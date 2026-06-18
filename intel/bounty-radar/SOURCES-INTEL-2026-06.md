@@ -78,7 +78,20 @@ _Intel drop logged 2026-06-18. Reference for bounty_radar.py source expansion + 
   contract assets + Base/Virtuals boosted), dedups via `bh-events-state.json`, writes
   `bh-alerts-<UTC>.md` + appends `bh-alerts.jsonl`.
   Seed run: 800 events -> 282 in-lane (live commits on Optimism, Chainlink, LiFi, Aurora, NEAR Bridges).
-- **Cron**: `bountyhunt-events-watch` every 30 min (isolated, light context). Event-delta only;
-  the full catalog sweep stays in `bounty-radar-scan`.
-- FUTURE: register a webhook (`/v1/webhooks`) to push events to a VAPE endpoint, or wire MCP for
-  agent-native tool access — would replace the 30-min poll with true push. Telegram alerts available too.
+
+## COST-OPTIMIZED ARCHITECTURE (Option A) — 2026-06-18
+The original design used a 30-min agentTurn cron = ~48 LLM turns/day just to babysit a
+2-second script. Wasteful. Replaced with a FREE daemon:
+- **`bountyhunt_watch.py --loop`** — persistent sleep-loop daemon. Polls every 30 min with
+  ZERO LLM cost (pure HTTP+parse, ~150 KB/run, ~22 MB RAM). Detached via `setsid` (PPID 1).
+- **Escalation is the ONLY paid action**: on a hit with weight >= 40 it fires ONE
+  `openclaw message send --channel last` (direct channel send, not an agent turn). So the
+  model/channel is touched only when something real lands — not every poll.
+- **`bountyhunt_watch_guard.sh`** — idempotent keepalive; starts at most one daemon.
+- **Cron `bountyhunt-watch-keepalive`** (every 3h) runs the guard — only does real work if the
+  daemon died (after a gateway/container restart). ~8 trivial turns/day worst case vs 48.
+- The old `bountyhunt-events-watch` 30-min agentTurn cron was REMOVED.
+- Full catalog sweep stays in `bounty-radar-scan` (unchanged).
+- Daemon log: `bounty-radar/bh-watch-daemon.log` (gitignored). State: `bh-events-state.json`.
+- FUTURE: register a webhook (`/v1/webhooks`) for true push (no poll at all), or wire MCP for
+  agent-native tool access. Telegram alerts also available on Pro.
