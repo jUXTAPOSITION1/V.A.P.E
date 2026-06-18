@@ -1,0 +1,1322 @@
+{
+  "sherlock:1260": {
+    "name": "XRP Ledger - April 2026",
+    "prizeUsd": 519000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:1140": {
+    "name": "Ethereum Fusaka Upgrade",
+    "prizeUsd": 1984400,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:38": {
+    "name": "Optimism",
+    "prizeUsd": 700000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:333": {
+    "name": "MakerDAO Endgame",
+    "prizeUsd": 415000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:1209": {
+    "name": "Aave V4",
+    "prizeUsd": 310000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:677": {
+    "name": "Babylon Chain Launch (Phase-2)",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:832": {
+    "name": "Usual Labs",
+    "prizeUsd": 180000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:59": {
+    "name": "Notional V3",
+    "prizeUsd": 164000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:747": {
+    "name": "Aave v3.3",
+    "prizeUsd": 160000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:1225": {
+    "name": "Fluid DEX v2",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:207": {
+    "name": "MorphL2",
+    "prizeUsd": 139000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:395": {
+    "name": "Aleo",
+    "prizeUsd": 125000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:1259": {
+    "name": "DRE App - dreUSD",
+    "prizeUsd": 48000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:550": {
+    "name": "K2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:1028": {
+    "name": "Centrifuge Protocol V3.1",
+    "prizeUsd": 234400,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:205": {
+    "name": "Optimism Fault Proofs",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:6": {
+    "name": "GMX",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:101": {
+    "name": "Tokemak",
+    "prizeUsd": 144000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:74": {
+    "name": "GMX Update",
+    "prizeUsd": 134000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:63": {
+    "name": "Optimism Update",
+    "prizeUsd": 120000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "sherlock:857": {
+    "name": "ZetaChain Cross-Chain",
+    "prizeUsd": 113600,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:543": {
+    "name": "Olas",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:554": {
+    "name": "Monetrix",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:548": {
+    "name": "Chainlink Payment Abstraction V2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:545": {
+    "name": "Injective Peggy Bridge",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:547": {
+    "name": "Panoptic: Next Core Mitigation Review: Round 2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:544": {
+    "name": "Panoptic: Next Core Mitigation Review",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:540": {
+    "name": "Panoptic: Next Core",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:542": {
+    "name": "Rujira",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:539": {
+    "name": "Brix Money",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:537": {
+    "name": "SukukFi",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:538": {
+    "name": "Merkl",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:522": {
+    "name": "Garden",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:529": {
+    "name": "Ekubo",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:523e1540-f8c3-45ae-9c5d-b6d35d3a326c": {
+    "name": "morpho-vaults-v2",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:b7c7def5-1033-4a4c-809d-08e507fb3583": {
+    "name": "Bitcoin Staking Scripts",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:c2e31b04-fbb2-4355-80ef-141d58b6e0cc": {
+    "name": "arcadexyz/arcade-protocol",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:9dfca0bc-a7bf-482e-a3df-4eb861f55c4f": {
+    "name": "reserve-index-dtf",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8b94becd-54e7-41cd-88e6-caae7becc76a": {
+    "name": "reserve-index-dtfs-solana",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:02c29467-cb27-4beb-b2ef-500ad95e1a51": {
+    "name": "ammalgam-contracts",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:0f543452-2076-438f-86ae-bbd6b065fffb": {
+    "name": "solayer-bridge",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:1b64737c-1373-4ecf-a179-4cd0d7b0b232": {
+    "name": "defi-app-contracts",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:076935b1-2706-48c6-bf0a-b3656aa24194": {
+    "name": "liquidity-book-vaults",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:aaf79192-6ea7-4b1e-aed7-3d23212dd0f1": {
+    "name": "gamma-univ4-limit-orders",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ddf86a5c-6f63-430f-aadc-d8742b4b1bcf": {
+    "name": "VenusProtocol/governance-contracts",
+    "prizeUsd": 58000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8337db39-e04e-470d-8090-0cfb9a7ec2dd": {
+    "name": "redstone-oracle",
+    "prizeUsd": 40000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:519": {
+    "name": "Jupiter Lend",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:4679e0fa-85f7-4ea5-8827-ee6c70bdee6b": {
+    "name": "Morpho Midnight",
+    "prizeUsd": 400000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:553": {
+    "name": "Intuition Mitigation Review",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:552": {
+    "name": "LayerZero - Stellar endpoint",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:551": {
+    "name": "Swafe Mitigation Review: Round 2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:549": {
+    "name": "Swafe Mitigation Review",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:546": {
+    "name": "Intuition",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:534": {
+    "name": "Swafe",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:536": {
+    "name": "Hybra Finance: mitigation review, round 2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:535": {
+    "name": "Sequence: Transaction Rails",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:533": {
+    "name": "Hybra Finance Mitigation Review",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "code4rena:530": {
+    "name": "Megapot",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e7af4986-183d-4764-8bd2-1d6b47f87d99": {
+    "name": "eigenlayer-contracts",
+    "prizeUsd": 2500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e2cf6906-ec8b-4c78-a585-74ac90615659": {
+    "name": "uniswap-v4",
+    "prizeUsd": 2350000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:19c5a5a6-f68d-4da8-b185-3f28c7f97bc1": {
+    "name": "PumpSwap",
+    "prizeUsd": 2010000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:1845d0b1-1d2b-42be-b347-a866d6549fca": {
+    "name": "lighthouse",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:38271533-dde5-4b48-95d5-58116fe8c62c": {
+    "name": "besu",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:52f3f9d9-7929-4bde-8d3a-2b5fc0863f35": {
+    "name": "teku",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:619e22ff-d9c9-47ab-be0b-b932a7df036e": {
+    "name": "grandine",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:642d8a2b-6a3b-4c54-9ff0-9b1fa3f3fbc7": {
+    "name": "reth",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:9ab19e33-b73c-4384-83a8-b905f508ce5e": {
+    "name": "Ethereum-Protocol",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a294d1aa-2c08-409e-b73a-51cdc76b1757": {
+    "name": "nimbus-eth2",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:abdbb5f0-d157-4db4-ada6-59fe837f4583": {
+    "name": "prysm",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:acc729ac-07d4-4806-89be-4e6715b752c6": {
+    "name": "nethermind",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:b568afa3-63e8-447e-9d9f-9318943fbbf7": {
+    "name": "lodestar",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f5182971-2ac4-42dc-89f1-d65d0d2425b8": {
+    "name": "erigon",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f7255cf4-8c1a-4082-b262-3c0e21af8dae": {
+    "name": "go-ethereum",
+    "prizeUsd": 2000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:41306bb9-2bb8-4da6-95c3-66b85e11639f": {
+    "name": "Euler-v2",
+    "prizeUsd": 1250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:c90131b4-5c7c-4ebc-a1f3-8002d219bfe0": {
+    "name": "Blast",
+    "prizeUsd": 1200000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d139882b-2d3a-49ac-9849-9dccef584090": {
+    "name": "Omni Network",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:0561defa-eeb2-4a74-8884-5d7a873afa58": {
+    "name": "story-protocol",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:949ad7c5-ea14-427d-b10a-54e33cef921b": {
+    "name": "balancer-v3",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ddc75feb-752e-4a61-8731-9c7c4c014128": {
+    "name": "Cantina ddc75feb",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a188a03f-4631-4b58-82ce-a5818a6df332": {
+    "name": "eulerswap-ctf",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:1ea959a6-7b85-4cda-98ed-32c88be2f3ff": {
+    "name": "lifi-contracts",
+    "prizeUsd": 450000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ac757733-81a4-43c7-8f49-17c5b135cdff": {
+    "name": "curvance",
+    "prizeUsd": 375000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f8f20c00-f84e-43d7-a0a4-ec818b98df82": {
+    "name": "Cantina f8f20c00",
+    "prizeUsd": 350000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d86632df-ab33-4448-8198-64955eae6712": {
+    "name": "liquity-bold",
+    "prizeUsd": 350000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3a42798b-b1aa-4b10-b5e4-a8bbc22a70bc": {
+    "name": "instadapp-fluid",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:18f1e37b-9ac2-4ba9-b32e-50344500c1a7": {
+    "name": "silo-contracts-v2",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ac5f64e6-3bf2-4269-bbb0-4bcd70425a1d": {
+    "name": "infrared-contracts",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:44b385bf-e51a-4e6c-b3a8-adbbe24d16e1": {
+    "name": "interop-portal",
+    "prizeUsd": 225000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:44d68da7-3cf4-4cec-a3f8-f0917062dac6": {
+    "name": "bima-money",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:5ffcedec-7e2e-4717-a3e4-e9041ca541c2": {
+    "name": "Aave v3.1 Competition",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:5617fffa-4b67-42a7-a9f5-dad93627faa3": {
+    "name": "infinitypools",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:21787352-de2c-4a77-af09-cc0a250d1f04": {
+    "name": "tensor-monorepo",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:84df57a3-0526-49b8-a7c5-334888f43940": {
+    "name": "sorella-angstrom",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ad445d42-9d39-4bcf-becb-0c6c8689b767": {
+    "name": "aave-aptos",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:2cd0b038-3e32-4db6-b488-0f85b6f0e49f": {
+    "name": "core-and-erc1155a",
+    "prizeUsd": 140000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a0a58a8b-247e-4203-b3cb-476ded9d5515": {
+    "name": "Centrifuge",
+    "prizeUsd": 125000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:80a33cf0-ad69-4163-a269-d27756aacb5e": {
+    "name": "zetachain-protocol",
+    "prizeUsd": 120000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:cb538ed2-6770-4646-a32b-610b62d9a34c": {
+    "name": "optimism-java",
+    "prizeUsd": 117362,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:b92d2750-d5a3-4c53-9bca-2e70d5dfe0ac": {
+    "name": "SP1",
+    "prizeUsd": 110000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:990ce947-05da-443e-b397-be38a65f0bff": {
+    "name": "Aquarius",
+    "prizeUsd": 110000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:26d5255b-6f68-46cf-be55-81dd565d9d16": {
+    "name": "telcoin-network",
+    "prizeUsd": 110000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d86b7f95-e574-4092-8ea2-78dcac2f54f1": {
+    "name": "morpho-blue",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8409a0ce-6c21-4cc9-8ef2-bd77ce7425af": {
+    "name": "metamorpho-and-periphery",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f0cfe0e9-290b-4967-94ac-504375329127": {
+    "name": "ctf",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:4b6f08a7-e830-4499-9977-08e2c3b32068": {
+    "name": "eigenlayer-contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:627528d0-db8a-4c42-b8b4-a5760ff31baf": {
+    "name": "Cantina 627528d0",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:cd180bb3-5d7d-46ed-8b99-d905e54a9d0b": {
+    "name": "hyperlend",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:050711ca-a6d1-4fdd-9f94-3816233c1bd5": {
+    "name": "collar-core",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:781d30df-39a9-47e6-b290-e388c79e04ea": {
+    "name": "aligned-layer",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:c486d600-bed0-4fc6-aed1-de759fd29fa2": {
+    "name": "openvm",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3cc30b66-1cba-4044-968f-a0817cd7bf83": {
+    "name": "SXT",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:7d650b99-8a40-49d1-9b65-2b060accfbb7": {
+    "name": "circuit-puzzles",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ae57d1ed-c242-4eac-932a-ef596c9bcc67": {
+    "name": "aave-aptos-ctf",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:cdce21ba-b787-4df4-9c56-b31d085388e7": {
+    "name": "kuru-contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:2adf7150-27ba-4cba-86a2-bd8ea175e7da": {
+    "name": "makina-contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a83eaf73-9cbc-495f-8607-e55d4fdaf407": {
+    "name": "incentive-contracts",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f214cf86-cc80-40c0-a70b-e9bb25d7ac80": {
+    "name": "Smart-contracts",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:31a752e3-8ece-49b3-a9ee-d7294c659340": {
+    "name": "Pegasus",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8773f033-afa5-4e7b-b0e8-8f989062ae8a": {
+    "name": "panoptic-core",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:49b9e08d-4f8f-4103-b6e5-f5f43cf9faa1": {
+    "name": "Citrea",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ce181972-2b40-4047-8ee9-89ec43527686": {
+    "name": "Clementine",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d47f8096-8858-437d-a9f5-2fe85ac9b95e": {
+    "name": "safe-extensions",
+    "prizeUsd": 75000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:6837e02a-0a87-4577-a047-4e1ea71cff01": {
+    "name": "spend-permissions",
+    "prizeUsd": 75000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:08c2b0b4-8449-4136-82a2-7074ccdfffac": {
+    "name": "Soon ",
+    "prizeUsd": 74000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:58cd719b-9004-4eca-a113-41d1691c0711": {
+    "name": "napier-v2",
+    "prizeUsd": 72000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:cdb738fd-0e7f-4a6b-9073-2b8629bfc1c3": {
+    "name": "Cantina cdb738fd",
+    "prizeUsd": 70000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f1433ef1-f309-4d37-b95a-eb6d17054cc5": {
+    "name": "Cantina f1433ef1",
+    "prizeUsd": 70000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3765f098-ef5c-47be-beb9-3f4ce9dcb407": {
+    "name": "USDaf-v2",
+    "prizeUsd": 70000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:eb93d215-e328-4d19-99ab-6c510acbb5aa": {
+    "name": "VII-Finance-Contracts",
+    "prizeUsd": 69500,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:4ee8716d-3e0e-4f59-b90d-aa56bf3b484c": {
+    "name": "mev-commit",
+    "prizeUsd": 65000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:57b00aab-8f8b-4d62-9378-41b6460ce6aa": {
+    "name": "doppler-contracts",
+    "prizeUsd": 65000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f9326d2b-bb99-45a9-88c5-94c54aa1823a": {
+    "name": "farcasterattestation-monorepo",
+    "prizeUsd": 60378,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:61087007-c7e9-4c4e-9d90-4e118933fecf": {
+    "name": "stakeup-bloomv2",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:691ce303-f137-437a-bf34-aef87dfe983b": {
+    "name": "dahlia-protocol",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8cf9c7a0-a7a6-446a-8577-1e2c254eb5a8": {
+    "name": "velvet-v4",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:7a40c849-0b35-4128-b084-d9a83fd533ea": {
+    "name": "jigsaw-contracts",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:917d796b-48d0-41d0-bb40-be137b7d3db5": {
+    "name": "octant-v2-core",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:fe8e03b1-f8db-4698-8a21-44b3a862e434": {
+    "name": "Mento-V3",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d4835c42-fc76-4fea-8e2c-70449237fc0e": {
+    "name": "beraborrow-blockend",
+    "prizeUsd": 52500,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:829164bf-7fba-4b84-a6b8-76652205bd97": {
+    "name": "lockbox-solana",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8bab566e-a6d4-4c1b-9f28-71a94bfd1da2": {
+    "name": "symbioticfi-core",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e757364c-1f68-4ec5-94f6-c6b3c2e80c6d": {
+    "name": "mezo-monorepo",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e68909e6-3491-4a94-a707-ecf0c89cf72a": {
+    "name": "alchemix-v3",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ba62fa4e-f933-4eec-b9ac-868325f4a694": {
+    "name": "superform-core",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:9c6e38e2-535e-47b2-83ef-29df91fbb774": {
+    "name": "Royco Dawn",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:efb6f308-f13b-4110-aff8-0d67181608dd": {
+    "name": "Revert Finance",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e55ee7b9-6c99-42f8-8338-39f3dd134ef3": {
+    "name": "Revert Finance - StableSwap Hooks",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:28425672-ce54-4c66-b188-c4d5650d6790": {
+    "name": "opal-contracts",
+    "prizeUsd": 40000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:6c3dc99c-d03f-42b1-8697-dd0c30a6c10e": {
+    "name": "Cantina 6c3dc99c",
+    "prizeUsd": 40000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:74fb60b8-879f-43b1-9f48-c788df0590da": {
+    "name": "Cantina 74fb60b8",
+    "prizeUsd": 40000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8d7bdfb9-cf19-4294-95d0-763af5d425b4": {
+    "name": "juicebox-monorepo",
+    "prizeUsd": 36796,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:708eecf5-a6a0-46c1-a949-277f7408decc": {
+    "name": "Avon-Contracts",
+    "prizeUsd": 36000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:2ac7f906-1661-47eb-bfd6-519f5db0d36b": {
+    "name": "infinifi-protocol",
+    "prizeUsd": 35000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a0806644-7d91-457a-a08d-aee2db73f352": {
+    "name": "pike-tapio-monrepo",
+    "prizeUsd": 35000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d69d41d0-bf70-4578-a820-749e99c4c6c4": {
+    "name": "Cantina d69d41d0",
+    "prizeUsd": 32000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:fadb5a8f-e39c-4a6b-89f6-a03858bb8602": {
+    "name": "Royco Protocol",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:205f8ca3-27fc-4da2-a2e6-0d43e1c60a41": {
+    "name": "TermMax",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:68d65682-ed04-48aa-969d-09a335de3748": {
+    "name": "desk-orderbook",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:bd882748-077e-4e55-853f-f8df70109dbb": {
+    "name": "succinct-network",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:980a5976-9a7d-4014-b2e1-c248b4c6fa44": {
+    "name": "Reserve Governor",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:a2c3cc6a-e384-495f-9751-5d7e657bc219": {
+    "name": "YOLO Games",
+    "prizeUsd": 27500,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:55023131-27df-44e4-af46-bec298d0fa8e": {
+    "name": "InterPol",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3fa36a55-4582-44f9-b142-e2c03348240e": {
+    "name": "Cantina 3fa36a55",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e9e9b3e0-f213-45e4-8d05-d72bf0c8787a": {
+    "name": "ton-pool-contracts",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3eff5a8f-b73a-4cfe-8c54-546b475548f0": {
+    "name": "inclusive-monorepo",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:7db75599-9dad-40aa-9fc7-e879803eea2b": {
+    "name": "colorpool-chromia",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:616d8bb4-16ce-4ca9-9ce9-5b99d6e146ef": {
+    "name": "mighty-contracts",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:50d38b86-80a0-49af-9df8-70d7d601b7d7": {
+    "name": "solaxy",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:12acc80c-4e4c-4081-a0a3-faa92150651a": {
+    "name": "genius-contracts",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:5c4a63a2-e744-43bd-b38b-d0063c117765": {
+    "name": "TermMax",
+    "prizeUsd": 23000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:5383fc52-5a0e-4a0d-a470-af5a6d4eab72": {
+    "name": "Cantina 5383fc52",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:39565094-32b6-45d9-88ce-1ad163a92088": {
+    "name": "Cantina 39565094",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:f57ffb47-0ded-4f04-bcec-ecd7d47fad58": {
+    "name": "badger-ebtc-bsm",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:b0a948cd-c861-4807-b36e-d680d82598bf": {
+    "name": "EIP7702Proxy",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e1c0be8d-0c3d-485a-a446-a582beb120b1": {
+    "name": "stability-contracts",
+    "prizeUsd": 16000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:3211ee0d-133f-43a0-837e-8dc1ecfaa424": {
+    "name": "grass",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d35ebc75-9107-4e58-a923-f81725912138": {
+    "name": "Cantina d35ebc75",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:d88cb915-64c9-4488-8062-dd16ede7a4a0": {
+    "name": "size-solidity",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:8cb347d2-53b5-4fd0-bbbd-3f67537f2bb0": {
+    "name": "tally-stGOV",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ffe90f03-ffd0-449b-a15f-6e7702323d16": {
+    "name": "aera-v3",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:c160af78-28f8-47f7-9926-889b3864c6d8": {
+    "name": "mystic-monorepo",
+    "prizeUsd": 13000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:bd43bdd1-bc7f-473b-96c0-d35d37f3db33": {
+    "name": "daao-contracts",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e92be0b9-b4f2-4bf2-9544-ae285fcfc02d": {
+    "name": "primev-validator-registry",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:217af22c-957e-4c13-bc2a-1d5255e72309": {
+    "name": "mev-commit",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:5078f03b-f09a-4955-b783-78d3bbf7837a": {
+    "name": "Cantina 5078f03b",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:9e6d884b-9a4d-4420-98f4-ac2c2d853387": {
+    "name": "Cantina 9e6d884b",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:e47e6ce9-e0e1-4f8a-ba4a-bc5aba9e7ecf": {
+    "name": "Cantina e47e6ce9",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "cantina:ae21d78b-f752-4a9e-aad9-9d89f2b4b8b5": {
+    "name": "hackathon-contracts",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Thorchain DEX-1778803200": {
+    "name": "Thorchain DEX (exploit $10,000,000)",
+    "prizeUsd": 10000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Wasabi Perps-1777507200": {
+    "name": "Wasabi Perps (exploit $5,500,000)",
+    "prizeUsd": 5500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:New Market Trading-1779667200": {
+    "name": "New Market Trading (exploit $3,980,000)",
+    "prizeUsd": 3980000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Verus-Ethereum Bridge-1778976000": {
+    "name": "Verus-Ethereum Bridge (exploit $11,500,000)",
+    "prizeUsd": 11500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Gravity Bridge-1780099200": {
+    "name": "Gravity Bridge (exploit $5,400,000)",
+    "prizeUsd": 5400000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:ZetaChain-1777248000": {
+    "name": "ZetaChain (exploit $300,000)",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Token of Power-1780963200": {
+    "name": "Token of Power (exploit $1,580,000)",
+    "prizeUsd": 1580000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Syndicate-1777420800": {
+    "name": "Syndicate (exploit $380,000)",
+    "prizeUsd": 380000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Singularity Finance-1777248000": {
+    "name": "Singularity Finance (exploit $413,000)",
+    "prizeUsd": 413000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Alephium Bridge-1780099200": {
+    "name": "Alephium Bridge (exploit $815,000)",
+    "prizeUsd": 815000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Adshares-1778889600": {
+    "name": "Adshares (exploit $628,000)",
+    "prizeUsd": 628000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:AFI Protocol-1780099200": {
+    "name": "AFI Protocol (exploit $480,000)",
+    "prizeUsd": 480000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Humanity-1780876800": {
+    "name": "Humanity (exploit $32,000,000)",
+    "prizeUsd": 32000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:TrustedVolumes-1778112000": {
+    "name": "TrustedVolumes (exploit $6,700,000)",
+    "prizeUsd": 6700000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:StablR-1779494400": {
+    "name": "StablR (exploit $2,800,000)",
+    "prizeUsd": 2800000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Aztec Connect-1781395200": {
+    "name": "Aztec Connect (exploit $2,100,000)",
+    "prizeUsd": 2100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Ekubo-1777939200": {
+    "name": "Ekubo (exploit $1,400,000)",
+    "prizeUsd": 1400000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Giddy-1776902400": {
+    "name": "Giddy (exploit $1,300,000)",
+    "prizeUsd": 1300000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Syscoin Bridge-1780790400": {
+    "name": "Syscoin Bridge (exploit $8,000,000)",
+    "prizeUsd": 8000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Volo Vault-1776729600": {
+    "name": "Volo Vault (exploit $3,500,000)",
+    "prizeUsd": 3500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Purrlend-1777075200": {
+    "name": "Purrlend (exploit $1,500,000)",
+    "prizeUsd": 1500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Raydium AMM-1781049600": {
+    "name": "Raydium AMM (exploit $1,340,000)",
+    "prizeUsd": 1340000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Aurellion-1778544000": {
+    "name": "Aurellion (exploit $456,000)",
+    "prizeUsd": 456000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Fluid Lending-1780185600": {
+    "name": "Fluid Lending (exploit $215,000)",
+    "prizeUsd": 215000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Echo Bridge-1779062400": {
+    "name": "Echo Bridge (exploit $821,000)",
+    "prizeUsd": 821000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:SEA Token-1778976000": {
+    "name": "SEA Token (exploit $153,000)",
+    "prizeUsd": 153000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Ambient-1780790400": {
+    "name": "Ambient (exploit $110,000)",
+    "prizeUsd": 110000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:SmartCredit-1777852800": {
+    "name": "SmartCredit (exploit $72,000)",
+    "prizeUsd": 72000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:DxSale-1779926400": {
+    "name": "DxSale (exploit $7,300,000)",
+    "prizeUsd": 7300000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Sweat Foundation-1777420800": {
+    "name": "Sweat Foundation (exploit $3,500,000)",
+    "prizeUsd": 3500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:RetoSwap-1781568000": {
+    "name": "RetoSwap (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:RetoSwap-1779235200": {
+    "name": "RetoSwap (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:TSR-1780272000": {
+    "name": "TSR (exploit $2,500,000)",
+    "prizeUsd": 2500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Transit Finance-1778630400": {
+    "name": "Transit Finance (exploit $1,880,000)",
+    "prizeUsd": 1880000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Aftermath Perps-1777420800": {
+    "name": "Aftermath Perps (exploit $1,140,000)",
+    "prizeUsd": 1140000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Little Boy Plus-1781654400": {
+    "name": "Little Boy Plus (exploit $367,000)",
+    "prizeUsd": 367000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:AROS-1780185600": {
+    "name": "AROS (exploit $295,000)",
+    "prizeUsd": 295000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Bankr-1779148800": {
+    "name": "Bankr (exploit $170,000)",
+    "prizeUsd": 170000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Kipseli-1776816000": {
+    "name": "Kipseli (exploit $80,000)",
+    "prizeUsd": 80000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Renegade-1778371200": {
+    "name": "Renegade (exploit $209,000)",
+    "prizeUsd": 209000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:WUSD.fi/Glove-1779667200": {
+    "name": "WUSD.fi/Glove (exploit $200,000)",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Quant-1777334400": {
+    "name": "Quant (exploit $138,000)",
+    "prizeUsd": 138000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:MAP Protocol-1779235200": {
+    "name": "MAP Protocol (exploit $110,000)",
+    "prizeUsd": 110000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:NovaBox-1780963200": {
+    "name": "NovaBox (exploit $107,000)",
+    "prizeUsd": 107000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Thetanuts Finance-1781481600": {
+    "name": "Thetanuts Finance (exploit $105,000)",
+    "prizeUsd": 105000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Stake DAO-1779840000": {
+    "name": "Stake DAO (exploit $91,000)",
+    "prizeUsd": 91000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Juicebox V3-1776643200": {
+    "name": "Juicebox V3 (exploit $52,000)",
+    "prizeUsd": 52000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Thetanuts Finance-1776643200": {
+    "name": "Thetanuts Finance (exploit $50,000)",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Bisq-1777593600": {
+    "name": "Bisq (exploit $858,000)",
+    "prizeUsd": 858000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Polymarket-1779408000": {
+    "name": "Polymarket (exploit $700,000)",
+    "prizeUsd": 700000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:SQ Protocol-1778544000": {
+    "name": "SQ Protocol (exploit $346,000)",
+    "prizeUsd": 346000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Sharwa.Finance-1777593600": {
+    "name": "Sharwa.Finance (exploit $32,850)",
+    "prizeUsd": 32850,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Fractal Protocol-1779580800": {
+    "name": "Fractal Protocol (exploit $13,700)",
+    "prizeUsd": 13700,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:JUDAO-1777334400": {
+    "name": "JUDAO (exploit $228,000)",
+    "prizeUsd": 228000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Bitmor-1779667200": {
+    "name": "Bitmor (exploit $10,000)",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Asterix-1780963200": {
+    "name": "Asterix (exploit $40,000)",
+    "prizeUsd": 40000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Mure-1779494400": {
+    "name": "Mure (exploit $11,700)",
+    "prizeUsd": 11700,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:GPU.NET-1780444800": {
+    "name": "GPU.NET (exploit $10,600)",
+    "prizeUsd": 10600,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:ATM-1780444800": {
+    "name": "ATM (exploit $243,500)",
+    "prizeUsd": 243500,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Scallop Lend-1777161600": {
+    "name": "Scallop Lend (exploit $150,000)",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:INK Finance-1778457600": {
+    "name": "INK Finance (exploit $140,000)",
+    "prizeUsd": 140000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:DIP-1781654400": {
+    "name": "DIP (exploit $111,000)",
+    "prizeUsd": 111000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:HermesVault-1779148800": {
+    "name": "HermesVault (exploit $30,000)",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Flooring Protocol-1780876800": {
+    "name": "Flooring Protocol (exploit $0)",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Litecoin-1777161600": {
+    "name": "Litecoin (exploit $0)",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "defillama-hack:Gnosis Pay-1780272000": {
+    "name": "Gnosis Pay (exploit $0)",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:ethena": {
+    "name": "Ethena",
+    "prizeUsd": 3000000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:dexeprotocol": {
+    "name": "DeXe Protocol",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:ssvnetwork": {
+    "name": "SSV Network",
+    "prizeUsd": 344400,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:lombard-finance": {
+    "name": "Lombard Finance",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:thegraph": {
+    "name": "The Graph",
+    "prizeUsd": 1500000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:ens": {
+    "name": "ENS",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:stackingdao": {
+    "name": "StackingDAO",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:zest-protocol-v2": {
+    "name": "Zest Protocol V2",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:immunefi": {
+    "name": "Immunefi",
+    "prizeUsd": 68900,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  },
+  "immunefi:hedera": {
+    "name": "Hedera",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+  }
+}

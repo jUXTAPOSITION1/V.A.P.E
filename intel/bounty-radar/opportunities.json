@@ -1,0 +1,5043 @@
+[
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Thorchain DEX-1778803200",
+    "name": "Thorchain DEX (exploit $10,000,000)",
+    "prizeUsd": 10000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bitcoin",
+      "ethereum",
+      "base",
+      "bsc"
+    ],
+    "desc": "Vault Churn Address Poisoning / Protocol Logic on Bitcoin,Ethereum,Base,BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 88,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Wasabi Perps-1777507200",
+    "name": "Wasabi Perps (exploit $5,500,000)",
+    "prizeUsd": 5500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "berachain",
+      "blast"
+    ],
+    "desc": "Admin Key Compromised / Protocol Logic on Ethereum,Base,Berachain,Blast. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 80,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:New Market Trading-1779667200",
+    "name": "New Market Trading (exploit $3,980,000)",
+    "prizeUsd": 3980000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "arbitrum"
+    ],
+    "desc": "Acces Control Exploit / Protocol Logic on Ethereum,Base,Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 80,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Verus-Ethereum Bridge-1778976000",
+    "name": "Verus-Ethereum Bridge (exploit $11,500,000)",
+    "prizeUsd": 11500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Bridge Verification Bypass / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 74,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Gravity Bridge-1780099200",
+    "name": "Gravity Bridge (exploit $5,400,000)",
+    "prizeUsd": 5400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 74,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:ZetaChain-1777248000",
+    "name": "ZetaChain (exploit $300,000)",
+    "prizeUsd": 300000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "polygon",
+      "arbitrum",
+      "avalanche",
+      "bsc"
+    ],
+    "desc": "GatewayEVM Contracts Exploit / Protocol Logic on Ethereum,Base,Polygon,Arbitrum,Avalanche,BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 74,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Token of Power-1780963200",
+    "name": "Token of Power (exploit $1,580,000)",
+    "prizeUsd": 1580000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Malicious Governance Proposal / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 72,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Syndicate-1777420800",
+    "name": "Syndicate (exploit $380,000)",
+    "prizeUsd": 380000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Commons Bridge Exploit / Protocol Logic on Base. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 72,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:ethena",
+    "name": "Ethena",
+    "prizeUsd": 3000000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/ethena/",
+    "deadline": null,
+    "tags": [
+      "ethereum",
+      "defi",
+      "stablecoin",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 70,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Singularity Finance-1777248000",
+    "name": "Singularity Finance (exploit $413,000)",
+    "prizeUsd": 413000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Oracle Misconfiguration Exploit / Protocol Logic on Base. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 70,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Alephium Bridge-1780099200",
+    "name": "Alephium Bridge (exploit $815,000)",
+    "prizeUsd": 815000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 68,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Adshares-1778889600",
+    "name": "Adshares (exploit $628,000)",
+    "prizeUsd": 628000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Bridge Verification Bypass / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 68,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:AFI Protocol-1780099200",
+    "name": "AFI Protocol (exploit $480,000)",
+    "prizeUsd": 480000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "afiUSD Vault Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 68,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Humanity-1780876800",
+    "name": "Humanity (exploit $32,000,000)",
+    "prizeUsd": 32000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "bsc"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Ethereum,BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:TrustedVolumes-1778112000",
+    "name": "TrustedVolumes (exploit $6,700,000)",
+    "prizeUsd": 6700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Forged RFQ Orders / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:StablR-1779494400",
+    "name": "StablR (exploit $2,800,000)",
+    "prizeUsd": 2800000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aztec Connect-1781395200",
+    "name": "Aztec Connect (exploit $2,100,000)",
+    "prizeUsd": 2100000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "ZK proof verification Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Ekubo-1777939200",
+    "name": "Ekubo (exploit $1,400,000)",
+    "prizeUsd": 1400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Improper Access Control Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Giddy-1776902400",
+    "name": "Giddy (exploit $1,300,000)",
+    "prizeUsd": 1300000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Incomplete EIP-712 Signature Coverage / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:4679e0fa-85f7-4ea5-8827-ee6c70bdee6b",
+    "name": "Morpho Midnight",
+    "prizeUsd": 400000,
+    "currency": "USDC",
+    "status": "judging",
+    "url": "https://cantina.xyz/competitions/4679e0fa-85f7-4ea5-8827-ee6c70bdee6b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Midnight is a non-custodial fixed-rate lending protocol implemented for the Ethereum Virtual Machine. It is organized around isolated, immutable, permissionlessly created markets with fixed-maturity. Lending and borrowing are implemented through the trading of credit and debt uni",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 66,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Syscoin Bridge-1780790400",
+    "name": "Syscoin Bridge (exploit $8,000,000)",
+    "prizeUsd": 8000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "syscoin"
+    ],
+    "desc": "Fake Proof Exploit / Protocol Logic on Syscoin. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Volo Vault-1776729600",
+    "name": "Volo Vault (exploit $3,500,000)",
+    "prizeUsd": 3500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "sui"
+    ],
+    "desc": "Admin Key Compromised / Protocol Logic on Sui. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Purrlend-1777075200",
+    "name": "Purrlend (exploit $1,500,000)",
+    "prizeUsd": 1500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "megaeth",
+      "hyperliquid l1"
+    ],
+    "desc": "Fake Bridge Address / Protocol Logic on MegaETH,Hyperliquid L1. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Raydium AMM-1781049600",
+    "name": "Raydium AMM (exploit $1,340,000)",
+    "prizeUsd": 1340000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Fake LP Mint Attack / Protocol Logic on Solana. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:dexeprotocol",
+    "name": "DeXe Protocol",
+    "prizeUsd": 500000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/dexeprotocol/",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "defi",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:ssvnetwork",
+    "name": "SSV Network",
+    "prizeUsd": 344400,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/ssvnetwork/",
+    "deadline": null,
+    "tags": [
+      "ethereum",
+      "staking",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:lombard-finance",
+    "name": "Lombard Finance",
+    "prizeUsd": 250000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/lombard-finance/",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "defi",
+      "btc",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 64,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:thegraph",
+    "name": "The Graph",
+    "prizeUsd": 1500000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/thegraph/",
+    "deadline": null,
+    "tags": [
+      "ethereum",
+      "infra",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 62,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aurellion-1778544000",
+    "name": "Aurellion (exploit $456,000)",
+    "prizeUsd": 456000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Uninitialized Proxy Exploit / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 60,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Fluid Lending-1780185600",
+    "name": "Fluid Lending (exploit $215,000)",
+    "prizeUsd": 215000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 60,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Echo Bridge-1779062400",
+    "name": "Echo Bridge (exploit $821,000)",
+    "prizeUsd": 821000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "monad"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Monad. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 58,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SEA Token-1778976000",
+    "name": "SEA Token (exploit $153,000)",
+    "prizeUsd": 153000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Flashloan Price Manipulation / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 58,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Ambient-1780790400",
+    "name": "Ambient (exploit $110,000)",
+    "prizeUsd": 110000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Accounting Logic Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 58,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SmartCredit-1777852800",
+    "name": "SmartCredit (exploit $72,000)",
+    "prizeUsd": 72000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 58,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DxSale-1779926400",
+    "name": "DxSale (exploit $7,300,000)",
+    "prizeUsd": 7300000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Ownership Override Attack / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Sweat Foundation-1777420800",
+    "name": "Sweat Foundation (exploit $3,500,000)",
+    "prizeUsd": 3500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "near"
+    ],
+    "desc": "Refund_first & Refund_second Logic Exploit / Protocol Logic on Near. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:RetoSwap-1781568000",
+    "name": "RetoSwap (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "monero"
+    ],
+    "desc": "ACK Frontrun Attack / Protocol Logic on Monero. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:RetoSwap-1779235200",
+    "name": "RetoSwap (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "monero"
+    ],
+    "desc": "ACK Message Frontrun Exploit / Protocol Logic on Monero. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:TSR-1780272000",
+    "name": "TSR (exploit $2,500,000)",
+    "prizeUsd": 2500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Infinite Mint and Dump / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Transit Finance-1778630400",
+    "name": "Transit Finance (exploit $1,880,000)",
+    "prizeUsd": 1880000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "tron"
+    ],
+    "desc": "Deprecated Smart Contract Exploit / Protocol Logic on Tron. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aftermath Perps-1777420800",
+    "name": "Aftermath Perps (exploit $1,140,000)",
+    "prizeUsd": 1140000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "sui"
+    ],
+    "desc": "Fee-Accounting Logic Flaw / Protocol Logic on Sui. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Little Boy Plus-1781654400",
+    "name": "Little Boy Plus (exploit $367,000)",
+    "prizeUsd": 367000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Oracle Manipulation / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:AROS-1780185600",
+    "name": "AROS (exploit $295,000)",
+    "prizeUsd": 295000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Flashloan Price Manipulation / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:ens",
+    "name": "ENS",
+    "prizeUsd": 250000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/ens/",
+    "deadline": null,
+    "tags": [
+      "ethereum",
+      "infra",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Bankr-1779148800",
+    "name": "Bankr (exploit $170,000)",
+    "prizeUsd": 170000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Compromised Session Keys / Infrastructure on Base. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Kipseli-1776816000",
+    "name": "Kipseli (exploit $80,000)",
+    "prizeUsd": 80000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Flawed Quoting Logic / Protocol Logic on Base. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 56,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1260",
+    "name": "XRP Ledger - April 2026",
+    "prizeUsd": 519000,
+    "currency": "USDC",
+    "status": "sherlock_judging",
+    "url": "https://audits.sherlock.xyz/contests/1260",
+    "deadline": 1777307400,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The XRP Ledger (XRPL) is a decentralized layer 1 blockchain renowned for its decade-long reliability and stability in tokenizing and exchanging crypto-native and real-world assets.  This contest covers upcoming protocol level features: Batch, Permission Delegation, MPT DEX, Confi",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 54,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Renegade-1778371200",
+    "name": "Renegade (exploit $209,000)",
+    "prizeUsd": 209000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Unprotected Initializer Exploit / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:WUSD.fi/Glove-1779667200",
+    "name": "WUSD.fi/Glove (exploit $200,000)",
+    "prizeUsd": 200000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Sybil Abuse / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Quant-1777334400",
+    "name": "Quant (exploit $138,000)",
+    "prizeUsd": 138000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Access Control Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:MAP Protocol-1779235200",
+    "name": "MAP Protocol (exploit $110,000)",
+    "prizeUsd": 110000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "bsc"
+    ],
+    "desc": "Infinite Mint and Dump / Protocol Logic on Ethereum,BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:NovaBox-1780963200",
+    "name": "NovaBox (exploit $107,000)",
+    "prizeUsd": 107000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Dividend Snapshot Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Thetanuts Finance-1781481600",
+    "name": "Thetanuts Finance (exploit $105,000)",
+    "prizeUsd": 105000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Low-Supply Share Pricing Hack / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Stake DAO-1779840000",
+    "name": "Stake DAO (exploit $91,000)",
+    "prizeUsd": 91000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Private Key Compromised / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Juicebox V3-1776643200",
+    "name": "Juicebox V3 (exploit $52,000)",
+    "prizeUsd": 52000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "borrowFrom Spoof Attack / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Thetanuts Finance-1776643200",
+    "name": "Thetanuts Finance (exploit $50,000)",
+    "prizeUsd": 50000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "First Depositor Attack / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 52,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Bisq-1777593600",
+    "name": "Bisq (exploit $858,000)",
+    "prizeUsd": 858000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bitcoin"
+    ],
+    "desc": "Fake Bisq V1 Client Hack / Protocol Logic on Bitcoin. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 50,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Polymarket-1779408000",
+    "name": "Polymarket (exploit $700,000)",
+    "prizeUsd": 700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "polygon"
+    ],
+    "desc": "Private Key Compromised / Infrastructure on Polygon. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 50,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SQ Protocol-1778544000",
+    "name": "SQ Protocol (exploit $346,000)",
+    "prizeUsd": 346000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Acces Control Exploit / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 50,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Sharwa.Finance-1777593600",
+    "name": "Sharwa.Finance (exploit $32,850)",
+    "prizeUsd": 32850,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Oracle Price Manipulation / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 50,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Fractal Protocol-1779580800",
+    "name": "Fractal Protocol (exploit $13,700)",
+    "prizeUsd": 13700,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Flashloan Price Manipulation / Protocol Logic on Arbitrum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 50,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:JUDAO-1777334400",
+    "name": "JUDAO (exploit $228,000)",
+    "prizeUsd": 228000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Flashloan Exploit / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 48,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Bitmor-1779667200",
+    "name": "Bitmor (exploit $10,000)",
+    "prizeUsd": 10000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Acces Control Exploit / Protocol Logic on Base. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 48,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:stackingdao",
+    "name": "StackingDAO",
+    "prizeUsd": 100000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/stackingdao/",
+    "deadline": null,
+    "tags": [
+      "staking",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 46,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:zest-protocol-v2",
+    "name": "Zest Protocol V2",
+    "prizeUsd": 100000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/zest-protocol-v2/",
+    "deadline": null,
+    "tags": [
+      "defi",
+      "lending",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 46,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Asterix-1780963200",
+    "name": "Asterix (exploit $40,000)",
+    "prizeUsd": 40000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "DN404 Forge Loop / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 44,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Mure-1779494400",
+    "name": "Mure (exploit $11,700)",
+    "prizeUsd": 11700,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Acces Control Exploit / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 44,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:GPU.NET-1780444800",
+    "name": "GPU.NET (exploit $10,600)",
+    "prizeUsd": 10600,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Social Engineering / Infrastructure on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 44,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:ATM-1780444800",
+    "name": "ATM (exploit $243,500)",
+    "prizeUsd": 243500,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Tax logic Exploit / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Scallop Lend-1777161600",
+    "name": "Scallop Lend (exploit $150,000)",
+    "prizeUsd": 150000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "sui"
+    ],
+    "desc": "Deprecated V2 Rewards Contract / Protocol Logic on Sui. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:INK Finance-1778457600",
+    "name": "INK Finance (exploit $140,000)",
+    "prizeUsd": 140000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "polygon"
+    ],
+    "desc": "Whitelisted Address Impersonation / Protocol Logic on Polygon. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DIP-1781654400",
+    "name": "DIP (exploit $111,000)",
+    "prizeUsd": 111000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Transfer/Sell Logic Exploit / Protocol Logic on BSC. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:HermesVault-1779148800",
+    "name": "HermesVault (exploit $30,000)",
+    "prizeUsd": 30000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "algorand"
+    ],
+    "desc": "Rekeying Attack / Protocol Logic on Algorand. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:550",
+    "name": "K2",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://code4rena.com/audits/2026-04-k2",
+    "deadline": "2026-08-01T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "K2 brings sophisticated DeFi lending to Stellar through pooled, isolated, and gated markets. Built for RWAs, AI agents, and institutions, with an integrated UI and real-time risk dashboards.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 42,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:immunefi",
+    "name": "Immunefi",
+    "prizeUsd": 68900,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/immunefi/",
+    "deadline": null,
+    "tags": [
+      "infra",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 38,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1259",
+    "name": "DRE App - dreUSD",
+    "prizeUsd": 48000,
+    "currency": "USDC",
+    "status": "judging",
+    "url": "https://audits.sherlock.xyz/contests/1259",
+    "deadline": 1781708400,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "DRE is a stablecoin protocol developing dreUSD, a USD-pegged stablecoin redeemable 1:1 with USDC, and is fully backed by cash & cash equivalents, property & real estate credit, and short-duration secured loans. The contest scope is the dreUSD core contracts only; dreUSD an ERC-20",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 38,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:19c5a5a6-f68d-4da8-b185-3f28c7f97bc1",
+    "name": "PumpSwap",
+    "prizeUsd": 2010000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/19c5a5a6-f68d-4da8-b185-3f28c7f97bc1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Pump allows anyone to create coins. All coins created on Pump are fair-launch, meaning everyone has equal access to buy and sell when the coin is first created.\n\nThis competition has 2 codebases. One is the pump bonding curve which facilitates coin launching and a bonding curve w",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:1845d0b1-1d2b-42be-b347-a866d6549fca",
+    "name": "lighthouse",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/1845d0b1-1d2b-42be-b347-a866d6549fca",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:38271533-dde5-4b48-95d5-58116fe8c62c",
+    "name": "besu",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/38271533-dde5-4b48-95d5-58116fe8c62c",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:52f3f9d9-7929-4bde-8d3a-2b5fc0863f35",
+    "name": "teku",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/52f3f9d9-7929-4bde-8d3a-2b5fc0863f35",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:619e22ff-d9c9-47ab-be0b-b932a7df036e",
+    "name": "grandine",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/619e22ff-d9c9-47ab-be0b-b932a7df036e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:642d8a2b-6a3b-4c54-9ff0-9b1fa3f3fbc7",
+    "name": "reth",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/642d8a2b-6a3b-4c54-9ff0-9b1fa3f3fbc7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize p",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:9ab19e33-b73c-4384-83a8-b905f508ce5e",
+    "name": "Ethereum-Protocol",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/9ab19e33-b73c-4384-83a8-b905f508ce5e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a294d1aa-2c08-409e-b73a-51cdc76b1757",
+    "name": "nimbus-eth2",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a294d1aa-2c08-409e-b73a-51cdc76b1757",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:abdbb5f0-d157-4db4-ada6-59fe837f4583",
+    "name": "prysm",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/abdbb5f0-d157-4db4-ada6-59fe837f4583",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:acc729ac-07d4-4806-89be-4e6715b752c6",
+    "name": "nethermind",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/acc729ac-07d4-4806-89be-4e6715b752c6",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:b568afa3-63e8-447e-9d9f-9318943fbbf7",
+    "name": "lodestar",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/b568afa3-63e8-447e-9d9f-9318943fbbf7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f5182971-2ac4-42dc-89f1-d65d0d2425b8",
+    "name": "erigon",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f5182971-2ac4-42dc-89f1-d65d0d2425b8",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f7255cf4-8c1a-4082-b262-3c0e21af8dae",
+    "name": "go-ethereum",
+    "prizeUsd": 2000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f7255cf4-8c1a-4082-b262-3c0e21af8dae",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "> [!IMPORTANT]\n> Pectra is a unique competition spanning multiple codebases ([see all](/competitions/pectra)) in the Ethereum ecosystem. To better manage the event format, it has been divided into several repositories (\"competitions\"). All competitions share a single $2M prize po",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 34,
+    "isNew": false
+  },
+  {
+    "platform": "immunefi",
+    "id": "immunefi:hedera",
+    "name": "Hedera",
+    "prizeUsd": 30000,
+    "currency": "USD",
+    "status": "active",
+    "url": "https://immunefi.com/bug-bounty/hedera/",
+    "deadline": null,
+    "tags": [
+      "l1",
+      "bug-bounty",
+      "always-on"
+    ],
+    "desc": "Always-on Immunefi bounty.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 30,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e7af4986-183d-4764-8bd2-1d6b47f87d99",
+    "name": "eigenlayer-contracts",
+    "prizeUsd": 2500000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e7af4986-183d-4764-8bd2-1d6b47f87d99",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "As a restaking platform, EigenLayer allows stakers to deposit assets and delegate stake to operators. Operators register for AVSs (Autonomous Verifiable Services), which are external platforms that leverage this stake to secure offchain processes. Currently, the operator/AVS rela",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:41306bb9-2bb8-4da6-95c3-66b85e11639f",
+    "name": "Euler-v2",
+    "prizeUsd": 1250000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/41306bb9-2bb8-4da6-95c3-66b85e11639f",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nEuler v2 is a modular lending platform with two main components at launch: 1) the Euler Vault Kit (EVK), which empowers builders to deploy and chain together their own customised lending vaults in a permissionless manner; and 2) the Ethereum Vault Connector (EVC), a powerful, i",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:c90131b4-5c7c-4ebc-a1f3-8002d219bfe0",
+    "name": "Blast",
+    "prizeUsd": 1200000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/c90131b4-5c7c-4ebc-a1f3-8002d219bfe0",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Blast Competition\n\nWelcome security researchers to the largest competition in history with Blast! Blast is an L2 for the Ethereum ecosystem introducing native yield for ETH and stablecoins.\n\nSay goodbye to flipping tabs, using Discord, copying Github links, and the nuisances of",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:0561defa-eeb2-4a74-8884-5d7a873afa58",
+    "name": "story-protocol",
+    "prizeUsd": 1000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/0561defa-eeb2-4a74-8884-5d7a873afa58",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nStory is making the legal system for creative Intellectual Property (IP) more efficient by turning IP \"programmable\" on the blockchain. To do this, we have created Story Network: a purpose-built layer 1 blockchain where people or programs alike can license, remix, and monetize ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:cd180bb3-5d7d-46ed-8b99-d905e54a9d0b",
+    "name": "hyperlend",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/cd180bb3-5d7d-46ed-8b99-d905e54a9d0b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nHyperLend is a lending platform, aiming to become the main lending market on the Hyperliquid HyperEVM chain.\n\nWe have 3 different types of lending markets:\n\n- **Core pools**: the codebase is a fork of [Aave v3.0.2](https://github.com/aave/aave-v3-core).  \n  Users can supply/bor",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ce181972-2b40-4047-8ee9-89ec43527686",
+    "name": "Clementine",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ce181972-2b40-4047-8ee9-89ec43527686",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Clementine is Citrea's BitVM based trust-minimized Bitcoin bridge. You can check Clementine whitepaper [here](citrea.xyz/clementine_whitepaper.pdf)\nThe repository includes:\n- A library for bridge operator, verifier, and aggregator\n- Circuits that will be optimistically verified w",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:eb93d215-e328-4d19-99ab-6c510acbb5aa",
+    "name": "VII-Finance-Contracts",
+    "prizeUsd": 69500,
+    "currency": "OP",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/eb93d215-e328-4d19-99ab-6c510acbb5aa",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nVII Finance is a credit-based market-making protocol. It allows users to borrow against their Uniswap V4 Liquidity Positions while earning lending interest on top of swap fees.\n\n\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** 69,500 OP\n- Only High & Medium severity",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:7a40c849-0b35-4128-b084-d9a83fd533ea",
+    "name": "jigsaw-contracts",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/7a40c849-0b35-4128-b084-d9a83fd533ea",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Jigsaw is a CDP-based stablecoin protocol that brings full flexibility and composability to your collateral through the concept of \u201cdynamic collateral\u201d. Jigsaw leverages crypto\u2019s unique permissionless composability to enable dynamic collateral in a fully non-custodial way.\nTechni",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d4835c42-fc76-4fea-8e2c-70449237fc0e",
+    "name": "beraborrow-blockend",
+    "prizeUsd": 52500,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d4835c42-fc76-4fea-8e2c-70449237fc0e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Beraborrow is a CDP featuring stablecoin loans backed by native Berachain assets, ETH LSTs, BTC derivatives, yield-bearing stablecoins and Proof of Liquidity assets (iBGT & iBERA).\n\nBased on Prisma Finance architecture (initial fork was done against this [commit](https://github.c",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 28,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Flooring Protocol-1780876800",
+    "name": "Flooring Protocol (exploit $0)",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "DN404 Forge Loop / Protocol Logic on Ethereum. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 26,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:949ad7c5-ea14-427d-b10a-54e33cef921b",
+    "name": "balancer-v3",
+    "prizeUsd": 500000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/949ad7c5-ea14-427d-b10a-54e33cef921b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nBalancer is a decentralized automated market maker (AMM) protocol built on Ethereum with a clear focus on fungible and yield-bearing liquidity. Balancer's success is intrinsically linked to the success of protocols and products built on the platform. Balancer v3\u2019s architecture f",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a188a03f-4631-4b58-82ce-a5818a6df332",
+    "name": "eulerswap-ctf",
+    "prizeUsd": 500000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a188a03f-4631-4b58-82ce-a5818a6df332",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Eulerswap introduces composable liquidity with lending-native yield mechanics, opening its infrastructure to researchers for deliberate, uncompromised testing.\nA smarter DEX with lending-boosted yield, deeper just-in-time liquidity, and native support for LP positions as collater",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:1ea959a6-7b85-4cda-98ed-32c88be2f3ff",
+    "name": "lifi-contracts",
+    "prizeUsd": 450000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/1ea959a6-7b85-4cda-98ed-32c88be2f3ff",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nLI.FI is a cross-chain aggregation protocol that combines multiple bridges and DEXs to enable seamless asset transfers between different blockchains. The protocol uses a diamond pattern (eip-2535) smart contract architecture where a main contract delegates calls to specialized f",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d86632df-ab33-4448-8198-64955eae6712",
+    "name": "liquity-bold",
+    "prizeUsd": 350000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d86632df-ab33-4448-8198-64955eae6712",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Liquity v2 is a collateralized debt platform. Users can lock up WETH and/or select LSTs, and issue stablecoin tokens (BOLD) to their own Ethereum address. The individual collateralized debt positions are called Troves.\nThe stablecoin tokens are economically geared towards maintai",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3a42798b-b1aa-4b10-b5e4-a8bbc22a70bc",
+    "name": "instadapp-fluid",
+    "prizeUsd": 250000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3a42798b-b1aa-4b10-b5e4-a8bbc22a70bc",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Fluid DEX protocol is a novel protocol that is built on top of the Liquidity Layer and introduces Smart Debt and Smart Collateral. By enabling the debt as trading liquidity, Fluid DEX generates up to \\$39 in DEX LP per \\$1 in TVL, making it the most capital-efficient and scalable",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:18f1e37b-9ac2-4ba9-b32e-50344500c1a7",
+    "name": "silo-contracts-v2",
+    "prizeUsd": 250000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/18f1e37b-9ac2-4ba9-b32e-50344500c1a7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nSilo Finance is a non-custodial, permissionless lending protocol that implements isolated lending markets. \n\nDocs: [https://docs.silo.finance/](https://docs.silo.finance/)\n\nTry it: https://v2.silo.finance/\n\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$250,000 ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 22,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e2cf6906-ec8b-4c78-a585-74ac90615659",
+    "name": "uniswap-v4",
+    "prizeUsd": 2350000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e2cf6906-ec8b-4c78-a585-74ac90615659",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Uniswap protocol is a peer-to-peer system designed for exchanging cryptocurrencies (ERC-20 Tokens) on the Ethereum blockchain. The protocol is implemented as a set of persistent, non-upgradable smart contracts; designed to prioritize censorship resistance, security, self-cust",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1140",
+    "name": "Ethereum Fusaka Upgrade",
+    "prizeUsd": 1984400,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/1140",
+    "deadline": 1760367600,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Ethereum Foundation (EF) is a non-profit that supports the Ethereum ecosystem. We are part of a larger community of organizations and individuals that fund protocol development, grow the ecosystem, and advocate for Ethereum.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d139882b-2d3a-49ac-9849-9dccef584090",
+    "name": "Omni Network",
+    "prizeUsd": 1000000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d139882b-2d3a-49ac-9849-9dccef584090",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": " \nOmni\u2019s goal is to make it easy for smart contract developers to source liquidity and users from anywhere. Our v1 release in scope for this competition consists of 2 primary building blocks: xchain messaging and an EVM. These building blocks are supported by 3 components that ma",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:44b385bf-e51a-4e6c-b3a8-adbbe24d16e1",
+    "name": "interop-portal",
+    "prizeUsd": 225000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/44b385bf-e51a-4e6c-b3a8-adbbe24d16e1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThe OP Stack is a decentralized software stack maintained by the Optimism Collective that forms the backbone of blockchains like OP Mainnet and Base. It's designed to be standardized, shared, and open-source, powering the Optimism ecosystem.\n\nThe OP Stack consists of various sof",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d86b7f95-e574-4092-8ea2-78dcac2f54f1",
+    "name": "morpho-blue",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d86b7f95-e574-4092-8ea2-78dcac2f54f1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Morpho Blue Competition\n\nMorpho Labs has teamed up with Cantina for the inaugural public security review competition hosted on their new platform by security researchers for security researchers. The competition will run two codebases in parallel: Metamorpho & Morpho Blue.\n\n**C",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3cc30b66-1cba-4044-968f-a0817cd7bf83",
+    "name": "SXT",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3cc30b66-1cba-4044-968f-a0817cd7bf83",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nSpace and Time is the Microsoft-backed blockchain for ZK-proven data. Secured by Proof of SQL, the first sub-second ZK coprocessor.\n\nThe codebase is broken into several repos: \n\n- sxt-node is a substrate based blockchain that essentially a database, responsible for accepting dat",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a83eaf73-9cbc-495f-8607-e55d4fdaf407",
+    "name": "incentive-contracts",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a83eaf73-9cbc-495f-8607-e55d4fdaf407",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Zerolend Competition\n\nZeroLend is the leading lending market on zkSync!\n\n\n### What are ZeroLend governance contracts\n\nA walkthrough of the governance contracts will be done on 9th of January.\n\n\n## Prize distribution and scoring\nThe prize distribution works as follows:\n\n- Securi",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8773f033-afa5-4e7b-b0e8-8f989062ae8a",
+    "name": "panoptic-core",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8773f033-afa5-4e7b-b0e8-8f989062ae8a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nPanoptic is a decentralized and permissionless options trading protocol built on Uniswap V3 and V4. We\u2019ve taken a new and innovative approach that allows us to adapt a novel form of perpetual options into a DeFi protocol with oracle-free settlement. Instead of relying on thin a",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e55ee7b9-6c99-42f8-8338-39f3dd134ef3",
+    "name": "Revert Finance - StableSwap Hooks",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e55ee7b9-6c99-42f8-8338-39f3dd134ef3",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "StableSwap Hooks is a Uniswap v4 hook implementation that brings Curve-style StableSwap AMM behavior to v4 pools. It targets stable assets (stablecoins, LSTs, etc.) to provide low-slippage swaps around the 1:1 price, while supporting configurable fees, rate oracles, and amplifica",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ad445d42-9d39-4bcf-becb-0c6c8689b767",
+    "name": "aave-aptos",
+    "prizeUsd": 150000,
+    "currency": "GHO",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ad445d42-9d39-4bcf-becb-0c6c8689b767",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The deployment of Aave V3 on the Aptos blockchain marks Aave's inaugural expansion beyond Ethereum Virtual Machine (EVM) compatible chains, tapping into Aptos' high throughput and advanced security features. Aptos, developed by former leaders of Meta\u2019s Diem project, is designed t",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 18,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ae57d1ed-c242-4eac-932a-ef596c9bcc67",
+    "name": "aave-aptos-ctf",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ae57d1ed-c242-4eac-932a-ef596c9bcc67",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The deployment of Aave V3 on the Aptos blockchain marks Aave's inaugural expansion beyond Ethereum Virtual Machine (EVM) compatible chains, tapping into Aptos' high throughput and advanced security features. \n\n## Live Aptos Mainnet Testing\n\n- Four selected Aave assets, each provi",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 18,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:542",
+    "name": "Rujira",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "reporting",
+    "url": "https://code4rena.com/audits/2025-12-rujira",
+    "deadline": "2026-03-27T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Rujira is building the App Layer on THORChain, providing a fully integrated suite of DeFi applications, accessible with native assets from all connected chains.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 18,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Litecoin-1777161600",
+    "name": "Litecoin (exploit $0)",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "litecoin"
+    ],
+    "desc": "Zero-Day Bug & DDoS Exploit / Protocol Logic on Litecoin. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 16,
+    "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Gnosis Pay-1780272000",
+    "name": "Gnosis Pay (exploit $0)",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "gnosis chain"
+    ],
+    "desc": "Zodiac Delay Module Exploit / Protocol Logic on Gnosis Chain. Lead for incident response + forensics.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 16,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:38",
+    "name": "Optimism",
+    "prizeUsd": 700000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/38",
+    "deadline": 1675695600,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Anyone can say it, only Optimism can back it up. Bedrock is the culmination of countless hours of research and development with the goal of building the best rollup architecture yet.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ddc75feb-752e-4a61-8731-9c7c4c014128",
+    "name": "Cantina ddc75feb",
+    "prizeUsd": 500000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ddc75feb-752e-4a61-8731-9c7c4c014128",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:333",
+    "name": "MakerDAO Endgame",
+    "prizeUsd": 415000,
+    "currency": "DAI",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/333",
+    "deadline": 1722870000,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Endgame is a fundamental transformation of MakerDAO that improves growth, resilience and accessibility, with the aim of scaling the Dai supply to 100 billion and beyond.\n",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ac757733-81a4-43c7-8f49-17c5b135cdff",
+    "name": "curvance",
+    "prizeUsd": 375000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ac757733-81a4-43c7-8f49-17c5b135cdff",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n# Curvance Competition\n\n\n## Competition at a glance\n\n- Monday, February 26th 20:00 UTC to Thursday, April 15th 20:00 UTC\n- Total Prize Pool: $375,000\n\n\n### What is Curvance\n\n## Curvance at a glance\n\nCurvance is a cross-chain money market for yield bearing assets. Maximize yield ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f8f20c00-f84e-43d7-a0a4-ec818b98df82",
+    "name": "Cantina f8f20c00",
+    "prizeUsd": 350000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f8f20c00-f84e-43d7-a0a4-ec818b98df82",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1209",
+    "name": "Aave V4",
+    "prizeUsd": 310000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/1209",
+    "deadline": 1768230000,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Aave V4 introduces a new Hub and Spoke architecture. This architecture introduces several new design paradigms to Aave, each with their own set of benefits. The contest should focus on edge cases in accounting and new features.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:677",
+    "name": "Babylon Chain Launch (Phase-2)",
+    "prizeUsd": 300000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/677",
+    "deadline": 1741100400,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Phase-2 of the Babylon mainnet will launch a Babylon PoS blockchain as the first Bitcoin Secured Network (BSN). This will be accompanied by the registration of the stakes created during Phase-1 to the Babylon blockchain allowing them to provide finality service for the it and ear",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ac5f64e6-3bf2-4269-bbb0-4bcd70425a1d",
+    "name": "infrared-contracts",
+    "prizeUsd": 250000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ac5f64e6-3bf2-4269-bbb0-4bcd70425a1d",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThe Infrared Protocol revolutionizes the way users engage with the Berachain ecosystem, particularly in how they stake consensus assets and receive the [Proof-of-Liquidity inflation](https://docs.berachain.com/learn/what-is-proof-of-liquidity#what-is-proof-of-liquidity). It enab",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:44d68da7-3cf4-4cec-a3f8-f0917062dac6",
+    "name": "bima-money",
+    "prizeUsd": 200000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/44d68da7-3cf4-4cec-a3f8-f0917062dac6",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nDecentralized borrowing protocol that allows users to mint a stablecoin, USBD, that is fully collateralized by BTC.\n \n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$200,000 \n\n- **The prize distribution has 2 possible triggers:**\n    - If one or more valid medium s",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:523e1540-f8c3-45ae-9c5d-b6d35d3a326c",
+    "name": "morpho-vaults-v2",
+    "prizeUsd": 200000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/523e1540-f8c3-45ae-9c5d-b6d35d3a326c",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Morpho Vault v2 enables anyone to create non-custodial vaults that allocate assets to any protocols, including but not limited to Morpho Market v1, Morpho Market v2, and Morpho Vaults v1. Depositors of Morpho Vault v2 earn from the underlying protocols without having to actively ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:832",
+    "name": "Usual Labs",
+    "prizeUsd": 180000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/832",
+    "deadline": 1741705200,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Usual is a secure and decentralized fiat-backed stablecoin issuer that redistributes value and ownership through the $USUAL token. Take control, make an impact, and grow with us.\n",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:59",
+    "name": "Notional V3",
+    "prizeUsd": 164000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/59",
+    "deadline": 1684162800,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Earn fixed income on your crypto or borrow at fixed rates for up to one year with Notional - DeFi's top fixed rate protocol.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:747",
+    "name": "Aave v3.3",
+    "prizeUsd": 160000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/747",
+    "deadline": 1737558000,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Aave is a DeFi liquidity protocol for users to supply and borrow assets. This contest focuses on its v3.3 version, optimising different components of the system like liquidations or bad debt management",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1225",
+    "name": "Fluid DEX v2",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/1225",
+    "deadline": 1771426800,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Fluid is a liquidity protocol that combines a lending protocol and a DEX. This contest focuses on the new version of Fluid DEX and lending protocol.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:b7c7def5-1033-4a4c-809d-08e507fb3583",
+    "name": "Bitcoin Staking Scripts",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/b7c7def5-1033-4a4c-809d-08e507fb3583",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nSince its inception in 2009, Bitcoin the asset only has two major\nutilities: storage of value and payment. This is due to BTC protocol's\npreference of stability over programmability. With limited\nprogrammability, most Bitcoin utility protocols require Bitcoin HODLERs\nto trust a ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:21787352-de2c-4a77-af09-cc0a250d1f04",
+    "name": "tensor-monorepo",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/21787352-de2c-4a77-af09-cc0a250d1f04",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Tensor Foundation protocol is a group of Solana programs (smart contracts) that allow trading Solana NFTs and digital assets in a permissionless and decentralized manner. The following programs are part of the protocol:\n\n* AMM \u2013 An automated market maker program that allows c",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:84df57a3-0526-49b8-a7c5-334888f43940",
+    "name": "sorella-angstrom",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/84df57a3-0526-49b8-a7c5-334888f43940",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Angstrom Core contracts which you\u2019ll be reviewing are at the heart of the larger Angstrom protocol. Angstrom as a whole is a hybrid DEX/limit order book protocol which combines several novel primitives into a unique efficient, trustless, MEV-minimizing exchange. The contract ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:207",
+    "name": "MorphL2",
+    "prizeUsd": 139000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/207",
+    "deadline": 1727103600,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Morph is an optimistic zkevm layer2 with decentralized sequencers. We\u2019ll focus on the security of fund in smart contracts like bridge and staking. In terms of marketing, Morph is the Consumer Blockchain for Everyday Life. ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:395",
+    "name": "Aleo",
+    "prizeUsd": 125000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/395",
+    "deadline": 1719241200,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "An all-in-one ZK platform for web applications that are programmable, permissionless, and secure.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:990ce947-05da-443e-b397-be38a65f0bff",
+    "name": "Aquarius",
+    "prizeUsd": 110000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/990ce947-05da-443e-b397-be38a65f0bff",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThis is the AMM protocol built on Stellar smart contract platform (Soroban) that allows spinning up 2 types of pools: volatile (inspired by Uniswap V2) and stable (inspired by Curve), as well as swapping assets in these pools including multihop routes where assetA is swapped int",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:4b6f08a7-e830-4499-9977-08e2c3b32068",
+    "name": "eigenlayer-contracts",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/4b6f08a7-e830-4499-9977-08e2c3b32068",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n# Eigenlayer Competition\n\n\n### What is Eigenlayer\n\nEigenLayer is a protocol built on Ethereum that introduces restaking, a new primitive in cryptoeconomic security. This primitive enables the reuse of ETH on the consensus layer. Users that stake ETH natively or with a liquid sta",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:050711ca-a6d1-4fdd-9f94-3816233c1bd5",
+    "name": "collar-core",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/050711ca-a6d1-4fdd-9f94-3816233c1bd5",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nCollar Protocol is a lending protocol that enables liquidation-free and high LTV borrowing against crypto assets by combining dex swaps and options-like payoff structures.\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$100,000 \n- **Primary Prize Pool:** \\$95,000\n",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:7d650b99-8a40-49d1-9b65-2b060accfbb7",
+    "name": "circuit-puzzles",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/7d650b99-8a40-49d1-9b65-2b060accfbb7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nCircuit is a DeFi protocol built on the [Chia blockchain.](https://www.chia.net/)\n\nSpecifically, Circuit is a collateralized debt position (CDP) protocol that allows users to borrow Bytecash (BYC), a USD stablecoin issued by the protocol, against XCH, the native token of Chia.\nC",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:cdce21ba-b787-4df4-9c56-b31d085388e7",
+    "name": "kuru-contracts",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/cdce21ba-b787-4df4-9c56-b31d085388e7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nKuru is a highly gas-efficient fully on-chain CLOB with backstop liquidity features. This combines the best of TradFi and DeFi together in order to trade both long-tail and short-tail assets seamlessly.  \n\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$100,000\n-",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:2adf7150-27ba-4cba-86a2-bd8ea175e7da",
+    "name": "makina-contracts",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/2adf7150-27ba-4cba-86a2-bd8ea175e7da",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Makina protocol introduces a novel architecture for onchain strategy execution that addresses fundamental limitations in existing vault infrastructure. \nThrough its hub-and-spoke multi-chain design, Makina enables sophisticated cross-chain strategies while maintaining strict ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f214cf86-cc80-40c0-a70b-e9bb25d7ac80",
+    "name": "Smart-contracts",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f214cf86-cc80-40c0-a70b-e9bb25d7ac80",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n#  Goat.Tech Competition\n\n\n### What is Goat.Tech\n\n\nGoat.Tech is a social-financial game, where users play by mainly staking ETH in each other\u2019s \u201cTrust Pool\u201d to earn 10 types of rewards, increase reputation (Trust Score), and find out who\u2019s the GOAT (highest Trust Score). Trust S",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:31a752e3-8ece-49b3-a9ee-d7294c659340",
+    "name": "Pegasus",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/31a752e3-8ece-49b3-a9ee-d7294c659340",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Usual is a Stablecoin DeFi protocol that redistributes control and redefines value sharing. It empowers users by aligning their interests with the platform's success.\n`$USD0` is a USUAL native stablecoin with real-time transparency of reserves, fully collateralized by US Treasury",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:58cd719b-9004-4eca-a113-41d1691c0711",
+    "name": "napier-v2",
+    "prizeUsd": 72000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/58cd719b-9004-4eca-a113-41d1691c0711",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nNapier v2 is a modular yield tokenization platform, allowing anyone to fix yields and trade yield-bearing tokens. It is similar to Pendle but with more flexibility and permissionless by design, built on the Curve Finance AMM.\n\nAnyone called curator, can deploy a yield tokenizati",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:c2e31b04-fbb2-4355-80ef-141d58b6e0cc",
+    "name": "arcadexyz/arcade-protocol",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/c2e31b04-fbb2-4355-80ef-141d58b6e0cc",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n# Arcade.xyz V4 competition\n\n\n## Competition at a glance\n\n- Thursday, February 22nd 20:00 UTC to Thursday, March 7th 20:00 UTC\n- Total Prize Pool: $60,000\n\n\n### What is Arcade\n\nArcade.xyz is the first of its kind Web3 platform to enable liquid lending markets for NFTs. At Arcade",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:9dfca0bc-a7bf-482e-a3df-4eb861f55c4f",
+    "name": "reserve-index-dtf",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/9dfca0bc-a7bf-482e-a3df-4eb861f55c4f",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThe Reserve Index Protocol is a protocol for creating and managing portfolios of ERC20-compliant assets entirely onchain. Index-RTokens are designed to be used as a single-source of truth for asset allocations, enabling composability of complex, multi-asset portfolios.\n\nMore inf",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:691ce303-f137-437a-bf34-aef87dfe983b",
+    "name": "dahlia-protocol",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/691ce303-f137-437a-bf34-aef87dfe983b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Dahlia is a permissionless, modular lending protocol that emphasizes advanced risk control and liquidity aggregation, built atop of the [Royco Protocol](https://https://www.royco.org/). \nDahlia markets are isolated and permissionless, allowing any user to create a market between ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8cf9c7a0-a7a6-446a-8577-1e2c254eb5a8",
+    "name": "velvet-v4",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8cf9c7a0-a7a6-446a-8577-1e2c254eb5a8",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Velvet.Capital is an Intent Operating System for DeFi which aims to streamline onchain portfolio management.\n\n## Prize Distribution and Scoring\n- **Total Prize Pool:** \\$60,000\n- Additional pay for dedicated Cantina researcher: \\$40,000\n\n- **Primary Prize Pool:** \\$57,000\n\n- \\$3,",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8b94becd-54e7-41cd-88e6-caae7becc76a",
+    "name": "reserve-index-dtfs-solana",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8b94becd-54e7-41cd-88e6-caae7becc76a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Reserve Index Protocol is a protocol for creating and managing portfolios of SPL-compliant assets entirely on-chain. Index-RTokens are designed to be used as a single-source of truth for asset allocations, enabling composability of complex, multi-asset portfolios.\n\nMore infor",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:02c29467-cb27-4beb-b2ef-500ad95e1a51",
+    "name": "ammalgam-contracts",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/02c29467-cb27-4beb-b2ef-500ad95e1a51",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nAmmalgam is a completely new primitive that combines lending and trading into one protocol called a Decentralized Lending Exchange (DLEX). This simple combination creates Capital Efficiency resulting in 60% increases in yield for Liquidity Providers (LPs). It offers unbounded ut",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:917d796b-48d0-41d0-bb40-be137b7d3db5",
+    "name": "octant-v2-core",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/917d796b-48d0-41d0-bb40-be137b7d3db5",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Octant is open public infrastructure for sustainable growth.\nIt provides innovative DeFi primitives that create regenerative funding streams and allocation mechanisms, building a self-sustaining network to support communities and their ecosystems.\nThrough its core components\u2014Fund",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:fe8e03b1-f8db-4698-8a21-44b3a862e434",
+    "name": "Mento-V3",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/fe8e03b1-f8db-4698-8a21-44b3a862e434",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Mento V3 is an evolution of the Mento Protocol, transitioning from a Reserve-backed stablecoin and swap protocol to a CDP-backed decentralized Foreign Exchange (FX) protocol. V3 enables fixed-price stablecoin swaps through a novel type of market maker contract, the FPMM (Fixed Pr",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8bab566e-a6d4-4c1b-9f28-71a94bfd1da2",
+    "name": "symbioticfi-core",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8bab566e-a6d4-4c1b-9f28-71a94bfd1da2",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Symbiotic is a shared security protocol enabling decentralized networks to control and customize their own multi-asset restaking implementation.\n\nSymbiotic core consists of:\n\n* Collateral: a new type of asset that allows stakeholders to hold onto their funds and earn yield from t",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ba62fa4e-f933-4eec-b9ac-868325f4a694",
+    "name": "superform-core",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ba62fa4e-f933-4eec-b9ac-868325f4a694",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nSuperform v2 is a modular DeFi protocol for yield abstraction that allows dynamic execution and flexible composition of user operations via ERC7579 modules.\n\n\n\n### Prize distribution and scoring\n\n- **Public Prize Pool:** \\$ 50,000\n- Additional pay for dedicated Cantina researche",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:0f543452-2076-438f-86ae-bbd6b065fffb",
+    "name": "solayer-bridge",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/0f543452-2076-438f-86ae-bbd6b065fffb",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Solayer Bridge (sBridge) is a canonical, SVM-native cross-chain bridge specifically designed to securely transfer assets and execute cross-chain transactions between Solana and Solayer environments. Unlike generic multichain bridges, sBridge is tightly aligned with the Solana",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:9c6e38e2-535e-47b2-83ef-29df91fbb774",
+    "name": "Royco Dawn",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/9c6e38e2-535e-47b2-83ef-29df91fbb774",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nRoyco (v2) Dawn, is a perpetual risk tranching protocol. Dawn tranches on and off chain yield opportunities into senior and junior tranches. \n\nThe senior tranche is protected, at minimum, from a market defined drawdown percentage in the underlying investment by virtue of the jun",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:efb6f308-f13b-4110-aff8-0d67181608dd",
+    "name": "Revert Finance",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/efb6f308-f13b-4110-aff8-0d67181608dd",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Revert Lend is a decentralized peer-to-pool lending protocol designed for Automated Market Maker Liquidity Providers. It allows users to collateralize their Aerodrome Slipstream concentrated liquidity positions, in the form of Aerodrome NonfungiblePositionManager NFTs, and obtain",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 14,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:5617fffa-4b67-42a7-a9f5-dad93627faa3",
+    "name": "infinitypools",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/5617fffa-4b67-42a7-a9f5-dad93627faa3",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nInfinityPools is a decentralized exchange that can offer unlimited leverage on any asset, with no liquidations, no counterparty risk and no oracles. \n\nIn order to mitigate liquidation risk, futures exchanges limit the maximum leverage available, the assets that can be traded and",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 12,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ddf86a5c-6f63-430f-aadc-d8742b4b1bcf",
+    "name": "VenusProtocol/governance-contracts",
+    "prizeUsd": 58000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ddf86a5c-6f63-430f-aadc-d8742b4b1bcf",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n# Venus Protocol - Multichain Governance Competition\n\n\n### What is Venus Protocol\n\nEarn, Borrow & Lend on the #1 Decentralized Money Market.\n\nThe Venus Protocol is currently deployed on BNB Chain, Ethereum and opBNB, and it will be deployed to more networks soon. Governance prop",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 12,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:829164bf-7fba-4b84-a6b8-76652205bd97",
+    "name": "lockbox-solana",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/829164bf-7fba-4b84-a6b8-76652205bd97",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "## Olas Competition\n\nOlas is a unified network for off-chain services like automation, oracles, co-owned AI. It offers a stack for building services and a protocol for incentivizing their creation and their operation in a co-owned and decentralized way.\n\n\nThe competition at a gla",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 12,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:2ac7f906-1661-47eb-bfd6-519f5db0d36b",
+    "name": "infinifi-protocol",
+    "prizeUsd": 35000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/2ac7f906-1661-47eb-bfd6-519f5db0d36b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "InfiniFi is a DeFi protocol that enables users to mint and redeem receipt tokens (iUSD) against collateral assets (USDC). The protocol features a sophisticated yield generation system through multiple farm integrations, a locking mechanism for enhanced rewards, and a governance s",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:519",
+    "name": "Jupiter Lend",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "judging complete",
+    "url": "https://code4rena.com/audits/2026-02-jupiter-lend",
+    "deadline": "2026-05-08T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Earn Yield, Borrow Assets, Maximize Returns. Better for Borrowers, Simpler for Lenders.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 12,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:50d38b86-80a0-49af-9df8-70d7d601b7d7",
+    "name": "solaxy",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/50d38b86-80a0-49af-9df8-70d7d601b7d7",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Solaxy is a next-generation launchpad, built on the Termina\u2019s rollup stack from Nitro Labs and powered by the Solana Virtual Machine. It brings fast, scalable execution, seamless settlement on Solana L1, and reliable data availability\u2014all within one integrated stack. Tokens on So",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 10,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:1028",
+    "name": "Centrifuge Protocol V3.1",
+    "prizeUsd": 234400,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/1028",
+    "deadline": 1763391600,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Centrifuge Protocol is an open, decentralized protocol for onchain asset management. Built on immutable smart contracts, it enables permissionless deployment of customizable tokenization products.\n\nBuild a wide range of use cases, from permissioned funds to onchain loans, whi",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:205",
+    "name": "Optimism Fault Proofs",
+    "prizeUsd": 200000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/205",
+    "deadline": 1712242800,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The first open source, permissionless, feature-complete fault proof system in the Ethereum ecosystem.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:6",
+    "name": "GMX",
+    "prizeUsd": 150000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/6",
+    "deadline": 1679670000,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "GMX is a decentralized spot and perpetual exchange that supports low swap fees and zero price impact trades.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:5ffcedec-7e2e-4717-a3e4-e9041ca541c2",
+    "name": "Aave v3.1 Competition",
+    "prizeUsd": 150000,
+    "currency": "GHO",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/5ffcedec-7e2e-4717-a3e4-e9041ca541c2",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nAave v3 is a liquidity protocol running on multiple EVM-compatible networks, where user can supply and borrow liquidity.\n\nThe v3.1 version target of this competition is an upgrade of the implementation smart contracts of Aave v3, focusing on improving its security and different",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:101",
+    "name": "Tokemak",
+    "prizeUsd": 144000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/101",
+    "deadline": 1693321200,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Generating sustainable liquidity for the tokenized world. Eliminating inefficiencies and helping LPs to deploy liquidity where it can do the most work is exactly why we are building Tokemak v2!",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:2cd0b038-3e32-4db6-b488-0f85b6f0e49f",
+    "name": "core-and-erc1155a",
+    "prizeUsd": 140000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/2cd0b038-3e32-4db6-b488-0f85b6f0e49f",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Superform Competition\n\nThe competition at a glance:\n\n- November 27th 20:00 UTC to December 18th 20:00 UTC\n- $140,000 total prize pool.\n\n\n### Prize distribution and scoring\n\n\nThe prize distribution works as follows:\n\n- Security reviewers will score points for each finding.\n- Pri",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:74",
+    "name": "GMX Update",
+    "prizeUsd": 134000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/74",
+    "deadline": 1685890800,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "GMX is a decentralized spot and perpetual exchange that supports low swap fees and zero price impact trades.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a0a58a8b-247e-4203-b3cb-476ded9d5515",
+    "name": "Centrifuge",
+    "prizeUsd": 125000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a0a58a8b-247e-4203-b3cb-476ded9d5515",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Centrifuge is the infrastructure that facilitates the decentralized financing of real-world assets natively on-chain, creating a fully transparent market which allows borrowers and lenders to transact without unnecessary interme- diaries. The protocol aims to lower the cost of bo",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:63",
+    "name": "Optimism Update",
+    "prizeUsd": 120000,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/63",
+    "deadline": 1680883200,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Bedrock is the cheapest, fastest, and most advanced rollup architecture. Ever. Contest focus is changes made since the previous Bedrock contest. ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:80a33cf0-ad69-4163-a269-d27756aacb5e",
+    "name": "zetachain-protocol",
+    "prizeUsd": 120000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/80a33cf0-ad69-4163-a269-d27756aacb5e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nZetaChain is a L1 EVM compatible blockchain focused on connecting blockchains.\nUnlike other interoperability solutions in general that connect chains end-to-end, ZetaChain acts as a hub where developer can deploy their main DApp logic (called Universal Apps). Developers can inte",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:cb538ed2-6770-4646-a32b-610b62d9a34c",
+    "name": "optimism-java",
+    "prizeUsd": 117362,
+    "currency": "OP",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/cb538ed2-6770-4646-a32b-610b62d9a34c",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nHildr implements the OP Stack consensus client, with core functionalities developed according to the [Rollup Node spec](https://specs.optimism.io/protocol/rollup-node.html), essentially equivalent to the op-node (excluding the sequencer) functionalities.\n\nOp-besu implements the ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "sherlock",
+    "id": "sherlock:857",
+    "name": "ZetaChain Cross-Chain",
+    "prizeUsd": 113600,
+    "currency": "USDC",
+    "status": "finished",
+    "url": "https://audits.sherlock.xyz/contests/857",
+    "deadline": 1747062000,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "ZetaChain is a layer one EVM compatible chain with a native interopability solution built in. Allowing developers to build Universal Dapps that interact with all chains",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:b92d2750-d5a3-4c53-9bca-2e70d5dfe0ac",
+    "name": "SP1",
+    "prizeUsd": 110000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/b92d2750-d5a3-4c53-9bca-2e70d5dfe0ac",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "SP1 is a performant, 100% open-source, contributor-friendly zkVM with a novel precompile-centric architecture. It is the only zkVM that is fully open-source, supports the Rust standard library, has customizable precompiles for state of the art performance, and leverages the lates",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:26d5255b-6f68-46cf-be55-81dd565d9d16",
+    "name": "telcoin-network",
+    "prizeUsd": 110000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/26d5255b-6f68-46cf-be55-81dd565d9d16",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Telcoin Network is the EVM layer 1 blockchain for the Telcoin Platform. Unlike Ethereum, consensus uses Narhwal and Bullshark to create local DAGs. The protocol is designed so only GSMA full-member mobile network operators (MNOs) validate the blocks to earn rewards.\nTelcoin (TEL)",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8409a0ce-6c21-4cc9-8ef2-bd77ce7425af",
+    "name": "metamorpho-and-periphery",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8409a0ce-6c21-4cc9-8ef2-bd77ce7425af",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Metamorpho and Periphery Competition\n\nMorpho Labs has teamed up with Cantina for the inaugural public security review competition hosted on their new platform by security researchers for security researchers.\n\nThe competition at a glance:\n\n- November 16th 10:00 UTC to December ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f0cfe0e9-290b-4967-94ac-504375329127",
+    "name": "ctf",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f0cfe0e9-290b-4967-94ac-504375329127",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Superform CTF\n\nHack Superform, keep the money. \n\n\n- Add your wallet address to your profile (Profile -> Edit Profile -> CTF Addresses).\n- The contracts are live, you can (legally) hack it onchain.\n- Use cantina code interface to submit a writeup about the exploit, with a link t",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:627528d0-db8a-4c42-b8b4-a5760ff31baf",
+    "name": "Cantina 627528d0",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/627528d0-db8a-4c42-b8b4-a5760ff31baf",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:781d30df-39a9-47e6-b290-e388c79e04ea",
+    "name": "aligned-layer",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/781d30df-39a9-47e6-b290-e388c79e04ea",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nAligned is a decentralized network that verifies Zero-Knowledge/validity proofs and posts the results to Ethereum. It is designed to provide high throughput, cheap proof verification with low latency.\n\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$100,000\n- **Pr",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:c486d600-bed0-4fc6-aed1-de759fd29fa2",
+    "name": "openvm",
+    "prizeUsd": 100000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/c486d600-bed0-4fc6-aed1-de759fd29fa2",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "OpenVM is a performant and modular zkVM framework built for customization and extensibility. The scope of the competition covers: \n\n- The proof system backend, built on top of plonky3 with FRI and Baby Bear.\n-  The ZK circuits and VM framework, including RV32IM and VM extensions ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:49b9e08d-4f8f-4103-b6e5-f5f43cf9faa1",
+    "name": "Citrea",
+    "prizeUsd": 80000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/49b9e08d-4f8f-4103-b6e5-f5f43cf9faa1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Citrea is the first rollup that enhances the capabilities of Bitcoin blockspace with zero-knowledge technology, making it possible to build everything on Bitcoin.\n\nAt its core, Citrea is a ZK-EVM rollup that leverages Bitcoin as both its data availability and settlement layer. It",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d47f8096-8858-437d-a9f5-2fe85ac9b95e",
+    "name": "safe-extensions",
+    "prizeUsd": 75000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d47f8096-8858-437d-a9f5-2fe85ac9b95e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n# Optimism Safe Extensions Competition\n\n## Overview\n\nOP Labs has developed Safe Modules and a Safe Guard for use on the Security Council safe which is involved in upgrades to OP Mainnet and other chains in the Superchain.\n\nThese modules and guard provide additional security guar",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:6837e02a-0a87-4577-a047-4e1ea71cff01",
+    "name": "spend-permissions",
+    "prizeUsd": 75000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/6837e02a-0a87-4577-a047-4e1ea71cff01",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Spend Permissions enable apps/third-party spenders to spend native tokens and ERC-20 tokens on behalf of users in a recurring way.  This unlocks use cases that would otherwise be prohibited by the burden of requiring real-time signatures from users, such as frequent in-game spend",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:08c2b0b4-8449-4136-82a2-7074ccdfffac",
+    "name": "Soon ",
+    "prizeUsd": 74000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/08c2b0b4-8449-4136-82a2-7074ccdfffac",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nSOON is building the most efficient roll-up stack by combining the strengths of SVM and OP Stack. We're the first to truly decouple SVM's execution engine from consensus, achieving 20x cheaper costs than Solana while delivering 30k TPS and 50ms block times. Our innovation in par",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:cdb738fd-0e7f-4a6b-9073-2b8629bfc1c3",
+    "name": "Cantina cdb738fd",
+    "prizeUsd": 70000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/cdb738fd-0e7f-4a6b-9073-2b8629bfc1c3",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f1433ef1-f309-4d37-b95a-eb6d17054cc5",
+    "name": "Cantina f1433ef1",
+    "prizeUsd": 70000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f1433ef1-f309-4d37-b95a-eb6d17054cc5",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3765f098-ef5c-47be-beb9-3f4ce9dcb407",
+    "name": "USDaf-v2",
+    "prizeUsd": 70000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3765f098-ef5c-47be-beb9-3f4ce9dcb407",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "USDaf a licensced Liquity v2 fork with wBTC, tBTC, scrvUSD, ysyBOLD, sfrxUSD, and sUSDS as collaterals. USDaf is a CDP and immutable by design. Users can deposit any of these assets and borrow USDaf against them, while setting their own custom fixed interest rates.\n\n## Prize dist",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:4ee8716d-3e0e-4f59-b90d-aa56bf3b484c",
+    "name": "mev-commit",
+    "prizeUsd": 65000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/4ee8716d-3e0e-4f59-b90d-aa56bf3b484c",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Mev-commit is a peer-to-peer networking platform designed to facilitate real-time interactions and coordination between mev actors and execution providers. It provides a robust network for exchanging execution bids and cryptographic commitments, which are used to specify executio",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:57b00aab-8f8b-4d62-9378-41b6460ce6aa",
+    "name": "doppler-contracts",
+    "prizeUsd": 65000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/57b00aab-8f8b-4d62-9378-41b6460ce6aa",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nDoppler is a customizable liquidity-bootstrapping Protocol designed for the Uniswap Ecosystem. The entire Protocol is designed for use onchain and eliminates value leakage of value.\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** \\$65,000 \n\n- Scoring described in th",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f9326d2b-bb99-45a9-88c5-94c54aa1823a",
+    "name": "farcasterattestation-monorepo",
+    "prizeUsd": 60378,
+    "currency": "OP",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f9326d2b-bb99-45a9-88c5-94c54aa1823a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nFarcaster Attestation is a set of smart contracts that bring Farcaster wallet verification on-chain, making it easy to issue and consume attestations within the Superchain ecosystem.\n\nThe **FarcasterResolver** contract on Optimism securely decodes signed messages, validates sign",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:61087007-c7e9-4c4e-9d90-4e118933fecf",
+    "name": "stakeup-bloomv2",
+    "prizeUsd": 60000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/61087007-c7e9-4c4e-9d90-4e118933fecf",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nStakeUp is a fully decentralized, on-chain and permissionless USDC autocompounding stable LST, that derives its yield from US Treasury Bills. All fees within the system are rewarded to stakers of the protocol\u2019s utility token, SUP. The protocol is built on-top of Bloom Protocol\u2019s",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e757364c-1f68-4ec5-94f6-c6b3c2e80c6d",
+    "name": "mezo-monorepo",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e757364c-1f68-4ec5-94f6-c6b3c2e80c6d",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Mezo is a Bitcoin-centric platform designed to enhance Bitcoin\u2019s utility through seamless borrowing, spending, and earning. Bitcoin has changed how people think about money, control, security, and transparency. Bitcoin excels as a store of value, but it currently lacks the tools ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e68909e6-3491-4a94-a707-ecf0c89cf72a",
+    "name": "alchemix-v3",
+    "prizeUsd": 50000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e68909e6-3491-4a94-a707-ecf0c89cf72a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nAlchemix lets you instantly access loans representing your collateral's future yield. Over time, the interest your deposit earns is used to repay your debt automatically. Alchemix loans are self-repaying, interest-free, and non-liquidating.\n\n### Prize distribution and scoring\n\n-",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8d7bdfb9-cf19-4294-95d0-763af5d425b4",
+    "name": "juicebox-monorepo",
+    "prizeUsd": 36796,
+    "currency": "OP",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8d7bdfb9-cf19-4294-95d0-763af5d425b4",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThe Juicebox protocol offers programmable, unstoppable treasuries for people and projects operating across EVM blockchains. Schedule rules that determine what happens when a treasury receives funds and under what conditions funds can be reclaimed or distributed from treasuries.\n",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:708eecf5-a6a0-46c1-a949-277f7408decc",
+    "name": "Avon-Contracts",
+    "prizeUsd": 36000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/708eecf5-a6a0-46c1-a949-277f7408decc",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Avon is building an entirely new way to borrow and lend on chain via lending infrastructure designed for efficiency, composability, and real-time dynamics. We combine the granularity of an order book with programmable lending markets (strategies), bringing true market dynamics to",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a0806644-7d91-457a-a08d-aee2db73f352",
+    "name": "pike-tapio-monrepo",
+    "prizeUsd": 35000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a0806644-7d91-457a-a08d-aee2db73f352",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\n**Pike Market Protocol**\nPike Market is a decentralized lending and borrowing protocol built for EVMs, designed to provide a secure, scalable, and flexible environment for users to manage their digital assets. It allows users to supply assets to earn yield or borrow against col",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:205f8ca3-27fc-4da2-a2e6-0d43e1c60a41",
+    "name": "TermMax",
+    "prizeUsd": 30000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/205f8ca3-27fc-4da2-a2e6-0d43e1c60a41",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "TermMax revolutionizes Decentralized Finance (DeFi) leveraged yield strategies by simplifying complex operations and enhancing both cost and time efficiency. Through its innovative fixed-rate borrowing and lending mechanism with integrated leverage functions, TermMax enables inve",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e9e9b3e0-f213-45e4-8d05-d72bf0c8787a",
+    "name": "ton-pool-contracts",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e9e9b3e0-f213-45e4-8d05-d72bf0c8787a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n**TON Pool** provides an efficient staking solution on the TON blockchain by utilizing the two-queue smart contract system from the [TON Whales](https://tonwhales.com/) project. By using two queues, the TON Pool ensures optimal resource use and enables validator efficiency.\n\nTo ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3eff5a8f-b73a-4cfe-8c54-546b475548f0",
+    "name": "inclusive-monorepo",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3eff5a8f-b73a-4cfe-8c54-546b475548f0",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The protocol consists of a few components: an intent processor, an auction manager, and a few vaults. The intent processor is responsible for validating the intents, and locking the funds globally. The auction manager selects which is the solution that wins, and hence will settle",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:1b64737c-1373-4ecf-a179-4cd0d7b0b232",
+    "name": "defi-app-contracts",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/1b64737c-1373-4ecf-a179-4cd0d7b0b232",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Defi App is solving crypto\u2019s main UX problem via a \u201cSuperDapp\u201d that will make CEXs obsolete. Through the use of account abstraction and integration to advanced DeFi infrastructure we can abstract complexity and let users have a delightful experience when swapping into any asset o",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:7db75599-9dad-40aa-9fc7-e879803eea2b",
+    "name": "colorpool-chromia",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/7db75599-9dad-40aa-9fc7-e879803eea2b",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "This source code is a decentralized finance (DeFi) project that combines functionalities of Uniswap (a decentralized exchange) with Farming and Staking mechanisms.\n\n## Prize Distribution and Scoring\n\n- **Total Prize Pool:** \\$25000\n- Additional pay for dedicated Cantina researche",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:076935b1-2706-48c6-bf0a-b3656aa24194",
+    "name": "liquidity-book-vaults",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/076935b1-2706-48c6-bf0a-b3656aa24194",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "**Maker Vault Code Introduction:**\nMaker Vaults are fully on-chain, non-custodial smart contracts that deploy and manage liquidity into DLMM pools. Managed by wallets, these vaults simplify liquidity provisioning while ensuring transparency.\n\n**Core Features:**\n- Open for All: Cr",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:616d8bb4-16ce-4ca9-9ce9-5b99d6e146ef",
+    "name": "mighty-contracts",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/616d8bb4-16ce-4ca9-9ce9-5b99d6e146ef",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nMighty Finance is a DeFi platform designed for concentrated liquidity market making (CLMM) with leveraged positions. It enables users to open leveraged positions, maximizing capital efficiency.\n\n## Prize Distribution and Scoring\n- **Total Public Pool:** \\$25,000\n\n- Additional pa",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:5c4a63a2-e744-43bd-b38b-d0063c117765",
+    "name": "TermMax",
+    "prizeUsd": 23000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/5c4a63a2-e744-43bd-b38b-d0063c117765",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Within a single platform, TermMax simplifies DeFi borrowing, lending, and leveraging with one-click token trading, enabling predictable borrowing costs and stable returns.\nBy reinventing the Uniswap V3 AMM with innovative fixed-rate mechanisms and customizable pricing curves, Ter",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:aaf79192-6ea7-4b1e-aed7-3d23212dd0f1",
+    "name": "gamma-univ4-limit-orders",
+    "prizeUsd": 20000,
+    "currency": "OP",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/aaf79192-6ea7-4b1e-aed7-3d23212dd0f1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "A comprehensive limit order system for Uniswap v4 pools, enabling limit orders and scale orders with keeper functionality and fee management.\n\n\n### Prize distribution and scoring\n\n- **Total Prize Pool:** 20,000 OP\n\nAdditional pay for dedicated Cantina Fellow: 3,400 OP\n\n- Scoring ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e1c0be8d-0c3d-485a-a446-a582beb120b1",
+    "name": "stability-contracts",
+    "prizeUsd": 16000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e1c0be8d-0c3d-485a-a446-a582beb120b1",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\n\nStability is a multi-chain DeFi platform that enables users to deploy capital into vaults with specialized yield-generating strategies. The platform handles the complexity of DeFi protocols, allowing users to earn yields while the system manages the underlying operations, inclu",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d88cb915-64c9-4488-8062-dd16ede7a4a0",
+    "name": "size-solidity",
+    "prizeUsd": 15000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d88cb915-64c9-4488-8062-dd16ede7a4a0",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Size is a fixed-rate lending marketplace built on an order book where offers are expressed like yield curves, allowing efficient and continuous pricing across markets and maturities.\nThis upgrade, version 1.7, introduces an authorization feature that enables users to allow other ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ffe90f03-ffd0-449b-a15f-6e7702323d16",
+    "name": "aera-v3",
+    "prizeUsd": 15000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ffe90f03-ffd0-449b-a15f-6e7702323d16",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Aera provides vault infrastructure for onchain DeFi strategies. We enable partners to offer sophisticated, Gauntlet-managed yield strategies to their users.\n\nAera simplifies the complexities of DeFi, providing a secure and efficient platform for deploying vault strategies, with o",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:c160af78-28f8-47f7-9926-889b3864c6d8",
+    "name": "mystic-monorepo",
+    "prizeUsd": 13000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/c160af78-28f8-47f7-9926-889b3864c6d8",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nThe Mystic Finance making a environment dedicated to RWA-backed lending which takes RWA's different characteristics into account and not only supports them, but leverages them to their full potential.  \n\n\n\n### Prize distribution and scoring\n\n- **Public Prize Pool:** \\$ 13,000\n- ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 6,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8337db39-e04e-470d-8090-0cfb9a7ec2dd",
+    "name": "redstone-oracle",
+    "prizeUsd": 40000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8337db39-e04e-470d-8090-0cfb9a7ec2dd",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "RedStone is a blockchain Oracle protocol, which proposes a completely new modular design, where data is first put into a data availability layer and then fetched on-chain. This allows us to broadcast a large number of assets at high frequency to a cheaper layer and put it on chai",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 4,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:980a5976-9a7d-4014-b2e1-c248b4c6fa44",
+    "name": "Reserve Governor",
+    "prizeUsd": 30000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/980a5976-9a7d-4014-b2e1-c248b4c6fa44",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Reserve Governor is a hybrid optimistic/pessimistic governance system for the Reserve protocol. It provides two proposal paths through a single timelock:\n\n- **Fast (Optimistic):** Quick execution after a short veto period, no affirmative voting required.\n- **Slow (Standard):** Fu",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 4,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:8cb347d2-53b5-4fd0-bbbd-3f67537f2bb0",
+    "name": "tally-stGOV",
+    "prizeUsd": 15000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/8cb347d2-53b5-4fd0-bbbd-3f67537f2bb0",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "stGov is a convenient liquid token wrapper on top of [Staker](https://github.com/withtally/staker). Governance token holders can stake their tokens for stGov. stGov automates claiming rewards and delegating governance power.\n\n### How it works\n- Stake governance tokens to receive ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": 4,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:28425672-ce54-4c66-b188-c4d5650d6790",
+    "name": "opal-contracts",
+    "prizeUsd": 40000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/28425672-ce54-4c66-b188-c4d5650d6790",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "# Opal Competition\n\nVisit the [docs](https://omnize.gitbook.io/opal) for an overview of the protocol.\n\n### Prize distribution and scoring\n\n- Scoring described in the [competition scoring page](https://docs.cantina.xyz/cantina-docs/enter-the-cantina/cantina-competitions/competitio",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:6c3dc99c-d03f-42b1-8697-dd0c30a6c10e",
+    "name": "Cantina 6c3dc99c",
+    "prizeUsd": 40000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/6c3dc99c-d03f-42b1-8697-dd0c30a6c10e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:74fb60b8-879f-43b1-9f48-c788df0590da",
+    "name": "Cantina 74fb60b8",
+    "prizeUsd": 40000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/74fb60b8-879f-43b1-9f48-c788df0590da",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d69d41d0-bf70-4578-a820-749e99c4c6c4",
+    "name": "Cantina d69d41d0",
+    "prizeUsd": 32000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d69d41d0-bf70-4578-a820-749e99c4c6c4",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:fadb5a8f-e39c-4a6b-89f6-a03858bb8602",
+    "name": "Royco Protocol",
+    "prizeUsd": 30000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/fadb5a8f-e39c-4a6b-89f6-a03858bb8602",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "**Royco Protocol allows anyone to create a market around any onchain transaction** (or series of transactions). Using Royco:\n\n- Incentive Providers may create intents to offer incentives to users to perform the transaction(s).   \n- Users may create intents to complete the transac",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:68d65682-ed04-48aa-969d-09a335de3748",
+    "name": "desk-orderbook",
+    "prizeUsd": 30000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/68d65682-ed04-48aa-969d-09a335de3748",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "HMX Orderbook is a cutting-edge perpetual trading platform offering traders a seamless experience with its Central Limit Order Book (CLOB) model. All trades are initially processed through our off-chain sequencer, ensuring efficiency and speed. Once the off-chain transactions are",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:bd882748-077e-4e55-853f-f8df70109dbb",
+    "name": "succinct-network",
+    "prizeUsd": 30000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/bd882748-077e-4e55-853f-f8df70109dbb",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Succinct Prover Network (SPN) is a decentralized marketplace for zero-knowledge proof generation and verification. The protocol connects proof requesters with a network of provers through a verifiable application (vApp) that executes its state transition function off-chain in",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:a2c3cc6a-e384-495f-9751-5d7e657bc219",
+    "name": "YOLO Games",
+    "prizeUsd": 27500,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/a2c3cc6a-e384-495f-9751-5d7e657bc219",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "YOLO Games is the hub of degen gaming. Play and earn across a range of\nprovably fair, on-chain games.\n\nWe have developed 4 new games where players play against the liquidity\npool.\n1. Flipper - pick a side on a provably fair coin. If it lands on your\n    predicted side, you win. I",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:55023131-27df-44e4-af46-bec298d0fa8e",
+    "name": "InterPol",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/55023131-27df-44e4-af46-bec298d0fa8e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "\nInterPol is a protocol allowing users to lock their liquidity, no matter the duration, without having to renounce to the rewards possible.\n\nLock your LP tokens, stake in any of the protocols we support and start earning rewards!\n\n\n### Prize distribution and scoring\n\n- **Total Pr",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3fa36a55-4582-44f9-b142-e2c03348240e",
+    "name": "Cantina 3fa36a55",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3fa36a55-4582-44f9-b142-e2c03348240e",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:12acc80c-4e4c-4081-a0a3-faa92150651a",
+    "name": "genius-contracts",
+    "prizeUsd": 25000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/12acc80c-4e4c-4081-a0a3-faa92150651a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Genius is the first way to buy anything, anywhere from 1 place while you retain full custody of your assets.\n\nWe believe in a future where thousands of tokens are traded across hundreds of chains - Genius is the decentralized layer to facilitate these transactions in a fast, safe",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:5383fc52-5a0e-4a0d-a470-af5a6d4eab72",
+    "name": "Cantina 5383fc52",
+    "prizeUsd": 20000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/5383fc52-5a0e-4a0d-a470-af5a6d4eab72",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:39565094-32b6-45d9-88ce-1ad163a92088",
+    "name": "Cantina 39565094",
+    "prizeUsd": 20000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/39565094-32b6-45d9-88ce-1ad163a92088",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:f57ffb47-0ded-4f04-bcec-ecd7d47fad58",
+    "name": "badger-ebtc-bsm",
+    "prizeUsd": 20000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/f57ffb47-0ded-4f04-bcec-ecd7d47fad58",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The BSM (eBTC Stability Module) contract facilitates bi-directional exchange between eBTC and other BTC-denominated assets with no slippage.\n\n## Prize Distribution and Scoring\n\n- **Total Prize Pool:** \\$20000\n- Additional pay for dedicated Cantina researcher: \\$10000\n\nScoring des",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:b0a948cd-c861-4807-b36e-d680d82598bf",
+    "name": "EIP7702Proxy",
+    "prizeUsd": 20000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/b0a948cd-c861-4807-b36e-d680d82598bf",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "[EIP-7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md) is a standard slated to be released with the Pectra hardfork in Q2 2025 that allows EOAs to become smart contracts by setting code at their address. This will allow wallet providers to offer users the optio",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:3211ee0d-133f-43a0-837e-8dc1ecfaa424",
+    "name": "grass",
+    "prizeUsd": 15000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/3211ee0d-133f-43a0-837e-8dc1ecfaa424",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Grass is a network of over 2 million people who are rewarded for helping AI developers access the internet. Its goal is to prevent the concentration of AI by allowing ordinary people to play a part and share in the benefits of its growth.\n\nGrass is the Data Layer of AI built as a",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:d35ebc75-9107-4e58-a923-f81725912138",
+    "name": "Cantina d35ebc75",
+    "prizeUsd": 15000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/d35ebc75-9107-4e58-a923-f81725912138",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:bd43bdd1-bc7f-473b-96c0-d35d37f3db33",
+    "name": "daao-contracts",
+    "prizeUsd": 12000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/bd43bdd1-bc7f-473b-96c0-d35d37f3db33",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "DAAO is a decentralized autonomous agentic organization protocol that enables automated fundraising and liquidity management through Uniswap V3. The protocol allows projects to raise funds through configurable fundraising rounds (both whitelisted and public), automatically create",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e92be0b9-b4f2-4bf2-9544-ae285fcfc02d",
+    "name": "primev-validator-registry",
+    "prizeUsd": 12000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e92be0b9-b4f2-4bf2-9544-ae285fcfc02d",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Mev-commit is a peer-to-peer networking platform designed to facilitate real-time interactions and coordination between mev actors and execution providers. It provides a robust network for exchanging execution bids and cryptographic commitments, which are used to specify executio",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:217af22c-957e-4c13-bc2a-1d5255e72309",
+    "name": "mev-commit",
+    "prizeUsd": 12000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/217af22c-957e-4c13-bc2a-1d5255e72309",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Primev\u2019s L1 smart contracts for routing builder payments, distributing validator stipends, and managing bidder deposits.\n\n**Core components:** \n\n- **BlockRewardManager** \u2014 a minimal router that forwards builder payments to a validator\u2019s fee recipient (with an owner controlled pro",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:5078f03b-f09a-4955-b783-78d3bbf7837a",
+    "name": "Cantina 5078f03b",
+    "prizeUsd": 10000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/5078f03b-f09a-4955-b783-78d3bbf7837a",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:9e6d884b-9a4d-4420-98f4-ac2c2d853387",
+    "name": "Cantina 9e6d884b",
+    "prizeUsd": 10000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/9e6d884b-9a4d-4420-98f4-ac2c2d853387",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:e47e6ce9-e0e1-4f8a-ba4a-bc5aba9e7ecf",
+    "name": "Cantina e47e6ce9",
+    "prizeUsd": 10000,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/e47e6ce9-e0e1-4f8a-ba4a-bc5aba9e7ecf",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -2,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:543",
+    "name": "Olas",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-01-olas",
+    "deadline": "2026-04-20T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Olas enables everyone to own and monetize their AI agents. It is the platform for true co-ownership of AI. Powered by the OLAS Token.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -8,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:554",
+    "name": "Monetrix",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-04-monetrix",
+    "deadline": "2026-06-04T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Yield layer for Hyperliquid, engineered to maximize capital efficiency by funneling all of Hyperliquid's yield sources into one stablecoin. It's the liquid entry point to capture full economic upside of the ecosystem through a unified, composable asset.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:548",
+    "name": "Chainlink Payment Abstraction V2",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-03-chainlink-payment-abstraction-v2",
+    "deadline": "2026-04-27T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Payment Abstraction is onchain infrastructure that enables users to pay for Chainlink services in their preferred form of payment, which is then programmatically converted to LINK.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:545",
+    "name": "Injective Peggy Bridge",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-02-injective-peggy-bridge",
+    "deadline": "2026-04-30T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Injective is a lightning fast interoperable layer one blockchain optimized for building premier Web3 finance applications. Injective provides developers with powerful plug-and-play modules for creating unmatched dApps. ",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:547",
+    "name": "Panoptic: Next Core Mitigation Review: Round 2",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-02-panoptic-next-core-mitigation-review-round-2",
+    "deadline": "2026-03-03T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Panoptic is a DeFi options protocol designed to enhance LPing and trading. It transforms Uniswap LP positions into onchain options, enabling traders to access liquidity in a new, flexible way.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:544",
+    "name": "Panoptic: Next Core Mitigation Review",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-02-panoptic-next-core-mitigation-review",
+    "deadline": "2026-03-03T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Panoptic is a DeFi options protocol designed to enhance LPing and trading. It transforms Uniswap LP positions into onchain options, enabling traders to access liquidity in a new, flexible way.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:540",
+    "name": "Panoptic: Next Core",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-12-panoptic-next-core",
+    "deadline": "2026-03-03T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Panoptic is a DeFi options protocol designed to enhance LPing and trading. It transforms Uniswap LP positions into onchain options, enabling traders to access liquidity in a new, flexible way.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:539",
+    "name": "Brix Money",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-brix-money",
+    "deadline": "2026-01-08T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "iTRY is a TRY-denominated digital asset, backed by tokenized money market funds. Brix is the protocol layer through which iTRY becomes accessible to DeFi users, enabling onchain staking, yield distribution, and integration with the broader ecosystem.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:537",
+    "name": "SukukFi",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-sukukfi",
+    "deadline": "2026-02-06T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "On-chain marketplace connecting DeFi directly with profitable real-world businesses through profit-sharing debt instruments",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:538",
+    "name": "Merkl",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-merkl",
+    "deadline": "2026-01-08T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Merkl is a DeFi incentive platform that connects liquidity providers with protocols looking to boost activity and engagement.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:522",
+    "name": "Garden",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-garden",
+    "deadline": "2026-01-30T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Trustless peer-to-peer bitcoin bridge",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:529",
+    "name": "Ekubo",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-ekubo",
+    "deadline": "2026-01-07T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The most efficient and powerful AMM infrastructure on the EVM.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -12,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:553",
+    "name": "Intuition Mitigation Review",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-04-intuition-mitigation-review",
+    "deadline": "2026-04-27T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The decentralized language protocol, knowledge network, & native blockchain for InfoFi - unlocking the next generation of the internet. Powered by $TRUST.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:552",
+    "name": "LayerZero - Stellar endpoint",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-04-layerzero-stellar-endpoint",
+    "deadline": "2026-05-20T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "LayerZero x Stellar integration",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:551",
+    "name": "Swafe Mitigation Review: Round 2",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-03-swafe-mitigation-review-round-2",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "No passwords. No backup phrases. No trusted companies. Swafe protects your access \u2014 securely, privately, and on your terms.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:549",
+    "name": "Swafe Mitigation Review",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-03-swafe-mitigation-review",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "No passwords. No backup phrases. No trusted companies. Swafe protects your access \u2014 securely, privately, and on your terms.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:546",
+    "name": "Intuition",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2026-03-intuition",
+    "deadline": "2026-03-30T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The decentralized language protocol, knowledge network, & native blockchain for InfoFi - unlocking the next generation of the internet. Powered by $TRUST.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:534",
+    "name": "Swafe",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-swafe",
+    "deadline": "2026-04-03T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "No passwords. No backup phrases. No trusted companies. Swafe protects your access \u2014 securely, privately, and on your terms.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:536",
+    "name": "Hybra Finance: mitigation review, round 2",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-hybra-finance-mitigation-review-round-2",
+    "deadline": "2025-11-17T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:535",
+    "name": "Sequence: Transaction Rails",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-sequence-transaction-rails",
+    "deadline": "2025-12-12T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Multichain transaction rails to pay, swap, fund, or earn in 1 click with any wallet, token or chain",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:533",
+    "name": "Hybra Finance Mitigation Review",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-hybra-finance-mitigation-review",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "Decentralized public liquidity layer for Hyperliquid",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "code4rena",
+    "id": "code4rena:530",
+    "name": "Megapot",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "completed",
+    "url": "https://code4rena.com/audits/2025-11-megapot",
+    "deadline": "2025-12-01T20:00:00.000Z",
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "The Internet's jackpot with $200M+ in drawings.",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  },
+  {
+    "platform": "cantina",
+    "id": "cantina:ae21d78b-f752-4a9e-aad9-9d89f2b4b8b5",
+    "name": "hackathon-contracts",
+    "prizeUsd": 0,
+    "currency": "USDC",
+    "status": "complete",
+    "url": "https://cantina.xyz/competitions/ae21d78b-f752-4a9e-aad9-9d89f2b4b8b5",
+    "deadline": null,
+    "tags": [
+      "evm",
+      "solidity",
+      "audit-contest"
+    ],
+    "desc": "## Sonic CTF Submission Template\n\nUser address: <your-wallet-address>\n\n## Problem Title 1\n\nTransaction hash: <on-chain-transaction-hash-for-the-solve>\n\nNote: for transaction involving multiple transactions, link all the related transaction hashes.\n\n```solidity\ncontract codePoc {\n",
+    "firstSeen": "2026-06-18T02:28:28.748685+00:00",
+    "fitScore": -20,
+    "isNew": false
+  }
+]

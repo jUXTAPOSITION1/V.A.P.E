@@ -1,0 +1,17 @@
+{
+  "fetchedAt": "2026-06-18T02:20:00Z",
+  "source": "browser-scrape https://immunefi.com/bug-bounty/",
+  "note": "Always-on bounties (recurring income). Refresh via immunefi_refresh task (browser-driven). maxBounty is best-effort from featured cards.",
+  "programs": [
+    {"slug": "ethena", "name": "Ethena", "maxBounty": 3000000, "tags": ["ethereum","defi","stablecoin"]},
+    {"slug": "thegraph", "name": "The Graph", "maxBounty": 1500000, "tags": ["ethereum","infra"]},
+    {"slug": "dexeprotocol", "name": "DeXe Protocol", "maxBounty": 500000, "tags": ["evm","defi"]},
+    {"slug": "ssvnetwork", "name": "SSV Network", "maxBounty": 344400, "tags": ["ethereum","staking"]},
+    {"slug": "ens", "name": "ENS", "maxBounty": 250000, "tags": ["ethereum","infra"]},
+    {"slug": "lombard-finance", "name": "Lombard Finance", "maxBounty": 250000, "tags": ["evm","defi","btc"]},
+    {"slug": "stackingdao", "name": "StackingDAO", "maxBounty": 100000, "tags": ["staking"]},
+    {"slug": "zest-protocol-v2", "name": "Zest Protocol V2", "maxBounty": 100000, "tags": ["defi","lending"]},
+    {"slug": "immunefi", "name": "Immunefi", "maxBounty": 68900, "tags": ["infra"]},
+    {"slug": "hedera", "name": "Hedera", "maxBounty": 30000, "tags": ["l1"]}
+  ]
+}

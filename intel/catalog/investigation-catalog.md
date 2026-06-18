@@ -3,6 +3,17 @@
 # Updated: 2026-06-18
 
 ## Active Investigations
+
+### Job 62580 — VAPE Token Quick Audit
+- **Date:** 2026-06-18T01:30Z
+- **Target:** 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE (fun VAPE on Base)
+- **Offering:** smart_contract_audit (scope: quick)
+- **Provider:** HACK
+- **Verdict:** SAFE (78/100)
+- **Key Findings:** MEDIUM — 93.8% supply in bonding curve (unlocked); LOW — 206 holders; INFO — no DEX listing
+- **Review:** 5⭐ on-chain tx 0xecf82752e7f6d742bc59a86861797316ff65ff9105483532e565ab298bce4364
+- **Report:** vape-intel/reports/hack-audit-2026-06-18-01.md
+- **Next:** Full Slither audit when Blockscout source access is available
 <!-- Jobs currently in progress or pending review -->
 
 ## Completed Investigations
