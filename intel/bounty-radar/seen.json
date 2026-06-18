@@ -2,1321 +2,4376 @@
   "sherlock:1260": {
     "name": "XRP Ledger - April 2026",
     "prizeUsd": 519000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:1140": {
     "name": "Ethereum Fusaka Upgrade",
     "prizeUsd": 1984400,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:38": {
     "name": "Optimism",
     "prizeUsd": 700000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:333": {
     "name": "MakerDAO Endgame",
     "prizeUsd": 415000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:1209": {
     "name": "Aave V4",
     "prizeUsd": 310000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:677": {
     "name": "Babylon Chain Launch (Phase-2)",
     "prizeUsd": 300000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:832": {
     "name": "Usual Labs",
     "prizeUsd": 180000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:59": {
     "name": "Notional V3",
     "prizeUsd": 164000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:747": {
     "name": "Aave v3.3",
     "prizeUsd": 160000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:1225": {
     "name": "Fluid DEX v2",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:207": {
     "name": "MorphL2",
     "prizeUsd": 139000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:395": {
     "name": "Aleo",
     "prizeUsd": 125000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:1259": {
     "name": "DRE App - dreUSD",
     "prizeUsd": 48000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:550": {
     "name": "K2",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:1028": {
     "name": "Centrifuge Protocol V3.1",
     "prizeUsd": 234400,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:205": {
     "name": "Optimism Fault Proofs",
     "prizeUsd": 200000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:6": {
     "name": "GMX",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:101": {
     "name": "Tokemak",
     "prizeUsd": 144000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:74": {
     "name": "GMX Update",
     "prizeUsd": 134000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:63": {
     "name": "Optimism Update",
     "prizeUsd": 120000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "sherlock:857": {
     "name": "ZetaChain Cross-Chain",
     "prizeUsd": 113600,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:543": {
     "name": "Olas",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:554": {
     "name": "Monetrix",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:548": {
     "name": "Chainlink Payment Abstraction V2",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:545": {
     "name": "Injective Peggy Bridge",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:547": {
     "name": "Panoptic: Next Core Mitigation Review: Round 2",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:544": {
     "name": "Panoptic: Next Core Mitigation Review",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:540": {
     "name": "Panoptic: Next Core",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:542": {
     "name": "Rujira",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:539": {
     "name": "Brix Money",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:537": {
     "name": "SukukFi",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:538": {
     "name": "Merkl",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:522": {
     "name": "Garden",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:529": {
     "name": "Ekubo",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:523e1540-f8c3-45ae-9c5d-b6d35d3a326c": {
     "name": "morpho-vaults-v2",
     "prizeUsd": 200000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:b7c7def5-1033-4a4c-809d-08e507fb3583": {
     "name": "Bitcoin Staking Scripts",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:c2e31b04-fbb2-4355-80ef-141d58b6e0cc": {
     "name": "arcadexyz/arcade-protocol",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:9dfca0bc-a7bf-482e-a3df-4eb861f55c4f": {
     "name": "reserve-index-dtf",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8b94becd-54e7-41cd-88e6-caae7becc76a": {
     "name": "reserve-index-dtfs-solana",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:02c29467-cb27-4beb-b2ef-500ad95e1a51": {
     "name": "ammalgam-contracts",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:0f543452-2076-438f-86ae-bbd6b065fffb": {
     "name": "solayer-bridge",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:1b64737c-1373-4ecf-a179-4cd0d7b0b232": {
     "name": "defi-app-contracts",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:076935b1-2706-48c6-bf0a-b3656aa24194": {
     "name": "liquidity-book-vaults",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:aaf79192-6ea7-4b1e-aed7-3d23212dd0f1": {
     "name": "gamma-univ4-limit-orders",
     "prizeUsd": 20000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ddf86a5c-6f63-430f-aadc-d8742b4b1bcf": {
     "name": "VenusProtocol/governance-contracts",
     "prizeUsd": 58000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8337db39-e04e-470d-8090-0cfb9a7ec2dd": {
     "name": "redstone-oracle",
     "prizeUsd": 40000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:519": {
     "name": "Jupiter Lend",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:4679e0fa-85f7-4ea5-8827-ee6c70bdee6b": {
     "name": "Morpho Midnight",
     "prizeUsd": 400000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:553": {
     "name": "Intuition Mitigation Review",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:552": {
     "name": "LayerZero - Stellar endpoint",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:551": {
     "name": "Swafe Mitigation Review: Round 2",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:549": {
     "name": "Swafe Mitigation Review",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:546": {
     "name": "Intuition",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:534": {
     "name": "Swafe",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:536": {
     "name": "Hybra Finance: mitigation review, round 2",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:535": {
     "name": "Sequence: Transaction Rails",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:533": {
     "name": "Hybra Finance Mitigation Review",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "code4rena:530": {
     "name": "Megapot",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e7af4986-183d-4764-8bd2-1d6b47f87d99": {
     "name": "eigenlayer-contracts",
     "prizeUsd": 2500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e2cf6906-ec8b-4c78-a585-74ac90615659": {
     "name": "uniswap-v4",
     "prizeUsd": 2350000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:19c5a5a6-f68d-4da8-b185-3f28c7f97bc1": {
     "name": "PumpSwap",
     "prizeUsd": 2010000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:1845d0b1-1d2b-42be-b347-a866d6549fca": {
     "name": "lighthouse",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:38271533-dde5-4b48-95d5-58116fe8c62c": {
     "name": "besu",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:52f3f9d9-7929-4bde-8d3a-2b5fc0863f35": {
     "name": "teku",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:619e22ff-d9c9-47ab-be0b-b932a7df036e": {
     "name": "grandine",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:642d8a2b-6a3b-4c54-9ff0-9b1fa3f3fbc7": {
     "name": "reth",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:9ab19e33-b73c-4384-83a8-b905f508ce5e": {
     "name": "Ethereum-Protocol",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a294d1aa-2c08-409e-b73a-51cdc76b1757": {
     "name": "nimbus-eth2",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:abdbb5f0-d157-4db4-ada6-59fe837f4583": {
     "name": "prysm",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:acc729ac-07d4-4806-89be-4e6715b752c6": {
     "name": "nethermind",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:b568afa3-63e8-447e-9d9f-9318943fbbf7": {
     "name": "lodestar",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f5182971-2ac4-42dc-89f1-d65d0d2425b8": {
     "name": "erigon",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f7255cf4-8c1a-4082-b262-3c0e21af8dae": {
     "name": "go-ethereum",
     "prizeUsd": 2000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:41306bb9-2bb8-4da6-95c3-66b85e11639f": {
     "name": "Euler-v2",
     "prizeUsd": 1250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:c90131b4-5c7c-4ebc-a1f3-8002d219bfe0": {
     "name": "Blast",
     "prizeUsd": 1200000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d139882b-2d3a-49ac-9849-9dccef584090": {
     "name": "Omni Network",
     "prizeUsd": 1000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:0561defa-eeb2-4a74-8884-5d7a873afa58": {
     "name": "story-protocol",
     "prizeUsd": 1000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:949ad7c5-ea14-427d-b10a-54e33cef921b": {
     "name": "balancer-v3",
     "prizeUsd": 500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ddc75feb-752e-4a61-8731-9c7c4c014128": {
     "name": "Cantina ddc75feb",
     "prizeUsd": 500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a188a03f-4631-4b58-82ce-a5818a6df332": {
     "name": "eulerswap-ctf",
     "prizeUsd": 500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:1ea959a6-7b85-4cda-98ed-32c88be2f3ff": {
     "name": "lifi-contracts",
     "prizeUsd": 450000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ac757733-81a4-43c7-8f49-17c5b135cdff": {
     "name": "curvance",
     "prizeUsd": 375000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f8f20c00-f84e-43d7-a0a4-ec818b98df82": {
     "name": "Cantina f8f20c00",
     "prizeUsd": 350000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d86632df-ab33-4448-8198-64955eae6712": {
     "name": "liquity-bold",
     "prizeUsd": 350000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3a42798b-b1aa-4b10-b5e4-a8bbc22a70bc": {
     "name": "instadapp-fluid",
     "prizeUsd": 250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:18f1e37b-9ac2-4ba9-b32e-50344500c1a7": {
     "name": "silo-contracts-v2",
     "prizeUsd": 250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ac5f64e6-3bf2-4269-bbb0-4bcd70425a1d": {
     "name": "infrared-contracts",
     "prizeUsd": 250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:44b385bf-e51a-4e6c-b3a8-adbbe24d16e1": {
     "name": "interop-portal",
     "prizeUsd": 225000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:44d68da7-3cf4-4cec-a3f8-f0917062dac6": {
     "name": "bima-money",
     "prizeUsd": 200000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:5ffcedec-7e2e-4717-a3e4-e9041ca541c2": {
     "name": "Aave v3.1 Competition",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:5617fffa-4b67-42a7-a9f5-dad93627faa3": {
     "name": "infinitypools",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:21787352-de2c-4a77-af09-cc0a250d1f04": {
     "name": "tensor-monorepo",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:84df57a3-0526-49b8-a7c5-334888f43940": {
     "name": "sorella-angstrom",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ad445d42-9d39-4bcf-becb-0c6c8689b767": {
     "name": "aave-aptos",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:2cd0b038-3e32-4db6-b488-0f85b6f0e49f": {
     "name": "core-and-erc1155a",
     "prizeUsd": 140000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a0a58a8b-247e-4203-b3cb-476ded9d5515": {
     "name": "Centrifuge",
     "prizeUsd": 125000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:80a33cf0-ad69-4163-a269-d27756aacb5e": {
     "name": "zetachain-protocol",
     "prizeUsd": 120000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:cb538ed2-6770-4646-a32b-610b62d9a34c": {
     "name": "optimism-java",
     "prizeUsd": 117362,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:b92d2750-d5a3-4c53-9bca-2e70d5dfe0ac": {
     "name": "SP1",
     "prizeUsd": 110000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:990ce947-05da-443e-b397-be38a65f0bff": {
     "name": "Aquarius",
     "prizeUsd": 110000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:26d5255b-6f68-46cf-be55-81dd565d9d16": {
     "name": "telcoin-network",
     "prizeUsd": 110000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d86b7f95-e574-4092-8ea2-78dcac2f54f1": {
     "name": "morpho-blue",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8409a0ce-6c21-4cc9-8ef2-bd77ce7425af": {
     "name": "metamorpho-and-periphery",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f0cfe0e9-290b-4967-94ac-504375329127": {
     "name": "ctf",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:4b6f08a7-e830-4499-9977-08e2c3b32068": {
     "name": "eigenlayer-contracts",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:627528d0-db8a-4c42-b8b4-a5760ff31baf": {
     "name": "Cantina 627528d0",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:cd180bb3-5d7d-46ed-8b99-d905e54a9d0b": {
     "name": "hyperlend",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:050711ca-a6d1-4fdd-9f94-3816233c1bd5": {
     "name": "collar-core",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:781d30df-39a9-47e6-b290-e388c79e04ea": {
     "name": "aligned-layer",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:c486d600-bed0-4fc6-aed1-de759fd29fa2": {
     "name": "openvm",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3cc30b66-1cba-4044-968f-a0817cd7bf83": {
     "name": "SXT",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:7d650b99-8a40-49d1-9b65-2b060accfbb7": {
     "name": "circuit-puzzles",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ae57d1ed-c242-4eac-932a-ef596c9bcc67": {
     "name": "aave-aptos-ctf",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:cdce21ba-b787-4df4-9c56-b31d085388e7": {
     "name": "kuru-contracts",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:2adf7150-27ba-4cba-86a2-bd8ea175e7da": {
     "name": "makina-contracts",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a83eaf73-9cbc-495f-8607-e55d4fdaf407": {
     "name": "incentive-contracts",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f214cf86-cc80-40c0-a70b-e9bb25d7ac80": {
     "name": "Smart-contracts",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:31a752e3-8ece-49b3-a9ee-d7294c659340": {
     "name": "Pegasus",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8773f033-afa5-4e7b-b0e8-8f989062ae8a": {
     "name": "panoptic-core",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:49b9e08d-4f8f-4103-b6e5-f5f43cf9faa1": {
     "name": "Citrea",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ce181972-2b40-4047-8ee9-89ec43527686": {
     "name": "Clementine",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d47f8096-8858-437d-a9f5-2fe85ac9b95e": {
     "name": "safe-extensions",
     "prizeUsd": 75000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:6837e02a-0a87-4577-a047-4e1ea71cff01": {
     "name": "spend-permissions",
     "prizeUsd": 75000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:08c2b0b4-8449-4136-82a2-7074ccdfffac": {
     "name": "Soon ",
     "prizeUsd": 74000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:58cd719b-9004-4eca-a113-41d1691c0711": {
     "name": "napier-v2",
     "prizeUsd": 72000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:cdb738fd-0e7f-4a6b-9073-2b8629bfc1c3": {
     "name": "Cantina cdb738fd",
     "prizeUsd": 70000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f1433ef1-f309-4d37-b95a-eb6d17054cc5": {
     "name": "Cantina f1433ef1",
     "prizeUsd": 70000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3765f098-ef5c-47be-beb9-3f4ce9dcb407": {
     "name": "USDaf-v2",
     "prizeUsd": 70000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:eb93d215-e328-4d19-99ab-6c510acbb5aa": {
     "name": "VII-Finance-Contracts",
     "prizeUsd": 69500,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:4ee8716d-3e0e-4f59-b90d-aa56bf3b484c": {
     "name": "mev-commit",
     "prizeUsd": 65000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:57b00aab-8f8b-4d62-9378-41b6460ce6aa": {
     "name": "doppler-contracts",
     "prizeUsd": 65000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f9326d2b-bb99-45a9-88c5-94c54aa1823a": {
     "name": "farcasterattestation-monorepo",
     "prizeUsd": 60378,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:61087007-c7e9-4c4e-9d90-4e118933fecf": {
     "name": "stakeup-bloomv2",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:691ce303-f137-437a-bf34-aef87dfe983b": {
     "name": "dahlia-protocol",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8cf9c7a0-a7a6-446a-8577-1e2c254eb5a8": {
     "name": "velvet-v4",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:7a40c849-0b35-4128-b084-d9a83fd533ea": {
     "name": "jigsaw-contracts",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:917d796b-48d0-41d0-bb40-be137b7d3db5": {
     "name": "octant-v2-core",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:fe8e03b1-f8db-4698-8a21-44b3a862e434": {
     "name": "Mento-V3",
     "prizeUsd": 60000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d4835c42-fc76-4fea-8e2c-70449237fc0e": {
     "name": "beraborrow-blockend",
     "prizeUsd": 52500,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:829164bf-7fba-4b84-a6b8-76652205bd97": {
     "name": "lockbox-solana",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8bab566e-a6d4-4c1b-9f28-71a94bfd1da2": {
     "name": "symbioticfi-core",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e757364c-1f68-4ec5-94f6-c6b3c2e80c6d": {
     "name": "mezo-monorepo",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e68909e6-3491-4a94-a707-ecf0c89cf72a": {
     "name": "alchemix-v3",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ba62fa4e-f933-4eec-b9ac-868325f4a694": {
     "name": "superform-core",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:9c6e38e2-535e-47b2-83ef-29df91fbb774": {
     "name": "Royco Dawn",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:efb6f308-f13b-4110-aff8-0d67181608dd": {
     "name": "Revert Finance",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e55ee7b9-6c99-42f8-8338-39f3dd134ef3": {
     "name": "Revert Finance - StableSwap Hooks",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:28425672-ce54-4c66-b188-c4d5650d6790": {
     "name": "opal-contracts",
     "prizeUsd": 40000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:6c3dc99c-d03f-42b1-8697-dd0c30a6c10e": {
     "name": "Cantina 6c3dc99c",
     "prizeUsd": 40000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:74fb60b8-879f-43b1-9f48-c788df0590da": {
     "name": "Cantina 74fb60b8",
     "prizeUsd": 40000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8d7bdfb9-cf19-4294-95d0-763af5d425b4": {
     "name": "juicebox-monorepo",
     "prizeUsd": 36796,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:708eecf5-a6a0-46c1-a949-277f7408decc": {
     "name": "Avon-Contracts",
     "prizeUsd": 36000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:2ac7f906-1661-47eb-bfd6-519f5db0d36b": {
     "name": "infinifi-protocol",
     "prizeUsd": 35000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a0806644-7d91-457a-a08d-aee2db73f352": {
     "name": "pike-tapio-monrepo",
     "prizeUsd": 35000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d69d41d0-bf70-4578-a820-749e99c4c6c4": {
     "name": "Cantina d69d41d0",
     "prizeUsd": 32000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:fadb5a8f-e39c-4a6b-89f6-a03858bb8602": {
     "name": "Royco Protocol",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:205f8ca3-27fc-4da2-a2e6-0d43e1c60a41": {
     "name": "TermMax",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:68d65682-ed04-48aa-969d-09a335de3748": {
     "name": "desk-orderbook",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:bd882748-077e-4e55-853f-f8df70109dbb": {
     "name": "succinct-network",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:980a5976-9a7d-4014-b2e1-c248b4c6fa44": {
     "name": "Reserve Governor",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:a2c3cc6a-e384-495f-9751-5d7e657bc219": {
     "name": "YOLO Games",
     "prizeUsd": 27500,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:55023131-27df-44e4-af46-bec298d0fa8e": {
     "name": "InterPol",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3fa36a55-4582-44f9-b142-e2c03348240e": {
     "name": "Cantina 3fa36a55",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e9e9b3e0-f213-45e4-8d05-d72bf0c8787a": {
     "name": "ton-pool-contracts",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3eff5a8f-b73a-4cfe-8c54-546b475548f0": {
     "name": "inclusive-monorepo",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:7db75599-9dad-40aa-9fc7-e879803eea2b": {
     "name": "colorpool-chromia",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:616d8bb4-16ce-4ca9-9ce9-5b99d6e146ef": {
     "name": "mighty-contracts",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:50d38b86-80a0-49af-9df8-70d7d601b7d7": {
     "name": "solaxy",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:12acc80c-4e4c-4081-a0a3-faa92150651a": {
     "name": "genius-contracts",
     "prizeUsd": 25000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:5c4a63a2-e744-43bd-b38b-d0063c117765": {
     "name": "TermMax",
     "prizeUsd": 23000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:5383fc52-5a0e-4a0d-a470-af5a6d4eab72": {
     "name": "Cantina 5383fc52",
     "prizeUsd": 20000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:39565094-32b6-45d9-88ce-1ad163a92088": {
     "name": "Cantina 39565094",
     "prizeUsd": 20000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:f57ffb47-0ded-4f04-bcec-ecd7d47fad58": {
     "name": "badger-ebtc-bsm",
     "prizeUsd": 20000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:b0a948cd-c861-4807-b36e-d680d82598bf": {
     "name": "EIP7702Proxy",
     "prizeUsd": 20000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e1c0be8d-0c3d-485a-a446-a582beb120b1": {
     "name": "stability-contracts",
     "prizeUsd": 16000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:3211ee0d-133f-43a0-837e-8dc1ecfaa424": {
     "name": "grass",
     "prizeUsd": 15000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d35ebc75-9107-4e58-a923-f81725912138": {
     "name": "Cantina d35ebc75",
     "prizeUsd": 15000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:d88cb915-64c9-4488-8062-dd16ede7a4a0": {
     "name": "size-solidity",
     "prizeUsd": 15000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:8cb347d2-53b5-4fd0-bbbd-3f67537f2bb0": {
     "name": "tally-stGOV",
     "prizeUsd": 15000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ffe90f03-ffd0-449b-a15f-6e7702323d16": {
     "name": "aera-v3",
     "prizeUsd": 15000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:c160af78-28f8-47f7-9926-889b3864c6d8": {
     "name": "mystic-monorepo",
     "prizeUsd": 13000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:bd43bdd1-bc7f-473b-96c0-d35d37f3db33": {
     "name": "daao-contracts",
     "prizeUsd": 12000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e92be0b9-b4f2-4bf2-9544-ae285fcfc02d": {
     "name": "primev-validator-registry",
     "prizeUsd": 12000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:217af22c-957e-4c13-bc2a-1d5255e72309": {
     "name": "mev-commit",
     "prizeUsd": 12000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:5078f03b-f09a-4955-b783-78d3bbf7837a": {
     "name": "Cantina 5078f03b",
     "prizeUsd": 10000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:9e6d884b-9a4d-4420-98f4-ac2c2d853387": {
     "name": "Cantina 9e6d884b",
     "prizeUsd": 10000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:e47e6ce9-e0e1-4f8a-ba4a-bc5aba9e7ecf": {
     "name": "Cantina e47e6ce9",
     "prizeUsd": 10000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "cantina:ae21d78b-f752-4a9e-aad9-9d89f2b4b8b5": {
     "name": "hackathon-contracts",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Thorchain DEX-1778803200": {
     "name": "Thorchain DEX (exploit $10,000,000)",
     "prizeUsd": 10000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Wasabi Perps-1777507200": {
     "name": "Wasabi Perps (exploit $5,500,000)",
     "prizeUsd": 5500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:New Market Trading-1779667200": {
     "name": "New Market Trading (exploit $3,980,000)",
     "prizeUsd": 3980000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Verus-Ethereum Bridge-1778976000": {
     "name": "Verus-Ethereum Bridge (exploit $11,500,000)",
     "prizeUsd": 11500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Gravity Bridge-1780099200": {
     "name": "Gravity Bridge (exploit $5,400,000)",
     "prizeUsd": 5400000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:ZetaChain-1777248000": {
     "name": "ZetaChain (exploit $300,000)",
     "prizeUsd": 300000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Token of Power-1780963200": {
     "name": "Token of Power (exploit $1,580,000)",
     "prizeUsd": 1580000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Syndicate-1777420800": {
     "name": "Syndicate (exploit $380,000)",
     "prizeUsd": 380000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Singularity Finance-1777248000": {
     "name": "Singularity Finance (exploit $413,000)",
     "prizeUsd": 413000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Alephium Bridge-1780099200": {
     "name": "Alephium Bridge (exploit $815,000)",
     "prizeUsd": 815000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Adshares-1778889600": {
     "name": "Adshares (exploit $628,000)",
     "prizeUsd": 628000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:AFI Protocol-1780099200": {
     "name": "AFI Protocol (exploit $480,000)",
     "prizeUsd": 480000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Humanity-1780876800": {
     "name": "Humanity (exploit $32,000,000)",
     "prizeUsd": 32000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:TrustedVolumes-1778112000": {
     "name": "TrustedVolumes (exploit $6,700,000)",
     "prizeUsd": 6700000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:StablR-1779494400": {
     "name": "StablR (exploit $2,800,000)",
     "prizeUsd": 2800000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Aztec Connect-1781395200": {
     "name": "Aztec Connect (exploit $2,100,000)",
     "prizeUsd": 2100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Ekubo-1777939200": {
     "name": "Ekubo (exploit $1,400,000)",
     "prizeUsd": 1400000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Giddy-1776902400": {
     "name": "Giddy (exploit $1,300,000)",
     "prizeUsd": 1300000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Syscoin Bridge-1780790400": {
     "name": "Syscoin Bridge (exploit $8,000,000)",
     "prizeUsd": 8000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Volo Vault-1776729600": {
     "name": "Volo Vault (exploit $3,500,000)",
     "prizeUsd": 3500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Purrlend-1777075200": {
     "name": "Purrlend (exploit $1,500,000)",
     "prizeUsd": 1500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Raydium AMM-1781049600": {
     "name": "Raydium AMM (exploit $1,340,000)",
     "prizeUsd": 1340000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Aurellion-1778544000": {
     "name": "Aurellion (exploit $456,000)",
     "prizeUsd": 456000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Fluid Lending-1780185600": {
     "name": "Fluid Lending (exploit $215,000)",
     "prizeUsd": 215000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Echo Bridge-1779062400": {
     "name": "Echo Bridge (exploit $821,000)",
     "prizeUsd": 821000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:SEA Token-1778976000": {
     "name": "SEA Token (exploit $153,000)",
     "prizeUsd": 153000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Ambient-1780790400": {
     "name": "Ambient (exploit $110,000)",
     "prizeUsd": 110000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:SmartCredit-1777852800": {
     "name": "SmartCredit (exploit $72,000)",
     "prizeUsd": 72000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:DxSale-1779926400": {
     "name": "DxSale (exploit $7,300,000)",
     "prizeUsd": 7300000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Sweat Foundation-1777420800": {
     "name": "Sweat Foundation (exploit $3,500,000)",
     "prizeUsd": 3500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:RetoSwap-1781568000": {
     "name": "RetoSwap (exploit $2,700,000)",
     "prizeUsd": 2700000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:RetoSwap-1779235200": {
     "name": "RetoSwap (exploit $2,700,000)",
     "prizeUsd": 2700000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:TSR-1780272000": {
     "name": "TSR (exploit $2,500,000)",
     "prizeUsd": 2500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Transit Finance-1778630400": {
     "name": "Transit Finance (exploit $1,880,000)",
     "prizeUsd": 1880000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Aftermath Perps-1777420800": {
     "name": "Aftermath Perps (exploit $1,140,000)",
     "prizeUsd": 1140000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Little Boy Plus-1781654400": {
     "name": "Little Boy Plus (exploit $367,000)",
     "prizeUsd": 367000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:AROS-1780185600": {
     "name": "AROS (exploit $295,000)",
     "prizeUsd": 295000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Bankr-1779148800": {
     "name": "Bankr (exploit $170,000)",
     "prizeUsd": 170000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Kipseli-1776816000": {
     "name": "Kipseli (exploit $80,000)",
     "prizeUsd": 80000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Renegade-1778371200": {
     "name": "Renegade (exploit $209,000)",
     "prizeUsd": 209000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:WUSD.fi/Glove-1779667200": {
     "name": "WUSD.fi/Glove (exploit $200,000)",
     "prizeUsd": 200000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Quant-1777334400": {
     "name": "Quant (exploit $138,000)",
     "prizeUsd": 138000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:MAP Protocol-1779235200": {
     "name": "MAP Protocol (exploit $110,000)",
     "prizeUsd": 110000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:NovaBox-1780963200": {
     "name": "NovaBox (exploit $107,000)",
     "prizeUsd": 107000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Thetanuts Finance-1781481600": {
     "name": "Thetanuts Finance (exploit $105,000)",
     "prizeUsd": 105000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Stake DAO-1779840000": {
     "name": "Stake DAO (exploit $91,000)",
     "prizeUsd": 91000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Juicebox V3-1776643200": {
     "name": "Juicebox V3 (exploit $52,000)",
     "prizeUsd": 52000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Thetanuts Finance-1776643200": {
     "name": "Thetanuts Finance (exploit $50,000)",
     "prizeUsd": 50000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Bisq-1777593600": {
     "name": "Bisq (exploit $858,000)",
     "prizeUsd": 858000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Polymarket-1779408000": {
     "name": "Polymarket (exploit $700,000)",
     "prizeUsd": 700000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:SQ Protocol-1778544000": {
     "name": "SQ Protocol (exploit $346,000)",
     "prizeUsd": 346000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Sharwa.Finance-1777593600": {
     "name": "Sharwa.Finance (exploit $32,850)",
     "prizeUsd": 32850,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Fractal Protocol-1779580800": {
     "name": "Fractal Protocol (exploit $13,700)",
     "prizeUsd": 13700,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:JUDAO-1777334400": {
     "name": "JUDAO (exploit $228,000)",
     "prizeUsd": 228000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Bitmor-1779667200": {
     "name": "Bitmor (exploit $10,000)",
     "prizeUsd": 10000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Asterix-1780963200": {
     "name": "Asterix (exploit $40,000)",
     "prizeUsd": 40000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Mure-1779494400": {
     "name": "Mure (exploit $11,700)",
     "prizeUsd": 11700,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:GPU.NET-1780444800": {
     "name": "GPU.NET (exploit $10,600)",
     "prizeUsd": 10600,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:ATM-1780444800": {
     "name": "ATM (exploit $243,500)",
     "prizeUsd": 243500,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Scallop Lend-1777161600": {
     "name": "Scallop Lend (exploit $150,000)",
     "prizeUsd": 150000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:INK Finance-1778457600": {
     "name": "INK Finance (exploit $140,000)",
     "prizeUsd": 140000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:DIP-1781654400": {
     "name": "DIP (exploit $111,000)",
     "prizeUsd": 111000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:HermesVault-1779148800": {
     "name": "HermesVault (exploit $30,000)",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Flooring Protocol-1780876800": {
     "name": "Flooring Protocol (exploit $0)",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Litecoin-1777161600": {
     "name": "Litecoin (exploit $0)",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "defillama-hack:Gnosis Pay-1780272000": {
     "name": "Gnosis Pay (exploit $0)",
     "prizeUsd": 0,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:ethena": {
     "name": "Ethena",
     "prizeUsd": 3000000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:dexeprotocol": {
     "name": "DeXe Protocol",
     "prizeUsd": 500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:ssvnetwork": {
     "name": "SSV Network",
     "prizeUsd": 344400,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:lombard-finance": {
     "name": "Lombard Finance",
     "prizeUsd": 250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:thegraph": {
     "name": "The Graph",
     "prizeUsd": 1500000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:ens": {
     "name": "ENS",
     "prizeUsd": 250000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:stackingdao": {
     "name": "StackingDAO",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:zest-protocol-v2": {
     "name": "Zest Protocol V2",
     "prizeUsd": 100000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:immunefi": {
     "name": "Immunefi",
     "prizeUsd": 68900,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   },
   "immunefi:hedera": {
     "name": "Hedera",
     "prizeUsd": 30000,
-    "lastSeen": "2026-06-18T02:28:28.748685+00:00"
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a3c3aed4d486a83a": {
+    "name": "SmarDex Smart Contracts",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ca9cd65dc957350a": {
+    "name": "Citrea Protocol & Smart Contracts",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_17595e33d4729eda": {
+    "name": "Coinbase",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b93bc48ea4b10240": {
+    "name": "MetaMask Validator Staking Smart Contracts",
+    "prizeUsd": 700000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c5b0449e4061f241": {
+    "name": "DeXe Protocol Smart Contracts",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2e8a391da5992082": {
+    "name": "TETU Smart Contracts",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2763bf67ce168368": {
+    "name": "Crypto.com",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b562c43d168b9524": {
+    "name": "Layer3 Smart Contracts",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_371f51b96b4b7922": {
+    "name": "Nado Smart Contracts",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_219a5621702e12b7": {
+    "name": "1inch Smart Contract",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8f3f4ac49d732683": {
+    "name": "Treehouse Smart Contracts",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6bb1e074dbe489c9": {
+    "name": "Account Abstraction Bugs",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6ba075b8b38615e6": {
+    "name": "DeltaPrime Smart Contracts",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_fd168d55e01e9e02": {
+    "name": "Dexalot Smart Contracts (Archived)",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f97669d15fecddf1": {
+    "name": "Dexalot Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1e6153da7163e1e5": {
+    "name": "Snowbridge On-Chain Code",
+    "prizeUsd": 75000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_7a47fc707a68a208": {
+    "name": "Hyperbridge Protocol",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d9720820346c764c": {
+    "name": "NEAR Intents: Bridges",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2fd2f5dbeac1393b": {
+    "name": "Ripio",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_435c1b0f5f93fe6f": {
+    "name": "Ample Smart Contracts",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1053edacda058c74": {
+    "name": "Bitmart Post-Incident Forensics Bounty Hunt",
+    "prizeUsd": 58000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_317986ec98a812eb": {
+    "name": "CoinDCX Recovery Bounty Program",
+    "prizeUsd": 11000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a5b5b933d23ba270": {
+    "name": "BigONE Hack Bounty Program",
+    "prizeUsd": 8100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d4b4ddf168ce3064": {
+    "name": "BtcTurk Hack Recovery Program",
+    "prizeUsd": 2400000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c0e709e4c2d9624d": {
+    "name": "Sui Protocol",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_aa5cb7793e123f98": {
+    "name": "BitDelta",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9d01d72f1652e53a": {
+    "name": "Aptos Function Values",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_98c7f294b07f67de": {
+    "name": "KuCoin",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0f1e6bf24f27a3d6": {
+    "name": "GMGN Web & Mobile",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_00a36290fbcc4ff4": {
+    "name": "OKX",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_245af9fc7f5623f9": {
+    "name": "1Password - CTF",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e78d22922b1b1039": {
+    "name": "Cronos zkEVM Smart Contracts",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_54047d7ebe9b8dc5": {
+    "name": "RISC Zero Blockchain Verifiers",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d68adbb46ebf2abd": {
+    "name": "Impermax Finance Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b4202b60f0a56530": {
+    "name": "Ternoa Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ae67dbb256c5e23e": {
+    "name": "1inch Aqua",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_69b379dee1b7e923": {
+    "name": "INIT Capital Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0419f4baa8793557": {
+    "name": "Asymetrix Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_326b54063feaca14": {
+    "name": "Chainlink",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_442593e51f71e8c2": {
+    "name": "Smilee Smart Contracts",
+    "prizeUsd": 75000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6fddf0f64af5dd50": {
+    "name": "Unitus V2 Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4e6d9dfc567f6dc5": {
+    "name": "Pandora Smart Contract",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_402c1d48188d4b16": {
+    "name": "InceptionLRT Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f7923a02c5cceb27": {
+    "name": "Snowbridge Web",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c4a3d72d33a71705": {
+    "name": "Whitechain Bridge",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ef3e5f2cd06df13e": {
+    "name": "Bucket Protocol Smart Contracts",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8de75303c6843399": {
+    "name": "Phemex Web & Mobile",
+    "prizeUsd": 500000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_21457f5d579927c8": {
+    "name": "Arcadia Finance Hack Recovery Program",
+    "prizeUsd": 360000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f7f6862772132229": {
+    "name": "NAVI Protocol",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e0942ea6b0df300f": {
+    "name": "NEAR Intents: Smart Contracts",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d5c7f7c266f1b7ce": {
+    "name": "NEAR Smart Contracts",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a79de6c8943fa43d": {
+    "name": "Cetus Smart Contracts",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_839bf691127930e2": {
+    "name": "Scallop Protocol (Smart Contract)",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3cdaf24384a82e0a": {
+    "name": "Aurora Smart Contract",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e6bbae930c4d097c": {
+    "name": "Aptos Network",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c149d9d49b147f6b": {
+    "name": "The Flipcash Reserve Contract Bug Bounty",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_31271998bce0fda1": {
+    "name": "Cronos Smart Contracts",
+    "prizeUsd": 250000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b0f9dc882f1fc834": {
+    "name": "Polkadot Bridge",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_87a45d0c0ad51b17": {
+    "name": "Avalanche Bridge",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_80dd20d956479c3a": {
+    "name": "STON.fi DEX Smart Contracts v2",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_4a12af82a90cdbc4": {
+    "name": "Superhuman (formerly Grammarly)",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b7ee8c68e851527d": {
+    "name": "Celestia",
+    "prizeUsd": 375000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6b03b12af74b348d": {
+    "name": "DOP Protocol",
+    "prizeUsd": 300000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0f1e1ba5b0699e45": {
+    "name": "Basecamp",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_836294806c822868": {
+    "name": "NEAR Protocol",
+    "prizeUsd": 1000000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_56ee53e9ed44b6d0": {
+    "name": "JOJO Smart Contracts",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_34c66b9e1f71d1ef": {
+    "name": "SuperEarn Web & Smart Contracts",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e8c8827c31537d34": {
+    "name": "Arcadia Finance Smart Contracts",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c5417647b58162e5": {
+    "name": "STBL Smart Contracts",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_79bc31b3d03e2114": {
+    "name": "Local Traders Smart Contracts",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c05d1ac9102ea9b2": {
+    "name": "Ember EVM Smart Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3cc3e3eb27910dba": {
+    "name": "Kalmar",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6c3217e2b5f91c82": {
+    "name": "MercadoLibre",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9c6d527621cd14ca": {
+    "name": "DODOFeeRouteProxy Smart Contract",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_20f677ce7458c5b2": {
+    "name": "DODOLimitOrder Smart Contract",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ea931b09dd791794": {
+    "name": "ADI Foundation Smart Contracts",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d8d0d09f18696c60": {
+    "name": "Multipli Smart Contracts",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a1a4cc2aa396ff9a": {
+    "name": "DODO V3",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_53aee8a8ad91b4e3": {
+    "name": "ADI Foundation zkVM Verification",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3211523cad936de1": {
+    "name": "VirtuSwap Smart Contract",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_58e94d2310a5b931": {
+    "name": "Vercel Open Source",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d754cbacd3d64d80": {
+    "name": "Momentum Smart Contracts",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_7c7714fe8f4f8233": {
+    "name": "Router Smart Contract",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_63c4200b20f92aae": {
+    "name": "Haedal Smart Contracts",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_fe4dfc920e909dd8": {
+    "name": "Shopify",
+    "prizeUsd": 200000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_fc7f261ffa385c2e": {
+    "name": "Astros Smart Contracts",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_763555a90e73475e": {
+    "name": "Volo Smart Contracts",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e5f3ecf6cd5739f6": {
+    "name": "Wickr",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e2bfc56ee3675a78": {
+    "name": "Walrus Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c03957b9c2687c5f": {
+    "name": "FitBurn Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9b7d03d696fb7432": {
+    "name": "1inch Wallet",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_75ff48762c9fa9d4": {
+    "name": "Calyx Smart Contract",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6c240be21081ea82": {
+    "name": "Ternoa Enclaves",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_5e73e03d7d9d60b2": {
+    "name": "Flow Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_565c21045be63566": {
+    "name": "Pallets",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_532e15bc1f5e1099": {
+    "name": "Backpack Web & API",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_51b79ffe6f736358": {
+    "name": "Zest Protocol Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4a7ae0d4b2a3e265": {
+    "name": "HTX",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_488399cc3ad4aae9": {
+    "name": "1inch Business",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_41d4f662240075f6": {
+    "name": "Kai Finance Yield Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3f47dd00a26edb79": {
+    "name": "Avalanche Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2da9270f41faf2f9": {
+    "name": "Aurora Web",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_22a0a995041a1a50": {
+    "name": "Exzo Network Protocol",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_07ce2fe2f9299b8e": {
+    "name": "Cronos Blockchain Protocols",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a8b65c064e9140df": {
+    "name": "Wallet on Telegram",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1ad3dc08744805d5": {
+    "name": "TRON DAO",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f33f7341d1cbd0ee": {
+    "name": "Nord Security",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ece7a6e113e25888": {
+    "name": "Internet Computer Protocol (ICP)",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e06341ccf1cf26f9": {
+    "name": "Exzo Network Wallet",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cbe20abff3059e2d": {
+    "name": "Kaia Protocol",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cbaf542e88635c79": {
+    "name": "Camino Network Protocol",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b22caa9cbf00186f": {
+    "name": "Ternoa Wallet",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9c95d602b13c4ec0": {
+    "name": "1inch Web",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_959013f0bc0d2482": {
+    "name": "Cryptology",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_81bd7b055a254f7d": {
+    "name": "NEAR Web",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_64d04a0352447b6d": {
+    "name": "Tothemoon Web",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2ee4fb563d502f9e": {
+    "name": "Solv Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_277908ae20b79c1e": {
+    "name": "Ternoa Web and Apps",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_dd944504272825f1": {
+    "name": "MetaMask",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_cc3c6762923b5bc1": {
+    "name": "CoinSpot",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_aba99df74944184c": {
+    "name": "Cosmos",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_9f0a7ad2725b4751": {
+    "name": "Deribit",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7b4f10e7d5036c32": {
+    "name": "Figma",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_661bb739add69bd3": {
+    "name": "Chia Network",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_21a3ffd0335e261c": {
+    "name": "Nintendo",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_871f242b740d6c61": {
+    "name": "Gridex Protocol: Hacker House 2023",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_85cd8d27ae687263": {
+    "name": "Bluefin Dex Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3f352d977b64f178": {
+    "name": "Ember Vaults Smart Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c7618354e5afcaf2": {
+    "name": "DEXX Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_579114164f1fdd2c": {
+    "name": "Tidex Exchange",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1a07ea51a462191b": {
+    "name": "Dexalot Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_fc405f2ca8ac39c9": {
+    "name": "ZetaChain Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ba900bc4a20bb010": {
+    "name": "Horizon Protocol Smart Contracts",
+    "prizeUsd": 60000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d8bf6f673bfd7dc6": {
+    "name": "KINZA Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ae5ac53334ec93d1": {
+    "name": "NOYA.ai Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c6a41fa4adc49a2f": {
+    "name": "GovGen Governance dApp",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_eac5d4fc7dfabb21": {
+    "name": "Lido C3",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_65ccf24b543aab71": {
+    "name": "Tokenize.it Token SC DualDefense Audit",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9c877884a758a7e0": {
+    "name": "idOS Apps and SC",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_fe40e3cf7c0c64e7": {
+    "name": "Circle BBP",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2d82b01beaeab397": {
+    "name": "ENVELOP Smart Contracts",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3340596c7d6534a8": {
+    "name": "Filmio Smart Contracts",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_20768816171b9755": {
+    "name": "Mybucks.online Wallet Cracking Challenge",
+    "prizeUsd": 1100,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8117452b1bcc318b": {
+    "name": "PlayStation",
+    "prizeUsd": 49999,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cc257d581dccd590": {
+    "name": "VeChainThor",
+    "prizeUsd": 35000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3b7bea89a57a88a3": {
+    "name": "Snapchat",
+    "prizeUsd": 35000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_398879fc1d95ca45": {
+    "name": "GitLab",
+    "prizeUsd": 35000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e641914ce6842eec": {
+    "name": "Slush Wallet",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8a92ccaf0db1298a": {
+    "name": "AlphaSec Web & Smart Contracts",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ef4c0ba96fa0a7e5": {
+    "name": "Ring",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_d5389ff6d2b4ea2f": {
+    "name": "eero",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b28357cd4e0431aa": {
+    "name": "OKG",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a5f787f06e1177df": {
+    "name": "Ubiquiti Inc.",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a5202e47226c7d51": {
+    "name": "1Password - Enterprise Password Manager",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7150ad9e0a6fd708": {
+    "name": "BitMEX",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3895b81b9efc637b": {
+    "name": "PayPal",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_25d33171c1c1bbb9": {
+    "name": "GitHub",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0282aea6a3fe0413": {
+    "name": "Amazon Vulnerability Research Program - Devices",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_eea9889a49190cae": {
+    "name": "Stripe",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_bb4416320c0172cb": {
+    "name": "NiceHash Mining platform",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_27e781e206eb62b7": {
+    "name": "Citrea Web & Apps",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_225735b91327218e": {
+    "name": "Polkadot SDK, Runtime by Parity",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_099042993acd2336": {
+    "name": "Parity Polkadot Release Infrastructure",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_fc3118e874356451": {
+    "name": "Airbnb",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f59c4f520c7f1f0b": {
+    "name": "Tools for Humanity",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f3e60429e15dacd4": {
+    "name": "Robinhood Markets Bounty",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c594c5bf19f44068": {
+    "name": "Temu",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ae9094552458b9f4": {
+    "name": "Netflix",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a1180ab2757da0a3": {
+    "name": "hostinger",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6dae3e433027bb81": {
+    "name": "Amazon Vulnerability Research Program",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_64c9a7430d7c2059": {
+    "name": "Epic Games",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_619753d480b47581": {
+    "name": "Rockstar Games",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5cffde22d9b793a9": {
+    "name": "Anduril Industries",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_308e0474ba1318b3": {
+    "name": "Audible",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f72052d9d1f14558": {
+    "name": "MoonPay",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7a425b36c42c3d3b": {
+    "name": "Roblox",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c252f2583fdf9d9f": {
+    "name": "Tinder",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cb19f62198c91620": {
+    "name": "1inch Infrastructure",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_93508bb47d961a2d": {
+    "name": "Superposition Finance Web",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_85193cb0a3446585": {
+    "name": "NEAR Intents: SDK",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_320304d60a166448": {
+    "name": "Civic Smart Contracts",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_07b4acf2c87da850": {
+    "name": "Solv Web & Infrastructure",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b52d9d4aa93f8b74": {
+    "name": "XVIDEOS",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8fbfb9fa385bfd59": {
+    "name": "Polygon Technology",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5640c057f8776b3a": {
+    "name": "X / xAI",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3a84df7ea4a2121a": {
+    "name": "The Browser Company of NYC",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1e86b5d7ff5e22c5": {
+    "name": "Wealthsimple",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_d6e08be541fe8759": {
+    "name": "Exodus",
+    "prizeUsd": 18000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2f9b68b852296cca": {
+    "name": "Slack",
+    "prizeUsd": 17000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0fd818da540576a7": {
+    "name": "Wells Fargo Bounty",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a70785a1dec0ca0a": {
+    "name": "Turbos Finance Smart Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_34fd59bfaf344c1f": {
+    "name": "Bluefin Spot Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2765d563008b6de8": {
+    "name": "Bluefin Coin Contracts",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e7358bb510422be8": {
+    "name": "Goldman Sachs",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ce5c524903ca5c9d": {
+    "name": "HackerOne",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ad7caa3ceafd2a15": {
+    "name": "inDrive",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_81c9367e54bc51ce": {
+    "name": "Mozilla",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7e33752ec82b7378": {
+    "name": "Reddit",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_771191cc6362f854": {
+    "name": "TikTok",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6f6d4ec54678380a": {
+    "name": "LinkedIn",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_50b4f964030db476": {
+    "name": "PortSwigger Web Security",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_4f6e5a9bd8036f5c": {
+    "name": "Grab",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2a2321d9fb436541": {
+    "name": "CLEAR",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_25ce1dc6e6101197": {
+    "name": "Adobe",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_093f3c83803e2e0d": {
+    "name": "EXNESS",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_078bf8209eb89d46": {
+    "name": "Uber",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_02a6168dc4cf5011": {
+    "name": "Instacart",
+    "prizeUsd": 15000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_642fe10a26256d90": {
+    "name": "DeTEE Hackers Challenge",
+    "prizeUsd": 14380,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f13d9d510e674533": {
+    "name": "Matomo",
+    "prizeUsd": 13000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_411778d394a325b2": {
+    "name": "Xiaomi",
+    "prizeUsd": 13000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a7b354ee74a960d0": {
+    "name": "0xMarkets Audit Contest",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ad6800c99ffd7a28": {
+    "name": "DoorDash",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_03c355d1f76fea4e": {
+    "name": "Early Warning",
+    "prizeUsd": 12000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_d7062386fa2f2fcc": {
+    "name": "OPPO",
+    "prizeUsd": 11500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f98318e2993fe75b": {
+    "name": "Marriott Bug Bounty Program",
+    "prizeUsd": 11000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_eac0f5a0b2775990": {
+    "name": "Quora",
+    "prizeUsd": 11000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b9009eb516e1ee4a": {
+    "name": "TipRun Smart Contract Audit Contest",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f3b19eb792f5cdc4": {
+    "name": "OFZA Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e6c337f829cf7bd0": {
+    "name": "STBL Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_df5b940e588b4f67": {
+    "name": "Goby Wallet",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_de1e8b0a3281cad0": {
+    "name": "CoinEx Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_dd60b64ccde745a3": {
+    "name": "ShapeShift",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d4a5fc4a49e4e827": {
+    "name": "BitForex",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d15236b2d3f91b70": {
+    "name": "Exzo Network Web & API",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_be7336c7af63322c": {
+    "name": "Linen API & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_bb71b76e03b824a1": {
+    "name": "Avalanche Websites and APIs",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_baf492dc2b935638": {
+    "name": "Nimbus",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b4688dee1c169d39": {
+    "name": "SynFutures dApp",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a0f36ef8d699aef3": {
+    "name": "Treehouse Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9fa6f95cee7d776c": {
+    "name": "Cetus Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9f211d08cbb919d5": {
+    "name": "Asphere Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9ac9d85ef2d1f5c4": {
+    "name": "Coinstore",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9a2674b574907495": {
+    "name": "Asymetrix Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9975715cc09e8665": {
+    "name": "Shido Network - Protocol",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_97e0eb3b6a39694f": {
+    "name": "Tapbit Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9250b056ba509a97": {
+    "name": "Cube Exchange Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8b2389a39b6b2087": {
+    "name": "Coin98",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_84be06194f244507": {
+    "name": "Nado Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_7a32dac21d547f14": {
+    "name": "Kaia Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_76b50a1a337ca4c9": {
+    "name": "Zoomex Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_72d5196425e3bf09": {
+    "name": "Bittrex",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6bb7a206a85c8eb7": {
+    "name": "INIT Capital Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_64cee482a207a4e4": {
+    "name": "FitBurn Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_576b5d9b563cbb39": {
+    "name": "BKEX",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4d48c3da1cda7ba1": {
+    "name": "Blockchain.com Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_458ed15e435dc0d2": {
+    "name": "NAVI Protocol Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3dfa6bf8537da261": {
+    "name": "Bag Labs Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3b03ca4c9baf3782": {
+    "name": "WEEX Web & App",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2ba6903d15c48414": {
+    "name": "WhiteBIT",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2649456694dd30b6": {
+    "name": "NXT Permission Smart Contract",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1fd16b394a0f5cea": {
+    "name": "Pionex App & API",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1e745c82d0e60ec9": {
+    "name": "Whitechain Network",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1d28ef771e017860": {
+    "name": "Layer3 Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1b4d011a09e7221a": {
+    "name": "AtomOne",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_16348c6fbdf5612b": {
+    "name": "Toobit Web & Mobile",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0f5ed9c200498fa4": {
+    "name": "Core",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0e927f696b24fed9": {
+    "name": "JOJO Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0d04a1758102e8eb": {
+    "name": "Alfred Telegram Trading Bot",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_031af8f09626b21a": {
+    "name": "TON Diamonds Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ed3731a6178b7f72": {
+    "name": "Dyson",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e082230d8a61911a": {
+    "name": "HubSpot",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_de86d05666962f95": {
+    "name": "Acronis",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_d7ec1ec994d2c226": {
+    "name": "Hyatt Hotels",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c2baac275cefbe57": {
+    "name": "Yelp",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c17e26ab61d68dc7": {
+    "name": "Brave Software",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_bd38ae637b6c6062": {
+    "name": "Databricks",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b8d40283ef2eed1e": {
+    "name": "Files.com",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b7d7a5308202bbda": {
+    "name": "Anthropic",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_afffbb18f8f2da72": {
+    "name": "Front",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_9aef151b421fbd12": {
+    "name": "Whatnot",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_96eb300aeb6263fa": {
+    "name": "Privy (Bounty)",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8c9ecff25585d1bb": {
+    "name": "Superbet",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_89be28b9424499ef": {
+    "name": "Bybit Fintech Ltd",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_84903001d1175bf3": {
+    "name": "Magic Eden",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7e032f9c3fd9c50d": {
+    "name": "Cloudflare Public Bug Bounty",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6a2f9c075182655a": {
+    "name": "Ping Identity",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5c860bda2c4a2ffe": {
+    "name": "Modern Treasury",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_50ca1f1d6df211fe": {
+    "name": "Mergify",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_4aa70b6ffa5f4eda": {
+    "name": "Palantir Public",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3ec85b13669bb910": {
+    "name": "Vodafone Oman",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_26f8b68226048232": {
+    "name": "Doppler",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1cdc8593e846bc68": {
+    "name": "Plaid",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_19d615880dd33128": {
+    "name": "Verily Life Sciences",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0b62d280c24ec84c": {
+    "name": "Sorare",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0ac50cce54c78e9d": {
+    "name": "Unico IDtech",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6e3116da41a43b61": {
+    "name": "VirtuSwap DEX APP",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_adc448bdd8037fb7": {
+    "name": "Allbridge",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_bbe02788410f8725": {
+    "name": "Dex-Trade",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6b037e2558bcc44b": {
+    "name": "CODEX Exchange",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4b140af721041ce6": {
+    "name": "U2Staking Web",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ae6386b0c055954f": {
+    "name": "LetsExchange Web & API & Widget: Swap, Bridge, DEX",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_6d869b131fae7a93": {
+    "name": "Zora Bridge",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_5ddb82e5f0799e72": {
+    "name": "BOB Bridge",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_23f256bd5740c8c4": {
+    "name": "cVault Finance",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0c64ab59b0845d8c": {
+    "name": "0G Labs Smart Contracts",
+    "prizeUsd": 32000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e9227616356fdfa9": {
+    "name": "Lendvest Smart Contracts",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a2c28ce92e27ea3f": {
+    "name": "OORT Protocol",
+    "prizeUsd": 30000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_81cd5aaa194934df": {
+    "name": "SG Forge Smart Contracts",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_60ec8f13229c7c7b": {
+    "name": "RISC Zero zkVM",
+    "prizeUsd": 150000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2cb6699673be324d": {
+    "name": "ZetaChain Blockchain Software",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0fea27782ae99625": {
+    "name": "Swap.io Smart Contracts",
+    "prizeUsd": 100000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6733a984ac22daca": {
+    "name": "DoubleUp Smart Contracts",
+    "prizeUsd": 50000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_43989fc4de81120e": {
+    "name": "AscendEX Web & Mobile",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a87d668c87a8c920": {
+    "name": "Elastic",
+    "prizeUsd": 9000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_32331e5beeedf585": {
+    "name": "Remitly",
+    "prizeUsd": 9000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c4e4dc4bca508438": {
+    "name": "Semrush",
+    "prizeUsd": 8500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_65935f5ce2efdbaf": {
+    "name": "Flickr",
+    "prizeUsd": 8500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_50e319ddd24f1e48": {
+    "name": "Pandora WEB",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2fa764333ad8eaef": {
+    "name": "Bitunix Web",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e8e9bbd0e293fa0a": {
+    "name": "Crowdstrike",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_cd401bec646bc1b8": {
+    "name": "Inditex",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_969103f60f92da0d": {
+    "name": "eufy Security",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_67520fef0adfd50b": {
+    "name": "Spotify",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_357710ee43a5a00d": {
+    "name": "Twilio",
+    "prizeUsd": 8000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ffec1f1404cf3f89": {
+    "name": "GoodRx",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e76ac3959c52db4e": {
+    "name": "Blend Labs",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_07b1a50bdcb44708": {
+    "name": "MongoDB",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e50303991a84abc7": {
+    "name": "pixiv",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a23debb17c55df9f": {
+    "name": "SIX Group",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_946d923988f584be": {
+    "name": "Valve",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_21c4283686778e35": {
+    "name": "Redox",
+    "prizeUsd": 7500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_94ee6ed921e7eae6": {
+    "name": "Klarna",
+    "prizeUsd": 7000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8566c24732885305": {
+    "name": "Arkose Labs",
+    "prizeUsd": 7000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5e59570230569518": {
+    "name": "REI BBP",
+    "prizeUsd": 7000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_106b8cfe55fd6fb6": {
+    "name": "WisdomTree, Inc.",
+    "prizeUsd": 6500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e3a0dd95b6eb8fe8": {
+    "name": "Hilton",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e367395df0e60543": {
+    "name": "Compass",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ee001cb0764596bc": {
+    "name": "Malwarebytes",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e6ddb684f6f5a897": {
+    "name": "Coupang Taiwan",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b88d3433ca86bbdd": {
+    "name": "Bumble",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a58fe7b1b1e9bfb5": {
+    "name": "Vimeo",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7679de815f40b201": {
+    "name": "Truecaller",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_67b7341fabaeea6c": {
+    "name": "Expedia Group Bug Bounty",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5cdbb9076d438347": {
+    "name": "Netlify",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_561b383f0c89c09d": {
+    "name": "Starbucks",
+    "prizeUsd": 6000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_cc33f060ea6b1a95": {
+    "name": "Boozt Fashion AB",
+    "prizeUsd": 5500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c9ced81d2606edf0": {
+    "name": "23andMe Bug Bounty",
+    "prizeUsd": 5500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3b68eee580e4fc18": {
+    "name": "Trip.com",
+    "prizeUsd": 5500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e408921c81494151": {
+    "name": "Capital One Bug Bounty",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_9bc9c17c6d9958bd": {
+    "name": "Playtika",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_9b0049a2d037278d": {
+    "name": "KHealth",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5fe03f53a5c71f91": {
+    "name": "Flutter UK&I",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_567511dd2b777a7c": {
+    "name": "Payoneer",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_452c874e6e59c896": {
+    "name": "SideFX",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_fb6dfb21ca999d91": {
+    "name": "TTC | SDK",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f3d3907aaba9ae54": {
+    "name": "TTC | Protocol",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ee00a8bc1485a3e4": {
+    "name": "Poloniex Web & API",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e1c50655b06944c4": {
+    "name": "Astros Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c7e110b5c11e841d": {
+    "name": "NoOnes Web & Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c759c538f4812c86": {
+    "name": "Gate US",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c0ff168491ed2a1e": {
+    "name": "Crypviser Network",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b96d4d305ae89f77": {
+    "name": "Polkalokr",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b676b1a3a60efe6c": {
+    "name": "Tokenize Xchange Web & Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b588baf0d227f6d0": {
+    "name": "LiNEAR Protocol",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_adf6ba5452ea9169": {
+    "name": "KUB Chain & Ecosystem",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a4e94385f88b3fe3": {
+    "name": "Status",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a1b96bd2d6e374e2": {
+    "name": "WhiteMarket Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_95c4ba90c6581f69": {
+    "name": "Openware",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8eba313fcd313b22": {
+    "name": "BitMart Exchange",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_7b00c8f5021c27d5": {
+    "name": "Kuna Crypto Exchange",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_79a360ef52e6f098": {
+    "name": "FlowX CLMM Smart Contracts",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_77ea1dcef8466eee": {
+    "name": "Router Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_717aab11be564f9c": {
+    "name": "NonKyc.io",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_67c606f37ac5c46c": {
+    "name": "AlphaX Exchange",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_615181e894b6e1fb": {
+    "name": "Volo Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6067564a778e91df": {
+    "name": "Unistake Smart Contracts",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_50b592e30fff4379": {
+    "name": "TTC | Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4a131da8b1ea2a24": {
+    "name": "KCEX",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_33aebcda2156e7ce": {
+    "name": "LeveX Web & Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_310a2904b262fcb3": {
+    "name": "Polkalokr",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_263d1f367fea88dc": {
+    "name": "Gate",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_055cd258da28cc2c": {
+    "name": "Bluefin Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e63b0ded9ad8c013": {
+    "name": "CS Money",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_e38032ea0a87272a": {
+    "name": "Notion Labs, Inc.",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_da817042d8b739fb": {
+    "name": "Lark Technologies",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_cbf326c2fd3c7420": {
+    "name": "S-Pankki",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_cb1d83008d25ad86": {
+    "name": "KOHO",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c40125702f6b9fdf": {
+    "name": "HYPR",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ac86527aa4c3d744": {
+    "name": "Bykea",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8b28a160f12523c5": {
+    "name": "Lightspark BBP",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_850870bed2087afb": {
+    "name": "Deriv.com",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_843a6aeb8ff51ad3": {
+    "name": "Dynatrace",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_83437df01778a21b": {
+    "name": "AT&T",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7e3d39236ecd4821": {
+    "name": "Banco Plata",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7b631cab6335a9d5": {
+    "name": "Priceline",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6b55fb4fe2b4d75c": {
+    "name": "Krisp",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5c5e386d5f1ba7df": {
+    "name": "KAYAK",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_58932956601883f8": {
+    "name": "Credit Karma",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_55dee5c08fc821e9": {
+    "name": "Evernote",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_4e25af79214af113": {
+    "name": "Dynamic Labs",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3e115689b5eeaf74": {
+    "name": "Kiwi.com",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3a72bda77458f89e": {
+    "name": "Lyst",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_35c3b9f36511aa1f": {
+    "name": "Zooplus",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_34aa0621ab16439f": {
+    "name": "Coinhako",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2e1e87ae62ac5f27": {
+    "name": "Braze, Inc.",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1eed512975e50d82": {
+    "name": "Neon",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0c6032eb753c04c3": {
+    "name": "Cloud Software Group",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0ae0ca5bd4426eca": {
+    "name": "Affirm",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_03ca5bcba23bb56a": {
+    "name": "NetScaler Public Program",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0ece6265e5063475": {
+    "name": "Visa",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_971ad48cb1ef904a": {
+    "name": "Kubernetes",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_710936c42c17908b": {
+    "name": "Logos",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3a87c1b2ee3f47c4": {
+    "name": "Frontegg",
+    "prizeUsd": 4500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_d8a7ce5963f54198": {
+    "name": "NBA Public Bug Bounty",
+    "prizeUsd": 4500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e5f358d161b600c5": {
+    "name": "Flow Web",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b636f0d57ecb0b07": {
+    "name": "XT",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9af26e9a4c952113": {
+    "name": "Swisstronik Core",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_6409fa2d5d8a9e10": {
+    "name": "BingX Exchange",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_21a7821765559966": {
+    "name": "BloFin Web & Mobile",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f1a91af0fe410db7": {
+    "name": "Flipkart",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c65b5622fd7251f0": {
+    "name": "ForeScout Technologies",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c3699c9492221999": {
+    "name": "Tor",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7fa75c028696476c": {
+    "name": "Grindr",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_6c300061361a5403": {
+    "name": "Yoti",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_071a04ce6c9021e2": {
+    "name": "Eternal",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_008995b4ed3142f1": {
+    "name": "Varonis",
+    "prizeUsd": 4000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a24eccbbf5174191": {
+    "name": "Newegg",
+    "prizeUsd": 3500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ecca605925b291b8": {
+    "name": "FanDuel",
+    "prizeUsd": 3500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_dc584a233e2e19fc": {
+    "name": "3CX",
+    "prizeUsd": 3500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c5c80e2d6be86cff": {
+    "name": "Airtable",
+    "prizeUsd": 3500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c21031868a0bf45c": {
+    "name": "Chaturbate",
+    "prizeUsd": 3001,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2366d03d16bf505e": {
+    "name": "Razorpay",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_73d4c779ff926523": {
+    "name": "SMTP2GO BBP",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d55dc33f607e5505": {
+    "name": "Enkrypt Wallet",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b87ae73fe44bfb65": {
+    "name": "MyEtherWallet",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_077d5d97ede68192": {
+    "name": "DART's SC DualDefense Audit",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ff9bd15d9e2b1cf4": {
+    "name": "Crypviser Secure Messenger",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f33e15e5239e0783": {
+    "name": "Neverdie Smart Contract",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_dc5fc1a5ea89f90f": {
+    "name": "DeepFi Trade",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_db8d25085d919e7c": {
+    "name": "BitStorage Web & API",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c1618d9f5d5843c7": {
+    "name": "Bitexen Smart Contracts",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_be85876eb33ec6cf": {
+    "name": "EVAA Web",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a9496db233a9268b": {
+    "name": "VeChainThor Wallet",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9e7593eeebb4bd49": {
+    "name": "Bitkub",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9a150f2bd75ad1c0": {
+    "name": "Monday Trade Web",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_94b36a7da7402606": {
+    "name": "Bitexen Web & App",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8ed1e9b894b78e19": {
+    "name": "Trustee Plus Mobile",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_74da0bfa53d51dd1": {
+    "name": "EXMO",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_5b7590bac4cc3f13": {
+    "name": "LCX",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3e1f43281729720e": {
+    "name": "Flipster Web & Mobile",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_36106ba85bc4a920": {
+    "name": "DeepFi Games",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_15dbf46e36f30a15": {
+    "name": "BTSE Bug Bounty Program",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_09df9159f1741926": {
+    "name": "Bit.com",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f77c87df85ebe671": {
+    "name": "Starbucks China",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_da0170b42d4eb39d": {
+    "name": "Judge.me",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a2ec9599249a05bb": {
+    "name": "M-Pesa Africa Limited",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_97db26d50b52b8dd": {
+    "name": "Automattic",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_8b842b73d5647fe7": {
+    "name": "Insightly",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7c455595ea0cba33": {
+    "name": "Sheer",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7abded60a360de16": {
+    "name": "Greenhouse.io",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7a7e0d40b115a91e": {
+    "name": "Django",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_731bf7047974e6a1": {
+    "name": "Urban Company",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_56b1e24a7dd320c3": {
+    "name": "1win",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3dd10ac1da8af5cf": {
+    "name": "Trendyol",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3a28d56834978851": {
+    "name": "Inspectorio",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2958548ac1afcda0": {
+    "name": "8x8",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_28c461729b271ba6": {
+    "name": "Starbucks Japan",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1bddbebc3b281e43": {
+    "name": "Booking.com",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1917d3a4e50cf48c": {
+    "name": "PornBox",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0ca13058b090c6aa": {
+    "name": "Whoop Bug Bounty",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_00cafa22a1158dbf": {
+    "name": "Stripchat",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_22ace7dac3055127": {
+    "name": "Via",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_eaa6a5a5ba036e61": {
+    "name": "Filmio Web & API",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b77313ea91c30846": {
+    "name": "NEAR Foundation Web (Low)",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_70f6a023a37e2712": {
+    "name": "Cronos Web",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4e94abb964920e2c": {
+    "name": "Bitkub Blockchain Technology",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_b4ede7c4aa75fbd8": {
+    "name": "Meesho",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_7a7ab40d868b9594": {
+    "name": "ALSCO",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_52caebf18c6bdd74": {
+    "name": "Freshworks",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_ea86eddc2df955df": {
+    "name": "WordPress",
+    "prizeUsd": 2350,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a2e7db7742ea7153": {
+    "name": "Discourse",
+    "prizeUsd": 2048,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_3e487e82ecc7dd08": {
+    "name": "Udemy",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f4ef5993587ba989": {
+    "name": "CoinW Web & Mobile",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_efef6b6a5a9936c0": {
+    "name": "emojicoin.fun frontend",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_da5ffda938f26e34": {
+    "name": "Chainstack",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cf197207b74cf4da": {
+    "name": "PUMB Web",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_ac5db299565fc8b4": {
+    "name": "Payhub Web",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a706be40e695d8a0": {
+    "name": "Sweed Web",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_8567e86af50f931a": {
+    "name": "Tickets Travel Network / Updated UI",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_84e954c550eef89a": {
+    "name": "Tickets Travel Network / Mobile",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_800f309f23a1dac3": {
+    "name": "Multipli Web",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_47e0bc556dc48f14": {
+    "name": "Pumb Tacsk",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_37894e2b50b1fde4": {
+    "name": "Hacken Web & Apps",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1ca95d2439195168": {
+    "name": "Raiffeisen Web & Mobile",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_02deeb5761f73073": {
+    "name": "Fastex Web",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f545e53f8266dbe5": {
+    "name": "Logitech",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_a93c98de91e5c284": {
+    "name": "Bumba",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_772fd7ac85a4ddf7": {
+    "name": "SHEIN",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_191b669fe791c5ef": {
+    "name": "Phabricator",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0a11fb02c4176988": {
+    "name": "Mapbox",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2ac8fd1d17449878": {
+    "name": "IoTeX",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_5fa75faad8fdd22c": {
+    "name": "Faraday, Inc.",
+    "prizeUsd": 1550,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_1f736704fd57a332": {
+    "name": "FetLife",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_23d63e0a40c00ba1": {
+    "name": "Telegram Apps Center",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f09ee89877a2400c": {
+    "name": "CoinGecko",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_dd670f5321bdda77": {
+    "name": "LACHAIN.IO",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b8f284b17a36771b": {
+    "name": "HackenProof",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b5c9d35c1103182d": {
+    "name": "WhiteBIT Blog",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_aef97682267abd26": {
+    "name": "AMLBot KYT Web",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_719e55a5dc853827": {
+    "name": "BigONE Global Exchange",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_443ce9ad0cea8d31": {
+    "name": "Bitrue",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4275f070fcbf3ccf": {
+    "name": "Latoken Exchange",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_198a729a4359ac03": {
+    "name": "Hotbit",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1560d869f76e2804": {
+    "name": "Dragon King",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_0b9d7870150f5d1c": {
+    "name": "Neverdie Web",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_c62cde8b127b7a16": {
+    "name": "Enjin",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_9a01fbaa6eaa5c8a": {
+    "name": "Ruby",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_02dac0aabf724ce8": {
+    "name": "Syfe",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_58e1ba4b722efcfa": {
+    "name": "Coinsbit",
+    "prizeUsd": 1200,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_07225967d17d1b9a": {
+    "name": "bitcastle Web",
+    "prizeUsd": 1200,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d8a06d99f01ce796": {
+    "name": "P2B Exchange",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d63bda18fd52c8e2": {
+    "name": "AssetMantle",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c147149ac5be5ee1": {
+    "name": "Bitkub Capital Group Holdings",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_419746a67d39e501": {
+    "name": "CITEX Web & API",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_76c2c23f031bad9c": {
+    "name": "Home Bargains",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_2233be36cff45309": {
+    "name": "Kong",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_35eaedaca002c8ce": {
+    "name": "UACatsDivision Smart Contracts",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_fec75421296db858": {
+    "name": "Frax Finance",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_f7b3303e71018bad": {
+    "name": "Chainflip",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_d2dcb63c65c7fc13": {
+    "name": "Yield Yak Aggregator",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_d078bca1a1230db3": {
+    "name": "dTRINITY dUSD",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_cce9ccdfe7cd359b": {
+    "name": "Obol",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_c959db777d9d3c1e": {
+    "name": "Pickle",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_b7c20c88d1fd3983": {
+    "name": "Overtime",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_aaada3966fd6745e": {
+    "name": "Railgun",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_9a29ee0dfc3b480d": {
+    "name": "MorpheusAI",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_9760724e25ddfb80": {
+    "name": "Dolomite",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_8e29b2d9ee408e48": {
+    "name": "Meta Pool",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_71f67fc9fd9d7cdd": {
+    "name": "Zircuit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_6f5ad6b72e718f71": {
+    "name": "flaunch",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_6990ce85387fcaae": {
+    "name": "Stake DAO",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_69868778b54a8244": {
+    "name": "LUSD ChickenBonds",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_626dce23925972b0": {
+    "name": "Across",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_3cbc751b7afd0a30": {
+    "name": "Frankencoin",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_3c240950a41ce45b": {
+    "name": "Altitude.Fi",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_300858200699f2ef": {
+    "name": "ACryptoS",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_1e2c22e17a04527b": {
+    "name": "AladdinDAO",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_0f327326d389f086": {
+    "name": "Brickken",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_041183c30f7f8f03": {
+    "name": "Hyperliquid",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_79a8b1a80f48765b": {
+    "name": "Supra Staking",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_3187bd24ec348c46": {
+    "name": "AlphaFi Lending",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f94db23080d17c75": {
+    "name": "Flow Wallet",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_dee2328a3ffebeff": {
+    "name": "Gear Protocol",
+    "prizeUsd": 25000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_949201c9c1c71adf": {
+    "name": "Dione Protocol",
+    "prizeUsd": 20000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f2a5f8f915ce7abc": {
+    "name": "DoubleUp Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_53035d0ac0f702e2": {
+    "name": "ZO Finance Smart Contracts",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_32cf64cd03952415": {
+    "name": "ZO Finance Web",
+    "prizeUsd": 10000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_effd787512943252": {
+    "name": "GoCardless Bug Bounty Program",
+    "prizeUsd": 900,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_cc2a481dfc70c989": {
+    "name": "ZetaChain Web Apps",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c64a3ef72b39676a": {
+    "name": "AMLBot Web",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_bbef72cd694196b7": {
+    "name": "Swisstronik Blockchain Stability",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a6dd6dcc69660579": {
+    "name": "Biconomy Web & Mobile",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_639d360f4c5969ad": {
+    "name": "BitKan Web & Mobile",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_55f6b8f7082b7985": {
+    "name": "PointPay Web & Mobile",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_2ba0654625818f18": {
+    "name": "Slex Web",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_02c5d0932bd8b1ed": {
+    "name": "CEX.IO Web & Mobile",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_bb99aa1334e74dae": {
+    "name": "CoinMate.io",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_72b9dfde5a981a17": {
+    "name": "Node.js",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_0643e0d11d453378": {
+    "name": "Moneybird",
+    "prizeUsd": 500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackerone:prg_f11fffcfca9dc57c": {
+    "name": "FloQast",
+    "prizeUsd": 50,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d0ad710649b421c6": {
+    "name": "UACatsDivision Web",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_9b56244dfdb36a2e": {
+    "name": "Serenity Shield Testnet Campain",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_42c0e9395ae3c562": {
+    "name": "Hack to the Future 2024 | ICP.Hub AE Hackathon",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1aa72a8a412dc413": {
+    "name": "Humanode Competitive Developer Initiative Program",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_c474d26c05c05c54": {
+    "name": "Curve Finance",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_b978924b2b0c9e2a": {
+    "name": "marginfi",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_9fbfe0aff85edaaa": {
+    "name": "Bitfinex",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_795b3cf59aa11d67": {
+    "name": "SpringSui",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_747bf4a7deb8153a": {
+    "name": "Save",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_67f279659fb265b6": {
+    "name": "Blend Pools V2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_55da22b528f71c56": {
+    "name": "Increment Swap",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_5516e860801db607": {
+    "name": "Tonstakers LSD",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_3f951cd70226666e": {
+    "name": "Phoenix Spot",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_2bc991ecb825fc8d": {
+    "name": "WaterNeuron",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "self_hosted:prg_069e64a1206415b6": {
+    "name": "Exponent",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_c39d46d7e7e8f971": {
+    "name": "EVAA Smart Contracts",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_915749a296fd1af0": {
+    "name": "Rtree Finance Web",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4f01a07368a2b775": {
+    "name": "AEX",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_4af22202232a58eb": {
+    "name": "FMCPAY Web & Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_3e98103b8ccc8915": {
+    "name": "Deepcoin Web & Mobile",
+    "prizeUsd": 5000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e48ecea723377d5a": {
+    "name": "CoinMetro Exchange",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_49912dceeae1c42e": {
+    "name": "Zeko Protocol",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_e426164d7c337b25": {
+    "name": "Inheriti\u00ae App",
+    "prizeUsd": 2500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_501db36607d70ba1": {
+    "name": "SafeSwap App",
+    "prizeUsd": 2000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_167fc7190111323d": {
+    "name": "GroveX Web & Mobile",
+    "prizeUsd": 1500,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_319b97981bf209fc": {
+    "name": "Meest Poshta Mobile",
+    "prizeUsd": 1000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_a37f5f55bdecd286": {
+    "name": "Lido Vaults Wrapper",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_820ac99de531adb6": {
+    "name": "Lido Vaults Wrapper 2",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_a007073be7029764": {
+    "name": "Cork Phoenix",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_987f6ddd3d4dcfac": {
+    "name": "Lido Earn",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_0b6ff6324adcc6cc": {
+    "name": "YOLO",
+    "prizeUsd": 3000,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_c6f3e005eb7fee89": {
+    "name": "Balancer ReCLAMM",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_a15943b7dfd362cf": {
+    "name": "Lido Staking",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_358362268db20395": {
+    "name": "Hyperbridge Protocol",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_2d8f93edfc473ec2": {
+    "name": "Size Meta Vault",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_73ed8261b6a30b66": {
+    "name": "Cork Phoenix Rollover",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_f8179f4442d19924": {
+    "name": "Bloxchain Protocol Core",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_f68caa99da080576": {
+    "name": "Chainlink Payment Abstraction V2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_d8ccd7f560bfcb3c": {
+    "name": "Lido C1",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_bf45ebf38bc1c923": {
+    "name": "Piggy Bank",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_b962984cb9b035d1": {
+    "name": "Alchemix",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_6f8d8ab8fd64b146": {
+    "name": "Harbor Protocol",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_42152c8867790d8e": {
+    "name": "Lido C2",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "agentarena:prg_3471a65153be8e89": {
+    "name": "UniswapX v4",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f7c0b3fa9fc89f27": {
+    "name": "DreamX HODLBonds SC DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_f5937ade83d6c110": {
+    "name": "Digbi2121 SC DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_d815888ab89b1c43": {
+    "name": "ADI Predictstreet SC DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_b387d36dbdc89492": {
+    "name": "KiiChain L1 DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_a3daf46ac581b7dd": {
+    "name": "Sundial Web&dApp DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_35f29f88513a04ca": {
+    "name": "Neyro SC DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
+  },
+  "hackenproof:prg_1ab59ad99e6bf528": {
+    "name": "DreamX HODLBonds Web&dApp DualDefense Audit",
+    "prizeUsd": 0,
+    "lastSeen": "2026-06-18T04:21:57.842016+00:00"
   }
 }
