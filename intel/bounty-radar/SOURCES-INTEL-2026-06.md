@@ -68,3 +68,17 @@ _Intel drop logged 2026-06-18. Reference for bounty_radar.py source expansion + 
 - NEXT LEVERAGE IF WE GO PRO: webhook -> push new-bounty + scope-change (commit/PR/release) events
   straight to a VAPE endpoint or Telegram, replacing poll-based detection. Operated by Cecuro, Inc.
 - Auth endpoint: `/v1/auth/get-session`. Provision a key via operator if/when Pro is justified.
+
+## PRO TIER — ACTIVE 2026-06-18
+- API key stored in `vape-intel/.env` as `BOUNTYHUNT_API_KEY` (gitignored — `.gitignore` now blocks all `.env`).
+- Verified Pro endpoints (all 200 w/ Bearer): `/v1/events`, `/v1/assets`, `/v1/webhooks`, `/v1/api-keys`, `/v1/me`. MCP at `api.bountyhunt.xyz/mcp` (POST).
+- **Events watcher SHIPPED**: `bountyhunt_watch.py` — the "get pushed, not pulled" layer.
+  Pulls `/v1/events` (commit.new / release.new / tag.new / program.*), filters to VAPE/HACK
+  lane (EVM/Base/Solidity/AI-agent), weights by act-now value (new program > release > commit;
+  contract assets + Base/Virtuals boosted), dedups via `bh-events-state.json`, writes
+  `bh-alerts-<UTC>.md` + appends `bh-alerts.jsonl`.
+  Seed run: 800 events -> 282 in-lane (live commits on Optimism, Chainlink, LiFi, Aurora, NEAR Bridges).
+- **Cron**: `bountyhunt-events-watch` every 30 min (isolated, light context). Event-delta only;
+  the full catalog sweep stays in `bounty-radar-scan`.
+- FUTURE: register a webhook (`/v1/webhooks`) to push events to a VAPE endpoint, or wire MCP for
+  agent-native tool access — would replace the 30-min poll with true push. Telegram alerts available too.
