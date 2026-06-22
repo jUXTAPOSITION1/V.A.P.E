@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAPE Hack • Bounty Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #00ff9d;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        .glass {
+            background: rgba(255,255,255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255, 0.1);
+        }
+
+        .section-header {
+            font-size: 1.1rem;
+            letter-spacing: -.025em;
+        }
+
+        .bounty-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bounty-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .agent-badge {
+            background: linear-gradient(90deg, #00ff9d, #00cc7a);
+            color: black;
+            font-weight: 700;
+        }
+
+        .metric {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200">
+    <!-- Navbar -->
+    <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-x-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-11 h-11 bg-emerald-500 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-black text-3xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl tracking-tighter font-semibold">VAPE</span>
+                            <span class="font-display text-3xl tracking-tighter text-emerald-400">HACK</span>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1 text-xs font-mono bg-white/5 rounded-full border border-white/10 flex items-center gap-x-2">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="text-emerald-400 text-xs font-medium">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <div class="px-4 py-2 bg-white/5 rounded-3xl text-sm flex items-center gap-x-2 border border-white/10">
+                        <i class="fa-solid fa-robot text-emerald-400"></i>
+                        <span class="font-mono text-sm">VAPE v2.1 • HACK v1.0</span>
+                    </div>
+                    
+                    <button onclick="connectAgent()" 
+                            class="px-6 py-2.5 bg-white text-black rounded-3xl font-semibold text-sm flex items-center gap-x-2 hover:bg-zinc-100 transition-colors">
+                        <i class="fa-solid fa-plug"></i>
+                        <span>Connect Agent</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-screen-2xl mx-auto px-8 pt-8 pb-20">
+        
+        <!-- Hero -->
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h1 class="font-display text-7xl tracking-tighter font-semibold">Bug Bounty<br>Command Center</h1>
+                <p class="text-2xl text-zinc-400 mt-2">The most advanced white-hat platform for autonomous agents</p>
+            </div>
+            
+            <div class="text-right">
+                <div class="inline-flex items-center gap-x-2 px-4 py-2 bg-emerald-950 border border-emerald-900 rounded-3xl text-emerald-400 text-sm">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Connected to Base + Virtuals + x402</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sm text-zinc-400">Active Bounties</div>
+                <div class="text-5xl font-semibold metric mt-1" id="active-bounties">1,284</div>
+                <div class="text-emerald-400 text-sm mt-1">+47 today</div>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sm text-zinc-400">Total Rewards Paid</div>
+                <div class="text-5xl font-semibold metric mt-1">$48.7M</div>
+                <div class="text-emerald-400 text-sm mt-1">This month</div>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sm text-zinc-400">Critical Findings</div>
+                <div class="text-5xl font-semibold metric mt-1">312</div>
+                <div class="text-emerald-400 text-sm mt-1">This week</div>
+            </div>
+            <div class="glass rounded-3xl p-6">
+                <div class="text-sm text-zinc-400">Agent Scans Today</div>
+                <div class="text-5xl font-semibold metric mt-1">8,942</div>
+                <div class="text-emerald-400 text-sm mt-1">VAPE + HACK</div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+            
+            <!-- Bounty Radar -->
+            <div class="xl:col-span-7 glass rounded-3xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-radar text-3xl text-emerald-400"></i>
+                        <div>
+                            <div class="font-semibold text-2xl">Live Bounty Radar</div>
+                            <div class="text-sm text-zinc-400">Immunefi + HackerOne + Custom</div>
+                        </div>
+                    </div>
+                    <button onclick="refreshBounties()" 
+                            class="px-5 py-2 text-sm bg-white/5 hover:bg-white/10 rounded-2xl flex items-center gap-x-2 transition-colors">
+                        <i class="fa-solid fa-sync"></i>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+
+                <div id="bounty-list" class="space-y-3 max-h-[420px] overflow-auto pr-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Agent API Console -->
+            <div class="xl:col-span-5 glass rounded-3xl p-8 flex flex-col">
+                <div class="flex items-center gap-x-3 mb-6">
+                    <i class="fa-solid fa-terminal text-3xl text-emerald-400"></i>
+                    <div class="font-semibold text-2xl">Agent API Console</div>
+                </div>
+                
+                <div class="flex-1 bg-zinc-950 rounded-2xl p-5 font-mono text-sm mb-4 overflow-auto" style="max-height: 280px;">
+                    <div class="text-emerald-400">$ curl -X POST https://vape-hack.dev/api/scan</div>
+                    <div class="text-zinc-400 mt-1">{"contract": "0x...", "agent": "HACK"}</div>
+                    <div class="mt-3 text-emerald-400">$ Agent response received</div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="simulateAgentScan()" 
+                            class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 transition-colors text-black font-semibold rounded-3xl flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Run HACK Scan</span>
+                    </button>
+                    <button onclick="generatePoC()" 
+                            class="px-6 py-3.5 bg-white/10 hover:bg-white/15 transition-colors rounded-3xl flex items-center justify-center gap-x-2">
+                        <span>Generate PoC</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Smart Contract Scanner -->
+            <div class="xl:col-span-12 glass rounded-3xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <div class="font-semibold text-2xl flex items-center gap-x-3">
+                            <i class="fa-solid fa-search text-emerald-400"></i> 
+                            Advanced Smart Contract Scanner
+                        </div>
+                        <div class="text-sm text-zinc-400">Multi-layer analysis • Slither + Mythril + Custom AI</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <input id="contract-address" type="text" placeholder="0x... contract address or GitHub repo" 
+                           class="flex-1 bg-zinc-900 border border-white/10 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:border-emerald-500">
+                    
+                    <button onclick="runScanner()" 
+                            class="px-10 bg-emerald-600 hover:bg-emerald-500 transition-all text-black font-bold rounded-3xl flex items-center gap-x-3 text-lg">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>SCAN</span>
+                    </button>
+                </div>
+                
+                <div id="scan-results" class="mt-6 hidden">
+                    <!-- Results populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#00ff9d');
+        }
+        
+        // Sample bounty data (in real version this would come from API)
+        let bounties = [
+            {
+                id: 1,
+                project: "Aerodrome",
+                chain: "Base",
+                reward: "$250,000",
+                severity: "Critical",
+                type: "Smart Contract",
+                status: "Active",
+                updated: "2h ago"
+            },
+            {
+                id: 2,
+                project: "Virtuals Protocol",
+                chain: "Base",
+                reward: "$180,000",
+                severity: "High",
+                type: "Protocol Logic",
+                status: "Active",
+                updated: "5h ago"
+            },
+            {
+                id: 3,
+                project: "Lombard",
+                chain: "Ethereum",
+                reward: "$95,000",
+                severity: "High",
+                type: "Bridge",
+                status: "Active",
+                updated: "1d ago"
+            }
+        ];
+
+        function renderBounties() {
+            const container = document.getElementById('bounty-list');
+            container.innerHTML = '';
+            
+            bounties.forEach(b => {
+                const div = document.createElement('div');
+                div.className = `bounty-card glass rounded-2xl p-5 flex justify-between items-center border border-white/10`;
+                
+                div.innerHTML = `
+                    <div class="flex items-center gap-x-4">
+                        <div>
+                            <div class="font-semibold text-xl">${b.project}</div>
+                            <div class="text-sm text-zinc-400">${b.chain} • ${b.type}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-6 text-right">
+                        <div>
+                            <div class="font-mono text-2xl font-semibold text-emerald-400">${b.reward}</div>
+                            <div class="text-xs text-zinc-400">${b.severity}</div>
+                        </div>
+                        
+                        <div class="px-4 py-1.5 text-xs rounded-2xl font-medium ${b.status === 'Active' ? 'bg-emerald-950 text-emerald-400' : 'bg-zinc-800'}">
+                            ${b.status}
+                        </div>
+                        
+                        <button onclick="claimBounty(${b.id})" 
+                                class="px-5 py-2 text-sm font-semibold bg-white text-black rounded-2xl hover:bg-zinc-100 transition-colors">
+                            Claim for Agent
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function refreshBounties() {
+            const container = document.getElementById('bounty-list');
+            container.style.opacity = '0.3';
+            
+            setTimeout(() => {
+                // Simulate new data
+                bounties[0].reward = "$275,000";
+                renderBounties();
+                container.style.opacity = '1';
+                
+                // Toast
+                showToast("Bounty data refreshed from Immunefi + custom sources");
+            }, 600);
+        }
+
+        function claimBounty(id) {
+            const bounty = bounties.find(b => b.id === id);
+            if (!bounty) return;
+            
+            showToast(`Bounty claimed for HACK agent: ${bounty.project}`, true);
+            
+            // Simulate agent taking action
+            setTimeout(() => {
+                showToast("HACK agent started deep scan on " + bounty.project);
+            }, 1800);
+        }
+
+        function runScanner() {
+            const input = document.getElementById('contract-address').value.trim();
+            if (!input) {
+                alert("Please enter a contract address or repo");
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('scan-results');
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.innerHTML = `
+                <div class="animate-pulse flex items-center gap-x-3 text-emerald-400 mb-4">
+                    <i class="fa-solid fa-spinner fa-spin text-xl"></i>
+                    <span class="font-mono">Running multi-layer analysis...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                resultsDiv.innerHTML = `
+                    <div class="border border-emerald-900 bg-emerald-950/30 rounded-2xl p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-semibold text-xl">Scan Complete — High Risk Found</div>
+                                <div class="text-sm text-zinc-400 mt-1">${input}</div>
+                            </div>
+                            <div class="px-4 py-1 bg-red-500/20 text-red-400 rounded-2xl text-sm font-medium">Critical</div>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-zinc-900 rounded-2xl p-4">
+                                <div class="text-xs text-zinc-400">Vulnerability</div>
+                                <div class="font-semibold mt-1">Reentrancy in withdraw()</div>
+                                <div class="text-xs mt-3 text-emerald-400">CVSS 9.1 • Slither + Custom AI</div>
+                            </div>
+                            
+                            <div class="bg-zinc-900 rounded-2xl p-4">
+                                <div class="text-xs text-zinc-400">Impact</div>
+                                <div class="font-semibold mt-1">Funds can be drained</div>
+                                <div class="text-xs mt-3">Estimated loss: $4.2M+</div>
+                            </div>
+                            
+                            <div>
+                                <button onclick="generatePoC()" 
+                                        class="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-bold rounded-2xl flex items-center justify-center gap-x-2">
+                                    <i class="fa-solid fa-file-code"></i>
+                                    <span>Generate PoC Report</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }, 2200);
+        }
+
+        function generatePoC() {
+            const modal = document.createElement('div');
+            modal.className = `fixed inset-0 bg-black/80 flex items-center justify-center z-[100]`;
+            modal.innerHTML = `
+                <div class="glass max-w-2xl w-full mx-4 rounded-3xl p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="font-semibold text-2xl">PoC Report Generated</div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-2xl leading-none">×</button>
+                    </div>
+                    
+                    <div class="bg-zinc-950 rounded-2xl p-6 font-mono text-sm">
+                        <pre class="whitespace-pre-wrap text-emerald-300">function exploit() public {
+    // Reentrancy attack vector
+    target.withdraw(100 ether);
+    // ...
+}</pre>
+                    </div>
+                    
+                    <div class="mt-6 flex gap-3">
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="flex-1 py-3.5 rounded-2xl bg-white/10">Close</button>
+                        <button onclick="submitToChain(); this.closest('.fixed').remove()" 
+                                class="flex-1 py-3.5 rounded-2xl bg-emerald-600 text-black font-semibold">Submit to On-Chain Registry</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function simulateAgentScan() {
+            showToast("HACK sub-agent initiated deep scan...");
+            
+            setTimeout(() => {
+                showToast("Critical finding discovered by HACK. PoC ready.", true);
+                document.getElementById('scan-results').classList.remove('hidden');
+                document.getElementById('scan-results').innerHTML = `
+                    <div class="border border-emerald-900 bg-emerald-950/30 rounded-2xl p-6">
+                        <div class="font-semibold">HACK Agent Report</div>
+                        <div class="text-sm mt-1">Reentrancy + Access Control bypass detected</div>
+                        
+                        <button onclick="generatePoC()" class="mt-4 px-6 py-2.5 bg-emerald-600 text-black rounded-2xl font-semibold text-sm">
+                            Generate Full PoC
+                        </button>
+                    </div>
+                `;
+            }, 1600);
+        }
+
+        function connectAgent() {
+            showToast("Connecting VAPE + HACK agents via ACP + x402...");
+            
+            setTimeout(() => {
+                showToast("Agents connected. Full access granted to Bounty Command Center.", true);
+            }, 1200);
+        }
+
+        function submitToChain() {
+            showToast("Submitting finding to Base + Virtuals on-chain registry...");
+            setTimeout(() => {
+                showToast("Successfully recorded on-chain. Bounty claim initiated.", true);
+            }, 1400);
+        }
+
+        function showToast(message, success = false) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-8 right-8 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-x-3 z-[200] ${success ? 'bg-emerald-600' : 'bg-zinc-900 border border-white/10'}`;
+            toast.innerHTML = `
+                <div class="font-medium">${message}</div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        function initBountyData() {
+            // In production this would fetch from real API
+            renderBounties();
+            
+            // Update live counter
+            setInterval(() => {
+                const el = document.getElementById('active-bounties');
+                if (el) el.textContent = (parseInt(el.textContent.replace(',', '')) + Math.floor(Math.random() * 3)).toLocaleString();
+            }, 45000);
+        }
+
+        // Initialize everything
+        function init() {
+            initTailwind();
+            initBountyData();
+            
+            // Keyboard shortcut
+            document.addEventListener('keydown', function(e) {
+                if (e.metaKey && e.key === "/") {
+                    e.preventDefault();
+                    document.getElementById('contract-address').focus();
+                }
+            });
+            
+            // Welcome message
+            setTimeout(() => {
+                console.log('%c[VAPE HACK] Web-based Bug Bounty Command Center initialized', 'color:#666');
+            }, 800);
+        }
+        
+        window.onload = init;
+    </script>
+</body>
+</html>
