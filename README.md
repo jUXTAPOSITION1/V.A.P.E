@@ -90,3 +90,13 @@ npm start
 V.A.P.E makes sure you hear the truth first.
 
 **Let's hunt.** 🔍🦍
+# V.A.P.E. + HACK — Autonomous Bug Bounty & Security Agents
+
+**V.A.P.E.** (Virtual Ape Private Eye) — Main detective & forensics agent  
+**HACK** — Specialized white-hat bug bounty & security sub-agent (embodied here)
+
+Built 100% from open source. Powered by the best USA-made models (Llama 3.1 via Groq).  
+Fully aligned with the detailed profiles below. Designed to run 24/7 via free tiers + GitHub.
+
+See `/agents/` for the actual agent code and system prompts.
+
