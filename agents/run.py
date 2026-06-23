@@ -30,11 +30,11 @@ def red_team_test(target):
 def propose_self_pr():
     """VAPE proposes a real PR for self-improvement"""
     response = ask_llm(
-        "You are VAPE. Propose a concrete GitHub PR with actual code diffs for self-improvement.",
-        "Analyze the agents folder and propose a specific improvement as a PR with code diffs."
+        "You are VAPE. Generate a full GitHub PR with title, description, and code diff for self-improvement.",
+        "Analyze the agents folder and create a real PR proposal with code changes."
     )
-    with open(f"reports/self_pr_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
-        f.write(f"# Proposed Self-PR - {datetime.now()}\n\n{response}")
+    with open(f"reports/self_pr_proposal_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
+        f.write(f"# Self-PR Proposal - {datetime.now()}\n\n{response}")
     print("Self-PR proposal generated.")
     return response
 
