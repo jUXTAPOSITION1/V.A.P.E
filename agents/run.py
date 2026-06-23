@@ -15,7 +15,7 @@ def ask_llm(system, query):
             {"role": "user", "content": query}
         ],
         temperature=0.7,
-        max_tokens=2048
+        max_tokens=4096
     )
     return response.choices[0].message.content
 
@@ -27,13 +27,13 @@ def main(review_repo=False):
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers.",
-            "Review the entire repo structure, code, recent changes, and give detailed findings and recommendations."
+            "Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions."
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous bug bounty agent. Provide concrete, actionable analysis without disclaimers or simulations.",
-            "Run a full bounty cycle on Base and Virtuals. Discover opportunities, audit contracts, generate PoC and detailed report."
+            "Run a full advanced bug bounty + red team cycle on Base and Virtuals. Include exploit simulation, jailbreak testing, smart contract analysis, and actionable recommendations."
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
