@@ -1,23 +1,25 @@
-import sys
-sys.path.append('/home/runner/work/V.A.P.E/V.A.P.E')
 from agents.vape import VAPE
 from agents.hack import HACK
-from agents.tools import fetch_bounties, generate_report
+from agents.tools import fetch_bounties, log_report
 
 def main():
-    print("Starting VAPE + HACK Autonomous Bug Bounty System")
+    print("VAPE + HACK Autonomous Bug Bounty Cycle Started")
     vape = VAPE()
     hack = HACK()
+    
     bounties = fetch_bounties()
-    print(f"Found {len(bounties)} potential bounties")
+    print(f"Found {len(bounties)} bounties")
+    
     for bounty in bounties[:3]:
         target = bounty.get("name", "unknown")
-        print(f"\n--- Processing {target} ---")
+        print(f"Processing {target}")
+        
         intel = vape.run_investigation(target)
-        audit = hack.audit_contract("example")
-        report = generate_report(audit, target)
+        audit = hack.audit_contract(target)
+        report = log_report(target, audit)
         print(report)
-    print("Cycle complete.")
+    
+    print("Cycle complete. Reports logged.")
 
 if __name__ == "__main__":
     main()
