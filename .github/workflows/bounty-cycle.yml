@@ -27,3 +27,5 @@ jobs:
           git add reports/
           git commit -m "Auto-generated bounty report $(date)" || echo "No new reports"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
