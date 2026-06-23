@@ -9,15 +9,6 @@ import subprocess
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-def get_repo_context():
-    context = ""
-    for root, dirs, files in os.walk("."):
-        for file in files:
-            if file.endswith(".py") or file.endswith(".md") and "report" not in file:
-                with open(os.path.join(root, file), "r", encoding="utf-8") as f:
-                    context += f"\n\n--- {file} ---\n{f.read()[:1000]}"
-    return context
-
 def ask_llm(system, query):
     for attempt in range(3):
         try:
@@ -52,18 +43,17 @@ def main(review_repo=False):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     slither_result = run_slither()
-    repo_context = get_repo_context()
 
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]} Repo context: {repo_context[:3000]}"
+            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]}"
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous code reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Run a full advanced code review on Base and Virtuals. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]} Repo context: {repo_context[:3000]}"
+            f"Run a full advanced code review on Base and Virtuals. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
