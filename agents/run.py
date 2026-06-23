@@ -19,6 +19,19 @@ def ask_llm(system, query):
     )
     return response.choices[0].message.content
 
+def self_review_and_improve():
+    """VAPE reviews its own code and suggests improvements"""
+    code_context = "Review the entire agents folder and suggest concrete code improvements, new features, and bug fixes for better bug bounty performance."
+    improvement_plan = ask_llm(
+        "You are VAPE. Analyze your own code and propose specific improvements. Be concrete.",
+        code_context
+    )
+    report = f"# Self-Improvement Report - {datetime.now()}\n\n{improvement_plan}"
+    with open(f"reports/self_improve_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
+        f.write(report)
+    print("Self-improvement analysis complete.")
+    return improvement_plan
+
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
     os.makedirs("reports", exist_ok=True)
@@ -41,6 +54,9 @@ def main(review_repo=False):
         f.write(f"# VAPE Report - {timestamp}\n\n{report}")
     
     print(f"Report saved to: {report_path}")
+    
+    # Self-improvement
+    self_review_and_improve()
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv
