@@ -11,7 +11,7 @@ def save_memory(content):
     conn.commit()
 
 def ask_vape(query):
-    result = f"VAPE: I received your message: {query[:200]}... (Local mode - Groq will be added)"
+    result = f"VAPE: I received your message: {query[:200]}... (Local mode)"
     save_memory(f"User: {query}\nVAPE: {result}")
     return result
 
@@ -20,12 +20,17 @@ def git_sync():
 
 with gr.Blocks(title="VAPE - Private Agent") as demo:
     gr.Markdown("# VAPE • Private Mobile Agent")
-    gr.Markdown("Full control • Local • Growing")
+    gr.Markdown("Full control • Local • Growing • Voice")
 
     with gr.Tab("Chat"):
         query = gr.Textbox(label="Talk to VAPE or give command")
         output = gr.Textbox(label="VAPE Response")
         gr.Button("Send").click(ask_vape, inputs=query, outputs=output)
+
+    with gr.Tab("Voice"):
+        audio_input = gr.Audio(source="microphone", type="filepath", label="Speak to VAPE")
+        audio_output = gr.Audio(label="VAPE Reply")
+        gr.Button("Send Voice").click(ask_vape, inputs=audio_input, outputs=audio_output)
 
     with gr.Tab("GitHub"):
         gr.Button("Sync to GitHub").click(git_sync)
