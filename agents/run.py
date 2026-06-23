@@ -16,8 +16,8 @@ def get_contract_source(address):
         url = f"https://api.etherscan.io/api?module=contract&action=getsourcecode&address={address}&apikey={ETHERSCAN_API_KEY}"
         response = requests.get(url)
         return response.json()
-    except:
-        return "Etherscan API error or no key"
+    except Exception as e:
+        return f"Etherscan API error: {str(e)}"
 
 def ask_llm(system, query):
     for attempt in range(3):
@@ -44,8 +44,8 @@ def run_slither():
     try:
         result = subprocess.run(["slither", "."], capture_output=True, text=True, timeout=30)
         return result.stdout
-    except:
-        return "Slither scan completed (limited environment)."
+    except Exception as e:
+        return f"Slither error: {str(e)}"
 
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
@@ -58,13 +58,13 @@ def main(review_repo=False):
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]} Contract source: {contract_source}"
+            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result} Contract source: {contract_source}"
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous code reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Run a full advanced code review on Base and all EVM chains. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]} Contract source: {contract_source}"
+            f"Run a full advanced code review on Base and all EVM chains. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result} Contract source: {contract_source}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
