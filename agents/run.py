@@ -12,9 +12,12 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY")
 
 def get_contract_source(address):
-    url = f"https://api.etherscan.io/api?module=contract&action=getsourcecode&address={address}&apikey={ETHERSCAN_API_KEY}"
-    response = requests.get(url)
-    return response.json()
+    try:
+        url = f"https://api.etherscan.io/api?module=contract&action=getsourcecode&address={address}&apikey={ETHERSCAN_API_KEY}"
+        response = requests.get(url)
+        return response.json()
+    except:
+        return "Etherscan API error or no key"
 
 def ask_llm(system, query):
     for attempt in range(3):
@@ -50,7 +53,7 @@ def main(review_repo=False):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     slither_result = run_slither()
-    contract_source = get_contract_source("0x...example")  # Add real addresses here
+    contract_source = get_contract_source("0x...example")
 
     if review_repo:
         report = ask_llm(
