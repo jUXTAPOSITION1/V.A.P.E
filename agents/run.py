@@ -10,10 +10,9 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 def ask_llm(system, query):
     # Try fine-tuned model first
     try:
-        from fine_tuned_model.model import load_model
-        model = load_model()
-        # Use fine-tuned model (placeholder - replace with actual loading)
-        return "Fine-tuned model response (placeholder)"
+        # Placeholder for loading fine-tuned model
+        print("Using fine-tuned model (placeholder)")
+        return "Fine-tuned model response (placeholder - replace with actual loading)"
     except:
         # Fallback to Groq
         response = client.chat.completions.create(
