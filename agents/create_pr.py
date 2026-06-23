@@ -4,7 +4,7 @@ from groq import Groq
 from datetime import datetime
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.getenv("Vape_agent_token")
 REPO = "jUXTAPOSITION1/V.A.P.E"
 
 def create_github_pr(title, body, branch_name):
