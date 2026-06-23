@@ -11,8 +11,8 @@ load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 ETHERSCAN_API_KEY = os.getenv("ETHERSCAN_API_KEY")
 
-def get_contract_source(address, chain="base"):
-    url = f"https://api.etherscan.io/v2/api?chainid=8453&module=contract&action=getsourcecode&address={address}&apikey={ETHERSCAN_API_KEY}"
+def get_contract_source(address):
+    url = f"https://api.etherscan.io/api?module=contract&action=getsourcecode&address={address}&apikey={ETHERSCAN_API_KEY}"
     response = requests.get(url)
     return response.json()
 
