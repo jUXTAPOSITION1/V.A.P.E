@@ -27,6 +27,17 @@ def red_team_test(target):
     )
     return response
 
+def propose_self_pr():
+    """VAPE proposes a real PR for self-improvement"""
+    response = ask_llm(
+        "You are VAPE. Propose a concrete GitHub PR with actual code diffs for self-improvement.",
+        "Analyze the agents folder and propose a specific improvement as a PR with code diffs."
+    )
+    with open(f"reports/self_pr_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
+        f.write(f"# Proposed Self-PR - {datetime.now()}\n\n{response}")
+    print("Self-PR proposal generated.")
+    return response
+
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
     os.makedirs("reports", exist_ok=True)
@@ -56,6 +67,9 @@ def main(review_repo=False):
         f.write(f"# Red Team Report - {timestamp}\n\n{redteam_report}")
     
     print("Red team analysis complete.")
+    
+    # Self-PR proposal
+    propose_self_pr()
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv
