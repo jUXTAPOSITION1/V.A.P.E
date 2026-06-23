@@ -12,7 +12,7 @@ def ask_llm(system, query):
     for attempt in range(3):
         try:
             response = client.chat.completions.create(
-                model="openai/gpt-oss-20b",
+                model="llama-3.1-8b-instant",
                 messages=[
                     {"role": "system", "content": system},
                     {"role": "user", "content": query}
@@ -34,16 +34,18 @@ def main(review_repo=False):
     os.makedirs("reports", exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
+    repo_context = "Repo: https://github.com/jUXTAPOSITION1/V.A.P.E"
+
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            "Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions."
+            f"{repo_context}\nReview the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions."
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous bug bounty agent. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            "Run a full advanced bug bounty + red team cycle on Base and Virtuals. Include exploit simulation, jailbreak testing, smart contract analysis, and actionable recommendations."
+            f"{repo_context}\nRun a full advanced bug bounty + red team cycle on Base and Virtuals. Include exploit simulation, jailbreak testing, smart contract analysis, and actionable recommendations."
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
