@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/runner/work/V.A.P.E/V.A.P.E')
 from agents.vape import VAPE
 from agents.hack import HACK
 from agents.tools import fetch_bounties, generate_report
