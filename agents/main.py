@@ -4,13 +4,10 @@ from agents.tools import fetch_bounties, generate_report
 
 def main():
     print("Starting VAPE + HACK Autonomous Bug Bounty System")
-    
     vape = VAPE()
     hack = HACK()
-    
     bounties = fetch_bounties()
     print(f"Found {len(bounties)} potential bounties")
-    
     for bounty in bounties[:3]:
         target = bounty.get("name", "unknown")
         print(f"\n--- Processing {target} ---")
@@ -18,7 +15,6 @@ def main():
         audit = hack.audit_contract("example")
         report = generate_report(audit, target)
         print(report)
-    
     print("Cycle complete.")
 
 if __name__ == "__main__":
