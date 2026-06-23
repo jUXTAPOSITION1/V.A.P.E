@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from .wallet import AgentWallet
-from .acp import ACPProtocol
+from agents.wallet import AgentWallet
+from agents.acp import ACPProtocol
 
 load_dotenv()
 
@@ -12,7 +12,6 @@ class VAPE:
         self.system_prompt = open("agents/vape_system.md", "r", encoding="utf-8").read()
 
     def think(self, query):
-        """Simple placeholder for LLM"""
         return f"[VAPE Thinking]\nQuery: {query[:500]}\n\nAnalysis complete. Ready for action."
 
     def run_investigation(self, target):
