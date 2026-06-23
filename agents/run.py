@@ -19,18 +19,13 @@ def ask_llm(system, query):
     )
     return response.choices[0].message.content
 
-def self_review_and_improve():
-    """VAPE reviews its own code and suggests improvements"""
-    code_context = "Review the entire agents folder and suggest concrete code improvements, new features, and bug fixes for better bug bounty performance."
-    improvement_plan = ask_llm(
-        "You are VAPE. Analyze your own code and propose specific improvements. Be concrete.",
-        code_context
+def red_team_test(target):
+    """Red teaming module"""
+    response = ask_llm(
+        "You are a professional red teamer. Be technical and concrete.",
+        f"Perform advanced red teaming on {target}. Include prompt injection, jailbreak, and agent workflow attacks."
     )
-    report = f"# Self-Improvement Report - {datetime.now()}\n\n{improvement_plan}"
-    with open(f"reports/self_improve_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
-        f.write(report)
-    print("Self-improvement analysis complete.")
-    return improvement_plan
+    return response
 
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
@@ -55,8 +50,12 @@ def main(review_repo=False):
     
     print(f"Report saved to: {report_path}")
     
-    # Self-improvement
-    self_review_and_improve()
+    # Red teaming
+    redteam_report = red_team_test("Base and Virtuals protocols")
+    with open(f"reports/redteam_{timestamp}.md", "w") as f:
+        f.write(f"# Red Team Report - {timestamp}\n\n{redteam_report}")
+    
+    print("Red team analysis complete.")
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv
