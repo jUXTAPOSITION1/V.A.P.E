@@ -2,7 +2,7 @@ name: VAPE + HACK Bounty + Self-Improvement Cycle
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Hourly bounty cycle
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -27,9 +27,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add reports/
           git commit -m "Auto-generated bounty report $(date)" || echo "No new reports"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   repo-review:
     runs-on: ubuntu-latest
@@ -49,9 +52,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add reports/
           git commit -m "VAPE repo review $(date)" || echo "No new reviews"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   self-fine-tune:
     runs-on: ubuntu-latest
@@ -62,6 +68,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install
-        run: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+        run: pip install python-dotenv groq torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu datasets peft trl transformers accelerate
       - name: Self Fine-Tune
         run: python agents/fine_tune.py
