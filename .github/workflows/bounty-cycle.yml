@@ -1,15 +1,15 @@
-name: VAPE + HACK Bounty Cycle
+name: VAPE + HACK Bounty + Self-Improvement Cycle
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 * * * *'   # Hourly bounty cycle
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  hunt:
+  bounty-hunt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,3 +30,38 @@ jobs:
           git add reports/
           git commit -m "Auto-generated bounty report $(date)" || echo "No new reports"
           git push
+
+  repo-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: pip install python-dotenv groq
+      - name: VAPE Repo Review
+        run: python agents/run.py --review-repo
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      - name: Commit Review
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "VAPE repo review $(date)" || echo "No new reviews"
+          git push
+
+  self-fine-tune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+      - name: Self Fine-Tune
+        run: python agents/fine_tune.py
