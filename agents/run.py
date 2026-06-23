@@ -3,38 +3,31 @@ from dotenv import load_dotenv
 from groq import Groq
 from datetime import datetime
 import sys
+import time
 
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def ask_llm(system, query):
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": query}
-        ],
-        temperature=0.7,
-        max_tokens=4096
-    )
-    return response.choices[0].message.content
-
-def red_team_test(target):
-    response = ask_llm(
-        "You are a professional red teamer. Be technical and concrete.",
-        f"Perform advanced red teaming on {target}. Include prompt injection, jailbreak, and agent workflow attacks."
-    )
-    return response
-
-def propose_and_create_pr():
-    response = ask_llm(
-        "You are VAPE. Generate a real PR title, description, and code diff for self-improvement.",
-        "Analyze the agents folder and create a real PR proposal with code changes."
-    )
-    with open(f"reports/self_pr_proposal_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
-        f.write(f"# Self-PR Proposal - {datetime.now()}\n\n{response}")
-    print("Self-PR proposal generated.")
-    return response
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="llama3-8b-8192",
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": query}
+                ],
+                temperature=0.7,
+                max_tokens=4096
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            if "rate_limit" in str(e).lower():
+                print(f"Rate limit hit. Waiting 30s... (attempt {attempt+1}/3)")
+                time.sleep(30)
+            else:
+                return f"Error: {str(e)}"
+    return "Rate limit persistent. Try later."
 
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
@@ -58,16 +51,6 @@ def main(review_repo=False):
         f.write(f"# VAPE Report - {timestamp}\n\n{report}")
     
     print(f"Report saved to: {report_path}")
-    
-    # Red teaming
-    redteam_report = red_team_test("Base and Virtuals protocols")
-    with open(f"reports/redteam_{timestamp}.md", "w") as f:
-        f.write(f"# Red Team Report - {timestamp}\n\n{redteam_report}")
-    
-    print("Red team analysis complete.")
-    
-    # Self-PR proposal
-    propose_and_create_pr()
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv
