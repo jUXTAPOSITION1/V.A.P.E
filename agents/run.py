@@ -5,9 +5,16 @@ from datetime import datetime
 import sys
 import time
 import subprocess
+import requests
 
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+GITHUB_TOKEN = os.getenv("Vape_agent_token")
+
+def get_repo_files():
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    response = requests.get("https://api.github.com/repos/jUXTAPOSITION1/V.A.P.E/contents", headers=headers)
+    return response.json()
 
 def ask_llm(system, query):
     for attempt in range(3):
@@ -43,17 +50,18 @@ def main(review_repo=False):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     slither_result = run_slither()
+    repo_files = get_repo_files()
 
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]}"
+            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]} Repo files: {repo_files}"
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous code reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Run a full advanced code review on Base and Virtuals. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
+            f"Run a full advanced code review on Base and Virtuals. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]} Repo files: {repo_files}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
