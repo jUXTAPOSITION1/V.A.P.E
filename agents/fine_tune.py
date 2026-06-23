@@ -6,27 +6,32 @@ from trl import SFTTrainer
 from datetime import datetime
 
 def collect_training_data():
-    """Collect all reports as training data"""
+    """Collect all reports as high-quality training data"""
     data = []
     for file in os.listdir("reports"):
         if file.endswith(".md"):
             with open(f"reports/{file}", "r", encoding="utf-8") as f:
                 content = f.read()
-                # Simple format: instruction + response
+                # High-quality format for fine-tuning
                 data.append({
-                    "text": f"### Instruction:\nImprove this bug bounty report with more technical depth and actionable PoCs.\n\n### Input:\n{content}\n\n### Response:\n"
+                    "text": f"""### Instruction:
+Improve this bug bounty report with more technical depth, concrete PoCs, and actionable recommendations.
+
+### Input:
+{content}
+
+### Response:
+"""
                 })
     return data
 
 def fine_tune():
     print("Starting self-fine-tuning cycle...")
     
-    # Use 8B for faster training (you can switch to 70B later)
     model_name = "meta-llama/Llama-3.1-8B-Instruct"
     model = AutoModelForCausalLM.from_pretrained(model_name)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     
-    # LoRA config (efficient fine-tuning)
     lora_config = LoraConfig(
         r=16,
         lora_alpha=32,
@@ -37,7 +42,6 @@ def fine_tune():
     )
     model = get_peft_model(model, lora_config)
     
-    # Collect training data from reports
     raw_data = collect_training_data()
     dataset = Dataset.from_list(raw_data)
     
