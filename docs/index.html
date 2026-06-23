@@ -58,7 +58,7 @@
             list.innerHTML = '<div class="text-emerald-400">Fetching real data...</div>';
             
             try {
-                const res = await fetch('https://raw.githubusercontent.com/infosec-us-team/Immunefi-Bug-Bounty-Programs-Unofficial/main/projects.json', { cache: 'no-cache' });
+                const res = await fetch('https://api.allorigins.win/raw?url=https://raw.githubusercontent.com/infosec-us-team/Immunefi-Bug-Bounty-Programs-Unofficial/main/projects.json');
                 const data = await res.json();
                 list.innerHTML = '';
                 data.slice(0, 8).forEach(p => {
@@ -91,7 +91,7 @@
         window.onload = () => {
             fetchRealBounties();
             fetchRecentActivity();
-            setInterval(fetchRealBounties, 300000);
+            setInterval(fetchRealBounties, 300000); // Refresh every 5 minutes
         };
     </script>
 </body>
