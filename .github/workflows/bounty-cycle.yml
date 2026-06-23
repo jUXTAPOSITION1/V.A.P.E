@@ -15,9 +15,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install
-        run: pip install web3 python-dotenv requests groq eth-account
+        run: pip install python-dotenv
       - name: Run
-        run: python -m agents.main
+        run: python agents/run.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           VAPE_PRIVATE_KEY: ${{ secrets.VAPE_PRIVATE_KEY }}
