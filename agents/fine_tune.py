@@ -12,7 +12,6 @@ def collect_training_data():
         if file.endswith(".md"):
             with open(f"reports/{file}", "r", encoding="utf-8") as f:
                 content = f.read()
-                # High-quality format for fine-tuning
                 data.append({
                     "text": f"""### Instruction:
 Improve this bug bounty report with more technical depth, concrete PoCs, and actionable recommendations.
@@ -62,6 +61,7 @@ def fine_tune():
     
     trainer.train()
     print("Self-fine-tuning complete. Model saved to fine_tuned_model/")
+    return "Fine-tuning completed."
 
 if __name__ == "__main__":
     fine_tune()
