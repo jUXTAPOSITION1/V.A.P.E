@@ -26,14 +26,14 @@ def main(review_repo=False):
     
     if review_repo:
         report = ask_llm(
-            "You are VAPE, a thorough repo reviewer.",
+            "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers.",
             "Review the entire repo structure, code, recent changes, and give detailed findings and recommendations."
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
-            "You are VAPE + HACK, a powerful bug bounty agent.",
-            "Run a full bounty cycle. Discover opportunities, audit, generate PoC."
+            "You are VAPE + HACK, a real autonomous bug bounty agent. Provide concrete, actionable analysis without disclaimers or simulations.",
+            "Run a full bounty cycle on Base and Virtuals. Discover opportunities, audit contracts, generate PoC and detailed report."
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
