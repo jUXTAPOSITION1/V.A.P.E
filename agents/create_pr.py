@@ -17,13 +17,13 @@ def create_github_pr(title, body, branch_name):
 def propose_and_create_pr():
     """VAPE proposes and creates a real PR"""
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="llama-3.1-8b-instant",
         messages=[
-            {"role": "system", "content": "You are VAPE. Generate a real PR title, description, and code diff for self-improvement."},
+            {"role": "system", "content": "You are VAPE. Generate a real PR title, description, and code diff for self-improvement. Use real data only."},
             {"role": "user", "content": "Analyze the agents folder and create a real PR proposal with code changes."}
         ],
         temperature=0.7,
-        max_tokens=4096
+        max_tokens=2048
     )
     pr_content = response.choices[0].message.content
     title = "VAPE Self-Improvement: " + pr_content.split("\n")[0][:100]
