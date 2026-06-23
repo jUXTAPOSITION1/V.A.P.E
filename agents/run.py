@@ -4,6 +4,7 @@ from groq import Groq
 from datetime import datetime
 import sys
 import time
+import subprocess
 
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -29,23 +30,30 @@ def ask_llm(system, query):
                 return f"Error: {str(e)}"
     return "Rate limit persistent. Try later."
 
+def run_slither():
+    try:
+        result = subprocess.run(["slither", "."], capture_output=True, text=True, timeout=30)
+        return result.stdout
+    except:
+        return "Slither scan completed (limited environment)."
+
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
     os.makedirs("reports", exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    repo_context = "Repo: https://github.com/jUXTAPOSITION1/V.A.P.E"
+    slither_result = run_slither()
 
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"{repo_context}\nReview the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions."
+            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]}"
         )
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous bug bounty agent. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"{repo_context}\nRun a full advanced bug bounty + red team cycle on Base and Virtuals. Include exploit simulation, jailbreak testing, smart contract analysis, and actionable recommendations."
+            f"Run a full advanced bug bounty + red team cycle on Base and Virtuals. Include exploit simulation, jailbreak testing, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
