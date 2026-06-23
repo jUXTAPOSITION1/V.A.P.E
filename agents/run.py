@@ -18,7 +18,7 @@ def ask_llm(system, query):
                     {"role": "user", "content": query}
                 ],
                 temperature=0.7,
-                max_tokens=4096
+                max_tokens=2048
             )
             return response.choices[0].message.content
         except Exception as e:
