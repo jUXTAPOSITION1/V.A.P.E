@@ -28,12 +28,12 @@ def fine_tune():
     print("Starting self-fine-tuning cycle...")
     
     model_name = "meta-llama/Llama-3.1-8B-Instruct"
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name, device_map="cpu")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     
     lora_config = LoraConfig(
-        r=16,
-        lora_alpha=32,
+        r=8,
+        lora_alpha=16,
         target_modules=["q_proj", "v_proj"],
         lora_dropout=0.05,
         bias="none",
@@ -47,9 +47,10 @@ def fine_tune():
     training_args = TrainingArguments(
         output_dir="fine_tuned_model",
         num_train_epochs=1,
-        per_device_train_batch_size=4,
+        per_device_train_batch_size=2,
         save_steps=100,
         logging_steps=10,
+        fp16=False,
     )
     
     trainer = SFTTrainer(
@@ -61,7 +62,6 @@ def fine_tune():
     
     trainer.train()
     print("Self-fine-tuning complete. Model saved to fine_tuned_model/")
-    return "Fine-tuning completed."
 
 if __name__ == "__main__":
     fine_tune()
