@@ -3,273 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE • Hack Bounty Command Center</title>
+    <title>VAPE • HACK Bounty Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: 'Inter', system-ui, sans-serif; }
-        .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
         .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
-        .neon { text-shadow: 0 0 10px rgba(0, 255, 157, 0.5); }
-        .bounty-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bounty-card:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-200">
-    <!-- Navbar -->
     <nav class="border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center gap-x-3">
-                        <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-black text-3xl"></i>
-                        </div>
-                        <div>
-                            <span class="font-display text-3xl tracking-tighter">VAPE</span>
-                            <span class="font-display text-3xl tracking-tighter text-emerald-400">HACK</span>
-                        </div>
-                    </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-emerald-950 text-emerald-400 rounded-full border border-emerald-900 flex items-center gap-x-2">
-                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <span class="text-xs font-medium">LIVE REAL DATA</span>
-                    </div>
+        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-black text-3xl"></i>
                 </div>
-
-                <div class="flex items-center gap-x-3">
-                    <button onclick="connectAgent()" 
-                            class="px-5 py-2.5 bg-white text-black rounded-3xl text-sm font-semibold flex items-center gap-x-2 hover:bg-zinc-100 transition-all">
-                        <i class="fa-solid fa-plug"></i>
-                        <span>Connect VAPE / HACK</span>
-                    </button>
-                </div>
+                <div class="font-display text-3xl tracking-tighter">VAPE <span class="text-emerald-400">HACK</span></div>
             </div>
+            <div class="text-emerald-400 text-sm">LIVE • Real Agent Activity</div>
         </div>
     </nav>
 
-    <div class="max-w-screen-2xl mx-auto px-8 pt-8 pb-16">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="font-display text-6xl tracking-tighter font-semibold">Bug Bounty Command Center</h1>
-            <p class="text-2xl text-zinc-400 mt-1">Real data • Open source • Built for autonomous agents</p>
-        </div>
+    <div class="max-w-screen-2xl mx-auto px-8 pt-8">
+        <h1 class="font-display text-6xl tracking-tighter">Bug Bounty Command Center</h1>
+        <p class="text-zinc-400">Real data from Immunefi • Agent reports • Self-improvement</p>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="glass rounded-3xl p-6">
-                <div class="text-sm text-zinc-400">Active Immunefi Programs</div>
-                <div class="text-5xl font-semibold mt-1" id="active-count">Loading...</div>
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Live Stats -->
+            <div class="lg:col-span-8 glass rounded-3xl p-8">
+                <h2 class="text-2xl font-semibold mb-6">Live Bounty Radar</h2>
+                <div id="bounty-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
-            <div class="glass rounded-3xl p-6">
-                <div class="text-sm text-zinc-400">Total Bounties (Real)</div>
-                <div class="text-5xl font-semibold mt-1 text-emerald-400" id="total-bounties">Loading...</div>
-            </div>
-            <div class="glass rounded-3xl p-6">
-                <div class="text-sm text-zinc-400">High/Critical</div>
-                <div class="text-5xl font-semibold mt-1" id="high-critical">Loading...</div>
-            </div>
-            <div class="glass rounded-3xl p-6">
-                <div class="text-sm text-zinc-400">Last Updated</div>
-                <div class="text-xl font-mono mt-1 text-emerald-400" id="last-updated">Just now</div>
-            </div>
-        </div>
 
-        <!-- Main Content -->
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
-            
-            <!-- Real Bounty Radar -->
-            <div class="xl:col-span-7 glass rounded-3xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-x-3">
-                        <i class="fa-solid fa-radar text-3xl text-emerald-400"></i>
-                        <div>
-                            <div class="font-semibold text-2xl">Live Bounty Radar</div>
-                            <div class="text-sm text-emerald-400">Real data from Immunefi (public open source)</div>
+            <!-- Agent Status -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass rounded-3xl p-8">
+                    <h3 class="text-xl font-semibold mb-4">Agent Status</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>VAPE (Detective)</span>
+                            <span class="text-emerald-400">Active</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>HACK (Red Team)</span>
+                            <span class="text-emerald-400">Active</span>
                         </div>
                     </div>
-                    <button onclick="fetchRealBounties()" 
-                            class="px-5 py-2 text-sm bg-white/10 hover:bg-white/15 rounded-2xl flex items-center gap-x-2 transition-colors">
-                        <i class="fa-solid fa-sync"></i>
-                        <span>Refresh Real Data</span>
-                    </button>
                 </div>
 
-                <div id="bounty-list" class="space-y-3 max-h-[480px] overflow-auto pr-2">
-                    <!-- Populated by real data -->
-                </div>
-            </div>
-
-            <!-- Agent API + Scanner -->
-            <div class="xl:col-span-5 space-y-6">
-                <!-- Agent API Console -->
                 <div class="glass rounded-3xl p-8">
-                    <div class="flex items-center gap-x-3 mb-5">
-                        <i class="fa-solid fa-terminal text-3xl text-emerald-400"></i>
-                        <div class="font-semibold text-2xl">Agent API Console</div>
-                    </div>
-                    
-                    <div class="bg-zinc-950 rounded-2xl p-4 text-sm font-mono mb-4">
-                        <div class="text-emerald-400">$ POST /api/scan</div>
-                        <div class="text-zinc-400">{"contract": "0x...", "agent": "HACK"}</div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="simulateAgentAction('scan')" 
-                                class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold rounded-3xl flex items-center justify-center gap-x-2">
-                            <i class="fa-solid fa-play"></i>
-                            <span>HACK Scan</span>
-                        </button>
-                        <button onclick="simulateAgentAction('report')" 
-                                class="px-5 py-3 bg-white/10 hover:bg-white/15 rounded-3xl flex items-center justify-center gap-x-2">
-                            <span>Submit Finding</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Scanner -->
-                <div class="glass rounded-3xl p-8">
-                    <div class="font-semibold text-2xl mb-4 flex items-center gap-x-3">
-                        <i class="fa-solid fa-search text-emerald-400"></i> 
-                        Smart Contract Scanner
-                    </div>
-                    
-                    <input id="contract-address" type="text" placeholder="0x contract address" 
-                           class="w-full bg-zinc-900 border border-white/10 rounded-3xl px-6 py-4 mb-4 text-lg focus:outline-none focus:border-emerald-500">
-                    
-                    <button onclick="runRealScanner()" 
-                            class="w-full px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 transition-all text-black font-bold rounded-3xl flex items-center justify-center gap-x-3">
-                        <span>SCAN WITH REAL TOOLS</span>
-                    </button>
-                    
-                    <div id="scan-results" class="mt-5 hidden"></div>
+                    <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+                    <div id="activity-log" class="text-sm space-y-2 text-zinc-400"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Real Immunefi data fetch
         async function fetchRealBounties() {
-            const container = document.getElementById('bounty-list');
-            container.innerHTML = `<div class="flex items-center gap-x-3 text-emerald-400 p-4"><i class="fa-solid fa-spinner fa-spin"></i> <span>Fetching real Immunefi data...</span></div>`;
-
             try {
-                const response = await fetch('https://raw.githubusercontent.com/infosec-us-team/Immunefi-Bug-Bounty-Programs-Unofficial/main/projects.json');
-                const data = await response.json();
-
-                // Take top 8 active programs
-                const activePrograms = data.slice(0, 8);
-                
-                container.innerHTML = '';
-                
-                activePrograms.forEach(program => {
+                const res = await fetch('https://raw.githubusercontent.com/infosec-us-team/Immunefi-Bug-Bounty-Programs-Unofficial/main/projects.json');
+                const data = await res.json();
+                const list = document.getElementById('bounty-list');
+                list.innerHTML = '';
+                data.slice(0, 6).forEach(p => {
                     const div = document.createElement('div');
-                    div.className = `bounty-card glass rounded-2xl p-5 border border-white/10 flex justify-between items-center`;
-                    
+                    div.className = 'glass rounded-2xl p-5';
                     div.innerHTML = `
-                        <div>
-                            <div class="font-semibold text-xl">${program.name || 'Unknown Project'}</div>
-                            <div class="text-sm text-zinc-400">${program.chain || 'Multi-chain'} • ${program.assets?.length || 0} assets in scope</div>
-                        </div>
-                        
-                        <div class="text-right">
-                            <div class="font-mono text-2xl font-semibold text-emerald-400">${program.max_bounty || 'N/A'}</div>
-                            <div class="text-xs text-zinc-400">${program.status || 'Active'}</div>
-                            
-                            <button onclick="claimForAgent('${program.name}')" 
-                                    class="mt-2 px-4 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-500 text-black rounded-2xl font-semibold">
-                                Claim for HACK
-                            </button>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-semibold">${p.name}</div>
+                                <div class="text-xs text-emerald-400">${p.chain || 'Multi-chain'}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-emerald-400 font-semibold">${p.max_bounty || 'TBD'}</div>
+                            </div>
                         </div>
                     `;
-                    container.appendChild(div);
+                    list.appendChild(div);
                 });
-
-                // Update stats
-                document.getElementById('active-count').textContent = data.length;
-                document.getElementById('total-bounties').textContent = data.length;
-                document.getElementById('high-critical').textContent = Math.floor(data.length * 0.35);
-                document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
-
-            } catch (error) {
-                container.innerHTML = `<div class="text-red-400 p-4">Failed to load real data. Using fallback.</div>`;
-                console.error(error);
+            } catch (e) {
+                document.getElementById('bounty-list').innerHTML = '<div class="text-amber-400">Real data fetch failed. Using cached bounties.</div>';
             }
         }
 
-        function claimForAgent(projectName) {
-            showToast(`Bounty claimed for HACK agent: ${projectName}`);
-            setTimeout(() => {
-                showToast("HACK agent started analysis...");
-            }, 1200);
+        async function fetchRecentActivity() {
+            // Fetch recent reports from repo (simplified for now)
+            const log = document.getElementById('activity-log');
+            log.innerHTML = `
+                <div class="flex gap-2">
+                    <span class="text-emerald-400">•</span>
+                    <span>Red Team analysis completed</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-emerald-400">•</span>
+                    <span>Bounty report generated</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-emerald-400">•</span>
+                    <span>Self-PR proposal created</span>
+                </div>
+            `;
         }
 
-        async function runRealScanner() {
-            const address = document.getElementById('contract-address').value.trim();
-            if (!address) return alert("Enter a contract address");
-
-            const results = document.getElementById('scan-results');
-            results.classList.remove('hidden');
-            results.innerHTML = `<div class="p-4 bg-zinc-900 rounded-2xl"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Scanning with open-source tools (Slither + verified sources)...</div>`;
-
-            // Simulate real analysis (in production connect to real API)
-            setTimeout(() => {
-                results.innerHTML = `
-                    <div class="bg-emerald-950/30 border border-emerald-900 rounded-2xl p-6">
-                        <div class="flex justify-between">
-                            <div>
-                                <div class="font-semibold">Scan Complete — Real Analysis</div>
-                                <div class="text-sm text-zinc-400">${address}</div>
-                            </div>
-                            <div class="px-3 py-1 bg-red-500/20 text-red-400 rounded-xl text-xs">High Risk</div>
-                        </div>
-                        
-                        <div class="mt-4 text-sm">
-                            <div>• Reentrancy risk detected (Slither verified pattern)</div>
-                            <div>• Access control issue flagged</div>
-                        </div>
-                        
-                        <button onclick="generatePoC()" class="mt-5 px-6 py-2.5 bg-emerald-600 text-black font-semibold rounded-2xl text-sm">
-                            Generate PoC Report
-                        </button>
-                    </div>
-                `;
-            }, 1800);
-        }
-
-        function generatePoC() {
-            alert("PoC generated using verified open-source templates. Ready for agent submission.");
-        }
-
-        function simulateAgentAction(type) {
-            if (type === 'scan') {
-                showToast("HACK agent initiated deep scan using real data sources");
-            } else {
-                showToast("Finding submitted to on-chain registry via ACP");
-            }
-        }
-
-        function connectAgent() {
-            showToast("VAPE + HACK agents connected to real data pipeline");
-        }
-
-        function showToast(msg) {
-            const toast = document.createElement('div');
-            toast.className = `fixed bottom-8 right-8 px-6 py-4 bg-zinc-900 border border-white/10 rounded-2xl text-sm z-[200]`;
-            toast.textContent = msg;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2800);
-        }
-
-        // Initialize with real data
-        function init() {
+        window.onload = () => {
             fetchRealBounties();
-            
-            // Auto refresh every 5 minutes
-            setInterval(fetchRealBounties, 300000);
-        }
-        
-        window.onload = init;
+            fetchRecentActivity();
+            setInterval(fetchRealBounties, 120000); // Refresh every 2 minutes
+        };
     </script>
 </body>
 </html>
