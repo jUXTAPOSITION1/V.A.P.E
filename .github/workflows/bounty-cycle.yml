@@ -68,6 +68,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install
-        run: pip install python-dotenv groq torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu datasets peft trl transformers accelerate
+        run: |
+          pip install python-dotenv groq datasets peft trl transformers accelerate
+          pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
       - name: Self Fine-Tune
         run: python agents/fine_tune.py
