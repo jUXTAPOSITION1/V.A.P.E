@@ -59,17 +59,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # self-fine-tune:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.11'
-  #     - name: Install
-  #       run: |
-  #         pip install python-dotenv groq datasets peft trl transformers accelerate
-  #         pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-  #     - name: Self Fine-Tune
-  #       run: python agents/fine_tune.py
+  self-fine-tune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Base Packages
+        run: pip install python-dotenv groq datasets peft trl transformers accelerate
+      - name: Install Torch (CPU)
+        run: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+      - name: Self Fine-Tune
+        run: python agents/fine_tune.py
