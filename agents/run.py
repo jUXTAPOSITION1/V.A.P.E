@@ -29,6 +29,23 @@ def ask_llm(system, query):
                 return f"Error: {str(e)}"
     return "Rate limit persistent. Try later."
 
+def red_team_test(target):
+    response = ask_llm(
+        "You are a professional red teamer. Be technical and concrete. Use real data only.",
+        f"Perform advanced red teaming on {target}. Include prompt injection, jailbreak, and agent workflow attacks."
+    )
+    return response
+
+def propose_and_create_pr():
+    response = ask_llm(
+        "You are VAPE. Generate a real PR title, description, and code diff for self-improvement. Use real data only.",
+        "Analyze the agents folder and create a real PR proposal with code changes."
+    )
+    with open(f"reports/self_pr_proposal_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as f:
+        f.write(f"# Self-PR Proposal - {datetime.now()}\n\n{response}")
+    print("Self-PR proposal generated.")
+    return response
+
 def main(review_repo=False):
     print("VAPE + HACK Cycle Started")
     os.makedirs("reports", exist_ok=True)
@@ -51,6 +68,16 @@ def main(review_repo=False):
         f.write(f"# VAPE Report - {timestamp}\n\n{report}")
     
     print(f"Report saved to: {report_path}")
+    
+    # Red teaming
+    redteam_report = red_team_test("Base and Virtuals protocols")
+    with open(f"reports/redteam_{timestamp}.md", "w") as f:
+        f.write(f"# Red Team Report - {timestamp}\n\n{redteam_report}")
+    
+    print("Red team analysis complete.")
+    
+    # Self-PR proposal
+    propose_and_create_pr()
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv
