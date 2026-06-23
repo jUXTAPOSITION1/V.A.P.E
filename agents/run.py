@@ -1,32 +1,23 @@
 import os
 from dotenv import load_dotenv
-from groq import Groq
 from datetime import datetime
 import sys
 import time
+import requests
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 def ask_llm(system, query):
     for attempt in range(3):
         try:
-            response = client.chat.completions.create(
-                model="openai/gpt-oss-20b",
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": query}
-                ],
-                temperature=0.7,
-                max_tokens=2048
-            )
-            return response.choices[0].message.content
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+            data = {"contents": [{"parts": [{"text": f"{system}\n\n{query}"}]}]}
+            response = requests.post(url, json=data)
+            return response.json()["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as e:
-            if "rate_limit" in str(e).lower():
-                print(f"Rate limit hit. Waiting 30s... (attempt {attempt+1}/3)")
-                time.sleep(30)
-            else:
-                return f"Error: {str(e)}"
+            print(f"Error: {str(e)}. Waiting 30s... (attempt {attempt+1}/3)")
+            time.sleep(30)
     return "Rate limit persistent. Try later."
 
 def main(review_repo=False):
