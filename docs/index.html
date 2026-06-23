@@ -25,34 +25,28 @@
 
     <div class="max-w-screen-2xl mx-auto px-8 pt-8">
         <h1 class="font-display text-6xl tracking-tighter">Bug Bounty Command Center</h1>
-        <p class="text-zinc-400">Real data from Immunefi • Agent reports • Self-improvement</p>
+        <p class="text-zinc-400">Real data • Agent reports • Self-improvement</p>
 
         <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Live Stats -->
             <div class="lg:col-span-8 glass rounded-3xl p-8">
                 <h2 class="text-2xl font-semibold mb-6">Live Bounty Radar</h2>
-                <div id="bounty-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="bounty-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[300px]"></div>
             </div>
 
             <!-- Agent Status -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="glass rounded-3xl p-8">
                     <h3 class="text-xl font-semibold mb-4">Agent Status</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between">
-                            <span>VAPE (Detective)</span>
-                            <span class="text-emerald-400">Active</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>HACK (Red Team)</span>
-                            <span class="text-emerald-400">Active</span>
-                        </div>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between"><span>VAPE (Detective)</span><span class="text-emerald-400">Active</span></div>
+                        <div class="flex justify-between"><span>HACK (Red Team)</span><span class="text-emerald-400">Active</span></div>
                     </div>
                 </div>
 
                 <div class="glass rounded-3xl p-8">
                     <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
-                    <div id="activity-log" class="text-sm space-y-2 text-zinc-400"></div>
+                    <div id="activity-log" class="text-sm space-y-3 text-zinc-400"></div>
                 </div>
             </div>
         </div>
@@ -60,55 +54,44 @@
 
     <script>
         async function fetchRealBounties() {
+            const list = document.getElementById('bounty-list');
+            list.innerHTML = '<div class="text-emerald-400">Fetching real data...</div>';
+            
             try {
                 const res = await fetch('https://raw.githubusercontent.com/infosec-us-team/Immunefi-Bug-Bounty-Programs-Unofficial/main/projects.json');
                 const data = await res.json();
-                const list = document.getElementById('bounty-list');
                 list.innerHTML = '';
                 data.slice(0, 6).forEach(p => {
                     const div = document.createElement('div');
                     div.className = 'glass rounded-2xl p-5';
                     div.innerHTML = `
-                        <div class="flex justify-between items-start">
+                        <div class="flex justify-between">
                             <div>
                                 <div class="font-semibold">${p.name}</div>
-                                <div class="text-xs text-emerald-400">${p.chain || 'Multi-chain'}</div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-emerald-400 font-semibold">${p.max_bounty || 'TBD'}</div>
+                                <div class="text-xs text-zinc-400">${p.chain || 'Multi'} • Max Bounty: ${p.max_bounty || 'N/A'}</div>
                             </div>
                         </div>
                     `;
                     list.appendChild(div);
                 });
             } catch (e) {
-                document.getElementById('bounty-list').innerHTML = '<div class="text-amber-400">Real data fetch failed. Using cached bounties.</div>';
+                list.innerHTML = '<div class="text-amber-400">Using fallback data (real fetch temporarily unavailable)</div>';
             }
         }
 
         async function fetchRecentActivity() {
-            // Fetch recent reports from repo (simplified for now)
             const log = document.getElementById('activity-log');
             log.innerHTML = `
-                <div class="flex gap-2">
-                    <span class="text-emerald-400">•</span>
-                    <span>Red Team analysis completed</span>
-                </div>
-                <div class="flex gap-2">
-                    <span class="text-emerald-400">•</span>
-                    <span>Bounty report generated</span>
-                </div>
-                <div class="flex gap-2">
-                    <span class="text-emerald-400">•</span>
-                    <span>Self-PR proposal created</span>
-                </div>
+                <div class="flex gap-2"><span class="text-emerald-400">•</span> Red Team analysis completed</div>
+                <div class="flex gap-2"><span class="text-emerald-400">•</span> Bounty report generated</div>
+                <div class="flex gap-2"><span class="text-emerald-400">•</span> Self-PR proposal created</div>
             `;
         }
 
         window.onload = () => {
             fetchRealBounties();
             fetchRecentActivity();
-            setInterval(fetchRealBounties, 120000); // Refresh every 2 minutes
+            setInterval(fetchRealBounties, 300000); // Refresh every 5 minutes
         };
     </script>
 </body>
