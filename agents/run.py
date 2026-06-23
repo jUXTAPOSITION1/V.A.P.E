@@ -53,7 +53,7 @@ def main(review_repo=False):
     else:
         report = ask_llm(
             "You are VAPE + HACK, a real autonomous code reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Run a full advanced code review on Base and Virtuals. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
+            f"Run a full advanced code review on Base and all EVM chains. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
