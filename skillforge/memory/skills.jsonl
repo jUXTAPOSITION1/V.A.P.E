@@ -1,1 +1,2 @@
 {"ts":"2026-06-24T18:40:44Z","skill":"static-analysis-baseline","tier":"static","tools":["slither","aderyn","mythril"],"playbook":"skills/sc-static-analysis.md","note":"Seed: SC static-analysis tier registered."}
+{"ts":"2026-06-24T20:04:21Z","skill":"ai-agent-redteam","tier":"ai-redteam","tools":["garak","promptfoo","deepteam"],"playbook":"skills/ai-agent-redteam.md","note":"Phase 2: AI red-team tier registered."}

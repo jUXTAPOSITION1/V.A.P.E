@@ -37,7 +37,7 @@ VAPE measurably sharpens on REAL outcomes, not vibes.
 - Skill changes (synthesize) → **PR** for review.
 
 ## Scope (phased)
-- **Phase 1 (NOW):** smart-contract security tier — Slither, Aderyn, Mythril, Echidna, Foundry.
+- **Phase 1 (DONE):** smart-contract security tier — Slither, Aderyn, Mythril, Echidna, Foundry.
 - Phase 2: AI red-team tier (Garak, Promptfoo, DeepTeam).
 - Phase 3: recon/forensics tier (token-safety, wallet-trace, bridge-trace).
 

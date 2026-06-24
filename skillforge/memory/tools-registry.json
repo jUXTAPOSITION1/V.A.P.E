@@ -77,6 +77,47 @@
         "latest_release": "v1.7.1"
       }
     ],
+    "ai-redteam": [
+      {
+        "name": "garak",
+        "repo": "NVIDIA/garak",
+        "lang": "python",
+        "install": "pip install --quiet garak",
+        "invoke": "python -m garak --model_type <type> --model_name <name> --probes <probe>",
+        "version_cmd": "python -m garak --version",
+        "wrapper": "tools/ai-redteam/garak.sh",
+        "purpose": "NVIDIA LLM vulnerability scanner: jailbreak, prompt injection, toxicity, leakage probes.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null
+      },
+      {
+        "name": "promptfoo",
+        "repo": "promptfoo/promptfoo",
+        "lang": "node",
+        "install": "npm install -g promptfoo",
+        "invoke": "promptfoo redteam run -c <config.yaml>",
+        "version_cmd": "promptfoo --version",
+        "wrapper": "tools/ai-redteam/promptfoo.sh",
+        "purpose": "CLI prompt/agent/RAG red-team + eval; generates adversarial test suites.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null
+      },
+      {
+        "name": "deepteam",
+        "repo": "confident-ai/deepteam",
+        "lang": "python",
+        "install": "pip install --quiet deepteam",
+        "invoke": "python -c 'import deepteam' (library; build red_team() campaigns in python)",
+        "version_cmd": "python -c \"import importlib.metadata as m; print('deepteam', m.version('deepteam'))\"",
+        "wrapper": "tools/ai-redteam/deepteam.sh",
+        "purpose": "LLM/agent red-teaming framework: 40+ vulns, attack enhancements (jailbreak, prompt injection, PII, bias).",
+        "status": "untested",
+        "last_verified": null,
+        "version": null
+      }
+    ],
     "recon": []
   }
 }

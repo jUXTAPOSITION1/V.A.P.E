@@ -21,13 +21,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Cache tool installs
         uses: actions/cache@v4
         with:
           path: |
             ~/.cyfrin
+            ~/.cargo
             ~/.foundry
             ~/.local
+            ~/.cache/pip
           key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
           restore-keys: skillforge-tools-
       - name: Verify + version-pin registered tools
