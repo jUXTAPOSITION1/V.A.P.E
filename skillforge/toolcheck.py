@@ -52,7 +52,10 @@ def main():
                 print(f"[toolcheck] {name}: BROKEN rc={rc}", flush=True)
 
     reg["updated"] = now()
-    json.dump(reg, open(REGISTRY, "w"), indent=2)
+    tmp = REGISTRY + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(reg, f, indent=2)
+    os.replace(tmp, REGISTRY)  # atomic
 
     with open(LESSONS, "a") as f:
         f.write(json.dumps({"ts": now(), "action": "toolcheck",

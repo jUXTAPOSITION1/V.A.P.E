@@ -41,10 +41,12 @@ jobs:
         run: |
           git config user.name "VAPE"
           git config user.email "37087973+jUXTAPOSITION1@users.noreply.github.com"
-          git pull --rebase --autostash origin main || true
           git add skillforge/memory/
-          git commit -m "skillforge toolcheck $(date -u +%Y-%m-%dT%H:%MZ)" || echo "no changes"
-          git push || echo "nothing to push"
+          git commit -m "skillforge toolcheck $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
       - name: Open issue on broken tools
         if: always()
         run: |
