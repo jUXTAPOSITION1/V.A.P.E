@@ -10,7 +10,7 @@ STAMP="$(date -u +%Y-%m-%d\ %H:%M) UTC"
 MSG="${1:-VAPE intel sync $STAMP}"
 
 git pull --rebase --autostash origin main >/dev/null 2>&1 || true
-git add intel/ 2>/dev/null || true
+git add intel/ skillforge/ 2>/dev/null || true
 
 if git diff --cached --quiet; then
   echo "[intel_sync] no changes to commit"
