@@ -117,17 +117,4 @@ Fully aligned with the detailed profiles below. Designed to run 24/7 via free ti
 
 See `/agents/` for the actual agent code and system prompts.
 
----
-title: VAPE - Private Agent
-emoji: 🦍
-colorFrom: indigo
-colorTo: purple
-sdk: gradio
-sdk_version: "4.44.0"
-app_file: app.py
-pinned: false
----
 
-# VAPE • Private Mobile Agent
-
-Full control • Local • Growing
