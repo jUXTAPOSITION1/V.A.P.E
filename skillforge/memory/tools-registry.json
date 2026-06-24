@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T18:48:56Z",
+  "updated": "2026-06-24T18:54:47Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -14,7 +14,7 @@
         "wrapper": "tools/static/slither.sh",
         "purpose": "Static analysis framework for Solidity; 90+ detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:48:13Z",
+        "last_verified": "2026-06-24T18:54:03Z",
         "version": "0.11.5",
         "latest_release": "0.11.5"
       },
@@ -27,9 +27,9 @@
         "version_cmd": "aderyn --version",
         "wrapper": "tools/static/aderyn.sh",
         "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
-        "status": "broken",
-        "last_verified": "2026-06-24T18:48:13Z",
-        "version": null,
+        "status": "verified",
+        "last_verified": "2026-06-24T18:54:04Z",
+        "version": "aderyn 0.6.8",
         "latest_release": "aderyn-v0.6.8"
       },
       {
@@ -42,7 +42,7 @@
         "wrapper": "tools/static/mythril.sh",
         "purpose": "Symbolic execution / EVM bytecode security analysis.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:48:55Z",
+        "last_verified": "2026-06-24T18:54:46Z",
         "version": "Mythril version v0.24.8",
         "latest_release": "v0.24.8"
       }
@@ -57,9 +57,9 @@
         "version_cmd": "echidna --version",
         "wrapper": "tools/fuzzing/echidna.sh",
         "purpose": "Property-based smart contract fuzzer.",
-        "status": "broken",
-        "last_verified": "2026-06-24T18:48:55Z",
-        "version": null,
+        "status": "verified",
+        "last_verified": "2026-06-24T18:54:47Z",
+        "version": "Echidna 2.3.2",
         "latest_release": "v2.3.2"
       },
       {
@@ -72,7 +72,7 @@
         "wrapper": "tools/fuzzing/foundry.sh",
         "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
         "status": "broken",
-        "last_verified": "2026-06-24T18:48:56Z",
+        "last_verified": "2026-06-24T18:54:47Z",
         "version": null,
         "latest_release": "v1.7.1"
       }
