@@ -1,6 +1,10 @@
 {
   "schema": "vape.skillforge.tools.v1",
+<<<<<<< Updated upstream
   "updated": "2026-06-24T20:02:00Z",
+=======
+  "updated": "2026-06-24T20:08:36Z",
+>>>>>>> Stashed changes
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -14,7 +18,7 @@
         "wrapper": "tools/static/slither.sh",
         "purpose": "Static analysis framework for Solidity; 90+ detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:59:12Z",
+        "last_verified": "2026-06-24T20:05:03Z",
         "version": "0.11.5",
         "latest_release": "0.11.5"
       },
@@ -28,7 +32,7 @@
         "wrapper": "tools/static/aderyn.sh",
         "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:59:14Z",
+        "last_verified": "2026-06-24T20:05:04Z",
         "version": "aderyn 0.6.8",
         "latest_release": "aderyn-v0.6.8"
       },
@@ -42,7 +46,7 @@
         "wrapper": "tools/static/mythril.sh",
         "purpose": "Symbolic execution / EVM bytecode security analysis.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:59:49Z",
+        "last_verified": "2026-06-24T20:05:43Z",
         "version": "Mythril version v0.24.8",
         "latest_release": "v0.24.8"
       }
@@ -58,7 +62,7 @@
         "wrapper": "tools/fuzzing/echidna.sh",
         "purpose": "Property-based smart contract fuzzer.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:59:50Z",
+        "last_verified": "2026-06-24T20:05:43Z",
         "version": "Echidna 2.3.2",
         "latest_release": "v2.3.2"
       },
@@ -72,7 +76,7 @@
         "wrapper": "tools/fuzzing/foundry.sh",
         "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:59:52Z",
+        "last_verified": "2026-06-24T20:05:46Z",
         "version": "forge Version: 1.7.1",
         "latest_release": "v1.7.1"
       }
@@ -87,9 +91,9 @@
         "version_cmd": "python -m garak --version",
         "wrapper": "tools/ai-redteam/garak.sh",
         "purpose": "NVIDIA LLM vulnerability scanner: jailbreak, prompt injection, toxicity, leakage probes.",
-        "status": "untested",
-        "last_verified": null,
-        "version": null
+        "status": "verified",
+        "last_verified": "2026-06-24T20:07:18Z",
+        "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2"
       },
       {
         "name": "promptfoo",
@@ -100,9 +104,9 @@
         "version_cmd": "promptfoo --version",
         "wrapper": "tools/ai-redteam/promptfoo.sh",
         "purpose": "CLI prompt/agent/RAG red-team + eval; generates adversarial test suites.",
-        "status": "untested",
-        "last_verified": null,
-        "version": null
+        "status": "verified",
+        "last_verified": "2026-06-24T20:08:32Z",
+        "version": "0.121.17"
       },
       {
         "name": "deepteam",
@@ -113,9 +117,9 @@
         "version_cmd": "python -c \"import importlib.metadata as m; print('deepteam', m.version('deepteam'))\"",
         "wrapper": "tools/ai-redteam/deepteam.sh",
         "purpose": "LLM/agent red-teaming framework: 40+ vulns, attack enhancements (jailbreak, prompt injection, PII, bias).",
-        "status": "untested",
-        "last_verified": null,
-        "version": null
+        "status": "verified",
+        "last_verified": "2026-06-24T20:08:36Z",
+        "version": "deepteam 1.0.6"
       }
     ],
     "recon": [
