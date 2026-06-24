@@ -3,19 +3,19 @@ title: VAPE - Private Agent
 emoji: 🦍
 colorFrom: indigo
 colorTo: purple
-sdk: streamlit
-sdk_version: "1.38.0"
-app_file: streamlit_app.py
+sdk: gradio
+sdk_version: "4.44.0"
+app_file: app.py
 pinned: false
 ---
 
-# VAPE • Private Mobile Agent
-
-Full control • Local • Growing
-# VAPE • Private Mobile Agent
-
-Full control • Local • Growing
 # V.A.P.E. – VIRTUAL APE PRIVATE EYE
+
+_Full control • Autonomous • Growing_
+
+[![Bounty Cycle](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
+[![SKILLFORGE Toolcheck](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Agent Commerce Protocol ACP Profile
 **Deployment Base Blockchain + Virtuals Protocol**
@@ -44,61 +44,88 @@ Equal parts noir detective, blockchain archaeologist, and protocol guardian, V.A
 
 ---
 
+## How It Runs (two cooperating runtimes + a self-improving forge)
+
+- **Python engine** (`agents/`) — runs **hourly in GitHub Actions** (zero-cost, 24/7).
+  LLM analysis (Groq Llama 3.1) + Slither static analysis → timestamped reports.
+- **Node agent** (`src/`) — a continuous on-chain investigation loop for local/blockchain depth.
+- **SKILLFORGE** (`skillforge/`) — self-improving skill+tool ecosystem; 13 verified security
+  tools across static / fuzzing / AI-red-team / recon tiers, all on free runners.
+- **intel/** — the real-data audit trail (reports, audits, broadcasts, bounty-radar).
+- **ACP monitor** — autonomous USDC-escrow revenue via 14 live offerings on Virtuals/Base.
+
+> **Real data only.** Every loop is grounded in live on-chain/market/CVE sources —
+> no simulated or hypothetical output.
+
+---
+
 ## Project Structure
 
 ```
 V.A.P.E/
-├── src/
-│   ├── agents/
-│   ├── blockchain/
-│   ├── acp/
-│   ├── analysis/
-│   ├── data-fetchers/
-│   ├── security/
-│   └── config/
-├── contracts/
-├── tests/
-├── docs/
-├── scripts/
-├── package.json
-├── .env.example
-└── .gitignore
+├── agents/                 # Python engine (CI workhorse): run.py, main.py, vape.py, hack.py,
+│                           #   acp.py, wallet.py, redteam.py, self_improve.py, *_system.md
+├── src/                    # Node agent (continuous investigation lifecycle)
+│   ├── agents/vape.js      #   VAPEAgent class + investigation loop
+│   ├── blockchain/         #   analyzer.js  (Base RPC activity)
+│   ├── security/           #   scanner.js   (threat detection)
+│   ├── data-fetchers/      #   fetcher.js   (market metrics)
+│   ├── acp/                #   protocol.js  (findings reporting)
+│   └── config/             #   logger.js    (pino)
+├── skillforge/             # Self-improving skill+tool ecosystem
+│   ├── tools/              #   static/ fuzzing/ ai-redteam/ recon/  (13 tools)
+│   ├── skills/             #   playbooks (sc-static, ai-redteam, onchain-recon)
+│   └── memory/             #   append-only registry + findings/skills/lessons + INDEX
+├── intel/                  # Real-data audit trail
+│   ├── reports/  audits/  broadcasts/  bounty-radar/  engagements/  catalog/
+├── .github/workflows/      # bounty-cycle, skillforge-{harvest,toolcheck,synthesize}, sync-to-hub
+├── docs/                   # ARCHITECTURE.md, ACP_PROTOCOL.md, DEPLOYMENT.md, index.html (Pages)
+├── app.py                  # Gradio UI (Hugging Face Space)
+├── package.json            # Node agent deps/scripts (ESM, main: src/agents/vape.js)
+├── requirements.txt        # gradio (UI);  agents/requirements.txt = Python engine deps
+└── .env.example            # all referenced env vars (copy to .env)
 ```
+
+_Tree reflects tracked files (`git ls-files`). Not every claimed-but-empty dir from earlier
+drafts exists; this is the real layout._
 
 ---
 
 ## Quick Start
 
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Base RPC endpoint
-- Virtuals Protocol API key
-
-### Installation
+There are **two run paths** — the Python engine (what CI runs) and the Node agent (local depth).
 
 ```bash
 git clone https://github.com/jUXTAPOSITION1/V.A.P.E.git
 cd V.A.P.E
-npm install
-cp .env.example .env
-# Edit .env with your configuration
+cp .env.example .env          # fill in real values (gitignored)
 ```
 
-### Run V.A.P.E
-
+### Path 1 — Python engine (matches CI; needs only a Groq key)
 ```bash
-npm start
+pip install -r agents/requirements.txt
+python -m agents.run                 # bounty-hunt pass
+python -m agents.run --review-repo   # self-review pass
 ```
+
+### Path 2 — Node agent (continuous on-chain investigation)
+```bash
+npm install
+npm start                            # src/agents/vape.js investigation loop
+```
+
+### Path 3 — Just deploy it autonomously (recommended)
+Set `GROQ_API_KEY` in **repo Secrets** and enable Actions. The hourly workflows run VAPE
+24/7 with zero local compute. Full steps in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ---
 
 ## Documentation
 
-- [DEPLOYMENT.md](docs/DEPLOYMENT.md) - Deploy to Virtuals Protocol
-- [ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) - Agent Commerce Protocol details
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Technical architecture
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — system architecture, runtimes, data flow
+- [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) — ACP integration, job lifecycle, 14 offerings
+- [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) — deploy the CI engine, Node agent, UI, and ACP monitor
+- **Live dashboard:** [Bounty Command Center](https://jUXTAPOSITION1.github.io/V.A.P.E/) (GitHub Pages)
 
 ---
 
