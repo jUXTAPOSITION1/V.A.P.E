@@ -125,7 +125,7 @@
         "lang": "bash",
         "install": "chmod +x skillforge/tools/recon/base_rpc.sh",
         "invoke": "base_rpc.sh {balance <addr>|nonce <addr>|gas|block}",
-        "version_cmd": "base_rpc.sh block",
+        "version_cmd": "skillforge/tools/recon/base_rpc.sh block",
         "wrapper": "tools/recon/base_rpc.sh",
         "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
         "status": "broken",
@@ -139,7 +139,7 @@
         "lang": "bash",
         "install": "chmod +x skillforge/tools/recon/market_data.sh",
         "invoke": "market_data.sh {price <ids>|global|chaintvl <Chain>}",
-        "version_cmd": "market_data.sh global",
+        "version_cmd": "skillforge/tools/recon/market_data.sh global",
         "wrapper": "tools/recon/market_data.sh",
         "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
         "status": "broken",
@@ -168,11 +168,12 @@
         "invoke": "wallet_trace.sh {txs|erc20|first} <chainId> <address> [n]",
         "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
         "wrapper": "tools/recon/wallet_trace.sh",
-        "purpose": "Wallet/address forensics via Etherscan V2 multichain (needs ETHERSCAN_API_KEY): txs, erc20, funding source.",
+        "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
         "status": "verified",
         "last_verified": "2026-06-24T20:39:39Z",
         "version": "no data: NOTOK Free API access is not supported for this chain. Please upgrade y",
-        "requires_key": "ETHERSCAN_API_KEY"
+        "requires_key": "ETHERSCAN_API_KEY",
+        "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan. contract_recon's getsourcecode works on free."
       },
       {
         "name": "contract_recon",

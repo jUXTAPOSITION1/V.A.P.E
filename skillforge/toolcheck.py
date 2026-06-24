@@ -39,7 +39,9 @@ def main():
             # version probe = smoke test
             rc, out = sh(t.get("version_cmd", "true"), timeout=120)
             needs_key = t.get("requires_key")
-            if rc == 0 and out and '"error"' not in out:
+            err_markers = ('"error"', 'NOTOK', 'not supported', 'Invalid API Key', 'rate limit')
+            has_err = any(m.lower() in out.lower() for m in err_markers)
+            if rc == 0 and out and not has_err:
                 ver = out.splitlines()[0][:80]
                 t["version"] = ver
                 t["status"] = "verified"
