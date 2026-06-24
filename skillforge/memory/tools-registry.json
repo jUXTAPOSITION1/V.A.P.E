@@ -66,7 +66,7 @@
         "name": "foundry",
         "repo": "foundry-rs/foundry",
         "lang": "rust-binary",
-        "install": "curl -L https://foundry.paradigm.xyz | bash; $HOME/.foundry/bin/foundryup",
+        "install": "mkdir -p $HOME/.local/bin; TAG=$(curl -s https://api.github.com/repos/foundry-rs/foundry/releases/latest|grep tag_name|cut -d'\"' -f4); curl -fsSL https://github.com/foundry-rs/foundry/releases/download/${TAG}/foundry_${TAG}_linux_amd64.tar.gz | tar xz -C $HOME/.local/bin",
         "invoke": "forge test --fuzz-runs 1024",
         "version_cmd": "forge --version",
         "wrapper": "tools/fuzzing/foundry.sh",

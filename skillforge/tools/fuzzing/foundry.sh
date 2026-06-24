@@ -6,10 +6,11 @@ PROJ="${1:?usage: foundry.sh <project_dir> [fuzz-runs]}"
 RUNS="${2:-1024}"
 
 if ! command -v forge >/dev/null 2>&1; then
-  echo "[foundry.sh] installing via foundryup..." >&2
-  curl -fsSL https://foundry.paradigm.xyz | bash >/dev/null 2>&1
-  export PATH="$HOME/.foundry/bin:$PATH"
-  command -v foundryup >/dev/null 2>&1 && foundryup >/dev/null 2>&1
+  echo "[foundry.sh] installing prebuilt binary..." >&2
+  mkdir -p "$HOME/.local/bin"
+  TAG=$(curl -s https://api.github.com/repos/foundry-rs/foundry/releases/latest | grep -m1 tag_name | cut -d'"' -f4)
+  curl -fsSL "https://github.com/foundry-rs/foundry/releases/download/${TAG}/foundry_${TAG}_linux_amd64.tar.gz" | tar xz -C "$HOME/.local/bin" 2>/dev/null
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 command -v forge >/dev/null 2>&1 || { echo '{"error":"foundry install failed"}'; exit 1; }
 
