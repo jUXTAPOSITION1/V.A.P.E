@@ -14,7 +14,12 @@ def now(): return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 def tail(path, n=200):
     if not os.path.exists(path): return []
     lines = open(path).read().splitlines()
-    return [json.loads(l) for l in lines[-n:] if l.strip()]
+    out = []
+    for l in lines[-n:]:
+        if not l.strip(): continue
+        try: out.append(json.loads(l))
+        except Exception: continue  # skip malformed (e.g. stray merge markers)
+    return out
 
 def regenerate_index(reg, findings, skills, lessons):
     lines = [f"# SKILLFORGE Memory Index", f"_Regenerated {now()}_\n"]
