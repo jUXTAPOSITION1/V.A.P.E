@@ -1,10 +1,19 @@
 import os
+import json
 from dotenv import load_dotenv
 from groq import Groq
 from datetime import datetime
 import sys
 import time
 import subprocess
+
+try:
+    from agents.data_fetchers import build_market_context
+except Exception:
+    try:
+        from data_fetchers import build_market_context  # when run from inside agents/
+    except Exception:
+        build_market_context = None
 
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -44,6 +53,15 @@ def main(review_repo=False):
     
     slither_result = run_slither()
 
+    # Ground the LLM in REAL on-chain/market data (keyless, file-cached, compute-free).
+    market_context = {}
+    if build_market_context is not None:
+        try:
+            market_context = build_market_context()
+        except Exception as e:
+            market_context = {"error": f"market context unavailable: {e}"}
+    market_json = json.dumps(market_context, indent=2)[:3000]
+
     if review_repo:
         report = ask_llm(
             "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
@@ -52,13 +70,19 @@ def main(review_repo=False):
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         report = ask_llm(
-            "You are VAPE + HACK, a real autonomous code reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Run a full advanced code review on Base and all EVM chains. Include vulnerability assessment, smart contract analysis, and actionable recommendations. Slither result: {slither_result[:500]}"
+            "You are VAPE + HACK, a real autonomous on-chain detective. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use ONLY the real data provided.",
+            f"Analyze the live Base/DeFi data below for anomalies, exploit signals, TVL outflows, and threats. "
+            f"Tie findings to specific protocols/numbers. Give actionable recommendations.\n\n"
+            f"=== LIVE MARKET/CHAIN DATA (real, fetched now) ===\n{market_json}\n\n"
+            f"=== SLITHER (self-repo static analysis) ===\n{slither_result[:500]}"
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
     
     with open(report_path, "w") as f:
-        f.write(f"# VAPE Report - {timestamp}\n\n{report}")
+        f.write(f"# VAPE Report - {timestamp}\n\n")
+        if market_context and not review_repo:
+            f.write(f"## Live Data Snapshot\n\n```json\n{market_json}\n```\n\n## Analysis\n\n")
+        f.write(report)
     
     print(f"Report saved to: {report_path}")
 

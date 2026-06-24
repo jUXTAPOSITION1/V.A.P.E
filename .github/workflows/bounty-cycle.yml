@@ -21,7 +21,7 @@ jobs:
           cache-dependency-path: agents/requirements.txt
       - name: Install
         run: |
-          pip install python-dotenv groq
+          pip install -r agents/requirements.txt
           pip install slither-analyzer
       - name: Run Bounty Cycle
         run: python agents/run.py
@@ -49,7 +49,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: agents/requirements.txt
       - name: Install
-        run: pip install python-dotenv groq
+        run: pip install -r agents/requirements.txt
       - name: VAPE Repo Review
         run: python agents/run.py --review-repo
         env:
