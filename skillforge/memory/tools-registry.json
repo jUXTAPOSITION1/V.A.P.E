@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T18:54:47Z",
+  "updated": "2026-06-24T18:59:52Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -14,7 +14,7 @@
         "wrapper": "tools/static/slither.sh",
         "purpose": "Static analysis framework for Solidity; 90+ detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:54:03Z",
+        "last_verified": "2026-06-24T18:59:12Z",
         "version": "0.11.5",
         "latest_release": "0.11.5"
       },
@@ -28,7 +28,7 @@
         "wrapper": "tools/static/aderyn.sh",
         "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:54:04Z",
+        "last_verified": "2026-06-24T18:59:14Z",
         "version": "aderyn 0.6.8",
         "latest_release": "aderyn-v0.6.8"
       },
@@ -42,7 +42,7 @@
         "wrapper": "tools/static/mythril.sh",
         "purpose": "Symbolic execution / EVM bytecode security analysis.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:54:46Z",
+        "last_verified": "2026-06-24T18:59:49Z",
         "version": "Mythril version v0.24.8",
         "latest_release": "v0.24.8"
       }
@@ -58,7 +58,7 @@
         "wrapper": "tools/fuzzing/echidna.sh",
         "purpose": "Property-based smart contract fuzzer.",
         "status": "verified",
-        "last_verified": "2026-06-24T18:54:47Z",
+        "last_verified": "2026-06-24T18:59:50Z",
         "version": "Echidna 2.3.2",
         "latest_release": "v2.3.2"
       },
@@ -71,9 +71,9 @@
         "version_cmd": "forge --version",
         "wrapper": "tools/fuzzing/foundry.sh",
         "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
-        "status": "broken",
-        "last_verified": "2026-06-24T18:54:47Z",
-        "version": null,
+        "status": "verified",
+        "last_verified": "2026-06-24T18:59:52Z",
+        "version": "forge Version: 1.7.1",
         "latest_release": "v1.7.1"
       }
     ],
