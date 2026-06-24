@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T20:45:02Z",
+  "updated": "2026-06-24T20:55:14Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -89,7 +89,8 @@
         "purpose": "NVIDIA LLM vulnerability scanner: jailbreak, prompt injection, toxicity, leakage probes.",
         "status": "verified",
         "last_verified": "2026-06-24T20:43:50Z",
-        "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2"
+        "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2",
+        "latest_release": "v0.15.1"
       },
       {
         "name": "promptfoo",
@@ -102,7 +103,8 @@
         "purpose": "CLI prompt/agent/RAG red-team + eval; generates adversarial test suites.",
         "status": "verified",
         "last_verified": "2026-06-24T20:44:56Z",
-        "version": "0.121.17"
+        "version": "0.121.17",
+        "latest_release": "code-scan-action-0.1.8"
       },
       {
         "name": "deepteam",
@@ -115,7 +117,8 @@
         "purpose": "LLM/agent red-teaming framework: 40+ vulns, attack enhancements (jailbreak, prompt injection, PII, bias).",
         "status": "verified",
         "last_verified": "2026-06-24T20:45:00Z",
-        "version": "deepteam 1.0.6"
+        "version": "deepteam 1.0.6",
+        "latest_release": "v1.0.4"
       }
     ],
     "recon": [
