@@ -1,0 +1,1 @@
+{"ts":"2026-06-24T18:40:44Z","skill":"static-analysis-baseline","tier":"static","tools":["slither","aderyn","mythril"],"playbook":"skills/sc-static-analysis.md","note":"Seed: SC static-analysis tier registered."}

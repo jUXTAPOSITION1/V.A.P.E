@@ -1,0 +1,6 @@
+{"ts":"2026-06-24T18:40:44Z","source":"skillforge-init","severity":"INFO","target":"repo","summary":"SKILLFORGE ecosystem initialized; SC-security tier (slither/aderyn/mythril/echidna/foundry) registered for verification.","ref":"skillforge/MANIFEST.md"}
+{"ts": "2026-06-24T18:42:23Z", "source": "tool-release", "severity": "INFO", "target": "slither", "summary": "crytic/slither new release 0.11.5 (was None)", "ref": "release:crytic/slither:0.11.5"}
+{"ts": "2026-06-24T18:42:24Z", "source": "tool-release", "severity": "INFO", "target": "aderyn", "summary": "Cyfrin/aderyn new release aderyn-v0.6.8 (was None)", "ref": "release:Cyfrin/aderyn:aderyn-v0.6.8"}
+{"ts": "2026-06-24T18:42:25Z", "source": "tool-release", "severity": "INFO", "target": "mythril", "summary": "Consensys/mythril new release v0.24.8 (was None)", "ref": "release:Consensys/mythril:v0.24.8"}
+{"ts": "2026-06-24T18:42:26Z", "source": "tool-release", "severity": "INFO", "target": "echidna", "summary": "crytic/echidna new release v2.3.2 (was None)", "ref": "release:crytic/echidna:v2.3.2"}
+{"ts": "2026-06-24T18:42:27Z", "source": "tool-release", "severity": "INFO", "target": "foundry", "summary": "foundry-rs/foundry new release v1.7.1 (was None)", "ref": "release:foundry-rs/foundry:v1.7.1"}

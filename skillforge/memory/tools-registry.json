@@ -1,0 +1,82 @@
+{
+  "schema": "vape.skillforge.tools.v1",
+  "updated": "2026-06-24T18:42:28Z",
+  "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
+  "tiers": {
+    "static": [
+      {
+        "name": "slither",
+        "repo": "crytic/slither",
+        "lang": "python",
+        "install": "pipx install slither-analyzer || pip install slither-analyzer",
+        "invoke": "slither <target> --json -",
+        "version_cmd": "slither --version",
+        "wrapper": "tools/static/slither.sh",
+        "purpose": "Static analysis framework for Solidity; 90+ detectors.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "latest_release": "0.11.5"
+      },
+      {
+        "name": "aderyn",
+        "repo": "Cyfrin/aderyn",
+        "lang": "rust",
+        "install": "curl -L https://raw.githubusercontent.com/Cyfrin/aderyn/dev/cyfrinup/install | bash && cyfrinup",
+        "invoke": "aderyn <project_dir>",
+        "version_cmd": "aderyn --version",
+        "wrapper": "tools/static/aderyn.sh",
+        "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "latest_release": "aderyn-v0.6.8"
+      },
+      {
+        "name": "mythril",
+        "repo": "Consensys/mythril",
+        "lang": "python",
+        "install": "pip install mythril",
+        "invoke": "myth analyze <target> -o json",
+        "version_cmd": "myth version",
+        "wrapper": "tools/static/mythril.sh",
+        "purpose": "Symbolic execution / EVM bytecode security analysis.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "latest_release": "v0.24.8"
+      }
+    ],
+    "fuzzing": [
+      {
+        "name": "echidna",
+        "repo": "crytic/echidna",
+        "lang": "haskell-binary",
+        "install": "TAG=$(curl -s https://api.github.com/repos/crytic/echidna/releases/latest|grep tag_name|cut -d'\"' -f4); curl -L https://github.com/crytic/echidna/releases/download/${TAG}/echidna-${TAG}-x86_64-linux.tar.gz | tar xz -C /usr/local/bin",
+        "invoke": "echidna <contract.sol> --contract <C> --test-mode property",
+        "version_cmd": "echidna --version",
+        "wrapper": "tools/fuzzing/echidna.sh",
+        "purpose": "Property-based smart contract fuzzer.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "latest_release": "v2.3.2"
+      },
+      {
+        "name": "foundry",
+        "repo": "foundry-rs/foundry",
+        "lang": "rust-binary",
+        "install": "curl -L https://foundry.paradigm.xyz | bash && foundryup",
+        "invoke": "forge test --fuzz-runs 1024",
+        "version_cmd": "forge --version",
+        "wrapper": "tools/fuzzing/foundry.sh",
+        "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "latest_release": "v1.7.1"
+      }
+    ],
+    "recon": []
+  }
+}

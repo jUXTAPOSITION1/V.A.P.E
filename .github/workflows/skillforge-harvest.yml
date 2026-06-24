@@ -1,0 +1,32 @@
+name: SKILLFORGE Harvest (hourly, real data, no LLM)
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # hourly at :17 to avoid GH cron congestion
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: skillforge-harvest
+  cancel-in-progress: false
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Harvest real intel (CVEs + tool releases)
+        run: python skillforge/harvest.py
+      - name: Commit findings (direct, data only)
+        run: |
+          git config user.name "VAPE"
+          git config user.email "37087973+jUXTAPOSITION1@users.noreply.github.com"
+          git pull --rebase --autostash origin main || true
+          git add skillforge/memory/
+          git commit -m "skillforge harvest $(date -u +%Y-%m-%dT%H:%MZ)" || echo "no new intel"
+          git push || echo "nothing to push"

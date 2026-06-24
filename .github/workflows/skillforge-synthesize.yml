@@ -1,0 +1,46 @@
+name: SKILLFORGE Synthesize (daily, Groq, opens PR)
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # daily 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: skillforge-synthesize
+  cancel-in-progress: false
+
+jobs:
+  synthesize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: pip install --quiet groq
+      - name: Distill skills from real memory
+        run: python skillforge/synthesize.py
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      - name: Open PR with new/updated skills
+        run: |
+          git config user.name "VAPE"
+          git config user.email "37087973+jUXTAPOSITION1@users.noreply.github.com"
+          if git diff --quiet skillforge/skills/ skillforge/memory/INDEX.md; then
+            echo "no skill changes to propose"; exit 0
+          fi
+          BRANCH="skillforge/synthesize-$(date -u +%Y%m%d-%H%M)"
+          git checkout -b "$BRANCH"
+          git add skillforge/skills/ skillforge/memory/INDEX.md
+          git commit -m "skillforge synthesize $(date -u +%F): distilled skills from real findings"
+          git push -u origin "$BRANCH"
+          gh pr create --title "SKILLFORGE skills update $(date -u +%F)" \
+            --body "Auto-distilled from real findings/lessons by skillforge-synthesize. Review before merge." \
+            --label "skillforge,skills" --base main --head "$BRANCH" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

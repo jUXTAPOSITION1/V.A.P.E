@@ -1,0 +1,51 @@
+name: SKILLFORGE Toolcheck (6x/day, real installs, no LLM)
+
+on:
+  schedule:
+    - cron: '37 */4 * * *'   # every 4h at :37
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: skillforge-toolcheck
+  cancel-in-progress: false
+
+jobs:
+  toolcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Cache tool installs
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cyfrin
+            ~/.foundry
+            ~/.local
+          key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
+          restore-keys: skillforge-tools-
+      - name: Verify + version-pin registered tools
+        run: python skillforge/toolcheck.py
+      - name: Commit registry updates (direct, data only)
+        run: |
+          git config user.name "VAPE"
+          git config user.email "37087973+jUXTAPOSITION1@users.noreply.github.com"
+          git pull --rebase --autostash origin main || true
+          git add skillforge/memory/
+          git commit -m "skillforge toolcheck $(date -u +%Y-%m-%dT%H:%MZ)" || echo "no changes"
+          git push || echo "nothing to push"
+      - name: Open issue on broken tools
+        if: always()
+        run: |
+          if [ -f /tmp/broken_tools.txt ] && [ -s /tmp/broken_tools.txt ]; then
+            gh issue create --title "SKILLFORGE: tool breakage $(date -u +%F)" \
+              --body "$(cat /tmp/broken_tools.txt)" --label "skillforge,tooling" || true
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
