@@ -1,95 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE • HACK Bounty Command Center</title>
+    <title>VAPE • HACK — Bounty Command Center</title>
+    <meta name="description" content="V.A.P.E. — autonomous on-chain detective. Live Base/DeFi intel, grounded reports, bug-bounty radar.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        :root { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        body { background:
+            radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.12), transparent),
+            radial-gradient(1000px 500px at 100% 0%, rgba(16,185,129,0.08), transparent),
+            #09090b; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+        .live-dot { animation: pulse 1.8s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.85)} }
+        .stat { font-variant-numeric: tabular-nums; }
+        .skeleton { background: linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 37%,rgba(255,255,255,.04) 63%); background-size:400% 100%; animation: sh 1.4s ease infinite; }
+        @keyframes sh { 0%{background-position:100% 50%} 100%{background-position:0 50%} }
+        a { transition: color .15s; }
+        .card-h:hover { transform: translateY(-2px); border-color: rgba(16,185,129,.4); }
+        .card-h { transition: all .2s cubic-bezier(.4,0,.2,1); }
     </style>
 </head>
-<body class="bg-zinc-950 text-zinc-200">
-    <nav class="border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-shield-halved text-black text-3xl"></i>
+<body class="text-zinc-200 min-h-screen">
+    <!-- Navbar -->
+    <nav class="border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-user-secret text-black text-lg"></i>
                 </div>
-                <div class="font-display text-3xl tracking-tighter">VAPE <span class="text-emerald-400">HACK</span></div>
+                <div class="font-display text-2xl sm:text-3xl tracking-tighter leading-none">
+                    VAPE <span class="text-emerald-400">HACK</span>
+                </div>
             </div>
-            <div class="text-emerald-400 text-sm">LIVE • Real Agent Activity</div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-emerald-400">
+                <span class="inline-block w-2.5 h-2.5 bg-emerald-400 rounded-full live-dot"></span>
+                <span id="live-label">LIVE</span>
+            </div>
         </div>
     </nav>
 
-    <div class="max-w-screen-2xl mx-auto px-8 pt-8">
-        <h1 class="font-display text-6xl tracking-tighter">Bug Bounty Command Center</h1>
-        <p class="text-zinc-400">Real data • Agent reports • Self-improvement</p>
+    <main class="max-w-7xl mx-auto px-5 sm:px-8 pt-8 pb-20">
+        <!-- Hero -->
+        <header class="mb-8">
+            <h1 class="font-display text-4xl sm:text-6xl tracking-tighter">Bounty Command Center</h1>
+            <p class="text-zinc-400 mt-2 text-sm sm:text-base">
+                Autonomous on-chain detective · <span class="text-emerald-400">real data only</span> ·
+                grounded intel · <span id="last-sync" class="text-zinc-500">syncing…</span>
+            </p>
+        </header>
 
-        <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <!-- Live Stats -->
-            <div class="lg:col-span-8 glass rounded-3xl p-8">
-                <h2 class="text-2xl font-semibold mb-6">Live Bounty Radar</h2>
-                <div id="bounty-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 min-h-[300px]"></div>
+        <!-- Live metric strip -->
+        <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="glass rounded-2xl p-5">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider">Base TVL</div>
+                <div id="m-tvl" class="stat text-2xl sm:text-3xl font-display mt-1 skeleton rounded">&nbsp;</div>
             </div>
+            <div class="glass rounded-2xl p-5">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider">Latest Block</div>
+                <div id="m-block" class="stat text-2xl sm:text-3xl font-display mt-1 skeleton rounded">&nbsp;</div>
+            </div>
+            <div class="glass rounded-2xl p-5">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider">Gas (gwei)</div>
+                <div id="m-gas" class="stat text-2xl sm:text-3xl font-display mt-1 skeleton rounded">&nbsp;</div>
+            </div>
+            <div class="glass rounded-2xl p-5">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider">ETH / BTC</div>
+                <div id="m-price" class="stat text-2xl sm:text-3xl font-display mt-1 skeleton rounded">&nbsp;</div>
+            </div>
+        </section>
 
-            <!-- Agent Status -->
-            <div class="lg:col-span-4 space-y-6">
-                <div class="glass rounded-3xl p-8">
-                    <h3 class="text-xl font-semibold mb-4">Agent Status</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between"><span>VAPE (Detective)</span><span class="text-emerald-400">Active</span></div>
-                        <div class="flex justify-between"><span>HACK (Red Team)</span><span class="text-emerald-400">Active</span></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left column -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Top Base protocols -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex items-center justify-between mb-5">
+                        <h2 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-emerald-400"></i> Top Base Protocols (live TVL)</h2>
+                        <button onclick="App.refresh()" class="text-xs px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate"></i> Refresh
+                        </button>
                     </div>
-                </div>
+                    <div id="protocols" class="space-y-2">
+                        <div class="skeleton h-12 rounded-xl"></div>
+                        <div class="skeleton h-12 rounded-xl"></div>
+                        <div class="skeleton h-12 rounded-xl"></div>
+                    </div>
+                </section>
 
-                <div class="glass rounded-3xl p-8">
-                    <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
-                    <div id="activity-log" class="text-sm space-y-3 text-zinc-400"></div>
-                </div>
+                <!-- Bounty radar -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <h2 class="text-xl font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-satellite-dish text-emerald-400"></i> Bug Bounty Radar</h2>
+                    <div id="bounties" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="skeleton h-20 rounded-xl"></div>
+                        <div class="skeleton h-20 rounded-xl"></div>
+                    </div>
+                </section>
+
+                <!-- Reports -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <h2 class="text-xl font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-folder-open text-emerald-400"></i> Recent Grounded Reports</h2>
+                    <div id="reports" class="space-y-2">
+                        <div class="skeleton h-10 rounded-lg"></div>
+                        <div class="skeleton h-10 rounded-lg"></div>
+                    </div>
+                </section>
             </div>
-        </div>
-    </div>
 
-    <script>
-        async function loadDashboardData() {
-            try {
-                const res = await fetch('https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/dashboard.json');
-                const data = await res.json();
-                renderBounties(data.bounties || []);
-                renderActivity(data.activity || []);
-            } catch (e) {
-                console.log("Fallback data");
-                renderBounties([]);
-                renderActivity([]);
-            }
-        }
-
-        function renderBounties(bounties) {
-            const list = document.getElementById('bounty-list');
-            list.innerHTML = '';
-            bounties.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'glass rounded-2xl p-5';
-                div.innerHTML = `
-                    <div class="flex justify-between">
-                        <div>
-                            <div class="font-semibold">${p.name}</div>
-                            <div class="text-xs text-zinc-400">${p.chain || 'Multi'} • Max Bounty: ${p.max_bounty || 'N/A'}</div>
+            <!-- Right column -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Agent status -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <h3 class="text-lg font-semibold mb-4">Agent Status</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-user-secret text-indigo-400"></i> VAPE · Detective</span>
+                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></span>Active</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-skull-crossbones text-rose-400"></i> HACK · Red Team</span>
+                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></span>Active</span>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 text-zinc-400 text-xs leading-relaxed">
+                            14 ACP offerings live · ERC-8004 #54988 · Base
+                            <code class="text-zinc-500">0xa142…2879</code>
                         </div>
                     </div>
-                `;
-                list.appendChild(div);
-            });
-        }
+                </section>
 
-        function renderActivity(activity) {
-            const log = document.getElementById('activity-log');
-            log.innerHTML = activity.map(item => `<div class="flex gap-2"><span class="text-emerald-400">•</span> ${item}</div>`).join('');
-        }
+                <!-- Anomaly flags -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Anomaly Flags</h3>
+                    <div id="anomalies" class="text-sm text-zinc-400 space-y-2">
+                        <div class="skeleton h-6 rounded"></div>
+                    </div>
+                </section>
 
-        window.onload = loadDashboardData;
+                <!-- Links -->
+                <section class="glass rounded-3xl p-6 sm:p-8">
+                    <h3 class="text-lg font-semibold mb-4">Links</h3>
+                    <div class="space-y-2 text-sm">
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-brands fa-github w-4"></i> Repository</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-solid fa-file-lines w-4"></i> All Reports</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/docs" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-solid fa-book w-4"></i> Docs</a>
+                        <a href="https://x.com/based_vape" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-brands fa-x-twitter w-4"></i> @based_vape</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-xs text-zinc-600">
+            Data: DefiLlama · Base RPC · CoinGecko · GitHub — fetched client-side, zero server.
+            The chain never lies. 🦍🔍
+        </footer>
+    </main>
+
+    <script>
+    const REPO = "jUXTAPOSITION1/V.A.P.E";
+    const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+    const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
+    const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
+
+    const App = {
+        async refresh() {
+            document.getElementById('live-label').textContent = 'SYNCING';
+            await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports()]);
+            document.getElementById('live-label').textContent = 'LIVE';
+            document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
+        },
+
+        async metrics() {
+            // DefiLlama TVL
+            try {
+                const chains = await (await fetch('https://api.llama.fi/v2/chains')).json();
+                const base = chains.find(c => (c.name||'').toLowerCase()==='base');
+                document.getElementById('m-tvl').classList.remove('skeleton');
+                document.getElementById('m-tvl').textContent = base ? fmtUsd(base.tvl) : '—';
+                this._tvl = base?.tvl;
+            } catch(e){ this._set('m-tvl','—'); }
+
+            // Base RPC block + gas (public, keyless)
+            try {
+                const rpc = (m,p=[]) => fetch('https://mainnet.base.org',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',method:m,params:p,id:1})}).then(r=>r.json());
+                const [bn, gp] = await Promise.all([rpc('eth_blockNumber'), rpc('eth_gasPrice')]);
+                this._set('m-block', parseInt(bn.result,16).toLocaleString());
+                this._set('m-gas', (parseInt(gp.result,16)/1e9).toFixed(3));
+            } catch(e){ this._set('m-block','—'); this._set('m-gas','—'); }
+
+            // Prices
+            try {
+                const p = await (await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin&vs_currencies=usd&include_24hr_change=true')).json();
+                this._set('m-price', `$${Math.round(p.ethereum.usd).toLocaleString()} / $${Math.round(p.bitcoin.usd).toLocaleString()}`);
+            } catch(e){ this._set('m-price','—'); }
+        },
+
+        async protocols() {
+            const el = document.getElementById('protocols');
+            try {
+                const list = await (await fetch('https://api.llama.fi/protocols')).json();
+                const base = list.filter(p => (p.chains||[]).includes('Base') && p.category!=='CEX' && (p.chainTvls?.Base>0))
+                    .map(p => ({name:p.name, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category}))
+                    .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
+                el.innerHTML = base.map((p,i)=>`
+                    <div class="card-h glass rounded-xl px-4 py-3 flex items-center justify-between">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="text-zinc-600 text-sm w-5">${i+1}</span>
+                            <div class="min-w-0">
+                                <div class="font-semibold truncate">${p.name}</div>
+                                <div class="text-xs text-zinc-500">${p.cat||''}</div>
+                            </div>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <div class="stat font-display">${fmtUsd(p.tvl)}</div>
+                            <div class="text-xs">${pct(p.c1)}</div>
+                        </div>
+                    </div>`).join('');
+                // anomaly flags (rule-based, client-side)
+                const flags = [];
+                if (typeof this._tvl==='number') {} // chain-level change not in v2/chains; protocol-level below
+                base.forEach(p => { if (typeof p.c1==='number' && p.c1<=-20) flags.push(`${p.name} TVL ${p.c1.toFixed(1)}% in 24h — investigate`); });
+                const an = document.getElementById('anomalies');
+                an.querySelector('.skeleton')?.remove();
+                an.innerHTML = flags.length ? flags.map(f=>`<div class="flex gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i><span>${f}</span></div>`).join('')
+                    : `<div class="flex gap-2 text-emerald-400"><i class="fa-solid fa-check"></i><span>No critical flags (rule-based pass)</span></div>`;
+            } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
+        },
+
+        async bounties() {
+            const el = document.getElementById('bounties');
+            try {
+                let data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
+                if (!Array.isArray(data)) data = [];
+                data = data.sort((a,b)=>(b.prizeUsd||0)-(a.prizeUsd||0)).slice(0,6);
+                if (!data.length) throw 0;
+                el.innerHTML = data.map(b=>`
+                    <a href="${b.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 block">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="font-semibold text-sm leading-snug">${(b.name||'Unknown').replace(/</g,'&lt;')}</div>
+                            <div class="text-emerald-400 font-display shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
+                        </div>
+                        <div class="text-xs text-zinc-500 mt-2">${(b.platform||'')} ${b.status?'· '+b.status:''}</div>
+                        ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] bg-white/5 rounded px-1.5 py-0.5 mr-1 mt-2 text-zinc-400">${t}</span>`).join('')}
+                    </a>`).join('');
+            } catch(e){
+                el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No live radar data yet — <a class="text-emerald-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            }
+        },
+
+        async reports() {
+            const el = document.getElementById('reports');
+            try {
+                const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/reports`)).json();
+                const md = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
+                    .map(f=>{ const m=f.name.match(/(\d{8})_(\d{6})/); f._ts=m?m[1]+m[2]:'0'; return f; })
+                    .sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
+                if (!md.length) throw 0;
+                el.innerHTML = md.map(f=>`
+                    <a href="${f.html_url}" target="_blank" class="card-h glass rounded-lg px-4 py-2.5 flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-2 min-w-0"><i class="fa-solid fa-file-lines text-zinc-500"></i><span class="truncate">${f.name}</span></span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-xs shrink-0"></i>
+                    </a>`).join('');
+            } catch(e){
+                el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-emerald-400 text-sm">View all reports on GitHub →</a>`;
+            }
+        },
+
+        _set(id,v){ const e=document.getElementById(id); e.classList.remove('skeleton'); e.textContent=v; }
+    };
+
+    window.addEventListener('load', () => { App.refresh(); setInterval(()=>App.refresh(), 300000); });
     </script>
 </body>
 </html>
