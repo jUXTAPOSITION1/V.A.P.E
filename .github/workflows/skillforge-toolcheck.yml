@@ -37,6 +37,8 @@ jobs:
           restore-keys: skillforge-tools-
       - name: Verify + version-pin registered tools
         run: python skillforge/toolcheck.py
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
       - name: Commit registry updates (direct, data only)
         run: |
           git config user.name "VAPE"

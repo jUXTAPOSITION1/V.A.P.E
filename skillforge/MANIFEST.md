@@ -39,6 +39,6 @@ VAPE measurably sharpens on REAL outcomes, not vibes.
 ## Scope (phased)
 - **Phase 1 (DONE):** smart-contract security tier — Slither, Aderyn, Mythril, Echidna, Foundry.
 - Phase 2: AI red-team tier (Garak, Promptfoo, DeepTeam).
-- Phase 3: recon/forensics tier (token-safety, wallet-trace, bridge-trace).
+- **Phase 3 (NOW):** recon/forensics tier — base_rpc, market_data, token_safety, wallet_trace, contract_recon.
 
 *The chain never lies. VAPE makes sure you hear the truth first.* 🔫🦍

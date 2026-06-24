@@ -38,13 +38,19 @@ def main():
             sh(t["install"], timeout=600)  # best-effort install (cached across runs)
             # version probe = smoke test
             rc, out = sh(t.get("version_cmd", "true"), timeout=120)
-            if rc == 0 and out:
+            needs_key = t.get("requires_key")
+            if rc == 0 and out and '"error"' not in out:
                 ver = out.splitlines()[0][:80]
                 t["version"] = ver
                 t["status"] = "verified"
                 t["last_verified"] = now()
                 verified += 1
                 print(f"[toolcheck] {name}: OK -> {ver}", flush=True)
+            elif needs_key and not os.environ.get(needs_key):
+                # Tool is fine; just no key in this environment. Not a breakage.
+                t["status"] = "needs_key"
+                t["last_verified"] = now()
+                print(f"[toolcheck] {name}: needs {needs_key} (skipped, not broken)", flush=True)
             else:
                 t["status"] = "broken"
                 t["last_verified"] = now()

@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T20:02:00Z",
+  "updated": "2026-06-24T20:34:00Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -146,6 +146,47 @@
         "last_verified": "2026-06-24T20:02:00Z",
         "version": "local-1",
         "latest_release": "local-1"
+      },
+      {
+        "name": "token_safety",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/token_safety.sh",
+        "invoke": "token_safety.sh {goplus <chainId> <addr>|dex <addr>|check <chainId> <addr>}",
+        "version_cmd": "skillforge/tools/recon/token_safety.sh goplus 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "wrapper": "tools/recon/token_safety.sh",
+        "purpose": "Token honeypot/safety scan via GoPlusLabs (keyless) + DexScreener liquidity. PROCEED/CAUTION/REJECT.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null
+      },
+      {
+        "name": "wallet_trace",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/wallet_trace.sh",
+        "invoke": "wallet_trace.sh {txs|erc20|first} <chainId> <address> [n]",
+        "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
+        "wrapper": "tools/recon/wallet_trace.sh",
+        "purpose": "Wallet/address forensics via Etherscan V2 multichain (needs ETHERSCAN_API_KEY): txs, erc20, funding source.",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "requires_key": "ETHERSCAN_API_KEY"
+      },
+      {
+        "name": "contract_recon",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/contract_recon.sh",
+        "invoke": "contract_recon.sh {verified|abi|creation|source} <chainId> <addr>",
+        "version_cmd": "skillforge/tools/recon/contract_recon.sh verified 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "wrapper": "tools/recon/contract_recon.sh",
+        "purpose": "Contract verification/source/ABI/creator recon via Etherscan V2 (needs ETHERSCAN_API_KEY).",
+        "status": "untested",
+        "last_verified": null,
+        "version": null,
+        "requires_key": "ETHERSCAN_API_KEY"
       }
     ]
   }
