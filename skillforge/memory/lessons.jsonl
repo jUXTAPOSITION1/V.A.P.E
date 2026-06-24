@@ -3,3 +3,4 @@
 {"ts": "2026-06-24T18:48:56Z", "action": "toolcheck", "outcome": "2/5 verified", "bounty_usd": 0, "note": "3 broken"}
 {"ts": "2026-06-24T18:54:47Z", "action": "toolcheck", "outcome": "4/5 verified", "bounty_usd": 0, "note": "1 broken"}
 {"ts": "2026-06-24T18:59:52Z", "action": "toolcheck", "outcome": "5/5 verified", "bounty_usd": 0, "note": "0 broken"}
+{"ts":"2026-06-24T20:02:00Z","action":"intel-sweep-20","outcome":"4 reports + broadcast written; 2 recon wrappers built+verified live","bounty_usd":0,"note":"web_search/xurl down (no GEMINI key) -> fell back to free APIs + rekt.news fetch. Quant proxy for sentiment worked. Basescan V1 deprecated -> switched to mainnet.base.org RPC. Macro skipped (hr20, only 00/08/16)."}

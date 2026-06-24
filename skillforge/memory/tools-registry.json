@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T18:59:52Z",
+  "updated": "2026-06-24T20:02:00Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -118,6 +118,35 @@
         "version": null
       }
     ],
-    "recon": []
+    "recon": [
+      {
+        "name": "base_rpc",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/base_rpc.sh",
+        "invoke": "base_rpc.sh {balance <addr>|nonce <addr>|gas|block}",
+        "version_cmd": "base_rpc.sh block",
+        "wrapper": "tools/recon/base_rpc.sh",
+        "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
+        "status": "verified",
+        "last_verified": "2026-06-24T20:02:00Z",
+        "version": "local-1",
+        "latest_release": "local-1"
+      },
+      {
+        "name": "market_data",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/market_data.sh",
+        "invoke": "market_data.sh {price <ids>|global|chaintvl <Chain>}",
+        "version_cmd": "market_data.sh global",
+        "wrapper": "tools/recon/market_data.sh",
+        "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
+        "status": "verified",
+        "last_verified": "2026-06-24T20:02:00Z",
+        "version": "local-1",
+        "latest_release": "local-1"
+      }
+    ]
   }
 }
