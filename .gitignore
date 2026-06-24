@@ -19,3 +19,4 @@ Thumbs.db
 *.log
 npm-debug.log*
 .vape-git-credentials
+data/cache/
