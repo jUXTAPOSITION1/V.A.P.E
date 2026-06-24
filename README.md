@@ -3,12 +3,15 @@ title: VAPE - Private Agent
 emoji: 🦍
 colorFrom: indigo
 colorTo: purple
-sdk: gradio
-sdk_version: "4.44.0"
-app_file: app.py
+sdk: streamlit
+sdk_version: "1.38.0"
+app_file: streamlit_app.py
 pinned: false
 ---
 
+# VAPE • Private Mobile Agent
+
+Full control • Local • Growing
 # VAPE • Private Mobile Agent
 
 Full control • Local • Growing
