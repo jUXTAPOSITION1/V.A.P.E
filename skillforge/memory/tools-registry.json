@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T20:39:39Z",
+  "updated": "2026-06-24T20:45:02Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -14,7 +14,7 @@
         "wrapper": "tools/static/slither.sh",
         "purpose": "Static analysis framework for Solidity; 90+ detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:36:43Z",
+        "last_verified": "2026-06-24T20:42:12Z",
         "version": "0.11.5",
         "latest_release": "0.11.5"
       },
@@ -28,7 +28,7 @@
         "wrapper": "tools/static/aderyn.sh",
         "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:36:44Z",
+        "last_verified": "2026-06-24T20:42:13Z",
         "version": "aderyn 0.6.8",
         "latest_release": "aderyn-v0.6.8"
       },
@@ -42,7 +42,7 @@
         "wrapper": "tools/static/mythril.sh",
         "purpose": "Symbolic execution / EVM bytecode security analysis.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:37:11Z",
+        "last_verified": "2026-06-24T20:42:39Z",
         "version": "Mythril version v0.24.8",
         "latest_release": "v0.24.8"
       }
@@ -58,7 +58,7 @@
         "wrapper": "tools/fuzzing/echidna.sh",
         "purpose": "Property-based smart contract fuzzer.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:37:11Z",
+        "last_verified": "2026-06-24T20:42:40Z",
         "version": "Echidna 2.3.2",
         "latest_release": "v2.3.2"
       },
@@ -72,7 +72,7 @@
         "wrapper": "tools/fuzzing/foundry.sh",
         "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:37:13Z",
+        "last_verified": "2026-06-24T20:42:42Z",
         "version": "forge Version: 1.7.1",
         "latest_release": "v1.7.1"
       }
@@ -88,7 +88,7 @@
         "wrapper": "tools/ai-redteam/garak.sh",
         "purpose": "NVIDIA LLM vulnerability scanner: jailbreak, prompt injection, toxicity, leakage probes.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:38:24Z",
+        "last_verified": "2026-06-24T20:43:50Z",
         "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2"
       },
       {
@@ -101,7 +101,7 @@
         "wrapper": "tools/ai-redteam/promptfoo.sh",
         "purpose": "CLI prompt/agent/RAG red-team + eval; generates adversarial test suites.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:39:35Z",
+        "last_verified": "2026-06-24T20:44:56Z",
         "version": "0.121.17"
       },
       {
@@ -114,7 +114,7 @@
         "wrapper": "tools/ai-redteam/deepteam.sh",
         "purpose": "LLM/agent red-teaming framework: 40+ vulns, attack enhancements (jailbreak, prompt injection, PII, bias).",
         "status": "verified",
-        "last_verified": "2026-06-24T20:39:39Z",
+        "last_verified": "2026-06-24T20:45:00Z",
         "version": "deepteam 1.0.6"
       }
     ],
@@ -128,9 +128,9 @@
         "version_cmd": "skillforge/tools/recon/base_rpc.sh block",
         "wrapper": "tools/recon/base_rpc.sh",
         "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
-        "status": "broken",
-        "last_verified": "2026-06-24T20:39:39Z",
-        "version": "local-1",
+        "status": "verified",
+        "last_verified": "2026-06-24T20:45:01Z",
+        "version": "47772276",
         "latest_release": "local-1"
       },
       {
@@ -142,9 +142,9 @@
         "version_cmd": "skillforge/tools/recon/market_data.sh global",
         "wrapper": "tools/recon/market_data.sh",
         "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
-        "status": "broken",
-        "last_verified": "2026-06-24T20:39:39Z",
-        "version": "local-1",
+        "status": "verified",
+        "last_verified": "2026-06-24T20:45:01Z",
+        "version": "btc_dom 55.94 eth_dom 8.93 mcap_chg_24h -2.26",
         "latest_release": "local-1"
       },
       {
@@ -157,7 +157,7 @@
         "wrapper": "tools/recon/token_safety.sh",
         "purpose": "Token honeypot/safety scan via GoPlusLabs (keyless) + DexScreener liquidity. PROCEED/CAUTION/REJECT.",
         "status": "verified",
-        "last_verified": "2026-06-24T20:39:39Z",
+        "last_verified": "2026-06-24T20:45:01Z",
         "version": "{\"is_honeypot\": \"0\", \"buy_tax\": \"0\", \"sell_tax\": \"0\", \"is_mintable\": null, \"owne"
       },
       {
@@ -169,8 +169,8 @@
         "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
         "wrapper": "tools/recon/wallet_trace.sh",
         "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
-        "status": "verified",
-        "last_verified": "2026-06-24T20:39:39Z",
+        "status": "broken",
+        "last_verified": "2026-06-24T20:45:01Z",
         "version": "no data: NOTOK Free API access is not supported for this chain. Please upgrade y",
         "requires_key": "ETHERSCAN_API_KEY",
         "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan. contract_recon's getsourcecode works on free."
@@ -185,7 +185,7 @@
         "wrapper": "tools/recon/contract_recon.sh",
         "purpose": "Contract verification/source/ABI/creator recon via Etherscan V2 (needs ETHERSCAN_API_KEY).",
         "status": "verified",
-        "last_verified": "2026-06-24T20:39:39Z",
+        "last_verified": "2026-06-24T20:45:02Z",
         "version": "verified | name: FiatTokenProxy | compiler: v0.6.12+commit.27d51765 | proxy: 1 |",
         "requires_key": "ETHERSCAN_API_KEY"
       }
