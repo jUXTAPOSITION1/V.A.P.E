@@ -14,7 +14,7 @@ def now(): return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # Tools install to user-writable bins; ensure they're on PATH for install + probe.
 HOME = os.path.expanduser("~")
-EXTRA_PATH = ":".join([os.path.join(HOME, p) for p in (".cyfrin/bin", ".foundry/bin", ".local/bin")])
+EXTRA_PATH = ":".join([os.path.join(HOME, p) for p in (".cargo/bin", ".cyfrin/bin", ".foundry/bin", ".local/bin")])
 ENV = dict(os.environ, PATH=EXTRA_PATH + ":" + os.environ.get("PATH", ""))
 
 def sh(cmd, timeout=600):
