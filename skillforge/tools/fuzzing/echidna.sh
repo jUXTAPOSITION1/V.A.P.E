@@ -8,9 +8,11 @@ MODE="${3:---test-mode property}"
 
 if ! command -v echidna >/dev/null 2>&1; then
   echo "[echidna.sh] installing latest release..." >&2
+  mkdir -p "$HOME/.local/bin"
   TAG=$(curl -s https://api.github.com/repos/crytic/echidna/releases/latest | grep -m1 tag_name | cut -d'"' -f4)
   curl -fsSL "https://github.com/crytic/echidna/releases/download/${TAG}/echidna-${TAG}-x86_64-linux.tar.gz" \
-    | tar xz -C /usr/local/bin 2>/dev/null
+    | tar xz -C "$HOME/.local/bin" 2>/dev/null
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 command -v echidna >/dev/null 2>&1 || { echo '{"error":"echidna install failed"}'; exit 1; }
 

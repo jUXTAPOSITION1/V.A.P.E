@@ -12,9 +12,14 @@ BROKEN = "/tmp/broken_tools.txt"
 
 def now(): return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+# Tools install to user-writable bins; ensure they're on PATH for install + probe.
+HOME = os.path.expanduser("~")
+EXTRA_PATH = ":".join([os.path.join(HOME, p) for p in (".cyfrin/bin", ".foundry/bin", ".local/bin")])
+ENV = dict(os.environ, PATH=EXTRA_PATH + ":" + os.environ.get("PATH", ""))
+
 def sh(cmd, timeout=600):
     try:
-        p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
+        p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout, env=ENV)
         return p.returncode, (p.stdout + p.stderr).strip()
     except subprocess.TimeoutExpired:
         return 124, "timeout"
