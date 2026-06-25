@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-24T22:01:16Z",
+  "updated": "2026-06-25T00:02:00Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -191,6 +191,20 @@
         "last_verified": "2026-06-24T22:01:16Z",
         "version": "verified | name: FiatTokenProxy | compiler: v0.6.12+commit.27d51765 | proxy: 1 |",
         "requires_key": "ETHERSCAN_API_KEY"
+      },
+      {
+        "name": "hack_feed",
+        "repo": "DefiLlama/defillama-server",
+        "lang": "bash",
+        "install": "none (curl + python3 stdlib)",
+        "invoke": "hack_feed.sh latest [N] | since YYYY-MM-DD | chain <Chain>",
+        "version_cmd": "hack_feed.sh latest 1",
+        "wrapper": "tools/recon/hack_feed.sh",
+        "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
+        "status": "untested",
+        "last_verified": "2026-06-25T00:02:00Z",
+        "version": "2026-06-21 Taiko Bridge 1.7 M",
+        "latest_release": "n/a"
       }
     ]
   }
