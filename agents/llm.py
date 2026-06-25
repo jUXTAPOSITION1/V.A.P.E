@@ -71,6 +71,8 @@ def _call(url, key, model, system, user, temperature, max_tokens, timeout):
     req = urllib.request.Request(url, data=payload, headers={
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+        "Accept": "application/json",
     })
     with urllib.request.urlopen(req, timeout=timeout) as r:
         data = json.loads(r.read().decode())
