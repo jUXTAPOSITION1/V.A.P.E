@@ -1,0 +1,10 @@
+# Runtime artifacts — never commit
+*.pid
+*.log
+events.jsonl
+state.json
+state.json.tmp
+action-queue.jsonl
+action-queue.jsonl.tmp
+.wake
+*.realbak*
