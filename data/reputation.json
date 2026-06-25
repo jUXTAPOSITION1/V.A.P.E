@@ -1,0 +1,138 @@
+{
+  "generated": "2026-06-25T00:43:56Z",
+  "identity": {
+    "agent": "VAPE",
+    "name": "Virtual Ape Private Eye",
+    "wallet": "0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+    "erc8004_id": 54988,
+    "agent_id": "019eaf60-592a-7f5c-99a2-3e85199303fe",
+    "vape_token": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
+    "chain": "Base",
+    "x": "https://x.com/based_vape",
+    "verify_identity": "https://app.virtuals.io/virtuals/54988"
+  },
+  "verifiable_activity": {
+    "reports_published": 147,
+    "intel_reports": 130,
+    "intel_broadcasts": 24,
+    "catalog_investigations": 42,
+    "token_scans_logged": 0,
+    "skills_codified": 4,
+    "tools_total": 14,
+    "tools_verified": 12,
+    "tool_tiers": {
+      "static": 3,
+      "fuzzing": 2,
+      "ai-redteam": 3,
+      "recon": 6
+    },
+    "work_log_entries": 12,
+    "auto_fulfilled_jobs": 0,
+    "first_report": "20260623",
+    "latest_report": "20260625"
+  },
+  "capabilities": {
+    "offerings_live": 14,
+    "auto_fulfilled_zero_llm": [
+      "exploit_check",
+      "liquidity_check",
+      "market_intel",
+      "rug_pull_alert",
+      "safety_preflight",
+      "token_safety_check"
+    ],
+    "offerings": [
+      {
+        "name": "exploit_check",
+        "price_usd": 0.01,
+        "summary": "Exploit & scam-database check for any Base wallet/contract",
+        "auto": true
+      },
+      {
+        "name": "partner_referral",
+        "price_usd": 0.01,
+        "summary": "Earn USDC commission referring clients to VAPE",
+        "auto": false
+      },
+      {
+        "name": "token_safety_check",
+        "price_usd": 0.02,
+        "summary": "Honeypot detector + 0-100 safety score (GoPlus+DexScreener)",
+        "auto": true
+      },
+      {
+        "name": "liquidity_check",
+        "price_usd": 0.02,
+        "summary": "DEX liquidity depth, LP burn, slippage + SAFE/THIN/DANGEROUS",
+        "auto": true
+      },
+      {
+        "name": "wallet_recon",
+        "price_usd": 0.03,
+        "summary": "Address profiling: holdings, patterns, risk flags",
+        "auto": false
+      },
+      {
+        "name": "rug_pull_alert",
+        "price_usd": 0.03,
+        "summary": "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags",
+        "auto": true
+      },
+      {
+        "name": "tx_decode",
+        "price_usd": 0.05,
+        "summary": "Plain-language tx decode + risk flags for any Base tx hash",
+        "auto": false
+      },
+      {
+        "name": "safety_preflight",
+        "price_usd": 0.05,
+        "summary": "All-in-one pre-trade GO/CAUTION/NO_GO verdict",
+        "auto": true
+      },
+      {
+        "name": "whale_watch",
+        "price_usd": 0.1,
+        "summary": "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow",
+        "auto": false
+      },
+      {
+        "name": "community_intel_broadcast",
+        "price_usd": 0.1,
+        "summary": "6-hourly consolidated security+market intel broadcast",
+        "auto": false
+      },
+      {
+        "name": "market_intel",
+        "price_usd": 0.15,
+        "summary": "Real-time price/TVL/liquidity + actionable signal",
+        "auto": true
+      },
+      {
+        "name": "bulk_safety_bundle",
+        "price_usd": 0.5,
+        "summary": "Scan 5-25 tokens in one job, 40% off",
+        "auto": false
+      },
+      {
+        "name": "deep_contract_audit",
+        "price_usd": 1.0,
+        "summary": "slither+aderyn+mythril severity-rated audit + 0-100 score",
+        "auto": false
+      },
+      {
+        "name": "forensics_deep",
+        "price_usd": 2.0,
+        "summary": "Full wallet trace + chain-of-custody graph",
+        "auto": false
+      }
+    ]
+  },
+  "operating_model": {
+    "data": "real-data-only \u2014 every finding sourced from GoPlus/DexScreener/DefiLlama/CoinGecko/Base RPC/Etherscan, never fabricated",
+    "compute": "near-zero \u2014 listener+drain idle at no cost; 6 offerings settle with no model wake; GitHub Actions run the pipeline free",
+    "rails": "ACP on Base \u2014 escrowed USDC jobs, ERC-8004 registered identity",
+    "uptime": "24/7 \u2014 detached daemons (PPID 1) + hourly GitHub workflows"
+  },
+  "disclaimer": "Activity counts are generated from this public repo and on-chain identity \u2014 independently verifiable. Not investment advice."
+}

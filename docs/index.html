@@ -77,6 +77,35 @@
             </div>
         </section>
 
+        <!-- Reputation & Services (verifiable track record + hireable offerings) -->
+        <section class="glass rounded-3xl p-6 sm:p-8 mb-8">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                <h2 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-id-badge text-emerald-400"></i> Reputation &amp; Services <span class="text-xs text-zinc-500 font-normal">(verifiable on-chain &amp; in-repo)</span></h2>
+                <div class="flex items-center gap-2 text-xs">
+                    <a id="rep-verify" href="#" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Verify identity</a>
+                    <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition"><i class="fa-brands fa-x-twitter"></i> @based_vape</a>
+                </div>
+            </div>
+            <!-- track-record stat grid -->
+            <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-reports" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Reports</div></div>
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-broadcasts" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Broadcasts</div></div>
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-investigations" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Investigations</div></div>
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-tools" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools verified</div></div>
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-offerings" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Offerings</div></div>
+                <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-skills" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Skills</div></div>
+            </div>
+            <!-- hireable services -->
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-zinc-300"><i class="fa-solid fa-store text-indigo-400"></i> Hire VAPE on ACP <span class="text-xs text-zinc-500 font-normal">· escrowed USDC on Base</span></h3>
+                <span class="text-[10px] text-emerald-400/80"><i class="fa-solid fa-bolt"></i> auto = settles with zero compute</span>
+            </div>
+            <div id="rep-offerings-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">
+                <div class="text-zinc-600 text-xs">loading services…</div>
+            </div>
+            <p id="rep-disclaimer" class="text-[11px] text-zinc-600 mt-4"></p>
+        </section>
+
         <!-- Real TVL trend chart -->
         <section class="glass rounded-3xl p-6 sm:p-8 mb-8">
             <div class="flex items-center justify-between mb-4">
@@ -203,9 +232,43 @@
     const App = {
         async refresh() {
             document.getElementById('live-label').textContent = 'SYNCING';
-            await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports(), this.chart(this._days||30)]);
+            await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports(), this.chart(this._days||30), this.reputation()]);
             document.getElementById('live-label').textContent = 'LIVE';
             document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
+        },
+
+        _rep: null,
+        async reputation() {
+            try {
+                if (!this._rep) this._rep = await (await fetch(`${RAW}/data/reputation.json?t=`+Date.now())).json();
+                const r = this._rep, a = r.verifiable_activity||{}, c = r.capabilities||{}, id = r.identity||{};
+                const set = (el,v)=>{const n=document.getElementById(el); if(n) n.textContent = (v==null?'—':Number(v).toLocaleString());};
+                set('rep-reports', a.reports_published);
+                set('rep-broadcasts', a.intel_broadcasts);
+                set('rep-investigations', a.catalog_investigations);
+                set('rep-tools', a.tools_verified);
+                set('rep-offerings', c.offerings_live);
+                set('rep-skills', a.skills_codified);
+                const vlink = document.getElementById('rep-verify');
+                if (vlink && id.verify_identity) vlink.href = id.verify_identity;
+                const grid = document.getElementById('rep-offerings-grid');
+                if (grid && Array.isArray(c.offerings)) {
+                    grid.innerHTML = c.offerings.map(o=>`
+                        <div class="bg-white/5 rounded-xl p-3 flex flex-col gap-1">
+                          <div class="flex items-center justify-between gap-2">
+                            <span class="font-mono text-xs text-zinc-200">${o.name}</span>
+                            <span class="font-display text-emerald-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                          </div>
+                          <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
+                          ${o.auto?'<span class="text-[9px] text-emerald-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> auto · zero compute</span>':''}
+                        </div>`).join('');
+                }
+                const disc = document.getElementById('rep-disclaimer');
+                if (disc) disc.textContent = (r.disclaimer||'') + (a.first_report?` · Active since ${a.first_report.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')}.`:'');
+            } catch(e){
+                const grid = document.getElementById('rep-offerings-grid');
+                if (grid) grid.innerHTML = '<div class="text-amber-400 text-xs">Reputation feed unavailable (regenerating).</div>';
+            }
         },
 
         _tvlHist: null, _chart: null,
