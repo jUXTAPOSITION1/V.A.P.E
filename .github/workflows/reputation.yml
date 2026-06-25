@@ -1,0 +1,36 @@
+name: Publish Reputation (hourly, real data, no LLM)
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # every hour at :17
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reputation
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate verifiable reputation.json (stdlib only)
+        run: python agents/publish_reputation.py
+      - name: Commit reputation snapshot (direct, data only)
+        run: |
+          git config user.name "VAPE"
+          git config user.email "37087973+jUXTAPOSITION1@users.noreply.github.com"
+          git add data/reputation.json
+          git commit -m "reputation snapshot $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
