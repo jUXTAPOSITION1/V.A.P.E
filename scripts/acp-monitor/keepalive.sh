@@ -1,7 +1,13 @@
 #!/bin/sh
-# Restart the drain daemon if it died (e.g. after container/gateway restart).
+# Restart the drain daemon AND the listener if either died (e.g. after a
+# container/gateway restart, or a Privy approval-timeout crash). Run by cron.
 DIR="/home/node/.openclaw/acp-monitor"
 PIDF="$DIR/drain.pid"
+
+# Independently guard the listener (zombie-aware). The drain loop also does this
+# every 120s, but if the drain daemon itself is down the listener must still be
+# protected so VAPE never silently drops offline in ACP discovery.
+sh "$DIR/listener_guard.sh" >/dev/null 2>&1 || true
 if [ -f "$PIDF" ] && kill -0 "$(cat "$PIDF" 2>/dev/null)" 2>/dev/null; then
   echo "[keepalive] drain daemon alive pid=$(cat "$PIDF")"
   exit 0
