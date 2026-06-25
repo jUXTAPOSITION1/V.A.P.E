@@ -305,22 +305,22 @@
             try {
                 const list = await (await fetch('https://api.llama.fi/protocols')).json();
                 const base = list.filter(p => (p.chains||[]).includes('Base') && p.category!=='CEX' && (p.chainTvls?.Base>0))
-                    .map(p => ({name:p.name, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category}))
+                    .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category}))
                     .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
                 el.innerHTML = base.map((p,i)=>`
-                    <div class="card-h glass rounded-xl px-4 py-3 flex items-center justify-between">
-                        <div class="flex items-center gap-3 min-w-0">
-                            <span class="text-zinc-600 text-sm w-5">${i+1}</span>
-                            <div class="min-w-0">
-                                <div class="font-semibold truncate">${p.name}</div>
-                                <div class="text-xs text-zinc-500">${p.cat||''}</div>
-                            </div>
+                    <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
+                        <span class="text-zinc-600 text-sm w-5 shrink-0">${i+1}</span>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold truncate">${p.name}</div>
+                            <div class="text-xs text-zinc-500">${p.cat||''}</div>
                         </div>
-                        <div class="text-right shrink-0">
+                        <div class="spark shrink-0" data-slug="${p.slug||''}" style="width:72px;height:26px"></div>
+                        <div class="text-right shrink-0 w-24">
                             <div class="stat font-display">${fmtUsd(p.tvl)}</div>
                             <div class="text-xs">${pct(p.c1)}</div>
                         </div>
                     </div>`).join('');
+                this._sparklines();
                 // anomaly flags (rule-based, client-side)
                 const flags = [];
                 if (typeof this._tvl==='number') {} // chain-level change not in v2/chains; protocol-level below
@@ -330,6 +330,35 @@
                 an.innerHTML = flags.length ? flags.map(f=>`<div class="flex gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i><span>${f}</span></div>`).join('')
                     : `<div class="flex gap-2 text-emerald-400"><i class="fa-solid fa-check"></i><span>No critical flags (rule-based pass)</span></div>`;
             } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
+        },
+
+        _sparkCache: {},
+        async _sparklines() {
+            const nodes = [...document.querySelectorAll('.spark[data-slug]')].filter(n=>n.dataset.slug && !n._done);
+            for (const n of nodes) {
+                n._done = true;
+                const slug = n.dataset.slug;
+                try {
+                    let series = this._sparkCache[slug];
+                    if (!series) {
+                        const d = await (await fetch(`https://api.llama.fi/protocol/${slug}`)).json();
+                        const ct = d.chainTvls?.Base?.tvl || [];
+                        series = ct.slice(-14).map(x=>x.totalLiquidityUSD||0);
+                        this._sparkCache[slug] = series;
+                    }
+                    if (series.length < 2) continue;
+                    const min=Math.min(...series), max=Math.max(...series), W=72, H=26, pad=2, rng=(max-min)||1;
+                    const pts = series.map((v,i)=>{
+                        const x = pad + i*(W-2*pad)/(series.length-1);
+                        const y = H-pad - ((v-min)/rng)*(H-2*pad);
+                        return `${x.toFixed(1)},${y.toFixed(1)}`;
+                    }).join(' ');
+                    const up = series[series.length-1] >= series[0];
+                    const col = up ? '#34d399' : '#fb7185';
+                    n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${col}" stroke-width="1.5" points="${pts}"/></svg>`;
+                    await new Promise(r=>setTimeout(r,120));
+                } catch(e){ /* leave blank on failure */ }
+            }
         },
 
         async bounties() {
