@@ -15,10 +15,29 @@ except Exception:
     except Exception:
         build_market_context = None
 
+# Multi-provider LLM layer (Groq -> Cerebras -> OpenRouter -> GitHub Models -> Together).
+try:
+    from agents.llm import ask as _llm_ask, available as _llm_available
+except Exception:
+    try:
+        from llm import ask as _llm_ask, available as _llm_available
+    except Exception:
+        _llm_ask = None
+        _llm_available = lambda: []
+
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-def ask_llm(system, query):
+def ask_llm(system, query, tier="fast"):
+    # Prefer the resilient multi-provider layer (automatic failover across free tiers).
+    if _llm_ask is not None and _llm_available():
+        try:
+            txt, prov = _llm_ask(system, query, tier=tier)
+            print(f"[llm:{prov}] ok")
+            return txt
+        except Exception as e:
+            print(f"[llm] all providers failed ({e}); falling back to Groq SDK")
+    # Legacy direct-Groq fallback.
     for attempt in range(3):
         try:
             response = client.chat.completions.create(
