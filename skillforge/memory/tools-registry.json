@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-06-25T22:12:18Z",
+  "updated": "2026-06-26T04:57:21Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -14,7 +14,7 @@
         "wrapper": "tools/static/slither.sh",
         "purpose": "Static analysis framework for Solidity; 90+ detectors.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:09:24Z",
+        "last_verified": "2026-06-26T04:54:23Z",
         "version": "0.11.5",
         "latest_release": "0.11.5"
       },
@@ -28,7 +28,7 @@
         "wrapper": "tools/static/aderyn.sh",
         "purpose": "Rust-based Solidity AST analyzer; fast, modern detectors.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:09:25Z",
+        "last_verified": "2026-06-26T04:54:25Z",
         "version": "aderyn 0.6.8",
         "latest_release": "aderyn-v0.6.8"
       },
@@ -42,7 +42,7 @@
         "wrapper": "tools/static/mythril.sh",
         "purpose": "Symbolic execution / EVM bytecode security analysis.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:09:53Z",
+        "last_verified": "2026-06-26T04:54:50Z",
         "version": "Mythril version v0.24.8",
         "latest_release": "v0.24.8"
       }
@@ -58,7 +58,7 @@
         "wrapper": "tools/fuzzing/echidna.sh",
         "purpose": "Property-based smart contract fuzzer.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:09:53Z",
+        "last_verified": "2026-06-26T04:54:51Z",
         "version": "Echidna 2.3.2",
         "latest_release": "v2.3.2"
       },
@@ -72,7 +72,7 @@
         "wrapper": "tools/fuzzing/foundry.sh",
         "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:09:56Z",
+        "last_verified": "2026-06-26T04:54:53Z",
         "version": "forge Version: 1.7.1",
         "latest_release": "v1.7.1"
       }
@@ -88,7 +88,7 @@
         "wrapper": "tools/ai-redteam/garak.sh",
         "purpose": "NVIDIA LLM vulnerability scanner: jailbreak, prompt injection, toxicity, leakage probes.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:11:06Z",
+        "last_verified": "2026-06-26T04:56:05Z",
         "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2",
         "latest_release": "v0.15.1"
       },
@@ -102,7 +102,7 @@
         "wrapper": "tools/ai-redteam/promptfoo.sh",
         "purpose": "CLI prompt/agent/RAG red-team + eval; generates adversarial test suites.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:13Z",
+        "last_verified": "2026-06-26T04:57:16Z",
         "version": "0.121.17",
         "latest_release": "code-scan-action-0.1.8"
       },
@@ -116,7 +116,7 @@
         "wrapper": "tools/ai-redteam/deepteam.sh",
         "purpose": "LLM/agent red-teaming framework: 40+ vulns, attack enhancements (jailbreak, prompt injection, PII, bias).",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:17Z",
+        "last_verified": "2026-06-26T04:57:20Z",
         "version": "deepteam 1.0.6",
         "latest_release": "v1.0.4"
       }
@@ -132,8 +132,8 @@
         "wrapper": "tools/recon/base_rpc.sh",
         "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:17Z",
-        "version": "47818095",
+        "last_verified": "2026-06-26T04:57:20Z",
+        "version": "47830246",
         "latest_release": "local-1"
       },
       {
@@ -146,8 +146,8 @@
         "wrapper": "tools/recon/market_data.sh",
         "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:18Z",
-        "version": "btc_dom 55.89 eth_dom 8.85 mcap_chg_24h -1.17",
+        "last_verified": "2026-06-26T04:57:20Z",
+        "version": "btc_dom 55.94 eth_dom 8.71 mcap_chg_24h -2.22",
         "latest_release": "local-1"
       },
       {
@@ -160,7 +160,7 @@
         "wrapper": "tools/recon/token_safety.sh",
         "purpose": "Token honeypot/safety scan via GoPlusLabs (keyless) + DexScreener liquidity. PROCEED/CAUTION/REJECT.",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:18Z",
+        "last_verified": "2026-06-26T04:57:21Z",
         "version": "{\"is_honeypot\": \"0\", \"buy_tax\": \"0\", \"sell_tax\": \"0\", \"is_mintable\": null, \"owne"
       },
       {
@@ -173,7 +173,7 @@
         "wrapper": "tools/recon/wallet_trace.sh",
         "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
         "status": "broken",
-        "last_verified": "2026-06-25T22:12:18Z",
+        "last_verified": "2026-06-26T04:57:21Z",
         "version": "no data: NOTOK Free API access is not supported for this chain. Please upgrade y",
         "requires_key": "ETHERSCAN_API_KEY",
         "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan. contract_recon's getsourcecode works on free."
@@ -188,7 +188,7 @@
         "wrapper": "tools/recon/contract_recon.sh",
         "purpose": "Contract verification/source/ABI/creator recon via Etherscan V2 (needs ETHERSCAN_API_KEY).",
         "status": "verified",
-        "last_verified": "2026-06-25T22:12:18Z",
+        "last_verified": "2026-06-26T04:57:21Z",
         "version": "verified | name: FiatTokenProxy | compiler: v0.6.12+commit.27d51765 | proxy: 1 |",
         "requires_key": "ETHERSCAN_API_KEY"
       },
@@ -202,7 +202,7 @@
         "wrapper": "tools/recon/hack_feed.sh",
         "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
         "status": "broken",
-        "last_verified": "2026-06-25T22:12:18Z",
+        "last_verified": "2026-06-26T04:57:21Z",
         "version": "2026-06-21 Taiko Bridge 1.7 M",
         "latest_release": "n/a"
       }
