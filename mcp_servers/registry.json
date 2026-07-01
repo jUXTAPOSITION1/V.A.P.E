@@ -1,0 +1,132 @@
+{
+  "_comment": "V.A.P.E. MCP server registry. VAPE is an MCP host (skillforge/mcp_client.py) that spawns any of these over stdio, lazily per call, then tears them down (no daemons = no idle compute). Keyless servers with a present runtime work today; keyed community servers activate the instant their env var is set (no code change). Package sources verified against npm/PyPI 2026-07-01. Servers whose runtime is absent report available=false rather than failing.",
+  "protocol": "2024-11-05",
+  "servers": {
+    "vape": {
+      "purpose": "V.A.P.E.'s own detective tools (investigate, scan, memory, hacks, fear/greed)",
+      "command": "python3",
+      "args": ["${ROOT}/mcp_servers/vape_mcp.py"],
+      "keyless": true,
+      "env": [],
+      "category": "vape",
+      "source": "in-repo"
+    },
+    "filesystem": {
+      "purpose": "Sandboxed read/write to allow-listed dirs (contracts, reports, tools)",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${ROOT}/intel", "${ROOT}/skillforge", "${ROOT}/reports"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "npm:@modelcontextprotocol/server-filesystem"
+    },
+    "memory": {
+      "purpose": "Knowledge-graph persistent memory (companion to Central Memory)",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "npm:@modelcontextprotocol/server-memory"
+    },
+    "sequential-thinking": {
+      "purpose": "Structured step-by-step reasoning for complex investigations",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "npm:@modelcontextprotocol/server-sequential-thinking"
+    },
+    "fetch": {
+      "purpose": "LLM-optimized web content fetching (protocols, CVEs, docs)",
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "pypi:mcp-server-fetch",
+      "runtime_note": "needs uvx (pip install uv) or: pipx run mcp-server-fetch"
+    },
+    "git": {
+      "purpose": "Repo inspection: diffs, history, blame (analyze targets or own code)",
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "${ROOT}"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "pypi:mcp-server-git",
+      "runtime_note": "needs uvx (pip install uv)"
+    },
+    "sqlite": {
+      "purpose": "Structured queries over VAPE's derived memory DB",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "${ROOT}/data/memory.db"],
+      "keyless": true,
+      "env": [],
+      "category": "reference",
+      "source": "pypi:mcp-server-sqlite",
+      "runtime_note": "needs uvx (pip install uv)"
+    },
+    "brave-search": {
+      "purpose": "Brave web/news search — bounty discovery, protocol/CVE research",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "keyless": false,
+      "env": ["BRAVE_API_KEY"],
+      "category": "search",
+      "source": "npm:@modelcontextprotocol/server-brave-search",
+      "get_key": "https://brave.com/search/api/"
+    },
+    "tavily": {
+      "purpose": "Tavily AI search + extract — high-signal research for agents",
+      "command": "npx",
+      "args": ["-y", "tavily-mcp"],
+      "keyless": false,
+      "env": ["TAVILY_API_KEY"],
+      "category": "search",
+      "source": "npm:tavily-mcp",
+      "get_key": "https://tavily.com/"
+    },
+    "firecrawl": {
+      "purpose": "Firecrawl deep crawl/scrape/extract — protocol docs, bounty pages",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "keyless": false,
+      "env": ["FIRECRAWL_API_KEY"],
+      "category": "scrape",
+      "source": "npm:firecrawl-mcp",
+      "get_key": "https://www.firecrawl.dev/"
+    },
+    "apify": {
+      "purpose": "Apify actors — structured web data extraction at scale",
+      "command": "npx",
+      "args": ["-y", "@apify/actors-mcp-server"],
+      "keyless": false,
+      "env": ["APIFY_TOKEN"],
+      "category": "scrape",
+      "source": "npm:@apify/actors-mcp-server",
+      "get_key": "https://apify.com/"
+    },
+    "brightdata": {
+      "purpose": "Bright Data Web MCP — robust unblockable web access/scraping",
+      "command": "npx",
+      "args": ["-y", "@brightdata/mcp"],
+      "keyless": false,
+      "env": ["BRIGHTDATA_API_TOKEN"],
+      "category": "scrape",
+      "source": "npm:@brightdata/mcp",
+      "get_key": "https://brightdata.com/"
+    },
+    "github": {
+      "purpose": "Richer GitHub ops than the custom wrapper (issues, PRs, search)",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "keyless": false,
+      "env": ["GITHUB_TOKEN"],
+      "category": "dev",
+      "source": "npm:@modelcontextprotocol/server-github",
+      "get_key": "https://github.com/settings/tokens"
+    }
+  }
+}

@@ -61,6 +61,68 @@ python mcp_servers/vape_mcp.py --selftest
 The host then sees six discoverable tools and two resources — the LLM picks and
 calls them automatically.
 
+## VAPE as an MCP *host* (consuming the ecosystem)
+
+Beyond serving its own tools, VAPE can now **spawn and consume any MCP server** —
+official reference servers and community search/scrape servers — via a pure-stdlib
+host client.
+
+- **`skillforge/mcp_client.py`** — the host. Spawns a server over stdio, does the
+  JSON-RPC handshake, lists/calls tools, tears it down. Servers are launched
+  **lazily per call** (no daemons = no idle compute). PATH is auto-augmented so
+  `npx`/`uvx` resolve even under cron/CI.
+- **`mcp_servers/registry.json`** — declares every server: command, args, required
+  env keys, keyless flag, and verified package source. Keyed servers activate the
+  instant their env var is set — no code change.
+
+```bash
+python -m skillforge.mcp_client list                    # registry + live/keyed/needs-runtime
+python -m skillforge.mcp_client tools git               # discover a server's tools
+python -m skillforge.mcp_client call filesystem list_allowed_directories '{}'
+```
+
+### Registered servers
+
+| Server | Source | Status without keys |
+|--------|--------|---------------------|
+| `vape` | in-repo | **live** (VAPE's own tools) |
+| `filesystem` | npm `@modelcontextprotocol/server-filesystem` | **live** (sandboxed to intel/skillforge/reports) |
+| `memory` | npm `@modelcontextprotocol/server-memory` | **live** (knowledge-graph) |
+| `sequential-thinking` | npm `@modelcontextprotocol/server-sequential-thinking` | **live** |
+| `fetch` | pypi `mcp-server-fetch` (uvx) | **live** (needs `uv`) |
+| `git` | pypi `mcp-server-git` (uvx) | **live** (needs `uv`) |
+| `sqlite` | pypi `mcp-server-sqlite` (uvx) | **live** (needs `uv`) |
+| `brave-search` | npm `@modelcontextprotocol/server-brave-search` | needs `BRAVE_API_KEY` |
+| `tavily` | npm `tavily-mcp` | needs `TAVILY_API_KEY` |
+| `firecrawl` | npm `firecrawl-mcp` | needs `FIRECRAWL_API_KEY` |
+| `apify` | npm `@apify/actors-mcp-server` | needs `APIFY_TOKEN` |
+| `brightdata` | npm `@brightdata/mcp` | needs `BRIGHTDATA_API_TOKEN` |
+| `github` | npm `@modelcontextprotocol/server-github` | needs `GITHUB_TOKEN` |
+
+The `uvx` runtime (`uv`) is a single static binary: `curl -LsSf https://astral.sh/uv/install.sh | sh`.
+
+## Unified research router
+
+**`skillforge/research.py`** gives VAPE one search/scrape API that uses the **best
+available provider** and **falls back to keyless**:
+
+- **search**: Tavily → Brave → keyless (SearXNG/DDG, best-effort).
+- **scrape**: Firecrawl → Bright Data → Apify → keyless MCP `fetch`.
+
+```bash
+python -m skillforge.research providers                 # what's active right now
+python -m skillforge.research search "base defi exploit bounty" --max 5
+python -m skillforge.research scrape https://docs.base.org/
+```
+
+These are also exposed as MCP tools on VAPE's own server (`research_search`,
+`research_scrape`, `mcp_servers`), so any host or VAPE agent can call them. Add a
+provider key and the same call silently upgrades from keyless to Tavily/Firecrawl.
+
+> Note: keyless public search is unreliable from datacenter/CI IPs (they get
+> blocked) — that is exactly why the keyed providers exist. Keyless **scrape** of
+> known URLs works well via the MCP `fetch` server.
+
 ## Relationship to the old MCP layer
 
 `skillforge/mcp.py` (VAPE's original "Modular Connector Protocol" wrappers for

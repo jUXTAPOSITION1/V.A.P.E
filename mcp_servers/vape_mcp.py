@@ -82,6 +82,24 @@ def _memory_stats(**kw):
     return stats()
 
 
+def _research_search(**kw):
+    from skillforge.research import search
+    return search(kw.get('query', ''), int(kw.get('max_results', 5)))
+
+
+def _research_scrape(**kw):
+    from skillforge.research import scrape
+    url = kw.get('url')
+    if not url:
+        return {'error': 'url required'}
+    return scrape(url)
+
+
+def _mcp_servers(**kw):
+    from skillforge.mcp_client import status_all
+    return {'servers': status_all()}
+
+
 # ── tool registry: name -> (handler, description, input schema) ──────────────
 TOOLS = {
     "investigate_token": (
@@ -126,6 +144,27 @@ TOOLS = {
     "memory_stats": (
         _memory_stats,
         "Counts across V.A.P.E. Central Memory (by category, severity, high-confidence).",
+        {"type": "object", "properties": {}},
+    ),
+    "research_search": (
+        _research_search,
+        "Web search via the best available provider (Tavily/Brave when keyed, "
+        "keyless fallback otherwise) for bounties, protocols, CVEs, incidents.",
+        {"type": "object", "properties": {
+            "query": {"type": "string"},
+            "max_results": {"type": "integer"}}, "required": ["query"]},
+    ),
+    "research_scrape": (
+        _research_scrape,
+        "Scrape a page to clean text/markdown via the best available provider "
+        "(Firecrawl/BrightData/Apify when keyed, keyless MCP fetch otherwise).",
+        {"type": "object", "properties": {"url": {"type": "string"}},
+         "required": ["url"]},
+    ),
+    "mcp_servers": (
+        _mcp_servers,
+        "List the MCP servers VAPE can host (reference + community search/scrape) "
+        "and whether each is live, key-gated, or needs a runtime.",
         {"type": "object", "properties": {}},
     ),
 }
