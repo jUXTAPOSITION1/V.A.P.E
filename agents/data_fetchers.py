@@ -231,15 +231,150 @@ def get_account_txs(address, chainid=8453, limit=25):
     return d
 
 
+# ── 5. Security: DeFi exploit / hack feed (keyless) ───────────────────────────
+def get_hack_feed(limit=8, chain=None):
+    """Recent DeFi exploits/hacks from DeFiLlama. Keyless. The backbone of the
+    security vertical: dated incidents, $ lost, chain, technique."""
+    d = _get("https://api.llama.fi/hacks", ttl=1800, cache_key="llama_hacks")
+    if not isinstance(d, list):
+        return {"error": "hacks feed unavailable", "raw": d}
+    d = sorted(d, key=lambda x: x.get("date", 0), reverse=True)
+    out = []
+    for h in d:
+        chains = h.get("chain") or []
+        if chain and not any(str(chain).lower() == str(c).lower() for c in chains):
+            continue
+        try:
+            ts = datetime.fromtimestamp(h.get("date", 0), tz=timezone.utc).strftime("%Y-%m-%d")
+        except Exception:
+            ts = "?"
+        out.append({
+            "date": ts,
+            "name": h.get("name"),
+            "amount_usd_m": round((h.get("amount") or 0) / 1e6, 3),
+            "chains": chains,
+            "technique": h.get("technique"),
+        })
+        if len(out) >= limit:
+            break
+    return {"ts": _now_iso(), "count": len(out), "incidents": out}
+
+
+# ── 6. Macro: Fear & Greed + global market breadth (keyless) ──────────────────
+def get_fear_greed():
+    """Crypto Fear & Greed index (0-100) + yesterday, for macro sentiment. Keyless."""
+    d = _get("https://api.alternative.me/fng/?limit=2", ttl=1800, cache_key="fng")
+    try:
+        rows = d.get("data", [])
+        now = rows[0]; prev = rows[1] if len(rows) > 1 else {}
+        return {"ts": _now_iso(),
+                "value": int(now.get("value")),
+                "classification": now.get("value_classification"),
+                "prev_value": int(prev.get("value")) if prev.get("value") else None,
+                "prev_classification": prev.get("value_classification")}
+    except Exception:
+        return {"error": "fng unavailable", "raw": d}
+
+
+def get_global_market():
+    """Total mcap change, BTC/ETH dominance, volume. Keyless macro breadth."""
+    d = _get("https://api.coingecko.com/api/v3/global", ttl=600, cache_key="cg_global")
+    try:
+        g = d["data"]
+        return {"ts": _now_iso(),
+                "total_mcap_usd": (g.get("total_market_cap") or {}).get("usd"),
+                "total_vol_24h_usd": (g.get("total_volume") or {}).get("usd"),
+                "mcap_change_24h_pct": round(g.get("market_cap_change_percentage_24h_usd", 0), 2),
+                "btc_dominance_pct": round((g.get("market_cap_percentage") or {}).get("btc", 0), 2),
+                "eth_dominance_pct": round((g.get("market_cap_percentage") or {}).get("eth", 0), 2),
+                "active_cryptos": g.get("active_cryptocurrencies")}
+    except Exception:
+        return {"error": "global unavailable", "raw": d}
+
+
+# ── 7. Virtuals Protocol ecosystem (keyless) ──────────────────────────────────
+def get_virtuals_snapshot():
+    """VIRTUAL token market + Virtuals-Protocol TVL. The agent's home ecosystem."""
+    q = urllib.parse.urlencode({"ids": "virtual-protocol", "vs_currencies": "usd",
+                                "include_24hr_change": "true", "include_market_cap": "true",
+                                "include_24hr_vol": "true"})
+    px = _get(f"https://api.coingecko.com/api/v3/simple/price?{q}",
+              ttl=300, cache_key="cg_virtual")
+    v = (px or {}).get("virtual-protocol", {}) if isinstance(px, dict) else {}
+    out = {"ts": _now_iso(),
+           "virtual_price_usd": v.get("usd"),
+           "virtual_mcap_usd": v.get("usd_market_cap"),
+           "virtual_vol_24h_usd": v.get("usd_24h_vol"),
+           "virtual_change_24h_pct": round(v["usd_24h_change"], 2) if v.get("usd_24h_change") is not None else None}
+    proto = _get("https://api.llama.fi/protocol/virtual-protocol",
+                 ttl=1800, cache_key="llama_virtuals")
+    if isinstance(proto, dict) and not proto.get("error"):
+        cur = proto.get("currentChainTvls") or {}
+        if isinstance(cur, dict):
+            out["protocol_tvl_usd"] = sum(x for x in cur.values() if isinstance(x, (int, float)))
+    return out
+
+
+# ── 8. Base economic activity: fees / revenue (keyless) ───────────────────────
+def get_base_fees():
+    """Base chain 24h fees + top fee-generating protocols (real usage signal). Keyless."""
+    d = _get("https://api.llama.fi/overview/fees/base?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true",
+             ttl=1800, cache_key="llama_base_fees")
+    if not isinstance(d, dict) or d.get("error"):
+        return {"error": "base fees unavailable"}
+    protos = d.get("protocols") or []
+    top = sorted([p for p in protos if isinstance(p.get("total24h"), (int, float))],
+                 key=lambda p: p.get("total24h", 0), reverse=True)[:6]
+    return {"ts": _now_iso(),
+            "total_fees_24h_usd": d.get("total24h"),
+            "total_fees_7d_usd": d.get("total7d"),
+            "change_24h_pct": d.get("change_1d"),
+            "top_fee_protocols": [{"name": p.get("name"), "fees_24h_usd": p.get("total24h"),
+                                   "category": p.get("category")} for p in top]}
+
+
+# ── 9. Biggest 24h movers on Base (keyless, DexScreener) ──────────────────────
+def get_base_movers(limit=6):
+    """Notable Base tokens by 24h price change + volume via DexScreener search. Keyless."""
+    d = _get("https://api.dexscreener.com/latest/dex/search?q=base",
+             ttl=600, cache_key="dex_base_search")
+    pairs = d.get("pairs", []) if isinstance(d, dict) else []
+    base_pairs = [p for p in pairs if str(p.get("chainId", "")).lower() == "base"
+                  and isinstance((p.get("volume") or {}).get("h24"), (int, float))
+                  and (p.get("volume") or {}).get("h24", 0) > 5000]
+    base_pairs.sort(key=lambda p: (p.get("volume") or {}).get("h24", 0), reverse=True)
+    movers = []
+    for p in base_pairs[:limit]:
+        movers.append({
+            "symbol": (p.get("baseToken") or {}).get("symbol"),
+            "price_usd": p.get("priceUsd"),
+            "change_24h_pct": (p.get("priceChange") or {}).get("h24"),
+            "vol_24h_usd": (p.get("volume") or {}).get("h24"),
+            "liquidity_usd": (p.get("liquidity") or {}).get("usd"),
+        })
+    return {"ts": _now_iso(), "movers": movers}
+
+
 # ── orchestrator: one grounded-context blob for the LLM ───────────────────────
 def build_market_context():
-    """Single call the agent uses to ground a report. Returns dict + a flat summary string."""
+    """Single call the agent uses to ground a full, multi-domain report.
+
+    Covers every VAPE vertical: Base chain, DeFi security/exploits, crypto macro,
+    the Virtuals ecosystem, on-chain forensics inputs, and market movers. Every
+    sub-fetch degrades gracefully to {"error": ...} so a report always renders.
+    """
     tvl = get_base_tvl_and_protocols()
     activity = get_chain_activity()
     eth = get_token_price("ethereum,bitcoin")
     stables = get_stablecoin_flows()
+    hacks = get_hack_feed(limit=8)
+    fng = get_fear_greed()
+    glob = get_global_market()
+    virtuals = get_virtuals_snapshot()
+    base_fees = get_base_fees()
+    movers = get_base_movers()
 
-    # simple keyless anomaly heuristics (no LLM)
+    # keyless rule-based anomaly heuristics (no LLM) across all domains
     anomalies = []
     try:
         if isinstance(tvl.get("tvl_24h_change_pct"), (int, float)) and tvl["tvl_24h_change_pct"] <= -10:
@@ -250,15 +385,37 @@ def build_market_context():
                 anomalies.append(f"{p['name']} TVL {c:.1f}% in 24h — investigate")
         if isinstance(activity.get("gas_price_gwei"), (int, float)) and activity["gas_price_gwei"] > 5:
             anomalies.append(f"Elevated Base gas {activity['gas_price_gwei']} gwei — congestion/activity spike")
+        # security: fresh exploit in last 48h
+        for inc in (hacks.get("incidents") or [])[:3]:
+            try:
+                d = datetime.strptime(inc["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+                if (datetime.now(timezone.utc) - d).days <= 2:
+                    anomalies.append(f"RECENT EXPLOIT: {inc['name']} ${inc['amount_usd_m']}M on {inc['chains']} ({inc['technique']})")
+            except Exception:
+                pass
+        # macro: extreme fear/greed
+        if isinstance(fng.get("value"), int) and (fng["value"] <= 20 or fng["value"] >= 80):
+            anomalies.append(f"Macro: F&G {fng['value']} ({fng['classification']}) — sentiment extreme")
+        # movers: violent Base token moves
+        for m in (movers.get("movers") or [])[:3]:
+            ch = m.get("change_24h_pct")
+            if isinstance(ch, (int, float)) and abs(ch) >= 50:
+                anomalies.append(f"Base mover: {m.get('symbol')} {ch:+.0f}% 24h (liq ${m.get('liquidity_usd')}) — volatility/rug watch")
     except Exception:
         pass
 
     return {
         "generated_at": _now_iso(),
         "base_tvl": tvl,
+        "base_fees": base_fees,
         "chain_activity": activity,
         "prices": eth,
+        "global_market": glob,
+        "fear_greed": fng,
         "stablecoins": stables,
+        "security_hacks": hacks,
+        "virtuals": virtuals,
+        "base_movers": movers,
         "anomaly_flags": anomalies or ["none detected by rule-based pass"],
     }
 

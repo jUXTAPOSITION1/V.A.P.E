@@ -105,6 +105,126 @@ def run_slither():
     except:
         return "Slither scan completed (limited environment)."
 
+
+# ============================================================================
+# Full-report generation: system prompt, grounding, and structured template
+# ============================================================================
+
+VAPE_REPORT_SYSTEM = """You are V.A.P.E. (Virtual Ape Private Eye) + HACK — a real, autonomous
+on-chain detective and security analyst operating on Base + Virtuals Protocol.
+
+You write a COMPLETE, ROBUST intelligence report every cycle. You are NOT a chatbot
+summarizing numbers; you are a detective connecting evidence into a narrative with
+specific, non-obvious insight.
+
+HARD RULES:
+- Use ONLY the real data provided. Never invent numbers, incidents, or tickers.
+- If a data section is missing/errored, say "no data this cycle" — do not fabricate.
+- NEVER repeat last cycle's phrasing. Lead with WHAT CHANGED vs prior intel.
+- Every claim ties to a specific number, protocol, address, incident, or date.
+- No hedging filler ("could indicate a potential possible…"). Be decisive; state
+  confidence (HIGH/MED/LOW) and the evidence behind it.
+- No disclaimers, no "as an AI", no generic "monitor closely" advice. Give the
+  specific thing to watch and the threshold that would change your call.
+
+You MUST output these sections as Markdown (omit a section only if it truly has no
+data, and say so):
+
+## 🔍 Executive Summary
+3-5 punchy bullets: the single most important thing this cycle, what changed, net risk posture.
+
+## 🛡️ Security & Exploits
+Analyze the DeFi hack feed. Newest incidents, techniques, $ lost, which chains. Are any
+relevant to Base or Base-deployed protocols? Extract the repeatable attack pattern and
+the defensive takeaway for holders/protocols.
+
+## 🔵 Base Chain Intel
+TVL, fees/revenue, gas, block activity, top protocols. Where is capital flowing IN vs OUT?
+Name protocols + numbers. Flag concentration risk (e.g. one protocol = X% of Base TVL).
+
+## 📈 Crypto Macro
+BTC/ETH price + 24h, total mcap change, BTC/ETH dominance, Fear & Greed (+direction),
+stablecoin supply as a risk-on/off tell. What regime are we in and what flips it?
+
+## 🦍 Virtuals Ecosystem
+VIRTUAL price/mcap/volume + 24h, protocol TVL. Health of the agent economy VAPE lives in.
+
+## 🕯️ Movers & Investigations
+Notable Base token movers (volume/price). For anything violent or low-liquidity, open a
+mini-investigation: rug/honeypot/wash-trade hypothesis + what to verify next.
+
+## 🎯 Watchlist & Next Actions
+Concrete, prioritized. Each item: the trigger/threshold, the tool VAPE would run
+(token_safety, contract_recon, hack_feed, base_rpc), and why.
+
+Close with one sharp line in VAPE's noir detective voice. The chain never lies.
+"""
+
+
+def _recent_report_digests(n=5):
+    """Pull the last N bounty reports' Analysis sections (short) to force novelty."""
+    import glob
+    digests = []
+    try:
+        files = sorted(glob.glob("reports/bounty_report_*.md"), reverse=True)[:n]
+        for fp in files:
+            try:
+                with open(fp) as fh:
+                    txt = fh.read()
+                # take the summary/analysis portion, compressed
+                if "Executive Summary" in txt:
+                    body = txt.split("Executive Summary", 1)[1]
+                elif "## Analysis" in txt:
+                    body = txt.split("## Analysis", 1)[-1]
+                else:
+                    body = txt
+                snippet = " ".join(body.split())[:280]
+                stamp = os.path.basename(fp).replace("bounty_report_", "").replace(".md", "")
+                digests.append(f"- [{stamp}] {snippet}")
+            except Exception:
+                continue
+    except Exception:
+        pass
+    return digests
+
+
+def _build_grounding():
+    """Assemble anti-repetition grounding: recent report digests + Memory hits."""
+    parts = []
+    recent = _recent_report_digests(5)
+    if recent:
+        print(f"[Grounding] {len(recent)} recent reports loaded for novelty check\n")
+        parts.append(
+            "=== YOUR LAST FEW REPORTS (do NOT repeat these framings; report what CHANGED) ===\n"
+            + "\n".join(recent)
+        )
+    if INTEGRATION_AVAILABLE:
+        try:
+            from skillforge.memory.retriever import search_memory as _search
+            prior = _search(query="base exploit security virtuals macro anomaly",
+                            max_results=5, days_back=10)
+            if prior:
+                lines = [f"- ({p.get('timestamp','')[:10]}) {p.get('title','')}" for p in prior]
+                parts.append(
+                    "=== PRIOR INTELLIGENCE (Memory — build on this) ===\n" + "\n".join(lines)
+                )
+                print(f"[Memory] Grounded in {len(prior)} prior entries\n")
+        except Exception as e:
+            print(f"[Integration] Memory grounding failed: {e}\n")
+    return ("\n\n" + "\n\n".join(parts) + "\n") if parts else ""
+
+
+def _build_report_prompt(market_json, slither_result, memory_priming):
+    return (
+        "Write today's full V.A.P.E. intelligence report from the REAL data below. "
+        "Follow the exact section structure from your instructions. Be specific, "
+        "decisive, and non-repetitive.\n\n"
+        f"=== LIVE MULTI-DOMAIN DATA (real, fetched now) ===\n{market_json}\n\n"
+        f"=== SELF-REPO STATIC ANALYSIS (slither) ===\n{slither_result[:400]}\n"
+        f"{memory_priming}"
+    )
+
+
 def main(review_repo=False):
     print("=" * 80)
     print("VAPE + HACK Cycle Started")
@@ -133,7 +253,7 @@ def main(review_repo=False):
             market_context = build_market_context()
         except Exception as e:
             market_context = {"error": f"market context unavailable: {e}"}
-    market_json = json.dumps(market_context, indent=2)[:3000]
+    market_json = json.dumps(market_context, indent=2)[:9000]
 
     if review_repo:
         print("[Mode] Self-Review Pass\n")
@@ -145,37 +265,15 @@ def main(review_repo=False):
     else:
         print("[Mode] Bounty Hunt Pass\n")
 
-        # STEP 1: Ground in Memory (SEARCH ONLY) before analysis. We inject any
-        # relevant prior findings/lessons into the prompt so the LLM builds on
-        # accumulated intelligence rather than starting cold each hour.
-        memory_priming = ""
-        if INTEGRATION_AVAILABLE:
-            try:
-                from skillforge.memory.retriever import search_memory as _search
-                prior = _search(
-                    query="base defi anomaly exploit tvl outflow",
-                    max_results=4,
-                    days_back=14,
-                )
-                if prior:
-                    print(f"[Memory] Grounded in {len(prior)} prior entries\n")
-                    lines = [f"- ({p.get('timestamp','')[:10]}) {p.get('title','')}" for p in prior]
-                    memory_priming = (
-                        "\n=== PRIOR INTELLIGENCE (from Memory — build on this, avoid repeating) ===\n"
-                        + "\n".join(lines) + "\n"
-                    )
-                else:
-                    print("[Memory] No prior grounding entries — fresh start\n")
-            except Exception as e:
-                print(f"[Integration] Memory grounding failed: {e}\n")
+        # STEP 1: Ground in Memory + recent reports to FORCE novelty. We show the
+        # LLM the last several report summaries so it explicitly builds on prior
+        # intel and calls out what CHANGED instead of repeating boilerplate.
+        memory_priming = _build_grounding()
 
         report = ask_llm(
-            "You are VAPE + HACK, a real autonomous on-chain detective. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use ONLY the real data provided.",
-            f"Analyze the live Base/DeFi data below for anomalies, exploit signals, TVL outflows, and threats. "
-            f"Tie findings to specific protocols/numbers. Give actionable recommendations.\n\n"
-            f"=== LIVE MARKET/CHAIN DATA (real, fetched now) ===\n{market_json}\n\n"
-            f"=== SLITHER (self-repo static analysis) ===\n{slither_result[:500]}"
-            f"{memory_priming}"
+            VAPE_REPORT_SYSTEM,
+            _build_report_prompt(market_json, slither_result, memory_priming),
+            tier="deep",
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
 
@@ -199,10 +297,27 @@ def main(review_repo=False):
     
     # Write report
     with open(report_path, "w") as f:
-        f.write(f"# VAPE Report - {timestamp}\n\n")
-        if market_context and not review_repo:
-            f.write(f"## Live Data Snapshot\n\n```json\n{market_json}\n```\n\n## Analysis\n\n")
-        f.write(report)
+        if review_repo:
+            f.write(f"# VAPE Repo Review — {timestamp}\n\n")
+            f.write(report)
+        else:
+            gen = (market_context or {}).get("generated_at", timestamp)
+            f.write("# 🦍 V.A.P.E. Intelligence Report\n\n")
+            f.write(f"**Cycle:** `{timestamp}` · **Data timestamp (UTC):** {gen}  \n")
+            f.write("**Coverage:** Security · Base · Crypto Macro · Virtuals · Forensics · Movers\n\n")
+            # rule-based anomaly flags up top as an at-a-glance banner
+            flags = (market_context or {}).get("anomaly_flags") or []
+            if flags and flags != ["none detected by rule-based pass"]:
+                f.write("> **⚠️ Auto-flagged this cycle:**\n")
+                for fl in flags:
+                    f.write(f"> - {fl}\n")
+                f.write("\n")
+            f.write("---\n\n")
+            f.write(report)
+            # full raw data as a collapsed appendix (auditable, not noisy)
+            if market_context:
+                f.write("\n\n---\n\n<details>\n<summary>📊 Raw data snapshot (audit trail)</summary>\n\n")
+                f.write(f"```json\n{json.dumps(market_context, indent=2)}\n```\n\n</details>\n")
     
     print(f"\n✅ Report saved to: {report_path}\n")
     
