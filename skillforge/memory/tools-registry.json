@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-07-01T18:32:06Z",
+  "updated": "2026-07-01T20:02:00Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -206,6 +206,20 @@
         "last_verified": "2026-07-01T18:32:06Z",
         "version": "2026-06-30 Edel 0.4 M ['Ethereum'] Flashloan Price Oracle Attack",
         "latest_release": "n/a"
+      },
+      {
+        "name": "fear_greed",
+        "repo": "(local)",
+        "lang": "bash",
+        "install": "chmod +x skillforge/tools/recon/fear_greed.sh",
+        "invoke": "fear_greed.sh [latest|N|raw]",
+        "version_cmd": "bash skillforge/tools/recon/fear_greed.sh",
+        "wrapper": "tools/recon/fear_greed.sh",
+        "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
+        "status": "untested",
+        "last_verified": "2026-07-01T20:02:00Z",
+        "version": "11 Extreme Fear",
+        "latest_release": "local-1"
       }
     ]
   }
