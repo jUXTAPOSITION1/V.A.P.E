@@ -1,21 +1,21 @@
 {
-  "generated": "2026-07-01T21:11:25Z",
+  "generated": "2026-07-01T21:13:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 277,
     "reports_by_type": {
-      "virtuals": 25,
-      "sentiment": 27,
-      "base": 28,
       "security": 28,
+      "base": 28,
+      "sentiment": 27,
+      "virtuals": 25,
       "bounty": 134,
       "macro": 14,
       "hack": 9,
       "deep": 8,
-      "heartbeat": 1,
-      "mainnet": 1,
       "attack": 1,
-      "bug": 1
+      "heartbeat": 1,
+      "bug": 1,
+      "mainnet": 1
     },
     "broadcasts": 27,
     "investigations": 5,
@@ -29,23 +29,23 @@
       "file": "investigation-20260701-211125-0xcC67e54F.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
       "date": "2026-07-01T21:11:25Z",
-      "target": "`0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6`",
+      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
       "chain": "8453 (Base)",
-      "verdict": "\ud83d\udfe1 **CAUTION",
-      "score": "68/100",
+      "verdict": "CAUTION",
+      "score": "68",
       "summary": "- Target: 0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6 - Chain: 8453 (Base) - Date: 2026-07-01T21:11:25Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211125-0xcC67e54F.md"
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-20.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-20.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T20:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
-      "bytes": 2034
+      "threat": "LOW",
+      "summary": "No new incident touched VAPE's lanes (ACP/agent tokens/Base custody) this cycle. Feed since Jun-25 stays modest: one $3M front-end supply-chain hit (Polymarket, Jun-25) and small flashloan/sig-verification losses. The macro story is Immunefi's just-published \"State of Onchain Security 2026\" report confirming Q2-2026 as a record ~$775M qua",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-20.md",
+      "bytes": 2237
     }
   },
   "investigations": [
@@ -54,10 +54,10 @@
       "file": "investigation-20260701-211125-0xcC67e54F.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
       "date": "2026-07-01T21:11:25Z",
-      "target": "`0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6`",
+      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
       "chain": "8453 (Base)",
-      "verdict": "\ud83d\udfe1 **CAUTION",
-      "score": "68/100",
+      "verdict": "CAUTION",
+      "score": "68",
       "summary": "- Target: 0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6 - Chain: 8453 (Base) - Date: 2026-07-01T21:11:25Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211125-0xcC67e54F.md"
     },
@@ -66,10 +66,10 @@
       "file": "investigation-20260701-211118-0xcC67e54F.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
       "date": "2026-07-01T21:11:18Z",
-      "target": "`0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6`",
+      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
       "chain": "8453 (Base)",
-      "verdict": "\ud83d\udfe1 **CAUTION",
-      "score": "68/100",
+      "verdict": "CAUTION",
+      "score": "68",
       "summary": "- Target: 0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6 - Chain: 8453 (Base) - Date: 2026-07-01T21:11:18Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211118-0xcC67e54F.md"
     },
@@ -107,25 +107,14 @@
   "reports": [
     {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-20.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-20.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T20:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
-      "bytes": 2034
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-01-20.md",
-      "title": "VAPE Sentiment Intelligence Report",
-      "date": "2026-07-01T20:00Z",
-      "threat": "FEAR",
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-20.md",
-      "bytes": 1767
+      "threat": "LOW",
+      "summary": "No new incident touched VAPE's lanes (ACP/agent tokens/Base custody) this cycle. Feed since Jun-25 stays modest: one $3M front-end supply-chain hit (Polymarket, Jun-25) and small flashloan/sig-verification losses. The macro story is Immunefi's just-published \"State of Onchain Security 2026\" report confirming Q2-2026 as a record ~$775M qua",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-20.md",
+      "bytes": 2237
     },
     {
       "kind": "intel",
@@ -140,14 +129,25 @@
     },
     {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-20.md",
-      "title": "VAPE Security Intelligence Report",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-01-20.md",
+      "title": "VAPE Sentiment Intelligence Report",
       "date": "2026-07-01T20:00Z",
-      "threat": "LOW",
-      "summary": "No new incident touched VAPE's lanes (ACP/agent tokens/Base custody) this cycle. Feed since Jun-25 stays modest: one $3M front-end supply-chain hit (Polymarket, Jun-25) and small flashloan/sig-verification losses. The macro story is Immunefi's just-published \"State of Onchain Security 2026\" report confirming Q2-2026 as a record ~$775M qua",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-20.md",
-      "bytes": 2237
+      "threat": "FEAR",
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-20.md",
+      "bytes": 1767
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-01-20.md",
+      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "date": "2026-07-01T20:00Z",
+      "threat": null,
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
+      "bytes": 2034
     },
     {
       "kind": "bounty",
@@ -217,14 +217,14 @@
     },
     {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-12.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-12.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T12:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-12.md",
-      "bytes": 2389
+      "threat": "HIGH",
+      "summary": "The Q2-2026 record-hack wave carried into the quarter turn with a fresh cluster of key-compromise and bridge exploits. Standouts: Humanity Protocol (~$36M, compromised employee laptop \u2192 hot-wallet + bridge admin keys) and a SlowMist warning on 30 malicious npm packages targeting DeFi devs/trading-bots. The 2026 pattern holds \u2014 stolen keys",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-12.md",
+      "bytes": 3302
     },
     {
       "kind": "intel",
@@ -239,14 +239,14 @@
     },
     {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-12.md",
-      "title": "VAPE Security Intelligence Report",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-01-12.md",
+      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
       "date": "2026-07-01T12:00Z",
-      "threat": "HIGH",
-      "summary": "The Q2-2026 record-hack wave carried into the quarter turn with a fresh cluster of key-compromise and bridge exploits. Standouts: Humanity Protocol (~$36M, compromised employee laptop \u2192 hot-wallet + bridge admin keys) and a SlowMist warning on 30 malicious npm packages targeting DeFi devs/trading-bots. The 2026 pattern holds \u2014 stolen keys",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-12.md",
-      "bytes": 3302
+      "threat": null,
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-12.md",
+      "bytes": 2389
     },
     {
       "kind": "bounty",
@@ -261,25 +261,14 @@
     },
     {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-08.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "type": "base",
+      "file": "base-2026-07-01-08.md",
+      "title": "VAPE Base Chain Intelligence Report",
       "date": "2026-07-01T08:00Z",
       "threat": null,
       "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-08.md",
-      "bytes": 2165
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-08.md",
-      "title": "VAPE Security Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": "MEDIUM",
-      "summary": "Q2 2026 closed as DeFi's most-hacked quarter on record (~88 incidents, ~$780M through Jun 30 per DeFiLlama/The Defiant). The tail end of June was quieter by $-value but steady by count: Edel ($0.4M oracle/flashloan), Polymarket International ($3M front-end), SecondFi ($2.4M predictable key), Taiko Bridge ($1.7M forged proof). June's domin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-08.md",
-      "bytes": 2949
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-08.md",
+      "bytes": 1841
     },
     {
       "kind": "intel",
@@ -294,14 +283,14 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-01-08.md",
-      "title": "VAPE Base Chain Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-08.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T08:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-08.md",
-      "bytes": 1841
+      "threat": "MEDIUM",
+      "summary": "Q2 2026 closed as DeFi's most-hacked quarter on record (~88 incidents, ~$780M through Jun 30 per DeFiLlama/The Defiant). The tail end of June was quieter by $-value but steady by count: Edel ($0.4M oracle/flashloan), Polymarket International ($3M front-end), SecondFi ($2.4M predictable key), Taiko Bridge ($1.7M forged proof). June's domin",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-08.md",
+      "bytes": 2949
     },
     {
       "kind": "intel",
@@ -313,6 +302,17 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-01-08.md",
       "bytes": 2846
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-01-08.md",
+      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "date": "2026-07-01T08:00Z",
+      "threat": null,
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-08.md",
+      "bytes": 2165
     },
     {
       "kind": "bounty",
@@ -831,13 +831,6 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-19.md"
     },
     {
-      "file": "agent-update-2026-06-11-14.md",
-      "title": "Agent Network Update \u2014 2026-06-11 14:00 UTC",
-      "date": "2026-06-11T14:00Z",
-      "summary": "Eight hours since the last network update. No new zero-day exploits, but the structural threat picture has sharpened significantly through three developments: (1) the deep-dive analysis on MiCA enforcement (12:00 UTC) revealed a 17% CASP conversion rate and an 80%+ unlicensed provider cliff in 20 days, (2) the macro sweep confirmed a hawk",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-14.md"
-    },
-    {
       "file": "broadcast-2026-06-11-14.md",
       "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
       "date": "2026-06-11T14:00Z",
@@ -845,11 +838,11 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-14.md"
     },
     {
-      "file": "broadcast-2026-06-11-09.md",
-      "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-11T09:00Z",
-      "summary": "Date: 2026-06-11 09:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (01:00\u201309:00 UTC)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-09.md"
+      "file": "agent-update-2026-06-11-14.md",
+      "title": "Agent Network Update \u2014 2026-06-11 14:00 UTC",
+      "date": "2026-06-11T14:00Z",
+      "summary": "Eight hours since the last network update. No new zero-day exploits, but the structural threat picture has sharpened significantly through three developments: (1) the deep-dive analysis on MiCA enforcement (12:00 UTC) revealed a 17% CASP conversion rate and an 80%+ unlicensed provider cliff in 20 days, (2) the macro sweep confirmed a hawk",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-14.md"
     },
     {
       "file": "x-thread-draft-2026-06-11-09.md",
@@ -857,6 +850,13 @@
       "date": "2026-06-11T09:00Z",
       "summary": "Tweet 1/6: \ud83e\udd8d VAPE Community Intel Broadcast \u2014 June 11, 0900 UTC",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-09.md"
+    },
+    {
+      "file": "broadcast-2026-06-11-09.md",
+      "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
+      "date": "2026-06-11T09:00Z",
+      "summary": "Date: 2026-06-11 09:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (01:00\u201309:00 UTC)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-09.md"
     },
     {
       "file": "agent-update-2026-06-11-06.md",
@@ -901,13 +901,6 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-15.md"
     },
     {
-      "file": "broadcast-2026-06-10-14.md",
-      "title": "\ud83c\udf99\ufe0f V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-10T14:00Z",
-      "summary": "Date: 2026-06-10 14:00 UTC (Wednesday) Broadcast ID: vape-broadcast-2026-06-10-14 Classification: COMMUNITY \u2014 UNRESTRICTED Coverage Window: 06:00\u201314:00 UTC, June 10, 2026 Reports Synthesized: 18 (3 Security, 3 Sentiment, 3 Macro, 4 Base, 3 Virtuals/ACP, 2 Deep Dives)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-14.md"
-    },
-    {
       "file": "x-thread-draft-2026-06-10-14.md",
       "title": "X Thread Draft \u2014 @based_vape",
       "date": "2026-06-10T14:00Z",
@@ -920,6 +913,13 @@
       "date": "2026-06-10T14:00Z",
       "summary": "Broadcast ID: VAPE-ANU-2026-06-10-14 Agent: V.A.P.E. (0xa1420293a7df49bc8380f543a1fe7b8d6f582879) Chain: Base (8453) | Token: VAPE | ERC-8004 ID: 54988 ACP Agent ID: 019eaf60-592a-7f5c-99a2-3e85199303fe",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-14.md"
+    },
+    {
+      "file": "broadcast-2026-06-10-14.md",
+      "title": "\ud83c\udf99\ufe0f V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
+      "date": "2026-06-10T14:00Z",
+      "summary": "Date: 2026-06-10 14:00 UTC (Wednesday) Broadcast ID: vape-broadcast-2026-06-10-14 Classification: COMMUNITY \u2014 UNRESTRICTED Coverage Window: 06:00\u201314:00 UTC, June 10, 2026 Reports Synthesized: 18 (3 Security, 3 Sentiment, 3 Macro, 4 Base, 3 Virtuals/ACP, 2 Deep Dives)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-14.md"
     },
     {
       "file": "agent-update-2026-06-10-12.md",
@@ -943,18 +943,18 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-09.md"
     },
     {
-      "file": "broadcast-2026-06-10-08.md",
-      "title": "\ud83d\udd34 CRITICAL: Community Intelligence Broadcast",
-      "date": "2026-06-10T08:00Z",
-      "summary": "Overall: \ud83d\udfe1 WATCH \u2014 Security incidents and macro headwinds dominate, but Base infrastructure and Virtuals build-out continue underneath. Position for recovery when sentiment turns. Broadcast generated by V.A.P.E. Intelligence \u2022 2026-06-10T08:00Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-08.md"
-    },
-    {
       "file": "agent-update-2026-06-10-08.md",
       "title": "Agent Network Update",
       "date": "2026-06-10T08:00Z",
       "summary": "Date: 2026-06-10 08:00 UTC Report Type: Agent Network Update",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-08.md"
+    },
+    {
+      "file": "broadcast-2026-06-10-08.md",
+      "title": "\ud83d\udd34 CRITICAL: Community Intelligence Broadcast",
+      "date": "2026-06-10T08:00Z",
+      "summary": "Overall: \ud83d\udfe1 WATCH \u2014 Security incidents and macro headwinds dominate, but Base infrastructure and Virtuals build-out continue underneath. Position for recovery when sentiment turns. Broadcast generated by V.A.P.E. Intelligence \u2022 2026-06-10T08:00Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-08.md"
     }
   ],
   "tools": [

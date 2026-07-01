@@ -177,15 +177,21 @@ def scan_investigations():
     for fp in sorted(glob.glob(os.path.join(ROOT, "intel/investigations/*.md")), reverse=True):
         name = os.path.basename(fp)
         txt = _read(fp)
+        verdict_raw = _field(txt, "Verdict") or ""
+        vm = re.search(r"(PROCEED|CAUTION|REJECT)", verdict_raw, re.I)
+        score_raw = _field(txt, "Safety Score", "Score") or ""
+        sm = re.search(r"(\d{1,3})", score_raw)
+        target_raw = _field(txt, "Target") or ""
+        target = re.sub(r"[`*]", "", target_raw).strip()
         out.append({
             "source": "report",
             "file": name,
             "title": _first_heading(txt, name),
             "date": _field(txt, "Date", "Cycle") or _date_from_name(name),
-            "target": _field(txt, "Target"),
-            "chain": _field(txt, "Chain"),
-            "verdict": _field(txt, "Verdict"),
-            "score": _field(txt, "Score", "Safety Score"),
+            "target": target or None,
+            "chain": re.sub(r"[`*]", "", _field(txt, "Chain") or "").strip() or None,
+            "verdict": vm.group(1).upper() if vm else None,
+            "score": sm.group(1) if sm else None,
             "summary": _summary(txt),
             "url": f"{BLOB}/{_rel(fp)}",
         })

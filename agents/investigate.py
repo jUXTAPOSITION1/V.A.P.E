@@ -343,10 +343,31 @@ def update_catalog(target, sym, verdict, s, reasons, report_rel):
         f.write("\n" + row + "\n")
 
 
-def investigate(address, chain="8453", hint=""):
+def _recently_investigated(address, hours=12):
+    """Skip targets already investigated within the window (avoid re-hammering)."""
+    try:
+        cutoff = time.time() - hours * 3600
+        for fp in glob_investigations():
+            if address[:10].lower() in os.path.basename(fp).lower() and os.path.getmtime(fp) > cutoff:
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def glob_investigations():
+    import glob as _g
+    return _g.glob(os.path.join(INVEST_DIR, "*.md"))
+
+
+def investigate(address, chain="8453", hint="", force=False):
     address = address.strip()
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
+
+    if not force and _recently_investigated(address):
+        print(f"[investigate] skip {address} — investigated within last 12h")
+        return {"target": address, "skipped": "recently_investigated"}
 
     print(f"[investigate] target {address} ({hint})")
     gp = goplus_security(address, chain)
@@ -386,7 +407,7 @@ def main():
     else:
         ap.print_help(); return
 
-    result = investigate(target, args.chain, hint)
+    result = investigate(target, args.chain, hint, force=bool(args.address))
     print(json.dumps(result, indent=2))
 
 
