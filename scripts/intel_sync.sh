@@ -9,7 +9,18 @@ cd "$REPO"
 STAMP="$(date -u +%Y-%m-%d\ %H:%M) UTC"
 MSG="${1:-VAPE intel sync $STAMP}"
 
-git add intel/ skillforge/ 2>/dev/null || true
+# Deep investigation on the highest-signal live target (zero-LLM, real data).
+# Never let a recon hiccup block the sync.
+if [ -f agents/investigate.py ]; then
+  python3 agents/investigate.py --auto >/dev/null 2>&1 || echo "[intel_sync] no auto investigation this cycle"
+fi
+
+# Refresh the dashboard's machine-readable index (reports/broadcasts/tools/investigations).
+if [ -f agents/build_intel_index.py ]; then
+  python3 agents/build_intel_index.py >/dev/null 2>&1 || echo "[intel_sync] index build skipped"
+fi
+
+git add intel/ skillforge/ data/ 2>/dev/null || true
 
 if git diff --cached --quiet && [ -z "$(git log origin/main..HEAD 2>/dev/null)" ]; then
   echo "[intel_sync] no changes to commit"

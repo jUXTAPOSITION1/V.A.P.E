@@ -77,6 +77,23 @@
             </div>
         </section>
 
+        <!-- Investigation Summary (latest deep investigation + report headline) -->
+        <section class="glass rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+            <div class="absolute -top-16 -right-16 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                <h2 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-user-secret text-emerald-400"></i> Latest Investigation <span class="text-xs text-zinc-500 font-normal">· autonomous deep-recon</span></h2>
+                <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div id="inv-latest" class="rounded-2xl bg-white/5 p-5">
+                    <div class="skeleton h-28 rounded-xl"></div>
+                </div>
+                <div id="inv-report" class="rounded-2xl bg-white/5 p-5">
+                    <div class="skeleton h-28 rounded-xl"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- Reputation & Services (verifiable track record + hireable offerings) -->
         <section class="glass rounded-3xl p-6 sm:p-8 mb-8">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
@@ -198,6 +215,27 @@
             </div>
         </div>
 
+        <!-- Intel Explorer — detailed, linkable reports/broadcasts/investigations/tools -->
+        <section class="glass rounded-3xl p-6 sm:p-8 mt-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                <h2 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-folder-tree text-emerald-400"></i> Intel Explorer <span class="text-xs text-zinc-500 font-normal">· every finding linkable to source</span></h2>
+                <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs">
+                    <button data-tab="investigations" class="px-3 py-1.5 rounded-lg bg-indigo-600">Investigations <span id="c-investigations" class="opacity-60"></span></button>
+                    <button data-tab="reports" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Reports <span id="c-reports" class="opacity-60"></span></button>
+                    <button data-tab="broadcasts" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Broadcasts <span id="c-broadcasts" class="opacity-60"></span></button>
+                    <button data-tab="tools" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Tools <span id="c-tools" class="opacity-60"></span></button>
+                </div>
+            </div>
+            <div id="intel-filter-wrap" class="mb-4 hidden">
+                <div id="intel-filter" class="flex flex-wrap gap-1.5 text-[11px]"></div>
+            </div>
+            <div id="intel-body" class="space-y-2">
+                <div class="skeleton h-16 rounded-xl"></div>
+                <div class="skeleton h-16 rounded-xl"></div>
+                <div class="skeleton h-16 rounded-xl"></div>
+            </div>
+        </section>
+
         <!-- Interactive Hunt console (real GoPlus + DexScreener) -->
         <section class="glass rounded-3xl p-6 sm:p-8 mt-6">
             <h2 class="text-xl font-semibold flex items-center gap-2 mb-2"><i class="fa-solid fa-crosshairs text-emerald-400"></i> Launch Investigation</h2>
@@ -232,7 +270,7 @@
     const App = {
         async refresh() {
             document.getElementById('live-label').textContent = 'SYNCING';
-            await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports(), this.chart(this._days||30), this.reputation()]);
+            await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
             document.getElementById('live-label').textContent = 'LIVE';
             document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
         },
@@ -463,6 +501,142 @@
             }
         },
 
+        // ── Intel index: investigation summary + explorer (from data/intel-index.json)
+        _intel: null, _tab: 'investigations', _typeFilter: null,
+        _verdictColor(v){
+            v=(v||'').toUpperCase();
+            if(/REJECT|CRITICAL|HIGH|BEARISH|RISK-OFF|FEAR/.test(v)) return '#fb7185';
+            if(/CAUTION|MEDIUM|NEUTRAL/.test(v)) return '#fbbf24';
+            if(/PROCEED|LOW|ALL CLEAR|BULLISH|RISK-ON|GREED/.test(v)) return '#34d399';
+            return '#a1a1aa';
+        },
+        _pill(v){ if(!v) return ''; const c=this._verdictColor(v);
+            return `<span class="px-2 py-0.5 rounded font-display text-[11px] whitespace-nowrap" style="color:${c};background:${c}1a">${v}</span>`; },
+        _ago(iso){ if(!iso) return ''; const d=new Date(iso); if(isNaN(d)) return iso;
+            const s=(Date.now()-d)/1e3; if(s<3600) return Math.floor(s/60)+'m ago';
+            if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; },
+        _esc(t){ return (t||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); },
+
+        async intel(){
+            try{
+                if(!this._intel) this._intel = await (await fetch(`${RAW}/data/intel-index.json?t=`+Date.now())).json();
+                const d=this._intel, c=d.counts||{};
+                document.getElementById('inv-updated').textContent = 'index '+this._ago(d.generated);
+                ['investigations','reports','broadcasts','tools'].forEach(k=>{
+                    const n=document.getElementById('c-'+k); if(n) n.textContent='('+((c[k])??0)+')';
+                });
+                // hero: latest investigation
+                const inv=(d.latest_summary||{}).investigation;
+                const iel=document.getElementById('inv-latest');
+                if(inv){
+                    const verdict=inv.verdict||inv.key_finding&&'LOGGED';
+                    iel.innerHTML=`
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="text-[10px] uppercase tracking-widest text-zinc-500">Deep Investigation</div>
+                            ${this._pill(inv.verdict)}
+                        </div>
+                        <div class="font-display text-lg leading-tight mb-1">${this._esc(inv.target||inv.title||'target')}</div>
+                        ${inv.score?`<div class="text-xs text-zinc-400 mb-2">Safety score <span class="text-emerald-400 font-display">${inv.score}</span></div>`:''}
+                        <div class="text-xs text-zinc-400 leading-relaxed">${this._esc(inv.summary||inv.key_finding||'')}</div>
+                        <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
+                // hero: latest report
+                const rep=(d.latest_summary||{}).report;
+                const rel=document.getElementById('inv-report');
+                if(rep){
+                    rel.innerHTML=`
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="text-[10px] uppercase tracking-widest text-zinc-500">Latest Report · ${this._esc(rep.type||'')}</div>
+                            ${this._pill(rep.threat)}
+                        </div>
+                        <div class="font-display text-lg leading-tight mb-1">${this._esc(rep.title||rep.file)}</div>
+                        <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
+                        <div class="text-xs text-zinc-400 leading-relaxed">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
+                        <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
+                this._renderIntel();
+            }catch(e){
+                document.getElementById('intel-body').innerHTML='<div class="text-amber-400 text-sm">Intel index unavailable (regenerating next cycle).</div>';
+            }
+        },
+
+        _renderIntel(){
+            const d=this._intel; if(!d) return;
+            const body=document.getElementById('intel-body');
+            const fw=document.getElementById('intel-filter-wrap');
+            const tab=this._tab;
+            // type filter chips (reports only)
+            if(tab==='reports'){
+                const types=Object.keys(d.counts.reports_by_type||{}).sort((a,b)=>d.counts.reports_by_type[b]-d.counts.reports_by_type[a]);
+                fw.classList.remove('hidden');
+                document.getElementById('intel-filter').innerHTML=
+                    [['',' all']].concat(types.map(t=>[t,t])).map(([v,label])=>{
+                        const on=(this._typeFilter||'')===v;
+                        return `<button data-type="${v}" class="px-2 py-0.5 rounded ${on?'bg-emerald-600 text-black':'bg-white/5 hover:bg-white/10 text-zinc-300'}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
+                    }).join('');
+            } else { fw.classList.add('hidden'); }
+
+            let rows='';
+            if(tab==='investigations'){
+                const items=d.investigations||[];
+                rows=items.length?items.map(i=>`
+                    <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
+                        <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mt-1"></i>
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="font-mono text-xs truncate">${this._esc(i.target||i.title||'target')}</span>
+                                <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-emerald-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
+                            </div>
+                            <div class="text-xs text-zinc-500 mt-1">${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
+                            ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
+                        </div>
+                    </a>`).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
+            } else if(tab==='reports'){
+                let items=d.reports||[];
+                if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);
+                rows=items.slice(0,40).map(r=>`
+                    <a href="${r.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
+                        <i class="fa-solid fa-file-lines text-zinc-500 mt-1"></i>
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="font-semibold text-sm truncate">${this._esc(r.title||r.file)}</span>
+                                ${this._pill(r.threat)}
+                            </div>
+                            <div class="text-xs text-zinc-500 mt-1"><span class="text-indigo-400">${this._esc(r.type)}</span> · ${this._ago(r.date)}</div>
+                            ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc(r.summary.slice(0,200))}${r.summary.length>200?'…':''}</div>`:''}
+                        </div>
+                    </a>`).join('')||'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
+            } else if(tab==='broadcasts'){
+                const items=d.broadcasts||[];
+                rows=items.length?items.map(b=>`
+                    <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
+                        <i class="fa-solid fa-tower-broadcast text-emerald-400 mt-1"></i>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm">${this._esc(b.title||b.file)}</div>
+                            <div class="text-xs text-zinc-500 mt-1">${this._ago(b.date)}</div>
+                            ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc(b.summary.slice(0,200))}${b.summary.length>200?'…':''}</div>`:''}
+                        </div>
+                    </a>`).join(''):'<div class="text-zinc-500 text-sm">No broadcasts yet.</div>';
+            } else if(tab==='tools'){
+                const items=d.tools||[];
+                rows=items.length?items.map(t=>{
+                    const ok=t.status==='verified'; const lim=t.known_limitation;
+                    const col=ok?'#34d399':(lim?'#fbbf24':'#a1a1aa');
+                    return `<a href="${t.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
+                        <i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} mt-1" style="color:${col}"></i>
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="font-mono text-sm">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
+                                <span class="text-[11px] px-2 py-0.5 rounded" style="color:${col};background:${col}1a">${this._esc(t.status||'?')}</span>
+                            </div>
+                            <div class="text-xs text-zinc-500 mt-1"><span class="text-indigo-400">${this._esc(t.tier)}</span>${t.purpose?' · '+this._esc(t.purpose):''}</div>
+                        </div>
+                    </a>`;
+                }).join(''):'<div class="text-zinc-500 text-sm">No tools registered.</div>';
+            }
+            body.innerHTML=rows;
+        },
+
         _set(id,v){ const e=document.getElementById(id); e.classList.remove('skeleton'); e.textContent=v; }
     };
 
@@ -479,6 +653,19 @@
         });
         // Enter key launches hunt
         document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });
+        // Intel Explorer tab switching
+        document.getElementById('intel-tabs').addEventListener('click', e=>{
+            const b=e.target.closest('button[data-tab]'); if(!b) return;
+            App._tab=b.dataset.tab; App._typeFilter=null;
+            [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10');
+            b.className='px-3 py-1.5 rounded-lg bg-indigo-600';
+            App._renderIntel();
+        });
+        // Report type filter
+        document.getElementById('intel-filter').addEventListener('click', e=>{
+            const b=e.target.closest('button[data-type]'); if(!b) return;
+            App._typeFilter=b.dataset.type||null; App._renderIntel();
+        });
     });
     </script>
 </body>

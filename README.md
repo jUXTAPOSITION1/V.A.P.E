@@ -58,6 +58,7 @@ V.A.P.E. is the Virtual Ape Private Eye, a **fully autonomous AI detective engin
 - **Digital Asset Protection & Threat Intelligence** — Continuous monitoring, vulnerability feeds, CVE correlation
 - **Social & Narrative Intelligence** — X sentiment tracking, narrative shifts, coordinated attack detection
 - **Self-Improvement & Skill Generation** — Builder generates new playbooks grounded in Memory + past lessons
+- **Autonomous Deep Investigations** — every cycle VAPE auto-selects the highest-signal Base target, runs multi-source recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · hack-feed correlation), scores it 0–100, and files a verdict (🟢 PROCEED / 🟡 CAUTION / 🔴 REJECT) to Memory + the live dashboard
 
 ---
 
@@ -175,6 +176,8 @@ $ python -m skillforge.mcp --tool-releases crytic/slither
 V.A.P.E/
 ├── agents/                              # Python engine (CI + Builder)
 │   ├── run.py                          # ✅ Orchestrator (NOW with Memory grounding)
+│   ├── investigate.py                  # ✅ NEW: Deep investigation engine (auto target → verdict)
+│   ├── build_intel_index.py            # ✅ NEW: Builds data/intel-index.json for the dashboard
 │   ├── builder.py                      # ✅ NEW: Self-improving code generator
 │   ├── integration.py                  # ✅ NEW: Memory + Builder + MCP glue
 │   ├── llm.py                          # Multi-provider LLM fallback
@@ -210,6 +213,7 @@ V.A.P.E/
 │   ├── reports/                        # Timestamped sweeps (security/sentiment/base/macro)
 │   ├── scans/                          # Token safety scans
 │   ├── broadcasts/                     # Community intel
+│   ├── investigations/                 # ✅ NEW: Deep-investigation verdict reports
 │   ├── bounty-radar/                   # Active bounty tracking
 │   ├── catalog/                        # Investigation dedup
 │   └── engagements/                    # ACP job records
@@ -236,7 +240,7 @@ V.A.P.E/
 │   ├── MEMORY.md                       # Memory system usage ✅ NEW
 │   ├── BUILDER.md                      # Builder usage ✅ NEW
 │   ├── MCP.md                          # MCP integration guide ✅ NEW
-│   └── index.html                      # GitHub Pages dashboard
+│   └── index.html                      # ✅ Live dashboard (investigation hero + Intel Explorer)
 │
 ├── app.py                               # Gradio UI (HF Space)
 ├── package.json                         # Node.js deps + scripts
@@ -542,6 +546,16 @@ Every cycle compounds intelligence: past findings ground future runs.
 - [x] CLI interfaces (builder.py, mcp.py, integration.py)
 - [x] **Hardening pass** — see [changelog](#-hardening-changelog-july-2026) below
 
+### 🕵️ Deep Investigations + Live Dashboard (July 2026)
+VAPE now runs **autonomous end-to-end investigations** and publishes them to a **pro live dashboard**:
+
+| Component | What it does |
+|-----------|--------------|
+| **`agents/investigate.py`** | Deep-investigation engine (zero-LLM, real data). Auto-selects the highest-signal live Base target (violent movers / low-liquidity pools), runs GoPlus token-security + DexScreener liquidity + Base-RPC code presence + Etherscan V2 verification + recent-hack technique correlation, computes a weighted 0–100 safety score, and files a verdict report to `intel/investigations/`, logs a `finding` to Memory, and appends the catalog. Run `--auto` or `--address 0x…`. |
+| **`agents/build_intel_index.py`** | Zero-LLM parser that turns every produced artifact (reports, broadcasts, investigations, catalog, tools, skills) into a machine-readable, **linkable** `data/intel-index.json` — each entry deep-links to its exact source file on GitHub. |
+| **Live dashboard** | [`juxtaposition1.github.io/V.A.P.E`](https://juxtaposition1.github.io/V.A.P.E/) now leads with a **Latest Investigation** hero (verdict + score + rationale) and an **Intel Explorer** — tabbed, filterable, fully linkable sections for Investigations / Reports (by domain) / Broadcasts / Tools. Refreshes every cycle. |
+| **Cycle wiring** | Both the hourly CI (`bounty-cycle.yml`) and the local 4h sweep (`scripts/intel_sync.sh`) now run the investigation + rebuild the index before committing — so the site stays current with zero extra compute. |
+
 ### 🔧 Hardening Changelog (July 2026)
 The skeleton was reviewed end-to-end and filled into a robust, runnable system:
 
@@ -559,6 +573,7 @@ The skeleton was reviewed end-to-end and filled into a robust, runnable system:
 ### 🟡 Next (Planned)
 - [ ] Expand Builder to generate skill playbooks (sc-static, ai-redteam, recon)
 - [ ] Connect Node agent to Memory + Builder
+- [x] **Live dashboard with investigation summary + linkable intel explorer** ✅
 - [ ] Enhance UI with Memory browser + Builder dashboard
 - [ ] MCP: Integrate real X API v2 (vs. mock data for MVP)
 - [ ] MCP: Connect to more tool registries (npm, crates.io, etc.)
@@ -568,8 +583,8 @@ The skeleton was reviewed end-to-end and filled into a robust, runnable system:
 - `wallet_trace` account endpoints need a paid Etherscan V2 plan on Base — use keyless
   `base_rpc` (balance/nonce) and `contract_recon` (verified source) instead.
 - Social MCP sentiment is an MVP aggregate pending a live X API v2 / partner feed.
-- Node agent investigation loop is local-only (not yet wired into CI).
-- UI is status-level (ready for the planned Memory browser + Builder dashboard).
+- Node agent narrative sweeps are local (4h cron); the **investigation engine now runs in both CI and the local sweep**.
+- Etherscan V2 verification in investigations is best-effort — it activates only when `ETHERSCAN_API_KEY` is set; otherwise all other recon (GoPlus/DexScreener/Base RPC/hack-feed) still runs keyless.
 
 ---
 

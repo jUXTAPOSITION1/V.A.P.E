@@ -27,13 +27,20 @@ jobs:
         run: python agents/run.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      - name: Deep Investigation (auto target)
+        run: python agents/investigate.py --auto || echo "no auto target this cycle"
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      - name: Build Intel Index (site data)
+        run: python agents/build_intel_index.py
       - name: Commit Reports
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # run.py now also appends grounded findings to Memory; stage both so
-          # the rebase has a clean tree (findings.jsonl is tracked).
-          git add reports/ skillforge/memory/ || true
+          # run.py appends grounded findings to Memory; investigate.py writes
+          # investigations + catalog + findings; build_intel_index.py refreshes
+          # data/intel-index.json for the dashboard. Stage all so the tree is clean.
+          git add reports/ skillforge/memory/ intel/ data/ || true
           git commit -m "Auto-generated bounty report $(date)" || { echo "No new reports"; exit 0; }
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
