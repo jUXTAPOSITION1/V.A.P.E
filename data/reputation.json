@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-01T10:50:07Z",
+  "generated": "2026-07-01T13:41:32Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,21 +12,21 @@
     "verify_identity": "https://app.virtuals.io/virtuals/54988"
   },
   "verifiable_activity": {
-    "reports_published": 253,
-    "intel_reports": 135,
-    "intel_broadcasts": 25,
+    "reports_published": 255,
+    "intel_reports": 139,
+    "intel_broadcasts": 26,
     "catalog_investigations": 42,
     "token_scans_logged": 0,
     "skills_codified": 4,
     "tools_total": 14,
-    "tools_verified": 13,
+    "tools_verified": 12,
     "tool_tiers": {
       "static": 3,
       "fuzzing": 2,
       "ai-redteam": 3,
       "recon": 6
     },
-    "work_log_entries": 44,
+    "work_log_entries": 46,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260623",
     "latest_report": "20260701"
