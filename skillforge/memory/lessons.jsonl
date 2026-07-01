@@ -41,3 +41,4 @@
 {"ts": "2026-06-30T18:24:46Z", "action": "toolcheck", "outcome": "12/14 verified", "bounty_usd": 0, "note": "2 broken"}
 {"ts": "2026-06-30T22:05:50Z", "action": "toolcheck", "outcome": "12/14 verified", "bounty_usd": 0, "note": "2 broken"}
 {"ts": "2026-07-01T05:12:57Z", "action": "toolcheck", "outcome": "12/14 verified", "bounty_usd": 0, "note": "2 broken"}
+{"ts":"2026-07-01T08:02:00Z","action":"intel-cycle-08","outcome":"6 reports (macro incl, hr08) + broadcast written; hack_feed.sh promoted untested->verified after clean 'latest 8' + 'since 2026-06-25' runs","bounty_usd":0,"note":"web_search (Gemini) live and rich this cycle - no freshness= filter passed (avoids nano-granularity 400). All recon wrappers already registered so no new mirror needed; only promoted hack_feed status. market_data/base_rpc/hack_feed all returned live data first try. Corroborated DeFiLlama /hacks against The Defiant Q2 recap (~88 hacks/$780M). VAPE wallet still dormant."}

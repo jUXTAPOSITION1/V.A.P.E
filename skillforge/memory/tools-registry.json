@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-07-01T05:12:57Z",
+  "updated": "2026-07-01T08:02:00Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -201,9 +201,9 @@
         "version_cmd": "hack_feed.sh latest 1",
         "wrapper": "tools/recon/hack_feed.sh",
         "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
-        "status": "broken",
-        "last_verified": "2026-07-01T05:12:57Z",
-        "version": "2026-06-21 Taiko Bridge 1.7 M",
+        "status": "verified",
+        "last_verified": "2026-07-01T08:02:00Z",
+        "version": "2026-06-30 Edel 0.4 M ['Ethereum'] Flashloan Price Oracle Attack",
         "latest_release": "n/a"
       }
     ]
