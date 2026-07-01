@@ -33,6 +33,8 @@ jobs:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py
+      - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
+        run: python -m skillforge.memory.index_db build || echo "memory index skipped"
       - name: Commit Reports
         run: |
           git config user.name "VAPE Bot"

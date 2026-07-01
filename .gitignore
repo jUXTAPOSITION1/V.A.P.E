@@ -22,3 +22,7 @@ npm-debug.log*
 data/cache/
 __pycache__/
 *.pyc
+
+# Derived SQLite memory index (rebuildable from JSONL; not source of truth)
+data/memory.db
+data/memory.db-*

@@ -178,6 +178,7 @@ V.A.P.E/
 │   ├── run.py                          # ✅ Orchestrator (NOW with Memory grounding)
 │   ├── investigate.py                  # ✅ NEW: Deep investigation engine (auto target → verdict)
 │   ├── build_intel_index.py            # ✅ NEW: Builds data/intel-index.json for the dashboard
+│   └── (standard MCP server lives in mcp_servers/vape_mcp.py)
 │   ├── builder.py                      # ✅ NEW: Self-improving code generator
 │   ├── integration.py                  # ✅ NEW: Memory + Builder + MCP glue
 │   ├── llm.py                          # Multi-provider LLM fallback
@@ -555,6 +556,14 @@ VAPE now runs **autonomous end-to-end investigations** and publishes them to a *
 | **`agents/build_intel_index.py`** | Zero-LLM parser that turns every produced artifact (reports, broadcasts, investigations, catalog, tools, skills) into a machine-readable, **linkable** `data/intel-index.json` — each entry deep-links to its exact source file on GitHub. |
 | **Live dashboard** | [`juxtaposition1.github.io/V.A.P.E`](https://juxtaposition1.github.io/V.A.P.E/) now leads with a **Latest Investigation** hero (verdict + score + rationale) and an **Intel Explorer** — tabbed, filterable, fully linkable sections for Investigations / Reports (by domain) / Broadcasts / Tools. Refreshes every cycle. |
 | **Cycle wiring** | Both the hourly CI (`bounty-cycle.yml`) and the local 4h sweep (`scripts/intel_sync.sh`) now run the investigation + rebuild the index before committing — so the site stays current with zero extra compute. |
+
+### 🔌 Standard MCP Server + Queryable Memory (July 2026)
+V.A.P.E. now speaks the **industry-standard Model Context Protocol** and has a **queryable memory index** — both **zero new dependencies** (pure stdlib), so they stay compute-free and Termux/Android-friendly. See [docs/MCP_SERVER.md](docs/MCP_SERVER.md).
+
+| Component | What it does |
+|-----------|--------------|
+| **`mcp_servers/vape_mcp.py`** | A standard MCP server (JSON-RPC 2.0 over stdio, protocol `2024-11-05`) exposing VAPE's **real** capabilities as discoverable tools — `investigate_token`, `scan_token_safety`, `recent_hacks`, `fear_greed`, `memory_search`, `memory_stats` — plus `vape://reputation` and `vape://intel-index` resources. Any MCP host (Claude, Cursor, VS Code, custom agents) can discover and call them. Read-only / keyless-first. Smoke-test: `python mcp_servers/vape_mcp.py --selftest`. |
+| **`skillforge/memory/index_db.py`** | Projects the append-only JSONL memory into a **stdlib-SQLite** index (FTS5 full-text when available) so agents can ask real questions ("high-confidence Base findings in the last 30 days"). JSONL stays the source of truth; the `.db` is derived, gitignored, and rebuilt each cycle. |
 
 ### 🔧 Hardening Changelog (July 2026)
 The skeleton was reviewed end-to-end and filled into a robust, runnable system:
