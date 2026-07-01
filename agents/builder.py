@@ -68,54 +68,66 @@ logger = logging.getLogger("VAPE.Builder")
 # Security Validation
 # ============================================================================
 
-UNSAFE_PATTERNS = [
-    "import os",  # Unrestricted OS access
-    "subprocess.run",  # Shell execution
-    "eval(",  # Code execution
-    "exec(",  # Code execution
-    "__import__",  # Dynamic imports
-    "open(",  # Unrestricted file I/O
-    "requests.get",  # Unrestricted HTTP (must use keyless APIs)
-    "json.loads",  # Only after validation
+# HARD BLOCK: genuinely dangerous constructs. If any appear, the generated
+# code is rejected outright (arbitrary code exec, shell exec, unsafe deser).
+BLOCK_PATTERNS = [
+    "eval(",            # arbitrary code execution
+    "exec(",            # arbitrary code execution
+    "__import__",       # dynamic import evasion
+    "os.system(",       # shell execution
+    "os.popen(",        # shell execution
+    "subprocess.call(", # shell execution (shell=True risk)
+    "subprocess.Popen(",
+    "subprocess.run(",
+    "pickle.load",      # unsafe deserialization
+    "pickle.loads",
+    "marshal.load",
+    "yaml.load(",       # unsafe unless SafeLoader
+    "shell=True",       # command injection surface
 ]
 
-RESTRICTED_MODULES = [
-    "os.system",
-    "subprocess",
-    "pickle",
-    "marshal",
+# SOFT WARN: common, legitimate patterns that merely deserve a reviewer's eye.
+# These do NOT block; they are recorded and lower the stored confidence.
+WARN_PATTERNS = [
+    "open(",            # file I/O — fine, but note write scope
+    "requests.",       # network — prefer keyless/rate-limited endpoints
+    "urllib.request",   # network
+    "import os",        # env/path use — usually benign
+    "sys.argv",         # CLI input — ensure validation
+    "input(",           # interactive input — ensure validation
 ]
 
 
 def validate_security(code: str, task: str) -> Tuple[bool, List[str]]:
     """
     Validate generated code for security issues.
-    
+
+    Two tiers:
+      - BLOCK_PATTERNS  -> hard reject (is_safe=False)
+      - WARN_PATTERNS   -> advisory only (is_safe stays True, warnings recorded)
+
     Returns:
-        (is_safe, list_of_warnings)
+        (is_safe, list_of_warnings)  # warnings may be present even when safe
     """
-    warnings = []
-    
-    # Check for unsafe patterns
-    for pattern in UNSAFE_PATTERNS:
+    warnings: List[str] = []
+    blocked = False
+
+    for pattern in BLOCK_PATTERNS:
         if pattern in code:
-            warnings.append(f"Unsafe pattern detected: {pattern}")
-    
-    # Check for restricted modules
-    for module in RESTRICTED_MODULES:
-        if module in code:
-            warnings.append(f"Restricted module: {module}")
-    
-    # Check for unvalidated user input usage
-    if "sys.argv" in code or "input(" in code:
-        warnings.append("Unvalidated user input usage")
-    
-    # Task-specific restrictions
-    if "delete" in task.lower() or "remove" in task.lower():
-        if "os.remove" in code or "shutil" in code:
-            warnings.append("Destructive operation without confirmation gates")
-    
-    is_safe = len(warnings) == 0
+            warnings.append(f"BLOCKED: dangerous construct '{pattern}'")
+            blocked = True
+
+    for pattern in WARN_PATTERNS:
+        if pattern in code:
+            warnings.append(f"review: '{pattern}' present (advisory)")
+
+    # Task-specific: destructive file ops need explicit confirmation gates.
+    if ("delete" in task.lower() or "remove" in task.lower()):
+        if "os.remove" in code or "shutil.rmtree" in code:
+            warnings.append("BLOCKED: destructive fs op without confirmation gate")
+            blocked = True
+
+    is_safe = not blocked
     return is_safe, warnings
 
 
@@ -285,12 +297,12 @@ class Builder:
         # Security review
         if review:
             is_safe, warnings = validate_security(code, task)
+            if warnings:
+                logger.warning("Security review notes:\n" + "\n".join(warnings))
             if not is_safe:
-                logger.warning(f"Security review found issues:\n" + "\n".join(warnings))
-                if any("Unsafe pattern" in w for w in warnings):
-                    logger.error("Code contains unsafe patterns. Rejecting.")
-                    return "", {}
-                # Other warnings are recorded but code may proceed
+                logger.error("Code contains BLOCKED constructs. Rejecting generation.")
+                return "", {}
+            # Advisory (non-blocking) warnings are recorded in metadata below.
         
         # Generate metadata for Memory append
         metadata = self._extract_metadata(task, response, is_safe if review else True)

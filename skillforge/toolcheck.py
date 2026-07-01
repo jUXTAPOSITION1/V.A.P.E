@@ -34,6 +34,13 @@ def main():
         for t in tools:
             total += 1
             name = t["name"]
+            # Tools with a documented upstream limitation (e.g. paid-only API
+            # endpoints) are not code breakages; skip probing and don't flag.
+            if t.get("known_limitation"):
+                t["status"] = "unsupported"
+                t["last_verified"] = now()
+                print(f"[toolcheck] {name}: known upstream limitation (skipped, not broken)", flush=True)
+                continue
             print(f"[toolcheck] {name}: installing...", flush=True)
             sh(t["install"], timeout=600)  # best-effort install (cached across runs)
             # version probe = smoke test

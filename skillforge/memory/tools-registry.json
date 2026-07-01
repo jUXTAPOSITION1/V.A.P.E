@@ -172,11 +172,12 @@
         "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
         "wrapper": "tools/recon/wallet_trace.sh",
         "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
-        "status": "broken",
+        "status": "unsupported",
         "last_verified": "2026-07-01T15:26:44Z",
-        "version": "no data: NOTOK Free API access is not supported for this chain. Please upgrade y",
+        "version": "n/a (Etherscan V2 account endpoints require paid plan on Base)",
         "requires_key": "ETHERSCAN_API_KEY",
-        "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan. contract_recon's getsourcecode works on free."
+        "known_limitation": true,
+        "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan on Base. This is an upstream plan limit, not a code breakage. Keyless alternative: base_rpc for balance/nonce; contract_recon's getsourcecode works on free tier."
       },
       {
         "name": "contract_recon",
@@ -198,10 +199,10 @@
         "lang": "bash",
         "install": "none (curl + python3 stdlib)",
         "invoke": "hack_feed.sh latest [N] | since YYYY-MM-DD | chain <Chain>",
-        "version_cmd": "hack_feed.sh latest 1",
+        "version_cmd": "bash skillforge/tools/recon/hack_feed.sh latest 1",
         "wrapper": "tools/recon/hack_feed.sh",
         "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
-        "status": "broken",
+        "status": "verified",
         "last_verified": "2026-07-01T15:26:45Z",
         "version": "2026-06-30 Edel 0.4 M ['Ethereum'] Flashloan Price Oracle Attack",
         "latest_release": "n/a"

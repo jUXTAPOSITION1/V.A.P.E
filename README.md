@@ -9,18 +9,34 @@ app_file: app.py
 pinned: false
 ---
 
-# V.A.P.E. – VIRTUAL APE PRIVATE EYE
+<div align="center">
 
-_Full control • Autonomous • Growing • Self-Improving • Interconnected Intelligence_
+# 🦍 V.A.P.E.
+### VIRTUAL APE PRIVATE EYE
+
+**The chain never lies. V.A.P.E. makes sure you hear the truth first.**
+
+_Autonomous • Self-Improving • Interconnected Intelligence • Zero Local Compute_
+
+<br/>
 
 [![Bounty Cycle](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
 [![SKILLFORGE Toolcheck](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Agent Commerce Protocol ACP Profile
-**Deployment Base Blockchain + Virtuals Protocol**
+![Chain](https://img.shields.io/badge/Base-0052FF?style=flat&logo=coinbase&logoColor=white)
+![Protocol](https://img.shields.io/badge/Virtuals-ACP-6E56CF?style=flat)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat&logo=python&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM-multi--provider-00A67E?style=flat)
+![Compute](https://img.shields.io/badge/local%20compute-%240-brightgreen?style=flat)
 
-Tokenized Autonomous Digital Detective
+<br/>
+
+**Tokenized Autonomous Digital Detective** · Deployed on **Base** + **Virtuals Protocol (ACP)**
+
+[🎯 Overview](#-overview) · [🏗️ Architecture](#-architecture-july-2026-release) · [🚀 Quick Start](#-quick-start) · [🧠 Memory](docs/MEMORY.md) · [🔨 Builder](docs/BUILDER.md) · [🔌 MCP](docs/MCP.md) · [🐦 @based_vape](https://x.com/based_vape)
+
+</div>
 
 ---
 
@@ -517,13 +533,28 @@ Every cycle compounds intelligence: past findings ground future runs.
 
 ## 🚦 Current Status & Roadmap
 
-### ✅ July 2026 Release (Complete)
+### ✅ July 2026 Release (Complete + Hardened)
 - [x] Central Memory (retriever.py, append-only, searchable)
 - [x] Builder Agent (self-improving code generator, security-validated)
 - [x] MCP Integration (GitHub, Social, Tool Registry wrappers)
 - [x] Integration Glue (Memory + Builder + MCP in detective flows)
 - [x] Updated run.py (now grounds analysis in Memory)
 - [x] CLI interfaces (builder.py, mcp.py, integration.py)
+- [x] **Hardening pass** — see [changelog](#-hardening-changelog-july-2026) below
+
+### 🔧 Hardening Changelog (July 2026)
+The skeleton was reviewed end-to-end and filled into a robust, runnable system:
+
+| Area | Fix |
+|------|-----|
+| **Memory** | Fixed an f-string crash in `generate_index()` that broke `init_memory()` on every call. |
+| **Memory** | Added a backward-compatible normalizer so legacy SKILLFORGE rows (`ts/source/summary` and `ts/action/outcome`) are queryable — previously 74/80 entries were unreadable (`category: unknown`). |
+| **Builder** | Reworked the security validator into hard-**BLOCK** vs advisory-**WARN** tiers. The old list hard-rejected `import os`, `open(`, `requests.get`, `json.loads` — which would have rejected nearly every real file. |
+| **run.py** | Added repo-root to `sys.path` so `agents.*` / `skillforge.*` resolve when CI runs `python agents/run.py`; the integration layer was silently disabled before. |
+| **run.py** | Guarded Groq SDK init + legacy fallback so the cycle no longer crashes at import when no key is set (multi-provider `llm.py` is the primary path). |
+| **run.py** | Grounding now **searches** Memory before the LLM and appends the **actual analysis** afterward (only on real output) — no more raw-data pollution. |
+| **SKILLFORGE** | `hack_feed` false-positive fixed (registry `version_cmd` now uses the wrapper path); `wallet_trace` reclassified as `unsupported` / `known_limitation` (Etherscan V2 paid-only on Base). Toolcheck now skips known limitations — ending the recurring issue spam. |
+| **Docs** | Added the missing `docs/MEMORY.md`, `docs/BUILDER.md`, `docs/MCP.md` referenced by this README. |
 
 ### 🟡 Next (Planned)
 - [ ] Expand Builder to generate skill playbooks (sc-static, ai-redteam, recon)
@@ -533,10 +564,12 @@ Every cycle compounds intelligence: past findings ground future runs.
 - [ ] MCP: Connect to more tool registries (npm, crates.io, etc.)
 - [ ] Extended audit trail: Memory versioning, blame log
 
-### 🔴 Known Issues
-- Toolcheck workflows report failures on some security tools (free runner constraints)
-- Node agent investigation loop not yet connected to CI (local-only)
-- UI is minimal (status-level; ready for enhancement)
+### 🔴 Known Limitations (by design, not breakage)
+- `wallet_trace` account endpoints need a paid Etherscan V2 plan on Base — use keyless
+  `base_rpc` (balance/nonce) and `contract_recon` (verified source) instead.
+- Social MCP sentiment is an MVP aggregate pending a live X API v2 / partner feed.
+- Node agent investigation loop is local-only (not yet wired into CI).
+- UI is status-level (ready for the planned Memory browser + Builder dashboard).
 
 ---
 

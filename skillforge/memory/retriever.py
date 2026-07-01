@@ -171,6 +171,97 @@ def append_to_memory(
         return {}
 
 
+# ============================================================================
+# Backward-compatible loading
+# ============================================================================
+#
+# Older SKILLFORGE workflows (harvest.py, toolcheck.py, intel-cycle) write
+# entries in a legacy schema:
+#   findings.jsonl:  {ts, source, severity, target, summary, ref}
+#   lessons.jsonl:   {ts, action, outcome, bounty_usd, note}
+# The new brain uses {id, category, title, content, source, tags, confidence,
+# timestamp, metadata}. We normalize legacy rows on read so the entire memory
+# corpus is queryable without rewriting history or breaking the live workflows.
+
+_MEMORY_FILES = {
+    "finding": FINDINGS_FILE,
+    "lesson": LESSONS_FILE,
+    "skill": SKILLS_FILE,
+    "social_event": SOCIAL_EVENTS_FILE,
+}
+
+
+def _normalize_entry(entry: Dict[str, Any], default_category: str) -> Dict[str, Any]:
+    """Coerce a raw row (new or legacy schema) into the canonical entry shape."""
+    # Already new schema
+    if "category" in entry and ("title" in entry or "content" in entry):
+        entry.setdefault("timestamp", entry.get("ts", ""))
+        entry.setdefault("confidence", 0.7)
+        entry.setdefault("tags", [])
+        entry.setdefault("source", "unknown")
+        return entry
+
+    # Legacy finding: {ts, source, severity, target, summary, ref}
+    if "summary" in entry:
+        sev = str(entry.get("severity", "INFO")).upper()
+        conf = {"CRITICAL": 0.95, "HIGH": 0.9, "MEDIUM": 0.8,
+                "LOW": 0.6, "INFO": 0.6}.get(sev, 0.6)
+        return {
+            "id": entry.get("ref", ""),
+            "category": default_category,
+            "title": f"{entry.get('target', 'repo')}: {entry.get('summary', '')[:120]}",
+            "content": entry.get("summary", ""),
+            "source": entry.get("source", "unknown"),
+            "tags": [t for t in [entry.get("target"), sev.lower()] if t],
+            "confidence": conf,
+            "timestamp": entry.get("ts", ""),
+            "metadata": {"severity": sev, "ref": entry.get("ref", "")},
+        }
+
+    # Legacy lesson: {ts, action, outcome, bounty_usd, note}
+    if "action" in entry or "outcome" in entry:
+        return {
+            "id": "",
+            "category": default_category,
+            "title": f"{entry.get('action', 'lesson')}: {entry.get('outcome', '')[:120]}",
+            "content": entry.get("note", entry.get("outcome", "")),
+            "source": entry.get("source", "skillforge"),
+            "tags": [t for t in [entry.get("action")] if t],
+            "confidence": 0.7,
+            "timestamp": entry.get("ts", ""),
+            "metadata": {"bounty_usd": entry.get("bounty_usd", 0)},
+        }
+
+    # Unknown shape: best-effort passthrough
+    entry.setdefault("category", default_category)
+    entry.setdefault("title", str(entry)[:120])
+    entry.setdefault("content", json.dumps(entry)[:500])
+    entry.setdefault("source", "unknown")
+    entry.setdefault("tags", [])
+    entry.setdefault("confidence", 0.5)
+    entry.setdefault("timestamp", entry.get("ts", ""))
+    return entry
+
+
+def _load_all_entries() -> List[Dict[str, Any]]:
+    """Load and normalize every entry across all memory files."""
+    all_entries: List[Dict[str, Any]] = []
+    for cat, file in _MEMORY_FILES.items():
+        if file.exists():
+            try:
+                with open(file, "r") as f:
+                    for line in f:
+                        if line.strip():
+                            try:
+                                raw = json.loads(line)
+                            except json.JSONDecodeError:
+                                continue
+                            all_entries.append(_normalize_entry(raw, cat))
+            except Exception as e:
+                logger.error(f"Error reading {file}: {e}")
+    return all_entries
+
+
 def search_memory(
     query: str,
     category: Optional[str] = None,
@@ -200,17 +291,8 @@ def search_memory(
     if days_back:
         cutoff_time = (datetime.utcnow() - timedelta(days=days_back)).isoformat()
     
-    # Merge all files and search
-    all_entries = []
-    for file in [FINDINGS_FILE, LESSONS_FILE, SKILLS_FILE, SOCIAL_EVENTS_FILE]:
-        if file.exists():
-            try:
-                with open(file, "r") as f:
-                    for line in f:
-                        if line.strip():
-                            all_entries.append(json.loads(line))
-            except Exception as e:
-                logger.error(f"Error reading {file}: {e}")
+    # Merge all files and search (normalized: new + legacy schema)
+    all_entries = _load_all_entries()
     
     # Filter and rank
     for entry in all_entries:
@@ -261,16 +343,7 @@ def get_memory_stats() -> Dict[str, Any]:
         "confidence_distribution": {"high": 0, "medium": 0, "low": 0}
     }
     
-    all_entries = []
-    for file in [FINDINGS_FILE, LESSONS_FILE, SKILLS_FILE, SOCIAL_EVENTS_FILE]:
-        if file.exists():
-            try:
-                with open(file, "r") as f:
-                    for line in f:
-                        if line.strip():
-                            all_entries.append(json.loads(line))
-            except Exception as e:
-                logger.error(f"Error reading {file}: {e}")
+    all_entries = _load_all_entries()
     
     stats["total_entries"] = len(all_entries)
     
@@ -347,21 +420,21 @@ def generate_index():
     """Generate a human-readable INDEX.md for Memory."""
     stats = get_memory_stats()
     
-    index_md = f"""# VAPE Central Memory Index
+    header = (
+        "# VAPE Central Memory Index\n\n"
+        f"**Last updated:** {stats['timestamp']}\n\n"
+        "## Overview\n\n"
+        "The Central Memory is the shared intelligence brain for V.A.P.E. All components "
+        "(Detective, Builder, Social tools, Self-improvement) query and append to Memory, "
+        "creating a compounding intelligence loop.\n\n"
+        "## Statistics\n\n"
+        f"- **Total entries:** {stats['total_entries']}\n"
+        f"- **By category:** {stats['by_category']}\n"
+        f"- **By source:** {stats['by_source']}\n"
+        f"- **Confidence distribution:** {stats['confidence_distribution']}\n"
+    )
 
-**Last updated:** {stats['timestamp']}
-
-## Overview
-
-The Central Memory is the shared intelligence brain for V.A.P.E. All components (Detective, Builder, Social tools, Self-improvement) query and append to Memory, creating a compounding intelligence loop.
-
-## Statistics
-
-- **Total entries:** {stats['total_entries']}
-- **By category:** {stats['by_category']}
-- **By source:** {stats['by_source']}
-- **Confidence distribution:** {stats['confidence_distribution']}
-
+    body = r"""
 ## Usage
 
 ### Append a Finding (Security discovery, anomaly, pattern)
@@ -464,7 +537,8 @@ print(f"Total memory entries: {stats['total_entries']}")
 
 *Memory is the backbone of V.A.P.E.'s compounding intelligence. Every successful pattern, every threat discovered, every lesson learned, is permanently recorded and available to all future runs.*
 """
-    
+
+    index_md = header + body
     with open(INDEX_FILE, "w") as f:
         f.write(index_md)
     logger.info("Generated INDEX.md")
