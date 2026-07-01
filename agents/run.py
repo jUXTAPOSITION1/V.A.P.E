@@ -131,7 +131,9 @@ You MUST output these sections as Markdown (omit a section only if it truly has 
 data, and say so):
 
 ## 🔍 Executive Summary
-3-5 punchy bullets: the single most important thing this cycle, what changed, net risk posture.
+3-5 punchy bullets. Bullet 1 MUST state what CHANGED vs your last reports (the delta,
+not the level). Then the single most important development this cycle and the net risk
+posture (RISK-ON / NEUTRAL / RISK-OFF). Do not just restate raw numbers here.
 
 ## 🛡️ Security & Exploits
 Analyze the DeFi hack feed. Newest incidents, techniques, $ lost, which chains. Are any

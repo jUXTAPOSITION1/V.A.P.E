@@ -335,24 +335,33 @@ def get_base_fees():
 
 # ── 9. Biggest 24h movers on Base (keyless, DexScreener) ──────────────────────
 def get_base_movers(limit=6):
-    """Notable Base tokens by 24h price change + volume via DexScreener search. Keyless."""
-    d = _get("https://api.dexscreener.com/latest/dex/search?q=base",
-             ttl=600, cache_key="dex_base_search")
-    pairs = d.get("pairs", []) if isinstance(d, dict) else []
-    base_pairs = [p for p in pairs if str(p.get("chainId", "")).lower() == "base"
-                  and isinstance((p.get("volume") or {}).get("h24"), (int, float))
-                  and (p.get("volume") or {}).get("h24", 0) > 5000]
-    base_pairs.sort(key=lambda p: (p.get("volume") or {}).get("h24", 0), reverse=True)
-    movers = []
-    for p in base_pairs[:limit]:
-        movers.append({
-            "symbol": (p.get("baseToken") or {}).get("symbol"),
-            "price_usd": p.get("priceUsd"),
-            "change_24h_pct": (p.get("priceChange") or {}).get("h24"),
-            "vol_24h_usd": (p.get("volume") or {}).get("h24"),
-            "liquidity_usd": (p.get("liquidity") or {}).get("usd"),
-        })
-    return {"ts": _now_iso(), "movers": movers}
+    """Most active Base pools by 24h volume + biggest movers, via GeckoTerminal.
+    Keyless, reliable volume/price data. Surfaces both high-volume venues and
+    violent movers for the investigations vertical."""
+    d = _get("https://api.geckoterminal.com/api/v2/networks/base/pools?page=1",
+             ttl=600, cache_key="gt_base_pools")
+    pools = d.get("data", []) if isinstance(d, dict) else []
+    rows = []
+    for p in pools:
+        a = p.get("attributes", {}) if isinstance(p, dict) else {}
+        vol = (a.get("volume_usd") or {}).get("h24")
+        chg = (a.get("price_change_percentage") or {}).get("h24")
+        try:
+            vol = float(vol) if vol is not None else 0.0
+        except Exception:
+            vol = 0.0
+        try:
+            chg = float(chg) if chg is not None else None
+        except Exception:
+            chg = None
+        rows.append({"name": a.get("name"), "price_usd": a.get("base_token_price_usd"),
+                     "change_24h_pct": chg, "vol_24h_usd": round(vol),
+                     "reserve_usd": a.get("reserve_in_usd")})
+    # top by volume (venues), then flag biggest absolute movers among them
+    by_vol = sorted(rows, key=lambda r: r["vol_24h_usd"], reverse=True)[:limit]
+    movers = sorted([r for r in rows if isinstance(r["change_24h_pct"], (int, float))],
+                    key=lambda r: abs(r["change_24h_pct"]), reverse=True)[:limit]
+    return {"ts": _now_iso(), "top_by_volume": by_vol, "biggest_movers": movers}
 
 
 # ── orchestrator: one grounded-context blob for the LLM ───────────────────────
@@ -397,10 +406,10 @@ def build_market_context():
         if isinstance(fng.get("value"), int) and (fng["value"] <= 20 or fng["value"] >= 80):
             anomalies.append(f"Macro: F&G {fng['value']} ({fng['classification']}) — sentiment extreme")
         # movers: violent Base token moves
-        for m in (movers.get("movers") or [])[:3]:
+        for m in (movers.get("biggest_movers") or [])[:3]:
             ch = m.get("change_24h_pct")
-            if isinstance(ch, (int, float)) and abs(ch) >= 50:
-                anomalies.append(f"Base mover: {m.get('symbol')} {ch:+.0f}% 24h (liq ${m.get('liquidity_usd')}) — volatility/rug watch")
+            if isinstance(ch, (int, float)) and abs(ch) >= 25:
+                anomalies.append(f"Base mover: {m.get('name')} {ch:+.0f}% 24h (liq ${m.get('reserve_usd')}) — volatility/rug watch")
     except Exception:
         pass
 
