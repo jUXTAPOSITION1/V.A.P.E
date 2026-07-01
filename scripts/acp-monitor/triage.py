@@ -17,11 +17,19 @@ STATE = os.path.join(DIR, "state.json")
 QUEUE = os.path.join(DIR, "action-queue.jsonl")  # actionable items for the handler
 
 # Provider-side phases that need OUR action (we are selling services).
+# NOTE: the lightweight listener emits short status phases ("open", "funded",
+# "request", ...) as well as full "job.created"/"job.funded" system events.
+# Map BOTH so a job is never silently dropped (bug: "open" jobs like exploit_check
+# 64403 were classified action=None and never queued -> expired unfulfilled).
 ACTION_PHASES = {
     "job.created": "set-budget",     # price the job
     "job.funded": "submit",          # do the work + deliver
     "request": "set-budget",
     "transaction": "submit",
+    "open": "set-budget",            # lightweight phase for a newly created job
+    "created": "set-budget",
+    "funded": "submit",             # lightweight phase for a funded job
+    "negotiation": "set-budget",
 }
 
 def now(): return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

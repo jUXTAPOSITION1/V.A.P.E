@@ -117,7 +117,58 @@ def offering_of(item):
             for k in ("offering", "type", "service"):
                 if req.get(k) in PRICE:
                     return req[k]
+    # Fallback: ACP job events don't carry the offering name inline — it lives in
+    # the on-chain job `description` (set to offering.name at creation). Resolve it
+    # from job history so single-offering jobs (e.g. exploit_check 64403) settle
+    # instead of being dropped/escalated.
+    jid = str(item.get("jobId") or (ev.get("onChainJobId") if isinstance(ev, dict) else "") or "")
+    chain = 8453
+    if isinstance(ev, dict):
+        chain = ev.get("chainId") or ev.get("chain_id") or (e.get("chainId") if isinstance(e, dict) else None) or 8453
+    if jid:
+        name = _offering_from_history(jid, chain)
+        if name:
+            return name
     return None
+
+
+_HIST_CACHE = {}
+
+
+def _offering_from_history(jid, chain=8453):
+    """Look up a job's offering name from its on-chain description via ACP history.
+    Cached per job. Best-effort and network-guarded — never raises."""
+    if jid in _HIST_CACHE:
+        return _HIST_CACHE[jid]
+    name = None
+    try:
+        p = subprocess.run(
+            ["acp", "job", "history", "--job-id", str(jid),
+             "--chain-id", str(chain), "--json"],
+            cwd=WS, capture_output=True, text=True, timeout=30)
+        if p.returncode == 0 and p.stdout.strip():
+            d = json.loads(p.stdout)
+            blob = json.dumps(d)
+            # direct description field
+            for entry in d.get("entries", []):
+                ev = entry.get("event", {})
+                for k in ("description", "offering", "serviceName", "packageName"):
+                    v = ev.get(k) or entry.get(k)
+                    if v and str(v) in PRICE:
+                        name = str(v)
+                        break
+                if name:
+                    break
+            # else scan the whole blob for any known offering token
+            if not name:
+                for cand in PRICE:
+                    if cand in blob:
+                        name = cand
+                        break
+    except Exception:
+        pass
+    _HIST_CACHE[jid] = name
+    return name
 
 
 def requirement_of(item):
