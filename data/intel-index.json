@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-02T04:58:36Z",
+  "generated": "2026-07-02T08:18:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 280,
+    "reports": 281,
     "reports_by_type": {
-      "bounty": 137,
+      "bounty": 138,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 9,
+    "investigations": 11,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,29 +26,41 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260702-045836-0x7C797DA3.md",
+      "file": "investigation-20260702-081829-0x7CfA2a05.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
-      "date": "2026-07-02T04:58:36Z",
-      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
+      "date": "2026-07-02T08:18:29Z",
+      "target": "0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07",
       "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "78",
-      "summary": "- Target: 0x7C797DA3704b6F682917005b01C89710Ec17db07 - Chain: 8453 (Base) - Date: 2026-07-02T04:58:36Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
+      "verdict": "CAUTION",
+      "score": "68",
+      "summary": "- Target: 0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07 - Chain: 8453 (Base) - Date: 2026-07-02T08:18:29Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-081829-0x7CfA2a05.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260702_045826.md",
+      "file": "bounty_report_20260702_081820.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T04:58:26Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: Morpho Blue's TVL increased by 1.93% in the last 24 hours, continuing its growth trend, while the total fees on Base chain surged by 32.92% in the last 24 hours, indicating heightened activity. The most significant development this cycle is the 4.1% increase in Virtual's price, suggesting growing interest in the Virtual ecos",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_045826.md",
-      "bytes": 13361
+      "date": "2026-07-02T08:18:20Z",
+      "threat": "NEUTRAL",
+      "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, indicating heightened activity, while Morpho Blue's TVL increased by 1.83% in the same period, continuing its growth trend. The most significant development this cycle is the 4.97% increase in Virtual's price, suggesting a growing interest in the Virtuals ec",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_081820.md",
+      "bytes": 13944
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260702-081829-0x7CfA2a05.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
+      "date": "2026-07-02T08:18:29Z",
+      "target": "0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "68",
+      "summary": "- Target: 0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07 - Chain: 8453 (Base) - Date: 2026-07-02T08:18:29Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-081829-0x7CfA2a05.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260702-045836-0x7C797DA3.md",
@@ -146,9 +158,30 @@
       "verdict": "PROCEED (78/100)",
       "key_finding": "Low liquidity $23,118",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-02",
+      "job_id": "auto",
+      "target": "0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07 (OpenAI)",
+      "offering": "deep_investigation",
+      "verdict": "CAUTION (68/100)",
+      "key_finding": "Low liquidity $21,135",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260702_081820.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-02T08:18:20Z",
+      "threat": "NEUTRAL",
+      "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, indicating heightened activity, while Morpho Blue's TVL increased by 1.83% in the same period, continuing its growth trend. The most significant development this cycle is the 4.97% increase in Virtual's price, suggesting a growing interest in the Virtuals ec",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_081820.md",
+      "bytes": 13944
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -797,17 +830,6 @@
       "summary": "Based on the provided data, here are the key findings:",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260626_221540.md",
       "bytes": 5770
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260626_204751.md",
-      "title": "VAPE Report - 20260626_204751",
-      "date": "2026-06-26T20:47:51Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260626_204751.md",
-      "bytes": 5408
     }
   ],
   "broadcasts": [
