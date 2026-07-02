@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-02T00:09:13Z",
+  "generated": "2026-07-02T04:58:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 279,
+    "reports": 280,
     "reports_by_type": {
-      "bounty": 136,
+      "bounty": 137,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 7,
+    "investigations": 9,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,29 +26,41 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260702-000913-0x43D6e8F4.md",
+      "file": "investigation-20260702-045836-0x7C797DA3.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
-      "date": "2026-07-02T00:09:13Z",
-      "target": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
+      "date": "2026-07-02T04:58:36Z",
+      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "78",
-      "summary": "- Target: 0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07 - Chain: 8453 (Base) - Date: 2026-07-02T00:09:13Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-000913-0x43D6e8F4.md"
+      "summary": "- Target: 0x7C797DA3704b6F682917005b01C89710Ec17db07 - Chain: 8453 (Base) - Date: 2026-07-02T04:58:36Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260702_000906.md",
+      "file": "bounty_report_20260702_045826.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T00:09:06Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: Morpho Blue's TVL increased by 2.615% in the last 24 hours, surpassing its previous growth, and indicating a continued shift in user activity towards this lending protocol. The most significant development this cycle is the 3.74% increase in Virtual's price, suggesting a growing interest in the Virtual ecosystem. The net ris",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_000906.md",
-      "bytes": 13591
+      "date": "2026-07-02T04:58:26Z",
+      "threat": "RISK-ON",
+      "summary": "What changed: Morpho Blue's TVL increased by 1.93% in the last 24 hours, continuing its growth trend, while the total fees on Base chain surged by 32.92% in the last 24 hours, indicating heightened activity. The most significant development this cycle is the 4.1% increase in Virtual's price, suggesting growing interest in the Virtual ecos",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_045826.md",
+      "bytes": 13361
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260702-045836-0x7C797DA3.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
+      "date": "2026-07-02T04:58:36Z",
+      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "78",
+      "summary": "- Target: 0x7C797DA3704b6F682917005b01C89710Ec17db07 - Chain: 8453 (Base) - Date: 2026-07-02T04:58:36Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260702-000913-0x43D6e8F4.md",
@@ -124,9 +136,30 @@
       "verdict": "PROCEED (78/100)",
       "key_finding": "Violent 24h move +99949% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-02",
+      "job_id": "auto",
+      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07 (OpenAI)",
+      "offering": "deep_investigation",
+      "verdict": "PROCEED (78/100)",
+      "key_finding": "Low liquidity $23,118",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260702_045826.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-02T04:58:26Z",
+      "threat": "RISK-ON",
+      "summary": "What changed: Morpho Blue's TVL increased by 1.93% in the last 24 hours, continuing its growth trend, while the total fees on Base chain surged by 32.92% in the last 24 hours, indicating heightened activity. The most significant development this cycle is the 4.1% increase in Virtual's price, suggesting growing interest in the Virtual ecos",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_045826.md",
+      "bytes": 13361
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -775,17 +808,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260626_204751.md",
       "bytes": 5408
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260626_185310.md",
-      "title": "VAPE Report - 20260626_185310",
-      "date": "2026-06-26T18:53:10Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260626_185310.md",
-      "bytes": 5049
     }
   ],
   "broadcasts": [
@@ -1064,7 +1086,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48077226",
+      "version": "48089149",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1074,7 +1096,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.79 eth_dom 9.01 mcap_chg_24h 2.94",
+      "version": "btc_dom 55.81 eth_dom 9.02 mcap_chg_24h 1.75",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1124,7 +1146,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "11 Extreme Fear",
+      "version": "19 Extreme Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
