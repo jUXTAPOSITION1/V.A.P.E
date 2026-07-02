@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-02T18:26:14Z",
+  "generated": "2026-07-02T20:19:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 285,
+    "reports": 286,
     "reports_by_type": {
-      "bounty": 142,
+      "bounty": 143,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260702_182608.md",
+      "file": "bounty_report_20260702_201942.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T18:26:08Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: The concentration of TVL in Morpho Blue has increased, now accounting for approximately 66% of the top 10 protocols' TVL, indicating a potential concentration risk. The most significant development this cycle is the 2.6955% increase in Morpho Blue's TVL, alongside a 2.3824% increase in Aave V3's TVL, signaling a potential re",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_182608.md",
-      "bytes": 13624
+      "date": "2026-07-02T20:19:42Z",
+      "threat": "RISK-ON",
+      "summary": "What changed: The concentration of TVL in Morpho Blue has increased further, now accounting for approximately 65.8% of the total Base TVL, up from previous reports, indicating a continued potential concentration risk. The most significant development this cycle is the 2.83% increase in Morpho Blue's TVL, alongside a 2.61% increase in Bitc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_201942.md",
+      "bytes": 13471
     }
   },
   "investigations": [
@@ -215,6 +215,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260702_201942.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-02T20:19:42Z",
+      "threat": "RISK-ON",
+      "summary": "What changed: The concentration of TVL in Morpho Blue has increased further, now accounting for approximately 65.8% of the total Base TVL, up from previous reports, indicating a continued potential concentration risk. The most significant development this cycle is the 2.83% increase in Morpho Blue's TVL, alongside a 2.61% increase in Bitc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_201942.md",
+      "bytes": 13471
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -863,17 +874,6 @@
       "summary": "Based on the provided data, I will analyze the Base/DeFi market for anomalies, exploit signals, TVL outflows, and threats.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_120956.md",
       "bytes": 5639
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260627_101052.md",
-      "title": "VAPE Report - 20260627_101052",
-      "date": "2026-06-27T10:10:52Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_101052.md",
-      "bytes": 6697
     }
   ],
   "broadcasts": [
