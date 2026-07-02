@@ -16,6 +16,10 @@ concurrency:
 jobs:
   toolcheck:
     runs-on: ubuntu-latest
+    env:                              # ← ADDED: job-level env for all MCP/research keys
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,11 +32,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cyfrin
-            ~/.cargo
-            ~/.foundry
-            ~/.local
-            ~/.cache/pip
+            \~/.cyfrin
+            \~/.cargo
+            \~/.foundry
+            \~/.local
+            \~/.cache/pip
           key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
           restore-keys: skillforge-tools-
       - name: Verify + version-pin registered tools
