@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-02T16:50:40Z",
+  "generated": "2026-07-02T18:26:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 284,
+    "reports": 285,
     "reports_by_type": {
-      "bounty": 141,
+      "bounty": 142,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260702_165029.md",
+      "file": "bounty_report_20260702_182608.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T16:50:29Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: The total fees on Base chain surged by 32.91% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.97% increase in WETH / USDC 0.05% price, suggesting a strong ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_165029.md",
-      "bytes": 13596
+      "date": "2026-07-02T18:26:08Z",
+      "threat": "NEUTRAL",
+      "summary": "What changed: The concentration of TVL in Morpho Blue has increased, now accounting for approximately 66% of the top 10 protocols' TVL, indicating a potential concentration risk. The most significant development this cycle is the 2.6955% increase in Morpho Blue's TVL, alongside a 2.3824% increase in Aave V3's TVL, signaling a potential re",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_182608.md",
+      "bytes": 13624
     }
   },
   "investigations": [
@@ -215,6 +215,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260702_182608.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-02T18:26:08Z",
+      "threat": "NEUTRAL",
+      "summary": "What changed: The concentration of TVL in Morpho Blue has increased, now accounting for approximately 66% of the top 10 protocols' TVL, indicating a potential concentration risk. The most significant development this cycle is the 2.6955% increase in Morpho Blue's TVL, alongside a 2.3824% increase in Aave V3's TVL, signaling a potential re",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_182608.md",
+      "bytes": 13624
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -863,17 +874,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_101052.md",
       "bytes": 6697
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260627_075042.md",
-      "title": "VAPE Report - 20260627_075042",
-      "date": "2026-06-27T07:50:42Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_075042.md",
-      "bytes": 5197
     }
   ],
   "broadcasts": [
@@ -1152,7 +1152,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48107515",
+      "version": "48113565",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1162,7 +1162,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.75 eth_dom 9.25 mcap_chg_24h 3.03",
+      "version": "btc_dom 55.8 eth_dom 9.24 mcap_chg_24h 2.58",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
