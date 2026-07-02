@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-02T14:04:12Z",
+  "generated": "2026-07-02T16:50:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 283,
+    "reports": 284,
     "reports_by_type": {
-      "bounty": 140,
+      "bounty": 141,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260702_140403.md",
+      "file": "bounty_report_20260702_165029.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T14:04:03Z",
+      "date": "2026-07-02T16:50:29Z",
       "threat": "RISK-ON",
-      "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.12% increase in Morpho Blue's TVL, solidifying its position a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_140403.md",
-      "bytes": 14374
+      "summary": "What changed: The total fees on Base chain surged by 32.91% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.97% increase in WETH / USDC 0.05% price, suggesting a strong ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_165029.md",
+      "bytes": 13596
     }
   },
   "investigations": [
@@ -215,6 +215,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260702_165029.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-02T16:50:29Z",
+      "threat": "RISK-ON",
+      "summary": "What changed: The total fees on Base chain surged by 32.91% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.97% increase in WETH / USDC 0.05% price, suggesting a strong ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_165029.md",
+      "bytes": 13596
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -863,17 +874,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_075042.md",
       "bytes": 5197
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260627_045446.md",
-      "title": "VAPE Report - 20260627_045446",
-      "date": "2026-06-27T04:54:46Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_045446.md",
-      "bytes": 5757
     }
   ],
   "broadcasts": [
@@ -1152,7 +1152,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48100844",
+      "version": "48107515",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1162,7 +1162,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.82 eth_dom 9.04 mcap_chg_24h 3.79",
+      "version": "btc_dom 55.75 eth_dom 9.25 mcap_chg_24h 3.03",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
