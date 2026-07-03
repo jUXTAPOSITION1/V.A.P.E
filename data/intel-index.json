@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-03T11:33:50Z",
+  "generated": "2026-07-03T14:08:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 291,
+    "reports": 292,
     "reports_by_type": {
-      "bounty": 148,
+      "bounty": 149,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260703_113341.md",
+      "file": "bounty_report_20260703_140821.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T11:33:41Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: Morpho Blue's TVL has increased by 2.3416% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 5.214% increase in Aave V3's TVL, indicating growing trust in lending protocols. The net risk post",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_113341.md",
-      "bytes": 13881
+      "date": "2026-07-03T14:08:21Z",
+      "threat": null,
+      "summary": "What changed: Morpho Blue's TVL has increased by 2.6229% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.6585% increase in Aave V3's TVL, indicating growing trust in the lending protocol. The net risk ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_140821.md",
+      "bytes": 13908
     }
   },
   "investigations": [
@@ -237,6 +237,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260703_140821.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-03T14:08:21Z",
+      "threat": null,
+      "summary": "What changed: Morpho Blue's TVL has increased by 2.6229% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.6585% increase in Aave V3's TVL, indicating growing trust in the lending protocol. The net risk ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_140821.md",
+      "bytes": 13908
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -885,17 +896,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_051812.md",
       "bytes": 6087
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_000416.md",
-      "title": "VAPE Report - 20260628_000416",
-      "date": "2026-06-28T00:04:16Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_000416.md",
-      "bytes": 6249
     }
   ],
   "broadcasts": [
