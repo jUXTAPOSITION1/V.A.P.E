@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-03T04:42:46Z",
+  "generated": "2026-07-03T08:10:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 289,
+    "reports": 290,
     "reports_by_type": {
-      "bounty": 146,
+      "bounty": 147,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 15,
+    "investigations": 17,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,29 +26,41 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260702-140412-0x31A62699.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 USA250",
-      "date": "2026-07-02T14:04:12Z",
-      "target": "0x31A626996E36a302b06b27283C561d5926db6b7c",
+      "file": "investigation-20260703-081033-0x2228B383.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 FAFO",
+      "date": "2026-07-03T08:10:33Z",
+      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "- Target: 0x31A626996E36a302b06b27283C561d5926db6b7c - Chain: 8453 (Base) - Date: 2026-07-02T14:04:12Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 90/100",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-140412-0x31A62699.md"
+      "score": "88",
+      "summary": "- Target: 0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F - Chain: 8453 (Base) - Date: 2026-07-03T08:10:33Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260703_044238.md",
+      "file": "bounty_report_20260703_081023.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T04:42:38Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: Morpho Blue's TVL has increased by 2.8414% in the last 24 hours, with its dominance now at approximately 65.8% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.11% increase in Aave V3's TVL, indicating growing trust in lending protocols. The net risk postu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_044238.md",
-      "bytes": 13084
+      "date": "2026-07-03T08:10:23Z",
+      "threat": null,
+      "summary": "What changed: Morpho Blue's TVL has increased by 2.8435% in the last 24 hours, maintaining its dominance at approximately 65.9% of the total Base TVL, indicating a persistent concentration risk. The most significant development this cycle is the 4.1692% increase in Aave V3's TVL, showcasing a notable surge in lending activity. The net ris",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_081023.md",
+      "bytes": 13561
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260703-081033-0x2228B383.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 FAFO",
+      "date": "2026-07-03T08:10:33Z",
+      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "- Target: 0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F - Chain: 8453 (Base) - Date: 2026-07-03T08:10:33Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260702-140412-0x31A62699.md",
@@ -212,9 +224,30 @@
       "verdict": "PROCEED (90/100)",
       "key_finding": "Low liquidity $19,800",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-03",
+      "job_id": "auto",
+      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F (FAFO)",
+      "offering": "deep_investigation",
+      "verdict": "PROCEED (88/100)",
+      "key_finding": "Mintable supply (dilution risk)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260703_081023.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-03T08:10:23Z",
+      "threat": null,
+      "summary": "What changed: Morpho Blue's TVL has increased by 2.8435% in the last 24 hours, maintaining its dominance at approximately 65.9% of the total Base TVL, indicating a persistent concentration risk. The most significant development this cycle is the 4.1692% increase in Aave V3's TVL, showcasing a notable surge in lending activity. The net ris",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_081023.md",
+      "bytes": 13561
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -863,17 +896,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_200936.md",
       "bytes": 6276
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260627_180520.md",
-      "title": "VAPE Report - 20260627_180520",
-      "date": "2026-06-27T18:05:20Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260627_180520.md",
-      "bytes": 5549
     }
   ],
   "broadcasts": [
@@ -1152,7 +1174,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48131899",
+      "version": "48137906",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1162,7 +1184,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.61 eth_dom 9.29 mcap_chg_24h 1.32",
+      "version": "btc_dom 55.68 eth_dom 9.31 mcap_chg_24h 2.74",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1202,7 +1224,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-06-30 Edel 0.4 M ['Ethereum'] Flashloan Price Oracle Attack",
+      "version": "2026-07-02 Hinkal 0.82 M ['Ethereum'] prooflessDeposit() Exploit",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
