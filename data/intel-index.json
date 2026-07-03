@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-03T22:37:51Z",
+  "generated": "2026-07-03T23:09:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 296,
@@ -34,7 +34,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "88",
-      "summary": "- Target: 0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F - Chain: 8453 (Base) - Date: 2026-07-03T08:10:33Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "summary": "[-12] Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
     },
     "report": {
@@ -60,7 +60,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "88",
-      "summary": "- Target: 0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F - Chain: 8453 (Base) - Date: 2026-07-03T08:10:33Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "summary": "[-12] Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
     },
     {
@@ -73,7 +73,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "90",
-      "summary": "- Target: 0x31A626996E36a302b06b27283C561d5926db6b7c - Chain: 8453 (Base) - Date: 2026-07-02T14:04:12Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 90/100",
+      "summary": "[-10] Low liquidity $19,800",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-140412-0x31A62699.md"
     },
     {
@@ -86,7 +86,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "92",
-      "summary": "- Target: 0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd - Chain: 8453 (Base) - Date: 2026-07-02T11:35:20Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 92/100",
+      "summary": "[-8] Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-113520-0xbF927b84.md"
     },
     {
@@ -99,7 +99,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "- Target: 0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07 - Chain: 8453 (Base) - Date: 2026-07-02T08:18:29Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
+      "summary": "[-10] Low liquidity $21,135 \u00b7 [-10] Violent 24h move +389% (volatility/manipulation) \u00b7 [-12] Pair only 0.3 days old (fresh-launch risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-081829-0x7CfA2a05.md"
     },
     {
@@ -112,7 +112,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "78",
-      "summary": "- Target: 0x7C797DA3704b6F682917005b01C89710Ec17db07 - Chain: 8453 (Base) - Date: 2026-07-02T04:58:36Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
+      "summary": "[-10] Low liquidity $23,118 \u00b7 [-12] Pair only 1.1 days old (fresh-launch risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
     },
     {
@@ -125,7 +125,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "78",
-      "summary": "- Target: 0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07 - Chain: 8453 (Base) - Date: 2026-07-02T00:09:13Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 78/100",
+      "summary": "[-10] Violent 24h move +99949% (volatility/manipulation) \u00b7 [-12] Pair only 0.0 days old (fresh-launch risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-000913-0x43D6e8F4.md"
     },
     {
@@ -138,7 +138,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "- Target: 0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6 - Chain: 8453 (Base) - Date: 2026-07-01T21:11:25Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
+      "summary": "[-10] Low liquidity $26,641 \u00b7 [-10] Violent 24h move +577% (volatility/manipulation) \u00b7 [-12] Pair only 0.8 days old (fresh-launch risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211125-0xcC67e54F.md"
     },
     {
@@ -151,7 +151,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "- Target: 0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6 - Chain: 8453 (Base) - Date: 2026-07-01T21:11:18Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 68/100",
+      "summary": "[-10] Low liquidity $26,641 \u00b7 [-10] Violent 24h move +577% (volatility/manipulation) \u00b7 [-12] Pair only 0.8 days old (fresh-launch risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211118-0xcC67e54F.md"
     },
     {

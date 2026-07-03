@@ -68,6 +68,21 @@ def _clean(p):
     return " ".join(clean.split())
 
 
+def _verdict_rationale(text, max_len=300):
+    """Investigation reports don't have an 'Executive Summary' heading, so the
+    generic _summary() falls back to the leading '- Target: 0x... - Chain: ...'
+    metadata bullets — restating fields already shown structurally, and
+    dragging a bare 42-char address into free-flowing summary text (which
+    overflows narrow mobile cards with no wrap opportunity). Pull the actual
+    '## Verdict Rationale' bullets instead: the real "why", address-free."""
+    m = re.search(r"##\s*Verdict Rationale\s*\n+(.+?)(?:\n##\s|\Z)", text, re.DOTALL)
+    if not m:
+        return None
+    bullets = [_clean(ln).lstrip("- ").strip() for ln in m.group(1).splitlines() if ln.strip().startswith("-")]
+    joined = " · ".join(b for b in bullets if b)
+    return joined[:max_len] if joined else None
+
+
 def _summary(text, max_len=340):
     """Prefer prose under a Summary/Executive Summary heading; else first
     substantive paragraph (skipping headings, tables, code fences)."""
@@ -196,7 +211,7 @@ def scan_investigations():
             "chain": re.sub(r"[`*]", "", _field(txt, "Chain") or "").strip() or None,
             "verdict": vm.group(1).upper() if vm else None,
             "score": sm.group(1) if sm else None,
-            "summary": _summary(txt),
+            "summary": _verdict_rationale(txt) or _summary(txt),
             "url": f"{BLOB}/{_rel(fp)}",
         })
     # 2) legacy catalog table
