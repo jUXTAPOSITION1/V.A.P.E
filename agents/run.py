@@ -110,54 +110,62 @@ def run_slither():
 # Full-report generation: system prompt, grounding, and structured template
 # ============================================================================
 
-VAPE_REPORT_SYSTEM = """You are V.A.P.E. (Virtual Ape Private Eye) + HACK — a real, autonomous
-on-chain detective and security analyst operating on Base + Virtuals Protocol.
+VAPE_REPORT_SYSTEM = """You are V.A.P.E. (Virtual Ape Private Eye) — an autonomous bug-bounty
+hunter, contract investigator, and tool builder operating on Base + Virtuals Protocol.
 
-You write a COMPLETE, ROBUST intelligence report every cycle. You are NOT a chatbot
-summarizing numbers; you are a detective connecting evidence into a narrative with
-specific, non-obvious insight.
+Your job is NOT to narrate TVL and macro numbers cycle after cycle. Your job is to turn
+real recon data — deep contract investigations, self-repo static analysis, tool health —
+into decisive findings, and to say plainly when your own tooling is the bottleneck.
 
-HARD RULES:
-- Use ONLY the real data provided. Never invent numbers, incidents, or tickers.
-- If a data section is missing/errored, say "no data this cycle" — do not fabricate.
-- NEVER repeat last cycle's phrasing. Lead with WHAT CHANGED vs prior intel.
-- Every claim ties to a specific number, protocol, address, incident, or date.
-- No hedging filler ("could indicate a potential possible…"). Be decisive; state
-  confidence (HIGH/MED/LOW) and the evidence behind it.
-- No disclaimers, no "as an AI", no generic "monitor closely" advice. Give the
-  specific thing to watch and the threshold that would change your call.
+HARD RULES (unconditional):
+- Use ONLY the real data provided below. Never invent bounty programs, contracts,
+  addresses, findings, or numbers. If a data section is missing/errored, say
+  "no data this cycle" — do not fabricate to fill a section.
+- NEVER repeat a prior cycle's framing. The grounding block below shows your last
+  reports and investigations — lead with what's NEW or DIFFERENT. Reciting the same
+  Morpho-dominance / Aave-TVL-growth / Base-concentration story again is a failure.
+- Every claim traces to a specific report, address, score, tool, or number given to
+  you. No hedging filler ("could indicate a potential possible…"). State confidence
+  (HIGH/MED/LOW) and the evidence behind it.
+- No disclaimers, no "as an AI", no generic "monitor closely" without a concrete
+  trigger/threshold.
 
-You MUST output these sections as Markdown (omit a section only if it truly has no
-data, and say so):
+PRIORITY ORDER — cover in this order; a lower tier only needs a line if it has nothing new:
+1. REAL INVESTIGATION FINDINGS — the deep-investigation verdicts from `agents/investigate.py`
+   provided below. For any CAUTION/REJECT verdict: state the exploit hypothesis (access
+   control? honeypot? swappable proxy implementation? liquidity rug?), what a PoC would
+   need to confirm it, and the single next recon step. Clean/PROCEED verdicts get one line.
+2. SELF-REPO STATIC ANALYSIS — Slither findings on VAPE's own code. A real finding here
+   is real bounty-relevant work; treat it with the same rigor as an external target.
+3. TOOL GAP ANALYSIS — using the tool registry status provided (broken / needs_key /
+   missing capability), state plainly what is blocking deeper work right now and propose
+   1-3 concrete tools or fixes. If nothing is broken and no gap was hit, say so in one
+   line. Do not invent a gap to fill space.
+4. SECURITY & EXPLOIT FEED — newest real incidents from the hack feed. Extract the
+   repeatable technique and whether it correlates with Base or any address VAPE has
+   already investigated.
+5. MARKET CONTEXT (Base / Macro / Virtuals) — ONE compressed paragraph, delta-only
+   ("what moved since last cycle"), never the lead. If nothing materially changed,
+   write "no material delta" and move on — do not pad this into a full section.
 
-## 🔍 Executive Summary
-3-5 punchy bullets. Bullet 1 MUST state what CHANGED vs your last reports (the delta,
-not the level). Then the single most important development this cycle and the net risk
-posture (RISK-ON / NEUTRAL / RISK-OFF). Do not just restate raw numbers here.
+REPORT DISCIPLINE:
+- The FIRST line of your response must be exactly `SIGNAL: HIGH` or `SIGNAL: LOW`.
+  - HIGH = at least one non-clean investigation, a real Slither finding, or a genuine
+    tool gap surfaced this cycle.
+  - LOW = none of the above; everything provided is a continuation of prior state.
+- If SIGNAL: LOW, the rest of your response must be at most 5 lines: what was checked
+  (counts of investigations/tools/incidents reviewed) and confirmation nothing changed.
+  Do NOT write the full section structure below.
+- If SIGNAL: HIGH, write the full Markdown report using these sections (omit a section
+  only if it truly has nothing, and say so instead of padding):
 
+## 🕵️ Investigation Findings
+## 🛠️ Tool Gap Analysis
 ## 🛡️ Security & Exploits
-Analyze the DeFi hack feed. Newest incidents, techniques, $ lost, which chains. Are any
-relevant to Base or Base-deployed protocols? Extract the repeatable attack pattern and
-the defensive takeaway for holders/protocols.
-
-## 🔵 Base Chain Intel
-TVL, fees/revenue, gas, block activity, top protocols. Where is capital flowing IN vs OUT?
-Name protocols + numbers. Flag concentration risk (e.g. one protocol = X% of Base TVL).
-
-## 📈 Crypto Macro
-BTC/ETH price + 24h, total mcap change, BTC/ETH dominance, Fear & Greed (+direction),
-stablecoin supply as a risk-on/off tell. What regime are we in and what flips it?
-
-## 🦍 Virtuals Ecosystem
-VIRTUAL price/mcap/volume + 24h, protocol TVL. Health of the agent economy VAPE lives in.
-
-## 🕯️ Movers & Investigations
-Notable Base token movers (volume/price). For anything violent or low-liquidity, open a
-mini-investigation: rug/honeypot/wash-trade hypothesis + what to verify next.
-
-## 🎯 Watchlist & Next Actions
-Concrete, prioritized. Each item: the trigger/threshold, the tool VAPE would run
-(token_safety, contract_recon, hack_feed, base_rpc), and why.
+## 📊 Market Delta (Base / Macro / Virtuals — compressed, one paragraph)
+## 🎯 Next Actions
+Concrete, prioritized. Each item: the trigger/threshold, the tool VAPE would run or
+build, and why.
 
 Close with one sharp line in VAPE's noir detective voice. The chain never lies.
 """
@@ -190,8 +198,64 @@ def _recent_report_digests(n=5):
     return digests
 
 
+def _recent_investigations(n=5):
+    """Pull the last N real deep-investigation verdicts (agents/investigate.py output).
+
+    This is VAPE's actual bounty-hunting work product — feed it as primary signal
+    instead of asking the LLM to reason about targets it has never actually recon'd.
+    """
+    import glob
+    digests = []
+    try:
+        inv_dir = os.path.join(_REPO_ROOT, "intel", "investigations")
+        files = sorted(glob.glob(os.path.join(inv_dir, "*.md")),
+                        key=os.path.getmtime, reverse=True)[:n]
+        for fp in files:
+            try:
+                with open(fp) as fh:
+                    lines = fh.readlines()
+                head = [l.strip() for l in lines if l.startswith("# ") or l.startswith("- **")]
+                if head:
+                    digests.append(" | ".join(head))
+            except Exception:
+                continue
+    except Exception:
+        pass
+    return digests
+
+
+def _tool_gap_context():
+    """Surface real tool-registry status (broken/needs_key) so tool-gap analysis is
+    grounded in fact instead of invented. Returns "" when nothing is worth flagging."""
+    registry_path = os.path.join(_REPO_ROOT, "skillforge", "memory", "tools-registry.json")
+    try:
+        with open(registry_path) as fh:
+            reg = json.load(fh)
+    except Exception:
+        return ""
+    broken, needs_key = [], []
+    for tier, tools in reg.get("tiers", {}).items():
+        for t in tools:
+            status = t.get("status")
+            name = t.get("name", "?")
+            if status == "broken":
+                broken.append(f"{name} ({tier}): {t.get('purpose', '')}")
+            elif status == "needs_key":
+                broken_key = t.get("requires_key", "?")
+                needs_key.append(f"{name} ({tier}) blocked on missing {broken_key}")
+    if not broken and not needs_key:
+        return ""
+    lines = []
+    if broken:
+        lines.append("BROKEN tools (real capability gaps): " + "; ".join(broken))
+    if needs_key:
+        lines.append("Tools blocked on missing keys: " + "; ".join(needs_key))
+    return "\n".join(lines)
+
+
 def _build_grounding():
-    """Assemble anti-repetition grounding: recent report digests + Memory hits."""
+    """Assemble anti-repetition grounding: recent report digests + Memory hits
+    + real investigation verdicts + real tool-registry gaps."""
     parts = []
     recent = _recent_report_digests(5)
     if recent:
@@ -199,6 +263,20 @@ def _build_grounding():
         parts.append(
             "=== YOUR LAST FEW REPORTS (do NOT repeat these framings; report what CHANGED) ===\n"
             + "\n".join(recent)
+        )
+    investigations = _recent_investigations(5)
+    if investigations:
+        print(f"[Grounding] {len(investigations)} recent investigations loaded\n")
+        parts.append(
+            "=== RECENT DEEP INVESTIGATIONS (agents/investigate.py — real recon+scoring) ===\n"
+            + "\n".join(investigations)
+        )
+    tool_gaps = _tool_gap_context()
+    if tool_gaps:
+        print("[Grounding] tool registry gaps found\n")
+        parts.append(
+            "=== TOOL REGISTRY STATUS (skillforge/memory/tools-registry.json — real) ===\n"
+            + tool_gaps
         )
     if INTEGRATION_AVAILABLE:
         try:
@@ -218,13 +296,27 @@ def _build_grounding():
 
 def _build_report_prompt(market_json, slither_result, memory_priming):
     return (
-        "Write today's full V.A.P.E. intelligence report from the REAL data below. "
-        "Follow the exact section structure from your instructions. Be specific, "
-        "decisive, and non-repetitive.\n\n"
+        "=== MISSION ===\n"
+        "You are operating in Bounty Hunter + Deep Investigation mode. Follow the "
+        "PRIORITY ORDER and REPORT DISCIPLINE from your system instructions exactly, "
+        "starting with the SIGNAL: HIGH|LOW line.\n\n"
+        f"{memory_priming}\n"
         f"=== LIVE MULTI-DOMAIN DATA (real, fetched now) ===\n{market_json}\n\n"
-        f"=== SELF-REPO STATIC ANALYSIS (slither) ===\n{slither_result[:400]}\n"
-        f"{memory_priming}"
+        f"=== SELF-REPO STATIC ANALYSIS (Slither) ===\n"
+        f"{slither_result[:800] if slither_result else 'No Slither output this cycle.'}\n\n"
+        "=== YOUR TASK ===\n"
+        "Lead with investigation findings and tool gaps, not market numbers. If the "
+        "investigations/tool-registry sections above are empty, say so plainly instead "
+        "of substituting a macro narrative. Only write the full section structure if "
+        "SIGNAL: HIGH; otherwise keep it to the required 5-line summary."
     )
+
+
+def _parse_signal(report_text):
+    """Read the SIGNAL: HIGH|LOW marker the LLM is instructed to lead with.
+    Defaults to HIGH (full formatting) if the model didn't comply."""
+    first_line = (report_text or "").strip().splitlines()[0] if report_text else ""
+    return "LOW" if first_line.strip().upper().startswith("SIGNAL: LOW") else "HIGH"
 
 
 def main(review_repo=False):
@@ -278,6 +370,8 @@ def main(review_repo=False):
             tier="deep",
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
+        signal = _parse_signal(report)
+        print(f"[Signal] {signal}\n")
 
         # STEP 2: Append the ACTUAL analysis back to Memory (not raw data), and
         # only when we produced a real report (skip LLM-unavailable stubs).
@@ -286,27 +380,32 @@ def main(review_repo=False):
                 from skillforge.memory.retriever import append_to_memory as _append
                 _append(
                     category="finding",
-                    title=f"Bounty-cycle analysis {timestamp}",
+                    title=f"Bounty-cycle analysis {timestamp} [{signal}]",
                     content=report[:2000],
                     source="agents/run.py",
-                    tags=["bounty-cycle", "base", "defi", "analysis"],
+                    tags=["bounty-cycle", "base", "defi", "analysis", signal.lower()],
                     confidence=0.8,
-                    metadata={"timestamp": timestamp, "report_path": report_path},
+                    metadata={"timestamp": timestamp, "report_path": report_path, "signal": signal},
                 )
                 print("[Memory] Analysis appended to findings\n")
             except Exception as e:
                 print(f"[Integration] Memory append failed: {e}\n")
-    
+
     # Write report
     with open(report_path, "w") as f:
         if review_repo:
             f.write(f"# VAPE Repo Review — {timestamp}\n\n")
             f.write(report)
+        elif signal == "LOW":
+            # Low-signal cycle: no new investigation, finding, or tool gap. Keep it
+            # short — don't pad a full report scaffold around nothing new.
+            f.write(f"# 🦍 V.A.P.E. Cycle — {timestamp} (no new signal)\n\n")
+            f.write(report)
         else:
             gen = (market_context or {}).get("generated_at", timestamp)
             f.write("# 🦍 V.A.P.E. Intelligence Report\n\n")
             f.write(f"**Cycle:** `{timestamp}` · **Data timestamp (UTC):** {gen}  \n")
-            f.write("**Coverage:** Security · Base · Crypto Macro · Virtuals · Forensics · Movers\n\n")
+            f.write("**Coverage:** Investigations · Tool Gaps · Security · Base · Macro · Virtuals\n\n")
             # rule-based anomaly flags up top as an at-a-glance banner
             flags = (market_context or {}).get("anomaly_flags") or []
             if flags and flags != ["none detected by rule-based pass"]:
@@ -320,7 +419,7 @@ def main(review_repo=False):
             if market_context:
                 f.write("\n\n---\n\n<details>\n<summary>📊 Raw data snapshot (audit trail)</summary>\n\n")
                 f.write(f"```json\n{json.dumps(market_context, indent=2)}\n```\n\n</details>\n")
-    
+
     print(f"\n✅ Report saved to: {report_path}\n")
     
     # NEW: Optionally run full cycle if requested
