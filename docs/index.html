@@ -386,10 +386,11 @@
                 el.innerHTML = `
                     <div class="glass rounded-2xl p-5">
                         <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-2 min-w-0">
+                            <a href="${this._explorerUrl(addr, chain)}" target="_blank" rel="noopener" class="flex items-center gap-2 min-w-0 hover:opacity-80">
                                 ${this._iconImg(addr, chain, 28)}
                                 <div class="font-semibold truncate">${name}</div>
-                            </div>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60 shrink-0"></i>
+                            </a>
                             <span class="px-3 py-1 rounded-lg font-display shrink-0" style="color:${vc};background:${vc}1a">${verdict[0]}</span>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
@@ -437,16 +438,16 @@
                     .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category, logo:p.logo}))
                     .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
                 el.innerHTML = base.map((p,i)=>`
-                    <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
-                        <span class="text-zinc-600 text-sm w-5 shrink-0">${i+1}</span>
-                        ${p.logo?`<img src="${p.logo}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
+                    <div class="card-h glass rounded-xl px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3">
+                        <span class="text-zinc-600 text-sm w-4 sm:w-5 shrink-0">${i+1}</span>
+                        ${p.logo?`<img src="${p.logo}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover shrink-0 sm:w-7 sm:h-7" onerror="this.remove()">`:''}
                         <div class="min-w-0 flex-1">
                             <div class="font-semibold truncate">${p.name}</div>
-                            <div class="text-xs text-zinc-500">${p.cat||''}</div>
+                            <div class="text-xs text-zinc-500 truncate">${p.cat||''}</div>
                         </div>
-                        <div class="spark shrink-0" data-slug="${p.slug||''}" style="width:72px;height:26px"></div>
-                        <div class="text-right shrink-0 w-24">
-                            <div class="stat font-display">${fmtUsd(p.tvl)}</div>
+                        <div class="spark shrink-0 hidden sm:block" data-slug="${p.slug||''}" style="width:72px;height:26px"></div>
+                        <div class="text-right shrink-0 w-16 sm:w-24">
+                            <div class="stat font-display text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
                             <div class="text-xs">${pct(p.c1)}</div>
                         </div>
                     </div>`).join('');
@@ -557,6 +558,12 @@
             if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
             return `https://dd.dexscreener.com/ds-data/tokens/${this._chainSlug(chain)}/${address.toLowerCase()}.png?size=lg`;
         },
+        _explorerUrl(address, chain){
+            if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
+            const slug = this._chainSlug(chain);
+            const host = slug==='arbitrum' ? 'arbiscan.io' : slug==='ethereum' ? 'etherscan.io' : 'basescan.org';
+            return `https://${host}/address/${address}`;
+        },
         _iconImg(address, chain, size=36, extra=''){
             const src = this._tokenIcon(address, chain);
             return src ? `<img src="${src}" alt="" width="${size}" height="${size}" class="rounded-full bg-white/5 object-cover shrink-0 ${extra}" onerror="this.remove()">` : '';
@@ -576,20 +583,21 @@
                 if(inv){
                     const sym = inv.symbol || this._symFromTitle(inv.title);
                     const heading = sym || this._shortAddr(inv.target) || inv.title || 'target';
+                    const explorer = this._explorerUrl(inv.target, inv.chain);
                     iel.innerHTML=`
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <div class="text-[10px] uppercase tracking-widest text-zinc-500">Deep Investigation</div>
                             ${this._pill(inv.verdict)}
                         </div>
-                        <div class="flex items-center gap-3 mb-1">
+                        <a href="${explorer||'#'}" target="_blank" rel="noopener" class="flex items-center gap-3 mb-1 ${explorer?'hover:opacity-80':'pointer-events-none'}">
                             ${this._iconImg(inv.target, inv.chain, 40)}
                             <div class="min-w-0">
                                 <div class="font-display text-lg leading-tight truncate">${this._esc(heading)}</div>
-                                ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))}</div>`:''}
+                                ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                             </div>
-                        </div>
+                        </a>
                         ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-emerald-400 font-display">${inv.score}</span></div>`:''}
-                        <div class="text-xs text-zinc-400 leading-relaxed">${this._esc(inv.summary||inv.key_finding||'')}</div>
+                        <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
                         <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
                 } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
                 // hero: latest report
@@ -601,9 +609,9 @@
                             <div class="text-[10px] uppercase tracking-widest text-zinc-500">Latest Report · ${this._esc(rep.type||'')}</div>
                             ${this._pill(rep.threat)}
                         </div>
-                        <div class="font-display text-lg leading-tight mb-1">${this._esc(rep.title||rep.file)}</div>
+                        <div class="font-display text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
                         <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
-                        <div class="text-xs text-zinc-400 leading-relaxed">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
+                        <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
                         <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
                 } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
                 this._renderIntel();
@@ -639,11 +647,11 @@
                         ${icon || '<i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mt-1"></i>'}
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="font-mono text-xs truncate">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
+                                <span class="font-mono text-xs truncate min-w-0">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
                                 <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-emerald-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                             </div>
                             <div class="text-xs text-zinc-500 mt-1 truncate">${i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span> · `:''}${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
-                            ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
+                            ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
                         </div>
                     </a>`;
                 }).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
@@ -655,11 +663,11 @@
                         <i class="fa-solid fa-file-lines text-zinc-500 mt-1"></i>
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="font-semibold text-sm truncate">${this._esc(r.title||r.file)}</span>
+                                <span class="font-semibold text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
                                 ${this._pill(r.threat)}
                             </div>
                             <div class="text-xs text-zinc-500 mt-1"><span class="text-indigo-400">${this._esc(r.type)}</span> · ${this._ago(r.date)}</div>
-                            ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc(r.summary.slice(0,200))}${r.summary.length>200?'…':''}</div>`:''}
+                            ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc(r.summary.slice(0,200))}${r.summary.length>200?'…':''}</div>`:''}
                         </div>
                     </a>`).join('')||'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
             } else if(tab==='broadcasts'){
@@ -668,9 +676,9 @@
                     <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
                         <i class="fa-solid fa-tower-broadcast text-emerald-400 mt-1"></i>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm">${this._esc(b.title||b.file)}</div>
+                            <div class="font-semibold text-sm break-words">${this._esc(b.title||b.file)}</div>
                             <div class="text-xs text-zinc-500 mt-1">${this._ago(b.date)}</div>
-                            ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc(b.summary.slice(0,200))}${b.summary.length>200?'…':''}</div>`:''}
+                            ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc(b.summary.slice(0,200))}${b.summary.length>200?'…':''}</div>`:''}
                         </div>
                     </a>`).join(''):'<div class="text-zinc-500 text-sm">No broadcasts yet.</div>';
             } else if(tab==='tools'){
