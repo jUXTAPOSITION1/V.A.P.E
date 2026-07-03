@@ -1,0 +1,64 @@
+name: Dependency Audit (pip-audit + npm audit)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "requirements.txt"
+      - "agents/requirements.txt"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/dependency-audit.yml"
+  pull_request:
+    paths:
+      - "requirements.txt"
+      - "agents/requirements.txt"
+      - "package.json"
+      - "package-lock.json"
+  schedule:
+    - cron: '15 6 * * 1'   # weekly, Monday 06:15 UTC — catches newly-disclosed CVEs in pinned versions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: pip-audit (root)
+        run: |
+          pip install -q pip-audit
+          pip-audit -r requirements.txt | tee /tmp/pip-audit-root.txt
+
+      - name: pip-audit (agents)
+        run: pip-audit -r agents/requirements.txt | tee /tmp/pip-audit-agents.txt
+
+      - name: npm audit
+        run: |
+          npm install --package-lock-only
+          npm audit --audit-level=moderate | tee /tmp/npm-audit.txt
+
+      - name: Open issue on new vulnerabilities
+        if: failure()
+        run: |
+          {
+            echo "Dependency audit found issues — see run for full output."
+            echo
+            echo '### pip-audit (root)'; cat /tmp/pip-audit-root.txt 2>/dev/null
+            echo '### pip-audit (agents)'; cat /tmp/pip-audit-agents.txt 2>/dev/null
+            echo '### npm audit'; cat /tmp/npm-audit.txt 2>/dev/null
+          } > /tmp/audit-body.txt
+          gh issue create --title "Dependency audit: vulnerabilities found $(date -u +%F)" \
+            --body-file /tmp/audit-body.txt --label "dependencies,security" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
