@@ -382,12 +382,15 @@
                 if (liq>0 && liq<10000) flags.push('low liquidity');
                 const verdict = (gp.is_honeypot==='1') ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#34d399']);
                 const vc = verdict[1];
-                const name = gp.token_name ? `${gp.token_name} (${gp.token_symbol})` : addr.slice(0,10)+'…';
+                const name = gp.token_name ? `${this._esc(gp.token_name)} (${this._esc(gp.token_symbol)})` : this._shortAddr(addr);
                 el.innerHTML = `
                     <div class="glass rounded-2xl p-5">
                         <div class="flex items-center justify-between mb-3">
-                            <div class="font-semibold">${name}</div>
-                            <span class="px-3 py-1 rounded-lg font-display" style="color:${vc};background:${vc}1a">${verdict[0]}</span>
+                            <div class="flex items-center gap-2 min-w-0">
+                                ${this._iconImg(addr, chain, 28)}
+                                <div class="font-semibold truncate">${name}</div>
+                            </div>
+                            <span class="px-3 py-1 rounded-lg font-display shrink-0" style="color:${vc};background:${vc}1a">${verdict[0]}</span>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                             <div><div class="text-zinc-500">Holders</div><div class="stat">${gp.holder_count?Number(gp.holder_count).toLocaleString():'—'}</div></div>
@@ -431,11 +434,12 @@
             try {
                 const list = await (await fetch('https://api.llama.fi/protocols')).json();
                 const base = list.filter(p => (p.chains||[]).includes('Base') && p.category!=='CEX' && (p.chainTvls?.Base>0))
-                    .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category}))
+                    .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category, logo:p.logo}))
                     .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
                 el.innerHTML = base.map((p,i)=>`
                     <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
                         <span class="text-zinc-600 text-sm w-5 shrink-0">${i+1}</span>
+                        ${p.logo?`<img src="${p.logo}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                         <div class="min-w-0 flex-1">
                             <div class="font-semibold truncate">${p.name}</div>
                             <div class="text-xs text-zinc-500">${p.cat||''}</div>
@@ -541,6 +545,22 @@
             const s=(Date.now()-d)/1e3; if(s<3600) return Math.floor(s/60)+'m ago';
             if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; },
         _esc(t){ return (t||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); },
+        _shortAddr(a){ return (a && a.length>12) ? a.slice(0,6)+'…'+a.slice(-4) : (a||''); },
+        _symFromTitle(t){ const m=(t||'').match(/Investigation\s*[—-]\s*(.+)$/); return m ? m[1].trim() : null; },
+        _chainSlug(c){
+            const s=String(c||'');
+            if(/42161|arbitrum/i.test(s)) return 'arbitrum';
+            if(/^1$|ethereum/i.test(s)) return 'ethereum';
+            return 'base';
+        },
+        _tokenIcon(address, chain){
+            if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
+            return `https://dd.dexscreener.com/ds-data/tokens/${this._chainSlug(chain)}/${address.toLowerCase()}.png?size=lg`;
+        },
+        _iconImg(address, chain, size=36, extra=''){
+            const src = this._tokenIcon(address, chain);
+            return src ? `<img src="${src}" alt="" width="${size}" height="${size}" class="rounded-full bg-white/5 object-cover shrink-0 ${extra}" onerror="this.remove()">` : '';
+        },
 
         async intel(){
             try{
@@ -554,14 +574,21 @@
                 const inv=(d.latest_summary||{}).investigation;
                 const iel=document.getElementById('inv-latest');
                 if(inv){
-                    const verdict=inv.verdict||inv.key_finding&&'LOGGED';
+                    const sym = inv.symbol || this._symFromTitle(inv.title);
+                    const heading = sym || this._shortAddr(inv.target) || inv.title || 'target';
                     iel.innerHTML=`
-                        <div class="flex items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center justify-between gap-2 mb-3">
                             <div class="text-[10px] uppercase tracking-widest text-zinc-500">Deep Investigation</div>
                             ${this._pill(inv.verdict)}
                         </div>
-                        <div class="font-display text-lg leading-tight mb-1">${this._esc(inv.target||inv.title||'target')}</div>
-                        ${inv.score?`<div class="text-xs text-zinc-400 mb-2">Safety score <span class="text-emerald-400 font-display">${inv.score}</span></div>`:''}
+                        <div class="flex items-center gap-3 mb-1">
+                            ${this._iconImg(inv.target, inv.chain, 40)}
+                            <div class="min-w-0">
+                                <div class="font-display text-lg leading-tight truncate">${this._esc(heading)}</div>
+                                ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))}</div>`:''}
+                            </div>
+                        </div>
+                        ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-emerald-400 font-display">${inv.score}</span></div>`:''}
                         <div class="text-xs text-zinc-400 leading-relaxed">${this._esc(inv.summary||inv.key_finding||'')}</div>
                         <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
                 } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
@@ -604,18 +631,22 @@
             let rows='';
             if(tab==='investigations'){
                 const items=d.investigations||[];
-                rows=items.length?items.map(i=>`
+                rows=items.length?items.map(i=>{
+                    const sym = i.symbol || this._symFromTitle(i.title);
+                    const icon = this._iconImg(i.target, i.chain, 32, 'mt-0.5');
+                    return `
                     <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                        <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mt-1"></i>
+                        ${icon || '<i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mt-1"></i>'}
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <span class="font-mono text-xs truncate">${this._esc(i.target||i.title||'target')}</span>
+                                <span class="font-mono text-xs truncate">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
                                 <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-emerald-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                             </div>
-                            <div class="text-xs text-zinc-500 mt-1">${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
+                            <div class="text-xs text-zinc-500 mt-1 truncate">${i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span> · `:''}${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
                             ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
                         </div>
-                    </a>`).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
+                    </a>`;
+                }).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
             } else if(tab==='reports'){
                 let items=d.reports||[];
                 if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);

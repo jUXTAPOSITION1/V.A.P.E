@@ -183,10 +183,14 @@ def scan_investigations():
         sm = re.search(r"(\d{1,3})", score_raw)
         target_raw = _field(txt, "Target") or ""
         target = re.sub(r"[`*]", "", target_raw).strip()
+        title = _first_heading(txt, name)
+        sym_m = re.search(r"Investigation\s*[—-]\s*(.+)$", title)
+        symbol = sym_m.group(1).strip() if sym_m else None
         out.append({
             "source": "report",
             "file": name,
-            "title": _first_heading(txt, name),
+            "title": title,
+            "symbol": symbol,
             "date": _field(txt, "Date", "Cycle") or _date_from_name(name),
             "target": target or None,
             "chain": re.sub(r"[`*]", "", _field(txt, "Chain") or "").strip() or None,
@@ -201,11 +205,14 @@ def scan_investigations():
         for ln in _read(cat).splitlines():
             cells = [c.strip() for c in ln.split("|") if c.strip()]
             if len(cells) >= 6 and re.match(r"\d{4}-\d{2}-\d{2}", cells[0]):
+                target_cell = cells[2] if len(cells) > 2 else ""
+                tm = re.match(r"(0x[a-fA-F0-9]{40})\s*(?:\(([^)]+)\))?", target_cell)
                 out.append({
                     "source": "catalog",
                     "date": cells[0],
                     "job_id": cells[1] if len(cells) > 1 else None,
-                    "target": cells[2] if len(cells) > 2 else None,
+                    "target": tm.group(1) if tm else (target_cell or None),
+                    "symbol": tm.group(2) if tm and tm.group(2) else None,
                     "offering": cells[3] if len(cells) > 3 else None,
                     "verdict": cells[4] if len(cells) > 4 else None,
                     "key_finding": cells[5] if len(cells) > 5 else None,
