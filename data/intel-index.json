@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-03T14:08:30Z",
+  "generated": "2026-07-03T16:25:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 292,
+    "reports": 293,
     "reports_by_type": {
-      "bounty": 149,
+      "bounty": 150,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260703_140821.md",
+      "file": "bounty_report_20260703_162539.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T14:08:21Z",
+      "date": "2026-07-03T16:25:39Z",
       "threat": null,
-      "summary": "What changed: Morpho Blue's TVL has increased by 2.6229% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.6585% increase in Aave V3's TVL, indicating growing trust in the lending protocol. The net risk ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_140821.md",
-      "bytes": 13908
+      "summary": "What changed: The concentration risk in Base TVL has persisted, with Morpho Blue's TVL increasing by 2.0043% in the last 24 hours, maintaining its dominance at approximately 65.9% of the total Base TVL. The most significant development this cycle is the 3.8578% increase in Aave V3's TVL, indicating a growing demand for lending protocols o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_162539.md",
+      "bytes": 13051
     }
   },
   "investigations": [
@@ -237,6 +237,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260703_162539.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-03T16:25:39Z",
+      "threat": null,
+      "summary": "What changed: The concentration risk in Base TVL has persisted, with Morpho Blue's TVL increasing by 2.0043% in the last 24 hours, maintaining its dominance at approximately 65.9% of the total Base TVL. The most significant development this cycle is the 3.8578% increase in Aave V3's TVL, indicating a growing demand for lending protocols o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_162539.md",
+      "bytes": 13051
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -885,17 +896,6 @@
       "summary": "Analysis of Base/DeFi Data for Anomalies, Exploit Signals, TVL Outflows, and Threats",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_085431.md",
       "bytes": 6227
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_051812.md",
-      "title": "VAPE Report - 20260628_051812",
-      "date": "2026-06-28T05:18:12Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_051812.md",
-      "bytes": 6087
     }
   ],
   "broadcasts": [
@@ -1174,7 +1174,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48144093",
+      "version": "48150722",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1184,7 +1184,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.6 eth_dom 9.41 mcap_chg_24h 1.5",
+      "version": "btc_dom 55.69 eth_dom 9.36 mcap_chg_24h 1.15",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
