@@ -1,0 +1,43 @@
+name: SKILLFORGE Self-Directed Build (weekly, opens a PR for review)
+
+# Weekly, not daily — this is VAPE proposing its OWN work (not fixing a known
+# bug like self-improve.yml), so a slower cadence keeps PR volume reviewable
+# and controls LLM cost.
+on:
+  schedule:
+    - cron: '0 9 * * 3'   # Wednesdays 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: skillforge-build
+  cancel-in-progress: false
+
+jobs:
+  skillforge-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Propose + build a self-directed skill/tool, open a PR
+        run: python -m agents.skillforge_build
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit report
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/ skillforge/memory/ || true
+          git commit -m "VAPE skillforge build cycle $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
