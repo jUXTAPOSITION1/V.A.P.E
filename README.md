@@ -185,11 +185,12 @@ V.A.P.E/
 │   ├── data_fetchers.py                # Real market/chain data
 │   ├── vape.py / hack.py               # Persona engines
 │   ├── vape_system.md / hack_system.md # System prompts
-│   ├── acp.py / acp_fulfill.py         # ACP integration
+│   ├── acp_fulfill.py                  # ACP integration
 │   ├── wallet.py                       # Wallet scaffolding
 │   ├── token_scan.py                   # Token safety (GoPlus/DexScreener)
-│   ├── self_improve.py                 # Self-improvement pipeline
-│   ├── create_pr.py / self_pr.py       # GitHub PR creation
+│   ├── scout.py                        # Bounty-radar triage (rule-based, no LLM)
+│   ├── self_improve.py                 # Grounded self-improvement — finds a real
+│   │                                    #   bug/gap, Builder proposes a fix, opens a PR
 │   └── requirements.txt                # Python deps
 │
 ├── skillforge/                          # Self-growing skill + tool ecosystem
