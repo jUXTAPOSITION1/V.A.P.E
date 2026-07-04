@@ -8,7 +8,14 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // path hit an account-level workers.dev subdomain bug). Every caller below
 // still falls back to its direct-API path if this ever returns an error, so
 // the site keeps working even if the worker is down.
-const WORKER_BASE = "https://vape-r860sg3jzek4.juxtaposition1.deno.net";
+//
+// IMPORTANT: this must be Deno Deploy's stable *production* URL (the one
+// shown at the top of the project's Overview page), not an individual
+// build's preview URL (e.g. "vape-8kje756vhqqy.deno.net") — preview URLs are
+// frozen forever at whatever code was live for that one build and never
+// receive later pushes, which is exactly what caused the x402 hire flow to
+// keep failing with a stale CORS config after the fix had already shipped.
+const WORKER_BASE = "https://vape.juxtaposition1.deno.net";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 // app.js is a classic script; wallet.js/profile.js are ES modules with their own
