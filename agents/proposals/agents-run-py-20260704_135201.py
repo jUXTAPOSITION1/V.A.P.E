@@ -1,0 +1,106 @@
+"""
+VAPE self-improvement proposal — generated 2026-07-04T13:52:01.325822+00:00
+Target: agents/run.py
+Issue: pyflakes: 'agents.integration.analysis_with_memory_grounding' imported but unused (line 45)
+Security review: review: 'import os' present (advisory)
+
+This is a PROPOSAL, not applied automatically. A human reviews this PR
+and decides whether/how to merge it into the actual target file.
+"""
+
+import os
+import json
+from datetime import datetime
+import sys
+import time
+import subprocess
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+
+# Ensure the repository ROOT is importable so `agents.*` and `skillforge.*`
+# resolve whether we're invoked as `python agents/run.py` (CI) or as a module.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+try:
+    from dotenv import load_dotenv
+except Exception:
+    def load_dotenv(*a, **k):
+        return False
+
+try:
+    from groq import Groq
+except Exception:
+    Groq = None
+
+try:
+    from agents.data_fetchers import build_market_context
+except Exception:
+    try:
+        from data_fetchers import build_market_context
+    except Exception:
+        build_market_context = None
+
+# Multi-provider LLM layer
+try:
+    from agents.llm import ask as _llm_ask, available as _llm_available
+except Exception:
+    try:
+        from llm import ask as _llm_ask, available as _llm_available
+    except Exception:
+        _llm_ask = None
+        _llm_available = lambda: []
+
+# NEW: Integration layer (Memory + Builder + MCP)
+try:
+    from agents.integration import (
+        builder_generate_and_append,
+        mcp_harvest_and_append,
+        run_full_cycle,
+        get_system_status,
+    )
+    INTEGRATION_AVAILABLE = True
+except Exception as e:
+    print(f"[run.py] Warning: Integration layer not available: {e}")
+    INTEGRATION_AVAILABLE = False
+
+load_dotenv()
+# Guard Groq init: don't crash at import if the SDK or key is absent — the
+# multi-provider llm.py layer is the primary path; Groq SDK is a legacy fallback.
+client = None
+if Groq is not None and os.getenv("GROQ_API_KEY"):
+    try:
+        client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+    except Exception as _e:
+        print(f"[run.py] Groq SDK init skipped: {_e}")
+
+def ask_llm(system: str, query: str, tier: str = "fast", temperature: float = 0.7) -> str:
+    """Prefer the resilient multi-provider layer; fall back to Groq SDK."""
+    if _llm_ask is not None and _llm_available():
+        try:
+            txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature)
+            logging.info(f"[llm:{prov}] ok")
+            return txt
+        except Exception as e:
+            logging.error(f"[llm] all providers failed ({e}); falling back to Groq SDK")
+
+    # Legacy direct-Groq fallback (only if the SDK client initialized)
+    if client is None:
+        return "[llm unavailable: no provider key set (need GROQ_API_KEY or one of CEREBRAS/OPENROUTER/GITHUB_MODELS/TOGETHER)]"
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": query}
+                ],
+                temperature=temperature,
+                max_tokens=2048
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            logging.error(f"[llm:groq] failed: {e}")
