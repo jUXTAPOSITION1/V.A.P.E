@@ -72,7 +72,7 @@ all running in the **existing free GitHub Actions** (no new infra):
 
 | Agent | Role | Backing tools (already built) | Compute |
 |---|---|---|---|
-| **SCOUT** ⚪ | Bounty-radar triage — rank new Immunefi/Code4rena/hack leads by fit | `intel/bounty-radar/*`, market_data | hourly, no LLM for ranking |
+| **SCOUT** ✅ | Bounty-radar triage — ranks new DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Code4rena/Sherlock have no stable public API so those stay static seed data until one exists | `intel/bounty-radar/*`, DeFiLlama hacks feed | hourly (`.github/workflows/scout.yml`), no LLM |
 | **LEDGER** ⚪ | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace, base_rpc (Etherscan Pro unlocks full) | on-demand |
 | **ORACLE** ⚪ | Market-anomaly watcher — TVL outflow / depeg / gas-spike alerts → broadcasts | data_fetchers anomaly flags | 4×/day, rule-based first |
 | **CURATOR** 🟡 | SKILLFORGE synthesizer — distills harvested intel into skills (exists as synthesize.py) | harvest + Groq | daily PR |
@@ -133,7 +133,7 @@ the CI-side default with Groq as the low-latency path. ⚪ evaluate first.
 1. ✅ ACP fulfillment bridge (`acp_fulfill.py`) — done.
 2. ⚪ Wire bridge into the monitor handler (6 offerings settle with no LLM).
 3. ⚪ `agents/llm.py` multi-provider fallback (Groq + Cerebras + GitHub Models).
-4. ⚪ SCOUT + ORACLE (rule-based, no LLM) on existing crons.
+4. ✅ SCOUT shipped (rule-based, no LLM, hourly). ⚪ ORACLE still pending.
 5. ⚪ Etherscan Pro key → unlocks wallet_trace → forensics_deep ($2) + LEDGER agent.
 6. ⚪ Reputation loop on the dashboard → more inbound ACP jobs.
 
