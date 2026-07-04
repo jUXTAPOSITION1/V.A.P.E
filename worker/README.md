@@ -35,6 +35,9 @@ curl -i "http://localhost:8787/scan/token_safety_check?address=0x2b601d7fc470536
 
 ```bash
 npx wrangler secret put ETHERSCAN_API_KEY   # optional — only exploit_check/safety_preflight use it
+npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement — see below
+npx wrangler secret put CDP_API_KEY_SECRET
+npx wrangler secret put ALCHEMY_API_KEY     # optional — powers /portfolio, /nfts, /network-status
 ```
 
 ### Deploy
@@ -43,16 +46,23 @@ npx wrangler secret put ETHERSCAN_API_KEY   # optional — only exploit_check/sa
 npx wrangler deploy
 ```
 
-Ships on your `*.workers.dev` subdomain by default — no custom domain needed to start.
+Ships on your `*.workers.dev` subdomain by default — no custom domain needed to start. **One manual one-time step**: Cloudflare requires you to register a `workers.dev` subdomain from the dashboard before the first deploy of any Worker on a fresh account will actually publish; `wrangler deploy` will tell you if this is still pending.
 
-## Testnet first, then mainnet
+## Base mainnet + Coinbase Developer Platform
 
-`wrangler.toml` defaults to **Base Sepolia** (`eip155:84532`) and the free public facilitator (`facilitator.x402.org`) — no Coinbase account needed to prove the full loop with test funds. To go live on Base mainnet:
+`wrangler.toml` is pointed at **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `wrangler.toml`/`src/index.ts` for the testnet config if you need to reproduce that).
 
-1. Get [Coinbase Developer Platform](https://portal.cdp.coinbase.com) credentials.
-2. Change `X402_NETWORK` in `wrangler.toml` to `"eip155:8453"`.
-3. Change `X402_FACILITATOR_URL` to your CDP-hosted facilitator endpoint.
-4. If that facilitator needs auth headers, wire them via `HTTPFacilitatorClient`'s `createAuthHeaders` option in `src/index.ts`, backed by `wrangler secret put` — never a plaintext var.
+To actually settle payments you need a [CDP Secret API Key](https://portal.cdp.coinbase.com) (`CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` above) — `src/lib/cdpAuth.ts` mints a Bearer JWT from it for every `/verify`, `/settle`, and `/supported` call to the facilitator (`src/index.ts`'s `buildCreateAuthHeaders()`). Without both secrets set, those calls go out unauthenticated and the facilitator returns 401.
+
+## Free Alchemy-backed reliability endpoints
+
+Three unpaid, no-x402-gate routes back the site's wallet profile ("Your Case File") and metrics strip:
+
+- `GET /portfolio?address=0x…` — full auto-discovered native ETH + ERC-20 balances via Alchemy's `alchemy_getTokenBalances`/`alchemy_getTokenMetadata`, superseding the site's curated `docs/assets/base-tokens.json` fallback list.
+- `GET /nfts?address=0x…` — NFT holdings via Alchemy's NFT v3 API.
+- `GET /network-status` — current block number + gas price, more reliable than a direct call to the public `mainnet.base.org` RPC.
+
+All three need `ALCHEMY_API_KEY` (a free-tier [Alchemy](https://dashboard.alchemy.com) app scoped to Base Mainnet) and return `503` if it isn't set — the site (`docs/assets/app.js`/`profile.js`) treats that as "not deployed yet" and transparently falls back to its direct public-API path, so the site works identically with or without this worker running.
 
 ## CI
 

@@ -2,20 +2,23 @@
  * VAPE x402 payment worker — pay-per-call access to the 6 "auto" ACP
  * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
  * 14-offering catalog; the other 8 need the SKILLFORGE tool tier and are
- * hired via a real ACP job instead).
+ * hired via a real ACP job instead). Also hosts a few free, unpaid Alchemy-
+ * backed reliability endpoints (/portfolio, /nfts, /network-status) that the
+ * site's wallet profile and metrics strip prefer over direct public-RPC
+ * calls when this worker is deployed and configured.
  *
- * Ships pointed at Base Sepolia + the public x402.org testnet facilitator
- * (no account needed) so the full 402 -> sign -> resubmit -> settle loop can
- * be proven with no real funds at risk. Switching to Base mainnet is a
- * wrangler.toml var change (X402_NETWORK, X402_FACILITATOR_URL) once you
- * have Coinbase Developer Platform credentials — see wrangler.toml.
+ * Runs on Base mainnet + Coinbase Developer Platform's hosted x402
+ * facilitator (real funds) — see wrangler.toml for the network/facilitator
+ * config and required secrets.
  */
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { fulfill, type HandlerName } from "./handlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
+import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
 type Caip2Network = `${string}:${string}`;
@@ -24,10 +27,13 @@ export interface Env {
   ETHERSCAN_API_KEY?: string;
   CDP_API_KEY_ID?: string;
   CDP_API_KEY_SECRET?: string;
+  ALCHEMY_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
 }
+
+const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 
 /**
  * Builds the facilitator's `createAuthHeaders` callback. Only CDP's hosted
@@ -88,6 +94,48 @@ app.get("/", (c) =>
     docs: "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
   })
 );
+
+// Free, unpaid Alchemy-backed endpoints — no x402 gate, since these back the
+// site's read-only wallet profile and metrics strip rather than a priced
+// offering. 503 (not 500) when ALCHEMY_API_KEY isn't configured, so callers
+// can fall back to their direct public-RPC path instead of erroring. CORS
+// open (GET, no credentials) since they're called browser-side from GitHub
+// Pages with no auth of their own.
+const freeEndpointCors = cors({ origin: "*", allowMethods: ["GET"] });
+
+app.get("/portfolio", freeEndpointCors, async (c) => {
+  const address = c.req.query("address") || "";
+  if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
+  if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "portfolio lookup not configured" }, 503);
+  try {
+    const portfolio = await getPortfolio(c.env, address);
+    return c.json({ address, ...portfolio });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed" }, 502);
+  }
+});
+
+app.get("/nfts", freeEndpointCors, async (c) => {
+  const address = c.req.query("address") || "";
+  if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
+  if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "nft lookup not configured" }, 503);
+  try {
+    const nfts = await getNftsForOwner(c.env, address);
+    return c.json({ address, nfts });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed" }, 502);
+  }
+});
+
+app.get("/network-status", freeEndpointCors, async (c) => {
+  if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "network status not configured" }, 503);
+  try {
+    const status = await getNetworkStatus(c.env);
+    return c.json(status);
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed" }, 502);
+  }
+});
 
 app.use("*", async (c, next) => {
   const facilitatorClient = new HTTPFacilitatorClient({

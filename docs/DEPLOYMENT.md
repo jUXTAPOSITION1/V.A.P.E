@@ -106,15 +106,21 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ## E. x402 payment worker (pay-per-call hiring)
 `worker/` is a Cloudflare Worker gating 6 of VAPE's 14 offerings behind Coinbase's x402
 HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
-ACP job instead, see section D). Ships pointed at Base Sepolia + the free public
-facilitator so the full pay → verify → settle loop can be proven with no real funds.
-See `worker/README.md` for full setup; summary:
+ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
+Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was
+proven first on Base Sepolia + the free public facilitator before that switch.
+It also hosts three free, unpaid Alchemy-backed endpoints (`/portfolio`, `/nfts`,
+`/network-status`) that the site's wallet profile and metrics strip prefer over direct
+public-RPC calls once deployed. See `worker/README.md` for full setup; summary:
 
 ```bash
 cd worker
 npm install
 npx wrangler login
 npx wrangler secret put ETHERSCAN_API_KEY   # optional, only 2 of 6 offerings use it
+npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement
+npx wrangler secret put CDP_API_KEY_SECRET
+npx wrangler secret put ALCHEMY_API_KEY     # optional, powers /portfolio /nfts /network-status
 npx wrangler deploy
 ```
 
@@ -126,11 +132,15 @@ npx wrangler deploy
 
 Without these set, the workflow still runs (checkout, install, typecheck) and skips the
 live deploy step rather than failing — safe to merge before you've set up Cloudflare.
+The Worker secrets above (`CDP_API_KEY_ID`/etc.) are separate from these — they're set
+once via `wrangler secret put`, not as GitHub Actions repo secrets, since the CI job
+only builds and deploys code, never runs it.
 
-### E2. Going to Base mainnet
-Testnet (Base Sepolia) needs no account. Mainnet needs a
-[Coinbase Developer Platform](https://portal.cdp.coinbase.com) account for a hosted
-facilitator — see `worker/wrangler.toml` for the exact vars to change.
+### E2. CDP mainnet credentials
+Get a [Coinbase Developer Platform](https://portal.cdp.coinbase.com) Secret API Key —
+that's `CDP_API_KEY_ID`/`CDP_API_KEY_SECRET` above. `src/lib/cdpAuth.ts` uses it to sign
+the Bearer JWT the facilitator requires on every `/verify` and `/settle` call; without
+it, settlement calls go out unauthenticated and CDP returns 401.
 
 ---
 
