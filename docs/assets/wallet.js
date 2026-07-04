@@ -2,10 +2,9 @@
 // discovery (MetaMask, Coinbase extension, Rabby, etc.) + Coinbase Wallet SDK
 // (mobile/non-extension) + WalletConnect (everything else, QR/mobile).
 //
-// WalletConnect needs a Project ID from https://cloud.reown.com (free) before
-// that connector activates — until then, injected wallets + Coinbase Wallet
-// SDK work on their own.
-const WALLETCONNECT_PROJECT_ID = ''; // TODO: set once you have a Reown Cloud project
+// Project ID from https://cloud.reown.com — public identifier, safe to embed
+// client-side (identifies the app to the relay network, no auth power).
+const WALLETCONNECT_PROJECT_ID = '624e168bc87a042f6e09ec7301ea357d';
 
 const BASE_CHAIN_HEX = '0x2105'; // 8453
 const BASE_PARAMS = {
