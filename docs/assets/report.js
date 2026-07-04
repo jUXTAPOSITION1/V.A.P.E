@@ -32,6 +32,39 @@ function basescanUrl(address) {
     return `https://basescan.org/address/${address}`;
 }
 
+// Deliverable JSON is real on-chain/API data, but individual fields (a
+// token's name, a flag's free-text description) can themselves be
+// attacker-influenced (e.g. a malicious token's on-chain name()) — same
+// class of risk already handled in profile.js, so escape before innerHTML.
+function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function verdictClass(v) {
+    if (v === "PROCEED" || v === "LOW" || v === "GO") return 'bg-emerald-500/20 text-emerald-400';
+    if (v === "CAUTION" || v === "MEDIUM") return 'bg-amber-500/20 text-amber-400';
+    if (v === "REJECT" || v === "HIGH" || v === "EXTREME") return 'bg-rose-500/20 text-rose-400';
+    return 'bg-white/10 text-zinc-300';
+}
+
+function renderDeliverableHtml(obj, depth = 0) {
+    const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict']);
+    return Object.entries(obj).filter(([k]) => depth > 0 || !skip.has(k)).map(([key, val]) => {
+        const indent = depth ? `style="margin-left:${depth * 14}px"` : '';
+        if (val !== null && typeof val === 'object' && !Array.isArray(val)) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                ${renderDeliverableHtml(val, depth + 1)}
+            </div>`;
+        }
+        const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
+        return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
+            <span class="text-zinc-500 shrink-0">${escapeHtml(humanLabel(key))}</span>
+            <span class="text-zinc-300 text-right break-all">${escapeHtml(display)}</span>
+        </div>`;
+    }).join('');
+}
+
 const Report = {
     _jsPDF: null,
     async _load() {
@@ -216,6 +249,40 @@ const Report = {
             img.onerror = reject;
             img.src = src;
         });
+    },
+
+    // Synchronous, no jsPDF dependency, no network — the actual report
+    // content rendered as HTML, so it's visible immediately on payment
+    // completion and in Case History regardless of whether the PDF/download
+    // path works in a given browser (e.g. an in-app wallet webview that
+    // blocks third-party CDN scripts or file downloads).
+    buildHtmlSummary(opts) {
+        const deliverable = (opts.result && opts.result.deliverable) || {};
+        const verdictField = deliverable.verdict || deliverable.rug_risk || deliverable.combined || deliverable.token_verdict;
+        const generated = new Date().toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC');
+        const disclaimer = (opts.result && opts.result.disclaimer) || 'Real on-chain data. Not investment advice.';
+        const source = (opts.result && opts.result.source) || 'vape-real-data';
+        const addr = opts.requestedAddress;
+        const addrHtml = addr ? `<a href="${basescanUrl(addr)}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
+        const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
+        return `
+            <div class="text-left">
+                <div class="flex items-center justify-between gap-3 mb-3">
+                    <div class="font-display text-sm">${escapeHtml(humanLabel(opts.offering || ''))}</div>
+                    ${verdictField ? `<span class="inline-block px-3 py-1 rounded-lg font-display text-xs shrink-0 ${verdictClass(verdictField)}">${escapeHtml(VERDICT_LABELS[verdictField] || verdictField)}</span>` : ''}
+                </div>
+                <div class="text-[11px] text-zinc-500 mb-3 space-y-0.5">
+                    <div>Target: ${addrHtml}</div>
+                    <div>${opts.via === 'x402' ? 'Paid via x402' : 'Free preview'} ${opts.priceUsd != null ? `· $${opts.priceUsd}` : ''} · ${escapeHtml(generated)}</div>
+                </div>
+                <div class="mb-2">${renderDeliverableHtml(deliverable)}</div>
+                ${flags.length ? `
+                    <div class="mt-2">
+                        <div class="text-[11px] font-semibold text-zinc-300 mb-1">Flags raised</div>
+                        ${flags.map(f => `<div class="text-xs text-rose-400 flex gap-1.5"><span>•</span><span class="text-zinc-400">${escapeHtml(String(f))}</span></div>`).join('')}
+                    </div>` : ''}
+                <div class="text-[10px] text-zinc-600 mt-3">${escapeHtml(disclaimer)} · Source: ${escapeHtml(source)}</div>
+            </div>`;
     },
 
     async downloadPdf(opts) {
