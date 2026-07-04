@@ -1,0 +1,239 @@
+#!/usr/bin/env python3
+"""
+VAPE Community Intel Broadcast — lightweight, zero-LLM, real-data-only revival.
+
+intel/broadcasts/ went dormant on 2026-07-01: nothing in this repo's CI ever
+generated these files — every historical broadcast came from an external
+process outside this codebase. Same "declared but never wired" gap as the
+Tavily/Firecrawl/BrightData research router before it got wired into
+agents/investigate.py and agents/run.py.
+
+This is a from-scratch, deterministic replacement built entirely from data
+VAPE's own pipeline already fetches — agents/data_fetchers.build_market_context()
+(TVL, fees, hacks, Fear&Greed, global market, Virtuals, movers, anomaly flags)
+plus the investigation ledger (agents/investigate.py). No new API calls beyond
+what build_market_context() already makes, no LLM cost, so it can run every
+few hours indefinitely for free.
+
+Output: intel/broadcasts/broadcast-<UTC-YYYY-MM-DD-HH>.md — same naming
+convention the old broadcasts used, so agents/build_intel_index.py's
+scan_broadcasts() picks it up with zero changes.
+
+CLI:
+  python -m agents.broadcast [--window-hours 6]
+"""
+import os
+import sys
+import argparse
+from datetime import datetime, timezone, timedelta
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+BROADCAST_DIR = os.path.join(ROOT, "intel", "broadcasts")
+
+try:
+    from agents.data_fetchers import build_market_context
+    from agents import investigate as inv
+except Exception:
+    from data_fetchers import build_market_context
+    import investigate as inv
+
+try:
+    from skillforge.memory.retriever import append_to_memory
+except Exception:
+    append_to_memory = None
+
+
+def now_iso():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _usd(n):
+    try:
+        n = float(n)
+    except Exception:
+        return "—"
+    if abs(n) >= 1e12:
+        return f"${n/1e12:.2f}T"
+    if abs(n) >= 1e9:
+        return f"${n/1e9:.2f}B"
+    if abs(n) >= 1e6:
+        return f"${n/1e6:.1f}M"
+    if abs(n) >= 1e3:
+        return f"${n/1e3:.0f}K"
+    return f"${n:.0f}"
+
+
+def _pct(n, digits=1):
+    try:
+        return f"{float(n):+.{digits}f}%"
+    except Exception:
+        return "—"
+
+
+def _recent_ledger_activity(window_hours):
+    """Ledger entries last_investigated within the window, newest first."""
+    ledger = inv._load_ledger()
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=window_hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    recent = [e for e in ledger.values() if e.get("last_investigated", "") >= cutoff]
+    recent.sort(key=lambda e: e.get("last_investigated", ""), reverse=True)
+    return recent, ledger
+
+
+def _verdict_counts(ledger):
+    counts = {"PROCEED": 0, "CAUTION": 0, "REJECT": 0}
+    for e in ledger.values():
+        v = e.get("last_verdict")
+        if v in counts:
+            counts[v] += 1
+    return counts
+
+
+def build_broadcast(window_hours=6):
+    ctx = build_market_context()
+    recent, ledger = _recent_ledger_activity(window_hours)
+    counts = _verdict_counts(ledger)
+
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H")
+    L = []
+    L.append("# 🔍 VAPE Community Intelligence Broadcast")
+    L.append(f"**Date:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC  ")
+    L.append(f"**Broadcast #:** {stamp}")
+    L.append("")
+    L.append("---")
+    L.append("")
+
+    # ── Overview (feeds build_intel_index.py's _summary() extraction) ──────
+    flags = ctx.get("anomaly_flags") or []
+    clean = flags == ["none detected by rule-based pass"]
+    L.append("## Overview")
+    if clean and not recent:
+        L.append(f"Quiet cycle: no rule-based anomalies flagged across Base/DeFi/macro this "
+                  f"window, and no new VAPE investigations completed in the last {window_hours}h. "
+                  f"Base TVL {_usd((ctx.get('base_tvl') or {}).get('tvl_usd'))}, "
+                  f"{counts['PROCEED']+counts['CAUTION']+counts['REJECT']} targets on VAPE's "
+                  f"permanent record ({counts['REJECT']} REJECT / {counts['CAUTION']} CAUTION / "
+                  f"{counts['PROCEED']} PROCEED).")
+    else:
+        bits = []
+        if recent:
+            bits.append(f"{len(recent)} new VAPE investigation(s) in the last {window_hours}h")
+        if not clean:
+            bits.append(f"{len(flags)} rule-based anomaly flag(s) this cycle")
+        L.append(f"{' and '.join(bits)}. Base TVL {_usd((ctx.get('base_tvl') or {}).get('tvl_usd'))}, "
+                  f"{counts['PROCEED']+counts['CAUTION']+counts['REJECT']} targets on VAPE's permanent "
+                  f"record ({counts['REJECT']} REJECT / {counts['CAUTION']} CAUTION / {counts['PROCEED']} PROCEED).")
+    L.append("")
+
+    # ── Anomaly flags (rule-based, real) ────────────────────────────────────
+    L.append("## 🚨 Anomaly Flags")
+    if clean:
+        L.append("None this cycle — clean sweep across TVL, gas, exploit feed, and macro sentiment checks.")
+    else:
+        for f in flags:
+            L.append(f"- {f}")
+    L.append("")
+
+    # ── VAPE Casework (real ledger activity) ────────────────────────────────
+    L.append("## 🕵️ VAPE Casework")
+    if recent:
+        for e in recent[:8]:
+            emoji = {"PROCEED": "🟢", "CAUTION": "🟡", "REJECT": "🔴"}.get(e.get("last_verdict"), "⚪")
+            L.append(f"- {emoji} **{e.get('symbol', '?')}** (`{e.get('address', '?')[:10]}…`) — "
+                      f"{e.get('last_verdict')} {e.get('last_score')}/100")
+    else:
+        L.append(f"No new investigations completed in the last {window_hours}h — see the "
+                  "[fail](../investigations/fail-list.md) / [caution](../investigations/caution-list.md) / "
+                  "[pass](../investigations/pass-list.md) lists for the full permanent record.")
+    L.append("")
+
+    # ── Security Pulse (real DeFiLlama hack feed) ───────────────────────────
+    L.append("## 🛡️ Security Pulse")
+    hacks = (ctx.get("security_hacks") or {}).get("incidents") or []
+    if hacks:
+        for h in hacks[:5]:
+            L.append(f"- **{h.get('date')}** {h.get('name')} — ${h.get('amount_usd_m')}M on "
+                      f"{', '.join(h.get('chains') or [])} ({h.get('technique') or 'technique unknown'})")
+    else:
+        L.append("No incidents in DeFiLlama's feed this cycle.")
+    L.append("")
+
+    # ── Market Pulse (real Fear&Greed + global market) ──────────────────────
+    fng = ctx.get("fear_greed") or {}
+    glob_m = ctx.get("global_market") or {}
+    prices = ctx.get("prices") or {}
+    L.append("## 📊 Market Pulse")
+    if fng.get("value") is not None:
+        L.append(f"- Fear & Greed: **{fng.get('value')}** ({fng.get('classification')}), "
+                  f"prev {fng.get('prev_value')} ({fng.get('prev_classification')})")
+    if glob_m.get("total_mcap_usd") is not None:
+        L.append(f"- Total crypto mcap: {_usd(glob_m.get('total_mcap_usd'))} "
+                  f"({_pct(glob_m.get('mcap_change_24h_pct'))} 24h) · "
+                  f"BTC dom {glob_m.get('btc_dominance_pct')}% · ETH dom {glob_m.get('eth_dominance_pct')}%")
+    if isinstance(prices, dict) and prices.get("ethereum"):
+        eth_p = (prices.get("ethereum") or {}).get("usd")
+        btc_p = (prices.get("bitcoin") or {}).get("usd")
+        L.append(f"- ETH ${eth_p} · BTC ${btc_p}")
+    L.append("")
+
+    # ── Base & Virtuals Update (real TVL/fees/gas + VIRTUAL) ────────────────
+    tvl = ctx.get("base_tvl") or {}
+    fees = ctx.get("base_fees") or {}
+    activity = ctx.get("chain_activity") or {}
+    virtuals = ctx.get("virtuals") or {}
+    L.append("## ⛓️ Base & Virtuals Update")
+    L.append(f"- Base TVL: {_usd(tvl.get('tvl_usd'))} ({_pct(tvl.get('tvl_24h_change_pct'))} 24h)")
+    top_protocols = tvl.get("top_protocols") or []
+    if top_protocols:
+        top3 = ", ".join(f"{p.get('name')} ({_usd(p.get('tvl_usd'))})" for p in top_protocols[:3])
+        L.append(f"- Top protocols: {top3}")
+    if activity.get("gas_price_gwei") is not None:
+        L.append(f"- Gas: {activity.get('gas_price_gwei')} gwei")
+    if fees.get("total_fees_24h_usd") is not None:
+        L.append(f"- Base 24h fees: {_usd(fees.get('total_fees_24h_usd'))} ({_pct(fees.get('change_24h_pct'))})")
+    if virtuals.get("virtual_price_usd") is not None:
+        L.append(f"- VIRTUAL: ${virtuals.get('virtual_price_usd')} "
+                  f"({_pct(virtuals.get('virtual_change_24h_pct'))} 24h)")
+    L.append("")
+
+    L.append("---")
+    L.append("")
+    L.append("*V.A.P.E. — Virtual Ape Private Eye — @based_vape*  ")
+    L.append("*The chain never lies. Real data only — every figure above traces to a live, "
+              "keyless API call made at generation time.*")
+
+    return "\n".join(L) + "\n", stamp
+
+
+def main():
+    ap = argparse.ArgumentParser(description="VAPE Community Intel Broadcast")
+    ap.add_argument("--window-hours", type=int, default=6,
+                     help="lookback window for 'recent' casework/cadence framing (default 6)")
+    args = ap.parse_args()
+
+    os.makedirs(BROADCAST_DIR, exist_ok=True)
+    content, stamp = build_broadcast(args.window_hours)
+    path = os.path.join(BROADCAST_DIR, f"broadcast-{stamp}.md")
+    with open(path, "w") as f:
+        f.write(content)
+    print(f"[broadcast] wrote {path}")
+
+    if append_to_memory:
+        try:
+            append_to_memory(
+                category="finding",
+                title=f"Community broadcast {stamp}",
+                content=content[:1500],
+                source="agents/broadcast.py",
+                tags=["broadcast", "community-intel"],
+                confidence=0.7,
+                metadata={"path": os.path.relpath(path, ROOT)},
+            )
+        except Exception as e:
+            print(f"[broadcast] memory log failed (non-fatal): {e}")
+
+
+if __name__ == "__main__":
+    main()

@@ -16,6 +16,7 @@ import { cors } from "hono/cors";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
+import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
 import { fulfill, type HandlerName } from "./handlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
@@ -84,6 +85,45 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   rug_pull_alert: "$0.03",
   safety_preflight: "$0.05",
   market_intel: "$0.15",
+};
+
+// Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
+// here so the x402 Bazaar listing shows the same icon a human sees in their
+// browser tab, not a separate logo asset.
+const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png";
+
+// Per-offering discovery metadata for the x402 Bazaar (see
+// x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
+// for correctly-implemented services, and may require a CDP-provisioned
+// payout wallet rather than VAPE's external ACP EOA; this is a best-effort
+// announcement, not a guaranteed listing). Mirrors the real output shape of
+// each agents/acp_fulfill.py / worker/src/handlers.ts handler exactly — no
+// invented fields.
+const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Record<string, unknown> }> = {
+  exploit_check: {
+    description: "Contract verification + proxy-swap surface check.",
+    output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
+  },
+  token_safety_check: {
+    description: "Full GoPlus + DexScreener token safety scan with CertiK-style scoring.",
+    output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
+  },
+  liquidity_check: {
+    description: "Liquidity depth + top pair DEX for a Base token.",
+    output: { address: "0x...", liquidity_usd: 500000, top_pair_dex: "aerodrome", verdict: "PROCEED" },
+  },
+  rug_pull_alert: {
+    description: "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration).",
+    output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
+  },
+  safety_preflight: {
+    description: "Combined token safety + contract verification preflight verdict.",
+    output: { address: "0x...", token_verdict: "PROCEED", verified: true, combined: "PROCEED" },
+  },
+  market_intel: {
+    description: "Base TVL, top protocols, prices, and rule-based anomaly flags.",
+    output: { base_tvl: 4100000000, top_protocols: ["Morpho", "Aerodrome"], anomaly_flags: [] },
+  },
 };
 
 const app = new Hono<{ Bindings: Env }>();
@@ -195,17 +235,39 @@ app.get("/cost-basis", async (c) => {
 });
 
 app.use("*", async (c, next) => {
-  const facilitatorClient = new HTTPFacilitatorClient({
+  // withBazaar() extends the facilitator client so its getSupported()/
+  // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
+  // discovery index reads — without this wrapper, registerExtension() below
+  // declares the route metadata but the facilitator has no signal to
+  // actually catalog it.
+  const facilitatorClient = withBazaar(new HTTPFacilitatorClient({
     url: c.env.X402_FACILITATOR_URL,
     createAuthHeaders: buildCreateAuthHeaders(c.env),
-  });
-  const resourceServer = new x402ResourceServer(facilitatorClient).register(c.env.X402_NETWORK, new ExactEvmScheme());
+  }));
+  const resourceServer = new x402ResourceServer(facilitatorClient)
+    .register(c.env.X402_NETWORK, new ExactEvmScheme())
+    .registerExtension(bazaarResourceServerExtension);
 
   const routes: Record<string, unknown> = {};
   for (const [name, price] of Object.entries(OFFERING_PRICES)) {
+    const meta = OFFERING_DISCOVERY[name as HandlerName];
     routes[`GET /scan/${name}`] = {
       accepts: { scheme: "exact", price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-      description: `VAPE ${name} — real GoPlus/DexScreener/DefiLlama data, no simulation.`,
+      description: `VAPE ${name} — ${meta.description} Real GoPlus/DexScreener/DefiLlama data, no simulation.`,
+      serviceName: "VAPE",
+      iconUrl: ICON_URL,
+      tags: ["security", "on-chain-forensics", "base"],
+      extensions: declareDiscoveryExtension({
+        input: { address: "0x0000000000000000000000000000000000dEaD" },
+        inputSchema: {
+          properties: {
+            address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
+            chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+          },
+          required: ["address"],
+        },
+        output: { example: meta.output },
+      }),
     };
   }
   return paymentMiddleware(routes as any, resourceServer)(c, next);
