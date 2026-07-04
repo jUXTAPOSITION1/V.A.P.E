@@ -116,14 +116,30 @@ class GitHubMCPWrapper:
                 return True, body
         
         except urllib.error.HTTPError as e:
+            # Read GitHub's actual error body instead of guessing — a 403 here is most
+            # often NOT rate limiting: it's the repo-level "Allow GitHub Actions to
+            # create and approve pull requests" setting being off (Settings > Actions >
+            # General > Workflow permissions), which silently blocks GITHUB_TOKEN-
+            # authenticated PR creation regardless of the workflow's own `permissions:`
+            # block. Confirmed via a real self-improve.yml run: workflow declared
+            # `pull-requests: write`, GitHub still returned 403 on POST .../pulls.
+            try:
+                detail = json.loads(e.read().decode())
+                msg = detail.get("message", "")
+            except Exception:
+                msg = ""
             if e.code == 403:
-                logger.error("GitHub: Rate limited or insufficient permissions")
-                return False, {"error": "rate_limited"}
+                hint = (" — likely the repo's \"Allow GitHub Actions to create and "
+                        "approve pull requests\" setting is OFF (Settings > Actions > "
+                        "General > Workflow permissions); this blocks GITHUB_TOKEN PR "
+                        "creation even with pull-requests: write declared in the workflow")
+                logger.error(f"GitHub 403{': ' + msg if msg else ''}{hint}")
+                return False, {"error": "forbidden", "message": msg}
             elif e.code == 404:
                 return False, {"error": "not_found"}
             else:
-                logger.error(f"GitHub HTTP {e.code}: {e.reason}")
-                return False, {"error": str(e.reason)}
+                logger.error(f"GitHub HTTP {e.code}: {e.reason}{': ' + msg if msg else ''}")
+                return False, {"error": str(e.reason), "message": msg}
         except Exception as e:
             logger.error(f"GitHub API call failed: {e}")
             return False, {"error": str(e)}
