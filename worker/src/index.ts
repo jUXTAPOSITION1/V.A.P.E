@@ -85,6 +85,22 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
 
 const app = new Hono<{ Bindings: Env }>();
 
+// Applies to every route, including /scan/*: the site calls this worker
+// browser-side from GitHub Pages (a different origin), and the x402 payment
+// retry sends a custom `X-PAYMENT` header, which makes browsers preflight
+// with OPTIONS — without allowHeaders covering it, that preflight (and thus
+// the whole payment flow) fails before any wallet-signing code ever runs.
+// exposeHeaders makes the x402 protocol's custom response headers (the 402
+// body's payment requirements come through as JSON, but settlement details
+// arrive as headers) readable by client JS, which cross-origin responses
+// hide by default unless explicitly exposed.
+app.use("*", cors({
+  origin: "*",
+  allowMethods: ["GET", "OPTIONS"],
+  allowHeaders: ["Content-Type", "X-PAYMENT", "PAYMENT-SIGNATURE"],
+  exposeHeaders: ["PAYMENT-REQUIRED", "PAYMENT-RESPONSE", "X-PAYMENT-RESPONSE"],
+}));
+
 app.get("/", (c) =>
   c.json({
     agent: "VAPE",
@@ -98,12 +114,8 @@ app.get("/", (c) =>
 // Free, unpaid Alchemy-backed endpoints — no x402 gate, since these back the
 // site's read-only wallet profile and metrics strip rather than a priced
 // offering. 503 (not 500) when ALCHEMY_API_KEY isn't configured, so callers
-// can fall back to their direct public-RPC path instead of erroring. CORS
-// open (GET, no credentials) since they're called browser-side from GitHub
-// Pages with no auth of their own.
-const freeEndpointCors = cors({ origin: "*", allowMethods: ["GET"] });
-
-app.get("/portfolio", freeEndpointCors, async (c) => {
+// can fall back to their direct public-RPC path instead of erroring.
+app.get("/portfolio", async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "portfolio lookup not configured" }, 503);
@@ -115,7 +127,7 @@ app.get("/portfolio", freeEndpointCors, async (c) => {
   }
 });
 
-app.get("/nfts", freeEndpointCors, async (c) => {
+app.get("/nfts", async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "nft lookup not configured" }, 503);
@@ -127,7 +139,7 @@ app.get("/nfts", freeEndpointCors, async (c) => {
   }
 });
 
-app.get("/network-status", freeEndpointCors, async (c) => {
+app.get("/network-status", async (c) => {
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "network status not configured" }, 503);
   try {
     const status = await getNetworkStatus(c.env);
