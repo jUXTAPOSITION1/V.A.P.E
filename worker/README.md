@@ -55,7 +55,7 @@ The Cloudflare path above needs a one-time `workers.dev` subdomain registration 
 
 This works because `src/index.ts`'s Hono `app` object has zero Cloudflare-specific code — the only Workers-specific things are `wrangler.toml` and how `c.env` gets populated. `deno/deno-entry.ts` is the Deno equivalent of that: it builds the same `Env` shape from `Deno.env.get(...)` and calls `app.fetch(req, env)` directly (Hono's documented pattern for feeding `c.env` on any non-Workers runtime).
 
-`deno/deno.json` (its own directory, deliberately **not** next to `package.json`) holds the import map aliasing the same npm packages `worker/package.json` uses — `hono`, `@x402/hono`, `@x402/core`, `@x402/evm`, `jose` — to their `npm:` specifiers Deno resolves natively, plus `"nodeModulesDir": "none"`. Both matter: a `deno.json` sitting next to a `package.json` makes Deno auto-detect a Node "workspace" and try to resolve *every* dependency in `package.json` — including unrelated devDependencies like `tsx`/`wrangler`/`typescript` that the Deno runtime never imports — which failed in an actual Deno Deploy build with an unrelated npm version-resolution error before this was separated out.
+`deno/deno.json` (its own directory, deliberately **not** next to `package.json`) holds the import map aliasing the same npm packages `worker/package.json` uses — `hono`, `@x402/hono`, `@x402/core`, `@x402/evm`, `@x402/extensions`, `jose` — to their `npm:` specifiers Deno resolves natively, plus `"nodeModulesDir": "none"`. Both matter: a `deno.json` sitting next to a `package.json` makes Deno auto-detect a Node "workspace" and try to resolve *every* dependency in `package.json` — including unrelated devDependencies like `tsx`/`wrangler`/`typescript` that the Deno runtime never imports — which failed in an actual Deno Deploy build with an unrelated npm version-resolution error before this was separated out.
 
 Verified locally in this session (via `npm install deno` — Deno ships as an npm package too):
 - `deno check deno-entry.ts` (run from `worker/deno/`) passes cleanly.
@@ -82,6 +82,14 @@ If you go this route instead of Cloudflare, `.github/workflows/deploy-worker.yml
 `wrangler.toml` is pointed at **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `wrangler.toml`/`src/index.ts` for the testnet config if you need to reproduce that).
 
 To actually settle payments you need a [CDP Secret API Key](https://portal.cdp.coinbase.com) (`CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` above) — `src/lib/cdpAuth.ts` mints a Bearer JWT from it for every `/verify`, `/settle`, and `/supported` call to the facilitator (`src/index.ts`'s `buildCreateAuthHeaders()`). Without both secrets set, those calls go out unauthenticated and the facilitator returns 401.
+
+## x402 Bazaar discovery + third-party directory listings
+
+Every `/scan/<offering>` route declares Bazaar discovery metadata (`@x402/extensions/bazaar`'s `declareDiscoveryExtension`, registered via `resourceServer.registerExtension(bazaarResourceServerExtension)`, with the facilitator client wrapped in `withBazaar(...)`) — `iconUrl` points at VAPE's real favicon (`docs/assets/favicon-32.png`), and `serviceName`/`tags`/per-offering `output.example` match the real handler output shapes in `src/handlers.ts`.
+
+**This is a best-effort announcement, not a guaranteed listing.** As of this writing Bazaar indexing has a live, unresolved bug ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112)) where correctly-implemented services following this exact pattern still don't get indexed, and one open theory is that it may require a CDP-provisioned payout wallet rather than an external EOA — VAPE's `PAY_TO_ADDRESS` is its existing ACP wallet (an external EOA), so indexing may simply not happen regardless of how correct this wiring is. Settlement is unaffected either way; this only touches discovery metadata.
+
+`agents/x402_directory_register.py` (run via `.github/workflows/x402-directory.yml`, `workflow_dispatch` only — not scheduled, since repeated calls to an unfamiliar directory's register endpoint with unknown dedup behavior risk creating duplicate listings) separately registers VAPE's 6 offerings with [402 Index](https://402index.io) (documented `POST /api/v1/register` API) and prints a ready-to-paste manifest for [x402 List](https://x402-list.com) (no documented public submission API — manual web-form only).
 
 ## Free reliability + pricing endpoints
 

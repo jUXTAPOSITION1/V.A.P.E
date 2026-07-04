@@ -12,6 +12,7 @@ sign or submit here (that stays in the ACP CLI path). This module only produces 
 deliverable payload, so it's safe to run/test without touching the wallet.
 """
 import json
+import os
 import sys
 
 try:
@@ -105,6 +106,20 @@ def _safety_preflight(req):
             "combined": "PROCEED" if ts.get("verdict") == "PROCEED" and (src.get("verified") if isinstance(src, dict) else False) else "REVIEW"}
 
 
+def _community_broadcast(req):
+    """Return VAPE's latest real community intel broadcast (agents/broadcast.py,
+    scheduled every 6h) — the offering was priced/listed since day one but had
+    no auto-handler because nothing generated fresh broadcasts to serve."""
+    import glob
+    files = sorted(glob.glob(os.path.join(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__))), "intel", "broadcasts", "broadcast-*.md")), reverse=True)
+    if not files:
+        return {"error": "no broadcast generated yet"}
+    with open(files[0]) as f:
+        content = f.read()
+    return {"file": os.path.basename(files[0]), "content": content}
+
+
 HANDLERS = {
     "token_safety_check": _token_safety,
     "liquidity_check": _liquidity,
@@ -112,6 +127,7 @@ HANDLERS = {
     "exploit_check": _exploit_check,
     "market_intel": _market_intel,
     "safety_preflight": _safety_preflight,
+    "community_intel_broadcast": _community_broadcast,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

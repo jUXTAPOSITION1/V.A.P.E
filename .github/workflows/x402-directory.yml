@@ -1,0 +1,25 @@
+name: x402 Directory Registration (manual, one-off announcement)
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why this run (e.g. "initial listing", "offering price change")'
+        required: false
+        default: 'manual trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Register VAPE's x402 offerings with discovery directories
+        run: python agents/x402_directory_register.py

@@ -1,0 +1,38 @@
+name: Community Intel Broadcast (6-hourly, real data, no LLM)
+
+on:
+  schedule:
+    - cron: '25 */6 * * *'   # every 6 hours at :25
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: broadcast
+  cancel-in-progress: false
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate community intel broadcast (stdlib only, zero-LLM)
+        run: python -m agents.broadcast
+      - name: Rebuild intel index (site Broadcasts tab/counter)
+        run: python agents/build_intel_index.py
+      - name: Commit broadcast + index (direct, data only)
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/broadcasts/ data/intel-index.json skillforge/memory/findings.jsonl
+          git commit -m "community broadcast $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
