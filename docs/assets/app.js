@@ -1,5 +1,13 @@
 const REPO = "jUXTAPOSITION1/V.A.P.E";
 const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+// The vape-x402 Cloudflare Worker's base URL — backs the free Alchemy-powered
+// /portfolio, /nfts, /network-status routes (more reliable + full token/NFT
+// auto-discovery vs. the public mainnet.base.org RPC + curated token list)
+// and the priced /scan/* x402 offerings. Empty until the worker is deployed
+// and its workers.dev subdomain registered (see worker/README.md) — every
+// caller below falls back to its existing direct-API path when this is unset
+// or the worker returns an error, so the site works identically either way.
+const WORKER_BASE = "";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 // app.js is a classic script; wallet.js/profile.js are ES modules with their own
@@ -7,6 +15,7 @@ const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400'
 // unless explicitly published on window.
 window.fmtUsd = fmtUsd;
 window.pct = pct;
+window.WORKER_BASE = WORKER_BASE;
 
 const App = {
     async refresh() {
@@ -150,12 +159,25 @@ const App = {
             this._tvl = base?.tvl;
         } catch(e){ this._set('m-tvl','—'); }
 
-        // Base RPC block + gas (public, keyless)
+        // Base block + gas — prefer the Alchemy-backed worker endpoint (more
+        // reliable, keyless from the browser's perspective) and fall back to
+        // the public RPC directly if the worker isn't deployed/configured.
         try {
-            const rpc = (m,p=[]) => fetch('https://mainnet.base.org',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',method:m,params:p,id:1})}).then(r=>r.json());
-            const [bn, gp] = await Promise.all([rpc('eth_blockNumber'), rpc('eth_gasPrice')]);
-            this._set('m-block', parseInt(bn.result,16).toLocaleString());
-            this._set('m-gas', (parseInt(gp.result,16)/1e9).toFixed(3));
+            let block, gasGwei;
+            if (WORKER_BASE) {
+                try {
+                    const s = await (await fetch(`${WORKER_BASE}/network-status`)).json();
+                    if (typeof s.blockNumber === 'number') { block = s.blockNumber; gasGwei = s.gasPriceGwei; }
+                } catch (e) { /* fall through to public RPC */ }
+            }
+            if (block == null) {
+                const rpc = (m,p=[]) => fetch('https://mainnet.base.org',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',method:m,params:p,id:1})}).then(r=>r.json());
+                const [bn, gp] = await Promise.all([rpc('eth_blockNumber'), rpc('eth_gasPrice')]);
+                block = parseInt(bn.result,16);
+                gasGwei = parseInt(gp.result,16)/1e9;
+            }
+            this._set('m-block', block.toLocaleString());
+            this._set('m-gas', gasGwei.toFixed(3));
         } catch(e){ this._set('m-block','—'); this._set('m-gas','—'); }
 
         // Prices
