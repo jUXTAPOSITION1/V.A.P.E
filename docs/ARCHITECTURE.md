@@ -61,8 +61,11 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   gaps — never an open-ended LLM guess), has `builder.py` propose a fix grounded in the
   actual target file, and opens a real PR via `skillforge/mcp.py`'s `GitHubMCPWrapper` for
   human review. Never auto-merges.
-- **`redteam.py`** 🟡 — AI red-team probes (currently an ungrounded stub, same class of bug
-  `self_improve.py` had before this fix — not yet rebuilt).
+- **`redteam.py`** ✅ — real prompt-injection test against VAPE's own report pipeline: crafts
+  a malicious token symbol, runs it through the real `investigate.py -> run.py` grounding
+  path and a real LLM call, judges the actual output, and logs a real finding if it's
+  hijacked (daily via `redteam.yml`). See `agents/run.py::_build_grounding()` for the
+  untrusted-data framing this test verifies.
 
 ### 2. Node agent — `src/` 🟡 (continuous-investigation lifecycle)
 Local/long-running runtime (`package.json`, ESM, `main: src/agents/vape.js`).
