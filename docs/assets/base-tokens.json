@@ -1,6 +1,6 @@
 {
   "schema": "vape.base-tokens.v1",
-  "note": "Curated Base (chain 8453) token list for the keyless wallet profile. Every address here is verified against an authoritative source (BaseScan / official project docs / OP-Stack spec) before being added — never memory-only. Balances are read live via public RPC; prices via CoinGecko's contract-address lookup (no per-token id needed).",
+  "note": "Curated Base (chain 8453) token list — the wallet profile's fallback when the vape-x402 worker (full Alchemy-backed auto-discovery) isn't deployed or configured. Every address here is verified against an authoritative source (BaseScan / official project docs / OP-Stack spec) before being added — never memory-only. Balances are read live via public RPC; prices via CoinGecko's contract-address lookup (no per-token id needed).",
   "tokens": [
     {
       "symbol": "WETH",

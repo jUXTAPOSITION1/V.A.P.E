@@ -19,6 +19,8 @@ import { HTTPFacilitatorClient } from "@x402/core/server";
 import { fulfill, type HandlerName } from "./handlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
+import { getCurrentPrices } from "./lib/coingecko";
+import { estimateCostBasis } from "./lib/costBasis";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
 type Caip2Network = `${string}:${string}`;
@@ -28,6 +30,7 @@ export interface Env {
   CDP_API_KEY_ID?: string;
   CDP_API_KEY_SECRET?: string;
   ALCHEMY_API_KEY?: string;
+  COINGECKO_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
@@ -148,6 +151,44 @@ app.get("/network-status", async (c) => {
   try {
     const status = await getNetworkStatus(c.env);
     return c.json(status);
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed" }, 502);
+  }
+});
+
+// CoinGecko current-price proxy — same data the site's client-side JS can
+// already fetch directly and unauthenticated, but attaching COINGECKO_API_KEY
+// server-side gets the Demo tier's higher/guaranteed rate limit instead of
+// the fully anonymous tier's. 503s (not 500s) so callers fall back to their
+// existing direct CoinGecko call, same pattern as the Alchemy routes above.
+app.get("/prices", async (c) => {
+  const addresses = (c.req.query("addresses") || "").split(",").map((a) => a.trim().toLowerCase()).filter(Boolean);
+  if (!addresses.length || !addresses.every((a) => ADDRESS_RE.test(a))) return c.json({ error: "invalid addresses" }, 400);
+  try {
+    const prices = await getCurrentPrices(c.env, addresses);
+    return c.json(prices);
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed" }, 502);
+  }
+});
+
+// Estimated cost-basis P&L — needs both ALCHEMY_API_KEY (to find each
+// token's earliest incoming transfer) and COINGECKO_API_KEY (historical
+// price by contract, which CoinGecko gates behind at least its free Demo
+// key). See lib/costBasis.ts for exactly what this does and doesn't compute
+// — it's a single-acquisition-point estimate, not full accounting.
+app.get("/cost-basis", async (c) => {
+  const address = c.req.query("address") || "";
+  if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
+  if (!c.env.ALCHEMY_API_KEY || !c.env.COINGECKO_API_KEY) return c.json({ error: "cost basis estimate not configured" }, 503);
+  try {
+    const portfolio = await getPortfolio(c.env, address);
+    const priced = await getCurrentPrices(c.env, portfolio.tokens.map((t) => t.contractAddress.toLowerCase()));
+    const tokensForEstimate = portfolio.tokens
+      .map((t) => ({ contractAddress: t.contractAddress, symbol: t.symbol, currentBalance: t.balance, currentPriceUsd: priced[t.contractAddress.toLowerCase()]?.usd ?? 0 }))
+      .filter((t) => t.currentBalance > 0 && t.currentPriceUsd > 0);
+    const results = await estimateCostBasis(c.env, address, tokensForEstimate);
+    return c.json({ address, results });
   } catch (e) {
     return c.json({ error: "upstream lookup failed" }, 502);
   }

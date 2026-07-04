@@ -84,7 +84,8 @@ README/Space config.
 
 ### C2. GitHub Pages (public site)
 `docs/index.html` is VAPE's public site — narrative "case file" pages, live Base/market
-data, wallet connect, a keyless wallet profile, and the hiring panels (x402 + ACP).
+data, wallet connect, a wallet profile (portfolio, P&L, cost-basis estimate, case
+history), and the hiring panels (x402 + ACP).
 Enable Pages: `Settings → Pages → Source: Deploy from branch → main /docs`.
 Zero build step — `docs/assets/*.js` are plain files, no bundler required.
 
@@ -120,7 +121,8 @@ npx wrangler login
 npx wrangler secret put ETHERSCAN_API_KEY   # optional, only 2 of 6 offerings use it
 npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement
 npx wrangler secret put CDP_API_KEY_SECRET
-npx wrangler secret put ALCHEMY_API_KEY     # optional, powers /portfolio /nfts /network-status
+npx wrangler secret put ALCHEMY_API_KEY     # optional, powers /portfolio /nfts /network-status /cost-basis
+npx wrangler secret put COINGECKO_API_KEY   # optional, powers /prices; required for /cost-basis
 npx wrangler deploy
 ```
 

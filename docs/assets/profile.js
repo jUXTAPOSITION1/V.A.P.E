@@ -9,7 +9,10 @@
 //    docs/assets/base-tokens.json for why that list is small and verified
 //    rather than "everything".
 // Both paths price tokens the same way: one batched CoinGecko contract-
-// address lookup, entirely client-side (no secret involved).
+// address lookup, preferring the vape-x402 worker's /prices proxy (attaches
+// a CoinGecko Demo API key server-side for better rate-limit headroom) and
+// falling back to a direct, unauthenticated CoinGecko call if the worker
+// isn't deployed or errors.
 const RPC_URL = 'https://mainnet.base.org';
 
 // Token/NFT names and symbols are read straight off arbitrary on-chain
@@ -57,10 +60,35 @@ const Profile = {
 
     async _prices(addresses) {
         if (!addresses.length) return {};
+        if (window.WORKER_BASE) {
+            try {
+                const res = await fetch(`${window.WORKER_BASE}/prices?addresses=${addresses.join(',')}`);
+                if (res.ok) return await res.json();
+            } catch (e) { /* fall through to direct CoinGecko */ }
+        }
         try {
             const url = `https://api.coingecko.com/api/v3/simple/token_price/base?contract_addresses=${addresses.join(',')}&vs_currencies=usd&include_24hr_change=true`;
             return await (await fetch(url)).json();
         } catch (e) { return {}; }
+    },
+
+    // Estimated cost-basis P&L, opt-in (heavier: Alchemy transfer history +
+    // CoinGecko historical price per token) — needs the worker deployed with
+    // both ALCHEMY_API_KEY and COINGECKO_API_KEY. See worker/src/lib/
+    // costBasis.ts for exactly what this does and doesn't compute (a single
+    // first-acquisition price point per token, not full weighted-average
+    // accounting) — that honesty is preserved end-to-end into the UI labels.
+    async loadCostBasis(address) {
+        if (!window.WORKER_BASE) return { error: 'not-configured' };
+        try {
+            const res = await fetch(`${window.WORKER_BASE}/cost-basis?address=${address}`);
+            if (res.status === 503) return { error: 'not-configured' };
+            if (!res.ok) return { error: 'upstream-failed' };
+            const data = await res.json();
+            return { results: data.results || [] };
+        } catch (e) {
+            return { error: 'upstream-failed' };
+        }
     },
 
     // Full auto-discovered ETH + ERC-20 balances via the vape-x402 worker's
@@ -133,11 +161,12 @@ const Profile = {
     },
 
     // Real 24h P&L — sums valueUsd * (change24h/100) across whatever holdings
-    // CoinGecko actually returned a 24hr-change figure for. Deliberately NOT
-    // a "since acquired" cost-basis P&L: that needs historical price-by-
-    // contract data, which CoinGecko now gates behind a paid/signup Demo API
-    // key — introducing that would break this site's keyless-first design,
-    // so it's out of scope rather than faked with a placeholder number.
+    // CoinGecko actually returned a 24hr-change figure for. This is separate
+    // from the "since acquired" cost-basis estimate below (_runCostBasis),
+    // which needs a CoinGecko Demo API key (worker/src/lib/costBasis.ts) and
+    // is a rougher single-acquisition-point approximation, not full
+    // accounting — the two numbers answer different questions and both are
+    // labeled honestly rather than blended into one figure.
     _computePnl24h(holdings) {
         const priced = holdings.filter(h => h.valueUsd > 0 && typeof h.change24h === 'number');
         if (!priced.length) return null;
@@ -217,6 +246,14 @@ const Profile = {
                 <div class="text-zinc-400 text-xs uppercase tracking-wider">All tracked assets (${holdings.length})</div>
             </div>
             <div id="profile-holdings" class="space-y-2 mb-6"></div>
+            <div class="glass rounded-2xl p-5 mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-zinc-400 text-xs uppercase tracking-wider">Cost basis estimate <span class="text-zinc-600 normal-case">(beta)</span></div>
+                    <button id="profile-costbasis-btn" class="bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs shrink-0">Run estimate</button>
+                </div>
+                <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet — an approximation, not a full weighted-average cost basis across every acquisition. Needs the VAPE worker with Alchemy + CoinGecko keys configured.</p>
+                <div id="profile-costbasis"></div>
+            </div>
             <div class="mb-6">
                 <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">Case history</div>
                 <div id="profile-cases"></div>
@@ -234,6 +271,45 @@ const Profile = {
 
         document.getElementById('profile-add-btn').onclick = () => this._addManual(address);
         document.getElementById('profile-add-input').addEventListener('keypress', e => { if (e.key === 'Enter') this._addManual(address); });
+        document.getElementById('profile-costbasis-btn').onclick = () => this._runCostBasis(address);
+    },
+
+    async _runCostBasis(address) {
+        const btn = document.getElementById('profile-costbasis-btn');
+        const el = document.getElementById('profile-costbasis');
+        btn.disabled = true;
+        btn.classList.add('opacity-50');
+        el.innerHTML = '<div class="text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Estimating (this can take a few seconds — one lookup per top holding)…</div>';
+        const { results, error } = await this.loadCostBasis(address);
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+        if (error === 'not-configured') {
+            el.innerHTML = '<div class="text-zinc-500 text-sm">Not available — the VAPE worker needs both an Alchemy and a CoinGecko API key configured for this. See worker/README.md.</div>';
+            return;
+        }
+        if (error || !results) {
+            el.innerHTML = '<div class="text-amber-400 text-sm">Estimate failed — try again in a moment.</div>';
+            return;
+        }
+        if (!results.length) {
+            el.innerHTML = '<div class="text-zinc-500 text-sm">No priced holdings to estimate.</div>';
+            return;
+        }
+        el.innerHTML = results.map(r => {
+            const hasPnl = typeof r.pnlUsd === 'number';
+            const acquired = r.acquiredAt ? new Date(r.acquiredAt).toLocaleDateString() : '—';
+            return `
+            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3 mb-2">
+                <div class="min-w-0 flex-1">
+                    <div class="font-semibold truncate">${escapeHtml(r.symbol)}</div>
+                    <div class="text-[11px] text-zinc-600 truncate">${r.note ? escapeHtml(r.note) : `first acquired ${acquired}`}</div>
+                </div>
+                <div class="text-right shrink-0">
+                    <div class="stat font-display text-sm ${hasPnl ? (r.pnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400') : 'text-zinc-600'}">${hasPnl ? `${r.pnlUsd >= 0 ? '+' : ''}${fmtUsd(r.pnlUsd)}` : '—'}</div>
+                    <div class="text-xs text-zinc-500">${typeof r.pnlPct === 'number' ? pct(r.pnlPct) : ''}</div>
+                </div>
+            </div>`;
+        }).join('');
     },
 
     _renderHoldingsTable(holdings) {

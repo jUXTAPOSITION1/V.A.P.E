@@ -38,6 +38,7 @@ npx wrangler secret put ETHERSCAN_API_KEY   # optional — only exploit_check/sa
 npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement — see below
 npx wrangler secret put CDP_API_KEY_SECRET
 npx wrangler secret put ALCHEMY_API_KEY     # optional — powers /portfolio, /nfts, /network-status
+npx wrangler secret put COINGECKO_API_KEY   # optional — powers /prices, and required for /cost-basis
 ```
 
 ### Deploy
@@ -82,15 +83,17 @@ If you go this route instead of Cloudflare, `.github/workflows/deploy-worker.yml
 
 To actually settle payments you need a [CDP Secret API Key](https://portal.cdp.coinbase.com) (`CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` above) — `src/lib/cdpAuth.ts` mints a Bearer JWT from it for every `/verify`, `/settle`, and `/supported` call to the facilitator (`src/index.ts`'s `buildCreateAuthHeaders()`). Without both secrets set, those calls go out unauthenticated and the facilitator returns 401.
 
-## Free Alchemy-backed reliability endpoints
+## Free reliability + pricing endpoints
 
-Three unpaid, no-x402-gate routes back the site's wallet profile ("Your Case File") and metrics strip:
+Unpaid, no-x402-gate routes back the site's wallet profile ("Your Case File") and metrics strip:
 
-- `GET /portfolio?address=0x…` — full auto-discovered native ETH + ERC-20 balances via Alchemy's `alchemy_getTokenBalances`/`alchemy_getTokenMetadata`, superseding the site's curated `docs/assets/base-tokens.json` fallback list.
-- `GET /nfts?address=0x…` — NFT holdings via Alchemy's NFT v3 API.
-- `GET /network-status` — current block number + gas price, more reliable than a direct call to the public `mainnet.base.org` RPC.
+- `GET /portfolio?address=0x…` — full auto-discovered native ETH + ERC-20 balances via Alchemy's `alchemy_getTokenBalances`/`alchemy_getTokenMetadata`, superseding the site's curated `docs/assets/base-tokens.json` fallback list. Needs `ALCHEMY_API_KEY`.
+- `GET /nfts?address=0x…` — NFT holdings via Alchemy's NFT v3 API. Needs `ALCHEMY_API_KEY`.
+- `GET /network-status` — current block number + gas price, more reliable than a direct call to the public `mainnet.base.org` RPC. Needs `ALCHEMY_API_KEY`.
+- `GET /prices?addresses=0x…,0x…` — current USD price + 24h change for a batch of Base contract addresses, proxying CoinGecko with `COINGECKO_API_KEY` attached for better rate-limit headroom than the fully anonymous public tier (which the site's client-side JS falls back to directly if this route isn't available).
+- `GET /cost-basis?address=0x…` — estimated cost-basis P&L per token (see `src/lib/costBasis.ts` for exactly what it computes — a single first-acquisition price point per token via Alchemy transfer history + CoinGecko's historical-price-by-contract endpoint, not full weighted-average accounting). Needs **both** `ALCHEMY_API_KEY` and `COINGECKO_API_KEY` — the historical-price endpoint specifically requires a CoinGecko key even on their free Demo tier (confirmed by testing it unauthenticated and getting rejected), unlike `/prices`' current-price lookup which works either way.
 
-All three need `ALCHEMY_API_KEY` (a free-tier [Alchemy](https://dashboard.alchemy.com) app scoped to Base Mainnet) and return `503` if it isn't set — the site (`docs/assets/app.js`/`profile.js`) treats that as "not deployed yet" and transparently falls back to its direct public-API path, so the site works identically with or without this worker running.
+Alchemy-backed routes need `ALCHEMY_API_KEY` (a free-tier [Alchemy](https://dashboard.alchemy.com) app scoped to Base Mainnet); CoinGecko-backed routes need `COINGECKO_API_KEY` (a free [CoinGecko Demo API key](https://www.coingecko.com/en/api) — signup required, no payment). Every route here returns `503` if its required key(s) aren't set — the site (`docs/assets/app.js`/`profile.js`) treats that as "not deployed/configured yet" and transparently falls back to its direct public-API path (except `/cost-basis`, which has no keyless equivalent and just shows as unavailable), so the site works with or without this worker running.
 
 ## CI
 
