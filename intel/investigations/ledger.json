@@ -101,6 +101,23 @@
     "symbol": "OpenAI",
     "times_investigated": 1
   },
+  "0x9cb961dd3169e41726e4417d1a6eaded333b6b07": {
+    "address": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07",
+    "first_investigated": "2026-07-04T20:11:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260704-201136-0x9cb961dD.md",
+        "score": 70,
+        "ts": "2026-07-04T20:11:36Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-04T20:11:36Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "claude",
+    "times_investigated": 1
+  },
   "0xbf927b841994731c573bdf09ceb0c6b0aa887cdd": {
     "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
     "first_investigated": "2026-07-02T11:35:20Z",
