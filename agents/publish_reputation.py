@@ -34,7 +34,7 @@ IDENTITY = {
     "vape_token": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
     "chain": "Base",
     "x": "https://x.com/based_vape",
-    "verify_identity": "https://app.virtuals.io/virtuals/54988",
+    "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe",
 }
 
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
