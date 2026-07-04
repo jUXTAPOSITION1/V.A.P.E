@@ -14,6 +14,11 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # GitHub Actions doesn't allow referencing `secrets` directly inside an
+    # `if:` conditional (rejected as an invalid workflow file, before any job
+    # runs) — route it through `env:` first, per GitHub's documented pattern.
+    env:
+      HAS_CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,7 +36,7 @@ jobs:
         run: npm run typecheck
 
       - name: Deploy
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ env.HAS_CF_TOKEN == 'true' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -40,5 +45,5 @@ jobs:
           command: deploy
 
       - name: Skip deploy (no Cloudflare secrets yet)
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' }}
+        if: ${{ env.HAS_CF_TOKEN == 'false' }}
         run: echo "CLOUDFLARE_API_TOKEN not set — typecheck passed, skipping live deploy. See worker/README.md."
