@@ -356,7 +356,13 @@ const App = {
     _ago(iso){ if(!iso) return ''; const d=new Date(iso); if(isNaN(d)) return iso;
         const s=(Date.now()-d)/1e3; if(s<3600) return Math.floor(s/60)+'m ago';
         if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; },
-    _esc(t){ return (t||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); },
+    // Escapes quotes too, not just tag-relevant chars — several call sites
+    // interpolate this into an HTML *attribute* value (e.g. title="${...}"),
+    // and a target/name containing a bare `"` could otherwise break out of
+    // the attribute and inject a new one (CodeQL: incomplete HTML attribute
+    // sanitization). Real risk: on-chain token/contract names are attacker-
+    // controlled data rendered here.
+    _esc(t){ return (t||'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); },
     _shortAddr(a){ return (a && a.length>12) ? a.slice(0,6)+'…'+a.slice(-4) : (a||''); },
     _symFromTitle(t){ const m=(t||'').match(/Investigation\s*[—-]\s*(.+)$/); return m ? m[1].trim() : null; },
     _chainSlug(c){
