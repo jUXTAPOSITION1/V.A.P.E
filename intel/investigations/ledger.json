@@ -16,6 +16,23 @@
     "symbol": "America250",
     "times_investigated": 1
   },
+  "0x0e7d4bdfe24aa679f9903f10414a25f56cbebb07": {
+    "address": "0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07",
+    "first_investigated": "2026-07-04T22:03:04Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260704-220304-0x0e7d4bDf.md",
+        "score": 60,
+        "ts": "2026-07-04T22:03:04Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-04T22:03:04Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "Claude",
+    "times_investigated": 1
+  },
   "0x2228b3832ac68eb8f35fb007d92d28e0c048206f": {
     "address": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
     "first_investigated": "2026-07-03T08:10:33Z",
