@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-04T15:33:33Z",
+  "generated": "2026-07-04T17:29:12Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,7 +12,7 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 319,
+    "reports_published": 321,
     "intel_reports": 143,
     "intel_broadcasts": 27,
     "catalog_investigations": 42,
