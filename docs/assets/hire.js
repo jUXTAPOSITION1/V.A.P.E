@@ -99,8 +99,15 @@ const Hire = {
                 : `${window.WORKER_BASE}/scan/${offeringName}`;
             set('<i class="fa-solid fa-spinner fa-spin"></i> Sign the request in your wallet…');
             const res = await fetchWithPayment(url);
-            if (!res.ok) throw new Error(`Worker returned ${res.status}`);
-            const result = await res.json();
+            const result = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                // Payment may have already settled by the time a non-2xx comes back (e.g.
+                // bounty_deep_dive's dispatch-configuration gap) — surface the worker's
+                // actual error message rather than a bare status code, since that's the
+                // buyer's only way to know their money went through even though the
+                // deliverable didn't (see worker/src/index.ts's 503 case).
+                throw new Error(result.error || `Worker returned ${res.status}`);
+            }
             await this._renderResult(offeringName, priceUsd, address, result);
         } catch (e) {
             const msg = (e && e.message) || String(e);
@@ -113,6 +120,28 @@ const Hire = {
     async _renderResult(offeringName, priceUsd, address, result) {
         const body = document.getElementById('hire-body');
         if (!body) return;
+        // bounty_deep_dive is async — payment gates a real GitHub Actions job
+        // (worker/src/index.ts's /scan/bounty_deep_dive), not an inline result.
+        // No deliverable exists yet, so this needs its own "queued" rendering
+        // instead of the "Paid & delivered" success state below.
+        if (result.status === 'accepted') {
+            const walletAddress = (window.Wallet && Wallet.state().account) || null;
+            try {
+                if (window.CaseHistory && walletAddress) {
+                    CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: address, verdict: 'QUEUED', result });
+                }
+            } catch (e) { /* non-fatal */ }
+            body.innerHTML = `
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-clock text-cyan-400 text-3xl mb-2"></i>
+                    <div class="font-display text-lg">Paid — audit queued</div>
+                    <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
+                </div>
+                <div class="glass rounded-xl p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Deep-dive audit queued — report lands within 24h.')}</div>
+                <a href="${result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports'}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
+                <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Case History in "Your Case File" below — check back for the finished report.</div>`;
+            return;
+        }
         const deliverable = result.deliverable || {};
         const verdict = deliverable.verdict || deliverable.rug_risk || deliverable.combined || deliverable.token_verdict;
         const walletAddress = (window.Wallet && Wallet.state().account) || null;

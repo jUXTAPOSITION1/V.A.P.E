@@ -12,6 +12,7 @@ Sources (all verifiable):
   - skillforge/memory/lessons.jsonl                             (real job/work log)
   - agents/acp_fulfill.py HANDLERS + price map                  (live offerings)
   - on-chain identity constants (wallet, ERC-8004, agent id)    (publicly checkable)
+  - GitHub PR search (real "VAPE build:"/"VAPE self-build:" PRs)  (live build ledger)
 
 Zero new deps (stdlib only). Runs on the free GitHub runner.
 """
@@ -19,10 +20,14 @@ import json
 import os
 import glob
 import re
+import urllib.request
+import urllib.parse
+import urllib.error
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data", "reputation.json")
+REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
 
 # Publicly verifiable on-chain identity (anyone can check these).
 IDENTITY = {
@@ -40,6 +45,12 @@ IDENTITY = {
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
         "exploit_check", "safety_preflight", "market_intel"}
+# Payable via the x402 worker specifically — must match worker/src/index.ts's
+# OFFERING_PRICES keys (the synchronous AUTO set) plus bounty_deep_dive, which
+# has its own async /scan/bounty_deep_dive route (dispatches a real GitHub
+# Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
+# above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
+X402 = AUTO | {"bounty_deep_dive"}
 OFFERINGS = [
     ("exploit_check", 0.01, "Exploit & scam-database check for any Base wallet/contract"),
     ("partner_referral", 0.01, "Earn USDC commission referring clients to VAPE"),
@@ -119,10 +130,75 @@ def lessons_stats():
     return work_entries, auto_jobs
 
 
+# Strict prefixes only — GitHub's search API does fuzzy/tokenized matching (a
+# search for "VAPE build" also matches titles like "SKILLFORGE self-directed
+# build: VAPE proposes..." that merely contain both words), so the API call
+# below is just a candidate filter; this regex is the real gate that decides
+# what actually counts as a VAPE-built tool for the public ledger.
+_BUILD_TITLE_RE = re.compile(r"^VAPE (self-build|build):\s*(.+)$", re.IGNORECASE)
+_VERIFY_RE = re.compile(r"^- (✅|⚠️|❌) `([^`]+)`", re.MULTILINE)
+
+
+def _gh_search_prs(query, token=None):
+    url = "https://api.github.com/search/issues?" + urllib.parse.urlencode({
+        "q": f"repo:{REPO_SLUG} is:pr in:title {query}",
+        "sort": "created", "order": "desc", "per_page": 30,
+    })
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "vape-reputation/1.0"}
+    if token:
+        headers["Authorization"] = f"token {token}"
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode()).get("items", [])
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+        print(f"[publish_reputation] GitHub PR search failed for {query!r}: {e}")
+        return []
+
+
+def tool_builds():
+    """Real, live ledger of tools VAPE has actually built via its autonomous
+    build pipelines (agents/build_request.py, agents/skillforge_build.py) —
+    every entry here is a real PR that really exists on GitHub right now, not
+    a hand-maintained changelog. Most cycles produce nothing (grounded
+    proposals only, see agents/skillforge_build.py's gather_signals()), so a
+    short or empty list here is expected and correct, not a bug."""
+    token = os.getenv("GITHUB_TOKEN")
+    seen, builds = set(), []
+    for query in ('"VAPE build"', '"VAPE self-build"'):
+        for item in _gh_search_prs(query, token):
+            number = item.get("number")
+            if number in seen:
+                continue
+            m = _BUILD_TITLE_RE.match(item.get("title", ""))
+            if not m:
+                continue  # fuzzy API match that isn't actually a build-pipeline PR
+            seen.add(number)
+            pr = item.get("pull_request") or {}
+            body = item.get("body") or ""
+            verify_counts = {"ok": 0, "warn": 0, "fail": 0}
+            for icon, _path in _VERIFY_RE.findall(body):
+                verify_counts["ok" if icon == "✅" else "warn" if icon == "⚠️" else "fail"] += 1
+            status = "merged" if pr.get("merged_at") else ("open" if item.get("state") == "open" else "closed")
+            builds.append({
+                "number": number,
+                "title": m.group(2).strip(),
+                "kind": "self-directed" if m.group(1).lower() == "self-build" else "issue-driven",
+                "status": status,
+                "url": item.get("html_url"),
+                "created_at": item.get("created_at"),
+                "closed_at": item.get("closed_at"),
+                "verification": verify_counts,
+            })
+    builds.sort(key=lambda b: b["created_at"] or "", reverse=True)
+    return builds
+
+
 def main():
     total_tools, verified_tools, tier_breakdown = tool_stats()
     work_entries, auto_jobs = lessons_stats()
     first, last = newest_oldest("reports/bounty_report_*.md")
+    builds = tool_builds()
 
     # Real investigation count — one file per real deep investigation, same
     # pattern as reports_published/token_scans_logged above. Previously
@@ -147,6 +223,8 @@ def main():
             "tools_total": total_tools,
             "tools_verified": verified_tools,
             "tool_tiers": tier_breakdown,
+            "tools_built": len(builds),
+            "tools_built_list": builds,
             "work_log_entries": work_entries,
             "auto_fulfilled_jobs": auto_jobs,
             "first_report": first,
@@ -156,7 +234,8 @@ def main():
             "offerings_live": len(OFFERINGS),
             "auto_fulfilled_zero_llm": sorted(AUTO),
             "offerings": [
-                {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO}
+                {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
+                 "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant"}
                 for n, p, s in OFFERINGS
             ],
         },
@@ -176,7 +255,8 @@ def main():
     with open(OUT, "w") as f:
         json.dump(rep, f, indent=2)
     print(json.dumps({"wrote": OUT, "reports": rep["verifiable_activity"]["reports_published"],
-                      "offerings": len(OFFERINGS), "tools_verified": verified_tools}, indent=2))
+                      "offerings": len(OFFERINGS), "tools_verified": verified_tools,
+                      "tools_built": len(builds)}, indent=2))
 
 
 if __name__ == "__main__":

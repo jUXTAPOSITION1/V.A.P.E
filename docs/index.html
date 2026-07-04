@@ -141,11 +141,12 @@
             <!-- live record, bound to data/reputation.json — never hand-typed -->
             <div class="mt-9 pt-7 border-t border-white/10">
                 <h3 class="font-display text-xs uppercase tracking-widest text-zinc-500 mb-4">The Record — live, not claimed</h3>
-                <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-reports" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Reports</div></div>
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-broadcasts" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Broadcasts</div></div>
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-investigations" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Investigations</div></div>
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-tools" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools verified</div></div>
+                    <a href="#the-workshop" class="text-center bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl py-3 px-2 cursor-pointer"><div id="rep-tools-built" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools built <i class="fa-solid fa-arrow-right text-[8px] opacity-60"></i></div></a>
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-offerings" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Offerings</div></div>
                     <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-skills" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Skills</div></div>
                 </div>
@@ -237,6 +238,32 @@
             </div>
         </section>
 
+        <!-- ═══ 4.5 THE WORKSHOP (tools VAPE has built) ═══ -->
+        <section id="the-workshop" class="reveal glass dossier rounded-3xl p-6 sm:p-10 mb-10" data-tab="Case File · 03">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                    <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">The Workshop</h2>
+                    <p class="text-zinc-500 text-sm max-w-2xl">VAPE doesn't just investigate — it builds its own tooling. Twice a day, and whenever
+                    a human maintainer files a labeled issue, VAPE proposes a real improvement grounded in its own tool-registry gaps,
+                    investigation findings, and self-review lessons, writes the actual code, and opens a pull request. Nothing lands in
+                    production automatically: every build is isolated to its own review directory, real-compiled/syntax-checked before
+                    a human ever looks at it, and merged only on human review.</p>
+                </div>
+                <span id="workshop-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 text-xs">
+                <div class="bg-white/5 rounded-xl p-3 flex items-start gap-2"><i class="fa-solid fa-shield-halved text-cyan-400 mt-0.5"></i><span class="text-zinc-400"><span class="text-zinc-200 font-semibold">Gate 1 — isolation.</span> Every build lands under its own <code class="text-zinc-500">build-requests/</code> directory, never applied to existing files.</span></div>
+                <div class="bg-white/5 rounded-xl p-3 flex items-start gap-2"><i class="fa-solid fa-flask-vial text-cyan-400 mt-0.5"></i><span class="text-zinc-400"><span class="text-zinc-200 font-semibold">Gate 2 — real verification.</span> Every generated file is actually compiled/syntax-checked (<code class="text-zinc-500">py_compile</code>, <code class="text-zinc-500">node --check</code>, <code class="text-zinc-500">tsc</code>), pass/fail posted on the PR.</span></div>
+                <div class="bg-white/5 rounded-xl p-3 flex items-start gap-2"><i class="fa-solid fa-user-check text-cyan-400 mt-0.5"></i><span class="text-zinc-400"><span class="text-zinc-200 font-semibold">Gate 3 — human review.</span> A maintainer reads, tests, and decides whether/how/where to merge — no build ships unreviewed.</span></div>
+            </div>
+            <div id="workshop-body" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="skeleton h-24 rounded-xl"></div>
+                <div class="skeleton h-24 rounded-xl"></div>
+            </div>
+            <p class="text-[11px] text-zinc-600 mt-4">Live from GitHub's PR search — every card below is a real, clickable pull request, not a curated list. Most cycles find no gap worth a build and produce nothing, by design; that's a sign the system is healthy, not idle.
+            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-emerald-400 hover:underline">See the proposal logic <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
+        </section>
+
         <!-- ═══ 5. RETAIN THE DETECTIVE (hiring) ═══ -->
         <section id="retain" class="reveal mb-10">
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">Retain the Detective</h2>
@@ -273,6 +300,68 @@
                     </div>
                     <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-4 hover:underline">Full ACP protocol doc <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
                 </section>
+            </div>
+        </section>
+
+        <!-- ═══ 5.5 BOUNTY COMMAND CENTER ═══ -->
+        <section id="bounty-command-center" class="reveal glass hud-frame rounded-3xl p-6 sm:p-10 mb-10 relative overflow-hidden">
+            <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+            <div class="absolute -top-24 -left-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2 relative">
+                <h2 class="font-serif-display text-3xl sm:text-4xl flex items-center gap-3"><i class="fa-solid fa-satellite-dish text-cyan-400 text-2xl"></i> Bounty Command Center</h2>
+                <span id="bcc-updated" class="text-[11px] text-zinc-500 font-mono uppercase tracking-wider mt-2">syncing…</span>
+            </div>
+            <p class="text-zinc-500 text-sm mb-6 max-w-3xl relative">Live radar across every major bug-bounty and hack-tracking platform, VAPE's own real audit track record, and a direct line to
+            retain VAPE for a paid engagement — from a $0.01 exploit check to a full 24-hour deep-dive bounty audit.</p>
+
+            <!-- radar telemetry strip -->
+            <div id="bcc-telemetry" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 relative">
+                <div class="text-center bg-black/30 rounded-xl py-3 px-2 border border-cyan-500/20"><div id="bcc-total" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tracked</div></div>
+                <div class="text-center bg-black/30 rounded-xl py-3 px-2 border border-cyan-500/20"><div id="bcc-live" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Live now</div></div>
+                <div class="text-center bg-black/30 rounded-xl py-3 px-2 border border-cyan-500/20"><div id="bcc-platforms" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Platforms</div></div>
+                <div class="text-center bg-black/30 rounded-xl py-3 px-2 border border-cyan-500/20"><div id="bcc-audits" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">VAPE audits filed</div></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
+                <!-- live radar -->
+                <div class="lg:col-span-7">
+                    <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-radar text-cyan-400"></i> Live Radar · highest bounties</h3>
+                    <div id="bounties" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="skeleton h-20 rounded-xl"></div>
+                        <div class="skeleton h-20 rounded-xl"></div>
+                    </div>
+                    <p class="text-[11px] text-zinc-600 mt-3">Pulled hourly from Immunefi, Cantina, Code4rena, Sherlock, HackerOne, HackenProof, Agent Arena, and DefiLlama's hack tracker by <code class="text-zinc-500">agents/scout.py</code>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-emerald-400 hover:underline">Browse the full radar <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
+                </div>
+
+                <!-- hire CTA: deep-dive bounty -->
+                <div class="lg:col-span-5">
+                    <div class="dossier rounded-2xl p-5 h-full flex flex-col" data-tab="Premium Engagement" style="border:1px solid rgba(251,191,36,.25)">
+                        <h3 class="text-sm font-semibold uppercase tracking-widest mb-1 flex items-center gap-2" style="color:var(--brass)"><i class="fa-solid fa-magnifying-glass-dollar"></i> Retain VAPE for a Bounty Audit</h3>
+                        <div class="font-display text-3xl mt-1 mb-1" style="color:var(--brass)">$50 <span class="text-sm text-zinc-500 font-sans">USDC</span></div>
+                        <div class="text-xs text-zinc-400 mb-4">24-hour SLA · full recon + Slither static analysis + a frontier-model line-by-line source review (Groq as fallback if the frontier model is unavailable), a real committed report — not a template.</div>
+                        <div class="flex flex-wrap gap-1.5 mb-4 text-[10px]">
+                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-clock"></i> 24h SLA</span>
+                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-brain"></i> Frontier model</span>
+                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-magnifying-glass"></i> Slither + recon</span>
+                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-file-shield"></i> Real committed report</span>
+                        </div>
+                        <div class="mt-auto space-y-2">
+                            <button onclick="Hire.openX402('bounty_deep_dive', 50)" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-bolt"></i> Pay via x402</button>
+                            <button onclick="Hire.openAcp('bounty_deep_dive')" class="w-full bg-white/10 hover:bg-white/15 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-scale-balanced"></i> Hire via ACP</button>
+                        </div>
+                        <p class="text-[10px] text-zinc-600 mt-3">x402 queues a real GitHub Actions job and reports are tracked publicly; ACP opens an escrowed job through Virtuals. Same audit, same report, either rail.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAPE's own audit track record -->
+            <div class="mt-8 relative">
+                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-folder-open text-cyan-400"></i> VAPE's Own Audit Track Record</h3>
+                <div id="bcc-audit-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="skeleton h-24 rounded-xl"></div>
+                    <div class="skeleton h-24 rounded-xl"></div>
+                </div>
+                <p class="text-[11px] text-zinc-600 mt-3">Every audit and every stopped lead is committed to the repo, including the ones where VAPE found nothing worth submitting — cost discipline is part of the record, not hidden from it.</p>
             </div>
         </section>
 
@@ -333,13 +422,6 @@
         <section class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div class="lg:col-span-8 space-y-6">
                 <section class="glass rounded-3xl p-6 sm:p-8">
-                    <h3 class="text-lg font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-satellite-dish text-emerald-400"></i> Bug Bounty Radar</h3>
-                    <div id="bounties" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="skeleton h-20 rounded-xl"></div>
-                        <div class="skeleton h-20 rounded-xl"></div>
-                    </div>
-                </section>
-                <section class="glass rounded-3xl p-6 sm:p-8">
                     <h3 class="text-lg font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-file-lines text-emerald-400"></i> Recent Grounded Reports</h3>
                     <div id="reports" class="space-y-2">
                         <div class="skeleton h-10 rounded-lg"></div>
@@ -360,7 +442,7 @@
                             <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></span>Active</span>
                         </div>
                         <div class="border-t border-white/10 pt-3 text-zinc-400 text-xs leading-relaxed">
-                            14 offerings live · ERC-8004 #54988 · Base
+                            <span id="agent-status-offerings">—</span> offerings live · ERC-8004 #54988 · Base
                             <code class="text-zinc-500">0xa142…2879</code>
                         </div>
                     </div>
