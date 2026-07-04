@@ -1,7 +1,13 @@
-// VAPE case-report PDF generator — client-side only, no API key, no server
-// round-trip. Takes the real JSON a paid x402 offering (or the free preview)
-// returned and lays it out as a letterheaded, hyperlinked report using jsPDF
-// (loaded from esm.sh, same zero-bundler pattern as wallet.js's connectors).
+// VAPE case-report PDF generator — client-side only, no server round-trip.
+// Takes the real JSON a paid x402 offering (or the free preview) returned
+// and lays it out as a letterheaded, hyperlinked report using jsPDF.
+//
+// Loaded via jsPDF's UMD build (plain <script> tag in index.html, same
+// pattern as Chart.js) rather than `import()`-ing its ESM build from
+// esm.sh: jsPDF's published ESM build has an unresolved bare `@babel/runtime`
+// import that fails outside a real bundler — confirmed by testing it
+// directly (Failed to resolve module specifier). The UMD build has no such
+// issue and is what's actually loaded here, via `window.jspdf.jsPDF`.
 const CYAN = [34, 211, 238];
 const EMERALD = [16, 185, 129];
 const AMBER = [251, 191, 36];
@@ -30,8 +36,12 @@ const Report = {
     _jsPDF: null,
     async _load() {
         if (this._jsPDF) return this._jsPDF;
-        const mod = await import('https://esm.sh/jspdf@4.2.1');
-        this._jsPDF = mod.jsPDF;
+        // window.jspdf is set by the UMD <script> tag in index.html, a
+        // classic script that always finishes before this module script
+        // runs — but poll briefly anyway in case of unusual load ordering.
+        for (let i = 0; i < 100 && !window.jspdf; i++) await new Promise(r => setTimeout(r, 50));
+        if (!window.jspdf) throw new Error('jsPDF failed to load');
+        this._jsPDF = window.jspdf.jsPDF;
         return this._jsPDF;
     },
 
