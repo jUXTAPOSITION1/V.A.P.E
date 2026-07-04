@@ -237,10 +237,17 @@ class GitHubMCPWrapper:
         Returns:
             (success, pr_data)
         """
-        # Sanitize inputs
+        # Sanitize inputs. NOTE: head must NOT be truncated to some arbitrary short
+        # length here — callers (agents/build_request.py, agents/skillforge_build.py)
+        # already pushed a real git branch under this exact name (often
+        # "vape-build-<issue>-<40-char-slug>-<timestamp>", 60-80 chars). Cutting it
+        # down after the fact produces a branch name that was never pushed, so
+        # GitHub's PR API 422s with "Validation Failed" (head branch not found) —
+        # confirmed via issue #67's build run. Git refs allow up to 255 bytes, so
+        # only strip disallowed characters, cap generously above what callers emit.
         title = re.sub(r'[<>\"\\]', '', title)[:100]
         body = re.sub(r'[<>\\]', '', body)[:5000]
-        head = re.sub(r'[^a-zA-Z0-9\-_/]', '', head)[:50]
+        head = re.sub(r'[^a-zA-Z0-9\-_/]', '', head)[:200]
         
         # Log for audit
         logger.info(f"[WRITE] Creating PR in {repo}")
