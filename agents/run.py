@@ -64,16 +64,16 @@ if Groq is not None and os.getenv("GROQ_API_KEY"):
     except Exception as _e:
         print(f"[run.py] Groq SDK init skipped: {_e}")
 
-def ask_llm(system, query, tier="fast"):
+def ask_llm(system, query, tier="fast", temperature=0.7):
     """Prefer the resilient multi-provider layer; fall back to Groq SDK."""
     if _llm_ask is not None and _llm_available():
         try:
-            txt, prov = _llm_ask(system, query, tier=tier)
+            txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature)
             print(f"[llm:{prov}] ok")
             return txt
         except Exception as e:
             print(f"[llm] all providers failed ({e}); falling back to Groq SDK")
-    
+
     # Legacy direct-Groq fallback (only if the SDK client initialized)
     if client is None:
         return "[llm unavailable: no provider key set (need GROQ_API_KEY or one of CEREBRAS/OPENROUTER/GITHUB_MODELS/TOGETHER)]"
@@ -85,7 +85,7 @@ def ask_llm(system, query, tier="fast"):
                     {"role": "system", "content": system},
                     {"role": "user", "content": query}
                 ],
-                temperature=0.7,
+                temperature=temperature,
                 max_tokens=2048
             )
             return response.choices[0].message.content
@@ -96,6 +96,39 @@ def ask_llm(system, query, tier="fast"):
             else:
                 return f"Error: {str(e)}"
     return "Rate limit persistent. Try later."
+
+
+def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
+    """Call the LLM for the structured report, retrying once with a sharper
+    corrective nudge if it didn't comply with the mandatory `SIGNAL: HIGH|LOW`
+    first line. Confirmed real failure mode: open models (Llama family via
+    Groq) frequently ignore rigid structural instructions on the first pass
+    and default to their own trained-in "Executive Summary / Market Intel"
+    template instead — which is exactly what produced reports with no SIGNAL
+    line and a different section scheme than the one actually specified.
+    Lower temperature than the default also measurably helps compliance
+    without suppressing genuine content variation (that should come from the
+    grounding data changing cycle to cycle, not from sampling randomness).
+    """
+    report = ask_llm(system, prompt, tier=tier, temperature=temperature)
+    if (report or "").startswith("[llm unavailable"):
+        return report
+    first_line = (report or "").strip().splitlines()[0] if report else ""
+    if first_line.strip().upper().startswith("SIGNAL:"):
+        return report
+    print("[Signal] model did not start with SIGNAL: — retrying once with a corrective nudge\n")
+    corrective = prompt + (
+        "\n\n=== FORMAT CORRECTION (mandatory) ===\n"
+        "Your response MUST start with exactly `SIGNAL: HIGH` or `SIGNAL: LOW` as "
+        "its very first line, nothing before it. Rewrite your entire response now, "
+        "starting with that line, following the section structure you were given."
+    )
+    retry = ask_llm(system, corrective, tier=tier, temperature=temperature)
+    retry_first = (retry or "").strip().splitlines()[0] if retry else ""
+    if retry_first.strip().upper().startswith("SIGNAL:"):
+        return retry
+    print("[Signal] retry still non-compliant — using original output as-is (signal will default to HIGH)\n")
+    return report
 
 def run_slither():
     """Run slither static analysis (or return placeholder in limited environment)."""
@@ -253,6 +286,71 @@ def _tool_gap_context():
     return "\n".join(lines)
 
 
+def _repo_snapshot_for_review():
+    """Real, current repo content for the self-review pass.
+
+    Root cause of prior repo_review reports inventing fictional files
+    (models/user.py, services/auth.py, config.py — none of which exist in
+    this repo): the old prompt was a one-line instruction ("review the
+    entire repo structure") with ZERO actual repo content attached. An LLM
+    given no real material to review predictably hallucinates a generic
+    "typical webapp" review instead. This grounds it in the actual file
+    tree and actual file contents.
+
+    Deliberately avoids `git log`/`git diff` against history: CI does a
+    shallow checkout (actions/checkout@v4 defaults to fetch-depth: 1), so
+    prior commits usually aren't even present to diff against. Current
+    on-disk content is always available regardless of checkout depth.
+
+    Rotates which files get full content shown, keyed by hour-of-day, so
+    consecutive hourly cycles cover different real code instead of only
+    ever reviewing the same handful (or replaying the same generic output)
+    — this is what actually makes repeated reviews diverse rather than the
+    "same report over and over" symptom.
+    """
+    import datetime as _dt
+
+    src_dirs = ["agents", "worker/src", "docs/assets"]
+    all_files = []
+    for d in src_dirs:
+        base = os.path.join(_REPO_ROOT, d)
+        for root, dirs, files in os.walk(base):
+            dirs[:] = [x for x in dirs if x not in ("node_modules", "__pycache__", ".git")]
+            for fn in files:
+                if fn.endswith((".py", ".ts", ".js")):
+                    all_files.append(os.path.relpath(os.path.join(root, fn), _REPO_ROOT))
+    all_files.sort()
+    if not all_files:
+        return "=== REAL FILE TREE ===\n(no source files found — nothing to review this cycle)"
+
+    tree_block = "=== REAL FILE TREE (agents/, worker/src/, docs/assets/ — the ENTIRE real stack) ===\n" + "\n".join(all_files)
+
+    chunk = 4
+    hour = _dt.datetime.utcnow().hour
+    start = (hour * chunk) % len(all_files)
+    rotation = (all_files[start:] + all_files[:start])[:chunk]
+
+    budget = 6000
+    blocks = []
+    for rel in rotation:
+        try:
+            with open(os.path.join(_REPO_ROOT, rel), encoding="utf-8") as fh:
+                content = fh.read()
+        except Exception:
+            continue
+        snippet = content[:1500]
+        blocks.append(f"--- {rel} ---\n{snippet}")
+        budget -= len(snippet)
+        if budget <= 0:
+            break
+    content_block = (
+        "=== REAL FILE CONTENTS THIS CYCLE (rotates hourly by file position — "
+        "the full codebase gets covered over a day of runs, not repeated) ===\n"
+        + "\n\n".join(blocks)
+    )
+    return tree_block + "\n\n" + content_block
+
+
 def _build_grounding():
     """Assemble anti-repetition grounding: recent report digests + Memory hits
     + real investigation verdicts + real tool-registry gaps."""
@@ -351,10 +449,35 @@ def main(review_repo=False):
 
     if review_repo:
         print("[Mode] Self-Review Pass\n")
-        report = ask_llm(
-            "You are VAPE, a thorough repo reviewer. Provide concrete, actionable analysis without disclaimers, simulations, or fictional examples. Use real data only.",
-            f"Review the entire repo structure, code, recent changes, and give detailed findings, bugs, and improvement suggestions. Slither result: {slither_result[:500]}"
+        # Real grounding — see _repo_snapshot_for_review()'s docstring for why
+        # the old one-line-instruction version reliably hallucinated a fictional
+        # generic codebase (models/user.py, services/auth.py — neither exists here).
+        repo_grounding = _repo_snapshot_for_review()
+        tool_gaps = _tool_gap_context()
+        review_system = (
+            "You are VAPE, reviewing your OWN real, live codebase — not a generic "
+            "example project. The actual stack: Python stdlib agents (agents/*.py), "
+            "a Cloudflare Workers/Deno Hono TypeScript API (worker/src/*.ts), and a "
+            "vanilla JS/HTML static site with no build step (docs/assets/*.js). "
+            "There is no Django/Flask/Express/ORM/user-model anywhere in this "
+            "project. Only reference files, functions, and code that literally "
+            "appear in the REAL FILE TREE and REAL FILE CONTENTS given to you — you "
+            "may name a file from the tree, but never describe what's inside a file "
+            "whose contents you weren't shown. If nothing shown has a real issue, "
+            "say so plainly rather than inventing generic advice to fill space."
         )
+        review_prompt = (
+            f"{repo_grounding}\n\n"
+            + (f"=== TOOL REGISTRY GAPS (real) ===\n{tool_gaps}\n\n" if tool_gaps else "")
+            + "=== YOUR TASK ===\n"
+            "Review ONLY the real files shown above (this cycle's rotation — a "
+            "different slice gets reviewed each hour, so the full codebase is "
+            "covered over time). Give concrete findings: bugs, security issues, "
+            "missed edge cases, dead/redundant code, and up to 3 targeted "
+            "improvements. Cite exact file names and function names from what was "
+            "actually shown to you."
+        )
+        report = ask_llm(review_system, review_prompt, tier="deep", temperature=0.4)
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         print("[Mode] Bounty Hunt Pass\n")
@@ -364,10 +487,11 @@ def main(review_repo=False):
         # intel and calls out what CHANGED instead of repeating boilerplate.
         memory_priming = _build_grounding()
 
-        report = ask_llm(
+        report = _ask_with_signal_retry(
             VAPE_REPORT_SYSTEM,
             _build_report_prompt(market_json, slither_result, memory_priming),
             tier="deep",
+            temperature=0.4,
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
         signal = _parse_signal(report)
