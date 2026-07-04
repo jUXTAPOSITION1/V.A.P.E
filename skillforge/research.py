@@ -28,6 +28,7 @@ import html
 import argparse
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
@@ -49,11 +50,68 @@ SCRAPE_PROVIDERS = [
                                        "input": {"startUrls": [{"url": u}]}}),
 ]
 
+# ── quota guard ──────────────────────────────────────────────────────────────
+# Conservative monthly caps, deliberately well under each provider's real
+# free-tier ceiling (Tavily free ~1,000 searches/mo, Firecrawl free ~500
+# scrape credits/mo, Bright Data's free trial credits are smaller/less
+# predictable) — these keys are shared across every hourly/daily VAPE
+# workflow that might call research.py, so the cap has to hold across ALL of
+# them combined, not per-workflow. Adjust once real usage patterns are known;
+# erring conservative costs nothing (keyless fallback still works), erring
+# permissive risks a surprise bill or a dead key mid-month.
+MONTHLY_QUOTA = {"tavily": 200, "firecrawl": 100, "brightdata": 20}
+# Deliberately NOT under data/cache/ — that directory is gitignored (it's an
+# ephemeral TTL response cache), so a quota counter living there would reset
+# to zero on every fresh CI checkout and never actually cap anything across
+# runs. skillforge/memory/ is real, committed, persistent state, same as
+# tools-registry.json — this needs the same durability.
+QUOTA_PATH = os.path.join(ROOT, "skillforge", "memory", "research_quota.json")
+
+
+def _quota_month():
+    return datetime.now(timezone.utc).strftime("%Y-%m")
+
+
+def _load_quota():
+    try:
+        with open(QUOTA_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_quota(q):
+    os.makedirs(os.path.dirname(QUOTA_PATH), exist_ok=True)
+    with open(QUOTA_PATH, "w") as f:
+        json.dump(q, f, indent=2)
+
+
+def _quota_ok(name):
+    cap = MONTHLY_QUOTA.get(name)
+    if cap is None:
+        return True  # uncapped provider (e.g. apify) — no free-tier assumption made for it
+    q = _load_quota()
+    entry = q.get(name, {})
+    return entry.get("month") != _quota_month() or entry.get("count", 0) < cap
+
+
+def _record_usage(name):
+    if name not in MONTHLY_QUOTA:
+        return
+    q = _load_quota()
+    month = _quota_month()
+    entry = q.get(name, {})
+    if entry.get("month") != month:
+        entry = {"month": month, "count": 0}
+    entry["count"] = entry.get("count", 0) + 1
+    q[name] = entry
+    _save_quota(q)
+
 
 def _available(name):
     reg = load_registry()
     spec = reg.get("servers", {}).get(name)
-    return bool(spec) and server_status(name, spec)["available"]
+    return bool(spec) and server_status(name, spec)["available"] and _quota_ok(name)
 
 
 # ── keyless fallbacks ────────────────────────────────────────────────────────
@@ -80,7 +138,7 @@ def _ddg_search(query, n):
                 d = json.loads(r.read().decode("utf-8", "replace"))
             rows = d.get("results", [])[:n]
             if rows:
-                return {"provider": f"searxng-keyless",
+                return {"provider": "searxng-keyless",
                         "results": [{"title": x.get("title", ""),
                                      "url": x.get("url", ""),
                                      "snippet": x.get("content", "")} for x in rows]}
@@ -136,6 +194,7 @@ def search(query, max_results=5):
     for name, tool, build in SEARCH_PROVIDERS:
         if _available(name):
             res = call(name, tool, build(query, max_results))
+            _record_usage(name)  # counts the attempt — the real API call already fired either way
             if res.get("ok"):
                 return {"provider": name, "query": query, "raw": res.get("data")}
     return {"query": query, **_ddg_search(query, max_results)}
@@ -146,23 +205,32 @@ def scrape(url):
     for name, tool, build in SCRAPE_PROVIDERS:
         if _available(name):
             res = call(name, tool, build(url))
+            _record_usage(name)
             if res.get("ok"):
                 return {"provider": name, "url": url, "raw": res.get("data")}
     return {"url": url, **_fetch_keyless(url)}
 
 
+def _quota_status(name):
+    if name not in MONTHLY_QUOTA:
+        return None
+    q = _load_quota().get(name, {})
+    used = q.get("count", 0) if q.get("month") == _quota_month() else 0
+    return {"used": used, "cap": MONTHLY_QUOTA[name]}
+
+
 def providers():
-    """Report which research providers are active vs key-gated right now."""
+    """Report which research providers are active vs key-gated vs quota-capped right now."""
     out = {"search": [], "scrape": [], "active_search": None, "active_scrape": None}
     for name, *_ in SEARCH_PROVIDERS:
         av = _available(name)
-        out["search"].append({"name": name, "available": av})
+        out["search"].append({"name": name, "available": av, "quota": _quota_status(name)})
         if av and not out["active_search"]:
             out["active_search"] = name
     out["active_search"] = out["active_search"] or "ddg-keyless"
     for name, *_ in SCRAPE_PROVIDERS:
         av = _available(name)
-        out["scrape"].append({"name": name, "available": av})
+        out["scrape"].append({"name": name, "available": av, "quota": _quota_status(name)})
         if av and not out["active_scrape"]:
             out["active_scrape"] = name
     out["active_scrape"] = out["active_scrape"] or ("mcp-fetch" if _available("fetch") else "urllib-keyless")

@@ -23,6 +23,11 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
           cache-dependency-path: agents/requirements.txt
+      - name: Cache npm (skillforge/research.py spawns Tavily/Firecrawl/Bright Data MCP servers via npx)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-research-mcp-${{ runner.os }}
       - name: Install
         run: |
           pip install -r agents/requirements.txt

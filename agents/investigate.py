@@ -163,6 +163,56 @@ def hack_correlation(gp):
     return hits
 
 
+# Strong, unambiguous scam-indicator keywords — deliberately narrow. Web
+# search results are noisy and this is NOT run through an LLM to judge, so
+# only react to language a human wouldn't mistake for anything else. This
+# is meant to catch "this got rugged, discussed publicly" (real on-chain
+# GoPlus/DexScreener data can't see that), not to score-judge sentiment.
+_SCAM_KEYWORDS = ("rug pull", "rugpull", "rugged", "scam", "honeypot", "exit scam", "exploited", "hacked")
+
+
+def web_reputation_check(symbol, address):
+    """Real web search for public reputation signals GoPlus/DexScreener can't
+    see — has this project been publicly called out as a rug/scam anywhere
+    indexed? Uses skillforge/research.py's provider router (Tavily -> Brave
+    -> keyless DDG/SearXNG fallback, quota-capped) — gracefully returns
+    empty on any import/network failure, exactly like every other recon
+    step here degrades rather than blocking the investigation."""
+    try:
+        from skillforge.research import search as web_search
+    except Exception:
+        return {"available": False, "hits": [], "results": []}
+    query = f'"{symbol}" {address} rug pull OR scam OR honeypot OR exploit'
+    try:
+        res = web_search(query, max_results=5)
+    except Exception:
+        return {"available": False, "hits": [], "results": []}
+    raw = res.get("raw")
+    results = []
+    if isinstance(raw, dict):
+        results = raw.get("results") or raw.get("data") or []
+    elif isinstance(raw, list):
+        results = raw
+    if not isinstance(results, list):
+        results = []
+    if not results and res.get("results"):  # keyless fallback shape
+        results = res["results"]
+
+    hits = []
+    normalized = []
+    for r in results[:5]:
+        if not isinstance(r, dict):
+            continue
+        title = str(r.get("title") or "")
+        snippet = str(r.get("content") or r.get("snippet") or r.get("description") or "")
+        url = str(r.get("url") or "")
+        normalized.append({"title": title, "url": url, "snippet": snippet[:200]})
+        blob = f"{title} {snippet}".lower()
+        if any(kw in blob for kw in _SCAM_KEYWORDS):
+            hits.append(f"Public web result flags this project: \"{title}\" — {url}")
+    return {"available": True, "provider": res.get("provider"), "hits": hits, "results": normalized}
+
+
 # Known permissionless meme-token factory templates on Base — deployed via
 # bot/one-click flows with zero team vetting by design (e.g. Clanker, a
 # Farcaster-integrated bot: reply to a cast, get an ERC-20). A contract's
@@ -175,7 +225,7 @@ MEME_FACTORY_NAME_PATTERNS = ("clanker",)
 
 
 # ── scoring ─────────────────────────────────────────────────────────────────
-def score(gp, dex, onchain, verif):
+def score(gp, dex, onchain, verif, web_rep=None):
     """Return (score_0_100, verdict, reasons[], positive_signals[]).
     Higher score = safer.
 
@@ -305,6 +355,16 @@ def score(gp, dex, onchain, verif):
     flag(unproven, 10, "No known third-party audit or verifiable team identity found — "
                        "treated as unaudited/anonymous by default")
 
+    # Real web search for public reputation signals — GoPlus/DexScreener are
+    # on-chain-only and can't see "this got called out as a rug on X/a forum
+    # somewhere." See web_reputation_check()'s narrow keyword list (title/
+    # snippet must contain unambiguous language like "rug pull"/"scam"/
+    # "honeypot") — this is real, disclosed evidence with a source link in
+    # the report, not a sentiment guess.
+    if web_rep and web_rep.get("hits"):
+        flag(True, 25, f"Public web search surfaced {len(web_rep['hits'])} unambiguous "
+                        f"scam/rug mention(s) — see Public Web Signals section")
+
     # Legitimacy cap: don't let a clean red-flag sweep alone buy a PROCEED
     # verdict. Real positive evidence (renounced ownership + deep liquidity +
     # real holder base + real track record + genuinely custom verified code)
@@ -353,7 +413,7 @@ def auto_target():
 
 
 # ── report + persistence ────────────────────────────────────────────────────
-def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals):
+def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -427,10 +487,27 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- No correlation to recent exploit techniques.")
     L.append("")
+    L.append("## Public Web Signals")
+    if web_rep and web_rep.get("available"):
+        if web_rep.get("hits"):
+            for h in web_rep["hits"]:
+                L.append(f"- ⚠️ {h}")
+        else:
+            L.append("- No unambiguous scam/rug mentions found in the top web search results.")
+        if web_rep.get("results"):
+            L.append("")
+            L.append(f"<details><summary>Raw search results ({web_rep.get('provider', '?')})</summary>\n")
+            for r in web_rep["results"]:
+                L.append(f"- [{r['title'] or r['url']}]({r['url']}) — {r['snippet']}")
+            L.append("\n</details>")
+    else:
+        L.append("- Web search unavailable this cycle (no research provider configured/reachable).")
+    L.append("")
     L.append("---")
     L.append("")
     L.append("*V.A.P.E. — The chain never lies. Investigation conducted with keyless, "
-             "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed).*")
+             "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed) "
+             "plus a real web search for public reputation signals.*")
     with open(path, "w") as f:
         f.write("\n".join(L))
 
@@ -566,9 +643,11 @@ def investigate(address, chain="8453", hint="", force=False):
     onchain = onchain_presence(address)
     verif = contract_verification(address, chain)
     corr = hack_correlation(gp)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif)
+    prelim_sym = dex.get("symbol") or verif.get("name") or "unknown"
+    web_rep = web_reputation_check(prelim_sym, address)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep)
 
-    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals)
+    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel)
     update_catalog(address, sym, verdict, s, reasons, rel)

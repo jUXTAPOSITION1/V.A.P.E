@@ -351,6 +351,42 @@ def _repo_snapshot_for_review():
     return tree_block + "\n\n" + content_block
 
 
+def _web_intel_context():
+    """Real, fresh web search for Base/DeFi security context that DeFiLlama's
+    hack feed alone won't have (breaking news, not-yet-cataloged incidents).
+    Uses skillforge/research.py's provider router (Tavily -> Brave -> keyless
+    fallback, quota-capped) — one call per report cycle, well within any
+    provider's free tier. Returns "" on any failure so a missing/exhausted
+    key never blocks report generation, same graceful-degradation contract
+    as every other grounding source here."""
+    try:
+        from skillforge.research import search as web_search
+    except Exception:
+        return ""
+    try:
+        res = web_search("Base blockchain exploit OR hack OR vulnerability this week", max_results=5)
+    except Exception:
+        return ""
+    raw = res.get("raw")
+    results = raw.get("results") if isinstance(raw, dict) else (raw if isinstance(raw, list) else None)
+    results = results or res.get("results") or []
+    if not isinstance(results, list) or not results:
+        return ""
+    lines = []
+    for r in results[:5]:
+        if not isinstance(r, dict):
+            continue
+        title = str(r.get("title") or "").strip()
+        url = str(r.get("url") or "").strip()
+        if title:
+            lines.append(f"- {title} — {url}")
+    if not lines:
+        return ""
+    return (f"=== LIVE WEB SEARCH (via {res.get('provider', 'unknown')} — real results, "
+            "cross-check before citing as fact, this is unverified web text not on-chain data) ===\n"
+            + "\n".join(lines))
+
+
 def _build_grounding():
     """Assemble anti-repetition grounding: recent report digests + Memory hits
     + real investigation verdicts + real tool-registry gaps."""
@@ -389,6 +425,10 @@ def _build_grounding():
             "=== TOOL REGISTRY STATUS (skillforge/memory/tools-registry.json — real) ===\n"
             + tool_gaps
         )
+    web_intel = _web_intel_context()
+    if web_intel:
+        print("[Grounding] live web search results loaded\n")
+        parts.append(web_intel)
     if INTEGRATION_AVAILABLE:
         try:
             from skillforge.memory.retriever import search_memory as _search
