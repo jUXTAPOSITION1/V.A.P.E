@@ -4,6 +4,7 @@ VAPE Deep Investigation Engine — autonomous, thorough, real-data-only.
 
 Runs a full detective investigation on a Base target (token/contract) and produces:
   - intel/investigations/investigation-<UTC>-<short>.md   (full report)
+  - intel/investigations/investigation-<UTC>-<short>.pdf  (same evidence, letterheaded PDF)
   - a `finding` entry in skillforge/memory/findings.jsonl  (Memory log)
   - a row appended to intel/catalog/investigation-catalog.md (status/verdict)
 
@@ -312,6 +313,18 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
              "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed).*")
     with open(path, "w") as f:
         f.write("\n".join(L))
+
+    # PDF is a value-add rendering of the same evidence above — never let a
+    # PDF-layout failure (e.g. unexpected data shape) break the real report.
+    try:
+        from agents.report_pdf import build_investigation_pdf
+        build_investigation_pdf(
+            path[:-3] + ".pdf", target, chain, sym, verdict, s, reasons,
+            gp, dex, onchain, verif, corr, now_iso(),
+        )
+    except Exception as e:
+        print(f"[investigate] PDF generation failed (non-fatal): {e}")
+
     return path, sym, emoji
 
 
