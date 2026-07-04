@@ -33,10 +33,17 @@ try:
 except Exception:
     GitHubMCPWrapper = None
 
+try:
+    from skillforge.memory.retriever import append_to_memory  # noqa: E402
+except Exception:
+    append_to_memory = None
+
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORTS_DIR = os.path.join(_REPO_ROOT, "reports")
 PROPOSALS_DIR = os.path.join(_REPO_ROOT, "agents", "proposals")
 REGISTRY_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "tools-registry.json")
+FINDINGS_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "findings.jsonl")
+STATE_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "self_improve_state.json")
 REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
 
 
@@ -49,6 +56,57 @@ def _run(cmd, **kwargs):
 
 
 # ─── Step 1: find a real, concrete target — no LLM, no guessing ──────────────
+
+def _load_state():
+    try:
+        with open(STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {"addressed_findings": []}
+
+
+def _save_state(state):
+    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+    with open(STATE_PATH, "w") as f:
+        json.dump(state, f, indent=2)
+        f.write("\n")
+
+
+def _find_redteam_finding():
+    """Real, unaddressed HIGH/CRITICAL findings from VAPE's own AI red-team
+    tooling (agents/redteam.py, skillforge/tools/ai-redteam/*) — this is the
+    highest-value gap source: a discovered vulnerability in VAPE's actual
+    pipeline, not a style nit. Checked first, ahead of pyflakes/tool-registry
+    gaps, because a real security hole outranks a lint warning. Tracks what's
+    already been turned into a proposal in self_improve_state.json so the
+    same finding doesn't get re-targeted every single cycle."""
+    if not os.path.exists(FINDINGS_PATH):
+        return None
+    addressed = set(_load_state().get("addressed_findings", []))
+    entries = []
+    with open(FINDINGS_PATH) as f:
+        for line in f:
+            try:
+                entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    for e in reversed(entries):  # newest first
+        if "ai-redteam" not in (e.get("tags") or []):
+            continue
+        if e.get("severity") not in ("CRITICAL", "HIGH"):
+            continue
+        key = e.get("title", "")
+        if not key or key in addressed:
+            continue
+        return {
+            "module": "agents/run.py",  # the shared real target of every current red-team test
+            "issue": f"Unaddressed {e.get('severity')} AI red-team finding: {key} — "
+                     f"{(e.get('content') or '')[:400]}",
+            "kind": "redteam-finding",
+            "_finding_key": key,
+        }
+    return None
+
 
 def _find_pyflakes_issue():
     """Real undefined-name / unused-import bugs via pyflakes — exactly the
@@ -102,7 +160,7 @@ def _find_tool_registry_gap():
 
 
 def find_improvement_target():
-    return _find_pyflakes_issue() or _find_tool_registry_gap()
+    return _find_redteam_finding() or _find_pyflakes_issue() or _find_tool_registry_gap()
 
 
 # ─── Step 2: ask Builder (real, grounded, validated) to propose a fix ────────
@@ -117,6 +175,27 @@ def _read_snippet(rel_path, limit=3000):
 
 
 def build_task(target):
+    if target["kind"] == "redteam-finding":
+        # agents/run.py is ~27KB — comfortably within a "deep" tier model's
+        # context, but bigger than the default 3000-char pyflakes snippet
+        # (which truncates from the file start and would miss
+        # _build_grounding() entirely, since that function sits well past
+        # byte 3000 in this file).
+        snippet = _read_snippet(target["module"], limit=28000)
+        return (
+            f"VAPE's own AI red-team tooling (agents/redteam.py or the garak/promptfoo/"
+            f"deepteam campaigns in skillforge/tools/ai-redteam/) found a real vulnerability "
+            f"against VAPE's report pipeline: {target['issue']}\n\n"
+            f"Current full content of {target['module']} (VAPE_REPORT_SYSTEM and "
+            f"_build_grounding() — the shared target of all current red-team tests):\n"
+            f"```python\n{snippet}\n```\n\n"
+            "Propose a minimal, concrete code change that mitigates this SPECIFIC finding "
+            "(e.g. stronger untrusted-data framing around external/on-chain text, a stricter "
+            "output check, or a corrective retry — see the existing untrusted-data framing "
+            "in _build_grounding() for the established pattern this repo already uses). "
+            "Return the complete corrected file content as a single Python code block. "
+            "Do not restructure unrelated code."
+        )
     if target["kind"] == "pyflakes" and os.path.exists(os.path.join(_REPO_ROOT, target["module"])):
         snippet = _read_snippet(target["module"])
         return (
@@ -202,6 +281,32 @@ def open_proposal_pr(target, code, metadata, warnings):
         _run(["git", "checkout", original_branch])
 
 
+# ─── Growth loop: feed this cycle back into Memory ───────────────────────────
+
+def _log_lesson(target, code, pr_url):
+    """Appends a real "lesson" to skillforge/memory/lessons.jsonl so this
+    cycle's actual work compounds into the same Memory skillforge/synthesize.py
+    reads from — without this, self_improve.py's real bug-finding never
+    reached the growth loop the rest of SKILLFORGE already has (harvest.py's
+    CVE feed and now agents/redteam.py's findings both flow into Memory;
+    this was the missing piece connecting self-improvement to it)."""
+    if append_to_memory is None:
+        return
+    outcome = "opened a real PR" if pr_url else ("proposed a fix (no PR — see report)" if code else "found no fix this cycle")
+    try:
+        append_to_memory(
+            category="lesson",
+            title=f"self_improve: {target['kind']} in {target['module']} — {outcome}",
+            content=f"Target: {target['issue']}\nOutcome: {outcome}" + (f"\nPR: {pr_url}" if pr_url else ""),
+            source="agents/self_improve.py",
+            tags=["self-improve", target["kind"]],
+            confidence=0.8,
+            metadata={"module": target["module"], "pr_url": pr_url},
+        )
+    except Exception as e:
+        print(f"[SelfImprove] could not log lesson: {e}")
+
+
 # ─── Orchestration ────────────────────────────────────────────────────────────
 
 def self_review_and_improve():
@@ -244,6 +349,17 @@ def self_review_and_improve():
     pr_url = None
     if code:
         pr_url = open_proposal_pr(target, code, metadata, warnings)
+
+    # Only mark a redteam finding "addressed" once a PR actually landed — if
+    # PR creation failed (e.g. no GITHUB_TOKEN in this environment), leave it
+    # unmarked so the next cycle retries instead of silently dropping a real
+    # vulnerability that was found but never actually proposed anywhere.
+    if target["kind"] == "redteam-finding" and pr_url and target.get("_finding_key"):
+        state = _load_state()
+        state.setdefault("addressed_findings", []).append(target["_finding_key"])
+        _save_state(state)
+
+    _log_lesson(target, code, pr_url)
 
     report = (
         f"# Self-Improvement Cycle — {datetime.now(timezone.utc).isoformat()}\n\n"
