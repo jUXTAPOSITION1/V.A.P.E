@@ -1,13 +1,14 @@
 const REPO = "jUXTAPOSITION1/V.A.P.E";
 const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
-// The vape-x402 Cloudflare Worker's base URL — backs the free Alchemy-powered
+// The vape-x402 worker's base URL — backs the free Alchemy-powered
 // /portfolio, /nfts, /network-status routes (more reliable + full token/NFT
 // auto-discovery vs. the public mainnet.base.org RPC + curated token list)
-// and the priced /scan/* x402 offerings. Empty until the worker is deployed
-// and its workers.dev subdomain registered (see worker/README.md) — every
-// caller below falls back to its existing direct-API path when this is unset
-// or the worker returns an error, so the site works identically either way.
-const WORKER_BASE = "";
+// and the priced /scan/* x402 offerings. Deployed on Deno Deploy (see
+// worker/README.md's "Alternative: Deno Deploy" section — the Cloudflare
+// path hit an account-level workers.dev subdomain bug). Every caller below
+// still falls back to its direct-API path if this ever returns an error, so
+// the site keeps working even if the worker is down.
+const WORKER_BASE = "https://vape-r860sg3jzek4.juxtaposition1.deno.net";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 // app.js is a classic script; wallet.js/profile.js are ES modules with their own
