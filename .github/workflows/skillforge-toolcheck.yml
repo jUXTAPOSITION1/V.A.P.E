@@ -32,17 +32,18 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            \~/.cyfrin
-            \~/.cargo
-            \~/.foundry
-            \~/.local
-            \~/.cache/pip
+            ~/.cyfrin
+            ~/.cargo
+            ~/.foundry
+            ~/.local
+            ~/.cache/pip
           key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
           restore-keys: skillforge-tools-
       - name: Verify + version-pin registered tools
         run: python skillforge/toolcheck.py
         env:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit registry updates (direct, data only)
         run: |
           git config user.name "VAPE Bot"
