@@ -383,10 +383,19 @@
         </footer>
     </main>
 
-    <script src="assets/app.js"></script>
-    <script type="module" src="assets/wallet.js"></script>
-    <script type="module" src="assets/profile.js"></script>
-    <script type="module" src="assets/report.js"></script>
-    <script type="module" src="assets/hire.js"></script>
+    <!--
+      Cache-busting query string on every local script below: GitHub Pages
+      and (especially) embedded in-app browser webviews (e.g. Base Wallet's)
+      can hold onto a stale cached copy of these files well after a fix has
+      shipped to main, which looks identical to the bug still being present.
+      BUMP THIS NUMBER whenever any of app/wallet/profile/report/hire.js
+      change, or you'll chase "it's not fixed" reports that are actually
+      just stale caches.
+    -->
+    <script src="assets/app.js?v=2"></script>
+    <script type="module" src="assets/wallet.js?v=2"></script>
+    <script type="module" src="assets/profile.js?v=2"></script>
+    <script type="module" src="assets/report.js?v=2"></script>
+    <script type="module" src="assets/hire.js?v=2"></script>
 </body>
 </html>

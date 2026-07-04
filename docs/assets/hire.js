@@ -93,7 +93,7 @@ const Hire = {
             const res = await fetchWithPayment(url);
             if (!res.ok) throw new Error(`Worker returned ${res.status}`);
             const result = await res.json();
-            this._renderResult(offeringName, priceUsd, address, result);
+            await this._renderResult(offeringName, priceUsd, address, result);
         } catch (e) {
             const msg = (e && e.message) || String(e);
             set(`Payment failed: ${msg.slice(0, 200)}`, 'text-rose-400');
@@ -107,39 +107,44 @@ const Hire = {
         if (!body) return;
         const deliverable = result.deliverable || {};
         const verdict = deliverable.verdict || deliverable.rug_risk || deliverable.combined || deliverable.token_verdict;
-        const walletAddress = Wallet.state().account;
-        if (window.CaseHistory && walletAddress) {
-            CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: address, verdict, result });
-        }
+        const walletAddress = (window.Wallet && Wallet.state().account) || null;
         const reportOpts = { offering: offeringName, priceUsd, requestedAddress: address, hiredBy: walletAddress, result, via: 'x402' };
+
+        // Render the actual report content first, synchronously, before any
+        // risky async work (PDF generation needs a CDN script, saving to
+        // localStorage) — those can fail independently in a restrictive
+        // browser (e.g. Base Wallet's in-app webview) without ever hiding
+        // the thing that was actually paid for.
+        let inlineReport = '';
+        try { inlineReport = Report.buildHtmlSummary(reportOpts); } catch (e) { /* fall through with empty inline report */ }
         body.innerHTML = `
             <div class="text-center mb-4">
                 <i class="fa-solid fa-circle-check text-emerald-400 text-3xl mb-2"></i>
                 <div class="font-display text-lg">Paid & delivered</div>
                 <div class="text-xs text-zinc-500">${offeringName.replace(/_/g,' ')} · $${priceUsd} settled on Base</div>
             </div>
-            ${verdict ? `<div class="text-center mb-4"><span class="inline-block px-4 py-1.5 rounded-lg font-display text-sm bg-white/10">${verdict}</span></div>` : ''}
+            <div class="glass rounded-xl p-4 mb-4">${inlineReport || '<div class="text-xs text-amber-400">Could not render report preview — use Copy JSON below for the raw result.</div>'}</div>
             <div class="flex gap-2">
                 <button id="hire-download" class="flex-1 bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
                 <button id="hire-copy" class="flex-1 bg-white/10 hover:bg-white/15 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-copy"></i> Copy JSON</button>
             </div>
-            <div id="hire-copy-status" class="text-xs text-zinc-500 mt-3 text-center">Generating your case report…</div>
-            <div class="text-[11px] text-zinc-600 mt-3 text-center">Also saved to your Case History in "Your Case File" below.</div>`;
+            <div id="hire-copy-status" class="text-xs text-zinc-500 mt-3 text-center">Saved to your Case History in "Your Case File" below.</div>`;
         document.getElementById('hire-download').onclick = () => Report.downloadPdf(reportOpts);
         document.getElementById('hire-copy').onclick = async () => {
             await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
             document.getElementById('hire-copy-status').textContent = 'Copied raw JSON to clipboard.';
         };
-        // Auto-download the PDF the moment the case is delivered, so the
-        // deliverable populates immediately rather than waiting on a second
-        // click — the manual button above still works for re-downloading.
-        const status = document.getElementById('hire-copy-status');
+
+        // Everything below is best-effort — the report above is already
+        // fully visible regardless of what happens here.
+        try {
+            if (window.CaseHistory && walletAddress) {
+                CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: address, verdict, result });
+            }
+        } catch (e) { /* non-fatal — report is already shown above */ }
         try {
             await Report.downloadPdf(reportOpts);
-            if (status) status.textContent = 'PDF downloaded automatically — use the button above to get it again.';
-        } catch (e) {
-            if (status) status.textContent = 'Auto-download failed — use the "Download PDF" button above.';
-        }
+        } catch (e) { /* PDF/download not available in this browser — inline report above still stands */ }
     },
 };
 

@@ -424,21 +424,32 @@ const Profile = {
         }
         el.innerHTML = cases.slice(0, 50).map((c, i) => {
             const explorer = (c.targetAddress && window.App) ? App._explorerUrl(c.targetAddress, '8453') : null;
+            let reportHtml = '';
+            try {
+                reportHtml = window.Report ? Report.buildHtmlSummary({ offering: c.offering, priceUsd: c.priceUsd, requestedAddress: c.targetAddress, hiredBy: c.walletAddress, result: c.result, via: c.via || 'x402' }) : '';
+            } catch (e) { /* fall back to just the header row + JSON copy button */ }
             return `
-            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3 mb-2">
-                <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt text-cyan-400 text-sm"></i></div>
-                <div class="min-w-0 flex-1">
-                    <div class="font-semibold truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
-                    <div class="text-xs text-zinc-500 truncate">
-                        ${c.verdict ? `<span class="text-zinc-300">${escapeHtml(String(c.verdict))}</span> · ` : ''}
-                        ${c.targetAddress ? (explorer ? `<a href="${explorer}" target="_blank" rel="noopener" class="hover:text-cyan-400">${escapeHtml(App._shortAddr(c.targetAddress))}</a> · ` : `${escapeHtml(App._shortAddr ? App._shortAddr(c.targetAddress) : c.targetAddress)} · `) : ''}
-                        ${this._relativeTime(c.timestamp)}
+            <div class="card-h glass rounded-xl px-4 py-3 mb-2">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt text-cyan-400 text-sm"></i></div>
+                    <div class="min-w-0 flex-1">
+                        <div class="font-semibold truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
+                        <div class="text-xs text-zinc-500 truncate">
+                            ${c.verdict ? `<span class="text-zinc-300">${escapeHtml(String(c.verdict))}</span> · ` : ''}
+                            ${c.targetAddress ? (explorer ? `<a href="${explorer}" target="_blank" rel="noopener" class="hover:text-cyan-400">${escapeHtml(App._shortAddr(c.targetAddress))}</a> · ` : `${escapeHtml(App._shortAddr ? App._shortAddr(c.targetAddress) : c.targetAddress)} · `) : ''}
+                            ${this._relativeTime(c.timestamp)}
+                        </div>
+                    </div>
+                    <div class="flex gap-2 shrink-0">
+                        <button data-case-idx="${i}" class="case-pdf-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button data-case-idx="${i}" class="case-copy-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Copy JSON"><i class="fa-solid fa-copy"></i></button>
                     </div>
                 </div>
-                <div class="flex gap-2 shrink-0">
-                    <button data-case-idx="${i}" class="case-pdf-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                    <button data-case-idx="${i}" class="case-copy-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Copy JSON"><i class="fa-solid fa-copy"></i></button>
-                </div>
+                ${reportHtml ? `
+                <details class="mt-3" ${i === 0 ? 'open' : ''}>
+                    <summary class="text-xs text-cyan-400 cursor-pointer select-none">View full report</summary>
+                    <div class="mt-3 pt-3 border-t border-white/10">${reportHtml}</div>
+                </details>` : ''}
             </div>`;
         }).join('');
         el.querySelectorAll('.case-pdf-btn').forEach(btn => btn.onclick = async () => {
