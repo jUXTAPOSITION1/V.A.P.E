@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-04T22:03:05Z",
+  "generated": "2026-07-04T23:10:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 306,
+    "reports": 307,
     "reports_by_type": {
-      "bounty": 163,
+      "bounty": 164,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 25,
+    "investigations": 27,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260704-220304-0x0e7d4bDf.md",
+      "file": "investigation-20260704-231034-0x30EC37E2.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 Claude",
       "symbol": "Claude",
-      "date": "2026-07-04T22:03:04Z",
-      "target": "0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07",
+      "date": "2026-07-04T23:10:34Z",
+      "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "- Target: 0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07 - Chain: 8453 (Base) - Date: 2026-07-04T22:03:04Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 60/100",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-220304-0x0e7d4bDf.md"
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "- Target: 0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07 - Chain: 8453 (Base) - Date: 2026-07-04T23:10:34Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 25/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-231034-0x30EC37E2.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260704_215946.md",
+      "file": "bounty_report_20260704_230714.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T21:59:46Z",
+      "date": "2026-07-04T23:07:14Z",
       "threat": null,
-      "summary": "Cycle: 20260704215946 \u00b7 Data timestamp (UTC): 2026-07-04T21:59:49Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_215946.md",
-      "bytes": 10616
+      "summary": "Cycle: 20260704230714 \u00b7 Data timestamp (UTC): 2026-07-04T23:07:18Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_230714.md",
+      "bytes": 10431
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260704-231034-0x30EC37E2.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "date": "2026-07-04T23:10:34Z",
+      "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "- Target: 0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07 - Chain: 8453 (Base) - Date: 2026-07-04T23:10:34Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 25/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-231034-0x30EC37E2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260704-220304-0x0e7d4bDf.md",
@@ -348,9 +361,31 @@
       "verdict": "CAUTION (60/100)",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-04",
+      "job_id": "auto",
+      "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
+      "symbol": "Claude",
+      "offering": "deep_investigation",
+      "verdict": "REJECT (25/100)",
+      "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_230714.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T23:07:14Z",
+      "threat": null,
+      "summary": "Cycle: 20260704230714 \u00b7 Data timestamp (UTC): 2026-07-04T23:07:18Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_230714.md",
+      "bytes": 10431
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -999,17 +1034,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_230001.md",
       "bytes": 5164
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260629_214140.md",
-      "title": "VAPE Report - 20260629_214140",
-      "date": "2026-06-29T21:41:40Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_214140.md",
-      "bytes": 5523
     }
   ],
   "broadcasts": [

@@ -50,6 +50,23 @@
     "symbol": "FAFO",
     "times_investigated": 1
   },
+  "0x30ec37e22ff8865e2e439d84e7d2ffd58296db07": {
+    "address": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
+    "first_investigated": "2026-07-04T23:10:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260704-231034-0x30EC37E2.md",
+        "score": 25,
+        "ts": "2026-07-04T23:10:34Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-04T23:10:34Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "Claude",
+    "times_investigated": 1
+  },
   "0x31a626996e36a302b06b27283c561d5926db6b7c": {
     "address": "0x31A626996E36a302b06b27283C561d5926db6b7c",
     "first_investigated": "2026-07-02T14:04:12Z",
