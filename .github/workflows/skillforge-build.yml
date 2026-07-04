@@ -1,11 +1,14 @@
-name: SKILLFORGE Self-Directed Build (weekly, opens a PR for review)
+name: SKILLFORGE Self-Directed Build (2x/day, opens a PR for review)
 
-# Weekly, not daily — this is VAPE proposing its OWN work (not fixing a known
-# bug like self-improve.yml), so a slower cadence keeps PR volume reviewable
-# and controls LLM cost.
+# 2x/day — VAPE proposing its OWN work (not fixing a known bug like
+# self-improve.yml). Each real proposal is grounded in tool-registry gaps +
+# Memory findings/lessons and explicitly returns nothing when the real
+# signal doesn't justify a build, so most cycles are a no-op report rather
+# than a PR — this cadence just means checking more often, not forcing two
+# PRs a day.
 on:
   schedule:
-    - cron: '0 9 * * 3'   # Wednesdays 09:00 UTC
+    - cron: '0 9,21 * * *'   # 09:00 and 21:00 UTC
   workflow_dispatch:
 
 permissions:
