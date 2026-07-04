@@ -5,7 +5,7 @@
  * manual subdomain registration step (unlike the Cloudflare account issue
  * this was built to route around).
  */
-import app, { type Env } from "./index.ts";
+import app, { type Env } from "../src/index.ts";
 
 const env: Env = {
   ETHERSCAN_API_KEY: Deno.env.get("ETHERSCAN_API_KEY"),

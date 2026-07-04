@@ -1,4 +1,5 @@
 {
+  "nodeModulesDir": "none",
   "unstable": ["sloppy-imports"],
   "compilerOptions": {
     "lib": ["deno.window"],
@@ -13,6 +14,6 @@
     "jose": "npm:jose@6.2.3"
   },
   "tasks": {
-    "start": "deno run --allow-net --allow-env src/deno-entry.ts"
+    "start": "deno run --allow-net --allow-env deno-entry.ts"
   }
 }

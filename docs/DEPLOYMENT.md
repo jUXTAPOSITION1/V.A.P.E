@@ -146,11 +146,12 @@ it, settlement calls go out unauthenticated and CDP returns 401.
 If your Cloudflare account can't complete `workers.dev` subdomain registration (a known
 account-level Cloudflare bug hit during development — see `worker/README.md`'s
 "Alternative: Deno Deploy" section for the full symptoms), the same worker code runs
-unmodified on [Deno Deploy](https://deno.com/deploy) via `worker/src/deno-entry.ts` +
-`worker/deno.json`, which assigns a working `*.deno.dev` URL automatically with no
-manual step. Connect the repo at dash.deno.com with entry point `worker/src/deno-entry.ts`,
-set the same secrets as environment variables there, and update `WORKER_BASE` in
-`docs/assets/app.js`/`profile.js` to the resulting URL.
+unmodified on [Deno Deploy](https://deno.com/deploy) via `worker/deno/deno-entry.ts` +
+`worker/deno/deno.json` (deliberately its own directory, not next to `package.json` —
+see `worker/README.md` for why that matters), which assigns a working `*.deno.dev` URL
+automatically with no manual step. Connect the repo at dash.deno.com with entry point
+`worker/deno/deno-entry.ts`, set the same secrets as environment variables there, and
+update `WORKER_BASE` in `docs/assets/app.js`/`profile.js` to the resulting URL.
 
 ---
 
