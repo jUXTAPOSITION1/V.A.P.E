@@ -213,7 +213,13 @@ def get_contract_source(address, chainid=8453):
                 "contract_name": r.get("ContractName"),
                 "compiler": r.get("CompilerVersion"),
                 "proxy": r.get("Proxy") == "1",
-                "implementation": r.get("Implementation") or None}
+                "implementation": r.get("Implementation") or None,
+                # Raw verified source (may be multi-file JSON-wrapped by Etherscan for
+                # standard-json-input contracts) — additive field, existing callers only
+                # ever .get() the fields above so this is safe. Used by
+                # agents/deep_dive_audit.py to actually feed a frontier LLM the real
+                # contract text instead of just metadata about it.
+                "source_code": r.get("SourceCode") or None}
     return d
 
 

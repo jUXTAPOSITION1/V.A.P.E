@@ -10,7 +10,7 @@ ALREADY priced + submitted the 6 deterministic zero-LLM offerings:
 market_intel`. If you were woken, the `action-queue.jsonl` lines marked `"escalate": true`
 are the ones that need YOUR reasoning / heavy tools — typically `deep_contract_audit`,
 `forensics_deep`, `wallet_recon`, `tx_decode`, `whale_watch`, `bulk_safety_bundle`,
-`community_intel_broadcast`. Process ONLY those. Do not re-handle anything already in
+`community_intel_broadcast`, `bounty_deep_dive`. Process ONLY those. Do not re-handle anything already in
 `state.json` with `"done": true` or `"budgeted": true`.
 If a job carries `"error"`, the auto path failed — inspect, fix, and complete it manually.
 
@@ -46,6 +46,7 @@ If a job carries `"error"`, the auto path failed — inspect, fix, and complete 
 | bulk_safety_bundle | 0.50 | `token_safety.sh check` x N | per-token verdict table |
 | community_intel_broadcast | 0.10 | latest `intel/broadcasts/` + `market_data` | broadcast summary |
 | partner_referral | 0.01 | n/a (referral) | referral confirmation |
+| bounty_deep_dive | 50.00 | `python -m agents.deep_dive_audit --address <addr> --chain <chainId>` | full recon + Slither (if available) + frontier-LLM (Gemini 2.5 Pro, Groq fallback) line-by-line source review — report at `intel/audits/poc-reports/audit-deep-dive-<slug>-<date>.md`. This is a genuinely heavier job than the others — SLA is 24h, not 5-30m; take the time to actually review the generated report before submit rather than rubber-stamping it. |
 
 ## Rules
 - **Dedup:** check `intel/catalog/investigation-catalog.md` before re-doing a recent same-target+offering (<7d).

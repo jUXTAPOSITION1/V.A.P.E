@@ -13,6 +13,7 @@ const env: Env = {
   CDP_API_KEY_SECRET: Deno.env.get("CDP_API_KEY_SECRET"),
   ALCHEMY_API_KEY: Deno.env.get("ALCHEMY_API_KEY"),
   COINGECKO_API_KEY: Deno.env.get("COINGECKO_API_KEY"),
+  GH_DISPATCH_TOKEN: Deno.env.get("GH_DISPATCH_TOKEN"),
   PAY_TO_ADDRESS: Deno.env.get("PAY_TO_ADDRESS") ?? "",
   X402_NETWORK: (Deno.env.get("X402_NETWORK") ?? "eip155:8453") as Env["X402_NETWORK"],
   X402_FACILITATOR_URL: Deno.env.get("X402_FACILITATOR_URL") ?? "https://api.cdp.coinbase.com/platform/v2/x402",

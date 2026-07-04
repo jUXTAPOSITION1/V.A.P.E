@@ -39,6 +39,7 @@ npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settleme
 npx wrangler secret put CDP_API_KEY_SECRET
 npx wrangler secret put ALCHEMY_API_KEY     # optional — powers /portfolio, /nfts, /network-status
 npx wrangler secret put COINGECKO_API_KEY   # optional — powers /prices, and required for /cost-basis
+npx wrangler secret put GH_DISPATCH_TOKEN   # optional — powers /scan/bounty_deep_dive (see below)
 ```
 
 ### Deploy
@@ -90,6 +91,16 @@ Every `/scan/<offering>` route declares Bazaar discovery metadata (`@x402/extens
 **This is a best-effort announcement, not a guaranteed listing.** As of this writing Bazaar indexing has a live, unresolved bug ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112)) where correctly-implemented services following this exact pattern still don't get indexed, and one open theory is that it may require a CDP-provisioned payout wallet rather than an external EOA — VAPE's `PAY_TO_ADDRESS` is its existing ACP wallet (an external EOA), so indexing may simply not happen regardless of how correct this wiring is. Settlement is unaffected either way; this only touches discovery metadata.
 
 `agents/x402_directory_register.py` (run via `.github/workflows/x402-directory.yml`, `workflow_dispatch` only — not scheduled, since repeated calls to an unfamiliar directory's register endpoint with unknown dedup behavior risk creating duplicate listings) separately registers VAPE's 6 offerings with [402 Index](https://402index.io) (documented `POST /api/v1/register` API) and prints a ready-to-paste manifest for [x402 List](https://x402-list.com) (no documented public submission API — manual web-form only).
+
+## `/scan/bounty_deep_dive` — the 24h-SLA premium offering ($50)
+
+Unlike every other `/scan/*` route (synchronous — pay, get a JSON result, done in well under a second), this one genuinely can't complete inside a Worker's request window: the real work (`agents/deep_dive_audit.py` — recon + Slither + a frontier-model line-by-line source review) takes minutes, not milliseconds. So the route:
+
+1. Gates payment exactly like the other 6 (x402, same middleware).
+2. On settlement, calls `src/lib/githubDispatch.ts`'s `dispatchDeepDiveAudit()` — a `workflow_dispatch` REST call to `.github/workflows/deep-dive-bounty.yml`, passing `address`/`chain`/an optional `callback_url`.
+3. Returns immediately with `{"status": "accepted", ...}` and where the report will land (`intel/audits/poc-reports/`) — never a synchronous result.
+
+Needs `GH_DISPATCH_TOKEN` (a fine-grained PAT scoped to this repo, `Actions: write` + `Contents: read` — Workers have no equivalent of the `GITHUB_TOKEN` Actions injects into its own runs). Without it, the route still gates and settles payment correctly but returns a `503` after settlement telling the buyer to use ACP instead — set this secret before advertising the x402 path for this offering. The ACP path (`scripts/acp-monitor/HANDLER_BRIEF.md`) doesn't need it — the host-side reasoning handler just runs `agents/deep_dive_audit.py` directly.
 
 ## Free reliability + pricing endpoints
 

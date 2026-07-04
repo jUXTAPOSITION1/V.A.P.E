@@ -55,6 +55,8 @@ OFFERINGS = [
     ("bulk_safety_bundle", 0.50, "Scan 5-25 tokens in one job, 40% off"),
     ("deep_contract_audit", 1.00, "slither+aderyn+mythril severity-rated audit + 0-100 score"),
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
+    ("bounty_deep_dive", 50.00, "24h-SLA premium audit: full recon + Slither + frontier-model "
+     "line-by-line source review, real report"),
 ]
 
 
