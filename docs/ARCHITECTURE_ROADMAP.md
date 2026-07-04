@@ -74,8 +74,8 @@ all running in the **existing free GitHub Actions** (no new infra):
 |---|---|---|---|
 | **SCOUT** ✅ | Bounty-radar triage — ranks new DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Code4rena/Sherlock have no stable public API so those stay static seed data until one exists | `intel/bounty-radar/*`, DeFiLlama hacks feed | hourly (`.github/workflows/scout.yml`), no LLM |
 | **LEDGER** ⚪ | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace, base_rpc (Etherscan Pro unlocks full) | on-demand |
-| **ORACLE** ⚪ | Market-anomaly watcher — TVL outflow / depeg / gas-spike alerts → broadcasts | data_fetchers anomaly flags | 4×/day, rule-based first |
-| **CURATOR** 🟡 | SKILLFORGE synthesizer — distills harvested intel into skills (exists as synthesize.py) | harvest + Groq | daily PR |
+| **ORACLE** ✅ | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), no LLM |
+| **CURATOR** ✅ | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks (Groq); `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review | harvest/Memory + Groq + `builder.py`'s `generate_project()` | daily PR (synthesize) / weekly PR (build) |
 | **WARDEN** ⚪ | ACP job QA — validates deliverables before submit (schema + sanity) | acp_fulfill output | per-job, no LLM |
 
 **Design rule:** each agent is **rule-based first, LLM only when reasoning is required.**
@@ -133,7 +133,7 @@ the CI-side default with Groq as the low-latency path. ⚪ evaluate first.
 1. ✅ ACP fulfillment bridge (`acp_fulfill.py`) — done.
 2. ⚪ Wire bridge into the monitor handler (6 offerings settle with no LLM).
 3. ⚪ `agents/llm.py` multi-provider fallback (Groq + Cerebras + GitHub Models).
-4. ✅ SCOUT shipped (rule-based, no LLM, hourly). ⚪ ORACLE still pending.
+4. ✅ SCOUT shipped (rule-based, no LLM, hourly). ✅ ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
 5. ⚪ Etherscan Pro key → unlocks wallet_trace → forensics_deep ($2) + LEDGER agent.
 6. ⚪ Reputation loop on the dashboard → more inbound ACP jobs.
 
