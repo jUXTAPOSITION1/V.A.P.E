@@ -29,6 +29,7 @@ prices, or worker URL change — see .github/workflows/x402-directory.yml.
 """
 import json
 import sys
+import time
 import urllib.request
 import urllib.error
 
@@ -54,26 +55,49 @@ OFFERINGS = {
 }
 
 
-def _post(url, payload, timeout=15):
+def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
+    """POST with retry-on-429. GitHub-hosted runners share IP pools across
+    countless unrelated CI jobs, so a small public API's per-IP rate limit
+    (confirmed hit in practice: 402index.io caps at 50/hour/IP) can trip from
+    traffic that has nothing to do with this repo. Honors a real Retry-After
+    header when the server sends one; otherwise backs off exponentially,
+    capped so one bad/huge Retry-After value can't stall the job for hours."""
     data = json.dumps(payload).encode()
-    req = urllib.request.Request(url, data=data, headers=UA, method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            return r.getcode(), json.loads(r.read().decode())
-    except urllib.error.HTTPError as e:
-        body = e.read().decode(errors="replace")
+    code, body = 0, {"error": "not attempted"}
+    for attempt in range(max_retries + 1):
+        req = urllib.request.Request(url, data=data, headers=UA, method="POST")
         try:
-            body = json.loads(body)
-        except Exception:
-            body = {"raw": body}
-        return e.code, body
-    except Exception as e:
-        return 0, {"error": str(e)}
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.getcode(), json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            raw = e.read().decode(errors="replace")
+            try:
+                body = json.loads(raw)
+            except Exception:
+                body = {"raw": raw}
+            code = e.code
+            if code == 429 and attempt < max_retries:
+                retry_after = e.headers.get("Retry-After") if e.headers else None
+                try:
+                    wait = float(retry_after) if retry_after else backoff_base * (2 ** attempt)
+                except Exception:
+                    wait = backoff_base * (2 ** attempt)
+                wait = min(wait, 120)
+                print(f"[402index] 429 rate-limited, retrying in {wait:.0f}s "
+                      f"(attempt {attempt + 1}/{max_retries})...")
+                time.sleep(wait)
+                continue
+            return code, body
+        except Exception as e:
+            return 0, {"error": str(e)}
+    return code, body
 
 
 def register_402index():
     results = []
-    for name in OFFERINGS:
+    for i, name in enumerate(OFFERINGS):
+        if i > 0:
+            time.sleep(2)  # pace requests — be a good citizen on someone else's free API
         payload = {
             "url": f"{WORKER_BASE}/scan/{name}",
             "name": f"VAPE {name}",
@@ -113,8 +137,20 @@ def main():
 
     failed = [r for r in idx_results if not r["ok"]]
     if failed and len(failed) == len(idx_results):
-        # every single call failed (e.g. host unreachable/blocked) — surface as a real failure
-        print(f"\n[402index] all {len(failed)} registrations failed", file=sys.stderr)
+        # every single call failed (e.g. host unreachable/blocked, or the
+        # per-IP rate limit was already exhausted by unrelated traffic on
+        # this shared GitHub-runner IP before the retries in _post() even
+        # had a chance) — surface as a real failure, but with an actionable
+        # message instead of a bare exit code.
+        still_429 = all(r["status"] == 429 for r in failed)
+        if still_429:
+            print(f"\n[402index] all {len(failed)} registrations still rate-limited (HTTP 429) "
+                  "after in-run retries — this GitHub-runner IP's hourly cap was likely already "
+                  "used up by unrelated traffic. Re-run this workflow later (the hourly window "
+                  "resets on its own); no code fix will make a shared-IP limit clear faster.",
+                  file=sys.stderr)
+        else:
+            print(f"\n[402index] all {len(failed)} registrations failed", file=sys.stderr)
         sys.exit(1)
 
 
