@@ -72,7 +72,6 @@ from `.env`. Read-only by default (no signing).
 pip install -r agents/requirements.txt
 python -m agents.run                 # bounty mode
 python -m agents.run --review-repo   # self-review mode
-python -m agents.main                # VAPE + HACK over fetched bounties
 ```
 
 ---
@@ -83,9 +82,11 @@ python -m agents.main                # VAPE + HACK over fetched bounties
 `sync-to-hub.yml` (set the `HF_TOKEN` secret). The Space frontmatter lives in the repo
 README/Space config.
 
-### C2. GitHub Pages (status dashboard)
-`docs/index.html` is the "Bounty Command Center". Enable Pages:
-`Settings → Pages → Source: Deploy from branch → main /docs`.
+### C2. GitHub Pages (public site)
+`docs/index.html` is VAPE's public site — narrative "case file" pages, live Base/market
+data, wallet connect, a keyless wallet profile, and the hiring panels (x402 + ACP).
+Enable Pages: `Settings → Pages → Source: Deploy from branch → main /docs`.
+Zero build step — `docs/assets/*.js` are plain files, no bundler required.
 
 ---
 
@@ -99,6 +100,37 @@ acp offering list             # confirm offerings live
 # start the monitor daemons (see acp-monitor/README.md on the host)
 ```
 See `docs/ACP_PROTOCOL.md` for the full lifecycle.
+
+---
+
+## E. x402 payment worker (pay-per-call hiring)
+`worker/` is a Cloudflare Worker gating 6 of VAPE's 14 offerings behind Coinbase's x402
+HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
+ACP job instead, see section D). Ships pointed at Base Sepolia + the free public
+facilitator so the full pay → verify → settle loop can be proven with no real funds.
+See `worker/README.md` for full setup; summary:
+
+```bash
+cd worker
+npm install
+npx wrangler login
+npx wrangler secret put ETHERSCAN_API_KEY   # optional, only 2 of 6 offerings use it
+npx wrangler deploy
+```
+
+### E1. Repository secrets for CI deploy (`.github/workflows/deploy-worker.yml`)
+| Secret | Required | Used for |
+|---|---|---|
+| `CLOUDFLARE_API_TOKEN` | ✅ | Workers Scripts: Edit permission |
+| `CLOUDFLARE_ACCOUNT_ID` | ✅ | target account |
+
+Without these set, the workflow still runs (checkout, install, typecheck) and skips the
+live deploy step rather than failing — safe to merge before you've set up Cloudflare.
+
+### E2. Going to Base mainnet
+Testnet (Base Sepolia) needs no account. Mainnet needs a
+[Coinbase Developer Platform](https://portal.cdp.coinbase.com) account for a hosted
+facilitator — see `worker/wrangler.toml` for the exact vars to change.
 
 ---
 

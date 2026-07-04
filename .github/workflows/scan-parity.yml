@@ -1,0 +1,71 @@
+name: Scan Parity (Python vs TypeScript)
+
+# The same GoPlus+DexScreener scan logic is implemented three times: the real
+# agent (agents/token_scan.py), the x402 worker (worker/src/scan.ts), and the
+# free browser preview (docs/assets/app.js). This job keeps the first two
+# honest against each other on real live data — the browser version is
+# harder to run headlessly here, so it's covered by manual review instead.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/token_scan.py"
+      - "worker/src/scan.ts"
+      - "worker/src/handlers.ts"
+  pull_request:
+    paths:
+      - "agents/token_scan.py"
+      - "worker/src/scan.ts"
+      - "worker/src/handlers.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        address:
+          - "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" # USDC — clean, stable baseline
+          - "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE" # VAPE's own token
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install worker deps
+        working-directory: worker
+        run: npm ci
+
+      - name: Run Python scan
+        run: |
+          python3 -c "
+          import json, sys
+          sys.path.insert(0, '.')
+          from agents.token_scan import scan
+          r = scan('${{ matrix.address }}', 8453)
+          json.dump({'verdict': r['verdict'], 'flags': sorted(r['flags'])}, open('/tmp/py.json', 'w'))
+          "
+          cat /tmp/py.json
+
+      - name: Run TypeScript scan
+        working-directory: worker
+        run: npx tsx scripts/run-scan.ts "${{ matrix.address }}" 8453 > /tmp/ts.json
+        continue-on-error: false
+
+      - name: Compare verdicts
+        run: |
+          cat /tmp/ts.json
+          PY_VERDICT=$(python3 -c "import json; print(json.load(open('/tmp/py.json'))['verdict'])")
+          TS_VERDICT=$(python3 -c "import json; print(json.load(open('/tmp/ts.json'))['verdict'])")
+          echo "Python: $PY_VERDICT · TypeScript: $TS_VERDICT"
+          if [ "$PY_VERDICT" != "$TS_VERDICT" ]; then
+            echo "::error::Verdict mismatch for ${{ matrix.address }} — Python says $PY_VERDICT, TypeScript says $TS_VERDICT"
+            exit 1
+          fi

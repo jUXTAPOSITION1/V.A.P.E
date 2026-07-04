@@ -1,0 +1,25 @@
+name = "vape-x402"
+main = "src/index.ts"
+compatibility_date = "2026-07-04"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Payment configuration ────────────────────────────────────────────────
+# Ships pointed at Base Sepolia + the public x402.org testnet facilitator so
+# the full pay -> verify -> settle loop can be proven with no real funds.
+[vars]
+PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
+X402_NETWORK = "eip155:84532"
+X402_FACILITATOR_URL = "https://facilitator.x402.org"
+
+# ETHERSCAN_API_KEY is a SECRET, not a var — set it with:
+#   wrangler secret put ETHERSCAN_API_KEY
+# Only exploit_check / safety_preflight need it; the other 4 offerings work
+# without it (degrade to {"verified": null}, matching agents/data_fetchers.py).
+
+# ── Going to Base mainnet (after proving the loop on testnet above) ────────
+# 1. Get Coinbase Developer Platform credentials: https://portal.cdp.coinbase.com
+# 2. Change X402_NETWORK below to "eip155:8453"
+# 3. Change X402_FACILITATOR_URL to your CDP-hosted facilitator endpoint
+# 4. If your facilitator needs auth headers, wire them via HTTPFacilitatorClient's
+#    createAuthHeaders option in src/index.ts, backed by a `wrangler secret put`
+#    for the CDP API key/secret — never a plaintext var.
