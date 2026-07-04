@@ -185,6 +185,38 @@ Output format:
 3. Metadata for Memory append (title, tags, confidence)
 """
 
+# Same constraints as single-file generation, extended to real multi-file
+# tools/scripts/small apps — the actual "VAPE can build things" capability
+# (agents/build_request.py), not just narrow single-file bug fixes
+# (agents/self_improve.py, which still uses generate_code() above).
+BUILDER_PROJECT_SYSTEM_PROMPT = """You are BUILDER, V.A.P.E.'s autonomous project-generation
+engine — the same self-improvement engine as single-file generation, extended to produce
+complete multi-file tools, scripts, or small apps when a task needs more than one file.
+
+VAPE's core specialization areas (stay inside these unless the task explicitly asks for
+something else): Base/EVM on-chain investigation and forensics, smart-contract security
+(bug bounty hunting, static/dynamic analysis), autonomous agent tooling, and AI-agent
+security (prompt injection, red-teaming). This repo's real stack: Python stdlib-first for
+agents/, Hono/TypeScript for worker/, vanilla no-bundler JS for docs/assets/ — match the
+existing style of whichever area the task targets, don't introduce a new framework/bundler.
+
+Constraints (same as single-file generation):
+- NEVER generate unsafe code (no eval/exec, no unrestricted OS access, no shell commands)
+- ALWAYS include input validation and error handling
+- ALWAYS prefer compute-free/keyless solutions consistent with this repo's ethos
+- Never invent APIs, endpoints, or libraries that don't exist
+- No disclaimers, no "as an AI" — just the files
+
+Output format — one or more files, each as exactly:
+### FILE: relative/path/to/file.ext
+```<language>
+...full file content...
+```
+
+Always include the `### FILE:` header before every code block, even for a single file — the
+parser requires it. Use relative paths only (no leading `/`, no `..` segments).
+"""
+
 
 # ============================================================================
 # Builder Class
@@ -320,6 +352,76 @@ class Builder:
         logger.info(f"Code generation successful ({len(code)} chars)")
         return code, metadata
     
+    def generate_project(
+        self,
+        task: str,
+        review: bool = True,
+        tier: str = "deep"
+    ) -> Tuple[Dict[str, str], Dict[str, Any]]:
+        """
+        Generate a real multi-file tool/script/small app for a task, grounded
+        in Memory — the extension that makes "VAPE can build things" concrete
+        rather than limited to generate_code()'s single-file scope.
+
+        Args:
+            task: Task description, e.g. a real GitHub issue's title + body
+            review: Whether to validate all generated files before returning
+            tier: LLM tier ("fast" or "deep" for reasoning)
+
+        Returns:
+            (files, metadata) where files is {relative_path: content}. Empty
+            dict on any failure — callers should treat that as "nothing to
+            do this cycle," never fabricate files to fill the gap.
+        """
+        if not self.llm_ready:
+            logger.error("LLM not ready. Cannot generate project.")
+            return {}, {}
+
+        logger.info(f"Builder generating project for task: {task[:80]}...")
+        prompt = self._build_prompt(task)
+
+        try:
+            response, provider = llm_ask(
+                system=BUILDER_PROJECT_SYSTEM_PROMPT,
+                user=prompt,
+                tier=tier,
+                max_tokens=4000,
+                temperature=0.7
+            )
+            logger.info(f"LLM generation complete (provider: {provider})")
+        except Exception as e:
+            logger.error(f"LLM call failed: {e}")
+            return {}, {}
+
+        files = self._extract_files(response)
+        if not files:
+            logger.error("No FILE blocks found in LLM response")
+            return {}, {}
+
+        if review:
+            combined = "\n\n".join(files.values())
+            is_safe, warnings = validate_security(combined, task)
+            if warnings:
+                logger.warning("Security review notes:\n" + "\n".join(warnings))
+            if not is_safe:
+                logger.error("Project contains BLOCKED constructs. Rejecting generation.")
+                return {}, {}
+
+        metadata = self._extract_metadata(task, response, True)
+        metadata["files"] = list(files.keys())
+
+        self.outputs.append({
+            "timestamp": datetime.utcnow().isoformat(),
+            "task": task,
+            "files": list(files.keys()),
+            "provider": provider,
+            "metadata": metadata,
+            "safe": True,
+        })
+
+        logger.info(f"Project generation successful ({len(files)} files)")
+        return files, metadata
+
     def propose_improvement(
         self,
         module: str,
@@ -396,6 +498,33 @@ class Builder:
         
         return ""
     
+    @staticmethod
+    def _extract_files(response: str) -> Dict[str, str]:
+        """Parse '### FILE: path\\n```lang\\ncontent\\n```' blocks into
+        {path: content}. Rejects path traversal / absolute paths (this
+        parses LLM output that may be influenced by untrusted input, e.g. a
+        GitHub issue body in agents/build_request.py) and caps file count
+        and size so a runaway generation can't produce an enormous diff."""
+        import re
+        MAX_FILES = 20
+        MAX_FILE_BYTES = 50_000
+        files: Dict[str, str] = {}
+        pattern = re.compile(r'###\s*FILE:\s*(\S+)\s*\n```[a-zA-Z0-9_+-]*\n(.*?)\n```', re.DOTALL)
+        for match in pattern.finditer(response):
+            if len(files) >= MAX_FILES:
+                logger.warning(f"generate_project: hit MAX_FILES={MAX_FILES}, dropping the rest")
+                break
+            path = match.group(1).strip()
+            if path.startswith("/") or path.startswith("~") or ".." in path.split("/"):
+                logger.warning(f"generate_project: rejected unsafe path '{path}'")
+                continue
+            content = match.group(2)
+            if len(content.encode("utf-8", errors="ignore")) > MAX_FILE_BYTES:
+                logger.warning(f"generate_project: truncating oversized file '{path}'")
+                content = content[:MAX_FILE_BYTES]
+            files[path] = content
+        return files
+
     @staticmethod
     def _extract_metadata(task: str, response: str, is_safe: bool) -> Dict[str, Any]:
         """Extract metadata from task + response."""

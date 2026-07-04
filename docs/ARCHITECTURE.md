@@ -67,6 +67,14 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   self-improvement's own real work into the same Memory `skillforge/synthesize.py` distills
   from. `skillforge/memory/self_improve_state.json` tracks which findings already got a PR
   so the same one isn't re-targeted forever.
+- **`build_request.py`** ✅ — the concrete "VAPE can build tools/apps/anything needed"
+  capability: label a GitHub issue `vape-build` (real-time via `build-request.yml`'s
+  `issues: labeled` trigger, not polled) and `builder.py`'s new `generate_project()`
+  attempts a real multi-file implementation (parses `### FILE: path` blocks, rejects path
+  traversal/absolute paths, caps file count/size). Files land in an isolated
+  `build-requests/issue-<N>-<slug>/` directory via a PR — never applied to the real codebase
+  automatically. Same two gates as `self_improve.py`: Builder's security validation, then
+  human PR review.
 - **`redteam.py`** ✅ — real prompt-injection test against VAPE's own report pipeline: crafts
   a malicious token symbol, runs it through the real `investigate.py -> run.py` grounding
   path and a real LLM call, judges the actual output, and logs a real finding if it's

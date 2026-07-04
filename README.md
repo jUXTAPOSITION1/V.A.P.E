@@ -191,6 +191,8 @@ V.A.P.E/
 │   ├── scout.py                        # Bounty-radar triage (rule-based, no LLM)
 │   ├── self_improve.py                 # Grounded self-improvement — finds a real
 │   │                                    #   bug/gap, Builder proposes a fix, opens a PR
+│   ├── build_request.py                # Label an issue "vape-build" -> real multi-file
+│   │                                    #   PR from builder.py's generate_project()
 │   └── requirements.txt                # Python deps
 │
 ├── skillforge/                          # Self-growing skill + tool ecosystem
