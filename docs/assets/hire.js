@@ -4,6 +4,14 @@
 const ACP_AGENT_URL = 'https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe';
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 
+// offeringName arrives here via an inline onclick="Hire.openX402('${o.name}', ...)"
+// string built in app.js, and exception messages can echo back arbitrary text
+// (e.g. from a fetch error) — both get written into innerHTML below, so escape
+// them at the sink, same pattern already used in report.js.
+function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 const Hire = {
     _modal: null,
 
@@ -25,7 +33,7 @@ const Hire = {
                     <button data-close class="text-zinc-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div id="hire-body">
-                    <div class="text-sm text-zinc-400 mb-1">${offeringName.replace(/_/g,' ')} <span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
+                    <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g,' '))} <span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
                     <p class="text-xs text-zinc-500 mb-4">Pays via x402: your wallet signs a gasless USDC authorization for the exact price above — no gas fee, no subscription, settles on Base mainnet.</p>
                     ${needsAddress ? `
                     <label class="text-xs text-zinc-500 block mb-1">Target contract address</label>
@@ -96,7 +104,7 @@ const Hire = {
             await this._renderResult(offeringName, priceUsd, address, result);
         } catch (e) {
             const msg = (e && e.message) || String(e);
-            set(`Payment failed: ${msg.slice(0, 200)}`, 'text-rose-400');
+            set(`Payment failed: ${escapeHtml(msg.slice(0, 200))}`, 'text-rose-400');
             submitBtn.disabled = false;
             submitBtn.classList.remove('opacity-50');
         }
@@ -121,7 +129,7 @@ const Hire = {
             <div class="text-center mb-4">
                 <i class="fa-solid fa-circle-check text-emerald-400 text-3xl mb-2"></i>
                 <div class="font-display text-lg">Paid & delivered</div>
-                <div class="text-xs text-zinc-500">${offeringName.replace(/_/g,' ')} · $${priceUsd} settled on Base</div>
+                <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
             </div>
             <div class="glass rounded-xl p-4 mb-4">${inlineReport || '<div class="text-xs text-amber-400">Could not render report preview — use Copy JSON below for the raw result.</div>'}</div>
             <div class="flex gap-2">

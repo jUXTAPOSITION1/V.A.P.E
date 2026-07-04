@@ -29,9 +29,7 @@ import re
 import sys
 import json
 import time
-import hashlib
 import argparse
-import subprocess
 import urllib.request
 import urllib.parse
 from datetime import datetime, timezone

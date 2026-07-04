@@ -16,12 +16,10 @@ import sys
 
 try:
     from agents.token_scan import scan as token_scan
-    from agents.data_fetchers import (build_market_context, get_contract_source,
-                                      get_token_market_by_contract, get_base_tvl_and_protocols)
+    from agents.data_fetchers import build_market_context, get_contract_source
 except Exception:  # when invoked from inside agents/
     from token_scan import scan as token_scan
-    from data_fetchers import (build_market_context, get_contract_source,
-                               get_token_market_by_contract, get_base_tvl_and_protocols)
+    from data_fetchers import build_market_context, get_contract_source
 
 
 def _addr(req):

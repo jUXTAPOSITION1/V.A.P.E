@@ -151,10 +151,7 @@ def builder_generate_and_append(
     
     try:
         builder = Builder()
-        
-        # Use provided query or default to task
-        search_query = context_query or task
-        
+
         # Generate code (Builder internally grounds in Memory)
         code, metadata = builder.generate_code(
             task=task,

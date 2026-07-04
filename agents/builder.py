@@ -26,12 +26,10 @@ Usage:
   # Builder grounds in Memory, generates, validates, auto-appends to Memory
 """
 
-import os
 import json
 import sys
 from datetime import datetime
-from pathlib import Path
-from typing import Optional, Dict, Any, Tuple, List
+from typing import Dict, Any, Tuple, List
 
 # Multi-provider LLM (already proven in agents/llm.py)
 try:
@@ -440,11 +438,9 @@ class Builder:
         """
         task = f"Improve {module}: {issue}"
         logger.info(f"Builder proposing improvement: {task[:80]}...")
-        
+
         # This would typically read the existing file, ground in Memory, then propose changes
         # For now, delegate to generate_code with improvement framing
-        prompt_addition = f"\nExisting module: {module}\nCurrent issue: {issue}\n"
-        
         code, metadata = self.generate_code(
             task=task,
             review=True,

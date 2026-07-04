@@ -29,7 +29,7 @@ import os
 import json
 import time
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from pathlib import Path
 import hashlib
@@ -288,7 +288,7 @@ class SocialMCPWrapper:
     
     def _get_cache_key(self, query: str) -> str:
         """Hash query to cache filename."""
-        return hashlib.md5(query.encode()).hexdigest()[:16]
+        return hashlib.sha256(query.encode()).hexdigest()[:16]
     
     def get_sentiment_summary(
         self,
