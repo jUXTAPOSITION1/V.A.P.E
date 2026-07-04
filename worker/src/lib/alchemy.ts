@@ -136,6 +136,50 @@ export async function getNftsForOwner(env: AlchemyEnv, address: string): Promise
   }));
 }
 
+export interface EarliestTransfer {
+  timestamp: number; // unix seconds
+  value: number; // token units (already decimal-adjusted by Alchemy)
+}
+
+interface AlchemyTransfersResponse {
+  transfers: Array<{ metadata?: { blockTimestamp?: string }; value?: number | null }>;
+}
+
+/**
+ * The single earliest incoming ERC-20 transfer of `contractAddress` to
+ * `address`, if any — used as a lightweight, single-call proxy for "when
+ * was this token first acquired" (see lib/costBasis.ts). Deliberately not a
+ * full transfer history: `alchemy_getAssetTransfers` with `order: "asc"` and
+ * `maxCount: 1` returns just the first match directly, one call per token
+ * instead of paging through everything.
+ */
+export async function getEarliestIncomingTransfer(env: AlchemyEnv, address: string, contractAddress: string): Promise<EarliestTransfer | null> {
+  const res = await fetch(rpcUrl(env), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "alchemy_getAssetTransfers",
+      params: [{
+        toAddress: address,
+        contractAddresses: [contractAddress],
+        category: ["erc20"],
+        order: "asc",
+        maxCount: "0x1",
+        withMetadata: true,
+        excludeZeroValue: true,
+      }],
+    }),
+  });
+  if (!res.ok) throw new Error(`Alchemy RPC HTTP ${res.status}`);
+  const json = (await res.json()) as { result?: AlchemyTransfersResponse; error?: { message: string } };
+  if (json.error) throw new Error(json.error.message);
+  const transfer = json.result?.transfers?.[0];
+  if (!transfer || typeof transfer.value !== "number" || !transfer.metadata?.blockTimestamp) return null;
+  return { timestamp: Math.floor(new Date(transfer.metadata.blockTimestamp).getTime() / 1000), value: transfer.value };
+}
+
 interface NetworkStatus {
   blockNumber: number;
   gasPriceGwei: number;

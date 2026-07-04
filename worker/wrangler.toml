@@ -18,6 +18,7 @@ X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 #   wrangler secret put CDP_API_KEY_ID
 #   wrangler secret put CDP_API_KEY_SECRET
 #   wrangler secret put ALCHEMY_API_KEY
+#   wrangler secret put COINGECKO_API_KEY
 #
 # ETHERSCAN_API_KEY: only exploit_check / safety_preflight need it; the other
 # 4 offerings work without it (degrade to {"verified": null}, matching
@@ -31,7 +32,13 @@ X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 # missing, which the facilitator will reject with 401.
 #
 # ALCHEMY_API_KEY: a free-tier Alchemy app key scoped to Base Mainnet
-# (dashboard.alchemy.com), used only by the free /portfolio, /nfts, and
-# /network-status routes (src/lib/alchemy.ts) — never by the priced /scan/*
-# offerings. Without it those three routes return 503 and the site falls
-# back to its direct public-RPC path.
+# (dashboard.alchemy.com), used only by the free /portfolio, /nfts,
+# /network-status, and /cost-basis routes (src/lib/alchemy.ts) — never by
+# the priced /scan/* offerings. Without it those routes return 503 and the
+# site falls back to its direct public-RPC path.
+#
+# COINGECKO_API_KEY: a free CoinGecko Demo API key (coingecko.com/en/api —
+# no payment required, just a signup), used by /prices (better rate-limit
+# headroom than the fully anonymous public API) and /cost-basis (needs
+# CoinGecko's historical-price-by-contract endpoint, which requires this key
+# — that endpoint 403s without one). Both routes 503 without it.
