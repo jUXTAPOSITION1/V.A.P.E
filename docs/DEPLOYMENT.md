@@ -142,6 +142,16 @@ that's `CDP_API_KEY_ID`/`CDP_API_KEY_SECRET` above. `src/lib/cdpAuth.ts` uses it
 the Bearer JWT the facilitator requires on every `/verify` and `/settle` call; without
 it, settlement calls go out unauthenticated and CDP returns 401.
 
+### E3. Alternative: Deno Deploy
+If your Cloudflare account can't complete `workers.dev` subdomain registration (a known
+account-level Cloudflare bug hit during development — see `worker/README.md`'s
+"Alternative: Deno Deploy" section for the full symptoms), the same worker code runs
+unmodified on [Deno Deploy](https://deno.com/deploy) via `worker/src/deno-entry.ts` +
+`worker/deno.json`, which assigns a working `*.deno.dev` URL automatically with no
+manual step. Connect the repo at dash.deno.com with entry point `worker/src/deno-entry.ts`,
+set the same secrets as environment variables there, and update `WORKER_BASE` in
+`docs/assets/app.js`/`profile.js` to the resulting URL.
+
 ---
 
 ## Verification checklist
