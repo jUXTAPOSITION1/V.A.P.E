@@ -31,7 +31,7 @@ jobs:
           - "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" # USDC — clean, stable baseline
           - "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE" # VAPE's own token
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
