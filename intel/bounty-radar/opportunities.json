@@ -17178,5 +17178,1618 @@
     "firstSeen": "2026-06-18T18:15:14.563337+00:00",
     "fitScore": -30,
     "isNew": false
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Hinkal-1782950400",
+    "name": "Hinkal (exploit $820,000)",
+    "prizeUsd": 820000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "prooflessDeposit() Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 79,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Edel-1782777600",
+    "name": "Edel (exploit $403,000)",
+    "prizeUsd": 403000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Price Oracle Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 81,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:AIDC-1782604800",
+    "name": "AIDC (exploit $121)",
+    "prizeUsd": 121,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Burn-from-LP Exploit on BSC. Lead for incident response + forensics.",
+    "fitScore": 50,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Polymarket International-1782345600",
+    "name": "Polymarket International (exploit $3,000,000)",
+    "prizeUsd": 3000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "polygon"
+    ],
+    "desc": "Front-end Vulnerability on Polygon. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Lixir Finance-1782345600",
+    "name": "Lixir Finance (exploit $12,300)",
+    "prizeUsd": 12300,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Broken Signature Verification on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 61,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SecondFi-1782172800",
+    "name": "SecondFi (exploit $2,400,000)",
+    "prizeUsd": 2400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "cardano"
+    ],
+    "desc": "Predictable Private Key Exploit on Cardano. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Royal.io-1782172800",
+    "name": "Royal.io (exploit $263,000)",
+    "prizeUsd": 263000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "polygon"
+    ],
+    "desc": "Hook Manipulation Hack on Polygon. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Quicksilver Zone-1782000000",
+    "name": "Quicksilver Zone (exploit $3,500)",
+    "prizeUsd": 3500,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "quicksilver"
+    ],
+    "desc": "Unchecked Proof Minting on Quicksilver. Lead for incident response + forensics.",
+    "fitScore": 45,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Taiko Bridge-1782000000",
+    "name": "Taiko Bridge (exploit $1,700,000)",
+    "prizeUsd": 1700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "taiko"
+    ],
+    "desc": "Fake Proof Exploit on Taiko. Lead for incident response + forensics.",
+    "fitScore": 72,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:LABUBU/OLPC-1781913600",
+    "name": "LABUBU/OLPC (exploit $1,100,000)",
+    "prizeUsd": 1100000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Deflationary Reserve Poisoning on BSC. Lead for incident response + forensics.",
+    "fitScore": 80,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:JaredFromSubway MEV Bot-1781913600",
+    "name": "JaredFromSubway MEV Bot (exploit $7,500,000)",
+    "prizeUsd": 7500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Reverse MEV Honeypot on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 89,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:JB-1781827200",
+    "name": "JB (exploit $50,000)",
+    "prizeUsd": 50000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Flashloan Price Manipulation on BSC. Lead for incident response + forensics.",
+    "fitScore": 67,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:mySwap CL-1781827200",
+    "name": "mySwap CL (exploit $300,000)",
+    "prizeUsd": 300000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "starknet"
+    ],
+    "desc": "CL Pool Accounting Hack on Starknet. Lead for incident response + forensics.",
+    "fitScore": 65,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Namada Shielded Pools-1781827200",
+    "name": "Namada Shielded Pools (exploit $600,000)",
+    "prizeUsd": 600000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "namada"
+    ],
+    "desc": "IBC Transfer Logic Exploit on Namada. Lead for incident response + forensics.",
+    "fitScore": 73,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Secret Network-1781827200",
+    "name": "Secret Network (exploit $4,670,000)",
+    "prizeUsd": 4670000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "secret"
+    ],
+    "desc": "Unbacked Mint via ICS-20 on Secret. Lead for incident response + forensics.",
+    "fitScore": 77,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aztec Bridge-1781654400",
+    "name": "Aztec Bridge (exploit $2,000,000)",
+    "prizeUsd": 2000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "escapeHatch Function Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 83,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Kelp-1776470400",
+    "name": "Kelp (exploit $293,000,000)",
+    "prizeUsd": 293000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "arbitrum"
+    ],
+    "desc": "LayerZero OFT bridge exploit on Ethereum,Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 90,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Grinex-1776297600",
+    "name": "Grinex (exploit $15,000,000)",
+    "prizeUsd": 15000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "tron",
+      "ethereum"
+    ],
+    "desc": "Hot Wallet Hack on Tron,Ethereum. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Rhea Lend-1776297600",
+    "name": "Rhea Lend (exploit $18,400,000)",
+    "prizeUsd": 18400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "near"
+    ],
+    "desc": "Fake Collateral Exploit on Near. Lead for incident response + forensics.",
+    "fitScore": 75,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Zerion Wallet-1776124800",
+    "name": "Zerion Wallet (exploit $100,000)",
+    "prizeUsd": 100000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics"
+    ],
+    "desc": "Hot Wallet Compromise via Social Engineering on . Lead for incident response + forensics.",
+    "fitScore": 55,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:MONA-1776038400",
+    "name": "MONA (exploit $60,950)",
+    "prizeUsd": 60950,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "BurnAddress Accounting Exploit on BSC. Lead for incident response + forensics.",
+    "fitScore": 63,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Dango-1776038400",
+    "name": "Dango (exploit $410,000)",
+    "prizeUsd": 410000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "dango"
+    ],
+    "desc": "Donate Negative Amounts Hack on Dango. Lead for incident response + forensics.",
+    "fitScore": 61,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SubQuery Network-1775952000",
+    "name": "SubQuery Network (exploit $60,000)",
+    "prizeUsd": 60000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Access Control Exploit on Base. Lead for incident response + forensics.",
+    "fitScore": 78,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Hyperbridge-1775952000",
+    "name": "Hyperbridge (exploit $2,500,000)",
+    "prizeUsd": 2500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "bsc",
+      "arbitrum"
+    ],
+    "desc": "Fake State Proof on Ethereum,Base,BSC,Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 89,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aethir-1775692800",
+    "name": "Aethir (exploit $423,000)",
+    "prizeUsd": 423000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Access Control Exploit on BSC. Lead for incident response + forensics.",
+    "fitScore": 76,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:BSC TMM/USDT-1775260800",
+    "name": "BSC TMM/USDT (exploit $1,665,000)",
+    "prizeUsd": 1665000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Reserve Manipulation Attack on BSC. Lead for incident response + forensics.",
+    "fitScore": 72,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Drift Trade-1775001600",
+    "name": "Drift Trade (exploit $295,000,000)",
+    "prizeUsd": 295000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Compromised Admin + Fake Token Price Manipulation on Solana. Lead for incident response + forensics.",
+    "fitScore": 70,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:LML/USDT staking protocol-1774915200",
+    "name": "LML/USDT staking protocol (exploit $950,000)",
+    "prizeUsd": 950000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Price Manipulation Attack on BSC. Lead for incident response + forensics.",
+    "fitScore": 70,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:GoonFi-1774656000",
+    "name": "GoonFi (exploit $254,000)",
+    "prizeUsd": 254000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Mispricing Arbitrage on Solana. Lead for incident response + forensics.",
+    "fitScore": 54,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Cyrus Finance-1774137600",
+    "name": "Cyrus Finance (exploit $5,000,000)",
+    "prizeUsd": 5000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Flashloan Pool Shares Exploit on BSC. Lead for incident response + forensics.",
+    "fitScore": 77,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Resolv-1774051200",
+    "name": "Resolv (exploit $24,500,000)",
+    "prizeUsd": 24500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Neutrl-1773792000",
+    "name": "Neutrl",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "DNS Hijacking Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 40,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:dTRINITY dLEND-1773705600",
+    "name": "dTRINITY dLEND (exploit $257,000)",
+    "prizeUsd": 257000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Deposit Inflation Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Venus Core Pool-1773532800",
+    "name": "Venus Core Pool (exploit $3,700,000)",
+    "prizeUsd": 3700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Donation Attack on BSC. Lead for incident response + forensics.",
+    "fitScore": 76,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Goose Finance-1773446400",
+    "name": "Goose Finance (exploit $8,435)",
+    "prizeUsd": 8435,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Share Accounting Flaw on BSC. Lead for incident response + forensics.",
+    "fitScore": 49,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aave V3-1773273600",
+    "name": "Aave V3 (exploit $862,000)",
+    "prizeUsd": 862000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "CAPO Oracle Misconfiguration on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Stake DAO-1773273600",
+    "name": "Stake DAO (exploit $176,000)",
+    "prizeUsd": 176000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum",
+      "base"
+    ],
+    "desc": "Oracle Message Spoofing on Arbitrum,Base. Lead for incident response + forensics.",
+    "fitScore": 77,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Gondi V3-1773014400",
+    "name": "Gondi V3 (exploit $230,000)",
+    "prizeUsd": 230000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "PurchaseBundler Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Molt EVM-1772841600",
+    "name": "Molt EVM (exploit $127,000)",
+    "prizeUsd": 127000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "onlySpawnerToken Modifier Hack on Base. Lead for incident response + forensics.",
+    "fitScore": 71,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:SolvBTC-1772755200",
+    "name": "SolvBTC (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Mint Reserves Logic Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 79,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Curve LlamaLend-1772409600",
+    "name": "Curve LlamaLend (exploit $240,000)",
+    "prizeUsd": 240000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Donation Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:FOOM Cash-1772409600",
+    "name": "FOOM Cash (exploit $2,260,000)",
+    "prizeUsd": 2260000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base"
+    ],
+    "desc": "Fake Proof Spam on Ethereum,Base. Lead for incident response + forensics.",
+    "fitScore": 84,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Wise Lending V2-1772236800",
+    "name": "Wise Lending V2 (exploit $66,000)",
+    "prizeUsd": 66000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum",
+      "ethereum"
+    ],
+    "desc": "Flashloan Exploit on Arbitrum,Ethereum. Lead for incident response + forensics.",
+    "fitScore": 58,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Ploutos Money-1772064000",
+    "name": "Ploutos Money (exploit $390,000)",
+    "prizeUsd": 390000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Misconfigured Oracle Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 71,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DGLD-1771804800",
+    "name": "DGLD",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Infinite Mint and Dump on Base. Lead for incident response + forensics.",
+    "fitScore": 50,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Blend Pools V2-1771718400",
+    "name": "Blend Pools V2 (exploit $10,970,000)",
+    "prizeUsd": 10970000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "stellar"
+    ],
+    "desc": "Price Oracle Manipulation on Stellar. Lead for incident response + forensics.",
+    "fitScore": 75,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:IoTeX-1771632000",
+    "name": "IoTeX (exploit $8,000,000)",
+    "prizeUsd": 8000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 84,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Veil Cash-1771632000",
+    "name": "Veil Cash (exploit $5,000)",
+    "prizeUsd": 5000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Misconfigured Groth16 Verifier on Base. Lead for incident response + forensics.",
+    "fitScore": 57,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Velar Perps-1771459200",
+    "name": "Velar Perps (exploit $401,000)",
+    "prizeUsd": 401000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "mezo"
+    ],
+    "desc": "Predictable Oracle Price Update on Mezo. Lead for incident response + forensics.",
+    "fitScore": 61,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Moonwell Lending-1771113600",
+    "name": "Moonwell Lending (exploit $1,780,000)",
+    "prizeUsd": 1780000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "cbETH Collateral Exploit on Base. Lead for incident response + forensics.",
+    "fitScore": 83,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:CrossCurve-1769904000",
+    "name": "CrossCurve (exploit $3,000,000)",
+    "prizeUsd": 3000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics"
+    ],
+    "desc": "Spoofed Cross-Chain Messages on . Lead for incident response + forensics.",
+    "fitScore": 65,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Step Finance-1769817600",
+    "name": "Step Finance (exploit $40,000,000)",
+    "prizeUsd": 40000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Private Key Compromised on Solana. Lead for incident response + forensics.",
+    "fitScore": 75,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Revert Lend-1769644800",
+    "name": "Revert Lend (exploit $50,000)",
+    "prizeUsd": 50000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Staked Collateral Exploit on Base. Lead for incident response + forensics.",
+    "fitScore": 67,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Matcha-1769299200",
+    "name": "Matcha (exploit $13,430,000)",
+    "prizeUsd": 13430000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base",
+      "ethereum"
+    ],
+    "desc": "Unlimited Approval Exploit on Base,Ethereum. Lead for incident response + forensics.",
+    "fitScore": 90,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Aperture LM-1769299200",
+    "name": "Aperture LM (exploit $3,200,000)",
+    "prizeUsd": 3200000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "bsc"
+    ],
+    "desc": "Incident lead for forensics on Ethereum,Base,BSC.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Saga-1768953600",
+    "name": "Saga (exploit $7,000,000)",
+    "prizeUsd": 7000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "saga"
+    ],
+    "desc": "Infinite Mint and Dump on Saga. Lead for incident response + forensics.",
+    "fitScore": 68,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Makina-1768780800",
+    "name": "Makina (exploit $4,200,000)",
+    "prizeUsd": 4200000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Price Oracle Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 81,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Meteora DAMM V2-1768608000",
+    "name": "Meteora DAMM V2 (exploit $1,500,000)",
+    "prizeUsd": 1500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Fake OTC Deal on Solana. Lead for incident response + forensics.",
+    "fitScore": 62,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:YO Protocol-1768262400",
+    "name": "YO Protocol (exploit $3,730,000)",
+    "prizeUsd": 3730000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Slippage Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 76,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Truebit-1767830400",
+    "name": "Truebit (exploit $26,400,000)",
+    "prizeUsd": 26400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Bonding Curve Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 80,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Polycule-1767744000",
+    "name": "Polycule (exploit $230,000)",
+    "prizeUsd": 230000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "polygon"
+    ],
+    "desc": "Incident lead for forensics on Polygon.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Fusion by IPOR-1767657600",
+    "name": "Fusion by IPOR (exploit $336,000)",
+    "prizeUsd": 336000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "EIP-7702 Delegation Exploit on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 65,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:TMX TRIBE-1767571200",
+    "name": "TMX TRIBE (exploit $1,400,000)",
+    "prizeUsd": 1400000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Mint & Stake Loop Exploit on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 71,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:PRXVT-1767225600",
+    "name": "PRXVT (exploit $97,000)",
+    "prizeUsd": 97000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Sybil Attack with CREATE2 Addresses on Base. Lead for incident response + forensics.",
+    "fitScore": 70,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Unleash Protocol-1767052800",
+    "name": "Unleash Protocol (exploit $3,900,000)",
+    "prizeUsd": 3900000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "story"
+    ],
+    "desc": "Multisig Governance Hack on Story. Lead for incident response + forensics.",
+    "fitScore": 66,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:MSCST-1766880000",
+    "name": "MSCST (exploit $129,900)",
+    "prizeUsd": 129900,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Atomic Sandwich Attack on BSC. Lead for incident response + forensics.",
+    "fitScore": 61,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Flow-1766793600",
+    "name": "Flow (exploit $3,900,000)",
+    "prizeUsd": 3900000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "flow"
+    ],
+    "desc": "mint-and-dump Hack on Flow. Lead for incident response + forensics.",
+    "fitScore": 66,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Trust Wallet Wallet-1766620800",
+    "name": "Trust Wallet Wallet (exploit $7,000,000)",
+    "prizeUsd": 7000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "bitcoin",
+      "solana"
+    ],
+    "desc": "Private Key Compromised (Supply Chain Attack) on Ethereum,Bitcoin,Solana. Lead for incident response + forensics.",
+    "fitScore": 83,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Rari Capital-1766016000",
+    "name": "Rari Capital (exploit $2,000,000)",
+    "prizeUsd": 2000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Uninitialized Proxy Hijack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 73,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:FutureSwap-1765843200",
+    "name": "FutureSwap (exploit $270,000)",
+    "prizeUsd": 270000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Governance Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Yearn Finance-1765843200",
+    "name": "Yearn Finance (exploit $300,000)",
+    "prizeUsd": 300000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Misconfigured Fulcrum sUSD Strategy on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 65,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Mars Perps-1765670400",
+    "name": "Mars Perps (exploit $960,000)",
+    "prizeUsd": 960000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "neutron"
+    ],
+    "desc": "Thin-Market Skew Exploit on Neutron. Lead for incident response + forensics.",
+    "fitScore": 60,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Ribbon-1765497600",
+    "name": "Ribbon (exploit $2,700,000)",
+    "prizeUsd": 2700000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 79,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:0G Labs-1765411200",
+    "name": "0G Labs (exploit $516,000)",
+    "prizeUsd": 516000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "0g"
+    ],
+    "desc": "emergencyWithdraw Function Exploit on 0G. Lead for incident response + forensics.",
+    "fitScore": 57,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:US Permissionless Dollar-1764806400",
+    "name": "US Permissionless Dollar (exploit $1,000,000)",
+    "prizeUsd": 1000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "\"CPIMP\" proxy front-run on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 70,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Yearn Ether-1764460800",
+    "name": "Yearn Ether (exploit $9,000,000)",
+    "prizeUsd": 9000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "yETH stablepool Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 80,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Upbit-1764115200",
+    "name": "Upbit (exploit $36,000,000)",
+    "prizeUsd": 36000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Private Key Compromised on Solana. Lead for incident response + forensics.",
+    "fitScore": 75,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Port3 Network-1763856000",
+    "name": "Port3 Network (exploit $166,000)",
+    "prizeUsd": 166000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Infinite Mint and Dump on BSC. Lead for incident response + forensics.",
+    "fitScore": 62,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Raga Finance-1763769600",
+    "name": "Raga Finance (exploit $18,500)",
+    "prizeUsd": 18500,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "hyperliquid l1"
+    ],
+    "desc": "HyperEVM Delta Neutral Exploit on Hyperliquid L1. Lead for incident response + forensics.",
+    "fitScore": 43,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:GANA Payment-1763596800",
+    "name": "GANA Payment (exploit $3,100,000)",
+    "prizeUsd": 3100000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Private Key Compromised on BSC. Lead for incident response + forensics.",
+    "fitScore": 80,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Impermax V3-1762819200",
+    "name": "Impermax V3 (exploit $380,000)",
+    "prizeUsd": 380000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base"
+    ],
+    "desc": "Zero-Rate Hack on Base. Lead for incident response + forensics.",
+    "fitScore": 76,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DIMO-1762473600",
+    "name": "DIMO (exploit $40,000)",
+    "prizeUsd": 40000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 61,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Moonwell Lending-1762214400",
+    "name": "Moonwell Lending (exploit $1,000,000)",
+    "prizeUsd": 1000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "base",
+      "optimism"
+    ],
+    "desc": "Oracle Price Feed Manipulation on Base,Optimism. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Balancer V2-1762128000",
+    "name": "Balancer V2 (exploit $128,000,000)",
+    "prizeUsd": 128000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "arbitrum",
+      "base",
+      "polygon",
+      "sonic",
+      "optimism"
+    ],
+    "desc": "Composable Stable Pools Exploit on Ethereum,Arbitrum,Base,Polygon,Sonic,Optimism. Lead for incident response + forensics.",
+    "fitScore": 90,
+    "isNew": true,
+    "firstSeen": "2026-07-04T11:08:07.739782Z"
   }
 ]
