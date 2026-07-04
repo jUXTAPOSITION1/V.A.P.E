@@ -1,0 +1,41 @@
+{
+  "schema": "vape.base-tokens.v1",
+  "note": "Curated Base (chain 8453) token list for the keyless wallet profile. Every address here is verified against an authoritative source (BaseScan / official project docs / OP-Stack spec) before being added — never memory-only. Balances are read live via public RPC; prices via CoinGecko's contract-address lookup (no per-token id needed).",
+  "tokens": [
+    {
+      "symbol": "WETH",
+      "name": "Wrapped Ether",
+      "address": "0x4200000000000000000000000000000000000006",
+      "decimals": 18,
+      "source": "OP-Stack predeploy — identical across every OP-Stack chain (specs.optimism.io/protocol/predeploys.html)"
+    },
+    {
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "decimals": 6,
+      "source": "Circle-native USDC on Base (developers.circle.com/stablecoins/usdc-contract-addresses)"
+    },
+    {
+      "symbol": "cbBTC",
+      "name": "Coinbase Wrapped BTC",
+      "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+      "decimals": 8,
+      "source": "Coinbase-native (coinbase.com/cbbtc)"
+    },
+    {
+      "symbol": "VIRTUAL",
+      "name": "Virtual Protocol",
+      "address": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b",
+      "decimals": 18,
+      "source": "Virtuals Protocol official (whitepaper.virtuals.io/info-hub/important-links-and-resources/contract-address)"
+    },
+    {
+      "symbol": "VAPE",
+      "name": "fun VAPE",
+      "address": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
+      "decimals": 18,
+      "source": "VAPE's own agent token — ground-truthed in this repo (agents/publish_reputation.py, data/reputation.json, intel/catalog/investigation-catalog.md). Note: this repo's own investigation flagged it CAUTION (owner-controlled burnFrom, no timelock) — shown as-is, not investment advice."
+    }
+  ]
+}

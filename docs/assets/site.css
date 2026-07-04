@@ -1,0 +1,104 @@
+/* VAPE — retro-futurist noir-dossier design system. Tailwind CDN handles utilities;
+   this file holds custom tokens, motion, and decoration Tailwind's utility set can't. */
+
+:root {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    --cyan: #22d3ee;
+    --cyan-dim: rgba(34,211,238,0.14);
+    --brass: #c9a86a;
+    --brass-dim: rgba(201,168,106,0.16);
+}
+
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+.font-serif-display { font-family: 'Fraunces', Georgia, serif; }
+
+body {
+    background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.12), transparent),
+        radial-gradient(1000px 500px at 100% 0%, rgba(16,185,129,0.08), transparent),
+        radial-gradient(900px 500px at 50% 60%, rgba(34,211,238,0.05), transparent),
+        #09090b;
+}
+
+.glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+.live-dot { animation: pulse 1.8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.85)} }
+.stat { font-variant-numeric: tabular-nums; }
+.skeleton { background: linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 37%,rgba(255,255,255,.04) 63%); background-size:400% 100%; animation: sh 1.4s ease infinite; }
+@keyframes sh { 0%{background-position:100% 50%} 100%{background-position:0 50%} }
+a { transition: color .15s; }
+.card-h:hover { transform: translateY(-2px); border-color: rgba(16,185,129,.4); }
+.card-h { transition: all .2s cubic-bezier(.4,0,.2,1); }
+
+/* ── Scroll reveal ─────────────────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.in-view { opacity: 1; transform: none; }
+.reveal-1.in-view { transition-delay: .08s; }
+.reveal-2.in-view { transition-delay: .16s; }
+.reveal-3.in-view { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* ── Dossier chrome (brass) ────────────────────────────────────────────── */
+.dossier {
+    position: relative;
+    border: 1px solid rgba(201,168,106,0.25);
+}
+.dossier::before {
+    content: attr(data-tab);
+    position: absolute;
+    top: -1px;
+    left: 24px;
+    transform: translateY(-100%);
+    background: rgba(201,168,106,0.16);
+    color: var(--brass);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid rgba(201,168,106,0.25);
+    border-bottom: none;
+}
+
+/* ── HUD chrome (cyan) ─────────────────────────────────────────────────── */
+.hud-frame {
+    position: relative;
+    border: 1px solid rgba(34,211,238,0.2);
+    box-shadow: 0 0 0 1px rgba(34,211,238,0.05) inset;
+}
+.hud-corner { position: absolute; width: 14px; height: 14px; border-color: var(--cyan); opacity: .6; }
+.hud-corner.tl { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+.hud-corner.tr { top: -1px; right: -1px; border-top: 2px solid; border-right: 2px solid; }
+.hud-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid; border-left: 2px solid; }
+.hud-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+
+.text-cyan-glow { color: var(--cyan); text-shadow: 0 0 12px rgba(34,211,238,.5); }
+
+/* ── Hero character placeholder (used until real art lands) ─────────────── */
+.hero-portrait-fallback {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(34,211,238,0.25), transparent 55%),
+        radial-gradient(circle at 75% 75%, rgba(249,115,22,0.18), transparent 55%),
+        linear-gradient(160deg, #0c0c10 0%, #030303 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.hero-portrait-fallback::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode: overlay;
+}
+.hero-glyph { filter: drop-shadow(0 0 30px rgba(34,211,238,.35)); }
+
+/* ── Wallet chip / profile ────────────────────────────────────────────── */
+.wallet-chip { transition: all .15s; }
+.wallet-chip:hover { border-color: rgba(34,211,238,.4); }
+.chain-badge-warn { animation: chainpulse 1.6s infinite; }
+@keyframes chainpulse { 0%,100%{opacity:1} 50%{opacity:.6} }
