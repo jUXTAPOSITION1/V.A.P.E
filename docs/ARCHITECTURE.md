@@ -55,8 +55,14 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`main.py`** — `VAPE` (investigator) + `HACK` (red-team auditor) over fetched bounties.
 - **`vape.py` / `hack.py`** — persona engines with `vape_system.md` / `hack_system.md` prompts.
 - **`tools.py`** — `fetch_bounties()`, `log_report()`.
-- **`acp.py` / `wallet.py`** 🟡 — ACP reporting + wallet scaffolding (signing via ACP CLI).
-- **`redteam.py` / `self_improve.py` / `create_pr.py` / `self_pr.py`** — AI red-team + self-improvement → opens PRs.
+- **`acp_fulfill.py` / `wallet.py`** 🟡 — ACP job fulfillment + wallet scaffolding (signing via ACP CLI).
+- **`scout.py`** ✅ — bounty-radar triage, rule-based fit scoring (no LLM), hourly via `scout.yml`.
+- **`self_improve.py`** ✅ — finds one real, evidence-backed issue (pyflakes / tool-registry
+  gaps — never an open-ended LLM guess), has `builder.py` propose a fix grounded in the
+  actual target file, and opens a real PR via `skillforge/mcp.py`'s `GitHubMCPWrapper` for
+  human review. Never auto-merges.
+- **`redteam.py`** 🟡 — AI red-team probes (currently an ungrounded stub, same class of bug
+  `self_improve.py` had before this fix — not yet rebuilt).
 
 ### 2. Node agent — `src/` 🟡 (continuous-investigation lifecycle)
 Local/long-running runtime (`package.json`, ESM, `main: src/agents/vape.js`).

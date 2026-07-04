@@ -1,0 +1,46 @@
+name: VAPE Self-Improvement (grounded, opens a PR for review)
+
+on:
+  schedule:
+    - cron: '0 12 * * *'   # once daily — heavier than the hourly crons (LLM call + PR)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: self-improve
+  cancel-in-progress: false
+
+jobs:
+  self-improve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: agents/requirements.txt
+      - name: Install
+        run: |
+          pip install -r agents/requirements.txt
+          pip install pyflakes
+      - name: Run self-improvement cycle (finds a real gap, proposes a fix, opens a PR)
+        run: python agents/self_improve.py
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit report
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/ skillforge/memory/ || true
+          git commit -m "VAPE self-improvement cycle $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
