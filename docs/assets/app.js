@@ -52,9 +52,54 @@ window.WORKER_BASE = WORKER_BASE;
 const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
-        await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
+    },
+
+    // Bounty Command Center telemetry strip + VAPE's own audit track record.
+    // opportunities.json is the same real feed bounties() renders cards from;
+    // this just adds the aggregate counts and the separate poc-reports ledger.
+    async bountyCommand() {
+        try {
+            const data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
+            const list = Array.isArray(data) ? data : [];
+            const liveStatuses = new Set(['live','active']);
+            const live = list.filter(o => liveStatuses.has((o.status||'').toLowerCase())).length;
+            const platforms = new Set(list.map(o=>o.platform).filter(Boolean));
+            this._set('bcc-total', list.length.toLocaleString());
+            this._set('bcc-live', live.toLocaleString());
+            this._set('bcc-platforms', platforms.size);
+            document.getElementById('bcc-updated').textContent = 'radar synced ' + new Date().toLocaleTimeString();
+        } catch(e) {
+            document.getElementById('bcc-updated').textContent = 'radar telemetry unavailable';
+        }
+
+        const auditEl = document.getElementById('bcc-audit-list');
+        try {
+            const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/poc-reports`)).json();
+            const files = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
+                .map(f=>{
+                    const stopped = /-STOPPED/.test(f.name);
+                    const m = f.name.match(/(\d{4}-\d{2}-\d{2})/);
+                    const base = f.name.replace(/\.md$/,'').replace(/-STOPPED/,'').replace(/^(audit|lead)-/,'').replace(/-\d{4}-\d{2}-\d{2}$/,'');
+                    return { name: base.replace(/-/g,' '), stopped, date: m?m[1]:'', url: f.html_url, isAudit: f.name.startsWith('audit-') };
+                })
+                .sort((a,b)=>b.date.localeCompare(a.date));
+            this._set('bcc-audits', files.filter(f=>f.isAudit).length);
+            if (!files.length) throw 0;
+            auditEl.innerHTML = files.map(f => `
+                <a href="${f.url}" target="_blank" class="card-h glass rounded-xl p-4 block">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-400'}"></i>
+                        <span class="text-[10px] px-2 py-0.5 rounded ${f.stopped?'bg-white/5 text-zinc-500':'bg-emerald-500/10 text-emerald-400'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
+                    </div>
+                    <div class="font-semibold text-xs leading-snug capitalize">${this._esc(f.name)}</div>
+                    <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
+                </a>`).join('');
+        } catch(e) {
+            auditEl.innerHTML = '<div class="sm:col-span-2 lg:col-span-4 text-zinc-500 text-sm">No audits filed yet — <a class="text-emerald-400" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
+        }
     },
 
     _rep: null,
@@ -67,23 +112,26 @@ const App = {
             set('rep-broadcasts', a.intel_broadcasts);
             set('rep-investigations', a.catalog_investigations);
             set('rep-tools', a.tools_verified);
+            set('rep-tools-built', a.tools_built);
             set('rep-offerings', c.offerings_live);
+            set('agent-status-offerings', c.offerings_live);
             set('rep-skills', a.skills_codified);
+            this._renderWorkshop(a.tools_built_list || [], r.generated);
             const vlink = document.getElementById('rep-verify');
             if (vlink && id.verify_identity) vlink.href = id.verify_identity;
             const allOfferings = Array.isArray(c.offerings) ? c.offerings : [];
-            const auto = allOfferings.filter(o=>o.auto);
+            const x402able = allOfferings.filter(o=>o.x402 ?? o.auto);
             const manual = allOfferings.filter(o=>!o.auto);
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
-                grid.innerHTML = auto.map(o=>`
+                grid.innerHTML = x402able.map(o=>`
                     <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
                         <span class="font-mono text-xs text-zinc-200">${o.name}</span>
                         <span class="font-display text-emerald-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · click to hire</span>
+                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'click to hire'}</span>
                     </button>`).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
@@ -104,6 +152,46 @@ const App = {
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) grid.innerHTML = '<div class="text-amber-400 text-xs">Reputation feed unavailable (regenerating).</div>';
         }
+    },
+
+    // "The Workshop" — real PRs opened by VAPE's own build pipelines
+    // (agents/build_request.py, agents/skillforge_build.py), pre-fetched and
+    // filtered server-side in agents/publish_reputation.py::tool_builds() so
+    // the browser never needs its own GitHub Search API call/rate limit.
+    _renderWorkshop(builds, generatedAt) {
+        const el = document.getElementById('workshop-body');
+        if (!el) return;
+        const upd = document.getElementById('workshop-updated');
+        if (upd) upd.textContent = 'ledger ' + this._ago(generatedAt);
+        if (!builds.length) {
+            el.innerHTML = `<div class="md:col-span-2 text-center py-8 text-zinc-500 text-sm">
+                <i class="fa-solid fa-drafting-compass text-2xl mb-3 opacity-50 block"></i>
+                No open build proposals right now — the last cycle found no gap worth building against
+                (tool registry clean, no fresh findings to ground a proposal in). Checks run 2x/day automatically.
+            </div>`;
+            return;
+        }
+        const statusStyle = { merged: ['#34d399','Merged'], open: ['#22d3ee','Open · awaiting review'], closed: ['#71717a','Closed'] };
+        el.innerHTML = builds.map(b => {
+            const [col, label] = statusStyle[b.status] || statusStyle.closed;
+            const v = b.verification || {};
+            const vBits = [];
+            if (v.ok) vBits.push(`<span class="text-emerald-400">✅ ${v.ok}</span>`);
+            if (v.warn) vBits.push(`<span class="text-amber-400">⚠️ ${v.warn}</span>`);
+            if (v.fail) vBits.push(`<span class="text-rose-400">❌ ${v.fail}</span>`);
+            return `
+            <a href="${b.url}" target="_blank" rel="noopener" class="card-h glass rounded-xl p-4 block">
+                <div class="flex items-start justify-between gap-2 mb-1.5">
+                    <div class="font-semibold text-sm leading-snug min-w-0">${this._esc(b.title)}</div>
+                    <span class="text-[10px] px-2 py-0.5 rounded shrink-0 whitespace-nowrap" style="color:${col};background:${col}1a">${label}</span>
+                </div>
+                <div class="text-xs text-zinc-500 flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <span class="text-indigo-400">${b.kind==='self-directed'?'VAPE self-directed':'Human-requested'}</span>
+                    <span>· #${b.number} · ${this._ago(b.created_at)}</span>
+                    ${vBits.length?`<span>· verify: ${vBits.join(' ')}</span>`:''}
+                </div>
+            </a>`;
+        }).join('');
     },
 
     _tvlHist: null, _chart: null,

@@ -24,6 +24,8 @@ jobs:
           python-version: '3.11'
       - name: Generate verifiable reputation.json (stdlib only)
         run: python agents/publish_reputation.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit reputation snapshot (direct, data only)
         run: |
           git config user.name "VAPE Bot"
