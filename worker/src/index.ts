@@ -90,14 +90,18 @@ const app = new Hono<{ Bindings: Env }>();
 // retry sends a custom `X-PAYMENT` header, which makes browsers preflight
 // with OPTIONS — without allowHeaders covering it, that preflight (and thus
 // the whole payment flow) fails before any wallet-signing code ever runs.
-// exposeHeaders makes the x402 protocol's custom response headers (the 402
-// body's payment requirements come through as JSON, but settlement details
-// arrive as headers) readable by client JS, which cross-origin responses
-// hide by default unless explicitly exposed.
+// `@x402/fetch`'s client also sets `Access-Control-Expose-Headers` as a
+// *request* header on the retry (unusual — that header is normally
+// response-only — but it's what the library actually sends), so it has to
+// be allow-listed too or the browser blocks that specific retry while the
+// unauthenticated first request still succeeds, which is exactly the
+// signed-then-fails symptom this fixes. exposeHeaders makes the protocol's
+// custom response headers readable by client JS, which cross-origin
+// responses hide by default unless explicitly exposed.
 app.use("*", cors({
   origin: "*",
   allowMethods: ["GET", "OPTIONS"],
-  allowHeaders: ["Content-Type", "X-PAYMENT", "PAYMENT-SIGNATURE"],
+  allowHeaders: ["Content-Type", "X-PAYMENT", "PAYMENT-SIGNATURE", "Access-Control-Expose-Headers"],
   exposeHeaders: ["PAYMENT-REQUIRED", "PAYMENT-RESPONSE", "X-PAYMENT-RESPONSE"],
 }));
 
