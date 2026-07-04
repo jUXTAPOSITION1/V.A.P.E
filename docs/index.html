@@ -42,8 +42,9 @@
     <nav class="border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                <div class="relative w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0 overflow-hidden">
                     <i class="fa-solid fa-user-secret text-black text-lg"></i>
+                    <img src="assets/vape-avatar.jpg" alt="" class="absolute w-9 h-9 rounded-xl object-cover" onerror="this.remove()">
                 </div>
                 <div class="font-display text-2xl sm:text-3xl tracking-tighter leading-none">
                     VAPE <span class="text-emerald-400">HACK</span>
@@ -90,7 +91,8 @@
                     <div class="hud-corner tl" aria-hidden="true"></div><div class="hud-corner tr" aria-hidden="true"></div>
                     <div class="hud-corner bl" aria-hidden="true"></div><div class="hud-corner br" aria-hidden="true"></div>
                     <i class="fa-solid fa-user-secret hero-glyph text-cyan-400/70" style="font-size:9rem" aria-hidden="true"></i>
-                    <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-cyan-400/70 flex justify-between">
+                    <img src="assets/vape-hero.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
+                    <div class="absolute bottom-4 left-4 right-4 font-mono text-[10px] text-cyan-400/70 flex justify-between z-10">
                         <span>ID: ERC-8004 #54988</span>
                         <span>BASE · 8453</span>
                     </div>
