@@ -4,22 +4,27 @@ compatibility_date = "2026-07-04"
 compatibility_flags = ["nodejs_compat"]
 
 # ── Payment configuration ────────────────────────────────────────────────
-# Ships pointed at Base Sepolia + the public x402.org testnet facilitator so
-# the full pay -> verify -> settle loop can be proven with no real funds.
+# Base mainnet + Coinbase Developer Platform's hosted facilitator (real
+# funds). The full pay -> verify -> settle loop was proven first against
+# Base Sepolia + the public facilitator.x402.org testnet facilitator before
+# this switch; see git history on this file for the testnet values.
 [vars]
 PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
-X402_NETWORK = "eip155:84532"
-X402_FACILITATOR_URL = "https://facilitator.x402.org"
+X402_NETWORK = "eip155:8453"
+X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 
-# ETHERSCAN_API_KEY is a SECRET, not a var — set it with:
+# The following are SECRETS, not vars — set them with:
 #   wrangler secret put ETHERSCAN_API_KEY
-# Only exploit_check / safety_preflight need it; the other 4 offerings work
-# without it (degrade to {"verified": null}, matching agents/data_fetchers.py).
-
-# ── Going to Base mainnet (after proving the loop on testnet above) ────────
-# 1. Get Coinbase Developer Platform credentials: https://portal.cdp.coinbase.com
-# 2. Change X402_NETWORK below to "eip155:8453"
-# 3. Change X402_FACILITATOR_URL to your CDP-hosted facilitator endpoint
-# 4. If your facilitator needs auth headers, wire them via HTTPFacilitatorClient's
-#    createAuthHeaders option in src/index.ts, backed by a `wrangler secret put`
-#    for the CDP API key/secret — never a plaintext var.
+#   wrangler secret put CDP_API_KEY_ID
+#   wrangler secret put CDP_API_KEY_SECRET
+#
+# ETHERSCAN_API_KEY: only exploit_check / safety_preflight need it; the other
+# 4 offerings work without it (degrade to {"verified": null}, matching
+# agents/data_fetchers.py).
+#
+# CDP_API_KEY_ID / CDP_API_KEY_SECRET: a CDP Secret API Key (portal.cdp.
+# coinbase.com) used to mint the Bearer JWT src/lib/cdpAuth.ts signs for
+# every /verify, /settle, and /supported call to the facilitator above. Both
+# must be set for real settlement to work — src/index.ts's
+# buildCreateAuthHeaders() no-ops (no auth headers sent) if either is
+# missing, which the facilitator will reject with 401.

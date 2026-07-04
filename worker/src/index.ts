@@ -15,15 +15,55 @@ import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { fulfill, type HandlerName } from "./handlers";
+import { generateCdpJwt } from "./lib/cdpAuth";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
 type Caip2Network = `${string}:${string}`;
 
 export interface Env {
   ETHERSCAN_API_KEY?: string;
+  CDP_API_KEY_ID?: string;
+  CDP_API_KEY_SECRET?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
+}
+
+/**
+ * Builds the facilitator's `createAuthHeaders` callback. Only CDP's hosted
+ * facilitator (api.cdp.coinbase.com) needs Bearer JWT auth; the public
+ * testnet facilitator (facilitator.x402.org) needs none, so this is a no-op
+ * unless both CDP secrets are configured (`wrangler secret put`).
+ *
+ * The callback signature takes no arguments — the client picks the right
+ * header set (verify/settle/supported) out of the returned object — so a
+ * fresh, correctly-scoped JWT is minted for each of the three endpoints on
+ * every call rather than reused across them (CDP JWTs bind `uris` to one
+ * exact method+path and expire after 120s, so they're not reusable anyway).
+ */
+function buildCreateAuthHeaders(env: Env) {
+  if (!env.CDP_API_KEY_ID || !env.CDP_API_KEY_SECRET) return undefined;
+  const apiKeyId = env.CDP_API_KEY_ID;
+  const apiKeySecret = env.CDP_API_KEY_SECRET;
+  const host = new URL(env.X402_FACILITATOR_URL).host;
+  const basePath = new URL(env.X402_FACILITATOR_URL).pathname;
+
+  const jwtFor = async (method: string, subPath: string) => {
+    const jwt = await generateCdpJwt({
+      apiKeyId,
+      apiKeySecret,
+      requestMethod: method,
+      requestHost: host,
+      requestPath: `${basePath}${subPath}`,
+    });
+    return { Authorization: `Bearer ${jwt}` };
+  };
+
+  return async () => ({
+    verify: await jwtFor("POST", "/verify"),
+    settle: await jwtFor("POST", "/settle"),
+    supported: await jwtFor("GET", "/supported"),
+  });
 }
 
 // Prices match data/reputation.json exactly — this file is the payment
@@ -50,7 +90,10 @@ app.get("/", (c) =>
 );
 
 app.use("*", async (c, next) => {
-  const facilitatorClient = new HTTPFacilitatorClient({ url: c.env.X402_FACILITATOR_URL });
+  const facilitatorClient = new HTTPFacilitatorClient({
+    url: c.env.X402_FACILITATOR_URL,
+    createAuthHeaders: buildCreateAuthHeaders(c.env),
+  });
   const resourceServer = new x402ResourceServer(facilitatorClient).register(c.env.X402_NETWORK, new ExactEvmScheme());
 
   const routes: Record<string, unknown> = {};
