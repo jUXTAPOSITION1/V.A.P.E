@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-04T16:07:07Z",
+  "generated": "2026-07-04T18:06:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 303,
+    "reports": 304,
     "reports_by_type": {
-      "bounty": 160,
+      "bounty": 161,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,38 +18,51 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 19,
+    "investigations": 21,
     "tools": 15,
-    "tools_verified": 14,
+    "tools_verified": 12,
     "skills": 4
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260704-101133-0x044098A1.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 America250",
-      "symbol": "America250",
-      "date": "2026-07-04T10:11:33Z",
-      "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
+      "file": "investigation-20260704-180603-0xDB879F45.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 CLAUDE",
+      "symbol": "CLAUDE",
+      "date": "2026-07-04T18:06:03Z",
+      "target": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "[-10] Low liquidity $34,531",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-101133-0x044098A1.md"
+      "score": "88",
+      "summary": "- Target: 0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892 - Chain: 8453 (Base) - Date: 2026-07-04T18:06:03Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-180603-0xDB879F45.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260704_160359.md",
+      "file": "bounty_report_20260704_180250.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T16:03:59Z",
+      "date": "2026-07-04T18:02:50Z",
       "threat": null,
-      "summary": "Cycle: 20260704160359 \u00b7 Data timestamp (UTC): 2026-07-04T16:04:02Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_160359.md",
-      "bytes": 10351
+      "summary": "Cycle: 20260704180250 \u00b7 Data timestamp (UTC): 2026-07-04T18:02:56Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_180250.md",
+      "bytes": 10423
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260704-180603-0xDB879F45.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 CLAUDE",
+      "symbol": "CLAUDE",
+      "date": "2026-07-04T18:06:03Z",
+      "target": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "- Target: 0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892 - Chain: 8453 (Base) - Date: 2026-07-04T18:06:03Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-180603-0xDB879F45.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260704-101133-0x044098A1.md",
@@ -276,9 +289,31 @@
       "verdict": "PROCEED (90/100)",
       "key_finding": "Low liquidity $34,531",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-04",
+      "job_id": "auto",
+      "target": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
+      "symbol": "CLAUDE",
+      "offering": "deep_investigation",
+      "verdict": "PROCEED (88/100)",
+      "key_finding": "Mintable supply (dilution risk)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_180250.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T18:02:50Z",
+      "threat": null,
+      "summary": "Cycle: 20260704180250 \u00b7 Data timestamp (UTC): 2026-07-04T18:02:56Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_180250.md",
+      "bytes": 10423
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -927,17 +962,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_173823.md",
       "bytes": 7146
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260629_140548.md",
-      "title": "VAPE Report - 20260629_140548",
-      "date": "2026-06-29T14:05:48Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_140548.md",
-      "bytes": 6269
     }
   ],
   "broadcasts": [
@@ -1165,7 +1189,7 @@
     {
       "name": "echidna",
       "tier": "fuzzing",
-      "status": "verified",
+      "status": "broken",
       "version": "Echidna 2.3.2",
       "purpose": "Property-based smart contract fuzzer.",
       "repo": "crytic/echidna",
@@ -1175,7 +1199,7 @@
     {
       "name": "foundry",
       "tier": "fuzzing",
-      "status": "verified",
+      "status": "broken",
       "version": "forge Version: 1.7.1",
       "purpose": "Forge fuzz + invariant testing, Anvil mainnet-fork PoC.",
       "repo": "foundry-rs/foundry",
@@ -1216,7 +1240,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48192579",
+      "version": "48198781",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1226,7 +1250,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.57 eth_dom 9.44 mcap_chg_24h 0.9",
+      "version": "btc_dom 55.59 eth_dom 9.48 mcap_chg_24h 1.62",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
