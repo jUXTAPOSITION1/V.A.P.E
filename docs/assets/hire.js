@@ -107,6 +107,10 @@ const Hire = {
         if (!body) return;
         const deliverable = result.deliverable || {};
         const verdict = deliverable.verdict || deliverable.rug_risk || deliverable.combined || deliverable.token_verdict;
+        const walletAddress = Wallet.state().account;
+        if (window.CaseHistory && walletAddress) {
+            CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: address, verdict, result });
+        }
         body.innerHTML = `
             <div class="text-center mb-4">
                 <i class="fa-solid fa-circle-check text-emerald-400 text-3xl mb-2"></i>

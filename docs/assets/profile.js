@@ -132,6 +132,21 @@ const Profile = {
         } catch (e) { return []; }
     },
 
+    // Real 24h P&L — sums valueUsd * (change24h/100) across whatever holdings
+    // CoinGecko actually returned a 24hr-change figure for. Deliberately NOT
+    // a "since acquired" cost-basis P&L: that needs historical price-by-
+    // contract data, which CoinGecko now gates behind a paid/signup Demo API
+    // key — introducing that would break this site's keyless-first design,
+    // so it's out of scope rather than faked with a placeholder number.
+    _computePnl24h(holdings) {
+        const priced = holdings.filter(h => h.valueUsd > 0 && typeof h.change24h === 'number');
+        if (!priced.length) return null;
+        const deltaUsd = priced.reduce((s, h) => s + h.valueUsd * (h.change24h / 100), 0);
+        const baseValue = priced.reduce((s, h) => s + h.valueUsd / (1 + h.change24h / 100), 0);
+        const deltaPct = baseValue > 0 ? (deltaUsd / baseValue) * 100 : 0;
+        return { deltaUsd, deltaPct, coverage: priced.length, total: holdings.filter(h => h.valueUsd > 0).length };
+    },
+
     async render(address) {
         const root = document.getElementById('profile-root');
         root.innerHTML = `<div class="text-center py-8 text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Reading your case file from Base…</div>`;
@@ -144,23 +159,46 @@ const Profile = {
         }
         const total = holdings.reduce((s, h) => s + h.valueUsd, 0);
         const nonzero = holdings.filter(h => h.balance > 0);
+        const pnl = this._computePnl24h(holdings);
+        const cases = (window.CaseHistory ? CaseHistory.forWallet(address) : []);
         const coverageNote = this._viaWorker
             ? 'native ETH + every ERC-20 Alchemy has indexed for this wallet'
             : 'native ETH + curated Base tokens (deploy the VAPE worker for full auto-discovery)';
 
         root.innerHTML = `
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
-                <div class="lg:col-span-4 glass rounded-2xl p-5 flex flex-col justify-center">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="glass rounded-2xl p-5">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Total tracked value</div>
                     <div class="stat font-display text-3xl text-cyan-400 mt-1">${fmtUsd(total)}</div>
-                    <div class="text-[11px] text-zinc-600 mt-2">${nonzero.length} of ${holdings.length} tracked assets held · ${coverageNote}</div>
+                    <div class="text-[11px] text-zinc-600 mt-2">${nonzero.length} of ${holdings.length} tracked assets held</div>
                 </div>
-                <div class="lg:col-span-4 glass rounded-2xl p-5">
-                    <div style="position:relative; height:180px;">
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-zinc-400 text-xs uppercase tracking-wider">24h profit / loss</div>
+                    ${pnl ? `
+                        <div class="stat font-display text-3xl mt-1 ${pnl.deltaUsd >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${pnl.deltaUsd >= 0 ? '+' : ''}${fmtUsd(pnl.deltaUsd)}</div>
+                        <div class="text-[11px] text-zinc-600 mt-2">${pct(pnl.deltaPct)} · based on ${pnl.coverage} of ${pnl.total} priced assets</div>
+                    ` : `
+                        <div class="stat font-display text-3xl mt-1 text-zinc-600">—</div>
+                        <div class="text-[11px] text-zinc-600 mt-2">No priced holdings with 24h data yet</div>
+                    `}
+                </div>
+                <div class="glass rounded-2xl p-5">
+                    <div class="text-zinc-400 text-xs uppercase tracking-wider">Case history</div>
+                    <div class="stat font-display text-3xl text-cyan-400 mt-1">${cases.length}</div>
+                    <div class="text-[11px] text-zinc-600 mt-2">offerings hired by this wallet, saved on this device</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                <div class="lg:col-span-7 glass rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-zinc-400 text-xs uppercase tracking-wider">Composition</div>
+                        <div class="text-[10px] text-zinc-600">${coverageNote}</div>
+                    </div>
+                    <div style="position:relative; height:200px;">
                         <canvas id="profileDonut"></canvas>
                     </div>
                 </div>
-                <div class="lg:col-span-4 glass rounded-2xl p-5">
+                <div class="lg:col-span-5 glass rounded-2xl p-5">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider mb-2">Add any Base token</div>
                     <div class="flex gap-2">
                         <input id="profile-add-input" type="text" placeholder="0x… token contract" class="flex-1 min-w-0 bg-zinc-900/80 border border-white/10 focus:border-cyan-500 outline-none px-3 py-2 rounded-lg text-xs font-mono">
@@ -175,7 +213,14 @@ const Profile = {
                     <canvas id="profileBar"></canvas>
                 </div>
             </div>
+            <div class="flex items-center justify-between mb-3">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider">All tracked assets (${holdings.length})</div>
+            </div>
             <div id="profile-holdings" class="space-y-2 mb-6"></div>
+            <div class="mb-6">
+                <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">Case history</div>
+                <div id="profile-cases"></div>
+            </div>
             <div>
                 <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">NFTs on Base</div>
                 <div id="profile-nfts"></div>
@@ -184,6 +229,7 @@ const Profile = {
         this._renderHoldingsTable(holdings);
         this._renderDonut(nonzero.length ? nonzero : holdings.slice(0, 1));
         this._renderBar(nonzero);
+        this._renderCases(cases);
         this._renderNfts(nfts);
 
         document.getElementById('profile-add-btn').onclick = () => this._addManual(address);
@@ -195,13 +241,17 @@ const Profile = {
         if (!el) return;
         el.innerHTML = holdings.map(h => {
             const icon = (h.address && window.App) ? App._iconImg(h.address, '8453', 28) : `<div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-display shrink-0">${(h.symbol||'?').slice(0,2)}</div>`;
-            return `
-            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
-                ${icon}
+            const explorer = (h.address && window.App) ? App._explorerUrl(h.address, '8453') : null;
+            const nameBlock = `
                 <div class="min-w-0 flex-1">
                     <div class="font-semibold truncate">${escapeHtml(h.symbol)}</div>
                     <div class="text-xs text-zinc-500 truncate">${escapeHtml(h.name || '')}</div>
-                </div>
+                </div>`;
+            return `
+            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
+                ${explorer
+                    ? `<a href="${explorer}" target="_blank" rel="noopener" class="flex items-center gap-3 min-w-0 flex-1 hover:opacity-80">${icon}${nameBlock}</a>`
+                    : `<div class="flex items-center gap-3 min-w-0 flex-1">${icon}${nameBlock}</div>`}
                 <div class="text-right shrink-0">
                     <div class="stat font-display text-sm">${h.balance < 0.0001 && h.balance > 0 ? '<0.0001' : h.balance.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
                     <div class="text-xs text-zinc-500">${h.valueUsd ? fmtUsd(h.valueUsd) : '—'} ${typeof h.change24h==='number' ? pct(h.change24h) : ''}</div>
@@ -214,14 +264,29 @@ const Profile = {
         const ctx = document.getElementById('profileDonut');
         if (!ctx || typeof Chart === 'undefined') return;
         if (this._chart) this._chart.destroy();
-        const colors = ['#22d3ee', '#10b981', '#c9a86a', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa'];
-        const data = holdings.filter(h => h.valueUsd > 0);
-        if (!data.length) { ctx.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No priced holdings to chart yet.</div>'; return; }
+        const colors = ['#22d3ee', '#10b981', '#c9a86a', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
+        const OTHER_COLOR = '#52525b';
+        const sorted = holdings.filter(h => h.valueUsd > 0).sort((a, b) => b.valueUsd - a.valueUsd);
+        if (!sorted.length) { ctx.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No priced holdings to chart yet.</div>'; return; }
+        // Beyond the color palette's distinct slots, individual slices stop
+        // being visually readable anyway — fold the long tail into one
+        // "Other" slice rather than silently dropping tokens from the chart.
+        const maxSlices = colors.length;
+        const data = sorted.length > maxSlices ? sorted.slice(0, maxSlices - 1) : sorted;
+        const rest = sorted.length > maxSlices ? sorted.slice(maxSlices - 1) : [];
+        const labels = data.map(h => h.symbol);
+        const values = data.map(h => h.valueUsd);
+        const palette = colors.slice(0, data.length);
+        if (rest.length) {
+            labels.push(`Other (${rest.length})`);
+            values.push(rest.reduce((s, h) => s + h.valueUsd, 0));
+            palette.push(OTHER_COLOR);
+        }
         this._chart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: data.map(h => h.symbol),
-                datasets: [{ data: data.map(h => h.valueUsd), backgroundColor: colors, borderColor: '#09090b', borderWidth: 2 }],
+                labels,
+                datasets: [{ data: values, backgroundColor: palette, borderColor: '#09090b', borderWidth: 2 }],
             },
             options: {
                 responsive: true,
@@ -256,6 +321,57 @@ const Profile = {
                     y: { ticks: { color: '#a1a1aa' }, grid: { display: false } },
                 },
             },
+        });
+    },
+
+    _relativeTime(ts) {
+        const diffSec = Math.max(0, Math.round((Date.now() - ts) / 1000));
+        if (diffSec < 60) return 'just now';
+        const mins = Math.round(diffSec / 60);
+        if (mins < 60) return `${mins}m ago`;
+        const hrs = Math.round(mins / 60);
+        if (hrs < 24) return `${hrs}h ago`;
+        const days = Math.round(hrs / 24);
+        return `${days}d ago`;
+    },
+
+    // Case history is x402 hires only (docs/assets/hire.js saves to
+    // CaseHistory on success) — ACP jobs are created and fulfilled entirely
+    // off-site via Virtuals' own platform, so there's no client-side result
+    // to persist here.
+    _renderCases(cases) {
+        const el = document.getElementById('profile-cases');
+        if (!el) return;
+        if (!cases.length) {
+            el.innerHTML = '<div class="text-zinc-500 text-sm">No cases hired yet from this wallet on this device — pay-and-run an x402 offering above in "Retain the Detective" and it\'ll show up here.</div>';
+            return;
+        }
+        el.innerHTML = cases.slice(0, 50).map((c, i) => {
+            const explorer = (c.targetAddress && window.App) ? App._explorerUrl(c.targetAddress, '8453') : null;
+            return `
+            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3 mb-2">
+                <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt text-cyan-400 text-sm"></i></div>
+                <div class="min-w-0 flex-1">
+                    <div class="font-semibold truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
+                    <div class="text-xs text-zinc-500 truncate">
+                        ${c.verdict ? `<span class="text-zinc-300">${escapeHtml(String(c.verdict))}</span> · ` : ''}
+                        ${c.targetAddress ? (explorer ? `<a href="${explorer}" target="_blank" rel="noopener" class="hover:text-cyan-400">${escapeHtml(App._shortAddr(c.targetAddress))}</a> · ` : `${escapeHtml(App._shortAddr ? App._shortAddr(c.targetAddress) : c.targetAddress)} · `) : ''}
+                        ${this._relativeTime(c.timestamp)}
+                    </div>
+                </div>
+                <div class="flex gap-2 shrink-0">
+                    <button data-case-idx="${i}" class="case-pdf-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                    <button data-case-idx="${i}" class="case-copy-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Copy JSON"><i class="fa-solid fa-copy"></i></button>
+                </div>
+            </div>`;
+        }).join('');
+        el.querySelectorAll('.case-pdf-btn').forEach(btn => btn.onclick = async () => {
+            const c = cases[Number(btn.dataset.caseIdx)];
+            await Report.downloadPdf({ offering: c.offering, priceUsd: c.priceUsd, requestedAddress: c.targetAddress, hiredBy: c.walletAddress, result: c.result, via: c.via || 'x402' });
+        });
+        el.querySelectorAll('.case-copy-btn').forEach(btn => btn.onclick = async () => {
+            const c = cases[Number(btn.dataset.caseIdx)];
+            await navigator.clipboard.writeText(JSON.stringify(c.result, null, 2));
         });
     },
 

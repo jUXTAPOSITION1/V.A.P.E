@@ -18,6 +18,30 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 const WORKER_BASE = "https://vape.juxtaposition1.deno.net";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
+
+// Every successful x402 hire gets saved here (browser localStorage, keyed by
+// the paying wallet) so "Your Case File" can show a persistent case history
+// with no backend — same zero-cost, keyless philosophy as the rest of the
+// site. Scope: this device/browser only, not synced across devices; that's
+// an honest limitation of a no-backend design, not a bug.
+const CaseHistory = {
+    KEY: 'vape_case_history_v1',
+    MAX_ENTRIES: 200,
+    _all() {
+        try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch (e) { return []; }
+    },
+    save(record) {
+        const all = this._all();
+        all.unshift({ id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, timestamp: Date.now(), ...record });
+        try { localStorage.setItem(this.KEY, JSON.stringify(all.slice(0, this.MAX_ENTRIES))); } catch (e) { /* storage full/unavailable — non-fatal */ }
+    },
+    forWallet(address) {
+        if (!address) return [];
+        const a = address.toLowerCase();
+        return this._all().filter(c => (c.walletAddress || '').toLowerCase() === a);
+    },
+};
+window.CaseHistory = CaseHistory;
 // app.js is a classic script; wallet.js/profile.js are ES modules with their own
 // top-level scope, so top-level const bindings here aren't visible to them
 // unless explicitly published on window.
