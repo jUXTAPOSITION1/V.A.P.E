@@ -11,6 +11,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
-  "exclude": ["src/deno-entry.ts"]
+  "include": ["src"]
 }
