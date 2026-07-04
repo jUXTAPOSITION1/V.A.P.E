@@ -66,6 +66,11 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   path and a real LLM call, judges the actual output, and logs a real finding if it's
   hijacked (daily via `redteam.yml`). See `agents/run.py::_build_grounding()` for the
   untrusted-data framing this test verifies.
+- **`skillforge/tools/ai-redteam/`** ✅ — garak (native `groq` generator), promptfoo (native
+  `groq:` provider, config generated from the real `VAPE_REPORT_SYSTEM`), and deepteam
+  (`vape_deepeval_model.py` wraps `agents/llm.py` as the simulator+judge — zero new
+  cost/secrets) all wired against VAPE's real production model, weekly via
+  `redteam-deep.yml`. See `skillforge/skills/ai-agent-redteam.md`.
 
 ### 2. Node agent — `src/` 🟡 (continuous-investigation lifecycle)
 Local/long-running runtime (`package.json`, ESM, `main: src/agents/vape.js`).
