@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-04T04:36:17Z",
+  "generated": "2026-07-04T16:07:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 298,
+    "reports": 303,
     "reports_by_type": {
-      "bounty": 155,
+      "bounty": 160,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 17,
+    "investigations": 19,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260703-081033-0x2228B383.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 FAFO",
-      "symbol": "FAFO",
-      "date": "2026-07-03T08:10:33Z",
-      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
+      "file": "investigation-20260704-101133-0x044098A1.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 America250",
+      "symbol": "America250",
+      "date": "2026-07-04T10:11:33Z",
+      "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "88",
-      "summary": "[-12] Mintable supply (dilution risk)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
+      "score": "90",
+      "summary": "[-10] Low liquidity $34,531",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-101133-0x044098A1.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260704_043610.md",
+      "file": "bounty_report_20260704_160359.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T04:36:10Z",
+      "date": "2026-07-04T16:03:59Z",
       "threat": null,
-      "summary": "Cycle: 20260704043610 \u00b7 Data timestamp (UTC): 2026-07-04T04:36:14Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_043610.md",
-      "bytes": 11891
+      "summary": "Cycle: 20260704160359 \u00b7 Data timestamp (UTC): 2026-07-04T16:04:02Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_160359.md",
+      "bytes": 10351
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260704-101133-0x044098A1.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 America250",
+      "symbol": "America250",
+      "date": "2026-07-04T10:11:33Z",
+      "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "[-10] Low liquidity $34,531",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-101133-0x044098A1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260703-081033-0x2228B383.md",
@@ -252,9 +265,75 @@
       "verdict": "PROCEED (88/100)",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-04",
+      "job_id": "auto",
+      "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
+      "symbol": "America250",
+      "offering": "deep_investigation",
+      "verdict": "PROCEED (90/100)",
+      "key_finding": "Low liquidity $34,531",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_160359.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T16:03:59Z",
+      "threat": null,
+      "summary": "Cycle: 20260704160359 \u00b7 Data timestamp (UTC): 2026-07-04T16:04:02Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_160359.md",
+      "bytes": 10351
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_143844.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T14:38:44Z",
+      "threat": null,
+      "summary": "Cycle: 20260704143844 \u00b7 Data timestamp (UTC): 2026-07-04T14:38:49Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_143844.md",
+      "bytes": 10384
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_120747.md",
+      "title": "\ud83e\udd8d V.A.P.E. Cycle \u2014 20260704_120747 (no new signal)",
+      "date": "2026-07-04T12:07:47Z",
+      "threat": null,
+      "summary": "SIGNAL: LOW No new investigations were completed this cycle, with the last investigations resulting in PROCEED verdicts. The tool registry shows no gaps or issues. No Slither output was generated for self-repo static analysis. Security incidents were reviewed, but none correlated with prior investigations. The chain never lies, and this c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_120747.md",
+      "bytes": 421
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_101123.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T10:11:23Z",
+      "threat": null,
+      "summary": "Cycle: 20260704101123 \u00b7 Data timestamp (UTC): 2026-07-04T10:11:29Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_101123.md",
+      "bytes": 11939
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_074736.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T07:47:36Z",
+      "threat": null,
+      "summary": "Cycle: 20260704074736 \u00b7 Data timestamp (UTC): 2026-07-04T07:47:40Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_074736.md",
+      "bytes": 11613
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -859,61 +938,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_140548.md",
       "bytes": 6269
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260629_092708.md",
-      "title": "VAPE Report - 20260629_092708",
-      "date": "2026-06-29T09:27:08Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_092708.md",
-      "bytes": 5396
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260629_040514.md",
-      "title": "VAPE Report - 20260629_040514",
-      "date": "2026-06-29T04:05:14Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_040514.md",
-      "bytes": 6500
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_230351.md",
-      "title": "VAPE Report - 20260628_230351",
-      "date": "2026-06-28T23:03:51Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_230351.md",
-      "bytes": 5828
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_210323.md",
-      "title": "VAPE Report - 20260628_210323",
-      "date": "2026-06-28T21:03:23Z",
-      "threat": null,
-      "summary": "Based on the provided data, I've identified the following anomalies and exploit signals:",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_210323.md",
-      "bytes": 5377
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_192238.md",
-      "title": "VAPE Report - 20260628_192238",
-      "date": "2026-06-28T19:22:38Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_192238.md",
-      "bytes": 6512
     }
   ],
   "broadcasts": [
@@ -1192,7 +1216,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48174940",
+      "version": "48192579",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1202,7 +1226,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.69 eth_dom 9.38 mcap_chg_24h 1.85",
+      "version": "btc_dom 55.57 eth_dom 9.44 mcap_chg_24h 0.9",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1263,7 +1287,7 @@
     {
       "file": "ai-agent-redteam.md",
       "title": "Skill: AI Agent & LLM Red-Teaming",
-      "summary": "Tier: ai-redteam \u00b7 Tools: garak, promptfoo, deepteam \u00b7 Status: active",
+      "summary": "Tier: ai-redteam \u00b7 Tools: garak, promptfoo, deepteam \u00b7 Status: live (daily, redteam-deep.yml)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/ai-agent-redteam.md"
     },
     {
