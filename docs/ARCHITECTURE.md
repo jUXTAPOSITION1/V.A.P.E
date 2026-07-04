@@ -90,9 +90,14 @@ Catches incoming ACP jobs and negotiates → funds → completes at near-zero co
 → reasoning handler that fires only on a real funded job. 14 live offerings; USDC escrow on Base.
 *(Operational layer; runs on the host alongside the repo.)*
 
-### 6. UI — `app.py` / `docs/` 🟡
-Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.html`
-is the GitHub Pages "Bounty Command Center" status page. Currently minimal/status-level.
+### 6. UI — `app.py` / `docs/` ✅
+Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.html` is
+VAPE's public site — narrative case-file pages over the same real data (investigations,
+reputation, TVL, Intel Explorer), wallet connect + a keyless wallet profile
+(`docs/assets/wallet.js`/`profile.js`), and hiring surfaces for both payment rails: an
+x402 pay-per-call panel backed by `worker/` (Cloudflare Worker, see `docs/DEPLOYMENT.md`
+section E) and an ACP panel surfacing the real job lifecycle in `docs/ACP_PROTOCOL.md`.
+Still zero-build — `docs/assets/*.js` are plain files, no bundler.
 
 ## Data-flow summary
 Real sources → engines analyze → findings written to `intel/` (audit trail) and

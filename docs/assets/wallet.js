@@ -165,11 +165,11 @@ const Wallet = {
             const onBase = this._chainId === 8453;
             root.innerHTML = `
                 <div class="relative">
-                    <button id="wallet-chip-btn" class="wallet-chip glass rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs">
-                        <span class="w-2 h-2 rounded-full ${onBase ? 'bg-emerald-400' : 'bg-amber-400 chain-badge-warn'}"></span>
+                    <button id="wallet-chip-btn" class="wallet-chip glass rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs" aria-label="${onBase ? `Connected wallet ${this._account}, on Base. Click to disconnect.` : `Connected wallet ${this._account}, wrong network. Click to switch to Base.`}">
+                        <span class="w-2 h-2 rounded-full ${onBase ? 'bg-emerald-400' : 'bg-amber-400 chain-badge-warn'}" aria-hidden="true"></span>
                         <span class="font-mono">${this._short(this._account)}</span>
                         ${onBase ? '' : '<span class="text-amber-400">Switch to Base</span>'}
-                        <i class="fa-solid fa-chevron-down text-[9px] opacity-60"></i>
+                        <i class="fa-solid fa-chevron-down text-[9px] opacity-60" aria-hidden="true"></i>
                     </button>
                 </div>`;
             document.getElementById('wallet-chip-btn').onclick = async () => {
@@ -177,8 +177,8 @@ const Wallet = {
                 if (confirm('Disconnect wallet?')) this.disconnect();
             };
         } else {
-            root.innerHTML = `<button id="wallet-connect-btn" class="bg-cyan-600 hover:bg-cyan-500 transition px-3 py-1.5 rounded-xl font-display text-xs flex items-center gap-1.5">
-                <i class="fa-solid fa-wallet"></i> Connect
+            root.innerHTML = `<button id="wallet-connect-btn" class="bg-cyan-600 hover:bg-cyan-500 transition px-3 py-1.5 rounded-xl font-display text-xs flex items-center gap-1.5" aria-label="Connect a wallet" aria-haspopup="true">
+                <i class="fa-solid fa-wallet" aria-hidden="true"></i> Connect
             </button>`;
             document.getElementById('wallet-connect-btn').onclick = (e) => this._openPopover(e.currentTarget);
         }
