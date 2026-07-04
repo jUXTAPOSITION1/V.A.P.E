@@ -94,17 +94,29 @@ const Profile = {
     // Full auto-discovered ETH + ERC-20 balances via the vape-x402 worker's
     // Alchemy-backed /portfolio route. Returns null (not throws) on any
     // failure — every caller falls back to the direct-RPC + curated-list path.
+    // Records the *why* in this._workerError so the fallback coverage note
+    // below can show a real reason instead of just "worker unavailable" —
+    // that's the one piece of information nobody can see without devtools.
     async _discoverViaWorker(address) {
-        if (!window.WORKER_BASE) return null;
+        this._workerError = null;
+        if (!window.WORKER_BASE) { this._workerError = 'WORKER_BASE not set'; return null; }
         try {
             const res = await fetch(`${window.WORKER_BASE}/portfolio?address=${address}`);
-            if (!res.ok) return null;
+            if (!res.ok) {
+                let detail = '';
+                try { detail = (await res.json()).error || ''; } catch (e) { /* non-JSON error body */ }
+                this._workerError = `worker returned HTTP ${res.status}${detail ? ' — ' + detail : ''}`;
+                return null;
+            }
             const data = await res.json();
             return {
                 ethBalance: data.ethBalance,
                 tokens: (data.tokens || []).map(t => ({ symbol: t.symbol, name: t.name, address: t.contractAddress, decimals: t.decimals, balance: t.balance })),
             };
-        } catch (e) { return null; }
+        } catch (e) {
+            this._workerError = `worker request failed: ${(e && e.message) || e}`;
+            return null;
+        }
     },
 
     async _discoverViaRpc(address) {
@@ -192,7 +204,9 @@ const Profile = {
         const cases = (window.CaseHistory ? CaseHistory.forWallet(address) : []);
         const coverageNote = this._viaWorker
             ? 'native ETH + every ERC-20 Alchemy has indexed for this wallet'
-            : 'native ETH + curated Base tokens (deploy the VAPE worker for full auto-discovery)';
+            : window.WORKER_BASE
+                ? `native ETH + curated Base tokens (worker unavailable: ${this._workerError || 'unknown reason'})`
+                : 'native ETH + curated Base tokens (deploy the VAPE worker for full auto-discovery)';
 
         root.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
