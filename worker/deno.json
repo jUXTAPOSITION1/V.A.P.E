@@ -1,0 +1,18 @@
+{
+  "unstable": ["sloppy-imports"],
+  "compilerOptions": {
+    "lib": ["deno.window"],
+    "strict": true
+  },
+  "imports": {
+    "hono": "npm:hono@4.12.27",
+    "hono/cors": "npm:hono@4.12.27/cors",
+    "@x402/hono": "npm:@x402/hono@2.17.0",
+    "@x402/core/server": "npm:@x402/core@2.17.0/server",
+    "@x402/evm/exact/server": "npm:@x402/evm@2.17.0/exact/server",
+    "jose": "npm:jose@6.2.3"
+  },
+  "tasks": {
+    "start": "deno run --allow-net --allow-env src/deno-entry.ts"
+  }
+}

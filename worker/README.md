@@ -48,6 +48,31 @@ npx wrangler deploy
 
 Ships on your `*.workers.dev` subdomain by default — no custom domain needed to start. **One manual one-time step**: Cloudflare requires you to register a `workers.dev` subdomain from the dashboard before the first deploy of any Worker on a fresh account will actually publish; `wrangler deploy` will tell you if this is still pending.
 
+## Alternative: Deno Deploy (no subdomain registration step)
+
+The Cloudflare path above needs a one-time `workers.dev` subdomain registration on your account before the first deploy will actually publish — on at least one real account this hit a Cloudflare-side bug where that registration silently never completed (dashboard showed no way to fix it: the per-Worker URL stayed `*-null` even with the toggle on, `/workers/onboarding` 404'd, and three separate deploy paths — Wrangler, Cloudflare's own Git integration, and its "Create Application" wizard — all failed identically). If you hit the same wall, `worker/` also runs unmodified on [Deno Deploy](https://deno.com/deploy), which assigns a working `https://<project>.deno.dev` URL automatically on first deploy — no manual step.
+
+This works because `src/index.ts`'s Hono `app` object has zero Cloudflare-specific code — the only Workers-specific things are `wrangler.toml` and how `c.env` gets populated. `src/deno-entry.ts` is the Deno equivalent of that: it builds the same `Env` shape from `Deno.env.get(...)` and calls `app.fetch(req, env)` directly (Hono's documented pattern for feeding `c.env` on any non-Workers runtime).
+
+Verified locally in this session (via `npm install deno` — Deno ships as an npm package too):
+- `deno check src/deno-entry.ts` passes cleanly against `deno.json`'s import map (which aliases the same npm packages `worker/package.json` uses — `hono`, `@x402/hono`, `@x402/core`, `@x402/evm`, `jose` — to their `npm:` specifiers Deno resolves natively).
+- `deno task start` runs the real server: `GET /` returns the same offering catalog as the Cloudflare version, `GET /portfolio` and `GET /network-status` correctly 503 without `ALCHEMY_API_KEY`, and `GET /scan/<offering>` correctly reaches the x402 middleware's facilitator handshake (fails only on outbound network access to `api.cdp.coinbase.com` in this dev sandbox — the same block that affects `wrangler dev` and the Cloudflare API from here).
+
+To deploy:
+```bash
+npm install deno    # or the standalone installer at deno.com/deploy — either works
+cd worker
+deno task start     # local smoke test first; needs env vars set (see below)
+```
+
+Then at [dash.deno.com](https://dash.deno.com):
+1. **New Project → GitHub → jUXTAPOSITION1/V.A.P.E**.
+2. Set the **entry point** to `worker/src/deno-entry.ts`.
+3. Add the same environment variables as the Cloudflare secrets above (`PAY_TO_ADDRESS`, `X402_NETWORK`, `X402_FACILITATOR_URL`, `CDP_API_KEY_ID`, `CDP_API_KEY_SECRET`, `ALCHEMY_API_KEY`, `ETHERSCAN_API_KEY`) — Deno Deploy's project settings support marking these as secrets (hidden after save, same as `wrangler secret put`).
+4. Deploy. You get `https://<project-name>.deno.dev` immediately — update `docs/assets/app.js`'s and `docs/assets/profile.js`'s `WORKER_BASE` constant to that URL.
+
+If you go this route instead of Cloudflare, `.github/workflows/deploy-worker.yml` and the `wrangler.toml`-based secrets above become unused — Deno Deploy's own GitHub integration handles CI on every push, so that workflow file can be deleted (or left inert; it only runs on `worker/**` changes and no-ops without `CLOUDFLARE_API_TOKEN`).
+
 ## Base mainnet + Coinbase Developer Platform
 
 `wrangler.toml` is pointed at **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `wrangler.toml`/`src/index.ts` for the testnet config if you need to reproduce that).
