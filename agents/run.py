@@ -43,9 +43,6 @@ except Exception:
 # NEW: Integration layer (Memory + Builder + MCP)
 try:
     from agents.integration import (
-        analysis_with_memory_grounding,
-        builder_generate_and_append,
-        mcp_harvest_and_append,
         run_full_cycle,
         get_system_status,
     )
@@ -481,7 +478,7 @@ def main(review_repo=False):
     # Print integration system status
     if INTEGRATION_AVAILABLE:
         status = get_system_status()
-        print(f"\n[Integration Status]")
+        print("\n[Integration Status]")
         print(f"  Memory: {'✅' if status['memory_available'] else '❌'}")
         print(f"  Builder: {'✅' if status['builder_available'] else '❌'}")
         print(f"  MCP: {'✅' if status['mcp_available'] else '❌'}")

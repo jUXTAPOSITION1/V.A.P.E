@@ -22,7 +22,7 @@ def tail(path, n=200):
     return out
 
 def regenerate_index(reg, findings, skills, lessons):
-    lines = [f"# SKILLFORGE Memory Index", f"_Regenerated {now()}_\n"]
+    lines = ["# SKILLFORGE Memory Index", f"_Regenerated {now()}_\n"]
     lines.append("## Tool Registry")
     for tier, tools in reg.get("tiers", {}).items():
         if not tools: continue
@@ -30,10 +30,10 @@ def regenerate_index(reg, findings, skills, lessons):
         for t in tools:
             lines.append(f"- **{t['name']}** `{t.get('version') or '?'}` — "
                          f"status: {t.get('status','?')} (verified {t.get('last_verified') or 'never'})")
-    lines.append(f"\n## Stats")
+    lines.append("\n## Stats")
     lines.append(f"- findings logged: {sum(1 for _ in open(os.path.join(MEM,'findings.jsonl'))) if os.path.exists(os.path.join(MEM,'findings.jsonl')) else 0}")
     lines.append(f"- skills: {len([f for f in os.listdir(SKILLS) if f.endswith('.md')])}")
-    lines.append(f"- recent severities: " + ", ".join(
+    lines.append("- recent severities: " + ", ".join(
         sorted({f.get('severity','?') for f in findings[-50:]})))
     open(os.path.join(MEM, "INDEX.md"), "w").write("\n".join(lines) + "\n")
 

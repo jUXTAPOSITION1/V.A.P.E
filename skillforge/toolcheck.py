@@ -2,7 +2,7 @@
 """SKILLFORGE toolcheck — really installs + smoke-tests each registered tool on the runner,
 updates version + last_verified + status. Writes broken tools to /tmp/broken_tools.txt for issue.
 Real verification only; status reflects actual install/run result."""
-import json, os, subprocess, sys
+import json, os, subprocess
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +19,9 @@ ENV = dict(os.environ, PATH=EXTRA_PATH + ":" + os.environ.get("PATH", ""))
 
 def sh(cmd, timeout=600):
     try:
+        # cmd always comes from tools-registry.json (repo-controlled config), never
+        # external/runtime input, and genuinely needs shell features (pipes, $(...),
+        # || fallback chaining) that a shlex.split()+shell=False rewrite would break.
         p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout, env=ENV)
         return p.returncode, (p.stdout + p.stderr).strip()
     except subprocess.TimeoutExpired:
