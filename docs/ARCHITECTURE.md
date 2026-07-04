@@ -57,10 +57,16 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`tools.py`** — `fetch_bounties()`, `log_report()`.
 - **`acp_fulfill.py` / `wallet.py`** 🟡 — ACP job fulfillment + wallet scaffolding (signing via ACP CLI).
 - **`scout.py`** ✅ — bounty-radar triage, rule-based fit scoring (no LLM), hourly via `scout.yml`.
-- **`self_improve.py`** ✅ — finds one real, evidence-backed issue (pyflakes / tool-registry
-  gaps — never an open-ended LLM guess), has `builder.py` propose a fix grounded in the
-  actual target file, and opens a real PR via `skillforge/mcp.py`'s `GitHubMCPWrapper` for
-  human review. Never auto-merges.
+- **`self_improve.py`** ✅ — finds one real, evidence-backed issue, priority order: (1)
+  unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
+  from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
+  bugs, then (3) tool-registry gaps (never an open-ended LLM guess). Has `builder.py`
+  propose a fix grounded in the actual target file, opens a real PR via `skillforge/mcp.py`'s
+  `GitHubMCPWrapper` for human review (never auto-merges), and logs a "lesson" to
+  `skillforge/memory/lessons.jsonl` every cycle — the missing link that now feeds
+  self-improvement's own real work into the same Memory `skillforge/synthesize.py` distills
+  from. `skillforge/memory/self_improve_state.json` tracks which findings already got a PR
+  so the same one isn't re-targeted forever.
 - **`redteam.py`** ✅ — real prompt-injection test against VAPE's own report pipeline: crafts
   a malicious token symbol, runs it through the real `investigate.py -> run.py` grounding
   path and a real LLM call, judges the actual output, and logs a real finding if it's
@@ -69,7 +75,7 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`skillforge/tools/ai-redteam/`** ✅ — garak (native `groq` generator), promptfoo (native
   `groq:` provider, config generated from the real `VAPE_REPORT_SYSTEM`), and deepteam
   (`vape_deepeval_model.py` wraps `agents/llm.py` as the simulator+judge — zero new
-  cost/secrets) all wired against VAPE's real production model, weekly via
+  cost/secrets) all wired against VAPE's real production model, daily via
   `redteam-deep.yml`. See `skillforge/skills/ai-agent-redteam.md`.
 
 ### 2. Node agent — `src/` 🟡 (continuous-investigation lifecycle)

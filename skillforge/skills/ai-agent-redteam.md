@@ -1,6 +1,6 @@
 # Skill: AI Agent & LLM Red-Teaming
 
-**Tier:** ai-redteam · **Tools:** garak, promptfoo, deepteam · **Status:** live (weekly, `redteam-deep.yml`)
+**Tier:** ai-redteam · **Tools:** garak, promptfoo, deepteam · **Status:** live (daily, `redteam-deep.yml`)
 
 ## When to use
 Assessing any LLM-powered system or autonomous agent (incl. Virtuals ACP agents) for
@@ -11,14 +11,14 @@ AI-security lane — pairs with the SC-security tier for full-stack agent audits
 - `agents/redteam.py` — custom prompt-injection test against the real attacker-controlled-
   token-symbol -> grounding path, daily via `redteam.yml`.
 - `skillforge/tools/ai-redteam/run_garak_scan.py` — garak against garak's native `groq`
-  generator (same `GROQ_API_KEY`, VAPE's real "deep" model), weekly via `redteam-deep.yml`.
+  generator (same `GROQ_API_KEY`, VAPE's real "deep" model), daily via `redteam-deep.yml`.
 - `skillforge/tools/ai-redteam/gen_promptfoo_config.py` + `run_promptfoo_scan.py` — promptfoo
   against its native `groq:` provider, config generated from the REAL
-  `agents/run.py::VAPE_REPORT_SYSTEM` (never hand-copied, can't drift), weekly.
+  `agents/run.py::VAPE_REPORT_SYSTEM` (never hand-copied, can't drift), daily.
 - `skillforge/tools/ai-redteam/campaign_vape.py` + `vape_deepeval_model.py` — deepteam
   campaign against the real report pipeline, using VAPE's own free-tier model as
   simulator+judge (`vape_deepeval_model.py`'s `VapeLLM` — zero new secrets/cost; see its
-  docstring for the self-judging honesty caveat), weekly.
+  docstring for the self-judging honesty caveat), daily.
 
 All four append real findings to `skillforge/memory/findings.jsonl` and write a report under
 `reports/` — this is the reference procedure for adding MORE probes/plugins/vulnerability

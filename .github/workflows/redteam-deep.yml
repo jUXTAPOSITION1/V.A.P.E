@@ -1,13 +1,13 @@
-name: VAPE AI Red-Team Deep Scan (garak + promptfoo + deepteam, weekly)
+name: VAPE AI Red-Team Deep Scan (garak + promptfoo + deepteam, daily)
 
-# Heavier than redteam.yml's daily custom test: garak pulls torch/transformers
+# Heavier than redteam.yml's custom test: garak pulls torch/transformers
 # (multi-minute first install per skillforge/skills/ai-agent-redteam.md's own
-# "Known limitations"), promptfoo needs a Node toolchain, and deepteam runs a
-# multi-call LLM campaign. Weekly matches that cost, not the hourly/daily
-# cadence of the cheap rule-based agents.
+# "Known limitations") and promptfoo needs a full npm install. Both are
+# pip/npm-cached below so daily runs reuse yesterday's download instead of
+# re-pulling torch from scratch every time.
 on:
   schedule:
-    - cron: '0 13 * * 0'   # Sundays 13:00 UTC
+    - cron: '0 13 * * *'   # daily, 13:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -31,6 +31,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Cache npm global installs (promptfoo has no package.json/lock for setup-node's own cache to key on)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-promptfoo-${{ runner.os }}
       - name: deepteam campaign (VAPE's real report pipeline, VAPE-model simulator+judge)
         run: skillforge/tools/ai-redteam/deepteam.sh skillforge/tools/ai-redteam/campaign_vape.py
         env:
