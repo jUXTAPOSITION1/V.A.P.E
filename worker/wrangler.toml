@@ -42,3 +42,12 @@ X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 # headroom than the fully anonymous public API) and /cost-basis (needs
 # CoinGecko's historical-price-by-contract endpoint, which requires this key
 # — that endpoint 403s without one). Both routes 503 without it.
+#
+# GH_DISPATCH_TOKEN: a fine-grained GitHub PAT scoped to jUXTAPOSITION1/V.A.P.E
+# with "Actions: write" + "Contents: read", used only by /scan/bounty_deep_dive
+# (the $50/24h-SLA premium offering) to trigger .github/workflows/deep-dive-
+# bounty.yml — see src/lib/githubDispatch.ts. Workers have no equivalent of the
+# GITHUB_TOKEN Actions injects into its own runs, so this is a real, separate
+# secret. Without it, the route still gates payment correctly but returns a
+# 503 after settlement telling the buyer to use ACP instead — set this before
+# advertising the x402 path for this offering.

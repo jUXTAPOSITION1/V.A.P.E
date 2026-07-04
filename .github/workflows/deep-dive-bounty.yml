@@ -1,0 +1,87 @@
+name: Deep-Dive Bounty Audit (50 USDC / 24h SLA)
+
+# Fired two ways:
+#   - x402: worker/src/lib/githubDispatch.ts calls this via the REST API right
+#     after a buyer's payment settles on /scan/bounty_deep_dive.
+#   - ACP: the host-side reasoning handler (scripts/acp-monitor/HANDLER_BRIEF.md)
+#     runs agents/deep_dive_audit.py directly instead of going through this
+#     workflow — this file exists specifically for the x402 async-job path,
+#     since a Worker can't run a multi-minute job itself.
+on:
+  workflow_dispatch:
+    inputs:
+      address:
+        description: 'Target contract/token address (0x...)'
+        required: true
+      chain:
+        description: 'Chain ID (default Base 8453)'
+        required: false
+        default: '8453'
+      callback_url:
+        description: 'Optional webhook to POST the completed report to'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deep-dive-bounty-${{ github.event.inputs.address }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore cached security tools (best-effort — Slither if already cached)
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/.cyfrin
+            ~/.cargo
+            ~/.foundry
+            ~/.local
+            ~/.cache/pip
+          key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
+          restore-keys: skillforge-tools-
+      - name: Run the deep-dive audit
+        # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
+        # string — that's classic GitHub Actions script injection, and callback_url
+        # here is attacker-influenced (an x402 buyer's own query param, unvalidated
+        # by the worker). Routing everything through `env:` first means bash sees
+        # it only as a quoted variable expansion, never as re-parsed shell syntax.
+        env:
+          TARGET_ADDRESS: ${{ github.event.inputs.address }}
+          TARGET_CHAIN: ${{ github.event.inputs.chain }}
+          TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ARGS=(--address "$TARGET_ADDRESS" --chain "$TARGET_CHAIN")
+          if [ -n "$TARGET_CALLBACK_URL" ]; then
+            ARGS+=(--callback-url "$TARGET_CALLBACK_URL")
+          fi
+          python -m agents.deep_dive_audit "${ARGS[@]}"
+      - name: Commit the report
+        env:
+          TARGET_ADDRESS: ${{ github.event.inputs.address }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/audits/poc-reports/ skillforge/memory/ || true
+          git commit -m "Deep-dive bounty audit: $TARGET_ADDRESS" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done

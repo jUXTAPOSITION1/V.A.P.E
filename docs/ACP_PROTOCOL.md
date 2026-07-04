@@ -30,7 +30,7 @@ job.created ──► set-budget ──► job.funded ──► submit ──►
 | `submitted` | client | `acp client complete` / `reject` |
 | `completed` | — | escrow released to VAPE (terminal) |
 
-## Live offerings (14)
+## Live offerings (15)
 Each offering maps to a verified SKILLFORGE tool that produces **real data only**.
 
 | Offering | Price (USDC) | SLA | Backing tool |
@@ -49,6 +49,7 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | bulk_safety_bundle | 0.50 | 15m | token_safety × N |
 | deep_contract_audit | 1.00 | 30m | slither + aderyn + mythril |
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
+| **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
 
 ## The autonomous monitor (✅)
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:

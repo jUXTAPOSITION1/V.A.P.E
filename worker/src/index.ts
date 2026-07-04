@@ -22,6 +22,7 @@ import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
+import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
 type Caip2Network = `${string}:${string}`;
@@ -32,6 +33,9 @@ export interface Env {
   CDP_API_KEY_SECRET?: string;
   ALCHEMY_API_KEY?: string;
   COINGECKO_API_KEY?: string;
+  // Fine-grained PAT (Actions: write, Contents: read) for triggering the
+  // bounty_deep_dive offering's async job — see worker/src/lib/githubDispatch.ts.
+  GH_DISPATCH_TOKEN?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
@@ -126,6 +130,26 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
   },
 };
 
+// The 24h-SLA premium tier — genuinely can't complete inside a Worker's request
+// window (real recon + Slither + a frontier-model source review takes minutes,
+// not milliseconds), so this route pays, then dispatches a GitHub Actions job
+// (agents/deep_dive_audit.py via .github/workflows/deep-dive-bounty.yml) and
+// returns immediately with delivery info instead of a synchronous result —
+// unlike every other route below. Priced far above the rest of the catalog to
+// match the real analysis depth: full recon, real Slither output when
+// available, and a frontier LLM (Gemini 2.5 Pro, Groq fallback) reading the
+// actual verified source.
+const BOUNTY_DEEP_DIVE_PRICE = "$50.00";
+const BOUNTY_DEEP_DIVE_DISCOVERY = {
+  description: "24h-SLA premium audit: full recon + Slither + frontier-model line-by-line "
+    + "source review, delivered as a real committed report — VAPE's deepest automated pass.",
+  output: {
+    status: "accepted",
+    address: "0x...",
+    message: "Deep-dive audit queued — report lands in intel/audits/poc-reports/ within 24h.",
+  },
+};
+
 const app = new Hono<{ Bindings: Env }>();
 
 // Applies to every route, including /scan/*: the site calls this worker
@@ -153,7 +177,10 @@ app.get("/", (c) =>
     agent: "VAPE",
     erc8004: 54988,
     protocol: "x402",
-    offerings: Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
+    offerings: [
+      ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
+      { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "24h (async)" },
+    ],
     docs: "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
   })
 );
@@ -270,6 +297,29 @@ app.use("*", async (c, next) => {
       }),
     };
   }
+
+  // bounty_deep_dive: same x402 gate, but its own price/metadata since it isn't part
+  // of the synchronous OFFERING_PRICES/HandlerName set (see the handler below).
+  routes["GET /scan/bounty_deep_dive"] = {
+    accepts: { scheme: "exact", price: BOUNTY_DEEP_DIVE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE bounty_deep_dive — ${BOUNTY_DEEP_DIVE_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["security", "on-chain-forensics", "base", "premium"],
+    extensions: declareDiscoveryExtension({
+      input: { address: "0x0000000000000000000000000000000000dEaD" },
+      inputSchema: {
+        properties: {
+          address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
+          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+          callback_url: { type: "string", description: "optional webhook to POST the completed report to" },
+        },
+        required: ["address"],
+      },
+      output: { example: BOUNTY_DEEP_DIVE_DISCOVERY.output },
+    }),
+  };
+
   return paymentMiddleware(routes as any, resourceServer)(c, next);
 });
 
@@ -282,5 +332,43 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
     return c.json(result);
   });
 }
+
+// bounty_deep_dive: payment has already settled by the time this handler runs (the
+// x402 middleware above gates it) — this just kicks off the real async job and
+// returns immediately. The actual audit runs in GitHub Actions
+// (.github/workflows/deep-dive-bounty.yml -> agents/deep_dive_audit.py), not here.
+app.get("/scan/bounty_deep_dive", async (c) => {
+  const address = c.req.query("address") || "";
+  const chain = c.req.query("chain") || "8453";
+  const callbackUrl = c.req.query("callback_url") || undefined;
+
+  if (!ADDRESS_RE.test(address)) {
+    return c.json({ offering: "bounty_deep_dive", status: "error", error: "invalid or missing address" }, 400);
+  }
+  if (!c.env.GH_DISPATCH_TOKEN) {
+    // Payment already settled — this is a real config gap, not a client error, so 503
+    // (not 400/402) tells the buyer to retry rather than re-check their request.
+    return c.json({
+      offering: "bounty_deep_dive", status: "error",
+      error: "deep-dive dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
+    }, 503);
+  }
+
+  const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
+  if (!dispatch.ok) {
+    return c.json({
+      offering: "bounty_deep_dive", status: "error",
+      error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
+    }, 502);
+  }
+
+  return c.json({
+    offering: "bounty_deep_dive", status: "accepted", address, chain,
+    message: "Deep-dive audit queued — report lands in intel/audits/poc-reports/ within 24h."
+      + (callbackUrl ? " Will also POST the result to your callback_url." : ""),
+    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
+    source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
+  });
+});
 
 export default app;
