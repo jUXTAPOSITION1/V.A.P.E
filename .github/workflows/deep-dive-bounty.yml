@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Restore cached security tools (best-effort — Slither if already cached)
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.cyfrin
