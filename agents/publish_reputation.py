@@ -122,10 +122,15 @@ def main():
     work_entries, auto_jobs = lessons_stats()
     first, last = newest_oldest("reports/bounty_report_*.md")
 
-    catalog = 0
-    cat_path = os.path.join(ROOT, "intel/catalog/investigation-catalog.md")
-    if os.path.exists(cat_path):
-        catalog = sum(1 for ln in open(cat_path) if re.match(r"^\s*[-*]\s", ln))
+    # Real investigation count — one file per real deep investigation, same
+    # pattern as reports_published/token_scans_logged above. Previously
+    # counted "- "/"* " bullet lines in investigation-catalog.md, but
+    # agents/investigate.py::update_catalog() appends "| ... |" markdown
+    # TABLE rows, not bullets — every real auto-investigation since the
+    # catalog switched to table format was silently uncounted, freezing this
+    # number at the 42 bullet-style entries from the original June seed data
+    # forever regardless of how many new investigations actually ran.
+    catalog = count_glob("intel/investigations/*.md")
 
     rep = {
         "generated": now(),

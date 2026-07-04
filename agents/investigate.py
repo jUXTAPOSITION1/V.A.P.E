@@ -157,17 +157,46 @@ def hack_correlation(gp):
     return hits
 
 
+# Known permissionless meme-token factory templates on Base — deployed via
+# bot/one-click flows with zero team vetting by design (e.g. Clanker, a
+# Farcaster-integrated bot: reply to a cast, get an ERC-20). A contract's
+# verified NAME matching one of these is a real, deterministic signal, not a
+# guess — GoPlus/Etherscan report the deployer's own declared contract name,
+# and factory templates all share the same name across every token they spit
+# out. This list is deliberately conservative (confirmed patterns only); it
+# should grow only as more are confirmed, never padded to look thorough.
+MEME_FACTORY_NAME_PATTERNS = ("clanker",)
+
+
 # ── scoring ─────────────────────────────────────────────────────────────────
 def score(gp, dex, onchain, verif):
-    """Return (score_0_100, verdict, reasons[]). Higher score = safer."""
+    """Return (score_0_100, verdict, reasons[], positive_signals[]).
+    Higher score = safer.
+
+    CertiK-style posture: risk is the default state for an anonymous/young
+    token, not the exception. The old version started at 100 and only ever
+    subtracted for explicit red flags, so a token with NO known red flags but
+    also NO known legitimacy — no age, no holders, no audit, deployed via a
+    zero-vetting factory template — still scored 90+. That's backwards: the
+    ABSENCE of evidence isn't evidence of safety. This version still starts
+    at 100 and subtracts for red flags, but also tracks positive_signals
+    (real, observed legitimacy evidence) and caps the final score below
+    PROCEED tier when too few of those were found, regardless of how clean
+    the red-flag checks came back.
+    """
     s = 100
     reasons = []
+    positive_signals = []
 
     def flag(cond, penalty, msg):
         nonlocal s
         if cond:
             s -= penalty
             reasons.append(f"[-{penalty}] {msg}")
+
+    def signal(cond, msg):
+        if cond:
+            positive_signals.append(msg)
 
     flag(str(gp.get("is_honeypot")) == "1", 60, "GoPlus: HONEYPOT detected")
     flag(str(gp.get("cannot_sell_all")) == "1", 30, "GoPlus: cannot sell all tokens")
@@ -176,12 +205,48 @@ def score(gp, dex, onchain, verif):
     flag(str(gp.get("owner_change_balance")) == "1", 25, "Owner can change balances (rug surface)")
     flag(str(gp.get("hidden_owner")) == "1", 20, "Hidden owner")
     flag(str(gp.get("is_proxy")) == "1", 8, "Upgradeable proxy (verify implementation)")
+    flag(str(gp.get("transfer_pausable")) == "1", 15, "Transfers can be paused by owner")
     try:
         bt = float(gp.get("buy_tax") or 0); st = float(gp.get("sell_tax") or 0)
         flag(bt > 0.10, 15, f"High buy tax {bt*100:.0f}%")
         flag(st > 0.10, 20, f"High sell tax {st*100:.0f}%")
     except Exception:
         pass
+
+    # Ownership renouncement — real GoPlus owner_address field, same signal
+    # agents/token_scan.py's lighter-weight scan already uses; investigate.py
+    # previously never checked this at all despite reporting owner_address
+    # in every investigation's raw data section.
+    owner = (gp.get("owner_address") or "").lower()
+    zero_addr = "0x0000000000000000000000000000000000000000"
+    owner_present = bool(owner) and owner != zero_addr
+    flag(owner_present, 10, f"Owner not renounced ({gp.get('owner_address')}) — can still act on the contract")
+    signal(bool(owner) and not owner_present, "Ownership renounced")
+
+    # Meme-factory template detection — real, deterministic (see
+    # MEME_FACTORY_NAME_PATTERNS above), not a heuristic guess.
+    cname = (verif.get("name") or "").lower()
+    is_factory_template = any(p in cname for p in MEME_FACTORY_NAME_PATTERNS)
+    flag(is_factory_template, 20,
+         f"Deployed via a permissionless meme-token factory template ({verif.get('name')}) "
+         "— no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens")
+
+    # Holder concentration — real GoPlus holder_count. Thin distribution
+    # means a handful of wallets can move the price or exit-liquidity anyone
+    # who buys in; CertiK-style diligence treats this as a first-class risk
+    # factor, not an afterthought.
+    holders = None
+    try:
+        if gp.get("holder_count") not in (None, ""):
+            holders = int(gp.get("holder_count"))
+    except Exception:
+        holders = None
+    if holders is not None:
+        flag(holders < 50, 20, f"Very few holders ({holders}) — thin, easily manipulated distribution")
+        flag(50 <= holders < 200, 8, f"Low holder count ({holders})")
+        signal(holders >= 500, f"{holders} holders — reasonably distributed")
+    else:
+        flag(True, 5, "Holder count unavailable — cannot assess distribution")
 
     liq = dex.get("liquidity_usd") or 0
     try:
@@ -190,6 +255,7 @@ def score(gp, dex, onchain, verif):
         liq = 0
     flag(liq and liq < 10000, 25, f"Very low liquidity ${liq:,.0f} (rug/illiquid)")
     flag(liq and liq < 50000, 10, f"Low liquidity ${liq:,.0f}")
+    signal(liq >= 500000, f"Deep liquidity (${liq:,.0f})")
 
     chg = dex.get("change_24h_pct")
     try:
@@ -198,23 +264,59 @@ def score(gp, dex, onchain, verif):
     except Exception:
         pass
 
-    # freshly created pair
+    # Track record length, tiered — CertiK-style caution: a week-old token
+    # has no proven track record. The old single "<3 days" check let
+    # anything even slightly older than that pass with zero penalty.
     pc = dex.get("pair_created_ms")
+    age_days = None
     if pc:
         try:
             age_days = (time.time() * 1000 - float(pc)) / 86400000
-            flag(age_days < 3, 12, f"Pair only {age_days:.1f} days old (fresh-launch risk)")
         except Exception:
-            pass
+            age_days = None
+    if age_days is not None:
+        flag(age_days < 3, 15, f"Pair only {age_days:.1f} days old (extreme fresh-launch risk)")
+        flag(3 <= age_days < 14, 10, f"Pair {age_days:.1f} days old — under two weeks, no track record yet")
+        flag(14 <= age_days < 30, 5, f"Pair {age_days:.1f} days old — under a month, still unproven")
+        signal(age_days >= 90, f"Trading {age_days:.0f}+ days without a known incident in this scan")
+    else:
+        flag(True, 8, "No pair-creation timestamp available — cannot establish track record length")
 
     if verif.get("checked"):
         flag(verif.get("verified") is False, 15, "Contract source UNVERIFIED")
+        signal(verif.get("verified") is True and not is_factory_template,
+               "Custom verified source (not a mass-produced factory template)")
     if onchain.get("is_contract") is False:
         reasons.append("[note] address has no contract code (EOA or not deployed)")
 
+    # Honest absence-of-audit framing: VAPE has no third-party audit-database
+    # access, so audit status is always genuinely unknown unless real
+    # evidence contradicts that. For an anonymous/young/template-deployed
+    # token, treating "unknown" as neutral (as the old scoring silently did)
+    # is exactly the gap this rework closes — unknown audit status on an
+    # otherwise-unproven project is itself a real, disclosed risk factor.
+    unproven = is_factory_template or (age_days is not None and age_days < 30) or (holders is not None and holders < 200)
+    flag(unproven, 10, "No known third-party audit or verifiable team identity found — "
+                       "treated as unaudited/anonymous by default")
+
+    # Legitimacy cap: don't let a clean red-flag sweep alone buy a PROCEED
+    # verdict. Real positive evidence (renounced ownership + deep liquidity +
+    # real holder base + real track record + genuinely custom verified code)
+    # has to be present — the absence of red flags is not the same thing as
+    # the presence of trust.
+    cap = None
+    if len(positive_signals) == 0:
+        cap = 55
+    elif len(positive_signals) == 1:
+        cap = 70
+    if cap is not None and s > cap:
+        reasons.append(f"[capped at {cap}] Only {len(positive_signals)} positive legitimacy "
+                        f"signal(s) found — score capped even though few explicit red flags triggered")
+        s = cap
+
     s = max(0, min(100, s))
-    verdict = "PROCEED" if s >= 75 else ("CAUTION" if s >= 45 else "REJECT")
-    return s, verdict, reasons
+    verdict = "PROCEED" if s >= 80 else ("CAUTION" if s >= 50 else "REJECT")
+    return s, verdict, reasons, positive_signals
 
 
 # ── target selection ──────────────────────────────────────────────────────────
@@ -241,7 +343,7 @@ def auto_target():
 
 
 # ── report + persistence ────────────────────────────────────────────────────
-def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons):
+def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -260,12 +362,20 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append("")
     L.append("---")
     L.append("")
-    L.append("## Verdict Rationale")
+    L.append("## Verdict Rationale (risk factors)")
     if reasons:
         for r in reasons:
             L.append(f"- {r}")
     else:
         L.append("- No risk penalties triggered — clean across all automated checks.")
+    L.append("")
+    L.append("## Positive Signals (real legitimacy evidence found)")
+    if positive_signals:
+        for p in positive_signals:
+            L.append(f"- {p}")
+    else:
+        L.append("- None found. Absence of red flags is not evidence of safety — a clean sweep "
+                  "with zero positive signals still caps the score below PROCEED tier.")
     L.append("")
     L.append("## Market & Liquidity (DexScreener)")
     if dex:
@@ -282,7 +392,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     if gp:
         for k in ("is_honeypot", "buy_tax", "sell_tax", "is_mintable", "is_proxy",
                   "can_take_back_ownership", "owner_change_balance", "hidden_owner",
-                  "cannot_sell_all", "owner_address"):
+                  "cannot_sell_all", "transfer_pausable", "holder_count", "owner_address"):
             if k in gp:
                 L.append(f"- {k}: `{gp.get(k)}`")
     else:
@@ -388,16 +498,16 @@ def investigate(address, chain="8453", hint="", force=False):
     onchain = onchain_presence(address)
     verif = contract_verification(address, chain)
     corr = hack_correlation(gp)
-    s, verdict, reasons = score(gp, dex, onchain, verif)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif)
 
-    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons)
+    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel)
     update_catalog(address, sym, verdict, s, reasons, rel)
 
     print(f"[investigate] {emoji} {verdict} {s}/100 — {sym} → {rel}")
     return {"target": address, "symbol": sym, "verdict": verdict, "score": s,
-            "report": rel, "reasons": reasons}
+            "report": rel, "reasons": reasons, "positive_signals": positive_signals}
 
 
 def main():
