@@ -28,6 +28,7 @@ import html
 import argparse
 import urllib.parse
 import urllib.request
+from html.parser import HTMLParser
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -153,7 +154,9 @@ def _ddg_search(query, n):
         results = []
         for m in re.finditer(r'result__a"\s+href="([^"]+)"(.*?)</a>', body, re.S):
             href = html.unescape(m.group(1))
-            title = re.sub(r"<[^>]+>", "", m.group(2)).strip()
+            _tx = _TextExtractor()
+            _tx.feed(m.group(2))
+            title = _tx.get_text()
             if href.startswith("//"):
                 href = "https:" + href
             params = urllib.parse.parse_qs(urllib.parse.urlparse(href).query)
@@ -170,6 +173,33 @@ def _ddg_search(query, n):
                     "TAVILY_API_KEY or BRAVE_API_KEY for reliable research."}
 
 
+class _TextExtractor(HTMLParser):
+    """Strip tags via the stdlib HTML parser instead of a hand-rolled regex —
+    a regex like <script.*?</script> can't correctly handle case, attributes
+    containing '>', or malformed/nested markup (real pages have all three),
+    so it silently leaves stray content in. A real parser gets this right."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self._skip_depth = 0
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style"):
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style") and self._skip_depth:
+            self._skip_depth -= 1
+
+    def handle_data(self, data):
+        if not self._skip_depth:
+            self.parts.append(data)
+
+    def get_text(self):
+        return " ".join("".join(self.parts).split())
+
+
 def _fetch_keyless(url):
     """Keyless page fetch via the MCP `fetch` server if present, else urllib."""
     if _available("fetch"):
@@ -180,9 +210,9 @@ def _fetch_keyless(url):
         req = urllib.request.Request(url, headers=UA)
         with urllib.request.urlopen(req, timeout=20) as r:
             raw = r.read().decode("utf-8", "replace")
-        text = re.sub(r"<script.*?</script>|<style.*?</style>", " ", raw, flags=re.S)
-        text = re.sub(r"<[^>]+>", " ", text)
-        text = html.unescape(re.sub(r"\s+", " ", text)).strip()
+        extractor = _TextExtractor()
+        extractor.feed(raw)
+        text = extractor.get_text()
         return {"provider": "urllib-keyless", "content": text[:8000]}
     except Exception as e:
         return {"provider": "urllib-keyless", "error": str(e)}

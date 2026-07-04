@@ -95,7 +95,7 @@ class MemoryEntry:
         confidence: float = 0.8,
         metadata: Optional[Dict[str, Any]] = None
     ):
-        self.id = hashlib.md5(f"{title}{time.time()}".encode()).hexdigest()[:12]
+        self.id = hashlib.sha256(f"{title}{time.time()}".encode()).hexdigest()[:12]
         self.category = category
         self.title = sanitize_input(title, 200)
         self.content = sanitize_input(content)
