@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-04T00:05:46Z",
+  "generated": "2026-07-04T04:36:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 297,
+    "reports": 298,
     "reports_by_type": {
-      "bounty": 154,
+      "bounty": 155,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -40,13 +40,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260704_000540.md",
+      "file": "bounty_report_20260704_043610.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T00:05:40Z",
+      "date": "2026-07-04T04:36:10Z",
       "threat": null,
-      "summary": "Cycle: 20260704000540 \u00b7 Data timestamp (UTC): 2026-07-04T00:05:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_000540.md",
-      "bytes": 11486
+      "summary": "Cycle: 20260704043610 \u00b7 Data timestamp (UTC): 2026-07-04T04:36:14Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_043610.md",
+      "bytes": 11891
     }
   },
   "investigations": [
@@ -255,6 +255,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260704_043610.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-04T04:36:10Z",
+      "threat": null,
+      "summary": "Cycle: 20260704043610 \u00b7 Data timestamp (UTC): 2026-07-04T04:36:14Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_043610.md",
+      "bytes": 11891
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -903,17 +914,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_192238.md",
       "bytes": 6512
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260628_171403.md",
-      "title": "VAPE Report - 20260628_171403",
-      "date": "2026-06-28T17:14:03Z",
-      "threat": null,
-      "summary": "Based on the provided data, I've identified the following findings and recommendations:",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260628_171403.md",
-      "bytes": 5966
     }
   ],
   "broadcasts": [
@@ -1192,7 +1192,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48162907",
+      "version": "48174940",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1202,7 +1202,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.65 eth_dom 9.43 mcap_chg_24h 1.8",
+      "version": "btc_dom 55.69 eth_dom 9.38 mcap_chg_24h 1.85",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1252,7 +1252,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "21 Extreme Fear",
+      "version": "22 Extreme Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
