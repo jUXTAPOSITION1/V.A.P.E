@@ -72,7 +72,8 @@ def _rug_pull(req):
     if "error" in r:
         return r
     rug = [f for f in r.get("flags", []) if f in
-           ("HONEYPOT", "mintable", "owner_not_renounced", "cannot_sell_all", "transfer_pausable")]
+           ("HONEYPOT", "mintable", "owner_not_renounced", "cannot_sell_all", "transfer_pausable",
+            "is_blacklisted", "selfdestruct", "is_airdrop_scam", "lp_concentrated")]
     return {"address": a, "rug_risk": "HIGH" if (r.get("is_honeypot") == "1" or len(rug) >= 2) else "LOW",
             "owner_powers": rug, "verdict": r.get("verdict")}
 

@@ -1,0 +1,66 @@
+name: VAPE Ledger Self-Review (pass/caution weekly, fail monthly)
+
+# VAPE checking its own past verdicts against fresh data — "where was I
+# accurate, where wasn't I." Re-checks the oldest-reviewed addresses in each
+# category (never the same handful every time) via the real
+# agents/investigate.py pipeline, and logs a real finding whenever a past
+# verdict no longer holds. Pass/caution reviewed weekly (more likely to
+# drift — a clean or borderline token can still turn bad); fail reviewed
+# monthly (a REJECT rarely needs urgent re-checking).
+on:
+  schedule:
+    - cron: '0 9 * * 1'    # Mondays 09:00 UTC — pass + caution
+    - cron: '0 9 1 * *'    # 1st of the month 09:00 UTC — fail
+  workflow_dispatch:
+    inputs:
+      categories:
+        description: 'Comma list: pass,caution,fail'
+        default: 'pass,caution'
+      sample:
+        description: 'Max addresses re-checked per category'
+        default: '5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: review-ledger
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Determine categories for this trigger
+        id: cats
+        run: |
+          if [ -n "${{ github.event.inputs.categories }}" ]; then
+            echo "categories=${{ github.event.inputs.categories }}" >> "$GITHUB_OUTPUT"
+            echo "sample=${{ github.event.inputs.sample }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "0 9 1 * *" ]; then
+            echo "categories=fail" >> "$GITHUB_OUTPUT"
+            echo "sample=5" >> "$GITHUB_OUTPUT"
+          else
+            echo "categories=pass,caution" >> "$GITHUB_OUTPUT"
+            echo "sample=5" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run self-review
+        run: python agents/review_ledger.py --categories "${{ steps.cats.outputs.categories }}" --sample "${{ steps.cats.outputs.sample }}"
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      - name: Commit ledger + lists + review report
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/investigations/ skillforge/memory/ || true
+          git commit -m "VAPE ledger self-review $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done

@@ -188,8 +188,13 @@ def scan_investigations():
     """Structured investigation records from intel/investigations/*.md (new deep
     investigations) + the legacy catalog table rows."""
     out = []
-    # 1) dedicated investigation reports
-    for fp in sorted(glob.glob(os.path.join(ROOT, "intel/investigations/*.md")), reverse=True):
+    # 1) dedicated investigation reports — matches write_report()'s exact
+    # naming convention (investigation-<stamp>-<short>.md). Deliberately NOT
+    # the broader "*.md" glob: intel/investigations/ also holds
+    # fail-list.md/caution-list.md/pass-list.md (regenerated summary views,
+    # not individual reports — different structure, no Verdict:/Target:
+    # fields, would otherwise get misparsed into garbage null entries here).
+    for fp in sorted(glob.glob(os.path.join(ROOT, "intel/investigations/investigation-*.md")), reverse=True):
         name = os.path.basename(fp)
         txt = _read(fp)
         verdict_raw = _field(txt, "Verdict") or ""

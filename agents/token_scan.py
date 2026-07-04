@@ -16,6 +16,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 
@@ -35,8 +36,26 @@ def _get(url, timeout=15):
         return {"_error": str(e)}
 
 
+# Hard-reject GoPlus fields — same tier as honeypot, not just an advisory
+# flag. All three: real, documented GoPlus token_security fields, flat
+# "0"/"1" strings like their siblings (is_mintable, is_proxy, etc.) already
+# used above. Kept in its own list so scan.ts/app.js port identically.
+HARD_REJECT_FIELDS = ("is_blacklisted", "selfdestruct", "is_airdrop_scam")
+
+
 def scan(address, chain_id=8453):
-    """Return a structured verdict dict from real GoPlus + DexScreener data."""
+    """Return a structured verdict dict from real GoPlus + DexScreener data.
+
+    Same CertiK-style "risk is the default, not the exception" checks added
+    to agents/investigate.py's deep-investigation scoring, ported to this
+    quick-scan tier wherever they're keyless (GoPlus + DexScreener only) so
+    the free Hunt console, the paid x402 offerings, and deep investigations
+    never disagree on the checks they share. Contract-verification-based
+    checks (e.g. meme-factory-template detection) stay investigate.py-only:
+    that needs an optional Etherscan key server-side, which the pure
+    browser path (docs/assets/app.js) can't safely hold client-side —
+    porting it here would silently diverge the browser from the other two.
+    """
     address = address.strip()
     if not re.fullmatch(r"0x[a-fA-F0-9]{40}", address):
         return {"error": "invalid_address", "address": address}
@@ -52,6 +71,11 @@ def scan(address, chain_id=8453):
 
     pairs = ds_raw.get("pairs") or [] if isinstance(ds_raw, dict) else []
     liquidity_usd = round(sum((p.get("liquidity") or {}).get("usd", 0) for p in pairs), 2)
+    # Oldest pair creation timestamp across all pairs — a token's real track
+    # record starts at its FIRST pair, not whichever pair happens to be
+    # deepest right now.
+    pair_created_ms = min((p.get("pairCreatedAt") for p in pairs if p.get("pairCreatedAt")), default=None)
+    has_socials = any((p.get("info") or {}).get("socials") or (p.get("info") or {}).get("websites") for p in pairs)
 
     def f(x):
         try:
@@ -79,8 +103,32 @@ def scan(address, chain_id=8453):
         flags.append("cannot_sell_all")
     if gp.get("transfer_pausable") == "1":
         flags.append("transfer_pausable")
+    for field in HARD_REJECT_FIELDS:
+        if gp.get(field) == "1":
+            flags.append(field)
+    try:
+        lp_holders = int(gp.get("lp_holder_count")) if gp.get("lp_holder_count") not in (None, "") else None
+    except Exception:
+        lp_holders = None
+    if lp_holders is not None and lp_holders <= 1:
+        flags.append("lp_concentrated")
+    try:
+        holders = int(gp.get("holder_count")) if gp.get("holder_count") not in (None, "") else None
+    except Exception:
+        holders = None
+    if holders is not None and holders < 50:
+        flags.append("low_holder_count")
+    if pair_created_ms:
+        try:
+            if (time.time() * 1000 - float(pair_created_ms)) / 86400000 < 3:
+                flags.append("fresh_launch")
+        except Exception:
+            pass
+    if not has_socials:
+        flags.append("no_declared_socials")
 
-    if gp.get("is_honeypot") == "1":
+    hard_reject = gp.get("is_honeypot") == "1" or any(gp.get(field) == "1" for field in HARD_REJECT_FIELDS)
+    if hard_reject:
         verdict = "REJECT"
     elif len(flags) >= 2:
         verdict = "CAUTION"
@@ -96,7 +144,10 @@ def scan(address, chain_id=8453):
         "verdict": verdict,
         "flags": flags,
         "holder_count": gp.get("holder_count"),
+        "lp_holder_count": gp.get("lp_holder_count"),
         "liquidity_usd": liquidity_usd,
+        "pair_created_ms": pair_created_ms,
+        "has_declared_socials": has_socials,
         "is_honeypot": gp.get("is_honeypot"),
         "buy_tax": gp.get("buy_tax"),
         "sell_tax": gp.get("sell_tax"),
@@ -121,11 +172,12 @@ def log_scan(result):
         f.write(f"- **Verdict:** {result['verdict']}\n")
         f.write(f"- **Address:** `{result['address']}` (chain {result['chain_id']})\n")
         f.write(f"- **Scanned:** {result['ts']}\n")
-        f.write(f"- **Holders:** {result.get('holder_count')}\n")
+        f.write(f"- **Holders:** {result.get('holder_count')} (LP holders: {result.get('lp_holder_count')})\n")
         f.write(f"- **Liquidity (USD):** {result.get('liquidity_usd')}\n")
         f.write(f"- **Honeypot:** {result.get('is_honeypot')}\n")
         f.write(f"- **Buy/Sell tax:** {result.get('buy_tax')} / {result.get('sell_tax')}\n")
         f.write(f"- **Owner:** {result.get('owner_address')}\n")
+        f.write(f"- **Declared socials/website (self-reported, unverified):** {result.get('has_declared_socials')}\n")
         f.write(f"- **Flags:** {', '.join(result['flags']) if result['flags'] else 'none'}\n\n")
         f.write("_Real data: GoPlus token_security + DexScreener. Not investment advice._\n")
     with open(os.path.join(SCAN_DIR, "scans.jsonl"), "a") as f:

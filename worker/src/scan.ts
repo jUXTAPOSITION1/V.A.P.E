@@ -21,7 +21,10 @@ export interface ScanResult {
   verdict: "PROCEED" | "CAUTION" | "REJECT";
   flags: string[];
   holder_count: string | null;
+  lp_holder_count: string | null;
   liquidity_usd: number;
+  pair_created_ms: number | null;
+  has_declared_socials: boolean;
   is_honeypot: string | null;
   buy_tax: string | null;
   sell_tax: string | null;
@@ -31,6 +34,13 @@ export interface ScanResult {
   data_error?: string | null;
   error?: string;
 }
+
+// Hard-reject GoPlus fields — same tier as honeypot, not just an advisory
+// flag. Real, documented GoPlus token_security fields, flat "0"/"1" strings
+// like their siblings (is_mintable, is_proxy, etc.) already used below.
+// Kept in its own list so agents/token_scan.py / docs/assets/app.js stay
+// field-for-field identical.
+const HARD_REJECT_FIELDS = ["is_blacklisted", "selfdestruct", "is_airdrop_scam"] as const;
 
 async function safeGet(url: string): Promise<any> {
   try {
@@ -65,6 +75,11 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
 
   const pairs: any[] = (dsRaw && typeof dsRaw === "object" && Array.isArray(dsRaw.pairs)) ? dsRaw.pairs : [];
   const liquidityUsd = Math.round(pairs.reduce((s, p) => s + ((p.liquidity || {}).usd || 0), 0) * 100) / 100;
+  // Oldest pair creation timestamp across all pairs — a token's real track
+  // record starts at its FIRST pair, not whichever pair happens deepest now.
+  const pairCreatedTimes = pairs.map((p) => p.pairCreatedAt).filter((t) => !!t);
+  const pairCreatedMs = pairCreatedTimes.length ? Math.min(...pairCreatedTimes) : null;
+  const hasSocials = pairs.some((p) => (p.info?.socials?.length ?? 0) > 0 || (p.info?.websites?.length ?? 0) > 0);
 
   const flags: string[] = [];
   if (gp.is_honeypot === "1") flags.push("HONEYPOT");
@@ -79,9 +94,19 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
   if (liquidityUsd > 0 && liquidityUsd < 10000) flags.push("low_liquidity");
   if (gp.cannot_sell_all === "1") flags.push("cannot_sell_all");
   if (gp.transfer_pausable === "1") flags.push("transfer_pausable");
+  for (const field of HARD_REJECT_FIELDS) {
+    if (gp[field] === "1") flags.push(field);
+  }
+  const lpHolders = gp.lp_holder_count != null && gp.lp_holder_count !== "" ? parseInt(gp.lp_holder_count, 10) : null;
+  if (lpHolders !== null && !Number.isNaN(lpHolders) && lpHolders <= 1) flags.push("lp_concentrated");
+  const holders = gp.holder_count != null && gp.holder_count !== "" ? parseInt(gp.holder_count, 10) : null;
+  if (holders !== null && !Number.isNaN(holders) && holders < 50) flags.push("low_holder_count");
+  if (pairCreatedMs && (Date.now() - pairCreatedMs) / 86400000 < 3) flags.push("fresh_launch");
+  if (!hasSocials) flags.push("no_declared_socials");
 
+  const hardReject = gp.is_honeypot === "1" || HARD_REJECT_FIELDS.some((field) => gp[field] === "1");
   let verdict: ScanResult["verdict"];
-  if (gp.is_honeypot === "1") verdict = "REJECT";
+  if (hardReject) verdict = "REJECT";
   else if (flags.length >= 2) verdict = "CAUTION";
   else verdict = "PROCEED";
 
@@ -94,7 +119,10 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
     verdict,
     flags,
     holder_count: gp.holder_count ?? null,
+    lp_holder_count: gp.lp_holder_count ?? null,
     liquidity_usd: liquidityUsd,
+    pair_created_ms: pairCreatedMs,
+    has_declared_socials: hasSocials,
     is_honeypot: gp.is_honeypot ?? null,
     buy_tax: gp.buy_tax ?? null,
     sell_tax: gp.sell_tax ?? null,

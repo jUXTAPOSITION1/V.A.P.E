@@ -131,7 +131,16 @@ const App = {
         } catch(e){ document.getElementById('tvlChart').insertAdjacentHTML('afterend','<div class="text-amber-400 text-sm mt-2">TVL history unavailable.</div>'); }
     },
 
-    renderScanResult(el, addr, chain, gp, liq) {
+    // Hard-reject GoPlus fields — same tier as honeypot, not just an advisory
+    // flag. Real, documented GoPlus token_security fields, flat "0"/"1"
+    // strings like their siblings (is_mintable etc.) below. Kept in its own
+    // list so agents/token_scan.py / worker/src/scan.ts stay field-for-field
+    // identical (see .github/workflows/scan-parity.yml for the CI half of
+    // that guarantee — this browser path is the manually-reviewed third).
+    _HARD_REJECT_FIELDS: ['is_blacklisted', 'selfdestruct', 'is_airdrop_scam'],
+
+    renderScanResult(el, addr, chain, gp, liq, pairs) {
+        pairs = pairs || [];
         const flags = [];
         if (gp.is_honeypot==='1') flags.push('HONEYPOT');
         if (parseFloat(gp.buy_tax)>0.1) flags.push('buy tax '+(gp.buy_tax*100).toFixed(0)+'%');
@@ -139,7 +148,18 @@ const App = {
         if (gp.is_mintable==='1') flags.push('mintable');
         if (gp.owner_address && gp.owner_address!=='0x0000000000000000000000000000000000000000') flags.push('owner not renounced');
         if (liq>0 && liq<10000) flags.push('low liquidity');
-        const verdict = (gp.is_honeypot==='1') ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#34d399']);
+        this._HARD_REJECT_FIELDS.forEach(field => { if (gp[field]==='1') flags.push(field.replace(/_/g,' ')); });
+        const lpHolders = (gp.lp_holder_count!=null && gp.lp_holder_count!=='') ? parseInt(gp.lp_holder_count,10) : null;
+        if (lpHolders!=null && !isNaN(lpHolders) && lpHolders<=1) flags.push('LP concentrated (1 holder)');
+        const holders = (gp.holder_count!=null && gp.holder_count!=='') ? parseInt(gp.holder_count,10) : null;
+        if (holders!=null && !isNaN(holders) && holders<50) flags.push('low holder count');
+        const pairCreatedTimes = pairs.map(p=>p.pairCreatedAt).filter(Boolean);
+        const pairCreatedMs = pairCreatedTimes.length ? Math.min(...pairCreatedTimes) : null;
+        if (pairCreatedMs && (Date.now()-pairCreatedMs)/86400000 < 3) flags.push('fresh launch (<3 days)');
+        const hasSocials = pairs.some(p => (p.info?.socials?.length>0) || (p.info?.websites?.length>0));
+        if (!hasSocials) flags.push('no declared socials');
+        const hardReject = gp.is_honeypot==='1' || this._HARD_REJECT_FIELDS.some(field => gp[field]==='1');
+        const verdict = hardReject ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#34d399']);
         const vc = verdict[1];
         const name = gp.token_name ? `${this._esc(gp.token_name)} (${this._esc(gp.token_symbol)})` : this._shortAddr(addr);
         el.innerHTML = `
@@ -178,7 +198,7 @@ const App = {
             const gp = gpR.status==='fulfilled' ? (Object.values(gpR.value.result||{})[0]||{}) : {};
             const pairs = dsR.status==='fulfilled' ? (dsR.value.pairs||[]) : [];
             const liq = pairs.reduce((s,p)=>s+(p.liquidity?.usd||0),0);
-            this.renderScanResult(el, addr, chain, gp, liq);
+            this.renderScanResult(el, addr, chain, gp, liq, pairs);
         } catch(e){ el.innerHTML = '<span class="text-amber-400">Scan failed (rate limit or unsupported token). Try again.</span>'; }
     },
 

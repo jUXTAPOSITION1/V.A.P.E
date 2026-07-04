@@ -56,6 +56,18 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`vape.py` / `hack.py`** — persona engines with `vape_system.md` / `hack_system.md` prompts.
 - **`tools.py`** — `fetch_bounties()`, `log_report()`.
 - **`acp_fulfill.py` / `wallet.py`** 🟡 — ACP job fulfillment + wallet scaffolding (signing via ACP CLI).
+- **`investigate.py`** ✅ — deep-investigation engine, CertiK-style scoring (risk is the default,
+  not the exception — see README's table for the full check list). Every real verdict is
+  permanent in `intel/investigations/ledger.json`; auto mode never re-investigates an address
+  already on record, `--address` always forces a re-check (hired job / deliberate deep-dive).
+  `fail-list.md`/`caution-list.md`/`pass-list.md` regenerate from the ledger every run.
+- **`review_ledger.py`** ✅ — self-review: re-checks the oldest-reviewed addresses per list
+  against fresh data (pass/caution weekly, fail monthly, `review-ledger.yml`), logs a real
+  finding when a past verdict drifts. This is VAPE auditing its own track record, not just
+  producing new ones.
+- **`token_scan.py`** ✅ — free Hunt console + paid x402 quick-check, same keyless checks as
+  `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
+  `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
 - **`scout.py`** ✅ — bounty-radar triage, rule-based fit scoring (no LLM), hourly via `scout.yml`.
 - **`self_improve.py`** ✅ — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop

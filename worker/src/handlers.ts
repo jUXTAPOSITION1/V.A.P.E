@@ -53,7 +53,8 @@ async function rugPullAlert(req: Requirement) {
   if (!a) return { error: "no address" };
   const r = await scan(a, chainFrom(req));
   if (r.error) return r;
-  const ownerFlags = new Set(["HONEYPOT", "mintable", "owner_not_renounced", "cannot_sell_all", "transfer_pausable"]);
+  const ownerFlags = new Set(["HONEYPOT", "mintable", "owner_not_renounced", "cannot_sell_all", "transfer_pausable",
+    "is_blacklisted", "selfdestruct", "is_airdrop_scam", "lp_concentrated"]);
   const rug = r.flags.filter(f => ownerFlags.has(f));
   return {
     address: a,

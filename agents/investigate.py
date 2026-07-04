@@ -42,6 +42,12 @@ if ROOT not in sys.path:
 
 INVEST_DIR = os.path.join(ROOT, "intel", "investigations")
 CATALOG = os.path.join(ROOT, "intel", "catalog", "investigation-catalog.md")
+LEDGER_PATH = os.path.join(INVEST_DIR, "ledger.json")
+LIST_PATHS = {
+    "REJECT": os.path.join(INVEST_DIR, "fail-list.md"),
+    "CAUTION": os.path.join(INVEST_DIR, "caution-list.md"),
+    "PROCEED": os.path.join(INVEST_DIR, "pass-list.md"),
+}
 BASE_RPC = os.getenv("BASE_RPC_URL", "https://mainnet.base.org")
 UA = {"User-Agent": "VAPE-PrivateEye/1.0"}
 
@@ -321,9 +327,13 @@ def score(gp, dex, onchain, verif):
 
 # ── target selection ──────────────────────────────────────────────────────────
 def auto_target():
-    """Pick the highest-signal Base target from live data (violent/low-liq movers)."""
+    """Pick the highest-signal Base target from live data (violent/low-liq movers)
+    that VAPE hasn't already reached a real verdict on — skip anything already
+    in the ledger so auto mode never wastes a cycle re-discovering a target
+    it's just going to turn around and skip anyway."""
     if not DF:
         return None
+    ledger = _load_ledger()
     movers = DF.get_base_movers(limit=10)
     cands = movers.get("biggest_movers") or []
     # prefer big movers with a resolvable token; fall back to top volume pools
@@ -337,7 +347,7 @@ def auto_target():
         for p in (d.get("pairs") or []) if isinstance(d, dict) else []:
             if str(p.get("chainId", "")).lower() == "base":
                 addr = (p.get("baseToken") or {}).get("address")
-                if addr:
+                if addr and addr.lower() not in ledger:
                     return {"address": addr, "hint": f"auto: mover {m.get('name')} {m.get('change_24h_pct')}%"}
     return None
 
@@ -466,21 +476,74 @@ def update_catalog(target, sym, verdict, s, reasons, report_rel):
         f.write("\n" + row + "\n")
 
 
-def _recently_investigated(address, hours=12):
-    """Skip targets already investigated within the window (avoid re-hammering)."""
+# ── ledger: permanent record of every real verdict, keyed by address ────────
+# The single database VAPE checks before ever auto-investigating a target
+# again, and the source of truth for the fail/caution/pass lists below.
+# Replaces the old _recently_investigated() 12-hour window, which only
+# prevented re-hammering a target within half a day — it said nothing about
+# a token VAPE had already reached a real verdict on a week ago, which is
+# exactly the repeat-investigation loop this was built to stop. Auto mode
+# checks this and skips permanently; --address (a human/paying-job-driven
+# hire, or a deliberate deep-dive) always passes force=True and can still
+# re-investigate on demand — the two documented, legitimate exceptions.
+def _load_ledger():
     try:
-        cutoff = time.time() - hours * 3600
-        for fp in glob_investigations():
-            if address[:10].lower() in os.path.basename(fp).lower() and os.path.getmtime(fp) > cutoff:
-                return True
+        with open(LEDGER_PATH) as f:
+            return json.load(f)
     except Exception:
-        pass
-    return False
+        return {}
 
 
-def glob_investigations():
-    import glob as _g
-    return _g.glob(os.path.join(INVEST_DIR, "*.md"))
+def _save_ledger(ledger):
+    os.makedirs(os.path.dirname(LEDGER_PATH), exist_ok=True)
+    with open(LEDGER_PATH, "w") as f:
+        json.dump(ledger, f, indent=2, sort_keys=True)
+        f.write("\n")
+
+
+def ledger_entry(address):
+    return _load_ledger().get(address.lower())
+
+
+def _update_ledger(address, sym, verdict, s, report_rel):
+    ledger = _load_ledger()
+    key = address.lower()
+    entry = ledger.get(key, {"first_investigated": now_iso(), "times_investigated": 0, "history": []})
+    entry["address"] = address  # original checksum/case, for display — key stays lowercase for lookup
+    entry["symbol"] = sym
+    entry["last_investigated"] = now_iso()
+    entry["times_investigated"] = entry.get("times_investigated", 0) + 1
+    entry["last_verdict"] = verdict
+    entry["last_score"] = s
+    entry.setdefault("history", []).append({"ts": now_iso(), "verdict": verdict, "score": s, "report": report_rel})
+    entry["history"] = entry["history"][-20:]  # cap per-address history, this is a ledger not a full replay log
+    ledger[key] = entry
+    _save_ledger(ledger)
+    return ledger
+
+
+def regenerate_lists(ledger):
+    """Real, regenerated-every-run views VAPE (and anyone else) can read
+    without touching the raw ledger: every address currently on record,
+    grouped by its LAST real verdict. This is the fail/caution/pass list."""
+    by_verdict = {"REJECT": [], "CAUTION": [], "PROCEED": []}
+    for addr, entry in ledger.items():
+        v = entry.get("last_verdict")
+        if v in by_verdict:
+            by_verdict[v].append((addr, entry))
+
+    titles = {"REJECT": "🔴 Fail List (REJECT)", "CAUTION": "🟡 Caution List", "PROCEED": "🟢 Pass List (PROCEED)"}
+    for verdict, path in LIST_PATHS.items():
+        rows = sorted(by_verdict[verdict], key=lambda kv: kv[1].get("last_investigated", ""), reverse=True)
+        lines = [f"# VAPE {titles[verdict]}", "",
+                 f"_Regenerated {now_iso()} — {len(rows)} address(es) currently on record with a last verdict of {verdict}._",
+                 "", "| Symbol | Address | Score | Times Checked | Last Investigated |",
+                 "|--------|---------|-------|----------------|--------------------|"]
+        for addr, entry in rows:
+            lines.append(f"| {entry.get('symbol', '?')} | `{entry.get('address', addr)}` | {entry.get('last_score')}/100 | "
+                          f"{entry.get('times_investigated', 1)} | {entry.get('last_investigated', '?')} |")
+        with open(path, "w") as f:
+            f.write("\n".join(lines) + "\n")
 
 
 def investigate(address, chain="8453", hint="", force=False):
@@ -488,9 +551,14 @@ def investigate(address, chain="8453", hint="", force=False):
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
 
-    if not force and _recently_investigated(address):
-        print(f"[investigate] skip {address} — investigated within last 12h")
-        return {"target": address, "skipped": "recently_investigated"}
+    existing = ledger_entry(address)
+    if not force and existing:
+        print(f"[investigate] skip {address} — already on record: {existing['last_verdict']} "
+              f"{existing['last_score']}/100 on {existing['last_investigated']} "
+              f"({existing.get('times_investigated', 1)}x checked). Use --address to force a re-check "
+              "(hire / deep-dive exception).")
+        return {"target": address, "skipped": "already_investigated",
+                "last_verdict": existing["last_verdict"], "last_score": existing["last_score"]}
 
     print(f"[investigate] target {address} ({hint})")
     gp = goplus_security(address, chain)
@@ -504,6 +572,8 @@ def investigate(address, chain="8453", hint="", force=False):
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel)
     update_catalog(address, sym, verdict, s, reasons, rel)
+    ledger = _update_ledger(address, sym, verdict, s, rel)
+    regenerate_lists(ledger)
 
     print(f"[investigate] {emoji} {verdict} {s}/100 — {sym} → {rel}")
     return {"target": address, "symbol": sym, "verdict": verdict, "score": s,
