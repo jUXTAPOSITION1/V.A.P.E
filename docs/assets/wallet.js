@@ -25,6 +25,9 @@ const Wallet = {
     onChange(cb) { this._listeners.push(cb); },
     _emit() { this._listeners.forEach(cb => { try { cb(this.state()); } catch (e) {} }); },
     state() { return { account: this._account, chainId: this._chainId, connected: !!this._account }; },
+    // Raw EIP-1193 provider for the active connection — needed by hire.js to
+    // build a viem WalletClient for EIP-712 signing (x402 payment authorization).
+    getProvider() { return this._active?.provider || null; },
 
     init() {
         window.addEventListener('eip6963:announceProvider', (e) => {

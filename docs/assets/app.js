@@ -46,25 +46,26 @@ const App = {
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
                 grid.innerHTML = auto.map(o=>`
-                    <div class="bg-white/5 rounded-xl p-3 flex flex-col gap-1">
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
                         <span class="font-mono text-xs text-zinc-200">${o.name}</span>
                         <span class="font-display text-emerald-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · pay &amp; run</span>
-                    </div>`).join('');
+                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · click to hire</span>
+                    </button>`).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {
                 acpGrid.innerHTML = manual.map(o=>`
-                    <div class="bg-white/5 rounded-xl p-3 flex flex-col gap-1">
+                    <button onclick="Hire.openAcp('${o.name}')" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-amber-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
                         <span class="font-mono text-xs text-zinc-200">${o.name}</span>
                         <span class="font-display text-amber-300 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                    </div>`).join('');
+                      <span class="text-[9px] text-brass-400 uppercase tracking-wider" style="color:var(--brass)"><i class="fa-solid fa-scale-balanced"></i> ACP · click to hire</span>
+                    </button>`).join('');
             }
             const disc = document.getElementById('rep-disclaimer');
             if (disc) disc.textContent = (r.disclaimer||'') + (a.first_report?` · Active since ${a.first_report.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')}.`:'');
