@@ -138,7 +138,7 @@ const Hire = {
                     <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                 </div>
                 <div class="glass rounded-xl p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Deep-dive audit queued — report lands within 24h.')}</div>
-                <a href="${result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports'}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
+                <a href="${escapeHtml(result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports')}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
                 <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — check back for the finished report.</div>`;
             return;
         }
