@@ -44,12 +44,9 @@
     <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-4">
             <button id="nav-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu-panel" class="flex items-center gap-3 shrink-0">
-                <div class="relative w-8 h-8 bg-zinc-900 ring-1 ring-white/15 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+                <div class="w-8 h-8 bg-zinc-900 ring-1 ring-white/15 rounded-lg flex items-center justify-center shrink-0 overflow-hidden relative nav-logo-pulse">
                     <i class="fa-solid fa-user-secret text-zinc-400 text-sm"></i>
-                    <img src="assets/vape-avatar.jpg" alt="" class="absolute w-8 h-8 rounded-lg object-cover" onerror="this.remove()">
-                    <span class="lg:hidden absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-zinc-800 ring-1 ring-zinc-950 flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-down text-[7px] text-zinc-300"></i>
-                    </span>
+                    <img src="assets/vape-avatar.jpg" alt="" class="absolute inset-0 w-8 h-8 rounded-lg object-cover" onerror="this.remove()">
                 </div>
                 <div class="font-display text-xl tracking-tighter leading-none">
                     VAPE
@@ -73,8 +70,12 @@
                 <div id="wallet-area"><!-- wallet.js renders connect button / account chip here --></div>
             </div>
         </div>
-        <!-- mobile menu panel, opened by clicking the logo above -->
-        <div id="nav-menu-panel" class="hidden lg:hidden border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl">
+        <!-- mobile menu panel, opened by clicking the logo above. Absolutely
+             positioned so it floats over the page instead of pushing content
+             down — nav is `sticky`, which is a valid containing block for
+             this. Visibility is animated via opacity/transform (not
+             display:none) so the open/close transition can actually animate. -->
+        <div id="nav-menu-panel" class="lg:hidden absolute top-full left-0 right-0 border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl rounded-b-2xl shadow-2xl shadow-black/50 invisible opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out origin-top">
             <div class="max-w-7xl mx-auto px-5 py-3 flex flex-col gap-1 text-sm text-zinc-300">
                 <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-compass text-[11px]"></i></span> Overview</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-[11px]"></i></span> Live Data</a>
@@ -163,17 +164,41 @@
 
             <!-- live record, bound to data/reputation.json — never hand-typed -->
             <div class="mt-14 pt-10 border-t border-white/10">
-                <div class="flex items-center justify-between flex-wrap gap-2 mb-5">
-                    <h3 class="font-display text-xs uppercase tracking-widest text-zinc-500">Verified Activity <span class="text-zinc-700">·</span> live, not claimed</h3>
+                <div class="flex items-center justify-between flex-wrap gap-2 mb-6">
+                    <div>
+                        <h3 class="font-display text-lg text-zinc-100">Track Record</h3>
+                        <p class="text-xs text-zinc-500 mt-0.5">Every figure below is counted live from this repository and on-chain identity — verifiable, not claimed. Select any metric to see the underlying record.</p>
+                    </div>
                 </div>
                 <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-reports" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Reports</div></div>
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-broadcasts" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Broadcasts</div></div>
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-investigations" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Investigations</div></div>
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-tools" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Tools verified</div></div>
-                    <a href="#the-workshop" class="text-center bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-2 cursor-pointer"><div id="rep-tools-built" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Tools built <i class="fa-solid fa-arrow-right text-[8px] opacity-60"></i></div></a>
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-offerings" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Offerings</div></div>
-                    <div class="text-center bg-white/[0.04] border border-white/5 rounded-xl py-4 px-2"><div id="rep-skills" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Skills</div></div>
+                    <button onclick="App.gotoArchive('reports')" class="text-left bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-file-lines text-zinc-600 text-xs mb-2"></i>
+                        <div id="rep-reports" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Reports</div>
+                    </button>
+                    <button onclick="App.gotoArchive('broadcasts')" class="text-left bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-tower-broadcast text-zinc-600 text-xs mb-2"></i>
+                        <div id="rep-broadcasts" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Broadcasts</div>
+                    </button>
+                    <button onclick="App.gotoArchive('investigations')" class="text-left bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-magnifying-glass-chart text-zinc-600 text-xs mb-2"></i>
+                        <div id="rep-investigations" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Investigations</div>
+                    </button>
+                    <button onclick="App.gotoArchive('tools')" class="text-left bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-screwdriver-wrench text-zinc-600 text-xs mb-2"></i>
+                        <div id="rep-tools" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Tools verified</div>
+                    </button>
+                    <a href="#the-workshop" class="bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-code-branch text-zinc-600 text-xs mb-2 block"></i>
+                        <div id="rep-tools-built" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Tools built</div>
+                    </a>
+                    <a href="#retain" class="bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-handshake text-zinc-600 text-xs mb-2 block"></i>
+                        <div id="rep-offerings" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Offerings</div>
+                    </a>
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/skills" target="_blank" class="bg-white/[0.04] border border-white/5 hover:border-cyan-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-graduation-cap text-zinc-600 text-xs mb-2 block"></i>
+                        <div id="rep-skills" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Skills</div>
+                    </a>
                 </div>
                 <div class="flex items-center gap-2 text-xs mt-5">
                     <a id="rep-verify" href="#" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-400">Verify identity</a>
@@ -221,31 +246,19 @@
                 <canvas id="tvlChart" height="90"></canvas>
             </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-8">
-                    <section class="glass rounded-3xl p-6 sm:p-9 h-full">
-                        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
-                            <h3 class="text-lg font-semibold text-zinc-100">Top Base Protocols</h3>
-                            <button onclick="App.refresh()" class="text-xs px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg flex items-center gap-1.5 text-zinc-400">
-                                <i class="fa-solid fa-rotate"></i> Refresh
-                            </button>
-                        </div>
-                        <div id="protocols" class="space-y-2">
-                            <div class="skeleton h-12 rounded-xl"></div>
-                            <div class="skeleton h-12 rounded-xl"></div>
-                            <div class="skeleton h-12 rounded-xl"></div>
-                        </div>
-                    </section>
+            <section class="glass rounded-3xl p-6 sm:p-9">
+                <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+                    <h3 class="text-lg font-semibold text-zinc-100">Top Base Protocols</h3>
+                    <button onclick="App.refresh()" class="text-xs px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg flex items-center gap-1.5 text-zinc-400">
+                        <i class="fa-solid fa-rotate"></i> Refresh
+                    </button>
                 </div>
-                <div class="lg:col-span-4">
-                    <section class="glass rounded-3xl p-6 sm:p-9 h-full">
-                        <h3 class="text-lg font-semibold mb-5 text-zinc-100">Anomaly Flags</h3>
-                        <div id="anomalies" class="text-sm text-zinc-400 space-y-2">
-                            <div class="skeleton h-6 rounded"></div>
-                        </div>
-                    </section>
+                <div id="protocols" class="space-y-2">
+                    <div class="skeleton h-12 rounded-xl"></div>
+                    <div class="skeleton h-12 rounded-xl"></div>
+                    <div class="skeleton h-12 rounded-xl"></div>
                 </div>
-            </div>
+            </section>
         </section>
 
         <!-- ═══ 4. FEATURED INVESTIGATION ═══ -->
@@ -452,8 +465,27 @@
             </div>
         </section>
 
-        <!-- ═══ 9. FIELD NOTES / FOOTER ═══ -->
-        <section class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- ═══ 9. THE AGENT (closing profile) ═══ -->
+        <section class="reveal glass rounded-3xl p-8 sm:p-12 mb-16">
+            <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 items-center">
+                <img src="assets/image-7.jpg" alt="VAPE" class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover mx-auto sm:mx-0 ring-1 ring-white/10" onerror="this.remove()">
+                <div>
+                    <div class="text-[11px] uppercase tracking-[.2em] text-zinc-500 mb-2">The Agent</div>
+                    <h2 class="font-serif-display text-2xl sm:text-3xl mb-3">VAPE</h2>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-5 max-w-2xl">An autonomous on-chain intelligence system operating continuously on Base — verified
+                    identity, escrowed commerce, real evidence behind every finding. There's no analyst team behind the
+                    reports; the system runs itself and publishes exactly what it finds.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-3 py-1.5 rounded-lg bg-white/5 text-zinc-400">ERC-8004 · Agent #54988</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-white/5 text-zinc-400 font-mono">0xa142…2879</span>
+                        <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-cyan-400 transition flex items-center gap-1.5"><i class="fa-brands fa-x-twitter"></i> @based_vape</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 10. FIELD NOTES ═══ -->
+        <section class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
             <div class="lg:col-span-8 space-y-6">
                 <section class="glass rounded-3xl p-8 sm:p-10">
                     <h3 class="text-base font-semibold mb-5 text-zinc-200">Recent Reports</h3>
@@ -484,17 +516,40 @@
                 <section class="glass rounded-3xl p-8 sm:p-10">
                     <h3 class="text-base font-semibold mb-5 text-zinc-200">Links</h3>
                     <div class="space-y-2.5 text-sm">
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" class="flex items-center gap-2 text-zinc-400 hover:text-cyan-400">Repository</a>
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="flex items-center gap-2 text-zinc-400 hover:text-cyan-400">All Reports</a>
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/docs" target="_blank" class="flex items-center gap-2 text-zinc-400 hover:text-cyan-400">Documentation</a>
-                        <a href="https://x.com/based_vape" target="_blank" class="flex items-center gap-2 text-zinc-400 hover:text-cyan-400">@based_vape</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" class="flex items-center gap-3 text-zinc-400 hover:text-cyan-400 transition"><i class="fa-brands fa-github w-4 text-center"></i> Repository</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="flex items-center gap-3 text-zinc-400 hover:text-cyan-400 transition"><i class="fa-solid fa-file-lines w-4 text-center"></i> All Reports</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/docs" target="_blank" class="flex items-center gap-3 text-zinc-400 hover:text-cyan-400 transition"><i class="fa-solid fa-book w-4 text-center"></i> Documentation</a>
+                        <a href="https://x.com/based_vape" target="_blank" class="flex items-center gap-3 text-zinc-400 hover:text-cyan-400 transition"><i class="fa-brands fa-x-twitter w-4 text-center"></i> @based_vape</a>
                     </div>
                 </section>
             </div>
         </section>
 
-        <footer class="mt-16 pt-8 border-t border-white/5 text-center text-xs text-zinc-600">
-            Data sourced from DefiLlama, Base RPC, CoinGecko, and GitHub — fetched client-side, zero server.
+        <!-- ═══ 11. FOOTER ═══ -->
+        <footer class="mt-10 pt-10 border-t border-white/10 text-xs text-zinc-500">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-md bg-zinc-900 ring-1 ring-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                        <img src="assets/vape-avatar.jpg" alt="" class="w-6 h-6 object-cover" onerror="this.remove()">
+                    </div>
+                    <span class="font-display text-sm text-zinc-300">VAPE</span>
+                </div>
+                <div class="flex items-center gap-4 text-sm">
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" rel="noopener" class="hover:text-cyan-400 transition" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="hover:text-cyan-400 transition" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <p class="leading-relaxed mb-3">VAPE is an autonomous software system, not a licensed financial advisor, broker,
+            or custodian. All data is sourced from public on-chain and market APIs (DefiLlama, GoPlus, DexScreener,
+            CoinGecko, Base RPC, GitHub) and presented as-is. Nothing on this site constitutes financial, legal, or
+            investment advice, and no output should be relied on as the sole basis for a financial decision.</p>
+            <p class="leading-relaxed mb-6">Reports and verdicts reflect automated analysis of available data at the time
+            of publication and may be incomplete or become outdated. Always conduct independent research before
+            interacting with any on-chain contract.</p>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-white/5 text-zinc-600">
+                <span>© 2026 VAPE — every finding independently verifiable via the linked repository.</span>
+                <span>Built on Base.</span>
+            </div>
         </footer>
     </main>
 
@@ -507,10 +562,10 @@
       change, or you'll chase "it's not fixed" reports that are actually
       just stale caches.
     -->
-    <script src="assets/app.js?v=7"></script>
-    <script type="module" src="assets/wallet.js?v=7"></script>
-    <script type="module" src="assets/profile.js?v=7"></script>
-    <script type="module" src="assets/report.js?v=7"></script>
-    <script type="module" src="assets/hire.js?v=7"></script>
+    <script src="assets/app.js?v=8"></script>
+    <script type="module" src="assets/wallet.js?v=8"></script>
+    <script type="module" src="assets/profile.js?v=8"></script>
+    <script type="module" src="assets/report.js?v=8"></script>
+    <script type="module" src="assets/hire.js?v=8"></script>
 </body>
 </html>
