@@ -6,6 +6,17 @@
 // client-side (identifies the app to the relay network, no auth power).
 const WALLETCONNECT_PROJECT_ID = '624e168bc87a042f6e09ec7301ea357d';
 
+// EIP-6963 `info` (name/icon/uuid) is announced by whatever browser extension
+// dispatches the event — a malicious or compromised extension can spoof it to
+// impersonate a real wallet, so treat it exactly like any other untrusted
+// external string and escape before it goes into innerHTML (same pattern used
+// throughout report.js/hire.js/profile.js for on-chain-sourced text).
+function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
+
 const BASE_CHAIN_HEX = '0x2105'; // 8453
 const BASE_PARAMS = {
     chainId: BASE_CHAIN_HEX,
@@ -59,6 +70,18 @@ const Wallet = {
     },
 
     async _bind(provider, connectorType, account) {
+        // `account` comes straight from the provider's own eth_requestAccounts
+        // response. A real wallet always returns a well-formed address, but the
+        // "provider" itself can be a spoofed EIP-6963 announcement (see the
+        // escapeHtml note above) — its `request()` is attacker-controlled JS
+        // that could return any string. This value is rendered unescaped as
+        // text and inside href/aria-label attributes in several places below,
+        // so reject anything that isn't a real address before trusting it.
+        if (!ADDRESS_RE.test(account || '')) {
+            console.error('[wallet] provider returned a malformed account, refusing to connect:', account);
+            alert('This wallet returned an invalid account and was not connected.');
+            return;
+        }
         this._active = { provider, connectorType };
         this._account = account;
         try {
@@ -66,7 +89,13 @@ const Wallet = {
         } catch (e) { this._chainId = null; }
         localStorage.setItem('vape_wallet_connector', connectorType);
         provider.on?.('accountsChanged', (accs) => {
-            this._account = accs[0] || null;
+            const next = accs[0] || null;
+            if (next && !ADDRESS_RE.test(next)) {
+                console.error('[wallet] accountsChanged returned a malformed account, disconnecting:', next);
+                this.disconnect();
+                return;
+            }
+            this._account = next;
             if (!this._account) this.disconnect();
             else { this._renderConnectButton(); this._emit(); }
         });
@@ -262,8 +291,8 @@ const Wallet = {
         this._closePopover();
         const discovered = [...this._providers.values()];
         const rows = discovered.length
-            ? discovered.map(({ info }) => `<button data-uuid="${info.uuid}" class="wc-injected w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm">
-                    <img src="${info.icon}" alt="" class="w-5 h-5 rounded" onerror="this.remove()"> ${info.name}
+            ? discovered.map(({ info }) => `<button data-uuid="${escapeHtml(info.uuid)}" class="wc-injected w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm">
+                    <img src="${escapeHtml(info.icon)}" alt="" class="w-5 h-5 rounded" onerror="this.remove()"> ${escapeHtml(info.name)}
                 </button>`).join('')
             : `<button data-uuid="" class="wc-injected w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm">
                     <i class="fa-solid fa-plug w-5 text-center"></i> Browser wallet
