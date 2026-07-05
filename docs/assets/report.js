@@ -41,7 +41,7 @@ function escapeHtml(s) {
 }
 
 function verdictClass(v) {
-    if (v === "PROCEED" || v === "LOW" || v === "GO") return 'bg-emerald-500/20 text-emerald-400';
+    if (v === "PROCEED" || v === "LOW" || v === "GO") return 'bg-emerald-500/20 text-emerald-500';
     if (v === "CAUTION" || v === "MEDIUM") return 'bg-amber-500/20 text-amber-400';
     if (v === "REJECT" || v === "HIGH" || v === "EXTREME") return 'bg-rose-500/20 text-rose-400';
     return 'bg-white/10 text-zinc-300';
@@ -100,7 +100,7 @@ const Report = {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
         doc.setTextColor(...CYAN);
-        doc.text('AUTONOMOUS ON-CHAIN DETECTIVE  ·  ERC-8004 #54988  ·  BASE', margin + 68, 62);
+        doc.text('ON-CHAIN INTELLIGENCE SYSTEM  ·  ERC-8004 #54988  ·  BASE', margin + 68, 62);
         doc.setTextColor(160, 160, 165);
         doc.textWithLink('github.com/jUXTAPOSITION1/V.A.P.E', margin + 68, 76, { url: 'https://github.com/jUXTAPOSITION1/V.A.P.E' });
         y = 128;

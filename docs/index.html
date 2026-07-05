@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE • HACK — Bounty Command Center</title>
-    <meta name="description" content="Autonomous on-chain detective for Base &amp; Virtuals — live TVL, security incidents, deep investigations, bug-bounty radar.">
+    <title>VAPE — On-Chain Intelligence System</title>
+    <meta name="description" content="VAPE is an autonomous on-chain intelligence system for Base &amp; Virtuals — real-time chain telemetry, contract security analysis, investigation records, and a live bounty command center.">
     <link rel="canonical" href="https://juxtaposition1.github.io/V.A.P.E/">
 
     <!-- Open Graph / Facebook, Discord, Slack, LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://juxtaposition1.github.io/V.A.P.E/">
-    <meta property="og:site_name" content="VAPE • HACK">
-    <meta property="og:title" content="VAPE • HACK — Bounty Command Center">
-    <meta property="og:description" content="Autonomous on-chain detective for Base &amp; Virtuals — live TVL, security incidents, deep investigations, bug-bounty radar.">
+    <meta property="og:site_name" content="VAPE">
+    <meta property="og:title" content="VAPE — On-Chain Intelligence System">
+    <meta property="og:description" content="VAPE is an autonomous on-chain intelligence system for Base &amp; Virtuals — real-time chain telemetry, contract security analysis, investigation records, and a live bounty command center.">
     <meta property="og:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="VAPE HACK Bounty Command Center — Explore the live dashboard">
+    <meta property="og:image:alt" content="VAPE — On-Chain Intelligence System">
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@based_vape">
-    <meta name="twitter:title" content="VAPE • HACK — Bounty Command Center">
-    <meta name="twitter:description" content="Autonomous on-chain detective for Base &amp; Virtuals — live TVL, security incidents, deep investigations, bug-bounty radar.">
+    <meta name="twitter:title" content="VAPE — On-Chain Intelligence System">
+    <meta name="twitter:description" content="VAPE is an autonomous on-chain intelligence system for Base &amp; Virtuals — real-time chain telemetry, contract security analysis, investigation records, and a live bounty command center.">
     <meta name="twitter:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
 
     <!-- Icons -->
@@ -43,17 +43,17 @@
     <nav class="border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="relative w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0 overflow-hidden">
-                    <i class="fa-solid fa-user-secret text-black text-lg"></i>
+                <div class="relative w-9 h-9 bg-zinc-900 ring-1 ring-cyan-500/30 rounded-xl flex items-center justify-center shrink-0 overflow-hidden">
+                    <i class="fa-solid fa-user-secret text-cyan-400 text-lg"></i>
                     <img src="assets/vape-avatar.jpg" alt="" class="absolute w-9 h-9 rounded-xl object-cover" onerror="this.remove()">
                 </div>
                 <div class="font-display text-2xl sm:text-3xl tracking-tighter leading-none">
-                    VAPE <span class="text-emerald-400">HACK</span>
+                    VAPE
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center gap-2 text-xs text-emerald-400">
-                    <span class="inline-block w-2.5 h-2.5 bg-emerald-400 rounded-full live-dot"></span>
+                <div class="hidden sm:flex items-center gap-2 text-xs text-emerald-500">
+                    <span class="inline-block w-2.5 h-2.5 bg-emerald-500 rounded-full live-dot"></span>
                     <span id="live-label">LIVE</span>
                 </div>
                 <div id="wallet-area"><!-- wallet.js renders connect button / account chip here --></div>
@@ -61,34 +61,42 @@
         </div>
     </nav>
 
+    <!-- Title banner — sits below the top bar, above the hero -->
+    <div class="border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <img src="assets/image-2.jpg" alt="V.A.P.E. — Intelligence System"
+                class="w-full h-28 sm:h-36 object-cover rounded-b-2xl opacity-90" onerror="this.remove()">
+        </div>
+    </div>
+
     <main class="max-w-7xl mx-auto px-5 sm:px-8 pt-8 pb-20">
 
         <!-- ═══ 1. HERO ═══ -->
         <header class="reveal grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-10 sm:py-16">
             <div class="lg:col-span-7 order-2 lg:order-1">
                 <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-[.2em] text-cyan-400 mb-4">
-                    <i class="fa-solid fa-satellite-dish"></i> Field Unit · Base &amp; Virtuals
+                    <i class="fa-solid fa-satellite-dish"></i> Intelligence System · Base &amp; Virtuals
                 </div>
                 <h1 class="font-serif-display text-5xl sm:text-7xl leading-[0.95] tracking-tight text-zinc-50">
                     The chain<br>never lies.
                 </h1>
                 <p class="text-zinc-400 mt-5 text-base sm:text-lg max-w-xl leading-relaxed">
-                    VAPE is an autonomous on-chain detective — always watching Base and the Virtuals
-                    ecosystem, always working the case, never fabricating a finding.
-                    <span class="text-emerald-400">Real data only.</span>
+                    VAPE is an autonomous on-chain intelligence system — continuously monitoring Base and
+                    the Virtuals ecosystem, verifying every claim against live data, never fabricating a finding.
+                    <span class="text-cyan-400">Real data only.</span>
                 </p>
                 <p class="text-zinc-500 mt-3 text-sm" id="last-sync">syncing…</p>
                 <div class="flex flex-wrap gap-3 mt-7">
-                    <a href="#retain" class="bg-emerald-600 hover:bg-emerald-500 transition px-5 py-3 rounded-xl font-display text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-briefcase"></i> Retain the Detective
+                    <a href="#retain" class="bg-cyan-600 hover:bg-cyan-500 transition px-5 py-3 rounded-xl font-display text-sm flex items-center gap-2 text-zinc-950 font-semibold">
+                        <i class="fa-solid fa-briefcase"></i> Engagement Options
                     </a>
                     <a href="#the-wire" class="bg-white/5 hover:bg-white/10 transition px-5 py-3 rounded-xl font-display text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-signal"></i> Watch the Wire
+                        <i class="fa-solid fa-signal"></i> View Live Feed
                     </a>
                 </div>
             </div>
             <div class="lg:col-span-5 order-1 lg:order-2">
-                <div class="hero-portrait-fallback hud-frame rounded-3xl aspect-square relative overflow-hidden flex items-center justify-center" role="img" aria-label="VAPE — a noir detective in AR field glasses, watching the chain">
+                <div class="hero-portrait-fallback hud-frame rounded-3xl aspect-square relative overflow-hidden flex items-center justify-center" role="img" aria-label="VAPE — an on-chain intelligence system, rendered as a figure in AR field glasses">
                     <div class="hud-corner tl" aria-hidden="true"></div><div class="hud-corner tr" aria-hidden="true"></div>
                     <div class="hud-corner bl" aria-hidden="true"></div><div class="hud-corner br" aria-hidden="true"></div>
                     <i class="fa-solid fa-user-secret hero-glyph text-cyan-400/70" style="font-size:9rem" aria-hidden="true"></i>
@@ -102,37 +110,37 @@
         </header>
 
         <!-- ═══ 2. THE FILE ON VAPE ═══ -->
-        <section id="the-file" class="reveal dossier glass rounded-3xl p-6 sm:p-10 mb-10" data-tab="Case File · 01">
-            <h2 class="font-serif-display text-3xl sm:text-4xl mb-8">The File on VAPE</h2>
+        <section id="the-file" class="reveal dossier glass rounded-3xl p-6 sm:p-10 mb-10" data-tab="Overview · 01">
+            <h2 class="font-serif-display text-3xl sm:text-4xl mb-8">Platform Overview</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-zinc-400 leading-relaxed">
                 <div>
-                    <h3 class="font-display text-emerald-400 text-xs uppercase tracking-widest mb-2">Mission</h3>
-                    <p>VAPE is a piece of software that watches Base and the Virtuals ecosystem continuously
-                    and tells the truth about what it finds. No analyst sits behind each report — the recon,
-                    the verdict, and the published record all run on their own, around the clock. Every claim
-                    traces back to a real API response, a real block, a real transaction. If the data isn't
-                    there, VAPE says so instead of guessing.</p>
+                    <h3 class="font-display text-cyan-400 text-xs uppercase tracking-widest mb-2">Mission</h3>
+                    <p>VAPE is a piece of software that monitors Base and the Virtuals ecosystem continuously
+                    and reports what it finds without embellishment. No analyst sits behind each report — the
+                    recon, the verdict, and the published record all run on their own, around the clock. Every
+                    claim traces back to a real API response, a real block, a real transaction. Where the data
+                    isn't there, VAPE says so instead of estimating.</p>
                 </div>
                 <div>
-                    <h3 class="font-display text-emerald-400 text-xs uppercase tracking-widest mb-2">Capabilities</h3>
+                    <h3 class="font-display text-cyan-400 text-xs uppercase tracking-widest mb-2">Capabilities</h3>
                     <p>Contract forensics (honeypot, tax, mint, ownership, liquidity checks), market intelligence
                     (Base TVL, macro regime, the Virtuals agent economy), security auditing (static analysis
-                    against its own codebase), and threat correlation against the live hack feed — five
-                    specializations, one detective, no simulated output.</p>
+                    against its own codebase), and threat correlation against the live hack feed — four
+                    specializations, one system, no simulated output.</p>
                 </div>
                 <div>
-                    <h3 class="font-display text-emerald-400 text-xs uppercase tracking-widest mb-2">Method</h3>
-                    <p>Every investigation runs the same discipline: pull GoPlus token-security data and
-                    DexScreener liquidity for the target, run it against a fixed set of risk flags, weigh
+                    <h3 class="font-display text-cyan-400 text-xs uppercase tracking-widest mb-2">Method</h3>
+                    <p>Every assessment runs the same discipline: pull GoPlus token-security data and
+                    DexScreener liquidity for the target, evaluate it against a fixed set of risk flags, weigh
                     them into a PROCEED / CAUTION / REJECT verdict, and publish the full evidence trail —
-                    not just the conclusion — to the Archive below. The same logic runs whether the request
-                    comes free, through ACP escrow, or through an x402 payment.</p>
+                    not just the conclusion — to the Investigation Archive below. The same logic runs whether
+                    the request comes free, through ACP escrow, or through an x402 payment.</p>
                 </div>
                 <div>
-                    <h3 class="font-display text-emerald-400 text-xs uppercase tracking-widest mb-2">Ecosystem Position</h3>
+                    <h3 class="font-display text-cyan-400 text-xs uppercase tracking-widest mb-2">Ecosystem Position</h3>
                     <p>VAPE holds an on-chain identity under <span class="text-zinc-300">ERC-8004 (agent #54988)</span>,
-                    settles in USDC on <span class="text-zinc-300">Base</span>, and sells services through
+                    settles in USDC on <span class="text-zinc-300">Base</span>, and provides services through
                     Virtuals Protocol's <span class="text-zinc-300">Agent Commerce Protocol</span> — escrowed,
                     verifiable, agent-to-agent commerce, not a subscription paywall.</p>
                 </div>
@@ -140,28 +148,34 @@
 
             <!-- live record, bound to data/reputation.json — never hand-typed -->
             <div class="mt-9 pt-7 border-t border-white/10">
-                <h3 class="font-display text-xs uppercase tracking-widest text-zinc-500 mb-4">The Record — live, not claimed</h3>
+                <h3 class="font-display text-xs uppercase tracking-widest text-zinc-500 mb-4">Verified Activity — live, not claimed</h3>
                 <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-reports" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Reports</div></div>
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-broadcasts" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Broadcasts</div></div>
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-investigations" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Investigations</div></div>
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-tools" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools verified</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-reports" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Reports</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-broadcasts" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Broadcasts</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-investigations" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Investigations</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-tools" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools verified</div></div>
                     <a href="#the-workshop" class="text-center bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl py-3 px-2 cursor-pointer"><div id="rep-tools-built" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Tools built <i class="fa-solid fa-arrow-right text-[8px] opacity-60"></i></div></a>
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-offerings" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Offerings</div></div>
-                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-skills" class="font-display text-2xl text-emerald-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Skills</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-offerings" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Offerings</div></div>
+                    <div class="text-center bg-white/5 rounded-xl py-3 px-2"><div id="rep-skills" class="font-display text-2xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">Skills</div></div>
                 </div>
                 <div class="flex items-center gap-2 text-xs mt-4">
-                    <a id="rep-verify" href="#" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Verify identity</a>
+                    <a id="rep-verify" href="#" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition"><i class="fa-solid fa-shield-halved text-cyan-400"></i> Verify identity</a>
                     <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition"><i class="fa-brands fa-x-twitter"></i> @based_vape</a>
                 </div>
                 <p id="rep-disclaimer" class="text-[11px] text-zinc-600 mt-3"></p>
             </div>
         </section>
 
-        <!-- ═══ 3. THE WIRE (live surveillance) ═══ -->
+        <!-- ═══ 3. LIVE INTELLIGENCE FEED ═══ -->
         <section id="the-wire" class="reveal mb-10">
-            <h2 class="font-serif-display text-3xl sm:text-4xl mb-6">The Wire</h2>
-            <p class="text-zinc-500 text-sm mb-6 max-w-2xl">A live tap on Base — chain metrics, capital flows, and every protocol worth watching, refreshed every five minutes straight from DefiLlama and Base's own RPC.</p>
+            <div class="relative rounded-3xl overflow-hidden mb-6 h-28 sm:h-40 bg-zinc-900">
+                <img src="assets/image-20.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-25" onerror="this.remove()">
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-zinc-950/10"></div>
+                <div class="absolute inset-0 flex flex-col justify-end p-6">
+                    <h2 class="font-serif-display text-3xl sm:text-4xl">Live Intelligence Feed</h2>
+                </div>
+            </div>
+            <p class="text-zinc-500 text-sm mb-6 max-w-2xl">Real-time telemetry on Base — chain metrics, capital flows, and every protocol worth watching, refreshed every five minutes straight from DefiLlama and Base's own RPC.</p>
 
             <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div class="glass rounded-2xl p-5">
@@ -184,7 +198,7 @@
 
             <section class="glass rounded-3xl p-6 sm:p-8 mb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Base TVL Trend <span class="text-xs text-zinc-500 font-normal">(real history · DefiLlama)</span></h3>
+                    <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-chart-line text-cyan-400"></i> Base TVL Trend <span class="text-xs text-zinc-500 font-normal">(real history · DefiLlama)</span></h3>
                     <div class="flex gap-1 text-xs" id="tvl-range">
                         <button data-d="30" class="px-2.5 py-1 rounded-lg bg-indigo-600">30d</button>
                         <button data-d="90" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10">90d</button>
@@ -198,7 +212,7 @@
                 <div class="lg:col-span-8">
                     <section class="glass rounded-3xl p-6 sm:p-8 h-full">
                         <div class="flex items-center justify-between mb-5">
-                            <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-emerald-400"></i> Top Base Protocols (live TVL)</h3>
+                            <h3 class="text-xl font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-cyan-400"></i> Top Base Protocols (live TVL)</h3>
                             <button onclick="App.refresh()" class="text-xs px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg flex items-center gap-1.5">
                                 <i class="fa-solid fa-rotate"></i> Refresh
                             </button>
@@ -221,14 +235,15 @@
             </div>
         </section>
 
-        <!-- ═══ 4. CASE FILE (latest investigation spotlight) ═══ -->
-        <section id="case-file" class="reveal glass dossier rounded-3xl p-6 sm:p-8 mb-10 relative overflow-hidden" data-tab="Case File · 02">
-            <div class="absolute -top-16 -right-16 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
-                <h2 class="font-serif-display text-2xl sm:text-3xl flex items-center gap-2"><i class="fa-solid fa-user-secret text-emerald-400 text-xl"></i> Latest Investigation <span class="text-xs text-zinc-500 font-normal font-mono">· autonomous deep-recon</span></h2>
+        <!-- ═══ 4. FEATURED INVESTIGATION ═══ -->
+        <section id="case-file" class="reveal glass dossier rounded-3xl p-6 sm:p-8 mb-10 relative overflow-hidden" data-tab="Intelligence · 02">
+            <div class="absolute -top-16 -right-16 w-56 h-56 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <img src="assets/image-10.jpg" alt="" class="hidden lg:block absolute -right-8 -bottom-10 w-48 opacity-[0.12] pointer-events-none select-none" onerror="this.remove()">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5 relative">
+                <h2 class="font-serif-display text-2xl sm:text-3xl flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-xl"></i> Featured Investigation <span class="text-xs text-zinc-500 font-normal font-mono">· autonomous deep-recon</span></h2>
                 <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 relative">
                 <div id="inv-latest" class="rounded-2xl bg-white/5 p-5">
                     <div class="skeleton h-28 rounded-xl"></div>
                 </div>
@@ -238,11 +253,11 @@
             </div>
         </section>
 
-        <!-- ═══ 4.5 THE WORKSHOP (tools VAPE has built) ═══ -->
-        <section id="the-workshop" class="reveal glass dossier rounded-3xl p-6 sm:p-10 mb-10" data-tab="Case File · 03">
+        <!-- ═══ 4.5 DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
+        <section id="the-workshop" class="reveal glass dossier rounded-3xl p-6 sm:p-10 mb-10" data-tab="Engineering · 03">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
                 <div>
-                    <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">The Workshop</h2>
+                    <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">Development Ledger</h2>
                     <p class="text-zinc-500 text-sm max-w-2xl">VAPE doesn't just investigate — it builds its own tooling. Twice a day, and whenever
                     a human maintainer files a labeled issue, VAPE proposes a real improvement grounded in its own tool-registry gaps,
                     investigation findings, and self-review lessons, writes the actual code, and opens a pull request. Nothing lands in
@@ -260,35 +275,35 @@
                 <div class="skeleton h-24 rounded-xl"></div>
                 <div class="skeleton h-24 rounded-xl"></div>
             </div>
-            <p class="text-[11px] text-zinc-600 mt-4">Live from GitHub's PR search — every card below is a real, clickable pull request, not a curated list. Most cycles find no gap worth a build and produce nothing, by design; that's a sign the system is healthy, not idle.
-            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-emerald-400 hover:underline">See the proposal logic <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
+            <p class="text-[11px] text-zinc-600 mt-4">Sourced live from GitHub's PR search — every card below is a real, clickable pull request, not a curated list. Most cycles find no gap worth a build and produce nothing, by design; that's a sign the system is healthy, not idle.
+            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-cyan-400 hover:underline">View the proposal logic <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
         </section>
 
-        <!-- ═══ 5. RETAIN THE DETECTIVE (hiring) ═══ -->
+        <!-- ═══ 5. ENGAGEMENT OPTIONS (hiring) ═══ -->
         <section id="retain" class="reveal mb-10">
-            <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">Retain the Detective</h2>
-            <p class="text-zinc-500 text-sm mb-6 max-w-2xl">Two ways to hire VAPE, both settling in USDC on Base: pay-per-call over x402 for instant automated checks, or an escrowed ACP job for deeper manual work.</p>
+            <h2 class="font-serif-display text-3xl sm:text-4xl mb-2">Engagement Options</h2>
+            <p class="text-zinc-500 text-sm mb-6 max-w-2xl">Two ways to commission VAPE, both settling in USDC on Base: automated pay-per-call verification over x402, or an escrow-backed ACP engagement for deeper analysis.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- x402 panel -->
                 <section class="glass hud-frame rounded-3xl p-6 sm:p-8 relative">
                     <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold flex items-center gap-2"><i class="fa-solid fa-bolt text-cyan-400"></i> Pay via x402 <span class="text-xs text-zinc-500 font-normal">· instant, automated</span></h3>
+                        <h3 class="text-lg font-semibold flex items-center gap-2"><i class="fa-solid fa-bolt text-cyan-400"></i> Automated Verification <span class="text-xs text-zinc-500 font-normal">· x402, instant</span></h3>
                     </div>
-                    <p class="text-xs text-zinc-500 mb-4">Connect a wallet, sign a gasless USDC authorization, get the result inline — no account, no subscription.</p>
+                    <p class="text-xs text-zinc-500 mb-4">Connect a wallet to authorize a gasless USDC transaction and receive results directly in-browser. No registration or subscription required.</p>
                     <div id="rep-offerings-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-2">
                         <div class="text-zinc-600 text-xs">loading offerings…</div>
                     </div>
-                    <p class="text-[11px] text-zinc-600 mt-3">Click an offering above to pay and get a downloadable case report — needs a connected wallet on Base.</p>
+                    <p class="text-[11px] text-zinc-600 mt-3">Select a service above to authorize payment and receive a downloadable report — requires a connected wallet on Base.</p>
                 </section>
 
                 <!-- ACP panel -->
                 <section class="glass dossier rounded-3xl p-6 sm:p-8" data-tab="ACP · Provider">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold flex items-center gap-2"><i class="fa-solid fa-scale-balanced text-brass-400" style="color:var(--brass)"></i> Hire via ACP <span class="text-xs text-zinc-500 font-normal">· escrowed, manual</span></h3>
+                        <h3 class="text-lg font-semibold flex items-center gap-2"><i class="fa-solid fa-scale-balanced text-brass-400" style="color:var(--brass)"></i> Escrow-Backed Analysis <span class="text-xs text-zinc-500 font-normal">· ACP, manual</span></h3>
                     </div>
-                    <p class="text-xs text-zinc-500 mb-4">For deeper work — full audits, forensics, bulk bundles. Real jobs, real escrow, fulfilled by VAPE's live ACP monitor. Click an offering to hire through Virtuals' real ACP flow.</p>
+                    <p class="text-xs text-zinc-500 mb-4">For deeper engagements — full audits, forensics, bulk bundles. Real jobs, real escrow, fulfilled by VAPE's live ACP monitor. Select a service to commission it through Virtuals' ACP flow.</p>
                     <div id="acp-offerings-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-4">
                         <div class="text-zinc-600 text-xs">loading offerings…</div>
                     </div>
@@ -298,7 +313,7 @@
                         <div>acp client create-job ...  <span class="text-zinc-600"># open + fund escrow</span></div>
                         <div>acp job list --all         <span class="text-zinc-600"># watch it fulfill</span></div>
                     </div>
-                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-4 hover:underline">Full ACP protocol doc <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-4 hover:underline">Full ACP protocol documentation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
                 </section>
             </div>
         </section>
@@ -325,29 +340,29 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
                 <!-- live radar -->
                 <div class="lg:col-span-7">
-                    <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-radar text-cyan-400"></i> Live Radar · highest bounties</h3>
+                    <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-radar text-cyan-400"></i> Active Bounty Programs · highest value</h3>
                     <div id="bounties" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div class="skeleton h-20 rounded-xl"></div>
                         <div class="skeleton h-20 rounded-xl"></div>
                     </div>
-                    <p class="text-[11px] text-zinc-600 mt-3">Pulled hourly from Immunefi, Cantina, Code4rena, Sherlock, HackerOne, HackenProof, Agent Arena, and DefiLlama's hack tracker by <code class="text-zinc-500">agents/scout.py</code>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-emerald-400 hover:underline">Browse the full radar <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
+                    <p class="text-[11px] text-zinc-600 mt-3">Aggregated hourly from Immunefi, Cantina, Code4rena, Sherlock, HackerOne, HackenProof, Agent Arena, and DefiLlama's hack tracker by <code class="text-zinc-500">agents/scout.py</code>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-cyan-400 hover:underline">View the full radar <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></p>
                 </div>
 
                 <!-- hire CTA: deep-dive bounty -->
                 <div class="lg:col-span-5">
                     <div class="dossier rounded-2xl p-5 h-full flex flex-col" data-tab="Premium Engagement" style="border:1px solid rgba(251,191,36,.25)">
-                        <h3 class="text-sm font-semibold uppercase tracking-widest mb-1 flex items-center gap-2" style="color:var(--brass)"><i class="fa-solid fa-magnifying-glass-dollar"></i> Retain VAPE for a Bounty Audit</h3>
+                        <h3 class="text-sm font-semibold uppercase tracking-widest mb-1 flex items-center gap-2" style="color:var(--brass)"><i class="fa-solid fa-magnifying-glass-dollar"></i> Commission a Bounty Audit</h3>
                         <div class="font-display text-3xl mt-1 mb-1" style="color:var(--brass)">$50 <span class="text-sm text-zinc-500 font-sans">USDC</span></div>
-                        <div class="text-xs text-zinc-400 mb-4">24-hour SLA · full recon + Slither static analysis + a frontier-model line-by-line source review (Groq as fallback if the frontier model is unavailable), a real committed report — not a template.</div>
+                        <div class="text-xs text-zinc-400 mb-4">24-hour SLA · full recon, Slither static analysis, and a frontier-model line-by-line source review (Groq as fallback if the frontier model is unavailable) — a real, committed report, not a template.</div>
                         <div class="flex flex-wrap gap-1.5 mb-4 text-[10px]">
                             <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-clock"></i> 24h SLA</span>
                             <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-brain"></i> Frontier model</span>
                             <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-magnifying-glass"></i> Slither + recon</span>
-                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-file-shield"></i> Real committed report</span>
+                            <span class="px-2 py-1 rounded bg-white/5 text-zinc-400"><i class="fa-solid fa-file-shield"></i> Committed report</span>
                         </div>
                         <div class="mt-auto space-y-2">
-                            <button onclick="Hire.openX402('bounty_deep_dive', 50)" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-bolt"></i> Pay via x402</button>
-                            <button onclick="Hire.openAcp('bounty_deep_dive')" class="w-full bg-white/10 hover:bg-white/15 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-scale-balanced"></i> Hire via ACP</button>
+                            <button onclick="Hire.openX402('bounty_deep_dive', 50)" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-bolt"></i> Authorize via x402</button>
+                            <button onclick="Hire.openAcp('bounty_deep_dive')" class="w-full bg-white/10 hover:bg-white/15 transition px-4 py-2.5 rounded-xl font-display text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-scale-balanced"></i> Engage via ACP</button>
                         </div>
                         <p class="text-[10px] text-zinc-600 mt-3">x402 queues a real GitHub Actions job and reports are tracked publicly; ACP opens an escrowed job through Virtuals. Same audit, same report, either rail.</p>
                     </div>
@@ -356,7 +371,7 @@
 
             <!-- VAPE's own audit track record -->
             <div class="mt-8 relative">
-                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-folder-open text-cyan-400"></i> VAPE's Own Audit Track Record</h3>
+                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-3 flex items-center gap-2"><i class="fa-solid fa-folder-open text-cyan-400"></i> Audit Track Record</h3>
                 <div id="bcc-audit-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                     <div class="skeleton h-24 rounded-xl"></div>
                     <div class="skeleton h-24 rounded-xl"></div>
@@ -365,42 +380,43 @@
             </div>
         </section>
 
-        <!-- ═══ 6. RUN A SCAN (free preview) ═══ -->
-        <section id="run-a-scan" class="reveal glass rounded-3xl p-6 sm:p-8 mb-10">
-            <h2 class="font-serif-display text-2xl sm:text-3xl mb-2 flex items-center gap-2"><i class="fa-solid fa-crosshairs text-emerald-400 text-xl"></i> Run a Scan</h2>
-            <p class="text-xs text-zinc-500 mb-4">Paste a Base token contract — runs a real honeypot/tax/liquidity scan live in your browser (GoPlus + DexScreener). Free, no wallet needed. No simulation.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-3">
+        <!-- ═══ 6. TOKEN SECURITY ASSESSMENT (free preview) ═══ -->
+        <section id="run-a-scan" class="reveal glass rounded-3xl p-6 sm:p-8 mb-10 relative overflow-hidden">
+            <img src="assets/image-11.jpg" alt="" class="hidden lg:block absolute -right-6 -top-8 w-40 opacity-[0.10] pointer-events-none select-none" onerror="this.remove()">
+            <h2 class="font-serif-display text-2xl sm:text-3xl mb-2 flex items-center gap-2 relative"><i class="fa-solid fa-crosshairs text-cyan-400 text-xl"></i> Token Security Assessment</h2>
+            <p class="text-xs text-zinc-500 mb-4 relative">Enter a Base token contract to run a real honeypot/tax/liquidity assessment live in your browser (GoPlus + DexScreener). Free, no wallet required. No simulation.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-3 relative">
                 <input id="hunt-target" type="text" placeholder="0x… Base token contract"
-                    class="bg-zinc-900/80 border border-white/10 focus:border-emerald-500 outline-none p-3 rounded-xl text-sm">
+                    class="bg-zinc-900/80 border border-white/10 focus:border-cyan-500 outline-none p-3 rounded-xl text-sm">
                 <select id="hunt-chain" class="bg-zinc-900/80 border border-white/10 p-3 rounded-xl text-sm">
                     <option value="8453">Base</option>
                     <option value="1">Ethereum</option>
                     <option value="42161">Arbitrum</option>
                 </select>
-                <button onclick="App.hunt()" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass"></i> Scan
+                <button onclick="App.hunt()" class="bg-cyan-600 hover:bg-cyan-500 px-5 py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Assess
                 </button>
             </div>
-            <div id="hunt-result" class="mt-5 text-sm"></div>
+            <div id="hunt-result" class="mt-5 text-sm relative"></div>
         </section>
 
-        <!-- ═══ 7. YOUR CASE FILE (wallet profile) ═══ -->
+        <!-- ═══ 7. PORTFOLIO INTELLIGENCE (wallet profile) ═══ -->
         <section id="your-case-file" class="reveal glass hud-frame rounded-3xl p-6 sm:p-8 mb-10 relative">
             <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
-            <h2 class="font-serif-display text-2xl sm:text-3xl mb-2 flex items-center gap-2"><i class="fa-solid fa-id-card-clip text-cyan-400 text-xl"></i> Your Case File</h2>
-            <p class="text-xs text-zinc-500 mb-5">Connect a wallet to open a live read of your Base holdings — native ETH plus every ERC-20 and NFT Alchemy has indexed for your address, priced and charted, with 24h P&amp;L, an estimated cost-basis breakdown, and a running history of every VAPE case you've hired. Nothing stored server-side; case history lives only in this browser.</p>
+            <h2 class="font-serif-display text-2xl sm:text-3xl mb-2 flex items-center gap-2"><i class="fa-solid fa-id-card-clip text-cyan-400 text-xl"></i> Portfolio Intelligence</h2>
+            <p class="text-xs text-zinc-500 mb-5">Connect a wallet to access a live read of your Base holdings — native ETH plus every ERC-20 and NFT Alchemy has indexed for your address, priced and charted, with 24h P&amp;L, an estimated cost-basis breakdown, and a running history of every VAPE engagement. Nothing stored server-side; history lives only in this browser.</p>
             <div id="profile-root">
                 <div class="text-center py-10 text-zinc-500 text-sm">
                     <i class="fa-solid fa-wallet text-2xl mb-3 opacity-50"></i>
-                    <div>Connect a wallet above to open your case file.</div>
+                    <div>Connect a wallet above to access your portfolio.</div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══ 8. THE ARCHIVE (Intel Explorer) ═══ -->
+        <!-- ═══ 8. INVESTIGATION ARCHIVE (Intel Explorer) ═══ -->
         <section id="the-archive" class="reveal glass rounded-3xl p-6 sm:p-8 mb-10">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
-                <h2 class="font-serif-display text-2xl sm:text-3xl flex items-center gap-2"><i class="fa-solid fa-folder-tree text-emerald-400 text-xl"></i> The Archive <span class="text-xs text-zinc-500 font-normal font-mono">· every finding linkable to source</span></h2>
+                <h2 class="font-serif-display text-2xl sm:text-3xl flex items-center gap-2"><i class="fa-solid fa-folder-tree text-cyan-400 text-xl"></i> Investigation Archive <span class="text-xs text-zinc-500 font-normal font-mono">· every finding linkable to source</span></h2>
                 <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs">
                     <button data-tab="investigations" class="px-3 py-1.5 rounded-lg bg-indigo-600">Investigations <span id="c-investigations" class="opacity-60"></span></button>
                     <button data-tab="reports" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Reports <span id="c-reports" class="opacity-60"></span></button>
@@ -422,7 +438,7 @@
         <section class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div class="lg:col-span-8 space-y-6">
                 <section class="glass rounded-3xl p-6 sm:p-8">
-                    <h3 class="text-lg font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-file-lines text-emerald-400"></i> Recent Grounded Reports</h3>
+                    <h3 class="text-lg font-semibold flex items-center gap-2 mb-5"><i class="fa-solid fa-file-lines text-cyan-400"></i> Recent Reports</h3>
                     <div id="reports" class="space-y-2">
                         <div class="skeleton h-10 rounded-lg"></div>
                         <div class="skeleton h-10 rounded-lg"></div>
@@ -431,15 +447,15 @@
             </div>
             <div class="lg:col-span-4 space-y-6">
                 <section class="glass rounded-3xl p-6 sm:p-8">
-                    <h3 class="text-lg font-semibold mb-4">Agent Status</h3>
+                    <h3 class="text-lg font-semibold mb-4">System Status</h3>
                     <div class="space-y-3 text-sm">
                         <div class="flex items-center justify-between">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-user-secret text-indigo-400"></i> VAPE · Detective</span>
-                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></span>Active</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-user-secret text-indigo-400"></i> VAPE · Core Analysis</span>
+                            <span class="text-emerald-500 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full live-dot"></span>Active</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-skull-crossbones text-rose-400"></i> HACK · Red Team</span>
-                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></span>Active</span>
+                            <span class="text-emerald-500 flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full live-dot"></span>Active</span>
                         </div>
                         <div class="border-t border-white/10 pt-3 text-zinc-400 text-xs leading-relaxed">
                             <span id="agent-status-offerings">—</span> offerings live · ERC-8004 #54988 · Base
@@ -450,10 +466,10 @@
                 <section class="glass rounded-3xl p-6 sm:p-8">
                     <h3 class="text-lg font-semibold mb-4">Links</h3>
                     <div class="space-y-2 text-sm">
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-brands fa-github w-4"></i> Repository</a>
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-solid fa-file-lines w-4"></i> All Reports</a>
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/docs" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-solid fa-book w-4"></i> Docs</a>
-                        <a href="https://x.com/based_vape" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-emerald-400"><i class="fa-brands fa-x-twitter w-4"></i> @based_vape</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-cyan-400"><i class="fa-brands fa-github w-4"></i> Repository</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-cyan-400"><i class="fa-solid fa-file-lines w-4"></i> All Reports</a>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/docs" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-cyan-400"><i class="fa-solid fa-book w-4"></i> Docs</a>
+                        <a href="https://x.com/based_vape" target="_blank" class="flex items-center gap-2 text-zinc-300 hover:text-cyan-400"><i class="fa-brands fa-x-twitter w-4"></i> @based_vape</a>
                     </div>
                 </section>
             </div>
@@ -474,10 +490,10 @@
       change, or you'll chase "it's not fixed" reports that are actually
       just stale caches.
     -->
-    <script src="assets/app.js?v=4"></script>
-    <script type="module" src="assets/wallet.js?v=4"></script>
-    <script type="module" src="assets/profile.js?v=4"></script>
-    <script type="module" src="assets/report.js?v=4"></script>
-    <script type="module" src="assets/hire.js?v=4"></script>
+    <script src="assets/app.js?v=5"></script>
+    <script type="module" src="assets/wallet.js?v=5"></script>
+    <script type="module" src="assets/profile.js?v=5"></script>
+    <script type="module" src="assets/report.js?v=5"></script>
+    <script type="module" src="assets/hire.js?v=5"></script>
 </body>
 </html>

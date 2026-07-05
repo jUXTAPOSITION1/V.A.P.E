@@ -1,4 +1,4 @@
-// VAPE wallet profile ("Your Case File"). Two data paths:
+// VAPE wallet profile ("Portfolio Intelligence"). Two data paths:
 //  - Worker path (window.WORKER_BASE set, vape-x402 deployed with an Alchemy
 //    key): full auto-discovered ETH + ERC-20 balances via /portfolio, plus
 //    NFT holdings via /nfts — no curated list needed, Alchemy has already
@@ -190,7 +190,7 @@ const Profile = {
 
     async render(address) {
         const root = document.getElementById('profile-root');
-        root.innerHTML = `<div class="text-center py-8 text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Reading your case file from Base…</div>`;
+        root.innerHTML = `<div class="text-center py-8 text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Reading your portfolio from Base…</div>`;
         let holdings, nfts;
         try {
             [holdings, nfts] = await Promise.all([this.loadHoldings(address), this.loadNfts(address)]);
@@ -226,7 +226,7 @@ const Profile = {
                     `}
                 </div>
                 <div class="glass rounded-2xl p-5">
-                    <div class="text-zinc-400 text-xs uppercase tracking-wider">Case history</div>
+                    <div class="text-zinc-400 text-xs uppercase tracking-wider">Engagement history</div>
                     <div class="stat font-display text-3xl text-cyan-400 mt-1">${cases.length}</div>
                     <div class="text-[11px] text-zinc-600 mt-2">offerings hired by this wallet, saved on this device</div>
                 </div>
@@ -269,7 +269,7 @@ const Profile = {
                 <div id="profile-costbasis"></div>
             </div>
             <div class="mb-6">
-                <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">Case history</div>
+                <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">Engagement history</div>
                 <div id="profile-cases"></div>
             </div>
             <div>
@@ -354,7 +354,7 @@ const Profile = {
         const ctx = document.getElementById('profileDonut');
         if (!ctx || typeof Chart === 'undefined') return;
         if (this._chart) this._chart.destroy();
-        const colors = ['#22d3ee', '#10b981', '#c9a86a', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa', '#34d399', '#f472b6', '#60a5fa'];
+        const colors = ['#22d3ee', '#c9a86a', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa', '#f472b6', '#60a5fa', '#10b981', '#94a3b8'];
         const OTHER_COLOR = '#52525b';
         const sorted = holdings.filter(h => h.valueUsd > 0).sort((a, b) => b.valueUsd - a.valueUsd);
         if (!sorted.length) { ctx.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No priced holdings to chart yet.</div>'; return; }
@@ -433,7 +433,7 @@ const Profile = {
         const el = document.getElementById('profile-cases');
         if (!el) return;
         if (!cases.length) {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">No cases hired yet from this wallet on this device — pay-and-run an x402 offering above in "Retain the Detective" and it\'ll show up here.</div>';
+            el.innerHTML = '<div class="text-zinc-500 text-sm">No engagements yet from this wallet on this device — authorize an x402 service above in "Engagement Options" and it\'ll show up here.</div>';
             return;
         }
         el.innerHTML = cases.slice(0, 50).map((c, i) => {
@@ -529,7 +529,7 @@ const Profile = {
         document.getElementById('profile-root').innerHTML = `
             <div class="text-center py-10 text-zinc-500 text-sm">
                 <i class="fa-solid fa-wallet text-2xl mb-3 opacity-50"></i>
-                <div>Connect a wallet above to open your case file.</div>
+                <div>Connect a wallet above to access your portfolio.</div>
             </div>`;
     },
 };
