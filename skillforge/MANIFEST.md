@@ -26,6 +26,9 @@ A skill isn't "learned" until it's reproducible from this repo with one command.
 - `memory/findings.jsonl`  — real vulns/audits/CVEs: {ts, source, severity, target, summary, ref}
 - `memory/skills.jsonl`    — learned skills: {ts, skill, tier, tools[], playbook}
 - `memory/lessons.jsonl`   — what worked/failed: {ts, action, outcome, bounty_usd, note}
+- `memory/build_log.jsonl` — how-and-why build patterns/gotchas, written as instructionals
+  for future builds (not just a changelog) — see `memory/BUILD_LEDGER.md`, append via
+  `agents/build_ledger.py`
 - `memory/INDEX.md`        — human rollup, regenerated each cycle
 
 ## Self-improvement scoring (each cycle appends to lessons.jsonl)
