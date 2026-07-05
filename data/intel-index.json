@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-05T20:18:52Z",
+  "generated": "2026-07-05T22:03:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 315,
+    "reports": 316,
     "reports_by_type": {
-      "bounty": 172,
+      "bounty": 173,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 31,
-    "investigations": 36,
+    "investigations": 37,
     "tools": 15,
     "tools_verified": 14,
     "skills": 9
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260705-201852-0x454777B9.md",
+      "file": "investigation-20260705-220341-0x454777B9.md",
       "title": "Investigation \u2014 OpenAI",
       "symbol": "OpenAI",
-      "date": "2026-07-05T20:18:52Z",
+      "date": "2026-07-05T22:03:41Z",
       "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "55",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-201852-0x454777B9.md"
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-220341-0x454777B9.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260705_201527.md",
+      "file": "bounty_report_20260705_220324.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-05T20:15:27Z",
+      "date": "2026-07-05T22:03:24Z",
       "threat": null,
-      "summary": "Base mover: OpenAI / USDC 0.01% +99666% 24h (liq $1121717.908) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +853% 24h (liq $26383.16) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2704625.2868) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_201527.md",
-      "bytes": 10708
+      "summary": "Base mover: OpenAI / USDC 0.01% +99264% 24h (liq $1123530.4775) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +3818% 24h (liq $53414.3429) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_220324.md",
+      "bytes": 12232
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260705-220341-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "date": "2026-07-05T22:03:41Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-220341-0x454777B9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260705-201852-0x454777B9.md",
@@ -490,6 +503,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260705_220324.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-05T22:03:24Z",
+      "threat": null,
+      "summary": "Base mover: OpenAI / USDC 0.01% +99264% 24h (liq $1123530.4775) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +3818% 24h (liq $53414.3429) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_220324.md",
+      "bytes": 12232
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1138,17 +1162,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_000559.md",
       "bytes": 5147
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260630_221559.md",
-      "title": "VAPE Report - 20260630_221559",
-      "date": "2026-06-30T22:15:59Z",
-      "threat": null,
-      "summary": "Based on the provided data, the following protocols show significant changes in their TVL (Total Value Locked) over the past 24 hours:",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260630_221559.md",
-      "bytes": 6939
     }
   ],
   "broadcasts": [
@@ -1448,7 +1461,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48242042",
+      "version": "48249150",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1458,7 +1471,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.54 eth_dom 9.5 mcap_chg_24h -0.91",
+      "version": "btc_dom 55.58 eth_dom 9.46 mcap_chg_24h -0.39",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
