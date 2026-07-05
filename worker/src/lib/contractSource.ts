@@ -14,6 +14,12 @@ export interface ContractSource {
   compiler?: string | null;
   proxy?: boolean;
   implementation?: string | null;
+  // Raw verified source (may be multi-file JSON-wrapped by Etherscan for
+  // standard-json-input contracts) — additive field, existing callers only
+  // ever read the fields above so this is safe. Mirrors
+  // agents/data_fetchers.py::get_contract_source()'s source_code field,
+  // used by the safety_preflight offering's frontier-LLM quick read.
+  source_code?: string | null;
 }
 
 export async function getContractSource(address: string, chainId: number, apiKey?: string): Promise<ContractSource> {
@@ -33,6 +39,7 @@ export async function getContractSource(address: string, chainId: number, apiKey
         compiler: res.CompilerVersion ?? null,
         proxy: res.Proxy === "1",
         implementation: res.Implementation || null,
+        source_code: res.SourceCode || null,
       };
     }
     return d;

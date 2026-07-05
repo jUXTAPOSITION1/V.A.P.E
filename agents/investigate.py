@@ -107,6 +107,7 @@ def dexscreener(address):
     if not pairs:
         return {}
     p = max(pairs, key=lambda x: (x.get("liquidity") or {}).get("usd", 0) or 0)
+    info = p.get("info") or {}
     return {
         "symbol": (p.get("baseToken") or {}).get("symbol"),
         "name": (p.get("baseToken") or {}).get("name"),
@@ -116,6 +117,12 @@ def dexscreener(address):
         "change_24h_pct": (p.get("priceChange") or {}).get("h24"),
         "pair_created_ms": p.get("pairCreatedAt"),
         "dex": p.get("dexId"),
+        # Raw declared URLs (not just the has-any-socials boolean
+        # agents/token_scan.py computes) — used by acp_fulfill.py's
+        # safety_preflight to actually visit these, not just count them.
+        "socials": [{"type": s.get("type"), "url": s.get("url")}
+                    for s in (info.get("socials") or []) if s.get("url")],
+        "websites": [{"url": w.get("url")} for w in (info.get("websites") or []) if w.get("url")],
     }
 
 
@@ -440,6 +447,37 @@ def score(gp, dex, onchain, verif, web_rep=None):
     s = max(0, min(100, s))
     verdict = "PROCEED" if s >= 80 else ("CAUTION" if s >= 50 else "REJECT")
     return s, verdict, reasons, positive_signals
+
+
+# ── ephemeral assessment (no persistence) ───────────────────────────────────
+# Same recon + scoring pipeline as investigate() (steps 1-3 of this module's
+# own docstring), minus the report/ledger/memory/catalog writes — used by
+# agents/acp_fulfill.py's paid safety_preflight offering so a customer's
+# on-demand call reuses VAPE's real heuristic engine (score, meme-factory
+# detection, hack correlation, web-reputation search) without polluting the
+# free investigation ledger/fail-caution-pass lists a paid, on-demand call
+# has no business writing to.
+def quick_assess(address, chain="8453"):
+    address = address.strip()
+    if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
+        return {"error": f"invalid address: {address}"}
+    gp = goplus_security(address, chain)
+    dex = dexscreener(address)
+    onchain = onchain_presence(address)
+    verif = contract_verification(address, chain)
+    corr = hack_correlation(gp)
+    prelim_sym = dex.get("symbol") or verif.get("name") or "unknown"
+    web_rep = web_reputation_check(prelim_sym, address)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep)
+    cname = (verif.get("name") or "").lower()
+    is_factory_template = any(p in cname for p in MEME_FACTORY_NAME_PATTERNS)
+    return {
+        "address": address, "chain": chain, "symbol": prelim_sym,
+        "score": s, "verdict": verdict, "reasons": reasons, "positive_signals": positive_signals,
+        "gp": gp, "dex": dex, "onchain": onchain, "verif": verif,
+        "hack_correlation": corr, "web_reputation": web_rep,
+        "meme_factory_template": is_factory_template,
+    }
 
 
 # ── target selection ──────────────────────────────────────────────────────────

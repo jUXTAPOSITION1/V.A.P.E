@@ -45,6 +45,14 @@ IDENTITY = {
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
         "exploit_check", "safety_preflight", "market_intel"}
+# Zero-LLM deliverables specifically. safety_preflight stays in AUTO above
+# (the monitor still auto-prices/submits it with no triage wake — see
+# scripts/acp-monitor/HANDLER_BRIEF.md), but its own deliverable now
+# includes a real frontier-LLM quick source read
+# (agents/acp_fulfill.py::_ai_quick_review), so it's excluded here. Same
+# "auto but not zero-LLM" split already established for bounty_deep_dive's
+# relationship to X402 below.
+ZERO_LLM = AUTO - {"safety_preflight"}
 # Payable via the x402 worker specifically — must match worker/src/index.ts's
 # OFFERING_PRICES keys (the synchronous AUTO set) plus bounty_deep_dive, which
 # has its own async /scan/bounty_deep_dive route (dispatches a real GitHub
@@ -59,10 +67,12 @@ OFFERINGS = [
     ("wallet_recon", 0.03, "Address profiling: holdings, patterns, risk flags"),
     ("rug_pull_alert", 0.03, "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags"),
     ("tx_decode", 0.05, "Plain-language tx decode + risk flags for any Base tx hash"),
-    ("safety_preflight", 0.05, "All-in-one pre-trade GO/CAUTION/NO_GO verdict"),
     ("whale_watch", 0.10, "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow"),
     ("community_intel_broadcast", 0.10, "6-hourly consolidated security+market intel broadcast"),
     ("market_intel", 0.15, "Real-time price/TVL/liquidity + actionable signal"),
+    ("safety_preflight", 0.35, "VAPE's deepest instant verdict: weighted CertiK-style score, "
+     "meme-factory-template detection, recent-hack correlation, public web-reputation search, "
+     "a live check of declared socials, and a frontier-LLM quick source read"),
     ("bulk_safety_bundle", 0.50, "Scan 5-25 tokens in one job, 40% off"),
     ("deep_contract_audit", 1.00, "slither+aderyn+mythril severity-rated audit + 0-100 score"),
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
@@ -232,7 +242,7 @@ def main():
         },
         "capabilities": {
             "offerings_live": len(OFFERINGS),
-            "auto_fulfilled_zero_llm": sorted(AUTO),
+            "auto_fulfilled_zero_llm": sorted(ZERO_LLM),
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
                  "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant"}

@@ -30,6 +30,11 @@ npx wrangler secret put CDP_API_KEY_SECRET
 npx wrangler secret put ALCHEMY_API_KEY     # optional — powers /portfolio, /nfts, /network-status
 npx wrangler secret put COINGECKO_API_KEY   # optional — powers /prices, and required for /cost-basis
 npx wrangler secret put GH_DISPATCH_TOKEN   # optional — powers /scan/bounty_deep_dive (see below)
+npx wrangler secret put TAVILY_API_KEY      # optional — safety_preflight's web-reputation search (falls back to keyless DDG)
+npx wrangler secret put BRAVE_API_KEY       # optional — safety_preflight's web-reputation search, 2nd choice after Tavily
+npx wrangler secret put FIRECRAWL_API_KEY   # optional — safety_preflight's declared-socials scrape (falls back to a keyless fetch)
+npx wrangler secret put GEMINI_API_KEY      # optional — safety_preflight's frontier-LLM quick source read (falls back to Groq)
+npx wrangler secret put GROQ_API_KEY        # optional — safety_preflight's LLM fallback if Gemini has no key/errors
 ```
 
 ### Deploy
@@ -93,6 +98,18 @@ Unpaid, no-x402-gate routes back the site's wallet profile ("Your Case File") an
 `/portfolio`, `/nfts`, and `/network-status` are cached at the edge for 20–60s (the Web Cache API, via Hono's built-in `cache` middleware — Cloudflare's `caches.open()` on Workers, Deno's own on the fallback) — Alchemy usage is metered, and `/network-status` in particular is identical for every visitor at a given moment, so this absorbs repeat requests instead of burning a fresh Alchemy call each time. Error responses (400/502/503) are never cached.
 
 Alchemy-backed routes need `ALCHEMY_API_KEY` (a free-tier [Alchemy](https://dashboard.alchemy.com) app scoped to Base Mainnet); CoinGecko-backed routes need `COINGECKO_API_KEY` (a free [CoinGecko Demo API key](https://www.coingecko.com/en/api) — signup required, no payment). Every route here returns `503` if its required key(s) aren't set — the site (`docs/assets/app.js`/`profile.js`) treats that as "not deployed/configured yet" and transparently falls back to its direct public-API path (except `/cost-basis`, which has no keyless equivalent and just shows as unavailable), so the site works with or without this worker running.
+
+## `safety_preflight` — VAPE's deepest instant offering ($0.35)
+
+Every other `/scan/*` route is a thin wrapper over `scan.ts`/`contractSource.ts`. `safety_preflight` is the exception: it runs the real heuristic engine `agents/investigate.py` uses for every FREE VAPE investigation (`src/lib/investigateLite.ts`'s `score()` — a weighted CertiK-style rubric, meme-factory-template detection, recent-hack correlation), plus two things nothing else in the catalog does:
+
+- **Public web-reputation search** (`src/lib/webResearch.ts`) — a real search for `"{symbol}" {address} rug pull OR scam OR honeypot OR exploit`, Tavily → Brave → keyless DuckDuckGo fallback, escalating the first unambiguous hit to a real page scrape (Firecrawl → keyless fetch fallback).
+- **A live check of the project's own declared socials** — actually visits (scrapes) the website/Telegram/X URLs DexScreener reports, instead of only checking the array is non-empty like every other offering's `has_declared_socials` boolean. This is reachability, not a follower-count/account-age check — X's/Telegram's real metrics need an official paid API this repo doesn't hold.
+- **A frontier-LLM quick read of the actual verified source** (`src/lib/llm.ts`) — Gemini 2.5 Pro, Groq fallback, same framing as the $50 `bounty_deep_dive` audit but a much smaller prompt/output budget matched to this offering's synchronous, instant-tier nature.
+
+All three degrade gracefully exactly like `ETHERSCAN_API_KEY` above — without `TAVILY_API_KEY`/`BRAVE_API_KEY`, `FIRECRAWL_API_KEY`, and `GEMINI_API_KEY`/`GROQ_API_KEY` set, the corresponding section of the response reports `available: false` / `checked: 0` with an honest note rather than a fabricated result, and the score/verdict still reflects real GoPlus/DexScreener/Etherscan/Base-RPC data either way.
+
+`agents/acp_fulfill.py::_safety_preflight()` (via `agents/investigate.py::quick_assess()`) is the source of truth this mirrors field-for-field — see that module's docstrings for the exact same pipeline on the ACP side.
 
 ## CI
 
