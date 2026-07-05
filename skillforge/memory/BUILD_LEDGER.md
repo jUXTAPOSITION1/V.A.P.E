@@ -12,6 +12,15 @@ This is deliberately separate from the rest of `skillforge/memory/`:
 | `findings.jsonl` | What did VAPE discover? (a vulnerability, an anomaly) |
 | `lessons.jsonl` | Did a specific build attempt succeed or fail? |
 | **`build_log.jsonl`** | **How do you actually build this kind of thing, and why does it work?** |
+| `skills/coding-*.md` | Full how-to curricula (a whole workflow, not one atomic pattern) — see below |
+
+A `build_log` entry is one atomic pattern or gotcha. For a full worked
+curriculum on a whole workflow — writing a new agent, building the frontend,
+shipping a change end to end, verifying a change — see the dedicated
+`skillforge/skills/coding-*.md` files (same format as this repo's existing
+security-recon skills, registered in `skills.jsonl` under tier `coding`).
+Start there for a first read; use `build_log.jsonl` to look up a specific
+gotcha once you already know roughly what you're building.
 
 ## Why this exists
 
