@@ -8,6 +8,8 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEM = os.path.join(ROOT, "skillforge", "memory")
 SKILLS = os.path.join(ROOT, "skillforge", "skills")
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
 def now(): return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -45,13 +47,20 @@ def main():
 
     regenerate_index(reg, findings, skills, lessons)
 
-    key = os.getenv("GROQ_API_KEY")
-    if not key:
-        print("[synthesize] no GROQ_API_KEY — index regenerated, skipping distillation")
+    # Was a direct Groq SDK call with no fallback — every other LLM call site
+    # in this repo goes through agents.llm.ask()'s multi-provider chain
+    # (Groq -> Cerebras -> OpenRouter -> Gemini -> GitHub Models -> Together),
+    # so a Groq-only outage silently skipped distillation here while every
+    # other job degraded gracefully. Real rate-limit audit evidence: ~3.5% of
+    # hourly bounty-cycle runs already hit "Rate limit persistent" on Groq
+    # alone (see skillforge/memory/build_log.jsonl), so a single-provider
+    # dependency here isn't theoretical.
+    try:
+        from agents.llm import ask as llm_ask
+    except Exception as e:
+        print(f"[synthesize] agents.llm unavailable ({e}) — index regenerated, skipping distillation")
         return
     try:
-        from groq import Groq
-        client = Groq(api_key=key)
         verified = [t['name'] for tier in reg['tiers'].values() for t in tier if t.get('status')=='verified']
         sys_p = ("You are HACK, VAPE's white-hat security specialist. Distill ONE concrete, "
                  "reproducible skill playbook from the REAL data provided. Never invent tools, "
@@ -62,11 +71,9 @@ def main():
                f"Recent real findings (last 30): {json.dumps(findings[-30:])[:4000]}\n"
                f"Recent lessons: {json.dumps(lessons[-20:])[:1500]}\n"
                "Produce the most valuable NEW or UPDATED playbook given this real data.")
-        resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[{"role":"system","content":sys_p},{"role":"user","content":usr}],
-            temperature=0.4, max_tokens=2048)
-        content = resp.choices[0].message.content.strip()
+        content, provider = llm_ask(sys_p, usr, tier="deep", temperature=0.4, max_tokens=2048)
+        content = content.strip()
+        print(f"[synthesize] distilled via {provider}")
         # derive filename from first heading
         first = next((l for l in content.splitlines() if l.startswith("#")), "# distilled-skill")
         slug = "".join(c.lower() if c.isalnum() else "-" for c in first.lstrip("# ").strip())[:50].strip("-")

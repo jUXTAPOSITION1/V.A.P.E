@@ -126,20 +126,36 @@ def onchain_presence(address):
 
 
 def contract_verification(address, chain="8453"):
-    key = os.getenv("ETHERSCAN_API_KEY")
-    if not key:
-        return {"checked": False, "note": "no ETHERSCAN_API_KEY"}
-    d = _get(f"https://api.etherscan.io/v2/api?chainid={chain}&module=contract"
-             f"&action=getsourcecode&address={address}&apikey={key}")
-    try:
-        r = (d.get("result") or [{}])[0]
-        return {"checked": True, "verified": bool(r.get("SourceCode")),
-                "name": r.get("ContractName") or None,
-                "compiler": r.get("CompilerVersion") or None,
-                "proxy": r.get("Proxy") == "1",
-                "implementation": r.get("Implementation") or None}
-    except Exception:
-        return {"checked": True, "verified": None}
+    # Was its own uncached _get() call to the same Etherscan endpoint
+    # data_fetchers.get_contract_source() already hits with a 1h cache —
+    # every hourly `--auto` run, every async deep-dive, and every weekly/
+    # monthly review-ledger re-check was paying for a duplicate live call.
+    # Route through the cached helper instead and remap its field names to
+    # this function's existing return shape (checked/name/... — several
+    # callers below depend on those exact keys).
+    if not DF:
+        key = os.getenv("ETHERSCAN_API_KEY")
+        if not key:
+            return {"checked": False, "note": "no ETHERSCAN_API_KEY"}
+        d = _get(f"https://api.etherscan.io/v2/api?chainid={chain}&module=contract"
+                 f"&action=getsourcecode&address={address}&apikey={key}")
+        try:
+            r = (d.get("result") or [{}])[0]
+            return {"checked": True, "verified": bool(r.get("SourceCode")),
+                    "name": r.get("ContractName") or None,
+                    "compiler": r.get("CompilerVersion") or None,
+                    "proxy": r.get("Proxy") == "1",
+                    "implementation": r.get("Implementation") or None}
+        except Exception:
+            return {"checked": True, "verified": None}
+    r = DF.get_contract_source(address, chainid=chain)
+    if not isinstance(r, dict) or r.get("error"):
+        return {"checked": False, "note": (r or {}).get("note", "no ETHERSCAN_API_KEY")}
+    return {"checked": True, "verified": r.get("verified"),
+            "name": r.get("contract_name"),
+            "compiler": r.get("compiler"),
+            "proxy": r.get("proxy"),
+            "implementation": r.get("implementation")}
 
 
 def hack_correlation(gp):
