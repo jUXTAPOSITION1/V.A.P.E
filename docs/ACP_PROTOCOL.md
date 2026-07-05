@@ -42,10 +42,10 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | wallet_recon | 0.03 | 5m | recon/wallet_trace.sh / base_rpc |
 | rug_pull_alert | 0.03 | 5m | token_safety.sh (mint/owner) |
 | tx_decode | 0.05 | 5m | contract_recon (abi) + RPC |
-| safety_preflight | 0.05 | 5m | token_safety + contract_recon |
 | whale_watch | 0.10 | 5m | wallet_trace + market_data |
 | community_intel_broadcast | 0.10 | 5m | intel/broadcasts + market_data |
 | market_intel | 0.15 | 5m | recon/market_data.sh |
+| safety_preflight | 0.35 | 5m | `agents/investigate.py`'s real heuristic engine (weighted score, meme-factory detection, hack correlation, web-reputation search) + a live check of declared socials + a frontier-LLM quick source read |
 | bulk_safety_bundle | 0.50 | 15m | token_safety × N |
 | deep_contract_audit | 1.00 | 30m | slither + aderyn + mythril |
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |

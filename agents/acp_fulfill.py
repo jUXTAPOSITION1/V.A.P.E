@@ -18,9 +18,11 @@ import sys
 try:
     from agents.token_scan import scan as token_scan
     from agents.data_fetchers import build_market_context, get_contract_source
+    from agents import investigate
 except Exception:  # when invoked from inside agents/
     from token_scan import scan as token_scan
     from data_fetchers import build_market_context, get_contract_source
+    import investigate
 
 
 def _addr(req):
@@ -118,21 +120,138 @@ def _market_intel(req):
             "global_market_cap_change_24h_pct": glob_m.get("mcap_change_24h_pct")}
 
 
+def _verify_socials(dex):
+    """Best-effort: actually VISIT each DexScreener-declared website/social
+    URL via skillforge/research.py's scrape router (Firecrawl -> Bright Data
+    -> Apify -> keyless fetch), instead of only checking the array is
+    non-empty (see token_scan.py's has_declared_socials for that lighter
+    boolean-only check every free/auto offering already reports). This is
+    NOT a follower-count/account-age check — X's/Telegram's real metrics
+    need an official paid API VAPE doesn't hold — it's a real, disclosed
+    "did we actually reach this and get a real page back" signal, which is
+    strictly more than a boolean.
+    """
+    declared = (dex.get("websites") or []) + (dex.get("socials") or [])
+    if not declared:
+        return {"declared_count": 0, "checked": []}
+    try:
+        from skillforge.research import scrape as web_scrape
+    except Exception:
+        return {"declared_count": len(declared), "checked": [], "note": "scrape unavailable this cycle"}
+    checked = []
+    # Cap at 3 — cost/latency proportionate to safety_preflight's instant,
+    # synchronous nature, and shared scrape quota (skillforge/research.py's
+    # MONTHLY_QUOTA) is spent across every VAPE workflow, not just this one.
+    for item in declared[:3]:
+        url = item.get("url")
+        if not url:
+            continue
+        entry = {"type": item.get("type", "website"), "url": url}
+        try:
+            res = web_scrape(url)
+            raw = res.get("raw")
+            content = None
+            if isinstance(raw, dict):
+                content = raw.get("markdown") or raw.get("content") or raw.get("text")
+            elif isinstance(raw, list) and raw and isinstance(raw[0], dict):
+                content = raw[0].get("markdown") or raw[0].get("text") or raw[0].get("content")
+            if not content:
+                content = res.get("content")  # keyless-fetch shape
+            reachable = bool(isinstance(content, str) and content.strip())
+            entry["reachable"] = reachable
+            if reachable:
+                entry["excerpt"] = " ".join(content.split())[:200]
+        except Exception as e:
+            entry["reachable"] = False
+            entry["error"] = str(e)
+        checked.append(entry)
+    return {"declared_count": len(declared), "checked": checked}
+
+
+_AI_QUICK_REVIEW_SYSTEM = (
+    "You are VAPE, an autonomous on-chain security reviewer, giving a QUICK paid "
+    "pre-trade read (not the full $50 24h deep-dive audit). Base every claim on "
+    "the actual verified source given below — never invent function names or "
+    "behavior you weren't shown. In 3-5 sentences, name any real red flags across "
+    "reentrancy, access control, oracle trust, proxy/upgrade risk, and honeypot/rug "
+    "mechanics — or state plainly that nothing stood out in a quick read. This is a "
+    "fast signal, not a substitute for a full audit; do not fabricate confidence."
+)
+
+
+def _ai_quick_review(a, chain, assess, src):
+    """Frontier-LLM quick read of the actual verified source — same provider
+    chain as the $50 deep-dive (agents/llm.ask_frontier: Gemini 2.5 Pro,
+    Groq fallback), but a far smaller prompt/output budget matched to
+    safety_preflight's synchronous, instant-tier nature rather than the
+    bounty's full markdown report."""
+    verif = assess["verif"]
+    if not verif.get("checked"):
+        return {"available": False, "note": verif.get("note", "contract source unavailable")}
+    source_code = src.get("source_code") if isinstance(src, dict) else None
+    if not source_code:
+        return {"available": False, "note": "verified but no source text returned"}
+    try:
+        from agents.llm import ask_frontier
+    except Exception:
+        try:
+            from llm import ask_frontier
+        except Exception:
+            return {"available": False, "note": "no LLM provider configured"}
+    user = (f"=== VERIFIED SOURCE ({verif.get('name')}, truncated) ===\n{source_code[:12000]}\n\n"
+            f"=== KNOWN RISK FACTORS FROM RECON ===\n" + ("\n".join(assess["reasons"]) or "none"))
+    try:
+        text, provider = ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=400, temperature=0.3, timeout=25)
+        return {"available": True, "provider": provider, "summary": text.strip()}
+    except Exception as e:
+        return {"available": False, "note": f"LLM unavailable this call: {e}"}
+
+
 def _safety_preflight(req):
+    """All-in-one pre-trade verdict — VAPE's most complete instant offering.
+
+    Reuses agents/investigate.py's real heuristic engine (the same
+    CertiK-style weighted score, meme-factory-template detection, recent-
+    hack correlation, and public web-reputation search every FREE VAPE
+    investigation runs — see investigate.quick_assess()) instead of the
+    thinner token_scan()-only verdict this offering returned before, plus
+    two things nothing else in VAPE's catalog does: a best-effort visit of
+    the project's own declared website/social URLs (_verify_socials, not
+    just a boolean "has any"), and a frontier-LLM quick read of the actual
+    verified source (_ai_quick_review) — VAPE's deepest automated signal
+    short of the $50 24h deep-dive audit.
+    """
     a = _addr(req)
     if not a:
         return {"error": "no address"}
-    ts = token_scan(a, _chain(req))
-    if "error" in ts:
-        return ts
-    src = get_contract_source(a, _chain(req))
-    result = {"address": a, "token_verdict": ts.get("verdict"), "flags": ts.get("flags"),
-              "verified": src.get("verified") if isinstance(src, dict) else None,
-              "combined": "PROCEED" if ts.get("verdict") == "PROCEED" and (src.get("verified") if isinstance(src, dict) else False) else "REVIEW"}
+    chain = _chain(req)
+    assess = investigate.quick_assess(a, chain)
+    if "error" in assess:
+        return assess
+    verif = assess["verif"]
+
+    result = {
+        "address": a, "chain_id": chain, "symbol": assess["symbol"],
+        "score": assess["score"], "verdict": assess["verdict"],
+        "reasons": assess["reasons"], "positive_signals": assess["positive_signals"],
+        "verified": verif.get("verified"), "contract_name": verif.get("name"),
+        "proxy": verif.get("proxy"), "meme_factory_template": assess["meme_factory_template"],
+        "hack_correlation": assess["hack_correlation"],
+        "web_reputation": {"checked": assess["web_reputation"].get("available", False),
+                            "flagged": bool(assess["web_reputation"].get("hits")),
+                            "hits": assess["web_reputation"].get("hits", []),
+                            "provider": assess["web_reputation"].get("provider")},
+    }
     # Same reasoning as _exploit_check: don't let a missing/failed
     # verification silently collapse into "verified: None" with no context.
-    if isinstance(src, dict) and src.get("error"):
-        result["verification_note"] = src.get("note", src["error"])
+    if not verif.get("checked"):
+        result["verification_note"] = verif.get("note")
+
+    result["social_verification"] = _verify_socials(assess["dex"])
+
+    src = get_contract_source(a, chain)
+    result["ai_review"] = _ai_quick_review(a, chain, assess, src if isinstance(src, dict) else {})
+
     return result
 
 

@@ -37,6 +37,14 @@ export interface Env {
   // Fine-grained PAT (Actions: write, Contents: read) for triggering the
   // bounty_deep_dive offering's async job — see worker/src/lib/githubDispatch.ts.
   GH_DISPATCH_TOKEN?: string;
+  // safety_preflight's web-reputation search + declared-social scrape +
+  // frontier-LLM quick read — all optional, degrade gracefully exactly like
+  // ETHERSCAN_API_KEY above. See lib/webResearch.ts / lib/llm.ts.
+  TAVILY_API_KEY?: string;
+  BRAVE_API_KEY?: string;
+  FIRECRAWL_API_KEY?: string;
+  GEMINI_API_KEY?: string;
+  GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
@@ -103,8 +111,8 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   token_safety_check: "$0.02",
   liquidity_check: "$0.02",
   rug_pull_alert: "$0.03",
-  safety_preflight: "$0.05",
   market_intel: "$0.15",
+  safety_preflight: "$0.35",
 };
 
 // Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
@@ -137,8 +145,13 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
   },
   safety_preflight: {
-    description: "Combined token safety + contract verification preflight verdict.",
-    output: { address: "0x...", token_verdict: "PROCEED", verified: true, combined: "PROCEED" },
+    description: "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template "
+      + "detection, recent-hack correlation, public web-reputation search, a live check of the "
+      + "project's declared socials, and a frontier-LLM quick read of the verified source.",
+    output: { address: "0x...", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
+              verified: true, meme_factory_template: false, hack_correlation: [],
+              web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
+              ai_review: { available: true, provider: "gemini", summary: "..." } },
   },
   market_intel: {
     description: "Base TVL, top protocols, prices, and rule-based anomaly flags.",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-05T22:15:09Z",
+  "generated": "2026-07-05T23:06:47Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -26,23 +26,8 @@
       "ai-redteam": 3,
       "recon": 7
     },
-    "tools_built": 1,
-    "tools_built_list": [
-      {
-        "number": 70,
-        "title": "test: verify 422 fix (issue #67)",
-        "kind": "issue-driven",
-        "status": "closed",
-        "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/70",
-        "created_at": "2026-07-04T23:22:25Z",
-        "closed_at": "2026-07-04T23:22:35Z",
-        "verification": {
-          "ok": 0,
-          "warn": 0,
-          "fail": 0
-        }
-      }
-    ],
+    "tools_built": 0,
+    "tools_built_list": [],
     "work_log_entries": 79,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260623",
@@ -55,7 +40,6 @@
       "liquidity_check",
       "market_intel",
       "rug_pull_alert",
-      "safety_preflight",
       "token_safety_check"
     ],
     "offerings": [
@@ -116,14 +100,6 @@
         "sla": "instant"
       },
       {
-        "name": "safety_preflight",
-        "price_usd": 0.05,
-        "summary": "All-in-one pre-trade GO/CAUTION/NO_GO verdict",
-        "auto": true,
-        "x402": true,
-        "sla": "instant"
-      },
-      {
         "name": "whale_watch",
         "price_usd": 0.1,
         "summary": "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow",
@@ -143,6 +119,14 @@
         "name": "market_intel",
         "price_usd": 0.15,
         "summary": "Real-time price/TVL/liquidity + actionable signal",
+        "auto": true,
+        "x402": true,
+        "sla": "instant"
+      },
+      {
+        "name": "safety_preflight",
+        "price_usd": 0.35,
+        "summary": "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template detection, recent-hack correlation, public web-reputation search, a live check of declared socials, and a frontier-LLM quick source read",
         "auto": true,
         "x402": true,
         "sla": "instant"
