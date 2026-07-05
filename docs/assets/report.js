@@ -263,7 +263,7 @@ const Report = {
         const disclaimer = (opts.result && opts.result.disclaimer) || 'Real on-chain data. Not investment advice.';
         const source = (opts.result && opts.result.source) || 'vape-real-data';
         const addr = opts.requestedAddress;
-        const addrHtml = addr ? `<a href="${basescanUrl(addr)}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
+        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
         const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
         return `
             <div class="text-left">
