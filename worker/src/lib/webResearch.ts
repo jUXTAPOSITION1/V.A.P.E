@@ -51,25 +51,52 @@ async function braveSearch(apiKey: string, query: string, maxResults: number): P
 // Keyless fallback — DDG HTML scrape only (skillforge/research.py also tries
 // several SearXNG instances first; simplified here to one real, documented
 // fallback rather than porting a multi-instance list unverified for Workers).
+//
+// Parsed with the Workers runtime's real streaming HTML parser (HTMLRewriter)
+// rather than a hand-rolled regex — same reasoning agents/investigate.py's
+// _TextExtractor / skillforge/research.py's _TextExtractor already document:
+// "a regex like <script.*?</script> can't correctly handle case, attributes
+// containing '>', or malformed/nested markup ... a real parser gets this
+// right." A prior regex-based version of this function was flagged by
+// CodeQL for exactly that class of bug.
 async function ddgSearch(query: string, maxResults: number): Promise<SearchResult> {
   try {
     const url = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
     const res = await fetch(url, { headers: { "User-Agent": "VAPE-PrivateEye/1.0" } });
     if (!res.ok) throw new Error(`ddg HTTP ${res.status}`);
-    const body = await res.text();
+
     const results: Array<{ title: string; url: string; snippet: string }> = [];
-    const re = /result__a"\s+href="([^"]+)"[^>]*>(.*?)<\/a>/gs;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(body)) && results.length < maxResults) {
-      const href = m[1].replace(/&amp;/g, "&");
-      const title = m[2].replace(/<[^>]+>/g, "").trim();
-      let realUrl = href;
-      try {
-        const parsed = new URL(href.startsWith("//") ? `https:${href}` : href);
-        realUrl = parsed.searchParams.get("uddg") || href;
-      } catch { /* keep raw href */ }
-      results.push({ title, url: decodeURIComponent(realUrl), snippet: "" });
-    }
+    let currentHref: string | null = null;
+    let currentTitle = "";
+
+    const rewriter = new HTMLRewriter().on("a.result__a", {
+      element(el) {
+        currentHref = el.getAttribute("href");
+        currentTitle = "";
+        // onEndTag (not the text handler's lastInTextNode) marks the true
+        // end of THIS element — a title with a bolded query term inside a
+        // nested <b> is still multiple text nodes within the same <a>, so
+        // finalizing on the first text node would truncate it.
+        el.onEndTag(() => {
+          const href = currentHref;
+          if (href && results.length < maxResults) {
+            let realUrl = href;
+            try {
+              const parsed = new URL(href.startsWith("//") ? `https:${href}` : href);
+              realUrl = parsed.searchParams.get("uddg") || href;
+            } catch { /* keep raw href */ }
+            results.push({ title: currentTitle.trim(), url: decodeURIComponent(realUrl), snippet: "" });
+          }
+          currentHref = null;
+          currentTitle = "";
+        });
+      },
+      text(chunk) {
+        if (currentHref !== null) currentTitle += chunk.text;
+      },
+    });
+    await rewriter.transform(res).arrayBuffer(); // drives the parse; output itself is unused
+
     return { provider: "ddg-keyless", results, degraded: results.length === 0 };
   } catch {
     return { provider: "keyless", results: [], degraded: true };
@@ -102,14 +129,31 @@ async function firecrawlScrape(apiKey: string, url: string): Promise<ScrapeResul
   return { provider: "firecrawl", content: data?.data?.markdown ?? null };
 }
 
+// Parsed with HTMLRewriter (see ddgSearch's comment above for why this
+// isn't a regex) — script/style content is tracked via a real open/close-tag
+// depth counter, never string-matched, so it can't leak into the collected
+// text regardless of malformed or nested-looking markup.
 async function keylessFetch(url: string): Promise<ScrapeResult> {
   try {
     const res = await fetch(url, { headers: { "User-Agent": "VAPE-PrivateEye/1.0" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
-    const text = html.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "")
-      .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-    return { provider: "fetch-keyless", content: text.slice(0, 8000) };
+    let text = "";
+    let skipDepth = 0;
+    const rewriter = new HTMLRewriter()
+      .on("script, style", {
+        element(el) {
+          skipDepth++;
+          el.onEndTag(() => { skipDepth = Math.max(0, skipDepth - 1); });
+        },
+      })
+      .on("*", {
+        text(chunk) {
+          if (skipDepth === 0) text += chunk.text;
+        },
+      });
+    await rewriter.transform(res).arrayBuffer(); // drives the parse; output itself is unused
+    const cleaned = text.replace(/\s+/g, " ").trim();
+    return { provider: "fetch-keyless", content: cleaned.slice(0, 8000) };
   } catch {
     return { provider: "fetch-keyless", content: null };
   }
