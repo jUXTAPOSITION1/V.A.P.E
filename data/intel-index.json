@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-04T23:10:34Z",
+  "generated": "2026-07-05T03:33:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 307,
+    "reports": 308,
     "reports_by_type": {
-      "bounty": 164,
+      "bounty": 165,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 27,
-    "investigations": 27,
+    "investigations": 29,
     "tools": 15,
     "tools_verified": 14,
     "skills": 4
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260704-231034-0x30EC37E2.md",
+      "file": "investigation-20260705-033348-0x7F42440C.md",
       "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 Claude",
       "symbol": "Claude",
-      "date": "2026-07-04T23:10:34Z",
-      "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
+      "date": "2026-07-05T03:33:48Z",
+      "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "- Target: 0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07 - Chain: 8453 (Base) - Date: 2026-07-04T23:10:34Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 25/100",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-231034-0x30EC37E2.md"
+      "score": "45",
+      "summary": "- Target: 0x7F42440C1E87187F523aE48980E7386508804B07 - Chain: 8453 (Base) - Date: 2026-07-05T03:33:48Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 45/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-033348-0x7F42440C.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260704_230714.md",
+      "file": "bounty_report_20260705_033330.md",
       "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T23:07:14Z",
+      "date": "2026-07-05T03:33:30Z",
       "threat": null,
-      "summary": "Cycle: 20260704230714 \u00b7 Data timestamp (UTC): 2026-07-04T23:07:18Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_230714.md",
-      "bytes": 10431
+      "summary": "Cycle: 20260705033330 \u00b7 Data timestamp (UTC): 2026-07-05T03:33:34Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_033330.md",
+      "bytes": 12165
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260705-033348-0x7F42440C.md",
+      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "date": "2026-07-05T03:33:48Z",
+      "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "- Target: 0x7F42440C1E87187F523aE48980E7386508804B07 - Chain: 8453 (Base) - Date: 2026-07-05T03:33:48Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 45/100",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-033348-0x7F42440C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260704-231034-0x30EC37E2.md",
@@ -372,9 +385,31 @@
       "verdict": "REJECT (25/100)",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
+    },
+    {
+      "source": "catalog",
+      "date": "2026-07-05",
+      "job_id": "auto",
+      "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
+      "symbol": "Claude",
+      "offering": "deep_investigation",
+      "verdict": "REJECT (45/100)",
+      "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260705_033330.md",
+      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
+      "date": "2026-07-05T03:33:30Z",
+      "threat": null,
+      "summary": "Cycle: 20260705033330 \u00b7 Data timestamp (UTC): 2026-07-05T03:33:34Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_033330.md",
+      "bytes": 12165
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1023,17 +1058,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260630_001532.md",
       "bytes": 5916
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260629_230001.md",
-      "title": "VAPE Report - 20260629_230001",
-      "date": "2026-06-29T23:00:01Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260629_230001.md",
-      "bytes": 5164
     }
   ],
   "broadcasts": [
@@ -1312,7 +1336,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48205844",
+      "version": "48216314",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1322,7 +1346,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.7 eth_dom 9.48 mcap_chg_24h 1.07",
+      "version": "btc_dom 55.71 eth_dom 9.42 mcap_chg_24h 0.18",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1372,7 +1396,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "22 Extreme Fear",
+      "version": "23 Extreme Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
