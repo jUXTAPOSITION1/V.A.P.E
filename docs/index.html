@@ -291,6 +291,30 @@
             </section>
         </section>
 
+        <!-- ═══ 3.5 SECTION BREAK — INTO CASE STUDY ═══
+             Cinematic full-bleed banner, deliberately not the boxed HUD-frame
+             portrait treatment the hero uses — bg-zinc-950 on the section
+             itself is the fallback if the image is ever missing/still
+             onerror'd out, so this never shows a layout gap or a broken-
+             image icon, same graceful-degradation contract as every other
+             optional image on this site. -->
+        <section class="reveal relative rounded-3xl overflow-hidden mb-16 min-h-[380px] sm:min-h-[460px] flex items-end bg-zinc-950">
+            <img src="assets/vape-banner-casefile.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/10"></div>
+            <div class="relative p-8 sm:p-14 max-w-2xl">
+                <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-[.2em] text-indigo-400 mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> Case Study
+                </div>
+                <h2 class="font-serif-display text-4xl sm:text-6xl leading-[0.98] tracking-tight text-zinc-50 mb-4">
+                    Every verdict,<br>built on evidence.
+                </h2>
+                <p class="text-zinc-300 text-base sm:text-lg max-w-xl leading-relaxed">
+                    The numbers above are the surface. Underneath every call VAPE makes is a full case file — the
+                    data gathered, the reasoning applied, and the verdict it produced.
+                </p>
+            </div>
+        </section>
+
         <!-- ═══ 4. FEATURED INVESTIGATION ═══ -->
         <section id="case-file" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden">
             <img src="assets/image-10.jpg" alt="" class="hidden lg:block absolute -right-10 -bottom-12 w-52 opacity-[0.08] pointer-events-none select-none" onerror="this.remove()">
@@ -480,6 +504,28 @@
                     <i class="fa-solid fa-wallet text-2xl mb-3 opacity-40"></i>
                     <div>Connect a wallet above to access your portfolio.</div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ═══ 7.5 SECTION BREAK — INTO THE ARCHIVE ═══
+             Same cinematic-banner pattern as the Case Study break above, a
+             different photo and a different accent (matching the Archive's
+             own neutral zinc badge below) so the two breaks don't read as
+             the same image repeated with new text. -->
+        <section class="reveal relative rounded-3xl overflow-hidden mb-16 min-h-[380px] sm:min-h-[460px] flex items-end bg-zinc-950">
+            <img src="assets/vape-banner-archive.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/10"></div>
+            <div class="relative p-8 sm:p-14 max-w-2xl">
+                <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-[.2em] text-zinc-300 mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-300"></span> Records
+                </div>
+                <h2 class="font-serif-display text-4xl sm:text-6xl leading-[0.98] tracking-tight text-zinc-50 mb-4">
+                    The complete record,<br>always open.
+                </h2>
+                <p class="text-zinc-300 text-base sm:text-lg max-w-xl leading-relaxed">
+                    Every investigation, every report, every tool — indexed the moment it's published. Nothing here
+                    is curated after the fact.
+                </p>
             </div>
         </section>
 
