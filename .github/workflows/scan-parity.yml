@@ -32,7 +32,7 @@ jobs:
           - "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE" # VAPE's own token
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - uses: actions/setup-node@v4
