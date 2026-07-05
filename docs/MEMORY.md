@@ -1,4 +1,4 @@
-# 🧠 Central Memory — V.A.P.E.'s Long-Term Brain
+# Central Memory — V.A.P.E.'s Long-Term Brain
 
 `skillforge/memory/retriever.py`
 

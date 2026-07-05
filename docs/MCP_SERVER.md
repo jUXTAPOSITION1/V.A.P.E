@@ -1,4 +1,4 @@
-# 🔌 V.A.P.E. MCP Server — standard Model Context Protocol
+# V.A.P.E. MCP Server — standard Model Context Protocol
 
 `mcp_servers/vape_mcp.py`
 

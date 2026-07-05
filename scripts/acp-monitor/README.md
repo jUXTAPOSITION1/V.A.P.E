@@ -41,9 +41,9 @@ See HANDLER_BRIEF.md for the offering→tool→deliverable map.
 - Stop all: `kill $(cat drain.pid) $(cat listener.pid)`
 
 ## Requirements (all met as of 2026-06-24)
-- Signer provisioned (restricted policy) ✓
-- 14 offerings live ✓
-- Wallet funded (USDC on Base) ✓
+- Signer provisioned (restricted policy) [OK]
+- 14 offerings live [OK]
+- Wallet funded (USDC on Base) [OK]
 
 ## Note: Privy policy approvals
 The `restricted` signer may surface one-time Privy RPC approvals on init

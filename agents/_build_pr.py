@@ -75,7 +75,7 @@ def verify_files(out_dir, files):
 def _format_verification(results):
     lines = ["## Generated-file verification (real compile/syntax check, not just pattern-matching)", ""]
     for rel_path, ok, detail in results:
-        icon = "✅" if ok is True else ("⚠️" if ok is None else "❌")
+        icon = "[OK]" if ok is True else ("[WARN]" if ok is None else "[FAIL]")
         lines.append(f"- {icon} `{rel_path}` — {detail}")
     return "\n".join(lines)
 

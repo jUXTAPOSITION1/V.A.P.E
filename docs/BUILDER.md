@@ -1,4 +1,4 @@
-# 🔨 Builder — Self-Improving Code Generation Agent
+# Builder — Self-Improving Code Generation Agent
 
 `agents/builder.py`
 
@@ -64,7 +64,7 @@ python agents/builder.py --stats
 Builder never ships arbitrary dangerous code, but it also must not reject ordinary,
 legitimate Python. So validation is split:
 
-### 🛑 BLOCK (hard reject — `is_safe = False`)
+### BLOCK (hard reject — `is_safe = False`)
 
 Arbitrary code execution, shell execution, and unsafe deserialization:
 
@@ -72,7 +72,7 @@ Arbitrary code execution, shell execution, and unsafe deserialization:
 `pickle.load/loads`, `marshal.load`, `yaml.load(`, `shell=True`, plus destructive
 filesystem ops (`os.remove`, `shutil.rmtree`) on delete/remove tasks.
 
-### ⚠️ WARN (advisory — recorded, non-blocking)
+### WARN (advisory — recorded, non-blocking)
 
 Common, legitimate patterns that merely deserve a reviewer's eye and slightly lower the
 stored confidence: `open(`, `requests.`, `urllib.request`, `import os`, `sys.argv`,

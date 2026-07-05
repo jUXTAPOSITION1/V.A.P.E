@@ -27,9 +27,9 @@ The Python engine + SKILLFORGE run entirely in GitHub Actions. No server needed.
 
 | Secret | Required | Used by |
 |---|---|---|
-| `GROQ_API_KEY` | ✅ | bounty-cycle, synthesize |
-| `GEMINI_API_KEY` | ⬜ | intel web_search |
-| `ETHERSCAN_API_KEY` | ⬜ | recon toolcheck (contract_recon) |
+| `GROQ_API_KEY` | [OK] | bounty-cycle, synthesize |
+| `GEMINI_API_KEY` | optional | intel web_search |
+| `ETHERSCAN_API_KEY` | optional | recon toolcheck (contract_recon) |
 | `GITHUB_TOKEN` | auto | commits/pushes (injected by Actions) |
 
 > If `GITHUB_TOKEN` is restricted by org policy and pushes fail, add a fine-grained
@@ -129,8 +129,8 @@ npx wrangler deploy
 ### E1. Repository secrets for CI deploy (`.github/workflows/deploy-worker.yml`)
 | Secret | Required | Used for |
 |---|---|---|
-| `CLOUDFLARE_API_TOKEN` | ✅ | Workers Scripts: Edit permission |
-| `CLOUDFLARE_ACCOUNT_ID` | ✅ | target account |
+| `CLOUDFLARE_API_TOKEN` | [OK] | Workers Scripts: Edit permission |
+| `CLOUDFLARE_ACCOUNT_ID` | [OK] | target account |
 
 Without these set, the workflow still runs (checkout, install, typecheck) and skips the
 live deploy step rather than failing — safe to merge before you've set up Cloudflare.

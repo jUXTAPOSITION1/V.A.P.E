@@ -136,7 +136,7 @@ def lessons_stats():
 # below is just a candidate filter; this regex is the real gate that decides
 # what actually counts as a VAPE-built tool for the public ledger.
 _BUILD_TITLE_RE = re.compile(r"^VAPE (self-build|build):\s*(.+)$", re.IGNORECASE)
-_VERIFY_RE = re.compile(r"^- (✅|⚠️|❌) `([^`]+)`", re.MULTILINE)
+_VERIFY_RE = re.compile(r"^- ([OK]|[WARN]|[FAIL]) `([^`]+)`", re.MULTILINE)
 
 
 def _gh_search_prs(query, token=None):
@@ -178,7 +178,7 @@ def tool_builds():
             body = item.get("body") or ""
             verify_counts = {"ok": 0, "warn": 0, "fail": 0}
             for icon, _path in _VERIFY_RE.findall(body):
-                verify_counts["ok" if icon == "✅" else "warn" if icon == "⚠️" else "fail"] += 1
+                verify_counts["ok" if icon == "[OK]" else "warn" if icon == "[WARN]" else "fail"] += 1
             status = "merged" if pr.get("merged_at") else ("open" if item.get("state") == "open" else "closed")
             builds.append({
                 "number": number,

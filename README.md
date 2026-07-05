@@ -1,6 +1,5 @@
 ---
-title: VAPE - Private Agent
-emoji: 🦍
+title: VAPE - Autonomous On-Chain Intelligence
 colorFrom: indigo
 colorTo: purple
 sdk: gradio
@@ -10,718 +9,258 @@ pinned: false
 ---
 
 <div align="center">
+<img src="docs/assets/vape-avatar.jpg" width="96" height="96" alt="VAPE" style="border-radius:18px" />
 
-# 🦍 V.A.P.E.
-### VIRTUAL APE PRIVATE EYE
+# V.A.P.E.
+### Virtual Ape Private Eye
 
-**The chain never lies. V.A.P.E. makes sure you hear the truth first.**
-
-_Autonomous • Self-Improving • Interconnected Intelligence • Zero Local Compute_
+**An autonomous on-chain intelligence system for Base and the Virtuals ecosystem.**
+**Real recon, real verdicts, zero fabrication.**
 
 <br/>
 
 [![Bounty Cycle](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
 [![SKILLFORGE Toolcheck](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-A1A1AA?style=flat-square)](LICENSE)
 
-![Chain](https://img.shields.io/badge/Base-0052FF?style=flat&logo=coinbase&logoColor=white)
-![Protocol](https://img.shields.io/badge/Virtuals-ACP-6E56CF?style=flat)
-![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat&logo=python&logoColor=white)
-![LLM](https://img.shields.io/badge/LLM-multi--provider-00A67E?style=flat)
-![Compute](https://img.shields.io/badge/local%20compute-%240-brightgreen?style=flat)
+![Base](https://img.shields.io/badge/Chain-Base-0052FF?style=flat-square&logo=coinbase&logoColor=white)
+![ACP](https://img.shields.io/badge/Protocol-Virtuals_ACP-8B5CF6?style=flat-square)
+![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2354988-10B981?style=flat-square)
+![x402](https://img.shields.io/badge/Payments-x402-22D3EE?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
+![Compute](https://img.shields.io/badge/local_compute-%240-10B981?style=flat-square)
 
 <br/>
 
-**Tokenized Autonomous Digital Detective** · Deployed on **Base** + **Virtuals Protocol (ACP)**
-
-[🎯 Overview](#-overview) · [🏗️ Architecture](#-architecture-july-2026-release) · [🚀 Quick Start](#-quick-start) · [🧠 Memory](docs/MEMORY.md) · [🔨 Builder](docs/BUILDER.md) · [🔌 MCP](docs/MCP.md) · [🐦 @based_vape](https://x.com/based_vape)
+[Live Dashboard](https://juxtaposition1.github.io/V.A.P.E/) ·
+[Architecture](docs/ARCHITECTURE.md) ·
+[Quick Start](#quick-start) ·
+[ACP Protocol](docs/ACP_PROTOCOL.md) ·
+[Deployment](docs/DEPLOYMENT.md) ·
+[@based_vape](https://x.com/based_vape)
 
 </div>
 
 ---
 
-## 🎯 Overview
+## Overview
 
-V.A.P.E. is the Virtual Ape Private Eye, a **fully autonomous AI detective engineered for the on-chain ecosystem**. Operating 24/7 on Base and deeply integrated with Virtuals Protocol's Agent Commerce Protocol (ACP), V.A.P.E. delivers **real-time security intelligence, market alpha, and protocol monitoring** at zero local compute cost.
+V.A.P.E. is a fully autonomous AI detective for the on-chain ecosystem. It runs continuously
+on GitHub Actions at zero local compute cost, watching Base and the Virtuals economy, and
+publishes exactly what it finds — a token security scan, a market anomaly, a completed
+investigation — with the evidence attached, never just a conclusion.
 
-**As of July 2026:** V.A.P.E. now runs with **interconnected intelligence** — a Central Memory system that grounds all analysis in past findings and lessons, a self-improving Builder that generates new security tools, and MCP wrappers for safe external data access (GitHub, X/social, tool registries). Every cycle compounds intelligence.
+It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #54988**,
+wallet `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, settling every paid engagement in USDC
+on Base. Both hiring paths are real and live — an escrow-backed engagement through Virtuals
+Protocol's Agent Commerce Protocol (ACP), or an instant, wallet-signed payment through x402 —
+see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Options section.
 
-**X Profile:** [@based_vape](https://x.com/based_vape)
-
----
-
-## 🔍 Core Specializations
-
-- **Blockchain Forensics & Asset Tracing** — Track tokens, identify malicious actors, analyze on-chain flows
-- **Market Intelligence & Alpha Generation** — Real-time TVL, liquidity, anomaly detection, DeFi metrics
-- **Protocol Security & Smart Contract Auditing** — AI red-teaming + static analysis (slither, aderyn, mythril)
-- **Digital Asset Protection & Threat Intelligence** — Continuous monitoring, vulnerability feeds, CVE correlation
-- **Social & Narrative Intelligence** — X sentiment tracking, narrative shifts, coordinated attack detection
-- **Self-Improvement & Skill Generation** — Builder generates new playbooks grounded in Memory + past lessons
-- **Autonomous Deep Investigations** — every cycle VAPE auto-selects the highest-signal Base target, runs multi-source recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · hack-feed correlation), scores it 0–100, and files a verdict (🟢 PROCEED / 🟡 CAUTION / 🔴 REJECT) to Memory + the live dashboard
+**X:** [@based_vape](https://x.com/based_vape) · **Live dashboard:** [juxtaposition1.github.io/V.A.P.E](https://juxtaposition1.github.io/V.A.P.E/)
 
 ---
 
-## 🏗️ Architecture (July 2026 Release)
+## What it actually does
 
-### Three Interconnected Systems
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│           CENTRAL MEMORY (General-Purpose Brain)             │
-│    Append-only intelligence layer. Any component queries &   │
-│    appends findings, lessons, skills, social events.         │
-│    Every finding → future runs get grounded in Memory.       │
-└──────────────────┬──────────────────────────────────────────┘
-                   │ (queries & appends)
-        ┌──────────┼──────────┐
-        │          │          │
-    ┌───▼────┐  ┌──▼────┐  ┌─▼──────┐
-    │DETECTIVE│  │BUILDER│  │MCP     │
-    │(agents) │  │ (self-│  │(GitHub,│
-    │  run.py │  │ improv)│  │Social, │
-    │ vape.py │  │Generate│  │Tools)  │
-    └────┬────┘  │code &  │  └──┬────┘
-    (LLM +      │skills  │     (safe
-    data        │grounded│     external
-    fetchers)   │in Memory│    data)
-         │      └────┬────┘     │
-         │           │           │
-         └───────────┼───────────┘
-                     │
-            ┌────────▼─────────┐
-            │  SKILLFORGE      │
-            │  (self-growing   │
-            │   tool+skill     │
-            │   ecosystem)     │
-            └──────────────────┘
-                     │
-         ┌───────────┼───────────┐
-         │           │           │
-      ┌──▼──┐   ┌────▼───┐  ┌──▼────┐
-      │intel│   │ ACP    │  │ UI    │
-      │     │   │ monitor│  │(Gradio│
-      │     │   │ (USDC  │  │ +GH   │
-      │     │   │ revenue)   │Pages) │
-      └─────┘   └────────┘  └───────┘
-```
-
-### System Components (2026 Status)
-
-| Component | Status | Purpose |
-|-----------|--------|---------|
-| **Central Memory** | ✅ **NEW** | Append-only brain: findings, lessons, skills, social events |
-| **Builder** | ✅ **NEW** | Self-improving code generator (grounded in Memory, auto-appends) |
-| **MCP Integration** | ✅ **NEW** | Safe GitHub, Social, Tool Registry wrappers (Memory-connected) |
-| **Python Engine** | ✅ Hourly CI | LLM analysis + slither, grounded in Memory findings |
-| **SKILLFORGE** | ✅ Running | 13 verified security tools, harvest/toolcheck/synthesize workflows |
-| **intel/** | ✅ Live | Reports, broadcasts, bounty-radar audit trail |
-| **ACP Monitor** | ✅ Revenue | Autonomous USDC-escrow job fulfillment (14 live offerings) |
-| **Node Agent** | 🟡 Partial | On-chain investigation loop (ready for integration) |
-| **UI** | 🟡 Minimal | Gradio + GitHub Pages (expandable) |
+- **Deep investigations** — every cycle, VAPE auto-selects the highest-signal live Base
+  target, runs multi-source recon (GoPlus token security, DexScreener liquidity, Base RPC,
+  Etherscan V2 contract verification, recent-hack technique correlation, and a real web
+  search for public rug/scam mentions), scores it 0-100, and publishes a verdict — PROCEED,
+  CAUTION, or REJECT — to `intel/investigations/` and the live dashboard.
+- **Market intelligence** — TVL, gas, Fear & Greed, global market cap, and Base's top
+  protocols and trending pairs, refreshed continuously and shown live on the site.
+- **Security auditing** — a real prompt-injection red-team suite runs against VAPE's own
+  reporting pipeline, plus a static-analysis tier (Slither, Aderyn, Mythril) for
+  smart-contract review offerings.
+- **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
+  implements real code changes (new tools, bug fixes, skill playbooks), every one gated
+  behind automated security validation and a human-reviewed pull request.
+- **Commerce** — 14 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, and more), payable through ACP escrow or
+  instant x402, with results delivered as a rendered report on-site or a downloadable PDF.
 
 ---
 
-## 🚀 How It Runs (Three Cooperating Runtimes)
+## The live site
 
-### **Runtime 1: Python Engine (CI Workhorse)**
-```bash
-$ python -m agents.run                 # Hourly bounty hunt pass
-$ python -m agents.run --review-repo   # Self-review pass
-```
+[**juxtaposition1.github.io/V.A.P.E**](https://juxtaposition1.github.io/V.A.P.E/) is the
+primary way to see and use VAPE — not a static status page, a working product surface:
 
-**What happens:**
-1. Queries **Memory** for past findings & lessons (grounded context)
-2. Fetches **real market data** (TVL, prices, on-chain activity)
-3. Runs **slither static analysis**
-4. Calls **multi-provider LLM** (Groq → Cerebras → OpenRouter → GitHub Models)
-5. **Appends findings to Memory** (auto-compounds intelligence)
-6. Writes timestamped **report to intel/**
+- Live network/market data (Base TVL, gas, top protocols, trending pairs, Fear & Greed)
+- A wallet-connect portfolio view (injected wallets, Coinbase Wallet, WalletConnect) with
+  real Base holdings, balances, and price history — no paid indexer, nothing fabricated
+- Instant x402 payment for any auto-fulfilled offering, signed directly from a connected
+  wallet, with the report rendered inline and downloadable as a letterheaded PDF
+- A fully linkable investigation archive, indexed automatically from every report VAPE
+  has ever published — nothing curated after the fact
+- A free token-security preview tool, open to anyone, no wallet required
 
-**Frequency:** Hourly via GitHub Actions (free, 24/7)
-
-### **Runtime 2: Builder Agent (Self-Improvement)**
-```bash
-$ python -m agents.builder --task "Create playbook for static analysis"
-$ python -m agents.builder --improve "agents/run.py:Add Memory search capability"
-```
-
-**What happens:**
-1. **Grounds in Memory** (searches for similar past work)
-2. Generates **production code** (type hints, error handling, logging)
-3. **Validates security** (no unsafe patterns, no eval/exec)
-4. **Auto-appends to Memory** (as a "skill")
-5. Returns code ready for PR or deployment
-
-**Integration:** Called by skillforge/synthesize.py daily; can propose self-improving PRs
-
-### **Runtime 3: MCP Integration (External Data)**
-```bash
-$ python -m skillforge.mcp --harvest               # Fetch GitHub/Social/Tools
-$ python -m skillforge.mcp --social-sentiment      # X sentiment summary
-$ python -m skillforge.mcp --tool-releases crytic/slither
-```
-
-**What happens:**
-1. **GitHub MCP:** Read repo data, search issues, propose PRs (safe write-gates)
-2. **Social MCP:** Fetch aggregated X sentiment (no individual tracking)
-3. **Tool Registry MCP:** Fetch latest security tool releases
-4. **All results → Memory** (auto-append for future grounding)
+Built with zero bundler (plain HTML/CSS/JS under `docs/assets/`) and a small Cloudflare/Deno
+Workers backend (`worker/`) for the x402 payment gate and Alchemy-backed portfolio data.
 
 ---
 
-## 📋 Project Structure
+## Architecture
 
-```
-V.A.P.E/
-├── agents/                              # Python engine (CI + Builder)
-│   ├── run.py                          # ✅ Orchestrator (NOW with Memory grounding)
-│   ├── investigate.py                  # ✅ NEW: Deep investigation engine (auto target → verdict)
-│   ├── build_intel_index.py            # ✅ NEW: Builds data/intel-index.json for the dashboard
-│   └── (standard MCP server lives in mcp_servers/vape_mcp.py)
-│   ├── builder.py                      # ✅ NEW: Self-improving code generator
-│   ├── integration.py                  # ✅ NEW: Memory + Builder + MCP glue
-│   ├── llm.py                          # Multi-provider LLM fallback
-│   ├── data_fetchers.py                # Real market/chain data
-│   ├── vape.py / hack.py               # Persona engines
-│   ├── vape_system.md / hack_system.md # System prompts
-│   ├── acp_fulfill.py                  # ACP integration
-│   ├── wallet.py                       # Wallet scaffolding
-│   ├── token_scan.py                   # Token safety (GoPlus/DexScreener)
-│   ├── scout.py                        # Bounty-radar triage (rule-based, no LLM)
-│   ├── self_improve.py                 # Grounded self-improvement — finds a real
-│   │                                    #   bug/gap, Builder proposes a fix, opens a PR
-│   ├── build_request.py                # Label an issue "vape-build" -> real multi-file
-│   │                                    #   PR from builder.py's generate_project()
-│   ├── skillforge_build.py             # ✅ NEW: VAPE's OWN build proposals (no human
-│   │                                    #   ask needed) — grounded in real tool-registry
-│   │                                    #   gaps + Memory findings/lessons, weekly PR
-│   ├── _build_pr.py                    # Shared git/PR plumbing for both build pipelines
-│   └── requirements.txt                # Python deps
-│
-├── skillforge/                          # Self-growing skill + tool ecosystem
-│   ├── memory/                          # ✅ NEW: Central Memory
-│   │   ├── retriever.py                # Search, append, sanitize
-│   │   ├── findings.jsonl              # Security discoveries (append-only)
-│   │   ├── lessons.jsonl               # Patterns & best practices
-│   │   ├── skills.jsonl                # Generated playbooks by Builder
-│   │   ├── social-events.jsonl         # X sentiment, narratives
-│   │   ├── tools-registry.json         # Tool metadata
-│   │   └── INDEX.md                    # Human-readable guide
-│   │
-│   ├── mcp.py                          # ✅ NEW: Safe GitHub/Social/Tool wrappers
-│   ├── harvest.py                      # CVE & tool harvest (no LLM)
-│   ├── toolcheck.py                    # Verify 13 security tools
-│   ├── synthesize.py                   # LLM distills → PR proposals
-│   ├── MANIFEST.md                     # Tool registry & skill playbooks
-│   ├── skills/                         # Playbook files (sc-static, ai-redteam, recon)
-│   └── tools/                          # 13 tools in subdirs (static/fuzzing/ai-redteam/recon)
-│
-├── intel/                               # Real-data audit trail
-│   ├── reports/                        # Timestamped sweeps (security/sentiment/base/macro)
-│   ├── scans/                          # Token safety scans
-│   ├── broadcasts/                     # Community intel
-│   ├── investigations/                 # ✅ NEW: Deep-investigation verdict reports
-│   ├── bounty-radar/                   # Active bounty tracking
-│   ├── catalog/                        # Investigation dedup
-│   └── engagements/                    # ACP job records
-│
-├── src/                                 # Node agent (on-chain investigation)
-│   ├── agents/vape.js                  # Investigation loop
-│   ├── blockchain/analyzer.js          # Base RPC activity
-│   ├── security/scanner.js             # Threat detection
-│   ├── data-fetchers/fetcher.js        # Market metrics
-│   ├── acp/protocol.js                 # ACP reporting
-│   └── config/logger.js                # Pino logging
-│
-├── .github/workflows/                  # CI/CD automation
-│   ├── bounty-cycle.yml                # Hourly Python engine
-│   ├── skillforge-harvest.yml          # Hourly CVE/tool harvest
-│   ├── skillforge-toolcheck.yml        # 6×/day tool verification
-│   ├── skillforge-synthesize.yml       # Daily LLM synthesis
-│   └── sync-to-hub.yml                 # Sync intel to HF Space
-│
-├── docs/                                # Documentation
-│   ├── ARCHITECTURE.md                 # System design
-│   ├── ACP_PROTOCOL.md                 # ACP details
-│   ├── DEPLOYMENT.md                   # Deployment guide
-│   ├── MEMORY.md                       # Memory system usage ✅ NEW
-│   ├── BUILDER.md                      # Builder usage ✅ NEW
-│   ├── MCP.md                          # MCP integration guide ✅ NEW
-│   └── index.html                      # ✅ Live dashboard (investigation hero + Intel Explorer)
-│
-├── app.py                               # Gradio UI (HF Space)
-├── package.json                         # Node.js deps + scripts
-├── requirements.txt                     # Root deps (gradio)
-├── .env.example                         # All env vars
-└── README.md                            # This file
-```
+Three cooperating pieces, all free-tier:
+
+| Layer | What it is | Where |
+|---|---|---|
+| **Python engine** | Hourly CI orchestration, investigations, market sweeps, self-improvement | `agents/*.py` |
+| **SKILLFORGE** | Self-growing skill + tool ecosystem: harvest, toolcheck, synthesize, a shared Memory base, and a build ledger of instructional patterns | `skillforge/` |
+| **Live site + worker** | The dashboard, wallet, and x402 payment backend | `docs/`, `worker/` |
+
+Full component-level detail, the real data flow, and current status of every piece live in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — this README stays a map, not a duplicate.
 
 ---
 
-## 🎓 Quick Start
-
-### Setup (All Paths)
+## Quick start
 
 ```bash
 git clone https://github.com/jUXTAPOSITION1/V.A.P.E.git
 cd V.A.P.E
-cp .env.example .env                    # Fill in your keys
-```
-
-### Path 1: Run Python Engine (Hourly Detection Loop)
-
-```bash
+cp .env.example .env        # fill in at least one LLM key (Groq is free)
 pip install -r agents/requirements.txt
-python -m agents.run                    # Bounty hunt
-python -m agents.run --review-repo      # Self-review
 ```
-
-**Output:** Reports in `reports/`; findings auto-appended to `skillforge/memory/findings.jsonl`
-
-### Path 2: Use Builder (Self-Improvement)
 
 ```bash
-python -m agents.builder --task "Create a playbook for analyzing new Solidity contracts"
+python -m agents.investigate --auto     # run one real investigation
+python -m agents.run                    # hourly bounty-cycle pass
+python -m agents.run --review-repo      # self-review pass
+python -m agents.builder --task "..."   # generate code grounded in Memory
 ```
 
-**Output:** Generated code in stdout; auto-appended to `skillforge/memory/skills.jsonl`
+Everything above writes real output: a report in `intel/` or `reports/`, a finding appended
+to `skillforge/memory/findings.jsonl`. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for
+running the full system on GitHub Actions (the actual production setup — 24/7, zero local
+compute) and [worker/README.md](worker/README.md) for the site's payment backend.
 
-### Path 3: Run MCP Harvest (GitHub + Social + Tools)
+---
+
+## Memory, Builder, and MCP
+
+- **Central Memory** (`skillforge/memory/`) — an append-only, searchable brain every
+  component reads from and writes to: `findings.jsonl` (security discoveries),
+  `lessons.jsonl` (build outcomes), `skills.jsonl` (learned playbooks),
+  `build_log.jsonl` (instructional build patterns — see
+  [BUILD_LEDGER.md](skillforge/memory/BUILD_LEDGER.md)), and `social-events.jsonl`.
+  See [docs/MEMORY.md](docs/MEMORY.md).
+- **Builder** (`agents/builder.py`) — grounds every code-generation task in Memory,
+  validates the output against a hard-block/soft-warn security policy, and auto-appends
+  results back to Memory. See [docs/BUILDER.md](docs/BUILDER.md).
+- **MCP** — VAPE speaks the standard Model Context Protocol both ways: a real MCP server
+  (`mcp_servers/vape_mcp.py`) exposes VAPE's own tools to any MCP host, and VAPE itself
+  hosts 13 registered MCP servers (7 keyless, 6 that activate the instant a key is set) for
+  research and tool discovery. See [docs/MCP.md](docs/MCP.md) and
+  [docs/MCP_SERVER.md](docs/MCP_SERVER.md).
+
+---
+
+## Security and audit
+
+- Every generated deliverable traces to a real, cited data source — no simulated tool
+  output, no invented findings.
+- Memory is append-only; nothing is silently deleted or rewritten.
+- Builder-generated code is checked against a hard-block list (`eval`, `exec`, shell
+  execution, unsafe deserialization) before it can be appended or opened as a PR.
+- Every autonomous PR (self-improvement, build requests, skill synthesis) requires human
+  review before merge — nothing reaches `main` unreviewed.
+- A real prompt-injection red-team suite (`agents/redteam.py`) runs against VAPE's own
+  report-generation pipeline, not a hypothetical scenario, and is scored PASS/FAIL from
+  actual model output.
+
+---
+
+## Repository layout
+
+```
+V.A.P.E/
+├── agents/              Python engine — investigations, market sweeps, builder, red-team
+├── skillforge/          Self-growing skill/tool ecosystem + shared Memory
+├── intel/               Real-data audit trail: reports, broadcasts, investigations, bounty radar
+├── docs/                Site (docs/index.html) + architecture/deployment/protocol docs
+├── worker/              Cloudflare/Deno Workers backend — x402 payments, portfolio data
+├── mcp_servers/         Standard MCP server exposing VAPE's tools
+├── scripts/acp-monitor/ ACP job listener/fulfillment daemons
+├── src/                 Legacy Node.js prototype — retired, not part of the live system
+└── reports/             Timestamped bounty-cycle and self-review output
+```
+
+---
+
+## Status
+
+**Live and running:** hourly investigations and market sweeps, the SKILLFORGE tool
+ecosystem (15 tools registered, 14 verified), ACP job fulfillment across 14 offerings,
+x402 payments on the live site, wallet-connect portfolio, the Central Memory system, and
+the Builder self-improvement pipeline.
+
+**In progress:** deeper on-chain forensics (wallet trace / fund-flow graphs, gated behind
+a paid Etherscan tier), expanded LLM provider fallback, richer social-sentiment intel
+beyond the current keyless aggregate.
+
+**Legacy:** the original Node.js prototype (`src/`) predates the current Python-engine
+architecture and isn't invoked by any CI workflow — kept for history, not deleted outright.
+`app.py` is an unconnected placeholder stub (it doesn't call any real VAPE agent code) that
+exists only to satisfy this repo's synced Hugging Face Space's Gradio entry point — the
+actual product is the live GitHub Pages site above.
+
+---
+
+## Documentation
+
+| Doc | Covers |
+|---|---|
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design, component status, data flow |
+| [ARCHITECTURE_ROADMAP.md](docs/ARCHITECTURE_ROADMAP.md) | ACP revenue strategy, LLM provider expansion |
+| [ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) | Identity, wallet, offerings, job lifecycle |
+| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Actions + repository secrets setup |
+| [MEMORY.md](docs/MEMORY.md) | Central Memory usage guide |
+| [BUILDER.md](docs/BUILDER.md) | Builder agent reference |
+| [MCP.md](docs/MCP.md) / [MCP_SERVER.md](docs/MCP_SERVER.md) | MCP integration + standard server |
+| [worker/README.md](worker/README.md) | x402 payment backend |
+| [skillforge/memory/BUILD_LEDGER.md](skillforge/memory/BUILD_LEDGER.md) | Instructional build patterns |
+
+---
+
+## Environment variables
+
+Copy `.env.example` to `.env`. At minimum, set one LLM key:
 
 ```bash
-python -m skillforge.mcp --harvest                 # Full harvest cycle
-python -m skillforge.mcp --social-sentiment        # Social sentiment only
-python -m skillforge.mcp --tool-releases crytic/slither
+GROQ_API_KEY=       # required — free tier, primary fast path
 ```
 
-**Output:** Data appended to Memory; findings in `intel/` audit trail
-
-### Path 4: Full Cycle (Memory + Builder + MCP + Detective)
-
-```bash
-VAPE_FULL_CYCLE=1 python -m agents.run
-```
-
-**What happens:**
-1. Detective analysis grounded in Memory findings
-2. Builder proposes code improvements based on Memory lessons
-3. MCP harvests external data (GitHub, Social, Tools)
-4. All new findings/skills/events appended back to Memory
+Everything else (Etherscan, additional LLM fallbacks, MCP research providers, the
+worker's Cloudflare/Alchemy/CoinGecko keys) is optional — VAPE degrades gracefully to
+keyless data sources when a key isn't set. See `.env.example` for the full list and
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for which secrets the live site's CI actually
+needs.
 
 ---
 
-## 🧠 Central Memory System (Priority 1 — NEW)
+## Contributing
 
-The **Central Memory** is V.A.P.E.'s long-term intelligence brain. Every component can query and append.
-
-### Search Past Findings
-
-```python
-from skillforge.memory.retriever import search_memory
-
-# Find past anomalies on Base
-findings = search_memory(
-    query="base tvl anomaly",
-    category="finding",
-    min_confidence=0.8,
-    days_back=7
-)
-print(f"Found {len(findings)} high-confidence findings")
-```
-
-### Append a Discovery
-
-```python
-from skillforge.memory.retriever import append_to_memory
-
-append_to_memory(
-    category="finding",
-    title="$5M TVL outflow from Lido/Base",
-    content="Detected at 14:23 UTC. Possible hedge or exploit fear.",
-    source="agents/run.py",
-    tags=["base", "lido", "anomaly"],
-    confidence=0.92
-)
-```
-
-### Memory Statistics
-
-```python
-from skillforge.memory.retriever import get_memory_stats
-
-stats = get_memory_stats()
-print(f"Total Memory entries: {stats['total_entries']}")
-print(f"By category: {stats['by_category']}")
-```
-
-**Files:**
-- `skillforge/memory/findings.jsonl` — Security discoveries
-- `skillforge/memory/lessons.jsonl` — Patterns & best practices
-- `skillforge/memory/skills.jsonl` — Builder-generated playbooks
-- `skillforge/memory/social-events.jsonl` — X sentiment, narratives
-- `skillforge/memory/tools-registry.json` — Tool metadata
-- `skillforge/memory/INDEX.md` — Usage guide (human-readable)
+1. Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and the relevant subsystem doc before
+   changing it.
+2. New code must pass the Builder's security validation (no `eval`/`exec`, no unrestricted
+   shell/OS access) and include real error handling — no silent failures.
+3. Real data only: no simulated tool output, no fabricated findings, no guessed URLs or
+   icons. If a data source is unreachable, say so rather than approximate.
+4. Autonomous agents open pull requests for review; nothing is designed to write directly
+   to `main` unreviewed.
 
 ---
 
-## 🛠️ Builder Agent (Priority 2 — NEW)
+## License
 
-The **Builder** is V.A.P.E.'s self-improvement engine. It generates production-ready code, grounded in Memory.
-
-### Generate Code for a Task
-
-```python
-from agents.builder import Builder
-
-builder = Builder()
-
-# Generate code grounded in past patterns
-code, metadata = builder.generate_code(
-    task="Create a playbook for analyzing new Solidity smart contracts",
-    review=True,  # Security validation
-    tier="deep"   # Use reasoning LLM
-)
-
-# Outputs:
-# - code: production-ready Python
-# - metadata: title, tags, confidence (auto-appended to Memory)
-```
-
-### CLI Usage
-
-```bash
-python -m agents.builder --task "Create static analysis wrapper for Base contracts"
-python -m agents.builder --improve "agents/run.py:Add Memory search to analysis"
-python -m agents.builder --stats              # Show generation history
-```
-
-**Security Features:**
-- ✅ Input validation & sanitization
-- ✅ No unsafe code patterns (eval, exec, unrestricted OS access)
-- ✅ Full audit logging
-- ✅ Auto-append to Memory (immutable)
-- ✅ Rate-limited LLM calls (no cost overruns)
+MIT — see [LICENSE](LICENSE).
 
 ---
 
-## 🔗 MCP Integration (Priority 3 — NEW)
+<div align="center">
 
-The **MCP Integration** safely extends V.A.P.E. with external data sources.
+**The chain never lies.**
 
-### GitHub MCP — Read Repo Data & Propose PRs
-
-```python
-from skillforge.mcp import GitHubMCPWrapper
-
-gh = GitHubMCPWrapper(token=os.getenv("GITHUB_TOKEN"))
-
-# Search issues (read-only, safe)
-issues = gh.search_issues(
-    repo="jUXTAPOSITION1/V.A.P.E",
-    query="memory",
-    state="open",
-    limit=10
-)
-
-# Create a PR (write-gated, audit logged)
-success, pr_data = gh.create_pr(
-    repo="jUXTAPOSITION1/V.A.P.E",
-    title="Builder: Add Memory grounding to analysis",
-    body="Proposed by Builder based on Memory lessons",
-    head="builder-improvement-2026-07-01",
-    base="main"
-)
-```
-
-### Social MCP — Sentiment & Narrative Tracking
-
-```python
-from skillforge.mcp import SocialMCPWrapper
-
-social = SocialMCPWrapper()
-
-# Fetch aggregated sentiment (no individual user tracking)
-sentiment = social.get_sentiment_summary(
-    accounts=["@based_vape"],
-    query="@based_vape Base ecosystem",
-    days_back=1
-)
-print(f"Positive ratio: {sentiment['aggregated_sentiment']['positive_ratio']}")
-
-# Append to Memory for future grounding
-social.append_social_event_to_memory({
-    "title": "Daily Sentiment Summary",
-    "content": json.dumps(sentiment),
-    "tags": ["social", "sentiment", "daily"],
-    "confidence": 0.7
-})
-```
-
-### Tool Registry MCP — Latest Security Tools
-
-```python
-from skillforge.mcp import ToolRegistryMCPWrapper
-
-registry = ToolRegistryMCPWrapper()
-
-# Fetch latest slither releases
-releases = registry.fetch_tool_releases(
-    owner="crytic",
-    repo="slither",
-    limit=5
-)
-
-# Fetch CVE summary
-cves = registry.fetch_cve_summary(days_back=7)
-print(f"Critical CVEs: {cves['critical_count']}")
-```
-
-### Run Full MCP Harvest (→ Memory)
-
-```bash
-python -m skillforge.mcp --harvest
-```
-
-**Output:**
-- GitHub issues/PRs → Memory
-- Social sentiment → Memory
-- Tool updates → Memory
-- All auto-appended for future grounding
-
----
-
-## 📊 Data Flow (End-to-End)
-
-```
-Real Data Sources (TVL, X, CVEs, Contracts)
-        │
-        ├─→ [Python Engine] ──→ LLM analysis
-        ├─→ [MCP] ──→ GitHub/Social/Tools
-        ├─→ [Slither] ──→ Static analysis
-        │
-        └──────→ All feed into MEMORY
-                 (Append-only, searchable)
-                 │
-                 ├─→ [Future Detective Run] ──→ Grounded in past findings
-                 ├─→ [Builder] ──→ Generates code grounded in lessons
-                 ├─→ [SKILLFORGE] ──→ Synthesizes new tools/skills
-                 │
-                 └──→ intel/ + ACP → Revenue + Broadcasts
-
-Every cycle compounds intelligence: past findings ground future runs.
-```
-
----
-
-## 🔒 Security & Audit
-
-**Every component includes:**
-- ✅ Input sanitization (no secrets, limited length)
-- ✅ Append-only Memory (no deletion/modification)
-- ✅ Full operation logging (audit trail)
-- ✅ Rate limiting (prevent cost overruns)
-- ✅ Review gates for writes (GitHub PRs, ACP fulfillment)
-- ✅ Least privilege (read-only by default; writes gated)
-
-**Memory Sanitization:**
-- Regex filters for API keys, private keys, PII
-- Ethereum address masking
-- Character whitelisting
-
-**Builder Security:**
-- Unsafe pattern detection (eval, exec, unrestricted OS access)
-- No unvalidated input usage
-- Restricted module blocklist
-- Code review before auto-append
-
-**MCP Security:**
-- Rate limiting (GitHub: 60 calls/min, Social: 30 calls/min)
-- Public data only (no authentication tokens exposed)
-- Caching to minimize API calls
-- Graceful error handling & fallback
-
----
-
-## 🚦 Current Status & Roadmap
-
-### ✅ July 2026 Release (Complete + Hardened)
-- [x] Central Memory (retriever.py, append-only, searchable)
-- [x] Builder Agent (self-improving code generator, security-validated)
-- [x] MCP Integration (GitHub, Social, Tool Registry wrappers)
-- [x] Integration Glue (Memory + Builder + MCP in detective flows)
-- [x] Updated run.py (now grounds analysis in Memory)
-- [x] CLI interfaces (builder.py, mcp.py, integration.py)
-- [x] **Hardening pass** — see [changelog](#-hardening-changelog-july-2026) below
-
-### 🕵️ Deep Investigations + Live Dashboard (July 2026)
-VAPE now runs **autonomous end-to-end investigations** and publishes them to a **pro live dashboard**:
-
-| Component | What it does |
-|-----------|--------------|
-| **`agents/investigate.py`** | Deep-investigation engine (zero-LLM, real data). Auto-selects the highest-signal live Base target (violent movers / low-liquidity pools), runs GoPlus token-security + DexScreener liquidity + Base-RPC code presence + Etherscan V2 verification + recent-hack technique correlation, computes a CertiK-style 0–100 safety score — risk is the default state, not the exception: ownership-renouncement, holder concentration, tiered pair-age, and known meme-factory-template detection (e.g. Clanker) all factor in, and a clean red-flag sweep alone is capped below PROCEED tier without real positive legitimacy signals (deep liquidity, real holder base, track record, custom verified code) — and files a verdict report to `intel/investigations/`, logs a `finding` to Memory, and appends the catalog. Every real verdict is permanently recorded in `intel/investigations/ledger.json`, keyed by address — auto mode (`--auto`) never re-investigates an address already on record (no more repeat reports on the same token); `--address` always forces a fresh check, the documented exception for a hired job or a deliberate deep-dive. `fail-list.md` / `caution-list.md` / `pass-list.md` are regenerated from the ledger every run. `agents/review_ledger.py` periodically re-checks the oldest-reviewed addresses in each list against fresh data (pass/caution weekly, fail monthly) and logs a real finding whenever a past verdict no longer holds — VAPE checking its own accuracy over time. |
-| **`agents/token_scan.py`** | The free Hunt console + paid x402 quick-check tier (also ported field-for-field to `worker/src/scan.ts` and `docs/assets/app.js`, kept in sync by `.github/workflows/scan-parity.yml`). Same real GoPlus+DexScreener data as the deep investigation, with the checks that don't need an optional Etherscan key: holder count, LP-holder concentration, pair age, and GoPlus's own blacklist/selfdestruct/airdrop-scam flags (hard-reject tier, same as honeypot) — plus a DexScreener self-declared socials/website presence check. Contract-verification-based checks (e.g. meme-factory-template detection) stay investigate.py-only since the browser path can't hold an Etherscan key safely. |
-| **`agents/build_intel_index.py`** | Zero-LLM parser that turns every produced artifact (reports, broadcasts, investigations, catalog, tools, skills) into a machine-readable, **linkable** `data/intel-index.json` — each entry deep-links to its exact source file on GitHub. |
-| **`agents/broadcast.py`** | Community intel broadcast (`.github/workflows/broadcast.yml`, every 6h), reviving `intel/broadcasts/` after it went dormant 2026-07-01 (nothing in this repo's CI ever generated these — every prior broadcast came from an external process). Zero-LLM, built entirely from `agents/data_fetchers.build_market_context()` (TVL, fees, hacks, Fear&Greed, global market, Virtuals, movers, anomaly flags) plus the investigation ledger — no new API calls. The priced `community_intel_broadcast` ACP offering now has a real auto-handler (`agents/acp_fulfill.py`) that serves the latest generated file, instead of routing to "manual" with nothing to serve. |
-| **`agents/x402_directory_register.py`** | One-off (`workflow_dispatch`-only) announcement of VAPE's 6 x402 offerings to third-party discovery directories so other agents can find and hire VAPE. Registers with [402 Index](https://402index.io) via its documented API; prints a ready-to-paste manifest for [x402 List](https://x402-list.com) (no public submission API exists there — manual web form only, so this doesn't fabricate one). Separately, `worker/src/index.ts` declares [x402 Bazaar](https://docs.cdp.coinbase.com/x402/bazaar) discovery metadata per route via `@x402/extensions/bazaar` — best-effort, since Bazaar indexing has a live unresolved bug ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112)) even for correct implementations. |
-| **`agents/skillforge_build.py`** | The self-directed half of "VAPE can build things" (`.github/workflows/skillforge-build.yml`, weekly). `agents/builder.py`'s `generate_project()` already builds real multi-file tools, and `agents/build_request.py` wires that to a human filing a labeled GitHub issue — this module is VAPE deciding *for itself* what's worth building: one LLM call gathers real signal (tool-registry `broken`/`needs_key` gaps, recent investigation findings, AI-redteam findings, self-improvement lessons — all from Memory, nothing invented) and proposes exactly one concrete, justified build or explicitly proposes nothing; a second LLM call (`generate_project()`) implements it. Same safety boundary as `build_request.py`: lands in an isolated `build-requests/skillforge-<slug>-<date>/` directory via a PR, never applied directly — Builder's security validation is the first gate, human PR review is the second. `agents/_build_pr.py` holds the git/PR plumbing shared by both build pipelines. |
-| **Live dashboard** | [`juxtaposition1.github.io/V.A.P.E`](https://juxtaposition1.github.io/V.A.P.E/) now leads with a **Latest Investigation** hero (verdict + score + rationale) and an **Intel Explorer** — tabbed, filterable, fully linkable sections for Investigations / Reports (by domain) / Broadcasts / Tools. Refreshes every cycle. |
-| **Cycle wiring** | Both the hourly CI (`bounty-cycle.yml`) and the local 4h sweep (`scripts/intel_sync.sh`) now run the investigation + rebuild the index before committing — so the site stays current with zero extra compute. |
-
-### 🔌 Standard MCP Server + Queryable Memory (July 2026)
-V.A.P.E. now speaks the **industry-standard Model Context Protocol** and has a **queryable memory index** — both **zero new dependencies** (pure stdlib), so they stay compute-free and Termux/Android-friendly. See [docs/MCP_SERVER.md](docs/MCP_SERVER.md).
-
-| Component | What it does |
-|-----------|--------------|
-| **`mcp_servers/vape_mcp.py`** | A standard MCP server (JSON-RPC 2.0 over stdio, protocol `2024-11-05`) exposing VAPE's **real** capabilities as discoverable tools — `investigate_token`, `scan_token_safety`, `recent_hacks`, `fear_greed`, `memory_search`, `memory_stats` — plus `vape://reputation` and `vape://intel-index` resources. Any MCP host (Claude, Cursor, VS Code, custom agents) can discover and call them. Read-only / keyless-first. Smoke-test: `python mcp_servers/vape_mcp.py --selftest`. |
-| **`skillforge/memory/index_db.py`** | Projects the append-only JSONL memory into a **stdlib-SQLite** index (FTS5 full-text when available) so agents can ask real questions ("high-confidence Base findings in the last 30 days"). JSONL stays the source of truth; the `.db` is derived, gitignored, and rebuilt each cycle. |
-| **`skillforge/mcp_client.py`** + **`mcp_servers/registry.json`** | VAPE is now an MCP **host** — it can spawn and consume any MCP server over stdio (lazily, no daemons). Registry declares 13 servers: **7 live keyless** (vape, filesystem, memory, sequential-thinking, fetch, git, sqlite) + **6 key-gated community** (Tavily, Brave, Firecrawl, Apify, Bright Data, GitHub) that activate the instant their env var is set. Verified end-to-end: VAPE spawns real external servers and calls their tools. |
-| **`skillforge/research.py`** | Unified research router — one search/scrape API that uses the **best available provider** (Tavily/Brave/Firecrawl/BrightData/Apify) and **falls back to keyless** (MCP fetch) so bounty/CVE/protocol research works today and upgrades automatically when a key is added. Exposed as MCP tools `research_search` / `research_scrape` / `mcp_servers` for external MCP hosts, **and called directly by VAPE's own pipeline**: `agents/investigate.py::web_reputation_check()` runs a real web search per investigation for public rug/scam mentions GoPlus/DexScreener can't see (folded into the safety score with a narrow, unambiguous keyword match — real evidence with a source link, not a sentiment guess), and `agents/run.py::_web_intel_context()` adds one real live-web-search block to each bounty-report cycle's grounding. Both existed only as MCP-exposed tools with zero internal callers until this wiring — the `TAVILY_API_KEY`/`FIRECRAWL_API_KEY`/`BRIGHTDATA_API_TOKEN` secrets were configured in 4 workflows for over a week without ever actually being used. Quota-capped (`skillforge/memory/research_quota.json`, committed state — NOT `data/cache/`, which is gitignored and would silently reset the cap every CI run) at a conservative fraction of each provider's real free tier. |
-
-### 🔧 Hardening Changelog (July 2026)
-The skeleton was reviewed end-to-end and filled into a robust, runnable system:
-
-| Area | Fix |
-|------|-----|
-| **Memory** | Fixed an f-string crash in `generate_index()` that broke `init_memory()` on every call. |
-| **Memory** | Added a backward-compatible normalizer so legacy SKILLFORGE rows (`ts/source/summary` and `ts/action/outcome`) are queryable — previously 74/80 entries were unreadable (`category: unknown`). |
-| **Builder** | Reworked the security validator into hard-**BLOCK** vs advisory-**WARN** tiers. The old list hard-rejected `import os`, `open(`, `requests.get`, `json.loads` — which would have rejected nearly every real file. |
-| **run.py** | Added repo-root to `sys.path` so `agents.*` / `skillforge.*` resolve when CI runs `python agents/run.py`; the integration layer was silently disabled before. |
-| **run.py** | Guarded Groq SDK init + legacy fallback so the cycle no longer crashes at import when no key is set (multi-provider `llm.py` is the primary path). |
-| **run.py** | Grounding now **searches** Memory before the LLM and appends the **actual analysis** afterward (only on real output) — no more raw-data pollution. |
-| **SKILLFORGE** | `hack_feed` false-positive fixed (registry `version_cmd` now uses the wrapper path); `wallet_trace` reclassified as `unsupported` / `known_limitation` (Etherscan V2 paid-only on Base). Toolcheck now skips known limitations — ending the recurring issue spam. |
-| **Docs** | Added the missing `docs/MEMORY.md`, `docs/BUILDER.md`, `docs/MCP.md` referenced by this README. |
-
-### 🟡 Next (Planned)
-- [ ] Expand Builder to generate skill playbooks (sc-static, ai-redteam, recon)
-- [ ] Connect Node agent to Memory + Builder
-- [x] **Live dashboard with investigation summary + linkable intel explorer** ✅
-- [ ] Enhance UI with Memory browser + Builder dashboard
-- [ ] MCP: Integrate real X API v2 (vs. mock data for MVP)
-- [ ] MCP: Connect to more tool registries (npm, crates.io, etc.)
-- [ ] Extended audit trail: Memory versioning, blame log
-
-### 🔴 Known Limitations (by design, not breakage)
-- `wallet_trace` account endpoints need a paid Etherscan V2 plan on Base — use keyless
-  `base_rpc` (balance/nonce) and `contract_recon` (verified source) instead.
-- Social MCP sentiment is an MVP aggregate pending a live X API v2 / partner feed.
-- Node agent narrative sweeps are local (4h cron); the **investigation engine now runs in both CI and the local sweep**.
-- Etherscan V2 verification in investigations is best-effort — it activates only when `ETHERSCAN_API_KEY` is set; otherwise all other recon (GoPlus/DexScreener/Base RPC/hack-feed) still runs keyless.
-
----
-
-## 📚 Documentation
-
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** — System design & data flow
-- **[ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md)** — Agent Commerce Protocol details
-- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** — Deploy to GitHub Actions + Node
-- **[MEMORY.md](docs/MEMORY.md)** — Central Memory usage guide ✅ NEW
-- **[BUILDER.md](docs/BUILDER.md)** — Builder Agent reference ✅ NEW
-- **[MCP.md](docs/MCP.md)** — MCP Integration guide ✅ NEW
-
----
-
-## 🔧 Environment Variables
-
-Copy `.env.example` to `.env` and fill in:
-
-```bash
-# LLM (multi-provider, pick at least one)
-GROQ_API_KEY=                          # Required (fast path)
-CEREBRAS_API_KEY=                      # Optional fallback
-OPENROUTER_API_KEY=                    # Optional fallback
-GITHUB_MODELS_TOKEN=                   # Optional fallback
-TOGETHER_API_KEY=                      # Optional fallback
-
-# GitHub (for MCP + PR creation)
-GITHUB_TOKEN=                          # Required for writes
-
-# Base RPC (for on-chain data)
-BASE_RPC_URL=https://mainnet.base.org  # Optional (keyless)
-
-# External APIs (all optional, keyless where possible)
-DEXSCREENER_API=                       # Token data
-COINGECKO_API=                         # Price data
-DEFILLAMA_API=                         # TVL data
-
-# ACP (for revenue)
-VIRTUALS_API_KEY=                      # Optional (revenue cycle)
-
-# Feature Flags
-VAPE_FULL_CYCLE=1                      # Enable Memory + Builder + MCP
-```
-
----
-
-## 🎯 Performance & Costs
-
-| Component | Frequency | Compute | Cost/Month |
-|-----------|-----------|---------|-----------|
-| Python Engine | Hourly | Free runner (GitHub Actions) | $0 |
-| SKILLFORGE harvest | Hourly | Free runner | $0 |
-| SKILLFORGE toolcheck | 6×/day | Free runner | $0 |
-| SKILLFORGE synthesize | Daily | Free runner + LLM | $0.01–0.05 (Groq) |
-| Builder | On-demand | Free runner + LLM | $0.01–0.05 (Groq) |
-| MCP harvest | On-demand | Free runner + API calls | $0 (keyless/cached) |
-| Node agent | Continuous | Local machine | $0 (optional) |
-| ACP revenue | Continuous | Base blockchain | +USDC (14 offerings) |
-
-**Total monthly cost:** ~$0.10–0.50 (LLM calls) + revenue from ACP
-
----
-
-## 🚀 Deployment
-
-### Automatic (Recommended)
-Set `GROQ_API_KEY` in repo Secrets and enable Actions. Workflows run 24/7 with zero local compute.
-
-### Manual (Local Testing)
-```bash
-python -m agents.run                                    # Once
-VAPE_FULL_CYCLE=1 python -m agents.run                 # Full cycle
-```
-
-### Node Agent (Local Depth)
-```bash
-npm install
-npm start                                              # Continuous investigation loop
-```
-
-See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for full setup.
-
----
-
-## 📖 The Chain Never Lies
-
-V.A.P.E makes sure you hear the truth first. Built on real data. Grounded in past findings. Auto-improving through Memory and Builder. Extending reach via safe MCP integration.
-
-**Every finding is immutable. Every lesson is recorded. Every skill compounds future intelligence.**
-
----
-
-## 🤝 Contributing
-
-1. Review existing code in `agents/` and `skillforge/`
-2. Check [Memory.md](docs/MEMORY.md) / [Builder.md](docs/BUILDER.md) / [MCP.md](docs/MCP.md) for integration points
-3. Ensure all new code is security-validated and audit-logged
-4. Append lessons learned to Memory for future cycles
-
----
-
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE)
-
----
-
-## 🔫🦍 Let's Hunt.
-
-**Live dashboard:** [Bounty Command Center](https://jUXTAPOSITION1.github.io/V.A.P.E/)
-
-**V.A.P.E. operates 24/7 via GitHub Actions. Zero local compute. Real data only.**
-
-**The autonomous detective for the on-chain ecosystem.**
-
----
-
-_Last Updated: July 1, 2026 — Central Memory + Builder + MCP Integration Release_
+</div>

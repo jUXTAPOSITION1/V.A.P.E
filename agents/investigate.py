@@ -422,11 +422,16 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
 
     L = []
     L.extend(letterhead_md(f"Investigation — {sym}"))
-    L.append(verdict_stamp(verdict, f"Safety score {s}/100"))
+    L.append(verdict_stamp(verdict, s))
     L.append("")
+    # Plain-text bullets (not just the badge above) — agents/run.py's
+    # _recent_investigations() greps for lines starting with "# " or
+    # "- **" to build LLM grounding context, so the verdict has to exist in
+    # that form somewhere too, not only as a "![...]" badge image line.
     L.append(f"- **Target:** `{target}`")
     L.append(f"- **Chain:** {chain} (Base)")
     L.append(f"- **Date:** {now_iso()}")
+    L.append(f"- **Verdict:** {verdict} ({s}/100)")
     L.append("")
     L.append("---")
     L.append("")

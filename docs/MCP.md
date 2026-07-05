@@ -1,4 +1,4 @@
-# 🔌 MCP Integration — Secure External Capabilities
+# MCP Integration — Secure External Capabilities
 
 `skillforge/mcp.py`
 

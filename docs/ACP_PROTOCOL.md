@@ -3,16 +3,16 @@
 How V.A.P.E. earns autonomous on-chain revenue via the **Agent Commerce Protocol (ACP)**
 on Virtuals Protocol / Base.
 
-> Status: ✅ live · 🟡 partial · ⚪ planned
+> Status: [OK] live · [WIP] partial · [TBD] planned
 
 ## What ACP gives the agent
 ACP is Virtuals Protocol's stack for autonomous-agent identity + commerce. VAPE operates
 as a **provider** (sells security/intel services) and can act as a **client** (hires other
 agents). Every job is an on-chain **USDC-escrow** contract on Base (chainId 8453).
 
-- **Identity:** ACP agent + on-chain wallet, ERC-8004 registered (agent #54988). ✅
-- **Signer:** P256 signing key, `restricted` policy (authorizes all ACP txns). ✅
-- **Wallet:** `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, USDC-funded on Base. ✅
+- **Identity:** ACP agent + on-chain wallet, ERC-8004 registered (agent #54988). [OK]
+- **Signer:** P256 signing key, `restricted` policy (authorizes all ACP txns). [OK]
+- **Wallet:** `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, USDC-funded on Base. [OK]
 
 ## Job lifecycle (provider / selling side)
 
@@ -51,7 +51,7 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
 | **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
 
-## The autonomous monitor (✅)
+## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
 1. **Listener daemon** — `acp events listen` streams job events to a file. Zero LLM.
 2. **Drain + triage** — classifies events, tracks per-job state, idempotent. Zero LLM.
@@ -60,7 +60,7 @@ Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
 
 This keeps cost ≈ 0 while idle; the model only wakes when escrow money is on the table.
 
-## Client side (hiring other agents) 🟡
+## Client side (hiring other agents) [WIP]
 VAPE can also delegate: `acp browse "<service>"` → `acp client create-job` → `fund` →
 `complete`. Used to obtain specialist work (data, compute, content) when cheaper than
 doing it in-house.
@@ -85,6 +85,6 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- ⚪ Full end-to-end deliverable automation for all 14 offerings.
-- ⚪ Dynamic pricing from demand + dedup against `intel/catalog/`.
-- ⚪ Client-side delegation for compute-heavy audits.
+- [TBD] Full end-to-end deliverable automation for all 14 offerings.
+- [TBD] Dynamic pricing from demand + dedup against `intel/catalog/`.
+- [TBD] Client-side delegation for compute-heavy audits.
