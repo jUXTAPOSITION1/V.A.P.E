@@ -212,10 +212,24 @@
         <section id="the-wire" class="reveal mb-16">
             <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Live Data</span></div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3">Live Intelligence Feed</h2>
-            <p class="text-zinc-400 text-sm mb-8 max-w-2xl leading-relaxed">A continuous view of Base — capital flows, network health, and protocol activity,
-            refreshed every five minutes from primary on-chain and market data.</p>
+            <p class="text-zinc-400 text-sm mb-8 max-w-2xl leading-relaxed">A continuous view of the broader market and Base itself — capital flows, network
+            health, protocol activity, and real-time trading behavior — refreshed every five minutes from primary
+            on-chain and market data, never a cached snapshot.</p>
 
-            <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <section id="metrics" class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-zinc-500 text-xs uppercase tracking-wider">Global Market Cap</div>
+                    <div id="m-mcap" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
+                </div>
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-zinc-500 text-xs uppercase tracking-wider">Fear &amp; Greed</div>
+                    <div id="m-feargreed" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
+                    <div class="h-1 rounded-full bg-white/10 mt-3 overflow-hidden"><div id="m-feargreed-fill" class="h-full rounded-full transition-all duration-500" style="width:0%;background:#a1a1aa"></div></div>
+                </div>
+                <div class="glass rounded-2xl p-6">
+                    <div class="text-zinc-500 text-xs uppercase tracking-wider">ETH / BTC</div>
+                    <div id="m-price" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
+                </div>
                 <div class="glass rounded-2xl p-6">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider">Base TVL</div>
                     <div id="m-tvl" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
@@ -227,10 +241,6 @@
                 <div class="glass rounded-2xl p-6">
                     <div class="text-zinc-500 text-xs uppercase tracking-wider">Gas (gwei)</div>
                     <div id="m-gas" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
-                </div>
-                <div class="glass rounded-2xl p-6">
-                    <div class="text-zinc-500 text-xs uppercase tracking-wider">ETH / BTC</div>
-                    <div id="m-price" class="stat text-2xl sm:text-3xl font-display mt-2 skeleton rounded">&nbsp;</div>
                 </div>
             </section>
 
@@ -257,6 +267,26 @@
                     <div class="skeleton h-12 rounded-xl"></div>
                     <div class="skeleton h-12 rounded-xl"></div>
                     <div class="skeleton h-12 rounded-xl"></div>
+                </div>
+            </section>
+
+            <section class="glass rounded-3xl p-6 sm:p-9 mt-6">
+                <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
+                    <h3 class="text-lg font-semibold text-zinc-100">Base Movers <span class="text-xs text-zinc-500 font-normal">· DexScreener</span></h3>
+                    <div class="flex gap-1 text-xs" id="movers-tabs">
+                        <button data-m="trending" class="px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold">Trending</button>
+                        <button data-m="gainers" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10">Gainers</button>
+                        <button data-m="losers" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10">Losers</button>
+                        <button data-m="volume" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10">Volume</button>
+                    </div>
+                </div>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most actively promoted token pairs on Base right now, re-ranked live by
+                24-hour price change and trading volume — a real-time cross-section of retail attention, not a ranking by
+                market capitalization.</p>
+                <div id="base-movers" class="space-y-2">
+                    <div class="skeleton h-14 rounded-xl"></div>
+                    <div class="skeleton h-14 rounded-xl"></div>
+                    <div class="skeleton h-14 rounded-xl"></div>
                 </div>
             </section>
         </section>
@@ -446,14 +476,15 @@
         <!-- ═══ 8. INVESTIGATION ARCHIVE (Intel Explorer) ═══ -->
         <section id="the-archive" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16">
             <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-white/10 text-zinc-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-folder-open text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Records</span></div>
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-7">
-                <h2 class="font-serif-display text-2xl sm:text-3xl">Investigation Archive</h2>
-                <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs">
-                    <button data-tab="investigations" class="px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold">Investigations <span id="c-investigations" class="opacity-70"></span></button>
-                    <button data-tab="reports" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Reports <span id="c-reports" class="opacity-60"></span></button>
-                    <button data-tab="broadcasts" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Broadcasts <span id="c-broadcasts" class="opacity-60"></span></button>
-                    <button data-tab="tools" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Tools <span id="c-tools" class="opacity-60"></span></button>
-                </div>
+            <h2 class="font-serif-display text-2xl sm:text-3xl mb-3">Investigation Archive</h2>
+            <p class="text-zinc-400 text-sm mb-7 max-w-2xl leading-relaxed">The complete, unedited case log — every investigation, report, broadcast, and
+            internal tool VAPE has ever published, indexed automatically as it happens. Nothing here is curated after the
+            fact.</p>
+            <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs mb-7">
+                <button data-tab="investigations" class="px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold">Investigations <span id="c-investigations" class="opacity-70"></span></button>
+                <button data-tab="reports" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Reports <span id="c-reports" class="opacity-60"></span></button>
+                <button data-tab="broadcasts" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Broadcasts <span id="c-broadcasts" class="opacity-60"></span></button>
+                <button data-tab="tools" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Tools <span id="c-tools" class="opacity-60"></span></button>
             </div>
             <div id="intel-filter-wrap" class="mb-4 hidden">
                 <div id="intel-filter" class="flex flex-wrap gap-1.5 text-[11px]"></div>
@@ -488,10 +519,15 @@
         <section class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
             <div class="lg:col-span-8 space-y-6">
                 <section class="glass rounded-3xl p-8 sm:p-10">
-                    <h3 class="text-base font-semibold mb-5 text-zinc-200">Recent Reports</h3>
+                    <div class="flex items-center justify-between gap-3 mb-1.5">
+                        <h3 class="text-base font-semibold text-zinc-200">Recent Reports</h3>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" class="text-[11px] text-zinc-500 hover:text-cyan-400 transition shrink-0">All reports <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                    </div>
+                    <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-lg">The most recent published output across every report type VAPE generates — market
+                    intelligence, token security, and vulnerability disclosures — each with the verdict and evidence trail attached, not a summary written after the fact.</p>
                     <div id="reports" class="space-y-2">
-                        <div class="skeleton h-10 rounded-lg"></div>
-                        <div class="skeleton h-10 rounded-lg"></div>
+                        <div class="skeleton h-14 rounded-xl"></div>
+                        <div class="skeleton h-14 rounded-xl"></div>
                     </div>
                 </section>
             </div>
@@ -562,7 +598,7 @@
       change, or you'll chase "it's not fixed" reports that are actually
       just stale caches.
     -->
-    <script src="assets/app.js?v=8"></script>
+    <script src="assets/app.js?v=9"></script>
     <script type="module" src="assets/wallet.js?v=8"></script>
     <script type="module" src="assets/profile.js?v=8"></script>
     <script type="module" src="assets/report.js?v=8"></script>
