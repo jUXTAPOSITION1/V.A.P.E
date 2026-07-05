@@ -87,11 +87,13 @@ jobs:
       - name: Spot-check free data routes (manual trigger only)
         if: ${{ success() && env.HAS_CF_TOKEN == 'true' && github.event_name == 'workflow_dispatch' }}
         run: |
+          # No -f: curl's -f swallows the response BODY on HTTP error status
+          # codes, which hid every route's JSON error/detail field behind a
+          # bare "curl: (22) ... 502" on the very run meant to reveal it.
           addr=0xa1420293a7df49bc8380f543a1fe7b8d6f582879
           for path in "network-status" "portfolio?address=$addr" "nfts?address=$addr"; do
             echo "--- /$path ---"
-            curl -fsS --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path" || echo "(request failed)"
-            echo
+            curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
