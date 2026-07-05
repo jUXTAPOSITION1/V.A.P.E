@@ -7,11 +7,13 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // to its direct-API path if this ever returns an error, so the site keeps
 // working even if the worker is down.
 //
-// Currently pointed at the Deno Deploy fallback (see worker/README.md's
-// "Cloudflare + Deno Deploy" section) while Cloudflare's workers.dev
-// subdomain is being re-registered on the account — switch this to the
-// Cloudflare *.workers.dev URL once that's confirmed live, same either way
-// since src/index.ts has zero runtime-specific code.
+// Cloudflare Workers is the primary deploy target (.github/workflows/
+// deploy-worker.yml, which also runs a post-deploy smoke test against this
+// exact URL on every deploy). worker/deno/ mirrors the identical src/index.ts
+// on Deno Deploy as a documented fallback — switch this back to
+// "https://vape.juxtaposition1.deno.net" with zero code changes if this
+// Cloudflare account ever re-hits the workers.dev subdomain-registration bug
+// described in worker/README.md's "Cloudflare + Deno Deploy" section.
 //
 // IMPORTANT: whichever URL this points to, it must be that platform's
 // stable *production* URL, not an individual build's preview URL (e.g.
@@ -19,7 +21,7 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // whatever code was live for that one build and never receive later pushes,
 // which is exactly what caused the x402 hire flow to keep failing with a
 // stale CORS config after the fix had already shipped.
-const WORKER_BASE = "https://vape.juxtaposition1.deno.net";
+const WORKER_BASE = "https://vape-x402.vapex402.workers.dev";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 
