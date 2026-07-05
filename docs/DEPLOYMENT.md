@@ -27,14 +27,25 @@ The Python engine + SKILLFORGE run entirely in GitHub Actions. No server needed.
 
 | Secret | Required | Used by |
 |---|---|---|
-| `GROQ_API_KEY` | [OK] | bounty-cycle, synthesize |
-| `GEMINI_API_KEY` | optional | intel web_search |
+| `GROQ_API_KEY` | [OK] | bounty-cycle, synthesize, redteam, self-improve, skillforge-build — every scheduled LLM call |
+| `CEREBRAS_API_KEY` | recommended | `agents/llm.py`'s automatic fallback when Groq rate-limits (free, 1M tokens/day) |
+| `OPENROUTER_API_KEY` | optional | further fallback in the same chain (20+ free models) |
+| `GEMINI_API_KEY` | optional | frontier tier for the 50 USDC deep-dive audit (`gemini-2.5-pro`); also a fallback in the normal chain |
+| `TOGETHER_API_KEY` | optional | last fallback rung in the same chain |
 | `ETHERSCAN_API_KEY` | optional | recon toolcheck (contract_recon) |
 | `GITHUB_TOKEN` | auto | commits/pushes (injected by Actions) |
 
 > If `GITHUB_TOKEN` is restricted by org policy and pushes fail, add a fine-grained
 > **PAT** with `contents: write` as a secret (e.g. `VAPE_PAT`) and reference it in the
 > workflow checkout/push step.
+
+> **Set at least one fallback LLM key.** `agents/llm.py` is built as a
+> multi-provider chain, but with only `GROQ_API_KEY` configured it's a single
+> point of failure in practice — a real rate-limit audit of this repo's own
+> `reports/bounty_report_*.md` history found ~3.5% of hourly bounty-cycle
+> runs hit "Rate limit persistent. Try later." with Groq alone. Adding
+> `CEREBRAS_API_KEY` (free, highest daily quota of the fallbacks, zero code
+> changes needed) closes that gap.
 
 ### A2. Workflows (already in `.github/workflows/`)
 | Workflow | Schedule | Purpose |

@@ -13,6 +13,7 @@
  */
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { cache } from "hono/cache";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
@@ -189,7 +190,18 @@ app.get("/", (c) =>
 // site's read-only wallet profile and metrics strip rather than a priced
 // offering. 503 (not 500) when ALCHEMY_API_KEY isn't configured, so callers
 // can fall back to their direct public-RPC path instead of erroring.
-app.get("/portfolio", async (c) => {
+//
+// Alchemy usage is metered (compute units), unlike the public-data providers
+// elsewhere in this file — a real per-visitor cost, not just a shared public
+// rate limit. None of this had any caching, so a page reload, multiple open
+// tabs, or the site's own periodic polling each burned a fresh Alchemy call
+// for data that's identical within a short window. Cloudflare's Cache API
+// (via Hono's built-in `cache` middleware) absorbs repeat requests to the
+// same URL — `/network-status` takes no query params at all, so this also
+// means every visitor now shares ONE cached Alchemy call instead of one each.
+// Only 200 responses are cached by default, so the 400/502/503 error paths
+// below are never cached.
+app.get("/portfolio", cache({ cacheName: "vape-portfolio", cacheControl: "max-age=20" }), async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "portfolio lookup not configured" }, 503);
@@ -201,7 +213,7 @@ app.get("/portfolio", async (c) => {
   }
 });
 
-app.get("/nfts", async (c) => {
+app.get("/nfts", cache({ cacheName: "vape-nfts", cacheControl: "max-age=60" }), async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "nft lookup not configured" }, 503);
@@ -213,7 +225,7 @@ app.get("/nfts", async (c) => {
   }
 });
 
-app.get("/network-status", async (c) => {
+app.get("/network-status", cache({ cacheName: "vape-network-status", cacheControl: "max-age=20" }), async (c) => {
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "network status not configured" }, 503);
   try {
     const status = await getNetworkStatus(c.env);
