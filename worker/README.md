@@ -2,64 +2,57 @@
 
 Pay-per-call access to VAPE's 6 automatable ACP offerings over Coinbase's [x402](https://www.x402.org/) HTTP payment protocol. The other 8 offerings (deep audits, forensics, wallet recon, etc.) need the SKILLFORGE tool tier and are hired through a real [ACP job](../docs/ACP_PROTOCOL.md) instead — this worker doesn't duplicate that.
 
-Runs on [Deno Deploy](https://deno.com/deploy), not Cloudflare Workers — see "Why Deno Deploy, not Cloudflare" below for the history, if you're wondering why `src/index.ts` still reads like Workers code.
-
 ## Setup
 
 ```bash
 cd worker
 npm install
-npm run dev     # runs worker/deno/deno-entry.ts locally via `deno task start`
+npx wrangler login          # opens a browser, needs your Cloudflare account
+npx wrangler dev            # local dev server
 ```
 
 Try the unpaid route first:
 ```bash
-curl http://localhost:8000/
+curl http://localhost:8787/
 ```
 
 Then a paid one (expect a real `402` with payment requirements, since you have no payment header yet):
 ```bash
-curl -i "http://localhost:8000/scan/token_safety_check?address=0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE"
+curl -i "http://localhost:8787/scan/token_safety_check?address=0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE"
 ```
 
-### Environment variables
+### Secrets
 
-Set these as environment variables in the Deno Deploy project settings (mark them "secret" there — hidden after save, same idea as `wrangler secret put`):
-
-| Variable | Required | Used for |
-|---|---|---|
-| `PAY_TO_ADDRESS` | [OK] | payout wallet for every settled x402 call — VAPE's existing ACP wallet |
-| `X402_NETWORK` | [OK] | `eip155:8453` (Base mainnet) |
-| `X402_FACILITATOR_URL` | [OK] | `https://api.cdp.coinbase.com/platform/v2/x402` |
-| `CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` | required for real settlement | mints the Bearer JWT `src/lib/cdpAuth.ts` needs for every `/verify`/`/settle` call — see [CDP Secret API Key](https://portal.cdp.coinbase.com) |
-| `ETHERSCAN_API_KEY` | optional | only `exploit_check`/`safety_preflight` use it |
-| `ALCHEMY_API_KEY` | optional | powers `/portfolio`, `/nfts`, `/network-status` |
-| `COINGECKO_API_KEY` | optional | powers `/prices`; required for `/cost-basis` |
-| `GH_DISPATCH_TOKEN` | optional | powers `/scan/bounty_deep_dive` (see below) |
-
-Locally, export these in your shell before `npm run dev`; `deno-entry.ts` reads them via `Deno.env.get(...)`.
+```bash
+npx wrangler secret put ETHERSCAN_API_KEY   # optional — only exploit_check/safety_preflight use it
+npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement — see below
+npx wrangler secret put CDP_API_KEY_SECRET
+npx wrangler secret put ALCHEMY_API_KEY     # optional — powers /portfolio, /nfts, /network-status
+npx wrangler secret put COINGECKO_API_KEY   # optional — powers /prices, and required for /cost-basis
+npx wrangler secret put GH_DISPATCH_TOKEN   # optional — powers /scan/bounty_deep_dive (see below)
+```
 
 ### Deploy
 
-At [dash.deno.com](https://dash.deno.com):
-1. **New Project → GitHub → jUXTAPOSITION1/V.A.P.E**.
-2. Set the **entry point** to `worker/deno/deno-entry.ts`.
-3. Add the environment variables above in the project's settings.
-4. Deploy. Deno assigns a working `https://<project>.deno.dev` URL immediately — no manual subdomain registration step. If you ever change the project name/URL, update `docs/assets/app.js`'s and `docs/assets/profile.js`'s `WORKER_BASE` constant to match.
+```bash
+npx wrangler deploy
+```
 
-Every push to `main` that touches `worker/**` auto-deploys via Deno Deploy's own GitHub integration — no workflow file, no token, nothing in this repo's CI drives it. `.github/workflows/worker-typecheck.yml` only runs `deno check` on PRs/pushes to catch type errors before merge; it never deploys anything.
+Ships on your `*.workers.dev` subdomain by default. **One manual one-time step**: Cloudflare requires you to claim a `workers.dev` subdomain from the dashboard (Workers & Pages → Overview) before the first deploy on a fresh account will actually publish — do this once, confirm it shows an active value (not blank), *then* deploy. `.github/workflows/deploy-worker.yml` does this same deploy on every push to `main` that touches `worker/**`, and needs `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` repo secrets to run live (it still typechecks and no-ops without them, rather than failing).
 
-### Why Deno Deploy, not Cloudflare
+## Cloudflare + Deno Deploy
 
-This started on Cloudflare Workers, and `src/index.ts` still reads like Workers code because the actual application logic has zero Cloudflare-specific dependencies — it's a plain Hono `app`, and `deno-entry.ts` just feeds it the same `Env` shape via `Deno.env.get(...)` instead of a Workers binding (Hono's documented pattern for any non-Workers runtime).
+Cloudflare Workers is the primary deploy target. `worker/deno/` runs the exact same Hono `app` (`src/index.ts`) on [Deno Deploy](https://deno.com/deploy) as a documented fallback — see `deno/deno-entry.ts` and `deno/deno.json`. This exists because one real Cloudflare account previously hit an account-level bug where `workers.dev` subdomain registration silently never completed (the per-Worker URL stayed `*-null` even with the toggle on, `/workers/onboarding` 404'd, and Wrangler/Cloudflare's Git integration/its "Create Application" wizard all failed identically) — if that ever recurs, this repo can switch `WORKER_BASE` in `docs/assets/app.js`/`profile.js` to the Deno URL without any code changes, since `src/index.ts` has zero Cloudflare-specific code.
 
-The move happened because one real Cloudflare account hit a subdomain-registration bug that never got resolved: `workers.dev` registration silently never completed (the per-Worker URL stayed `*-null` even with the toggle on, `/workers/onboarding` 404'd, and three separate deploy paths — Wrangler, Cloudflare's own Git integration, and its "Create Application" wizard — all failed identically). Deno Deploy assigns a working `*.deno.dev` URL automatically on first deploy, with no equivalent manual step, so this repo now runs there instead. There's no remaining Cloudflare dependency anywhere in this project — no `wrangler.toml`, no Cloudflare secrets, no Cloudflare Workers Builds Git integration should be connected to this repo (disconnect it from the Cloudflare dashboard if it still shows up posting build-status comments on PRs).
+To deploy the Deno fallback: at [dash.deno.com](https://dash.deno.com), **New Project → GitHub → jUXTAPOSITION1/V.A.P.E**, entry point `worker/deno/deno-entry.ts`, add the same environment variables as the Cloudflare secrets above (as Deno Deploy project settings, marked secret). Deno assigns a working `https://<project>.deno.dev` URL immediately, auto-deploying on every push to `main` via its own GitHub integration — no workflow file needed for that side.
 
-`deno/deno.json` (its own directory, deliberately **not** next to `package.json`) holds the import map aliasing the same npm packages `worker/package.json` uses — `hono`, `@x402/hono`, `@x402/core`, `@x402/evm`, `@x402/extensions`, `jose` — to their `npm:` specifiers Deno resolves natively, plus `"nodeModulesDir": "none"`. Both matter: a `deno.json` sitting next to a `package.json` makes Deno auto-detect a Node "workspace" and try to resolve *every* dependency in `package.json` — including devDependencies Deno never imports — which failed in an actual Deno Deploy build with an unrelated npm version-resolution error before this was separated out. Similarly, the entry point must be `worker/deno/deno-entry.ts`, not a copy sitting next to `package.json` — Deno Deploy's remote build runs `npm install` first and switches to strict "bring your own node_modules" resolution when it sees a sibling `package.json`, which doesn't consult the import map for scoped-package subpaths the way `deno check`/`deno run` do locally.
+`deno/deno.json` (its own directory, deliberately **not** next to `package.json`) holds the import map aliasing the same npm packages `worker/package.json` uses — `hono`, `@x402/hono`, `@x402/core`, `@x402/evm`, `@x402/extensions`, `jose` — to their `npm:` specifiers Deno resolves natively, plus `"nodeModulesDir": "none"`. Both matter: a `deno.json` sitting next to a `package.json` makes Deno auto-detect a Node "workspace" and try to resolve *every* dependency in `package.json` — including unrelated devDependencies like `wrangler`/`typescript` that the Deno runtime never imports — which failed in an actual Deno Deploy build with an unrelated npm version-resolution error before this was separated out. The entry point must stay at `worker/deno/deno-entry.ts` for the same reason: Deno Deploy's remote build runs `npm install` first and switches to strict "bring your own node_modules" resolution when it sees a sibling `package.json`, which a copy sitting next to `package.json` would trigger.
+
+`.github/workflows/worker-typecheck.yml` independently runs `deno check` against `deno/deno-entry.ts` on every push/PR touching `worker/**`, so the Deno path stays typechecked even though its actual deploys aren't CI-driven.
 
 ## Base mainnet + Coinbase Developer Platform
 
-This runs against **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `src/index.ts` for the testnet config if you need to reproduce that).
+`wrangler.toml` is pointed at **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `wrangler.toml`/`src/index.ts` for the testnet config if you need to reproduce that).
 
 To actually settle payments you need a [CDP Secret API Key](https://portal.cdp.coinbase.com) (`CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` above) — `src/lib/cdpAuth.ts` mints a Bearer JWT from it for every `/verify`, `/settle`, and `/supported` call to the facilitator (`src/index.ts`'s `buildCreateAuthHeaders()`). Without both secrets set, those calls go out unauthenticated and the facilitator returns 401.
 
@@ -73,13 +66,13 @@ Every `/scan/<offering>` route declares Bazaar discovery metadata (`@x402/extens
 
 ## `/scan/bounty_deep_dive` — the 24h-SLA premium offering ($50)
 
-Unlike every other `/scan/*` route (synchronous — pay, get a JSON result, done in well under a second), this one genuinely can't complete inside a single request: the real work (`agents/deep_dive_audit.py` — recon + Slither + a frontier-model line-by-line source review) takes minutes, not milliseconds. So the route:
+Unlike every other `/scan/*` route (synchronous — pay, get a JSON result, done in well under a second), this one genuinely can't complete inside a Worker's request window: the real work (`agents/deep_dive_audit.py` — recon + Slither + a frontier-model line-by-line source review) takes minutes, not milliseconds. So the route:
 
 1. Gates payment exactly like the other 6 (x402, same middleware).
 2. On settlement, calls `src/lib/githubDispatch.ts`'s `dispatchDeepDiveAudit()` — a `workflow_dispatch` REST call to `.github/workflows/deep-dive-bounty.yml`, passing `address`/`chain`/an optional `callback_url`.
 3. Returns immediately with `{"status": "accepted", ...}` and where the report will land (`intel/audits/poc-reports/`) — never a synchronous result.
 
-Needs `GH_DISPATCH_TOKEN` (a fine-grained PAT scoped to this repo, `Actions: write` + `Contents: read` — Deno Deploy has no equivalent of a CI-injected token). Without it, the route still gates and settles payment correctly but returns a `503` after settlement telling the buyer to use ACP instead — set this variable before advertising the x402 path for this offering. The ACP path (`scripts/acp-monitor/HANDLER_BRIEF.md`) doesn't need it — the host-side reasoning handler just runs `agents/deep_dive_audit.py` directly.
+Needs `GH_DISPATCH_TOKEN` (a fine-grained PAT scoped to this repo, `Actions: write` + `Contents: read` — Workers have no equivalent of the `GITHUB_TOKEN` Actions injects into its own runs). Without it, the route still gates payment correctly but returns a `503` after settlement telling the buyer to use ACP instead — set this secret before advertising the x402 path for this offering. The ACP path (`scripts/acp-monitor/HANDLER_BRIEF.md`) doesn't need it — the host-side reasoning handler just runs `agents/deep_dive_audit.py` directly.
 
 ## Free reliability + pricing endpoints
 
@@ -91,13 +84,13 @@ Unpaid, no-x402-gate routes back the site's wallet profile ("Your Case File") an
 - `GET /prices?addresses=0x…,0x…` — current USD price + 24h change for a batch of Base contract addresses, proxying CoinGecko with `COINGECKO_API_KEY` attached for better rate-limit headroom than the fully anonymous public tier (which the site's client-side JS falls back to directly if this route isn't available).
 - `GET /cost-basis?address=0x…` — estimated cost-basis P&L per token (see `src/lib/costBasis.ts` for exactly what it computes — a single first-acquisition price point per token via Alchemy transfer history + CoinGecko's historical-price-by-contract endpoint, not full weighted-average accounting). Needs **both** `ALCHEMY_API_KEY` and `COINGECKO_API_KEY` — the historical-price endpoint specifically requires a CoinGecko key even on their free Demo tier (confirmed by testing it unauthenticated and getting rejected), unlike `/prices`' current-price lookup which works either way.
 
-`/portfolio`, `/nfts`, and `/network-status` are cached at the edge for 20–60s (Deno's `caches.open()` Web Cache API, via Hono's built-in `cache` middleware) — Alchemy usage is metered, and `/network-status` in particular is identical for every visitor at a given moment, so this absorbs repeat requests instead of burning a fresh Alchemy call each time. Error responses (400/502/503) are never cached.
+`/portfolio`, `/nfts`, and `/network-status` are cached at the edge for 20–60s (the Web Cache API, via Hono's built-in `cache` middleware — Cloudflare's `caches.open()` on Workers, Deno's own on the fallback) — Alchemy usage is metered, and `/network-status` in particular is identical for every visitor at a given moment, so this absorbs repeat requests instead of burning a fresh Alchemy call each time. Error responses (400/502/503) are never cached.
 
 Alchemy-backed routes need `ALCHEMY_API_KEY` (a free-tier [Alchemy](https://dashboard.alchemy.com) app scoped to Base Mainnet); CoinGecko-backed routes need `COINGECKO_API_KEY` (a free [CoinGecko Demo API key](https://www.coingecko.com/en/api) — signup required, no payment). Every route here returns `503` if its required key(s) aren't set — the site (`docs/assets/app.js`/`profile.js`) treats that as "not deployed/configured yet" and transparently falls back to its direct public-API path (except `/cost-basis`, which has no keyless equivalent and just shows as unavailable), so the site works with or without this worker running.
 
 ## CI
 
-`.github/workflows/worker-typecheck.yml` runs `deno check` against `worker/deno/deno-entry.ts` on every push/PR touching `worker/**` — no secrets, no `npm ci`, nothing to skip. It only catches type errors; it never deploys. Deployment is entirely Deno Deploy's own GitHub integration (see "Deploy" above).
+`.github/workflows/deploy-worker.yml` deploys to Cloudflare on push to `main` when `worker/**` changes — needs `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit permission) and `CLOUDFLARE_ACCOUNT_ID` repo secrets; typechecks and no-ops without them rather than failing. `.github/workflows/worker-typecheck.yml` separately runs `deno check` on the same paths, so the Deno fallback path stays typechecked too. Deno Deploy's actual deployment is handled by its own GitHub integration, not a workflow file in this repo.
 
 ## Keeping scan logic in sync
 

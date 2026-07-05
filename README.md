@@ -95,8 +95,8 @@ primary way to see and use VAPE — not a static status page, a working product 
   has ever published — nothing curated after the fact
 - A free token-security preview tool, open to anyone, no wallet required
 
-Built with zero bundler (plain HTML/CSS/JS under `docs/assets/`) and a small Deno Deploy
-backend (`worker/`) for the x402 payment gate and Alchemy-backed portfolio data.
+Built with zero bundler (plain HTML/CSS/JS under `docs/assets/`) and a small Cloudflare/Deno
+Workers backend (`worker/`) for the x402 payment gate and Alchemy-backed portfolio data.
 
 ---
 
@@ -180,7 +180,7 @@ V.A.P.E/
 ├── skillforge/          Self-growing skill/tool ecosystem + shared Memory
 ├── intel/               Real-data audit trail: reports, broadcasts, investigations, bounty radar
 ├── docs/                Site (docs/index.html) + architecture/deployment/protocol docs
-├── worker/              Deno Deploy backend — x402 payments, portfolio data
+├── worker/              Cloudflare/Deno Workers backend — x402 payments, portfolio data
 ├── mcp_servers/         Standard MCP server exposing VAPE's tools
 ├── scripts/acp-monitor/ ACP job listener/fulfillment daemons
 ├── src/                 Legacy Node.js prototype — retired, not part of the live system
@@ -233,7 +233,7 @@ GROQ_API_KEY=       # required — free tier, primary fast path
 ```
 
 Everything else (Etherscan, additional LLM fallbacks, MCP research providers, the
-worker's Alchemy/CoinGecko keys) is optional — VAPE degrades gracefully to
+worker's Cloudflare/Alchemy/CoinGecko keys) is optional — VAPE degrades gracefully to
 keyless data sources when a key isn't set. See `.env.example` for the full list and
 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for which secrets the live site's CI actually
 needs.

@@ -3,18 +3,22 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // The vape-x402 worker's base URL — backs the free Alchemy-powered
 // /portfolio, /nfts, /network-status routes (more reliable + full token/NFT
 // auto-discovery vs. the public mainnet.base.org RPC + curated token list)
-// and the priced /scan/* x402 offerings. Deployed on Deno Deploy (see
-// worker/README.md's "Why Deno Deploy, not Cloudflare" section for why this
-// isn't a Cloudflare Worker). Every caller below still falls back to its
-// direct-API path if this ever returns an error, so the site keeps working
-// even if the worker is down.
+// and the priced /scan/* x402 offerings. Every caller below still falls back
+// to its direct-API path if this ever returns an error, so the site keeps
+// working even if the worker is down.
 //
-// IMPORTANT: this must be Deno Deploy's stable *production* URL (the one
-// shown at the top of the project's Overview page), not an individual
-// build's preview URL (e.g. "vape-8kje756vhqqy.deno.net") — preview URLs are
-// frozen forever at whatever code was live for that one build and never
-// receive later pushes, which is exactly what caused the x402 hire flow to
-// keep failing with a stale CORS config after the fix had already shipped.
+// Currently pointed at the Deno Deploy fallback (see worker/README.md's
+// "Cloudflare + Deno Deploy" section) while Cloudflare's workers.dev
+// subdomain is being re-registered on the account — switch this to the
+// Cloudflare *.workers.dev URL once that's confirmed live, same either way
+// since src/index.ts has zero runtime-specific code.
+//
+// IMPORTANT: whichever URL this points to, it must be that platform's
+// stable *production* URL, not an individual build's preview URL (e.g.
+// Deno's "vape-8kje756vhqqy.deno.net") — preview URLs are frozen forever at
+// whatever code was live for that one build and never receive later pushes,
+// which is exactly what caused the x402 hire flow to keep failing with a
+// stale CORS config after the fix had already shipped.
 const WORKER_BASE = "https://vape.juxtaposition1.deno.net";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
