@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '22'
       - name: Cache npm global installs (promptfoo has no package.json/lock for setup-node's own cache to key on)
