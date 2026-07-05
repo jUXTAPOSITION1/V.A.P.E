@@ -187,6 +187,36 @@ def hack_correlation(gp):
 _SCAM_KEYWORDS = ("rug pull", "rugpull", "rugged", "scam", "honeypot", "exit scam", "exploited", "hacked")
 
 
+def _scrape_excerpt(url, max_len=400):
+    """Escalate a search hit that already matched a scam keyword to a real
+    full-page scrape (skillforge/research.py's Firecrawl -> Bright Data ->
+    Apify -> keyless-fetch chain) instead of relying on the search engine's
+    own ~200-char snippet. Deliberately only called for hits that already
+    cleared the keyword bar — scraping is quota-limited (Firecrawl/Bright
+    Data both cap well under their real free-tier ceilings, see
+    skillforge/research.py's MONTHLY_QUOTA), so usage stays proportionate to
+    actual signal instead of scraping every search result on every cycle."""
+    try:
+        from skillforge.research import scrape as web_scrape
+    except Exception:
+        return None
+    try:
+        res = web_scrape(url)
+    except Exception:
+        return None
+    raw = res.get("raw")
+    content = None
+    if isinstance(raw, dict):
+        content = raw.get("markdown") or raw.get("content") or raw.get("text")
+    elif isinstance(raw, list) and raw and isinstance(raw[0], dict):
+        content = raw[0].get("markdown") or raw[0].get("text") or raw[0].get("content")
+    if not content:
+        content = res.get("content")  # keyless-fetch shape (skillforge.research._fetch_keyless)
+    if not isinstance(content, str) or not content.strip():
+        return None
+    return " ".join(content.split())[:max_len]
+
+
 def web_reputation_check(symbol, address):
     """Real web search for public reputation signals GoPlus/DexScreener can't
     see — has this project been publicly called out as a rug/scam anywhere
@@ -216,6 +246,7 @@ def web_reputation_check(symbol, address):
 
     hits = []
     normalized = []
+    scraped_one = False
     for r in results[:5]:
         if not isinstance(r, dict):
             continue
@@ -225,7 +256,17 @@ def web_reputation_check(symbol, address):
         normalized.append({"title": title, "url": url, "snippet": snippet[:200]})
         blob = f"{title} {snippet}".lower()
         if any(kw in blob for kw in _SCAM_KEYWORDS):
-            hits.append(f"Public web result flags this project: \"{title}\" — {url}")
+            hit = f"Public web result flags this project: \"{title}\" — {url}"
+            # Only escalate the first flagged hit per investigation to a real
+            # scrape — a 200-char search snippet is thin evidence for a real
+            # accusation, but scrape quota is shared across every hourly
+            # investigation this cycle runs, so this stays proportionate.
+            if not scraped_one and url:
+                scraped_one = True
+                excerpt = _scrape_excerpt(url)
+                if excerpt:
+                    hit += f"\n  - Scraped evidence: {excerpt}"
+            hits.append(hit)
     return {"available": True, "provider": res.get("provider"), "hits": hits, "results": normalized}
 
 
