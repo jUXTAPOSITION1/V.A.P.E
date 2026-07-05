@@ -6,9 +6,9 @@
  * every other x402 route here returns.
  *
  * Needs a fine-grained PAT scoped to this repo with "Actions: write" +
- * "Contents: read" — Deno Deploy has no equivalent of the GITHUB_TOKEN
- * Actions injects into its own workflow runs, so this is a real, separate
- * environment variable: GH_DISPATCH_TOKEN (see worker/README.md).
+ * "Contents: read" — Workers have no equivalent of the GITHUB_TOKEN Actions
+ * injects into its own workflow runs, so this is a real, separate secret:
+ *   wrangler secret put GH_DISPATCH_TOKEN
  */
 const REPO = "jUXTAPOSITION1/V.A.P.E";
 
