@@ -63,29 +63,60 @@ def _field(text, *labels):
 
 
 def _clean(p):
-    clean = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", p)
-    clean = re.sub(r"[*_`>#]", "", clean)
+    # Strip raw HTML first (every report opens with letterhead_md()'s literal
+    # <img>/<br> letterhead tags) — otherwise a paragraph that's just the
+    # letterhead image can survive as visible "<img src=...>" text in a
+    # summary excerpt once the markdown-only cleanup below runs.
+    clean = re.sub(r"<[^>]+>", "", p)
+    clean = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", clean)
+    clean = re.sub(r"[*_`>#!]", "", clean)
     return " ".join(clean.split())
 
 
-def _verdict_rationale(text, max_len=300):
+def _section_bullets(text, heading):
+    """Pull the bullet lines under a '## <heading>...' section (any trailing
+    text on the heading line, e.g. '(risk factors)', is allowed — the actual
+    headings agents/investigate.py writes aren't bare)."""
+    m = re.search(rf"##\s*{re.escape(heading)}[^\n]*\n+(.+?)(?:\n##\s|\Z)", text, re.DOTALL)
+    if not m:
+        return []
+    return [_clean(ln).lstrip("- ").strip() for ln in m.group(1).splitlines() if ln.strip().startswith("-")]
+
+
+def _verdict_rationale(text, max_len=320):
     """Investigation reports don't have an 'Executive Summary' heading, so the
     generic _summary() falls back to the leading '- Target: 0x... - Chain: ...'
     metadata bullets — restating fields already shown structurally, and
     dragging a bare 42-char address into free-flowing summary text (which
     overflows narrow mobile cards with no wrap opportunity). Pull the actual
-    '## Verdict Rationale' bullets instead: the real "why", address-free."""
-    m = re.search(r"##\s*Verdict Rationale\s*\n+(.+?)(?:\n##\s|\Z)", text, re.DOTALL)
-    if not m:
-        return None
-    bullets = [_clean(ln).lstrip("- ").strip() for ln in m.group(1).splitlines() if ln.strip().startswith("-")]
-    joined = " · ".join(b for b in bullets if b)
+    risk-factor and positive-signal bullets instead — the real "why" behind
+    the verdict, in both directions, address-free. A verdict without its
+    negatives AND its positives is a badge, not an investigation."""
+    risks = _section_bullets(text, "Verdict Rationale")
+    positives = _section_bullets(text, "Positive Signals")
+    parts = []
+    if risks:
+        parts.append("Risk factors: " + "; ".join(risks) + ".")
+    if positives:
+        parts.append("Positive evidence: " + "; ".join(positives) + ".")
+    joined = " ".join(parts)
     return joined[:max_len] if joined else None
 
 
 def _summary(text, max_len=340):
-    """Prefer prose under a Summary/Executive Summary heading; else first
-    substantive paragraph (skipping headings, tables, code fences)."""
+    """Prefer an 'Auto-flagged this cycle' callout, then prose under a
+    Summary/Executive Summary heading, else the first substantive paragraph
+    (skipping headings, tables, code fences)."""
+    # 0) bounty_report's blockquote callout is the actual newsworthy content
+    # for that report type (specific movers/anomalies flagged this cycle) —
+    # worth surfacing ahead of the generic cycle/timestamp metadata that
+    # would otherwise win as "first substantive paragraph" below.
+    m = re.search(r"^>\s*\*\*Auto-flagged this cycle:\*\*\s*\n((?:^>.*\n?)+)", text, re.MULTILINE)
+    if m:
+        lines = [_clean(ln.lstrip(">").strip()) for ln in m.group(1).splitlines()]
+        joined = " · ".join(ln.lstrip("- ").strip() for ln in lines if ln.strip())
+        if len(joined) > 40:
+            return joined[:max_len]
     # 1) content right after a Summary-style heading
     m = re.search(r"#+\s*\S*\s*(?:Executive Summary|Summary|Overview)\s*\n+(.+?)(?:\n#+\s|\Z)",
                   text, re.IGNORECASE | re.DOTALL)
@@ -199,8 +230,16 @@ def scan_investigations():
         txt = _read(fp)
         verdict_raw = _field(txt, "Verdict") or ""
         vm = re.search(r"(PROCEED|CAUTION|REJECT)", verdict_raw, re.I)
-        score_raw = _field(txt, "Safety Score", "Score") or ""
-        sm = re.search(r"(\d{1,3})", score_raw)
+        # There's no separate "Score:"/"Safety Score:" field — write_report()
+        # embeds it in the Verdict line itself, e.g. "PROCEED (88/100)" — so
+        # a dedicated _field() lookup for a "Score" label never matches and
+        # this silently stayed null. Pull the "(NN/100)" straight out of the
+        # verdict line; fall back to a standalone "Score:" field for any
+        # older/other report format that does write one separately.
+        sm = re.search(r"\((\d{1,3})\s*/\s*100\)", verdict_raw)
+        if not sm:
+            score_raw = _field(txt, "Safety Score", "Score") or ""
+            sm = re.search(r"(\d{1,3})", score_raw)
         target_raw = _field(txt, "Target") or ""
         target = re.sub(r"[`*]", "", target_raw).strip()
         title = _first_heading(txt, name)
