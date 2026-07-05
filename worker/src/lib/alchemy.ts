@@ -23,22 +23,41 @@ interface RpcCall {
   params: unknown[];
 }
 
-async function batchRpc(env: AlchemyEnv, calls: RpcCall[]): Promise<unknown[]> {
+// Alchemy's shared free-tier infra occasionally throttles a burst of calls
+// with a plain-English rate-limit message ("Your app has been rate-limited
+// due to unusually high global traffic...") returned as a single JSON-RPC
+// error object (HTTP 200, not a per-call array) rather than a clean 429 —
+// observed live the first time this route was exercised right after
+// ALCHEMY_API_KEY was configured, immediately following two other RPC calls
+// against the same app (/network-status). Retry once with a short backoff,
+// same idiom already used for DexScreener/GoPlus in agents/token_scan.py and
+// worker/src/scan.ts — these are read-only calls, so a retry is always safe.
+async function batchRpc(env: AlchemyEnv, calls: RpcCall[], retries = 1): Promise<unknown[]> {
   const body = calls.map((call, i) => ({ jsonrpc: "2.0", id: i, method: call.method, params: call.params }));
-  const res = await fetch(rpcUrl(env), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`Alchemy RPC HTTP ${res.status}`);
-  const json = (await res.json()) as Array<{ id: number; result?: unknown; error?: { message: string } }>;
-  const byId = Array.isArray(json) ? json : [json as any];
-  return calls.map((_, i) => {
-    const entry = byId.find((r) => r.id === i);
-    if (!entry) throw new Error("Alchemy RPC: missing batch response");
-    if (entry.error) throw new Error(entry.error.message);
-    return entry.result;
-  });
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const res = await fetch(rpcUrl(env), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error(`Alchemy RPC HTTP ${res.status}`);
+      const json = (await res.json()) as Array<{ id: number; result?: unknown; error?: { message: string } }>;
+      const byId = Array.isArray(json) ? json : [json as any];
+      return calls.map((_, i) => {
+        const entry = byId.find((r) => r.id === i);
+        if (!entry) throw new Error("Alchemy RPC: missing batch response");
+        if (entry.error) throw new Error(entry.error.message);
+        return entry.result;
+      });
+    } catch (e) {
+      if (attempt < retries) {
+        await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
+        continue;
+      }
+      throw e;
+    }
+  }
 }
 
 export interface PortfolioToken {
