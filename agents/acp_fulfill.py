@@ -82,6 +82,12 @@ def _exploit_check(req):
     if not a:
         return {"error": "no address"}
     src = get_contract_source(a, _chain(req))
+    # src's "no_key"/error state (e.g. ETHERSCAN_API_KEY not configured) must
+    # be surfaced, not swallowed — silently falling through to all-None
+    # fields looks like "we checked, it's not verified" when the truth is
+    # "we never checked", which a paying customer has no way to tell apart.
+    if isinstance(src, dict) and src.get("error"):
+        return {"address": a, "error": src["error"], "note": src.get("note", "contract verification unavailable")}
     return {"address": a, "verified": src.get("verified") if isinstance(src, dict) else None,
             "contract_name": src.get("contract_name") if isinstance(src, dict) else None,
             "proxy": src.get("proxy") if isinstance(src, dict) else None,
@@ -117,10 +123,17 @@ def _safety_preflight(req):
     if not a:
         return {"error": "no address"}
     ts = token_scan(a, _chain(req))
+    if "error" in ts:
+        return ts
     src = get_contract_source(a, _chain(req))
-    return {"address": a, "token_verdict": ts.get("verdict"), "flags": ts.get("flags"),
-            "verified": src.get("verified") if isinstance(src, dict) else None,
-            "combined": "PROCEED" if ts.get("verdict") == "PROCEED" and (src.get("verified") if isinstance(src, dict) else False) else "REVIEW"}
+    result = {"address": a, "token_verdict": ts.get("verdict"), "flags": ts.get("flags"),
+              "verified": src.get("verified") if isinstance(src, dict) else None,
+              "combined": "PROCEED" if ts.get("verdict") == "PROCEED" and (src.get("verified") if isinstance(src, dict) else False) else "REVIEW"}
+    # Same reasoning as _exploit_check: don't let a missing/failed
+    # verification silently collapse into "verified: None" with no context.
+    if isinstance(src, dict) and src.get("error"):
+        result["verification_note"] = src.get("note", src["error"])
+    return result
 
 
 def _community_broadcast(req):
