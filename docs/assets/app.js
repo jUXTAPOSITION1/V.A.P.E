@@ -635,7 +635,7 @@ window.addEventListener('load', () => {
         const b = e.target.closest('button'); if (!b) return;
         App._days = +b.dataset.d;
         [...e.currentTarget.children].forEach(x=>{x.className='px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10';});
-        b.className='px-2.5 py-1 rounded-lg bg-indigo-600';
+        b.className='px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
         App.chart(App._days);
     });
     // Enter key launches hunt
@@ -645,7 +645,7 @@ window.addEventListener('load', () => {
         const b=e.target.closest('button[data-tab]'); if(!b) return;
         App._tab=b.dataset.tab; App._typeFilter=null;
         [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10');
-        b.className='px-3 py-1.5 rounded-lg bg-indigo-600';
+        b.className='px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
         App._renderIntel();
     });
     // Report type filter
@@ -653,4 +653,17 @@ window.addEventListener('load', () => {
         const b=e.target.closest('button[data-type]'); if(!b) return;
         App._typeFilter=b.dataset.type||null; App._renderIntel();
     });
+    // Sticky nav — mobile menu toggle + auto-close on link click
+    const navToggle = document.getElementById('nav-menu-toggle');
+    const navPanel = document.getElementById('nav-menu-panel');
+    if (navToggle && navPanel) {
+        navToggle.addEventListener('click', () => {
+            const open = navPanel.classList.toggle('hidden') === false;
+            navToggle.setAttribute('aria-expanded', String(open));
+        });
+        navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            navPanel.classList.add('hidden');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
 });
