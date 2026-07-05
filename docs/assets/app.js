@@ -386,12 +386,23 @@ const App = {
         const el = document.getElementById('base-movers');
         if (!el) return;
         try {
-            const boosts = await (await fetch('https://api.dexscreener.com/token-boosts/top/v1')).json();
+            // DexScreener occasionally 403s or rate-limits this endpoint —
+            // fetch() only rejects on a network-level failure, not on a non-2xx
+            // response, so an unchecked `.json()` on a 403's (often non-JSON)
+            // body was throwing an opaque parse error that told a browser
+            // console nothing about the real cause. Check status explicitly so
+            // the actual reason is visible for debugging instead of a silent
+            // "Live data unavailable."
+            const boostsRes = await fetch('https://api.dexscreener.com/token-boosts/top/v1');
+            if (!boostsRes.ok) throw new Error(`token-boosts/top/v1 -> HTTP ${boostsRes.status}`);
+            const boosts = await boostsRes.json();
             const addrs = [...new Set((Array.isArray(boosts) ? boosts : [])
                 .filter(b => b.chainId === 'base' && b.tokenAddress)
                 .map(b => b.tokenAddress.toLowerCase()))].slice(0, 30);
             if (!addrs.length) throw new Error('no boosted Base tokens right now');
-            const data = await (await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addrs.join(',')}`)).json();
+            const pairsRes = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addrs.join(',')}`);
+            if (!pairsRes.ok) throw new Error(`latest/dex/tokens -> HTTP ${pairsRes.status}`);
+            const data = await pairsRes.json();
             const byToken = new Map();
             (data.pairs || []).forEach(p => {
                 if (p.chainId !== 'base') return;
@@ -404,8 +415,12 @@ const App = {
             // the tokens/{addrs} lookup above returns pairs in its own order,
             // not the boost ranking, so rebuild from `addrs`.
             this._movers = addrs.map(a => byToken.get(a)).filter(Boolean);
+            if (!this._movers.length) throw new Error('boosted addresses returned no matching Base pairs');
             this._renderMovers();
-        } catch (e) { el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable.</div>`; }
+        } catch (e) {
+            console.error('[baseMovers] Base Movers unavailable:', e.message || e);
+            el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable — retries next cycle.</div>`;
+        }
     },
 
     _renderMovers() {
