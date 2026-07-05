@@ -1,27 +1,27 @@
 {
-  "generated": "2026-07-05T14:48:25Z",
+  "generated": "2026-07-05T15:51:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 312,
     "reports_by_type": {
       "bounty": 169,
+      "virtuals": 25,
       "security": 28,
       "sentiment": 27,
       "base": 28,
-      "virtuals": 25,
       "macro": 14,
       "hack": 9,
       "deep": 8,
       "heartbeat": 1,
+      "attack": 1,
       "mainnet": 1,
-      "bug": 1,
-      "attack": 1
+      "bug": 1
     },
     "broadcasts": 30,
     "investigations": 33,
     "tools": 15,
     "tools_verified": 14,
-    "skills": 8
+    "skills": 9
   },
   "latest_summary": {
     "investigation": {
@@ -33,8 +33,8 @@
       "target": "0xe0796A28bD35Ae0Cb0A4f4e1f1b01E3d84f5CDe1",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 12460 holders \u2014 reasonably distributed; Trading 166+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-144825-0xe0796A28.md"
     },
     "report": {
@@ -44,7 +44,7 @@
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-07-05T14:45:03Z",
       "threat": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "summary": "Base mover: AMERICA250 / WETH 0.01% +392% 24h (liq $94127.9189) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2687308.5178) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_144503.md",
       "bytes": 10528
     }
@@ -59,8 +59,8 @@
       "target": "0xe0796A28bD35Ae0Cb0A4f4e1f1b01E3d84f5CDe1",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 12460 holders \u2014 reasonably distributed; Trading 166+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-144825-0xe0796A28.md"
     },
     {
@@ -72,8 +72,8 @@
       "target": "0xe0796A28bD35Ae0Cb0A4f4e1f1b01E3d84f5CDe1",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 12460 holders \u2014 reasonably distributed; Trading 166+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-121747-0xe0796A28.md"
     },
     {
@@ -85,8 +85,8 @@
       "target": "0x381A1DAd944f42918AC161d99C50f3A714A0269b",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,594 (rug/illiquid); [-10] Low liquidity $1,594; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-101518-0x381A1DAd.md"
     },
     {
@@ -98,8 +98,8 @@
       "target": "0xB8Cb9F0630fc8C956B6461A8425097230B1E0aCa",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "score": "68",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Pair 7.3 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 41844 holders \u2014 reasonably distributed; Custom verified source (not a ma",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-072758-0xB8Cb9F06.md"
     },
     {
@@ -112,7 +112,7 @@
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "45",
-      "summary": "- Target: 0x7F42440C1E87187F523aE48980E7386508804B07 - Chain: 8453 (Base) - Date: 2026-07-05T03:33:48Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 45/100",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Violent 24h move +100139% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known thi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-033348-0x7F42440C.md"
     },
     {
@@ -125,7 +125,7 @@
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "25",
-      "summary": "- Target: 0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07 - Chain: 8453 (Base) - Date: 2026-07-04T23:10:34Z - Verdict: \ud83d\udd34 REJECT - Safety Score: 25/100",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-25] Very low liquidity $206 (rug/illiquid); [-10] Low liquidity $206; [-10] Pair 7.0 days old \u2014 under two weeks, no track record yet;",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-231034-0x30EC37E2.md"
     },
     {
@@ -138,7 +138,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "60",
-      "summary": "- Target: 0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07 - Chain: 8453 (Base) - Date: 2026-07-04T22:03:04Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 60/100",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Pair 5.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-220304-0x0e7d4bDf.md"
     },
     {
@@ -151,7 +151,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "70",
-      "summary": "- Target: 0x9cb961dD3169e41726e4417d1a6EadeD333B6b07 - Chain: 8453 (Base) - Date: 2026-07-04T20:11:36Z - Verdict: \ud83d\udfe1 CAUTION - Safety Score: 70/100",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Owne",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-201136-0x9cb961dD.md"
     },
     {
@@ -164,7 +164,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "88",
-      "summary": "- Target: 0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892 - Chain: 8453 (Base) - Date: 2026-07-04T18:06:03Z - Verdict: \ud83d\udfe2 PROCEED - Safety Score: 88/100",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 1493 holders \u2014 reasonably distributed; Trading 167+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-180603-0xDB879F45.md"
     },
     {
@@ -177,7 +177,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "90",
-      "summary": "[-10] Low liquidity $34,531",
+      "summary": "Risk factors: [-10] Low liquidity $34,531.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-101133-0x044098A1.md"
     },
     {
@@ -190,7 +190,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "88",
-      "summary": "[-12] Mintable supply (dilution risk)",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260703-081033-0x2228B383.md"
     },
     {
@@ -203,7 +203,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "90",
-      "summary": "[-10] Low liquidity $19,800",
+      "summary": "Risk factors: [-10] Low liquidity $19,800.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-140412-0x31A62699.md"
     },
     {
@@ -216,7 +216,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "92",
-      "summary": "[-8] Upgradeable proxy (verify implementation)",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-113520-0xbF927b84.md"
     },
     {
@@ -229,7 +229,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "[-10] Low liquidity $21,135 \u00b7 [-10] Violent 24h move +389% (volatility/manipulation) \u00b7 [-12] Pair only 0.3 days old (fresh-launch risk)",
+      "summary": "Risk factors: [-10] Low liquidity $21,135; [-10] Violent 24h move +389% (volatility/manipulation); [-12] Pair only 0.3 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-081829-0x7CfA2a05.md"
     },
     {
@@ -242,7 +242,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "78",
-      "summary": "[-10] Low liquidity $23,118 \u00b7 [-12] Pair only 1.1 days old (fresh-launch risk)",
+      "summary": "Risk factors: [-10] Low liquidity $23,118; [-12] Pair only 1.1 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
     },
     {
@@ -255,7 +255,7 @@
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "78",
-      "summary": "[-10] Violent 24h move +99949% (volatility/manipulation) \u00b7 [-12] Pair only 0.0 days old (fresh-launch risk)",
+      "summary": "Risk factors: [-10] Violent 24h move +99949% (volatility/manipulation); [-12] Pair only 0.0 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-000913-0x43D6e8F4.md"
     },
     {
@@ -268,7 +268,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "[-10] Low liquidity $26,641 \u00b7 [-10] Violent 24h move +577% (volatility/manipulation) \u00b7 [-12] Pair only 0.8 days old (fresh-launch risk)",
+      "summary": "Risk factors: [-10] Low liquidity $26,641; [-10] Violent 24h move +577% (volatility/manipulation); [-12] Pair only 0.8 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211125-0xcC67e54F.md"
     },
     {
@@ -281,7 +281,7 @@
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "68",
-      "summary": "[-10] Low liquidity $26,641 \u00b7 [-10] Violent 24h move +577% (volatility/manipulation) \u00b7 [-12] Pair only 0.8 days old (fresh-launch risk)",
+      "summary": "Risk factors: [-10] Low liquidity $26,641; [-10] Violent 24h move +577% (volatility/manipulation); [-12] Pair only 0.8 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211118-0xcC67e54F.md"
     },
     {
@@ -458,7 +458,7 @@
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-07-05T14:45:03Z",
       "threat": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "summary": "Base mover: AMERICA250 / WETH 0.01% +392% 24h (liq $94127.9189) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2687308.5178) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_144503.md",
       "bytes": 10528
     },
@@ -469,7 +469,7 @@
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-07-05T12:17:30Z",
       "threat": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "summary": "Base mover: AMERICA250 / WETH 0.01% +489% 24h (liq $76912.3201) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -52% 24h (liq $2657666.3366) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_121730.md",
       "bytes": 12839
     },
@@ -480,7 +480,7 @@
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-07-05T10:15:02Z",
       "threat": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "summary": "Base mover: AMERICA250 / WETH 0.01% +519% 24h (liq $78672.5229) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_101502.md",
       "bytes": 11986
     },
@@ -491,7 +491,7 @@
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-07-05T07:27:43Z",
       "threat": null,
-      "summary": "<img src=\"https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg\" width=\"56\" height=\"56\" align=\"left\" style=\"border-radius:10px;margin-right:14px\" alt=\"VAPE\" /",
+      "summary": "Base mover: ASOS / WETH 0.01% +2132% 24h (liq $83075.2489) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -29% 24h (liq $2660564.8019) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_072743.md",
       "bytes": 12049
     },
@@ -838,6 +838,17 @@
     },
     {
       "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-01-20.md",
+      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
+      "date": "2026-07-01T20:00Z",
+      "threat": null,
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
+      "bytes": 2034
+    },
+    {
+      "kind": "intel",
       "type": "security",
       "file": "security-2026-07-01-20.md",
       "title": "VAPE Security Intelligence Report",
@@ -868,17 +879,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-20.md",
       "bytes": 1570
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-20.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
-      "date": "2026-07-01T20:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
-      "bytes": 2034
     },
     {
       "kind": "bounty",
@@ -937,6 +937,17 @@
     },
     {
       "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-01-12.md",
+      "title": "VAPE Base Chain Intelligence Report",
+      "date": "2026-07-01T12:00Z",
+      "threat": null,
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-12.md",
+      "bytes": 1449
+    },
+    {
+      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-07-01-12.md",
       "title": "VAPE Sentiment Intelligence Report",
@@ -945,17 +956,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-12.md",
       "bytes": 1891
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-12.md",
-      "title": "VAPE Security Intelligence Report",
-      "date": "2026-07-01T12:00Z",
-      "threat": "HIGH",
-      "summary": "The Q2-2026 record-hack wave carried into the quarter turn with a fresh cluster of key-compromise and bridge exploits. Standouts: Humanity Protocol (~$36M, compromised employee laptop \u2192 hot-wallet + bridge admin keys) and a SlowMist warning on 30 malicious npm packages targeting DeFi devs/trading-bots. The 2026 pattern holds \u2014 stolen keys",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-12.md",
-      "bytes": 3302
     },
     {
       "kind": "intel",
@@ -970,14 +970,14 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-01-12.md",
-      "title": "VAPE Base Chain Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-12.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T12:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-12.md",
-      "bytes": 1449
+      "threat": "HIGH",
+      "summary": "The Q2-2026 record-hack wave carried into the quarter turn with a fresh cluster of key-compromise and bridge exploits. Standouts: Humanity Protocol (~$36M, compromised employee laptop \u2192 hot-wallet + bridge admin keys) and a SlowMist warning on 30 malicious npm packages targeting DeFi devs/trading-bots. The 2026 pattern holds \u2014 stolen keys",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-12.md",
+      "bytes": 3302
     },
     {
       "kind": "bounty",
@@ -992,14 +992,14 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-01-08.md",
-      "title": "VAPE Macro & Micro Intelligence Report",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-01-08.md",
+      "title": "VAPE Sentiment Intelligence Report",
       "date": "2026-07-01T08:00Z",
-      "threat": null,
+      "threat": "FEAR",
       "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-01-08.md",
-      "bytes": 2846
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-08.md",
+      "bytes": 2057
     },
     {
       "kind": "intel",
@@ -1014,14 +1014,25 @@
     },
     {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-01-08.md",
-      "title": "VAPE Sentiment Intelligence Report",
+      "type": "security",
+      "file": "security-2026-07-01-08.md",
+      "title": "VAPE Security Intelligence Report",
       "date": "2026-07-01T08:00Z",
-      "threat": "FEAR",
+      "threat": "MEDIUM",
+      "summary": "Q2 2026 closed as DeFi's most-hacked quarter on record (~88 incidents, ~$780M through Jun 30 per DeFiLlama/The Defiant). The tail end of June was quieter by $-value but steady by count: Edel ($0.4M oracle/flashloan), Polymarket International ($3M front-end), SecondFi ($2.4M predictable key), Taiko Bridge ($1.7M forged proof). June's domin",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-08.md",
+      "bytes": 2949
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-01-08.md",
+      "title": "VAPE Macro & Micro Intelligence Report",
+      "date": "2026-07-01T08:00Z",
+      "threat": null,
       "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-08.md",
-      "bytes": 2057
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-01-08.md",
+      "bytes": 2846
     },
     {
       "kind": "intel",
@@ -1033,17 +1044,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-08.md",
       "bytes": 1841
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-08.md",
-      "title": "VAPE Security Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": "MEDIUM",
-      "summary": "Q2 2026 closed as DeFi's most-hacked quarter on record (~88 incidents, ~$780M through Jun 30 per DeFiLlama/The Defiant). The tail end of June was quieter by $-value but steady by count: Edel ($0.4M oracle/flashloan), Polymarket International ($3M front-end), SecondFi ($2.4M predictable key), Taiko Bridge ($1.7M forged proof). June's domin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-08.md",
-      "bytes": 2949
     },
     {
       "kind": "bounty",
@@ -1198,13 +1198,6 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-19.md"
     },
     {
-      "file": "broadcast-2026-06-11-14.md",
-      "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-11T14:00Z",
-      "summary": "Date: 2026-06-11 14:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (06:00\u201314:00 UTC)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-14.md"
-    },
-    {
       "file": "agent-update-2026-06-11-14.md",
       "title": "Agent Network Update \u2014 2026-06-11 14:00 UTC",
       "date": "2026-06-11T14:00Z",
@@ -1212,11 +1205,11 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-14.md"
     },
     {
-      "file": "broadcast-2026-06-11-09.md",
+      "file": "broadcast-2026-06-11-14.md",
       "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-11T09:00Z",
-      "summary": "Date: 2026-06-11 09:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (01:00\u201309:00 UTC)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-09.md"
+      "date": "2026-06-11T14:00Z",
+      "summary": "Date: 2026-06-11 14:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (06:00\u201314:00 UTC)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-14.md"
     },
     {
       "file": "x-thread-draft-2026-06-11-09.md",
@@ -1224,6 +1217,13 @@
       "date": "2026-06-11T09:00Z",
       "summary": "Tweet 1/6: \ud83e\udd8d VAPE Community Intel Broadcast \u2014 June 11, 0900 UTC",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-09.md"
+    },
+    {
+      "file": "broadcast-2026-06-11-09.md",
+      "title": "\ud83e\udd8d VAPE COMMUNITY INTELLIGENCE BROADCAST",
+      "date": "2026-06-11T09:00Z",
+      "summary": "Date: 2026-06-11 09:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (01:00\u201309:00 UTC)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-09.md"
     },
     {
       "file": "agent-update-2026-06-11-06.md",
@@ -1254,13 +1254,6 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-19.md"
     },
     {
-      "file": "broadcast-2026-06-10-15.md",
-      "title": "COMMUNITY INTELLIGENCE BROADCAST \u2014 2026-06-10 15:12 UTC",
-      "date": "2026-06-10T15:00Z",
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-15.md"
-    },
-    {
       "file": "agent-update-2026-06-10-15.md",
       "title": "AGENT NETWORK UPDATE \u2014 2026-06-10 15:12 UTC",
       "date": "2026-06-10T15:00Z",
@@ -1268,11 +1261,11 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-15.md"
     },
     {
-      "file": "broadcast-2026-06-10-14.md",
-      "title": "\ud83c\udf99\ufe0f V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-10T14:00Z",
-      "summary": "Date: 2026-06-10 14:00 UTC (Wednesday) Broadcast ID: vape-broadcast-2026-06-10-14 Classification: COMMUNITY \u2014 UNRESTRICTED Coverage Window: 06:00\u201314:00 UTC, June 10, 2026 Reports Synthesized: 18 (3 Security, 3 Sentiment, 3 Macro, 4 Base, 3 Virtuals/ACP, 2 Deep Dives)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-14.md"
+      "file": "broadcast-2026-06-10-15.md",
+      "title": "COMMUNITY INTELLIGENCE BROADCAST \u2014 2026-06-10 15:12 UTC",
+      "date": "2026-06-10T15:00Z",
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-15.md"
     },
     {
       "file": "x-thread-draft-2026-06-10-14.md",
@@ -1289,11 +1282,11 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-14.md"
     },
     {
-      "file": "agent-update-2026-06-10-12.md",
-      "title": "Agent Network Update \u2014 2026-06-10 12:12 UTC",
-      "date": "2026-06-10T12:00Z",
-      "summary": "1. AI Agent Security Auditing \u2014 The Grok heist and Semantic Kernel RCE create urgent demand for security audits of agent architectures. Agents with security expertise can offer prompt injection testing, transaction flow review, and dependency audit services.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-12.md"
+      "file": "broadcast-2026-06-10-14.md",
+      "title": "\ud83c\udf99\ufe0f V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
+      "date": "2026-06-10T14:00Z",
+      "summary": "Date: 2026-06-10 14:00 UTC (Wednesday) Broadcast ID: vape-broadcast-2026-06-10-14 Classification: COMMUNITY \u2014 UNRESTRICTED Coverage Window: 06:00\u201314:00 UTC, June 10, 2026 Reports Synthesized: 18 (3 Security, 3 Sentiment, 3 Macro, 4 Base, 3 Virtuals/ACP, 2 Deep Dives)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-14.md"
     },
     {
       "file": "broadcast-2026-06-10-12.md",
@@ -1303,6 +1296,13 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-12.md"
     },
     {
+      "file": "agent-update-2026-06-10-12.md",
+      "title": "Agent Network Update \u2014 2026-06-10 12:12 UTC",
+      "date": "2026-06-10T12:00Z",
+      "summary": "1. AI Agent Security Auditing \u2014 The Grok heist and Semantic Kernel RCE create urgent demand for security audits of agent architectures. Agents with security expertise can offer prompt injection testing, transaction flow review, and dependency audit services.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-12.md"
+    },
+    {
       "file": "broadcast-2026-06-10-09.md",
       "title": "\ud83d\udce1 VAPE COMMUNITY INTELLIGENCE BROADCAST",
       "date": "2026-06-10T09:00Z",
@@ -1310,18 +1310,18 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-09.md"
     },
     {
-      "file": "agent-update-2026-06-10-08.md",
-      "title": "Agent Network Update",
-      "date": "2026-06-10T08:00Z",
-      "summary": "Date: 2026-06-10 08:00 UTC Report Type: Agent Network Update",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-08.md"
-    },
-    {
       "file": "broadcast-2026-06-10-08.md",
       "title": "\ud83d\udd34 CRITICAL: Community Intelligence Broadcast",
       "date": "2026-06-10T08:00Z",
       "summary": "Overall: \ud83d\udfe1 WATCH \u2014 Security incidents and macro headwinds dominate, but Base infrastructure and Virtuals build-out continue underneath. Position for recovery when sentiment turns. Broadcast generated by V.A.P.E. Intelligence \u2022 2026-06-10T08:00Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-08.md"
+    },
+    {
+      "file": "agent-update-2026-06-10-08.md",
+      "title": "Agent Network Update",
+      "date": "2026-06-10T08:00Z",
+      "summary": "Date: 2026-06-10 08:00 UTC Report Type: Agent Network Update",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-08.md"
     }
   ],
   "tools": [
@@ -1484,9 +1484,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/ai-agent-redteam.md"
     },
     {
+      "file": "coding-security-review.md",
+      "title": "Skill: Auditing Client-Side Code for Real, Concrete Vulnerabilities",
+      "summary": "1. Sweep by pattern, not by file. Grep the whole tree for the small set of sink patterns that actually matter, rather than reading every file top to bottom: - innerHTML|insertAdjacentHTML|document.write in client JS \u2014 ev",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/coding-security-review.md"
+    },
+    {
       "file": "coding-frontend-vanilla-js.md",
       "title": "Skill: Building the Zero-Build Frontend (docs/)",
-      "summary": "1. Know which script-loading mode a file needs before writing it. docs/assets/app.js is a classic <script (no type=\"module\") because its top-level consts need to be visible the old way; wallet.js, profile.js, report.js, ",
+      "summary": "1. Know which script-loading mode a file needs before writing it. docs/assets/app.js is a classic (no type=\"module\") because its top-level consts need to be visible the old way; wallet.js, profile.js, report.js, hire.js ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/coding-frontend-vanilla-js.md"
     },
     {
@@ -1504,7 +1510,7 @@
     {
       "file": "coding-git-workflow.md",
       "title": "Skill: Shipping a Change \u2014 Branch, Verify, Commit, PR, Merge",
-      "summary": "1. Branch from current main, not from an old checkout. git fetch origin main && git checkout -B <branch origin/main. If a previous branch with the same name already has a merged PR behind it, don't stack new work on the ",
+      "summary": "1. Branch from current main, not from an old checkout. git fetch origin main && git checkout -B origin/main. If a previous branch with the same name already has a merged PR behind it, don't stack new work on the stale br",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/coding-git-workflow.md"
     },
     {
@@ -1516,7 +1522,7 @@
     {
       "file": "coding-verification.md",
       "title": "Skill: Verifying a Change Before Calling It Done",
-      "summary": "1. Syntax first, always \u2014 it's nearly free. - Python: python3 -m pycompile <file.py catches syntax errors; python3 -c \"import <module\" additionally catches import-time errors (a bad top-level import, a circular import) t",
+      "summary": "1. Syntax first, always \u2014 it's nearly free. - Python: python3 -m pycompile .py catches syntax errors; python3 -c \"import \" additionally catches import-time errors (a bad top-level import, a circular import) that pycompil",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/coding-verification.md"
     },
     {

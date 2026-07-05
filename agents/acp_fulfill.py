@@ -89,10 +89,27 @@ def _exploit_check(req):
 
 
 def _market_intel(req):
+    # Was base_tvl/top_protocols/prices/anomaly_flags only — thin for a paid
+    # snapshot when build_market_context() already fetches fear_greed and
+    # global_market for the free site's own "Wire" section. Surfacing the
+    # same real, already-fetched fields here instead of a second API call.
+    # anomaly_flags is dropped rather than kept ACP-only: it needs the full
+    # multi-vertical fetch (hacks/movers/chain-activity), which is real
+    # parity work worker/src/lib/marketIntel.ts can't cheaply match for a
+    # single lean paid call — better to keep both fulfillment paths
+    # identical in scope than let the ACP buyer see a field the x402 buyer
+    # never gets for the same offering.
     ctx = build_market_context()
+    fng = ctx.get("fear_greed") or {}
+    glob_m = ctx.get("global_market") or {}
     return {"base_tvl": ctx.get("base_tvl", {}).get("tvl_usd"),
+            "base_tvl_24h_change_pct": ctx.get("base_tvl", {}).get("tvl_24h_change_pct"),
             "top_protocols": [p["name"] for p in ctx.get("base_tvl", {}).get("top_protocols", [])[:5]],
-            "prices": ctx.get("prices"), "anomaly_flags": ctx.get("anomaly_flags")}
+            "prices": ctx.get("prices"),
+            "fear_greed": fng.get("value"),
+            "fear_greed_classification": fng.get("classification"),
+            "global_market_cap_usd": glob_m.get("total_mcap_usd"),
+            "global_market_cap_change_24h_pct": glob_m.get("mcap_change_24h_pct")}
 
 
 def _safety_preflight(req):

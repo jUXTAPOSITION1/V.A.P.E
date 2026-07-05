@@ -19,6 +19,26 @@ const MUTED = [113, 113, 122];
 
 const VERDICT_LABELS = { PROCEED: "GO", CAUTION: "CAUTION", REJECT: "NO-GO", LOW: "LOW RISK", HIGH: "HIGH RISK", MEDIUM: "MEDIUM RISK", EXTREME: "EXTREME RISK" };
 
+// Same abbreviation/sign-coloring convention app.js already uses for the
+// site's live metrics strip, duplicated here (rather than imported) since
+// report.js renders arbitrary deliverable JSON, not just app.js's own data.
+function fmtUsdCompact(n) {
+    if (n === null || n === undefined || isNaN(n)) return '—';
+    const v = Number(n);
+    // Global crypto market cap runs into the trillions — app.js's own
+    // metrics-strip formatter tops out at "B" because nothing it renders
+    // gets that large, but a market_intel report's global_market_cap_usd
+    // routinely does, so this needs the extra tier to stay legible.
+    if (Math.abs(v) >= 1e12) return '$' + (v / 1e12).toFixed(2) + 'T';
+    if (Math.abs(v) >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
+    if (Math.abs(v) >= 1e6) return '$' + (v / 1e6).toFixed(1) + 'M';
+    return '$' + v.toLocaleString();
+}
+function pctHtml(n) {
+    if (typeof n !== 'number' || isNaN(n)) return '—';
+    return `<span class="${n >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${n >= 0 ? '+' : ''}${n.toFixed(2)}%</span>`;
+}
+
 function verdictColor(v) {
     if (v === "PROCEED" || v === "LOW" || v === "GO") return EMERALD;
     if (v === "CAUTION" || v === "MEDIUM") return AMBER;
@@ -26,8 +46,16 @@ function verdictColor(v) {
     return MUTED;
 }
 
+// Domain acronyms that should stay fully uppercase instead of Title Case
+// ("tvl" -> "TVL", not "Tvl") — same list a reader would expect from any
+// on-chain/finance report.
+const ACRONYMS = new Set(['tvl', 'apy', 'apr', 'usd', 'eth', 'btc', 'nft', 'acp', 'pdf', 'url', 'id', 'dex', 'rpc', 'llm', 'ai', 'sla']);
+// A handful of field names read better as a fixed phrase than anything the
+// generic acronym/title-case rules below would produce.
+const LABEL_OVERRIDES = { fear_greed: 'Fear & Greed Index' };
 function humanLabel(key) {
-    return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    if (LABEL_OVERRIDES[key]) return LABEL_OVERRIDES[key];
+    return key.replace(/_/g, ' ').replace(/\b\w+\b/g, w => ACRONYMS.has(w.toLowerCase()) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1));
 }
 
 function basescanUrl(address) {
@@ -58,8 +86,23 @@ function verdictClass(v) {
 // `enhanceIcons()` once the caller inserts this HTML into the DOM.
 function renderDeliverableHtml(obj, depth = 0) {
     const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict']);
+    // A "<key>_classification" sibling (e.g. fear_greed / fear_greed_classification)
+    // is a label for <key>'s value, not an independent fact — fold it into
+    // one row instead of showing "Fear Greed 42" and "Fear Greed Classification
+    // Fear" as two disconnected lines.
+    for (const k of Object.keys(obj)) {
+        if (k.endsWith('_classification') && obj[k.replace(/_classification$/, '')] !== undefined) {
+            skip.add(k);
+        }
+    }
     return Object.entries(obj).filter(([k]) => depth > 0 || !skip.has(k)).map(([key, val]) => {
         const indent = depth ? `style="margin-left:${depth * 14}px"` : '';
+        if (obj[`${key}_classification`] !== undefined && (typeof val === 'number' || typeof val === 'string')) {
+            return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
+                <span class="text-zinc-500 shrink-0">${escapeHtml(humanLabel(key))}</span>
+                <span class="text-zinc-300 text-right">${escapeHtml(String(val))} · ${escapeHtml(String(obj[`${key}_classification`]))}</span>
+            </div>`;
+        }
         if (key === 'prices' && val !== null && typeof val === 'object' && !Array.isArray(val)) {
             return `<div class="mb-1.5" ${indent}>
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
@@ -88,6 +131,29 @@ function renderDeliverableHtml(obj, depth = 0) {
             return `<div class="mb-1.5" ${indent}>
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
                 ${renderDeliverableHtml(val, depth + 1)}
+            </div>`;
+        }
+        // A raw "-1.2" or "4300000000" reads as noise next to prose fields —
+        // format percent/USD-suffixed numeric fields the same way the live
+        // site's own metrics strip does, with a shortened, de-suffixed label
+        // ("Base TVL 24H Change" rather than "Base Tvl 24h Change Pct").
+        if (key.endsWith('_pct') && typeof val === 'number') {
+            const label = humanLabel(key.replace(/_pct$/, ''));
+            return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
+                <span class="text-zinc-500 shrink-0">${escapeHtml(label)}</span>
+                <span class="text-right">${pctHtml(val)}</span>
+            </div>`;
+        }
+        // base_tvl (market_intel) is a real dollar figure but predates the
+        // _usd-suffix convention the newer fields use — special-cased by
+        // name rather than renamed, since that key is also embedded in
+        // hundreds of already-published historical report snapshots this
+        // repo never edits retroactively.
+        if ((key.endsWith('_usd') || key === 'base_tvl') && (typeof val === 'number' || val === null)) {
+            const label = humanLabel(key.replace(/_usd$/, ''));
+            return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
+                <span class="text-zinc-500 shrink-0">${escapeHtml(label)}</span>
+                <span class="text-zinc-300 text-right">${fmtUsdCompact(val)}</span>
             </div>`;
         }
         const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
