@@ -1,3 +1,5 @@
+import { tokenIconByAddress } from './icons.js';
+
 // VAPE wallet profile ("Portfolio Intelligence"). Two data paths:
 //  - Worker path (window.WORKER_BASE set, vape-x402 deployed with an Alchemy
 //    key): full auto-discovered ETH + ERC-20 balances via /portfolio, plus
@@ -440,10 +442,18 @@ const Profile = {
             try {
                 reportHtml = window.Report ? Report.buildHtmlSummary({ offering: c.offering, priceUsd: c.priceUsd, requestedAddress: c.targetAddress, hiredBy: c.walletAddress, result: c.result, via: c.via || 'x402' }) : '';
             } catch (e) { /* fall back to just the header row + JSON copy button */ }
+            // Real token logo for the card avatar when the engagement targeted
+            // a specific contract — same DexScreener CDN used everywhere else
+            // on the site — falling back to the generic bolt glyph otherwise
+            // (e.g. market_intel has no single target address).
+            const cardIcon = c.targetAddress ? tokenIconByAddress(c.targetAddress, c.result?.deliverable?.chain_id) : null;
             return `
             <div class="card-h glass rounded-xl px-4 py-3 mb-2">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt text-cyan-400 text-sm"></i></div>
+                    <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0 relative overflow-hidden">
+                        <i class="fa-solid fa-bolt text-cyan-400 text-sm"></i>
+                        ${cardIcon ? `<img src="${escapeHtml(cardIcon)}" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">` : ''}
+                    </div>
                     <div class="min-w-0 flex-1">
                         <div class="font-semibold truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
                         <div class="text-xs text-zinc-500 truncate">
@@ -464,6 +474,7 @@ const Profile = {
                 </details>` : ''}
             </div>`;
         }).join('');
+        if (window.Report) Report.enhanceIcons(el);
         el.querySelectorAll('.case-pdf-btn').forEach(btn => btn.onclick = async () => {
             const c = cases[Number(btn.dataset.caseIdx)];
             await Report.downloadPdf({ offering: c.offering, priceUsd: c.priceUsd, requestedAddress: c.targetAddress, hiredBy: c.walletAddress, result: c.result, via: c.via || 'x402' });

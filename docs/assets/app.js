@@ -351,14 +351,6 @@ const App = {
                     </div>
                 </div>`).join('');
             this._sparklines();
-            // anomaly flags (rule-based, client-side)
-            const flags = [];
-            if (typeof this._tvl==='number') {} // chain-level change not in v2/chains; protocol-level below
-            base.forEach(p => { if (typeof p.c1==='number' && p.c1<=-20) flags.push(`${p.name} TVL ${p.c1.toFixed(1)}% in 24h — investigate`); });
-            const an = document.getElementById('anomalies');
-            an.querySelector('.skeleton')?.remove();
-            an.innerHTML = flags.length ? flags.map(f=>`<div class="flex gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i><span>${f}</span></div>`).join('')
-                : `<div class="flex gap-2 text-emerald-500"><i class="fa-solid fa-check"></i><span>No critical flags (rule-based pass)</span></div>`;
         } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
     },
 
@@ -525,6 +517,21 @@ const App = {
         }
     },
 
+    // Track Record stat tiles link here to jump straight to the matching
+    // Archive tab instead of dropping the visitor on the section and making
+    // them find it themselves.
+    gotoArchive(tab){
+        this._tab = tab; this._typeFilter = null;
+        const tabsEl = document.getElementById('intel-tabs');
+        if (tabsEl) {
+            [...tabsEl.querySelectorAll('button[data-tab]')].forEach(b=>{
+                b.className = b.dataset.tab===tab ? 'px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold' : 'px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10';
+            });
+        }
+        this._renderIntel();
+        document.getElementById('the-archive')?.scrollIntoView({ behavior:'smooth', block:'start' });
+    },
+
     _renderIntel(){
         const d=this._intel; if(!d) return;
         const body=document.getElementById('intel-body');
@@ -657,13 +664,19 @@ window.addEventListener('load', () => {
     const navToggle = document.getElementById('nav-menu-toggle');
     const navPanel = document.getElementById('nav-menu-panel');
     if (navToggle && navPanel) {
-        navToggle.addEventListener('click', () => {
-            const open = navPanel.classList.toggle('hidden') === false;
+        // Visibility is animated (opacity/scale), not display:none, so open/close
+        // can actually transition instead of an abrupt cut — see site.css.
+        const OPEN = ['visible', 'opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto'];
+        const CLOSED = ['invisible', 'opacity-0', 'scale-[0.98]', '-translate-y-1', 'pointer-events-none'];
+        const setOpen = (open) => {
+            navPanel.classList.remove(...(open ? CLOSED : OPEN));
+            navPanel.classList.add(...(open ? OPEN : CLOSED));
             navToggle.setAttribute('aria-expanded', String(open));
+        };
+        navToggle.addEventListener('click', () => setOpen(navPanel.classList.contains('invisible')));
+        navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('click', (e) => {
+            if (!navPanel.classList.contains('invisible') && !navPanel.contains(e.target) && !navToggle.contains(e.target)) setOpen(false);
         });
-        navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            navPanel.classList.add('hidden');
-            navToggle.setAttribute('aria-expanded', 'false');
-        }));
     }
 });

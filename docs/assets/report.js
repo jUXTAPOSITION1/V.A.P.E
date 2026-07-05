@@ -8,6 +8,8 @@
 // import that fails outside a real bundler — confirmed by testing it
 // directly (Failed to resolve module specifier). The UMD build has no such
 // issue and is what's actually loaded here, via `window.jspdf.jsPDF`.
+import { knownIcon, tokenIconByAddress, resolveProtocolLogo } from './icons.js';
+
 const CYAN = [34, 211, 238];
 const EMERALD = [16, 185, 129];
 const AMBER = [251, 191, 36];
@@ -47,10 +49,41 @@ function verdictClass(v) {
     return 'bg-white/10 text-zinc-300';
 }
 
+// `prices` ({ethereum, bitcoin, ...}) and `top_protocols` (string[]) are the
+// two shapes market_intel actually returns with no address attached (see
+// worker/src/lib/marketIntel.ts) — special-cased here so BTC/ETH and named
+// Base protocols get their real logos instead of a plain text row. Protocol
+// name -> logo needs a live DefiLlama lookup (no slug/logo in the raw
+// deliverable), so those chips render icon-less first and are filled in by
+// `enhanceIcons()` once the caller inserts this HTML into the DOM.
 function renderDeliverableHtml(obj, depth = 0) {
     const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict']);
     return Object.entries(obj).filter(([k]) => depth > 0 || !skip.has(k)).map(([key, val]) => {
         const indent = depth ? `style="margin-left:${depth * 14}px"` : '';
+        if (key === 'prices' && val !== null && typeof val === 'object' && !Array.isArray(val)) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                ${Object.entries(val).map(([sym, price]) => {
+                    const icon = knownIcon(sym);
+                    return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5">
+                        <span class="text-zinc-500 shrink-0 flex items-center gap-1.5">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}${escapeHtml(humanLabel(sym))}</span>
+                        <span class="text-zinc-300 text-right">${price === null || price === undefined ? '—' : `$${price}`}</span>
+                    </div>`;
+                }).join('')}
+            </div>`;
+        }
+        if (key === 'top_protocols' && Array.isArray(val)) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                <div class="flex flex-wrap gap-1.5">
+                    ${val.map(name => `
+                        <span class="protocol-chip inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/5 text-xs text-zinc-300" data-protocol="${escapeHtml(String(name))}">
+                            <img class="protocol-chip-icon w-3.5 h-3.5 rounded-full shrink-0" alt="" style="display:none" onerror="this.style.display='none'" onload="this.style.display=''">
+                            ${escapeHtml(String(name))}
+                        </span>`).join('')}
+                </div>
+            </div>`;
+        }
         if (val !== null && typeof val === 'object' && !Array.isArray(val)) {
             return `<div class="mb-1.5" ${indent}>
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
@@ -58,9 +91,13 @@ function renderDeliverableHtml(obj, depth = 0) {
             </div>`;
         }
         const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
+        // token_scan deliverables (token_safety_check) carry `symbol` alongside
+        // `address`/`chain_id` at the same level — real per-token icon, same
+        // DexScreener CDN already used for investigation/scan cards.
+        const icon = key === 'symbol' && val ? (tokenIconByAddress(obj.address, obj.chain_id) || knownIcon(val)) : null;
         return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
             <span class="text-zinc-500 shrink-0">${escapeHtml(humanLabel(key))}</span>
-            <span class="text-zinc-300 text-right break-all">${escapeHtml(display)}</span>
+            <span class="text-zinc-300 text-right break-all flex items-center gap-1.5 justify-end">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}${escapeHtml(display)}</span>
         </div>`;
     }).join('');
 }
@@ -263,12 +300,19 @@ const Report = {
         const disclaimer = (opts.result && opts.result.disclaimer) || 'Real on-chain data. Not investment advice.';
         const source = (opts.result && opts.result.source) || 'vape-real-data';
         const addr = opts.requestedAddress;
-        const addrHtml = addr ? `<a href="${basescanUrl(addr)}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
+        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
         const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
+        // Same real-token icon used for the `symbol` row above, surfaced once
+        // more at the top of the card — the case-report equivalent of the
+        // logo the user sees on every investigation/scan card elsewhere.
+        const assetIcon = addr ? tokenIconByAddress(addr, deliverable.chain_id) : null;
         return `
             <div class="text-left">
                 <div class="flex items-center justify-between gap-3 mb-3">
-                    <div class="font-display text-sm">${escapeHtml(humanLabel(opts.offering || ''))}</div>
+                    <div class="flex items-center gap-2 min-w-0">
+                        ${assetIcon ? `<img src="${assetIcon}" alt="" class="w-6 h-6 rounded-full shrink-0" onerror="this.remove()">` : ''}
+                        <div class="font-display text-sm truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>
+                    </div>
                     ${verdictField ? `<span class="inline-block px-3 py-1 rounded-lg font-display text-xs shrink-0 ${verdictClass(verdictField)}">${escapeHtml(VERDICT_LABELS[verdictField] || verdictField)}</span>` : ''}
                 </div>
                 <div class="text-[11px] text-zinc-500 mb-3 space-y-0.5">
@@ -283,6 +327,22 @@ const Report = {
                     </div>` : ''}
                 <div class="text-[10px] text-zinc-600 mt-3">${escapeHtml(disclaimer)} · Source: ${escapeHtml(source)}</div>
             </div>`;
+    },
+
+    // Fills in the `.protocol-chip-icon` placeholders left by
+    // renderDeliverableHtml()'s `top_protocols` handling, once `container`
+    // (the element the buildHtmlSummary() HTML was inserted into) is in the
+    // DOM. Real logo or nothing — never a guessed icon, so a chip just stays
+    // text-only if DefiLlama has no exact name match.
+    async enhanceIcons(container) {
+        if (!container) return;
+        const chips = [...container.querySelectorAll('.protocol-chip[data-protocol]')];
+        await Promise.all(chips.map(async chip => {
+            const logo = await resolveProtocolLogo(chip.dataset.protocol);
+            if (!logo) return;
+            const img = chip.querySelector('.protocol-chip-icon');
+            if (img) img.src = logo;
+        }));
     },
 
     async downloadPdf(opts) {

@@ -186,11 +186,24 @@ const Wallet = {
         }
     },
 
+    // Popovers are appended to <body> (so they aren't clipped by any
+    // ancestor's overflow/backdrop-filter stacking context) and positioned
+    // with `fixed` using the anchor's live viewport rect — `absolute` here
+    // would resolve against the initial containing block (the very top of
+    // the whole document, not the viewport), so opening the wallet menu
+    // after scrolling down rendered the popover off-screen above the fold.
+    _placeNearAnchor(pop, anchor) {
+        const r = anchor.getBoundingClientRect();
+        pop.style.position = 'fixed';
+        pop.style.top = `${r.bottom + 8}px`;
+        pop.style.right = `${Math.max(8, window.innerWidth - r.right)}px`;
+    },
+
     async _openAccountPopover(anchor) {
         this._closePopover();
         const pop = document.createElement('div');
         pop.id = 'wallet-popover';
-        pop.className = 'absolute right-5 top-16 sm:right-8 glass rounded-2xl p-4 w-72 z-50 text-zinc-200';
+        pop.className = 'glass rounded-2xl p-4 w-72 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
         pop.innerHTML = `
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
@@ -213,6 +226,7 @@ const Wallet = {
                 <button id="wallet-pop-disconnect" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm text-rose-400"><i class="fa-solid fa-right-from-bracket w-5 text-center"></i> Disconnect</button>
             </div>`;
         document.body.appendChild(pop);
+        this._placeNearAnchor(pop, anchor);
         document.getElementById('wallet-pop-case-file').onclick = () => {
             this._closePopover();
             document.getElementById('your-case-file')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -256,7 +270,7 @@ const Wallet = {
                 </button>`;
         const pop = document.createElement('div');
         pop.id = 'wallet-popover';
-        pop.className = 'absolute right-5 top-16 sm:right-8 glass rounded-2xl p-2 w-64 z-50 text-zinc-200';
+        pop.className = 'glass rounded-2xl p-2 w-64 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
         pop.innerHTML = `
             <div class="text-[10px] uppercase tracking-widest text-zinc-500 px-3 py-1.5">Detected</div>
             ${rows}
@@ -265,6 +279,7 @@ const Wallet = {
             <button id="wc-walletconnect" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-qrcode w-5 text-center text-indigo-400"></i> WalletConnect</button>
         `;
         document.body.appendChild(pop);
+        this._placeNearAnchor(pop, anchor);
         pop.querySelectorAll('.wc-injected').forEach(btn => btn.onclick = () => this.connectInjected(btn.dataset.uuid || undefined));
         document.getElementById('wc-coinbase').onclick = () => this.connectCoinbase();
         document.getElementById('wc-walletconnect').onclick = () => this.connectWalletConnect();
