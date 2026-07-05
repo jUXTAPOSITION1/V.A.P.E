@@ -52,9 +52,22 @@ window.WORKER_BASE = WORKER_BASE;
 const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
-        await Promise.allSettled([this.metrics(), this.protocols(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
+        this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
+    },
+
+    // Shared, memoized-per-cycle intel-index fetch — reports() and intel()
+    // both want it and run concurrently in refresh()'s allSettled, so this
+    // avoids a duplicate fetch and the race of reports() reading `this._intel`
+    // before intel() has populated it.
+    _intelPromise: null,
+    async _loadIntel() {
+        if (!this._intelPromise) {
+            this._intelPromise = fetch(`${RAW}/data/intel-index.json?t=` + Date.now()).then(r => r.json()).catch(() => null);
+        }
+        return this._intelPromise;
     },
 
     // Bounty Command Center telemetry strip + VAPE's own audit track record.
@@ -329,6 +342,104 @@ const App = {
         } catch(e){ this._set('m-price','—'); }
     },
 
+    // Broader-market context alongside the Base-specific tiles above — both
+    // sources are free, unauthenticated, and already stable public APIs used
+    // industry-wide for exactly this (alternative.me's Fear & Greed Index,
+    // CoinGecko's /global). One call each per five-minute refresh cycle, well
+    // inside either service's rate limit.
+    async sentiment() {
+        try {
+            const fng = await (await fetch('https://api.alternative.me/fng/?limit=1')).json();
+            const d = (fng?.data || [])[0];
+            const v = d ? parseInt(d.value, 10) : null;
+            const el = document.getElementById('m-feargreed');
+            el.classList.remove('skeleton');
+            el.innerHTML = (v != null && !isNaN(v)) ? `${v} <span class="text-xs text-zinc-500 font-sans">${this._esc(d.value_classification || '')}</span>` : '—';
+            const fill = document.getElementById('m-feargreed-fill');
+            if (fill && v != null && !isNaN(v)) {
+                fill.style.width = `${v}%`;
+                fill.style.background = v <= 24 ? '#fb7185' : v <= 44 ? '#fbbf24' : v <= 55 ? '#a1a1aa' : v <= 75 ? '#84cc16' : '#10b981';
+            }
+        } catch (e) { this._set('m-feargreed', '—'); }
+
+        try {
+            const g = await (await fetch('https://api.coingecko.com/api/v3/global')).json();
+            const mc = g?.data?.total_market_cap?.usd;
+            const chg = g?.data?.market_cap_change_percentage_24h_usd;
+            const el = document.getElementById('m-mcap');
+            el.classList.remove('skeleton');
+            el.innerHTML = mc != null ? `${fmtUsd(mc)}${typeof chg === 'number' ? ` <span class="text-xs font-sans">${pct(chg)}</span>` : ''}` : '—';
+        } catch (e) { this._set('m-mcap', '—'); }
+    },
+
+    // "Base Movers" — DexScreener's boosted-token feed is the closest
+    // keyless, real-time signal to "trending" available without a paid data
+    // provider: these are pairs projects have actively promoted, not a
+    // ranking by market cap, so the copy is careful to call it "trending"
+    // rather than "top by market cap". One batched pairs lookup per refresh
+    // cycle (comma-joined addresses, same call shape DexScreener's own docs
+    // recommend for up to 30 tokens) — Gainers/Losers/Volume just re-sort
+    // that same fetched set client-side, no extra requests per tab switch.
+    _movers: null,
+    _moversTab: 'trending',
+    async baseMovers() {
+        const el = document.getElementById('base-movers');
+        if (!el) return;
+        try {
+            const boosts = await (await fetch('https://api.dexscreener.com/token-boosts/top/v1')).json();
+            const addrs = [...new Set((Array.isArray(boosts) ? boosts : [])
+                .filter(b => b.chainId === 'base' && b.tokenAddress)
+                .map(b => b.tokenAddress.toLowerCase()))].slice(0, 30);
+            if (!addrs.length) throw new Error('no boosted Base tokens right now');
+            const data = await (await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addrs.join(',')}`)).json();
+            const byToken = new Map();
+            (data.pairs || []).forEach(p => {
+                if (p.chainId !== 'base') return;
+                const addr = (p.baseToken?.address || '').toLowerCase();
+                if (!addr) return;
+                const existing = byToken.get(addr);
+                if (!existing || (p.liquidity?.usd || 0) > (existing.liquidity?.usd || 0)) byToken.set(addr, p);
+            });
+            // Preserve the boost feed's own ranking for the "trending" tab —
+            // the tokens/{addrs} lookup above returns pairs in its own order,
+            // not the boost ranking, so rebuild from `addrs`.
+            this._movers = addrs.map(a => byToken.get(a)).filter(Boolean);
+            this._renderMovers();
+        } catch (e) { el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable.</div>`; }
+    },
+
+    _renderMovers() {
+        const el = document.getElementById('base-movers');
+        if (!el || !this._movers) return;
+        let items = this._movers.slice();
+        if (this._moversTab === 'gainers') items.sort((a,b) => (b.priceChange?.h24 ?? -Infinity) - (a.priceChange?.h24 ?? -Infinity));
+        else if (this._moversTab === 'losers') items.sort((a,b) => (a.priceChange?.h24 ?? Infinity) - (b.priceChange?.h24 ?? Infinity));
+        else if (this._moversTab === 'volume') items.sort((a,b) => (b.volume?.h24 || 0) - (a.volume?.h24 || 0));
+        items = items.slice(0, 12);
+        el.innerHTML = items.length ? items.map((p,i) => {
+            const chg = p.priceChange?.h24;
+            const icon = p.info?.imageUrl || this._tokenIcon(p.baseToken?.address, 'base');
+            const priceUsd = p.priceUsd != null ? Number(p.priceUsd) : null;
+            return `
+            <a href="${p.url}" target="_blank" rel="noopener" class="card-h glass rounded-xl px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 overflow-hidden">
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
+                <div class="min-w-0 flex-1">
+                    <div class="font-semibold truncate">${this._esc(p.baseToken?.symbol||'?')}</div>
+                    <div class="text-xs text-zinc-500 truncate">${this._esc(p.baseToken?.name||'')}</div>
+                </div>
+                <div class="text-right shrink-0 w-16 sm:w-24">
+                    <div class="stat font-display text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
+                    <div class="text-xs">${typeof chg==='number'?pct(chg):'—'}</div>
+                </div>
+                <div class="text-right shrink-0 hidden sm:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(p.volume?.h24)}</div>
+                </div>
+            </a>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
+    },
+
     async protocols() {
         const el = document.getElementById('protocols');
         try {
@@ -404,21 +515,45 @@ const App = {
         }
     },
 
+    // Prefers the generated intel index (real title/type/verdict/summary per
+    // report, same source the Archive's Reports tab uses) over a bare GitHub
+    // directory listing — falls back to filenames-only if the index isn't
+    // reachable for any reason, since that's still real, live data.
     async reports() {
         const el = document.getElementById('reports');
         try {
-            const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/reports`)).json();
-            const md = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
-                .map(f=>{ const m=f.name.match(/(\d{8})_(\d{6})/); f._ts=m?m[1]+m[2]:'0'; return f; })
-                .sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
-            if (!md.length) throw 0;
-            el.innerHTML = md.map(f=>`
-                <a href="${f.html_url}" target="_blank" class="card-h glass rounded-lg px-4 py-2.5 flex items-center justify-between text-sm">
-                    <span class="flex items-center gap-2 min-w-0"><i class="fa-solid fa-file-lines text-zinc-500"></i><span class="truncate">${f.name}</span></span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-xs shrink-0"></i>
+            const d = await this._loadIntel();
+            if (!d) throw new Error('intel index unavailable');
+            const items = (d.reports||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,6);
+            if (!items.length) throw new Error('no reports in index');
+            el.innerHTML = items.map(r=>`
+                <a href="${r.url}" target="_blank" class="card-h glass rounded-xl px-4 py-3 flex items-start gap-3">
+                    <i class="fa-solid fa-file-lines text-zinc-500 mt-1 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="font-semibold text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
+                            ${this._pill(r.threat)}
+                        </div>
+                        <div class="text-xs text-zinc-500 mt-1 truncate"><span class="text-indigo-400">${this._esc(r.type||'report')}</span> · ${this._ago(r.date)}</div>
+                        ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug truncate">${this._esc(r.summary)}</div>`:''}
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-[10px] shrink-0 mt-1.5"></i>
                 </a>`).join('');
-        } catch(e){
-            el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-cyan-400 text-sm">View all reports on GitHub →</a>`;
+        } catch(e) {
+            try {
+                const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/reports`)).json();
+                const md = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
+                    .map(f=>{ const m=f.name.match(/(\d{8})_(\d{6})/); f._ts=m?m[1]+m[2]:'0'; return f; })
+                    .sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
+                if (!md.length) throw 0;
+                el.innerHTML = md.map(f=>`
+                    <a href="${f.html_url}" target="_blank" class="card-h glass rounded-lg px-4 py-2.5 flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-2 min-w-0"><i class="fa-solid fa-file-lines text-zinc-500"></i><span class="truncate">${f.name}</span></span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-xs shrink-0"></i>
+                    </a>`).join('');
+            } catch (e2) {
+                el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-cyan-400 text-sm">View all reports on GitHub →</a>`;
+            }
         }
     },
 
@@ -461,6 +596,19 @@ const App = {
         const host = slug==='arbitrum' ? 'arbiscan.io' : slug==='ethereum' ? 'etherscan.io' : 'basescan.org';
         return `https://${host}/address/${address}`;
     },
+    // Archive/report-card meta line: small wrapping chips instead of a single
+    // "·"-joined text string — a long joined line (long address, long offering
+    // name) has nowhere to shrink and can push a narrow card wider than its
+    // container; chips wrap onto a new line instead, so a card's width is
+    // always bounded by its own layout, never by its content.
+    _metaChips(parts){
+        const items = parts.filter(Boolean);
+        if(!items.length) return '';
+        return `<div class="flex flex-wrap items-center gap-1.5 mt-1.5">${items.map(p=>`<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-zinc-500 whitespace-nowrap max-w-full truncate">${p}</span>`).join('')}</div>`;
+    },
+    _iconChip(inner, colorClass='bg-white/10 text-zinc-300'){
+        return `<div class="w-9 h-9 rounded-lg ${colorClass} flex items-center justify-center shrink-0 overflow-hidden">${inner}</div>`;
+    },
     _iconImg(address, chain, size=36, extra=''){
         const src = this._tokenIcon(address, chain);
         return src ? `<img src="${src}" alt="" width="${size}" height="${size}" class="rounded-full bg-white/5 object-cover shrink-0 ${extra}" onerror="this.remove()">` : '';
@@ -468,7 +616,8 @@ const App = {
 
     async intel(){
         try{
-            if(!this._intel) this._intel = await (await fetch(`${RAW}/data/intel-index.json?t=`+Date.now())).json();
+            this._intel = await this._loadIntel();
+            if(!this._intel) throw new Error('intel index unavailable');
             const d=this._intel, c=d.counts||{};
             document.getElementById('inv-updated').textContent = 'index '+this._ago(d.generated);
             ['investigations','reports','broadcasts','tools'].forEach(k=>{
@@ -553,17 +702,21 @@ const App = {
             const items=d.investigations||[];
             rows=items.length?items.map(i=>{
                 const sym = i.symbol || this._symFromTitle(i.title);
-                const icon = this._iconImg(i.target, i.chain, 32, 'mt-0.5');
+                const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
                 return `
-                <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    ${icon || '<i class="fa-solid fa-magnifying-glass-chart text-cyan-400 mt-1"></i>'}
+                <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                    ${icon ? this._iconChip(icon) : this._iconChip('<i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-sm"></i>', 'bg-cyan-500/10')}
                     <div class="min-w-0 flex-1">
-                        <div class="flex items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="font-mono text-xs truncate min-w-0">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
                             <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-cyan-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                         </div>
-                        <div class="text-xs text-zinc-500 mt-1 truncate">${i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span> · `:''}${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
-                        ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
+                        ${this._metaChips([
+                            i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span>`:null,
+                            this._esc(i.date||''),
+                            this._esc(i.offering||i.chain||'deep_investigation'),
+                        ])}
+                        ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(i.summary||i.key_finding)}</div>`:''}
                     </div>
                 </a>`;
             }).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
@@ -571,26 +724,26 @@ const App = {
             let items=d.reports||[];
             if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);
             rows=items.slice(0,40).map(r=>`
-                <a href="${r.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    <i class="fa-solid fa-file-lines text-zinc-500 mt-1"></i>
+                <a href="${r.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                    ${this._iconChip('<i class="fa-solid fa-file-lines text-zinc-400 text-sm"></i>')}
                     <div class="min-w-0 flex-1">
-                        <div class="flex items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="font-semibold text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
                             ${this._pill(r.threat)}
                         </div>
-                        <div class="text-xs text-zinc-500 mt-1"><span class="text-indigo-400">${this._esc(r.type)}</span> · ${this._ago(r.date)}</div>
-                        ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc(r.summary.slice(0,200))}${r.summary.length>200?'…':''}</div>`:''}
+                        ${this._metaChips([`<span class="text-indigo-400">${this._esc(r.type)}</span>`, this._esc(this._ago(r.date))])}
+                        ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(r.summary)}</div>`:''}
                     </div>
                 </a>`).join('')||'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
         } else if(tab==='broadcasts'){
             const items=d.broadcasts||[];
             rows=items.length?items.map(b=>`
-                <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    <i class="fa-solid fa-tower-broadcast text-cyan-400 mt-1"></i>
+                <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                    ${this._iconChip('<i class="fa-solid fa-tower-broadcast text-cyan-400 text-sm"></i>', 'bg-cyan-500/10')}
                     <div class="min-w-0 flex-1">
                         <div class="font-semibold text-sm break-words">${this._esc(b.title||b.file)}</div>
-                        <div class="text-xs text-zinc-500 mt-1">${this._ago(b.date)}</div>
-                        ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc(b.summary.slice(0,200))}${b.summary.length>200?'…':''}</div>`:''}
+                        ${this._metaChips([this._esc(this._ago(b.date))])}
+                        ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(b.summary)}</div>`:''}
                     </div>
                 </a>`).join(''):'<div class="text-zinc-500 text-sm">No broadcasts yet.</div>';
         } else if(tab==='tools'){
@@ -598,14 +751,14 @@ const App = {
             rows=items.length?items.map(t=>{
                 const ok=t.status==='verified'; const lim=t.known_limitation;
                 const col=ok?'#10b981':(lim?'#fbbf24':'#a1a1aa');
-                return `<a href="${t.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    <i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} mt-1" style="color:${col}"></i>
+                return `<a href="${t.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                    ${this._iconChip(`<i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} text-sm" style="color:${col}"></i>`)}
                     <div class="min-w-0 flex-1">
-                        <div class="flex items-center justify-between gap-2">
-                            <span class="font-mono text-sm">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
-                            <span class="text-[11px] px-2 py-0.5 rounded" style="color:${col};background:${col}1a">${this._esc(t.status||'?')}</span>
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="font-mono text-sm truncate min-w-0">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
+                            <span class="text-[11px] px-2 py-0.5 rounded shrink-0" style="color:${col};background:${col}1a">${this._esc(t.status||'?')}</span>
                         </div>
-                        <div class="text-xs text-zinc-500 mt-1"><span class="text-indigo-400">${this._esc(t.tier)}</span>${t.purpose?' · '+this._esc(t.purpose):''}</div>
+                        ${this._metaChips([`<span class="text-indigo-400">${this._esc(t.tier)}</span>`, t.purpose?this._esc(t.purpose):null])}
                     </div>
                 </a>`;
             }).join(''):'<div class="text-zinc-500 text-sm">No tools registered.</div>';
@@ -645,6 +798,14 @@ window.addEventListener('load', () => {
         b.className='px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
         App.chart(App._days);
     });
+    // Base Movers tab switching — re-sorts the already-fetched set, no new request
+    document.getElementById('movers-tabs').addEventListener('click', e => {
+        const b = e.target.closest('button[data-m]'); if (!b) return;
+        App._moversTab = b.dataset.m;
+        [...e.currentTarget.children].forEach(x=>{x.className='px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10';});
+        b.className='px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
+        App._renderMovers();
+    });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });
     // Intel Explorer tab switching
@@ -668,10 +829,12 @@ window.addEventListener('load', () => {
         // can actually transition instead of an abrupt cut — see site.css.
         const OPEN = ['visible', 'opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto'];
         const CLOSED = ['invisible', 'opacity-0', 'scale-[0.98]', '-translate-y-1', 'pointer-events-none'];
+        const navLogo = navToggle.querySelector('.nav-logo-pulse');
         const setOpen = (open) => {
             navPanel.classList.remove(...(open ? CLOSED : OPEN));
             navPanel.classList.add(...(open ? OPEN : CLOSED));
             navToggle.setAttribute('aria-expanded', String(open));
+            navLogo?.classList.toggle('nav-logo-active', open);
         };
         navToggle.addEventListener('click', () => setOpen(navPanel.classList.contains('invisible')));
         navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
