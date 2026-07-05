@@ -188,10 +188,11 @@ app.get("/", (c) =>
 
 // Domain-ownership proof for 402index.io's listing-claim flow (see
 // agents/x402_index_claim.py) — must serve ONLY this hash, as plain text,
-// with no redirect, for POST /api/v1/claim/verify to succeed. Empty until a
-// real claim has been run (a 404 here is correct/expected before then, not
-// a bug — never fabricate a hash).
-const WELLKNOWN_402INDEX_HASH = "";
+// with no redirect, for POST /api/v1/claim/verify to succeed. This is the
+// real verification_hash returned by the 2026-07-05 `claim` run (safe to
+// publish by design — 402index.io never exposes the raw token this hash
+// was derived from).
+const WELLKNOWN_402INDEX_HASH = "610bdcdbe9d823eca680314fecea7fcceb4a009dcf4458117d5711cd3c207084";
 app.get("/.well-known/402index-verify.txt", (c) =>
   WELLKNOWN_402INDEX_HASH
     ? c.text(WELLKNOWN_402INDEX_HASH)
