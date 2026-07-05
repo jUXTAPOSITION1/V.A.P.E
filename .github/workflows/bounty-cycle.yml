@@ -24,7 +24,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: agents/requirements.txt
       - name: Cache npm (skillforge/research.py spawns Tavily/Firecrawl/Bright Data MCP servers via npx)
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.npm
           key: npm-research-mcp-${{ runner.os }}
