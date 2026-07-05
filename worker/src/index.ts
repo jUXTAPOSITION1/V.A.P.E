@@ -44,6 +44,21 @@ export interface Env {
 
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 
+// Alchemy/CoinGecko URLs embed the API key as a path/query segment, so any
+// thrown error whose message echoes the request URL (e.g. a generic fetch
+// failure) could otherwise leak it into a public API response. Strip both
+// known key env vars out of the message before surfacing it — this is
+// deliberately not swallowed to a generic string, matching exploit_check/
+// safety_preflight's "surface real failures" fix: a vague "upstream lookup
+// failed" with no detail looks identical whether the key is wrong, Alchemy
+// rate-limited us, or the address just has too many token balances to batch.
+function errDetail(e: unknown, env: Env): string {
+  let msg = e instanceof Error ? e.message : String(e);
+  if (env.ALCHEMY_API_KEY) msg = msg.split(env.ALCHEMY_API_KEY).join("***");
+  if (env.COINGECKO_API_KEY) msg = msg.split(env.COINGECKO_API_KEY).join("***");
+  return msg;
+}
+
 /**
  * Builds the facilitator's `createAuthHeaders` callback. Only CDP's hosted
  * facilitator (api.cdp.coinbase.com) needs Bearer JWT auth; the public
@@ -222,7 +237,7 @@ app.get("/portfolio", cache({ cacheName: "vape-portfolio", cacheControl: "max-ag
     const portfolio = await getPortfolio(c.env, address);
     return c.json({ address, ...portfolio });
   } catch (e) {
-    return c.json({ error: "upstream lookup failed" }, 502);
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
 });
 
@@ -234,7 +249,7 @@ app.get("/nfts", cache({ cacheName: "vape-nfts", cacheControl: "max-age=60" }), 
     const nfts = await getNftsForOwner(c.env, address);
     return c.json({ address, nfts });
   } catch (e) {
-    return c.json({ error: "upstream lookup failed" }, 502);
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
 });
 
@@ -244,7 +259,7 @@ app.get("/network-status", cache({ cacheName: "vape-network-status", cacheContro
     const status = await getNetworkStatus(c.env);
     return c.json(status);
   } catch (e) {
-    return c.json({ error: "upstream lookup failed" }, 502);
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
 });
 
@@ -260,7 +275,7 @@ app.get("/prices", async (c) => {
     const prices = await getCurrentPrices(c.env, addresses);
     return c.json(prices);
   } catch (e) {
-    return c.json({ error: "upstream lookup failed" }, 502);
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
 });
 
@@ -282,7 +297,7 @@ app.get("/cost-basis", async (c) => {
     const results = await estimateCostBasis(c.env, address, tokensForEstimate);
     return c.json({ address, results });
   } catch (e) {
-    return c.json({ error: "upstream lookup failed" }, 502);
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
 });
 

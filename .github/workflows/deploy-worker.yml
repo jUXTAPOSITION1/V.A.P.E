@@ -79,6 +79,23 @@ jobs:
           command: secret list
           wranglerVersion: '4.107.0'
 
+      # Spot-checks the free (no x402 gate) Alchemy/CoinGecko-backed routes
+      # against a real, known address (VAPE's own ACP wallet) so an
+      # ALCHEMY_API_KEY/COINGECKO_API_KEY addition can be confirmed live
+      # without needing a funded wallet to pay for the x402 routes. Logs
+      # response snippets only — informational, never fails the job.
+      - name: Spot-check free data routes (manual trigger only)
+        if: ${{ success() && env.HAS_CF_TOKEN == 'true' && github.event_name == 'workflow_dispatch' }}
+        run: |
+          # No -f: curl's -f swallows the response BODY on HTTP error status
+          # codes, which hid every route's JSON error/detail field behind a
+          # bare "curl: (22) ... 502" on the very run meant to reveal it.
+          addr=0xa1420293a7df49bc8380f543a1fe7b8d6f582879
+          for path in "network-status" "portfolio?address=$addr" "nfts?address=$addr"; do
+            echo "--- /$path ---"
+            curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
+          done
+
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
         run: |
