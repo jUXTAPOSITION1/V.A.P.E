@@ -1,0 +1,27 @@
+name: 402 Index Domain Claim (manual, one-off)
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'claim (get token+hash) or verify (after the hash is deployed)'
+        required: true
+        type: choice
+        options: [claim, verify]
+        default: claim
+
+permissions:
+  contents: read
+
+jobs:
+  claim-or-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run 402 Index ${{ inputs.action }}
+        run: python agents/x402_index_claim.py ${{ inputs.action }}

@@ -186,6 +186,18 @@ app.get("/", (c) =>
   })
 );
 
+// Domain-ownership proof for 402index.io's listing-claim flow (see
+// agents/x402_index_claim.py) — must serve ONLY this hash, as plain text,
+// with no redirect, for POST /api/v1/claim/verify to succeed. Empty until a
+// real claim has been run (a 404 here is correct/expected before then, not
+// a bug — never fabricate a hash).
+const WELLKNOWN_402INDEX_HASH = "";
+app.get("/.well-known/402index-verify.txt", (c) =>
+  WELLKNOWN_402INDEX_HASH
+    ? c.text(WELLKNOWN_402INDEX_HASH)
+    : c.notFound()
+);
+
 // Free, unpaid Alchemy-backed endpoints — no x402 gate, since these back the
 // site's read-only wallet profile and metrics strip rather than a priced
 // offering. 503 (not 500) when ALCHEMY_API_KEY isn't configured, so callers
