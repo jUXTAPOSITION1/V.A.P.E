@@ -53,7 +53,20 @@ jobs:
         if: ${{ env.HAS_CF_TOKEN == 'false' }}
         run: echo "CLOUDFLARE_API_TOKEN not set — typecheck passed, skipping live deploy. See worker/README.md."
 
-      - name: If Deploy failed, check the workers.dev subdomain first
+      # Runs on GitHub's runner, which has real unrestricted egress — proves
+      # the deploy actually answers requests, not just that `wrangler deploy`
+      # exited 0 (uploading successfully and being reachable are different
+      # things, e.g. the workers.dev subdomain not being claimed yet). Custom
+      # `if:` conditions replace the implicit success() check rather than
+      # adding to it, so success() is spelled out here on purpose.
+      - name: Smoke test (confirm the live deploy actually answers)
+        if: ${{ success() && env.HAS_CF_TOKEN == 'true' }}
+        run: |
+          body=$(curl -fsS --retry 3 --retry-delay 2 https://vape-x402.vapex402.workers.dev/)
+          echo "$body"
+          echo "$body" | grep -q '"agent":"VAPE"' || { echo "::error::Smoke test failed — https://vape-x402.vapex402.workers.dev/ did not return the expected VAPE/x402 payload"; exit 1; }
+
+      - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
         run: |
-          echo "::error::Deploy failed. If the log above shows 'You need to register a workers.dev subdomain', this is an account-level Cloudflare setup step, not a code issue: Workers & Pages -> Overview in the dashboard, claim a subdomain, confirm it shows an active value (not blank/-null), then re-run this workflow. See worker/README.md's 'Cloudflare + Deno Deploy' section."
+          echo "::error::Deploy or the post-deploy smoke test failed. If the Deploy step's log shows 'You need to register a workers.dev subdomain', this is an account-level Cloudflare setup step, not a code issue: Workers & Pages -> Overview in the dashboard, claim a subdomain, confirm it shows an active value (not blank/-null), then re-run this workflow. If Deploy succeeded but the smoke test failed, the Worker uploaded but isn't answering at the expected URL — check that vape-x402.vapex402.workers.dev still matches this account's actual claimed subdomain. See worker/README.md's 'Cloudflare + Deno Deploy' section."
