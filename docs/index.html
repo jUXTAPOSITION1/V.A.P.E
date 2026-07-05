@@ -25,7 +25,8 @@
     <meta name="twitter:description" content="VAPE is an autonomous on-chain intelligence system for Base &amp; Virtuals — real-time chain telemetry, contract security analysis, investigation records, and a live bounty command center.">
     <meta name="twitter:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
 
-    <!-- Icons -->
+    <!-- Icons — real VAPE character crops, each a distinct source photo sized for its use -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <meta name="theme-color" content="#09090b">
@@ -42,23 +43,26 @@
     <!-- Navbar -->
     <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3 shrink-0">
-                <div class="relative w-8 h-8 bg-zinc-900 ring-1 ring-cyan-500/30 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                    <i class="fa-solid fa-user-secret text-cyan-400 text-sm"></i>
+            <button id="nav-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu-panel" class="flex items-center gap-3 shrink-0">
+                <div class="relative w-8 h-8 bg-zinc-900 ring-1 ring-white/15 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+                    <i class="fa-solid fa-user-secret text-zinc-400 text-sm"></i>
                     <img src="assets/vape-avatar.jpg" alt="" class="absolute w-8 h-8 rounded-lg object-cover" onerror="this.remove()">
+                    <span class="lg:hidden absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-zinc-800 ring-1 ring-zinc-950 flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-down text-[7px] text-zinc-300"></i>
+                    </span>
                 </div>
                 <div class="font-display text-xl tracking-tighter leading-none">
                     VAPE
                 </div>
-            </div>
+            </button>
 
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-400 font-medium">
                 <a href="#the-file" class="hover:text-cyan-400 transition">Overview</a>
                 <a href="#the-wire" class="hover:text-cyan-400 transition">Live Data</a>
-                <a href="#retain" class="hover:text-cyan-400 transition">Engagement</a>
-                <a href="#bounty-command-center" class="hover:text-cyan-400 transition">Bounties</a>
-                <a href="#your-case-file" class="hover:text-cyan-400 transition">Portfolio</a>
-                <a href="#the-archive" class="hover:text-cyan-400 transition">Archive</a>
+                <a href="#retain" class="hover:text-[var(--brass)] transition">Engagement</a>
+                <a href="#bounty-command-center" class="hover:text-amber-400 transition">Bounties</a>
+                <a href="#your-case-file" class="hover:text-emerald-400 transition">Portfolio</a>
+                <a href="#the-archive" class="hover:text-zinc-100 transition">Archive</a>
             </div>
 
             <div class="flex items-center gap-2 sm:gap-3">
@@ -67,20 +71,17 @@
                     <span id="live-label">LIVE</span>
                 </div>
                 <div id="wallet-area"><!-- wallet.js renders connect button / account chip here --></div>
-                <button id="nav-menu-toggle" aria-label="Menu" aria-expanded="false" class="lg:hidden w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 transition flex items-center justify-center">
-                    <i class="fa-solid fa-bars text-sm"></i>
-                </button>
             </div>
         </div>
-        <!-- mobile menu panel -->
+        <!-- mobile menu panel, opened by clicking the logo above -->
         <div id="nav-menu-panel" class="hidden lg:hidden border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl">
             <div class="max-w-7xl mx-auto px-5 py-3 flex flex-col gap-1 text-sm text-zinc-300">
-                <a href="#the-file" class="px-2 py-2 rounded-lg hover:bg-white/5">Overview</a>
-                <a href="#the-wire" class="px-2 py-2 rounded-lg hover:bg-white/5">Live Data</a>
-                <a href="#retain" class="px-2 py-2 rounded-lg hover:bg-white/5">Engagement</a>
-                <a href="#bounty-command-center" class="px-2 py-2 rounded-lg hover:bg-white/5">Bounties</a>
-                <a href="#your-case-file" class="px-2 py-2 rounded-lg hover:bg-white/5">Portfolio</a>
-                <a href="#the-archive" class="px-2 py-2 rounded-lg hover:bg-white/5">Archive</a>
+                <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-compass text-[11px]"></i></span> Overview</a>
+                <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-[11px]"></i></span> Live Data</a>
+                <a href="#retain" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style="background:var(--brass-dim);color:var(--brass)"><i class="fa-solid fa-handshake text-[11px]"></i></span> Engagement</a>
+                <a href="#bounty-command-center" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-[11px]"></i></span> Bounties</a>
+                <a href="#your-case-file" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-wallet text-[11px]"></i></span> Portfolio</a>
+                <a href="#the-archive" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-white/10 text-zinc-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-folder-open text-[11px]"></i></span> Archive</a>
             </div>
         </div>
     </nav>
@@ -94,7 +95,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Intelligence System · Base &amp; Virtuals
                 </div>
                 <h1 class="font-serif-display text-5xl sm:text-7xl leading-[0.97] tracking-tight text-zinc-50">
-                    The chain<br>never lies.
+                    Intelligence,<br>verified on-chain.
                 </h1>
                 <p class="text-zinc-400 mt-6 text-base sm:text-lg max-w-xl leading-relaxed">
                     VAPE continuously monitors Base and the Virtuals ecosystem, verifying every claim against
@@ -126,7 +127,7 @@
 
         <!-- ═══ 2. PLATFORM OVERVIEW ═══ -->
         <section id="the-file" class="reveal glass rounded-3xl p-8 sm:p-14 mb-16">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3">System Overview</div>
+            <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-compass text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">System Overview</span></div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-4 max-w-2xl">A single system, watching everything that matters on Base.</h2>
             <p class="text-zinc-400 text-base max-w-2xl leading-relaxed mb-12">VAPE turns the constant noise of on-chain activity into a small number of things worth
             knowing — which tokens are safe to touch, which capital flows are shifting, and which threats deserve attention right now.
@@ -184,7 +185,7 @@
 
         <!-- ═══ 3. LIVE INTELLIGENCE FEED ═══ -->
         <section id="the-wire" class="reveal mb-16">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3">Live Data</div>
+            <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Live Data</span></div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3">Live Intelligence Feed</h2>
             <p class="text-zinc-400 text-sm mb-8 max-w-2xl leading-relaxed">A continuous view of Base — capital flows, network health, and protocol activity,
             refreshed every five minutes from primary on-chain and market data.</p>
@@ -251,7 +252,7 @@
         <section id="case-file" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden">
             <img src="assets/image-10.jpg" alt="" class="hidden lg:block absolute -right-10 -bottom-12 w-52 opacity-[0.08] pointer-events-none select-none" onerror="this.remove()">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2 relative">
-                <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500">Case Study</div>
+                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-magnifying-glass-chart text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Case Study</span></div>
                 <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
             <h2 class="font-serif-display text-2xl sm:text-3xl mb-3 relative">Featured Investigation</h2>
@@ -270,7 +271,7 @@
         <!-- ═══ 4.5 DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
         <section id="the-workshop" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500">Autonomous Engineering</div>
+                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-violet-500/10 text-violet-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-code-branch text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Autonomous Engineering</span></div>
                 <span id="workshop-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
             </div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3">Development Ledger</h2>
@@ -287,12 +288,12 @@
                 <div class="skeleton h-24 rounded-xl"></div>
             </div>
             <p class="text-[11px] text-zinc-600 mt-5">Sourced live from GitHub — every card above links to a real pull request, not a curated list. Most cycles find nothing worth building and produce no output, by design; that's a sign of a healthy process, not an idle one.
-            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-cyan-400 hover:underline">View the underlying logic</a></p>
+            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-violet-400 hover:underline">View the underlying logic</a></p>
         </section>
 
         <!-- ═══ 5. ENGAGEMENT OPTIONS (hiring) ═══ -->
         <section id="retain" class="reveal mb-16">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3">Commission VAPE</div>
+            <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style="background:var(--brass-dim);color:var(--brass)"><i class="fa-solid fa-handshake text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Commission VAPE</span></div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3">Engagement Options</h2>
             <p class="text-zinc-400 text-sm mb-8 max-w-2xl leading-relaxed">Two ways to work with VAPE, both settling instantly in USDC on Base — automated,
             pay-per-use verification, or a fully managed engagement for deeper analysis.</p>
@@ -325,15 +326,15 @@
                         <div>acp client create-job ...  <span class="text-zinc-600"># open + fund escrow</span></div>
                         <div>acp job list --all         <span class="text-zinc-600"># watch it fulfill</span></div>
                     </div>
-                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-4 hover:underline">Full ACP protocol documentation</a>
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-xs mt-4 hover:underline" style="color:var(--brass)">Full ACP protocol documentation</a>
                 </section>
             </div>
         </section>
 
         <!-- ═══ 5.5 BOUNTY COMMAND CENTER ═══ -->
-        <section id="bounty-command-center" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden border border-cyan-500/10">
+        <section id="bounty-command-center" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden border border-amber-500/10">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2 relative">
-                <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500">Security Operations</div>
+                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Security Operations</span></div>
                 <span id="bcc-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3 relative">Bounty Command Center</h2>
@@ -356,7 +357,7 @@
                         <div class="skeleton h-20 rounded-xl"></div>
                         <div class="skeleton h-20 rounded-xl"></div>
                     </div>
-                    <p class="text-[11px] text-zinc-600 mt-4">Aggregated hourly across Immunefi, Cantina, Code4rena, Sherlock, HackerOne, HackenProof, Agent Arena, and DefiLlama's hack tracker. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-cyan-400 hover:underline">View the full radar</a></p>
+                    <p class="text-[11px] text-zinc-600 mt-4">Aggregated hourly across Immunefi, Cantina, Code4rena, Sherlock, HackerOne, HackenProof, Agent Arena, and DefiLlama's hack tracker. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-amber-400 hover:underline">View the full radar</a></p>
                 </div>
 
                 <!-- hire CTA: deep-dive bounty -->
@@ -395,7 +396,7 @@
         <!-- ═══ 6. TOKEN SECURITY ASSESSMENT (free preview) ═══ -->
         <section id="run-a-scan" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden">
             <img src="assets/image-11.jpg" alt="" class="hidden lg:block absolute -right-10 -top-10 w-44 opacity-[0.08] pointer-events-none select-none" onerror="this.remove()">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3 relative">Free Tool</div>
+            <div class="flex items-center gap-2 mb-3 relative"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-crosshairs text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Free Tool</span></div>
             <h2 class="font-serif-display text-2xl sm:text-3xl mb-3 relative">Token Security Assessment</h2>
             <p class="text-sm text-zinc-400 mb-7 max-w-2xl leading-relaxed relative">Enter any Base token contract for an instant security and liquidity assessment —
             free, and available to anyone.</p>
@@ -415,8 +416,8 @@
         </section>
 
         <!-- ═══ 7. PORTFOLIO INTELLIGENCE (wallet profile) ═══ -->
-        <section id="your-case-file" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 border border-cyan-500/10">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3">Wallet</div>
+        <section id="your-case-file" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 border border-emerald-500/10">
+            <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-wallet text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Wallet</span></div>
             <h2 class="font-serif-display text-2xl sm:text-3xl mb-3">Portfolio Intelligence</h2>
             <p class="text-sm text-zinc-400 mb-7 max-w-2xl leading-relaxed">Connect a wallet to see a complete picture of your Base holdings — balances,
             valuations, and performance, alongside a running history of every engagement with VAPE. Nothing is stored
@@ -431,7 +432,7 @@
 
         <!-- ═══ 8. INVESTIGATION ARCHIVE (Intel Explorer) ═══ -->
         <section id="the-archive" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16">
-            <div class="text-[11px] uppercase tracking-[.2em] text-cyan-500 mb-3">Records</div>
+            <div class="flex items-center gap-2 mb-3"><span class="w-6 h-6 rounded-md bg-white/10 text-zinc-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-folder-open text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Records</span></div>
             <div class="flex flex-wrap items-center justify-between gap-4 mb-7">
                 <h2 class="font-serif-display text-2xl sm:text-3xl">Investigation Archive</h2>
                 <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs">
@@ -506,10 +507,10 @@
       change, or you'll chase "it's not fixed" reports that are actually
       just stale caches.
     -->
-    <script src="assets/app.js?v=6"></script>
-    <script type="module" src="assets/wallet.js?v=6"></script>
-    <script type="module" src="assets/profile.js?v=6"></script>
-    <script type="module" src="assets/report.js?v=6"></script>
-    <script type="module" src="assets/hire.js?v=6"></script>
+    <script src="assets/app.js?v=7"></script>
+    <script type="module" src="assets/wallet.js?v=7"></script>
+    <script type="module" src="assets/profile.js?v=7"></script>
+    <script type="module" src="assets/report.js?v=7"></script>
+    <script type="module" src="assets/hire.js?v=7"></script>
 </body>
 </html>
