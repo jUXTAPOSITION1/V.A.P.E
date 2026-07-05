@@ -635,9 +635,9 @@ def main():
         
         # Auto-append to Memory
         if builder.auto_append_to_memory(code, metadata):
-            print("\n✅ Auto-appended to Memory")
+            print("\n[OK] Auto-appended to Memory")
     else:
-        print("❌ Code generation failed")
+        print("[FAIL] Code generation failed")
         sys.exit(1)
 
 

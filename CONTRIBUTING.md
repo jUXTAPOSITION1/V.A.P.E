@@ -223,4 +223,4 @@ Documentation files:
 - Help others learn
 - Respect privacy and security
 
-Thank you for contributing! 🦍
+Thank you for contributing!

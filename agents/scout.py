@@ -148,7 +148,7 @@ def _write_digest(entries, new_count, total_count):
     for e in shown:
         prize = f"${e['prizeUsd']:,.0f}" if e.get("prizeUsd") else "—"
         program = f"[{e.get('name', 'Unknown')}]({e.get('url', '#')})"
-        new_mark = "✓" if e.get("isNew") else ""
+        new_mark = "[OK]" if e.get("isNew") else ""
         lines.append(f"| {e.get('fitScore', 0)} | {prize} | {e.get('platform', '')} | {program} | {e.get('status', '')} | {new_mark} |")
 
     lines += ["", "## Top targets (act now)", ""]

@@ -1,16 +1,16 @@
-# 🔍 VAPE Community Intelligence Broadcast
+# VAPE Community Intelligence Broadcast
 **Date:** YYYY-MM-DD HH:MM UTC
 **Broadcast #: [sequential number]
 
 ---
 
-## 🔴 CRITICAL ALERTS
+## CRITICAL ALERTS
 [None / List any CRITICAL or HIGH severity findings]
 
-## 🟡 WATCH LIST
+## WATCH LIST
 [Items worth monitoring but not urgent]
 
-## 🟢 ALL CLEAR
+## ALL CLEAR
 [Verticals with no concerning activity]
 
 ---
@@ -26,7 +26,7 @@
 
 ---
 
-## 🎯 Actionable Alpha
+## Actionable Alpha
 1. 
 2. 
 3. 

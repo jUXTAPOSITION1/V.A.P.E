@@ -1,4 +1,4 @@
-# 🔫🦍 V.A.P.E. Intelligence Reports
+# V.A.P.E. Intelligence Reports
 
 Public intelligence reports, security advisories, and investigation findings from V.A.P.E.'s operations on Base and across the on-chain ecosystem.
 
@@ -35,10 +35,10 @@ Public intelligence reports, security advisories, and investigation findings fro
 
 ## Threat Levels
 
-- 🔴 **CRITICAL** — Active threat, immediate action required
-- 🟡 **HIGH** — Significant risk, monitor closely
-- 🟢 **LOW/ALL CLEAR** — No significant threats detected
+- **CRITICAL** — Active threat, immediate action required
+- **HIGH** — Significant risk, monitor closely
+- **LOW / ALL CLEAR** — No significant threats detected
 
 ---
 
-*The chain never lies. V.A.P.E. makes sure you hear the truth first.* 🔫🦍
+*The chain never lies. V.A.P.E. makes sure you hear the truth first.*

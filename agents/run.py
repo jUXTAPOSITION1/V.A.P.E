@@ -488,9 +488,9 @@ def main(review_repo=False):
     if INTEGRATION_AVAILABLE:
         status = get_system_status()
         print("\n[Integration Status]")
-        print(f"  Memory: {'✅' if status['memory_available'] else '❌'}")
-        print(f"  Builder: {'✅' if status['builder_available'] else '❌'}")
-        print(f"  MCP: {'✅' if status['mcp_available'] else '❌'}")
+        print(f"  Memory: {'[OK]' if status['memory_available'] else '[FAIL]'}")
+        print(f"  Builder: {'[OK]' if status['builder_available'] else '[FAIL]'}")
+        print(f"  MCP: {'[OK]' if status['mcp_available'] else '[FAIL]'}")
         if status['memory_stats']:
             print(f"  Memory entries: {status['memory_stats'].get('total_entries', 0)}")
         print()
@@ -606,7 +606,7 @@ def main(review_repo=False):
                 f.write("\n\n---\n\n<details>\n<summary>Raw data snapshot (audit trail)</summary>\n\n")
                 f.write(f"```json\n{json.dumps(market_context, indent=2)}\n```\n\n</details>\n")
 
-    print(f"\n✅ Report saved to: {report_path}\n")
+    print(f"\n[OK] Report saved to: {report_path}\n")
     
     # NEW: Optionally run full cycle if requested
     if os.getenv("VAPE_FULL_CYCLE"):

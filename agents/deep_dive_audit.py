@@ -216,7 +216,7 @@ def run_audit(address, chain="8453", callback_url=None):
     path = os.path.join(AUDIT_DIR, f"audit-deep-dive-{slug}-{stamp}.md")
 
     L = []
-    L.append(f"# 🔍 VAPE Deep-Dive Bounty Audit — {sym}")
+    L.append(f"# VAPE Deep-Dive Bounty Audit — {sym}")
     L.append("")
     L.append(f"**Target:** `{address}` (chain {chain})  ")
     L.append(f"**Date:** {now_iso()}  ")

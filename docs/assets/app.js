@@ -189,9 +189,9 @@ const App = {
             const [col, label] = statusStyle[b.status] || statusStyle.closed;
             const v = b.verification || {};
             const vBits = [];
-            if (v.ok) vBits.push(`<span class="text-emerald-400">✅ ${v.ok}</span>`);
-            if (v.warn) vBits.push(`<span class="text-amber-400">⚠️ ${v.warn}</span>`);
-            if (v.fail) vBits.push(`<span class="text-rose-400">❌ ${v.fail}</span>`);
+            if (v.ok) vBits.push(`<span class="text-emerald-400">[OK] ${v.ok}</span>`);
+            if (v.warn) vBits.push(`<span class="text-amber-400">[WARN] ${v.warn}</span>`);
+            if (v.fail) vBits.push(`<span class="text-rose-400">[FAIL] ${v.fail}</span>`);
             return `
             <a href="${b.url}" target="_blank" rel="noopener" class="card-h glass rounded-xl p-4 block">
                 <div class="flex items-start justify-between gap-2 mb-1.5">

@@ -1,4 +1,4 @@
-# 🦍🔧 VAPE SKILLFORGE — Persistent Skill & Memory Ecosystem
+# VAPE SKILLFORGE — Persistent Skill & Memory Ecosystem
 
 A self-reinforcing loop that constantly sharpens VAPE/HACK's bug-bounty & white-hat skill set.
 **Real data only. No hypotheticals, no fiction, no simulated tool output.**
@@ -44,4 +44,4 @@ VAPE measurably sharpens on REAL outcomes, not vibes.
 - Phase 2: AI red-team tier (Garak, Promptfoo, DeepTeam).
 - **Phase 3 (NOW):** recon/forensics tier — base_rpc, market_data, token_safety, wallet_trace, contract_recon.
 
-*The chain never lies. VAPE makes sure you hear the truth first.* 🔫🦍
+*The chain never lies. VAPE makes sure you hear the truth first.*
