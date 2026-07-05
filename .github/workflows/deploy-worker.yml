@@ -66,6 +66,18 @@ jobs:
           echo "$body"
           echo "$body" | grep -q '"agent":"VAPE"' || { echo "::error::Smoke test failed — https://vape-x402.vapex402.workers.dev/ did not return the expected VAPE/x402 payload"; exit 1; }
 
+      # Names only, never values — safe to print to the Actions log. Manual
+      # trigger only (not on every push) since this is an audit convenience,
+      # not something that needs to run on every deploy.
+      - name: List configured Worker secrets (names only, manual trigger only)
+        if: ${{ success() && env.HAS_CF_TOKEN == 'true' && github.event_name == 'workflow_dispatch' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          command: secret list
+
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
         run: |
