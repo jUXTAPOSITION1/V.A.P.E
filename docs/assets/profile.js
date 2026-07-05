@@ -203,10 +203,8 @@ const Profile = {
         const pnl = this._computePnl24h(holdings);
         const cases = (window.CaseHistory ? CaseHistory.forWallet(address) : []);
         const coverageNote = this._viaWorker
-            ? 'native ETH + every ERC-20 Alchemy has indexed for this wallet'
-            : window.WORKER_BASE
-                ? `native ETH + curated Base tokens (worker unavailable: ${this._workerError || 'unknown reason'})`
-                : 'native ETH + curated Base tokens (deploy the VAPE worker for full auto-discovery)';
+            ? 'native ETH plus every token detected in this wallet'
+            : 'native ETH plus a curated set of well-known Base tokens';
 
         root.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
@@ -265,7 +263,7 @@ const Profile = {
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Cost basis estimate <span class="text-zinc-600 normal-case">(beta)</span></div>
                     <button id="profile-costbasis-btn" class="bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs shrink-0">Run estimate</button>
                 </div>
-                <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet — an approximation, not a full weighted-average cost basis across every acquisition. Needs the VAPE worker with Alchemy + CoinGecko keys configured.</p>
+                <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet — an approximation, not a full weighted-average cost basis across every acquisition.</p>
                 <div id="profile-costbasis"></div>
             </div>
             <div class="mb-6">
@@ -298,7 +296,7 @@ const Profile = {
         btn.disabled = false;
         btn.classList.remove('opacity-50');
         if (error === 'not-configured') {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">Not available — the VAPE worker needs both an Alchemy and a CoinGecko API key configured for this. See worker/README.md.</div>';
+            el.innerHTML = '<div class="text-zinc-500 text-sm">Cost-basis analysis isn\'t available right now.</div>';
             return;
         }
         if (error || !results) {
@@ -480,7 +478,7 @@ const Profile = {
         const el = document.getElementById('profile-nfts');
         if (!el) return;
         if (!window.WORKER_BASE) {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">NFT holdings need the VAPE worker deployed (Alchemy-backed) — see worker/README.md.</div>';
+            el.innerHTML = '<div class="text-zinc-500 text-sm">NFT holdings aren\'t available right now.</div>';
             return;
         }
         if (!nfts.length) {
