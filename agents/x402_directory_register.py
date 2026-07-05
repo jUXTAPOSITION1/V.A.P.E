@@ -33,7 +33,7 @@ import time
 import urllib.request
 import urllib.error
 
-WORKER_BASE = "https://vape.juxtaposition1.deno.net"
+WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 PROVIDER = "VAPE"
 # Literally VAPE's favicon (the same file served at docs/index.html's
 # <link rel="icon">), not a separate logo asset — reused here so every
