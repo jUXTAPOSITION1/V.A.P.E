@@ -14,8 +14,8 @@
 
 body {
     background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.12), transparent),
-        radial-gradient(1000px 500px at 100% 0%, rgba(16,185,129,0.08), transparent),
+        radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.10), transparent),
+        radial-gradient(1000px 500px at 100% 0%, rgba(34,211,238,0.07), transparent),
         radial-gradient(900px 500px at 50% 60%, rgba(34,211,238,0.05), transparent),
         #09090b;
 }
@@ -27,7 +27,7 @@ body {
 .skeleton { background: linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 37%,rgba(255,255,255,.04) 63%); background-size:400% 100%; animation: sh 1.4s ease infinite; }
 @keyframes sh { 0%{background-position:100% 50%} 100%{background-position:0 50%} }
 a { transition: color .15s; }
-.card-h:hover { transform: translateY(-2px); border-color: rgba(16,185,129,.4); }
+.card-h:hover { transform: translateY(-2px); border-color: rgba(34,211,238,.35); }
 .card-h { transition: all .2s cubic-bezier(.4,0,.2,1); }
 
 /* ── Scroll reveal ─────────────────────────────────────────────────────── */

@@ -115,7 +115,7 @@ const Wallet = {
                 showQrModal: true,
                 metadata: {
                     name: 'VAPE',
-                    description: 'Autonomous on-chain detective for Base & Virtuals',
+                    description: 'Autonomous on-chain intelligence system for Base & Virtuals',
                     url: 'https://juxtaposition1.github.io/V.A.P.E/',
                     icons: ['https://juxtaposition1.github.io/V.A.P.E/assets/apple-touch-icon.png'],
                 },
@@ -168,7 +168,7 @@ const Wallet = {
             root.innerHTML = `
                 <div class="relative">
                     <button id="wallet-chip-btn" class="wallet-chip glass rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs" aria-label="${onBase ? `Connected wallet ${this._account}, on Base. Click to disconnect.` : `Connected wallet ${this._account}, wrong network. Click to switch to Base.`}">
-                        <span class="w-2 h-2 rounded-full ${onBase ? 'bg-emerald-400' : 'bg-amber-400 chain-badge-warn'}" aria-hidden="true"></span>
+                        <span class="w-2 h-2 rounded-full ${onBase ? 'bg-emerald-500' : 'bg-amber-400 chain-badge-warn'}" aria-hidden="true"></span>
                         <span class="font-mono">${this._short(this._account)}</span>
                         ${onBase ? '' : '<span class="text-amber-400">Switch to Base</span>'}
                         <i class="fa-solid fa-chevron-down text-[9px] opacity-60" aria-hidden="true"></i>
@@ -193,7 +193,7 @@ const Wallet = {
         pop.className = 'absolute right-5 top-16 sm:right-8 glass rounded-2xl p-4 w-72 z-50 text-zinc-200';
         pop.innerHTML = `
             <div class="flex items-center gap-2 mb-3">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                 <span class="font-mono text-xs break-all">${this._account}</span>
             </div>
             <div class="grid grid-cols-2 gap-2 mb-3">
@@ -203,11 +203,11 @@ const Wallet = {
                 </div>
                 <div class="bg-white/5 rounded-lg p-2.5">
                     <div class="text-[10px] uppercase tracking-wider text-zinc-500">Network</div>
-                    <div class="font-display text-sm mt-0.5 text-emerald-400">Base</div>
+                    <div class="font-display text-sm mt-0.5 text-emerald-500">Base</div>
                 </div>
             </div>
             <div class="flex flex-col gap-1.5">
-                <button id="wallet-pop-case-file" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-id-card-clip w-5 text-center text-cyan-400"></i> View full case file</button>
+                <button id="wallet-pop-case-file" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-id-card-clip w-5 text-center text-cyan-400"></i> View portfolio</button>
                 <button id="wallet-pop-copy" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-copy w-5 text-center"></i> Copy address</button>
                 <a href="https://basescan.org/address/${this._account}" target="_blank" rel="noopener" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-arrow-up-right-from-square w-5 text-center"></i> View on Basescan</a>
                 <button id="wallet-pop-disconnect" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm text-rose-400"><i class="fa-solid fa-right-from-bracket w-5 text-center"></i> Disconnect</button>
@@ -220,7 +220,7 @@ const Wallet = {
         document.getElementById('wallet-pop-copy').onclick = async () => {
             await navigator.clipboard.writeText(this._account);
             const btn = document.getElementById('wallet-pop-copy');
-            btn.innerHTML = '<i class="fa-solid fa-check w-5 text-center text-emerald-400"></i> Copied!';
+            btn.innerHTML = '<i class="fa-solid fa-check w-5 text-center text-emerald-500"></i> Copied!';
         };
         document.getElementById('wallet-pop-disconnect').onclick = () => { this._closePopover(); this.disconnect(); };
         setTimeout(() => {

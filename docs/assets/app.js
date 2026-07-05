@@ -20,10 +20,10 @@ const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
-// the paying wallet) so "Your Case File" can show a persistent case history
-// with no backend — same zero-cost, keyless philosophy as the rest of the
-// site. Scope: this device/browser only, not synced across devices; that's
-// an honest limitation of a no-backend design, not a bug.
+// the paying wallet) so "Portfolio Intelligence" can show a persistent
+// engagement history with no backend — same zero-cost, keyless philosophy as
+// the rest of the site. Scope: this device/browser only, not synced across
+// devices; that's an honest limitation of a no-backend design, not a bug.
 const CaseHistory = {
     KEY: 'vape_case_history_v1',
     MAX_ENTRIES: 200,
@@ -91,14 +91,14 @@ const App = {
             auditEl.innerHTML = files.map(f => `
                 <a href="${f.url}" target="_blank" class="card-h glass rounded-xl p-4 block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-400'}"></i>
-                        <span class="text-[10px] px-2 py-0.5 rounded ${f.stopped?'bg-white/5 text-zinc-500':'bg-emerald-500/10 text-emerald-400'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
+                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-500'}"></i>
+                        <span class="text-[10px] px-2 py-0.5 rounded ${f.stopped?'bg-white/5 text-zinc-500':'bg-emerald-500/10 text-emerald-500'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
                     </div>
                     <div class="font-semibold text-xs leading-snug capitalize">${this._esc(f.name)}</div>
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
                 </a>`).join('');
         } catch(e) {
-            auditEl.innerHTML = '<div class="sm:col-span-2 lg:col-span-4 text-zinc-500 text-sm">No audits filed yet — <a class="text-emerald-400" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
+            auditEl.innerHTML = '<div class="sm:col-span-2 lg:col-span-4 text-zinc-500 text-sm">No audits filed yet — <a class="text-cyan-400" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
         }
     },
 
@@ -128,10 +128,10 @@ const App = {
                     <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
                         <span class="font-mono text-xs text-zinc-200">${o.name}</span>
-                        <span class="font-display text-emerald-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        <span class="font-display text-cyan-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'click to hire'}</span>
+                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
                     </button>`).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
@@ -143,7 +143,7 @@ const App = {
                         <span class="font-display text-amber-300 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-brass-400 uppercase tracking-wider" style="color:var(--brass)"><i class="fa-solid fa-scale-balanced"></i> ACP · click to hire</span>
+                      <span class="text-[9px] text-brass-400 uppercase tracking-wider" style="color:var(--brass)"><i class="fa-solid fa-scale-balanced"></i> ACP · select to commission</span>
                     </button>`).join('');
             }
             const disc = document.getElementById('rep-disclaimer');
@@ -171,7 +171,7 @@ const App = {
             </div>`;
             return;
         }
-        const statusStyle = { merged: ['#34d399','Merged'], open: ['#22d3ee','Open · awaiting review'], closed: ['#71717a','Closed'] };
+        const statusStyle = { merged: ['#10b981','Merged'], open: ['#22d3ee','Open · awaiting review'], closed: ['#71717a','Closed'] };
         el.innerHTML = builds.map(b => {
             const [col, label] = statusStyle[b.status] || statusStyle.closed;
             const v = b.verification || {};
@@ -207,10 +207,10 @@ const App = {
             const ctx = document.getElementById('tvlChart');
             if (this._chart) this._chart.destroy();
             const g = ctx.getContext('2d').createLinearGradient(0,0,0,200);
-            g.addColorStop(0,'rgba(16,185,129,0.35)'); g.addColorStop(1,'rgba(16,185,129,0)');
+            g.addColorStop(0,'rgba(34,211,238,0.35)'); g.addColorStop(1,'rgba(34,211,238,0)');
             this._chart = new Chart(ctx, {
                 type:'line',
-                data:{ labels, datasets:[{ data, borderColor:'#10b981', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
+                data:{ labels, datasets:[{ data, borderColor:'#22d3ee', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
                 options:{ responsive:true, maintainAspectRatio:true, plugins:{legend:{display:false},
                     tooltip:{callbacks:{label:c=>'$'+(c.parsed.y/1e9).toFixed(3)+'B'}}},
                     scales:{ y:{ticks:{color:'#52525b',callback:v=>'$'+(v/1e9).toFixed(1)+'B'},grid:{color:'rgba(255,255,255,0.04)'}},
@@ -247,7 +247,7 @@ const App = {
         const hasSocials = pairs.some(p => (p.info?.socials?.length>0) || (p.info?.websites?.length>0));
         if (!hasSocials) flags.push('no declared socials');
         const hardReject = gp.is_honeypot==='1' || this._HARD_REJECT_FIELDS.some(field => gp[field]==='1');
-        const verdict = hardReject ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#34d399']);
+        const verdict = hardReject ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#10b981']);
         const vc = verdict[1];
         const name = gp.token_name ? `${this._esc(gp.token_name)} (${this._esc(gp.token_symbol)})` : this._shortAddr(addr);
         el.innerHTML = `
@@ -263,10 +263,10 @@ const App = {
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                     <div><div class="text-zinc-500">Holders</div><div class="stat">${gp.holder_count?Number(gp.holder_count).toLocaleString():'—'}</div></div>
                     <div><div class="text-zinc-500">Liquidity</div><div class="stat">${liq?fmtUsd(liq):'—'}</div></div>
-                    <div><div class="text-zinc-500">Honeypot</div><div class="${gp.is_honeypot==='1'?'text-rose-400':'text-emerald-400'}">${gp.is_honeypot==='1'?'YES':'no'}</div></div>
+                    <div><div class="text-zinc-500">Honeypot</div><div class="${gp.is_honeypot==='1'?'text-rose-400':'text-emerald-500'}">${gp.is_honeypot==='1'?'YES':'no'}</div></div>
                     <div><div class="text-zinc-500">Buy/Sell tax</div><div>${gp.buy_tax!=null?(gp.buy_tax*100).toFixed(1):'?'}% / ${gp.sell_tax!=null?(gp.sell_tax*100).toFixed(1):'?'}%</div></div>
                 </div>
-                <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block rounded px-2 py-0.5 mr-1 mb-1" style="color:${vc};background:${vc}1a">${f}</span>`).join(''):'<span class="text-emerald-400">No risk flags from real on-chain scan.</span>'}</div>
+                <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block rounded px-2 py-0.5 mr-1 mb-1" style="color:${vc};background:${vc}1a">${f}</span>`).join(''):'<span class="text-emerald-500">No risk flags from real on-chain scan.</span>'}</div>
                 <div class="mt-2 text-[10px] text-zinc-600">Real data: GoPlus token_security + DexScreener liquidity. Not investment advice.</div>
             </div>`;
         return verdict[0];
@@ -277,7 +277,7 @@ const App = {
         const addr = (document.getElementById('hunt-target').value||'').trim();
         const chain = document.getElementById('hunt-chain').value;
         if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { el.innerHTML = '<span class="text-amber-400">Enter a valid 0x… 40-hex contract address.</span>'; return; }
-        el.innerHTML = '<span class="text-emerald-400"><i class="fa-solid fa-spinner fa-spin"></i> Scanning real data (GoPlus + DexScreener)…</span>';
+        el.innerHTML = '<span class="text-cyan-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real data (GoPlus + DexScreener)…</span>';
         try {
             const [gpR, dsR] = await Promise.allSettled([
                 fetch(`https://api.gopluslabs.io/api/v1/token_security/${chain}?contract_addresses=${addr}`).then(r=>r.json()),
@@ -358,7 +358,7 @@ const App = {
             const an = document.getElementById('anomalies');
             an.querySelector('.skeleton')?.remove();
             an.innerHTML = flags.length ? flags.map(f=>`<div class="flex gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i><span>${f}</span></div>`).join('')
-                : `<div class="flex gap-2 text-emerald-400"><i class="fa-solid fa-check"></i><span>No critical flags (rule-based pass)</span></div>`;
+                : `<div class="flex gap-2 text-emerald-500"><i class="fa-solid fa-check"></i><span>No critical flags (rule-based pass)</span></div>`;
         } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
     },
 
@@ -384,7 +384,7 @@ const App = {
                     return `${x.toFixed(1)},${y.toFixed(1)}`;
                 }).join(' ');
                 const up = series[series.length-1] >= series[0];
-                const col = up ? '#34d399' : '#fb7185';
+                const col = up ? '#10b981' : '#fb7185';
                 n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${col}" stroke-width="1.5" points="${pts}"/></svg>`;
                 await new Promise(r=>setTimeout(r,120));
             } catch(e){ /* leave blank on failure */ }
@@ -402,13 +402,13 @@ const App = {
                 <a href="${b.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 block">
                     <div class="flex items-start justify-between gap-2">
                         <div class="font-semibold text-sm leading-snug">${(b.name||'Unknown').replace(/</g,'&lt;')}</div>
-                        <div class="text-emerald-400 font-display shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
+                        <div class="text-cyan-400 font-display shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
                     </div>
                     <div class="text-xs text-zinc-500 mt-2">${(b.platform||'')} ${b.status?'· '+b.status:''}</div>
                     ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] bg-white/5 rounded px-1.5 py-0.5 mr-1 mt-2 text-zinc-400">${t}</span>`).join('')}
                 </a>`).join('');
         } catch(e){
-            el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No live radar data yet — <a class="text-emerald-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No live radar data yet — <a class="text-cyan-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
         }
     },
 
@@ -426,7 +426,7 @@ const App = {
                     <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-xs shrink-0"></i>
                 </a>`).join('');
         } catch(e){
-            el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-emerald-400 text-sm">View all reports on GitHub →</a>`;
+            el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-cyan-400 text-sm">View all reports on GitHub →</a>`;
         }
     },
 
@@ -436,7 +436,7 @@ const App = {
         v=(v||'').toUpperCase();
         if(/REJECT|CRITICAL|HIGH|BEARISH|RISK-OFF|FEAR/.test(v)) return '#fb7185';
         if(/CAUTION|MEDIUM|NEUTRAL/.test(v)) return '#fbbf24';
-        if(/PROCEED|LOW|ALL CLEAR|BULLISH|RISK-ON|GREED/.test(v)) return '#34d399';
+        if(/PROCEED|LOW|ALL CLEAR|BULLISH|RISK-ON|GREED/.test(v)) return '#10b981';
         return '#a1a1aa';
     },
     _pill(v){ if(!v) return ''; const c=this._verdictColor(v);
@@ -501,9 +501,9 @@ const App = {
                             ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                         </div>
                     </a>
-                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-emerald-400 font-display">${inv.score}</span></div>`:''}
+                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-cyan-400 font-display">${inv.score}</span></div>`:''}
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
             // hero: latest report
             const rep=(d.latest_summary||{}).report;
@@ -517,7 +517,7 @@ const App = {
                     <div class="font-display text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
                     <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
-                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-emerald-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
             this._renderIntel();
         }catch(e){
@@ -537,7 +537,7 @@ const App = {
             document.getElementById('intel-filter').innerHTML=
                 [['',' all']].concat(types.map(t=>[t,t])).map(([v,label])=>{
                     const on=(this._typeFilter||'')===v;
-                    return `<button data-type="${v}" class="px-2 py-0.5 rounded ${on?'bg-emerald-600 text-black':'bg-white/5 hover:bg-white/10 text-zinc-300'}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
+                    return `<button data-type="${v}" class="px-2 py-0.5 rounded ${on?'bg-cyan-600 text-black':'bg-white/5 hover:bg-white/10 text-zinc-300'}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
                 }).join('');
         } else { fw.classList.add('hidden'); }
 
@@ -549,11 +549,11 @@ const App = {
                 const icon = this._iconImg(i.target, i.chain, 32, 'mt-0.5');
                 return `
                 <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    ${icon || '<i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mt-1"></i>'}
+                    ${icon || '<i class="fa-solid fa-magnifying-glass-chart text-cyan-400 mt-1"></i>'}
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center justify-between gap-2">
                             <span class="font-mono text-xs truncate min-w-0">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
-                            <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-emerald-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
+                            <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-cyan-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                         </div>
                         <div class="text-xs text-zinc-500 mt-1 truncate">${i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span> · `:''}${this._esc(i.date||'')} · ${this._esc(i.offering||i.chain||'deep_investigation')}</div>
                         ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug break-words">${this._esc((i.summary||i.key_finding).slice(0,180))}</div>`:''}
@@ -579,7 +579,7 @@ const App = {
             const items=d.broadcasts||[];
             rows=items.length?items.map(b=>`
                 <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
-                    <i class="fa-solid fa-tower-broadcast text-emerald-400 mt-1"></i>
+                    <i class="fa-solid fa-tower-broadcast text-cyan-400 mt-1"></i>
                     <div class="min-w-0 flex-1">
                         <div class="font-semibold text-sm break-words">${this._esc(b.title||b.file)}</div>
                         <div class="text-xs text-zinc-500 mt-1">${this._ago(b.date)}</div>
@@ -590,7 +590,7 @@ const App = {
             const items=d.tools||[];
             rows=items.length?items.map(t=>{
                 const ok=t.status==='verified'; const lim=t.known_limitation;
-                const col=ok?'#34d399':(lim?'#fbbf24':'#a1a1aa');
+                const col=ok?'#10b981':(lim?'#fbbf24':'#a1a1aa');
                 return `<a href="${t.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3">
                     <i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} mt-1" style="color:${col}"></i>
                     <div class="min-w-0 flex-1">
