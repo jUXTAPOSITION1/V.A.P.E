@@ -1,0 +1,33 @@
+name: Worker Typecheck
+
+# Deployment itself is handled entirely by Deno Deploy's own GitHub
+# integration (auto-deploys worker/deno/deno-entry.ts on every push to main
+# — no token/secret needed here, no separate deploy step to maintain). This
+# workflow only catches type errors before merge, on the actual runtime the
+# worker ships on, via Deno's native npm: specifier resolution — no Cloudflare
+# account, no `npm ci`, nothing to skip/degrade.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/worker-typecheck.yml"
+  pull_request:
+    paths:
+      - "worker/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: deno check (worker/deno)
+        working-directory: worker/deno
+        run: deno check deno-entry.ts

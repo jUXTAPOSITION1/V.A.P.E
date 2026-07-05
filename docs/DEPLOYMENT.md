@@ -116,38 +116,37 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ---
 
 ## E. x402 payment worker (pay-per-call hiring)
-`worker/` is a Cloudflare Worker gating 6 of VAPE's 14 offerings behind Coinbase's x402
-HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
-ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
-Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was
-proven first on Base Sepolia + the free public facilitator before that switch.
-It also hosts three free, unpaid Alchemy-backed endpoints (`/portfolio`, `/nfts`,
+`worker/` gates 6 of VAPE's 14 offerings behind Coinbase's x402 HTTP payment protocol
+(the other 8 need the SKILLFORGE tool tier — hire those via a real ACP job instead, see
+section D). Runs on [Deno Deploy](https://deno.com/deploy) against Base mainnet and
+Coinbase Developer Platform's hosted facilitator (real funds) — the full pay → verify →
+settle loop was proven first on Base Sepolia + the free public facilitator before that
+switch. It also hosts three free, unpaid Alchemy-backed endpoints (`/portfolio`, `/nfts`,
 `/network-status`) that the site's wallet profile and metrics strip prefer over direct
 public-RPC calls once deployed. See `worker/README.md` for full setup; summary:
 
 ```bash
 cd worker
 npm install
-npx wrangler login
-npx wrangler secret put ETHERSCAN_API_KEY   # optional, only 2 of 6 offerings use it
-npx wrangler secret put CDP_API_KEY_ID      # required for real mainnet settlement
-npx wrangler secret put CDP_API_KEY_SECRET
-npx wrangler secret put ALCHEMY_API_KEY     # optional, powers /portfolio /nfts /network-status /cost-basis
-npx wrangler secret put COINGECKO_API_KEY   # optional, powers /prices; required for /cost-basis
-npx wrangler deploy
+npm run dev     # local smoke test — runs worker/deno/deno-entry.ts
 ```
 
-### E1. Repository secrets for CI deploy (`.github/workflows/deploy-worker.yml`)
-| Secret | Required | Used for |
-|---|---|---|
-| `CLOUDFLARE_API_TOKEN` | [OK] | Workers Scripts: Edit permission |
-| `CLOUDFLARE_ACCOUNT_ID` | [OK] | target account |
+Then at [dash.deno.com](https://dash.deno.com): **New Project → GitHub →
+jUXTAPOSITION1/V.A.P.E**, entry point `worker/deno/deno-entry.ts`, add the environment
+variables below in project settings, deploy. Every push to `main` touching `worker/**`
+auto-deploys from there on — no token, no workflow file drives it.
 
-Without these set, the workflow still runs (checkout, install, typecheck) and skips the
-live deploy step rather than failing — safe to merge before you've set up Cloudflare.
-The Worker secrets above (`CDP_API_KEY_ID`/etc.) are separate from these — they're set
-once via `wrangler secret put`, not as GitHub Actions repo secrets, since the CI job
-only builds and deploys code, never runs it.
+### E1. Environment variables (set in the Deno Deploy project, not GitHub secrets)
+| Variable | Required | Used for |
+|---|---|---|
+| `PAY_TO_ADDRESS` / `X402_NETWORK` / `X402_FACILITATOR_URL` | [OK] | payout wallet + Base mainnet + CDP's facilitator |
+| `CDP_API_KEY_ID` / `CDP_API_KEY_SECRET` | required for real settlement | signs the Bearer JWT every `/verify`/`/settle` call needs |
+| `ETHERSCAN_API_KEY` | optional | only 2 of 6 offerings use it |
+| `ALCHEMY_API_KEY` | optional | powers `/portfolio` `/nfts` `/network-status` `/cost-basis` |
+| `COINGECKO_API_KEY` | optional | powers `/prices`; required for `/cost-basis` |
+
+`.github/workflows/worker-typecheck.yml` only runs `deno check` on `worker/**` changes —
+no secrets needed, nothing to skip. It never deploys anything.
 
 ### E2. CDP mainnet credentials
 Get a [Coinbase Developer Platform](https://portal.cdp.coinbase.com) Secret API Key —
@@ -155,16 +154,14 @@ that's `CDP_API_KEY_ID`/`CDP_API_KEY_SECRET` above. `src/lib/cdpAuth.ts` uses it
 the Bearer JWT the facilitator requires on every `/verify` and `/settle` call; without
 it, settlement calls go out unauthenticated and CDP returns 401.
 
-### E3. Alternative: Deno Deploy
-If your Cloudflare account can't complete `workers.dev` subdomain registration (a known
-account-level Cloudflare bug hit during development — see `worker/README.md`'s
-"Alternative: Deno Deploy" section for the full symptoms), the same worker code runs
-unmodified on [Deno Deploy](https://deno.com/deploy) via `worker/deno/deno-entry.ts` +
-`worker/deno/deno.json` (deliberately its own directory, not next to `package.json` —
-see `worker/README.md` for why that matters), which assigns a working `*.deno.dev` URL
-automatically with no manual step. Connect the repo at dash.deno.com with entry point
-`worker/deno/deno-entry.ts`, set the same secrets as environment variables there, and
-update `WORKER_BASE` in `docs/assets/app.js`/`profile.js` to the resulting URL.
+### E3. Why Deno Deploy, not Cloudflare
+This project doesn't use Cloudflare at all — no `wrangler.toml`, no Cloudflare secrets,
+no Cloudflare Workers Builds Git integration should be connected to this repo (disconnect
+it from the Cloudflare dashboard if it's still posting build-status comments on PRs). It
+started on Cloudflare Workers and moved after one real account hit an unresolved
+`workers.dev` subdomain-registration bug (see `worker/README.md`'s "Why Deno Deploy, not
+Cloudflare" section for the full symptoms); `src/index.ts` has zero Cloudflare-specific
+code, so the move was a new entry point (`worker/deno/deno-entry.ts`), not a rewrite.
 
 ---
 
