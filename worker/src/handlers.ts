@@ -68,6 +68,14 @@ async function exploitCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string 
   const a = addrFrom(req);
   if (!a) return { error: "no address" };
   const src = await getContractSource(a, chainFrom(req), env.ETHERSCAN_API_KEY);
+  // src.error (e.g. "no_key" when ETHERSCAN_API_KEY isn't configured, or a
+  // real Etherscan API failure) must be surfaced, not swallowed — silently
+  // falling through to all-null fields looks like "we checked, it's not
+  // verified" when the truth is "we never checked", which a paying customer
+  // has no way to tell apart otherwise.
+  if (src.error) {
+    return { address: a, error: src.error, note: src.note ?? "contract verification unavailable" };
+  }
   return {
     address: a,
     verified: src.verified ?? null,
@@ -89,11 +97,15 @@ async function safetyPreflight(req: Requirement, env: { ETHERSCAN_API_KEY?: stri
     scan(a, chainFrom(req)),
     getContractSource(a, chainFrom(req), env.ETHERSCAN_API_KEY),
   ]);
+  if (ts.error) return ts;
   return {
     address: a,
     token_verdict: ts.verdict,
     flags: ts.flags,
     verified: src.verified ?? null,
+    // Same reasoning as exploitCheck: don't let a missing/failed
+    // verification silently collapse into "verified: null" with no context.
+    verification_note: src.error ? (src.note ?? src.error) : undefined,
     combined: (ts.verdict === "PROCEED" && src.verified) ? "PROCEED" : "REVIEW",
   };
 }

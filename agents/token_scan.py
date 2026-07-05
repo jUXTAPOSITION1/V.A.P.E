@@ -17,6 +17,7 @@ import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
@@ -28,12 +29,63 @@ def _now():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _get(url, timeout=15):
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
-            return json.loads(r.read().decode())
-    except Exception as e:
-        return {"_error": str(e)}
+GECKOTERMINAL_NETWORK = {8453: "base", 1: "eth", 42161: "arbitrum"}
+
+
+def _get(url, timeout=15, retries=1):
+    # DexScreener fronts its API through Cloudflare, and its anti-bot layer
+    # occasionally rate-limits datacenter egress with an HTML block page
+    # (Cloudflare "error code: 1015") instead of a clean 429 — that page
+    # isn't JSON, so json.loads() used to throw a raw parser exception
+    # ("Expecting value: line 1 column 1...") straight into a paying
+    # customer's report as data_error. Retry transient failures once, and
+    # always return a clean, human-readable _error instead of a bare
+    # exception message.
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
+                return json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            if attempt < retries and (e.code == 429 or e.code == 403 or e.code >= 500):
+                time.sleep(0.4 * (attempt + 1))
+                continue
+            return {"_error": f"upstream returned HTTP {e.code}"}
+        except Exception:
+            if attempt < retries:
+                time.sleep(0.4 * (attempt + 1))
+                continue
+            return {"_error": "upstream request failed or returned invalid data"}
+
+
+def _fetch_liquidity_fallback(address, chain_id):
+    """Used only when DexScreener fails outright — GoPlus alone still covers
+    token *security*, but reporting $0 liquidity for a token that may have
+    plenty is actively misleading, not just incomplete, for a paying
+    customer. GeckoTerminal is a real, keyless, already-used-in-this-repo
+    source (see get_base_movers() above)."""
+    network = GECKOTERMINAL_NETWORK.get(chain_id)
+    if not network:
+        return None
+    data = _get(f"https://api.geckoterminal.com/api/v2/networks/{network}/tokens/{address}/pools", retries=0)
+    pools = data.get("data") if isinstance(data, dict) else None
+    if not pools:
+        return None
+    liquidity_usd = sum(float((p.get("attributes") or {}).get("reserve_in_usd") or 0) for p in pools)
+    created_times = []
+    for p in pools:
+        created_at = (p.get("attributes") or {}).get("pool_created_at")
+        if created_at:
+            try:
+                created_times.append(datetime.fromisoformat(created_at.replace("Z", "+00:00")).timestamp() * 1000)
+            except Exception:
+                pass
+    top = pools[0]
+    return {
+        "liquidity_usd": round(liquidity_usd, 2),
+        "top_pair_dex": ((top.get("relationships") or {}).get("dex") or {}).get("data", {}).get("id"),
+        "pair_created_ms": min(created_times) if created_times else None,
+        "source": "geckoterminal",
+    }
 
 
 # Hard-reject GoPlus fields — same tier as honeypot, not just an advisory
@@ -76,6 +128,18 @@ def scan(address, chain_id=8453):
     # deepest right now.
     pair_created_ms = min((p.get("pairCreatedAt") for p in pairs if p.get("pairCreatedAt")), default=None)
     has_socials = any((p.get("info") or {}).get("socials") or (p.get("info") or {}).get("websites") for p in pairs)
+    top_pair_dex = pairs[0].get("dexId") if pairs else None
+    liquidity_source = "dexscreener"
+
+    # DexScreener failed outright (not just "no pairs found") — see
+    # _fetch_liquidity_fallback's docstring for why this matters.
+    if isinstance(ds_raw, dict) and ds_raw.get("_error") and not pairs:
+        fallback = _fetch_liquidity_fallback(address, chain_id)
+        if fallback:
+            liquidity_usd = fallback["liquidity_usd"]
+            pair_created_ms = fallback["pair_created_ms"]
+            top_pair_dex = fallback["top_pair_dex"]
+            liquidity_source = fallback["source"]
 
     def f(x):
         try:
@@ -152,9 +216,15 @@ def scan(address, chain_id=8453):
         "buy_tax": gp.get("buy_tax"),
         "sell_tax": gp.get("sell_tax"),
         "owner_address": owner or None,
-        "top_pair_dex": (pairs[0].get("dexId") if pairs else None),
+        "top_pair_dex": top_pair_dex,
         "source": "goplus+dexscreener",
-        "data_error": gp_raw.get("_error") or ds_raw.get("_error"),
+        "liquidity_source": liquidity_source,
+        "data_error": (
+            gp_raw.get("_error") if isinstance(gp_raw, dict) and gp_raw.get("_error")
+            else (f"dexscreener unavailable ({ds_raw.get('_error')}) — liquidity from GeckoTerminal instead"
+                  if liquidity_source == "geckoterminal"
+                  else (ds_raw.get("_error") if isinstance(ds_raw, dict) else None))
+        ),
     }
 
 

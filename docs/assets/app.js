@@ -246,7 +246,43 @@ const App = {
     // that guarantee — this browser path is the manually-reviewed third).
     _HARD_REJECT_FIELDS: ['is_blacklisted', 'selfdestruct', 'is_airdrop_scam'],
 
-    renderScanResult(el, addr, chain, gp, liq, pairs) {
+    // DexScreener fronts its API through Cloudflare, and its anti-bot layer
+    // occasionally rate-limits datacenter/browser-proxy egress with an HTML
+    // block page (Cloudflare "error code: 1015") instead of a clean 429 —
+    // reading that as JSON throws a raw parser exception. Retry once, then
+    // fall back to GeckoTerminal for liquidity so a transient DexScreener
+    // block doesn't misreport real liquidity as $0. Mirrors
+    // agents/token_scan.py::_get()/_fetch_liquidity_fallback() and
+    // worker/src/scan.ts::safeGet()/fetchLiquidityFallback() — keep in sync.
+    _GECKOTERMINAL_NETWORK: {'8453':'base','1':'eth','42161':'arbitrum'},
+    async _safeFetchJson(url, retries=1) {
+        for (let attempt=0; ; attempt++) {
+            try {
+                const r = await fetch(url);
+                if (!r.ok) {
+                    if (attempt<retries && (r.status===429||r.status===403||r.status>=500)) {
+                        await new Promise(res=>setTimeout(res,400*(attempt+1))); continue;
+                    }
+                    return {_error:`upstream returned HTTP ${r.status}`};
+                }
+                return await r.json();
+            } catch(e) {
+                if (attempt<retries) { await new Promise(res=>setTimeout(res,400*(attempt+1))); continue; }
+                return {_error:'upstream request failed or returned invalid data'};
+            }
+        }
+    },
+    async _fetchLiquidityFallback(addr, chain) {
+        const network = this._GECKOTERMINAL_NETWORK[String(chain)];
+        if (!network) return null;
+        const data = await this._safeFetchJson(`https://api.geckoterminal.com/api/v2/networks/${network}/tokens/${addr}/pools`, 0);
+        const pools = Array.isArray(data?.data) ? data.data : [];
+        if (!pools.length) return null;
+        const liquidity_usd = pools.reduce((s,p)=>s+(parseFloat(p?.attributes?.reserve_in_usd)||0),0);
+        return { liquidity_usd, top_pair_dex: pools[0]?.relationships?.dex?.data?.id || null, source: 'geckoterminal' };
+    },
+
+    renderScanResult(el, addr, chain, gp, liq, pairs, note) {
         pairs = pairs || [];
         const flags = [];
         if (gp.is_honeypot==='1') flags.push('HONEYPOT');
@@ -286,6 +322,7 @@ const App = {
                     <div><div class="text-zinc-500">Buy/Sell tax</div><div>${gp.buy_tax!=null?(gp.buy_tax*100).toFixed(1):'?'}% / ${gp.sell_tax!=null?(gp.sell_tax*100).toFixed(1):'?'}%</div></div>
                 </div>
                 <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block rounded px-2 py-0.5 mr-1 mb-1" style="color:${vc};background:${vc}1a">${f}</span>`).join(''):'<span class="text-emerald-500">No risk flags from real on-chain scan.</span>'}</div>
+                ${note?`<div class="mt-2 text-[10px] text-amber-400">${this._esc(note)}</div>`:''}
                 <div class="mt-2 text-[10px] text-zinc-600">Real data: GoPlus token_security + DexScreener liquidity. Not investment advice.</div>
             </div>`;
         return verdict[0];
@@ -298,15 +335,30 @@ const App = {
         if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { el.innerHTML = '<span class="text-amber-400">Enter a valid 0x… 40-hex contract address.</span>'; return; }
         el.innerHTML = '<span class="text-cyan-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real data (GoPlus + DexScreener)…</span>';
         try {
-            const [gpR, dsR] = await Promise.allSettled([
-                fetch(`https://api.gopluslabs.io/api/v1/token_security/${chain}?contract_addresses=${addr}`).then(r=>r.json()),
-                fetch(`https://api.dexscreener.com/latest/dex/tokens/${addr}`).then(r=>r.json())
+            const [gpRaw, dsRaw] = await Promise.all([
+                this._safeFetchJson(`https://api.gopluslabs.io/api/v1/token_security/${chain}?contract_addresses=${addr}`),
+                this._safeFetchJson(`https://api.dexscreener.com/latest/dex/tokens/${addr}`)
             ]);
-            const gp = gpR.status==='fulfilled' ? (Object.values(gpR.value.result||{})[0]||{}) : {};
-            const pairs = dsR.status==='fulfilled' ? (dsR.value.pairs||[]) : [];
-            const liq = pairs.reduce((s,p)=>s+(p.liquidity?.usd||0),0);
-            this.renderScanResult(el, addr, chain, gp, liq, pairs);
-        } catch(e){ el.innerHTML = '<span class="text-amber-400">Scan failed (rate limit or unsupported token). Try again.</span>'; }
+            if (gpRaw?._error) { el.innerHTML = `<span class="text-amber-400">GoPlus security data unavailable (${this._esc(gpRaw._error)}). Try again shortly.</span>`; return; }
+            const gp = Object.values(gpRaw.result||{})[0] || {};
+            let pairs = dsRaw?.pairs || [];
+            let liq = pairs.reduce((s,p)=>s+(p.liquidity?.usd||0),0);
+            let note = null;
+            // DexScreener failed outright (not just "no pairs found") — reporting
+            // $0 liquidity for a token that may have plenty is misleading, not
+            // just incomplete. Fall back to GeckoTerminal, same as the paid
+            // offerings and agents/token_scan.py.
+            if (dsRaw?._error && !pairs.length) {
+                const fallback = await this._fetchLiquidityFallback(addr, chain);
+                if (fallback) {
+                    liq = fallback.liquidity_usd;
+                    note = `Liquidity from GeckoTerminal (DexScreener temporarily unavailable: ${dsRaw._error}).`;
+                } else {
+                    note = `DexScreener unavailable (${dsRaw._error}) — liquidity may be understated.`;
+                }
+            }
+            this.renderScanResult(el, addr, chain, gp, liq, pairs, note);
+        } catch(e){ el.innerHTML = '<span class="text-amber-400">Scan failed unexpectedly. Try again.</span>'; }
     },
 
     async metrics() {

@@ -12,6 +12,14 @@
 
 const UA = { "User-Agent": "VAPE-PrivateEye/1.0 (+https://github.com/jUXTAPOSITION1/V.A.P.E)" };
 
+// DexScreener fronts its API through Cloudflare, and its anti-bot layer
+// occasionally rate-limits datacenter egress (Workers included) with an HTML
+// block page (Cloudflare "error code: 1015") instead of a 429 — reading that
+// as JSON throws a raw "Unexpected token '<'..." parser exception, which used
+// to leak straight into a paying customer's report as `data_error`. GoPlus
+// is rock-solid by comparison, so DexScreener is the one worth retrying.
+const GECKOTERMINAL_NETWORK: Record<number, string> = { 8453: "base", 1: "eth", 42161: "arbitrum" };
+
 export interface ScanResult {
   ts: string;
   chain_id: number;
@@ -31,6 +39,7 @@ export interface ScanResult {
   owner_address: string | null;
   top_pair_dex: string | null;
   source: string;
+  liquidity_source?: string;
   data_error?: string | null;
   error?: string;
 }
@@ -42,13 +51,62 @@ export interface ScanResult {
 // field-for-field identical.
 const HARD_REJECT_FIELDS = ["is_blacklisted", "selfdestruct", "is_airdrop_scam"] as const;
 
-async function safeGet(url: string): Promise<any> {
-  try {
-    const r = await fetch(url, { headers: UA });
-    return await r.json();
-  } catch (e: any) {
-    return { _error: String(e?.message || e) };
+async function safeGet(url: string, retries = 1): Promise<any> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const r = await fetch(url, { headers: UA });
+      if (!r.ok) {
+        // A non-2xx here (Cloudflare block/rate-limit pages included) is
+        // HTML/plain-text, not JSON — never hand that to r.json(), which
+        // would throw an opaque parser exception instead of a clean status.
+        if (attempt < retries && (r.status === 429 || r.status === 403 || r.status >= 500)) {
+          await new Promise((res) => setTimeout(res, 400 * (attempt + 1)));
+          continue;
+        }
+        return { _error: `upstream returned HTTP ${r.status}` };
+      }
+      return await r.json();
+    } catch (e: any) {
+      if (attempt < retries) {
+        await new Promise((res) => setTimeout(res, 400 * (attempt + 1)));
+        continue;
+      }
+      // Covers both network failures and a 2xx response whose body still
+      // isn't valid JSON — same clean-message treatment either way.
+      return { _error: "upstream request failed or returned invalid data" };
+    }
   }
+}
+
+interface LiquidityFallback {
+  liquidity_usd: number;
+  top_pair_dex: string | null;
+  pair_created_ms: number | null;
+  source: string;
+}
+
+// Used only when DexScreener fails outright (see safeGet above) — GoPlus
+// alone still tells the customer everything about token *security*, but
+// liquidity_check/token_safety_check would otherwise report $0 liquidity for
+// a token that may have plenty, which is actively misleading rather than
+// just incomplete. GeckoTerminal is already a real, keyless source used
+// elsewhere in this repo (agents/data_fetchers.py's Base-movers feed).
+async function fetchLiquidityFallback(addr: string, chainId: number): Promise<LiquidityFallback | null> {
+  const network = GECKOTERMINAL_NETWORK[chainId];
+  if (!network) return null;
+  const data = await safeGet(`https://api.geckoterminal.com/api/v2/networks/${network}/tokens/${addr}/pools`, 0);
+  const pools: any[] = Array.isArray(data?.data) ? data.data : [];
+  if (!pools.length) return null;
+  const liquidityUsd = pools.reduce((s, p) => s + (parseFloat(p?.attributes?.reserve_in_usd) || 0), 0);
+  const createdTimes = pools
+    .map((p) => p?.attributes?.pool_created_at ? Date.parse(p.attributes.pool_created_at) : NaN)
+    .filter((t) => !Number.isNaN(t));
+  return {
+    liquidity_usd: Math.round(liquidityUsd * 100) / 100,
+    top_pair_dex: pools[0]?.relationships?.dex?.data?.id ?? null,
+    pair_created_ms: createdTimes.length ? Math.min(...createdTimes) : null,
+    source: "geckoterminal",
+  };
 }
 
 function toFloat(x: unknown): number | null {
@@ -74,12 +132,27 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
   }
 
   const pairs: any[] = (dsRaw && typeof dsRaw === "object" && Array.isArray(dsRaw.pairs)) ? dsRaw.pairs : [];
-  const liquidityUsd = Math.round(pairs.reduce((s, p) => s + ((p.liquidity || {}).usd || 0), 0) * 100) / 100;
+  let liquidityUsd = Math.round(pairs.reduce((s, p) => s + ((p.liquidity || {}).usd || 0), 0) * 100) / 100;
   // Oldest pair creation timestamp across all pairs — a token's real track
   // record starts at its FIRST pair, not whichever pair happens deepest now.
   const pairCreatedTimes = pairs.map((p) => p.pairCreatedAt).filter((t) => !!t);
-  const pairCreatedMs = pairCreatedTimes.length ? Math.min(...pairCreatedTimes) : null;
+  let pairCreatedMs = pairCreatedTimes.length ? Math.min(...pairCreatedTimes) : null;
   const hasSocials = pairs.some((p) => (p.info?.socials?.length ?? 0) > 0 || (p.info?.websites?.length ?? 0) > 0);
+  let topPairDex: string | null = pairs[0]?.dexId ?? null;
+  let liquiditySource = "dexscreener";
+
+  // DexScreener failed outright (not just "no pairs found") — GoPlus alone
+  // would otherwise report $0 liquidity for a token that may have plenty,
+  // which is misleading rather than merely incomplete for a paying customer.
+  if (dsRaw?._error && !pairs.length) {
+    const fallback = await fetchLiquidityFallback(addr, chainId);
+    if (fallback) {
+      liquidityUsd = fallback.liquidity_usd;
+      pairCreatedMs = fallback.pair_created_ms;
+      topPairDex = fallback.top_pair_dex;
+      liquiditySource = fallback.source;
+    }
+  }
 
   const flags: string[] = [];
   if (gp.is_honeypot === "1") flags.push("HONEYPOT");
@@ -127,8 +200,13 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
     buy_tax: gp.buy_tax ?? null,
     sell_tax: gp.sell_tax ?? null,
     owner_address: owner || null,
-    top_pair_dex: pairs[0]?.dexId ?? null,
+    top_pair_dex: topPairDex,
     source: "goplus+dexscreener",
-    data_error: gpRaw?._error || dsRaw?._error || null,
+    liquidity_source: liquiditySource,
+    data_error: gpRaw?._error
+      ? gpRaw._error
+      : dsRaw?._error
+        ? (liquiditySource === "geckoterminal" ? `dexscreener unavailable (${dsRaw._error}) — liquidity from GeckoTerminal instead` : dsRaw._error)
+        : null,
   };
 }
