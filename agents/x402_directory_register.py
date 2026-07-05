@@ -16,11 +16,54 @@ Registers each of VAPE's 6 auto-fulfilled x402 offerings (docs/ACP_PROTOCOL.md
     POST /api/v1/register with {url, name, protocol, provider}. Confirmed
     schema at https://402index.io/api-docs.
 
-x402 List (https://x402-list.com) has no documented public submission API as
-of this writing — only a manual web-form "submit yours" flow. This script
-prints a ready-to-paste listing manifest to the job log instead of guessing
-at an undocumented endpoint; do not add a fabricated POST call here without
-first confirming a real one exists.
+The following have no documented public submission API as of this writing —
+only a manual web-form flow each. This script prints a ready-to-paste listing
+manifest to the job log for each instead of guessing at an undocumented
+endpoint; do not add a fabricated POST call here without first confirming a
+real one exists (see the 2026-07 directory survey below for what's actually
+real vs. unverifiable in this fast-moving ecosystem):
+  - x402 List (https://x402-list.com) — "submit yours" web form.
+  - x402scan (https://www.x402scan.com/resources/register) — a real
+    Merit-Systems-built ecosystem explorer; its /resources/register page
+    fetches the submitted URL and auto-adds it if it returns a valid x402
+    schema, but there's no documented POST API to call directly — same
+    manual-submission treatment as x402 List.
+  - x402.study — another real, independent x402 directory with a "submit
+    yours" flow.
+  - awesome-x402 (https://github.com/xpaysh/awesome-x402) — a real, actively
+    curated GitHub list; listing requires a PR to a third-party repo, not an
+    API call. Prints a ready-to-paste README entry instead.
+
+Deliberately NOT integrated (real, but need a real decision or access this
+script doesn't have — see worker/README.md's "x402 Bazaar discovery" section
+for the full writeup):
+  - Coinbase's Bazaar / agentic.market — real and already wired in-code
+    (worker/src/index.ts's registerExtension(bazaarResourceServerExtension)/
+    withBazaar()). Indexing is automatic on the CDP facilitator's side (no
+    registration call exists to make) the first time a real payment settles
+    on an endpoint — but x402-foundation/x402#2112 (confirmed still OPEN as
+    of 2026-07-05: a service with 8 real settlements still isn't indexed) is
+    a live, unresolved bug in CDP's own facilitator, not something fixable
+    from this repo.
+  - the402.ai — real marketplace with a real self-service API, but listing
+    costs a real $0.01 x402 payment (POST /v1/register), meaning a CI job
+    would need a funded, signing-capable wallet — a materially bigger, more
+    sensitive lift than a plain POST. Needs an explicit decision before
+    building, not a silent addition.
+  - 402index.io domain verification (POST /api/v1/claim -> publish the
+    returned verification_hash at /.well-known/402index-verify.txt on the
+    worker -> POST /api/v1/claim/verify) would upgrade our existing
+    "pending review" listings to instantly-approved. Real and documented,
+    but the claim's verification_token is an ongoing edit credential that
+    needs to be stored as a real secret — this script/session has no way to
+    write a new encrypted GitHub Actions secret, so this needs a human step.
+  - _x402 DNS TXT record discovery — a real IETF draft
+    (draft-jeftovic-x402-dns-discovery-00), but still an early-stage draft
+    (not a ratified standard) and requires adding a DNS record in the
+    Cloudflare dashboard, which this script/session has no access to.
+  - "agent-index.x402.merkleworks.io", mentioned in passing during this
+    research — no evidence found that this actually exists; not referenced
+    or implemented anywhere.
 
 Deliberately NOT scheduled: repeated calls to an unfamiliar directory's
 /register endpoint with unknown dedup behavior risk creating duplicate
@@ -126,14 +169,36 @@ def build_x402_list_manifest():
     }
 
 
+def build_awesome_x402_entry():
+    """A ready-to-paste line for a PR against xpaysh/awesome-x402's services
+    list — that repo takes contributions via PR, not an API, and this repo
+    has no write access to it, so a human has to actually open that PR."""
+    return (
+        f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
+        f"(ERC-8004 #54988). 6 instant x402 offerings ($0.01-$0.15: exploit/token-safety/"
+        f"liquidity/rug-pull/preflight/market-intel checks) + a $50 24h-SLA deep-dive audit "
+        f"(recon + Slither + frontier-model review). Docs: "
+        f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
+    )
+
+
 def main():
     print(f"=== VAPE x402 directory registration — worker: {WORKER_BASE} ===\n")
     idx_results = register_402index()
 
     manifest = build_x402_list_manifest()
-    print("\n[x402-list.com] No documented public submission API — submit manually at "
-          "https://x402-list.com/ using this listing info:\n")
-    print(json.dumps(manifest, indent=2))
+    for directory_name, url in (
+        ("x402-list.com", "https://x402-list.com/"),
+        ("x402scan.com", "https://www.x402scan.com/resources/register"),
+        ("x402.study", "https://x402.study/"),
+    ):
+        print(f"\n[{directory_name}] No documented public submission API — submit manually at "
+              f"{url} using this listing info:\n")
+        print(json.dumps(manifest, indent=2))
+
+    print("\n[awesome-x402] PR-only (github.com/xpaysh/awesome-x402) — this repo has no write "
+          "access there, so open the PR by hand with this entry:\n")
+    print(build_awesome_x402_entry())
 
     failed = [r for r in idx_results if not r["ok"]]
     if failed and len(failed) == len(idx_results):
