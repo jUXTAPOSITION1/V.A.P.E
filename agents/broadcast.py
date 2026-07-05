@@ -31,6 +31,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+from agents.report_format import letterhead_md
+
 BROADCAST_DIR = os.path.join(ROOT, "intel", "broadcasts")
 
 try:
@@ -98,7 +100,7 @@ def build_broadcast(window_hours=6):
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H")
     L = []
-    L.append("# 🔍 VAPE Community Intelligence Broadcast")
+    L.extend(letterhead_md("VAPE Community Intelligence Broadcast"))
     L.append(f"**Date:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC  ")
     L.append(f"**Broadcast #:** {stamp}")
     L.append("")
@@ -128,7 +130,7 @@ def build_broadcast(window_hours=6):
     L.append("")
 
     # ── Anomaly flags (rule-based, real) ────────────────────────────────────
-    L.append("## 🚨 Anomaly Flags")
+    L.append("## Anomaly Flags")
     if clean:
         L.append("None this cycle — clean sweep across TVL, gas, exploit feed, and macro sentiment checks.")
     else:
@@ -137,11 +139,10 @@ def build_broadcast(window_hours=6):
     L.append("")
 
     # ── VAPE Casework (real ledger activity) ────────────────────────────────
-    L.append("## 🕵️ VAPE Casework")
+    L.append("## VAPE Casework")
     if recent:
         for e in recent[:8]:
-            emoji = {"PROCEED": "🟢", "CAUTION": "🟡", "REJECT": "🔴"}.get(e.get("last_verdict"), "⚪")
-            L.append(f"- {emoji} **{e.get('symbol', '?')}** (`{e.get('address', '?')[:10]}…`) — "
+            L.append(f"- **{e.get('symbol', '?')}** (`{e.get('address', '?')[:10]}…`) — "
                       f"{e.get('last_verdict')} {e.get('last_score')}/100")
     else:
         L.append(f"No new investigations completed in the last {window_hours}h — see the "
@@ -150,7 +151,7 @@ def build_broadcast(window_hours=6):
     L.append("")
 
     # ── Security Pulse (real DeFiLlama hack feed) ───────────────────────────
-    L.append("## 🛡️ Security Pulse")
+    L.append("## Security Pulse")
     hacks = (ctx.get("security_hacks") or {}).get("incidents") or []
     if hacks:
         for h in hacks[:5]:
@@ -164,7 +165,7 @@ def build_broadcast(window_hours=6):
     fng = ctx.get("fear_greed") or {}
     glob_m = ctx.get("global_market") or {}
     prices = ctx.get("prices") or {}
-    L.append("## 📊 Market Pulse")
+    L.append("## Market Pulse")
     if fng.get("value") is not None:
         L.append(f"- Fear & Greed: **{fng.get('value')}** ({fng.get('classification')}), "
                   f"prev {fng.get('prev_value')} ({fng.get('prev_classification')})")
@@ -183,7 +184,7 @@ def build_broadcast(window_hours=6):
     fees = ctx.get("base_fees") or {}
     activity = ctx.get("chain_activity") or {}
     virtuals = ctx.get("virtuals") or {}
-    L.append("## ⛓️ Base & Virtuals Update")
+    L.append("## Base & Virtuals Update")
     L.append(f"- Base TVL: {_usd(tvl.get('tvl_usd'))} ({_pct(tvl.get('tvl_24h_change_pct'))} 24h)")
     top_protocols = tvl.get("top_protocols") or []
     if top_protocols:

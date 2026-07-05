@@ -470,6 +470,29 @@ class Builder:
                 }
             )
             logger.info(f"Auto-appended to Memory: {result.get('id', 'unknown')}")
+
+            # Also drop a lighter-weight build_log entry — the "skill" entry above
+            # holds the generated code; this holds the what-and-why in plain
+            # language, so a future build scanning the ledger for a pattern
+            # doesn't have to parse raw code to find it. See
+            # skillforge/memory/BUILD_LEDGER.md for the full convention this
+            # feeds into (manually-written entries are more detailed than this
+            # auto-generated one, and that's expected — both categories coexist
+            # on purpose).
+            try:
+                from agents.build_ledger import log_build
+                log_build(
+                    title=f"Builder: {metadata.get('title', 'Generated Skill')}",
+                    content=f"Task: {metadata.get('task_summary', '')}\n\n"
+                            f"Generated {len(code.split(chr(10)))} lines, tagged "
+                            f"{metadata.get('tags', ['builder', 'generated'])}.",
+                    source="agents/builder.py",
+                    tags=list(metadata.get("tags", ["builder", "generated"])) + ["auto"],
+                    confidence=metadata.get("confidence", 0.6),
+                )
+            except Exception as e:
+                logger.warning(f"build_log auto-append skipped: {e}")
+
             return True
         except Exception as e:
             logger.error(f"Failed to auto-append to Memory: {e}")

@@ -30,6 +30,12 @@ except Exception:
     except Exception:
         build_market_context = None
 
+try:
+    from agents.report_format import letterhead_md
+except Exception:
+    def letterhead_md(title):
+        return [f"# {title}", ""]
+
 # Multi-provider LLM layer
 try:
     from agents.llm import ask as _llm_ask, available as _llm_available
@@ -189,13 +195,16 @@ REPORT DISCIPLINE:
 - If SIGNAL: HIGH, write the full Markdown report using these sections (omit a section
   only if it truly has nothing, and say so instead of padding):
 
-## 🕵️ Investigation Findings
-## 🛠️ Tool Gap Analysis
-## 🛡️ Security & Exploits
-## 📊 Market Delta (Base / Macro / Virtuals — compressed, one paragraph)
-## 🎯 Next Actions
+## Investigation Findings
+## Tool Gap Analysis
+## Security & Exploits
+## Market Delta (Base / Macro / Virtuals — compressed, one paragraph)
+## Next Actions
 Concrete, prioritized. Each item: the trigger/threshold, the tool VAPE would run or
 build, and why.
+
+Do not use emoji anywhere in the report — plain section headers and prose only,
+in the style of a professional security dossier.
 
 Close with one sharp line in VAPE's noir detective voice. The chain never lies.
 """
@@ -568,22 +577,25 @@ def main(review_repo=False):
     # Write report
     with open(report_path, "w") as f:
         if review_repo:
-            f.write(f"# VAPE Repo Review — {timestamp}\n\n")
+            f.write("\n".join(letterhead_md(f"VAPE Repo Review — {timestamp}")))
+            f.write("\n")
             f.write(report)
         elif signal == "LOW":
             # Low-signal cycle: no new investigation, finding, or tool gap. Keep it
             # short — don't pad a full report scaffold around nothing new.
-            f.write(f"# 🦍 V.A.P.E. Cycle — {timestamp} (no new signal)\n\n")
+            f.write("\n".join(letterhead_md(f"V.A.P.E. Cycle — {timestamp} (no new signal)")))
+            f.write("\n")
             f.write(report)
         else:
             gen = (market_context or {}).get("generated_at", timestamp)
-            f.write("# 🦍 V.A.P.E. Intelligence Report\n\n")
+            f.write("\n".join(letterhead_md("V.A.P.E. Intelligence Report")))
+            f.write("\n")
             f.write(f"**Cycle:** `{timestamp}` · **Data timestamp (UTC):** {gen}  \n")
             f.write("**Coverage:** Investigations · Tool Gaps · Security · Base · Macro · Virtuals\n\n")
             # rule-based anomaly flags up top as an at-a-glance banner
             flags = (market_context or {}).get("anomaly_flags") or []
             if flags and flags != ["none detected by rule-based pass"]:
-                f.write("> **⚠️ Auto-flagged this cycle:**\n")
+                f.write("> **Auto-flagged this cycle:**\n")
                 for fl in flags:
                     f.write(f"> - {fl}\n")
                 f.write("\n")
@@ -591,7 +603,7 @@ def main(review_repo=False):
             f.write(report)
             # full raw data as a collapsed appendix (auditable, not noisy)
             if market_context:
-                f.write("\n\n---\n\n<details>\n<summary>📊 Raw data snapshot (audit trail)</summary>\n\n")
+                f.write("\n\n---\n\n<details>\n<summary>Raw data snapshot (audit trail)</summary>\n\n")
                 f.write(f"```json\n{json.dumps(market_context, indent=2)}\n```\n\n</details>\n")
 
     print(f"\n✅ Report saved to: {report_path}\n")

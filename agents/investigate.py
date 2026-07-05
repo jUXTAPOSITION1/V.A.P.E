@@ -38,6 +38,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+from agents.report_format import letterhead_md, verdict_stamp
+
 INVEST_DIR = os.path.join(ROOT, "intel", "investigations")
 CATALOG = os.path.join(ROOT, "intel", "catalog", "investigation-catalog.md")
 LEDGER_PATH = os.path.join(INVEST_DIR, "ledger.json")
@@ -417,16 +419,14 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     short = target[:10]
     path = os.path.join(INVEST_DIR, f"investigation-{stamp}-{short}.md")
     sym = dex.get("symbol") or verif.get("name") or "unknown"
-    emoji = {"PROCEED": "🟢", "CAUTION": "🟡", "REJECT": "🔴"}.get(verdict, "⚪")
 
     L = []
-    L.append(f"# 🕵️ VAPE Investigation — {sym}")
+    L.extend(letterhead_md(f"Investigation — {sym}"))
+    L.append(verdict_stamp(verdict, f"Safety score {s}/100"))
     L.append("")
     L.append(f"- **Target:** `{target}`")
     L.append(f"- **Chain:** {chain} (Base)")
     L.append(f"- **Date:** {now_iso()}")
-    L.append(f"- **Verdict:** {emoji} **{verdict}**")
-    L.append(f"- **Safety Score:** {s}/100")
     L.append("")
     L.append("---")
     L.append("")
@@ -489,7 +489,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     if web_rep and web_rep.get("available"):
         if web_rep.get("hits"):
             for h in web_rep["hits"]:
-                L.append(f"- ⚠️ {h}")
+                L.append(f"- **Flag:** {h}")
         else:
             L.append("- No unambiguous scam/rug mentions found in the top web search results.")
         if web_rep.get("results"):
@@ -607,7 +607,7 @@ def regenerate_lists(ledger):
         if v in by_verdict:
             by_verdict[v].append((addr, entry))
 
-    titles = {"REJECT": "🔴 Fail List (REJECT)", "CAUTION": "🟡 Caution List", "PROCEED": "🟢 Pass List (PROCEED)"}
+    titles = {"REJECT": "Fail List (REJECT)", "CAUTION": "Caution List (CAUTION)", "PROCEED": "Pass List (PROCEED)"}
     for verdict, path in LIST_PATHS.items():
         rows = sorted(by_verdict[verdict], key=lambda kv: kv[1].get("last_investigated", ""), reverse=True)
         lines = [f"# VAPE {titles[verdict]}", "",
