@@ -1,9 +1,11 @@
 /**
- * Deno Deploy entry point — same Hono `app` (src/index.ts) as the Cloudflare
- * Worker, just fed its `Env` via Deno.env instead of a Workers binding.
- * Deno assigns a public *.deno.dev URL automatically on deploy, with no
- * manual subdomain registration step (unlike the Cloudflare account issue
- * this was built to route around).
+ * Deno Deploy entry point — this repo's only worker deployment target.
+ * `src/index.ts`'s Hono `app` was originally written for Cloudflare Workers
+ * and still reads that way (fed its `Env` here via Deno.env instead of a
+ * Workers binding) because it has zero Cloudflare-specific code either way;
+ * see worker/README.md's "Why Deno Deploy, not Cloudflare" for why this
+ * repo moved off Cloudflare entirely. Deno assigns a public *.deno.dev URL
+ * automatically on deploy, with no manual subdomain registration step.
  */
 import app, { type Env } from "../src/index.ts";
 

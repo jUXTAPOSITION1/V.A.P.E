@@ -7,9 +7,9 @@
  * site's wallet profile and metrics strip prefer over direct public-RPC
  * calls when this worker is deployed and configured.
  *
- * Runs on Base mainnet + Coinbase Developer Platform's hosted x402
- * facilitator (real funds) — see wrangler.toml for the network/facilitator
- * config and required secrets.
+ * Runs on Deno Deploy, against Base mainnet + Coinbase Developer Platform's
+ * hosted x402 facilitator (real funds) — see worker/README.md for the
+ * network/facilitator config and required environment variables.
  */
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -48,7 +48,7 @@ const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
  * Builds the facilitator's `createAuthHeaders` callback. Only CDP's hosted
  * facilitator (api.cdp.coinbase.com) needs Bearer JWT auth; the public
  * testnet facilitator (facilitator.x402.org) needs none, so this is a no-op
- * unless both CDP secrets are configured (`wrangler secret put`).
+ * unless both CDP secrets are configured as Deno Deploy environment variables.
  *
  * The callback signature takes no arguments — the client picks the right
  * header set (verify/settle/supported) out of the returned object — so a

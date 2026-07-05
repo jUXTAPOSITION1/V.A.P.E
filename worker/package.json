@@ -5,8 +5,7 @@
   "type": "module",
   "description": "x402 payment gate for VAPE's 6 automatable ACP offerings (see docs/ACP_PROTOCOL.md).",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "dev": "cd deno && deno task start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -18,9 +17,7 @@
     "jose": "^6.2.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20260702.1",
     "tsx": "4.23.0",
-    "typescript": "6.0.3",
-    "wrangler": "4.107.0"
+    "typescript": "6.0.3"
   }
 }

@@ -4,10 +4,10 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // /portfolio, /nfts, /network-status routes (more reliable + full token/NFT
 // auto-discovery vs. the public mainnet.base.org RPC + curated token list)
 // and the priced /scan/* x402 offerings. Deployed on Deno Deploy (see
-// worker/README.md's "Alternative: Deno Deploy" section — the Cloudflare
-// path hit an account-level workers.dev subdomain bug). Every caller below
-// still falls back to its direct-API path if this ever returns an error, so
-// the site keeps working even if the worker is down.
+// worker/README.md's "Why Deno Deploy, not Cloudflare" section for why this
+// isn't a Cloudflare Worker). Every caller below still falls back to its
+// direct-API path if this ever returns an error, so the site keeps working
+// even if the worker is down.
 //
 // IMPORTANT: this must be Deno Deploy's stable *production* URL (the one
 // shown at the top of the project's Overview page), not an individual
