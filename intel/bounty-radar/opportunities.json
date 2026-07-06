@@ -18810,5 +18810,24 @@
     "fitScore": 88,
     "isNew": true,
     "firstSeen": "2026-07-06T19:20:57.903718Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:BonkDAO-1783296000",
+    "name": "BonkDAO (exploit $20,000,000)",
+    "prizeUsd": 20000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Malicious Governance Proposal on Solana. Lead for incident response + forensics.",
+    "fitScore": 80,
+    "isNew": true,
+    "firstSeen": "2026-07-06T21:12:56.906530Z"
   }
 ]
