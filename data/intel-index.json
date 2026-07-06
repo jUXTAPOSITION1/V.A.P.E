@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-06T11:11:29Z",
+  "generated": "2026-07-06T14:27:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 319,
+    "reports": 320,
     "reports_by_type": {
-      "bounty": 176,
+      "bounty": 177,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 33,
-    "investigations": 40,
+    "investigations": 41,
     "tools": 15,
     "tools_verified": 14,
     "skills": 9
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260706-102605-0x87300364.md",
-      "title": "Investigation \u2014 TRUMP250",
-      "symbol": "TRUMP250",
-      "date": "2026-07-06T10:26:05Z",
-      "target": "0x87300364C1b3558cF50D64Ef44ff04F3Ff56bC5a",
+      "file": "investigation-20260706-142724-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "date": "2026-07-06T14:27:24Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 33379 holders \u2014 reasonably distributed; Custom verified source (not a mass-pro",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-102605-0x87300364.md"
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-25] Very low liquidity $154 (rug/illiquid); [-10] Low liquidity $154; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-142724-0x454777B9.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260706_102546.md",
+      "file": "bounty_report_20260706_142708.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T10:25:46Z",
+      "date": "2026-07-06T14:27:08Z",
       "threat": null,
-      "summary": "Base mover: TRUMP250 / WETH 0.01% +240% 24h (liq $273.9839) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7828.1358) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% -76% 24h (liq $41947.8325) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_102546.md",
-      "bytes": 12542
+      "summary": "Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7737.5874) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_142708.md",
+      "bytes": 11851
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-142724-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "date": "2026-07-06T14:27:24Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-25] Very low liquidity $154 (rug/illiquid); [-10] Low liquidity $154; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-142724-0x454777B9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260706-102605-0x87300364.md",
@@ -528,20 +541,20 @@
       "verdict": "REJECT (25/100)",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-05",
-      "job_id": "auto",
-      "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
-      "symbol": "Claude",
-      "offering": "deep_investigation",
-      "verdict": "REJECT (45/100)",
-      "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_142708.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T14:27:08Z",
+      "threat": null,
+      "summary": "Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7737.5874) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_142708.md",
+      "bytes": 11851
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1190,17 +1203,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-08.md",
       "bytes": 2057
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-01-08.md",
-      "title": "VAPE Base Chain Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-08.md",
-      "bytes": 1841
     }
   ],
   "broadcasts": [
@@ -1500,7 +1502,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48262289",
+      "version": "48275822",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1510,7 +1512,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.76 eth_dom 9.44 mcap_chg_24h 0.7",
+      "version": "btc_dom 55.52 eth_dom 9.42 mcap_chg_24h -0.84",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
