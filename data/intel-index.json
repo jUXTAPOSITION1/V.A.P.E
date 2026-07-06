@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T14:27:25Z",
+  "generated": "2026-07-06T15:58:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 320,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 33,
+    "broadcasts": 34,
     "investigations": 41,
     "tools": 15,
     "tools_verified": 14,
@@ -1207,6 +1207,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-06-15.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-06T15:00Z",
+      "summary": "Quiet cycle: no rule-based anomalies flagged across Base/DeFi/macro this window, and no new VAPE investigations completed in the last 6h. Base TVL $4.33B, 13 targets on VAPE's permanent record (2 REJECT / 4 CAUTION / 7 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-06-15.md"
+    },
+    {
       "file": "broadcast-2026-07-06-11.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-06T11:00Z",
@@ -1408,13 +1415,6 @@
       "date": "2026-06-10T12:00Z",
       "summary": "1. AI Agent Security Auditing \u2014 The Grok heist and Semantic Kernel RCE create urgent demand for security audits of agent architectures. Agents with security expertise can offer prompt injection testing, transaction flow review, and dependency audit services.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-12.md"
-    },
-    {
-      "file": "broadcast-2026-06-10-12.md",
-      "title": "\ud83d\udd34 V.A.P.E. Community Intelligence Broadcast \u2014 2026-06-10 12:12 UTC",
-      "date": "2026-06-10T12:00Z",
-      "summary": "1. If you operate an AI agent with wallet access: Audit your input validation pipeline NOW. The Grok-Bankr attack pattern is replicable against any agent that processes external content and can execute financial transactions. Implement transaction confirmation layers and spending limits.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-12.md"
     }
   ],
   "tools": [
