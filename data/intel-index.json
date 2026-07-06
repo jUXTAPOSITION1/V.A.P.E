@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-05T22:03:41Z",
+  "generated": "2026-07-06T00:11:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 316,
+    "reports": 317,
     "reports_by_type": {
-      "bounty": 173,
+      "bounty": 174,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 31,
-    "investigations": 37,
+    "investigations": 38,
     "tools": 15,
     "tools_verified": 14,
     "skills": 9
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260705-220341-0x454777B9.md",
+      "file": "investigation-20260706-001140-0x454777B9.md",
       "title": "Investigation \u2014 OpenAI",
       "symbol": "OpenAI",
-      "date": "2026-07-05T22:03:41Z",
+      "date": "2026-07-06T00:11:40Z",
       "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "55",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260705-220341-0x454777B9.md"
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-001140-0x454777B9.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260705_220324.md",
+      "file": "bounty_report_20260706_000808.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-05T22:03:24Z",
+      "date": "2026-07-06T00:08:08Z",
       "threat": null,
-      "summary": "Base mover: OpenAI / USDC 0.01% +99264% 24h (liq $1123530.4775) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +3818% 24h (liq $53414.3429) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_220324.md",
-      "bytes": 12232
+      "summary": "Base mover: OpenAI / USDC 0.01% +99431% 24h (liq $1118537.2905) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +2771% 24h (liq $43273.0467) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 0.01% +674% 24h (liq $81383.1805) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_000808.md",
+      "bytes": 10723
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-001140-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "date": "2026-07-06T00:11:40Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-001140-0x454777B9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260705-220341-0x454777B9.md",
@@ -503,6 +516,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_000808.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T00:08:08Z",
+      "threat": null,
+      "summary": "Base mover: OpenAI / USDC 0.01% +99431% 24h (liq $1118537.2905) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +2771% 24h (liq $43273.0467) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 0.01% +674% 24h (liq $81383.1805) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_000808.md",
+      "bytes": 10723
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1151,17 +1175,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_052223.md",
       "bytes": 5654
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_000559.md",
-      "title": "VAPE Report - 20260701_000559",
-      "date": "2026-07-01T00:05:59Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_000559.md",
-      "bytes": 5147
     }
   ],
   "broadcasts": [
