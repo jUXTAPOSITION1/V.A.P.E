@@ -56,7 +56,6 @@ component's state changes.
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
 | Security tool tiers | [OK] | 13 tools registered across static/fuzzing/ai-redteam/recon |
 | `skillforge/memory/` | [OK] | Shared append-only memory base |
-| `src/*.js` (legacy Node agent) | Retired | Superseded by `agents/*.py`; not invoked by any CI workflow — kept for history, not part of the live system |
 
 ## Components
 
@@ -111,21 +110,7 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   cost/secrets) all wired against VAPE's real production model, daily via
   `redteam-deep.yml`. See `skillforge/skills/ai-agent-redteam.md`.
 
-### 2. Legacy Node agent — `src/` (retired)
-An early-stage local/long-running runtime (`package.json`, ESM, `main:
-src/agents/vape.js`), superseded by the Python engine above. Not invoked by
-any CI workflow and not part of the live system — kept in the repo for
-history rather than deleted outright, but should not be read as a second
-active runtime alongside `agents/*.py`.
-- **`agents/vape.js`** — `VAPEAgent` class: `initialize()`, `startInvestigation()`
-  (`setInterval` cycles), `runInvestigationCycle()` → calls the modules below.
-- **`blockchain/analyzer.js`** — `analyzeRecentActivity()` over Base RPC.
-- **`security/scanner.js`** — `scanForThreats()`.
-- **`data-fetchers/fetcher.js`** — `getMarketMetrics()`.
-- **`acp/protocol.js`** — `reportFindings()` + alerting.
-- **`config/logger.js`** — pino logging.
-
-### 3. SKILLFORGE — `skillforge/` [OK] (self-improving skill+tool ecosystem)
+### 2. SKILLFORGE — `skillforge/` [OK] (self-improving skill+tool ecosystem)
 Zero-local-compute skill growth via GitHub Actions. See `skillforge/MANIFEST.md`.
 - **harvest** (hourly) — real CVE + tool-release intel, no LLM.
 - **toolcheck** (6×/day) — installs & verifies 13 security tools on runners, no LLM.
@@ -135,18 +120,18 @@ Zero-local-compute skill growth via GitHub Actions. See `skillforge/MANIFEST.md`
 - **Memory:** append-only `memory/` (tools-registry.json, findings/skills/lessons.jsonl, INDEX.md).
 - **Skills:** playbooks in `skillforge/skills/` (sc-static-analysis, ai-agent-redteam, onchain-recon-forensics).
 
-### 4. intel/ pipeline [OK] (the audit trail)
+### 3. intel/ pipeline [OK] (the audit trail)
 Timestamped real-data outputs committed continuously: `reports/`, `audits/poc-reports/`,
 `broadcasts/`, `bounty-radar/`, `engagements/`, `catalog/`. Synced to the HF Space via
 `sync-to-hub.yml`.
 
-### 5. ACP job monitor [OK] (autonomous revenue)
+### 4. ACP job monitor [OK] (autonomous revenue)
 Catches incoming ACP jobs and negotiates → funds → completes at near-zero compute.
 3 layers: persistent `acp events listen` daemon (zero LLM) → drain+triage loop (zero LLM)
 → reasoning handler that fires only on a real funded job. 14 live offerings; USDC escrow on Base.
 *(Operational layer; runs on the host alongside the repo.)*
 
-### 6. UI — `app.py` / `docs/` [OK]
+### 5. UI — `app.py` / `docs/` [OK]
 Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.html` is
 VAPE's public site — narrative case-file pages over the same real data (investigations,
 reputation, TVL, Intel Explorer), wallet connect + a wallet profile — portfolio, 24h P&L,
