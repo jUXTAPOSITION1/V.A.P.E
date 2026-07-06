@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-06T05:13:41Z",
+  "generated": "2026-07-06T10:26:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 318,
+    "reports": 319,
     "reports_by_type": {
-      "bounty": 175,
+      "bounty": 176,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 32,
-    "investigations": 39,
+    "investigations": 40,
     "tools": 15,
     "tools_verified": 14,
     "skills": 9
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260706-051341-0x454777B9.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "date": "2026-07-06T05:13:41Z",
-      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "file": "investigation-20260706-102605-0x87300364.md",
+      "title": "Investigation \u2014 TRUMP250",
+      "symbol": "TRUMP250",
+      "date": "2026-07-06T10:26:05Z",
+      "target": "0x87300364C1b3558cF50D64Ef44ff04F3Ff56bC5a",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-15] Pair only 2.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-051341-0x454777B9.md"
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 33379 holders \u2014 reasonably distributed; Custom verified source (not a mass-pro",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-102605-0x87300364.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260706_051319.md",
+      "file": "bounty_report_20260706_102546.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T05:13:19Z",
+      "date": "2026-07-06T10:25:46Z",
       "threat": null,
-      "summary": "Base mover: OpenAI / USDC 0.01% +99205% 24h (liq $997744.6109) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +2345% 24h (liq $40856.3732) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_051319.md",
-      "bytes": 12309
+      "summary": "Base mover: TRUMP250 / WETH 0.01% +240% 24h (liq $273.9839) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7828.1358) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% -76% 24h (liq $41947.8325) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_102546.md",
+      "bytes": 12542
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-102605-0x87300364.md",
+      "title": "Investigation \u2014 TRUMP250",
+      "symbol": "TRUMP250",
+      "date": "2026-07-06T10:26:05Z",
+      "target": "0x87300364C1b3558cF50D64Ef44ff04F3Ff56bC5a",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 33379 holders \u2014 reasonably distributed; Custom verified source (not a mass-pro",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-102605-0x87300364.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260706-051341-0x454777B9.md",
@@ -529,6 +542,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_102546.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T10:25:46Z",
+      "threat": null,
+      "summary": "Base mover: TRUMP250 / WETH 0.01% +240% 24h (liq $273.9839) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7828.1358) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% -76% 24h (liq $41947.8325) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_102546.md",
+      "bytes": 12542
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1177,17 +1201,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-08.md",
       "bytes": 1841
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-08.md",
-      "title": "VAPE Security Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": "MEDIUM",
-      "summary": "Q2 2026 closed as DeFi's most-hacked quarter on record (~88 incidents, ~$780M through Jun 30 per DeFiLlama/The Defiant). The tail end of June was quieter by $-value but steady by count: Edel ($0.4M oracle/flashloan), Polymarket International ($3M front-end), SecondFi ($2.4M predictable key), Taiko Bridge ($1.7M forged proof). June's domin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-08.md",
-      "bytes": 2949
     }
   ],
   "broadcasts": [
