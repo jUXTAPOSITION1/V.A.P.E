@@ -42,8 +42,8 @@ If a job carries `"error"`, the auto path failed — inspect, fix, and complete 
 | wallet_recon | 0.03 | `recon/wallet_trace.sh` (needs ETHERSCAN key) / `base_rpc.sh` | balance, nonce, funding source |
 | tx_decode | 0.05 | `recon/contract_recon.sh abi` + RPC | decoded call + intent |
 | whale_watch | 0.10 | `recon/wallet_trace.sh erc20` + `market_data.sh` | large flows + context |
-| market_intel | 0.15 | `recon/market_data.sh price/global/chaintvl` | price/vol/TVL + BULLISH/BEARISH/NEUTRAL signal |
-| safety_preflight | 0.35 | `agents.investigate.quick_assess` (weighted score + meme-factory + hack correlation + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | 0-100 score, verdict, reasons, positive signals, social/AI review |
+| market_intel | 0.07 | `recon/market_data.sh price/global/chaintvl` | price/vol/TVL + BULLISH/BEARISH/NEUTRAL signal |
+| safety_preflight | 0.10 | `agents.investigate.quick_assess` (weighted score + meme-factory + hack correlation + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | 0-100 score, verdict, reasons, positive signals, social/AI review |
 | deep_contract_audit | 1.00 | `static/slither.sh` + `aderyn.sh` + `mythril.sh` (+ echidna/foundry if HIGH) | severity-rated findings + 0-100 score |
 | forensics_deep | 2.00 | `wallet_trace` + `contract_recon` + graph reasoning | full trace + chain-of-custody |
 | bulk_safety_bundle | 0.50 | `token_safety.sh check` x N | per-token verdict table |

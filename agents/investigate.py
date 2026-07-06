@@ -254,6 +254,8 @@ def web_reputation_check(symbol, address):
     hits = []
     normalized = []
     scraped_one = False
+    addr_lower = address.lower()
+    sym_lower = (symbol or "").lower()
     for r in results[:5]:
         if not isinstance(r, dict):
             continue
@@ -262,7 +264,16 @@ def web_reputation_check(symbol, address):
         url = str(r.get("url") or "")
         normalized.append({"title": title, "url": url, "snippet": snippet[:200]})
         blob = f"{title} {snippet}".lower()
-        if any(kw in blob for kw in _SCAM_KEYWORDS):
+        # A broad OR-query like "... rug pull OR scam OR honeypot" reliably
+        # surfaces popular GENERIC scam-education pages (a 2022 explainer
+        # video, a rug-pull category page, etc.) for virtually any token,
+        # since search engines don't literally AND every quoted term. Require
+        # the result to actually reference THIS token (address, or a
+        # reasonably specific symbol) before treating a keyword match as
+        # real evidence — otherwise every token gets the same generic hits
+        # and a false -25 penalty regardless of any real incident.
+        mentions_target = addr_lower in blob or (len(sym_lower) >= 3 and sym_lower in blob)
+        if mentions_target and any(kw in blob for kw in _SCAM_KEYWORDS):
             hit = f"Public web result flags this project: \"{title}\" — {url}"
             # Only escalate the first flagged hit per investigation to a real
             # scrape — a 200-char search snippet is thin evidence for a real

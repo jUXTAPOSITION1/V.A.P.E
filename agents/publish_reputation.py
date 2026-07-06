@@ -67,12 +67,12 @@ OFFERINGS = [
     ("wallet_recon", 0.03, "Address profiling: holdings, patterns, risk flags"),
     ("rug_pull_alert", 0.03, "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags"),
     ("tx_decode", 0.05, "Plain-language tx decode + risk flags for any Base tx hash"),
-    ("whale_watch", 0.10, "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow"),
-    ("community_intel_broadcast", 0.10, "6-hourly consolidated security+market intel broadcast"),
-    ("market_intel", 0.15, "Real-time price/TVL/liquidity + actionable signal"),
-    ("safety_preflight", 0.35, "VAPE's deepest instant verdict: weighted CertiK-style score, "
+    ("market_intel", 0.07, "Real-time price/TVL/liquidity + actionable signal"),
+    ("safety_preflight", 0.10, "VAPE's deepest instant verdict: weighted CertiK-style score, "
      "meme-factory-template detection, recent-hack correlation, public web-reputation search, "
      "a live check of declared socials, and a frontier-LLM quick source read"),
+    ("whale_watch", 0.10, "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow"),
+    ("community_intel_broadcast", 0.10, "6-hourly consolidated security+market intel broadcast"),
     ("bulk_safety_bundle", 0.50, "Scan 5-25 tokens in one job, 40% off"),
     ("deep_contract_audit", 1.00, "slither+aderyn+mythril severity-rated audit + 0-100 score"),
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),

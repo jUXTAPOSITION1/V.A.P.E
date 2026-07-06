@@ -122,9 +122,20 @@ export async function webReputationCheck(env: ResearchEnv, symbol: string, addre
   const hits: string[] = [];
   const normalized = search.results.slice(0, 5).map((r) => ({ title: r.title, url: r.url, snippet: r.snippet.slice(0, 200) }));
   let scrapedOne = false;
+  const addrLower = address.toLowerCase();
+  const symLower = symbol.toLowerCase();
   for (const r of normalized) {
     const blob = `${r.title} ${r.snippet}`.toLowerCase();
-    if (SCAM_KEYWORDS.some((kw) => blob.includes(kw))) {
+    // A broad OR-query like "... rug pull OR scam OR honeypot" reliably
+    // surfaces popular GENERIC scam-education pages for virtually any
+    // token, since search engines don't literally AND every quoted term.
+    // Require the result to actually reference THIS token (address, or a
+    // reasonably specific symbol) before treating a keyword match as real
+    // evidence — otherwise every token gets the same generic hits and a
+    // false penalty regardless of any real incident. Mirrors
+    // agents/investigate.py::web_reputation_check() exactly.
+    const mentionsTarget = blob.includes(addrLower) || (symLower.length >= 3 && blob.includes(symLower));
+    if (mentionsTarget && SCAM_KEYWORDS.some((kw) => blob.includes(kw))) {
       let hit = `Public web result flags this project: "${r.title}" — ${r.url}`;
       if (!scrapedOne && r.url) {
         scrapedOne = true;
