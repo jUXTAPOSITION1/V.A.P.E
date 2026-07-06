@@ -340,12 +340,17 @@ def get_base_fees():
 
 
 # ── 9. Biggest 24h movers on Base (keyless, DexScreener) ──────────────────────
-def get_base_movers(limit=6):
-    """Most active Base pools by 24h volume + biggest movers, via GeckoTerminal.
-    Keyless, reliable volume/price data. Surfaces both high-volume venues and
-    violent movers for the investigations vertical."""
-    d = _get("https://api.geckoterminal.com/api/v2/networks/base/pools?page=1",
-             ttl=600, cache_key="gt_base_pools")
+def get_evm_movers(network="base", limit=6):
+    """Most active pools by 24h volume + biggest movers on any GeckoTerminal
+    EVM network (keyless). Generalized from the old Base-only get_base_movers()
+    so agents/investigate.py::auto_target() can rotate its candidate sourcing
+    across chains instead of only ever looking at Base — see EVM_CHAINS in
+    agents/investigate.py for the supported network slugs. `network` here is
+    a GeckoTerminal network id (e.g. "base", "eth", "arbitrum"), not an EVM
+    chain id. Degrades to an empty result on an unknown/unreachable slug,
+    same as every other fetch in this module."""
+    d = _get(f"https://api.geckoterminal.com/api/v2/networks/{network}/pools?page=1",
+             ttl=600, cache_key=f"gt_{network}_pools")
     pools = d.get("data", []) if isinstance(d, dict) else []
     rows = []
     for p in pools:
@@ -367,7 +372,109 @@ def get_base_movers(limit=6):
     by_vol = sorted(rows, key=lambda r: r["vol_24h_usd"], reverse=True)[:limit]
     movers = sorted([r for r in rows if isinstance(r["change_24h_pct"], (int, float))],
                     key=lambda r: abs(r["change_24h_pct"]), reverse=True)[:limit]
-    return {"ts": _now_iso(), "top_by_volume": by_vol, "biggest_movers": movers}
+    return {"ts": _now_iso(), "network": network, "top_by_volume": by_vol, "biggest_movers": movers}
+
+
+def get_base_movers(limit=6):
+    """Back-compat wrapper — Base was the only network this ever covered
+    before get_evm_movers() generalized it. Still used by
+    build_market_context() for the site's Base-specific market section."""
+    return get_evm_movers("base", limit)
+
+
+# ── anomaly-flag cooldown: stop re-flagging the same stuck/stale mover ────────
+# Real bug this fixes: a thin/illiquid pool can report an enormous 24h change
+# (e.g. +99,000%) that barely moves cycle to cycle — not a fresh event, just a
+# stale/degenerate ratio against a near-zero reference price. Without a
+# cooldown, build_market_context()'s anomaly pass re-flags the exact same pool
+# as "this cycle's" anomaly every single run (hourly), which is what made
+# VAPE's own bounty reports read as stuck in a loop even though the flag
+# itself wasn't wrong, just stale. State is committed (bounty-cycle.yml
+# stages skillforge/memory/), so the cooldown survives across CI runs, not
+# just within one process.
+ANOMALY_STATE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
+                                   "skillforge", "memory", "anomaly_state.json")
+ANOMALY_COOLDOWN_HOURS = 12
+# "Barely changed" has to be judged relative to the value's own scale, not as
+# a fixed point-difference — a pool stuck around +99,000% will naturally
+# jitter by hundreds of points between polls without that being a new event,
+# while a mover actually swinging from +30% to +45% is a real, small-scale
+# change worth flagging. 5% relative drift (with a small absolute floor for
+# tiny values) is "the same" anomaly; anything past that counts as new.
+ANOMALY_REPEAT_RELATIVE_TOLERANCE = 0.05
+ANOMALY_REPEAT_ABSOLUTE_FLOOR = 10
+
+
+def _load_anomaly_state():
+    try:
+        with open(ANOMALY_STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_anomaly_state(state):
+    try:
+        os.makedirs(os.path.dirname(ANOMALY_STATE_PATH), exist_ok=True)
+        with open(ANOMALY_STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2, sort_keys=True)
+            f.write("\n")
+    except Exception:
+        pass
+
+
+def _age_hours(ts_str):
+    return (datetime.now(timezone.utc)
+            - datetime.strptime(ts_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            ).total_seconds() / 3600
+
+
+def _anomaly_is_stale_repeat(key, value, state):
+    """True if `key` was already flagged recently with a near-identical value
+    (same stuck anomaly, not a new event worth re-surfacing)."""
+    prev = state.get(key)
+    if not prev:
+        return False
+    try:
+        age_hours = _age_hours(prev["ts"])
+    except Exception:
+        return False
+    if age_hours >= ANOMALY_COOLDOWN_HOURS:
+        return False  # cooldown expired — worth re-flagging even if unchanged
+    try:
+        prev_val = float(prev.get("value"))
+        new_val = float(value)
+        tolerance = max(ANOMALY_REPEAT_ABSOLUTE_FLOOR, abs(prev_val) * ANOMALY_REPEAT_RELATIVE_TOLERANCE)
+        return abs(new_val - prev_val) <= tolerance
+    except Exception:
+        return False
+
+
+def _filter_stale_mover_anomalies(mover_flags):
+    """Given a list of (key, value, text) mover-anomaly candidates, drop the
+    ones that are stale repeats and record the ones that survive. Returns the
+    surviving text list. Isolated from the other anomaly categories (TVL/gas/
+    hacks/F&G) since those weren't observed to have this stuck-value problem —
+    only the mover feed showed the same pool re-flagged cycle after cycle."""
+    state = _load_anomaly_state()
+    now = _now_iso()
+    kept = []
+    for key, value, text in mover_flags:
+        if _anomaly_is_stale_repeat(key, value, state):
+            continue
+        kept.append(text)
+        state[key] = {"ts": now, "value": value}
+    # prune entries older than a few cooldown windows so this file doesn't grow forever
+    cutoff_state = {}
+    for k, v in state.items():
+        try:
+            age_hours = _age_hours(v["ts"])
+            if age_hours < ANOMALY_COOLDOWN_HOURS * 4:
+                cutoff_state[k] = v
+        except Exception:
+            continue
+    _save_anomaly_state(cutoff_state)
+    return kept
 
 
 # ── orchestrator: one grounded-context blob for the LLM ───────────────────────
@@ -411,11 +518,17 @@ def build_market_context():
         # macro: extreme fear/greed
         if isinstance(fng.get("value"), int) and (fng["value"] <= 20 or fng["value"] >= 80):
             anomalies.append(f"Macro: F&G {fng['value']} ({fng['classification']}) — sentiment extreme")
-        # movers: violent Base token moves
+        # movers: violent Base token moves — cooldown-filtered so a stuck/
+        # stale extreme-% pool doesn't get re-flagged as "this cycle's"
+        # anomaly every single run (see _filter_stale_mover_anomalies).
+        mover_candidates = []
         for m in (movers.get("biggest_movers") or [])[:3]:
             ch = m.get("change_24h_pct")
             if isinstance(ch, (int, float)) and abs(ch) >= 25:
-                anomalies.append(f"Base mover: {m.get('name')} {ch:+.0f}% 24h (liq ${m.get('reserve_usd')}) — volatility/rug watch")
+                key = f"mover:{m.get('name')}"
+                text = f"Base mover: {m.get('name')} {ch:+.0f}% 24h (liq ${m.get('reserve_usd')}) — volatility/rug watch"
+                mover_candidates.append((key, ch, text))
+        anomalies.extend(_filter_stale_mover_anomalies(mover_candidates))
     except Exception:
         pass
 

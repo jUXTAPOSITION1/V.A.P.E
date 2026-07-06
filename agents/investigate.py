@@ -52,6 +52,44 @@ LIST_PATHS = {
 BASE_RPC = os.getenv("BASE_RPC_URL", "https://mainnet.base.org")
 UA = {"User-Agent": "VAPE-PrivateEye/1.0"}
 
+# Supported EVM chains for auto-investigation, beyond the original Base-only
+# scope. Each entry carries the three independent identifiers real recon
+# needs: the numeric EVM chain id (GoPlus token_security + Etherscan V2's
+# unified multichain API both key off this), the GeckoTerminal network slug
+# (candidate/mover sourcing), the DexScreener chainId string (pair
+# resolution/filtering), and a keyless public JSON-RPC endpoint (on-chain
+# code-presence check). "base" is the only slug set actually exercised by
+# this codebase before this change; the others are the standard/documented
+# identifiers for each provider but weren't live-curl-verified in this
+# session (sandboxed network egress). Every fetch already degrades to
+# empty/error on a wrong slug (same pattern as every other call in this
+# file), so a mistake here narrows one chain's candidate pool rather than
+# breaking anything — worth spot-checking a real run's logs after this ships.
+EVM_CHAINS = {
+    "8453":  {"name": "Base",      "gecko": "base",        "dex": "base",      "rpc": BASE_RPC},
+    "1":     {"name": "Ethereum",  "gecko": "eth",          "dex": "ethereum",  "rpc": "https://ethereum.publicnode.com"},
+    "42161": {"name": "Arbitrum",  "gecko": "arbitrum",     "dex": "arbitrum",  "rpc": "https://arb1.arbitrum.io/rpc"},
+    "10":    {"name": "Optimism",  "gecko": "optimism",     "dex": "optimism",  "rpc": "https://mainnet.optimism.io"},
+    "137":   {"name": "Polygon",   "gecko": "polygon_pos",  "dex": "polygon",   "rpc": "https://polygon-rpc.com"},
+    "56":    {"name": "BNB Chain", "gecko": "bsc",          "dex": "bsc",       "rpc": "https://bsc-dataseed.binance.org"},
+    "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/Chain"},
+}
+
+# Real, non-crypto companies with zero legitimate on-chain token affiliation
+# on any permissionless EVM chain — a token adopting one of these exact
+# brand names is impersonation riding AI/tech hype, not coincidence.
+# Deliberately narrow (full distinctive names only, matched as substrings of
+# the token's own declared name/symbol) to avoid false-positiving genuinely
+# unrelated community coins that merely mention "ai" generically. This list
+# exists because VAPE's own ledger has repeatedly auto-investigated copycat
+# tokens named exactly "OpenAI" and "Claude"/"CLAUDE" — several of which
+# scored a false PROCEED before this check existed, since nothing in the
+# original scoring model accounted for brand impersonation at all.
+IMPERSONATED_BRAND_PATTERNS = (
+    "openai", "chatgpt", "anthropic", "claude", "deepmind",
+    "perplexity ai", "midjourney", "stability ai",
+)
+
 try:
     from agents import data_fetchers as DF
 except Exception:
@@ -80,10 +118,10 @@ def _get(url, timeout=12):
         return {"error": str(e)}
 
 
-def _rpc(method, params, timeout=10):
+def _rpc(method, params, timeout=10, rpc_url=None):
     payload = json.dumps({"jsonrpc": "2.0", "method": method, "params": params, "id": 1}).encode()
     try:
-        req = urllib.request.Request(BASE_RPC, data=payload,
+        req = urllib.request.Request(rpc_url or BASE_RPC, data=payload,
                                      headers={**UA, "Content-Type": "application/json"})
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.loads(r.read().decode())
@@ -124,12 +162,22 @@ def goplus_security(address, chain="8453"):
         return {}
 
 
-def dexscreener(address):
+def dexscreener(address, chain="8453"):
     d = _get(f"https://api.dexscreener.com/latest/dex/tokens/{address}")
     pairs = d.get("pairs") or [] if isinstance(d, dict) else []
     if not pairs:
         return {}
-    p = max(pairs, key=lambda x: (x.get("liquidity") or {}).get("usd", 0) or 0)
+    # Real bug this fixes: the same address can exist (coincidentally, or via
+    # CREATE2) on more than one chain, each an unrelated project. Picking
+    # "whichever pair has the most liquidity" with no chain filter could pull
+    # in a totally different token's market data than the one actually being
+    # investigated on the target chain. Filter to the target chain's
+    # DexScreener slug first; only fall back to a cross-chain max-liquidity
+    # pick (the old behavior) if nothing matches, so a caller that doesn't
+    # know/care about chain (e.g. acp_fulfill.py's ad-hoc lookups) still works.
+    dex_slug = (EVM_CHAINS.get(str(chain)) or {}).get("dex")
+    scoped = [p for p in pairs if dex_slug and str(p.get("chainId", "")).lower() == dex_slug] or pairs
+    p = max(scoped, key=lambda x: (x.get("liquidity") or {}).get("usd", 0) or 0)
     info = p.get("info") or {}
     return {
         "symbol": (p.get("baseToken") or {}).get("symbol"),
@@ -149,8 +197,14 @@ def dexscreener(address):
     }
 
 
-def onchain_presence(address):
-    code = _rpc("eth_getCode", [address, "latest"])
+def onchain_presence(address, chain="8453"):
+    # Real bug this fixes: this used to always hit Base's RPC regardless of
+    # the target chain, so a non-Base auto-investigation would check
+    # completely the wrong network's state at that address (garbage
+    # is_contract/code_size, or worse, coincidentally real-looking bytecode
+    # for an unrelated Base contract at the same address).
+    rpc_url = (EVM_CHAINS.get(str(chain)) or {}).get("rpc", BASE_RPC)
+    code = _rpc("eth_getCode", [address, "latest"], rpc_url=rpc_url)
     c = code.get("result", "0x") if isinstance(code, dict) else "0x"
     return {"is_contract": bool(c and c != "0x"), "code_size_bytes": max(0, (len(c) - 2) // 2)}
 
@@ -323,7 +377,7 @@ MEME_FACTORY_NAME_PATTERNS = ("clanker",)
 
 
 # ── scoring ─────────────────────────────────────────────────────────────────
-def score(gp, dex, onchain, verif, web_rep=None):
+def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None):
     """Return (score_0_100, verdict, reasons[], positive_signals[]).
     Higher score = safer.
 
@@ -384,6 +438,28 @@ def score(gp, dex, onchain, verif, web_rep=None):
     flag(is_factory_template, 20,
          f"Deployed via a permissionless meme-token factory template ({verif.get('name')}) "
          "— no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens")
+
+    # Brand impersonation — real, deterministic (see IMPERSONATED_BRAND_PATTERNS
+    # above). Confirmed real gap: VAPE's own investigation ledger has repeated
+    # copycat tokens named exactly "OpenAI"/"Claude"/"CLAUDE" that scored
+    # false PROCEEDs (78-92/100) because nothing previously checked whether a
+    # clean-looking contract's declared name/symbol impersonates a real,
+    # unaffiliated company riding AI/tech hype.
+    dex_name_l = (dex.get("name") or "").lower()
+    dex_sym_l = (dex.get("symbol") or "").lower()
+    is_brand_impersonation = any(p in dex_name_l or p in dex_sym_l for p in IMPERSONATED_BRAND_PATTERNS)
+    flag(is_brand_impersonation, 35,
+         f"Token name/symbol ({dex.get('name')} / {dex.get('symbol')}) impersonates a real company "
+         "with no on-chain affiliation — a hype-riding impersonation pattern, not coincidence")
+
+    # Deployer repeat-offender — real, ledger-derived (see
+    # _deployer_repeat_offender() in the target-selection section below).
+    # Confirmed real gap: several of the impersonation tokens above shared a
+    # deployer fingerprint (same CREATE2 vanity address suffix) but were each
+    # scored as a fully independent, unrelated target — this connects them.
+    if deployer_repeat_offender:
+        flag(True, 30, f"Same deployer has a prior CAUTION/REJECT verdict on record: "
+                        f"{deployer_repeat_offender} — likely the same serial campaign")
 
     # Holder concentration — real GoPlus holder_count. Thin distribution
     # means a handful of wallets can move the price or exit-liquidity anyone
@@ -496,13 +572,14 @@ def quick_assess(address, chain="8453"):
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
     gp = goplus_security(address, chain)
-    dex = dexscreener(address)
-    onchain = onchain_presence(address)
+    dex = dexscreener(address, chain)
+    onchain = onchain_presence(address, chain)
     verif = contract_verification(address, chain)
     corr = hack_correlation(gp)
     prelim_sym = dex.get("symbol") or verif.get("name") or "unknown"
     web_rep = web_reputation_check(prelim_sym, address)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep)
+    deployer_repeat = _deployer_repeat_offender(gp.get("creator_address"), chain, address)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat)
     cname = (verif.get("name") or "").lower()
     is_factory_template = any(p in cname for p in MEME_FACTORY_NAME_PATTERNS)
     return {
@@ -515,29 +592,62 @@ def quick_assess(address, chain="8453"):
 
 
 # ── target selection ──────────────────────────────────────────────────────────
-def auto_target():
-    """Pick the highest-signal Base target from live data (violent/low-liq movers)
-    that VAPE hasn't already reached a real verdict on — skip anything already
-    in the ledger so auto mode never wastes a cycle re-discovering a target
-    it's just going to turn around and skip anyway."""
+# Base stays the plurality/default chain (VAPE's core identity is Base +
+# Virtuals), but the old version ONLY ever looked at Base — one single
+# GeckoTerminal page, one chain, forever. Confirmed real consequence: weeks
+# of hourly auto-cycles produced only 13 ever-investigated addresses total,
+# several of them trivial copycat variants of the same brand-impersonation
+# campaign, because the candidate pool was this narrow. Rotating across
+# chains by hour-of-day (same technique already used in run.py's
+# _repo_snapshot_for_review() for file coverage) opens real diversity —
+# roughly 2 out of every 3 hourly cycles still check Base, the remaining
+# third round-robins through the other supported EVM chains.
+_OTHER_CHAINS = [c for c in EVM_CHAINS if c != "8453"]
+
+
+def _pick_chain_for_hour(hour):
+    if hour % 3 != 0 or not _OTHER_CHAINS:
+        return "8453"
+    return _OTHER_CHAINS[(hour // 3) % len(_OTHER_CHAINS)]
+
+
+def auto_target(chain=None):
+    """Pick the highest-signal target from live data (violent/low-liq movers)
+    on the selected chain (rotates across all of EVM_CHAINS by hour if not
+    given explicitly) that VAPE hasn't already reached a real verdict on —
+    skip anything already in the ledger so auto mode never wastes a cycle
+    re-discovering a target it's just going to turn around and skip anyway.
+    Falls back to Base if the rotated-to chain's candidate pool comes up
+    empty (e.g. thin GeckoTerminal coverage for that network), so a single
+    exotic chain never silently zeroes out a whole cycle's auto-investigation."""
     if not DF:
         return None
+    chain = chain or _pick_chain_for_hour(datetime.now(timezone.utc).hour)
+    chains_to_try = [chain] if chain == "8453" else [chain, "8453"]
+
     ledger = _load_ledger()
-    movers = DF.get_base_movers(limit=10)
-    cands = movers.get("biggest_movers") or []
-    # prefer big movers with a resolvable token; fall back to top volume pools
-    for m in cands:
-        # movers from GeckoTerminal are pool-named; we need a token address, so we
-        # search DexScreener for the symbol to resolve an address.
-        name = (m.get("name") or "").split("/")[0].strip()
-        if not name:
+    for cid in chains_to_try:
+        chain_info = EVM_CHAINS.get(cid)
+        if not chain_info:
             continue
-        d = _get(f"https://api.dexscreener.com/latest/dex/search?q={urllib.parse.quote(name)}")
-        for p in (d.get("pairs") or []) if isinstance(d, dict) else []:
-            if str(p.get("chainId", "")).lower() == "base":
-                addr = (p.get("baseToken") or {}).get("address")
-                if addr and addr.lower() not in ledger:
-                    return {"address": addr, "hint": f"auto: mover {m.get('name')} {m.get('change_24h_pct')}%"}
+        get_movers = getattr(DF, "get_evm_movers", None)
+        movers = get_movers(chain_info["gecko"], limit=10) if get_movers else (
+            DF.get_base_movers(limit=10) if cid == "8453" else {})
+        cands = movers.get("biggest_movers") or []
+        for m in cands:
+            # movers from GeckoTerminal are pool-named; we need a token address, so we
+            # search DexScreener for the symbol to resolve an address.
+            name = (m.get("name") or "").split("/")[0].strip()
+            if not name:
+                continue
+            d = _get(f"https://api.dexscreener.com/latest/dex/search?q={urllib.parse.quote(name)}")
+            for p in (d.get("pairs") or []) if isinstance(d, dict) else []:
+                if str(p.get("chainId", "")).lower() == chain_info["dex"]:
+                    addr = (p.get("baseToken") or {}).get("address")
+                    if addr and not ledger.get(_ledger_key(addr, cid)) and not (
+                            cid == "8453" and addr.lower() in ledger):
+                        return {"address": addr, "chain": cid,
+                                "hint": f"auto: {chain_info['name']} mover {m.get('name')} {m.get('change_24h_pct')}%"}
     return None
 
 
@@ -548,6 +658,21 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     short = target[:10]
     path = os.path.join(INVEST_DIR, f"investigation-{stamp}-{short}.md")
     sym = dex.get("symbol") or verif.get("name") or "unknown"
+    # Real, currently-live production bug fixed here: PR #78 (2026-07-05)
+    # replaced the in-body emoji badges with verdict_stamp()'s image badge
+    # but never updated this function's `return path, sym, emoji` (or the
+    # caller's unpacking / print statement) to match — `emoji` was never
+    # assigned anywhere, so every single call to write_report() has been
+    # raising an unconditional NameError on its own return statement ever
+    # since. Confirmed real consequence: since this crash happens AFTER the
+    # .md report is written but BEFORE investigate() reaches log_memory()/
+    # update_catalog()/_update_ledger(), every real auto-cycle and
+    # review_ledger.py re-check for the past ~33 hours wrote a report file
+    # but never recorded it in the ledger — which is exactly why
+    # review_ledger.py's "oldest-checked first" sampler kept re-selecting
+    # the same frozen-timestamp address over and over (six re-investigations
+    # of one address in 13 hours, observed directly in intel/investigations/).
+    emoji = {"PROCEED": "🟢", "CAUTION": "🟡", "REJECT": "🔴"}.get(verdict, "⚪")
 
     L = []
     L.extend(letterhead_md(f"Investigation — {sym}"))
@@ -558,7 +683,8 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     # "- **" to build LLM grounding context, so the verdict has to exist in
     # that form somewhere too, not only as a "![...]" badge image line.
     L.append(f"- **Target:** `{target}`")
-    L.append(f"- **Chain:** {chain} (Base)")
+    chain_display = (EVM_CHAINS.get(str(chain)) or {}).get("name", "unknown")
+    L.append(f"- **Chain:** {chain} ({chain_display})")
     L.append(f"- **Date:** {now_iso()}")
     L.append(f"- **Verdict:** {verdict} ({s}/100)")
     L.append("")
@@ -600,7 +726,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- GoPlus returned no security profile for this token.")
     L.append("")
-    L.append("## On-chain Presence (Base RPC)")
+    L.append(f"## On-chain Presence ({chain_display} RPC)")
     L.append(f"- Is contract: {onchain.get('is_contract')}")
     L.append(f"- Code size: {onchain.get('code_size_bytes')} bytes")
     L.append("")
@@ -657,18 +783,19 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     return path, sym, emoji
 
 
-def log_memory(target, sym, verdict, s, reasons, report_rel):
+def log_memory(target, sym, verdict, s, reasons, report_rel, chain="8453"):
     if not append_to_memory:
         return
+    chain_tag = (EVM_CHAINS.get(str(chain)) or {}).get("gecko", "base")
     try:
         append_to_memory(
             category="finding",
             title=f"Investigation: {sym} ({target[:10]}) → {verdict} {s}/100",
             content="; ".join(reasons)[:1800] or "clean across automated checks",
             source="agents/investigate.py",
-            tags=["investigation", "base", verdict.lower(), sym.lower()],
+            tags=["investigation", chain_tag, verdict.lower(), sym.lower()],
             confidence=0.9 if verdict != "CAUTION" else 0.75,
-            metadata={"target": target, "score": s, "verdict": verdict, "report": report_rel},
+            metadata={"target": target, "chain": str(chain), "score": s, "verdict": verdict, "report": report_rel},
         )
     except Exception as e:
         print(f"[investigate] memory log failed: {e}")
@@ -710,16 +837,59 @@ def _save_ledger(ledger):
         f.write("\n")
 
 
-def ledger_entry(address):
-    return _load_ledger().get(address.lower())
+def _ledger_key(address, chain="8453"):
+    # Chain-qualified so the same address on two different EVM chains (rare,
+    # but real via CREATE2 or coincidence) doesn't collide in the ledger.
+    return f"{chain}:{address.lower()}"
 
 
-def _update_ledger(address, sym, verdict, s, report_rel):
+def ledger_entry(address, chain="8453"):
     ledger = _load_ledger()
-    key = address.lower()
-    entry = ledger.get(key, {"first_investigated": now_iso(), "times_investigated": 0, "history": []})
+    entry = ledger.get(_ledger_key(address, chain))
+    if entry is not None:
+        return entry
+    # Legacy fallback: every entry written before multi-chain support was
+    # keyed by bare lowercase address (implicitly Base). Without this, the
+    # migration would silently re-investigate every address already on
+    # record the first time this runs post-upgrade.
+    if str(chain) == "8453":
+        return ledger.get(address.lower())
+    return None
+
+
+def _deployer_repeat_offender(creator_address, chain, exclude_address):
+    """Scan the ledger for another address (excluding this one) sharing the
+    same deployer/creator with a prior CAUTION or REJECT verdict. Returns a
+    short description if found, else None. This is what connects serial
+    copycat campaigns (same deployer, different vanity address each time)
+    instead of scoring every variant as a fully independent unknown target."""
+    if not creator_address:
+        return None
+    creator_l = creator_address.lower()
+    exclude_key = _ledger_key(exclude_address, chain)
+    for key, entry in _load_ledger().items():
+        if key == exclude_key:
+            continue
+        if (entry.get("creator_address") or "").lower() != creator_l:
+            continue
+        if entry.get("last_verdict") in ("CAUTION", "REJECT"):
+            return f"{entry.get('symbol', '?')} ({entry.get('address', key)}) — {entry.get('last_verdict')} {entry.get('last_score')}/100"
+    return None
+
+
+def _update_ledger(address, sym, verdict, s, report_rel, chain="8453", creator_address=None):
+    ledger = _load_ledger()
+    key = _ledger_key(address, chain)
+    # Migrate a legacy bare-address entry to the chain-qualified key on first
+    # re-touch, rather than leaving a stale duplicate behind.
+    legacy_key = address.lower()
+    prior = ledger.pop(legacy_key, None) if str(chain) == "8453" and legacy_key in ledger else None
+    entry = ledger.get(key) or prior or {"first_investigated": now_iso(), "times_investigated": 0, "history": []}
     entry["address"] = address  # original checksum/case, for display — key stays lowercase for lookup
+    entry["chain"] = str(chain)
     entry["symbol"] = sym
+    if creator_address:
+        entry["creator_address"] = creator_address
     entry["last_investigated"] = now_iso()
     entry["times_investigated"] = entry.get("times_investigated", 0) + 1
     entry["last_verdict"] = verdict
@@ -746,10 +916,11 @@ def regenerate_lists(ledger):
         rows = sorted(by_verdict[verdict], key=lambda kv: kv[1].get("last_investigated", ""), reverse=True)
         lines = [f"# VAPE {titles[verdict]}", "",
                  f"_Regenerated {now_iso()} — {len(rows)} address(es) currently on record with a last verdict of {verdict}._",
-                 "", "| Symbol | Address | Score | Times Checked | Last Investigated |",
-                 "|--------|---------|-------|----------------|--------------------|"]
+                 "", "| Symbol | Chain | Address | Score | Times Checked | Last Investigated |",
+                 "|--------|-------|---------|-------|----------------|--------------------|"]
         for addr, entry in rows:
-            lines.append(f"| {entry.get('symbol', '?')} | `{entry.get('address', addr)}` | {entry.get('last_score')}/100 | "
+            chain_name = (EVM_CHAINS.get(str(entry.get("chain", "8453"))) or {}).get("name", entry.get("chain", "Base"))
+            lines.append(f"| {entry.get('symbol', '?')} | {chain_name} | `{entry.get('address', addr)}` | {entry.get('last_score')}/100 | "
                           f"{entry.get('times_investigated', 1)} | {entry.get('last_investigated', '?')} |")
         with open(path, "w") as f:
             f.write("\n".join(lines) + "\n")
@@ -760,7 +931,7 @@ def investigate(address, chain="8453", hint="", force=False):
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
 
-    existing = ledger_entry(address)
+    existing = ledger_entry(address, chain)
     if not force and existing:
         print(f"[investigate] skip {address} — already on record: {existing['last_verdict']} "
               f"{existing['last_score']}/100 on {existing['last_investigated']} "
@@ -769,21 +940,23 @@ def investigate(address, chain="8453", hint="", force=False):
         return {"target": address, "skipped": "already_investigated",
                 "last_verdict": existing["last_verdict"], "last_score": existing["last_score"]}
 
-    print(f"[investigate] target {address} ({hint})")
+    print(f"[investigate] target {address} on {(EVM_CHAINS.get(str(chain)) or {}).get('name', chain)} ({hint})")
     gp = goplus_security(address, chain)
-    dex = dexscreener(address)
-    onchain = onchain_presence(address)
+    dex = dexscreener(address, chain)
+    onchain = onchain_presence(address, chain)
     verif = contract_verification(address, chain)
     corr = hack_correlation(gp)
     prelim_sym = dex.get("symbol") or verif.get("name") or "unknown"
     web_rep = web_reputation_check(prelim_sym, address)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep)
+    creator_address = gp.get("creator_address")
+    deployer_repeat = _deployer_repeat_offender(creator_address, chain, address)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat)
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
-    log_memory(address, sym, verdict, s, reasons, rel)
+    log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
-    ledger = _update_ledger(address, sym, verdict, s, rel)
+    ledger = _update_ledger(address, sym, verdict, s, rel, chain, creator_address)
     regenerate_lists(ledger)
 
     print(f"[investigate] {emoji} {verdict} {s}/100 — {sym} → {rel}")
@@ -800,18 +973,19 @@ def main():
 
     target = None
     hint = ""
+    chain = args.chain
     if args.address:
         target = args.address
     elif args.auto:
         picked = auto_target()
         if picked:
-            target, hint = picked["address"], picked.get("hint", "")
+            target, hint, chain = picked["address"], picked.get("hint", ""), picked.get("chain", args.chain)
         else:
             print("[investigate] no auto target found this cycle"); return
     else:
         ap.print_help(); return
 
-    result = investigate(target, args.chain, hint, force=bool(args.address))
+    result = investigate(target, chain, hint, force=bool(args.address))
     print(json.dumps(result, indent=2))
 
 

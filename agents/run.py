@@ -237,29 +237,79 @@ def _recent_report_digests(n=5):
     return digests
 
 
+RUN_STATE_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "run_report_state.json")
+_NARRATED_CAP = 500  # rolling cap so this file doesn't grow forever
+
+
+def _load_run_state():
+    try:
+        with open(RUN_STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {"narrated_investigations": []}
+
+
+def _save_run_state(state):
+    try:
+        os.makedirs(os.path.dirname(RUN_STATE_PATH), exist_ok=True)
+        state["narrated_investigations"] = state.get("narrated_investigations", [])[-_NARRATED_CAP:]
+        with open(RUN_STATE_PATH, "w") as f:
+            json.dump(state, f, indent=2)
+            f.write("\n")
+    except Exception:
+        pass
+
+
 def _recent_investigations(n=5):
-    """Pull the last N real deep-investigation verdicts (agents/investigate.py output).
+    """Pull the last N real deep-investigation verdicts (agents/investigate.py output)
+    that this bounty cycle hasn't already narrated in a prior report.
 
     This is VAPE's actual bounty-hunting work product — feed it as primary signal
     instead of asking the LLM to reason about targets it has never actually recon'd.
+
+    Real bug this closes: the old version just grabbed the N most-recently-
+    modified files by mtime with no memory of what was already reported. When
+    agents/investigate.py --auto found nothing genuinely new for hours/days at
+    a stretch (a real, observed failure mode — see auto_target()'s narrow
+    candidate pool), the exact same 2-3 stale investigation files kept being
+    handed to the LLM as "recent" grounding cycle after cycle, producing
+    near-identical narration hour after hour despite the system prompt's
+    explicit "never repeat a prior cycle's framing" instruction — the model
+    can't invent novelty from grounding data that hasn't actually changed.
+    Tracking what's already been narrated (skillforge/memory/run_report_state.json,
+    same pattern as agents/self_improve.py's addressed_findings) means a
+    cycle with nothing new gets an empty investigations block, correctly
+    pushing the report toward SIGNAL: LOW instead of re-telling an old story.
     """
     import glob
+    state = _load_run_state()
+    already = set(state.get("narrated_investigations", []))
     digests = []
+    fresh_basenames = []
     try:
         inv_dir = os.path.join(_REPO_ROOT, "intel", "investigations")
         files = sorted(glob.glob(os.path.join(inv_dir, "*.md")),
-                        key=os.path.getmtime, reverse=True)[:n]
+                        key=os.path.getmtime, reverse=True)
         for fp in files:
+            base = os.path.basename(fp)
+            if base in already:
+                continue
             try:
                 with open(fp) as fh:
                     lines = fh.readlines()
                 head = [l.strip() for l in lines if l.startswith("# ") or l.startswith("- **")]
                 if head:
                     digests.append(" | ".join(head))
+                    fresh_basenames.append(base)
             except Exception:
                 continue
+            if len(digests) >= n:
+                break
     except Exception:
         pass
+    if fresh_basenames:
+        state["narrated_investigations"] = state.get("narrated_investigations", []) + fresh_basenames
+        _save_run_state(state)
     return digests
 
 
