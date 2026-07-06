@@ -35,8 +35,8 @@ everywhere else.
 Writes directly into the same Cloudflare KV namespace worker/src/lib/
 jobLog.ts uses, via Cloudflare's REST API (this runs in GitHub Actions,
 outside the Workers runtime, so it can't import that file directly) —
-replicating its exact RECENT_JOBS/TOTALS/STATS_DAILY:<date> read-modify-
-write shape so the two data sources never drift apart. Dedupes by
+replicating its exact RECENT_JOBS/TOTALS/DAILY_HISTORY read-modify-write
+shape so the two data sources never drift apart. Dedupes by
 transaction hash, so it's safe to re-run (e.g. periodically, to catch any
 new real transfer that predates this ledger's specific launch moment —
 though going forward every new payment is already logged live).
@@ -221,6 +221,7 @@ def main():
         print(f"X402_BACKFILL_RESET set — dropping {dropped} previously-backfilled record(s) to reclassify from scratch (keeping {len(live_only)} live-logged record(s)).")
         recent = live_only
         totals = {"jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {}}
+        daily_by_date = {}
         for j in recent:
             totals["jobs"] += 1
             if j.get("status") == "error":
@@ -234,13 +235,19 @@ def main():
             if j.get("status") != "error":
                 off["revenue_usd"] = round(off["revenue_usd"] + j["amount_usd"], 6)
             totals["by_offering"][j["offering"]] = off
+            day = j["ts"][:10]
+            entry = daily_by_date.setdefault(day, {"date": day, "jobs": 0, "revenue_usd": 0})
+            entry["jobs"] += 1
+            if j.get("status") != "error":
+                entry["revenue_usd"] = round(entry["revenue_usd"] + j["amount_usd"], 6)
     else:
         recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
         totals = cf_kv_get(account_id, namespace_id, cf_token, "TOTALS") or {
             "jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {},
         }
+        daily_history = cf_kv_get(account_id, namespace_id, cf_token, "DAILY_HISTORY") or []
+        daily_by_date = {d["date"]: d for d in daily_history}
     seen_hashes = {j.get("tx_hash") for j in recent if j.get("tx_hash")}
-    daily_cache = {}
     block_ts_cache = {}
 
     added = 0
@@ -282,20 +289,19 @@ def main():
         totals["by_offering"][record["offering"]] = off
 
         day = ts_iso[:10]
-        if day not in daily_cache:
-            daily_cache[day] = cf_kv_get(account_id, namespace_id, cf_token, f"STATS_DAILY:{day}") or {"jobs": 0, "revenue_usd": 0}
-        daily_cache[day]["jobs"] += 1
-        daily_cache[day]["revenue_usd"] = round(daily_cache[day]["revenue_usd"] + amount_usd, 6)
+        entry = daily_by_date.setdefault(day, {"date": day, "jobs": 0, "revenue_usd": 0})
+        entry["jobs"] += 1
+        entry["revenue_usd"] = round(entry["revenue_usd"] + amount_usd, 6)
 
-    if not added:
+    if not added and not reset_first:
         print("Nothing new to backfill — every real on-chain transfer is already logged (or none exist yet).")
         return 0
 
     recent.sort(key=lambda j: j["ts"], reverse=True)
     cf_kv_put(account_id, namespace_id, cf_token, "RECENT_JOBS", recent[:200])
     cf_kv_put(account_id, namespace_id, cf_token, "TOTALS", totals)
-    for day, bucket in daily_cache.items():
-        cf_kv_put(account_id, namespace_id, cf_token, f"STATS_DAILY:{day}", bucket, ttl=60 * 60 * 24 * 100)
+    daily_history = sorted(daily_by_date.values(), key=lambda d: d["date"])[-400:]
+    cf_kv_put(account_id, namespace_id, cf_token, "DAILY_HISTORY", daily_history)
 
     print(f"Backfilled {added} real historical job(s) from on-chain data.")
     print(json.dumps(totals, indent=2))

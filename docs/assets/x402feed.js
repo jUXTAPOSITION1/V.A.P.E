@@ -43,11 +43,16 @@ async function directoryLinks() {
     return _directoryLinks;
 }
 
+const RANGE_BTN_ACTIVE = ['bg-violet-500/15', 'text-violet-300'];
+const RANGE_BTN_INACTIVE = ['text-zinc-500', 'hover:text-zinc-200', 'hover:bg-white/5'];
+
 const X402Feed = {
     _chart: null,
     _pollHandle: null,
+    _days: 30,
 
     async init() {
+        this._wireRangeToggle();
         await Promise.all([this._loadStats(), this._loadFeed(), this._renderDirectoryLinks()]);
         // 25s: cheap enough not to hammer the worker's edge cache (both
         // endpoints cache 10-30s server-side anyway), frequent enough that
@@ -55,6 +60,24 @@ const X402Feed = {
         if (!this._pollHandle) {
             this._pollHandle = setInterval(() => { this._loadStats(); this._loadFeed(); }, 25000);
         }
+    },
+
+    _wireRangeToggle() {
+        const wrap = document.getElementById('x402-range-toggle');
+        if (!wrap) return;
+        wrap.querySelectorAll('.x402-range-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const days = Number(btn.dataset.days) || 30;
+                if (days === this._days) return;
+                this._days = days;
+                wrap.querySelectorAll('.x402-range-btn').forEach(b => {
+                    const active = b === btn;
+                    b.classList.remove(...RANGE_BTN_ACTIVE, ...RANGE_BTN_INACTIVE);
+                    b.classList.add(...(active ? RANGE_BTN_ACTIVE : RANGE_BTN_INACTIVE));
+                });
+                this._loadStats();
+            });
+        });
     },
 
     async _renderDirectoryLinks() {
@@ -78,7 +101,7 @@ const X402Feed = {
         const setTxt = (id, v) => { const n = document.getElementById(id); if (n) n.textContent = v; };
         const updated = document.getElementById('x402-updated');
         try {
-            const r = await fetch(`${window.WORKER_BASE}/x402/stats?days=30`);
+            const r = await fetch(`${window.WORKER_BASE}/x402/stats?days=${this._days}`);
             if (r.status === 503) {
                 this._notConfigured();
                 return;
@@ -88,12 +111,12 @@ const X402Feed = {
             const settled = t.jobs - (t.errors || 0);
             const successRate = t.jobs ? Math.round((settled / t.jobs) * 100) : null;
             setTxt('x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '—');
+            setTxt('rep-x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '—');
             setTxt('x402-revenue', t.revenue_usd != null ? '$' + t.revenue_usd.toFixed(2) : '—');
             setTxt('x402-success', successRate != null ? successRate + '%' : '—');
-            if (updated) updated.innerHTML = `<span class="w-2 h-2 bg-cyan-500 rounded-full live-dot"></span>live`;
+            if (updated) updated.innerHTML = `<span class="w-2 h-2 bg-emerald-500 rounded-full live-dot"></span>live`;
 
             this._renderChart(stats.daily || []);
-            this._renderTracker(t);
         } catch (e) {
             if (updated) updated.textContent = 'ledger unavailable';
         }
@@ -129,7 +152,7 @@ const X402Feed = {
             ? `<span class="px-1.5 py-0.5 rounded text-[10px] shrink-0 ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
             : '<span class="text-zinc-700 text-[10px] shrink-0">—</span>';
         const tx = j.tx_hash
-            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" class="text-cyan-500 hover:underline truncate">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
+            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" class="text-zinc-300 hover:text-white underline decoration-zinc-700 truncate">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
             : '<span class="text-zinc-700">unsettled</span>';
         return `
         <div class="flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-lg px-2.5 py-2 whitespace-nowrap overflow-x-auto">
@@ -137,7 +160,7 @@ const X402Feed = {
             ${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}
             <span class="text-zinc-200 shrink-0 min-w-[52px]">${escapeHtml(label)}</span>
             <span class="text-zinc-600 shrink-0">${escapeHtml(j.offering)}</span>
-            <span class="text-cyan-400 shrink-0">$${Number(j.amount_usd).toFixed(2)}</span>
+            <span class="text-zinc-100 font-medium shrink-0">$${Number(j.amount_usd).toFixed(2)}</span>
             ${verdictPill}
             <span class="text-zinc-600 shrink-0">${j.latency_ms != null ? j.latency_ms + 'ms' : '—'}</span>
             ${j.backfilled ? '<span class="text-amber-500/70 text-[10px] shrink-0" title="Reconstructed from on-chain history — logged after the fact, not watched live">hist</span>' : ''}
@@ -146,23 +169,48 @@ const X402Feed = {
         </div>`;
     },
 
+    // At wider ranges, one bar per day is unreadable — aggregate into
+    // weekly (90d view) or monthly (1y view) buckets. 30d and under stays
+    // daily since the raw /x402/stats?days= array is already that
+    // granularity and there's nothing to gain by collapsing it.
+    _bucketize(daily, days) {
+        if (days <= 30 || daily.length <= 31) return daily;
+        const groupSize = days > 180 ? 30 : 7;
+        const buckets = [];
+        for (let i = 0; i < daily.length; i += groupSize) {
+            const slice = daily.slice(i, i + groupSize);
+            if (!slice.length) continue;
+            buckets.push({
+                date: slice[slice.length - 1].date,
+                jobs: slice.reduce((s, d) => s + d.jobs, 0),
+                revenue_usd: slice.reduce((s, d) => s + d.revenue_usd, 0),
+            });
+        }
+        return buckets;
+    },
+
     _renderChart(daily) {
         const canvas = document.getElementById('x402Chart');
         if (!canvas || typeof Chart === 'undefined') return;
-        const labels = daily.map(d => new Date(d.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
-        const revenue = daily.map(d => d.revenue_usd);
-        const jobs = daily.map(d => d.jobs);
+        const bucketed = this._bucketize(daily, this._days);
+        const labels = bucketed.map(d => new Date(d.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
+        const revenue = bucketed.map(d => d.revenue_usd);
+        const jobs = bucketed.map(d => d.jobs);
         if (this._chart) this._chart.destroy();
         const ctx = canvas.getContext('2d');
+        // Violet is this site's established "engineering ledger" accent
+        // (see the Development Ledger section) — used here as the one
+        // deliberate color, with the Jobs line kept neutral white/grey so
+        // it reads as data, not decoration.
         const g = ctx.createLinearGradient(0, 0, 0, 180);
-        g.addColorStop(0, 'rgba(34,211,238,0.35)'); g.addColorStop(1, 'rgba(34,211,238,0)');
+        g.addColorStop(0, 'rgba(167,139,250,0.35)'); g.addColorStop(1, 'rgba(167,139,250,0)');
         this._chart = new Chart(canvas, {
             type: 'bar',
             data: {
                 labels,
                 datasets: [
-                    { label: 'Revenue (USD)', data: revenue, backgroundColor: g, borderColor: '#22d3ee', borderWidth: 1, yAxisID: 'y', order: 2 },
-                    { label: 'Jobs', data: jobs, type: 'line', borderColor: '#fbbf24', backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, yAxisID: 'y1', order: 1 },
+                    { label: 'Revenue (USD)', data: revenue, backgroundColor: g, borderColor: '#a78bfa', borderWidth: 1, yAxisID: 'y', order: 2 },
+                    { label: 'Jobs', data: jobs, type: 'line', borderColor: '#d4d4d8', backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, yAxisID: 'y1', order: 1 },
                 ],
             },
             options: {
@@ -177,21 +225,6 @@ const X402Feed = {
         });
     },
 
-    // Compact live tracker line embedded in the Track Record section (see
-    // docs/index.html) — kept hidden until real data exists, rather than
-    // showing a zeroed/placeholder tracker for a feed nobody's used yet.
-    _renderTracker(totals) {
-        const wrap = document.getElementById('rep-x402-tracker');
-        const summary = document.getElementById('rep-x402-summary');
-        if (!wrap || !summary) return;
-        if (!totals.jobs) { wrap.classList.add('hidden'); return; }
-        wrap.classList.remove('hidden');
-        const settled = totals.jobs - (totals.errors || 0);
-        summary.textContent = `${settled.toLocaleString()} x402 job${settled === 1 ? '' : 's'} settled · `
-            + `$${(totals.revenue_usd || 0).toFixed(2)} revenue`
-            + (totals.last_job_ts ? ` · last job ${ago(totals.last_job_ts)}` : '');
-    },
-
     _notConfigured() {
         const feedEl = document.getElementById('x402-feed');
         if (feedEl) feedEl.innerHTML = `<div class="text-center py-8 text-zinc-500 text-xs">
@@ -200,8 +233,6 @@ const X402Feed = {
         </div>`;
         const updated = document.getElementById('x402-updated');
         if (updated) updated.textContent = 'not configured';
-        const wrap = document.getElementById('rep-x402-tracker');
-        if (wrap) wrap.classList.add('hidden');
         if (this._pollHandle) { clearInterval(this._pollHandle); this._pollHandle = null; }
     },
 };

@@ -72,15 +72,25 @@ export interface Totals {
   by_offering: Record<string, OfferingTotals>;
 }
 
-interface DailyBucket {
+export interface DailyEntry {
+  date: string;
   jobs: number;
   revenue_usd: number;
 }
 
 const RECENT_KEY = "RECENT_JOBS";
 const TOTALS_KEY = "TOTALS";
+const DAILY_HISTORY_KEY = "DAILY_HISTORY";
 const RECENT_CAP = 200;
-const DAILY_PREFIX = "STATS_DAILY:";
+// ~13 months of daily entries — comfortably covers the site's longest
+// chart view (1 year) with room to spare, while keeping this a single
+// small KV value rather than one key per day. That per-day-key design
+// (STATS_DAILY:<date>, one KV GET per requested day) is what this
+// replaced: querying a 90-day range meant 90 parallel subrequests from a
+// single Worker invocation, uncomfortably close to Cloudflare's
+// documented free-plan cap of 50 subrequests per request — a 365-day
+// view would have failed outright, not just been slow.
+const DAILY_HISTORY_CAP = 400;
 
 function dateKey(iso: string): string {
   return iso.slice(0, 10); // YYYY-MM-DD
@@ -120,13 +130,17 @@ export async function logJob(kv: KVLike | undefined, record: JobRecord): Promise
     totals.by_offering[record.offering] = off;
     await kv.put(TOTALS_KEY, JSON.stringify(totals));
 
-    const dKey = DAILY_PREFIX + dateKey(record.ts);
-    const daily = await readJson<DailyBucket>(kv, dKey, { jobs: 0, revenue_usd: 0 });
-    daily.jobs += 1;
-    if (record.status === "settled") daily.revenue_usd += record.amount_usd;
-    // 100 days is plenty for any chart window this feed will ever show, and
-    // keeps a long-forgotten deploy from accumulating KV keys forever.
-    await kv.put(dKey, JSON.stringify(daily), { expirationTtl: 60 * 60 * 24 * 100 });
+    const today = dateKey(record.ts);
+    const dailyHistory = await readJson<DailyEntry[]>(kv, DAILY_HISTORY_KEY, []);
+    let entry = dailyHistory.find((d) => d.date === today);
+    if (!entry) {
+      entry = { date: today, jobs: 0, revenue_usd: 0 };
+      dailyHistory.push(entry);
+    }
+    entry.jobs += 1;
+    if (record.status === "settled") entry.revenue_usd += record.amount_usd;
+    dailyHistory.sort((a, b) => a.date.localeCompare(b.date));
+    await kv.put(DAILY_HISTORY_KEY, JSON.stringify(dailyHistory.slice(-DAILY_HISTORY_CAP)));
   } catch {
     // Never let logging failure surface to a paying caller.
   }
@@ -140,19 +154,22 @@ export async function getFeed(kv: KVLike | undefined, limit = 50): Promise<JobRe
 
 export async function getStats(kv: KVLike | undefined, days = 30) {
   if (!kv) return null;
-  const totals = await readJson<Totals>(kv, TOTALS_KEY, {
-    jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {},
-  });
+  // Exactly 2 KV reads regardless of `days` — the old design did one GET
+  // per requested day, which meant a 90-day chart alone could approach
+  // Cloudflare's 50-subrequest-per-request cap on the free plan.
+  const [totals, dailyHistory] = await Promise.all([
+    readJson<Totals>(kv, TOTALS_KEY, {
+      jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {},
+    }),
+    readJson<DailyEntry[]>(kv, DAILY_HISTORY_KEY, []),
+  ]);
+  const byDate = new Map(dailyHistory.map((d) => [d.date, d]));
   const now = new Date();
-  const dailyKeys: string[] = [];
-  const dates: string[] = [];
+  const daily: DailyEntry[] = [];
   for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(now.getTime() - i * 86400000);
-    const ds = d.toISOString().slice(0, 10);
-    dates.push(ds);
-    dailyKeys.push(DAILY_PREFIX + ds);
+    const ds = new Date(now.getTime() - i * 86400000).toISOString().slice(0, 10);
+    const found = byDate.get(ds);
+    daily.push({ date: ds, jobs: found?.jobs ?? 0, revenue_usd: found?.revenue_usd ?? 0 });
   }
-  const buckets = await Promise.all(dailyKeys.map((k) => readJson<DailyBucket>(kv, k, { jobs: 0, revenue_usd: 0 })));
-  const daily = dates.map((date, i) => ({ date, jobs: buckets[i].jobs, revenue_usd: buckets[i].revenue_usd }));
   return { totals, daily };
 }

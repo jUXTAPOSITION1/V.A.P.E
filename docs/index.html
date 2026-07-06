@@ -185,7 +185,7 @@
                         <p class="text-xs text-zinc-500 mt-0.5">Nothing below is typed in by hand — every number updates automatically from this repository and VAPE's on-chain identity. Tap any metric to see the record behind it.</p>
                     </div>
                 </div>
-                <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                <div id="rep-stats" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
                     <button onclick="App.gotoArchive('reports')" class="text-left bg-white/[0.04] border border-white/5 hover:border-blue-500/40 transition rounded-xl py-4 px-3">
                         <i class="fa-solid fa-file-lines text-zinc-600 text-xs mb-2"></i>
                         <div id="rep-reports" class="font-display text-2xl text-blue-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Reports</div>
@@ -214,42 +214,47 @@
                         <i class="fa-solid fa-graduation-cap text-zinc-600 text-xs mb-2 block"></i>
                         <div id="rep-skills" class="font-display text-2xl text-blue-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Skills</div>
                     </a>
+                    <a href="#x402-ledger" class="bg-white/[0.04] border border-white/5 hover:border-blue-500/40 transition rounded-xl py-4 px-3">
+                        <i class="fa-solid fa-money-bill-transfer text-zinc-600 text-xs mb-2 block"></i>
+                        <div id="rep-x402-jobs" class="font-display text-2xl text-blue-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">x402 Payments</div>
+                    </a>
                 </div>
                 <div class="flex items-center gap-2 text-xs mt-5">
                     <a id="rep-verify" href="#" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-400">Verify identity</a>
                     <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-400"><i class="fa-brands fa-x-twitter"></i> @based_vape</a>
                 </div>
                 <p id="rep-disclaimer" class="text-[11px] text-zinc-600 mt-3"></p>
-                <!-- populated by x402feed.js once real jobs exist; hidden until then -->
-                <div id="rep-x402-tracker" class="hidden mt-4 flex items-center gap-2 text-xs text-zinc-400 border-t border-white/5 pt-4">
-                    <span class="w-2 h-2 bg-cyan-500 rounded-full live-dot"></span>
-                    <span id="rep-x402-summary">Live x402 ledger syncing…</span>
-                    <a href="#x402-ledger" class="text-cyan-400 hover:underline ml-1">View live ledger <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
             </div>
         </section>
 
         <!-- ═══ 2.5 LIVE X402 LEDGER ═══ -->
-        <section id="x402-ledger" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden border border-cyan-500/10">
+        <section id="x402-ledger" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden border border-white/10">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2 relative">
-                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill-transfer text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">On-Chain Settlement</span></div>
+                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-violet-500/10 text-violet-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill-transfer text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">On-Chain Settlement</span></div>
                 <span id="x402-updated" class="text-[11px] text-zinc-500 flex items-center gap-1.5">syncing…</span>
             </div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3 relative">The Ledger</h2>
-            <p class="text-zinc-400 text-sm mb-9 max-w-3xl leading-relaxed relative">Every x402 job VAPE fulfills — settled or errored — logged the instant it happens,
-            not reported after the fact. Each entry carries the real Base settlement transaction from the x402 facilitator itself, so nothing here has
-            to be taken on VAPE's word alone.</p>
+            <p class="text-zinc-400 text-sm mb-9 max-w-3xl leading-relaxed relative">A running record of every x402 transaction VAPE settles — successful or
+            not — captured the moment it occurs, not compiled after the fact. Each entry is anchored to its actual settlement on Base, making this ledger
+            independently verifiable rather than a claim taken on trust.</p>
 
             <div id="x402-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-9 relative">
-                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-jobs" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Jobs settled</div></div>
-                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-revenue" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Revenue (USDC)</div></div>
-                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-success" class="font-display text-xl text-cyan-400">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Success rate</div></div>
-                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div class="font-display text-xl text-cyan-400"><i class="fa-solid fa-link text-sm"></i></div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Basescan-verified</div></div>
+                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-jobs" class="font-display text-xl text-zinc-100">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Jobs settled</div></div>
+                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-revenue" class="font-display text-xl text-zinc-100">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Revenue (USDC)</div></div>
+                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div id="x402-success" class="font-display text-xl text-zinc-100">—</div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Success rate</div></div>
+                <div class="text-center bg-white/[0.04] rounded-xl py-4 px-2 border border-white/5"><div class="font-display text-xl text-zinc-300"><i class="fa-solid fa-link text-sm"></i></div><div class="text-[10px] uppercase tracking-wider text-zinc-500 mt-1">Basescan-verified</div></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
                 <div class="lg:col-span-5">
-                    <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-4">Volume &amp; Revenue (30d)</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500">Volume &amp; Revenue</h3>
+                        <div id="x402-range-toggle" class="flex items-center gap-1 text-[10px] font-display">
+                            <button type="button" data-days="30" class="x402-range-btn px-2.5 py-1 rounded-md transition bg-violet-500/15 text-violet-300">30D</button>
+                            <button type="button" data-days="90" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">90D</button>
+                            <button type="button" data-days="365" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">1Y</button>
+                        </div>
+                    </div>
                     <div class="glass rounded-2xl p-4 border border-white/5"><canvas id="x402Chart" height="180"></canvas></div>
                 </div>
                 <div class="lg:col-span-7">
@@ -263,7 +268,7 @@
             </div>
 
             <div id="x402-directory-links" class="flex flex-wrap items-center gap-2 mt-8 text-[11px] relative"></div>
-            <p class="text-[11px] text-zinc-600 mt-4 relative">Logged in-house the moment the x402 facilitator confirms settlement (Cloudflare KV, <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank" class="text-cyan-500 hover:underline">worker/src/lib/jobLog.ts</a>), layered with independent on-chain proof — every settled job's transaction hash links to Basescan, and every offering below links to its real, independently-registered listing.</p>
+            <p class="text-[11px] text-zinc-600 mt-4 relative">Logged in-house the moment the x402 facilitator confirms settlement (Cloudflare KV, <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank" class="text-zinc-400 hover:text-white underline decoration-zinc-700">worker/src/lib/jobLog.ts</a>), layered with independent on-chain proof — every settled job's transaction hash links to Basescan, and every offering below links to its real, independently-registered listing.</p>
         </section>
 
         <!-- ═══ 3. LIVE INTELLIGENCE FEED ═══ -->

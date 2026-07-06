@@ -354,7 +354,9 @@ app.get("/x402/feed", cache({ cacheName: "vape-x402-feed", cacheControl: "max-ag
 
 app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-age=30" }), async (c) => {
   if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
-  const days = Math.min(Number(c.req.query("days")) || 30, 90);
+  // 400-day cap matches jobLog.ts's DAILY_HISTORY_CAP — safe now that
+  // getStats() reads one history record instead of one KV key per day.
+  const days = Math.min(Number(c.req.query("days")) || 30, 400);
   const stats = await getStats(c.env.VAPE_JOBS, days);
   return c.json(stats);
 });
