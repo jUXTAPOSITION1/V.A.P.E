@@ -56,7 +56,7 @@ def review_category(category, sample_size):
     results = []
     for addr, old_entry in _sample(category, sample_size):
         old_verdict, old_score = old_entry.get("last_verdict"), old_entry.get("last_score")
-        r = inv.investigate(old_entry.get("address", addr), force=True)
+        r = inv.investigate(old_entry.get("address", addr), old_entry.get("chain", "8453"), force=True)
         if r.get("error") or r.get("skipped"):
             continue
         new_verdict, new_score = r["verdict"], r["score"]

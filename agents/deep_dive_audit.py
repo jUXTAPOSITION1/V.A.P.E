@@ -186,8 +186,12 @@ def run_audit(address, chain="8453", callback_url=None):
 
     print(f"[deep_dive_audit] target {address} (chain {chain})")
     gp = inv.goplus_security(address, chain)
-    dex = inv.dexscreener(address)
-    onchain = inv.onchain_presence(address)
+    # Real bug fixed here: these two previously always defaulted to Base
+    # regardless of the requested `chain` — a paid deep-dive on any other
+    # chain would silently check Base's on-chain state / DexScreener pair
+    # instead of the actual target's.
+    dex = inv.dexscreener(address, chain)
+    onchain = inv.onchain_presence(address, chain)
     src = DF.get_contract_source(address, int(chain))
     if not isinstance(src, dict):
         src = {"error": "contract source lookup failed"}
@@ -201,7 +205,8 @@ def run_audit(address, chain="8453", callback_url=None):
     verif_for_score = {"checked": "error" not in src, "verified": src.get("verified"),
                        "name": src.get("contract_name"), "compiler": src.get("compiler"),
                        "proxy": src.get("proxy"), "implementation": src.get("implementation")}
-    score, verdict, reasons, positive_signals = inv.score(gp, dex, onchain, verif_for_score, web_rep)
+    deployer_repeat = inv._deployer_repeat_offender(gp.get("creator_address"), chain, address)
+    score, verdict, reasons, positive_signals = inv.score(gp, dex, onchain, verif_for_score, web_rep, deployer_repeat)
 
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result)
