@@ -102,20 +102,38 @@ def offering_for_amount(usd):
 
 
 def rpc_call(method, params):
+    """Handles HTTP 429 (rate limited) itself, centrally, for every RPC
+    call this script makes — confirmed live that a second full scan run
+    shortly after a successful first one gets rate-limited by the public
+    RPC. Backing off and retrying the SAME request is the right response
+    to a 429; it's a different failure mode from a "block range too
+    large" error, which needs a smaller range instead (handled by the
+    caller, since only eth_getLogs has a range to shrink)."""
     payload = json.dumps({"jsonrpc": "2.0", "method": method, "params": params, "id": 1}).encode()
-    req = urllib.request.Request(BASE_RPC, data=payload, headers={**UA, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        data = json.loads(r.read().decode())
-    if "error" in data:
-        raise RuntimeError(f"Base RPC error ({method}): {data['error']}")
-    return data["result"]
+    backoff = 1.0
+    while True:
+        try:
+            req = urllib.request.Request(BASE_RPC, data=payload, headers={**UA, "Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                data = json.loads(r.read().decode())
+            if "error" in data:
+                raise RuntimeError(f"Base RPC error ({method}): {data['error']}")
+            time.sleep(0.15)  # pace requests — be a good citizen on a public, shared RPC
+            return data["result"]
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or backoff > 60:
+                raise
+            print(f"Rate-limited (HTTP 429) on {method} — backing off {backoff:.0f}s...")
+            time.sleep(backoff)
+            backoff *= 2
 
 
 def fetch_usdc_transfer_logs(lookback_days):
     """Real USDC Transfer event logs (to PAY_TO_ADDRESS only) from Base's
     public RPC, paginated in chunks since eth_getLogs caps the block range
-    per call on public providers. Chunk size shrinks on a range-related
-    error and retries the same window rather than giving up."""
+    per call on public providers — shrinks the chunk and retries the same
+    window on a range-related error (rpc_call already handles rate limits
+    on its own, so anything reaching here is assumed range-related)."""
     latest = int(rpc_call("eth_blockNumber", []), 16)
     blocks_per_day = 86400 // BASE_BLOCK_TIME_SEC
     from_block = max(0, latest - lookback_days * blocks_per_day)
@@ -138,8 +156,6 @@ def fetch_usdc_transfer_logs(lookback_days):
             if chunk <= 50:
                 raise RuntimeError(f"eth_getLogs failed even at minimum chunk size: {e}")
             chunk = max(50, chunk // 2)
-            # retry the same `start` with a smaller window, no time.sleep
-            # needed here — the failure itself is the rate limiter.
     return logs
 
 
