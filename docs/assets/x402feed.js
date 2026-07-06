@@ -140,6 +140,7 @@ const X402Feed = {
             <span class="text-cyan-400 shrink-0">$${Number(j.amount_usd).toFixed(2)}</span>
             ${verdictPill}
             <span class="text-zinc-600 shrink-0">${j.latency_ms != null ? j.latency_ms + 'ms' : '—'}</span>
+            ${j.backfilled ? '<span class="text-amber-500/70 text-[10px] shrink-0" title="Reconstructed from on-chain history — logged after the fact, not watched live">hist</span>' : ''}
             <span class="ml-auto shrink-0">${tx}</span>
             <span class="text-zinc-700 shrink-0">${ago(j.ts)}</span>
         </div>`;
