@@ -202,8 +202,15 @@ const X402Feed = {
         // (see the Development Ledger section) — used here as the one
         // deliberate color, with the Jobs line kept neutral white/grey so
         // it reads as data, not decoration.
-        const g = ctx.createLinearGradient(0, 0, 0, 180);
+        const h = canvas.parentElement?.clientHeight || 256;
+        const g = ctx.createLinearGradient(0, 0, 0, h);
         g.addColorStop(0, 'rgba(167,139,250,0.35)'); g.addColorStop(1, 'rgba(167,139,250,0)');
+        // The canvas sits in a height-controlled wrapper (see docs/index.html)
+        // rather than deriving its height from a fixed aspect ratio — on
+        // narrow viewports a 2:1 ratio squashed the chart into an unreadable
+        // sliver, so maintainAspectRatio is off and the wrapper's own
+        // responsive Tailwind height (h-64 sm:h-72 lg:h-80) drives the size.
+        const narrow = window.innerWidth < 640;
         this._chart = new Chart(canvas, {
             type: 'bar',
             data: {
@@ -214,12 +221,12 @@ const X402Feed = {
                 ],
             },
             options: {
-                responsive: true, maintainAspectRatio: true,
-                plugins: { legend: { display: true, labels: { color: '#a1a1aa', boxWidth: 10, font: { size: 10 } } } },
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#a1a1aa', boxWidth: 10, font: { size: narrow ? 9 : 10 } } } },
                 scales: {
-                    y: { position: 'left', ticks: { color: '#52525b', callback: v => '$' + v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.04)' } },
-                    y1: { position: 'right', ticks: { color: '#52525b', stepSize: 1 }, grid: { display: false } },
-                    x: { ticks: { color: '#52525b', maxTicksLimit: 8 }, grid: { display: false } },
+                    y: { position: 'left', ticks: { color: '#52525b', font: { size: narrow ? 9 : 11 }, callback: v => '$' + v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.04)' } },
+                    y1: { position: 'right', ticks: { color: '#52525b', stepSize: 1, font: { size: narrow ? 9 : 11 } }, grid: { display: false } },
+                    x: { ticks: { color: '#52525b', maxTicksLimit: narrow ? 4 : 8, font: { size: narrow ? 9 : 11 } }, grid: { display: false } },
                 },
             },
         });
