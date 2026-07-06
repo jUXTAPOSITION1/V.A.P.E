@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-06T21:47:46Z",
+  "generated": "2026-07-06T23:09:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 323,
+    "reports": 324,
     "reports_by_type": {
-      "bounty": 180,
+      "bounty": 181,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 35,
-    "investigations": 46,
+    "investigations": 48,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260706-214746-0x25118290.md",
-      "title": "Investigation \u2014 RAIN",
-      "symbol": "RAIN",
-      "name": "RAIN",
-      "date": "2026-07-06T21:47:46Z",
-      "target": "0x25118290e6A5f4139381D072181157035864099d",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-5] Pair 24.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 170485 holders \u2014 reasonably distributed; Deep liquidity ($4,127,029); Custom verified source (not a mass-produced fact",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-214746-0x25118290.md"
+      "file": "investigation-20260706-230955-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-06T23:09:55Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-230955-0x454777B9.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260706_214424.md",
+      "file": "bounty_report_20260706_230939.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T21:44:24Z",
+      "date": "2026-07-06T23:09:39Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_214424.md",
-      "bytes": 10473
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10119% 24h (liq $1126804.3635) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_230939.md",
+      "bytes": 12163
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-230955-0x454777B9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-06T23:09:55Z",
+      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-230955-0x454777B9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260706-214746-0x25118290.md",
@@ -566,20 +580,20 @@
       "verdict": "PROCEED (90/100)",
       "key_finding": "Low liquidity $34,531",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-04",
-      "job_id": "auto",
-      "target": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
-      "symbol": "CLAUDE",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
-      "key_finding": "Mintable supply (dilution risk)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_230939.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T23:09:39Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10119% 24h (liq $1126804.3635) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_230939.md",
+      "bytes": 12163
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1228,17 +1242,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-12.md",
       "bytes": 1449
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_095035.md",
-      "title": "VAPE Report - 20260701_095035",
-      "date": "2026-07-01T09:50:35Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_095035.md",
-      "bytes": 5480
     }
   ],
   "broadcasts": [
@@ -1538,7 +1541,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48286683",
+      "version": "48293033",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1548,7 +1551,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.9 eth_dom 9.46 mcap_chg_24h 0.85",
+      "version": "btc_dom 55.95 eth_dom 9.48 mcap_chg_24h 1.0",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1591,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-05 Lazy Summer Protocol 6.0 M ['Ethereum'] Donation Attack",
+      "version": "2026-07-06 BonkDAO 20.0 M ['Solana'] Malicious Governance Proposal",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
