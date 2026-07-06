@@ -12,6 +12,10 @@ on:
         description: 'How many days of Base blocks to scan for USDC transfers'
         required: false
         default: '30'
+      reset:
+        description: 'Drop and reclassify all previously-backfilled records from scratch (true/false) — use after fixing the amount-matching logic'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read
@@ -36,6 +40,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           VAPE_JOBS_KV_ID: ${{ secrets.VAPE_JOBS_KV_ID }}
           X402_BACKFILL_LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '30' }}
+          X402_BACKFILL_RESET: ${{ github.event.inputs.reset || 'false' }}
         run: python -m agents.x402_ledger_backfill
 
       - name: Missing required secrets

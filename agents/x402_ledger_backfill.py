@@ -44,6 +44,9 @@ though going forward every new payment is already logged live).
 Usage (CI only — needs these as env vars):
   CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, VAPE_JOBS_KV_ID
   Optional: X402_BACKFILL_LOOKBACK_DAYS (default 30)
+  Optional: X402_BACKFILL_RESET=true — drop and reclassify every
+    previously-backfilled record from scratch (e.g. after fixing a bug in
+    the amount-matching logic below); live-logged records are untouched.
     python -m agents.x402_ledger_backfill
 """
 import json
@@ -186,10 +189,40 @@ def main():
     logs = fetch_usdc_transfer_logs(lookback_days)
     print(f"Found {len(logs)} real incoming USDC transfer(s) on-chain.")
 
-    recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
-    totals = cf_kv_get(account_id, namespace_id, cf_token, "TOTALS") or {
-        "jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {},
-    }
+    # RESET_FIRST: re-derive RECENT_JOBS/TOTALS from scratch instead of
+    # appending. Real use case, not speculative: this script infers
+    # `offering` from amount, so a fix to that inference logic (or a fix
+    # to PRICE_HISTORY) only actually corrects already-written entries if
+    # they're regenerated — dedup-by-hash otherwise silently preserves the
+    # old, now-wrong labels forever. Only reprocesses entries this script
+    # itself wrote (backfilled: true); anything logged live by jobLog.ts
+    # is real observed data, never touched.
+    reset_first = os.environ.get("X402_BACKFILL_RESET", "").lower() in ("1", "true", "yes")
+    if reset_first:
+        recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
+        live_only = [j for j in recent if not j.get("backfilled")]
+        dropped = len(recent) - len(live_only)
+        print(f"X402_BACKFILL_RESET set — dropping {dropped} previously-backfilled record(s) to reclassify from scratch (keeping {len(live_only)} live-logged record(s)).")
+        recent = live_only
+        totals = {"jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {}}
+        for j in recent:
+            totals["jobs"] += 1
+            if j.get("status") == "error":
+                totals["errors"] += 1
+            else:
+                totals["revenue_usd"] = round(totals["revenue_usd"] + j["amount_usd"], 6)
+            totals["first_job_ts"] = min(totals["first_job_ts"], j["ts"]) if totals["first_job_ts"] else j["ts"]
+            totals["last_job_ts"] = max(totals["last_job_ts"], j["ts"]) if totals["last_job_ts"] else j["ts"]
+            off = totals["by_offering"].get(j["offering"], {"count": 0, "revenue_usd": 0})
+            off["count"] += 1
+            if j.get("status") != "error":
+                off["revenue_usd"] = round(off["revenue_usd"] + j["amount_usd"], 6)
+            totals["by_offering"][j["offering"]] = off
+    else:
+        recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
+        totals = cf_kv_get(account_id, namespace_id, cf_token, "TOTALS") or {
+            "jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {},
+        }
     seen_hashes = {j.get("tx_hash") for j in recent if j.get("tx_hash")}
     daily_cache = {}
     block_ts_cache = {}
@@ -207,7 +240,12 @@ def main():
         record = {
             "id": f"{ts_iso}-backfill-{tx_hash[2:10]}",
             "ts": ts_iso,
-            "offering": offering_for_amount(round(amount_usd, 2)),
+            # amount_usd is already an exact figure derived from atomic USDC
+            # units — do NOT round to cents before matching. x402's "exact"
+            # payment scheme means a real offering payment lands at its
+            # quoted price to the atomic unit; rounding here previously let
+            # near-miss amounts (e.g. $0.0089) falsely match a $0.01 price.
+            "offering": offering_for_amount(amount_usd),
             "address": None, "chain_id": CHAIN_ID,
             "symbol": None, "name": None, "verdict": None,
             "status": "settled", "amount_usd": amount_usd, "latency_ms": None,
