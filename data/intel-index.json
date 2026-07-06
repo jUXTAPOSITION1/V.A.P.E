@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-06T20:21:12Z",
+  "generated": "2026-07-06T21:47:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 322,
+    "reports": 323,
     "reports_by_type": {
-      "bounty": 179,
+      "bounty": 180,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,39 +18,53 @@
       "attack": 1
     },
     "broadcasts": 35,
-    "investigations": 44,
+    "investigations": 46,
     "tools": 15,
     "tools_verified": 14,
-    "skills": 9
+    "skills": 11
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260706-195956-0x853a7c99.md",
-      "title": "Investigation \u2014 PLAY",
-      "symbol": "PLAY",
-      "name": "Play",
-      "date": "2026-07-06T19:59:56Z",
-      "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260706-214746-0x25118290.md",
+      "title": "Investigation \u2014 RAIN",
+      "symbol": "RAIN",
+      "name": "RAIN",
+      "date": "2026-07-06T21:47:46Z",
+      "target": "0x25118290e6A5f4139381D072181157035864099d",
+      "chain": "42161 (Arbitrum)",
       "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5009 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-195956-0x853a7c99.md"
+      "score": "85",
+      "summary": "Risk factors: [-5] Pair 24.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 170485 holders \u2014 reasonably distributed; Deep liquidity ($4,127,029); Custom verified source (not a mass-produced fact",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-214746-0x25118290.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260706_195941.md",
+      "file": "bounty_report_20260706_214424.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T19:59:41Z",
+      "date": "2026-07-06T21:44:24Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_195941.md",
-      "bytes": 12308
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_214424.md",
+      "bytes": 10473
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-214746-0x25118290.md",
+      "title": "Investigation \u2014 RAIN",
+      "symbol": "RAIN",
+      "name": "RAIN",
+      "date": "2026-07-06T21:47:46Z",
+      "target": "0x25118290e6A5f4139381D072181157035864099d",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-5] Pair 24.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 170485 holders \u2014 reasonably distributed; Deep liquidity ($4,127,029); Custom verified source (not a mass-produced fact",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-214746-0x25118290.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260706-195956-0x853a7c99.md",
@@ -563,20 +577,20 @@
       "verdict": "PROCEED (88/100)",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-04",
-      "job_id": "auto",
-      "target": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07",
-      "symbol": "claude",
-      "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
-      "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_214424.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T21:44:24Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_214424.md",
+      "bytes": 10473
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1225,17 +1239,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_095035.md",
       "bytes": 5480
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-01-08.md",
-      "title": "VAPE Macro & Micro Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-01-08.md",
-      "bytes": 2846
     }
   ],
   "broadcasts": [
@@ -1604,6 +1607,12 @@
   ],
   "skills": [
     {
+      "file": "defi-protocol-security-audit-playbook.md",
+      "title": "DeFi Protocol Security Audit Playbook",
+      "summary": "Distilled 2026-07-05T09:12:01Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/defi-protocol-security-audit-playbook.md"
+    },
+    {
       "file": "ai-agent-redteam.md",
       "title": "Skill: AI Agent & LLM Red-Teaming",
       "summary": "Tier: ai-redteam \u00b7 Tools: garak, promptfoo, deepteam \u00b7 Status: live (daily, redteam-deep.yml)",
@@ -1656,6 +1665,12 @@
       "title": "Skill: Writing a New VAPE Agent Script (Python)",
       "summary": "1. Start from the real-data-only rule, not from a mock. Every agent in this repo calls real, live APIs (GoPlus, DexScreener, DefiLlama, Base RPC, alternative.me, CoinGecko) and writes down exactly what came back \u2014 never ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/coding-python-agent.md"
+    },
+    {
+      "file": "smart-contract-investigation-and-tool-gap-analysis.md",
+      "title": "Smart Contract Investigation and Tool Gap Analysis",
+      "summary": "Distilled 2026-07-06T10:45:48Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/smart-contract-investigation-and-tool-gap-analysis.md"
     }
   ]
 }
