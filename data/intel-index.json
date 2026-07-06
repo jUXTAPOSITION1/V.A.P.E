@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T00:11:40Z",
+  "generated": "2026-07-06T04:49:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 317,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 31,
+    "broadcasts": 32,
     "investigations": 38,
     "tools": 15,
     "tools_verified": 14,
@@ -1179,6 +1179,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-06-04.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-06T04:00Z",
+      "summary": "2 rule-based anomaly flag(s) this cycle. Base TVL $4.40B, 13 targets on VAPE's permanent record (2 REJECT / 4 CAUTION / 7 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-06-04.md"
+    },
+    {
       "file": "broadcast-2026-07-05-19.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-05T19:00Z",
@@ -1380,13 +1387,6 @@
       "date": "2026-06-10T09:00Z",
       "summary": "Broadcast ID: broadcast-2026-06-10-09 Timestamp: 2026-06-10T09:00:00Z Window: 8 hours (01:00\u201309:00 UTC) Sources: 7 reports \u2014 security, macro, sentiment, base, virtuals, deep-dive, heartbeat Classification: COMMUNITY UPDATE",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-09.md"
-    },
-    {
-      "file": "agent-update-2026-06-10-08.md",
-      "title": "Agent Network Update",
-      "date": "2026-06-10T08:00Z",
-      "summary": "Date: 2026-06-10 08:00 UTC Report Type: Agent Network Update",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-08.md"
     }
   ],
   "tools": [
