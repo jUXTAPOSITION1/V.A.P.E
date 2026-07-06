@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T10:26:06Z",
+  "generated": "2026-07-06T11:11:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 319,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 32,
+    "broadcasts": 33,
     "investigations": 40,
     "tools": 15,
     "tools_verified": 14,
@@ -1205,6 +1205,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-06-11.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-06T11:00Z",
+      "summary": "2 rule-based anomaly flag(s) this cycle. Base TVL $4.37B, 13 targets on VAPE's permanent record (2 REJECT / 4 CAUTION / 7 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-06-11.md"
+    },
+    {
       "file": "broadcast-2026-07-06-04.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-06T04:00Z",
@@ -1406,13 +1413,6 @@
       "date": "2026-06-10T12:00Z",
       "summary": "1. If you operate an AI agent with wallet access: Audit your input validation pipeline NOW. The Grok-Bankr attack pattern is replicable against any agent that processes external content and can execute financial transactions. Implement transaction confirmation layers and spending limits.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-12.md"
-    },
-    {
-      "file": "broadcast-2026-06-10-09.md",
-      "title": "\ud83d\udce1 VAPE COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-10T09:00Z",
-      "summary": "Broadcast ID: broadcast-2026-06-10-09 Timestamp: 2026-06-10T09:00:00Z Window: 8 hours (01:00\u201309:00 UTC) Sources: 7 reports \u2014 security, macro, sentiment, base, virtuals, deep-dive, heartbeat Classification: COMMUNITY UPDATE",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-09.md"
     }
   ],
   "tools": [
