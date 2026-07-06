@@ -462,10 +462,20 @@ const App = {
         }
     },
     async _moversFromCoinGecko() {
-        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=base-ecosystem&order=price_change_percentage_24h_desc&per_page=30&page=1&sparkline=false&price_change_percentage=24h');
+        // Real bug fixed here (caught by review): CoinGecko's /coins/markets
+        // `order` param only accepts market_cap_desc/asc, volume_desc/asc, or
+        // id_desc/asc — price_change_percentage_24h_desc isn't a real value
+        // and was silently falling back to the default (market_cap_desc), so
+        // the "trending" tab was actually just market-cap-ranked, not movers
+        // at all. Fetch by market cap (a legitimate, broad pool of real Base
+        // ecosystem tokens), then sort by absolute 24h change client-side —
+        // same "biggest movers" definition already used server-side in
+        // agents/data_fetchers.py::get_evm_movers().
+        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=base-ecosystem&order=market_cap_desc&per_page=30&page=1&sparkline=false&price_change_percentage=24h');
         if (!res.ok) throw new Error(`coingecko coins/markets -> HTTP ${res.status}`);
         const coins = await res.json();
         if (!Array.isArray(coins) || !coins.length) throw new Error('coingecko returned no base-ecosystem coins');
+        coins.sort((a, b) => Math.abs(b.price_change_percentage_24h ?? 0) - Math.abs(a.price_change_percentage_24h ?? 0));
         // Normalized into the exact shape _renderMovers() already expects
         // (priceUsd / priceChange.h24 / volume.h24 / baseToken.symbol+name /
         // info.imageUrl / url) so that function needs zero changes regardless
