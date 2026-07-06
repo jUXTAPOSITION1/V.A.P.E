@@ -56,7 +56,18 @@ def review_category(category, sample_size):
     results = []
     for addr, old_entry in _sample(category, sample_size):
         old_verdict, old_score = old_entry.get("last_verdict"), old_entry.get("last_score")
-        r = inv.investigate(old_entry.get("address", addr), old_entry.get("chain", "8453"), force=True)
+        try:
+            r = inv.investigate(old_entry.get("address", addr), old_entry.get("chain", "8453"), force=True)
+        except Exception as e:
+            # Defense in depth: a real crash in one address's re-check (e.g.
+            # the write_report() emoji-NameError this session found and
+            # fixed) used to kill this entire batch before it reached
+            # _update_ledger() for ANY sampled address — including the ones
+            # that succeeded before the crash. One address's real failure
+            # should cost that address a re-check this cycle, not the
+            # whole self-review run.
+            print(f"[review_ledger] {old_entry.get('address', addr)} re-check crashed, skipping: {e}")
+            continue
         if r.get("error") or r.get("skipped"):
             continue
         new_verdict, new_score = r["verdict"], r["score"]

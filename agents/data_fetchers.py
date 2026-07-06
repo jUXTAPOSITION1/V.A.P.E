@@ -423,6 +423,12 @@ def _save_anomaly_state(state):
         pass
 
 
+def _age_hours(ts_str):
+    return (datetime.now(timezone.utc)
+            - datetime.strptime(ts_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            ).total_seconds() / 3600
+
+
 def _anomaly_is_stale_repeat(key, value, state):
     """True if `key` was already flagged recently with a near-identical value
     (same stuck anomaly, not a new event worth re-surfacing)."""
@@ -430,9 +436,7 @@ def _anomaly_is_stale_repeat(key, value, state):
     if not prev:
         return False
     try:
-        age_hours = (datetime.now(timezone.utc)
-                     - datetime.strptime(prev["ts"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
-                     ).total_seconds() / 3600
+        age_hours = _age_hours(prev["ts"])
     except Exception:
         return False
     if age_hours >= ANOMALY_COOLDOWN_HOURS:
@@ -464,9 +468,7 @@ def _filter_stale_mover_anomalies(mover_flags):
     cutoff_state = {}
     for k, v in state.items():
         try:
-            age_hours = (datetime.now(timezone.utc)
-                         - datetime.strptime(v["ts"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
-                         ).total_seconds() / 3600
+            age_hours = _age_hours(v["ts"])
             if age_hours < ANOMALY_COOLDOWN_HOURS * 4:
                 cutoff_state[k] = v
         except Exception:

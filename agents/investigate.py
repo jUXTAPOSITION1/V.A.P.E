@@ -658,6 +658,21 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     short = target[:10]
     path = os.path.join(INVEST_DIR, f"investigation-{stamp}-{short}.md")
     sym = dex.get("symbol") or verif.get("name") or "unknown"
+    # Real, currently-live production bug fixed here: PR #78 (2026-07-05)
+    # replaced the in-body emoji badges with verdict_stamp()'s image badge
+    # but never updated this function's `return path, sym, emoji` (or the
+    # caller's unpacking / print statement) to match — `emoji` was never
+    # assigned anywhere, so every single call to write_report() has been
+    # raising an unconditional NameError on its own return statement ever
+    # since. Confirmed real consequence: since this crash happens AFTER the
+    # .md report is written but BEFORE investigate() reaches log_memory()/
+    # update_catalog()/_update_ledger(), every real auto-cycle and
+    # review_ledger.py re-check for the past ~33 hours wrote a report file
+    # but never recorded it in the ledger — which is exactly why
+    # review_ledger.py's "oldest-checked first" sampler kept re-selecting
+    # the same frozen-timestamp address over and over (six re-investigations
+    # of one address in 13 hours, observed directly in intel/investigations/).
+    emoji = {"PROCEED": "🟢", "CAUTION": "🟡", "REJECT": "🔴"}.get(verdict, "⚪")
 
     L = []
     L.extend(letterhead_md(f"Investigation — {sym}"))
@@ -668,7 +683,8 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     # "- **" to build LLM grounding context, so the verdict has to exist in
     # that form somewhere too, not only as a "![...]" badge image line.
     L.append(f"- **Target:** `{target}`")
-    L.append(f"- **Chain:** {chain} (Base)")
+    chain_display = (EVM_CHAINS.get(str(chain)) or {}).get("name", "unknown")
+    L.append(f"- **Chain:** {chain} ({chain_display})")
     L.append(f"- **Date:** {now_iso()}")
     L.append(f"- **Verdict:** {verdict} ({s}/100)")
     L.append("")
@@ -710,7 +726,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- GoPlus returned no security profile for this token.")
     L.append("")
-    L.append("## On-chain Presence (Base RPC)")
+    L.append(f"## On-chain Presence ({chain_display} RPC)")
     L.append(f"- Is contract: {onchain.get('is_contract')}")
     L.append(f"- Code size: {onchain.get('code_size_bytes')} bytes")
     L.append("")
@@ -767,18 +783,19 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     return path, sym, emoji
 
 
-def log_memory(target, sym, verdict, s, reasons, report_rel):
+def log_memory(target, sym, verdict, s, reasons, report_rel, chain="8453"):
     if not append_to_memory:
         return
+    chain_tag = (EVM_CHAINS.get(str(chain)) or {}).get("gecko", "base")
     try:
         append_to_memory(
             category="finding",
             title=f"Investigation: {sym} ({target[:10]}) → {verdict} {s}/100",
             content="; ".join(reasons)[:1800] or "clean across automated checks",
             source="agents/investigate.py",
-            tags=["investigation", "base", verdict.lower(), sym.lower()],
+            tags=["investigation", chain_tag, verdict.lower(), sym.lower()],
             confidence=0.9 if verdict != "CAUTION" else 0.75,
-            metadata={"target": target, "score": s, "verdict": verdict, "report": report_rel},
+            metadata={"target": target, "chain": str(chain), "score": s, "verdict": verdict, "report": report_rel},
         )
     except Exception as e:
         print(f"[investigate] memory log failed: {e}")
@@ -937,7 +954,7 @@ def investigate(address, chain="8453", hint="", force=False):
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
-    log_memory(address, sym, verdict, s, reasons, rel)
+    log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
     ledger = _update_ledger(address, sym, verdict, s, rel, chain, creator_address)
     regenerate_lists(ledger)
