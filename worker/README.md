@@ -55,6 +55,8 @@ To deploy the Deno fallback: at [dash.deno.com](https://dash.deno.com), **New Pr
 
 `.github/workflows/worker-typecheck.yml` independently runs `deno check` against `deno/deno-entry.ts` on every push/PR touching `worker/**`, so the Deno path stays typechecked even though its actual deploys aren't CI-driven.
 
+The repo root's `package.json`/`package-lock.json` are an intentionally empty placeholder (no dependencies, no scripts, `"private": true`) — Deno Deploy's dashboard build for this project runs from the repo root and its framework auto-detection needs *some* `package.json` to exist there, even though the real entry point lives entirely under `worker/deno/`. Don't add real dependencies/scripts to it; if it's ever deleted, the Deno Deploy build for this project starts failing (`deploy/juxtaposition1/vape` status check) even though nothing in `worker/` changed.
+
 ## Base mainnet + Coinbase Developer Platform
 
 `wrangler.toml` is pointed at **Base mainnet** (`eip155:8453`) and CDP's hosted facilitator (`https://api.cdp.coinbase.com/platform/v2/x402`) — real funds move through this. The pay → verify → settle loop was proven first against Base Sepolia + the free public `facilitator.x402.org` facilitator before this switch (see git history on `wrangler.toml`/`src/index.ts` for the testnet config if you need to reproduce that).

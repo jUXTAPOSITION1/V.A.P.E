@@ -1,0 +1,7 @@
+{
+  "name": "vape-repo-root",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder only — the real VAPE stack is agents/*.py (Python) plus worker/ (its own package.json, the actual TypeScript Cloudflare Worker/Deno Deploy app). This file exists solely so the Deno Deploy dashboard's repo-root build auto-detection for the worker/deno/ fallback deployment succeeds; it has no dependencies, scripts, or entry point and should not be treated as a real Node project.",
+  "license": "MIT"
+}
