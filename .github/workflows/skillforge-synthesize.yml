@@ -52,8 +52,17 @@ jobs:
           git add skillforge/skills/ skillforge/memory/INDEX.md
           git commit -m "skillforge synthesize $(date -u +%F): distilled skills from real findings"
           git push -u origin "$BRANCH"
-          gh pr create --title "SKILLFORGE skills update $(date -u +%F)" \
+          if gh pr create --title "SKILLFORGE skills update $(date -u +%F)" \
             --body "Auto-distilled from real findings/lessons by skillforge-synthesize. Review before merge." \
-            --label "skillforge,skills" --base main --head "$BRANCH" || true
+            --label "skillforge,skills" --base main --head "$BRANCH"; then
+            # A fresh PR supersedes any earlier, still-open one — nobody was
+            # closing those out, so #85 and #112 sat open simultaneously with
+            # no way to tell which snapshot was current. Close the rest so
+            # only the newest daily snapshot stays open for review.
+            for old in $(gh pr list --state open --label skillforge --json number,headRefName \
+                --jq ".[] | select(.headRefName != \"$BRANCH\" and (.headRefName | startswith(\"skillforge/synthesize-\"))) | .number"); do
+              gh pr close "$old" --comment "Superseded by a newer SKILLFORGE synthesize PR." || true
+            done
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

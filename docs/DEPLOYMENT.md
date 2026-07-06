@@ -1,14 +1,16 @@
 # Deployment Guide
 
-V.A.P.E. runs on free tiers. There are three independently deployable surfaces:
-**(A) the autonomous CI engine**, **(B) the local Node agent**, **(C) the UI**.
+V.A.P.E. runs on free tiers. There are several independently deployable surfaces —
+**(A) the autonomous CI engine**, **(C) the UI**, **(D) the ACP job monitor**,
+**(E) the x402 payment worker** — plus **(B) local Python runs** for one-off,
+non-deployed invocations.
 
 ## Prerequisites
 - GitHub account (free Actions minutes; public repo = unlimited)
 - Groq API key (free) — `GROQ_API_KEY`
 - Optional: Gemini key, Etherscan V2 key, Base RPC URL, Virtuals/ACP credentials
-- Node.js 18+ (only for the local Node agent)
 - Python 3.11+ (for local Python runs)
+- Node.js 18+ (only for the `worker/` Cloudflare Worker, section E)
 
 ## 0. Clone & configure
 ```bash
@@ -65,20 +67,7 @@ The Python engine + SKILLFORGE run entirely in GitHub Actions. No server needed.
 
 ---
 
-## B. Local Node agent (continuous investigation, blockchain depth)
-For long-running on-chain monitoring beyond the hourly CI pass.
-
-```bash
-npm install
-npm run setup-wallet     # one-time wallet setup (if applicable)
-npm start                # starts VAPEAgent investigation loop (src/agents/vape.js)
-# dev mode with reload:
-npm run dev
-```
-Reads `BASE_RPC_URL`, `VIRTUALS_API_KEY`, `CHECK_INTERVAL`, `MAX_CASES_PER_RUN`, `LOG_LEVEL`
-from `.env`. Read-only by default (no signing).
-
-### Local Python run (single pass)
+## B. Local Python run (single pass)
 ```bash
 pip install -r agents/requirements.txt
 python -m agents.run                 # bounty mode
@@ -178,7 +167,7 @@ account-level subdomain bug recurs — switching is just updating `WORKER_BASE` 
 - [ ] `.env` filled (or secrets set in Actions) — never commit `.env`
 - [ ] Manual workflow run produced a new `reports/` file
 - [ ] SKILLFORGE toolcheck shows tools verified (Actions log)
-- [ ] (Node) `npm start` connects to Base RPC and logs a cycle
+- [ ] (Python) `python -m agents.run` connects to Base RPC and logs a cycle
 - [ ] (ACP) `acp agent whoami` shows agent + signer; offerings listed
 - [ ] (Pages) status dashboard reachable
 - [ ] No secrets in git history (`git log -p -- .env` should be empty/placeholder)
