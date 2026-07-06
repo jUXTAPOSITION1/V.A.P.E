@@ -111,8 +111,8 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   token_safety_check: "$0.02",
   liquidity_check: "$0.02",
   rug_pull_alert: "$0.03",
-  market_intel: "$0.15",
-  safety_preflight: "$0.35",
+  market_intel: "$0.07",
+  safety_preflight: "$0.10",
 };
 
 // Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
