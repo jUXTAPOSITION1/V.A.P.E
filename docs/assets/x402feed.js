@@ -74,6 +74,7 @@ const X402Feed = {
                     const active = b === btn;
                     b.classList.remove(...RANGE_BTN_ACTIVE, ...RANGE_BTN_INACTIVE);
                     b.classList.add(...(active ? RANGE_BTN_ACTIVE : RANGE_BTN_INACTIVE));
+                    b.setAttribute('aria-pressed', String(active));
                 });
                 this._loadStats();
             });

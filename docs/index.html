@@ -249,10 +249,10 @@
                 <div class="lg:col-span-5">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500">Volume &amp; Revenue</h3>
-                        <div id="x402-range-toggle" class="flex items-center gap-1 text-[10px] font-display">
-                            <button type="button" data-days="30" class="x402-range-btn px-2.5 py-1 rounded-md transition bg-violet-500/15 text-violet-300">30D</button>
-                            <button type="button" data-days="90" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">90D</button>
-                            <button type="button" data-days="365" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">1Y</button>
+                        <div id="x402-range-toggle" role="group" aria-label="Chart time range" class="flex items-center gap-1 text-[10px] font-display">
+                            <button type="button" data-days="30" aria-pressed="true" class="x402-range-btn px-2.5 py-1 rounded-md transition bg-violet-500/15 text-violet-300">30D</button>
+                            <button type="button" data-days="90" aria-pressed="false" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">90D</button>
+                            <button type="button" data-days="365" aria-pressed="false" class="x402-range-btn px-2.5 py-1 rounded-md transition text-zinc-500 hover:text-zinc-200 hover:bg-white/5">1Y</button>
                         </div>
                     </div>
                     <div class="glass rounded-2xl p-4 border border-white/5">
