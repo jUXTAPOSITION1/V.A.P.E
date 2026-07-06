@@ -144,14 +144,17 @@ const App = {
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
                 grid.innerHTML = x402able.map(o=>`
-                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
+                    <div class="relative group">
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="w-full text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
                         <span class="font-mono text-xs text-zinc-200">${o.name}</span>
                         <span class="font-display text-cyan-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
                       <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
-                    </button>`).join('');
+                    </button>
+                    ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-cyan-400 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+                    </div>`).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {

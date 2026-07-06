@@ -24,6 +24,8 @@ import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
 import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
+import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
+import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
 type Caip2Network = `${string}:${string}`;
@@ -48,7 +50,19 @@ export interface Env {
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
   X402_FACILITATOR_URL: string;
+  // In-house x402 job ledger (see lib/jobLog.ts) — optional exactly like the
+  // API keys above: wire it once `VAPE_JOBS_KV_ID` is set (see
+  // worker/README.md), and until then every /scan/* route still works
+  // exactly as before, it just isn't logged to the live feed.
+  VAPE_JOBS?: KVLike;
 }
+
+// Per-request Hono variable used to hand the real settlement facts (payer,
+// on-chain tx hash, network) from the payment middleware's onAfterSettle
+// hook down to the route handler below, which is the only place that also
+// knows the job's actual result (offering output, latency) — the hook fires
+// before the handler runs, so neither side has both halves on its own.
+type Variables = { x402Settlement?: { payer: string | null; txHash: string | null; network: string | null } };
 
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 
@@ -179,7 +193,21 @@ const BOUNTY_DEEP_DIVE_DISCOVERY = {
   },
 };
 
-const app = new Hono<{ Bindings: Env }>();
+const app = new Hono<{ Bindings: Env; Variables: Variables }>();
+
+// c.executionCtx throws (not just returns undefined) when no ExecutionContext
+// was supplied to app.fetch() — true on the Deno fallback (worker/deno/deno-entry.ts
+// calls app.fetch(req, env) with no third argument). Falling back to awaiting
+// inline there still logs correctly, just without the "don't block the
+// response" benefit Cloudflare gets from waitUntil().
+function safeWaitUntil(c: Context, promise: Promise<unknown>): void {
+  const settled = promise.catch(() => {});
+  try {
+    c.executionCtx.waitUntil(settled);
+  } catch {
+    void settled;
+  }
+}
 
 // Applies to every route, including /scan/*: the site calls this worker
 // browser-side from GitHub Pages (a different origin), and the x402 payment
@@ -314,6 +342,23 @@ app.get("/cost-basis", async (c) => {
   }
 });
 
+// Live x402 job ledger — free, unpaid (this is the showcase, not a priced
+// offering). Backed by lib/jobLog.ts's KV-backed record; 503s exactly like
+// /portfolio above when VAPE_JOBS isn't wired yet (see worker/README.md).
+app.get("/x402/feed", cache({ cacheName: "vape-x402-feed", cacheControl: "max-age=10" }), async (c) => {
+  if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
+  const limit = Math.min(Number(c.req.query("limit")) || 50, 200);
+  const jobs = await getFeed(c.env.VAPE_JOBS, limit);
+  return c.json({ jobs });
+});
+
+app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-age=30" }), async (c) => {
+  if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
+  const days = Math.min(Number(c.req.query("days")) || 30, 90);
+  const stats = await getStats(c.env.VAPE_JOBS, days);
+  return c.json(stats);
+});
+
 app.use("*", async (c, next) => {
   // withBazaar() extends the facilitator client so its getSupported()/
   // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
@@ -326,7 +371,20 @@ app.use("*", async (c, next) => {
   }));
   const resourceServer = new x402ResourceServer(facilitatorClient)
     .register(c.env.X402_NETWORK, new ExactEvmScheme())
-    .registerExtension(bazaarResourceServerExtension);
+    .registerExtension(bazaarResourceServerExtension)
+    // Fires once the facilitator confirms settlement, before the actual
+    // /scan/:offering handler runs — this is the ONLY place the real
+    // on-chain tx hash + payer address are available, so stash them on the
+    // request (c.set) for the route handler below to pick up once it also
+    // knows the job's result. See lib/jobLog.ts for why this is layered
+    // with Basescan rather than trusted as VAPE's word alone.
+    .onAfterSettle(async (ctx) => {
+      c.set("x402Settlement", {
+        payer: ctx.result.payer ?? null,
+        txHash: ctx.result.transaction ?? null,
+        network: ctx.result.network ?? null,
+      });
+    });
 
   const routes: Record<string, unknown> = {};
   for (const [name, price] of Object.entries(OFFERING_PRICES)) {
@@ -380,8 +438,30 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
   app.get(`/scan/${name}`, async (c) => {
     const address = c.req.query("address") || "";
     const chain = c.req.query("chain");
-    const req = { address, ...(chain ? { chain_id: Number(chain) } : {}) };
+    const chainId = chain ? Number(chain) : 8453;
+    const req = { address, ...(chain ? { chain_id: chainId } : {}) };
+    const t0 = Date.now();
     const result = await fulfill(name, req, c.env);
+    const d = (result as { deliverable?: Record<string, unknown> }).deliverable ?? {};
+    const settlement = c.get("x402Settlement");
+    const record: JobRecord = {
+      id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+      ts: new Date().toISOString(),
+      offering: name,
+      address,
+      chain_id: chainId,
+      symbol: (d.symbol as string) ?? null,
+      name: (d.name as string) ?? (d.contract_name as string) ?? null,
+      verdict: (d.verdict as string) ?? (d.rug_risk as string) ?? null,
+      status: result.status === "error" ? "error" : "settled",
+      amount_usd: Number(OFFERING_PRICES[name].replace("$", "")),
+      latency_ms: Date.now() - t0,
+      payer: settlement?.payer ?? null,
+      tx_hash: settlement?.txHash ?? null,
+      network: settlement?.network ?? null,
+      error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
+    };
+    safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
     return c.json(result);
   });
 }

@@ -111,6 +111,22 @@ All three degrade gracefully exactly like `ETHERSCAN_API_KEY` above — without 
 
 `agents/acp_fulfill.py::_dossier_check()` (via `agents/investigate.py::quick_assess()`) is the source of truth this mirrors field-for-field — see that module's docstrings for the exact same pipeline on the ACP side.
 
+## Live x402 job ledger — `/x402/feed`, `/x402/stats`
+
+Every real paid `/scan/*` call (any offering, settled or errored) gets logged in-house — `src/lib/jobLog.ts`, backed by a Cloudflare KV namespace (binding `VAPE_JOBS`). The site's live transaction feed (`docs/assets/x402feed.js`) reads these two free, unpaid endpoints:
+
+- `GET /x402/feed?limit=50` — the most recent jobs (newest first): offering, token symbol/name, verdict, cost, latency, status, and — this is the part that makes it independently checkable, not just VAPE's word — the **real on-chain settlement transaction hash** (`tx_hash`) and payer address, captured from the x402 facilitator's own settlement response (`src/index.ts`'s `onAfterSettle` hook, not something this repo asserts on its own). The site links every entry straight to Basescan.
+- `GET /x402/stats?days=30` — running totals (jobs, revenue, error count, per-offering breakdown) plus a daily time series for the site's revenue/volume chart.
+
+**Setup (one-time, KV can't be a `wrangler secret`)**:
+```bash
+npx wrangler kv namespace create VAPE_JOBS
+# -> copy the returned id into a new GitHub repo secret named VAPE_JOBS_KV_ID
+```
+`.github/workflows/deploy-worker.yml` appends the `[[kv_namespaces]]` binding to `wrangler.toml` at deploy time from that secret — never committed as a static value, since a placeholder id would fail `wrangler deploy` outright (see `wrangler.toml`'s `VAPE_JOBS` comment). Until `VAPE_JOBS_KV_ID` is set, every `/scan/*` route works exactly as before; `/x402/feed`/`/x402/stats` just 503 with `"job feed not configured"`.
+
+**Honest framing, not fabricated precision**: "profit" isn't reported anywhere here — VAPE's real marginal cost per job is ~$0 (GoPlus/DexScreener/Etherscan are keyless; `dossier_check`'s optional Gemini/Groq calls run on their free tiers), so a manufactured cost-and-margin breakdown would just be theater. Revenue and job counts are the real, checkable numbers; the tx hash lets anyone verify a given job actually settled on Base rather than trusting this log alone.
+
 ## CI
 
 `.github/workflows/deploy-worker.yml` deploys to Cloudflare on push to `main` when `worker/**` changes — needs `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit permission) and `CLOUDFLARE_ACCOUNT_ID` repo secrets; typechecks and no-ops without them rather than failing. `.github/workflows/worker-typecheck.yml` separately runs `deno check` on the same paths, so the Deno fallback path stays typechecked too. Deno Deploy's actual deployment is handled by its own GitHub integration, not a workflow file in this repo.
