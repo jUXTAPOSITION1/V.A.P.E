@@ -7,10 +7,19 @@ Context: worker/src/lib/jobLog.ts only started logging paid /scan/* jobs
 once VAPE_JOBS_KV_ID was configured (see skillforge/memory/build_log.jsonl
 for that story). Every USDC payment settled to VAPE's wallet before that
 point is real and on-chain, but was never recorded in the ledger's KV
-store — this script reconstructs those entries from Etherscan's
-token-transfer history for PAY_TO_ADDRESS, so "The Ledger" site section
-reflects VAPE's actual full history, not just activity since the KV
-binding went live.
+store — this script reconstructs those entries so "The Ledger" site
+section reflects VAPE's actual full history, not just activity since the
+KV binding went live.
+
+Data source: Base's public RPC (mainnet.base.org), reading real USDC
+Transfer(address,address,uint256) event logs directly via eth_getLogs —
+NOT Etherscan. Etherscan V2's free API tier returns "Free API access is
+not supported for this chain" for the tokentx/txlist history endpoints on
+L2s like Base (confirmed live, 2026-07-06) even though its
+contract/getsourcecode endpoint works fine cross-chain on the same free
+key — a real, undocumented-until-you-hit-it tier restriction. The RPC
+path is keyless, needs no new secret, and is the same public endpoint
+already used elsewhere in this repo (agents/investigate.py, etc).
 
 Honesty constraint, deliberate: which OFFERING a historical payment was
 for can only be inferred from its USD amount, and offering prices changed
@@ -33,7 +42,8 @@ new real transfer that predates this ledger's specific launch moment —
 though going forward every new payment is already logged live).
 
 Usage (CI only — needs these as env vars):
-  ETHERSCAN_API_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, VAPE_JOBS_KV_ID
+  CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, VAPE_JOBS_KV_ID
+  Optional: X402_BACKFILL_LOOKBACK_DAYS (default 30)
     python -m agents.x402_ledger_backfill
 """
 import json
@@ -41,12 +51,22 @@ import os
 import sys
 import time
 import urllib.error
-import urllib.parse
 import urllib.request
 
 PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
 USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 CHAIN_ID = 8453
+BASE_RPC = "https://mainnet.base.org"
+# keccak256("Transfer(address,address,uint256)") — the standard ERC-20
+# Transfer event topic, identical across every ERC-20 token.
+TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+# eth_getLogs topic filters are 32-byte, left-zero-padded — this is
+# PAY_TO_ADDRESS as the log's indexed `to` (topics[2]).
+PAY_TO_TOPIC = "0x" + "0" * 24 + PAY_TO_ADDRESS[2:].lower()
+BASE_BLOCK_TIME_SEC = 2
+# Conservative starting chunk size for eth_getLogs — public RPC providers
+# commonly cap the block range per call; shrinks automatically on error.
+LOG_CHUNK_BLOCKS = 2000
 
 # Every USD price this offering has EVER been listed at (not just its
 # current price) — reconstructed from real git history, not assumed.
@@ -63,7 +83,6 @@ PRICE_HISTORY = {
 # genuinely no way to tell them apart from amount alone after the fact.
 AMBIGUOUS_PRICES = {0.02: ["token_safety_check", "liquidity_check"]}
 
-ETHERSCAN_V2 = "https://api.etherscan.io/v2/api"
 CF_API = "https://api.cloudflare.com/client/v4"
 UA = {"User-Agent": "VAPE-x402-ledger-backfill/1.0"}
 
@@ -79,18 +98,53 @@ def offering_for_amount(usd):
     return f"unknown (${usd:.2f})"
 
 
-def fetch_usdc_transfers(api_key):
-    q = urllib.parse.urlencode({
-        "chainid": CHAIN_ID, "module": "account", "action": "tokentx",
-        "address": PAY_TO_ADDRESS, "contractaddress": USDC_BASE,
-        "sort": "asc", "apikey": api_key,
-    })
-    req = urllib.request.Request(f"{ETHERSCAN_V2}?{q}", headers=UA)
-    with urllib.request.urlopen(req, timeout=30) as r:
+def rpc_call(method, params):
+    payload = json.dumps({"jsonrpc": "2.0", "method": method, "params": params, "id": 1}).encode()
+    req = urllib.request.Request(BASE_RPC, data=payload, headers={**UA, "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=20) as r:
         data = json.loads(r.read().decode())
-    if data.get("status") != "1" and data.get("message") != "No transactions found":
-        raise RuntimeError(f"Etherscan error: {data.get('message')} — {data.get('result')}")
-    return data.get("result") or []
+    if "error" in data:
+        raise RuntimeError(f"Base RPC error ({method}): {data['error']}")
+    return data["result"]
+
+
+def fetch_usdc_transfer_logs(lookback_days):
+    """Real USDC Transfer event logs (to PAY_TO_ADDRESS only) from Base's
+    public RPC, paginated in chunks since eth_getLogs caps the block range
+    per call on public providers. Chunk size shrinks on a range-related
+    error and retries the same window rather than giving up."""
+    latest = int(rpc_call("eth_blockNumber", []), 16)
+    blocks_per_day = 86400 // BASE_BLOCK_TIME_SEC
+    from_block = max(0, latest - lookback_days * blocks_per_day)
+    print(f"Scanning Base blocks {from_block:,} to {latest:,} (~{lookback_days}d) for USDC transfers to {PAY_TO_ADDRESS}...")
+
+    logs = []
+    start = from_block
+    chunk = LOG_CHUNK_BLOCKS
+    while start <= latest:
+        end = min(start + chunk - 1, latest)
+        try:
+            result = rpc_call("eth_getLogs", [{
+                "fromBlock": hex(start), "toBlock": hex(end),
+                "address": USDC_BASE,
+                "topics": [TRANSFER_TOPIC, None, PAY_TO_TOPIC],
+            }])
+            logs.extend(result)
+            start = end + 1
+        except (RuntimeError, urllib.error.HTTPError) as e:
+            if chunk <= 50:
+                raise RuntimeError(f"eth_getLogs failed even at minimum chunk size: {e}")
+            chunk = max(50, chunk // 2)
+            # retry the same `start` with a smaller window, no time.sleep
+            # needed here — the failure itself is the rate limiter.
+    return logs
+
+
+def block_timestamp(cache, block_number_hex):
+    if block_number_hex not in cache:
+        block = rpc_call("eth_getBlockByNumber", [block_number_hex, False])
+        cache[block_number_hex] = int(block["timestamp"], 16)
+    return cache[block_number_hex]
 
 
 def cf_kv_get(account_id, namespace_id, token, key):
@@ -124,15 +178,13 @@ def cf_kv_put(account_id, namespace_id, token, key, value, ttl=None):
 
 
 def main():
-    etherscan_key = os.environ["ETHERSCAN_API_KEY"]
     cf_token = os.environ["CLOUDFLARE_API_TOKEN"]
     account_id = os.environ["CLOUDFLARE_ACCOUNT_ID"]
     namespace_id = os.environ["VAPE_JOBS_KV_ID"]
+    lookback_days = int(os.environ.get("X402_BACKFILL_LOOKBACK_DAYS", "30"))
 
-    print(f"Fetching real USDC transfer history to {PAY_TO_ADDRESS} on Base from Etherscan...")
-    transfers = fetch_usdc_transfers(etherscan_key)
-    incoming = [t for t in transfers if t.get("to", "").lower() == PAY_TO_ADDRESS.lower()]
-    print(f"Found {len(incoming)} real incoming USDC transfer(s) on-chain.")
+    logs = fetch_usdc_transfer_logs(lookback_days)
+    print(f"Found {len(logs)} real incoming USDC transfer(s) on-chain.")
 
     recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
     totals = cf_kv_get(account_id, namespace_id, cf_token, "TOTALS") or {
@@ -140,23 +192,26 @@ def main():
     }
     seen_hashes = {j.get("tx_hash") for j in recent if j.get("tx_hash")}
     daily_cache = {}
+    block_ts_cache = {}
 
     added = 0
-    for t in incoming:
-        tx_hash = t.get("hash")
+    for log in logs:
+        tx_hash = log.get("transactionHash")
         if not tx_hash or tx_hash in seen_hashes:
             continue
-        decimals = int(t.get("tokenDecimal", "6"))
-        amount_usd = round(int(t["value"]) / (10 ** decimals), 6)
-        ts_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(int(t["timeStamp"])))
+        from_addr = "0x" + log["topics"][1][-40:]
+        # USDC on Base is always 6 decimals (its real, fixed contract
+        # property — not something that varies per transfer).
+        amount_usd = round(int(log["data"], 16) / 1_000_000, 6)
+        ts_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(block_timestamp(block_ts_cache, log["blockNumber"])))
         record = {
-            "id": f"{ts_iso}-backfill-{tx_hash[:8]}",
+            "id": f"{ts_iso}-backfill-{tx_hash[2:10]}",
             "ts": ts_iso,
             "offering": offering_for_amount(round(amount_usd, 2)),
             "address": None, "chain_id": CHAIN_ID,
             "symbol": None, "name": None, "verdict": None,
             "status": "settled", "amount_usd": amount_usd, "latency_ms": None,
-            "payer": t.get("from"), "tx_hash": tx_hash, "network": "eip155:8453",
+            "payer": from_addr, "tx_hash": tx_hash, "network": "eip155:8453",
             "error": None, "backfilled": True,
         }
         recent.append(record)
