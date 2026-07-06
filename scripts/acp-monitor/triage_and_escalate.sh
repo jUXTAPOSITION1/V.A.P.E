@@ -19,7 +19,7 @@ echo "$OUT"
 [ "$RC" = "10" ] || exit 0
 
 # 3) AUTO-FULFILL the deterministic zero-LLM offerings (token_safety, liquidity,
-#    rug_pull, exploit_check, safety_preflight, market_intel). Prices + submits via
+#    rug_pull, exploit_check, dossier_check, market_intel). Prices + submits via
 #    the ACP CLI; leaves only reasoning-grade jobs in the queue with escalate=true.
 AF=$(python3 "$DIR/auto_fulfill.py" 2>/dev/null) || true
 echo "$AF"

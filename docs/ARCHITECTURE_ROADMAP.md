@@ -28,7 +28,7 @@ repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do 
 | rug_pull_alert | 0.03 | `token_scan.py` (owner/mint/honeypot) | [OK] auto |
 | exploit_check | 0.01 | `data_fetchers.get_contract_source` | [OK] auto (needs Etherscan key on runner) |
 | market_intel | 0.07 | `build_market_context()` | [OK] auto |
-| safety_preflight | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto |
+| dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto |
 | deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [WIP] monitor handler |
 | forensics_deep | 2.00 | wallet_trace + contract_recon | [WIP] needs Etherscan Pro |
 | wallet_recon | 0.03 | base_rpc / wallet_trace | [WIP] partial |

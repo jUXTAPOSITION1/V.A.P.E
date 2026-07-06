@@ -11,10 +11,10 @@ deliverables — at near-zero compute. Mirrors the bounty-radar "Option A" cost 
    paid handler if reasoning-grade jobs survive auto-fulfill.
 3. **Auto-fulfiller** (`auto_fulfill.py`, ZERO LLM at the monitor level): for the 6
    offerings it handles with no triage wake (token_safety_check, liquidity_check,
-   rug_pull_alert, exploit_check, safety_preflight, market_intel) it prices
+   rug_pull_alert, exploit_check, dossier_check, market_intel) it prices
    (`set-budget`) and submits a REAL deliverable from `agents/acp_fulfill.py` — the
    monitor itself never wakes a model to decide handling. Five of those six are also
-   zero-LLM in their own deliverable; `safety_preflight`'s deliverable now includes a
+   zero-LLM in their own deliverable; `dossier_check`'s deliverable now includes a
    real frontier-LLM quick source read (see `agents/publish_reputation.py`'s `ZERO_LLM`
    vs `AUTO` split). Everything else is left in the queue with `escalate=true`.
    Idempotent via `state.json`. `--dry-run` previews without CLI writes.

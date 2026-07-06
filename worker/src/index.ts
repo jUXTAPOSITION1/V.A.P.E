@@ -37,7 +37,7 @@ export interface Env {
   // Fine-grained PAT (Actions: write, Contents: read) for triggering the
   // bounty_deep_dive offering's async job — see worker/src/lib/githubDispatch.ts.
   GH_DISPATCH_TOKEN?: string;
-  // safety_preflight's web-reputation search + declared-social scrape +
+  // dossier_check's web-reputation search + declared-social scrape +
   // frontier-LLM quick read — all optional, degrade gracefully exactly like
   // ETHERSCAN_API_KEY above. See lib/webResearch.ts / lib/llm.ts.
   TAVILY_API_KEY?: string;
@@ -57,7 +57,7 @@ const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 // failure) could otherwise leak it into a public API response. Strip both
 // known key env vars out of the message before surfacing it — this is
 // deliberately not swallowed to a generic string, matching exploit_check/
-// safety_preflight's "surface real failures" fix: a vague "upstream lookup
+// dossier_check's "surface real failures" fix: a vague "upstream lookup
 // failed" with no detail looks identical whether the key is wrong, Alchemy
 // rate-limited us, or the address just has too many token balances to batch.
 function errDetail(e: unknown, env: Env): string {
@@ -112,7 +112,7 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   liquidity_check: "$0.02",
   rug_pull_alert: "$0.03",
   market_intel: "$0.07",
-  safety_preflight: "$0.10",
+  dossier_check: "$0.10",
 };
 
 // Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
@@ -144,11 +144,11 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     description: "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration).",
     output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
   },
-  safety_preflight: {
+  dossier_check: {
     description: "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template "
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
-    output: { address: "0x...", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
+    output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
               verified: true, meme_factory_template: false, hack_correlation: [],
               web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
               ai_review: { available: true, provider: "gemini", summary: "..." } },

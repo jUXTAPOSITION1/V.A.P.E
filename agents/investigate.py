@@ -32,6 +32,7 @@ import time
 import argparse
 import urllib.request
 import urllib.parse
+import urllib.error
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,10 +91,32 @@ def _rpc(method, params, timeout=10):
         return {"error": str(e)}
 
 
+def _get_with_retries(url, timeout=12, retries=3):
+    """Like _get(), but retries transient 429/403/5xx once GoPlus starts
+    rate-limiting — GoPlus is the sole source for security traits here (no
+    keyless fallback), so giving up after the first hit means the whole
+    report ships with empty security fields instead of real data."""
+    for attempt in range(retries + 1):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            if attempt < retries and (e.code == 429 or e.code == 403 or e.code >= 500):
+                time.sleep(0.4 * (attempt + 1))
+                continue
+            return {"error": f"upstream returned HTTP {e.code}"}
+        except Exception as e:
+            if attempt < retries:
+                time.sleep(0.4 * (attempt + 1))
+                continue
+            return {"error": str(e)}
+
+
 # ── recon steps ───────────────────────────────────────────────────────────────
 def goplus_security(address, chain="8453"):
-    d = _get(f"https://api.gopluslabs.io/api/v1/token_security/{chain}"
-             f"?contract_addresses={address}")
+    d = _get_with_retries(f"https://api.gopluslabs.io/api/v1/token_security/{chain}"
+                          f"?contract_addresses={address}")
     try:
         return (d.get("result") or {}).get(address.lower(), {}) or \
                next(iter((d.get("result") or {}).values()), {})
@@ -119,7 +142,7 @@ def dexscreener(address):
         "dex": p.get("dexId"),
         # Raw declared URLs (not just the has-any-socials boolean
         # agents/token_scan.py computes) — used by acp_fulfill.py's
-        # safety_preflight to actually visit these, not just count them.
+        # dossier_check to actually visit these, not just count them.
         "socials": [{"type": s.get("type"), "url": s.get("url")}
                     for s in (info.get("socials") or []) if s.get("url")],
         "websites": [{"url": w.get("url")} for w in (info.get("websites") or []) if w.get("url")],
@@ -463,7 +486,7 @@ def score(gp, dex, onchain, verif, web_rep=None):
 # ── ephemeral assessment (no persistence) ───────────────────────────────────
 # Same recon + scoring pipeline as investigate() (steps 1-3 of this module's
 # own docstring), minus the report/ledger/memory/catalog writes — used by
-# agents/acp_fulfill.py's paid safety_preflight offering so a customer's
+# agents/acp_fulfill.py's paid dossier_check offering so a customer's
 # on-demand call reuses VAPE's real heuristic engine (score, meme-factory
 # detection, hack correlation, web-reputation search) without polluting the
 # free investigation ledger/fail-caution-pass lists a paid, on-demand call

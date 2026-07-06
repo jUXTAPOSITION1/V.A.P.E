@@ -71,7 +71,7 @@ export interface FrontierResult {
 }
 
 /** Try Gemini first, then Groq. Never throws — mirrors agents/llm.py::ask_safe()'s
- * "never raises" contract, since safety_preflight must degrade, not 500, when no
+ * "never raises" contract, since dossier_check must degrade, not 500, when no
  * LLM key is configured. */
 export async function askFrontier(env: LlmEnv, system: string, user: string,
                                    opts: { maxTokens?: number; temperature?: number; timeoutMs?: number } = {}): Promise<FrontierResult> {

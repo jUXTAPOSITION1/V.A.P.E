@@ -46,14 +46,14 @@ except Exception as e:
 # never needs a network round-trip. Update if you reprice offerings.
 PRICE = {
     "token_safety_check": "0.02", "liquidity_check": "0.02", "rug_pull_alert": "0.03",
-    "exploit_check": "0.01", "safety_preflight": "0.10", "market_intel": "0.07",
+    "exploit_check": "0.01", "dossier_check": "0.10", "market_intel": "0.07",
     "wallet_recon": "0.03", "tx_decode": "0.05", "whale_watch": "0.10",
     "deep_contract_audit": "1", "forensics_deep": "2", "bulk_safety_bundle": "0.50",
     "community_intel_broadcast": "0.10", "partner_referral": "0.01",
 }
 
 # Only these settle with no model. Everything else -> escalate to LLM handler.
-AUTO = set(HANDLERS.keys())  # token_safety/liquidity/rug_pull/exploit/safety_preflight/market_intel
+AUTO = set(HANDLERS.keys())  # token_safety/liquidity/rug_pull/exploit/dossier_check/market_intel
 
 DRY = "--dry-run" in sys.argv
 

@@ -94,7 +94,7 @@ OFFERINGS = {
     "liquidity_check": ("0.02", "Liquidity depth + top pair DEX for a Base token."),
     "rug_pull_alert": ("0.03", "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration)."),
     "market_intel": ("0.07", "Base TVL, top protocols, prices, and rule-based anomaly flags."),
-    "safety_preflight": ("0.10", "VAPE's deepest instant verdict: weighted CertiK-style score, "
+    "dossier_check": ("0.10", "VAPE's deepest instant verdict: weighted CertiK-style score, "
                          "meme-factory-template detection, recent-hack correlation, public "
                          "web-reputation search, a live check of declared socials, and a "
                          "frontier-LLM quick source read."),

@@ -63,7 +63,8 @@ def _liquidity(req):
     r = token_scan(a, _chain(req)) if a else {"error": "no address"}
     if "error" in r:
         return r
-    return {"address": a, "liquidity_usd": r.get("liquidity_usd"),
+    return {"address": a, "symbol": r.get("symbol"), "name": r.get("name"),
+            "liquidity_usd": r.get("liquidity_usd"),
             "top_pair_dex": r.get("top_pair_dex"), "verdict": r.get("verdict")}
 
 
@@ -75,7 +76,8 @@ def _rug_pull(req):
     rug = [f for f in r.get("flags", []) if f in
            ("HONEYPOT", "mintable", "owner_not_renounced", "cannot_sell_all", "transfer_pausable",
             "is_blacklisted", "selfdestruct", "is_airdrop_scam", "lp_concentrated")]
-    return {"address": a, "rug_risk": "HIGH" if (r.get("is_honeypot") == "1" or len(rug) >= 2) else "LOW",
+    return {"address": a, "symbol": r.get("symbol"), "name": r.get("name"),
+            "rug_risk": "HIGH" if (r.get("is_honeypot") == "1" or len(rug) >= 2) else "LOW",
             "owner_powers": rug, "verdict": r.get("verdict")}
 
 
@@ -139,7 +141,7 @@ def _verify_socials(dex):
     except Exception:
         return {"declared_count": len(declared), "checked": [], "note": "scrape unavailable this cycle"}
     checked = []
-    # Cap at 3 — cost/latency proportionate to safety_preflight's instant,
+    # Cap at 3 — cost/latency proportionate to dossier_check's instant,
     # synchronous nature, and shared scrape quota (skillforge/research.py's
     # MONTHLY_QUOTA) is spent across every VAPE workflow, not just this one.
     for item in declared[:3]:
@@ -171,11 +173,18 @@ def _verify_socials(dex):
 _AI_QUICK_REVIEW_SYSTEM = (
     "You are VAPE, an autonomous on-chain security reviewer, giving a QUICK paid "
     "pre-trade read (not the full $50 24h deep-dive audit). Base every claim on "
-    "the actual verified source given below — never invent function names or "
-    "behavior you weren't shown. In 3-5 sentences, name any real red flags across "
-    "reentrancy, access control, oracle trust, proxy/upgrade risk, and honeypot/rug "
-    "mechanics — or state plainly that nothing stood out in a quick read. This is a "
-    "fast signal, not a substitute for a full audit; do not fabricate confidence."
+    "the actual verified source and recon data given below — never invent function "
+    "names, behavior, or facts you weren't shown. Open by naming the token/project "
+    "and stating whether the source is a known template (e.g. a Virtuals Protocol "
+    "AgentTokenV2 proxy, a Clanker deployment, a standard OpenZeppelin base) versus "
+    "fully bespoke code, since that changes how much of the risk is inherited from "
+    "an audited base contract versus custom logic. Then, in 3-5 more sentences, name "
+    "any real red flags across reentrancy, access control, oracle trust, proxy/upgrade "
+    "risk, and honeypot/rug mechanics — reconcile with the recon score/flags below "
+    "rather than repeating them verbatim (e.g. if a flagged risk is standard for the "
+    "template identified above, say so explicitly instead of restating it as novel). "
+    "State plainly if nothing stood out. This is a fast signal, not a substitute for "
+    "a full audit; do not fabricate confidence."
 )
 
 
@@ -183,7 +192,7 @@ def _ai_quick_review(a, chain, assess, src):
     """Frontier-LLM quick read of the actual verified source — same provider
     chain as the $50 deep-dive (agents/llm.ask_frontier: Gemini 2.5 Pro,
     Groq fallback), but a far smaller prompt/output budget matched to
-    safety_preflight's synchronous, instant-tier nature rather than the
+    dossier_check's synchronous, instant-tier nature rather than the
     bounty's full markdown report."""
     verif = assess["verif"]
     if not verif.get("checked"):
@@ -198,16 +207,20 @@ def _ai_quick_review(a, chain, assess, src):
             from llm import ask_frontier
         except Exception:
             return {"available": False, "note": "no LLM provider configured"}
-    user = (f"=== VERIFIED SOURCE ({verif.get('name')}, truncated) ===\n{source_code[:12000]}\n\n"
-            f"=== KNOWN RISK FACTORS FROM RECON ===\n" + ("\n".join(assess["reasons"]) or "none"))
+    user = (f"=== TOKEN ===\n{assess.get('symbol') or 'unknown'} / {assess['dex'].get('name') or verif.get('name') or 'unknown'} "
+            f"on chain {chain}, contract {a}\n\n"
+            f"=== VERIFIED SOURCE ({verif.get('name')}, truncated) ===\n{source_code[:12000]}\n\n"
+            f"=== RECON SCORE ===\n{assess.get('score')}/100 -> {assess.get('verdict')}\n\n"
+            f"=== RECON RISK FLAGS ===\n" + ("\n".join(assess["reasons"]) or "none") + "\n\n"
+            f"=== RECON POSITIVE SIGNALS ===\n" + ("\n".join(assess.get("positive_signals") or []) or "none"))
     try:
-        text, provider = ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=400, temperature=0.3, timeout=25)
+        text, provider = ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=550, temperature=0.3, timeout=25)
         return {"available": True, "provider": provider, "summary": text.strip()}
     except Exception as e:
         return {"available": False, "note": f"LLM unavailable this call: {e}"}
 
 
-def _safety_preflight(req):
+def _dossier_check(req):
     """All-in-one pre-trade verdict — VAPE's most complete instant offering.
 
     Reuses agents/investigate.py's real heuristic engine (the same
@@ -232,6 +245,7 @@ def _safety_preflight(req):
 
     result = {
         "address": a, "chain_id": chain, "symbol": assess["symbol"],
+        "name": assess["dex"].get("name"),
         "score": assess["score"], "verdict": assess["verdict"],
         "reasons": assess["reasons"], "positive_signals": assess["positive_signals"],
         "verified": verif.get("verified"), "contract_name": verif.get("name"),
@@ -275,7 +289,7 @@ HANDLERS = {
     "rug_pull_alert": _rug_pull,
     "exploit_check": _exploit_check,
     "market_intel": _market_intel,
-    "safety_preflight": _safety_preflight,
+    "dossier_check": _dossier_check,
     "community_intel_broadcast": _community_broadcast,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
