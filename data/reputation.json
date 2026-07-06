@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T02:00:05Z",
+  "generated": "2026-07-06T02:51:28Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -49,7 +49,8 @@
         "summary": "Exploit & scam-database check for any Base wallet/contract",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/b5e3344f-d3a7-4125-ba91-71855e32e3cc"
       },
       {
         "name": "partner_referral",
@@ -65,7 +66,8 @@
         "summary": "Honeypot detector + 0-100 safety score (GoPlus+DexScreener)",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/bc2d3fd2-cfb1-4bf9-93d0-b4ddb87a5ac6"
       },
       {
         "name": "liquidity_check",
@@ -73,7 +75,8 @@
         "summary": "DEX liquidity depth, LP burn, slippage + SAFE/THIN/DANGEROUS",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/10208324-4a29-4d43-8d1a-ca59c9b78fc2"
       },
       {
         "name": "wallet_recon",
@@ -89,7 +92,8 @@
         "summary": "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/68074b35-edd0-40f6-ad69-e2a91f4c36f8"
       },
       {
         "name": "tx_decode",
@@ -105,7 +109,8 @@
         "summary": "Real-time price/TVL/liquidity + actionable signal",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/8ae726ba-7daf-4946-8bf3-d0209fdae463"
       },
       {
         "name": "dossier_check",
@@ -113,7 +118,8 @@
         "summary": "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template detection, recent-hack correlation, public web-reputation search, a live check of declared socials, and a frontier-LLM quick source read",
         "auto": true,
         "x402": true,
-        "sla": "instant"
+        "sla": "instant",
+        "directory_url": "https://402index.io/service/814ea6af-de02-420e-b929-f67d2a106051"
       },
       {
         "name": "whale_watch",

@@ -23,6 +23,7 @@ jobs:
     # runs) — route it through `env:` first, per GitHub's documented pattern.
     env:
       HAS_CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      HAS_JOBS_KV: ${{ secrets.VAPE_JOBS_KV_ID != '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
@@ -38,6 +39,23 @@ jobs:
       - name: Typecheck
         working-directory: worker
         run: npm run typecheck
+
+      # The live x402 job ledger's KV binding can't be committed as a static
+      # wrangler.toml block (a placeholder id would fail `wrangler deploy`
+      # outright — see wrangler.toml's VAPE_JOBS comment) so it's appended
+      # here, only once VAPE_JOBS_KV_ID exists as a repo secret. Skipped
+      # entirely otherwise — /scan/* deploys and works exactly the same
+      # either way, /x402/feed just stays unconfigured until this is set.
+      - name: Wire VAPE_JOBS KV binding (if configured)
+        if: ${{ env.HAS_JOBS_KV == 'true' }}
+        working-directory: worker
+        run: |
+          cat >> wrangler.toml <<EOF
+
+          [[kv_namespaces]]
+          binding = "VAPE_JOBS"
+          id = "${{ secrets.VAPE_JOBS_KV_ID }}"
+          EOF
 
       - name: Deploy
         if: ${{ env.HAS_CF_TOKEN == 'true' }}

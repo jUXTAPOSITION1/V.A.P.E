@@ -59,3 +59,19 @@ X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 # secret. Without it, the route still gates payment correctly but returns a
 # 503 after settlement telling the buyer to use ACP instead — set this before
 # advertising the x402 path for this offering.
+#
+# ── VAPE_JOBS (KV binding, not a secret) ────────────────────────────────
+# The live x402 job ledger (src/lib/jobLog.ts, /x402/feed + /x402/stats) is
+# backed by a Cloudflare KV namespace, which — unlike the secrets above —
+# has to be declared as a `[[kv_namespaces]]` binding in THIS file with a
+# real namespace id, not just set via `wrangler secret put`. Deliberately
+# NOT committed here as a static block: a bogus/placeholder id would fail
+# `wrangler deploy` outright and take down every other route with it, so
+# .github/workflows/deploy-worker.yml injects this binding at deploy time
+# from a `VAPE_JOBS_KV_ID` repo secret instead, exactly like
+# CLOUDFLARE_API_TOKEN — only appending it when that secret is set. Until
+# then, /scan/* keeps working exactly as before; /x402/feed and /x402/stats
+# just 503 with "job feed not configured". One-time setup:
+#   1. npx wrangler kv namespace create VAPE_JOBS   (run once, needs CLOUDFLARE_API_TOKEN/ACCOUNT_ID)
+#   2. copy the returned id into a new repo secret named VAPE_JOBS_KV_ID
+#   3. re-run (or wait for) the next deploy-worker.yml run

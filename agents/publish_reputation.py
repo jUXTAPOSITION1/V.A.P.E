@@ -59,6 +59,27 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
 # above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
 X402 = AUTO | {"bounty_deep_dive"}
+# Real 402index.io service IDs, transcribed from the actual response bodies
+# logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
+# (.github/workflows/x402-directory.yml run 28754656195, job 85259559335) —
+# https://402index.io/api/v1/register returns {"service": {"id": "..."}} on
+# each 201, and 402index's own per-service page is real and live at
+# https://402index.io/service/<id> (confirmed: rug_pull_alert's id below is
+# the exact page a human pulled up and shared). IDs are permanent identifiers
+# 402index assigned at registration time — they stay valid even though that
+# run predates the dossier_check rename (still registered there under its
+# old name "safety_preflight" until x402-directory.yml is re-run; re-running
+# risks a duplicate listing per that workflow's own dedup-uncertainty
+# caveat, so this hasn't been done automatically). Never guess an id that
+# isn't transcribed from a real response like this.
+_402INDEX_SERVICE_IDS = {
+    "exploit_check": "b5e3344f-d3a7-4125-ba91-71855e32e3cc",
+    "token_safety_check": "bc2d3fd2-cfb1-4bf9-93d0-b4ddb87a5ac6",
+    "liquidity_check": "10208324-4a29-4d43-8d1a-ca59c9b78fc2",
+    "rug_pull_alert": "68074b35-edd0-40f6-ad69-e2a91f4c36f8",
+    "dossier_check": "814ea6af-de02-420e-b929-f67d2a106051",  # registered as "safety_preflight"
+    "market_intel": "8ae726ba-7daf-4946-8bf3-d0209fdae463",
+}
 OFFERINGS = [
     ("exploit_check", 0.01, "Exploit & scam-database check for any Base wallet/contract"),
     ("partner_referral", 0.01, "Earn USDC commission referring clients to VAPE"),
@@ -245,7 +266,9 @@ def main():
             "auto_fulfilled_zero_llm": sorted(ZERO_LLM),
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
-                 "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant"}
+                 "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant",
+                 **({"directory_url": f"https://402index.io/service/{_402INDEX_SERVICE_IDS[n]}"}
+                    if n in _402INDEX_SERVICE_IDS else {})}
                 for n, p, s in OFFERINGS
             ],
         },
