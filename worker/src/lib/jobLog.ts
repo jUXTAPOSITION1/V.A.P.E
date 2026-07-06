@@ -37,18 +37,25 @@ export interface JobRecord {
   id: string;
   ts: string;
   offering: string;
-  address: string;
+  address: string | null;
   chain_id: number;
   symbol: string | null;
   name: string | null;
   verdict: string | null;
   status: "settled" | "error";
   amount_usd: number;
-  latency_ms: number;
+  latency_ms: number | null;
   payer: string | null;
   tx_hash: string | null;
   network: string | null;
   error: string | null;
+  // Set only by agents/x402_ledger_backfill.py — a real on-chain USDC
+  // transfer reconstructed after the fact, from before VAPE_JOBS_KV_ID
+  // existed, rather than something this Worker watched happen live. See
+  // that script's docstring for why `offering`/`address`/`symbol`/etc. are
+  // sometimes less precise (amount-inferred, occasionally ambiguous) for
+  // these entries specifically.
+  backfilled?: boolean;
 }
 
 interface OfferingTotals {
