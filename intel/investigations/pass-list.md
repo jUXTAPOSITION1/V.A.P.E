@@ -1,13 +1,14 @@
-# VAPE 🟢 Pass List (PROCEED)
+# VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-05T03:33:48Z — 7 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-06T19:59:56Z — 8 address(es) currently on record with a last verdict of PROCEED._
 
-| Symbol | Address | Score | Times Checked | Last Investigated |
-|--------|---------|-------|----------------|--------------------|
-| CLAUDE | `0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892` | 88/100 | 1 | 2026-07-04T18:06:03Z |
-| America250 | `0x044098A1b8B8e175035842952986bea0E2333B07` | 90/100 | 1 | 2026-07-04T10:11:33Z |
-| FAFO | `0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F` | 88/100 | 1 | 2026-07-03T08:10:33Z |
-| USA250 | `0x31A626996E36a302b06b27283C561d5926db6b7c` | 90/100 | 1 | 2026-07-02T14:04:12Z |
-| VELVET | `0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd` | 92/100 | 1 | 2026-07-02T11:35:20Z |
-| OpenAI | `0x7C797DA3704b6F682917005b01C89710Ec17db07` | 78/100 | 1 | 2026-07-02T04:58:36Z |
-| OpenAI | `0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07` | 78/100 | 1 | 2026-07-02T00:09:13Z |
+| Symbol | Chain | Address | Score | Times Checked | Last Investigated |
+|--------|-------|---------|-------|----------------|--------------------|
+| PLAY | Base | `0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841` | 100/100 | 1 | 2026-07-06T19:59:56Z |
+| CLAUDE | Base | `0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892` | 88/100 | 1 | 2026-07-04T18:06:03Z |
+| America250 | Base | `0x044098A1b8B8e175035842952986bea0E2333B07` | 90/100 | 1 | 2026-07-04T10:11:33Z |
+| FAFO | Base | `0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F` | 88/100 | 1 | 2026-07-03T08:10:33Z |
+| USA250 | Base | `0x31A626996E36a302b06b27283C561d5926db6b7c` | 90/100 | 1 | 2026-07-02T14:04:12Z |
+| VELVET | Base | `0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd` | 92/100 | 1 | 2026-07-02T11:35:20Z |
+| OpenAI | Base | `0x7C797DA3704b6F682917005b01C89710Ec17db07` | 78/100 | 1 | 2026-07-02T04:58:36Z |
+| OpenAI | Base | `0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07` | 78/100 | 1 | 2026-07-02T00:09:13Z |

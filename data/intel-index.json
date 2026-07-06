@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-06T17:49:00Z",
+  "generated": "2026-07-06T19:59:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 321,
+    "reports": 322,
     "reports_by_type": {
-      "bounty": 178,
+      "bounty": 179,
       "security": 28,
       "sentiment": 27,
       "base": 28,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 34,
-    "investigations": 42,
+    "investigations": 44,
     "tools": 15,
     "tools_verified": 14,
     "skills": 9
@@ -26,30 +26,43 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260706-174859-0x853a7c99.md",
+      "file": "investigation-20260706-195956-0x853a7c99.md",
       "title": "Investigation \u2014 PLAY",
       "symbol": "PLAY",
-      "date": "2026-07-06T17:48:59Z",
+      "date": "2026-07-06T19:59:56Z",
       "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5010 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-174859-0x853a7c99.md"
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5009 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-195956-0x853a7c99.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260706_174507.md",
+      "file": "bounty_report_20260706_195941.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T17:45:07Z",
+      "date": "2026-07-06T19:59:41Z",
       "threat": null,
-      "summary": "Cycle: 20260706174507 \u00b7 Data timestamp (UTC): 2026-07-06T17:45:12Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_174507.md",
-      "bytes": 10126
+      "summary": "RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_195941.md",
+      "bytes": 12308
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260706-195956-0x853a7c99.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "date": "2026-07-06T19:59:56Z",
+      "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5009 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-195956-0x853a7c99.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260706-174859-0x853a7c99.md",
@@ -532,20 +545,20 @@
       "verdict": "CAUTION (70/100)",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-04",
-      "job_id": "auto",
-      "target": "0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07",
-      "symbol": "Claude",
-      "offering": "deep_investigation",
-      "verdict": "CAUTION (60/100)",
-      "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260706_195941.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-06T19:59:41Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_195941.md",
+      "bytes": 12308
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1194,17 +1207,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-01-08.md",
       "bytes": 2846
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-08.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
-      "date": "2026-07-01T08:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-08.md",
-      "bytes": 2165
     }
   ],
   "broadcasts": [
@@ -1504,7 +1506,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48282353",
+      "version": "48286683",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1514,7 +1516,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.82 eth_dom 9.45 mcap_chg_24h 0.87",
+      "version": "btc_dom 55.9 eth_dom 9.46 mcap_chg_24h 0.85",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1554,7 +1556,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-02 Hinkal 0.82 M ['Ethereum'] prooflessDeposit() Exploit",
+      "version": "2026-07-05 Lazy Summer Protocol 6.0 M ['Ethereum'] Donation Attack",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,

@@ -225,5 +225,24 @@
     "last_verdict": "PROCEED",
     "symbol": "CLAUDE",
     "times_investigated": 1
+  },
+  "8453:0x853a7c99227499dba9db8c3a02aa691afdebf841": {
+    "address": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
+    "chain": "8453",
+    "creator_address": "0x9e39b6fa4303ec8d83b4e55083fefc1c5cf692d2",
+    "first_investigated": "2026-07-06T19:59:56Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260706-195956-0x853a7c99.md",
+        "score": 100,
+        "ts": "2026-07-06T19:59:56Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-06T19:59:56Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "PLAY",
+    "times_investigated": 1
   }
 }
