@@ -29,15 +29,19 @@ jobs:
           python-version: '3.11'
 
       - name: pip-audit (root)
+        id: root_audit
+        continue-on-error: true
         run: |
           pip install -q pip-audit
           pip-audit -r requirements.txt | tee /tmp/pip-audit-root.txt
 
       - name: pip-audit (agents)
+        id: agents_audit
+        continue-on-error: true
         run: pip-audit -r agents/requirements.txt | tee /tmp/pip-audit-agents.txt
 
       - name: Open issue on new vulnerabilities
-        if: failure()
+        if: steps.root_audit.outcome == 'failure' || steps.agents_audit.outcome == 'failure'
         run: |
           {
             echo "Dependency audit found issues — see run for full output."

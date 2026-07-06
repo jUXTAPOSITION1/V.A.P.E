@@ -152,11 +152,10 @@ Every loop is grounded in **real data only** — no simulated or hypothetical ou
 |---|---|---|---|
 | Python engine | GH Actions hourly | free runner | reports/ commits |
 | SKILLFORGE | GH Actions (hourly/6x/daily) | free runner | skillforge/memory |
-| Node agent | local `npm start` | local | in-memory + intel/ |
 | ACP monitor | persistent daemon | ~zero idle | acp-monitor/state.json |
 
 ## Current vs. future
 **Now:** autonomous hourly LLM+slither reports, SKILLFORGE 13-tool verification, intel
 audit trail, ACP job monetization, self-review PRs.
-**Next:** wire Node fetchers to grounded targets, richer UI, external-target auditing
-(beyond self-repo), persistent cross-run agent memory, full ACP deliverable automation.
+**Next:** richer UI, external-target auditing (beyond self-repo), persistent
+cross-run agent memory, full ACP deliverable automation.
