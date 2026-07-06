@@ -127,7 +127,10 @@ const X402Feed = {
         const el = document.getElementById('x402-feed');
         if (!el) return;
         try {
-            const r = await fetch(`${window.WORKER_BASE}/x402/feed?limit=30`);
+            const [r, links] = await Promise.all([
+                fetch(`${window.WORKER_BASE}/x402/feed?limit=30`),
+                directoryLinks(),
+            ]);
             if (r.status === 503) { this._notConfigured(); return; }
             const { jobs } = await r.json();
             if (!jobs || !jobs.length) {
@@ -137,13 +140,14 @@ const X402Feed = {
                 </div>`;
                 return;
             }
-            el.innerHTML = jobs.map(j => this._row(j)).join('');
+            const serviceUrlByOffering = Object.fromEntries(links.map(o => [o.name, o.directory_url]));
+            el.innerHTML = jobs.map(j => this._row(j, serviceUrlByOffering)).join('');
         } catch (e) {
             el.innerHTML = `<div class="text-amber-400 text-xs text-center py-6">Live ledger temporarily unavailable.</div>`;
         }
     },
 
-    _row(j) {
+    _row(j, serviceUrlByOffering = {}) {
         const icon = tokenIconByAddress(j.address, j.chain_id);
         const label = j.symbol ? `$${j.symbol}` : (j.address ? j.address.slice(0, 8) + '…' : '—');
         const statusDot = j.status === 'settled'
@@ -153,14 +157,22 @@ const X402Feed = {
             ? `<span class="px-1.5 py-0.5 rounded text-[10px] shrink-0 ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
             : '<span class="text-zinc-700 text-[10px] shrink-0">—</span>';
         const tx = j.tx_hash
-            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" class="text-zinc-300 hover:text-white underline decoration-zinc-700 truncate">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
+            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on Basescan" class="text-zinc-300 hover:text-white underline decoration-zinc-700 truncate">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
             : '<span class="text-zinc-700">unsettled</span>';
+        // Each of the 6 auto offerings has a real, verified 402index.io service
+        // listing (see agents/publish_reputation.py's _402INDEX_SERVICE_IDS) —
+        // link straight to it so a job's offering is independently checkable
+        // too, not just its settlement tx.
+        const serviceUrl = serviceUrlByOffering[j.offering];
+        const offeringLabel = serviceUrl
+            ? `<a href="${escapeHtml(serviceUrl)}" target="_blank" rel="noopener" title="View ${escapeHtml(j.offering)} on 402index.io" class="text-zinc-600 hover:text-zinc-300 underline decoration-zinc-800 shrink-0">${escapeHtml(j.offering)}</a>`
+            : `<span class="text-zinc-600 shrink-0">${escapeHtml(j.offering)}</span>`;
         return `
         <div class="flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-lg px-2.5 py-2 whitespace-nowrap overflow-x-auto">
             ${statusDot}
             ${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}
             <span class="text-zinc-200 shrink-0 min-w-[52px]">${escapeHtml(label)}</span>
-            <span class="text-zinc-600 shrink-0">${escapeHtml(j.offering)}</span>
+            ${offeringLabel}
             <span class="text-zinc-100 font-medium shrink-0">$${Number(j.amount_usd).toFixed(2)}</span>
             ${verdictPill}
             <span class="text-zinc-600 shrink-0">${j.latency_ms != null ? j.latency_ms + 'ms' : '—'}</span>

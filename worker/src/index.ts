@@ -57,12 +57,18 @@ export interface Env {
   VAPE_JOBS?: KVLike;
 }
 
-// Per-request Hono variable used to hand the real settlement facts (payer,
-// on-chain tx hash, network) from the payment middleware's onAfterSettle
-// hook down to the route handler below, which is the only place that also
-// knows the job's actual result (offering output, latency) — the hook fires
-// before the handler runs, so neither side has both halves on its own.
-type Variables = { x402Settlement?: { payer: string | null; txHash: string | null; network: string | null } };
+// Per-request Hono variable used to hand the job's real result (offering
+// output, latency) from the route handler up to the payment middleware's
+// onAfterSettle hook, which is the only place the real settlement facts
+// (payer, on-chain tx hash, network) actually exist. @x402/hono settles
+// strictly AFTER the route handler resolves (see paymentMiddlewareFromHTTPServer:
+// `await next()` runs the handler, THEN `processSettlement()` fires
+// onAfterSettle) — so the handler can never see its own settlement, only the
+// hook can. jobLog.logJob() is therefore called from onAfterSettle, not the
+// handler, once both halves are available.
+type Variables = {
+  vapeJobDraft?: Omit<JobRecord, "payer" | "tx_hash" | "network">;
+};
 
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
 
@@ -374,18 +380,29 @@ app.use("*", async (c, next) => {
   const resourceServer = new x402ResourceServer(facilitatorClient)
     .register(c.env.X402_NETWORK, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension)
-    // Fires once the facilitator confirms settlement, before the actual
-    // /scan/:offering handler runs — this is the ONLY place the real
-    // on-chain tx hash + payer address are available, so stash them on the
-    // request (c.set) for the route handler below to pick up once it also
-    // knows the job's result. See lib/jobLog.ts for why this is layered
+    // Fires once the facilitator confirms settlement — AFTER the
+    // /scan/:offering handler below has already run and stashed its result
+    // via c.set("vapeJobDraft", ...). This is the ONLY place the real
+    // on-chain tx hash + payer address are available, so the actual
+    // jobLog.logJob() call happens here, merging the handler's draft with
+    // the real settlement facts. See lib/jobLog.ts for why this is layered
     // with Basescan rather than trusted as VAPE's word alone.
+    //
+    // Previously this stashed settlement facts for the handler to read —
+    // backwards, since @x402/hono settles strictly after next() resolves,
+    // so the handler's c.get() always saw undefined and every logged job
+    // showed a permanently null tx_hash ("unsettled" on the site) even
+    // though the payment had genuinely settled moments later.
     .onAfterSettle(async (ctx) => {
-      c.set("x402Settlement", {
+      const draft = c.get("vapeJobDraft");
+      if (!draft) return; // e.g. bounty_deep_dive, which doesn't log a job record
+      const record: JobRecord = {
+        ...draft,
         payer: ctx.result.payer ?? null,
-        txHash: ctx.result.transaction ?? null,
+        tx_hash: ctx.result.transaction ?? null,
         network: ctx.result.network ?? null,
-      });
+      };
+      safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
     });
 
   const routes: Record<string, unknown> = {};
@@ -445,8 +462,11 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
     const t0 = Date.now();
     const result = await fulfill(name, req, c.env);
     const d = (result as { deliverable?: Record<string, unknown> }).deliverable ?? {};
-    const settlement = c.get("x402Settlement");
-    const record: JobRecord = {
+    // Settlement facts (payer/tx_hash/network) aren't known yet at this point —
+    // @x402/hono settles after this handler returns. Stash everything this
+    // handler DOES know; the onAfterSettle hook above merges in the rest and
+    // does the actual logJob() call once settlement completes.
+    c.set("vapeJobDraft", {
       id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
       ts: new Date().toISOString(),
       offering: name,
@@ -458,20 +478,20 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
       status: result.status === "error" ? "error" : "settled",
       amount_usd: Number(OFFERING_PRICES[name].replace("$", "")),
       latency_ms: Date.now() - t0,
-      payer: settlement?.payer ?? null,
-      tx_hash: settlement?.txHash ?? null,
-      network: settlement?.network ?? null,
       error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
-    };
-    safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
+    });
     return c.json(result);
   });
 }
 
-// bounty_deep_dive: payment has already settled by the time this handler runs (the
-// x402 middleware above gates it) — this just kicks off the real async job and
-// returns immediately. The actual audit runs in GitHub Actions
-// (.github/workflows/deep-dive-bounty.yml -> agents/deep_dive_audit.py), not here.
+// bounty_deep_dive: gated by the same x402 middleware above — payment
+// verification has already happened by the time this handler runs, but
+// actual settlement still happens after (see the onAfterSettle hook above),
+// and is cancelled automatically if this handler responds >= 400. This just
+// kicks off the real async job and returns immediately. The actual audit
+// runs in GitHub Actions (.github/workflows/deep-dive-bounty.yml ->
+// agents/deep_dive_audit.py), not here — it doesn't log an x402 job record
+// (see lib/jobLog.ts), so it never appears in the live feed.
 app.get("/scan/bounty_deep_dive", async (c) => {
   const address = c.req.query("address") || "";
   const chain = c.req.query("chain") || "8453";
