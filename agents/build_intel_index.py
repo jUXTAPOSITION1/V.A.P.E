@@ -245,11 +245,25 @@ def scan_investigations():
         title = _first_heading(txt, name)
         sym_m = re.search(r"Investigation\s*[—-]\s*(.+)$", title)
         symbol = sym_m.group(1).strip() if sym_m else None
+        # write_report() emits a single "- Symbol/Name: SYM / Name" line under
+        # "## Market & Liquidity" — the ticker was already being parsed from
+        # the report title above, but the full token NAME was never extracted
+        # into the index at all, so the site could only ever show a ticker/
+        # address, never the name. dex.get(...) can be None, which the f-string
+        # in write_report() stringifies literally as the text "None" — treat
+        # that (and an empty string) as "no name available", not a real name.
+        symname = _field(txt, "Symbol/Name")
+        token_name = None
+        if symname and "/" in symname:
+            candidate = symname.split("/", 1)[1].strip()
+            if candidate and candidate.lower() != "none":
+                token_name = candidate
         out.append({
             "source": "report",
             "file": name,
             "title": title,
             "symbol": symbol,
+            "name": token_name,
             "date": _field(txt, "Date", "Cycle") or _date_from_name(name),
             "target": target or None,
             "chain": re.sub(r"[`*]", "", _field(txt, "Chain") or "").strip() or None,

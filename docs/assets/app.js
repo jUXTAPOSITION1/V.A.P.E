@@ -433,55 +433,95 @@ const App = {
         } catch (e) { this._set('m-mcap', '—'); }
     },
 
-    // "Base Movers" — DexScreener's boosted-token feed is the closest
-    // keyless, real-time signal to "trending" available without a paid data
-    // provider: these are pairs projects have actively promoted, not a
-    // ranking by market cap, so the copy is careful to call it "trending"
-    // rather than "top by market cap". One batched pairs lookup per refresh
-    // cycle (comma-joined addresses, same call shape DexScreener's own docs
-    // recommend for up to 30 tokens) — Gainers/Losers/Volume just re-sort
-    // that same fetched set client-side, no extra requests per tab switch.
+    // "Base Movers" — real data source, tried in order:
+    //   1. CoinGecko's "Base Ecosystem" category (curated, real Base tokens
+    //      with reliable logo/symbol/name/price data in one keyless,
+    //      CORS-friendly call).
+    //   2. DexScreener's boosted-token feed as a fallback — kept because it
+    //      was the only source before, but demoted: it's a paid-promotion
+    //      signal (projects actively boosting a listing), not organic
+    //      movers, and was observed going empty/unavailable often enough in
+    //      practice that this section stopped populating entirely.
+    // Gainers/Losers/Volume just re-sort whichever set loaded, client-side —
+    // no extra requests per tab switch.
     _movers: null,
     _moversTab: 'trending',
     async baseMovers() {
         const el = document.getElementById('base-movers');
         if (!el) return;
         try {
-            // DexScreener occasionally 403s or rate-limits this endpoint —
-            // fetch() only rejects on a network-level failure, not on a non-2xx
-            // response, so an unchecked `.json()` on a 403's (often non-JSON)
-            // body was throwing an opaque parse error that told a browser
-            // console nothing about the real cause. Check status explicitly so
-            // the actual reason is visible for debugging instead of a silent
-            // "Live data unavailable."
-            const boostsRes = await fetch('https://api.dexscreener.com/token-boosts/top/v1');
-            if (!boostsRes.ok) throw new Error(`token-boosts/top/v1 -> HTTP ${boostsRes.status}`);
-            const boosts = await boostsRes.json();
-            const addrs = [...new Set((Array.isArray(boosts) ? boosts : [])
-                .filter(b => b.chainId === 'base' && b.tokenAddress)
-                .map(b => b.tokenAddress.toLowerCase()))].slice(0, 30);
-            if (!addrs.length) throw new Error('no boosted Base tokens right now');
-            const pairsRes = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addrs.join(',')}`);
-            if (!pairsRes.ok) throw new Error(`latest/dex/tokens -> HTTP ${pairsRes.status}`);
-            const data = await pairsRes.json();
-            const byToken = new Map();
-            (data.pairs || []).forEach(p => {
-                if (p.chainId !== 'base') return;
-                const addr = (p.baseToken?.address || '').toLowerCase();
-                if (!addr) return;
-                const existing = byToken.get(addr);
-                if (!existing || (p.liquidity?.usd || 0) > (existing.liquidity?.usd || 0)) byToken.set(addr, p);
-            });
-            // Preserve the boost feed's own ranking for the "trending" tab —
-            // the tokens/{addrs} lookup above returns pairs in its own order,
-            // not the boost ranking, so rebuild from `addrs`.
-            this._movers = addrs.map(a => byToken.get(a)).filter(Boolean);
-            if (!this._movers.length) throw new Error('boosted addresses returned no matching Base pairs');
-            this._renderMovers();
+            await this._moversFromCoinGecko();
         } catch (e) {
-            console.error('[baseMovers] Base Movers unavailable:', e.message || e);
-            el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable — retries next cycle.</div>`;
+            console.error('[baseMovers] CoinGecko unavailable, falling back to DexScreener boosts:', e.message || e);
+            try {
+                await this._moversFromDexScreenerBoosts();
+            } catch (e2) {
+                console.error('[baseMovers] Base Movers unavailable:', e2.message || e2);
+                el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable — retries next cycle.</div>`;
+            }
         }
+    },
+    async _moversFromCoinGecko() {
+        // Real bug fixed here (caught by review): CoinGecko's /coins/markets
+        // `order` param only accepts market_cap_desc/asc, volume_desc/asc, or
+        // id_desc/asc — price_change_percentage_24h_desc isn't a real value
+        // and was silently falling back to the default (market_cap_desc), so
+        // the "trending" tab was actually just market-cap-ranked, not movers
+        // at all. Fetch by market cap (a legitimate, broad pool of real Base
+        // ecosystem tokens), then sort by absolute 24h change client-side —
+        // same "biggest movers" definition already used server-side in
+        // agents/data_fetchers.py::get_evm_movers().
+        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=base-ecosystem&order=market_cap_desc&per_page=30&page=1&sparkline=false&price_change_percentage=24h');
+        if (!res.ok) throw new Error(`coingecko coins/markets -> HTTP ${res.status}`);
+        const coins = await res.json();
+        if (!Array.isArray(coins) || !coins.length) throw new Error('coingecko returned no base-ecosystem coins');
+        coins.sort((a, b) => Math.abs(b.price_change_percentage_24h ?? 0) - Math.abs(a.price_change_percentage_24h ?? 0));
+        // Normalized into the exact shape _renderMovers() already expects
+        // (priceUsd / priceChange.h24 / volume.h24 / baseToken.symbol+name /
+        // info.imageUrl / url) so that function needs zero changes regardless
+        // of which source actually supplied the data this cycle.
+        this._movers = coins.map(c => ({
+            url: `https://www.coingecko.com/en/coins/${c.id}`,
+            baseToken: { symbol: (c.symbol || '').toUpperCase(), name: c.name, address: null },
+            priceUsd: c.current_price,
+            priceChange: { h24: c.price_change_percentage_24h },
+            volume: { h24: c.total_volume },
+            info: { imageUrl: c.image },
+        }));
+        this._renderMovers();
+    },
+    async _moversFromDexScreenerBoosts() {
+        // DexScreener occasionally 403s or rate-limits this endpoint —
+        // fetch() only rejects on a network-level failure, not on a non-2xx
+        // response, so an unchecked `.json()` on a 403's (often non-JSON)
+        // body was throwing an opaque parse error that told a browser
+        // console nothing about the real cause. Check status explicitly so
+        // the actual reason is visible for debugging instead of a silent
+        // "Live data unavailable."
+        const boostsRes = await fetch('https://api.dexscreener.com/token-boosts/top/v1');
+        if (!boostsRes.ok) throw new Error(`token-boosts/top/v1 -> HTTP ${boostsRes.status}`);
+        const boosts = await boostsRes.json();
+        const addrs = [...new Set((Array.isArray(boosts) ? boosts : [])
+            .filter(b => b.chainId === 'base' && b.tokenAddress)
+            .map(b => b.tokenAddress.toLowerCase()))].slice(0, 30);
+        if (!addrs.length) throw new Error('no boosted Base tokens right now');
+        const pairsRes = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${addrs.join(',')}`);
+        if (!pairsRes.ok) throw new Error(`latest/dex/tokens -> HTTP ${pairsRes.status}`);
+        const data = await pairsRes.json();
+        const byToken = new Map();
+        (data.pairs || []).forEach(p => {
+            if (p.chainId !== 'base') return;
+            const addr = (p.baseToken?.address || '').toLowerCase();
+            if (!addr) return;
+            const existing = byToken.get(addr);
+            if (!existing || (p.liquidity?.usd || 0) > (existing.liquidity?.usd || 0)) byToken.set(addr, p);
+        });
+        // Preserve the boost feed's own ranking for the "trending" tab —
+        // the tokens/{addrs} lookup above returns pairs in its own order,
+        // not the boost ranking, so rebuild from `addrs`.
+        this._movers = addrs.map(a => byToken.get(a)).filter(Boolean);
+        if (!this._movers.length) throw new Error('boosted addresses returned no matching Base pairs');
+        this._renderMovers();
     },
 
     _renderMovers() {
@@ -656,11 +696,18 @@ const App = {
     _esc(t){ return (t||'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); },
     _shortAddr(a){ return (a && a.length>12) ? a.slice(0,6)+'…'+a.slice(-4) : (a||''); },
     _symFromTitle(t){ const m=(t||'').match(/Investigation\s*[—-]\s*(.+)$/); return m ? m[1].trim() : null; },
+    // Real bug fixed here: investigations are now genuinely multi-chain
+    // (agents/investigate.py rotates auto-target across 7 EVM chains), but
+    // this used to only distinguish arbitrum/ethereum/base — anything else
+    // (Optimism/Polygon/BNB Chain/Avalanche) silently fell through to 'base',
+    // giving a wrong-chain token-icon CDN path and a wrong explorer link.
+    // Extracts the leading chain-id number from whatever format the
+    // "Chain:" field is in (e.g. "42161 (Arbitrum)") and maps it directly —
+    // robust to the exact display text wrapping around it.
+    _CHAIN_ID_MAP: {'1':'ethereum','8453':'base','42161':'arbitrum','10':'optimism','137':'polygon','56':'bsc','43114':'avalanche'},
     _chainSlug(c){
-        const s=String(c||'');
-        if(/42161|arbitrum/i.test(s)) return 'arbitrum';
-        if(/^1$|ethereum/i.test(s)) return 'ethereum';
-        return 'base';
+        const m = String(c||'').match(/\d+/);
+        return (m && this._CHAIN_ID_MAP[m[0]]) || 'base';
     },
     _tokenIcon(address, chain){
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
@@ -669,8 +716,9 @@ const App = {
     _explorerUrl(address, chain){
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
         const slug = this._chainSlug(chain);
-        const host = slug==='arbitrum' ? 'arbiscan.io' : slug==='ethereum' ? 'etherscan.io' : 'basescan.org';
-        return `https://${host}/address/${address}`;
+        const hosts = {arbitrum:'arbiscan.io', ethereum:'etherscan.io', optimism:'optimistic.etherscan.io',
+                       polygon:'polygonscan.com', bsc:'bscscan.com', avalanche:'snowtrace.io', base:'basescan.org'};
+        return `https://${hosts[slug]||'basescan.org'}/address/${address}`;
     },
     // Archive/report-card meta line: small wrapping chips instead of a single
     // "·"-joined text string — a long joined line (long address, long offering
@@ -705,6 +753,7 @@ const App = {
             if(inv){
                 const sym = inv.symbol || this._symFromTitle(inv.title);
                 const heading = sym || this._shortAddr(inv.target) || inv.title || 'target';
+                const showName = inv.name && inv.name.toLowerCase() !== (sym||'').toLowerCase();
                 const explorer = this._explorerUrl(inv.target, inv.chain);
                 iel.innerHTML=`
                     <div class="flex items-center justify-between gap-2 mb-3">
@@ -715,6 +764,7 @@ const App = {
                         ${this._iconImg(inv.target, inv.chain, 40)}
                         <div class="min-w-0">
                             <div class="font-display text-lg leading-tight truncate">${this._esc(heading)}</div>
+                            ${showName?`<div class="text-xs text-zinc-400 truncate">${this._esc(inv.name)}</div>`:''}
                             ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                         </div>
                     </a>
@@ -778,13 +828,17 @@ const App = {
             const items=d.investigations||[];
             rows=items.length?items.map(i=>{
                 const sym = i.symbol || this._symFromTitle(i.title);
+                const showName = i.name && i.name.toLowerCase() !== (sym||'').toLowerCase();
                 const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
                 return `
                 <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
                     ${icon ? this._iconChip(icon) : this._iconChip('<i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-sm"></i>', 'bg-cyan-500/10')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="font-mono text-xs truncate min-w-0">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
+                            <span class="min-w-0 truncate">
+                                <span class="font-mono text-xs">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
+                                ${showName?`<span class="text-[11px] text-zinc-500 ml-1.5">${this._esc(i.name)}</span>`:''}
+                            </span>
                             <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-cyan-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                         </div>
                         ${this._metaChips([
