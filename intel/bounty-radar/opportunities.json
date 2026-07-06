@@ -18791,5 +18791,24 @@
     "fitScore": 90,
     "isNew": true,
     "firstSeen": "2026-07-04T11:08:07.739782Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Lazy Summer Protocol-1783209600",
+    "name": "Lazy Summer Protocol (exploit $6,000,000)",
+    "prizeUsd": 6000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Donation Attack on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 88,
+    "isNew": true,
+    "firstSeen": "2026-07-06T19:20:57.903718Z"
   }
 ]
