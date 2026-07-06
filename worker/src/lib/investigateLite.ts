@@ -2,9 +2,9 @@
  * TypeScript port of agents/investigate.py's real heuristic engine — the
  * same CertiK-style weighted score(), meme-factory-template detection, and
  * recent-hack correlation every FREE VAPE investigation runs, now reachable
- * from the paid safety_preflight x402 route. Field-for-field port of the
+ * from the paid dossier_check x402 route. Field-for-field port of the
  * scoring rubric (same weights, same thresholds, same messages) so the ACP
- * and x402 versions of safety_preflight never disagree on a verdict — same
+ * and x402 versions of dossier_check never disagree on a verdict — same
  * parity guarantee this repo already holds for token_scan.py/scan.ts.
  *
  * Deliberately does NOT persist anything (no report file, no ledger, no
@@ -17,22 +17,36 @@ import { webSearch, webScrape, type ResearchEnv } from "./webResearch";
 const UA = { "User-Agent": "VAPE-PrivateEye/1.0" };
 const BASE_RPC = "https://mainnet.base.org";
 
-async function safeGetJson(url: string): Promise<any> {
-  try {
-    const r = await fetch(url, { headers: UA });
-    if (!r.ok) return {};
-    return await r.json();
-  } catch {
-    return {};
+async function safeGetJson(url: string, retries = 0): Promise<any> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const r = await fetch(url, { headers: UA });
+      if (!r.ok) {
+        if (attempt < retries && (r.status === 429 || r.status === 403 || r.status >= 500)) {
+          await new Promise((res) => setTimeout(res, 400 * (attempt + 1)));
+          continue;
+        }
+        return {};
+      }
+      return await r.json();
+    } catch {
+      if (attempt < retries) {
+        await new Promise((res) => setTimeout(res, 400 * (attempt + 1)));
+        continue;
+      }
+      return {};
+    }
   }
+  return {};
 }
 
 /** Raw GoPlus token_security fields — deliberately the FULL raw dict (unlike
  * scan.ts's scan(), which only keeps derived flags), since score() below
  * needs individual raw traits (hidden_owner, can_take_back_ownership, etc.)
- * scan.ts never surfaces. */
+ * scan.ts never surfaces. GoPlus is the sole source for these traits (no
+ * fallback), so a 429 gets extra retries same as scan.ts's safeGet. */
 export async function goplusRaw(address: string, chainId: number): Promise<Record<string, any>> {
-  const data = await safeGetJson(`https://api.gopluslabs.io/api/v1/token_security/${chainId}?contract_addresses=${address}`);
+  const data = await safeGetJson(`https://api.gopluslabs.io/api/v1/token_security/${chainId}?contract_addresses=${address}`, 3);
   const result = data?.result;
   if (!result) return {};
   const vals = Object.values(result as Record<string, any>);

@@ -120,8 +120,11 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
     return { error: "invalid_address", address: addr } as unknown as ScanResult;
   }
 
+  // GoPlus is the sole source for security fields (mintable/honeypot/owner/
+  // taxes) — unlike DexScreener there's no GeckoTerminal-style fallback, so
+  // a 429 here is worth extra retries rather than giving up after one.
   const [gpRaw, dsRaw] = await Promise.all([
-    safeGet(`https://api.gopluslabs.io/api/v1/token_security/${chainId}?contract_addresses=${addr}`),
+    safeGet(`https://api.gopluslabs.io/api/v1/token_security/${chainId}?contract_addresses=${addr}`, 3),
     safeGet(`https://api.dexscreener.com/latest/dex/tokens/${addr}`),
   ]);
 

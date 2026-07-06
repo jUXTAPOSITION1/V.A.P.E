@@ -18,7 +18,7 @@ export interface ContractSource {
   // standard-json-input contracts) — additive field, existing callers only
   // ever read the fields above so this is safe. Mirrors
   // agents/data_fetchers.py::get_contract_source()'s source_code field,
-  // used by the safety_preflight offering's frontier-LLM quick read.
+  // used by the dossier_check offering's frontier-LLM quick read.
   source_code?: string | null;
 }
 

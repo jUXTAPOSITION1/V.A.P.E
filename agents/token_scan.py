@@ -112,8 +112,11 @@ def scan(address, chain_id=8453):
     if not re.fullmatch(r"0x[a-fA-F0-9]{40}", address):
         return {"error": "invalid_address", "address": address}
 
+    # GoPlus is the sole source for security fields (mintable/honeypot/owner/
+    # taxes) — unlike DexScreener there's no GeckoTerminal-style fallback, so
+    # a 429 here is worth extra retries rather than giving up after one.
     gp_raw = _get(f"https://api.gopluslabs.io/api/v1/token_security/{chain_id}"
-                  f"?contract_addresses={address}")
+                  f"?contract_addresses={address}", retries=3)
     ds_raw = _get(f"https://api.dexscreener.com/latest/dex/tokens/{address}")
 
     gp = {}

@@ -49,7 +49,7 @@ async function liquidityCheck(req: Requirement) {
   if (!a) return { error: "no address" };
   const r = await scan(a, chainFrom(req));
   if (r.error) return r;
-  return { address: a, liquidity_usd: r.liquidity_usd, top_pair_dex: r.top_pair_dex, verdict: r.verdict };
+  return { address: a, symbol: r.symbol, name: r.name, liquidity_usd: r.liquidity_usd, top_pair_dex: r.top_pair_dex, verdict: r.verdict };
 }
 
 async function rugPullAlert(req: Requirement) {
@@ -62,6 +62,8 @@ async function rugPullAlert(req: Requirement) {
   const rug = r.flags.filter(f => ownerFlags.has(f));
   return {
     address: a,
+    symbol: r.symbol,
+    name: r.name,
     rug_risk: (r.is_honeypot === "1" || rug.length >= 2) ? "HIGH" : "LOW",
     owner_powers: rug,
     verdict: r.verdict,
@@ -104,7 +106,7 @@ async function marketIntelHandler(_req: Requirement) {
 async function verifySocials(env: ResearchEnv, dex: DexInfo) {
   const declared = [...dex.websites, ...dex.socials];
   if (!declared.length) return { declared_count: 0, checked: [] as Array<Record<string, unknown>> };
-  // Cap at 3 — cost/latency proportionate to safety_preflight's instant,
+  // Cap at 3 — cost/latency proportionate to dossier_check's instant,
   // synchronous nature.
   const checked = await Promise.all(declared.slice(0, 3).map(async (item: any) => {
     const url = item.url as string;
@@ -124,25 +126,37 @@ async function verifySocials(env: ResearchEnv, dex: DexInfo) {
 
 const AI_QUICK_REVIEW_SYSTEM = "You are VAPE, an autonomous on-chain security reviewer, giving a QUICK paid "
   + "pre-trade read (not the full $50 24h deep-dive audit). Base every claim on "
-  + "the actual verified source given below — never invent function names or "
-  + "behavior you weren't shown. In 3-5 sentences, name any real red flags across "
-  + "reentrancy, access control, oracle trust, proxy/upgrade risk, and honeypot/rug "
-  + "mechanics — or state plainly that nothing stood out in a quick read. This is a "
-  + "fast signal, not a substitute for a full audit; do not fabricate confidence.";
+  + "the actual verified source and recon data given below — never invent function "
+  + "names, behavior, or facts you weren't shown. Open by naming the token/project "
+  + "and stating whether the source is a known template (e.g. a Virtuals Protocol "
+  + "AgentTokenV2 proxy, a Clanker deployment, a standard OpenZeppelin base) versus "
+  + "fully bespoke code, since that changes how much of the risk is inherited from "
+  + "an audited base contract versus custom logic. Then, in 3-5 more sentences, name "
+  + "any real red flags across reentrancy, access control, oracle trust, proxy/upgrade "
+  + "risk, and honeypot/rug mechanics — reconcile with the recon score/flags below "
+  + "rather than repeating them verbatim (e.g. if a flagged risk is standard for the "
+  + "template identified above, say so explicitly instead of restating it as novel). "
+  + "State plainly if nothing stood out. This is a fast signal, not a substitute for "
+  + "a full audit; do not fabricate confidence.";
 
 // Frontier-LLM quick read of the actual verified source — same provider
 // framing as the $50 deep-dive (Gemini 2.5 Pro, Groq fallback — see
 // lib/llm.ts), but a far smaller prompt/output budget matched to
-// safety_preflight's synchronous, instant-tier nature. Mirrors
+// dossier_check's synchronous, instant-tier nature. Mirrors
 // agents/acp_fulfill.py::_ai_quick_review() exactly.
 async function aiQuickReview(env: LlmEnv, verifChecked: boolean, verifNote: string | undefined,
                               verifName: string | null | undefined, sourceCode: string | null | undefined,
-                              reasons: string[]) {
+                              reasons: string[], ctx: { symbol: string; name: string | null; address: string;
+                              chain: number; score: number; verdict: string; positiveSignals: string[] }) {
   if (!verifChecked) return { available: false, note: verifNote ?? "contract source unavailable" };
   if (!sourceCode) return { available: false, note: "verified but no source text returned" };
-  const user = `=== VERIFIED SOURCE (${verifName}, truncated) ===\n${sourceCode.slice(0, 12000)}\n\n`
-    + `=== KNOWN RISK FACTORS FROM RECON ===\n${reasons.length ? reasons.join("\n") : "none"}`;
-  const result = await askFrontier(env, AI_QUICK_REVIEW_SYSTEM, user, { maxTokens: 400, temperature: 0.3, timeoutMs: 25000 });
+  const user = `=== TOKEN ===\n${ctx.symbol || "unknown"} / ${ctx.name || verifName || "unknown"} `
+    + `on chain ${ctx.chain}, contract ${ctx.address}\n\n`
+    + `=== VERIFIED SOURCE (${verifName}, truncated) ===\n${sourceCode.slice(0, 12000)}\n\n`
+    + `=== RECON SCORE ===\n${ctx.score}/100 -> ${ctx.verdict}\n\n`
+    + `=== RECON RISK FLAGS ===\n${reasons.length ? reasons.join("\n") : "none"}\n\n`
+    + `=== RECON POSITIVE SIGNALS ===\n${ctx.positiveSignals.length ? ctx.positiveSignals.join("\n") : "none"}`;
+  const result = await askFrontier(env, AI_QUICK_REVIEW_SYSTEM, user, { maxTokens: 550, temperature: 0.3, timeoutMs: 25000 });
   return result.available
     ? { available: true, provider: result.provider, summary: result.text }
     : { available: false, note: result.note };
@@ -155,8 +169,8 @@ async function aiQuickReview(env: LlmEnv, verifChecked: boolean, verifNote: stri
 // instead of the thinner token_scan()-only verdict this offering returned
 // before, plus a best-effort visit of the project's own declared website/
 // social URLs and a frontier-LLM quick read of the actual verified source.
-// Mirrors agents/acp_fulfill.py::_safety_preflight() exactly.
-async function safetyPreflight(req: Requirement, env: { ETHERSCAN_API_KEY?: string } & ResearchEnv & LlmEnv) {
+// Mirrors agents/acp_fulfill.py::_dossier_check() exactly.
+async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string } & ResearchEnv & LlmEnv) {
   const a = addrFrom(req);
   if (!a) return { error: "no address" };
   const chain = chainFrom(req);
@@ -178,7 +192,7 @@ async function safetyPreflight(req: Requirement, env: { ETHERSCAN_API_KEY?: stri
   const memeFactoryTemplate = ["clanker"].some((p) => cname.includes(p));
 
   const result: Record<string, unknown> = {
-    address: a, chain_id: chain, symbol,
+    address: a, chain_id: chain, symbol, name: dex.name ?? null,
     score: s, verdict, reasons, positive_signals,
     verified: verif.verified, contract_name: verif.name, proxy: verif.proxy,
     meme_factory_template: memeFactoryTemplate,
@@ -190,12 +204,13 @@ async function safetyPreflight(req: Requirement, env: { ETHERSCAN_API_KEY?: stri
   if (!verifChecked) result.verification_note = verif.note;
 
   result.social_verification = await verifySocials(env, dex);
-  result.ai_review = await aiQuickReview(env, verifChecked, verif.note, verif.name, src.source_code, reasons);
+  result.ai_review = await aiQuickReview(env, verifChecked, verif.note, verif.name, src.source_code, reasons,
+    { symbol, name: dex.name ?? null, address: a, chain, score: s, verdict, positiveSignals: positive_signals });
 
   return result;
 }
 
-export type HandlerName = "token_safety_check" | "liquidity_check" | "rug_pull_alert" | "exploit_check" | "market_intel" | "safety_preflight";
+export type HandlerName = "token_safety_check" | "liquidity_check" | "rug_pull_alert" | "exploit_check" | "market_intel" | "dossier_check";
 
 export const HANDLERS: Record<HandlerName, (req: Requirement, env: any) => Promise<unknown>> = {
   token_safety_check: tokenSafetyCheck,
@@ -203,7 +218,7 @@ export const HANDLERS: Record<HandlerName, (req: Requirement, env: any) => Promi
   rug_pull_alert: rugPullAlert,
   exploit_check: exploitCheck,
   market_intel: marketIntelHandler,
-  safety_preflight: safetyPreflight,
+  dossier_check: dossierCheck,
 };
 
 export async function fulfill(offering: HandlerName, req: Requirement, env: any) {

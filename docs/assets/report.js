@@ -85,7 +85,7 @@ function verdictClass(v) {
 // deliverable), so those chips render icon-less first and are filled in by
 // `enhanceIcons()` once the caller inserts this HTML into the DOM.
 function renderDeliverableHtml(obj, depth = 0) {
-    const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict']);
+    const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol']);
     // A "<key>_classification" sibling (e.g. fear_greed / fear_greed_classification)
     // is a label for <key>'s value, not an independent fact — fold it into
     // one row instead of showing "Fear Greed 42" and "Fear Greed Classification
@@ -131,6 +131,17 @@ function renderDeliverableHtml(obj, depth = 0) {
             return `<div class="mb-1.5" ${indent}>
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
                 ${renderDeliverableHtml(val, depth + 1)}
+            </div>`;
+        }
+        // An array of OBJECTS (e.g. social_verification.checked's
+        // {type,url,reachable,excerpt} entries) would otherwise fall through
+        // to the plain-array branch below, whose val.join(', ') stringifies
+        // each object as the literal text "[object Object]". Render each
+        // item as its own nested field block instead.
+        if (Array.isArray(val) && val.length && val.every(v => v !== null && typeof v === 'object' && !Array.isArray(v))) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                ${val.map(item => `<div class="pl-2 mb-1 border-l border-white/10">${renderDeliverableHtml(item, depth + 1)}</div>`).join('')}
             </div>`;
         }
         // A raw "-1.2" or "4300000000" reads as noise next to prose fields —
@@ -223,8 +234,14 @@ const Report = {
         doc.setFontSize(10);
         doc.setTextColor(...MUTED);
         const generated = new Date().toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC');
+        const pdfDeliverable = (opts.result && opts.result.deliverable) || {};
+        const pdfTokenParts = [];
+        if (pdfDeliverable.symbol) pdfTokenParts.push(`$${pdfDeliverable.symbol}`);
+        const pdfTokenName = pdfDeliverable.name || pdfDeliverable.contract_name;
+        if (pdfTokenName && pdfTokenName !== pdfDeliverable.symbol) pdfTokenParts.push(pdfTokenName);
         const rows = [
             ['Offering', humanLabel(opts.offering)],
+            ...(pdfTokenParts.length ? [['Token', pdfTokenParts.join(' ')]] : []),
             ['Fulfillment', opts.via === 'x402' ? 'Paid via x402 (on-chain, real-time)' : 'Free preview scan'],
             ['Price', opts.priceUsd != null ? `$${opts.priceUsd}` : '—'],
             ['Target address', opts.requestedAddress || '—'],
@@ -317,7 +334,7 @@ const Report = {
     _renderObject(doc, obj, x, y, maxWidth, depth = 0) {
         const H = doc.internal.pageSize.getHeight();
         // Skip fields already surfaced in the header block or verdict badge above.
-        const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict']);
+        const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol']);
         for (const [key, val] of Object.entries(obj)) {
             if (skip.has(key) && depth === 0) continue;
             if (y > H - 90) { doc.addPage(); y = 48; }
@@ -328,6 +345,20 @@ const Report = {
                 doc.text(`${humanLabel(key)}:`, x + depth * 12, y);
                 y += 14;
                 y = this._renderObject(doc, val, x, y, maxWidth, depth + 1);
+                continue;
+            }
+            // Same "[object Object]" risk as renderDeliverableHtml() above —
+            // an array of objects (e.g. social_verification.checked) needs
+            // its own nested rendering, not a plain join().
+            if (Array.isArray(val) && val.length && val.every(v => v !== null && typeof v === 'object' && !Array.isArray(v))) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9.5);
+                doc.setTextColor(...INK);
+                doc.text(`${humanLabel(key)}:`, x + depth * 12, y);
+                y += 14;
+                for (const item of val) {
+                    y = this._renderObject(doc, item, x, y, maxWidth, depth + 1);
+                }
                 continue;
             }
             const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
@@ -372,12 +403,26 @@ const Report = {
         // more at the top of the card — the case-report equivalent of the
         // logo the user sees on every investigation/scan card elsewhere.
         const assetIcon = addr ? tokenIconByAddress(addr, deliverable.chain_id) : null;
+        // Token identity (symbol + project name) belongs front-and-center next
+        // to the icon, above the offering name — a buyer scans the card to
+        // confirm "is this the token I paid to check" before anything else.
+        const tokenSymbol = deliverable.symbol;
+        const tokenName = deliverable.name || deliverable.contract_name;
+        const identityParts = [];
+        if (tokenSymbol) identityParts.push(`$${tokenSymbol}`);
+        if (tokenName && tokenName !== tokenSymbol) identityParts.push(tokenName);
+        const titleHtml = identityParts.length
+            ? `<div class="min-w-0">
+                    <div class="font-display text-sm font-semibold truncate">${escapeHtml(identityParts.join(' '))}</div>
+                    <div class="text-[10px] text-zinc-500 truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>
+                </div>`
+            : `<div class="font-display text-sm truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>`;
         return `
             <div class="text-left">
                 <div class="flex items-center justify-between gap-3 mb-3">
                     <div class="flex items-center gap-2 min-w-0">
                         ${assetIcon ? `<img src="${assetIcon}" alt="" class="w-6 h-6 rounded-full shrink-0" onerror="this.remove()">` : ''}
-                        <div class="font-display text-sm truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>
+                        ${titleHtml}
                     </div>
                     ${verdictField ? `<span class="inline-block px-3 py-1 rounded-lg font-display text-xs shrink-0 ${verdictClass(verdictField)}">${escapeHtml(VERDICT_LABELS[verdictField] || verdictField)}</span>` : ''}
                 </div>

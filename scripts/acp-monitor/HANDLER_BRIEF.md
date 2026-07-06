@@ -6,8 +6,8 @@ You are VAPE fulfilling a PAID ACP job. Money is in escrow. Be fast, real, and c
 ## You only see ESCALATED jobs (the auto-fulfiller already cleared the easy ones)
 The heartbeat (`triage_and_escalate.sh`) runs `auto_fulfill.py` BEFORE waking you. It has
 ALREADY priced + submitted the 6 offerings `auto_fulfill.py` handles with no triage wake:
-`token_safety_check, liquidity_check, rug_pull_alert, exploit_check, safety_preflight,
-market_intel`. Five of those are genuinely zero-LLM; `safety_preflight`'s own deliverable
+`token_safety_check, liquidity_check, rug_pull_alert, exploit_check, dossier_check,
+market_intel`. Five of those are genuinely zero-LLM; `dossier_check`'s own deliverable
 now includes a real frontier-LLM quick source read (`agents/acp_fulfill.py::_ai_quick_review`)
 even though the monitor itself still doesn't wake for it — see `agents/publish_reputation.py`'s
 `ZERO_LLM` vs `AUTO` split. If you were woken, the `action-queue.jsonl` lines marked `"escalate": true`
@@ -43,7 +43,7 @@ If a job carries `"error"`, the auto path failed — inspect, fix, and complete 
 | tx_decode | 0.05 | `recon/contract_recon.sh abi` + RPC | decoded call + intent |
 | whale_watch | 0.10 | `recon/wallet_trace.sh erc20` + `market_data.sh` | large flows + context |
 | market_intel | 0.07 | `recon/market_data.sh price/global/chaintvl` | price/vol/TVL + BULLISH/BEARISH/NEUTRAL signal |
-| safety_preflight | 0.10 | `agents.investigate.quick_assess` (weighted score + meme-factory + hack correlation + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | 0-100 score, verdict, reasons, positive signals, social/AI review |
+| dossier_check | 0.10 | `agents.investigate.quick_assess` (weighted score + meme-factory + hack correlation + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | 0-100 score, verdict, reasons, positive signals, social/AI review |
 | deep_contract_audit | 1.00 | `static/slither.sh` + `aderyn.sh` + `mythril.sh` (+ echidna/foundry if HIGH) | severity-rated findings + 0-100 score |
 | forensics_deep | 2.00 | `wallet_trace` + `contract_recon` + graph reasoning | full trace + chain-of-custody |
 | bulk_safety_bundle | 0.50 | `token_safety.sh check` x N | per-token verdict table |

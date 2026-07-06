@@ -28,7 +28,7 @@ X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 #   wrangler secret put ALCHEMY_API_KEY
 #   wrangler secret put COINGECKO_API_KEY
 #
-# ETHERSCAN_API_KEY: only exploit_check / safety_preflight need it; the other
+# ETHERSCAN_API_KEY: only exploit_check / dossier_check need it; the other
 # 4 offerings work without it (degrade to {"verified": null}, matching
 # agents/data_fetchers.py).
 #
