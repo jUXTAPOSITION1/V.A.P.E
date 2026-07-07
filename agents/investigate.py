@@ -243,23 +243,49 @@ def contract_verification(address, chain="8453"):
 
 
 def hack_correlation(gp):
-    """Correlate the target's risk traits against recent real exploit techniques."""
+    """Correlate the target's risk traits against ACTUAL recent exploit
+    incidents (the same real feed agents/security_sweep.py's Threat Ledger
+    draws from — agents/data_fetchers.get_hack_feed()), not just a canned
+    description of the trait in isolation. When a trait's technique
+    category genuinely appears in the tracked feed, cites the specific
+    dated incident (name/amount/technique/chain) so a reader can verify the
+    claim against a real event; says so plainly when it doesn't, rather
+    than asserting a vague warning regardless of what the real data shows.
+    """
     if not DF:
         return []
     feed = DF.get_hack_feed(limit=25)
-    techniques = {}
-    for inc in (feed.get("incidents") or []):
-        t = (inc.get("technique") or "").lower()
-        if t:
-            techniques[t] = techniques.get(t, 0) + 1
-    hits = []
-    # crude trait->technique matches
+    incidents = feed.get("incidents") or []
+
+    # Trait -> technique keywords it plausibly correlates with, used to find
+    # a REAL matching incident in the feed rather than describing the trait alone.
+    trait_checks = [
+        ("Honeypot trait present", ("honeypot",)),
+        ("Owner can alter balances/ownership", ("access control", "key compromise", "admin key", "owner")),
+        ("Proxy contract (upgradeable logic)", ("proxy", "upgrad")),
+    ]
+    active_traits = []
     if str(gp.get("is_honeypot")) == "1":
-        hits.append("Honeypot trait present — matches recurring honeypot/rug incidents.")
+        active_traits.append(trait_checks[0])
     if str(gp.get("can_take_back_ownership")) == "1" or str(gp.get("owner_change_balance")) == "1":
-        hits.append("Owner can alter balances/ownership — access-control exploit surface (seen in recent key-compromise hacks).")
+        active_traits.append(trait_checks[1])
     if str(gp.get("is_proxy")) == "1":
-        hits.append("Proxy contract — upgradeable logic; verify implementation isn't swappable to malicious code.")
+        active_traits.append(trait_checks[2])
+
+    hits = []
+    for label, keywords in active_traits:
+        match = next(
+            (inc for inc in incidents if any(kw in (inc.get("technique") or "").lower() for kw in keywords)),
+            None,
+        )
+        if match:
+            hits.append(
+                f"{label} — matches a real recent incident: {match['name']} (${match['amount_usd_m']}M, "
+                f"{match['technique']}, {match['date']}, {', '.join(match.get('chains') or []) or 'unknown chain'})."
+            )
+        else:
+            hits.append(f"{label} — no directly matching technique in the {len(incidents)} most recent tracked "
+                         "incidents, but this remains a structural risk category.")
     return hits
 
 

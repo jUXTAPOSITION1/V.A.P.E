@@ -90,6 +90,15 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   from real data (`data_fetchers.py` + `skillforge/research.py`'s live web search), the LLM
   only narrates what the real data means. Scheduled via `intel-sweeps.yml` — security/base/
   virtuals 4x/day, sentiment 2x/day, macro daily, the two follow-up checks weekly.
+  `security_sweep.py` also writes `data/attack-feed.json` (real, dated incidents from the
+  same hacks feed, powering the site's homepage ticker + "Threat Ledger" section — see
+  `docs/assets/attackfeed.js`) and, for any new Base-chain incident it can resolve a real
+  on-chain address for via web search, runs `investigate.py`'s actual forensics pipeline
+  against it (`attempt_incident_forensics()`) — never a fabricated address, honestly skipped
+  when one can't be found. `investigate.py::hack_correlation()` was also fixed to genuinely
+  cross-reference a target's risk traits against real incidents in the same feed (citing the
+  specific matching incident by name/date/amount) instead of returning generic canned text
+  regardless of what the real data showed.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes

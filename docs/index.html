@@ -71,6 +71,7 @@
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-400 font-medium">
                 <a href="#the-file" class="hover:text-cyan-400 transition">Overview</a>
                 <a href="#the-wire" class="hover:text-cyan-400 transition">Live Data</a>
+                <a href="#threat-ledger" class="hover:text-rose-400 transition">Threats</a>
                 <a href="#retain" class="hover:text-[var(--brass)] transition">Engagement</a>
                 <a href="#bounty-command-center" class="hover:text-amber-400 transition">Bounties</a>
                 <a href="#your-case-file" class="hover:text-emerald-400 transition">Portfolio</a>
@@ -94,6 +95,7 @@
             <div class="max-w-7xl mx-auto px-5 py-3 flex flex-col gap-1 text-sm text-zinc-300">
                 <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-compass text-[11px]"></i></span> Overview</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-[11px]"></i></span> Live Data</a>
+                <a href="#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-triangle-exclamation text-[11px]"></i></span> Threats</a>
                 <a href="#retain" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style="background:var(--brass-dim);color:var(--brass)"><i class="fa-solid fa-handshake text-[11px]"></i></span> Engagement</a>
                 <a href="#bounty-command-center" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-[11px]"></i></span> Bounties</a>
                 <a href="#your-case-file" class="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5"><span class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-wallet text-[11px]"></i></span> Portfolio</a>
@@ -103,6 +105,42 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-5 sm:px-8 pt-10 pb-24">
+
+        <!-- ═══ 0. LIVE THREAT TICKER ═══
+             Fills the gap between the sticky nav and the hero — a single
+             rotating line, not a dashboard, so it reads as ambient signal
+             rather than competing with the hero for attention. Real
+             incidents only (data/attack-feed.json, written by
+             agents/security_sweep.py from DeFiLlama's hacks feed) — an
+             empty feed renders an honest "no incidents" state, never a
+             placeholder attack. -->
+        <div id="attack-ticker" class="reveal mb-8 sm:mb-10">
+            <div class="glass rounded-2xl border border-rose-500/15 overflow-hidden">
+                <div class="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3">
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="relative flex h-2 w-2">
+                            <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-60"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                        </span>
+                        <span class="font-display text-[11px] uppercase tracking-[.18em] text-rose-400 whitespace-nowrap">
+                            <span class="hidden sm:inline">Live Threat Feed</span><span class="sm:hidden">Threats</span>
+                        </span>
+                    </div>
+                    <div class="w-px h-4 bg-white/10 shrink-0" aria-hidden="true"></div>
+                    <div class="flex-1 min-w-0 h-5 relative overflow-hidden">
+                        <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-300 font-mono whitespace-nowrap overflow-hidden transition-all duration-300 ease-out">
+                            <span class="text-zinc-600">syncing threat feed…</span>
+                        </div>
+                    </div>
+                    <a href="#threat-ledger" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-zinc-500 hover:text-rose-400 transition shrink-0 font-medium">
+                        Full Ledger <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                    </a>
+                </div>
+                <div class="h-[2px] bg-white/5 relative overflow-hidden" aria-hidden="true">
+                    <div id="attack-ticker-progress" class="h-full bg-rose-500/50" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
 
         <!-- ═══ 1. HERO ═══ -->
         <header class="reveal grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center py-8 sm:py-14">
@@ -380,6 +418,36 @@
                     data gathered, the reasoning applied, and the verdict it produced.
                 </p>
             </div>
+        </section>
+
+        <!-- ═══ 3.7 THREAT LEDGER (live attack tracking) ═══
+             Sits between the two case-study sections — the same real feed
+             the ticker above draws from, in full. Every row is a real,
+             dated DeFiLlama incident; nothing here is curated for effect. -->
+        <section id="threat-ledger" class="reveal glass rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden border border-rose-500/10">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2 relative">
+                <div class="flex items-center gap-2"><span class="w-6 h-6 rounded-md bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-triangle-exclamation text-[11px]"></i></span><span class="text-[11px] uppercase tracking-[.2em] text-zinc-400">Threat Intelligence</span></div>
+                <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
+            </div>
+            <h2 class="font-serif-display text-3xl sm:text-4xl mb-3 relative">Every attack, tracked as it happens.</h2>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4 relative">A real, dated record of DeFi/crypto exploits from roughly the past two months,
+            pulled straight from DeFiLlama's public hacks feed by VAPE's own security sweep — the same data behind the ticker above.
+            No editorializing, no cherry-picking: every incident the feed returns appears here.</p>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8 text-xs relative">
+                <span id="threat-ledger-threat" class="inline-flex items-center gap-1.5 font-medium"></span>
+                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source sweep report</a>
+                <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/security_sweep.py" target="_blank" rel="noopener" class="text-zinc-500 hover:text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-code text-[10px]"></i> How this feed is built</a>
+            </div>
+            <div id="threat-ledger-body" class="grid grid-cols-1 gap-2 max-h-[440px] overflow-y-auto pr-1 relative">
+                <div class="skeleton h-14 rounded-xl"></div>
+                <div class="skeleton h-14 rounded-xl"></div>
+                <div class="skeleton h-14 rounded-xl"></div>
+                <div class="skeleton h-14 rounded-xl"></div>
+            </div>
+            <p class="text-[11px] text-zinc-600 mt-5 relative">Updated automatically, several times a day, by <code>agents/security_sweep.py</code>. When an
+            incident lands on Base and VAPE can resolve a real on-chain address for it, it runs its own forensics investigation
+            against that contract too — see <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for
+            any resulting case files, not just a summary of someone else's report.</p>
         </section>
 
         <!-- ═══ 4. FEATURED INVESTIGATION ═══ -->
@@ -727,5 +795,6 @@
     <script type="module" src="assets/report.js?v=8"></script>
     <script type="module" src="assets/hire.js?v=8"></script>
     <script type="module" src="assets/x402feed.js?v=1"></script>
+    <script type="module" src="assets/attackfeed.js?v=1"></script>
 </body>
 </html>

@@ -15,9 +15,11 @@ operational surface, grounded in the real data passed to it.
 
 Usage: python agents/security_sweep.py
 """
+import json
 import os
+import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.data_fetchers import get_hack_feed  # noqa: E402
@@ -27,6 +29,24 @@ from agents import llm  # noqa: E402
 RECENT_DAYS = 7
 BIG_HACK_USD_M = 50
 BIG_HACK_WINDOW_DAYS = 14
+
+# Feeds docs/assets/attackfeed.js's homepage ticker + "Threat Ledger" section —
+# more items than the report table shows (which stays short for readability),
+# filtered to a real, dated lookback window rather than an arbitrary count so
+# "past 2 months or so" is an honest, reproducible cutoff, not just "however
+# many the API happened to return."
+ATTACK_FEED_PATH = os.path.join(ic.ROOT, "data", "attack-feed.json")
+ATTACK_FEED_LOOKBACK_DAYS = 60
+ATTACK_FEED_FETCH_LIMIT = 40
+
+# VAPE doesn't just report these incidents — for ones it can actually verify
+# a target for, it runs its own real forensics pipeline against them (see
+# attempt_incident_forensics() below). Scoped to Base only (investigate.py's
+# real pipeline) and a real, resolved on-chain address only — never a
+# fabricated one — so "investigating the attacks" means something checkable.
+ATTACK_RESPONSE_STATE_PATH = os.path.join(ic.ROOT, "skillforge", "memory", "attack_response_state.json")
+ATTACK_RESPONSE_LOOKBACK_DAYS = 14
+_ADDR_RE = re.compile(r"0x[a-fA-F0-9]{40}")
 
 
 def _days_ago(date_str):
@@ -51,16 +71,127 @@ def compute_threat_level(incidents):
     return "LOW", recent, big_recent
 
 
+def write_attack_feed(incidents, threat, source_report_path):
+    """Real, dated-window slice of the same incident feed the report table
+    draws from — powers the homepage ticker and the full Threat Ledger
+    section. `source_report` is the exact report this run just wrote, so
+    the site can link the feed straight back to its knowledge source."""
+    cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_FEED_LOOKBACK_DAYS)
+    recent = []
+    for h in incidents:
+        try:
+            d = datetime.strptime(h["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        if d >= cutoff:
+            recent.append(h)
+    payload = {
+        "generated_at": ic.now_iso(),
+        "source_report": os.path.relpath(source_report_path, ic.ROOT).replace(os.sep, "/"),
+        "threat_level": threat,
+        "lookback_days": ATTACK_FEED_LOOKBACK_DAYS,
+        "incidents": recent,
+    }
+    os.makedirs(os.path.dirname(ATTACK_FEED_PATH), exist_ok=True)
+    with open(ATTACK_FEED_PATH, "w") as f:
+        json.dump(payload, f, indent=2)
+    return len(recent)
+
+
+def _load_attack_response_state():
+    try:
+        with open(ATTACK_RESPONSE_STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_attack_response_state(state):
+    os.makedirs(os.path.dirname(ATTACK_RESPONSE_STATE_PATH), exist_ok=True)
+    with open(ATTACK_RESPONSE_STATE_PATH, "w") as f:
+        json.dump(state, f, indent=2)
+
+
+def attempt_incident_forensics(incidents):
+    """VAPE doesn't just narrate these incidents, it investigates the ones
+    it can verify a real target for: for recent Base-chain hacks not
+    already checked, search for the real on-chain address and, if one is
+    found, run investigate.py's actual forensics pipeline against it —
+    producing a genuine investigation report, not a summary of someone
+    else's. Never fabricates an address: if search doesn't surface one,
+    the incident is honestly recorded as unresolved and skipped. A state
+    file makes this idempotent — each real incident is only ever searched
+    once, not re-queried every 6 hours forever.
+    """
+    try:
+        from agents import investigate as inv
+    except Exception as e:
+        print(f"[security_sweep] could not import investigate.py: {e}")
+        return []
+
+    state = _load_attack_response_state()
+    cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_RESPONSE_LOOKBACK_DAYS)
+    outcomes = []
+    for h in incidents:
+        chains = [str(c).lower() for c in (h.get("chains") or [])]
+        if "base" not in chains:
+            continue
+        try:
+            d = datetime.strptime(h["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        if d < cutoff:
+            continue
+        incident_id = f"{h['date']}:{h['name']}"
+        if incident_id in state:
+            continue  # already resolved-or-tried this exact real incident
+
+        search = ic.web_search_snippets(f"{h['name']} exploit contract address Base Basescan", max_results=5)
+        address = None
+        for r in search.get("results", []):
+            m = _ADDR_RE.search(f"{r.get('title', '')} {r.get('snippet', '')}")
+            if m:
+                address = m.group(0)
+                break
+
+        if not address:
+            state[incident_id] = {"checked_at": ic.now_iso(), "resolved": False}
+            outcomes.append({"incident": incident_id, "resolved": False})
+            continue
+
+        hint = f"post-incident forensics: {h['name']} exploit ({h['date']}, ${h.get('amount_usd_m')}M, {h.get('technique')})"
+        try:
+            result = inv.investigate(address, chain="8453", hint=hint, force=False)
+        except Exception as e:
+            print(f"[security_sweep] investigate({address}) failed: {e}")
+            state[incident_id] = {"checked_at": ic.now_iso(), "resolved": False, "error": str(e)}
+            outcomes.append({"incident": incident_id, "resolved": False})
+            continue
+
+        state[incident_id] = {
+            "checked_at": ic.now_iso(), "resolved": True, "address": address,
+            "verdict": result.get("verdict") or result.get("skipped"),
+            "report": result.get("report"),
+        }
+        outcomes.append({"incident": incident_id, "resolved": True, "address": address})
+
+    _save_attack_response_state(state)
+    return outcomes
+
+
 def run():
-    feed = get_hack_feed(limit=15)
+    feed = get_hack_feed(limit=ATTACK_FEED_FETCH_LIMIT)
     incidents = feed.get("incidents", []) if isinstance(feed, dict) else []
     threat, recent, big_recent = compute_threat_level(incidents)
 
     search = ic.web_search_snippets("ERC-8183 ACP agent commerce protocol exploit vulnerability 2026", max_results=5)
 
+    # Report table stays short for readability even though `incidents` now
+    # holds up to ATTACK_FEED_FETCH_LIMIT entries (the ticker/Threat Ledger
+    # want more history than a markdown table should show inline).
     table_rows = "\n".join(
         f"| {h['date']} | {h['name']} | ${h['amount_usd_m']}M | {h.get('technique') or '—'} | {', '.join(h.get('chains') or []) or '—'} |"
-        for h in incidents
+        for h in incidents[:15]
     ) or "| — | no incidents in feed this cycle | — | — | — |"
 
     system = (
@@ -132,8 +263,17 @@ pre-revival report.*
     path = ic.write_report("security", body)
     summary = f"Security sweep: {threat} — {len(recent)} incident(s) in last {RECENT_DAYS}d, {len(big_recent)} >= ${BIG_HACK_USD_M}M."
     ic.log_sweep_memory("agents/security_sweep.py", threat, summary, path, tags=["security"])
-    print(f"[security_sweep] {threat} — wrote {os.path.relpath(path, ic.ROOT)}")
-    return {"threat": threat, "path": path}
+
+    feed_count = write_attack_feed(incidents, threat, path)
+    forensics = attempt_incident_forensics(incidents)
+    resolved = [o for o in forensics if o["resolved"]]
+    if forensics:
+        print(f"[security_sweep] incident forensics: {len(resolved)}/{len(forensics)} new Base incident(s) "
+              f"resolved to a real address and investigated")
+
+    print(f"[security_sweep] {threat} — wrote {os.path.relpath(path, ic.ROOT)}, "
+          f"{feed_count} incident(s) in attack feed")
+    return {"threat": threat, "path": path, "feed_count": feed_count, "forensics": forensics}
 
 
 if __name__ == "__main__":
