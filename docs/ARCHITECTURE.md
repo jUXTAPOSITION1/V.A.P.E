@@ -90,15 +90,28 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   from real data (`data_fetchers.py` + `skillforge/research.py`'s live web search), the LLM
   only narrates what the real data means. Scheduled via `intel-sweeps.yml` — security/base/
   virtuals 4x/day, sentiment 2x/day, macro daily, the two follow-up checks weekly.
-  `security_sweep.py` also writes `data/attack-feed.json` (real, dated incidents from the
-  same hacks feed, powering the site's homepage ticker + "Threat Ledger" section — see
-  `docs/assets/attackfeed.js`) and, for any new Base-chain incident it can resolve a real
-  on-chain address for via web search, runs `investigate.py`'s actual forensics pipeline
-  against it (`attempt_incident_forensics()`) — never a fabricated address, honestly skipped
-  when one can't be found. `investigate.py::hack_correlation()` was also fixed to genuinely
-  cross-reference a target's risk traits against real incidents in the same feed (citing the
-  specific matching incident by name/date/amount) instead of returning generic canned text
+  `security_sweep.py` also writes `data/attack-feed.json` (real, dated incidents over a
+  rolling 56-day/8-week window from the same hacks feed, powering the site's homepage
+  ticker + "Threat Ledger" section — see `docs/assets/attackfeed.js`) and, for any new
+  Base-chain incident it can resolve a real on-chain address for via web search, runs
+  `investigate.py`'s actual forensics pipeline against it (`attempt_incident_forensics()`)
+  — never a fabricated address, honestly skipped when one can't be found.
+  `investigate.py::hack_correlation()` was also fixed to genuinely cross-reference a
+  target's risk traits against real incidents in the same feed (citing the specific
+  matching incident by name/date/amount) instead of returning generic canned text
   regardless of what the real data showed.
+  `security_sweep.py::learn_from_incidents()` closes the loop from "reports/investigates"
+  to "learns": every incident within the same 14-day actionable window is run through a
+  deterministic keyword classifier (`ATTACK_PATTERNS`) mapping its real `technique` string
+  to a known vulnerability class, a concrete prevention measure, and — honestly — whether
+  `investigate.py`'s `score()` already has a named check for it or whether this is an
+  admitted coverage gap. Where forensics resolved a real Base address, it also backtests
+  VAPE's own scoring model against the actual verdict (`PROCEED`/`CAUTION`/`REJECT`) on
+  that contract — a `PROCEED` verdict on something that then got exploited is logged as a
+  real model miss, not smoothed over. Every lesson is logged once (idempotent via
+  `attack_lessons_state.json`) to `skillforge/memory/findings.jsonl`, surfaced in the
+  report's "Lessons Learned" section and per-incident in `data/attack-feed.json`/the
+  Threat Ledger UI. Nothing here is LLM-guessed — see this module's design law above.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
