@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T23:09:55Z",
+  "generated": "2026-07-07T04:31:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 324,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 35,
+    "broadcasts": 36,
     "investigations": 48,
     "tools": 15,
     "tools_verified": 14,
@@ -1246,6 +1246,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-07-04.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-07T04:00Z",
+      "summary": "1 new VAPE investigation(s) in the last 6h and 3 rule-based anomaly flag(s) this cycle. Base TVL $4.45B, 16 targets on VAPE's permanent record (3 REJECT / 4 CAUTION / 9 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-07-04.md"
+    },
+    {
       "file": "broadcast-2026-07-06-20.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-06T20:00Z",
@@ -1447,13 +1454,6 @@
       "date": "2026-06-10T14:00Z",
       "summary": "Tweet 1/8: \ud83d\udea8 VAPE COMMUNITY INTELLIGENCE BROADCAST \u2014 June 10, 14:00 UTC",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-10-14.md"
-    },
-    {
-      "file": "agent-update-2026-06-10-14.md",
-      "title": "Agent Network Update \u2014 2026-06-10 14:10 UTC",
-      "date": "2026-06-10T14:00Z",
-      "summary": "Broadcast ID: VAPE-ANU-2026-06-10-14 Agent: V.A.P.E. (0xa1420293a7df49bc8380f543a1fe7b8d6f582879) Chain: Base (8453) | Token: VAPE | ERC-8004 ID: 54988 ACP Agent ID: 019eaf60-592a-7f5c-99a2-3e85199303fe",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-14.md"
     }
   ],
   "tools": [
