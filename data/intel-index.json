@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-07T10:58:55Z",
+  "generated": "2026-07-07T11:16:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 327,
+    "reports": 328,
     "reports_by_type": {
+      "sentiment": 28,
       "bounty": 182,
       "virtuals": 26,
       "security": 29,
-      "sentiment": 27,
       "base": 28,
       "macro": 14,
       "hack": 9,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-105854-0x006b340b.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260707_105834.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-07T10:58:34Z",
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-07-11.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-07 11:16 UTC",
+      "date": "2026-07-07T11:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_105834.md",
-      "bytes": 12605
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-07-11.md",
+      "bytes": 2055
     }
   },
   "investigations": [
@@ -586,6 +586,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-07-11.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-07 11:16 UTC",
+      "date": "2026-07-07T11:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-07-11.md",
+      "bytes": 2055
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1234,17 +1245,6 @@
       "summary": "Upon analyzing the provided data, I've identified the following anomalies:",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_123430.md",
       "bytes": 5651
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-01-12.md",
-      "title": "VAPE Sentiment Intelligence Report",
-      "date": "2026-07-01T12:00Z",
-      "threat": "FEAR",
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-12.md",
-      "bytes": 1891
     }
   ],
   "broadcasts": [
