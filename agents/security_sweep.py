@@ -112,16 +112,49 @@ def _save_attack_response_state(state):
         json.dump(state, f, indent=2)
 
 
+# Words too generic to trust as a name/symbol match on their own — "Lazy
+# Summer Protocol" matching any contract whose name merely contains
+# "Protocol" would defeat the point of cross-checking at all.
+_GENERIC_NAME_WORDS = {
+    "protocol", "finance", "labs", "dao", "swap", "network", "chain",
+    "token", "coin", "capital", "official", "project", "foundation",
+}
+
+
+def _address_matches_incident(inv, address, incident_name):
+    """Real on-chain cross-check that a candidate address is actually THIS
+    incident's protocol, not merely some other address that happened to
+    appear in the same search result (an attacker wallet, a victim's own
+    unrelated token, a different protocol mentioned in the same writeup).
+    Address proximity to a keyword in a search snippet is not evidence —
+    the address's real, fetched on-chain name/symbol has to genuinely
+    reference the incident's protocol name."""
+    tokens = [t for t in re.split(r"[^a-z0-9]+", incident_name.lower())
+              if len(t) >= 3 and t not in _GENERIC_NAME_WORDS]
+    if not tokens:
+        return False
+    dex = inv.dexscreener(address, chain="8453")
+    verif = inv.contract_verification(address, chain="8453")
+    candidate_text = " ".join(str(x) for x in (dex.get("name"), dex.get("symbol"), verif.get("name")) if x).lower()
+    if not candidate_text:
+        return False
+    return any(t in candidate_text for t in tokens)
+
+
 def attempt_incident_forensics(incidents):
     """VAPE doesn't just narrate these incidents, it investigates the ones
     it can verify a real target for: for recent Base-chain hacks not
     already checked, search for the real on-chain address and, if one is
-    found, run investigate.py's actual forensics pipeline against it —
+    found AND its real fetched name/symbol actually cross-checks against
+    the incident's protocol name (see _address_matches_incident —
+    proximity to a keyword in a search result is not enough evidence on
+    its own), run investigate.py's actual forensics pipeline against it —
     producing a genuine investigation report, not a summary of someone
-    else's. Never fabricates an address: if search doesn't surface one,
-    the incident is honestly recorded as unresolved and skipped. A state
-    file makes this idempotent — each real incident is only ever searched
-    once, not re-queried every 6 hours forever.
+    else's. Never fabricates or guesses an address: if search doesn't
+    surface one that verifiably matches, the incident is honestly recorded
+    as unresolved and skipped. A state file makes this idempotent — each
+    real incident is only ever searched once, not re-queried every 6 hours
+    forever.
     """
     try:
         from agents import investigate as inv
@@ -149,9 +182,12 @@ def attempt_incident_forensics(incidents):
         search = ic.web_search_snippets(f"{h['name']} exploit contract address Base Basescan", max_results=5)
         address = None
         for r in search.get("results", []):
-            m = _ADDR_RE.search(f"{r.get('title', '')} {r.get('snippet', '')}")
-            if m:
-                address = m.group(0)
+            for m in _ADDR_RE.finditer(f"{r.get('title', '')} {r.get('snippet', '')}"):
+                candidate = m.group(0)
+                if _address_matches_incident(inv, candidate, h["name"]):
+                    address = candidate
+                    break
+            if address:
                 break
 
         if not address:

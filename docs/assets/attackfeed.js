@@ -138,7 +138,7 @@ const AttackFeed = {
         <div class="flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-xl px-3.5 py-3">
             <div class="w-16 sm:w-20 shrink-0 text-[11px] text-zinc-500 font-mono leading-tight">
                 <div>${escapeHtml(item.date)}</div>
-                <div class="text-zinc-700">${ago(item.date)}</div>
+                <div class="text-zinc-700">${escapeHtml(ago(item.date))}</div>
             </div>
             <div class="min-w-0 flex-1">
                 <div class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</div>
