@@ -19,6 +19,7 @@ import json
 import os
 import sys
 from datetime import datetime, timezone, timedelta
+from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import intel_common as ic  # noqa: E402
@@ -51,10 +52,21 @@ def load_recent_base_opportunities():
     return out[:10]
 
 
+def _is_immunefi_url(url):
+    """Real hostname check, not a substring match — CodeQL correctly flagged
+    the substring form as unreliable (e.g. 'evil.com/?u=immunefi.com' or
+    'immunefi.com.evil.com' would both false-positive on 'in url')."""
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    return host == "immunefi.com" or host.endswith(".immunefi.com")
+
+
 def run():
     search = ic.web_search_snippets("Virtuals Protocol Immunefi bug bounty program launch", max_results=5)
     immunefi_live = any(
-        "immunefi.com" in (r.get("url") or "").lower() and "virtual" in (r.get("url") + r.get("title") + r.get("snippet")).lower()
+        _is_immunefi_url(r.get("url") or "") and "virtual" in (r.get("title", "") + r.get("snippet", "")).lower()
         for r in search.get("results", [])
     )
 
