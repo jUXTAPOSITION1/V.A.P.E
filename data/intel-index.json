@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-07T23:06:25Z",
+  "generated": "2026-07-07T23:37:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 341,
+    "reports": 342,
     "reports_by_type": {
       "bounty": 186,
+      "security": 32,
       "base": 31,
       "sentiment": 29,
       "virtuals": 28,
-      "security": 31,
       "macro": 15,
       "hack": 9,
       "deep": 8,
@@ -608,6 +608,17 @@
       "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_230259.md",
       "bytes": 10461
+    },
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-07-23.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-07T23:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 4 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. Notably, none of the incidents in the last 14 days exceed",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-07-23.md",
+      "bytes": 6439
     },
     {
       "kind": "intel",
@@ -1246,17 +1257,6 @@
       "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.12% increase in Morpho Blue's TVL, solidifying its position a",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_140403.md",
       "bytes": 14374
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_113511.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T11:35:11Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 6.29% increase in Virtual's price, suggesting a growing interes",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_113511.md",
-      "bytes": 13931
     }
   ],
   "broadcasts": [

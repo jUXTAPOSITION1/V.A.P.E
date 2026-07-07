@@ -1,0 +1,37 @@
+{
+  "2026-07-06:BonkDAO": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "governance",
+    "has_backtest": false
+  },
+  "2026-07-05:Lazy Summer Protocol": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "donation_inflation",
+    "has_backtest": false
+  },
+  "2026-07-02:Hinkal": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "deposit_proof",
+    "has_backtest": false
+  },
+  "2026-06-30:Edel": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "oracle_flashloan",
+    "has_backtest": false
+  },
+  "2026-06-28:AIDC": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "tokenomics_drain",
+    "has_backtest": false
+  },
+  "2026-06-25:Polymarket International": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "frontend_offchain",
+    "has_backtest": false
+  },
+  "2026-06-25:Lixir Finance": {
+    "logged_at": "2026-07-07T23:37:22Z",
+    "pattern": "signature",
+    "has_backtest": false
+  }
+}

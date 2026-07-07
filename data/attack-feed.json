@@ -1,0 +1,595 @@
+{
+  "generated_at": "2026-07-07T23:37:22Z",
+  "source_report": "intel/reports/security-2026-07-07-23.md",
+  "threat_level": "HIGH",
+  "lookback_days": 56,
+  "incidents": [
+    {
+      "date": "2026-07-06",
+      "name": "BonkDAO",
+      "amount_usd_m": 21.3,
+      "chains": [
+        "Solana"
+      ],
+      "technique": "Malicious Governance Proposal",
+      "lesson": {
+        "pattern": "governance",
+        "label": "Malicious governance proposal or vote manipulation",
+        "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-07-05",
+      "name": "Lazy Summer Protocol",
+      "amount_usd_m": 6.0,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Donation Attack",
+      "lesson": {
+        "pattern": "donation_inflation",
+        "label": "First-depositor share-price / donation inflation attack",
+        "prevention": "Seed vaults with a minimum initial deposit or use virtual shares to block first-depositor share-price manipulation.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-07-02",
+      "name": "Hinkal",
+      "amount_usd_m": 0.82,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "prooflessDeposit() Exploit",
+      "lesson": {
+        "pattern": "deposit_proof",
+        "label": "Missing or forged deposit/withdrawal proof validation",
+        "prevention": "Validate every deposit/withdrawal proof on-chain against a trusted root; never trust client-supplied proof data unverified.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-06-30",
+      "name": "Edel",
+      "amount_usd_m": 0.403,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Flashloan Price Oracle Attack",
+      "lesson": {
+        "pattern": "oracle_flashloan",
+        "label": "Flashloan-driven price or oracle manipulation",
+        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-06-28",
+      "name": "AIDC",
+      "amount_usd_m": 0.0,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Burn-from-LP Exploit",
+      "lesson": {
+        "pattern": "tokenomics_drain",
+        "label": "Malicious tokenomics / reserve- or LP-draining mechanics",
+        "prevention": "Treat burn/rebase/deflationary hooks on LP or reserve balances as a hard red flag; simulate supply mechanics before trusting a pool.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "name": "Polymarket International",
+      "amount_usd_m": 3.0,
+      "chains": [
+        "Polygon"
+      ],
+      "technique": "Front-end Vulnerability",
+      "lesson": {
+        "pattern": "frontend_offchain",
+        "label": "Front-end or off-chain infrastructure compromise",
+        "prevention": "Out of scope for on-chain analysis \u2014 the contract itself may be sound; the compromise sits in off-chain infrastructure.",
+        "covered_by": null,
+        "out_of_scope": true
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "name": "Lixir Finance",
+      "amount_usd_m": 0.012,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Broken Signature Verification",
+      "lesson": {
+        "pattern": "signature",
+        "label": "Broken or replayable signature verification",
+        "prevention": "EIP-712 domain separation with a nonce and expiry on every signed authorization; reject cross-chain replays.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-06-23",
+      "name": "SecondFi",
+      "amount_usd_m": 2.4,
+      "chains": [
+        "Cardano"
+      ],
+      "technique": "Predictable Private Key Exploit"
+    },
+    {
+      "date": "2026-06-23",
+      "name": "Royal.io",
+      "amount_usd_m": 0.263,
+      "chains": [
+        "Polygon"
+      ],
+      "technique": "Hook Manipulation Hack"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Quicksilver Zone",
+      "amount_usd_m": 0.004,
+      "chains": [
+        "Quicksilver"
+      ],
+      "technique": "Unchecked Proof Minting"
+    },
+    {
+      "date": "2026-06-21",
+      "name": "Taiko Bridge",
+      "amount_usd_m": 1.7,
+      "chains": [
+        "Taiko"
+      ],
+      "technique": "Fake Proof Exploit"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "LABUBU/OLPC",
+      "amount_usd_m": 1.1,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Deflationary Reserve Poisoning"
+    },
+    {
+      "date": "2026-06-20",
+      "name": "JaredFromSubway MEV Bot",
+      "amount_usd_m": 7.5,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Reverse MEV Honeypot"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "JB",
+      "amount_usd_m": 0.05,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Flashloan Price Manipulation"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "mySwap CL",
+      "amount_usd_m": 0.3,
+      "chains": [
+        "Starknet"
+      ],
+      "technique": "CL Pool Accounting Hack"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Namada Shielded Pools",
+      "amount_usd_m": 0.6,
+      "chains": [
+        "Namada"
+      ],
+      "technique": "IBC Transfer Logic Exploit"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Secret Network",
+      "amount_usd_m": 4.67,
+      "chains": [
+        "Secret"
+      ],
+      "technique": "Unbacked Mint via ICS-20"
+    },
+    {
+      "date": "2026-06-17",
+      "name": "DIP",
+      "amount_usd_m": 0.111,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Transfer/Sell Logic Exploit"
+    },
+    {
+      "date": "2026-06-17",
+      "name": "Little Boy Plus",
+      "amount_usd_m": 0.367,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Oracle Manipulation"
+    },
+    {
+      "date": "2026-06-17",
+      "name": "Aztec Bridge",
+      "amount_usd_m": 2.0,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "escapeHatch Function Exploit"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "RetoSwap",
+      "amount_usd_m": 2.7,
+      "chains": [
+        "Monero"
+      ],
+      "technique": "ACK Frontrun Attack"
+    },
+    {
+      "date": "2026-06-15",
+      "name": "Thetanuts Finance",
+      "amount_usd_m": 0.105,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Low-Supply Share Pricing Hack"
+    },
+    {
+      "date": "2026-06-14",
+      "name": "Aztec Connect",
+      "amount_usd_m": 2.1,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "ZK proof verification Exploit"
+    },
+    {
+      "date": "2026-06-10",
+      "name": "Raydium AMM",
+      "amount_usd_m": 1.34,
+      "chains": [
+        "Solana"
+      ],
+      "technique": "Fake LP Mint Attack"
+    },
+    {
+      "date": "2026-06-09",
+      "name": "Asterix",
+      "amount_usd_m": 0.04,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "DN404 Forge Loop"
+    },
+    {
+      "date": "2026-06-09",
+      "name": "NovaBox",
+      "amount_usd_m": 0.107,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Dividend Snapshot Exploit"
+    },
+    {
+      "date": "2026-06-09",
+      "name": "Token of Power",
+      "amount_usd_m": 1.58,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Malicious Governance Proposal"
+    },
+    {
+      "date": "2026-06-08",
+      "name": "Flooring Protocol",
+      "amount_usd_m": 0.0,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "DN404 Forge Loop"
+    },
+    {
+      "date": "2026-06-08",
+      "name": "Humanity",
+      "amount_usd_m": 32.0,
+      "chains": [
+        "Ethereum",
+        "BSC"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-06-07",
+      "name": "Syscoin Bridge",
+      "amount_usd_m": 8.0,
+      "chains": [
+        "Syscoin"
+      ],
+      "technique": "Fake Proof Exploit"
+    },
+    {
+      "date": "2026-06-07",
+      "name": "Ambient",
+      "amount_usd_m": 0.11,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Flashloan Accounting Logic Exploit"
+    },
+    {
+      "date": "2026-06-03",
+      "name": "GPU.NET",
+      "amount_usd_m": 0.011,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Social Engineering"
+    },
+    {
+      "date": "2026-06-03",
+      "name": "ATM",
+      "amount_usd_m": 0.243,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Tax Logic Exploit"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "TSR",
+      "amount_usd_m": 2.5,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Infinite Mint and Dump"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Gnosis Pay",
+      "amount_usd_m": 0.0,
+      "chains": [
+        "Gnosis Chain"
+      ],
+      "technique": "Zodiac Delay Module Exploit"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "AROS",
+      "amount_usd_m": 0.295,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Flashloan Price Manipulation"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Fluid Lending",
+      "amount_usd_m": 0.215,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Alephium Bridge",
+      "amount_usd_m": 0.815,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-30",
+      "name": "AFI Protocol",
+      "amount_usd_m": 0.48,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "afiUSD Vault Exploit"
+    },
+    {
+      "date": "2026-05-30",
+      "name": "Gravity Bridge",
+      "amount_usd_m": 5.4,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-28",
+      "name": "DxSale",
+      "amount_usd_m": 7.3,
+      "chains": [
+        "BSC"
+      ],
+      "technique": "Ownership Override Attack"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Stake DAO",
+      "amount_usd_m": 0.091,
+      "chains": [
+        "Arbitrum"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "WUSD.fi/Glove",
+      "amount_usd_m": 0.2,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Sybil Abuse"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "New Market Trading",
+      "amount_usd_m": 3.98,
+      "chains": [
+        "Ethereum",
+        "Base",
+        "Arbitrum"
+      ],
+      "technique": "Access Control Exploit"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Bitmor",
+      "amount_usd_m": 0.01,
+      "chains": [
+        "Base"
+      ],
+      "technique": "Access Control Exploit"
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Fractal Protocol",
+      "amount_usd_m": 0.014,
+      "chains": [
+        "Arbitrum"
+      ],
+      "technique": "Flashloan Price Manipulation"
+    },
+    {
+      "date": "2026-05-23",
+      "name": "StablR",
+      "amount_usd_m": 2.8,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-23",
+      "name": "Mure",
+      "amount_usd_m": 0.012,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Access Control Exploit"
+    },
+    {
+      "date": "2026-05-22",
+      "name": "Polymarket",
+      "amount_usd_m": 0.7,
+      "chains": [
+        "Polygon"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-20",
+      "name": "MAP Protocol",
+      "amount_usd_m": 0.11,
+      "chains": [
+        "Ethereum",
+        "BSC"
+      ],
+      "technique": "Infinite Mint and Dump"
+    },
+    {
+      "date": "2026-05-20",
+      "name": "RetoSwap",
+      "amount_usd_m": 2.7,
+      "chains": [
+        "Monero"
+      ],
+      "technique": "ACK Message Frontrun Exploit"
+    },
+    {
+      "date": "2026-05-19",
+      "name": "HermesVault",
+      "amount_usd_m": 0.03,
+      "chains": [
+        "Algorand"
+      ],
+      "technique": "Rekeying Attack"
+    },
+    {
+      "date": "2026-05-19",
+      "name": "Bankr",
+      "amount_usd_m": 0.17,
+      "chains": [
+        "Base"
+      ],
+      "technique": "Compromised Session Keys"
+    },
+    {
+      "date": "2026-05-18",
+      "name": "Echo Bridge",
+      "amount_usd_m": 0.821,
+      "chains": [
+        "Monad"
+      ],
+      "technique": "Private Key Compromised"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "SEA Token",
+      "amount_usd_m": 0.153,
+      "chains": [
+        "Arbitrum"
+      ],
+      "technique": "Flashloan Price Manipulation"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "Verus-Ethereum Bridge",
+      "amount_usd_m": 11.5,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Bridge Verification Bypass"
+    },
+    {
+      "date": "2026-05-16",
+      "name": "Adshares",
+      "amount_usd_m": 0.628,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Bridge Verification Bypass"
+    },
+    {
+      "date": "2026-05-15",
+      "name": "Thorchain DEX",
+      "amount_usd_m": 10.0,
+      "chains": [
+        "Bitcoin",
+        "Ethereum",
+        "Base",
+        "BSC"
+      ],
+      "technique": "Vault Churn Address Poisoning"
+    },
+    {
+      "date": "2026-05-13",
+      "name": "Transit Finance",
+      "amount_usd_m": 1.88,
+      "chains": [
+        "Tron"
+      ],
+      "technique": "Deprecated Smart Contract Exploit"
+    }
+  ]
+}
