@@ -81,6 +81,15 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
 - **`scout.py`** [OK] — bounty-radar triage, rule-based fit scoring (no LLM), hourly via `scout.yml`.
+- **`intel_common.py` / `security_sweep.py` / `base_sweep.py` / `sentiment_sweep.py` /
+  `virtuals_sweep.py` / `macro_sweep.py` / `mainnet_patch_check.py` / `bug_bounty_intel.py`**
+  [OK] — revives the intel/reports/{security,base,sentiment,virtuals,macro,mainnet-patch-check,
+  bug-bounty-intel}-*.md sweeps, which used to run as ad hoc Claude Code sessions (never
+  committed code) until they all silently stopped 2026-07-01 with zero trace in git history.
+  Same design rule as `scout.py`: the headline verdict/score is computed deterministically
+  from real data (`data_fetchers.py` + `skillforge/research.py`'s live web search), the LLM
+  only narrates what the real data means. Scheduled via `intel-sweeps.yml` — security/base/
+  virtuals 4x/day, sentiment 2x/day, macro daily, the two follow-up checks weekly.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
