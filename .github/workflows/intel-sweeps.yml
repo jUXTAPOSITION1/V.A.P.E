@@ -114,7 +114,12 @@ jobs:
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/reports/ skillforge/memory/ data/intel-index.json
+          # data/attack-feed.json: written by security_sweep.py (homepage ticker
+          # + Threat Ledger section). intel/investigations/ + intel/catalog/:
+          # security_sweep.py's attempt_incident_forensics() may run a real
+          # investigate.py forensics pass against a Base incident it resolved
+          # a real address for — those land here just like any other investigation.
+          git add intel/reports/ intel/investigations/ intel/catalog/ skillforge/memory/ data/intel-index.json data/attack-feed.json
           git commit -m "$SWEEP_SCRIPT $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do
