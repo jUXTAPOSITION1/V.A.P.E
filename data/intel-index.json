@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-07T11:16:16Z",
+  "generated": "2026-07-07T11:39:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 328,
+    "reports": 329,
     "reports_by_type": {
+      "base": 29,
       "sentiment": 28,
       "bounty": 182,
       "virtuals": 26,
       "security": 29,
-      "base": 28,
       "macro": 14,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-07-11.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-07 11:16 UTC",
+      "type": "base",
+      "file": "base-2026-07-07-11.md",
+      "title": "Base Blockchain Sweep Report",
       "date": "2026-07-07T11:00Z",
       "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-07-11.md",
-      "bytes": 2055
+      "summary": "Date: 2026-07-07 11:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-11.md",
+      "bytes": 3086
     }
   },
   "investigations": [
@@ -586,6 +586,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-07-11.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-07T11:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-07 11:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-11.md",
+      "bytes": 3086
+    },
     {
       "kind": "intel",
       "type": "sentiment",
@@ -1234,17 +1245,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_174809.md",
       "bytes": 5288
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_123430.md",
-      "title": "VAPE Report - 20260701_123430",
-      "date": "2026-07-01T12:34:30Z",
-      "threat": null,
-      "summary": "Upon analyzing the provided data, I've identified the following anomalies:",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_123430.md",
-      "bytes": 5651
     }
   ],
   "broadcasts": [
@@ -1544,7 +1544,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48311077",
+      "version": "48317232",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1554,7 +1554,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.77 eth_dom 9.43 mcap_chg_24h 0.24",
+      "version": "btc_dom 55.82 eth_dom 9.44 mcap_chg_24h 0.56",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
