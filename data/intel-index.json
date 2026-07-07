@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-07T20:22:53Z",
+  "generated": "2026-07-07T20:51:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 336,
+    "reports": 337,
     "reports_by_type": {
+      "virtuals": 28,
       "bounty": 184,
       "security": 31,
       "base": 30,
       "macro": 15,
-      "virtuals": 27,
       "sentiment": 28,
       "hack": 9,
       "deep": 8,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260707_190356.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-07T19:03:56Z",
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-07-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-07T20:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_190356.md",
-      "bytes": 10450
+      "summary": "Date: 2026-07-07 20:51 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-20.md",
+      "bytes": 2914
     }
   },
   "investigations": [
@@ -592,6 +592,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-07-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-07T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-07 20:51 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-20.md",
+      "bytes": 2914
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1240,17 +1251,6 @@
       "summary": "What changed: Morpho Blue's TVL increased by 2.014% in the last 24 hours, indicating a continued shift in user activity towards this lending protocol. The most significant development this cycle is the 5.64% increase in Virtual's price, suggesting a growing interest in the Virtuals ecosystem. The net risk posture remains RISK-ON, driven b",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_221813.md",
       "bytes": 14040
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-01-20.md",
-      "title": "VAPE Security Intelligence Report",
-      "date": "2026-07-01T20:00Z",
-      "threat": "LOW",
-      "summary": "No new incident touched VAPE's lanes (ACP/agent tokens/Base custody) this cycle. Feed since Jun-25 stays modest: one $3M front-end supply-chain hit (Polymarket, Jun-25) and small flashloan/sig-verification losses. The macro story is Immunefi's just-published \"State of Onchain Security 2026\" report confirming Q2-2026 as a record ~$775M qua",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-01-20.md",
-      "bytes": 2237
     }
   ],
   "broadcasts": [
