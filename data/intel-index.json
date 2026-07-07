@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-07T20:51:36Z",
+  "generated": "2026-07-07T21:29:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 337,
+    "reports": 338,
     "reports_by_type": {
+      "bounty": 185,
       "virtuals": 28,
-      "bounty": 184,
       "security": 31,
       "base": 30,
       "macro": 15,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 39,
-    "investigations": 54,
+    "investigations": 56,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260707-190722-0x511ef9Ad.md",
-      "title": "Investigation \u2014 VU",
-      "symbol": "VU",
-      "name": "Velvet Unicorn by Virtuals",
-      "date": "2026-07-07T19:07:22Z",
-      "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260707-212921-0x0C1c1C10.md",
+      "title": "Investigation \u2014 CHIP",
+      "symbol": "CHIP",
+      "name": "Chip",
+      "date": "2026-07-07T21:29:21Z",
+      "target": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
+      "chain": "42161 (Arbitrum)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84349 holders \u2014 reasonably distributed; Trading 620+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 5167 holders \u2014 reasonably distributed; Deep liquidity ($1,282,639); Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-212921-0x0C1c1C10.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-07-20.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-07T20:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_212556.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T21:25:56Z",
       "threat": null,
-      "summary": "Date: 2026-07-07 20:51 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-20.md",
-      "bytes": 2914
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_212556.md",
+      "bytes": 10457
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260707-212921-0x0C1c1C10.md",
+      "title": "Investigation \u2014 CHIP",
+      "symbol": "CHIP",
+      "name": "Chip",
+      "date": "2026-07-07T21:29:21Z",
+      "target": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 5167 holders \u2014 reasonably distributed; Deep liquidity ($1,282,639); Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-212921-0x0C1c1C10.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260707-190722-0x511ef9Ad.md",
@@ -578,20 +592,20 @@
       "verdict": "CAUTION (68/100)",
       "key_finding": "Low liquidity $21,135",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-02",
-      "job_id": "auto",
-      "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
-      "symbol": "VELVET",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
-      "key_finding": "Upgradeable proxy (verify implementation)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_212556.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T21:25:56Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_212556.md",
+      "bytes": 10457
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1240,17 +1254,6 @@
       "summary": "What changed: Morpho Blue's TVL increased by 2.615% in the last 24 hours, surpassing its previous growth, and indicating a continued shift in user activity towards this lending protocol. The most significant development this cycle is the 3.74% increase in Virtual's price, suggesting a growing interest in the Virtual ecosystem. The net ris",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_000906.md",
       "bytes": 13591
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_221813.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-01T22:18:13Z",
-      "threat": null,
-      "summary": "What changed: Morpho Blue's TVL increased by 2.014% in the last 24 hours, indicating a continued shift in user activity towards this lending protocol. The most significant development this cycle is the 5.64% increase in Virtual's price, suggesting a growing interest in the Virtuals ecosystem. The net risk posture remains RISK-ON, driven b",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_221813.md",
-      "bytes": 14040
     }
   ],
   "broadcasts": [
