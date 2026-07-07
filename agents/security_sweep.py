@@ -416,8 +416,10 @@ def learn_from_incidents(incidents):
             }
         lessons_by_id[incident_id] = lesson
 
-        if incident_id in lesson_state:
-            continue  # already logged this exact real incident to Memory
+        already_logged = lesson_state.get(incident_id)
+        has_new_backtest = bool(lesson.get("backtest")) and not (already_logged or {}).get("has_backtest")
+        if already_logged and not has_new_backtest:
+            continue  # already logged this exact real incident to Memory, nothing new to add
         if not append_to_memory:
             continue  # Memory unavailable this cycle — retry next run, don't mark as logged
 
@@ -461,7 +463,8 @@ def learn_from_incidents(incidents):
             print(f"[security_sweep] could not log attack lesson: {e}")
             continue
         if entry:
-            lesson_state[incident_id] = {"logged_at": ic.now_iso(), "pattern": lesson["pattern"]}
+            lesson_state[incident_id] = {"logged_at": ic.now_iso(), "pattern": lesson["pattern"],
+                                          "has_backtest": bool(lesson.get("backtest"))}
 
     _save_attack_lesson_state(lesson_state)
     return lessons_by_id
