@@ -301,5 +301,24 @@
     "last_verdict": "PROCEED",
     "symbol": "PLAY",
     "times_investigated": 1
+  },
+  "8453:0x930389f6a4a8346698dc8a3d6b299ffcd9b1be65": {
+    "address": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
+    "chain": "8453",
+    "creator_address": "0x617573225eea06e56c454471d049fa239d9b07a4",
+    "first_investigated": "2026-07-07T16:36:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260707-163614-0x930389F6.md",
+        "score": 78,
+        "ts": "2026-07-07T16:36:14Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-07T16:36:14Z",
+    "last_score": 78,
+    "last_verdict": "CAUTION",
+    "symbol": "VELVET",
+    "times_investigated": 1
   }
 }

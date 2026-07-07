@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-07T15:45:40Z",
+  "generated": "2026-07-07T16:36:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 331,
+    "reports": 332,
     "reports_by_type": {
+      "bounty": 183,
       "virtuals": 27,
       "security": 30,
       "base": 29,
       "sentiment": 28,
-      "bounty": 182,
       "macro": 14,
       "hack": 9,
       "deep": 8,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 38,
-    "investigations": 50,
+    "investigations": 52,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260707-105854-0x006b340b.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-07T10:58:54Z",
-      "target": "0x006b340bEE30F8425cf65f064712F57B2BC0bB07",
+      "file": "investigation-20260707-163614-0x930389F6.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "Velvet",
+      "date": "2026-07-07T16:36:14Z",
+      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-105854-0x006b340b.md"
+      "verdict": "CAUTION",
+      "score": "78",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $28,286. Positive evidence: 12476 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-163614-0x930389F6.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-07-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-07T15:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_163255.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T16:32:55Z",
       "threat": null,
-      "summary": "Date: 2026-07-07 15:45 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-15.md",
-      "bytes": 1628
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_163255.md",
+      "bytes": 10447
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260707-163614-0x930389F6.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "Velvet",
+      "date": "2026-07-07T16:36:14Z",
+      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "78",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $28,286. Positive evidence: 12476 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-163614-0x930389F6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260707-105854-0x006b340b.md",
@@ -572,20 +586,20 @@
       "verdict": "PROCEED (90/100)",
       "key_finding": "Low liquidity $19,800",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-03",
-      "job_id": "auto",
-      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
-      "symbol": "FAFO",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
-      "key_finding": "Mintable supply (dilution risk)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_163255.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T16:32:55Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_163255.md",
+      "bytes": 10447
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1234,17 +1248,6 @@
       "summary": "The Base chain's TVL has remained relatively stable at $4.16 billion, with Morpho Blue still leading at $2.73 billion, but its 1-day change has increased to 2.259%, indicating a potential shift in user activity. The most significant development this cycle is the 99993.791% price increase of the \"OpenAI / USDC 0.01%\" token, which warrants ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_183128.md",
       "bytes": 14004
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_182807.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-01T18:28:07Z",
-      "threat": null,
-      "summary": "The Base chain's TVL stands at $4.16 billion, with Morpho Blue and Steakhouse Financial being the top two protocols by TVL, at $2.73 billion and $1.23 billion respectively. The global market capitalization has increased by 1.98% in the last 24 hours, with Bitcoin's dominance at 55.63% and Ethereum's at 9.02%. The Fear & Greed index is at ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_182807.md",
-      "bytes": 10707
     }
   ],
   "broadcasts": [
