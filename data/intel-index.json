@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-07T14:38:07Z",
+  "generated": "2026-07-07T15:23:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 330,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 37,
+    "broadcasts": 38,
     "investigations": 50,
     "tools": 15,
     "tools_verified": 14,
@@ -1249,6 +1249,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-07-15.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-07T15:00Z",
+      "summary": "1 new VAPE investigation(s) in the last 6h and 2 rule-based anomaly flag(s) this cycle. Base TVL $4.41B, 17 targets on VAPE's permanent record (4 REJECT / 4 CAUTION / 9 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-07-15.md"
+    },
+    {
       "file": "broadcast-2026-07-07-10.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-07T10:00Z",
@@ -1450,13 +1457,6 @@
       "date": "2026-06-10T15:00Z",
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-15.md"
-    },
-    {
-      "file": "broadcast-2026-06-10-14.md",
-      "title": "\ud83c\udf99\ufe0f V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-10T14:00Z",
-      "summary": "Date: 2026-06-10 14:00 UTC (Wednesday) Broadcast ID: vape-broadcast-2026-06-10-14 Classification: COMMUNITY \u2014 UNRESTRICTED Coverage Window: 06:00\u201314:00 UTC, June 10, 2026 Reports Synthesized: 18 (3 Security, 3 Sentiment, 3 Macro, 4 Base, 3 Virtuals/ACP, 2 Deep Dives)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-10-14.md"
     }
   ],
   "tools": [
