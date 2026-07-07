@@ -100,7 +100,7 @@ def run():
         for c in checks
     ) or "| — | could not run this cycle |"
 
-    any_needs_review = any("NEEDS REVIEW" in c["status"] for c in checks)
+    any_needs_review = any(c["status"] != "LIKELY PATCHED" for c in checks)
     if not checks:
         verdict = "UNKNOWN"
     elif any_needs_review:
