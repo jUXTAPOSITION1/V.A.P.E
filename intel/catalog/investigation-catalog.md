@@ -127,3 +127,5 @@
 | 2026-07-07 | auto | 0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53 (VU) | deep_investigation | PROCEED (90/100) | Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) — can still act | +7d |
 
 | 2026-07-07 | auto | 0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e (CHIP) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-07 | auto | 0x11030f79109269d796fd0FB956D6244e502757f7 (CTR) | deep_investigation | PROCEED (82/100) | Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) — can still act | +7d |
