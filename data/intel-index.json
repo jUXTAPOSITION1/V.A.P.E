@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-07T17:07:13Z",
+  "generated": "2026-07-07T19:07:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 334,
+    "reports": 335,
     "reports_by_type": {
+      "bounty": 184,
       "base": 30,
-      "bounty": 183,
       "macro": 15,
       "virtuals": 27,
       "security": 30,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 38,
-    "investigations": 52,
+    "investigations": 54,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260707-163614-0x930389F6.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvet",
-      "date": "2026-07-07T16:36:14Z",
-      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
+      "file": "investigation-20260707-190722-0x511ef9Ad.md",
+      "title": "Investigation \u2014 VU",
+      "symbol": "VU",
+      "name": "Velvet Unicorn by Virtuals",
+      "date": "2026-07-07T19:07:22Z",
+      "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "78",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $28,286. Positive evidence: 12476 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-163614-0x930389F6.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84349 holders \u2014 reasonably distributed; Trading 620+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-07-17.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-07T17:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_190356.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T19:03:56Z",
       "threat": null,
-      "summary": "Date: 2026-07-07 17:07 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-17.md",
-      "bytes": 3246
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_190356.md",
+      "bytes": 10450
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260707-190722-0x511ef9Ad.md",
+      "title": "Investigation \u2014 VU",
+      "symbol": "VU",
+      "name": "Velvet Unicorn by Virtuals",
+      "date": "2026-07-07T19:07:22Z",
+      "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84349 holders \u2014 reasonably distributed; Trading 620+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260707-163614-0x930389F6.md",
@@ -575,20 +589,20 @@
       "verdict": "PROCEED (92/100)",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-02",
-      "job_id": "auto",
-      "target": "0x31A626996E36a302b06b27283C561d5926db6b7c",
-      "symbol": "USA250",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
-      "key_finding": "Low liquidity $19,800",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260707_190356.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-07T19:03:56Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_190356.md",
+      "bytes": 10450
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1237,17 +1251,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-01-20.md",
       "bytes": 1767
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-01-20.md",
-      "title": "VAPE Base Chain Intelligence Report",
-      "date": "2026-07-01T20:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-20.md",
-      "bytes": 1570
     }
   ],
   "broadcasts": [
@@ -1547,7 +1550,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48324615",
+      "version": "48330057",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1557,7 +1560,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.98 eth_dom 9.48 mcap_chg_24h 0.11",
+      "version": "btc_dom 56.05 eth_dom 9.49 mcap_chg_24h 0.08",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
