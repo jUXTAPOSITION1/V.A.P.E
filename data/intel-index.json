@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-07T04:31:16Z",
+  "generated": "2026-07-07T09:44:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 324,
+    "reports": 325,
     "reports_by_type": {
+      "security": 29,
       "bounty": 181,
-      "security": 28,
       "sentiment": 27,
       "base": 28,
       "virtuals": 25,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-230955-0x454777B9.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260706_230939.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T23:09:39Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-07-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-07T09:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10119% 24h (liq $1126804.3635) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_230939.md",
-      "bytes": 12163
+      "summary": "The current threat landscape indicates a HIGH threat level, with 4 incidents occurring in the last 7 days. The incidents involve various attack vectors, including malicious governance proposals, donation attacks, and exploits of smart contract vulnerabilities. The affected platforms include Solana, Ethereum, BSC, Polygon, and others, with",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-07-09.md",
+      "bytes": 3855
     }
   },
   "investigations": [
@@ -583,6 +583,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-07-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-07T09:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 4 incidents occurring in the last 7 days. The incidents involve various attack vectors, including malicious governance proposals, donation attacks, and exploits of smart contract vulnerabilities. The affected platforms include Solana, Ethereum, BSC, Polygon, and others, with",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-07-09.md",
+      "bytes": 3855
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1231,17 +1242,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-12.md",
       "bytes": 2389
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-01-12.md",
-      "title": "VAPE Base Chain Intelligence Report",
-      "date": "2026-07-01T12:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-12.md",
-      "bytes": 1449
     }
   ],
   "broadcasts": [
@@ -1541,7 +1541,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48293033",
+      "version": "48311077",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1551,7 +1551,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.95 eth_dom 9.48 mcap_chg_24h 1.0",
+      "version": "btc_dom 55.77 eth_dom 9.43 mcap_chg_24h 0.24",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1601,7 +1601,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "24 Extreme Fear",
+      "version": "27 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
