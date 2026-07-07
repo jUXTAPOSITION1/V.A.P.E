@@ -1,0 +1,123 @@
+name: VAPE Intel Sweeps (security/base/sentiment/virtuals/macro/patch-check/bounty-intel)
+
+# Revives the 5 core intel sweeps (see intel/reports/{security,base,sentiment,
+# virtuals,macro}-*.md) plus two follow-up checks (mainnet-patch-check,
+# bug-bounty-intel), all of which ran as ad hoc Claude Code sessions — never
+# committed code — for weeks, then silently stopped 2026-07-01 with zero
+# trace in git history. See agents/intel_common.py's module docstring for
+# the full story and the design rule every sweep here follows.
+#
+# One workflow, one job, dispatched by github.event.schedule — 7 near-
+# identical workflow files would just be copy-pasted boilerplate; the cron
+# string itself tells this job which sweep fired, matching cadences roughly
+# derived from each category's historical density (security/base/virtuals
+# ran densest; sentiment/macro were always sparser; the two follow-up
+# checks are weekly since their real-world triggers are rare events).
+on:
+  schedule:
+    - cron: '0 0,6,12,18 * * *'   # security_sweep — 4x/day
+    - cron: '0 3,9,15,21 * * *'   # base_sweep — 4x/day, offset from security
+    - cron: '0 1,7,13,19 * * *'   # virtuals_sweep — 4x/day, offset from both
+    - cron: '0 8,20 * * *'        # sentiment_sweep — 2x/day (quality over frequency)
+    - cron: '0 14 * * *'          # macro_sweep — 1x/day (macro moves slowest)
+    - cron: '0 10 * * 1'          # mainnet_patch_check — weekly, Monday
+    - cron: '0 11 * * 1'          # bug_bounty_intel — weekly, Monday
+  workflow_dispatch:
+    inputs:
+      sweep:
+        description: 'Which sweep to run'
+        type: choice
+        options:
+          - security_sweep
+          - base_sweep
+          - virtuals_sweep
+          - sentiment_sweep
+          - macro_sweep
+          - mainnet_patch_check
+          - bug_bounty_intel
+
+permissions:
+  contents: write
+
+concurrency:
+  group: intel-sweeps
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+    steps:
+      # persist-credentials: false — "Run sweep" spawns third-party npm
+      # packages via npx (skillforge/research.py's Tavily/Firecrawl/Bright
+      # Data MCP servers), a supply-chain vector that could otherwise read
+      # the contents:write-scoped GITHUB_TOKEN straight out of .git/config
+      # for the job's full duration. The token is wired back explicitly,
+      # scoped to just the commit/push step, right before it's needed.
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: agents/requirements.txt
+      - name: Cache npm (skillforge/research.py spawns Tavily/Firecrawl/Bright Data MCP servers via npx)
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-research-mcp-${{ runner.os }}
+      - name: Install
+        run: pip install -r agents/requirements.txt
+
+      - name: Determine which sweep fired
+        id: which
+        env:
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          EVENT_INPUT_SWEEP: ${{ github.event.inputs.sweep }}
+        run: |
+          case "$EVENT_SCHEDULE" in
+            '0 0,6,12,18 * * *') echo "script=security_sweep" >> "$GITHUB_OUTPUT" ;;
+            '0 3,9,15,21 * * *') echo "script=base_sweep" >> "$GITHUB_OUTPUT" ;;
+            '0 1,7,13,19 * * *') echo "script=virtuals_sweep" >> "$GITHUB_OUTPUT" ;;
+            '0 8,20 * * *') echo "script=sentiment_sweep" >> "$GITHUB_OUTPUT" ;;
+            '0 14 * * *') echo "script=macro_sweep" >> "$GITHUB_OUTPUT" ;;
+            '0 10 * * 1') echo "script=mainnet_patch_check" >> "$GITHUB_OUTPUT" ;;
+            '0 11 * * 1') echo "script=bug_bounty_intel" >> "$GITHUB_OUTPUT" ;;
+            *) echo "script=$EVENT_INPUT_SWEEP" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Run sweep
+        env:
+          SWEEP_SCRIPT: ${{ steps.which.outputs.script }}
+        run: python -m "agents.$SWEEP_SCRIPT"
+
+      - name: Build Intel Index (site data)
+        run: python agents/build_intel_index.py
+
+      - name: Commit report
+        env:
+          SWEEP_SCRIPT: ${{ steps.which.outputs.script }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/reports/ skillforge/memory/ data/intel-index.json
+          git commit -m "$SWEEP_SCRIPT $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
