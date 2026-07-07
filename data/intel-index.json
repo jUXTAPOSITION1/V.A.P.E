@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-07T16:36:15Z",
+  "generated": "2026-07-07T16:37:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 332,
+    "reports": 333,
     "reports_by_type": {
       "bounty": 183,
+      "macro": 15,
       "virtuals": 27,
       "security": 30,
       "base": 29,
       "sentiment": 28,
-      "macro": 14,
       "hack": 9,
       "deep": 8,
       "heartbeat": 1,
@@ -599,6 +599,17 @@
       "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_163255.md",
       "bytes": 10447
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-07-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-07T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27) and global market cap 24h change (0.22%).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-07-16.md",
+      "bytes": 1788
     },
     {
       "kind": "intel",
@@ -1237,17 +1248,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
       "bytes": 2034
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260701_183128.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-01T18:31:28Z",
-      "threat": "NEUTRAL",
-      "summary": "The Base chain's TVL has remained relatively stable at $4.16 billion, with Morpho Blue still leading at $2.73 billion, but its 1-day change has increased to 2.259%, indicating a potential shift in user activity. The most significant development this cycle is the 99993.791% price increase of the \"OpenAI / USDC 0.01%\" token, which warrants ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260701_183128.md",
-      "bytes": 14004
     }
   ],
   "broadcasts": [
