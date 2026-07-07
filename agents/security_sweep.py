@@ -389,17 +389,26 @@ def learn_from_incidents(incidents):
             continue
         incident_id = f"{h['date']}:{h['name']}"
         pattern = _classify_technique(h.get("technique"))
-        if not pattern:
-            continue
-
-        lesson = {
-            "pattern": pattern["id"], "label": pattern["label"],
-            "prevention": pattern["prevention"],
-            "covered_by": pattern.get("covered_by"),
-            "out_of_scope": pattern.get("out_of_scope", False),
-        }
         resolved = response_state.get(incident_id)
-        if resolved and resolved.get("resolved") and resolved.get("verdict") in ("PROCEED", "CAUTION", "REJECT"):
+        has_backtest = bool(resolved and resolved.get("resolved")
+                             and resolved.get("verdict") in ("PROCEED", "CAUTION", "REJECT"))
+        if not pattern and not has_backtest:
+            continue  # unclassified technique and no real forensics verdict — nothing to say
+
+        if pattern:
+            lesson = {
+                "pattern": pattern["id"], "label": pattern["label"],
+                "prevention": pattern["prevention"],
+                "covered_by": pattern.get("covered_by"),
+                "out_of_scope": pattern.get("out_of_scope", False),
+            }
+        else:
+            # A real forensics verdict exists but the technique text didn't match
+            # any known category — the backtest result is still real data and
+            # shouldn't be discarded just because it can't be labeled.
+            lesson = {"pattern": None, "label": "Unclassified technique",
+                      "prevention": None, "covered_by": None, "out_of_scope": False}
+        if has_backtest:
             lesson["backtest"] = {
                 "address": resolved.get("address"),
                 "verdict": resolved["verdict"],
@@ -409,9 +418,11 @@ def learn_from_incidents(incidents):
 
         if incident_id in lesson_state:
             continue  # already logged this exact real incident to Memory
+        if not append_to_memory:
+            continue  # Memory unavailable this cycle — retry next run, don't mark as logged
 
-        if append_to_memory:
-            tags = ["security", "attack-lesson"]
+        tags = ["security", "attack-lesson"]
+        if pattern:
             if not pattern.get("covered_by") and not pattern.get("out_of_scope"):
                 tags.append("coverage-gap")
             content = (f"{h['name']} ({h['date']}, ${h.get('amount_usd_m')}M via {h.get('technique')}) "
@@ -422,29 +433,35 @@ def learn_from_incidents(incidents):
                 content += "Out of investigate.py's on-chain scope."
             else:
                 content += "Not currently a standalone investigate.py check — a real coverage gap."
-            if lesson.get("backtest"):
-                bt = lesson["backtest"]
-                content += (f" Backtest: VAPE's own investigate.py verdict on the resolved contract "
-                            f"({bt['address']}) was {bt['verdict']} — "
-                            + ("would have flagged it." if bt["would_have_flagged"]
-                               else "would NOT have flagged it — a real model miss."))
-                if not bt["would_have_flagged"]:
-                    tags.append("backtest-miss")
-            try:
-                append_to_memory(
-                    category="finding",
-                    title=f"Attack lesson: {h['name']} → {pattern['label']}",
-                    content=content,
-                    source="agents/security_sweep.py",
-                    tags=tags,
-                    confidence=0.85,
-                    metadata={"incident": incident_id, "pattern": pattern["id"],
-                              **({"backtest": lesson["backtest"]} if lesson.get("backtest") else {})},
-                )
-            except Exception as e:
-                print(f"[security_sweep] could not log attack lesson: {e}")
+        else:
+            content = (f"{h['name']} ({h['date']}, ${h.get('amount_usd_m')}M via {h.get('technique')}) "
+                       "doesn't match a known attack-pattern category yet, but VAPE resolved a real "
+                       "on-chain target and ran its own forensics on it.")
+        if lesson.get("backtest"):
+            bt = lesson["backtest"]
+            content += (f" Backtest: VAPE's own investigate.py verdict on the resolved contract "
+                        f"({bt['address']}) was {bt['verdict']} — "
+                        + ("would have flagged it." if bt["would_have_flagged"]
+                           else "would NOT have flagged it — a real model miss."))
+            if not bt["would_have_flagged"]:
+                tags.append("backtest-miss")
 
-        lesson_state[incident_id] = {"logged_at": ic.now_iso(), "pattern": pattern["id"]}
+        try:
+            entry = append_to_memory(
+                category="finding",
+                title=f"Attack lesson: {h['name']} → {lesson['label']}",
+                content=content,
+                source="agents/security_sweep.py",
+                tags=tags,
+                confidence=0.85,
+                metadata={"incident": incident_id, "pattern": lesson["pattern"],
+                          **({"backtest": lesson["backtest"]} if lesson.get("backtest") else {})},
+            )
+        except Exception as e:
+            print(f"[security_sweep] could not log attack lesson: {e}")
+            continue
+        if entry:
+            lesson_state[incident_id] = {"logged_at": ic.now_iso(), "pattern": lesson["pattern"]}
 
     _save_attack_lesson_state(lesson_state)
     return lessons_by_id
@@ -461,14 +478,18 @@ def _render_lessons_section(incidents, lessons_by_id):
     lines = []
     for incident_id, lesson in lessons_by_id.items():
         h = by_id.get(incident_id, {})
-        line = (f"- **{h.get('name', incident_id)}** ({h.get('date')}, ${h.get('amount_usd_m')}M) — "
-                f"technique matches **{lesson['label']}**. Prevention: {lesson['prevention']}")
-        if lesson.get("covered_by"):
-            line += f" *(already covered — {lesson['covered_by']})*"
-        elif lesson.get("out_of_scope"):
-            line += " *(out of investigate.py's on-chain scope)*"
+        if lesson.get("prevention"):
+            line = (f"- **{h.get('name', incident_id)}** ({h.get('date')}, ${h.get('amount_usd_m')}M) — "
+                    f"technique matches **{lesson['label']}**. Prevention: {lesson['prevention']}")
+            if lesson.get("covered_by"):
+                line += f" *(already covered — {lesson['covered_by']})*"
+            elif lesson.get("out_of_scope"):
+                line += " *(out of investigate.py's on-chain scope)*"
+            else:
+                line += " *(not currently a standalone investigate.py check — real coverage gap)*"
         else:
-            line += " *(not currently a standalone investigate.py check — real coverage gap)*"
+            line = (f"- **{h.get('name', incident_id)}** ({h.get('date')}, ${h.get('amount_usd_m')}M) — "
+                    "technique not yet classified, but VAPE resolved a real on-chain target and investigated it.")
         if lesson.get("backtest"):
             bt = lesson["backtest"]
             line += ("\n  Backtest: investigate.py's real verdict on the resolved contract was "

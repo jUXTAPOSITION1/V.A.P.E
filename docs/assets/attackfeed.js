@@ -134,14 +134,16 @@ const AttackFeed = {
     _lessonHtml(lesson) {
         if (!lesson) return '';
         let tone = 'text-cyan-500/80';
-        let note = lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap — noted');
+        let note = lesson.prevention
+            ? (lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap — noted'))
+            : 'unclassified — investigated anyway';
         if (lesson.backtest && lesson.backtest.would_have_flagged === false) {
             tone = 'text-rose-400/80';
             note = 'model backtest miss';
-        } else if (lesson.covered_by) {
+        } else if (lesson.prevention && lesson.covered_by) {
             tone = 'text-emerald-500/70';
         }
-        const title = `${lesson.label}. Prevention: ${lesson.prevention}`;
+        const title = lesson.prevention ? `${lesson.label}. Prevention: ${lesson.prevention}` : lesson.label;
         return `<div class="text-[10.5px] ${tone} truncate mt-0.5" title="${escapeHtml(title)}">
             <i class="fa-solid fa-shield-halved text-[9px] mr-1"></i>${escapeHtml(lesson.label)} — ${escapeHtml(note)}</div>`;
     },
