@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-07T16:37:07Z",
+  "generated": "2026-07-07T17:07:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 333,
+    "reports": 334,
     "reports_by_type": {
+      "base": 30,
       "bounty": 183,
       "macro": 15,
       "virtuals": 27,
       "security": 30,
-      "base": 29,
       "sentiment": 28,
       "hack": 9,
       "deep": 8,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-163614-0x930389F6.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260707_163255.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-07T16:32:55Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-07-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-07T17:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_163255.md",
-      "bytes": 10447
+      "summary": "Date: 2026-07-07 17:07 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-17.md",
+      "bytes": 3246
     }
   },
   "investigations": [
@@ -589,6 +589,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-07-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-07T17:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-07 17:07 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-17.md",
+      "bytes": 3246
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1237,17 +1248,6 @@
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-01-20.md",
       "bytes": 1570
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-01-20.md",
-      "title": "VAPE Virtuals Protocol & ACP Intelligence Report",
-      "date": "2026-07-01T20:00Z",
-      "threat": null,
-      "summary": "",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-01-20.md",
-      "bytes": 2034
     }
   ],
   "broadcasts": [
