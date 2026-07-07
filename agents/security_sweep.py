@@ -36,8 +36,12 @@ BIG_HACK_WINDOW_DAYS = 14
 # "past 2 months or so" is an honest, reproducible cutoff, not just "however
 # many the API happened to return."
 ATTACK_FEED_PATH = os.path.join(ic.ROOT, "data", "attack-feed.json")
-ATTACK_FEED_LOOKBACK_DAYS = 60
-ATTACK_FEED_FETCH_LIMIT = 40
+ATTACK_FEED_LOOKBACK_DAYS = 56  # 8 weeks, exactly
+# get_hack_feed() returns the top N most-recent hacks off the full DeFiLlama
+# history, newest first — write_attack_feed then slices that down to the
+# real 56-day window. 200 is a wide safety margin so a busy 8-week stretch
+# never gets truncated before the date filter even runs.
+ATTACK_FEED_FETCH_LIMIT = 200
 
 # VAPE doesn't just report these incidents — for ones it can actually verify
 # a target for, it runs its own real forensics pipeline against them (see
@@ -47,6 +51,109 @@ ATTACK_FEED_FETCH_LIMIT = 40
 ATTACK_RESPONSE_STATE_PATH = os.path.join(ic.ROOT, "skillforge", "memory", "attack_response_state.json")
 ATTACK_RESPONSE_LOOKBACK_DAYS = 14
 _ADDR_RE = re.compile(r"0x[a-fA-F0-9]{40}")
+
+# VAPE's response to an incident isn't limited to "did I find an address to
+# investigate" — it also asks "what class of bug was this, do I already
+# check for it, and would my own scoring have caught it." This table is the
+# rule-based half of that (VAPE's design law: a verdict is only ever LLM
+# text when it's narrating something already decided by real data — see
+# intel_common.py). Each `keywords` set is matched against the DeFiLlama
+# feed's own `technique` string; `covered_by` cites the real investigate.py
+# check that defends against this class, or is None when it's a genuine,
+# named gap. Getting a `covered_by` claim wrong would be worse than saying
+# nothing, so every one here is a check that actually exists in score()
+# (agents/investigate.py) as of this writing — verify there before adding
+# a new "covered" entry.
+ATTACK_PATTERNS = [
+    {
+        "id": "access_control", "label": "Access control / compromised admin key",
+        "keywords": ("access control", "admin key", "private key", "key compromise",
+                     "compromised key", "predictable private key"),
+        "prevention": "Multisig + timelock on every privileged function; alert in real time on owner/admin changes.",
+        "covered_by": "investigate.py's score() flags an owner able to reclaim ownership or alter balances "
+                       "(can_take_back_ownership / owner_change_balance).",
+    },
+    {
+        "id": "proxy_upgrade", "label": "Malicious or unreviewed proxy upgrade",
+        "keywords": ("proxy", "upgrad"),
+        "prevention": "Timelocked upgrades with a public review window; re-verify the implementation address on every upgrade event.",
+        "covered_by": "investigate.py's score() flags upgradeable proxy contracts (is_proxy) for manual review before trust is extended.",
+    },
+    {
+        "id": "honeypot", "label": "Honeypot / restricted sell mechanics",
+        "keywords": ("honeypot",),
+        "prevention": "Simulate a sell before ever holding a position — reject anything that blocks or excessively taxes exit.",
+        "covered_by": "investigate.py's score() runs exactly this GoPlus honeypot simulation before VAPE ever signs off on a target.",
+    },
+    {
+        "id": "oracle_flashloan", "label": "Flashloan-driven price or oracle manipulation",
+        "keywords": ("flashloan", "flash loan", "price oracle", "oracle manipulation", "price manipulation"),
+        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
+        "covered_by": None,
+    },
+    {
+        "id": "reentrancy", "label": "Reentrancy",
+        "keywords": ("reentrancy", "re-entrancy", "recursive call"),
+        "prevention": "Checks-effects-interactions ordering plus a reentrancy guard on every external call that moves value.",
+        "covered_by": None,
+    },
+    {
+        "id": "signature", "label": "Broken or replayable signature verification",
+        "keywords": ("signature", "replay"),
+        "prevention": "EIP-712 domain separation with a nonce and expiry on every signed authorization; reject cross-chain replays.",
+        "covered_by": None,
+    },
+    {
+        "id": "governance", "label": "Malicious governance proposal or vote manipulation",
+        "keywords": ("governance", "voting", "proposal"),
+        "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
+        "covered_by": None,
+    },
+    {
+        "id": "deposit_proof", "label": "Missing or forged deposit/withdrawal proof validation",
+        "keywords": ("proofless", "unchecked proof", "fake proof", "missing validation", "broken proof"),
+        "prevention": "Validate every deposit/withdrawal proof on-chain against a trusted root; never trust client-supplied proof data unverified.",
+        "covered_by": None,
+    },
+    {
+        "id": "donation_inflation", "label": "First-depositor share-price / donation inflation attack",
+        "keywords": ("donation attack", "share inflation", "first depositor"),
+        "prevention": "Seed vaults with a minimum initial deposit or use virtual shares to block first-depositor share-price manipulation.",
+        "covered_by": None,
+    },
+    {
+        "id": "hook_manipulation", "label": "AMM hook / callback manipulation",
+        "keywords": ("hook manipulation", "hook exploit"),
+        "prevention": "Audit hook permissions and callback logic separately from core pool math; restrict who can register or upgrade a hook.",
+        "covered_by": None,
+    },
+    {
+        "id": "tokenomics_drain", "label": "Malicious tokenomics / reserve- or LP-draining mechanics",
+        "keywords": ("burn-from-lp", "reserve poisoning", "deflationary"),
+        "prevention": "Treat burn/rebase/deflationary hooks on LP or reserve balances as a hard red flag; simulate supply mechanics before trusting a pool.",
+        "covered_by": None,
+    },
+    {
+        "id": "bridge_exploit", "label": "Cross-chain bridge / message-verification exploit",
+        "keywords": ("bridge",),
+        "prevention": "Require independent verification of cross-chain messages from more than one relayer; avoid single-verifier bridge designs.",
+        "covered_by": None,
+    },
+    {
+        "id": "frontend_offchain", "label": "Front-end or off-chain infrastructure compromise",
+        "keywords": ("front-end", "frontend", "dns hijack", "phishing"),
+        "prevention": "Out of scope for on-chain analysis — the contract itself may be sound; the compromise sits in off-chain infrastructure.",
+        "covered_by": None,
+        "out_of_scope": True,
+    },
+]
+
+ATTACK_LESSON_STATE_PATH = os.path.join(ic.ROOT, "skillforge", "memory", "attack_lessons_state.json")
+# Same 14-day actionable window as incident forensics — the Threat Ledger
+# still shows the full 8 weeks for context, but VAPE only logs a "lesson"
+# for genuinely recent incidents, so a first backfill run doesn't dump
+# decades of stale history into memory in one shot.
+ATTACK_LESSON_LOOKBACK_DAYS = ATTACK_RESPONSE_LOOKBACK_DAYS
 
 
 def _days_ago(date_str):
@@ -71,11 +178,13 @@ def compute_threat_level(incidents):
     return "LOW", recent, big_recent
 
 
-def write_attack_feed(incidents, threat, source_report_path):
+def write_attack_feed(incidents, threat, source_report_path, lessons_by_id=None):
     """Real, dated-window slice of the same incident feed the report table
     draws from — powers the homepage ticker and the full Threat Ledger
     section. `source_report` is the exact report this run just wrote, so
-    the site can link the feed straight back to its knowledge source."""
+    the site can link the feed straight back to its knowledge source.
+    `lessons_by_id`, when given, attaches each incident's learn_from_incidents()
+    verdict so the Threat Ledger can show what VAPE took away from it."""
     cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_FEED_LOOKBACK_DAYS)
     recent = []
     for h in incidents:
@@ -84,7 +193,12 @@ def write_attack_feed(incidents, threat, source_report_path):
         except Exception:
             continue
         if d >= cutoff:
-            recent.append(h)
+            entry = dict(h)
+            if lessons_by_id:
+                lesson = lessons_by_id.get(f"{h['date']}:{h['name']}")
+                if lesson:
+                    entry["lesson"] = lesson
+            recent.append(entry)
     payload = {
         "generated_at": ic.now_iso(),
         "source_report": os.path.relpath(source_report_path, ic.ROOT).replace(os.sep, "/"),
@@ -215,6 +329,156 @@ def attempt_incident_forensics(incidents):
     return outcomes
 
 
+def _load_attack_lesson_state():
+    try:
+        with open(ATTACK_LESSON_STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_attack_lesson_state(state):
+    os.makedirs(os.path.dirname(ATTACK_LESSON_STATE_PATH), exist_ok=True)
+    with open(ATTACK_LESSON_STATE_PATH, "w") as f:
+        json.dump(state, f, indent=2)
+
+
+def _classify_technique(technique):
+    """Deterministic keyword match against ATTACK_PATTERNS — the only kind
+    of "verdict" this classifier is allowed to produce. Returns the first
+    matching pattern, or None if nothing matches (an honest 'no lesson
+    available' beats forcing a guess)."""
+    t = (technique or "").lower()
+    for pattern in ATTACK_PATTERNS:
+        if any(k in t for k in pattern["keywords"]):
+            return pattern
+    return None
+
+
+def learn_from_incidents(incidents):
+    """VAPE's response to an incident doesn't stop at reporting or even
+    investigating it: every genuinely recent incident (the same 14-day
+    window attempt_incident_forensics() uses) whose technique matches a
+    known vulnerability class gets a real lesson logged to Memory — the
+    class of bug, a concrete prevention measure, and whether investigate.py
+    already checks for it (citing a real, named check) or whether this is a
+    genuine, admitted coverage gap. For any incident forensics resolved to a
+    real Base address, this also backtests VAPE's own scoring model against
+    the actual investigate.py verdict on that contract — if VAPE would have
+    said PROCEED on something that then got exploited, that's logged as a
+    real miss, not smoothed over. Idempotent via its own state file, same
+    pattern as attempt_incident_forensics — each incident is only ever
+    logged to Memory once.
+    """
+    try:
+        from skillforge.memory.retriever import append_to_memory
+    except Exception:
+        append_to_memory = None
+
+    response_state = _load_attack_response_state()  # has verdict+address for resolved Base incidents
+    lesson_state = _load_attack_lesson_state()
+    cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_LESSON_LOOKBACK_DAYS)
+    lessons_by_id = {}
+
+    for h in incidents:
+        try:
+            d = datetime.strptime(h["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+        if d < cutoff:
+            continue
+        incident_id = f"{h['date']}:{h['name']}"
+        pattern = _classify_technique(h.get("technique"))
+        if not pattern:
+            continue
+
+        lesson = {
+            "pattern": pattern["id"], "label": pattern["label"],
+            "prevention": pattern["prevention"],
+            "covered_by": pattern.get("covered_by"),
+            "out_of_scope": pattern.get("out_of_scope", False),
+        }
+        resolved = response_state.get(incident_id)
+        if resolved and resolved.get("resolved") and resolved.get("verdict") in ("PROCEED", "CAUTION", "REJECT"):
+            lesson["backtest"] = {
+                "address": resolved.get("address"),
+                "verdict": resolved["verdict"],
+                "would_have_flagged": resolved["verdict"] != "PROCEED",
+            }
+        lessons_by_id[incident_id] = lesson
+
+        if incident_id in lesson_state:
+            continue  # already logged this exact real incident to Memory
+
+        if append_to_memory:
+            tags = ["security", "attack-lesson"]
+            if not pattern.get("covered_by") and not pattern.get("out_of_scope"):
+                tags.append("coverage-gap")
+            content = (f"{h['name']} ({h['date']}, ${h.get('amount_usd_m')}M via {h.get('technique')}) "
+                       f"maps to: {pattern['label']}. Prevention: {pattern['prevention']} ")
+            if pattern.get("covered_by"):
+                content += f"Already covered: {pattern['covered_by']}"
+            elif pattern.get("out_of_scope"):
+                content += "Out of investigate.py's on-chain scope."
+            else:
+                content += "Not currently a standalone investigate.py check — a real coverage gap."
+            if lesson.get("backtest"):
+                bt = lesson["backtest"]
+                content += (f" Backtest: VAPE's own investigate.py verdict on the resolved contract "
+                            f"({bt['address']}) was {bt['verdict']} — "
+                            + ("would have flagged it." if bt["would_have_flagged"]
+                               else "would NOT have flagged it — a real model miss."))
+                if not bt["would_have_flagged"]:
+                    tags.append("backtest-miss")
+            try:
+                append_to_memory(
+                    category="finding",
+                    title=f"Attack lesson: {h['name']} → {pattern['label']}",
+                    content=content,
+                    source="agents/security_sweep.py",
+                    tags=tags,
+                    confidence=0.85,
+                    metadata={"incident": incident_id, "pattern": pattern["id"],
+                              **({"backtest": lesson["backtest"]} if lesson.get("backtest") else {})},
+                )
+            except Exception as e:
+                print(f"[security_sweep] could not log attack lesson: {e}")
+
+        lesson_state[incident_id] = {"logged_at": ic.now_iso(), "pattern": pattern["id"]}
+
+    _save_attack_lesson_state(lesson_state)
+    return lessons_by_id
+
+
+def _render_lessons_section(incidents, lessons_by_id):
+    """Pure formatting over already-decided data — no LLM involved, so a
+    reader can trust every claim in this section is grounded in either
+    ATTACK_PATTERNS' fixed text or a real investigate.py backtest result."""
+    if not lessons_by_id:
+        return (f"No incidents in the last {ATTACK_LESSON_LOOKBACK_DAYS} days matched a known attack-pattern "
+                "category this cycle — nothing new to log.")
+    by_id = {f"{h['date']}:{h['name']}": h for h in incidents}
+    lines = []
+    for incident_id, lesson in lessons_by_id.items():
+        h = by_id.get(incident_id, {})
+        line = (f"- **{h.get('name', incident_id)}** ({h.get('date')}, ${h.get('amount_usd_m')}M) — "
+                f"technique matches **{lesson['label']}**. Prevention: {lesson['prevention']}")
+        if lesson.get("covered_by"):
+            line += f" *(already covered — {lesson['covered_by']})*"
+        elif lesson.get("out_of_scope"):
+            line += " *(out of investigate.py's on-chain scope)*"
+        else:
+            line += " *(not currently a standalone investigate.py check — real coverage gap)*"
+        if lesson.get("backtest"):
+            bt = lesson["backtest"]
+            line += ("\n  Backtest: investigate.py's real verdict on the resolved contract was "
+                      f"**{bt['verdict']}** — "
+                      + ("would have flagged it." if bt["would_have_flagged"]
+                         else "would NOT have flagged it — a real model miss."))
+        lines.append(line)
+    return "\n".join(lines)
+
+
 def run():
     feed = get_hack_feed(limit=ATTACK_FEED_FETCH_LIMIT)
     incidents = feed.get("incidents", []) if isinstance(feed, dict) else []
@@ -253,6 +517,13 @@ def run():
     )
     narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400)
 
+    # Investigate and learn BEFORE the report body is assembled, so the
+    # "Lessons Learned" section reflects this exact cycle's real forensics
+    # and backtest results rather than being bolted on after the fact.
+    forensics = attempt_incident_forensics(incidents)
+    lessons_by_id = learn_from_incidents(incidents)
+    lessons_section = _render_lessons_section(incidents, lessons_by_id)
+
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     threat_emoji = {"HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢"}[threat]
     body = f"""# VAPE Security Sweep Report
@@ -281,6 +552,12 @@ tracked feed, {len(big_recent)} of which exceeded ${BIG_HACK_USD_M}M within the 
 
 ---
 
+## Lessons Learned ({ATTACK_LESSON_LOOKBACK_DAYS}-day window, rule-based classification)
+
+{lessons_section}
+
+---
+
 {ic.format_search_section("Web Signals — ERC-8183 / ACP", search)}
 
 ---
@@ -300,16 +577,16 @@ pre-revival report.*
     summary = f"Security sweep: {threat} — {len(recent)} incident(s) in last {RECENT_DAYS}d, {len(big_recent)} >= ${BIG_HACK_USD_M}M."
     ic.log_sweep_memory("agents/security_sweep.py", threat, summary, path, tags=["security"])
 
-    feed_count = write_attack_feed(incidents, threat, path)
-    forensics = attempt_incident_forensics(incidents)
+    feed_count = write_attack_feed(incidents, threat, path, lessons_by_id=lessons_by_id)
     resolved = [o for o in forensics if o["resolved"]]
     if forensics:
         print(f"[security_sweep] incident forensics: {len(resolved)}/{len(forensics)} new Base incident(s) "
               f"resolved to a real address and investigated")
 
     print(f"[security_sweep] {threat} — wrote {os.path.relpath(path, ic.ROOT)}, "
-          f"{feed_count} incident(s) in attack feed")
-    return {"threat": threat, "path": path, "feed_count": feed_count, "forensics": forensics}
+          f"{feed_count} incident(s) in attack feed, {len(lessons_by_id)} lesson(s) matched")
+    return {"threat": threat, "path": path, "feed_count": feed_count, "forensics": forensics,
+            "lessons": len(lessons_by_id)}
 
 
 if __name__ == "__main__":

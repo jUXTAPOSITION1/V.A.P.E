@@ -131,6 +131,21 @@ const AttackFeed = {
         wrap.addEventListener('focusout', resume);
     },
 
+    _lessonHtml(lesson) {
+        if (!lesson) return '';
+        let tone = 'text-cyan-500/80';
+        let note = lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap — noted');
+        if (lesson.backtest && lesson.backtest.would_have_flagged === false) {
+            tone = 'text-rose-400/80';
+            note = 'model backtest miss';
+        } else if (lesson.covered_by) {
+            tone = 'text-emerald-500/70';
+        }
+        const title = `${lesson.label}. Prevention: ${lesson.prevention}`;
+        return `<div class="text-[10.5px] ${tone} truncate mt-0.5" title="${escapeHtml(title)}">
+            <i class="fa-solid fa-shield-halved text-[9px] mr-1"></i>${escapeHtml(lesson.label)} — ${escapeHtml(note)}</div>`;
+    },
+
     _ledgerRow(item) {
         const sev = severityClass(item.amount_usd_m);
         const chains = (item.chains || []).join(', ') || 'unknown chain';
@@ -143,6 +158,7 @@ const AttackFeed = {
             <div class="min-w-0 flex-1">
                 <div class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</div>
                 <div class="text-zinc-500 text-xs truncate">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
+                ${this._lessonHtml(item.lesson)}
             </div>
             <span class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
         </div>`;

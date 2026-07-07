@@ -430,13 +430,12 @@
                 <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
             </div>
             <h2 class="font-serif-display text-3xl sm:text-4xl mb-3 relative">Every attack, tracked as it happens.</h2>
-            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4 relative">A real, dated record of DeFi/crypto exploits from roughly the past two months,
-            pulled straight from DeFiLlama's public hacks feed by VAPE's own security sweep — the same data behind the ticker above.
-            No editorializing, no cherry-picking: every incident the feed returns appears here.</p>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4 relative">A running ledger of real exploits across DeFi and crypto
+            infrastructure from roughly the past two months — the techniques attackers are actively using, the money involved, and where the
+            next incident is likely to land. No editorializing, no cherry-picking: every tracked incident appears here.</p>
             <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8 text-xs relative">
                 <span id="threat-ledger-threat" class="inline-flex items-center gap-1.5 font-medium"></span>
-                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source sweep report</a>
-                <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/security_sweep.py" target="_blank" rel="noopener" class="text-zinc-500 hover:text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-code text-[10px]"></i> How this feed is built</a>
+                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source intelligence report</a>
             </div>
             <div id="threat-ledger-body" class="grid grid-cols-1 gap-2 max-h-[440px] overflow-y-auto pr-1 relative">
                 <div class="skeleton h-14 rounded-xl"></div>
@@ -444,10 +443,10 @@
                 <div class="skeleton h-14 rounded-xl"></div>
                 <div class="skeleton h-14 rounded-xl"></div>
             </div>
-            <p class="text-[11px] text-zinc-600 mt-5 relative">Updated automatically, several times a day, by <code>agents/security_sweep.py</code>. When an
-            incident lands on Base and VAPE can resolve a real on-chain address for it, it runs its own forensics investigation
-            against that contract too — see <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for
-            any resulting case files, not just a summary of someone else's report.</p>
+            <p class="text-[11px] text-zinc-600 mt-5 relative">VAPE doesn't just track these incidents — each one is checked against known attack
+            patterns for a concrete prevention takeaway, and where a hack resolves to a real on-chain target, VAPE runs its own forensics
+            investigation and backtests its own scoring model against the outcome. See
+            <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for the resulting case files.</p>
         </section>
 
         <!-- ═══ 4. FEATURED INVESTIGATION ═══ -->
