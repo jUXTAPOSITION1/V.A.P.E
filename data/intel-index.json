@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-08T16:43:45Z",
+  "generated": "2026-07-08T19:27:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 356,
+    "reports": 357,
     "reports_by_type": {
+      "security": 35,
       "bounty": 190,
       "base": 34,
       "macro": 16,
       "virtuals": 31,
       "sentiment": 30,
-      "security": 34,
       "hack": 9,
       "deep": 8,
       "heartbeat": 1,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-164345-0x9999955f.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260708_164023.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T16:40:23Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T19:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_164023.md",
-      "bytes": 10392
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various attack vectors, including malicious governance proposals, donation attacks, and exploits of specific contract functions. Notably, none of the incidents in the last 14 days ex",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-19.md",
+      "bytes": 6361
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T19:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various attack vectors, including malicious governance proposals, donation attacks, and exploits of specific contract functions. Notably, none of the incidents in the last 14 days ex",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-19.md",
+      "bytes": 6361
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Cycle: 20260704043610 \u00b7 Data timestamp (UTC): 2026-07-04T04:36:14Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_043610.md",
       "bytes": 11891
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260704_000540.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-04T00:05:40Z",
-      "threat": null,
-      "summary": "Cycle: 20260704000540 \u00b7 Data timestamp (UTC): 2026-07-04T00:05:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_000540.md",
-      "bytes": 11486
     }
   ],
   "broadcasts": [
@@ -1568,7 +1568,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48366803",
+      "version": "48372366",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1578,7 +1578,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 55.89 eth_dom 9.4 mcap_chg_24h -2.68",
+      "version": "btc_dom 55.96 eth_dom 9.4 mcap_chg_24h -2.26",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
