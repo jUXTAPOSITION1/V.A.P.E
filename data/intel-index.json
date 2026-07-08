@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-08T05:56:56Z",
+  "generated": "2026-07-08T08:31:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 346,
+    "reports": 347,
     "reports_by_type": {
+      "security": 34,
       "bounty": 187,
       "base": 32,
       "virtuals": 29,
-      "security": 33,
       "sentiment": 29,
       "macro": 15,
       "hack": 9,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260708_055335.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T05:53:35Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T08:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_055335.md",
-      "bytes": 10448
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The affected protocols span multiple blockchain platforms",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-08.md",
+      "bytes": 6034
     }
   },
   "investigations": [
@@ -601,6 +601,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T08:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The affected protocols span multiple blockchain platforms",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-08.md",
+      "bytes": 6034
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1249,17 +1260,6 @@
       "summary": "What changed: Morpho Blue's TVL dominance has slightly decreased to approximately 65.7% of the total Base TVL, with a 2.0766% increase in the last 24 hours, indicating a minor shift in concentration risk. The most significant development this cycle is the 32.9% surge in total fees on the Base chain, with Uniswap V3 and Aerodrome Slipstrea",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_000732.md",
       "bytes": 13875
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_220811.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T22:08:11Z",
-      "threat": null,
-      "summary": "What changed: The concentration of TVL in Morpho Blue has slightly decreased to 65.9% of the total Base TVL, a minor shift from the previous report. The most significant development this cycle is the 3.108% increase in Morpho Blue's TVL, indicating continued trust in the lending protocol. The net risk posture remains RISK-ON due to the ov",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_220811.md",
-      "bytes": 13764
     }
   ],
   "broadcasts": [
@@ -1559,7 +1559,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48346950",
+      "version": "48352737",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1569,7 +1569,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.03 eth_dom 9.42 mcap_chg_24h -0.96",
+      "version": "btc_dom 56.02 eth_dom 9.42 mcap_chg_24h -1.24",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
