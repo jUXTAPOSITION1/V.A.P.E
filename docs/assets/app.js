@@ -914,6 +914,15 @@ function initReveal() {
         });
     }, { threshold: 0.15 });
     els.forEach(el => io.observe(el));
+    // Safety net: some embedded/webview browsers report inconsistent
+    // IntersectionObserver results (or none at all) for sections already in
+    // the viewport at load. A section that never gets marked in-view stays
+    // at opacity:0 forever — invisible, not just unanimated. If anything is
+    // still hidden a few seconds after load, reveal it outright rather than
+    // leave real content permanently blank.
+    setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.in-view)').forEach(el => el.classList.add('in-view'));
+    }, 2500);
 }
 
 window.addEventListener('load', () => {

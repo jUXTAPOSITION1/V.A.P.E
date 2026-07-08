@@ -7,6 +7,16 @@
 // state; nothing here is ever fabricated to fill space.
 const ATTACK_FEED_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/attack-feed.json';
 const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
+// Same keyless DeFiLlama protocols list docs/assets/app.js already uses for
+// the "Top Base Protocols" logos — reused here so an incident whose
+// protocol DeFiLlama tracks can show its real logo too. Matching is
+// deliberately conservative (exact normalized name only, optionally after
+// stripping a generic corporate-suffix word): a wrong logo next to a real
+// hack would be worse than no logo at all, so an uncertain match renders
+// nothing rather than guessing.
+const PROTOCOLS_URL = 'https://api.llama.fi/protocols';
+const _GENERIC_SUFFIXES = ['protocol', 'finance', 'labs', 'dao', 'network', 'international',
+    'bridge', 'exchange', 'official', 'foundation', 'capital', 'swap', 'coin', 'token'];
 
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -44,19 +54,20 @@ const THREAT_BADGE = {
 
 const AttackFeed = {
     _data: null,
+    _protocolIcons: null,
     _rotateHandle: null,
     _rotateIdx: 0,
     _paused: false,
-    HOLD_MS: 4200,
+    HOLD_MS: 5200,
     TRANSITION_MS: 320,
 
     async init() {
-        try {
-            const res = await fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`);
-            this._data = await res.json();
-        } catch (e) {
-            this._data = null;
-        }
+        const [feedResult, iconsResult] = await Promise.allSettled([
+            fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`).then(r => r.json()),
+            this._loadProtocolIcons(),
+        ]);
+        this._data = feedResult.status === 'fulfilled' ? feedResult.value : null;
+        this._protocolIcons = iconsResult.status === 'fulfilled' ? iconsResult.value : new Map();
         this._renderTicker();
         this._renderLedger();
     },
@@ -65,11 +76,48 @@ const AttackFeed = {
         return (this._data && Array.isArray(this._data.incidents)) ? this._data.incidents : [];
     },
 
+    _normalizeName(name) {
+        return String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    },
+
+    async _loadProtocolIcons() {
+        // Best-effort only — an unreachable protocols list just means no
+        // icons render this cycle, never a broken feed.
+        const map = new Map();
+        try {
+            const list = await (await fetch(PROTOCOLS_URL)).json();
+            for (const p of list) {
+                if (p.logo && p.name) map.set(this._normalizeName(p.name), p.logo);
+            }
+        } catch (e) { /* icons are decoration, not load-bearing */ }
+        return map;
+    },
+
+    _iconFor(name) {
+        if (!this._protocolIcons || !this._protocolIcons.size) return null;
+        const full = this._normalizeName(name);
+        if (this._protocolIcons.has(full)) return this._protocolIcons.get(full);
+        for (const suffix of _GENERIC_SUFFIXES) {
+            if (full.endsWith(suffix) && full.length > suffix.length) {
+                const stripped = full.slice(0, full.length - suffix.length);
+                if (this._protocolIcons.has(stripped)) return this._protocolIcons.get(stripped);
+            }
+        }
+        return null;
+    },
+
+    _iconHtml(name, sizeClass) {
+        const src = this._iconFor(name);
+        if (!src) return '';
+        return `<img src="${src}" alt="" width="16" height="16" class="${sizeClass} rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`;
+    },
+
     _tickerLineHtml(item) {
         const sev = severityClass(item.amount_usd_m);
         const chains = (item.chains || []).join(', ') || 'unknown chain';
         return `<span class="w-1.5 h-1.5 rounded-full ${sev.dot} shrink-0"></span>
             <span class="text-zinc-600 shrink-0">${escapeHtml(item.date)}</span>
+            ${this._iconHtml(item.name, 'w-4 h-4')}
             <span class="text-zinc-200 font-medium truncate">${escapeHtml(item.name)}</span>
             <span class="${sev.text} font-semibold shrink-0">${fmtLoss(item.amount_usd_m)}</span>
             <span class="text-zinc-600 hidden sm:inline truncate">${escapeHtml(item.technique || '')}</span>
@@ -85,7 +133,7 @@ const AttackFeed = {
         const incidents = this._incidents();
         if (!incidents.length) {
             line.innerHTML = '<span class="text-zinc-600">No incidents in the tracked feed this cycle — the ticker fills in as soon as one lands.</span>';
-            if (progress) progress.style.width = '0%';
+            if (progress) progress.style.left = '-10%';
             return;
         }
 
@@ -101,10 +149,10 @@ const AttackFeed = {
         const runProgress = () => {
             if (!progress) return;
             progress.style.transition = 'none';
-            progress.style.width = '0%';
-            void progress.offsetWidth; // force reflow so the next transition actually animates from 0
-            progress.style.transition = `width ${this.HOLD_MS}ms linear`;
-            progress.style.width = '100%';
+            progress.style.left = '-10%';
+            void progress.offsetWidth; // force reflow so the next transition actually animates from the start
+            progress.style.transition = `left ${this.HOLD_MS}ms linear`;
+            progress.style.left = '105%';
         };
         runProgress();
 
@@ -158,7 +206,9 @@ const AttackFeed = {
                 <div class="text-zinc-700">${escapeHtml(ago(item.date))}</div>
             </div>
             <div class="min-w-0 flex-1">
-                <div class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</div>
+                <div class="text-zinc-100 text-sm font-medium truncate flex items-center gap-1.5">
+                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="truncate">${escapeHtml(item.name)}</span>
+                </div>
                 <div class="text-zinc-500 text-xs truncate">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
                 ${this._lessonHtml(item.lesson)}
             </div>
