@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-08T04:17:06Z",
+  "generated": "2026-07-08T05:43:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 344,
+    "reports": 345,
     "reports_by_type": {
+      "base": 32,
       "virtuals": 29,
       "security": 33,
       "bounty": 186,
-      "base": 31,
       "sentiment": 29,
       "macro": 15,
       "hack": 9,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-08-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-08T04:00Z",
+      "type": "base",
+      "file": "base-2026-07-08-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-08T05:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-08 04:17 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-08-04.md",
-      "bytes": 2652
+      "summary": "Date: 2026-07-08 05:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-05.md",
+      "bytes": 3205
     }
   },
   "investigations": [
@@ -598,6 +598,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-08-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-08T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-08 05:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-05.md",
+      "bytes": 3205
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1246,17 +1257,6 @@
       "summary": "What changed: The concentration of TVL in Morpho Blue has increased further, now accounting for approximately 65.8% of the total Base TVL, up from previous reports, indicating a continued potential concentration risk. The most significant development this cycle is the 2.83% increase in Morpho Blue's TVL, alongside a 2.61% increase in Bitc",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_201942.md",
       "bytes": 13471
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_182608.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T18:26:08Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: The concentration of TVL in Morpho Blue has increased, now accounting for approximately 66% of the top 10 protocols' TVL, indicating a potential concentration risk. The most significant development this cycle is the 2.6955% increase in Morpho Blue's TVL, alongside a 2.3824% increase in Aave V3's TVL, signaling a potential re",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_182608.md",
-      "bytes": 13624
     }
   ],
   "broadcasts": [
