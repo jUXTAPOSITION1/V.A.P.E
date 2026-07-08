@@ -137,3 +137,5 @@
 | 2026-07-08 | auto | 0x068c1c81B802DE01E60C1393Ee974d896138aD56 (PLAY) | deep_investigation | REJECT (35/100) | Very few holders (19) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-08 | auto | 0x9999955f3dD86230d90c545f7C9b239514Ecb999 (AI) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-08 | auto | 0x6db3cFe766818505e672f9D1ee7b812210B70B07 (Claude) | deep_investigation | REJECT (25/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

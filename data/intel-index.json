@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-08T21:59:56Z",
+  "generated": "2026-07-08T22:11:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 360,
+    "reports": 361,
     "reports_by_type": {
+      "bounty": 191,
       "sentiment": 31,
       "base": 35,
       "virtuals": 32,
       "security": 35,
-      "bounty": 190,
       "macro": 16,
       "hack": 9,
       "deep": 8,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 43,
-    "investigations": 66,
+    "investigations": 68,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260708-164345-0x9999955f.md",
-      "title": "Investigation \u2014 AI",
-      "symbol": "AI",
-      "name": "Ai",
-      "date": "2026-07-08T16:43:45Z",
-      "target": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
+      "file": "investigation-20260708-221124-0x6db3cFe7.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-08T22:11:24Z",
+      "target": "0x6db3cFe766818505e672f9D1ee7b812210B70B07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-5] Pair 28.0 days old \u2014 under a month, still unproven; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-164345-0x9999955f.md"
+      "score": "25",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-221124-0x6db3cFe7.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-08-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-08 21:17 UTC",
-      "date": "2026-07-08T21:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_220801.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T22:08:01Z",
       "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-08-21.md",
-      "bytes": 2084
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_220801.md",
+      "bytes": 10430
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260708-221124-0x6db3cFe7.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-08T22:11:24Z",
+      "target": "0x6db3cFe766818505e672f9D1ee7b812210B70B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-221124-0x6db3cFe7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260708-164345-0x9999955f.md",
@@ -596,20 +610,20 @@
       "score": "68",
       "summary": "Risk factors: [-10] Low liquidity $26,641; [-10] Violent 24h move +577% (volatility/manipulation); [-12] Pair only 0.8 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211118-0xcC67e54F.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-06-18",
-      "job_id": "62559",
-      "target": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
-      "symbol": "VAPE token",
-      "offering": "smart_contract_audit",
-      "verdict": "CAUTION (55/100)",
-      "key_finding": "Owner-controlled burnFrom() can rug holders; no timelock on admin funcs",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_220801.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T22:08:01Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_220801.md",
+      "bytes": 10430
+    },
     {
       "kind": "intel",
       "type": "sentiment",
@@ -1258,17 +1272,6 @@
       "summary": "Cycle: 20260704143844 \u00b7 Data timestamp (UTC): 2026-07-04T14:38:49Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_143844.md",
       "bytes": 10384
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260704_120747.md",
-      "title": "\ud83e\udd8d V.A.P.E. Cycle \u2014 20260704_120747 (no new signal)",
-      "date": "2026-07-04T12:07:47Z",
-      "threat": null,
-      "summary": "SIGNAL: LOW No new investigations were completed this cycle, with the last investigations resulting in PROCEED verdicts. The tool registry shows no gaps or issues. No Slither output was generated for self-repo static analysis. Security incidents were reviewed, but none correlated with prior investigations. The chain never lies, and this c",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_120747.md",
-      "bytes": 421
     }
   ],
   "broadcasts": [

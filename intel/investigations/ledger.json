@@ -378,6 +378,25 @@
     "symbol": "VU",
     "times_investigated": 1
   },
+  "8453:0x6db3cfe766818505e672f9d1ee7b812210b70b07": {
+    "address": "0x6db3cFe766818505e672f9D1ee7b812210B70B07",
+    "chain": "8453",
+    "creator_address": "0x9c251c1b3708f508173494d925d84d913a450175",
+    "first_investigated": "2026-07-08T22:11:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260708-221124-0x6db3cFe7.md",
+        "score": 25,
+        "ts": "2026-07-08T22:11:24Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-08T22:11:24Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "Claude",
+    "times_investigated": 1
+  },
   "8453:0x853a7c99227499dba9db8c3a02aa691afdebf841": {
     "address": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
     "chain": "8453",
