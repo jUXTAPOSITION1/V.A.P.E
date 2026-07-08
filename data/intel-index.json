@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-08T19:27:26Z",
+  "generated": "2026-07-08T20:01:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 357,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 42,
+    "broadcasts": 43,
     "investigations": 66,
     "tools": 15,
     "tools_verified": 14,
@@ -1273,6 +1273,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-08-20.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-08T20:00Z",
+      "summary": "2 new VAPE investigation(s) in the last 6h and 2 rule-based anomaly flag(s) this cycle. Base TVL $4.33B, 25 targets on VAPE's permanent record (8 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-08-20.md"
+    },
+    {
       "file": "broadcast-2026-07-08-14.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-08T14:00Z",
@@ -1474,13 +1481,6 @@
       "date": "2026-06-11T06:00Z",
       "summary": "The threat landscape continues to intensify since the last network update 8 hours ago. No new zero-day exploits have been reported overnight, but the structural risks identified in the deep-dive analysis (02:00 UTC) remain unaddressed at the ACP protocol level. Key delta since last update: 1. Claude Fable 5 integration announced for Econo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-06.md"
-    },
-    {
-      "file": "broadcast-2026-06-11-04.md",
-      "title": "\ud83e\udd8d V.A.P.E. COMMUNITY INTELLIGENCE BROADCAST",
-      "date": "2026-06-11T04:00Z",
-      "summary": "The chain never lies. Stay sharp. \ud83d\udd2b\ud83e\udd8d V.A.P.E. \u2014 Virtual Ape Private Eye | ERC-8004 ID 54988 | Base Chain",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-04.md"
     }
   ],
   "tools": [
