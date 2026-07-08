@@ -5,18 +5,10 @@
 // same data its intel/reports/security-*.md reports use) — real, dated
 // incidents only. An empty or unreachable feed renders an honest empty
 // state; nothing here is ever fabricated to fill space.
+import { resolveProtocolLogo } from './icons.js';
+
 const ATTACK_FEED_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/attack-feed.json';
 const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
-// Same keyless DeFiLlama protocols list docs/assets/app.js already uses for
-// the "Top Base Protocols" logos — reused here so an incident whose
-// protocol DeFiLlama tracks can show its real logo too. Matching is
-// deliberately conservative (exact normalized name only, optionally after
-// stripping a generic corporate-suffix word): a wrong logo next to a real
-// hack would be worse than no logo at all, so an uncertain match renders
-// nothing rather than guessing.
-const PROTOCOLS_URL = 'https://api.llama.fi/protocols';
-const _GENERIC_SUFFIXES = ['protocol', 'finance', 'labs', 'dao', 'network', 'international',
-    'bridge', 'exchange', 'official', 'foundation', 'capital', 'swap', 'coin', 'token'];
 
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -54,7 +46,6 @@ const THREAT_BADGE = {
 
 const AttackFeed = {
     _data: null,
-    _protocolIcons: null,
     _rotateHandle: null,
     _rotateIdx: 0,
     _paused: false,
@@ -62,12 +53,12 @@ const AttackFeed = {
     TRANSITION_MS: 320,
 
     async init() {
-        const [feedResult, iconsResult] = await Promise.allSettled([
-            fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`).then(r => r.json()),
-            this._loadProtocolIcons(),
-        ]);
-        this._data = feedResult.status === 'fulfilled' ? feedResult.value : null;
-        this._protocolIcons = iconsResult.status === 'fulfilled' ? iconsResult.value : new Map();
+        try {
+            const res = await fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`);
+            this._data = await res.json();
+        } catch (e) {
+            this._data = null;
+        }
         this._renderTicker();
         this._renderLedger();
     },
@@ -76,40 +67,23 @@ const AttackFeed = {
         return (this._data && Array.isArray(this._data.incidents)) ? this._data.incidents : [];
     },
 
-    _normalizeName(name) {
-        return String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    },
-
-    async _loadProtocolIcons() {
-        // Best-effort only — an unreachable protocols list just means no
-        // icons render this cycle, never a broken feed.
-        const map = new Map();
-        try {
-            const list = await (await fetch(PROTOCOLS_URL)).json();
-            for (const p of list) {
-                if (p.logo && p.name) map.set(this._normalizeName(p.name), p.logo);
-            }
-        } catch (e) { /* icons are decoration, not load-bearing */ }
-        return map;
-    },
-
-    _iconFor(name) {
-        if (!this._protocolIcons || !this._protocolIcons.size) return null;
-        const full = this._normalizeName(name);
-        if (this._protocolIcons.has(full)) return this._protocolIcons.get(full);
-        for (const suffix of _GENERIC_SUFFIXES) {
-            if (full.endsWith(suffix) && full.length > suffix.length) {
-                const stripped = full.slice(0, full.length - suffix.length);
-                if (this._protocolIcons.has(stripped)) return this._protocolIcons.get(stripped);
-            }
-        }
-        return null;
-    },
-
+    // Placeholder only — never blocks the ticker/ledger's first paint on a
+    // network round-trip for a purely decorative logo. `icons.js`'s
+    // resolveProtocolLogo() (same page-lifetime-cached DeFiLlama /protocols
+    // lookup already used by report.js's protocol chips, exact-name-match
+    // only) fills these in asynchronously via _enhanceIcons() right after
+    // render, same pattern as report.js::enhanceIcons().
     _iconHtml(name, sizeClass) {
-        const src = this._iconFor(name);
-        if (!src) return '';
-        return `<img src="${src}" alt="" width="16" height="16" class="${sizeClass} rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`;
+        return `<img class="protocol-icon ${sizeClass} rounded-full bg-white/5 object-cover shrink-0" data-protocol="${escapeHtml(name)}" alt="" style="display:none" onerror="this.style.display='none'" onload="this.style.display=''">`;
+    },
+
+    async _enhanceIcons(container) {
+        if (!container) return;
+        const imgs = [...container.querySelectorAll('.protocol-icon[data-protocol]')];
+        await Promise.all(imgs.map(async img => {
+            const logo = await resolveProtocolLogo(img.dataset.protocol);
+            if (logo) img.src = logo;
+        }));
     },
 
     _tickerLineHtml(item) {
@@ -138,7 +112,10 @@ const AttackFeed = {
         }
 
         const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const render = () => { line.innerHTML = this._tickerLineHtml(incidents[this._rotateIdx]); };
+        const render = () => {
+            line.innerHTML = this._tickerLineHtml(incidents[this._rotateIdx]);
+            this._enhanceIcons(line);
+        };
         render();
 
         if (reduceMotion || incidents.length === 1) {
@@ -242,6 +219,7 @@ const AttackFeed = {
             </div>`;
         } else {
             body.innerHTML = incidents.map(i => this._ledgerRow(i)).join('');
+            this._enhanceIcons(body);
         }
 
         if (updated && data.generated_at) {
