@@ -207,7 +207,7 @@ const AttackFeed = {
         <div class="flex flex-col gap-1 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-xl px-3.5 py-3">
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0 flex-1 flex items-center gap-1.5">
-                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</span>
+                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="text-zinc-100 text-sm font-medium truncate min-w-0">${escapeHtml(item.name)}</span>
                 </div>
                 <span class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
             </div>
