@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-08T05:43:14Z",
+  "generated": "2026-07-08T05:56:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 345,
+    "reports": 346,
     "reports_by_type": {
+      "bounty": 187,
       "base": 32,
       "virtuals": 29,
       "security": 33,
-      "bounty": 186,
       "sentiment": 29,
       "macro": 15,
       "hack": 9,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 40,
-    "investigations": 58,
+    "investigations": 60,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260707-230625-0x11030f79.md",
-      "title": "Investigation \u2014 CTR",
-      "symbol": "CTR",
-      "name": "CTR",
-      "date": "2026-07-07T23:06:25Z",
-      "target": "0x11030f79109269d796fd0FB956D6244e502757f7",
+      "file": "investigation-20260708-055655-0x28CE689E.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-08T05:56:55Z",
+      "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
       "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2735 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-230625-0x11030f79.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-08-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-08T05:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_055335.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T05:53:35Z",
       "threat": null,
-      "summary": "Date: 2026-07-08 05:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-05.md",
-      "bytes": 3205
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_055335.md",
+      "bytes": 10448
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260708-055655-0x28CE689E.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-08T05:56:55Z",
+      "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260707-230625-0x11030f79.md",
@@ -584,20 +598,20 @@
       "verdict": "PROCEED (78/100)",
       "key_finding": "Violent 24h move +99949% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-02",
-      "job_id": "auto",
-      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
-      "symbol": "OpenAI",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (78/100)",
-      "key_finding": "Low liquidity $23,118",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_055335.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T05:53:35Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_055335.md",
+      "bytes": 10448
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1246,17 +1260,6 @@
       "summary": "What changed: The concentration of TVL in Morpho Blue has slightly decreased to 65.9% of the total Base TVL, a minor shift from the previous report. The most significant development this cycle is the 3.108% increase in Morpho Blue's TVL, indicating continued trust in the lending protocol. The net risk posture remains RISK-ON due to the ov",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_220811.md",
       "bytes": 13764
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_201942.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T20:19:42Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: The concentration of TVL in Morpho Blue has increased further, now accounting for approximately 65.8% of the total Base TVL, up from previous reports, indicating a continued potential concentration risk. The most significant development this cycle is the 2.83% increase in Morpho Blue's TVL, alongside a 2.61% increase in Bitc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_201942.md",
-      "bytes": 13471
     }
   ],
   "broadcasts": [
