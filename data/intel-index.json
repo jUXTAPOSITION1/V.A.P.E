@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-08T16:26:02Z",
+  "generated": "2026-07-08T16:43:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 355,
+    "reports": 356,
     "reports_by_type": {
+      "bounty": 190,
       "base": 34,
       "macro": 16,
       "virtuals": 31,
-      "bounty": 189,
       "sentiment": 30,
       "security": 34,
       "hack": 9,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 42,
-    "investigations": 64,
+    "investigations": 66,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260708-141226-0x068c1c81.md",
-      "title": "Investigation \u2014 PLAY",
-      "symbol": "PLAY",
-      "name": "PLAY",
-      "date": "2026-07-08T14:12:26Z",
-      "target": "0x068c1c81B802DE01E60C1393Ee974d896138aD56",
+      "file": "investigation-20260708-164345-0x9999955f.md",
+      "title": "Investigation \u2014 AI",
+      "symbol": "AI",
+      "name": "Ai",
+      "date": "2026-07-08T16:43:45Z",
+      "target": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Very few holders (19) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $135 (rug/illiquid); [-10] Low liquidity $135; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-141226-0x068c1c81.md"
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-5] Pair 28.0 days old \u2014 under a month, still unproven; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-164345-0x9999955f.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-08-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-08T16:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_164023.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T16:40:23Z",
       "threat": null,
-      "summary": "Date: 2026-07-08 16:26 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-16.md",
-      "bytes": 3739
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_164023.md",
+      "bytes": 10392
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260708-164345-0x9999955f.md",
+      "title": "Investigation \u2014 AI",
+      "symbol": "AI",
+      "name": "Ai",
+      "date": "2026-07-08T16:43:45Z",
+      "target": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-5] Pair 28.0 days old \u2014 under a month, still unproven; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-164345-0x9999955f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260708-141226-0x068c1c81.md",
@@ -593,20 +607,20 @@
       "verdict": "CAUTION (55/100)",
       "key_finding": "Owner-controlled burnFrom() can rug holders; no timelock on admin funcs",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-01",
-      "job_id": "auto",
-      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
-      "symbol": "OpenAI",
-      "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
-      "key_finding": "Low liquidity $26,641",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_164023.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T16:40:23Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_164023.md",
+      "bytes": 10392
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1255,17 +1269,6 @@
       "summary": "Cycle: 20260704000540 \u00b7 Data timestamp (UTC): 2026-07-04T00:05:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260704_000540.md",
       "bytes": 11486
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260703_220532.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T22:05:32Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: Morpho Blue's TVL growth has accelerated to 2.6396% in the last 24 hours, increasing its dominance to approximately 65.9% of the total Base TVL, with a slight increase in concentration risk. The most significant development this cycle is the 7.3819% increase in Morpho Blue's TVL over the last 7 days, solidifying its position",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_220532.md",
-      "bytes": 13511
     }
   ],
   "broadcasts": [
