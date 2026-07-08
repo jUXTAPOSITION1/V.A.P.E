@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-08T09:04:39Z",
+  "generated": "2026-07-08T09:28:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 347,
+    "reports": 348,
     "reports_by_type": {
+      "virtuals": 30,
       "security": 34,
       "bounty": 187,
       "base": 32,
-      "virtuals": 29,
       "sentiment": 29,
       "macro": 15,
       "hack": 9,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-08-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-08T08:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-08-09.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-08T09:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The affected protocols span multiple blockchain platforms",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-08.md",
-      "bytes": 6034
+      "summary": "Date: 2026-07-08 09:28 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-08-09.md",
+      "bytes": 2860
     }
   },
   "investigations": [
@@ -601,6 +601,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-08-09.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-08T09:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-08 09:28 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-08-09.md",
+      "bytes": 2860
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1249,17 +1260,6 @@
       "summary": "What changed: Morpho Blue's TVL has increased by 2.8414% in the last 24 hours, with its dominance now at approximately 65.8% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.11% increase in Aave V3's TVL, indicating growing trust in lending protocols. The net risk postu",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_044238.md",
       "bytes": 13084
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260703_000732.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T00:07:32Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: Morpho Blue's TVL dominance has slightly decreased to approximately 65.7% of the total Base TVL, with a 2.0766% increase in the last 24 hours, indicating a minor shift in concentration risk. The most significant development this cycle is the 32.9% surge in total fees on the Base chain, with Uniswap V3 and Aerodrome Slipstrea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_000732.md",
-      "bytes": 13875
     }
   ],
   "broadcasts": [
