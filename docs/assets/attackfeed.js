@@ -5,6 +5,8 @@
 // same data its intel/reports/security-*.md reports use) — real, dated
 // incidents only. An empty or unreachable feed renders an honest empty
 // state; nothing here is ever fabricated to fill space.
+import { resolveProtocolLogo } from './icons.js';
+
 const ATTACK_FEED_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/attack-feed.json';
 const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
 
@@ -47,7 +49,7 @@ const AttackFeed = {
     _rotateHandle: null,
     _rotateIdx: 0,
     _paused: false,
-    HOLD_MS: 4200,
+    HOLD_MS: 5200,
     TRANSITION_MS: 320,
 
     async init() {
@@ -65,11 +67,37 @@ const AttackFeed = {
         return (this._data && Array.isArray(this._data.incidents)) ? this._data.incidents : [];
     },
 
+    // Placeholder only — never blocks the ticker/ledger's first paint on a
+    // network round-trip for a purely decorative logo. `icons.js`'s
+    // resolveProtocolLogo() (same page-lifetime-cached DeFiLlama /protocols
+    // lookup already used by report.js's protocol chips, exact-name-match
+    // only) fills these in asynchronously via _enhanceIcons() right after
+    // render, same pattern as report.js::enhanceIcons().
+    _iconHtml(name, sizeClass) {
+        // visibility, not display: sizeClass already reserves a fixed box, so
+        // a resolved icon fades in without shifting the adjacent text —
+        // display:none/'' would pop the box in and reflow the row, most
+        // visible during the ticker's periodic re-renders.
+        return `<img class="protocol-icon ${sizeClass} rounded-full bg-white/5 object-cover shrink-0" data-protocol="${escapeHtml(name)}" alt="" style="visibility:hidden" onerror="this.style.visibility='hidden'" onload="this.style.visibility='visible'">`;
+    },
+
+    async _enhanceIcons(container) {
+        if (!container) return;
+        const imgs = [...container.querySelectorAll('.protocol-icon[data-protocol]')];
+        await Promise.all(imgs.map(async img => {
+            try {
+                const logo = await resolveProtocolLogo(img.dataset.protocol);
+                if (logo) img.src = logo;
+            } catch (e) { /* decorative only — ignore lookup failures */ }
+        }));
+    },
+
     _tickerLineHtml(item) {
         const sev = severityClass(item.amount_usd_m);
         const chains = (item.chains || []).join(', ') || 'unknown chain';
         return `<span class="w-1.5 h-1.5 rounded-full ${sev.dot} shrink-0"></span>
             <span class="text-zinc-600 shrink-0">${escapeHtml(item.date)}</span>
+            ${this._iconHtml(item.name, 'w-4 h-4')}
             <span class="text-zinc-200 font-medium truncate">${escapeHtml(item.name)}</span>
             <span class="${sev.text} font-semibold shrink-0">${fmtLoss(item.amount_usd_m)}</span>
             <span class="text-zinc-600 hidden sm:inline truncate">${escapeHtml(item.technique || '')}</span>
@@ -85,12 +113,15 @@ const AttackFeed = {
         const incidents = this._incidents();
         if (!incidents.length) {
             line.innerHTML = '<span class="text-zinc-600">No incidents in the tracked feed this cycle — the ticker fills in as soon as one lands.</span>';
-            if (progress) progress.style.width = '0%';
+            if (progress) progress.style.left = '-10%';
             return;
         }
 
         const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const render = () => { line.innerHTML = this._tickerLineHtml(incidents[this._rotateIdx]); };
+        const render = () => {
+            line.innerHTML = this._tickerLineHtml(incidents[this._rotateIdx]);
+            this._enhanceIcons(line);
+        };
         render();
 
         if (reduceMotion || incidents.length === 1) {
@@ -101,10 +132,10 @@ const AttackFeed = {
         const runProgress = () => {
             if (!progress) return;
             progress.style.transition = 'none';
-            progress.style.width = '0%';
-            void progress.offsetWidth; // force reflow so the next transition actually animates from 0
-            progress.style.transition = `width ${this.HOLD_MS}ms linear`;
-            progress.style.width = '100%';
+            progress.style.left = '-10%';
+            void progress.offsetWidth; // force reflow so the next transition actually animates from the start
+            progress.style.transition = `left ${this.HOLD_MS}ms linear`;
+            progress.style.left = '105%';
         };
         runProgress();
 
@@ -123,7 +154,18 @@ const AttackFeed = {
         // Pause on hover/focus — an auto-rotating feed that can't be paused
         // to actually read is a real accessibility miss (WCAG 2.2.2), not
         // just a nicety.
-        const pause = () => { this._paused = true; if (progress) progress.style.transition = 'none'; };
+        // A CSS transition animates the rendered position, but the
+        // specified `left` value is already '105%' from the instant the
+        // transition starts — dropping the transition mid-flight without
+        // freezing the position first snaps it straight to that end value
+        // instead of holding wherever it visually was.
+        const pause = () => {
+            this._paused = true;
+            if (!progress) return;
+            const frozenLeft = getComputedStyle(progress).left;
+            progress.style.transition = 'none';
+            progress.style.left = frozenLeft;
+        };
         const resume = () => { this._paused = false; runProgress(); };
         wrap.addEventListener('mouseenter', pause);
         wrap.addEventListener('mouseleave', resume);
@@ -158,7 +200,9 @@ const AttackFeed = {
                 <div class="text-zinc-700">${escapeHtml(ago(item.date))}</div>
             </div>
             <div class="min-w-0 flex-1">
-                <div class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</div>
+                <div class="text-zinc-100 text-sm font-medium truncate flex items-center gap-1.5">
+                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="truncate">${escapeHtml(item.name)}</span>
+                </div>
                 <div class="text-zinc-500 text-xs truncate">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
                 ${this._lessonHtml(item.lesson)}
             </div>
@@ -192,6 +236,7 @@ const AttackFeed = {
             </div>`;
         } else {
             body.innerHTML = incidents.map(i => this._ledgerRow(i)).join('');
+            this._enhanceIcons(body);
         }
 
         if (updated && data.generated_at) {
