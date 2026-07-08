@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-08T11:09:32Z",
+  "generated": "2026-07-08T14:12:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 351,
+    "reports": 352,
     "reports_by_type": {
-      "bounty": 188,
+      "bounty": 189,
       "base": 33,
       "sentiment": 30,
       "virtuals": 30,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 41,
-    "investigations": 62,
+    "investigations": 64,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260708-110931-0xeF34d1ba.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-08T11:09:31Z",
-      "target": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
+      "file": "investigation-20260708-141226-0x068c1c81.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "PLAY",
+      "date": "2026-07-08T14:12:26Z",
+      "target": "0x068c1c81B802DE01E60C1393Ee974d896138aD56",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-110931-0xeF34d1ba.md"
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (19) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $135 (rug/illiquid); [-10] Low liquidity $135; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-141226-0x068c1c81.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260708_110612.md",
+      "file": "bounty_report_20260708_141208.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T11:06:12Z",
+      "date": "2026-07-08T14:12:08Z",
       "threat": null,
       "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_110612.md",
-      "bytes": 10422
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_141208.md",
+      "bytes": 11973
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260708-141226-0x068c1c81.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "PLAY",
+      "date": "2026-07-08T14:12:26Z",
+      "target": "0x068c1c81B802DE01E60C1393Ee974d896138aD56",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (19) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $135 (rug/illiquid); [-10] Low liquidity $135; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-141226-0x068c1c81.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260708-110931-0xeF34d1ba.md",
@@ -590,20 +604,20 @@
       "verdict": "CAUTION (68/100)",
       "key_finding": "Low liquidity $26,641",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-01",
-      "job_id": "auto",
-      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
-      "symbol": "OpenAI",
-      "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
-      "key_finding": "Low liquidity $26,641",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_141208.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T14:12:08Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_141208.md",
+      "bytes": 11973
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1252,17 +1266,6 @@
       "summary": "What changed: The concentration risk in Base TVL has persisted, with Morpho Blue's TVL increasing by 2.0043% in the last 24 hours, maintaining its dominance at approximately 65.9% of the total Base TVL. The most significant development this cycle is the 3.8578% increase in Aave V3's TVL, indicating a growing demand for lending protocols o",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_162539.md",
       "bytes": 13051
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260703_140821.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T14:08:21Z",
-      "threat": null,
-      "summary": "What changed: Morpho Blue's TVL has increased by 2.6229% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.6585% increase in Aave V3's TVL, indicating growing trust in the lending protocol. The net risk ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_140821.md",
-      "bytes": 13908
     }
   ],
   "broadcasts": [

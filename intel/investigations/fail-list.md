@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-08T11:09:31Z — 6 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-08T14:12:26Z — 7 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| PLAY | Base | `0x068c1c81B802DE01E60C1393Ee974d896138aD56` | 35/100 | 1 | 2026-07-08T14:12:26Z |
 | Claude | Base | `0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07` | 0/100 | 1 | 2026-07-08T11:09:31Z |
 | Claude | Base | `0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07` | 0/100 | 1 | 2026-07-08T05:56:55Z |
 | OpenAI | Base | `0x006b340bEE30F8425cf65f064712F57B2BC0bB07` | 0/100 | 1 | 2026-07-07T10:58:54Z |
