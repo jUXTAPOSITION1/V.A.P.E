@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-08T10:56:00Z",
+  "generated": "2026-07-08T11:09:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 350,
+    "reports": 351,
     "reports_by_type": {
+      "bounty": 188,
       "base": 33,
       "sentiment": 30,
       "virtuals": 30,
       "security": 34,
-      "bounty": 187,
       "macro": 15,
       "hack": 9,
       "deep": 8,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 41,
-    "investigations": 60,
+    "investigations": 62,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260708-055655-0x28CE689E.md",
+      "file": "investigation-20260708-110931-0xeF34d1ba.md",
       "title": "Investigation \u2014 Claude",
       "symbol": "Claude",
       "name": "Claude",
-      "date": "2026-07-08T05:56:55Z",
-      "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
+      "date": "2026-07-08T11:09:31Z",
+      "target": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-110931-0xeF34d1ba.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-08-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-08T10:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_110612.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T11:06:12Z",
       "threat": null,
-      "summary": "Date: 2026-07-08 10:56 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-10.md",
-      "bytes": 3195
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_110612.md",
+      "bytes": 10422
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260708-110931-0xeF34d1ba.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-08T11:09:31Z",
+      "target": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-110931-0xeF34d1ba.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260708-055655-0x28CE689E.md",
@@ -587,20 +601,20 @@
       "verdict": "CAUTION (68/100)",
       "key_finding": "Low liquidity $26,641",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
-    },
-    {
-      "source": "catalog",
-      "date": "2026-07-02",
-      "job_id": "auto",
-      "target": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
-      "symbol": "OpenAI",
-      "offering": "deep_investigation",
-      "verdict": "PROCEED (78/100)",
-      "key_finding": "Violent 24h move +99949% (volatility/manipulation)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260708_110612.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-08T11:06:12Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_110612.md",
+      "bytes": 10422
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1249,17 +1263,6 @@
       "summary": "What changed: Morpho Blue's TVL has increased by 2.6229% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 4.6585% increase in Aave V3's TVL, indicating growing trust in the lending protocol. The net risk ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_140821.md",
       "bytes": 13908
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260703_113341.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-03T11:33:41Z",
-      "threat": "NEUTRAL",
-      "summary": "What changed: Morpho Blue's TVL has increased by 2.3416% in the last 24 hours, with its dominance now at approximately 65.9% of the total Base TVL, indicating a continued concentration risk. The most significant development this cycle is the 5.214% increase in Aave V3's TVL, indicating growing trust in lending protocols. The net risk post",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260703_113341.md",
-      "bytes": 13881
     }
   ],
   "broadcasts": [

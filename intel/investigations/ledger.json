@@ -396,5 +396,24 @@
     "last_verdict": "CAUTION",
     "symbol": "VELVET",
     "times_investigated": 1
+  },
+  "8453:0xef34d1ba20131f0e6ea93a8c3e9397a871ab7b07": {
+    "address": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
+    "chain": "8453",
+    "creator_address": "0x04f46e13e583a46c1ec68a7abcba3552b55eb1bc",
+    "first_investigated": "2026-07-08T11:09:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260708-110931-0xeF34d1ba.md",
+        "score": 0,
+        "ts": "2026-07-08T11:09:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-08T11:09:31Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "Claude",
+    "times_investigated": 1
   }
 }

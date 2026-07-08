@@ -131,3 +131,5 @@
 | 2026-07-07 | auto | 0x11030f79109269d796fd0FB956D6244e502757f7 (CTR) | deep_investigation | PROCEED (82/100) | Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) — can still act | +7d |
 
 | 2026-07-08 | auto | 0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-08 | auto | 0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
