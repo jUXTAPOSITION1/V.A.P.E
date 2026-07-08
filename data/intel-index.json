@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-08T03:52:49Z",
+  "generated": "2026-07-08T04:17:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 343,
+    "reports": 344,
     "reports_by_type": {
+      "virtuals": 29,
       "security": 33,
       "bounty": 186,
       "base": 31,
       "sentiment": 29,
-      "virtuals": 28,
       "macro": 15,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-08-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-08T02:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-08-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-08T04:00Z",
       "threat": null,
-      "summary": "The current threat landscape is assessed as HIGH. In the last 7 days, three significant incidents occurred, including a $21.3M malicious governance proposal on Solana, a $6.0M donation attack on Ethereum, and an $0.82",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-02.md",
-      "bytes": 4549
+      "summary": "Date: 2026-07-08 04:17 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-08-04.md",
+      "bytes": 2652
     }
   },
   "investigations": [
@@ -598,6 +598,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-08-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-08T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-08 04:17 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-08-04.md",
+      "bytes": 2652
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1246,17 +1257,6 @@
       "summary": "What changed: The concentration of TVL in Morpho Blue has increased, now accounting for approximately 66% of the top 10 protocols' TVL, indicating a potential concentration risk. The most significant development this cycle is the 2.6955% increase in Morpho Blue's TVL, alongside a 2.3824% increase in Aave V3's TVL, signaling a potential re",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_182608.md",
       "bytes": 13624
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_165029.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T16:50:29Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: The total fees on Base chain surged by 32.91% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.97% increase in WETH / USDC 0.05% price, suggesting a strong ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_165029.md",
-      "bytes": 13596
     }
   ],
   "broadcasts": [
@@ -1556,7 +1556,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48336176",
+      "version": "48346950",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1566,7 +1566,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.04 eth_dom 9.43 mcap_chg_24h -1.65",
+      "version": "btc_dom 56.03 eth_dom 9.42 mcap_chg_24h -0.96",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1616,7 +1616,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "27 Fear",
+      "version": "20 Extreme Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
