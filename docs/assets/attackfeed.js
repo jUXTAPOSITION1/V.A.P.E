@@ -74,15 +74,21 @@ const AttackFeed = {
     // only) fills these in asynchronously via _enhanceIcons() right after
     // render, same pattern as report.js::enhanceIcons().
     _iconHtml(name, sizeClass) {
-        return `<img class="protocol-icon ${sizeClass} rounded-full bg-white/5 object-cover shrink-0" data-protocol="${escapeHtml(name)}" alt="" style="display:none" onerror="this.style.display='none'" onload="this.style.display=''">`;
+        // visibility, not display: sizeClass already reserves a fixed box, so
+        // a resolved icon fades in without shifting the adjacent text —
+        // display:none/'' would pop the box in and reflow the row, most
+        // visible during the ticker's periodic re-renders.
+        return `<img class="protocol-icon ${sizeClass} rounded-full bg-white/5 object-cover shrink-0" data-protocol="${escapeHtml(name)}" alt="" style="visibility:hidden" onerror="this.style.visibility='hidden'" onload="this.style.visibility='visible'">`;
     },
 
     async _enhanceIcons(container) {
         if (!container) return;
         const imgs = [...container.querySelectorAll('.protocol-icon[data-protocol]')];
         await Promise.all(imgs.map(async img => {
-            const logo = await resolveProtocolLogo(img.dataset.protocol);
-            if (logo) img.src = logo;
+            try {
+                const logo = await resolveProtocolLogo(img.dataset.protocol);
+                if (logo) img.src = logo;
+            } catch (e) { /* decorative only — ignore lookup failures */ }
         }));
     },
 
@@ -148,7 +154,18 @@ const AttackFeed = {
         // Pause on hover/focus — an auto-rotating feed that can't be paused
         // to actually read is a real accessibility miss (WCAG 2.2.2), not
         // just a nicety.
-        const pause = () => { this._paused = true; if (progress) progress.style.transition = 'none'; };
+        // A CSS transition animates the rendered position, but the
+        // specified `left` value is already '105%' from the instant the
+        // transition starts — dropping the transition mid-flight without
+        // freezing the position first snaps it straight to that end value
+        // instead of holding wherever it visually was.
+        const pause = () => {
+            this._paused = true;
+            if (!progress) return;
+            const frozenLeft = getComputedStyle(progress).left;
+            progress.style.transition = 'none';
+            progress.style.left = frozenLeft;
+        };
         const resume = () => { this._paused = false; runProgress(); };
         wrap.addEventListener('mouseenter', pause);
         wrap.addEventListener('mouseleave', resume);
