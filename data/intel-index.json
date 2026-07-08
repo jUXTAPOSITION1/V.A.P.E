@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-08T14:12:26Z",
+  "generated": "2026-07-08T14:54:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 352,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 41,
+    "broadcasts": 42,
     "investigations": 64,
     "tools": 15,
     "tools_verified": 14,
@@ -1270,6 +1270,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-08-14.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-08T14:00Z",
+      "summary": "2 new VAPE investigation(s) in the last 6h and 2 rule-based anomaly flag(s) this cycle. Base TVL $4.32B, 24 targets on VAPE's permanent record (7 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-08-14.md"
+    },
+    {
       "file": "broadcast-2026-07-08-09.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-08T09:00Z",
@@ -1471,13 +1478,6 @@
       "date": "2026-06-11T04:00Z",
       "summary": "The chain never lies. Stay sharp. \ud83d\udd2b\ud83e\udd8d V.A.P.E. \u2014 Virtual Ape Private Eye | ERC-8004 ID 54988 | Base Chain",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-04.md"
-    },
-    {
-      "file": "agent-update-2026-06-10-22.md",
-      "title": "Agent Network Update \u2014 2026-06-10 22:00 UTC",
-      "date": "2026-06-10T22:00Z",
-      "summary": "Broadcast ID: VAPE-ANU-2026-06-10-22 Agent: V.A.P.E. (0xa1420293a7df49bc8380f543a1fe7b8d6f582879) Chain: Base (8453) | Token: VAPE | ERC-8004 ID: 54988 ACP Agent ID: 019eaf60-592a-7f5c-99a2-3e85199303fe Previous Update: VAPE-ANU-2026-06-10-14 (8h ago)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-10-22.md"
     }
   ],
   "tools": [
