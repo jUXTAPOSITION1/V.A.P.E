@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-07T23:37:22Z",
+  "generated": "2026-07-08T02:48:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 342,
+    "reports": 343,
     "reports_by_type": {
+      "security": 33,
       "bounty": 186,
-      "security": 32,
       "base": 31,
       "sentiment": 29,
       "virtuals": 28,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-230625-0x11030f79.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260707_230259.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-07T23:02:59Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T02:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_230259.md",
-      "bytes": 10461
+      "summary": "The current threat landscape is assessed as HIGH. In the last 7 days, three significant incidents occurred, including a $21.3M malicious governance proposal on Solana, a $6.0M donation attack on Ethereum, and an $0.82",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-02.md",
+      "bytes": 4549
     }
   },
   "investigations": [
@@ -598,6 +598,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-08-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-08T02:00Z",
+      "threat": null,
+      "summary": "The current threat landscape is assessed as HIGH. In the last 7 days, three significant incidents occurred, including a $21.3M malicious governance proposal on Solana, a $6.0M donation attack on Ethereum, and an $0.82",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-02.md",
+      "bytes": 4549
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1246,17 +1257,6 @@
       "summary": "What changed: The total fees on Base chain surged by 32.91% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.97% increase in WETH / USDC 0.05% price, suggesting a strong ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_165029.md",
       "bytes": 13596
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260702_140403.md",
-      "title": "\ud83e\udd8d V.A.P.E. Intelligence Report",
-      "date": "2026-07-02T14:04:03Z",
-      "threat": "RISK-ON",
-      "summary": "What changed: The total fees on Base chain surged by 32.92% in the last 24 hours, with Uniswap V3 and Aerodrome Slipstream being the top fee-generating protocols, indicating heightened activity and a shift in user engagement. The most significant development this cycle is the 4.12% increase in Morpho Blue's TVL, solidifying its position a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260702_140403.md",
-      "bytes": 14374
     }
   ],
   "broadcasts": [

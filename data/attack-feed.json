@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-07T23:37:22Z",
-  "source_report": "intel/reports/security-2026-07-07-23.md",
+  "generated_at": "2026-07-08T02:48:53Z",
+  "source_report": "intel/reports/security-2026-07-08-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -581,15 +581,6 @@
         "BSC"
       ],
       "technique": "Vault Churn Address Poisoning"
-    },
-    {
-      "date": "2026-05-13",
-      "name": "Transit Finance",
-      "amount_usd_m": 1.88,
-      "chains": [
-        "Tron"
-      ],
-      "technique": "Deprecated Smart Contract Exploit"
     }
   ]
 }
