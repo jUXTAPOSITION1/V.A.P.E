@@ -92,16 +92,20 @@ const AttackFeed = {
         }));
     },
 
+    // Order matches how someone actually reads a threat line: what got hit,
+    // how much it cost, what happened, how recent — not an absolute date
+    // stamp up front eating space before you even know what the incident is.
+    // Name/amount/recency are always visible; the technique description
+    // shares space with the name and shrinks first on narrow viewports
+    // rather than disappearing outright, so mobile still gets some of it.
     _tickerLineHtml(item) {
         const sev = severityClass(item.amount_usd_m);
-        const chains = (item.chains || []).join(', ') || 'unknown chain';
         return `<span class="w-1.5 h-1.5 rounded-full ${sev.dot} shrink-0"></span>
-            <span class="text-zinc-600 shrink-0">${escapeHtml(item.date)}</span>
             ${this._iconHtml(item.name, 'w-4 h-4')}
-            <span class="text-zinc-200 font-medium truncate">${escapeHtml(item.name)}</span>
+            <span class="text-zinc-200 font-medium truncate min-w-0" style="flex:2 1 0%">${escapeHtml(item.name)}</span>
             <span class="${sev.text} font-semibold shrink-0">${fmtLoss(item.amount_usd_m)}</span>
-            <span class="text-zinc-600 hidden sm:inline truncate">${escapeHtml(item.technique || '')}</span>
-            <span class="text-zinc-700 shrink-0 hidden md:inline">${escapeHtml(chains)}</span>`;
+            <span class="text-zinc-600 truncate min-w-0" style="flex:1 1 0%">${escapeHtml(item.technique || '')}</span>
+            <span class="text-zinc-700 shrink-0 font-mono text-[11px]">${escapeHtml(ago(item.date))}</span>`;
     },
 
     _renderTicker() {
@@ -186,27 +190,30 @@ const AttackFeed = {
             tone = 'text-emerald-500/70';
         }
         const title = lesson.prevention ? `${lesson.label}. Prevention: ${lesson.prevention}` : lesson.label;
-        return `<div class="text-[10.5px] ${tone} truncate mt-0.5" title="${escapeHtml(title)}">
+        return `<div class="text-[10.5px] ${tone} mt-1 leading-relaxed" title="${escapeHtml(title)}">
             <i class="fa-solid fa-shield-halved text-[9px] mr-1"></i>${escapeHtml(lesson.label)} — ${escapeHtml(note)}</div>`;
     },
 
+    // Stacked, not a single truncating row: a fixed date column used to eat
+    // enough width on narrow screens that the name, technique, and lesson
+    // all got ellipsis-cut to near-illegibility. Name+amount share the top
+    // line (name truncates only if it's genuinely too long to fit next to
+    // the amount badge); technique/chains and the lesson line wrap freely
+    // instead of truncating; date+recency move to a compact trailing line.
     _ledgerRow(item) {
         const sev = severityClass(item.amount_usd_m);
         const chains = (item.chains || []).join(', ') || 'unknown chain';
         return `
-        <div class="flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-xl px-3.5 py-3">
-            <div class="w-16 sm:w-20 shrink-0 text-[11px] text-zinc-500 font-mono leading-tight">
-                <div>${escapeHtml(item.date)}</div>
-                <div class="text-zinc-700">${escapeHtml(ago(item.date))}</div>
-            </div>
-            <div class="min-w-0 flex-1">
-                <div class="text-zinc-100 text-sm font-medium truncate flex items-center gap-1.5">
-                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="truncate">${escapeHtml(item.name)}</span>
+        <div class="flex flex-col gap-1 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-xl px-3.5 py-3">
+            <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0 flex-1 flex items-center gap-1.5">
+                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="text-zinc-100 text-sm font-medium truncate">${escapeHtml(item.name)}</span>
                 </div>
-                <div class="text-zinc-500 text-xs truncate">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
-                ${this._lessonHtml(item.lesson)}
+                <span class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
             </div>
-            <span class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
+            <div class="text-zinc-500 text-xs leading-relaxed">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
+            ${this._lessonHtml(item.lesson)}
+            <div class="text-[10.5px] text-zinc-700 font-mono mt-0.5">${escapeHtml(item.date)} · ${escapeHtml(ago(item.date))}</div>
         </div>`;
     },
 
