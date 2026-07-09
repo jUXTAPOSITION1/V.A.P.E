@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-09T20:15:54Z",
+  "generated": "2026-07-09T20:49:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 373,
+    "reports": 374,
     "reports_by_type": {
+      "virtuals": 36,
       "security": 39,
       "base": 38,
       "macro": 17,
-      "virtuals": 35,
       "sentiment": 32,
       "bounty": 191,
       "hack": 9,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-09-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-09T19:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-09-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-09T20:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days did not exceed $50M, but there were notable exploits, including a $21.3M malicious governance proposal on Solana and a $6.0M donation attack on Ethereum. The diversity of attack vectors, inc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-09-19.md",
-      "bytes": 5960
+      "summary": "Date: 2026-07-09 20:49 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-09-20.md",
+      "bytes": 2977
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-09-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-09T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-09 20:49 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-09-20.md",
+      "bytes": 2977
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1261,17 +1272,6 @@
       "summary": "Base mover: OpenAI / USDC 0.01% +99666% 24h (liq $1121717.908) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +853% 24h (liq $26383.16) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2704625.2868) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_201527.md",
       "bytes": 10708
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260705_180451.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-05T18:04:51Z",
-      "threat": null,
-      "summary": "Base mover: OpenAI / USDC 0.01% +99040% 24h (liq $1114491.5641) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +5512% 24h (liq $60028.7256) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2701160.9937) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_180451.md",
-      "bytes": 10745
     }
   ],
   "broadcasts": [
