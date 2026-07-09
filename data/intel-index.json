@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-09T19:48:42Z",
+  "generated": "2026-07-09T20:15:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 373,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 46,
+    "broadcasts": 47,
     "investigations": 68,
     "tools": 15,
     "tools_verified": 14,
@@ -1276,6 +1276,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-09-20.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-09T20:00Z",
+      "summary": "2 rule-based anomaly flag(s) this cycle. Base TVL $4.39B, 26 targets on VAPE's permanent record (9 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-09-20.md"
+    },
+    {
       "file": "broadcast-2026-07-09-15.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-09T15:00Z",
@@ -1477,13 +1484,6 @@
       "date": "2026-06-11T14:00Z",
       "summary": "Date: 2026-06-11 14:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (06:00\u201314:00 UTC)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-14.md"
-    },
-    {
-      "file": "agent-update-2026-06-11-14.md",
-      "title": "Agent Network Update \u2014 2026-06-11 14:00 UTC",
-      "date": "2026-06-11T14:00Z",
-      "summary": "Eight hours since the last network update. No new zero-day exploits, but the structural threat picture has sharpened significantly through three developments: (1) the deep-dive analysis on MiCA enforcement (12:00 UTC) revealed a 17% CASP conversion rate and an 80%+ unlicensed provider cliff in 20 days, (2) the macro sweep confirmed a hawk",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-14.md"
     }
   ],
   "tools": [
