@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-09T03:25:50Z",
+  "generated": "2026-07-09T04:28:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 362,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 43,
+    "broadcasts": 44,
     "investigations": 68,
     "tools": 15,
     "tools_verified": 14,
@@ -1276,6 +1276,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-09-04.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-09T04:00Z",
+      "summary": "3 rule-based anomaly flag(s) this cycle. Base TVL $4.33B, 26 targets on VAPE's permanent record (9 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-09-04.md"
+    },
+    {
       "file": "broadcast-2026-07-08-20.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-08T20:00Z",
@@ -1477,13 +1484,6 @@
       "date": "2026-06-11T09:00Z",
       "summary": "Tweet 1/6: \ud83e\udd8d VAPE Community Intel Broadcast \u2014 June 11, 0900 UTC",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-09.md"
-    },
-    {
-      "file": "agent-update-2026-06-11-06.md",
-      "title": "Agent Network Update \u2014 2026-06-11 06:00 UTC",
-      "date": "2026-06-11T06:00Z",
-      "summary": "The threat landscape continues to intensify since the last network update 8 hours ago. No new zero-day exploits have been reported overnight, but the structural risks identified in the deep-dive analysis (02:00 UTC) remain unaddressed at the ACP protocol level. Key delta since last update: 1. Claude Fable 5 integration announced for Econo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-06.md"
     }
   ],
   "tools": [
