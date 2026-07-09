@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-09T16:31:31Z",
+  "generated": "2026-07-09T17:13:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 371,
+    "reports": 372,
     "reports_by_type": {
+      "base": 38,
       "macro": 17,
       "virtuals": 35,
       "security": 38,
       "sentiment": 32,
-      "base": 37,
       "bounty": 191,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-09-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-09T16:00Z",
+      "type": "base",
+      "file": "base-2026-07-09-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-09T17:00Z",
       "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (22) and global market cap 24h change (0.59%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-09-16.md",
-      "bytes": 2114
+      "summary": "Date: 2026-07-09 17:13 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-09-17.md",
+      "bytes": 3444
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-09-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-09T17:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-09 17:13 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-09-17.md",
+      "bytes": 3444
+    },
     {
       "kind": "intel",
       "type": "macro",
@@ -1261,17 +1272,6 @@
       "summary": "Base mover: OpenAI / USDC 0.01% +99321% 24h (liq $1118470.6414) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2691983.6558) \u2014 volatility/rug watch \u00b7 Base mover: AMERICA250 / WETH 0.01% -62% 24h (liq $318.3343) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_161025.md",
       "bytes": 10745
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260705_144503.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-05T14:45:03Z",
-      "threat": null,
-      "summary": "Base mover: AMERICA250 / WETH 0.01% +392% 24h (liq $94127.9189) \u2014 volatility/rug watch \u00b7 Base mover: Claude / USDC 0.01% -100% 24h (liq $2687308.5178) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260705_144503.md",
-      "bytes": 10528
     }
   ],
   "broadcasts": [
