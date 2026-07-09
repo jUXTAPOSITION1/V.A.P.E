@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T19:27:26Z",
-  "source_report": "intel/reports/security-2026-07-08-19.md",
+  "generated_at": "2026-07-09T03:25:50Z",
+  "source_report": "intel/reports/security-2026-07-09-03.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -91,14 +91,7 @@
       "chains": [
         "Polygon"
       ],
-      "technique": "Front-end Vulnerability",
-      "lesson": {
-        "pattern": "frontend_offchain",
-        "label": "Front-end or off-chain infrastructure compromise",
-        "prevention": "Out of scope for on-chain analysis \u2014 the contract itself may be sound; the compromise sits in off-chain infrastructure.",
-        "covered_by": null,
-        "out_of_scope": true
-      }
+      "technique": "Front-end Vulnerability"
     },
     {
       "date": "2026-06-25",
@@ -107,14 +100,7 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Broken Signature Verification",
-      "lesson": {
-        "pattern": "signature",
-        "label": "Broken or replayable signature verification",
-        "prevention": "EIP-712 domain separation with a nonce and expiry on every signed authorization; reject cross-chain replays.",
-        "covered_by": null,
-        "out_of_scope": false
-      }
+      "technique": "Broken Signature Verification"
     },
     {
       "date": "2026-06-23",
