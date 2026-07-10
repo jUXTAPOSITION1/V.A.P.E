@@ -18829,5 +18829,24 @@
     "fitScore": 80,
     "isNew": true,
     "firstSeen": "2026-07-06T21:12:56.906530Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Resolv USR-1774051200",
+    "name": "Resolv USR (exploit $24,500,000)",
+    "prizeUsd": 24500000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Private Key Compromised on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-10T20:02:33.906188Z"
   }
 ]
