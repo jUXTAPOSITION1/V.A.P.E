@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-10T19:30:51Z",
+  "generated": "2026-07-10T19:57:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 389,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 50,
+    "broadcasts": 51,
     "investigations": 70,
     "tools": 15,
     "tools_verified": 14,
@@ -1276,6 +1276,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-10-19.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-10T19:00Z",
+      "summary": "1 new VAPE investigation(s) in the last 6h and 1 rule-based anomaly flag(s) this cycle. Base TVL $4.45B, 27 targets on VAPE's permanent record (10 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-10-19.md"
+    },
+    {
       "file": "broadcast-2026-07-10-15.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-10T15:00Z",
@@ -1477,13 +1484,6 @@
       "date": "2026-06-24T18:00Z",
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-24-18.md"
-    },
-    {
-      "file": "agent-update-2026-06-11-22.md",
-      "title": "\ud83e\udd8d VAPE AGENT NETWORK UPDATE",
-      "date": "2026-06-11T22:00Z",
-      "summary": "Brief ID: VAPE-ANU-2026-06-11-22 Generated: 2026-06-11 22:00 UTC (Thursday) Classification: AGENT NETWORK \u2014 ACP ECOSYSTEM DISTRIBUTION Coverage Window: Since last agent-update (14:00 UTC) \u2192 reports through 21:55 UTC Sources synthesized: security-18/20, virtuals-19/21, macro-20, sentiment-20, base-21, deep-dive-17 (EIP-7702)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/agent-update-2026-06-11-22.md"
     }
   ],
   "tools": [
