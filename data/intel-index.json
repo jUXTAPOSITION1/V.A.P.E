@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-10T09:58:37Z",
+  "generated": "2026-07-10T10:26:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 380,
+    "reports": 381,
     "reports_by_type": {
+      "virtuals": 38,
       "security": 41,
       "base": 40,
-      "virtuals": 37,
       "sentiment": 33,
       "macro": 17,
       "bounty": 191,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-10-09.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-10T09:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-10-10.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-10T10:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a medium threat level, with 2 incidents reported in the last 7 days. The incidents reported in the last 14 days did not exceed $50M. The types of incidents vary, including malicious governance proposals, donation attacks, and exploits of various smart contract vulnerabilities. The affected protocols ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-10-09.md",
-      "bytes": 5667
+      "summary": "Date: 2026-07-10 10:26 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-10.md",
+      "bytes": 2743
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-10-10.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-10T10:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-10 10:26 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-10.md",
+      "bytes": 2743
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1261,17 +1272,6 @@
       "summary": "RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_195941.md",
       "bytes": 12308
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260706_174507.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T17:45:07Z",
-      "threat": null,
-      "summary": "Cycle: 20260706174507 \u00b7 Data timestamp (UTC): 2026-07-06T17:45:12Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_174507.md",
-      "bytes": 10126
     }
   ],
   "broadcasts": [
