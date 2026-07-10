@@ -141,3 +141,5 @@
 | 2026-07-08 | auto | 0x6db3cFe766818505e672f9D1ee7b812210B70B07 (Claude) | deep_investigation | REJECT (25/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-10 | auto | 0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0 (BLINK) | deep_investigation | REJECT (22/100) | High buy tax 11% | +7d |
+
+| 2026-07-10 | auto | 0x7db93b6C49f8D0b4eEBfE2532A8A734dE49dcB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
