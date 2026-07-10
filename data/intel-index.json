@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-10T04:55:45Z",
+  "generated": "2026-07-10T06:35:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 378,
+    "reports": 379,
     "reports_by_type": {
+      "base": 40,
       "virtuals": 37,
       "security": 40,
-      "base": 39,
       "sentiment": 33,
       "macro": 17,
       "bounty": 191,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-10-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-10T04:00Z",
+      "type": "base",
+      "file": "base-2026-07-10-06.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-10T06:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-10 04:55 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-04.md",
-      "bytes": 2795
+      "summary": "Date: 2026-07-10 06:35 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-10-06.md",
+      "bytes": 2976
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-10-06.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-10T06:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-10 06:35 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-10-06.md",
+      "bytes": 2976
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1261,17 +1272,6 @@
       "summary": "Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7737.5874) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_142708.md",
       "bytes": 11851
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260706_102546.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T10:25:46Z",
-      "threat": null,
-      "summary": "Base mover: TRUMP250 / WETH 0.01% +240% 24h (liq $273.9839) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC 0.01% -96% 24h (liq $7828.1358) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% -76% 24h (liq $41947.8325) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_102546.md",
-      "bytes": 12542
     }
   ],
   "broadcasts": [
