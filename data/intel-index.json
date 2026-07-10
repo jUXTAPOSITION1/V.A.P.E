@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-10T15:34:41Z",
+  "generated": "2026-07-10T16:28:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 385,
+    "reports": 386,
     "reports_by_type": {
+      "macro": 18,
       "virtuals": 39,
       "security": 42,
       "sentiment": 34,
       "base": 41,
-      "macro": 17,
       "bounty": 191,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-10-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-10T15:00Z",
+      "type": "macro",
+      "file": "macro-2026-07-10-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-10T16:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-10 15:34 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-15.md",
-      "bytes": 1500
+      "summary": "Computed deterministically from real Fear & Greed (23) and global market cap 24h change (1.75%).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-10-16.md",
+      "bytes": 2075
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-10-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-10T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (23) and global market cap 24h change (1.75%).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-10-16.md",
+      "bytes": 2075
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1261,17 +1272,6 @@
       "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_105834.md",
       "bytes": 12605
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-07-10.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-07T10:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-07 10:28 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-10.md",
-      "bytes": 2738
     }
   ],
   "broadcasts": [
