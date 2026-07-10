@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-09T19:48:42Z",
-  "source_report": "intel/reports/security-2026-07-09-19.md",
-  "threat_level": "HIGH",
+  "generated_at": "2026-07-10T03:28:16Z",
+  "source_report": "intel/reports/security-2026-07-10-03.md",
+  "threat_level": "MEDIUM",
   "lookback_days": 56,
   "incidents": [
     {
@@ -555,18 +555,6 @@
         "Ethereum"
       ],
       "technique": "Bridge Verification Bypass"
-    },
-    {
-      "date": "2026-05-15",
-      "name": "Thorchain DEX",
-      "amount_usd_m": 10.0,
-      "chains": [
-        "Bitcoin",
-        "Ethereum",
-        "Base",
-        "BSC"
-      ],
-      "technique": "Vault Churn Address Poisoning"
     }
   ]
 }

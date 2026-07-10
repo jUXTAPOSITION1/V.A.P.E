@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-09T22:15:32Z",
+  "generated": "2026-07-10T03:28:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 376,
+    "reports": 377,
     "reports_by_type": {
+      "security": 40,
       "base": 39,
       "sentiment": 33,
       "virtuals": 36,
-      "security": 39,
       "macro": 17,
       "bounty": 191,
       "hack": 9,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-09-22.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-09T22:00Z",
+      "type": "security",
+      "file": "security-2026-07-10-03.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-10T03:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-09 22:15 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-09-22.md",
-      "bytes": 3112
+      "summary": "The current threat landscape indicates a medium threat level, with 2 incidents reported in the last 7 days. The incidents over the last 14 days have not exceeded $50M, but there have been multiple exploits and attacks on various protocols, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-10-03.md",
+      "bytes": 5578
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-10-03.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-10T03:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a medium threat level, with 2 incidents reported in the last 7 days. The incidents over the last 14 days have not exceeded $50M, but there have been multiple exploits and attacks on various protocols, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-10-03.md",
+      "bytes": 5578
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1261,17 +1272,6 @@
       "summary": "Base mover: OpenAI / USDC 0.01% +99205% 24h (liq $997744.6109) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +2345% 24h (liq $40856.3732) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_051319.md",
       "bytes": 12309
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260706_000808.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-06T00:08:08Z",
-      "threat": null,
-      "summary": "Base mover: OpenAI / USDC 0.01% +99431% 24h (liq $1118537.2905) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 1% +2771% 24h (liq $43273.0467) \u2014 volatility/rug watch \u00b7 Base mover: BRIAN / WETH 0.01% +674% 24h (liq $81383.1805) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260706_000808.md",
-      "bytes": 10723
     }
   ],
   "broadcasts": [
