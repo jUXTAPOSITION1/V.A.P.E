@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-10T16:51:12Z",
+  "generated": "2026-07-10T18:29:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 387,
+    "reports": 388,
     "reports_by_type": {
+      "bounty": 192,
       "base": 42,
       "macro": 18,
       "virtuals": 39,
       "security": 42,
       "sentiment": 34,
-      "bounty": 191,
       "hack": 9,
       "deep": 8,
       "heartbeat": 1,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 50,
-    "investigations": 68,
+    "investigations": 70,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260708-221124-0x6db3cFe7.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-08T22:11:24Z",
-      "target": "0x6db3cFe766818505e672f9D1ee7b812210B70B07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260710-182902-0xf1D3Fbe0.md",
+      "title": "Investigation \u2014 BLINK",
+      "symbol": "BLINK",
+      "name": "BLINK",
+      "date": "2026-07-10T18:29:02Z",
+      "target": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-221124-0x6db3cFe7.md"
+      "score": "22",
+      "summary": "Risk factors: [-15] High buy tax 11%; [-10] Owner not renounced (0x560f427fde21e3d81aad7beee4ea3be5f02942de) \u2014 can still act on the contract; [-8] Low holder count (91); [-10] Low liquidity $49,472; [-10] Violent 24h move +1793% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260710-182902-0xf1D3Fbe0.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-10-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-10T16:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260710_182543.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-10T18:25:43Z",
       "threat": null,
-      "summary": "Date: 2026-07-10 16:51 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-10-16.md",
-      "bytes": 3650
+      "summary": "Cycle: 20260710182543 \u00b7 Data timestamp (UTC): 2026-07-10T18:25:45Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260710_182543.md",
+      "bytes": 10152
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260710-182902-0xf1D3Fbe0.md",
+      "title": "Investigation \u2014 BLINK",
+      "symbol": "BLINK",
+      "name": "BLINK",
+      "date": "2026-07-10T18:29:02Z",
+      "target": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-15] High buy tax 11%; [-10] Owner not renounced (0x560f427fde21e3d81aad7beee4ea3be5f02942de) \u2014 can still act on the contract; [-8] Low holder count (91); [-10] Low liquidity $49,472; [-10] Violent 24h move +1793% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260710-182902-0xf1D3Fbe0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260708-221124-0x6db3cFe7.md",
@@ -596,23 +610,20 @@
       "score": "68",
       "summary": "Risk factors: [-10] Low liquidity $26,641; [-10] Violent 24h move +577% (volatility/manipulation); [-12] Pair only 0.8 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211125-0xcC67e54F.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260701-211118-0xcC67e54F.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-01T21:11:18Z",
-      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "68",
-      "summary": "Risk factors: [-10] Low liquidity $26,641; [-10] Violent 24h move +577% (volatility/manipulation); [-12] Pair only 0.8 days old (fresh-launch risk).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260701-211118-0xcC67e54F.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260710_182543.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-10T18:25:43Z",
+      "threat": null,
+      "summary": "Cycle: 20260710182543 \u00b7 Data timestamp (UTC): 2026-07-10T18:25:45Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260710_182543.md",
+      "bytes": 10152
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1261,17 +1272,6 @@
       "summary": "Date: 2026-07-07 11:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-07-11.md",
       "bytes": 3086
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-07-11.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-07 11:16 UTC",
-      "date": "2026-07-07T11:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-07-11.md",
-      "bytes": 2055
     }
   ],
   "broadcasts": [
@@ -1571,7 +1571,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48453745",
+      "version": "48458927",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1581,7 +1581,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.36 eth_dom 9.48 mcap_chg_24h 1.71",
+      "version": "btc_dom 56.29 eth_dom 9.49 mcap_chg_24h 1.02",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-08T22:11:24Z — 9 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-10T18:29:02Z — 10 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BLINK | Ethereum | `0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0` | 22/100 | 1 | 2026-07-10T18:29:02Z |
 | Claude | Base | `0x6db3cFe766818505e672f9D1ee7b812210B70B07` | 25/100 | 1 | 2026-07-08T22:11:24Z |
 | AI | Base | `0x9999955f3dD86230d90c545f7C9b239514Ecb999` | 42/100 | 1 | 2026-07-08T16:43:45Z |
 | PLAY | Base | `0x068c1c81B802DE01E60C1393Ee974d896138aD56` | 35/100 | 1 | 2026-07-08T14:12:26Z |
