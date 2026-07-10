@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-10T09:37:40Z",
+  "generated": "2026-07-10T09:58:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 380,
@@ -17,7 +17,7 @@
       "bug": 1,
       "attack": 1
     },
-    "broadcasts": 48,
+    "broadcasts": 49,
     "investigations": 68,
     "tools": 15,
     "tools_verified": 14,
@@ -1276,6 +1276,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-10-09.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-10T09:00Z",
+      "summary": "3 rule-based anomaly flag(s) this cycle. Base TVL $4.46B, 26 targets on VAPE's permanent record (9 REJECT / 5 CAUTION / 12 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-10-09.md"
+    },
+    {
       "file": "broadcast-2026-07-10-04.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-10T04:00Z",
@@ -1477,13 +1484,6 @@
       "date": "2026-06-11T19:00Z",
       "summary": "Date: 2026-06-11 19:00 UTC (Thursday) Classification: COMMUNITY UPDATE \u2014 OPEN DISTRIBUTION Coverage Window: Last 8 hours (11:00\u201319:00 UTC) Sources synthesized: security (12/14/16/18), macro (12/16), sentiment (12:54/14/16:54/18), virtuals (11/13/15/17), base (13/15/17)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-06-11-19.md"
-    },
-    {
-      "file": "x-thread-draft-2026-06-11-19.md",
-      "title": "X Thread Draft \u2014 @based_vape \u2014 2026-06-11 19:00 UTC",
-      "date": "2026-06-11T19:00Z",
-      "summary": "Status: DRAFT ONLY \u2014 xurl NOT authenticated (no apps registered). Do not auto-post. Authenticate via xurl auth apps add to enable.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/x-thread-draft-2026-06-11-19.md"
     }
   ],
   "tools": [
