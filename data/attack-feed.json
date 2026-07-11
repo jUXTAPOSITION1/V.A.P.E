@@ -1,9 +1,25 @@
 {
-  "generated_at": "2026-07-11T13:22:12Z",
-  "source_report": "intel/reports/security-2026-07-11-13.md",
-  "threat_level": "MEDIUM",
+  "generated_at": "2026-07-11T19:05:43Z",
+  "source_report": "intel/reports/security-2026-07-11-19.md",
+  "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-11",
+      "name": "Bonzo Lend",
+      "amount_usd_m": 10.05,
+      "chains": [
+        "Hedera"
+      ],
+      "technique": "Price Oracle Manipulation",
+      "lesson": {
+        "pattern": "oracle_flashloan",
+        "label": "Flashloan-driven price or oracle manipulation",
+        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
     {
       "date": "2026-07-06",
       "name": "BonkDAO",
