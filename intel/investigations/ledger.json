@@ -226,6 +226,25 @@
     "symbol": "CLAUDE",
     "times_investigated": 1
   },
+  "1:0xde4ee8057785a7e8e800db58f9784845a5c2cbd6": {
+    "address": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
+    "chain": "1",
+    "creator_address": "0xd3c3a4712ccb7a69f78bfc64f8b6c1a5810482c4",
+    "first_investigated": "2026-07-11T00:02:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260711-000246-0xde4EE805.md",
+        "score": 90,
+        "ts": "2026-07-11T00:02:46Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-11T00:02:46Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "DEXE",
+    "times_investigated": 1
+  },
   "1:0xf1d3fbe00af8185add548e84d77075bc98f18ce0": {
     "address": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
     "chain": "1",

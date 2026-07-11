@@ -143,3 +143,5 @@
 | 2026-07-10 | auto | 0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0 (BLINK) | deep_investigation | REJECT (22/100) | High buy tax 11% | +7d |
 
 | 2026-07-10 | auto | 0x7db93b6C49f8D0b4eEBfE2532A8A734dE49dcB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-11 | auto | 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 (DEXE) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) — can still act | +7d |
