@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-11T15:03:00Z",
+  "generated": "2026-07-11T15:46:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 409,
+    "reports": 410,
     "reports_by_type": {
+      "base": 46,
       "macro": 19,
       "bounty": 199,
       "virtuals": 43,
       "security": 46,
-      "base": 45,
       "sentiment": 36,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-11-15.md",
-      "title": "Macro & Micro News Sweep Report",
+      "type": "base",
+      "file": "base-2026-07-11-15.md",
+      "title": "Base Blockchain Sweep Report",
       "date": "2026-07-11T15:00Z",
       "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (26) and global market cap 24h change (0.8%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-11-15.md",
-      "bytes": 1757
+      "summary": "Date: 2026-07-11 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-11-15.md",
+      "bytes": 3131
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-11-15.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-11T15:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-11 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-11-15.md",
+      "bytes": 3131
+    },
     {
       "kind": "intel",
       "type": "macro",
@@ -1261,17 +1272,6 @@
       "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_110612.md",
       "bytes": 10422
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-08-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-08T10:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-08 10:56 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-10.md",
-      "bytes": 3195
     }
   ],
   "broadcasts": [
