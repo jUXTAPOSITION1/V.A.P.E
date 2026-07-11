@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-11T02:45:18Z",
+  "generated": "2026-07-11T03:33:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 395,
+    "reports": 396,
     "reports_by_type": {
+      "bounty": 195,
       "security": 44,
-      "bounty": 194,
       "base": 43,
       "sentiment": 35,
       "virtuals": 40,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 51,
-    "investigations": 74,
+    "investigations": 76,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260711-000246-0xde4EE805.md",
-      "title": "Investigation \u2014 DEXE",
-      "symbol": "DEXE",
-      "name": "Dexe",
-      "date": "2026-07-11T00:02:46Z",
-      "target": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260711-033326-0xb23bB8c2.md",
+      "title": "Investigation \u2014 NOX",
+      "symbol": "NOX",
+      "name": "NOXCAT",
+      "date": "2026-07-11T03:33:26Z",
+      "target": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
+      "chain": "42161 (Arbitrum)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) \u2014 can still act on the contract. Positive evidence: 3705 holders \u2014 reasonably distributed; Deep liquidity ($856,500); Trading 721+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-000246-0xde4EE805.md"
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2770 holders \u2014 reasonably distributed; Deep liquidity ($1,268,211); Trading 118+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-033326-0xb23bB8c2.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-11-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-11T02:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260711_033243.md",
+      "title": "V.A.P.E. Cycle \u2014 20260711_033243 (no new signal)",
+      "date": "2026-07-11T03:32:43Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a medium threat level, with 2 incidents reported in the last 7 days. The incidents reported in the last 14 days did not exceed $50M. Recent exploits include malicious governance proposals, donation attacks, and flash loan price oracle attacks, affecting various protocols on Solana, Ethereum, and othe",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-11-02.md",
-      "bytes": 5497
+      "summary": "SIGNAL: LOW No new deep investigations were conducted this cycle, with only one prior investigation of DEXE | 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 yielding a PROCEED verdict. The tool registry and Slither output were empty, indicating no new tool gaps or security findings in VAPE's own code. No incidents from the hack feed correlate",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_033243.md",
+      "bytes": 812
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260711-033326-0xb23bB8c2.md",
+      "title": "Investigation \u2014 NOX",
+      "symbol": "NOX",
+      "name": "NOXCAT",
+      "date": "2026-07-11T03:33:26Z",
+      "target": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2770 holders \u2014 reasonably distributed; Deep liquidity ($1,268,211); Trading 118+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-033326-0xb23bB8c2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260711-000246-0xde4EE805.md",
@@ -596,23 +610,20 @@
       "score": "68",
       "summary": "Risk factors: [-10] Low liquidity $21,135; [-10] Violent 24h move +389% (volatility/manipulation); [-12] Pair only 0.3 days old (fresh-launch risk).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-081829-0x7CfA2a05.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260702-045836-0x7C797DA3.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-02T04:58:36Z",
-      "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "78",
-      "summary": "Risk factors: [-10] Low liquidity $23,118; [-12] Pair only 1.1 days old (fresh-launch risk).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260702-045836-0x7C797DA3.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260711_033243.md",
+      "title": "V.A.P.E. Cycle \u2014 20260711_033243 (no new signal)",
+      "date": "2026-07-11T03:32:43Z",
+      "threat": null,
+      "summary": "SIGNAL: LOW No new deep investigations were conducted this cycle, with only one prior investigation of DEXE | 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 yielding a PROCEED verdict. The tool registry and Slither output were empty, indicating no new tool gaps or security findings in VAPE's own code. No incidents from the hack feed correlate",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_033243.md",
+      "bytes": 812
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1261,17 +1272,6 @@
       "summary": "Date: 2026-07-07 20:51 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-07-20.md",
       "bytes": 2914
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260707_190356.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-07T19:03:56Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $20.0M on ['Solana'] (Malicious Governance Proposal) \u00b7 RECENT EXPLOIT: Lazy Summer Protocol $6.0M on ['Ethereum'] (Donation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260707_190356.md",
-      "bytes": 10450
     }
   ],
   "broadcasts": [

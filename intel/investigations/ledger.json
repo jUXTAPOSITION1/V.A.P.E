@@ -302,6 +302,25 @@
     "symbol": "RAIN",
     "times_investigated": 1
   },
+  "42161:0xb23bb8c2c6cb9169eeac8f2bd42fcf333a1a8c55": {
+    "address": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
+    "chain": "42161",
+    "creator_address": "0x12edfddeb99b4bffe19f3753012bf781d2a20f74",
+    "first_investigated": "2026-07-11T03:33:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260711-033326-0xb23bB8c2.md",
+        "score": 100,
+        "ts": "2026-07-11T03:33:26Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-11T03:33:26Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "NOX",
+    "times_investigated": 1
+  },
   "8453:0x006b340bee30f8425cf65f064712f57b2bc0bb07": {
     "address": "0x006b340bEE30F8425cf65f064712F57B2BC0bB07",
     "chain": "8453",
