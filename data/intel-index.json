@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-11T15:46:13Z",
+  "generated": "2026-07-11T16:01:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 410,
+    "reports": 411,
     "reports_by_type": {
+      "bounty": 200,
       "base": 46,
       "macro": 19,
-      "bounty": 199,
       "virtuals": 43,
       "security": 46,
       "sentiment": 36,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 53,
-    "investigations": 84,
+    "investigations": 86,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260711-145838-0x0b3e3284.md",
-      "title": "Investigation \u2014 VIRTUAL",
-      "symbol": "VIRTUAL",
-      "name": "Virtual Protocol",
-      "date": "2026-07-11T14:58:38Z",
-      "target": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b",
+      "file": "investigation-20260711-160102-0x940181a9.md",
+      "title": "Investigation \u2014 AERO",
+      "symbol": "AERO",
+      "name": "Aerodrome",
+      "date": "2026-07-11T16:01:02Z",
+      "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: Ownership renounced; 1020290 holders \u2014 reasonably distributed; Deep liquidity ($4,664,127); Trading 832+ days without a known incident in this scan; Custom verified source (not a ma",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-145838-0x0b3e3284.md"
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 749427 holders \u2014 reasonably distributed; Deep liquidity ($31,182,960); Trading 1038+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-160102-0x940181a9.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-11-15.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-11T15:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260711_155742.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-11T15:57:42Z",
       "threat": null,
-      "summary": "Date: 2026-07-11 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-11-15.md",
-      "bytes": 3131
+      "summary": "Cycle: 20260711155742 \u00b7 Data timestamp (UTC): 2026-07-11T15:57:45Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_155742.md",
+      "bytes": 10170
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260711-160102-0x940181a9.md",
+      "title": "Investigation \u2014 AERO",
+      "symbol": "AERO",
+      "name": "Aerodrome",
+      "date": "2026-07-11T16:01:02Z",
+      "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 749427 holders \u2014 reasonably distributed; Deep liquidity ($31,182,960); Trading 1038+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-160102-0x940181a9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260711-145838-0x0b3e3284.md",
@@ -596,23 +610,20 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 1493 holders \u2014 reasonably distributed; Trading 167+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-180603-0xDB879F45.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260704-101133-0x044098A1.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 America250",
-      "symbol": "America250",
-      "name": "America250",
-      "date": "2026-07-04T10:11:33Z",
-      "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $34,531.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-101133-0x044098A1.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260711_155742.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-11T15:57:42Z",
+      "threat": null,
+      "summary": "Cycle: 20260711155742 \u00b7 Data timestamp (UTC): 2026-07-11T15:57:45Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_155742.md",
+      "bytes": 10170
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1261,17 +1272,6 @@
       "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_141208.md",
       "bytes": 11973
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260708_110612.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T11:06:12Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_110612.md",
-      "bytes": 10422
     }
   ],
   "broadcasts": [
