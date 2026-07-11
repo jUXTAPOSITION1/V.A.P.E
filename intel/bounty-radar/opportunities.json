@@ -18848,5 +18848,24 @@
     "fitScore": 85,
     "isNew": true,
     "firstSeen": "2026-07-10T20:02:33.906188Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Bonzo Lend-1783728000",
+    "name": "Bonzo Lend (exploit $10,050,000)",
+    "prizeUsd": 10050000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "hedera"
+    ],
+    "desc": "Price Oracle Manipulation on Hedera. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-11T17:34:51.574232Z"
   }
 ]
