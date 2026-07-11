@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-11T19:39:53Z",
+  "generated": "2026-07-11T20:07:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 413,
+    "reports": 414,
     "reports_by_type": {
+      "virtuals": 44,
       "security": 47,
       "bounty": 201,
       "base": 46,
       "macro": 19,
-      "virtuals": 43,
       "sentiment": 36,
       "hack": 9,
       "deep": 8,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-11-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-11T19:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-11-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-11T20:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days did not exceed $50M, but notable attacks include a $21.3M malicious governance proposal on Solana and a $10.05M price oracle manipulation on Hedera. Various attack vectors were exploited, in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-11-19.md",
-      "bytes": 6133
+      "summary": "Date: 2026-07-11 20:07 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-11-20.md",
+      "bytes": 2873
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-11-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-11T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-11 20:07 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-11-20.md",
+      "bytes": 2873
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1261,17 +1272,6 @@
       "summary": "Date: 2026-07-08 16:26 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-16.md",
       "bytes": 3739
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-08-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-08T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (20) and global market cap 24h change (-3.38%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-08-16.md",
-      "bytes": 1922
     }
   ],
   "broadcasts": [
