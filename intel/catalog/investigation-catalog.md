@@ -147,3 +147,5 @@
 | 2026-07-11 | auto | 0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6 (DEXE) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) — can still act | +7d |
 
 | 2026-07-11 | auto | 0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55 (NOX) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-11 | auto | 0x4200000000000000000000000000000000000042 (OP) | deep_investigation | CAUTION (70/100) | Mintable supply (dilution risk) | +7d |
