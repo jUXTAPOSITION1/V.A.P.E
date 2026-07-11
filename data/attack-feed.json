@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-10T19:30:51Z",
-  "source_report": "intel/reports/security-2026-07-10-19.md",
+  "generated_at": "2026-07-11T02:45:17Z",
+  "source_report": "intel/reports/security-2026-07-11-02.md",
   "threat_level": "MEDIUM",
   "lookback_days": 56,
   "incidents": [
@@ -542,15 +542,6 @@
       "date": "2026-05-17",
       "name": "Verus-Ethereum Bridge",
       "amount_usd_m": 11.5,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "Bridge Verification Bypass"
-    },
-    {
-      "date": "2026-05-16",
-      "name": "Adshares",
-      "amount_usd_m": 0.628,
       "chains": [
         "Ethereum"
       ],
