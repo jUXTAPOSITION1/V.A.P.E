@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-11T11:56:41Z",
+  "generated": "2026-07-11T13:22:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 405,
+    "reports": 406,
     "reports_by_type": {
+      "security": 46,
       "bounty": 198,
       "base": 45,
       "sentiment": 36,
       "virtuals": 42,
-      "security": 45,
       "macro": 18,
       "hack": 9,
       "deep": 8,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-115641-0xE23b60DF.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260711_115321.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-11T11:53:21Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-11-13.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-11T13:00Z",
       "threat": null,
-      "summary": "Cycle: 20260711115321 \u00b7 Data timestamp (UTC): 2026-07-11T11:53:24Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_115321.md",
-      "bytes": 10195
+      "summary": "The current threat landscape indicates a moderate level of risk, with 2 incidents reported in the last 7 days and no incidents exceeding $50M in the last 14 days. The incidents reported involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks, affecting multiple bl",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-11-13.md",
+      "bytes": 5756
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-11-13.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-11T13:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a moderate level of risk, with 2 incidents reported in the last 7 days and no incidents exceeding $50M in the last 14 days. The incidents reported involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks, affecting multiple bl",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-11-13.md",
+      "bytes": 5756
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1261,17 +1272,6 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The affected protocols span multiple blockchain platforms",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-08-08.md",
       "bytes": 6034
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260708_055335.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T05:53:35Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_055335.md",
-      "bytes": 10448
     }
   ],
   "broadcasts": [
