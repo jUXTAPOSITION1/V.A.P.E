@@ -342,7 +342,7 @@
     ]
   },
   "operating_model": {
-    "data": "real-data-only \u2014 every finding sourced from GoPlus/DexScreener/CoinGecko/Base RPC/Etherscan, never fabricated",
+    "data": "real-data-only \u2014 every finding sourced from verified external APIs and on-chain sources, never fabricated",
     "compute": "near-zero \u2014 listener+drain idle at no cost; 6 offerings settle with no model wake; GitHub Actions run the pipeline free",
     "rails": "ACP on Base \u2014 escrowed USDC jobs, ERC-8004 registered identity",
     "uptime": "24/7 \u2014 detached daemons (PPID 1) + hourly GitHub workflows"

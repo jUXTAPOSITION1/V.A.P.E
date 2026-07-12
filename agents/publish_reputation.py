@@ -299,8 +299,8 @@ def main():
             ],
         },
         "operating_model": {
-            "data": "real-data-only — every finding sourced from GoPlus/DexScreener/"
-                    "CoinGecko/Base RPC/Etherscan, never fabricated",
+            "data": "real-data-only — every finding sourced from verified external APIs "
+                    "and on-chain sources, never fabricated",
             "compute": "near-zero — listener+drain idle at no cost; 6 offerings settle "
                        "with no model wake; GitHub Actions run the pipeline free",
             "rails": "ACP on Base — escrowed USDC jobs, ERC-8004 registered identity",
