@@ -43,8 +43,8 @@ def test_xai_providers_have_no_fast_or_bulk_model():
         if name in ("xai_1", "xai_2"):
             assert "fast" not in models
             assert "bulk" not in models
-            assert models.get("deep") == "grok-4.1-fast"
-            assert models.get("frontier") == "grok-4.1-fast"
+            assert models.get("deep") == "grok-4.1-fast-reasoning"
+            assert models.get("frontier") == "grok-4.1-fast-reasoning"
 
 
 def test_default_providers_order_unchanged_xai_appended_last():
@@ -133,7 +133,7 @@ def test_usage_is_logged_on_success(monkeypatch, tmp_path):
     assert len(lines) == 1
     row = json.loads(lines[0])
     assert row["provider"] == "xai_1"
-    assert row["model"] == "grok-4.1-fast"
+    assert row["model"] == "grok-4.1-fast-reasoning"
     assert row["total_tokens"] == 15
 
 

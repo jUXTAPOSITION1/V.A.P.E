@@ -111,18 +111,24 @@ PROVIDERS = [
         "deep": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free",
         "bulk": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
     }),
-    # Grok 4.1 Fast — paid, primary model for the highest-stakes work (see the
+    # Grok 4.1 Fast (reasoning variant — xAI splits this model into
+    # "-reasoning"/"-non-reasoning" IDs; reasoning fits VAPE's actual use
+    # here, multi-step research/report synthesis, not speed-critical single
+    # replies) — paid, primary model for the highest-stakes work (see the
     # module docstring + FRONTIER_ORDER below). Deliberately no "fast"/"bulk"
     # key so a bare tier="fast"/"bulk" ask() call never resolves to Grok even
     # if xai ever ends up early in some provider_order — only "deep"/
     # "frontier" callers reach it. Two adjacent entries sharing one model so
     # key 1 is exhausted before key 2 is tried (see docstring) instead of
     # rotated call-by-call.
+    # NOTE: xAI deprecated this model 2026-05-15; it retires 2026-08-15 —
+    # will need to move to whatever supersedes it (grok-4.5 or similar)
+    # before then.
     ("xai_1", "XAI_API_KEY_1", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast", "frontier": "grok-4.1-fast",
+        "deep": "grok-4.1-fast-reasoning", "frontier": "grok-4.1-fast-reasoning",
     }),
     ("xai_2", "XAI_API_KEY_2", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast", "frontier": "grok-4.1-fast",
+        "deep": "grok-4.1-fast-reasoning", "frontier": "grok-4.1-fast-reasoning",
     }),
 ]
 
