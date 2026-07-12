@@ -140,7 +140,7 @@ const App = {
             if (vlink && id.verify_identity) vlink.href = id.verify_identity;
             const allOfferings = Array.isArray(c.offerings) ? c.offerings : [];
             const x402able = allOfferings.filter(o=>o.x402 ?? o.auto);
-            const manual = allOfferings.filter(o=>!o.auto);
+            const manual = allOfferings.filter(o=>!(o.x402 ?? o.auto));
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
                 const card = o=>`

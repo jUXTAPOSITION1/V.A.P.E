@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:                              # ← ADDED: job-level env for all MCP/research keys
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
     steps:
@@ -39,6 +40,10 @@ jobs:
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
         env:
@@ -67,6 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     env:                              # ← ADDED: job-level env for all MCP/research keys
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
     steps:
@@ -86,6 +92,10 @@ jobs:
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       - name: Commit Review
         run: |
           git config user.name "VAPE Bot"

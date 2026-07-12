@@ -29,6 +29,10 @@ jobs:
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       - name: Commit report + findings
         run: |
           git config user.name "VAPE Bot"

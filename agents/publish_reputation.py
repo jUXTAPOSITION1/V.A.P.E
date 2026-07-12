@@ -67,7 +67,8 @@ DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
 
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
-        "exploit_check", "dossier_check", "market_intel"} | DL_NAMES
+        "exploit_check", "dossier_check", "market_intel",
+        "community_intel_broadcast"} | DL_NAMES
 # Zero-LLM deliverables specifically. dossier_check stays in AUTO above
 # (the monitor still auto-prices/submits it with no triage wake — see
 # scripts/acp-monitor/HANDLER_BRIEF.md), but its own deliverable now
@@ -81,7 +82,9 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # has its own async /scan/bounty_deep_dive route (dispatches a real GitHub
 # Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
 # above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
-X402 = AUTO | {"bounty_deep_dive"}
+# community_intel_broadcast is auto-fulfilled via ACP but has no worker route
+# (not in OFFERING_PRICES), so it's excluded here.
+X402 = (AUTO | {"bounty_deep_dive"}) - {"community_intel_broadcast"}
 # (AUTO already includes DL_NAMES, so the market-data tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py

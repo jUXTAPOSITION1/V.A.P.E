@@ -141,12 +141,13 @@ def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
     return report
 
 def run_slither():
-    """Run slither static analysis (or return placeholder in limited environment)."""
+    """Run slither static analysis. Returns "" on failure/missing binary so callers
+    treat it as no data this cycle, rather than fabricating a fake success string."""
     try:
         result = subprocess.run(["slither", "."], capture_output=True, text=True, timeout=30)
         return result.stdout
-    except:
-        return "Slither scan completed (limited environment)."
+    except Exception:
+        return ""
 
 
 # ============================================================================
