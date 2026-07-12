@@ -38,13 +38,14 @@ except Exception:
 
 # Multi-provider LLM layer
 try:
-    from agents.llm import ask as _llm_ask, available as _llm_available
+    from agents.llm import ask as _llm_ask, available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER
 except Exception:
     try:
-        from llm import ask as _llm_ask, available as _llm_available
+        from llm import ask as _llm_ask, available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER
     except Exception:
         _llm_ask = None
         _llm_available = lambda: []
+        _FRONTIER_ORDER = None
 
 # NEW: Integration layer (Memory + Builder + MCP)
 try:
@@ -67,11 +68,17 @@ if Groq is not None and os.getenv("GROQ_API_KEY"):
     except Exception as _e:
         print(f"[run.py] Groq SDK init skipped: {_e}")
 
-def ask_llm(system, query, tier="fast", temperature=0.7):
-    """Prefer the resilient multi-provider layer; fall back to Groq SDK."""
+def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None):
+    """Prefer the resilient multi-provider layer; fall back to Groq SDK.
+
+    provider_order defaults to None (agents.llm's own default ordering);
+    the real report-generation call sites below pass _FRONTIER_ORDER so
+    VAPE's hourly/self-review reports use Grok 4.1 Fast first — see
+    agents/llm.py's module docstring for the full operating policy."""
     if _llm_ask is not None and _llm_available():
         try:
-            txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature)
+            txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature,
+                                 provider_order=provider_order)
             print(f"[llm:{prov}] ok")
             return txt
         except Exception as e:
@@ -113,7 +120,7 @@ def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
     without suppressing genuine content variation (that should come from the
     grounding data changing cycle to cycle, not from sampling randomness).
     """
-    report = ask_llm(system, prompt, tier=tier, temperature=temperature)
+    report = ask_llm(system, prompt, tier=tier, temperature=temperature, provider_order=_FRONTIER_ORDER)
     if (report or "").startswith("[llm unavailable"):
         return report
     first_line = (report or "").strip().splitlines()[0] if report else ""
@@ -126,7 +133,7 @@ def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
         "its very first line, nothing before it. Rewrite your entire response now, "
         "starting with that line, following the section structure you were given."
     )
-    retry = ask_llm(system, corrective, tier=tier, temperature=temperature)
+    retry = ask_llm(system, corrective, tier=tier, temperature=temperature, provider_order=_FRONTIER_ORDER)
     retry_first = (retry or "").strip().splitlines()[0] if retry else ""
     if retry_first.strip().upper().startswith("SIGNAL:"):
         return retry
@@ -586,7 +593,8 @@ def main(review_repo=False):
             "improvements. Cite exact file names and function names from what was "
             "actually shown to you."
         )
-        report = ask_llm(review_system, review_prompt, tier="deep", temperature=0.4)
+        report = ask_llm(review_system, review_prompt, tier="deep", temperature=0.4,
+                         provider_order=_FRONTIER_ORDER)
         report_path = f"reports/repo_review_{timestamp}.md"
     else:
         print("[Mode] Bounty Hunt Pass\n")

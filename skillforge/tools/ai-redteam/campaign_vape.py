@@ -37,7 +37,7 @@ sys.path.insert(0, _REPO_ROOT)
 sys.path.insert(0, _THIS_DIR)
 
 from agents.run import VAPE_REPORT_SYSTEM, _build_report_prompt  # noqa: E402
-from agents.llm import ask_safe  # noqa: E402
+from agents.llm import ask_safe, FRONTIER_ORDER  # noqa: E402
 from vape_deepeval_model import VapeLLM  # noqa: E402
 
 from deepteam import red_team
@@ -58,8 +58,10 @@ def vape_model_callback(input_str, turns=None):
         slither_result=None,
         memory_priming=input_str,
     )
+    # provider_order=FRONTIER_ORDER matches agents/run.py's real report call —
+    # this must stay on whatever model production actually uses.
     response, _provider = ask_safe(system=VAPE_REPORT_SYSTEM, user=prompt, tier="deep",
-                                    temperature=0.4, max_tokens=1200)
+                                    temperature=0.4, max_tokens=1200, provider_order=FRONTIER_ORDER)
     return RTTurn(role="assistant", content=response or "")
 
 
@@ -102,7 +104,12 @@ def main():
         print("[campaign_vape] no LLM provider — skipping.")
         return
 
-    judge = VapeLLM(tier="deep")
+    # Judge gets Grok-first (provider_order=FRONTIER_ORDER) — directly
+    # addresses VapeLLM's own honesty note that a stronger judge model
+    # catches subtler jailbreaks the small open models could miss. The
+    # simulator (writes attack prompts, doesn't need to be smart) stays on
+    # the free chain.
+    judge = VapeLLM(tier="deep", provider_order=FRONTIER_ORDER)
     sim = VapeLLM(tier="fast")
     vulnerabilities = [PromptLeakage(), ExcessiveAgency(), Misinformation()]
 

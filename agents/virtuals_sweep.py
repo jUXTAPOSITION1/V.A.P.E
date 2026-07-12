@@ -83,7 +83,8 @@ def run():
         "about protocol health right now.\n"
         "2. Action Items for VAPE — 3-5 bullets grounded in VAPE's own real activity numbers above."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200)
+    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+                                       provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Virtuals Protocol & ACP Sweep Report

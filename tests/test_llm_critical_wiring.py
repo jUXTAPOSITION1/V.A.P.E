@@ -1,0 +1,78 @@
+"""Pins which of VAPE's LLM call sites route through agents.llm.FRONTIER_ORDER
+(Grok 4.1 Fast first) versus the default free chain — the operating split
+requested: Grok primary for reports/investigations/the $50 x402 audit/intel/
+Builder/SKILLFORGE; Groq/Gemini for everything else.
+
+Source-scan based (reads the file text) rather than executing each module,
+since several of these live inside real GitHub Actions workflows this
+sandbox can't fully exercise (deepteam/deepeval aren't installed here) —
+same pattern already used for offering-name parity in
+tests/test_acp_defillama.py. A future refactor that drops the
+provider_order kwarg from any of these calls will fail this test loudly.
+"""
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Every file with a "critical" LLM call, and the exact snippet that must be
+# present — proof the call site actually passes the frontier/Grok-first
+# order, not just that the file imports it.
+_CRITICAL_CALL_SITES = {
+    "agents/base_sweep.py": "provider_order=llm.FRONTIER_ORDER",
+    "agents/security_sweep.py": "provider_order=llm.FRONTIER_ORDER",
+    "agents/virtuals_sweep.py": "provider_order=llm.FRONTIER_ORDER",
+    "agents/sentiment_sweep.py": "provider_order=llm.FRONTIER_ORDER",
+    "agents/macro_sweep.py": "provider_order=llm.FRONTIER_ORDER",
+    "agents/redteam.py": "provider_order=FRONTIER_ORDER",
+    "agents/self_improve.py": "provider_order=FRONTIER_ORDER",
+    "agents/build_request.py": "provider_order=FRONTIER_ORDER",
+    "agents/skillforge_build.py": "provider_order=FRONTIER_ORDER",
+    "skillforge/synthesize.py": "provider_order=FRONTIER_ORDER",
+    "skillforge/tools/ai-redteam/campaign_vape.py": "provider_order=FRONTIER_ORDER",
+}
+
+
+def test_every_named_critical_call_site_uses_frontier_order():
+    missing = []
+    for rel_path, needle in _CRITICAL_CALL_SITES.items():
+        text = (ROOT / rel_path).read_text()
+        if needle not in text:
+            missing.append(rel_path)
+    assert not missing, f"critical call site(s) missing provider_order=FRONTIER_ORDER: {missing}"
+
+
+def test_deep_dive_and_dossier_use_ask_frontier_with_no_local_override():
+    """The $50 x402 job and investigations' AI quick review already used
+    ask_frontier() before this change — they must keep calling it BARE (no
+    provider_order kwarg of their own), so they pick up FRONTIER_ORDER's new
+    Grok-first composition automatically rather than freezing to the old one."""
+    dd = (ROOT / "agents/deep_dive_audit.py").read_text()
+    assert "ask_frontier(FRONTIER_SYSTEM, prompt" in dd
+    assert "ask_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3, provider_order" not in dd
+
+    acp = (ROOT / "agents/acp_fulfill.py").read_text()
+    assert "ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user" in acp
+    assert "provider_order" not in acp.split("ask_frontier(_AI_QUICK_REVIEW_SYSTEM")[1].split(")")[0]
+
+
+def test_redteam_judge_matches_run_py_production_provider_order():
+    """agents/redteam.py's whole purpose is testing agents/run.py's REAL
+    production report pipeline — if run.py's actual call ever stops using
+    FRONTIER_ORDER while redteam.py keeps using it (or vice versa), the test
+    silently stops testing production. Pin both together."""
+    run_py = (ROOT / "agents/run.py").read_text()
+    redteam_py = (ROOT / "agents/redteam.py").read_text()
+    assert "provider_order=_FRONTIER_ORDER" in run_py
+    assert "provider_order=FRONTIER_ORDER" in redteam_py
+
+
+def test_adversarial_simulator_stays_off_frontier_order():
+    """The deepteam attack simulator (writes attack prompts, not judged
+    output) deliberately stays on the free chain — only the judge should be
+    pinned to FRONTIER_ORDER. Confirms campaign_vape.py doesn't accidentally
+    upgrade the simulator too."""
+    text = (ROOT / "skillforge/tools/ai-redteam/campaign_vape.py").read_text()
+    sim_line = next(l for l in text.splitlines() if "sim = VapeLLM" in l)
+    assert "provider_order" not in sim_line
+    judge_line = next(l for l in text.splitlines() if "judge = VapeLLM" in l)
+    assert "provider_order=FRONTIER_ORDER" in judge_line

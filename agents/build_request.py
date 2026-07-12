@@ -28,6 +28,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.builder import Builder, validate_security  # noqa: E402
 from agents._build_pr import open_build_pr as _open_build_pr  # noqa: E402
+from agents.llm import FRONTIER_ORDER  # noqa: E402
 
 try:
     from skillforge.memory.retriever import append_to_memory  # noqa: E402
@@ -114,7 +115,8 @@ def main():
         "'vape-build' by a maintainer. Build exactly what's asked, scoped to VAPE's real "
         "stack and specialization areas — never invent scope beyond the issue text."
     )
-    files, metadata = builder.generate_project(task=task, review=True, tier="deep")
+    files, metadata = builder.generate_project(task=task, review=True, tier="deep",
+                                                provider_order=FRONTIER_ORDER)
     combined = "\n\n".join(files.values()) if files else ""
     _, warnings = validate_security(combined, task) if files else (True, [])
 

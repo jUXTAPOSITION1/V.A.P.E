@@ -42,10 +42,11 @@ from agents.builder import Builder, validate_security  # noqa: E402
 from agents._build_pr import open_build_pr  # noqa: E402
 
 try:
-    from agents.llm import ask as llm_ask, available as llm_available
+    from agents.llm import ask as llm_ask, available as llm_available, FRONTIER_ORDER
 except Exception:
     llm_ask = None
     llm_available = lambda: []  # noqa: E731
+    FRONTIER_ORDER = None
 
 try:
     from skillforge.memory.retriever import search_memory, append_to_memory
@@ -159,6 +160,7 @@ def propose(signals):
             tier="deep",
             max_tokens=600,
             temperature=0.5,
+            provider_order=FRONTIER_ORDER,
         )
     except Exception as e:
         print(f"[SkillforgeBuild] propose LLM call failed: {e}")
@@ -198,7 +200,8 @@ def build_and_open_pr(proposal):
         "This is VAPE's own self-directed build (not a human request) — build exactly "
         "what's specified above, scoped to VAPE's real stack and specialization areas."
     )
-    files, metadata = builder.generate_project(task=task, review=True, tier="deep")
+    files, metadata = builder.generate_project(task=task, review=True, tier="deep",
+                                                provider_order=FRONTIER_ORDER)
     if not files:
         return None, {}
 

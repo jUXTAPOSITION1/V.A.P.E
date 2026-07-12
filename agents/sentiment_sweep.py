@@ -74,7 +74,8 @@ def run():
         "2. Narrative Shifts — how this compares to what you'd expect from the real Fear & Greed "
         "reading, and any tension between the numeric mood and the qualitative narrative."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200)
+    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+                                       provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Sentiment Sweep Report — {stamp}

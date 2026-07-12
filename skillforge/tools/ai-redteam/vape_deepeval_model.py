@@ -24,10 +24,18 @@ from deepeval.models.base_model import DeepEvalBaseLLM
 
 
 class VapeLLM(DeepEvalBaseLLM):
-    """Wraps agents.llm.ask_safe as a deepteam/deepeval-compatible model."""
+    """Wraps agents.llm.ask_safe as a deepteam/deepeval-compatible model.
 
-    def __init__(self, tier="fast"):
+    provider_order lets a caller pin this to agents.llm.FRONTIER_ORDER — used
+    for the judge (see campaign_vape.py), since a stronger judge model
+    directly addresses the honesty note above: a smarter judge catches
+    subtler jailbreaks the small open models could miss. Left None (the
+    default free chain) for the attack simulator, which doesn't need to be
+    smart to write attack prompts."""
+
+    def __init__(self, tier="fast", provider_order=None):
         self.tier = tier
+        self.provider_order = provider_order
         super().__init__(model=f"vape-{tier}")
 
     def load_model(self):
@@ -52,6 +60,7 @@ class VapeLLM(DeepEvalBaseLLM):
             tier=self.tier,
             temperature=0.7,
             max_tokens=1024,
+            provider_order=self.provider_order,
         )
         if (text or "").startswith("[llm unavailable"):
             raise RuntimeError(text)
