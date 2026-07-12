@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-12T06:34:18Z",
+  "generated": "2026-07-12T08:20:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 420,
+    "reports": 421,
     "reports_by_type": {
+      "security": 49,
       "bounty": 202,
       "base": 48,
       "virtuals": 45,
-      "security": 48,
       "sentiment": 37,
       "macro": 19,
       "hack": 9,
@@ -39,15 +39,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-063418-0x9560e827.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260712_063358.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-12T06:33:58Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-12-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-12T08:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Bonzo Lend $10.05M on ['Hedera'] (Price Oracle Manipulation)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260712_063358.md",
-      "bytes": 11725
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including price oracle manipulation, malicious governance proposals, and donation attacks, affecting multiple blockchain platforms such as Hedera, Solana, ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-08.md",
+      "bytes": 5605
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-12-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-12T08:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days involve various exploit techniques, including price oracle manipulation, malicious governance proposals, and donation attacks, affecting multiple blockchain platforms such as Hedera, Solana, ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-08.md",
+      "bytes": 5605
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1261,17 +1272,6 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days include a range of exploit types, such as malicious governance proposals, donation attacks, and flash loan price oracle attacks. The majority of these incidents occurred on the Ethereum and S",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-09-03.md",
       "bytes": 5743
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260708_220801.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-08T22:08:01Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_220801.md",
-      "bytes": 10430
     }
   ],
   "broadcasts": [
@@ -1571,7 +1571,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48520107",
+      "version": "48525556",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1581,7 +1581,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.31 eth_dom 9.56 mcap_chg_24h 0.11",
+      "version": "btc_dom 56.26 eth_dom 9.54 mcap_chg_24h -0.46",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
