@@ -1,0 +1,80 @@
+name: Archive Reports (working-tree hygiene)
+
+# Folds aged report files (see scripts/archive_reports.py) into monthly
+# tarballs under intel/archive/, keeping a queryable metadata index, so the
+# working tree doesn't drown in loose per-cycle output. Weekly is plenty —
+# this is a slow-moving hygiene task, not a data pipeline. Also prints a repo
+# health summary (scripts/repo_stats.py) to the run summary each week so the
+# growth curve stays visible.
+#
+# Runs on a schedule + manual dispatch only. The commit/push hardening
+# (persist-credentials:false, token wired only at push time) mirrors
+# intel-sweeps.yml — the archiver itself spawns nothing third-party, but
+# keeping the pattern uniform is cheaper than reasoning about each workflow
+# separately.
+on:
+  schedule:
+    - cron: '30 5 * * 1'   # weekly, Monday 05:30 UTC (before the Monday intel sweeps)
+  workflow_dispatch:
+    inputs:
+      retention_days:
+        description: 'Keep indexed reports newer than this many days live (internal churn uses a shorter fixed window)'
+        default: '21'
+      dry_run:
+        description: 'Dry run only (no changes committed)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive-reports
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Repo health summary (before)
+        run: python scripts/repo_stats.py || true
+
+      - name: Archive aged reports
+        env:
+          RETENTION_DAYS: ${{ github.event.inputs.retention_days || '21' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python scripts/archive_reports.py --retention-days "$RETENTION_DAYS"
+          else
+            python scripts/archive_reports.py --retention-days "$RETENTION_DAYS" --apply
+          fi
+
+      - name: Rebuild intel index
+        # Regenerate data/intel-index.json from the now-reduced live tree so the
+        # committed index never links to a report that was just archived.
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: python agents/build_intel_index.py
+
+      - name: Commit
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A reports/ intel/reports/ intel/archive/ data/intel-index.json
+          git commit -m "archive: fold aged reports into intel/archive/ $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done

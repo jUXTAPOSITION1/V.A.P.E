@@ -156,6 +156,21 @@ Timestamped real-data outputs committed continuously: `reports/`, `audits/poc-re
 `broadcasts/`, `bounty-radar/`, `engagements/`, `catalog/`. Synced to the HF Space via
 `sync-to-hub.yml`.
 
+**Working-tree hygiene:** the repo is the operational store ("GitHub as the brain"),
+which stays fast only if the loose-file count stays bounded. `scripts/archive_reports.py`
+(weekly `archive-reports.yml`) folds aged report output into one compressed tarball per
+(category, month) under `intel/archive/`, keeping a queryable `index.json` manifest
+(title/date/threat/summary/sha256 per report) — nothing deleted, everything byte-recoverable,
+just moved out of the live tree once past its retention window (short for internal cycle
+churn like `repo_review_*`, longer for dashboard-indexed `bounty_report_*`/`intel/reports/*`).
+The workflow rebuilds `data/intel-index.json` immediately after archiving so the committed
+index never links a report that just moved to cold storage; the dashboard only ever surfaces
+the most-recent handful, so it's unaffected. `scripts/repo_stats.py` prints a weekly repo-size /
+file-count / memory-log-growth summary so scaling decisions stay driven by real numbers.
+The SQLite memory projection (`skillforge/memory/index_db.py`, `data/memory.db`, gitignored
+and rebuildable) is the read-side complement: append-only JSONL stays the source of truth,
+the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
+
 ### 4. ACP job monitor [OK] (autonomous revenue)
 Catches incoming ACP jobs and negotiates → funds → completes at near-zero compute.
 3 layers: persistent `acp events listen` daemon (zero LLM) → drain+triage loop (zero LLM)
@@ -185,8 +200,27 @@ Every loop is grounded in **real data only** — no simulated or hypothetical ou
 | SKILLFORGE | GH Actions (hourly/6x/daily) | free runner | skillforge/memory |
 | ACP monitor | persistent daemon | ~zero idle | acp-monitor/state.json |
 
+### 6. Quality gates & the model path [OK]/[WIP]
+- **`tests/` + `tests.yml`** [OK] — a hermetic, network-free pytest suite pins VAPE's
+  deterministic core (`investigate.score()`, threat-level computation, the attack-pattern
+  classifier, the archiver round-trip, the safe fmt helpers), gated on every Python-touching
+  PR alongside pyflakes over `agents/`+`scripts/`. This is the safety net the self-improvement
+  loop needs before it can trust a self-proposed change to scoring or classification.
+- **`scripts/build_finetune_dataset.py`** [WIP] — "an LLM of VAPE's own", grounded and
+  reproducible: turns VAPE's real, published investigations (`intel/investigations/`) into a
+  chat-format instruction-tuning corpus (`data/finetune/`), where the INPUT is the observable
+  recon VAPE actually gathered and the OUTPUT is the verdict `score()` deterministically
+  reached — so a small open-weight model (LoRA) can be taught to reason like VAPE, not to
+  re-distill another model's guesses. It does NOT replace `score()` (rule-based stays the
+  source of truth); a fine-tuned candidate is a better "fast" tier, to be graded against the
+  frontier tier with the existing promptfoo/deepteam harness before any real traffic. The
+  corpus grows for free as VAPE keeps investigating — see `data/finetune/DATASET_CARD.md`.
+
 ## Current vs. future
 **Now:** autonomous hourly LLM+slither reports, SKILLFORGE 13-tool verification, intel
-audit trail, ACP job monetization, self-review PRs.
+audit trail, ACP job monetization, self-review PRs, deterministic-core test gate, working-tree
+archiving + repo-health monitoring, and a reproducible fine-tune corpus seeded from VAPE's own
+investigation history.
 **Next:** richer UI, external-target auditing (beyond self-repo), persistent
-cross-run agent memory, full ACP deliverable automation.
+cross-run agent memory, full ACP deliverable automation, and a first LoRA fine-tune graded
+against the frontier tier before it serves any real "fast"-tier traffic.

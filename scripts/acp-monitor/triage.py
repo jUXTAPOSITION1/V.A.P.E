@@ -7,7 +7,7 @@ Exit codes:
   0  nothing actionable (idle)
   10 actionable job event(s) present -> caller should wake the handler
 """
-import json, os, subprocess, sys, time
+import json, os, subprocess, sys
 from datetime import datetime, timezone
 
 DIR = "/home/node/.openclaw/acp-monitor"

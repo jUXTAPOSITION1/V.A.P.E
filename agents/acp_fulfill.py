@@ -211,8 +211,8 @@ def _ai_quick_review(a, chain, assess, src):
             f"on chain {chain}, contract {a}\n\n"
             f"=== VERIFIED SOURCE ({verif.get('name')}, truncated) ===\n{source_code[:12000]}\n\n"
             f"=== RECON SCORE ===\n{assess.get('score')}/100 -> {assess.get('verdict')}\n\n"
-            f"=== RECON RISK FLAGS ===\n" + ("\n".join(assess["reasons"]) or "none") + "\n\n"
-            f"=== RECON POSITIVE SIGNALS ===\n" + ("\n".join(assess.get("positive_signals") or []) or "none"))
+            "=== RECON RISK FLAGS ===\n" + ("\n".join(assess["reasons"]) or "none") + "\n\n"
+            "=== RECON POSITIVE SIGNALS ===\n" + ("\n".join(assess.get("positive_signals") or []) or "none"))
     try:
         text, provider = ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=550, temperature=0.3, timeout=25)
         return {"available": True, "provider": provider, "summary": text.strip()}

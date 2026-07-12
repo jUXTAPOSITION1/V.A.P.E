@@ -1,0 +1,51 @@
+name: Tests (deterministic core + pyflakes)
+
+# Two cheap, hermetic gates on every push/PR that touches Python:
+#   1. pytest over tests/ — pins the network-free decision logic (score(),
+#      threat-level, the attack-pattern classifier, the archiver round-trip,
+#      the safe fmt helpers). These are the pieces whose correctness a reader,
+#      or VAPE's own self-improvement loop, has to trust before believing a
+#      verdict — and the first thing a self-proposed refactor could regress.
+#   2. pyflakes over agents/ + scripts/ — real undefined-name/unused-import
+#      bugs, the same check self_improve.py already runs reactively, promoted
+#      to a pre-merge gate so a broken import can't land on main.
+# No secrets, no API keys, no external calls — runs in seconds.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/**"
+      - "scripts/**"
+      - "skillforge/**"
+      - "tests/**"
+      - "pytest.ini"
+      - ".github/workflows/tests.yml"
+  pull_request:
+    paths:
+      - "agents/**"
+      - "scripts/**"
+      - "skillforge/**"
+      - "tests/**"
+      - "pytest.ini"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install test + runtime deps
+        run: |
+          pip install pytest pyflakes
+          pip install -r agents/requirements.txt || true
+      - name: pyflakes (agents/ + scripts/)
+        run: python -m pyflakes agents/ scripts/
+      - name: pytest (deterministic core)
+        run: python -m pytest tests/ -q
