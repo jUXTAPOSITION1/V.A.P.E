@@ -12,6 +12,32 @@ function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// DefiLlama data micro-services (worker /data/<name>, agents/dataHandlers.ts).
+// Different route prefix, varied inputs, and a rich-data (not verdict) result.
+// Each spec's `inputs` drives the modal fields; empty = a zero-input call.
+const DATA_OFFERINGS = {
+    dl_token_intel:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
+                                    { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
+                                    { k: 'slug', label: 'Protocol slug (optional — adds fees/unlocks/treasury)', ph: 'aave', opt: true }] },
+    dl_token_chart:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
+                                    { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
+                                    { k: 'span', label: 'Days of history', ph: '30', def: '30' }] },
+    dl_protocol:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aerodrome' }] },
+    dl_protocol_fees:   { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aave' }] },
+    dl_unlocks:         { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aptos' }] },
+    dl_treasury:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'uniswap' }] },
+    dl_chain_protocols: { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
+    dl_chain_overview:  { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
+    dl_chain_fees:      { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
+    dl_dex_volumes:     { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
+    dl_derivatives:     { inputs: [] },
+    dl_yields:          { inputs: [{ k: 'chain', label: 'Chain (optional)', ph: 'Base', opt: true },
+                                    { k: 'project', label: 'Project (optional)', ph: 'aave-v3', opt: true },
+                                    { k: 'symbol', label: 'Symbol (optional)', ph: 'USDC', opt: true }] },
+    dl_stablecoins:     { inputs: [] },
+    dl_bridges:         { inputs: [] },
+};
+
 const Hire = {
     _modal: null,
 
@@ -20,6 +46,8 @@ const Hire = {
     },
 
     openX402(offeringName, priceUsd) {
+        // DefiLlama data tier has its own route/inputs/result path.
+        if (DATA_OFFERINGS[offeringName]) return this.openData(offeringName, priceUsd);
         this._closeModal();
         const needsAddress = offeringName !== 'market_intel';
         const modal = document.createElement('div');
@@ -183,6 +211,169 @@ const Hire = {
         try {
             await Report.downloadPdf(reportOpts);
         } catch (e) { /* PDF/download not available in this browser — inline report above still stands */ }
+    },
+
+    // ── DefiLlama data micro-services ($0.01 each) ───────────────────────────
+    openData(offeringName, priceUsd) {
+        this._closeModal();
+        const spec = DATA_OFFERINGS[offeringName];
+        const fields = spec.inputs.map(f => `
+            <label class="text-xs text-zinc-500 block mb-1">${escapeHtml(f.label)}</label>
+            <input data-key="${escapeHtml(f.k)}" type="text" placeholder="${escapeHtml(f.ph || '')}" value="${escapeHtml(f.def || '')}"
+                   class="w-full bg-zinc-900/80 border border-white/10 focus:border-cyan-500 outline-none px-3 py-2 rounded-lg text-xs font-mono mb-3">`).join('');
+        const modal = document.createElement('div');
+        modal.id = 'hire-modal';
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
+        modal.innerHTML = `
+            <div class="absolute inset-0 bg-black/70" data-close></div>
+            <div class="relative glass rounded-2xl p-6 w-full max-w-md">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-display text-lg flex items-center gap-2"><i class="fa-solid fa-database text-cyan-400"></i> DefiLlama data</h3>
+                    <button data-close class="text-zinc-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="hire-body">
+                    <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g, ' '))} <span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
+                    <p class="text-xs text-zinc-500 mb-4">Keyless real DefiLlama data. Settles via x402: your wallet signs a gasless USDC authorization for the exact price above.</p>
+                    ${fields || '<div class="mb-1"></div>'}
+                    <button id="hire-submit" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm mt-1">Authorize &amp; Fetch</button>
+                    <div id="hire-status" class="text-xs text-zinc-500 mt-3"></div>
+                </div>
+            </div>`;
+        document.body.appendChild(modal);
+        this._modal = modal;
+        modal.querySelectorAll('[data-close]').forEach(el => el.onclick = () => this._closeModal());
+        modal.querySelector('#hire-submit').onclick = () => this._runData(offeringName, priceUsd, spec);
+    },
+
+    async _runData(offeringName, priceUsd, spec) {
+        const status = document.getElementById('hire-status');
+        const submitBtn = document.getElementById('hire-submit');
+        const set = (html, cls) => { status.innerHTML = html; status.className = `text-xs mt-3 ${cls || 'text-zinc-500'}`; };
+
+        if (!window.Wallet || !Wallet.state().connected) { set('Connect a wallet first (top right), then try again.', 'text-amber-400'); return; }
+        if (!window.WORKER_BASE) { set("VAPE's payment worker isn't configured yet.", 'text-amber-400'); return; }
+
+        // Collect + validate inputs from the modal.
+        const params = {};
+        for (const f of spec.inputs) {
+            const el = document.querySelector(`#hire-body [data-key="${f.k}"]`);
+            const v = (el && el.value || '').trim();
+            if (!v) {
+                if (f.opt) continue;
+                set(`Enter ${escapeHtml(f.label.toLowerCase())}.`, 'text-amber-400');
+                return;
+            }
+            if (f.addr && !ADDRESS_RE.test(v)) { set('Enter a valid 0x… address.', 'text-amber-400'); return; }
+            params[f.k] = v;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50');
+        set('<i class="fa-solid fa-spinner fa-spin"></i> Checking network…');
+        const onBase = await Wallet.ensureBase();
+        if (!onBase) { set('Switch your wallet to Base mainnet and try again.', 'text-amber-400'); submitBtn.disabled = false; submitBtn.classList.remove('opacity-50'); return; }
+
+        try {
+            set('<i class="fa-solid fa-spinner fa-spin"></i> Loading payment protocol…');
+            const [{ wrapFetchWithPaymentFromConfig }, { ExactEvmScheme }, { createWalletClient, custom }] = await Promise.all([
+                import('https://esm.sh/@x402/fetch@2.17.0'),
+                import('https://esm.sh/@x402/evm@2.17.0'),
+                import('https://esm.sh/viem@2'),
+            ]);
+            const account = Wallet.state().account;
+            const provider = Wallet.getProvider();
+            const walletClient = createWalletClient({ account, transport: custom(provider) });
+            const signer = { address: account, signTypedData: (args) => walletClient.signTypedData({ account, ...args }) };
+            const fetchWithPayment = wrapFetchWithPaymentFromConfig(fetch, {
+                schemes: [{ network: 'eip155:8453', client: new ExactEvmScheme(signer) }],
+            });
+
+            const qs = Object.keys(params).length
+                ? '?' + Object.entries(params).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&') : '';
+            set('<i class="fa-solid fa-spinner fa-spin"></i> Sign the request in your wallet…');
+            const res = await fetchWithPayment(`${window.WORKER_BASE}/data/${offeringName}${qs}`);
+            const result = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(result.error || `Worker returned ${res.status}`);
+            this._renderDataResult(offeringName, priceUsd, params, result);
+        } catch (e) {
+            const msg = (e && e.message) || String(e);
+            set(`Payment failed: ${escapeHtml(msg.slice(0, 200))}`, 'text-rose-400');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50');
+        }
+    },
+
+    _renderDataResult(offeringName, priceUsd, params, result) {
+        const body = document.getElementById('hire-body');
+        if (!body) return;
+        const deliverable = (result && result.deliverable) || {};
+        const walletAddress = (window.Wallet && Wallet.state().account) || null;
+        body.innerHTML = `
+            <div class="text-center mb-4">
+                <i class="fa-solid fa-circle-check text-cyan-400 text-3xl mb-2"></i>
+                <div class="font-display text-lg">Paid &amp; delivered</div>
+                <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g, ' '))} · $${priceUsd} settled on Base</div>
+            </div>
+            <div class="glass rounded-xl p-4 mb-4 max-h-80 overflow-y-auto">${this._dataHtml(deliverable)}</div>
+            <button id="hire-copy" class="w-full bg-white/10 hover:bg-white/15 transition px-4 py-2.5 rounded-xl font-display text-sm"><i class="fa-solid fa-copy"></i> Copy JSON</button>
+            <div id="hire-copy-status" class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below.</div>`;
+        document.getElementById('hire-copy').onclick = async () => {
+            await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
+            document.getElementById('hire-copy-status').textContent = 'Copied raw JSON to clipboard.';
+        };
+        try {
+            if (window.CaseHistory && walletAddress) {
+                CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress,
+                    targetAddress: params.address || params.slug || params.chain || '', verdict: 'DATA', result });
+            }
+        } catch (e) { /* non-fatal — data is already shown above */ }
+    },
+
+    // Rich, logo-aware renderer for a DefiLlama deliverable. Handles the common
+    // shapes (a logo + scalars, and any array of rows that may carry per-row
+    // logos) generically, so all 14 tools render without 14 bespoke layouts.
+    // Everything is escaped; logos use the same onerror-hide pattern the rest
+    // of the site uses for token/protocol icons.
+    _dataHtml(d) {
+        if (!d || typeof d !== 'object') return `<div class="text-xs text-zinc-400">${escapeHtml(String(d))}</div>`;
+        if (d.error) return `<div class="text-xs text-amber-400">DefiLlama: ${escapeHtml(String(d.error))}</div>`;
+        const img = (url) => url ? `<img src="${escapeHtml(url)}" class="w-5 h-5 rounded-full inline-block align-middle mr-1.5" onerror="this.style.display='none'">` : '';
+        const fmt = (v) => {
+            if (v == null) return '—';
+            if (typeof v === 'number') return v.toLocaleString(undefined, { maximumFractionDigits: 6 });
+            return escapeHtml(String(v));
+        };
+        const rows = [];
+        if (d.logo || d.name || d.symbol) {
+            rows.push(`<div class="flex items-center gap-1 mb-2 text-sm text-zinc-100">${img(d.logo)}<span class="font-semibold">${escapeHtml(d.name || d.symbol || '')}</span>${d.symbol && d.name ? `<span class="text-zinc-500 text-xs ml-1">${escapeHtml(d.symbol)}</span>` : ''}</div>`);
+        }
+        // Scalar fields (skip noisy/internal keys and arrays/objects handled below).
+        const skip = new Set(['logo', 'name', 'symbol', 'ts', 'chain', 'address', 'prices']);
+        for (const [k, v] of Object.entries(d)) {
+            if (skip.has(k) || v == null) continue;
+            if (Array.isArray(v)) continue;
+            if (typeof v === 'object') {
+                // one level of nesting (e.g. price:{price,confidence}, first_price:{age_days})
+                const sub = Object.entries(v).filter(([, x]) => x != null && typeof x !== 'object')
+                    .map(([sk, sx]) => `<span class="text-zinc-400">${escapeHtml(sk)}</span> ${fmt(sx)}`).join(' · ');
+                if (sub) rows.push(`<div class="text-xs mb-1"><span class="text-cyan-400 font-mono">${escapeHtml(k)}</span> — ${sub}</div>`);
+                continue;
+            }
+            rows.push(`<div class="text-xs mb-1 flex justify-between gap-3"><span class="text-zinc-500 font-mono">${escapeHtml(k)}</span><span class="text-zinc-200 text-right">${fmt(v)}</span></div>`);
+        }
+        // Arrays of rows (protocols, dexs, bridges, stablecoins, pools, venues…).
+        for (const [k, v] of Object.entries(d)) {
+            if (!Array.isArray(v) || !v.length || typeof v[0] !== 'object') continue;
+            const items = v.slice(0, 12).map(row => {
+                const title = row.name || row.symbol || row.project || row.pool || '';
+                const metricKey = ['depeg', 'apy', 'tvl_usd', 'vol_24h', 'fees_24h', 'circulating_usd', 'last_daily_volume']
+                    .find(mk => row[mk] != null);
+                const metric = metricKey ? `<span class="text-cyan-400 font-mono text-[11px] whitespace-nowrap">${escapeHtml(metricKey)}: ${fmt(row[metricKey])}</span>` : '';
+                return `<div class="flex items-center justify-between gap-2 py-0.5"><span class="flex items-center min-w-0 text-xs text-zinc-200">${img(row.logo)}<span class="truncate">${escapeHtml(title)}</span></span>${metric}</div>`;
+            }).join('');
+            rows.push(`<div class="mt-2"><div class="text-[10px] uppercase tracking-wider text-zinc-500 mb-1">${escapeHtml(k)} (${v.length})</div>${items}</div>`);
+        }
+        return rows.join('') || `<pre class="text-[11px] text-zinc-400 whitespace-pre-wrap">${escapeHtml(JSON.stringify(d, null, 2))}</pre>`;
     },
 };
 
