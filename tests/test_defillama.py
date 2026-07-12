@@ -88,15 +88,27 @@ def test_bridges_rank_by_volume(monkeypatch):
 
 
 def test_treasury_own_token_share(monkeypatch):
-    _patch(monkeypatch, {"name": "X", "currentChainTvls": {"OwnTokens": 90, "stablecoins": 10}})
+    # Real shape: per-chain totals (already inclusive of own tokens) PLUS
+    # own-token breakdowns (aggregate "OwnTokens" + per-chain "<chain>-OwnTokens").
+    # Summing all of them would double-count; only the plain per-chain totals
+    # count toward treasury_usd.
+    _patch(monkeypatch, {"name": "X", "currentChainTvls": {
+        "ethereum": 80, "ethereum-OwnTokens": 72,
+        "base": 20, "base-OwnTokens": 18,
+        "OwnTokens": 90}})
     r = dl.treasury("x")
-    assert r["own_token_share"] == 0.9  # 90% own-token treasury = fragility signal
+    assert r["treasury_usd"] == 100        # 80 + 20 only — breakdowns excluded
+    assert r["own_token_usd"] == 90
+    assert r["own_token_share"] == 0.9     # 90/100 = 90% own-token = fragility signal
 
 
 def test_unlocks_surfaces_next_upcoming(monkeypatch):
     import time
     future = time.time() + 10 * 86400
+    # "later" is listed FIRST but is further out — the earliest future event
+    # ("cliff", 10d) must win regardless of list order.
     _patch(monkeypatch, {"name": "X", "events": [
+        {"timestamp": time.time() + 30 * 86400, "description": "later", "noOfTokens": 5000},
         {"timestamp": time.time() - 86400, "description": "past"},
         {"timestamp": future, "description": "cliff", "noOfTokens": 1000},
     ]})

@@ -362,7 +362,11 @@ const Hire = {
             rows.push(`<div class="text-xs mb-1 flex justify-between gap-3"><span class="text-zinc-500 font-mono">${escapeHtml(k)}</span><span class="text-zinc-200 text-right">${fmt(v)}</span></div>`);
         }
         // Arrays of rows (protocols, dexs, bridges, stablecoins, pools, venues…).
+        // Respect the same skip set as the scalar pass so the raw `prices`
+        // series (dl_token_chart's [{timestamp,price}]) isn't rendered as a
+        // blank generic row list — it's a chart series, not a row table.
         for (const [k, v] of Object.entries(d)) {
+            if (skip.has(k)) continue;
             if (!Array.isArray(v) || !v.length || typeof v[0] !== 'object') continue;
             const items = v.slice(0, 12).map(row => {
                 const title = row.name || row.symbol || row.project || row.pool || '';

@@ -334,14 +334,18 @@ def unlocks(slug):
     events = d.get("events") or d.get("unlocks") or []
     now = time.time()
     upcoming = None
+    best_ts = None
+    # Scan every event and keep the EARLIEST future one — `events` isn't
+    # guaranteed sorted (some payloads are newest-first), so stopping at the
+    # first future item can surface a later unlock than the one that's next.
     for e in events:
         ts = e.get("timestamp") or e.get("date")
-        if isinstance(ts, (int, float)) and ts > now:
+        if isinstance(ts, (int, float)) and ts > now and (best_ts is None or ts < best_ts):
+            best_ts = ts
             upcoming = {"timestamp": ts,
                         "in_days": round((ts - now) / 86400, 1),
                         "description": e.get("description") or e.get("category"),
                         "amount": e.get("noOfTokens") or e.get("amount")}
-            break
     return {"ts": _now_iso(), "slug": slug, "name": d.get("name"),
             "next_unlock": upcoming, "tracked_events": len(events)}
 
@@ -355,7 +359,15 @@ def treasury(slug):
         return d
     tvls = d.get("currentChainTvls") or {}
     own = tvls.get("OwnTokens") or tvls.get("ownTokens") or 0
-    total = sum(v for v in tvls.values() if isinstance(v, (int, float)))
+    # currentChainTvls mixes per-chain totals (e.g. "ethereum", which already
+    # includes that chain's own tokens) with own-token breakdowns — an
+    # aggregate "OwnTokens" plus per-chain "<chain>-OwnTokens". Summing every
+    # numeric value double-counts the own-token bucket, inflating treasury_usd
+    # and skewing own_token_share. Sum only the plain per-chain totals.
+    total = sum(v for k, v in tvls.items()
+                if isinstance(v, (int, float))
+                and k not in ("OwnTokens", "ownTokens")
+                and not k.endswith("-OwnTokens"))
     return {"ts": _now_iso(), "slug": slug, "name": d.get("name"),
             "treasury_usd": round(total, 2), "own_token_usd": round(own, 2),
             "own_token_share": round(own / total, 3) if total else None}

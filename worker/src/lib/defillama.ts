@@ -259,14 +259,17 @@ export async function unlocks(slug: string): Promise<DlResult> {
   const events = d.events || d.unlocks || [];
   const now = Date.now() / 1000;
   let upcoming: Record<string, unknown> | null = null;
+  let bestTs: number | null = null;
+  // Keep the EARLIEST future event — `events` isn't guaranteed sorted, so
+  // stopping at the first future item can surface a later unlock than the next.
   for (const e of events) {
     const ts = e.timestamp ?? e.date;
-    if (typeof ts === "number" && ts > now) {
+    if (typeof ts === "number" && ts > now && (bestTs === null || ts < bestTs)) {
+      bestTs = ts;
       upcoming = {
         timestamp: ts, in_days: Math.round(((ts - now) / 86400) * 10) / 10,
         description: e.description || e.category, amount: e.noOfTokens ?? e.amount,
       };
-      break;
     }
   }
   return { ts: nowIso(), slug, name: d.name, next_unlock: upcoming, tracked_events: events.length };
@@ -278,8 +281,14 @@ export async function treasury(slug: string): Promise<DlResult> {
   if (isErr(d)) return d;
   const tvls = d.currentChainTvls || {};
   const own = tvls.OwnTokens || tvls.ownTokens || 0;
+  // currentChainTvls mixes per-chain totals (already inclusive of own tokens)
+  // with own-token breakdowns — an aggregate OwnTokens + per-chain
+  // <chain>-OwnTokens. Sum only the plain per-chain totals so treasury_usd /
+  // own_token_share aren't double-counted.
   let total = 0;
-  for (const v of Object.values(tvls)) if (typeof v === "number") total += v;
+  for (const [k, v] of Object.entries(tvls)) {
+    if (typeof v === "number" && k !== "OwnTokens" && k !== "ownTokens" && !k.endsWith("-OwnTokens")) total += v;
+  }
   return {
     ts: nowIso(), slug, name: d.name, treasury_usd: Math.round(total * 100) / 100,
     own_token_usd: Math.round(own * 100) / 100,
