@@ -63,7 +63,7 @@ def fetch(direction):
 
 
 transfers = fetch("to") + fetch("from")
-transfers.sort(key=lambda t: t.get("blockNum", "0x0"), reverse=(order == "desc"))
+transfers.sort(key=lambda t: int(t.get("blockNum", "0x0"), 16), reverse=(order == "desc"))
 # Both directions can return the same transfer's counterpart view once each
 # is fetched from opposite ends of a single fromAddress<->toAddress edge —
 # dedupe on the unique tx hash + log index Alchemy assigns per transfer.
@@ -84,7 +84,7 @@ if not transfers:
 if mode == "first":
     t = transfers[0]
     print("first_seen block", int(t.get("blockNum", "0x0"), 16),
-          "counterparty", t.get("from") if t.get("to", "").lower() == addr.lower() else t.get("to"),
+          "counterparty", t.get("from") if (t.get("to") or "").lower() == addr.lower() else t.get("to"),
           "hash", t.get("hash"))
 else:
     for t in transfers:

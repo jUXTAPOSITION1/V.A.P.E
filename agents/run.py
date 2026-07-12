@@ -145,8 +145,12 @@ def run_slither():
     treat it as no data this cycle, rather than fabricating a fake success string."""
     try:
         result = subprocess.run(["slither", "."], capture_output=True, text=True, timeout=30)
+        if result.returncode != 0:
+            print(f"[Slither] failed with exit code {result.returncode}: {result.stderr[-1000:]}")
+            return ""
         return result.stdout
-    except Exception:
+    except (FileNotFoundError, subprocess.TimeoutExpired, OSError) as exc:
+        print(f"[Slither] unavailable: {exc}")
         return ""
 
 
