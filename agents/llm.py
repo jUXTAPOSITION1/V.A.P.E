@@ -67,6 +67,7 @@ Backwards compatible: run.py can keep calling its own ask_llm; this is opt-in.
 """
 import json
 import os
+import sys
 import time
 import urllib.request
 import urllib.error
@@ -110,18 +111,24 @@ PROVIDERS = [
         "deep": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free",
         "bulk": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
     }),
-    # Grok 4.1 Fast — paid, primary model for the highest-stakes work (see the
+    # Grok 4.1 Fast (reasoning variant — xAI splits this model into
+    # "-reasoning"/"-non-reasoning" IDs; reasoning fits VAPE's actual use
+    # here, multi-step research/report synthesis, not speed-critical single
+    # replies) — paid, primary model for the highest-stakes work (see the
     # module docstring + FRONTIER_ORDER below). Deliberately no "fast"/"bulk"
     # key so a bare tier="fast"/"bulk" ask() call never resolves to Grok even
     # if xai ever ends up early in some provider_order — only "deep"/
     # "frontier" callers reach it. Two adjacent entries sharing one model so
     # key 1 is exhausted before key 2 is tried (see docstring) instead of
     # rotated call-by-call.
+    # NOTE: xAI deprecated this model 2026-05-15; it retires 2026-08-15 —
+    # will need to move to whatever supersedes it (grok-4.5 or similar)
+    # before then.
     ("xai_1", "XAI_API_KEY_1", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast", "frontier": "grok-4.1-fast",
+        "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
     }),
     ("xai_2", "XAI_API_KEY_2", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast", "frontier": "grok-4.1-fast",
+        "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
     }),
 ]
 
@@ -163,12 +170,18 @@ def _call(url, key, model, system, user, temperature, max_tokens, timeout):
     return data["choices"][0]["message"]["content"], data.get("usage") or {}
 
 
-def _log_usage(provider, model, tier, usage):
+def _log_usage(provider, model, tier, usage, fallback_from=None):
     """Best-effort per-call token usage log for later cost/routing self-
     optimization — a flat JSONL, not routed through skillforge/memory's
     curated finding/lesson/skill categories (this is high-frequency raw
     telemetry, not a narrative record). Never raises; silently a no-op if
-    `usage` is empty (some providers omit it) or the file isn't writable."""
+    `usage` is empty (some providers omit it) or the file isn't writable.
+
+    fallback_from: earlier providers that were tried and failed before this
+    one succeeded (see ask()) — without this, a higher-priority provider
+    (e.g. Grok) silently losing every call to its fallback (e.g. Groq) left
+    zero trace anywhere once the fallback succeeded, since ask()'s per-call
+    `errors` list was discarded the moment any provider returned."""
     if not usage:
         return
     try:
@@ -180,6 +193,8 @@ def _log_usage(provider, model, tier, usage):
             "completion_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
         }
+        if fallback_from:
+            row["fallback_from"] = fallback_from
         with open(USAGE_LOG, "a") as f:
             f.write(json.dumps(row) + "\n")
     except Exception:
@@ -208,20 +223,28 @@ def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
         for attempt in range(retries_per_provider):
             try:
                 txt, usage = _call(url, key, model, system, user, temperature, max_tokens, timeout)
-                _log_usage(name, model, tier, usage)
+                _log_usage(name, model, tier, usage, fallback_from=errors or None)
                 return txt, name
             except urllib.error.HTTPError as e:
                 code = e.code
+                try:
+                    body = e.read().decode(errors="replace")[:200]
+                except Exception:
+                    body = ""
+                detail = f"{name}:HTTP{code}" + (f" {body}" if body else "")
+                print(f"[llm] {detail}", file=sys.stderr)
                 if code == 429:  # rate limited — brief backoff then next provider
                     time.sleep(2)
-                    errors.append(f"{name}:429")
+                    errors.append(detail)
                     break
-                errors.append(f"{name}:HTTP{code}")
+                errors.append(detail)
                 if attempt + 1 >= retries_per_provider:
                     break
                 time.sleep(1.5)
             except Exception as e:
-                errors.append(f"{name}:{type(e).__name__}")
+                detail = f"{name}:{type(e).__name__}:{e}"
+                print(f"[llm] {detail}", file=sys.stderr)
+                errors.append(detail)
                 break
     raise RuntimeError("all LLM providers failed/absent: " + ", ".join(errors) if errors
                        else "no LLM provider key set (need one of: "
@@ -245,7 +268,6 @@ def ask_safe(system, user, **kw):
 
 
 if __name__ == "__main__":
-    import sys
     print("providers with keys:", available() or "(none)")
     if available():
         txt, prov = ask_safe("You are a test.", "Reply with the single word: OK", tier="fast", max_tokens=10)

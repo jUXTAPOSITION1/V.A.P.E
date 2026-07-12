@@ -5,7 +5,8 @@
 ## When to use
 First-touch intelligence on any address, token, or contract before deeper audit/fuzzing.
 Powers VAPE's forensics + market-intel ACP offerings and the daily intel sweeps.
-Keyless tools run anywhere; Etherscan-backed tools need `ETHERSCAN_API_KEY`.
+Keyless tools run anywhere; Etherscan-backed tools need `ETHERSCAN_API_KEY`;
+`wallet_trace.sh` needs `VAPE_TRACE_ALCHEMY_API`.
 
 ## Tool map
 | Tool | Key? | Use |
@@ -13,7 +14,7 @@ Keyless tools run anywhere; Etherscan-backed tools need `ETHERSCAN_API_KEY`.
 | `base_rpc.sh` | no | Live Base state: balance, nonce, gas, block (public RPC) |
 | `market_data.sh` | no | Price/mcap/vol (CoinGecko) + dominance + chain TVL (DeFiLlama) |
 | `token_safety.sh` | no | Honeypot/tax/mint/owner (GoPlusLabs) + DEX liquidity (DexScreener) → PROCEED/CAUTION/REJECT |
-| `wallet_trace.sh` | ETHERSCAN | tx history, ERC-20 flows, first-funding source (multichain V2) |
+| `wallet_trace.sh` | VAPE_TRACE_ALCHEMY_API | tx history, ERC-20 flows, first-funding source (Alchemy Transfers API) |
 | `contract_recon.sh` | ETHERSCAN | verification status, source, ABI, creator (multichain V2) |
 
 ## Procedure (real-data-only)

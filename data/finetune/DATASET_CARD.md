@@ -19,9 +19,9 @@ LLM. This corpus therefore teaches a model to imitate VAPE's grounded reasoning,
 not to re-distill another model's output.
 
 ## Stats
-- Unique examples: **42**
-- Verdict mix: {'CAUTION': 9, 'PROCEED': 16, 'REJECT': 17}
-- Split (deterministic, hashed on target address): **38 train / 4 val**
+- Unique examples: **45**
+- Verdict mix: {'CAUTION': 10, 'PROCEED': 18, 'REJECT': 17}
+- Split (deterministic, hashed on target address): **40 train / 5 val**
 
 ## Intended use
 Fine-tune a small open-weight instruct model (e.g. Llama-3.1-8B) with LoRA to

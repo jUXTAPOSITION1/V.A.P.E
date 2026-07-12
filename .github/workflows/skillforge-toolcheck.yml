@@ -43,6 +43,7 @@ jobs:
         run: python skillforge/toolcheck.py
         env:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          VAPE_TRACE_ALCHEMY_API: ${{ secrets.VAPE_TRACE_ALCHEMY_API }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit registry updates (direct, data only)
         run: |

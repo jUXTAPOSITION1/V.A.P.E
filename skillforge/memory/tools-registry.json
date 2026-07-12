@@ -171,7 +171,7 @@
         "invoke": "wallet_trace.sh {txs|erc20|first} <chainId> <address> [n]",
         "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
         "wrapper": "tools/recon/wallet_trace.sh",
-        "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
+        "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) — switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
         "status": "unsupported",
         "last_verified": "2026-07-12T21:31:54Z",
         "version": "n/a (Etherscan V2 account endpoints require paid plan on Base)",

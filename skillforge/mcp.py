@@ -470,33 +470,6 @@ class ToolRegistryMCPWrapper:
             logger.error(f"Failed to fetch tool releases: {e}")
             return []
     
-    def fetch_cve_summary(self, days_back: int = 7) -> Dict[str, Any]:
-        """
-        Fetch recent CVE summary (read-only, safe).
-        
-        For MVP: static list. Real implementation would query NVD API.
-        
-        Args:
-            days_back: Days to look back
-        
-        Returns:
-            CVE summary
-        """
-        # MVP: Static data
-        summary = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "days_back": days_back,
-            "total_cves": 42,  # Placeholder
-            "critical_count": 3,
-            "high_count": 8,
-            "blockchain_relevant": 5,
-            "data_source": "nvd_public_feed",
-            "note": "Aggregated public CVE data, no exploitation tracking"
-        }
-        
-        logger.info(f"CVE summary: {summary['total_cves']} total CVEs in last {days_back} days")
-        return summary
-
 
 # ============================================================================
 # Orchestration: Fetch & Append to Memory

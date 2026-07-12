@@ -39,7 +39,7 @@ If a job carries `"error"`, the auto path failed — inspect, fix, and complete 
 | liquidity_check | 0.02 | `recon/token_safety.sh dex <addr>` | pools, liquidity USD, depth note |
 | exploit_check | 0.01 | `recon/contract_recon.sh verified` + `static/slither.sh` | CLEAN/FLAGGED/CRITICAL + findings |
 | rug_pull_alert | 0.03 | `recon/token_safety.sh` (mint/owner/honeypot) | rug risk + owner powers |
-| wallet_recon | 0.03 | `recon/wallet_trace.sh` (needs ETHERSCAN key) / `base_rpc.sh` | balance, nonce, funding source |
+| wallet_recon | 0.03 | `recon/wallet_trace.sh` (needs VAPE_TRACE_ALCHEMY_API) / `base_rpc.sh` | balance, nonce, funding source |
 | tx_decode | 0.05 | `recon/contract_recon.sh abi` + RPC | decoded call + intent |
 | whale_watch | 0.10 | `recon/wallet_trace.sh erc20` + `market_data.sh` | large flows + context |
 | market_intel | 0.07 | `recon/market_data.sh price/global/chaintvl` | price/vol/TVL + BULLISH/BEARISH/NEUTRAL signal |
@@ -54,7 +54,7 @@ If a job carries `"error"`, the auto path failed — inspect, fix, and complete 
 ## Rules
 - **Dedup:** check `intel/catalog/investigation-catalog.md` before re-doing a recent same-target+offering (<7d).
 - **Idempotency:** never set-budget or submit twice for the same job (check state.json `done`/`pending_action`).
-- **Honesty:** if a tool needs a key we lack (e.g. Etherscan Pro for wallet_trace txlist), use the keyless
+- **Honesty:** if a tool needs a key we lack (e.g. VAPE_TRACE_ALCHEMY_API for wallet_trace), use the keyless
   fallback (base_rpc) and state the limitation in the deliverable. Never invent data to fill a gap.
 - **Chain ID:** use the event's chainId (default 8453 Base).
 - **Amounts:** `--amount` must EXACTLY match offering priceValue / the funded amount.
