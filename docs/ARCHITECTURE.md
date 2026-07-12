@@ -48,7 +48,7 @@ component's state changes.
 |---|---|---|
 | `agents/run.py` | [OK] | Hourly bounty-cycle orchestration |
 | `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring |
-| Groq LLM tier | [OK] | Frontier-model fallback chain, see `agents/llm.py` |
+| Groq/Grok LLM tier | [OK] | Multi-provider fallback chain, see `agents/llm.py` |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` / wallet | [WIP] | ACP job fulfillment + wallet scaffolding |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |

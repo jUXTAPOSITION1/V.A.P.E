@@ -87,7 +87,8 @@ def run():
         "about Base's current state. Cite specific protocols/news items from the data above.\n"
         "2. Summary & Watch Items — 3-5 bullet action items for VAPE, grounded in the real data."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200)
+    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+                                       provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Base Blockchain Sweep Report

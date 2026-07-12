@@ -27,6 +27,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.builder import Builder, validate_security  # noqa: E402
+from agents.llm import FRONTIER_ORDER  # noqa: E402
 
 try:
     from skillforge.mcp import GitHubMCPWrapper  # noqa: E402
@@ -340,7 +341,8 @@ def self_review_and_improve():
         return None
 
     task = build_task(target)
-    code, metadata = builder.generate_code(task=task, review=True, tier="deep")
+    code, metadata = builder.generate_code(task=task, review=True, tier="deep",
+                                           provider_order=FRONTIER_ORDER)
     # generate_code() already ran this and rejected unsafe code (code == "" in
     # that case); re-running it here on the returned code is cheap, pure, and
     # gets us the advisory warnings for the report without touching Builder.

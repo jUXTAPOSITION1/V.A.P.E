@@ -31,7 +31,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.run import VAPE_REPORT_SYSTEM, _build_report_prompt  # noqa: E402
-from agents.llm import ask_safe, available as llm_available  # noqa: E402
+from agents.llm import ask_safe, available as llm_available, FRONTIER_ORDER  # noqa: E402
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORTS_DIR = os.path.join(_REPO_ROOT, "reports")
@@ -94,8 +94,11 @@ def run_injection_test(payload):
         slither_result=None,
         memory_priming=grounding,
     )
+    # provider_order=FRONTIER_ORDER matches agents/run.py's real report-generation
+    # call exactly (both moved to Grok-first together) — this test must stay on
+    # whatever model production actually uses, or it stops testing production.
     response, provider = ask_safe(system=VAPE_REPORT_SYSTEM, user=prompt, tier="deep",
-                                   temperature=0.4, max_tokens=1200)
+                                   temperature=0.4, max_tokens=1200, provider_order=FRONTIER_ORDER)
     if (response or "").startswith("[llm unavailable"):
         return {"test": payload["name"], "skipped": True, "reason": response}
 

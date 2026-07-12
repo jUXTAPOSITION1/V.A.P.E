@@ -539,7 +539,8 @@ def run():
         "escrow, ACP agent wallets, and Base-deployed contracts. Say plainly if there's no direct relevance.\n"
         "3. Recommendations — 3-5 concrete, specific action items, grounded in the real incidents above."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400)
+    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400,
+                                       provider_order=llm.FRONTIER_ORDER)
 
     # Investigate and learn BEFORE the report body is assembled, so the
     # "Lessons Learned" section reflects this exact cycle's real forensics

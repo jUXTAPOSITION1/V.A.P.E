@@ -68,7 +68,8 @@ def run():
         "2. Micro Opportunities — AI-agent x crypto sector signal from the search results.\n"
         "3. Summary Verdict — 2-3 sentences tying the real numbers and search context together."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400)
+    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400,
+                                       provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     trend_emoji = {"RISK-OFF": "⚠️", "RISK-ON": "🟢", "NEUTRAL": "🟡", "UNKNOWN": "⚪"}[trend]

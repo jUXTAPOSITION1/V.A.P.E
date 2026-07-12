@@ -281,28 +281,33 @@ class Builder:
         self,
         task: str,
         review: bool = True,
-        tier: str = "deep"
+        tier: str = "deep",
+        provider_order=None
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Generate production code for a task, grounded in Memory.
-        
+
         Args:
             task: Task description (e.g., "Create a playbook for static analysis")
             review: Whether to validate code before returning
             tier: LLM tier ("fast" or "deep" for reasoning)
-        
+            provider_order: optional agents.llm provider order override (e.g.
+                agents.llm.FRONTIER_ORDER to try Grok 4.1 Fast first) — passed
+                straight through to llm_ask(); None uses agents.llm's own
+                default ordering.
+
         Returns:
             (code, metadata) where metadata has title, tags, confidence for Memory append
         """
         if not self.llm_ready:
             logger.error("LLM not ready. Cannot generate code.")
             return "", {}
-        
+
         logger.info(f"Builder generating code for task: {task[:80]}...")
-        
+
         # Build prompt with Memory grounding
         prompt = self._build_prompt(task)
-        
+
         # Call LLM
         try:
             response, provider = llm_ask(
@@ -310,7 +315,8 @@ class Builder:
                 user=prompt,
                 tier=tier,
                 max_tokens=3000,
-                temperature=0.7
+                temperature=0.7,
+                provider_order=provider_order
             )
             logger.info(f"LLM generation complete (provider: {provider})")
         except Exception as e:
@@ -354,7 +360,8 @@ class Builder:
         self,
         task: str,
         review: bool = True,
-        tier: str = "deep"
+        tier: str = "deep",
+        provider_order=None
     ) -> Tuple[Dict[str, str], Dict[str, Any]]:
         """
         Generate a real multi-file tool/script/small app for a task, grounded
@@ -365,6 +372,8 @@ class Builder:
             task: Task description, e.g. a real GitHub issue's title + body
             review: Whether to validate all generated files before returning
             tier: LLM tier ("fast" or "deep" for reasoning)
+            provider_order: optional agents.llm provider order override (see
+                generate_code() above); None uses the default ordering.
 
         Returns:
             (files, metadata) where files is {relative_path: content}. Empty
@@ -384,6 +393,7 @@ class Builder:
                 user=prompt,
                 tier=tier,
                 max_tokens=4000,
+                provider_order=provider_order,
                 temperature=0.7
             )
             logger.info(f"LLM generation complete (provider: {provider})")
@@ -424,15 +434,18 @@ class Builder:
         self,
         module: str,
         issue: str,
-        tier: str = "deep"
+        tier: str = "deep",
+        provider_order=None
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Propose an improvement to an existing module.
-        
+
         Args:
             module: Which module to improve (e.g., "agents/run.py")
             issue: What to improve (e.g., "Add Memory querying to find past patterns")
-        
+            provider_order: optional agents.llm provider order override (see
+                generate_code() above); None uses the default ordering.
+
         Returns:
             (code_diff_or_patch, metadata)
         """
@@ -444,7 +457,8 @@ class Builder:
         code, metadata = self.generate_code(
             task=task,
             review=True,
-            tier=tier
+            tier=tier,
+            provider_order=provider_order
         )
         
         return code, metadata
