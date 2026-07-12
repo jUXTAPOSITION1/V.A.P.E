@@ -77,6 +77,15 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
   against fresh data (pass/caution weekly, fail monthly, `review-ledger.yml`), logs a real
   finding when a past verdict drifts. This is VAPE auditing its own track record, not just
   producing new ones.
+- **`critic.py`** [OK] — same-cycle structural self-check, run inside `investigate()`
+  immediately after `score()`. Where `review_ledger.py` is retrospective (did the REAL WORLD
+  change under an old verdict?), the critic is immediate (does THIS investigation's own
+  reasons/positive_signals/verdict/score actually agree with the raw evidence and with
+  `score()`'s own declared invariants — verdict/score bands, the legitimacy cap, honeypot/
+  verified/renounced claims grounded against the raw GoPlus/verification data?). Rule-based
+  only, never mutates the verdict — a real contradiction is logged to
+  `skillforge/memory/lessons.jsonl` and surfaced in the report's "Critic Self-Audit" section
+  for `self_improve.py`/a human to triage.
 - **`token_scan.py`** [OK] — free Hunt console + paid x402 quick-check, same keyless checks as
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
@@ -149,6 +158,17 @@ Zero-local-compute skill growth via GitHub Actions. See `skillforge/MANIFEST.md`
 - **Tool tiers:** static (slither/aderyn/mythril) · fuzzing (echidna/foundry) ·
   ai-redteam (garak/promptfoo/deepteam) · recon (token_safety/contract_recon/wallet_trace/base_rpc/market_data).
 - **Memory:** append-only `memory/` (tools-registry.json, findings/skills/lessons.jsonl, INDEX.md).
+- **`memory/graph.py`** [OK] — a deployer/token relationship graph built from the real
+  `intel/investigations/ledger.json` (every investigated address's GoPlus-reported
+  `creator_address`), zero new data collection, hand-rolled adjacency dicts (no new
+  dependency — matches this repo's stdlib-only convention). Generalizes
+  `investigate.py`'s `_deployer_repeat_offender()` (which only checks whether ONE prior
+  token from the same deployer already tripped CAUTION/REJECT) into a full queryable
+  cluster: every token from a deployer, worst-verdict-first, independent of their
+  individual verdicts — feeds a distinct "mass-token-factory" scoring signal in `score()`
+  and a "Deployer Network" report section. The live ledger already contains a real
+  7-token cluster (a brand-impersonation campaign), so this surfaces a genuine pattern,
+  not a hypothetical one.
 - **Skills:** playbooks in `skillforge/skills/` (sc-static-analysis, ai-agent-redteam, onchain-recon-forensics).
 
 ### 3. intel/ pipeline [OK] (the audit trail)
