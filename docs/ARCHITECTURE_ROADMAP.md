@@ -77,6 +77,7 @@ all running in the **existing free GitHub Actions** (no new infra):
 | **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), no LLM |
 | **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks (Groq); `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review | harvest/Memory + Groq + `builder.py`'s `generate_project()` | daily PR (synthesize) / weekly PR (build) |
 | **WARDEN** [TBD] | ACP job QA — validates deliverables before submit (schema + sanity) | acp_fulfill output | per-job, no LLM |
+| **DATA AGENT** [OK] | VAPE's own paying customer — recruited by every real investigation (`agents/investigate.py::investigate()`) to hire 2-4 random $0.01 x402 market-data offerings against the token under review, using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`); results fold into the report's "Data Agent Intel" section | `agents/data_agent.py`, worker's `/data/*` x402 routes (`worker/src/dataHandlers.ts`) | per-investigation, capped 15 paid hires/day, no LLM |
 
 **Design rule:** each agent is **rule-based first, LLM only when reasoning is required.**
 SCOUT ranks by numeric fit score (no LLM); ORACLE flags by thresholds (no LLM); only

@@ -716,7 +716,7 @@ def auto_target(chain=None):
 
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
-                 defillama=None, deployer_siblings=None, critic_result=None):
+                 defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -841,6 +841,20 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
                      "— absence noted, not penalized.")
     else:
         L.append("- DefiLlama cross-source not fetched this cycle.")
+    L.append("")
+    L.append("## Data Agent Intel (VAPE's own x402 spend)")
+    if data_agent_intel and data_agent_intel.get("hired"):
+        paid_n = sum(1 for h in data_agent_intel["hired"] if h["paid"])
+        L.append(f"- DATA AGENT hired {len(data_agent_intel['hired'])} of VAPE's own $0.01 x402 "
+                 f"market-data offerings against this token (real USDC on Base, {paid_n} settled, "
+                 f"${data_agent_intel.get('cost_usd', 0):.2f} total):")
+        for h in data_agent_intel["hired"]:
+            tag = "settled" if h["paid"] else "failed"
+            L.append(f"  - **{h['offering']}** ({tag}) — {_fmt_data_agent_deliverable(h['deliverable'])}")
+    elif data_agent_intel and data_agent_intel.get("note"):
+        L.append(f"- {data_agent_intel['note']}")
+    else:
+        L.append("- Data agent not recruited this cycle.")
     L.append("")
     L.append("## Deployer Network (skillforge/memory/graph.py)")
     if deployer_siblings:
@@ -1044,6 +1058,44 @@ def _defillama_intel(address, chain):
         return None
 
 
+def _data_agent_intel(address, chain):
+    """Best-effort recruitment of DATA AGENT (agents/data_agent.py) to hire
+    2-4 of VAPE's own $0.01 x402 market-data offerings against this token,
+    paid for with its own real, funded wallet — the same rail an external
+    buyer uses, just recruited internally. Never raises and never blocks the
+    investigation on a payment/network failure or a missing key."""
+    try:
+        from agents import data_agent
+        return data_agent.run_for_investigation(address, chain)
+    except Exception as e:
+        print(f"[investigate] data agent unavailable: {e}")
+        return None
+
+
+def _fmt_data_agent_deliverable(d):
+    """Short, generic summary of a market-data deliverable's top-level
+    scalar fields — offerings vary wildly in shape (token_intel vs bridges
+    vs stablecoins), so this reports whatever real fields came back rather
+    than a bespoke per-offering formatter."""
+    if not isinstance(d, dict):
+        return str(d)
+    if d.get("error"):
+        return f"error — {d['error']}"
+    parts = []
+    for k, v in d.items():
+        if k in ("logo", "ts", "chain", "address"):
+            continue
+        if isinstance(v, list):
+            parts.append(f"{k}: {len(v)} item(s)")
+        elif isinstance(v, dict):
+            continue
+        elif v is not None:
+            parts.append(f"{k}={v}")
+        if len(parts) >= 6:
+            break
+    return "; ".join(parts) if parts else "no notable fields"
+
+
 def _deployer_graph_intel(creator_address, address):
     """Best-effort deployer relationship lookup via
     skillforge/memory/graph.py — a real generalization of
@@ -1089,6 +1141,7 @@ def investigate(address, chain="8453", hint="", force=False):
     deployer_repeat = _deployer_repeat_offender(creator_address, chain, address)
     dl_intel = _defillama_intel(address, chain)
     cluster_size, siblings = _deployer_graph_intel(creator_address, address)
+    data_agent_intel = _data_agent_intel(address, chain)
     s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat,
                                                   dl_intel, cluster_size)
 
@@ -1101,7 +1154,7 @@ def investigate(address, chain="8453", hint="", force=False):
         critic.log_finding(address, chain, prelim_sym, critic_result["issues"])
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
-                                    positive_signals, web_rep, dl_intel, siblings, critic_result)
+                                    positive_signals, web_rep, dl_intel, siblings, critic_result, data_agent_intel)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)

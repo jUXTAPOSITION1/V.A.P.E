@@ -172,12 +172,12 @@
         "version_cmd": "skillforge/tools/recon/wallet_trace.sh txs 8453 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 1",
         "wrapper": "tools/recon/wallet_trace.sh",
         "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) — switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
-        "status": "unsupported",
+        "status": "pending_verification",
         "last_verified": "2026-07-12T21:31:54Z",
-        "version": "n/a (Etherscan V2 account endpoints require paid plan on Base)",
-        "requires_key": "ETHERSCAN_API_KEY",
+        "version": "n/a (pending live verification with Alchemy)",
+        "requires_key": "VAPE_TRACE_ALCHEMY_API",
         "known_limitation": true,
-        "note": "Etherscan V2 account endpoints (txlist/tokentx) require a paid plan on Base. This is an upstream plan limit, not a code breakage. Keyless alternative: base_rpc for balance/nonce; contract_recon's getsourcecode works on free tier."
+        "note": "Migrated from Etherscan V2 to Alchemy Transfers API. Pending live verification. Keyless alternative: base_rpc for balance/nonce; contract_recon's getsourcecode works on free tier."
       },
       {
         "name": "contract_recon",
