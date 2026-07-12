@@ -30,8 +30,8 @@ repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do 
 | market_intel | 0.07 | `build_market_context()` | [OK] auto |
 | dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto |
 | deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [WIP] monitor handler |
-| forensics_deep | 2.00 | wallet_trace + contract_recon | [WIP] needs Etherscan Pro |
-| wallet_recon | 0.03 | base_rpc / wallet_trace | [WIP] partial |
+| forensics_deep | 2.00 | wallet_trace + contract_recon | [WIP] wallet_trace now Alchemy-backed, pending live verification |
+| wallet_recon | 0.03 | base_rpc / wallet_trace | [WIP] wallet_trace now Alchemy-backed, pending live verification |
 | whale_watch / tx_decode / bulk_safety_bundle / community_intel_broadcast / partner_referral | — | mapped, monitor handler | [TBD] |
 
 ### Data flow (the loop that earns)
@@ -73,7 +73,7 @@ all running in the **existing free GitHub Actions** (no new infra):
 | Agent | Role | Backing tools (already built) | Compute |
 |---|---|---|---|
 | **SCOUT** [OK] | Bounty-radar triage — ranks new DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Code4rena/Sherlock have no stable public API so those stay static seed data until one exists | `intel/bounty-radar/*`, DeFiLlama hacks feed | hourly (`.github/workflows/scout.yml`), no LLM |
-| **LEDGER** [TBD] | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace, base_rpc (Etherscan Pro unlocks full) | on-demand |
+| **LEDGER** [TBD] | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace (Alchemy-backed), base_rpc | on-demand |
 | **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), no LLM |
 | **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks (Groq); `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review | harvest/Memory + Groq + `builder.py`'s `generate_project()` | daily PR (synthesize) / weekly PR (build) |
 | **WARDEN** [TBD] | ACP job QA — validates deliverables before submit (schema + sanity) | acp_fulfill output | per-job, no LLM |
@@ -134,7 +134,7 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 2. [TBD] Wire bridge into the monitor handler (6 offerings settle with no LLM).
 3. [TBD] `agents/llm.py` multi-provider fallback (Groq + Cerebras + GitHub Models).
 4. [OK] SCOUT shipped (rule-based, no LLM, hourly). [OK] ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
-5. [TBD] Etherscan Pro key → unlocks wallet_trace → forensics_deep ($2) + LEDGER agent.
+5. [TBD] wallet_trace switched to Alchemy (VAPE_TRACE_ALCHEMY_API), pending a live verification run → unlocks forensics_deep ($2) + LEDGER agent.
 6. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
 
 Every step reuses the free GitHub runner + existing keyless tools. No new infrastructure,
