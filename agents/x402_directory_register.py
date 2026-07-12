@@ -100,14 +100,14 @@ OFFERINGS = {
                          "frontier-LLM quick source read."),
 }
 
-# DefiLlama data micro-services — mirrors worker/src/dataHandlers.ts's
+# Market-data micro-services — mirrors worker/src/dataHandlers.ts's
 # DL_OFFERINGS exactly. These are served at /data/<name> (not /scan/<name>),
 # so they're kept in their own dict and routed accordingly below. All 0.01 USDC.
 DATA_OFFERINGS = {
-    "token_intel": ("0.01", "DefiLlama price + confidence, oracle-derived token age, optional "
+    "token_intel": ("0.01", "Price + confidence, oracle-derived token age, optional "
                        "fees/unlocks/treasury, and the token's real logo."),
-    "token_chart": ("0.01", "DefiLlama daily price series (default 30d) + token logo."),
-    "protocol": ("0.01", "Full DefiLlama protocol record: per-chain TVL, category, audits, logo."),
+    "token_chart": ("0.01", "Daily price series (default 30d) + token logo."),
+    "protocol": ("0.01", "Full protocol record: per-chain TVL, category, audits, logo."),
     "protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d)."),
     "unlocks": ("0.01", "Token unlock/emission schedule — next upcoming dump-risk event."),
     "treasury": ("0.01", "Protocol treasury composition + own-token fragility share."),
@@ -208,7 +208,7 @@ def build_awesome_x402_entry():
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
         f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
-        f"liquidity/rug-pull/dossier/market-intel checks) + 14 DefiLlama data micro-services "
+        f"liquidity/rug-pull/dossier/market-intel checks) + 14 market-data micro-services "
         f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
         f"depeg, bridge volumes) + a $50 24h-SLA deep-dive audit (recon + Slither + frontier-model "
         f"review). Docs: https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"

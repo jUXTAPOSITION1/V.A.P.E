@@ -52,11 +52,10 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
 
 ### Market-data tools — 0.01 USDC each
-14 real-time DefiLlama market-data tools (`agents/defillama.py`), each
-auto-fulfilled by `agents/acp_fulfill.py` and also x402-payable at the worker's
-`/data/<name>` route. Protocol/chain tools carry DefiLlama's real hosted logos;
-token tools carry the token's DexScreener logo. Every result is real data or an
-honest `{error}` — never fabricated.
+14 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
+tools carry real hosted logos; token tools carry the token's DexScreener logo.
+Every result is real data or an honest `{error}` — never fabricated.
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|

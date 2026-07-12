@@ -244,7 +244,7 @@ app.get("/", (c) =>
     offerings: [
       ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
       { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "24h (async)" },
-      // DefiLlama data micro-services — keyless real data, $0.01 each.
+      // Keyless market-data micro-services — real data, $0.01 each.
       ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
     docs: "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
@@ -413,7 +413,7 @@ app.use("*", async (c, next) => {
     const meta = OFFERING_DISCOVERY[name as HandlerName];
     routes[`GET /scan/${name}`] = {
       accepts: { scheme: "exact", price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-      description: `VAPE ${name} — ${meta.description} Real GoPlus/DexScreener/DefiLlama data, no simulation.`,
+      description: `VAPE ${name} — ${meta.description} Real GoPlus/DexScreener data, no simulation.`,
       serviceName: "VAPE",
       iconUrl: ICON_URL,
       tags: ["security", "on-chain-forensics", "base"],
@@ -453,10 +453,9 @@ app.use("*", async (c, next) => {
     }),
   };
 
-  // DefiLlama data micro-services — one $0.01 paid route per tool, same x402
+  // Market-data micro-services — one $0.01 paid route per tool, same x402
   // gate and Bazaar discovery metadata as the security offerings above. Real
-  // hosted token/protocol logos and rich data, straight from DefiLlama's free
-  // API (see dataHandlers.ts).
+  // hosted token/protocol logos and rich data (see dataHandlers.ts).
   for (const o of DL_OFFERINGS) {
     routes[`GET /data/${o.name}`] = {
       accepts: { scheme: "exact", price: o.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
@@ -506,10 +505,10 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
   });
 }
 
-// DefiLlama data micro-services — the paid handlers behind the /data/* routes
+// Market-data micro-services — the paid handlers behind the /data/* routes
 // registered in the middleware above. Same job-draft/onAfterSettle logging as
 // /scan/* so these show up in the live x402 feed too. address is optional here
-// (many DefiLlama tools are chain- or protocol-scoped, not token-scoped).
+// (many of these tools are chain- or protocol-scoped, not token-scoped).
 for (const o of DL_OFFERINGS) {
   app.get(`/data/${o.name}`, async (c) => {
     const q: DlQuery = {

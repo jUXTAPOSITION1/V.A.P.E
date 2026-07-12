@@ -216,7 +216,7 @@
       {
         "name": "token_intel",
         "price_usd": 0.01,
-        "summary": "DefiLlama price + 0-1 confidence, oracle-derived token age, and (with a protocol slug) fees/unlocks/treasury \u2014 plus the token's real logo",
+        "summary": "Price + 0-1 confidence, oracle-derived token age, and (with a protocol slug) fees/unlocks/treasury \u2014 plus the token's real logo",
         "auto": true,
         "x402": true,
         "data": true,
@@ -225,7 +225,7 @@
       {
         "name": "token_chart",
         "price_usd": 0.01,
-        "summary": "DefiLlama daily price series (default 30d) + token logo \u2014 sparkline & volatility",
+        "summary": "Daily price series (default 30d) + token logo \u2014 sparkline & volatility",
         "auto": true,
         "x402": true,
         "data": true,
@@ -234,7 +234,7 @@
       {
         "name": "protocol",
         "price_usd": 0.01,
-        "summary": "Full DefiLlama protocol record: per-chain TVL, category, audits, official logo",
+        "summary": "Full protocol record: per-chain TVL, category, audits, official logo",
         "auto": true,
         "x402": true,
         "data": true,
@@ -279,7 +279,7 @@
       {
         "name": "chain_overview",
         "price_usd": 0.01,
-        "summary": "A chain's headline TVL + rank among all chains DefiLlama tracks",
+        "summary": "A chain's headline TVL + rank among all chains tracked",
         "auto": true,
         "x402": true,
         "data": true,
@@ -342,7 +342,7 @@
     ]
   },
   "operating_model": {
-    "data": "real-data-only \u2014 every finding sourced from GoPlus/DexScreener/DefiLlama/CoinGecko/Base RPC/Etherscan, never fabricated",
+    "data": "real-data-only \u2014 every finding sourced from GoPlus/DexScreener/CoinGecko/Base RPC/Etherscan, never fabricated",
     "compute": "near-zero \u2014 listener+drain idle at no cost; 6 offerings settle with no model wake; GitHub Actions run the pipeline free",
     "rails": "ACP on Base \u2014 escrowed USDC jobs, ERC-8004 registered identity",
     "uptime": "24/7 \u2014 detached daemons (PPID 1) + hourly GitHub workflows"
