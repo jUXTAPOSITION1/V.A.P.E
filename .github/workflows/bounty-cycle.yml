@@ -36,6 +36,9 @@ jobs:
         run: python agents/run.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
         env:
@@ -80,6 +83,9 @@ jobs:
         run: python agents/run.py --review-repo
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Commit Review
         run: |
           git config user.name "VAPE Bot"

@@ -26,6 +26,9 @@ jobs:
         run: python agents/redteam.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Commit report + findings
         run: |
           git config user.name "VAPE Bot"
