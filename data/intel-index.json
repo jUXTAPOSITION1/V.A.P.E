@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-12T05:48:53Z",
+  "generated": "2026-07-12T06:34:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 419,
+    "reports": 420,
     "reports_by_type": {
+      "bounty": 202,
       "base": 48,
       "virtuals": 45,
       "security": 48,
       "sentiment": 37,
-      "bounty": 201,
       "macro": 19,
       "hack": 9,
       "deep": 8,
@@ -18,7 +18,7 @@
       "attack": 1
     },
     "broadcasts": 55,
-    "investigations": 88,
+    "investigations": 90,
     "tools": 15,
     "tools_verified": 14,
     "skills": 11
@@ -26,31 +26,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260711-171011-0xc99560Fc.md",
-      "title": "Investigation \u2014 AERO",
-      "symbol": "AERO",
-      "name": "Aerodrome",
-      "date": "2026-07-11T17:10:11Z",
-      "target": "0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,704. Positive evidence: 18325 holders \u2014 reasonably distributed; Custom ve",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-171011-0xc99560Fc.md"
+      "file": "investigation-20260712-063418-0x9560e827.md",
+      "title": "Investigation \u2014 VELO",
+      "symbol": "VELO",
+      "name": "VelodromeV2",
+      "date": "2026-07-12T06:34:18Z",
+      "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
+      "chain": "10 (Optimism)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 57311 holders \u2014 reasonably distributed; Deep liquidity ($781,793); Trading 962+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-063418-0x9560e827.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-12-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-12T05:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260712_063358.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-12T06:33:58Z",
       "threat": null,
-      "summary": "Date: 2026-07-12 05:48 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-05.md",
-      "bytes": 3031
+      "summary": "RECENT EXPLOIT: Bonzo Lend $10.05M on ['Hedera'] (Price Oracle Manipulation)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260712_063358.md",
+      "bytes": 11725
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260712-063418-0x9560e827.md",
+      "title": "Investigation \u2014 VELO",
+      "symbol": "VELO",
+      "name": "VelodromeV2",
+      "date": "2026-07-12T06:34:18Z",
+      "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
+      "chain": "10 (Optimism)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 57311 holders \u2014 reasonably distributed; Deep liquidity ($781,793); Trading 962+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-063418-0x9560e827.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260711-171011-0xc99560Fc.md",
@@ -596,23 +610,20 @@
       "score": "60",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Pair 5.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-220304-0x0e7d4bDf.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260704-201136-0x9cb961dD.md",
-      "title": "\ud83d\udd75\ufe0f VAPE Investigation \u2014 claude",
-      "symbol": "claude",
-      "name": "Claude",
-      "date": "2026-07-04T20:11:36Z",
-      "target": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Owne",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260704-201136-0x9cb961dD.md"
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260712_063358.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-12T06:33:58Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Bonzo Lend $10.05M on ['Hedera'] (Price Oracle Manipulation)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260712_063358.md",
+      "bytes": 11725
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1261,17 +1272,6 @@
       "summary": "RECENT EXPLOIT: BonkDAO $21.3M on ['Solana'] (Malicious Governance Proposal) \u00b7 Macro: F&G 20 (Extreme Fear) \u2014 sentiment extreme",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260708_220801.md",
       "bytes": 10430
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-08-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-08 21:17 UTC",
-      "date": "2026-07-08T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-08-21.md",
-      "bytes": 2084
     }
   ],
   "broadcasts": [

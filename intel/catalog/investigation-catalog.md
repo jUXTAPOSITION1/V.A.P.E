@@ -159,3 +159,5 @@
 | 2026-07-11 | auto | 0x940181a94A35A4569E4529A3CDfB74e38FD98631 (AERO) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-11 | auto | 0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4 (AERO) | deep_investigation | REJECT (48/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-12 | auto | 0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db (VELO) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
