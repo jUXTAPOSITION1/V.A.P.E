@@ -1,19 +1,14 @@
 """
-VAPE's DefiLlama intelligence layer — the FREE, keyless open API, in full.
+VAPE's DefiLlama intelligence layer — the full open-API surface, in one module.
 
-Motivation: DefiLlama's official "skills" (github.com/DefiLlama/defillama-skills)
-are a curated wrapper over their PAID MCP server ($300/mo). But the underlying
-data for ~all of it lives on the FREE open API — no key, no subscription, and no
-meaningful rate limit (it serves billions of requests/month; be reasonable and
-cache). This module gives VAPE that whole surface, keyless, so its
-investigations, sweeps, and paid data micro-services run on real DefiLlama data
-without a subscription.
+Powers three things off real DefiLlama data: investigation cross-checks (price
+oracle + token age), the security/threat sweeps, and the market-data tool tier.
 
 Design (matches agents/data_fetchers.py exactly): stdlib-only urllib, one cached
 `_get`, every function returns real data or a `{"error": ...}` dict and NEVER
 raises — so a caller can always degrade honestly rather than crash.
 
-Hosts (all free):
+Hosts:
   api.llama.fi          TVL, protocols, chains, fees/revenue, dexs, derivatives,
                         treasury, unlocks/emissions
   coins.llama.fi        prices (current/first/historical/% change) — the
@@ -24,7 +19,7 @@ Hosts (all free):
                         bridge exploits are a top attack class)
 
 Live network is blocked from the dev sandbox (same as every llama.fi call in
-this repo); real validation runs in GitHub Actions, where these hosts are
+this repo); real validation runs in GitHub Actions where these hosts are
 reachable, exactly like the existing sweeps.
 """
 import json
@@ -326,7 +321,7 @@ def unlocks(slug):
     """Token unlock / emission schedule for a protocol — an imminent large
     unlock is a concrete dump-risk an investigator must flag. Returns the next
     upcoming unlock event and the total still-locked share where DefiLlama has
-    it. Free endpoint; degrades honestly when a token isn't tracked."""
+    it. Degrades honestly when a token isn't tracked."""
     d = _get(f"{API}/emission/{urllib.parse.quote(slug)}", ttl=21600, cache_key=f"dl_emission_{slug}")
     if _err(d):
         return d

@@ -141,14 +141,14 @@ const App = {
             const allOfferings = Array.isArray(c.offerings) ? c.offerings : [];
             const x402able = allOfferings.filter(o=>o.x402 ?? o.auto);
             const manual = allOfferings.filter(o=>!o.auto);
-            // Split the x402 tier so the DefiLlama data micro-services ($0.01
-            // each, /data/*) read as their own group under the security scans.
-            const isData = o => typeof o.name === 'string' && o.name.startsWith('dl_');
+            // Split the x402 tier so the market-data tools (served at /data/*)
+            // read as their own group under the security scans.
+            const isData = o => o.data === true;
             const security = x402able.filter(o=>!isData(o));
             const dataTier = x402able.filter(isData);
             const divider = (label, count) => `<div class="sm:col-span-2 flex items-center gap-2 mt-2 mb-0.5">
                 <span class="text-[10px] uppercase tracking-wider text-zinc-500">${label}</span>
-                <span class="text-[10px] text-zinc-600">· ${count} · $0.01 each · DefiLlama free-API data</span>
+                <span class="text-[10px] text-zinc-600">· ${count} tools</span>
                 <span class="flex-1 h-px bg-white/10"></span></div>`;
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {

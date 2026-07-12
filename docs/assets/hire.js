@@ -16,26 +16,26 @@ function escapeHtml(s) {
 // Different route prefix, varied inputs, and a rich-data (not verdict) result.
 // Each spec's `inputs` drives the modal fields; empty = a zero-input call.
 const DATA_OFFERINGS = {
-    dl_token_intel:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
+    token_intel:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
                                     { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
                                     { k: 'slug', label: 'Protocol slug (optional — adds fees/unlocks/treasury)', ph: 'aave', opt: true }] },
-    dl_token_chart:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
+    token_chart:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
                                     { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
                                     { k: 'span', label: 'Days of history', ph: '30', def: '30' }] },
-    dl_protocol:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aerodrome' }] },
-    dl_protocol_fees:   { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aave' }] },
-    dl_unlocks:         { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aptos' }] },
-    dl_treasury:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'uniswap' }] },
-    dl_chain_protocols: { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
-    dl_chain_overview:  { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
-    dl_chain_fees:      { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
-    dl_dex_volumes:     { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
-    dl_derivatives:     { inputs: [] },
-    dl_yields:          { inputs: [{ k: 'chain', label: 'Chain (optional)', ph: 'Base', opt: true },
+    protocol:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aerodrome' }] },
+    protocol_fees:   { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aave' }] },
+    unlocks:         { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aptos' }] },
+    treasury:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'uniswap' }] },
+    chain_protocols: { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
+    chain_overview:  { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
+    chain_fees:      { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
+    dex_volumes:     { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
+    derivatives:     { inputs: [] },
+    yields:          { inputs: [{ k: 'chain', label: 'Chain (optional)', ph: 'Base', opt: true },
                                     { k: 'project', label: 'Project (optional)', ph: 'aave-v3', opt: true },
                                     { k: 'symbol', label: 'Symbol (optional)', ph: 'USDC', opt: true }] },
-    dl_stablecoins:     { inputs: [] },
-    dl_bridges:         { inputs: [] },
+    stablecoins:     { inputs: [] },
+    bridges:         { inputs: [] },
 };
 
 const Hire = {
@@ -233,7 +233,7 @@ const Hire = {
                 </div>
                 <div id="hire-body">
                     <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g, ' '))} <span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
-                    <p class="text-xs text-zinc-500 mb-4">Keyless real DefiLlama data. Settles via x402: your wallet signs a gasless USDC authorization for the exact price above.</p>
+                    <p class="text-xs text-zinc-500 mb-4">Real-time DefiLlama market data. Settles via x402: your wallet signs a gasless USDC authorization for the exact price above.</p>
                     ${fields || '<div class="mb-1"></div>'}
                     <button id="hire-submit" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm mt-1">Authorize &amp; Fetch</button>
                     <div id="hire-status" class="text-xs text-zinc-500 mt-3"></div>
@@ -363,7 +363,7 @@ const Hire = {
         }
         // Arrays of rows (protocols, dexs, bridges, stablecoins, pools, venues…).
         // Respect the same skip set as the scalar pass so the raw `prices`
-        // series (dl_token_chart's [{timestamp,price}]) isn't rendered as a
+        // series (token_chart's [{timestamp,price}]) isn't rendered as a
         // blank generic row list — it's a chart series, not a row table.
         for (const [k, v] of Object.entries(d)) {
             if (skip.has(k)) continue;

@@ -337,7 +337,7 @@ def _dl_need_slug(req):
     return s or None
 
 
-def _dl_token_intel(req):
+def _token_intel(req):
     a = _addr(req)
     if not a:
         return {"error": "no address in requirement"}
@@ -347,7 +347,7 @@ def _dl_token_intel(req):
     return intel
 
 
-def _dl_token_chart(req):
+def _token_chart(req):
     a = _addr(req)
     if not a:
         return {"error": "no address in requirement"}
@@ -363,56 +363,56 @@ def _dl_token_chart(req):
     return chart
 
 
-def _dl_protocol(req):
+def _protocol(req):
     s = _dl_need_slug(req)
     return _dl().protocol(s) if s else {"error": "no protocol slug in requirement"}
 
 
-def _dl_protocol_fees(req):
+def _protocol_fees(req):
     s = _dl_need_slug(req)
     return _dl().protocol_fees(s) if s else {"error": "no protocol slug in requirement"}
 
 
-def _dl_unlocks(req):
+def _unlocks(req):
     s = _dl_need_slug(req)
     return _dl().unlocks(s) if s else {"error": "no protocol slug in requirement"}
 
 
-def _dl_treasury(req):
+def _treasury(req):
     s = _dl_need_slug(req)
     return _dl().treasury(s) if s else {"error": "no protocol slug in requirement"}
 
 
-def _dl_chain_protocols(req):
+def _chain_protocols(req):
     return _dl().protocols_on_chain(_dl_chain(req, "Base"))
 
 
-def _dl_chain_overview(req):
+def _chain_overview(req):
     return _dl().chain_overview(_dl_chain(req, "Base"))
 
 
-def _dl_chain_fees(req):
+def _chain_fees(req):
     return _dl().chain_fees(_dl_chain(req, "base"))
 
 
-def _dl_dex_volumes(req):
+def _dex_volumes(req):
     return _dl().dex_volumes(_dl_chain(req, "base"))
 
 
-def _dl_derivatives(req):
+def _derivatives(req):
     return _dl().derivatives_volumes()
 
 
-def _dl_yields(req):
+def _yields(req):
     r = req if isinstance(req, dict) else {}
     return _dl().yield_pools(chain=r.get("chain"), project=r.get("project"), symbol=r.get("symbol"))
 
 
-def _dl_stablecoins(req):
+def _stablecoins(req):
     return _dl().stablecoins()
 
 
-def _dl_bridges(req):
+def _bridges(req):
     return _dl().bridges()
 
 
@@ -425,20 +425,20 @@ HANDLERS = {
     "dossier_check": _dossier_check,
     "community_intel_broadcast": _community_broadcast,
     # DefiLlama data micro-services — 0.01 USDC each, real keyless data.
-    "dl_token_intel": _dl_token_intel,
-    "dl_token_chart": _dl_token_chart,
-    "dl_protocol": _dl_protocol,
-    "dl_protocol_fees": _dl_protocol_fees,
-    "dl_unlocks": _dl_unlocks,
-    "dl_treasury": _dl_treasury,
-    "dl_chain_protocols": _dl_chain_protocols,
-    "dl_chain_overview": _dl_chain_overview,
-    "dl_chain_fees": _dl_chain_fees,
-    "dl_dex_volumes": _dl_dex_volumes,
-    "dl_derivatives": _dl_derivatives,
-    "dl_yields": _dl_yields,
-    "dl_stablecoins": _dl_stablecoins,
-    "dl_bridges": _dl_bridges,
+    "token_intel": _token_intel,
+    "token_chart": _token_chart,
+    "protocol": _protocol,
+    "protocol_fees": _protocol_fees,
+    "unlocks": _unlocks,
+    "treasury": _treasury,
+    "chain_protocols": _chain_protocols,
+    "chain_overview": _chain_overview,
+    "chain_fees": _chain_fees,
+    "dex_volumes": _dex_volumes,
+    "derivatives": _derivatives,
+    "yields": _yields,
+    "stablecoins": _stablecoins,
+    "bridges": _bridges,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

@@ -42,26 +42,26 @@ IDENTITY = {
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe",
 }
 
-# The 14 DefiLlama data micro-services (agents/defillama.py / acp_fulfill.py's
-# HANDLERS / worker /data/*) — all keyless, zero-LLM, real-data, x402-payable
-# at 0.01 USDC. Defined once here as (name, price, summary) and reused for the
-# catalog, the AUTO/X402/ZERO_LLM sets, and the published capabilities list.
+# The 14 DefiLlama market-data tools (agents/defillama.py / acp_fulfill.py's
+# HANDLERS / worker /data/*) — real-data, x402-payable at 0.01 USDC. Defined
+# once here as (name, price, summary) and reused for the catalog, the
+# AUTO/X402/ZERO_LLM sets, and the published capabilities list.
 DL_OFFERINGS = [
-    ("dl_token_intel", 0.01, "DefiLlama price + 0-1 confidence, oracle-derived token age, and "
+    ("token_intel", 0.01, "DefiLlama price + 0-1 confidence, oracle-derived token age, and "
      "(with a protocol slug) fees/unlocks/treasury — plus the token's real logo"),
-    ("dl_token_chart", 0.01, "DefiLlama daily price series (default 30d) + token logo — sparkline & volatility"),
-    ("dl_protocol", 0.01, "Full DefiLlama protocol record: per-chain TVL, category, audits, official logo"),
-    ("dl_protocol_fees", 0.01, "Protocol real earned fees + revenue (24h/7d/30d) — legitimacy signal TVL misses"),
-    ("dl_unlocks", 0.01, "Token unlock/emission schedule — the next upcoming dump-risk event"),
-    ("dl_treasury", 0.01, "Protocol treasury composition + own-token share (fragility signal)"),
-    ("dl_chain_protocols", 0.01, "Top protocols on a chain by TVL, each with its real logo"),
-    ("dl_chain_overview", 0.01, "A chain's headline TVL + rank among all chains DefiLlama tracks"),
-    ("dl_chain_fees", 0.01, "Fee-earning protocols on a chain, ranked, with logos — real economic activity"),
-    ("dl_dex_volumes", 0.01, "DEX trading volume on a chain by venue, with logos"),
-    ("dl_derivatives", 0.01, "Perps/derivatives volume by venue, with logos"),
-    ("dl_yields", 0.01, "Yield pools by chain/project/symbol, TVL-ranked — trap detection"),
-    ("dl_stablecoins", 0.01, "Stablecoins by supply with live peg price + computed depeg amount"),
-    ("dl_bridges", 0.01, "Bridges ranked by daily volume — capital-flow data for bridge-exploit threat work"),
+    ("token_chart", 0.01, "DefiLlama daily price series (default 30d) + token logo — sparkline & volatility"),
+    ("protocol", 0.01, "Full DefiLlama protocol record: per-chain TVL, category, audits, official logo"),
+    ("protocol_fees", 0.01, "Protocol real earned fees + revenue (24h/7d/30d) — legitimacy signal TVL misses"),
+    ("unlocks", 0.01, "Token unlock/emission schedule — the next upcoming dump-risk event"),
+    ("treasury", 0.01, "Protocol treasury composition + own-token share (fragility signal)"),
+    ("chain_protocols", 0.01, "Top protocols on a chain by TVL, each with its real logo"),
+    ("chain_overview", 0.01, "A chain's headline TVL + rank among all chains DefiLlama tracks"),
+    ("chain_fees", 0.01, "Fee-earning protocols on a chain, ranked, with logos — real economic activity"),
+    ("dex_volumes", 0.01, "DEX trading volume on a chain by venue, with logos"),
+    ("derivatives", 0.01, "Perps/derivatives volume by venue, with logos"),
+    ("yields", 0.01, "Yield pools by chain/project/symbol, TVL-ranked — trap detection"),
+    ("stablecoins", 0.01, "Stablecoins by supply with live peg price + computed depeg amount"),
+    ("bridges", 0.01, "Bridges ranked by daily volume — capital-flow data for bridge-exploit threat work"),
 ]
 DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
 
@@ -291,6 +291,7 @@ def main():
             "auto_fulfilled_zero_llm": sorted(ZERO_LLM),
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
+                 "data": n in DL_NAMES,
                  "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant",
                  **({"directory_url": f"https://402index.io/service/{_402INDEX_SERVICE_IDS[n]}"}
                     if n in _402INDEX_SERVICE_IDS else {})}

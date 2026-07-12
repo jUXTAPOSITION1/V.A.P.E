@@ -19,26 +19,35 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
-def _names(path, pattern):
-    return set(re.findall(pattern, (ROOT / path).read_text()))
+# The 14 market-data tools, by name (no prefix). This literal set is the
+# contract every surface must match — if a tool is added/renamed, this and all
+# four surfaces move together or the test fails.
+DATA_TOOLS = {
+    "token_intel", "token_chart", "protocol", "protocol_fees", "unlocks", "treasury",
+    "chain_protocols", "chain_overview", "chain_fees", "dex_volumes", "derivatives",
+    "yields", "stablecoins", "bridges",
+}
 
 
-def test_dl_offering_names_identical_across_all_surfaces():
-    acp = _names("agents/acp_fulfill.py", r'"(dl_[a-z_]+)":')
-    pub = _names("agents/publish_reputation.py", r'\("(dl_[a-z_]+)",')
-    x402 = _names("agents/x402_directory_register.py", r'"(dl_[a-z_]+)":')
-    worker = _names("worker/src/dataHandlers.ts", r'name:\s*"(dl_[a-z_]+)"')
-    assert len(acp) == 14
-    assert acp == pub == x402 == worker
+def test_data_offering_names_identical_across_all_surfaces():
+    from agents.publish_reputation import DL_NAMES
+    from agents.x402_directory_register import DATA_OFFERINGS
+    from agents.acp_fulfill import HANDLERS
+    # worker/src/dataHandlers.ts declares the data tools as `name: "..."` (the
+    # only place in that file that does), so this captures exactly the tier.
+    worker = set(re.findall(r'name:\s*"([a-z_]+)"', (ROOT / "worker/src/dataHandlers.ts").read_text()))
+    assert DL_NAMES == DATA_TOOLS                 # published catalog
+    assert set(DATA_OFFERINGS) == DATA_TOOLS      # x402 directory
+    assert worker == DATA_TOOLS                   # paid worker routes
+    assert DATA_TOOLS <= set(HANDLERS)            # every data tool is ACP-fulfillable
 
 
-def test_dl_offerings_all_priced_one_cent_in_catalog():
-    # Every DefiLlama entry in the published catalog is exactly 0.01 USDC.
-    text = (ROOT / "agents/publish_reputation.py").read_text()
-    dl_block = text[text.index("DL_OFFERINGS = ["):text.index("DL_NAMES")]
-    entries = re.findall(r'\("(dl_[a-z_]+)",\s*([0-9.]+),', dl_block)
-    assert len(entries) == 14
-    assert all(price == "0.01" for _n, price in entries)
+def test_data_offerings_all_priced_one_cent():
+    from agents.publish_reputation import DL_OFFERINGS
+    from agents.x402_directory_register import DATA_OFFERINGS
+    assert len(DL_OFFERINGS) == 14
+    assert all(price == 0.01 for _n, price, _s in DL_OFFERINGS)
+    assert all(meta[0] == "0.01" for meta in DATA_OFFERINGS.values())
 
 
 def _stub_defillama(monkeypatch):
@@ -69,7 +78,7 @@ def test_every_dl_offering_has_a_working_handler(monkeypatch):
     _stub_defillama(monkeypatch)
     from agents import acp_fulfill as A
     monkeypatch.setattr(A, "_dl_token_logo", lambda a: None)  # no network for logo enrichment
-    dl_names = [n for n in A.HANDLERS if n.startswith("dl_")]
+    dl_names = [n for n in A.HANDLERS if n in DATA_TOOLS]
     assert len(dl_names) == 14
     for name in dl_names:
         # Give every handler the union of inputs it might need.
@@ -83,7 +92,7 @@ def test_token_handlers_route_chain_address_and_enrich_logo(monkeypatch):
     calls = _stub_defillama(monkeypatch)
     from agents import acp_fulfill as A
     monkeypatch.setattr(A, "_dl_token_logo", lambda a: "https://logo.test")
-    out = A.fulfill("dl_token_intel", {"address": "0xABC0000000000000000000000000000000000abc",
+    out = A.fulfill("token_intel", {"address": "0xABC0000000000000000000000000000000000abc",
                                        "chain": "base", "slug": "aave"})
     assert out["deliverable"]["logo"] == "https://logo.test"
     name, args, _k = calls[-1]
@@ -94,5 +103,5 @@ def test_token_handlers_route_chain_address_and_enrich_logo(monkeypatch):
 def test_slug_handler_errors_honestly_without_slug(monkeypatch):
     _stub_defillama(monkeypatch)
     from agents import acp_fulfill as A
-    out = A.fulfill("dl_protocol", {})  # no slug provided
+    out = A.fulfill("protocol", {})  # no slug provided
     assert out["deliverable"].get("error")

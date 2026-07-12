@@ -1,10 +1,8 @@
 /**
- * DefiLlama x402 micro-service tier — one paid endpoint per DefiLlama tool,
- * all priced at $0.01 (the cheapest useful on-chain data a caller can buy from
- * VAPE). Backed by lib/defillama.ts (keyless free API), so the marginal cost
- * to VAPE is ~zero and the price is pure margin funding the agent.
+ * DefiLlama market-data tool tier — one x402 endpoint per tool, priced at
+ * $0.01. Backed by lib/defillama.ts.
  *
- * "Token logos, rich data": every protocol/chain/fee/dex tool already carries
+ * Token logos + rich data: every protocol/chain/fee/dex tool carries
  * DefiLlama's real hosted `logo` URLs; token-level tools (intel, chart) are
  * enriched here with the token's real DexScreener image, so a buyer always
  * gets an icon alongside the numbers. Nothing is fabricated — a missing logo
@@ -75,7 +73,7 @@ export interface DlOffering {
 // documents and defaults the right one.
 export const DL_OFFERINGS: DlOffering[] = [
   {
-    name: "dl_token_intel",
+    name: "token_intel",
     price: "$0.01",
     description: "DefiLlama's full independent read on one token: current price + its own "
       + "0-1 confidence score, first-ever-recorded price (an oracle-derived age signal harder "
@@ -103,7 +101,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     },
   },
   {
-    name: "dl_token_chart",
+    name: "token_chart",
     price: "$0.01",
     description: "Daily price series for a token from DefiLlama's oracle (default 30d), plus the "
       + "token's real logo — feeds sparklines and a rule-based volatility read.",
@@ -125,7 +123,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     },
   },
   {
-    name: "dl_protocol",
+    name: "protocol",
     price: "$0.01",
     description: "Full DefiLlama protocol record: per-chain TVL, category, audits, the official "
       + "logo, Twitter, and description — the 'who is this protocol' snapshot.",
@@ -136,7 +134,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.protocol(requireSlug(q)),
   },
   {
-    name: "dl_protocol_fees",
+    name: "protocol_fees",
     price: "$0.01",
     description: "A protocol's real earned fees + revenue (24h/7d/30d) with its logo — 'does this "
       + "actually make money, or is it just parked TVL?', a legitimacy signal raw TVL misses.",
@@ -147,7 +145,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.protocolFees(requireSlug(q)),
   },
   {
-    name: "dl_unlocks",
+    name: "unlocks",
     price: "$0.01",
     description: "Token unlock / emission schedule for a protocol — surfaces the next upcoming "
       + "unlock event (a concrete dump-risk an investigator must flag) and how many days out it is.",
@@ -158,7 +156,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.unlocks(requireSlug(q)),
   },
   {
-    name: "dl_treasury",
+    name: "treasury",
     price: "$0.01",
     description: "A protocol's on-chain treasury composition — total USD, own-token USD, and the "
       + "own-token share (a treasury that's ~all its own token is a fragility signal).",
@@ -169,7 +167,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.treasury(requireSlug(q)),
   },
   {
-    name: "dl_chain_protocols",
+    name: "chain_protocols",
     price: "$0.01",
     description: "Top protocols on a chain by TVL (default Base), each with its real logo, category, "
       + "and 24h/7d change — the chain-ecosystem view.",
@@ -186,7 +184,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.protocolsOnChain(q.chain || "Base", q.limit || 20),
   },
   {
-    name: "dl_chain_overview",
+    name: "chain_overview",
     price: "$0.01",
     description: "A chain's headline TVL and its rank among all chains DefiLlama tracks (default Base).",
     tags: ["defillama", "tvl", "chain", "base"],
@@ -196,7 +194,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.chainOverview(q.chain || "Base"),
   },
   {
-    name: "dl_chain_fees",
+    name: "chain_fees",
     price: "$0.01",
     description: "Fee-earning protocols on a chain, ranked, each with its logo (default Base) — the "
       + "chain's real economic activity, not just parked capital.",
@@ -207,7 +205,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.chainFees(q.chain || "base"),
   },
   {
-    name: "dl_dex_volumes",
+    name: "dex_volumes",
     price: "$0.01",
     description: "DEX trading volume on a chain by venue, each with its logo (default Base) — real "
       + "trading activity across the chain's exchanges.",
@@ -218,7 +216,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.dexVolumes(q.chain || "base"),
   },
   {
-    name: "dl_derivatives",
+    name: "derivatives",
     price: "$0.01",
     description: "Perps / derivatives trading volume by venue, each with its logo — the derivatives "
       + "market's real activity across all tracked exchanges.",
@@ -229,7 +227,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async () => dl.derivativesVolumes(),
   },
   {
-    name: "dl_yields",
+    name: "yields",
     price: "$0.01",
     description: "Yield pools filtered by chain/project/symbol, ranked by TVL, with apy/apyBase/"
       + "ilRisk/exposure — enough to tell a real yield venue from a trap (huge APY + tiny TVL = red flag).",
@@ -247,7 +245,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.yieldPools({ chain: q.chain, project: q.project, symbol: q.symbol }),
   },
   {
-    name: "dl_stablecoins",
+    name: "stablecoins",
     price: "$0.01",
     description: "Stablecoins by circulating supply with live peg price and a computed depeg amount "
       + "— a de-pegging stablecoin is a live systemic threat signal.",
@@ -258,7 +256,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async () => dl.stablecoins(),
   },
   {
-    name: "dl_bridges",
+    name: "bridges",
     price: "$0.01",
     description: "Tracked bridges ranked by recent daily volume — bridge exploits are a top attack "
       + "class, and this is the capital-flow data that category needs a source for.",
@@ -283,7 +281,7 @@ export async function fulfillData(name: string, q: DlQuery) {
     const deliverable = await off.run(q);
     return {
       offering: name, status: "ok", deliverable,
-      source: "defillama-free-api", disclaimer: "Real DefiLlama data. Not investment advice.",
+      source: "defillama", disclaimer: "Real DefiLlama data. Not investment advice.",
     };
   } catch (e: any) {
     return { offering: name, status: "error", error: String(e?.message || e) };

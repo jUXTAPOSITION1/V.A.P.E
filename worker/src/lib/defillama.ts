@@ -1,19 +1,18 @@
 /**
- * TypeScript port of agents/defillama.py — VAPE's keyless, free-API DefiLlama
- * intelligence layer, made available to the paid x402 micro-service tier.
+ * TypeScript port of agents/defillama.py — VAPE's DefiLlama data layer, made
+ * available to the x402 market-data tool tier.
  *
  * Field-for-field faithful to the Python module so the x402 result, the ACP
  * deliverable, and any Python-side investigation never disagree. Same design
  * law: every function returns real data or an `{ error }` object and NEVER
  * throws — a caller (and the payment middleware) can always degrade honestly.
  *
- * No key, no subscription: DefiLlama's open API serves ~all of the paid MCP's
- * data. Per-route HTTP caching is handled by Hono's `cache` middleware in
- * index.ts (Cloudflare Cache API), so this layer is a thin fetch+parse — it
- * does not re-implement the Python disk cache.
+ * Per-route HTTP caching is handled by Hono's `cache` middleware in index.ts
+ * (Cloudflare Cache API), so this layer is a thin fetch+parse — it does not
+ * re-implement the Python disk cache.
  *
- * Hosts (all free): api.llama.fi, coins.llama.fi, yields.llama.fi,
- * stablecoins.llama.fi, bridges.llama.fi.
+ * Hosts: api.llama.fi, coins.llama.fi, yields.llama.fi, stablecoins.llama.fi,
+ * bridges.llama.fi.
  */
 const API = "https://api.llama.fi";
 const COINS = "https://coins.llama.fi";

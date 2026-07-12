@@ -104,21 +104,21 @@ OFFERINGS = {
 # DL_OFFERINGS exactly. These are served at /data/<name> (not /scan/<name>),
 # so they're kept in their own dict and routed accordingly below. All 0.01 USDC.
 DATA_OFFERINGS = {
-    "dl_token_intel": ("0.01", "DefiLlama price + confidence, oracle-derived token age, optional "
+    "token_intel": ("0.01", "DefiLlama price + confidence, oracle-derived token age, optional "
                        "fees/unlocks/treasury, and the token's real logo."),
-    "dl_token_chart": ("0.01", "DefiLlama daily price series (default 30d) + token logo."),
-    "dl_protocol": ("0.01", "Full DefiLlama protocol record: per-chain TVL, category, audits, logo."),
-    "dl_protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d)."),
-    "dl_unlocks": ("0.01", "Token unlock/emission schedule — next upcoming dump-risk event."),
-    "dl_treasury": ("0.01", "Protocol treasury composition + own-token fragility share."),
-    "dl_chain_protocols": ("0.01", "Top protocols on a chain by TVL, each with its logo."),
-    "dl_chain_overview": ("0.01", "A chain's headline TVL + rank among all chains."),
-    "dl_chain_fees": ("0.01", "Fee-earning protocols on a chain, ranked, with logos."),
-    "dl_dex_volumes": ("0.01", "DEX trading volume on a chain by venue, with logos."),
-    "dl_derivatives": ("0.01", "Perps/derivatives volume by venue, with logos."),
-    "dl_yields": ("0.01", "Yield pools by chain/project/symbol, TVL-ranked — trap detection."),
-    "dl_stablecoins": ("0.01", "Stablecoins by supply with live peg + computed depeg."),
-    "dl_bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
+    "token_chart": ("0.01", "DefiLlama daily price series (default 30d) + token logo."),
+    "protocol": ("0.01", "Full DefiLlama protocol record: per-chain TVL, category, audits, logo."),
+    "protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d)."),
+    "unlocks": ("0.01", "Token unlock/emission schedule — next upcoming dump-risk event."),
+    "treasury": ("0.01", "Protocol treasury composition + own-token fragility share."),
+    "chain_protocols": ("0.01", "Top protocols on a chain by TVL, each with its logo."),
+    "chain_overview": ("0.01", "A chain's headline TVL + rank among all chains."),
+    "chain_fees": ("0.01", "Fee-earning protocols on a chain, ranked, with logos."),
+    "dex_volumes": ("0.01", "DEX trading volume on a chain by venue, with logos."),
+    "derivatives": ("0.01", "Perps/derivatives volume by venue, with logos."),
+    "yields": ("0.01", "Yield pools by chain/project/symbol, TVL-ranked — trap detection."),
+    "stablecoins": ("0.01", "Stablecoins by supply with live peg + computed depeg."),
+    "bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
 }
 
 # (name, (price, desc), route_prefix) across both tiers — one place that knows
