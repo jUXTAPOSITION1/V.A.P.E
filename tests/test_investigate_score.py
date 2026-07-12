@@ -87,6 +87,40 @@ def test_deployer_repeat_offender_penalized():
     assert any("deployer" in r.lower() for r in reasons)
 
 
+def test_deployer_cluster_size_is_a_distinct_penalty():
+    """The graph-derived factory-scale signal must fire independently of
+    deployer_repeat_offender — a mass-token-factory deployer whose OTHER
+    tokens are all still PROCEED (so repeat_offender never trips) is still a
+    real, distinct risk this signal exists to catch. Uses a legit-shaped
+    input (enough positive signals to clear the legitimacy cap) so the
+    incremental deduction is visible rather than absorbed by the cap."""
+    gp = clean_gp(owner_address="0x0000000000000000000000000000000000000000", holder_count="1200")
+    dex = clean_dex(name="Legit", symbol="LEGIT", liquidity_usd=800000, pair_created_ms=days_ago_ms(200))
+    verif = {"checked": True, "verified": True, "name": "LegitToken"}
+    baseline, _, _, _ = score(gp, dex, {"is_contract": True}, verif)
+    clustered, _, reasons, _ = score(gp, dex, {"is_contract": True}, verif, deployer_cluster_size=5)
+    assert clustered == baseline - 15
+    assert any("mass-token-factory" in r for r in reasons)
+
+
+def test_deployer_cluster_size_and_repeat_offender_both_apply_additively():
+    gp, dex = clean_gp(), clean_dex()
+    both, _, reasons, _ = score(gp, dex, {"is_contract": True}, {},
+                                deployer_repeat_offender="0xBAD", deployer_cluster_size=5)
+    just_repeat, _, _, _ = score(gp, dex, {"is_contract": True}, {},
+                                 deployer_repeat_offender="0xBAD")
+    assert both < just_repeat  # cluster signal stacks on top, doesn't replace
+    assert any("prior CAUTION/REJECT" in r for r in reasons)
+    assert any("mass-token-factory" in r for r in reasons)
+
+
+def test_deployer_cluster_size_none_is_noop():
+    gp, dex = clean_gp(), clean_dex()
+    a = score(gp, dex, {"is_contract": True}, {})[0]
+    b = score(gp, dex, {"is_contract": True}, {}, deployer_cluster_size=None)[0]
+    assert a == b
+
+
 def test_score_never_out_of_bounds():
     """Even with every red flag on and every legitimacy signal absent, the
     score stays clamped to [0, 100] and returns a valid verdict."""

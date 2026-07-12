@@ -40,6 +40,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 from agents.report_format import letterhead_md, verdict_stamp
+from agents import critic
 
 INVEST_DIR = os.path.join(ROOT, "intel", "investigations")
 CATALOG = os.path.join(ROOT, "intel", "catalog", "investigation-catalog.md")
@@ -403,7 +404,8 @@ MEME_FACTORY_NAME_PATTERNS = ("clanker",)
 
 
 # ── scoring ─────────────────────────────────────────────────────────────────
-def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, defillama=None):
+def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, defillama=None,
+          deployer_cluster_size=None):
     """Return (score_0_100, verdict, reasons[], positive_signals[]).
     Higher score = safer.
 
@@ -486,6 +488,17 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
     if deployer_repeat_offender:
         flag(True, 30, f"Same deployer has a prior CAUTION/REJECT verdict on record: "
                         f"{deployer_repeat_offender} — likely the same serial campaign")
+
+    # Deployer factory-scale — a DISTINCT signal from the repeat-offender flag
+    # above (see skillforge/memory/graph.py::sibling_tokens()). That flag only
+    # fires once a prior token from this deployer already tripped CAUTION/
+    # REJECT; a mass-token-factory deployer can rack up several tokens with
+    # mixed early verdicts before any single one gets unlucky enough to hit
+    # that bar. Deploy VOLUME itself, independent of those verdicts, is a real
+    # risk signal a genuine one-off legitimate project won't have.
+    if deployer_cluster_size:
+        flag(True, 15, f"Deployer has {deployer_cluster_size} other token(s) on record "
+                       "— mass-token-factory deployment pattern, independent of their individual verdicts")
 
     # Holder concentration — real GoPlus holder_count. Thin distribution
     # means a handful of wallets can move the price or exit-liquidity anyone
@@ -600,6 +613,11 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
         s = cap
 
     s = max(0, min(100, s))
+    # NOTE: these 80/50 bands are mirrored by agents/critic.py::_verdict_for_score()
+    # (its verdict/score-band consistency check needs its own copy to detect
+    # drift here) — if you change these thresholds, update that function too.
+    # tests/test_critic.py's zero-false-positive tests will fail loudly if
+    # the two ever fall out of sync.
     verdict = "PROCEED" if s >= 80 else ("CAUTION" if s >= 50 else "REJECT")
     return s, verdict, reasons, positive_signals
 
@@ -697,7 +715,8 @@ def auto_target(chain=None):
 
 
 # ── report + persistence ────────────────────────────────────────────────────
-def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None, defillama=None):
+def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
+                 defillama=None, deployer_siblings=None, critic_result=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -822,6 +841,27 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
                      "— absence noted, not penalized.")
     else:
         L.append("- DefiLlama cross-source not fetched this cycle.")
+    L.append("")
+    L.append("## Deployer Network (skillforge/memory/graph.py)")
+    if deployer_siblings:
+        L.append(f"- This deployer has **{len(deployer_siblings)}** other token(s) on record "
+                 "(worst-verdict-first):")
+        for sib in deployer_siblings:
+            L.append(f"  - `{sib['address']}` — {sib.get('symbol')} — {sib.get('verdict')} "
+                     f"({sib.get('score')}/100)")
+    else:
+        L.append("- No other tokens from this deployer on record yet.")
+    L.append("")
+    L.append("## Critic Self-Audit (agents/critic.py)")
+    if critic_result and not critic_result.get("ok", True):
+        L.append("- ⚠️ **Consistency issue(s) flagged** — this investigation's own reasons/signals "
+                 "did not fully agree with the raw evidence or score()'s own invariants:")
+        for issue in critic_result["issues"]:
+            L.append(f"  - {issue}")
+        L.append("  - Logged to Memory for self_improve.py triage.")
+    else:
+        L.append("- No structural inconsistencies found — reasons, positive signals, verdict and "
+                 "score all agree with the raw evidence and score()'s own invariants.")
     L.append("")
     L.append("---")
     L.append("")
@@ -1004,6 +1044,25 @@ def _defillama_intel(address, chain):
         return None
 
 
+def _deployer_graph_intel(creator_address, address):
+    """Best-effort deployer relationship lookup via
+    skillforge/memory/graph.py — a real generalization of
+    _deployer_repeat_offender() into a full cluster: every OTHER token on
+    record from the same deployer, regardless of their individual verdicts.
+    Returns (cluster_size, siblings_list); (None, []) when the deployer isn't
+    on record, has deployed nothing else, or the graph is unavailable for any
+    reason. Never raises — this is enrichment, not a load-bearing check."""
+    if not creator_address:
+        return None, []
+    try:
+        from skillforge.memory.graph import sibling_tokens
+        siblings = sibling_tokens(address)
+        return (len(siblings) if len(siblings) >= 2 else None), siblings
+    except Exception as e:
+        print(f"[investigate] deployer graph unavailable: {e}")
+        return None, []
+
+
 def investigate(address, chain="8453", hint="", force=False):
     address = address.strip()
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
@@ -1029,9 +1088,20 @@ def investigate(address, chain="8453", hint="", force=False):
     creator_address = gp.get("creator_address")
     deployer_repeat = _deployer_repeat_offender(creator_address, chain, address)
     dl_intel = _defillama_intel(address, chain)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat, dl_intel)
+    cluster_size, siblings = _deployer_graph_intel(creator_address, address)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat,
+                                                  dl_intel, cluster_size)
 
-    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep, dl_intel)
+    # Same-cycle structural self-check (agents/critic.py) — deterministic,
+    # never mutates the verdict; only surfaces a real internal inconsistency
+    # into Memory + the report the moment it happens.
+    critic_result = critic.verify(gp, verif, s, verdict, reasons, positive_signals)
+    if not critic_result["ok"]:
+        print(f"[investigate] CRITIC FLAGGED {address}: {critic_result['issues']}")
+        critic.log_finding(address, chain, prelim_sym, critic_result["issues"])
+
+    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
+                                    positive_signals, web_rep, dl_intel, siblings, critic_result)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
