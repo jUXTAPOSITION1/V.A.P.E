@@ -30,7 +30,7 @@ job.created ──► set-budget ──► job.funded ──► submit ──►
 | `submitted` | client | `acp client complete` / `reject` |
 | `completed` | — | escrow released to VAPE (terminal) |
 
-## Live offerings (15)
+## Live offerings (29)
 Each offering maps to a verified SKILLFORGE tool that produces **real data only**.
 
 | Offering | Price (USDC) | SLA | Backing tool |
@@ -50,6 +50,30 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | deep_contract_audit | 1.00 | 30m | slither + aderyn + mythril |
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
 | **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
+
+### Market-data tools — 0.01 USDC each
+14 real-time DefiLlama market-data tools (`agents/defillama.py`), each
+auto-fulfilled by `agents/acp_fulfill.py` and also x402-payable at the worker's
+`/data/<name>` route. Protocol/chain tools carry DefiLlama's real hosted logos;
+token tools carry the token's DexScreener logo. Every result is real data or an
+honest `{error}` — never fabricated.
+
+| Offering | Price (USDC) | SLA | Input | What it returns |
+|---|---|---|---|---|
+| token_intel | 0.01 | 5m | `address`, `chain`, optional `slug` | Price + 0-1 confidence, oracle-derived token age, optional fees/unlocks/treasury, + logo |
+| token_chart | 0.01 | 5m | `address`, `chain`, `span` | Daily price series (default 30d) + logo |
+| protocol | 0.01 | 5m | `slug` | Full protocol record: per-chain TVL, category, audits, logo |
+| protocol_fees | 0.01 | 5m | `slug` | Real earned fees + revenue (24h/7d/30d) |
+| unlocks | 0.01 | 5m | `slug` | Next upcoming token-unlock (dump-risk) event |
+| treasury | 0.01 | 5m | `slug` | Treasury composition + own-token fragility share |
+| chain_protocols | 0.01 | 5m | `chain` | Top protocols on a chain by TVL, each with logo |
+| chain_overview | 0.01 | 5m | `chain` | Chain headline TVL + rank among all chains |
+| chain_fees | 0.01 | 5m | `chain` | Fee-earning protocols on a chain, ranked, with logos |
+| dex_volumes | 0.01 | 5m | `chain` | DEX volume on a chain by venue, with logos |
+| derivatives | 0.01 | 5m | — | Perps/derivatives volume by venue, with logos |
+| yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
+| stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
+| bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
 
 ## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:

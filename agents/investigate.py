@@ -403,7 +403,7 @@ MEME_FACTORY_NAME_PATTERNS = ("clanker",)
 
 
 # ── scoring ─────────────────────────────────────────────────────────────────
-def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None):
+def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, defillama=None):
     """Return (score_0_100, verdict, reasons[], positive_signals[]).
     Higher score = safer.
 
@@ -565,6 +565,25 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None):
         flag(True, 25, f"Public web search surfaced {len(web_rep['hits'])} unambiguous "
                         f"scam/rug mention(s) — see Public Web Signals section")
 
+    # DefiLlama cross-source signals — an INDEPENDENT oracle, not the same
+    # DexScreener/GoPlus data re-counted. Two genuinely new, non-double-counting
+    # checks: (1) DefiLlama's first-ever recorded price is a longevity source
+    # that's harder to spoof than a DEX pair-creation timestamp (a token can
+    # spin up a fresh pair but can't retroactively invent price history);
+    # (2) DefiLlama's own price-confidence score flags thinly/unreliably priced
+    # tokens the on-chain checks can't see.
+    if defillama:
+        fp = defillama.get("first_price") or {}
+        dl_age = fp.get("age_days")
+        if isinstance(dl_age, (int, float)):
+            signal(dl_age >= 90, f"DefiLlama has priced this token for {dl_age:.0f}+ days — "
+                                 "independent longevity corroboration")
+        pr = defillama.get("price") or {}
+        conf = pr.get("confidence")
+        if isinstance(conf, (int, float)):
+            flag(conf < 0.5, 8, f"DefiLlama price confidence low ({conf:.2f}) — "
+                                "thinly or unreliably priced across venues")
+
     # Legitimacy cap: don't let a clean red-flag sweep alone buy a PROCEED
     # verdict. Real positive evidence (renounced ownership + deep liquidity +
     # real holder base + real track record + genuinely custom verified code)
@@ -678,7 +697,7 @@ def auto_target(chain=None):
 
 
 # ── report + persistence ────────────────────────────────────────────────────
-def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None):
+def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None, defillama=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -787,11 +806,28 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- Web search unavailable this cycle (no research provider configured/reachable).")
     L.append("")
+    L.append("## DefiLlama Cross-Source (independent oracle)")
+    if defillama:
+        pr = defillama.get("price") or {}
+        fp = defillama.get("first_price") or {}
+        if pr:
+            conf = pr.get("confidence")
+            L.append(f"- Price: ${pr.get('price')} · confidence: "
+                     f"{conf if conf is not None else 'n/a'} · symbol: {pr.get('symbol')}")
+        if fp:
+            L.append(f"- First DefiLlama price: {fp.get('first_seen_iso')} "
+                     f"({fp.get('age_days')} days ago) — independent longevity source")
+        if not pr and not fp:
+            L.append("- DefiLlama does not price this token (obscure / not yet on the oracle) "
+                     "— absence noted, not penalized.")
+    else:
+        L.append("- DefiLlama cross-source not fetched this cycle.")
+    L.append("")
     L.append("---")
     L.append("")
     L.append("*V.A.P.E. — The chain never lies. Investigation conducted with keyless, "
-             "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed) "
-             "plus a real web search for public reputation signals.*")
+             "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed "
+             "& price oracle) plus a real web search for public reputation signals.*")
     with open(path, "w") as f:
         f.write("\n".join(L))
 
@@ -952,6 +988,22 @@ def regenerate_lists(ledger):
             f.write("\n".join(lines) + "\n")
 
 
+def _defillama_intel(address, chain):
+    """Best-effort DefiLlama cross-source for a token, or None. Maps VAPE's
+    numeric chain id to DefiLlama's chain slug (same slug DexScreener uses,
+    already in EVM_CHAINS['dex']). Never raises — a DefiLlama outage or an
+    untracked token must never sink an investigation."""
+    slug = (EVM_CHAINS.get(str(chain)) or {}).get("dex")
+    if not slug:
+        return None
+    try:
+        from agents import defillama as dl
+        return dl.token_intel(slug, address)
+    except Exception as e:
+        print(f"[investigate] defillama intel unavailable: {e}")
+        return None
+
+
 def investigate(address, chain="8453", hint="", force=False):
     address = address.strip()
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
@@ -976,9 +1028,10 @@ def investigate(address, chain="8453", hint="", force=False):
     web_rep = web_reputation_check(prelim_sym, address)
     creator_address = gp.get("creator_address")
     deployer_repeat = _deployer_repeat_offender(creator_address, chain, address)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat)
+    dl_intel = _defillama_intel(address, chain)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat, dl_intel)
 
-    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep)
+    path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep, dl_intel)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)

@@ -42,9 +42,32 @@ IDENTITY = {
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe",
 }
 
+# The 14 DefiLlama market-data tools (agents/defillama.py / acp_fulfill.py's
+# HANDLERS / worker /data/*) — real-data, x402-payable at 0.01 USDC. Defined
+# once here as (name, price, summary) and reused for the catalog, the
+# AUTO/X402/ZERO_LLM sets, and the published capabilities list.
+DL_OFFERINGS = [
+    ("token_intel", 0.01, "DefiLlama price + 0-1 confidence, oracle-derived token age, and "
+     "(with a protocol slug) fees/unlocks/treasury — plus the token's real logo"),
+    ("token_chart", 0.01, "DefiLlama daily price series (default 30d) + token logo — sparkline & volatility"),
+    ("protocol", 0.01, "Full DefiLlama protocol record: per-chain TVL, category, audits, official logo"),
+    ("protocol_fees", 0.01, "Protocol real earned fees + revenue (24h/7d/30d) — legitimacy signal TVL misses"),
+    ("unlocks", 0.01, "Token unlock/emission schedule — the next upcoming dump-risk event"),
+    ("treasury", 0.01, "Protocol treasury composition + own-token share (fragility signal)"),
+    ("chain_protocols", 0.01, "Top protocols on a chain by TVL, each with its real logo"),
+    ("chain_overview", 0.01, "A chain's headline TVL + rank among all chains DefiLlama tracks"),
+    ("chain_fees", 0.01, "Fee-earning protocols on a chain, ranked, with logos — real economic activity"),
+    ("dex_volumes", 0.01, "DEX trading volume on a chain by venue, with logos"),
+    ("derivatives", 0.01, "Perps/derivatives volume by venue, with logos"),
+    ("yields", 0.01, "Yield pools by chain/project/symbol, TVL-ranked — trap detection"),
+    ("stablecoins", 0.01, "Stablecoins by supply with live peg price + computed depeg amount"),
+    ("bridges", 0.01, "Bridges ranked by daily volume — capital-flow data for bridge-exploit threat work"),
+]
+DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
+
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
-        "exploit_check", "dossier_check", "market_intel"}
+        "exploit_check", "dossier_check", "market_intel"} | DL_NAMES
 # Zero-LLM deliverables specifically. dossier_check stays in AUTO above
 # (the monitor still auto-prices/submits it with no triage wake — see
 # scripts/acp-monitor/HANDLER_BRIEF.md), but its own deliverable now
@@ -59,6 +82,7 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
 # above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
 X402 = AUTO | {"bounty_deep_dive"}
+# (AUTO already includes DL_NAMES, so the DefiLlama tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
 # (.github/workflows/x402-directory.yml run 28754656195, job 85259559335) —
@@ -99,6 +123,7 @@ OFFERINGS = [
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
     ("bounty_deep_dive", 50.00, "24h-SLA premium audit: full recon + Slither + frontier-model "
      "line-by-line source review, real report"),
+    *DL_OFFERINGS,
 ]
 
 
@@ -266,6 +291,7 @@ def main():
             "auto_fulfilled_zero_llm": sorted(ZERO_LLM),
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
+                 "data": n in DL_NAMES,
                  "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant",
                  **({"directory_url": f"https://402index.io/service/{_402INDEX_SERVICE_IDS[n]}"}
                     if n in _402INDEX_SERVICE_IDS else {})}
