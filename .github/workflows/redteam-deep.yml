@@ -40,6 +40,9 @@ jobs:
         run: skillforge/tools/ai-redteam/deepteam.sh skillforge/tools/ai-redteam/campaign_vape.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         continue-on-error: true
       - name: garak scan (real production model, native groq generator)
         run: python skillforge/tools/ai-redteam/run_garak_scan.py
