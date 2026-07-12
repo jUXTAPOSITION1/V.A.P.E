@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-11T19:05:43Z",
-  "source_report": "intel/reports/security-2026-07-11-19.md",
+  "generated_at": "2026-07-12T02:53:21Z",
+  "source_report": "intel/reports/security-2026-07-12-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -91,14 +91,7 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Burn-from-LP Exploit",
-      "lesson": {
-        "pattern": "tokenomics_drain",
-        "label": "Malicious tokenomics / reserve- or LP-draining mechanics",
-        "prevention": "Treat burn/rebase/deflationary hooks on LP or reserve balances as a hard red flag; simulate supply mechanics before trusting a pool.",
-        "covered_by": null,
-        "out_of_scope": false
-      }
+      "technique": "Burn-from-LP Exploit"
     },
     {
       "date": "2026-06-25",
@@ -544,24 +537,6 @@
         "Monad"
       ],
       "technique": "Private Key Compromised"
-    },
-    {
-      "date": "2026-05-17",
-      "name": "SEA Token",
-      "amount_usd_m": 0.153,
-      "chains": [
-        "Arbitrum"
-      ],
-      "technique": "Flashloan Price Manipulation"
-    },
-    {
-      "date": "2026-05-17",
-      "name": "Verus-Ethereum Bridge",
-      "amount_usd_m": 11.5,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "Bridge Verification Bypass"
     }
   ]
 }
