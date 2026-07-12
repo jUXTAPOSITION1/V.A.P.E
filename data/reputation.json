@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-12T15:18:12Z",
+  "generated": "2026-07-12T17:27:22Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,12 +12,12 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 312,
-    "intel_reports": 108,
+    "reports_published": 313,
+    "intel_reports": 109,
     "intel_broadcasts": 57,
     "catalog_investigations": 54,
     "token_scans_logged": 0,
-    "skills_codified": 11,
+    "skills_codified": 12,
     "tools_total": 15,
     "tools_verified": 14,
     "tool_tiers": {
@@ -49,13 +49,27 @@
     "latest_report": "20260712"
   },
   "capabilities": {
-    "offerings_live": 15,
+    "offerings_live": 29,
     "auto_fulfilled_zero_llm": [
+      "bridges",
+      "chain_fees",
+      "chain_overview",
+      "chain_protocols",
+      "derivatives",
+      "dex_volumes",
       "exploit_check",
       "liquidity_check",
       "market_intel",
+      "protocol",
+      "protocol_fees",
       "rug_pull_alert",
-      "token_safety_check"
+      "stablecoins",
+      "token_chart",
+      "token_intel",
+      "token_safety_check",
+      "treasury",
+      "unlocks",
+      "yields"
     ],
     "offerings": [
       {
@@ -64,6 +78,7 @@
         "summary": "Exploit & scam-database check for any Base wallet/contract",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/b5e3344f-d3a7-4125-ba91-71855e32e3cc"
       },
@@ -73,6 +88,7 @@
         "summary": "Earn USDC commission referring clients to VAPE",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -81,6 +97,7 @@
         "summary": "Honeypot detector + 0-100 safety score (GoPlus+DexScreener)",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/bc2d3fd2-cfb1-4bf9-93d0-b4ddb87a5ac6"
       },
@@ -90,6 +107,7 @@
         "summary": "DEX liquidity depth, LP burn, slippage + SAFE/THIN/DANGEROUS",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/10208324-4a29-4d43-8d1a-ca59c9b78fc2"
       },
@@ -99,6 +117,7 @@
         "summary": "Address profiling: holdings, patterns, risk flags",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -107,6 +126,7 @@
         "summary": "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/68074b35-edd0-40f6-ad69-e2a91f4c36f8"
       },
@@ -116,6 +136,7 @@
         "summary": "Plain-language tx decode + risk flags for any Base tx hash",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -124,6 +145,7 @@
         "summary": "Real-time price/TVL/liquidity + actionable signal",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/8ae726ba-7daf-4946-8bf3-d0209fdae463"
       },
@@ -133,6 +155,7 @@
         "summary": "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template detection, recent-hack correlation, public web-reputation search, a live check of declared socials, and a frontier-LLM quick source read",
         "auto": true,
         "x402": true,
+        "data": false,
         "sla": "instant",
         "directory_url": "https://402index.io/service/814ea6af-de02-420e-b929-f67d2a106051"
       },
@@ -142,6 +165,7 @@
         "summary": "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -150,6 +174,7 @@
         "summary": "6-hourly consolidated security+market intel broadcast",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -158,6 +183,7 @@
         "summary": "Scan 5-25 tokens in one job, 40% off",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -166,6 +192,7 @@
         "summary": "slither+aderyn+mythril severity-rated audit + 0-100 score",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -174,6 +201,7 @@
         "summary": "Full wallet trace + chain-of-custody graph",
         "auto": false,
         "x402": false,
+        "data": false,
         "sla": "instant"
       },
       {
@@ -182,7 +210,134 @@
         "summary": "24h-SLA premium audit: full recon + Slither + frontier-model line-by-line source review, real report",
         "auto": false,
         "x402": true,
+        "data": false,
         "sla": "24h (async, frontier-model)"
+      },
+      {
+        "name": "token_intel",
+        "price_usd": 0.01,
+        "summary": "DefiLlama price + 0-1 confidence, oracle-derived token age, and (with a protocol slug) fees/unlocks/treasury \u2014 plus the token's real logo",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "token_chart",
+        "price_usd": 0.01,
+        "summary": "DefiLlama daily price series (default 30d) + token logo \u2014 sparkline & volatility",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "protocol",
+        "price_usd": 0.01,
+        "summary": "Full DefiLlama protocol record: per-chain TVL, category, audits, official logo",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "protocol_fees",
+        "price_usd": 0.01,
+        "summary": "Protocol real earned fees + revenue (24h/7d/30d) \u2014 legitimacy signal TVL misses",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "unlocks",
+        "price_usd": 0.01,
+        "summary": "Token unlock/emission schedule \u2014 the next upcoming dump-risk event",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "treasury",
+        "price_usd": 0.01,
+        "summary": "Protocol treasury composition + own-token share (fragility signal)",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "chain_protocols",
+        "price_usd": 0.01,
+        "summary": "Top protocols on a chain by TVL, each with its real logo",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "chain_overview",
+        "price_usd": 0.01,
+        "summary": "A chain's headline TVL + rank among all chains DefiLlama tracks",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "chain_fees",
+        "price_usd": 0.01,
+        "summary": "Fee-earning protocols on a chain, ranked, with logos \u2014 real economic activity",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "dex_volumes",
+        "price_usd": 0.01,
+        "summary": "DEX trading volume on a chain by venue, with logos",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "derivatives",
+        "price_usd": 0.01,
+        "summary": "Perps/derivatives volume by venue, with logos",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "yields",
+        "price_usd": 0.01,
+        "summary": "Yield pools by chain/project/symbol, TVL-ranked \u2014 trap detection",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "stablecoins",
+        "price_usd": 0.01,
+        "summary": "Stablecoins by supply with live peg price + computed depeg amount",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "bridges",
+        "price_usd": 0.01,
+        "summary": "Bridges ranked by daily volume \u2014 capital-flow data for bridge-exploit threat work",
+        "auto": true,
+        "x402": true,
+        "data": true,
+        "sla": "instant"
       }
     ]
   },
