@@ -283,6 +283,139 @@ def _community_broadcast(req):
     return {"file": os.path.basename(files[0]), "content": content}
 
 
+# ── DefiLlama data micro-services (see agents/defillama.py) ──────────────────
+# The 14 keyless DefiLlama tools, priced at 0.01 USDC each — the same tools the
+# x402 worker serves at /data/* (worker/src/dataHandlers.ts), fulfilled here
+# field-for-field so the ACP and x402 deliverables never disagree. All
+# zero-LLM, real-data, auto-fulfillable. Token-level tools carry the token's
+# real DexScreener logo; protocol/chain tools carry DefiLlama's own hosted
+# logos — matching the worker's "token logos, rich data" contract.
+def _dl():
+    try:
+        from agents import defillama as _m
+    except Exception:
+        import defillama as _m
+    return _m
+
+
+def _dl_slug(req):
+    if isinstance(req, dict):
+        for k in ("slug", "protocol", "project"):
+            if req.get(k):
+                return str(req[k]).strip()
+    return None
+
+
+def _dl_chain(req, default="base"):
+    if isinstance(req, dict) and req.get("chain"):
+        return str(req["chain"]).strip()
+    return default
+
+
+def _dl_token_logo(address):
+    """Best-effort real token logo from DexScreener (info.imageUrl), or None —
+    can only ADD a logo, never break a result."""
+    try:
+        try:
+            from agents.data_fetchers import _get
+        except Exception:
+            from data_fetchers import _get
+        d = _get(f"https://api.dexscreener.com/latest/dex/tokens/{address}",
+                 ttl=3600, cache_key=f"ds_logo_{address.lower()}")
+        if isinstance(d, dict) and not d.get("error"):
+            for p in (d.get("pairs") or []):
+                img = (p.get("info") or {}).get("imageUrl")
+                if img:
+                    return img
+    except Exception:
+        pass
+    return None
+
+
+def _dl_need_slug(req):
+    s = _dl_slug(req)
+    return s or None
+
+
+def _dl_token_intel(req):
+    a = _addr(req)
+    if not a:
+        return {"error": "no address in requirement"}
+    intel = _dl().token_intel(_dl_chain(req, "base"), a, _dl_slug(req))
+    if isinstance(intel, dict):
+        intel["logo"] = _dl_token_logo(a)
+    return intel
+
+
+def _dl_token_chart(req):
+    a = _addr(req)
+    if not a:
+        return {"error": "no address in requirement"}
+    span = 30
+    if isinstance(req, dict) and req.get("span"):
+        try:
+            span = int(req["span"])
+        except Exception:
+            pass
+    chart = _dl().token_price_chart(_dl_chain(req, "base"), a, span)
+    if isinstance(chart, dict) and not chart.get("error"):
+        chart["logo"] = _dl_token_logo(a)
+    return chart
+
+
+def _dl_protocol(req):
+    s = _dl_need_slug(req)
+    return _dl().protocol(s) if s else {"error": "no protocol slug in requirement"}
+
+
+def _dl_protocol_fees(req):
+    s = _dl_need_slug(req)
+    return _dl().protocol_fees(s) if s else {"error": "no protocol slug in requirement"}
+
+
+def _dl_unlocks(req):
+    s = _dl_need_slug(req)
+    return _dl().unlocks(s) if s else {"error": "no protocol slug in requirement"}
+
+
+def _dl_treasury(req):
+    s = _dl_need_slug(req)
+    return _dl().treasury(s) if s else {"error": "no protocol slug in requirement"}
+
+
+def _dl_chain_protocols(req):
+    return _dl().protocols_on_chain(_dl_chain(req, "Base"))
+
+
+def _dl_chain_overview(req):
+    return _dl().chain_overview(_dl_chain(req, "Base"))
+
+
+def _dl_chain_fees(req):
+    return _dl().chain_fees(_dl_chain(req, "base"))
+
+
+def _dl_dex_volumes(req):
+    return _dl().dex_volumes(_dl_chain(req, "base"))
+
+
+def _dl_derivatives(req):
+    return _dl().derivatives_volumes()
+
+
+def _dl_yields(req):
+    r = req if isinstance(req, dict) else {}
+    return _dl().yield_pools(chain=r.get("chain"), project=r.get("project"), symbol=r.get("symbol"))
+
+
+def _dl_stablecoins(req):
+    return _dl().stablecoins()
+
+
+def _dl_bridges(req):
+    return _dl().bridges()
+
+
 HANDLERS = {
     "token_safety_check": _token_safety,
     "liquidity_check": _liquidity,
@@ -291,6 +424,21 @@ HANDLERS = {
     "market_intel": _market_intel,
     "dossier_check": _dossier_check,
     "community_intel_broadcast": _community_broadcast,
+    # DefiLlama data micro-services — 0.01 USDC each, real keyless data.
+    "dl_token_intel": _dl_token_intel,
+    "dl_token_chart": _dl_token_chart,
+    "dl_protocol": _dl_protocol,
+    "dl_protocol_fees": _dl_protocol_fees,
+    "dl_unlocks": _dl_unlocks,
+    "dl_treasury": _dl_treasury,
+    "dl_chain_protocols": _dl_chain_protocols,
+    "dl_chain_overview": _dl_chain_overview,
+    "dl_chain_fees": _dl_chain_fees,
+    "dl_dex_volumes": _dl_dex_volumes,
+    "dl_derivatives": _dl_derivatives,
+    "dl_yields": _dl_yields,
+    "dl_stablecoins": _dl_stablecoins,
+    "dl_bridges": _dl_bridges,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

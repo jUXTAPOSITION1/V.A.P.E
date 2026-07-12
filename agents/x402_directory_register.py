@@ -100,6 +100,35 @@ OFFERINGS = {
                          "frontier-LLM quick source read."),
 }
 
+# DefiLlama data micro-services — mirrors worker/src/dataHandlers.ts's
+# DL_OFFERINGS exactly. These are served at /data/<name> (not /scan/<name>),
+# so they're kept in their own dict and routed accordingly below. All 0.01 USDC.
+DATA_OFFERINGS = {
+    "dl_token_intel": ("0.01", "DefiLlama price + confidence, oracle-derived token age, optional "
+                       "fees/unlocks/treasury, and the token's real logo."),
+    "dl_token_chart": ("0.01", "DefiLlama daily price series (default 30d) + token logo."),
+    "dl_protocol": ("0.01", "Full DefiLlama protocol record: per-chain TVL, category, audits, logo."),
+    "dl_protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d)."),
+    "dl_unlocks": ("0.01", "Token unlock/emission schedule — next upcoming dump-risk event."),
+    "dl_treasury": ("0.01", "Protocol treasury composition + own-token fragility share."),
+    "dl_chain_protocols": ("0.01", "Top protocols on a chain by TVL, each with its logo."),
+    "dl_chain_overview": ("0.01", "A chain's headline TVL + rank among all chains."),
+    "dl_chain_fees": ("0.01", "Fee-earning protocols on a chain, ranked, with logos."),
+    "dl_dex_volumes": ("0.01", "DEX trading volume on a chain by venue, with logos."),
+    "dl_derivatives": ("0.01", "Perps/derivatives volume by venue, with logos."),
+    "dl_yields": ("0.01", "Yield pools by chain/project/symbol, TVL-ranked — trap detection."),
+    "dl_stablecoins": ("0.01", "Stablecoins by supply with live peg + computed depeg."),
+    "dl_bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
+}
+
+# (name, (price, desc), route_prefix) across both tiers — one place that knows
+# which offering lives at which route.
+def _all_offerings():
+    for name, meta in OFFERINGS.items():
+        yield name, meta, "scan"
+    for name, meta in DATA_OFFERINGS.items():
+        yield name, meta, "data"
+
 
 def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
     """POST with retry-on-429. GitHub-hosted runners share IP pools across
@@ -141,11 +170,11 @@ def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
 
 def register_402index():
     results = []
-    for i, name in enumerate(OFFERINGS):
+    for i, (name, _meta, prefix) in enumerate(_all_offerings()):
         if i > 0:
             time.sleep(2)  # pace requests — be a good citizen on someone else's free API
         payload = {
-            "url": f"{WORKER_BASE}/scan/{name}",
+            "url": f"{WORKER_BASE}/{prefix}/{name}",
             "name": f"VAPE {name}",
             "protocol": "x402",
             "provider": PROVIDER,
@@ -166,8 +195,8 @@ def build_x402_list_manifest():
         "pay_to": PAY_TO,
         "docs": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
         "offerings": [
-            {"name": name, "route": f"/scan/{name}", "price_usd": price, "description": desc}
-            for name, (price, desc) in OFFERINGS.items()
+            {"name": name, "route": f"/{prefix}/{name}", "price_usd": price, "description": desc}
+            for name, (price, desc), prefix in _all_offerings()
         ],
     }
 
@@ -178,10 +207,11 @@ def build_awesome_x402_entry():
     has no write access to it, so a human has to actually open that PR."""
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
-        f"(ERC-8004 #54988). 6 instant x402 offerings ($0.01-$0.15: exploit/token-safety/"
-        f"liquidity/rug-pull/preflight/market-intel checks) + a $50 24h-SLA deep-dive audit "
-        f"(recon + Slither + frontier-model review). Docs: "
-        f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
+        f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
+        f"liquidity/rug-pull/dossier/market-intel checks) + 14 DefiLlama data micro-services "
+        f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
+        f"depeg, bridge volumes) + a $50 24h-SLA deep-dive audit (recon + Slither + frontier-model "
+        f"review). Docs: https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
     )
 
 
