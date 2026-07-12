@@ -1,12 +1,12 @@
 /**
- * DefiLlama market-data tool tier — one x402 endpoint per tool, priced at
+ * VAPE's market-data tool tier — one x402 endpoint per tool, priced at
  * $0.01. Backed by lib/defillama.ts.
  *
- * Token logos + rich data: every protocol/chain/fee/dex tool carries
- * DefiLlama's real hosted `logo` URLs; token-level tools (intel, chart) are
- * enriched here with the token's real DexScreener image, so a buyer always
- * gets an icon alongside the numbers. Nothing is fabricated — a missing logo
- * is simply absent.
+ * Token logos + rich data: every protocol/chain/fee/dex tool carries a real
+ * hosted `logo` URL; token-level tools (intel, chart) are enriched here with
+ * the token's real DexScreener image, so a buyer always gets an icon
+ * alongside the numbers. Nothing is fabricated — a missing logo is simply
+ * absent.
  *
  * Each offering is defined once in DL_OFFERINGS; index.ts derives the x402
  * routes, the Bazaar discovery metadata, and the root listing from that single
@@ -52,7 +52,7 @@ function requireAddress(q: DlQuery): string {
 
 function requireSlug(q: DlQuery): string {
   const s = (q.slug || "").trim();
-  if (!s) throw new Error("'slug' required (DefiLlama protocol slug, e.g. 'aave')");
+  if (!s) throw new Error("'slug' required (protocol slug, e.g. 'aave')");
   return s;
 }
 
@@ -67,24 +67,24 @@ export interface DlOffering {
   run: (q: DlQuery) => Promise<Record<string, unknown>>;
 }
 
-// Chain-slug conventions differ by DefiLlama host: the coins/price oracle and
-// the fees/dexs overviews use lowercase slugs ("base"), while the TVL
+// Chain-slug conventions differ by host: the coins/price oracle and the
+// fees/dexs overviews use lowercase slugs ("base"), while the TVL
 // protocols/chains endpoints use display names ("Base"). Each offering below
 // documents and defaults the right one.
 export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "token_intel",
     price: "$0.01",
-    description: "DefiLlama's full independent read on one token: current price + its own "
-      + "0-1 confidence score, first-ever-recorded price (an oracle-derived age signal harder "
-      + "to spoof than a DEX pair timestamp), the token's real logo, and — when a protocol slug "
-      + "is given — fees/revenue, the next unlock event, and treasury own-token share.",
-    tags: ["defillama", "price-oracle", "token", "base"],
+    description: "A full independent read on one token: current price + a 0-1 confidence "
+      + "score, first-ever-recorded price (an oracle-derived age signal harder to spoof than "
+      + "a DEX pair timestamp), the token's real logo, and — when a protocol slug is given — "
+      + "fees/revenue, the next unlock event, and treasury own-token share.",
+    tags: ["price-oracle", "token", "base"],
     inputSchema: {
       properties: {
         address: { type: "string", description: "token contract address" },
-        chain: { type: "string", description: "DefiLlama chain slug, default 'base'" },
-        slug: { type: "string", description: "optional DefiLlama protocol slug to add fees/unlocks/treasury" },
+        chain: { type: "string", description: "chain slug, default 'base'" },
+        slug: { type: "string", description: "optional protocol slug to add fees/unlocks/treasury" },
       },
       required: ["address"],
     },
@@ -103,13 +103,13 @@ export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "token_chart",
     price: "$0.01",
-    description: "Daily price series for a token from DefiLlama's oracle (default 30d), plus the "
-      + "token's real logo — feeds sparklines and a rule-based volatility read.",
-    tags: ["defillama", "price-oracle", "chart", "base"],
+    description: "Daily price series for a token (default 30d), plus the token's real logo — "
+      + "feeds sparklines and a rule-based volatility read.",
+    tags: ["price-oracle", "chart", "base"],
     inputSchema: {
       properties: {
         address: { type: "string", description: "token contract address" },
-        chain: { type: "string", description: "DefiLlama chain slug, default 'base'" },
+        chain: { type: "string", description: "chain slug, default 'base'" },
         span: { type: "number", description: "days of history, default 30" },
       },
       required: ["address"],
@@ -125,10 +125,10 @@ export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "protocol",
     price: "$0.01",
-    description: "Full DefiLlama protocol record: per-chain TVL, category, audits, the official "
-      + "logo, Twitter, and description — the 'who is this protocol' snapshot.",
-    tags: ["defillama", "tvl", "protocol"],
-    inputSchema: { properties: { slug: { type: "string", description: "DefiLlama protocol slug, e.g. 'aerodrome'" } }, required: ["slug"] },
+    description: "Full protocol record: per-chain TVL, category, audits, the official logo, "
+      + "Twitter, and description — the 'who is this protocol' snapshot.",
+    tags: ["tvl", "protocol"],
+    inputSchema: { properties: { slug: { type: "string", description: "protocol slug, e.g. 'aerodrome'" } }, required: ["slug"] },
     inputExample: { slug: "aerodrome" },
     output: { slug: "aerodrome", name: "Aerodrome", logo: "https://...", tvl: { Base: 900000000 }, audits: "2" },
     run: async (q) => dl.protocol(requireSlug(q)),
@@ -138,8 +138,8 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "A protocol's real earned fees + revenue (24h/7d/30d) with its logo — 'does this "
       + "actually make money, or is it just parked TVL?', a legitimacy signal raw TVL misses.",
-    tags: ["defillama", "fees", "revenue", "protocol"],
-    inputSchema: { properties: { slug: { type: "string", description: "DefiLlama protocol slug" } }, required: ["slug"] },
+    tags: ["fees", "revenue", "protocol"],
+    inputSchema: { properties: { slug: { type: "string", description: "protocol slug" } }, required: ["slug"] },
     inputExample: { slug: "aave" },
     output: { slug: "aave", name: "AAVE", logo: "https://...", fees_24h: 500000, revenue_24h: 90000 },
     run: async (q) => dl.protocolFees(requireSlug(q)),
@@ -149,8 +149,8 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Token unlock / emission schedule for a protocol — surfaces the next upcoming "
       + "unlock event (a concrete dump-risk an investigator must flag) and how many days out it is.",
-    tags: ["defillama", "unlocks", "emissions", "risk"],
-    inputSchema: { properties: { slug: { type: "string", description: "DefiLlama protocol slug" } }, required: ["slug"] },
+    tags: ["unlocks", "emissions", "risk"],
+    inputSchema: { properties: { slug: { type: "string", description: "protocol slug" } }, required: ["slug"] },
     inputExample: { slug: "aptos" },
     output: { slug: "aptos", next_unlock: { in_days: 9.5, description: "cliff", amount: 1000000 }, tracked_events: 42 },
     run: async (q) => dl.unlocks(requireSlug(q)),
@@ -160,8 +160,8 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "A protocol's on-chain treasury composition — total USD, own-token USD, and the "
       + "own-token share (a treasury that's ~all its own token is a fragility signal).",
-    tags: ["defillama", "treasury", "risk"],
-    inputSchema: { properties: { slug: { type: "string", description: "DefiLlama protocol slug" } }, required: ["slug"] },
+    tags: ["treasury", "risk"],
+    inputSchema: { properties: { slug: { type: "string", description: "protocol slug" } }, required: ["slug"] },
     inputExample: { slug: "uniswap" },
     output: { slug: "uniswap", treasury_usd: 4000000000, own_token_usd: 3800000000, own_token_share: 0.95 },
     run: async (q) => dl.treasury(requireSlug(q)),
@@ -171,10 +171,10 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Top protocols on a chain by TVL (default Base), each with its real logo, category, "
       + "and 24h/7d change — the chain-ecosystem view.",
-    tags: ["defillama", "tvl", "chain", "base"],
+    tags: ["tvl", "chain", "base"],
     inputSchema: {
       properties: {
-        chain: { type: "string", description: "DefiLlama chain display name, default 'Base'" },
+        chain: { type: "string", description: "chain display name, default 'Base'" },
         limit: { type: "number", description: "how many protocols, default 20" },
       },
       required: [],
@@ -186,8 +186,8 @@ export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "chain_overview",
     price: "$0.01",
-    description: "A chain's headline TVL and its rank among all chains DefiLlama tracks (default Base).",
-    tags: ["defillama", "tvl", "chain", "base"],
+    description: "A chain's headline TVL and its rank among all tracked chains (default Base).",
+    tags: ["tvl", "chain", "base"],
     inputSchema: { properties: { chain: { type: "string", description: "chain display name, default 'Base'" } }, required: [] },
     inputExample: { chain: "Base" },
     output: { chain: "Base", tvl_usd: 4100000000, rank: 7, total_chains: 300 },
@@ -198,8 +198,8 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Fee-earning protocols on a chain, ranked, each with its logo (default Base) — the "
       + "chain's real economic activity, not just parked capital.",
-    tags: ["defillama", "fees", "chain", "base"],
-    inputSchema: { properties: { chain: { type: "string", description: "DefiLlama chain slug, default 'base'" } }, required: [] },
+    tags: ["fees", "chain", "base"],
+    inputSchema: { properties: { chain: { type: "string", description: "chain slug, default 'base'" } }, required: [] },
     inputExample: { chain: "base" },
     output: { chain: "base", total_fees_24h: 300000, protocols: [{ name: "Aerodrome", logo: "https://...", fees_24h: 120000 }] },
     run: async (q) => dl.chainFees(q.chain || "base"),
@@ -209,8 +209,8 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "DEX trading volume on a chain by venue, each with its logo (default Base) — real "
       + "trading activity across the chain's exchanges.",
-    tags: ["defillama", "dex", "volume", "base"],
-    inputSchema: { properties: { chain: { type: "string", description: "DefiLlama chain slug, default 'base'" } }, required: [] },
+    tags: ["dex", "volume", "base"],
+    inputSchema: { properties: { chain: { type: "string", description: "chain slug, default 'base'" } }, required: [] },
     inputExample: { chain: "base" },
     output: { chain: "base", total_vol_24h: 200000000, dexs: [{ name: "Aerodrome", logo: "https://...", vol_24h: 150000000 }] },
     run: async (q) => dl.dexVolumes(q.chain || "base"),
@@ -220,7 +220,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Perps / derivatives trading volume by venue, each with its logo — the derivatives "
       + "market's real activity across all tracked exchanges.",
-    tags: ["defillama", "derivatives", "perps", "volume"],
+    tags: ["derivatives", "perps", "volume"],
     inputSchema: { properties: {}, required: [] },
     inputExample: {},
     output: { total_vol_24h: 5000000000, venues: [{ name: "Hyperliquid", logo: "https://...", vol_24h: 3000000000 }] },
@@ -231,7 +231,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Yield pools filtered by chain/project/symbol, ranked by TVL, with apy/apyBase/"
       + "ilRisk/exposure — enough to tell a real yield venue from a trap (huge APY + tiny TVL = red flag).",
-    tags: ["defillama", "yields", "apy"],
+    tags: ["yields", "apy"],
     inputSchema: {
       properties: {
         chain: { type: "string", description: "chain filter, e.g. 'Base'" },
@@ -249,7 +249,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Stablecoins by circulating supply with live peg price and a computed depeg amount "
       + "— a de-pegging stablecoin is a live systemic threat signal.",
-    tags: ["defillama", "stablecoins", "depeg", "risk"],
+    tags: ["stablecoins", "depeg", "risk"],
     inputSchema: { properties: {}, required: [] },
     inputExample: {},
     output: { count: 25, stablecoins: [{ symbol: "USDC", circulating_usd: 3e10, price: 1.0, depeg: 0.0 }] },
@@ -260,7 +260,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     price: "$0.01",
     description: "Tracked bridges ranked by recent daily volume — bridge exploits are a top attack "
       + "class, and this is the capital-flow data that category needs a source for.",
-    tags: ["defillama", "bridges", "volume", "threat"],
+    tags: ["bridges", "volume", "threat"],
     inputSchema: { properties: {}, required: [] },
     inputExample: {},
     output: { count: 25, bridges: [{ name: "Across", last_daily_volume: 5000000, chains: ["Base"] }] },
@@ -271,9 +271,9 @@ export const DL_OFFERINGS: DlOffering[] = [
 export const DL_OFFERINGS_BY_NAME: Record<string, DlOffering> =
   Object.fromEntries(DL_OFFERINGS.map((o) => [o.name, o]));
 
-// Uniform envelope matching handlers.ts::fulfill() so a DefiLlama result and a
-// security-scan result look the same to a client. Never throws — a bad param
-// or an upstream miss comes back as status:"error" with a real message.
+// Uniform envelope matching handlers.ts::fulfill() so a market-data result and
+// a security-scan result look identical to a client. Never throws — a bad
+// param or an upstream miss comes back as status:"error" with a real message.
 export async function fulfillData(name: string, q: DlQuery) {
   const off = DL_OFFERINGS_BY_NAME[name];
   if (!off) return { offering: name, status: "error", error: "unknown offering" };
@@ -281,7 +281,7 @@ export async function fulfillData(name: string, q: DlQuery) {
     const deliverable = await off.run(q);
     return {
       offering: name, status: "ok", deliverable,
-      source: "defillama", disclaimer: "Real DefiLlama data. Not investment advice.",
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
     };
   } catch (e: any) {
     return { offering: name, status: "error", error: String(e?.message || e) };

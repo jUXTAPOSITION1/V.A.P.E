@@ -141,15 +141,6 @@ const App = {
             const allOfferings = Array.isArray(c.offerings) ? c.offerings : [];
             const x402able = allOfferings.filter(o=>o.x402 ?? o.auto);
             const manual = allOfferings.filter(o=>!o.auto);
-            // Split the x402 tier so the market-data tools (served at /data/*)
-            // read as their own group under the security scans.
-            const isData = o => o.data === true;
-            const security = x402able.filter(o=>!isData(o));
-            const dataTier = x402able.filter(isData);
-            const divider = (label, count) => `<div class="sm:col-span-2 flex items-center gap-2 mt-2 mb-0.5">
-                <span class="text-[10px] uppercase tracking-wider text-zinc-500">${label}</span>
-                <span class="text-[10px] text-zinc-600">· ${count} tools</span>
-                <span class="flex-1 h-px bg-white/10"></span></div>`;
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
                 const card = o=>`
@@ -164,8 +155,7 @@ const App = {
                     </button>
                     ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-cyan-400 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
                     </div>`;
-                grid.innerHTML = security.map(card).join('')
-                    + (dataTier.length ? divider('DefiLlama data', dataTier.length) + dataTier.map(card).join('') : '');
+                grid.innerHTML = x402able.map(card).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {

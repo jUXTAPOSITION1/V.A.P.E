@@ -12,7 +12,7 @@ function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-// DefiLlama data micro-services (worker /data/<name>, agents/dataHandlers.ts).
+// VAPE's market-data tools (worker /data/<name>, worker/src/dataHandlers.ts).
 // Different route prefix, varied inputs, and a rich-data (not verdict) result.
 // Each spec's `inputs` drives the modal fields; empty = a zero-input call.
 const DATA_OFFERINGS = {
@@ -22,10 +22,10 @@ const DATA_OFFERINGS = {
     token_chart:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
                                     { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
                                     { k: 'span', label: 'Days of history', ph: '30', def: '30' }] },
-    protocol:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aerodrome' }] },
-    protocol_fees:   { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aave' }] },
-    unlocks:         { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'aptos' }] },
-    treasury:        { inputs: [{ k: 'slug', label: 'DefiLlama protocol slug', ph: 'uniswap' }] },
+    protocol:        { inputs: [{ k: 'slug', label: 'Protocol slug', ph: 'aerodrome' }] },
+    protocol_fees:   { inputs: [{ k: 'slug', label: 'Protocol slug', ph: 'aave' }] },
+    unlocks:         { inputs: [{ k: 'slug', label: 'Protocol slug', ph: 'aptos' }] },
+    treasury:        { inputs: [{ k: 'slug', label: 'Protocol slug', ph: 'uniswap' }] },
     chain_protocols: { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
     chain_overview:  { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
     chain_fees:      { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
@@ -46,7 +46,8 @@ const Hire = {
     },
 
     openX402(offeringName, priceUsd) {
-        // DefiLlama data tier has its own route/inputs/result path.
+        // Market-data tools take varied inputs and return rich data (not a
+        // verdict), so they get their own modal/result path.
         if (DATA_OFFERINGS[offeringName]) return this.openData(offeringName, priceUsd);
         this._closeModal();
         const needsAddress = offeringName !== 'market_intel';
@@ -213,10 +214,11 @@ const Hire = {
         } catch (e) { /* PDF/download not available in this browser — inline report above still stands */ }
     },
 
-    // ── DefiLlama data micro-services ($0.01 each) ───────────────────────────
+    // ── VAPE market-data tools ($0.01 each) ───────────────────────────────────
     openData(offeringName, priceUsd) {
         this._closeModal();
         const spec = DATA_OFFERINGS[offeringName];
+        const title = offeringName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         const fields = spec.inputs.map(f => `
             <label class="text-xs text-zinc-500 block mb-1">${escapeHtml(f.label)}</label>
             <input data-key="${escapeHtml(f.k)}" type="text" placeholder="${escapeHtml(f.ph || '')}" value="${escapeHtml(f.def || '')}"
@@ -228,12 +230,12 @@ const Hire = {
             <div class="absolute inset-0 bg-black/70" data-close></div>
             <div class="relative glass rounded-2xl p-6 w-full max-w-md">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-display text-lg flex items-center gap-2"><i class="fa-solid fa-database text-cyan-400"></i> DefiLlama data</h3>
+                    <h3 class="font-display text-lg flex items-center gap-2"><i class="fa-solid fa-bolt text-cyan-400"></i> ${escapeHtml(title)}</h3>
                     <button data-close class="text-zinc-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div id="hire-body">
-                    <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g, ' '))} <span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
-                    <p class="text-xs text-zinc-500 mb-4">Real-time DefiLlama market data. Settles via x402: your wallet signs a gasless USDC authorization for the exact price above.</p>
+                    <div class="text-sm text-zinc-400 mb-1"><span class="text-cyan-400 font-mono">$${priceUsd}</span></div>
+                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above — no gas fee, no subscription, settles on Base mainnet.</p>
                     ${fields || '<div class="mb-1"></div>'}
                     <button id="hire-submit" class="w-full bg-cyan-600 hover:bg-cyan-500 transition px-4 py-2.5 rounded-xl font-display text-sm mt-1">Authorize &amp; Fetch</button>
                     <div id="hire-status" class="text-xs text-zinc-500 mt-3"></div>
@@ -329,14 +331,14 @@ const Hire = {
         } catch (e) { /* non-fatal — data is already shown above */ }
     },
 
-    // Rich, logo-aware renderer for a DefiLlama deliverable. Handles the common
-    // shapes (a logo + scalars, and any array of rows that may carry per-row
-    // logos) generically, so all 14 tools render without 14 bespoke layouts.
-    // Everything is escaped; logos use the same onerror-hide pattern the rest
-    // of the site uses for token/protocol icons.
+    // Rich, logo-aware renderer for a market-data deliverable. Handles the
+    // common shapes (a logo + scalars, and any array of rows that may carry
+    // per-row logos) generically, so every tool renders without a bespoke
+    // layout each. Everything is escaped; logos use the same onerror-hide
+    // pattern the rest of the site uses for token/protocol icons.
     _dataHtml(d) {
         if (!d || typeof d !== 'object') return `<div class="text-xs text-zinc-400">${escapeHtml(String(d))}</div>`;
-        if (d.error) return `<div class="text-xs text-amber-400">DefiLlama: ${escapeHtml(String(d.error))}</div>`;
+        if (d.error) return `<div class="text-xs text-amber-400">${escapeHtml(String(d.error))}</div>`;
         const img = (url) => url ? `<img src="${escapeHtml(url)}" class="w-5 h-5 rounded-full inline-block align-middle mr-1.5" onerror="this.style.display='none'">` : '';
         const fmt = (v) => {
             if (v == null) return '—';
