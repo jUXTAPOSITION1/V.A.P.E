@@ -121,3 +121,59 @@ def test_token_intel_degrades_per_field(monkeypatch):
     r = dl.token_intel("base", "0xabc")
     assert r["price"] is None            # errored field nulled, not crashed
     assert r["first_price"]["symbol"] == "T"
+
+
+# ── DefiLlama signals wired into investigate.py::score() ─────────────────────
+# Self-contained (no conftest dependency): this branch predates the shared
+# test fixtures, and score()'s new `defillama` param is optional/backward-
+# compatible so it composes cleanly once both land.
+import time as _time
+from agents.investigate import score as _score
+
+
+def _clean_gp(**o):
+    base = {"is_honeypot": "0", "cannot_sell_all": "0", "is_mintable": "0",
+            "can_take_back_ownership": "0", "owner_change_balance": "0",
+            "hidden_owner": "0", "is_proxy": "0", "transfer_pausable": "0",
+            "buy_tax": "0", "sell_tax": "0",
+            "owner_address": "0x0000000000000000000000000000000000000000",
+            "holder_count": "1200"}
+    base.update(o)
+    return base
+
+
+def _legit_dex(**o):
+    base = {"name": "Real", "symbol": "REAL", "liquidity_usd": 800000,
+            "change_24h_pct": None, "pair_created_ms": (_time.time() - 200 * 86400) * 1000}
+    base.update(o)
+    return base
+
+
+def test_score_backward_compatible_without_defillama():
+    # Old 6-arg call path must still work unchanged.
+    s, verdict, reasons, positives = _score({}, {}, {"is_contract": True}, {})
+    assert verdict in ("PROCEED", "CAUTION", "REJECT")
+
+
+def test_score_low_defillama_confidence_penalized():
+    dl = {"price": {"price": 0.001, "confidence": 0.2, "symbol": "X"}, "first_price": {}}
+    _s, _v, reasons, _p = _score(_clean_gp(), _legit_dex(), {"is_contract": True},
+                                 {"checked": True, "verified": True, "name": "Real"}, defillama=dl)
+    assert any("confidence low" in r for r in reasons)
+
+
+def test_score_defillama_longevity_is_positive_signal():
+    dl = {"price": {"price": 1.0, "confidence": 0.99, "symbol": "X"},
+          "first_price": {"age_days": 200, "first_seen_iso": "2025-01-01T00:00:00Z"}}
+    _s, _v, _r, positives = _score(_clean_gp(), _legit_dex(), {"is_contract": True},
+                                   {"checked": True, "verified": True, "name": "Real"}, defillama=dl)
+    assert any("longevity" in p for p in positives)
+
+
+def test_score_defillama_none_is_noop():
+    # Absence of DefiLlama data must not change the verdict vs the no-arg path.
+    args = (_clean_gp(), _legit_dex(), {"is_contract": True},
+            {"checked": True, "verified": True, "name": "Real"})
+    a = _score(*args)[0]
+    b = _score(*args, defillama=None)[0]
+    assert a == b
