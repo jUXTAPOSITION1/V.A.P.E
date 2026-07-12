@@ -19,6 +19,7 @@ import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
 import { fulfill, type HandlerName } from "./handlers";
+import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
@@ -243,6 +244,8 @@ app.get("/", (c) =>
     offerings: [
       ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
       { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "24h (async)" },
+      // DefiLlama data micro-services — keyless real data, $0.01 each.
+      ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
     docs: "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
   })
@@ -450,6 +453,25 @@ app.use("*", async (c, next) => {
     }),
   };
 
+  // DefiLlama data micro-services — one $0.01 paid route per tool, same x402
+  // gate and Bazaar discovery metadata as the security offerings above. Real
+  // hosted token/protocol logos and rich data, straight from DefiLlama's free
+  // API (see dataHandlers.ts).
+  for (const o of DL_OFFERINGS) {
+    routes[`GET /data/${o.name}`] = {
+      accepts: { scheme: "exact", price: o.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+      description: `VAPE ${o.name} — ${o.description}`,
+      serviceName: "VAPE",
+      iconUrl: ICON_URL,
+      tags: o.tags,
+      extensions: declareDiscoveryExtension({
+        input: o.inputExample,
+        inputSchema: o.inputSchema,
+        output: { example: o.output },
+      }),
+    };
+  }
+
   return paymentMiddleware(routes as any, resourceServer)(c, next);
 });
 
@@ -477,6 +499,42 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
       verdict: (d.verdict as string) ?? (d.rug_risk as string) ?? null,
       status: result.status === "error" ? "error" : "settled",
       amount_usd: Number(OFFERING_PRICES[name].replace("$", "")),
+      latency_ms: Date.now() - t0,
+      error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
+    });
+    return c.json(result);
+  });
+}
+
+// DefiLlama data micro-services — the paid handlers behind the /data/* routes
+// registered in the middleware above. Same job-draft/onAfterSettle logging as
+// /scan/* so these show up in the live x402 feed too. address is optional here
+// (many DefiLlama tools are chain- or protocol-scoped, not token-scoped).
+for (const o of DL_OFFERINGS) {
+  app.get(`/data/${o.name}`, async (c) => {
+    const q: DlQuery = {
+      address: c.req.query("address") || undefined,
+      chain: c.req.query("chain") || undefined,
+      slug: c.req.query("slug") || undefined,
+      project: c.req.query("project") || undefined,
+      symbol: c.req.query("symbol") || undefined,
+      span: c.req.query("span") ? Number(c.req.query("span")) : undefined,
+      limit: c.req.query("limit") ? Number(c.req.query("limit")) : undefined,
+    };
+    const t0 = Date.now();
+    const result = await fulfillData(o.name, q);
+    const d = (result as { deliverable?: Record<string, unknown> }).deliverable ?? {};
+    c.set("vapeJobDraft", {
+      id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+      ts: new Date().toISOString(),
+      offering: o.name,
+      address: q.address ?? null,
+      chain_id: 8453,
+      symbol: (d.symbol as string) ?? null,
+      name: (d.name as string) ?? null,
+      verdict: null,
+      status: result.status === "error" ? "error" : "settled",
+      amount_usd: Number(o.price.replace("$", "")),
       latency_ms: Date.now() - t0,
       error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
     });
