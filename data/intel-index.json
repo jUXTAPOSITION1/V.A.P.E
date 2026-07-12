@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-12T22:27:54Z",
+  "generated": "2026-07-12T23:03:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 319,
+    "reports": 320,
     "reports_by_type": {
-      "security": 31,
+      "security": 32,
       "bounty": 204,
       "base": 29,
       "sentiment": 18,
@@ -35,13 +35,13 @@
     "report": {
       "kind": "intel",
       "type": "security",
-      "file": "security-2026-07-12-2227.md",
+      "file": "security-2026-07-12-23.md",
       "title": "VAPE Security Sweep Report",
-      "date": "2026-07-12T22:00Z",
+      "date": "2026-07-12T23:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days do not exceed $50M, but they demonstrate a variety of attack techniques, including price oracle manipulation, malicious governance proposals, and donation attacks. The affected protocols span",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2227.md",
-      "bytes": 5673
+      "summary": "Three incidents occurred in the last 7 days across Hedera, Solana, and Ethereum, including a $10.05M price oracle manipulation on Bonzo Lend, a $21.3M malicious governance proposal on BonkDAO, and a $6.0M donation attack on Lazy Summer Protocol. Additional incidents in the prior period featured flashloan price oracle attacks, proofless de",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-23.md",
+      "bytes": 5526
     }
   },
   "investigations": [
@@ -607,6 +607,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-12-23.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-12T23:00Z",
+      "threat": null,
+      "summary": "Three incidents occurred in the last 7 days across Hedera, Solana, and Ethereum, including a $10.05M price oracle manipulation on Bonzo Lend, a $21.3M malicious governance proposal on BonkDAO, and a $6.0M donation attack on Lazy Summer Protocol. Additional incidents in the prior period featured flashloan price oracle attacks, proofless de",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-23.md",
+      "bytes": 5526
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1255,17 +1266,6 @@
       "summary": "Date: 2026-07-10 04:55 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-04.md",
       "bytes": 2795
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-10-03.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-10T03:00Z",
-      "threat": null,
-      "summary": "The current threat landscape indicates a medium threat level, with 2 incidents reported in the last 7 days. The incidents over the last 14 days have not exceeded $50M, but there have been multiple exploits and attacks on various protocols, including malicious governance proposals, donation attacks, and flash loan price oracle attacks. The",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-10-03.md",
-      "bytes": 5578
     }
   ],
   "broadcasts": [
@@ -1596,7 +1596,7 @@
       "tier": "recon",
       "status": "unsupported",
       "version": "n/a (Etherscan V2 account endpoints require paid plan on Base)",
-      "purpose": "Wallet/address forensics via Etherscan V2 (txlist/tokentx need PAID tier; key alone insufficient on free). Use base_rpc for keyless balance/nonce.",
+      "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": true,
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/tools/recon/wallet_trace.sh"
