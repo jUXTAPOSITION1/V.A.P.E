@@ -613,6 +613,11 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
         s = cap
 
     s = max(0, min(100, s))
+    # NOTE: these 80/50 bands are mirrored by agents/critic.py::_verdict_for_score()
+    # (its verdict/score-band consistency check needs its own copy to detect
+    # drift here) — if you change these thresholds, update that function too.
+    # tests/test_critic.py's zero-false-positive tests will fail loudly if
+    # the two ever fall out of sync.
     verdict = "PROCEED" if s >= 80 else ("CAUTION" if s >= 50 else "REJECT")
     return s, verdict, reasons, positive_signals
 

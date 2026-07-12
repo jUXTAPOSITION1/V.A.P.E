@@ -145,7 +145,13 @@ def sibling_tokens(token_address, g=None):
 
 def graph_stats(g=None):
     g = g if g is not None else build_graph()
-    deployers = [n for n, d in g.nodes.items() if d.get("role") == "deployer"]
+    # Derived from graph STRUCTURE (has outgoing DEPLOYED edges), not the
+    # mutable "role" attribute — a node can be both a token (its own ledger
+    # entry) and a deployer (of others). role="token" would silently
+    # overwrite an earlier role="deployer" via add_node()'s update(), which
+    # previously undercounted such a node here even though
+    # tokens_by_deployer()/sibling_tokens() (edge-based already) stayed correct.
+    deployers = [n for n in g.nodes if g.successors(n)]
     clusters = {d: len(g.successors(d)) for d in deployers}
     clusters = {k: v for k, v in clusters.items() if v > 1}
     biggest = max(clusters.items(), key=lambda kv: kv[1]) if clusters else None

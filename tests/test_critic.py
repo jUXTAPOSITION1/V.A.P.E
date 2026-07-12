@@ -89,6 +89,33 @@ def test_catches_renounced_signal_contradicting_owner_present():
     assert any("renounced-signal present" in i for i in result["issues"])
 
 
+def test_catches_unverified_reason_without_unverified_flag():
+    result = critic.verify({}, {"verified": True}, 60, "CAUTION",
+                            ["[-15] Contract source UNVERIFIED"], [])
+    assert not result["ok"]
+    assert any("unverified-reason present" in i for i in result["issues"])
+
+
+def test_catches_verified_signal_without_verified_flag():
+    result = critic.verify({}, {"verified": False}, 90, "PROCEED", [],
+                            ["Custom verified source (not a mass-produced factory template)"])
+    assert not result["ok"]
+    assert any("verified-signal present" in i for i in result["issues"])
+
+
+def test_catches_owner_not_renounced_reason_without_owner_present():
+    gp = {"owner_address": ""}
+    result = critic.verify(gp, {}, 45, "CAUTION", ["[-10] Owner not renounced (0x0)"], [])
+    assert not result["ok"]
+    assert any("owner-not-renounced reason present" in i for i in result["issues"])
+
+
+def test_catches_legitimacy_cap_violation_one_signal():
+    result = critic.verify({}, {}, 90, "PROCEED", [], ["one signal"])
+    assert not result["ok"]
+    assert any("exceeds the 70 cap" in i for i in result["issues"])
+
+
 def test_critic_never_raises_on_malformed_input():
     # gp/verif as None would break dict.get() calls elsewhere — the critic
     # must degrade to a reported issue, never propagate an exception.

@@ -115,6 +115,32 @@ def test_unknown_address_returns_empty_not_error():
     assert g.sibling_tokens("0xnotintheledger00000000000000000000000", graph) == []
 
 
+def test_deployer_with_its_own_ledger_entry_still_counts_as_deployer():
+    """Regression: an address can be BOTH a deployer (of others) AND itself
+    a separately-investigated token. graph_stats() must derive deployer
+    status from graph structure (has outgoing DEPLOYED edges), not the
+    mutable "role" attribute — the address's own token-entry add_node() call
+    would otherwise silently overwrite an earlier role="deployer" and
+    undercount it here (tokens_by_deployer()/sibling_tokens() were already
+    edge-based and unaffected by this)."""
+    dual_role = "0x4440000000000000000000000000000000004"
+    ledger = _ledger(
+        # dual_role deployed this other token...
+        {"address": "0x5550000000000000000000000000000000005", "creator_address": dual_role,
+         "symbol": "KID", "last_verdict": "PROCEED", "last_score": 80},
+        # ...and was ALSO itself investigated as a token in its own right.
+        {"address": dual_role, "symbol": "SELF", "last_verdict": "CAUTION", "last_score": 60},
+    )
+    graph = g.build_graph(ledger)
+    stats = g.graph_stats(graph)
+    assert dual_role in [d for d in graph.nodes if graph.successors(d)]
+    assert stats["deployers"] == 1
+    assert stats["multi_token_deployers"] == 0  # only 1 token deployed, not >1
+    assert stats["biggest_cluster"] is None
+    # Edge-based queries were correct even before this fix.
+    assert g.tokens_by_deployer(dual_role, graph)[0]["symbol"] == "KID"
+
+
 def test_export_graph_json_writes_real_file(tmp_path):
     ledger = _ledger({"address": "0x3330000000000000000000000000000000003",
                       "creator_address": "0xdeployerD00000000000000000000000000004",
