@@ -38,13 +38,21 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Install test + runtime deps
         run: |
           pip install pytest pyflakes
-          pip install -r agents/requirements.txt || true
+          # Runtime deps are best-effort: the deterministic tests are hermetic
+          # and import only stdlib + repo code, so a runtime-dep install failure
+          # must not false-green the gate — but it also shouldn't be silent.
+          # Warn loudly (visible in the run + step summary) and carry on.
+          if ! pip install -r agents/requirements.txt; then
+            echo "::warning::agents/requirements.txt install failed — continuing (deterministic tests don't need it, but investigate if imports break)"
+          fi
       - name: pyflakes (agents/ + scripts/)
         run: python -m pyflakes agents/ scripts/
       - name: pytest (deterministic core)

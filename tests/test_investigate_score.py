@@ -25,7 +25,7 @@ def _legit_inputs():
 
 def test_honeypot_is_rejected():
     gp = clean_gp(is_honeypot="1")
-    s, verdict, reasons, _ = score(gp, clean_dex(), {"is_contract": True}, {})
+    _s, verdict, reasons, _ = score(gp, clean_dex(), {"is_contract": True}, {})
     assert verdict == "REJECT"
     assert any("HONEYPOT" in r for r in reasons)
 
@@ -62,7 +62,7 @@ def test_brand_impersonation_penalized():
     gp = clean_gp(owner_address="0x0000000000000000000000000000000000000000", holder_count="1200")
     dex = clean_dex(name="OpenAI", symbol="OPENAI", liquidity_usd=800000,
                     pair_created_ms=days_ago_ms(200))
-    s_imp, v_imp, reasons, _ = score(gp, dex, {"is_contract": True}, {"checked": True, "verified": True, "name": "OpenAI"})
+    s_imp, _v_imp, reasons, _ = score(gp, dex, {"is_contract": True}, {"checked": True, "verified": True, "name": "OpenAI"})
     s_clean = score(*_legit_inputs())[0]
     assert s_imp < s_clean
     assert any("impersonat" in r.lower() for r in reasons)

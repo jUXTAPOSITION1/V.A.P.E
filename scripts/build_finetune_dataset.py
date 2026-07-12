@@ -100,7 +100,8 @@ def _field(text, label):
 def parse_investigation(path):
     """Extract a training pair from one investigation report, or None if the
     report is missing the fields that make it a valid, learnable example."""
-    text = open(path, encoding="utf-8", errors="ignore").read()
+    with open(path, encoding="utf-8", errors="ignore") as f:
+        text = f.read()
 
     target = _field(text, "Target")
     chain = _field(text, "Chain")
@@ -168,6 +169,9 @@ def _is_val(target):
 
 
 def collect():
+    """Parse every investigation report into a training example, deduplicating
+    by (target, verdict, score) so a heavily re-investigated address doesn't
+    dominate the corpus. Returns the list of unique examples."""
     seen, examples = set(), []
     for fp in sorted(glob.glob(INVEST_GLOB)):
         rec = parse_investigation(fp)
@@ -192,6 +196,8 @@ def _verdict_counts(examples):
 
 
 def build(write):
+    """Collect examples, split train/val deterministically, and (when write)
+    emit the JSONL files + dataset card. write=False prints stats only."""
     examples = collect()
     train = [e for e in examples if not _is_val(e["target"])]
     val = [e for e in examples if _is_val(e["target"])]

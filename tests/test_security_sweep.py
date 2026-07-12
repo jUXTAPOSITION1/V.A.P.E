@@ -16,28 +16,28 @@ def _incident(days_ago, amount_m, technique="Some Exploit", chains=("Ethereum",)
 
 def test_threat_high_on_big_recent_hack():
     incidents = [_incident(2, ss.BIG_HACK_USD_M + 10)]
-    threat, recent, big = ss.compute_threat_level(incidents)
+    threat, _recent, big = ss.compute_threat_level(incidents)
     assert threat == "HIGH"
     assert len(big) == 1
 
 
 def test_threat_high_on_three_recent_hacks():
     incidents = [_incident(1, 1), _incident(2, 1), _incident(3, 1)]
-    threat, recent, big = ss.compute_threat_level(incidents)
+    threat, recent, _big = ss.compute_threat_level(incidents)
     assert threat == "HIGH"
     assert len(recent) == 3
 
 
 def test_threat_medium_on_single_small_recent_hack():
     incidents = [_incident(2, 1)]
-    threat, _, big = ss.compute_threat_level(incidents)
+    threat, _recent, big = ss.compute_threat_level(incidents)
     assert threat == "MEDIUM"
     assert big == []
 
 
 def test_threat_low_when_nothing_recent():
     incidents = [_incident(60, 1), _incident(90, 5)]
-    threat, recent, _ = ss.compute_threat_level(incidents)
+    threat, recent, _big = ss.compute_threat_level(incidents)
     assert threat == "LOW"
     assert recent == []
 

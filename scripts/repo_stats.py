@@ -32,7 +32,7 @@ def _run(cmd):
 
 
 def _tracked_files():
-    return [l for l in _run(["git", "ls-files"]).splitlines() if l]
+    return [line for line in _run(["git", "ls-files"]).splitlines() if line]
 
 
 def _du_mb(path):

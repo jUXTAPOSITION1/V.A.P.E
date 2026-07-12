@@ -166,6 +166,8 @@ def _collect(default_retention):
 
 
 def stats(default_retention):
+    """Print live report counts by category, the retention anchor date, and how
+    many reports are already archived — the read-only view, changes nothing."""
     files, newest = _collect(default_retention)
     by_cat = {}
     for f in files:
@@ -208,6 +210,10 @@ def _archive_into_tarball(tar_path, members, apply):
 
 
 def archive(retention_days, apply):
+    """Fold every report older than its category's retention window into the
+    matching monthly tarball, record its metadata in index.json, and (when
+    apply) remove the live file. Dry-run (apply=False) reports what would move
+    and writes nothing. Idempotent — already-archived reports are skipped."""
     files, newest = _collect(retention_days)
     if newest is None:
         print("No report files found — nothing to archive.")
@@ -259,11 +265,13 @@ def archive(retention_days, apply):
         print(f"{action} {len(group):3d} -> {os.path.relpath(tar_path, ROOT)}")
 
     if apply:
-        # Remove exactly the files whose bytes were just written into a
-        # tarball — no re-derivation from date/category, so a partial run can
-        # never delete a file that wasn't successfully archived first.
-        for path in archived_paths:
-            os.remove(path)
+        # Persist the metadata index BEFORE deleting any live file. The bytes
+        # already live in the tarball at this point; if we deleted first and
+        # crashed before writing the index, those reports would be recoverable
+        # from the tarball but no longer findable by metadata, and a re-run
+        # wouldn't fix it (_collect no longer sees the deleted files). Writing
+        # the index first means the worst a crash can do is leave a live file
+        # that's already safely in a tarball — harmless, and a re-run cleans it.
         idx.setdefault("archived", []).extend(new_records)
         idx["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         idx["retention_days"] = retention_days
@@ -271,6 +279,11 @@ def archive(retention_days, apply):
         os.makedirs(ARCHIVE_DIR, exist_ok=True)
         with open(ARCHIVE_INDEX, "w", encoding="utf-8") as f:
             json.dump(idx, f, indent=2)
+        # Now remove exactly the files whose bytes were just written into a
+        # tarball — no re-derivation from date/category, so a partial run can
+        # never delete a file that wasn't successfully archived first.
+        for path in archived_paths:
+            os.remove(path)
         print(f"\nArchived {total} file(s); removed from live tree; "
               f"metadata recorded in {os.path.relpath(ARCHIVE_INDEX, ROOT)}.")
     else:
