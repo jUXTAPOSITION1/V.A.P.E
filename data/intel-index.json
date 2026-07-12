@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-12T04:27:31Z",
+  "generated": "2026-07-12T05:48:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 418,
+    "reports": 419,
     "reports_by_type": {
+      "base": 48,
       "virtuals": 45,
       "security": 48,
-      "base": 47,
       "sentiment": 37,
       "bounty": 201,
       "macro": 19,
@@ -40,14 +40,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-12-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-12T04:00Z",
+      "type": "base",
+      "file": "base-2026-07-12-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-12T05:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-12 04:27 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-12-04.md",
-      "bytes": 2842
+      "summary": "Date: 2026-07-12 05:48 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-05.md",
+      "bytes": 3031
     }
   },
   "investigations": [
@@ -613,6 +613,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-12-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-12T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-12 05:48 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-05.md",
+      "bytes": 3031
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1261,17 +1272,6 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-08-21.md",
       "bytes": 2084
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-08-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-08T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-08 21:59 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-08-21.md",
-      "bytes": 3110
     }
   ],
   "broadcasts": [
