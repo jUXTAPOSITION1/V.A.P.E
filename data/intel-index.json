@@ -1,21 +1,15 @@
 {
-  "generated": "2026-07-12T14:27:45Z",
+  "generated": "2026-07-12T14:28:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 426,
+    "reports": 309,
     "reports_by_type": {
-      "virtuals": 47,
-      "security": 50,
-      "base": 49,
-      "sentiment": 38,
+      "virtuals": 28,
+      "security": 28,
+      "base": 27,
+      "sentiment": 17,
       "bounty": 202,
-      "macro": 19,
-      "hack": 9,
-      "deep": 8,
-      "heartbeat": 1,
-      "mainnet": 1,
-      "bug": 1,
-      "attack": 1
+      "macro": 7
     },
     "broadcasts": 57,
     "investigations": 90,
