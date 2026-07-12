@@ -24,7 +24,6 @@ import json
 import os
 import subprocess
 import sys
-import time
 from datetime import datetime, timezone
 
 DIR = "/home/node/.openclaw/acp-monitor"
