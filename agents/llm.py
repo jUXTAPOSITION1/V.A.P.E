@@ -125,10 +125,10 @@ PROVIDERS = [
     # will need to move to whatever supersedes it (grok-4.5 or similar)
     # before then.
     ("xai_1", "XAI_API_KEY_1", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast-reasoning", "frontier": "grok-4.1-fast-reasoning",
+        "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
     }),
     ("xai_2", "XAI_API_KEY_2", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4.1-fast-reasoning", "frontier": "grok-4.1-fast-reasoning",
+        "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
     }),
 ]
 
