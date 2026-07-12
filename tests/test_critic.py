@@ -90,22 +90,29 @@ def test_catches_renounced_signal_contradicting_owner_present():
 
 
 def test_catches_unverified_reason_without_unverified_flag():
-    result = critic.verify({}, {"verified": True}, 60, "CAUTION",
+    # score kept <=55 so this stays isolated to the intended issue — 0
+    # positive signals with a higher score would also trip the legitimacy cap.
+    result = critic.verify({}, {"verified": True}, 50, "CAUTION",
                             ["[-15] Contract source UNVERIFIED"], [])
     assert not result["ok"]
     assert any("unverified-reason present" in i for i in result["issues"])
 
 
 def test_catches_verified_signal_without_verified_flag():
+    # A second signal clears the 1-signal/70 cap so PROCEED at 90 stays
+    # isolated to the intended verified-signal contradiction.
     result = critic.verify({}, {"verified": False}, 90, "PROCEED", [],
-                            ["Custom verified source (not a mass-produced factory template)"])
+                            ["Custom verified source (not a mass-produced factory template)",
+                             "another positive signal"])
     assert not result["ok"]
     assert any("verified-signal present" in i for i in result["issues"])
 
 
 def test_catches_owner_not_renounced_reason_without_owner_present():
+    # score=50 keeps this in the CAUTION band (>=50) per _verdict_for_score,
+    # and <=55 avoids the 0-signal cap — isolated to the intended issue.
     gp = {"owner_address": ""}
-    result = critic.verify(gp, {}, 45, "CAUTION", ["[-10] Owner not renounced (0x0)"], [])
+    result = critic.verify(gp, {}, 50, "CAUTION", ["[-10] Owner not renounced (0x0)"], [])
     assert not result["ok"]
     assert any("owner-not-renounced reason present" in i for i in result["issues"])
 
