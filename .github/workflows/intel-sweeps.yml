@@ -61,6 +61,7 @@ jobs:
       GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
       TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
     steps:
       # persist-credentials: false — "Run sweep" spawns third-party npm
       # packages via npx (skillforge/research.py's Tavily/Firecrawl/Bright

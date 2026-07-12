@@ -3,3 +3,4 @@ python-dotenv
 requests
 groq
 eth-account
+x402
