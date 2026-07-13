@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T02:54:56Z",
+  "generated": "2026-07-13T04:07:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 322,
@@ -11,10 +11,10 @@
       "virtuals": 29,
       "macro": 8
     },
-    "broadcasts": 58,
+    "broadcasts": 59,
     "investigations": 94,
     "tools": 15,
-    "tools_verified": 14,
+    "tools_verified": 15,
     "skills": 12
   },
   "latest_summary": {
@@ -1270,6 +1270,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-13-04.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-13T04:00Z",
+      "summary": "2 rule-based anomaly flag(s) this cycle. Base TVL $4.44B, 39 targets on VAPE's permanent record (15 REJECT / 7 CAUTION / 17 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-13-04.md"
+    },
+    {
       "file": "broadcast-2026-07-12-19.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-12T19:00Z",
@@ -1471,13 +1478,6 @@
       "date": "2026-07-05T14:00Z",
       "summary": "2 rule-based anomaly flag(s) this cycle. Base TVL $4.36B, 13 targets on VAPE's permanent record (2 REJECT / 4 CAUTION / 7 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-05-14.md"
-    },
-    {
-      "file": "broadcast-2026-07-05-09.md",
-      "title": "VAPE Community Intelligence Broadcast",
-      "date": "2026-07-05T09:00Z",
-      "summary": "1 new VAPE investigation(s) in the last 6h and 1 rule-based anomaly flag(s) this cycle. Base TVL $4.37B, 13 targets on VAPE's permanent record (2 REJECT / 4 CAUTION / 7 PROCEED).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-05-09.md"
     }
   ],
   "tools": [
@@ -1594,11 +1594,11 @@
     {
       "name": "wallet_trace",
       "tier": "recon",
-      "status": "pending_verification",
-      "version": "n/a (pending live verification with Alchemy)",
+      "status": "verified",
+      "version": "0x43a1e1208d50 App Store: Install BTC.AI to Claim Airdrop 8.0 from 0x833589fc to",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
-      "known_limitation": true,
+      "known_limitation": false,
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/tools/recon/wallet_trace.sh"
     },
     {
