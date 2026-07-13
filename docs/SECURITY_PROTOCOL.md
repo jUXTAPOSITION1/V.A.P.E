@@ -73,23 +73,31 @@ these confirmed, concrete issues, all fixed in the same change as this doc:
    to `/prices`, `/cost-basis`, `/portfolio`, and `/nfts` — degrades to
    "never blocks" when `VAPE_JOBS` isn't configured, same graceful pattern
    as every other optional resource in that file.
-2. **Unframed contract source in an LLM prompt** —
-   `agents/acp_fulfill.py::_ai_quick_review` embedded a verified contract's
-   deployer-controlled source directly into a prompt with no untrusted-data
-   framing — the same injection shape just closed in `run.py`, capped at a
-   misleading summary paragraph rather than fund loss (the deterministic
-   score/verdict fields are computed separately and can't be overridden this
-   way). Fixed: added explicit inert-data framing to
-   `_AI_QUICK_REVIEW_SYSTEM`.
-3. **Shell-injection anti-pattern in two workflows** —
-   `review-ledger.yml` and `x402-index-claim.yml` interpolated
-   `workflow_dispatch` inputs directly into `run:` steps instead of routing
-   through `env:` first, inconsistent with the rest of the repo's own
-   convention. `review-ledger.yml`'s job in particular carries every LLM/
-   research API key plus `DATA_AGENT_PRIVATE_KEY` and `contents: write` —
-   real blast radius if that input path were ever abused, even though the
-   trigger requires existing repo-write access already. Fixed both, plus one
-   more instance caught by the new linter in `build-request.yml`.
+2. **Unframed contract source in an LLM prompt** — both
+   `agents/acp_fulfill.py::_ai_quick_review` AND its worker-side twin
+   `worker/src/handlers.ts::aiQuickReview` embed a verified contract's
+   deployer-controlled source directly into a prompt. The Python side was
+   fixed first; CodeRabbit's review of that fix (correctly) pointed out the
+   TypeScript copy mirrors it exactly and was still unframed. Capped at a
+   misleading summary paragraph rather than fund loss either way (the
+   deterministic score/verdict fields are computed separately and can't be
+   overridden this way). Fixed: added the same explicit inert-data framing
+   to both `_AI_QUICK_REVIEW_SYSTEM` (Python) and `AI_QUICK_REVIEW_SYSTEM`
+   (TypeScript).
+3. **Shell-injection anti-pattern, including a residual instance CodeRabbit
+   caught in its own review of the fix** — `review-ledger.yml` and
+   `x402-index-claim.yml` interpolated `workflow_dispatch` inputs directly
+   into `run:` steps instead of routing through `env:` first. Fixed both,
+   plus one more instance caught by the new linter in `build-request.yml` —
+   but the FIRST fix to `review-ledger.yml` only routed the raw
+   `github.event.inputs.*` through `env:` in the step that computes
+   `categories`/`sample`; the NEXT step then re-interpolated that step's
+   *output* (`${{ steps.cats.outputs.categories }}`) straight into `run:`
+   again, reopening the identical injection in a job that carries every
+   LLM/research API key plus `DATA_AGENT_PRIVATE_KEY` and `contents: write`.
+   Fixed by routing the step output through `env:` too. This class
+   (`steps.*.outputs.*` re-interpolation) is a deliberate blind spot in
+   `security_lint.py` — see its docstring for why.
 4. **Unpinned third-party Action with live deploy credentials** —
    `cloudflare/wrangler-action@v4` ran with `CLOUDFLARE_API_TOKEN`/
    `CLOUDFLARE_ACCOUNT_ID` on every push to `main` touching `worker/**`,
@@ -99,8 +107,22 @@ these confirmed, concrete issues, all fixed in the same change as this doc:
    that job, lower severity) was pinned too for consistency.
 5. **No dependency scanning for `worker/`** — the only Node project handling
    real payment logic had zero CVE scanning anywhere in CI. Fixed: added
-   `npm audit` to `dependency-audit.yml` and an `npm`/`/worker` entry to
-   `dependabot.yml`.
+   `npm audit` to `dependency-audit.yml` (as its own step, separate from
+   `npm ci`, so a lockfile failure can't silently skip the audit and leave
+   an empty section in the auto-filed issue — another CodeRabbit catch) and
+   an `npm`/`/worker` entry to `dependabot.yml`.
+6. **Missing `persist-credentials: false` across 16 secret-carrying jobs**
+   (CWE-522) — `actions/checkout`'s default persists `GITHUB_TOKEN` in
+   local git config for the rest of the job. CodeRabbit's review (via
+   zizmor, a dedicated GitHub Actions security linter) first flagged this on
+   `security-lint.yml` itself — that particular job carries no secrets, so
+   it was a consistency/hygiene ask there, not a live CWE-522 — but checking
+   every OTHER workflow found 16 jobs across 15 files that carry real
+   secrets (every LLM/research API key, `DATA_AGENT_PRIVATE_KEY`,
+   `CLOUDFLARE_API_TOKEN`, `GH_TOKEN`) and were still missing it, out of 20
+   secret-carrying jobs total. Fixed all of them; `security_lint.py` now
+   checks for this going forward (see below) so it can't silently regress
+   one job at a time.
 
 **Confirmed clean, no fix needed**: private-key handling
 (`agents/data_agent.py`'s `DATA_AGENT_PRIVATE_KEY` — never logged, never
@@ -142,12 +164,19 @@ protocol — it's a report. Four things make this one keep working after
 today:
 
 1. **`security-lint.yml` / `scripts/security_lint.py`** — runs on every PR
-   touching `.github/workflows/**`, deterministically re-checking for the
-   exact four regression classes found above (pwn-request triggers,
-   unpinned third-party Actions with secrets, raw `${{ github.event.* }}`
-   interpolation into `run:`, missing `permissions:` blocks). This is the
-   mechanism that stops today's fixes from quietly rotting — including
-   against PRs `self_improve.py`/`skillforge_build.py` open on their own.
+   touching `.github/workflows/**`, deterministically re-checking for five
+   regression classes: pwn-request triggers, unpinned third-party Actions
+   *or reusable workflows* with secrets (including `secrets: inherit`), raw
+   `github.event.*`/`inputs.*` interpolation into `run:` (dot OR bracket
+   notation), missing `permissions:` blocks, and missing
+   `persist-credentials: false` on checkout in secret-carrying jobs. The
+   linter itself went through its own round of CodeRabbit review before
+   this doc was finalized — the bracket-notation gap, the reusable-workflow
+   gap, and the persist-credentials check were all added in response to
+   real findings against the linter's *first* version, not invented gaps.
+   This is the mechanism that stops today's fixes from quietly rotting —
+   including against PRs `self_improve.py`/`skillforge_build.py` open on
+   their own.
 2. **`agents/redteam.py` + `redteam-deep.yml`** keep probing the live report
    pipeline daily; a regression in `_reconcile_report()`'s protection would
    show up as a new HIGH/CRITICAL finding in `skillforge/memory/findings.jsonl`,

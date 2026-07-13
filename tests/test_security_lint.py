@@ -101,6 +101,56 @@ def test_unpinned_action_without_secrets_not_flagged():
     assert findings == []
 
 
+def test_unpinned_reusable_workflow_with_secrets_flagged():
+    """Confirmed real gap (CodeRabbit review, PR #157): the original check
+    only ever inspected steps[*].uses, so a credentialed reusable-workflow
+    call (jobs.<id>.uses, which has no steps of its own) passed
+    unconditionally regardless of pinning."""
+    doc = {
+        "jobs": {
+            "deploy": {
+                "uses": "someorg/somerepo/.github/workflows/deploy.yml@main",
+                "secrets": {"TOKEN": "${{ secrets.DEPLOY_TOKEN }}"},
+            }
+        }
+    }
+    findings = []
+    sl._check_unpinned_actions_with_secrets(doc, "fake.yml", findings)
+    assert len(findings) == 1
+    assert findings[0][0] == "HIGH"
+
+
+def test_secrets_inherit_treated_as_carrying_secrets():
+    """Confirmed real gap: `secrets: inherit` carries every caller secret
+    but never contains the literal substring "secrets.", so the original
+    _job_has_secrets() missed it entirely."""
+    doc = {
+        "jobs": {
+            "deploy": {
+                "uses": "someorg/somerepo/.github/workflows/deploy.yml@main",
+                "secrets": "inherit",
+            }
+        }
+    }
+    findings = []
+    sl._check_unpinned_actions_with_secrets(doc, "fake.yml", findings)
+    assert len(findings) == 1
+
+
+def test_local_reusable_workflow_not_flagged():
+    doc = {
+        "jobs": {
+            "deploy": {
+                "uses": "./.github/workflows/deploy.yml",
+                "secrets": "inherit",
+            }
+        }
+    }
+    findings = []
+    sl._check_unpinned_actions_with_secrets(doc, "fake.yml", findings)
+    assert findings == []
+
+
 def test_raw_event_interpolation_in_run_flagged():
     doc = {
         "jobs": {
@@ -113,6 +163,49 @@ def test_raw_event_interpolation_in_run_flagged():
     sl._check_unsafe_interpolation(doc, "fake.yml", findings)
     assert len(findings) == 1
     assert findings[0][0] == "HIGH"
+
+
+def test_bracket_notation_event_interpolation_flagged():
+    """Confirmed real gap (CodeRabbit review, PR #157): the original regex
+    only matched dot notation, so github['event']['title'] slipped past."""
+    doc = {
+        "jobs": {
+            "build": {
+                "steps": [{"name": "bad", "run": "echo \"${{ github['event']['pull_request']['title'] }}\""}],
+            }
+        }
+    }
+    findings = []
+    sl._check_unsafe_interpolation(doc, "fake.yml", findings)
+    assert len(findings) == 1
+
+
+def test_bracket_notation_inputs_interpolation_flagged():
+    doc = {
+        "jobs": {
+            "build": {
+                "steps": [{"name": "bad", "run": 'echo "${{ inputs[\'name\'] }}"'}],
+            }
+        }
+    }
+    findings = []
+    sl._check_unsafe_interpolation(doc, "fake.yml", findings)
+    assert len(findings) == 1
+
+
+def test_safe_github_context_fields_not_flagged():
+    """github.sha, github.run_id etc. aren't attacker-controlled the way
+    github.event.* is — must not false-positive."""
+    doc = {
+        "jobs": {
+            "build": {
+                "steps": [{"name": "fine", "run": 'echo "${{ github.sha }}"'}],
+            }
+        }
+    }
+    findings = []
+    sl._check_unsafe_interpolation(doc, "fake.yml", findings)
+    assert findings == []
 
 
 def test_env_scoped_interpolation_in_run_not_flagged():
@@ -145,10 +238,53 @@ def test_present_permissions_block_not_flagged():
     assert findings == []
 
 
+def test_missing_persist_credentials_flagged_when_job_has_secrets():
+    doc = {
+        "jobs": {
+            "deploy": {
+                "env": {"TOKEN": "${{ secrets.CLOUDFLARE_API_TOKEN }}"},
+                "steps": [{"uses": "actions/checkout@v7"}],
+            }
+        }
+    }
+    findings = []
+    sl._check_missing_persist_credentials(doc, "fake.yml", findings)
+    assert len(findings) == 1
+    assert findings[0][0] == "MEDIUM"
+
+
+def test_persist_credentials_false_not_flagged():
+    doc = {
+        "jobs": {
+            "deploy": {
+                "env": {"TOKEN": "${{ secrets.CLOUDFLARE_API_TOKEN }}"},
+                "steps": [{"uses": "actions/checkout@v7", "with": {"persist-credentials": False}}],
+            }
+        }
+    }
+    findings = []
+    sl._check_missing_persist_credentials(doc, "fake.yml", findings)
+    assert findings == []
+
+
+def test_missing_persist_credentials_without_secrets_not_flagged():
+    doc = {
+        "jobs": {
+            "typecheck": {
+                "steps": [{"uses": "actions/checkout@v7"}],
+            }
+        }
+    }
+    findings = []
+    sl._check_missing_persist_credentials(doc, "fake.yml", findings)
+    assert findings == []
+
+
 def test_real_repo_workflows_pass_clean():
     """The actual regression-guard invariant: every real workflow file in
-    this repo today must already be clean (all 4 classes were fixed as
-    part of the audit that introduced this linter)."""
+    this repo today must already be clean (all 5 classes were fixed as
+    part of the audit that introduced this linter, including the follow-up
+    round CodeRabbit's review of that same audit caught)."""
     findings = []
     for path in sl._iter_workflow_files(sl.DEFAULT_WORKFLOWS_DIR):
         sl.lint_file(path, findings)

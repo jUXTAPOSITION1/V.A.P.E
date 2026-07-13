@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
@@ -56,23 +58,40 @@ jobs:
       # dependencies at all). `--omit=dev` matches what actually ships/runs;
       # dev-only tooling CVEs (tsx/typescript/wrangler CLI) don't affect the
       # deployed Worker and would otherwise drown out real findings.
-      - name: npm audit (worker)
-        id: worker_audit
+      #
+      # Install and audit are separate steps (not one `run:` with both
+      # commands) so a lockfile-out-of-sync `npm ci` failure can't silently
+      # skip `npm audit` — confirmed real gap: with both in one step, `set
+      # -e` exits the script before the audit ever runs, but the step still
+      # reports "failure" and the issue body's audit section comes back
+      # empty instead of explaining why (CodeRabbit review, PR #157).
+      - name: npm ci (worker)
+        id: worker_ci
         continue-on-error: true
         working-directory: worker
-        run: |
-          npm ci
-          npm audit --omit=dev | tee /tmp/npm-audit-worker.txt
+        run: npm ci
+
+      - name: npm audit (worker)
+        id: worker_audit
+        if: steps.worker_ci.outcome == 'success'
+        continue-on-error: true
+        working-directory: worker
+        run: npm audit --omit=dev | tee /tmp/npm-audit-worker.txt
 
       - name: Open issue on new vulnerabilities
-        if: steps.root_audit.outcome == 'failure' || steps.agents_audit.outcome == 'failure' || steps.worker_audit.outcome == 'failure'
+        if: steps.root_audit.outcome == 'failure' || steps.agents_audit.outcome == 'failure' || steps.worker_ci.outcome == 'failure' || steps.worker_audit.outcome == 'failure'
         run: |
           {
             echo "Dependency audit found issues — see run for full output."
             echo
             echo '### pip-audit (root)'; cat /tmp/pip-audit-root.txt 2>/dev/null
             echo '### pip-audit (agents)'; cat /tmp/pip-audit-agents.txt 2>/dev/null
-            echo '### npm audit (worker, production deps)'; cat /tmp/npm-audit-worker.txt 2>/dev/null
+            if [ -f /tmp/npm-audit-worker.txt ]; then
+              echo '### npm audit (worker, production deps)'; cat /tmp/npm-audit-worker.txt
+            else
+              echo '### npm audit (worker, production deps)'
+              echo '`npm ci` failed (see the "npm ci (worker)" step log) — audit never ran.'
+            fi
           } > /tmp/audit-body.txt
           gh issue create --title "Dependency audit: vulnerabilities found $(date -u +%F)" \
             --body-file /tmp/audit-body.txt --label "dependencies,security" || true
