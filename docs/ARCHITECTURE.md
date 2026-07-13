@@ -14,7 +14,7 @@ paid frontier-model upgrade for the calls that benefit most from it.
                           │            DATA SOURCES (real)            │
                           │  Base RPC · Etherscan V2 · DexScreener    │
                           │  GoPlus · CoinGecko · DeFiLlama · CVEs    │
-                          │  Immunefi/Code4rena · X/@based_vape       │
+                          │  Immunefi/Sherlock · X/@based_vape        │
                           └───────────────┬───────────────────────────┘
                                           │
         ┌─────────────────────────────────┼─────────────────────────────────┐
@@ -32,13 +32,20 @@ paid frontier-model upgrade for the calls that benefit most from it.
                  │ reports/audits/ │               │ events→triage→   │
                  │ broadcasts/     │               │ negotiate/fund/  │
                  │ bounty-radar/   │               │ complete jobs    │
+                 │ engagements/    │               │                  │
                  └────────┬────────┘               └────────┬─────────┘
                           │                                 │
                  ┌────────▼────────┐               ┌────────▼─────────┐
                  │  GitHub Pages   │               │  USDC escrow on  │
                  │  (docs/) — UI   │               │  Base — payment  │
+                 │  + worker/x402  │               │                  │
                  └─────────────────┘               └──────────────────┘
 ```
+
+A fourth, orthogonal piece — `mcp_servers/vape_mcp.py` — exposes VAPE's own real
+tools (investigation, wallet forensics, DefiLlama intel, bounty radar, Memory) over
+the standard Model Context Protocol so any MCP host (Claude, Cursor, a custom agent)
+can call them directly; see component 6 below.
 
 Component-level status detail (see the legend above) lives in the table
 below, not inside the diagram — a diagram should show structure, a table
@@ -48,14 +55,20 @@ component's state changes.
 | Component | Status | Notes |
 |---|---|---|
 | `agents/run.py` | [OK] | Hourly bounty-cycle orchestration |
-| `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring |
+| `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring, cross-chain |
+| `agents/scout.py` | [OK] | Bounty-radar triage + strategic briefing + real, cross-chain incident-forensics action |
+| `agents/security_sweep.py` | [OK] | Incident-forensics pipeline (any chain `EVM_CHAINS` supports, high-value leads act regardless of age) |
+| `agents/engagements.py` | [OK] | Real per-lead engagement status (never a fabricated outreach/signup) |
+| `agents/defillama.py` | [OK] | Full DefiLlama API surface: TVL, yields, fees, stablecoins, bridges, token intel |
+| `agents/data_agent.py` | [OK] | DATA AGENT — VAPE's own paying customer, real x402 hires per investigation |
 | LLM tier | [OK] | Frontier model + multi-provider free fallback chain, see `agents/llm.py` |
+| `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
-| `agents/acp_fulfill.py` / wallet | [WIP] | ACP job fulfillment + wallet scaffolding |
+| `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
-| Security tool tiers | [OK] | 13 tools registered across static/fuzzing/ai-redteam/recon |
+| Security tool tiers | [OK] | 15 tools registered across static/fuzzing/ai-redteam/recon |
 | `skillforge/memory/` | [OK] | Shared append-only memory base |
 
 ## Components
@@ -64,11 +77,13 @@ component's state changes.
 Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`run.py`** — single-pass orchestrator. `ask_llm()` (Groq `llama-3.1-8b-instant`,
   3-retry rate-limit backoff) + `run_slither()` (30s timeout). Dual mode via
-  `--review-repo` → bounty reports vs. self-review reports.
-- **`main.py`** — `VAPE` (investigator) + `HACK` (red-team auditor) over fetched bounties.
-- **`vape.py` / `hack.py`** — persona engines with `vape_system.md` / `hack_system.md` prompts.
-- **`tools.py`** — `fetch_bounties()`, `log_report()`.
-- **`acp_fulfill.py` / `wallet.py`** [WIP] — ACP job fulfillment + wallet scaffolding (signing via ACP CLI).
+  `--review-repo` → bounty reports vs. self-review reports. (The original `main.py`/
+  `vape.py`/`hack.py`/`tools.py` persona-engine layer this once called into no longer
+  exists — `run.py` + `investigate.py` are the real current path; `vape_system.md`/
+  `hack_system.md` now feed the persona prompt directly.)
+- **`acp_fulfill.py`** [OK] — ACP job fulfillment bridge: given an offering name +
+  requirement, runs the real tool (`token_scan`/`data_fetchers`/`investigate`) and returns
+  a structured deliverable. Wallet signing happens via the separate ACP CLI, not a repo file.
 - **`investigate.py`** [OK] — deep-investigation engine, CertiK-style scoring (risk is the default,
   not the exception — see README's table for the full check list). Every real verdict is
   permanent in `intel/investigations/ledger.json`; auto mode never re-investigates an address
@@ -90,7 +105,26 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`token_scan.py`** [OK] — free Hunt console + paid x402 quick-check, same keyless checks as
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
-- **`scout.py`** [OK] — bounty-radar triage, rule-based fit scoring (no LLM), hourly via `scout.yml`.
+- **`scout.py`** [OK] — bounty-radar triage, rule-based fit scoring (no LLM), a frontier-model
+  strategic briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates
+  to `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports —
+  not just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
+  (`ATTACK_RESPONSE_HIGH_VALUE_USD_M`). Hourly via `scout.yml`.
+- **`engagements.py`** [OK] — revives `intel/engagements/`, replacing pre-repo fabricated seed
+  data (a templated audit stub, cold-outreach emails to real hack victims — see
+  `intel/archive/legacy-seed-engagements/README.md`) with a real per-lead status derived from
+  `skillforge/memory/attack_response_state.json`: a resolved incident cites the real
+  address/verdict/report; static seed-platform leads (Immunefi/Cantina/Sherlock/etc.) are
+  honestly recorded as "tracked only, no automated engagement path" rather than a fictional
+  signup. Idempotent log, always-current `intel/engagements/STATUS.md`. Runs after SCOUT hourly.
+- **`defillama.py`** [OK] — the full DefiLlama API surface (TVL, protocols, fees/revenue, yield
+  pools, stablecoins, bridges, token price/age intel) in one keyless module, feeding
+  `investigate.py`'s scoring, the worker's `/defillama/*` x402 endpoints, and the site's DefiLlama
+  panel.
+- **`data_agent.py`** [OK] — DATA AGENT, VAPE's own paying customer: recruited mid-investigation
+  to hire 2-4 of VAPE's own $0.01 x402 market-data offerings against the token under review,
+  using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`) and the real x402 payment rail —
+  capped at 15 hires/day, results fold into the report's "Data Agent Intel" section.
 - **`intel_common.py` / `security_sweep.py` / `base_sweep.py` / `sentiment_sweep.py` /
   `virtuals_sweep.py` / `macro_sweep.py` / `mainnet_patch_check.py` / `bug_bounty_intel.py`**
   [OK] — revives the intel/reports/{security,base,sentiment,virtuals,macro,mainnet-patch-check,
@@ -154,10 +188,12 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 ### 2. SKILLFORGE — `skillforge/` [OK] (self-improving skill+tool ecosystem)
 Zero-local-compute skill growth via GitHub Actions. See `skillforge/MANIFEST.md`.
 - **harvest** (hourly) — real CVE + tool-release intel, no LLM.
-- **toolcheck** (6×/day) — installs & verifies 13 security tools on runners, no LLM.
+- **toolcheck** (6×/day) — installs & verifies 15 security tools on runners, no LLM.
 - **synthesize** (daily) — Groq distills harvested data → opens a PR.
 - **Tool tiers:** static (slither/aderyn/mythril) · fuzzing (echidna/foundry) ·
-  ai-redteam (garak/promptfoo/deepteam) · recon (token_safety/contract_recon/wallet_trace/base_rpc/market_data).
+  ai-redteam (garak/promptfoo/deepteam) · recon (base_rpc/market_data/token_safety/
+  wallet_trace/contract_recon/hack_feed/fear_greed). `wallet_trace` is Alchemy-backed
+  (Base/Eth/Arb/Op) — live-verified against the real Transfers API, see PR #145.
 - **Memory:** append-only `memory/` (tools-registry.json, findings/skills/lessons.jsonl, INDEX.md).
 - **`memory/graph.py`** [OK] — a deployer/token relationship graph built from the real
   `intel/investigations/ledger.json` (every investigated address's GoPlus-reported
@@ -209,6 +245,17 @@ x402 pay-per-call panel backed by `worker/` (Cloudflare Worker/Deno Deploy, see
 `docs/ACP_PROTOCOL.md`.
 Still zero-build — `docs/assets/*.js` are plain files, no bundler.
 
+### 6. MCP Server — `mcp_servers/vape_mcp.py` [OK]
+Standard Model Context Protocol (`2024-11-05`, JSON-RPC 2.0 over stdio, pure stdlib —
+no SDK to install) exposing 17 of VAPE's real tools to any MCP host (Claude, Cursor,
+a custom agent): `investigate_token`, `scan_token_safety`, `wallet_trace` (shells out
+to the real Alchemy-backed `wallet_trace.sh` rather than re-implementing it),
+`contract_source`, `recent_hacks`, `fear_greed`, `global_market`, four
+`defillama_*` tools, `bounty_radar`, `memory_search`/`memory_stats`,
+`research_search`/`research_scrape`, and `mcp_servers` (VAPE as an MCP *host*,
+consuming community search/scrape servers via `skillforge/mcp_client.py`). Two
+resources (`vape://reputation`, `vape://intel-index`). See `docs/MCP_SERVER.md`.
+
 ## Data-flow summary
 Real sources → engines analyze → findings written to `intel/` (audit trail) and
 SKILLFORGE memory (learning) → surfaced via UI/broadcasts → monetized via ACP jobs.
@@ -220,8 +267,9 @@ Every loop is grounded in **real data only** — no simulated or hypothetical ou
 | Python engine | GH Actions hourly | free runner | reports/ commits |
 | SKILLFORGE | GH Actions (hourly/6x/daily) | free runner | skillforge/memory |
 | ACP monitor | persistent daemon | ~zero idle | acp-monitor/state.json |
+| MCP server | spawned per-call by host | ~zero idle | stateless (reads live repo data) |
 
-### 6. Quality gates & the model path [OK]/[WIP]
+### 7. Quality gates & the model path [OK]/[WIP]
 - **`tests/` + `tests.yml`** [OK] — a hermetic, network-free pytest suite pins VAPE's
   deterministic core (`investigate.score()`, threat-level computation, the attack-pattern
   classifier, the archiver round-trip, the safe fmt helpers), gated on every Python-touching
@@ -238,10 +286,12 @@ Every loop is grounded in **real data only** — no simulated or hypothetical ou
   corpus grows for free as VAPE keeps investigating — see `data/finetune/DATASET_CARD.md`.
 
 ## Current vs. future
-**Now:** autonomous hourly LLM+slither reports, SKILLFORGE 13-tool verification, intel
-audit trail, ACP job monetization, self-review PRs, deterministic-core test gate, working-tree
-archiving + repo-health monitoring, and a reproducible fine-tune corpus seeded from VAPE's own
-investigation history.
+**Now:** autonomous hourly LLM+slither reports, SKILLFORGE 15-tool verification, real
+cross-chain incident-forensics action (not just Base, large leads act regardless of age),
+a real per-lead engagement record, a full DefiLlama intelligence layer, a standard MCP
+server exposing 17 real tools to any host, intel audit trail, ACP job monetization,
+self-review PRs, deterministic-core test gate, working-tree archiving + repo-health
+monitoring, and a reproducible fine-tune corpus seeded from VAPE's own investigation history.
 **Next:** richer UI, external-target auditing (beyond self-repo), persistent
 cross-run agent memory, full ACP deliverable automation, and a first LoRA fine-tune graded
 against the frontier tier before it serves any real "fast"-tier traffic.

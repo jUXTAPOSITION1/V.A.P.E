@@ -31,6 +31,9 @@ intel/bounty-radar/opportunities.json (HackenProof, HackerOne, Cantina,
 Code4rena, Sherlock, Immunefi, AgentArena) were bundled in as static
 seed/example data at repo import (commit e69546c) and have no public,
 keyless, stable API to poll — wiring those up for real is future work, not
+(Code4rena specifically announced its wind-down in May 2026, with Immunefi
+absorbing its bounty programs and researchers — its seed entries here are
+historical only; no new Code4rena leads should be expected going forward.)
 faked here.
 
 Behavior: append-only. Existing opportunities (including the June 2026 seed
