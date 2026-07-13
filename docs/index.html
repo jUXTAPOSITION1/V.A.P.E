@@ -31,13 +31,17 @@
     <!-- Icons — real VAPE character crops, each a distinct source photo sized for its use.
          192/512 + the manifest are what mobile browsers (incl. in-app wallet browsers like
          Coinbase/Base) pull from for tab thumbnails and "add to home screen" — the 16/32/180
-         favicon-class sizes alone are too small for those surfaces and render blank. -->
-    <link rel="icon" href="favicon.ico" sizes="32x32">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+         favicon-class sizes alone are too small for those surfaces and render blank. Absolute
+         URLs (matching the og:image pattern above) rather than relative — this site lives
+         under a /V.A.P.E/ subpath, not the domain root, and some in-app browser "history"/
+         URL-bar UIs (observed: Base Wallet falling back to a generic globe icon) resolve a
+         page's favicon against the origin root rather than the actual page path. -->
+    <link rel="icon" href="https://juxtaposition1.github.io/V.A.P.E/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://juxtaposition1.github.io/V.A.P.E/assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://juxtaposition1.github.io/V.A.P.E/assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://juxtaposition1.github.io/V.A.P.E/assets/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#09090b">
     <meta name="application-name" content="VAPE">
