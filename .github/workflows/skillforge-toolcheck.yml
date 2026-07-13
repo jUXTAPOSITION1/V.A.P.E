@@ -1,4 +1,4 @@
-name: SKILLFORGE Toolcheck (6x/day, real installs, no LLM)
+name: SKILLFORGE Toolcheck (6x/day, installs + smoke-tests every registered security tool)
 
 on:
   schedule:

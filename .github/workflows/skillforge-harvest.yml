@@ -1,4 +1,4 @@
-name: SKILLFORGE Harvest (hourly, real data, no LLM)
+name: SKILLFORGE Harvest (hourly, pulls new CVEs + security-tool releases)
 
 on:
   schedule:

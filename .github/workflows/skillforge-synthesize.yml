@@ -1,4 +1,4 @@
-name: SKILLFORGE Synthesize (daily, Groq, opens PR)
+name: SKILLFORGE Synthesize (daily, distills skills from memory, opens PR)
 
 on:
   schedule:

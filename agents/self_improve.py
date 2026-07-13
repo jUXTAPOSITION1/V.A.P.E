@@ -284,6 +284,34 @@ def open_proposal_pr(target, code, metadata, warnings):
 
 # ─── Growth loop: feed this cycle back into Memory ───────────────────────────
 
+def _log_build_entry(target, code, pr_url):
+    """Appends a real build_log entry (skillforge/memory/BUILD_LEDGER.md —
+    the site's "Development Ledger") whenever this cycle actually generated
+    a fix and opened a real PR. Without this, self_improve.py's real,
+    automated engineering work never reached the ledger — only interactive
+    Builder sessions did, even though this pipeline runs daily and opens
+    real PRs like anything else. Deliberately skipped on a no-target or
+    no-code cycle; a build_log entry is "here's a real pattern," not "here's
+    what didn't happen."""
+    if not (code and pr_url):
+        return
+    try:
+        from agents.build_ledger import log_build
+        log_build(
+            title=f"self_improve: {target['kind']} in {target['module']}",
+            content=f"Target: {target['issue']}\n\nGenerated a fix via "
+                    f"agents.builder.Builder (frontier chain, security-validated) "
+                    f"and opened it for review rather than applying it automatically.\n"
+                    f"PR: {pr_url}",
+            source="agents/self_improve.py",
+            tags=["self-improve", target["kind"], "auto"],
+            confidence=0.7,
+            files=[target["module"]],
+        )
+    except Exception as e:
+        print(f"[SelfImprove] could not log build_log entry: {e}")
+
+
 def _log_lesson(target, code, pr_url):
     """Appends a real "lesson" to skillforge/memory/lessons.jsonl so this
     cycle's actual work compounds into the same Memory skillforge/synthesize.py
@@ -362,6 +390,7 @@ def self_review_and_improve():
         _save_state(state)
 
     _log_lesson(target, code, pr_url)
+    _log_build_entry(target, code, pr_url)
 
     report = (
         f"# Self-Improvement Cycle — {datetime.now(timezone.utc).isoformat()}\n\n"

@@ -23,10 +23,11 @@ applied directly to production files — a human decides whether/how/where to
 integrate it. Builder's own security validation is the first gate; PR
 review is the second.
 
-Deliberately infrequent (weekly, not daily — see
-.github/workflows/skillforge-build.yml) since this is VAPE inventing its own
-work rather than fixing a known bug; a slower cadence keeps PR volume
-reviewable and controls LLM cost.
+Runs 2x/day (see .github/workflows/skillforge-build.yml) — slower than the
+hourly/daily reactive pipelines since this is VAPE inventing its own work
+rather than fixing a known bug, and most cycles are a no-op report rather
+than a PR (see gather_signals()/propose() below) so this cadence just means
+checking more often, not forcing two PRs a day.
 
 CLI:
   python -m agents.skillforge_build
@@ -285,6 +286,34 @@ def _log_lesson(proposal, files, pr_url):
         print(f"[SkillforgeBuild] could not log lesson: {e}")
 
 
+def _log_build_entry(proposal, files, pr_url):
+    """Appends a real build_log entry (skillforge/memory/BUILD_LEDGER.md —
+    the site's "Development Ledger") whenever this cycle actually generated
+    real files and opened a real PR. Same gap as self_improve.py had: this
+    pipeline runs real cycles and opens real PRs, but without this call the
+    ledger never heard about any of it. Skipped on a no-signal/no-proposal/
+    no-files cycle — a build_log entry documents a real pattern, not an
+    empty cycle."""
+    if not (files and pr_url):
+        return
+    try:
+        from agents.build_ledger import log_build
+        log_build(
+            title=f"skillforge_build: {proposal['title'][:80]}",
+            content=f"Justification: {proposal['justification']}\n\n"
+                    f"Self-directed build, grounded in real tool-registry/Memory signals "
+                    f"(not a human request) — built via agents.builder.Builder's "
+                    f"generate_project(), security-validated, opened for review.\n"
+                    f"PR: {pr_url}",
+            source="agents/skillforge_build.py",
+            tags=["skillforge-build", "builder", "self-directed", "auto"],
+            confidence=0.7,
+            files=list(files.keys()),
+        )
+    except Exception as e:
+        print(f"[SkillforgeBuild] could not log build_log entry: {e}")
+
+
 def main():
     os.makedirs(REPORTS_DIR, exist_ok=True)
     report_path = os.path.join(REPORTS_DIR, f"skillforge_build_{_now_stamp()}.md")
@@ -312,6 +341,7 @@ def main():
     print(f"[SkillforgeBuild] proposing: {proposal['title']}")
     pr_url, files = build_and_open_pr(proposal)
     _log_lesson(proposal, files, pr_url)
+    _log_build_entry(proposal, files, pr_url)
 
     report = (
         f"# VAPE SKILLFORGE Build — {proposal['title']}\n\n"

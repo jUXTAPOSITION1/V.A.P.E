@@ -84,16 +84,16 @@ all running in the **existing free GitHub Actions** (no new infra):
 |---|---|---|---|
 | **SCOUT** [OK] | Bounty-radar triage — ranks DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Sherlock have no stable public API so those stay static seed data until one exists (Code4rena wound down in May 2026, Immunefi absorbed its programs — its seed entries are historical only). Every cycle gets a "Strategic Briefing" (why the top opportunities matter, what VAPE capability each exercises, one next action) on top of the numeric table — insight is also ACTED on, not just narrated: `_act_on_incidents()` delegates to `agents/security_sweep.py`'s verified address-resolution pipeline to trigger a real `agents/investigate.py` investigation whenever an incident's address checks out, on any chain investigate.py supports (not just Base — large leads like Kelp/Balancer V2/Matcha also qualify regardless of age; see `ATTACK_RESPONSE_HIGH_VALUE_USD_M`), shown in the digest's "Actions Taken This Cycle" section | `intel/bounty-radar/*`, DeFiLlama hacks feed, the frontier model via `agents/llm.py`'s `FRONTIER_ORDER` (every cycle, not gated on new entries), `agents/security_sweep.py`'s incident-forensics pipeline | hourly (`.github/workflows/scout.yml`) |
 | **LEDGER** [TBD] | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace (Alchemy-backed), base_rpc | on-demand |
-| **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), no LLM |
-| **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks (Groq); `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review | harvest/Memory + Groq + `builder.py`'s `generate_project()` | daily PR (synthesize) / weekly PR (build) |
-| **WARDEN** [TBD] | ACP job QA — validates deliverables before submit (schema + sanity) | acp_fulfill output | per-job, no LLM |
-| **DATA AGENT** [OK] | VAPE's own paying customer — recruited by every real investigation (`agents/investigate.py::investigate()`) to hire 2-4 random $0.01 x402 market-data offerings against the token under review, using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`); results fold into the report's "Data Agent Intel" section | `agents/data_agent.py`, worker's `/data/*` x402 routes (`worker/src/dataHandlers.ts`) | per-investigation, capped 15 paid hires/day, no LLM |
+| **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), fixed numeric thresholds |
+| **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks; `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review — both go through `agents/llm.py`'s `FRONTIER_ORDER` (Grok 4.1 Fast first, free fallbacks after) | harvest/Memory + `FRONTIER_ORDER` + `builder.py`'s `generate_project()` | daily PR (synthesize) / 2x-daily PR (build) |
+| **WARDEN** [TBD] | ACP job QA — validates deliverables before submit (schema + sanity) | acp_fulfill output | per-job, schema/sanity check |
+| **DATA AGENT** [OK] | VAPE's own paying customer — recruited by every real investigation (`agents/investigate.py::investigate()`) to hire 2-4 random $0.01 x402 market-data offerings against the token under review, using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`); results fold into the report's "Data Agent Intel" section | `agents/data_agent.py`, worker's `/data/*` x402 routes (`worker/src/dataHandlers.ts`) | per-investigation, capped 15 paid hires/day + a 2h minimum interval |
 
-**Design rule:** each agent is **rule-based first, LLM only when reasoning is required.**
-SCOUT ranks by numeric fit score and gets a frontier-model strategic briefing every cycle
-(coverage over conserving that credit, by explicit direction), then acts on real incidents
-across any chain investigate.py supports via security_sweep.py's verified pipeline (not
-just Base); ORACLE flags by thresholds (no LLM);
+**Design rule:** each agent is **rule-based first, a frontier-model call only when real
+reasoning is required.** SCOUT ranks by numeric fit score and gets a frontier-model strategic
+briefing every cycle (coverage over conserving that credit, by explicit direction), then acts
+on real incidents across any chain investigate.py supports via security_sweep.py's verified
+pipeline (not just Base); ORACLE flags by fixed numeric thresholds, no model call at all;
 CURATOR's tool proposals are now also grounded in SCOUT's real bounty-radar opportunities,
 not only registry gaps.
 
@@ -177,7 +177,7 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/
    Together), plus a frontier tier (xAI/Gemini) on top for reasoning-heavy calls.
-4. [OK] SCOUT shipped (rule-based + every-cycle strategic briefing + real, cross-chain incident-forensics action, hourly). [OK] ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
+4. [OK] SCOUT shipped (rule-based + every-cycle strategic briefing + real, cross-chain incident-forensics action, hourly). [OK] ORACLE shipped (fixed numeric thresholds, no model call, 6-hourly broadcasts).
 5. [OK] wallet_trace switched to Alchemy (VAPE_TRACE_ALCHEMY_API), live-verified against the
    real Transfers API (PR #145). [TBD] still unlocks: a real auto-handler for `forensics_deep`
    ($2)/`wallet_recon` ($0.03), and the LEDGER agent — the tool works, nothing calls it
