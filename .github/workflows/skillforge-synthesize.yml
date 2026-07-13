@@ -16,10 +16,6 @@ concurrency:
 jobs:
   synthesize:
     runs-on: ubuntu-latest
-    env:                              # ← ADDED: job-level env for all MCP/research keys
-      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
