@@ -19,9 +19,9 @@ Pipeline (all keyless where possible, graceful degradation):
 
 Scoring is deterministic — score() below is a pure weighted heuristic, never an
 LLM call, and its verdict is never overridden by one. On top of that, every
-report gets a real synthesis layer: _grok_expert_assessment() has Grok (first,
-via agents/llm.py's FRONTIER_ORDER) read the exact same evidence and write
-actual analysis plus an explicit AGREE/DISAGREE second opinion on the verdict —
+report gets a real synthesis layer: _expert_assessment() has the frontier
+model (via agents/llm.py's FRONTIER_ORDER) read the exact same evidence and
+write actual analysis plus an explicit AGREE/DISAGREE second opinion on the verdict —
 disagreements are logged to Memory as signal, never used to mutate the verdict
 itself. Same "surface, don't override" pattern as agents/critic.py's
 structural self-check. Degrades to "not available this cycle" with zero
@@ -724,7 +724,7 @@ def auto_target(chain=None):
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
                  defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None,
-                 grok_assessment=None):
+                 expert_assessment=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -777,12 +777,12 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append("- None found. Absence of red flags is not evidence of safety — a clean sweep "
                   "with zero positive signals still caps the score below PROCEED tier.")
     L.append("")
-    L.append("## Expert Assessment (Grok)")
-    if grok_assessment and grok_assessment.get("text"):
-        tag = "⚠️ **DISAGREES with the verdict above**" if grok_assessment["disagrees"] else "Agrees with the verdict above"
+    L.append("## Expert Assessment")
+    if expert_assessment and expert_assessment.get("text"):
+        tag = "⚠️ **DISAGREES with the verdict above**" if expert_assessment["disagrees"] else "Agrees with the verdict above"
         L.append(f"- {tag}:")
         L.append("")
-        L.append(grok_assessment["text"])
+        L.append(expert_assessment["text"])
     else:
         L.append("- Expert assessment not available this cycle.")
     L.append("")
@@ -896,7 +896,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append("")
     L.append("---")
     L.append("")
-    L.append("*V.A.P.E. — The chain never lies. Investigation conducted with keyless, "
+    L.append("*V.A.P.E. — investigation conducted with keyless, "
              "real-data recon (GoPlus · DexScreener · Base RPC · Etherscan V2 · DeFiLlama hack feed "
              "& price oracle) plus a real web search for public reputation signals.*")
     with open(path, "w") as f:
@@ -1113,15 +1113,15 @@ def _fmt_data_agent_deliverable(d):
     return "; ".join(parts) if parts else "no notable fields"
 
 
-def _grok_expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals,
+def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals,
                              gp, dex, onchain, verif, corr, web_rep, defillama,
                              deployer_siblings, data_agent_intel):
     """Real synthesis of everything gathered this cycle — score() already
     produces a deterministic rule-based verdict, but write_report() below
     otherwise just lists each source's raw fields with no reasoning
-    connecting them. This gives Grok the same evidence a human reviewer
-    would see and has it write actual analysis, plus an explicit second
-    opinion on the verdict. Never overrides score()'s verdict — same
+    connecting them. This gives the frontier model the same evidence a
+    human reviewer would see and has it write actual analysis, plus an
+    explicit second opinion on the verdict. Never overrides score()'s verdict — same
     "surface disagreement, never mutate" pattern as agents/critic.py's
     structural self-check; a real disagreement here is signal for
     self_improve.py/review_ledger.py, not a verdict change. Never raises."""
@@ -1172,7 +1172,7 @@ def _grok_expert_assessment(target, sym, chain, verdict, s, reasons, positive_si
                 f"{h['offering']}={_fmt_data_agent_deliverable(h['deliverable'])}" for h in paid))
 
     system = (
-        "You are Grok, VAPE's lead investigator. VAPE is an autonomous on-chain detective "
+        "You are VAPE's lead investigator. VAPE is an autonomous on-chain detective "
         "specializing in Base/EVM forensics and smart-contract security. Below is every real "
         "piece of evidence gathered this cycle by VAPE's own tools. Write real analysis "
         "connecting the evidence, not a restatement of the fields. Never invent evidence not "
@@ -1200,8 +1200,8 @@ def _grok_expert_assessment(target, sym, chain, verdict, s, reasons, positive_si
     return {"text": text, "disagrees": text.upper().startswith("DISAGREE")}
 
 
-def _log_grok_disagreement(target, chain, sym, verdict, s, assessment_text):
-    """Best-effort: a real verdict disagreement from Grok's expert assessment
+def _log_expert_disagreement(target, chain, sym, verdict, s, assessment_text):
+    """Best-effort: a real verdict disagreement from the expert assessment
     is signal for self_improve.py/review_ledger.py, not just report color —
     log it the same way agents/critic.py logs a structural inconsistency."""
     if not append_to_memory:
@@ -1209,15 +1209,15 @@ def _log_grok_disagreement(target, chain, sym, verdict, s, assessment_text):
     try:
         append_to_memory(
             category="lesson",
-            title=f"Grok disagreed with {sym} ({target[:10]}) verdict {verdict} ({s}/100)",
+            title=f"Expert assessment disagreed with {sym} ({target[:10]}) verdict {verdict} ({s}/100)",
             content=assessment_text[:1800],
             source="agents/investigate.py",
-            tags=["grok", "expert-assessment", "verdict-disagreement"],
+            tags=["expert-assessment", "verdict-disagreement"],
             confidence=0.7,
             metadata={"target": target, "chain": str(chain), "verdict": verdict, "score": s},
         )
     except Exception as e:
-        print(f"[investigate] grok disagreement memory log failed: {e}")
+        print(f"[investigate] expert-assessment disagreement memory log failed: {e}")
 
 
 def _deployer_graph_intel(creator_address, address):
@@ -1277,16 +1277,16 @@ def investigate(address, chain="8453", hint="", force=False):
         print(f"[investigate] CRITIC FLAGGED {address}: {critic_result['issues']}")
         critic.log_finding(address, chain, prelim_sym, critic_result["issues"])
 
-    grok_assessment = _grok_expert_assessment(address, prelim_sym, chain, verdict, s, reasons,
+    expert_assessment = _expert_assessment(address, prelim_sym, chain, verdict, s, reasons,
                                                positive_signals, gp, dex, onchain, verif, corr,
                                                web_rep, dl_intel, siblings, data_agent_intel)
-    if grok_assessment and grok_assessment["disagrees"]:
-        print(f"[investigate] GROK DISAGREES with {verdict} verdict for {address}")
-        _log_grok_disagreement(address, chain, prelim_sym, verdict, s, grok_assessment["text"])
+    if expert_assessment and expert_assessment["disagrees"]:
+        print(f"[investigate] EXPERT ASSESSMENT DISAGREES with {verdict} verdict for {address}")
+        _log_expert_disagreement(address, chain, prelim_sym, verdict, s, expert_assessment["text"])
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
                                     positive_signals, web_rep, dl_intel, siblings, critic_result,
-                                    data_agent_intel, grok_assessment)
+                                    data_agent_intel, expert_assessment)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)

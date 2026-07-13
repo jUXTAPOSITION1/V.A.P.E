@@ -102,7 +102,7 @@ Workers backend (`worker/`) for the x402 payment gate and Alchemy-backed portfol
 
 ## Architecture
 
-Three cooperating pieces, all free-tier:
+Three cooperating pieces:
 
 | Layer | What it is | Where |
 |---|---|---|
@@ -120,7 +120,7 @@ Full component-level detail, the real data flow, and current status of every pie
 ```bash
 git clone https://github.com/jUXTAPOSITION1/V.A.P.E.git
 cd V.A.P.E
-cp .env.example .env        # fill in at least one LLM key (Groq is free)
+cp .env.example .env        # fill in at least one LLM provider key
 pip install -r agents/requirements.txt
 ```
 
@@ -229,14 +229,16 @@ actual product is the live GitHub Pages site above.
 Copy `.env.example` to `.env`. At minimum, set one LLM key:
 
 ```bash
-GROQ_API_KEY=       # required — free tier, primary fast path
+GROQ_API_KEY=       # free tier — enough to run everything
 ```
 
-Everything else (Etherscan, additional LLM fallbacks, MCP research providers, the
-worker's Cloudflare/Alchemy/CoinGecko keys) is optional — VAPE degrades gracefully to
-keyless data sources when a key isn't set. See `.env.example` for the full list and
-[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for which secrets the live site's CI actually
-needs.
+xAI's Grok 4.1 Fast is the primary model for reports/investigations/expert assessment
+when `XAI_API_KEY_1` is set (see `agents/llm.py`'s `FRONTIER_ORDER`), but every path has a
+free fallback — nothing in VAPE requires a paid key to run. Everything else (Etherscan,
+Alchemy, additional LLM fallbacks, MCP research providers, the worker's Cloudflare/
+CoinGecko keys) is optional — VAPE degrades gracefully to keyless data sources when a key
+isn't set. See `.env.example` for the full list and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+for which secrets the live site's CI actually needs.
 
 ---
 
@@ -261,6 +263,6 @@ MIT — see [LICENSE](LICENSE).
 
 <div align="center">
 
-**The chain never lies.**
+**On-chain data, real tools, no fabricated results.**
 
 </div>

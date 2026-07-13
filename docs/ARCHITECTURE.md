@@ -3,8 +3,9 @@
 > Status legend: [OK] implemented & running · [WIP] partial/scaffolded · [TBD] planned
 
 V.A.P.E. is an autonomous on-chain security & intelligence operation. It runs as
-**two cooperating runtimes** plus a **self-improving skill ecosystem**, all on free
-tiers (Groq + GitHub Actions + open-source tooling).
+**two cooperating runtimes** plus a **self-improving skill ecosystem**, entirely on
+GitHub Actions and open-source tooling — zero required cost to run, with an optional
+paid frontier-model upgrade for the calls that benefit most from it.
 
 ## High-level flow
 
@@ -48,7 +49,7 @@ component's state changes.
 |---|---|---|
 | `agents/run.py` | [OK] | Hourly bounty-cycle orchestration |
 | `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring |
-| Groq/Grok LLM tier | [OK] | Multi-provider fallback chain, see `agents/llm.py` |
+| LLM tier | [OK] | Frontier model + multi-provider free fallback chain, see `agents/llm.py` |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` / wallet | [WIP] | ACP job fulfillment + wallet scaffolding |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
