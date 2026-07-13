@@ -22,6 +22,11 @@ Rate limits (hard caps enforced HERE, not the worker's job):
     skillforge/research.py's MONTHLY_QUOTA pattern, just per-day). Once hit,
     this becomes a documented no-op for the rest of the day rather than
     erroring the investigation that recruited it.
+  - A 2-hour minimum interval between hire attempts (skillforge/memory/
+    data_agent_quota.json's "last_ts"), independent of the daily cap above —
+    lets agents/investigate.py run on a much tighter cadence (the site's
+    Featured Investigation spotlight) without DATA AGENT itself firing any
+    more often than every 2h.
 
 Restricted to offerings that only need the address already under
 investigation, a chain slug, or no input at all — protocol/protocol_fees/
@@ -50,6 +55,7 @@ NETWORK = "eip155:8453"  # Base mainnet — same network the worker's PAY_TO_ADD
 DAILY_CAP = 15
 MIN_PER_RUN = 2
 MAX_PER_RUN = 4
+MIN_INTERVAL_SECONDS = 2 * 60 * 60  # 2h floor between hire attempts, see module docstring
 
 # Real, funded wallet the user provisioned for this agent — a fund-moving
 # action never proceeds unless DATA_AGENT_PRIVATE_KEY actually derives this
@@ -97,13 +103,32 @@ def _remaining_today():
     return max(0, DAILY_CAP - q.get("count", 0))
 
 
+def _seconds_since_last_attempt():
+    """None if there's no record yet (never gates a fresh install)."""
+    last_ts = _load_quota().get("last_ts")
+    if not last_ts:
+        return None
+    try:
+        last = datetime.fromisoformat(last_ts.replace("Z", "+00:00"))
+    except Exception:
+        return None
+    return (datetime.now(timezone.utc) - last).total_seconds()
+
+
+def _mark_attempt():
+    q = _load_quota()
+    if q.get("date") != _today():
+        q = {"date": _today(), "count": 0}
+    q["last_ts"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    _save_quota(q)
+
+
 def _record_hires(n):
     if n <= 0:
         return
     q = _load_quota()
-    today = _today()
-    if q.get("date") != today:
-        q = {"date": today, "count": 0}
+    if q.get("date") != _today():
+        q = {"date": _today(), "count": 0, "last_ts": q.get("last_ts")}
     q["count"] = q.get("count", 0) + n
     _save_quota(q)
 
@@ -173,10 +198,17 @@ def run_for_investigation(address, chain="8453"):
     """Recruited by agents/investigate.py::investigate() for every real
     report. Hires 2-4 random $0.01 x402 offerings against the token under
     investigation (capped at 15 total paid hires/day across all
-    investigations) and returns what it bought so the report can fold it in.
+    investigations, and no more often than once every 2h regardless of how
+    often investigate.py itself runs — see MIN_INTERVAL_SECONDS) and returns
+    what it bought so the report can fold it in.
     """
     if str(chain) != "8453":
         return {"hired": [], "note": "data agent only wired for Base (8453) investigations"}
+
+    since_last = _seconds_since_last_attempt()
+    if since_last is not None and since_last < MIN_INTERVAL_SECONDS:
+        wait_min = round((MIN_INTERVAL_SECONDS - since_last) / 60)
+        return {"hired": [], "note": f"2h interval not yet up ({wait_min}m remaining) — skipped this cycle"}
 
     remaining = _remaining_today()
     if remaining < MIN_PER_RUN:
@@ -185,6 +217,8 @@ def run_for_investigation(address, chain="8453"):
     session = _build_session()
     if session is None:
         return {"hired": [], "note": "DATA_AGENT_PRIVATE_KEY not configured or invalid — skipped"}
+
+    _mark_attempt()
 
     n = min(random.randint(MIN_PER_RUN, MAX_PER_RUN), remaining)
     picks = random.sample(list(OFFERING_PARAMS.keys()), n)

@@ -44,10 +44,10 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
-      - name: Deep Investigation (auto target)
-        run: python agents/investigate.py --auto || echo "no auto target this cycle"
-        env:
-          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      # The auto-target deep investigation moved to its own workflow
+      # (featured-investigation.yml, every 30 min) so the site's Featured
+      # Investigation spotlight + DATA AGENT get a fresher cadence than the
+      # rest of this hourly cycle without bumping everything else's cost.
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)

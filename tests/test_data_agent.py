@@ -115,6 +115,48 @@ def test_hire_reports_unpaid_on_non_200(monkeypatch):
     assert "error" in deliverable
 
 
+def test_second_call_within_2h_is_skipped_without_touching_session(monkeypatch, tmp_path):
+    quota_path = tmp_path / "data_agent_quota.json"
+    ledger_path = tmp_path / "data_agent_ledger.jsonl"
+    monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
+    monkeypatch.setattr(data_agent, "LEDGER_PATH", str(ledger_path))
+
+    def responder(url, params):
+        offering = url.rsplit("/", 1)[-1]
+        return _FakeResponse(200, {"offering": offering, "status": "ok", "deliverable": {"ok": True}})
+
+    monkeypatch.setattr(data_agent, "_build_session", lambda: _FakeSession(responder))
+
+    first = data_agent.run_for_investigation("0x" + "cc" * 20, chain="8453")
+    assert len(first["hired"]) > 0  # real hire happened, last_ts is now "now"
+
+    called = {"n": 0}
+    monkeypatch.setattr(data_agent, "_build_session", lambda: called.update(n=called["n"] + 1))
+    second = data_agent.run_for_investigation("0x" + "dd" * 20, chain="8453")
+    assert second["hired"] == []
+    assert "2h interval" in second["note"]
+    assert called["n"] == 0  # gated before ever building a session
+
+
+def test_call_after_2h_elapsed_is_allowed(monkeypatch, tmp_path):
+    quota_path = tmp_path / "data_agent_quota.json"
+    monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
+
+    from datetime import datetime, timedelta, timezone
+    stale_ts = (datetime.now(timezone.utc) - timedelta(hours=3)).isoformat().replace("+00:00", "Z")
+    quota_path.write_text(json.dumps({"date": data_agent._today(), "count": 0, "last_ts": stale_ts}))
+
+    def responder(url, params):
+        offering = url.rsplit("/", 1)[-1]
+        return _FakeResponse(200, {"offering": offering, "status": "ok", "deliverable": {"ok": True}})
+
+    monkeypatch.setattr(data_agent, "LEDGER_PATH", str(quota_path.parent / "ledger.jsonl"))
+    monkeypatch.setattr(data_agent, "_build_session", lambda: _FakeSession(responder))
+
+    result = data_agent.run_for_investigation("0x" + "ee" * 20, chain="8453")
+    assert len(result["hired"]) > 0
+
+
 def test_hire_reports_paid_on_200_even_if_deliverable_reports_error(monkeypatch):
     # A real upstream miss still means the x402 payment already settled —
     # same as any other paid job that comes back with "no data".

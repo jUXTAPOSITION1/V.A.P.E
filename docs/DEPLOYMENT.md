@@ -53,6 +53,7 @@ The Python engine + SKILLFORGE run entirely in GitHub Actions. No server needed.
 | Workflow | Schedule | Purpose |
 |---|---|---|
 | `bounty-cycle.yml` | hourly `0 * * * *` | bounty-hunt + self-review → commits reports/ |
+| `featured-investigation.yml` | every 30 min `*/30 * * * *` | auto-target deep investigation (site's Featured Investigation spotlight); recruits DATA AGENT (`agents/data_agent.py`, gated to its own 2h floor) |
 | `skillforge-harvest.yml` | hourly `:17` | real CVE + tool-release intel (no LLM) |
 | `skillforge-toolcheck.yml` | every 4h `:37` | install+verify 13 security tools (no LLM) |
 | `skillforge-synthesize.yml` | daily `06:00` | Groq distill → opens PR |
