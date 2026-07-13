@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T05:59:59Z",
+  "generated": "2026-07-13T08:30:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 324,
@@ -1565,7 +1565,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48563623",
+      "version": "48569952",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1575,7 +1575,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.06 eth_dom 9.56 mcap_chg_24h -1.34",
+      "version": "btc_dom 56.06 eth_dom 9.57 mcap_chg_24h -1.04",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1595,7 +1595,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x6f0766314ef2 App Store: Install BTC.AI to Claim Airdrop 8.0 from 0x833589fc to",
+      "version": "0x9c9142d21837 App Store: Install BTC.AI to Claim Airdrop 8.0 from 0x833589fc to",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
