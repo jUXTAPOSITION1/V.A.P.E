@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T15:43:58Z",
+  "generated": "2026-07-13T16:05:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 333,
@@ -14,7 +14,7 @@
       "macro": 8
     },
     "broadcasts": 61,
-    "investigations": 108,
+    "investigations": 110,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260713-132624-0xeC0d0159.md",
+      "file": "investigation-20260713-160550-0x5E176083.md",
       "title": "Investigation \u2014 OpenAI",
       "symbol": "OpenAI",
       "name": "OpenAI",
-      "date": "2026-07-13T13:26:24Z",
-      "target": "0xeC0d015979077ebDDB16f665cCF2b4022fa3Ab07",
+      "date": "2026-07-13T16:05:50Z",
+      "target": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-132624-0xeC0d0159.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-160550-0x5E176083.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260713-160550-0x5E176083.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-13T16:05:50Z",
+      "target": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-160550-0x5E176083.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260713-132624-0xeC0d0159.md",
@@ -592,20 +606,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5010 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-174859-0x853a7c99.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260706-142724-0x454777B9.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-06T14:27:24Z",
-      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-25] Very low liquidity $154 (rug/illiquid); [-10] Low liquidity $154; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-142724-0x454777B9.md"
     }
   ],
   "reports": [
