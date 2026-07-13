@@ -454,6 +454,25 @@
     "symbol": "CTR",
     "times_investigated": 1
   },
+  "8453:0x20bc6cbb8c5c9b356f554de71d45bf5508892346": {
+    "address": "0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346",
+    "chain": "8453",
+    "creator_address": "0x46dd5eea1cd2dac0a248730d60a65370bc7d7c28",
+    "first_investigated": "2026-07-13T10:40:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260713-104037-0x20Bc6CBB.md",
+        "score": 100,
+        "ts": "2026-07-13T10:40:37Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-13T10:40:37Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "BASE",
+    "times_investigated": 1
+  },
   "8453:0x28ce689e12d8d9ff18651e8684aac88f1334fb07": {
     "address": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
     "chain": "8453",
