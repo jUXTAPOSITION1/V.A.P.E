@@ -145,7 +145,7 @@ its key is unset, so this table is "what's wired," not "what you personally have
   sensitive forensics; Groq/Cerebras/Together are inference-only on free tier.
   Flag Google AI Studio / Mistral Experiment as "may train" — use only for public intel.
 - **Ethos update (2026-07):** VAPE is deliberately moving off "stay free at all costs"
-  for the calls that matter most. `FRONTIER_ORDER` (Grok first, key 1 then key 2, then
+  for the calls that matter most. `FRONTIER_ORDER` (Grok first, then
   Groq/Gemini/the free chain) is now the actual PRIMARY route — not an emergency
   fallback — for every reasoning-heavy call site: the periodic sweep narratives
   (`base/macro/security/sentiment/virtuals_sweep.py`), the flagship bounty report

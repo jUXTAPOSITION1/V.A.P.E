@@ -23,7 +23,6 @@ jobs:
       # which needs the full set below, same secrets intel-sweeps.yml wires
       # for the same reason.
       XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
-      XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
