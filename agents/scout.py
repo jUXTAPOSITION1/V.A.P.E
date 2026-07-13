@@ -5,14 +5,20 @@ Per docs/ARCHITECTURE_ROADMAP.md's own design rule ("rule-based first, LLM
 only when reasoning is required"), SCOUT ranks opportunities by a plain
 numeric fit score — no LLM call, no token spend, safe to run hourly.
 
-The one exception, where reasoning genuinely is required: when this cycle's
-scan actually turns up something new, _grok_briefing() below adds a real
-strategic analysis (Grok first via agents/llm.py's FRONTIER_ORDER) on top of
-the numeric table — why the top opportunities matter and what VAPE should
-actually do about them, not just a re-sorted list. Gated on new_entries
-being non-empty (most hourly runs have none — DeFiLlama's feed doesn't move
-every hour) specifically to stay inside Grok's free/one-time API credit
-rather than spending it on 24 near-identical calls/day.
+The one exception, where reasoning genuinely is required: every cycle with
+anything to assess gets a real strategic analysis on top of the numeric
+table (_grok_briefing() below, Grok first via agents/llm.py's FRONTIER_ORDER)
+— why the top opportunities matter and what VAPE should actually do about
+them, not just a re-sorted list. Runs every cycle, not only when something's
+new — coverage over conserving Grok's one-time credit, by explicit direction.
+
+Insight also gets ACTED on, not just narrated: _act_on_base_incidents() below
+delegates to agents/security_sweep.py's already-verified Base-chain
+address-resolution pipeline (same dedup state file security_sweep.py's own
+scheduled runs use) so a real incident gets a real agents/investigate.py
+investigation triggered from SCOUT's hourly cadence too, not only
+security_sweep's 4x/day. Never fabricates an address — same "verify or skip"
+guarantee as attempt_incident_forensics() itself.
 
 Real data source: DeFiLlama's public hacks feed (https://api.llama.fi/hacks,
 keyless, already proven elsewhere in this repo via
@@ -141,27 +147,23 @@ def fetch_defillama_hacks(limit=FETCH_LIMIT):
 
 
 def _grok_briefing(new_entries, shown):
-    """Real strategic analysis of this cycle's top opportunities — Grok's
+    """Real strategic analysis of THIS cycle's top opportunities — Grok's
     reasoning on WHY they matter and WHAT VAPE should actually do about
-    them, not just a re-statement of the numeric-fit table below. Only
-    called when something genuinely new appeared this cycle (most hourly
-    runs have zero — DeFiLlama's feed doesn't move every hour) to keep
-    this inside Grok's free/one-time credit tier rather than burning it on
-    24 near-identical calls/day re-explaining unchanged data. Returns ""
-    on any failure/unavailability/nothing-new — a digest without a
-    briefing is still a complete, honest digest, per this repo's own
-    "rule-based first, LLM only when reasoning is required" design rule.
+    them, not just a re-statement of the numeric-fit table below. Runs
+    every cycle that has anything to assess (not gated on new_entries —
+    per explicit direction, coverage matters more than conserving Grok's
+    one-time credit here). Returns "" on any failure/unavailability/
+    nothing-to-assess — a digest without a briefing is still a complete,
+    honest digest.
     """
-    if not new_entries:
+    top = shown[:10]
+    if not top:
         return ""
     try:
         from agents.llm import ask_safe, FRONTIER_ORDER
     except Exception:
         return ""
 
-    top = shown[:10]
-    if not top:
-        return ""
     lines = [
         f"- {e.get('name', 'Unknown')} | platform={e.get('platform', '')} | "
         f"fit={e.get('fitScore', 0)} | prize=${e.get('prizeUsd', 0):,.0f} | "
@@ -181,13 +183,15 @@ def _grok_briefing(new_entries, shown):
     user = (
         "=== TOP-RANKED OPPORTUNITIES THIS CYCLE (real, DeFiLlama hacks feed + seed bounty data) ===\n"
         + "\n".join(lines)
-        + "\n\n=== NEW THIS CYCLE ===\n" + "\n".join(new_lines)
+        + "\n\n=== NEW THIS CYCLE ===\n" + ("\n".join(new_lines) if new_lines else "(none — same top set as last cycle)")
         + "\n\n=== YOUR TASK ===\n"
         "Pick the 3-5 opportunities most worth VAPE's attention right now. For each: WHY it "
         "matters (technique novelty, chain relevance, prize vs. effort), WHAT VAPE-specific "
         "capability or tool this would exercise or expose a gap in (recon, static analysis, "
-        "forensics tracing), and ONE concrete next action. If genuinely nothing here is worth "
-        "VAPE's attention this cycle, say so plainly instead of padding."
+        "forensics tracing), and ONE concrete next action. If nothing changed since last cycle, "
+        "say that plainly and don't repeat the same analysis verbatim — note what, if anything, "
+        "is still worth chasing. If genuinely nothing here is worth VAPE's attention, say so "
+        "plainly instead of padding."
     )
     try:
         text, _provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
@@ -200,7 +204,34 @@ def _grok_briefing(new_entries, shown):
     return text.strip()
 
 
-def _write_digest(entries, new_count, total_count, new_entries):
+def _act_on_base_incidents():
+    """Real action step, not just narration: for recent Base-chain hack
+    incidents, delegate to agents.security_sweep's already-built,
+    address-verification pipeline (attempt_incident_forensics) — same
+    skillforge/memory/attack_response_state.json dedup file
+    security_sweep.py's own scheduled runs use, so this never re-does work
+    those runs already did (or vice versa). Triggers a REAL
+    agents.investigate.investigate() call whenever a real, verified address
+    is found. Never fabricates an address: an incident search finding
+    nothing verifiable is honestly recorded as unresolved, same as
+    attempt_incident_forensics()'s own guarantee. Returns the list of
+    outcomes; [] on any failure/no candidates — never raises."""
+    try:
+        from agents.data_fetchers import get_hack_feed
+        from agents.security_sweep import attempt_incident_forensics
+    except Exception as e:
+        print(f"[SCOUT] action step unavailable: {e}")
+        return []
+    try:
+        feed = get_hack_feed(limit=FETCH_LIMIT)
+        incidents = feed.get("incidents", []) if isinstance(feed, dict) else []
+        return attempt_incident_forensics(incidents)
+    except Exception as e:
+        print(f"[SCOUT] action step failed: {e}")
+        return []
+
+
+def _write_digest(entries, new_count, total_count, new_entries, forensics_outcomes=None):
     now = datetime.now(timezone.utc)
     path = os.path.join(INTEL_DIR, f"digest-{now.strftime('%Y-%m-%d-%H')}.md")
     ranked = sorted(entries, key=lambda x: x.get("fitScore", 0), reverse=True)
@@ -216,6 +247,20 @@ def _write_digest(entries, new_count, total_count, new_entries):
     briefing = _grok_briefing(new_entries, shown)
     if briefing:
         lines += ["## Strategic Briefing (Grok)", "", briefing, ""]
+
+    if forensics_outcomes:
+        lines += ["## Actions Taken This Cycle", ""]
+        resolved = [o for o in forensics_outcomes if o.get("resolved")]
+        if resolved:
+            for o in resolved:
+                lines.append(f"- ✅ **{o['incident']}** — verified address `{o['address']}`, "
+                             "real investigation launched (see intel/investigations/).")
+        unresolved = [o for o in forensics_outcomes if not o.get("resolved")]
+        if unresolved:
+            lines.append(f"- Searched but could not verify a real address for "
+                         f"{len(unresolved)} other recent Base incident(s) this cycle "
+                         "(no fabricated targets — recorded as unresolved).")
+        lines.append("")
 
     lines += [
         "| Fit | Prize | Platform | Program | Status | New |",
@@ -275,11 +320,16 @@ def run():
         _save_json(OPPORTUNITIES_PATH, opportunities)
 
     _save_json(SEEN_PATH, seen)
-    digest_path = _write_digest(opportunities, len(new_entries), len(opportunities), new_entries)
+    forensics_outcomes = _act_on_base_incidents()
+    digest_path = _write_digest(opportunities, len(new_entries), len(opportunities), new_entries,
+                                forensics_outcomes)
 
+    resolved_n = sum(1 for o in forensics_outcomes if o.get("resolved"))
     print(f"[SCOUT] scanned {len(fetched)} DeFiLlama incidents, {len(new_entries)} new, "
-          f"{len(opportunities)} total in archive. Digest: {os.path.relpath(digest_path, _REPO_ROOT)}")
-    return {"scanned": len(fetched), "new": len(new_entries), "total": len(opportunities)}
+          f"{len(opportunities)} total in archive, {resolved_n} real investigation(s) launched this "
+          f"cycle. Digest: {os.path.relpath(digest_path, _REPO_ROOT)}")
+    return {"scanned": len(fetched), "new": len(new_entries), "total": len(opportunities),
+            "investigations_launched": resolved_n}
 
 
 if __name__ == "__main__":
