@@ -1,0 +1,34 @@
+name: Security Lint (CI workflow regression guard)
+
+# Encodes the exact CI supply-chain/injection risk classes found in the
+# 2026-07-13 repo-wide security audit (see docs/SECURITY_PROTOCOL.md) as a
+# deterministic, network-free check against every workflow file — so a
+# future PR to .github/workflows/ (including one self_improve.py or
+# skillforge_build.py opens on its own) can't silently reintroduce any of
+# them. See scripts/security_lint.py for what's actually checked.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - "scripts/security_lint.py"
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "scripts/security_lint.py"
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install PyYAML
+        run: pip install -q pyyaml
+      - name: Run security_lint
+        run: python3 scripts/security_lint.py

@@ -41,11 +41,13 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
       - name: Commit report
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/ skillforge/memory/ || true
-          git commit -m "VAPE build request report: issue #${{ github.event.issue.number }}" || { echo "no changes"; exit 0; }
+          git commit -m "VAPE build request report: issue #$ISSUE_NUMBER" || { echo "no changes"; exit 0; }
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
             git push && break || { echo "push race retry $i"; sleep $((i*3)); }

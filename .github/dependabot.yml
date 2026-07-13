@@ -21,6 +21,17 @@ updates:
     open-pull-requests-limit: 10
     labels: ["dependencies", "security"]
 
+  # worker/ is the real Node project (x402 payment worker) — the root entry
+  # above only covers package.json's placeholder (no dependencies), so
+  # worker/'s actual deps (hono, @x402/*, jose, wrangler) had no Dependabot
+  # coverage at all until this entry.
+  - package-ecosystem: "npm"
+    directory: "/worker"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels: ["dependencies", "security"]
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

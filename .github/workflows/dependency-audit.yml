@@ -1,4 +1,4 @@
-name: Dependency Audit (pip-audit)
+name: Dependency Audit (pip-audit + npm audit)
 
 on:
   push:
@@ -6,11 +6,15 @@ on:
     paths:
       - "requirements.txt"
       - "agents/requirements.txt"
+      - "worker/package.json"
+      - "worker/package-lock.json"
       - ".github/workflows/dependency-audit.yml"
   pull_request:
     paths:
       - "requirements.txt"
       - "agents/requirements.txt"
+      - "worker/package.json"
+      - "worker/package-lock.json"
   schedule:
     - cron: '15 6 * * 1'   # weekly, Monday 06:15 UTC — catches newly-disclosed CVEs in pinned versions
   workflow_dispatch:
@@ -27,6 +31,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: worker/package-lock.json
 
       - name: pip-audit (root)
         id: root_audit
@@ -40,14 +49,30 @@ jobs:
         continue-on-error: true
         run: pip-audit -r agents/requirements.txt | tee /tmp/pip-audit-agents.txt
 
+      # worker/ is the real payment surface (x402 settlement, wallet address
+      # config) — previously the only Node project in this repo with zero
+      # dependency-vuln scanning anywhere in CI (dependabot.yml's npm entry
+      # only covers the root placeholder package.json, which has no
+      # dependencies at all). `--omit=dev` matches what actually ships/runs;
+      # dev-only tooling CVEs (tsx/typescript/wrangler CLI) don't affect the
+      # deployed Worker and would otherwise drown out real findings.
+      - name: npm audit (worker)
+        id: worker_audit
+        continue-on-error: true
+        working-directory: worker
+        run: |
+          npm ci
+          npm audit --omit=dev | tee /tmp/npm-audit-worker.txt
+
       - name: Open issue on new vulnerabilities
-        if: steps.root_audit.outcome == 'failure' || steps.agents_audit.outcome == 'failure'
+        if: steps.root_audit.outcome == 'failure' || steps.agents_audit.outcome == 'failure' || steps.worker_audit.outcome == 'failure'
         run: |
           {
             echo "Dependency audit found issues — see run for full output."
             echo
             echo '### pip-audit (root)'; cat /tmp/pip-audit-root.txt 2>/dev/null
             echo '### pip-audit (agents)'; cat /tmp/pip-audit-agents.txt 2>/dev/null
+            echo '### npm audit (worker, production deps)'; cat /tmp/npm-audit-worker.txt 2>/dev/null
           } > /tmp/audit-body.txt
           gh issue create --title "Dependency audit: vulnerabilities found $(date -u +%F)" \
             --body-file /tmp/audit-body.txt --label "dependencies,security" || true

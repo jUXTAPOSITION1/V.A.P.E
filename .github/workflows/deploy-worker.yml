@@ -59,7 +59,13 @@ jobs:
 
       - name: Deploy
         if: ${{ env.HAS_CF_TOKEN == 'true' }}
-        uses: cloudflare/wrangler-action@v4
+        # Pinned to the v4 tag's current commit, not the mutable tag itself —
+        # this step runs with live CLOUDFLARE_API_TOKEN/ACCOUNT_ID on every
+        # push to main touching worker/**, so a repointed tag on the upstream
+        # action would otherwise be an unreviewed way to run arbitrary code
+        # with real deploy credentials. Re-pin deliberately (verify the new
+        # commit on cloudflare/wrangler-action first) when bumping this.
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -89,7 +95,7 @@ jobs:
       # not something that needs to run on every deploy.
       - name: List configured Worker secrets (names only, manual trigger only)
         if: ${{ success() && env.HAS_CF_TOKEN == 'true' && github.event_name == 'workflow_dispatch' }}
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

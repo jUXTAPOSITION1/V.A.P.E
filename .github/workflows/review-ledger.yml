@@ -64,11 +64,21 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Determine categories for this trigger
         id: cats
+        # Routed through env: rather than interpolated straight into the
+        # script — this job's env carries every LLM/research API key plus
+        # DATA_AGENT_PRIVATE_KEY and contents:write, so a raw
+        # ${{ github.event.inputs.* }} splice into `run:` (shell-injection
+        # into a job with that secret set) is worth closing even though this
+        # trigger is workflow_dispatch-only, not fork-reachable.
+        env:
+          INPUT_CATEGORIES: ${{ github.event.inputs.categories }}
+          INPUT_SAMPLE: ${{ github.event.inputs.sample }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
         run: |
-          if [ -n "${{ github.event.inputs.categories }}" ]; then
-            echo "categories=${{ github.event.inputs.categories }}" >> "$GITHUB_OUTPUT"
-            echo "sample=${{ github.event.inputs.sample }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "0 9 1 * *" ]; then
+          if [ -n "$INPUT_CATEGORIES" ]; then
+            echo "categories=$INPUT_CATEGORIES" >> "$GITHUB_OUTPUT"
+            echo "sample=$INPUT_SAMPLE" >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT_SCHEDULE" = "0 9 1 * *" ]; then
             echo "categories=fail" >> "$GITHUB_OUTPUT"
             echo "sample=5" >> "$GITHUB_OUTPUT"
           else
