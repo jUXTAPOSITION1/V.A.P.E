@@ -1,0 +1,182 @@
+# VAPE Engagement Status — 2026-07-13T05:53:39Z
+
+Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
+
+## Not yet attempted this cycle
+
+- Kelp (exploit $293,000,000) ($293,000,000, fit 90, defillama-hack)
+- Matcha (exploit $13,430,000) ($13,430,000, fit 90, defillama-hack)
+- Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90, defillama-hack)
+- JaredFromSubway MEV Bot (exploit $7,500,000) ($7,500,000, fit 89, defillama-hack)
+- Hyperbridge (exploit $2,500,000) ($2,500,000, fit 89, defillama-hack)
+- Thorchain DEX (exploit $10,000,000) ($10,000,000, fit 88, defillama-hack)
+- Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88, defillama-hack)
+- Polymarket International (exploit $3,000,000) ($3,000,000, fit 85, defillama-hack)
+- Grinex (exploit $15,000,000) ($15,000,000, fit 85, defillama-hack)
+- Resolv (exploit $24,500,000) ($24,500,000, fit 85, defillama-hack)
+- Aperture LM (exploit $3,200,000) ($3,200,000, fit 85, defillama-hack)
+- Moonwell Lending (exploit $1,000,000) ($1,000,000, fit 85, defillama-hack)
+- Resolv USR (exploit $24,500,000) ($24,500,000, fit 85, defillama-hack)
+- Bonzo Lend (exploit $10,050,000) ($10,050,000, fit 85, defillama-hack)
+- FOOM Cash (exploit $2,260,000) ($2,260,000, fit 84, defillama-hack)
+- IoTeX (exploit $8,000,000) ($8,000,000, fit 84, defillama-hack)
+- Aztec Bridge (exploit $2,000,000) ($2,000,000, fit 83, defillama-hack)
+- Moonwell Lending (exploit $1,780,000) ($1,780,000, fit 83, defillama-hack)
+- Trust Wallet Wallet (exploit $7,000,000) ($7,000,000, fit 83, defillama-hack)
+- Edel (exploit $403,000) ($403,000, fit 81, defillama-hack)
+- Makina (exploit $4,200,000) ($4,200,000, fit 81, defillama-hack)
+- Wasabi Perps (exploit $5,500,000) ($5,500,000, fit 80, defillama-hack)
+- New Market Trading (exploit $3,980,000) ($3,980,000, fit 80, defillama-hack)
+- LABUBU/OLPC (exploit $1,100,000) ($1,100,000, fit 80, defillama-hack)
+- Truebit (exploit $26,400,000) ($26,400,000, fit 80, defillama-hack)
+- Yearn Ether (exploit $9,000,000) ($9,000,000, fit 80, defillama-hack)
+- GANA Payment (exploit $3,100,000) ($3,100,000, fit 80, defillama-hack)
+- BonkDAO (exploit $20,000,000) ($20,000,000, fit 80, defillama-hack)
+- Hinkal (exploit $820,000) ($820,000, fit 79, defillama-hack)
+- SolvBTC (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
+- Ribbon (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
+- SubQuery Network (exploit $60,000) ($60,000, fit 78, defillama-hack)
+- Secret Network (exploit $4,670,000) ($4,670,000, fit 77, defillama-hack)
+- Cyrus Finance (exploit $5,000,000) ($5,000,000, fit 77, defillama-hack)
+- Stake DAO (exploit $176,000) ($176,000, fit 77, defillama-hack)
+- Aethir (exploit $423,000) ($423,000, fit 76, defillama-hack)
+- Venus Core Pool (exploit $3,700,000) ($3,700,000, fit 76, defillama-hack)
+- YO Protocol (exploit $3,730,000) ($3,730,000, fit 76, defillama-hack)
+- Impermax V3 (exploit $380,000) ($380,000, fit 76, defillama-hack)
+- Rhea Lend (exploit $18,400,000) ($18,400,000, fit 75, defillama-hack)
+- Blend Pools V2 (exploit $10,970,000) ($10,970,000, fit 75, defillama-hack)
+- Step Finance (exploit $40,000,000) ($40,000,000, fit 75, defillama-hack)
+- Upbit (exploit $36,000,000) ($36,000,000, fit 75, defillama-hack)
+- Verus-Ethereum Bridge (exploit $11,500,000) ($11,500,000, fit 74, defillama-hack)
+- Gravity Bridge (exploit $5,400,000) ($5,400,000, fit 74, defillama-hack)
+- ZetaChain (exploit $300,000) ($300,000, fit 74, defillama-hack)
+- SecondFi (exploit $2,400,000) ($2,400,000, fit 74, defillama-hack)
+- Royal.io (exploit $263,000) ($263,000, fit 74, defillama-hack)
+- Aave V3 (exploit $862,000) ($862,000, fit 74, defillama-hack)
+- Namada Shielded Pools (exploit $600,000) ($600,000, fit 73, defillama-hack)
+- Rari Capital (exploit $2,000,000) ($2,000,000, fit 73, defillama-hack)
+- Token of Power (exploit $1,580,000) ($1,580,000, fit 72, defillama-hack)
+- Syndicate (exploit $380,000) ($380,000, fit 72, defillama-hack)
+- Taiko Bridge (exploit $1,700,000) ($1,700,000, fit 72, defillama-hack)
+- BSC TMM/USDT (exploit $1,665,000) ($1,665,000, fit 72, defillama-hack)
+- Molt EVM (exploit $127,000) ($127,000, fit 71, defillama-hack)
+- Ploutos Money (exploit $390,000) ($390,000, fit 71, defillama-hack)
+- TMX TRIBE (exploit $1,400,000) ($1,400,000, fit 71, defillama-hack)
+- Singularity Finance (exploit $413,000) ($413,000, fit 70, defillama-hack)
+- Drift Trade (exploit $295,000,000) ($295,000,000, fit 70, defillama-hack)
+- LML/USDT staking protocol (exploit $950,000) ($950,000, fit 70, defillama-hack)
+- PRXVT (exploit $97,000) ($97,000, fit 70, defillama-hack)
+- US Permissionless Dollar (exploit $1,000,000) ($1,000,000, fit 70, defillama-hack)
+- Alephium Bridge (exploit $815,000) ($815,000, fit 68, defillama-hack)
+- Adshares (exploit $628,000) ($628,000, fit 68, defillama-hack)
+- AFI Protocol (exploit $480,000) ($480,000, fit 68, defillama-hack)
+- Saga (exploit $7,000,000) ($7,000,000, fit 68, defillama-hack)
+- JB (exploit $50,000) ($50,000, fit 67, defillama-hack)
+- Revert Lend (exploit $50,000) ($50,000, fit 67, defillama-hack)
+- Humanity (exploit $32,000,000) ($32,000,000, fit 66, defillama-hack)
+- TrustedVolumes (exploit $6,700,000) ($6,700,000, fit 66, defillama-hack)
+- StablR (exploit $2,800,000) ($2,800,000, fit 66, defillama-hack)
+- Aztec Connect (exploit $2,100,000) ($2,100,000, fit 66, defillama-hack)
+- Ekubo (exploit $1,400,000) ($1,400,000, fit 66, defillama-hack)
+- Giddy (exploit $1,300,000) ($1,300,000, fit 66, defillama-hack)
+- Unleash Protocol (exploit $3,900,000) ($3,900,000, fit 66, defillama-hack)
+- Flow (exploit $3,900,000) ($3,900,000, fit 66, defillama-hack)
+- mySwap CL (exploit $300,000) ($300,000, fit 65, defillama-hack)
+- CrossCurve (exploit $3,000,000) ($3,000,000, fit 65, defillama-hack)
+- Fusion by IPOR (exploit $336,000) ($336,000, fit 65, defillama-hack)
+- Yearn Finance (exploit $300,000) ($300,000, fit 65, defillama-hack)
+- Syscoin Bridge (exploit $8,000,000) ($8,000,000, fit 64, defillama-hack)
+- Volo Vault (exploit $3,500,000) ($3,500,000, fit 64, defillama-hack)
+- Purrlend (exploit $1,500,000) ($1,500,000, fit 64, defillama-hack)
+- Raydium AMM (exploit $1,340,000) ($1,340,000, fit 64, defillama-hack)
+- dTRINITY dLEND (exploit $257,000) ($257,000, fit 64, defillama-hack)
+- Gondi V3 (exploit $230,000) ($230,000, fit 64, defillama-hack)
+- Curve LlamaLend (exploit $240,000) ($240,000, fit 64, defillama-hack)
+- Polycule (exploit $230,000) ($230,000, fit 64, defillama-hack)
+- FutureSwap (exploit $270,000) ($270,000, fit 64, defillama-hack)
+- MONA (exploit $60,950) ($60,950, fit 63, defillama-hack)
+- Meteora DAMM V2 (exploit $1,500,000) ($1,500,000, fit 62, defillama-hack)
+- Port3 Network (exploit $166,000) ($166,000, fit 62, defillama-hack)
+- Lixir Finance (exploit $12,300) ($12,300, fit 61, defillama-hack)
+- Dango (exploit $410,000) ($410,000, fit 61, defillama-hack)
+- Velar Perps (exploit $401,000) ($401,000, fit 61, defillama-hack)
+- MSCST (exploit $129,900) ($129,900, fit 61, defillama-hack)
+- DIMO (exploit $40,000) ($40,000, fit 61, defillama-hack)
+- Aurellion (exploit $456,000) ($456,000, fit 60, defillama-hack)
+- Fluid Lending (exploit $215,000) ($215,000, fit 60, defillama-hack)
+- Mars Perps (exploit $960,000) ($960,000, fit 60, defillama-hack)
+- Echo Bridge (exploit $821,000) ($821,000, fit 58, defillama-hack)
+- SEA Token (exploit $153,000) ($153,000, fit 58, defillama-hack)
+- Ambient (exploit $110,000) ($110,000, fit 58, defillama-hack)
+- SmartCredit (exploit $72,000) ($72,000, fit 58, defillama-hack)
+- Wise Lending V2 (exploit $66,000) ($66,000, fit 58, defillama-hack)
+- Veil Cash (exploit $5,000) ($5,000, fit 57, defillama-hack)
+- 0G Labs (exploit $516,000) ($516,000, fit 57, defillama-hack)
+- DxSale (exploit $7,300,000) ($7,300,000, fit 56, defillama-hack)
+- Sweat Foundation (exploit $3,500,000) ($3,500,000, fit 56, defillama-hack)
+- RetoSwap (exploit $2,700,000) ($2,700,000, fit 56, defillama-hack)
+- RetoSwap (exploit $2,700,000) ($2,700,000, fit 56, defillama-hack)
+- TSR (exploit $2,500,000) ($2,500,000, fit 56, defillama-hack)
+- Transit Finance (exploit $1,880,000) ($1,880,000, fit 56, defillama-hack)
+- Aftermath Perps (exploit $1,140,000) ($1,140,000, fit 56, defillama-hack)
+- Little Boy Plus (exploit $367,000) ($367,000, fit 56, defillama-hack)
+- AROS (exploit $295,000) ($295,000, fit 56, defillama-hack)
+- Bankr (exploit $170,000) ($170,000, fit 56, defillama-hack)
+- Kipseli (exploit $80,000) ($80,000, fit 56, defillama-hack)
+- Zerion Wallet (exploit $100,000) ($100,000, fit 55, defillama-hack)
+- GoonFi (exploit $254,000) ($254,000, fit 54, defillama-hack)
+- Renegade (exploit $209,000) ($209,000, fit 52, defillama-hack)
+- WUSD.fi/Glove (exploit $200,000) ($200,000, fit 52, defillama-hack)
+- Quant (exploit $138,000) ($138,000, fit 52, defillama-hack)
+- MAP Protocol (exploit $110,000) ($110,000, fit 52, defillama-hack)
+- NovaBox (exploit $107,000) ($107,000, fit 52, defillama-hack)
+- Thetanuts Finance (exploit $105,000) ($105,000, fit 52, defillama-hack)
+- Stake DAO (exploit $91,000) ($91,000, fit 52, defillama-hack)
+- Juicebox V3 (exploit $52,000) ($52,000, fit 52, defillama-hack)
+- Thetanuts Finance (exploit $50,000) ($50,000, fit 52, defillama-hack)
+- Bisq (exploit $858,000) ($858,000, fit 50, defillama-hack)
+- Polymarket (exploit $700,000) ($700,000, fit 50, defillama-hack)
+- SQ Protocol (exploit $346,000) ($346,000, fit 50, defillama-hack)
+- Sharwa.Finance (exploit $32,850) ($32,850, fit 50, defillama-hack)
+- Fractal Protocol (exploit $13,700) ($13,700, fit 50, defillama-hack)
+- AIDC (exploit $121) ($121, fit 50, defillama-hack)
+- DGLD ($0, fit 50, defillama-hack)
+
+## Tracked for visibility only (no automated engagement path)
+
+- [SmarDex Smart Contracts](https://hackenproof.com/programs/smardex-smart-contracts) — hackenproof, $500,000, fit 78
+- [Citrea Protocol & Smart Contracts](https://hackenproof.com/programs/citrea-protocol-and-smart-contracts) — hackenproof, $250,000, fit 70
+- [Coinbase](https://hackerone.com/coinbase) — hackerone, $1,000,000, fit 66
+- [Morpho Midnight](https://cantina.xyz/competitions/4679e0fa-85f7-4ea5-8827-ee6c70bdee6b) — cantina, $400,000, fit 66
+- [MetaMask Validator Staking Smart Contracts](https://hackenproof.com/programs/metamask-validator-staking-smart-contracts) — hackenproof, $700,000, fit 64
+- [DeXe Protocol Smart Contracts](https://hackenproof.com/programs/dexe-protocol-smart-contracts) — hackenproof, $500,000, fit 64
+- [TETU Smart Contracts](https://hackenproof.com/programs/tetu-smart-contracts) — hackenproof, $1,000,000, fit 62
+- [Crypto.com](https://hackerone.com/crypto) — hackerone, $1,000,000, fit 62
+- [Layer3 Smart Contracts](https://hackenproof.com/programs/layer3-smart-contracts) — hackenproof, $500,000, fit 56
+- [Nado Smart Contracts](https://hackenproof.com/programs/nado-smart-contracts) — hackenproof, $500,000, fit 56
+- [1inch Smart Contract](https://hackenproof.com/programs/1inch-smart-contract) — hackenproof, $500,000, fit 56
+- [Treehouse Smart Contracts](https://hackenproof.com/programs/treehouse-smart-contracts) — hackenproof, $250,000, fit 56
+- [Account Abstraction Bugs](https://hackenproof.com/programs/account-abstraction-bugs) — hackenproof, $250,000, fit 56
+- [DeltaPrime Smart Contracts](https://hackenproof.com/programs/deltaprime-smart-contracts) — hackenproof, $250,000, fit 56
+- [Dexalot Smart Contracts (Archived)](https://hackenproof.com/programs/dexalot-smart-contracts-archived) — hackenproof, $100,000, fit 56
+- [Dexalot Smart Contracts](https://hackenproof.com/programs/dexalot-smart-contracts-2) — hackenproof, $100,000, fit 56
+- [Snowbridge On-Chain Code](https://hackenproof.com/programs/snowbridge-on-chain-code) — hackenproof, $75,000, fit 56
+- [Hyperbridge Protocol](https://hackenproof.com/programs/hyperbridge-protocol) — hackenproof, $50,000, fit 56
+- [XRP Ledger - April 2026](https://audits.sherlock.xyz/contests/1260) — sherlock, $519,000, fit 54
+- [DeXe Protocol](https://immunefi.com/bug-bounty/dexeprotocol/) — immunefi, $500,000, fit 54
+- [NEAR Intents: Bridges](https://hackenproof.com/programs/near-intents-bridges) — hackenproof, $300,000, fit 54
+- [Ripio](https://hackerone.com/ripio) — hackerone, $25,000, fit 54
+- [Ample Smart Contracts](https://hackenproof.com/programs/ample-smart-contracts) — hackenproof, $20,000, fit 54
+- [Bitmart Post-Incident Forensics Bounty Hunt](https://hackenproof.com/programs/bitmart-post-incident-forensics-bounty-hunt) — hackenproof, $58,000,000, fit 52
+- [CoinDCX Recovery Bounty Program](https://hackenproof.com/programs/coindcx-recovery-bounty-program) — hackenproof, $11,000,000, fit 52
+- [BigONE Hack Bounty Program](https://hackenproof.com/programs/bigone-hack-bounty-program) — hackenproof, $8,100,000, fit 52
+- [Ethena](https://immunefi.com/bug-bounty/ethena/) — immunefi, $3,000,000, fit 52
+- [BtcTurk Hack Recovery Program](https://hackenproof.com/programs/btcturk-hack-recovery-program) — hackenproof, $2,400,000, fit 52
+- [The Graph](https://immunefi.com/bug-bounty/thegraph/) — immunefi, $1,500,000, fit 52
+- [Sui Protocol](https://hackenproof.com/programs/sui-protocol) — hackenproof, $1,000,000, fit 52
+- [BitDelta](https://hackenproof.com/programs/bitdelta) — hackenproof, $1,000,000, fit 52
+- [Aptos Function Values](https://hackenproof.com/programs/aptos-function-values) — hackenproof, $1,000,000, fit 52
+- [KuCoin](https://hackenproof.com/programs/kucoin) — hackenproof, $1,000,000, fit 52
+- [GMGN Web & Mobile](https://hackenproof.com/programs/gmgn-web-and-mobile) — hackenproof, $1,000,000, fit 52
+- [OKX](https://hackenproof.com/programs/okx) — hackenproof, $1,000,000, fit 52
+- [1Password - CTF](https://hackerone.com/1password_ctf) — hackerone, $1,000,000, fit 52

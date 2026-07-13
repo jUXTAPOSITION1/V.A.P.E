@@ -310,7 +310,7 @@ TOOLS = {
     "bounty_radar": (
         _bounty_radar,
         "Real, currently-tracked bug-bounty/incident-lead opportunities "
-        "(Immunefi/Code4rena/Sherlock/DeFiLlama hacks), ranked by VAPE's own "
+        "(Immunefi/Sherlock/DeFiLlama hacks), ranked by VAPE's own "
         "numeric fit score. Never LLM-scored.",
         {"type": "object", "properties": {
             "min_fit": {"type": "integer", "description": "default 50"},

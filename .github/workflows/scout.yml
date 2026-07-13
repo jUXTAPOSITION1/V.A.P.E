@@ -17,10 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # scout.py's strategic briefing runs every cycle now (agents/llm.py is
-      # stdlib-only — no pip install needed for these). _act_on_base_incidents()
-      # additionally calls agents.investigate.investigate() for real when a
-      # Base incident's address verifies, which needs the full set below —
-      # same secrets intel-sweeps.yml wires for the same reason.
+      # stdlib-only — no pip install needed for these). _act_on_incidents()
+      # additionally calls agents.investigate.investigate() for real when an
+      # incident's address verifies, on any chain investigate.py supports —
+      # which needs the full set below, same secrets intel-sweeps.yml wires
+      # for the same reason.
       XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
       XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -53,14 +54,18 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Run SCOUT (rule-based scan + strategic briefing + real incident forensics)
         run: python agents/scout.py
+      - name: Update engagement status (real record of what VAPE did about each tracked lead)
+        continue-on-error: true
+        run: python -m agents.engagements
       - name: Commit bounty radar sweep
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # intel/investigations/ + intel/catalog/ + skillforge/memory/:
-          # _act_on_base_incidents() may trigger a real agents.investigate.py
+          # _act_on_incidents() may trigger a real agents.investigate.py
           # forensics pass — those land here just like any other investigation.
-          git add intel/bounty-radar/ intel/investigations/ intel/catalog/ skillforge/memory/
+          # intel/engagements/: agents.engagements.py's real, idempotent status update.
+          git add intel/bounty-radar/ intel/investigations/ intel/catalog/ intel/engagements/ skillforge/memory/
           git commit -m "SCOUT bounty radar sweep $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
