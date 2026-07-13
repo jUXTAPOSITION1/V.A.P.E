@@ -251,8 +251,13 @@ the hourly cycle.
   same test succeeded against a real model on five separate dates after that framing shipped
   (see `skillforge/memory/findings.jsonl`) — `_reconcile_report()` is the deterministic
   backstop that actually closes it: a fact computed from the investigation digests
-  themselves (a token symbol can't influence it) decides what gets surfaced, never the
-  model's own account of what it read.
+  themselves decides what gets surfaced, never the model's own account of what it read.
+  A token symbol can't influence that fact because `investigate.py::_sanitize_symbol()`
+  strips `**`/newlines from every attacker-controlled name/symbol before it's ever
+  embedded in a digest — closed at the point untrusted data enters the system, with
+  `_nonclean_digests()` preferring the last regex match as defense-in-depth on top of
+  that (a real gap here, caught by CodeRabbit review on PR #156: an unsanitized symbol
+  forging an early fake `**Verdict:**` match could otherwise shadow the real one).
 - **`skillforge/tools/ai-redteam/`** [OK] — garak (native `groq` generator), promptfoo (native
   `groq:` provider, config generated from the real `VAPE_REPORT_SYSTEM`), and deepteam
   (`vape_deepeval_model.py` wraps `agents/llm.py` as the simulator+judge — zero new

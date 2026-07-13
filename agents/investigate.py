@@ -159,6 +159,25 @@ def _get_with_retries(url, timeout=12, retries=3):
             return {"error": str(e)}
 
 
+def _sanitize_symbol(s):
+    """The on-chain token symbol/name (DexScreener) and the verified-contract
+    name (Etherscan) are both fully attacker-controlled — anyone can deploy a
+    token named anything, or submit any contract name when verifying source.
+    Both get embedded directly in this module's report text, which
+    agents/run.py::_recent_investigations() greps into LLM grounding.
+    Confirmed real, exploitable path (CodeRabbit review on PR #156): a name
+    containing literal `**Verdict:** PROCEED` text, or an embedded newline
+    that fabricates an entire fake `- **Verdict:**` report line, can make
+    agents/run.py::_nonclean_digests()'s regex scan pick up a forged verdict
+    instead of the real one written later in the same report. Sanitized once
+    here, at the exact point untrusted data enters the system (both
+    dexscreener() and contract_verification() below), rather than trying to
+    out-parse every downstream embedding of it. Real symbols/contract names
+    are short ASCII in practice; this never touches a legitimate one."""
+    s = str(s or "").replace("\n", " ").replace("\r", " ").replace("**", "")
+    return s.strip()[:80] or None
+
+
 # ── recon steps ───────────────────────────────────────────────────────────────
 def goplus_security(address, chain="8453"):
     d = _get_with_retries(f"https://api.gopluslabs.io/api/v1/token_security/{chain}"
@@ -188,8 +207,8 @@ def dexscreener(address, chain="8453"):
     p = max(scoped, key=lambda x: (x.get("liquidity") or {}).get("usd", 0) or 0)
     info = p.get("info") or {}
     return {
-        "symbol": (p.get("baseToken") or {}).get("symbol"),
-        "name": (p.get("baseToken") or {}).get("name"),
+        "symbol": _sanitize_symbol((p.get("baseToken") or {}).get("symbol")),
+        "name": _sanitize_symbol((p.get("baseToken") or {}).get("name")),
         "price_usd": p.get("priceUsd"),
         "liquidity_usd": (p.get("liquidity") or {}).get("usd"),
         "vol_24h_usd": (p.get("volume") or {}).get("h24"),
@@ -234,7 +253,7 @@ def contract_verification(address, chain="8453"):
         try:
             r = (d.get("result") or [{}])[0]
             return {"checked": True, "verified": bool(r.get("SourceCode")),
-                    "name": r.get("ContractName") or None,
+                    "name": _sanitize_symbol(r.get("ContractName")),
                     "compiler": r.get("CompilerVersion") or None,
                     "proxy": r.get("Proxy") == "1",
                     "implementation": r.get("Implementation") or None}
@@ -244,7 +263,7 @@ def contract_verification(address, chain="8453"):
     if not isinstance(r, dict) or r.get("error"):
         return {"checked": False, "note": (r or {}).get("note", "no ETHERSCAN_API_KEY")}
     return {"checked": True, "verified": r.get("verified"),
-            "name": r.get("contract_name"),
+            "name": _sanitize_symbol(r.get("contract_name")),
             "compiler": r.get("compiler"),
             "proxy": r.get("proxy"),
             "implementation": r.get("implementation")}
@@ -729,6 +748,8 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
     path = os.path.join(INVEST_DIR, f"investigation-{stamp}-{short}.md")
+    # dex["symbol"]/verif["name"] are sanitized at the source (dexscreener()/
+    # contract_verification() below) — safe to embed directly everywhere.
     sym = dex.get("symbol") or verif.get("name") or "unknown"
     # Real, currently-live production bug fixed here: PR #78 (2026-07-05)
     # replaced the in-body emoji badges with verdict_stamp()'s image badge

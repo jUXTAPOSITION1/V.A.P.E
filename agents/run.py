@@ -553,13 +553,23 @@ def _nonclean_digests(digests):
     """Real, deterministic scan for REJECT/CAUTION verdicts already present
     in this cycle's own investigation digests — parsed directly from the
     `**Verdict:** X` line agents/investigate.py's write_report() already
-    emits, never from the LLM's own summary of what it read. A token symbol
-    has no way to influence this: it's a regex over VAPE's own prior output,
-    not a judgment call the model makes."""
+    emits, never from the LLM's own summary of what it read.
+
+    A token symbol has no way to influence this at the source: agents/
+    investigate.py::_sanitize_symbol() strips `**`/newlines from every
+    attacker-controlled name/symbol before it's ever embedded in a report,
+    so it can't forge a fake `**Verdict:**` field or a fake raw report line.
+    Takes the LAST match, not the first, as defense-in-depth on top of that:
+    the confirmed real exploit (CodeRabbit review, PR #156) put the forged
+    match in the report's title line, which always comes BEFORE the real
+    `- **Verdict:**` field write_report() emits right after it — so even if
+    sanitization were ever bypassed or a new attacker-reachable field were
+    added ahead of the real one, the last match is the one least likely to
+    be an early, attacker-placed decoy."""
     out = []
     for d in digests or []:
-        m = _VERDICT_RE.search(d or "")
-        if m and m.group(1).upper() in ("REJECT", "CAUTION"):
+        verdicts = _VERDICT_RE.findall(d or "")
+        if verdicts and verdicts[-1].upper() in ("REJECT", "CAUTION"):
             out.append(d)
     return out
 
@@ -589,7 +599,9 @@ def _reconcile_report(report_text, digests):
     nonclean = _nonclean_digests(digests)
     text = (report_text or "").strip()
     first_line = text.splitlines()[0].strip().upper() if text else ""
-    well_formed = first_line.startswith("SIGNAL: HIGH") or first_line.startswith("SIGNAL: LOW")
+    # Exact match, not startswith — a malformed line like "SIGNAL: HIGHJACKED"
+    # would otherwise pass as well-formed and be published unchanged.
+    well_formed = first_line in ("SIGNAL: HIGH", "SIGNAL: LOW")
 
     if not well_formed:
         lines = ["SIGNAL: HIGH", "", "## Investigation Findings",
@@ -602,7 +614,7 @@ def _reconcile_report(report_text, digests):
             lines.append("No non-clean investigation data this cycle to fall back to.")
         return "\n".join(lines), "HIGH"
 
-    claimed_low = first_line.startswith("SIGNAL: LOW")
+    claimed_low = first_line == "SIGNAL: LOW"
     if claimed_low and nonclean:
         lines = ["SIGNAL: HIGH", "", "## Investigation Findings (verified, not model-reported)",
                   "The model reported SIGNAL: LOW this cycle, but the following real verdict(s) "
