@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-12T23:53:45Z",
-  "source_report": "intel/reports/security-2026-07-12-2353.md",
-  "threat_level": "HIGH",
+  "generated_at": "2026-07-13T02:54:55Z",
+  "source_report": "intel/reports/security-2026-07-13-02.md",
+  "threat_level": "MEDIUM",
   "lookback_days": 56,
   "incidents": [
     {
@@ -528,15 +528,6 @@
         "Base"
       ],
       "technique": "Compromised Session Keys"
-    },
-    {
-      "date": "2026-05-18",
-      "name": "Echo Bridge",
-      "amount_usd_m": 0.821,
-      "chains": [
-        "Monad"
-      ],
-      "technique": "Private Key Compromised"
     }
   ]
 }
