@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-13T10:40:37Z — 18 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-13T12:07:27Z — 14 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VELVET | Base | `0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd` | 84/100 | 2 | 2026-07-13T12:06:02Z |
 | BASE | Base | `0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346` | 100/100 | 1 | 2026-07-13T10:40:37Z |
 | ARB | Arbitrum | `0x912CE59144191C1204E64559FE8253a0e49E6548` | 92/100 | 1 | 2026-07-12T21:55:38Z |
 | VELO | Optimism | `0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db` | 88/100 | 1 | 2026-07-12T06:34:18Z |
@@ -17,8 +18,3 @@ _Regenerated 2026-07-13T10:40:37Z — 18 address(es) currently on record with a 
 | PLAY | Base | `0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841` | 100/100 | 1 | 2026-07-06T19:59:56Z |
 | CLAUDE | Base | `0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892` | 88/100 | 1 | 2026-07-04T18:06:03Z |
 | America250 | Base | `0x044098A1b8B8e175035842952986bea0E2333B07` | 90/100 | 1 | 2026-07-04T10:11:33Z |
-| FAFO | Base | `0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F` | 88/100 | 1 | 2026-07-03T08:10:33Z |
-| USA250 | Base | `0x31A626996E36a302b06b27283C561d5926db6b7c` | 90/100 | 1 | 2026-07-02T14:04:12Z |
-| VELVET | Base | `0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd` | 92/100 | 1 | 2026-07-02T11:35:20Z |
-| OpenAI | Base | `0x7C797DA3704b6F682917005b01C89710Ec17db07` | 78/100 | 1 | 2026-07-02T04:58:36Z |
-| OpenAI | Base | `0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07` | 78/100 | 1 | 2026-07-02T00:09:13Z |

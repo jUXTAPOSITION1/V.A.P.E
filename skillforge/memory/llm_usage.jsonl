@@ -21,3 +21,13 @@
 {"ts": "2026-07-13T11:41:40Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1155, "completion_tokens": 269, "total_tokens": 1724}
 {"ts": "2026-07-13T11:54:05Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 871, "completion_tokens": 355, "total_tokens": 1587}
 {"ts": "2026-07-13T11:57:23Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 1082, "completion_tokens": 3, "total_tokens": 1516}
+{"ts": "2026-07-13T12:05:36Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 748, "completion_tokens": 164, "total_tokens": 1293}
+{"ts": "2026-07-13T12:05:49Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 765, "completion_tokens": 150, "total_tokens": 1396}
+{"ts": "2026-07-13T12:06:02Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 687, "completion_tokens": 125, "total_tokens": 1147}
+{"ts": "2026-07-13T12:06:14Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 572, "completion_tokens": 143, "total_tokens": 1191}
+{"ts": "2026-07-13T12:06:27Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 615, "completion_tokens": 131, "total_tokens": 1255}
+{"ts": "2026-07-13T12:06:39Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 576, "completion_tokens": 156, "total_tokens": 1146}
+{"ts": "2026-07-13T12:06:52Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 597, "completion_tokens": 146, "total_tokens": 1182}
+{"ts": "2026-07-13T12:07:04Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 676, "completion_tokens": 143, "total_tokens": 1211}
+{"ts": "2026-07-13T12:07:15Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 748, "completion_tokens": 169, "total_tokens": 1237}
+{"ts": "2026-07-13T12:07:27Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 664, "completion_tokens": 143, "total_tokens": 1223}

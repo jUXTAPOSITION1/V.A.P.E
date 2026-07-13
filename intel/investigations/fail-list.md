@@ -1,9 +1,14 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-13T10:40:37Z — 15 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-13T12:07:27Z — 20 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VELVET | Base | `0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65` | 48/100 | 2 | 2026-07-13T12:07:27Z |
+| Claude | Base | `0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07` | 0/100 | 2 | 2026-07-13T12:07:15Z |
+| claude | Base | `0x9cb961dD3169e41726e4417d1a6EadeD333B6b07` | 35/100 | 2 | 2026-07-13T12:07:04Z |
+| OpenAI | Base | `0x7C797DA3704b6F682917005b01C89710Ec17db07` | 0/100 | 2 | 2026-07-13T12:05:49Z |
+| OpenAI | Base | `0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07` | 0/100 | 2 | 2026-07-13T12:05:36Z |
 | AERO | Base | `0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4` | 48/100 | 1 | 2026-07-11T17:10:11Z |
 | VIRTUAL | Base | `0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b` | 43/100 | 1 | 2026-07-11T14:58:38Z |
 | OpenAI | Base | `0xE23b60DF9dae1E54E81fc802Fd0E085f4F7e0B07` | 0/100 | 1 | 2026-07-11T11:56:41Z |
