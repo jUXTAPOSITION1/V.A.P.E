@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T21:47:45Z",
+  "generated": "2026-07-13T22:28:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 339,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 62,
-    "investigations": 116,
+    "investigations": 118,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260713-210812-0x0c880f67.md",
-      "title": "Investigation \u2014 PENDLE",
-      "symbol": "PENDLE",
-      "name": "Pendle",
-      "date": "2026-07-13T21:08:12Z",
-      "target": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8",
-      "chain": "42161 (Arbitrum)",
+      "file": "investigation-20260713-222848-0x29cC30f9.md",
+      "title": "Investigation \u2014 ELSA",
+      "symbol": "ELSA",
+      "name": "Elsa",
+      "date": "2026-07-13T22:28:48Z",
+      "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA",
+      "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 70416 holders \u2014 reasonably distributed; Deep liquidity ($1,522,244); Trading 1250+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1902+ days \u2014 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-210812-0x0c880f67.md"
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 240986 holders \u2014 reasonably distributed; Trading 175+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 175+ days \u2014 independent ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-222848-0x29cC30f9.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260713-222848-0x29cC30f9.md",
+      "title": "Investigation \u2014 ELSA",
+      "symbol": "ELSA",
+      "name": "Elsa",
+      "date": "2026-07-13T22:28:48Z",
+      "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 240986 holders \u2014 reasonably distributed; Trading 175+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 175+ days \u2014 independent ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-222848-0x29cC30f9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260713-210812-0x0c880f67.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-105854-0x006b340b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260706-230955-0x454777B9.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-06T23:09:55Z",
-      "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-230955-0x454777B9.md"
     }
   ],
   "reports": [

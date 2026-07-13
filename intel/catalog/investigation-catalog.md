@@ -177,3 +177,5 @@
 | 2026-07-13 | auto | 0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c (DUAL) | deep_investigation | REJECT (33/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-13 | auto | 0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8 (PENDLE) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-13 | auto | 0x29cC30f9D113B356Ce408667aa6433589CeCBDcA (ELSA) | deep_investigation | PROCEED (100/100) | clean | +7d |
