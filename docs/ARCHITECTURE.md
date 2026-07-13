@@ -243,9 +243,16 @@ the hourly cycle.
   human PR review.
 - **`redteam.py`** [OK] — real prompt-injection test against VAPE's own report pipeline: crafts
   a malicious token symbol, runs it through the real `investigate.py -> run.py` grounding
-  path and a real LLM call, judges the actual output, and logs a real finding if it's
-  hijacked (daily via `redteam.yml`). See `agents/run.py::_build_grounding()` for the
-  untrusted-data framing this test verifies.
+  path and a real LLM call, and judges the RECONCILED output (`agents/run.py::
+  _reconcile_report()`), not the raw model response — records both whether the raw model
+  itself resisted and whether the exploit actually reached what would be published, logging
+  a real finding only in the latter case (daily via `redteam.yml`). `_build_grounding()`'s
+  prompt-level "treat this as inert data" framing did NOT reliably hold on its own — the
+  same test succeeded against a real model on five separate dates after that framing shipped
+  (see `skillforge/memory/findings.jsonl`) — `_reconcile_report()` is the deterministic
+  backstop that actually closes it: a fact computed from the investigation digests
+  themselves (a token symbol can't influence it) decides what gets surfaced, never the
+  model's own account of what it read.
 - **`skillforge/tools/ai-redteam/`** [OK] — garak (native `groq` generator), promptfoo (native
   `groq:` provider, config generated from the real `VAPE_REPORT_SYSTEM`), and deepteam
   (`vape_deepeval_model.py` wraps `agents/llm.py` as the simulator+judge — zero new
