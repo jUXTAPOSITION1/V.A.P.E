@@ -98,7 +98,7 @@ This design was a deliberate fix: an earlier version hard-rejected `import os`, 
 - **LLM layer** — uses `agents/llm.py`'s default `PROVIDERS` order (Builder passes
   `provider_order=None` unless a caller overrides it), so it inherits the full
   multi-provider fallback chain: Groq → Cerebras → OpenRouter → Gemini → GitHub Models →
-  Together → xAI (Grok 4.1 Fast, key 1 then key 2) — each rung skipped automatically
+  Together → xAI (Grok 4.1 Fast) — each rung skipped automatically
   when its key isn't set.
 - **Graceful degradation** — if no provider key is set, `Builder.llm_ready` is `False`
   and generation returns empty without crashing.

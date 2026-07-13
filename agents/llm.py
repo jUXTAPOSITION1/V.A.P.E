@@ -23,7 +23,7 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     GitHub Models, despite GitHub Models technically
                                     also offering premium models today.
     together    TOGETHER_API_KEY    70B free endpoints — when 8B isn't enough
-    xai         XAI_API_KEY_1/_2    Grok 4.1 Fast — paid, primary model for VAPE's
+    xai         XAI_API_KEY_1       Grok 4.1 Fast — paid, primary model for VAPE's
                                     highest-stakes work (see FRONTIER_ORDER below).
                                     Not in the default PROVIDERS chain a bare ask()
                                     call uses — only reachable via provider_order=
@@ -32,19 +32,15 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     the free chain, matching the operating policy:
                                     Grok for reports/investigations/the $50 x402
                                     audit/intel/Builder/SKILLFORGE; Groq/Gemini for
-                                    everything else. Two adjacent entries (xai_1,
-                                    xai_2) rather than in-process key rotation: ask()
-                                    already tries one provider entry to failure before
-                                    moving to the NEXT entry (a 429 falls through
-                                    immediately — no point hammering a rate-limited
-                                    key; a non-429 error retries that SAME key up to
-                                    `retries_per_provider` times first) — placing
-                                    xai_1 immediately before xai_2 in FRONTIER_ORDER
-                                    means key 1 is always tried first and never
-                                    alternated call-by-call, avoiding the rapid
-                                    key-switching xAI's ToS prohibits, with zero new
-                                    rotation logic. OpenAI-compatible endpoint
-                                    (api.x.ai/v1), same _call() as everything else.
+                                    everything else. A single key, not a rotated
+                                    pair — a second key (XAI_API_KEY_2) was tried
+                                    briefly but its xAI team had no credits/license,
+                                    so it's not worth the added complexity of a
+                                    two-key fallthrough for a key that can't serve
+                                    real traffic anyway; revisit if a genuinely
+                                    funded second key is ever needed.
+                                    OpenAI-compatible endpoint (api.x.ai/v1), same
+                                    _call() as everything else.
 
 Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
@@ -118,28 +114,23 @@ PROVIDERS = [
     # module docstring + FRONTIER_ORDER below). Deliberately no "fast"/"bulk"
     # key so a bare tier="fast"/"bulk" ask() call never resolves to Grok even
     # if xai ever ends up early in some provider_order — only "deep"/
-    # "frontier" callers reach it. Two adjacent entries sharing one model so
-    # key 1 is exhausted before key 2 is tried (see docstring) instead of
-    # rotated call-by-call.
+    # "frontier" callers reach it. Single key (see module docstring for why
+    # there's no second key/rotation).
     # NOTE: xAI deprecated this model 2026-05-15; it retires 2026-08-15 —
     # will need to move to whatever supersedes it (grok-4.5 or similar)
     # before then.
     ("xai_1", "XAI_API_KEY_1", "https://api.x.ai/v1/chat/completions", {
         "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
     }),
-    ("xai_2", "XAI_API_KEY_2", "https://api.x.ai/v1/chat/completions", {
-        "deep": "grok-4-1-fast-reasoning", "frontier": "grok-4-1-fast-reasoning",
-    }),
 ]
 
 # Frontier-tier provider order — VAPE's "smart LLM" chain for the highest-stakes
-# work: Grok 4.1 Fast (key 1, then key 2 on persistent failure) -> Groq -> Gemini
-# -> the rest of the free chain (Cerebras/OpenRouter/GitHub Models/Together —
-# VAPE's own "local/custom" free fallback tier; there's no separate self-hosted
-# model wired in yet, so this honestly IS that tier today). Providers without a
-# distinct "frontier" model reuse their "deep" model (see ask()'s model-
-# resolution fallback).
-_FRONTIER_NAMES = ("xai_1", "xai_2", "groq", "gemini")
+# work: Grok 4.1 Fast -> Groq -> Gemini -> the rest of the free chain
+# (Cerebras/OpenRouter/GitHub Models/Together — VAPE's own "local/custom" free
+# fallback tier; there's no separate self-hosted model wired in yet, so this
+# honestly IS that tier today). Providers without a distinct "frontier" model
+# reuse their "deep" model (see ask()'s model-resolution fallback).
+_FRONTIER_NAMES = ("xai_1", "groq", "gemini")
 FRONTIER_ORDER = (
     [p for name in _FRONTIER_NAMES for p in PROVIDERS if p[0] == name]
     + [p for p in PROVIDERS if p[0] not in _FRONTIER_NAMES]

@@ -40,7 +40,6 @@ jobs:
       # FRONTIER_ORDER) runs on every real re-check below — was previously
       # unwired here entirely, so it silently no-op'd on every run.
       XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
-      XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

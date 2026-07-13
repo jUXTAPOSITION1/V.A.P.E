@@ -1,4 +1,4 @@
-name: Publish Reputation (hourly, real data, no LLM)
+name: Publish Reputation (hourly, syncs live stats + offerings to the site's reputation feed)
 
 on:
   schedule:

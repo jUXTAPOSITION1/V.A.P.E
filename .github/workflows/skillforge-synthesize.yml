@@ -1,4 +1,4 @@
-name: SKILLFORGE Synthesize (daily, Groq, opens PR)
+name: SKILLFORGE Synthesize (daily, distills skills from memory, opens PR)
 
 on:
   schedule:
@@ -16,10 +16,6 @@ concurrency:
 jobs:
   synthesize:
     runs-on: ubuntu-latest
-    env:                              # ← ADDED: job-level env for all MCP/research keys
-      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
@@ -36,7 +32,6 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
-          XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

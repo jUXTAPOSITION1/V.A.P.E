@@ -171,7 +171,7 @@ the hourly cycle.
 - **`token_scan.py`** [OK] — free Hunt console + paid x402 quick-check, same keyless checks as
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
-- **`scout.py`** [OK] — bounty-radar triage, rule-based fit scoring (no LLM), a frontier-model
+- **`scout.py`** [OK] — bounty-radar triage, numeric fit-score ranking, a frontier-model
   strategic briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates
   to `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports —
   not just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
@@ -254,9 +254,12 @@ the hourly cycle.
 
 ### 2. SKILLFORGE — `skillforge/` [OK] (self-improving skill+tool ecosystem)
 Zero-local-compute skill growth via GitHub Actions. See `skillforge/MANIFEST.md`.
-- **harvest** (hourly) — real CVE + tool-release intel, no LLM.
-- **toolcheck** (6×/day) — installs & verifies 15 security tools on runners, no LLM.
-- **synthesize** (daily) — Groq distills harvested data → opens a PR.
+- **harvest** (hourly) — pulls new CVEs + security-tool releases into the registry.
+- **toolcheck** (6×/day) — installs & smoke-tests all 15 registered security tools on runners,
+  updates each one's verified/broken status.
+- **synthesize** (daily) — distills a skill/playbook from real findings+lessons via the
+  frontier-model chain (`agents/llm.py`'s `FRONTIER_ORDER` — Grok 4.1 Fast first, free
+  fallbacks after), opens a PR.
 - **Tool tiers:** static (slither/aderyn/mythril) · fuzzing (echidna/foundry) ·
   ai-redteam (garak/promptfoo/deepteam) · recon (base_rpc/market_data/token_safety/
   wallet_trace/contract_recon/hack_feed/fear_greed). `wallet_trace` is Alchemy-backed

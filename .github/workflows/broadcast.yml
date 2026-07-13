@@ -1,4 +1,4 @@
-name: Community Intel Broadcast (6-hourly, real data, no LLM)
+name: Community Intel Broadcast (6-hourly market/security digest)
 
 on:
   schedule:

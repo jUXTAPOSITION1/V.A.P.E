@@ -54,9 +54,11 @@ The Python engine + SKILLFORGE run entirely in GitHub Actions. No server needed.
 |---|---|---|
 | `bounty-cycle.yml` | hourly `0 * * * *` | bounty-hunt + self-review → commits reports/ |
 | `featured-investigation.yml` | every 30 min `*/30 * * * *` | auto-target deep investigation (site's Featured Investigation spotlight); recruits DATA AGENT (`agents/data_agent.py`, gated to its own 2h floor) |
-| `skillforge-harvest.yml` | hourly `:17` | real CVE + tool-release intel (no LLM) |
-| `skillforge-toolcheck.yml` | every 4h `:37` | install+verify 13 security tools (no LLM) |
-| `skillforge-synthesize.yml` | daily `06:00` | Groq distill → opens PR |
+| `skillforge-harvest.yml` | hourly `:17` | pulls new CVEs + security-tool releases into the registry |
+| `skillforge-toolcheck.yml` | every 4h `:37` | installs + smoke-tests all 15 registered security tools |
+| `skillforge-synthesize.yml` | daily `06:00` | distills a skill/playbook from real findings+lessons → opens PR |
+| `self-improve.yml` | daily `12:00` | finds a real gap (pyflakes/tool-registry), generates a fix, opens a PR |
+| `skillforge-build.yml` | 2x/day `09:00,21:00` | proposes + builds a self-directed tool grounded in Memory, opens a PR |
 | `sync-to-hub.yml` | manual/dispatch | mirror to Hugging Face Space |
 
 ### A3. Enable & verify
