@@ -47,12 +47,11 @@ except Exception:
         _llm_available = lambda: []
         _FRONTIER_ORDER = None
 
-# NEW: Integration layer (Memory + Builder + MCP)
+# Integration status (Memory + Builder + MCP availability) — see
+# agents/integration.py::get_system_status(). INTEGRATION_AVAILABLE also
+# gates the direct skillforge.memory.retriever calls further below.
 try:
-    from agents.integration import (
-        run_full_cycle,
-        get_system_status,
-    )
+    from agents.integration import get_system_status
     INTEGRATION_AVAILABLE = True
 except Exception as e:
     print(f"[run.py] Warning: Integration layer not available: {e}")
@@ -670,23 +669,6 @@ def main(review_repo=False):
                 f.write(f"```json\n{json.dumps(market_context, indent=2)}\n```\n\n</details>\n")
 
     print(f"\n[OK] Report saved to: {report_path}\n")
-    
-    # NEW: Optionally run full cycle if requested
-    if os.getenv("VAPE_FULL_CYCLE"):
-        print("[Integration] Running full cycle (Memory + Builder + MCP)...")
-        try:
-            cycle = run_full_cycle(
-                market_data=market_context,
-                slither_output=slither_result[:500],
-                bounties=[]  # Would fetch real bounties
-            )
-            print(f"[Cycle] Detective grounded: {cycle['detective_grounded']}")
-            print(f"[Cycle] Builder generated: {cycle['builder_generated']}")
-            print(f"[Cycle] MCP harvested: {cycle['mcp_harvested']}")
-            if cycle['memory_stats']:
-                print(f"[Cycle] Memory entries: {cycle['memory_stats'].get('total_entries', 0)}\n")
-        except Exception as e:
-            print(f"[Cycle] Full cycle failed: {e}\n")
 
 if __name__ == "__main__":
     review = "--review-repo" in sys.argv

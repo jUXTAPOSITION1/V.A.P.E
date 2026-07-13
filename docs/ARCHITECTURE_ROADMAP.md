@@ -124,6 +124,23 @@ chain** — all free tier, all open-source models, swap by base-URL + key.
 - **Data-privacy note:** prefer providers that don't train on prompts for any
   sensitive forensics; Groq/Cerebras/Together are inference-only on free tier.
   Flag Google AI Studio / Mistral Experiment as "may train" — use only for public intel.
+- **Ethos update (2026-07):** VAPE is deliberately moving off "stay free at all costs"
+  for the calls that matter most. `FRONTIER_ORDER` (Grok first, key 1 then key 2, then
+  Groq/Gemini/the free chain) is now the actual PRIMARY route — not an emergency
+  fallback — for every reasoning-heavy call site: the periodic sweep narratives
+  (`base/macro/security/sentiment/virtuals_sweep.py`), the flagship bounty report
+  (`run.py`), SKILLFORGE's self-directed build proposals + code generation, redteam's
+  judge calls, SCOUT's gated strategic briefing, and every real investigation's new
+  Grok expert-assessment layer (`investigate.py::_grok_expert_assessment`). Still
+  free-fallback-safe (every one of these degrades gracefully with zero keys), but the
+  bar for "is this worth paying for" is now "does it need real reasoning," not
+  "can it be free." Real budget/privacy constraint: xAI's free tier is a one-time $25
+  signup credit, not a recurring free quota like Groq's — the $150/month recurring
+  option requires opting into API-input data-sharing for model training, which is
+  intentionally left OFF (conflicts with the data-privacy note above for anything
+  touching real forensics). Gate new high-frequency call sites the way
+  `agents/scout.py::_grok_briefing` does (only call when something genuinely new
+  happened) unless the call site is inherently low-frequency already.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to
