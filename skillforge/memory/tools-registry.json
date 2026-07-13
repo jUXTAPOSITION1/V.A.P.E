@@ -176,8 +176,7 @@
         "last_verified": "2026-07-12T21:31:54Z",
         "version": "n/a (pending live verification with Alchemy)",
         "requires_key": "VAPE_TRACE_ALCHEMY_API",
-        "known_limitation": true,
-        "note": "Migrated from Etherscan V2 to Alchemy Transfers API. Pending live verification. Keyless alternative: base_rpc for balance/nonce; contract_recon's getsourcecode works on free tier."
+        "note": "Migrated from Etherscan V2 (whose txlist/tokentx account-module endpoints gate Base behind a paid tier) to Alchemy's Transfers API, which supports Base on its free tier — no known upstream limitation anymore. Keyless alternative: base_rpc for balance/nonce; contract_recon's getsourcecode works on free tier."
       },
       {
         "name": "contract_recon",
