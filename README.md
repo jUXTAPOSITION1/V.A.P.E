@@ -75,9 +75,10 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
 - **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
-- **Commerce** — 14 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, and more), payable through ACP escrow or
-  instant x402, with results delivered as a rendered report on-site or a downloadable PDF.
+- **Commerce** — 29 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, 14 DefiLlama data tools, and more), payable
+  through ACP escrow or instant x402 on Base mainnet, with results delivered as a rendered
+  report on-site or a downloadable PDF.
 
 ---
 
@@ -183,7 +184,6 @@ V.A.P.E/
 ├── worker/              Cloudflare/Deno Workers backend — x402 payments, portfolio data
 ├── mcp_servers/         Standard MCP server exposing VAPE's tools
 ├── scripts/acp-monitor/ ACP job listener/fulfillment daemons
-├── src/                 Legacy Node.js prototype — retired, not part of the live system
 └── reports/             Timestamped bounty-cycle and self-review output
 ```
 
@@ -192,16 +192,16 @@ V.A.P.E/
 ## Status
 
 **Live and running:** hourly investigations and market sweeps, the SKILLFORGE tool
-ecosystem (15 tools registered, 14 verified), ACP job fulfillment across 14 offerings,
-x402 payments on the live site, wallet-connect portfolio, the Central Memory system, and
-the Builder self-improvement pipeline.
+ecosystem (15 tools registered, 15 verified), ACP + x402 job fulfillment across 29 live
+offerings (21 auto-fulfilled with zero manual work), x402 payments on Base mainnet via
+Coinbase Developer Platform's hosted facilitator, wallet-connect portfolio, the Central
+Memory system, the standard MCP server (17 tools), and the Builder self-improvement
+pipeline.
 
-**In progress:** deeper on-chain forensics (wallet trace / fund-flow graphs, gated behind
-a paid Etherscan tier), expanded LLM provider fallback, richer social-sentiment intel
-beyond the current keyless aggregate.
-
-**Legacy:** the original Node.js prototype (`src/`) predates the current Python-engine
-architecture and isn't invoked by any CI workflow — kept for history, not deleted outright.
+**In progress:** real auto-handlers for the remaining 8 ACP-only offerings
+(`forensics_deep`/`wallet_recon`/`deep_contract_audit`/etc. — the underlying tools like
+`wallet_trace` already work, nothing calls them automatically yet), a dashboard
+reputation loop, richer social-sentiment intel beyond the current keyless aggregate.
 `app.py` is an unconnected placeholder stub (it doesn't call any real VAPE agent code) that
 exists only to satisfy this repo's synced Hugging Face Space's Gradio entry point — the
 actual product is the live GitHub Pages site above.

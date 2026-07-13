@@ -95,8 +95,11 @@ This design was a deliberate fix: an earlier version hard-rejected `import os`, 
 
 - **Reads Memory** before every generation (`_ground_in_memory`).
 - **Writes Memory** after every safe generation (category `skill`).
-- **LLM layer** — uses `agents/llm.py`, so it inherits the free multi-provider fallback
-  chain (Groq → Cerebras → OpenRouter → GitHub Models → Together).
+- **LLM layer** — uses `agents/llm.py`'s default `PROVIDERS` order (Builder passes
+  `provider_order=None` unless a caller overrides it), so it inherits the full
+  multi-provider fallback chain: Groq → Cerebras → OpenRouter → Gemini → GitHub Models →
+  Together → xAI (Grok 4.1 Fast, key 1 then key 2) — each rung skipped automatically
+  when its key isn't set.
 - **Graceful degradation** — if no provider key is set, `Builder.llm_ready` is `False`
   and generation returns empty without crashing.
 

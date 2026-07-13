@@ -14,25 +14,32 @@ while holding the line: **maximum capability, lowest possible compute, real data
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 14 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 29 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
+**21 of 29 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+`HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
+the x402 side) covers all of them:
+
 | Offering | $ | Auto-fulfilled by | Status |
 |---|---|---|---|
-| token_safety_check | 0.02 | `token_scan.py` (GoPlus+DexScreener) | [OK] auto |
-| liquidity_check | 0.02 | `token_scan.py` (liquidity) | [OK] auto |
-| rug_pull_alert | 0.03 | `token_scan.py` (owner/mint/honeypot) | [OK] auto |
-| exploit_check | 0.01 | `data_fetchers.get_contract_source` | [OK] auto (needs Etherscan key on runner) |
-| market_intel | 0.07 | `build_market_context()` | [OK] auto |
-| dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto |
-| deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [WIP] monitor handler |
-| forensics_deep | 2.00 | wallet_trace + contract_recon | [WIP] wallet_trace now Alchemy-backed, pending live verification |
-| wallet_recon | 0.03 | base_rpc / wallet_trace | [WIP] wallet_trace now Alchemy-backed, pending live verification |
-| whale_watch / tx_decode / bulk_safety_bundle / community_intel_broadcast / partner_referral | — | mapped, monitor handler | [TBD] |
+| token_safety_check | 0.02 | `token_scan.py` (GoPlus+DexScreener) | [OK] auto, x402 |
+| liquidity_check | 0.02 | `token_scan.py` (liquidity) | [OK] auto, x402 |
+| rug_pull_alert | 0.03 | `token_scan.py` (owner/mint/honeypot) | [OK] auto, x402 |
+| exploit_check | 0.01 | `data_fetchers.get_contract_source` | [OK] auto, x402 (needs Etherscan key on runner) |
+| market_intel | 0.07 | `build_market_context()` | [OK] auto, x402 |
+| dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto, x402 |
+| bounty_deep_dive | 50.00 | `agents/deep_dive_audit.py` — real Slither + frontier-model source review, dispatched async via `deep-dive-bounty.yml` (x402 pays first, GH Actions job runs, report lands in `intel/audits/poc-reports/` within 24h) | [OK] auto (async), x402 |
+| community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
+| 14 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
+| deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
+| forensics_deep | 2.00 | wallet_trace + contract_recon | [TBD] manual — wallet_trace itself is now [OK] Alchemy-backed and live-verified (PR #145); an auto-handler for this offering still isn't wired |
+| wallet_recon | 0.03 | base_rpc / wallet_trace | [TBD] manual, same gap as forensics_deep |
+| whale_watch / tx_decode / bulk_safety_bundle / partner_referral | 0.10 / 0.05 / 0.50 / 0.01 | mapped, monitor handler | [TBD] manual |
 
 ### Data flow (the loop that earns)
 ```
@@ -47,17 +54,20 @@ ACP job.funded  ─► reasoning handler ─► acp_fulfill.fulfill(offering, re
                                    log ─► intel/scans + intel/catalog (audit trail)
 ```
 
-### Next ACP steps ([TBD] proposed, all low-compute)
-1. **Wire `acp_fulfill` into the monitor handler** — the `vape-acp-handler` cron calls
-   `fulfill()` for the 6 auto-offerings; only escalates to the LLM for deep_audit/forensics.
-   → Most jobs settle with **zero LLM cost** (pure tool output).
-2. **Self-listing refresh from GitHub** — a workflow that regenerates offering descriptions
-   from the live tool registry (`skillforge/memory/tools-registry.json`) so offerings never
-   drift from real capability.
-3. **Dedup + caching** — check `intel/scans/scans.jsonl` before re-running a recent
-   same-target scan; serve cached deliverable (faster SLA, lower cost, higher margin).
-4. **Reputation loop** — after each completed job, append outcome to `lessons.jsonl`;
-   surface success-rate on the dashboard to attract more buyers.
+### Next ACP steps
+1. [OK] shipped — **`scripts/acp-monitor/auto_fulfill.py`** imports `acp_fulfill.fulfill`/
+   `HANDLERS` directly: the monitor calls it for all 21 auto-offerings, only escalating to
+   a human/manual path for the remaining 8. Most jobs settle with **zero LLM cost** (pure
+   tool output) — `dossier_check`/`community_intel_broadcast` are the only auto-offerings
+   that spend an LLM call at all.
+2. [TBD] proposed — **Self-listing refresh from GitHub**: a workflow that regenerates
+   offering descriptions from the live tool registry (`skillforge/memory/tools-registry.json`)
+   so offerings never drift from real capability.
+3. [TBD] proposed — **Dedup + caching**: check for a recent same-target scan before
+   re-running one; serve the cached deliverable (faster SLA, lower cost, higher margin).
+   No `scans.jsonl`-style cache exists yet — every job runs the real tool fresh.
+4. [TBD] proposed — **Reputation loop**: after each completed job, append outcome to
+   `lessons.jsonl`; surface success-rate on the dashboard to attract more buyers.
 5. **Client side (hire-out)** — for deep_contract_audit jobs needing heavy compute, VAPE
    can *delegate* via `acp browse` → `client create-job` to a specialist agent when that's
    cheaper than running echidna/mythril itself. Spend-to-earn arbitrage.
@@ -93,20 +103,28 @@ commits to `intel/` (its audit trail) and they coordinate through shared files, 
 
 ---
 
-## 3. More Free Open-Source LLMs (resilience + capability)
+## 3. More Free Open-Source LLMs (resilience + capability) [OK] shipped
 
-Today VAPE uses **Groq (Llama 3.1 8B)** for synthesis + reports. Single-provider = single
-point of failure (rate limits, outages). Add an **OpenAI-compatible multi-provider fallback
-chain** — all free tier, all open-source models, swap by base-URL + key.
+This section's original framing ("today VAPE uses Groq alone, single point of failure")
+predates the actual build below — kept only as the historical rationale for why the
+multi-provider chain (and later the frontier tier) exists at all. Reality now: a paid
+frontier model is the primary route for every reasoning-heavy call, with the full
+free chain below as the fallback for every one of them, and the sole path for anything
+run with zero keys configured — see the "Ethos update" note further down.
 
-### Recommended free providers (researched, 2026)
+### Free providers — all wired in `agents/llm.py`
 | Provider | Free tier | Models | Best for |
 |---|---|---|---|
-| **Groq** (have it) | 14.4k req/day, 30k TPM | Llama 3.1/4, Qwen3, DeepSeek-R1-Distill | speed champion — real-time reports |
-| **Cerebras** [TBD] | **1M tokens/day**, no CC | Llama 4 Scout, Qwen3 32B, DeepSeek-R1 | daily-volume champion — bulk synthesis |
-| **OpenRouter** [TBD] | 20+ free models, one key | DeepSeek-R1, Llama 3.3 70B, Qwen3 Coder | fallback marketplace, model variety |
-| **GitHub Models** [TBD] | free w/ GitHub account | Llama, DeepSeek (Azure OAI endpoint) | already in our CI env — natural fit |
-| **Together AI** [TBD] | free endpoints | Llama-3.3-70B-Turbo-Free, DeepSeek-R1-Distill-70B | bigger models when 8B isn't enough |
+| **Groq** [OK] | 14.4k req/day, 30k TPM | Llama 3.1/4, Qwen3, DeepSeek-R1-Distill | speed champion — real-time reports |
+| **Cerebras** [OK] | **1M tokens/day**, no CC | Llama 4 Scout, Qwen3 32B, DeepSeek-R1 | daily-volume champion — bulk synthesis |
+| **OpenRouter** [OK] | 20+ free models, one key | DeepSeek-R1, Llama 3.3 70B, Qwen3 Coder | fallback marketplace, model variety |
+| **GitHub Models** [OK] | free w/ GitHub account | Llama, DeepSeek (Azure OAI endpoint) | already in our CI env — natural fit |
+| **Together AI** [OK] | free endpoints | Llama-3.3-70B-Turbo-Free, DeepSeek-R1-Distill-70B | bigger models when 8B isn't enough |
+| **Gemini** [OK] | free tier, mind rate limits | Gemini 2.5 | powers the DefiLlama panel's AI review + web-search intel feed |
+| **xAI (Grok 4.1 Fast)** [OK] | one-time $25 signup credit, not recurring | Grok 4.1 Fast | the actual frontier-tier primary — see Ethos update below |
+
+All seven are real env-keyed options in `.env.example`; a provider is silently skipped if
+its key is unset, so this table is "what's wired," not "what you personally have keyed."
 | **Mistral** [TBD] | Experiment tier (~1B tok/mo) | open-weight Mistral | EU option, large quota |
 
 ### Implementation ([OK] shipped — `agents/llm.py`)
@@ -154,12 +172,18 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done.
-2. [TBD] Wire bridge into the monitor handler (6 offerings settle with no LLM).
-3. [TBD] `agents/llm.py` multi-provider fallback (Groq + Cerebras + GitHub Models).
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 29 offerings auto-fulfill.
+2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
+   for every offering except `dossier_check`/`community_intel_broadcast`.
+3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/
+   Together), plus a frontier tier (xAI/Gemini) on top for reasoning-heavy calls.
 4. [OK] SCOUT shipped (rule-based + every-cycle strategic briefing + real, cross-chain incident-forensics action, hourly). [OK] ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
-5. [OK] wallet_trace switched to Alchemy (VAPE_TRACE_ALCHEMY_API), live-verified against the real Transfers API (PR #145) → [TBD] unlocks forensics_deep ($2) + LEDGER agent.
-6. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
+5. [OK] wallet_trace switched to Alchemy (VAPE_TRACE_ALCHEMY_API), live-verified against the
+   real Transfers API (PR #145). [TBD] still unlocks: a real auto-handler for `forensics_deep`
+   ($2)/`wallet_recon` ($0.03), and the LEDGER agent — the tool works, nothing calls it
+   automatically yet.
+6. [OK] x402 payment worker live on Base mainnet, 21 routes, real KV job ledger + live feed.
+7. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
 
 Every step reuses the free GitHub runner + existing keyless tools. No new infrastructure,
 no recurring cost, real data throughout.

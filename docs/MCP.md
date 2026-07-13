@@ -109,9 +109,14 @@ MCP wrappers ──▶ append_to_memory()  ──▶  Central Memory  ──▶ 
 ## Roadmap
 
 - Replace the MVP synthetic social summary with a live X API v2 / approved partner feed.
-- Wire real NVD/CVE feeds into `fetch_cve_summary`.
-- Add a dedicated `skillforge-mcp-harvest.yml` workflow (currently invoked via harvest /
-  the full cycle).
+- `ToolRegistryMCPWrapper` has no CVE method today — real NVD/CVE ingestion already
+  shipped, just through a separate module: `skillforge/harvest.py::harvest_cves()` hits
+  the live NVD CVE API 2.0 (blockchain/Solidity keywords, 24h lookback) on the hourly
+  `skillforge-harvest.yml` schedule. Folding that logic into this wrapper (or vice versa)
+  is the remaining cleanup, not the CVE feed itself.
+- `run_mcp_harvest()` is only reachable via `python skillforge/mcp.py --harvest` today —
+  no workflow or other module calls it yet. Either wire it into an existing scheduled
+  workflow or add a dedicated one.
 
 ---
 

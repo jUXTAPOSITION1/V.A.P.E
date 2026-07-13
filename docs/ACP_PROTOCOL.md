@@ -108,6 +108,12 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [TBD] Full end-to-end deliverable automation for all 14 offerings.
+- [OK] End-to-end deliverable automation for 21 of 29 offerings —
+  `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
+  `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
+  the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,
+  `wallet_recon`, `tx_decode`, `whale_watch`, `bulk_safety_bundle`,
+  `deep_contract_audit`, `forensics_deep`, and `bounty_deep_dive`'s 24h
+  async escalation) still need manual or human-in-the-loop fulfillment.
 - [TBD] Dynamic pricing from demand + dedup against `intel/catalog/`.
 - [TBD] Client-side delegation for compute-heavy audits.
