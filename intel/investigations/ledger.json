@@ -181,6 +181,25 @@
     "symbol": "CHIP",
     "times_investigated": 1
   },
+  "42161:0x0c880f6761f1af8d9aa9c466984b80dab9a8c9e8": {
+    "address": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8",
+    "chain": "42161",
+    "creator_address": "0x3fe38087a94903a9d946fa1915e1772fe611000f",
+    "first_investigated": "2026-07-13T21:08:12Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260713-210812-0x0c880f67.md",
+        "score": 92,
+        "ts": "2026-07-13T21:08:12Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-13T21:08:12Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "PENDLE",
+    "times_investigated": 1
+  },
   "42161:0x25118290e6a5f4139381d072181157035864099d": {
     "address": "0x25118290e6A5f4139381D072181157035864099d",
     "chain": "42161",
