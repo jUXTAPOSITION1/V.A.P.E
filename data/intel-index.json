@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T13:12:43Z",
+  "generated": "2026-07-13T13:26:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 331,
@@ -14,7 +14,7 @@
       "macro": 8
     },
     "broadcasts": 60,
-    "investigations": 106,
+    "investigations": 108,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260713-120727-0x930389F6.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvet",
-      "date": "2026-07-13T12:07:27Z",
-      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
+      "file": "investigation-20260713-132624-0xeC0d0159.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-13T13:26:24Z",
+      "target": "0xeC0d015979077ebDDB16f665cCF2b4022fa3Ab07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AERO (0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,457. Positive evidence: 12949 holders \u2014 reasonably distributed; Custom verif",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120727-0x930389F6.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-132624-0xeC0d0159.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260713-132624-0xeC0d0159.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-13T13:26:24Z",
+      "target": "0xeC0d015979077ebDDB16f665cCF2b4022fa3Ab07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-132624-0xeC0d0159.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260713-120727-0x930389F6.md",
@@ -592,20 +606,6 @@
       "score": "20",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-25] Very low liquidity $154 (rug/illiquid); [-10] Low liquidity $154; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-142724-0x454777B9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260706-102605-0x87300364.md",
-      "title": "Investigation \u2014 TRUMP250",
-      "symbol": "TRUMP250",
-      "name": "TRUMP 250",
-      "date": "2026-07-06T10:26:05Z",
-      "target": "0x87300364C1b3558cF50D64Ef44ff04F3Ff56bC5a",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 33379 holders \u2014 reasonably distributed; Custom verified source (not a mass-pro",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-102605-0x87300364.md"
     }
   ],
   "reports": [
