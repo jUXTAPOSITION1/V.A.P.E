@@ -61,9 +61,23 @@ a { transition: color .15s; }
 .hud-corner.br { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
 
 /* ── Hero portrait frame (used until real art lands) ─────────────────────── */
+/* position/overflow/aspect-ratio here duplicate this element's own Tailwind
+   utility classes (relative overflow-hidden aspect-square) on purpose —
+   Tailwind is loaded from a CDN <script>, which is inert until it downloads
+   and runs, so without a real, always-on CSS rule the raw hero <img> briefly
+   paints at full intrinsic size (a single large VAPE photo) on first load
+   before Tailwind's utilities apply. Same story for its child <img> below. */
 .hero-portrait-fallback {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
     background: linear-gradient(160deg, #0d0d11 0%, #030303 100%);
     border: 1px solid rgba(255,255,255,0.08);
+}
+.hero-portrait-fallback img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
 }
 .hero-portrait-fallback::after {
     content: '';
@@ -89,6 +103,19 @@ a { transition: color .15s; }
 @keyframes nav-logo-glow {
     0%, 93%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
     96% { box-shadow: 0 0 0 1px rgba(34,211,238,.3), 0 0 7px 1px rgba(34,211,238,.18); }
+}
+/* Same always-on containment as .hero-portrait-fallback above, and for the
+   same reason — this is the very first image on the page, so it's the most
+   visible spot for the pre-Tailwind unstyled-photo flash. */
+.nav-logo-pulse {
+    position: relative;
+    width: 2rem; height: 2rem;
+    overflow: hidden;
+}
+.nav-logo-pulse img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
 }
 @media (max-width: 1023px) {
     .nav-logo-pulse { animation: nav-logo-glow 22s ease-in-out infinite; }
