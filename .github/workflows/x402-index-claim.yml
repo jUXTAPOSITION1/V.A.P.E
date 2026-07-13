@@ -24,4 +24,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run 402 Index ${{ inputs.action }}
-        run: python agents/x402_index_claim.py ${{ inputs.action }}
+        env:
+          INPUT_ACTION: ${{ inputs.action }}
+        run: python agents/x402_index_claim.py "$INPUT_ACTION"

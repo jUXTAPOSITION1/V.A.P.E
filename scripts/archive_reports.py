@@ -86,6 +86,16 @@ SOURCES = [
     # Indexed by the dashboard — default (longer) retention, self-heals out of the index.
     {"glob": "reports/bounty_report_*.md", "category": "bounty_report", "date": "ts", "indexed": True},
     {"glob": "intel/reports/*.md", "category": "intel_reports", "date": "date", "indexed": True},
+    # agents/scout.py writes one digest-YYYY-MM-DD-HH.md per hourly run
+    # (intel/bounty-radar/) — never read back by anything (scout.py only
+    # ever writes to *today's* path) and never by the dashboard (it reads
+    # the live intel/bounty-radar/opportunities.json scout.py maintains
+    # instead, not the per-cycle digests). Same internal-cycle-output shape
+    # as the reports/ categories above. bh-alerts-*.md is older output from
+    # a since-removed scope-change-alert path (no current writer at all,
+    # confirmed via repo-wide grep) — same treatment, it's pure audit trail.
+    {"glob": "intel/bounty-radar/digest-*.md", "category": "bounty_radar_digest", "date": "date", "indexed": False, "retention": _INTERNAL_RETENTION},
+    {"glob": "intel/bounty-radar/bh-alerts-*.md", "category": "bounty_radar_digest", "date": "date", "indexed": False, "retention": _INTERNAL_RETENTION},
 ]
 
 

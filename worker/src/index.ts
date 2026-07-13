@@ -264,6 +264,45 @@ app.get("/.well-known/402index-verify.txt", (c) =>
     : c.notFound()
 );
 
+// Per-IP fixed-window rate limiter for the free (unpaid) endpoints below,
+// backed by the same optional VAPE_JOBS KV already used for the job ledger.
+// Degrades to "never blocks" when that binding isn't configured — same
+// graceful-degradation pattern as every other optional resource in this file
+// — so it's safe to attach even before VAPE_JOBS_KV_ID is set up. This closes
+// a real gap: /prices and /cost-basis had neither caching nor any limit, so
+// a scripted loop varying the address/addresses param on every call bypassed
+// Cloudflare's URL-keyed Cache API entirely and burned metered Alchemy/
+// CoinGecko compute units with nothing to stop it. Not a true sliding
+// window and not meant to survive a distributed-IP attacker — just enough
+// to stop a single scripted client from draining quota, which is the actual
+// threat here (these routes hold no funds and gate no priced offering).
+function rateLimiter(routeName: string, limit: number, windowSeconds: number) {
+  return async (c: Context<{ Bindings: Env }>, next: () => Promise<void>) => {
+    const kv = c.env.VAPE_JOBS;
+    if (!kv) return next();
+    const ip = c.req.header("cf-connecting-ip") || "unknown";
+    const bucket = Math.floor(Date.now() / (windowSeconds * 1000));
+    const key = `ratelimit:${routeName}:${ip}:${bucket}`;
+    let current = 0;
+    try {
+      current = Number(await kv.get(key)) || 0;
+    } catch {
+      return next(); // KV hiccup — fail open, never block a legitimate caller over it
+    }
+    if (current >= limit) {
+      c.header("Retry-After", String(windowSeconds));
+      return c.json({ error: "rate limited, try again shortly" }, 429);
+    }
+    try {
+      await kv.put(key, String(current + 1), { expirationTtl: windowSeconds * 2 });
+    } catch {
+      // Best-effort counting — a failed increment just means this window
+      // undercounts, never a reason to block the current request.
+    }
+    return next();
+  };
+}
+
 // Free, unpaid Alchemy-backed endpoints — no x402 gate, since these back the
 // site's read-only wallet profile and metrics strip rather than a priced
 // offering. 503 (not 500) when ALCHEMY_API_KEY isn't configured, so callers
@@ -279,7 +318,7 @@ app.get("/.well-known/402index-verify.txt", (c) =>
 // means every visitor now shares ONE cached Alchemy call instead of one each.
 // Only 200 responses are cached by default, so the 400/502/503 error paths
 // below are never cached.
-app.get("/portfolio", cache({ cacheName: "vape-portfolio", cacheControl: "max-age=20" }), async (c) => {
+app.get("/portfolio", rateLimiter("portfolio", 20, 60), cache({ cacheName: "vape-portfolio", cacheControl: "max-age=20" }), async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "portfolio lookup not configured" }, 503);
@@ -291,7 +330,7 @@ app.get("/portfolio", cache({ cacheName: "vape-portfolio", cacheControl: "max-ag
   }
 });
 
-app.get("/nfts", cache({ cacheName: "vape-nfts", cacheControl: "max-age=60" }), async (c) => {
+app.get("/nfts", rateLimiter("nfts", 20, 60), cache({ cacheName: "vape-nfts", cacheControl: "max-age=60" }), async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY) return c.json({ error: "nft lookup not configured" }, 503);
@@ -318,7 +357,7 @@ app.get("/network-status", cache({ cacheName: "vape-network-status", cacheContro
 // server-side gets the Demo tier's higher/guaranteed rate limit instead of
 // the fully anonymous tier's. 503s (not 500s) so callers fall back to their
 // existing direct CoinGecko call, same pattern as the Alchemy routes above.
-app.get("/prices", async (c) => {
+app.get("/prices", rateLimiter("prices", 20, 60), cache({ cacheName: "vape-prices", cacheControl: "max-age=20" }), async (c) => {
   const addresses = (c.req.query("addresses") || "").split(",").map((a) => a.trim().toLowerCase()).filter(Boolean);
   if (!addresses.length || !addresses.every((a) => ADDRESS_RE.test(a))) return c.json({ error: "invalid addresses" }, 400);
   try {
@@ -334,7 +373,7 @@ app.get("/prices", async (c) => {
 // price by contract, which CoinGecko gates behind at least its free Demo
 // key). See lib/costBasis.ts for exactly what this does and doesn't compute
 // — it's a single-acquisition-point estimate, not full accounting.
-app.get("/cost-basis", async (c) => {
+app.get("/cost-basis", rateLimiter("cost-basis", 10, 60), cache({ cacheName: "vape-cost-basis", cacheControl: "max-age=30" }), async (c) => {
   const address = c.req.query("address") || "";
   if (!ADDRESS_RE.test(address)) return c.json({ error: "invalid address" }, 400);
   if (!c.env.ALCHEMY_API_KEY || !c.env.COINGECKO_API_KEY) return c.json({ error: "cost basis estimate not configured" }, 503);

@@ -1,6 +1,6 @@
-web3
-python-dotenv
-requests
-groq
-eth-account
-x402
+web3>=7.16.0
+python-dotenv>=1.2.2
+requests>=2.33.1
+groq>=1.5.0
+eth-account>=0.13.7
+x402>=2.15.0

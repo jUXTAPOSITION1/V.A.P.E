@@ -45,7 +45,11 @@ jobs:
           python-version: '3.11'
       - name: Install test + runtime deps
         run: |
-          pip install pytest pyflakes
+          # pyyaml: not a runtime dep of agents/, but scripts/security_lint.py
+          # (and its tests/test_security_lint.py) parse workflow YAML — needs
+          # to be installed unconditionally here, not folded into the
+          # best-effort agents/requirements.txt install below.
+          pip install pytest pyflakes pyyaml
           # Runtime deps are best-effort: the deterministic tests are hermetic
           # and import only stdlib + repo code, so a runtime-dep install failure
           # must not false-green the gate — but it also shouldn't be silent.

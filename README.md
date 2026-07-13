@@ -220,6 +220,7 @@ actual product is the live GitHub Pages site above.
 | [MEMORY.md](docs/MEMORY.md) | Central Memory usage guide |
 | [BUILDER.md](docs/BUILDER.md) | Builder agent reference |
 | [MCP.md](docs/MCP.md) / [MCP_SERVER.md](docs/MCP_SERVER.md) | MCP integration + standard server |
+| [SECURITY_PROTOCOL.md](docs/SECURITY_PROTOCOL.md) | Threat model, existing security automation, evolving CI regression guard |
 | [worker/README.md](worker/README.md) | x402 payment backend |
 | [skillforge/memory/BUILD_LEDGER.md](skillforge/memory/BUILD_LEDGER.md) | Instructional build patterns |
 
