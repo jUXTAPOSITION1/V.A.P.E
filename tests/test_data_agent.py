@@ -37,7 +37,11 @@ def test_non_base_chain_is_skipped_with_no_network_attempt(monkeypatch):
     assert "8453" in result["note"]
 
 
-def test_missing_key_is_skipped(monkeypatch):
+def test_missing_key_is_skipped(monkeypatch, tmp_path):
+    # Needs a fresh QUOTA_PATH — the real skillforge/memory/data_agent_quota.json
+    # accumulates a real last_ts from real automated runs, which would otherwise
+    # make this hit the unrelated 2h-interval gate instead of the missing-key check.
+    monkeypatch.setattr(data_agent, "QUOTA_PATH", str(tmp_path / "data_agent_quota.json"))
     monkeypatch.delenv("DATA_AGENT_PRIVATE_KEY", raising=False)
     result = data_agent.run_for_investigation("0x" + "aa" * 20, chain="8453")
     assert result["hired"] == []
