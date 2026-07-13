@@ -1,38 +1,43 @@
-# VAPE Engagement Status — 2026-07-13T05:53:39Z
+# VAPE Engagement Status — 2026-07-13T08:35:18Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
+## Searched, no verifiable on-chain target found
+
+- Kelp (exploit $293,000,000) ($293,000,000, fit 90) — checked 2026-07-13T05:05:24Z, honestly unresolved.
+- Matcha (exploit $13,430,000) ($13,430,000, fit 90) — checked 2026-07-13T05:05:30Z, honestly unresolved.
+- Thorchain DEX (exploit $10,000,000) ($10,000,000, fit 88) — checked 2026-07-13T05:05:22Z, honestly unresolved.
+- Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88) — checked 2026-07-13T05:05:09Z, honestly unresolved.
+- Grinex (exploit $15,000,000) ($15,000,000, fit 85) — checked 2026-07-13T05:05:26Z, honestly unresolved.
+- Resolv USR (exploit $24,500,000) ($24,500,000, fit 85) — checked 2026-07-13T05:05:28Z, honestly unresolved.
+- Edel (exploit $403,000) ($403,000, fit 81) — checked 2026-07-13T05:05:15Z, honestly unresolved.
+- Truebit (exploit $26,400,000) ($26,400,000, fit 80) — checked 2026-07-13T05:05:32Z, honestly unresolved.
+- Hinkal (exploit $820,000) ($820,000, fit 79) — checked 2026-07-13T05:05:12Z, honestly unresolved.
+- Verus-Ethereum Bridge (exploit $11,500,000) ($11,500,000, fit 74) — checked 2026-07-13T05:05:20Z, honestly unresolved.
+- Humanity (exploit $32,000,000) ($32,000,000, fit 66) — checked 2026-07-13T05:05:18Z, honestly unresolved.
+
 ## Not yet attempted this cycle
 
-- Kelp (exploit $293,000,000) ($293,000,000, fit 90, defillama-hack)
-- Matcha (exploit $13,430,000) ($13,430,000, fit 90, defillama-hack)
 - Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90, defillama-hack)
 - JaredFromSubway MEV Bot (exploit $7,500,000) ($7,500,000, fit 89, defillama-hack)
 - Hyperbridge (exploit $2,500,000) ($2,500,000, fit 89, defillama-hack)
-- Thorchain DEX (exploit $10,000,000) ($10,000,000, fit 88, defillama-hack)
-- Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88, defillama-hack)
 - Polymarket International (exploit $3,000,000) ($3,000,000, fit 85, defillama-hack)
-- Grinex (exploit $15,000,000) ($15,000,000, fit 85, defillama-hack)
 - Resolv (exploit $24,500,000) ($24,500,000, fit 85, defillama-hack)
 - Aperture LM (exploit $3,200,000) ($3,200,000, fit 85, defillama-hack)
 - Moonwell Lending (exploit $1,000,000) ($1,000,000, fit 85, defillama-hack)
-- Resolv USR (exploit $24,500,000) ($24,500,000, fit 85, defillama-hack)
 - Bonzo Lend (exploit $10,050,000) ($10,050,000, fit 85, defillama-hack)
 - FOOM Cash (exploit $2,260,000) ($2,260,000, fit 84, defillama-hack)
 - IoTeX (exploit $8,000,000) ($8,000,000, fit 84, defillama-hack)
 - Aztec Bridge (exploit $2,000,000) ($2,000,000, fit 83, defillama-hack)
 - Moonwell Lending (exploit $1,780,000) ($1,780,000, fit 83, defillama-hack)
 - Trust Wallet Wallet (exploit $7,000,000) ($7,000,000, fit 83, defillama-hack)
-- Edel (exploit $403,000) ($403,000, fit 81, defillama-hack)
 - Makina (exploit $4,200,000) ($4,200,000, fit 81, defillama-hack)
 - Wasabi Perps (exploit $5,500,000) ($5,500,000, fit 80, defillama-hack)
 - New Market Trading (exploit $3,980,000) ($3,980,000, fit 80, defillama-hack)
 - LABUBU/OLPC (exploit $1,100,000) ($1,100,000, fit 80, defillama-hack)
-- Truebit (exploit $26,400,000) ($26,400,000, fit 80, defillama-hack)
 - Yearn Ether (exploit $9,000,000) ($9,000,000, fit 80, defillama-hack)
 - GANA Payment (exploit $3,100,000) ($3,100,000, fit 80, defillama-hack)
 - BonkDAO (exploit $20,000,000) ($20,000,000, fit 80, defillama-hack)
-- Hinkal (exploit $820,000) ($820,000, fit 79, defillama-hack)
 - SolvBTC (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - Ribbon (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - SubQuery Network (exploit $60,000) ($60,000, fit 78, defillama-hack)
@@ -47,7 +52,6 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Blend Pools V2 (exploit $10,970,000) ($10,970,000, fit 75, defillama-hack)
 - Step Finance (exploit $40,000,000) ($40,000,000, fit 75, defillama-hack)
 - Upbit (exploit $36,000,000) ($36,000,000, fit 75, defillama-hack)
-- Verus-Ethereum Bridge (exploit $11,500,000) ($11,500,000, fit 74, defillama-hack)
 - Gravity Bridge (exploit $5,400,000) ($5,400,000, fit 74, defillama-hack)
 - ZetaChain (exploit $300,000) ($300,000, fit 74, defillama-hack)
 - SecondFi (exploit $2,400,000) ($2,400,000, fit 74, defillama-hack)
@@ -73,7 +77,6 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Saga (exploit $7,000,000) ($7,000,000, fit 68, defillama-hack)
 - JB (exploit $50,000) ($50,000, fit 67, defillama-hack)
 - Revert Lend (exploit $50,000) ($50,000, fit 67, defillama-hack)
-- Humanity (exploit $32,000,000) ($32,000,000, fit 66, defillama-hack)
 - TrustedVolumes (exploit $6,700,000) ($6,700,000, fit 66, defillama-hack)
 - StablR (exploit $2,800,000) ($2,800,000, fit 66, defillama-hack)
 - Aztec Connect (exploit $2,100,000) ($2,100,000, fit 66, defillama-hack)
