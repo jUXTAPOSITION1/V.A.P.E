@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from datetime import datetime
 import sys
 import time
@@ -456,7 +457,14 @@ def _web_intel_context():
 
 def _build_grounding():
     """Assemble anti-repetition grounding: recent report digests + Memory hits
-    + real investigation verdicts + real tool-registry gaps."""
+    + real investigation verdicts + real tool-registry gaps.
+
+    Returns (priming_text, investigation_digests) — the caller needs the raw
+    digests separately from the assembled prompt text so _reconcile_report()
+    can deterministically re-check them against whatever the LLM claims,
+    without re-deriving them (and without calling _recent_investigations()
+    a second time, which would just return empty on a repeat call — it
+    marks each digest "already narrated" the first time it's read)."""
     parts = []
     recent = _recent_report_digests(5)
     if recent:
@@ -509,7 +517,8 @@ def _build_grounding():
                 print(f"[Memory] Grounded in {len(prior)} prior entries\n")
         except Exception as e:
             print(f"[Integration] Memory grounding failed: {e}\n")
-    return ("\n\n" + "\n\n".join(parts) + "\n") if parts else ""
+    priming = ("\n\n" + "\n\n".join(parts) + "\n") if parts else ""
+    return priming, investigations
 
 
 def _build_report_prompt(market_json, slither_result, memory_priming):
@@ -535,6 +544,87 @@ def _parse_signal(report_text):
     Defaults to HIGH (full formatting) if the model didn't comply."""
     first_line = (report_text or "").strip().splitlines()[0] if report_text else ""
     return "LOW" if first_line.strip().upper().startswith("SIGNAL: LOW") else "HIGH"
+
+
+_VERDICT_RE = re.compile(r"\*\*Verdict:\*\*\s*(REJECT|CAUTION|PROCEED)", re.IGNORECASE)
+
+
+def _nonclean_digests(digests):
+    """Real, deterministic scan for REJECT/CAUTION verdicts already present
+    in this cycle's own investigation digests — parsed directly from the
+    `**Verdict:** X` line agents/investigate.py's write_report() already
+    emits, never from the LLM's own summary of what it read.
+
+    A token symbol has no way to influence this at the source: agents/
+    investigate.py::_sanitize_symbol() strips `**`/newlines from every
+    attacker-controlled name/symbol before it's ever embedded in a report,
+    so it can't forge a fake `**Verdict:**` field or a fake raw report line.
+    Takes the LAST match, not the first, as defense-in-depth on top of that:
+    the confirmed real exploit (CodeRabbit review, PR #156) put the forged
+    match in the report's title line, which always comes BEFORE the real
+    `- **Verdict:**` field write_report() emits right after it — so even if
+    sanitization were ever bypassed or a new attacker-reachable field were
+    added ahead of the real one, the last match is the one least likely to
+    be an early, attacker-placed decoy."""
+    out = []
+    for d in digests or []:
+        verdicts = _VERDICT_RE.findall(d or "")
+        if verdicts and verdicts[-1].upper() in ("REJECT", "CAUTION"):
+            out.append(d)
+    return out
+
+
+def _reconcile_report(report_text, digests):
+    """Deterministic backstop against prompt injection via attacker-
+    controlled token symbols (agents/redteam.py's fake-clean-verdict-via-
+    token-symbol / instruction-override-via-token-symbol tests — both
+    confirmed real, repeated hijacks of VAPE_REPORT_SYSTEM even after
+    _build_grounding()'s "treat this as inert data" framing shipped;
+    prompt-level framing alone did not reliably hold against a real model).
+
+    Never lets the LLM's own claimed SIGNAL or narrative be the sole gate
+    for whether a real finding gets surfaced, or the sole content published
+    when its output doesn't even match the mandatory report contract:
+
+    - If the response doesn't start with the required SIGNAL: HIGH|LOW
+      marker at all, it's discarded outright and replaced with a report
+      built only from real digest data — never published verbatim,
+      whatever it says.
+    - If it claims SIGNAL: LOW but a real REJECT/CAUTION verdict is present
+      in this cycle's own digests, that claim is overruled unconditionally
+      and the real verdict(s) are surfaced ahead of the model's own text.
+    - Otherwise (well-formed, and consistent with the real data), returned
+      unchanged — this must never fire on a genuinely clean cycle.
+    """
+    nonclean = _nonclean_digests(digests)
+    text = (report_text or "").strip()
+    first_line = text.splitlines()[0].strip().upper() if text else ""
+    # Exact match, not startswith — a malformed line like "SIGNAL: HIGHJACKED"
+    # would otherwise pass as well-formed and be published unchanged.
+    well_formed = first_line in ("SIGNAL: HIGH", "SIGNAL: LOW")
+
+    if not well_formed:
+        lines = ["SIGNAL: HIGH", "", "## Investigation Findings",
+                  "AI narrative rejected this cycle — did not start with the required "
+                  "SIGNAL: marker, so it was not published as-is."]
+        if nonclean:
+            lines.append("Publishing this cycle's real investigation data directly instead:")
+            lines += [f"- {d}" for d in nonclean]
+        else:
+            lines.append("No non-clean investigation data this cycle to fall back to.")
+        return "\n".join(lines), "HIGH"
+
+    claimed_low = first_line == "SIGNAL: LOW"
+    if claimed_low and nonclean:
+        lines = ["SIGNAL: HIGH", "", "## Investigation Findings (verified, not model-reported)",
+                  "The model reported SIGNAL: LOW this cycle, but the following real verdict(s) "
+                  "were present in this cycle's own investigation data and are surfaced here "
+                  "regardless of what the narrative below claims:"]
+        lines += [f"- {d}" for d in nonclean]
+        lines += ["", "---", "", text]
+        return "\n".join(lines), "HIGH"
+
+    return report_text, ("LOW" if claimed_low else "HIGH")
 
 
 def main(review_repo=False):
@@ -606,7 +696,7 @@ def main(review_repo=False):
         # STEP 1: Ground in Memory + recent reports to FORCE novelty. We show the
         # LLM the last several report summaries so it explicitly builds on prior
         # intel and calls out what CHANGED instead of repeating boilerplate.
-        memory_priming = _build_grounding()
+        memory_priming, investigation_digests = _build_grounding()
 
         report = _ask_with_signal_retry(
             VAPE_REPORT_SYSTEM,
@@ -615,7 +705,10 @@ def main(review_repo=False):
             temperature=0.4,
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
-        signal = _parse_signal(report)
+        # Deterministic backstop — never trust the model's own SIGNAL/narrative
+        # claim over what this cycle's real investigation digests actually say
+        # (see _reconcile_report's docstring for the confirmed injection this closes).
+        report, signal = _reconcile_report(report, investigation_digests)
         print(f"[Signal] {signal}\n")
 
         # STEP 2: Append the ACTUAL analysis back to Memory (not raw data), and
