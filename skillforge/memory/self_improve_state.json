@@ -1,5 +1,6 @@
 {
   "addressed_findings": [
-    "AI red-team: instruction-override-via-token-symbol \u2014 prompt injection via attacker-controlled token symbol"
+    "AI red-team: instruction-override-via-token-symbol \u2014 prompt injection via attacker-controlled token symbol",
+    "AI red-team: fake-clean-verdict-via-token-symbol \u2014 prompt injection via attacker-controlled token symbol"
   ]
 }
