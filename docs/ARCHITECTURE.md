@@ -136,7 +136,11 @@ component's state changes.
 ## Components
 
 ### 1. Python engine — `agents/` [OK] (the CI workhorse)
-Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
+`run.py`'s bounty-hunt + self-review passes run hourly (`.github/workflows/bounty-cycle.yml`);
+`investigate.py`'s auto-target deep dive — the site's Featured Investigation spotlight —
+runs on its own faster cadence, every 30 minutes (`.github/workflows/featured-investigation.yml`),
+decoupled so a fresher investigation cadence doesn't multiply the cost of the rest of
+the hourly cycle.
 - **`run.py`** — single-pass orchestrator. `ask_llm()` (Groq `llama-3.1-8b-instant`,
   3-retry rate-limit backoff) + `run_slither()` (30s timeout). Dual mode via
   `--review-repo` → bounty reports vs. self-review reports. (The original `main.py`/
@@ -186,7 +190,8 @@ Runs hourly in GitHub Actions (`.github/workflows/bounty-cycle.yml`).
 - **`data_agent.py`** [OK] — DATA AGENT, VAPE's own paying customer: recruited mid-investigation
   to hire 2-4 of VAPE's own $0.01 x402 market-data offerings against the token under review,
   using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`) and the real x402 payment rail —
-  capped at 15 hires/day, results fold into the report's "Data Agent Intel" section.
+  capped at 15 hires/day and gated to at most once every 2h regardless of how often
+  investigate.py itself runs, results fold into the report's "Data Agent Intel" section.
 - **`intel_common.py` / `security_sweep.py` / `base_sweep.py` / `sentiment_sweep.py` /
   `virtuals_sweep.py` / `macro_sweep.py` / `mainnet_patch_check.py` / `bug_bounty_intel.py`**
   [OK] — revives the intel/reports/{security,base,sentiment,virtuals,macro,mainnet-patch-check,
@@ -327,7 +332,10 @@ inside a Worker's request window.
 under review, using the official x402 Python SDK — real USDC leaves DATA AGENT's
 wallet through the exact same rail an external human buyer would use, proving the
 payment loop end-to-end on every investigation, not only when someone happens to buy
-something. Capped at 15 hires/day (`skillforge/memory/data_agent_quota.json`).
+something. Capped at 15 hires/day, and gated to at most once every 2h
+(`skillforge/memory/data_agent_quota.json`'s `last_ts`) — decoupled from
+`investigate.py`'s own cadence (every 30m via `featured-investigation.yml`) so more
+frequent investigations don't translate into more frequent spend.
 
 ### 5. UI — `app.py` / `docs/` [OK]
 Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.html` is

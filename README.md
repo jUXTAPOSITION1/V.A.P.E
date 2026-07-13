@@ -191,7 +191,8 @@ V.A.P.E/
 
 ## Status
 
-**Live and running:** hourly investigations and market sweeps, the SKILLFORGE tool
+**Live and running:** Featured Investigations every 30 minutes, hourly bounty/market
+sweeps, the SKILLFORGE tool
 ecosystem (15 tools registered, 15 verified), ACP + x402 job fulfillment across 29 live
 offerings (21 auto-fulfilled with zero manual work), x402 payments on Base mainnet via
 Coinbase Developer Platform's hosted facilitator, wallet-connect portfolio, the Central
