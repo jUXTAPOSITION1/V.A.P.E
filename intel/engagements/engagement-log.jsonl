@@ -181,3 +181,4 @@
 {"ts": "2026-07-13T08:35:18Z", "lead": "Hinkal (exploit $820,000)", "platform": "defillama-hack", "prizeUsd": 820000, "fitScore": 79, "engagement": {"status": "no_target_found", "checked_at": "2026-07-13T05:05:12Z"}}
 {"ts": "2026-07-13T08:35:18Z", "lead": "Verus-Ethereum Bridge (exploit $11,500,000)", "platform": "defillama-hack", "prizeUsd": 11500000, "fitScore": 74, "engagement": {"status": "no_target_found", "checked_at": "2026-07-13T05:05:20Z"}}
 {"ts": "2026-07-13T08:35:18Z", "lead": "Humanity (exploit $32,000,000)", "platform": "defillama-hack", "prizeUsd": 32000000, "fitScore": 66, "engagement": {"status": "no_target_found", "checked_at": "2026-07-13T05:05:18Z"}}
+{"ts": "2026-07-13T11:41:40Z", "lead": "Balancer V2 (exploit $128,000,000)", "platform": "defillama-hack", "prizeUsd": 128000000, "fitScore": 90, "engagement": {"status": "no_target_found", "checked_at": "2026-07-13T09:30:23Z"}}

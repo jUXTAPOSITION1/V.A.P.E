@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-13T08:35:18Z
+# VAPE Engagement Status — 2026-07-13T11:41:40Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -6,6 +6,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 
 - Kelp (exploit $293,000,000) ($293,000,000, fit 90) — checked 2026-07-13T05:05:24Z, honestly unresolved.
 - Matcha (exploit $13,430,000) ($13,430,000, fit 90) — checked 2026-07-13T05:05:30Z, honestly unresolved.
+- Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90) — checked 2026-07-13T09:30:23Z, honestly unresolved.
 - Thorchain DEX (exploit $10,000,000) ($10,000,000, fit 88) — checked 2026-07-13T05:05:22Z, honestly unresolved.
 - Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88) — checked 2026-07-13T05:05:09Z, honestly unresolved.
 - Grinex (exploit $15,000,000) ($15,000,000, fit 85) — checked 2026-07-13T05:05:26Z, honestly unresolved.
@@ -18,7 +19,6 @@ Real record of what VAPE's automated pipeline has actually done about each track
 
 ## Not yet attempted this cycle
 
-- Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90, defillama-hack)
 - JaredFromSubway MEV Bot (exploit $7,500,000) ($7,500,000, fit 89, defillama-hack)
 - Hyperbridge (exploit $2,500,000) ($2,500,000, fit 89, defillama-hack)
 - Polymarket International (exploit $3,000,000) ($3,000,000, fit 85, defillama-hack)
