@@ -4,7 +4,7 @@
   "description": "Autonomous on-chain intelligence for Base & Virtuals — real-time chain telemetry, contract security analysis, and a live bounty command center.",
   "start_url": "./",
   "scope": "./",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#09090b",
   "theme_color": "#09090b",
   "icons": [
