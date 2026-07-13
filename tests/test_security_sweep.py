@@ -6,6 +6,7 @@ Ledger present as ground truth, so a reader must be able to recompute them.
 from datetime import datetime, timezone, timedelta
 
 from agents import security_sweep as ss
+from agents import investigate as inv
 
 
 def _incident(days_ago, amount_m, technique="Some Exploit", chains=("Ethereum",)):
@@ -75,3 +76,65 @@ def test_covered_by_claims_are_non_empty_strings_or_none():
     for p in ss.ATTACK_PATTERNS:
         cb = p["covered_by"]
         assert cb is None or (isinstance(cb, str) and cb.strip())
+
+
+# ── _pick_chain_id() — real chain support, not Base-only ────────────────────
+
+def test_pick_chain_id_prefers_base_when_present():
+    assert ss._pick_chain_id(["Ethereum", "Base"], inv.EVM_CHAINS) == "8453"
+
+
+def test_pick_chain_id_supports_non_base_evm_chain():
+    # This is the exact gap that let Kelp ($293M, Ethereum+Arbitrum, no Base)
+    # slip past the old Base-only filter forever.
+    assert ss._pick_chain_id(["Ethereum", "Arbitrum"], inv.EVM_CHAINS) == "1"
+
+
+def test_pick_chain_id_none_when_nothing_supported():
+    assert ss._pick_chain_id(["Sonic", "Hedera"], inv.EVM_CHAINS) is None
+
+
+def test_pick_chain_id_none_on_empty():
+    assert ss._pick_chain_id([], inv.EVM_CHAINS) is None
+    assert ss._pick_chain_id(None, inv.EVM_CHAINS) is None
+
+
+# ── attempt_incident_forensics() — cross-chain + high-value age exception ──
+
+def _hack(days_ago, amount_m, chains, name="Test Hack"):
+    d = (datetime.now(timezone.utc) - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+    return {"date": d, "name": name, "amount_usd_m": amount_m,
+            "technique": "Exploit", "chains": list(chains)}
+
+
+def _run_forensics(tmp_path, monkeypatch, incidents):
+    monkeypatch.setattr(ss, "ATTACK_RESPONSE_STATE_PATH", str(tmp_path / "state.json"))
+    monkeypatch.setattr(ss.ic, "web_search_snippets", lambda *a, **kw: {"results": []})
+    return ss.attempt_incident_forensics(incidents)
+
+
+def test_old_but_high_value_incident_still_attempted(tmp_path, monkeypatch):
+    old_and_huge = _hack(days_ago=90, amount_m=293, chains=["Ethereum", "Arbitrum"], name="Kelp")
+    outcomes = _run_forensics(tmp_path, monkeypatch, [old_and_huge])
+    assert len(outcomes) == 1
+    assert outcomes[0]["incident"].endswith("Kelp")
+
+
+def test_old_and_small_incident_skipped_by_age_gate(tmp_path, monkeypatch):
+    old_and_small = _hack(days_ago=90, amount_m=1, chains=["Ethereum"], name="Tiny Old Hack")
+    outcomes = _run_forensics(tmp_path, monkeypatch, [old_and_small])
+    assert outcomes == []
+
+
+def test_incident_on_unsupported_chain_only_is_skipped(tmp_path, monkeypatch):
+    sonic_only = _hack(days_ago=1, amount_m=500, chains=["Sonic"], name="Unsupported Chain Hack")
+    outcomes = _run_forensics(tmp_path, monkeypatch, [sonic_only])
+    assert outcomes == []
+
+
+def test_recent_small_incident_still_attempted(tmp_path, monkeypatch):
+    # Ordinary fast-incident-response behavior must survive the age-gate change.
+    recent_small = _hack(days_ago=1, amount_m=1, chains=["Base"], name="Fresh Small Hack")
+    outcomes = _run_forensics(tmp_path, monkeypatch, [recent_small])
+    assert len(outcomes) == 1
+    assert outcomes[0]["resolved"] is False

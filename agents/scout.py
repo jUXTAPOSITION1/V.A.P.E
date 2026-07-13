@@ -7,15 +7,17 @@ numeric fit score — no LLM call, no token spend, safe to run hourly.
 
 The one exception, where reasoning genuinely is required: every cycle with
 anything to assess gets a real strategic analysis on top of the numeric
-table (_grok_briefing() below, Grok first via agents/llm.py's FRONTIER_ORDER)
-— why the top opportunities matter and what VAPE should actually do about
+table (_strategic_briefing() below, via agents/llm.py's FRONTIER_ORDER) —
+why the top opportunities matter and what VAPE should actually do about
 them, not just a re-sorted list. Runs every cycle, not only when something's
-new — coverage over conserving Grok's one-time credit, by explicit direction.
+new — coverage over conserving the frontier tier's one-time credit, by
+explicit direction.
 
-Insight also gets ACTED on, not just narrated: _act_on_base_incidents() below
-delegates to agents/security_sweep.py's already-verified Base-chain
+Insight also gets ACTED on, not just narrated: _act_on_incidents() below
+delegates to agents/security_sweep.py's already-verified, real-chain
 address-resolution pipeline (same dedup state file security_sweep.py's own
-scheduled runs use) so a real incident gets a real agents/investigate.py
+scheduled runs use) so a real incident — on any chain investigate.py can
+actually work with, not just Base — gets a real agents/investigate.py
 investigation triggered from SCOUT's hourly cadence too, not only
 security_sweep's 4x/day. Never fabricates an address — same "verify or skip"
 guarantee as attempt_incident_forensics() itself.
@@ -146,15 +148,15 @@ def fetch_defillama_hacks(limit=FETCH_LIMIT):
     return out
 
 
-def _grok_briefing(new_entries, shown):
-    """Real strategic analysis of THIS cycle's top opportunities — Grok's
-    reasoning on WHY they matter and WHAT VAPE should actually do about
-    them, not just a re-statement of the numeric-fit table below. Runs
-    every cycle that has anything to assess (not gated on new_entries —
-    per explicit direction, coverage matters more than conserving Grok's
-    one-time credit here). Returns "" on any failure/unavailability/
-    nothing-to-assess — a digest without a briefing is still a complete,
-    honest digest.
+def _strategic_briefing(new_entries, shown):
+    """Real strategic analysis of THIS cycle's top opportunities — the
+    frontier model's reasoning on WHY they matter and WHAT VAPE should
+    actually do about them, not just a re-statement of the numeric-fit
+    table below. Runs every cycle that has anything to assess (not gated
+    on new_entries — per explicit direction, coverage matters more than
+    conserving the frontier tier's one-time credit here). Returns "" on
+    any failure/unavailability/nothing-to-assess — a digest without a
+    briefing is still a complete, honest digest.
     """
     top = shown[:10]
     if not top:
@@ -174,7 +176,7 @@ def _grok_briefing(new_entries, shown):
     new_lines = [f"- {e.get('name', 'Unknown')} (fit {e.get('fitScore', 0)})" for e in new_entries[:15]]
 
     system = (
-        "You are Grok, VAPE's strategic analyst for its bug-bounty/incident radar. VAPE is an "
+        "You are VAPE's strategic analyst for its bug-bounty/incident radar. VAPE is an "
         "autonomous on-chain detective specializing in Base/EVM forensics, smart-contract "
         "security, and bounty hunting. Give a terse, opinionated, actionable strategic briefing "
         "on the real data below — not a summary of a table the reader already sees. No "
@@ -204,10 +206,11 @@ def _grok_briefing(new_entries, shown):
     return text.strip()
 
 
-def _act_on_base_incidents():
-    """Real action step, not just narration: for recent Base-chain hack
-    incidents, delegate to agents.security_sweep's already-built,
-    address-verification pipeline (attempt_incident_forensics) — same
+def _act_on_incidents():
+    """Real action step, not just narration: for recent (or large enough
+    to still be worth chasing regardless of age) hack incidents on any
+    chain investigate.py can work with, delegate to agents.security_sweep's
+    already-built, address-verification pipeline (attempt_incident_forensics) — same
     skillforge/memory/attack_response_state.json dedup file
     security_sweep.py's own scheduled runs use, so this never re-does work
     those runs already did (or vice versa). Triggers a REAL
@@ -244,9 +247,9 @@ def _write_digest(entries, new_count, total_count, new_entries, forensics_outcom
         "",
     ]
 
-    briefing = _grok_briefing(new_entries, shown)
+    briefing = _strategic_briefing(new_entries, shown)
     if briefing:
-        lines += ["## Strategic Briefing (Grok)", "", briefing, ""]
+        lines += ["## Strategic Briefing", "", briefing, ""]
 
     if forensics_outcomes:
         lines += ["## Actions Taken This Cycle", ""]
@@ -258,7 +261,7 @@ def _write_digest(entries, new_count, total_count, new_entries, forensics_outcom
         unresolved = [o for o in forensics_outcomes if not o.get("resolved")]
         if unresolved:
             lines.append(f"- Searched but could not verify a real address for "
-                         f"{len(unresolved)} other recent Base incident(s) this cycle "
+                         f"{len(unresolved)} other recent incident(s) this cycle "
                          "(no fabricated targets — recorded as unresolved).")
         lines.append("")
 
@@ -320,7 +323,7 @@ def run():
         _save_json(OPPORTUNITIES_PATH, opportunities)
 
     _save_json(SEEN_PATH, seen)
-    forensics_outcomes = _act_on_base_incidents()
+    forensics_outcomes = _act_on_incidents()
     digest_path = _write_digest(opportunities, len(new_entries), len(opportunities), new_entries,
                                 forensics_outcomes)
 

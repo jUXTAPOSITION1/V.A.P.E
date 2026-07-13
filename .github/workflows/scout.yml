@@ -1,4 +1,4 @@
-name: SCOUT Bounty Radar (hourly, rule-based + gated Grok briefing)
+name: SCOUT Bounty Radar (hourly, rule-based + strategic briefing)
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
   scout:
     runs-on: ubuntu-latest
     env:
-      # scout.py's Grok briefing runs every cycle now (agents/llm.py is
+      # scout.py's strategic briefing runs every cycle now (agents/llm.py is
       # stdlib-only — no pip install needed for these). _act_on_base_incidents()
       # additionally calls agents.investigate.investigate() for real when a
       # Base incident's address verifies, which needs the full set below —
@@ -51,7 +51,7 @@ jobs:
           key: npm-research-mcp-${{ runner.os }}
       - name: Install
         run: pip install -r agents/requirements.txt
-      - name: Run SCOUT (rule-based scan + Grok strategic briefing + real incident forensics)
+      - name: Run SCOUT (rule-based scan + strategic briefing + real incident forensics)
         run: python agents/scout.py
       - name: Commit bounty radar sweep
         run: |

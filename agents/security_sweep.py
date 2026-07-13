@@ -45,12 +45,45 @@ ATTACK_FEED_FETCH_LIMIT = 200
 
 # VAPE doesn't just report these incidents — for ones it can actually verify
 # a target for, it runs its own real forensics pipeline against them (see
-# attempt_incident_forensics() below). Scoped to Base only (investigate.py's
-# real pipeline) and a real, resolved on-chain address only — never a
-# fabricated one — so "investigating the attacks" means something checkable.
+# attempt_incident_forensics() below). Scoped to any chain investigate.py's
+# EVM_CHAINS map actually supports (Base, Ethereum, Arbitrum, Optimism,
+# Polygon, BNB Chain, Avalanche — not just Base) and a real, resolved
+# on-chain address only — never a fabricated one — so "investigating the
+# attacks" means something checkable.
 ATTACK_RESPONSE_STATE_PATH = os.path.join(ic.ROOT, "skillforge", "memory", "attack_response_state.json")
 ATTACK_RESPONSE_LOOKBACK_DAYS = 14
+# The 14-day window above is for ordinary incident response (react fast to
+# something new). It was also the reason VAPE's own SCOUT briefing kept
+# surfacing the same high-value leads (Kelp $293M, Balancer V2 $128M, Matcha
+# $13.4M) cycle after cycle as "still worth chasing" while the action step
+# silently could never touch them — they're all older than 14 days. A lead
+# this large stays worth real forensics regardless of age; only genuinely
+# small, stale incidents should age out.
+ATTACK_RESPONSE_HIGH_VALUE_USD_M = 10
 _ADDR_RE = re.compile(r"0x[a-fA-F0-9]{40}")
+# DeFiLlama chain-name strings that don't match investigate.EVM_CHAINS'
+# canonical `name` field verbatim.
+_CHAIN_NAME_ALIASES = {"bsc": "56", "binance": "56", "matic": "137", "avax": "43114", "eth": "1"}
+
+
+def _pick_chain_id(chains, evm_chains):
+    """Which of investigate.py's real, tool-supported chains (see
+    EVM_CHAINS) this incident can actually be investigated on — never
+    invents support for a chain VAPE has no real recon path for (e.g.
+    DeFiLlama's "sonic" on the Balancer V2 incident has no EVM_CHAINS
+    entry, so it's skipped in favor of the incident's other real chains).
+    Base preferred when present since investigate.py's forensics coverage
+    is most complete there; otherwise the first supported chain in the
+    incident's own chain list. None if nothing here is supported."""
+    chains_lower = [str(c).lower() for c in (chains or [])]
+    if "base" in chains_lower:
+        return "8453"
+    by_name = {meta["name"].lower(): cid for cid, meta in evm_chains.items()}
+    for c in chains_lower:
+        cid = by_name.get(c) or _CHAIN_NAME_ALIASES.get(c)
+        if cid:
+            return cid
+    return None
 
 # VAPE's response to an incident isn't limited to "did I find an address to
 # investigate" — it also asks "what class of bug was this, do I already
@@ -235,20 +268,21 @@ _GENERIC_NAME_WORDS = {
 }
 
 
-def _address_matches_incident(inv, address, incident_name):
+def _address_matches_incident(inv, address, incident_name, chain="8453"):
     """Real on-chain cross-check that a candidate address is actually THIS
     incident's protocol, not merely some other address that happened to
     appear in the same search result (an attacker wallet, a victim's own
     unrelated token, a different protocol mentioned in the same writeup).
     Address proximity to a keyword in a search snippet is not evidence —
     the address's real, fetched on-chain name/symbol has to genuinely
-    reference the incident's protocol name."""
+    reference the incident's protocol name. Checked on the incident's own
+    resolved chain (see _pick_chain_id), not hardcoded to Base."""
     tokens = [t for t in re.split(r"[^a-z0-9]+", incident_name.lower())
               if len(t) >= 3 and t not in _GENERIC_NAME_WORDS]
     if not tokens:
         return False
-    dex = inv.dexscreener(address, chain="8453")
-    verif = inv.contract_verification(address, chain="8453")
+    dex = inv.dexscreener(address, chain=chain)
+    verif = inv.contract_verification(address, chain=chain)
     candidate_text = " ".join(str(x) for x in (dex.get("name"), dex.get("symbol"), verif.get("name")) if x).lower()
     if not candidate_text:
         return False
@@ -257,8 +291,9 @@ def _address_matches_incident(inv, address, incident_name):
 
 def attempt_incident_forensics(incidents):
     """VAPE doesn't just narrate these incidents, it investigates the ones
-    it can verify a real target for: for recent Base-chain hacks not
-    already checked, search for the real on-chain address and, if one is
+    it can verify a real target for: for each hack not already checked,
+    on any chain investigate.py can actually work with (see _pick_chain_id
+    — not just Base), search for the real on-chain address and, if one is
     found AND its real fetched name/symbol actually cross-checks against
     the incident's protocol name (see _address_matches_incident —
     proximity to a keyword in a search result is not enough evidence on
@@ -268,7 +303,12 @@ def attempt_incident_forensics(incidents):
     surface one that verifiably matches, the incident is honestly recorded
     as unresolved and skipped. A state file makes this idempotent — each
     real incident is only ever searched once, not re-queried every 6 hours
-    forever.
+    forever. Age gate: incidents younger than ATTACK_RESPONSE_LOOKBACK_DAYS
+    always qualify (fast incident response); older ones still qualify if
+    the loss is large enough (ATTACK_RESPONSE_HIGH_VALUE_USD_M) to be worth
+    real forensics regardless of when it happened — otherwise VAPE's own
+    briefings can keep flagging a $100M+ lead as "still worth chasing"
+    forever while this step structurally can never act on it.
     """
     try:
         from agents import investigate as inv
@@ -280,25 +320,26 @@ def attempt_incident_forensics(incidents):
     cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_RESPONSE_LOOKBACK_DAYS)
     outcomes = []
     for h in incidents:
-        chains = [str(c).lower() for c in (h.get("chains") or [])]
-        if "base" not in chains:
+        chain_id = _pick_chain_id(h.get("chains"), inv.EVM_CHAINS)
+        if not chain_id:
             continue
         try:
             d = datetime.strptime(h["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
         except Exception:
             continue
-        if d < cutoff:
+        if d < cutoff and (h.get("amount_usd_m") or 0) < ATTACK_RESPONSE_HIGH_VALUE_USD_M:
             continue
         incident_id = f"{h['date']}:{h['name']}"
         if incident_id in state:
             continue  # already resolved-or-tried this exact real incident
 
-        search = ic.web_search_snippets(f"{h['name']} exploit contract address Base Basescan", max_results=5)
+        chain_name = inv.EVM_CHAINS[chain_id]["name"]
+        search = ic.web_search_snippets(f"{h['name']} exploit contract address {chain_name} explorer", max_results=5)
         address = None
         for r in search.get("results", []):
             for m in _ADDR_RE.finditer(f"{r.get('title', '')} {r.get('snippet', '')}"):
                 candidate = m.group(0)
-                if _address_matches_incident(inv, candidate, h["name"]):
+                if _address_matches_incident(inv, candidate, h["name"], chain=chain_id):
                     address = candidate
                     break
             if address:
@@ -309,9 +350,9 @@ def attempt_incident_forensics(incidents):
             outcomes.append({"incident": incident_id, "resolved": False})
             continue
 
-        hint = f"post-incident forensics: {h['name']} exploit ({h['date']}, ${h.get('amount_usd_m')}M, {h.get('technique')})"
+        hint = f"post-incident forensics: {h['name']} exploit ({h['date']}, ${h.get('amount_usd_m')}M, {h.get('technique')}, {chain_name})"
         try:
-            result = inv.investigate(address, chain="8453", hint=hint, force=False)
+            result = inv.investigate(address, chain=chain_id, hint=hint, force=False)
         except Exception as e:
             print(f"[security_sweep] investigate({address}) failed: {e}")
             state[incident_id] = {"checked_at": ic.now_iso(), "resolved": False, "error": str(e)}
@@ -319,11 +360,11 @@ def attempt_incident_forensics(incidents):
             continue
 
         state[incident_id] = {
-            "checked_at": ic.now_iso(), "resolved": True, "address": address,
+            "checked_at": ic.now_iso(), "resolved": True, "address": address, "chain": chain_id,
             "verdict": result.get("verdict") or result.get("skipped"),
             "report": result.get("report"),
         }
-        outcomes.append({"incident": incident_id, "resolved": True, "address": address})
+        outcomes.append({"incident": incident_id, "resolved": True, "address": address, "chain": chain_id})
 
     _save_attack_response_state(state)
     return outcomes
@@ -375,7 +416,7 @@ def learn_from_incidents(incidents):
     except Exception:
         append_to_memory = None
 
-    response_state = _load_attack_response_state()  # has verdict+address for resolved Base incidents
+    response_state = _load_attack_response_state()  # has verdict+address+chain for resolved incidents
     lesson_state = _load_attack_lesson_state()
     cutoff = datetime.now(timezone.utc) - timedelta(days=ATTACK_LESSON_LOOKBACK_DAYS)
     lessons_by_id = {}
