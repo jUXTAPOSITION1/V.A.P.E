@@ -42,5 +42,41 @@
   "2026-01-08:Truebit": {
     "checked_at": "2026-07-13T05:05:32Z",
     "resolved": false
+  },
+  "2025-11-03:Balancer V2": {
+    "checked_at": "2026-07-13T09:30:23Z",
+    "resolved": false
+  },
+  "2025-10-30:Garden": {
+    "checked_at": "2026-07-13T09:30:25Z",
+    "resolved": false
+  },
+  "2025-09-24:SBI Crypto": {
+    "checked_at": "2026-07-13T09:30:27Z",
+    "resolved": false
+  },
+  "2025-09-22:UXLINK": {
+    "checked_at": "2026-07-13T09:30:29Z",
+    "resolved": false
+  },
+  "2025-08-14:BtcTurk\n": {
+    "checked_at": "2026-07-13T09:30:32Z",
+    "resolved": false
+  },
+  "2025-07-24:WOO X": {
+    "checked_at": "2026-07-13T09:30:34Z",
+    "resolved": false
+  },
+  "2025-07-09:GMX V1 Perps": {
+    "checked_at": "2026-07-13T09:30:36Z",
+    "resolved": false
+  },
+  "2025-06-18:Nobitex": {
+    "checked_at": "2026-07-13T09:30:38Z",
+    "resolved": false
+  },
+  "2025-05-28:Cork V1": {
+    "checked_at": "2026-07-13T09:30:40Z",
+    "resolved": false
   }
 }
