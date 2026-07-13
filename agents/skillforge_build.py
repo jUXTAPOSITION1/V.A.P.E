@@ -84,6 +84,25 @@ def _tool_gaps():
     return gaps
 
 
+def _bounty_radar_signal(max_items=8):
+    """Real top-fit opportunities from SCOUT's bounty-radar archive
+    (agents/scout.py, intel/bounty-radar/opportunities.json) — grounds tool
+    proposals in actual $ opportunities VAPE could pursue right now, not
+    only its own registry gaps. Returns [] if the archive is missing/empty;
+    never fabricates an opportunity."""
+    path = os.path.join(_REPO_ROOT, "intel", "bounty-radar", "opportunities.json")
+    try:
+        with open(path) as f:
+            opps = json.load(f)
+    except Exception:
+        return []
+    if not isinstance(opps, list):
+        return []
+    ranked = sorted(opps, key=lambda o: o.get("fitScore", 0), reverse=True)[:max_items]
+    return [f"{o.get('name', '?')} ({o.get('platform', '?')}, fit {o.get('fitScore', 0)}, "
+            f"${o.get('prizeUsd', 0):,.0f}): {o.get('desc', '')}" for o in ranked]
+
+
 def _memory_signal(query, category, max_results=6, min_confidence=0.6):
     if not search_memory:
         return []
@@ -103,6 +122,12 @@ def gather_signals():
     if gaps:
         parts.append("=== TOOL REGISTRY GAPS (real, skillforge/memory/tools-registry.json) ===\n"
                       + "\n".join(f"- {g}" for g in gaps))
+
+    bounty = _bounty_radar_signal()
+    if bounty:
+        parts.append("=== TOP BOUNTY-RADAR OPPORTUNITIES (real, agents/scout.py, "
+                      "intel/bounty-radar/opportunities.json) ===\n"
+                      + "\n".join(f"- {b}" for b in bounty))
 
     findings = _memory_signal("investigation reject caution rug honeypot", "finding")
     if findings:
@@ -135,9 +160,15 @@ Rules:
 - Propose EXACTLY ONE concrete, buildable tool/skill/mini-app — not a vague idea.
 - It MUST be justified by a SPECIFIC signal in the data below — quote or closely
   reference it. If nothing below genuinely justifies a new build, say so.
+- A TOP BOUNTY-RADAR OPPORTUNITY is a high-priority justification category: if a real,
+  high-fit opportunity below would need a capability VAPE doesn't have yet (a specific
+  chain's tracing, a technique-specific detector, a program's required audit format),
+  proposing exactly that capability is the strongest kind of build — it's tied to real
+  dollars, not just self-maintenance. Prefer it over a generic gap when both are present.
 - Scope it to something implementable in one pass: a script, a CLI tool, a detector, a
   small analysis module, a playbook-backed utility — not a multi-week project.
-- Never invent capability gaps, findings, or patterns that aren't in the data given.
+- Never invent capability gaps, findings, patterns, or opportunities that aren't in the
+  data given.
 - No disclaimers, no hedging — a real decision or an honest "nothing justified."
 
 Output format (exactly, first line always one of these two):

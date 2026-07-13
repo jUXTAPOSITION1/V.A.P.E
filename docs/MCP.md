@@ -69,11 +69,11 @@ python skillforge/mcp.py --social-sentiment
 python skillforge/mcp.py --tool-releases crytic/slither
 ```
 
-From the integration layer:
+Directly in Python:
 
 ```python
-from agents.integration import mcp_harvest_and_append
-result = mcp_harvest_and_append()   # harvests + appends to Memory
+from skillforge.mcp import run_mcp_harvest
+result = run_mcp_harvest()   # harvests + appends to Memory
 ```
 
 ---

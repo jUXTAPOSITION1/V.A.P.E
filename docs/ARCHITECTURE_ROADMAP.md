@@ -72,7 +72,7 @@ all running in the **existing free GitHub Actions** (no new infra):
 
 | Agent | Role | Backing tools (already built) | Compute |
 |---|---|---|---|
-| **SCOUT** [OK] | Bounty-radar triage — ranks new DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Code4rena/Sherlock have no stable public API so those stay static seed data until one exists | `intel/bounty-radar/*`, DeFiLlama hacks feed | hourly (`.github/workflows/scout.yml`), no LLM |
+| **SCOUT** [OK] | Bounty-radar triage — ranks new DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Code4rena/Sherlock have no stable public API so those stay static seed data until one exists. When a cycle turns up something genuinely new, a Grok-authored "Strategic Briefing" (why it matters, what VAPE capability it exercises, one next action) is added on top of the numeric table | `intel/bounty-radar/*`, DeFiLlama hacks feed, Grok via `agents/llm.py`'s `FRONTIER_ORDER` (gated on new entries only, to stay inside its free/one-time API credit) | hourly (`.github/workflows/scout.yml`), LLM only on new-entry cycles |
 | **LEDGER** [TBD] | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace (Alchemy-backed), base_rpc | on-demand |
 | **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), no LLM |
 | **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks (Groq); `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review | harvest/Memory + Groq + `builder.py`'s `generate_project()` | daily PR (synthesize) / weekly PR (build) |
@@ -80,8 +80,10 @@ all running in the **existing free GitHub Actions** (no new infra):
 | **DATA AGENT** [OK] | VAPE's own paying customer — recruited by every real investigation (`agents/investigate.py::investigate()`) to hire 2-4 random $0.01 x402 market-data offerings against the token under review, using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`); results fold into the report's "Data Agent Intel" section | `agents/data_agent.py`, worker's `/data/*` x402 routes (`worker/src/dataHandlers.ts`) | per-investigation, capped 15 paid hires/day, no LLM |
 
 **Design rule:** each agent is **rule-based first, LLM only when reasoning is required.**
-SCOUT ranks by numeric fit score (no LLM); ORACLE flags by thresholds (no LLM); only
-CURATOR and deep-audit paths spend tokens. This keeps the roster nearly free.
+SCOUT ranks by numeric fit score and only calls Grok for a strategic briefing when a
+cycle turns up something genuinely new (most hourly runs don't); ORACLE flags by
+thresholds (no LLM); CURATOR's tool proposals are now also grounded in SCOUT's real
+bounty-radar opportunities, not only registry gaps. This keeps the roster nearly free.
 
 **Orchestration:** keep the current pattern — independent GitHub workflows on staggered
 crons + the persistent ACP monitor on the host. No central scheduler needed; each agent
@@ -122,6 +124,23 @@ chain** — all free tier, all open-source models, swap by base-URL + key.
 - **Data-privacy note:** prefer providers that don't train on prompts for any
   sensitive forensics; Groq/Cerebras/Together are inference-only on free tier.
   Flag Google AI Studio / Mistral Experiment as "may train" — use only for public intel.
+- **Ethos update (2026-07):** VAPE is deliberately moving off "stay free at all costs"
+  for the calls that matter most. `FRONTIER_ORDER` (Grok first, key 1 then key 2, then
+  Groq/Gemini/the free chain) is now the actual PRIMARY route — not an emergency
+  fallback — for every reasoning-heavy call site: the periodic sweep narratives
+  (`base/macro/security/sentiment/virtuals_sweep.py`), the flagship bounty report
+  (`run.py`), SKILLFORGE's self-directed build proposals + code generation, redteam's
+  judge calls, SCOUT's gated strategic briefing, and every real investigation's new
+  Grok expert-assessment layer (`investigate.py::_grok_expert_assessment`). Still
+  free-fallback-safe (every one of these degrades gracefully with zero keys), but the
+  bar for "is this worth paying for" is now "does it need real reasoning," not
+  "can it be free." Real budget/privacy constraint: xAI's free tier is a one-time $25
+  signup credit, not a recurring free quota like Groq's — the $150/month recurring
+  option requires opting into API-input data-sharing for model training, which is
+  intentionally left OFF (conflicts with the data-privacy note above for anything
+  touching real forensics). Gate new high-frequency call sites the way
+  `agents/scout.py::_grok_briefing` does (only call when something genuinely new
+  happened) unless the call site is inherently low-frequency already.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to
@@ -134,7 +153,7 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done.
 2. [TBD] Wire bridge into the monitor handler (6 offerings settle with no LLM).
 3. [TBD] `agents/llm.py` multi-provider fallback (Groq + Cerebras + GitHub Models).
-4. [OK] SCOUT shipped (rule-based, no LLM, hourly). [OK] ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
+4. [OK] SCOUT shipped (rule-based + gated Grok briefing, hourly). [OK] ORACLE shipped (rule-based, no LLM, 6-hourly broadcasts).
 5. [TBD] wallet_trace switched to Alchemy (VAPE_TRACE_ALCHEMY_API), pending a live verification run → unlocks forensics_deep ($2) + LEDGER agent.
 6. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
 

@@ -17,8 +17,15 @@ Pipeline (all keyless where possible, graceful degradation):
   3. Scoring          — weighted risk score -> verdict PROCEED / CAUTION / REJECT.
   4. Persist          — write report, log to Memory, update catalog, dedup-aware.
 
-Zero-LLM: this is deterministic analysis. The narrative report is templated from
-the evidence. (The local agent cron can optionally add an LLM narrative layer.)
+Scoring is deterministic — score() below is a pure weighted heuristic, never an
+LLM call, and its verdict is never overridden by one. On top of that, every
+report gets a real synthesis layer: _grok_expert_assessment() has Grok (first,
+via agents/llm.py's FRONTIER_ORDER) read the exact same evidence and write
+actual analysis plus an explicit AGREE/DISAGREE second opinion on the verdict —
+disagreements are logged to Memory as signal, never used to mutate the verdict
+itself. Same "surface, don't override" pattern as agents/critic.py's
+structural self-check. Degrades to "not available this cycle" with zero
+LLM keys configured, same as every other real-data source here.
 
 CLI:
   python agents/investigate.py --address 0x... [--chain 8453]
@@ -716,7 +723,8 @@ def auto_target(chain=None):
 
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
-                 defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None):
+                 defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None,
+                 grok_assessment=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -768,6 +776,15 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- None found. Absence of red flags is not evidence of safety — a clean sweep "
                   "with zero positive signals still caps the score below PROCEED tier.")
+    L.append("")
+    L.append("## Expert Assessment (Grok)")
+    if grok_assessment and grok_assessment.get("text"):
+        tag = "⚠️ **DISAGREES with the verdict above**" if grok_assessment["disagrees"] else "Agrees with the verdict above"
+        L.append(f"- {tag}:")
+        L.append("")
+        L.append(grok_assessment["text"])
+    else:
+        L.append("- Expert assessment not available this cycle.")
     L.append("")
     L.append("## Market & Liquidity (DexScreener)")
     if dex:
@@ -1096,6 +1113,113 @@ def _fmt_data_agent_deliverable(d):
     return "; ".join(parts) if parts else "no notable fields"
 
 
+def _grok_expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals,
+                             gp, dex, onchain, verif, corr, web_rep, defillama,
+                             deployer_siblings, data_agent_intel):
+    """Real synthesis of everything gathered this cycle — score() already
+    produces a deterministic rule-based verdict, but write_report() below
+    otherwise just lists each source's raw fields with no reasoning
+    connecting them. This gives Grok the same evidence a human reviewer
+    would see and has it write actual analysis, plus an explicit second
+    opinion on the verdict. Never overrides score()'s verdict — same
+    "surface disagreement, never mutate" pattern as agents/critic.py's
+    structural self-check; a real disagreement here is signal for
+    self_improve.py/review_ledger.py, not a verdict change. Never raises."""
+    try:
+        from agents.llm import ask_safe, FRONTIER_ORDER
+    except Exception:
+        return None
+
+    evidence = [f"Target: {sym} ({target}) on chain {chain}",
+                f"Rule-based verdict: {verdict} ({s}/100)"]
+    if reasons:
+        evidence.append("Risk factors: " + "; ".join(reasons))
+    if positive_signals:
+        evidence.append("Positive signals: " + "; ".join(positive_signals))
+    if gp:
+        evidence.append(f"GoPlus security: honeypot={gp.get('is_honeypot')}, "
+                         f"buy_tax={gp.get('buy_tax')}, sell_tax={gp.get('sell_tax')}, "
+                         f"mintable={gp.get('is_mintable')}, proxy={gp.get('is_proxy')}, "
+                         f"owner={gp.get('owner_address')}, holders={gp.get('holder_count')}")
+    if dex:
+        evidence.append(f"Market: {dex.get('symbol')}/{dex.get('name')}, price=${dex.get('price_usd')}, "
+                         f"liquidity=${dex.get('liquidity_usd')}, 24h_vol=${dex.get('vol_24h_usd')}, "
+                         f"24h_change={dex.get('change_24h_pct')}%, dex={dex.get('dex')}")
+    if onchain:
+        evidence.append(f"On-chain: is_contract={onchain.get('is_contract')}, "
+                         f"code_size={onchain.get('code_size_bytes')}B")
+    if verif and verif.get("checked"):
+        evidence.append(f"Verification: verified={verif.get('verified')}, name={verif.get('name')}, "
+                         f"proxy={verif.get('proxy')}")
+    if corr:
+        evidence.append("Threat correlation: " + "; ".join(corr))
+    if web_rep and web_rep.get("available") and web_rep.get("hits"):
+        evidence.append("Web-reputation flags: " + "; ".join(web_rep["hits"]))
+    if defillama:
+        pr = defillama.get("price") or {}
+        fp = defillama.get("first_price") or {}
+        if pr or fp:
+            evidence.append(f"DefiLlama: price=${pr.get('price')}, "
+                             f"first_seen={fp.get('first_seen_iso')} ({fp.get('age_days')} days ago)")
+    if deployer_siblings:
+        evidence.append(f"Deployer has {len(deployer_siblings)} other token(s) on record: "
+                         + "; ".join(f"{sib.get('symbol')}={sib.get('verdict')}"
+                                     for sib in deployer_siblings[:5]))
+    if data_agent_intel and data_agent_intel.get("hired"):
+        paid = [h for h in data_agent_intel["hired"] if h["paid"]]
+        if paid:
+            evidence.append("Data agent bought " + "; ".join(
+                f"{h['offering']}={_fmt_data_agent_deliverable(h['deliverable'])}" for h in paid))
+
+    system = (
+        "You are Grok, VAPE's lead investigator. VAPE is an autonomous on-chain detective "
+        "specializing in Base/EVM forensics and smart-contract security. Below is every real "
+        "piece of evidence gathered this cycle by VAPE's own tools. Write real analysis "
+        "connecting the evidence, not a restatement of the fields. Never invent evidence not "
+        "given below."
+    )
+    user = (
+        "=== REAL EVIDENCE THIS CYCLE ===\n" + "\n".join(f"- {e}" for e in evidence)
+        + "\n\n=== YOUR TASK ===\n"
+        "Start your response with exactly `AGREE:` or `DISAGREE:` on the first line (whether "
+        "you agree with the rule-based verdict above), then:\n"
+        "1. In 2-4 sentences, the real story — what's actually going on with this contract, "
+        "connecting the evidence, not restating it item by item.\n"
+        "2. If you disagree, say exactly what evidence the heuristic underweighted or missed.\n"
+        "3. One concrete recommendation for what to watch/check next on this target."
+    )
+    try:
+        text, _provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
+                                    max_tokens=650, temperature=0.4)
+    except Exception as e:
+        print(f"[investigate] expert assessment unavailable: {e}")
+        return None
+    if not text or text.startswith("[llm unavailable"):
+        return None
+    text = text.strip()
+    return {"text": text, "disagrees": text.upper().startswith("DISAGREE")}
+
+
+def _log_grok_disagreement(target, chain, sym, verdict, s, assessment_text):
+    """Best-effort: a real verdict disagreement from Grok's expert assessment
+    is signal for self_improve.py/review_ledger.py, not just report color —
+    log it the same way agents/critic.py logs a structural inconsistency."""
+    if not append_to_memory:
+        return
+    try:
+        append_to_memory(
+            category="lesson",
+            title=f"Grok disagreed with {sym} ({target[:10]}) verdict {verdict} ({s}/100)",
+            content=assessment_text[:1800],
+            source="agents/investigate.py",
+            tags=["grok", "expert-assessment", "verdict-disagreement"],
+            confidence=0.7,
+            metadata={"target": target, "chain": str(chain), "verdict": verdict, "score": s},
+        )
+    except Exception as e:
+        print(f"[investigate] grok disagreement memory log failed: {e}")
+
+
 def _deployer_graph_intel(creator_address, address):
     """Best-effort deployer relationship lookup via
     skillforge/memory/graph.py — a real generalization of
@@ -1153,8 +1277,16 @@ def investigate(address, chain="8453", hint="", force=False):
         print(f"[investigate] CRITIC FLAGGED {address}: {critic_result['issues']}")
         critic.log_finding(address, chain, prelim_sym, critic_result["issues"])
 
+    grok_assessment = _grok_expert_assessment(address, prelim_sym, chain, verdict, s, reasons,
+                                               positive_signals, gp, dex, onchain, verif, corr,
+                                               web_rep, dl_intel, siblings, data_agent_intel)
+    if grok_assessment and grok_assessment["disagrees"]:
+        print(f"[investigate] GROK DISAGREES with {verdict} verdict for {address}")
+        _log_grok_disagreement(address, chain, prelim_sym, verdict, s, grok_assessment["text"])
+
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
-                                    positive_signals, web_rep, dl_intel, siblings, critic_result, data_agent_intel)
+                                    positive_signals, web_rep, dl_intel, siblings, critic_result,
+                                    data_agent_intel, grok_assessment)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
