@@ -12,8 +12,11 @@ agent — can **discover and call V.A.P.E.'s real capabilities** with no bespoke
   directly with pure stdlib. Nothing to `pip install` — keeps VAPE compute-free
   and **Termux/Android-friendly** (stdio is the local transport).
 - **Real code, real data.** Every tool calls existing VAPE functions
-  (`agents.investigate`, `agents.token_scan`, `agents.data_fetchers`, the Memory
-  retriever + SQLite index). No stubs, no fabricated numbers.
+  (`agents.investigate`, `agents.token_scan`, `agents.data_fetchers`,
+  `agents.defillama`, the Memory retriever + SQLite index) directly in-process.
+  The one exception is `wallet_trace`, which shells out to the real
+  `skillforge/tools/recon/wallet_trace.sh` (Alchemy-backed, live-verified —
+  see PR #145) rather than re-implementing it. No stubs, no fabricated numbers.
 - **Read-only / keyless-first.** Nothing here signs, spends, or mutates chain
   state — safe to expose to any host.
 
@@ -27,6 +30,17 @@ agent — can **discover and call V.A.P.E.'s real capabilities** with no bespoke
 | `fear_greed` | Current crypto Fear & Greed index |
 | `memory_search` | Query Central Memory (SQLite-indexed) by text/category/days |
 | `memory_stats` | Counts by category, severity, high-confidence |
+| `research_search` | Web search via the best available provider (Tavily/Brave, keyless fallback) |
+| `research_scrape` | Scrape a page to clean text/markdown (Firecrawl/BrightData/Apify, keyless fallback) |
+| `mcp_servers` | List the MCP servers VAPE can host and their live/key-gated/needs-runtime status |
+| `wallet_trace` | Wallet/address forensics via Alchemy's Transfers API (Base/Eth/Arb/Op) |
+| `contract_source` | Contract verification status + source/ABI via Etherscan V2 |
+| `global_market` | Global crypto market snapshot: BTC/ETH dominance, 24h mcap change |
+| `defillama_token_intel` | A token's DefiLlama picture: price, first-seen age, fees/unlocks/treasury |
+| `defillama_chain_overview` | A chain's headline TVL + rank among all tracked chains |
+| `defillama_protocols_on_chain` | Top protocols on a chain by TVL, with category and 24h/7d change |
+| `defillama_yield_pools` | Yield pools by chain/project/symbol, ranked by TVL, with APY/IL-risk |
+| `bounty_radar` | Currently-tracked bug-bounty/incident-lead opportunities, ranked by fit score |
 
 ## Resources exposed (`resources/list`)
 
@@ -58,8 +72,8 @@ python mcp_servers/vape_mcp.py --selftest
 }
 ```
 
-The host then sees six discoverable tools and two resources — the LLM picks and
-calls them automatically.
+The host then sees every tool above and two resources — the LLM picks and calls
+them automatically.
 
 ## VAPE as an MCP *host* (consuming the ecosystem)
 

@@ -9,9 +9,14 @@ Design choices that match VAPE's model:
     it directly (newline-delimited JSON on stdin/stdout). No SDK to install,
     which keeps it Termux/Android-friendly and compute-free to ship.
   - Calls REAL VAPE code (agents.investigate, token_scan, data_fetchers,
-    memory retriever + SQLite index). No stubs, no fabricated data.
+    agents.defillama, memory retriever + SQLite index) directly in-process.
+    The one exception is wallet_trace, which shells out to
+    skillforge/tools/recon/wallet_trace.sh (the real, Alchemy-backed,
+    live-verified tool — see PR #145) rather than re-implementing it, so this
+    server can never drift from what skillforge/toolcheck.py already verifies
+    against the live API. No stubs, no fabricated data anywhere.
   - Read-only / keyless-first. Nothing here signs, spends, or mutates chain
-    state. The investigation + scan tools are safe to expose to any host.
+    state. Every tool is safe to expose to any host.
 
 Protocol: MCP 2024-11-05. Implements initialize, tools/list, tools/call,
 resources/list, resources/read, ping. Transport: stdio.
@@ -30,7 +35,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 PROTOCOL_VERSION = "2024-11-05"
-SERVER_INFO = {"name": "vape-detective", "version": "1.0.0"}
+SERVER_INFO = {"name": "vape-detective", "version": "1.1.0"}
 
 # ── lazy real-capability imports (kept lazy so a missing optional dep can't
 #    break server startup / tools/list discovery) ────────────────────────────
@@ -100,6 +105,88 @@ def _mcp_servers(**kw):
     return {'servers': status_all()}
 
 
+def _wallet_trace(**kw):
+    """Real wallet/address forensics — shells out to the real, Alchemy-backed
+    skillforge/tools/recon/wallet_trace.sh rather than re-implementing it
+    (see the tool's own module docstring for why: Etherscan V2's account
+    endpoints gate Base behind a paid tier; Alchemy's Transfers API does not).
+    """
+    import subprocess
+    addr = kw.get("address")
+    if not addr:
+        return {"error": "address required"}
+    mode = kw.get("mode", "txs")
+    if mode not in ("txs", "erc20", "first"):
+        return {"error": "mode must be one of: txs, erc20, first"}
+    chain = str(kw.get("chain", "8453"))
+    limit = str(kw.get("limit", 10))
+    script = os.path.join(ROOT, "skillforge", "tools", "recon", "wallet_trace.sh")
+    try:
+        proc = subprocess.run(["bash", script, mode, chain, addr, limit],
+                              capture_output=True, text=True, timeout=20)
+    except Exception as e:
+        return {"error": str(e)}
+    raw = (proc.stdout or proc.stderr or "").strip()
+    try:
+        return json.loads(raw)
+    except Exception:
+        return {"error": "unparseable tool output", "raw": raw[:500]}
+
+
+def _contract_source(**kw):
+    from agents.data_fetchers import get_contract_source
+    addr = kw.get("address")
+    if not addr:
+        return {"error": "address required"}
+    return get_contract_source(addr, int(kw.get("chain", 8453)))
+
+
+def _global_market(**kw):
+    from agents.data_fetchers import get_global_market
+    return get_global_market()
+
+
+def _defillama_token_intel(**kw):
+    from agents.defillama import token_intel
+    chain, addr = kw.get("chain"), kw.get("address")
+    if not chain or not addr:
+        return {"error": "chain and address required"}
+    return token_intel(chain, addr, kw.get("protocol_slug"))
+
+
+def _defillama_chain_overview(**kw):
+    from agents.defillama import chain_overview
+    return chain_overview(kw.get("chain", "Base"))
+
+
+def _defillama_protocols_on_chain(**kw):
+    from agents.defillama import protocols_on_chain
+    return protocols_on_chain(kw.get("chain", "Base"), int(kw.get("top_n", 20)))
+
+
+def _defillama_yield_pools(**kw):
+    from agents.defillama import yield_pools
+    return yield_pools(kw.get("chain"), kw.get("project"), kw.get("symbol"),
+                       float(kw.get("min_tvl", 10000)), int(kw.get("limit", 25)))
+
+
+def _bounty_radar(**kw):
+    """Real, currently-tracked bug-bounty/incident-lead opportunities
+    (intel/bounty-radar/opportunities.json), ranked by the same numeric fit
+    score agents/scout.py's hourly digest uses. Never LLM-scored."""
+    path = os.path.join(ROOT, "intel", "bounty-radar", "opportunities.json")
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except Exception as e:
+        return {"error": str(e)}
+    min_fit = int(kw.get("min_fit", 50))
+    limit = int(kw.get("limit", 15))
+    rows = sorted((o for o in data if (o.get("fitScore") or 0) >= min_fit),
+                  key=lambda o: o.get("fitScore", 0), reverse=True)
+    return {"count": len(rows), "opportunities": rows[:limit]}
+
+
 # ── tool registry: name -> (handler, description, input schema) ──────────────
 TOOLS = {
     "investigate_token": (
@@ -166,6 +253,68 @@ TOOLS = {
         "List the MCP servers VAPE can host (reference + community search/scrape) "
         "and whether each is live, key-gated, or needs a runtime.",
         {"type": "object", "properties": {}},
+    ),
+    "wallet_trace": (
+        _wallet_trace,
+        "Wallet/address forensics via Alchemy's Transfers API: recent transfers "
+        "(any asset or ERC-20 only) or first-seen transfer (funding source). "
+        "Base/Ethereum/Arbitrum/Optimism. Needs VAPE_TRACE_ALCHEMY_API.",
+        {"type": "object", "properties": {
+            "address": {"type": "string"},
+            "mode": {"type": "string", "description": "txs|erc20|first, default txs"},
+            "chain": {"type": "string", "description": "chain id, default 8453 (Base)"},
+            "limit": {"type": "integer"}},
+         "required": ["address"]},
+    ),
+    "contract_source": (
+        _contract_source,
+        "Contract verification status + source/ABI metadata via Etherscan V2 "
+        "(free tier). Needs ETHERSCAN_API_KEY.",
+        {"type": "object", "properties": {
+            "address": {"type": "string"}, "chain": {"type": "integer"}},
+         "required": ["address"]},
+    ),
+    "global_market": (
+        _global_market,
+        "Global crypto market snapshot: BTC/ETH dominance, 24h market-cap change. Keyless.",
+        {"type": "object", "properties": {}},
+    ),
+    "defillama_token_intel": (
+        _defillama_token_intel,
+        "DefiLlama's full picture of a token: current + first-seen price, and "
+        "(with a protocol slug) fees/revenue, unlocks, and treasury. Keyless.",
+        {"type": "object", "properties": {
+            "chain": {"type": "string"}, "address": {"type": "string"},
+            "protocol_slug": {"type": "string"}}, "required": ["chain", "address"]},
+    ),
+    "defillama_chain_overview": (
+        _defillama_chain_overview,
+        "A chain's headline TVL + rank among all tracked chains (DefiLlama). Keyless.",
+        {"type": "object", "properties": {"chain": {"type": "string"}}},
+    ),
+    "defillama_protocols_on_chain": (
+        _defillama_protocols_on_chain,
+        "Top protocols on a chain by TVL, with category and 24h/7d change. Keyless.",
+        {"type": "object", "properties": {
+            "chain": {"type": "string"}, "top_n": {"type": "integer"}}},
+    ),
+    "defillama_yield_pools": (
+        _defillama_yield_pools,
+        "Yield pools filtered by chain/project/symbol, ranked by TVL, with "
+        "APY/IL-risk/exposure — enough to spot a yield trap. Keyless.",
+        {"type": "object", "properties": {
+            "chain": {"type": "string"}, "project": {"type": "string"},
+            "symbol": {"type": "string"}, "min_tvl": {"type": "number"},
+            "limit": {"type": "integer"}}},
+    ),
+    "bounty_radar": (
+        _bounty_radar,
+        "Real, currently-tracked bug-bounty/incident-lead opportunities "
+        "(Immunefi/Code4rena/Sherlock/DeFiLlama hacks), ranked by VAPE's own "
+        "numeric fit score. Never LLM-scored.",
+        {"type": "object", "properties": {
+            "min_fit": {"type": "integer", "description": "default 50"},
+            "limit": {"type": "integer", "description": "default 15"}}},
     ),
 }
 
@@ -281,6 +430,8 @@ def selftest():
          "params": {"name": "memory_stats", "arguments": {}}},
         {"jsonrpc": "2.0", "id": 5, "method": "tools/call",
          "params": {"name": "fear_greed", "arguments": {}}},
+        {"jsonrpc": "2.0", "id": 6, "method": "tools/call",
+         "params": {"name": "bounty_radar", "arguments": {"limit": 3}}},
     ]
     for r in seq:
         resp = handle(r)
