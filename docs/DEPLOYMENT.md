@@ -105,14 +105,16 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ---
 
 ## E. x402 payment worker (pay-per-call hiring)
-`worker/` is a Cloudflare Worker gating 6 of VAPE's 14 offerings behind Coinbase's x402
+`worker/` is a Cloudflare Worker gating 21 of VAPE's 29 offerings behind Coinbase's x402
 HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
 ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
 Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was
 proven first on Base Sepolia + the free public facilitator before that switch.
-It also hosts three free, unpaid Alchemy-backed endpoints (`/portfolio`, `/nfts`,
-`/network-status`) that the site's wallet profile and metrics strip prefer over direct
-public-RPC calls once deployed. See `worker/README.md` for full setup; summary:
+It also hosts five free, unpaid endpoints (`/portfolio`, `/nfts`, `/network-status`,
+`/prices`, `/cost-basis`, all Alchemy/CoinGecko-backed) that the site's wallet profile and
+metrics strip prefer over direct public-RPC calls once deployed, plus the unpriced
+`/x402/feed` and `/x402/stats` live job-ledger showcase. See `worker/README.md` for full
+setup; summary:
 
 ```bash
 cd worker
@@ -147,7 +149,7 @@ on Deno Deploy as a documented fallback — see E3.
 
 ### E2. CDP mainnet credentials
 Get a [Coinbase Developer Platform](https://portal.cdp.coinbase.com) Secret API Key —
-that's `CDP_API_KEY_ID`/`CDP_API_KEY_SECRET` above. `src/lib/cdpAuth.ts` uses it to sign
+that's `CDP_API_KEY_ID`/`CDP_API_KEY_SECRET` above. `worker/src/lib/cdpAuth.ts` uses it to sign
 the Bearer JWT the facilitator requires on every `/verify` and `/settle` call; without
 it, settlement calls go out unauthenticated and CDP returns 401.
 

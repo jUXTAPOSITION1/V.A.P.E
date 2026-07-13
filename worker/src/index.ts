@@ -1,11 +1,11 @@
 /**
- * VAPE x402 payment worker — pay-per-call access to the 6 "auto" ACP
+ * VAPE x402 payment worker — pay-per-call access to 21 of the 29 "auto" ACP
  * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
- * 14-offering catalog; the other 8 need the SKILLFORGE tool tier and are
+ * 29-offering catalog; the other 8 need the SKILLFORGE tool tier and are
  * hired via a real ACP job instead). Also hosts a few free, unpaid Alchemy-
- * backed reliability endpoints (/portfolio, /nfts, /network-status) that the
- * site's wallet profile and metrics strip prefer over direct public-RPC
- * calls when this worker is deployed and configured.
+ * backed reliability endpoints (/portfolio, /nfts, /network-status, /prices,
+ * /cost-basis) that the site's wallet profile and metrics strip prefer over
+ * direct public-RPC calls when this worker is deployed and configured.
  *
  * Runs on Base mainnet + Coinbase Developer Platform's hosted x402
  * facilitator (real funds) — see wrangler.toml for the network/facilitator

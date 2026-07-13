@@ -35,7 +35,8 @@ enrich the same shared corpus. Nothing learned is ever lost.
 | `lessons.jsonl` | `lesson` | self-improve, toolcheck outcomes |
 | `skills.jsonl` | `skill` | Builder-generated playbooks |
 | `social-events.jsonl` | `social_event` | Social/X MCP wrapper |
-| `tools-registry.json` | — | SKILLFORGE toolcheck (version-pinned tools) |
+| `build_log.jsonl` | `build_log` | `agents/build_ledger.py` — instructional how/why for every build; a `lesson` is what happened, a `build_log` entry is a reusable how-to (see [BUILD_LEDGER.md](../skillforge/memory/BUILD_LEDGER.md)) |
+| `tools-registry.json` | `tool` | SKILLFORGE toolcheck (version-pinned tools) |
 | `INDEX.md` | — | auto-generated human-readable summary |
 
 All entry files are **append-only JSONL**. Entries are immutable once written.
@@ -90,7 +91,7 @@ append_to_memory(
 )
 ```
 
-Categories: `finding`, `lesson`, `skill`, `social_event`.
+Categories: `finding`, `lesson`, `skill`, `social_event`, `build_log`, `tool`.
 
 ### `search_memory(query, category=None, tags=None, max_results=10, min_confidence=0.0, days_back=None)`
 
@@ -129,6 +130,7 @@ Returns totals by category, by source, and a confidence distribution.
 | `agents/run.py` | ground each bounty cycle in prior intel, then append the analysis |
 | `agents/builder.py` | ground code generation in lessons; auto-append generated skills |
 | `agents/integration.py` | coordinate search→act→append across all flows |
+| `agents/build_ledger.py` | append `build_log` entries — the reusable how-to behind every real build |
 | `skillforge/mcp.py` | append social sentiment + external harvest results |
 | `skillforge/toolcheck.py` | record tool verification outcomes as lessons |
 
