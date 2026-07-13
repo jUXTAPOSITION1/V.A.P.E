@@ -3,9 +3,12 @@
 > Status legend: [OK] implemented & running · [WIP] partial/scaffolded · [TBD] planned
 
 V.A.P.E. is an autonomous on-chain security & intelligence operation. It runs as
-**two cooperating runtimes** plus a **self-improving skill ecosystem**, entirely on
-GitHub Actions and open-source tooling — zero required cost to run, with an optional
-paid frontier-model upgrade for the calls that benefit most from it.
+**several cooperating runtimes** — a CI intelligence engine, a self-improving skill
+ecosystem, two independent real-money commerce rails, and a standard tool-serving
+interface — entirely on GitHub Actions, Cloudflare's free tier, and open-source
+tooling. Zero required cost to run; an optional paid frontier-model upgrade for the
+calls that benefit most from it, and real USDC settling on Base mainnet for every
+paid engagement, human or agent.
 
 ## High-level flow
 
@@ -47,6 +50,63 @@ tools (investigation, wallet forensics, DefiLlama intel, bounty radar, Memory) o
 the standard Model Context Protocol so any MCP host (Claude, Cursor, a custom agent)
 can call them directly; see component 6 below.
 
+### How VAPE gets paid — two independent, real-money rails
+
+29 live offerings total: 21 are x402-payable (instant, no account needed), 8 need a
+real ACP job (manual/SKILLFORGE-tool-tier work no synchronous HTTP route can do in a
+few seconds). Both rails pay into the same wallet; neither is a demo — the x402 side
+runs on **Base mainnet** via Coinbase Developer Platform's hosted facilitator, real
+USDC, real settlement transactions.
+
+```
+┌─────────────────────────────┐        ┌──────────────────────────────────────┐
+│         ACP RAIL            │        │              x402 RAIL                │
+│  Virtuals Protocol escrow   │        │      worker/ (Cloudflare, Hono)       │
+│                             │        │                                        │
+│ job.created ──► set-budget  │        │  buyer/DATA AGENT signs EIP-3009      │
+│      │        (VAPE)        │        │  authorization ──► GET /scan|/data/*  │
+│      ▼                      │        │      │                                │
+│ job.funded ──► real tool    │        │      ▼                                │
+│      │      runs (SKILLFORGE│        │  @x402/hono middleware verifies with  │
+│      │      tier / manual)  │        │  CDP's hosted facilitator, runs the    │
+│      ▼                      │        │  real handler (handlers.ts/           │
+│  submit ──► client          │        │  dataHandlers.ts — TS port of         │
+│  deliverable    completes   │        │  acp_fulfill.py/defillama.py), THEN    │
+│      │                      │        │  settles on-chain                     │
+│      ▼                      │        │      │                                │
+│  escrow released to VAPE    │        │      ▼                                │
+│  (8 ACP-only offerings:     │        │  onAfterSettle logs real payer/tx_hash │
+│  wallet_recon, tx_decode,   │        │  to KV (lib/jobLog.ts) ──► live feed   │
+│  deep_contract_audit,       │        │  (docs/assets/x402feed.js), tx linked  │
+│  forensics_deep, etc.)      │        │  straight to Basescan                  │
+└─────────────────────────────┘        └──────────────────────────────────────┘
+              │                                          │
+              └────────────────┬─────────────────────────┘
+                                ▼
+                  USDC settles on Base mainnet into
+              0xa1420293a7df49bc8380f543a1fe7b8d6f582879
+                                ▲
+                                │
+     DATA AGENT (agents/data_agent.py) closes the loop from the OTHER side:
+     every real investigate.py run recruits VAPE's own funded wallet to hire
+     2-4 of the x402 offerings above against the token under review — real
+     USDC leaves DATA AGENT's wallet through the exact same rail an external
+     human buyer would use, capped at 15 hires/day.
+```
+
+The 21 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+$0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
+`.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
+Slither run + frontier-model source review can't finish inside a Worker's request
+window) + 14 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+`chain_overview`, `yields`, `stablecoins`, `bridges`, etc.). Advertised for discovery
+via the x402 Bazaar extension and a claimed listing on
+[402index.io](https://402index.io) (`/.well-known/402index-verify.txt` proves domain
+ownership). A handful of free, unpaid Alchemy-backed routes (`/portfolio`, `/nfts`,
+`/network-status`, `/prices`, `/cost-basis`) back the site's wallet profile and
+metrics strip instead of hitting public RPC directly — Cloudflare's Cache API means
+every visitor shares one cached upstream call instead of paying for one each.
+
 Component-level status detail (see the legend above) lives in the table
 below, not inside the diagram — a diagram should show structure, a table
 should show status, so neither has to be hand-re-aligned every time a
@@ -65,6 +125,8 @@ component's state changes.
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
+| `worker/` (x402) | [OK] | 21 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 29 total: 21 x402-payable, 8 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
@@ -228,11 +290,44 @@ The SQLite memory projection (`skillforge/memory/index_db.py`, `data/memory.db`,
 and rebuildable) is the read-side complement: append-only JSONL stays the source of truth,
 the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
 
-### 4. ACP job monitor [OK] (autonomous revenue)
-Catches incoming ACP jobs and negotiates → funds → completes at near-zero compute.
-3 layers: persistent `acp events listen` daemon (zero LLM) → drain+triage loop (zero LLM)
-→ reasoning handler that fires only on a real funded job. 14 live offerings; USDC escrow on Base.
-*(Operational layer; runs on the host alongside the repo.)*
+### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
+29 live offerings across two independent, real-money rails — see the payment-rails
+diagram above for the full flow. Both settle into the same wallet
+(`0xa1420293a7df49bc8380f543a1fe7b8d6f582879`); neither is a demo.
+
+**ACP job monitor** (`scripts/acp-*`) catches incoming ACP jobs and negotiates →
+funds → completes at near-zero compute. 3 layers: persistent `acp events listen`
+daemon (zero LLM) → drain+triage loop (zero LLM) → reasoning handler that fires only
+on a real funded job. Escrow-backed on Base, `docs/ACP_PROTOCOL.md` is the full
+reference. *(Operational layer; runs on the host alongside the repo.)* 8 offerings are
+ACP-only (`wallet_recon`, `tx_decode`, `whale_watch`, `community_intel_broadcast`,
+`bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, `partner_referral`) —
+manual or SKILLFORGE-tool-tier work no synchronous HTTP route can complete in seconds.
+
+**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 21
+routes with `@x402/hono` middleware against **Base mainnet** via Coinbase Developer
+Platform's hosted facilitator (`api.cdp.coinbase.com`, JWT-authenticated — see
+`worker/src/lib/cdpAuth.ts`) — real EIP-3009 signed authorizations, real on-chain
+settlement, not a testnet demo. `worker/src/handlers.ts` and `dataHandlers.ts` are
+faithful TypeScript ports of `agents/acp_fulfill.py` and `agents/defillama.py` (kept
+honest by `scan-parity.yml`'s cross-language diff check), so a $0.01 x402 call and a
+free ACP job never disagree. Every real settlement is logged to a Cloudflare KV job
+ledger (`worker/src/lib/jobLog.ts`) with the actual payer address and on-chain tx
+hash — surfaced on the site's live feed, linked straight to Basescan, not just VAPE's
+own word. Advertised via the x402 Bazaar discovery extension and a claimed
+[402index.io](https://402index.io) listing. The `bounty_deep_dive` route ($50) is the
+one async exception: pays via x402, then dispatches
+`.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
+immediately, since a real Slither run + frontier-model source review can't complete
+inside a Worker's request window.
+
+**`agents/data_agent.py`** [OK] closes the loop from the buy side: every real
+`investigate.py` run recruits DATA AGENT's own funded wallet
+(`DATA_AGENT_PRIVATE_KEY`) to hire 2-4 of the x402 offerings above against the token
+under review, using the official x402 Python SDK — real USDC leaves DATA AGENT's
+wallet through the exact same rail an external human buyer would use, proving the
+payment loop end-to-end on every investigation, not only when someone happens to buy
+something. Capped at 15 hires/day (`skillforge/memory/data_agent_quota.json`).
 
 ### 5. UI — `app.py` / `docs/` [OK]
 Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.html` is

@@ -55,6 +55,7 @@ jobs:
       - name: Run SCOUT (rule-based scan + strategic briefing + real incident forensics)
         run: python agents/scout.py
       - name: Update engagement status (real record of what VAPE did about each tracked lead)
+        continue-on-error: true
         run: python -m agents.engagements
       - name: Commit bounty radar sweep
         run: |
