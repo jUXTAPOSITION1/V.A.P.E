@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T17:08:58Z",
+  "generated": "2026-07-13T18:17:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 335,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 61,
-    "investigations": 110,
+    "investigations": 112,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260713-160550-0x5E176083.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-13T16:05:50Z",
-      "target": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260713-181738-0x36D527D7.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-13T18:17:38Z",
+      "target": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-160550-0x5E176083.md"
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or v",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-181738-0x36D527D7.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260713-181738-0x36D527D7.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-13T18:17:38Z",
+      "target": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or v",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-181738-0x36D527D7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260713-160550-0x5E176083.md",
@@ -592,20 +606,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5009 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-195956-0x853a7c99.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260706-174859-0x853a7c99.md",
-      "title": "Investigation \u2014 PLAY",
-      "symbol": "PLAY",
-      "name": "Play",
-      "date": "2026-07-06T17:48:59Z",
-      "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 5010 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260706-174859-0x853a7c99.md"
     }
   ],
   "reports": [
