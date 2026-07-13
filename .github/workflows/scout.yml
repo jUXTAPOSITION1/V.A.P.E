@@ -16,9 +16,11 @@ jobs:
   scout:
     runs-on: ubuntu-latest
     env:
-      # agents/llm.py is stdlib-only (urllib) — no pip install needed. These
-      # are only ever read on a cycle with genuinely new opportunities (see
-      # scout.py::_grok_briefing), so most hourly runs never touch them.
+      # scout.py's Grok briefing runs every cycle now (agents/llm.py is
+      # stdlib-only — no pip install needed for these). _act_on_base_incidents()
+      # additionally calls agents.investigate.investigate() for real when a
+      # Base incident's address verifies, which needs the full set below —
+      # same secrets intel-sweeps.yml wires for the same reason.
       XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
       XAI_API_KEY_2: ${{ secrets.XAI_API_KEY_2 }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -27,6 +29,12 @@ jobs:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
       TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -34,13 +42,25 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - name: Run SCOUT (rule-based scan; Grok briefing only on genuinely new opportunities)
+          cache: 'pip'
+          cache-dependency-path: agents/requirements.txt
+      - name: Cache npm (agents.investigate's web reputation check spawns research MCP servers via npx)
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-research-mcp-${{ runner.os }}
+      - name: Install
+        run: pip install -r agents/requirements.txt
+      - name: Run SCOUT (rule-based scan + Grok strategic briefing + real incident forensics)
         run: python agents/scout.py
       - name: Commit bounty radar sweep
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/bounty-radar/
+          # intel/investigations/ + intel/catalog/ + skillforge/memory/:
+          # _act_on_base_incidents() may trigger a real agents.investigate.py
+          # forensics pass — those land here just like any other investigation.
+          git add intel/bounty-radar/ intel/investigations/ intel/catalog/ skillforge/memory/
           git commit -m "SCOUT bounty radar sweep $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
