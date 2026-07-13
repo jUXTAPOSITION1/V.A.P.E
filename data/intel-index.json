@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-13T10:28:26Z",
+  "generated": "2026-07-13T10:31:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 326,
+    "reports": 327,
     "reports_by_type": {
       "bounty": 205,
+      "virtuals": 31,
       "security": 35,
       "base": 30,
-      "virtuals": 30,
       "sentiment": 18,
       "macro": 8
     },
@@ -617,6 +617,17 @@
       "summary": "Checked 1 investigation (ARB 0x912CE59144191C1204E64559FE8253a0e49E6548, PROCEED 92/100), 0 Slither outputs, 8 hack-feed incidents, and no tool-registry status. No non-clean verdicts, no self-repo findings, and no tool gaps surfaced. All inputs remain continuation of prior state.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260713_102813.md",
       "bytes": 664
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-13-10.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-13T10:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-13 10:31 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-13-10.md",
+      "bytes": 2288
     },
     {
       "kind": "intel",
@@ -1255,17 +1266,6 @@
       "summary": "Date: 2026-07-10 15:34 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-10-15.md",
       "bytes": 1500
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-10-14.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-10T14:00Z",
-      "threat": null,
-      "summary": "The current threat landscape indicates a moderate level of risk, with 2 incidents reported in the last 7 days and no incidents exceeding $50M in the last 14 days. The incidents reported involve various attack vectors, including malicious governance proposals, donation attacks, and exploits of smart contract vulnerabilities. The affected p",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-10-14.md",
-      "bytes": 5710
     }
   ],
   "broadcasts": [
