@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-14T13:46:49Z",
-  "source_report": "intel/reports/security-2026-07-14-13.md",
-  "threat_level": "MEDIUM",
+  "generated_at": "2026-07-14T19:22:27Z",
+  "source_report": "intel/reports/security-2026-07-14-19.md",
+  "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
     {
@@ -12,6 +12,22 @@
         "Arbitrum"
       ],
       "technique": "Silent Auto-Approval Hack"
+    },
+    {
+      "date": "2026-07-13",
+      "name": "Chi Protocol",
+      "amount_usd_m": 0.009,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Flashloan Accounting Logic Exploit",
+      "lesson": {
+        "pattern": "oracle_flashloan",
+        "label": "Flashloan-driven price or oracle manipulation",
+        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
     },
     {
       "date": "2026-07-11",
