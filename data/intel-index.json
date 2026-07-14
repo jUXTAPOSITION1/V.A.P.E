@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-14T03:43:08Z",
+  "generated": "2026-07-14T04:06:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 340,
+    "reports": 341,
     "reports_by_type": {
+      "virtuals": 34,
       "security": 38,
       "sentiment": 20,
       "base": 33,
-      "virtuals": 33,
       "macro": 9,
       "bug": 1,
       "mainnet": 1,
@@ -36,14 +36,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-14-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-14T02:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-14-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-14T04:00Z",
       "threat": null,
-      "summary": "Two incidents occurred in the last seven days, both under the $50M threshold that defines the higher-risk category, contributing to an overall MEDIUM threat level. The dominant techniques in the feed include price-oracle manipulation on Hedera and a silent auto-approval exploit on Arbitrum, alongside earlier instances of donation attacks,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-14-02.md",
-      "bytes": 5372
+      "summary": "Date: 2026-07-14 04:06 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-14-04.md",
+      "bytes": 2148
     }
   },
   "investigations": [
@@ -609,6 +609,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-14-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-14T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-14 04:06 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-14-04.md",
+      "bytes": 2148
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1257,17 +1268,6 @@
       "summary": "Cycle: 20260711061426 \u00b7 Data timestamp (UTC): 2026-07-11T06:14:29Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_061426.md",
       "bytes": 11129
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-11-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-11T05:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-11 05:33 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-11-05.md",
-      "bytes": 3329
     }
   ],
   "broadcasts": [
