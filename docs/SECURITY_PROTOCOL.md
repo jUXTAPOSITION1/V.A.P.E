@@ -4,10 +4,11 @@ VAPE is an autonomous agent that holds a real wallet, spends real API/LLM
 budget on a schedule, reads attacker-controlled on-chain data as part of its
 job, and opens real PRs against its own source. This document is the single
 place that threat model lives — what's actually being defended, what already
-defends it, what a 2026-07-13 repo-wide audit found and fixed, and how this
-keeps evolving instead of going stale the way a one-time audit report does.
+defends it, what the 2026-07-13 repo-wide audit (and the 2026-07-14
+follow-up) found and fixed, and how this keeps evolving instead of going
+stale the way a one-time audit report does.
 
-Every claim below is grounded in a real file/line in this repo as of the
+Every claim below is grounded in a real file/line in this repo as of its
 audit date — nothing here is aspirational. Where something is a known,
 accepted gap, it's stated as such rather than omitted.
 
@@ -55,8 +56,28 @@ accepted gap, it's stated as such rather than omitted.
 - **Scan-logic drift**: `scan-parity.yml` fails the build if
   `agents/token_scan.py` and `worker/src/scan.ts` ever disagree on a fixed
   test address.
-- **CI regression** (new this audit): `security-lint.yml` /
-  `scripts/security_lint.py` — see below.
+- **CI regression**: `security-lint.yml` runs two complementary checks on
+  every workflow-touching PR — `scripts/security_lint.py` (deterministic,
+  checks the exact classes this repo's own audits have found; see below)
+  and `zizmor` (a maintained, general-purpose GitHub Actions static
+  analyzer; added 2026-07-14 — see that date's section below for why a
+  narrow custom linter alone wasn't enough).
+- **LLM spend runaway**: `agents/llm.py::ask()` (added 2026-07-14) enforces
+  a daily $ cap on `xai_1` (Grok, the only provider that's real money —
+  everything else in `PROVIDERS` is free/quota-limited) computed from the
+  same `llm_usage.jsonl` telemetry every provider already writes to; a
+  provider over cap is skipped in favor of the free chain, and a finding is
+  logged once per day so it doesn't happen silently. See that date's
+  section below.
+- **Findings-log tamper-evidence**: `findings-seal.yml` (every 6h) hash-
+  chains `findings.jsonl` via `skillforge/findings_chain.py` — an edit or
+  deletion in an already-sealed range fails the next verify loudly, added
+  2026-07-14 (see that date's section below).
+- **Builder code-generation prompt injection**: `agents/redteam_builder.py`
+  (daily, alongside `agents/redteam.py` in `redteam.yml`) runs real
+  adversarial payloads through a poisoned Memory entry into Builder's real
+  code-generation path, judging the actual generated code against
+  `validate_security()` — added 2026-07-14, see that date's section below.
 
 ## What this audit found and fixed (2026-07-13)
 
@@ -132,16 +153,101 @@ maintainer-only); `skillforge/toolcheck.py` (the "free tool checker" flagged
 going into this audit — cron/dispatch-only trigger, fixed maintainer-curated
 registry, per-call subprocess timeouts, not externally reachable); the
 existing `agents/llm.py` provider-fallback chain (bounded retries, no
-runaway-retry gap, though see the accepted gap below on aggregate spend).
+runaway-retry gap — the separate aggregate-$-spend gap this left open was
+closed in the 2026-07-14 follow-up below).
+
+## What this follow-up audit found and fixed (2026-07-14)
+
+A second pass — prompted by an external review of this same document,
+verified against the actual code rather than taken at face value — closed
+every genuinely open item it raised except one architectural trade-off
+(narrative templating, already named above and still deliberately
+deferred):
+
+1. **No aggregate $ spend cap across LLM providers** (the gap this document
+   itself named on 2026-07-13). `agents/llm.py` already logged every call's
+   token usage to `llm_usage.jsonl`, but nothing read it back to bound total
+   spend. Fixed: `PROVIDER_PRICING_USD_PER_M_TOKENS` prices `xai_1` (Grok,
+   the only real-money provider — verified against public xAI API pricing,
+   $0.20/$0.50 per 1M input/output tokens as of 2026-07) and `ask()` now
+   sums that provider's spend for the current UTC day before every call,
+   skipping it (falling through to the free chain) once
+   `XAI_DAILY_SPEND_CAP_USD` (default $3.00 — generous relative to real
+   historical usage, sized to catch a genuine runaway, not throttle normal
+   operation) is reached. A `MEDIUM` finding is logged to `findings.jsonl`
+   the first time this fires each day (deduplicated so it doesn't spam on
+   every subsequent call) so a cap being hit is visible, not silent.
+2. **zizmor wasn't actually wired into CI.** `security_lint.py`'s own
+   docstring names classes it deliberately doesn't check (e.g.
+   `steps.*.outputs.*` re-interpolation); zizmor had only ever been run
+   once, ad-hoc, by a CodeRabbit review (see item 6 in the 2026-07-13
+   section above) — nothing stopped a new instance of what it caught from
+   coming back. Fixed: added a `zizmor` job to `security-lint.yml` (pinned
+   to `zizmorcore/zizmor-action@192e21d7...` / v0.5.7, verified against the
+   action's real README at fix time), `persona: pedantic`, `min-severity:
+   medium`, uploading results to GitHub code scanning rather than failing
+   the build outright — broader/heuristic coverage than the narrow
+   deterministic `lint` job, so it's additive visibility, not a second copy
+   of the same hard gate.
+3. **No tamper-evidence on `findings.jsonl`** — VAPE's published
+   findings/coverage-gap log, read by `self_improve.py` to decide what to
+   act on, had no way to detect an edit or deletion after the fact.
+   Six-plus call sites write to it their own way (`agents/redteam.py`,
+   `skillforge/harvest.py`, the `ai-redteam` tools, `agents/llm.py`'s new
+   spend-cap alert, plus `skillforge/memory/retriever.py`'s shared
+   `append_to_memory()`), so making tamper-evidence meaningful at the
+   per-entry level would mean migrating all of them onto one write path —
+   a much bigger, riskier refactor than this gap actually calls for. Fixed
+   instead with `skillforge/findings_chain.py`: treats `findings.jsonl` as
+   an opaque append-only text file and periodically "seals" it (hashes
+   every line added since the last seal, chained to the previous seal's
+   hash, recorded in a new `findings.chain.jsonl`); verifying re-derives
+   each seal's hash from the file's *current* content, so an edit or
+   deletion inside an already-sealed range no longer matches. Runs every 6
+   hours via `findings-seal.yml`, which verifies (failing loudly on
+   tampering) before sealing anything new.
+4. **`agents/redteam.py`'s daily adversarial probing only covered the
+   report pipeline** — the autonomous code-generation path
+   (`agents/builder.py`) had no adversarial testing at all. Concrete,
+   evidence-based target found by reading the code (same bar
+   `agents/redteam.py` itself holds to): `Builder._ground_in_memory()`
+   embeds Memory search results directly into the LLM prompt with zero
+   "treat this as inert data" framing — and Memory entries can originate
+   from processing untrusted external data (e.g. `security_sweep.py`'s
+   DeFiLlama hack-feed descriptions), so a poisoned entry reaching a
+   future, unrelated Builder task is a real path, not a hypothetical one.
+   Fixed: `agents/redteam_builder.py` runs two real adversarial payloads
+   through a poisoned Memory entry (mocked via `search_memory`, never
+   written to the real files) into a real LLM call, then judges the actual
+   extracted code against `validate_security()` — the deterministic
+   backstop `generate_code()` applies before returning anything. Building
+   this test found a concrete gap in `validate_security()` itself:
+   `BLOCK_PATTERNS` blocked `subprocess.call/Popen/run` but not
+   `subprocess.check_output`/`check_call` — same shell-execution risk
+   family, just omitted — fixed in the same change, with the new test
+   payload regression-testing exactly that fix. A second, known limitation
+   (`getattr(__builtins__, 'ev'+'al')` evades substring matching entirely)
+   is deliberately NOT patched with more string rules — pure pattern
+   matching can't close a class of bypass like this; it needs AST-based
+   analysis, a real future project, not a quick string addition — so this
+   is tracked as a live, dated, real finding every time the model actually
+   produces it, the same evidence-based standard the rest of this
+   document holds itself to, rather than silently pattern-matched away.
+   Wired into the existing daily `redteam.yml` schedule alongside
+   `agents/redteam.py`, not a new workflow.
+
+No further items from that review are open — everything it raised is
+either fixed above, the one architectural trade-off already named, or the
+memory-growth item below.
+
+- **Memory growth / retention policy for `skillforge/memory/*.jsonl`.**
+  Total memory footprint today is under 500KB (`findings.jsonl` is the
+  largest at ~300KB) — real long-term concern, not a current one, so
+  deferred rather than building a compaction policy against a problem that
+  doesn't exist yet.
 
 ## Known, accepted gaps (not fixed here — stated, not hidden)
 
-- **No aggregate $ spend cap across LLM providers.** `agents/llm.py`'s
-  `FRONTIER_ORDER` chain bounds retries *per call*, but nothing caps total
-  spend per day/run across all scheduled agents. Not currently exploitable
-  (every caller is a scheduled cron job, not an externally-reachable
-  trigger), so this is a cost-hygiene gap, not a security hole — tracked
-  here rather than rushed into this change.
 - **`_reconcile_report()`'s narrative body isn't content-sanitized once the
   `SIGNAL:` marker is well-formed and consistent with real digest data.**
   Raised by CodeRabbit during PR #156's review and deliberately deferred:
@@ -160,8 +266,7 @@ runaway-retry gap, though see the accepted gap below on aggregate spend).
 ## How this evolves (the actual point of calling it a "protocol")
 
 A security posture that's only as good as its last audit is not a
-protocol — it's a report. Four things make this one keep working after
-today:
+protocol — it's a report. These make this one keep working after today:
 
 1. **`security-lint.yml` / `scripts/security_lint.py`** — runs on every PR
    touching `.github/workflows/**`, deterministically re-checking for five
@@ -192,3 +297,13 @@ today:
    right move is to update this file's tables in the same PR as the fix —
    the same discipline this repo already applies to
    `docs/ARCHITECTURE.md`.
+5. **`agents/redteam_builder.py`** (added 2026-07-14) keeps probing
+   Builder's code-generation path daily alongside `agents/redteam.py`; a
+   regression in `validate_security()` would show up as a new HIGH/CRITICAL
+   finding, not silence — and its known getattr-indirection gap (see that
+   date's section) staying open and dated in `findings.jsonl` is itself the
+   honest signal that a real AST-based fix is still owed, not forgotten.
+6. **`findings-seal.yml`** (added 2026-07-14) verifies the findings hash
+   chain before sealing anything new, every 6 hours — a tampered
+   `findings.jsonl` fails that job loudly rather than the tampering just
+   sitting there unnoticed until someone happens to diff a backup.
