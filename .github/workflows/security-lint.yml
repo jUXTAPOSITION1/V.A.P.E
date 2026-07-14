@@ -34,3 +34,31 @@ jobs:
         run: pip install -q pyyaml
       - name: Run security_lint
         run: python3 scripts/security_lint.py
+
+  # General-purpose complement to the `lint` job above: security_lint.py only
+  # checks the specific classes the 2026-07-13 audit actually found (its own
+  # docstring names re-interpolated `steps.*.outputs.*` as a deliberate blind
+  # spot, for one). zizmor is a maintained, general GitHub Actions static
+  # analyzer that catches a much broader set of template-injection,
+  # credential-persistence, and excessive-permission patterns — this job
+  # exists so those classes get checked too, not just the ones already known.
+  # Pinned action + tool version (real, verified against
+  # github.com/zizmorcore/zizmor-action and PyPI at the time this was added)
+  # rather than floating on `latest`, matching this repo's existing pinning
+  # convention for third-party Actions with elevated permissions.
+  zizmor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@192e21d79ab29983730a13d1382995c2307fbcaa # v0.5.7
+        with:
+          version: "1.27.0"
+          persona: pedantic
+          min-severity: medium
