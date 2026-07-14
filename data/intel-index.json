@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T10:39:05Z",
+  "generated": "2026-07-14T11:08:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 346,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 64,
-    "investigations": 128,
+    "investigations": 130,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-090652-0x1Bdf71ED.md",
-      "title": "Investigation \u2014 CES",
-      "symbol": "CES",
-      "name": "WhaleBit",
-      "date": "2026-07-14T09:06:52Z",
-      "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $45,938; [note] address has no contract code (EOA or not deployed). Positive evidence: 288075 holders \u2014 reasonably distributed; Trading 437+ days without a known incident in this scan; Custom verified source (not a mass-produced factory t",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-090652-0x1Bdf71ED.md"
+      "file": "investigation-20260714-110836-0xb77FB108.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-14T11:08:36Z",
+      "target": "0xb77FB1083E2544969Cc2949912bF5376C1876b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-110836-0xb77FB108.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-110836-0xb77FB108.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-14T11:08:36Z",
+      "target": "0xb77FB1083E2544969Cc2949912bF5376C1876b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-110836-0xb77FB108.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-090652-0x1Bdf71ED.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-110931-0xeF34d1ba.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260708-055655-0x28CE689E.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-08T05:56:55Z",
-      "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
     }
   ],
   "reports": [

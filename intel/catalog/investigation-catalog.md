@@ -189,3 +189,5 @@
 | 2026-07-14 | auto | 0x3c8B650257cFb5f272f799F5e2b4e65093a11a05 (VELO) | deep_investigation | CAUTION (68/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-14 | auto | 0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610 (CES) | deep_investigation | PROCEED (82/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-14 | auto | 0xb77FB1083E2544969Cc2949912bF5376C1876b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
