@@ -37,6 +37,7 @@ enrich the same shared corpus. Nothing learned is ever lost.
 | `social-events.jsonl` | `social_event` | Social/X MCP wrapper |
 | `build_log.jsonl` | `build_log` | `agents/build_ledger.py` — instructional how/why for every build; a `lesson` is what happened, a `build_log` entry is a reusable how-to (see [BUILD_LEDGER.md](../skillforge/memory/BUILD_LEDGER.md)) |
 | `tools-registry.json` | `tool` | SKILLFORGE toolcheck (version-pinned tools) |
+| `findings.chain.jsonl` | — | `skillforge/findings_chain.py` (`findings-seal.yml`, every 6h) — a hash-chained seal log over `findings.jsonl`'s content, so an edit or deletion in an already-sealed range is detectable, not just possible to notice by chance. Not itself a memory category; see that module's docstring for the design. |
 | `INDEX.md` | — | auto-generated human-readable summary |
 
 All entry files are **append-only JSONL**. Entries are immutable once written.

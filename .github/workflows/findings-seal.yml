@@ -1,0 +1,48 @@
+name: Findings Chain Seal + Verify
+
+# Tamper-evidence for skillforge/memory/findings.jsonl — see
+# skillforge/findings_chain.py's docstring for the full design. This job
+# does two things every run, in order: (1) verify every already-sealed
+# range of findings.jsonl still hashes to what was recorded at seal time
+# (this is what actually catches tampering — a mismatch here fails the
+# job loudly), then (2) seal whatever new lines have been appended since
+# the last run. Runs on its own schedule rather than piggybacking on an
+# existing workflow so a compromise of some OTHER job can't also suppress
+# this one in the same breath.
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: findings-seal
+  cancel-in-progress: false
+
+jobs:
+  seal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Verify existing chain (fails loudly on tampering)
+        run: python3 skillforge/findings_chain.py verify
+      - name: Seal any new findings since the last run
+        run: python3 skillforge/findings_chain.py seal
+      - name: Commit chain log if it changed
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skillforge/memory/findings.chain.jsonl
+          git commit -m "Seal findings chain $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
