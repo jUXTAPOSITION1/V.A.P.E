@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T22:00:14Z",
+  "generated": "2026-07-14T23:06:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 354,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 66,
-    "investigations": 134,
+    "investigations": 136,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-145453-0x3221BAEB.md",
-      "title": "Investigation \u2014 ETD",
-      "symbol": "ETD",
-      "name": "EDYNE Technologies",
-      "date": "2026-07-14T14:54:53Z",
-      "target": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13",
+      "file": "investigation-20260714-230647-0xed327E88.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-14T23:06:47Z",
+      "target": "0xed327E881bdDe8a134E6FDdcf4a64881F86A3b07",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-20] Very few holders (30) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $11,108; [-10] Pair 3.3 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership ren",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-145453-0x3221BAEB.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-230647-0xed327E88.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-230647-0xed327E88.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-14T23:06:47Z",
+      "target": "0xed327E881bdDe8a134E6FDdcf4a64881F86A3b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-230647-0xed327E88.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-145453-0x3221BAEB.md",
@@ -592,20 +606,6 @@
       "score": "25",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-221124-0x6db3cFe7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260708-164345-0x9999955f.md",
-      "title": "Investigation \u2014 AI",
-      "symbol": "AI",
-      "name": "Ai",
-      "date": "2026-07-08T16:43:45Z",
-      "target": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-5] Pair 28.0 days old \u2014 under a month, still unproven; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-164345-0x9999955f.md"
     }
   ],
   "reports": [

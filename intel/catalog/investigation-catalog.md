@@ -195,3 +195,5 @@
 | 2026-07-14 | auto | 0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1 (EVAA) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-14 | auto | 0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13 (ETD) | deep_investigation | CAUTION (50/100) | Very few holders (30) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-14 | auto | 0xed327E881bdDe8a134E6FDdcf4a64881F86A3b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
