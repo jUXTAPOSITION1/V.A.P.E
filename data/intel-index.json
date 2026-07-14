@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T11:08:37Z",
+  "generated": "2026-07-14T12:48:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 346,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 64,
-    "investigations": 130,
+    "investigations": 132,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-110836-0xb77FB108.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-14T11:08:36Z",
-      "target": "0xb77FB1083E2544969Cc2949912bF5376C1876b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-110836-0xb77FB108.md"
+      "file": "investigation-20260714-124849-0xaa036928.md",
+      "title": "Investigation \u2014 EVAA",
+      "symbol": "EVAA",
+      "name": "EVAA",
+      "date": "2026-07-14T12:48:49Z",
+      "target": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 25565 holders \u2014 reasonably distributed; Trading 285+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 284+",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-124849-0xaa036928.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-124849-0xaa036928.md",
+      "title": "Investigation \u2014 EVAA",
+      "symbol": "EVAA",
+      "name": "EVAA",
+      "date": "2026-07-14T12:48:49Z",
+      "target": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 25565 holders \u2014 reasonably distributed; Trading 285+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 284+",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-124849-0xaa036928.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-110836-0xb77FB108.md",
@@ -592,20 +606,6 @@
       "score": "35",
       "summary": "Risk factors: [-20] Very few holders (19) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $135 (rug/illiquid); [-10] Low liquidity $135; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-141226-0x068c1c81.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260708-110931-0xeF34d1ba.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-08T11:09:31Z",
-      "target": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-110931-0xeF34d1ba.md"
     }
   ],
   "reports": [
