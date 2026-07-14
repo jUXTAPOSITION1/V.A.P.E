@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T04:06:02Z",
+  "generated": "2026-07-14T04:06:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 341,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 63,
-    "investigations": 122,
+    "investigations": 124,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-005606-0x459d9e51.md",
-      "title": "Investigation \u2014 DEXE",
-      "symbol": "DEXE",
-      "name": "DeXe",
-      "date": "2026-07-14T00:56:06Z",
-      "target": "0x459d9e517DdAb532FCA6e34e760fe202829ACcCf",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260714-040639-0x18cD0eF9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-14T04:06:39Z",
+      "target": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "3",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DEXE (0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a) \u2014 REJECT 33/100 \u2014 likely the same serial campai",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-005606-0x459d9e51.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-040639-0x18cD0eF9.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-040639-0x18cD0eF9.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-14T04:06:39Z",
+      "target": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-040639-0x18cD0eF9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-005606-0x459d9e51.md",
@@ -592,20 +606,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 5167 holders \u2014 reasonably distributed; Deep liquidity ($1,282,639); Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-212921-0x0C1c1C10.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260707-190722-0x511ef9Ad.md",
-      "title": "Investigation \u2014 VU",
-      "symbol": "VU",
-      "name": "Velvet Unicorn by Virtuals",
-      "date": "2026-07-07T19:07:22Z",
-      "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84349 holders \u2014 reasonably distributed; Trading 620+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
     }
   ],
   "reports": [

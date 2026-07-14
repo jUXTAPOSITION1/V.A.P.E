@@ -3,3 +3,4 @@
 {"ts": "2026-07-13T16:05:41.891165Z", "target": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07", "hired": ["dex_volumes", "token_intel", "token_chart"], "paid": 3, "cost_usd": 0.03}
 {"ts": "2026-07-13T19:59:34.571997Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["dex_volumes", "yields", "chain_protocols"], "paid": 3, "cost_usd": 0.03}
 {"ts": "2026-07-13T22:28:43.337041Z", "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "hired": ["chain_fees", "bridges"], "paid": 2, "cost_usd": 0.02}
+{"ts": "2026-07-14T04:06:31.274489Z", "target": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07", "hired": ["chain_overview", "derivatives", "yields"], "paid": 0, "cost_usd": 0.0}

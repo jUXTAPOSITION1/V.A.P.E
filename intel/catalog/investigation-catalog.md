@@ -183,3 +183,5 @@
 | 2026-07-13 | auto | 0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF (ELSA) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-14 | auto | 0x459d9e517DdAb532FCA6e34e760fe202829ACcCf (DEXE) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-14 | auto | 0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
