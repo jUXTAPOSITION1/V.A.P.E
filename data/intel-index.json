@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-14T21:06:57Z",
+  "generated": "2026-07-14T21:50:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 353,
+    "reports": 354,
     "reports_by_type": {
       "sentiment": 22,
+      "base": 37,
       "virtuals": 37,
       "security": 41,
-      "base": 36,
       "macro": 10,
       "bug": 1,
       "mainnet": 1,
@@ -619,6 +619,17 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-14-21.md",
       "bytes": 1834
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-14-21.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-14T21:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-14 21:50 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-21.md",
+      "bytes": 2886
     },
     {
       "kind": "intel",
@@ -1257,17 +1268,6 @@
       "summary": "RECENT EXPLOIT: Bonzo Lend $10.05M on ['Hedera'] (Price Oracle Manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_170651.md",
       "bytes": 10321
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260711_155742.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-11T15:57:42Z",
-      "threat": null,
-      "summary": "Cycle: 20260711155742 \u00b7 Data timestamp (UTC): 2026-07-11T15:57:45Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_155742.md",
-      "bytes": 10170
     }
   ],
   "broadcasts": [
