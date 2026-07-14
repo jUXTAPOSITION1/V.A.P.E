@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-14T04:06:39Z — 6 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-14T06:35:25Z — 7 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VELO | Optimism | `0x3c8B650257cFb5f272f799F5e2b4e65093a11a05` | 68/100 | 1 | 2026-07-14T06:35:25Z |
 | ClankerToken | Base | `0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07` | 54/100 | 2 | 2026-07-13T12:06:52Z |
 | ERC20Token | Base | `0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6` | 70/100 | 3 | 2026-07-13T12:06:39Z |
 | FAFO | Base | `0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F` | 73/100 | 2 | 2026-07-13T12:06:27Z |

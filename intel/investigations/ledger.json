@@ -67,6 +67,25 @@
     "symbol": "CLAUDE",
     "times_investigated": 1
   },
+  "10:0x3c8b650257cfb5f272f799f5e2b4e65093a11a05": {
+    "address": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
+    "chain": "10",
+    "creator_address": "0xc0de1436c4e247f8652476a0b9ff55699801e1d0",
+    "first_investigated": "2026-07-14T06:35:25Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260714-063525-0x3c8B6502.md",
+        "score": 68,
+        "ts": "2026-07-14T06:35:25Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-14T06:35:25Z",
+    "last_score": 68,
+    "last_verdict": "CAUTION",
+    "symbol": "VELO",
+    "times_investigated": 1
+  },
   "10:0x4200000000000000000000000000000000000042": {
     "address": "0x4200000000000000000000000000000000000042",
     "chain": "10",

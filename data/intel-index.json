@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T05:22:28Z",
+  "generated": "2026-07-14T06:35:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 342,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 63,
-    "investigations": 124,
+    "investigations": 126,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-040639-0x18cD0eF9.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-14T04:06:39Z",
-      "target": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-040639-0x18cD0eF9.md"
+      "file": "investigation-20260714-063525-0x3c8B6502.md",
+      "title": "Investigation \u2014 VELO",
+      "symbol": "VELO",
+      "name": "Velodrome",
+      "date": "2026-07-14T06:35:25Z",
+      "target": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
+      "chain": "10 (Optimism)",
+      "verdict": "CAUTION",
+      "score": "68",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x3460dc71a8863710d1c907b8d9d5dbc053a4102d) \u2014 can still act on the contract; [-10] Low liquidity $44,239. Positive evidence: 30057 holders \u2014 reasonably distributed; Trading 1503+ days without a known incident in this scan; Custom verified s",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-063525-0x3c8B6502.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-063525-0x3c8B6502.md",
+      "title": "Investigation \u2014 VELO",
+      "symbol": "VELO",
+      "name": "Velodrome",
+      "date": "2026-07-14T06:35:25Z",
+      "target": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
+      "chain": "10 (Optimism)",
+      "verdict": "CAUTION",
+      "score": "68",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x3460dc71a8863710d1c907b8d9d5dbc053a4102d) \u2014 can still act on the contract; [-10] Low liquidity $44,239. Positive evidence: 30057 holders \u2014 reasonably distributed; Trading 1503+ days without a known incident in this scan; Custom verified s",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-063525-0x3c8B6502.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-040639-0x18cD0eF9.md",
@@ -592,20 +606,6 @@
       "score": "82",
       "summary": "Risk factors: [-10] Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2735 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-230625-0x11030f79.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260707-212921-0x0C1c1C10.md",
-      "title": "Investigation \u2014 CHIP",
-      "symbol": "CHIP",
-      "name": "Chip",
-      "date": "2026-07-07T21:29:21Z",
-      "target": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 5167 holders \u2014 reasonably distributed; Deep liquidity ($1,282,639); Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-212921-0x0C1c1C10.md"
     }
   ],
   "reports": [
