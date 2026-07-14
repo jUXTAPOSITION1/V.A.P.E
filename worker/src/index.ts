@@ -26,6 +26,7 @@ import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
 import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
+import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -50,7 +51,13 @@ export interface Env {
   GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
+  // CDP's hosted facilitator — the fallback. Kept as the required var since
+  // every existing deployment already has it configured.
   X402_FACILITATOR_URL: string;
+  // VAPOR (our own facilitator, x402.duckdns.org) — preferred when set. Falls
+  // back to X402_FACILITATOR_URL (CDP) on any error so a VAPOR outage never
+  // takes real revenue down with it. See lib/facilitatorClient.ts.
+  VAPOR_FACILITATOR_URL?: string;
   // In-house x402 job ledger (see lib/jobLog.ts) — optional exactly like the
   // API keys above: wire it once `VAPE_JOBS_KV_ID` is set (see
   // worker/README.md), and until then every /scan/* route still works
@@ -414,11 +421,25 @@ app.use("*", async (c, next) => {
   // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
   // discovery index reads — without this wrapper, registerExtension() below
   // declares the route metadata but the facilitator has no signal to
-  // actually catalog it.
-  const facilitatorClient = withBazaar(new HTTPFacilitatorClient({
+  // actually catalog it. Bazaar discovery stays tied to CDP specifically
+  // (withBazaar's .extensions.bazaar reads the wrapped client's own .url/
+  // createAuthHeaders internally) — that's fine, discovery listing isn't on
+  // the real-money verify/settle path the fallback below actually protects.
+  const cdpClient = withBazaar(new HTTPFacilitatorClient({
     url: c.env.X402_FACILITATOR_URL,
     createAuthHeaders: buildCreateAuthHeaders(c.env),
   }));
+
+  // VAPOR (our own facilitator) is preferred when configured; CDP is the
+  // fallback for any verify/settle/getSupported call VAPOR's client throws
+  // on. See lib/facilitatorClient.ts for why blind retry-on-fallback is safe
+  // here even for settle.
+  const facilitatorClient = c.env.VAPOR_FACILITATOR_URL
+    ? Object.assign(
+        new FallbackFacilitatorClient(new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL }), cdpClient),
+        { extensions: cdpClient.extensions }
+      )
+    : cdpClient;
   const resourceServer = new x402ResourceServer(facilitatorClient)
     .register(c.env.X402_NETWORK, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension)

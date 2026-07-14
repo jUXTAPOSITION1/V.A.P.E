@@ -325,10 +325,13 @@ ACP-only (`wallet_recon`, `tx_decode`, `whale_watch`, `community_intel_broadcast
 manual or SKILLFORGE-tool-tier work no synchronous HTTP route can complete in seconds.
 
 **x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 21
-routes with `@x402/hono` middleware against **Base mainnet** via Coinbase Developer
+routes with `@x402/hono` middleware against **Base mainnet** — real EIP-3009 signed
+authorizations, real on-chain settlement, not a testnet demo. VAPOR (our own
+facilitator, `x402.duckdns.org`) is the preferred facilitator; Coinbase Developer
 Platform's hosted facilitator (`api.cdp.coinbase.com`, JWT-authenticated — see
-`worker/src/lib/cdpAuth.ts`) — real EIP-3009 signed authorizations, real on-chain
-settlement, not a testnet demo. `worker/src/handlers.ts` and `dataHandlers.ts` are
+`worker/src/lib/cdpAuth.ts`) is the automatic fallback for any verify/settle/
+getSupported call VAPOR's client throws on (`worker/src/lib/facilitatorClient.ts`),
+so a VAPOR outage never takes real revenue down with it. `worker/src/handlers.ts` and `dataHandlers.ts` are
 faithful TypeScript ports of `agents/acp_fulfill.py` and `agents/defillama.py` (kept
 honest by `scan-parity.yml`'s cross-language diff check), so a $0.01 x402 call and a
 free ACP job never disagree. Every real settlement is logged to a Cloudflare KV job
