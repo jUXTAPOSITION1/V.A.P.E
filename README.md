@@ -75,8 +75,8 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
 - **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
-- **Commerce** — 29 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 14 DefiLlama data tools, and more), payable
+- **Commerce** — 28 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, 13 DefiLlama data tools, and more), payable
   through ACP escrow or instant x402 on Base mainnet, with results delivered as a rendered
   report on-site or a downloadable PDF.
 

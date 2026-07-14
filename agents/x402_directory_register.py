@@ -115,7 +115,6 @@ DATA_OFFERINGS = {
     "chain_overview": ("0.01", "A chain's headline TVL + rank among all chains."),
     "chain_fees": ("0.01", "Fee-earning protocols on a chain, ranked, with logos."),
     "dex_volumes": ("0.01", "DEX trading volume on a chain by venue, with logos."),
-    "derivatives": ("0.01", "Perps/derivatives volume by venue, with logos."),
     "yields": ("0.01", "Yield pools by chain/project/symbol, TVL-ranked — trap detection."),
     "stablecoins": ("0.01", "Stablecoins by supply with live peg + computed depeg."),
     "bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
@@ -208,7 +207,7 @@ def build_awesome_x402_entry():
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
         f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
-        f"liquidity/rug-pull/dossier/market-intel checks) + 14 market-data micro-services "
+        f"liquidity/rug-pull/dossier/market-intel checks) + 13 market-data micro-services "
         f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
         f"depeg, bridge volumes) + a $50 24h-SLA deep-dive audit (recon + Slither + frontier-model "
         f"review). Docs: https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"

@@ -42,7 +42,7 @@ IDENTITY = {
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe",
 }
 
-# 14 real-time market-data tools (agents/defillama.py / acp_fulfill.py's
+# 13 real-time market-data tools (agents/defillama.py / acp_fulfill.py's
 # HANDLERS / worker /data/*) — real-data, x402-payable at 0.01 USDC. Defined
 # once here as (name, price, summary) and reused for the catalog, the
 # AUTO/X402/ZERO_LLM sets, and the published capabilities list.
@@ -58,7 +58,6 @@ DL_OFFERINGS = [
     ("chain_overview", 0.01, "A chain's headline TVL + rank among all chains tracked"),
     ("chain_fees", 0.01, "Fee-earning protocols on a chain, ranked, with logos — real economic activity"),
     ("dex_volumes", 0.01, "DEX trading volume on a chain by venue, with logos"),
-    ("derivatives", 0.01, "Perps/derivatives volume by venue, with logos"),
     ("yields", 0.01, "Yield pools by chain/project/symbol, TVL-ranked — trap detection"),
     ("stablecoins", 0.01, "Stablecoins by supply with live peg price + computed depeg amount"),
     ("bridges", 0.01, "Bridges ranked by daily volume — capital-flow data for bridge-exploit threat work"),

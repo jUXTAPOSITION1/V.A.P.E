@@ -169,17 +169,6 @@ export async function dexVolumes(chain = "base"): Promise<DlResult> {
   return { ts: nowIso(), chain, total_vol_24h: d.total24h, dexs: protos.slice(0, 20) };
 }
 
-export async function derivativesVolumes(): Promise<DlResult> {
-  const url = `${API}/overview/derivatives?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true`;
-  const d = await dlGet(url);
-  if (isErr(d)) return d;
-  const protos = (d.protocols || []).map((p: any) => ({
-    name: p.name, logo: p.logo, vol_24h: p.total24h, vol_7d: p.total7d,
-  }));
-  protos.sort((a: any, b: any) => (b.vol_24h || 0) - (a.vol_24h || 0));
-  return { ts: nowIso(), total_vol_24h: d.total24h, venues: protos.slice(0, 20) };
-}
-
 // ── Yields (yields.llama.fi) ─────────────────────────────────────────────────
 export interface YieldFilter {
   chain?: string;
@@ -230,7 +219,12 @@ export async function stablecoins(minMcap = 1e8, limit = 25): Promise<DlResult> 
 
 // ── Bridges (bridges.llama.fi) — feeds threat work ───────────────────────────
 export async function bridges(limit = 25): Promise<DlResult> {
-  const d = await dlGet(`${BRIDGES}/bridges?includeChains=true`);
+  // Plain /bridges (list only) stays free; `includeChains=true` pulls the
+  // per-bridge chain breakdown, which DefiLlama now gates behind its Pro API
+  // (this call was observed 402ing in production with that param — see
+  // agents/defillama.py::bridges() for the parallel fix). Dropping it keeps
+  // this offering deliverable; `chains` is simply absent from the result now.
+  const d = await dlGet(`${BRIDGES}/bridges`);
   if (isErr(d)) return d;
   const rows = (d.bridges || []).map((b: any) => ({
     id: b.id, name: b.displayName || b.name, chains: b.chains,

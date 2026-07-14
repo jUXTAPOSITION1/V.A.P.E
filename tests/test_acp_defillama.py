@@ -1,6 +1,6 @@
 """DefiLlama tools as ACP/x402 offerings — cross-surface parity + dispatch.
 
-The 14 DefiLlama micro-services must stay identical across the four places
+The 13 DefiLlama micro-services must stay identical across the four places
 that declare them, or a buyer hires a name one surface can't fulfill:
   - agents/acp_fulfill.py           HANDLERS (what actually runs)
   - agents/publish_reputation.py    DL_OFFERINGS (the published catalog)
@@ -19,12 +19,17 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
-# The 14 market-data tools, by name (no prefix). This literal set is the
+# The 13 market-data tools, by name (no prefix). This literal set is the
 # contract every surface must match — if a tool is added/renamed, this and all
 # four surfaces move together or the test fails.
+#
+# `derivatives` was retired 2026-07-14: DefiLlama moved overview/derivatives
+# behind its Pro API tier with no free equivalent, so real x402/ACP customers
+# paying for it got charged for an error — the offering was pulled rather
+# than sold undeliverable. See agents/defillama.py's module docstring.
 DATA_TOOLS = {
     "token_intel", "token_chart", "protocol", "protocol_fees", "unlocks", "treasury",
-    "chain_protocols", "chain_overview", "chain_fees", "dex_volumes", "derivatives",
+    "chain_protocols", "chain_overview", "chain_fees", "dex_volumes",
     "yields", "stablecoins", "bridges",
 }
 
@@ -45,7 +50,7 @@ def test_data_offering_names_identical_across_all_surfaces():
 def test_data_offerings_all_priced_one_cent():
     from agents.publish_reputation import DL_OFFERINGS
     from agents.x402_directory_register import DATA_OFFERINGS
-    assert len(DL_OFFERINGS) == 14
+    assert len(DL_OFFERINGS) == 13
     assert all(price == 0.01 for _n, price, _s in DL_OFFERINGS)
     assert all(meta[0] == "0.01" for meta in DATA_OFFERINGS.values())
 
@@ -67,7 +72,7 @@ def _stub_defillama(monkeypatch):
 
     for fn in ["token_intel", "token_price_chart", "protocol", "protocol_fees", "unlocks",
                "treasury", "protocols_on_chain", "chain_overview", "chain_fees", "dex_volumes",
-               "derivatives_volumes", "yield_pools", "stablecoins", "bridges"]:
+               "yield_pools", "stablecoins", "bridges"]:
         setattr(fake, fn, rec(fn))
     monkeypatch.setitem(sys.modules, "agents.defillama", fake)
     monkeypatch.setattr(agents, "defillama", fake, raising=False)
@@ -79,7 +84,7 @@ def test_every_dl_offering_has_a_working_handler(monkeypatch):
     from agents import acp_fulfill as A
     monkeypatch.setattr(A, "_dl_token_logo", lambda a: None)  # no network for logo enrichment
     dl_names = [n for n in A.HANDLERS if n in DATA_TOOLS]
-    assert len(dl_names) == 14
+    assert len(dl_names) == 13
     for name in dl_names:
         # Give every handler the union of inputs it might need.
         req = {"address": "0x" + "a" * 40, "chain": "base", "slug": "aave", "span": 7}

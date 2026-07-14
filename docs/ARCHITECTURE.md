@@ -94,12 +94,14 @@ USDC, real settlement transactions.
      human buyer would use, capped at 15 hires/day.
 ```
 
-The 21 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
 `.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
 Slither run + frontier-model source review can't finish inside a Worker's request
-window) + 14 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
-`chain_overview`, `yields`, `stablecoins`, `bridges`, etc.). Advertised for discovery
+window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+`chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
+retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
+with no free equivalent). Advertised for discovery
 via the x402 Bazaar extension and a claimed listing on
 [402index.io](https://402index.io) (`/.well-known/402index-verify.txt` proves domain
 ownership). A handful of free, unpaid Alchemy-backed routes (`/portfolio`, `/nfts`,
@@ -125,8 +127,8 @@ component's state changes.
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 21 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 29 total: 21 x402-payable, 8 ACP-only — see component 4 |
+| `worker/` (x402) | [OK] | 20 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 28 total: 20 x402-payable, 8 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
