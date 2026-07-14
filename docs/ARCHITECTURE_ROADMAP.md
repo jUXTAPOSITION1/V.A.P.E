@@ -1,4 +1,4 @@
-# V.A.P.E. — Architecture Roadmap: ACP Revenue, More Agents, More LLMs
+# V.A.P.E. — Architecture Roadmap: More Agents, More LLMs
 
 Strategy for deepening ACP integration and expanding the agent/LLM framework —
 while holding the line: **maximum capability, lowest possible compute, real data only.**
