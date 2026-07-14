@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T08:33:32Z",
+  "generated": "2026-07-14T09:06:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 343,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 64,
-    "investigations": 126,
+    "investigations": 128,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260714-063525-0x3c8B6502.md",
-      "title": "Investigation \u2014 VELO",
-      "symbol": "VELO",
-      "name": "Velodrome",
-      "date": "2026-07-14T06:35:25Z",
-      "target": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "68",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x3460dc71a8863710d1c907b8d9d5dbc053a4102d) \u2014 can still act on the contract; [-10] Low liquidity $44,239. Positive evidence: 30057 holders \u2014 reasonably distributed; Trading 1503+ days without a known incident in this scan; Custom verified s",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-063525-0x3c8B6502.md"
+      "file": "investigation-20260714-090652-0x1Bdf71ED.md",
+      "title": "Investigation \u2014 CES",
+      "symbol": "CES",
+      "name": "WhaleBit",
+      "date": "2026-07-14T09:06:52Z",
+      "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $45,938; [note] address has no contract code (EOA or not deployed). Positive evidence: 288075 holders \u2014 reasonably distributed; Trading 437+ days without a known incident in this scan; Custom verified source (not a mass-produced factory t",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-090652-0x1Bdf71ED.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-090652-0x1Bdf71ED.md",
+      "title": "Investigation \u2014 CES",
+      "symbol": "CES",
+      "name": "WhaleBit",
+      "date": "2026-07-14T09:06:52Z",
+      "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $45,938; [note] address has no contract code (EOA or not deployed). Positive evidence: 288075 holders \u2014 reasonably distributed; Trading 437+ days without a known incident in this scan; Custom verified source (not a mass-produced factory t",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-090652-0x1Bdf71ED.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260714-063525-0x3c8B6502.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260708-055655-0x28CE689E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260707-230625-0x11030f79.md",
-      "title": "Investigation \u2014 CTR",
-      "symbol": "CTR",
-      "name": "CTR",
-      "date": "2026-07-07T23:06:25Z",
-      "target": "0x11030f79109269d796fd0FB956D6244e502757f7",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2735 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-230625-0x11030f79.md"
     }
   ],
   "reports": [

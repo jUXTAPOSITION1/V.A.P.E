@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-14T06:35:25Z — 17 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-14T09:06:53Z — 18 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| CES | Polygon | `0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610` | 82/100 | 1 | 2026-07-14T09:06:53Z |
 | ELSA | Base | `0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF` | 88/100 | 1 | 2026-07-13T23:29:08Z |
 | ELSA | Base | `0x29cC30f9D113B356Ce408667aa6433589CeCBDcA` | 100/100 | 1 | 2026-07-13T22:28:48Z |
 | PENDLE | Arbitrum | `0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8` | 92/100 | 1 | 2026-07-13T21:08:12Z |
