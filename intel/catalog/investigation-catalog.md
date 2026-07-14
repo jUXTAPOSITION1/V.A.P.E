@@ -181,3 +181,5 @@
 | 2026-07-13 | auto | 0x29cC30f9D113B356Ce408667aa6433589CeCBDcA (ELSA) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-13 | auto | 0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF (ELSA) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-14 | auto | 0x459d9e517DdAb532FCA6e34e760fe202829ACcCf (DEXE) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |

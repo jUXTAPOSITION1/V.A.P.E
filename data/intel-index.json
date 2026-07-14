@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T23:29:08Z",
+  "generated": "2026-07-14T00:56:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 339,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 62,
-    "investigations": 120,
+    "investigations": 122,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260713-232908-0x80F994E3.md",
-      "title": "Investigation \u2014 ELSA",
-      "symbol": "ELSA",
-      "name": "Elsa Chain",
-      "date": "2026-07-13T23:29:08Z",
-      "target": "0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 51471 holders \u2014 reasonably distributed; Deep liquidity ($1,905,514); Trading 175+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-232908-0x80F994E3.md"
+      "file": "investigation-20260714-005606-0x459d9e51.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "DeXe",
+      "date": "2026-07-14T00:56:06Z",
+      "target": "0x459d9e517DdAb532FCA6e34e760fe202829ACcCf",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DEXE (0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a) \u2014 REJECT 33/100 \u2014 likely the same serial campai",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-005606-0x459d9e51.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260714-005606-0x459d9e51.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "DeXe",
+      "date": "2026-07-14T00:56:06Z",
+      "target": "0x459d9e517DdAb532FCA6e34e760fe202829ACcCf",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DEXE (0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a) \u2014 REJECT 33/100 \u2014 likely the same serial campai",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-005606-0x459d9e51.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260713-232908-0x80F994E3.md",
@@ -592,20 +606,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84349 holders \u2014 reasonably distributed; Trading 620+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-190722-0x511ef9Ad.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260707-163614-0x930389F6.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvet",
-      "date": "2026-07-07T16:36:14Z",
-      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "78",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $28,286. Positive evidence: 12476 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260707-163614-0x930389F6.md"
     }
   ],
   "reports": [
