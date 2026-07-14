@@ -7,9 +7,10 @@
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
  * direct public-RPC calls when this worker is deployed and configured.
  *
- * Runs on Base mainnet + Coinbase Developer Platform's hosted x402
- * facilitator (real funds) — see wrangler.toml for the network/facilitator
- * config and required secrets.
+ * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
+ * facilitator) and Coinbase Developer Platform's hosted one — see
+ * wrangler.toml for the network/facilitator config and required secrets,
+ * and lib/facilitatorClient.ts for the hybrid routing itself.
  */
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -51,12 +52,15 @@ export interface Env {
   GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
-  // CDP's hosted facilitator — the fallback. Kept as the required var since
-  // every existing deployment already has it configured.
+  // CDP's hosted facilitator — one half of the real 50/50 hybrid split with
+  // VAPOR (see lib/facilitatorClient.ts). Kept as the required var since
+  // every existing deployment already has it configured; it's also the sole
+  // facilitator whenever VAPOR_FACILITATOR_URL isn't set.
   X402_FACILITATOR_URL: string;
-  // VAPOR (our own facilitator, x402.duckdns.org) — preferred when set. Falls
-  // back to X402_FACILITATOR_URL (CDP) on any error so a VAPOR outage never
-  // takes real revenue down with it. See lib/facilitatorClient.ts.
+  // VAPOR (our own facilitator, x402.duckdns.org) — the other half of the
+  // hybrid split when set. Each request picks VAPOR or CDP as primary with
+  // even odds, falling back to the other on any error so an outage on
+  // either side never takes real revenue down with it.
   VAPOR_FACILITATOR_URL?: string;
   // In-house x402 job ledger (see lib/jobLog.ts) — optional exactly like the
   // API keys above: wire it once `VAPE_JOBS_KV_ID` is set (see
@@ -92,6 +96,7 @@ function errDetail(e: unknown, env: Env): string {
   let msg = e instanceof Error ? e.message : String(e);
   if (env.ALCHEMY_API_KEY) msg = msg.split(env.ALCHEMY_API_KEY).join("***");
   if (env.COINGECKO_API_KEY) msg = msg.split(env.COINGECKO_API_KEY).join("***");
+  if (env.CDP_API_KEY_SECRET) msg = msg.split(env.CDP_API_KEY_SECRET).join("***");
   return msg;
 }
 
@@ -416,6 +421,71 @@ app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-
   return c.json(stats);
 });
 
+// Real, read-side self-check for CDP's Bazaar discovery catalog. CDP's
+// facilitator never emits the documented EXTENSION-RESPONSES header that's
+// supposed to confirm a listing was accepted/rejected (confirmed via
+// network-level packet capture in x402-foundation/x402#2112, still open),
+// so declaring the bazaar extension correctly gives zero visibility into
+// whether it actually got indexed. This queries CDP's own discovery
+// catalog directly and diffs it against our real offering list — filtered
+// by our own payTo (shared across every VAPE offering), so it never needs
+// to paginate CDP's full ~20k-item catalog. Public and free: the result
+// only reveals whether our ALREADY-public offerings are indexed, nothing
+// sensitive, and it's rate-limited/cached like the other free routes.
+app.get("/admin/bazaar-status", rateLimiter("bazaar-status", 6, 300), cache({ cacheName: "vape-bazaar-status", cacheControl: "max-age=300" }), async (c) => {
+  if (!c.env.CDP_API_KEY_ID || !c.env.CDP_API_KEY_SECRET) {
+    return c.json({ error: "CDP credentials not configured" }, 503);
+  }
+  const base = c.env.X402_FACILITATOR_URL;
+  const host = new URL(base).host;
+  const path = `${new URL(base).pathname}/discovery/resources`;
+
+  let jwt: string;
+  try {
+    jwt = await generateCdpJwt({
+      apiKeyId: c.env.CDP_API_KEY_ID,
+      apiKeySecret: c.env.CDP_API_KEY_SECRET,
+      requestMethod: "GET",
+      requestHost: host,
+      requestPath: path,
+    });
+  } catch (e) {
+    return c.json({ error: `failed to build CDP auth: ${errDetail(e, c.env)}`, cdp_reachable: false }, 502);
+  }
+
+  let body: { items?: { resource?: string }[] };
+  try {
+    const r = await fetch(`${base}/discovery/resources?payTo=${c.env.PAY_TO_ADDRESS}&limit=200`, {
+      headers: { Authorization: `Bearer ${jwt}`, Accept: "application/json" },
+    });
+    if (!r.ok) {
+      return c.json({ error: `CDP discovery HTTP ${r.status}`, cdp_reachable: r.status < 500 }, 502);
+    }
+    body = await r.json();
+  } catch (e) {
+    return c.json({ error: `CDP discovery fetch failed: ${errDetail(e, c.env)}`, cdp_reachable: false }, 502);
+  }
+
+  const indexedUrls = new Set((body.items ?? []).map((it) => it.resource).filter(Boolean));
+  const origin = new URL(c.req.url).origin;
+  const allOfferings = [
+    ...Object.keys(OFFERING_PRICES).map((name) => `${origin}/scan/${name}`),
+    `${origin}/scan/bounty_deep_dive`,
+    ...DL_OFFERINGS.map((o) => `${origin}/data/${o.name}`),
+  ];
+  const indexed = allOfferings.filter((u) => indexedUrls.has(u));
+  const missing = allOfferings.filter((u) => !indexedUrls.has(u));
+
+  return c.json({
+    checked_at: new Date().toISOString(),
+    cdp_reachable: true,
+    total_offerings: allOfferings.length,
+    indexed_count: indexed.length,
+    indexed,
+    missing,
+  });
+});
+
 app.use("*", async (c, next) => {
   // withBazaar() extends the facilitator client so its getSupported()/
   // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
@@ -430,16 +500,39 @@ app.use("*", async (c, next) => {
     createAuthHeaders: buildCreateAuthHeaders(c.env),
   }));
 
-  // VAPOR (our own facilitator) is preferred when configured; CDP is the
-  // fallback for any verify/settle/getSupported call VAPOR's client throws
-  // on. See lib/facilitatorClient.ts for why blind retry-on-fallback is safe
-  // here even for settle.
-  const facilitatorClient = c.env.VAPOR_FACILITATOR_URL
-    ? Object.assign(
-        new FallbackFacilitatorClient(new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL }), cdpClient),
-        { extensions: cdpClient.extensions }
-      )
+  // Hybrid facilitator routing: real production traffic is deliberately
+  // split ~50/50 between VAPOR (our own facilitator) and CDP's hosted one,
+  // per request — not "prefer one, only touch the other on any failure".
+  // VAPOR needs genuine, ongoing settlement volume to prove itself as a
+  // real facilitator (not just a cold failover path); CDP stays
+  // continuously exercised too, not relegated to an outage-only role.
+  // Each request still falls back to the other facilitator if its
+  // randomly-chosen primary throws — resilience isn't traded away for the
+  // split (see lib/facilitatorClient.ts for why blind retry-on-fallback is
+  // safe here even for settle). DATA AGENT's own hires (agents/data_agent.py)
+  // go through these exact same routes, so they get the same 50/50 split
+  // as any external buyer — there's no separate code path for them.
+  const vaporClient = c.env.VAPOR_FACILITATOR_URL
+    ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
+    : null;
+  const usesVaporPrimary = vaporClient !== null && Math.random() < 0.5;
+  const hybridClient = vaporClient
+    ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
+    : null;
+  const facilitatorClient = hybridClient
+    ? Object.assign(hybridClient, { extensions: cdpClient.extensions })
     : cdpClient;
+  // What ACTUALLY settled this request's payment, accounting for a
+  // fallback having occurred — not just which one was picked as primary.
+  // Read from lib/facilitatorClient.ts's lastUsed after the real
+  // verify/settle calls happen below (onAfterSettle), never assumed here.
+  const facilitatorUsed = (): "vapor" | "cdp" => {
+    if (!hybridClient) return "cdp";
+    const primaryWasVapor = usesVaporPrimary;
+    return hybridClient.lastUsed === "primary"
+      ? (primaryWasVapor ? "vapor" : "cdp")
+      : (primaryWasVapor ? "cdp" : "vapor");
+  };
   const resourceServer = new x402ResourceServer(facilitatorClient)
     .register(c.env.X402_NETWORK, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension)
@@ -464,6 +557,7 @@ app.use("*", async (c, next) => {
         payer: ctx.result.payer ?? null,
         tx_hash: ctx.result.transaction ?? null,
         network: ctx.result.network ?? null,
+        facilitator: facilitatorUsed(),
       };
       safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
     });

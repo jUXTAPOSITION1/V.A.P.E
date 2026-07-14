@@ -97,9 +97,11 @@ PAY_TO = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
 USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 UA = {"User-Agent": "VAPE-x402-directory-register/1.0", "Content-Type": "application/json"}
 
-# VAPOR (jUXTAPOSITION1/VAPOR) — VAPE's own preferred x402 facilitator,
-# also a Bazaar-compatible discovery service in its own right (see its
-# docs/API.md's "Discovery (x402 Bazaar)" section).
+# VAPOR (jUXTAPOSITION1/VAPOR) — VAPE's own x402 facilitator, settling half
+# of VAPE's real x402 traffic in a 50/50 hybrid split with CDP (see
+# worker/src/lib/facilitatorClient.ts), and also a Bazaar-compatible
+# discovery service in its own right (see its docs/API.md's "Discovery
+# (x402 Bazaar)" section).
 VAPOR_BASE = "https://x402.duckdns.org"
 # Optional: only needed if VAPOR's production deployment has API_KEYS
 # configured (see VAPOR's src/config/api-keys.ts) — if VAPOR is running

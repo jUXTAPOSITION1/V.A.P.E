@@ -49,6 +49,11 @@ export interface JobRecord {
   tx_hash: string | null;
   network: string | null;
   error: string | null;
+  // Which facilitator actually settled this payment (see
+  // lib/facilitatorClient.ts's lastUsed) — absent on records logged before
+  // the 50/50 VAPOR/CDP hybrid split shipped, and on any job that never
+  // reached settlement.
+  facilitator?: "vapor" | "cdp";
   // Set only by agents/x402_ledger_backfill.py — a real on-chain USDC
   // transfer reconstructed after the fact, from before VAPE_JOBS_KV_ID
   // existed, rather than something this Worker watched happen live. See
@@ -70,6 +75,11 @@ export interface Totals {
   first_job_ts: string | null;
   last_job_ts: string | null;
   by_offering: Record<string, OfferingTotals>;
+  // Real achieved VAPOR/CDP split (see the 50/50 hybrid routing in
+  // index.ts) — lets the site show the actual ratio rather than just the
+  // intended one. Jobs logged before this field existed, or that never
+  // reached settlement, aren't counted in either bucket.
+  by_facilitator: Record<string, OfferingTotals>;
 }
 
 export interface DailyEntry {
@@ -117,8 +127,13 @@ export async function logJob(kv: KVLike | undefined, record: JobRecord): Promise
     await kv.put(RECENT_KEY, JSON.stringify(recent.slice(0, RECENT_CAP)));
 
     const totals = await readJson<Totals>(kv, TOTALS_KEY, {
-      jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {},
+      jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {}, by_facilitator: {},
     });
+    // Migration guard: real, already-stored KV data predates by_facilitator,
+    // so readJson above returns that older shape verbatim (the fallback
+    // literal only applies when the key is entirely absent) — never assume
+    // the field exists just because the read succeeded.
+    totals.by_facilitator = totals.by_facilitator ?? {};
     totals.jobs += 1;
     if (record.status === "error") totals.errors += 1;
     else totals.revenue_usd += record.amount_usd;
@@ -128,6 +143,12 @@ export async function logJob(kv: KVLike | undefined, record: JobRecord): Promise
     off.count += 1;
     if (record.status === "settled") off.revenue_usd += record.amount_usd;
     totals.by_offering[record.offering] = off;
+    if (record.facilitator) {
+      const fac = totals.by_facilitator[record.facilitator] ?? { count: 0, revenue_usd: 0 };
+      fac.count += 1;
+      if (record.status === "settled") fac.revenue_usd += record.amount_usd;
+      totals.by_facilitator[record.facilitator] = fac;
+    }
     await kv.put(TOTALS_KEY, JSON.stringify(totals));
 
     const today = dateKey(record.ts);
@@ -159,10 +180,13 @@ export async function getStats(kv: KVLike | undefined, days = 30) {
   // Cloudflare's 50-subrequest-per-request cap on the free plan.
   const [totals, dailyHistory] = await Promise.all([
     readJson<Totals>(kv, TOTALS_KEY, {
-      jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {},
+      jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {}, by_facilitator: {},
     }),
     readJson<DailyEntry[]>(kv, DAILY_HISTORY_KEY, []),
   ]);
+  // Same migration guard as logJob() — real, already-stored KV data may
+  // predate by_facilitator.
+  totals.by_facilitator = totals.by_facilitator ?? {};
   const byDate = new Map(dailyHistory.map((d) => [d.date, d]));
   const now = new Date();
   const daily: DailyEntry[] = [];

@@ -182,7 +182,8 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
    real Transfers API (PR #145). [TBD] still unlocks: a real auto-handler for `forensics_deep`
    ($2)/`wallet_recon` ($0.03), and the LEDGER agent — the tool works, nothing calls it
    automatically yet.
-6. [OK] x402 payment worker live on Base mainnet, 21 routes, real KV job ledger + live feed.
+6. [OK] x402 payment worker live on Base mainnet, 20 routes, real KV job ledger + live feed,
+   settled through a real 50/50 VAPOR/CDP hybrid facilitator split.
 7. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
 
 Every step reuses the free GitHub runner + existing keyless tools. No new infrastructure,
