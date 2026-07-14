@@ -1,9 +1,18 @@
 {
-  "generated_at": "2026-07-13T19:25:00Z",
-  "source_report": "intel/reports/security-2026-07-13-19.md",
+  "generated_at": "2026-07-14T02:35:41Z",
+  "source_report": "intel/reports/security-2026-07-14-02.md",
   "threat_level": "MEDIUM",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-13",
+      "name": "Lumi Finance",
+      "amount_usd_m": 0.27,
+      "chains": [
+        "Arbitrum"
+      ],
+      "technique": "Silent Auto-Approval Hack"
+    },
     {
       "date": "2026-07-11",
       "name": "Bonzo Lend",
@@ -75,14 +84,7 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Flashloan Price Oracle Attack",
-      "lesson": {
-        "pattern": "oracle_flashloan",
-        "label": "Flashloan-driven price or oracle manipulation",
-        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
-        "covered_by": null,
-        "out_of_scope": false
-      }
+      "technique": "Flashloan Price Oracle Attack"
     },
     {
       "date": "2026-06-28",
@@ -510,24 +512,6 @@
         "Monero"
       ],
       "technique": "ACK Message Frontrun Exploit"
-    },
-    {
-      "date": "2026-05-19",
-      "name": "HermesVault",
-      "amount_usd_m": 0.03,
-      "chains": [
-        "Algorand"
-      ],
-      "technique": "Rekeying Attack"
-    },
-    {
-      "date": "2026-05-19",
-      "name": "Bankr",
-      "amount_usd_m": 0.17,
-      "chains": [
-        "Base"
-      ],
-      "technique": "Compromised Session Keys"
     }
   ]
 }
