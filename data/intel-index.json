@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T19:13:18Z",
+  "generated": "2026-07-15T19:15:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 366,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 69,
-    "investigations": 154,
+    "investigations": 156,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-174827-0x2376A4fC.md",
+      "file": "investigation-20260715-191556-0x71A64AA0.md",
       "title": "Investigation \u2014 BRIAN",
       "symbol": "BRIAN",
-      "name": "The Bald Eagle",
-      "date": "2026-07-15T17:48:27Z",
-      "target": "0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07",
+      "name": "The Bald Bull",
+      "date": "2026-07-15T19:15:56Z",
+      "target": "0x71A64AA011566A33F79eE48ed1491752AEc254b6",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (30) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $10,297; [-10] Pair 10.6 days old \u2014 under two ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-174827-0x2376A4fC.md"
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,034; [-10] Pair 10.0 days old \u2014 under two weeks, no track record yet; [-10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-191556-0x71A64AA0.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-191556-0x71A64AA0.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "The Bald Bull",
+      "date": "2026-07-15T19:15:56Z",
+      "target": "0x71A64AA011566A33F79eE48ed1491752AEc254b6",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,034; [-10] Pair 10.0 days old \u2014 under two weeks, no track record yet; [-10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-191556-0x71A64AA0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-174827-0x2376A4fC.md",
@@ -592,20 +606,6 @@
       "score": "48",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,704. Positive evidence: 18325 holders \u2014 reasonably distributed; Custom ve",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-171011-0xc99560Fc.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260711-160102-0x940181a9.md",
-      "title": "Investigation \u2014 AERO",
-      "symbol": "AERO",
-      "name": "Aerodrome",
-      "date": "2026-07-11T16:01:02Z",
-      "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 749427 holders \u2014 reasonably distributed; Deep liquidity ($31,182,960); Trading 1038+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-160102-0x940181a9.md"
     }
   ],
   "reports": [

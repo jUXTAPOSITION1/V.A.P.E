@@ -215,3 +215,5 @@
 | 2026-07-15 | auto | 0x3ecced5b416e58664f04a39dD18935eB71D33B15 (BRIAN) | deep_investigation | CAUTION (75/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-15 | auto | 0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07 (BRIAN) | deep_investigation | REJECT (30/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-15 | auto | 0x71A64AA011566A33F79eE48ed1491752AEc254b6 (BRIAN) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
