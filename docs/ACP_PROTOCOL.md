@@ -52,7 +52,7 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
 
 ### Market-data tools — 0.01 USDC each
-14 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+13 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
 tools carry real hosted logos; token tools carry the token's DexScreener logo.
 Every result is real data or an honest `{error}` — never fabricated.
@@ -69,7 +69,6 @@ Every result is real data or an honest `{error}` — never fabricated.
 | chain_overview | 0.01 | 5m | `chain` | Chain headline TVL + rank among all chains |
 | chain_fees | 0.01 | 5m | `chain` | Fee-earning protocols on a chain, ranked, with logos |
 | dex_volumes | 0.01 | 5m | `chain` | DEX volume on a chain by venue, with logos |
-| derivatives | 0.01 | 5m | — | Perps/derivatives volume by venue, with logos |
 | yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
@@ -108,7 +107,7 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 21 of 29 offerings —
+- [OK] End-to-end deliverable automation for 20 of 28 offerings —
   `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
   `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
   the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,

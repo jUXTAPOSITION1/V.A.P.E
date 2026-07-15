@@ -216,17 +216,6 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async (q) => dl.dexVolumes(q.chain || "base"),
   },
   {
-    name: "derivatives",
-    price: "$0.01",
-    description: "Perps / derivatives trading volume by venue, each with its logo — the derivatives "
-      + "market's real activity across all tracked exchanges.",
-    tags: ["derivatives", "perps", "volume"],
-    inputSchema: { properties: {}, required: [] },
-    inputExample: {},
-    output: { total_vol_24h: 5000000000, venues: [{ name: "Hyperliquid", logo: "https://...", vol_24h: 3000000000 }] },
-    run: async () => dl.derivativesVolumes(),
-  },
-  {
     name: "yields",
     price: "$0.01",
     description: "Yield pools filtered by chain/project/symbol, ranked by TVL, with apy/apyBase/"

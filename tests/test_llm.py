@@ -9,6 +9,8 @@ import json
 import urllib.error
 from unittest import mock
 
+import pytest
+
 from agents import llm
 
 
@@ -163,3 +165,94 @@ def test_ask_safe_still_never_raises_when_all_absent(monkeypatch):
     text, provider = llm.ask_safe("sys", "usr")
     assert provider is None
     assert text.startswith("[llm unavailable")
+
+
+def _write_usage_rows(path, rows):
+    with open(path, "w") as f:
+        for row in rows:
+            f.write(json.dumps(row) + "\n")
+
+
+class TestDailySpendCap:
+    """agents/llm.py's daily $ spend cap — the only provider it can apply to
+    is xai_1 (real money); every other provider is free/quota-limited and
+    has no entry in PROVIDER_PRICING_USD_PER_M_TOKENS at all."""
+
+    def test_todays_spend_sums_only_todays_rows_for_the_priced_provider(self, monkeypatch, tmp_path):
+        usage_log = tmp_path / "llm_usage.jsonl"
+        monkeypatch.setattr(llm, "USAGE_LOG", str(usage_log))
+        today = llm.datetime.now(llm.timezone.utc).strftime("%Y-%m-%d")
+        _write_usage_rows(usage_log, [
+            {"ts": f"{today}T00:00:00Z", "provider": "xai_1", "prompt_tokens": 1_000_000, "completion_tokens": 0},
+            {"ts": f"{today}T01:00:00Z", "provider": "xai_1", "prompt_tokens": 0, "completion_tokens": 1_000_000},
+            {"ts": "2020-01-01T00:00:00Z", "provider": "xai_1", "prompt_tokens": 1_000_000, "completion_tokens": 0},
+            {"ts": f"{today}T02:00:00Z", "provider": "groq", "prompt_tokens": 1_000_000, "completion_tokens": 1_000_000},
+        ])
+        spend = llm._todays_paid_spend_usd("xai_1")
+        assert spend == pytest.approx(0.20 + 0.50)  # only today's two xai_1 rows
+
+    def test_free_provider_has_zero_spend_regardless_of_usage(self, monkeypatch, tmp_path):
+        usage_log = tmp_path / "llm_usage.jsonl"
+        monkeypatch.setattr(llm, "USAGE_LOG", str(usage_log))
+        today = llm.datetime.now(llm.timezone.utc).strftime("%Y-%m-%d")
+        _write_usage_rows(usage_log, [
+            {"ts": f"{today}T00:00:00Z", "provider": "groq", "prompt_tokens": 10**9, "completion_tokens": 10**9},
+        ])
+        assert llm._todays_paid_spend_usd("groq") == 0.0
+
+    def test_cap_reached_skips_xai_and_falls_through_to_groq(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        usage_log = tmp_path / "llm_usage.jsonl"
+        findings_log = tmp_path / "findings.jsonl"
+        monkeypatch.setattr(llm, "USAGE_LOG", str(usage_log))
+        monkeypatch.setattr(llm, "FINDINGS_LOG", str(findings_log))
+        monkeypatch.setenv("XAI_DAILY_SPEND_CAP_USD", "1.00")
+        today = llm.datetime.now(llm.timezone.utc).strftime("%Y-%m-%d")
+        # 10M input tokens @ $0.20/M = $2.00, already over the $1.00 cap.
+        _write_usage_rows(usage_log, [
+            {"ts": f"{today}T00:00:00Z", "provider": "xai_1", "prompt_tokens": 10_000_000, "completion_tokens": 0},
+        ])
+        xai_attempts = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            if req.headers.get("Authorization") == "Bearer key1":
+                xai_attempts["n"] += 1
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+
+        assert provider == "groq" and text == "via groq"
+        assert xai_attempts["n"] == 0  # never even attempted, no wasted retry/backoff
+        findings = findings_log.read_text().strip().splitlines()
+        assert len(findings) == 1
+        finding = json.loads(findings[0])
+        assert finding["severity"] == "MEDIUM"
+        assert "xai_1" in finding["title"]
+
+    def test_cap_reached_finding_is_not_duplicated_within_the_same_day(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        usage_log = tmp_path / "llm_usage.jsonl"
+        findings_log = tmp_path / "findings.jsonl"
+        monkeypatch.setattr(llm, "USAGE_LOG", str(usage_log))
+        monkeypatch.setattr(llm, "FINDINGS_LOG", str(findings_log))
+        monkeypatch.setenv("XAI_DAILY_SPEND_CAP_USD", "1.00")
+        today = llm.datetime.now(llm.timezone.utc).strftime("%Y-%m-%d")
+        _write_usage_rows(usage_log, [
+            {"ts": f"{today}T00:00:00Z", "provider": "xai_1", "prompt_tokens": 10_000_000, "completion_tokens": 0},
+        ])
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+            llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+
+        assert len(findings_log.read_text().strip().splitlines()) == 1
+
+    def test_default_cap_is_used_when_env_var_unset(self, monkeypatch):
+        monkeypatch.delenv("XAI_DAILY_SPEND_CAP_USD", raising=False)
+        assert llm._daily_cap_usd("xai_1") == llm.DEFAULT_DAILY_SPEND_CAP_USD

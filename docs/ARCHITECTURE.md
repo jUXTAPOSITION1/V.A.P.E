@@ -52,7 +52,7 @@ can call them directly; see component 6 below.
 
 ### How VAPE gets paid — two independent, real-money rails
 
-29 live offerings total: 21 are x402-payable (instant, no account needed), 8 need a
+28 live offerings total: 20 are x402-payable (instant, no account needed), 8 need a
 real ACP job (manual/SKILLFORGE-tool-tier work no synchronous HTTP route can do in a
 few seconds). Both rails pay into the same wallet; neither is a demo — the x402 side
 runs on **Base mainnet** via Coinbase Developer Platform's hosted facilitator, real
@@ -94,12 +94,14 @@ USDC, real settlement transactions.
      human buyer would use, capped at 15 hires/day.
 ```
 
-The 21 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
 `.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
 Slither run + frontier-model source review can't finish inside a Worker's request
-window) + 14 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
-`chain_overview`, `yields`, `stablecoins`, `bridges`, etc.). Advertised for discovery
+window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+`chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
+retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
+with no free equivalent). Advertised for discovery
 via the x402 Bazaar extension and a claimed listing on
 [402index.io](https://402index.io) (`/.well-known/402index-verify.txt` proves domain
 ownership). A handful of free, unpaid Alchemy-backed routes (`/portfolio`, `/nfts`,
@@ -125,8 +127,8 @@ component's state changes.
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 21 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 29 total: 21 x402-payable, 8 ACP-only — see component 4 |
+| `worker/` (x402) | [OK] | 20 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 28 total: 20 x402-payable, 8 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
@@ -311,7 +313,7 @@ and rebuildable) is the read-side complement: append-only JSONL stays the source
 the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
 
 ### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
-29 live offerings across two independent, real-money rails — see the payment-rails
+28 live offerings across two independent, real-money rails — see the payment-rails
 diagram above for the full flow. Both settle into the same wallet
 (`0xa1420293a7df49bc8380f543a1fe7b8d6f582879`); neither is a demo.
 
@@ -324,18 +326,33 @@ ACP-only (`wallet_recon`, `tx_decode`, `whale_watch`, `community_intel_broadcast
 `bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, `partner_referral`) —
 manual or SKILLFORGE-tool-tier work no synchronous HTTP route can complete in seconds.
 
-**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 21
-routes with `@x402/hono` middleware against **Base mainnet** via Coinbase Developer
-Platform's hosted facilitator (`api.cdp.coinbase.com`, JWT-authenticated — see
-`worker/src/lib/cdpAuth.ts`) — real EIP-3009 signed authorizations, real on-chain
-settlement, not a testnet demo. `worker/src/handlers.ts` and `dataHandlers.ts` are
+**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 20
+routes with `@x402/hono` middleware against **Base mainnet** — real EIP-3009 signed
+authorizations, real on-chain settlement, not a testnet demo. Every request is
+routed through a real 50/50 hybrid split between VAPOR (our own facilitator,
+`x402.duckdns.org`) and Coinbase Developer Platform's hosted facilitator
+(`api.cdp.coinbase.com`, JWT-authenticated — see `worker/src/lib/cdpAuth.ts`) —
+which one is primary is picked randomly per request, falling back to the other
+on any infrastructure failure (`worker/src/lib/facilitatorClient.ts`), so an
+outage on either side never takes real revenue down with it, and both
+facilitators get genuine, ongoing settlement volume rather than one being a
+cold failover path. `agents/data_agent.py`'s own hires go through these same
+routes, so they get the identical split as any external buyer. The real
+achieved ratio (not just the intended one — a fallback can still occur) is
+tracked per job in `worker/src/lib/jobLog.ts` and surfaced via `GET
+/x402/stats`'s `by_facilitator` totals. `worker/src/handlers.ts` and `dataHandlers.ts` are
 faithful TypeScript ports of `agents/acp_fulfill.py` and `agents/defillama.py` (kept
 honest by `scan-parity.yml`'s cross-language diff check), so a $0.01 x402 call and a
 free ACP job never disagree. Every real settlement is logged to a Cloudflare KV job
 ledger (`worker/src/lib/jobLog.ts`) with the actual payer address and on-chain tx
 hash — surfaced on the site's live feed, linked straight to Basescan, not just VAPE's
 own word. Advertised via the x402 Bazaar discovery extension and a claimed
-[402index.io](https://402index.io) listing. The `bounty_deep_dive` route ($50) is the
+[402index.io](https://402index.io) listing — since CDP's facilitator never emits
+the header that's supposed to confirm Bazaar indexing succeeded
+([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112),
+still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
+(`cdp-bazaar-check.yml`, weekly) check CDP's own discovery catalog directly
+instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($50) is the
 one async exception: pays via x402, then dispatches
 `.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
 immediately, since a real Slither run + frontier-model source review can't complete

@@ -9,14 +9,20 @@ Design (matches agents/data_fetchers.py exactly): stdlib-only urllib, one cached
 raises — so a caller can always degrade honestly rather than crash.
 
 Hosts:
-  api.llama.fi          TVL, protocols, chains, fees/revenue, dexs, derivatives,
-                        treasury, unlocks/emissions
+  api.llama.fi          TVL, protocols, chains, fees/revenue, dexs, treasury,
+                        unlocks/emissions
   coins.llama.fi        prices (current/first/historical/% change) — the
                         multichain price oracle
   yields.llama.fi       yield pools + per-pool history
   stablecoins.llama.fi  stablecoin supply + peg
-  bridges.llama.fi      bridge list + per-chain volume (feeds threat work —
-                        bridge exploits are a top attack class)
+  bridges.llama.fi      bridge list (feeds threat work — bridge exploits are
+                        a top attack class)
+
+Note: DefiLlama moved overview/derivatives (and bridges' per-chain
+`includeChains` detail) behind its Pro API tier — both were observed 402ing
+in production. There is no free `derivatives` fetcher here anymore (the
+offering was retired rather than sold undeliverable); `bridges()` below
+drops `includeChains` to stay on the still-free list endpoint.
 
 Live network is blocked from the dev sandbox (same as every llama.fi call in
 this repo); real validation runs in GitHub Actions where these hosts are
@@ -220,19 +226,6 @@ def dex_volumes(chain="base"):
             "dexs": protos[:20]}
 
 
-def derivatives_volumes():
-    """Perps/derivatives volume by venue (the 'derivatives' skill's core)."""
-    url = f"{API}/overview/derivatives?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true"
-    d = _get(url, ttl=3600, cache_key="dl_derivs")
-    if _err(d):
-        return d
-    protos = [{"name": p.get("name"), "logo": p.get("logo"),
-               "vol_24h": p.get("total24h"), "vol_7d": p.get("total7d")}
-              for p in (d.get("protocols") or [])]
-    protos.sort(key=lambda p: p["vol_24h"] or 0, reverse=True)
-    return {"ts": _now_iso(), "total_vol_24h": d.get("total24h"), "venues": protos[:20]}
-
-
 # ── Yields (yields.llama.fi) ─────────────────────────────────────────────────
 def yield_pools(chain=None, project=None, symbol=None, min_tvl=10000, limit=25):
     """Yield pools filtered by chain/project/symbol, ranked by TVL. Each pool:
@@ -289,8 +282,14 @@ def stablecoins(min_mcap=1e8, limit=25):
 def bridges(limit=25):
     """All tracked bridges with recent daily volume. Bridge exploits are one of
     the top attack categories (see security_sweep's ATTACK_PATTERNS); this is
-    the flow data that category was missing a source for."""
-    d = _get(f"{BRIDGES}/bridges?includeChains=true", ttl=1800, cache_key="dl_bridges")
+    the flow data that category was missing a source for.
+
+    Plain /bridges (list only) stays free; `includeChains=true` pulls the
+    per-bridge chain breakdown, which DefiLlama now gates behind its Pro API
+    (this call was observed 402ing in production with that param — see
+    worker/src/lib/defillama.ts::bridges() for the parallel fix). Dropping it
+    keeps this offering deliverable; `chains` is simply absent now."""
+    d = _get(f"{BRIDGES}/bridges", ttl=1800, cache_key="dl_bridges")
     if _err(d):
         return d
     rows = [{"id": b.get("id"), "name": b.get("displayName") or b.get("name"),

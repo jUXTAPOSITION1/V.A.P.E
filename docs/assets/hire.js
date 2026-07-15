@@ -30,7 +30,6 @@ const DATA_OFFERINGS = {
     chain_overview:  { inputs: [{ k: 'chain', label: 'Chain name', ph: 'Base', def: 'Base' }] },
     chain_fees:      { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
     dex_volumes:     { inputs: [{ k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
-    derivatives:     { inputs: [] },
     yields:          { inputs: [{ k: 'chain', label: 'Chain (optional)', ph: 'Base', opt: true },
                                     { k: 'project', label: 'Project (optional)', ph: 'aave-v3', opt: true },
                                     { k: 'symbol', label: 'Symbol (optional)', ph: 'USDC', opt: true }] },

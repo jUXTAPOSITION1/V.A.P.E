@@ -77,6 +77,11 @@ BLOCK_PATTERNS = [
     "subprocess.call(", # shell execution (shell=True risk)
     "subprocess.Popen(",
     "subprocess.run(",
+    "subprocess.check_output(",  # same family as call/Popen/run above — was
+    "subprocess.check_call(",    # missing here despite being just as capable
+                                  # of shell execution (found by
+                                  # agents/redteam_builder.py's adversarial
+                                  # test against this exact list)
     "pickle.load",      # unsafe deserialization
     "pickle.loads",
     "marshal.load",

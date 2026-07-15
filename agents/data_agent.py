@@ -71,7 +71,6 @@ OFFERING_PARAMS = {
     "chain_overview":  lambda addr: {"chain": "Base"},
     "chain_fees":      lambda addr: {"chain": "base"},
     "dex_volumes":     lambda addr: {"chain": "base"},
-    "derivatives":     lambda addr: {},
     "yields":          lambda addr: {},
     "stablecoins":     lambda addr: {},
     "bridges":         lambda addr: {},

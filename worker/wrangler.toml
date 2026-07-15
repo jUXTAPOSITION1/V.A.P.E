@@ -12,14 +12,18 @@ compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
 # ── Payment configuration ────────────────────────────────────────────────
-# Base mainnet + Coinbase Developer Platform's hosted facilitator (real
-# funds). The full pay -> verify -> settle loop was proven first against
-# Base Sepolia + the public facilitator.x402.org testnet facilitator before
-# this switch; see git history on this file for the testnet values.
+# Base mainnet. VAPOR (our own facilitator) is preferred; CDP's hosted
+# facilitator is the fallback for any verify/settle/getSupported call VAPOR
+# errors on (see src/lib/facilitatorClient.ts) — a VAPOR outage must never
+# take real revenue down with it. The full pay -> verify -> settle loop was
+# proven first against Base Sepolia + the public facilitator.x402.org
+# testnet facilitator before ever switching to real funds; see git history
+# on this file for the testnet values.
 [vars]
 PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
 X402_NETWORK = "eip155:8453"
 X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
+VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"
 
 # The following are SECRETS, not vars — set them with:
 #   wrangler secret put ETHERSCAN_API_KEY

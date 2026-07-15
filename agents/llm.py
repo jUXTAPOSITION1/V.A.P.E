@@ -59,6 +59,12 @@ Per-call token usage is best-effort logged to skillforge/memory/llm_usage.jsonl
 (provider/model/tier/token counts) for later cost/routing self-optimization — never
 raises, never blocks a caller if Memory/disk isn't writable.
 
+Every provider above except xai_1 is a free tier (rate/quota-limited, not billed) —
+xai_1 (Grok, real money) is the only one a runaway loop could actually cost VAPE for,
+which is why it's the only entry in PROVIDER_PRICING_USD_PER_M_TOKENS below and the
+only one the daily spend cap in ask() applies to. See that constant's comment for
+where the per-token price came from.
+
 Backwards compatible: run.py can keep calling its own ask_llm; this is opt-in.
 """
 import json
@@ -67,10 +73,31 @@ import sys
 import time
 import urllib.request
 import urllib.error
+from datetime import datetime, timezone
 
 MEMORY_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           "skillforge", "memory")
 USAGE_LOG = os.path.join(MEMORY_DIR, "llm_usage.jsonl")
+FINDINGS_LOG = os.path.join(MEMORY_DIR, "findings.jsonl")
+
+# USD per 1M tokens, standard (non-batch, non-cached) rate. Verified against
+# xAI's public API pricing (multiple independent pricing trackers agreed on
+# $0.20 input / $0.50 output for grok-4-1-fast-reasoning as of 2026-07) —
+# re-verify against https://x.ai/api before changing, don't guess a new
+# number. Only providers that actually bill real money belong in this dict;
+# everything else in PROVIDERS is a free/quota-limited tier with nothing to
+# cap here.
+PROVIDER_PRICING_USD_PER_M_TOKENS = {
+    "xai_1": {"input": 0.20, "output": 0.50},
+}
+
+# Hand-picked, not derived from historical usage: real logged xai_1 spend to
+# date is a fraction of a cent (see skillforge/memory/llm_usage.jsonl), so
+# this is deliberately a generous ceiling meant to catch a genuine runaway
+# (a bug looping thousands of calls) long before it does real damage, not to
+# throttle normal operation. Override via XAI_DAILY_SPEND_CAP_USD if actual
+# usage ever legitimately grows toward it.
+DEFAULT_DAILY_SPEND_CAP_USD = 3.00
 
 # provider: (env_key, base_url, {tier: model})
 PROVIDERS = [
@@ -192,6 +219,94 @@ def _log_usage(provider, model, tier, usage, fallback_from=None):
         pass  # telemetry must never break a real LLM call
 
 
+def _daily_cap_usd(provider):
+    """Reads XAI_DAILY_SPEND_CAP_USD (or the hardcoded default) fresh on
+    every call rather than at import time, so a workflow that sets it can
+    override without needing this module reloaded."""
+    try:
+        return float(os.getenv("XAI_DAILY_SPEND_CAP_USD", DEFAULT_DAILY_SPEND_CAP_USD))
+    except (TypeError, ValueError):
+        return DEFAULT_DAILY_SPEND_CAP_USD
+
+
+def _todays_paid_spend_usd(provider):
+    """Sums today's (UTC calendar day) real-money cost for one provider from
+    llm_usage.jsonl, using PROVIDER_PRICING_USD_PER_M_TOKENS. Returns 0.0 for
+    a provider with no pricing entry (nothing to cap), a missing/unreadable
+    log, or any malformed row — this must never raise or block a real call
+    over a telemetry read failure, matching _log_usage's own guarantee."""
+    pricing = PROVIDER_PRICING_USD_PER_M_TOKENS.get(provider)
+    if not pricing:
+        return 0.0
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    total = 0.0
+    try:
+        with open(USAGE_LOG) as f:
+            for line in f:
+                try:
+                    row = json.loads(line)
+                except ValueError:
+                    continue
+                if row.get("provider") != provider or not str(row.get("ts", "")).startswith(today):
+                    continue
+                total += (row.get("prompt_tokens") or 0) / 1_000_000 * pricing["input"]
+                total += (row.get("completion_tokens") or 0) / 1_000_000 * pricing["output"]
+    except (OSError, IOError):
+        return 0.0
+    return total
+
+
+def _already_alerted_spend_cap_today(provider):
+    """Avoids writing a duplicate finding on every subsequent call once the
+    cap is hit in a run (or across the many scheduled runs in one day) —
+    scans findings.jsonl (a few hundred KB, cheap) for today's marker rather
+    than maintaining separate state, matching this repo's JSONL-only memory
+    convention. Any read failure is treated as "not yet alerted" so the
+    alert path fails open (a possible duplicate finding) rather than never
+    firing at all."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    marker = f"llm-daily-spend-cap:{provider}:{today}"
+    try:
+        with open(FINDINGS_LOG) as f:
+            return any(marker in line for line in f)
+    except (OSError, IOError):
+        return False
+
+
+def _log_spend_cap_finding(provider, spend, cap):
+    """Real, dated, open finding in the same channel/schema self_improve.py
+    already reads (see docs/SECURITY_PROTOCOL.md's coverage-gap findings) —
+    this is a cost-hygiene event, not a security exploit, but it belongs in
+    the same place so it's visible without needing a separate dashboard."""
+    if _already_alerted_spend_cap_today(provider):
+        return
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    entry = {
+        "category": "finding",
+        "title": f"LLM daily spend cap reached: {provider}",
+        "content": (
+            f"agents/llm.py: {provider}'s estimated spend today (UTC) is "
+            f"${spend:.4f}, at or above the ${cap:.2f} daily cap "
+            f"(XAI_DAILY_SPEND_CAP_USD). Calls for this provider are being "
+            f"skipped for the rest of the day and falling through to the "
+            f"free chain instead — check skillforge/memory/llm_usage.jsonl "
+            f"for what drove the volume; this may be legitimate growth "
+            f"(raise the cap) or a runaway loop (fix the caller)."
+        ),
+        "source": "agents/llm.py",
+        "tags": ["cost-hygiene", "llm-spend", f"llm-daily-spend-cap:{provider}:{today}"],
+        "confidence": 1.0,
+        "severity": "MEDIUM",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+    try:
+        os.makedirs(MEMORY_DIR, exist_ok=True)
+        with open(FINDINGS_LOG, "a") as f:
+            f.write(json.dumps(entry) + "\n")
+    except Exception:
+        pass  # this is an alert about spend, not itself allowed to break a call
+
+
 def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
         timeout=45, retries_per_provider=2, provider_order=None):
     """
@@ -210,6 +325,15 @@ def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
         key = os.getenv(env)
         if not key:
             continue
+        if name in PROVIDER_PRICING_USD_PER_M_TOKENS:
+            cap = _daily_cap_usd(name)
+            spend = _todays_paid_spend_usd(name)
+            if spend >= cap:
+                detail = f"{name}:daily-spend-cap-reached(${spend:.4f}>=${cap:.2f})"
+                print(f"[llm] {detail}", file=sys.stderr)
+                _log_spend_cap_finding(name, spend, cap)
+                errors.append(detail)
+                continue
         model = models.get(tier) or models.get("deep") or models.get("fast")
         for attempt in range(retries_per_provider):
             try:

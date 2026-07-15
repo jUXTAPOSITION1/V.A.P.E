@@ -1,4 +1,4 @@
-# V.A.P.E. — Architecture Roadmap: ACP Revenue, More Agents, More LLMs
+# V.A.P.E. — Architecture Roadmap: More Agents, More LLMs
 
 Strategy for deepening ACP integration and expanding the agent/LLM framework —
 while holding the line: **maximum capability, lowest possible compute, real data only.**
@@ -14,14 +14,14 @@ while holding the line: **maximum capability, lowest possible compute, real data
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 29 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 28 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
-**21 of 29 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+**20 of 28 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
 `HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
 the x402 side) covers all of them:
 
@@ -35,7 +35,7 @@ the x402 side) covers all of them:
 | dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto, x402 |
 | bounty_deep_dive | 50.00 | `agents/deep_dive_audit.py` — real Slither + frontier-model source review, dispatched async via `deep-dive-bounty.yml` (x402 pays first, GH Actions job runs, report lands in `intel/audits/poc-reports/` within 24h) | [OK] auto (async), x402 |
 | community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
-| 14 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
+| 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
 | deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
 | forensics_deep | 2.00 | wallet_trace + contract_recon | [TBD] manual — wallet_trace itself is now [OK] Alchemy-backed and live-verified (PR #145); an auto-handler for this offering still isn't wired |
 | wallet_recon | 0.03 | base_rpc / wallet_trace | [TBD] manual, same gap as forensics_deep |
@@ -172,7 +172,7 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 29 offerings auto-fulfill.
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 20 of 28 offerings auto-fulfill.
 2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/
@@ -182,7 +182,8 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
    real Transfers API (PR #145). [TBD] still unlocks: a real auto-handler for `forensics_deep`
    ($2)/`wallet_recon` ($0.03), and the LEDGER agent — the tool works, nothing calls it
    automatically yet.
-6. [OK] x402 payment worker live on Base mainnet, 21 routes, real KV job ledger + live feed.
+6. [OK] x402 payment worker live on Base mainnet, 20 routes, real KV job ledger + live feed,
+   settled through a real 50/50 VAPOR/CDP hybrid facilitator split.
 7. [TBD] Reputation loop on the dashboard → more inbound ACP jobs.
 
 Every step reuses the free GitHub runner + existing keyless tools. No new infrastructure,

@@ -181,6 +181,34 @@ def cf_kv_get(account_id, namespace_id, token, key):
         raise RuntimeError(f"Cloudflare KV GET {key} failed: HTTP {e.code} — {e.read().decode()[:300]}")
 
 
+def recompute_aggregates(recent):
+    """Derives TOTALS/DAILY_HISTORY authoritatively from a final `recent`
+    list, rather than trusting incrementally-mutated running totals — used
+    right before writing so a merge that adds/removes records afterward
+    can't leave totals drifted from what's actually in `recent`."""
+    totals = {"jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {}}
+    daily_by_date = {}
+    for j in recent:
+        totals["jobs"] += 1
+        if j.get("status") == "error":
+            totals["errors"] += 1
+        else:
+            totals["revenue_usd"] = round(totals["revenue_usd"] + j["amount_usd"], 6)
+        totals["first_job_ts"] = min(totals["first_job_ts"], j["ts"]) if totals["first_job_ts"] else j["ts"]
+        totals["last_job_ts"] = max(totals["last_job_ts"], j["ts"]) if totals["last_job_ts"] else j["ts"]
+        off = totals["by_offering"].get(j["offering"], {"count": 0, "revenue_usd": 0})
+        off["count"] += 1
+        if j.get("status") != "error":
+            off["revenue_usd"] = round(off["revenue_usd"] + j["amount_usd"], 6)
+        totals["by_offering"][j["offering"]] = off
+        day = j["ts"][:10]
+        entry = daily_by_date.setdefault(day, {"date": day, "jobs": 0, "revenue_usd": 0})
+        entry["jobs"] += 1
+        if j.get("status") != "error":
+            entry["revenue_usd"] = round(entry["revenue_usd"] + j["amount_usd"], 6)
+    return totals, daily_by_date
+
+
 def cf_kv_put(account_id, namespace_id, token, key, value, ttl=None):
     url = f"{CF_API}/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key}"
     if ttl:
@@ -220,33 +248,9 @@ def main():
         dropped = len(recent) - len(live_only)
         print(f"X402_BACKFILL_RESET set — dropping {dropped} previously-backfilled record(s) to reclassify from scratch (keeping {len(live_only)} live-logged record(s)).")
         recent = live_only
-        totals = {"jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {}}
-        daily_by_date = {}
-        for j in recent:
-            totals["jobs"] += 1
-            if j.get("status") == "error":
-                totals["errors"] += 1
-            else:
-                totals["revenue_usd"] = round(totals["revenue_usd"] + j["amount_usd"], 6)
-            totals["first_job_ts"] = min(totals["first_job_ts"], j["ts"]) if totals["first_job_ts"] else j["ts"]
-            totals["last_job_ts"] = max(totals["last_job_ts"], j["ts"]) if totals["last_job_ts"] else j["ts"]
-            off = totals["by_offering"].get(j["offering"], {"count": 0, "revenue_usd": 0})
-            off["count"] += 1
-            if j.get("status") != "error":
-                off["revenue_usd"] = round(off["revenue_usd"] + j["amount_usd"], 6)
-            totals["by_offering"][j["offering"]] = off
-            day = j["ts"][:10]
-            entry = daily_by_date.setdefault(day, {"date": day, "jobs": 0, "revenue_usd": 0})
-            entry["jobs"] += 1
-            if j.get("status") != "error":
-                entry["revenue_usd"] = round(entry["revenue_usd"] + j["amount_usd"], 6)
+        totals, daily_by_date = recompute_aggregates(recent)
     else:
         recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
-        totals = cf_kv_get(account_id, namespace_id, cf_token, "TOTALS") or {
-            "jobs": 0, "errors": 0, "revenue_usd": 0, "first_job_ts": None, "last_job_ts": None, "by_offering": {},
-        }
-        daily_history = cf_kv_get(account_id, namespace_id, cf_token, "DAILY_HISTORY") or []
-        daily_by_date = {d["date"]: d for d in daily_history}
     seen_hashes = {j.get("tx_hash") for j in recent if j.get("tx_hash")}
     block_ts_cache = {}
 
@@ -279,24 +283,29 @@ def main():
         seen_hashes.add(tx_hash)
         added += 1
 
-        totals["jobs"] += 1
-        totals["revenue_usd"] = round(totals["revenue_usd"] + amount_usd, 6)
-        totals["first_job_ts"] = min(totals["first_job_ts"], ts_iso) if totals["first_job_ts"] else ts_iso
-        totals["last_job_ts"] = max(totals["last_job_ts"], ts_iso) if totals["last_job_ts"] else ts_iso
-        off = totals["by_offering"].get(record["offering"], {"count": 0, "revenue_usd": 0})
-        off["count"] += 1
-        off["revenue_usd"] = round(off["revenue_usd"] + amount_usd, 6)
-        totals["by_offering"][record["offering"]] = off
-
-        day = ts_iso[:10]
-        entry = daily_by_date.setdefault(day, {"date": day, "jobs": 0, "revenue_usd": 0})
-        entry["jobs"] += 1
-        entry["revenue_usd"] = round(entry["revenue_usd"] + amount_usd, 6)
-
     if not added and not reset_first:
         print("Nothing new to backfill — every real on-chain transfer is already logged (or none exist yet).")
         return 0
 
+    # This script's own initial read (above) can be arbitrarily stale by the
+    # time we're ready to write — a real paid job can land live via
+    # worker/src/lib/jobLog.ts's onAfterSettle hook at any point in
+    # between, on a completely separate process/runtime this script has no
+    # way to coordinate with directly. A blind overwrite here would erase
+    # that job from the ledger even though the payment itself is real and
+    # already settled on-chain. Re-read immediately before writing and
+    # merge in anything new from a fresher read (deduping by `id`, which is
+    # unique across both live and backfilled records), so a race narrows to
+    # "still possible in the instant between this re-read and the write"
+    # rather than "over this whole script's multi-minute chain scan."
+    fresh_recent = cf_kv_get(account_id, namespace_id, cf_token, "RECENT_JOBS") or []
+    known_ids = {j["id"] for j in recent if j.get("id")}
+    newly_live = [j for j in fresh_recent if j.get("id") and j["id"] not in known_ids]
+    if newly_live:
+        print(f"Merging {len(newly_live)} record(s) logged live since this run's initial read.")
+        recent.extend(newly_live)
+
+    totals, daily_by_date = recompute_aggregates(recent)
     recent.sort(key=lambda j: j["ts"], reverse=True)
     cf_kv_put(account_id, namespace_id, cf_token, "RECENT_JOBS", recent[:200])
     cf_kv_put(account_id, namespace_id, cf_token, "TOTALS", totals)

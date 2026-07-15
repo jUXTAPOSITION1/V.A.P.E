@@ -1,5 +1,11 @@
 name: VAPE AI Red-Team (real prompt-injection test, daily)
 
+# Two real, independent adversarial tests: the report pipeline
+# (agents/redteam.py, since this workflow's original build) and Builder's
+# code-generation path (agents/redteam_builder.py, added 2026-07-14 — see
+# that script's docstring for why the report pipeline alone wasn't
+# coverage of everything that generates or acts on LLM output in this repo).
+
 on:
   schedule:
     - cron: '30 12 * * *'   # once daily, offset from self-improve.yml's :00
@@ -25,6 +31,16 @@ jobs:
           python-version: '3.11'
       - name: Run real prompt-injection test against VAPE_REPORT_SYSTEM
         run: python agents/redteam.py
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      - name: Run real prompt-injection test against Builder's code-generation path
+        run: python agents/redteam_builder.py
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}

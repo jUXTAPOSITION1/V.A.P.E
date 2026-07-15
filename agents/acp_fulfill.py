@@ -292,7 +292,7 @@ def _community_broadcast(req):
 
 
 # ── DefiLlama data micro-services (see agents/defillama.py) ──────────────────
-# The 14 keyless DefiLlama tools, priced at 0.01 USDC each — the same tools the
+# The 13 keyless DefiLlama tools, priced at 0.01 USDC each — the same tools the
 # x402 worker serves at /data/* (worker/src/dataHandlers.ts), fulfilled here
 # field-for-field so the ACP and x402 deliverables never disagree. All
 # zero-LLM, real-data, auto-fulfillable. Token-level tools carry the token's
@@ -407,10 +407,6 @@ def _dex_volumes(req):
     return _dl().dex_volumes(_dl_chain(req, "base"))
 
 
-def _derivatives(req):
-    return _dl().derivatives_volumes()
-
-
 def _yields(req):
     r = req if isinstance(req, dict) else {}
     return _dl().yield_pools(chain=r.get("chain"), project=r.get("project"), symbol=r.get("symbol"))
@@ -443,7 +439,6 @@ HANDLERS = {
     "chain_overview": _chain_overview,
     "chain_fees": _chain_fees,
     "dex_volumes": _dex_volumes,
-    "derivatives": _derivatives,
     "yields": _yields,
     "stablecoins": _stablecoins,
     "bridges": _bridges,

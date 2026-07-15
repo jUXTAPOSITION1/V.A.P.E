@@ -108,7 +108,7 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ---
 
 ## E. x402 payment worker (pay-per-call hiring)
-`worker/` is a Cloudflare Worker gating 21 of VAPE's 29 offerings behind Coinbase's x402
+`worker/` is a Cloudflare Worker gating 20 of VAPE's 28 offerings behind Coinbase's x402
 HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
 ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
 Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was

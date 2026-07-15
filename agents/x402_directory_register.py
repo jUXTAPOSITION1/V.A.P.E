@@ -34,6 +34,14 @@ real vs. unverifiable in this fast-moving ecosystem):
     curated GitHub list; listing requires a PR to a third-party repo, not an
     API call. Prints a ready-to-paste README entry instead.
 
+Also registers every offering with VAPOR (jUXTAPOSITION1/VAPOR) — our own
+x402 facilitator's Bazaar-compatible discovery endpoint (`POST
+/discovery/register`, see VAPOR's docs/API.md), an explicit alternative to
+CDP's undocumented, observably-broken auto-listing (x402-foundation/x402#2112,
+still open — see the note below). Unlike the third-party directories above,
+this is our own service, so it's safe to re-run on a schedule (a real upsert,
+not a one-shot "hope it dedupes" POST).
+
 Deliberately NOT integrated (real, but need a real decision or access this
 script doesn't have — see worker/README.md's "x402 Bazaar discovery" section
 for the full writeup):
@@ -42,7 +50,7 @@ for the full writeup):
     withBazaar()). Indexing is automatic on the CDP facilitator's side (no
     registration call exists to make) the first time a real payment settles
     on an endpoint — but x402-foundation/x402#2112 (confirmed still OPEN as
-    of 2026-07-05: a service with 8 real settlements still isn't indexed) is
+    of 2026-07-14: a service with 8 real settlements still isn't indexed) is
     a live, unresolved bug in CDP's own facilitator, not something fixable
     from this repo.
   - the402.ai — real marketplace with a real self-service API, but listing
@@ -71,6 +79,7 @@ listings. Trigger manually (workflow_dispatch) when the offering list,
 prices, or worker URL change — see .github/workflows/x402-directory.yml.
 """
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -83,7 +92,25 @@ PROVIDER = "VAPE"
 # external listing matches the icon a human sees in their own browser tab.
 ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png"
 PAY_TO = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
+# Real, already-verified USDC-on-Base contract (same address used by
+# agents/x402_ledger_backfill.py — never re-typed from memory here).
+USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 UA = {"User-Agent": "VAPE-x402-directory-register/1.0", "Content-Type": "application/json"}
+
+# VAPOR (jUXTAPOSITION1/VAPOR) — VAPE's own x402 facilitator, settling half
+# of VAPE's real x402 traffic in a 50/50 hybrid split with CDP (see
+# worker/src/lib/facilitatorClient.ts), and also a Bazaar-compatible
+# discovery service in its own right (see its docs/API.md's "Discovery
+# (x402 Bazaar)" section).
+VAPOR_BASE = "https://x402.duckdns.org"
+# Optional: only needed if VAPOR's production deployment has API_KEYS
+# configured (see VAPOR's src/config/api-keys.ts) — if VAPOR is running
+# with no keys configured at all ("open mode"), registration works with no
+# header. Set as a repo secret once VAPOR's operator issues one; until
+# then, calls are attempted unauthenticated and a 401 is reported plainly
+# rather than silently skipped, since that's a real, actionable signal
+# (not merely "feature unavailable").
+VAPOR_API_KEY = os.environ.get("VAPOR_API_KEY")
 
 # Mirrors worker/src/index.ts::OFFERING_PRICES exactly — this script is a
 # discovery announcement, not a second source of pricing truth; if prices
@@ -115,7 +142,6 @@ DATA_OFFERINGS = {
     "chain_overview": ("0.01", "A chain's headline TVL + rank among all chains."),
     "chain_fees": ("0.01", "Fee-earning protocols on a chain, ranked, with logos."),
     "dex_volumes": ("0.01", "DEX trading volume on a chain by venue, with logos."),
-    "derivatives": ("0.01", "Perps/derivatives volume by venue, with logos."),
     "yields": ("0.01", "Yield pools by chain/project/symbol, TVL-ranked — trap detection."),
     "stablecoins": ("0.01", "Stablecoins by supply with live peg + computed depeg."),
     "bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
@@ -186,6 +212,62 @@ def register_402index():
     return results
 
 
+def _to_raw_usdc(price_usd):
+    """"0.01" -> "10000" (USDC has 6 decimals) — base-10 integer string, the
+    same unit x402's maxAmountRequired/PaymentRequirements always use."""
+    return str(round(float(price_usd) * 1_000_000))
+
+
+def register_vapor():
+    """Registers every offering with VAPOR's own Bazaar-compatible discovery
+    endpoint (see module docstring). Real upsert on our own service — safe
+    to re-run every time this script runs, unlike the third-party
+    directories above."""
+    headers = dict(UA)
+    if VAPOR_API_KEY:
+        headers["x-api-key"] = VAPOR_API_KEY
+
+    results = []
+    for i, (name, (price, desc), prefix) in enumerate(_all_offerings()):
+        if i > 0:
+            time.sleep(1)
+        resource_url = f"{WORKER_BASE}/{prefix}/{name}"
+        payload = {
+            "resource": resource_url,
+            "x402Version": 1,
+            "accepts": [{
+                "scheme": "exact",
+                "network": "eip155:8453",
+                "maxAmountRequired": _to_raw_usdc(price),
+                "resource": resource_url,
+                "payTo": PAY_TO,
+                "asset": USDC_BASE,
+            }],
+            "description": desc,
+            "serviceName": PROVIDER,
+            "tags": ["security", "base"] if prefix == "scan" else ["market-data", "base"],
+            "iconUrl": ICON_URL,
+        }
+        data = json.dumps(payload).encode()
+        req = urllib.request.Request(f"{VAPOR_BASE}/discovery/register", data=data, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                code, body = r.getcode(), json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            raw = e.read().decode(errors="replace")
+            try:
+                body = json.loads(raw)
+            except Exception:
+                body = {"raw": raw}
+            code = e.code
+        except Exception as e:
+            code, body = 0, {"error": str(e)}
+        ok = 200 <= code < 300
+        results.append({"offering": name, "status": code, "ok": ok})
+        print(f"[vapor] {name}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
+    return results
+
+
 def build_x402_list_manifest():
     return {
         "provider": PROVIDER,
@@ -208,7 +290,7 @@ def build_awesome_x402_entry():
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
         f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
-        f"liquidity/rug-pull/dossier/market-intel checks) + 14 market-data micro-services "
+        f"liquidity/rug-pull/dossier/market-intel checks) + 13 market-data micro-services "
         f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
         f"depeg, bridge volumes) + a $50 24h-SLA deep-dive audit (recon + Slither + frontier-model "
         f"review). Docs: https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
@@ -232,6 +314,19 @@ def main():
     print("\n[awesome-x402] PR-only (github.com/xpaysh/awesome-x402) — this repo has no write "
           "access there, so open the PR by hand with this entry:\n")
     print(build_awesome_x402_entry())
+
+    print(f"\n=== Registering with VAPOR's discovery endpoint — {VAPOR_BASE} ===\n")
+    vapor_results = register_vapor()
+    vapor_failed = [r for r in vapor_results if not r["ok"]]
+    if vapor_failed and all(r["status"] == 401 for r in vapor_failed):
+        print("\n[vapor] all registrations rejected with HTTP 401 — VAPOR's production deployment "
+              "has API_KEYS configured and this run has no VAPOR_API_KEY secret set. Ask VAPOR's "
+              "operator for a key (scoped to VAPE's own payTo is fine) and set it as this repo's "
+              "VAPOR_API_KEY secret; this is not treated as a build failure since it's a known, "
+              "actionable configuration gap rather than a code bug.", file=sys.stderr)
+    elif vapor_failed:
+        print(f"\n[vapor] {len(vapor_failed)}/{len(vapor_results)} registrations failed for a reason "
+              "other than a missing API key — see the per-offering lines above.", file=sys.stderr)
 
     failed = [r for r in idx_results if not r["ok"]]
     if failed and len(failed) == len(idx_results):

@@ -18,8 +18,14 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 1
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Register VAPE's x402 offerings with discovery directories
         run: python agents/x402_directory_register.py
+        env:
+          # Optional — only needed once VAPOR's operator issues a key
+          # (VAPOR's production deployment may be running with no
+          # API_KEYS configured at all, in which case this is unused).
+          VAPOR_API_KEY: ${{ secrets.VAPOR_API_KEY }}
