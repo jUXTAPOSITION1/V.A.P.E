@@ -130,6 +130,11 @@ jobs:
           done
           echo "--- VAPOR /stats (the other half of the 50/50 hybrid split) ---"
           curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
+          echo "--- VAPOR /supported (same call getSupported() makes) ---"
+          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/supported"
+          echo "--- VAPOR /verify with a deliberately-invalid payload (expect a clean 400, not a timeout/connection failure) ---"
+          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 -X POST "https://x402.duckdns.org/verify" \
+            -H "Content-Type: application/json" -d '{"x402Version":1,"paymentPayload":{},"paymentRequirements":{}}'
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
