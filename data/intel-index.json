@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T10:43:09Z",
+  "generated": "2026-07-15T11:10:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 361,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 68,
-    "investigations": 144,
+    "investigations": 146,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-091110-0xCFB28756.md",
-      "title": "Investigation \u2014 RISE",
-      "symbol": "RISE",
-      "name": "RISE Token",
-      "date": "2026-07-15T09:11:10Z",
-      "target": "0xCFB287565201763743A77c556dcA44A673d0a777",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-20] High sell tax 20%; [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [note] address has no contract code (EOA or not deployed). Positive evidence: 30622 holders \u2014 reasonably distributed; Deep liquidity ($5,874,069); Trading 97+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-091110-0xCFB28756.md"
+      "file": "investigation-20260715-111004-0x932dDc71.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-15T11:10:04Z",
+      "target": "0x932dDc710C39dF4838958553E8f2Da8331CBcB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-111004-0x932dDc71.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-111004-0x932dDc71.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-15T11:10:04Z",
+      "target": "0x932dDc710C39dF4838958553E8f2Da8331CBcB07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-111004-0x932dDc71.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-091110-0xCFB28756.md",
@@ -592,20 +606,6 @@
       "score": "70",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x5c4e7ba1e219e47948e6e3f55019a647ba501005) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 1372597 holders \u2014 reasonably distributed; Custom verified sour",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-061718-0x42000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260711-033326-0xb23bB8c2.md",
-      "title": "Investigation \u2014 NOX",
-      "symbol": "NOX",
-      "name": "NOXCAT",
-      "date": "2026-07-11T03:33:26Z",
-      "target": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2770 holders \u2014 reasonably distributed; Deep liquidity ($1,268,211); Trading 118+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-033326-0xb23bB8c2.md"
     }
   ],
   "reports": [
