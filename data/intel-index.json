@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T03:43:34Z",
+  "generated": "2026-07-15T04:07:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 355,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 67,
-    "investigations": 138,
+    "investigations": 140,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-005138-0x90456725.md",
-      "title": "Investigation \u2014 KITE",
-      "symbol": "KITE",
-      "name": "Kite",
-      "date": "2026-07-15T00:51:38Z",
-      "target": "0x904567252D8F48555b7447c67dCA23F0372E16be",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x725e318e181d7e1bb26c0d77ddc58ff6ba463fd8) \u2014 can still act on the contract. Positive evidence: 101076 holders \u2014 reasonably distributed; Deep liquidity ($843,163); Trading 246+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-005138-0x90456725.md"
+      "file": "investigation-20260715-040711-0xB2000000.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Coinbase Man",
+      "date": "2026-07-15T04:07:11Z",
+      "target": "0xB2000000000000000000007BF6D5cBb0E24cB301",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +22631% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudite",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-040711-0xB2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-040711-0xB2000000.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Coinbase Man",
+      "date": "2026-07-15T04:07:11Z",
+      "target": "0xB2000000000000000000007BF6D5cBb0E24cB301",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +22631% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudite",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-040711-0xB2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-005138-0x90456725.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260710-220828-0x7db93b6C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260710-182902-0xf1D3Fbe0.md",
-      "title": "Investigation \u2014 BLINK",
-      "symbol": "BLINK",
-      "name": "BLINK",
-      "date": "2026-07-10T18:29:02Z",
-      "target": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-15] High buy tax 11%; [-10] Owner not renounced (0x560f427fde21e3d81aad7beee4ea3be5f02942de) \u2014 can still act on the contract; [-8] Low holder count (91); [-10] Low liquidity $49,472; [-10] Violent 24h move +1793% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260710-182902-0xf1D3Fbe0.md"
     }
   ],
   "reports": [

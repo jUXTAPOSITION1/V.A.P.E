@@ -199,3 +199,5 @@
 | 2026-07-14 | auto | 0xed327E881bdDe8a134E6FDdcf4a64881F86A3b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-15 | auto | 0x904567252D8F48555b7447c67dCA23F0372E16be (KITE) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x725e318e181d7e1bb26c0d77ddc58ff6ba463fd8) — can still act | +7d |
+
+| 2026-07-15 | auto | 0xB2000000000000000000007BF6D5cBb0E24cB301 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
