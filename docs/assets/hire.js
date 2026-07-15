@@ -12,6 +12,19 @@ function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// Tags every x402 request this site's own wallet-connect flow makes with
+// X-VAPE-Client: site — the worker uses this to always route a real human's
+// in-browser payment through CDP (the facilitator Basescan actually
+// recognizes and labels) rather than risk the 50/50 VAPOR/CDP split landing
+// on VAPOR's still-unlabeled address for the one traffic class where a
+// person is looking at Basescan afterward expecting to see it tagged as an
+// x402 payment. Wrapping `fetch` itself (not passing headers per-call) means
+// both the initial 402 probe and @x402/fetch's own signed retry carry the
+// header, since the wrapper calls this same function for each.
+function siteTaggedFetch(input, init = {}) {
+    return fetch(input, { ...init, headers: { ...(init.headers || {}), 'X-VAPE-Client': 'site' } });
+}
+
 // VAPE's market-data tools (worker /data/<name>, worker/src/dataHandlers.ts).
 // Different route prefix, varied inputs, and a rich-data (not verdict) result.
 // Each spec's `inputs` drives the modal fields; empty = a zero-input call.
@@ -117,7 +130,7 @@ const Hire = {
                 address: account,
                 signTypedData: (args) => walletClient.signTypedData({ account, ...args }),
             };
-            const fetchWithPayment = wrapFetchWithPaymentFromConfig(fetch, {
+            const fetchWithPayment = wrapFetchWithPaymentFromConfig(siteTaggedFetch, {
                 schemes: [{ network: 'eip155:8453', client: new ExactEvmScheme(signer) }],
             });
 
@@ -285,7 +298,7 @@ const Hire = {
             const provider = Wallet.getProvider();
             const walletClient = createWalletClient({ account, transport: custom(provider) });
             const signer = { address: account, signTypedData: (args) => walletClient.signTypedData({ account, ...args }) };
-            const fetchWithPayment = wrapFetchWithPaymentFromConfig(fetch, {
+            const fetchWithPayment = wrapFetchWithPaymentFromConfig(siteTaggedFetch, {
                 schemes: [{ network: 'eip155:8453', client: new ExactEvmScheme(signer) }],
             });
 
