@@ -184,3 +184,6 @@
 {"ts": "2026-07-13T11:41:40Z", "lead": "Balancer V2 (exploit $128,000,000)", "platform": "defillama-hack", "prizeUsd": 128000000, "fitScore": 90, "engagement": {"status": "no_target_found", "checked_at": "2026-07-13T09:30:23Z"}}
 {"ts": "2026-07-15T15:10:08Z", "lead": "Lumi Finance (exploit $270,000)", "platform": "defillama-hack", "prizeUsd": 270000, "fitScore": 74, "engagement": {"status": "no_target_found", "checked_at": "2026-07-14T02:35:41Z"}}
 {"ts": "2026-07-15T15:10:08Z", "lead": "Chi Protocol (exploit $8,500)", "platform": "defillama-hack", "prizeUsd": 8500, "fitScore": 64, "engagement": {"status": "no_target_found", "checked_at": "2026-07-14T19:22:27Z"}}
+{"ts": "2026-07-15T18:41:47Z", "lead": "Ostium (exploit $18,000,000)", "platform": "defillama-hack", "prizeUsd": 18000000, "fitScore": 95, "engagement": {"status": "no_target_found", "checked_at": "2026-07-15T18:41:33Z"}}
+{"ts": "2026-07-15T18:41:47Z", "lead": "BarnBridge (exploit $776,000)", "platform": "defillama-hack", "prizeUsd": 776000, "fitScore": 79, "engagement": {"status": "no_target_found", "checked_at": "2026-07-15T18:41:35Z"}}
+{"ts": "2026-07-15T18:41:47Z", "lead": "Drips Network (exploit $24,900)", "platform": "defillama-hack", "prizeUsd": 24900, "fitScore": 64, "engagement": {"status": "no_target_found", "checked_at": "2026-07-15T18:41:37Z"}}

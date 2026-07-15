@@ -86,5 +86,17 @@
   "2026-07-13:Chi Protocol": {
     "checked_at": "2026-07-14T19:22:27Z",
     "resolved": false
+  },
+  "2026-07-15:Ostium": {
+    "checked_at": "2026-07-15T18:41:33Z",
+    "resolved": false
+  },
+  "2026-07-14:BarnBridge": {
+    "checked_at": "2026-07-15T18:41:35Z",
+    "resolved": false
+  },
+  "2026-07-14:Drips Network": {
+    "checked_at": "2026-07-15T18:41:37Z",
+    "resolved": false
   }
 }

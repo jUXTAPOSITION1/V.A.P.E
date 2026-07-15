@@ -172,5 +172,8 @@
   "defillama-hack:AIDC (exploit $121)": "not_yet_attempted",
   "defillama-hack:DGLD": "not_yet_attempted",
   "defillama-hack:Lumi Finance (exploit $270,000)": "no_target_found",
-  "defillama-hack:Chi Protocol (exploit $8,500)": "no_target_found"
+  "defillama-hack:Chi Protocol (exploit $8,500)": "no_target_found",
+  "defillama-hack:Ostium (exploit $18,000,000)": "no_target_found",
+  "defillama-hack:BarnBridge (exploit $776,000)": "no_target_found",
+  "defillama-hack:Drips Network (exploit $24,900)": "no_target_found"
 }

@@ -18905,5 +18905,62 @@
     "fitScore": 64,
     "isNew": true,
     "firstSeen": "2026-07-15T15:09:51.080124Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Ostium-1784073600",
+    "name": "Ostium (exploit $18,000,000)",
+    "prizeUsd": 18000000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Price Oracle Manipulation on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 95,
+    "isNew": true,
+    "firstSeen": "2026-07-15T18:41:31.154937Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:BarnBridge-1783987200",
+    "name": "BarnBridge (exploit $776,000)",
+    "prizeUsd": 776000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Malicious Governance Proposal on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 79,
+    "isNew": true,
+    "firstSeen": "2026-07-15T18:41:31.154937Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Drips Network-1783987200",
+    "name": "Drips Network (exploit $24,900)",
+    "prizeUsd": 24900,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Math Mistake Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-15T18:41:31.154937Z"
   }
 ]
