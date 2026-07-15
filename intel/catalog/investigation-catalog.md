@@ -209,3 +209,5 @@
 | 2026-07-15 | auto | 0x932dDc710C39dF4838958553E8f2Da8331CBcB07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-15 | auto | 0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db (AKE) | deep_investigation | PROCEED (90/100) | Violent 24h move +215% (volatility/manipulation) | +7d |
+
+| 2026-07-15 | auto | 0x9b88500C69CEa66c329Abd1C494319B197fb8453 (BRIAN) | deep_investigation | CAUTION (70/100) | Low liquidity $30,055 | +7d |
