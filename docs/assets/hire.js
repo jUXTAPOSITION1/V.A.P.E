@@ -18,21 +18,26 @@ function escapeHtml(s) {
 // recognizes and labels) rather than risk the 50/50 VAPOR/CDP split landing
 // on VAPOR's still-unlabeled address for the one traffic class where a
 // person is looking at Basescan afterward expecting to see it tagged as an
-// x402 payment. Wrapping `fetch` itself (not passing headers per-call) means
-// both the initial 402 probe and @x402/fetch's own signed retry carry the
-// header, since the wrapper calls this same function for each. Must build
-// the merged headers via the Headers API, not an object spread: @x402/fetch's
-// signed retry passes its X-PAYMENT header via a real Headers instance, and
-// spreading a Headers instance (`{...init.headers}`) enumerates no own
-// properties — it silently drops every header already set, including
-// X-PAYMENT itself, making the signed retry look unauthenticated again (a
-// second 402). `new Headers(init.headers)` copies correctly regardless of
-// whether the caller passed a plain object, an array of pairs, or a Headers
-// instance.
-function siteTaggedFetch(input, init = {}) {
-    const headers = new Headers(init.headers || undefined);
-    headers.set('X-VAPE-Client', 'site');
-    return fetch(input, { ...init, headers });
+// x402 payment.
+//
+// @x402/fetch's wrapFetchWithPayment (verified against the actual published
+// source, not assumed) ALWAYS calls the fetch it wraps with a single, fully-
+// formed Request object — never a (url, init) pair — and on the signed
+// retry, the wallet-signed X-PAYMENT header is already set directly on that
+// Request before it ever reaches here. A prior version of this function
+// built headers from `init.headers`, which is always empty in every call
+// this wrapper makes — the payment header lives on `input` itself, not a
+// second argument, so that version silently produced a request with ONLY
+// X-VAPE-Client and no X-PAYMENT, making the signed retry look unauthenticated
+// again (a second 402) — exactly the "Payment failed: Worker returned 402"
+// regression this replaces. `new Request(input, init)` clones whatever was
+// passed in — a plain URL string or an existing Request — preserving all of
+// its existing headers (X-PAYMENT included), and `.headers.set(...)` only
+// touches the one key we're adding, never removing anything else already set.
+function siteTaggedFetch(input, init) {
+    const request = new Request(input, init);
+    request.headers.set('X-VAPE-Client', 'site');
+    return fetch(request);
 }
 
 // VAPE's market-data tools (worker /data/<name>, worker/src/dataHandlers.ts).
