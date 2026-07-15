@@ -131,8 +131,8 @@ const Hire = {
         try {
             set('<i class="fa-solid fa-spinner fa-spin"></i> Loading payment protocol…');
             const [{ wrapFetchWithPaymentFromConfig }, { ExactEvmScheme }, { createWalletClient, custom }] = await Promise.all([
-                import('https://esm.sh/@x402/fetch@2.17.0'),
-                import('https://esm.sh/@x402/evm@2.17.0'),
+                import('https://esm.sh/@x402/fetch@2.18.0'),
+                import('https://esm.sh/@x402/evm@2.18.0'),
                 import('https://esm.sh/viem@2'),
             ]);
             const account = Wallet.state().account;
@@ -305,8 +305,8 @@ const Hire = {
         try {
             set('<i class="fa-solid fa-spinner fa-spin"></i> Loading payment protocol…');
             const [{ wrapFetchWithPaymentFromConfig }, { ExactEvmScheme }, { createWalletClient, custom }] = await Promise.all([
-                import('https://esm.sh/@x402/fetch@2.17.0'),
-                import('https://esm.sh/@x402/evm@2.17.0'),
+                import('https://esm.sh/@x402/fetch@2.18.0'),
+                import('https://esm.sh/@x402/evm@2.18.0'),
                 import('https://esm.sh/viem@2'),
             ]);
             const account = Wallet.state().account;
