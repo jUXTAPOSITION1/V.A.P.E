@@ -26,3 +26,7 @@ __pycache__/
 # Derived SQLite memory index (rebuildable from JSONL; not source of truth)
 data/memory.db
 data/memory.db-*
+
+# Runtime output of scripts/check_site_versions.py — only meaningful inside
+# the version-currency.yml CI run that reads it, never source of truth.
+version-review-needed.json
