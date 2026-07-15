@@ -124,7 +124,7 @@ jobs:
           # codes, which hid every route's JSON error/detail field behind a
           # bare "curl: (22) ... 502" on the very run meant to reveal it.
           addr=0xa1420293a7df49bc8380f543a1fe7b8d6f582879
-          for path in "network-status" "portfolio?address=$addr" "nfts?address=$addr" "x402/feed?limit=5"; do
+          for path in "network-status" "portfolio?address=$addr" "nfts?address=$addr" "x402/feed?limit=100" "x402/stats?days=30"; do
             echo "--- /$path ---"
             curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
