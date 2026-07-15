@@ -573,6 +573,25 @@
     "symbol": "FAFO",
     "times_investigated": 2
   },
+  "8453:0x2376a4fc1ae90a329b4b41fbb7611b9e76b9eb07": {
+    "address": "0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07",
+    "chain": "8453",
+    "creator_address": "0x1793d49e4993329d943e4dca3d03cd3ba02b054f",
+    "first_investigated": "2026-07-15T17:48:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-174827-0x2376A4fC.md",
+        "score": 30,
+        "ts": "2026-07-15T17:48:27Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-15T17:48:27Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "BRIAN",
+    "times_investigated": 1
+  },
   "8453:0x28ce689e12d8d9ff18651e8684aac88f1334fb07": {
     "address": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
     "chain": "8453",
