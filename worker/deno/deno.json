@@ -6,13 +6,13 @@
     "strict": true
   },
   "imports": {
-    "hono": "npm:hono@4.12.27",
-    "hono/cors": "npm:hono@4.12.27/cors",
-    "@x402/hono": "npm:@x402/hono@2.17.0",
-    "@x402/core/server": "npm:@x402/core@2.17.0/server",
-    "@x402/core/types": "npm:@x402/core@2.17.0/types",
-    "@x402/evm/exact/server": "npm:@x402/evm@2.17.0/exact/server",
-    "@x402/extensions/bazaar": "npm:@x402/extensions@2.17.0/bazaar",
+    "hono": "npm:hono@4.12.30",
+    "hono/cors": "npm:hono@4.12.30/cors",
+    "@x402/hono": "npm:@x402/hono@2.18.0",
+    "@x402/core/server": "npm:@x402/core@2.18.0/server",
+    "@x402/core/types": "npm:@x402/core@2.18.0/types",
+    "@x402/evm/exact/server": "npm:@x402/evm@2.18.0/exact/server",
+    "@x402/extensions/bazaar": "npm:@x402/extensions@2.18.0/bazaar",
     "jose": "npm:jose@6.2.3"
   },
   "tasks": {
