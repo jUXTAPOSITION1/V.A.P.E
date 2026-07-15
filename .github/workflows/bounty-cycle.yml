@@ -62,6 +62,9 @@ jobs:
           # data/intel-index.json for the dashboard. Stage all so the tree is clean.
           git add reports/ skillforge/memory/ intel/ data/ || true
           git commit -m "Auto-generated bounty report $(date)" || { echo "No new reports"; exit 0; }
+          # persist-credentials: false on checkout (see #157) means push has no
+          # credential unless re-injected here, scoped to just this step.
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
             git push && break || { echo "push race retry $i"; sleep $((i*3)); }
@@ -104,6 +107,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/ skillforge/memory/ || true
           git commit -m "VAPE repo review $(date)" || { echo "No new reviews"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
             git push && break || { echo "push race retry $i"; sleep $((i*3)); }

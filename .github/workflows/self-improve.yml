@@ -42,11 +42,14 @@ jobs:
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/ skillforge/memory/ || true
           git commit -m "VAPE self-improvement cycle $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main || true
             git push && break || { echo "push race retry $i"; sleep $((i*3)); }

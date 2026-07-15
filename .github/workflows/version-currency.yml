@@ -51,6 +51,9 @@ jobs:
           git checkout -b "$BRANCH"
           git add docs/
           git commit -m "site version currency $(date -u +%F): bump pinned CDN packages (same major)"
+          # persist-credentials: false on checkout means push has no credential
+          # unless re-injected here, scoped to just this step.
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git push -u origin "$BRANCH"
           if gh pr create --title "Site CDN version bump $(date -u +%F)" \
             --body "Auto-bumped by version-currency.yml: same-major-version updates to CDN-pinned packages in docs/ (Dependabot can't see these — they're plain version strings in HTML/JS, not a package manifest). Review before merge." \
