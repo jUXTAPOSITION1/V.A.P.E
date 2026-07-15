@@ -181,6 +181,25 @@
     "symbol": "DEXE",
     "times_investigated": 1
   },
+  "1:0x904567252d8f48555b7447c67dca23f0372e16be": {
+    "address": "0x904567252D8F48555b7447c67dCA23F0372E16be",
+    "chain": "1",
+    "creator_address": "0x148c65f381ae7efd1e8da7bbc96f6b7da08d8799",
+    "first_investigated": "2026-07-15T00:51:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-005138-0x90456725.md",
+        "score": 90,
+        "ts": "2026-07-15T00:51:38Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-15T00:51:38Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "KITE",
+    "times_investigated": 1
+  },
   "1:0xde4ee8057785a7e8e800db58f9784845a5c2cbd6": {
     "address": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
     "chain": "1",
