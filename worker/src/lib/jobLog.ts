@@ -19,13 +19,15 @@
  * already used for every optional API key in this codebase.
  *
  * Trade-off, stated plainly: recent-jobs/stats use KV read-modify-write, not
- * a transactional counter — at VAPE's real traffic volume (paid jobs are not
- * high-frequency) the chance of two writes racing and one update being lost
- * is low and the consequence is cosmetic (an undercount), not a payment or
- * security issue. A Durable Object would close that gap but is real added
- * infra/cost this repo's low-ops philosophy doesn't justify for a showcase
- * feed — the actual payment settlement (the part that's real money) is
- * handled entirely by the x402 facilitator, never by this log.
+ * a transactional counter — plain KV has no compare-and-swap, so two
+ * logJob() calls settling close together can still race. putWithVerifiedRetry()
+ * below closes most of that gap (read back after every write, retry against
+ * a fresh read if a concurrent write interleaved) without needing a Durable
+ * Object — real added infra/cost this repo's low-ops philosophy doesn't
+ * justify for a showcase feed. It narrows the race to "several attempts all
+ * collide," not "closes it entirely" — the actual payment settlement (the
+ * part that's real money) is handled entirely by the x402 facilitator,
+ * never by this log.
  */
 
 export interface KVLike {
@@ -115,6 +117,57 @@ async function readJson<T>(kv: KVLike, key: string, fallback: T): Promise<T> {
   }
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Plain KV has no compare-and-swap, so two logJob() calls settling within
+// the same few hundred ms (a burst of back-to-back paid requests, not an
+// edge case in practice) can both read the same snapshot and the later
+// put() silently clobbers the earlier one — previously undetected, this
+// dropped real settled jobs from the feed/totals entirely rather than just
+// under-counting a shared aggregate. Since this whole call already runs
+// off the response path (via waitUntil), there's headroom to read back
+// after writing and confirm THIS call's own update actually stuck, retrying
+// against a fresh read if a concurrent write raced ahead of it. Not a true
+// lock — two retries could still collide — but it turns a routine race
+// into a rare one without standing up a Durable Object for a showcase feed.
+const MAX_WRITE_ATTEMPTS = 8;
+// Full jitter (AWS's term for it): the whole delay is randomized up to the
+// exponential cap, not just added on top of a fixed base. A burst of
+// several settlements landing at once retry on staggered, decorrelated
+// schedules instead of a fixed cadence, so they don't all wake up and
+// collide again in lockstep — this is what actually resolves an N-way
+// pile-up within a handful of attempts rather than just spacing out a
+// pairwise collision.
+function fullJitterBackoff(attempt: number): number {
+  return Math.random() * Math.min(1000, 40 * 2 ** attempt);
+}
+
+async function putWithVerifiedRetry<T>(
+  kv: KVLike,
+  key: string,
+  fallback: T,
+  mutate: (current: T) => T
+): Promise<void> {
+  for (let attempt = 0; attempt < MAX_WRITE_ATTEMPTS; attempt++) {
+    const current = await readJson<T>(kv, key, fallback);
+    const serializedNext = JSON.stringify(mutate(current));
+    await kv.put(key, serializedNext);
+    // Re-read and compare verbatim: an exact match proves nothing landed in
+    // between our read and our write. Any difference means a concurrent
+    // writer's put() interleaved with ours — re-derive from its result
+    // instead of blindly overwriting it again.
+    const writtenBack = await readJson<T>(kv, key, fallback);
+    if (JSON.stringify(writtenBack) === serializedNext) return;
+    await sleep(fullJitterBackoff(attempt));
+  }
+  // Every attempt got clobbered by a concurrent write — extremely unlikely
+  // at VAPE's real traffic volume. Give up silently rather than loop
+  // forever; logJob()'s outer try/catch already treats logging failures as
+  // non-fatal, cosmetic misses, never something a paying caller should see.
+}
+
 /**
  * Fire-and-forget: called via c.executionCtx.waitUntil() from the route
  * handler, so a KV hiccup never delays or fails the actual paid response.
@@ -122,46 +175,68 @@ async function readJson<T>(kv: KVLike, key: string, fallback: T): Promise<T> {
 export async function logJob(kv: KVLike | undefined, record: JobRecord): Promise<void> {
   if (!kv) return;
   try {
-    const recent = await readJson<JobRecord[]>(kv, RECENT_KEY, []);
-    recent.unshift(record);
-    await kv.put(RECENT_KEY, JSON.stringify(recent.slice(0, RECENT_CAP)));
+    await putWithVerifiedRetry<JobRecord[]>(
+      kv,
+      RECENT_KEY,
+      [],
+      (recent) => [record, ...recent].slice(0, RECENT_CAP)
+    );
 
-    const totals = await readJson<Totals>(kv, TOTALS_KEY, {
+    const emptyTotals: Totals = {
       jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {}, by_facilitator: {},
-    });
-    // Migration guard: real, already-stored KV data predates by_facilitator,
-    // so readJson above returns that older shape verbatim (the fallback
-    // literal only applies when the key is entirely absent) — never assume
-    // the field exists just because the read succeeded.
-    totals.by_facilitator = totals.by_facilitator ?? {};
-    totals.jobs += 1;
-    if (record.status === "error") totals.errors += 1;
-    else totals.revenue_usd += record.amount_usd;
-    totals.first_job_ts = totals.first_job_ts ?? record.ts;
-    totals.last_job_ts = record.ts;
-    const off = totals.by_offering[record.offering] ?? { count: 0, revenue_usd: 0 };
-    off.count += 1;
-    if (record.status === "settled") off.revenue_usd += record.amount_usd;
-    totals.by_offering[record.offering] = off;
-    if (record.facilitator) {
-      const fac = totals.by_facilitator[record.facilitator] ?? { count: 0, revenue_usd: 0 };
-      fac.count += 1;
-      if (record.status === "settled") fac.revenue_usd += record.amount_usd;
-      totals.by_facilitator[record.facilitator] = fac;
-    }
-    await kv.put(TOTALS_KEY, JSON.stringify(totals));
+    };
+    await putWithVerifiedRetry<Totals>(
+      kv,
+      TOTALS_KEY,
+      emptyTotals,
+      (totals) => {
+        // Migration guard: real, already-stored KV data predates
+        // by_facilitator, so a read of an existing key returns that older
+        // shape verbatim (the fallback literal only applies when the key is
+        // entirely absent) — never assume the field exists just because the
+        // read succeeded.
+        const next: Totals = {
+          ...totals,
+          by_offering: { ...totals.by_offering },
+          by_facilitator: { ...(totals.by_facilitator ?? {}) },
+        };
+        next.jobs += 1;
+        if (record.status === "error") next.errors += 1;
+        else next.revenue_usd += record.amount_usd;
+        next.first_job_ts = next.first_job_ts ?? record.ts;
+        next.last_job_ts = record.ts;
+        const off = next.by_offering[record.offering] ?? { count: 0, revenue_usd: 0 };
+        const nextOff = { ...off, count: off.count + 1 };
+        if (record.status === "settled") nextOff.revenue_usd += record.amount_usd;
+        next.by_offering[record.offering] = nextOff;
+        if (record.facilitator) {
+          const fac = next.by_facilitator[record.facilitator] ?? { count: 0, revenue_usd: 0 };
+          const nextFac = { ...fac, count: fac.count + 1 };
+          if (record.status === "settled") nextFac.revenue_usd += record.amount_usd;
+          next.by_facilitator[record.facilitator] = nextFac;
+        }
+        return next;
+      }
+    );
 
     const today = dateKey(record.ts);
-    const dailyHistory = await readJson<DailyEntry[]>(kv, DAILY_HISTORY_KEY, []);
-    let entry = dailyHistory.find((d) => d.date === today);
-    if (!entry) {
-      entry = { date: today, jobs: 0, revenue_usd: 0 };
-      dailyHistory.push(entry);
-    }
-    entry.jobs += 1;
-    if (record.status === "settled") entry.revenue_usd += record.amount_usd;
-    dailyHistory.sort((a, b) => a.date.localeCompare(b.date));
-    await kv.put(DAILY_HISTORY_KEY, JSON.stringify(dailyHistory.slice(-DAILY_HISTORY_CAP)));
+    await putWithVerifiedRetry<DailyEntry[]>(
+      kv,
+      DAILY_HISTORY_KEY,
+      [],
+      (dailyHistory) => {
+        const next = dailyHistory.map((d) => ({ ...d }));
+        let entry = next.find((d) => d.date === today);
+        if (!entry) {
+          entry = { date: today, jobs: 0, revenue_usd: 0 };
+          next.push(entry);
+        }
+        entry.jobs += 1;
+        if (record.status === "settled") entry.revenue_usd += record.amount_usd;
+        next.sort((a, b) => a.date.localeCompare(b.date));
+        return next.slice(-DAILY_HISTORY_CAP);
+      }
+    );
   } catch {
     // Never let logging failure surface to a paying caller.
   }
