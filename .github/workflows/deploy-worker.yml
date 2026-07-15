@@ -128,6 +128,8 @@ jobs:
             echo "--- /$path ---"
             curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
+          echo "--- VAPOR /stats (the other half of the 50/50 hybrid split) ---"
+          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
