@@ -371,6 +371,25 @@
     "symbol": "NOX",
     "times_investigated": 1
   },
+  "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
+    "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
+    "chain": "56",
+    "creator_address": "0x6468cce97a300ff9d02d4cad0d3e097cace2eac2",
+    "first_investigated": "2026-07-15T12:52:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-125250-0x2c3a8Ee9.md",
+        "score": 90,
+        "ts": "2026-07-15T12:52:50Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-15T12:52:50Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "AKE",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",

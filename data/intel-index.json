@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T11:10:04Z",
+  "generated": "2026-07-15T12:52:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 361,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 68,
-    "investigations": 146,
+    "investigations": 148,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-111004-0x932dDc71.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-15T11:10:04Z",
-      "target": "0x932dDc710C39dF4838958553E8f2Da8331CBcB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-111004-0x932dDc71.md"
+      "file": "investigation-20260715-125250-0x2c3a8Ee9.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "AKE",
+      "date": "2026-07-15T12:52:50Z",
+      "target": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +215% (volatility/manipulation). Positive evidence: Ownership renounced; 36273 holders \u2014 reasonably distributed; Deep liquidity ($1,040,840); Trading 329+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-125250-0x2c3a8Ee9.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-125250-0x2c3a8Ee9.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "AKE",
+      "date": "2026-07-15T12:52:50Z",
+      "target": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +215% (volatility/manipulation). Positive evidence: Ownership renounced; 36273 holders \u2014 reasonably distributed; Deep liquidity ($1,040,840); Trading 329+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-125250-0x2c3a8Ee9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-111004-0x932dDc71.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-101946-0x7991eeD0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260711-061718-0x42000000.md",
-      "title": "Investigation \u2014 OP",
-      "symbol": "OP",
-      "name": "Optimism",
-      "date": "2026-07-11T06:17:18Z",
-      "target": "0x4200000000000000000000000000000000000042",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x5c4e7ba1e219e47948e6e3f55019a647ba501005) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 1372597 holders \u2014 reasonably distributed; Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-061718-0x42000000.md"
     }
   ],
   "reports": [
