@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -80,7 +80,7 @@ jobs:
           # peer-dependency resolution can conflict with whatever
           # @cloudflare/workers-types version package.json has, failing the
           # whole deploy with an ERESOLVE error before wrangler ever runs.
-          wranglerVersion: '4.110.0'
+          wranglerVersion: '4.111.0'
 
       - name: Skip deploy (no Cloudflare secrets yet)
         if: ${{ env.HAS_CF_TOKEN == 'false' }}
@@ -110,7 +110,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: worker
           command: secret list
-          wranglerVersion: '4.110.0'
+          wranglerVersion: '4.111.0'
 
       # Spot-checks the free (no x402 gate) Alchemy/CoinGecko-backed routes
       # against a real, known address (VAPE's own ACP wallet) so an
