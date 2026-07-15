@@ -50,6 +50,9 @@ jobs:
           git checkout -b "$BRANCH"
           git add skillforge/skills/ skillforge/memory/INDEX.md
           git commit -m "skillforge synthesize $(date -u +%F): distilled skills from real findings"
+          # persist-credentials: false on checkout (see #157) means push has no
+          # credential unless re-injected here, scoped to just this step.
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           git push -u origin "$BRANCH"
           if gh pr create --title "SKILLFORGE skills update $(date -u +%F)" \
             --body "Auto-distilled from real findings/lessons by skillforge-synthesize. Review before merge." \

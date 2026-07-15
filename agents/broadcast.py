@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-VAPE Community Intel Broadcast — lightweight, zero-LLM, real-data-only revival.
+VAPE Community Intel Broadcast — real-data sections + a Grok 4.1 Fast
+analyst briefing.
 
 intel/broadcasts/ went dormant on 2026-07-01: nothing in this repo's CI ever
 generated these files — every historical broadcast came from an external
@@ -8,12 +9,15 @@ process outside this codebase. Same "declared but never wired" gap as the
 Tavily/Firecrawl/BrightData research router before it got wired into
 agents/investigate.py and agents/run.py.
 
-This is a from-scratch, deterministic replacement built entirely from data
-VAPE's own pipeline already fetches — agents/data_fetchers.build_market_context()
-(TVL, fees, hacks, Fear&Greed, global market, Virtuals, movers, anomaly flags)
-plus the investigation ledger (agents/investigate.py). No new API calls beyond
-what build_market_context() already makes, no LLM cost, so it can run every
-few hours indefinitely for free.
+Every numeric section is built entirely from data VAPE's own pipeline
+already fetches — agents/data_fetchers.build_market_context() (TVL, fees,
+hacks, Fear&Greed, global market, Virtuals, movers, anomaly flags) plus the
+investigation ledger (agents/investigate.py). On top of that, one bounded
+web search plus a frontier-tier (Grok 4.1 Fast first, see
+agents/intel_common.py::grok_analysis()) narrative section synthesizes what
+this cycle's data + research actually implies — the numbers stay
+deterministic, only the "Analyst Briefing" section is model-generated, and
+it's explicitly barred from inventing facts beyond what it was given.
 
 Output: intel/broadcasts/broadcast-<UTC-YYYY-MM-DD-HH>.md — same naming
 convention the old broadcasts used, so agents/build_intel_index.py's
@@ -46,6 +50,8 @@ try:
     from skillforge.memory.retriever import append_to_memory
 except Exception:
     append_to_memory = None
+
+from agents import intel_common as ic
 
 
 def now_iso():
@@ -199,11 +205,49 @@ def build_broadcast(window_hours=6):
                   f"({_pct(virtuals.get('virtual_change_24h_pct'))} 24h)")
     L.append("")
 
+    # ── Analyst Briefing (Grok 4.1 Fast, frontier tier) ─────────────────────
+    # Everything above is deterministic, real-data markdown — this is the one
+    # section where VAPE's frontier LLM gets real room to connect the dots
+    # across this cycle's data rather than just restating it. One bounded web
+    # search gives it outside context the internal fetchers can't see (this
+    # broadcast previously did zero web research at all).
+    search = ic.web_search_snippets("Base blockchain AI agent ecosystem news this week", max_results=6)
+    search_lines = "\n".join(f"- {r['title']}: {r['snippet']}" for r in search.get("results", [])) or "none available"
+    grounding = (
+        f"Recent VAPE casework (last {window_hours}h): {len(recent)} investigation(s). "
+        f"Ledger totals: {counts['REJECT']} REJECT / {counts['CAUTION']} CAUTION / {counts['PROCEED']} PROCEED.\n"
+        f"Rule-based anomaly flags this cycle: {flags if not clean else 'none'}\n"
+        f"Recent DeFiLlama hack feed: {[(h.get('date'), h.get('name'), h.get('amount_usd_m')) for h in hacks[:5]] or 'none'}\n"
+        f"Fear & Greed: {fng.get('value')} ({fng.get('classification')}), prev {fng.get('prev_value')}\n"
+        f"Global crypto mcap: {_usd(glob_m.get('total_mcap_usd'))} ({_pct(glob_m.get('mcap_change_24h_pct'))} 24h)\n"
+        f"Base TVL: {_usd(tvl.get('tvl_usd'))} ({_pct(tvl.get('tvl_24h_change_pct'))} 24h), "
+        f"top protocols: {[(p.get('name'), _usd(p.get('tvl_usd'))) for p in top_protocols[:3]]}\n"
+        f"Base gas: {activity.get('gas_price_gwei')} gwei, 24h fees {_usd(fees.get('total_fees_24h_usd'))}\n"
+        f"VIRTUAL: {virtuals.get('virtual_price_usd')} ({_pct(virtuals.get('virtual_change_24h_pct'))} 24h)\n\n"
+        f"Web research this cycle ({search.get('provider') or 'unavailable'}):\n{search_lines}"
+    )
+    briefing = ic.grok_analysis(
+        "on-chain intelligence analyst",
+        grounding,
+        instructions=(
+            "Write the 'Analyst Briefing' section of a community intelligence broadcast. "
+            "Synthesize what this cycle's real data + web research actually implies for Base, "
+            "Virtuals/AI-agent activity, and VAPE's own casework — don't just restate the numbers "
+            "above, interpret them. If nothing notable stands out, say that plainly rather than "
+            "manufacturing a narrative."
+        ),
+    )
+    L.append("## Analyst Briefing")
+    L.append("")
+    L.append(briefing)
+    L.append("")
+
     L.append("---")
     L.append("")
     L.append("*V.A.P.E. — Virtual Ape Private Eye — @based_vape*  ")
-    L.append("*The chain never lies. Real data only — every figure above traces to a live, "
-              "keyless API call made at generation time.*")
+    L.append("*Real data only — every figure above traces to a live, keyless API call made at "
+              "generation time. The Analyst Briefing section is Grok 4.1 Fast's synthesis of that "
+              "data plus this cycle's web research, clearly separated from the deterministic figures.*")
 
     return "\n".join(L) + "\n", stamp
 

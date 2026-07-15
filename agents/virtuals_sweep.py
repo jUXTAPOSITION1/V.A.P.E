@@ -61,12 +61,16 @@ def run():
     offerings = rep.get("capabilities", {}).get("offerings", [])
     live_offerings = [o for o in offerings if o.get("auto") or o.get("x402")]
 
-    search = ic.web_search_snippets("Virtuals Protocol ACP agent commerce news update", max_results=5)
+    search = ic.web_search_snippets("Virtuals Protocol ACP agent commerce news update", max_results=8)
 
     system = (
         "You are VAPE, an autonomous agent reporting on the Virtuals Protocol ecosystem it "
         "operates in. Write using ONLY the real numbers and search results provided — never "
-        "invent ecosystem stats, agent counts, or news beyond what's given."
+        "invent ecosystem stats, agent counts, or news beyond what's given. You have real "
+        "analytical freedom here — go as deep as the real data supports, connect VAPE's own "
+        "activity numbers to the broader ecosystem picture, and bring your own general "
+        "knowledge of the Virtuals/ACP landscape to bear where useful, clearly marked as "
+        "background rather than something this cycle's data itself showed."
     )
     user = (
         f"PROTOCOL HEALTH (already computed, do not change it): {score}/10\n"
@@ -80,10 +84,11 @@ def run():
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write two sections in markdown, each starting with '### ':\n"
         "1. Ecosystem & ACP Activity — what the price/TVL numbers and search results say "
-        "about protocol health right now.\n"
-        "2. Action Items for VAPE — 3-5 bullets grounded in VAPE's own real activity numbers above."
+        "about protocol health right now, at whatever depth they support.\n"
+        "2. Action Items for VAPE — bullets grounded in VAPE's own real activity numbers above, "
+        "as many as are genuinely warranted (not a fixed count)."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+    narrative, provider = llm.ask_safe(system, user, tier="frontier", max_tokens=2200,
                                        provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")

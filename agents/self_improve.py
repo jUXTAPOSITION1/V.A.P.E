@@ -262,6 +262,13 @@ def open_proposal_pr(target, code, metadata, warnings):
         if commit.returncode != 0:
             print(f"[SelfImprove] Nothing to commit: {commit.stdout}{commit.stderr}")
             return None
+        # The calling workflow's checkout uses persist-credentials: false (a
+        # deliberate hardening — see #157), which means no git credential is
+        # ambient by the time this runs. Re-inject the token on the remote
+        # URL, scoped to just this push, the same pattern the CI workflows'
+        # own commit steps use.
+        token = os.getenv("GITHUB_TOKEN")
+        _run(["git", "remote", "set-url", "origin", f"https://x-access-token:{token}@github.com/{REPO_SLUG}.git"])
         push = _run(["git", "push", "-u", "origin", branch])
         if push.returncode != 0:
             print(f"[SelfImprove] Push failed: {push.stderr}")

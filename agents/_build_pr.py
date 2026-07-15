@@ -120,6 +120,13 @@ def open_build_pr(branch, out_dir_rel, pr_title, pr_body, readme, files):
         if commit.returncode != 0:
             print(f"[BuildPR] Nothing to commit: {commit.stdout}{commit.stderr}")
             return None
+        # The calling workflow's checkout uses persist-credentials: false (a
+        # deliberate hardening — see #157), which means no git credential is
+        # ambient by the time this runs. Re-inject the token on the remote
+        # URL, scoped to just this push, the same pattern the CI workflows'
+        # own commit steps use.
+        token = os.getenv("GITHUB_TOKEN")
+        _run(["git", "remote", "set-url", "origin", f"https://x-access-token:{token}@github.com/{REPO_SLUG}.git"])
         push = _run(["git", "push", "-u", "origin", branch])
         if push.returncode != 0:
             print(f"[BuildPR] Push failed: {push.stderr}")

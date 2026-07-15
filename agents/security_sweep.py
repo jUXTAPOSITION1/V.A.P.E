@@ -549,7 +549,7 @@ def run():
     incidents = feed.get("incidents", []) if isinstance(feed, dict) else []
     threat, recent, big_recent = compute_threat_level(incidents)
 
-    search = ic.web_search_snippets("ERC-8183 ACP agent commerce protocol exploit vulnerability 2026", max_results=5)
+    search = ic.web_search_snippets("ERC-8183 ACP agent commerce protocol exploit vulnerability 2026", max_results=8)
 
     # Report table stays short for readability even though `incidents` now
     # holds up to ATTACK_FEED_FETCH_LIMIT entries (the ticker/Threat Ledger
@@ -565,7 +565,11 @@ def run():
         "amounts, dates, or incidents beyond what's given. If the data is thin, say so plainly "
         "rather than padding with generic security advice. Focus specifically on how these real "
         "incidents relate to VAPE's own operational surface: Base chain, ERC-8183/ACP job "
-        "escrow contracts, and AI-agent-operated wallets."
+        "escrow contracts, and AI-agent-operated wallets. You have real analytical freedom here — "
+        "write at whatever depth the real data actually supports, connect incidents to each other "
+        "and to broader technique patterns you're aware of (clearly marked as general context, not "
+        "something this cycle's feed itself showed), and don't compress genuine analysis into a "
+        "forced word count."
     )
     user = (
         f"THREAT LEVEL (already computed from real data, do not change it): {threat}\n"
@@ -575,12 +579,15 @@ def run():
         f"Web search results on ERC-8183/ACP-specific security news:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write three sections in markdown, each starting with '### ':\n"
-        "1. Summary — 3-5 sentences on the current threat landscape from the real incidents above.\n"
+        "1. Summary — the current threat landscape from the real incidents above, as much depth as "
+        "they actually support.\n"
         "2. VAPE Impact Assessment — how these specific incidents/techniques relate to ERC-8183 "
-        "escrow, ACP agent wallets, and Base-deployed contracts. Say plainly if there's no direct relevance.\n"
-        "3. Recommendations — 3-5 concrete, specific action items, grounded in the real incidents above."
+        "escrow, ACP agent wallets, and Base-deployed contracts. Say plainly if there's no direct "
+        "relevance rather than manufacturing one.\n"
+        "3. Recommendations — concrete, specific action items grounded in the real incidents above, "
+        "as many as are genuinely warranted (not a fixed count)."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400,
+    narrative, provider = llm.ask_safe(system, user, tier="frontier", max_tokens=2600,
                                        provider_order=llm.FRONTIER_ORDER)
 
     # Investigate and learn BEFORE the report body is assembled, so the

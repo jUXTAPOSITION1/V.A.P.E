@@ -40,8 +40,8 @@ def run():
     stables = get_stablecoin_flows()
     trend = compute_trend(fng, glob)
 
-    search = ic.web_search_snippets("Federal Reserve interest rate crypto regulation news this week", max_results=5)
-    ai_search = ic.web_search_snippets("AI agent crypto sector Base x402 micropayments news", max_results=5)
+    search = ic.web_search_snippets("Federal Reserve interest rate crypto regulation news this week", max_results=8)
+    ai_search = ic.web_search_snippets("AI agent crypto sector Base x402 micropayments news", max_results=8)
 
     top_stables = stables.get("top_stablecoins") or []
     stable_rows = "\n".join(
@@ -52,7 +52,11 @@ def run():
     system = (
         "You are VAPE, an autonomous macro analyst covering crypto markets. Write using "
         "ONLY the real numbers and search results provided — never invent Fed rate figures, "
-        "regulatory dates, or news beyond what's given. If search results are thin, say so."
+        "regulatory dates, or news beyond what's given. If search results are thin, say so. "
+        "You have real analytical freedom here — go as deep as the real data supports, connect "
+        "the macro/regulatory picture to the AI-agent/crypto sector signal, and bring your own "
+        "general market/macro knowledge to bear where useful, clearly marked as background "
+        "rather than something this cycle's search itself surfaced."
     )
     user = (
         f"MACRO TREND (already computed, do not change it): {trend}\n"
@@ -64,11 +68,12 @@ def run():
         f"AI-agent/crypto sector web search results:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in ai_search.get('results', [])] or 'none available'}\n\n"
         "Write three sections in markdown, each starting with '### ':\n"
-        "1. Key Drivers — Fed/regulatory context from the search results, cited specifically.\n"
+        "1. Key Drivers — Fed/regulatory context from the search results, cited specifically, at "
+        "whatever depth they support.\n"
         "2. Micro Opportunities — AI-agent x crypto sector signal from the search results.\n"
-        "3. Summary Verdict — 2-3 sentences tying the real numbers and search context together."
+        "3. Summary Verdict — tying the real numbers and search context together."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1400,
+    narrative, provider = llm.ask_safe(system, user, tier="frontier", max_tokens=2600,
                                        provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")

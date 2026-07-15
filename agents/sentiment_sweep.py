@@ -50,15 +50,20 @@ def run():
     fng_value = fng.get("value") if isinstance(fng, dict) else None
     score, label = score_label(fng_value)
 
-    virtuals_search = ic.web_search_snippets("Virtuals Protocol AI agent Base ecosystem news this week", max_results=5)
-    base_search = ic.web_search_snippets("Base blockchain Coinbase crypto sentiment narrative this week", max_results=5)
+    virtuals_search = ic.web_search_snippets("Virtuals Protocol AI agent Base ecosystem news this week", max_results=8)
+    base_search = ic.web_search_snippets("Base blockchain Coinbase crypto sentiment narrative this week", max_results=8)
 
     system = (
         "You are VAPE, an autonomous crypto-market analyst. Write a qualitative narrative "
         "read of Virtuals Protocol / Base sentiment using ONLY the real search results "
         "provided below — do not claim access to live X/Twitter data you don't have, and "
         "do not invent engagement numbers, follower counts, or specific posts not present "
-        "in the snippets. If the search results are thin, say so plainly."
+        "in the snippets. If the search results are thin, say so plainly. You have real "
+        "analytical freedom here — go as deep as the search results actually support, draw "
+        "out tensions or agreements between what the numeric Fear & Greed reading implies and "
+        "what the qualitative narrative shows, and bring your own general market context to "
+        "bear where useful, clearly marked as background rather than something the search "
+        "itself surfaced."
     )
     user = (
         f"Real Fear & Greed index: {fng_value if fng_value is not None else 'unavailable'} "
@@ -69,12 +74,12 @@ def run():
         f"Base / crypto sentiment web search results:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in base_search.get('results', [])] or 'none available'}\n\n"
         "Write two sections in markdown, each starting with '### ':\n"
-        "1. Top Narratives — the 3-5 most notable themes from the search results above, "
-        "citing which result each comes from.\n"
+        "1. Top Narratives — the most notable themes from the search results above, as many as are "
+        "genuinely present (not a fixed count), citing which result each comes from.\n"
         "2. Narrative Shifts — how this compares to what you'd expect from the real Fear & Greed "
         "reading, and any tension between the numeric mood and the qualitative narrative."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+    narrative, provider = llm.ask_safe(system, user, tier="frontier", max_tokens=2200,
                                        provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")

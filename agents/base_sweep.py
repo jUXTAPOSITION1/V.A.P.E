@@ -59,7 +59,7 @@ def run():
     else:
         score = compute_health_score(tvl, activity)
 
-    search = ic.web_search_snippets("Base blockchain Coinbase L2 news update this week", max_results=5)
+    search = ic.web_search_snippets("Base blockchain Coinbase L2 news update this week", max_results=8)
 
     protos = tvl.get("top_protocols") or []
     proto_rows = "\n".join(
@@ -71,7 +71,11 @@ def run():
         "You are VAPE, an autonomous on-chain analyst covering the Base L2 ecosystem. "
         "Write using ONLY the real numbers and search results provided — never invent "
         "TVL figures, protocol names, or upgrade dates beyond what's given. If the web "
-        "search found nothing new, say so rather than padding with generic L2 commentary."
+        "search found nothing new, say so rather than padding with generic L2 commentary. "
+        "You have real analytical freedom here — go as deep as the real data supports, "
+        "connect protocol-level moves to the broader TVL/gas picture, and bring in your own "
+        "general knowledge of the L2/Base landscape to contextualize what the search results "
+        "surfaced, clearly marked as background rather than this cycle's own data."
     )
     user = (
         f"BASE HEALTH SCORE (already computed, do not change it): {score if score is not None else 'unavailable'}/10\n"
@@ -84,10 +88,12 @@ def run():
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write two sections in markdown, each starting with '### ':\n"
         "1. Ecosystem Highlights — what the TVL/gas numbers and search results together say "
-        "about Base's current state. Cite specific protocols/news items from the data above.\n"
-        "2. Summary & Watch Items — 3-5 bullet action items for VAPE, grounded in the real data."
+        "about Base's current state, at whatever depth they support. Cite specific protocols/news "
+        "items from the data above.\n"
+        "2. Summary & Watch Items — action items for VAPE, grounded in the real data (as many as "
+        "are genuinely warranted, not a fixed count)."
     )
-    narrative, provider = llm.ask_safe(system, user, tier="deep", max_tokens=1200,
+    narrative, provider = llm.ask_safe(system, user, tier="frontier", max_tokens=2200,
                                        provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
