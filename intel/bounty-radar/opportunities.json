@@ -18867,5 +18867,43 @@
     "fitScore": 85,
     "isNew": true,
     "firstSeen": "2026-07-11T17:34:51.574232Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Lumi Finance-1783900800",
+    "name": "Lumi Finance (exploit $270,000)",
+    "prizeUsd": 270000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Silent Auto-Approval Hack on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-15T15:09:51.080124Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Chi Protocol-1783900800",
+    "name": "Chi Protocol (exploit $8,500)",
+    "prizeUsd": 8500,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Flashloan Accounting Logic Exploit on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 64,
+    "isNew": true,
+    "firstSeen": "2026-07-15T15:09:51.080124Z"
   }
 ]
