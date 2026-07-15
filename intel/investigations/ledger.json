@@ -67,6 +67,25 @@
     "symbol": "CLAUDE",
     "times_investigated": 1
   },
+  "10:0x1f32b1c2345538c0c6f582fcb022739c4a194ebb": {
+    "address": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
+    "chain": "10",
+    "creator_address": "0x2c01f405e3c525c0cb867789aaf077f3553ccbb7",
+    "first_investigated": "2026-07-15T06:36:49Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-063649-0x1F32b1c2.md",
+        "score": 74,
+        "ts": "2026-07-15T06:36:49Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-15T06:36:49Z",
+    "last_score": 74,
+    "last_verdict": "CAUTION",
+    "symbol": "wstETH",
+    "times_investigated": 1
+  },
   "10:0x3c8b650257cfb5f272f799f5e2b4e65093a11a05": {
     "address": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
     "chain": "10",

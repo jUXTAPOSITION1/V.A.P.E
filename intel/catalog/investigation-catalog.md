@@ -201,3 +201,5 @@
 | 2026-07-15 | auto | 0x904567252D8F48555b7447c67dCA23F0372E16be (KITE) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x725e318e181d7e1bb26c0d77ddc58ff6ba463fd8) — can still act | +7d |
 
 | 2026-07-15 | auto | 0xB2000000000000000000007BF6D5cBb0E24cB301 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-15 | auto | 0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb (wstETH) | deep_investigation | CAUTION (74/100) | Upgradeable proxy (verify implementation) | +7d |

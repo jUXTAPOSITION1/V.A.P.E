@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T05:23:36Z",
+  "generated": "2026-07-15T06:36:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 357,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 67,
-    "investigations": 140,
+    "investigations": 142,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-040711-0xB2000000.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Coinbase Man",
-      "date": "2026-07-15T04:07:11Z",
-      "target": "0xB2000000000000000000007BF6D5cBb0E24cB301",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +22631% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudite",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-040711-0xB2000000.md"
+      "file": "investigation-20260715-063649-0x1F32b1c2.md",
+      "title": "Investigation \u2014 wstETH",
+      "symbol": "wstETH",
+      "name": "Wrapped liquid staked Ether 2.0",
+      "date": "2026-07-15T06:36:49Z",
+      "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
+      "chain": "10 (Optimism)",
+      "verdict": "CAUTION",
+      "score": "74",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 28697 holders \u2014 reasonably distributed; Custom verifi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-063649-0x1F32b1c2.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-063649-0x1F32b1c2.md",
+      "title": "Investigation \u2014 wstETH",
+      "symbol": "wstETH",
+      "name": "Wrapped liquid staked Ether 2.0",
+      "date": "2026-07-15T06:36:49Z",
+      "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
+      "chain": "10 (Optimism)",
+      "verdict": "CAUTION",
+      "score": "74",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 28697 holders \u2014 reasonably distributed; Custom verifi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-063649-0x1F32b1c2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-040711-0xB2000000.md",
@@ -592,20 +606,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) \u2014 can still act on the contract. Positive evidence: 3705 holders \u2014 reasonably distributed; Deep liquidity ($856,500); Trading 721+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-000246-0xde4EE805.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260710-220828-0x7db93b6C.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-10T22:08:28Z",
-      "target": "0x7db93b6C49f8D0b4eEBfE2532A8A734dE49dcB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260710-220828-0x7db93b6C.md"
     }
   ],
   "reports": [
