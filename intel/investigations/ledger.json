@@ -409,6 +409,25 @@
     "symbol": "EVAA",
     "times_investigated": 1
   },
+  "8453:0x0027da8d030dc3092e7ddb6488c52e1ee65580bc": {
+    "address": "0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc",
+    "chain": "8453",
+    "creator_address": "0x9298f4e5555f8357a55048dd11873e7722bd2b59",
+    "first_investigated": "2026-07-15T23:30:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-233020-0x0027dA8d.md",
+        "score": 35,
+        "ts": "2026-07-15T23:30:20Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-15T23:30:20Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "DOJI",
+    "times_investigated": 1
+  },
   "8453:0x006b340bee30f8425cf65f064712f57b2bc0bb07": {
     "address": "0x006b340bEE30F8425cf65f064712F57B2BC0bB07",
     "chain": "8453",
