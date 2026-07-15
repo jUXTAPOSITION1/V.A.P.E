@@ -1,9 +1,50 @@
 {
-  "generated_at": "2026-07-15T13:46:03Z",
-  "source_report": "intel/reports/security-2026-07-15-13.md",
+  "generated_at": "2026-07-15T19:13:18Z",
+  "source_report": "intel/reports/security-2026-07-15-19.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-15",
+      "name": "Ostium",
+      "amount_usd_m": 18.0,
+      "chains": [
+        "Arbitrum"
+      ],
+      "technique": "Price Oracle Manipulation",
+      "lesson": {
+        "pattern": "oracle_flashloan",
+        "label": "Flashloan-driven price or oracle manipulation",
+        "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "name": "BarnBridge",
+      "amount_usd_m": 0.776,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Malicious Governance Proposal",
+      "lesson": {
+        "pattern": "governance",
+        "label": "Malicious governance proposal or vote manipulation",
+        "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
+        "covered_by": null,
+        "out_of_scope": false
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "name": "Drips Network",
+      "amount_usd_m": 0.025,
+      "chains": [
+        "Ethereum"
+      ],
+      "technique": "Math Mistake Exploit"
+    },
     {
       "date": "2026-07-13",
       "name": "Lumi Finance",
