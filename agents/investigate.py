@@ -1098,7 +1098,7 @@ def _defillama_intel(address, chain):
 
 def _data_agent_intel(address, chain):
     """Best-effort recruitment of DATA AGENT (agents/data_agent.py) to hire
-    2-4 of VAPE's own $0.01 x402 market-data offerings against this token,
+    one of VAPE's own $0.01 x402 market-data offerings against this token,
     paid for with its own real, funded wallet — the same rail an external
     buyer uses, just recruited internally. Never raises and never blocks the
     investigation on a payment/network failure or a missing key."""

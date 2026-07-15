@@ -89,9 +89,9 @@ USDC, real settlement transactions.
                                 │
      DATA AGENT (agents/data_agent.py) closes the loop from the OTHER side:
      every real investigate.py run recruits VAPE's own funded wallet to hire
-     2-4 of the x402 offerings above against the token under review — real
+     1 of the x402 offerings above against the token under review — real
      USDC leaves DATA AGENT's wallet through the exact same rail an external
-     human buyer would use, capped at 15 hires/day.
+     human buyer would use, capped at 48 hires/day (2/hour).
 ```
 
 The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
@@ -190,10 +190,12 @@ the hourly cycle.
   `investigate.py`'s scoring, the worker's `/defillama/*` x402 endpoints, and the site's DefiLlama
   panel.
 - **`data_agent.py`** [OK] — DATA AGENT, VAPE's own paying customer: recruited mid-investigation
-  to hire 2-4 of VAPE's own $0.01 x402 market-data offerings against the token under review,
-  using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`) and the real x402 payment rail —
-  capped at 15 hires/day and gated to at most once every 2h regardless of how often
-  investigate.py itself runs, results fold into the report's "Data Agent Intel" section.
+  to hire 1 of VAPE's own $0.01 x402 market-data offerings against the token under review,
+  using its own funded wallet (`DATA_AGENT_PRIVATE_KEY`) and the real x402 payment rail, tagged
+  `X-VAPE-Client: data-agent` for deterministic CDP/VAPOR alternation instead of the worker's
+  usual coin flip — capped at 48 hires/day (2/hour) and gated to at most once every 30m
+  regardless of how often investigate.py itself runs, results fold into the report's
+  "Data Agent Intel" section.
 - **`intel_common.py` / `security_sweep.py` / `base_sweep.py` / `sentiment_sweep.py` /
   `virtuals_sweep.py` / `macro_sweep.py` / `mainnet_patch_check.py` / `bug_bounty_intel.py`**
   [OK] — revives the intel/reports/{security,base,sentiment,virtuals,macro,mainnet-patch-check,
@@ -336,8 +338,14 @@ which one is primary is picked randomly per request, falling back to the other
 on any infrastructure failure (`worker/src/lib/facilitatorClient.ts`), so an
 outage on either side never takes real revenue down with it, and both
 facilitators get genuine, ongoing settlement volume rather than one being a
-cold failover path. `agents/data_agent.py`'s own hires go through these same
-routes, so they get the identical split as any external buyer. The real
+cold failover path. Two tagged carve-outs to the coin flip (`X-VAPE-Client`
+header): a human paying in-browser through the site's wallet-connect flow
+always gets CDP as primary (Basescan's "x402 payment" labels are tied to
+CDP's known relayer addresses, not anything on-chain-derived); `agents/
+data_agent.py`'s own hires get a deterministic, KV-persisted CDP/VAPOR
+alternation instead (`worker/src/lib/dataAgentAlternator.ts`), since its
+fixed low-volume cadence could otherwise string together a long unlucky run
+on one side. Every other route keeps the plain random split. The real
 achieved ratio (not just the intended one — a fallback can still occur) is
 tracked per job in `worker/src/lib/jobLog.ts` and surfaced via `GET
 /x402/stats`'s `by_facilitator` totals. `worker/src/handlers.ts` and `dataHandlers.ts` are
@@ -360,11 +368,11 @@ inside a Worker's request window.
 
 **`agents/data_agent.py`** [OK] closes the loop from the buy side: every real
 `investigate.py` run recruits DATA AGENT's own funded wallet
-(`DATA_AGENT_PRIVATE_KEY`) to hire 2-4 of the x402 offerings above against the token
+(`DATA_AGENT_PRIVATE_KEY`) to hire 1 of the x402 offerings above against the token
 under review, using the official x402 Python SDK — real USDC leaves DATA AGENT's
 wallet through the exact same rail an external human buyer would use, proving the
 payment loop end-to-end on every investigation, not only when someone happens to buy
-something. Capped at 15 hires/day, and gated to at most once every 2h
+something. Capped at 48 hires/day (2/hour), and gated to at most once every 30m
 (`skillforge/memory/data_agent_quota.json`'s `last_ts`) — decoupled from
 `investigate.py`'s own cadence (every 30m via `featured-investigation.yml`) so more
 frequent investigations don't translate into more frequent spend.

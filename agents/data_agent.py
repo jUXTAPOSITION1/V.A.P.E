@@ -3,7 +3,7 @@
 DATA AGENT — VAPE's own paying customer.
 
 Recruited mid-investigation (agents/investigate.py::investigate()) to hire
-2-4 of VAPE's own $0.01 x402 market-data offerings (worker/src/dataHandlers.ts,
+one of VAPE's own $0.01 x402 market-data offerings (worker/src/dataHandlers.ts,
 the same ones a human buyer hires from docs/assets/hire.js) against the token
 under investigation, using its own real, funded wallet (DATA_AGENT_PRIVATE_KEY)
 and the official x402 Python SDK's exact-scheme EVM client. Real USDC leaves
@@ -11,22 +11,28 @@ DATA_AGENT's wallet and settles into VAPE's own PAY_TO_ADDRESS on Base
 mainnet, via the same worker + facilitator any other x402 buyer uses — this
 proves the payment rail end-to-end on every real investigation, not only when
 an external buyer happens to hire something, and folds independently-priced
-DefiLlama-backed data into every report VAPE already writes.
+DefiLlama-backed data into every report VAPE already writes. Tags every
+request with X-VAPE-Client: data-agent so the worker's facilitator-selection
+logic (worker/src/index.ts) alternates it deterministically between CDP and
+VAPOR (see worker/src/lib/dataAgentAlternator.ts) instead of coin-flipping —
+one hire per run, twice an hour, means one CDP hire and one VAPOR hire per
+hour rather than leaving the split to chance.
 
 Rate limits (hard caps enforced HERE, not the worker's job):
-  - 2-4 random offerings per investigation (a real minimum so a report never
-    leans on a single data source; a real maximum so one investigation can't
-    burn the whole daily budget).
-  - 15 hires/day total across every investigation, tracked in
+  - Exactly 1 offering hired per invocation — this agent runs on a fixed 2x/
+    hour cadence (see MIN_INTERVAL_SECONDS), so "1 per run" is what maps that
+    cadence onto "$0.01 per run" cleanly and keeps the CDP/VAPOR alternation
+    above at exactly 1:1 per run rather than muddying it with multiple picks.
+  - 48 hires/day total across every investigation (2/hour x 24h), tracked in
     skillforge/memory/data_agent_quota.json (same durable-counter shape as
     skillforge/research.py's MONTHLY_QUOTA pattern, just per-day). Once hit,
     this becomes a documented no-op for the rest of the day rather than
     erroring the investigation that recruited it.
-  - A 2-hour minimum interval between hire attempts (skillforge/memory/
+  - A 30-minute minimum interval between hire attempts (skillforge/memory/
     data_agent_quota.json's "last_ts"), independent of the daily cap above —
     lets agents/investigate.py run on a much tighter cadence (the site's
     Featured Investigation spotlight) without DATA AGENT itself firing any
-    more often than every 2h.
+    more often than 2x/hour.
 
 Restricted to offerings that only need the address already under
 investigation, a chain slug, or no input at all — protocol/protocol_fees/
@@ -52,10 +58,9 @@ LEDGER_PATH = os.path.join(ROOT, "skillforge", "memory", "data_agent_ledger.json
 WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 NETWORK = "eip155:8453"  # Base mainnet — same network the worker's PAY_TO_ADDRESS settles on
 
-DAILY_CAP = 15
-MIN_PER_RUN = 2
-MAX_PER_RUN = 4
-MIN_INTERVAL_SECONDS = 2 * 60 * 60  # 2h floor between hire attempts, see module docstring
+DAILY_CAP = 48  # 2/hour x 24h
+HIRES_PER_RUN = 1
+MIN_INTERVAL_SECONDS = 30 * 60  # 30m floor between hire attempts, see module docstring
 
 # Real, funded wallet the user provisioned for this agent — a fund-moving
 # action never proceeds unless DATA_AGENT_PRIVATE_KEY actually derives this
@@ -165,7 +170,15 @@ def _build_session():
         return None
     client = x402ClientSync()
     client.register(NETWORK, ExactEvmScheme(signer=account))
-    return x402_requests(client)
+    session = x402_requests(client)
+    # Lets the worker's facilitator-selection logic (worker/src/index.ts)
+    # single out DATA AGENT's own traffic for deterministic CDP/VAPOR
+    # alternation instead of the random 50/50 split — see module docstring.
+    # Session-level header, safe across the payment retry (unlike the fetch()
+    # Request-object gotcha docs/assets/hire.js hit): x402HTTPAdapter.send()
+    # builds retries via request.copy() + headers.update(), both additive.
+    session.headers["X-VAPE-Client"] = "data-agent"
+    return session
 
 
 def hire(session, offering, params):
@@ -195,9 +208,9 @@ def hire(session, offering, params):
 
 def run_for_investigation(address, chain="8453"):
     """Recruited by agents/investigate.py::investigate() for every real
-    report. Hires 2-4 random $0.01 x402 offerings against the token under
-    investigation (capped at 15 total paid hires/day across all
-    investigations, and no more often than once every 2h regardless of how
+    report. Hires 1 random $0.01 x402 offering against the token under
+    investigation (capped at 48 total paid hires/day across all
+    investigations, and no more often than once every 30m regardless of how
     often investigate.py itself runs — see MIN_INTERVAL_SECONDS) and returns
     what it bought so the report can fold it in.
     """
@@ -207,10 +220,10 @@ def run_for_investigation(address, chain="8453"):
     since_last = _seconds_since_last_attempt()
     if since_last is not None and since_last < MIN_INTERVAL_SECONDS:
         wait_min = round((MIN_INTERVAL_SECONDS - since_last) / 60)
-        return {"hired": [], "note": f"2h interval not yet up ({wait_min}m remaining) — skipped this cycle"}
+        return {"hired": [], "note": f"30m interval not yet up ({wait_min}m remaining) — skipped this cycle"}
 
     remaining = _remaining_today()
-    if remaining < MIN_PER_RUN:
+    if remaining < HIRES_PER_RUN:
         return {"hired": [], "note": f"daily cap reached ({DAILY_CAP}/day) — skipped this cycle"}
 
     session = _build_session()
@@ -219,8 +232,7 @@ def run_for_investigation(address, chain="8453"):
 
     _mark_attempt()
 
-    n = min(random.randint(MIN_PER_RUN, MAX_PER_RUN), remaining)
-    picks = random.sample(list(OFFERING_PARAMS.keys()), n)
+    picks = random.sample(list(OFFERING_PARAMS.keys()), HIRES_PER_RUN)
 
     hired = []
     paid_count = 0

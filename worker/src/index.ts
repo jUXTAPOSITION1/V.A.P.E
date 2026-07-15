@@ -28,6 +28,7 @@ import { estimateCostBasis } from "./lib/costBasis";
 import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
+import { nextDataAgentFacilitator } from "./lib/dataAgentAlternator";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -524,14 +525,27 @@ app.use("*", async (c, next) => {
   // most likely to go check Basescan afterward and expect to see it
   // classified correctly, so that traffic always gets CDP as primary (VAPOR
   // still stands in as fallback if CDP itself throws — this narrows WHERE
-  // the split applies, it doesn't remove the resilience). Automated/agent
-  // traffic (including agents/data_agent.py) is unaffected and keeps the
-  // random 50/50 split, since Basescan's label doesn't matter to a script.
+  // the split applies, it doesn't remove the resilience).
+  //
+  // A second carve-out: DATA AGENT's own hires (agents/data_agent.py) tag
+  // X-VAPE-Client: data-agent and get a deterministic CDP/VAPOR alternation
+  // (see lib/dataAgentAlternator.ts) instead of the coin flip — its low,
+  // fixed cadence means a random split could string together a long run
+  // that never touches one side, and VAPOR needs genuine, regular
+  // settlement volume from VAPE's own traffic to prove itself as a real
+  // facilitator. Any other automated/agent traffic keeps the random 50/50
+  // split, since Basescan's label doesn't matter to a script.
   const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
+  const isDataAgentTraffic = c.req.header("X-VAPE-Client") === "data-agent";
   const vaporClient = c.env.VAPOR_FACILITATOR_URL
     ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
     : null;
-  const usesVaporPrimary = vaporClient !== null && !isSiteTraffic && Math.random() < 0.5;
+  let usesVaporPrimary = false;
+  if (vaporClient !== null && !isSiteTraffic) {
+    usesVaporPrimary = isDataAgentTraffic
+      ? (await nextDataAgentFacilitator(c.env.VAPE_JOBS)) === "vapor"
+      : Math.random() < 0.5;
+  }
   const hybridClient = vaporClient
     ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
     : null;
