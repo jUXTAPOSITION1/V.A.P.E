@@ -240,11 +240,13 @@ function safeWaitUntil(c: Context, promise: Promise<unknown>): void {
 // unauthenticated first request still succeeds, which is exactly the
 // signed-then-fails symptom this fixes. exposeHeaders makes the protocol's
 // custom response headers readable by client JS, which cross-origin
-// responses hide by default unless explicitly exposed.
+// responses hide by default unless explicitly exposed. X-VAPE-Client is
+// docs/assets/hire.js's own tag (see the facilitator-routing middleware
+// below) — same preflight requirement as X-PAYMENT.
 app.use("*", cors({
   origin: "*",
   allowMethods: ["GET", "OPTIONS"],
-  allowHeaders: ["Content-Type", "X-PAYMENT", "PAYMENT-SIGNATURE", "Access-Control-Expose-Headers"],
+  allowHeaders: ["Content-Type", "X-PAYMENT", "PAYMENT-SIGNATURE", "Access-Control-Expose-Headers", "X-VAPE-Client"],
   exposeHeaders: ["PAYMENT-REQUIRED", "PAYMENT-RESPONSE", "X-PAYMENT-RESPONSE"],
 }));
 
@@ -512,10 +514,24 @@ app.use("*", async (c, next) => {
   // safe here even for settle). DATA AGENT's own hires (agents/data_agent.py)
   // go through these exact same routes, so they get the same 50/50 split
   // as any external buyer — there's no separate code path for them.
+  //
+  // One deliberate carve-out: a real human paying in-browser via the site's
+  // own wallet-connect flow (docs/assets/hire.js) tags its request with
+  // X-VAPE-Client: site. Basescan only recognizes/labels CDP's facilitator
+  // addresses as "x402 payment" (its own manually-curated Name Tags, not
+  // anything derived from the on-chain data) — VAPOR's settlement wallet has
+  // no such label. A person paying through the site is the one traffic class
+  // most likely to go check Basescan afterward and expect to see it
+  // classified correctly, so that traffic always gets CDP as primary (VAPOR
+  // still stands in as fallback if CDP itself throws — this narrows WHERE
+  // the split applies, it doesn't remove the resilience). Automated/agent
+  // traffic (including agents/data_agent.py) is unaffected and keeps the
+  // random 50/50 split, since Basescan's label doesn't matter to a script.
+  const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
   const vaporClient = c.env.VAPOR_FACILITATOR_URL
     ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
     : null;
-  const usesVaporPrimary = vaporClient !== null && Math.random() < 0.5;
+  const usesVaporPrimary = vaporClient !== null && !isSiteTraffic && Math.random() < 0.5;
   const hybridClient = vaporClient
     ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
     : null;
