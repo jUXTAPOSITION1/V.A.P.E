@@ -20,9 +20,19 @@ function escapeHtml(s) {
 // person is looking at Basescan afterward expecting to see it tagged as an
 // x402 payment. Wrapping `fetch` itself (not passing headers per-call) means
 // both the initial 402 probe and @x402/fetch's own signed retry carry the
-// header, since the wrapper calls this same function for each.
+// header, since the wrapper calls this same function for each. Must build
+// the merged headers via the Headers API, not an object spread: @x402/fetch's
+// signed retry passes its X-PAYMENT header via a real Headers instance, and
+// spreading a Headers instance (`{...init.headers}`) enumerates no own
+// properties — it silently drops every header already set, including
+// X-PAYMENT itself, making the signed retry look unauthenticated again (a
+// second 402). `new Headers(init.headers)` copies correctly regardless of
+// whether the caller passed a plain object, an array of pairs, or a Headers
+// instance.
 function siteTaggedFetch(input, init = {}) {
-    return fetch(input, { ...init, headers: { ...(init.headers || {}), 'X-VAPE-Client': 'site' } });
+    const headers = new Headers(init.headers || undefined);
+    headers.set('X-VAPE-Client', 'site');
+    return fetch(input, { ...init, headers });
 }
 
 // VAPE's market-data tools (worker /data/<name>, worker/src/dataHandlers.ts).
