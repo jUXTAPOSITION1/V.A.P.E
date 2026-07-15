@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-15T00:51:38Z",
+  "generated": "2026-07-15T02:33:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 354,
+    "reports": 355,
     "reports_by_type": {
+      "security": 42,
       "sentiment": 22,
       "base": 37,
       "virtuals": 37,
-      "security": 41,
       "macro": 10,
       "bug": 1,
       "mainnet": 1,
@@ -36,14 +36,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-14-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-14 21:06 UTC",
-      "date": "2026-07-14T21:00Z",
+      "type": "security",
+      "file": "security-2026-07-15-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-15T02:00Z",
       "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-14-21.md",
-      "bytes": 1834
+      "summary": "The threat level remains HIGH with exactly three incidents recorded in the last seven days and zero incidents exceeding $50M in the prior 14 days. The most recent events include a $0.27M silent auto-approval hack on Lumi Finance (Arbitrum) and a $0.009M flashloan accounting logic exploit on Chi Protocol (Ethereum), both occurring on 2026-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-15-02.md",
+      "bytes": 5864
     }
   },
   "investigations": [
@@ -609,6 +609,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-15-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-15T02:00Z",
+      "threat": null,
+      "summary": "The threat level remains HIGH with exactly three incidents recorded in the last seven days and zero incidents exceeding $50M in the prior 14 days. The most recent events include a $0.27M silent auto-approval hack on Lumi Finance (Arbitrum) and a $0.009M flashloan accounting logic exploit on Chi Protocol (Ethereum), both occurring on 2026-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-15-02.md",
+      "bytes": 5864
+    },
     {
       "kind": "intel",
       "type": "sentiment",
@@ -1257,17 +1268,6 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents occurring in the last 7 days. The incidents reported in the last 14 days did not exceed $50M, but notable attacks include a $21.3M malicious governance proposal on Solana and a $10.05M price oracle manipulation on Hedera. Various attack vectors were exploited, in",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-11-19.md",
       "bytes": 6133
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260711_170651.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-11T17:06:51Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Bonzo Lend $10.05M on ['Hedera'] (Price Oracle Manipulation)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260711_170651.md",
-      "bytes": 10321
     }
   ],
   "broadcasts": [
