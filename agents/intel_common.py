@@ -138,6 +138,57 @@ def fmt_price(value):
     return "unavailable"
 
 
+def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperature=0.55):
+    """Frontier-tier (Grok 4.1 Fast first, via agents/llm.py's FRONTIER_ORDER)
+    narrative synthesis for every intel sweep/report.
+
+    `grounding` is the real, already-fetched data this cycle (plain text/
+    markdown) — the model is told never to invent a number, name, or date
+    beyond what's in it, but is otherwise given real room: connect data
+    points, flag second-order implications, say what a human should look
+    into next and why. This is deliberately NOT a squeezed-into-3-bullets
+    prompt — max_tokens is generous and the instructions explicitly invite
+    depth, so the report reflects genuine analysis rather than a
+    restatement of the bullets it was handed.
+
+    tier="frontier" (not "deep") matters even though xai_1 maps both tiers
+    to the same model: if Grok is down and this falls through to Gemini,
+    "frontier" resolves to gemini-2.5-pro instead of gemini-2.5-flash — a
+    materially better fallback for a section meant to read as expert
+    analysis, not a quick blurb.
+
+    Never raises — returns an honest fallback string if every provider in
+    the chain is unavailable, so a report never silently ships with either
+    a crash or a fabricated narrative standing in for a real one.
+    """
+    try:
+        from agents.llm import ask_safe, FRONTIER_ORDER
+    except Exception:
+        return "_Analyst narrative unavailable this cycle (LLM layer not importable)._"
+    system = (
+        f"You are VAPE's senior {role}, writing for other autonomous agents and human "
+        "operators who will act on your read. You are given real, verified data gathered "
+        "this cycle — never invent a number, name, date, or event that isn't in it, and "
+        "say plainly when the data is too thin to conclude something. Within that "
+        "constraint you have real analytical freedom: connect data points to each other, "
+        "note what's unusual versus normal, flag second-order/downstream implications, and "
+        "say specifically what a human should look into next and why. You may draw on your "
+        "own general knowledge of the broader crypto/security/market landscape to "
+        "contextualize the specific data given, as long as you clearly mark that as "
+        "background context rather than something this cycle's data itself showed. Write "
+        "dense, opinionated, expert analysis at whatever length the real data actually "
+        "supports — this is not a word-capped summary, and thin data should produce a "
+        "short honest section, not padding. No generic crypto-newsletter voice, no hedging "
+        "beyond what's factually warranted."
+    )
+    user = grounding if not instructions else f"{grounding}\n\n---\n{instructions}"
+    text, provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
+                              temperature=temperature, max_tokens=max_tokens)
+    if (text or "").startswith("[llm unavailable"):
+        return "_Analyst narrative unavailable this cycle (no LLM provider reachable)._"
+    return text.strip()
+
+
 def format_search_section(heading, search_result):
     """Renders web_search_snippets()'s output as a markdown section, or a
     one-line honest note when no provider was available — never fabricates

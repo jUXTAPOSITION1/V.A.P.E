@@ -161,7 +161,7 @@ def _strategic_briefing(new_entries, shown):
     any failure/unavailability/nothing-to-assess — a digest without a
     briefing is still a complete, honest digest.
     """
-    top = shown[:10]
+    top = shown[:15]
     if not top:
         return ""
     try:
@@ -178,29 +178,51 @@ def _strategic_briefing(new_entries, shown):
     ]
     new_lines = [f"- {e.get('name', 'Unknown')} (fit {e.get('fitScore', 0)})" for e in new_entries[:15]]
 
+    # Previously this briefing reasoned only over the fit-table itself, with
+    # no outside research at all — one bounded web search on the top-ranked
+    # entry's own name gives it real freedom to bring in fresh context (a
+    # PoC, a disclosure thread, competing platforms already circling it) the
+    # static feed can't show.
+    try:
+        from agents import intel_common as ic
+        research = ic.web_search_snippets(f"{top[0].get('name', '')} exploit disclosure bug bounty", max_results=6)
+    except Exception:
+        research = {"available": False, "provider": None, "results": []}
+    research_lines = (
+        "\n".join(f"- {r['title']}: {r['snippet']}" for r in research.get("results", []))
+        or "(no web research available this cycle)"
+    )
+
     system = (
         "You are VAPE's strategic analyst for its bug-bounty/incident radar. VAPE is an "
         "autonomous on-chain detective specializing in Base/EVM forensics, smart-contract "
-        "security, and bounty hunting. Give a terse, opinionated, actionable strategic briefing "
-        "on the real data below — not a summary of a table the reader already sees. No "
-        "disclaimers, no hedging, no invented details beyond what's given."
+        "security, and bounty hunting. Give an opinionated, actionable strategic briefing on "
+        "the real data below — not a summary of a table the reader already sees. No hedging, "
+        "no invented details beyond what's given. You have real analytical freedom here: write "
+        "at whatever depth the real data and research actually support — this is not a "
+        "word-capped summary — and bring your own general knowledge of the bounty/security "
+        "landscape to bear where useful, clearly marked as background rather than something "
+        "this cycle's data itself showed."
     )
     user = (
         "=== TOP-RANKED OPPORTUNITIES THIS CYCLE (real, DeFiLlama hacks feed + seed bounty data) ===\n"
         + "\n".join(lines)
         + "\n\n=== NEW THIS CYCLE ===\n" + ("\n".join(new_lines) if new_lines else "(none — same top set as last cycle)")
+        + f"\n\n=== WEB RESEARCH on top-ranked entry ({research.get('provider') or 'unavailable'}) ===\n"
+        + research_lines
         + "\n\n=== YOUR TASK ===\n"
-        "Pick the 3-5 opportunities most worth VAPE's attention right now. For each: WHY it "
-        "matters (technique novelty, chain relevance, prize vs. effort), WHAT VAPE-specific "
-        "capability or tool this would exercise or expose a gap in (recon, static analysis, "
-        "forensics tracing), and ONE concrete next action. If nothing changed since last cycle, "
-        "say that plainly and don't repeat the same analysis verbatim — note what, if anything, "
-        "is still worth chasing. If genuinely nothing here is worth VAPE's attention, say so "
-        "plainly instead of padding."
+        "Pick as many opportunities as are genuinely worth VAPE's attention right now (not a "
+        "fixed count). For each: WHY it matters (technique novelty, chain relevance, prize vs. "
+        "effort), WHAT VAPE-specific capability or tool this would exercise or expose a gap in "
+        "(recon, static analysis, forensics tracing), and ONE concrete next action. Fold in "
+        "anything the web research above adds. If nothing changed since last cycle, say that "
+        "plainly and don't repeat the same analysis verbatim — note what, if anything, is still "
+        "worth chasing. If genuinely nothing here is worth VAPE's attention, say so plainly "
+        "instead of padding."
     )
     try:
         text, _provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                    max_tokens=700, temperature=0.4)
+                                    max_tokens=1800, temperature=0.4)
     except Exception as e:
         print(f"[SCOUT] strategic briefing unavailable: {e}")
         return ""

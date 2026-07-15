@@ -145,6 +145,22 @@ def gather_signals():
         parts.append("=== RECENT LESSONS (real, agents/self_improve.py + agents/review_ledger.py) ===\n"
                       + "\n".join(f"- {l.get('title', '')}: {(l.get('content') or '')[:200]}" for l in lessons))
 
+    # Previously every signal here was purely internal (registry/memory) —
+    # one bounded web search gives the proposal step real outside awareness
+    # of what's newly available to build on or adopt, rather than only ever
+    # reasoning over VAPE's own prior findings.
+    try:
+        from agents import intel_common as ic
+        research = ic.web_search_snippets(
+            "new open-source smart contract security tool OR on-chain forensics technique 2026",
+            max_results=6,
+        )
+        if research.get("results"):
+            parts.append("=== WEB RESEARCH — new tools/techniques (" + str(research.get("provider")) + ") ===\n"
+                          + "\n".join(f"- {r['title']}: {r['snippet']}" for r in research["results"]))
+    except Exception as e:
+        print(f"[SkillforgeBuild] web research signal skipped: {e}")
+
     return "\n\n".join(parts)
 
 
@@ -174,8 +190,12 @@ Rules:
 
 Output format (exactly, first line always one of these two):
 BUILD: <one-line title>
-JUSTIFICATION: <which real signal above motivates this, quoted/referenced>
-SPEC: <2-4 sentences: what it does, inputs/outputs, how it fits VAPE's real stack>
+JUSTIFICATION: <which real signal above motivates this, quoted/referenced — go into as much
+  depth as the signal supports; this is your real research/analysis of why it matters, not
+  a one-liner>
+SPEC: <what it does, inputs/outputs, how it fits VAPE's real stack, and how you'd approach
+  building it — as much detail as genuinely helps the build step that reads this next, not
+  capped at a fixed sentence count>
 
 or, if nothing is justified:
 BUILD: NONE
@@ -189,8 +209,8 @@ def propose(signals):
         response, _ = llm_ask(
             system=PROPOSE_SYSTEM,
             user=f"=== REAL SIGNALS THIS CYCLE ===\n{signals}\n\n=== YOUR TASK ===\nPropose exactly one build, or BUILD: NONE.",
-            tier="deep",
-            max_tokens=600,
+            tier="frontier",
+            max_tokens=1600,
             temperature=0.5,
             provider_order=FRONTIER_ORDER,
         )

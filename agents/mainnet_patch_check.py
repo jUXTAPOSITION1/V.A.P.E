@@ -14,7 +14,11 @@ degrades honestly if unset, same as every other optional key in this repo).
 Patch status is a DETERMINISTIC text-pattern check against the real fetched
 source, not an LLM guess — but this is a lightweight static check, not a
 real audit, so findings are reported as a starting point for a human/deep-
-dive follow-up, never as a definitive "safe" verdict.
+dive follow-up, never as a definitive "safe" verdict. One bounded web
+search adds real outside-research freedom this script previously had none
+of; a frontier-tier (Grok 4.1 Fast first — see agents/intel_common.py's
+grok_analysis()) Analyst Briefing section interprets the pattern-check
+result plus that research, still never overriding the deterministic verdict.
 
 Scope note: the historical report also flagged AgentToken-level issues
 (setProjectTaxRates, distributeTaxTokens), but AgentToken is clone-based —
@@ -80,6 +84,13 @@ def check_patch_status(source_code):
 
 
 def run():
+    # Previously this script only ever ran the deterministic pattern check
+    # below — zero outside research. One bounded web search gives it real
+    # freedom to catch anything the static pattern check can't see (a fresh
+    # public disclosure, a since-published PoC, a community thread flagging
+    # a bypass of the very access-control pattern the check looks for).
+    search = ic.web_search_snippets("AgentNftV2 Virtuals Protocol vulnerability exploit disclosure", max_results=6)
+
     src = get_contract_source(AGENT_NFT_V2_IMPL, chainid=8453)
 
     if src.get("error") == "no_key":
@@ -108,6 +119,25 @@ def run():
     else:
         verdict = "ALL CLEAR"
 
+    briefing = ic.grok_analysis(
+        "smart-contract security analyst",
+        (
+            f"VERDICT (deterministic pattern check, do not change): {verdict}\n"
+            f"Contract: AgentNftV2 implementation {AGENT_NFT_V2_IMPL} (Base, chain 8453)\n"
+            f"Pattern-check results:\n{check_rows}\n\n"
+            f"Web research this cycle ({search.get('provider') or 'unavailable'}):\n"
+            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none available")
+        ),
+        instructions=(
+            "Write the 'Analyst Briefing' section of this mainnet patch-status report. Interpret what "
+            "the pattern-check status plus this cycle's web research actually implies — call out "
+            "specifically if the web research surfaces anything (a disclosure, a discussion, a PoC) "
+            "the static pattern check wouldn't catch, and say plainly if it doesn't. Do not declare a "
+            "contract 'safe' — a NEEDS REVIEW result always warrants a real human look regardless of "
+            "what the web research does or doesn't show."
+        ),
+    )
+
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Mainnet Patch Status Check — Virtuals Protocol AgentNftV2
 
@@ -131,6 +161,16 @@ def run():
 
 ---
 
+## Analyst Briefing (Grok 4.1 Fast)
+
+{briefing}
+
+---
+
+{ic.format_search_section("Web Signals — AgentNftV2 Disclosure Watch", search)}
+
+---
+
 ## Method & Limitations
 
 This is a lightweight, deterministic text-pattern check against the real verified
@@ -148,7 +188,9 @@ canonical address to re-check automatically. That remains a manual/deep-dive ite
 
 ## Sources
 - Etherscan V2 / Basescan verified source (`get_contract_source`)
+- Live web search ({search.get('provider') or 'unavailable'})
 - Prior finding: `intel/reports/mainnet-patch-check-2026-06-10.md`, `intel/reports/attack-surface-map-2026-06-10.md`
+- Analyst Briefing: Grok 4.1 Fast (or the next available provider in `agents.llm.FRONTIER_ORDER`)
 
 ---
 

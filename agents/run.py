@@ -68,7 +68,7 @@ if Groq is not None and os.getenv("GROQ_API_KEY"):
     except Exception as _e:
         print(f"[run.py] Groq SDK init skipped: {_e}")
 
-def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None):
+def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None, max_tokens=2048):
     """Prefer the resilient multi-provider layer; fall back to Groq SDK.
 
     provider_order defaults to None (agents.llm's own default ordering);
@@ -78,7 +78,7 @@ def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None):
     if _llm_ask is not None and _llm_available():
         try:
             txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature,
-                                 provider_order=provider_order)
+                                 provider_order=provider_order, max_tokens=max_tokens)
             print(f"[llm:{prov}] ok")
             return txt
         except Exception as e:
@@ -96,7 +96,7 @@ def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None):
                     {"role": "user", "content": query}
                 ],
                 temperature=temperature,
-                max_tokens=2048
+                max_tokens=max_tokens
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -108,7 +108,7 @@ def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None):
     return "Rate limit persistent. Try later."
 
 
-def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
+def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4, max_tokens=3200):
     """Call the LLM for the structured report, retrying once with a sharper
     corrective nudge if it didn't comply with the mandatory `SIGNAL: HIGH|LOW`
     first line. Confirmed real failure mode: open models (Llama family via
@@ -119,8 +119,16 @@ def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
     Lower temperature than the default also measurably helps compliance
     without suppressing genuine content variation (that should come from the
     grounding data changing cycle to cycle, not from sampling randomness).
+
+    max_tokens defaults generously (3200, up from the old 2048 default) — a
+    genuine SIGNAL: HIGH report covers five real sections (investigation
+    findings, tool gaps, security, market delta, next actions) and was
+    getting cut short before it could go as deep as VAPE_REPORT_SYSTEM's own
+    "do not pad, but do not compress real findings either" instruction
+    actually invites.
     """
-    report = ask_llm(system, prompt, tier=tier, temperature=temperature, provider_order=_FRONTIER_ORDER)
+    report = ask_llm(system, prompt, tier=tier, temperature=temperature,
+                      provider_order=_FRONTIER_ORDER, max_tokens=max_tokens)
     if (report or "").startswith("[llm unavailable"):
         return report
     first_line = (report or "").strip().splitlines()[0] if report else ""
@@ -133,7 +141,8 @@ def _ask_with_signal_retry(system, prompt, tier="deep", temperature=0.4):
         "its very first line, nothing before it. Rewrite your entire response now, "
         "starting with that line, following the section structure you were given."
     )
-    retry = ask_llm(system, corrective, tier=tier, temperature=temperature, provider_order=_FRONTIER_ORDER)
+    retry = ask_llm(system, corrective, tier=tier, temperature=temperature,
+                     provider_order=_FRONTIER_ORDER, max_tokens=max_tokens)
     retry_first = (retry or "").strip().splitlines()[0] if retry else ""
     if retry_first.strip().upper().startswith("SIGNAL:"):
         return retry
@@ -701,7 +710,7 @@ def main(review_repo=False):
         report = _ask_with_signal_retry(
             VAPE_REPORT_SYSTEM,
             _build_report_prompt(market_json, slither_result, memory_priming),
-            tier="deep",
+            tier="frontier",
             temperature=0.4,
         )
         report_path = f"reports/bounty_report_{timestamp}.md"

@@ -5,11 +5,16 @@ ran once. Its core, still-open watch item was: "Virtuals Protocol is
 actively working with Immunefi to launch a bug bounty program (not yet
 live)" — this makes that a real recurring check instead of a one-time note.
 
-Real data: one bounded live web search checks for an actual Immunefi
-listing; agents/scout.py's own real, keyless DeFiLlama-hacks-derived
+Real data: a targeted live web search checks for an actual Immunefi listing;
+a second, broader search adds real context on the wider Base bug-bounty
+landscape; agents/scout.py's own real, keyless DeFiLlama-hacks-derived
 archive (intel/bounty-radar/opportunities.json, already running hourly via
 scout.yml) supplies a real cross-reference of recent Base-tagged incidents/
 opportunities, so this doesn't re-fetch data scout.py already maintains.
+The VERDICT stays a deterministic hostname check (never LLM-guessed); a
+frontier-tier (Grok 4.1 Fast first — see agents/intel_common.py's
+grok_analysis()) Analyst Briefing section synthesizes what both searches +
+the opportunities table actually imply.
 
 Runs weekly — bounty-program launches are rare events, no value in daily polling.
 
@@ -64,7 +69,12 @@ def _is_immunefi_url(url):
 
 
 def run():
-    search = ic.web_search_snippets("Virtuals Protocol Immunefi bug bounty program launch", max_results=5)
+    search = ic.web_search_snippets("Virtuals Protocol Immunefi bug bounty program launch", max_results=8)
+    # Second, broader query — the narrow Immunefi/Virtuals check above answers
+    # one specific yes/no, but gives Grok nothing else to reason about; this
+    # gives it real material on the wider Base bug-bounty landscape so the
+    # analyst section below can do more than restate the verdict.
+    landscape_search = ic.web_search_snippets("Base blockchain bug bounty program launch 2026", max_results=8)
     immunefi_live = any(
         _is_immunefi_url(r.get("url") or "") and "virtual" in (r.get("title", "") + r.get("snippet", "")).lower()
         for r in search.get("results", [])
@@ -77,6 +87,25 @@ def run():
     ) or f"| — | no new Base-tagged opportunities in the last {LOOKBACK_DAYS}d | — | — |"
 
     verdict = "IMMUNEFI LIVE" if immunefi_live else "NOT YET LAUNCHED"
+
+    briefing = ic.grok_analysis(
+        "bug-bounty-intelligence analyst",
+        (
+            f"VERDICT (deterministic, do not change): {verdict}\n\n"
+            f"Targeted search — Virtuals Protocol x Immunefi ({search.get('provider') or 'unavailable'}):\n"
+            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none")
+            + f"\n\nBroader search — Base bug bounty landscape ({landscape_search.get('provider') or 'unavailable'}):\n"
+            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in landscape_search.get("results", [])) or "none")
+            + f"\n\nRecent Base-tagged opportunities from scout.py's archive (last {LOOKBACK_DAYS}d):\n{recent_rows}"
+        ),
+        instructions=(
+            "Write the 'Analyst Briefing' section of this bug-bounty-intelligence report. Interpret "
+            "what the search results actually suggest about the state of Base/Virtuals bug-bounty "
+            "coverage — not just whether Immunefi is live, but what the broader landscape search "
+            "implies about competing platforms, timing, or gaps VAPE itself could speak to. If the "
+            "opportunities table shows a pattern worth flagging, say so."
+        ),
+    )
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Bug Bounty Intelligence Report — Base & Virtuals Protocol
@@ -104,7 +133,17 @@ Base-tagged entries seen in the last {LOOKBACK_DAYS} days.
 
 ---
 
+## Analyst Briefing (Grok 4.1 Fast)
+
+{briefing}
+
+---
+
 {ic.format_search_section("Web Signals — Immunefi / Bounty Programs", search)}
+
+---
+
+{ic.format_search_section("Web Signals — Base Bug Bounty Landscape", landscape_search)}
 
 ---
 
@@ -118,8 +157,9 @@ Base-tagged entries seen in the last {LOOKBACK_DAYS} days.
 ---
 
 ## Sources
-- Live web search ({search.get('provider') or 'unavailable'})
+- Live web search — targeted ({search.get('provider') or 'unavailable'}) + broader landscape ({landscape_search.get('provider') or 'unavailable'})
 - `intel/bounty-radar/opportunities.json` (real, maintained by `agents/scout.py` hourly)
+- Analyst Briefing: Grok 4.1 Fast (or the next available provider in `agents.llm.FRONTIER_ORDER`)
 
 ---
 
