@@ -211,3 +211,5 @@
 | 2026-07-15 | auto | 0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db (AKE) | deep_investigation | PROCEED (90/100) | Violent 24h move +215% (volatility/manipulation) | +7d |
 
 | 2026-07-15 | auto | 0x9b88500C69CEa66c329Abd1C494319B197fb8453 (BRIAN) | deep_investigation | CAUTION (70/100) | Low liquidity $30,055 | +7d |
+
+| 2026-07-15 | auto | 0x3ecced5b416e58664f04a39dD18935eB71D33B15 (BRIAN) | deep_investigation | CAUTION (75/100) | Owner can change balances (rug surface) | +7d |

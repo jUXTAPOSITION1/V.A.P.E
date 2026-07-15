@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T16:14:36Z",
+  "generated": "2026-07-15T16:24:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 365,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 69,
-    "investigations": 150,
+    "investigations": 152,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-145348-0x9b88500C.md",
+      "file": "investigation-20260715-162458-0x3ecced5b.md",
       "title": "Investigation \u2014 BRIAN",
       "symbol": "BRIAN",
-      "name": "The Bald Bull",
-      "date": "2026-07-15T14:53:48Z",
-      "target": "0x9b88500C69CEa66c329Abd1C494319B197fb8453",
+      "name": "Brian",
+      "date": "2026-07-15T16:24:58Z",
+      "target": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-10] Low liquidity $30,055; [-10] Pair 10.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3059 holders \u2014 reasonably distributed; Custom verified sourc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-145348-0x9b88500C.md"
+      "score": "75",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface). Positive evidence: Ownership renounced; 2718119 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 626+ days \u2014 independe",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-162458-0x3ecced5b.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-162458-0x3ecced5b.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Brian",
+      "date": "2026-07-15T16:24:58Z",
+      "target": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface). Positive evidence: Ownership renounced; 2718119 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 626+ days \u2014 independe",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-162458-0x3ecced5b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-145348-0x9b88500C.md",
@@ -592,20 +606,6 @@
       "score": "43",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: Ownership renounced; 1020290 holders \u2014 reasonably distributed; Deep liquidity ($4,664,127); Trading 832+ days without a known incident in this scan; Custom verified source (not a ma",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-145838-0x0b3e3284.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260711-115641-0xE23b60DF.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-11T11:56:41Z",
-      "target": "0xE23b60DF9dae1E54E81fc802Fd0E085f4F7e0B07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-115641-0xE23b60DF.md"
     }
   ],
   "reports": [

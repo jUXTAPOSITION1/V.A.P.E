@@ -655,6 +655,25 @@
     "symbol": "ETD",
     "times_investigated": 1
   },
+  "8453:0x3ecced5b416e58664f04a39dd18935eb71d33b15": {
+    "address": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
+    "chain": "8453",
+    "creator_address": "0x3760abd0f9bcc356d3611fbdb07fbea96e2e526a",
+    "first_investigated": "2026-07-15T16:24:58Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-162458-0x3ecced5b.md",
+        "score": 75,
+        "ts": "2026-07-15T16:24:58Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-15T16:24:58Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "BRIAN",
+    "times_investigated": 1
+  },
   "8453:0x43d6e8f4e413028365e9cf83d1e6c2181e8e3b07": {
     "address": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
     "chain": "8453",
