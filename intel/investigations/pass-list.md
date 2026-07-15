@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-15T19:15:56Z — 21 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-15T20:34:51Z — 22 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| doji | Base | `0x693B8De886712f0039EEf578bbE5aC7ea3B598CE` | 80/100 | 1 | 2026-07-15T20:34:51Z |
 | AKE | BNB Chain | `0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db` | 90/100 | 1 | 2026-07-15T12:52:50Z |
 | KITE | Ethereum | `0x904567252D8F48555b7447c67dCA23F0372E16be` | 90/100 | 1 | 2026-07-15T00:51:38Z |
 | EVAA | BNB Chain | `0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1` | 100/100 | 1 | 2026-07-14T12:48:49Z |

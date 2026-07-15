@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T20:13:55Z",
+  "generated": "2026-07-15T20:34:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 367,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 70,
-    "investigations": 156,
+    "investigations": 158,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-191556-0x71A64AA0.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "The Bald Bull",
-      "date": "2026-07-15T19:15:56Z",
-      "target": "0x71A64AA011566A33F79eE48ed1491752AEc254b6",
+      "file": "investigation-20260715-203451-0x693B8De8.md",
+      "title": "Investigation \u2014 doji",
+      "symbol": "doji",
+      "name": "doji",
+      "date": "2026-07-15T20:34:51Z",
+      "target": "0x693B8De886712f0039EEf578bbE5aC7ea3B598CE",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,034; [-10] Pair 10.0 days old \u2014 under two weeks, no track record yet; [-10",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-191556-0x71A64AA0.md"
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) \u2014 can still act on the contract; [-10] Violent 24h move +39066% (volatility/manipulation). Positive evidence: 1190 holders \u2014 reasonably distributed; Trading 267+ days without a known incident in this scan; Custom verified source (not a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-203451-0x693B8De8.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-203451-0x693B8De8.md",
+      "title": "Investigation \u2014 doji",
+      "symbol": "doji",
+      "name": "doji",
+      "date": "2026-07-15T20:34:51Z",
+      "target": "0x693B8De886712f0039EEf578bbE5aC7ea3B598CE",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) \u2014 can still act on the contract; [-10] Violent 24h move +39066% (volatility/manipulation). Positive evidence: 1190 holders \u2014 reasonably distributed; Trading 267+ days without a known incident in this scan; Custom verified source (not a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-203451-0x693B8De8.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-191556-0x71A64AA0.md",
@@ -592,20 +606,6 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 57311 holders \u2014 reasonably distributed; Deep liquidity ($781,793); Trading 962+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-063418-0x9560e827.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260711-171011-0xc99560Fc.md",
-      "title": "Investigation \u2014 AERO",
-      "symbol": "AERO",
-      "name": "Aerodrome",
-      "date": "2026-07-11T17:10:11Z",
-      "target": "0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,704. Positive evidence: 18325 holders \u2014 reasonably distributed; Custom ve",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260711-171011-0xc99560Fc.md"
     }
   ],
   "reports": [
