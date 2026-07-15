@@ -46,6 +46,13 @@ jobs:
   # github.com/zizmorcore/zizmor-action and PyPI at the time this was added)
   # rather than floating on `latest`, matching this repo's existing pinning
   # convention for third-party Actions with elevated permissions.
+  #
+  # v0.5.7 (192e21d) predated zizmor 1.27.0 and didn't recognize it as a
+  # valid --version, failing every run with "Unknown version: 1.27.0" the
+  # moment PyPI's zizmor package crossed that version — v0.6.0 was released
+  # (2026-07-15) specifically to add 1.27.0 support (now its own default).
+  # Re-verify both the action's tag->commit mapping and zizmor's own PyPI
+  # version list before bumping either pin again.
   zizmor:
     runs-on: ubuntu-latest
     permissions:
@@ -57,7 +64,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Run zizmor
-        uses: zizmorcore/zizmor-action@192e21d79ab29983730a13d1382995c2307fbcaa # v0.5.7
+        uses: zizmorcore/zizmor-action@6599ee8b7a49aef6a770f63d261d214911a7ce02 # v0.6.0
         with:
           version: "1.27.0"
           persona: pedantic
