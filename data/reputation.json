@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-13T19:52:10Z",
+  "generated": "2026-07-15T14:13:35Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 318,
-    "intel_reports": 131,
-    "intel_broadcasts": 61,
-    "catalog_investigations": 70,
+    "reports_published": 319,
+    "intel_reports": 157,
+    "intel_broadcasts": 68,
+    "catalog_investigations": 88,
     "token_scans_logged": 0,
     "skills_codified": 12,
     "tools_total": 15,
@@ -43,20 +43,19 @@
         }
       }
     ],
-    "work_log_entries": 140,
+    "work_log_entries": 141,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260623",
     "latest_report": "20260713"
   },
   "capabilities": {
-    "offerings_live": 29,
+    "offerings_live": 28,
     "auto_fulfilled_zero_llm": [
       "bridges",
       "chain_fees",
       "chain_overview",
       "chain_protocols",
       "community_intel_broadcast",
-      "derivatives",
       "dex_volumes",
       "exploit_check",
       "liquidity_check",
@@ -299,15 +298,6 @@
         "name": "dex_volumes",
         "price_usd": 0.01,
         "summary": "DEX trading volume on a chain by venue, with logos",
-        "auto": true,
-        "x402": true,
-        "data": true,
-        "sla": "instant"
-      },
-      {
-        "name": "derivatives",
-        "price_usd": 0.01,
-        "summary": "Perps/derivatives volume by venue, with logos",
         "auto": true,
         "x402": true,
         "data": true,
