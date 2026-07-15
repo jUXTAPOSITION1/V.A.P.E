@@ -529,6 +529,25 @@
     "symbol": "OpenAI",
     "times_investigated": 1
   },
+  "8453:0x1de2a8dcbe56abf971e9f2a9fec21082901ef0e5": {
+    "address": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
+    "chain": "8453",
+    "creator_address": "0x93670198bc99a986fece8c4ce38499ded0bd203d",
+    "first_investigated": "2026-07-15T22:03:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260715-220354-0x1DE2a8dC.md",
+        "score": 37,
+        "ts": "2026-07-15T22:03:54Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-15T22:03:54Z",
+    "last_score": 37,
+    "last_verdict": "REJECT",
+    "symbol": "DOJI",
+    "times_investigated": 1
+  },
   "8453:0x20bc6cbb8c5c9b356f554de71d45bf5508892346": {
     "address": "0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346",
     "chain": "8453",

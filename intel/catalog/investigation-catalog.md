@@ -219,3 +219,5 @@
 | 2026-07-15 | auto | 0x71A64AA011566A33F79eE48ed1491752AEc254b6 (BRIAN) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-15 | auto | 0x693B8De886712f0039EEf578bbE5aC7ea3B598CE (doji) | deep_investigation | PROCEED (80/100) | Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) — can still act | +7d |
+
+| 2026-07-15 | auto | 0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5 (DOJI) | deep_investigation | REJECT (37/100) | Low holder count (134) | +7d |

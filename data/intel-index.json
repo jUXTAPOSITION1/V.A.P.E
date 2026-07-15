@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-15T21:51:23Z",
+  "generated": "2026-07-15T22:03:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 369,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 70,
-    "investigations": 158,
+    "investigations": 160,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260715-203451-0x693B8De8.md",
-      "title": "Investigation \u2014 doji",
-      "symbol": "doji",
-      "name": "doji",
-      "date": "2026-07-15T20:34:51Z",
-      "target": "0x693B8De886712f0039EEf578bbE5aC7ea3B598CE",
+      "file": "investigation-20260715-220354-0x1DE2a8dC.md",
+      "title": "Investigation \u2014 DOJI",
+      "symbol": "DOJI",
+      "name": "COBIE'S DOG",
+      "date": "2026-07-15T22:03:54Z",
+      "target": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
       "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) \u2014 can still act on the contract; [-10] Violent 24h move +39066% (volatility/manipulation). Positive evidence: 1190 holders \u2014 reasonably distributed; Trading 267+ days without a known incident in this scan; Custom verified source (not a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-203451-0x693B8De8.md"
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-8] Low holder count (134); [-25] Very low liquidity $7,935 (rug/illiquid); [-10] Low liquidity $7,935; [-10] Violent 24h move +467% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-220354-0x1DE2a8dC.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260715-220354-0x1DE2a8dC.md",
+      "title": "Investigation \u2014 DOJI",
+      "symbol": "DOJI",
+      "name": "COBIE'S DOG",
+      "date": "2026-07-15T22:03:54Z",
+      "target": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-8] Low holder count (134); [-25] Very low liquidity $7,935 (rug/illiquid); [-10] Low liquidity $7,935; [-10] Violent 24h move +467% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-220354-0x1DE2a8dC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260715-203451-0x693B8De8.md",
@@ -592,20 +606,6 @@
       "score": "68",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xfd5844867387cecc3a0393b3e0be32479ea9e61a) \u2014 can still act on the contract; [-10] Low liquidity $36,196. Positive evidence: 88209 holders \u2014 reasonably distributed; Trading 1077+ days without a known incident in this scan; Custom verified s",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-205444-0xd07379a7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260712-063418-0x9560e827.md",
-      "title": "Investigation \u2014 VELO",
-      "symbol": "VELO",
-      "name": "VelodromeV2",
-      "date": "2026-07-12T06:34:18Z",
-      "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
-      "chain": "10 (Optimism)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 57311 holders \u2014 reasonably distributed; Deep liquidity ($781,793); Trading 962+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260712-063418-0x9560e827.md"
     }
   ],
   "reports": [
@@ -699,17 +699,6 @@
     },
     {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-15-10.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-15 10:09 UTC",
-      "date": "2026-07-15T10:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-15-10.md",
-      "bytes": 1685
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-07-15-10.md",
       "title": "Base Blockchain Sweep Report",
@@ -718,6 +707,17 @@
       "summary": "Date: 2026-07-15 10:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-15-10.md",
       "bytes": 2904
+    },
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-15-10.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-15 10:09 UTC",
+      "date": "2026-07-15T10:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-15-10.md",
+      "bytes": 1685
     },
     {
       "kind": "intel",
@@ -776,17 +776,6 @@
     },
     {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-14-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-14 21:06 UTC",
-      "date": "2026-07-14T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-14-21.md",
-      "bytes": 1834
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-07-14-21.md",
       "title": "Base Blockchain Sweep Report",
@@ -795,6 +784,17 @@
       "summary": "Date: 2026-07-14 21:50 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-21.md",
       "bytes": 2886
+    },
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-14-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-14 21:06 UTC",
+      "date": "2026-07-14T21:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-14-21.md",
+      "bytes": 1834
     },
     {
       "kind": "intel",
@@ -864,17 +864,6 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-14-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-14T10:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-14 10:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-10.md",
-      "bytes": 2855
-    },
-    {
-      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-07-14-10.md",
       "title": "Sentiment Sweep Report \u2014 2026-07-14 10:06 UTC",
@@ -883,6 +872,17 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-14-10.md",
       "bytes": 1763
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-14-10.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-14T10:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-14 10:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-10.md",
+      "bytes": 2855
     },
     {
       "kind": "intel",
@@ -941,17 +941,6 @@
     },
     {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-13-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-13 21:05 UTC",
-      "date": "2026-07-13T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-13-21.md",
-      "bytes": 1587
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-07-13-21.md",
       "title": "Base Blockchain Sweep Report",
@@ -960,6 +949,17 @@
       "summary": "Date: 2026-07-13 21:47 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-13-21.md",
       "bytes": 3057
+    },
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-13-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-13 21:05 UTC",
+      "date": "2026-07-13T21:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-13-21.md",
+      "bytes": 1587
     },
     {
       "kind": "intel",
@@ -1140,17 +1140,6 @@
     {
       "kind": "intel",
       "type": "security",
-      "file": "security-2026-07-12-2353.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-12T23:00Z",
-      "threat": null,
-      "summary": "Three incidents occurred in the last 7 days across the provided feed, with the largest being Bonzo Lend\u2019s $10.05M price oracle manipulation on Hedera on 2026-07-11, followed by BonkDAO\u2019s $21.3M malicious governance proposal on Solana and Lazy Summer Protocol\u2019s $6.0M donation attack on Ethereum. Other recent exploits include Hinkal\u2019s proof",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2353.md",
-      "bytes": 5324
-    },
-    {
-      "kind": "intel",
-      "type": "security",
       "file": "security-2026-07-12-23.md",
       "title": "VAPE Security Sweep Report",
       "date": "2026-07-12T23:00Z",
@@ -1162,13 +1151,13 @@
     {
       "kind": "intel",
       "type": "security",
-      "file": "security-2026-07-12-2227.md",
+      "file": "security-2026-07-12-2353.md",
       "title": "VAPE Security Sweep Report",
-      "date": "2026-07-12T22:00Z",
+      "date": "2026-07-12T23:00Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days do not exceed $50M, but they demonstrate a variety of attack techniques, including price oracle manipulation, malicious governance proposals, and donation attacks. The affected protocols span",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2227.md",
-      "bytes": 5673
+      "summary": "Three incidents occurred in the last 7 days across the provided feed, with the largest being Bonzo Lend\u2019s $10.05M price oracle manipulation on Hedera on 2026-07-11, followed by BonkDAO\u2019s $21.3M malicious governance proposal on Solana and Lazy Summer Protocol\u2019s $6.0M donation attack on Ethereum. Other recent exploits include Hinkal\u2019s proof",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2353.md",
+      "bytes": 5324
     },
     {
       "kind": "intel",
@@ -1180,6 +1169,17 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days involve various attack vectors, including price oracle manipulation, malicious governance proposals, and donation attacks. The majority of these incidents occurred on Ethereum and Solana, wit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-22.md",
       "bytes": 5598
+    },
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-12-2227.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-12T22:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days do not exceed $50M, but they demonstrate a variety of attack techniques, including price oracle manipulation, malicious governance proposals, and donation attacks. The affected protocols span",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2227.md",
+      "bytes": 5673
     },
     {
       "kind": "bounty",
@@ -1194,17 +1194,6 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-12-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-12T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-12 21:42 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-21.md",
-      "bytes": 3143
-    },
-    {
-      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-07-12-21.md",
       "title": "Sentiment Sweep Report \u2014 2026-07-12 21:00 UTC",
@@ -1213,6 +1202,17 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-12-21.md",
       "bytes": 2095
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-12-21.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-12T21:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-12 21:42 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-21.md",
+      "bytes": 3143
     },
     {
       "kind": "bounty",
@@ -1249,17 +1249,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-12-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-12T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (26) and global market cap 24h change (0.03%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-12-15.md",
-      "bytes": 1766
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-07-12-15.md",
       "title": "Base Blockchain Sweep Report",
@@ -1268,6 +1257,17 @@
       "summary": "Date: 2026-07-12 15:51 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-12-15.md",
       "bytes": 3114
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-12-15.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-12T15:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (26) and global market cap 24h change (0.03%).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-12-15.md",
+      "bytes": 1766
     }
   ],
   "broadcasts": [
