@@ -78,7 +78,7 @@ def test_quota_tracking_persists_and_resets_daily(monkeypatch, tmp_path):
 def test_daily_cap_reached_skips_without_touching_session(monkeypatch, tmp_path):
     quota_path = tmp_path / "data_agent_quota.json"
     monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
-    data_agent._record_hires(data_agent.DAILY_CAP - 1)  # only 1 slot left, below MIN_PER_RUN
+    data_agent._record_hires(data_agent.DAILY_CAP)  # no slots left
 
     monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", "0x" + "11" * 32)
     called = {"n": 0}
@@ -89,7 +89,7 @@ def test_daily_cap_reached_skips_without_touching_session(monkeypatch, tmp_path)
     assert called["n"] == 0  # never even tried to build a session once capped
 
 
-def test_run_for_investigation_hires_between_min_and_max(monkeypatch, tmp_path):
+def test_run_for_investigation_hires_exactly_one(monkeypatch, tmp_path):
     quota_path = tmp_path / "data_agent_quota.json"
     ledger_path = tmp_path / "data_agent_ledger.jsonl"
     monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
@@ -103,7 +103,7 @@ def test_run_for_investigation_hires_between_min_and_max(monkeypatch, tmp_path):
 
     result = data_agent.run_for_investigation("0x" + "bb" * 20, chain="8453")
     n = len(result["hired"])
-    assert data_agent.MIN_PER_RUN <= n <= data_agent.MAX_PER_RUN
+    assert n == data_agent.HIRES_PER_RUN == 1
     assert all(h["paid"] for h in result["hired"])
     assert result["cost_usd"] == round(n * 0.01, 2)
     assert data_agent._remaining_today() == data_agent.DAILY_CAP - n
@@ -119,7 +119,7 @@ def test_hire_reports_unpaid_on_non_200(monkeypatch):
     assert "error" in deliverable
 
 
-def test_second_call_within_2h_is_skipped_without_touching_session(monkeypatch, tmp_path):
+def test_second_call_within_30m_is_skipped_without_touching_session(monkeypatch, tmp_path):
     quota_path = tmp_path / "data_agent_quota.json"
     ledger_path = tmp_path / "data_agent_ledger.jsonl"
     monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
@@ -138,16 +138,16 @@ def test_second_call_within_2h_is_skipped_without_touching_session(monkeypatch, 
     monkeypatch.setattr(data_agent, "_build_session", lambda: called.update(n=called["n"] + 1))
     second = data_agent.run_for_investigation("0x" + "dd" * 20, chain="8453")
     assert second["hired"] == []
-    assert "2h interval" in second["note"]
+    assert "30m interval" in second["note"]
     assert called["n"] == 0  # gated before ever building a session
 
 
-def test_call_after_2h_elapsed_is_allowed(monkeypatch, tmp_path):
+def test_call_after_30m_elapsed_is_allowed(monkeypatch, tmp_path):
     quota_path = tmp_path / "data_agent_quota.json"
     monkeypatch.setattr(data_agent, "QUOTA_PATH", str(quota_path))
 
     from datetime import datetime, timedelta, timezone
-    stale_ts = (datetime.now(timezone.utc) - timedelta(hours=3)).isoformat().replace("+00:00", "Z")
+    stale_ts = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat().replace("+00:00", "Z")
     quota_path.write_text(json.dumps({"date": data_agent._today(), "count": 0, "last_ts": stale_ts}))
 
     def responder(url, params):

@@ -28,7 +28,6 @@ attempt or recommend any wallet-custody change.
 """
 import json
 import os
-import sys
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
@@ -139,7 +138,7 @@ def main():
                 f"agents/cdp_bazaar_check.py detected a real change in how many VAPE offerings "
                 f"CDP's x402 Bazaar catalog reports as indexed, versus the last recorded check "
                 f"({prev.get('checked_at')}). "
-                + (f"Improvement — CDP may have started indexing correctly." if improved
+                + ("Improvement — CDP may have started indexing correctly." if improved
                    else "Regression — a previously-indexed offering disappeared from CDP's catalog.")
                 + (f" Missing: {json.dumps(missing)}." if missing else " All offerings are now indexed.")
             ),

@@ -144,7 +144,7 @@ function fullJitterBackoff(attempt: number): number {
   return Math.random() * Math.min(1000, 40 * 2 ** attempt);
 }
 
-async function putWithVerifiedRetry<T>(
+export async function putWithVerifiedRetry<T>(
   kv: KVLike,
   key: string,
   fallback: T,
