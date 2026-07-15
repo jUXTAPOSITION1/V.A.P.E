@@ -424,6 +424,31 @@ app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-
   return c.json(stats);
 });
 
+// TEMPORARY diagnostic (to be removed once VAPOR's real 0-vapor-settlements
+// mystery is root-caused): tests whether the Cloudflare Worker runtime
+// itself can reach VAPOR at all, independent of the random facilitator
+// pick — a raw fetch (bypassing HTTPFacilitatorClient entirely) plus the
+// actual wrapped client call, so a network-level failure and a
+// response-shape/parsing failure show up distinctly instead of both just
+// looking like "falls back to cdp".
+app.get("/debug/vapor-check", async (c) => {
+  if (!c.env.VAPOR_FACILITATOR_URL) return c.json({ error: "VAPOR_FACILITATOR_URL not set" }, 503);
+  const result: Record<string, unknown> = { vaporUrl: c.env.VAPOR_FACILITATOR_URL };
+  try {
+    const raw = await fetch(`${c.env.VAPOR_FACILITATOR_URL}/supported`);
+    result.rawFetch = { status: raw.status, body: await raw.text() };
+  } catch (err) {
+    result.rawFetch = { error: err instanceof Error ? `${err.name}: ${err.message}` : String(err) };
+  }
+  try {
+    const vaporClient = new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL });
+    result.wrappedClient = { success: true, body: await vaporClient.getSupported() };
+  } catch (err) {
+    result.wrappedClient = { error: err instanceof Error ? `${err.name}: ${err.message}` : String(err) };
+  }
+  return c.json(result);
+});
+
 // Real, read-side self-check for CDP's Bazaar discovery catalog. CDP's
 // facilitator never emits the documented EXTENSION-RESPONSES header that's
 // supposed to confirm a listing was accepted/rejected (confirmed via
