@@ -203,3 +203,5 @@
 | 2026-07-15 | auto | 0xB2000000000000000000007BF6D5cBb0E24cB301 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-15 | auto | 0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb (wstETH) | deep_investigation | CAUTION (74/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-15 | auto | 0xCFB287565201763743A77c556dcA44A673d0a777 (RISE) | deep_investigation | CAUTION (70/100) | High sell tax 20% | +7d |
