@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T21:10:27Z",
+  "generated": "2026-07-16T21:33:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 381,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 74,
-    "investigations": 180,
+    "investigations": 182,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-184202-0x936AD605.md",
-      "title": "Investigation \u2014 YIELD",
-      "symbol": "YIELD",
-      "name": "Yield",
-      "date": "2026-07-16T18:42:02Z",
-      "target": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (60); [-25] Very low liquidity $5,573 (rug/illiquid); [-10] Low liquidity $5,573; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 2096+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-184202-0x936AD605.md"
+      "file": "investigation-20260716-213349-0x3b8db18e.md",
+      "title": "Investigation \u2014 ESP",
+      "symbol": "ESP",
+      "name": "Espresso",
+      "date": "2026-07-16T21:33:49Z",
+      "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 1316 holders \u2014 reasonably distributed; Deep liquidity ($531,679); Trading 156+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 154+ days \u2014 indep",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-213349-0x3b8db18e.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-213349-0x3b8db18e.md",
+      "title": "Investigation \u2014 ESP",
+      "symbol": "ESP",
+      "name": "Espresso",
+      "date": "2026-07-16T21:33:49Z",
+      "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 1316 holders \u2014 reasonably distributed; Deep liquidity ($531,679); Trading 156+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 154+ days \u2014 indep",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-213349-0x3b8db18e.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-184202-0x936AD605.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120715-0x0e7d4bDf.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120704-0x9cb961dD.md",
-      "title": "Investigation \u2014 claude",
-      "symbol": "claude",
-      "name": "Claude",
-      "date": "2026-07-13T12:07:04Z",
-      "target": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120704-0x9cb961dD.md"
     }
   ],
   "reports": [
