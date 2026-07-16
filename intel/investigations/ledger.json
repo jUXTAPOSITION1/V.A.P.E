@@ -1160,6 +1160,24 @@
     "symbol": "claude",
     "times_investigated": 2
   },
+  "8453:0xb2000000000000000000003833ed6154d9fa0f01": {
+    "address": "0xb2000000000000000000003833eD6154d9fA0f01",
+    "chain": "8453",
+    "first_investigated": "2026-07-16T07:23:52Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260716-072352-0xb2000000.md",
+        "score": 20,
+        "ts": "2026-07-16T07:23:52Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-16T07:23:52Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "DOJI",
+    "times_investigated": 1
+  },
   "8453:0xb2000000000000000000007bf6d5cbb0e24cb301": {
     "address": "0xB2000000000000000000007BF6D5cBb0E24cB301",
     "chain": "8453",

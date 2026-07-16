@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T05:32:31Z",
+  "generated": "2026-07-16T07:23:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 372,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 71,
-    "investigations": 166,
+    "investigations": 168,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-043945-0x0531f1e6.md",
-      "title": "Investigation \u2014 Doji",
-      "symbol": "Doji",
-      "name": "Cobie's dog",
-      "date": "2026-07-16T04:39:45Z",
-      "target": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
+      "file": "investigation-20260716-072352-0xb2000000.md",
+      "title": "Investigation \u2014 DOJI",
+      "symbol": "DOJI",
+      "name": "Doji",
+      "date": "2026-07-16T07:23:52Z",
+      "target": "0xb2000000000000000000003833eD6154d9fA0f01",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +405% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-produ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-043945-0x0531f1e6.md"
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,220; [-10] Violent 24h move +727% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-072352-0xb2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-072352-0xb2000000.md",
+      "title": "Investigation \u2014 DOJI",
+      "symbol": "DOJI",
+      "name": "Doji",
+      "date": "2026-07-16T07:23:52Z",
+      "target": "0xb2000000000000000000003833eD6154d9fA0f01",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,220; [-10] Violent 24h move +727% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-072352-0xb2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-043945-0x0531f1e6.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120549-0x7C797DA3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120536-0x43D6e8F4.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-13T12:05:36Z",
-      "target": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120536-0x43D6e8F4.md"
     }
   ],
   "reports": [
@@ -1567,7 +1567,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48692328",
+      "version": "48698227",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1577,7 +1577,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.19 eth_dom 10.05 mcap_chg_24h 0.05",
+      "version": "btc_dom 56.22 eth_dom 10.03 mcap_chg_24h 0.42",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1597,7 +1597,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x616b74093628 SAOS 10.0 from 0x5483a414 to 0x833589fc",
+      "version": "0x348da3673cac USPR 10.0 from 0xb930613b to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
