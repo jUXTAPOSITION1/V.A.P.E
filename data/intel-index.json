@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T15:42:02Z",
+  "generated": "2026-07-16T15:43:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 378,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 73,
-    "investigations": 174,
+    "investigations": 176,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-135907-0x038ad3c2.md",
-      "title": "Investigation \u2014 DOJI",
-      "symbol": "DOJI",
-      "name": "Cobie Dog",
-      "date": "2026-07-16T13:59:07Z",
-      "target": "0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: claude (0x9cb961dD3169e41726e4417d1a6EadeD333B6b07) \u2014 REJECT 35/100 \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-135907-0x038ad3c2.md"
+      "file": "investigation-20260716-154339-0x49D5c2Bd.md",
+      "title": "Investigation \u2014 WETH.e",
+      "symbol": "WETH.e",
+      "name": "Wrapped Ether",
+      "date": "2026-07-16T15:43:39Z",
+      "target": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+      "chain": "43114 (Avalanche)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 83271 holders \u2014 reasonably distributed; Deep liquidity ($2,767,968); Trading 298+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-154339-0x49D5c2Bd.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-154339-0x49D5c2Bd.md",
+      "title": "Investigation \u2014 WETH.e",
+      "symbol": "WETH.e",
+      "name": "Wrapped Ether",
+      "date": "2026-07-16T15:43:39Z",
+      "target": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+      "chain": "43114 (Avalanche)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 83271 holders \u2014 reasonably distributed; Deep liquidity ($2,767,968); Trading 298+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-154339-0x49D5c2Bd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-135907-0x038ad3c2.md",
@@ -592,20 +606,6 @@
       "score": "70",
       "summary": "Risk factors: [-8] Low holder count (62); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120639-0xcC67e54F.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120627-0x2228B383.md",
-      "title": "Investigation \u2014 FAFO",
-      "symbol": "FAFO",
-      "name": "Federal Agency For Financial Oversight",
-      "date": "2026-07-13T12:06:27Z",
-      "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "73",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-5] Pair 18.9 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 19790 holders \u2014 reasonably distributed; Custom verified source (not a mass-prod",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120627-0x2228B383.md"
     }
   ],
   "reports": [

@@ -235,3 +235,5 @@
 | 2026-07-16 | auto | 0x199084f1390B58493096Ff73Ec74c68164ba8453 ($COBIE) | deep_investigation | CAUTION (70/100) | Violent 24h move +1684% (volatility/manipulation) | +7d |
 
 | 2026-07-16 | auto | 0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07 (DOJI) | deep_investigation | REJECT (10/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-16 | auto | 0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB (WETH.e) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |

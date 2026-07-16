@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-16T13:59:07Z — 22 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-16T15:43:39Z — 23 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| WETH.e | Avalanche | `0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB` | 88/100 | 1 | 2026-07-16T15:43:39Z |
 | doji | Base | `0x693B8De886712f0039EEf578bbE5aC7ea3B598CE` | 80/100 | 1 | 2026-07-15T20:34:51Z |
 | AKE | BNB Chain | `0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db` | 90/100 | 1 | 2026-07-15T12:52:50Z |
 | KITE | Ethereum | `0x904567252D8F48555b7447c67dCA23F0372E16be` | 90/100 | 1 | 2026-07-15T00:51:38Z |
