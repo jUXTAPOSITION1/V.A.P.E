@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T21:57:43Z",
+  "generated": "2026-07-16T22:59:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 382,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 74,
-    "investigations": 182,
+    "investigations": 184,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-213349-0x3b8db18e.md",
-      "title": "Investigation \u2014 ESP",
-      "symbol": "ESP",
-      "name": "Espresso",
-      "date": "2026-07-16T21:33:49Z",
-      "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 1316 holders \u2014 reasonably distributed; Deep liquidity ($531,679); Trading 156+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 154+ days \u2014 indep",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-213349-0x3b8db18e.md"
+      "file": "investigation-20260716-225909-0x8453Cf5D.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-16T22:59:09Z",
+      "target": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-225909-0x8453Cf5D.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-225909-0x8453Cf5D.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-16T22:59:09Z",
+      "target": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-225909-0x8453Cf5D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-213349-0x3b8db18e.md",
@@ -592,20 +606,6 @@
       "score": "48",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AERO (0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,457. Positive evidence: 12949 holders \u2014 reasonably distributed; Custom verif",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120727-0x930389F6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120715-0x0e7d4bDf.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-13T12:07:15Z",
-      "target": "0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120715-0x0e7d4bDf.md"
     }
   ],
   "reports": [
