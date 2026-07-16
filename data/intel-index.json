@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-16T15:06:16Z",
+  "generated": "2026-07-16T15:42:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 377,
+    "reports": 378,
     "reports_by_type": {
       "virtuals": 44,
+      "macro": 12,
       "sentiment": 25,
       "base": 43,
       "security": 47,
-      "macro": 11,
       "bug": 1,
       "mainnet": 1,
       "bounty": 205
@@ -619,6 +619,17 @@
       "summary": "Date: 2026-07-16 15:06 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-16-15.md",
       "bytes": 2299
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-16-15.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-16T15:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (25) and global market cap 24h change (-0.99%).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-16-15.md",
+      "bytes": 2015
     },
     {
       "kind": "intel",
@@ -1257,17 +1268,6 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days involve various attack vectors, including price oracle manipulation, malicious governance proposals, and donation attacks. The majority of these incidents occurred on Ethereum and Solana, wit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-22.md",
       "bytes": 5598
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-12-2227.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-12T22:00Z",
-      "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 3 incidents reported in the last 7 days. The incidents reported in the last 14 days do not exceed $50M, but they demonstrate a variety of attack techniques, including price oracle manipulation, malicious governance proposals, and donation attacks. The affected protocols span",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-12-2227.md",
-      "bytes": 5673
     }
   ],
   "broadcasts": [
