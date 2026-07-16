@@ -223,3 +223,5 @@
 | 2026-07-15 | auto | 0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5 (DOJI) | deep_investigation | REJECT (37/100) | Low holder count (134) | +7d |
 
 | 2026-07-15 | auto | 0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc (DOJI) | deep_investigation | REJECT (35/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-16 | auto | 0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6 (SMB) | deep_investigation | REJECT (14/100) | Transfers can be paused by owner | +7d |

@@ -1347,5 +1347,24 @@
     "last_verdict": "REJECT",
     "symbol": "Claude",
     "times_investigated": 1
+  },
+  "8453:0xf11d5ad2d7a8261e72e549ed0971c5207c049bc6": {
+    "address": "0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6",
+    "chain": "8453",
+    "creator_address": "0x90fee9e3aa7b674c071541da385fb7f529c69917",
+    "first_investigated": "2026-07-16T01:02:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260716-010241-0xF11D5aD2.md",
+        "score": 14,
+        "ts": "2026-07-16T01:02:41Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-16T01:02:41Z",
+    "last_score": 14,
+    "last_verdict": "REJECT",
+    "symbol": "SMB",
+    "times_investigated": 1
   }
 }

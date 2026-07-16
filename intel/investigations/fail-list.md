@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-15T23:30:20Z — 34 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-16T01:02:41Z — 35 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SMB | Base | `0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6` | 14/100 | 1 | 2026-07-16T01:02:41Z |
 | DOJI | Base | `0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc` | 35/100 | 1 | 2026-07-15T23:30:20Z |
 | DOJI | Base | `0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5` | 37/100 | 1 | 2026-07-15T22:03:54Z |
 | BRIAN | Base | `0x71A64AA011566A33F79eE48ed1491752AEc254b6` | 28/100 | 1 | 2026-07-15T19:15:56Z |
