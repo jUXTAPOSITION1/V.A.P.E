@@ -237,3 +237,5 @@
 | 2026-07-16 | auto | 0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07 (DOJI) | deep_investigation | REJECT (10/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-16 | auto | 0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB (WETH.e) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-16 | auto | 0x664645ba2018507b4f336a1529122C5f982b2Ac8 (BRIAN) | deep_investigation | PROCEED (80/100) | Pair 9.8 days old — under two weeks, no track record yet | +7d |

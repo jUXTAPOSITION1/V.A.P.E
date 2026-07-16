@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T16:11:23Z",
+  "generated": "2026-07-16T17:20:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 379,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 73,
-    "investigations": 176,
+    "investigations": 178,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-154339-0x49D5c2Bd.md",
-      "title": "Investigation \u2014 WETH.e",
-      "symbol": "WETH.e",
-      "name": "Wrapped Ether",
-      "date": "2026-07-16T15:43:39Z",
-      "target": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
-      "chain": "43114 (Avalanche)",
+      "file": "investigation-20260716-172037-0x664645ba.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "The Bald Eagle \ud83e\udd85",
+      "date": "2026-07-16T17:20:37Z",
+      "target": "0x664645ba2018507b4f336a1529122C5f982b2Ac8",
+      "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 83271 holders \u2014 reasonably distributed; Deep liquidity ($2,767,968); Trading 298+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-154339-0x49D5c2Bd.md"
+      "score": "80",
+      "summary": "Risk factors: [-10] Pair 9.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 11404 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-172037-0x664645ba.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-172037-0x664645ba.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "The Bald Eagle \ud83e\udd85",
+      "date": "2026-07-16T17:20:37Z",
+      "target": "0x664645ba2018507b4f336a1529122C5f982b2Ac8",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Pair 9.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 11404 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-172037-0x664645ba.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-154339-0x49D5c2Bd.md",
@@ -592,20 +606,6 @@
       "score": "54",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-8] Low holder count (81); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-part",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120652-0x7CfA2a05.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120639-0xcC67e54F.md",
-      "title": "Investigation \u2014 ERC20Token",
-      "symbol": "ERC20Token",
-      "name": null,
-      "date": "2026-07-13T12:06:39Z",
-      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-8] Low holder count (62); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120639-0xcC67e54F.md"
     }
   ],
   "reports": [
