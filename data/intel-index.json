@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T10:50:39Z",
+  "generated": "2026-07-16T11:42:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 376,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 72,
-    "investigations": 170,
+    "investigations": 172,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-093547-0xC17c30e9.md",
-      "title": "Investigation \u2014 RISE",
-      "symbol": "RISE",
-      "name": "EverRise",
-      "date": "2026-07-16T09:35:47Z",
-      "target": "0xC17c30e98541188614dF99239cABD40280810cA3",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "23",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x33280d3a65b96eb878dd711abe9b2c0dbf740579) \u2014 can still act on the contract; [-10] Low liquidity $37,357; [note] address has no contract code (EOA or not deployed). Positive",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-093547-0xC17c30e9.md"
+      "file": "investigation-20260716-114244-0x199084f1.md",
+      "title": "Investigation \u2014 $COBIE",
+      "symbol": "$COBIE",
+      "name": "The UpOnly Bull",
+      "date": "2026-07-16T11:42:44Z",
+      "target": "0x199084f1390B58493096Ff73Ec74c68164ba8453",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-10] Violent 24h move +1684% (volatility/manipulation); [-10] Pair 10.9 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 952 holders \u2014 reasonably distrib",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-114244-0x199084f1.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-114244-0x199084f1.md",
+      "title": "Investigation \u2014 $COBIE",
+      "symbol": "$COBIE",
+      "name": "The UpOnly Bull",
+      "date": "2026-07-16T11:42:44Z",
+      "target": "0x199084f1390B58493096Ff73Ec74c68164ba8453",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-10] Violent 24h move +1684% (volatility/manipulation); [-10] Pair 10.9 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 952 holders \u2014 reasonably distrib",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-114244-0x199084f1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-093547-0xC17c30e9.md",
@@ -592,20 +606,6 @@
       "score": "70",
       "summary": "Risk factors: [-8] Low holder count (138); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even thoug",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120614-0x31A62699.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120602-0xbF927b84.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvet",
-      "date": "2026-07-13T12:06:02Z",
-      "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "84",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 8331 holders \u2014 reasonably distributed; Deep liquidity ($4,131,685); Custom verified source (not a mass-produced factory template); DefiLlama has priced this ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120602-0xbF927b84.md"
     }
   ],
   "reports": [
