@@ -18962,5 +18962,24 @@
     "fitScore": 64,
     "isNew": true,
     "firstSeen": "2026-07-15T18:41:31.154937Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DefiTuna Lending-1784160000",
+    "name": "DefiTuna Lending (exploit $580,000)",
+    "prizeUsd": 580000,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Incident lead for forensics on Solana.",
+    "fitScore": 68,
+    "isNew": true,
+    "firstSeen": "2026-07-16T23:31:08.279057Z"
   }
 ]

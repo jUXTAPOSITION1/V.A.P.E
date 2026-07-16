@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-16T21:40:01Z
+# VAPE Engagement Status — 2026-07-16T23:31:24Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -80,6 +80,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Adshares (exploit $628,000) ($628,000, fit 68, defillama-hack)
 - AFI Protocol (exploit $480,000) ($480,000, fit 68, defillama-hack)
 - Saga (exploit $7,000,000) ($7,000,000, fit 68, defillama-hack)
+- DefiTuna Lending (exploit $580,000) ($580,000, fit 68, defillama-hack)
 - JB (exploit $50,000) ($50,000, fit 67, defillama-hack)
 - Revert Lend (exploit $50,000) ($50,000, fit 67, defillama-hack)
 - TrustedVolumes (exploit $6,700,000) ($6,700,000, fit 66, defillama-hack)
