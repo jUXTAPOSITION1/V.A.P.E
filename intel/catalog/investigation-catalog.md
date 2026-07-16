@@ -229,3 +229,5 @@
 | 2026-07-16 | auto | 0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3 (Doji) | deep_investigation | CAUTION (65/100) | Violent 24h move +405% (volatility/manipulation) | +7d |
 
 | 2026-07-16 | auto | 0xb2000000000000000000003833eD6154d9fA0f01 (DOJI) | deep_investigation | REJECT (20/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-16 | auto | 0xC17c30e98541188614dF99239cABD40280810cA3 (RISE) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
