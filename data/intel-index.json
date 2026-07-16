@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T17:20:37Z",
+  "generated": "2026-07-16T18:42:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 379,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 73,
-    "investigations": 178,
+    "investigations": 180,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-172037-0x664645ba.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "The Bald Eagle \ud83e\udd85",
-      "date": "2026-07-16T17:20:37Z",
-      "target": "0x664645ba2018507b4f336a1529122C5f982b2Ac8",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Pair 9.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 11404 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factor",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-172037-0x664645ba.md"
+      "file": "investigation-20260716-184202-0x936AD605.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "Yield",
+      "date": "2026-07-16T18:42:02Z",
+      "target": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (60); [-25] Very low liquidity $5,573 (rug/illiquid); [-10] Low liquidity $5,573; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 2096+ days without a kno",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-184202-0x936AD605.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-184202-0x936AD605.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "Yield",
+      "date": "2026-07-16T18:42:02Z",
+      "target": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (60); [-25] Very low liquidity $5,573 (rug/illiquid); [-10] Low liquidity $5,573; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 2096+ days without a kno",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-184202-0x936AD605.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-172037-0x664645ba.md",
@@ -592,20 +606,6 @@
       "score": "35",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120704-0x9cb961dD.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120652-0x7CfA2a05.md",
-      "title": "Investigation \u2014 ClankerToken",
-      "symbol": "ClankerToken",
-      "name": null,
-      "date": "2026-07-13T12:06:52Z",
-      "target": "0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "54",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-8] Low holder count (81); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-part",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120652-0x7CfA2a05.md"
     }
   ],
   "reports": [
@@ -1567,7 +1567,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48711714",
+      "version": "48717492",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1577,7 +1577,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.35 eth_dom 9.89 mcap_chg_24h -0.97",
+      "version": "btc_dom 56.26 eth_dom 9.87 mcap_chg_24h -1.42",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1597,7 +1597,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x6401de4fbf0c MAGA 25.0 from 0xaa7f03de to 0x833589fc",
+      "version": "0x5c8ba8d33cd6 ARB | t.me/s/arb_pool 4120.0 from 0xa3a7b6f8 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

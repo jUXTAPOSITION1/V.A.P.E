@@ -239,3 +239,5 @@
 | 2026-07-16 | auto | 0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB (WETH.e) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-16 | auto | 0x664645ba2018507b4f336a1529122C5f982b2Ac8 (BRIAN) | deep_investigation | PROCEED (80/100) | Pair 9.8 days old — under two weeks, no track record yet | +7d |
+
+| 2026-07-16 | auto | 0x936AD605716234B77b7A61CDb95D6b6A188Da8E8 (YIELD) | deep_investigation | REJECT (35/100) | Mintable supply (dilution risk) | +7d |
