@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-16T02:42:29Z",
-  "source_report": "intel/reports/security-2026-07-16-02.md",
+  "generated_at": "2026-07-16T08:16:00Z",
+  "source_report": "intel/reports/security-2026-07-16-08.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
