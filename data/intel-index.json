@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T04:11:51Z",
+  "generated": "2026-07-16T04:39:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 371,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 71,
-    "investigations": 164,
+    "investigations": 166,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-010241-0xF11D5aD2.md",
-      "title": "Investigation \u2014 SMB",
-      "symbol": "SMB",
-      "name": "Symbiant",
-      "date": "2026-07-16T01:02:41Z",
-      "target": "0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6",
+      "file": "investigation-20260716-043945-0x0531f1e6.md",
+      "title": "Investigation \u2014 Doji",
+      "symbol": "Doji",
+      "name": "Cobie's dog",
+      "date": "2026-07-16T04:39:45Z",
+      "target": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "14",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x90fee9e3aa7b674c071541da385fb7f529c69917) \u2014 can still act on the contract; [-8] Low holder count (111); [-25] Very low liquidity $162 (rug/illiquid); [-10] Low liquidity $162; [-8] No pair-creation timestamp available \u2014 cannot establish ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-010241-0xF11D5aD2.md"
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +405% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-produ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-043945-0x0531f1e6.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260716-043945-0x0531f1e6.md",
+      "title": "Investigation \u2014 Doji",
+      "symbol": "Doji",
+      "name": "Cobie's dog",
+      "date": "2026-07-16T04:39:45Z",
+      "target": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +405% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-produ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-043945-0x0531f1e6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-010241-0xF11D5aD2.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120536-0x43D6e8F4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-104037-0x20Bc6CBB.md",
-      "title": "Investigation \u2014 BASE",
-      "symbol": "BASE",
-      "name": "Base April",
-      "date": "2026-07-13T10:40:37Z",
-      "target": "0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 57574 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-104037-0x20Bc6CBB.md"
     }
   ],
   "reports": [

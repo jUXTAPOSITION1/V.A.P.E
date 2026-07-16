@@ -225,3 +225,5 @@
 | 2026-07-15 | auto | 0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc (DOJI) | deep_investigation | REJECT (35/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-16 | auto | 0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6 (SMB) | deep_investigation | REJECT (14/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-16 | auto | 0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3 (Doji) | deep_investigation | CAUTION (65/100) | Violent 24h move +405% (volatility/manipulation) | +7d |
