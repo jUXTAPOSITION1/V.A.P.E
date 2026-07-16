@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-15T19:13:18Z",
-  "source_report": "intel/reports/security-2026-07-15-19.md",
+  "generated_at": "2026-07-16T02:42:29Z",
+  "source_report": "intel/reports/security-2026-07-16-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -125,14 +125,7 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "prooflessDeposit() Exploit",
-      "lesson": {
-        "pattern": "deposit_proof",
-        "label": "Missing or forged deposit/withdrawal proof validation",
-        "prevention": "Validate every deposit/withdrawal proof on-chain against a trusted root; never trust client-supplied proof data unverified.",
-        "covered_by": null,
-        "out_of_scope": false
-      }
+      "technique": "prooflessDeposit() Exploit"
     },
     {
       "date": "2026-06-30",
