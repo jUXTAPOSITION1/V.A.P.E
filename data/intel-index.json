@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17T21:03:06Z",
+  "generated": "2026-07-17T21:22:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 395,
@@ -15,7 +15,7 @@
       "bounty": 205
     },
     "broadcasts": 78,
-    "investigations": 206,
+    "investigations": 208,
     "tools": 15,
     "tools_verified": 14,
     "skills": 12
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260717-200733-0x4c433F4E.md",
-      "title": "Investigation \u2014 TSG",
-      "symbol": "TSG",
-      "name": "the sleeping giant",
-      "date": "2026-07-17T20:07:33Z",
-      "target": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-10] Violent 24h move +444% (volatility/manipulation). Positive evidence: 4062 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-200733-0x4c433F4E.md"
+      "file": "investigation-20260717-212204-0x43976a12.md",
+      "title": "Investigation \u2014 RAIN",
+      "symbol": "RAIN",
+      "name": "RAIN",
+      "date": "2026-07-17T21:22:04Z",
+      "target": "0x43976a124e6834b541840Ce741243dAD3dd538DA",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0xaff5289591653038340645fdc1e1ed3a3b52e436) \u2014 can still act on the contract; [-8] Low holder count (125); [-25] Very low liquidity $77 (rug/illiquid); [-10] Low liquidity $77; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-212204-0x43976a12.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-212204-0x43976a12.md",
+      "title": "Investigation \u2014 RAIN",
+      "symbol": "RAIN",
+      "name": "RAIN",
+      "date": "2026-07-17T21:22:04Z",
+      "target": "0x43976a124e6834b541840Ce741243dAD3dd538DA",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0xaff5289591653038340645fdc1e1ed3a3b52e436) \u2014 can still act on the contract; [-8] Low holder count (125); [-25] Very low liquidity $77 (rug/illiquid); [-10] Low liquidity $77; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-212204-0x43976a12.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260717-200733-0x4c433F4E.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-110836-0xb77FB108.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260714-090652-0x1Bdf71ED.md",
-      "title": "Investigation \u2014 CES",
-      "symbol": "CES",
-      "name": "WhaleBit",
-      "date": "2026-07-14T09:06:52Z",
-      "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $45,938; [note] address has no contract code (EOA or not deployed). Positive evidence: 288075 holders \u2014 reasonably distributed; Trading 437+ days without a known incident in this scan; Custom verified source (not a mass-produced factory t",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-090652-0x1Bdf71ED.md"
     }
   ],
   "reports": [
