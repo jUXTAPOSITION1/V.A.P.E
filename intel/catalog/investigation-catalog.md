@@ -271,3 +271,5 @@
 | 2026-07-17 | auto | 0x43976a124e6834b541840Ce741243dAD3dd538DA (RAIN) | deep_investigation | REJECT (37/100) | Owner not renounced (0xaff5289591653038340645fdc1e1ed3a3b52e436) — can still act | +7d |
 
 | 2026-07-17 | auto | 0x5FbE62dfdB805E1711d36Db0c2E22a2D77195BA3 (TSG) | deep_investigation | CAUTION (50/100) | Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) — can still act | +7d |
+
+| 2026-07-17 | auto | 0xB200000000000000000000717E391850b706fc01 (TSG) | deep_investigation | REJECT (10/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |

@@ -1519,6 +1519,24 @@
     "symbol": "DOJI",
     "times_investigated": 1
   },
+  "8453:0xb200000000000000000000717e391850b706fc01": {
+    "address": "0xB200000000000000000000717E391850b706fc01",
+    "chain": "8453",
+    "first_investigated": "2026-07-17T23:25:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260717-232526-0xB2000000.md",
+        "score": 10,
+        "ts": "2026-07-17T23:25:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-17T23:25:26Z",
+    "last_score": 10,
+    "last_verdict": "REJECT",
+    "symbol": "TSG",
+    "times_investigated": 1
+  },
   "8453:0xb2000000000000000000007bf6d5cbb0e24cb301": {
     "address": "0xB2000000000000000000007BF6D5cBb0E24cB301",
     "chain": "8453",
