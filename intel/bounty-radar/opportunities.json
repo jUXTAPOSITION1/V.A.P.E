@@ -18981,5 +18981,24 @@
     "fitScore": 68,
     "isNew": true,
     "firstSeen": "2026-07-16T23:31:08.279057Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Across-1784246400",
+    "name": "Across",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Incident lead for forensics on Solana.",
+    "fitScore": 40,
+    "isNew": true,
+    "firstSeen": "2026-07-17T16:43:17.515083Z"
   }
 ]
