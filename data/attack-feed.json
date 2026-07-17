@@ -1,9 +1,18 @@
 {
-  "generated_at": "2026-07-16T08:16:00Z",
-  "source_report": "intel/reports/security-2026-07-16-08.md",
+  "generated_at": "2026-07-17T02:44:44Z",
+  "source_report": "intel/reports/security-2026-07-17-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-16",
+      "name": "DefiTuna Lending",
+      "amount_usd_m": 0.58,
+      "chains": [
+        "Solana"
+      ],
+      "technique": null
+    },
     {
       "date": "2026-07-15",
       "name": "Ostium",
@@ -534,15 +543,6 @@
         "Ethereum"
       ],
       "technique": "Access Control Exploit"
-    },
-    {
-      "date": "2026-05-22",
-      "name": "Polymarket",
-      "amount_usd_m": 0.7,
-      "chains": [
-        "Polygon"
-      ],
-      "technique": "Private Key Compromised"
     }
   ]
 }
