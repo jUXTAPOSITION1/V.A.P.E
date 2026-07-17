@@ -261,3 +261,5 @@
 | 2026-07-17 | auto | 0xB20000000000000000000029784108e9706A0001 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-17 | auto | 0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7 (PHAR) | deep_investigation | CAUTION (72/100) | Owner not renounced (0xd23f124bbbc958bcddc0ce624042b48154222fde) — can still act | +7d |
+
+| 2026-07-17 | auto | 0xB200000000000000000000EAe54086e2363C0eC1 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
