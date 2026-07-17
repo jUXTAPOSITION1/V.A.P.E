@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-17T23:25:26Z — 45 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-17T23:57:56Z — 46 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| mr_lightspeed | Base | `0xb20000000000000000000009a08Ff22fAC1d7F82` | 5/100 | 1 | 2026-07-17T23:57:56Z |
 | TSG | Base | `0xB200000000000000000000717E391850b706fc01` | 10/100 | 1 | 2026-07-17T23:25:26Z |
 | RAIN | Arbitrum | `0x43976a124e6834b541840Ce741243dAD3dd538DA` | 37/100 | 1 | 2026-07-17T21:22:04Z |
 | BRIAN | Base | `0xB200000000000000000000EAe54086e2363C0eC1` | 30/100 | 1 | 2026-07-17T17:18:22Z |
