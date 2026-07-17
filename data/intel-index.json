@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17T19:38:40Z",
+  "generated": "2026-07-17T20:07:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 393,
@@ -15,7 +15,7 @@
       "bounty": 205
     },
     "broadcasts": 78,
-    "investigations": 204,
+    "investigations": 206,
     "tools": 15,
     "tools_verified": 14,
     "skills": 12
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260717-183451-0xFdcD8be9.md",
-      "title": "Investigation \u2014 IBNAi",
-      "symbol": "IBNAi",
-      "name": "Investor Brand Network Ai",
-      "date": "2026-07-17T18:34:51Z",
-      "target": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Owner not renounced (0x0f5f60ad3e43839d6b9d4a6d1d8eded24db73c32) \u2014 can still act on the contract; [-10] Violent 24h move +1460% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudit",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-183451-0xFdcD8be9.md"
+      "file": "investigation-20260717-200733-0x4c433F4E.md",
+      "title": "Investigation \u2014 TSG",
+      "symbol": "TSG",
+      "name": "the sleeping giant",
+      "date": "2026-07-17T20:07:33Z",
+      "target": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-10] Violent 24h move +444% (volatility/manipulation). Positive evidence: 4062 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-200733-0x4c433F4E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-200733-0x4c433F4E.md",
+      "title": "Investigation \u2014 TSG",
+      "symbol": "TSG",
+      "name": "the sleeping giant",
+      "date": "2026-07-17T20:07:33Z",
+      "target": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-10] Violent 24h move +444% (volatility/manipulation). Positive evidence: 4062 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-200733-0x4c433F4E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260717-183451-0xFdcD8be9.md",
@@ -593,20 +607,6 @@
       "score": "82",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $45,938; [note] address has no contract code (EOA or not deployed). Positive evidence: 288075 holders \u2014 reasonably distributed; Trading 437+ days without a known incident in this scan; Custom verified source (not a mass-produced factory t",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-090652-0x1Bdf71ED.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260714-063525-0x3c8B6502.md",
-      "title": "Investigation \u2014 VELO",
-      "symbol": "VELO",
-      "name": "Velodrome",
-      "date": "2026-07-14T06:35:25Z",
-      "target": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "68",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x3460dc71a8863710d1c907b8d9d5dbc053a4102d) \u2014 can still act on the contract; [-10] Low liquidity $44,239. Positive evidence: 30057 holders \u2014 reasonably distributed; Trading 1503+ days without a known incident in this scan; Custom verified s",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-063525-0x3c8B6502.md"
     }
   ],
   "reports": [
