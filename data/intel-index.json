@@ -1,9 +1,10 @@
 {
-  "generated": "2026-07-17T21:43:23Z",
+  "generated": "2026-07-17T21:59:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 397,
+    "reports": 398,
     "reports_by_type": {
+      "bounty": 206,
       "base": 49,
       "sentiment": 28,
       "skillforge": 2,
@@ -11,8 +12,7 @@
       "macro": 13,
       "security": 49,
       "bug": 1,
-      "mainnet": 1,
-      "bounty": 205
+      "mainnet": 1
     },
     "broadcasts": 78,
     "investigations": 208,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-212204-0x43976a12.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-17-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-17T21:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260717_215907.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-17T21:59:07Z",
       "threat": null,
-      "summary": "Date: 2026-07-17 21:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-17-21.md",
-      "bytes": 2842
+      "summary": "RECENT EXPLOIT: Across $0.0M on ['Solana'] (None) \u00b7 RECENT EXPLOIT: DefiTuna Lending $0.58M on ['Solana'] (None) \u00b7 RECENT EXPLOIT: Ostium $18.0M on ['Arbitrum'] (Price Oracle Manipulation) \u00b7 Base mover: BRIAN / ETH +2607% 24h (liq $399811.0777) \u2014 volatility/rug watch \u00b7 Base mover: mrlightspeed / ZORA 1% +321% 24h (liq $70215.6003) \u2014 volat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260717_215907.md",
+      "bytes": 12978
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260717_215907.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-17T21:59:07Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Across $0.0M on ['Solana'] (None) \u00b7 RECENT EXPLOIT: DefiTuna Lending $0.58M on ['Solana'] (None) \u00b7 RECENT EXPLOIT: Ostium $18.0M on ['Arbitrum'] (Price Oracle Manipulation) \u00b7 Base mover: BRIAN / ETH +2607% 24h (liq $399811.0777) \u2014 volatility/rug watch \u00b7 Base mover: mrlightspeed / ZORA 1% +321% 24h (liq $70215.6003) \u2014 volat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260717_215907.md",
+      "bytes": 12978
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-13 21:47 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-13-21.md",
       "bytes": 3057
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-13-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-13 21:05 UTC",
-      "date": "2026-07-13T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-13-21.md",
-      "bytes": 1587
     }
   ],
   "broadcasts": [
