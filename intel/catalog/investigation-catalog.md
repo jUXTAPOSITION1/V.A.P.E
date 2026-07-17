@@ -255,3 +255,5 @@
 | 2026-07-17 | auto | 0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82 (SOL) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) — can still act | +7d |
 
 | 2026-07-17 | auto | 0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a (ARMSTRONG) | deep_investigation | PROCEED (90/100) | Violent 24h move +18481% (volatility/manipulation) | +7d |
+
+| 2026-07-17 | auto | 0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444 (EGL1) | deep_investigation | PROCEED (100/100) | clean | +7d |
