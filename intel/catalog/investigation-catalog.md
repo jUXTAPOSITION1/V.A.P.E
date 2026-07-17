@@ -263,3 +263,5 @@
 | 2026-07-17 | auto | 0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7 (PHAR) | deep_investigation | CAUTION (72/100) | Owner not renounced (0xd23f124bbbc958bcddc0ce624042b48154222fde) — can still act | +7d |
 
 | 2026-07-17 | auto | 0xB200000000000000000000EAe54086e2363C0eC1 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-17 | auto | 0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953 (IBNAi) | deep_investigation | CAUTION (55/100) | Owner not renounced (0x0f5f60ad3e43839d6b9d4a6d1d8eded24db73c32) — can still act | +7d |

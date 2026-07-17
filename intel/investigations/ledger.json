@@ -333,6 +333,25 @@
     "symbol": "BLINK",
     "times_investigated": 1
   },
+  "1:0xfdcd8be9dd37cf982472d30eeee4ec50a0296953": {
+    "address": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
+    "chain": "1",
+    "creator_address": "0x2bbdf49a329eb7fdb75e7727e9a2530ef934537b",
+    "first_investigated": "2026-07-17T18:34:51Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260717-183451-0xFdcD8be9.md",
+        "score": 55,
+        "ts": "2026-07-17T18:34:51Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-17T18:34:51Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "IBNAi",
+    "times_investigated": 1
+  },
   "42161:0x0c1c1c109fe34733fca54b82d7b46b75cfb71f6e": {
     "address": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
     "chain": "42161",
