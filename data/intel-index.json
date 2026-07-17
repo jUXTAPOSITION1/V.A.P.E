@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17T10:39:52Z",
+  "generated": "2026-07-17T10:49:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 389,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 76,
-    "investigations": 192,
+    "investigations": 194,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260717-083610-0x311935Cd.md",
-      "title": "Investigation \u2014 SOL",
-      "symbol": "SOL",
-      "name": "Solana",
-      "date": "2026-07-17T08:36:10Z",
-      "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
+      "file": "investigation-20260717-104933-0xF0Cb96a4.md",
+      "title": "Investigation \u2014 ARMSTRONG",
+      "symbol": "ARMSTRONG",
+      "name": "Cryptocurrency for All!",
+      "date": "2026-07-17T10:49:33Z",
+      "target": "0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
       "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) \u2014 can still act on the contract. Positive evidence: 21193 holders \u2014 reasonably distributed; Deep liquidity ($532,502); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 214+ days \u2014 indep",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-083610-0x311935Cd.md"
+      "summary": "Risk factors: [-10] Violent 24h move +18481% (volatility/manipulation). Positive evidence: 2292 holders \u2014 reasonably distributed; Trading 177+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 262+ days \u2014 independent longevity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-104933-0xF0Cb96a4.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-104933-0xF0Cb96a4.md",
+      "title": "Investigation \u2014 ARMSTRONG",
+      "symbol": "ARMSTRONG",
+      "name": "Cryptocurrency for All!",
+      "date": "2026-07-17T10:49:33Z",
+      "target": "0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +18481% (volatility/manipulation). Positive evidence: 2292 holders \u2014 reasonably distributed; Trading 177+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 262+ days \u2014 independent longevity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-104933-0xF0Cb96a4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260717-083610-0x311935Cd.md",
@@ -592,20 +606,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 70416 holders \u2014 reasonably distributed; Deep liquidity ($1,522,244); Trading 1250+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1902+ days \u2014 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-210812-0x0c880f67.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-195942-0x832b55B0.md",
-      "title": "Investigation \u2014 DUAL",
-      "symbol": "DUAL",
-      "name": "DUAL",
-      "date": "2026-07-13T19:59:42Z",
-      "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "33",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Low liquidity $24,588. Positive evidence: Trading 98+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token f",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-195942-0x832b55B0.md"
     }
   ],
   "reports": [
