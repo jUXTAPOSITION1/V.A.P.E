@@ -1388,6 +1388,24 @@
     "symbol": "claude",
     "times_investigated": 2
   },
+  "8453:0xb20000000000000000000029784108e9706a0001": {
+    "address": "0xB20000000000000000000029784108e9706A0001",
+    "chain": "8453",
+    "first_investigated": "2026-07-17T14:13:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260717-141317-0xB2000000.md",
+        "score": 30,
+        "ts": "2026-07-17T14:13:17Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-17T14:13:17Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "BRIAN",
+    "times_investigated": 1
+  },
   "8453:0xb2000000000000000000003833ed6154d9fa0f01": {
     "address": "0xb2000000000000000000003833eD6154d9fA0f01",
     "chain": "8453",

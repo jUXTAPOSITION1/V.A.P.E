@@ -257,3 +257,5 @@
 | 2026-07-17 | auto | 0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a (ARMSTRONG) | deep_investigation | PROCEED (90/100) | Violent 24h move +18481% (volatility/manipulation) | +7d |
 
 | 2026-07-17 | auto | 0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444 (EGL1) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-17 | auto | 0xB20000000000000000000029784108e9706A0001 (BRIAN) | deep_investigation | REJECT (30/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
