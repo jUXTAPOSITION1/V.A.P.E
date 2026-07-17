@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-17T20:07:34Z",
+  "generated": "2026-07-17T20:09:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 393,
+    "reports": 394,
     "reports_by_type": {
+      "virtuals": 49,
       "skillforge": 1,
       "base": 48,
       "macro": 13,
-      "virtuals": 48,
       "sentiment": 27,
       "security": 49,
       "bug": 1,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "skillforge",
-      "file": "skillforge-toolcheck-2026-07-17-17.md",
-      "title": "SKILLFORGE Tool Gap Report",
-      "date": "2026-07-17T17:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-17-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-17T20:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-17 17:46 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-17-17.md",
-      "bytes": 1674
+      "summary": "Date: 2026-07-17 20:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-20.md",
+      "bytes": 2342
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-17-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-17T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-17 20:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-20.md",
+      "bytes": 2342
+    },
     {
       "kind": "intel",
       "type": "skillforge",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-13 17:08 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-13-17.md",
       "bytes": 2747
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-13-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-13T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28) and global market cap 24h change (-2.5%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-13-16.md",
-      "bytes": 1825
     }
   ],
   "broadcasts": [
