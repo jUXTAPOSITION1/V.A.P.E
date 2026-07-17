@@ -409,6 +409,25 @@
     "symbol": "ESP",
     "times_investigated": 1
   },
+  "42161:0x6fbbbd8bfb1cd3986b1d05e7861a0f62f87db74b": {
+    "address": "0x6fBBbD8bFB1cd3986B1D05e7861a0f62F87DB74b",
+    "chain": "42161",
+    "creator_address": "0x72f498b59099e7a35f445dde89e6354309acfba3",
+    "first_investigated": "2026-07-17T03:47:52Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260717-034752-0x6fBBbD8b.md",
+        "score": 92,
+        "ts": "2026-07-17T03:47:52Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-17T03:47:52Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "VSN",
+    "times_investigated": 1
+  },
   "42161:0x912ce59144191c1204e64559fe8253a0e49e6548": {
     "address": "0x912CE59144191C1204E64559FE8253a0e49E6548",
     "chain": "42161",
