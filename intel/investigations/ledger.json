@@ -839,6 +839,25 @@
     "symbol": "ELSA",
     "times_investigated": 1
   },
+  "8453:0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
+    "address": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
+    "chain": "8453",
+    "creator_address": "0xfb42764d7038afa33c19f362b7b6d13226891e60",
+    "first_investigated": "2026-07-17T08:36:10Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260717-083610-0x311935Cd.md",
+        "score": 90,
+        "ts": "2026-07-17T08:36:10Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-17T08:36:10Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "SOL",
+    "times_investigated": 1
+  },
   "8453:0x31a626996e36a302b06b27283c561d5926db6b7c": {
     "address": "0x31A626996E36a302b06b27283C561d5926db6b7c",
     "chain": "8453",

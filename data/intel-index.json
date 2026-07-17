@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17T08:33:11Z",
+  "generated": "2026-07-17T08:36:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 386,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 76,
-    "investigations": 190,
+    "investigations": 192,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260717-061955-0xC4aa3dc3.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-17T06:19:55Z",
-      "target": "0xC4aa3dc36ba618EAA0D76A89750430181cFc7b07",
+      "file": "investigation-20260717-083610-0x311935Cd.md",
+      "title": "Investigation \u2014 SOL",
+      "symbol": "SOL",
+      "name": "Solana",
+      "date": "2026-07-17T08:36:10Z",
+      "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-061955-0xC4aa3dc3.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) \u2014 can still act on the contract. Positive evidence: 21193 holders \u2014 reasonably distributed; Deep liquidity ($532,502); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 214+ days \u2014 indep",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-083610-0x311935Cd.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-083610-0x311935Cd.md",
+      "title": "Investigation \u2014 SOL",
+      "symbol": "SOL",
+      "name": "Solana",
+      "date": "2026-07-17T08:36:10Z",
+      "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) \u2014 can still act on the contract. Positive evidence: 21193 holders \u2014 reasonably distributed; Deep liquidity ($532,502); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 214+ days \u2014 indep",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-083610-0x311935Cd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260717-061955-0xC4aa3dc3.md",
@@ -592,20 +606,6 @@
       "score": "33",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Low liquidity $24,588. Positive evidence: Trading 98+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token f",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-195942-0x832b55B0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-181738-0x36D527D7.md",
-      "title": "Investigation \u2014 DEXE",
-      "symbol": "DEXE",
-      "name": "Dexe",
-      "date": "2026-07-13T18:17:38Z",
-      "target": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "33",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or v",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-181738-0x36D527D7.md"
     }
   ],
   "reports": [
