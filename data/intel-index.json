@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-16T22:59:10Z",
+  "generated": "2026-07-17T00:07:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 382,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 74,
-    "investigations": 184,
+    "investigations": 186,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260716-225909-0x8453Cf5D.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-16T22:59:09Z",
-      "target": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-225909-0x8453Cf5D.md"
+      "file": "investigation-20260717-000720-0x0f020434.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "Private Yield",
+      "date": "2026-07-17T00:07:20Z",
+      "target": "0x0f020434fFa8649B6994781EeD1D1522411807Ee",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-20] Very few holders (20) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-000720-0x0f020434.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-000720-0x0f020434.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "Private Yield",
+      "date": "2026-07-17T00:07:20Z",
+      "target": "0x0f020434fFa8649B6994781EeD1D1522411807Ee",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-20] Very few holders (20) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-000720-0x0f020434.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260716-225909-0x8453Cf5D.md",
@@ -592,20 +606,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-132624-0xeC0d0159.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-120727-0x930389F6.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvet",
-      "date": "2026-07-13T12:07:27Z",
-      "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AERO (0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $28,457. Positive evidence: 12949 holders \u2014 reasonably distributed; Custom verif",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-120727-0x930389F6.md"
     }
   ],
   "reports": [

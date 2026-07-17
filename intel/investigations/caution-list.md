@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-16T22:59:09Z — 14 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-17T00:07:20Z — 15 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| YIELD | Ethereum | `0x0f020434fFa8649B6994781EeD1D1522411807Ee` | 70/100 | 1 | 2026-07-17T00:07:20Z |
 | $COBIE | Base | `0x199084f1390B58493096Ff73Ec74c68164ba8453` | 70/100 | 1 | 2026-07-16T11:42:44Z |
 | Doji | Base | `0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3` | 65/100 | 1 | 2026-07-16T04:39:45Z |
 | BRIAN | Base | `0x3ecced5b416e58664f04a39dD18935eB71D33B15` | 75/100 | 1 | 2026-07-15T16:24:58Z |
