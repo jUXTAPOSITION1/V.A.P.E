@@ -249,3 +249,5 @@
 | 2026-07-17 | auto | 0x0f020434fFa8649B6994781EeD1D1522411807Ee (YIELD) | deep_investigation | CAUTION (70/100) | Very few holders (20) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-17 | auto | 0x6fBBbD8bFB1cd3986B1D05e7861a0f62F87DB74b (VSN) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-17 | auto | 0xC4aa3dc36ba618EAA0D76A89750430181cFc7b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
