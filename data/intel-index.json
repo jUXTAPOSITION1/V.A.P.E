@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-17T15:20:20Z",
+  "generated": "2026-07-17T15:56:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -14,7 +14,7 @@
       "bounty": 205
     },
     "broadcasts": 77,
-    "investigations": 198,
+    "investigations": 200,
     "tools": 15,
     "tools_verified": 15,
     "skills": 12
@@ -22,17 +22,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260717-141317-0xB2000000.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Ski Mask Brian",
-      "date": "2026-07-17T14:13:17Z",
-      "target": "0xB20000000000000000000029784108e9706A0001",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +1077% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-141317-0xB2000000.md"
+      "file": "investigation-20260717-155659-0x13A46699.md",
+      "title": "Investigation \u2014 PHAR",
+      "symbol": "PHAR",
+      "name": "Pharaoh",
+      "date": "2026-07-17T15:56:59Z",
+      "target": "0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7",
+      "chain": "43114 (Avalanche)",
+      "verdict": "CAUTION",
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0xd23f124bbbc958bcddc0ce624042b48154222fde) \u2014 can still act on the contract; [-8] Low holder count (142); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-155659-0x13A46699.md"
     },
     "report": {
       "kind": "intel",
@@ -47,6 +47,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260717-155659-0x13A46699.md",
+      "title": "Investigation \u2014 PHAR",
+      "symbol": "PHAR",
+      "name": "Pharaoh",
+      "date": "2026-07-17T15:56:59Z",
+      "target": "0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7",
+      "chain": "43114 (Avalanche)",
+      "verdict": "CAUTION",
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0xd23f124bbbc958bcddc0ce624042b48154222fde) \u2014 can still act on the contract; [-8] Low holder count (142); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-155659-0x13A46699.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260717-141317-0xB2000000.md",
@@ -592,20 +606,6 @@
       "score": "3",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x118b2bcf10a005a2ac7ad36d9c1075e82379b614) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DEXE (0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a) \u2014 REJECT 33/100 \u2014 likely the same serial campai",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260714-005606-0x459d9e51.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260713-232908-0x80F994E3.md",
-      "title": "Investigation \u2014 ELSA",
-      "symbol": "ELSA",
-      "name": "Elsa Chain",
-      "date": "2026-07-13T23:29:08Z",
-      "target": "0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 51471 holders \u2014 reasonably distributed; Deep liquidity ($1,905,514); Trading 175+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260713-232908-0x80F994E3.md"
     }
   ],
   "reports": [
