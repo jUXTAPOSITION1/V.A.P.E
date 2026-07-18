@@ -655,7 +655,24 @@ app.use("*", async (c, next) => {
     };
   }
 
-  return paymentMiddleware(routes as any, resourceServer)(c, next);
+  try {
+    return await paymentMiddleware(routes as any, resourceServer)(c, next);
+  } catch (err) {
+    // Temporary diagnostic (2026-07-17/18): DATA AGENT's paid retries have
+    // been getting a bare, undiagnosable "Internal Server Error" (Hono's
+    // own default catch-all, no detail) since the 2026-07-15 deploy that
+    // shipped the CDP/VAPOR alternator + @x402/* 2.18.0 bump together.
+    // Surface the real error only for the exact traffic class that's
+    // broken (never for arbitrary requests), so this doesn't leak
+    // internals to unrelated probing. Remove once root-caused.
+    if (isDataAgentTraffic) {
+      return c.json({
+        diag_error: err instanceof Error ? err.message : String(err),
+        diag_stack: err instanceof Error ? err.stack : undefined,
+      }, 500);
+    }
+    throw err;
+  }
 });
 
 for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
