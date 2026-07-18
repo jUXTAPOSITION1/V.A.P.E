@@ -25,6 +25,16 @@ the full rationale:
   commentary — included because the user wants VAPE to learn from its own
   operating history, not because every row here is as rock-solid as the two
   sources above.
+- **external** (0 examples) —
+  `data/finetune/external_corpus.jsonl`, produced separately by
+  `scripts/build_external_corpus.py` (real network fetches: NVD CVE API +
+  Code4rena audit-contest findings). OUTPUT is a severity label that comes
+  from the CVE's own official CVSS metric or the contest's own judged risk
+  category — never re-derived. This is the first THIRD-PARTY source in the
+  corpus (everything else is VAPE's own operating history); see that
+  script's docstring for exactly which external sources qualified (verified
+  real structure) and which didn't (SWC Registry, Sherlock — deferred, not
+  silently dropped).
 
 **Why most of the labels are trustworthy:** investigation and sweep outputs
 come from this repo's own deterministic scoring functions, never an LLM. This
@@ -53,7 +63,9 @@ existing `skillforge/tools/ai-redteam` (promptfoo/deepteam) harness — see
   operating — not a finished training set. Re-run this script as the
   investigation ledger, sweep reports, and lessons log all grow.
 - **On-chain / keyless recon only** for investigation and sweep sources — no
-  third-party audit data, no private feeds.
+  private feeds. The external source adds real third-party audit/CVE data,
+  but only if `scripts/build_external_corpus.py` has been run separately
+  (it needs live internet access this script never uses itself).
 - **Base-focused.** Reflects the chains VAPE actually operates on.
 - **Lesson source is mixed-provenance** — see above; don't treat it as an
   equally rigorous ground truth as investigation/sweep.

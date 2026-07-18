@@ -189,3 +189,43 @@ def test_is_val_works_for_arbitrary_string_keys():
     # Renamed from a target-address-only key to a generic per-example key —
     # must still work for report filenames and lesson ids, not just addresses.
     assert bf._is_val("security-2026-07-17-08.md") == bf._is_val("security-2026-07-17-08.md")
+
+
+def test_collect_external_returns_empty_when_file_absent(monkeypatch, tmp_path):
+    monkeypatch.setattr(bf, "EXTERNAL_PATH", str(tmp_path / "does-not-exist.jsonl"))
+    assert bf.collect_external() == []
+
+
+def test_collect_external_reads_real_rows_and_skips_malformed(monkeypatch, tmp_path):
+    path = tmp_path / "external_corpus.jsonl"
+    good = {"source": "cve", "source_id": "CVE-2023-1", "messages": [
+        {"role": "system", "content": "s"}, {"role": "user", "content": "u"},
+        {"role": "assistant", "content": "Severity: HIGH"}]}
+    missing_id = {"source": "cve", "messages": good["messages"]}
+    no_messages = {"source": "cve", "source_id": "CVE-2023-2"}
+    path.write_text(
+        json.dumps(good) + "\n" + json.dumps(missing_id) + "\n" +
+        json.dumps(no_messages) + "\n" + "not json\n"
+    )
+    monkeypatch.setattr(bf, "EXTERNAL_PATH", str(path))
+
+    examples = bf.collect_external()
+    assert len(examples) == 1
+    assert examples[0]["key"] == "CVE-2023-1"
+    assert examples[0]["messages"] == good["messages"]
+
+
+def test_collect_all_tags_external_source(monkeypatch, tmp_path):
+    path = tmp_path / "external_corpus.jsonl"
+    row = {"source": "cve", "source_id": "CVE-2023-9", "messages": [
+        {"role": "system", "content": "s"}, {"role": "user", "content": "u"},
+        {"role": "assistant", "content": "Severity: LOW"}]}
+    path.write_text(json.dumps(row) + "\n")
+    monkeypatch.setattr(bf, "EXTERNAL_PATH", str(path))
+    monkeypatch.setattr(bf, "INVEST_GLOB", str(tmp_path / "no-such-glob-*.md"))
+    monkeypatch.setattr(bf, "REPORTS_DIR", str(tmp_path / "no-such-reports"))
+    monkeypatch.setattr(bf, "LESSONS_PATH", str(tmp_path / "no-such-lessons.jsonl"))
+
+    examples = bf.collect_all()
+    assert len(examples) == 1
+    assert examples[0]["source"] == "external"

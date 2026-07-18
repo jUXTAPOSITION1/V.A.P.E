@@ -47,6 +47,18 @@ own honesty story:
   source, and the rest are terse one-line summaries the sweep-report parser
   above already captures more richly from the real report tables.)
 
+  external         data/finetune/external_corpus.jsonl (optional — only
+                   present after running scripts/build_external_corpus.py,
+                   which does real network I/O this offline script never
+                   does itself). Real third-party security ground truth VAPE
+                   didn't produce: NVD CVE disclosures (label = the CVE's own
+                   official CVSS severity) and Code4rena audit-contest
+                   findings (label = the contest's own judged High/Medium
+                   risk category). Same rule as everywhere else in this file:
+                   only rows with a real, independently-verified label are
+                   included — see build_external_corpus.py's own docstring
+                   for exactly which sources qualified and which didn't.
+
 This does NOT replace score() or any sweep's compute_*_score(). Per this
 repo's design law (rule-based first, LLM only when reasoning is required),
 the deterministic scorers stay the source of truth. A model fine-tuned on
@@ -81,6 +93,7 @@ INVEST_GLOB = os.path.join(ROOT, "intel", "investigations", "investigation-*.md"
 REPORTS_DIR = os.path.join(ROOT, "intel", "reports")
 LESSONS_PATH = os.path.join(ROOT, "skillforge", "memory", "lessons.jsonl")
 OUT_DIR = os.path.join(ROOT, "data", "finetune")
+EXTERNAL_PATH = os.path.join(OUT_DIR, "external_corpus.jsonl")
 
 VAL_FRACTION = 0.10  # ~1-in-10 held out for evaluation
 
@@ -379,8 +392,31 @@ def collect_investigations():
     return examples
 
 
+def collect_external():
+    """Optional fourth source: data/finetune/external_corpus.jsonl, produced
+    by scripts/build_external_corpus.py's real network fetches (NVD CVE +
+    Code4rena). Returns [] if that script has never been run — this stays a
+    real gap in the dataset card's stats, never silently faked."""
+    if not os.path.exists(EXTERNAL_PATH):
+        return []
+    examples = []
+    with open(EXTERNAL_PATH, encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except ValueError:
+                continue
+            if not row.get("messages") or not row.get("source_id"):
+                continue
+            examples.append({"key": row["source_id"], "messages": row["messages"]})
+    return examples
+
+
 def collect_all():
-    """All three sources, each example tagged with its source category and a
+    """All four sources, each example tagged with its source category and a
     stable split key. See module docstring for why findings.jsonl is excluded."""
     investigations = collect_investigations()
     sweeps = collect_sweeps()
@@ -389,7 +425,10 @@ def collect_all():
     lessons = collect_lessons()
     for e in lessons:
         e["source"] = "lesson"
-    return investigations + sweeps + lessons
+    external = collect_external()
+    for e in external:
+        e["source"] = "external"
+    return investigations + sweeps + lessons + external
 
 
 def _source_counts(examples):
@@ -467,6 +506,16 @@ the full rationale:
   commentary — included because the user wants VAPE to learn from its own
   operating history, not because every row here is as rock-solid as the two
   sources above.
+- **external** ({src_counts.get('external', 0)} examples) —
+  `data/finetune/external_corpus.jsonl`, produced separately by
+  `scripts/build_external_corpus.py` (real network fetches: NVD CVE API +
+  Code4rena audit-contest findings). OUTPUT is a severity label that comes
+  from the CVE's own official CVSS metric or the contest's own judged risk
+  category — never re-derived. This is the first THIRD-PARTY source in the
+  corpus (everything else is VAPE's own operating history); see that
+  script's docstring for exactly which external sources qualified (verified
+  real structure) and which didn't (SWC Registry, Sherlock — deferred, not
+  silently dropped).
 
 **Why most of the labels are trustworthy:** investigation and sweep outputs
 come from this repo's own deterministic scoring functions, never an LLM. This
@@ -495,7 +544,9 @@ existing `skillforge/tools/ai-redteam` (promptfoo/deepteam) harness — see
   operating — not a finished training set. Re-run this script as the
   investigation ledger, sweep reports, and lessons log all grow.
 - **On-chain / keyless recon only** for investigation and sweep sources — no
-  third-party audit data, no private feeds.
+  private feeds. The external source adds real third-party audit/CVE data,
+  but only if `scripts/build_external_corpus.py` has been run separately
+  (it needs live internet access this script never uses itself).
 - **Base-focused.** Reflects the chains VAPE actually operates on.
 - **Lesson source is mixed-provenance** — see above; don't treat it as an
   equally rigorous ground truth as investigation/sweep.
