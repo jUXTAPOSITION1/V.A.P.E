@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-18T19:39:59Z",
+  "generated": "2026-07-18T20:05:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 410,
+    "reports": 411,
     "reports_by_type": {
+      "virtuals": 53,
       "base": 52,
       "macro": 14,
-      "virtuals": 52,
       "security": 52,
       "sentiment": 29,
       "skillforge": 3,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-18-15.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-18T15:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-18-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-18T20:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-18 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-15.md",
-      "bytes": 3324
+      "summary": "Date: 2026-07-18 20:05 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-20.md",
+      "bytes": 2351
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-18-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-18T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-18 20:05 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-20.md",
+      "bytes": 2351
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-14 20:15 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-14-20.md",
       "bytes": 2215
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-14-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-14T19:00Z",
-      "threat": null,
-      "summary": "Three incidents occurred in the last 7 days across the provided feed, all below the $50M threshold, with the largest being Bonzo Lend's $10.05M price oracle manipulation on Hedera. The remaining recent events were a $0.27M silent auto-approval hack on Lumi Finance (Arbitrum) and a $0.009M flashloan accounting logic exploit on Chi Protocol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-14-19.md",
-      "bytes": 5547
     }
   ],
   "broadcasts": [
