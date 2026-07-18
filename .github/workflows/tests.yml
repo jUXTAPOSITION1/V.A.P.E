@@ -6,7 +6,7 @@ name: Tests (deterministic core + pyflakes)
 #      the safe fmt helpers). These are the pieces whose correctness a reader,
 #      or VAPE's own self-improvement loop, has to trust before believing a
 #      verdict — and the first thing a self-proposed refactor could regress.
-#   2. pyflakes over agents/ + scripts/ — real undefined-name/unused-import
+#   2. pyflakes over agents/ + scripts/ + training/ — real undefined-name/unused-import
 #      bugs, the same check self_improve.py already runs reactively, promoted
 #      to a pre-merge gate so a broken import can't land on main.
 # No secrets, no API keys, no external calls — runs in seconds.
@@ -16,6 +16,7 @@ on:
     paths:
       - "agents/**"
       - "scripts/**"
+      - "training/**"
       - "skillforge/**"
       - "tests/**"
       - "pytest.ini"
@@ -24,6 +25,7 @@ on:
     paths:
       - "agents/**"
       - "scripts/**"
+      - "training/**"
       - "skillforge/**"
       - "tests/**"
       - "pytest.ini"
@@ -57,7 +59,7 @@ jobs:
           if ! pip install -r agents/requirements.txt; then
             echo "::warning::agents/requirements.txt install failed — continuing (deterministic tests don't need it, but investigate if imports break)"
           fi
-      - name: pyflakes (agents/ + scripts/)
-        run: python -m pyflakes agents/ scripts/
+      - name: pyflakes (agents/ + scripts/ + training/)
+        run: python -m pyflakes agents/ scripts/ training/
       - name: pytest (deterministic core)
         run: python -m pytest tests/ -q

@@ -52,15 +52,23 @@ SCRAPE_PROVIDERS = [
 ]
 
 # ── quota guard ──────────────────────────────────────────────────────────────
-# Conservative monthly caps, deliberately well under each provider's real
+# Conservative monthly caps, deliberately under each provider's real
 # free-tier ceiling (Tavily free ~1,000 searches/mo, Firecrawl free ~500
 # scrape credits/mo, Bright Data's free trial credits are smaller/less
 # predictable) — these keys are shared across every hourly/daily VAPE
 # workflow that might call research.py, so the cap has to hold across ALL of
-# them combined, not per-workflow. Adjust once real usage patterns are known;
-# erring conservative costs nothing (keyless fallback still works), erring
-# permissive risks a surprise bill or a dead key mid-month.
-MONTHLY_QUOTA = {"tavily": 200, "firecrawl": 100, "brightdata": 20}
+# them combined, not per-workflow.
+#
+# The original tavily=200 was too conservative in practice: with a 30-minute
+# featured-investigation cycle plus hourly sweeps all drawing from the same
+# pool, real usage tripped it by the middle of every month (confirmed via
+# skillforge/memory/research_quota.json showing count=200/cap=200 well
+# before month-end), silently degrading every report's web search section to
+# empty for the rest of the month even though the underlying Tavily account
+# still had ~80% of its real free tier left unused. 800 keeps the same
+# safety margin (~20% headroom under Tavily's real ~1,000/mo ceiling)
+# without leaving that headroom unused for weeks at a time.
+MONTHLY_QUOTA = {"tavily": 800, "firecrawl": 100, "brightdata": 20}
 # Deliberately NOT under data/cache/ — that directory is gitignored (it's an
 # ephemeral TTL response cache), so a quota counter living there would reset
 # to zero on every fresh CI checkout and never actually cap anything across

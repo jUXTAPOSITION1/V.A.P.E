@@ -128,23 +128,11 @@ jobs:
             echo "--- /$path ---"
             curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
-          # Temporary diagnostic (2026-07-17): DATA AGENT (X-VAPE-Client:
-          # data-agent) has been getting a bare HTTP 500 with no body from
-          # every /data/* offering since the 2026-07-15T13:04 deploy —
-          # Cloudflare's generic uncaught-exception response, so something in
-          # the request path throws. This hits the exact same route/header
-          # combo with -v to capture full response, headers, and any body.
-          # Remove once root-caused.
-          echo "--- /data/chain_overview (data-agent header, unpaid — exercises the facilitator-alternator selection on the 402 challenge path) ---"
-          curl -sS -v -w '\n(HTTP %{http_code})\n' --retry 0 -H "X-VAPE-Client: data-agent" \
-            "https://vape-x402.vapex402.workers.dev/data/chain_overview?chain=Base" 2>&1
-          echo "--- VAPOR /stats (the other half of the 50/50 hybrid split) ---"
+          # Cross-checks VAPOR's own internal counters against the worker's
+          # ledger above — both should move together as real settlements land
+          # on each side of the CDP/VAPOR split.
+          echo "--- VAPOR /stats ---"
           curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
-          echo "--- VAPOR /supported (same call getSupported() makes) ---"
-          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/supported"
-          echo "--- VAPOR /verify with a deliberately-invalid payload (expect a clean 400, not a timeout/connection failure) ---"
-          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 -X POST "https://x402.duckdns.org/verify" \
-            -H "Content-Type: application/json" -d '{"x402Version":1,"paymentPayload":{},"paymentRequirements":{}}'
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}

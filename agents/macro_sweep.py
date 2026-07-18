@@ -22,16 +22,34 @@ from agents import llm  # noqa: E402
 
 def compute_trend(fng, glob):
     """RISK-OFF / RISK-ON / NEUTRAL from real Fear&Greed + global mcap
-    change — reproducible thresholds, not an LLM vibe."""
+    change — reproducible thresholds, not an LLM vibe.
+
+    Extreme Fear&Greed or a sharp mcap move are strong enough signals to
+    call the trend on their own (kept as-is below). But a LOT of days land
+    in the ambiguous middle where neither threshold fires and the result was
+    always a flat NEUTRAL — even though get_fear_greed() already fetches
+    yesterday's reading (`prev_value`) specifically to support a momentum
+    check, and that field was being discarded unused. Fast day-over-day
+    sentiment movement is a real, harder-to-fake signal (a one-day
+    Fear&Greed swing of 15+ points reflects an actual shift in aggregate
+    market behavior, not noise), so it now gets a say in the ambiguous
+    middle zone instead of always defaulting to NEUTRAL there."""
     fng_val = fng.get("value")
     mcap_chg = glob.get("mcap_change_24h_pct")
-    if isinstance(fng_val, int) and isinstance(mcap_chg, (int, float)):
-        if fng_val <= 25 or mcap_chg <= -5:
+    if not (isinstance(fng_val, int) and isinstance(mcap_chg, (int, float))):
+        return "UNKNOWN"
+    if fng_val <= 25 or mcap_chg <= -5:
+        return "RISK-OFF"
+    if fng_val >= 70 and mcap_chg >= 2:
+        return "RISK-ON"
+    prev_val = fng.get("prev_value")
+    if isinstance(prev_val, int):
+        delta = fng_val - prev_val
+        if delta <= -15:
             return "RISK-OFF"
-        if fng_val >= 70 and mcap_chg >= 2:
+        if delta >= 15 and mcap_chg > 0:
             return "RISK-ON"
-        return "NEUTRAL"
-    return "UNKNOWN"
+    return "NEUTRAL"
 
 
 def run():
@@ -86,8 +104,11 @@ def run():
 
 ## MACRO TREND: {trend_emoji} {trend}
 
-Computed deterministically from real Fear & Greed ({fng.get('value', 'unavailable')}) and global
-market cap 24h change ({glob.get('mcap_change_24h_pct', 'unavailable')}%).
+Computed deterministically from real Fear & Greed ({fng.get('value', 'unavailable')}, prior day
+{fng.get('prev_value', 'unavailable')}) and global market cap 24h change
+({glob.get('mcap_change_24h_pct', 'unavailable')}%). A sharp day-over-day Fear & Greed swing (15+
+points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON — see the function
+docstring in `agents/macro_sweep.py` for the exact thresholds.
 
 ---
 
@@ -96,6 +117,7 @@ market cap 24h change ({glob.get('mcap_change_24h_pct', 'unavailable')}%).
 | Metric | Value |
 |--------|-------|
 | Fear & Greed | {fng.get('value', 'unavailable')} ({fng.get('classification', 'unavailable')}) |
+| Fear & Greed (prior day) | {fng.get('prev_value', 'unavailable')} ({fng.get('prev_classification', 'unavailable')}) |
 | Global Market Cap 24h | {glob.get('mcap_change_24h_pct', 'unavailable')}% |
 | BTC Dominance | {glob.get('btc_dominance_pct', 'unavailable')}% |
 | ETH Dominance | {glob.get('eth_dominance_pct', 'unavailable')}% |

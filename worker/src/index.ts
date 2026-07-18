@@ -28,7 +28,6 @@ import { estimateCostBasis } from "./lib/costBasis";
 import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
-import { nextDataAgentFacilitator } from "./lib/dataAgentAlternator";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -527,24 +526,29 @@ app.use("*", async (c, next) => {
   // still stands in as fallback if CDP itself throws — this narrows WHERE
   // the split applies, it doesn't remove the resilience).
   //
-  // A second carve-out: DATA AGENT's own hires (agents/data_agent.py) tag
-  // X-VAPE-Client: data-agent and get a deterministic CDP/VAPOR alternation
-  // (see lib/dataAgentAlternator.ts) instead of the coin flip — its low,
-  // fixed cadence means a random split could string together a long run
-  // that never touches one side, and VAPOR needs genuine, regular
-  // settlement volume from VAPE's own traffic to prove itself as a real
-  // facilitator. Any other automated/agent traffic keeps the random 50/50
-  // split, since Basescan's label doesn't matter to a script.
+  // A second carve-out: DATA AGENT runs as two independent, explicitly-
+  // pinned instances (agents/data_agent.py tags X-VAPE-Client: data-agent
+  // for CDP, agents/data_agent_vapor.py tags data-agent-vapor for VAPOR)
+  // rather than one instance alternating between the two. An earlier
+  // version tried a persisted KV toggle (see git history on
+  // lib/dataAgentAlternator.ts, now removed) meant to flip 50/50 from a
+  // single agent — it turned out to be the wrong tool for proving VAPOR
+  // out reliably: debugging it required adding temporary debug fields to
+  // real job records to see what was actually happening call-to-call, and
+  // by the time that was in place, two thin always-CDP / always-VAPOR
+  // agents were simply less to get wrong than one agent coordinating state
+  // through a shared, rarely-written toggle. Any other automated/agent
+  // traffic keeps the random 50/50 split, since Basescan's label doesn't
+  // matter to a script.
   const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
-  const isDataAgentTraffic = c.req.header("X-VAPE-Client") === "data-agent";
+  const isDataAgentCdp = c.req.header("X-VAPE-Client") === "data-agent";
+  const isDataAgentVapor = c.req.header("X-VAPE-Client") === "data-agent-vapor";
   const vaporClient = c.env.VAPOR_FACILITATOR_URL
     ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
     : null;
   let usesVaporPrimary = false;
-  if (vaporClient !== null && !isSiteTraffic) {
-    usesVaporPrimary = isDataAgentTraffic
-      ? (await nextDataAgentFacilitator(c.env.VAPE_JOBS)) === "vapor"
-      : Math.random() < 0.5;
+  if (vaporClient !== null && !isSiteTraffic && !isDataAgentCdp) {
+    usesVaporPrimary = isDataAgentVapor ? true : Math.random() < 0.5;
   }
   const hybridClient = vaporClient
     ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
@@ -655,24 +659,7 @@ app.use("*", async (c, next) => {
     };
   }
 
-  try {
-    return await paymentMiddleware(routes as any, resourceServer)(c, next);
-  } catch (err) {
-    // Temporary diagnostic (2026-07-17/18): DATA AGENT's paid retries have
-    // been getting a bare, undiagnosable "Internal Server Error" (Hono's
-    // own default catch-all, no detail) since the 2026-07-15 deploy that
-    // shipped the CDP/VAPOR alternator + @x402/* 2.18.0 bump together.
-    // Surface the real error only for the exact traffic class that's
-    // broken (never for arbitrary requests), so this doesn't leak
-    // internals to unrelated probing. Remove once root-caused.
-    if (isDataAgentTraffic) {
-      return c.json({
-        diag_error: err instanceof Error ? err.message : String(err),
-        diag_stack: err instanceof Error ? err.stack : undefined,
-      }, 500);
-    }
-    throw err;
-  }
+  return await paymentMiddleware(routes as any, resourceServer)(c, next);
 });
 
 for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {

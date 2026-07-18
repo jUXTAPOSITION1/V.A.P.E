@@ -35,19 +35,66 @@ def load_reputation():
 
 
 def compute_health_score(snapshot):
-    """0-10, starts neutral at 5. Real VIRTUAL 24h price change drives the
-    swing — see intel_common.py's module docstring for why this isn't LLM-guessed."""
+    """0-10, starts neutral at 5. Four independent real factors drive the
+    swing — see intel_common.py's module docstring for why this isn't
+    LLM-guessed. A single day's price change is noisy (any token can swing
+    double digits on thin volume in a day) and was previously the ONLY
+    input; this weights it down and adds three sturdier signals so one bad
+    (or good) day can't single-handedly swing the whole score:
+
+    - 24h price change (small weight — noisy, kept for immediacy)
+    - 7d price trend (medium weight — smooths single-day noise)
+    - 7d protocol TVL trend (medium weight — real capital staying in the
+      ecosystem is harder to fake than a price pump, and moves independently
+      of the token's own price action)
+    - volume/mcap ratio (small weight — a token trading at a healthy
+      fraction of its market cap daily has real, active markets; one barely
+      trading at all is illiquid regardless of what price is doing)
+
+    Any factor whose real data is unavailable this cycle is simply skipped
+    (not defaulted to neutral/zero), so a single flaky upstream API degrades
+    the score's precision, never its direction."""
     score = 5.0
-    chg = snapshot.get("virtual_change_24h_pct")
-    if isinstance(chg, (int, float)):
-        if chg >= 5:
-            score += 2
-        elif chg > 0:
+    chg_24h = snapshot.get("virtual_change_24h_pct")
+    if isinstance(chg_24h, (int, float)):
+        if chg_24h >= 5:
             score += 1
-        elif chg <= -10:
-            score -= 2
-        elif chg < 0:
+        elif chg_24h > 0:
+            score += 0.5
+        elif chg_24h <= -10:
             score -= 1
+        elif chg_24h < 0:
+            score -= 0.5
+
+    chg_7d = snapshot.get("virtual_change_7d_pct")
+    if isinstance(chg_7d, (int, float)):
+        if chg_7d >= 10:
+            score += 2
+        elif chg_7d > 0:
+            score += 1
+        elif chg_7d <= -20:
+            score -= 2
+        elif chg_7d < 0:
+            score -= 1
+
+    tvl_7d = snapshot.get("tvl_change_7d_pct")
+    if isinstance(tvl_7d, (int, float)):
+        if tvl_7d >= 10:
+            score += 2
+        elif tvl_7d > 0:
+            score += 1
+        elif tvl_7d <= -20:
+            score -= 2
+        elif tvl_7d < 0:
+            score -= 1
+
+    vol_ratio = snapshot.get("volume_to_mcap_pct")
+    if isinstance(vol_ratio, (int, float)):
+        if vol_ratio >= 5:
+            score += 1
+        elif vol_ratio < 0.5:
+            score -= 1
+
     return max(0, min(10, round(score, 1)))
 
 
@@ -73,18 +120,24 @@ def run():
         "background rather than something this cycle's data itself showed."
     )
     user = (
-        f"PROTOCOL HEALTH (already computed, do not change it): {score}/10\n"
+        f"PROTOCOL HEALTH (already computed from 4 weighted real factors below, do not change it): {score}/10\n"
         f"VIRTUAL price: ${snapshot.get('virtual_price_usd', 'unavailable')} "
-        f"({snapshot.get('virtual_change_24h_pct', 'unavailable')}% 24h)\n"
+        f"({snapshot.get('virtual_change_24h_pct', 'unavailable')}% 24h, "
+        f"{snapshot.get('virtual_change_7d_pct', 'unavailable')}% 7d, "
+        f"{snapshot.get('virtual_change_30d_pct', 'unavailable')}% 30d)\n"
         f"VIRTUAL market cap: ${snapshot.get('virtual_mcap_usd', 'unavailable')}\n"
-        f"Virtuals Protocol TVL: ${snapshot.get('protocol_tvl_usd', 'unavailable')}\n"
+        f"VIRTUAL 24h volume / market cap: {snapshot.get('volume_to_mcap_pct', 'unavailable')}% "
+        f"(liquidity/activity signal — a healthy token typically trades a few percent of its mcap daily)\n"
+        f"Virtuals Protocol TVL: ${snapshot.get('protocol_tvl_usd', 'unavailable')} "
+        f"({snapshot.get('tvl_change_7d_pct', 'unavailable')}% 7d, {snapshot.get('tvl_change_30d_pct', 'unavailable')}% 30d)\n"
         f"VAPE's own real activity: {json.dumps(activity)}\n"
         f"VAPE's live offerings: {len(live_offerings)} of {len(offerings)} total\n\n"
         f"Web search on Virtuals/ACP news:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write two sections in markdown, each starting with '### ':\n"
-        "1. Ecosystem & ACP Activity — what the price/TVL numbers and search results say "
-        "about protocol health right now, at whatever depth they support.\n"
+        "1. Ecosystem & ACP Activity — what the price/TVL trends, liquidity signal, and search "
+        "results say about protocol health right now, at whatever depth they support. Explain "
+        "which of the four factors is driving the score this cycle, not just the score itself.\n"
         "2. Action Items for VAPE — bullets grounded in VAPE's own real activity numbers above, "
         "as many as are genuinely warranted (not a fixed count)."
     )
@@ -101,19 +154,28 @@ def run():
 
 ## PROTOCOL HEALTH: {score}/10
 
-Computed deterministically from VIRTUAL's real 24h price change ({snapshot.get('virtual_change_24h_pct', '—')}%).
+Computed deterministically from four weighted real factors: 24h price change ({snapshot.get('virtual_change_24h_pct', '—')}%,
+small weight — noisy), 7d price trend ({snapshot.get('virtual_change_7d_pct', '—')}%, medium weight), 7d Protocol TVL
+trend ({snapshot.get('tvl_change_7d_pct', '—')}%, medium weight — real capital staying in the ecosystem), and
+24h volume/market-cap ratio ({snapshot.get('volume_to_mcap_pct', '—')}%, small weight — liquidity/activity signal).
+A single day's price move can no longer single-handedly swing this score.
 
 ---
 
-## Token Movement — VIRTUAL (real, CoinGecko)
+## Token Movement — VIRTUAL (real, CoinGecko + DefiLlama)
 
 | Metric | Value |
 |---|---|
 | Price | {ic.fmt_price(snapshot.get('virtual_price_usd'))} |
 | 24h Change | {snapshot.get('virtual_change_24h_pct') if snapshot.get('virtual_change_24h_pct') is not None else 'unavailable'}% |
+| 7d Change | {snapshot.get('virtual_change_7d_pct') if snapshot.get('virtual_change_7d_pct') is not None else 'unavailable'}% |
+| 30d Change | {snapshot.get('virtual_change_30d_pct') if snapshot.get('virtual_change_30d_pct') is not None else 'unavailable'}% |
 | Market Cap | {ic.fmt_usd(snapshot.get('virtual_mcap_usd'))} |
 | 24h Volume | {ic.fmt_usd(snapshot.get('virtual_vol_24h_usd'))} |
+| Volume / Market Cap | {snapshot.get('volume_to_mcap_pct') if snapshot.get('volume_to_mcap_pct') is not None else 'unavailable'}% |
 | Protocol TVL | {ic.fmt_usd(snapshot.get('protocol_tvl_usd'))} |
+| TVL 7d Change | {snapshot.get('tvl_change_7d_pct') if snapshot.get('tvl_change_7d_pct') is not None else 'unavailable'}% |
+| TVL 30d Change | {snapshot.get('tvl_change_30d_pct') if snapshot.get('tvl_change_30d_pct') is not None else 'unavailable'}% |
 
 ---
 

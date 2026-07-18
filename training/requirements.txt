@@ -1,0 +1,16 @@
+# GPU-box-only deps for training/train_lora.py and training/eval_candidate.py —
+# NOT part of agents/requirements.txt, since these are large (CUDA/torch) and
+# only ever needed on the self-hosted training runner, never in the normal
+# GitHub-hosted CI/Actions jobs that run the rest of this repo.
+#
+# Pin loosely (minimum known-good versions) rather than exact-pinning every
+# package — the training box is set up once by the user per training/
+# setup_runner.sh and re-used across runs, not rebuilt fresh each time like a
+# GitHub-hosted runner's ephemeral environment.
+torch>=2.3
+transformers>=4.44
+peft>=0.12
+bitsandbytes>=0.43
+accelerate>=0.33
+datasets>=2.20
+huggingface_hub>=0.24

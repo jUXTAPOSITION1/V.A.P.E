@@ -108,7 +108,7 @@ function dateKey(iso: string): string {
   return iso.slice(0, 10); // YYYY-MM-DD
 }
 
-async function readJson<T>(kv: KVLike, key: string, fallback: T): Promise<T> {
+export async function readJson<T>(kv: KVLike, key: string, fallback: T): Promise<T> {
   try {
     const v = await kv.get(key, { type: "json" });
     return (v ?? fallback) as T;

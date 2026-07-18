@@ -888,7 +888,8 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
                  f"${data_agent_intel.get('cost_usd', 0):.2f} total):")
         for h in data_agent_intel["hired"]:
             tag = "settled" if h["paid"] else "failed"
-            L.append(f"  - **{h['offering']}** ({tag}) — {_fmt_data_agent_deliverable(h['deliverable'])}")
+            fac = f", {h['facilitator']}" if h.get("facilitator") else ""
+            L.append(f"  - **{h['offering']}** ({tag}{fac}) — {_fmt_data_agent_deliverable(h['deliverable'])}")
     elif data_agent_intel and data_agent_intel.get("note"):
         L.append(f"- {data_agent_intel['note']}")
     else:
@@ -1097,17 +1098,43 @@ def _defillama_intel(address, chain):
 
 
 def _data_agent_intel(address, chain):
-    """Best-effort recruitment of DATA AGENT (agents/data_agent.py) to hire
-    one of VAPE's own $0.01 x402 market-data offerings against this token,
-    paid for with its own real, funded wallet — the same rail an external
-    buyer uses, just recruited internally. Never raises and never blocks the
-    investigation on a payment/network failure or a missing key."""
+    """Best-effort recruitment of BOTH DATA AGENT instances (agents/
+    data_agent.py, CDP-pinned; agents/data_agent_vapor.py, VAPOR-pinned) to
+    each independently try to hire one of VAPE's own $0.01 x402 market-data
+    offerings against this token, paid for with the same real, funded wallet
+    — the same rail an external buyer uses, just recruited internally. Each
+    instance has its own 30m/48-per-day gate, so either, both, or neither may
+    actually fire this cycle. Never raises and never blocks the investigation
+    on a payment/network failure or a missing key."""
+    results = []
     try:
         from agents import data_agent
-        return data_agent.run_for_investigation(address, chain)
+        results.append(("cdp", data_agent.run_for_investigation(address, chain)))
     except Exception as e:
-        print(f"[investigate] data agent unavailable: {e}")
+        print(f"[investigate] data agent (cdp) unavailable: {e}")
+    try:
+        from agents import data_agent_vapor
+        results.append(("vapor", data_agent_vapor.run_for_investigation(address, chain)))
+    except Exception as e:
+        print(f"[investigate] data agent (vapor) unavailable: {e}")
+
+    if not results:
         return None
+
+    hired = []
+    notes = []
+    cost_usd = 0.0
+    for facilitator, r in results:
+        for h in r.get("hired", []):
+            hired.append({**h, "facilitator": facilitator})
+        if r.get("note"):
+            notes.append(f"{facilitator}: {r['note']}")
+        cost_usd += r.get("cost_usd", 0)
+
+    out = {"hired": hired, "cost_usd": round(cost_usd, 2)}
+    if notes:
+        out["note"] = "; ".join(notes)
+    return out
 
 
 def _fmt_data_agent_deliverable(d):

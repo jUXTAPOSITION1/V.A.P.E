@@ -1,0 +1,79 @@
+name: Refresh Training Corpus (external + PR history)
+
+# Runs scripts/build_external_corpus.py (NVD CVE + Code4rena) and
+# scripts/build_pr_history_dataset.py (VAPE's own bot-authored PR record) —
+# the two fine-tune sources that need real network I/O and can't run inside
+# the offline, deterministic scripts/build_finetune_dataset.py itself (see
+# both scripts' docstrings). Neither this sandbox's dev environment nor
+# build_finetune_dataset.py's own CI check ever exercises live network
+# calls to services.nvd.nist.gov/api.github.com, so this is the only place
+# those caches actually get refreshed.
+#
+# Weekly is plenty — both sources grow slowly (NVD keyword pages don't churn
+# fast; VAPE opens maybe one bot PR a day). Rate-limit-friendly by design:
+# NVD calls sleep between keyword pages, GitHub API calls use GITHUB_TOKEN
+# for the 5000/hr authenticated limit instead of unauthenticated's 60/hr.
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, Monday 06:00 UTC (after archive-reports' 05:30 slot)
+  workflow_dispatch:
+    inputs:
+      max_cve:
+        description: 'Max NVD CVE rows to fetch this run'
+        default: '200'
+      max_c4r:
+        description: 'Max Code4rena findings per configured repo'
+        default: '30'
+      max_prs:
+        description: 'Max bot-authored PRs to mine from this repo'
+        default: '100'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-training-corpus
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write  # only this job needs it (the final Commit step) — scoped here, not workflow-wide
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+
+      - name: Fetch external corpus (NVD CVE + Code4rena)
+        env:
+          INPUT_MAX_CVE: ${{ inputs.max_cve || '200' }}
+          INPUT_MAX_C4R: ${{ inputs.max_c4r || '30' }}
+        run: python scripts/build_external_corpus.py --max-cve "$INPUT_MAX_CVE" --max-c4r "$INPUT_MAX_C4R"
+
+      - name: Mine VAPE's own PR history
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_MAX_PRS: ${{ inputs.max_prs || '100' }}
+        run: python scripts/build_pr_history_dataset.py --max-prs "$INPUT_MAX_PRS"
+
+      - name: Rebuild the combined fine-tune dataset + card
+        run: python scripts/build_finetune_dataset.py
+
+      - name: Commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/finetune/
+          git commit -m "training corpus: refresh external + pr_history caches $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
