@@ -8,24 +8,20 @@
     "value": -82.508
   },
   "mover:BRIUN / WETH 1%": {
-    "ts": "2026-07-18T19:06:36Z",
-    "value": 234.004
+    "ts": "2026-07-18T20:51:43Z",
+    "value": 315.477
   },
   "mover:COBIE / WETH 0.01%": {
     "ts": "2026-07-18T17:06:55Z",
     "value": 714.077
-  },
-  "mover:ETD / USDC 0.3%": {
-    "ts": "2026-07-16T19:13:08Z",
-    "value": -36.176
   },
   "mover:Gitlawb / USDC 0.01%": {
     "ts": "2026-07-18T03:19:24Z",
     "value": 97891.315
   },
   "mover:MidnightProtocol / WETH 0.3%": {
-    "ts": "2026-07-18T19:06:36Z",
-    "value": 1117.029
+    "ts": "2026-07-18T20:51:43Z",
+    "value": 468.967
   },
   "mover:OpenAI / USDC 0.01%": {
     "ts": "2026-07-16T22:57:37Z",
@@ -34,10 +30,6 @@
   "mover:TSG / WETH": {
     "ts": "2026-07-18T11:53:33Z",
     "value": 91.663
-  },
-  "mover:doji / WETH 1%": {
-    "ts": "2026-07-16T19:13:08Z",
-    "value": 200.966
   },
   "mover:mr_lightspeed / ZORA 1%": {
     "ts": "2026-07-17T23:58:32Z",
