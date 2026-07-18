@@ -33,7 +33,7 @@ the x402 side) covers all of them:
 | exploit_check | 0.01 | `data_fetchers.get_contract_source` | [OK] auto, x402 (needs Etherscan key on runner) |
 | market_intel | 0.07 | `build_market_context()` | [OK] auto, x402 |
 | dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto, x402 |
-| bounty_deep_dive | 50.00 | `agents/deep_dive_audit.py` — real Slither + frontier-model source review, dispatched async via `deep-dive-bounty.yml` (x402 pays first, GH Actions job runs, report lands in `intel/audits/poc-reports/` within 24h) | [OK] auto (async), x402 |
+| bounty_deep_dive | 50.00 | `agents/deep_dive_audit.py` — real Slither + Halmos symbolic testing (`agents/scaffold_foundry_target.py`) + frontier-model source review, dispatched async via `deep-dive-bounty.yml` (x402 pays first, GH Actions job runs, report lands in `intel/audits/poc-reports/` within 24h) | [OK] auto (async), x402 |
 | community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
 | 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
 | deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
