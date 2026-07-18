@@ -52,6 +52,14 @@ that the candidate must be evaluated (training/eval_candidate.py) before any
 real traffic ever reaches it — "takeover as primary" is an earned later
 milestone, not something this module defaults to.
 
+A second, independent candidate — VAPE's own Gemini model, supervised-tuned
+via Vertex AI's managed tuning console (not the self-hosted GPU/LoRA path
+above) and served from a deployed Vertex endpoint — is reachable the same
+opt-in-only way via ask_vertex_candidate(), gated on VAPE_VERTEX_ACCESS_TOKEN
+(a short-lived OAuth token minted per workflow run via Workload Identity
+Federation, never a stored key — this Google Cloud project enforces
+iam.disableServiceAccountKeyCreation).
+
 Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
     deep      -> larger reasoning (daily synthesis, audits)
@@ -436,6 +444,69 @@ def ask_candidate(system, user, **kw):
     kw.setdefault("tier", "fast")
     kw.setdefault("provider_order", candidate_provider_order())
     return ask(system, user, **kw)
+
+
+VERTEX_TUNED_DEFAULT_PROJECT_NUMBER = "87858016172"
+VERTEX_TUNED_DEFAULT_LOCATION = "us"
+VERTEX_TUNED_DEFAULT_ENDPOINT_ID = "7011119457397374976"
+
+
+def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
+    """Vertex AI's generateContent isn't OpenAI-compatible (Bearer OAuth
+    access token rather than a static API key; contents/systemInstruction
+    request shape; candidates[0].content.parts[0].text response shape) —
+    can't reuse _call(), so this is its own small request/response pair
+    instead of forcing a mismatched shape through the generic path.
+
+    Auth is a short-lived OAuth access token minted per workflow run via
+    Workload Identity Federation (google-github-actions/auth with
+    token_format: access_token) — never a stored long-lived key, since this
+    Google Cloud org enforces iam.disableServiceAccountKeyCreation."""
+    project = os.getenv("VAPE_VERTEX_PROJECT_NUMBER", VERTEX_TUNED_DEFAULT_PROJECT_NUMBER)
+    location = os.getenv("VAPE_VERTEX_LOCATION", VERTEX_TUNED_DEFAULT_LOCATION)
+    endpoint_id = os.getenv("VAPE_VERTEX_ENDPOINT_ID", VERTEX_TUNED_DEFAULT_ENDPOINT_ID)
+    token = os.environ["VAPE_VERTEX_ACCESS_TOKEN"]
+    url = (f"https://{location}-aiplatform.googleapis.com/v1/projects/{project}"
+           f"/locations/{location}/endpoints/{endpoint_id}:generateContent")
+    payload = json.dumps({
+        "contents": [{"role": "user", "parts": [{"text": user}]}],
+        "systemInstruction": {"parts": [{"text": system}]},
+        "generationConfig": {"temperature": temperature, "maxOutputTokens": max_tokens},
+    }).encode()
+    req = urllib.request.Request(url, data=payload, headers={
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        data = json.loads(r.read().decode())
+    text = data["candidates"][0]["content"]["parts"][0]["text"]
+    usage_meta = data.get("usageMetadata") or {}
+    usage = {
+        "prompt_tokens": usage_meta.get("promptTokenCount"),
+        "completion_tokens": usage_meta.get("candidatesTokenCount"),
+        "total_tokens": usage_meta.get("totalTokenCount"),
+    } if usage_meta else {}
+    return text, usage
+
+
+def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, timeout=45):
+    """Calls VAPE's Vertex AI supervised-tuned Gemini model directly (see
+    the Vertex AI Tuning console job that produced it) if
+    VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to the normal
+    free chain (ask()) if it's unset or the call errors — same "opt-in,
+    never silently primary" posture as ask_candidate()'s self-hosted-GPU
+    path above; this is a second, independently-hosted candidate, not a
+    replacement for it. Call this ONLY for explicit comparison/evaluation
+    work, not production report/investigation/sweep code paths."""
+    if os.getenv("VAPE_VERTEX_ACCESS_TOKEN"):
+        try:
+            text, usage = _call_vertex_tuned(system, user, temperature, max_tokens, timeout)
+            _log_usage("vertex_tuned", "vape-gemini-tuned", "fast", usage)
+            return text, "vertex_tuned"
+        except Exception as e:
+            print(f"[llm] vertex_tuned:{type(e).__name__}:{e}", file=sys.stderr)
+    return ask(system, user, tier="fast", temperature=temperature, max_tokens=max_tokens, timeout=timeout)
 
 
 def ask_safe(system, user, **kw):

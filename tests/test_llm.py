@@ -307,3 +307,95 @@ class TestCandidateProvider:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             text, provider = llm.ask_candidate("sys", "usr")
         assert provider == "groq" and text == "via groq"
+
+
+def _fake_vertex_response(text, usage_meta=None):
+    body = {"candidates": [{"content": {"parts": [{"text": text}]}}]}
+    if usage_meta is not None:
+        body["usageMetadata"] = usage_meta
+    payload = json.dumps(body).encode()
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            pass
+
+        def read(self):
+            return payload
+    return Resp()
+
+
+class TestVertexTunedCandidate:
+    """agents/llm.py's second, independently-hosted candidate — VAPE's
+    Vertex-AI-supervised-tuned Gemini model, called via generateContent
+    (not OpenAI-compatible, unlike every other provider here) using a
+    short-lived WIF access token. Must stay opt-in-only, same as the
+    self-hosted-GPU candidate above."""
+
+    def test_falls_through_to_free_chain_when_token_unset(self, monkeypatch):
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys", "usr")
+        assert provider == "groq" and text == "via groq"
+
+    def test_reaches_vertex_when_token_set(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setattr(llm, "USAGE_LOG", str(tmp_path / "llm_usage.jsonl"))
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            captured["auth"] = req.get_header("Authorization")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_vertex_response("vertex reply",
+                                          {"promptTokenCount": 10, "candidatesTokenCount": 5, "totalTokenCount": 15})
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys prompt", "usr prompt")
+        assert provider == "vertex_tuned" and text == "vertex reply"
+        assert captured["auth"] == "Bearer fake-token"
+        assert captured["url"] == (
+            "https://us-aiplatform.googleapis.com/v1/projects/87858016172"
+            "/locations/us/endpoints/7011119457397374976:generateContent")
+        assert captured["body"]["contents"] == [{"role": "user", "parts": [{"text": "usr prompt"}]}]
+        assert captured["body"]["systemInstruction"] == {"parts": [{"text": "sys prompt"}]}
+
+    def test_honors_env_overrides_for_project_location_endpoint(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("VAPE_VERTEX_PROJECT_NUMBER", "999")
+        monkeypatch.setenv("VAPE_VERTEX_LOCATION", "eu")
+        monkeypatch.setenv("VAPE_VERTEX_ENDPOINT_ID", "123")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            return _fake_vertex_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("sys", "usr")
+        assert captured["url"] == (
+            "https://eu-aiplatform.googleapis.com/v1/projects/999"
+            "/locations/eu/endpoints/123:generateContent")
+
+    def test_falls_through_to_free_chain_on_vertex_error(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        calls = []
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(req.full_url)
+            if "aiplatform.googleapis.com" in req.full_url:
+                raise urllib.error.URLError("connection refused")
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys", "usr")
+        assert provider == "groq" and text == "via groq"
+        assert len(calls) == 2
