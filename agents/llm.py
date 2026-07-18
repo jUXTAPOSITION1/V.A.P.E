@@ -504,6 +504,12 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
             text, usage = _call_vertex_tuned(system, user, temperature, max_tokens, timeout)
             _log_usage("vertex_tuned", "vape-gemini-tuned", "fast", usage)
             return text, "vertex_tuned"
+        except urllib.error.HTTPError as e:
+            try:
+                body = e.read().decode(errors="replace")[:500]
+            except Exception:
+                body = ""
+            print(f"[llm] vertex_tuned:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
         except Exception as e:
             print(f"[llm] vertex_tuned:{type(e).__name__}:{e}", file=sys.stderr)
     return ask(system, user, tier="fast", temperature=temperature, max_tokens=max_tokens, timeout=timeout)
