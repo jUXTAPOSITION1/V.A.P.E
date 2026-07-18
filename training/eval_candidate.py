@@ -19,14 +19,30 @@ Two independent checks, both against VAPE's own real, held-out data
    Misinformation), pointed at the candidate instead, via the same
    DeepEvalBaseLLM adapter pattern as vape_deepeval_model.py's VapeLLM.
 
-Candidate model must already be served over an OpenAI-compatible HTTP API
-(vLLM's `vllm serve` or Ollama both expose one) — point VAPE_CANDIDATE_URL at
-it (default matches vLLM's own default: http://localhost:8000/v1).
+Two candidate backends, selected via VAPE_EVAL_BACKEND (default "vllm"):
+
+  vllm    Candidate model already served over an OpenAI-compatible HTTP API
+          (vLLM's `vllm serve` or Ollama both expose one) — point
+          VAPE_CANDIDATE_URL at it (default matches vLLM's own default:
+          http://localhost:8000/v1).
+
+  vertex  VAPE's Vertex-AI-supervised-tuned Gemini model (see
+          agents/llm.py::ask_vertex_candidate() and
+          .github/workflows/vertex-candidate-smoke-test.yml for the real,
+          verified call it reuses) — needs VAPE_VERTEX_ACCESS_TOKEN set in
+          this run's environment (a short-lived token minted via Workload
+          Identity Federation, same as the smoke-test workflow's auth step;
+          never a stored key). A reply that falls through to the free chain
+          instead of actually reaching the tuned model is treated as an
+          error for this example, not silently graded as the candidate's
+          own output.
 
 Usage:
   VAPE_CANDIDATE_URL=http://localhost:8000/v1 \
   VAPE_CANDIDATE_MODEL=vape-gemma-lora \
   python training/eval_candidate.py
+
+  VAPE_EVAL_BACKEND=vertex VAPE_VERTEX_ACCESS_TOKEN=... python training/eval_candidate.py
 """
 import json
 import os
@@ -46,6 +62,7 @@ REPORTS_DIR = os.path.join(_REPO_ROOT, "reports")
 
 CANDIDATE_URL = os.environ.get("VAPE_CANDIDATE_URL", "http://localhost:8000/v1")
 CANDIDATE_MODEL = os.environ.get("VAPE_CANDIDATE_MODEL", "vape-candidate")
+EVAL_BACKEND = os.environ.get("VAPE_EVAL_BACKEND", "vllm")  # "vllm" | "vertex"
 
 
 def _load_val():
@@ -60,10 +77,28 @@ def _load_val():
     return rows
 
 
+def _candidate_generate_vertex(system, user, max_tokens, temperature):
+    """Reuses agents/llm.py's own real, verified Vertex call (WIF auth, the
+    aiplatform.{location}.rep.googleapis.com multi-region host, the real
+    generateContent request/response shape) rather than re-implementing any
+    of it here. A reply that fell through to the free chain (provider !=
+    "vertex_tuned") is a real failure for eval purposes, not a candidate
+    output — grading a Groq/Gemini fallback reply as if it came from the
+    tuned model would silently corrupt the comparison."""
+    from agents.llm import ask_vertex_candidate
+    text, provider = ask_vertex_candidate(system, user, temperature=temperature, max_tokens=max_tokens)
+    if provider != "vertex_tuned":
+        raise RuntimeError(f"did not reach the Vertex candidate — fell through to {provider!r}")
+    return text
+
+
 def candidate_generate(system, user, max_tokens=400, temperature=0.2):
     """Plain urllib call to the candidate's OpenAI-compatible /chat/completions
-    — same no-heavy-deps house style as agents/llm.py, since this script only
-    needs an HTTP call, not a full client library."""
+    (vLLM/Ollama backend) — same no-heavy-deps house style as agents/llm.py,
+    since this script only needs an HTTP call, not a full client library.
+    Delegates to the Vertex backend instead when VAPE_EVAL_BACKEND=vertex."""
+    if EVAL_BACKEND == "vertex":
+        return _candidate_generate_vertex(system, user, max_tokens, temperature)
     body = json.dumps({
         "model": CANDIDATE_MODEL,
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
@@ -76,6 +111,19 @@ def candidate_generate(system, user, max_tokens=400, temperature=0.2):
     with urllib.request.urlopen(req, timeout=60) as resp:
         data = json.loads(resp.read())
     return data["choices"][0]["message"]["content"]
+
+
+def _candidate_label():
+    """Human-readable identity of whichever candidate/backend is active this
+    run — used in stdout and the report header instead of always printing
+    the vLLM-specific CANDIDATE_URL, which is meaningless for the Vertex
+    backend."""
+    if EVAL_BACKEND == "vertex":
+        project = os.environ.get("VAPE_VERTEX_PROJECT_NUMBER", "87858016172")
+        location = os.environ.get("VAPE_VERTEX_LOCATION", "us")
+        endpoint = os.environ.get("VAPE_VERTEX_ENDPOINT_ID", "7011119457397374976")
+        return f"vertex-tuned-gemini (projects/{project}/locations/{location}/endpoints/{endpoint})"
+    return f"{CANDIDATE_MODEL} at {CANDIDATE_URL}"
 
 
 def _first_line(text):
@@ -111,7 +159,7 @@ def run_verdict_match(val_rows):
         expected_tokens = _verdict_tokens(expected_line)
         try:
             actual = candidate_generate(system, user)
-        except (urllib.error.URLError, TimeoutError, KeyError) as e:
+        except (urllib.error.URLError, TimeoutError, KeyError, RuntimeError) as e:
             examples.append({"expected": expected_line, "actual": f"[error: {e}]", "match": False})
             continue
         actual_line = _first_line(actual)
@@ -160,7 +208,7 @@ def run_safety_campaign():
             return await asyncio.to_thread(self.generate, prompt)
 
         def get_model_name(self):
-            return f"vape-candidate ({CANDIDATE_MODEL})"
+            return f"vape-candidate ({_candidate_label()})"
 
     def candidate_callback(input_str, turns=None):
         prompt = _build_report_prompt(
@@ -196,7 +244,7 @@ def run_safety_campaign():
 def main():
     val_rows = _load_val()
     print(f"[eval_candidate] {len(val_rows)} real held-out examples from {VAL_PATH}")
-    print(f"[eval_candidate] candidate endpoint: {CANDIDATE_URL} (model={CANDIDATE_MODEL})")
+    print(f"[eval_candidate] backend={EVAL_BACKEND} candidate: {_candidate_label()}")
 
     verdict_result = run_verdict_match(val_rows)
     if verdict_result["rate"] is not None:
@@ -213,7 +261,7 @@ def main():
     lines = [
         f"# VAPE Fine-Tuned Candidate Evaluation — {datetime.now(timezone.utc).isoformat()}",
         "",
-        f"Candidate: `{CANDIDATE_MODEL}` at `{CANDIDATE_URL}`",
+        f"Candidate: `{_candidate_label()}` (backend={EVAL_BACKEND})",
         "",
         "## 1. Verdict match rate (held-out, never seen in training)",
         f"- {verdict_result['matches']}/{verdict_result['n']} = "

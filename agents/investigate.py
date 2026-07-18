@@ -1174,7 +1174,7 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     structural self-check; a real disagreement here is signal for
     self_improve.py/review_ledger.py, not a verdict change. Never raises."""
     try:
-        from agents.llm import ask_safe, FRONTIER_ORDER
+        from agents.llm import ask_vertex_candidate_safe, FRONTIER_ORDER
     except Exception:
         return None
 
@@ -1237,8 +1237,12 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
         "3. One concrete recommendation for what to watch/check next on this target."
     )
     try:
-        text, _provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                    max_tokens=650, temperature=0.4)
+        # ask_vertex_candidate_safe() tries VAPE's own Vertex-tuned model first
+        # if VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to exactly
+        # the same frontier tier/order as before otherwise — a run without the
+        # token configured behaves identically to before this change.
+        text, _provider = ask_vertex_candidate_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
+                                                    max_tokens=650, temperature=0.4)
     except Exception as e:
         print(f"[investigate] expert assessment unavailable: {e}")
         return None
