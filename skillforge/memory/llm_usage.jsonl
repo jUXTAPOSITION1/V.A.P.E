@@ -268,3 +268,4 @@
 {"ts": "2026-07-18T17:33:36Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 628, "completion_tokens": 176, "total_tokens": 1215}
 {"ts": "2026-07-18T17:36:35Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 96, "total_tokens": 2094}
 {"ts": "2026-07-18T18:33:57Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 98, "total_tokens": 2292}
+{"ts": "2026-07-18T19:06:43Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2320, "completion_tokens": 7, "total_tokens": 2992}
