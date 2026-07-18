@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-18T04:06:33Z",
+  "generated": "2026-07-18T05:17:27Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 401,
+    "reports": 402,
     "reports_by_type": {
+      "base": 50,
       "skillforge": 3,
       "virtuals": 50,
       "security": 50,
       "bounty": 206,
-      "base": 49,
       "sentiment": 28,
       "macro": 13,
       "bug": 1,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "skillforge",
-      "file": "skillforge-toolcheck-2026-07-18-03.md",
-      "title": "SKILLFORGE Tool Gap Report",
-      "date": "2026-07-18T03:00Z",
+      "type": "base",
+      "file": "base-2026-07-18-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-18T05:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-18 03:47 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-18-03.md",
-      "bytes": 1450
+      "summary": "Date: 2026-07-18 05:17 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-05.md",
+      "bytes": 3043
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-18-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-18T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-18 05:17 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-05.md",
+      "bytes": 3043
+    },
     {
       "kind": "intel",
       "type": "skillforge",
@@ -1258,17 +1269,6 @@
       "summary": "Two incidents occurred in the last 7 days: the $0.27M Silent Auto-Approval Hack on Lumi Finance (Arbitrum) and the $10.05M Price Oracle Manipulation on Bonzo Lend (Hedera). Broader activity in the preceding period included a $6.0M Donation Attack on Lazy Summer Protocol (Ethereum), a $0.82M prooflessDeposit() Exploit on Hinkal (Ethereum),",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-14-08.md",
       "bytes": 5341
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-14-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-14T05:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-14 05:22 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-05.md",
-      "bytes": 3041
     }
   ],
   "broadcasts": [
