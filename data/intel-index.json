@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T19:09:21Z",
+  "generated": "2026-07-18T19:32:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 81,
-    "investigations": 225,
+    "investigations": 226,
     "tools": 15,
     "tools_verified": 15,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-190921-0x89837420.md",
-      "title": "Investigation \u2014 MidnightProtocol",
-      "symbol": "MidnightProtocol",
-      "name": "MidnightProtocol",
-      "date": "2026-07-18T19:09:21Z",
-      "target": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
+      "file": "investigation-20260718-193246-0xb2000000.md",
+      "title": "Investigation \u2014 BRIUN",
+      "symbol": "BRIUN",
+      "name": "Briun Armstrong",
+      "date": "2026-07-18T19:32:46Z",
+      "target": "0xb20000000000000000000038a46caFDcb2B3a301",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +1095% (volatility/manipulation); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 2331 holders \u2014 reasonably distributed; Custom verified sourc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-190921-0x89837420.md"
+      "verdict": "REJECT",
+      "score": "10",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,891 (rug/illiquid); [-10] Low liquidity $1,891; [-10] Pair 3.2 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-193246-0xb2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-193246-0xb2000000.md",
+      "title": "Investigation \u2014 BRIUN",
+      "symbol": "BRIUN",
+      "name": "Briun Armstrong",
+      "date": "2026-07-18T19:32:46Z",
+      "target": "0xb20000000000000000000038a46caFDcb2B3a301",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "10",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,891 (rug/illiquid); [-10] Low liquidity $1,891; [-10] Pair 3.2 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-193246-0xb2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-190921-0x89837420.md",
@@ -593,20 +607,6 @@
       "score": "14",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x90fee9e3aa7b674c071541da385fb7f529c69917) \u2014 can still act on the contract; [-8] Low holder count (111); [-25] Very low liquidity $162 (rug/illiquid); [-10] Low liquidity $162; [-8] No pair-creation timestamp available \u2014 cannot establish ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-010241-0xF11D5aD2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-233020-0x0027dA8d.md",
-      "title": "Investigation \u2014 DOJI",
-      "symbol": "DOJI",
-      "name": "COBIE\u2019S DOG",
-      "date": "2026-07-15T23:30:20Z",
-      "target": "0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,856 (rug/illiquid); [-10] Low liquidity $1,856; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-233020-0x0027dA8d.md"
     }
   ],
   "reports": [

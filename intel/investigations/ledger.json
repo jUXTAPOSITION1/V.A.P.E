@@ -1763,6 +1763,24 @@
     "symbol": "DOJI",
     "times_investigated": 1
   },
+  "8453:0xb20000000000000000000038a46cafdcb2b3a301": {
+    "address": "0xb20000000000000000000038a46caFDcb2B3a301",
+    "chain": "8453",
+    "first_investigated": "2026-07-18T19:32:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-193246-0xb2000000.md",
+        "score": 10,
+        "ts": "2026-07-18T19:32:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T19:32:46Z",
+    "last_score": 10,
+    "last_verdict": "REJECT",
+    "symbol": "BRIUN",
+    "times_investigated": 1
+  },
   "8453:0xb200000000000000000000717e391850b706fc01": {
     "address": "0xB200000000000000000000717E391850b706fc01",
     "chain": "8453",
