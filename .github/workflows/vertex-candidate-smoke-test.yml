@@ -1,0 +1,63 @@
+name: Vertex Tuned Candidate Smoke Test
+
+# Manual-only. Authenticates to Google Cloud via Workload Identity Federation
+# (no stored key — this GCP project enforces iam.disableServiceAccountKeyCreation,
+# so a short-lived OIDC-exchanged access token is the only option, not just the
+# safer one) and sends one real prompt through agents/llm.py::ask_vertex_candidate()
+# against VAPE's Vertex-AI-supervised-tuned Gemini model. Purely a wiring check —
+# confirms the WIF auth + the generateContent endpoint/request shape are actually
+# correct against the real deployed endpoint, before anything calls this candidate
+# from production code.
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Prompt to send the tuned model'
+        type: string
+        default: 'Reply with the single word: OK'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write  # only this job needs it, for the WIF OIDC token exchange below
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+
+      - id: auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
+
+      - name: Call the tuned model
+        env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+          # Routed through env: rather than interpolated into `run:` — inputs.prompt
+          # is user-controlled workflow_dispatch text, and this job carries a live
+          # OAuth token, so a raw splice into `run:` would be shell-injection into a
+          # job with real cloud credentials (same class of bug fixed elsewhere in
+          # this repo's workflows, e.g. train-vape-model.yml).
+          INPUT_PROMPT: ${{ inputs.prompt }}
+        run: |
+          python3 -c "
+          import os, sys
+          sys.path.insert(0, '.')
+          from agents.llm import ask_vertex_candidate
+          text, provider = ask_vertex_candidate('You are a test.', os.environ['INPUT_PROMPT'], max_tokens=200)
+          print(f'[provider={provider}] {text}')
+          if provider != 'vertex_tuned':
+              print('::warning::did not reach the Vertex tuned candidate — fell through to the free chain, check the error printed above')
+          "
