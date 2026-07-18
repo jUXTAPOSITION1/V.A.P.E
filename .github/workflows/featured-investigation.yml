@@ -57,6 +57,16 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
+      # Temporary diagnostic (2026-07-18, manual trigger only): macro_sweep.py
+      # reports have shown "no web search results available" repeatedly.
+      # Print exactly which provider is active and what a real search call
+      # actually returns, so this isn't guesswork. Remove once root-caused.
+      - name: Diagnose web search availability (manual trigger only)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          python -m skillforge.research providers
+          echo "--- real search call ---"
+          python -m skillforge.research search "Federal Reserve interest rate crypto regulation news this week" --max 8
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)

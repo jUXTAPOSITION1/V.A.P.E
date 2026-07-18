@@ -299,8 +299,18 @@ def get_global_market():
 
 
 # ── 7. Virtuals Protocol ecosystem (keyless) ──────────────────────────────────
+def _pct_change(old, new):
+    if not isinstance(old, (int, float)) or not isinstance(new, (int, float)) or old == 0:
+        return None
+    return round((new - old) / abs(old) * 100, 2)
+
+
 def get_virtuals_snapshot():
-    """VIRTUAL token market + Virtuals-Protocol TVL. The agent's home ecosystem."""
+    """VIRTUAL token market + Virtuals-Protocol TVL — real trend data, not just
+    a single day's price wiggle. A single 24h price change is noisy (any token
+    can swing double digits on thin volume in a day); 7d/30d price trend and
+    TVL trend are much harder to fake and reflect real, sustained ecosystem
+    health rather than one day's sentiment."""
     q = urllib.parse.urlencode({"ids": "virtual-protocol", "vs_currencies": "usd",
                                 "include_24hr_change": "true", "include_market_cap": "true",
                                 "include_24hr_vol": "true"})
@@ -312,12 +322,60 @@ def get_virtuals_snapshot():
            "virtual_mcap_usd": v.get("usd_market_cap"),
            "virtual_vol_24h_usd": v.get("usd_24h_vol"),
            "virtual_change_24h_pct": round(v["usd_24h_change"], 2) if v.get("usd_24h_change") is not None else None}
+
+    # Volume/mcap ratio — a token trading at a healthy fraction of its market
+    # cap daily has real, active markets; one trading at a tiny fraction is
+    # illiquid regardless of what its price happens to be doing that day.
+    out["volume_to_mcap_pct"] = (
+        round(out["virtual_vol_24h_usd"] / out["virtual_mcap_usd"] * 100, 2)
+        if isinstance(out.get("virtual_vol_24h_usd"), (int, float))
+        and isinstance(out.get("virtual_mcap_usd"), (int, float))
+        and out["virtual_mcap_usd"] > 0
+        else None
+    )
+
+    # 7d/30d price trend — smooths out single-day noise. CoinGecko's
+    # market_chart returns [ms_timestamp, price] pairs at roughly hourly
+    # granularity across the requested window.
+    chart = _get(
+        "https://api.coingecko.com/api/v3/coins/virtual-protocol/market_chart"
+        "?vs_currency=usd&days=30",
+        ttl=3600, cache_key="cg_virtual_chart_30d")
+    prices = (chart or {}).get("prices") if isinstance(chart, dict) else None
+    if isinstance(prices, list) and len(prices) >= 2:
+        try:
+            latest = prices[-1][1]
+            now_ms = prices[-1][0]
+            week_ago_ms = now_ms - 7 * 24 * 3600 * 1000
+            month_ago_price = prices[0][1]
+            week_ago_price = min(prices, key=lambda p: abs(p[0] - week_ago_ms))[1]
+            out["virtual_change_7d_pct"] = _pct_change(week_ago_price, latest)
+            out["virtual_change_30d_pct"] = _pct_change(month_ago_price, latest)
+        except (IndexError, TypeError, ValueError):
+            pass
+
     proto = _get("https://api.llama.fi/protocol/virtual-protocol",
                  ttl=1800, cache_key="llama_virtuals")
     if isinstance(proto, dict) and not proto.get("error"):
         cur = proto.get("currentChainTvls") or {}
         if isinstance(cur, dict):
             out["protocol_tvl_usd"] = sum(x for x in cur.values() if isinstance(x, (int, float)))
+        # Top-level `tvl` is DefiLlama's full historical series for this
+        # protocol: [{"date": unix_seconds, "totalLiquidityUSD": number}, ...].
+        # Real TVL trend (money actually staying in the ecosystem) is a much
+        # sturdier fundamental signal than a single day's token price move.
+        history = proto.get("tvl")
+        if isinstance(history, list) and len(history) >= 2:
+            try:
+                latest_tvl = history[-1].get("totalLiquidityUSD")
+                now_s = history[-1].get("date")
+                week_ago_s = now_s - 7 * 24 * 3600
+                month_ago_tvl = history[0].get("totalLiquidityUSD")
+                week_ago_tvl = min(history, key=lambda h: abs((h.get("date") or 0) - week_ago_s)).get("totalLiquidityUSD")
+                out["tvl_change_7d_pct"] = _pct_change(week_ago_tvl, latest_tvl)
+                out["tvl_change_30d_pct"] = _pct_change(month_ago_tvl, latest_tvl)
+            except (IndexError, TypeError, ValueError, AttributeError):
+                pass
     return out
 
 
