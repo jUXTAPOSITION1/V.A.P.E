@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T20:59:51Z",
+  "generated": "2026-07-18T21:25:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 82,
-    "investigations": 227,
+    "investigations": 228,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-201317-0x24366661.md",
+      "file": "investigation-20260718-212532-0x21b8dfe7.md",
       "title": "Investigation \u2014 BRIAN",
       "symbol": "BRIAN",
       "name": "Coinbase Man",
-      "date": "2026-07-18T20:13:17Z",
-      "target": "0x243666616819d6D0A106A769efB1Ee8890Ae2F73",
+      "date": "2026-07-18T21:25:32Z",
+      "target": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
       "score": "58",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $29,483; [-10] Pair 3.7 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 15369 holders \u2014 reasonably distributed; Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-201317-0x24366661.md"
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $27,791; [-10] Pair 3.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 8620 holders \u2014 reasonably distributed; Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-212532-0x21b8dfe7.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-212532-0x21b8dfe7.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Coinbase Man",
+      "date": "2026-07-18T21:25:32Z",
+      "target": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $27,791; [-10] Pair 3.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 8620 holders \u2014 reasonably distributed; Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-212532-0x21b8dfe7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-201317-0x24366661.md",
@@ -593,20 +607,6 @@
       "score": "20",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,220; [-10] Violent 24h move +727% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-072352-0xb2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-043945-0x0531f1e6.md",
-      "title": "Investigation \u2014 Doji",
-      "symbol": "Doji",
-      "name": "Cobie's dog",
-      "date": "2026-07-16T04:39:45Z",
-      "target": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +405% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-produ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-043945-0x0531f1e6.md"
     }
   ],
   "reports": [

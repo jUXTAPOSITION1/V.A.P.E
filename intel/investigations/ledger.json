@@ -946,6 +946,25 @@
     "symbol": "BASE",
     "times_investigated": 1
   },
+  "8453:0x21b8dfe779671e54a4009f1882b955e0f6d1e0a2": {
+    "address": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2",
+    "chain": "8453",
+    "creator_address": "0xa89ca2976112bd03680e60cdd25d20de4b319624",
+    "first_investigated": "2026-07-18T21:25:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-212532-0x21b8dfe7.md",
+        "score": 58,
+        "ts": "2026-07-18T21:25:32Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-18T21:25:32Z",
+    "last_score": 58,
+    "last_verdict": "CAUTION",
+    "symbol": "BRIAN",
+    "times_investigated": 1
+  },
   "8453:0x2228b3832ac68eb8f35fb007d92d28e0c048206f": {
     "address": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
     "chain": "8453",

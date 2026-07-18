@@ -41,3 +41,4 @@
 {"ts": "2026-07-18T17:33:29.646891Z", "target": "0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-18T19:09:13.235987Z", "target": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-18T20:13:10.012966Z", "target": "0x243666616819d6D0A106A769efB1Ee8890Ae2F73", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-18T21:25:19.420337Z", "target": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
