@@ -1508,6 +1508,25 @@
     "symbol": "PLAY",
     "times_investigated": 1
   },
+  "8453:0x89837420864ca27f36c6847b9d1e8dbe0c6eccdb": {
+    "address": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
+    "chain": "8453",
+    "creator_address": "0xf517c0d0a9f5a765090486114318ea9886ef3882",
+    "first_investigated": "2026-07-18T19:09:21Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-190921-0x89837420.md",
+        "score": 65,
+        "ts": "2026-07-18T19:09:21Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-18T19:09:21Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "MidnightProtocol",
+    "times_investigated": 1
+  },
   "8453:0x8c81b4c816d66d36c4bf348bdec01dbcbc70e987": {
     "address": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
     "chain": "8453",

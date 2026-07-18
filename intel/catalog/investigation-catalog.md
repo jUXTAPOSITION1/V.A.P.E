@@ -299,3 +299,5 @@
 | 2026-07-18 | auto | 0xB20000000000000000000033C22aB099bbF76001 (COBIE) | deep_investigation | REJECT (30/100) | Very few holders (5) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-18 | auto | 0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea (MidnightProtocol) | deep_investigation | REJECT (45/100) | Very few holders (14) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-18 | auto | 0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB (MidnightProtocol) | deep_investigation | CAUTION (65/100) | Violent 24h move +1095% (volatility/manipulation) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T17:33:37Z",
+  "generated": "2026-07-18T19:09:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -15,25 +15,25 @@
       "mainnet": 1
     },
     "broadcasts": 81,
-    "investigations": 224,
+    "investigations": 225,
     "tools": 15,
     "tools_verified": 15,
-    "skills": 13
+    "skills": 14
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-173336-0x0675E10c.md",
+      "file": "investigation-20260718-190921-0x89837420.md",
       "title": "Investigation \u2014 MidnightProtocol",
       "symbol": "MidnightProtocol",
       "name": "MidnightProtocol",
-      "date": "2026-07-18T17:33:36Z",
-      "target": "0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea",
+      "date": "2026-07-18T19:09:21Z",
+      "target": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $14,215; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-173336-0x0675E10c.md"
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +1095% (volatility/manipulation); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 2331 holders \u2014 reasonably distributed; Custom verified sourc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-190921-0x89837420.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-190921-0x89837420.md",
+      "title": "Investigation \u2014 MidnightProtocol",
+      "symbol": "MidnightProtocol",
+      "name": "MidnightProtocol",
+      "date": "2026-07-18T19:09:21Z",
+      "target": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +1095% (volatility/manipulation); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 2331 holders \u2014 reasonably distributed; Custom verified sourc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-190921-0x89837420.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-173336-0x0675E10c.md",
@@ -593,20 +607,6 @@
       "score": "35",
       "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,856 (rug/illiquid); [-10] Low liquidity $1,856; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ days without a kno",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-233020-0x0027dA8d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-220354-0x1DE2a8dC.md",
-      "title": "Investigation \u2014 DOJI",
-      "symbol": "DOJI",
-      "name": "COBIE'S DOG",
-      "date": "2026-07-15T22:03:54Z",
-      "target": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-8] Low holder count (134); [-25] Very low liquidity $7,935 (rug/illiquid); [-10] Low liquidity $7,935; [-10] Violent 24h move +467% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-220354-0x1DE2a8dC.md"
     }
   ],
   "reports": [
@@ -1568,7 +1568,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48797128",
+      "version": "48803546",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1578,7 +1578,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.48 eth_dom 9.76 mcap_chg_24h 1.0",
+      "version": "btc_dom 56.52 eth_dom 9.77 mcap_chg_24h 0.33",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1598,7 +1598,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x1910f296fee9 Ori 65362586.0 from 0x15113806 to 0x833589fc",
+      "version": "0x7665ecf78f4e VORV 10.0 from 0x0f325bd1 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1707,6 +1707,12 @@
       "title": "Smart Contract Investigation and Tool Gap Analysis",
       "summary": "Distilled 2026-07-06T10:45:48Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/smart-contract-investigation-and-tool-gap-analysis.md"
+    },
+    {
+      "file": "skills-base-token-verdict-override-md.md",
+      "title": "skills/base-token-verdict-override.md",
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-base-token-verdict-override-md.md"
     },
     {
       "file": "skills-ledger-drift-review-md.md",
