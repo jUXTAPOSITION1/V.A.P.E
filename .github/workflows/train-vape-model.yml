@@ -62,13 +62,23 @@ jobs:
           "$VENV_PY" scripts/build_finetune_dataset.py
 
       - name: Train (QLoRA)
+        # Routed through env: rather than interpolated straight into the
+        # script — inputs.* is user-controlled workflow_dispatch text, and
+        # this job's env carries HF_TOKEN, so a raw splice into `run:` would
+        # be shell-injection into a job with that secret set (same class of
+        # bug review-ledger.yml/deep-dive-bounty.yml fixed the same way).
+        env:
+          INPUT_BASE_MODEL: ${{ inputs.base_model }}
+          INPUT_EPOCHS: ${{ inputs.epochs }}
+          INPUT_LORA_R: ${{ inputs.lora_r }}
+          INPUT_MERGE_FLAG: ${{ inputs.merge_and_serve == true && '--merge' || '' }}
         run: |
           "$VENV_PY" training/train_lora.py \
-            --base-model "${{ inputs.base_model }}" \
-            --epochs "${{ inputs.epochs }}" \
-            --lora-r "${{ inputs.lora_r }}" \
+            --base-model "$INPUT_BASE_MODEL" \
+            --epochs "$INPUT_EPOCHS" \
+            --lora-r "$INPUT_LORA_R" \
             --output-dir training/out/vape-gemma-lora \
-            ${{ inputs.merge_and_serve == true && '--merge' || '' }}
+            $INPUT_MERGE_FLAG
 
       - name: Upload LoRA adapter (survives even if this box is later torn down)
         uses: actions/upload-artifact@v4

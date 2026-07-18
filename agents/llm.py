@@ -42,6 +42,16 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     OpenAI-compatible endpoint (api.x.ai/v1), same
                                     _call() as everything else.
 
+VAPE's own fine-tuned candidate (see training/train_lora.py +
+.github/workflows/train-vape-model.yml) is deliberately NOT in the PROVIDERS
+list above and NOT reachable via a bare ask() call — it's an opt-in-only
+provider built by candidate_provider_order(), gated on VAPE_CANDIDATE_URL,
+used only by an explicit provider_order=candidate_provider_order() (or
+ask_candidate() below). This matches data/finetune/DATASET_CARD.md's rule
+that the candidate must be evaluated (training/eval_candidate.py) before any
+real traffic ever reaches it — "takeover as primary" is an earned later
+milestone, not something this module defaults to.
+
 Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
     deep      -> larger reasoning (daily synthesis, audits)
@@ -162,6 +172,46 @@ FRONTIER_ORDER = (
     [p for name in _FRONTIER_NAMES for p in PROVIDERS if p[0] == name]
     + [p for p in PROVIDERS if p[0] not in _FRONTIER_NAMES]
 )
+
+
+def candidate_provider_order():
+    """Builds the opt-in provider order for VAPE's own fine-tuned candidate
+    (see training/train_lora.py, training/eval_candidate.py,
+    .github/workflows/train-vape-model.yml), read fresh from env on every
+    call — never cached at import time, since the candidate is only ever
+    stood up ad hoc on the training GPU box, not something running whenever
+    this module loads.
+
+    Configure via:
+        VAPE_CANDIDATE_URL    OpenAI-compatible base URL, e.g.
+                              http://<gpu-box>:8000/v1 (vLLM's own default
+                              port/path). Unset means "not opted in" — this
+                              function then returns the plain PROVIDERS chain
+                              untouched, so callers can use it unconditionally
+                              without a manual availability check.
+        VAPE_CANDIDATE_MODEL  served model name (default: vape-candidate,
+                              matching train-vape-model.yml's --served-model-name).
+
+    Deliberately NOT part of the default PROVIDERS list ask() iterates by
+    default — only reachable via an explicit provider_order=
+    candidate_provider_order() (or ask_candidate() below), so no existing
+    caller starts routing real traffic to an unevaluated candidate just
+    because someone stood up a serving box.
+    """
+    url = os.getenv("VAPE_CANDIDATE_URL")
+    if not url:
+        return list(PROVIDERS)
+    model = os.getenv("VAPE_CANDIDATE_MODEL", "vape-candidate")
+    # "VAPE_CANDIDATE_URL" doubles as both the opt-in gate ask() checks via
+    # os.getenv(env) and the value sent as the Bearer token in _call() —
+    # local vLLM/Ollama serving doesn't enforce auth by default, so the
+    # token's actual content is irrelevant; the URL just needs to be set to
+    # opt in at all, matching every other provider's "env present == enabled"
+    # convention without inventing a separate unused API-key var.
+    candidate = ("vape_candidate", "VAPE_CANDIDATE_URL",
+                 url.rstrip("/") + "/chat/completions",
+                 {"fast": model, "deep": model, "bulk": model})
+    return [candidate] + list(PROVIDERS)
 
 
 def available():
@@ -371,6 +421,20 @@ def ask_frontier(system, user, **kw):
     first (key 1, then key 2), Groq/Gemini/the rest of the chain as fallback."""
     kw.setdefault("tier", "frontier")
     kw.setdefault("provider_order", FRONTIER_ORDER)
+    return ask(system, user, **kw)
+
+
+def ask_candidate(system, user, **kw):
+    """ask() pinned to VAPE's own fine-tuned candidate first (if
+    VAPE_CANDIDATE_URL is set — see candidate_provider_order() above),
+    falling back through the normal free chain if it errors or isn't
+    configured. Call this ONLY for explicit comparison/evaluation work
+    (training/eval_candidate.py, manual smoke tests) — no production report/
+    investigation/sweep code path should call this by default; routing real
+    traffic to the candidate is a later, evaluated decision, not this
+    function's job to make."""
+    kw.setdefault("tier", "fast")
+    kw.setdefault("provider_order", candidate_provider_order())
     return ask(system, user, **kw)
 
 

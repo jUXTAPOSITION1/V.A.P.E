@@ -256,3 +256,54 @@ class TestDailySpendCap:
     def test_default_cap_is_used_when_env_var_unset(self, monkeypatch):
         monkeypatch.delenv("XAI_DAILY_SPEND_CAP_USD", raising=False)
         assert llm._daily_cap_usd("xai_1") == llm.DEFAULT_DAILY_SPEND_CAP_USD
+
+
+class TestCandidateProvider:
+    """agents/llm.py's opt-in fine-tuned-candidate provider (training/) —
+    must stay entirely absent from the default chain until explicitly
+    requested, per data/finetune/DATASET_CARD.md's evaluate-before-real-
+    traffic rule."""
+
+    def test_candidate_absent_from_default_providers_and_frontier_order(self):
+        assert "vape_candidate" not in [p[0] for p in llm.PROVIDERS]
+        assert "vape_candidate" not in [p[0] for p in llm.FRONTIER_ORDER]
+
+    def test_candidate_order_is_plain_providers_when_url_unset(self, monkeypatch):
+        monkeypatch.delenv("VAPE_CANDIDATE_URL", raising=False)
+        order = llm.candidate_provider_order()
+        assert [p[0] for p in order] == [p[0] for p in llm.PROVIDERS]
+
+    def test_candidate_order_prepends_candidate_when_url_set(self, monkeypatch):
+        monkeypatch.setenv("VAPE_CANDIDATE_URL", "http://localhost:8000/v1")
+        order = llm.candidate_provider_order()
+        assert order[0][0] == "vape_candidate"
+        assert order[0][2] == "http://localhost:8000/v1/chat/completions"
+        assert order[0][3] == {"fast": "vape-candidate", "deep": "vape-candidate", "bulk": "vape-candidate"}
+        assert [p[0] for p in order[1:]] == [p[0] for p in llm.PROVIDERS]
+
+    def test_candidate_order_honors_custom_model_name(self, monkeypatch):
+        monkeypatch.setenv("VAPE_CANDIDATE_URL", "http://localhost:8000/v1")
+        monkeypatch.setenv("VAPE_CANDIDATE_MODEL", "vape-gemma-lora")
+        order = llm.candidate_provider_order()
+        assert order[0][3]["fast"] == "vape-gemma-lora"
+
+    def test_ask_candidate_reaches_candidate_first_when_configured(self, monkeypatch):
+        monkeypatch.setenv("VAPE_CANDIDATE_URL", "http://localhost:8000/v1")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("candidate reply")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_candidate("sys", "usr")
+        assert provider == "vape_candidate" and text == "candidate reply"
+
+    def test_ask_candidate_falls_through_to_free_chain_when_unset(self, monkeypatch):
+        monkeypatch.delenv("VAPE_CANDIDATE_URL", raising=False)
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_candidate("sys", "usr")
+        assert provider == "groq" and text == "via groq"
