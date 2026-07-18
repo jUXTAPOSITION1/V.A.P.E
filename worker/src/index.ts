@@ -537,13 +537,19 @@ app.use("*", async (c, next) => {
   // split, since Basescan's label doesn't matter to a script.
   const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
   const isDataAgentTraffic = c.req.header("X-VAPE-Client") === "data-agent";
+  // A logical x402 payment is two HTTP requests (unpaid 402 challenge, then
+  // the paid retry carrying X-PAYMENT) — only the paid leg should advance
+  // DATA AGENT's persisted alternator, or the two calls per hire cancel
+  // each other out and the real settling leg never rotates. See
+  // dataAgentAlternator.ts's docstring for the full story.
+  const isPaidRetry = !!c.req.header("X-PAYMENT");
   const vaporClient = c.env.VAPOR_FACILITATOR_URL
     ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
     : null;
   let usesVaporPrimary = false;
   if (vaporClient !== null && !isSiteTraffic) {
     usesVaporPrimary = isDataAgentTraffic
-      ? (await nextDataAgentFacilitator(c.env.VAPE_JOBS)) === "vapor"
+      ? (await nextDataAgentFacilitator(c.env.VAPE_JOBS, { advance: isPaidRetry })) === "vapor"
       : Math.random() < 0.5;
   }
   const hybridClient = vaporClient
