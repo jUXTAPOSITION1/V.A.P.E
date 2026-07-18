@@ -1689,6 +1689,24 @@
     "symbol": "BRIAN",
     "times_investigated": 1
   },
+  "8453:0xb20000000000000000000033c22ab099bbf76001": {
+    "address": "0xB20000000000000000000033C22aB099bbF76001",
+    "chain": "8453",
+    "first_investigated": "2026-07-18T16:27:25Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-162725-0xB2000000.md",
+        "score": 30,
+        "ts": "2026-07-18T16:27:25Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T16:27:25Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "COBIE",
+    "times_investigated": 1
+  },
   "8453:0xb2000000000000000000003833ed6154d9fa0f01": {
     "address": "0xb2000000000000000000003833eD6154d9fA0f01",
     "chain": "8453",
