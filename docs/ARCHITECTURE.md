@@ -132,7 +132,7 @@ component's state changes.
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
-| Security tool tiers | [OK] | 15 tools registered across static/fuzzing/ai-redteam/recon |
+| Security tool tiers | [OK] | 16 tools registered across static/symbolic/fuzzing/ai-redteam/recon |
 | `skillforge/memory/` | [OK] | Shared append-only memory base |
 
 ## Components

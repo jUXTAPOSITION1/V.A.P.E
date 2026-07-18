@@ -47,6 +47,22 @@
         "latest_release": "v0.24.8"
       }
     ],
+    "symbolic": [
+      {
+        "name": "halmos",
+        "repo": "a16z/halmos",
+        "lang": "python",
+        "install": "pip install halmos",
+        "invoke": "halmos (run from a Foundry project root; discovers check_<name>_<behavior>(...) functions)",
+        "version_cmd": "halmos --version",
+        "wrapper": "tools/symbolic/halmos.sh",
+        "purpose": "Bounded symbolic execution (Z3-backed) reusing the project's own Foundry tests as the spec — proves no assertion violation exists in that bound, rather than sampling random inputs like Echidna/forge fuzzing. Docs example uses python3.12; confirmed working on 3.11 too (this repo's CI Python version).",
+        "status": "verified",
+        "last_verified": "2026-07-18T20:44:00Z",
+        "version": "halmos 0.3.3",
+        "latest_release": "0.3.3"
+      }
+    ],
     "fuzzing": [
       {
         "name": "echidna",
