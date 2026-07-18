@@ -1540,6 +1540,25 @@
     "symbol": "claude",
     "times_investigated": 2
   },
+  "8453:0xae45b8fae07ffb2e5f4373bfcb6f4bd827a45b07": {
+    "address": "0xAE45b8faE07fFB2E5f4373bFCB6f4Bd827A45b07",
+    "chain": "8453",
+    "creator_address": "0x7fd96bae5725667888dc32e7141d8a1255f5d968",
+    "first_investigated": "2026-07-18T08:23:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-082354-0xAE45b8fa.md",
+        "score": 45,
+        "ts": "2026-07-18T08:23:54Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T08:23:54Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "Gitlawb",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000009a08ff22fac1d7f82": {
     "address": "0xb20000000000000000000009a08Ff22fAC1d7F82",
     "chain": "8453",
