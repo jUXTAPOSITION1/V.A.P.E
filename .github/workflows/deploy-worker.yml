@@ -128,23 +128,30 @@ jobs:
             echo "--- /$path ---"
             curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
-          # Temporary diagnostic (2026-07-17): DATA AGENT (X-VAPE-Client:
-          # data-agent) has been getting a bare HTTP 500 with no body from
-          # every /data/* offering since the 2026-07-15T13:04 deploy —
-          # Cloudflare's generic uncaught-exception response, so something in
-          # the request path throws. This hits the exact same route/header
-          # combo with -v to capture full response, headers, and any body.
-          # Remove once root-caused.
-          echo "--- /data/chain_overview (data-agent header, unpaid — exercises the facilitator-alternator selection on the 402 challenge path) ---"
-          curl -sS -v -w '\n(HTTP %{http_code})\n' --retry 0 -H "X-VAPE-Client: data-agent" \
-            "https://vape-x402.vapex402.workers.dev/data/chain_overview?chain=Base" 2>&1
-          echo "--- VAPOR /stats (the other half of the 50/50 hybrid split) ---"
-          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
-          echo "--- VAPOR /supported (same call getSupported() makes) ---"
+          # Temporary diagnostic (2026-07-18): root-caused and fixed as a
+          # VAPOR-side bug (x402Version:1 stale vs @x402/core's current
+          # protocol-version constant, 2, since the 2.18.0 bump) — VAPOR
+          # commit ed4b609/69d27f7, redeployed and verified against DATA
+          # AGENT traffic (real $0.01 payment, status 200). Since
+          # resourceServer.initialize() validates ALL registered routes
+          # against ONE facilitator response (whichever of VAPOR/CDP the
+          # hybrid client picked as primary for that request — see
+          # facilitatorClient.ts), the same crash hit /scan/* (the
+          # long-standing ACP-carried-over offerings) too, on any request
+          # where the 50/50 coin flip landed on VAPOR — not just data-agent
+          # traffic. This re-confirms /scan/exploit_check specifically
+          # across enough unauthenticated requests to sample both sides of
+          # that coin flip: every one should be a clean 402 (payment
+          # required), never a bare 500. Remove once this has run clean a
+          # few times post-fix.
+          echo "--- /scan/exploit_check x20 (unpaid, no X-VAPE-Client — the general/API traffic class, samples both facilitator coin-flip outcomes) ---"
+          for i in $(seq 1 20); do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --retry 0 \
+              "https://vape-x402.vapex402.workers.dev/scan/exploit_check?address=0xa1420293a7df49bc8380f543a1fe7b8d6f582879")
+            echo "attempt $i: HTTP $code"
+          done
+          echo "--- VAPOR /supported (confirm x402Version now reports 2, not the stale 1) ---"
           curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/supported"
-          echo "--- VAPOR /verify with a deliberately-invalid payload (expect a clean 400, not a timeout/connection failure) ---"
-          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 -X POST "https://x402.duckdns.org/verify" \
-            -H "Content-Type: application/json" -d '{"x402Version":1,"paymentPayload":{},"paymentRequirements":{}}'
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
