@@ -1,0 +1,128 @@
+name: Train VAPE Model (Gemma QLoRA fine-tune)
+
+# Manual-only, real GPU cost — never scheduled. Runs on the self-hosted GPU
+# runner set up via training/setup_runner.sh (see that script for the
+# one-time box setup this depends on). Rebuilds the dataset fresh from
+# VAPE's current real operating history each run (scripts/
+# build_finetune_dataset.py), fine-tunes (training/train_lora.py), uploads
+# the resulting LoRA adapter as a build artifact so it survives even if the
+# GPU box is later torn down, and — if requested — serves the candidate and
+# grades it against VAPE's real held-out data + the existing ai-redteam
+# safety suite (training/eval_candidate.py) before anything is trusted.
+on:
+  workflow_dispatch:
+    inputs:
+      base_model:
+        description: 'HF model id — verify against huggingface.co/google before running, do not trust this default blindly'
+        type: string
+        default: 'google/gemma-3-4b-it'
+      epochs:
+        description: 'Training epochs'
+        type: string
+        default: '3'
+      lora_r:
+        description: 'LoRA rank'
+        type: string
+        default: '16'
+      merge_and_serve:
+        description: 'After training, merge the adapter and run the eval_candidate.py comparison against a locally-served instance'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: train-vape-model
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: [self-hosted, gpu-train]
+    timeout-minutes: 360
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # This venv is created once by training/setup_runner.sh and persists
+      # across runs on this self-hosted box — NOT recreated per job, unlike
+      # a GitHub-hosted runner's ephemeral environment. If setup_runner.sh's
+      # own venv path ever changes, update this to match.
+      - name: Activate training venv + confirm GPU visible
+        run: |
+          source "$HOME/vape-training-venv/bin/activate"
+          python -c "import torch; print('CUDA available:', torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'no GPU')"
+          echo "VENV_PY=$HOME/vape-training-venv/bin/python" >> "$GITHUB_ENV"
+
+      - name: Rebuild the fine-tune dataset from current real data
+        run: |
+          "$VENV_PY" scripts/build_finetune_dataset.py
+
+      - name: Train (QLoRA)
+        run: |
+          "$VENV_PY" training/train_lora.py \
+            --base-model "${{ inputs.base_model }}" \
+            --epochs "${{ inputs.epochs }}" \
+            --lora-r "${{ inputs.lora_r }}" \
+            --output-dir training/out/vape-gemma-lora \
+            ${{ inputs.merge_and_serve == true && '--merge' || '' }}
+
+      - name: Upload LoRA adapter (survives even if this box is later torn down)
+        uses: actions/upload-artifact@v4
+        with:
+          name: vape-gemma-lora-adapter
+          path: training/out/vape-gemma-lora/adapter
+          retention-days: 30
+
+      - name: Upload merged model (if built)
+        if: ${{ inputs.merge_and_serve == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: vape-gemma-merged
+          path: training/out/vape-gemma-lora/merged
+          retention-days: 30
+
+      - name: Serve candidate + run real evaluation
+        if: ${{ inputs.merge_and_serve == true }}
+        run: |
+          source "$HOME/vape-training-venv/bin/activate"
+          # vllm isn't in training/requirements.txt (heavier, CUDA-version-
+          # sensitive) — install on demand so a training-only run never
+          # needs it, and this step degrades to a clear skip rather than a
+          # cryptic failure if the install itself doesn't work on this box.
+          if ! python -c "import vllm" 2>/dev/null; then
+            pip install vllm || { echo "::warning::vllm install failed — skipping serve+eval. Adapter/merged model artifacts are still uploaded above; evaluate manually."; exit 0; }
+          fi
+
+          MODEL_DIR="training/out/vape-gemma-lora/merged"
+          python -m vllm.entrypoints.openai.api_server \
+            --model "$MODEL_DIR" --served-model-name vape-candidate --port 8000 \
+            > vllm_server.log 2>&1 &
+          VLLM_PID=$!
+          trap 'kill $VLLM_PID 2>/dev/null || true' EXIT
+
+          echo "waiting for vLLM server to become healthy..."
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:8000/health >/dev/null 2>&1; then
+              echo "server healthy after ${i}0s"
+              break
+            fi
+            sleep 10
+          done
+
+          VAPE_CANDIDATE_URL=http://localhost:8000/v1 VAPE_CANDIDATE_MODEL=vape-candidate \
+            python training/eval_candidate.py
+
+      - name: Upload eval report + server log
+        if: ${{ always() && inputs.merge_and_serve == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: vape-candidate-eval
+          path: |
+            reports/vape_candidate_eval_*.md
+            vllm_server.log
+          retention-days: 30
+          if-no-files-found: ignore
