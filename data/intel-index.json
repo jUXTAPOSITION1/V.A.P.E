@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T15:02:29Z",
+  "generated": "2026-07-18T15:06:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 409,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 81,
-    "investigations": 221,
+    "investigations": 222,
     "tools": 15,
     "tools_verified": 15,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-135936-0x8c81B4c8.md",
-      "title": "Investigation \u2014 BRIUN",
-      "symbol": "BRIUN",
-      "name": "Briun Armstrung",
-      "date": "2026-07-18T13:59:36Z",
-      "target": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260718-150620-0x152b9d0F.md",
+      "title": "Investigation \u2014 BTC.b",
+      "symbol": "BTC.b",
+      "name": "Bitcoin",
+      "date": "2026-07-18T15:06:20Z",
+      "target": "0x152b9d0FdC40C096757F570A51E494bd4b943E50",
+      "chain": "43114 (Avalanche)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +481% (volatility/manipulation). Positive evidence: Ownership renounced; 71871 holders \u2014 reasonably distributed; Trading 864+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 852+ days \u2014 in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-135936-0x8c81B4c8.md"
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 170933 holders \u2014 reasonably distributed; Deep liquidity ($2,440,100); Trading 304+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template);",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-150620-0x152b9d0F.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-150620-0x152b9d0F.md",
+      "title": "Investigation \u2014 BTC.b",
+      "symbol": "BTC.b",
+      "name": "Bitcoin",
+      "date": "2026-07-18T15:06:20Z",
+      "target": "0x152b9d0FdC40C096757F570A51E494bd4b943E50",
+      "chain": "43114 (Avalanche)",
+      "verdict": "PROCEED",
+      "score": "88",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 170933 holders \u2014 reasonably distributed; Deep liquidity ($2,440,100); Trading 304+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template);",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-150620-0x152b9d0F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-135936-0x8c81B4c8.md",
@@ -593,20 +607,6 @@
       "score": "28",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: VELVET (0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65) \u2014 REJECT 48/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,034; [-10] Pair 10.0 days old \u2014 under two weeks, no track record yet; [-10",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-191556-0x71A64AA0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-174827-0x2376A4fC.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "The Bald Eagle",
-      "date": "2026-07-15T17:48:27Z",
-      "target": "0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (30) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $10,297; [-10] Pair 10.6 days old \u2014 under two ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-174827-0x2376A4fC.md"
     }
   ],
   "reports": [
