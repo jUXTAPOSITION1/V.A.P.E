@@ -605,6 +605,11 @@ app.use("*", async (c, next) => {
         tx_hash: ctx.result.transaction ?? null,
         network: ctx.result.network ?? null,
         facilitator: facilitatorUsed(),
+        debug_vapor_configured: vaporClient !== null,
+        debug_is_data_agent: isDataAgentTraffic,
+        debug_is_paid_retry: isPaidRetry,
+        debug_uses_vapor_primary: usesVaporPrimary,
+        debug_fallback_last_used: hybridClient?.lastUsed,
       };
       safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
     });
