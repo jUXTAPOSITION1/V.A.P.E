@@ -1,9 +1,18 @@
 {
-  "generated_at": "2026-07-17T08:11:46Z",
-  "source_report": "intel/reports/security-2026-07-17-08.md",
+  "generated_at": "2026-07-18T02:35:51Z",
+  "source_report": "intel/reports/security-2026-07-18-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-17",
+      "name": "Across",
+      "amount_usd_m": 0.0,
+      "chains": [
+        "Solana"
+      ],
+      "technique": null
+    },
     {
       "date": "2026-07-16",
       "name": "DefiTuna Lending",
@@ -525,24 +534,6 @@
         "Arbitrum"
       ],
       "technique": "Flashloan Price Manipulation"
-    },
-    {
-      "date": "2026-05-23",
-      "name": "StablR",
-      "amount_usd_m": 2.8,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "Private Key Compromised"
-    },
-    {
-      "date": "2026-05-23",
-      "name": "Mure",
-      "amount_usd_m": 0.012,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "Access Control Exploit"
     }
   ]
 }
