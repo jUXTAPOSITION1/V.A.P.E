@@ -364,7 +364,7 @@ class TestVertexTunedCandidate:
         assert provider == "vertex_tuned" and text == "vertex reply"
         assert captured["auth"] == "Bearer fake-token"
         assert captured["url"] == (
-            "https://us-aiplatform.googleapis.com/v1/projects/87858016172"
+            "https://aiplatform.us.rep.googleapis.com/v1/projects/87858016172"
             "/locations/us/endpoints/7011119457397374976:generateContent")
         assert captured["body"]["contents"] == [{"role": "user", "parts": [{"text": "usr prompt"}]}]
         assert captured["body"]["systemInstruction"] == {"parts": [{"text": "sys prompt"}]}
@@ -383,8 +383,25 @@ class TestVertexTunedCandidate:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_vertex_candidate("sys", "usr")
         assert captured["url"] == (
-            "https://eu-aiplatform.googleapis.com/v1/projects/999"
+            "https://aiplatform.eu.rep.googleapis.com/v1/projects/999"
             "/locations/eu/endpoints/123:generateContent")
+
+    def test_uses_classic_host_format_for_a_real_single_region(self, monkeypatch):
+        """Only the two documented Vertex multi-region values (us/eu) get the
+        aiplatform.{location}.rep.googleapis.com host — an actual single
+        region like us-central1 keeps the classic
+        {location}-aiplatform.googleapis.com form."""
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("VAPE_VERTEX_LOCATION", "us-central1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            return _fake_vertex_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("sys", "usr")
+        assert captured["url"].startswith("https://us-central1-aiplatform.googleapis.com/")
 
     def test_falls_through_to_free_chain_on_vertex_error(self, monkeypatch):
         monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
@@ -393,7 +410,7 @@ class TestVertexTunedCandidate:
 
         def fake_urlopen(req, timeout=None):
             calls.append(req.full_url)
-            if urllib.parse.urlparse(req.full_url).hostname == "us-aiplatform.googleapis.com":
+            if urllib.parse.urlparse(req.full_url).hostname == "aiplatform.us.rep.googleapis.com":
                 raise urllib.error.URLError("connection refused")
             return _fake_response("via groq")
 
@@ -413,7 +430,7 @@ class TestVertexTunedCandidate:
         error_body = b'{"error": {"code": 400, "message": "Unknown name \\"systemInstruction\\"", "status": "INVALID_ARGUMENT"}}'
 
         def fake_urlopen(req, timeout=None):
-            if urllib.parse.urlparse(req.full_url).hostname == "us-aiplatform.googleapis.com":
+            if urllib.parse.urlparse(req.full_url).hostname == "aiplatform.us.rep.googleapis.com":
                 raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", {}, io.BytesIO(error_body))
             return _fake_response("via groq")
 
