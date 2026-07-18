@@ -54,10 +54,12 @@ try:
     from agents import investigate as inv
     from agents import data_fetchers as DF
     from agents.llm import ask_frontier
+    from agents.scaffold_foundry_target import scaffold_and_analyze
 except Exception:
     import investigate as inv
     import data_fetchers as DF
     from llm import ask_frontier
+    from scaffold_foundry_target import scaffold_and_analyze
 
 
 def now_iso():
@@ -119,6 +121,24 @@ def _run_slither(address, chain, timeout=180):
         return {"ran": True, "ok": False, "reason": str(e)}
 
 
+def _run_symbolic(address, chain, src):
+    """Best-effort real bounded symbolic testing (Halmos) — mirrors
+    _run_slither's own "skip cleanly if the toolchain isn't here this run"
+    gate. Needs both forge (to scaffold+compile a throwaway Foundry project
+    from the target's own verified source) and halmos (to run bounded
+    symbolic tests against LLM-drafted check_* properties — see
+    agents/scaffold_foundry_target.py for the full pipeline and its one
+    deliberate LLM-generated piece, clearly labeled as hypotheses there)."""
+    if not shutil.which("forge"):
+        return {"ran": False, "reason": "forge not installed in this environment this run"}
+    if not shutil.which("halmos"):
+        return {"ran": False, "reason": "halmos not installed in this environment this run"}
+    try:
+        return scaffold_and_analyze(address, int(chain), pre_fetched_src=src)
+    except Exception as e:
+        return {"ran": False, "reason": str(e)}
+
+
 FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing a PAID
 24-hour-SLA deep-dive bug bounty audit. This is VAPE's premium tier — the highest rigor
 VAPE offers. Real money is on the line; be precise, evidence-based, and honest.
@@ -135,6 +155,10 @@ Rules:
   data provided — do not fabricate a source-level finding.
 - Cross-reference any static-analysis (Slither) findings given — confirm, refute, or
   add context; don't just restate them.
+- If Halmos symbolic-testing output is given, treat the tested properties as HYPOTHESES
+  a prior step drafted from this same source (not established findings) — a passing
+  Halmos run on a narrow property is not a clean bill of health, and a failing one is
+  a real, concrete counterexample worth investigating, not noise.
 - Distinguish real, exploitable findings from theoretical/low-severity noise, the same
   way a human auditor would triage away known false positives (e.g. standard-library
   math functions) rather than inflating a verdict off raw tool count.
@@ -147,7 +171,7 @@ found evidence for (skip classes with nothing to say rather than padding), then
 """
 
 
-def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result):
+def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result):
     parts = [f"=== TARGET ===\naddress: {address}\nchain: {chain}"]
     parts.append(f"=== GOPLUS TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
     parts.append(f"=== DEXSCREENER MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
@@ -170,6 +194,15 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
     else:
         parts.append(f"=== SLITHER STATIC ANALYSIS ===\nNot available this run: "
                      f"{slither_result.get('reason', 'unknown')}")
+    if symbolic_result.get("ran"):
+        halmos = symbolic_result.get("halmos", {})
+        parts.append(f"=== HALMOS SYMBOLIC TESTING (real run; properties below are HYPOTHESES an "
+                     f"earlier step drafted from this same verified source, not established "
+                     f"findings) ===\nDrafted properties:\n{symbolic_result.get('drafted_code', '')[:2000]}\n\n"
+                     f"Halmos output (rc={halmos.get('returncode')}):\n{halmos.get('output', '')[:2000]}")
+    else:
+        parts.append(f"=== HALMOS SYMBOLIC TESTING ===\nNot available this run: "
+                     f"{symbolic_result.get('reason', 'unknown')}")
     if corr:
         parts.append("=== RECENT-HACK TECHNIQUE CORRELATION (real, DeFiLlama feed) ===\n"
                      + "\n".join(f"- {c}" for c in corr))
@@ -199,6 +232,7 @@ def run_audit(address, chain="8453", callback_url=None):
     prelim_sym = dex.get("symbol") or src.get("contract_name") or "unknown"
     web_rep = inv.web_reputation_check(prelim_sym, address)
     slither_result = _run_slither(address, chain)
+    symbolic_result = _run_symbolic(address, chain, src)
 
     # Reuse investigate.py's scoring engine for a baseline consistent with every other
     # VAPE verdict — the frontier LLM pass adds depth on top, it doesn't replace this.
@@ -209,7 +243,7 @@ def run_audit(address, chain="8453", callback_url=None):
     score, verdict, reasons, positive_signals = inv.score(gp, dex, onchain, verif_for_score, web_rep, deployer_repeat)
 
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
-    prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result)
+    prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result)
     try:
         narrative, provider = ask_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
     except Exception as e:
@@ -226,7 +260,8 @@ def run_audit(address, chain="8453", callback_url=None):
     L.append(f"**Target:** `{address}` (chain {chain})  ")
     L.append(f"**Date:** {now_iso()}  ")
     L.append(f"**Engine:** Frontier LLM ({provider or 'unavailable'}) + real recon"
-             f"{' + Slither static analysis' if slither_result.get('ok') else ''}  ")
+             f"{' + Slither static analysis' if slither_result.get('ok') else ''}"
+             f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}  ")
     L.append(f"**Baseline Verdict:** {verdict} ({score}/100 — same scoring engine as every "
              "VAPE investigation, for consistency)")
     L.append("")
@@ -252,16 +287,34 @@ def run_audit(address, chain="8453", callback_url=None):
     else:
         L.append(f"- Not run this cycle: {slither_result.get('reason')}")
     L.append("")
+    L.append("## Symbolic Testing (Halmos)")
+    if symbolic_result.get("ran"):
+        halmos = symbolic_result.get("halmos", {})
+        L.append("- Ran bounded symbolic tests (Z3-backed) against properties an earlier step "
+                 "drafted from this contract's own verified source, scaffolded into a throwaway "
+                 "Foundry project — those properties are hypotheses to check, not findings; a "
+                 "pass narrows the search space, it isn't a clean bill of health.")
+        L.append(f"- Halmos exit code: {halmos.get('returncode')}")
+        if halmos.get("output"):
+            L.append("```")
+            L.append(halmos["output"][:1500])
+            L.append("```")
+    else:
+        L.append(f"- Not run this cycle: {symbolic_result.get('reason')}")
+    L.append("")
     L.append("## Methodology")
     L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
              "on-chain presence, DeFiLlama hack-technique correlation, public web search for "
              "reputation flags — identical pipeline to every free VAPE investigation.")
     L.append("2. Etherscan V2 contract verification + full verified source (when available).")
     L.append("3. Slither static analysis, real tool output, only if pre-installed this run.")
-    L.append("4. A frontier-tier LLM (Gemini 2.5 Pro, Groq as automatic fallback) reads the "
+    L.append("4. Halmos bounded symbolic testing against LLM-drafted check_* properties "
+             "compiled into a scaffolded Foundry project built from that same verified "
+             "source — only if forge and halmos are both installed this run.")
+    L.append("5. A frontier-tier LLM (Gemini 2.5 Pro, Groq as automatic fallback) reads the "
              "actual verified source and reasons per vulnerability class — this is VAPE's "
              "deepest automated pass, still followed by the human-verification list above.")
-    L.append("5. White-hat only: read-only analysis, no exploitation attempted.")
+    L.append("6. White-hat only: read-only analysis, no exploitation attempted.")
     L.append("")
     L.append("*V.A.P.E. — The chain never lies. This is a 24h-SLA premium engagement; "
              "results delivered as soon as generated, well inside that window.*")
