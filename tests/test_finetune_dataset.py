@@ -3,6 +3,7 @@ corpus is only trustworthy if every training pair traces to a real verdict, so
 these pin: both report-format generations parse, the label is never fabricated
 when the fields are missing, and the split is deterministic."""
 import importlib.util
+import json
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,3 +88,104 @@ def test_system_prompt_encodes_the_design_law():
     # VAPE's scoring — the training system prompt must carry it.
     assert "ABSENCE" in bf.SYSTEM_PROMPT
     assert "REJECT" in bf.SYSTEM_PROMPT
+
+
+SECURITY_SWEEP = """# VAPE Security Sweep Report
+
+**Generated:** 2026-07-17 08:11 UTC
+
+---
+
+## THREAT LEVEL: \U0001F534 HIGH
+
+Computed deterministically: 7 incident(s) in the last 7 days across the
+tracked feed, 0 of which exceeded $50M within the last 14 days.
+
+---
+
+## Recent DeFi/Crypto Incidents (real, DeFiLlama hacks feed)
+
+| Date | Protocol | Amount Lost |
+|------|----------|-------------|
+| 2026-07-16 | DefiTuna Lending | $0.58M |
+
+---
+
+### Summary
+Some narrative prose that must never end up in the assistant output.
+"""
+
+SENTIMENT_SWEEP = """# Sentiment Sweep Report
+
+---
+
+## SENTIMENT SCORE: 2.5/10 (Fear / Bearish-leaning)
+
+Real Fear & Greed index: **25** (Extreme Fear).
+Previous reading: 22 (Extreme Fear).
+
+---
+
+## Web Signals — Virtuals / AI Agents
+
+_No results returned this cycle._
+"""
+
+
+def _write_named(tmp_path, name, text):
+    p = tmp_path / name
+    p.write_text(text, encoding="utf-8")
+    return str(p)
+
+
+def test_parse_sweep_report_extracts_deterministic_verdict_only(tmp_path):
+    fp = _write_named(tmp_path, "security-x.md", SECURITY_SWEEP)
+    rec = bf.parse_sweep_report(fp, "security")
+    assert rec is not None
+    assistant = rec["messages"][2]["content"]
+    assert "THREAT LEVEL" in assistant
+    assert "Computed deterministically" in assistant
+    # The narrative prose under ### Summary must never leak into the output.
+    assert "must never end up" not in assistant
+
+
+def test_parse_sweep_report_input_excludes_narrative_headings(tmp_path):
+    fp = _write_named(tmp_path, "security-x.md", SECURITY_SWEEP)
+    rec = bf.parse_sweep_report(fp, "security")
+    user = rec["messages"][1]["content"]
+    assert "Recent DeFi/Crypto Incidents" in user
+
+
+def test_parse_sweep_report_sentiment_has_no_separate_input_table(tmp_path):
+    # Documented, expected behavior (see build_finetune_dataset.py's comment)
+    # — sentiment reports have no real-data table distinct from the score
+    # body itself, so they don't contribute examples via this parser.
+    fp = _write_named(tmp_path, "sentiment-x.md", SENTIMENT_SWEEP)
+    assert bf.parse_sweep_report(fp, "sentiment") is None
+
+
+def test_parse_sweep_report_rejects_report_without_the_verdict_heading(tmp_path):
+    fp = _write_named(tmp_path, "security-x.md", "# Report\n\nJust some text.\n")
+    assert bf.parse_sweep_report(fp, "security") is None
+
+
+def test_parse_lesson_requires_title_and_content():
+    good = json.dumps({"id": "abc123", "title": "T", "content": "C",
+                        "metadata": {"verdict": "PROCEED"}})
+    rec = bf.parse_lesson(good)
+    assert rec is not None
+    assert rec["key"] == "abc123"
+    assert "verdict: PROCEED" in rec["messages"][1]["content"]
+    assert rec["messages"][2]["content"] == "C"
+
+    missing_content = json.dumps({"id": "x", "title": "T"})
+    assert bf.parse_lesson(missing_content) is None
+
+    not_json = "not json at all"
+    assert bf.parse_lesson(not_json) is None
+
+
+def test_is_val_works_for_arbitrary_string_keys():
+    # Renamed from a target-address-only key to a generic per-example key —
+    # must still work for report filenames and lesson ids, not just addresses.
+    assert bf._is_val("security-2026-07-17-08.md") == bf._is_val("security-2026-07-17-08.md")

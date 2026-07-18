@@ -419,14 +419,18 @@ Every loop is grounded in **real data only** — no simulated or hypothetical ou
   PR alongside pyflakes over `agents/`+`scripts/`. This is the safety net the self-improvement
   loop needs before it can trust a self-proposed change to scoring or classification.
 - **`scripts/build_finetune_dataset.py`** [WIP] — "an LLM of VAPE's own", grounded and
-  reproducible: turns VAPE's real, published investigations (`intel/investigations/`) into a
-  chat-format instruction-tuning corpus (`data/finetune/`), where the INPUT is the observable
-  recon VAPE actually gathered and the OUTPUT is the verdict `score()` deterministically
-  reached — so a small open-weight model (LoRA) can be taught to reason like VAPE, not to
-  re-distill another model's guesses. It does NOT replace `score()` (rule-based stays the
-  source of truth); a fine-tuned candidate is a better "fast" tier, to be graded against the
-  frontier tier with the existing promptfoo/deepteam harness before any real traffic. The
-  corpus grows for free as VAPE keeps investigating — see `data/finetune/DATASET_CARD.md`.
+  reproducible: turns VAPE's real operating history — published investigations
+  (`intel/investigations/`), sweep reports (`intel/reports/`), and its own logged operational
+  lessons (`skillforge/memory/lessons.jsonl`) — into a chat-format instruction-tuning corpus
+  (`data/finetune/`), where the INPUT is the observable recon/data VAPE actually gathered and
+  the OUTPUT is the verdict/score/trend deterministically reached (never an LLM's narrative
+  prose, which is deliberately excluded) — so a small-to-mid open-weight model (LoRA/QLoRA)
+  can be taught to reason like VAPE across every domain it covers, not to re-distill another
+  model's guesses. It does NOT replace `score()` or any sweep's `compute_*_score()` (rule-based
+  stays the source of truth); a fine-tuned candidate is graded against the frontier tier with
+  the existing promptfoo/deepteam harness (`training/eval_candidate.py`) before any real
+  traffic. The corpus grows for free as VAPE keeps operating — see
+  `data/finetune/DATASET_CARD.md`.
 
 ## Current vs. future
 **Now:** autonomous hourly LLM+slither reports, SKILLFORGE 15-tool verification, real
