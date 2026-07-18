@@ -466,7 +466,17 @@ def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
     location = os.getenv("VAPE_VERTEX_LOCATION", VERTEX_TUNED_DEFAULT_LOCATION)
     endpoint_id = os.getenv("VAPE_VERTEX_ENDPOINT_ID", VERTEX_TUNED_DEFAULT_ENDPOINT_ID)
     token = os.environ["VAPE_VERTEX_ACCESS_TOKEN"]
-    url = (f"https://{location}-aiplatform.googleapis.com/v1/projects/{project}"
+    # Confirmed against a real 400 from Google ("Invalid hostname:
+    # us-aiplatform.googleapis.com"): the classic "{location}-aiplatform.
+    # googleapis.com" host only exists for actual single regions (e.g.
+    # us-central1). Vertex's two multi-region values (us/eu — what a tuned
+    # model's own location field shows, distinct from the region the tuning
+    # JOB ran in) are served from a different host entirely.
+    if location in ("us", "eu"):
+        host = f"aiplatform.{location}.rep.googleapis.com"
+    else:
+        host = f"{location}-aiplatform.googleapis.com"
+    url = (f"https://{host}/v1/projects/{project}"
            f"/locations/{location}/endpoints/{endpoint_id}:generateContent")
     payload = json.dumps({
         "contents": [{"role": "user", "parts": [{"text": user}]}],
