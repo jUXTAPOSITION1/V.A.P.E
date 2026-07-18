@@ -297,3 +297,5 @@
 | 2026-07-18 | auto | 0x152b9d0FdC40C096757F570A51E494bd4b943E50 (BTC.b) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-18 | auto | 0xB20000000000000000000033C22aB099bbF76001 (COBIE) | deep_investigation | REJECT (30/100) | Very few holders (5) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-18 | auto | 0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea (MidnightProtocol) | deep_investigation | REJECT (45/100) | Very few holders (14) — thin, easily manipulated distribution | +7d |

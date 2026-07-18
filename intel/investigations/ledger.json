@@ -769,6 +769,25 @@
     "symbol": "Doji",
     "times_investigated": 1
   },
+  "8453:0x0675e10c848ca8a725d186f7626dd5247ceed9ea": {
+    "address": "0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea",
+    "chain": "8453",
+    "creator_address": "0x1cc06dca9b7f83d8c6550bc63b0f1080c5f2718a",
+    "first_investigated": "2026-07-18T17:33:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-173336-0x0675E10c.md",
+        "score": 45,
+        "ts": "2026-07-18T17:33:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T17:33:36Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "MidnightProtocol",
+    "times_investigated": 1
+  },
   "8453:0x068c1c81b802de01e60c1393ee974d896138ad56": {
     "address": "0x068c1c81B802DE01E60C1393Ee974d896138aD56",
     "chain": "8453",

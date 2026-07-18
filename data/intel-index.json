@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T16:27:26Z",
+  "generated": "2026-07-18T17:33:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 81,
-    "investigations": 223,
+    "investigations": 224,
     "tools": 15,
     "tools_verified": 15,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-162725-0xB2000000.md",
-      "title": "Investigation \u2014 COBIE",
-      "symbol": "COBIE",
-      "name": "The Based Man",
-      "date": "2026-07-18T16:27:25Z",
-      "target": "0xB20000000000000000000033C22aB099bbF76001",
+      "file": "investigation-20260718-173336-0x0675E10c.md",
+      "title": "Investigation \u2014 MidnightProtocol",
+      "symbol": "MidnightProtocol",
+      "name": "MidnightProtocol",
+      "date": "2026-07-18T17:33:36Z",
+      "target": "0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $29,415; [-15] Pair only 2.3 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Posit",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-162725-0xB2000000.md"
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $14,215; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-173336-0x0675E10c.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-173336-0x0675E10c.md",
+      "title": "Investigation \u2014 MidnightProtocol",
+      "symbol": "MidnightProtocol",
+      "name": "MidnightProtocol",
+      "date": "2026-07-18T17:33:36Z",
+      "target": "0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $14,215; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-173336-0x0675E10c.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-162725-0xB2000000.md",
@@ -593,20 +607,6 @@
       "score": "37",
       "summary": "Risk factors: [-8] Low holder count (134); [-25] Very low liquidity $7,935 (rug/illiquid); [-10] Low liquidity $7,935; [-10] Violent 24h move +467% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 268+ d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-220354-0x1DE2a8dC.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-203451-0x693B8De8.md",
-      "title": "Investigation \u2014 doji",
-      "symbol": "doji",
-      "name": "doji",
-      "date": "2026-07-15T20:34:51Z",
-      "target": "0x693B8De886712f0039EEf578bbE5aC7ea3B598CE",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) \u2014 can still act on the contract; [-10] Violent 24h move +39066% (volatility/manipulation). Positive evidence: 1190 holders \u2014 reasonably distributed; Trading 267+ days without a known incident in this scan; Custom verified source (not a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-203451-0x693B8De8.md"
     }
   ],
   "reports": [
