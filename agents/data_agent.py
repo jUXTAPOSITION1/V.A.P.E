@@ -11,28 +11,33 @@ DATA_AGENT's wallet and settles into VAPE's own PAY_TO_ADDRESS on Base
 mainnet, via the same worker + facilitator any other x402 buyer uses — this
 proves the payment rail end-to-end on every real investigation, not only when
 an external buyer happens to hire something, and folds independently-priced
-DefiLlama-backed data into every report VAPE already writes. Tags every
-request with X-VAPE-Client: data-agent so the worker's facilitator-selection
-logic (worker/src/index.ts) alternates it deterministically between CDP and
-VAPOR (see worker/src/lib/dataAgentAlternator.ts) instead of coin-flipping —
-one hire per run, twice an hour, means one CDP hire and one VAPOR hire per
-hour rather than leaving the split to chance.
+DefiLlama-backed data into every report VAPE already writes.
 
-Rate limits (hard caps enforced HERE, not the worker's job):
+This module runs as TWO independent instances rather than one agent trying
+to alternate between facilitators: this file's own run_for_investigation()
+tags requests X-VAPE-Client: data-agent (worker/src/index.ts pins that tag
+to CDP), and agents/data_agent_vapor.py's run_for_investigation() tags
+data-agent-vapor (pinned to VAPOR). An earlier version tried a single agent
+alternating 50/50 via a KV-persisted toggle (worker/src/lib/
+dataAgentAlternator.ts, removed) — that added a cross-request shared-state
+dependency for no real benefit over just running two thin, independently-
+gated, deterministic agents. Each instance has its OWN quota/ledger state
+(see _State below) so neither's 30-minute gate or daily cap blocks the
+other — both can genuinely hire in the same investigation cycle.
+
+Rate limits (hard caps enforced HERE, not the worker's job), per instance:
   - Exactly 1 offering hired per invocation — this agent runs on a fixed 2x/
     hour cadence (see MIN_INTERVAL_SECONDS), so "1 per run" is what maps that
-    cadence onto "$0.01 per run" cleanly and keeps the CDP/VAPOR alternation
-    above at exactly 1:1 per run rather than muddying it with multiple picks.
+    cadence onto "$0.01 per run" cleanly.
   - 48 hires/day total across every investigation (2/hour x 24h), tracked in
-    skillforge/memory/data_agent_quota.json (same durable-counter shape as
+    a per-instance quota file (same durable-counter shape as
     skillforge/research.py's MONTHLY_QUOTA pattern, just per-day). Once hit,
     this becomes a documented no-op for the rest of the day rather than
     erroring the investigation that recruited it.
-  - A 30-minute minimum interval between hire attempts (skillforge/memory/
-    data_agent_quota.json's "last_ts"), independent of the daily cap above —
-    lets agents/investigate.py run on a much tighter cadence (the site's
-    Featured Investigation spotlight) without DATA AGENT itself firing any
-    more often than 2x/hour.
+  - A 30-minute minimum interval between hire attempts, independent of the
+    daily cap above — lets agents/investigate.py run on a much tighter
+    cadence (the site's Featured Investigation spotlight) without either
+    instance firing any more often than 2x/hour.
 
 Restricted to offerings that only need the address already under
 investigation, a chain slug, or no input at all — protocol/protocol_fees/
@@ -52,8 +57,6 @@ import random
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-QUOTA_PATH = os.path.join(ROOT, "skillforge", "memory", "data_agent_quota.json")
-LEDGER_PATH = os.path.join(ROOT, "skillforge", "memory", "data_agent_ledger.jsonl")
 
 WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 NETWORK = "eip155:8453"  # Base mainnet — same network the worker's PAY_TO_ADDRESS settles on
@@ -64,7 +67,9 @@ MIN_INTERVAL_SECONDS = 30 * 60  # 30m floor between hire attempts, see module do
 
 # Real, funded wallet the user provisioned for this agent — a fund-moving
 # action never proceeds unless DATA_AGENT_PRIVATE_KEY actually derives this
-# exact address (see _build_session()).
+# exact address (see _build_session()). Both facilitator-pinned instances
+# share the same wallet: the facilitator is just the settlement rail, not
+# the payer's identity, so there's no reason to need a second funded wallet.
 EXPECTED_WALLET = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 
 # name -> (address) -> query params. See the module docstring for why
@@ -82,68 +87,70 @@ OFFERING_PARAMS = {
 }
 
 
-def _today():
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+class _State:
+    """Per-instance quota/ledger state, keyed by a filename prefix so the
+    CDP-pinned and VAPOR-pinned instances never share (or contend over) the
+    same gate — each hires on its own independent 30m/48-per-day schedule."""
+
+    def __init__(self, prefix):
+        self.quota_path = os.path.join(ROOT, "skillforge", "memory", f"{prefix}_quota.json")
+        self.ledger_path = os.path.join(ROOT, "skillforge", "memory", f"{prefix}_ledger.jsonl")
+
+    def _today(self):
+        return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    def _load_quota(self):
+        try:
+            with open(self.quota_path) as f:
+                return json.load(f)
+        except Exception:
+            return {}
+
+    def _save_quota(self, q):
+        os.makedirs(os.path.dirname(self.quota_path), exist_ok=True)
+        with open(self.quota_path, "w") as f:
+            json.dump(q, f, indent=2)
+
+    def remaining_today(self):
+        q = self._load_quota()
+        if q.get("date") != self._today():
+            return DAILY_CAP
+        return max(0, DAILY_CAP - q.get("count", 0))
+
+    def seconds_since_last_attempt(self):
+        """None if there's no record yet (never gates a fresh install)."""
+        last_ts = self._load_quota().get("last_ts")
+        if not last_ts:
+            return None
+        try:
+            last = datetime.fromisoformat(last_ts.replace("Z", "+00:00"))
+        except Exception:
+            return None
+        return (datetime.now(timezone.utc) - last).total_seconds()
+
+    def mark_attempt(self):
+        q = self._load_quota()
+        if q.get("date") != self._today():
+            q = {"date": self._today(), "count": 0}
+        q["last_ts"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        self._save_quota(q)
+
+    def record_hires(self, n):
+        if n <= 0:
+            return
+        q = self._load_quota()
+        if q.get("date") != self._today():
+            q = {"date": self._today(), "count": 0, "last_ts": q.get("last_ts")}
+        q["count"] = q.get("count", 0) + n
+        self._save_quota(q)
+
+    def log_ledger(self, entry):
+        os.makedirs(os.path.dirname(self.ledger_path), exist_ok=True)
+        with open(self.ledger_path, "a") as f:
+            f.write(json.dumps(entry) + "\n")
 
 
-def _load_quota():
-    try:
-        with open(QUOTA_PATH) as f:
-            return json.load(f)
-    except Exception:
-        return {}
-
-
-def _save_quota(q):
-    os.makedirs(os.path.dirname(QUOTA_PATH), exist_ok=True)
-    with open(QUOTA_PATH, "w") as f:
-        json.dump(q, f, indent=2)
-
-
-def _remaining_today():
-    q = _load_quota()
-    if q.get("date") != _today():
-        return DAILY_CAP
-    return max(0, DAILY_CAP - q.get("count", 0))
-
-
-def _seconds_since_last_attempt():
-    """None if there's no record yet (never gates a fresh install)."""
-    last_ts = _load_quota().get("last_ts")
-    if not last_ts:
-        return None
-    try:
-        last = datetime.fromisoformat(last_ts.replace("Z", "+00:00"))
-    except Exception:
-        return None
-    return (datetime.now(timezone.utc) - last).total_seconds()
-
-
-def _mark_attempt():
-    q = _load_quota()
-    if q.get("date") != _today():
-        q = {"date": _today(), "count": 0}
-    q["last_ts"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    _save_quota(q)
-
-
-def _record_hires(n):
-    if n <= 0:
-        return
-    q = _load_quota()
-    if q.get("date") != _today():
-        q = {"date": _today(), "count": 0, "last_ts": q.get("last_ts")}
-    q["count"] = q.get("count", 0) + n
-    _save_quota(q)
-
-
-def _log_ledger(entry):
-    os.makedirs(os.path.dirname(LEDGER_PATH), exist_ok=True)
-    with open(LEDGER_PATH, "a") as f:
-        f.write(json.dumps(entry) + "\n")
-
-
-def _build_session():
+def _build_session(client_tag):
     """Build a requests.Session that transparently pays x402 402 challenges
     with DATA_AGENT's own funded wallet. Returns None if the key is unset,
     invalid, doesn't derive EXPECTED_WALLET, or the x402 SDK is unavailable —
@@ -172,12 +179,12 @@ def _build_session():
     client.register(NETWORK, ExactEvmScheme(signer=account))
     session = x402_requests(client)
     # Lets the worker's facilitator-selection logic (worker/src/index.ts)
-    # single out DATA AGENT's own traffic for deterministic CDP/VAPOR
-    # alternation instead of the random 50/50 split — see module docstring.
+    # pin this instance's traffic to its assigned facilitator (data-agent ->
+    # CDP, data-agent-vapor -> VAPOR) instead of the random 50/50 split.
     # Session-level header, safe across the payment retry (unlike the fetch()
     # Request-object gotcha docs/assets/hire.js hit): x402HTTPAdapter.send()
     # builds retries via request.copy() + headers.update(), both additive.
-    session.headers["X-VAPE-Client"] = "data-agent"
+    session.headers["X-VAPE-Client"] = client_tag
     return session
 
 
@@ -206,31 +213,30 @@ def hire(session, offering, params):
     return body.get("deliverable", body), True
 
 
-def run_for_investigation(address, chain="8453"):
-    """Recruited by agents/investigate.py::investigate() for every real
-    report. Hires 1 random $0.01 x402 offering against the token under
-    investigation (capped at 48 total paid hires/day across all
-    investigations, and no more often than once every 30m regardless of how
-    often investigate.py itself runs — see MIN_INTERVAL_SECONDS) and returns
-    what it bought so the report can fold it in.
+def _run(address, chain, *, client_tag, state, log_prefix):
+    """Shared core for both facilitator-pinned instances — see module
+    docstring. Hires 1 random $0.01 x402 offering against the token under
+    investigation (capped at 48 total paid hires/day, and no more often than
+    once every 30m regardless of how often investigate.py itself runs) and
+    returns what it bought so the report can fold it in.
     """
     if str(chain) != "8453":
         return {"hired": [], "note": "data agent only wired for Base (8453) investigations"}
 
-    since_last = _seconds_since_last_attempt()
+    since_last = state.seconds_since_last_attempt()
     if since_last is not None and since_last < MIN_INTERVAL_SECONDS:
         wait_min = round((MIN_INTERVAL_SECONDS - since_last) / 60)
         return {"hired": [], "note": f"30m interval not yet up ({wait_min}m remaining) — skipped this cycle"}
 
-    remaining = _remaining_today()
+    remaining = state.remaining_today()
     if remaining < HIRES_PER_RUN:
         return {"hired": [], "note": f"daily cap reached ({DAILY_CAP}/day) — skipped this cycle"}
 
-    session = _build_session()
+    session = _build_session(client_tag)
     if session is None:
         return {"hired": [], "note": "DATA_AGENT_PRIVATE_KEY not configured or invalid — skipped"}
 
-    _mark_attempt()
+    state.mark_attempt()
 
     picks = random.sample(list(OFFERING_PARAMS.keys()), HIRES_PER_RUN)
 
@@ -243,13 +249,24 @@ def run_for_investigation(address, chain="8453"):
         if paid:
             paid_count += 1
 
-    _record_hires(paid_count)
+    state.record_hires(paid_count)
     cost_usd = round(paid_count * 0.01, 2)
-    _log_ledger({
+    state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": address,
         "hired": [h["offering"] for h in hired],
         "paid": paid_count,
         "cost_usd": cost_usd,
     })
+    print(f"[{log_prefix}] {address}: hired {[h['offering'] for h in hired]}, "
+          f"paid {paid_count}, ${cost_usd:.2f}")
     return {"hired": hired, "cost_usd": cost_usd}
+
+
+_CDP_STATE = _State("data_agent")
+
+
+def run_for_investigation(address, chain="8453"):
+    """Recruited by agents/investigate.py::investigate() for every real
+    report — CDP-pinned instance (X-VAPE-Client: data-agent)."""
+    return _run(address, chain, client_tag="data-agent", state=_CDP_STATE, log_prefix="data_agent")

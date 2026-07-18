@@ -2,9 +2,10 @@ name: VAPE Featured Investigation (auto-target deep dive)
 
 # Split out of bounty-cycle.yml (which stays hourly for the bounty-hunt +
 # self-review passes) so the site's "Featured Investigation" spotlight and
-# DATA AGENT (recruited inside agents/investigate.py for every real
-# investigation — see agents/data_agent.py) get a much fresher cadence
-# without bumping the cost/frequency of the rest of the hourly cycle.
+# DATA AGENT (both facilitator-pinned instances recruited inside
+# agents/investigate.py for every real investigation — see
+# agents/data_agent.py and agents/data_agent_vapor.py) get a much fresher
+# cadence without bumping the cost/frequency of the rest of the hourly cycle.
 on:
   schedule:
     - cron: '*/30 * * * *'
@@ -34,10 +35,11 @@ jobs:
       GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
       TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
-      # DATA AGENT's own funded wallet — recruited mid-investigation to hire
-      # 2-4 of VAPE's own $0.01 x402 data offerings (see agents/data_agent.py;
-      # its own internal 2h-interval gate + 15/day cap apply regardless of
-      # how often this workflow fires).
+      # DATA AGENT's own funded wallet, shared by both facilitator-pinned
+      # instances (agents/data_agent.py -> CDP, agents/data_agent_vapor.py ->
+      # VAPOR) — recruited mid-investigation to each independently hire 1 of
+      # VAPE's own $0.01 x402 data offerings; each instance's own 30m-interval
+      # gate + 48/day cap apply regardless of how often this workflow fires.
       DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v7
@@ -57,20 +59,19 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
-      # Temporary (2026-07-18, manual trigger only): force a real DATA AGENT
-      # hire attempt directly against a known Base address, bypassing
-      # investigate.py's auto-target selection (today's auto target was
-      # non-Base, which data_agent.py skips outright). Needed to get a fresh
-      # real settlement onto /x402/feed carrying the debug fields just added
-      # to index.ts/jobLog.ts, without waiting on chance. Remove once
-      # root-caused.
-      - name: Force a real DATA AGENT hire (manual trigger only)
+      # Manual-trigger convenience: force both DATA AGENT instances against a
+      # known Base address, bypassing investigate.py's auto-target selection
+      # (which may land on a non-Base target, or none at all, this cycle) —
+      # useful for spot-checking the CDP/VAPOR split without waiting on
+      # chance. Each instance still enforces its own 30m-interval gate.
+      - name: Force both DATA AGENT instances (manual trigger only)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           python -c "
           import sys; sys.path.insert(0, '.')
-          from agents.data_agent import run_for_investigation
-          print(run_for_investigation('0xa1420293a7df49bc8380f543a1fe7b8d6f582879', '8453'))
+          from agents import data_agent, data_agent_vapor
+          print('cdp:', data_agent.run_for_investigation('0xa1420293a7df49bc8380f543a1fe7b8d6f582879', '8453'))
+          print('vapor:', data_agent_vapor.run_for_investigation('0xa1420293a7df49bc8380f543a1fe7b8d6f582879', '8453'))
           "
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py

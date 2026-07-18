@@ -63,18 +63,6 @@ export interface JobRecord {
   // sometimes less precise (amount-inferred, occasionally ambiguous) for
   // these entries specifically.
   backfilled?: boolean;
-  // Temporary (2026-07-18): every real post-fix settlement still shows
-  // facilitator:"cdp" with VAPOR's own /stats showing zero verify/settle
-  // requests ever received — stronger than the header-name bug already
-  // fixed once (that would still have LEFT verify attempts hitting VAPOR).
-  // These surface exactly which branch of index.ts's routing logic actually
-  // ran for a real settlement, without needing wrangler tail. Remove once
-  // root-caused.
-  debug_vapor_configured?: boolean;
-  debug_is_data_agent?: boolean;
-  debug_is_paid_retry?: boolean;
-  debug_uses_vapor_primary?: boolean;
-  debug_fallback_last_used?: "primary" | "fallback";
 }
 
 interface OfferingTotals {
