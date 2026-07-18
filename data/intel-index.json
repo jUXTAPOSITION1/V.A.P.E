@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T03:57:11Z",
+  "generated": "2026-07-18T04:06:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 401,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 79,
-    "investigations": 214,
+    "investigations": 215,
     "tools": 15,
     "tools_verified": 14,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-005713-0x769607fc.md",
-      "title": "Investigation \u2014 YIELD",
-      "symbol": "YIELD",
-      "name": "YieldFun",
-      "date": "2026-07-18T00:57:13Z",
-      "target": "0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Very few holders (26) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $6,130 (rug/illiquid); [-10] Low liquidity $6,130; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ve",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-005713-0x769607fc.md"
+      "file": "investigation-20260718-040633-0x5F980Dcf.md",
+      "title": "Investigation \u2014 GITLAWB",
+      "symbol": "GITLAWB",
+      "name": "gitlawb",
+      "date": "2026-07-18T04:06:33Z",
+      "target": "0x5F980Dcfc4c0fa3911554cf5ab288ed0eb13DBa3",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract. Positive evidence: 10393 holders \u2014 reasonably distributed; Deep liquidity ($1,273,369); Trading 129+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-040633-0x5F980Dcf.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-040633-0x5F980Dcf.md",
+      "title": "Investigation \u2014 GITLAWB",
+      "symbol": "GITLAWB",
+      "name": "gitlawb",
+      "date": "2026-07-18T04:06:33Z",
+      "target": "0x5F980Dcfc4c0fa3911554cf5ab288ed0eb13DBa3",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract. Positive evidence: 10393 holders \u2014 reasonably distributed; Deep liquidity ($1,273,369); Trading 129+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-040633-0x5F980Dcf.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-005713-0x769607fc.md",
@@ -593,20 +607,6 @@
       "score": "74",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 28697 holders \u2014 reasonably distributed; Custom verifi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-063649-0x1F32b1c2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-040711-0xB2000000.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Coinbase Man",
-      "date": "2026-07-15T04:07:11Z",
-      "target": "0xB2000000000000000000007BF6D5cBb0E24cB301",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +22631% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudite",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-040711-0xB2000000.md"
     }
   ],
   "reports": [
