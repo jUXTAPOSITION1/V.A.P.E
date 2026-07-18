@@ -538,11 +538,22 @@ app.use("*", async (c, next) => {
   const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
   const isDataAgentTraffic = c.req.header("X-VAPE-Client") === "data-agent";
   // A logical x402 payment is two HTTP requests (unpaid 402 challenge, then
-  // the paid retry carrying X-PAYMENT) — only the paid leg should advance
-  // DATA AGENT's persisted alternator, or the two calls per hire cancel
-  // each other out and the real settling leg never rotates. See
+  // the paid retry carrying the payment payload) — only the paid leg should
+  // advance DATA AGENT's persisted alternator, or the two calls per hire
+  // cancel each other out and the real settling leg never rotates. See
   // dataAgentAlternator.ts's docstring for the full story.
-  const isPaidRetry = !!c.req.header("X-PAYMENT");
+  //
+  // The header name here matters: @x402/core's own server-side
+  // extractPayment() (chunk-UCXEF6EL.mjs) reads "payment-signature" /
+  // "PAYMENT-SIGNATURE" to pull the payment payload off an incoming
+  // request — NOT "X-PAYMENT" (that's the outgoing header name the client
+  // library sends things under on the wire; see index.ts's own CORS
+  // allowHeaders list, which already carries both names for exactly this
+  // reason). Checking "X-PAYMENT" here meant this was always false, so the
+  // alternator never advanced on any leg after the first fix attempt,
+  // freezing DATA AGENT's real settlements on whichever side happened to
+  // be current at that moment.
+  const isPaidRetry = !!(c.req.header("payment-signature") || c.req.header("PAYMENT-SIGNATURE"));
   const vaporClient = c.env.VAPOR_FACILITATOR_URL
     ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
     : null;
