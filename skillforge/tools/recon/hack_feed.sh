@@ -17,7 +17,7 @@ d=json.load(sys.stdin); n=int(os.environ['N'])
 d.sort(key=lambda x:x.get('date',0),reverse=True)
 for h in d[:n]:
     ts=datetime.datetime.utcfromtimestamp(h['date']).strftime('%Y-%m-%d')
-    print(ts,h.get('name'),round(h.get('amount',0)/1e6,2),'M',h.get('chain'),h.get('technique'))
+    print(ts,h.get('name'),round((h.get('amount') or 0)/1e6,2),'M',h.get('chain'),h.get('technique'))
 ";;
   since)
     fetch | D="$2" python3 -c "
@@ -27,7 +27,7 @@ d.sort(key=lambda x:x.get('date',0),reverse=True)
 for h in d:
     if h.get('date',0)>=cut:
         ts=datetime.datetime.utcfromtimestamp(h['date']).strftime('%Y-%m-%d')
-        print(ts,h.get('name'),round(h.get('amount',0)/1e6,2),'M',h.get('chain'),h.get('technique'))
+        print(ts,h.get('name'),round((h.get('amount') or 0)/1e6,2),'M',h.get('chain'),h.get('technique'))
 ";;
   chain)
     fetch | C="$2" python3 -c "
@@ -37,7 +37,7 @@ d.sort(key=lambda x:x.get('date',0),reverse=True)
 for h in d:
     if any(c==str(x).lower() for x in (h.get('chain') or [])):
         ts=datetime.datetime.utcfromtimestamp(h['date']).strftime('%Y-%m-%d')
-        print(ts,h.get('name'),round(h.get('amount',0)/1e6,2),'M',h.get('chain'),h.get('technique'))
+        print(ts,h.get('name'),round((h.get('amount') or 0)/1e6,2),'M',h.get('chain'),h.get('technique'))
 ";;
   raw) fetch;;
   *) echo "usage: hack_feed.sh {latest [N]|since YYYY-MM-DD|chain <Chain>|raw}" >&2; exit 1;;
