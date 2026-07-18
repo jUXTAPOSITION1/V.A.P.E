@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T00:04:24Z",
+  "generated": "2026-07-18T00:57:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 398,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 78,
-    "investigations": 213,
+    "investigations": 214,
     "tools": 15,
     "tools_verified": 14,
     "skills": 12
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-000422-0xF94b5C56.md",
-      "title": "Investigation \u2014 YLD",
-      "symbol": "YLD",
-      "name": "Yield",
-      "date": "2026-07-18T00:04:22Z",
-      "target": "0xF94b5C5651c888d928439aB6514B93944eEE6F48",
+      "file": "investigation-20260718-005713-0x769607fc.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "YieldFun",
+      "date": "2026-07-18T00:57:13Z",
+      "target": "0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $4,502 (rug/illiquid); [-10] Low liquidity $4,502. Positive evidence: 7076 holders \u2014 reasonably distributed; Trading 1767+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); Def",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-000422-0xF94b5C56.md"
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (26) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $6,130 (rug/illiquid); [-10] Low liquidity $6,130; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ve",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-005713-0x769607fc.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-005713-0x769607fc.md",
+      "title": "Investigation \u2014 YIELD",
+      "symbol": "YIELD",
+      "name": "YieldFun",
+      "date": "2026-07-18T00:57:13Z",
+      "target": "0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (26) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $6,130 (rug/illiquid); [-10] Low liquidity $6,130; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ve",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-005713-0x769607fc.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-000422-0xF94b5C56.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +22631% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudite",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-040711-0xB2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-005138-0x90456725.md",
-      "title": "Investigation \u2014 KITE",
-      "symbol": "KITE",
-      "name": "Kite",
-      "date": "2026-07-15T00:51:38Z",
-      "target": "0x904567252D8F48555b7447c67dCA23F0372E16be",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x725e318e181d7e1bb26c0d77ddc58ff6ba463fd8) \u2014 can still act on the contract. Positive evidence: 101076 holders \u2014 reasonably distributed; Deep liquidity ($843,163); Trading 246+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-005138-0x90456725.md"
     }
   ],
   "reports": [

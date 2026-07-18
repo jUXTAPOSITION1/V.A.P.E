@@ -277,3 +277,5 @@
 | 2026-07-17 | auto | 0xb20000000000000000000009a08Ff22fAC1d7F82 (mr_lightspeed) | deep_investigation | REJECT (5/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-18 | auto | 0xF94b5C5651c888d928439aB6514B93944eEE6F48 (YLD) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-18 | auto | 0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc (YIELD) | deep_investigation | REJECT (35/100) | Very few holders (26) — thin, easily manipulated distribution | +7d |
