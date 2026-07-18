@@ -57,6 +57,21 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
+      # Temporary (2026-07-18, manual trigger only): force a real DATA AGENT
+      # hire attempt directly against a known Base address, bypassing
+      # investigate.py's auto-target selection (today's auto target was
+      # non-Base, which data_agent.py skips outright). Needed to get a fresh
+      # real settlement onto /x402/feed carrying the debug fields just added
+      # to index.ts/jobLog.ts, without waiting on chance. Remove once
+      # root-caused.
+      - name: Force a real DATA AGENT hire (manual trigger only)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          python -c "
+          import sys; sys.path.insert(0, '.')
+          from agents.data_agent import run_for_investigation
+          print(run_for_investigation('0xa1420293a7df49bc8380f543a1fe7b8d6f582879', '8453'))
+          "
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
