@@ -18,12 +18,14 @@ on:
 
 permissions:
   contents: read
-  id-token: write  # required for the WIF OIDC token exchange below
 
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write  # only this job needs it, for the WIF OIDC token exchange below
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:

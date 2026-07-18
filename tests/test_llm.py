@@ -7,6 +7,7 @@ env vars happen to be set when the suite runs.
 """
 import json
 import urllib.error
+import urllib.parse
 from unittest import mock
 
 import pytest
@@ -391,7 +392,7 @@ class TestVertexTunedCandidate:
 
         def fake_urlopen(req, timeout=None):
             calls.append(req.full_url)
-            if "aiplatform.googleapis.com" in req.full_url:
+            if urllib.parse.urlparse(req.full_url).hostname == "us-aiplatform.googleapis.com":
                 raise urllib.error.URLError("connection refused")
             return _fake_response("via groq")
 
