@@ -291,3 +291,5 @@
 | 2026-07-18 | auto | 0x7B492118AFC2b4EB3Da5Cc4253795885FEB2154B (Gitlawb) | deep_investigation | REJECT (47/100) | Low holder count (58) | +7d |
 
 | 2026-07-18 | auto | 0xB33F6E70535584c2aCa18335305797C16f1ad589 (AKE) | deep_investigation | REJECT (35/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-18 | auto | 0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987 (BRIUN) | deep_investigation | PROCEED (90/100) | Violent 24h move +481% (volatility/manipulation) | +7d |

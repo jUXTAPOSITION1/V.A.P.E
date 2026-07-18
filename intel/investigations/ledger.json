@@ -1470,6 +1470,25 @@
     "symbol": "PLAY",
     "times_investigated": 1
   },
+  "8453:0x8c81b4c816d66d36c4bf348bdec01dbcbc70e987": {
+    "address": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
+    "chain": "8453",
+    "creator_address": "0x66c684567eaF3d5aba3b886c3403916b590E2617",
+    "first_investigated": "2026-07-18T13:59:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-135936-0x8c81B4c8.md",
+        "score": 90,
+        "ts": "2026-07-18T13:59:36Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-18T13:59:36Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "BRIUN",
+    "times_investigated": 1
+  },
   "8453:0x930389f6a4a8346698dc8a3d6b299ffcd9b1be65": {
     "address": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
     "chain": "8453",
