@@ -56,7 +56,7 @@ def main():
     # alone (see skillforge/memory/build_log.jsonl), so a single-provider
     # dependency here isn't theoretical.
     try:
-        from agents.llm import ask as llm_ask, FRONTIER_ORDER
+        from agents.llm import ask_vertex_candidate, FRONTIER_ORDER
     except Exception as e:
         print(f"[synthesize] agents.llm unavailable ({e}) — index regenerated, skipping distillation")
         return
@@ -71,8 +71,14 @@ def main():
                f"Recent real findings (last 30): {json.dumps(findings[-30:])[:4000]}\n"
                f"Recent lessons: {json.dumps(lessons[-20:])[:1500]}\n"
                "Produce the most valuable NEW or UPDATED playbook given this real data.")
-        content, provider = llm_ask(sys_p, usr, tier="deep", temperature=0.4, max_tokens=2048,
-                                    provider_order=FRONTIER_ORDER)
+        # ask_vertex_candidate() tries VAPE's own Vertex-tuned model first if
+        # VAPE_VERTEX_ACCESS_TOKEN is set this run (this is the lowest-stakes
+        # real production spot for it: an internal skill-playbook distillation
+        # that lands in a PR for review, not anything customer-facing) —
+        # tier/provider_order here control ONLY its fallback path, so a run
+        # without the token configured behaves exactly as before.
+        content, provider = ask_vertex_candidate(sys_p, usr, temperature=0.4, max_tokens=2048,
+                                                 tier="deep", provider_order=FRONTIER_ORDER)
         content = content.strip()
         print(f"[synthesize] distilled via {provider}")
         # derive filename from first heading

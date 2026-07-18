@@ -419,6 +419,23 @@ class TestVertexTunedCandidate:
         assert provider == "groq" and text == "via groq"
         assert len(calls) == 2
 
+    def test_fallback_honors_caller_supplied_tier_and_provider_order(self, monkeypatch):
+        """A real production call site (e.g. skillforge/synthesize.py) that
+        normally calls ask(tier="deep", provider_order=FRONTIER_ORDER) must
+        degrade to EXACTLY that when the candidate isn't configured — not
+        silently drop to tier="fast" on the plain free chain, which would be
+        a real quality regression for every run that hasn't opted in."""
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("grok reply")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate(
+                "sys", "usr", tier="deep", provider_order=llm.FRONTIER_ORDER)
+        assert provider == "xai_1" and text == "grok reply"
+
     def test_http_error_body_is_surfaced_not_swallowed(self, monkeypatch, capsys):
         """A prior version only printed str(HTTPError) ("HTTP Error 400: Bad
         Request"), discarding Google's actual explanation of what was wrong

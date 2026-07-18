@@ -500,15 +500,26 @@ def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
     return text, usage
 
 
-def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, timeout=45):
+def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
+                          tier="fast", provider_order=None):
     """Calls VAPE's Vertex AI supervised-tuned Gemini model directly (see
     the Vertex AI Tuning console job that produced it) if
-    VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to the normal
-    free chain (ask()) if it's unset or the call errors — same "opt-in,
-    never silently primary" posture as ask_candidate()'s self-hosted-GPU
-    path above; this is a second, independently-hosted candidate, not a
-    replacement for it. Call this ONLY for explicit comparison/evaluation
-    work, not production report/investigation/sweep code paths."""
+    VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to ask() if it's
+    unset or the call errors — same "opt-in, never silently primary"
+    posture as ask_candidate()'s self-hosted-GPU path above; this is a
+    second, independently-hosted candidate, not a replacement for it.
+
+    tier/provider_order control ONLY the fallback ask() call (the Vertex
+    call itself has no notion of tiers) — a real production call site (e.g.
+    skillforge/synthesize.py's narrative distillation, previously a bare
+    ask(tier="deep", provider_order=FRONTIER_ORDER) call) should pass its own
+    normal tier/provider_order here, so a run where the candidate isn't
+    configured degrades to EXACTLY its old behavior rather than silently
+    dropping to the default fast/free chain. Safe to call from production
+    code: the candidate path only activates when VAPE_VERTEX_ACCESS_TOKEN is
+    actually set in that run's environment, which is a separate, deliberate
+    rollout decision (e.g. adding the WIF auth step to a workflow), not
+    something this function does on its own."""
     if os.getenv("VAPE_VERTEX_ACCESS_TOKEN"):
         try:
             text, usage = _call_vertex_tuned(system, user, temperature, max_tokens, timeout)
@@ -522,13 +533,26 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
             print(f"[llm] vertex_tuned:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
         except Exception as e:
             print(f"[llm] vertex_tuned:{type(e).__name__}:{e}", file=sys.stderr)
-    return ask(system, user, tier="fast", temperature=temperature, max_tokens=max_tokens, timeout=timeout)
+    return ask(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
+               timeout=timeout, provider_order=provider_order)
 
 
 def ask_safe(system, user, **kw):
     """Never raises — returns (text_or_error_string, provider_or_None)."""
     try:
         return ask(system, user, **kw)
+    except Exception as e:
+        return (f"[llm unavailable: {e}]", None)
+
+
+def ask_vertex_candidate_safe(system, user, **kw):
+    """ask_vertex_candidate() with ask_safe()'s same never-raise guarantee —
+    for call sites (the intel sweeps' narrative synthesis) that already
+    depend on ask_safe() never raising and are being extended to try the
+    Vertex candidate first, opt-in via VAPE_VERTEX_ACCESS_TOKEN, falling
+    back to their normal tier/provider_order otherwise."""
+    try:
+        return ask_vertex_candidate(system, user, **kw)
     except Exception as e:
         return (f"[llm unavailable: {e}]", None)
 
