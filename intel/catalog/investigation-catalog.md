@@ -287,3 +287,5 @@
 | 2026-07-18 | auto | 0xAE45b8faE07fFB2E5f4373bFCB6f4Bd827A45b07 (Gitlawb) | deep_investigation | REJECT (45/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-18 | auto | 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270 (WPOL) | deep_investigation | PROCEED (100/100) | address has no contract code (EOA or not deployed) | +7d |
+
+| 2026-07-18 | auto | 0x7B492118AFC2b4EB3Da5Cc4253795885FEB2154B (Gitlawb) | deep_investigation | REJECT (47/100) | Low holder count (58) | +7d |

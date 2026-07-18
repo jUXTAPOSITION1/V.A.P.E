@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T10:12:05Z",
+  "generated": "2026-07-18T11:12:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 406,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 80,
-    "investigations": 218,
+    "investigations": 219,
     "tools": 15,
     "tools_verified": 15,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-095755-0x0d500B1d.md",
-      "title": "Investigation \u2014 WPOL",
-      "symbol": "WPOL",
-      "name": "Wrapped Polygon Ecosystem Token",
-      "date": "2026-07-18T09:57:55Z",
-      "target": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: 841013 holders \u2014 reasonably distributed; Deep liquidity ($1,016,280); Trading 1670+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-095755-0x0d500B1d.md"
+      "file": "investigation-20260718-111224-0x7B492118.md",
+      "title": "Investigation \u2014 Gitlawb",
+      "symbol": "Gitlawb",
+      "name": "Gitlawb",
+      "date": "2026-07-18T11:12:24Z",
+      "target": "0x7B492118AFC2b4EB3Da5Cc4253795885FEB2154B",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (58); [-10] Low liquidity $15,466; [-10] Violent 24h move +667% (volatility/manipulation); [-15] Pair only 1.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-111224-0x7B492118.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-111224-0x7B492118.md",
+      "title": "Investigation \u2014 Gitlawb",
+      "symbol": "Gitlawb",
+      "name": "Gitlawb",
+      "date": "2026-07-18T11:12:24Z",
+      "target": "0x7B492118AFC2b4EB3Da5Cc4253795885FEB2154B",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (58); [-10] Low liquidity $15,466; [-10] Violent 24h move +667% (volatility/manipulation); [-15] Pair only 1.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-111224-0x7B492118.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-095755-0x0d500B1d.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-10] Low liquidity $30,055; [-10] Pair 10.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3059 holders \u2014 reasonably distributed; Custom verified sourc",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-145348-0x9b88500C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-125250-0x2c3a8Ee9.md",
-      "title": "Investigation \u2014 AKE",
-      "symbol": "AKE",
-      "name": "AKE",
-      "date": "2026-07-15T12:52:50Z",
-      "target": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +215% (volatility/manipulation). Positive evidence: Ownership renounced; 36273 holders \u2014 reasonably distributed; Deep liquidity ($1,040,840); Trading 329+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-125250-0x2c3a8Ee9.md"
     }
   ],
   "reports": [

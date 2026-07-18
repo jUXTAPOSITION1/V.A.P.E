@@ -1288,6 +1288,25 @@
     "symbol": "OpenAI",
     "times_investigated": 1
   },
+  "8453:0x7b492118afc2b4eb3da5cc4253795885feb2154b": {
+    "address": "0x7B492118AFC2b4EB3Da5Cc4253795885FEB2154B",
+    "chain": "8453",
+    "creator_address": "0x44724157f673ca39000568cd9be6d3ab85f0e7ac",
+    "first_investigated": "2026-07-18T11:12:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-111224-0x7B492118.md",
+        "score": 47,
+        "ts": "2026-07-18T11:12:24Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T11:12:24Z",
+    "last_score": 47,
+    "last_verdict": "REJECT",
+    "symbol": "Gitlawb",
+    "times_investigated": 1
+  },
   "8453:0x7c797da3704b6f682917005b01c89710ec17db07": {
     "address": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
     "chain": "8453",
