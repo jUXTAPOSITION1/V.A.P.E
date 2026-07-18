@@ -43,7 +43,7 @@ jobs:
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           persist-credentials: false
 
@@ -81,7 +81,7 @@ jobs:
             $INPUT_MERGE_FLAG
 
       - name: Upload LoRA adapter (survives even if this box is later torn down)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: vape-gemma-lora-adapter
           path: training/out/vape-gemma-lora/adapter
@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload merged model (if built)
         if: ${{ inputs.merge_and_serve == true }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: vape-gemma-merged
           path: training/out/vape-gemma-lora/merged
@@ -128,7 +128,7 @@ jobs:
 
       - name: Upload eval report + server log
         if: ${{ always() && inputs.merge_and_serve == true }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: vape-candidate-eval
           path: |
