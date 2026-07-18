@@ -5,6 +5,7 @@ All hermetic: urllib.request.urlopen is mocked, no real network call, no
 real API key. Provider ordering is asserted independently of whatever real
 env vars happen to be set when the suite runs.
 """
+import io
 import json
 import urllib.error
 import urllib.parse
@@ -400,3 +401,22 @@ class TestVertexTunedCandidate:
             text, provider = llm.ask_vertex_candidate("sys", "usr")
         assert provider == "groq" and text == "via groq"
         assert len(calls) == 2
+
+    def test_http_error_body_is_surfaced_not_swallowed(self, monkeypatch, capsys):
+        """A prior version only printed str(HTTPError) ("HTTP Error 400: Bad
+        Request"), discarding Google's actual explanation of what was wrong
+        with the request — the one piece of information needed to fix a
+        real 400 from generateContent. Confirms the response body reaches
+        stderr now."""
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        error_body = b'{"error": {"code": 400, "message": "Unknown name \\"systemInstruction\\"", "status": "INVALID_ARGUMENT"}}'
+
+        def fake_urlopen(req, timeout=None):
+            if urllib.parse.urlparse(req.full_url).hostname == "us-aiplatform.googleapis.com":
+                raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", {}, io.BytesIO(error_body))
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("sys", "usr")
+        assert "INVALID_ARGUMENT" in capsys.readouterr().err
