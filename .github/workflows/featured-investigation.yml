@@ -57,15 +57,6 @@ jobs:
         run: pip install -r agents/requirements.txt
       - name: Deep Investigation (auto target)
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
-      # Temporary diagnostic (2026-07-17, manual trigger only): DATA AGENT's
-      # own hire() truncates every failure down to "HTTP 500 Internal Server
-      # Error" with no further detail. This calls the same
-      # _build_session()/session.get() directly (one real $0.01 attempt,
-      # bypassing the 30m/daily-cap gate) and dumps the full response or
-      # exception traceback. Remove once the worker-side bug is root-caused.
-      - name: Diagnose DATA AGENT 500s (manual trigger only)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: python agents/_diag_data_agent.py
       - name: Build Intel Index (site data)
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
