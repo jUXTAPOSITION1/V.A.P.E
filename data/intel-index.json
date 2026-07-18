@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T09:40:31Z",
+  "generated": "2026-07-18T09:57:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 405,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 80,
-    "investigations": 217,
+    "investigations": 218,
     "tools": 15,
     "tools_verified": 15,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-082354-0xAE45b8fa.md",
-      "title": "Investigation \u2014 Gitlawb",
-      "symbol": "Gitlawb",
-      "name": "Gitlawb",
-      "date": "2026-07-18T08:23:54Z",
-      "target": "0xAE45b8faE07fFB2E5f4373bFCB6f4Bd827A45b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Violent 24h move +99939% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known thir",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-082354-0xAE45b8fa.md"
+      "file": "investigation-20260718-095755-0x0d500B1d.md",
+      "title": "Investigation \u2014 WPOL",
+      "symbol": "WPOL",
+      "name": "Wrapped Polygon Ecosystem Token",
+      "date": "2026-07-18T09:57:55Z",
+      "target": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: 841013 holders \u2014 reasonably distributed; Deep liquidity ($1,016,280); Trading 1670+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-095755-0x0d500B1d.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-095755-0x0d500B1d.md",
+      "title": "Investigation \u2014 WPOL",
+      "symbol": "WPOL",
+      "name": "Wrapped Polygon Ecosystem Token",
+      "date": "2026-07-18T09:57:55Z",
+      "target": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: 841013 holders \u2014 reasonably distributed; Deep liquidity ($1,016,280); Trading 1670+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-095755-0x0d500B1d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-082354-0xAE45b8fa.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Violent 24h move +215% (volatility/manipulation). Positive evidence: Ownership renounced; 36273 holders \u2014 reasonably distributed; Deep liquidity ($1,040,840); Trading 329+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-125250-0x2c3a8Ee9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-111004-0x932dDc71.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-15T11:10:04Z",
-      "target": "0x932dDc710C39dF4838958553E8f2Da8331CBcB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-111004-0x932dDc71.md"
     }
   ],
   "reports": [

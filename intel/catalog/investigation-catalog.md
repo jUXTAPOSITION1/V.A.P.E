@@ -285,3 +285,5 @@
 | 2026-07-18 | auto | 0xB73a50850680c66CF6C14e5276A7f6149f0b7f63 (GITLAWB) | deep_investigation | CAUTION (78/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-18 | auto | 0xAE45b8faE07fFB2E5f4373bFCB6f4Bd827A45b07 (Gitlawb) | deep_investigation | REJECT (45/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-18 | auto | 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270 (WPOL) | deep_investigation | PROCEED (100/100) | address has no contract code (EOA or not deployed) | +7d |

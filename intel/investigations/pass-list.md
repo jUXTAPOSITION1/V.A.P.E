@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-18T08:23:54Z — 31 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-18T09:57:55Z — 32 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| WPOL | Polygon | `0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270` | 100/100 | 1 | 2026-07-18T09:57:55Z |
 | GITLAWB | Base | `0x5F980Dcfc4c0fa3911554cf5ab288ed0eb13DBa3` | 90/100 | 1 | 2026-07-18T04:06:33Z |
 | TSG | Base | `0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3` | 80/100 | 1 | 2026-07-17T20:07:33Z |
 | EGL1 | BNB Chain | `0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444` | 100/100 | 1 | 2026-07-17T12:11:50Z |
