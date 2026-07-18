@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T05:17:27Z",
+  "generated": "2026-07-18T06:28:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 402,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 79,
-    "investigations": 215,
+    "investigations": 216,
     "tools": 15,
     "tools_verified": 14,
     "skills": 13
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-040633-0x5F980Dcf.md",
+      "file": "investigation-20260718-062842-0xB73a5085.md",
       "title": "Investigation \u2014 GITLAWB",
       "symbol": "GITLAWB",
       "name": "gitlawb",
-      "date": "2026-07-18T04:06:33Z",
-      "target": "0x5F980Dcfc4c0fa3911554cf5ab288ed0eb13DBa3",
+      "date": "2026-07-18T06:28:42Z",
+      "target": "0xB73a50850680c66CF6C14e5276A7f6149f0b7f63",
       "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract. Positive evidence: 10393 holders \u2014 reasonably distributed; Deep liquidity ($1,273,369); Trading 129+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-040633-0x5F980Dcf.md"
+      "verdict": "CAUTION",
+      "score": "78",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $29,008. Positive evidence: 11807 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-062842-0xB73a5085.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-062842-0xB73a5085.md",
+      "title": "Investigation \u2014 GITLAWB",
+      "symbol": "GITLAWB",
+      "name": "gitlawb",
+      "date": "2026-07-18T06:28:42Z",
+      "target": "0xB73a50850680c66CF6C14e5276A7f6149f0b7f63",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "78",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $29,008. Positive evidence: 11807 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-062842-0xB73a5085.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-040633-0x5F980Dcf.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-20] High sell tax 20%; [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [note] address has no contract code (EOA or not deployed). Positive evidence: 30622 holders \u2014 reasonably distributed; Deep liquidity ($5,874,069); Trading 97+ days without a kno",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-091110-0xCFB28756.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260715-063649-0x1F32b1c2.md",
-      "title": "Investigation \u2014 wstETH",
-      "symbol": "wstETH",
-      "name": "Wrapped liquid staked Ether 2.0",
-      "date": "2026-07-15T06:36:49Z",
-      "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "74",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 28697 holders \u2014 reasonably distributed; Custom verifi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260715-063649-0x1F32b1c2.md"
     }
   ],
   "reports": [

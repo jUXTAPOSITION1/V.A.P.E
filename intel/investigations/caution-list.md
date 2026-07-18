@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-18T04:06:33Z — 19 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-18T06:28:42Z — 20 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| GITLAWB | Base | `0xB73a50850680c66CF6C14e5276A7f6149f0b7f63` | 78/100 | 1 | 2026-07-18T06:28:42Z |
 | YLD | Ethereum | `0xF94b5C5651c888d928439aB6514B93944eEE6F48` | 57/100 | 1 | 2026-07-18T00:04:22Z |
 | TSG | Base | `0x5FbE62dfdB805E1711d36Db0c2E22a2D77195BA3` | 50/100 | 1 | 2026-07-17T22:23:34Z |
 | IBNAi | Ethereum | `0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953` | 55/100 | 1 | 2026-07-17T18:34:51Z |

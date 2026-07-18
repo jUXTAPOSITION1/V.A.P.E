@@ -281,3 +281,5 @@
 | 2026-07-18 | auto | 0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc (YIELD) | deep_investigation | REJECT (35/100) | Very few holders (26) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-18 | auto | 0x5F980Dcfc4c0fa3911554cf5ab288ed0eb13DBa3 (GITLAWB) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) — can still act | +7d |
+
+| 2026-07-18 | auto | 0xB73a50850680c66CF6C14e5276A7f6149f0b7f63 (GITLAWB) | deep_investigation | CAUTION (78/100) | Mintable supply (dilution risk) | +7d |
