@@ -8,12 +8,12 @@
     "value": -82.508
   },
   "mover:BRIUN / WETH 1%": {
-    "ts": "2026-07-18T14:54:38Z",
-    "value": 336.111
+    "ts": "2026-07-18T17:06:55Z",
+    "value": 367.572
   },
   "mover:COBIE / WETH 0.01%": {
-    "ts": "2026-07-18T15:59:14Z",
-    "value": 886.818
+    "ts": "2026-07-18T17:06:55Z",
+    "value": 714.077
   },
   "mover:ETD / USDC 0.3%": {
     "ts": "2026-07-16T19:13:08Z",
@@ -22,6 +22,10 @@
   "mover:Gitlawb / USDC 0.01%": {
     "ts": "2026-07-18T03:19:24Z",
     "value": 97891.315
+  },
+  "mover:MidnightProtocol / WETH 0.3%": {
+    "ts": "2026-07-18T17:06:55Z",
+    "value": 1439.554
   },
   "mover:OpenAI / USDC 0.01%": {
     "ts": "2026-07-16T22:57:37Z",
