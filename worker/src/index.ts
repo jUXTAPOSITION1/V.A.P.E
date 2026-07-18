@@ -26,7 +26,7 @@ import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
 import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
-import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
+import { logJob, getFeed, getStats, readJson, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import { nextDataAgentFacilitator } from "./lib/dataAgentAlternator";
 import type { Context } from "hono";
@@ -422,6 +422,34 @@ app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-
   const days = Math.min(Number(c.req.query("days")) || 30, 400);
   const stats = await getStats(c.env.VAPE_JOBS, days);
   return c.json(stats);
+});
+
+// Temporary (2026-07-18): DATA AGENT's alternator has never once picked
+// VAPOR as primary despite two prior fixes — debug fields on the last real
+// settlement proved the alternator itself returned "cdp" on an advancing
+// call. Before concluding the alternator's own logic is at fault, rule out
+// whether Cloudflare's network can even reach VAPOR at all (a network/DNS
+// failure there would explain the same symptom independently), and check
+// what's actually persisted for the alternator's KV key right now. Remove
+// once root-caused.
+app.get("/debug/x402-routing", async (c) => {
+  const out: Record<string, unknown> = {};
+  if (c.env.VAPOR_FACILITATOR_URL) {
+    try {
+      const r = await fetch(`${c.env.VAPOR_FACILITATOR_URL}/supported`);
+      out.vapor_supported = { ok: true, status: r.status, body: (await r.text()).slice(0, 500) };
+    } catch (e) {
+      out.vapor_supported = { ok: false, error: errDetail(e, c.env) };
+    }
+  } else {
+    out.vapor_supported = { ok: false, error: "VAPOR_FACILITATOR_URL not set" };
+  }
+  if (c.env.VAPE_JOBS) {
+    out.alternator_state = await readJson(c.env.VAPE_JOBS, "DATA_AGENT_ALTERNATOR", { nextPrimary: "unset" });
+  } else {
+    out.alternator_state = { error: "VAPE_JOBS not configured" };
+  }
+  return c.json(out);
 });
 
 // Real, read-side self-check for CDP's Bazaar discovery catalog. CDP's
