@@ -128,6 +128,10 @@ jobs:
             echo "--- /$path ---"
             curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/$path"
           done
+          # One-off (2026-07-18): confirm VAPOR's own internal counters are
+          # moving post-fix, not just the worker's ledger. Remove after use.
+          echo "--- VAPOR /stats (one-off post-fix check) ---"
+          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
