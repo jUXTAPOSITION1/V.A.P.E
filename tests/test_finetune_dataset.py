@@ -222,6 +222,7 @@ def test_collect_all_tags_external_source(monkeypatch, tmp_path):
         {"role": "assistant", "content": "Severity: LOW"}]}
     path.write_text(json.dumps(row) + "\n")
     monkeypatch.setattr(bf, "EXTERNAL_PATH", str(path))
+    monkeypatch.setattr(bf, "PR_HISTORY_PATH", str(tmp_path / "no-such-pr-history.jsonl"))
     monkeypatch.setattr(bf, "INVEST_GLOB", str(tmp_path / "no-such-glob-*.md"))
     monkeypatch.setattr(bf, "REPORTS_DIR", str(tmp_path / "no-such-reports"))
     monkeypatch.setattr(bf, "LESSONS_PATH", str(tmp_path / "no-such-lessons.jsonl"))
@@ -229,3 +230,32 @@ def test_collect_all_tags_external_source(monkeypatch, tmp_path):
     examples = bf.collect_all()
     assert len(examples) == 1
     assert examples[0]["source"] == "external"
+
+
+def test_collect_pr_history_returns_empty_when_file_absent(monkeypatch, tmp_path):
+    monkeypatch.setattr(bf, "PR_HISTORY_PATH", str(tmp_path / "does-not-exist.jsonl"))
+    assert bf.collect_pr_history() == []
+
+
+def test_collect_pr_history_reads_real_rows_with_outcome(monkeypatch, tmp_path):
+    path = tmp_path / "pr_history_corpus.jsonl"
+    row = {"source": "pr_history", "source_id": "repo#188", "outcome": "closed_unmerged",
+           "messages": [{"role": "system", "content": "s"}, {"role": "user", "content": "u"},
+                        {"role": "assistant", "content": "diff"}]}
+    path.write_text(json.dumps(row) + "\n")
+    monkeypatch.setattr(bf, "PR_HISTORY_PATH", str(path))
+
+    examples = bf.collect_pr_history()
+    assert len(examples) == 1
+    assert examples[0]["key"] == "repo#188"
+    assert examples[0]["outcome"] == "closed_unmerged"
+
+
+def test_pr_outcome_counts_only_counts_pr_history_source():
+    examples = [
+        {"source": "pr_history", "outcome": "merged"},
+        {"source": "pr_history", "outcome": "merged"},
+        {"source": "pr_history", "outcome": "closed_unmerged"},
+        {"source": "investigation", "verdict": "PROCEED"},
+    ]
+    assert bf._pr_outcome_counts(examples) == {"merged": 2, "closed_unmerged": 1}

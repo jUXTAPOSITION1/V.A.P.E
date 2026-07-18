@@ -59,6 +59,21 @@ own honesty story:
                    included — see build_external_corpus.py's own docstring
                    for exactly which sources qualified and which didn't.
 
+  pr_history       data/finetune/pr_history_corpus.jsonl (optional — only
+                   present after running
+                   scripts/build_pr_history_dataset.py, another script that
+                   does real network I/O this one never does itself). VAPE's
+                   own bot-authored PR history (self_improve.py/
+                   skillforge_build.py) — the concrete "VAPE writes code and
+                   builds tools on its own repo" signal. INPUT is the real
+                   task/gap VAPE identified; OUTPUT is the actual code it
+                   generated. Honesty note: most of these PRs are, by
+                   design, proposal-only and never get manually merged — the
+                   real "merged" vs "closed_unmerged" outcome is tagged as
+                   metadata rather than silently dropping the unmerged
+                   majority, closer in spirit to the "lesson" source above
+                   than to a curated all-success corpus.
+
 This does NOT replace score() or any sweep's compute_*_score(). Per this
 repo's design law (rule-based first, LLM only when reasoning is required),
 the deterministic scorers stay the source of truth. A model fine-tuned on
@@ -94,6 +109,7 @@ REPORTS_DIR = os.path.join(ROOT, "intel", "reports")
 LESSONS_PATH = os.path.join(ROOT, "skillforge", "memory", "lessons.jsonl")
 OUT_DIR = os.path.join(ROOT, "data", "finetune")
 EXTERNAL_PATH = os.path.join(OUT_DIR, "external_corpus.jsonl")
+PR_HISTORY_PATH = os.path.join(OUT_DIR, "pr_history_corpus.jsonl")
 
 VAL_FRACTION = 0.10  # ~1-in-10 held out for evaluation
 
@@ -415,8 +431,32 @@ def collect_external():
     return examples
 
 
+def collect_pr_history():
+    """Optional fifth source: data/finetune/pr_history_corpus.jsonl, produced
+    by scripts/build_pr_history_dataset.py's real GitHub API fetches. Returns
+    [] if that script has never been run. The real "merged"/"closed_unmerged"
+    outcome is carried through as metadata rather than dropped."""
+    if not os.path.exists(PR_HISTORY_PATH):
+        return []
+    examples = []
+    with open(PR_HISTORY_PATH, encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except ValueError:
+                continue
+            if not row.get("messages") or not row.get("source_id"):
+                continue
+            examples.append({"key": row["source_id"], "messages": row["messages"],
+                              "outcome": row.get("outcome")})
+    return examples
+
+
 def collect_all():
-    """All four sources, each example tagged with its source category and a
+    """All five sources, each example tagged with its source category and a
     stable split key. See module docstring for why findings.jsonl is excluded."""
     investigations = collect_investigations()
     sweeps = collect_sweeps()
@@ -428,7 +468,10 @@ def collect_all():
     external = collect_external()
     for e in external:
         e["source"] = "external"
-    return investigations + sweeps + lessons + external
+    pr_history = collect_pr_history()
+    for e in pr_history:
+        e["source"] = "pr_history"
+    return investigations + sweeps + lessons + external + pr_history
 
 
 def _source_counts(examples):
@@ -447,6 +490,15 @@ def _verdict_counts(examples):
     return c
 
 
+def _pr_outcome_counts(examples):
+    c = {}
+    for e in examples:
+        if e["source"] != "pr_history":
+            continue
+        c[e.get("outcome") or "unknown"] = c.get(e.get("outcome") or "unknown", 0) + 1
+    return c
+
+
 def build(write):
     """Collect examples from every source, split train/val deterministically,
     and (when write) emit the JSONL files + dataset card. write=False prints
@@ -457,6 +509,7 @@ def build(write):
 
     print(f"parsed {len(examples)} example(s) — {_source_counts(examples)}")
     print(f"  investigation verdict mix: {_verdict_counts(examples)}")
+    print(f"  pr_history outcome mix: {_pr_outcome_counts(examples)}")
     print(f"  train: {len(train)}  val: {len(val)}")
     if not write:
         return
@@ -479,6 +532,7 @@ def build(write):
 def _write_card(examples, train, val):
     src_counts = _source_counts(examples)
     verdict_counts = _verdict_counts(examples)
+    pr_outcome_counts = _pr_outcome_counts(examples)
     card = f"""# VAPE — fine-tune dataset card
 
 **What:** a chat-format instruction-tuning corpus built from VAPE's own real,
@@ -516,6 +570,15 @@ the full rationale:
   script's docstring for exactly which external sources qualified (verified
   real structure) and which didn't (SWC Registry, Sherlock — deferred, not
   silently dropped).
+- **pr_history** ({src_counts.get('pr_history', 0)} examples, outcomes:
+  {pr_outcome_counts}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
+  bot-authored PR history (`agents/self_improve.py`,
+  `agents/skillforge_build.py`). INPUT is the real task/gap VAPE identified;
+  OUTPUT is the actual code it generated. Honesty note: most of these PRs are
+  proposal-only by design and never get manually merged into the real
+  target file — the real outcome is tagged, not hidden. Don't read a
+  "closed_unmerged" row as a worse-quality label than a "merged" one; it
+  often just means no human has reviewed it yet.
 
 **Why most of the labels are trustworthy:** investigation and sweep outputs
 come from this repo's own deterministic scoring functions, never an LLM. This

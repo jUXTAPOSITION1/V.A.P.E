@@ -35,6 +35,15 @@ the full rationale:
   script's docstring for exactly which external sources qualified (verified
   real structure) and which didn't (SWC Registry, Sherlock — deferred, not
   silently dropped).
+- **pr_history** (0 examples, outcomes:
+  {}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
+  bot-authored PR history (`agents/self_improve.py`,
+  `agents/skillforge_build.py`). INPUT is the real task/gap VAPE identified;
+  OUTPUT is the actual code it generated. Honesty note: most of these PRs are
+  proposal-only by design and never get manually merged into the real
+  target file — the real outcome is tagged, not hidden. Don't read a
+  "closed_unmerged" row as a worse-quality label than a "merged" one; it
+  often just means no human has reviewed it yet.
 
 **Why most of the labels are trustworthy:** investigation and sweep outputs
 come from this repo's own deterministic scoring functions, never an LLM. This
