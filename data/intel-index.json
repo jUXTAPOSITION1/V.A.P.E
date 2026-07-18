@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T22:24:53Z",
+  "generated": "2026-07-18T23:28:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 413,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 82,
-    "investigations": 229,
+    "investigations": 230,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-222453-0xb2000000.md",
+      "file": "investigation-20260718-232830-0x02C4347E.md",
       "title": "Investigation \u2014 COBIE",
       "symbol": "COBIE",
-      "name": "Baseapp Man",
-      "date": "2026-07-18T22:24:53Z",
-      "target": "0xb200000000000000000000cFe0745F0793F0206b",
+      "name": "COBIE",
+      "date": "2026-07-18T23:28:30Z",
+      "target": "0x02C4347ECE55Fe108c9A29e96221615f13070791",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 1.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-222453-0xb2000000.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $13,998. Positive evidence: 2570 holders \u2014 reasonably distributed; Trading 271+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-232830-0x02C4347E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260718-232830-0x02C4347E.md",
+      "title": "Investigation \u2014 COBIE",
+      "symbol": "COBIE",
+      "name": "COBIE",
+      "date": "2026-07-18T23:28:30Z",
+      "target": "0x02C4347ECE55Fe108c9A29e96221615f13070791",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $13,998. Positive evidence: 2570 holders \u2014 reasonably distributed; Trading 271+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-232830-0x02C4347E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-222453-0xb2000000.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-10] Violent 24h move +1684% (volatility/manipulation); [-10] Pair 10.9 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 952 holders \u2014 reasonably distrib",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-114244-0x199084f1.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-093547-0xC17c30e9.md",
-      "title": "Investigation \u2014 RISE",
-      "symbol": "RISE",
-      "name": "EverRise",
-      "date": "2026-07-16T09:35:47Z",
-      "target": "0xC17c30e98541188614dF99239cABD40280810cA3",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "23",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x33280d3a65b96eb878dd711abe9b2c0dbf740579) \u2014 can still act on the contract; [-10] Low liquidity $37,357; [note] address has no contract code (EOA or not deployed). Positive",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-093547-0xC17c30e9.md"
     }
   ],
   "reports": [

@@ -43,3 +43,4 @@
 {"ts": "2026-07-18T20:13:10.012966Z", "target": "0x243666616819d6D0A106A769efB1Ee8890Ae2F73", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-18T21:25:19.420337Z", "target": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-18T22:24:39.606105Z", "target": "0xb200000000000000000000cFe0745F0793F0206b", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-18T23:28:20.047651Z", "target": "0x02C4347ECE55Fe108c9A29e96221615f13070791", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}

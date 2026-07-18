@@ -309,3 +309,5 @@
 | 2026-07-18 | auto | 0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2 (BRIAN) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-18 | auto | 0xb200000000000000000000cFe0745F0793F0206b (COBIE) | deep_investigation | REJECT (40/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-18 | auto | 0x02C4347ECE55Fe108c9A29e96221615f13070791 (COBIE) | deep_investigation | PROCEED (90/100) | Low liquidity $13,998 | +7d |
