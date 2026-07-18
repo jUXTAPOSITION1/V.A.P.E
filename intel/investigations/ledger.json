@@ -637,6 +637,24 @@
     "symbol": "EVAA",
     "times_investigated": 1
   },
+  "56:0xb33f6e70535584c2aca18335305797c16f1ad589": {
+    "address": "0xB33F6E70535584c2aCa18335305797C16f1ad589",
+    "chain": "56",
+    "first_investigated": "2026-07-18T12:28:02Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-122802-0xB33F6E70.md",
+        "score": 35,
+        "ts": "2026-07-18T12:28:02Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T12:28:02Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "AKE",
+    "times_investigated": 1
+  },
   "56:0xf4b385849f2e817e92bffbfb9aeb48f950ff4444": {
     "address": "0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444",
     "chain": "56",
