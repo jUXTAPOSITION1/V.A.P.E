@@ -132,6 +132,8 @@ jobs:
           # moving post-fix, not just the worker's ledger. Remove after use.
           echo "--- VAPOR /stats (one-off post-fix check) ---"
           curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://x402.duckdns.org/stats"
+          echo "--- /debug/x402-routing (one-off) ---"
+          curl -sS -w '\n(HTTP %{http_code})\n' --retry 2 --retry-delay 2 "https://vape-x402.vapex402.workers.dev/debug/x402-routing"
 
       - name: If Deploy or the smoke test failed, check the workers.dev subdomain first
         if: ${{ failure() }}
