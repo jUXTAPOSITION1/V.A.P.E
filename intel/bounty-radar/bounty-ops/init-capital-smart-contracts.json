@@ -1,0 +1,64 @@
+{
+  "id": "hackenproof:prg_69b379dee1b7e923",
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/init-capital-smart-contracts and extract exact in-scope contract addresses, repos, chains (Blast/Mantle), and all out-of-scope rules plus disclosure policy.",
+      "done": false
+    },
+    {
+      "item": "Clone the official INIT Capital Solidity repos for the listed contracts and confirm they match the deployed bytecode on Blast and Mantle explorers.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py --target <repo_root> --mode recon,slither,aderyn on the full codebase to surface initial static findings.",
+      "done": false
+    },
+    {
+      "item": "Execute agents/deep_dive_audit.py with --mode halmos,mythril on high-value functions (deposit, borrow, repay, liquidate, oracle updates) for the core lending and vault contracts.",
+      "done": false
+    },
+    {
+      "item": "Trigger frontier-LLM review pass inside deep_dive_audit.py on any flagged modules for access-control, reentrancy, and cross-contract call issues.",
+      "done": false
+    },
+    {
+      "item": "Manually inspect business logic for improper collateral factors, liquidation thresholds, interest-rate model edge cases, and Blast/Mantle-specific gas-token or sequencer assumptions.",
+      "done": false
+    },
+    {
+      "item": "Cross-check all findings against the program\u2019s severity table and Hackenproof duplicate policy before writing a report.",
+      "done": false
+    },
+    {
+      "item": "Prepare submission package containing contract addresses, exact commit hashes, reproduction steps, and minimal PoC for each valid issue.",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T15:34:05.982384Z",
+      "event": "Started tracking as a real Bounty Op (fit 65)."
+    },
+    {
+      "ts": "2026-07-19T15:34:13.373451Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784475245.9823756,
+  "vapeReportUrl": null,
+  "name": "INIT Capital Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/init-capital-smart-contracts",
+  "prizeUsd": 100000,
+  "bountyFitScore": 65,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "blast",
+    "mantle",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T15:34:05.982377Z"
+}

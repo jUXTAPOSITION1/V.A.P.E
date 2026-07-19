@@ -1,0 +1,67 @@
+{
+  "id": "hackenproof:prg_e78d22922b1b1039",
+  "checklist": [
+    {
+      "item": "Confirm in-scope contracts, repos, and submission rules directly on the Hackenproof program page",
+      "done": false
+    },
+    {
+      "item": "Clone the official Cronos zkEVM contracts repo and note exact commit or tag under audit",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the bridge, rollup, and verifier contract directories",
+      "done": false
+    },
+    {
+      "item": "Execute Slither + Aderyn passes for access-control, reentrancy, and unchecked-call findings",
+      "done": false
+    },
+    {
+      "item": "Run Halmos symbolic execution on deposit, withdraw, and state-transition entrypoints",
+      "done": false
+    },
+    {
+      "item": "Manually inspect role-based permissions, upgradeability patterns, and cross-chain message validation",
+      "done": false
+    },
+    {
+      "item": "Review business logic for sequencer/validator trust assumptions and withdrawal finality conditions",
+      "done": false
+    },
+    {
+      "item": "Compile reproducible PoCs, severity ratings, and affected contract addresses for each valid issue",
+      "done": false
+    },
+    {
+      "item": "Format report per Hackenproof template with clear impact and recommended fixes before submission",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T15:33:59.000828Z",
+      "event": "Started tracking as a real Bounty Op (fit 67)."
+    },
+    {
+      "ts": "2026-07-19T15:34:05.981933Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784475239.0008216,
+  "vapeReportUrl": null,
+  "name": "Cronos zkEVM Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/cronos-zkevm-smart-contracts",
+  "prizeUsd": 200000,
+  "bountyFitScore": 67,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "ethereum",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T15:33:59.000823Z"
+}
