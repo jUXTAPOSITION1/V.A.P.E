@@ -136,7 +136,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "protocol_fees",
     price: "$0.01",
-    description: "A protocol's real earned fees + revenue (24h/7d/30d) with its logo — 'does this "
+    description: "A protocol's real earned fees + revenue (24h/7d/30d/1y/all-time) with its logo — 'does this "
       + "actually make money, or is it just parked TVL?', a legitimacy signal raw TVL misses.",
     tags: ["fees", "revenue", "protocol"],
     inputSchema: { properties: { slug: { type: "string", description: "protocol slug" } }, required: ["slug"] },

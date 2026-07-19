@@ -118,7 +118,7 @@ def get_base_tvl_and_protocols(top_n=10):
         out["top_protocols"] = [
             {"name": p.get("name"), "base_tvl_usd": base_tvl(p),
              "change_1d": p.get("change_1d"), "change_7d": p.get("change_7d"),
-             "category": p.get("category")}
+             "change_1m": p.get("change_1m"), "category": p.get("category")}
             for p in base_protos[:top_n]
         ]
     return out

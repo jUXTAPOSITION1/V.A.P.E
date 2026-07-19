@@ -62,7 +62,7 @@ Every result is real data or an honest `{error}` — never fabricated.
 | token_intel | 0.01 | 5m | `address`, `chain`, optional `slug` | Price + 0-1 confidence, oracle-derived token age, optional fees/unlocks/treasury, + logo |
 | token_chart | 0.01 | 5m | `address`, `chain`, `span` | Daily price series (default 30d) + logo |
 | protocol | 0.01 | 5m | `slug` | Full protocol record: per-chain TVL, category, audits, logo |
-| protocol_fees | 0.01 | 5m | `slug` | Real earned fees + revenue (24h/7d/30d) |
+| protocol_fees | 0.01 | 5m | `slug` | Real earned fees + revenue (24h/7d/30d/1y/all-time) |
 | unlocks | 0.01 | 5m | `slug` | Next upcoming token-unlock (dump-risk) event |
 | treasury | 0.01 | 5m | `slug` | Treasury composition + own-token fragility share |
 | chain_protocols | 0.01 | 5m | `chain` | Top protocols on a chain by TVL, each with logo |
