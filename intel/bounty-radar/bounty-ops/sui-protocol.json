@@ -46,15 +46,19 @@
     {
       "ts": "2026-07-19T11:40:12.963860Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-19T14:07:47.696538Z",
+      "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md"
     }
   ],
   "checklistGeneratedAt": 1784461202.9812753,
-  "vapeReportUrl": null,
+  "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Sui Protocol",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/sui-protocol",
   "prizeUsd": 1000000,
-  "bountyFitScore": 63,
+  "bountyFitScore": 73,
   "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
   "tags": [
     "git_repo",
@@ -63,5 +67,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:40:02.981279Z"
+  "updatedAt": "2026-07-19T14:07:47.696469Z",
+  "vapeReportKind": "external-audit"
 }

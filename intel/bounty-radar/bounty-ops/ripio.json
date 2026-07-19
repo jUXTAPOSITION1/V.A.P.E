@@ -1,0 +1,65 @@
+{
+  "id": "hackerone:prg_2fd2f5dbeac1393b",
+  "checklist": [
+    {
+      "item": "Confirm current in-scope contracts, repos, and submission rules on https://hackerone.com/ripio",
+      "done": false
+    },
+    {
+      "item": "Clone latest Solidity source for all in-scope Ethereum and Base contracts listed in program policy",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the fetched repos, enabling Slither, Mythril, Aderyn and Halmos",
+      "done": false
+    },
+    {
+      "item": "Target Halmos symbolic execution on high-value functions (deposit, withdraw, bridge, liquidate)",
+      "done": false
+    },
+    {
+      "item": "Manually review access-control patterns, proxy upgrade logic, and role assignments in the audited contracts",
+      "done": false
+    },
+    {
+      "item": "Check for reentrancy, oracle trust issues, and business-logic flaws in lending/bridge flows",
+      "done": false
+    },
+    {
+      "item": "Validate any flagged findings against real exploitability and maximum bounty impact",
+      "done": false
+    },
+    {
+      "item": "Draft HackerOne report containing contract addresses, PoC steps, affected lines, and recommended fix",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T14:07:47.697105Z",
+      "event": "Started tracking as a real Bounty Op (fit 65)."
+    },
+    {
+      "ts": "2026-07-19T14:07:55.536915Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784470067.6970975,
+  "vapeReportUrl": null,
+  "name": "Ripio",
+  "platform": "hackerone",
+  "url": "https://hackerone.com/ripio",
+  "prizeUsd": 25000,
+  "bountyFitScore": 65,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "web",
+    "contract",
+    "ethereum",
+    "base",
+    "solidity",
+    "bugbounty",
+    "via:hackerone"
+  ],
+  "updatedAt": "2026-07-19T14:07:47.697099Z"
+}
