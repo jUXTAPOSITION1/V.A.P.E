@@ -607,7 +607,26 @@ class TestOciGrok:
 
     def test_default_cap_is_used_when_env_var_unset(self, monkeypatch):
         monkeypatch.delenv("OCI_GROK_DAILY_SPEND_CAP_USD", raising=False)
-        assert llm._oci_grok_daily_cap_usd() == llm.DEFAULT_DAILY_SPEND_CAP_USD
+        assert llm._oci_grok_daily_cap_usd() == llm.DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD == 10.00
+
+    def test_falls_back_to_vertex_candidate_when_configured_before_frontier(self, monkeypatch):
+        """The real chain is now OCI Grok -> Vertex-tuned candidate ->
+        frontier chain — when OCI is unset/errors but Vertex IS configured
+        (VAPE_VERTEX_ACCESS_TOKEN set), Vertex must be reached, not skipped
+        straight to FRONTIER_ORDER."""
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setattr(llm, "_load_repo_digest", lambda: "")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            return _fake_vertex_response("vertex reply")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr")
+        assert provider == "vertex_tuned" and text == "vertex reply"
+        assert "aiplatform" in captured["url"]
 
 
 class TestRepoDigest:

@@ -614,18 +614,33 @@ def ask_vertex_candidate_safe(system, user, **kw):
 # no request-signing code or oci SDK dependency is needed here, same as
 # every free-tier provider in PROVIDERS above.
 #
-# Same opt-in, never-silently-primary posture as ask_vertex_candidate()/
-# ask_candidate(): gated on OCI_GENAI_API_KEY, not part of PROVIDERS/
-# FRONTIER_ORDER until explicitly wired into a real call site.
+# By explicit direction (2026-07-19), OCI Grok is now the PRIMARY route for
+# every call site that used to try VAPE's Vertex-tuned candidate first
+# (skillforge/synthesize.py, the 5 intel sweeps, investigate.py's expert
+# assessment) — ask_oci_grok() below falls back to ask_vertex_candidate()
+# (not directly to ask()), so the real chain everywhere is now:
+#     OCI Grok 4.3  ->  Vertex-tuned Gemini  ->  FRONTIER_ORDER (xai_1/groq/
+#                                                 gemini/rest of the free chain)
+# Nothing is discarded — Vertex stays as a real middle layer wherever its own
+# gating (VAPE_VERTEX_ACCESS_TOKEN) is already configured; it just no longer
+# goes first. Gated on OCI_GENAI_API_KEY, not part of PROVIDERS/FRONTIER_ORDER
+# itself — still an opt-in-only candidate function, not a PROVIDERS entry.
 OCI_GROK_DEFAULT_REGION = "us-ashburn-1"
 OCI_GROK_DEFAULT_MODEL = "xai.grok-4.3"
+
+# Deliberately its own default, not DEFAULT_DAILY_SPEND_CAP_USD ($3, xai_1's
+# cap) — by explicit direction (2026-07-19), now that OCI Grok is the primary
+# reasoning route for most of VAPE's real call sites (far higher volume than
+# xai_1 ever saw directly), its cap starts higher rather than inheriting a
+# limit sized for a much narrower role.
+DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD = 10.00
 
 
 def _oci_grok_daily_cap_usd():
     try:
-        return float(os.getenv("OCI_GROK_DAILY_SPEND_CAP_USD", DEFAULT_DAILY_SPEND_CAP_USD))
+        return float(os.getenv("OCI_GROK_DAILY_SPEND_CAP_USD", DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD))
     except (TypeError, ValueError):
-        return DEFAULT_DAILY_SPEND_CAP_USD
+        return DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD
 
 
 def _call_oci_grok(system, user, temperature, max_tokens, timeout):
@@ -664,17 +679,24 @@ def _call_oci_grok(system, user, temperature, max_tokens, timeout):
 def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
                   tier="fast", provider_order=None):
     """Calls OCI-hosted Grok 4.3 directly if OCI_GENAI_API_KEY is set this
-    run, falling back to ask() otherwise/on error/over the daily spend cap —
-    same opt-in, never-silently-primary posture as ask_vertex_candidate()
-    above. This path runs outside ask()'s own provider loop (it's not in
-    PROVIDERS), so it needs its own daily-spend-cap guard
-    (OCI_GROK_DAILY_SPEND_CAP_USD, default $3 like xai_1's own cap) rather
-    than inheriting the one built into that loop.
+    run, falling back to ask_vertex_candidate() otherwise/on error/over the
+    daily spend cap — VAPE's Vertex-tuned candidate, which itself falls back
+    to the normal tier/provider_order chain if IT isn't configured either.
+    This is now the primary "best real reasoning" entrypoint for VAPE's
+    production call sites (see the module docstring + the comment above
+    OCI_GROK_DEFAULT_REGION): OCI Grok -> Vertex-tuned Gemini -> frontier
+    chain, each layer degrading gracefully to the next.
 
-    tier/provider_order control ONLY the fallback ask() call, matching
-    ask_vertex_candidate()'s exact contract — pass the caller's own normal
-    tier/provider_order so a run where this isn't configured degrades to
-    EXACTLY its prior behavior."""
+    This path runs outside ask()'s own provider loop (it's not in
+    PROVIDERS), so it needs its own daily-spend-cap guard
+    (OCI_GROK_DAILY_SPEND_CAP_USD, default $10 — see
+    DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD) rather than inheriting the one
+    built into that loop.
+
+    tier/provider_order control ONLY the eventual ask() call at the bottom
+    of the chain (via ask_vertex_candidate()'s own identical contract) —
+    pass the caller's own normal tier/provider_order so a run where neither
+    OCI nor Vertex is configured degrades to EXACTLY its prior behavior."""
     if os.getenv("OCI_GENAI_API_KEY"):
         cap = _oci_grok_daily_cap_usd()
         spend = _todays_paid_spend_usd("oci_grok")
@@ -695,8 +717,8 @@ def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
                 print(f"[llm] oci_grok:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
             except Exception as e:
                 print(f"[llm] oci_grok:{type(e).__name__}:{e}", file=sys.stderr)
-    return ask(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
-               timeout=timeout, provider_order=provider_order)
+    return ask_vertex_candidate(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
+                                 timeout=timeout, provider_order=provider_order)
 
 
 def ask_oci_grok_safe(system, user, **kw):

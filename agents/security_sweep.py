@@ -587,12 +587,12 @@ def run():
         "3. Recommendations — concrete, specific action items grounded in the real incidents above, "
         "as many as are genuinely warranted (not a fixed count)."
     )
-    # ask_vertex_candidate_safe() tries VAPE's own Vertex-tuned model first if
-    # VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to exactly the
-    # same frontier tier/order as before otherwise — a run without the token
-    # configured behaves identically to before this change.
-    narrative, provider = llm.ask_vertex_candidate_safe(system, user, tier="frontier", max_tokens=2600,
-                                                       provider_order=llm.FRONTIER_ORDER)
+    # ask_oci_grok_safe() tries OCI-hosted Grok 4.3 first, falling back to
+    # VAPE's Vertex-tuned model (if VAPE_VERTEX_ACCESS_TOKEN is set), falling
+    # back further to the same frontier tier/order as before — a run with
+    # neither configured behaves identically to before this change.
+    narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2600,
+                                                 provider_order=llm.FRONTIER_ORDER)
 
     # Investigate and learn BEFORE the report body is assembled, so the
     # "Lessons Learned" section reflects this exact cycle's real forensics

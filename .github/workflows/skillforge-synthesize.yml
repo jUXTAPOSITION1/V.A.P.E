@@ -39,12 +39,15 @@ jobs:
         # a Groq-only rate limit no longer silently skips the day's
         # distillation. All fallback keys passed through same as
         # deep-dive-bounty.yml; any that are unset are simply skipped.
-        # VAPE_VERTEX_ACCESS_TOKEN (from the WIF auth step above) lets
-        # synthesize.py try VAPE's own Vertex-tuned model first — see
-        # agents/llm.py::ask_vertex_candidate(); falls back to the chain
-        # below unchanged if that call ever errors.
+        # synthesize.py tries OCI-hosted Grok 4.3 first (agents/llm.py::
+        # ask_oci_grok()), falling back to VAPE's Vertex-tuned model
+        # (VAPE_VERTEX_ACCESS_TOKEN, from the WIF auth step above), falling
+        # back further to the chain below unchanged if both error/aren't
+        # configured.
         run: python skillforge/synthesize.py
         env:
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
           VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}

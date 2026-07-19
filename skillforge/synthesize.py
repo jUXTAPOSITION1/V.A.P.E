@@ -56,7 +56,7 @@ def main():
     # alone (see skillforge/memory/build_log.jsonl), so a single-provider
     # dependency here isn't theoretical.
     try:
-        from agents.llm import ask_vertex_candidate, FRONTIER_ORDER
+        from agents.llm import ask_oci_grok, FRONTIER_ORDER
     except Exception as e:
         print(f"[synthesize] agents.llm unavailable ({e}) — index regenerated, skipping distillation")
         return
@@ -71,14 +71,13 @@ def main():
                f"Recent real findings (last 30): {json.dumps(findings[-30:])[:4000]}\n"
                f"Recent lessons: {json.dumps(lessons[-20:])[:1500]}\n"
                "Produce the most valuable NEW or UPDATED playbook given this real data.")
-        # ask_vertex_candidate() tries VAPE's own Vertex-tuned model first if
-        # VAPE_VERTEX_ACCESS_TOKEN is set this run (this is the lowest-stakes
-        # real production spot for it: an internal skill-playbook distillation
-        # that lands in a PR for review, not anything customer-facing) —
-        # tier/provider_order here control ONLY its fallback path, so a run
-        # without the token configured behaves exactly as before.
-        content, provider = ask_vertex_candidate(sys_p, usr, temperature=0.4, max_tokens=2048,
-                                                 tier="deep", provider_order=FRONTIER_ORDER)
+        # ask_oci_grok() tries OCI-hosted Grok 4.3 first, falling back to
+        # VAPE's Vertex-tuned model (if VAPE_VERTEX_ACCESS_TOKEN is set this
+        # run), falling back further to FRONTIER_ORDER — tier/provider_order
+        # here control ONLY that final fallback, so a run with nothing
+        # configured behaves exactly as before.
+        content, provider = ask_oci_grok(sys_p, usr, temperature=0.4, max_tokens=2048,
+                                          tier="deep", provider_order=FRONTIER_ORDER)
         content = content.strip()
         print(f"[synthesize] distilled via {provider}")
         # derive filename from first heading
