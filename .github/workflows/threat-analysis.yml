@@ -1,0 +1,82 @@
+name: Threat Analysis (per-incident, HACK agent)
+
+# Writes a real, standalone analysis for every incident in data/attack-feed.json
+# (security_sweep.py's real DeFiLlama-sourced feed) and links it from the
+# site's Threat Ledger — see agents/hack_agent.py's module docstring for the
+# full design. Runs on its own schedule/module (not folded into
+# intel-sweeps.yml) so this newer, still-settling feature can iterate freely
+# without touching the sweep pipeline everything else already depends on.
+#
+# 6-hourly, offset from security_sweep's own 0,6,12,18 slots, so this always
+# runs against that cycle's freshest feed. MAX_ANALYSES_PER_RUN (15) means a
+# first-ever run against the full 8-week backlog catches up over a handful
+# of cycles rather than firing dozens of LLM calls at once.
+on:
+  schedule:
+    - cron: '0 2,8,14,20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: threat-analysis
+  cancel-in-progress: false
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+      OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+      OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+      CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+    steps:
+      # persist-credentials: false — same supply-chain reasoning as
+      # intel-sweeps.yml (skillforge/research.py spawns third-party npx MCP
+      # servers for the web-search step); token wired back explicitly for
+      # just the commit step below.
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: agents/requirements.txt
+      - name: Cache npm (skillforge/research.py spawns Tavily/Firecrawl/Bright Data MCP servers via npx)
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-research-mcp-${{ runner.os }}
+      - name: Install
+        run: pip install -r agents/requirements.txt
+
+      - name: Run HACK agent's threat analysis
+        run: python -m agents.hack_agent
+
+      - name: Commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/threat-analysis/ skillforge/memory/threat_analysis_state.json data/attack-feed.json
+          git commit -m "threat analysis: $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
