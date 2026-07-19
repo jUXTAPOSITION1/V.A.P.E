@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-19T01:05:08Z",
+  "generated": "2026-07-19T01:52:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 413,
+    "reports": 414,
     "reports_by_type": {
+      "macro": 15,
       "base": 53,
       "sentiment": 30,
       "virtuals": 53,
-      "macro": 14,
       "security": 52,
       "skillforge": 3,
       "bounty": 206,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-18-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-18T21:00Z",
+      "type": "macro",
+      "file": "macro-2026-07-19-01.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-19T01:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-18 21:41 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-21.md",
-      "bytes": 2659
+      "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.89%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-01.md",
+      "bytes": 2133
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-19-01.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-19T01:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.89%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-01.md",
+      "bytes": 2133
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "The threat level remains HIGH with exactly three incidents recorded in the last seven days and zero incidents exceeding $50M in the prior 14 days. The most recent events include a $0.27M silent auto-approval hack on Lumi Finance (Arbitrum) and a $0.009M flashloan accounting logic exploit on Chi Protocol (Ethereum), both occurring on 2026-",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-15-02.md",
       "bytes": 5864
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-14-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-14T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-14 21:50 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-14-21.md",
-      "bytes": 2886
     }
   ],
   "broadcasts": [
