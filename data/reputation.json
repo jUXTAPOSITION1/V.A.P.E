@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T22:10:43Z",
+  "generated": "2026-07-19T23:14:17Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 401,
+    "reports_published": 402,
     "intel_reports": 221,
     "intel_broadcasts": 86,
-    "catalog_investigations": 152,
+    "catalog_investigations": 153,
     "token_scans_logged": 0,
     "skills_codified": 15,
     "tools_total": 16,
@@ -33,10 +33,10 @@
         "number": 227,
         "title": "arbitrum-oracle-manip-tracer",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/227",
         "created_at": "2026-07-19T21:47:23Z",
-        "closed_at": null,
+        "closed_at": "2026-07-19T22:53:03Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -78,7 +78,7 @@
     "latest_report": "20260717"
   },
   "capabilities": {
-    "offerings_live": 29,
+    "offerings_live": 30,
     "auto_fulfilled_zero_llm": [
       "bridges",
       "chain_fees",
@@ -89,6 +89,7 @@
       "exploit_check",
       "liquidity_check",
       "market_intel",
+      "prediction_market_odds",
       "protocol",
       "protocol_fees",
       "rug_pull_alert",
@@ -247,6 +248,15 @@
         "name": "wallet_pnl_deepdive",
         "price_usd": 0.25,
         "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
+        "auto": true,
+        "x402": true,
+        "data": false,
+        "sla": "instant"
+      },
+      {
+        "name": "prediction_market_odds",
+        "price_usd": 0.01,
+        "summary": "Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume",
         "auto": true,
         "x402": true,
         "data": false,
