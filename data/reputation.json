@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T17:28:09Z",
+  "generated": "2026-07-19T19:34:49Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 396,
-    "intel_reports": 217,
+    "reports_published": 398,
+    "intel_reports": 218,
     "intel_broadcasts": 85,
-    "catalog_investigations": 148,
+    "catalog_investigations": 149,
     "token_scans_logged": 0,
     "skills_codified": 15,
     "tools_total": 16,
@@ -58,7 +58,7 @@
         }
       }
     ],
-    "work_log_entries": 169,
+    "work_log_entries": 170,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260623",
     "latest_report": "20260717"
@@ -230,6 +230,15 @@
         "sla": "async \u2014 no fixed SLA (frontier-model)"
       },
       {
+        "name": "wallet_pnl_deepdive",
+        "price_usd": 0.25,
+        "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
+        "auto": true,
+        "x402": true,
+        "data": false,
+        "sla": "instant"
+      },
+      {
         "name": "token_intel",
         "price_usd": 0.01,
         "summary": "Price + 0-1 confidence, oracle-derived token age, and (with a protocol slug) fees/unlocks/treasury \u2014 plus the token's real logo",
@@ -344,15 +353,6 @@
         "auto": true,
         "x402": true,
         "data": true,
-        "sla": "instant"
-      },
-      {
-        "name": "wallet_pnl_deepdive",
-        "price_usd": 0.25,
-        "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
-        "auto": true,
-        "x402": true,
-        "data": false,
         "sla": "instant"
       }
     ]
