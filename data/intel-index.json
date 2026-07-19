@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T10:20:06Z",
+  "generated": "2026-07-19T10:56:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 84,
-    "investigations": 234,
+    "investigations": 235,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-092940-0x4c18406F.md",
-      "title": "Investigation \u2014 IDL",
-      "symbol": "IDL",
-      "name": "InfinityDAO",
-      "date": "2026-07-19T09:29:40Z",
-      "target": "0x4c18406Fa690fAa53E5efa899a971557251Af72d",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 19429 holders \u2014 reasonably distributed; Deep liquidity ($2,976,471); Trading 248+ days without a known incident in this scan; Custom verified source (not a mass-produce",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-092940-0x4c18406F.md"
+      "file": "investigation-20260719-105637-0xE1b7A509.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T10:56:37Z",
+      "target": "0xE1b7A5096343164FAe02Db10353C03cd295787c5",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (74); [-10] Low liquidity $20,150; [-10] Violent 24h move +882% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-105637-0xE1b7A509.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-105637-0xE1b7A509.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T10:56:37Z",
+      "target": "0xE1b7A5096343164FAe02Db10353C03cd295787c5",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (74); [-10] Low liquidity $20,150; [-10] Violent 24h move +882% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-105637-0xE1b7A509.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-092940-0x4c18406F.md",
@@ -593,20 +607,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 1316 holders \u2014 reasonably distributed; Deep liquidity ($531,679); Trading 156+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 154+ days \u2014 indep",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-213349-0x3b8db18e.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-184202-0x936AD605.md",
-      "title": "Investigation \u2014 YIELD",
-      "symbol": "YIELD",
-      "name": "Yield",
-      "date": "2026-07-16T18:42:02Z",
-      "target": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (60); [-25] Very low liquidity $5,573 (rug/illiquid); [-10] Low liquidity $5,573; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 2096+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-184202-0x936AD605.md"
     }
   ],
   "reports": [

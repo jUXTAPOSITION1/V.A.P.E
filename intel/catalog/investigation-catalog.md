@@ -319,3 +319,5 @@
 | 2026-07-19 | auto | 0xb200000000000000000000AC6A5D35756eB8Cd01 (Baseller) | deep_investigation | REJECT (30/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-19 | auto | 0x4c18406Fa690fAa53E5efa899a971557251Af72d (IDL) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-19 | auto | 0xE1b7A5096343164FAe02Db10353C03cd295787c5 (Baseller) | deep_investigation | REJECT (47/100) | Low holder count (74) | +7d |
