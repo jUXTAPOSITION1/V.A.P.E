@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T21:43:02Z",
+  "generated": "2026-07-19T21:56:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 86,
-    "investigations": 242,
+    "investigations": 243,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-205403-0x624e2e7f.md",
-      "title": "Investigation \u2014 SOSO",
-      "symbol": "SOSO",
-      "name": "SoSoValue",
-      "date": "2026-07-19T20:54:03Z",
-      "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831",
+      "file": "investigation-20260719-215630-0xE8556a46.md",
+      "title": "Investigation \u2014 GR4YS",
+      "symbol": "GR4YS",
+      "name": "Little Gray Tokens",
+      "date": "2026-07-19T21:56:30Z",
+      "target": "0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: 89455 holders \u2014 reasonably distributed; Trading 238+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-205403-0x624e2e7f.md"
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe3b5d677199000d6f2d71bf9dd78a2c86029fca5) \u2014 can still act on the contract; [-8] Low holder count (83); [-25] Very low liquidity $1,034 (rug/illiquid); [-10] Low liquidity $1,034; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-215630-0xE8556a46.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-215630-0xE8556a46.md",
+      "title": "Investigation \u2014 GR4YS",
+      "symbol": "GR4YS",
+      "name": "Little Gray Tokens",
+      "date": "2026-07-19T21:56:30Z",
+      "target": "0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe3b5d677199000d6f2d71bf9dd78a2c86029fca5) \u2014 can still act on the contract; [-8] Low holder count (83); [-25] Very low liquidity $1,034 (rug/illiquid); [-10] Low liquidity $1,034; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-215630-0xE8556a46.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-205403-0x624e2e7f.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +1077% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-141317-0xB2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-121150-0xf4B38584.md",
-      "title": "Investigation \u2014 EGL1",
-      "symbol": "EGL1",
-      "name": "EGL1",
-      "date": "2026-07-17T12:11:50Z",
-      "target": "0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 101920 holders \u2014 reasonably distributed; Deep liquidity ($769,864); Trading 408+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama ha",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-121150-0xf4B38584.md"
     }
   ],
   "reports": [

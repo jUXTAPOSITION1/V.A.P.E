@@ -9,3 +9,4 @@
 {"ts": "2026-07-19T17:00:53.474256Z", "target": "0xE2F097962C9E7D8BD97dC961A7a169bb0eE68b1E", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-19T19:44:59.757189Z", "target": "0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-19T20:54:00.822053Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-19T21:56:27.562639Z", "target": "0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
