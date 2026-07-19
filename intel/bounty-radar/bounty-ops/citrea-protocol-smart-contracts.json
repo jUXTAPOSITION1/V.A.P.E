@@ -1,0 +1,31 @@
+{
+  "id": "hackenproof:prg_ca9cd65dc957350a",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.410294Z",
+      "event": "Started tracking as a real Bounty Op (fit 63)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Citrea Protocol & Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/citrea-protocol-and-smart-contracts",
+  "prizeUsd": 250000,
+  "bountyFitScore": 63,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "web",
+    "git_repo",
+    "contract",
+    "base",
+    "ethereum",
+    "bsc",
+    "rust",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.410282Z"
+}

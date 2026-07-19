@@ -1,0 +1,28 @@
+{
+  "id": "hackerone:prg_2763bf67ce168368",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.410659Z",
+      "event": "Started tracking as a real Bounty Op (fit 63)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Crypto.com",
+  "platform": "hackerone",
+  "url": "https://hackerone.com/crypto",
+  "prizeUsd": 1000000,
+  "bountyFitScore": 63,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "web",
+    "contract",
+    "ethereum",
+    "git_repo",
+    "solidity",
+    "bugbounty",
+    "via:hackerone"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.410651Z"
+}

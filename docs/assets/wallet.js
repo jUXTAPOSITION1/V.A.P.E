@@ -196,7 +196,7 @@ const Wallet = {
             const onBase = this._chainId === 8453;
             root.innerHTML = `
                 <div class="relative">
-                    <button id="wallet-chip-btn" class="wallet-chip glass rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs" aria-label="${onBase ? `Connected wallet ${this._account}, on Base. Click to disconnect.` : `Connected wallet ${this._account}, wrong network. Click to switch to Base.`}">
+                    <button id="wallet-chip-btn" class="wallet-chip px-3 py-1.5 flex items-center gap-2 text-xs" aria-label="${onBase ? `Connected wallet ${this._account}, on Base. Click to disconnect.` : `Connected wallet ${this._account}, wrong network. Click to switch to Base.`}">
                         <span class="w-2 h-2 rounded-full ${onBase ? 'bg-emerald-500' : 'bg-amber-400 chain-badge-warn'}" aria-hidden="true"></span>
                         <span class="font-mono">${this._short(this._account)}</span>
                         ${onBase ? '' : '<span class="text-amber-400">Switch to Base</span>'}
@@ -208,7 +208,7 @@ const Wallet = {
                 this._openAccountPopover(e.currentTarget);
             };
         } else {
-            root.innerHTML = `<button id="wallet-connect-btn" class="bg-cyan-600 hover:bg-cyan-500 transition px-3 py-1.5 rounded-xl font-display text-xs flex items-center gap-1.5" aria-label="Connect a wallet" aria-haspopup="true">
+            root.innerHTML = `<button id="wallet-connect-btn" class="term-btn term-btn-sm" aria-label="Connect a wallet" aria-haspopup="true">
                 <i class="fa-solid fa-wallet" aria-hidden="true"></i> Connect
             </button>`;
             document.getElementById('wallet-connect-btn').onclick = (e) => this._openPopover(e.currentTarget);
@@ -232,27 +232,27 @@ const Wallet = {
         this._closePopover();
         const pop = document.createElement('div');
         pop.id = 'wallet-popover';
-        pop.className = 'glass rounded-2xl p-4 w-72 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
+        pop.className = 'popover p-4 w-72 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
         pop.innerHTML = `
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                 <span class="font-mono text-xs break-all">${this._account}</span>
             </div>
             <div class="grid grid-cols-2 gap-2 mb-3">
-                <div class="bg-white/5 rounded-lg p-2.5">
+                <div class="border border-white/10 p-2.5">
                     <div class="text-[10px] uppercase tracking-wider text-zinc-500">Balance</div>
-                    <div id="wallet-pop-balance" class="font-display text-sm mt-0.5"><i class="fa-solid fa-spinner fa-spin text-xs"></i></div>
+                    <div id="wallet-pop-balance" class="text-sm mt-0.5"><i class="fa-solid fa-spinner fa-spin text-xs"></i></div>
                 </div>
-                <div class="bg-white/5 rounded-lg p-2.5">
+                <div class="border border-white/10 p-2.5">
                     <div class="text-[10px] uppercase tracking-wider text-zinc-500">Network</div>
-                    <div class="font-display text-sm mt-0.5 text-emerald-500">Base</div>
+                    <div class="text-sm mt-0.5 text-emerald-500">Base</div>
                 </div>
             </div>
             <div class="flex flex-col gap-1.5">
-                <button id="wallet-pop-case-file" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-id-card-clip w-5 text-center text-cyan-400"></i> View portfolio</button>
-                <button id="wallet-pop-copy" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-copy w-5 text-center"></i> Copy address</button>
-                <a href="https://basescan.org/address/${this._account}" target="_blank" rel="noopener" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-arrow-up-right-from-square w-5 text-center"></i> View on Basescan</a>
-                <button id="wallet-pop-disconnect" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm text-rose-400"><i class="fa-solid fa-right-from-bracket w-5 text-center"></i> Disconnect</button>
+                <button id="wallet-pop-case-file" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-id-card-clip w-5 text-center text-zinc-400"></i> View portfolio</button>
+                <button id="wallet-pop-copy" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-copy w-5 text-center"></i> Copy address</button>
+                <a href="https://basescan.org/address/${this._account}" target="_blank" rel="noopener" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-arrow-up-right-from-square w-5 text-center"></i> View on Basescan</a>
+                <button id="wallet-pop-disconnect" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm text-rose-400"><i class="fa-solid fa-right-from-bracket w-5 text-center"></i> Disconnect</button>
             </div>`;
         document.body.appendChild(pop);
         this._placeNearAnchor(pop, anchor);
@@ -291,21 +291,21 @@ const Wallet = {
         this._closePopover();
         const discovered = [...this._providers.values()];
         const rows = discovered.length
-            ? discovered.map(({ info }) => `<button data-uuid="${escapeHtml(info.uuid)}" class="wc-injected w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm">
+            ? discovered.map(({ info }) => `<button data-uuid="${escapeHtml(info.uuid)}" class="wc-injected w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm">
                     <img src="${escapeHtml(info.icon)}" alt="" class="w-5 h-5 rounded" onerror="this.remove()"> ${escapeHtml(info.name)}
                 </button>`).join('')
-            : `<button data-uuid="" class="wc-injected w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm">
+            : `<button data-uuid="" class="wc-injected w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm">
                     <i class="fa-solid fa-plug w-5 text-center"></i> Browser wallet
                 </button>`;
         const pop = document.createElement('div');
         pop.id = 'wallet-popover';
-        pop.className = 'glass rounded-2xl p-2 w-64 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
+        pop.className = 'popover p-2 w-64 max-w-[calc(100vw-2rem)] z-50 text-zinc-200';
         pop.innerHTML = `
             <div class="text-[10px] uppercase tracking-widest text-zinc-500 px-3 py-1.5">Detected</div>
             ${rows}
             <div class="text-[10px] uppercase tracking-widest text-zinc-500 px-3 py-1.5 mt-1">Other</div>
-            <button id="wc-coinbase" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-circle w-5 text-center text-blue-400"></i> Coinbase Wallet</button>
-            <button id="wc-walletconnect" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-qrcode w-5 text-center text-indigo-400"></i> WalletConnect</button>
+            <button id="wc-coinbase" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-circle w-5 text-center text-zinc-400"></i> Coinbase Wallet</button>
+            <button id="wc-walletconnect" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-qrcode w-5 text-center text-zinc-400"></i> WalletConnect</button>
         `;
         document.body.appendChild(pop);
         this._placeNearAnchor(pop, anchor);

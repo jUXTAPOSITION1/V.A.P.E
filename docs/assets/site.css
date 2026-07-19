@@ -1,112 +1,237 @@
-/* VAPE — dark, restrained enterprise-tech design system. Tailwind CDN handles
-   utilities; this file holds custom tokens, motion, and decoration Tailwind's
-   utility set can't. One accent color (cyan) used deliberately, not everywhere. */
+/* VAPE — sleek, restrained desktop-terminal design system, modeled on the
+   VAPOR sister site (github.com/jUXTAPOSITION1/VAPOR/docs/assets/site.css).
+   Tailwind CDN handles utilities; this file holds the tokens, motion, and
+   the handful of custom classes Tailwind's utility set can't express:
+   flat hairline-bordered panels (no fill, no blur, no radius), a single
+   accent color, and terminal-style type. Functional data-colors (verdict
+   severity, threat level, P&L sign, honeypot flag) are the one deliberate
+   exception — they stay wherever the markup/JS defines them, since they're
+   real data encoding, not chrome. */
 
 :root {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    --cyan: #22d3ee;
-    --cyan-dim: rgba(34,211,238,0.14);
-    --brass: #c9a86a;
-    --brass-dim: rgba(201,168,106,0.16);
+    /* One accent, used sparingly (live dot, hairline highlights) — every
+       other color on the page is white/zinc unless it's encoding real data. */
+    --accent: #4ade80;
+    --accent-dim: rgba(74, 222, 128, 0.14);
+    --border: rgba(255, 255, 255, 0.10);
 }
 
-.font-display { font-family: 'Space Grotesk', sans-serif; }
-.font-serif-display { font-family: 'Fraunces', Georgia, serif; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-    background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(99,102,241,0.10), transparent),
-        radial-gradient(1000px 500px at 100% 0%, rgba(34,211,238,0.07), transparent),
-        radial-gradient(900px 500px at 50% 60%, rgba(34,211,238,0.05), transparent),
-        #09090b;
+    background: #09090b;
+    color: #d4d4d8;
+    -webkit-font-smoothing: antialiased;
 }
 
-.glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
 /* Anchor-linked sections need headroom under the sticky nav, or a jump-to-#id
    click hides the heading right behind the bar. */
-section[id] { scroll-margin-top: 5.5rem; }
-.live-dot { animation: pulse 1.8s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.85)} }
+section[id] { scroll-margin-top: 4.5rem; }
+
+/* Section headings: same size/weight/color as body text — a "> " prompt
+   prefix (written directly in the markup, not a ::before) marks it as a
+   heading instead of bold/oversized display type. */
+.section-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #e4e4e7;
+    letter-spacing: 0;
+}
+
+/* Hero headline is the one deliberately-larger piece of type on the page —
+   still monospace, still with a "> " prefix, just set a step up from
+   .section-title for identity/impact rather than VAPOR's fully flat hero. */
+.hero-title {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 1.375rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #f4f4f5;
+}
+@media (min-width: 640px) {
+    .hero-title { font-size: 1.75rem; }
+}
+
+/* Bracket-tag eyebrow — replaces every colored icon-chip + uppercase
+   tracking-wide badge that used to precede a section title. */
+.eyebrow {
+    font-size: 0.8125rem;
+    color: #71717a;
+    white-space: normal;
+}
+
+/* A "panel" is a plain bordered section, not a filled card: no background
+   fill, no border-radius, no shadow — a hairline frame so content stays
+   legible without reading as a UI "widget". */
+.panel {
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+}
+@media (min-width: 640px) {
+    .panel { padding: 1.75rem; }
+}
+.panel-sm {
+    border: 1px solid var(--border);
+    padding: 0.875rem;
+}
+
+/* A "popover" needs a solid fill (unlike .panel) since it floats over page
+   content — a fully transparent bordered box isn't legible there. */
+.popover {
+    border: 1px solid var(--border);
+    background: #09090b;
+}
+
+.term-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border);
+    color: #e4e4e7;
+    font-size: 0.875rem;
+    background: transparent;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.term-btn:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+}
+.term-btn-active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+}
+.term-btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+/* Live pulse dot — the one place motion + the accent color draw attention,
+   since it's a genuine liveness signal, not decoration. */
+.live-dot { animation: pulse-ring 1.8s infinite; }
+@keyframes pulse-ring {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(.85); }
+}
+
 .stat { font-variant-numeric: tabular-nums; }
-.skeleton { background: linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 37%,rgba(255,255,255,.04) 63%); background-size:400% 100%; animation: sh 1.4s ease infinite; }
-@keyframes sh { 0%{background-position:100% 50%} 100%{background-position:0 50%} }
+
+/* Live stat readout: a wrapping status line (label + tabular-nums value
+   pairs), not a grid of individually-boxed tiles — reads as a terminal
+   status bar rather than a dashboard of "widgets". */
+.stat-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+}
+.stat-pair {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+.stat-pair-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    transition: color 0.15s ease;
+}
+.stat-pair-link:hover { color: #fff; }
+.stat-pair-link:hover .stat-value { text-decoration: underline; }
+.stat-label { color: #71717a; }
+.stat-value { color: #d4d4d8; font-variant-numeric: tabular-nums; }
+
+/* Plain stacked list divided by hairlines — replaces essentially every
+   JS-rendered card grid on the page (protocols, movers, bounty ops,
+   reports, investigations, tools, audits, feed rows). Never individually
+   boxed/colored cards. */
+.diff-list { border-top: 1px solid var(--border); }
+.diff-row {
+    display: block;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border);
+}
+a.diff-row { transition: opacity 0.15s ease; }
+a.diff-row:hover { opacity: 0.75; }
+
+/* Chart containers keep a substantial, desktop-like height across all
+   breakpoints — Chart.js is told maintainAspectRatio:false and fills this. */
+.chart-shell {
+    position: relative;
+    height: clamp(260px, 30vw, 380px);
+    width: 100%;
+}
+.chart-shell-sm {
+    position: relative;
+    height: clamp(200px, 22vw, 260px);
+    width: 100%;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,.04) 25%, rgba(255,255,255,.09) 37%, rgba(255,255,255,.04) 63%);
+    background-size: 400% 100%;
+    animation: sh 1.4s ease infinite;
+}
+@keyframes sh { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
 a { transition: color .15s; }
-.card-h:hover { transform: translateY(-2px); border-color: rgba(34,211,238,.35); }
-.card-h { transition: all .2s cubic-bezier(.4,0,.2,1); }
+.card-h { transition: opacity .15s ease; }
+.card-h:hover { opacity: 0.75; }
 
 /* ── Scroll reveal ─────────────────────────────────────────────────────── */
 .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+    transform: translateY(16px);
+    transition: opacity .6s cubic-bezier(.2,.8,.2,1), transform .6s cubic-bezier(.2,.8,.2,1);
 }
 .reveal.in-view { opacity: 1; transform: none; }
-.reveal-1.in-view { transition-delay: .08s; }
-.reveal-2.in-view { transition-delay: .16s; }
-.reveal-3.in-view { transition-delay: .24s; }
+.reveal-1.in-view { transition-delay: .06s; }
+.reveal-2.in-view { transition-delay: .12s; }
+.reveal-3.in-view { transition-delay: .18s; }
 @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+    .live-dot { animation: none; }
 }
 
-/* ── Hero frame (cyan) — kept to exactly one spot on the page, not repeated
-   as a motif across every card. Thin and subtle, not a sci-fi viewfinder. ── */
-.hud-frame {
-    position: relative;
-    border: 1px solid rgba(34,211,238,0.18);
+/* ── Wallet chip / profile ────────────────────────────────────────────── */
+.wallet-chip {
+    border: 1px solid var(--border);
+    transition: border-color .15s ease;
 }
-.hud-corner { position: absolute; width: 12px; height: 12px; border-color: rgba(34,211,238,.45); }
-.hud-corner.tl { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; }
-.hud-corner.tr { top: -1px; right: -1px; border-top: 1.5px solid; border-right: 1.5px solid; }
-.hud-corner.bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
-.hud-corner.br { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+.wallet-chip:hover { border-color: rgba(255,255,255,.35); }
+.chain-badge-warn { animation: chainpulse 1.6s infinite; }
+@keyframes chainpulse { 0%,100%{opacity:1} 50%{opacity:.6} }
 
-/* ── Hero portrait frame (used until real art lands) ─────────────────────── */
-/* position/overflow/aspect-ratio here duplicate this element's own Tailwind
-   utility classes (relative overflow-hidden aspect-square) on purpose —
-   Tailwind is loaded from a CDN <script>, which is inert until it downloads
-   and runs, so without a real, always-on CSS rule the raw hero <img> briefly
-   paints at full intrinsic size (a single large VAPE photo) on first load
-   before Tailwind's utilities apply. Same story for its child <img> below. */
+/* Hero portrait — flat 1px border, no HUD-corner sci-fi framing, no
+   scan-line overlay. position/overflow/aspect-ratio duplicate this
+   element's own Tailwind utility classes on purpose: Tailwind is loaded
+   from a CDN <script>, inert until it downloads and runs, so without a
+   real always-on CSS rule the raw <img> briefly paints at full intrinsic
+   size before Tailwind's utilities apply. */
 .hero-portrait-fallback {
     position: relative;
     overflow: hidden;
     aspect-ratio: 1 / 1;
-    background: linear-gradient(160deg, #0d0d11 0%, #030303 100%);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #0d0d0f;
+    border: 1px solid var(--border);
 }
 .hero-portrait-fallback img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
 }
-.hero-portrait-fallback::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
-    mix-blend-mode: overlay;
-}
 
-/* ── Wallet chip / profile ────────────────────────────────────────────── */
-.wallet-chip { transition: all .15s; }
-.wallet-chip:hover { border-color: rgba(34,211,238,.4); }
-.chain-badge-warn { animation: chainpulse 1.6s infinite; }
-@keyframes chainpulse { 0%,100%{opacity:1} 50%{opacity:.6} }
-
-/* ── Nav logo: occasional glow instead of a persistent "expand me" badge —
-   a quiet signal that it's interactive (mobile menu toggle) without a
-   permanent visual barnacle on the brand mark. Desktop nav already shows
-   the link row inline, so the logo isn't a control there — no glow. Kept
-   deliberately faint and rare (one ~1.5s flicker per 22s) — a hint, not a
-   beacon. `.nav-logo-active` is toggled by JS while the menu is open and
-   uses the same faint treatment as a static ring, so opening it feels like
-   a continuation of the same cue rather than a different, louder effect. ── */
-@keyframes nav-logo-glow {
-    0%, 93%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
-    96% { box-shadow: 0 0 0 1px rgba(34,211,238,.3), 0 0 7px 1px rgba(34,211,238,.18); }
-}
-/* Same always-on containment as .hero-portrait-fallback above, and for the
-   same reason — this is the very first image on the page, so it's the most
-   visible spot for the pre-Tailwind unstyled-photo flash. */
+/* Nav logo — same always-on containment as the hero portrait, and for the
+   same reason (first image on the page, most visible spot for a pre-
+   Tailwind unstyled-photo flash). No glow/pulse decoration. */
 .nav-logo-pulse {
     position: relative;
     width: 2rem; height: 2rem;
@@ -117,10 +242,12 @@ a { transition: color .15s; }
     width: 100%; height: 100%;
     object-fit: cover;
 }
-@media (max-width: 1023px) {
-    .nav-logo-pulse { animation: nav-logo-glow 22s ease-in-out infinite; }
-    .nav-logo-pulse.nav-logo-active { animation: none; box-shadow: 0 0 0 1px rgba(34,211,238,.3), 0 0 7px 1px rgba(34,211,238,.18); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .nav-logo-pulse { animation: none; }
-}
+
+code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+::selection { background: rgba(74, 222, 128, 0.25); }
+
+/* Nav — stays a scrollable row of real links rather than collapsing behind
+   a hamburger's worth of hidden information (the toggle here opens a full
+   mobile menu panel, distinct from the desktop inline row). */
+#site-nav-links a { white-space: nowrap; }

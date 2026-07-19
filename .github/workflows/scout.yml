@@ -23,6 +23,8 @@ jobs:
       # which needs the full set below, same secrets intel-sweeps.yml wires
       # for the same reason.
       XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+      OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+      OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
@@ -57,6 +59,9 @@ jobs:
       - name: Update engagement status (real record of what VAPE did about each tracked lead)
         continue-on-error: true
         run: python -m agents.engagements
+      - name: Run Bounty Ops (Task #197 — classify + Grok-4.3 checklist for VAPE-fit live programs)
+        continue-on-error: true
+        run: python -m agents.bounty_ops
       - name: Commit bounty radar sweep
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,6 +72,8 @@ jobs:
           # _act_on_incidents() may trigger a real agents.investigate.py
           # forensics pass — those land here just like any other investigation.
           # intel/engagements/: agents.engagements.py's real, idempotent status update.
+          # intel/bounty-radar/bounty-ops/: agents.bounty_ops.py's real,
+          # checklist-tracked Bounty Ops records (Task #197).
           git add intel/bounty-radar/ intel/investigations/ intel/catalog/ intel/engagements/ skillforge/memory/
           git commit -m "SCOUT bounty radar sweep $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"

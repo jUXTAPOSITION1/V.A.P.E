@@ -12,10 +12,10 @@ function escapeHtml(s) {
 function basescanTxUrl(hash) { return `https://basescan.org/tx/${hash}`; }
 function basescanAddrUrl(addr) { return `https://basescan.org/address/${addr}`; }
 function verdictClass(v) {
-    if (v === 'PROCEED' || v === 'LOW' || v === 'GO') return 'bg-emerald-500/20 text-emerald-500';
-    if (v === 'CAUTION' || v === 'MEDIUM') return 'bg-amber-500/20 text-amber-400';
-    if (v === 'REJECT' || v === 'HIGH' || v === 'EXTREME') return 'bg-rose-500/20 text-rose-400';
-    return 'bg-white/10 text-zinc-400';
+    if (v === 'PROCEED' || v === 'LOW' || v === 'GO') return 'border border-emerald-500 text-emerald-500';
+    if (v === 'CAUTION' || v === 'MEDIUM') return 'border border-amber-400 text-amber-400';
+    if (v === 'REJECT' || v === 'HIGH' || v === 'EXTREME') return 'border border-rose-400 text-rose-400';
+    return 'border border-white/20 text-zinc-400';
 }
 function ago(iso) {
     if (!iso) return '';
@@ -43,8 +43,7 @@ async function directoryLinks() {
     return _directoryLinks;
 }
 
-const RANGE_BTN_ACTIVE = ['bg-violet-500/15', 'text-violet-300'];
-const RANGE_BTN_INACTIVE = ['text-zinc-500', 'hover:text-zinc-200', 'hover:bg-white/5'];
+const RANGE_BTN_ACTIVE = ['term-btn-active'];
 
 const X402Feed = {
     _chart: null,
@@ -72,8 +71,8 @@ const X402Feed = {
                 this._days = days;
                 wrap.querySelectorAll('.x402-range-btn').forEach(b => {
                     const active = b === btn;
-                    b.classList.remove(...RANGE_BTN_ACTIVE, ...RANGE_BTN_INACTIVE);
-                    b.classList.add(...(active ? RANGE_BTN_ACTIVE : RANGE_BTN_INACTIVE));
+                    b.classList.remove(...RANGE_BTN_ACTIVE);
+                    if (active) b.classList.add(...RANGE_BTN_ACTIVE);
                     b.setAttribute('aria-pressed', String(active));
                 });
                 this._loadStats();
@@ -86,14 +85,14 @@ const X402Feed = {
         if (!el) return;
         // x402scan doesn't depend on reputation.json, so it renders immediately
         // rather than waiting on a fetch that only the 402index links need.
-        el.innerHTML = `<a href="https://www.x402scan.com/" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-400"><i class="fa-solid fa-magnifying-glass"></i> Browse x402scan</a>`;
+        el.innerHTML = `<a href="https://www.x402scan.com/" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-magnifying-glass"></i> Browse x402scan</a>`;
         const links = await directoryLinks();
         if (!links.length) return;
         const parts = [el.innerHTML,
-            `<a href="https://402index.io/" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-400"><i class="fa-solid fa-book"></i> 402 Index directory</a>`,
+            `<a href="https://402index.io/" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-book"></i> 402 Index directory</a>`,
         ];
         links.forEach(o => {
-            parts.push(`<a href="${escapeHtml(o.directory_url)}" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition text-zinc-500 font-mono">${escapeHtml(o.name)} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`);
+            parts.push(`<a href="${escapeHtml(o.directory_url)}" target="_blank" rel="noopener" class="term-btn term-btn-sm font-mono">${escapeHtml(o.name)} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`);
         });
         el.innerHTML = parts.join('');
     },
@@ -154,7 +153,7 @@ const X402Feed = {
             ? '<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full shrink-0"></span>'
             : '<span class="w-1.5 h-1.5 bg-rose-500 rounded-full shrink-0"></span>';
         const verdictPill = j.verdict
-            ? `<span class="px-1.5 py-0.5 rounded text-[10px] shrink-0 ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
+            ? `<span class="px-1.5 py-0.5 text-[10px] shrink-0 ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
             : '<span class="text-zinc-700 text-[10px] shrink-0">—</span>';
         const tx = j.tx_hash
             ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on Basescan" class="text-zinc-300 hover:text-white underline decoration-zinc-700 truncate">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
@@ -168,7 +167,7 @@ const X402Feed = {
             ? `<a href="${escapeHtml(serviceUrl)}" target="_blank" rel="noopener" title="View ${escapeHtml(j.offering)} on 402index.io" class="text-zinc-600 hover:text-zinc-300 underline decoration-zinc-800 shrink-0">${escapeHtml(j.offering)}</a>`
             : `<span class="text-zinc-600 shrink-0">${escapeHtml(j.offering)}</span>`;
         return `
-        <div class="flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-lg px-2.5 py-2 whitespace-nowrap overflow-x-auto">
+        <div class="diff-row flex items-center gap-2 whitespace-nowrap overflow-x-auto">
             ${statusDot}
             ${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}
             <span class="text-zinc-200 shrink-0 min-w-[52px]">${escapeHtml(label)}</span>
@@ -211,13 +210,12 @@ const X402Feed = {
         const jobs = bucketed.map(d => d.jobs);
         if (this._chart) this._chart.destroy();
         const ctx = canvas.getContext('2d');
-        // Violet is this site's established "engineering ledger" accent
-        // (see the Development Ledger section) — used here as the one
-        // deliberate color, with the Jobs line kept neutral white/grey so
+        // Emerald is the site's one deliberate accent color, used here for
+        // the Revenue bars, with the Jobs line kept neutral white/grey so
         // it reads as data, not decoration.
         const h = canvas.parentElement?.clientHeight || 256;
         const g = ctx.createLinearGradient(0, 0, 0, h);
-        g.addColorStop(0, 'rgba(167,139,250,0.35)'); g.addColorStop(1, 'rgba(167,139,250,0)');
+        g.addColorStop(0, 'rgba(74,222,128,0.30)'); g.addColorStop(1, 'rgba(74,222,128,0)');
         // The canvas sits in a height-controlled wrapper (see docs/index.html)
         // rather than deriving its height from a fixed aspect ratio — on
         // narrow viewports a 2:1 ratio squashed the chart into an unreadable
@@ -229,7 +227,7 @@ const X402Feed = {
             data: {
                 labels,
                 datasets: [
-                    { label: 'Revenue (USD)', data: revenue, backgroundColor: g, borderColor: '#a78bfa', borderWidth: 1, yAxisID: 'y', order: 2 },
+                    { label: 'Revenue (USD)', data: revenue, backgroundColor: g, borderColor: '#4ade80', borderWidth: 1, yAxisID: 'y', order: 2 },
                     { label: 'Jobs', data: jobs, type: 'line', borderColor: '#d4d4d8', backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, yAxisID: 'y1', order: 1 },
                 ],
             },

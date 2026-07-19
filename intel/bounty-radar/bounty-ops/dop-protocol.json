@@ -1,0 +1,26 @@
+{
+  "id": "hackenproof:prg_6b03b12af74b348d",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.412144Z",
+      "event": "Started tracking as a real Bounty Op (fit 59)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "DOP Protocol",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/dop-protocol",
+  "prizeUsd": 300000,
+  "bountyFitScore": 59,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "ethereum",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.412133Z"
+}

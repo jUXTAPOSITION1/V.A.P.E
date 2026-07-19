@@ -10,7 +10,7 @@
 // issue and is what's actually loaded here, via `window.jspdf.jsPDF`.
 import { knownIcon, tokenIconByAddress, resolveProtocolLogo } from './icons.js';
 
-const CYAN = [34, 211, 238];
+const ACCENT = [74, 222, 128];
 const EMERALD = [16, 185, 129];
 const AMBER = [251, 191, 36];
 const ROSE = [251, 113, 133];
@@ -71,10 +71,10 @@ function escapeHtml(s) {
 }
 
 function verdictClass(v) {
-    if (v === "PROCEED" || v === "LOW" || v === "GO") return 'bg-emerald-500/20 text-emerald-500';
-    if (v === "CAUTION" || v === "MEDIUM") return 'bg-amber-500/20 text-amber-400';
-    if (v === "REJECT" || v === "HIGH" || v === "EXTREME") return 'bg-rose-500/20 text-rose-400';
-    return 'bg-white/10 text-zinc-300';
+    if (v === "PROCEED" || v === "LOW" || v === "GO") return 'border border-emerald-500 text-emerald-500';
+    if (v === "CAUTION" || v === "MEDIUM") return 'border border-amber-400 text-amber-400';
+    if (v === "REJECT" || v === "HIGH" || v === "EXTREME") return 'border border-rose-400 text-rose-400';
+    return 'border border-white/20 text-zinc-300';
 }
 
 // `prices` ({ethereum, bitcoin, ...}) and `top_protocols` (string[]) are the
@@ -120,7 +120,7 @@ function renderDeliverableHtml(obj, depth = 0) {
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
                 <div class="flex flex-wrap gap-1.5">
                     ${val.map(name => `
-                        <span class="protocol-chip inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/5 text-xs text-zinc-300" data-protocol="${escapeHtml(String(name))}">
+                        <span class="protocol-chip inline-flex items-center gap-1.5 px-2 py-1 border border-white/10 text-xs text-zinc-300" data-protocol="${escapeHtml(String(name))}">
                             <img class="protocol-chip-icon w-3.5 h-3.5 rounded-full shrink-0" alt="" style="display:none" onerror="this.style.display='none'" onload="this.style.display=''">
                             ${escapeHtml(String(name))}
                         </span>`).join('')}
@@ -213,7 +213,7 @@ const Report = {
         doc.text('V.A.P.E.', margin + 68, 46);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
-        doc.setTextColor(...CYAN);
+        doc.setTextColor(...ACCENT);
         doc.text('ON-CHAIN INTELLIGENCE SYSTEM  ·  ERC-8004 #54988  ·  BASE', margin + 68, 62);
         doc.setTextColor(160, 160, 165);
         doc.textWithLink('github.com/jUXTAPOSITION1/V.A.P.E', margin + 68, 76, { url: 'https://github.com/jUXTAPOSITION1/V.A.P.E' });
@@ -225,7 +225,7 @@ const Report = {
         doc.setFontSize(16);
         doc.text('CASE REPORT', margin, y);
         y += 6;
-        doc.setDrawColor(...CYAN);
+        doc.setDrawColor(...ACCENT);
         doc.setLineWidth(1.5);
         doc.line(margin, y, margin + 90, y);
         y += 22;
@@ -256,7 +256,7 @@ const Report = {
             doc.setTextColor(...MUTED);
             const isAddr = k === 'Target address' && v && v.startsWith('0x');
             if (isAddr) {
-                doc.setTextColor(...CYAN);
+                doc.setTextColor(...ACCENT);
                 doc.textWithLink(v, margin + 110, y, { url: basescanUrl(v) });
             } else {
                 doc.text(String(v), margin + 110, y);
@@ -397,7 +397,7 @@ const Report = {
         const disclaimer = (opts.result && opts.result.disclaimer) || 'Real on-chain data. Not investment advice.';
         const source = (opts.result && opts.result.source) || 'vape-real-data';
         const addr = opts.requestedAddress;
-        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">${escapeHtml(addr)}</a>` : '—';
+        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-zinc-300 hover:underline">${escapeHtml(addr)}</a>` : '—';
         const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
         // Same real-token icon used for the `symbol` row above, surfaced once
         // more at the top of the card — the case-report equivalent of the
@@ -413,10 +413,10 @@ const Report = {
         if (tokenName && tokenName !== tokenSymbol) identityParts.push(tokenName);
         const titleHtml = identityParts.length
             ? `<div class="min-w-0">
-                    <div class="font-display text-sm font-semibold truncate">${escapeHtml(identityParts.join(' '))}</div>
+                    <div class="text-sm truncate">${escapeHtml(identityParts.join(' '))}</div>
                     <div class="text-[10px] text-zinc-500 truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>
                 </div>`
-            : `<div class="font-display text-sm truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>`;
+            : `<div class="text-sm truncate">${escapeHtml(humanLabel(opts.offering || ''))}</div>`;
         return `
             <div class="text-left">
                 <div class="flex items-center justify-between gap-3 mb-3">
@@ -424,7 +424,7 @@ const Report = {
                         ${assetIcon ? `<img src="${assetIcon}" alt="" class="w-6 h-6 rounded-full shrink-0" onerror="this.remove()">` : ''}
                         ${titleHtml}
                     </div>
-                    ${verdictField ? `<span class="inline-block px-3 py-1 rounded-lg font-display text-xs shrink-0 ${verdictClass(verdictField)}">${escapeHtml(VERDICT_LABELS[verdictField] || verdictField)}</span>` : ''}
+                    ${verdictField ? `<span class="inline-block px-3 py-1 text-xs shrink-0 ${verdictClass(verdictField)}">${escapeHtml(VERDICT_LABELS[verdictField] || verdictField)}</span>` : ''}
                 </div>
                 <div class="text-[11px] text-zinc-500 mb-3 space-y-0.5">
                     <div>Target: ${addrHtml}</div>

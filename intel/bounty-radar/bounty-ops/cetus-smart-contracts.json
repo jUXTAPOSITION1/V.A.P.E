@@ -1,0 +1,25 @@
+{
+  "id": "hackenproof:prg_a79de6c8943fa43d",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.411738Z",
+      "event": "Started tracking as a real Bounty Op (fit 59)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Cetus Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/cetus-smart-contracts",
+  "prizeUsd": 300000,
+  "bountyFitScore": 59,
+  "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
+  "tags": [
+    "git_repo",
+    "move",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.411729Z"
+}
