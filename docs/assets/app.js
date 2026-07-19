@@ -620,12 +620,29 @@ const App = {
             ]);
             const snap = snapRes.status==='fulfilled' ? snapRes.value : null;
             if (snap && !snap.error) this._renderVirtualsStats(snap);
+            else this._renderVirtualsUnavailable();
             const trend = trendRes.status==='fulfilled' ? trendRes.value : null;
             if (trend && !trend.error && Array.isArray(trend.tokens)) {
                 this._trendingBase = trend.tokens;
                 this._renderTrendingBase();
+            } else {
+                const el = document.getElementById('trending-base');
+                if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
             }
-        } catch(e) { /* leave skeletons on failure — no fabricated numbers */ }
+        } catch(e) {
+            this._renderVirtualsUnavailable();
+            const el = document.getElementById('trending-base');
+            if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
+        }
+    },
+
+    // Swaps the four skeleton stat spans for an honest "unavailable" line —
+    // this panel has no keyless fallback (Codex needs a worker-side key), so
+    // an error here should read as "not available", not sit as a permanent
+    // skeleton that looks like it's still loading.
+    _renderVirtualsUnavailable() {
+        const el = document.getElementById('virtuals-stats');
+        if (el) el.innerHTML = '<span class="text-zinc-500 text-sm">Unavailable right now.</span>';
     },
 
     // 0-100, neutral start 50 — VIRTUAL's health from Codex-native signals:
