@@ -229,7 +229,11 @@ the hourly cycle.
   virtuals 4x/day, sentiment 2x/day, macro daily, the two follow-up checks weekly.
   `security_sweep.py` also writes `data/attack-feed.json` (real, dated incidents over a
   rolling 56-day/8-week window from the same hacks feed, powering the site's homepage
-  ticker + "Threat Ledger" section — see `docs/assets/attackfeed.js`) and, for any new
+  ticker + "Threat Ledger" section — see `docs/assets/attackfeed.js`). Each incident carries
+  its own real `source_url` when DeFiLlama's raw feed actually has one (the original
+  disclosure/article — `agents/data_fetchers.py::_incident_source_url()`, checked
+  defensively, never fabricated), separate from VAPE's own `analysis_report` link below —
+  the Threat Ledger links both independently when present. And, for any new
   Base-chain incident it can resolve a real on-chain address for via web search, runs
   `investigate.py`'s actual forensics pipeline against it (`attempt_incident_forensics()`)
   — never a fabricated address, honestly skipped when one can't be found.
