@@ -1,6 +1,6 @@
 """Tests for agents/investigate.py's expert assessment — the real synthesis
 layer added on top of score()'s deterministic verdict. Hermetic:
-agents.llm.ask_vertex_candidate_safe is mocked, no real network/LLM call.
+agents.llm.ask_oci_grok_safe is mocked, no real network/LLM call.
 """
 from unittest import mock
 
@@ -9,7 +9,7 @@ from agents.llm import FRONTIER_ORDER
 
 
 def _call(response_text):
-    with mock.patch("agents.llm.ask_vertex_candidate_safe", return_value=(response_text, "xai_1")) as m:
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(response_text, "xai_1")) as m:
         result = inv._expert_assessment(
             "0x" + "aa" * 20, "TOKEN", "8453", "REJECT", 10, ["HONEYPOT"], [],
             {"is_honeypot": "1"}, {"symbol": "TOKEN"}, {"is_contract": True}, {},
@@ -34,7 +34,7 @@ def test_disagree_response_is_parsed_correctly():
 
 
 def test_llm_unavailable_returns_none():
-    with mock.patch("agents.llm.ask_vertex_candidate_safe", return_value=("[llm unavailable: no keys]", None)):
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("[llm unavailable: no keys]", None)):
         result = inv._expert_assessment(
             "0x" + "aa" * 20, "TOKEN", "8453", "REJECT", 10, [], [],
             {}, {}, {}, {}, [], None, [], None, None,
@@ -43,7 +43,7 @@ def test_llm_unavailable_returns_none():
 
 
 def test_exception_is_swallowed():
-    with mock.patch("agents.llm.ask_vertex_candidate_safe", side_effect=RuntimeError("boom")):
+    with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=RuntimeError("boom")):
         result = inv._expert_assessment(
             "0x" + "aa" * 20, "TOKEN", "8453", "REJECT", 10, [], [],
             {}, {}, {}, {}, [], None, [], None, None,

@@ -227,6 +227,17 @@ the hourly cycle.
   `attack_lessons_state.json`) to `skillforge/memory/findings.jsonl`, surfaced in the
   report's "Lessons Learned" section and per-incident in `data/attack-feed.json`/the
   Threat Ledger UI. Nothing here is LLM-guessed — see this module's design law above.
+- **`hack_agent.py`** [OK] — writes a real, standalone threat analysis for every incident
+  in `data/attack-feed.json`'s window, not just the rule-based lesson tag above. Grounded
+  only in that same feed's real fields plus one live web search for public writeups —
+  never invents a detail. Written by OCI-hosted xAI Grok 4.3 first (`agents/llm.py::
+  ask_oci_grok()`), falling back through `FRONTIER_ORDER` like every other analyst call
+  if OCI isn't configured or errors. Idempotent (`skillforge/memory/threat_analysis_state.
+  json`); patches each incident's `analysis_report` path back onto `data/attack-feed.json`
+  every run (which `security_sweep.py` regenerates fresh each cycle with no knowledge of
+  this field), so `docs/assets/attackfeed.js` can render a real per-incident "Full
+  analysis" link, not just the feed-wide source-report link. Own schedule
+  (`threat-analysis.yml`, 6-hourly) and module, independent of the sweep pipeline.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes

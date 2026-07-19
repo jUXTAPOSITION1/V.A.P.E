@@ -10,6 +10,13 @@ import { resolveProtocolLogo } from './icons.js';
 const ATTACK_FEED_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/attack-feed.json';
 const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
 
+// agents/hack_agent.py writes one real, standalone analysis per incident
+// (grounded only in this same feed's real fields, plus a live web search)
+// and patches its path back onto the incident as `analysis_report` — every
+// run, since security_sweep.py regenerates this whole file fresh each cycle
+// with no knowledge of that field. Only incidents hack_agent.py has actually
+// reached carry it; nothing here is ever a placeholder link.
+
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -213,7 +220,10 @@ const AttackFeed = {
             </div>
             <div class="text-zinc-500 text-xs leading-relaxed">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
             ${this._lessonHtml(item.lesson)}
-            <div class="text-[10.5px] text-zinc-700 font-mono mt-0.5">${escapeHtml(item.date)} · ${escapeHtml(ago(item.date))}</div>
+            <div class="flex items-center justify-between gap-3 mt-0.5">
+                <div class="text-[10.5px] text-zinc-700 font-mono">${escapeHtml(item.date)} · ${escapeHtml(ago(item.date))}</div>
+                ${item.analysis_report ? `<a href="${REPORT_BLOB_BASE}${escapeHtml(item.analysis_report)}" target="_blank" rel="noopener" class="text-[10.5px] text-rose-400/80 hover:text-rose-400 hover:underline inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-magnifying-glass text-[9px]"></i>Full analysis</a>` : ''}
+            </div>
         </div>`;
     },
 

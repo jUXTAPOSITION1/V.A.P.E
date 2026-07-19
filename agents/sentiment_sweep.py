@@ -79,12 +79,12 @@ def run():
         "2. Narrative Shifts — how this compares to what you'd expect from the real Fear & Greed "
         "reading, and any tension between the numeric mood and the qualitative narrative."
     )
-    # ask_vertex_candidate_safe() tries VAPE's own Vertex-tuned model first if
-    # VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to exactly the
-    # same frontier tier/order as before otherwise — a run without the token
-    # configured behaves identically to before this change.
-    narrative, provider = llm.ask_vertex_candidate_safe(system, user, tier="frontier", max_tokens=2200,
-                                                       provider_order=llm.FRONTIER_ORDER)
+    # ask_oci_grok_safe() tries OCI-hosted Grok 4.3 first, falling back to
+    # VAPE's Vertex-tuned model (if VAPE_VERTEX_ACCESS_TOKEN is set), falling
+    # back further to the same frontier tier/order as before — a run with
+    # neither configured behaves identically to before this change.
+    narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2200,
+                                                 provider_order=llm.FRONTIER_ORDER)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Sentiment Sweep Report — {stamp}
