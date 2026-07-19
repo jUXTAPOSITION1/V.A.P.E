@@ -67,7 +67,7 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.virtuals(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.virtuals(), this.predictionMarkets(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -702,6 +702,40 @@ const App = {
                     class="shrink-0 text-[10px] px-2 py-1 border border-white/10 hover:border-white/30 whitespace-nowrap">Hire deep-dive</button>
             </div>`;
         }).join('') : '<div class="text-zinc-500 text-sm">Holder data unavailable right now.</div>';
+    },
+
+    // Crypto/Base-relevant prediction-market odds from Polymarket + Kalshi
+    // (both free, keyless) via the worker's /prediction-markets route
+    // (worker/src/lib/predictionMarkets.ts) — same free-display + paid-x402
+    // dual pattern as everything else on this panel.
+    async predictionMarkets() {
+        const el = document.getElementById('prediction-markets');
+        if (!el) return;
+        if (!WORKER_BASE) { el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>'; return; }
+        try {
+            const res = await fetch(`${WORKER_BASE}/prediction-markets?limit=10`).then(r => r.json());
+            if (!res || res.error || !Array.isArray(res.markets)) {
+                el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
+                return;
+            }
+            el.innerHTML = res.markets.length ? res.markets.map((m) => {
+                const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
+                    : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
+                const pctLabel = yesPrice != null ? Math.round(yesPrice * 100) + '% Yes' : '—';
+                const platformLabel = m.platform === 'polymarket' ? 'Polymarket' : 'Kalshi';
+                return `
+                <a href="${m.url || '#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                    <span class="text-[10px] px-1.5 py-0.5 border border-white/10 text-zinc-400 shrink-0 whitespace-nowrap">${platformLabel}</span>
+                    <div class="min-w-0 flex-1 text-xs sm:text-sm truncate">${this._esc(m.question || '')}</div>
+                    <div class="text-right shrink-0 w-20">
+                        <div class="stat text-sm">${pctLabel}</div>
+                        <div class="text-[10px] text-zinc-500">${fmtUsd(m.volume)} vol</div>
+                    </div>
+                </a>`;
+            }).join('') : '<div class="text-zinc-500 text-sm">No crypto-relevant prediction markets right now.</div>';
+        } catch (e) {
+            el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
+        }
     },
 
     // VAPE Score for a trending Base token — same 0-100/neutral-50/skip-on-

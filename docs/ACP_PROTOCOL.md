@@ -30,7 +30,7 @@ job.created ──► set-budget ──► job.funded ──► submit ──►
 | `submitted` | client | `acp client complete` / `reject` |
 | `completed` | — | escrow released to VAPE (terminal) |
 
-## Live offerings (29)
+## Live offerings (30)
 Each offering maps to a verified SKILLFORGE tool that produces **real data only**.
 
 | Offering | Price (USDC) | SLA | Backing tool |
@@ -52,12 +52,14 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | **bounty_deep_dive** | **1.00** | **async, no fixed SLA** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review — a submission-ready PoC with full technical detail. Supply an address (Solidity/EVM) or a GitHub owner/repo (any other language, e.g. Move/Sui, via `agents/external_audit.py`) to scope it to a specific bounty program. |
 
 ### Market-data tools
-14 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
 tools carry real hosted logos; token tools carry the token's DexScreener logo.
-Every result is real data or an honest `{error}` — never fabricated. 13 are
-0.01 USDC each (backed by the keyless DefiLlama API); `wallet_pnl_deepdive`
-is priced separately since it's a richer, Codex-backed deliverable.
+Every result is real data or an honest `{error}` — never fabricated. 14 are
+0.01 USDC each (13 backed by the keyless DefiLlama API, plus
+`prediction_market_odds` backed by the keyless Polymarket/Kalshi APIs);
+`wallet_pnl_deepdive` is priced separately since it's a richer, Codex-backed
+deliverable.
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|
@@ -75,6 +77,7 @@ is priced separately since it's a richer, Codex-backed deliverable.
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
 | **wallet_pnl_deepdive** | **0.25** | 5m | `address`, `chain` | Real balances + realized P&L (USD/%), volume, tokens traded, and a P&L chart, via Codex |
+| prediction_market_odds | 0.01 | 5m | optional `limit` | Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume |
 
 ## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
@@ -110,7 +113,7 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 21 of 29 offerings —
+- [OK] End-to-end deliverable automation for 22 of 30 offerings —
   `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
   `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
   the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,

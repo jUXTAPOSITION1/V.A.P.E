@@ -14,14 +14,14 @@ while holding the line: **maximum capability, lowest possible compute, real data
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 29 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 30 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
-**21 of 29 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+**22 of 30 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
 `HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
 the x402 side) covers all of them:
 
@@ -37,6 +37,7 @@ the x402 side) covers all of them:
 | community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
 | 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
 | wallet_pnl_deepdive | 0.25 | `agents/codex_data.py` / `worker/src/lib/codex.ts` (Codex.io: balances + realized P&L + P&L chart) | [OK] auto, x402 |
+| prediction_market_odds | 0.01 | `agents/prediction_markets.py` / `worker/src/lib/predictionMarkets.ts` (Polymarket + Kalshi: crypto/Base-relevant odds, ranked by volume) | [OK] auto, x402 |
 | deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
 | forensics_deep | 2.00 | wallet_trace + contract_recon | [TBD] manual — wallet_trace itself is now [OK] Alchemy-backed and live-verified (PR #145); an auto-handler for this offering still isn't wired |
 | wallet_recon | 0.03 | base_rpc / wallet_trace | [TBD] manual, same gap as forensics_deep |
@@ -192,7 +193,7 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 29 offerings auto-fulfill.
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 22 of 30 offerings auto-fulfill.
 2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/
