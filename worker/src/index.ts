@@ -1,16 +1,17 @@
 /**
- * VAPE x402 payment worker — pay-per-call access to 21 of the 29 "auto" ACP
- * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
- * 29-offering catalog; the other 8 need the SKILLFORGE tool tier and are
- * hired via a real ACP job instead). Also hosts a few free, unpaid Alchemy-
- * backed reliability endpoints (/portfolio, /nfts, /network-status, /prices,
+ * VAPE x402 payment worker — pay-per-call access to 22 of the 30 "auto"
+ * ACP offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the
+ * full catalog; the other 8 need the SKILLFORGE tool tier and are hired via
+ * a real ACP job instead). Also hosts a few free, unpaid Alchemy-backed
+ * reliability endpoints (/portfolio, /nfts, /network-status, /prices,
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
  * direct public-RPC calls when this worker is deployed and configured, plus
- * two free Codex.io-backed routes (/virtuals-snapshot, /trending-base) for
- * the Live Intelligence Feed's Virtuals Protocol panel and trending-tokens
- * list — Codex needs a bearer key that can't ship to the browser, so these
- * can't be a direct client-side fetch the way DefiLlama/CoinGecko are — and
- * one free, fully keyless Polymarket/Kalshi-backed route (/prediction-markets).
+ * three free Codex.io-backed routes (/virtuals-snapshot, /trending-base,
+ * /new-launches) for the Live Intelligence Feed's Virtuals Protocol panel,
+ * trending-tokens list, and newest-launches feed — Codex needs a bearer key
+ * that can't ship to the browser, so these can't be a direct client-side
+ * fetch the way DefiLlama/CoinGecko are — and one free, fully keyless
+ * Polymarket/Kalshi-backed route (/prediction-markets).
  *
  * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
  * facilitator) and Coinbase Developer Platform's hosted one — see
@@ -424,16 +425,23 @@ app.get("/cost-basis", rateLimiter("cost-basis", 10, 60), cache({ cacheName: "va
 // VIRTUAL token's own price/volume/liquidity + holder concentration, all
 // via Codex.io (see lib/codex.ts) — replaces an earlier CoinGecko+DefiLlama
 // version of this panel. Free, unpaid, same rate-limit+cache pattern as
-// /portfolio above; 503s if CODEX_API_KEY isn't configured.
+// /portfolio above; 503s if CODEX_API_KEY isn't configured. max-age=300
+// (matches the site's own 5-minute auto-refresh interval, app.js's
+// setInterval) rather than a tighter TTL — Codex's Free-tier plan caps at
+// 10,000 requests/month shared across every route below, and this worker
+// has no per-key request budget of its own, so the cache TTL IS the budget
+// control; a 30s TTL under steady traffic could burn the whole month's
+// quota in days.
 const VIRTUAL_TOKEN_ADDRESS = "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b";
-app.get("/virtuals-snapshot", rateLimiter("virtuals-snapshot", 20, 60), cache({ cacheName: "vape-virtuals-snapshot", cacheControl: "max-age=30" }), async (c) => {
+app.get("/virtuals-snapshot", rateLimiter("virtuals-snapshot", 20, 60), cache({ cacheName: "vape-virtuals-snapshot", cacheControl: "max-age=300" }), async (c) => {
   if (!c.env.CODEX_API_KEY) return c.json({ error: "virtuals snapshot not configured" }, 503);
   try {
-    const [detail, holders] = await Promise.all([
+    const [detail, holders, bars] = await Promise.all([
       codex.tokenDetail(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID),
       codex.tokenHolders(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID, 10),
+      codex.tokenBars(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID, "1D", 30),
     ]);
-    return c.json({ ts: new Date().toISOString(), address: VIRTUAL_TOKEN_ADDRESS, detail, holders });
+    return c.json({ ts: new Date().toISOString(), address: VIRTUAL_TOKEN_ADDRESS, detail, holders, bars });
   } catch (e) {
     return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
@@ -442,8 +450,9 @@ app.get("/virtuals-snapshot", rateLimiter("virtuals-snapshot", 20, 60), cache({ 
 // Trending Base tokens ranked by Codex's own volume/liquidity signal, each
 // best-effort tagged `isVirtuals` (see lib/codex.ts::isVirtualsToken) —
 // "trending on Base, tagged if Virtuals-launched", not a fabricated
-// "Virtuals-only" feed dressed up as one.
-app.get("/trending-base", rateLimiter("trending-base", 20, 60), cache({ cacheName: "vape-trending-base", cacheControl: "max-age=60" }), async (c) => {
+// "Virtuals-only" feed dressed up as one. max-age=300 for the same shared
+// 10k/month Codex budget reason as /virtuals-snapshot above.
+app.get("/trending-base", rateLimiter("trending-base", 20, 60), cache({ cacheName: "vape-trending-base", cacheControl: "max-age=300" }), async (c) => {
   if (!c.env.CODEX_API_KEY) return c.json({ error: "trending tokens not configured" }, 503);
   try {
     const limit = Math.min(Number(c.req.query("limit")) || 20, 50);
@@ -455,6 +464,28 @@ app.get("/trending-base", rateLimiter("trending-base", 20, 60), cache({ cacheNam
       isVirtuals: t.token?.address ? await codex.isVirtualsToken(t.token.address) : false,
     })));
     return c.json({ ts: trending.ts, tokens: tagged });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
+  }
+});
+
+// Newest tokens on Base by creation time (see lib/codex.ts::newLaunches) —
+// closes the "launchpad feeds" gap left open in the original 4-PR plan:
+// Codex's launch events are otherwise subscription-only, but ranking
+// filterTokens by createdAt DESC is a real, poll-friendly substitute.
+// Same isVirtuals tagging and max-age=300 budget reasoning as /trending-base.
+app.get("/new-launches", rateLimiter("new-launches", 20, 60), cache({ cacheName: "vape-new-launches", cacheControl: "max-age=300" }), async (c) => {
+  if (!c.env.CODEX_API_KEY) return c.json({ error: "new launches not configured" }, 503);
+  try {
+    const limit = Math.min(Number(c.req.query("limit")) || 20, 50);
+    const launches = await codex.newLaunches(c.env.CODEX_API_KEY, [codex.BASE_NETWORK_ID], limit);
+    if (launches.error) return c.json(launches, 502);
+    const tokens = (launches.tokens as codex.TrendingTokenRow[]) || [];
+    const tagged = await Promise.all(tokens.map(async (t) => ({
+      ...t,
+      isVirtuals: t.token?.address ? await codex.isVirtualsToken(t.token.address) : false,
+    })));
+    return c.json({ ts: launches.ts, tokens: tagged });
   } catch (e) {
     return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }

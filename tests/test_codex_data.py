@@ -73,9 +73,33 @@ def test_wallet_pnl_chart_parses(monkeypatch):
     assert r["points"][1]["realizedProfitUsd"] == 150.0
 
 
-def test_new_launchpad_tokens_is_honest_placeholder():
+def test_new_launchpad_tokens_parses(monkeypatch):
+    _patch(monkeypatch, {"filterTokens": {"results": [
+        {"priceUSD": 0.002, "volume24": 5000, "createdAt": 1720000000,
+         "token": {"name": "Fresh", "symbol": "FRESH"}},
+    ]}})
     r = cd.new_launchpad_tokens()
-    assert r["error"] == "requires_websocket_subscription"
+    assert r["tokens"][0]["token"]["symbol"] == "FRESH"
+
+
+def test_new_launchpad_tokens_propagates_error(monkeypatch):
+    _patch(monkeypatch, {"error": "HTTP 500"})
+    assert cd.new_launchpad_tokens().get("error") == "HTTP 500"
+
+
+def test_token_bars_parses(monkeypatch):
+    _patch(monkeypatch, {"getBars": {
+        "t": [1720000000, 1720086400],
+        "o": [1.0, 1.1], "h": [1.2, 1.3], "l": [0.9, 1.0], "c": [1.1, 1.2], "v": [1000, 2000],
+    }})
+    r = cd.token_bars("0xToken", 8453)
+    assert len(r["points"]) == 2
+    assert r["points"][1]["c"] == 1.2
+
+
+def test_token_bars_propagates_error(monkeypatch):
+    _patch(monkeypatch, {"error": "HTTP 500"})
+    assert cd.token_bars("0xToken", 8453).get("error") == "HTTP 500"
 
 
 def test_query_without_api_key_returns_no_key_error(monkeypatch):

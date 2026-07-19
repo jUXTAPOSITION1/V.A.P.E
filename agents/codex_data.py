@@ -8,7 +8,7 @@ POST helper, every function returns real data or a `{"error": ...}` dict and
 NEVER raises — so a caller always degrades honestly rather than crashing.
 Unlike DefiLlama, Codex requires an API key (CODEX_API_KEY) and is a paid
 service with a free tier — `_query()` enforces a conservative, overridable
-daily request cap (CODEX_DAILY_REQUEST_CAP, default 500) so a bug or a
+daily request cap (CODEX_DAILY_REQUEST_CAP, default 200) so a bug or a
 tight polling loop can't quietly blow through free-tier quota; requests
 past the cap return `{"error": "daily_request_cap_reached", ...}` rather
 than firing.
@@ -25,12 +25,22 @@ Confirmed gaps (as of this module's introduction):
   Growth/Enterprise plans — not reachable on a free-tier key. VAPE sources
   prediction-market data straight from Polymarket's own free, keyless
   Gamma API instead (see agents/prediction_markets.py), not through Codex.
-- Launchpad new-token tracking is exposed via Codex as a GraphQL
-  *subscription* (onLaunchpadTokenEvent/Batch), not a plain query — this
-  stdlib-urllib client can't hold a WebSocket open the way a cron-style
-  agent run needs to. `new_launchpad_tokens()` is a placeholder that
-  returns `{"error": "requires_websocket_subscription", ...}` until a
-  poll-friendly query is confirmed against Codex's real schema.
+
+Budget note: the Free-tier plan this key runs on caps out at 10,000
+requests/month total, shared with every worker-side Codex route
+(worker/src/lib/codex.ts's /virtuals-snapshot, /trending-base,
+/new-launches, and wallet_pnl_deepdive). DEFAULT_DAILY_REQUEST_CAP below
+is a conservative per-process safety net for THIS module specifically
+(mainly hit by buyer-driven wallet_pnl_deepdive ACP jobs, not a cron
+sweep) — the worker's cache TTLs (see index.ts) are the primary defense
+against the shared key exceeding the monthly ceiling, since the worker
+has no per-key request budget of its own.
+
+new_launchpad_tokens() was originally left as an honest placeholder,
+believing Codex only exposed launch events via a GraphQL subscription
+(onLaunchpadTokenEvent/Batch) this urllib-based client can't hold open.
+Codex's own docs confirm filterTokens supports ranking by `createdAt`
+DESC — a plain poll-friendly query — so it's now implemented for real.
 """
 import json
 import os
@@ -54,7 +64,11 @@ GRAPHQL_URL = "https://graph.codex.io/graphql"
 UA = {"User-Agent": "VAPE-PrivateEye/1.0 (+https://github.com/jUXTAPOSITION1/V.A.P.E)"}
 
 API_KEY = os.getenv("CODEX_API_KEY", "")
-DEFAULT_DAILY_REQUEST_CAP = 500
+# 200/day = 6,000/month ceiling for this module alone, leaving headroom in
+# the shared 10k/month Free-tier budget for the worker's routes (see the
+# module docstring's Budget note) — was 500/day (15,000/month, already over
+# budget on its own) before this was tightened.
+DEFAULT_DAILY_REQUEST_CAP = 200
 _request_count = {"date": None, "count": 0}
 
 
@@ -227,14 +241,57 @@ def wallet_pnl_chart(wallet_address, network_id, resolution="1D"):
 
 
 # ── Launchpad (new token launches) ───────────────────────────────────────────
-def new_launchpad_tokens(*_args, **_kwargs):
-    """Codex exposes launchpad token creation/graduation events as a
-    GraphQL *subscription* (onLaunchpadTokenEvent / onLaunchpadTokenEventBatch),
-    not a plain request/response query — this stdlib-urllib client has no
-    WebSocket support, and a cron-style agent run can't hold a subscription
-    open between runs anyway. Left as an explicit, honest placeholder rather
-    than a fabricated query name; needs a real schema check (a poll-friendly
-    query, if Codex has one) before this can return real data."""
-    return {"error": "requires_websocket_subscription",
-            "note": "Codex launchpad events are subscription-only (onLaunchpadTokenEvent"
-                    "/onLaunchpadTokenEventBatch) — see this function's docstring."}
+def new_launchpad_tokens(network_ids=None, limit=20):
+    """Newest tokens by creation time — a real, poll-friendly alternative to
+    Codex's subscription-only launchpad events (onLaunchpadTokenEvent/Batch,
+    which this urllib-based client can't hold open). Same filterTokens query
+    trending_tokens() uses, just ranked by createdAt DESC instead of volume."""
+    query = """
+    query NewLaunches($limit: Int!, $networkFilter: [Int!]) {
+      filterTokens(limit: $limit, filters: {network: $networkFilter},
+                    rankings: {attribute: createdAt, direction: DESC}) {
+        results {
+          priceUSD
+          volume24
+          liquidity
+          marketCap
+          createdAt
+          token { name symbol address networkId }
+        }
+      }
+    }"""
+    d = _query(query, {"limit": limit, "networkFilter": network_ids},
+               ttl=180, cache_key=f"codex_newlaunch_{network_ids}_{limit}")
+    if _err(d):
+        return d
+    results = ((d.get("filterTokens") or {}).get("results")) or []
+    return {"ts": _now_iso(), "tokens": results}
+
+
+# ── OHLCV candlesticks (getBars) ─────────────────────────────────────────────
+_RESOLUTION_SECONDS = {"1": 60, "5": 300, "15": 900, "60": 3600, "240": 14400, "1D": 86400}
+
+
+def token_bars(token_address, network_id, resolution="1D", count=30):
+    """Real OHLCV candlesticks for a token — resolution is Codex's own
+    string format (e.g. '1', '5', '60', '1D'). `count` bars back from now."""
+    import time as _time
+    to_ts = int(_time.time())
+    from_ts = to_ts - count * _RESOLUTION_SECONDS.get(resolution, 86400)
+    query = """
+    query TokenBars($symbol: String!, $from: Int!, $to: Int!, $resolution: String!) {
+      getBars(symbol: $symbol, from: $from, to: $to, resolution: $resolution) {
+        t o h l c v
+      }
+    }"""
+    symbol = f"{token_address}:{network_id}"
+    d = _query(query, {"symbol": symbol, "from": from_ts, "to": to_ts, "resolution": resolution},
+               ttl=300, cache_key=f"codex_bars_{symbol}_{resolution}_{count}")
+    if _err(d):
+        return d
+    bars = d.get("getBars") or {}
+    times = bars.get("t") or []
+    points = [{"t": times[i], "o": bars["o"][i], "h": bars["h"][i], "l": bars["l"][i],
+               "c": bars["c"][i], "v": bars["v"][i]} for i in range(len(times))]
+    return {"ts": _now_iso(), "token_address": token_address, "network_id": network_id,
+            "resolution": resolution, "points": points}
