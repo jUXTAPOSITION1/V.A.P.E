@@ -108,16 +108,16 @@ const App = {
             this._set('bcc-audits', files.filter(f=>f.isAudit).length);
             if (!files.length) throw 0;
             auditEl.innerHTML = files.map(f => `
-                <a href="${f.url}" target="_blank" class="card-h glass rounded-xl p-4 block">
+                <a href="${f.url}" target="_blank" class="card-h diff-row block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-500'}"></i>
-                        <span class="text-[10px] px-2 py-0.5 rounded ${f.stopped?'bg-white/5 text-zinc-500':'bg-emerald-500/10 text-emerald-500'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
+                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-emerald-500'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
                     </div>
-                    <div class="font-semibold text-xs leading-snug capitalize">${this._esc(f.name)}</div>
+                    <div class="text-xs leading-snug capitalize">${this._esc(f.name)}</div>
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
                 </a>`).join('');
         } catch(e) {
-            auditEl.innerHTML = '<div class="sm:col-span-2 lg:col-span-4 text-zinc-500 text-sm">No audits filed yet — <a class="text-cyan-400" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
+            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
         }
     },
 
@@ -145,28 +145,28 @@ const App = {
             if (grid) {
                 const card = o=>`
                     <div class="relative group">
-                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="w-full text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-cyan-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
-                        <span class="font-mono text-xs text-zinc-200">${o.name}</span>
-                        <span class="font-display text-cyan-400 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        <span class="text-xs text-zinc-200">${o.name}</span>
+                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-cyan-400/80 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
+                      <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
                     </button>
-                    ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-cyan-400 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+                    ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-zinc-200 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
                     </div>`;
                 grid.innerHTML = x402able.map(card).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {
                 acpGrid.innerHTML = manual.map(o=>`
-                    <button onclick="Hire.openAcp('${o.name}')" class="text-left bg-white/5 hover:bg-white/10 hover:ring-1 hover:ring-amber-500/50 transition rounded-xl p-3 flex flex-col gap-1 cursor-pointer">
+                    <button onclick="Hire.openAcp('${o.name}')" class="text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
                       <div class="flex items-center justify-between gap-2">
-                        <span class="font-mono text-xs text-zinc-200">${o.name}</span>
-                        <span class="font-display text-amber-300 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        <span class="text-xs text-zinc-200">${o.name}</span>
+                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
-                      <span class="text-[9px] text-brass-400 uppercase tracking-wider" style="color:var(--brass)"><i class="fa-solid fa-scale-balanced"></i> ACP · select to commission</span>
+                      <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-scale-balanced"></i> ACP · select to commission</span>
                     </button>`).join('');
             }
             const disc = document.getElementById('rep-disclaimer');
@@ -188,13 +188,12 @@ const App = {
         if (upd) upd.textContent = 'ledger ' + this._ago(generatedAt);
         if (!builds.length) {
             el.innerHTML = `<div class="md:col-span-2 text-center py-8 text-zinc-500 text-sm">
-                <i class="fa-solid fa-drafting-compass text-2xl mb-3 opacity-50 block"></i>
                 No open build proposals right now — the last cycle found no gap worth building against
                 (tool registry clean, no fresh findings to ground a proposal in). Checks run 2x/day automatically.
             </div>`;
             return;
         }
-        const statusStyle = { merged: ['#10b981','Merged'], open: ['#22d3ee','Open · awaiting review'], closed: ['#71717a','Closed'] };
+        const statusStyle = { merged: ['#4ade80','Merged'], open: ['#a1a1aa','Open · awaiting review'], closed: ['#52525b','Closed'] };
         el.innerHTML = builds.map(b => {
             const [col, label] = statusStyle[b.status] || statusStyle.closed;
             const v = b.verification || {};
@@ -203,13 +202,13 @@ const App = {
             if (v.warn) vBits.push(`<span class="text-amber-400">[WARN] ${v.warn}</span>`);
             if (v.fail) vBits.push(`<span class="text-rose-400">[FAIL] ${v.fail}</span>`);
             return `
-            <a href="${b.url}" target="_blank" rel="noopener" class="card-h glass rounded-xl p-4 block">
+            <a href="${b.url}" target="_blank" rel="noopener" class="card-h diff-row block">
                 <div class="flex items-start justify-between gap-2 mb-1.5">
-                    <div class="font-semibold text-sm leading-snug min-w-0">${this._esc(b.title)}</div>
-                    <span class="text-[10px] px-2 py-0.5 rounded shrink-0 whitespace-nowrap" style="color:${col};background:${col}1a">${label}</span>
+                    <div class="text-sm leading-snug min-w-0">${this._esc(b.title)}</div>
+                    <span class="text-[10px] shrink-0 whitespace-nowrap" style="color:${col}">${label}</span>
                 </div>
                 <div class="text-xs text-zinc-500 flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <span class="text-indigo-400">${b.kind==='self-directed'?'VAPE self-directed':'Human-requested'}</span>
+                    <span>${b.kind==='self-directed'?'VAPE self-directed':'Human-requested'}</span>
                     <span>· #${b.number} · ${this._ago(b.created_at)}</span>
                     ${vBits.length?`<span>· verify: ${vBits.join(' ')}</span>`:''}
                 </div>
@@ -230,11 +229,11 @@ const App = {
             const ctx = document.getElementById('tvlChart');
             if (this._chart) this._chart.destroy();
             const g = ctx.getContext('2d').createLinearGradient(0,0,0,200);
-            g.addColorStop(0,'rgba(34,211,238,0.35)'); g.addColorStop(1,'rgba(34,211,238,0)');
+            g.addColorStop(0,'rgba(74,222,128,0.30)'); g.addColorStop(1,'rgba(74,222,128,0)');
             this._chart = new Chart(ctx, {
                 type:'line',
-                data:{ labels, datasets:[{ data, borderColor:'#22d3ee', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
-                options:{ responsive:true, maintainAspectRatio:true, plugins:{legend:{display:false},
+                data:{ labels, datasets:[{ data, borderColor:'#4ade80', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
+                options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},
                     tooltip:{callbacks:{label:c=>'$'+(c.parsed.y/1e9).toFixed(3)+'B'}}},
                     scales:{ y:{ticks:{color:'#52525b',callback:v=>'$'+(v/1e9).toFixed(1)+'B'},grid:{color:'rgba(255,255,255,0.04)'}},
                              x:{ticks:{color:'#52525b',maxTicksLimit:8},grid:{display:false}} } }
@@ -310,14 +309,14 @@ const App = {
         const vc = verdict[1];
         const name = gp.token_name ? `${this._esc(gp.token_name)} (${this._esc(gp.token_symbol)})` : this._shortAddr(addr);
         el.innerHTML = `
-            <div class="glass rounded-2xl p-5">
+            <div class="panel-sm">
                 <div class="flex items-center justify-between mb-3">
                     <a href="${this._explorerUrl(addr, chain)}" target="_blank" rel="noopener" class="flex items-center gap-2 min-w-0 hover:opacity-80">
                         ${this._iconImg(addr, chain, 28)}
-                        <div class="font-semibold truncate">${name}</div>
+                        <div class="truncate">${name}</div>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60 shrink-0"></i>
                     </a>
-                    <span class="px-3 py-1 rounded-lg font-display shrink-0" style="color:${vc};background:${vc}1a">${verdict[0]}</span>
+                    <span class="px-3 py-1 border shrink-0" style="color:${vc};border-color:${vc}">${verdict[0]}</span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                     <div><div class="text-zinc-500">Holders</div><div class="stat">${gp.holder_count?Number(gp.holder_count).toLocaleString():'—'}</div></div>
@@ -325,7 +324,7 @@ const App = {
                     <div><div class="text-zinc-500">Honeypot</div><div class="${gp.is_honeypot==='1'?'text-rose-400':'text-emerald-500'}">${gp.is_honeypot==='1'?'YES':'no'}</div></div>
                     <div><div class="text-zinc-500">Buy/Sell tax</div><div>${gp.buy_tax!=null?(gp.buy_tax*100).toFixed(1):'?'}% / ${gp.sell_tax!=null?(gp.sell_tax*100).toFixed(1):'?'}%</div></div>
                 </div>
-                <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block rounded px-2 py-0.5 mr-1 mb-1" style="color:${vc};background:${vc}1a">${f}</span>`).join(''):'<span class="text-emerald-500">No risk flags from real on-chain scan.</span>'}</div>
+                <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block border px-2 py-0.5 mr-1 mb-1" style="color:${vc};border-color:${vc}">${f}</span>`).join(''):'<span class="text-emerald-500">No risk flags from real on-chain scan.</span>'}</div>
                 ${note?`<div class="mt-2 text-[10px] text-amber-400">${this._esc(note)}</div>`:''}
                 <div class="mt-2 text-[10px] text-zinc-600">Real data: GoPlus token_security + DexScreener liquidity. Not investment advice.</div>
             </div>`;
@@ -337,7 +336,7 @@ const App = {
         const addr = (document.getElementById('hunt-target').value||'').trim();
         const chain = document.getElementById('hunt-chain').value;
         if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { el.innerHTML = '<span class="text-amber-400">Enter a valid 0x… 40-hex contract address.</span>'; return; }
-        el.innerHTML = '<span class="text-cyan-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real data (GoPlus + DexScreener)…</span>';
+        el.innerHTML = '<span class="text-zinc-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real data (GoPlus + DexScreener)…</span>';
         try {
             const [gpRaw, dsRaw] = await Promise.all([
                 this._safeFetchJson(`https://api.gopluslabs.io/api/v1/token_security/${chain}?contract_addresses=${addr}`),
@@ -538,15 +537,15 @@ const App = {
             const icon = p.info?.imageUrl || this._tokenIcon(p.baseToken?.address, 'base');
             const priceUsd = p.priceUsd != null ? Number(p.priceUsd) : null;
             return `
-            <a href="${p.url}" target="_blank" rel="noopener" class="card-h glass rounded-xl px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 overflow-hidden">
+            <a href="${p.url}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
                 <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
                 ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                 <div class="min-w-0 flex-1">
-                    <div class="font-semibold truncate">${this._esc(p.baseToken?.symbol||'?')}</div>
+                    <div class="truncate">${this._esc(p.baseToken?.symbol||'?')}</div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(p.baseToken?.name||'')}</div>
                 </div>
                 <div class="text-right shrink-0 w-16 sm:w-24">
-                    <div class="stat font-display text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
+                    <div class="stat text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs">${typeof chg==='number'?pct(chg):'—'}</div>
                 </div>
                 <div class="text-right shrink-0 hidden sm:block w-20">
@@ -565,16 +564,16 @@ const App = {
                 .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category, logo:p.logo}))
                 .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
             el.innerHTML = base.map((p,i)=>`
-                <div class="card-h glass rounded-xl px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3">
+                <div class="card-h diff-row flex items-center gap-2 sm:gap-3">
                     <span class="text-zinc-600 text-sm w-4 sm:w-5 shrink-0">${i+1}</span>
                     ${p.logo?`<img src="${p.logo}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover shrink-0 sm:w-7 sm:h-7" onerror="this.remove()">`:''}
                     <div class="min-w-0 flex-1">
-                        <div class="font-semibold truncate">${p.name}</div>
+                        <div class="truncate">${p.name}</div>
                         <div class="text-xs text-zinc-500 truncate">${p.cat||''}</div>
                     </div>
                     <div class="spark shrink-0 hidden sm:block" data-slug="${p.slug||''}" style="width:72px;height:26px"></div>
                     <div class="text-right shrink-0 w-16 sm:w-24">
-                        <div class="stat font-display text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
+                        <div class="stat text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
                         <div class="text-xs">${pct(p.c1)}</div>
                     </div>
                 </div>`).join('');
@@ -659,17 +658,17 @@ const App = {
                 const total = ops ? (ops.checklist||[]).length : 0;
                 const search = `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase();
                 return `
-                <a href="${b.url||'#'}" target="_blank" data-search="${this._esc(search)}" class="card-h glass rounded-xl p-4 block">
+                <a href="${b.url||'#'}" target="_blank" data-search="${this._esc(search)}" class="card-h diff-row block">
                     <div class="flex items-start justify-between gap-2">
-                        <div class="font-semibold text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
-                        <div class="text-cyan-400 font-display shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
+                        <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
+                        <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
                     </div>
                     <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
                     ${b.vapeFitReason?`<div class="text-[10px] text-emerald-500/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
-                    ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] bg-white/5 rounded px-1.5 py-0.5 mr-1 mt-2 text-zinc-400">${this._esc(t)}</span>`).join('')}
-                    ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-amber-400">
+                    ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
+                    ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
                         <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
-                        ${ops.vapeReportUrl?`<span class="text-cyan-400"><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
+                        ${ops.vapeReportUrl?`<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
                     </div>`:''}
                 </a>`;
             }).join('');
@@ -683,7 +682,7 @@ const App = {
                 };
             }
         } catch(e){
-            el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No VAPE-fit live bounty program currently tracked — <a class="text-cyan-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            el.innerHTML = `<div class="text-zinc-500 text-sm">No VAPE-fit live bounty program currently tracked — <a class="text-zinc-400 hover:underline" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
             if (searchEl) searchEl.classList.add('hidden');
         }
     },
@@ -700,14 +699,14 @@ const App = {
             const items = (d.reports||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,6);
             if (!items.length) throw new Error('no reports in index');
             el.innerHTML = items.map(r=>`
-                <a href="${r.url}" target="_blank" class="card-h glass rounded-xl px-4 py-3 flex items-start gap-3">
+                <a href="${r.url}" target="_blank" class="card-h diff-row flex items-start gap-3">
                     <i class="fa-solid fa-file-lines text-zinc-500 mt-1 shrink-0"></i>
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center justify-between gap-2">
-                            <span class="font-semibold text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
+                            <span class="text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
                             ${this._pill(r.threat)}
                         </div>
-                        <div class="text-xs text-zinc-500 mt-1 truncate"><span class="text-indigo-400">${this._esc(r.type||'report')}</span> · ${this._ago(r.date)}</div>
+                        <div class="text-xs text-zinc-500 mt-1 truncate">${this._esc(r.type||'report')} · ${this._ago(r.date)}</div>
                         ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1 leading-snug truncate">${this._esc(r.summary)}</div>`:''}
                     </div>
                     <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-[10px] shrink-0 mt-1.5"></i>
@@ -720,12 +719,12 @@ const App = {
                     .sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
                 if (!md.length) throw 0;
                 el.innerHTML = md.map(f=>`
-                    <a href="${f.html_url}" target="_blank" class="card-h glass rounded-lg px-4 py-2.5 flex items-center justify-between text-sm">
+                    <a href="${f.html_url}" target="_blank" class="card-h diff-row flex items-center justify-between text-sm">
                         <span class="flex items-center gap-2 min-w-0"><i class="fa-solid fa-file-lines text-zinc-500"></i><span class="truncate">${f.name}</span></span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-zinc-600 text-xs shrink-0"></i>
                     </a>`).join('');
             } catch (e2) {
-                el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-cyan-400 text-sm">View all reports on GitHub →</a>`;
+                el.innerHTML = `<a href="https://github.com/${REPO}/tree/main/reports" target="_blank" class="text-zinc-400 hover:underline text-sm">View all reports on GitHub →</a>`;
             }
         }
     },
@@ -740,7 +739,7 @@ const App = {
         return '#a1a1aa';
     },
     _pill(v){ if(!v) return ''; const c=this._verdictColor(v);
-        return `<span class="px-2 py-0.5 rounded font-display text-[11px] whitespace-nowrap" style="color:${c};background:${c}1a">${v}</span>`; },
+        return `<span class="px-2 py-0.5 border text-[11px] whitespace-nowrap" style="color:${c};border-color:${c}">${v}</span>`; },
     _ago(iso){ if(!iso) return ''; const d=new Date(iso); if(isNaN(d)) return iso;
         const s=(Date.now()-d)/1e3; if(s<3600) return Math.floor(s/60)+'m ago';
         if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; },
@@ -787,8 +786,8 @@ const App = {
         if(!items.length) return '';
         return `<div class="flex flex-wrap items-center gap-1.5 mt-1.5">${items.map(p=>`<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-zinc-500 whitespace-nowrap max-w-full truncate">${p}</span>`).join('')}</div>`;
     },
-    _iconChip(inner, colorClass='bg-white/10 text-zinc-300'){
-        return `<div class="w-9 h-9 rounded-lg ${colorClass} flex items-center justify-center shrink-0 overflow-hidden">${inner}</div>`;
+    _iconChip(inner, colorClass=''){
+        return `<div class="w-9 h-9 border border-white/10 ${colorClass} flex items-center justify-center shrink-0 overflow-hidden">${inner}</div>`;
     },
     _iconImg(address, chain, size=36, extra=''){
         const src = this._tokenIcon(address, chain);
@@ -820,14 +819,14 @@ const App = {
                     <a href="${explorer||'#'}" target="_blank" rel="noopener" class="flex items-center gap-3 mb-1 ${explorer?'hover:opacity-80':'pointer-events-none'}">
                         ${this._iconImg(inv.target, inv.chain, 40)}
                         <div class="min-w-0">
-                            <div class="font-display text-lg leading-tight truncate">${this._esc(heading)}</div>
+                            <div class="text-lg leading-tight truncate">${this._esc(heading)}</div>
                             ${showName?`<div class="text-xs text-zinc-400 truncate">${this._esc(inv.name)}</div>`:''}
                             ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                         </div>
                     </a>
-                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-cyan-400 font-display">${inv.score}</span></div>`:''}
+                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200">${inv.score}</span></div>`:''}
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
             // hero: latest report
             const rep=(d.latest_summary||{}).report;
@@ -838,10 +837,10 @@ const App = {
                         <div class="text-[10px] uppercase tracking-widest text-zinc-500">Latest Report · ${this._esc(rep.type||'')}</div>
                         ${this._pill(rep.threat)}
                     </div>
-                    <div class="font-display text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
+                    <div class="text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
                     <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
-                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-cyan-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
             this._renderIntel();
         }catch(e){
@@ -857,7 +856,7 @@ const App = {
         const tabsEl = document.getElementById('intel-tabs');
         if (tabsEl) {
             [...tabsEl.querySelectorAll('button[data-tab]')].forEach(b=>{
-                b.className = b.dataset.tab===tab ? 'px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold' : 'px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10';
+                b.className = b.dataset.tab===tab ? 'term-btn term-btn-sm term-btn-active' : 'term-btn term-btn-sm';
             });
         }
         this._renderIntel();
@@ -876,7 +875,7 @@ const App = {
             document.getElementById('intel-filter').innerHTML=
                 [['',' all']].concat(types.map(t=>[t,t])).map(([v,label])=>{
                     const on=(this._typeFilter||'')===v;
-                    return `<button data-type="${v}" class="px-2 py-0.5 rounded ${on?'bg-cyan-600 text-black':'bg-white/5 hover:bg-white/10 text-zinc-300'}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
+                    return `<button data-type="${v}" class="term-btn term-btn-sm ${on?'term-btn-active':''}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
                 }).join('');
         } else { fw.classList.add('hidden'); }
 
@@ -888,15 +887,15 @@ const App = {
                 const showName = i.name && i.name.toLowerCase() !== (sym||'').toLowerCase();
                 const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
                 return `
-                <a href="${i.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
-                    ${icon ? this._iconChip(icon) : this._iconChip('<i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-sm"></i>', 'bg-cyan-500/10')}
+                <a href="${i.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
+                    ${icon ? this._iconChip(icon) : this._iconChip('<i class="fa-solid fa-magnifying-glass-chart text-zinc-400 text-sm"></i>')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="min-w-0 truncate">
-                                <span class="font-mono text-xs">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
+                                <span class="text-xs">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
                                 ${showName?`<span class="text-[11px] text-zinc-500 ml-1.5">${this._esc(i.name)}</span>`:''}
                             </span>
-                            <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-cyan-400 text-xs font-display">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
+                            <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-zinc-300 text-xs">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
                         </div>
                         ${this._metaChips([
                             i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span>`:null,
@@ -911,24 +910,24 @@ const App = {
             let items=d.reports||[];
             if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);
             rows=items.slice(0,40).map(r=>`
-                <a href="${r.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                <a href="${r.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
                     ${this._iconChip('<i class="fa-solid fa-file-lines text-zinc-400 text-sm"></i>')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="font-semibold text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
+                            <span class="text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
                             ${this._pill(r.threat)}
                         </div>
-                        ${this._metaChips([`<span class="text-indigo-400">${this._esc(r.type)}</span>`, this._esc(this._ago(r.date))])}
+                        ${this._metaChips([this._esc(r.type), this._esc(this._ago(r.date))])}
                         ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(r.summary)}</div>`:''}
                     </div>
                 </a>`).join('')||'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
         } else if(tab==='broadcasts'){
             const items=d.broadcasts||[];
             rows=items.length?items.map(b=>`
-                <a href="${b.url}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
-                    ${this._iconChip('<i class="fa-solid fa-tower-broadcast text-cyan-400 text-sm"></i>', 'bg-cyan-500/10')}
+                <a href="${b.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
+                    ${this._iconChip('<i class="fa-solid fa-tower-broadcast text-zinc-400 text-sm"></i>')}
                     <div class="min-w-0 flex-1">
-                        <div class="font-semibold text-sm break-words">${this._esc(b.title||b.file)}</div>
+                        <div class="text-sm break-words">${this._esc(b.title||b.file)}</div>
                         ${this._metaChips([this._esc(this._ago(b.date))])}
                         ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(b.summary)}</div>`:''}
                     </div>
@@ -937,15 +936,15 @@ const App = {
             const items=d.tools||[];
             rows=items.length?items.map(t=>{
                 const ok=t.status==='verified'; const lim=t.known_limitation;
-                const col=ok?'#10b981':(lim?'#fbbf24':'#a1a1aa');
-                return `<a href="${t.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 flex items-start gap-3 overflow-hidden">
+                const col=ok?'#4ade80':(lim?'#fbbf24':'#a1a1aa');
+                return `<a href="${t.url||'#'}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
                     ${this._iconChip(`<i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} text-sm" style="color:${col}"></i>`)}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="font-mono text-sm truncate min-w-0">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
-                            <span class="text-[11px] px-2 py-0.5 rounded shrink-0" style="color:${col};background:${col}1a">${this._esc(t.status||'?')}</span>
+                            <span class="text-sm truncate min-w-0">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
+                            <span class="text-[11px] px-2 py-0.5 border shrink-0" style="color:${col};border-color:${col}">${this._esc(t.status||'?')}</span>
                         </div>
-                        ${this._metaChips([`<span class="text-indigo-400">${this._esc(t.tier)}</span>`, t.purpose?this._esc(t.purpose):null])}
+                        ${this._metaChips([this._esc(t.tier), t.purpose?this._esc(t.purpose):null])}
                     </div>
                 </a>`;
             }).join(''):'<div class="text-zinc-500 text-sm">No tools registered.</div>';
@@ -990,16 +989,16 @@ window.addEventListener('load', () => {
     document.getElementById('tvl-range').addEventListener('click', e => {
         const b = e.target.closest('button'); if (!b) return;
         App._days = +b.dataset.d;
-        [...e.currentTarget.children].forEach(x=>{x.className='px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10';});
-        b.className='px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
         App.chart(App._days);
     });
     // Base Movers tab switching — re-sorts the already-fetched set, no new request
     document.getElementById('movers-tabs').addEventListener('click', e => {
         const b = e.target.closest('button[data-m]'); if (!b) return;
         App._moversTab = b.dataset.m;
-        [...e.currentTarget.children].forEach(x=>{x.className='px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10';});
-        b.className='px-2.5 py-1 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
         App._renderMovers();
     });
     // Enter key launches hunt
@@ -1008,8 +1007,8 @@ window.addEventListener('load', () => {
     document.getElementById('intel-tabs').addEventListener('click', e=>{
         const b=e.target.closest('button[data-tab]'); if(!b) return;
         App._tab=b.dataset.tab; App._typeFilter=null;
-        [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10');
-        b.className='px-3 py-1.5 rounded-lg bg-cyan-600 text-zinc-950 font-semibold';
+        [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='term-btn term-btn-sm');
+        b.className='term-btn term-btn-sm term-btn-active';
         App._renderIntel();
     });
     // Report type filter

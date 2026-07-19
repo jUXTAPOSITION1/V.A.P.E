@@ -23,9 +23,9 @@ function escapeHtml(s) {
 
 function severityClass(amountUsdM) {
     const n = Number(amountUsdM) || 0;
-    if (n >= 10) return { text: 'text-rose-400', pill: 'bg-rose-500/15 text-rose-400', dot: 'bg-rose-500' };
-    if (n >= 1) return { text: 'text-amber-400', pill: 'bg-amber-500/15 text-amber-400', dot: 'bg-amber-500' };
-    return { text: 'text-zinc-400', pill: 'bg-white/10 text-zinc-400', dot: 'bg-zinc-500' };
+    if (n >= 10) return { text: 'text-rose-400', pill: 'border border-rose-400 text-rose-400', dot: 'bg-rose-500' };
+    if (n >= 1) return { text: 'text-amber-400', pill: 'border border-amber-400 text-amber-400', dot: 'bg-amber-500' };
+    return { text: 'text-zinc-400', pill: 'border border-white/20 text-zinc-400', dot: 'bg-zinc-500' };
 }
 
 function fmtLoss(amountUsdM) {
@@ -186,7 +186,7 @@ const AttackFeed = {
 
     _lessonHtml(lesson) {
         if (!lesson) return '';
-        let tone = 'text-cyan-500/80';
+        let tone = 'text-zinc-500';
         let note = lesson.prevention
             ? (lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap — noted'))
             : 'unclassified — investigated anyway';
@@ -211,12 +211,12 @@ const AttackFeed = {
         const sev = severityClass(item.amount_usd_m);
         const chains = (item.chains || []).join(', ') || 'unknown chain';
         return `
-        <div class="flex flex-col gap-1 bg-white/[0.03] hover:bg-white/[0.06] transition rounded-xl px-3.5 py-3">
+        <div class="diff-row flex flex-col gap-1">
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0 flex-1 flex items-center gap-1.5">
-                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="text-zinc-100 text-sm font-medium truncate min-w-0">${escapeHtml(item.name)}</span>
+                    ${this._iconHtml(item.name, 'w-4 h-4')}<span class="text-zinc-100 text-sm truncate min-w-0">${escapeHtml(item.name)}</span>
                 </div>
-                <span class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
+                <span class="shrink-0 px-2.5 py-1 text-xs ${sev.pill}">${fmtLoss(item.amount_usd_m)}</span>
             </div>
             <div class="text-zinc-500 text-xs leading-relaxed">${escapeHtml(item.technique || 'technique unspecified')} · ${escapeHtml(chains)}</div>
             ${this._lessonHtml(item.lesson)}

@@ -210,29 +210,29 @@ const Profile = {
 
         root.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div class="glass rounded-2xl p-5">
+                <div class="panel-sm">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Total tracked value</div>
-                    <div class="stat font-display text-3xl text-cyan-400 mt-1">${fmtUsd(total)}</div>
+                    <div class="stat text-3xl text-zinc-100 mt-1">${fmtUsd(total)}</div>
                     <div class="text-[11px] text-zinc-600 mt-2">${nonzero.length} of ${holdings.length} tracked assets held</div>
                 </div>
-                <div class="glass rounded-2xl p-5">
+                <div class="panel-sm">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">24h profit / loss</div>
                     ${pnl ? `
-                        <div class="stat font-display text-3xl mt-1 ${pnl.deltaUsd >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${pnl.deltaUsd >= 0 ? '+' : ''}${fmtUsd(pnl.deltaUsd)}</div>
+                        <div class="stat text-3xl mt-1 ${pnl.deltaUsd >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${pnl.deltaUsd >= 0 ? '+' : ''}${fmtUsd(pnl.deltaUsd)}</div>
                         <div class="text-[11px] text-zinc-600 mt-2">${pct(pnl.deltaPct)} · based on ${pnl.coverage} of ${pnl.total} priced assets</div>
                     ` : `
-                        <div class="stat font-display text-3xl mt-1 text-zinc-600">—</div>
+                        <div class="stat text-3xl mt-1 text-zinc-600">—</div>
                         <div class="text-[11px] text-zinc-600 mt-2">No priced holdings with 24h data yet</div>
                     `}
                 </div>
-                <div class="glass rounded-2xl p-5">
+                <div class="panel-sm">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Engagement history</div>
-                    <div class="stat font-display text-3xl text-cyan-400 mt-1">${cases.length}</div>
+                    <div class="stat text-3xl text-zinc-100 mt-1">${cases.length}</div>
                     <div class="text-[11px] text-zinc-600 mt-2">offerings hired by this wallet, saved on this device</div>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
-                <div class="lg:col-span-7 glass rounded-2xl p-5">
+                <div class="lg:col-span-7 panel-sm">
                     <div class="flex items-center justify-between mb-2">
                         <div class="text-zinc-400 text-xs uppercase tracking-wider">Composition</div>
                         <div class="text-[10px] text-zinc-600">${coverageNote}</div>
@@ -241,16 +241,16 @@ const Profile = {
                         <canvas id="profileDonut"></canvas>
                     </div>
                 </div>
-                <div class="lg:col-span-5 glass rounded-2xl p-5">
+                <div class="lg:col-span-5 panel-sm">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider mb-2">Add any Base token</div>
                     <div class="flex gap-2">
-                        <input id="profile-add-input" type="text" placeholder="0x… token contract" class="flex-1 min-w-0 bg-zinc-900/80 border border-white/10 focus:border-cyan-500 outline-none px-3 py-2 rounded-lg text-xs font-mono">
-                        <button id="profile-add-btn" class="bg-cyan-600 hover:bg-cyan-500 px-3 py-2 rounded-lg text-xs shrink-0"><i class="fa-solid fa-plus"></i></button>
+                        <input id="profile-add-input" type="text" placeholder="0x… token contract" class="flex-1 min-w-0 bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs">
+                        <button id="profile-add-btn" class="term-btn term-btn-sm shrink-0"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     <div id="profile-add-status" class="text-[11px] text-zinc-600 mt-2"></div>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-5 mb-6">
+            <div class="panel-sm mb-6">
                 <div class="text-zinc-400 text-xs uppercase tracking-wider mb-3">Top holdings by value</div>
                 <div style="position:relative; height:220px;">
                     <canvas id="profileBar"></canvas>
@@ -259,11 +259,11 @@ const Profile = {
             <div class="flex items-center justify-between mb-3">
                 <div class="text-zinc-400 text-xs uppercase tracking-wider">All tracked assets (${holdings.length})</div>
             </div>
-            <div id="profile-holdings" class="space-y-2 mb-6"></div>
-            <div class="glass rounded-2xl p-5 mb-6">
+            <div id="profile-holdings" class="diff-list mb-6"></div>
+            <div class="panel-sm mb-6">
                 <div class="flex items-center justify-between mb-2">
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Cost basis estimate <span class="text-zinc-600 normal-case">(beta)</span></div>
-                    <button id="profile-costbasis-btn" class="bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs shrink-0">Run estimate</button>
+                    <button id="profile-costbasis-btn" class="term-btn term-btn-sm shrink-0">Run estimate</button>
                 </div>
                 <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet — an approximation, not a full weighted-average cost basis across every acquisition.</p>
                 <div id="profile-costbasis"></div>
@@ -313,13 +313,13 @@ const Profile = {
             const hasPnl = typeof r.pnlUsd === 'number';
             const acquired = r.acquiredAt ? new Date(r.acquiredAt).toLocaleDateString() : '—';
             return `
-            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3 mb-2">
+            <div class="card-h diff-row flex items-center gap-3">
                 <div class="min-w-0 flex-1">
-                    <div class="font-semibold truncate">${escapeHtml(r.symbol)}</div>
+                    <div class="truncate">${escapeHtml(r.symbol)}</div>
                     <div class="text-[11px] text-zinc-600 truncate">${r.note ? escapeHtml(r.note) : `first acquired ${acquired}`}</div>
                 </div>
                 <div class="text-right shrink-0">
-                    <div class="stat font-display text-sm ${hasPnl ? (r.pnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400') : 'text-zinc-600'}">${hasPnl ? `${r.pnlUsd >= 0 ? '+' : ''}${fmtUsd(r.pnlUsd)}` : '—'}</div>
+                    <div class="stat text-sm ${hasPnl ? (r.pnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400') : 'text-zinc-600'}">${hasPnl ? `${r.pnlUsd >= 0 ? '+' : ''}${fmtUsd(r.pnlUsd)}` : '—'}</div>
                     <div class="text-xs text-zinc-500">${typeof r.pnlPct === 'number' ? pct(r.pnlPct) : ''}</div>
                 </div>
             </div>`;
@@ -330,20 +330,20 @@ const Profile = {
         const el = document.getElementById('profile-holdings');
         if (!el) return;
         el.innerHTML = holdings.map(h => {
-            const icon = (h.address && window.App) ? App._iconImg(h.address, '8453', 28) : `<div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-display shrink-0">${(h.symbol||'?').slice(0,2)}</div>`;
+            const icon = (h.address && window.App) ? App._iconImg(h.address, '8453', 28) : `<div class="w-7 h-7 border border-white/10 flex items-center justify-center text-[10px] shrink-0">${(h.symbol||'?').slice(0,2)}</div>`;
             const explorer = (h.address && window.App) ? App._explorerUrl(h.address, '8453') : null;
             const nameBlock = `
                 <div class="min-w-0 flex-1">
-                    <div class="font-semibold truncate">${escapeHtml(h.symbol)}</div>
+                    <div class="truncate">${escapeHtml(h.symbol)}</div>
                     <div class="text-xs text-zinc-500 truncate">${escapeHtml(h.name || '')}</div>
                 </div>`;
             return `
-            <div class="card-h glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <div class="card-h diff-row flex items-center gap-3">
                 ${explorer
                     ? `<a href="${explorer}" target="_blank" rel="noopener" class="flex items-center gap-3 min-w-0 flex-1 hover:opacity-80">${icon}${nameBlock}</a>`
                     : `<div class="flex items-center gap-3 min-w-0 flex-1">${icon}${nameBlock}</div>`}
                 <div class="text-right shrink-0">
-                    <div class="stat font-display text-sm">${h.balance < 0.0001 && h.balance > 0 ? '<0.0001' : h.balance.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
+                    <div class="stat text-sm">${h.balance < 0.0001 && h.balance > 0 ? '<0.0001' : h.balance.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
                     <div class="text-xs text-zinc-500">${h.valueUsd ? fmtUsd(h.valueUsd) : '—'} ${typeof h.change24h==='number' ? pct(h.change24h) : ''}</div>
                 </div>
             </div>`;
@@ -354,7 +354,7 @@ const Profile = {
         const ctx = document.getElementById('profileDonut');
         if (!ctx || typeof Chart === 'undefined') return;
         if (this._chart) this._chart.destroy();
-        const colors = ['#22d3ee', '#c9a86a', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa', '#f472b6', '#60a5fa', '#10b981', '#94a3b8'];
+        const colors = ['#4ade80', '#a1a1aa', '#818cf8', '#fb7185', '#fbbf24', '#a78bfa', '#f472b6', '#60a5fa', '#34d399', '#71717a'];
         const OTHER_COLOR = '#52525b';
         const sorted = holdings.filter(h => h.valueUsd > 0).sort((a, b) => b.valueUsd - a.valueUsd);
         if (!sorted.length) { ctx.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No priced holdings to chart yet.</div>'; return; }
@@ -399,7 +399,7 @@ const Profile = {
             type: 'bar',
             data: {
                 labels: data.map(h => h.symbol),
-                datasets: [{ data: data.map(h => h.valueUsd), backgroundColor: '#22d3ee', borderRadius: 4 }],
+                datasets: [{ data: data.map(h => h.valueUsd), backgroundColor: '#4ade80', borderRadius: 4 }],
             },
             options: {
                 indexAxis: 'y',
@@ -448,28 +448,28 @@ const Profile = {
             // (e.g. market_intel has no single target address).
             const cardIcon = c.targetAddress ? tokenIconByAddress(c.targetAddress, c.result?.deliverable?.chain_id) : null;
             return `
-            <div class="card-h glass rounded-xl px-4 py-3 mb-2">
+            <div class="card-h diff-row">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0 relative overflow-hidden">
-                        <i class="fa-solid fa-bolt text-cyan-400 text-sm"></i>
+                    <div class="w-9 h-9 border border-white/10 flex items-center justify-center shrink-0 relative overflow-hidden">
+                        <i class="fa-solid fa-bolt text-zinc-400 text-sm"></i>
                         ${cardIcon ? `<img src="${escapeHtml(cardIcon)}" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">` : ''}
                     </div>
                     <div class="min-w-0 flex-1">
-                        <div class="font-semibold truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
+                        <div class="truncate">${escapeHtml((c.offering || '').replace(/_/g, ' '))} <span class="text-zinc-500 font-normal">· $${c.priceUsd}</span></div>
                         <div class="text-xs text-zinc-500 truncate">
                             ${c.verdict ? `<span class="text-zinc-300">${escapeHtml(String(c.verdict))}</span> · ` : ''}
-                            ${c.targetAddress ? (explorer ? `<a href="${explorer}" target="_blank" rel="noopener" class="hover:text-cyan-400">${escapeHtml(App._shortAddr(c.targetAddress))}</a> · ` : `${escapeHtml(App._shortAddr ? App._shortAddr(c.targetAddress) : c.targetAddress)} · `) : ''}
+                            ${c.targetAddress ? (explorer ? `<a href="${explorer}" target="_blank" rel="noopener" class="hover:text-zinc-200">${escapeHtml(App._shortAddr(c.targetAddress))}</a> · ` : `${escapeHtml(App._shortAddr ? App._shortAddr(c.targetAddress) : c.targetAddress)} · `) : ''}
                             ${this._relativeTime(c.timestamp)}
                         </div>
                     </div>
                     <div class="flex gap-2 shrink-0">
-                        <button data-case-idx="${i}" class="case-pdf-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                        <button data-case-idx="${i}" class="case-copy-btn bg-white/10 hover:bg-white/15 transition px-3 py-1.5 rounded-lg text-xs" title="Copy JSON"><i class="fa-solid fa-copy"></i></button>
+                        <button data-case-idx="${i}" class="case-pdf-btn term-btn term-btn-sm" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button data-case-idx="${i}" class="case-copy-btn term-btn term-btn-sm" title="Copy JSON"><i class="fa-solid fa-copy"></i></button>
                     </div>
                 </div>
                 ${reportHtml ? `
                 <details class="mt-3" ${i === 0 ? 'open' : ''}>
-                    <summary class="text-xs text-cyan-400 cursor-pointer select-none">View full report</summary>
+                    <summary class="text-xs text-zinc-400 cursor-pointer select-none">View full report</summary>
                     <div class="mt-3 pt-3 border-t border-white/10">${reportHtml}</div>
                 </details>` : ''}
             </div>`;
@@ -497,14 +497,14 @@ const Profile = {
             return;
         }
         el.innerHTML = `<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">${nfts.slice(0, 24).map(n => `
-            <div class="card-h glass rounded-xl overflow-hidden">
+            <div class="card-h border border-white/10 overflow-hidden">
                 <div class="aspect-square bg-zinc-900/80 flex items-center justify-center">
                     ${n.image
                         ? `<img src="${escapeHtml(n.image)}" alt="${escapeHtml(n.name)}" class="w-full h-full object-cover" loading="lazy" onerror="this.remove()">`
                         : '<i class="fa-solid fa-image text-zinc-600 text-xl"></i>'}
                 </div>
                 <div class="px-3 py-2">
-                    <div class="text-xs font-semibold truncate">${escapeHtml(n.name)}</div>
+                    <div class="text-xs truncate">${escapeHtml(n.name)}</div>
                     <div class="text-[10px] text-zinc-500 truncate">${escapeHtml(n.collectionName || '')}</div>
                 </div>
             </div>`).join('')}</div>`;
