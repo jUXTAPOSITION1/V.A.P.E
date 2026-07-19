@@ -1,0 +1,127 @@
+{
+  "schema": "vape.skillforge.knowledge.v1",
+  "updated": "2026-07-19T04:00:00Z",
+  "note": "Real, source-verified security-research knowledge base — standards, checklists, and taxonomies VAPE's audit tools (deep_dive_audit.py, external_audit.py) and human reviewers can reference. Built from docs.hackenproof.com/education/useful-sources and each linked resource's own real content (hackenproof.com itself is unreachable from this sandbox's egress policy; each resource below was verified directly at its own real, independent URL). Never fabricated — a resource with 'verified_content: null' means its structure could not be confirmed this pass and should not be cited as fact.",
+  "resources": [
+    {
+      "id": "swc-registry",
+      "name": "SWC Registry (Smart Contract Weakness Classification)",
+      "url": "https://github.com/SmartContractSecurity/SWC-registry",
+      "category": "vulnerability-taxonomy",
+      "status": "deprecated",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "The original SWC-1xx numbered vulnerability taxonomy (reentrancy=SWC-107, unprotected selfdestruct=SWC-106, tx.origin=SWC-115, etc). Still widely referenced — Mythril, Slither, and this repo's own agents/deep_dive_audit.py all tag findings by SWC-ID — but the registry's own README states it 'has not been significantly updated since 2020, and is no longer actively maintained.'",
+      "successors": [
+        {"name": "EEA EthTrust Security Levels Specification", "note": "The SWC registry's own stated primary successor. Its v1 (Aug 2022) incorporated every SWC-registry vulnerability; v3 was expected early 2025."},
+        {"name": "Smart Contract Security Verification Standard (SCSVS)", "url": "https://github.com/securing/SCSVS", "note": "The SWC registry's own README calls this 'actively maintained over a number of years' and broader in scope than Solidity-only."}
+      ],
+      "verified_content": "SWC-ID prefixed weakness classification (SWC-100 through SWC-136 range) — real IDs still appear as citations throughout this repo's own tooling (see solcurity checklist below, which tags many items with their real SWC-ID)."
+    },
+    {
+      "id": "scsvs",
+      "name": "Smart Contract Security Verification Standard (SCSVS) v1.2",
+      "url": "https://github.com/securing/SCSVS",
+      "category": "verification-standard",
+      "status": "actively-maintained",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "A free, 14-part checklist standard for verifying smart contract security across the development lifecycle — the SWC registry's own recommended living successor.",
+      "verified_content": [
+        "V1: Architecture, Design and Threat Modelling",
+        "V2: Access Control",
+        "V3: Blockchain Data",
+        "V4: Communications",
+        "V5: Arithmetic",
+        "V6: Malicious Input Handling",
+        "V7: Gas Usage & Limitations",
+        "V8: Business Logic",
+        "V9: Denial of Service",
+        "V10: Token",
+        "V11: Code Clarity",
+        "V12: Test Coverage",
+        "V13: Known Attacks",
+        "V14: Decentralized Finance"
+      ]
+    },
+    {
+      "id": "consensys-best-practices",
+      "name": "ConsenSys Diligence — Smart Contract Best Practices",
+      "url": "https://github.com/Consensys/smart-contract-best-practices",
+      "site_url": "https://consensysdiligence.github.io/smart-contract-best-practices/",
+      "category": "best-practices-guide",
+      "status": "unknown-maintenance",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "One of the earliest and most widely cited Solidity security guides. Real top-level structure confirmed; the detailed attack-by-attack breakdown pages themselves returned 403 (bot-protected) to this pass's automated fetch and were not individually re-verified.",
+      "verified_content": [
+        "Development Recommendations — good coding patterns and practices for secure smart contract development",
+        "Known Attacks — the different classes of vulnerabilities to defend against",
+        "Security Tools — tools for improving code quality and detecting vulnerabilities",
+        "Bug Bounties — bug bounties in the ecosystem"
+      ]
+    },
+    {
+      "id": "secureum-101-201",
+      "name": "Secureum — Security Pitfalls & Best Practices 101 / 201",
+      "url": "https://secureum.substack.com/p/security-pitfalls-and-best-practices-101",
+      "url_201": "https://secureum.substack.com/p/security-pitfalls-and-best-practices-201",
+      "category": "audit-checklist",
+      "status": "unknown-maintenance",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "Secureum's own two-part checklist explicitly compiled FROM the other resources in this knowledge base — real value here is partly as a synthesis/index of the rest: it cites Slither's own detector documentation, the SWC Registry, Solidity's official list of known compiler bugs, Sigma Prime's audit findings, ConsenSys's known-attacks guide, DASP (Decentralized Application Security Project) Top 10, and OpenZeppelin/Trail of Bits upgradeability checklists as its own real sources.",
+      "verified_content": {
+        "101_example_topics": ["incorrect shift direction in inline assembly vs Solidity's shift operators",
+          "unsafe/unaudited inline assembly usage", "state variables that should be constant/immutable",
+          "compiler version pitfalls", "unlocked pragma (missing fixed compiler version)",
+          "incorrect access control"],
+        "201_example_topics": ["explicit over implicit — explicit declarations of intent and requirement validation",
+          "configuration issues", "initialization issues (missing/re-runnable initializers)", "cleanup issues"]
+      }
+    },
+    {
+      "id": "solcurity",
+      "name": "solcurity — Opinionated Solidity security & code-quality checklist",
+      "url": "https://github.com/transmissions11/solcurity",
+      "category": "code-review-checklist",
+      "status": "unknown-maintenance",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "A dense, real, per-line-item checklist organized by code construct (variables, structs, functions, modifiers, external/static calls, events, contract, project, DeFi-specific) rather than by attack class — complements SCSVS/ConsenSys's attack-class organization. Many items cite a real SWC-ID directly. This repo's own frontier-LLM audit prompts (agents/deep_dive_audit.py::FRONTIER_SYSTEM, agents/external_audit.py::GENERIC_AUDIT_SYSTEM) already reason about several of the same classes (access control, reentrancy/checks-before-effects, oracle trust) independently — this checklist is a candidate reference to fold into those prompts for even more systematic coverage.",
+      "verified_content": {
+        "categories": ["Variables (V1-V10)", "Structs (S1-S3)", "Functions (F1-F19)", "Modifiers (M1-M3)",
+          "Code (C1-C51)", "External Calls (X1-X8)", "Static Calls (S1-S4)", "Events (E1-E6)",
+          "Contract (T1-T12)", "Project (P1-P5)", "DeFi (D1-D11)"],
+        "notable_defi_items": [
+          "D3 - AMM spot price not used as oracle?",
+          "D5 - Sanity checks for oracle manipulation?",
+          "D7 - ERC-777 reentrancy risks checked?",
+          "D8 - Fee-on-transfer tokens documented?",
+          "D11 - Token approval targets avoid arbitrary calls?"
+        ]
+      }
+    },
+    {
+      "id": "kadenzipfel-attack-vectors",
+      "name": "kadenzipfel/smart-contract-attack-vectors",
+      "url": "https://github.com/kadenzipfel/smart-contract-attack-vectors",
+      "category": "vulnerability-catalog",
+      "status": "unknown-maintenance",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "A per-vulnerability catalog (each with a documented prevention method) organized into 6 categories, with the author's own 'LLM-optimized references' for further study — directly relevant to how VAPE's own frontier-LLM prompts are structured.",
+      "verified_content": [
+        "Access Control — authorization and permission-check vulnerabilities",
+        "Math — arithmetic operations and numerical precision issues",
+        "Control Flow — transaction execution order and gas-handling problems",
+        "Data Handling — storage, data retrieval, and initialization concerns",
+        "Unsafe Logic — randomness, hashing, timestamp, and low-level operation flaws",
+        "Code Quality — best-practice violations and maintenance issues"
+      ]
+    },
+    {
+      "id": "vigilseek",
+      "name": "VigilSeek",
+      "url": null,
+      "category": "bounty-aggregator",
+      "status": "not-independently-verified",
+      "last_verified": "2026-07-19T04:00:00Z",
+      "summary": "Named on HackenProof's useful-sources page as a bug-bounty-program aggregator with Telegram alerts. Its own site could not be reached/confirmed independently this pass (hackenproof.com's own page, which named it, is also unreachable from this sandbox's egress policy) — listed here for completeness, not as a verified fact. Do not treat as a data source until independently confirmed."
+    }
+  ]
+}
