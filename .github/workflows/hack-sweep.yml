@@ -1,0 +1,72 @@
+name: HACK Sweep (daily proactive deep-dive)
+
+# VAPE's own daily proactive vulnerability hunt: escalates a small number of
+# CAUTION-verdict entries already in agents/investigate.py's ledger (real
+# addresses from the free hourly auto-cycle) to the full heavy tool suite
+# (Slither/Halmos/Mythril/Aderyn + OCI Grok 4.3 frontier reasoning) via
+# agents/hack_sweep.py — see that module's docstring for the full design.
+# Not a paid engagement: reports land in intel/audits/hack-sweep-reports/,
+# clearly labeled as such (agents/deep_dive_audit.py's engagement="sweep").
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hack-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Restore cached security tools (best-effort — Slither/Mythril/Aderyn/Halmos if already cached)
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ~/.cyfrin
+            ~/.cargo
+            ~/.foundry
+            ~/.local
+            ~/.cache/pip
+          key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
+          restore-keys: skillforge-tools-
+      - name: Run the daily HACK sweep
+        env:
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: python -m agents.hack_sweep
+
+      - name: Commit reports + memory
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/audits/hack-sweep-reports/ skillforge/memory/ || true
+          git commit -m "HACK sweep: $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done

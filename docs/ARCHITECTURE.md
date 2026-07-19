@@ -239,6 +239,26 @@ the hourly cycle.
   this field), so `docs/assets/attackfeed.js` can render a real per-incident "Full
   analysis" link, not just the feed-wide source-report link. Own schedule
   (`threat-analysis.yml`, 6-hourly) and module, independent of the sweep pipeline.
+- **`hack_sweep.py`** [OK] — VAPE's daily proactive vulnerability hunt: escalates a
+  small number of CAUTION-verdict entries already in `investigate.py`'s own ledger (real
+  addresses from the free hourly auto-cycle) to `deep_dive_audit.py`'s full heavy tool
+  suite (Slither/Halmos/Mythril/Aderyn + OCI Grok 4.3 frontier reasoning) — the same
+  pipeline paying x402/ACP buyers get for the $50 `bounty_deep_dive` offering, run here
+  free against VAPE's own initiative (`engagement="sweep"`, reports land in
+  `intel/audits/hack-sweep-reports/`, clearly labeled as non-paid). Own dedup state
+  (`skillforge/memory/hack_sweep_state.json`) and daily schedule (`hack-sweep.yml`).
+- **`external_audit.py`** [OK] — VAPE's reusable pipeline for a real external bug-bounty
+  engagement against any target repo (any language/chain, not just VAPE's own Base/EVM
+  investigations) — built for the first real engagement, Momentum's `mmt-v3-core` CLMM
+  (Move/Sui) via HackenProof. Fetches real source (keyless, `raw.githubusercontent.com` +
+  the public git/trees API), detects language, and runs a rigorous frontier-LLM (OCI Grok
+  4.3) line-by-line review with a language-appropriate system prompt (a dedicated
+  Move-specific one distinguishing what Move's resource-safety model already guarantees
+  from what it doesn't). Deliberately does not invoke Slither/Mythril/Aderyn/Halmos —
+  those are Solidity-specific and need either a live on-chain address or a compilable
+  Foundry project; a genuinely Solidity on-chain target should go through
+  `deep_dive_audit.py` instead. Manual `workflow_dispatch`
+  (`external-bounty-audit.yml`) per engagement, not scheduled.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes

@@ -51,6 +51,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "poc-reports")
+SWEEP_AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "hack-sweep-reports")
 
 try:
     from agents import investigate as inv
@@ -249,9 +250,10 @@ def _run_aderyn(project_dir, timeout=120):
                 pass
 
 
-FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing a PAID
-24-hour-SLA deep-dive bug bounty audit. This is VAPE's premium tier — the highest rigor
-VAPE offers. Real money is on the line; be precise, evidence-based, and honest.
+FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing VAPE's
+deepest, highest-rigor automated audit tier — whether this run is a paid 24-hour-SLA bug
+bounty engagement or VAPE's own proactive daily sweep, the bar is the same: be precise,
+evidence-based, and honest.
 
 Rules:
 - Base every claim on the ACTUAL verified source code and recon data given below — never
@@ -339,7 +341,12 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
     return "\n\n".join(parts)
 
 
-def run_audit(address, chain="8453", callback_url=None):
+def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
+    """engagement distinguishes a paid x402/ACP bounty_deep_dive job ("paid",
+    the default — every existing caller) from VAPE's own proactive daily
+    sweep (agents/hack_sweep.py passes "sweep") — same tool suite, same
+    rigor, only the report's framing/output directory differ so a sweep
+    report never falsely claims to be a paid engagement."""
     address = address.strip()
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
@@ -379,13 +386,16 @@ def run_audit(address, chain="8453", callback_url=None):
     except Exception as e:
         narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
 
-    os.makedirs(AUDIT_DIR, exist_ok=True)
+    out_dir = AUDIT_DIR if engagement == "paid" else SWEEP_AUDIT_DIR
+    os.makedirs(out_dir, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     slug = re.sub(r"[^a-z0-9]+", "-", sym.lower()).strip("-") or address[:10]
-    path = os.path.join(AUDIT_DIR, f"audit-deep-dive-{slug}-{stamp}.md")
+    prefix = "audit-deep-dive" if engagement == "paid" else "hack-sweep"
+    path = os.path.join(out_dir, f"{prefix}-{slug}-{stamp}.md")
 
     L = []
-    L.append(f"# VAPE Deep-Dive Bounty Audit — {sym}")
+    title = "VAPE Deep-Dive Bounty Audit" if engagement == "paid" else "VAPE Proactive HACK Sweep"
+    L.append(f"# {title} — {sym}")
     L.append("")
     L.append(f"**Target:** `{address}` (chain {chain})  ")
     L.append(f"**Date:** {now_iso()}  ")
@@ -465,8 +475,12 @@ def run_audit(address, chain="8453", callback_url=None):
              "the human-verification list above.")
     L.append("8. White-hat only: read-only analysis, no exploitation attempted.")
     L.append("")
-    L.append("*V.A.P.E. — The chain never lies. This is a 24h-SLA premium engagement; "
-             "results delivered as soon as generated, well inside that window.*")
+    if engagement == "paid":
+        L.append("*This is a 24h-SLA premium engagement; results delivered as soon as "
+                 "generated, well inside that window.*")
+    else:
+        L.append("*This report was generated proactively by VAPE's own daily HACK sweep "
+                 "(agents/hack_sweep.py) — not a paid engagement.*")
 
     content = "\n".join(L)
     with open(path, "w") as f:
@@ -475,7 +489,7 @@ def run_audit(address, chain="8453", callback_url=None):
     print(f"[deep_dive_audit] wrote {rel}")
 
     result = {"address": address, "chain": chain, "symbol": sym, "verdict": verdict,
-              "score": score, "report": rel, "provider": provider}
+              "score": score, "report": rel, "provider": provider, "engagement": engagement}
 
     if callback_url:
         if not _is_safe_callback_url(callback_url):

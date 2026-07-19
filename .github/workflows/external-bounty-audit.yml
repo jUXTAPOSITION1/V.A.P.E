@@ -1,0 +1,99 @@
+name: External Bounty Engagement Audit
+
+# VAPE's reusable pipeline (agents/external_audit.py) for auditing a real
+# external bug-bounty target repo — built for the first real engagement,
+# Momentum's mmt-v3-core CLMM (Move/Sui):
+# https://hackenproof.com/programs/momentum-smart-contracts
+# real program repo mirror: github.com/hackenproof-public/mmt-v3-core
+# (source verified identical at the canonical github.com/mmt-finance/v3-core)
+#
+# Manual dispatch only — this is a deliberate, scoped engagement per program,
+# not a scheduled sweep (that's agents/hack_sweep.py's job, for VAPE's own
+# Base/EVM targets). Inputs default to this first real engagement so it can
+# be re-run as-is, but every field is overridable for a future program.
+on:
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: 'GitHub owner of the target repo'
+        required: true
+        default: 'mmt-finance'
+      repo:
+        description: 'GitHub repo name'
+        required: true
+        default: 'v3-core'
+      ref:
+        description: 'Git ref (branch/tag/commit) to audit'
+        required: false
+        default: 'main'
+      program_name:
+        description: 'Bounty program name (for the report header)'
+        required: false
+        default: 'Momentum Smart Contracts Core'
+      paths:
+        description: 'Comma-separated explicit file paths (skips auto-discovery — needed if the runner cannot reach api.github.com for this repo)'
+        required: false
+        default: 'clmm/sources/actions/trade.move,clmm/sources/actions/liquidity.move,clmm/sources/actions/admin.move,clmm/sources/storage/pool.move,clmm/sources/utils/swap_math.move,clmm/sources/utils/sqrt_price_math.move,clmm/sources/utils/tick_math.move'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-bounty-audit-${{ github.event.inputs.owner }}-${{ github.event.inputs.repo }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+
+      - name: Run the external bounty engagement audit
+        env:
+          TARGET_OWNER: ${{ github.event.inputs.owner }}
+          TARGET_REPO: ${{ github.event.inputs.repo }}
+          TARGET_REF: ${{ github.event.inputs.ref }}
+          TARGET_PROGRAM: ${{ github.event.inputs.program_name }}
+          TARGET_PATHS: ${{ github.event.inputs.paths }}
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: |
+          ARGS=(--owner "$TARGET_OWNER" --repo "$TARGET_REPO" --ref "$TARGET_REF")
+          if [ -n "$TARGET_PROGRAM" ]; then
+            ARGS+=(--program-name "$TARGET_PROGRAM")
+          fi
+          if [ -n "$TARGET_PATHS" ]; then
+            ARGS+=(--paths "$TARGET_PATHS")
+          fi
+          python -m agents.external_audit "${ARGS[@]}"
+
+      - name: Commit the report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_OWNER: ${{ github.event.inputs.owner }}
+          TARGET_REPO: ${{ github.event.inputs.repo }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/audits/external-bounties/ skillforge/memory/ || true
+          git commit -m "External bounty audit: $TARGET_OWNER/$TARGET_REPO" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main || true
+            git push && break || { echo "push race retry $i"; sleep $((i*3)); }
+          done
