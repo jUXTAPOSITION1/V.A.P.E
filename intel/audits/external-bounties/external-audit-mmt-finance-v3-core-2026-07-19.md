@@ -2,8 +2,8 @@
 
 **Target repo:** `mmt-finance/v3-core` @ `main`  
 **Language:** move  
-**Files reviewed:** 7 (`clmm/sources/actions/admin.move, clmm/sources/actions/liquidity.move, clmm/sources/actions/trade.move, clmm/sources/storage/pool.move, clmm/sources/utils/sqrt_price_math.move, clmm/sources/utils/swap_math.move, clmm/sources/utils/tick_math.move`)  
-**Date:** 2026-07-19T03:15Z  
+**Files reviewed:** 32 (`clmm/sources/actions/admin.move, clmm/sources/actions/collect.move, clmm/sources/actions/create_pool.move, clmm/sources/actions/liquidity.move, clmm/sources/actions/trade.move, clmm/sources/app.move, clmm/sources/error.move, clmm/sources/integer-mate/full_math_u128.move, clmm/sources/integer-mate/full_math_u64.move, clmm/sources/integer-mate/i128.move, ...`)  
+**Date:** 2026-07-19T03:18Z  
 **Engine:** Frontier LLM (oci_grok) — real source review, no Solidity static/symbolic tooling applies to this target's language (see module docstring for why)  
 
 ---
@@ -11,28 +11,28 @@
 ## AI Security Review
 **Executive Summary**
 
-The reviewed modules (`trade.move`, `liquidity.move`, `admin.move`, `pool.move`, `swap_math.move`, `sqrt_price_math.move`, `tick_math.move`) implement a CLMM with flash-loan/swap hot-potato receipts, position management, oracle observations, and admin-controlled fee/reward parameters. Move's resource semantics are respected: `FlashSwapReceipt`/`FlashLoanReceipt` lack `drop`/`copy`, receipts are consumed exactly once via `repay_*` entry points that perform reserve-delta assertions, and no unsafe unpack or leaked mutable references to value-holding state were found. All cross-object operations (pool ID verification on receipts, position-to-pool binding) are present and enforced. Fee math uses explicit `mul_div_floor`/`mul_div_round` with documented rounding direction; no integer overflow paths or dynamic-field key collisions exist in the supplied code. No exploitable findings were identified.
+Momentum v3-core is a Sui CLMM implementation. The reviewed modules (app, global_config, pool, position, tick, tick_bitmap, admin, liquidity, trade, oracle, math helpers, version, etc.) are written defensively. Move's resource linearity, UID ownership, and table/dynamic-field patterns are used correctly; no resource duplication, reentrancy, or double-spend vectors exist. Access control is consistently gated by `AdminCap` or `Acl` (with sender checks against stored admins). All hot-potato receipts (`FlashSwapReceipt`, `FlashLoanReceipt`) are linear and must be repaid. Cross-object validation (`verify_pool`, ID matching) and version gating are present. Math paths use explicit rounding parameters and wrapping arithmetic with bounds checks. No exploitable findings were identified in the supplied source.
 
 **Due Diligence — Checked and Confirmed Safe**
 
-- Hot-potato receipts (`FlashSwapReceipt`, `FlashLoanReceipt`) cannot be dropped, copied, or double-spent; `repay_*` functions consume them linearly and assert `initial_reserve + debt <= final_reserve`.
-- `pool::verify_pool` is called on every receipt repayment and on all liquidity/position operations; pool ID is stored inside the receipt at issuance time.
-- Admin actions (`collect_protocol_fee`, fee setters, reward emission updates) are gated by `Acl` capability checks (`get_pool_admin`, `get_rewarder_admin`) plus `version::assert_supported_version` and `assert_not_pause`.
-- No reentrancy vectors: all external calls are absent; state updates occur before any event emission or balance movement.
-- Tick crossing, oracle writes, and liquidity delta application in `flash_swap` and `update_data_for_delta_l` follow the same `tick::cross`/`observe_single`/`add_delta` sequence with proper `is_x_to_y` sign handling.
-- Rounding in `compute_swap_step`, `flash_loan` fee calculation, and protocol-fee share extraction consistently uses `mul_div_floor` for protocol share and `mul_div_round` for flash-loan fees; excess repayment is accepted as additional fee.
-- Dynamic-field keys (`MinTickRangeDfKey`, `PoolRewardCustodianDfKey`, trading/pause flags) are distinct and never collide.
-- `compute_swap_result*` functions are pure (take `&Pool`) and cannot mutate state.
+- Admin/rewarder capabilities: `set_*_admin`, `pause`, `set_min_tick_range_factor`, reward emission updates, and fee-rate setters all require either `&AdminCap` or an `Acl` check (`app::get_*_admin(acl) == sender`). No bypass paths.
+- Dynamic-field keys: `pool_trading_enabled_df_key`, `is_pause_df_key`, `MinTickRangeDfKey`, `PoolRewardCustodianDfKey<R>` are either constants or phantom-typed; no collision risk.
+- Flash-loan/swap receipts: Linear types; `repay_*` functions consume them and perform reserve-increase assertions. Cannot be dropped or reused.
+- Pool/position matching: Every liquidity, fee, reward, and swap path calls `verify_pool` (object ID equality).
+- Tick/liquidity invariants: `verify_tick`, `check_tick_range`, `exceed_max_liquidity_per_tick`, and bitmap flips are enforced on every update.
+- Rounding & overflow: All divisions that affect user vs. protocol amounts expose an explicit `round_up` flag; `full_math_*`, `wrapping_add`, and `checked_shlw` are used consistently. No silent truncation that favors an attacker.
+- Versioning & pause: Every public entrypoint that mutates state calls `version::assert_supported_version` + `assert_not_pause`.
+- Coin-type ordering: `create_pool` enforces `X < Y` via BCS comparison; subsequent operations assume this ordering.
+- Observation & reward growth: Oracle writes and reward accrual only occur on active liquidity ranges; growth vectors are length-checked.
 
 **Recommended Human Follow-up**
 
-- Confirm that `oracle::observe_single` / `tick::cross` / `pool::update_reward_infos` (called inside the swap loop) cannot be made to panic or return inconsistent values under extreme tick/liquidity conditions (would require Move Prover or targeted property tests).
-- Verify that the binary-search logic in `get_optimal_swap_amount_for_single_sided_liquidity` terminates for all `max_iterations` values and that `closer` produces a monotonic improvement (dynamic testing on edge ratios).
-- Re-audit any downstream modules that call `flash_swap`/`flash_loan` to ensure the returned balances are always forwarded to the matching `repay_*` call in the same transaction.
+- Re-run the full test suite (including the `#[test_only]` helpers) and any property tests after the next minor-version bump.
+- Manually verify that off-chain indexers correctly handle the `ToggleTradingEvent` / `PoolPausedEvent` state transitions (they are emitted after the DF mutation).
+- Confirm that the on-chain `GlobalConfig` fee-rate table entries match the intended production set (the `init` values plus any `enable_fee_rate` calls).
+- If formal verification is required, the `tick::update` / `cross` and `swap_math::compute_swap_step` loops are the highest-value targets for Move Prover.
 
-**Overall Verdict**
-
-No exploitable finding this pass — clean code.
+No findings warrant a bounty submission. The code is clean.
 
 ---
 
