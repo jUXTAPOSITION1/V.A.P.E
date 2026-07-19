@@ -458,8 +458,15 @@
                     <h3 class="text-sm text-zinc-500">Top Base Protocols</h3>
                     <button onclick="App.refresh()" class="term-btn term-btn-sm"><i class="fa-solid fa-rotate"></i> Refresh</button>
                 </div>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">TVL, real fees generated, and a VAPE Score quality signal for each —
+                <p class="text-xs text-zinc-500 mb-4 leading-relaxed max-w-2xl">TVL, real fees generated, and a VAPE Score quality signal for each —
                 click any row for a full report with its own 24h→all-time chart.</p>
+                <div class="flex gap-1 text-[11px] mb-5" id="proto-sort">
+                    <button data-s="tvl" class="term-btn term-btn-sm term-btn-active">TVL</button>
+                    <button data-s="24h" class="term-btn term-btn-sm">24h %</button>
+                    <button data-s="7d" class="term-btn term-btn-sm">7d %</button>
+                    <button data-s="30d" class="term-btn term-btn-sm">30d %</button>
+                    <button data-s="all" class="term-btn term-btn-sm">All-time %</button>
+                </div>
                 <div id="protocols" class="diff-list">
                     <div class="skeleton h-12 my-1"></div>
                     <div class="skeleton h-12 my-1"></div>
@@ -638,7 +645,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=12"></script>
+    <script src="assets/app.js?v=13"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

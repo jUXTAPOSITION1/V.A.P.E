@@ -601,17 +601,67 @@ const App = {
         }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
     },
 
+    _protoSort: 'tvl',
     async protocols() {
         const el = document.getElementById('protocols');
         try {
             const list = await (await fetch('https://api.llama.fi/protocols')).json();
             const base = list.filter(p => (p.chains||[]).includes('Base') && p.category!=='CEX' && (p.chainTvls?.Base>0))
-                .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, c7:p.change_7d, cat:p.category, logo:p.logo}))
+                .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, c7:p.change_7d, c30:p.change_1m, cat:p.category, logo:p.logo}))
                 .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
-            // Kept for openProtocolReport() to read basic fields (tvl/c1/c7/cat/logo)
-            // without a second /protocols list fetch.
+            // Kept for openProtocolReport() and _renderProtocolRows() to read
+            // basic fields (tvl/c1/c7/c30/cat/logo) without a second /protocols
+            // list fetch — the 8-protocol universe stays fixed (top by TVL);
+            // #proto-sort only reorders this same set, it doesn't refetch.
             this._protoList = base;
-            el.innerHTML = base.map((p,i)=>`
+            this._renderProtocolRows();
+            this._enrichProtocols();
+        } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
+    },
+
+    // All-time TVL % change for a protocol — DefiLlama's list endpoint has
+    // no "since inception" field, so this is derived from the full cached
+    // history _enrichProtocols()/_ensureProtoDetail() populates. Returns
+    // null (not zero) until that history has actually loaded for this slug.
+    _allTimeChange(slug) {
+        const hist = this._protoDetail[slug]?.tvlHistory;
+        if (!hist || hist.length < 2 || !hist[0].v) return null;
+        return ((hist[hist.length-1].v - hist[0].v) / hist[0].v) * 100;
+    },
+
+    // The % shown in each row's right-hand column tracks whichever range
+    // #proto-sort currently has selected, so the visible number always
+    // matches what the list is actually sorted by.
+    _protoRangeVal(p) {
+        const s = this._protoSort || 'tvl';
+        if (s === '24h') return p.c1;
+        if (s === '7d') return p.c7;
+        if (s === '30d') return p.c30;
+        if (s === 'all') return this._allTimeChange(p.slug);
+        return p.c1; // 'tvl' — same 1d change shown before sorting existed
+    },
+    _protoRangeLabel() {
+        const s = this._protoSort || 'tvl';
+        return s === 'tvl' ? '24h' : s === 'all' ? 'all-time' : s;
+    },
+
+    // Re-sorts and redraws the already-fetched 8-protocol list in place —
+    // no new network request (mirrors _renderMovers()'s tab-switch pattern).
+    // Re-rendered nodes lose their spark/score/.proto-fees fill (fresh DOM),
+    // so protocols()/the #proto-sort click handler both call
+    // _enrichProtocols() right after — cache hits for already-known slugs
+    // make that redraw effectively free.
+    _renderProtocolRows() {
+        const el = document.getElementById('protocols');
+        const list = [...(this._protoList||[])];
+        const s = this._protoSort || 'tvl';
+        if (s === '24h') list.sort((a,b)=>(b.c1??-Infinity)-(a.c1??-Infinity));
+        else if (s === '7d') list.sort((a,b)=>(b.c7??-Infinity)-(a.c7??-Infinity));
+        else if (s === '30d') list.sort((a,b)=>(b.c30??-Infinity)-(a.c30??-Infinity));
+        else if (s === 'all') list.sort((a,b)=>(this._allTimeChange(b.slug)??-Infinity)-(this._allTimeChange(a.slug)??-Infinity));
+        else list.sort((a,b)=>b.tvl-a.tvl);
+        const rangeLabel = this._protoRangeLabel();
+        el.innerHTML = list.map((p,i)=>`
                 <button onclick="App.openProtocolReport('${p.slug||''}')" class="card-h diff-row flex items-center gap-2 sm:gap-3">
                     <span class="text-zinc-600 text-sm w-4 sm:w-5 shrink-0">${i+1}</span>
                     ${p.logo?`<img src="${this._esc(p.logo)}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover shrink-0 sm:w-7 sm:h-7" onerror="this.remove()">`:''}
@@ -620,16 +670,16 @@ const App = {
                             <span class="truncate">${this._esc(p.name)}</span>
                             <span class="proto-score shrink-0"></span>
                         </div>
-                        <div class="text-xs text-zinc-500 truncate">${this._esc(p.cat||'')}<span class="proto-fees"></span></div>
+                        <div class="text-xs text-zinc-500 truncate">${this._esc(p.cat||'')}</div>
+                        <div class="text-[11px] text-zinc-600 proto-fees">Fees 24h …</div>
                     </div>
                     <div class="spark shrink-0 hidden sm:block" data-slug="${this._esc(p.slug||'')}" style="width:72px;height:26px"></div>
                     <div class="text-right shrink-0 w-16 sm:w-24">
                         <div class="stat text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
-                        <div class="text-xs">${pct(p.c1)}</div>
+                        <div class="text-[10px] text-zinc-600">${rangeLabel}</div>
+                        <div class="text-xs">${pct(this._protoRangeVal(p))}</div>
                     </div>
                 </button>`).join('');
-            this._enrichProtocols();
-        } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
     },
 
     // Combined per-protocol cache: full TVL history (not just a 14-day
@@ -649,7 +699,9 @@ const App = {
             const row = n.closest('button.diff-row');
             try {
                 let detail = this._protoDetail[slug];
+                let fetchedFresh = false;
                 if (!detail) {
+                    fetchedFresh = true;
                     const [protoRes, feesRes] = await Promise.allSettled([
                         fetch(`https://api.llama.fi/protocol/${slug}`).then(r=>r.json()),
                         fetch(`https://api.llama.fi/summary/fees/${slug}?dataType=dailyFees`).then(r=>r.json()),
@@ -680,11 +732,14 @@ const App = {
                     n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${up?'#10b981':'#fb7185'}" stroke-width="1.5" points="${pts}"/></svg>`;
                 }
                 const feesEl = row?.querySelector('.proto-fees');
-                if (feesEl && detail.fees24h) feesEl.textContent = ` · Fees 24h ${fmtUsd(detail.fees24h)}`;
+                if (feesEl) feesEl.textContent = `Fees 24h ${detail.fees24h!=null ? fmtUsd(detail.fees24h) : '—'}`;
                 const scoreEl = row?.querySelector('.proto-score');
                 const p = (this._protoList||[]).find(x=>x.slug===slug);
                 if (scoreEl && p) scoreEl.innerHTML = this._scorePill(this._protocolScore({...p, fees24h: detail.fees24h, audits: detail.audits}));
-                await new Promise(r=>setTimeout(r,120));
+                // Only the 8→9 real network requests need the courtesy
+                // stagger to the free public API — a cache hit (from a
+                // #proto-sort re-render, e.g.) fills instantly.
+                if (fetchedFresh) await new Promise(r=>setTimeout(r,120));
             } catch(e){ /* leave blank on failure */ }
         }
     },
@@ -1306,6 +1361,22 @@ window.addEventListener('load', () => {
         [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
         b.className='term-btn term-btn-sm term-btn-active';
         App._renderMovers();
+    });
+    // Top Base Protocols sort — re-sorts the already-fetched top-8-by-TVL
+    // set, no new list request. 'All-time %' is the one option that needs
+    // each protocol's full TVL history, which may not be cached yet this
+    // early — _ensureProtoDetail() fetches (or reuses the cache) for any
+    // slug still missing it before the re-sort/redraw happens.
+    document.getElementById('proto-sort').addEventListener('click', async e => {
+        const b = e.target.closest('button[data-s]'); if (!b) return;
+        App._protoSort = b.dataset.s;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        if (App._protoSort === 'all') {
+            await Promise.all((App._protoList||[]).map(p => App._ensureProtoDetail(p.slug)));
+        }
+        App._renderProtocolRows();
+        App._enrichProtocols();
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });
