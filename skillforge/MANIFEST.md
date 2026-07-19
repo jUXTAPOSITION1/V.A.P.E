@@ -23,6 +23,11 @@ A skill isn't "learned" until it's reproducible from this repo with one command.
 
 ## Memory base (append-only, git-versioned, never lost)
 - `memory/tools-registry.json` — canonical tool list: install + invoke + version + last_verified + status
+- `memory/security_standards.json` — real, source-verified security-research knowledge base
+  (SWC Registry, SCSVS, ConsenSys best practices, Secureum 101/201, solcurity, kadenzipfel
+  attack-vectors — built from docs.hackenproof.com/education/useful-sources and each
+  resource's own real content). Reference material for audit prompts and reviewers, not
+  a code path — see `tests/test_security_standards_knowledge_base.py` for its schema.
 - `memory/findings.jsonl`  — real vulns/audits/CVEs: {ts, source, severity, target, summary, ref}
 - `memory/skills.jsonl`    — learned skills: {ts, skill, tier, tools[], playbook}
 - `memory/lessons.jsonl`   — what worked/failed: {ts, action, outcome, bounty_usd, note}
