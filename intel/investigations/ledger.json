@@ -1859,6 +1859,24 @@
     "symbol": "BRIAN",
     "times_investigated": 1
   },
+  "8453:0xb2000000000000000000002b40e71c8f8609a1c8": {
+    "address": "0xB2000000000000000000002b40e71C8F8609a1C8",
+    "chain": "8453",
+    "first_investigated": "2026-07-19T14:02:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-140230-0xB2000000.md",
+        "score": 40,
+        "ts": "2026-07-19T14:02:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-19T14:02:30Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "BASELLER",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000033c22ab099bbf76001": {
     "address": "0xB20000000000000000000033C22aB099bbF76001",
     "chain": "8453",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T14:00:03Z",
+  "generated": "2026-07-19T14:02:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -15,25 +15,25 @@
       "mainnet": 1
     },
     "broadcasts": 85,
-    "investigations": 236,
+    "investigations": 237,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 14
+    "skills": 15
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-120248-0x3AeE7602.md",
-      "title": "Investigation \u2014 BANK",
-      "symbol": "BANK",
-      "name": "Lorenzo Governance Token",
-      "date": "2026-07-19T12:02:48Z",
-      "target": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Owner not renounced (0x1716ece3ad0803df784ea57a38722d66305d536f) \u2014 can still act on the contract; [-10] Violent 24h move +159% (volatility/manipulation). Positive evidence: 58449 holders \u2014 reasonably distributed; Trading 445+ days without a known incident in this scan; Custom verified source (not a ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-120248-0x3AeE7602.md"
+      "file": "investigation-20260719-140230-0xB2000000.md",
+      "title": "Investigation \u2014 BASELLER",
+      "symbol": "BASELLER",
+      "name": "Baseller",
+      "date": "2026-07-19T14:02:30Z",
+      "target": "0xB2000000000000000000002b40e71C8F8609a1C8",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-140230-0xB2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-140230-0xB2000000.md",
+      "title": "Investigation \u2014 BASELLER",
+      "symbol": "BASELLER",
+      "name": "Baseller",
+      "date": "2026-07-19T14:02:30Z",
+      "target": "0xB2000000000000000000002b40e71C8F8609a1C8",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-140230-0xB2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-120248-0x3AeE7602.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-20] Very few holders (20) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-000720-0x0f020434.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-225909-0x8453Cf5D.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-16T22:59:09Z",
-      "target": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-225909-0x8453Cf5D.md"
     }
   ],
   "reports": [
@@ -1717,6 +1717,12 @@
       "title": "Smart Contract Investigation and Tool Gap Analysis",
       "summary": "Distilled 2026-07-06T10:45:48Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/smart-contract-investigation-and-tool-gap-analysis.md"
+    },
+    {
+      "file": "token-investigation-workflow.md",
+      "title": "Token Investigation Workflow",
+      "summary": "",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-investigation-workflow.md"
     },
     {
       "file": "skills-base-token-verdict-override-md.md",
