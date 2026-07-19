@@ -501,8 +501,9 @@ USDC, real settlement transactions.
 The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
 `.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
-Slither run + Halmos symbolic testing + frontier-model source review can't finish
-inside a Worker's request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
+Aderyn static AST analysis + frontier-model source review can't finish inside
+a Worker's request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
 `chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
 retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
 with no free equivalent). Advertised for discovery
@@ -631,6 +632,44 @@ the hourly cycle.
   `attack_lessons_state.json`) to `skillforge/memory/findings.jsonl`, surfaced in the
   report's "Lessons Learned" section and per-incident in `data/attack-feed.json`/the
   Threat Ledger UI. Nothing here is LLM-guessed — see this module's design law above.
+- **`hack_agent.py`** [OK] — writes a real, standalone threat analysis for every incident
+  in `data/attack-feed.json`'s window, not just the rule-based lesson tag above. Grounded
+  only in that same feed's real fields plus one live web search for public writeups —
+  never invents a detail. Written by OCI-hosted xAI Grok 4.3 first (`agents/llm.py::
+  ask_oci_grok()`), falling back through `FRONTIER_ORDER` like every other analyst call
+  if OCI isn't configured or errors. Idempotent (`skillforge/memory/threat_analysis_state.
+  json`); patches each incident's `analysis_report` path back onto `data/attack-feed.json`
+  every run (which `security_sweep.py` regenerates fresh each cycle with no knowledge of
+  this field), so `docs/assets/attackfeed.js` can render a real per-incident "Full
+  analysis" link, not just the feed-wide source-report link. Own schedule
+  (`threat-analysis.yml`, 6-hourly) and module, independent of the sweep pipeline.
+- **`hack_sweep.py`** [OK] — VAPE's daily proactive vulnerability hunt: escalates a
+  small number of CAUTION-verdict entries already in `investigate.py`'s own ledger (real
+  addresses from the free hourly auto-cycle) to `deep_dive_audit.py`'s full heavy tool
+  suite (Slither/Halmos/Mythril/Aderyn + OCI Grok 4.3 frontier reasoning) — the same
+  pipeline paying x402/ACP buyers get for the $50 `bounty_deep_dive` offering, run here
+  free against VAPE's own initiative (`engagement="sweep"`, reports land in
+  `intel/audits/hack-sweep-reports/`, clearly labeled as non-paid). Own dedup state
+  (`skillforge/memory/hack_sweep_state.json`) and daily schedule (`hack-sweep.yml`).
+- **`external_audit.py`** [OK] — VAPE's reusable pipeline for a real external bug-bounty
+  engagement against any target repo (any language/chain, not just VAPE's own Base/EVM
+  investigations) — built for the first real engagement, Momentum's `mmt-v3-core` CLMM
+  (Move/Sui) via HackenProof. Fetches real source (keyless, `raw.githubusercontent.com` +
+  the public git/trees API), detects language, and runs a rigorous frontier-LLM (OCI Grok
+  4.3) line-by-line review with a language-appropriate system prompt (a dedicated
+  Move-specific one distinguishing what Move's resource-safety model already guarantees
+  from what it doesn't). Deliberately does not invoke Slither/Mythril/Aderyn/Halmos —
+  those are Solidity-specific and need either a live on-chain address or a compilable
+  Foundry project; a genuinely Solidity on-chain target should go through
+  `deep_dive_audit.py` instead. For Move targets, also runs bounded formal verification
+  (`agents/scaffold_move_target.py`): scaffolds a real local Move package from the
+  target's own fetched source + real Move.toml, has the frontier LLM draft speculative
+  Move Prover spec properties (mirrors `scaffold_foundry_target.py`'s Halmos-hypothesis
+  pattern, since real external targets rarely ship existing spec blocks), and runs
+  `sui-prover` against them if it's installed this run — deliberately not
+  auto-installed in any workflow (no Linux release published; needs a from-source
+  build with Boogie + Z3). Manual `workflow_dispatch`
+  (`external-bounty-audit.yml`) per engagement, not scheduled.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
@@ -767,14 +806,20 @@ still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
 instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($50) is the
 one async exception: pays via x402, then dispatches
 `.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
-immediately, since a real Slither run + Halmos symbolic testing + frontier-model
-source review can't complete inside a Worker's request window. Symbolic testing
-(`agents/scaffold_foundry_target.py`) scaffolds the target's own verified source
-into a throwaway Foundry project, drafts a handful of Halmos `check_*` properties
-with the frontier LLM (explicitly labeled hypotheses, never findings), and runs
-Halmos for real against them — a second, independent analysis layer alongside
-Slither's static pass, skipped cleanly if `forge`/`halmos` aren't on the runner's
-PATH this cycle.
+immediately, since a real Slither run + Halmos symbolic testing + Mythril
+symbolic-execution scan + Aderyn static AST analysis + frontier-model source
+review can't complete inside a Worker's request window. Symbolic testing
+(`agents/scaffold_foundry_target.py`) scaffolds the target's own verified
+source into a throwaway Foundry project, drafts a handful of Halmos `check_*`
+properties with the frontier LLM (explicitly labeled hypotheses, never
+findings), and runs Halmos for real against them — a second, independent
+analysis layer alongside Slither's static pass. Mythril (`myth analyze -a
+<address> --rpc <host:port>`) adds a third, independent pass, analyzing the
+target's actual deployed bytecode on-chain by address via the target chain's
+real public RPC. Aderyn adds a fourth pass, reusing that same scaffolded
+Foundry project for a second, independent static AST analysis. Each tool is
+skipped cleanly (never a hard dependency) if it isn't on the runner's PATH
+this cycle.
 
 **`agents/data_agent.py`** [OK] closes the loop from the buy side: every real
 `investigate.py` run recruits DATA AGENT's own funded wallet
@@ -1029,6 +1074,25 @@ its key is unset, so this table is "what's wired," not "what you personally have
   than only on new entries, and insight gets acted on, not just narrated —
   `_act_on_incidents()` triggers a real investigation whenever an incident's address
   verifies, on any chain investigate.py supports.
+- **Opt-in candidate providers (not on the default `FRONTIER_ORDER` path):**
+  `agents/llm.py` carries three opt-in-only LLM candidates, none in
+  `PROVIDERS`/`FRONTIER_ORDER` itself — a self-hosted GPU fine-tune
+  (`ask_candidate()`, `VAPE_CANDIDATE_URL`, still standalone/not chained),
+  a Vertex-AI supervised-tuned Gemini model with real repo-digest grounding
+  (`ask_vertex_candidate()`, `VAPE_VERTEX_ACCESS_TOKEN` via WIF), and Oracle
+  Cloud's hosted xAI Grok 4.3 (`ask_oci_grok()`, `OCI_GENAI_API_KEY`, a plain
+  Bearer secret from OCI's Generative AI service, 1M-token context,
+  reasoning-focused). By explicit direction (2026-07-19), **`ask_oci_grok()`
+  is now the primary real-reasoning entrypoint** for every one of these call
+  sites: `skillforge/synthesize.py`, the 5 intel sweeps' narrative synthesis,
+  and `investigate.py`'s expert assessment. It falls back to
+  `ask_vertex_candidate()` (wherever `VAPE_VERTEX_ACCESS_TOKEN` is also
+  configured), which itself falls back to `FRONTIER_ORDER` — so the real
+  chain everywhere is **OCI Grok 4.3 → Vertex-tuned Gemini → frontier chain
+  (xai_1/groq/gemini/rest)**, each layer degrading gracefully to the next.
+  OCI Grok's own daily spend cap (`OCI_GROK_DAILY_SPEND_CAP_USD`, default
+  $10 — see `DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD`) reflects this much
+  higher-volume role, sized independently of xai_1's own $3 default.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to
@@ -2149,6 +2213,9 @@ protocol — it's a report. These make this one keep working after today:
     deep_dive_audit.py
     defillama.py
     engagements.py
+    external_audit.py
+    hack_agent.py
+    hack_sweep.py
     hack_system.md
     integration.py
     intel_common.py
@@ -2165,6 +2232,7 @@ protocol — it's a report. These make this one keep working after today:
     review_ledger.py
     run.py
     scaffold_foundry_target.py
+    scaffold_move_target.py
     scout.py
     security_sweep.py
     self_improve.py
@@ -2179,7 +2247,6 @@ protocol — it's a report. These make this one keep working after today:
   data/
     attack-feed.json
     intel-index.json
-    memory.db
     reputation.json
     finetune/
   docs/
@@ -2210,6 +2277,7 @@ protocol — it's a report. These make this one keep working after today:
     reports/
     scans/
     templates/
+    threat-analysis/
   mcp_servers/
     registry.json
     vape_mcp.py
@@ -2561,6 +2629,11 @@ protocol — it's a report. These make this one keep working after today:
     repo_review_20260718_170654.md
     repo_review_20260718_190631.md
     repo_review_20260718_205140.md
+    repo_review_20260718_215237.md
+    repo_review_20260718_225136.md
+    repo_review_20260718_235509.md
+    repo_review_20260719_024954.md
+    repo_review_20260719_055516.md
     self_improve_20260706_155110.md
     self_improve_20260707_145511.md
     self_improve_20260708_143315.md
@@ -2594,6 +2667,7 @@ protocol — it's a report. These make this one keep working after today:
     skillforge_build_20260717_104226.md
     skillforge_build_20260717_214738.md
     skillforge_build_20260718_101516.md
+    skillforge_build_20260718_214505.md
   scripts/
     INTEL_RUNBOOK.md
     REBUILD_STATE.md
@@ -2634,12 +2708,17 @@ protocol — it's a report. These make this one keep working after today:
     test_convert_dataset_vertex.py
     test_critic.py
     test_data_agent.py
+    test_deep_dive_aderyn.py
+    test_deep_dive_mythril.py
     test_deep_dive_symbolic.py
     test_defillama.py
     test_engagements.py
     test_eval_candidate.py
+    test_external_audit.py
     test_findings_chain.py
     test_finetune_dataset.py
+    test_hack_agent.py
+    test_hack_sweep.py
     test_intel_common.py
     test_investigate_expert_assessment.py
     test_investigate_sanitize.py
@@ -2651,8 +2730,10 @@ protocol — it's a report. These make this one keep working after today:
     test_redteam_builder.py
     test_run_reconcile.py
     test_scaffold_foundry_target.py
+    test_scaffold_move_target.py
     test_scout_strategic_briefing.py
     test_security_lint.py
+    test_security_standards_knowledge_base.py
     test_security_sweep.py
     test_skillforge_build_bounty_signal.py
   training/
@@ -2999,14 +3080,15 @@ VAPE Deep-Dive Bounty Audit — the 50 USDC / 24h-SLA premium offering.
 
 The cheapest 6 x402 offerings and agents/investigate.py's free auto-cycle are all
 deliberately zero/light-LLM, keyless-first, sub-5-minute checks. This is the other
-end of the spectrum: a real frontier-tier model (agents/llm.py::ask_frontier() —
-Gemini 2.5 Pro, Groq as the automatic fallback) reads the contract's ACTUAL verified
+end of the spectrum: a real frontier-tier model (agents/llm.py::ask_oci_grok_frontier() —
+OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback) reads the contract's ACTUAL verified
 source text and reasons about specific vulnerability classes line-by-line, on top of
 every recon signal agents/investigate.py already gathers (GoPlus, DexScreener, on-chain
-presence, hack-technique correlation, public web reputation). Slither runs too, for
-real, if it's already on PATH in the environment this executes in — never a hard
-dependency, since a fresh multi-minute toolchain install has no place in a script whose
-whole point is a reliable result, not gambling on a slow install succeeding.
+presence, hack-technique correlation, public web reputation). Slither, Halmos, Mythril,
+and Aderyn all run too, for real, if they're already on PATH in the environment this
+executes in — never a hard dependency, since a fresh multi-minute toolchain install has
+no place in a script whose whole point is a reliable result, not gambling on a slow
+install succeeding.
 
 "24h SLA" is a turnaround promise to the buyer, not a literal runtime — this completes
 in one run (recon + optional Slither + one frontier LLM call), matching
@@ -3101,6 +3183,119 @@ elsewhere in this repo) — a real history of status transitions, not a
 replay of the same snapshot every cycle.
 
 Usage: python -m agents.engagements
+
+### agents/external_audit.py
+
+External Bounty Engagement — VAPE's blueprint for auditing a real, external
+bug-bounty target repo (any language, any chain), not just its own on-chain
+Base/EVM investigations.
+
+Built for the first real engagement this covers (Momentum's mmt-v3-core
+CLMM, https://hackenproof.com/programs/momentum-smart-contracts, real
+program repo mirror at github.com/hackenproof-public/mmt-v3-core, source
+verified identical at the canonical github.com/mmt-finance/v3-core) — but
+deliberately generalized so any future external bounty repo (Move/Sui,
+Solidity/EVM, Rust/Solana, anything) can reuse this exact pipeline instead
+of a one-off script per engagement.
+
+Scope, honestly stated: this tool's real, verified capability is a rigorous
+frontier-LLM (OCI Grok 4.3, agents/llm.py::ask_oci_grok_frontier — same
+"no local override" contract deep_dive_audit.py uses) line-by-line source
+review — the same kind of reasoning pass deep_dive_audit.py already runs
+against on-chain Solidity targets. It deliberately does NOT invoke
+Slither/Mythril/Aderyn/Halmos here: those are Solidity-specific static/
+symbolic tools that need either a live on-chain address (Slither, Mythril)
+or a locally compilable Foundry project (Aderyn, Halmos) — neither applies
+to a source-only fetch of an arbitrary external repo, and for a non-Solidity
+target (e.g. Move, this engagement's actual language) none of them apply at
+all regardless. A genuinely Solidity on-chain target should go through
+agents/deep_dive_audit.py instead, which has the real toolchain wired in.
+
+Fetching: two real, keyless mechanisms —
+  - fetch_repo_tree(): GitHub's public git/trees API (unauthenticated,
+    rate-limited but fine for a one-off engagement) to auto-discover every
+    source file in the repo at a given ref.
+  - fetch_file(): raw.githubusercontent.com (no auth, no rate-limit
+    concerns) to pull each file's actual real content.
+Both degrade honestly (empty result / None) rather than fabricating source
+on any network failure — this sandbox's own egress policy blocks api.github.
+com/github.com for repos outside its session scope, so fetch_repo_tree()
+could not be live-tested from here; fetch_file() against
+raw.githubusercontent.com (a separate, unrestricted host) was verified live.
+A real GitHub Actions run has unrestricted egress and can exercise both.
+
+Real, not fabricated: never invents a finding. If nothing the frontier model
+flags survives an honest read, the report says so plainly instead of
+manufacturing severity to justify a submission.
+
+### agents/hack_agent.py
+
+HACK Agent — VAPE's per-incident threat-analysis writer.
+
+Every real incident in data/attack-feed.json's lookback window (the same
+feed security_sweep.py already writes from DeFiLlama's real hacks data) gets
+its own real, standalone markdown analysis — not just the single rule-based
+"lesson" tag the Threat Ledger already shows. Grounded ONLY in the real
+fields security_sweep.py already gathered (name/date/amount/technique/
+chains/lesson) plus one real web search for public writeups — the model is
+told never to invent a detail beyond what's given, and to say plainly when
+the real data is too thin to say more.
+
+Written by OCI-hosted Grok 4.3 first (agents/llm.py::ask_oci_grok() —
+VAPE's newest, most capable currently-wired reasoning model), falling back
+through FRONTIER_ORDER exactly like every other analyst call in this repo
+(agents/intel_common.py::grok_analysis()) if OCI isn't configured or errors.
+Never blocks: an unreachable LLM chain just means that incident is retried
+next run, not a crash.
+
+Idempotent via its own state file (skillforge/memory/threat_analysis_state.
+json), same pattern as security_sweep.py's attack_response/attack_lesson
+state files — each incident only gets a real analysis written once. Every
+run re-patches each incident's `analysis_report` path back onto data/
+attack-feed.json (which security_sweep.py's own schedule regenerates fresh
+every cycle and has no knowledge of this field) so docs/assets/attackfeed.js
+can render a real per-incident link, not just the feed-wide `source_report`
+link that already exists.
+
+Every incident gets a write-up — not just high-severity ones — by explicit
+direction; a $0-loss incident just gets an honestly short one instead of
+padding. MAX_ANALYSES_PER_RUN caps a single run's LLM spend/runtime; a large
+backlog (e.g. a first-ever run against the full 8-week feed) catches up over
+a few scheduled cycles rather than firing dozens of calls at once.
+
+### agents/hack_sweep.py
+
+HACK SWEEP — VAPE's daily proactive full-tool-coverage vulnerability sweep
+across real Base/EVM targets, running for free against VAPE's own initiative
+(not a paid engagement).
+
+This is an escalation pipeline, not a fresh discovery mechanism:
+agents/investigate.py's existing hourly auto-cycle (auto_target()) already
+does real keyless recon + scoring across every EVM_CHAINS network and
+records a verdict in its own ledger (agents/investigate.py::LEDGER_PATH) for
+every target it touches. This sweep reuses that same real ledger as its
+candidate pool and promotes a small number of the most interesting-looking
+entries — CAUTION verdicts specifically: REJECT ones are already
+conclusively bad under the free pass, PROCEED ones already look clean, but
+CAUTION is exactly where a deeper, multi-tool pass earns its keep — to
+VAPE's heaviest analysis: agents/deep_dive_audit.py's full tool suite
+(GoPlus + DexScreener + on-chain recon + Etherscan source + Slither +
+Halmos + Mythril + Aderyn + OCI Grok 4.3 frontier reasoning), the exact same
+pipeline paying x402/ACP buyers get for the $50 bounty_deep_dive offering,
+run here with engagement="sweep" so the resulting report honestly reads as
+a proactive sweep rather than a paid job.
+
+Keeps its own dedup state (skillforge/memory/hack_sweep_state.json) —
+separate from investigate.py's ledger, since "already free-investigated"
+and "already got the full heavy tool-suite deep dive" are different facts
+about the same address. Real, not fabricated: never invents a target
+address; skips cleanly (does nothing) if the ledger has no fresh
+CAUTION-flagged candidate this cycle.
+
+Logs a summary finding to skillforge/memory/findings.jsonl per address
+swept — VAPE's memory review of its own daily proactive hunt, the same
+convention agents/hack_agent.py already established for per-incident
+threat writeups.
 
 ### agents/integration.py
 
@@ -3227,6 +3422,12 @@ opt-in-only way via ask_vertex_candidate(), gated on VAPE_VERTEX_ACCESS_TOKEN
 (a short-lived OAuth token minted per workflow run via Workload Identity
 Federation, never a stored key — this Google Cloud project enforces
 iam.disableServiceAccountKeyCreation).
+
+A third candidate — Oracle Cloud's hosted xAI Grok 4.3 (1M-token context,
+reasoning-focused; not fine-tuned/VAPE-specific like the two above, just a
+second real frontier-model host) — is reachable via ask_oci_grok(), gated on
+OCI_GENAI_API_KEY (a plain Bearer secret from OCI's Generative AI service,
+distinct from the IAM RSA key pair used for general OCI SDK/CLI auth).
 
 Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
@@ -3484,6 +3685,54 @@ release tarball, not a pip package like Halmos), so the actual forge build +
 halmos run can only be smoke-tested on a normal GitHub Actions runner or the
 training GPU box — the parsing/scaffolding logic below is what
 tests/test_scaffold_foundry_target.py covers hermetically.
+
+### agents/scaffold_move_target.py
+
+Scaffolds a real local Move package from an external repo's already-fetched
+source (agents/external_audit.py) so sui-prover — which needs a real
+Move.toml-rooted package directory, not loose in-memory files — has
+something concrete to run formal verification against.
+
+Extends agents/external_audit.py's frontier-LLM-only review with a second,
+independent layer for Move targets: bounded formal verification. Real, no
+fabrication end to end except one deliberate exception, clearly marked —
+same discipline as agents/scaffold_foundry_target.py's Halmos pipeline for
+Solidity, which this mirrors:
+
+  1. Source: the exact files agents/external_audit.py already fetched byte
+     for byte from raw.githubusercontent.com (including the target's own
+     real Move.toml, fetched the same way — never synthesized) — nothing
+     invented.
+  2. Scaffold: writes those files into a real directory tree under
+     sources/, using each file's real relative path, plus the target's own
+     real Move.toml written back unmodified.
+  3. Specs: THIS is the one LLM-generated piece. Move Prover only proves
+     properties actually written in Move's spec language (MSL) — a real
+     target repo with zero existing `spec` blocks (Momentum's mmt-v3-core,
+     confirmed by inspection, is exactly this case) gives sui-prover nothing
+     to check beyond generic default-abort framework analysis. A frontier
+     LLM drafts candidate `spec` blocks (aborts_if/ensures) for a handful of
+     the most security-relevant functions already identified in the
+     narrative review, labeled plainly as HYPOTHESES to check, never as
+     established findings — mirrors scaffold_foundry_target.py's Halmos
+     check_* drafting step exactly.
+  4. Prove: a real `sui-prover` run against the scaffolded package + the
+     drafted spec module.
+
+Needs `sui-prover` on PATH. Deliberately NOT auto-installed by any workflow
+in this repo: as of this module's writing, asymptotic-code/sui-prover
+publishes no Linux release artifact (macOS Homebrew only) and depends on
+the Boogie verification engine + Z3 SMT solver — a from-source build in CI
+would be multi-minute and fragile, unlike this repo's other best-effort
+tools (Slither/Mythril/Aderyn/Halmos), which all install in well under a
+minute via pip/a release binary. A real live-verified run needs a runner
+with sui-prover pre-installed (a dedicated one-time setup, same pattern as
+the LoRA fine-tuning GPU box) — this sandbox's own egress policy also
+blocks the hosts needed to attempt that install here. The scaffolding/
+prompt-construction/output-parsing logic below is what
+tests/test_scaffold_move_target.py covers hermetically; report any real
+compile/prove failure honestly rather than papering over it, exactly like
+scaffold_foundry_target.py's forge-build step.
 
 ### agents/scout.py
 
@@ -4450,18 +4699,16 @@ Usage: python run_promptfoo_scan.py
 
 DeepEvalBaseLLM adapter wrapping VAPE's own multi-provider LLM layer
 (agents/llm.py — Groq/Cerebras/OpenRouter/GitHub Models/Together, all free
-tier). deepteam's red_team() needs a `simulator_model` (writes attacks) and
-an `evaluation_model` (judges whether the target was compromised); both
+tier, plus OCI-hosted Grok 4.3/Vertex/xai_1 as the opt-in stronger chain).
+deepteam's red_team() needs a `simulator_model` (writes attacks) and an
+`evaluation_model` (judges whether the target was compromised); both
 default to OpenAI models, which VAPE doesn't have a key for and won't pay
-for. This adapter lets deepteam campaigns run entirely on VAPE's existing
-free-tier stack — zero new secrets, zero new cost.
+for. This adapter lets deepteam campaigns run entirely on VAPE's own stack.
 
-Honesty note (documented, not hidden): using VAPE's own small open-source
-model as both attacker and judge is weaker than using a stronger frontier
-model as judge — it can miss subtler jailbreaks. A FAIL from this setup is
-still strong evidence of a real vulnerability (the target model produced
-the bad output regardless of who graded it); a PASS is weaker evidence of
-true safety and should be read as "held against this test," not "immune."
+By explicit direction (2026-07-19), both the simulator and the judge use
+OCI Grok 4.3 first (falling back through FRONTIER_ORDER) — a stronger
+simulator writes more sophisticated, harder-to-defend-against attacks, a
+more realistic adversary, not just a stronger judge. See campaign_vape.py.
 
 ### training/eval_candidate.py
 
