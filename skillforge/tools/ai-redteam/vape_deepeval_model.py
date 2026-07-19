@@ -1,18 +1,16 @@
 """
 DeepEvalBaseLLM adapter wrapping VAPE's own multi-provider LLM layer
 (agents/llm.py — Groq/Cerebras/OpenRouter/GitHub Models/Together, all free
-tier). deepteam's red_team() needs a `simulator_model` (writes attacks) and
-an `evaluation_model` (judges whether the target was compromised); both
+tier, plus OCI-hosted Grok 4.3/Vertex/xai_1 as the opt-in stronger chain).
+deepteam's red_team() needs a `simulator_model` (writes attacks) and an
+`evaluation_model` (judges whether the target was compromised); both
 default to OpenAI models, which VAPE doesn't have a key for and won't pay
-for. This adapter lets deepteam campaigns run entirely on VAPE's existing
-free-tier stack — zero new secrets, zero new cost.
+for. This adapter lets deepteam campaigns run entirely on VAPE's own stack.
 
-Honesty note (documented, not hidden): using VAPE's own small open-source
-model as both attacker and judge is weaker than using a stronger frontier
-model as judge — it can miss subtler jailbreaks. A FAIL from this setup is
-still strong evidence of a real vulnerability (the target model produced
-the bad output regardless of who graded it); a PASS is weaker evidence of
-true safety and should be read as "held against this test," not "immune."
+By explicit direction (2026-07-19), both the simulator and the judge use
+OCI Grok 4.3 first (falling back through FRONTIER_ORDER) — a stronger
+simulator writes more sophisticated, harder-to-defend-against attacks, a
+more realistic adversary, not just a stronger judge. See campaign_vape.py.
 """
 import os
 import sys
@@ -27,19 +25,17 @@ class VapeLLM(DeepEvalBaseLLM):
     """Wraps agents.llm.ask_safe (or ask_oci_grok_safe, see use_oci_grok) as
     a deepteam/deepeval-compatible model.
 
-    provider_order lets a caller pin this to agents.llm.FRONTIER_ORDER — used
-    for the judge (see campaign_vape.py), since a stronger judge model
-    directly addresses the honesty note above: a smarter judge catches
-    subtler jailbreaks the small open models could miss. Left None (the
-    default free chain) for the attack simulator, which doesn't need to be
-    smart to write attack prompts.
+    provider_order lets a caller pin this to agents.llm.FRONTIER_ORDER —
+    the fallback chain below OCI Grok/Vertex for whichever instance sets
+    use_oci_grok=True (see campaign_vape.py, which now sets it for both the
+    judge and the simulator).
 
     use_oci_grok routes generate() through ask_oci_grok_safe (OCI-hosted
     Grok 4.3 first, falling back to Vertex/provider_order) instead of plain
-    ask_safe — set True only for the judge instance, never the simulator:
-    the simulator must stay off VAPE's strongest models by design (it's
-    writing attacks, not judging them), enforced by tests/
-    test_llm_critical_wiring.py::test_adversarial_simulator_stays_off_frontier_order."""
+    ask_safe. Left as a per-instance flag (not just always-on) so a caller
+    that genuinely wants the plain free chain for one role — e.g. a future
+    campaign wanting an intentionally weak simulator for some other test —
+    still can, without changing this adapter."""
 
     def __init__(self, tier="fast", provider_order=None, use_oci_grok=False):
         self.tier = tier
