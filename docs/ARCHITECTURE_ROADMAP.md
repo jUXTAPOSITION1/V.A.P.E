@@ -163,6 +163,20 @@ its key is unset, so this table is "what's wired," not "what you personally have
   than only on new entries, and insight gets acted on, not just narrated —
   `_act_on_incidents()` triggers a real investigation whenever an incident's address
   verifies, on any chain investigate.py supports.
+- **Opt-in candidate providers (not on the default `FRONTIER_ORDER` path):**
+  `agents/llm.py` also carries three explicitly opt-in-only LLM candidates,
+  each falling back to the normal chain above when unconfigured/erroring —
+  a self-hosted GPU fine-tune (`ask_candidate()`, `VAPE_CANDIDATE_URL`), a
+  Vertex-AI supervised-tuned Gemini model with real repo-digest grounding
+  (`ask_vertex_candidate()`, `VAPE_VERTEX_ACCESS_TOKEN` via WIF, wired into
+  `skillforge/synthesize.py`/the sweep narratives/investigations' expert
+  assessment), and Oracle Cloud's hosted xAI Grok 4.3 — a second real
+  frontier-model host, 1M-token context, reasoning-focused
+  (`ask_oci_grok()`, `OCI_GENAI_API_KEY`, a plain Bearer secret from OCI's
+  Generative AI service). None of these three are in `PROVIDERS`/
+  `FRONTIER_ORDER` by default — each is a separate, evaluated rollout
+  decision per call site, matching the eval-before-real-traffic rule in
+  `data/finetune/DATASET_CARD.md`.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to
