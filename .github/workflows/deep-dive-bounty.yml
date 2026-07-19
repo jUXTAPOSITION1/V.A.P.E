@@ -61,6 +61,8 @@ jobs:
           TARGET_ADDRESS: ${{ github.event.inputs.address }}
           TARGET_CHAIN: ${{ github.event.inputs.chain }}
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
