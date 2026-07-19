@@ -57,8 +57,10 @@ if ROOT not in sys.path:
 
 try:
     from agents.llm import ask_oci_grok_frontier
+    from agents.scaffold_move_target import scaffold_and_prove
 except Exception:
     from llm import ask_oci_grok_frontier
+    from scaffold_move_target import scaffold_and_prove
 
 AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "external-bounties")
 FINDINGS_PATH = os.path.join(ROOT, "skillforge", "memory", "findings.jsonl")
@@ -106,6 +108,35 @@ def fetch_repo_tree(owner, repo, ref, timeout=20):
     except Exception as e:
         print(f"[external_audit] fetch_repo_tree failed: {e}", file=sys.stderr)
         return []
+
+
+def _derive_move_toml_candidates(paths):
+    """Move packages conventionally place Move.toml one level above their
+    sources/ directory — derive the real package root from the fetched
+    paths' own "sources/" ancestor rather than assuming a fixed layout, so
+    this works for any Move repo, not just this engagement's."""
+    candidates = []
+    seen = set()
+    for p in paths:
+        idx = p.find("/sources/")
+        if idx != -1:
+            root = p[:idx]
+        elif p.startswith("sources/"):
+            root = ""
+        else:
+            continue
+        for name in ("Move.toml", "move.toml"):
+            cand = f"{root}/{name}" if root else name
+            if cand not in seen:
+                seen.add(cand)
+                candidates.append(cand)
+    return candidates
+
+
+def _strip_package_root(path, root_prefix):
+    if root_prefix and path.startswith(root_prefix + "/"):
+        return path[len(root_prefix) + 1:]
+    return path
 
 
 def detect_language(paths):
@@ -261,6 +292,25 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
         (re.search(r"(?im)^#+\s*executive summary\s*\n+(.+)", narrative)
          or re.search(r"(.{0,120})", narrative)).group(1).strip()
 
+    prover_result = {"ran": False, "reason": "not applicable — target is not a Move package"}
+    if language == "move":
+        move_toml_content, root_prefix = None, ""
+        for cand in _derive_move_toml_candidates(paths):
+            content = fetch_file(owner, repo, ref, cand)
+            if content is not None:
+                move_toml_content = content
+                root_prefix = cand.rsplit("/", 1)[0] if "/" in cand else ""
+                break
+        if move_toml_content is None:
+            prover_result = {"ran": False, "reason": "could not locate this package's real Move.toml"}
+        else:
+            stripped_files = {_strip_package_root(p, root_prefix): c for p, c in files.items()}
+            try:
+                prover_result = scaffold_and_prove(stripped_files, move_toml_content,
+                                                   focus_note=narrative[:800] if provider else "")
+            except Exception as e:
+                prover_result = {"ran": False, "reason": str(e)}
+
     os.makedirs(AUDIT_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     slug = re.sub(r"[^a-z0-9]+", "-", f"{owner}-{repo}".lower()).strip("-")
@@ -274,15 +324,39 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
          f"**Date:** {now_iso()}  ",
          f"**Engine:** Frontier LLM ({provider or 'unavailable'}) — real source review, no "
          f"Solidity static/symbolic tooling applies to this target's language (see module "
-         f"docstring for why)  ",
-         "", "---", "", "## AI Security Review", narrative, "", "---", "",
-         "## Methodology", "1. Real source fetched directly from the target's own public "
+         f"docstring for why)"
+         f"{' + Move Prover formal verification' if prover_result.get('ran') else ''}  ",
+         "", "---", "", "## AI Security Review", narrative, "", "---", ""]
+    if language == "move":
+        L.append("## Formal Verification (Move Prover / sui-prover)")
+        if prover_result.get("ran"):
+            prover = prover_result.get("prover", {})
+            L.append("- Ran `sui-prover` against a real scaffolded package (the target's own "
+                     "verified source + Move.toml) with a handful of specification properties "
+                     "an earlier step drafted from that same source — those properties are "
+                     "HYPOTHESES to check, not established findings; a pass narrows the search "
+                     "space, it isn't a clean bill of health.")
+            L.append(f"- sui-prover exit code: {prover.get('returncode')}")
+            if prover.get("output"):
+                L.append("```")
+                L.append(prover["output"][:1500])
+                L.append("```")
+        else:
+            L.append(f"- Not run this cycle: {prover_result.get('reason')}")
+        L.append("")
+        L.append("---")
+        L.append("")
+    L += ["## Methodology", "1. Real source fetched directly from the target's own public "
          "GitHub repository (raw.githubusercontent.com, keyless) — byte for byte, nothing "
          "invented or paraphrased before review.",
          "2. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Groq as "
          "fallback) reads the actual source and reasons per vulnerability class relevant "
          "to the target language/platform.",
-         "3. White-hat only: read-only source review, no on-chain interaction or "
+         "3. For Move targets: bounded formal verification via sui-prover against LLM-drafted "
+         "specification properties compiled into a scaffolded package built from that same "
+         "verified source — only if sui-prover is installed this run (see "
+         "agents/scaffold_move_target.py's docstring for why this isn't auto-installed).",
+         "4. White-hat only: read-only source review, no on-chain interaction or "
          "exploitation attempted.",
          "", "*Generated by agents/external_audit.py — VAPE's reusable external bug-bounty "
          "engagement pipeline. This report is a first-pass automated review; any finding "
@@ -296,7 +370,8 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
 
     result = {"program": program_name or f"{owner}/{repo}", "repo": f"{owner}/{repo}", "ref": ref,
               "language": language, "files_reviewed": len(files), "report": rel,
-              "provider": provider, "verdict_summary": verdict_summary}
+              "provider": provider, "verdict_summary": verdict_summary,
+              "move_prover_ran": prover_result.get("ran", False)}
     _append_finding(result)
     return result
 
