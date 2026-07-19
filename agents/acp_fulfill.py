@@ -172,7 +172,7 @@ def _verify_socials(dex):
 
 _AI_QUICK_REVIEW_SYSTEM = (
     "You are VAPE, an autonomous on-chain security reviewer, giving a QUICK paid "
-    "pre-trade read (not the full $50 24h deep-dive audit). Base every claim on "
+    "pre-trade read (not the full $1 deep-dive audit). Base every claim on "
     "the actual verified source and recon data given below — never invent function "
     "names, behavior, or facts you weren't shown. Open by naming the token/project "
     "and stating whether the source is a known template (e.g. a Virtuals Protocol "
@@ -198,7 +198,7 @@ _AI_QUICK_REVIEW_SYSTEM = (
 
 def _ai_quick_review(a, chain, assess, src):
     """Frontier-LLM quick read of the actual verified source — same provider
-    chain as the $50 deep-dive (agents/llm.ask_oci_grok_frontier: OCI-hosted
+    chain as the $1 deep-dive (agents/llm.ask_oci_grok_frontier: OCI-hosted
     Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback), but
     a far smaller prompt/output budget matched to dossier_check's
     synchronous, instant-tier nature rather than the bounty's full markdown
@@ -241,7 +241,7 @@ def _dossier_check(req):
     the project's own declared website/social URLs (_verify_socials, not
     just a boolean "has any"), and a frontier-LLM quick read of the actual
     verified source (_ai_quick_review) — VAPE's deepest automated signal
-    short of the $50 24h deep-dive audit.
+    short of the $1 deep-dive audit.
     """
     a = _addr(req)
     if not a:

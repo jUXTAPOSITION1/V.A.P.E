@@ -1,4 +1,4 @@
-name: Deep-Dive Bounty Audit (50 USDC / 24h SLA)
+name: Deep-Dive Bounty Audit (1 USDC)
 
 # Fired two ways:
 #   - x402: worker/src/lib/githubDispatch.ts calls this via the REST API right

@@ -48,3 +48,44 @@ export async function dispatchDeepDiveAudit(
   const body = res.status === 204 ? "" : await res.text().catch(() => "");
   return { ok: res.status === 204, status: res.status, body };
 }
+
+export interface ExternalAuditDispatchArgs {
+  owner: string;
+  repo: string;
+  ref?: string;
+  programName?: string;
+  paths?: string;
+  callbackUrl?: string;
+}
+
+/** Sibling of dispatchDeepDiveAudit() for a source-repo target instead of an
+ * on-chain address (e.g. Move/Sui or any external bounty-program repo) —
+ * same fire-and-forget REST dispatch shape, targeting
+ * agents/external_audit.py via .github/workflows/external-bounty-audit.yml. */
+export async function dispatchExternalBountyAudit(
+  token: string,
+  args: ExternalAuditDispatchArgs,
+): Promise<DispatchResult> {
+  const inputs: Record<string, string> = { owner: args.owner, repo: args.repo };
+  if (args.ref) inputs.ref = args.ref;
+  if (args.programName) inputs.program_name = args.programName;
+  if (args.paths) inputs.paths = args.paths;
+  if (args.callbackUrl) inputs.callback_url = args.callbackUrl;
+
+  const res = await fetch(
+    `https://api.github.com/repos/${REPO}/actions/workflows/external-bounty-audit.yml/dispatches`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+        "User-Agent": "vape-x402-worker/1.0",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify({ ref: "main", inputs }),
+    },
+  );
+  const body = res.status === 204 ? "" : await res.text().catch(() => "");
+  return { ok: res.status === 204, status: res.status, body };
+}

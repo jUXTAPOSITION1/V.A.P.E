@@ -364,7 +364,8 @@
             </div>
             <h2 class="section-title text-lg mb-3">&gt; Bounty Command Center</h2>
             <p class="text-zinc-400 text-sm mb-8 max-w-3xl leading-relaxed">Active bug-bounty programs, VAPE's own audit record, and a
-            direct line to commission a paid engagement — from a $0.01 exploit check to a full 24-hour audit.</p>
+            direct line to commission a paid engagement — from a $0.01 exploit check to a $1 submission-ready bounty audit,
+            hireable directly from a matched program below.</p>
 
             <div id="bcc-telemetry" class="stat-line mb-8 pb-8 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">—</span></span>
@@ -391,20 +392,20 @@
                 <div class="lg:col-span-5">
                     <div class="panel h-full flex flex-col">
                         <h3 class="text-sm text-zinc-500 mb-2">Commission a Bounty Audit</h3>
-                        <div class="text-2xl mb-2 text-zinc-100">$50 <span class="text-sm text-zinc-500">USDC</span></div>
-                        <div class="text-sm text-zinc-400 mb-5 leading-relaxed">A comprehensive audit within 24 hours — full reconnaissance, static analysis,
-                        and a detailed line-by-line review by a frontier language model.</div>
+                        <div class="text-2xl mb-2 text-zinc-100">$1 <span class="text-sm text-zinc-500">USDC</span></div>
+                        <div class="text-sm text-zinc-400 mb-5 leading-relaxed">A submission-ready PoC and all supporting detail — full reconnaissance, static analysis,
+                        and a line-by-line review by a frontier language model. No fixed turnaround; delivered as soon as it completes.</div>
                         <div class="stat-line mb-5 text-[11px]">
-                            <span class="stat-label">24h turnaround</span><span class="stat-label">·</span>
+                            <span class="stat-label">submission-ready PoC</span><span class="stat-label">·</span>
                             <span class="stat-label">frontier model</span><span class="stat-label">·</span>
                             <span class="stat-label">full recon</span><span class="stat-label">·</span>
                             <span class="stat-label">committed report</span>
                         </div>
                         <div class="mt-auto space-y-2">
-                            <button onclick="Hire.openX402('bounty_deep_dive', 50)" class="term-btn w-full">Authorize via x402</button>
+                            <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="term-btn w-full">Authorize via x402</button>
                             <button onclick="Hire.openAcp('bounty_deep_dive')" class="term-btn w-full">Engage via ACP</button>
                         </div>
-                        <p class="text-[10px] text-zinc-600 mt-4">Whether you pay by x402 or engage through ACP, the audit and the report are identical.</p>
+                        <p class="text-[10px] text-zinc-600 mt-4">Whether you pay by x402 or engage through ACP, the audit and the report are identical. Prefer to scope it to a specific program? Use the "Hire VAPE" button on any Bounty Ops card at left.</p>
                     </div>
                 </div>
             </div>
@@ -632,11 +633,11 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=10"></script>
+    <script src="assets/app.js?v=11"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
-    <script type="module" src="assets/hire.js?v=9"></script>
+    <script type="module" src="assets/hire.js?v=10"></script>
     <script type="module" src="assets/x402feed.js?v=2"></script>
     <script type="module" src="assets/attackfeed.js?v=2"></script>
 </body>

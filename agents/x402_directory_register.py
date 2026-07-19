@@ -292,8 +292,9 @@ def build_awesome_x402_entry():
         f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
         f"liquidity/rug-pull/dossier/market-intel checks) + 13 market-data micro-services "
         f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
-        f"depeg, bridge volumes) + a $50 24h-SLA deep-dive audit (recon + Slither + frontier-model "
-        f"review). Docs: https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
+        f"depeg, bridge volumes) + a $1 deep-dive bounty audit (recon + Slither + frontier-model "
+        f"review — a submission-ready PoC and full technical detail). Docs: "
+        f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
     )
 
 

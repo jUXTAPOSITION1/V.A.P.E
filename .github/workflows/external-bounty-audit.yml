@@ -7,21 +7,35 @@ name: External Bounty Engagement Audit
 # real program repo mirror: github.com/hackenproof-public/mmt-v3-core
 # (source verified identical at the canonical github.com/mmt-finance/v3-core)
 #
-# Manual dispatch only — this is a deliberate, scoped engagement per program,
-# not a scheduled sweep (that's agents/hack_sweep.py's job, for VAPE's own
-# Base/EVM targets). Inputs default to this first real engagement so it can
-# be re-run as-is, but every field is overridable for a future program.
+# Fired two ways, same as deep-dive-bounty.yml:
+#   - Manual workflow_dispatch for a deliberate, scoped engagement per program
+#     (not a scheduled sweep — that's agents/hack_sweep.py's job, for VAPE's
+#     own Base/EVM targets).
+#   - x402: worker/src/lib/githubDispatch.ts's dispatchExternalBountyAudit()
+#     calls this via the REST API after a buyer's payment settles on
+#     /scan/bounty_deep_dive with an owner/repo instead of an address (the
+#     "hire VAPE for this specific bounty program" flow).
+#
+# No engagement-specific defaults here deliberately: the first real engagement
+# (Momentum's mmt-v3-core CLMM, https://hackenproof.com/programs/momentum-smart-contracts)
+# used to be hardcoded as the default for every field, including `paths` —
+# that's a real bug for any other program, since GitHub Actions falls back to
+# a workflow_dispatch input's `default:` whenever a caller supplies an empty
+# value (not just when the key is omitted), silently poisoning any dispatch
+# for a different repo with Momentum's own file list and 404ing every fetch.
+# `owner`/`repo` are always supplied by both a manual dispatch and the
+# worker's automated call, so they need no default; `paths` empty means
+# auto-discovery (the sane default behavior for a program nobody has
+# pre-mapped file paths for yet).
 on:
   workflow_dispatch:
     inputs:
       owner:
         description: 'GitHub owner of the target repo'
         required: true
-        default: 'mmt-finance'
       repo:
         description: 'GitHub repo name'
         required: true
-        default: 'v3-core'
       ref:
         description: 'Git ref (branch/tag/commit) to audit'
         required: false
@@ -29,11 +43,12 @@ on:
       program_name:
         description: 'Bounty program name (for the report header)'
         required: false
-        default: 'Momentum Smart Contracts Core'
       paths:
         description: 'Comma-separated explicit file paths (skips auto-discovery — needed if the runner cannot reach api.github.com for this repo)'
         required: false
-        default: 'clmm/sources/actions/trade.move,clmm/sources/actions/liquidity.move,clmm/sources/actions/admin.move,clmm/sources/storage/pool.move,clmm/sources/utils/swap_math.move,clmm/sources/utils/sqrt_price_math.move,clmm/sources/utils/tick_math.move'
+      callback_url:
+        description: 'Optional webhook to POST the completed report to (x402 async path)'
+        required: false
 
 permissions:
   contents: read
@@ -58,12 +73,19 @@ jobs:
           python-version: '3.11'
 
       - name: Run the external bounty engagement audit
+        # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
+        # string — callback_url in particular is attacker-influenced (an x402
+        # buyer's own query param, unvalidated by the worker). Routing everything
+        # through `env:` first means bash sees it only as a quoted variable
+        # expansion, never as re-parsed shell syntax (same pattern deep-dive-bounty.yml
+        # already uses for its own callback_url input).
         env:
           TARGET_OWNER: ${{ github.event.inputs.owner }}
           TARGET_REPO: ${{ github.event.inputs.repo }}
           TARGET_REF: ${{ github.event.inputs.ref }}
           TARGET_PROGRAM: ${{ github.event.inputs.program_name }}
           TARGET_PATHS: ${{ github.event.inputs.paths }}
+          TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -79,6 +101,9 @@ jobs:
           fi
           if [ -n "$TARGET_PATHS" ]; then
             ARGS+=(--paths "$TARGET_PATHS")
+          fi
+          if [ -n "$TARGET_CALLBACK_URL" ]; then
+            ARGS+=(--callback-url "$TARGET_CALLBACK_URL")
           fi
           python -m agents.external_audit "${ARGS[@]}"
 
