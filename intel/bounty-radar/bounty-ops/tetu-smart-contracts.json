@@ -1,0 +1,29 @@
+{
+  "id": "hackenproof:prg_2e8a391da5992082",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.410489Z",
+      "event": "Started tracking as a real Bounty Op (fit 63)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "TETU Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/tetu-smart-contracts",
+  "prizeUsd": 1000000,
+  "bountyFitScore": 63,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "polygon",
+    "ethereum",
+    "git_repo",
+    "solidity",
+    "typescript",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.410481Z"
+}

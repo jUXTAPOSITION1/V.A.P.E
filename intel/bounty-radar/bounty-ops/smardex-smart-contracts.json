@@ -1,0 +1,30 @@
+{
+  "id": "hackenproof:prg_a3c3aed4d486a83a",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.409617Z",
+      "event": "Started tracking as a real Bounty Op (fit 66)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "SmarDex Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/smardex-smart-contracts",
+  "prizeUsd": 500000,
+  "bountyFitScore": 66,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "ethereum",
+    "polygon",
+    "arbitrum",
+    "bsc",
+    "base",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.409573Z"
+}

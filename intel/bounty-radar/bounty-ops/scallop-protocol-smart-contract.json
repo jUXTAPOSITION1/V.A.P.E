@@ -1,0 +1,26 @@
+{
+  "id": "hackenproof:prg_839bf691127930e2",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.411881Z",
+      "event": "Started tracking as a real Bounty Op (fit 59)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Scallop Protocol (Smart Contract)",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/scallop-protocol-smart-contract",
+  "prizeUsd": 300000,
+  "bountyFitScore": 59,
+  "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
+  "tags": [
+    "git_repo",
+    "move",
+    "typescript",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.411875Z"
+}

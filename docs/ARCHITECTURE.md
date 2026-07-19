@@ -119,7 +119,8 @@ component's state changes.
 |---|---|---|
 | `agents/run.py` | [OK] | Hourly bounty-cycle orchestration |
 | `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring, cross-chain |
-| `agents/scout.py` | [OK] | Bounty-radar triage + strategic briefing + real, cross-chain incident-forensics action |
+| `agents/scout.py` | [OK] | Bounty-radar triage (real bounty/incident track separation + VAPE-fit classification) + strategic briefing + real, cross-chain incident-forensics action |
+| `agents/bounty_ops.py` | [OK] | Bounty Ops: Grok-4.3 checklists + progress tracking for VAPE-fit live bounty programs |
 | `agents/security_sweep.py` | [OK] | Incident-forensics pipeline (any chain `EVM_CHAINS` supports, high-value leads act regardless of age) |
 | `agents/engagements.py` | [OK] | Real per-lead engagement status (never a fabricated outreach/signup) |
 | `agents/defillama.py` | [OK] | Full DefiLlama API surface: TVL, yields, fees, stablecoins, bridges, token intel |
@@ -174,11 +175,31 @@ the hourly cycle.
 - **`token_scan.py`** [OK] — free Hunt console + paid x402 quick-check, same keyless checks as
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
-- **`scout.py`** [OK] — bounty-radar triage, numeric fit-score ranking, a frontier-model
-  strategic briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates
-  to `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports —
-  not just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
+- **`scout.py`** [OK] — bounty-radar triage. Every opportunity is classified into a real
+  `track` — `"incident"` (historical DeFiLlama hacks, a forensics lead — see the Threat Ledger)
+  or `"bounty"` (a real live program) — and every bounty-track entry additionally gets
+  `vapeFit`/`vapeFitReason` (does its real scope match Solidity/EVM `deep_dive_audit.py` or
+  Move/Sui `external_audit.py` — excluding web/mobile-only scope and post-incident
+  recovery/negotiation "bounties") and its own `bountyFitScore` (fit + reward + chain + freshness,
+  deliberately NOT the incident formula's raw-dollar-size weighting — this was the fix for a real
+  bug where a $58M post-incident recovery offer was outranking a $250k real smart-contract review
+  program). A capped, honest liveness recheck (`_recheck_liveness()`) HTTP-pings stale bounty URLs
+  so static seed data doesn't silently rot forever. Also runs the frontier-model strategic
+  briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates to
+  `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports — not
+  just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
   (`ATTACK_RESPONSE_HIGH_VALUE_USD_M`). Hourly via `scout.yml`.
+- **`bounty_ops.py`** [OK] — Bounty Ops: selects the top VAPE-fit live bounty programs from
+  `scout.py`'s classification and, for each one VAPE actively tracks, generates/refreshes a real
+  Grok-4.3 checklist (what to do, which of VAPE's two real tools to run, what to check against
+  `skillforge/memory/security_standards.json`'s real taxonomy) with a recurring, append-only
+  progress log — a checklist item's done-state is never reset by a later run. Cross-references
+  VAPE's own real audit output (`intel/audits/poc-reports/`, `hack-sweep-reports/`,
+  `external-bounties/`) by filename token overlap so a program links straight to VAPE's own
+  report the moment one exists. Output: `intel/bounty-radar/bounty-ops/<slug>.json` + `INDEX.md`.
+  Renders on the site as the Bounty Command Center's "Bounty Ops — VAPE-Fit, Live" panel
+  (`docs/assets/app.js::bounties()`), searchable client-side, separate from the Threat Ledger's
+  historical-incident feed. Runs after SCOUT hourly, via `scout.yml`.
 - **`engagements.py`** [OK] — revives `intel/engagements/`, replacing pre-repo fabricated seed
   data (a templated audit stub, cold-outreach emails to real hack victims — see
   `intel/archive/legacy-seed-engagements/README.md`) with a real per-lead status derived from

@@ -611,24 +611,80 @@ const App = {
         }
     },
 
+    // Bounty Ops (Task #197): real, checklist-tracked programs written by
+    // agents/bounty_ops.py to intel/bounty-radar/bounty-ops/*.json. Keyed
+    // by the same slug the backend generates (slugified program name) so a
+    // card can show live checklist progress + a link to VAPE's own report
+    // the moment one exists. Best-effort — a card renders fine with no
+    // bounty-ops record at all (not every VAPE-fit program is tracked yet).
+    _bountyOpsPromise: null,
+    async _loadBountyOps() {
+        if (this._bountyOpsPromise) return this._bountyOpsPromise;
+        this._bountyOpsPromise = (async () => {
+            try {
+                const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/bounty-radar/bounty-ops`)).json();
+                const files = (Array.isArray(items) ? items : []).filter(f => f.name.endsWith('.json') && f.name !== 'INDEX.json');
+                const entries = await Promise.all(files.map(f =>
+                    fetch(`${RAW}/intel/bounty-radar/bounty-ops/${f.name}?t=`+Date.now()).then(r => r.json()).catch(() => null)
+                ));
+                const map = {};
+                entries.filter(Boolean).forEach(e => {
+                    const slug = (e.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                    map[slug] = e;
+                });
+                return map;
+            } catch (e) { return {}; }
+        })();
+        return this._bountyOpsPromise;
+    },
+
     async bounties() {
         const el = document.getElementById('bounties');
+        const searchEl = document.getElementById('bounty-ops-search');
         try {
             let data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
             if (!Array.isArray(data)) data = [];
-            data = data.sort((a,b)=>(b.prizeUsd||0)-(a.prizeUsd||0)).slice(0,6);
+            // Task #196 fix: only real, VAPE-fit LIVE BOUNTY PROGRAMS here —
+            // never a historical incident (track==="incident", already shown
+            // in the Threat Ledger) and never a program whose scope doesn't
+            // actually match VAPE's own tooling, regardless of headline $.
+            data = data.filter(b => b.track === 'bounty' && b.vapeFit === true)
+                       .sort((a,b)=>(b.bountyFitScore||0)-(a.bountyFitScore||0)).slice(0,12);
             if (!data.length) throw 0;
-            el.innerHTML = data.map(b=>`
-                <a href="${b.url||'#'}" target="_blank" class="card-h glass rounded-xl p-4 block">
+            const opsMap = await this._loadBountyOps();
+            el.innerHTML = data.map(b=>{
+                const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                const ops = opsMap[slug];
+                const done = ops ? (ops.checklist||[]).filter(i=>i.done).length : 0;
+                const total = ops ? (ops.checklist||[]).length : 0;
+                const search = `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase();
+                return `
+                <a href="${b.url||'#'}" target="_blank" data-search="${this._esc(search)}" class="card-h glass rounded-xl p-4 block">
                     <div class="flex items-start justify-between gap-2">
-                        <div class="font-semibold text-sm leading-snug">${(b.name||'Unknown').replace(/</g,'&lt;')}</div>
+                        <div class="font-semibold text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
                         <div class="text-cyan-400 font-display shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
                     </div>
-                    <div class="text-xs text-zinc-500 mt-2">${(b.platform||'')} ${b.status?'· '+b.status:''}</div>
-                    ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] bg-white/5 rounded px-1.5 py-0.5 mr-1 mt-2 text-zinc-400">${t}</span>`).join('')}
-                </a>`).join('');
+                    <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
+                    ${b.vapeFitReason?`<div class="text-[10px] text-emerald-500/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
+                    ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] bg-white/5 rounded px-1.5 py-0.5 mr-1 mt-2 text-zinc-400">${this._esc(t)}</span>`).join('')}
+                    ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-amber-400">
+                        <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
+                        ${ops.vapeReportUrl?`<span class="text-cyan-400"><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
+                    </div>`:''}
+                </a>`;
+            }).join('');
+            if (searchEl) {
+                searchEl.classList.remove('hidden');
+                searchEl.oninput = () => {
+                    const q = searchEl.value.trim().toLowerCase();
+                    el.querySelectorAll('[data-search]').forEach(card => {
+                        card.style.display = !q || card.dataset.search.includes(q) ? '' : 'none';
+                    });
+                };
+            }
         } catch(e){
-            el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No live radar data yet — <a class="text-cyan-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            el.innerHTML = `<div class="text-zinc-500 text-sm col-span-2">No VAPE-fit live bounty program currently tracked — <a class="text-cyan-400" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            if (searchEl) searchEl.classList.add('hidden');
         }
     },
 

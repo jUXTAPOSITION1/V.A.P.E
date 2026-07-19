@@ -1,0 +1,26 @@
+{
+  "id": "hackenproof:prg_c0e709e4c2d9624d",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.410817Z",
+      "event": "Started tracking as a real Bounty Op (fit 63)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Sui Protocol",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/sui-protocol",
+  "prizeUsd": 1000000,
+  "bountyFitScore": 63,
+  "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
+  "tags": [
+    "git_repo",
+    "move",
+    "rust",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.410810Z"
+}

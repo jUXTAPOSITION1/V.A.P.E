@@ -1,0 +1,27 @@
+{
+  "id": "hackenproof:prg_b562c43d168b9524",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.411407Z",
+      "event": "Started tracking as a real Bounty Op (fit 61)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Layer3 Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/layer3-smart-contracts",
+  "prizeUsd": 500000,
+  "bountyFitScore": 61,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "ethereum",
+    "git_repo",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.411399Z"
+}

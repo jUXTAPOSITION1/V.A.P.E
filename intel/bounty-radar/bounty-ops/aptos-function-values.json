@@ -1,0 +1,26 @@
+{
+  "id": "hackenproof:prg_9d01d72f1652e53a",
+  "checklist": [],
+  "progress": [
+    {
+      "ts": "2026-07-19T03:50:31.410978Z",
+      "event": "Started tracking as a real Bounty Op (fit 63)."
+    }
+  ],
+  "checklistGeneratedAt": null,
+  "vapeReportUrl": null,
+  "name": "Aptos Function Values",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/aptos-function-values",
+  "prizeUsd": 1000000,
+  "bountyFitScore": 63,
+  "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
+  "tags": [
+    "git_repo",
+    "move",
+    "rust",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T03:50:31.410971Z"
+}
