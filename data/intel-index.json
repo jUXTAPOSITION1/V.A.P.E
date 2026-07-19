@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T19:39:24Z",
+  "generated": "2026-07-19T19:45:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 424,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 86,
-    "investigations": 240,
+    "investigations": 241,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-182839-0xDcB01cc4.md",
-      "title": "Investigation \u2014 YLD",
-      "symbol": "YLD",
-      "name": "Yield",
-      "date": "2026-07-19T18:28:39Z",
-      "target": "0xDcB01cc464238396E213a6fDd933E36796eAfF9f",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260719-194502-0x2690e2f9.md",
+      "title": "Investigation \u2014 VORF",
+      "symbol": "VORF",
+      "name": "Vanguard Oil Retiretment Fund",
+      "date": "2026-07-19T19:45:02Z",
+      "target": "0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "8",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-25] Very low liquidity $1,885 (rug/illiquid); [-10] Low liquidity $1,885. Positive evidence: 1148 holders \u2014 reasonably distributed; Trading 2048+ days without a known incident in this scan; Custom v",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-182839-0xDcB01cc4.md"
+      "score": "38",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FAFO (0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F) \u2014 CAUTION 73/100 \u2014 likely the same serial campaign; [-10] Pair 13.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-194502-0x2690e2f9.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-194502-0x2690e2f9.md",
+      "title": "Investigation \u2014 VORF",
+      "symbol": "VORF",
+      "name": "Vanguard Oil Retiretment Fund",
+      "date": "2026-07-19T19:45:02Z",
+      "target": "0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "38",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FAFO (0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F) \u2014 CAUTION 73/100 \u2014 likely the same serial campaign; [-10] Pair 13.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-194502-0x2690e2f9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-182839-0xDcB01cc4.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Violent 24h move +18481% (volatility/manipulation). Positive evidence: 2292 holders \u2014 reasonably distributed; Trading 177+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 262+ days \u2014 independent longevity ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-104933-0xF0Cb96a4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-083610-0x311935Cd.md",
-      "title": "Investigation \u2014 SOL",
-      "symbol": "SOL",
-      "name": "Solana",
-      "date": "2026-07-17T08:36:10Z",
-      "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) \u2014 can still act on the contract. Positive evidence: 21193 holders \u2014 reasonably distributed; Deep liquidity ($532,502); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 214+ days \u2014 indep",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-083610-0x311935Cd.md"
     }
   ],
   "reports": [
