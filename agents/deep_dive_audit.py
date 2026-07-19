@@ -8,8 +8,8 @@ end of the spectrum: a real frontier-tier model (agents/llm.py::ask_oci_grok_fro
 OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback) reads the contract's ACTUAL verified
 source text and reasons about specific vulnerability classes line-by-line, on top of
 every recon signal agents/investigate.py already gathers (GoPlus, DexScreener, on-chain
-presence, hack-technique correlation, public web reputation). Slither, Halmos, and
-Mythril all run too, for real, if they're already on PATH in the environment this
+presence, hack-technique correlation, public web reputation). Slither, Halmos, Mythril,
+and Aderyn all run too, for real, if they're already on PATH in the environment this
 executes in — never a hard dependency, since a fresh multi-minute toolchain install has
 no place in a script whose whole point is a reliable result, not gambling on a slow
 install succeeding.
@@ -41,6 +41,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -189,6 +190,65 @@ def _run_mythril(address, chain, timeout=200):
         return {"ran": True, "ok": False, "reason": str(e)}
 
 
+def _run_aderyn(project_dir, timeout=120):
+    """Best-effort real static AST analysis via Aderyn — mirrors _run_slither's/
+    _run_symbolic's/_run_mythril's own "skip cleanly if the toolchain isn't
+    here this run" gate. Unlike Slither/Mythril (which work directly off an
+    on-chain address), Aderyn needs a real Foundry/Hardhat project directory
+    on disk to analyze — reuses the SAME scaffolded project _run_symbolic
+    already built from the target's own verified source
+    (agents/scaffold_foundry_target.py's project_dir), rather than
+    scaffolding a second one. A real consequence of that reuse: Aderyn only
+    gets a chance to run when _run_symbolic's own forge+halmos gate let
+    scaffolding happen at all — an environment with aderyn+forge but no
+    halmos will (honestly) report this as unavailable too, since no
+    project was ever scaffolded this run.
+
+    Real CLI flags and JSON schema confirmed against Cyfrin/aderyn's actual
+    source (aderyn/src/main.rs's clap args) and its own committed sample
+    report (reports/playground-json-report.json): `-o/--output <path>`
+    picks JSON output by file extension; top-level `issue_count`
+    ({"high": N, "low": N}) plus `high_issues`/`low_issues`, each shaped
+    {"issues": [{title, description, detector_name, instances: [...]}]}."""
+    if not shutil.which("aderyn"):
+        return {"ran": False, "reason": "aderyn not installed in this environment this run"}
+    if not project_dir or not os.path.isdir(project_dir):
+        return {"ran": False, "reason": "no scaffolded Foundry project available this run "
+                                         "(symbolic testing didn't reach the scaffolding stage)"}
+    out_path = None
+    try:
+        fd, out_path = tempfile.mkstemp(suffix=".json", prefix="vape-aderyn-")
+        os.close(fd)
+        p = subprocess.run(
+            ["aderyn", "--output", out_path, "--skip-cloc", "--no-snippets"],
+            cwd=project_dir, capture_output=True, text=True, timeout=timeout,
+        )
+        try:
+            with open(out_path) as f:
+                data = json.load(f)
+        except Exception:
+            return {"ran": True, "ok": False, "reason": f"aderyn produced no valid JSON (rc={p.returncode})",
+                    "raw_tail": (p.stderr or p.stdout or "")[-500:]}
+        counts = data.get("issue_count") or {}
+        findings = []
+        for sev_key, sev_name in (("high_issues", "High"), ("low_issues", "Low")):
+            for iss in (data.get(sev_key) or {}).get("issues", []):
+                findings.append({"severity": sev_name, "title": iss.get("title"),
+                                  "description": (iss.get("description") or "")[:300]})
+        total = sum(counts.values()) if counts else len(findings)
+        return {"ran": True, "ok": True, "counts": counts, "findings": findings[:30], "total": total}
+    except subprocess.TimeoutExpired:
+        return {"ran": True, "ok": False, "reason": f"aderyn timed out after {timeout}s"}
+    except Exception as e:
+        return {"ran": True, "ok": False, "reason": str(e)}
+    finally:
+        if out_path and os.path.exists(out_path):
+            try:
+                os.remove(out_path)
+            except OSError:
+                pass
+
+
 FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing a PAID
 24-hour-SLA deep-dive bug bounty audit. This is VAPE's premium tier — the highest rigor
 VAPE offers. Real money is on the line; be precise, evidence-based, and honest.
@@ -222,7 +282,7 @@ found evidence for (skip classes with nothing to say rather than padding), then
 
 
 def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
-                  mythril_result=None):
+                  mythril_result=None, aderyn_result=None):
     parts = [f"=== TARGET ===\naddress: {address}\nchain: {chain}"]
     parts.append(f"=== GOPLUS TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
     parts.append(f"=== DEXSCREENER MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
@@ -262,6 +322,14 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
     else:
         parts.append(f"=== MYTHRIL SYMBOLIC-EXECUTION SCAN ===\nNot available this run: "
                      f"{mythril_result.get('reason', 'unknown')}")
+    aderyn_result = aderyn_result or {}
+    if aderyn_result.get("ran") and aderyn_result.get("ok"):
+        parts.append(f"=== ADERYN STATIC AST ANALYSIS (real, {aderyn_result['total']} raw issues) ===\n"
+                     f"Severity counts: {aderyn_result['counts']}\n"
+                     f"{json.dumps(aderyn_result['findings'], indent=2)[:3000]}")
+    else:
+        parts.append(f"=== ADERYN STATIC AST ANALYSIS ===\nNot available this run: "
+                     f"{aderyn_result.get('reason', 'unknown')}")
     if corr:
         parts.append("=== RECENT-HACK TECHNIQUE CORRELATION (real, DeFiLlama feed) ===\n"
                      + "\n".join(f"- {c}" for c in corr))
@@ -293,6 +361,7 @@ def run_audit(address, chain="8453", callback_url=None):
     slither_result = _run_slither(address, chain)
     symbolic_result = _run_symbolic(address, chain, src)
     mythril_result = _run_mythril(address, chain)
+    aderyn_result = _run_aderyn(symbolic_result.get("project_dir"))
 
     # Reuse investigate.py's scoring engine for a baseline consistent with every other
     # VAPE verdict — the frontier LLM pass adds depth on top, it doesn't replace this.
@@ -304,7 +373,7 @@ def run_audit(address, chain="8453", callback_url=None):
 
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
-                          mythril_result)
+                          mythril_result, aderyn_result)
     try:
         narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
     except Exception as e:
@@ -323,7 +392,8 @@ def run_audit(address, chain="8453", callback_url=None):
     L.append(f"**Engine:** Frontier LLM ({provider or 'unavailable'}) + real recon"
              f"{' + Slither static analysis' if slither_result.get('ok') else ''}"
              f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}"
-             f"{' + Mythril symbolic-execution scan' if mythril_result.get('ok') else ''}  ")
+             f"{' + Mythril symbolic-execution scan' if mythril_result.get('ok') else ''}"
+             f"{' + Aderyn static AST analysis' if aderyn_result.get('ok') else ''}  ")
     L.append(f"**Baseline Verdict:** {verdict} ({score}/100 — same scoring engine as every "
              "VAPE investigation, for consistency)")
     L.append("")
@@ -370,6 +440,12 @@ def run_audit(address, chain="8453", callback_url=None):
     else:
         L.append(f"- Not run this cycle: {mythril_result.get('reason')}")
     L.append("")
+    L.append("## Static Analysis (Aderyn)")
+    if aderyn_result.get("ok"):
+        L.append(f"- Raw issues: **{aderyn_result['total']}** — {aderyn_result['counts']}")
+    else:
+        L.append(f"- Not run this cycle: {aderyn_result.get('reason')}")
+    L.append("")
     L.append("## Methodology")
     L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
              "on-chain presence, DeFiLlama hack-technique correlation, public web search for "
@@ -381,11 +457,13 @@ def run_audit(address, chain="8453", callback_url=None):
              "source — only if forge and halmos are both installed this run.")
     L.append("5. Mythril symbolic-execution scan of the deployed bytecode on-chain by address, "
              "via the target chain's real public RPC — only if pre-installed this run.")
-    L.append("6. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 "
+    L.append("6. Aderyn static AST analysis of that same scaffolded Foundry project — only if "
+             "pre-installed this run and step 4's scaffolding stage was reached.")
+    L.append("7. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 "
              "Pro/Groq as fallback) reads the actual verified source and reasons per "
              "vulnerability class — this is VAPE's deepest automated pass, still followed by "
              "the human-verification list above.")
-    L.append("7. White-hat only: read-only analysis, no exploitation attempted.")
+    L.append("8. White-hat only: read-only analysis, no exploitation attempted.")
     L.append("")
     L.append("*V.A.P.E. — The chain never lies. This is a 24h-SLA premium engagement; "
              "results delivered as soon as generated, well inside that window.*")
