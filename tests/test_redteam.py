@@ -2,7 +2,7 @@
 output (agents/run.py::_reconcile_report) rather than the raw model
 response — the real security question is whether an exploit reaches what
 would actually be published, not whether the raw model alone resists it.
-Hermetic: agents.redteam.ask_safe is mocked, no real network/LLM call.
+Hermetic: agents.redteam.ask_oci_grok_safe is mocked, no real network/LLM call.
 """
 import json
 from unittest import mock
@@ -12,7 +12,7 @@ from agents import redteam
 
 def _run(payload_name, raw_response, provider="xai_1"):
     payload = next(p for p in redteam.INJECTION_PAYLOADS if p["name"] == payload_name)
-    with mock.patch("agents.redteam.ask_safe", return_value=(raw_response, provider)) as m:
+    with mock.patch("agents.redteam.ask_oci_grok_safe", return_value=(raw_response, provider)) as m:
         result = redteam.run_injection_test(payload)
     return result, m
 
@@ -47,14 +47,14 @@ def test_well_behaved_model_is_never_flagged():
 
 def test_skipped_when_llm_unavailable():
     payload = redteam.INJECTION_PAYLOADS[0]
-    with mock.patch("agents.redteam.ask_safe", return_value=("[llm unavailable: no keys]", None)):
+    with mock.patch("agents.redteam.ask_oci_grok_safe", return_value=("[llm unavailable: no keys]", None)):
         result = redteam.run_injection_test(payload)
     assert result["skipped"] is True
 
 
 def test_provider_order_matches_production_frontier_order():
     payload = redteam.INJECTION_PAYLOADS[0]
-    with mock.patch("agents.redteam.ask_safe", return_value=("SIGNAL: LOW\nok", "xai_1")) as m:
+    with mock.patch("agents.redteam.ask_oci_grok_safe", return_value=("SIGNAL: LOW\nok", "xai_1")) as m:
         redteam.run_injection_test(payload)
     _, kwargs = m.call_args
     assert kwargs["provider_order"] == redteam.FRONTIER_ORDER

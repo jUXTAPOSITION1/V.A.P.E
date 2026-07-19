@@ -165,7 +165,7 @@ def _strategic_briefing(new_entries, shown):
     if not top:
         return ""
     try:
-        from agents.llm import ask_safe, FRONTIER_ORDER
+        from agents.llm import ask_oci_grok_safe, FRONTIER_ORDER
     except Exception:
         return ""
 
@@ -221,8 +221,8 @@ def _strategic_briefing(new_entries, shown):
         "instead of padding."
     )
     try:
-        text, _provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                    max_tokens=1800, temperature=0.4)
+        text, _provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
+                                             max_tokens=1800, temperature=0.4)
     except Exception as e:
         print(f"[SCOUT] strategic briefing unavailable: {e}")
         return ""

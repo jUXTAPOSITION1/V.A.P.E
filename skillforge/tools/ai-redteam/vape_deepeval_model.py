@@ -18,24 +18,33 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from agents.llm import ask_safe  # noqa: E402
+from agents.llm import ask_safe, ask_oci_grok_safe  # noqa: E402
 
 from deepeval.models.base_model import DeepEvalBaseLLM
 
 
 class VapeLLM(DeepEvalBaseLLM):
-    """Wraps agents.llm.ask_safe as a deepteam/deepeval-compatible model.
+    """Wraps agents.llm.ask_safe (or ask_oci_grok_safe, see use_oci_grok) as
+    a deepteam/deepeval-compatible model.
 
     provider_order lets a caller pin this to agents.llm.FRONTIER_ORDER — used
     for the judge (see campaign_vape.py), since a stronger judge model
     directly addresses the honesty note above: a smarter judge catches
     subtler jailbreaks the small open models could miss. Left None (the
     default free chain) for the attack simulator, which doesn't need to be
-    smart to write attack prompts."""
+    smart to write attack prompts.
 
-    def __init__(self, tier="fast", provider_order=None):
+    use_oci_grok routes generate() through ask_oci_grok_safe (OCI-hosted
+    Grok 4.3 first, falling back to Vertex/provider_order) instead of plain
+    ask_safe — set True only for the judge instance, never the simulator:
+    the simulator must stay off VAPE's strongest models by design (it's
+    writing attacks, not judging them), enforced by tests/
+    test_llm_critical_wiring.py::test_adversarial_simulator_stays_off_frontier_order."""
+
+    def __init__(self, tier="fast", provider_order=None, use_oci_grok=False):
         self.tier = tier
         self.provider_order = provider_order
+        self.use_oci_grok = use_oci_grok
         super().__init__(model=f"vape-{tier}")
 
     def load_model(self):
@@ -54,7 +63,8 @@ class VapeLLM(DeepEvalBaseLLM):
         # non-native-schema path.
         if schema is not None:
             raise TypeError("VapeLLM has no native structured-output support")
-        text, provider = ask_safe(
+        ask_fn = ask_oci_grok_safe if self.use_oci_grok else ask_safe
+        text, provider = ask_fn(
             system="You are a precise, technical assistant. Follow the instructions exactly.",
             user=prompt,
             tier=self.tier,

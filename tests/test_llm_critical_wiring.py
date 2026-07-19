@@ -42,17 +42,18 @@ def test_every_named_critical_call_site_uses_frontier_order():
 
 
 def test_deep_dive_and_dossier_use_ask_frontier_with_no_local_override():
-    """The $50 x402 job and investigations' AI quick review already used
-    ask_frontier() before this change — they must keep calling it BARE (no
-    provider_order kwarg of their own), so they pick up FRONTIER_ORDER's new
-    Grok-first composition automatically rather than freezing to the old one."""
+    """The $50 x402 job and investigations' AI quick review call
+    ask_oci_grok_frontier() (OCI Grok 4.3 primary, same 'no local override'
+    contract ask_frontier() had) — they must keep calling it BARE (no
+    provider_order kwarg of their own), so they pick up FRONTIER_ORDER's
+    Grok-first composition automatically rather than freezing to an old one."""
     dd = (ROOT / "agents/deep_dive_audit.py").read_text()
-    assert "ask_frontier(FRONTIER_SYSTEM, prompt" in dd
-    assert "ask_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3, provider_order" not in dd
+    assert "ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt" in dd
+    assert "ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3, provider_order" not in dd
 
     acp = (ROOT / "agents/acp_fulfill.py").read_text()
-    assert "ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user" in acp
-    assert "provider_order" not in acp.split("ask_frontier(_AI_QUICK_REVIEW_SYSTEM")[1].split(")")[0]
+    assert "ask_oci_grok_frontier(_AI_QUICK_REVIEW_SYSTEM, user" in acp
+    assert "provider_order" not in acp.split("ask_oci_grok_frontier(_AI_QUICK_REVIEW_SYSTEM")[1].split(")")[0]
 
 
 def test_redteam_judge_matches_run_py_production_provider_order():

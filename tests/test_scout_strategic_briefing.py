@@ -1,7 +1,7 @@
 """Tests for agents/scout.py's strategic briefing (runs every cycle with
 anything to assess — no longer gated on new_entries, by explicit direction:
 coverage over conserving the frontier tier's one-time credit) and the real
-action step (_act_on_incidents). Hermetic: agents.llm.ask_safe and the
+action step (_act_on_incidents). Hermetic: agents.llm.ask_oci_grok_safe and the
 security_sweep/data_fetchers delegation are mocked, no real network call.
 """
 from unittest import mock
@@ -16,7 +16,7 @@ def _entry(name, fit=80, prize=1_000_000, platform="defillama-hack"):
 
 
 def test_empty_shown_list_skips_llm_entirely():
-    with mock.patch("agents.llm.ask_safe") as m:
+    with mock.patch("agents.llm.ask_oci_grok_safe") as m:
         result = scout._strategic_briefing([_entry("New One")], [])
     assert result == ""
     m.assert_not_called()
@@ -25,20 +25,20 @@ def test_empty_shown_list_skips_llm_entirely():
 def test_no_new_entries_still_assesses_the_shown_set():
     # The whole point of the fix: an unchanged top-fit set must still get
     # assessed, not silently skipped just because nothing is new.
-    with mock.patch("agents.llm.ask_safe", return_value=("Nothing new, still worth watching X.", "xai_1")) as m:
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Nothing new, still worth watching X.", "xai_1")) as m:
         result = scout._strategic_briefing([], [_entry("Old One")])
     assert result == "Nothing new, still worth watching X."
     m.assert_called_once()
 
 
 def test_llm_unavailable_returns_empty_string():
-    with mock.patch("agents.llm.ask_safe", return_value=("[llm unavailable: no keys]", None)):
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("[llm unavailable: no keys]", None)):
         result = scout._strategic_briefing([_entry("New One")], [_entry("New One")])
     assert result == ""
 
 
 def test_successful_briefing_is_returned_and_uses_frontier_tier():
-    with mock.patch("agents.llm.ask_safe", return_value=("Prioritize the bridge exploit.", "xai_1")) as m:
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Prioritize the bridge exploit.", "xai_1")) as m:
         result = scout._strategic_briefing([_entry("Bridge Hack")], [_entry("Bridge Hack")])
     assert result == "Prioritize the bridge exploit."
     _, kwargs = m.call_args
@@ -47,7 +47,7 @@ def test_successful_briefing_is_returned_and_uses_frontier_tier():
 
 
 def test_briefing_exception_is_swallowed():
-    with mock.patch("agents.llm.ask_safe", side_effect=RuntimeError("boom")):
+    with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=RuntimeError("boom")):
         result = scout._strategic_briefing([_entry("New One")], [_entry("New One")])
     assert result == ""
 

@@ -43,7 +43,7 @@ from agents.builder import Builder, validate_security  # noqa: E402
 from agents._build_pr import open_build_pr  # noqa: E402
 
 try:
-    from agents.llm import ask as llm_ask, available as llm_available, FRONTIER_ORDER
+    from agents.llm import ask_oci_grok_safe as llm_ask, available as llm_available, FRONTIER_ORDER
 except Exception:
     llm_ask = None
     llm_available = lambda: []  # noqa: E731

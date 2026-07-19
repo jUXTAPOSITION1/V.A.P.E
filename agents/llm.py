@@ -727,6 +727,19 @@ def ask_oci_grok_safe(system, user, **kw):
         return (f"[llm unavailable: {e}]", None)
 
 
+def ask_oci_grok_frontier(system, user, **kw):
+    """ask_oci_grok() pinned to the frontier tier + FRONTIER_ORDER fallback —
+    the OCI-Grok-primary equivalent of ask_frontier() above, for call sites
+    (agents/deep_dive_audit.py's $50 bounty audit, acp_fulfill.py's
+    dossier_check quick review) that want that same 'no local override'
+    convenience but with OCI Grok 4.3 as the actual primary model. Raises on
+    total failure exactly like ask_frontier() — callers already wrap their
+    own try/except, matching the existing contract they were built against."""
+    kw.setdefault("tier", "frontier")
+    kw.setdefault("provider_order", FRONTIER_ORDER)
+    return ask_oci_grok(system, user, **kw)
+
+
 if __name__ == "__main__":
     print("providers with keys:", available() or "(none)")
     if available():
