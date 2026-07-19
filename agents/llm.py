@@ -60,6 +60,12 @@ opt-in-only way via ask_vertex_candidate(), gated on VAPE_VERTEX_ACCESS_TOKEN
 Federation, never a stored key — this Google Cloud project enforces
 iam.disableServiceAccountKeyCreation).
 
+A third candidate — Oracle Cloud's hosted xAI Grok 4.3 (1M-token context,
+reasoning-focused; not fine-tuned/VAPE-specific like the two above, just a
+second real frontier-model host) — is reachable via ask_oci_grok(), gated on
+OCI_GENAI_API_KEY (a plain Bearer secret from OCI's Generative AI service,
+distinct from the IAM RSA key pair used for general OCI SDK/CLI auth).
+
 Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
     deep      -> larger reasoning (daily synthesis, audits)
@@ -107,6 +113,14 @@ FINDINGS_LOG = os.path.join(MEMORY_DIR, "findings.jsonl")
 # cap here.
 PROVIDER_PRICING_USD_PER_M_TOKENS = {
     "xai_1": {"input": 0.20, "output": 0.50},
+    # xAI's own published direct-API rate for Grok 4.3 (openrouter.ai/x-ai/
+    # grok-4.3, pricepertoken.com — both agreed $1.25 input / $2.50 output
+    # per 1M tokens as of 2026-07), used as a conservative proxy for OCI's
+    # on-demand rate since Oracle doesn't publish a per-token price the same
+    # way — this errs toward the cap firing too early, not too late.
+    # Re-verify against the OCI console's cost estimator / a real invoice
+    # before trusting this beyond "catch a runaway loop."
+    "oci_grok": {"input": 1.25, "output": 2.50},
 }
 
 # Hand-picked, not derived from historical usage: real logged xai_1 spend to
@@ -585,6 +599,110 @@ def ask_vertex_candidate_safe(system, user, **kw):
     back to their normal tier/provider_order otherwise."""
     try:
         return ask_vertex_candidate(system, user, **kw)
+    except Exception as e:
+        return (f"[llm unavailable: {e}]", None)
+
+
+# --- OCI Generative AI (xAI Grok 4.3, hosted on Oracle Cloud) ---
+# A third, independently-hosted candidate — Oracle Cloud's own hosted xAI
+# Grok 4.3 (1M-token context, reasoning-focused model; see
+# https://docs.oracle.com/en-us/iaas/Content/generative-ai/xai-grok-4-3.htm),
+# reached via OCI's OpenAI-compatible endpoint. That endpoint takes a plain
+# Bearer "Generative AI API key" — a distinct secret minted in the OCI
+# console's Generative AI service, NOT the IAM RSA key pair (user/tenancy/
+# fingerprint/private key) used for general OCI SDK/CLI request signing — so
+# no request-signing code or oci SDK dependency is needed here, same as
+# every free-tier provider in PROVIDERS above.
+#
+# Same opt-in, never-silently-primary posture as ask_vertex_candidate()/
+# ask_candidate(): gated on OCI_GENAI_API_KEY, not part of PROVIDERS/
+# FRONTIER_ORDER until explicitly wired into a real call site.
+OCI_GROK_DEFAULT_REGION = "us-ashburn-1"
+OCI_GROK_DEFAULT_MODEL = "xai.grok-4.3"
+
+
+def _oci_grok_daily_cap_usd():
+    try:
+        return float(os.getenv("OCI_GROK_DAILY_SPEND_CAP_USD", DEFAULT_DAILY_SPEND_CAP_USD))
+    except (TypeError, ValueError):
+        return DEFAULT_DAILY_SPEND_CAP_USD
+
+
+def _call_oci_grok(system, user, temperature, max_tokens, timeout):
+    """OCI's OpenAI-compatible Generative AI endpoint uses the exact same
+    request/response shape as _call() above (model/messages/temperature/
+    max_tokens in, choices[0].message.content out) — the one real difference
+    is an optional CompartmentId header some OCI auth modes require, which
+    _call() has no parameter for. Kept as its own small function rather than
+    adding an OCI-specific header kwarg to every other provider's call path."""
+    region = os.getenv("OCI_REGION", OCI_GROK_DEFAULT_REGION)
+    model = os.getenv("OCI_GROK_MODEL", OCI_GROK_DEFAULT_MODEL)
+    key = os.environ["OCI_GENAI_API_KEY"]
+    url = f"https://inference.generativeai.{region}.oci.oraclecloud.com/20231130/actions/v1/chat/completions"
+    payload = json.dumps({
+        "model": model,
+        "messages": [{"role": "system", "content": system},
+                     {"role": "user", "content": user}],
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+    }).encode()
+    headers = {
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+        "Accept": "application/json",
+    }
+    compartment_id = os.getenv("OCI_COMPARTMENT_OCID")
+    if compartment_id:
+        headers["CompartmentId"] = compartment_id
+    req = urllib.request.Request(url, data=payload, headers=headers)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        data = json.loads(r.read().decode())
+    return data["choices"][0]["message"]["content"], data.get("usage") or {}
+
+
+def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
+                  tier="fast", provider_order=None):
+    """Calls OCI-hosted Grok 4.3 directly if OCI_GENAI_API_KEY is set this
+    run, falling back to ask() otherwise/on error/over the daily spend cap —
+    same opt-in, never-silently-primary posture as ask_vertex_candidate()
+    above. This path runs outside ask()'s own provider loop (it's not in
+    PROVIDERS), so it needs its own daily-spend-cap guard
+    (OCI_GROK_DAILY_SPEND_CAP_USD, default $3 like xai_1's own cap) rather
+    than inheriting the one built into that loop.
+
+    tier/provider_order control ONLY the fallback ask() call, matching
+    ask_vertex_candidate()'s exact contract — pass the caller's own normal
+    tier/provider_order so a run where this isn't configured degrades to
+    EXACTLY its prior behavior."""
+    if os.getenv("OCI_GENAI_API_KEY"):
+        cap = _oci_grok_daily_cap_usd()
+        spend = _todays_paid_spend_usd("oci_grok")
+        if spend >= cap:
+            detail = f"oci_grok:daily-spend-cap-reached(${spend:.4f}>=${cap:.2f})"
+            print(f"[llm] {detail}", file=sys.stderr)
+            _log_spend_cap_finding("oci_grok", spend, cap)
+        else:
+            try:
+                text, usage = _call_oci_grok(system, user, temperature, max_tokens, timeout)
+                _log_usage("oci_grok", os.getenv("OCI_GROK_MODEL", OCI_GROK_DEFAULT_MODEL), tier, usage)
+                return text, "oci_grok"
+            except urllib.error.HTTPError as e:
+                try:
+                    body = e.read().decode(errors="replace")[:500]
+                except Exception:
+                    body = ""
+                print(f"[llm] oci_grok:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
+            except Exception as e:
+                print(f"[llm] oci_grok:{type(e).__name__}:{e}", file=sys.stderr)
+    return ask(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
+               timeout=timeout, provider_order=provider_order)
+
+
+def ask_oci_grok_safe(system, user, **kw):
+    """ask_oci_grok() with ask_safe()'s same never-raise guarantee."""
+    try:
+        return ask_oci_grok(system, user, **kw)
     except Exception as e:
         return (f"[llm unavailable: {e}]", None)
 

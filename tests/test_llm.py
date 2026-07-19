@@ -460,6 +460,156 @@ class TestVertexTunedCandidate:
         assert "INVALID_ARGUMENT" in capsys.readouterr().err
 
 
+class TestOciGrok:
+    """agents/llm.py's third candidate — Oracle Cloud's hosted xAI Grok 4.3,
+    reached via OCI's OpenAI-compatible endpoint (same request/response
+    shape as _call()/PROVIDERS, unlike the Vertex candidate above). Must
+    stay opt-in-only, gated on OCI_GENAI_API_KEY, with its own daily-spend
+    cap since this path runs outside ask()'s provider loop."""
+
+    def test_falls_through_to_free_chain_when_key_unset(self, monkeypatch):
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr")
+        assert provider == "groq" and text == "via groq"
+
+    def test_reaches_oci_when_key_set(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.delenv("OCI_COMPARTMENT_OCID", raising=False)
+        monkeypatch.setattr(llm, "USAGE_LOG", str(tmp_path / "llm_usage.jsonl"))
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            captured["auth"] = req.get_header("Authorization")
+            captured["compartment_header"] = req.get_header("Compartmentid")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("grok via oci", {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15})
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys prompt", "usr prompt")
+        assert provider == "oci_grok" and text == "grok via oci"
+        assert captured["auth"] == "Bearer fake-oci-key"
+        assert captured["url"] == (
+            "https://inference.generativeai.us-ashburn-1.oci.oraclecloud.com"
+            "/20231130/actions/v1/chat/completions")
+        assert captured["body"]["model"] == "xai.grok-4.3"
+        assert captured["body"]["messages"] == [
+            {"role": "system", "content": "sys prompt"},
+            {"role": "user", "content": "usr prompt"},
+        ]
+        assert captured["compartment_header"] is None  # not set unless OCI_COMPARTMENT_OCID is
+
+    def test_compartment_header_sent_when_configured(self, monkeypatch):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("OCI_COMPARTMENT_OCID", "ocid1.compartment.oc1..abc")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["compartment_header"] = req.get_header("Compartmentid")
+            return _fake_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok("sys", "usr")
+        assert captured["compartment_header"] == "ocid1.compartment.oc1..abc"
+
+    def test_honors_env_overrides_for_region_and_model(self, monkeypatch):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("OCI_REGION", "us-chicago-1")
+        monkeypatch.setenv("OCI_GROK_MODEL", "xai.grok-4.20")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok("sys", "usr")
+        assert captured["url"].startswith("https://inference.generativeai.us-chicago-1.oci.oraclecloud.com")
+        assert captured["body"]["model"] == "xai.grok-4.20"
+
+    def test_falls_through_to_free_chain_on_oci_error(self, monkeypatch):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        calls = []
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(req.full_url)
+            if urllib.parse.urlparse(req.full_url).hostname.startswith("inference.generativeai"):
+                raise urllib.error.URLError("connection refused")
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr")
+        assert provider == "groq" and text == "via groq"
+        assert len(calls) == 2
+
+    def test_fallback_honors_caller_supplied_tier_and_provider_order(self, monkeypatch):
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("grok reply")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok(
+                "sys", "usr", tier="deep", provider_order=llm.FRONTIER_ORDER)
+        assert provider == "xai_1" and text == "grok reply"
+
+    def test_http_error_body_is_surfaced_not_swallowed(self, monkeypatch, capsys):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        error_body = b'{"code": "NotAuthenticated", "message": "The required information to complete authentication was not provided"}'
+
+        def fake_urlopen(req, timeout=None):
+            if urllib.parse.urlparse(req.full_url).hostname.startswith("inference.generativeai"):
+                raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized", {}, io.BytesIO(error_body))
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok("sys", "usr")
+        assert "NotAuthenticated" in capsys.readouterr().err
+
+    def test_cap_reached_skips_oci_and_falls_through_to_groq(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        usage_log = tmp_path / "llm_usage.jsonl"
+        findings_log = tmp_path / "findings.jsonl"
+        monkeypatch.setattr(llm, "USAGE_LOG", str(usage_log))
+        monkeypatch.setattr(llm, "FINDINGS_LOG", str(findings_log))
+        monkeypatch.setenv("OCI_GROK_DAILY_SPEND_CAP_USD", "1.00")
+        today = llm.datetime.now(llm.timezone.utc).strftime("%Y-%m-%d")
+        # 1M output tokens @ $2.50/M = $2.50, already over the $1.00 cap.
+        _write_usage_rows(usage_log, [
+            {"ts": f"{today}T00:00:00Z", "provider": "oci_grok", "prompt_tokens": 0, "completion_tokens": 1_000_000},
+        ])
+        oci_attempts = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            if req.headers.get("Authorization") == "Bearer fake-oci-key":
+                oci_attempts["n"] += 1
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr")
+
+        assert provider == "groq" and text == "via groq"
+        assert oci_attempts["n"] == 0
+        findings = findings_log.read_text().strip().splitlines()
+        assert len(findings) == 1
+        assert "oci_grok" in json.loads(findings[0])["title"]
+
+    def test_default_cap_is_used_when_env_var_unset(self, monkeypatch):
+        monkeypatch.delenv("OCI_GROK_DAILY_SPEND_CAP_USD", raising=False)
+        assert llm._oci_grok_daily_cap_usd() == llm.DEFAULT_DAILY_SPEND_CAP_USD
+
+
 class TestRepoDigest:
     """The real, regenerable repo-grounding doc (scripts/build_repo_digest.py)
     prepended ONLY to the Vertex candidate's systemInstruction — never the
