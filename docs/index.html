@@ -120,23 +120,22 @@
              danger-color exception (threat severity), not decoration. -->
         <a href="#threat-ledger" id="attack-ticker" class="reveal mb-3 block group">
             <div class="panel-sm border-rose-500/20 transition-colors group-hover:border-rose-500/40">
-                <div class="flex items-center gap-3 sm:gap-4">
+                <div class="flex items-center justify-between gap-3 mb-2">
                     <div class="flex items-center gap-2 shrink-0">
                         <span class="relative flex h-1.5 w-1.5">
                             <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-60"></span>
                             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
                         </span>
-                        <span class="text-xs text-zinc-500 whitespace-nowrap">Recent Exploits</span>
-                    </div>
-                    <div class="w-px h-4 bg-white/10 shrink-0" aria-hidden="true"></div>
-                    <div class="flex-1 min-w-0 h-5 relative overflow-hidden">
-                        <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
-                            <span class="text-zinc-600">syncing threat feed…</span>
-                        </div>
+                        <span class="text-xs text-zinc-500 whitespace-nowrap">Exploits</span>
                     </div>
                     <span class="inline-flex items-center gap-1.5 text-[11px] text-zinc-500 group-hover:text-rose-400 transition shrink-0">
                         <span class="sr-only sm:not-sr-only">Full Ledger</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </span>
+                </div>
+                <div class="w-full h-5 relative overflow-hidden">
+                    <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
+                        <span class="text-zinc-600">syncing threat feed…</span>
+                    </div>
                 </div>
                 <div class="h-[2px] bg-white/5 relative overflow-hidden mt-3" aria-hidden="true">
                     <div id="attack-ticker-progress" class="absolute top-0 h-full w-8 rounded-full bg-rose-500/60" style="left:-10%"></div>
@@ -424,7 +423,7 @@
 
             <section class="panel-sm mb-6">
                 <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
-                    <h3 class="text-sm text-zinc-500">Base TVL Trend <span class="text-zinc-600">· DefiLlama</span></h3>
+                    <h3 class="text-sm text-zinc-500">Base TVL Trend</h3>
                     <div class="flex gap-1 text-[11px]" id="tvl-range">
                         <button data-d="24h" class="term-btn term-btn-sm">24h</button>
                         <button data-d="7d" class="term-btn term-btn-sm">7d</button>
@@ -460,7 +459,7 @@
 
             <section class="panel-sm mt-6">
                 <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
-                    <h3 class="text-sm text-zinc-500">Base Movers <span class="text-zinc-600">· DexScreener</span></h3>
+                    <h3 class="text-sm text-zinc-500">Base Movers</h3>
                     <div class="flex gap-1 text-[11px]" id="movers-tabs">
                         <button data-m="trending" class="term-btn term-btn-sm term-btn-active">Trending</button>
                         <button data-m="gainers" class="term-btn term-btn-sm">Gainers</button>
@@ -468,8 +467,8 @@
                         <button data-m="volume" class="term-btn term-btn-sm">Volume</button>
                     </div>
                 </div>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most actively promoted token pairs on Base right now, re-ranked live by
-                24-hour price change and trading volume — each carries its own VAPE Score, a market-quality signal (real liquidity, pair age) independent of the momentum ranking.</p>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most active token pairs on Base right now, with a VAPE Score for each —
+                a market-quality signal independent of the momentum ranking.</p>
                 <div id="base-movers" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -478,9 +477,8 @@
             </section>
 
             <section class="panel-sm mt-6">
-                <h3 class="text-sm text-zinc-500 mb-2">Virtuals Protocol <span class="text-zinc-600">· Codex</span></h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price, volume, and holder concentration — a VAPE Score that
-                rewards a widely-held token over one dominated by a handful of wallets.</p>
+                <h3 class="text-sm text-zinc-500 mb-2">Virtuals Protocol</h3>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price, volume, and holder concentration, with a VAPE Score.</p>
                 <div id="virtuals-stats" class="stat-line">
                     <span class="stat-pair"><span class="stat-label">price</span><span id="v-price" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                     <span class="stat-pair"><span class="stat-label">mcap</span><span id="v-mcap" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
@@ -491,9 +489,8 @@
             </section>
 
             <section class="panel-sm mt-6">
-                <h3 class="text-sm text-zinc-500 mb-2">Trending on Base <span class="text-zinc-600">· Codex</span></h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">Base tokens ranked live by Codex's own volume/liquidity signal — tokens
-                launched via Virtuals' agent-token factory are tagged, not filtered to only those.</p>
+                <h3 class="text-sm text-zinc-500 mb-2">Trending on Base</h3>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most active tokens on Base right now. Tokens from the Virtuals ecosystem are tagged.</p>
                 <div id="trending-base" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -653,7 +650,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=16"></script>
+    <script src="assets/app.js?v=17"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
