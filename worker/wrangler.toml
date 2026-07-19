@@ -31,6 +31,7 @@ VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"
 #   wrangler secret put CDP_API_KEY_SECRET
 #   wrangler secret put ALCHEMY_API_KEY
 #   wrangler secret put COINGECKO_API_KEY
+#   wrangler secret put CODEX_API_KEY
 #
 # ETHERSCAN_API_KEY: only exploit_check / dossier_check need it; the other
 # 4 offerings work without it (degrade to {"verified": null}, matching
@@ -54,6 +55,14 @@ VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"
 # headroom than the fully anonymous public API) and /cost-basis (needs
 # CoinGecko's historical-price-by-contract endpoint, which requires this key
 # — that endpoint 403s without one). Both routes 503 without it.
+#
+# CODEX_API_KEY: a Codex.io GraphQL API key (dashboard.codex.io — free tier),
+# used only by the free /virtuals-snapshot and /trending-base routes
+# (src/lib/codex.ts). Codex requires a bearer key that can't ship to the
+# browser, unlike the keyless DefiLlama/CoinGecko calls the site makes
+# directly elsewhere — so this is a real, separate secret, not optional
+# polish. Without it those two routes return 503 and the corresponding site
+# panels show as unavailable.
 #
 # GH_DISPATCH_TOKEN: a fine-grained GitHub PAT scoped to jUXTAPOSITION1/V.A.P.E
 # with "Actions: write" + "Contents: read", used only by /scan/bounty_deep_dive

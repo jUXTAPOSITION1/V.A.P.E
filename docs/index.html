@@ -122,17 +122,15 @@
             <div class="panel-sm border-rose-500/20 transition-colors group-hover:border-rose-500/40">
                 <div class="flex items-center gap-3 sm:gap-4">
                     <div class="flex items-center gap-2 shrink-0">
-                        <span class="relative flex h-2 w-2">
+                        <span class="relative flex h-1.5 w-1.5">
                             <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-60"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
                         </span>
-                        <span class="text-[11px] uppercase tracking-[.12em] text-rose-400 whitespace-nowrap">
-                            <span class="hidden sm:inline">Live Threat Feed</span><span class="sm:hidden">Threats</span>
-                        </span>
+                        <span class="text-xs text-zinc-500 whitespace-nowrap">Recent Exploits</span>
                     </div>
                     <div class="w-px h-4 bg-white/10 shrink-0" aria-hidden="true"></div>
                     <div class="flex-1 min-w-0 h-5 relative overflow-hidden">
-                        <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap overflow-hidden transition-all duration-300 ease-out">
+                        <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
                             <span class="text-zinc-600">syncing threat feed…</span>
                         </div>
                     </div>
@@ -148,7 +146,6 @@
 
         <!-- ═══ 1. HERO ═══ -->
         <header class="reveal pt-2 sm:pt-3 pb-8 sm:pb-12">
-            <div class="eyebrow mb-4">[ intelligence system — base &amp; virtuals ]</div>
             <h1 class="hero-title">
                 &gt; Intelligence, verified on-chain.
             </h1>
@@ -481,27 +478,27 @@
             </section>
 
             <section class="panel-sm mt-6">
-                <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
-                    <h3 class="text-sm text-zinc-500">Virtuals Protocol <span class="text-zinc-600">· CoinGecko + DefiLlama</span></h3>
-                    <div class="flex gap-1 text-[11px]" id="virtuals-range">
-                        <button data-d="24h" class="term-btn term-btn-sm">24h</button>
-                        <button data-d="7d" class="term-btn term-btn-sm">7d</button>
-                        <button data-d="30d" class="term-btn term-btn-sm term-btn-active">30d</button>
-                        <button data-d="90d" class="term-btn term-btn-sm">90d</button>
-                        <button data-d="1y" class="term-btn term-btn-sm">1y</button>
-                        <button data-d="all" class="term-btn term-btn-sm">All</button>
-                    </div>
-                </div>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price/volume plus the Virtuals Protocol ecosystem's own TVL —
-                a VAPE Score reflecting sustained 7d trend, not one day's price wiggle.</p>
-                <div id="virtuals-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+                <h3 class="text-sm text-zinc-500 mb-2">Virtuals Protocol <span class="text-zinc-600">· Codex</span></h3>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price, volume, and holder concentration — a VAPE Score that
+                rewards a widely-held token over one dominated by a handful of wallets.</p>
+                <div id="virtuals-stats" class="stat-line">
                     <span class="stat-pair"><span class="stat-label">price</span><span id="v-price" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                     <span class="stat-pair"><span class="stat-label">mcap</span><span id="v-mcap" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                     <span class="stat-pair"><span class="stat-label">vol 24h</span><span id="v-vol" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-                    <span class="stat-pair"><span class="stat-label">24h/7d/30d</span><span id="v-chg" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-                    <span class="stat-pair"><span class="stat-label">protocol tvl</span><span id="v-tvl" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span class="stat-label">24h</span><span id="v-chg" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span id="v-holders" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                 </div>
-                <div class="chart-shell-sm"><canvas id="virtualsChart"></canvas></div>
+            </section>
+
+            <section class="panel-sm mt-6">
+                <h3 class="text-sm text-zinc-500 mb-2">Trending on Base <span class="text-zinc-600">· Codex</span></h3>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">Base tokens ranked live by Codex's own volume/liquidity signal — tokens
+                launched via Virtuals' agent-token factory are tagged, not filtered to only those.</p>
+                <div id="trending-base" class="diff-list">
+                    <div class="skeleton h-14 my-1"></div>
+                    <div class="skeleton h-14 my-1"></div>
+                    <div class="skeleton h-14 my-1"></div>
+                </div>
             </section>
         </section>
 
@@ -656,7 +653,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=15"></script>
+    <script src="assets/app.js?v=16"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

@@ -63,8 +63,9 @@ const AttackFeed = {
     _rotateHandle: null,
     _rotateIdx: 0,
     _paused: false,
-    HOLD_MS: 5200,
-    TRANSITION_MS: 320,
+    _phase: 'in',
+    HOLD_MS: 3200,
+    SLIDE_MS: 600,
 
     async init() {
         try {
@@ -122,73 +123,128 @@ const AttackFeed = {
             <span class="text-zinc-700 shrink-0 font-mono text-[11px]">${escapeHtml(ago(item.date))}</span>`;
     },
 
+    // News-ticker motion: each incident slides in from the right, comes to
+    // rest and holds (readable, progress bar fills), then slides out to the
+    // left before the next one enters from the right — never two headlines
+    // overlapping mid-transition. A named `_phase` (in/hold/out) plus a
+    // single tracked timeout handle means pause() can always cleanly cancel
+    // whatever's pending; resume() just re-enters the hold phase rather than
+    // trying to reconstruct exact remaining time in a sub-phase, which is a
+    // fine trade for a decorative ticker.
     _renderTicker() {
         const line = document.getElementById('attack-ticker-line');
         const progress = document.getElementById('attack-ticker-progress');
         const wrap = document.getElementById('attack-ticker');
         if (!line || !wrap) return;
+        this._tickerLine = line;
+        this._tickerProgress = progress;
 
         const incidents = this._incidents();
         if (!incidents.length) {
+            line.style.transition = 'none';
+            line.style.transform = 'translateX(0)';
             line.innerHTML = '<span class="text-zinc-600">No incidents in the tracked feed this cycle — the ticker fills in as soon as one lands.</span>';
             if (progress) progress.style.left = '-10%';
             return;
         }
+        this._tickerIncidents = incidents;
 
-        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const render = () => {
-            line.innerHTML = this._tickerLineHtml(incidents[this._rotateIdx]);
+        const paint = (idx) => {
+            line.innerHTML = this._tickerLineHtml(incidents[idx]);
             this._enhanceIcons(line);
         };
-        render();
 
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (reduceMotion || incidents.length === 1) {
+            line.style.transition = 'none';
+            line.style.transform = 'translateX(0)';
+            paint(this._rotateIdx);
             if (progress) progress.parentElement.style.display = 'none';
             return; // static — no auto-rotation, no motion
         }
 
-        const runProgress = () => {
-            if (!progress) return;
-            progress.style.transition = 'none';
-            progress.style.left = '-10%';
-            void progress.offsetWidth; // force reflow so the next transition actually animates from the start
-            progress.style.transition = `left ${this.HOLD_MS}ms linear`;
-            progress.style.left = '105%';
-        };
-        runProgress();
+        // Kick off the cycle sitting off-screen right so the very first
+        // headline also slides in rather than just appearing.
+        line.style.transition = 'none';
+        line.style.transform = 'translateX(100%)';
+        paint(this._rotateIdx);
+        void line.offsetWidth; // force reflow so the next transition actually animates from here
 
-        const advance = () => {
-            if (this._paused) return;
-            line.classList.add('opacity-0', '-translate-y-1');
-            setTimeout(() => {
-                this._rotateIdx = (this._rotateIdx + 1) % incidents.length;
-                render();
-                line.classList.remove('opacity-0', '-translate-y-1');
-                runProgress();
-            }, this.TRANSITION_MS);
-        };
-        this._rotateHandle = setInterval(advance, this.HOLD_MS + this.TRANSITION_MS);
+        wrap.addEventListener('mouseenter', () => this._pauseTicker());
+        wrap.addEventListener('mouseleave', () => this._resumeTicker());
+        wrap.addEventListener('focusin', () => this._pauseTicker());
+        wrap.addEventListener('focusout', () => this._resumeTicker());
 
-        // Pause on hover/focus — an auto-rotating feed that can't be paused
-        // to actually read is a real accessibility miss (WCAG 2.2.2), not
-        // just a nicety.
-        // A CSS transition animates the rendered position, but the
-        // specified `left` value is already '105%' from the instant the
-        // transition starts — dropping the transition mid-flight without
-        // freezing the position first snaps it straight to that end value
-        // instead of holding wherever it visually was.
-        const pause = () => {
-            this._paused = true;
-            if (!progress) return;
-            const frozenLeft = getComputedStyle(progress).left;
-            progress.style.transition = 'none';
-            progress.style.left = frozenLeft;
-        };
-        const resume = () => { this._paused = false; runProgress(); };
-        wrap.addEventListener('mouseenter', pause);
-        wrap.addEventListener('mouseleave', resume);
-        wrap.addEventListener('focusin', pause);
-        wrap.addEventListener('focusout', resume);
+        this._slideIn();
+    },
+
+    _clearTickerTimer() {
+        if (this._rotateHandle) { clearTimeout(this._rotateHandle); this._rotateHandle = null; }
+    },
+
+    _slideIn() {
+        const line = this._tickerLine;
+        this._phase = 'in';
+        line.style.transition = `transform ${this.SLIDE_MS}ms cubic-bezier(.22,.9,.32,1)`;
+        line.style.transform = 'translateX(0%)';
+        this._rotateHandle = setTimeout(() => this._holdPhase(), this.SLIDE_MS);
+    },
+
+    _holdPhase() {
+        this._phase = 'hold';
+        this._runProgress();
+        this._rotateHandle = setTimeout(() => this._slideOut(), this.HOLD_MS);
+    },
+
+    _slideOut() {
+        const line = this._tickerLine;
+        this._phase = 'out';
+        if (this._tickerProgress) {
+            this._tickerProgress.style.transition = 'none';
+            this._tickerProgress.style.left = '105%';
+        }
+        line.style.transition = `transform ${this.SLIDE_MS}ms cubic-bezier(.6,0,.8,.2)`;
+        line.style.transform = 'translateX(-100%)';
+        this._rotateHandle = setTimeout(() => {
+            this._rotateIdx = (this._rotateIdx + 1) % this._tickerIncidents.length;
+            line.style.transition = 'none';
+            line.style.transform = 'translateX(100%)';
+            line.innerHTML = this._tickerLineHtml(this._tickerIncidents[this._rotateIdx]);
+            this._enhanceIcons(line);
+            void line.offsetWidth;
+            this._slideIn();
+        }, this.SLIDE_MS);
+    },
+
+    _runProgress() {
+        const progress = this._tickerProgress;
+        if (!progress) return;
+        progress.style.transition = 'none';
+        progress.style.left = '-10%';
+        void progress.offsetWidth; // force reflow so the next transition actually animates from the start
+        progress.style.transition = `left ${this.HOLD_MS}ms linear`;
+        progress.style.left = '105%';
+    },
+
+    // Pause on hover/focus — an auto-rotating feed that can't be paused to
+    // actually read is a real accessibility miss (WCAG 2.2.2), not just a
+    // nicety. Cancels whatever phase-timeout is pending; the in-flight CSS
+    // transition (if any) still finishes on its own since it isn't tied to
+    // the JS timer, so pausing never snaps the headline to a jarring
+    // mid-slide stop.
+    _pauseTicker() {
+        this._paused = true;
+        this._clearTickerTimer();
+        if (this._tickerProgress) {
+            const frozenLeft = getComputedStyle(this._tickerProgress).left;
+            this._tickerProgress.style.transition = 'none';
+            this._tickerProgress.style.left = frozenLeft;
+        }
+    },
+    _resumeTicker() {
+        if (!this._paused) return;
+        this._paused = false;
+        this._holdPhase();
     },
 
     _lessonHtml(lesson) {
