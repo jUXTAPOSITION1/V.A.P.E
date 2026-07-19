@@ -143,3 +143,81 @@ def test_run_external_audit_handles_llm_unavailable(monkeypatch, tmp_path):
     result = ea.run_external_audit("owner", "repo", "main", paths=["a.move"])
     assert result["provider"] is None
     assert "unavailable" in result["verdict_summary"]
+
+
+# ── Move Prover wiring ───────────────────────────────────────────────────────
+
+def test_derive_move_toml_candidates_from_sources_ancestor():
+    candidates = ea._derive_move_toml_candidates(["clmm/sources/actions/trade.move"])
+    assert candidates == ["clmm/Move.toml", "clmm/move.toml"]
+
+
+def test_derive_move_toml_candidates_root_level_sources():
+    candidates = ea._derive_move_toml_candidates(["sources/trade.move"])
+    assert candidates == ["Move.toml", "move.toml"]
+
+
+def test_derive_move_toml_candidates_dedupes_across_paths():
+    candidates = ea._derive_move_toml_candidates(
+        ["clmm/sources/a.move", "clmm/sources/actions/b.move"])
+    assert candidates == ["clmm/Move.toml", "clmm/move.toml"]
+
+
+def test_derive_move_toml_candidates_skips_paths_without_sources():
+    assert ea._derive_move_toml_candidates(["README.md", "flat.move"]) == []
+
+
+def test_strip_package_root_removes_prefix():
+    assert ea._strip_package_root("clmm/sources/a.move", "clmm") == "sources/a.move"
+
+
+def test_strip_package_root_noop_without_prefix():
+    assert ea._strip_package_root("sources/a.move", "") == "sources/a.move"
+
+
+def test_run_external_audit_wires_move_prover_when_toml_found(monkeypatch, tmp_path):
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
+
+    def fake_fetch(owner, repo, ref, p, timeout=15):
+        if p.endswith("Move.toml"):
+            return "[package]\nname = \"mmt_v3\"\n"
+        if p == "clmm/move.toml":
+            return None
+        return f"module mmt_v3::x {{}} // {p}"
+
+    monkeypatch.setattr(ea, "fetch_file", fake_fetch)
+    monkeypatch.setattr(ea, "ask_oci_grok_frontier",
+                        lambda system, prompt, max_tokens=None, temperature=None:
+                        ("## Executive Summary\nClean.", "oci_grok"))
+
+    captured = {}
+
+    def fake_scaffold_and_prove(files, move_toml_content, focus_note=""):
+        captured["files"] = files
+        captured["move_toml"] = move_toml_content
+        return {"ran": True, "prover": {"returncode": 0, "output": "1 verified"}}
+
+    monkeypatch.setattr(ea, "scaffold_and_prove", fake_scaffold_and_prove)
+    result = ea.run_external_audit("mmt-finance", "v3-core", "main",
+                                    paths=["clmm/sources/actions/trade.move"])
+    assert result["move_prover_ran"] is True
+    assert captured["files"] == {"sources/actions/trade.move": "module mmt_v3::x {} // clmm/sources/actions/trade.move"}
+    assert "mmt_v3" in captured["move_toml"]
+    content = (tmp_path / "audits").iterdir().__next__().read_text()
+    assert "Formal Verification (Move Prover" in content
+    assert "1 verified" in content
+
+
+def test_run_external_audit_reports_missing_move_toml(monkeypatch, tmp_path):
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
+    monkeypatch.setattr(ea, "fetch_file",
+                        lambda owner, repo, ref, p, timeout=15: None if "toml" in p.lower() else f"// {p}")
+    monkeypatch.setattr(ea, "ask_oci_grok_frontier",
+                        lambda system, prompt, max_tokens=None, temperature=None: ("Clean.", "oci_grok"))
+    result = ea.run_external_audit("mmt-finance", "v3-core", "main",
+                                    paths=["clmm/sources/actions/trade.move"])
+    assert result["move_prover_ran"] is False
+    content = (tmp_path / "audits").iterdir().__next__().read_text()
+    assert "could not locate this package's real Move.toml" in content

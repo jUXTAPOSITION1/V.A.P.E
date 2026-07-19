@@ -257,7 +257,14 @@ the hourly cycle.
   from what it doesn't). Deliberately does not invoke Slither/Mythril/Aderyn/Halmos —
   those are Solidity-specific and need either a live on-chain address or a compilable
   Foundry project; a genuinely Solidity on-chain target should go through
-  `deep_dive_audit.py` instead. Manual `workflow_dispatch`
+  `deep_dive_audit.py` instead. For Move targets, also runs bounded formal verification
+  (`agents/scaffold_move_target.py`): scaffolds a real local Move package from the
+  target's own fetched source + real Move.toml, has the frontier LLM draft speculative
+  Move Prover spec properties (mirrors `scaffold_foundry_target.py`'s Halmos-hypothesis
+  pattern, since real external targets rarely ship existing spec blocks), and runs
+  `sui-prover` against them if it's installed this run — deliberately not
+  auto-installed in any workflow (no Linux release published; needs a from-source
+  build with Boogie + Z3). Manual `workflow_dispatch`
   (`external-bounty-audit.yml`) per engagement, not scheduled.
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
