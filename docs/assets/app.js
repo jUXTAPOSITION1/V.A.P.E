@@ -67,7 +67,7 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.virtuals(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -599,6 +599,117 @@ const App = {
                 </div>
             </a>`;
         }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
+    },
+
+    // ── Virtuals Protocol — VIRTUAL token + ecosystem TVL ───────────────────
+    // Mirrors agents/data_fetchers.py::get_virtuals_snapshot() exactly (same
+    // keyless CoinGecko + DefiLlama sources, same 30d window for 7d/30d price
+    // trend), so the numbers/score shown here match VAPE's own backend sweep
+    // (agents/virtuals_sweep.py). Client-side, free — same pattern as
+    // protocols()/chart()/baseMovers(), no worker/x402 involved.
+    _virtualsTvlHistory: [],
+    _virtualsRange: '30d',
+    _virtualsChart: null,
+    async virtuals() {
+        try {
+            const [pxRes, chartRes, protoRes] = await Promise.allSettled([
+                fetch('https://api.coingecko.com/api/v3/simple/price?ids=virtual-protocol&vs_currencies=usd&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true').then(r=>r.json()),
+                fetch('https://api.coingecko.com/api/v3/coins/virtual-protocol/market_chart?vs_currency=usd&days=30').then(r=>r.json()),
+                fetch('https://api.llama.fi/protocol/virtual-protocol').then(r=>r.json()),
+            ]);
+            const px = pxRes.status==='fulfilled' ? (pxRes.value?.['virtual-protocol']||{}) : {};
+            const snapshot = {
+                price_usd: px.usd, mcap_usd: px.usd_market_cap, vol_24h_usd: px.usd_24h_vol,
+                change_24h_pct: typeof px.usd_24h_change==='number' ? Math.round(px.usd_24h_change*100)/100 : null,
+            };
+            snapshot.volume_to_mcap_pct = (typeof snapshot.vol_24h_usd==='number' && typeof snapshot.mcap_usd==='number' && snapshot.mcap_usd>0)
+                ? Math.round(snapshot.vol_24h_usd/snapshot.mcap_usd*10000)/100 : null;
+
+            const chart = chartRes.status==='fulfilled' ? chartRes.value : null;
+            const prices = chart?.prices;
+            if (Array.isArray(prices) && prices.length >= 2) {
+                const latest = prices[prices.length-1][1];
+                const nowMs = prices[prices.length-1][0];
+                const weekAgoMs = nowMs - 7*24*3600*1000;
+                const monthAgoPrice = prices[0][1];
+                const weekAgoPrice = prices.reduce((a,b)=>Math.abs(a[0]-weekAgoMs)<Math.abs(b[0]-weekAgoMs)?a:b)[1];
+                snapshot.change_7d_pct = weekAgoPrice ? Math.round((latest-weekAgoPrice)/weekAgoPrice*10000)/100 : null;
+                snapshot.change_30d_pct = monthAgoPrice ? Math.round((latest-monthAgoPrice)/monthAgoPrice*10000)/100 : null;
+            }
+
+            const proto = protoRes.status==='fulfilled' ? protoRes.value : null;
+            if (proto && !proto.error) {
+                const cur = proto.currentChainTvls || {};
+                snapshot.protocol_tvl_usd = Object.values(cur).reduce((s,v)=>typeof v==='number'?s+v:s, 0);
+                const history = proto.tvl;
+                if (Array.isArray(history) && history.length >= 2) {
+                    this._virtualsTvlHistory = history.map(h=>({t:h.date*1000, v:h.totalLiquidityUSD||0}));
+                    const latestTvl = history[history.length-1].totalLiquidityUSD;
+                    const nowS = history[history.length-1].date;
+                    const weekAgoS = nowS - 7*24*3600;
+                    const monthAgoTvl = history[0].totalLiquidityUSD;
+                    const weekAgoTvl = history.reduce((a,b)=>Math.abs((a.date||0)-weekAgoS)<Math.abs((b.date||0)-weekAgoS)?a:b).totalLiquidityUSD;
+                    snapshot.tvl_change_7d_pct = weekAgoTvl ? Math.round((latestTvl-weekAgoTvl)/weekAgoTvl*10000)/100 : null;
+                    snapshot.tvl_change_30d_pct = monthAgoTvl ? Math.round((latestTvl-monthAgoTvl)/monthAgoTvl*10000)/100 : null;
+                }
+            }
+
+            this._renderVirtualsStats(snapshot);
+            this._renderVirtualsChart(this._virtualsRange);
+        } catch(e) { /* leave skeletons on failure — no fabricated numbers */ }
+    },
+
+    // 0-100, neutral start 50 — direct port of agents/virtuals_sweep.py's
+    // compute_health_score() (0-10 there), same four weighted factors
+    // (24h price/small, 7d price/medium, 7d TVL trend/medium, vol-mcap
+    // ratio/small) scaled ×10, same skip-if-missing rule.
+    _virtualsScore(s) {
+        let score = 50;
+        if (typeof s.change_24h_pct === 'number') {
+            if (s.change_24h_pct >= 5) score += 10; else if (s.change_24h_pct > 0) score += 5;
+            else if (s.change_24h_pct <= -10) score -= 10; else if (s.change_24h_pct < 0) score -= 5;
+        }
+        if (typeof s.change_7d_pct === 'number') {
+            if (s.change_7d_pct >= 10) score += 20; else if (s.change_7d_pct > 0) score += 10;
+            else if (s.change_7d_pct <= -20) score -= 20; else if (s.change_7d_pct < 0) score -= 10;
+        }
+        if (typeof s.tvl_change_7d_pct === 'number') {
+            if (s.tvl_change_7d_pct >= 10) score += 20; else if (s.tvl_change_7d_pct > 0) score += 10;
+            else if (s.tvl_change_7d_pct <= -20) score -= 20; else if (s.tvl_change_7d_pct < 0) score -= 10;
+        }
+        if (typeof s.volume_to_mcap_pct === 'number') {
+            if (s.volume_to_mcap_pct >= 5) score += 10; else if (s.volume_to_mcap_pct < 0.5) score -= 10;
+        }
+        return Math.max(0, Math.min(100, Math.round(score)));
+    },
+
+    _renderVirtualsStats(s) {
+        this._set('v-price', s.price_usd!=null ? '$'+Number(s.price_usd).toLocaleString(undefined,{maximumSignificantDigits:6}) : '—');
+        this._set('v-mcap', fmtUsd(s.mcap_usd));
+        this._set('v-vol', fmtUsd(s.vol_24h_usd));
+        const chgEl = document.getElementById('v-chg');
+        if (chgEl) chgEl.innerHTML = `${pct(s.change_24h_pct)} · ${pct(s.change_7d_pct)} · ${pct(s.change_30d_pct)}`;
+        const tvlEl = document.getElementById('v-tvl');
+        if (tvlEl) tvlEl.innerHTML = `${fmtUsd(s.protocol_tvl_usd)} <span class="text-xs">${pct(s.tvl_change_7d_pct)} 7d</span> ${this._scorePill(this._virtualsScore(s))}`;
+    },
+
+    _renderVirtualsChart(range) {
+        const canvas = document.getElementById('virtualsChart');
+        if (!canvas || !this._virtualsTvlHistory.length) return;
+        const slice = this._virtualsTvlHistory.slice(-(RANGE_DAYS[range] || RANGE_DAYS['30d']));
+        const labels = slice.map(p => new Date(p.t).toLocaleDateString(undefined,{month:'short',day:'numeric'}));
+        const data = slice.map(p => p.v);
+        if (this._virtualsChart) this._virtualsChart.destroy();
+        const g = canvas.getContext('2d').createLinearGradient(0,0,0,200);
+        g.addColorStop(0,'rgba(74,222,128,0.30)'); g.addColorStop(1,'rgba(74,222,128,0)');
+        this._virtualsChart = new Chart(canvas, {
+            type:'line',
+            data:{ labels, datasets:[{ data, borderColor:'#4ade80', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
+            options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},
+                tooltip:{callbacks:{label:c=>fmtUsd(c.parsed.y)}}},
+                scales:{ y:{ticks:{color:'#52525b',callback:v=>fmtUsd(v)},grid:{color:'rgba(255,255,255,0.04)'}},
+                         x:{ticks:{color:'#52525b',maxTicksLimit:8},grid:{display:false}} } }
+        });
     },
 
     _protoSort: 'tvl',
@@ -1381,6 +1492,15 @@ window.addEventListener('load', () => {
         }
         App._renderProtocolRows();
         App._enrichProtocols();
+    });
+    // Virtuals Protocol TVL chart range — reuses the already-cached full
+    // history, no new request (same pattern as tvl-range/proto-report-range).
+    document.getElementById('virtuals-range').addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        App._virtualsRange = b.dataset.d;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        App._renderVirtualsChart(App._virtualsRange);
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });

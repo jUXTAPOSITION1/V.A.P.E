@@ -492,6 +492,30 @@
                     <div class="skeleton h-14 my-1"></div>
                 </div>
             </section>
+
+            <section class="panel-sm mt-6">
+                <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
+                    <h3 class="text-sm text-zinc-500">Virtuals Protocol <span class="text-zinc-600">· CoinGecko + DefiLlama</span></h3>
+                    <div class="flex gap-1 text-[11px]" id="virtuals-range">
+                        <button data-d="24h" class="term-btn term-btn-sm">24h</button>
+                        <button data-d="7d" class="term-btn term-btn-sm">7d</button>
+                        <button data-d="30d" class="term-btn term-btn-sm term-btn-active">30d</button>
+                        <button data-d="90d" class="term-btn term-btn-sm">90d</button>
+                        <button data-d="1y" class="term-btn term-btn-sm">1y</button>
+                        <button data-d="all" class="term-btn term-btn-sm">All</button>
+                    </div>
+                </div>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price/volume plus the Virtuals Protocol ecosystem's own TVL —
+                a VAPE Score reflecting sustained 7d trend, not one day's price wiggle.</p>
+                <div id="virtuals-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+                    <span class="stat-pair"><span class="stat-label">price</span><span id="v-price" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span class="stat-label">mcap</span><span id="v-mcap" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span class="stat-label">vol 24h</span><span id="v-vol" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span class="stat-label">24h/7d/30d</span><span id="v-chg" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                    <span class="stat-pair"><span class="stat-label">protocol tvl</span><span id="v-tvl" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                </div>
+                <div class="chart-shell-sm"><canvas id="virtualsChart"></canvas></div>
+            </section>
         </section>
 
         <!-- ═══ 10. TOKEN SECURITY ASSESSMENT (free preview) ═══ -->
@@ -645,7 +669,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=14"></script>
+    <script src="assets/app.js?v=15"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
