@@ -1717,6 +1717,25 @@
     "symbol": "MidnightProtocol",
     "times_investigated": 1
   },
+  "8453:0x8b7dde054be9d180c1be7fae0874697374a49832": {
+    "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832",
+    "chain": "8453",
+    "creator_address": "0x7565f60988b83e577cb1a670ce577667311b11ae",
+    "first_investigated": "2026-07-19T22:57:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-225730-0x8B7DdE05.md",
+        "score": 70,
+        "ts": "2026-07-19T22:57:30Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-19T22:57:30Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "PROS",
+    "times_investigated": 1
+  },
   "8453:0x8c81b4c816d66d36c4bf348bdec01dbcbc70e987": {
     "address": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
     "chain": "8453",
