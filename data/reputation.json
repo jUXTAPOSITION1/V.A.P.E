@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T13:55:55Z",
+  "generated": "2026-07-19T15:16:59Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,12 +12,12 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 391,
-    "intel_reports": 214,
-    "intel_broadcasts": 84,
-    "catalog_investigations": 145,
+    "reports_published": 395,
+    "intel_reports": 216,
+    "intel_broadcasts": 85,
+    "catalog_investigations": 146,
     "token_scans_logged": 0,
-    "skills_codified": 14,
+    "skills_codified": 15,
     "tools_total": 16,
     "tools_verified": 16,
     "tool_tiers": {
@@ -58,7 +58,7 @@
         }
       }
     ],
-    "work_log_entries": 168,
+    "work_log_entries": 169,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260623",
     "latest_report": "20260717"
@@ -258,7 +258,7 @@
       {
         "name": "protocol_fees",
         "price_usd": 0.01,
-        "summary": "Protocol real earned fees + revenue (24h/7d/30d) \u2014 legitimacy signal TVL misses",
+        "summary": "Protocol real earned fees + revenue (24h/7d/30d/1y/all-time) \u2014 legitimacy signal TVL misses",
         "auto": true,
         "x402": true,
         "data": true,
