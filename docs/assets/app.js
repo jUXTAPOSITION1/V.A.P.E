@@ -832,7 +832,7 @@ const App = {
             fetch(`https://api.llama.fi/treasury/${slug}`).then(r=>r.json()),
         ]);
         const f = feesRes.status==='fulfilled' ? feesRes.value : {};
-        if (f && !f.error) { detail.fees7d = f.total7d; detail.fees30d = f.total30d; }
+        if (f && !f.error) { detail.fees7d = f.total7d; detail.fees30d = f.total30d; detail.fees1y = f.total1y; detail.feesAllTime = f.totalAllTime; }
         const rev = revRes.status==='fulfilled' ? revRes.value : {};
         if (rev && !rev.error) { detail.revenue24h = rev.total24h; detail.revenue7d = rev.total7d; detail.revenue30d = rev.total30d; }
         const t = treasuryRes.status==='fulfilled' ? treasuryRes.value : {};
@@ -917,6 +917,8 @@ const App = {
                     <span class="stat-pair"><span class="stat-label">fees 24h</span><span id="proto-fees24" class="stat-value">${detail.fees24h!=null?fmtUsd(detail.fees24h):'—'}</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 7d</span><span id="proto-fees7" class="stat-value">…</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 30d</span><span id="proto-fees30" class="stat-value">…</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees 1y</span><span id="proto-fees1y" class="stat-value">…</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees all-time</span><span id="proto-fees-all" class="stat-value">…</span></span>
                     <span class="stat-pair"><span class="stat-label">audits</span><span class="stat-value">${detail.audits?this._esc(String(detail.audits)):'—'}</span></span>
                 </div>
                 <div id="proto-treasury" class="text-xs text-zinc-500 mb-5"></div>
@@ -952,6 +954,8 @@ const App = {
             this._ensureProtoExtras(slug).then(d => {
                 const f7 = document.getElementById('proto-fees7'); if (f7) f7.textContent = d.fees7d!=null?fmtUsd(d.fees7d):'—';
                 const f30 = document.getElementById('proto-fees30'); if (f30) f30.textContent = d.fees30d!=null?fmtUsd(d.fees30d):'—';
+                const f1y = document.getElementById('proto-fees1y'); if (f1y) f1y.textContent = d.fees1y!=null?fmtUsd(d.fees1y):'—';
+                const fAll = document.getElementById('proto-fees-all'); if (fAll) fAll.textContent = d.feesAllTime!=null?fmtUsd(d.feesAllTime):'—';
                 const tEl = document.getElementById('proto-treasury');
                 if (tEl && d.treasuryUsd) {
                     tEl.textContent = `Treasury ${fmtUsd(d.treasuryUsd)}` + (d.ownTokenShare!=null ? ` · ${(d.ownTokenShare*100).toFixed(0)}% own-token` : '');

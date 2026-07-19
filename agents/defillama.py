@@ -180,7 +180,10 @@ def chain_overview(chain="Base"):
 def protocol_fees(slug):
     """A protocol's real earned fees/revenue — 'does this thing actually make
     money, or is it just TVL parked?' A strong legitimacy signal raw TVL misses.
-    Returns 24h/7d/30d fees + revenue where DefiLlama tracks them."""
+    Returns 24h/7d/30d/1y/all-time fees + revenue where DefiLlama tracks them —
+    all-time in particular is the one figure that can't be reconstructed from
+    the shorter windows (a protocol can have thin recent fees but a large
+    lifetime total, or vice versa for a newly-ramping one)."""
     d = _get(f"{API}/summary/fees/{urllib.parse.quote(slug)}?dataType=dailyFees",
              ttl=3600, cache_key=f"dl_fees_{slug}")
     if _err(d):
@@ -188,10 +191,12 @@ def protocol_fees(slug):
     rev = _get(f"{API}/summary/fees/{urllib.parse.quote(slug)}?dataType=dailyRevenue",
                ttl=3600, cache_key=f"dl_rev_{slug}")
     out = {"ts": _now_iso(), "slug": slug, "name": d.get("name"), "logo": d.get("logo"),
-           "fees_24h": d.get("total24h"), "fees_7d": d.get("total7d"), "fees_30d": d.get("total30d")}
+           "fees_24h": d.get("total24h"), "fees_7d": d.get("total7d"), "fees_30d": d.get("total30d"),
+           "fees_1y": d.get("total1y"), "fees_all_time": d.get("totalAllTime")}
     if not _err(rev):
         out.update({"revenue_24h": rev.get("total24h"), "revenue_7d": rev.get("total7d"),
-                    "revenue_30d": rev.get("total30d")})
+                    "revenue_30d": rev.get("total30d"), "revenue_1y": rev.get("total1y"),
+                    "revenue_all_time": rev.get("totalAllTime")})
     return out
 
 

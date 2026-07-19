@@ -51,7 +51,7 @@ DL_OFFERINGS = [
      "(with a protocol slug) fees/unlocks/treasury — plus the token's real logo"),
     ("token_chart", 0.01, "Daily price series (default 30d) + token logo — sparkline & volatility"),
     ("protocol", 0.01, "Full protocol record: per-chain TVL, category, audits, official logo"),
-    ("protocol_fees", 0.01, "Protocol real earned fees + revenue (24h/7d/30d) — legitimacy signal TVL misses"),
+    ("protocol_fees", 0.01, "Protocol real earned fees + revenue (24h/7d/30d/1y/all-time) — legitimacy signal TVL misses"),
     ("unlocks", 0.01, "Token unlock/emission schedule — the next upcoming dump-risk event"),
     ("treasury", 0.01, "Protocol treasury composition + own-token share (fragility signal)"),
     ("chain_protocols", 0.01, "Top protocols on a chain by TVL, each with its real logo"),

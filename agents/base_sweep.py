@@ -24,10 +24,13 @@ from agents import intel_common as ic  # noqa: E402
 from agents import llm  # noqa: E402
 
 
-def compute_health_score(tvl, activity):
+def compute_health_score(tvl, activity, protos=None):
     """0-10, starts at a neutral 5. Real thresholds, reproducible from the
     numbers printed in the report — see intel_common.py's module docstring
-    for why this isn't an LLM guess."""
+    for why this isn't an LLM guess. `protos` (optional) is the same
+    fees+VAPE-Score-enriched top_protocols list run() builds — if present,
+    the average protocol VAPE Score nudges the chain-level score too (small
+    weight; skipped entirely when no protocol has a computed score)."""
     score = 5.0
     chg = tvl.get("tvl_24h_change_pct")
     if isinstance(chg, (int, float)):
@@ -45,7 +48,56 @@ def compute_health_score(tvl, activity):
             score += 1
         elif gas > 5:
             score -= 1
+    if protos:
+        proto_scores = [p["vape_score"] for p in protos if isinstance(p.get("vape_score"), (int, float))]
+        if proto_scores:
+            avg = sum(proto_scores) / len(proto_scores)
+            if avg >= 70:
+                score += 1
+            elif avg <= 40:
+                score -= 1
     return max(0, min(10, round(score, 1)))
+
+
+def compute_protocol_score(p):
+    """0-100 VAPE Score for a single Base protocol — the same deterministic,
+    neutral-start-at-50, skip-if-missing weighting as the site's client-side
+    _protocolScore() (docs/assets/app.js), so the number VAPE reasons over
+    here in its own report matches what a site visitor sees on the live
+    dashboard. Built from TVL health (7d/1d change) + real fee/TVL yield —
+    audits are skipped (that field lives on DefiLlama's per-protocol detail
+    endpoint, not the /protocols list this data comes from)."""
+    score = 50
+    c7 = p.get("change_7d")
+    if isinstance(c7, (int, float)):
+        if c7 >= 10:
+            score += 20
+        elif c7 > 0:
+            score += 10
+        elif c7 <= -20:
+            score -= 20
+        elif c7 < 0:
+            score -= 10
+    c1 = p.get("change_1d")
+    if isinstance(c1, (int, float)):
+        if c1 >= 5:
+            score += 10
+        elif c1 > 0:
+            score += 5
+        elif c1 <= -10:
+            score -= 10
+        elif c1 < 0:
+            score -= 5
+    fees24h, base_tvl = p.get("fees_24h_usd"), p.get("base_tvl_usd")
+    if isinstance(fees24h, (int, float)) and fees24h > 0 and isinstance(base_tvl, (int, float)) and base_tvl > 0:
+        fee_yield = fees24h / base_tvl
+        if fee_yield >= 0.001:
+            score += 15
+        elif fee_yield >= 0.0002:
+            score += 8
+        else:
+            score += 3
+    return max(0, min(100, round(score)))
 
 
 def run():
@@ -54,18 +106,29 @@ def run():
     fees = get_base_fees()
     eth_balance = ic.get_vape_eth_balance()
 
+    protos = tvl.get("top_protocols") or []
+    # fees and tvl are two separate DefiLlama calls that were previously
+    # never merged — fees_by_name joins them by protocol name (both come
+    # from the same DefiLlama Base universe) so each protocol row carries
+    # its own real fees_24h + a computed VAPE Score, not just raw TVL.
+    fees_by_name = {f["name"]: f.get("fees_24h_usd") for f in (fees.get("top_fee_protocols") or []) if f.get("name")}
+    for p in protos:
+        p["fees_24h_usd"] = fees_by_name.get(p["name"])
+        p["vape_score"] = compute_protocol_score(p)
+
     if tvl.get("error"):
         score = None
     else:
-        score = compute_health_score(tvl, activity)
+        score = compute_health_score(tvl, activity, protos)
 
     search = ic.web_search_snippets("Base blockchain Coinbase L2 news update this week", max_results=8)
 
-    protos = tvl.get("top_protocols") or []
     proto_rows = "\n".join(
-        f"| {p['name']} | ${p['base_tvl_usd']:,.0f} | {p.get('change_1d', '—')}% | {p.get('category') or '—'} |"
+        f"| {p['name']} | ${p['base_tvl_usd']:,.0f} | {p.get('change_1d', '—')}% | {p.get('change_7d', '—')}% | "
+        f"{p.get('change_1m', '—')}% | {ic.fmt_usd(p['fees_24h_usd']) if p.get('fees_24h_usd') is not None else '—'} | "
+        f"{p.get('vape_score', '—')} | {p.get('category') or '—'} |"
         for p in protos
-    ) or "| — | data unavailable this cycle | — | — |"
+    ) or "| — | data unavailable this cycle | — | — | — | — | — | — |"
 
     system = (
         "You are VAPE, an autonomous on-chain analyst covering the Base L2 ecosystem. "
@@ -83,7 +146,7 @@ def run():
         f"Gas: {activity.get('gas_price_gwei', 'unavailable')} gwei, latest block {activity.get('latest_block', 'unavailable')}\n"
         f"24h fees: {fees}\n"
         f"VAPE wallet ETH balance: {eth_balance if eth_balance is not None else 'unavailable'} ETH\n\n"
-        f"Top protocols by TVL:\n{proto_rows}\n\n"
+        f"Top protocols (TVL, 24h/7d/30d change, real fees_24h, VAPE Score 0-100):\n{proto_rows}\n\n"
         f"Web search on recent Base ecosystem news:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write two sections in markdown, each starting with '### ':\n"
@@ -111,8 +174,9 @@ def run():
 
 ## BASE HEALTH SCORE: {score if score is not None else 'N/A'} / 10
 
-Computed deterministically from real TVL 24h change ({tvl.get('tvl_24h_change_pct', '—')}%) and
-gas price ({activity.get('gas_price_gwei', '—')} gwei) — see `agents/base_sweep.py::compute_health_score`.
+Computed deterministically from real TVL 24h change ({tvl.get('tvl_24h_change_pct', '—')}%), gas
+price ({activity.get('gas_price_gwei', '—')} gwei), and the average VAPE Score across the top
+protocols below — see `agents/base_sweep.py::compute_health_score`.
 
 ---
 
@@ -128,8 +192,8 @@ gas price ({activity.get('gas_price_gwei', '—')} gwei) — see `agents/base_sw
 
 ### Top Protocols by TVL
 
-| Protocol | Base TVL | 24h Change | Category |
-|----------|----------|------------|----------|
+| Protocol | Base TVL | 24h Change | 7d Change | 30d Change | Fees 24h | VAPE Score | Category |
+|----------|----------|------------|-----------|------------|----------|------------|----------|
 {proto_rows}
 
 ---

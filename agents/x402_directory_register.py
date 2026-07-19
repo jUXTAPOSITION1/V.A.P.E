@@ -135,7 +135,7 @@ DATA_OFFERINGS = {
                        "fees/unlocks/treasury, and the token's real logo."),
     "token_chart": ("0.01", "Daily price series (default 30d) + token logo."),
     "protocol": ("0.01", "Full protocol record: per-chain TVL, category, audits, logo."),
-    "protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d)."),
+    "protocol_fees": ("0.01", "Protocol real earned fees + revenue (24h/7d/30d/1y/all-time)."),
     "unlocks": ("0.01", "Token unlock/emission schedule — next upcoming dump-risk event."),
     "treasury": ("0.01", "Protocol treasury composition + own-token fragility share."),
     "chain_protocols": ("0.01", "Top protocols on a chain by TVL, each with its logo."),

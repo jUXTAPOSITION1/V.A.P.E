@@ -136,11 +136,14 @@ export async function protocolFees(slug: string): Promise<DlResult> {
   const out: DlResult = {
     ts: nowIso(), slug, name: d.name, logo: d.logo,
     fees_24h: d.total24h, fees_7d: d.total7d, fees_30d: d.total30d,
+    fees_1y: d.total1y, fees_all_time: d.totalAllTime,
   };
   if (!isErr(rev)) {
     out.revenue_24h = rev.total24h;
     out.revenue_7d = rev.total7d;
     out.revenue_30d = rev.total30d;
+    out.revenue_1y = rev.total1y;
+    out.revenue_all_time = rev.totalAllTime;
   }
   return out;
 }
