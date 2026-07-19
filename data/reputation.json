@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T17:17:08Z",
+  "generated": "2026-07-19T17:28:09Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -230,15 +230,6 @@
         "sla": "async \u2014 no fixed SLA (frontier-model)"
       },
       {
-        "name": "wallet_pnl_deepdive",
-        "price_usd": 0.25,
-        "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
-        "auto": true,
-        "x402": true,
-        "data": false,
-        "sla": "instant"
-      },
-      {
         "name": "token_intel",
         "price_usd": 0.01,
         "summary": "Price + 0-1 confidence, oracle-derived token age, and (with a protocol slug) fees/unlocks/treasury \u2014 plus the token's real logo",
@@ -353,6 +344,15 @@
         "auto": true,
         "x402": true,
         "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "wallet_pnl_deepdive",
+        "price_usd": 0.25,
+        "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
+        "auto": true,
+        "x402": true,
+        "data": false,
         "sla": "instant"
       }
     ]

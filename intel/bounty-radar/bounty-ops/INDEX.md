@@ -1,4 +1,4 @@
-# VAPE Bounty Ops — 2026-07-19T16:32:22Z
+# VAPE Bounty Ops — 2026-07-19T17:36:27Z
 
 Real, classified, checklist-tracked live bug-bounty programs VAPE has actually vetted as matching its own tooling (Solidity/EVM via agents/deep_dive_audit.py, or Move/Sui via agents/external_audit.py) — never historical exploits (those live in the Threat Ledger) and never a post-incident recovery/negotiation offer regardless of its headline dollar size. See agents/scout.py and agents/bounty_ops.py for the real classification/scoring and checklist-generation logic.
 
@@ -49,6 +49,6 @@ Real, classified, checklist-tracked live bug-bounty programs VAPE has actually v
 - Checklist progress: 0/9
 - VAPE's own report: [external-audit](intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md)
 
-## [Treehouse Smart Contracts](https://hackenproof.com/programs/treehouse-smart-contracts) — hackenproof, $250,000, fit 68
+## [DOP Protocol](https://hackenproof.com/programs/dop-protocol) — hackenproof, $300,000, fit 69
 - Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
-- Checklist progress: 0/7
+- Checklist progress: 0/8
