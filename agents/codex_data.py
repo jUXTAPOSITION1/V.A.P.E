@@ -69,10 +69,17 @@ def _daily_request_cap():
 
 
 def _over_daily_cap():
+    """`_request_count` is in-memory, but agents/codex_data.py is invoked as a
+    fresh process per run (cron/GitHub Actions) — an in-memory-only counter
+    would silently reset to 0 every run and never actually bound usage across
+    a real day. Persist the running count on the same disk cache every other
+    fetcher here already uses, keyed by date, so the cap holds across
+    restarts."""
     today = time.strftime("%Y-%m-%d", time.gmtime())
     if _request_count["date"] != today:
         _request_count["date"] = today
-        _request_count["count"] = 0
+        persisted = _cache_get(f"codex_daily_count_{today}", 90000)
+        _request_count["count"] = persisted if isinstance(persisted, int) else 0
     return _request_count["count"] >= _daily_request_cap()
 
 
@@ -102,6 +109,7 @@ def _query(query, variables=None, ttl=300, cache_key=None, timeout=15):
         with urllib.request.urlopen(req, timeout=timeout) as r:
             body = json.loads(r.read().decode())
         _request_count["count"] += 1
+        _cache_put(f"codex_daily_count_{_request_count['date']}", _request_count["count"])
         if body.get("errors"):
             return {"error": "; ".join(e.get("message", str(e)) for e in body["errors"])}
         return _cache_put(key, body.get("data") or {})
