@@ -143,6 +143,7 @@ jobs:
           git commit -m "$SWEEP_SCRIPT $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do
+            git rebase --abort >/dev/null 2>&1 || true
             git pull --rebase --autostash origin main || true
             git push && break || { echo "push race retry $i"; sleep $((i*3)); }
           done
