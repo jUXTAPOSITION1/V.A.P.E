@@ -238,9 +238,28 @@ def get_account_txs(address, chainid=8453, limit=25):
 
 
 # ── 5. Security: DeFi exploit / hack feed (keyless) ───────────────────────────
+def _incident_source_url(h):
+    """Real per-incident source link (the original disclosure/news article
+    DeFiLlama itself cites for this hack), NOT VAPE's own generated report —
+    those are two different things and both are worth linking. Checked
+    defensively across every plausible real key name DeFiLlama's raw hacks
+    object might use (`source` is the one actually documented/observed;
+    the rest are cheap, harmless fallbacks) rather than assumed off one
+    guess — never fabricates a URL: a hack with none of these keys set
+    (or a non-string/non-http value) simply gets no source link, same
+    honest-degradation as every other optional field here."""
+    for key in ("source", "sourceUrl", "sourceURL", "link", "url", "article"):
+        v = h.get(key)
+        if isinstance(v, str) and v.startswith("http"):
+            return v
+    return None
+
+
 def get_hack_feed(limit=8, chain=None):
     """Recent DeFi exploits/hacks from DeFiLlama. Keyless. The backbone of the
-    security vertical: dated incidents, $ lost, chain, technique."""
+    security vertical: dated incidents, $ lost, chain, technique, and (when
+    DeFiLlama's own raw data actually includes one) a link to the original
+    source article/disclosure for that specific incident."""
     d = _get("https://api.llama.fi/hacks", ttl=1800, cache_key="llama_hacks")
     if not isinstance(d, list):
         return {"error": "hacks feed unavailable", "raw": d}
@@ -260,6 +279,7 @@ def get_hack_feed(limit=8, chain=None):
             "amount_usd_m": round((h.get("amount") or 0) / 1e6, 3),
             "chains": chains,
             "technique": h.get("technique"),
+            "source_url": _incident_source_url(h),
         })
         if len(out) >= limit:
             break

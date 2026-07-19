@@ -16,6 +16,13 @@ const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
 // run, since security_sweep.py regenerates this whole file fresh each cycle
 // with no knowledge of that field. Only incidents hack_agent.py has actually
 // reached carry it; nothing here is ever a placeholder link.
+//
+// `source_url`, when present, is DeFiLlama's own real link to the original
+// incident disclosure/article (agents/data_fetchers.py::_incident_source_url()
+// extracts it defensively from the raw hacks feed) — a different thing from
+// `analysis_report` above, which is VAPE's own write-up. Both link out
+// independently; an incident with neither simply shows no link, never a
+// fabricated one.
 
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -222,7 +229,10 @@ const AttackFeed = {
             ${this._lessonHtml(item.lesson)}
             <div class="flex items-center justify-between gap-3 mt-0.5">
                 <div class="text-[10.5px] text-zinc-700 font-mono">${escapeHtml(item.date)} · ${escapeHtml(ago(item.date))}</div>
-                ${item.analysis_report ? `<a href="${REPORT_BLOB_BASE}${escapeHtml(item.analysis_report)}" target="_blank" rel="noopener" class="text-[10.5px] text-rose-400/80 hover:text-rose-400 hover:underline inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-magnifying-glass text-[9px]"></i>Full analysis</a>` : ''}
+                <div class="flex items-center gap-3 shrink-0">
+                    ${item.source_url ? `<a href="${escapeHtml(item.source_url)}" target="_blank" rel="noopener" class="text-[10.5px] text-zinc-500 hover:text-zinc-300 hover:underline inline-flex items-center gap-1" title="Original incident source"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>Incident source</a>` : ''}
+                    ${item.analysis_report ? `<a href="${REPORT_BLOB_BASE}${escapeHtml(item.analysis_report)}" target="_blank" rel="noopener" class="text-[10.5px] text-rose-400/80 hover:text-rose-400 hover:underline inline-flex items-center gap-1"><i class="fa-solid fa-magnifying-glass text-[9px]"></i>Full analysis</a>` : ''}
+                </div>
             </div>
         </div>`;
     },
