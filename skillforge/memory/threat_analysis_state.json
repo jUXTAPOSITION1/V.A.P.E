@@ -223,5 +223,45 @@
     "report": "intel/threat-analysis/2026-05-31-fluid-lending.md",
     "provider": "xai_1",
     "written_at": "2026-07-19T14:50:39Z"
+  },
+  "2026-05-30:Alephium Bridge": {
+    "report": "intel/threat-analysis/2026-05-30-alephium-bridge.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-19T20:38:53Z"
+  },
+  "2026-05-30:AFI Protocol": {
+    "report": "intel/threat-analysis/2026-05-30-afi-protocol.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:01Z"
+  },
+  "2026-05-30:Gravity Bridge": {
+    "report": "intel/threat-analysis/2026-05-30-gravity-bridge.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:11Z"
+  },
+  "2026-05-28:DxSale": {
+    "report": "intel/threat-analysis/2026-05-28-dxsale.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:19Z"
+  },
+  "2026-05-27:Stake DAO": {
+    "report": "intel/threat-analysis/2026-05-27-stake-dao.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:28Z"
+  },
+  "2026-05-25:WUSD.fi/Glove": {
+    "report": "intel/threat-analysis/2026-05-25-wusd-fi-glove.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:36Z"
+  },
+  "2026-05-25:New Market Trading": {
+    "report": "intel/threat-analysis/2026-05-25-new-market-trading.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:45Z"
+  },
+  "2026-05-25:Bitmor": {
+    "report": "intel/threat-analysis/2026-05-25-bitmor.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T20:39:53Z"
   }
 }
