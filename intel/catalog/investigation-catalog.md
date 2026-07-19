@@ -327,3 +327,5 @@
 | 2026-07-19 | auto | 0xB2000000000000000000002b40e71C8F8609a1C8 (BASELLER) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-19 | auto | 0x420FcA0121DC28039145009570975747295f2329 (COQ) | deep_investigation | PROCEED (100/100) | address has no contract code (EOA or not deployed) | +7d |
+
+| 2026-07-19 | auto | 0xE2F097962C9E7D8BD97dC961A7a169bb0eE68b1E (Baseller) | deep_investigation | REJECT (33/100) | Mintable supply (dilution risk) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T15:49:44Z",
+  "generated": "2026-07-19T17:00:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 423,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 85,
-    "investigations": 238,
+    "investigations": 239,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-153203-0x420FcA01.md",
-      "title": "Investigation \u2014 COQ",
-      "symbol": "COQ",
-      "name": "COQINU",
-      "date": "2026-07-19T15:32:03Z",
-      "target": "0x420FcA0121DC28039145009570975747295f2329",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 109963 holders \u2014 reasonably distributed; Trading 955+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 954+ days ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-153203-0x420FcA01.md"
+      "file": "investigation-20260719-170057-0xE2F09796.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T17:00:57Z",
+      "target": "0xE2F097962C9E7D8BD97dC961A7a169bb0eE68b1E",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or veri",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-170057-0xE2F09796.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-170057-0xE2F09796.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T17:00:57Z",
+      "target": "0xE2F097962C9E7D8BD97dC961A7a169bb0eE68b1E",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or veri",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-170057-0xE2F09796.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-153203-0x420FcA01.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-061955-0xC4aa3dc3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-034752-0x6fBBbD8b.md",
-      "title": "Investigation \u2014 VSN",
-      "symbol": "VSN",
-      "name": "Vision",
-      "date": "2026-07-17T03:47:52Z",
-      "target": "0x6fBBbD8bFB1cd3986B1D05e7861a0f62F87DB74b",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 42784 holders \u2014 reasonably distributed; Deep liquidity ($653,197); Trading 247+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 366+ days \u2014 inde",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-034752-0x6fBBbD8b.md"
     }
   ],
   "reports": [

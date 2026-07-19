@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-19T15:32:03Z — 59 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-19T17:00:57Z — 60 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| Baseller | Base | `0xE2F097962C9E7D8BD97dC961A7a169bb0eE68b1E` | 33/100 | 1 | 2026-07-19T17:00:57Z |
 | BASELLER | Base | `0xB2000000000000000000002b40e71C8F8609a1C8` | 40/100 | 1 | 2026-07-19T14:02:30Z |
 | Baseller | Base | `0xE1b7A5096343164FAe02Db10353C03cd295787c5` | 47/100 | 1 | 2026-07-19T10:56:37Z |
 | Baseller | Base | `0xb200000000000000000000AC6A5D35756eB8Cd01` | 30/100 | 1 | 2026-07-19T07:28:20Z |
