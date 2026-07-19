@@ -215,39 +215,6 @@ a { transition: color .15s; }
 .chain-badge-warn { animation: chainpulse 1.6s infinite; }
 @keyframes chainpulse { 0%,100%{opacity:1} 50%{opacity:.6} }
 
-/* Hero portrait — flat 1px border, no HUD-corner sci-fi framing, no
-   scan-line overlay. position/overflow/aspect-ratio duplicate this
-   element's own Tailwind utility classes on purpose: Tailwind is loaded
-   from a CDN <script>, inert until it downloads and runs, so without a
-   real always-on CSS rule the raw <img> briefly paints at full intrinsic
-   size before Tailwind's utilities apply. */
-.hero-portrait-fallback {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    background: #0d0d0f;
-    border: 1px solid var(--border);
-}
-.hero-portrait-fallback img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-}
-
-/* Nav logo — same always-on containment as the hero portrait, and for the
-   same reason (first image on the page, most visible spot for a pre-
-   Tailwind unstyled-photo flash). No glow/pulse decoration. */
-.nav-logo-pulse {
-    position: relative;
-    width: 2rem; height: 2rem;
-    overflow: hidden;
-}
-.nav-logo-pulse img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-}
-
 code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
 ::selection { background: rgba(74, 222, 128, 0.25); }

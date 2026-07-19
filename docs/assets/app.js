@@ -1265,6 +1265,16 @@ const App = {
     _iconChip(inner, colorClass=''){
         return `<div class="w-9 h-9 border border-white/10 ${colorClass} flex items-center justify-center shrink-0 overflow-hidden">${inner}</div>`;
     },
+    // Plain inline icon indicator — no border/box chrome, matching the flat
+    // footer-link icon style (Repository/Reports/Documentation in the
+    // Resources panel: a bare icon in the surrounding text color). Same
+    // width/alignment slot as _iconChip() so list rows still line up; the
+    // bordered "chip" frame stays reserved for real image avatars (token
+    // logos), a distinct, deliberate pattern matching the nav logo/hero
+    // portrait/wallet chip elsewhere on the site.
+    _iconGlyph(faClasses, colorStyle=''){
+        return `<div class="w-9 flex items-start justify-center pt-0.5 shrink-0"><i class="fa-solid ${faClasses} text-zinc-400 text-sm"${colorStyle?` style="color:${colorStyle}"`:''}></i></div>`;
+    },
     _iconImg(address, chain, size=36, extra=''){
         const src = this._tokenIcon(address, chain);
         return src ? `<img src="${src}" alt="" width="${size}" height="${size}" class="rounded-full bg-white/5 object-cover shrink-0 ${extra}" onerror="this.remove()">` : '';
@@ -1364,7 +1374,7 @@ const App = {
                 const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
                 return `
                 <a href="${i.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${icon ? this._iconChip(icon) : this._iconChip('<i class="fa-solid fa-magnifying-glass-chart text-zinc-400 text-sm"></i>')}
+                    ${icon ? this._iconChip(icon) : this._iconGlyph('fa-magnifying-glass-chart')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="min-w-0 truncate">
@@ -1387,7 +1397,7 @@ const App = {
             if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);
             rows=items.slice(0,40).map(r=>`
                 <a href="${r.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconChip('<i class="fa-solid fa-file-lines text-zinc-400 text-sm"></i>')}
+                    ${this._iconGlyph('fa-file-lines')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
@@ -1401,7 +1411,7 @@ const App = {
             const items=d.broadcasts||[];
             rows=items.length?items.map(b=>`
                 <a href="${b.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconChip('<i class="fa-solid fa-tower-broadcast text-zinc-400 text-sm"></i>')}
+                    ${this._iconGlyph('fa-tower-broadcast')}
                     <div class="min-w-0 flex-1">
                         <div class="text-sm break-words">${this._esc(b.title||b.file)}</div>
                         ${this._metaChips([this._esc(this._ago(b.date))])}
@@ -1414,7 +1424,7 @@ const App = {
                 const ok=t.status==='verified'; const lim=t.known_limitation;
                 const col=ok?'#4ade80':(lim?'#fbbf24':'#a1a1aa');
                 return `<a href="${t.url||'#'}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconChip(`<i class="fa-solid ${ok?'fa-circle-check':'fa-circle-dot'} text-sm" style="color:${col}"></i>`)}
+                    ${this._iconGlyph(ok?'fa-circle-check':'fa-circle-dot', col)}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span class="text-sm truncate min-w-0">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
@@ -1525,12 +1535,13 @@ window.addEventListener('load', () => {
         // can actually transition instead of an abrupt cut — see site.css.
         const OPEN = ['visible', 'opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto'];
         const CLOSED = ['invisible', 'opacity-0', 'scale-[0.98]', '-translate-y-1', 'pointer-events-none'];
-        const navLogo = navToggle.querySelector('.nav-logo-pulse');
+        const navIcon = document.getElementById('nav-menu-icon');
         const setOpen = (open) => {
             navPanel.classList.remove(...(open ? CLOSED : OPEN));
             navPanel.classList.add(...(open ? OPEN : CLOSED));
             navToggle.setAttribute('aria-expanded', String(open));
-            navLogo?.classList.toggle('nav-logo-active', open);
+            navIcon?.classList.toggle('fa-bars', !open);
+            navIcon?.classList.toggle('fa-xmark', open);
         };
         navToggle.addEventListener('click', () => setOpen(navPanel.classList.contains('invisible')));
         navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
