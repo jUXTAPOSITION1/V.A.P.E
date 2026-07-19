@@ -203,7 +203,8 @@
       "chains": [
         "Cardano"
       ],
-      "technique": "Predictable Private Key Exploit"
+      "technique": "Predictable Private Key Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-23-secondfi.md"
     },
     {
       "date": "2026-06-23",
@@ -212,7 +213,8 @@
       "chains": [
         "Polygon"
       ],
-      "technique": "Hook Manipulation Hack"
+      "technique": "Hook Manipulation Hack",
+      "analysis_report": "intel/threat-analysis/2026-06-23-royal-io.md"
     },
     {
       "date": "2026-06-21",
@@ -221,7 +223,8 @@
       "chains": [
         "Quicksilver"
       ],
-      "technique": "Unchecked Proof Minting"
+      "technique": "Unchecked Proof Minting",
+      "analysis_report": "intel/threat-analysis/2026-06-21-quicksilver-zone.md"
     },
     {
       "date": "2026-06-21",
@@ -230,7 +233,8 @@
       "chains": [
         "Taiko"
       ],
-      "technique": "Fake Proof Exploit"
+      "technique": "Fake Proof Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-21-taiko-bridge.md"
     },
     {
       "date": "2026-06-20",
@@ -239,7 +243,8 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Deflationary Reserve Poisoning"
+      "technique": "Deflationary Reserve Poisoning",
+      "analysis_report": "intel/threat-analysis/2026-06-20-labubu-olpc.md"
     },
     {
       "date": "2026-06-20",
@@ -248,7 +253,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Reverse MEV Honeypot"
+      "technique": "Reverse MEV Honeypot",
+      "analysis_report": "intel/threat-analysis/2026-06-20-jaredfromsubway-mev-bot.md"
     },
     {
       "date": "2026-06-19",
@@ -257,7 +263,8 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Flashloan Price Manipulation"
+      "technique": "Flashloan Price Manipulation",
+      "analysis_report": "intel/threat-analysis/2026-06-19-jb.md"
     },
     {
       "date": "2026-06-19",
@@ -266,7 +273,8 @@
       "chains": [
         "Starknet"
       ],
-      "technique": "CL Pool Accounting Hack"
+      "technique": "CL Pool Accounting Hack",
+      "analysis_report": "intel/threat-analysis/2026-06-19-myswap-cl.md"
     },
     {
       "date": "2026-06-19",
@@ -275,7 +283,8 @@
       "chains": [
         "Namada"
       ],
-      "technique": "IBC Transfer Logic Exploit"
+      "technique": "IBC Transfer Logic Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-19-namada-shielded-pools.md"
     },
     {
       "date": "2026-06-19",
@@ -284,7 +293,8 @@
       "chains": [
         "Secret"
       ],
-      "technique": "Unbacked Mint via ICS-20"
+      "technique": "Unbacked Mint via ICS-20",
+      "analysis_report": "intel/threat-analysis/2026-06-19-secret-network.md"
     },
     {
       "date": "2026-06-17",
@@ -293,7 +303,8 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Transfer/Sell Logic Exploit"
+      "technique": "Transfer/Sell Logic Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-17-dip.md"
     },
     {
       "date": "2026-06-17",
@@ -302,7 +313,8 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Oracle Manipulation"
+      "technique": "Oracle Manipulation",
+      "analysis_report": "intel/threat-analysis/2026-06-17-little-boy-plus.md"
     },
     {
       "date": "2026-06-17",
@@ -311,7 +323,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "escapeHatch Function Exploit"
+      "technique": "escapeHatch Function Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-17-aztec-bridge.md"
     },
     {
       "date": "2026-06-16",
@@ -320,7 +333,8 @@
       "chains": [
         "Monero"
       ],
-      "technique": "ACK Frontrun Attack"
+      "technique": "ACK Frontrun Attack",
+      "analysis_report": "intel/threat-analysis/2026-06-16-retoswap.md"
     },
     {
       "date": "2026-06-15",
@@ -329,7 +343,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Low-Supply Share Pricing Hack"
+      "technique": "Low-Supply Share Pricing Hack",
+      "analysis_report": "intel/threat-analysis/2026-06-15-thetanuts-finance.md"
     },
     {
       "date": "2026-06-14",

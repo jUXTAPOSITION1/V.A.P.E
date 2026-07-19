@@ -73,5 +73,80 @@
     "report": "intel/threat-analysis/2026-06-25-lixir-finance.md",
     "provider": "xai_1",
     "written_at": "2026-07-19T05:17:16Z"
+  },
+  "2026-06-23:SecondFi": {
+    "report": "intel/threat-analysis/2026-06-23-secondfi.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-19T09:45:47Z"
+  },
+  "2026-06-23:Royal.io": {
+    "report": "intel/threat-analysis/2026-06-23-royal-io.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:46:00Z"
+  },
+  "2026-06-21:Quicksilver Zone": {
+    "report": "intel/threat-analysis/2026-06-21-quicksilver-zone.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:46:12Z"
+  },
+  "2026-06-21:Taiko Bridge": {
+    "report": "intel/threat-analysis/2026-06-21-taiko-bridge.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:46:25Z"
+  },
+  "2026-06-20:LABUBU/OLPC": {
+    "report": "intel/threat-analysis/2026-06-20-labubu-olpc.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:46:41Z"
+  },
+  "2026-06-20:JaredFromSubway MEV Bot": {
+    "report": "intel/threat-analysis/2026-06-20-jaredfromsubway-mev-bot.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:46:57Z"
+  },
+  "2026-06-19:JB": {
+    "report": "intel/threat-analysis/2026-06-19-jb.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:47:09Z"
+  },
+  "2026-06-19:mySwap CL": {
+    "report": "intel/threat-analysis/2026-06-19-myswap-cl.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:47:23Z"
+  },
+  "2026-06-19:Namada Shielded Pools": {
+    "report": "intel/threat-analysis/2026-06-19-namada-shielded-pools.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:47:37Z"
+  },
+  "2026-06-19:Secret Network": {
+    "report": "intel/threat-analysis/2026-06-19-secret-network.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:47:51Z"
+  },
+  "2026-06-17:DIP": {
+    "report": "intel/threat-analysis/2026-06-17-dip.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-19T09:47:58Z"
+  },
+  "2026-06-17:Little Boy Plus": {
+    "report": "intel/threat-analysis/2026-06-17-little-boy-plus.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:48:11Z"
+  },
+  "2026-06-17:Aztec Bridge": {
+    "report": "intel/threat-analysis/2026-06-17-aztec-bridge.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:48:26Z"
+  },
+  "2026-06-16:RetoSwap": {
+    "report": "intel/threat-analysis/2026-06-16-retoswap.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:48:40Z"
+  },
+  "2026-06-15:Thetanuts Finance": {
+    "report": "intel/threat-analysis/2026-06-15-thetanuts-finance.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T09:48:56Z"
   }
 }
