@@ -39,6 +39,7 @@ enrich the same shared corpus. Nothing learned is ever lost.
 | `tools-registry.json` | `tool` | SKILLFORGE toolcheck (version-pinned tools) |
 | `findings.chain.jsonl` | — | `skillforge/findings_chain.py` (`findings-seal.yml`, every 6h) — a hash-chained seal log over `findings.jsonl`'s content, so an edit or deletion in an already-sealed range is detectable, not just possible to notice by chance. Not itself a memory category; see that module's docstring for the design. |
 | `INDEX.md` | — | auto-generated human-readable summary |
+| `repo_digest.md` | — | `scripts/build_repo_digest.py` (`refresh-repo-digest.yml`, weekly) — a deterministic repo-grounding doc (architecture docs verbatim + every module's own docstring + a real directory tree), read only by VAPE's Vertex-tuned candidate (`agents/llm.py::_call_vertex_tuned()`), never the frontier chain. Not itself a memory category; fully regenerated each run, not appended to. |
 
 All entry files are **append-only JSONL**. Entries are immutable once written.
 
