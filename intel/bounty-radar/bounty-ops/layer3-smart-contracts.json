@@ -1,19 +1,60 @@
 {
   "id": "hackenproof:prg_b562c43d168b9524",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/layer3-smart-contracts and extract exact in-scope contract addresses, Git repo URLs, commit hashes, and any out-of-scope items or testing rules.",
+      "done": false
+    },
+    {
+      "item": "Clone the official Layer3 Solidity repository at the pinned commit and identify the core contracts directory (e.g., src/, contracts/).",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the cloned repo root, enabling recon + full static (Slither/Aderyn) + symbolic (Halmos) + Mythril passes.",
+      "done": false
+    },
+    {
+      "item": "Triage Slither/Aderyn findings for access-control, reentrancy, and unchecked external calls.",
+      "done": false
+    },
+    {
+      "item": "Execute targeted Halmos symbolic tests on functions handling staking, reward distribution, and cross-contract calls.",
+      "done": false
+    },
+    {
+      "item": "Manually review business logic for oracle trust assumptions, role escalation paths, and improper state transitions not covered by automated tools.",
+      "done": false
+    },
+    {
+      "item": "Verify any candidate issues on a local fork or testnet using the exact deployed bytecode and constructor arguments from scope.",
+      "done": false
+    },
+    {
+      "item": "Draft submission with reproduction steps, minimal PoC, root-cause, and impact rating that matches Hackenproof severity and payout tiers.",
+      "done": false
+    },
+    {
+      "item": "Submit report through the Hackenproof platform UI, attaching only the allowed artifacts and respecting their disclosure policy.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.411407Z",
       "event": "Started tracking as a real Bounty Op (fit 61)."
+    },
+    {
+      "ts": "2026-07-19T11:39:49.911105Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784461179.4379597,
   "vapeReportUrl": null,
   "name": "Layer3 Smart Contracts",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/layer3-smart-contracts",
   "prizeUsd": 500000,
-  "bountyFitScore": 61,
+  "bountyFitScore": 71,
   "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
   "tags": [
     "contract",
@@ -23,5 +64,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.411399Z"
+  "updatedAt": "2026-07-19T11:39:39.437964Z"
 }

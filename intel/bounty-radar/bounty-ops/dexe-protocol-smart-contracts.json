@@ -1,0 +1,67 @@
+{
+  "id": "hackenproof:prg_c5b0449e4061f241",
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/dexe-protocol-smart-contracts and extract exact in-scope contracts, excluded files, and all submission rules.",
+      "done": false
+    },
+    {
+      "item": "Locate the official Git repository URL listed in the program scope and clone the Solidity contracts.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned repo with recon, Slither, Mythril, Aderyn, and Halmos enabled.",
+      "done": false
+    },
+    {
+      "item": "Target the core protocol contracts (DEX, governance, token, staking) identified during recon for all automated scans.",
+      "done": false
+    },
+    {
+      "item": "Manually review access-control, reentrancy, oracle trust, and business-logic issues in governance and fee-distribution flows.",
+      "done": false
+    },
+    {
+      "item": "Check upgradeability patterns, proxy storage layout, and any JavaScript integration points for additional attack surface.",
+      "done": false
+    },
+    {
+      "item": "Validate every high-severity finding with concrete reproduction steps and confirm it is inside the published scope.",
+      "done": false
+    },
+    {
+      "item": "Prepare the report with severity, impact, PoC, and recommended fix in the exact format required by Hackenproof.",
+      "done": false
+    },
+    {
+      "item": "Submit only through the Hackenproof platform after confirming the disclosure policy and duplicate rules.",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T11:40:24.679270Z",
+      "event": "Started tracking as a real Bounty Op (fit 61)."
+    },
+    {
+      "ts": "2026-07-19T11:40:36.393267Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784461224.6792533,
+  "vapeReportUrl": null,
+  "name": "DeXe Protocol Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/dexe-protocol-smart-contracts",
+  "prizeUsd": 500000,
+  "bountyFitScore": 61,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "git_repo",
+    "javascript",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T11:40:24.679256Z"
+}

@@ -1,19 +1,60 @@
 {
   "id": "hackenproof:prg_b93bc48ea4b10240",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Confirm in-scope contracts, repos, deployment addresses, and all rules/restrictions on the Hackenproof program page",
+      "done": false
+    },
+    {
+      "item": "Clone the official Git repository referenced in the program scope",
+      "done": false
+    },
+    {
+      "item": "Map the primary staking, validator, and reward contracts plus any proxy or upgrade patterns",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned repo targeting the identified Solidity contracts",
+      "done": false
+    },
+    {
+      "item": "Analyze Slither, Aderyn, Mythril, and Halmos results for high/critical issues",
+      "done": false
+    },
+    {
+      "item": "Manually audit for access control, reentrancy, business-logic flaws, and oracle trust assumptions",
+      "done": false
+    },
+    {
+      "item": "Verify any candidate findings against live contract state on Ethereum mainnet",
+      "done": false
+    },
+    {
+      "item": "Prepare submission with clear PoC, affected contracts, and severity justification per program template",
+      "done": false
+    },
+    {
+      "item": "Submit report through the Hackenproof platform and retain all supporting artifacts",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.411224Z",
       "event": "Started tracking as a real Bounty Op (fit 62)."
+    },
+    {
+      "ts": "2026-07-19T11:39:39.437555Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784461170.1292799,
   "vapeReportUrl": null,
   "name": "MetaMask Validator Staking Smart Contracts",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/metamask-validator-staking-smart-contracts",
   "prizeUsd": 700000,
-  "bountyFitScore": 62,
+  "bountyFitScore": 72,
   "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
   "tags": [
     "contract",
@@ -24,5 +65,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.411213Z"
+  "updatedAt": "2026-07-19T11:39:30.129284Z"
 }

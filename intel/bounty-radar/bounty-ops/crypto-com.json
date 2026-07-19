@@ -1,19 +1,56 @@
 {
   "id": "hackerone:prg_2763bf67ce168368",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Confirm in-scope contracts, repos, and rules directly on the HackerOne Crypto.com program page and policy.",
+      "done": false
+    },
+    {
+      "item": "Extract official Git repository URLs and deployed Ethereum contract addresses listed in scope or linked docs.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned repos and target addresses with full Slither + Mythril + Aderyn + Halmos passes.",
+      "done": false
+    },
+    {
+      "item": "Triage tool output for access-control, reentrancy, oracle, and business-logic issues flagged at high severity.",
+      "done": false
+    },
+    {
+      "item": "Manually review core contracts for upgradeability, proxy, and permission patterns not caught by static tools.",
+      "done": false
+    },
+    {
+      "item": "Validate any candidate findings against live chain state, recent commits, and actual call flows.",
+      "done": false
+    },
+    {
+      "item": "Produce minimal PoC transaction sequence and clear impact statement for each confirmed issue.",
+      "done": false
+    },
+    {
+      "item": "Draft report with scope reference, reproduction, and suggested fix then submit via HackerOne.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.410659Z",
       "event": "Started tracking as a real Bounty Op (fit 63)."
+    },
+    {
+      "ts": "2026-07-19T11:39:30.128888Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784461160.9753451,
   "vapeReportUrl": null,
   "name": "Crypto.com",
   "platform": "hackerone",
   "url": "https://hackerone.com/crypto",
   "prizeUsd": 1000000,
-  "bountyFitScore": 63,
+  "bountyFitScore": 73,
   "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
   "tags": [
     "web",
@@ -24,5 +61,5 @@
     "bugbounty",
     "via:hackerone"
   ],
-  "updatedAt": "2026-07-19T03:50:31.410651Z"
+  "updatedAt": "2026-07-19T11:39:20.975349Z"
 }

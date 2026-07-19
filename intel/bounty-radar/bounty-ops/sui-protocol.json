@@ -1,13 +1,54 @@
 {
   "id": "hackenproof:prg_c0e709e4c2d9624d",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/sui-protocol and extract exact in-scope Move packages, repos, and exclusions",
+      "done": false
+    },
+    {
+      "item": "Clone the official Sui git repo at the commit/tag listed in scope",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py against the scoped Move modules and dependencies",
+      "done": false
+    },
+    {
+      "item": "Review tool output for capability leaks, missing ownership checks, and type-safety violations",
+      "done": false
+    },
+    {
+      "item": "Manually inspect business logic around token transfers, staking, and object ownership",
+      "done": false
+    },
+    {
+      "item": "Check for oracle or cross-module trust assumptions that could be abused",
+      "done": false
+    },
+    {
+      "item": "Validate any findings with targeted Move unit tests or sui-prover assertions",
+      "done": false
+    },
+    {
+      "item": "Draft submission containing reproduction steps, affected commit, and severity justification",
+      "done": false
+    },
+    {
+      "item": "Submit report through the Hackenproof platform following their exact disclosure rules",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.410817Z",
       "event": "Started tracking as a real Bounty Op (fit 63)."
+    },
+    {
+      "ts": "2026-07-19T11:40:12.963860Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784461202.9812753,
   "vapeReportUrl": null,
   "name": "Sui Protocol",
   "platform": "hackenproof",
@@ -22,5 +63,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.410810Z"
+  "updatedAt": "2026-07-19T11:40:02.981279Z"
 }

@@ -1,0 +1,66 @@
+{
+  "id": "hackenproof:prg_371f51b96b4b7922",
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/nado-smart-contracts and extract exact in-scope contracts, git repos, commit hashes, and all submission rules/restrictions.",
+      "done": false
+    },
+    {
+      "item": "Clone the confirmed git_repo and identify the precise Solidity files or directories within scope.",
+      "done": false
+    },
+    {
+      "item": "Execute agents/deep_dive_audit.py against the cloned repo, enabling Slither, Mythril, Halmos, and Aderyn on all in-scope contracts.",
+      "done": false
+    },
+    {
+      "item": "Review the tool output for high/medium findings and manually validate each against the live contracts on the target network.",
+      "done": false
+    },
+    {
+      "item": "Manually audit access-control patterns, role management, and upgradeability logic across all contracts.",
+      "done": false
+    },
+    {
+      "item": "Check oracle integrations, price feeds, and external call trust boundaries for manipulation or staleness issues.",
+      "done": false
+    },
+    {
+      "item": "Inspect reentrancy vectors, cross-contract interactions, and business-logic state transitions for economic exploits.",
+      "done": false
+    },
+    {
+      "item": "Confirm any findings are not already disclosed or out-of-scope before drafting the report.",
+      "done": false
+    },
+    {
+      "item": "Prepare the HackenProof submission with contract addresses, exact commit, reproduction steps, and severity justification.",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T11:40:36.393623Z",
+      "event": "Started tracking as a real Bounty Op (fit 61)."
+    },
+    {
+      "ts": "2026-07-19T11:40:45.238394Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784461236.3936064,
+  "vapeReportUrl": null,
+  "name": "Nado Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/nado-smart-contracts",
+  "prizeUsd": 500000,
+  "bountyFitScore": 61,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "git_repo",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T11:40:36.393610Z"
+}

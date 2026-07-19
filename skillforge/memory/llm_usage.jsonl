@@ -309,3 +309,16 @@
 {"ts": "2026-07-19T10:23:49Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1141, "completion_tokens": 127, "total_tokens": 2017}
 {"ts": "2026-07-19T10:36:21Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2443, "completion_tokens": 119, "total_tokens": 3101}
 {"ts": "2026-07-19T10:56:37Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 663, "completion_tokens": 169, "total_tokens": 1235}
+{"ts": "2026-07-19T11:38:49Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 334, "total_tokens": 2461}
+{"ts": "2026-07-19T11:38:59Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 487, "completion_tokens": 187, "total_tokens": 1142}
+{"ts": "2026-07-19T11:39:10Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 492, "completion_tokens": 215, "total_tokens": 1142}
+{"ts": "2026-07-19T11:39:20Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 484, "completion_tokens": 259, "total_tokens": 1219}
+{"ts": "2026-07-19T11:39:30Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 474, "completion_tokens": 169, "total_tokens": 1087}
+{"ts": "2026-07-19T11:39:39Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 487, "completion_tokens": 162, "total_tokens": 1059}
+{"ts": "2026-07-19T11:39:49Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 479, "completion_tokens": 242, "total_tokens": 1184}
+{"ts": "2026-07-19T11:39:53Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 475, "completion_tokens": 183, "total_tokens": 1066}
+{"ts": "2026-07-19T11:40:02Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 475, "completion_tokens": 184, "total_tokens": 1087}
+{"ts": "2026-07-19T11:40:12Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 472, "completion_tokens": 144, "total_tokens": 998}
+{"ts": "2026-07-19T11:40:24Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 475, "completion_tokens": 206, "total_tokens": 1088}
+{"ts": "2026-07-19T11:40:36Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 478, "completion_tokens": 211, "total_tokens": 1225}
+{"ts": "2026-07-19T11:40:45Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 474, "completion_tokens": 205, "total_tokens": 1031}

@@ -1,19 +1,60 @@
 {
   "id": "hackenproof:prg_2e8a391da5992082",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/tetu-smart-contracts and extract exact in-scope contracts, excluded contracts, severity tiers, and submission formatting rules.",
+      "done": false
+    },
+    {
+      "item": "Clone the official TETU Git repository referenced on the program page and note commit hash used for mainnet deployments.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned repo, pointing it at the core vaults, strategies, controller, and reward distributor contracts on Polygon.",
+      "done": false
+    },
+    {
+      "item": "Execute the full static suite (Slither + Aderyn + Mythril) inside deep_dive_audit.py and triage all high/critical findings for access-control or reentrancy patterns.",
+      "done": false
+    },
+    {
+      "item": "Trigger Halmos symbolic execution via the same script on fee accrual, reward distribution, and strategy migration functions to search for under-constrained states.",
+      "done": false
+    },
+    {
+      "item": "Manually review oracle usage, proxy upgrade paths, and cross-contract calls against the real deployment addresses for business-logic and trust issues.",
+      "done": false
+    },
+    {
+      "item": "Check for common EVM pitfalls (unchecked return values, incorrect msg.value handling, storage collisions) not covered by automated tools.",
+      "done": false
+    },
+    {
+      "item": "Prepare submission package containing PoC, exact contract addresses, reproduction transaction hashes, and severity justification that matches Hackenproof template.",
+      "done": false
+    },
+    {
+      "item": "Submit the report through the Hackenproof platform only after confirming the finding is not already disclosed or out of scope.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.410489Z",
       "event": "Started tracking as a real Bounty Op (fit 63)."
+    },
+    {
+      "ts": "2026-07-19T11:39:20.974950Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784461150.0971937,
   "vapeReportUrl": null,
   "name": "TETU Smart Contracts",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/tetu-smart-contracts",
   "prizeUsd": 1000000,
-  "bountyFitScore": 63,
+  "bountyFitScore": 73,
   "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
   "tags": [
     "contract",
@@ -25,5 +66,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.410481Z"
+  "updatedAt": "2026-07-19T11:39:10.097198Z"
 }

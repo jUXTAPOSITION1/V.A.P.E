@@ -1,0 +1,59 @@
+{
+  "id": "hackenproof:prg_8f3f4ac49d732683",
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/treehouse-smart-contracts and extract current in-scope contracts, addresses, commit hashes, and all submission rules/restrictions.",
+      "done": false
+    },
+    {
+      "item": "Clone the official Treehouse repo at the exact commit listed in scope and identify the primary Solidity contracts (e.g., staking, vault, token, oracle integrations).",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the full contract set, enabling recon + Slither + Aderyn + Mythril + Halmos passes.",
+      "done": false
+    },
+    {
+      "item": "Triage static-analysis findings for access-control flaws, reentrancy, and unchecked external calls.",
+      "done": false
+    },
+    {
+      "item": "Manually review business logic around reward distribution, oracle price feeds, and upgrade mechanisms for economic exploits.",
+      "done": false
+    },
+    {
+      "item": "Test any privileged roles or timelocks on a local fork to confirm real impact and bypass potential.",
+      "done": false
+    },
+    {
+      "item": "Prepare a HackenProof submission containing contract addresses, exact commit, reproduction steps, and severity classification matching their taxonomy.",
+      "done": false
+    }
+  ],
+  "progress": [
+    {
+      "ts": "2026-07-19T11:39:49.911507Z",
+      "event": "Started tracking as a real Bounty Op (fit 68)."
+    },
+    {
+      "ts": "2026-07-19T11:39:53.648568Z",
+      "event": "Checklist refreshed \u2014 7 new item(s) from Grok 4.3."
+    }
+  ],
+  "checklistGeneratedAt": 1784461189.9114897,
+  "vapeReportUrl": null,
+  "name": "Treehouse Smart Contracts",
+  "platform": "hackenproof",
+  "url": "https://hackenproof.com/programs/treehouse-smart-contracts",
+  "prizeUsd": 250000,
+  "bountyFitScore": 68,
+  "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
+  "tags": [
+    "contract",
+    "ethereum",
+    "solidity",
+    "bugbounty",
+    "via:hackenproof"
+  ],
+  "updatedAt": "2026-07-19T11:39:49.911494Z"
+}
