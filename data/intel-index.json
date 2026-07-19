@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-18T23:28:30Z",
+  "generated": "2026-07-19T01:05:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 413,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 82,
-    "investigations": 230,
+    "investigations": 231,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260718-232830-0x02C4347E.md",
-      "title": "Investigation \u2014 COBIE",
-      "symbol": "COBIE",
-      "name": "COBIE",
-      "date": "2026-07-18T23:28:30Z",
-      "target": "0x02C4347ECE55Fe108c9A29e96221615f13070791",
+      "file": "investigation-20260719-010507-0xb2000000.md",
+      "title": "Investigation \u2014 BRIUN",
+      "symbol": "BRIUN",
+      "name": "Briun Amstrong",
+      "date": "2026-07-19T01:05:07Z",
+      "target": "0xb20000000000000000000012141bf387DD37eB01",
       "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $13,998. Positive evidence: 2570 holders \u2014 reasonably distributed; Trading 271+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-232830-0x02C4347E.md"
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $412 (rug/illiquid); [-10] Low liquidity $412; [-15] Pair only 2.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-010507-0xb2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-010507-0xb2000000.md",
+      "title": "Investigation \u2014 BRIUN",
+      "symbol": "BRIUN",
+      "name": "Briun Amstrong",
+      "date": "2026-07-19T01:05:07Z",
+      "target": "0xb20000000000000000000012141bf387DD37eB01",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $412 (rug/illiquid); [-10] Low liquidity $412; [-15] Pair only 2.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-010507-0xb2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260718-232830-0x02C4347E.md",
@@ -593,20 +607,6 @@
       "score": "10",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: claude (0x9cb961dD3169e41726e4417d1a6EadeD333B6b07) \u2014 REJECT 35/100 \u2014",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-135907-0x038ad3c2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-114244-0x199084f1.md",
-      "title": "Investigation \u2014 $COBIE",
-      "symbol": "$COBIE",
-      "name": "The UpOnly Bull",
-      "date": "2026-07-16T11:42:44Z",
-      "target": "0x199084f1390B58493096Ff73Ec74c68164ba8453",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-10] Violent 24h move +1684% (volatility/manipulation); [-10] Pair 10.9 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 952 holders \u2014 reasonably distrib",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-114244-0x199084f1.md"
     }
   ],
   "reports": [

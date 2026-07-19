@@ -1766,6 +1766,24 @@
     "symbol": "mr_lightspeed",
     "times_investigated": 1
   },
+  "8453:0xb20000000000000000000012141bf387dd37eb01": {
+    "address": "0xb20000000000000000000012141bf387DD37eB01",
+    "chain": "8453",
+    "first_investigated": "2026-07-19T01:05:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-010507-0xb2000000.md",
+        "score": 5,
+        "ts": "2026-07-19T01:05:07Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-19T01:05:07Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "BRIUN",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000029784108e9706a0001": {
     "address": "0xB20000000000000000000029784108e9706A0001",
     "chain": "8453",
