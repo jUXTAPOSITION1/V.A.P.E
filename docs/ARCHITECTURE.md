@@ -97,8 +97,9 @@ USDC, real settlement transactions.
 The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
 `.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
-Slither run + Halmos symbolic testing + frontier-model source review can't finish
-inside a Worker's request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
+frontier-model source review can't finish inside a Worker's request window) +
+13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
 `chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
 retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
 with no free equivalent). Advertised for discovery
@@ -374,14 +375,17 @@ still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
 instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($50) is the
 one async exception: pays via x402, then dispatches
 `.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
-immediately, since a real Slither run + Halmos symbolic testing + frontier-model
-source review can't complete inside a Worker's request window. Symbolic testing
-(`agents/scaffold_foundry_target.py`) scaffolds the target's own verified source
-into a throwaway Foundry project, drafts a handful of Halmos `check_*` properties
-with the frontier LLM (explicitly labeled hypotheses, never findings), and runs
-Halmos for real against them — a second, independent analysis layer alongside
-Slither's static pass, skipped cleanly if `forge`/`halmos` aren't on the runner's
-PATH this cycle.
+immediately, since a real Slither run + Halmos symbolic testing + Mythril
+symbolic-execution scan + frontier-model source review can't complete inside a
+Worker's request window. Symbolic testing (`agents/scaffold_foundry_target.py`)
+scaffolds the target's own verified source into a throwaway Foundry project,
+drafts a handful of Halmos `check_*` properties with the frontier LLM
+(explicitly labeled hypotheses, never findings), and runs Halmos for real
+against them — a second, independent analysis layer alongside Slither's static
+pass. Mythril (`myth analyze -a <address> --rpc <host:port>`) adds a third,
+independent pass, analyzing the target's actual deployed bytecode on-chain by
+address via the target chain's real public RPC. Each tool is skipped cleanly
+(never a hard dependency) if it isn't on the runner's PATH this cycle.
 
 **`agents/data_agent.py`** [OK] closes the loop from the buy side: every real
 `investigate.py` run recruits DATA AGENT's own funded wallet

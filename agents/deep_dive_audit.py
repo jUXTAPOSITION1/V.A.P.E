@@ -8,10 +8,11 @@ end of the spectrum: a real frontier-tier model (agents/llm.py::ask_oci_grok_fro
 OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback) reads the contract's ACTUAL verified
 source text and reasons about specific vulnerability classes line-by-line, on top of
 every recon signal agents/investigate.py already gathers (GoPlus, DexScreener, on-chain
-presence, hack-technique correlation, public web reputation). Slither runs too, for
-real, if it's already on PATH in the environment this executes in — never a hard
-dependency, since a fresh multi-minute toolchain install has no place in a script whose
-whole point is a reliable result, not gambling on a slow install succeeding.
+presence, hack-technique correlation, public web reputation). Slither, Halmos, and
+Mythril all run too, for real, if they're already on PATH in the environment this
+executes in — never a hard dependency, since a fresh multi-minute toolchain install has
+no place in a script whose whole point is a reliable result, not gambling on a slow
+install succeeding.
 
 "24h SLA" is a turnaround promise to the buyer, not a literal runtime — this completes
 in one run (recon + optional Slither + one frontier LLM call), matching
@@ -139,6 +140,55 @@ def _run_symbolic(address, chain, src):
         return {"ran": False, "reason": str(e)}
 
 
+def _run_mythril(address, chain, timeout=200):
+    """Best-effort real symbolic-execution security scan via Mythril (myth) —
+    mirrors _run_slither's/_run_symbolic's own "skip cleanly if the toolchain
+    isn't here this run" gate. Analyzes the actual deployed bytecode on-chain
+    by address via the target chain's real public RPC
+    (agents/investigate.py::EVM_CHAINS). Mythril's --rpc flag takes a bare
+    HOST:PORT (confirmed against its real CLI source, mythril/interfaces/
+    cli.py — there is no --rpc-url flag), so the chain's RPC URL is parsed
+    down to host:port here; --rpctls is passed whenever that RPC is https.
+    --execution-timeout is set well under the outer subprocess timeout as a
+    backstop against a documented Mythril bug where it doesn't always respect
+    its own internal timeout."""
+    if not shutil.which("myth"):
+        return {"ran": False, "reason": "mythril (myth) not installed in this environment this run"}
+    chain_info = inv.EVM_CHAINS.get(str(chain))
+    rpc_url = chain_info["rpc"] if chain_info else None
+    if not rpc_url:
+        return {"ran": False, "reason": f"no known RPC endpoint for chain {chain}"}
+    parsed = urllib.parse.urlparse(rpc_url)
+    host = parsed.hostname
+    port = parsed.port or (443 if parsed.scheme == "https" else 80)
+    if not host:
+        return {"ran": False, "reason": f"could not parse RPC host from {rpc_url}"}
+    cmd = ["myth", "analyze", "-a", address, "--rpc", f"{host}:{port}",
+           "--execution-timeout", "90", "-o", "jsonv2"]
+    if parsed.scheme == "https":
+        cmd.append("--rpctls")
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        try:
+            data = json.loads(p.stdout)
+        except Exception:
+            return {"ran": True, "ok": False, "reason": f"mythril produced no valid JSON (rc={p.returncode})",
+                    "raw_tail": (p.stderr or p.stdout or "")[-500:]}
+        issues = data.get("issues") or []
+        counts = {}
+        for iss in issues:
+            sev = iss.get("severity", "Unknown")
+            counts[sev] = counts.get(sev, 0) + 1
+        findings = [{"severity": iss.get("severity"), "swc": iss.get("swcTitle") or iss.get("swcID"),
+                     "description": ((iss.get("description") or {}).get("head") or "")[:300]}
+                    for iss in issues[:30]]
+        return {"ran": True, "ok": True, "counts": counts, "findings": findings, "total": len(issues)}
+    except subprocess.TimeoutExpired:
+        return {"ran": True, "ok": False, "reason": f"mythril timed out after {timeout}s"}
+    except Exception as e:
+        return {"ran": True, "ok": False, "reason": str(e)}
+
+
 FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing a PAID
 24-hour-SLA deep-dive bug bounty audit. This is VAPE's premium tier — the highest rigor
 VAPE offers. Real money is on the line; be precise, evidence-based, and honest.
@@ -171,7 +221,8 @@ found evidence for (skip classes with nothing to say rather than padding), then
 """
 
 
-def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result):
+def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
+                  mythril_result=None):
     parts = [f"=== TARGET ===\naddress: {address}\nchain: {chain}"]
     parts.append(f"=== GOPLUS TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
     parts.append(f"=== DEXSCREENER MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
@@ -203,6 +254,14 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
     else:
         parts.append(f"=== HALMOS SYMBOLIC TESTING ===\nNot available this run: "
                      f"{symbolic_result.get('reason', 'unknown')}")
+    mythril_result = mythril_result or {}
+    if mythril_result.get("ran") and mythril_result.get("ok"):
+        parts.append(f"=== MYTHRIL SYMBOLIC-EXECUTION SCAN (real, {mythril_result['total']} raw issues) ===\n"
+                     f"Severity counts: {mythril_result['counts']}\n"
+                     f"{json.dumps(mythril_result['findings'], indent=2)[:3000]}")
+    else:
+        parts.append(f"=== MYTHRIL SYMBOLIC-EXECUTION SCAN ===\nNot available this run: "
+                     f"{mythril_result.get('reason', 'unknown')}")
     if corr:
         parts.append("=== RECENT-HACK TECHNIQUE CORRELATION (real, DeFiLlama feed) ===\n"
                      + "\n".join(f"- {c}" for c in corr))
@@ -233,6 +292,7 @@ def run_audit(address, chain="8453", callback_url=None):
     web_rep = inv.web_reputation_check(prelim_sym, address)
     slither_result = _run_slither(address, chain)
     symbolic_result = _run_symbolic(address, chain, src)
+    mythril_result = _run_mythril(address, chain)
 
     # Reuse investigate.py's scoring engine for a baseline consistent with every other
     # VAPE verdict — the frontier LLM pass adds depth on top, it doesn't replace this.
@@ -243,7 +303,8 @@ def run_audit(address, chain="8453", callback_url=None):
     score, verdict, reasons, positive_signals = inv.score(gp, dex, onchain, verif_for_score, web_rep, deployer_repeat)
 
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
-    prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result)
+    prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
+                          mythril_result)
     try:
         narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
     except Exception as e:
@@ -261,7 +322,8 @@ def run_audit(address, chain="8453", callback_url=None):
     L.append(f"**Date:** {now_iso()}  ")
     L.append(f"**Engine:** Frontier LLM ({provider or 'unavailable'}) + real recon"
              f"{' + Slither static analysis' if slither_result.get('ok') else ''}"
-             f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}  ")
+             f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}"
+             f"{' + Mythril symbolic-execution scan' if mythril_result.get('ok') else ''}  ")
     L.append(f"**Baseline Verdict:** {verdict} ({score}/100 — same scoring engine as every "
              "VAPE investigation, for consistency)")
     L.append("")
@@ -302,6 +364,12 @@ def run_audit(address, chain="8453", callback_url=None):
     else:
         L.append(f"- Not run this cycle: {symbolic_result.get('reason')}")
     L.append("")
+    L.append("## Static Analysis (Mythril)")
+    if mythril_result.get("ok"):
+        L.append(f"- Raw issues: **{mythril_result['total']}** — {mythril_result['counts']}")
+    else:
+        L.append(f"- Not run this cycle: {mythril_result.get('reason')}")
+    L.append("")
     L.append("## Methodology")
     L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
              "on-chain presence, DeFiLlama hack-technique correlation, public web search for "
@@ -311,10 +379,13 @@ def run_audit(address, chain="8453", callback_url=None):
     L.append("4. Halmos bounded symbolic testing against LLM-drafted check_* properties "
              "compiled into a scaffolded Foundry project built from that same verified "
              "source — only if forge and halmos are both installed this run.")
-    L.append("5. A frontier-tier LLM (Gemini 2.5 Pro, Groq as automatic fallback) reads the "
-             "actual verified source and reasons per vulnerability class — this is VAPE's "
-             "deepest automated pass, still followed by the human-verification list above.")
-    L.append("6. White-hat only: read-only analysis, no exploitation attempted.")
+    L.append("5. Mythril symbolic-execution scan of the deployed bytecode on-chain by address, "
+             "via the target chain's real public RPC — only if pre-installed this run.")
+    L.append("6. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 "
+             "Pro/Groq as fallback) reads the actual verified source and reasons per "
+             "vulnerability class — this is VAPE's deepest automated pass, still followed by "
+             "the human-verification list above.")
+    L.append("7. White-hat only: read-only analysis, no exploitation attempted.")
     L.append("")
     L.append("*V.A.P.E. — The chain never lies. This is a 24h-SLA premium engagement; "
              "results delivered as soon as generated, well inside that window.*")
