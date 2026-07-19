@@ -1,4 +1,4 @@
-# VAPE Bounty Ops — 2026-07-19T15:34:13Z
+# VAPE Bounty Ops — 2026-07-19T16:32:22Z
 
 Real, classified, checklist-tracked live bug-bounty programs VAPE has actually vetted as matching its own tooling (Solidity/EVM via agents/deep_dive_audit.py, or Move/Sui via agents/external_audit.py) — never historical exploits (those live in the Threat Ledger) and never a post-incident recovery/negotiation offer regardless of its headline dollar size. See agents/scout.py and agents/bounty_ops.py for the real classification/scoring and checklist-generation logic.
 
@@ -35,18 +35,20 @@ Real, classified, checklist-tracked live bug-bounty programs VAPE has actually v
 - Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
 - Checklist progress: 0/9
 
+## [NAVI Protocol](https://hackenproof.com/programs/navi-protocol) — hackenproof, $300,000, fit 69
+- Why it fits: Move/Sui smart-contract scope — matches agents/external_audit.py
+- Checklist progress: 0/8
+
+## [Cetus Smart Contracts](https://hackenproof.com/programs/cetus-smart-contracts) — hackenproof, $300,000, fit 69
+- Why it fits: Move/Sui smart-contract scope — matches agents/external_audit.py
+- Checklist progress: 0/8
+- VAPE's own report: [external-audit](intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md)
+
+## [Scallop Protocol (Smart Contract)](https://hackenproof.com/programs/scallop-protocol-smart-contract) — hackenproof, $300,000, fit 69
+- Why it fits: Move/Sui smart-contract scope — matches agents/external_audit.py
+- Checklist progress: 0/9
+- VAPE's own report: [external-audit](intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md)
+
 ## [Treehouse Smart Contracts](https://hackenproof.com/programs/treehouse-smart-contracts) — hackenproof, $250,000, fit 68
 - Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
 - Checklist progress: 0/7
-
-## [Cronos zkEVM Smart Contracts](https://hackenproof.com/programs/cronos-zkevm-smart-contracts) — hackenproof, $200,000, fit 67
-- Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
-- Checklist progress: 0/9
-
-## [Ripio](https://hackerone.com/ripio) — hackerone, $25,000, fit 65
-- Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
-- Checklist progress: 0/8
-
-## [INIT Capital Smart Contracts](https://hackenproof.com/programs/init-capital-smart-contracts) — hackenproof, $100,000, fit 65
-- Why it fits: Solidity/EVM smart-contract scope — matches agents/deep_dive_audit.py
-- Checklist progress: 0/8

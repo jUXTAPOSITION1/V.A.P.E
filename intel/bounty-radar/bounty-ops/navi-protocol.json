@@ -1,19 +1,56 @@
 {
   "id": "hackenproof:prg_f7f6862772132229",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/navi-protocol to confirm in-scope Move packages, excluded contracts, severity tiers, and exact submission format.",
+      "done": false
+    },
+    {
+      "item": "Clone the official NAVI Sui Move repo listed on the program page and note the exact package IDs and published addresses.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the cloned repo, pointing it at the core lending, collateral, and oracle modules.",
+      "done": false
+    },
+    {
+      "item": "Examine the tool report for capability leaks, missing type checks, arithmetic issues, and Move Prover violations.",
+      "done": false
+    },
+    {
+      "item": "Manually review admin capability usage, object ownership transfers, and oracle price feed trust assumptions.",
+      "done": false
+    },
+    {
+      "item": "Test business logic around liquidation thresholds, flash-loan callbacks, and interest-rate model updates.",
+      "done": false
+    },
+    {
+      "item": "Verify any findings are reproducible on a fresh Sui devnet fork using the exact package versions in scope.",
+      "done": false
+    },
+    {
+      "item": "Draft the Hackenproof report with clear steps, affected contracts, severity justification, and a minimal PoC transaction.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.411580Z",
       "event": "Started tracking as a real Bounty Op (fit 59)."
+    },
+    {
+      "ts": "2026-07-19T16:32:07.565641Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": null,
+  "checklistGeneratedAt": 1784478720.8558242,
   "vapeReportUrl": null,
   "name": "NAVI Protocol",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/navi-protocol",
   "prizeUsd": 300000,
-  "bountyFitScore": 59,
+  "bountyFitScore": 69,
   "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
   "tags": [
     "git_repo",
@@ -21,5 +58,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.411572Z"
+  "updatedAt": "2026-07-19T16:32:00.855826Z"
 }

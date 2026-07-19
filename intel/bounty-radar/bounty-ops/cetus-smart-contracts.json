@@ -1,19 +1,60 @@
 {
   "id": "hackenproof:prg_a79de6c8943fa43d",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/cetus-smart-contracts to confirm live scope, in-scope Move packages, excluded contracts, and exact submission format/rules.",
+      "done": false
+    },
+    {
+      "item": "Clone the official Cetus Sui/Move git repository referenced on the program page.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the cloned repo, pointing it at core packages (cetus-clmm, cetus-lending, oracle modules).",
+      "done": false
+    },
+    {
+      "item": "Trigger Move Prover/sui-prover formal verification via the agent on key invariants such as liquidity math and capability checks.",
+      "done": false
+    },
+    {
+      "item": "Use the agent's frontier-LLM review pass to surface access-control, capability-leak, and storage-collision candidates.",
+      "done": false
+    },
+    {
+      "item": "Manually inspect results against Move/Sui taxonomy: improper transfer_to_object, missing &mut checks, oracle trust, and business-logic races in swap/lend flows.",
+      "done": false
+    },
+    {
+      "item": "Reproduce any flagged issues locally with sui move test or published testnets and capture minimal PoC transactions.",
+      "done": false
+    },
+    {
+      "item": "Draft submission with contract addresses, exact Move module versions, step-by-step reproduction, and severity justification matching Hackenproof template.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.411738Z",
       "event": "Started tracking as a real Bounty Op (fit 59)."
+    },
+    {
+      "ts": "2026-07-19T16:32:16.220538Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-19T16:32:16.220661Z",
+      "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md"
     }
   ],
-  "checklistGeneratedAt": null,
-  "vapeReportUrl": null,
+  "checklistGeneratedAt": 1784478727.5661285,
+  "vapeReportUrl": "intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md",
   "name": "Cetus Smart Contracts",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/cetus-smart-contracts",
   "prizeUsd": 300000,
-  "bountyFitScore": 59,
+  "bountyFitScore": 69,
   "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
   "tags": [
     "git_repo",
@@ -21,5 +62,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.411729Z"
+  "updatedAt": "2026-07-19T16:32:07.566154Z",
+  "vapeReportKind": "external-audit"
 }

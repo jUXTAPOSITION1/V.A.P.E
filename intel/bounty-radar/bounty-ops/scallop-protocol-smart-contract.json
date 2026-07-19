@@ -1,19 +1,64 @@
 {
   "id": "hackenproof:prg_839bf691127930e2",
-  "checklist": [],
+  "checklist": [
+    {
+      "item": "Visit https://hackenproof.com/programs/scallop-protocol-smart-contract and extract exact in-scope Sui packages, excluded contracts, reward tiers, and submission formatting rules.",
+      "done": false
+    },
+    {
+      "item": "Clone the official Scallop git repository referenced in the program scope and identify the Move package directories for core lending, borrowing, and oracle modules.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the cloned Sui packages, directing it to fetch source, invoke sui-prover where applicable, and perform frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Use the agent's output to enumerate all public entry functions and capability objects that control admin or privileged operations.",
+      "done": false
+    },
+    {
+      "item": "Manually audit the Move source for missing or incorrectly scoped key abilities on objects that guard collateral deposits and liquidations.",
+      "done": false
+    },
+    {
+      "item": "Inspect oracle price feed handling for single-source trust assumptions or missing staleness checks inside the Sui Move modules.",
+      "done": false
+    },
+    {
+      "item": "Review liquidation and interest-rate business logic for incorrect threshold calculations or missing invariant checks on user positions.",
+      "done": false
+    },
+    {
+      "item": "Confirm the absence of object ownership or transfer-related issues that could allow unauthorized withdrawal of collateral objects.",
+      "done": false
+    },
+    {
+      "item": "Prepare the final submission package containing the exact commit hash, reproduction transaction examples, and severity mapping required by Hackenproof.",
+      "done": false
+    }
+  ],
   "progress": [
     {
       "ts": "2026-07-19T03:50:31.411881Z",
       "event": "Started tracking as a real Bounty Op (fit 59)."
+    },
+    {
+      "ts": "2026-07-19T16:32:22.785179Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-19T16:32:22.785301Z",
+      "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md"
     }
   ],
-  "checklistGeneratedAt": null,
-  "vapeReportUrl": null,
+  "checklistGeneratedAt": 1784478736.2210479,
+  "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Scallop Protocol (Smart Contract)",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/scallop-protocol-smart-contract",
   "prizeUsd": 300000,
-  "bountyFitScore": 59,
+  "bountyFitScore": 69,
   "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
   "tags": [
     "git_repo",
@@ -22,5 +67,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T03:50:31.411875Z"
+  "updatedAt": "2026-07-19T16:32:16.221051Z",
+  "vapeReportKind": "external-audit"
 }
