@@ -67,13 +67,17 @@ def test_redteam_judge_matches_run_py_production_provider_order():
     assert "provider_order=FRONTIER_ORDER" in redteam_py
 
 
-def test_adversarial_simulator_stays_off_frontier_order():
-    """The deepteam attack simulator (writes attack prompts, not judged
-    output) deliberately stays on the free chain — only the judge should be
-    pinned to FRONTIER_ORDER. Confirms campaign_vape.py doesn't accidentally
-    upgrade the simulator too."""
+def test_adversarial_simulator_and_judge_both_use_oci_grok_primary():
+    """By explicit direction (2026-07-19), both the deepteam attack
+    simulator and the judge use OCI Grok 4.3 first (use_oci_grok=True),
+    falling back through FRONTIER_ORDER — a stronger simulator writes more
+    sophisticated attacks, a more realistic adversary, not just a stronger
+    judge. This intentionally supersedes the earlier weak-simulator/
+    strong-judge asymmetry."""
     text = (ROOT / "skillforge/tools/ai-redteam/campaign_vape.py").read_text()
     sim_line = next(l for l in text.splitlines() if "sim = VapeLLM" in l)
-    assert "provider_order" not in sim_line
+    assert "provider_order=FRONTIER_ORDER" in sim_line
+    assert "use_oci_grok=True" in sim_line
     judge_line = next(l for l in text.splitlines() if "judge = VapeLLM" in l)
     assert "provider_order=FRONTIER_ORDER" in judge_line
+    assert "use_oci_grok=True" in judge_line

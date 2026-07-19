@@ -104,13 +104,14 @@ def main():
         print("[campaign_vape] no LLM provider — skipping.")
         return
 
-    # Judge gets OCI-hosted Grok 4.3 first (use_oci_grok=True, falling back
-    # through provider_order=FRONTIER_ORDER) — directly addresses VapeLLM's
-    # own honesty note that a stronger judge model catches subtler
-    # jailbreaks the small open models could miss. The simulator (writes
-    # attack prompts, doesn't need to be smart) stays on the free chain.
+    # Both judge and simulator get OCI-hosted Grok 4.3 first (use_oci_grok=
+    # True, falling back through provider_order=FRONTIER_ORDER), by explicit
+    # direction (2026-07-19): a stronger simulator writes more sophisticated,
+    # harder-to-defend-against attacks — a more realistic adversary, not
+    # just a stronger judge. This intentionally drops the earlier
+    # weak-simulator/strong-judge asymmetry.
     judge = VapeLLM(tier="deep", provider_order=FRONTIER_ORDER, use_oci_grok=True)
-    sim = VapeLLM(tier="fast")
+    sim = VapeLLM(tier="fast", provider_order=FRONTIER_ORDER, use_oci_grok=True)
     vulnerabilities = [PromptLeakage(), ExcessiveAgency(), Misinformation()]
 
     assessment = red_team(
