@@ -601,115 +601,94 @@ const App = {
         }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
     },
 
-    // ── Virtuals Protocol — VIRTUAL token + ecosystem TVL ───────────────────
-    // Mirrors agents/data_fetchers.py::get_virtuals_snapshot() exactly (same
-    // keyless CoinGecko + DefiLlama sources, same 30d window for 7d/30d price
-    // trend), so the numbers/score shown here match VAPE's own backend sweep
-    // (agents/virtuals_sweep.py). Client-side, free — same pattern as
-    // protocols()/chart()/baseMovers(), no worker/x402 involved.
-    _virtualsTvlHistory: [],
-    _virtualsRange: '30d',
-    _virtualsChart: null,
+    // ── Virtuals Protocol — VIRTUAL token stats + trending Base tokens ─────
+    // Sourced entirely from Codex.io via the worker's /virtuals-snapshot and
+    // /trending-base routes (worker/src/lib/codex.ts, a TS port of
+    // agents/codex_data.py) — Codex needs a bearer key that can't ship to
+    // the browser, so unlike protocols()/chart()/baseMovers() this can't be
+    // a direct client-side fetch. Intentionally no protocol TVL here: Codex
+    // is a token-market-data platform, not a DeFi-TVL aggregator, so this
+    // panel doesn't reach for DefiLlama to fill that gap — everything shown
+    // is real Codex data or nothing.
+    _trendingBase: [],
     async virtuals() {
+        if (!WORKER_BASE) return;
         try {
-            const [pxRes, chartRes, protoRes] = await Promise.allSettled([
-                fetch('https://api.coingecko.com/api/v3/simple/price?ids=virtual-protocol&vs_currencies=usd&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true').then(r=>r.json()),
-                fetch('https://api.coingecko.com/api/v3/coins/virtual-protocol/market_chart?vs_currency=usd&days=30').then(r=>r.json()),
-                fetch('https://api.llama.fi/protocol/virtual-protocol').then(r=>r.json()),
+            const [snapRes, trendRes] = await Promise.allSettled([
+                fetch(`${WORKER_BASE}/virtuals-snapshot`).then(r=>r.json()),
+                fetch(`${WORKER_BASE}/trending-base?limit=12`).then(r=>r.json()),
             ]);
-            const px = pxRes.status==='fulfilled' ? (pxRes.value?.['virtual-protocol']||{}) : {};
-            const snapshot = {
-                price_usd: px.usd, mcap_usd: px.usd_market_cap, vol_24h_usd: px.usd_24h_vol,
-                change_24h_pct: typeof px.usd_24h_change==='number' ? Math.round(px.usd_24h_change*100)/100 : null,
-            };
-            snapshot.volume_to_mcap_pct = (typeof snapshot.vol_24h_usd==='number' && typeof snapshot.mcap_usd==='number' && snapshot.mcap_usd>0)
-                ? Math.round(snapshot.vol_24h_usd/snapshot.mcap_usd*10000)/100 : null;
-
-            const chart = chartRes.status==='fulfilled' ? chartRes.value : null;
-            const prices = chart?.prices;
-            if (Array.isArray(prices) && prices.length >= 2) {
-                const latest = prices[prices.length-1][1];
-                const nowMs = prices[prices.length-1][0];
-                const weekAgoMs = nowMs - 7*24*3600*1000;
-                const monthAgoPrice = prices[0][1];
-                const weekAgoPrice = prices.reduce((a,b)=>Math.abs(a[0]-weekAgoMs)<Math.abs(b[0]-weekAgoMs)?a:b)[1];
-                snapshot.change_7d_pct = weekAgoPrice ? Math.round((latest-weekAgoPrice)/weekAgoPrice*10000)/100 : null;
-                snapshot.change_30d_pct = monthAgoPrice ? Math.round((latest-monthAgoPrice)/monthAgoPrice*10000)/100 : null;
+            const snap = snapRes.status==='fulfilled' ? snapRes.value : null;
+            if (snap && !snap.error) this._renderVirtualsStats(snap);
+            const trend = trendRes.status==='fulfilled' ? trendRes.value : null;
+            if (trend && !trend.error && Array.isArray(trend.tokens)) {
+                this._trendingBase = trend.tokens;
+                this._renderTrendingBase();
             }
-
-            const proto = protoRes.status==='fulfilled' ? protoRes.value : null;
-            if (proto && !proto.error) {
-                const cur = proto.currentChainTvls || {};
-                snapshot.protocol_tvl_usd = Object.values(cur).reduce((s,v)=>typeof v==='number'?s+v:s, 0);
-                const history = proto.tvl;
-                if (Array.isArray(history) && history.length >= 2) {
-                    this._virtualsTvlHistory = history.map(h=>({t:h.date*1000, v:h.totalLiquidityUSD||0}));
-                    const latestTvl = history[history.length-1].totalLiquidityUSD;
-                    const nowS = history[history.length-1].date;
-                    const weekAgoS = nowS - 7*24*3600;
-                    const monthAgoTvl = history[0].totalLiquidityUSD;
-                    const weekAgoTvl = history.reduce((a,b)=>Math.abs((a.date||0)-weekAgoS)<Math.abs((b.date||0)-weekAgoS)?a:b).totalLiquidityUSD;
-                    snapshot.tvl_change_7d_pct = weekAgoTvl ? Math.round((latestTvl-weekAgoTvl)/weekAgoTvl*10000)/100 : null;
-                    snapshot.tvl_change_30d_pct = monthAgoTvl ? Math.round((latestTvl-monthAgoTvl)/monthAgoTvl*10000)/100 : null;
-                }
-            }
-
-            this._renderVirtualsStats(snapshot);
-            this._renderVirtualsChart(this._virtualsRange);
         } catch(e) { /* leave skeletons on failure — no fabricated numbers */ }
     },
 
-    // 0-100, neutral start 50 — direct port of agents/virtuals_sweep.py's
-    // compute_health_score() (0-10 there), same four weighted factors
-    // (24h price/small, 7d price/medium, 7d TVL trend/medium, vol-mcap
-    // ratio/small) scaled ×10, same skip-if-missing rule.
-    _virtualsScore(s) {
+    // 0-100, neutral start 50 — VIRTUAL's health from Codex-native signals:
+    // 24h price change (small weight, noisy on its own) and top-10-holder
+    // concentration (medium weight — a widely-held token is harder to
+    // manipulate than one a handful of wallets control). No TVL trend input
+    // here — see virtuals() above for why. Either factor is simply skipped
+    // (not defaulted to neutral/zero) if Codex didn't return it this cycle.
+    _virtualsScore(detail, holders) {
         let score = 50;
-        if (typeof s.change_24h_pct === 'number') {
-            if (s.change_24h_pct >= 5) score += 10; else if (s.change_24h_pct > 0) score += 5;
-            else if (s.change_24h_pct <= -10) score -= 10; else if (s.change_24h_pct < 0) score -= 5;
+        const chg = detail && typeof detail.change24 === 'number' ? detail.change24 : null;
+        if (chg != null) {
+            if (chg >= 5) score += 10; else if (chg > 0) score += 5;
+            else if (chg <= -10) score -= 10; else if (chg < 0) score -= 5;
         }
-        if (typeof s.change_7d_pct === 'number') {
-            if (s.change_7d_pct >= 10) score += 20; else if (s.change_7d_pct > 0) score += 10;
-            else if (s.change_7d_pct <= -20) score -= 20; else if (s.change_7d_pct < 0) score -= 10;
-        }
-        if (typeof s.tvl_change_7d_pct === 'number') {
-            if (s.tvl_change_7d_pct >= 10) score += 20; else if (s.tvl_change_7d_pct > 0) score += 10;
-            else if (s.tvl_change_7d_pct <= -20) score -= 20; else if (s.tvl_change_7d_pct < 0) score -= 10;
-        }
-        if (typeof s.volume_to_mcap_pct === 'number') {
-            if (s.volume_to_mcap_pct >= 5) score += 10; else if (s.volume_to_mcap_pct < 0.5) score -= 10;
+        const top10 = holders && typeof holders.top10HoldersPercent === 'number' ? holders.top10HoldersPercent : null;
+        if (top10 != null) {
+            if (top10 <= 20) score += 20; else if (top10 <= 35) score += 10;
+            else if (top10 >= 70) score -= 20; else if (top10 >= 50) score -= 10;
         }
         return Math.max(0, Math.min(100, Math.round(score)));
     },
 
-    _renderVirtualsStats(s) {
-        this._set('v-price', s.price_usd!=null ? '$'+Number(s.price_usd).toLocaleString(undefined,{maximumSignificantDigits:6}) : '—');
-        this._set('v-mcap', fmtUsd(s.mcap_usd));
-        this._set('v-vol', fmtUsd(s.vol_24h_usd));
+    _renderVirtualsStats(snap) {
+        const detail = snap.detail || {};
+        const holders = snap.holders || {};
+        this._set('v-price', detail.priceUSD!=null ? '$'+Number(detail.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}) : '—');
+        this._set('v-mcap', fmtUsd(detail.marketCap));
+        this._set('v-vol', fmtUsd(detail.volume24));
         const chgEl = document.getElementById('v-chg');
-        if (chgEl) chgEl.innerHTML = `${pct(s.change_24h_pct)} · ${pct(s.change_7d_pct)} · ${pct(s.change_30d_pct)}`;
-        const tvlEl = document.getElementById('v-tvl');
-        if (tvlEl) tvlEl.innerHTML = `${fmtUsd(s.protocol_tvl_usd)} <span class="text-xs">${pct(s.tvl_change_7d_pct)} 7d</span> ${this._scorePill(this._virtualsScore(s))}`;
+        if (chgEl) chgEl.innerHTML = pct(detail.change24);
+        const holdEl = document.getElementById('v-holders');
+        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span> ${this._scorePill(this._virtualsScore(detail, holders))}`;
     },
 
-    _renderVirtualsChart(range) {
-        const canvas = document.getElementById('virtualsChart');
-        if (!canvas || !this._virtualsTvlHistory.length) return;
-        const slice = this._virtualsTvlHistory.slice(-(RANGE_DAYS[range] || RANGE_DAYS['30d']));
-        const labels = slice.map(p => new Date(p.t).toLocaleDateString(undefined,{month:'short',day:'numeric'}));
-        const data = slice.map(p => p.v);
-        if (this._virtualsChart) this._virtualsChart.destroy();
-        const g = canvas.getContext('2d').createLinearGradient(0,0,0,200);
-        g.addColorStop(0,'rgba(74,222,128,0.30)'); g.addColorStop(1,'rgba(74,222,128,0)');
-        this._virtualsChart = new Chart(canvas, {
-            type:'line',
-            data:{ labels, datasets:[{ data, borderColor:'#4ade80', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
-            options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},
-                tooltip:{callbacks:{label:c=>fmtUsd(c.parsed.y)}}},
-                scales:{ y:{ticks:{color:'#52525b',callback:v=>fmtUsd(v)},grid:{color:'rgba(255,255,255,0.04)'}},
-                         x:{ticks:{color:'#52525b',maxTicksLimit:8},grid:{display:false}} } }
-        });
+    _renderTrendingBase() {
+        const el = document.getElementById('trending-base');
+        if (!el) return;
+        const items = this._trendingBase;
+        el.innerHTML = items.length ? items.map((t,i) => {
+            const tok = t.token || {};
+            const icon = this._tokenIcon(tok.address, 'base');
+            return `
+            <a href="https://dexscreener.com/base/${this._esc(tok.address||'')}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
+                <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="truncate">${this._esc(tok.symbol||'?')}</span>
+                        ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
+                    </div>
+                    <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
+                </div>
+                <div class="text-right shrink-0 w-16 sm:w-24">
+                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
+                    <div class="text-xs">${typeof t.change24==='number'?pct(t.change24):'—'}</div>
+                </div>
+                <div class="text-right shrink-0 hidden sm:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
+                </div>
+            </a>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
     },
 
     _protoSort: 'tvl',
@@ -1502,15 +1481,6 @@ window.addEventListener('load', () => {
         }
         App._renderProtocolRows();
         App._enrichProtocols();
-    });
-    // Virtuals Protocol TVL chart range — reuses the already-cached full
-    // history, no new request (same pattern as tvl-range/proto-report-range).
-    document.getElementById('virtuals-range').addEventListener('click', e => {
-        const b = e.target.closest('button'); if (!b) return;
-        App._virtualsRange = b.dataset.d;
-        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
-        b.className='term-btn term-btn-sm term-btn-active';
-        App._renderVirtualsChart(App._virtualsRange);
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });

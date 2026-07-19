@@ -5,7 +5,11 @@
  * hired via a real ACP job instead). Also hosts a few free, unpaid Alchemy-
  * backed reliability endpoints (/portfolio, /nfts, /network-status, /prices,
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
- * direct public-RPC calls when this worker is deployed and configured.
+ * direct public-RPC calls when this worker is deployed and configured, plus
+ * two free Codex.io-backed routes (/virtuals-snapshot, /trending-base) for
+ * the Live Intelligence Feed's Virtuals Protocol panel and trending-tokens
+ * list — Codex needs a bearer key that can't ship to the browser, so these
+ * can't be a direct client-side fetch the way DefiLlama/CoinGecko are.
  *
  * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
  * facilitator) and Coinbase Developer Platform's hosted one — see
@@ -25,6 +29,7 @@ import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
+import * as codex from "./lib/codex";
 import { dispatchDeepDiveAudit, dispatchExternalBountyAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
@@ -39,6 +44,11 @@ export interface Env {
   CDP_API_KEY_SECRET?: string;
   ALCHEMY_API_KEY?: string;
   COINGECKO_API_KEY?: string;
+  // Codex.io GraphQL data (trending tokens, holders, wallet PnL) — see
+  // lib/codex.ts. Server-side only; Codex requires a bearer key that can
+  // never be shipped to the browser, unlike the keyless DefiLlama/CoinGecko
+  // calls the site makes directly.
+  CODEX_API_KEY?: string;
   // Fine-grained PAT (Actions: write, Contents: read) for triggering the
   // bounty_deep_dive offering's async job — see worker/src/lib/githubDispatch.ts.
   GH_DISPATCH_TOKEN?: string;
@@ -404,6 +414,45 @@ app.get("/cost-basis", rateLimiter("cost-basis", 10, 60), cache({ cacheName: "va
       .filter((t) => t.currentBalance > 0 && t.currentPriceUsd > 0);
     const results = await estimateCostBasis(c.env, address, tokensForEstimate);
     return c.json({ address, results });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
+  }
+});
+
+// VIRTUAL token's own price/volume/liquidity + holder concentration, all
+// via Codex.io (see lib/codex.ts) — replaces an earlier CoinGecko+DefiLlama
+// version of this panel. Free, unpaid, same rate-limit+cache pattern as
+// /portfolio above; 503s if CODEX_API_KEY isn't configured.
+const VIRTUAL_TOKEN_ADDRESS = "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b";
+app.get("/virtuals-snapshot", rateLimiter("virtuals-snapshot", 20, 60), cache({ cacheName: "vape-virtuals-snapshot", cacheControl: "max-age=30" }), async (c) => {
+  if (!c.env.CODEX_API_KEY) return c.json({ error: "virtuals snapshot not configured" }, 503);
+  try {
+    const [detail, holders] = await Promise.all([
+      codex.tokenDetail(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID),
+      codex.tokenHolders(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID, 10),
+    ]);
+    return c.json({ ts: new Date().toISOString(), address: VIRTUAL_TOKEN_ADDRESS, detail, holders });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
+  }
+});
+
+// Trending Base tokens ranked by Codex's own volume/liquidity signal, each
+// best-effort tagged `isVirtuals` (see lib/codex.ts::isVirtualsToken) —
+// "trending on Base, tagged if Virtuals-launched", not a fabricated
+// "Virtuals-only" feed dressed up as one.
+app.get("/trending-base", rateLimiter("trending-base", 20, 60), cache({ cacheName: "vape-trending-base", cacheControl: "max-age=60" }), async (c) => {
+  if (!c.env.CODEX_API_KEY) return c.json({ error: "trending tokens not configured" }, 503);
+  try {
+    const limit = Math.min(Number(c.req.query("limit")) || 20, 50);
+    const trending = await codex.trendingTokens(c.env.CODEX_API_KEY, [codex.BASE_NETWORK_ID], limit);
+    if (trending.error) return c.json(trending, 502);
+    const tokens = (trending.tokens as codex.TrendingTokenRow[]) || [];
+    const tagged = await Promise.all(tokens.map(async (t) => ({
+      ...t,
+      isVirtuals: t.token?.address ? await codex.isVirtualsToken(t.token.address) : false,
+    })));
+    return c.json({ ts: trending.ts, tokens: tagged });
   } catch (e) {
     return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
