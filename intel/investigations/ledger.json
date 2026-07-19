@@ -656,6 +656,25 @@
     "symbol": "AKE",
     "times_investigated": 1
   },
+  "56:0x3aee7602b612de36088f3ffed8c8f10e86ebf2bf": {
+    "address": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF",
+    "chain": "56",
+    "creator_address": "0x18d3c20a79fbceb89fa1dad8831dcf6ebbe27491",
+    "first_investigated": "2026-07-19T12:02:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-120248-0x3AeE7602.md",
+        "score": 80,
+        "ts": "2026-07-19T12:02:48Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-19T12:02:48Z",
+    "last_score": 80,
+    "last_verdict": "PROCEED",
+    "symbol": "BANK",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",

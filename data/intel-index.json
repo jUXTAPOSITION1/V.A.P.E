@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T10:56:38Z",
+  "generated": "2026-07-19T12:02:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 84,
-    "investigations": 235,
+    "investigations": 236,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-105637-0xE1b7A509.md",
-      "title": "Investigation \u2014 Baseller",
-      "symbol": "Baseller",
-      "name": "Base Seller",
-      "date": "2026-07-19T10:56:37Z",
-      "target": "0xE1b7A5096343164FAe02Db10353C03cd295787c5",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Low holder count (74); [-10] Low liquidity $20,150; [-10] Violent 24h move +882% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-105637-0xE1b7A509.md"
+      "file": "investigation-20260719-120248-0x3AeE7602.md",
+      "title": "Investigation \u2014 BANK",
+      "symbol": "BANK",
+      "name": "Lorenzo Governance Token",
+      "date": "2026-07-19T12:02:48Z",
+      "target": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x1716ece3ad0803df784ea57a38722d66305d536f) \u2014 can still act on the contract; [-10] Violent 24h move +159% (volatility/manipulation). Positive evidence: 58449 holders \u2014 reasonably distributed; Trading 445+ days without a known incident in this scan; Custom verified source (not a ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-120248-0x3AeE7602.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-120248-0x3AeE7602.md",
+      "title": "Investigation \u2014 BANK",
+      "symbol": "BANK",
+      "name": "Lorenzo Governance Token",
+      "date": "2026-07-19T12:02:48Z",
+      "target": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x1716ece3ad0803df784ea57a38722d66305d536f) \u2014 can still act on the contract; [-10] Violent 24h move +159% (volatility/manipulation). Positive evidence: 58449 holders \u2014 reasonably distributed; Trading 445+ days without a known incident in this scan; Custom verified source (not a ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-120248-0x3AeE7602.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-105637-0xE1b7A509.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-225909-0x8453Cf5D.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-213349-0x3b8db18e.md",
-      "title": "Investigation \u2014 ESP",
-      "symbol": "ESP",
-      "name": "Espresso",
-      "date": "2026-07-16T21:33:49Z",
-      "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 1316 holders \u2014 reasonably distributed; Deep liquidity ($531,679); Trading 156+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 154+ days \u2014 indep",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-213349-0x3b8db18e.md"
     }
   ],
   "reports": [

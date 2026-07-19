@@ -321,3 +321,5 @@
 | 2026-07-19 | auto | 0x4c18406Fa690fAa53E5efa899a971557251Af72d (IDL) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-19 | auto | 0xE1b7A5096343164FAe02Db10353C03cd295787c5 (Baseller) | deep_investigation | REJECT (47/100) | Low holder count (74) | +7d |
+
+| 2026-07-19 | auto | 0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF (BANK) | deep_investigation | PROCEED (80/100) | Owner not renounced (0x1716ece3ad0803df784ea57a38722d66305d536f) — can still act | +7d |
