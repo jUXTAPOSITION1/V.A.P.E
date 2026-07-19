@@ -127,6 +127,7 @@ component's state changes.
 | `agents/security_sweep.py` | [OK] | Incident-forensics pipeline (any chain `EVM_CHAINS` supports, high-value leads act regardless of age) |
 | `agents/engagements.py` | [OK] | Real per-lead engagement status (never a fabricated outreach/signup) |
 | `agents/defillama.py` | [OK] | Full DefiLlama API surface: TVL, yields, fees, stablecoins, bridges, token intel |
+| `agents/codex_data.py` | [OK] | Codex.io GraphQL client — trending tokens, holders, wallet PnL (foundation for the wallet deep-dive offering + new trending/holders feeds; launchpad tracking is subscription-only on Codex's side, not yet wired) |
 | `agents/data_agent.py` | [OK] | DATA AGENT — VAPE's own paying customer, real x402 hires per investigation |
 | LLM tier | [OK] | Frontier model + multi-provider free fallback chain, see `agents/llm.py` |
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
