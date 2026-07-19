@@ -486,12 +486,23 @@
                     <span class="stat-pair"><span class="stat-label">24h</span><span id="v-chg" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                     <span class="stat-pair"><span id="v-holders" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                 </div>
+                <div style="position:relative;height:60px;width:100%;margin-top:12px"><canvas id="virtuals-sparkline"></canvas></div>
             </section>
 
             <section class="panel-sm mt-6">
                 <h3 class="text-sm text-zinc-500 mb-2">Trending on Base</h3>
                 <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most active tokens on Base right now, with a VAPE Score for each. Tokens from the Virtuals ecosystem are tagged.</p>
                 <div id="trending-base" class="diff-list">
+                    <div class="skeleton h-14 my-1"></div>
+                    <div class="skeleton h-14 my-1"></div>
+                    <div class="skeleton h-14 my-1"></div>
+                </div>
+            </section>
+
+            <section class="panel-sm mt-6">
+                <h3 class="text-sm text-zinc-500 mb-2">New Launches</h3>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The newest tokens on Base by creation time, with a VAPE Score for each. Tokens from the Virtuals ecosystem are tagged.</p>
+                <div id="new-launches" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -670,7 +681,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=19"></script>
+    <script src="assets/app.js?v=20"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

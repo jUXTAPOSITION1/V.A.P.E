@@ -88,6 +88,65 @@ export async function trendingTokens(
   return { ts: new Date().toISOString(), tokens: results };
 }
 
+// Newest tokens by creation time — a real, poll-friendly alternative to
+// Codex's subscription-only launchpad events (onLaunchpadTokenEvent/Batch,
+// which a Cloudflare Worker can't hold open either). Same filterTokens query
+// as trendingTokens(), ranked by createdAt DESC instead of volume.
+export async function newLaunches(
+  apiKey: string | undefined,
+  networkIds: number[] | undefined,
+  limit = 20,
+): Promise<CodexResult> {
+  const query = `
+    query NewLaunches($limit: Int!, $networkFilter: [Int!]) {
+      filterTokens(limit: $limit, filters: {network: $networkFilter},
+                    rankings: {attribute: createdAt, direction: DESC}) {
+        results {
+          priceUSD
+          volume24
+          liquidity
+          marketCap
+          createdAt
+          token { name symbol address networkId }
+        }
+      }
+    }`;
+  const d = await codexQuery(apiKey, query, { limit, networkFilter: networkIds });
+  if (isErr(d)) return d;
+  const results: TrendingTokenRow[] = (d.filterTokens && d.filterTokens.results) || [];
+  return { ts: new Date().toISOString(), tokens: results };
+}
+
+const RESOLUTION_SECONDS: Record<string, number> = { "1": 60, "5": 300, "15": 900, "60": 3600, "240": 14400, "1D": 86400 };
+
+// Real OHLCV candlesticks for a token. `resolution` is Codex's own string
+// format ("1"/"5"/"15"/"60"/"240"/"1D"); `count` bars back from now.
+export async function tokenBars(
+  apiKey: string | undefined,
+  tokenAddress: string,
+  networkId: number,
+  resolution = "1D",
+  count = 30,
+): Promise<CodexResult> {
+  const toTs = Math.floor(Date.now() / 1000);
+  const fromTs = toTs - count * (RESOLUTION_SECONDS[resolution] || 86400);
+  const query = `
+    query TokenBars($symbol: String!, $from: Int!, $to: Int!, $resolution: String!) {
+      getBars(symbol: $symbol, from: $from, to: $to, resolution: $resolution) {
+        t o h l c v
+      }
+    }`;
+  const symbol = `${tokenAddress}:${networkId}`;
+  const d = await codexQuery(apiKey, query, { symbol, from: fromTs, to: toTs, resolution });
+  if (isErr(d)) return d;
+  const bars = d.getBars || {};
+  const times: number[] = bars.t || [];
+  const points = times.map((t: number, i: number) => ({
+    t, o: bars.o?.[i], h: bars.h?.[i], l: bars.l?.[i], c: bars.c?.[i], v: bars.v?.[i],
+  }));
+  return { ts: new Date().toISOString(), tokenAddress, networkId, resolution, points };
+}
+
 export async function tokenDetail(
   apiKey: string | undefined,
   address: string,

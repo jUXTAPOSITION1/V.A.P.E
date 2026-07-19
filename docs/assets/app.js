@@ -601,22 +601,24 @@ const App = {
         }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
     },
 
-    // ── Virtuals Protocol — VIRTUAL token stats + trending Base tokens ─────
-    // Sourced entirely from Codex.io via the worker's /virtuals-snapshot and
-    // /trending-base routes (worker/src/lib/codex.ts, a TS port of
-    // agents/codex_data.py) — Codex needs a bearer key that can't ship to
-    // the browser, so unlike protocols()/chart()/baseMovers() this can't be
-    // a direct client-side fetch. Intentionally no protocol TVL here: Codex
-    // is a token-market-data platform, not a DeFi-TVL aggregator, so this
-    // panel doesn't reach for DefiLlama to fill that gap — everything shown
-    // is real Codex data or nothing.
+    // ── Virtuals Protocol — VIRTUAL token stats + trending/new Base tokens ──
+    // Sourced entirely from Codex.io via the worker's /virtuals-snapshot,
+    // /trending-base, and /new-launches routes (worker/src/lib/codex.ts, a
+    // TS port of agents/codex_data.py) — Codex needs a bearer key that can't
+    // ship to the browser, so unlike protocols()/chart()/baseMovers() this
+    // can't be a direct client-side fetch. Intentionally no protocol TVL
+    // here: Codex is a token-market-data platform, not a DeFi-TVL
+    // aggregator, so this panel doesn't reach for DefiLlama to fill that
+    // gap — everything shown is real Codex data or nothing.
     _trendingBase: [],
+    _newLaunches: [],
     async virtuals() {
         if (!WORKER_BASE) return;
         try {
-            const [snapRes, trendRes] = await Promise.allSettled([
+            const [snapRes, trendRes, launchRes] = await Promise.allSettled([
                 fetch(`${WORKER_BASE}/virtuals-snapshot`).then(r=>r.json()),
                 fetch(`${WORKER_BASE}/trending-base?limit=12`).then(r=>r.json()),
+                fetch(`${WORKER_BASE}/new-launches?limit=12`).then(r=>r.json()),
             ]);
             const snap = snapRes.status==='fulfilled' ? snapRes.value : null;
             if (snap && !snap.error) this._renderVirtualsStats(snap);
@@ -629,10 +631,20 @@ const App = {
                 const el = document.getElementById('trending-base');
                 if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
             }
+            const launch = launchRes.status==='fulfilled' ? launchRes.value : null;
+            if (launch && !launch.error && Array.isArray(launch.tokens)) {
+                this._newLaunches = launch.tokens;
+                this._renderNewLaunches();
+            } else {
+                const el = document.getElementById('new-launches');
+                if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">New-launches data unavailable right now.</div>';
+            }
         } catch(e) {
             this._renderVirtualsUnavailable();
-            const el = document.getElementById('trending-base');
-            if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
+            const trendEl = document.getElementById('trending-base');
+            if (trendEl) trendEl.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
+            const launchEl = document.getElementById('new-launches');
+            if (launchEl) launchEl.innerHTML = '<div class="text-zinc-500 text-sm">New-launches data unavailable right now.</div>';
         }
     },
 
@@ -681,6 +693,36 @@ const App = {
         const holdEl = document.getElementById('v-holders');
         if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span> ${this._scorePill(this._virtualsScore(detail, holders))}`;
         this._renderTopWallets(holders.items || []);
+        this._renderVirtualsSparkline(snap.bars);
+    },
+
+    // Real 30-day daily OHLCV close-price sparkline for VIRTUAL, from the
+    // same /virtuals-snapshot call above (worker/src/lib/codex.ts::tokenBars,
+    // Codex's getBars) — a minimal Chart.js line, no axes/gridlines, since
+    // this is a glance-value sparkline, not a full chart like the protocol
+    // detail modal's. Real data or nothing: skipped entirely on error/empty.
+    // Wrapped in try/catch (unlike the other Chart.js call sites on this
+    // page, which run standalone) because this one runs inside virtuals()'s
+    // shared try block alongside Trending on Base and New Launches — a
+    // blocked/failed Chart.js CDN load must not take those down with it.
+    _renderVirtualsSparkline(bars) {
+        try {
+            const canvas = document.getElementById('virtuals-sparkline');
+            if (!canvas || typeof Chart === 'undefined') return;
+            const points = (bars && !bars.error && Array.isArray(bars.points)) ? bars.points : [];
+            if (this._virtualsSparkChart) { this._virtualsSparkChart.destroy(); this._virtualsSparkChart = null; }
+            if (!points.length) return;
+            const data = points.map(p => p.c);
+            const up = data[data.length-1] >= data[0];
+            this._virtualsSparkChart = new Chart(canvas, {
+                type: 'line',
+                data: { labels: points.map(p => p.t), datasets: [{ data, borderColor: up?'#4ade80':'#fb7185',
+                    fill: false, tension: 0.25, pointRadius: 0, borderWidth: 1.5 }] },
+                options: { responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                    scales: { x: { display: false }, y: { display: false } } },
+            });
+        } catch (e) { /* non-fatal — the rest of the Virtuals panel still stands */ }
     },
 
     // Real top-holder wallets for VIRTUAL, from the same Codex holders() call
@@ -789,6 +831,50 @@ const App = {
                 </div>
             </a>`;
         }).join('') : '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
+    },
+
+    // Human-readable "launched Xh ago" from a unix-seconds createdAt. Real
+    // Codex data or nothing — returns '—' rather than a fabricated guess.
+    _launchAge(createdAt) {
+        if (typeof createdAt !== 'number') return '—';
+        const mins = Math.floor((Date.now()/1000 - createdAt) / 60);
+        if (mins < 60) return `${Math.max(mins,0)}m ago`;
+        if (mins < 1440) return `${Math.floor(mins/60)}h ago`;
+        return `${Math.floor(mins/1440)}d ago`;
+    },
+
+    // Newest tokens on Base by creation time (worker's /new-launches route,
+    // see worker/src/lib/codex.ts::newLaunches) — the real, poll-friendly
+    // launchpad feed that replaced the honest placeholder in
+    // agents/codex_data.py::new_launchpad_tokens(). Reuses
+    // _trendingTokenScore() as-is: brand-new tokens naturally read as
+    // neutral "Fair" (liquidity/marketCap too new to score, not penalized)
+    // unless something's already gone thin or wildly volatile.
+    _renderNewLaunches() {
+        const el = document.getElementById('new-launches');
+        if (!el) return;
+        const items = this._newLaunches;
+        el.innerHTML = items.length ? items.map((t,i) => {
+            const tok = t.token || {};
+            const icon = this._tokenIcon(tok.address, 'base');
+            return `
+            <a href="https://dexscreener.com/base/${this._esc(tok.address||'')}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
+                <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="truncate">${this._esc(tok.symbol||'?')}</span>
+                        ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
+                        ${this._scorePill(this._trendingTokenScore(t))}
+                    </div>
+                    <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
+                </div>
+                <div class="text-right shrink-0 w-16 sm:w-24">
+                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
+                    <div class="text-xs text-zinc-500">${this._launchAge(t.createdAt)}</div>
+                </div>
+            </a>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">No new launches right now.</div>';
     },
 
     _protoSort: 'tvl',
