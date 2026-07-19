@@ -11,7 +11,8 @@
       "chains": [
         "Solana"
       ],
-      "technique": null
+      "technique": null,
+      "analysis_report": "intel/threat-analysis/2026-07-17-across.md"
     },
     {
       "date": "2026-07-16",
@@ -20,7 +21,8 @@
       "chains": [
         "Solana"
       ],
-      "technique": null
+      "technique": null,
+      "analysis_report": "intel/threat-analysis/2026-07-16-defituna-lending.md"
     },
     {
       "date": "2026-07-15",
@@ -36,7 +38,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-15-ostium.md"
     },
     {
       "date": "2026-07-14",
@@ -52,7 +55,8 @@
         "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-14-barnbridge.md"
     },
     {
       "date": "2026-07-14",
@@ -61,7 +65,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Math Mistake Exploit"
+      "technique": "Math Mistake Exploit",
+      "analysis_report": "intel/threat-analysis/2026-07-14-drips-network.md"
     },
     {
       "date": "2026-07-13",
@@ -70,7 +75,8 @@
       "chains": [
         "Arbitrum"
       ],
-      "technique": "Silent Auto-Approval Hack"
+      "technique": "Silent Auto-Approval Hack",
+      "analysis_report": "intel/threat-analysis/2026-07-13-lumi-finance.md"
     },
     {
       "date": "2026-07-13",
@@ -86,7 +92,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-13-chi-protocol.md"
     },
     {
       "date": "2026-07-11",
@@ -102,7 +109,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-11-bonzo-lend.md"
     },
     {
       "date": "2026-07-06",
@@ -118,7 +126,8 @@
         "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-06-bonkdao.md"
     },
     {
       "date": "2026-07-05",
@@ -134,7 +143,8 @@
         "prevention": "Seed vaults with a minimum initial deposit or use virtual shares to block first-depositor share-price manipulation.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-05-lazy-summer-protocol.md"
     },
     {
       "date": "2026-07-02",
@@ -143,7 +153,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "prooflessDeposit() Exploit"
+      "technique": "prooflessDeposit() Exploit",
+      "analysis_report": "intel/threat-analysis/2026-07-02-hinkal.md"
     },
     {
       "date": "2026-06-30",
@@ -152,7 +163,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Flashloan Price Oracle Attack"
+      "technique": "Flashloan Price Oracle Attack",
+      "analysis_report": "intel/threat-analysis/2026-06-30-edel.md"
     },
     {
       "date": "2026-06-28",
@@ -161,7 +173,8 @@
       "chains": [
         "BSC"
       ],
-      "technique": "Burn-from-LP Exploit"
+      "technique": "Burn-from-LP Exploit",
+      "analysis_report": "intel/threat-analysis/2026-06-28-aidc.md"
     },
     {
       "date": "2026-06-25",
@@ -170,7 +183,8 @@
       "chains": [
         "Polygon"
       ],
-      "technique": "Front-end Vulnerability"
+      "technique": "Front-end Vulnerability",
+      "analysis_report": "intel/threat-analysis/2026-06-25-polymarket-international.md"
     },
     {
       "date": "2026-06-25",
@@ -179,7 +193,8 @@
       "chains": [
         "Ethereum"
       ],
-      "technique": "Broken Signature Verification"
+      "technique": "Broken Signature Verification",
+      "analysis_report": "intel/threat-analysis/2026-06-25-lixir-finance.md"
     },
     {
       "date": "2026-06-23",
