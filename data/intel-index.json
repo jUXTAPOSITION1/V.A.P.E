@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T04:23:37Z",
+  "generated": "2026-07-19T04:50:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 415,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 83,
-    "investigations": 231,
+    "investigations": 232,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-010507-0xb2000000.md",
-      "title": "Investigation \u2014 BRIUN",
-      "symbol": "BRIUN",
-      "name": "Briun Amstrong",
-      "date": "2026-07-19T01:05:07Z",
-      "target": "0xb20000000000000000000012141bf387DD37eB01",
+      "file": "investigation-20260719-045003-0x72f3a461.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Bullieve in Base",
+      "date": "2026-07-19T04:50:03Z",
+      "target": "0x72f3a461B2C631dffe9A2A6A95dC816b78279B07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $412 (rug/illiquid); [-10] Low liquidity $412; [-15] Pair only 2.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-010507-0xb2000000.md"
+      "score": "30",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $18,392; [-10] Pair 12.7 days old \u2014 under two w",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-045003-0x72f3a461.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-045003-0x72f3a461.md",
+      "title": "Investigation \u2014 BRIAN",
+      "symbol": "BRIAN",
+      "name": "Bullieve in Base",
+      "date": "2026-07-19T04:50:03Z",
+      "target": "0x72f3a461B2C631dffe9A2A6A95dC816b78279B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $18,392; [-10] Pair 12.7 days old \u2014 under two w",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-045003-0x72f3a461.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-010507-0xb2000000.md",
@@ -593,20 +607,6 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 83271 holders \u2014 reasonably distributed; Deep liquidity ($2,767,968); Trading 298+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-154339-0x49D5c2Bd.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-135907-0x038ad3c2.md",
-      "title": "Investigation \u2014 DOJI",
-      "symbol": "DOJI",
-      "name": "Cobie Dog",
-      "date": "2026-07-16T13:59:07Z",
-      "target": "0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: claude (0x9cb961dD3169e41726e4417d1a6EadeD333B6b07) \u2014 REJECT 35/100 \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-135907-0x038ad3c2.md"
     }
   ],
   "reports": [
