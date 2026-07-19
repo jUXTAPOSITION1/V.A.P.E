@@ -39,12 +39,14 @@ except Exception:
 
 # Multi-provider LLM layer
 try:
-    from agents.llm import ask as _llm_ask, available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER
+    from agents.llm import (ask_oci_grok as _llm_ask_oci_grok,
+                             available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER)
 except Exception:
     try:
-        from llm import ask as _llm_ask, available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER
+        from llm import (ask_oci_grok as _llm_ask_oci_grok,
+                          available as _llm_available, FRONTIER_ORDER as _FRONTIER_ORDER)
     except Exception:
-        _llm_ask = None
+        _llm_ask_oci_grok = None
         _llm_available = lambda: []
         _FRONTIER_ORDER = None
 
@@ -72,13 +74,16 @@ def ask_llm(system, query, tier="fast", temperature=0.7, provider_order=None, ma
     """Prefer the resilient multi-provider layer; fall back to Groq SDK.
 
     provider_order defaults to None (agents.llm's own default ordering);
-    the real report-generation call sites below pass _FRONTIER_ORDER so
-    VAPE's hourly/self-review reports use Grok 4.1 Fast first — see
-    agents/llm.py's module docstring for the full operating policy."""
-    if _llm_ask is not None and _llm_available():
+    the real report-generation call sites below pass _FRONTIER_ORDER. By
+    explicit direction (2026-07-19), OCI-hosted Grok 4.3 is now VAPE's
+    primary reasoning route everywhere, so this goes through
+    agents.llm.ask_oci_grok() (falling back to Vertex-tuned Gemini, then to
+    the given tier/provider_order) rather than a bare ask() call — see
+    agents/llm.py's module docstring for the full chain."""
+    if _llm_ask_oci_grok is not None and _llm_available():
         try:
-            txt, prov = _llm_ask(system, query, tier=tier, temperature=temperature,
-                                 provider_order=provider_order, max_tokens=max_tokens)
+            txt, prov = _llm_ask_oci_grok(system, query, tier=tier, temperature=temperature,
+                                          provider_order=provider_order, max_tokens=max_tokens)
             print(f"[llm:{prov}] ok")
             return txt
         except Exception as e:

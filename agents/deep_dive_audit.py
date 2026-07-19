@@ -4,8 +4,8 @@ VAPE Deep-Dive Bounty Audit — the 50 USDC / 24h-SLA premium offering.
 
 The cheapest 6 x402 offerings and agents/investigate.py's free auto-cycle are all
 deliberately zero/light-LLM, keyless-first, sub-5-minute checks. This is the other
-end of the spectrum: a real frontier-tier model (agents/llm.py::ask_frontier() —
-Gemini 2.5 Pro, Groq as the automatic fallback) reads the contract's ACTUAL verified
+end of the spectrum: a real frontier-tier model (agents/llm.py::ask_oci_grok_frontier() —
+OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback) reads the contract's ACTUAL verified
 source text and reasons about specific vulnerability classes line-by-line, on top of
 every recon signal agents/investigate.py already gathers (GoPlus, DexScreener, on-chain
 presence, hack-technique correlation, public web reputation). Slither runs too, for
@@ -53,12 +53,12 @@ AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "poc-reports")
 try:
     from agents import investigate as inv
     from agents import data_fetchers as DF
-    from agents.llm import ask_frontier
+    from agents.llm import ask_oci_grok_frontier
     from agents.scaffold_foundry_target import scaffold_and_analyze
 except Exception:
     import investigate as inv
     import data_fetchers as DF
-    from llm import ask_frontier
+    from llm import ask_oci_grok_frontier
     from scaffold_foundry_target import scaffold_and_analyze
 
 
@@ -245,7 +245,7 @@ def run_audit(address, chain="8453", callback_url=None):
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result)
     try:
-        narrative, provider = ask_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
+        narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
     except Exception as e:
         narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
 

@@ -198,10 +198,11 @@ _AI_QUICK_REVIEW_SYSTEM = (
 
 def _ai_quick_review(a, chain, assess, src):
     """Frontier-LLM quick read of the actual verified source — same provider
-    chain as the $50 deep-dive (agents/llm.ask_frontier: Gemini 2.5 Pro,
-    Groq fallback), but a far smaller prompt/output budget matched to
-    dossier_check's synchronous, instant-tier nature rather than the
-    bounty's full markdown report."""
+    chain as the $50 deep-dive (agents/llm.ask_oci_grok_frontier: OCI-hosted
+    Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 Pro/Groq as fallback), but
+    a far smaller prompt/output budget matched to dossier_check's
+    synchronous, instant-tier nature rather than the bounty's full markdown
+    report."""
     verif = assess["verif"]
     if not verif.get("checked"):
         return {"available": False, "note": verif.get("note", "contract source unavailable")}
@@ -209,10 +210,10 @@ def _ai_quick_review(a, chain, assess, src):
     if not source_code:
         return {"available": False, "note": "verified but no source text returned"}
     try:
-        from agents.llm import ask_frontier
+        from agents.llm import ask_oci_grok_frontier
     except Exception:
         try:
-            from llm import ask_frontier
+            from llm import ask_oci_grok_frontier
         except Exception:
             return {"available": False, "note": "no LLM provider configured"}
     user = (f"=== TOKEN ===\n{assess.get('symbol') or 'unknown'} / {assess['dex'].get('name') or verif.get('name') or 'unknown'} "
@@ -222,7 +223,7 @@ def _ai_quick_review(a, chain, assess, src):
             "=== RECON RISK FLAGS ===\n" + ("\n".join(assess["reasons"]) or "none") + "\n\n"
             "=== RECON POSITIVE SIGNALS ===\n" + ("\n".join(assess.get("positive_signals") or []) or "none"))
     try:
-        text, provider = ask_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=550, temperature=0.3, timeout=25)
+        text, provider = ask_oci_grok_frontier(_AI_QUICK_REVIEW_SYSTEM, user, max_tokens=550, temperature=0.3, timeout=25)
         return {"available": True, "provider": provider, "summary": text.strip()}
     except Exception as e:
         return {"available": False, "note": f"LLM unavailable this call: {e}"}

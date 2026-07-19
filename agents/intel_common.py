@@ -139,8 +139,11 @@ def fmt_price(value):
 
 
 def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperature=0.55):
-    """Frontier-tier (Grok 4.1 Fast first, via agents/llm.py's FRONTIER_ORDER)
-    narrative synthesis for every intel sweep/report.
+    """OCI-hosted Grok 4.3 first (falling back to VAPE's Vertex-tuned model,
+    then FRONTIER_ORDER — see agents/llm.py::ask_oci_grok()) narrative
+    synthesis for every intel sweep/report that calls this shared helper
+    (broadcast.py, bug_bounty_intel.py, mainnet_patch_check.py,
+    skillforge/toolcheck.py).
 
     `grounding` is the real, already-fetched data this cycle (plain text/
     markdown) — the model is told never to invent a number, name, or date
@@ -162,7 +165,7 @@ def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperatu
     a crash or a fabricated narrative standing in for a real one.
     """
     try:
-        from agents.llm import ask_safe, FRONTIER_ORDER
+        from agents.llm import ask_oci_grok_safe, FRONTIER_ORDER
     except Exception:
         return "_Analyst narrative unavailable this cycle (LLM layer not importable)._"
     system = (
@@ -182,8 +185,8 @@ def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperatu
         "beyond what's factually warranted."
     )
     user = grounding if not instructions else f"{grounding}\n\n---\n{instructions}"
-    text, provider = ask_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                              temperature=temperature, max_tokens=max_tokens)
+    text, provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
+                                        temperature=temperature, max_tokens=max_tokens)
     if (text or "").startswith("[llm unavailable"):
         return "_Analyst narrative unavailable this cycle (no LLM provider reachable)._"
     return text.strip()
