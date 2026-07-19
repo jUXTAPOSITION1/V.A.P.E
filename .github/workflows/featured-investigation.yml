@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: featured-investigation
@@ -22,6 +22,9 @@ jobs:
   investigate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: write
+      id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
     env:
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
@@ -57,7 +60,19 @@ jobs:
           key: npm-research-mcp-${{ runner.os }}
       - name: Install
         run: pip install -r agents/requirements.txt
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Deep Investigation (auto target)
+        # VAPE_VERTEX_ACCESS_TOKEN (from the WIF auth step above) lets
+        # _expert_assessment() try VAPE's own Vertex-tuned model first — see
+        # agents/llm.py::ask_vertex_candidate_safe(); falls back to the
+        # normal frontier chain unchanged if that call ever errors.
+        env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
       # Manual-trigger convenience: force both DATA AGENT instances against a
       # known Base address, bypassing investigate.py's auto-target selection

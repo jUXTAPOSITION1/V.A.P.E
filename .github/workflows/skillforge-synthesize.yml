@@ -6,8 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: skillforge-synthesize
@@ -16,6 +15,10 @@ concurrency:
 jobs:
   synthesize:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
     steps:
       - uses: actions/checkout@v7
         with:
@@ -23,6 +26,12 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Distill skills from real memory
         # No install step needed for the `groq` package anymore — this now
         # goes through agents.llm.ask()'s stdlib-only multi-provider chain
@@ -30,8 +39,13 @@ jobs:
         # a Groq-only rate limit no longer silently skips the day's
         # distillation. All fallback keys passed through same as
         # deep-dive-bounty.yml; any that are unset are simply skipped.
+        # VAPE_VERTEX_ACCESS_TOKEN (from the WIF auth step above) lets
+        # synthesize.py try VAPE's own Vertex-tuned model first — see
+        # agents/llm.py::ask_vertex_candidate(); falls back to the chain
+        # below unchanged if that call ever errors.
         run: python skillforge/synthesize.py
         env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
