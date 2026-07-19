@@ -1,0 +1,51 @@
+name: OCI Grok Candidate Smoke Test
+
+# Manual-only. Sends one real prompt through agents/llm.py::ask_oci_grok()
+# against Oracle Cloud's hosted xAI Grok 4.3 via OCI's OpenAI-compatible
+# Generative AI endpoint. Purely a wiring check — confirms OCI_GENAI_API_KEY
+# (a Bearer secret from OCI's Generative AI service, not the IAM RSA key
+# pair) actually authenticates and the request/response shape is correct
+# against the real endpoint, before anything calls this candidate from
+# production code.
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Prompt to send Grok 4.3'
+        type: string
+        default: 'Reply with the single word: OK'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+
+      - name: Call OCI-hosted Grok 4.3
+        env:
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          # Routed through env: rather than interpolated into `run:` — inputs.prompt
+          # is user-controlled workflow_dispatch text, same shell-injection concern
+          # as vertex-candidate-smoke-test.yml.
+          INPUT_PROMPT: ${{ inputs.prompt }}
+        run: |
+          python3 -c "
+          import os, sys
+          sys.path.insert(0, '.')
+          from agents.llm import ask_oci_grok
+          text, provider = ask_oci_grok('You are a test.', os.environ['INPUT_PROMPT'], max_tokens=200)
+          print(f'[provider={provider}] {text}')
+          if provider != 'oci_grok':
+              print('::warning::did not reach the OCI Grok candidate — fell through to the free chain, check the error printed above')
+          "
