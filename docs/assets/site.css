@@ -160,6 +160,11 @@ section[id] { scroll-margin-top: 4.5rem; }
 }
 a.diff-row { transition: opacity 0.15s ease; }
 a.diff-row:hover { opacity: 0.75; }
+/* A diff-row can also be a real <button> (e.g. a clickable protocol row that
+   opens a detail modal) — reset the browser's default button chrome back to
+   looking like every other plain row, keep the same hover opacity via .card-h. */
+button.diff-row { width: 100%; text-align: left; background: none; border: none;
+    border-bottom: 1px solid var(--border); font: inherit; color: inherit; cursor: pointer; }
 
 /* Chart containers keep a substantial, desktop-like height across all
    breakpoints — Chart.js is told maintainAspectRatio:false and fills this. */

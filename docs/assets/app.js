@@ -25,6 +25,14 @@ const WORKER_BASE = "https://vape-x402.vapex402.workers.dev";
 const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 
+// Shared chart-range map — one source of truth for every range selector on
+// the site (the chain-wide TVL chart and each per-protocol detail chart).
+// '24h' uses the last 2 points since DefiLlama's chain/protocol TVL history
+// is daily granularity, not intraday — this is an honest 2-point "latest
+// day vs the one before," not a real-time reading. 'all' needs no special
+// case: JS's Array.slice(-Infinity) already returns the whole array.
+const RANGE_DAYS = { '24h': 2, '7d': 7, '30d': 30, '90d': 90, '1y': 365, 'all': Infinity };
+
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
 // the paying wallet) so "Portfolio Intelligence" can show a persistent
 // engagement history with no backend — same zero-cost, keyless philosophy as
@@ -59,7 +67,7 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._days||30), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -217,13 +225,13 @@ const App = {
     },
 
     _tvlHist: null, _chart: null,
-    async chart(days=30) {
+    async chart(range='30d') {
         try {
             if (!this._tvlHist) {
                 const raw = await (await fetch('https://api.llama.fi/v2/historicalChainTvl/Base')).json();
                 this._tvlHist = raw.map(p => ({ t: p.date*1000, v: p.tvl }));
             }
-            const slice = this._tvlHist.slice(-days);
+            const slice = this._tvlHist.slice(-(RANGE_DAYS[range] || RANGE_DAYS['30d']));
             const labels = slice.map(p => new Date(p.t).toLocaleDateString(undefined,{month:'short',day:'numeric'}));
             const data = slice.map(p => p.v);
             const ctx = document.getElementById('tvlChart');
@@ -487,6 +495,12 @@ const App = {
             priceChange: { h24: c.price_change_percentage_24h },
             volume: { h24: c.total_volume },
             info: { imageUrl: c.image },
+            // VAPE Score inputs _moverScore() reads — CoinGecko has no direct
+            // liquidity/pair-age field, left null so that function skips them
+            // rather than penalizing a source-side gap.
+            marketCapRank: c.market_cap_rank ?? null,
+            liquidityUsd: null,
+            pairCreatedMs: null,
         }));
         this._renderMovers();
     },
@@ -519,9 +533,37 @@ const App = {
         // Preserve the boost feed's own ranking for the "trending" tab —
         // the tokens/{addrs} lookup above returns pairs in its own order,
         // not the boost ranking, so rebuild from `addrs`.
-        this._movers = addrs.map(a => byToken.get(a)).filter(Boolean);
+        // DexScreener's own pair schema already matches what _renderMovers()
+        // expects (baseToken/priceUsd/priceChange.h24/volume.h24/url/info) —
+        // spread the raw pair through unchanged, just add the VAPE Score
+        // inputs _moverScore() reads that CoinGecko's path can't supply
+        // (real liquidity depth, real pair age) but this source can.
+        this._movers = addrs.map(a => byToken.get(a)).filter(Boolean).map(p => ({
+            ...p, marketCapRank: null, liquidityUsd: p.liquidity?.usd ?? null, pairCreatedMs: p.pairCreatedAt ?? null,
+        }));
         if (!this._movers.length) throw new Error('boosted addresses returned no matching Base pairs');
         this._renderMovers();
+    },
+
+    // VAPE Score for a Base mover — same 0-100/neutral-50/skip-on-missing
+    // shape as _protocolScore(), but deliberately measuring market QUALITY,
+    // not momentum: the tabs already rank by price change/volume, so this
+    // score would just double up on that signal if it rewarded big moves.
+    // Instead it rewards a real, established, liquid market and flags thin
+    // or brand-new pairs as risk — the same "quality/trust" meaning "VAPE
+    // Score"/"Safety score" carries everywhere else on the site.
+    _moverScore(p) {
+        let score = 50;
+        if (typeof p.marketCapRank === 'number' && p.marketCapRank > 0) score += 15;
+        const liq = p.liquidityUsd ?? p.volume?.h24;
+        if (typeof liq === 'number') {
+            if (liq >= 50000) score += 10;
+            else if (liq < 5000) score -= 15;
+        }
+        const chg = p.priceChange?.h24;
+        if (typeof chg === 'number' && Math.abs(chg) >= 50) score -= 10;
+        if (typeof p.pairCreatedMs === 'number' && (Date.now() - p.pairCreatedMs) < 86400000) score -= 10;
+        return Math.max(0, Math.min(100, Math.round(score)));
     },
 
     _renderMovers() {
@@ -541,7 +583,10 @@ const App = {
                 <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
                 ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                 <div class="min-w-0 flex-1">
-                    <div class="truncate">${this._esc(p.baseToken?.symbol||'?')}</div>
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="truncate">${this._esc(p.baseToken?.symbol||'?')}</span>
+                        ${this._scorePill(this._moverScore(p))}
+                    </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(p.baseToken?.name||'')}</div>
                 </div>
                 <div class="text-right shrink-0 w-16 sm:w-24">
@@ -561,52 +606,304 @@ const App = {
         try {
             const list = await (await fetch('https://api.llama.fi/protocols')).json();
             const base = list.filter(p => (p.chains||[]).includes('Base') && p.category!=='CEX' && (p.chainTvls?.Base>0))
-                .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, cat:p.category, logo:p.logo}))
+                .map(p => ({name:p.name, slug:p.slug, tvl:p.chainTvls.Base, c1:p.change_1d, c7:p.change_7d, cat:p.category, logo:p.logo}))
                 .sort((a,b)=>b.tvl-a.tvl).slice(0,8);
+            // Kept for openProtocolReport() to read basic fields (tvl/c1/c7/cat/logo)
+            // without a second /protocols list fetch.
+            this._protoList = base;
             el.innerHTML = base.map((p,i)=>`
-                <div class="card-h diff-row flex items-center gap-2 sm:gap-3">
+                <button onclick="App.openProtocolReport('${p.slug||''}')" class="card-h diff-row flex items-center gap-2 sm:gap-3">
                     <span class="text-zinc-600 text-sm w-4 sm:w-5 shrink-0">${i+1}</span>
-                    ${p.logo?`<img src="${p.logo}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover shrink-0 sm:w-7 sm:h-7" onerror="this.remove()">`:''}
+                    ${p.logo?`<img src="${this._esc(p.logo)}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover shrink-0 sm:w-7 sm:h-7" onerror="this.remove()">`:''}
                     <div class="min-w-0 flex-1">
-                        <div class="truncate">${p.name}</div>
-                        <div class="text-xs text-zinc-500 truncate">${p.cat||''}</div>
+                        <div class="flex items-center gap-2 min-w-0">
+                            <span class="truncate">${this._esc(p.name)}</span>
+                            <span class="proto-score shrink-0"></span>
+                        </div>
+                        <div class="text-xs text-zinc-500 truncate">${this._esc(p.cat||'')}<span class="proto-fees"></span></div>
                     </div>
-                    <div class="spark shrink-0 hidden sm:block" data-slug="${p.slug||''}" style="width:72px;height:26px"></div>
+                    <div class="spark shrink-0 hidden sm:block" data-slug="${this._esc(p.slug||'')}" style="width:72px;height:26px"></div>
                     <div class="text-right shrink-0 w-16 sm:w-24">
                         <div class="stat text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
                         <div class="text-xs">${pct(p.c1)}</div>
                     </div>
-                </div>`).join('');
-            this._sparklines();
+                </button>`).join('');
+            this._enrichProtocols();
         } catch(e){ el.innerHTML = `<div class="text-amber-400 text-sm">Live protocol fetch unavailable.</div>`; }
     },
 
-    _sparkCache: {},
-    async _sparklines() {
+    // Combined per-protocol cache: full TVL history (not just a 14-day
+    // slice — reused by the detail modal's range-selectable chart) + fees
+    // 24h. Same 120ms-staggered fetch loop _sparklines() used to run alone;
+    // now does one extra parallel request (fees) per protocol, still capped
+    // at the 8 rows protocols() renders. Revenue/7d/30d fees and treasury
+    // are deliberately NOT fetched here (kept lazy, per-slug, on modal open
+    // in openProtocolReport()) to avoid ~3x the background requests on every
+    // page load for numbers most visitors will never look at.
+    _protoDetail: {},
+    async _enrichProtocols() {
         const nodes = [...document.querySelectorAll('.spark[data-slug]')].filter(n=>n.dataset.slug && !n._done);
         for (const n of nodes) {
             n._done = true;
             const slug = n.dataset.slug;
+            const row = n.closest('button.diff-row');
             try {
-                let series = this._sparkCache[slug];
-                if (!series) {
-                    const d = await (await fetch(`https://api.llama.fi/protocol/${slug}`)).json();
-                    const ct = d.chainTvls?.Base?.tvl || [];
-                    series = ct.slice(-14).map(x=>x.totalLiquidityUSD||0);
-                    this._sparkCache[slug] = series;
+                let detail = this._protoDetail[slug];
+                if (!detail) {
+                    const [protoRes, feesRes] = await Promise.allSettled([
+                        fetch(`https://api.llama.fi/protocol/${slug}`).then(r=>r.json()),
+                        fetch(`https://api.llama.fi/summary/fees/${slug}?dataType=dailyFees`).then(r=>r.json()),
+                    ]);
+                    const d = protoRes.status==='fulfilled' ? protoRes.value : {};
+                    const f = feesRes.status==='fulfilled' ? feesRes.value : {};
+                    detail = {
+                        // Full history, oldest→newest — _sparklines' own 14-day cap
+                        // used to be applied here; now it's applied only at render
+                        // time (both for this 14-day mini-chart and, unsliced, for
+                        // the detail modal's 24h/7d/30d/90d/1y/all range selector).
+                        tvlHistory: (d.chainTvls?.Base?.tvl || []).map(x=>({t:x.date*1000, v:x.totalLiquidityUSD||0})),
+                        category: d.category, url: d.url, audits: d.audits, auditLinks: d.audit_links,
+                        description: d.description, chains: d.chains, name: d.name, logo: d.logo,
+                        fees24h: (f && !f.error) ? f.total24h : null,
+                    };
+                    this._protoDetail[slug] = detail;
                 }
-                if (series.length < 2) continue;
-                const min=Math.min(...series), max=Math.max(...series), W=72, H=26, pad=2, rng=(max-min)||1;
-                const pts = series.map((v,i)=>{
-                    const x = pad + i*(W-2*pad)/(series.length-1);
-                    const y = H-pad - ((v-min)/rng)*(H-2*pad);
-                    return `${x.toFixed(1)},${y.toFixed(1)}`;
-                }).join(' ');
-                const up = series[series.length-1] >= series[0];
-                const col = up ? '#10b981' : '#fb7185';
-                n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${col}" stroke-width="1.5" points="${pts}"/></svg>`;
+                const series = detail.tvlHistory.slice(-14).map(p=>p.v);
+                if (series.length >= 2) {
+                    const min=Math.min(...series), max=Math.max(...series), W=72, H=26, pad=2, rng=(max-min)||1;
+                    const pts = series.map((v,i)=>{
+                        const x = pad + i*(W-2*pad)/(series.length-1);
+                        const y = H-pad - ((v-min)/rng)*(H-2*pad);
+                        return `${x.toFixed(1)},${y.toFixed(1)}`;
+                    }).join(' ');
+                    const up = series[series.length-1] >= series[0];
+                    n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${up?'#10b981':'#fb7185'}" stroke-width="1.5" points="${pts}"/></svg>`;
+                }
+                const feesEl = row?.querySelector('.proto-fees');
+                if (feesEl && detail.fees24h) feesEl.textContent = ` · Fees 24h ${fmtUsd(detail.fees24h)}`;
+                const scoreEl = row?.querySelector('.proto-score');
+                const p = (this._protoList||[]).find(x=>x.slug===slug);
+                if (scoreEl && p) scoreEl.innerHTML = this._scorePill(this._protocolScore({...p, fees24h: detail.fees24h, audits: detail.audits}));
                 await new Promise(r=>setTimeout(r,120));
             } catch(e){ /* leave blank on failure */ }
+        }
+    },
+
+    // ── VAPE Score — quality/trust indicator, not a momentum signal ────────
+    // 0-100, neutral start at 50, weighted additive factors generalizing
+    // agents/virtuals_sweep.py::compute_health_score()'s pattern (deterministic,
+    // never LLM-guessed) from one specific token to any Base protocol. Any
+    // factor whose real data is missing this cycle is skipped — never
+    // defaulted to a penalty — so a single flaky/untracked field only costs
+    // precision, never direction (same rule that module documents).
+    _protocolScore(p) {
+        let score = 50;
+        if (typeof p.c7 === 'number') {
+            if (p.c7 >= 10) score += 20; else if (p.c7 > 0) score += 10;
+            else if (p.c7 <= -20) score -= 20; else if (p.c7 < 0) score -= 10;
+        }
+        if (typeof p.c1 === 'number') {
+            if (p.c1 >= 5) score += 10; else if (p.c1 > 0) score += 5;
+            else if (p.c1 <= -10) score -= 10; else if (p.c1 < 0) score -= 5;
+        }
+        if (typeof p.fees24h === 'number' && p.fees24h > 0 && p.tvl > 0) {
+            const feeYield = p.fees24h / p.tvl; // daily fee yield — real usage vs parked capital
+            if (feeYield >= 0.001) score += 15; else if (feeYield >= 0.0002) score += 8; else score += 3;
+        }
+        if (p.audits && Number(p.audits) > 0) score += 7;
+        return Math.max(0, Math.min(100, Math.round(score)));
+    },
+
+    // Shared score-pill renderer — same visual language as PROCEED/CAUTION/
+    // REJECT verdicts elsewhere (_verdictColor/_pill), reused by both
+    // protocol rows and Base Movers rows so "VAPE Score" reads consistently
+    // site-wide regardless of what it's scoring.
+    _scoreBand(score) {
+        if (score >= 70) return { label: 'Strong', color: '#10b981' };
+        if (score >= 40) return { label: 'Fair', color: '#fbbf24' };
+        return { label: 'Weak', color: '#fb7185' };
+    },
+    _scorePill(score) {
+        if (typeof score !== 'number') return '';
+        const b = this._scoreBand(score);
+        return `<span class="px-1.5 py-0.5 border text-[10px] whitespace-nowrap" style="color:${b.color};border-color:${b.color}" title="VAPE Score: ${b.label}">VAPE ${score}</span>`;
+    },
+
+    // One-line, human-readable list of which VAPE Score factors actually
+    // fired for this protocol, so the modal doesn't just show a bare number.
+    _scoreBreakdown(p) {
+        const parts = [];
+        if (typeof p.c7 === 'number') parts.push(p.c7 > 0 ? 'TVL 7d ↑' : p.c7 < 0 ? 'TVL 7d ↓' : 'TVL 7d flat');
+        if (typeof p.fees24h === 'number' && p.fees24h > 0 && p.tvl > 0) {
+            const y = p.fees24h / p.tvl;
+            parts.push(y >= 0.001 ? 'fees/TVL strong' : y >= 0.0002 ? 'fees/TVL moderate' : 'fees/TVL thin');
+        }
+        if (p.audits && Number(p.audits) > 0) parts.push('audited');
+        return parts.length ? parts.join(' · ') : 'insufficient data for a full breakdown';
+    },
+
+    // Ensures _protoDetail[slug] exists even if the user clicks a protocol
+    // row before _enrichProtocols()'s staggered loop has reached it yet —
+    // same fetch/shape as that loop, just triggered on demand instead of
+    // waiting a turn.
+    async _ensureProtoDetail(slug) {
+        if (this._protoDetail[slug]) return this._protoDetail[slug];
+        const [protoRes, feesRes] = await Promise.allSettled([
+            fetch(`https://api.llama.fi/protocol/${slug}`).then(r=>r.json()),
+            fetch(`https://api.llama.fi/summary/fees/${slug}?dataType=dailyFees`).then(r=>r.json()),
+        ]);
+        const d = protoRes.status==='fulfilled' ? protoRes.value : {};
+        const f = feesRes.status==='fulfilled' ? feesRes.value : {};
+        const detail = {
+            tvlHistory: (d.chainTvls?.Base?.tvl || []).map(x=>({t:x.date*1000, v:x.totalLiquidityUSD||0})),
+            category: d.category, url: d.url, audits: d.audits, auditLinks: d.audit_links,
+            description: d.description, chains: d.chains, name: d.name, logo: d.logo,
+            fees24h: (f && !f.error) ? f.total24h : null,
+        };
+        this._protoDetail[slug] = detail;
+        return detail;
+    },
+
+    // Lazy, once-per-slug fetch of the heavier numbers most visitors never
+    // look at (7d/30d fees, revenue, treasury) — only pulled when a user
+    // actually opens this protocol's detail modal, cached on the same
+    // _protoDetail[slug] record so reopening is instant.
+    async _ensureProtoExtras(slug) {
+        const detail = this._protoDetail[slug];
+        if (!detail || detail.extrasFetchedAt) return detail;
+        const [feesRes, revRes, treasuryRes] = await Promise.allSettled([
+            fetch(`https://api.llama.fi/summary/fees/${slug}?dataType=dailyFees`).then(r=>r.json()),
+            fetch(`https://api.llama.fi/summary/fees/${slug}?dataType=dailyRevenue`).then(r=>r.json()),
+            fetch(`https://api.llama.fi/treasury/${slug}`).then(r=>r.json()),
+        ]);
+        const f = feesRes.status==='fulfilled' ? feesRes.value : {};
+        if (f && !f.error) { detail.fees7d = f.total7d; detail.fees30d = f.total30d; }
+        const rev = revRes.status==='fulfilled' ? revRes.value : {};
+        if (rev && !rev.error) { detail.revenue24h = rev.total24h; detail.revenue7d = rev.total7d; detail.revenue30d = rev.total30d; }
+        const t = treasuryRes.status==='fulfilled' ? treasuryRes.value : {};
+        if (t && !t.error) {
+            // Mirrors agents/defillama.py::treasury()'s exact math: sum only
+            // plain per-chain totals, excluding the "OwnTokens"/"<chain>-OwnTokens"
+            // breakdown keys already folded into those totals (summing both
+            // would double-count and inflate treasury_usd / skew own_token_share).
+            const tvls = t.currentChainTvls || {};
+            const own = tvls.OwnTokens || tvls.ownTokens || 0;
+            const total = Object.entries(tvls).reduce((sum,[k,v]) =>
+                (typeof v === 'number' && k !== 'OwnTokens' && k !== 'ownTokens' && !k.endsWith('-OwnTokens')) ? sum+v : sum, 0);
+            if (total) detail.treasuryUsd = total, detail.ownTokenShare = own/total;
+        }
+        detail.extrasFetchedAt = Date.now();
+        return detail;
+    },
+
+    _protoModal: null, _protoModalChart: null,
+    _closeProtocolModal() {
+        if (this._protoModalChart) { this._protoModalChart.destroy(); this._protoModalChart = null; }
+        if (this._protoModal) { this._protoModal.remove(); this._protoModal = null; }
+    },
+
+    _renderProtoChart(slug, range) {
+        const detail = this._protoDetail[slug];
+        const canvas = document.getElementById('proto-report-chart');
+        if (!detail || !canvas || !detail.tvlHistory.length) return;
+        const slice = detail.tvlHistory.slice(-(RANGE_DAYS[range] || RANGE_DAYS['30d']));
+        const labels = slice.map(p => new Date(p.t).toLocaleDateString(undefined,{month:'short',day:'numeric'}));
+        const data = slice.map(p => p.v);
+        if (this._protoModalChart) this._protoModalChart.destroy();
+        const g = canvas.getContext('2d').createLinearGradient(0,0,0,200);
+        g.addColorStop(0,'rgba(74,222,128,0.30)'); g.addColorStop(1,'rgba(74,222,128,0)');
+        this._protoModalChart = new Chart(canvas, {
+            type:'line',
+            data:{ labels, datasets:[{ data, borderColor:'#4ade80', backgroundColor:g, fill:true, tension:0.25, pointRadius:0, borderWidth:2 }]},
+            options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},
+                tooltip:{callbacks:{label:c=>fmtUsd(c.parsed.y)}}},
+                scales:{ y:{ticks:{color:'#52525b',callback:v=>fmtUsd(v)},grid:{color:'rgba(255,255,255,0.04)'}},
+                         x:{ticks:{color:'#52525b',maxTicksLimit:8},grid:{display:false}} } }
+        });
+    },
+
+    // Read-only protocol detail report — same .popover-over-backdrop modal
+    // shell docs/assets/hire.js established for commerce flows, reused here
+    // for a free, no-wallet, no-payment informational view.
+    async openProtocolReport(slug) {
+        this._closeProtocolModal();
+        const base = (this._protoList || []).find(x => x.slug === slug) || { slug };
+        const modal = document.createElement('div');
+        modal.id = 'protocol-report-modal';
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
+        modal.innerHTML = `
+            <div class="absolute inset-0 bg-black/70" data-close></div>
+            <div class="relative popover p-6 w-full max-w-lg max-h-[85vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg flex items-center gap-2">
+                        ${base.logo?`<img src="${this._esc(base.logo)}" alt="" width="24" height="24" class="rounded-full bg-white/5 object-cover" onerror="this.remove()">`:''}
+                        ${this._esc(base.name || slug)}
+                    </h3>
+                    <button data-close class="text-zinc-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="proto-report-body" class="text-sm text-zinc-400">Loading…</div>
+            </div>`;
+        document.body.appendChild(modal);
+        this._protoModal = modal;
+        modal.querySelectorAll('[data-close]').forEach(el => el.onclick = () => this._closeProtocolModal());
+
+        const body = document.getElementById('proto-report-body');
+        try {
+            const detail = await this._ensureProtoDetail(slug);
+            const scoreInput = { ...base, fees24h: detail.fees24h, audits: detail.audits };
+            const score = this._protocolScore(scoreInput);
+            body.innerHTML = `
+                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                    ${this._scorePill(score)}
+                    <span class="text-xs text-zinc-500">${this._esc(this._scoreBreakdown(scoreInput))}</span>
+                </div>
+                <div class="stat-line mb-5 pb-5 border-b border-white/10">
+                    <span class="stat-pair"><span class="stat-label">tvl</span><span class="stat-value">${fmtUsd(base.tvl)}</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees 24h</span><span id="proto-fees24" class="stat-value">${detail.fees24h!=null?fmtUsd(detail.fees24h):'—'}</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees 7d</span><span id="proto-fees7" class="stat-value">…</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees 30d</span><span id="proto-fees30" class="stat-value">…</span></span>
+                    <span class="stat-pair"><span class="stat-label">audits</span><span class="stat-value">${detail.audits?this._esc(String(detail.audits)):'—'}</span></span>
+                </div>
+                <div id="proto-treasury" class="text-xs text-zinc-500 mb-5"></div>
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-xs text-zinc-500 uppercase tracking-wider">TVL trend</h4>
+                    <div class="flex gap-1 text-[11px]" id="proto-report-range">
+                        <button data-d="24h" class="term-btn term-btn-sm">24h</button>
+                        <button data-d="7d" class="term-btn term-btn-sm">7d</button>
+                        <button data-d="30d" class="term-btn term-btn-sm term-btn-active">30d</button>
+                        <button data-d="90d" class="term-btn term-btn-sm">90d</button>
+                        <button data-d="1y" class="term-btn term-btn-sm">1y</button>
+                        <button data-d="all" class="term-btn term-btn-sm">All</button>
+                    </div>
+                </div>
+                <div class="chart-shell-sm mb-5"><canvas id="proto-report-chart"></canvas></div>
+                ${detail.description?`<p class="text-xs text-zinc-500 mb-4 leading-relaxed">${this._esc(detail.description)}</p>`:''}
+                <div class="flex gap-2 flex-wrap text-xs">
+                    ${detail.url?`<a href="${this._esc(detail.url)}" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Website</a>`:''}
+                    <a href="https://defillama.com/protocol/${slug}" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> DefiLlama</a>
+                    ${(detail.auditLinks||[]).slice(0,2).map(u=>`<a href="${this._esc(u)}" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-shield-halved"></i> Audit</a>`).join('')}
+                </div>`;
+            this._renderProtoChart(slug, '30d');
+            document.getElementById('proto-report-range').addEventListener('click', e => {
+                const b = e.target.closest('button'); if (!b) return;
+                [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+                b.className='term-btn term-btn-sm term-btn-active';
+                this._renderProtoChart(slug, b.dataset.d);
+            });
+
+            // Lazy extras (7d/30d fees, revenue, treasury) — fetched after the
+            // core view above is already visible, so a slow/failed extra
+            // fetch never blocks or breaks the rest of the modal.
+            this._ensureProtoExtras(slug).then(d => {
+                const f7 = document.getElementById('proto-fees7'); if (f7) f7.textContent = d.fees7d!=null?fmtUsd(d.fees7d):'—';
+                const f30 = document.getElementById('proto-fees30'); if (f30) f30.textContent = d.fees30d!=null?fmtUsd(d.fees30d):'—';
+                const tEl = document.getElementById('proto-treasury');
+                if (tEl && d.treasuryUsd) {
+                    tEl.textContent = `Treasury ${fmtUsd(d.treasuryUsd)}` + (d.ownTokenShare!=null ? ` · ${(d.ownTokenShare*100).toFixed(0)}% own-token` : '');
+                }
+            }).catch(()=>{});
+        } catch(e) {
+            body.innerHTML = '<div class="text-amber-400 text-sm">Protocol detail unavailable right now.</div>';
         }
     },
 
@@ -997,10 +1294,10 @@ window.addEventListener('load', () => {
     // chart range buttons
     document.getElementById('tvl-range').addEventListener('click', e => {
         const b = e.target.closest('button'); if (!b) return;
-        App._days = +b.dataset.d;
+        App._chartRange = b.dataset.d;
         [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
         b.className='term-btn term-btn-sm term-btn-active';
-        App.chart(App._days);
+        App.chart(App._chartRange);
     });
     // Base Movers tab switching — re-sorts the already-fetched set, no new request
     document.getElementById('movers-tabs').addEventListener('click', e => {

@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=1">
+    <link rel="stylesheet" href="assets/site.css?v=2">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -442,19 +442,24 @@
                 <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
                     <h3 class="text-sm text-zinc-500">Base TVL Trend <span class="text-zinc-600">· DefiLlama</span></h3>
                     <div class="flex gap-1 text-[11px]" id="tvl-range">
-                        <button data-d="30" class="term-btn term-btn-sm term-btn-active">30d</button>
-                        <button data-d="90" class="term-btn term-btn-sm">90d</button>
-                        <button data-d="365" class="term-btn term-btn-sm">1y</button>
+                        <button data-d="24h" class="term-btn term-btn-sm">24h</button>
+                        <button data-d="7d" class="term-btn term-btn-sm">7d</button>
+                        <button data-d="30d" class="term-btn term-btn-sm term-btn-active">30d</button>
+                        <button data-d="90d" class="term-btn term-btn-sm">90d</button>
+                        <button data-d="1y" class="term-btn term-btn-sm">1y</button>
+                        <button data-d="all" class="term-btn term-btn-sm">All</button>
                     </div>
                 </div>
                 <div class="chart-shell"><canvas id="tvlChart"></canvas></div>
             </section>
 
             <section class="panel-sm">
-                <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+                <div class="flex items-center justify-between mb-2 flex-wrap gap-3">
                     <h3 class="text-sm text-zinc-500">Top Base Protocols</h3>
                     <button onclick="App.refresh()" class="term-btn term-btn-sm"><i class="fa-solid fa-rotate"></i> Refresh</button>
                 </div>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">TVL, real fees generated, and a VAPE Score quality signal for each —
+                click any row for a full report with its own 24h→all-time chart.</p>
                 <div id="protocols" class="diff-list">
                     <div class="skeleton h-12 my-1"></div>
                     <div class="skeleton h-12 my-1"></div>
@@ -473,7 +478,7 @@
                     </div>
                 </div>
                 <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most actively promoted token pairs on Base right now, re-ranked live by
-                24-hour price change and trading volume.</p>
+                24-hour price change and trading volume — each carries its own VAPE Score, a market-quality signal (real liquidity, pair age) independent of the momentum ranking.</p>
                 <div id="base-movers" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -633,7 +638,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=11"></script>
+    <script src="assets/app.js?v=12"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
