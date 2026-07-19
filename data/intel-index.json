@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T15:04:07Z",
+  "generated": "2026-07-19T15:32:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 422,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 85,
-    "investigations": 237,
+    "investigations": 238,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-140230-0xB2000000.md",
-      "title": "Investigation \u2014 BASELLER",
-      "symbol": "BASELLER",
-      "name": "Baseller",
-      "date": "2026-07-19T14:02:30Z",
-      "target": "0xB2000000000000000000002b40e71C8F8609a1C8",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-140230-0xB2000000.md"
+      "file": "investigation-20260719-153203-0x420FcA01.md",
+      "title": "Investigation \u2014 COQ",
+      "symbol": "COQ",
+      "name": "COQINU",
+      "date": "2026-07-19T15:32:03Z",
+      "target": "0x420FcA0121DC28039145009570975747295f2329",
+      "chain": "43114 (Avalanche)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 109963 holders \u2014 reasonably distributed; Trading 955+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 954+ days ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-153203-0x420FcA01.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-153203-0x420FcA01.md",
+      "title": "Investigation \u2014 COQ",
+      "symbol": "COQ",
+      "name": "COQINU",
+      "date": "2026-07-19T15:32:03Z",
+      "target": "0x420FcA0121DC28039145009570975747295f2329",
+      "chain": "43114 (Avalanche)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 109963 holders \u2014 reasonably distributed; Trading 955+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 954+ days ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-153203-0x420FcA01.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-140230-0xB2000000.md",
@@ -593,20 +607,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 42784 holders \u2014 reasonably distributed; Deep liquidity ($653,197); Trading 247+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 366+ days \u2014 inde",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-034752-0x6fBBbD8b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-000720-0x0f020434.md",
-      "title": "Investigation \u2014 YIELD",
-      "symbol": "YIELD",
-      "name": "Private Yield",
-      "date": "2026-07-17T00:07:20Z",
-      "target": "0x0f020434fFa8649B6994781EeD1D1522411807Ee",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-20] Very few holders (20) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-000720-0x0f020434.md"
     }
   ],
   "reports": [

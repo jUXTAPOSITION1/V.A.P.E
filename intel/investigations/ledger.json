@@ -618,6 +618,25 @@
     "symbol": "BTC.b",
     "times_investigated": 1
   },
+  "43114:0x420fca0121dc28039145009570975747295f2329": {
+    "address": "0x420FcA0121DC28039145009570975747295f2329",
+    "chain": "43114",
+    "creator_address": "0x522bd75da0852ba6249403d0f0d8e257216dae9a",
+    "first_investigated": "2026-07-19T15:32:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-153203-0x420FcA01.md",
+        "score": 100,
+        "ts": "2026-07-19T15:32:03Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-19T15:32:03Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "COQ",
+    "times_investigated": 1
+  },
   "43114:0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab": {
     "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
     "chain": "43114",
