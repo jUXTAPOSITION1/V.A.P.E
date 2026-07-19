@@ -287,20 +287,27 @@ export const DL_OFFERINGS: DlOffering[] = [
     },
     inputExample: { address: "0x0000000000000000000000000000000000000000", chain: "base" },
     output: {
-      address: "0x...", networkId: 8453,
+      address: "0x...", network_id: 8453,
       balances: { items: [{ symbol: "AERO", shiftedBalance: 120.5, balanceUsd: 45.6 }] },
-      pnl: { realizedProfitUsd: 1234.5, realizedProfitPct: 12.3, volumeUsd: 50000, tokensTraded: 7 },
+      pnl: { realized_profit_usd: 1234.5, realized_profit_pct: 12.3, volume_usd: 50000, tokens_traded: 7 },
       pnl_chart: { points: [{ timestamp: 1720000000, realizedProfitUsd: 100 }] },
     },
     run: async (q, env) => {
       const a = requireAddress(q);
-      const networkId = CHAIN_NETWORK_IDS[(q.chain || "base").toLowerCase()] ?? codex.BASE_NETWORK_ID;
+      const networkId = CHAIN_NETWORK_IDS[String(q.chain || "base").toLowerCase()] ?? codex.BASE_NETWORK_ID;
       const [balances, pnl, pnlChart] = await Promise.all([
         codex.walletBalances(env.CODEX_API_KEY, a, [networkId]),
         codex.walletPnlStats(env.CODEX_API_KEY, a, networkId),
         codex.walletPnlChart(env.CODEX_API_KEY, a, networkId),
       ]);
-      return { address: a, networkId, balances, pnl, pnl_chart: pnlChart };
+      // Codex functions never throw (design law: real data or an honest
+      // {error} object) — but that means a missing key/upstream miss would
+      // otherwise sail through as a "successful" $0.25 deliverable. Surface
+      // it as a real failure so the buyer isn't charged for an error.
+      for (const r of [balances, pnl, pnlChart]) {
+        if (r && typeof r === "object" && "error" in r) throw new Error(String((r as { error: unknown }).error));
+      }
+      return { address: a, network_id: networkId, balances, pnl, pnl_chart: pnlChart };
     },
   },
 ];

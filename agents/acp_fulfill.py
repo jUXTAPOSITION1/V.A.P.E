@@ -424,7 +424,7 @@ def _bridges(req):
 def _codex():
     try:
         from agents import codex_data as _m
-    except Exception:
+    except ImportError:
         import codex_data as _m
     return _m
 
@@ -445,12 +445,21 @@ def _wallet_pnl_deepdive(req):
         return {"error": "no wallet address in requirement"}
     network_id = _CODEX_NETWORK_IDS.get(_dl_chain(req, "base").lower(), 8453)
     m = _codex()
+    balances = m.wallet_balances(a, [network_id])
+    pnl = m.wallet_pnl_stats(a, network_id)
+    pnl_chart = m.wallet_pnl_chart(a, network_id)
+    # codex_data functions never raise (real data or an honest {error} dict) —
+    # surface that error as a real failure instead of a "successful" $0.25
+    # deliverable, same design law already enforced elsewhere in this file.
+    for r in (balances, pnl, pnl_chart):
+        if isinstance(r, dict) and r.get("error"):
+            raise ValueError(r["error"])
     return {
         "address": a,
         "network_id": network_id,
-        "balances": m.wallet_balances(a, [network_id]),
-        "pnl": m.wallet_pnl_stats(a, network_id),
-        "pnl_chart": m.wallet_pnl_chart(a, network_id),
+        "balances": balances,
+        "pnl": pnl,
+        "pnl_chart": pnl_chart,
     }
 
 
