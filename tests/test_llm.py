@@ -350,6 +350,10 @@ class TestVertexTunedCandidate:
     def test_reaches_vertex_when_token_set(self, monkeypatch, tmp_path):
         monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
         monkeypatch.setattr(llm, "USAGE_LOG", str(tmp_path / "llm_usage.jsonl"))
+        # Hermetic: don't depend on the real, regenerable repo_digest.md —
+        # the repo-digest prepending behavior itself has its own dedicated
+        # tests below.
+        monkeypatch.setattr(llm, "_load_repo_digest", lambda: "")
         captured = {}
 
         def fake_urlopen(req, timeout=None):
@@ -454,3 +458,80 @@ class TestVertexTunedCandidate:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_vertex_candidate("sys", "usr")
         assert "INVALID_ARGUMENT" in capsys.readouterr().err
+
+
+class TestRepoDigest:
+    """The real, regenerable repo-grounding doc (scripts/build_repo_digest.py)
+    prepended ONLY to the Vertex candidate's systemInstruction — never the
+    frontier ask()/ask_frontier() chain, per the explicit "only vertex"
+    scope this was built to."""
+
+    def setup_method(self):
+        # _load_repo_digest() memoizes in a module global — reset it before
+        # each test so tests don't leak state into each other regardless of
+        # execution order.
+        llm._repo_digest_cache = None
+
+    def teardown_method(self):
+        llm._repo_digest_cache = None
+
+    def test_load_repo_digest_returns_empty_string_when_file_missing(self, monkeypatch, tmp_path):
+        monkeypatch.setattr(llm, "REPO_DIGEST_PATH", str(tmp_path / "does-not-exist.md"))
+        assert llm._load_repo_digest() == ""
+
+    def test_load_repo_digest_reads_real_file_and_caches(self, monkeypatch, tmp_path):
+        digest_path = tmp_path / "repo_digest.md"
+        digest_path.write_text("REAL DIGEST CONTENT")
+        monkeypatch.setattr(llm, "REPO_DIGEST_PATH", str(digest_path))
+        assert llm._load_repo_digest() == "REAL DIGEST CONTENT"
+        # Mutate the file after the first read — cached value must not change,
+        # confirming this doesn't re-read the file on every single LLM call.
+        digest_path.write_text("CHANGED")
+        assert llm._load_repo_digest() == "REAL DIGEST CONTENT"
+
+    def test_digest_is_prepended_to_vertex_system_instruction_when_present(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setattr(llm, "_load_repo_digest", lambda: "REAL REPO DIGEST TEXT")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_vertex_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("my real instructions", "usr")
+        system_text = captured["body"]["systemInstruction"]["parts"][0]["text"]
+        assert "REAL REPO DIGEST TEXT" in system_text
+        assert "my real instructions" in system_text
+
+    def test_no_digest_means_bare_system_text_unchanged(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setattr(llm, "_load_repo_digest", lambda: "")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_vertex_response("ok")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("sys prompt", "usr")
+        assert captured["body"]["systemInstruction"] == {"parts": [{"text": "sys prompt"}]}
+
+    def test_frontier_chain_never_sees_the_repo_digest(self, monkeypatch):
+        """The digest is scoped to _call_vertex_tuned() only — a bare
+        ask()/ask_frontier() call (what every real production call site
+        other than the 3 Vertex-wired ones still uses) must never have it
+        injected."""
+        monkeypatch.setattr(llm, "_load_repo_digest", lambda: "REPO DIGEST SHOULD NOT APPEAR")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("plain reply")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask("sys prompt", "usr")
+        system_sent = captured["body"]["messages"][0]["content"]
+        assert system_sent == "sys prompt"
+        assert "REPO DIGEST" not in system_sent

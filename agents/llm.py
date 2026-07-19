@@ -451,6 +451,31 @@ VERTEX_TUNED_DEFAULT_LOCATION = "us"
 VERTEX_TUNED_DEFAULT_ENDPOINT_ID = "7011119457397374976"
 
 
+REPO_DIGEST_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                "skillforge", "memory", "repo_digest.md")
+_repo_digest_cache = None
+
+
+def _load_repo_digest():
+    """Real, regenerable grounding doc (scripts/build_repo_digest.py) —
+    architecture docs verbatim + every module's own real docstring + a real
+    directory tree. Deliberately only prepended for the Vertex candidate
+    (below), not the frontier ask()/ask_frontier() chain — this is scoped
+    grounding for the one model that otherwise starts every stateless call
+    with zero repo awareness, not a change to every LLM call site's prompt.
+    Cached per-process (this file doesn't change mid-run); a missing file is
+    a silent empty string, never a hard failure, since a stale/absent digest
+    should degrade to "no extra context" rather than break the whole call."""
+    global _repo_digest_cache
+    if _repo_digest_cache is None:
+        try:
+            with open(REPO_DIGEST_PATH, encoding="utf-8") as f:
+                _repo_digest_cache = f.read()
+        except OSError:
+            _repo_digest_cache = ""
+    return _repo_digest_cache
+
+
 def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
     """Vertex AI's generateContent isn't OpenAI-compatible (Bearer OAuth
     access token rather than a static API key; contents/systemInstruction
@@ -478,9 +503,16 @@ def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
         host = f"{location}-aiplatform.googleapis.com"
     url = (f"https://{host}/v1/projects/{project}"
            f"/locations/{location}/endpoints/{endpoint_id}:generateContent")
+    digest = _load_repo_digest()
+    system_text = (
+        f"{digest}\n\n---\n\nEverything above this line is real, generated grounding "
+        f"context about VAPE's own repository (scripts/build_repo_digest.py) — reference "
+        f"it for architecture/module awareness, but the instructions below are what this "
+        f"specific call actually asks you to do.\n\n{system}"
+    ) if digest else system
     payload = json.dumps({
         "contents": [{"role": "user", "parts": [{"text": user}]}],
-        "systemInstruction": {"parts": [{"text": system}]},
+        "systemInstruction": {"parts": [{"text": system_text}]},
         "generationConfig": {"temperature": temperature, "maxOutputTokens": max_tokens},
     }).encode()
     req = urllib.request.Request(url, data=payload, headers={
