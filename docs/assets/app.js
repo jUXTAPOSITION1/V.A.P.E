@@ -639,10 +639,14 @@ const App = {
     // Swaps the four skeleton stat spans for an honest "unavailable" line —
     // this panel has no keyless fallback (Codex needs a worker-side key), so
     // an error here should read as "not available", not sit as a permanent
-    // skeleton that looks like it's still loading.
+    // skeleton that looks like it's still loading. Top Wallets is sourced
+    // from this same /virtuals-snapshot call (see _renderVirtualsStats),
+    // so it needs the same honest fallback here too, not just the stats line.
     _renderVirtualsUnavailable() {
         const el = document.getElementById('virtuals-stats');
         if (el) el.innerHTML = '<span class="text-zinc-500 text-sm">Unavailable right now.</span>';
+        const walletsEl = document.getElementById('virtuals-top-wallets');
+        if (walletsEl) walletsEl.innerHTML = '<div class="text-zinc-500 text-sm">Holder data unavailable right now.</div>';
     },
 
     // 0-100, neutral start 50 — VIRTUAL's health from Codex-native signals:
