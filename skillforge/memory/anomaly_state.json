@@ -16,8 +16,8 @@
     "value": -51.915
   },
   "mover:Baseller / WETH 0.01%": {
-    "ts": "2026-07-19T13:44:46Z",
-    "value": 1317.301
+    "ts": "2026-07-19T14:57:11Z",
+    "value": 1697.66
   },
   "mover:COBIE / WETH 0.01%": {
     "ts": "2026-07-18T17:06:55Z",
@@ -38,6 +38,10 @@
   "mover:TSG / WETH": {
     "ts": "2026-07-18T11:53:33Z",
     "value": 91.663
+  },
+  "mover:VORF / WETH 0.01%": {
+    "ts": "2026-07-19T14:57:11Z",
+    "value": 819.201
   },
   "mover:mr_lightspeed / ZORA 1%": {
     "ts": "2026-07-17T23:58:32Z",
