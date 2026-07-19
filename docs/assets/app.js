@@ -651,14 +651,19 @@ const App = {
                        .sort((a,b)=>(b.bountyFitScore||0)-(a.bountyFitScore||0)).slice(0,12);
             if (!data.length) throw 0;
             const opsMap = await this._loadBountyOps();
+            // Keyed lookup so docs/assets/hire.js::openBountyOps() can read back
+            // full program context (name/platform/prize/vapeFitReason/tags) by
+            // slug without stuffing a JSON blob into an inline onclick string.
+            this._bountyOpsList = {};
             el.innerHTML = data.map(b=>{
                 const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                this._bountyOpsList[slug] = b;
                 const ops = opsMap[slug];
                 const done = ops ? (ops.checklist||[]).filter(i=>i.done).length : 0;
                 const total = ops ? (ops.checklist||[]).length : 0;
                 const search = `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase();
                 return `
-                <a href="${b.url||'#'}" target="_blank" data-search="${this._esc(search)}" class="card-h diff-row block">
+                <div data-search="${this._esc(search)}" class="diff-row">
                     <div class="flex items-start justify-between gap-2">
                         <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
                         <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
@@ -670,7 +675,11 @@ const App = {
                         <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
                         ${ops.vapeReportUrl?`<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
                     </div>`:''}
-                </a>`;
+                    <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
+                        <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
+                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-emerald-500/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
+                    </div>
+                </div>`;
             }).join('');
             if (searchEl) {
                 searchEl.classList.remove('hidden');

@@ -123,8 +123,8 @@ OFFERINGS = [
     ("bulk_safety_bundle", 0.50, "Scan 5-25 tokens in one job, 40% off"),
     ("deep_contract_audit", 1.00, "slither+aderyn+mythril severity-rated audit + 0-100 score"),
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
-    ("bounty_deep_dive", 50.00, "24h-SLA premium audit: full recon + Slither + frontier-model "
-     "line-by-line source review, real report"),
+    ("bounty_deep_dive", 1.00, "Submission-ready PoC and full technical detail: full recon + "
+     "Slither + frontier-model line-by-line source review, real committed report"),
     *DL_OFFERINGS,
 ]
 
@@ -294,7 +294,7 @@ def main():
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
                  "data": n in DL_NAMES,
-                 "sla": "24h (async, frontier-model)" if n == "bounty_deep_dive" else "instant",
+                 "sla": "async — no fixed SLA (frontier-model)" if n == "bounty_deep_dive" else "instant",
                  **({"directory_url": f"https://402index.io/service/{_402INDEX_SERVICE_IDS[n]}"}
                     if n in _402INDEX_SERVICE_IDS else {})}
                 for n, p, s in OFFERINGS

@@ -95,11 +95,14 @@ USDC, real settlement transactions.
 ```
 
 The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
-$0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
-`.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
+$0.01-$0.10) + `bounty_deep_dive` ($1, async — pays, then dispatches either
+`.github/workflows/deep-dive-bounty.yml` (an on-chain address target — real
 Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
-Aderyn static AST analysis + frontier-model source review can't finish inside
-a Worker's request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
+Aderyn static AST analysis + frontier-model source review) or
+`.github/workflows/external-bounty-audit.yml` (a GitHub owner/repo target,
+e.g. Move/Sui or any bounty program's own source repo — `agents/external_audit.py`),
+returning immediately either way since neither can finish inside a Worker's
+request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
 `chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
 retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
 with no free equivalent). Advertised for discovery
@@ -268,7 +271,7 @@ the hourly cycle.
   small number of CAUTION-verdict entries already in `investigate.py`'s own ledger (real
   addresses from the free hourly auto-cycle) to `deep_dive_audit.py`'s full heavy tool
   suite (Slither/Halmos/Mythril/Aderyn + OCI Grok 4.3 frontier reasoning) — the same
-  pipeline paying x402/ACP buyers get for the $50 `bounty_deep_dive` offering, run here
+  pipeline paying x402/ACP buyers get for the $1 `bounty_deep_dive` offering, run here
   free against VAPE's own initiative (`engagement="sweep"`, reports land in
   `intel/audits/hack-sweep-reports/`, clearly labeled as non-paid). Own dedup state
   (`skillforge/memory/hack_sweep_state.json`) and daily schedule (`hack-sweep.yml`).
@@ -282,15 +285,20 @@ the hourly cycle.
   from what it doesn't). Deliberately does not invoke Slither/Mythril/Aderyn/Halmos —
   those are Solidity-specific and need either a live on-chain address or a compilable
   Foundry project; a genuinely Solidity on-chain target should go through
-  `deep_dive_audit.py` instead. For Move targets, also runs bounded formal verification
+  `deep_dive_audit.py` instead. Reachable two ways: manual `workflow_dispatch`
+  (`external-bounty-audit.yml`) for a deliberate scoped engagement, or the same
+  x402 `/scan/bounty_deep_dive` route as `deep_dive_audit.py` — supply an
+  `owner`+`repo` instead of an `address` and the worker dispatches this pipeline
+  instead (see docs/assets/hire.js's per-Bounty-Ops-program "Hire VAPE" flow).
+  For Move targets, also runs bounded formal verification
   (`agents/scaffold_move_target.py`): scaffolds a real local Move package from the
   target's own fetched source + real Move.toml, has the frontier LLM draft speculative
   Move Prover spec properties (mirrors `scaffold_foundry_target.py`'s Halmos-hypothesis
   pattern, since real external targets rarely ship existing spec blocks), and runs
   `sui-prover` against them if it's installed this run — deliberately not
   auto-installed in any workflow (no Linux release published; needs a from-source
-  build with Boogie + Z3). Manual `workflow_dispatch`
-  (`external-bounty-audit.yml`) per engagement, not scheduled.
+  build with Boogie + Z3). Not scheduled — dispatched per engagement (manually,
+  or via the x402 route above).
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
@@ -424,12 +432,14 @@ the header that's supposed to confirm Bazaar indexing succeeded
 ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112),
 still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
 (`cdp-bazaar-check.yml`, weekly) check CDP's own discovery catalog directly
-instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($50) is the
-one async exception: pays via x402, then dispatches
-`.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
-immediately, since a real Slither run + Halmos symbolic testing + Mythril
-symbolic-execution scan + Aderyn static AST analysis + frontier-model source
-review can't complete inside a Worker's request window. Symbolic testing
+instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($1) is the
+one async exception: pays via x402, then dispatches either
+`.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`, address
+target) or `.github/workflows/external-bounty-audit.yml` (`agents/external_audit.py`,
+owner/repo target) and returns immediately, since a real Slither run + Halmos
+symbolic testing + Mythril symbolic-execution scan + Aderyn static AST analysis +
+frontier-model source review can't complete inside a Worker's request window.
+Symbolic testing
 (`agents/scaffold_foundry_target.py`) scaffolds the target's own verified
 source into a throwaway Foundry project, drafts a handful of Halmos `check_*`
 properties with the frontier LLM (explicitly labeled hypotheses, never

@@ -49,7 +49,7 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | bulk_safety_bundle | 0.50 | 15m | token_safety × N |
 | deep_contract_audit | 1.00 | 30m | slither + aderyn + mythril |
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
-| **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
+| **bounty_deep_dive** | **1.00** | **async, no fixed SLA** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review — a submission-ready PoC with full technical detail. Supply an address (Solidity/EVM) or a GitHub owner/repo (any other language, e.g. Move/Sui, via `agents/external_audit.py`) to scope it to a specific bounty program. |
 
 ### Market-data tools — 0.01 USDC each
 13 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
@@ -112,7 +112,7 @@ acp wallet balance          # treasury
   `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
   the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,
   `wallet_recon`, `tx_decode`, `whale_watch`, `bulk_safety_bundle`,
-  `deep_contract_audit`, `forensics_deep`, and `bounty_deep_dive`'s 24h
-  async escalation) still need manual or human-in-the-loop fulfillment.
+  `deep_contract_audit`, `forensics_deep`, and `bounty_deep_dive`'s async
+  escalation) still need manual or human-in-the-loop fulfillment.
 - [TBD] Dynamic pricing from demand + dedup against `intel/catalog/`.
 - [TBD] Client-side delegation for compute-heavy audits.

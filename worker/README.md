@@ -83,13 +83,13 @@ Deliberately **not** wired up, each for a real, specific reason:
 - **`_x402` DNS TXT record discovery** — a real IETF draft (`draft-jeftovic-x402-dns-discovery-00`), but still an early-stage draft, not a ratified standard, and would need a DNS record added in the Cloudflare dashboard.
 - A `.well-known/x402.json` static manifest is a real, documented pattern too, but its exact schema comes from Coinbase's docs/example repo, both of which returned 403/404 when checked — rather than guess at a schema and ship something no real consumer can parse, this is left for whenever that can be confirmed against a primary source.
 
-## `/scan/bounty_deep_dive` — the 24h-SLA premium offering ($50)
+## `/scan/bounty_deep_dive` — the premium offering ($1), submission-ready PoC + full detail
 
-Unlike every other `/scan/*` route (synchronous — pay, get a JSON result, done in well under a second), this one genuinely can't complete inside a Worker's request window: the real work (`agents/deep_dive_audit.py` — recon + Slither + a frontier-model line-by-line source review) takes minutes, not milliseconds. So the route:
+Unlike every other `/scan/*` route (synchronous — pay, get a JSON result, done in well under a second), this one genuinely can't complete inside a Worker's request window: the real work (`agents/deep_dive_audit.py` or `agents/external_audit.py` — recon + Slither + a frontier-model line-by-line source review) takes minutes, not milliseconds. No fixed turnaround is promised; the deliverable is the point. So the route:
 
 1. Gates payment exactly like the other 6 (x402, same middleware).
-2. On settlement, calls `src/lib/githubDispatch.ts`'s `dispatchDeepDiveAudit()` — a `workflow_dispatch` REST call to `.github/workflows/deep-dive-bounty.yml`, passing `address`/`chain`/an optional `callback_url`.
-3. Returns immediately with `{"status": "accepted", ...}` and where the report will land (`intel/audits/poc-reports/`) — never a synchronous result.
+2. On settlement, branches on the supplied inputs: an `address` (+`chain`) dispatches `src/lib/githubDispatch.ts`'s `dispatchDeepDiveAudit()` → `.github/workflows/deep-dive-bounty.yml` (Solidity/EVM on-chain target); an `owner`+`repo` (+optional `ref`/`program_name`/`paths`) dispatches `dispatchExternalBountyAudit()` → `.github/workflows/external-bounty-audit.yml` (a bounty program's own source repo, e.g. Move/Sui). Both accept an optional `callback_url`.
+3. Returns immediately with `{"status": "accepted", ...}` and where the report will land (`intel/audits/poc-reports/` or `intel/audits/external-bounties/`) — never a synchronous result.
 
 Needs `GH_DISPATCH_TOKEN` (a fine-grained PAT scoped to this repo, `Actions: write` + `Contents: read` — Workers have no equivalent of the `GITHUB_TOKEN` Actions injects into its own runs). Without it, the route still gates payment correctly but returns a `503` after settlement telling the buyer to use ACP instead — set this secret before advertising the x402 path for this offering. The ACP path (`scripts/acp-monitor/HANDLER_BRIEF.md`) doesn't need it — the host-side reasoning handler just runs `agents/deep_dive_audit.py` directly.
 
@@ -113,7 +113,7 @@ Every other `/scan/*` route is a thin wrapper over `scan.ts`/`contractSource.ts`
 
 - **Public web-reputation search** (`src/lib/webResearch.ts`) — a real search for `"{symbol}" {address} rug pull OR scam OR honeypot OR exploit`, Tavily → Brave → keyless DuckDuckGo fallback, escalating the first unambiguous hit to a real page scrape (Firecrawl → keyless fetch fallback).
 - **A live check of the project's own declared socials** — actually visits (scrapes) the website/Telegram/X URLs DexScreener reports, instead of only checking the array is non-empty like every other offering's `has_declared_socials` boolean. This is reachability, not a follower-count/account-age check — X's/Telegram's real metrics need an official paid API this repo doesn't hold.
-- **A frontier-LLM quick read of the actual verified source** (`src/lib/llm.ts`) — Gemini 2.5 Pro, Groq fallback, same framing as the $50 `bounty_deep_dive` audit but a much smaller prompt/output budget matched to this offering's synchronous, instant-tier nature.
+- **A frontier-LLM quick read of the actual verified source** (`src/lib/llm.ts`) — Gemini 2.5 Pro, Groq fallback, same framing as the $1 `bounty_deep_dive` audit but a much smaller prompt/output budget matched to this offering's synchronous, instant-tier nature.
 
 All three degrade gracefully exactly like `ETHERSCAN_API_KEY` above — without `TAVILY_API_KEY`/`BRAVE_API_KEY`, `FIRECRAWL_API_KEY`, and `GEMINI_API_KEY`/`GROQ_API_KEY` set, the corresponding section of the response reports `available: false` / `checked: 0` with an honest note rather than a fabricated result, and the score/verdict still reflects real GoPlus/DexScreener/Etherscan/Base-RPC data either way.
 

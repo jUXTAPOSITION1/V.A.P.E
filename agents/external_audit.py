@@ -43,11 +43,14 @@ flags survives an honest read, the report says so plainly instead of
 manufacturing severity to justify a submission.
 """
 import argparse
+import ipaddress
 import json
 import os
 import re
+import socket
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -77,6 +80,27 @@ MAX_TOTAL_CHARS = 350000  # safety cap on total source fed to the LLM (well unde
 
 def now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+
+
+def _is_safe_callback_url(url):
+    """callback_url is attacker-influenced (an x402 buyer's own query param,
+    passed through unvalidated by the worker) and this script POSTs to it from
+    a GitHub Actions runner — block the obvious SSRF targets (cloud metadata
+    endpoints, loopback, link-local, private ranges) rather than blindly
+    fetching whatever URL a buyer supplies. Same check as
+    agents/deep_dive_audit.py's — not a complete SSRF defense (DNS rebinding,
+    redirects, etc. are out of scope), just the cheap, high-value checks."""
+    try:
+        parsed = urllib.parse.urlparse(url)
+        if parsed.scheme not in ("http", "https") or not parsed.hostname:
+            return False
+        for info in socket.getaddrinfo(parsed.hostname, None):
+            ip = ipaddress.ip_address(info[4][0])
+            if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast:
+                return False
+        return True
+    except Exception:
+        return False
 
 
 def fetch_file(owner, repo, ref, path, timeout=15):
@@ -261,7 +285,8 @@ def _append_finding(result):
         print(f"[external_audit] could not append finding: {e}")
 
 
-def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, max_tokens=6000):
+def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, max_tokens=6000,
+                        callback_url=None):
     """Real engagement orchestrator. `paths` lets a caller pass an explicit,
     already-known file list (this engagement's actual usage, since the
     GitHub tree API needs unrestricted egress this specific run may not
@@ -373,6 +398,23 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
               "provider": provider, "verdict_summary": verdict_summary,
               "move_prover_ran": prover_result.get("ran", False)}
     _append_finding(result)
+
+    if callback_url:
+        if not _is_safe_callback_url(callback_url):
+            print("[external_audit] callback_url rejected (not a public http/https host) "
+                  "— report is still committed, just not POSTed anywhere")
+        else:
+            try:
+                req = urllib.request.Request(
+                    callback_url, data=json.dumps(result).encode(),
+                    headers={"Content-Type": "application/json", "User-Agent": "VAPE-ExternalAudit/1.0"},
+                    method="POST",
+                )
+                with urllib.request.urlopen(req, timeout=15):
+                    print("[external_audit] delivered result to callback_url")
+            except Exception as e:
+                print(f"[external_audit] callback delivery failed (non-fatal, report is committed either way): {e}")
+
     return result
 
 
@@ -383,9 +425,11 @@ def main():
     ap.add_argument("--ref", default="main")
     ap.add_argument("--program-name", default=None)
     ap.add_argument("--paths", default=None, help="comma-separated explicit file paths (skips auto-discovery)")
+    ap.add_argument("--callback-url", default=None, help="optional webhook to POST the result to on completion")
     args = ap.parse_args()
     paths = [p.strip() for p in args.paths.split(",")] if args.paths else None
-    result = run_external_audit(args.owner, args.repo, args.ref, paths, args.program_name)
+    result = run_external_audit(args.owner, args.repo, args.ref, paths, args.program_name,
+                                 callback_url=args.callback_url)
     print(json.dumps(result, indent=2))
 
 

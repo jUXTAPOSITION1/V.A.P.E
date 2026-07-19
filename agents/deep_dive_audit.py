@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-VAPE Deep-Dive Bounty Audit — the 50 USDC / 24h-SLA premium offering.
+VAPE Deep-Dive Bounty Audit — the 1 USDC premium offering: a submission-ready
+PoC with full technical detail, not a time-boxed audit.
 
 The cheapest 6 x402 offerings and agents/investigate.py's free auto-cycle are all
 deliberately zero/light-LLM, keyless-first, sub-5-minute checks. This is the other
@@ -14,11 +15,12 @@ executes in — never a hard dependency, since a fresh multi-minute toolchain in
 no place in a script whose whole point is a reliable result, not gambling on a slow
 install succeeding.
 
-"24h SLA" is a turnaround promise to the buyer, not a literal runtime — this completes
-in one run (recon + optional Slither + one frontier LLM call), matching
-intel/audits/poc-reports/'s existing hand-written audit format and rigor (see e.g.
-audit-aerodrome-aero-2026-06-18.md: real tool output, honest triage of false positives,
-explicit methodology) so the automated version holds the same bar.
+No fixed turnaround is promised — the deliverable is the point: a submission-ready
+PoC and all supporting detail a buyer needs to actually file a bounty submission.
+This completes in one run (recon + optional Slither + one frontier LLM call),
+matching intel/audits/poc-reports/'s existing hand-written audit format and rigor
+(see e.g. audit-aerodrome-aero-2026-06-18.md: real tool output, honest triage of
+false positives, explicit methodology) so the automated version holds the same bar.
 
 Fulfillment paths:
   - ACP: scripts/acp-monitor/HANDLER_BRIEF.md maps the `bounty_deep_dive` offering to
@@ -251,8 +253,8 @@ def _run_aderyn(project_dir, timeout=120):
 
 
 FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing VAPE's
-deepest, highest-rigor automated audit tier — whether this run is a paid 24-hour-SLA bug
-bounty engagement or VAPE's own proactive daily sweep, the bar is the same: be precise,
+deepest, highest-rigor automated audit tier — whether this run is a paid bug bounty
+engagement or VAPE's own proactive daily sweep, the bar is the same: be precise,
 evidence-based, and honest.
 
 Rules:
@@ -343,10 +345,13 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
 
 def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     """engagement distinguishes a paid x402/ACP bounty_deep_dive job ("paid",
-    the default — every existing caller) from VAPE's own proactive daily
-    sweep (agents/hack_sweep.py passes "sweep") — same tool suite, same
-    rigor, only the report's framing/output directory differ so a sweep
-    report never falsely claims to be a paid engagement."""
+    the default — every existing caller), VAPE's own proactive daily sweep
+    (agents/hack_sweep.py passes "sweep"), and an unpaid pipeline-validation
+    run ("validation" — exercises the exact same tool suite/rigor against a
+    real target with no money involved, e.g. to prove out a new fulfillment
+    path) — same tool suite, same rigor, only the report's framing/output
+    directory differ so neither a sweep nor a validation report ever falsely
+    claims to be a paid engagement."""
     address = address.strip()
     if not re.match(r"^0x[a-fA-F0-9]{40}$", address):
         return {"error": f"invalid address: {address}"}
@@ -386,15 +391,18 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     except Exception as e:
         narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
 
-    out_dir = AUDIT_DIR if engagement == "paid" else SWEEP_AUDIT_DIR
+    out_dir = SWEEP_AUDIT_DIR if engagement == "sweep" else AUDIT_DIR
     os.makedirs(out_dir, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     slug = re.sub(r"[^a-z0-9]+", "-", sym.lower()).strip("-") or address[:10]
-    prefix = "audit-deep-dive" if engagement == "paid" else "hack-sweep"
+    prefix = "hack-sweep" if engagement == "sweep" else (
+        "audit-validation" if engagement == "validation" else "audit-deep-dive")
     path = os.path.join(out_dir, f"{prefix}-{slug}-{stamp}.md")
 
     L = []
-    title = "VAPE Deep-Dive Bounty Audit" if engagement == "paid" else "VAPE Proactive HACK Sweep"
+    title = ("VAPE Proactive HACK Sweep" if engagement == "sweep" else
+              "VAPE Pipeline Validation Run" if engagement == "validation" else
+              "VAPE Deep-Dive Bounty Audit")
     L.append(f"# {title} — {sym}")
     L.append("")
     L.append(f"**Target:** `{address}` (chain {chain})  ")
@@ -476,8 +484,13 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     L.append("8. White-hat only: read-only analysis, no exploitation attempted.")
     L.append("")
     if engagement == "paid":
-        L.append("*This is a 24h-SLA premium engagement; results delivered as soon as "
-                 "generated, well inside that window.*")
+        L.append("*This is VAPE's premium bounty-engagement tier — a submission-ready "
+                 "proof-of-concept with full technical detail, delivered as soon as the "
+                 "audit completes, with no fixed turnaround promised.*")
+    elif engagement == "validation":
+        L.append("*This is a pipeline-validation run against a real target — no payment "
+                 "was made; it exercises the exact same audit pipeline a real paid "
+                 "engagement would run, and is not a submission on VAPE's behalf.*")
     else:
         L.append("*This report was generated proactively by VAPE's own daily HACK sweep "
                  "(agents/hack_sweep.py) — not a paid engagement.*")
@@ -511,7 +524,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="VAPE Deep-Dive Bounty Audit (50 USDC / 24h SLA)")
+    ap = argparse.ArgumentParser(description="VAPE Deep-Dive Bounty Audit (1 USDC)")
     ap.add_argument("--address", required=True, help="target contract/token address (0x...)")
     ap.add_argument("--chain", default="8453", help="chain id (default Base 8453)")
     ap.add_argument("--callback-url", default=None, help="optional webhook to POST the result to on completion")

@@ -80,7 +80,8 @@ PRICE_HISTORY = {
     # registered/priced under the old name "safety_preflight" for part of
     # this history, before the dossier_check rename.
     "dossier_check": [0.05, 0.10, 0.35],
-    "bounty_deep_dive": [50.00],
+    # $50 was the price through 2026-07-19; repriced to $1 after that.
+    "bounty_deep_dive": [50.00, 1.00],
 }
 # token_safety_check and liquidity_check have ALWAYS both been $0.02 —
 # genuinely no way to tell them apart from amount alone after the fact.

@@ -11,7 +11,7 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
     openrouter  OPENROUTER_API_KEY  20+ free models — fallback marketplace
     gemini      GEMINI_API_KEY      real frontier tier (gemini-2.5-pro) — free tier is
                                     quota-limited (5 RPM / 50 RPD) but that's plenty for
-                                    an occasional premium job like the 24h deep-dive
+                                    an occasional premium job like the deep-dive
                                     bounty audit, not a high-volume path. Get a free key
                                     at https://aistudio.google.com/apikey.
     github      GITHUB_MODELS_TOKEN GitHub Models (DeepSeek-R1). GitHub is FULLY
@@ -30,7 +30,7 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     FRONTIER_ORDER / ask_frontier(), so ordinary
                                     fast/bulk-tier calls never touch it and stay on
                                     the free chain, matching the operating policy:
-                                    Grok for reports/investigations/the $50 x402
+                                    Grok for reports/investigations/the $1 x402
                                     audit/intel/Builder/SKILLFORGE; Groq/Gemini for
                                     everything else. A single key, not a rotated
                                     pair — a second key (XAI_API_KEY_2) was tried
@@ -70,7 +70,7 @@ Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
     deep      -> larger reasoning (daily synthesis, audits)
     bulk      -> high daily volume (harvest passes)
-    frontier  -> the real premium model for the highest-stakes work (the 24h deep-dive
+    frontier  -> the real premium model for the highest-stakes work (the deep-dive
                  bounty audit, investigations' AI quick review, and — via explicit
                  provider_order=FRONTIER_ORDER at each call site — the intel sweeps'
                  narrative, Builder, SKILLFORGE synthesis, and the AI red-team). Falls
@@ -730,7 +730,7 @@ def ask_oci_grok_safe(system, user, **kw):
 def ask_oci_grok_frontier(system, user, **kw):
     """ask_oci_grok() pinned to the frontier tier + FRONTIER_ORDER fallback —
     the OCI-Grok-primary equivalent of ask_frontier() above, for call sites
-    (agents/deep_dive_audit.py's $50 bounty audit, acp_fulfill.py's
+    (agents/deep_dive_audit.py's $1 bounty audit, acp_fulfill.py's
     dossier_check quick review) that want that same 'no local override'
     convenience but with OCI Grok 4.3 as the actual primary model. Raises on
     total failure exactly like ask_frontier() — callers already wrap their

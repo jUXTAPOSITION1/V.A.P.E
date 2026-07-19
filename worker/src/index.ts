@@ -25,7 +25,7 @@ import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
-import { dispatchDeepDiveAudit } from "./lib/githubDispatch";
+import { dispatchDeepDiveAudit, dispatchExternalBountyAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
@@ -192,23 +192,28 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
   },
 };
 
-// The 24h-SLA premium tier — genuinely can't complete inside a Worker's request
+// A premium audit tier that genuinely can't complete inside a Worker's request
 // window (real recon + Slither + a frontier-model source review takes minutes,
 // not milliseconds), so this route pays, then dispatches a GitHub Actions job
-// (agents/deep_dive_audit.py via .github/workflows/deep-dive-bounty.yml) and
-// returns immediately with delivery info instead of a synchronous result —
-// unlike every other route below. Priced far above the rest of the catalog to
-// match the real analysis depth: full recon, real Slither output when
-// available, and a frontier LLM (Gemini 2.5 Pro, Groq fallback) reading the
-// actual verified source.
-const BOUNTY_DEEP_DIVE_PRICE = "$50.00";
+// — either agents/deep_dive_audit.py via .github/workflows/deep-dive-bounty.yml
+// (address-based, Solidity/EVM on-chain targets) or agents/external_audit.py via
+// .github/workflows/external-bounty-audit.yml (owner/repo-based, e.g. Move/Sui
+// or any external bounty-program repo) — and returns immediately with delivery
+// info instead of a synchronous result, unlike every other route below. No
+// fixed turnaround is promised: the deliverable is a submission-ready PoC with
+// full technical detail (full recon, real Slither/Mythril/Aderyn/Halmos output
+// when applicable, and a frontier LLM reading the actual verified source).
+const BOUNTY_DEEP_DIVE_PRICE = "$1.00";
 const BOUNTY_DEEP_DIVE_DISCOVERY = {
-  description: "24h-SLA premium audit: full recon + Slither + frontier-model line-by-line "
-    + "source review, delivered as a real committed report — VAPE's deepest automated pass.",
+  description: "Submission-ready PoC and full technical detail: real recon + Slither + "
+    + "frontier-model line-by-line source review, delivered as a real committed report — "
+    + "VAPE's deepest automated pass. Supply a contract address, or a GitHub owner/repo "
+    + "to have VAPE audit a specific bounty program directly.",
   output: {
     status: "accepted",
     address: "0x...",
-    message: "Deep-dive audit queued — report lands in intel/audits/poc-reports/ within 24h.",
+    message: "Audit queued — report lands in intel/audits/poc-reports/ (or external-bounties/ "
+      + "for a repo-based target) as soon as it completes.",
   },
 };
 
@@ -257,7 +262,7 @@ app.get("/", (c) =>
     protocol: "x402",
     offerings: [
       ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
-      { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "24h (async)" },
+      { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "async — no fixed SLA" },
       // Keyless market-data micro-services — real data, $0.01 each.
       ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
@@ -729,44 +734,87 @@ for (const o of DL_OFFERINGS) {
   });
 }
 
+// A GitHub owner/repo is [A-Za-z0-9_.-]+ per GitHub's own naming rules — this
+// is the gate before either value is threaded into a workflow_dispatch input.
+const GH_SLUG_RE = /^[A-Za-z0-9_.-]+$/;
+
 // bounty_deep_dive: gated by the same x402 middleware above — payment
 // verification has already happened by the time this handler runs, but
 // actual settlement still happens after (see the onAfterSettle hook above),
 // and is cancelled automatically if this handler responds >= 400. This just
-// kicks off the real async job and returns immediately. The actual audit
-// runs in GitHub Actions (.github/workflows/deep-dive-bounty.yml ->
-// agents/deep_dive_audit.py), not here — it doesn't log an x402 job record
-// (see lib/jobLog.ts), so it never appears in the live feed.
+// kicks off the real async job and returns immediately — the actual audit
+// runs in GitHub Actions, not here, so neither path logs an x402 job record
+// (see lib/jobLog.ts) or appears in the live feed.
+//
+// Two fulfillment paths, chosen by which inputs the buyer supplies (the site's
+// hire-from-Bounty-Ops flow picks the right one per program automatically,
+// see docs/assets/hire.js::openBountyOps()):
+//   - address (+ chain): on-chain Solidity/EVM target -> deep-dive-bounty.yml
+//     -> agents/deep_dive_audit.py.
+//   - owner + repo (+ ref/program_name/paths): a bounty program's own source
+//     repo (Move/Sui or any other language) -> external-bounty-audit.yml ->
+//     agents/external_audit.py.
 app.get("/scan/bounty_deep_dive", async (c) => {
   const address = c.req.query("address") || "";
   const chain = c.req.query("chain") || "8453";
+  const owner = c.req.query("owner") || "";
+  const repo = c.req.query("repo") || "";
+  const ref = c.req.query("ref") || undefined;
+  const programName = c.req.query("program_name") || undefined;
+  const paths = c.req.query("paths") || undefined;
   const callbackUrl = c.req.query("callback_url") || undefined;
 
-  if (!ADDRESS_RE.test(address)) {
-    return c.json({ offering: "bounty_deep_dive", status: "error", error: "invalid or missing address" }, 400);
+  const hasAddress = ADDRESS_RE.test(address);
+  const hasRepo = owner && repo && GH_SLUG_RE.test(owner) && GH_SLUG_RE.test(repo);
+
+  if (!hasAddress && !hasRepo) {
+    return c.json({
+      offering: "bounty_deep_dive", status: "error",
+      error: "provide either a contract address or a GitHub owner/repo",
+    }, 400);
   }
   if (!c.env.GH_DISPATCH_TOKEN) {
     // Payment already settled — this is a real config gap, not a client error, so 503
     // (not 400/402) tells the buyer to retry rather than re-check their request.
     return c.json({
       offering: "bounty_deep_dive", status: "error",
-      error: "deep-dive dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
+      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
     }, 503);
   }
 
-  const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
+  if (hasAddress) {
+    const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
+    if (!dispatch.ok) {
+      return c.json({
+        offering: "bounty_deep_dive", status: "error",
+        error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
+      }, 502);
+    }
+    return c.json({
+      offering: "bounty_deep_dive", status: "accepted", address, chain,
+      message: "Audit queued — a submission-ready PoC report lands in intel/audits/poc-reports/ "
+        + "as soon as it completes."
+        + (callbackUrl ? " Will also POST the result to your callback_url." : ""),
+      track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
+    });
+  }
+
+  const dispatch = await dispatchExternalBountyAudit(c.env.GH_DISPATCH_TOKEN, {
+    owner, repo, ref, programName, paths, callbackUrl,
+  });
   if (!dispatch.ok) {
     return c.json({
       offering: "bounty_deep_dive", status: "error",
       error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
     }, 502);
   }
-
   return c.json({
-    offering: "bounty_deep_dive", status: "accepted", address, chain,
-    message: "Deep-dive audit queued — report lands in intel/audits/poc-reports/ within 24h."
+    offering: "bounty_deep_dive", status: "accepted", owner, repo, ref: ref || "main",
+    message: "Audit queued — a submission-ready PoC report lands in "
+      + "intel/audits/external-bounties/ as soon as it completes."
       + (callbackUrl ? " Will also POST the result to your callback_url." : ""),
-    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
+    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/external-bounties",
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
 });
