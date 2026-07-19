@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T05:43:50Z",
+  "generated": "2026-07-19T07:28:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 83,
-    "investigations": 232,
+    "investigations": 233,
     "tools": 16,
     "tools_verified": 16,
     "skills": 14
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-045003-0x72f3a461.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Bullieve in Base",
-      "date": "2026-07-19T04:50:03Z",
-      "target": "0x72f3a461B2C631dffe9A2A6A95dC816b78279B07",
+      "file": "investigation-20260719-072820-0xb2000000.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T07:28:20Z",
+      "target": "0xb200000000000000000000AC6A5D35756eB8Cd01",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "30",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $18,392; [-10] Pair 12.7 days old \u2014 under two w",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-045003-0x72f3a461.md"
+      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +2037% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-072820-0xb2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-072820-0xb2000000.md",
+      "title": "Investigation \u2014 Baseller",
+      "symbol": "Baseller",
+      "name": "Base Seller",
+      "date": "2026-07-19T07:28:20Z",
+      "target": "0xb200000000000000000000AC6A5D35756eB8Cd01",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +2037% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-072820-0xb2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-045003-0x72f3a461.md",
@@ -593,20 +607,6 @@
       "score": "80",
       "summary": "Risk factors: [-10] Pair 9.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 11404 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factor",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-172037-0x664645ba.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260716-154339-0x49D5c2Bd.md",
-      "title": "Investigation \u2014 WETH.e",
-      "symbol": "WETH.e",
-      "name": "Wrapped Ether",
-      "date": "2026-07-16T15:43:39Z",
-      "target": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 83271 holders \u2014 reasonably distributed; Deep liquidity ($2,767,968); Trading 298+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260716-154339-0x49D5c2Bd.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48822409",
+      "version": "48827943",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.54 eth_dom 9.81 mcap_chg_24h 0.91",
+      "version": "btc_dom 56.52 eth_dom 9.82 mcap_chg_24h 0.92",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xccc0c2670303 BFS/MRBEAST 16.0 from 0xf59c9302 to 0x833589fc",
+      "version": "0x9857ca2a2235 FOX 12.0 from 0xaa7f03de to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

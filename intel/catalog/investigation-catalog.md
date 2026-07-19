@@ -315,3 +315,5 @@
 | 2026-07-19 | auto | 0xb20000000000000000000012141bf387DD37eB01 (BRIUN) | deep_investigation | REJECT (5/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-19 | auto | 0x72f3a461B2C631dffe9A2A6A95dC816b78279B07 (BRIAN) | deep_investigation | REJECT (30/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-19 | auto | 0xb200000000000000000000AC6A5D35756eB8Cd01 (Baseller) | deep_investigation | REJECT (30/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
