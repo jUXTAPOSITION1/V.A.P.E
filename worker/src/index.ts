@@ -9,7 +9,8 @@
  * two free Codex.io-backed routes (/virtuals-snapshot, /trending-base) for
  * the Live Intelligence Feed's Virtuals Protocol panel and trending-tokens
  * list — Codex needs a bearer key that can't ship to the browser, so these
- * can't be a direct client-side fetch the way DefiLlama/CoinGecko are.
+ * can't be a direct client-side fetch the way DefiLlama/CoinGecko are — and
+ * one free, fully keyless Polymarket/Kalshi-backed route (/prediction-markets).
  *
  * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
  * facilitator) and Coinbase Developer Platform's hosted one — see
@@ -30,6 +31,7 @@ import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
 import * as codex from "./lib/codex";
+import * as predictionMarkets from "./lib/predictionMarkets";
 import { dispatchDeepDiveAudit, dispatchExternalBountyAudit } from "./lib/githubDispatch";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
@@ -453,6 +455,21 @@ app.get("/trending-base", rateLimiter("trending-base", 20, 60), cache({ cacheNam
       isVirtuals: t.token?.address ? await codex.isVirtualsToken(t.token.address) : false,
     })));
     return c.json({ ts: trending.ts, tokens: tagged });
+  } catch (e) {
+    return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
+  }
+});
+
+// Crypto/Base-relevant prediction-market odds from Polymarket + Kalshi — both
+// free and keyless, unlike the Codex-backed routes above, so this needs no
+// env/secret check at all. Same free-display + paid-x402-tool dual pattern
+// as everything else here: this route is the free site-panel counterpart to
+// the /data/prediction_market_odds offering (worker/src/dataHandlers.ts).
+app.get("/prediction-markets", rateLimiter("prediction-markets", 20, 60), cache({ cacheName: "vape-prediction-markets", cacheControl: "max-age=120" }), async (c) => {
+  try {
+    const limit = Math.min(Number(c.req.query("limit")) || 20, 50);
+    const result = await predictionMarkets.cryptoPredictionMarkets(limit);
+    return c.json(result);
   } catch (e) {
     return c.json({ error: "upstream lookup failed", detail: errDetail(e, c.env) }, 502);
   }
