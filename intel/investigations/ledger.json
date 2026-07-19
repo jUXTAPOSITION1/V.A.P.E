@@ -1401,6 +1401,25 @@
     "symbol": "TSG",
     "times_investigated": 1
   },
+  "8453:0x624e2e7fdc8903165f64891672267ab0fcb98831": {
+    "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831",
+    "chain": "8453",
+    "creator_address": "0xf1371d81c59041d54cf34b4e564824f86d8722c2",
+    "first_investigated": "2026-07-19T20:54:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-205403-0x624e2e7f.md",
+        "score": 43,
+        "ts": "2026-07-19T20:54:03Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-19T20:54:03Z",
+    "last_score": 43,
+    "last_verdict": "REJECT",
+    "symbol": "SOSO",
+    "times_investigated": 1
+  },
   "8453:0x664645ba2018507b4f336a1529122c5f982b2ac8": {
     "address": "0x664645ba2018507b4f336a1529122C5f982b2Ac8",
     "chain": "8453",

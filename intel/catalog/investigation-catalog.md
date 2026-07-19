@@ -333,3 +333,5 @@
 | 2026-07-19 | auto | 0xDcB01cc464238396E213a6fDd933E36796eAfF9f (YLD) | deep_investigation | REJECT (8/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-19 | auto | 0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532 (VORF) | deep_investigation | REJECT (38/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-19 | auto | 0x624e2e7fDc8903165F64891672267AB0FCB98831 (SOSO) | deep_investigation | REJECT (43/100) | Mintable supply (dilution risk) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T20:08:48Z",
+  "generated": "2026-07-19T20:54:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 86,
-    "investigations": 241,
+    "investigations": 242,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260719-194502-0x2690e2f9.md",
-      "title": "Investigation \u2014 VORF",
-      "symbol": "VORF",
-      "name": "Vanguard Oil Retiretment Fund",
-      "date": "2026-07-19T19:45:02Z",
-      "target": "0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532",
+      "file": "investigation-20260719-205403-0x624e2e7f.md",
+      "title": "Investigation \u2014 SOSO",
+      "symbol": "SOSO",
+      "name": "SoSoValue",
+      "date": "2026-07-19T20:54:03Z",
+      "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "38",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FAFO (0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F) \u2014 CAUTION 73/100 \u2014 likely the same serial campaign; [-10] Pair 13.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit o",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-194502-0x2690e2f9.md"
+      "score": "43",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: 89455 holders \u2014 reasonably distributed; Trading 238+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-205403-0x624e2e7f.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260719-205403-0x624e2e7f.md",
+      "title": "Investigation \u2014 SOSO",
+      "symbol": "SOSO",
+      "name": "SoSoValue",
+      "date": "2026-07-19T20:54:03Z",
+      "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "43",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: 89455 holders \u2014 reasonably distributed; Trading 238+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-205403-0x624e2e7f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260719-194502-0x2690e2f9.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 101920 holders \u2014 reasonably distributed; Deep liquidity ($769,864); Trading 408+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama ha",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-121150-0xf4B38584.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-104933-0xF0Cb96a4.md",
-      "title": "Investigation \u2014 ARMSTRONG",
-      "symbol": "ARMSTRONG",
-      "name": "Cryptocurrency for All!",
-      "date": "2026-07-17T10:49:33Z",
-      "target": "0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +18481% (volatility/manipulation). Positive evidence: 2292 holders \u2014 reasonably distributed; Trading 177+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 262+ days \u2014 independent longevity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-104933-0xF0Cb96a4.md"
     }
   ],
   "reports": [
