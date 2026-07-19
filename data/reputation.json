@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19T11:32:46Z",
+  "generated": "2026-07-19T13:55:55Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 388,
-    "intel_reports": 213,
+    "reports_published": 391,
+    "intel_reports": 214,
     "intel_broadcasts": 84,
-    "catalog_investigations": 144,
+    "catalog_investigations": 145,
     "token_scans_logged": 0,
     "skills_codified": 14,
     "tools_total": 16,
@@ -221,12 +221,12 @@
       },
       {
         "name": "bounty_deep_dive",
-        "price_usd": 50.0,
-        "summary": "24h-SLA premium audit: full recon + Slither + frontier-model line-by-line source review, real report",
+        "price_usd": 1.0,
+        "summary": "Submission-ready PoC and full technical detail: full recon + Slither + frontier-model line-by-line source review, real committed report",
         "auto": false,
         "x402": true,
         "data": false,
-        "sla": "24h (async, frontier-model)"
+        "sla": "async \u2014 no fixed SLA (frontier-model)"
       },
       {
         "name": "token_intel",
