@@ -67,7 +67,7 @@ DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
         "exploit_check", "dossier_check", "market_intel",
-        "community_intel_broadcast"} | DL_NAMES
+        "community_intel_broadcast", "wallet_pnl_deepdive"} | DL_NAMES
 # Zero-LLM deliverables specifically. dossier_check stays in AUTO above
 # (the monitor still auto-prices/submits it with no triage wake — see
 # scripts/acp-monitor/HANDLER_BRIEF.md), but its own deliverable now
@@ -125,6 +125,8 @@ OFFERINGS = [
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
     ("bounty_deep_dive", 1.00, "Submission-ready PoC and full technical detail: full recon + "
      "Slither + frontier-model line-by-line source review, real committed report"),
+    ("wallet_pnl_deepdive", 0.25, "Real wallet P&L via Codex: current balances, realized profit/loss "
+     "(USD/%), trade volume, tokens traded, and a P&L chart over time"),
     *DL_OFFERINGS,
 ]
 

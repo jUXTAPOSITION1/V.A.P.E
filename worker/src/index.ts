@@ -763,7 +763,7 @@ for (const o of DL_OFFERINGS) {
       limit: c.req.query("limit") ? Number(c.req.query("limit")) : undefined,
     };
     const t0 = Date.now();
-    const result = await fulfillData(o.name, q);
+    const result = await fulfillData(o.name, q, c.env);
     const d = (result as { deliverable?: Record<string, unknown> }).deliverable ?? {};
     c.set("vapeJobDraft", {
       id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,

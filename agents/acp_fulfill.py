@@ -421,6 +421,39 @@ def _bridges(req):
     return _dl().bridges()
 
 
+def _codex():
+    try:
+        from agents import codex_data as _m
+    except Exception:
+        import codex_data as _m
+    return _m
+
+
+# Codex network ids are plain EVM chain ids — same map as
+# worker/src/dataHandlers.ts's CHAIN_NETWORK_IDS, kept in sync by hand since
+# one's Python and the other's TypeScript.
+_CODEX_NETWORK_IDS = {"base": 8453, "ethereum": 1, "arbitrum": 42161, "optimism": 10, "polygon": 137}
+
+
+def _wallet_pnl_deepdive(req):
+    """$0.25 wallet P&L deep-dive via Codex — real current balances, realized
+    P&L (USD/%), volume, tokens traded, and a P&L chart series. Field-for-
+    field the same as the x402 worker's wallet_pnl_deepdive route
+    (worker/src/dataHandlers.ts) so ACP and x402 buyers get identical data."""
+    a = _addr(req)
+    if not a:
+        return {"error": "no wallet address in requirement"}
+    network_id = _CODEX_NETWORK_IDS.get(_dl_chain(req, "base").lower(), 8453)
+    m = _codex()
+    return {
+        "address": a,
+        "network_id": network_id,
+        "balances": m.wallet_balances(a, [network_id]),
+        "pnl": m.wallet_pnl_stats(a, network_id),
+        "pnl_chart": m.wallet_pnl_chart(a, network_id),
+    }
+
+
 HANDLERS = {
     "token_safety_check": _token_safety,
     "liquidity_check": _liquidity,
@@ -443,6 +476,8 @@ HANDLERS = {
     "yields": _yields,
     "stablecoins": _stablecoins,
     "bridges": _bridges,
+    # Codex-backed wallet deep-dive — 0.25 USDC, real balances + P&L.
+    "wallet_pnl_deepdive": _wallet_pnl_deepdive,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

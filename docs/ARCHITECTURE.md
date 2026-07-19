@@ -133,8 +133,8 @@ component's state changes.
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 20 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 28 total: 20 x402-payable, 8 ACP-only — see component 4 |
+| `worker/` (x402) | [OK] | 21 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 29 total: 21 x402-payable, 8 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |

@@ -66,6 +66,8 @@ const DATA_OFFERINGS = {
                                     { k: 'symbol', label: 'Symbol (optional)', ph: 'USDC', opt: true }] },
     stablecoins:     { inputs: [] },
     bridges:         { inputs: [] },
+    wallet_pnl_deepdive: { inputs: [{ k: 'address', label: 'Wallet address to hire the deep-dive for', ph: '0x… wallet', addr: true },
+                                    { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
 };
 
 const Hire = {
@@ -430,6 +432,8 @@ const Hire = {
         if (!body) return;
         const deliverable = (result && result.deliverable) || {};
         const walletAddress = (window.Wallet && Wallet.state().account) || null;
+        const targetAddress = params.address || params.slug || params.chain || '';
+        const reportOpts = { offering: offeringName, priceUsd, requestedAddress: targetAddress, hiredBy: walletAddress, result, via: 'x402' };
         body.innerHTML = `
             <div class="text-center mb-4">
                 <i class="fa-solid fa-circle-check text-zinc-300 text-3xl mb-2"></i>
@@ -437,8 +441,12 @@ const Hire = {
                 <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g, ' '))} · $${priceUsd} settled on Base</div>
             </div>
             <div class="border border-white/10 p-4 mb-4 max-h-80 overflow-y-auto">${this._dataHtml(deliverable)}</div>
-            <button id="hire-copy" class="w-full term-btn"><i class="fa-solid fa-copy"></i> Copy JSON</button>
+            <div class="flex gap-2">
+                <button id="hire-download" class="flex-1 term-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+                <button id="hire-copy" class="flex-1 term-btn"><i class="fa-solid fa-copy"></i> Copy JSON</button>
+            </div>
             <div id="hire-copy-status" class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below.</div>`;
+        document.getElementById('hire-download').onclick = () => Report.downloadPdf(reportOpts);
         document.getElementById('hire-copy').onclick = async () => {
             await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
             document.getElementById('hire-copy-status').textContent = 'Copied raw JSON to clipboard.';
@@ -446,9 +454,13 @@ const Hire = {
         try {
             if (window.CaseHistory && walletAddress) {
                 CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress,
-                    targetAddress: params.address || params.slug || params.chain || '', verdict: 'DATA', result });
+                    targetAddress, verdict: 'DATA', result });
             }
         } catch (e) { /* non-fatal — data is already shown above */ }
+        // Best-effort auto-download, same as the verdict-offering flow
+        // (_renderResult) — the inline preview above is already fully
+        // visible regardless of whether this succeeds.
+        Report.downloadPdf(reportOpts).catch(() => { /* PDF/download not available in this browser — inline preview above still stands */ });
     },
 
     // Rich, logo-aware renderer for a market-data deliverable. Handles the
