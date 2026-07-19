@@ -421,6 +421,48 @@ def _bridges(req):
     return _dl().bridges()
 
 
+def _codex():
+    try:
+        from agents import codex_data as _m
+    except ImportError:
+        import codex_data as _m
+    return _m
+
+
+# Codex network ids are plain EVM chain ids — same map as
+# worker/src/dataHandlers.ts's CHAIN_NETWORK_IDS, kept in sync by hand since
+# one's Python and the other's TypeScript.
+_CODEX_NETWORK_IDS = {"base": 8453, "ethereum": 1, "arbitrum": 42161, "optimism": 10, "polygon": 137}
+
+
+def _wallet_pnl_deepdive(req):
+    """$0.25 wallet P&L deep-dive via Codex — real current balances, realized
+    P&L (USD/%), volume, tokens traded, and a P&L chart series. Field-for-
+    field the same as the x402 worker's wallet_pnl_deepdive route
+    (worker/src/dataHandlers.ts) so ACP and x402 buyers get identical data."""
+    a = _addr(req)
+    if not a:
+        return {"error": "no wallet address in requirement"}
+    network_id = _CODEX_NETWORK_IDS.get(_dl_chain(req, "base").lower(), 8453)
+    m = _codex()
+    balances = m.wallet_balances(a, [network_id])
+    pnl = m.wallet_pnl_stats(a, network_id)
+    pnl_chart = m.wallet_pnl_chart(a, network_id)
+    # codex_data functions never raise (real data or an honest {error} dict) —
+    # surface that error as a real failure instead of a "successful" $0.25
+    # deliverable, same design law already enforced elsewhere in this file.
+    for r in (balances, pnl, pnl_chart):
+        if isinstance(r, dict) and r.get("error"):
+            raise ValueError(r["error"])
+    return {
+        "address": a,
+        "network_id": network_id,
+        "balances": balances,
+        "pnl": pnl,
+        "pnl_chart": pnl_chart,
+    }
+
+
 HANDLERS = {
     "token_safety_check": _token_safety,
     "liquidity_check": _liquidity,
@@ -443,6 +485,8 @@ HANDLERS = {
     "yields": _yields,
     "stablecoins": _stablecoins,
     "bridges": _bridges,
+    # Codex-backed wallet deep-dive — 0.25 USDC, real balances + P&L.
+    "wallet_pnl_deepdive": _wallet_pnl_deepdive,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

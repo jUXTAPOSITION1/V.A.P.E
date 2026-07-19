@@ -156,13 +156,15 @@ export async function walletPnlStats(
   const d = await codexQuery(apiKey, query, { wallet: walletAddress, networkId });
   if (isErr(d)) return d;
   const stats = (d.detailedWalletStats && d.detailedWalletStats.statsUsd) || {};
+  // snake_case to match agents/codex_data.py::wallet_pnl_stats() field-for-field
+  // (this repo's established Python/TS parity convention — see protocol_fees()).
   return {
     wallet: walletAddress,
-    networkId,
-    realizedProfitUsd: stats.realizedProfitUsd,
-    realizedProfitPct: stats.realizedProfitPercentage,
-    volumeUsd: stats.volume,
-    tokensTraded: stats.tokensTraded,
+    network_id: networkId,
+    realized_profit_usd: stats.realizedProfitUsd,
+    realized_profit_pct: stats.realizedProfitPercentage,
+    volume_usd: stats.volume,
+    tokens_traded: stats.tokensTraded,
   };
 }
 

@@ -64,7 +64,7 @@
     "latest_report": "20260717"
   },
   "capabilities": {
-    "offerings_live": 28,
+    "offerings_live": 29,
     "auto_fulfilled_zero_llm": [
       "bridges",
       "chain_fees",
@@ -84,6 +84,7 @@
       "token_safety_check",
       "treasury",
       "unlocks",
+      "wallet_pnl_deepdive",
       "yields"
     ],
     "offerings": [
@@ -343,6 +344,15 @@
         "auto": true,
         "x402": true,
         "data": true,
+        "sla": "instant"
+      },
+      {
+        "name": "wallet_pnl_deepdive",
+        "price_usd": 0.25,
+        "summary": "Real wallet P&L via Codex: current balances, realized profit/loss (USD/%), trade volume, tokens traded, and a P&L chart over time",
+        "auto": true,
+        "x402": true,
+        "data": false,
         "sla": "instant"
       }
     ]

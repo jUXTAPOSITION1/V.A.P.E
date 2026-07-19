@@ -1,6 +1,9 @@
 /**
- * VAPE's market-data tool tier — one x402 endpoint per tool, priced at
- * $0.01. Backed by lib/defillama.ts.
+ * VAPE's market-data tool tier — one x402 endpoint per tool. Most are priced
+ * at $0.01 and backed by lib/defillama.ts (keyless); wallet_pnl_deepdive is
+ * priced separately at $0.25 and backed by lib/codex.ts (needs a
+ * server-side CODEX_API_KEY, hence the `env` parameter on `run` below —
+ * every other offering here ignores it).
  *
  * Token logos + rich data: every protocol/chain/fee/dex tool carries a real
  * hosted `logo` URL; token-level tools (intel, chart) are enriched here with
@@ -13,6 +16,19 @@
  * array, exactly the way the 6 security offerings work.
  */
 import * as dl from "./lib/defillama";
+import * as codex from "./lib/codex";
+
+// Chain slug -> Codex's numeric network id (same ids as EVM chainIds).
+const CHAIN_NETWORK_IDS: Record<string, number> = {
+  base: codex.BASE_NETWORK_ID, ethereum: 1, arbitrum: 42161, optimism: 10, polygon: 137,
+};
+
+// Structural subset of worker/src/index.ts's `Env` — avoids a circular
+// import (index.ts imports this file) while still typechecking `c.env`
+// (a superset) at every call site.
+export interface DlEnv {
+  CODEX_API_KEY?: string;
+}
 
 export interface DlQuery {
   address?: string;
@@ -64,7 +80,7 @@ export interface DlOffering {
   inputSchema: { properties: Record<string, unknown>; required: string[] };
   inputExample: Record<string, unknown>;
   output: Record<string, unknown>;
-  run: (q: DlQuery) => Promise<Record<string, unknown>>;
+  run: (q: DlQuery, env: DlEnv) => Promise<Record<string, unknown>>;
 }
 
 // Chain-slug conventions differ by host: the coins/price oracle and the
@@ -255,6 +271,45 @@ export const DL_OFFERINGS: DlOffering[] = [
     output: { count: 25, bridges: [{ name: "Across", last_daily_volume: 5000000, chains: ["Base"] }] },
     run: async () => dl.bridges(),
   },
+  {
+    name: "wallet_pnl_deepdive",
+    price: "$0.25",
+    description: "A real wallet P&L deep-dive via Codex: current token balances with USD values, "
+      + "realized profit/loss (USD and %), total trade volume, tokens traded, and a realized-P&L "
+      + "chart series over time — not a single-acquisition-point cost-basis estimate.",
+    tags: ["wallet", "pnl", "portfolio", "base"],
+    inputSchema: {
+      properties: {
+        address: { type: "string", description: "wallet address" },
+        chain: { type: "string", description: "chain slug, default 'base'" },
+      },
+      required: ["address"],
+    },
+    inputExample: { address: "0x0000000000000000000000000000000000000000", chain: "base" },
+    output: {
+      address: "0x...", network_id: 8453,
+      balances: { items: [{ symbol: "AERO", shiftedBalance: 120.5, balanceUsd: 45.6 }] },
+      pnl: { realized_profit_usd: 1234.5, realized_profit_pct: 12.3, volume_usd: 50000, tokens_traded: 7 },
+      pnl_chart: { points: [{ timestamp: 1720000000, realizedProfitUsd: 100 }] },
+    },
+    run: async (q, env) => {
+      const a = requireAddress(q);
+      const networkId = CHAIN_NETWORK_IDS[String(q.chain || "base").toLowerCase()] ?? codex.BASE_NETWORK_ID;
+      const [balances, pnl, pnlChart] = await Promise.all([
+        codex.walletBalances(env.CODEX_API_KEY, a, [networkId]),
+        codex.walletPnlStats(env.CODEX_API_KEY, a, networkId),
+        codex.walletPnlChart(env.CODEX_API_KEY, a, networkId),
+      ]);
+      // Codex functions never throw (design law: real data or an honest
+      // {error} object) — but that means a missing key/upstream miss would
+      // otherwise sail through as a "successful" $0.25 deliverable. Surface
+      // it as a real failure so the buyer isn't charged for an error.
+      for (const r of [balances, pnl, pnlChart]) {
+        if (r && typeof r === "object" && "error" in r) throw new Error(String((r as { error: unknown }).error));
+      }
+      return { address: a, network_id: networkId, balances, pnl, pnl_chart: pnlChart };
+    },
+  },
 ];
 
 export const DL_OFFERINGS_BY_NAME: Record<string, DlOffering> =
@@ -263,11 +318,11 @@ export const DL_OFFERINGS_BY_NAME: Record<string, DlOffering> =
 // Uniform envelope matching handlers.ts::fulfill() so a market-data result and
 // a security-scan result look identical to a client. Never throws — a bad
 // param or an upstream miss comes back as status:"error" with a real message.
-export async function fulfillData(name: string, q: DlQuery) {
+export async function fulfillData(name: string, q: DlQuery, env: DlEnv) {
   const off = DL_OFFERINGS_BY_NAME[name];
   if (!off) return { offering: name, status: "error", error: "unknown offering" };
   try {
-    const deliverable = await off.run(q);
+    const deliverable = await off.run(q, env);
     return {
       offering: name, status: "ok", deliverable,
       source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",

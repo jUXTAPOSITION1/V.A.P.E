@@ -51,11 +51,13 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
 | **bounty_deep_dive** | **1.00** | **async, no fixed SLA** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review — a submission-ready PoC with full technical detail. Supply an address (Solidity/EVM) or a GitHub owner/repo (any other language, e.g. Move/Sui, via `agents/external_audit.py`) to scope it to a specific bounty program. |
 
-### Market-data tools — 0.01 USDC each
-13 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+### Market-data tools
+14 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
 tools carry real hosted logos; token tools carry the token's DexScreener logo.
-Every result is real data or an honest `{error}` — never fabricated.
+Every result is real data or an honest `{error}` — never fabricated. 13 are
+0.01 USDC each (backed by the keyless DefiLlama API); `wallet_pnl_deepdive`
+is priced separately since it's a richer, Codex-backed deliverable.
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|
@@ -72,6 +74,7 @@ Every result is real data or an honest `{error}` — never fabricated.
 | yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
+| **wallet_pnl_deepdive** | **0.25** | 5m | `address`, `chain` | Real balances + realized P&L (USD/%), volume, tokens traded, and a P&L chart, via Codex |
 
 ## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
@@ -107,7 +110,7 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 20 of 28 offerings —
+- [OK] End-to-end deliverable automation for 21 of 29 offerings —
   `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
   `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
   the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,

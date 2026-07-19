@@ -32,6 +32,14 @@ DATA_TOOLS = {
     "chain_protocols", "chain_overview", "chain_fees", "dex_volumes",
     "yields", "stablecoins", "bridges",
 }
+# wallet_pnl_deepdive is the one /data/* tool NOT backed by DefiLlama — it's
+# Codex-backed (agents/codex_data.py / worker/src/lib/codex.ts) and priced at
+# $0.25 instead of the uniform $0.01. It shares the same DATA_OFFERINGS dict /
+# worker DL_OFFERINGS array / route prefix as the 13 DefiLlama tools, so it's
+# included in the cross-surface-parity check below but excluded from the
+# "13 DefiLlama tools, all priced $0.01" assertions.
+NON_DEFILLAMA_DATA_TOOLS = {"wallet_pnl_deepdive"}
+ALL_DATA_TOOLS = DATA_TOOLS | NON_DEFILLAMA_DATA_TOOLS
 
 
 def test_data_offering_names_identical_across_all_surfaces():
@@ -41,10 +49,10 @@ def test_data_offering_names_identical_across_all_surfaces():
     # worker/src/dataHandlers.ts declares the data tools as `name: "..."` (the
     # only place in that file that does), so this captures exactly the tier.
     worker = set(re.findall(r'name:\s*"([a-z_]+)"', (ROOT / "worker/src/dataHandlers.ts").read_text()))
-    assert DL_NAMES == DATA_TOOLS                 # published catalog
-    assert set(DATA_OFFERINGS) == DATA_TOOLS      # x402 directory
-    assert worker == DATA_TOOLS                   # paid worker routes
-    assert DATA_TOOLS <= set(HANDLERS)            # every data tool is ACP-fulfillable
+    assert DL_NAMES == DATA_TOOLS                      # published DefiLlama-only catalog subset
+    assert set(DATA_OFFERINGS) == ALL_DATA_TOOLS       # x402 directory (DefiLlama + Codex)
+    assert worker == ALL_DATA_TOOLS                    # paid worker routes
+    assert ALL_DATA_TOOLS <= set(HANDLERS)             # every data tool is ACP-fulfillable
 
 
 def test_data_offerings_all_priced_one_cent():
@@ -52,7 +60,8 @@ def test_data_offerings_all_priced_one_cent():
     from agents.x402_directory_register import DATA_OFFERINGS
     assert len(DL_OFFERINGS) == 13
     assert all(price == 0.01 for _n, price, _s in DL_OFFERINGS)
-    assert all(meta[0] == "0.01" for meta in DATA_OFFERINGS.values())
+    assert all(meta[0] == "0.01" for name, meta in DATA_OFFERINGS.items() if name in DATA_TOOLS)
+    assert DATA_OFFERINGS["wallet_pnl_deepdive"][0] == "0.25"
 
 
 def _stub_defillama(monkeypatch):
@@ -109,4 +118,48 @@ def test_slug_handler_errors_honestly_without_slug(monkeypatch):
     _stub_defillama(monkeypatch)
     from agents import acp_fulfill as A
     out = A.fulfill("protocol", {})  # no slug provided
+    assert out["deliverable"].get("error")
+
+
+def _stub_codex_data(monkeypatch):
+    """Same pattern as _stub_defillama above, for agents.codex_data — a fake
+    module recording calls, no network."""
+    import agents
+    fake = types.ModuleType("agents.codex_data")
+    calls = []
+
+    def rec(name):
+        def f(*a, **k):
+            calls.append((name, a, k))
+            return {"ok": name}
+        return f
+
+    for fn in ["wallet_balances", "wallet_pnl_stats", "wallet_pnl_chart"]:
+        setattr(fake, fn, rec(fn))
+    monkeypatch.setitem(sys.modules, "agents.codex_data", fake)
+    monkeypatch.setattr(agents, "codex_data", fake, raising=False)
+    return calls
+
+
+def test_wallet_pnl_deepdive_routes_address_and_network_id(monkeypatch):
+    calls = _stub_codex_data(monkeypatch)
+    from agents import acp_fulfill as A
+    wallet = "0x" + "b" * 40
+    out = A.fulfill("wallet_pnl_deepdive", {"address": wallet, "chain": "arbitrum"})
+    assert out["status"] == "ok"
+    d = out["deliverable"]
+    assert d["address"] == wallet
+    assert d["network_id"] == 42161  # arbitrum, per _CODEX_NETWORK_IDS
+    names_and_args = [(n, a) for n, a, _k in calls]
+    assert names_and_args == [
+        ("wallet_balances", (wallet, [42161])),
+        ("wallet_pnl_stats", (wallet, 42161)),
+        ("wallet_pnl_chart", (wallet, 42161)),
+    ]
+
+
+def test_wallet_pnl_deepdive_errors_honestly_without_address(monkeypatch):
+    _stub_codex_data(monkeypatch)
+    from agents import acp_fulfill as A
+    out = A.fulfill("wallet_pnl_deepdive", {})
     assert out["deliverable"].get("error")

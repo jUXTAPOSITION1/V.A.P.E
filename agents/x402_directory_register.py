@@ -129,8 +129,12 @@ OFFERINGS = {
 
 # Market-data micro-services — mirrors worker/src/dataHandlers.ts's
 # DL_OFFERINGS exactly. These are served at /data/<name> (not /scan/<name>),
-# so they're kept in their own dict and routed accordingly below. All 0.01 USDC.
+# so they're kept in their own dict and routed accordingly below. Mostly
+# 0.01 USDC (the keyless DefiLlama tools); wallet_pnl_deepdive is priced
+# separately since it's a Codex-backed, richer deliverable.
 DATA_OFFERINGS = {
+    "wallet_pnl_deepdive": ("0.25", "Real wallet P&L via Codex: current balances, realized "
+                       "profit/loss (USD/%), trade volume, tokens traded, and a P&L chart."),
     "token_intel": ("0.01", "Price + confidence, oracle-derived token age, optional "
                        "fees/unlocks/treasury, and the token's real logo."),
     "token_chart": ("0.01", "Daily price series (default 30d) + token logo."),
