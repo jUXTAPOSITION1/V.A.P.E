@@ -148,5 +148,80 @@
     "report": "intel/threat-analysis/2026-06-15-thetanuts-finance.md",
     "provider": "xai_1",
     "written_at": "2026-07-19T09:48:56Z"
+  },
+  "2026-06-14:Aztec Connect": {
+    "report": "intel/threat-analysis/2026-06-14-aztec-connect.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-19T14:48:30Z"
+  },
+  "2026-06-10:Raydium AMM": {
+    "report": "intel/threat-analysis/2026-06-10-raydium-amm.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:48:37Z"
+  },
+  "2026-06-09:Asterix": {
+    "report": "intel/threat-analysis/2026-06-09-asterix.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:48:49Z"
+  },
+  "2026-06-09:NovaBox": {
+    "report": "intel/threat-analysis/2026-06-09-novabox.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:48:58Z"
+  },
+  "2026-06-09:Token of Power": {
+    "report": "intel/threat-analysis/2026-06-09-token-of-power.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:49:10Z"
+  },
+  "2026-06-08:Flooring Protocol": {
+    "report": "intel/threat-analysis/2026-06-08-flooring-protocol.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:49:20Z"
+  },
+  "2026-06-08:Humanity": {
+    "report": "intel/threat-analysis/2026-06-08-humanity.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:49:29Z"
+  },
+  "2026-06-07:Syscoin Bridge": {
+    "report": "intel/threat-analysis/2026-06-07-syscoin-bridge.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-19T14:49:36Z"
+  },
+  "2026-06-07:Ambient": {
+    "report": "intel/threat-analysis/2026-06-07-ambient.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:49:45Z"
+  },
+  "2026-06-03:GPU.NET": {
+    "report": "intel/threat-analysis/2026-06-03-gpu-net.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:49:53Z"
+  },
+  "2026-06-03:ATM": {
+    "report": "intel/threat-analysis/2026-06-03-atm.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:50:02Z"
+  },
+  "2026-06-01:TSR": {
+    "report": "intel/threat-analysis/2026-06-01-tsr.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:50:11Z"
+  },
+  "2026-06-01:Gnosis Pay": {
+    "report": "intel/threat-analysis/2026-06-01-gnosis-pay.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:50:20Z"
+  },
+  "2026-05-31:AROS": {
+    "report": "intel/threat-analysis/2026-05-31-aros.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:50:29Z"
+  },
+  "2026-05-31:Fluid Lending": {
+    "report": "intel/threat-analysis/2026-05-31-fluid-lending.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-19T14:50:39Z"
   }
 }
