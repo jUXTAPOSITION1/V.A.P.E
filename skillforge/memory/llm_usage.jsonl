@@ -275,3 +275,17 @@
 {"ts": "2026-07-18T20:05:13Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 847, "completion_tokens": 249, "total_tokens": 1790}
 {"ts": "2026-07-18T20:13:17Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 654, "completion_tokens": 185, "total_tokens": 1401}
 {"ts": "2026-07-18T20:51:53Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2302, "completion_tokens": 128, "total_tokens": 3146}
+{"ts": "2026-07-18T20:59:51Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 459, "completion_tokens": 128, "total_tokens": 1161}
+{"ts": "2026-07-18T21:25:32Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 688, "completion_tokens": 195, "total_tokens": 1381}
+{"ts": "2026-07-18T21:29:37Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 94, "total_tokens": 2047}
+{"ts": "2026-07-18T21:41:58Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 949, "completion_tokens": 226, "total_tokens": 1603}
+{"ts": "2026-07-18T21:45:24Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1141, "completion_tokens": 3, "total_tokens": 1841}
+{"ts": "2026-07-18T21:52:46Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2329, "completion_tokens": 90, "total_tokens": 2956}
+{"ts": "2026-07-18T22:24:53Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 621, "completion_tokens": 224, "total_tokens": 1325}
+{"ts": "2026-07-18T22:28:04Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 71, "total_tokens": 2072}
+{"ts": "2026-07-18T22:51:49Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2326, "completion_tokens": 0, "total_tokens": 2348}
+{"ts": "2026-07-18T23:28:30Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 622, "completion_tokens": 163, "total_tokens": 1308}
+{"ts": "2026-07-18T23:32:31Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 460, "total_tokens": 2585}
+{"ts": "2026-07-18T23:55:23Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2465, "completion_tokens": 289, "total_tokens": 3642}
+{"ts": "2026-07-19T01:05:07Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 74687, "completion_tokens": 23, "total_tokens": 75333}
+{"ts": "2026-07-19T01:06:10Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 171, "total_tokens": 2248}

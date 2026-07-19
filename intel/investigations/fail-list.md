@@ -1,9 +1,11 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-18T20:13:17Z — 53 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-19T01:05:07Z — 55 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BRIUN | Base | `0xb20000000000000000000012141bf387DD37eB01` | 5/100 | 1 | 2026-07-19T01:05:07Z |
+| COBIE | Base | `0xb200000000000000000000cFe0745F0793F0206b` | 40/100 | 1 | 2026-07-18T22:24:53Z |
 | BRIUN | Base | `0xb20000000000000000000038a46caFDcb2B3a301` | 10/100 | 1 | 2026-07-18T19:32:46Z |
 | MidnightProtocol | Base | `0x0675E10c848Ca8a725d186f7626dD5247cEED9Ea` | 45/100 | 1 | 2026-07-18T17:33:36Z |
 | COBIE | Base | `0xB20000000000000000000033C22aB099bbF76001` | 30/100 | 1 | 2026-07-18T16:27:25Z |

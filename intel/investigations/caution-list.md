@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-18T20:13:17Z — 22 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-19T01:05:07Z — 23 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BRIAN | Base | `0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2` | 58/100 | 1 | 2026-07-18T21:25:32Z |
 | BRIAN | Base | `0x243666616819d6D0A106A769efB1Ee8890Ae2F73` | 58/100 | 1 | 2026-07-18T20:13:17Z |
 | MidnightProtocol | Base | `0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB` | 65/100 | 1 | 2026-07-18T19:09:21Z |
 | GITLAWB | Base | `0xB73a50850680c66CF6C14e5276A7f6149f0b7f63` | 78/100 | 1 | 2026-07-18T06:28:42Z |

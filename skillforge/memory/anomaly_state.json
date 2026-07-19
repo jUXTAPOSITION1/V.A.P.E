@@ -8,8 +8,8 @@
     "value": -82.508
   },
   "mover:BRIUN / WETH 1%": {
-    "ts": "2026-07-18T20:51:43Z",
-    "value": 315.477
+    "ts": "2026-07-18T23:55:12Z",
+    "value": 445.226
   },
   "mover:COBIE / WETH 0.01%": {
     "ts": "2026-07-18T17:06:55Z",
@@ -22,10 +22,6 @@
   "mover:MidnightProtocol / WETH 0.3%": {
     "ts": "2026-07-18T20:51:43Z",
     "value": 468.967
-  },
-  "mover:OpenAI / USDC 0.01%": {
-    "ts": "2026-07-16T22:57:37Z",
-    "value": 97851.236
   },
   "mover:TSG / WETH": {
     "ts": "2026-07-18T11:53:33Z",

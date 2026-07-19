@@ -642,7 +642,6 @@ def _oci_grok_daily_cap_usd():
     except (TypeError, ValueError):
         return DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD
 
-
 def _call_oci_grok(system, user, temperature, max_tokens, timeout):
     """OCI's OpenAI-compatible Generative AI endpoint uses the exact same
     request/response shape as _call() above (model/messages/temperature/
@@ -719,7 +718,6 @@ def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
                 print(f"[llm] oci_grok:{type(e).__name__}:{e}", file=sys.stderr)
     return ask_vertex_candidate(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
                                  timeout=timeout, provider_order=provider_order)
-
 
 def ask_oci_grok_safe(system, user, **kw):
     """ask_oci_grok() with ask_safe()'s same never-raise guarantee."""

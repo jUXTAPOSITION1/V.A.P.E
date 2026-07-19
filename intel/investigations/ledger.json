@@ -731,6 +731,25 @@
     "symbol": "OpenAI",
     "times_investigated": 1
   },
+  "8453:0x02c4347ece55fe108c9a29e96221615f13070791": {
+    "address": "0x02C4347ECE55Fe108c9A29e96221615f13070791",
+    "chain": "8453",
+    "creator_address": "0x00e6c0560438baf5b5deb60cdf8503b12b39e0fd",
+    "first_investigated": "2026-07-18T23:28:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-232830-0x02C4347E.md",
+        "score": 90,
+        "ts": "2026-07-18T23:28:30Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-18T23:28:30Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "COBIE",
+    "times_investigated": 1
+  },
   "8453:0x038ad3c2241f54492e25a8a419fd3e4494c6db07": {
     "address": "0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07",
     "chain": "8453",
@@ -944,6 +963,25 @@
     "last_score": 100,
     "last_verdict": "PROCEED",
     "symbol": "BASE",
+    "times_investigated": 1
+  },
+  "8453:0x21b8dfe779671e54a4009f1882b955e0f6d1e0a2": {
+    "address": "0x21b8dfe779671e54A4009F1882B955e0F6d1e0A2",
+    "chain": "8453",
+    "creator_address": "0xa89ca2976112bd03680e60cdd25d20de4b319624",
+    "first_investigated": "2026-07-18T21:25:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-212532-0x21b8dfe7.md",
+        "score": 58,
+        "ts": "2026-07-18T21:25:32Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-18T21:25:32Z",
+    "last_score": 58,
+    "last_verdict": "CAUTION",
+    "symbol": "BRIAN",
     "times_investigated": 1
   },
   "8453:0x2228b3832ac68eb8f35fb007d92d28e0c048206f": {
@@ -1728,6 +1766,24 @@
     "symbol": "mr_lightspeed",
     "times_investigated": 1
   },
+  "8453:0xb20000000000000000000012141bf387dd37eb01": {
+    "address": "0xb20000000000000000000012141bf387DD37eB01",
+    "chain": "8453",
+    "first_investigated": "2026-07-19T01:05:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260719-010507-0xb2000000.md",
+        "score": 5,
+        "ts": "2026-07-19T01:05:07Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-19T01:05:07Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "BRIUN",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000029784108e9706a0001": {
     "address": "0xB20000000000000000000029784108e9706A0001",
     "chain": "8453",
@@ -1834,6 +1890,24 @@
     "last_score": 30,
     "last_verdict": "REJECT",
     "symbol": "BRIAN",
+    "times_investigated": 1
+  },
+  "8453:0xb200000000000000000000cfe0745f0793f0206b": {
+    "address": "0xb200000000000000000000cFe0745F0793F0206b",
+    "chain": "8453",
+    "first_investigated": "2026-07-18T22:24:53Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260718-222453-0xb2000000.md",
+        "score": 40,
+        "ts": "2026-07-18T22:24:53Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-18T22:24:53Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "COBIE",
     "times_investigated": 1
   },
   "8453:0xb200000000000000000000eae54086e2363c0ec1": {
