@@ -676,6 +676,50 @@ const App = {
         if (chgEl) chgEl.innerHTML = pct(detail.change24);
         const holdEl = document.getElementById('v-holders');
         if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span> ${this._scorePill(this._virtualsScore(detail, holders))}`;
+        this._renderTopWallets(holders.items || []);
+    },
+
+    // Real top-holder wallets for VIRTUAL, from the same Codex holders() call
+    // /virtuals-snapshot already makes for the concentration stat above —
+    // no new backend route or Codex request. Codex has no chain-wide
+    // "most active/profitable wallets" query to build a fabricated global
+    // leaderboard from, so this is scoped honestly: the real wallets actually
+    // holding this token, each one hireable for the $0.25 P&L deep-dive.
+    _renderTopWallets(items) {
+        const el = document.getElementById('virtuals-top-wallets');
+        if (!el) return;
+        el.innerHTML = items.length ? items.slice(0, 10).map((h,i) => {
+            const addr = h.address || '';
+            const short = addr ? addr.slice(0,6)+'…'+addr.slice(-4) : '—';
+            return `
+            <div class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                <div class="min-w-0 flex-1">
+                    <div class="font-mono text-xs truncate">${this._esc(short)}</div>
+                </div>
+                <div class="text-right shrink-0 text-xs text-zinc-300">${h.balance!=null?Number(h.balance).toLocaleString(undefined,{maximumFractionDigits:2}):'—'}</div>
+                <button onclick="Hire.openData('wallet_pnl_deepdive', 0.25, {address:'${this._esc(addr)}'})"
+                    class="shrink-0 text-[10px] px-2 py-1 border border-white/10 hover:border-white/30 whitespace-nowrap">Hire deep-dive</button>
+            </div>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">Holder data unavailable right now.</div>';
+    },
+
+    // VAPE Score for a trending Base token — same 0-100/neutral-50/skip-on-
+    // missing shape as _moverScore(), and for the same reason: this list is
+    // already ranked by Codex's own volume/liquidity signal, so the score
+    // measures market QUALITY (a real, liquid, established pair) rather than
+    // rewarding the momentum the ranking already captures. isVirtuals is
+    // informational (which ecosystem launched it), not a quality signal, so
+    // it isn't scored either way.
+    _trendingTokenScore(t) {
+        let score = 50;
+        if (typeof t.liquidity === 'number') {
+            if (t.liquidity >= 50000) score += 15;
+            else if (t.liquidity < 5000) score -= 20;
+        }
+        if (typeof t.marketCap === 'number' && t.marketCap >= 1000000) score += 10;
+        if (typeof t.change24 === 'number' && Math.abs(t.change24) >= 50) score -= 10;
+        return Math.max(0, Math.min(100, Math.round(score)));
     },
 
     _renderTrendingBase() {
@@ -693,6 +737,7 @@ const App = {
                     <div class="flex items-center gap-2 min-w-0">
                         <span class="truncate">${this._esc(tok.symbol||'?')}</span>
                         ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
+                        ${this._scorePill(this._trendingTokenScore(t))}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
                 </div>

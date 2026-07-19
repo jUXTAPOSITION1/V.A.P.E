@@ -337,13 +337,16 @@ const Hire = {
     },
 
     // ── VAPE market-data tools ($0.01 each) ───────────────────────────────────
-    openData(offeringName, priceUsd) {
+    // prefill optionally pre-populates input fields by key (e.g. {address:
+    // '0x...'}) — used by callers that already know the target, like a
+    // top-holder row linking straight into a hire for that specific wallet.
+    openData(offeringName, priceUsd, prefill) {
         this._closeModal();
         const spec = DATA_OFFERINGS[offeringName];
         const title = offeringName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         const fields = spec.inputs.map(f => `
             <label class="text-xs text-zinc-500 block mb-1">${escapeHtml(f.label)}</label>
-            <input data-key="${escapeHtml(f.k)}" type="text" placeholder="${escapeHtml(f.ph || '')}" value="${escapeHtml(f.def || '')}"
+            <input data-key="${escapeHtml(f.k)}" type="text" placeholder="${escapeHtml(f.ph || '')}" value="${escapeHtml((prefill && prefill[f.k]) || f.def || '')}"
                    class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-3">`).join('');
         const modal = document.createElement('div');
         modal.id = 'hire-modal';
