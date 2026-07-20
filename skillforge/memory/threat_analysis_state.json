@@ -258,5 +258,10 @@
     "report": "intel/threat-analysis/2026-05-25-bitmor.md",
     "provider": "xai_1",
     "written_at": "2026-07-19T20:39:53Z"
+  },
+  "2026-07-16:DefiTuna Lending": {
+    "report": "intel/threat-analysis/2026-07-16-defituna-lending.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-20T16:40:30Z"
   }
 }
