@@ -58,8 +58,8 @@ tools carry real hosted logos; token tools carry the token's DexScreener logo.
 Every result is real data or an honest `{error}` — never fabricated. 14 are
 0.01 USDC each (13 backed by the keyless DefiLlama API, plus
 `prediction_market_odds` backed by the keyless Polymarket/Kalshi APIs);
-`wallet_pnl_deepdive` is priced separately since it's a richer, Codex-backed
-deliverable.
+`wallet_pnl_deepdive` is priced separately since it's a richer, Alchemy +
+CoinGecko-backed deliverable (Base mainnet only).
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|
@@ -76,7 +76,7 @@ deliverable.
 | yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
-| **wallet_pnl_deepdive** | **0.25** | 5m | `address`, `chain` | Real balances + realized P&L (USD/%), volume, tokens traded, and a P&L chart, via Codex |
+| **wallet_pnl_deepdive** | **0.25** | 5m | `address` | Real Base-mainnet balances (via Alchemy) + an unrealized-P&L estimate per holding (current value vs. first-acquisition price, via CoinGecko) |
 | prediction_market_odds | 0.01 | 5m | optional `limit` | Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume |
 
 ## The autonomous monitor ([OK])

@@ -791,7 +791,17 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
       latency_ms: Date.now() - t0,
       error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
     });
-    return c.json(result);
+    // A non-2xx status here is what makes @x402/hono's own settlement gate
+    // (res.status >= 400 -> cancel, never settle) actually engage — c.json()
+    // defaults to 200 regardless of this body's own status:"error" field, so
+    // without this a total failure still got charged. Real bug: two logged
+    // wallet_pnl_deepdive jobs below settled $0.25 each for a "no_key" error
+    // with nothing delivered, confirmed via /x402/feed's real on-chain
+    // tx_hash on both. Partial-but-real results (e.g. exploit_check's
+    // {"verified": null} on a missing key) still return status:"ok" and are
+    // rightly still billable — this only blocks a total, nothing-delivered
+    // failure.
+    return c.json(result, result.status === "error" ? 502 : 200);
   });
 }
 
@@ -827,7 +837,11 @@ for (const o of DL_OFFERINGS) {
       latency_ms: Date.now() - t0,
       error: result.status === "error" ? String((result as { error?: unknown }).error ?? "unknown error") : null,
     });
-    return c.json(result);
+    // Same fix as /scan/*'s handler above — a non-2xx status here is what
+    // lets @x402/hono's own settlement gate skip charging on a total
+    // failure (see the comment there for the wallet_pnl_deepdive incident
+    // this was found from).
+    return c.json(result, result.status === "error" ? 502 : 200);
   });
 }
 

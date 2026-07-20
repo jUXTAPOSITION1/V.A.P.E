@@ -132,10 +132,13 @@ OFFERINGS = {
 # so they're kept in their own dict and routed accordingly below. Mostly
 # 0.01 USDC (the keyless DefiLlama tools, plus prediction_market_odds which
 # is also keyless via Polymarket/Kalshi); wallet_pnl_deepdive is priced
-# separately since it's a Codex-backed, richer deliverable.
+# separately since it's a richer, Alchemy + CoinGecko-backed deliverable
+# (Base mainnet only — rebuilt off Codex after its wallet-analytics fields
+# turned out to be paid-plan-gated).
 DATA_OFFERINGS = {
-    "wallet_pnl_deepdive": ("0.25", "Real wallet P&L via Codex: current balances, realized "
-                       "profit/loss (USD/%), trade volume, tokens traded, and a P&L chart."),
+    "wallet_pnl_deepdive": ("0.25", "Real Base-mainnet wallet balances (Alchemy) + an "
+                       "unrealized-P&L estimate per holding (current value vs. first-"
+                       "acquisition price, via CoinGecko)."),
     "prediction_market_odds": ("0.01", "Live crypto/Base-relevant prediction-market odds from "
                        "Polymarket and Kalshi, ranked by volume."),
     "token_intel": ("0.01", "Price + confidence, oracle-derived token age, optional "

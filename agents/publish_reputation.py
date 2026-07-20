@@ -65,9 +65,14 @@ DL_OFFERINGS = [
 DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
 
 # Live offerings the agent SELLS (price + which are auto-fulfilled with zero LLM).
+# wallet_pnl_deepdive deliberately excluded — it's x402-payable (added to
+# X402 explicitly below) but no longer ACP-auto-fulfilled; see
+# agents/acp_fulfill.py's HANDLERS comment for why (Codex's wallet-analytics
+# fields are paid-plan-gated; the ACP path was removed rather than ported to
+# a from-scratch Python Alchemy client, unlike the x402 path which was).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
         "exploit_check", "dossier_check", "market_intel",
-        "community_intel_broadcast", "wallet_pnl_deepdive",
+        "community_intel_broadcast",
         "prediction_market_odds"} | DL_NAMES
 # Zero-LLM deliverables specifically. dossier_check stays in AUTO above
 # (the monitor still auto-prices/submits it with no triage wake — see
@@ -83,8 +88,10 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
 # above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
 # community_intel_broadcast is auto-fulfilled via ACP but has no worker route
-# (not in OFFERING_PRICES), so it's excluded here.
-X402 = (AUTO | {"bounty_deep_dive"}) - {"community_intel_broadcast"}
+# (not in OFFERING_PRICES), so it's excluded here. wallet_pnl_deepdive is the
+# reverse case — x402-payable (worker/src/dataHandlers.ts, Alchemy-backed)
+# but not in AUTO since it's no longer ACP-auto-fulfilled.
+X402 = (AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive"}) - {"community_intel_broadcast"}
 # (AUTO already includes DL_NAMES, so the market-data tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
@@ -126,8 +133,9 @@ OFFERINGS = [
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
     ("bounty_deep_dive", 1.00, "Submission-ready PoC and full technical detail: full recon + "
      "Slither + frontier-model line-by-line source review, real committed report"),
-    ("wallet_pnl_deepdive", 0.25, "Real wallet P&L via Codex: current balances, realized profit/loss "
-     "(USD/%), trade volume, tokens traded, and a P&L chart over time"),
+    ("wallet_pnl_deepdive", 0.25, "Real Base-mainnet wallet balances (via Alchemy) + an "
+     "unrealized-P&L estimate per holding (current value vs. first-acquisition price, via "
+     "CoinGecko) — x402 only, not ACP-fulfilled"),
     ("prediction_market_odds", 0.01, "Live crypto/Base-relevant prediction-market odds from "
      "Polymarket and Kalshi, ranked by volume"),
     *DL_OFFERINGS,

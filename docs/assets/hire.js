@@ -66,8 +66,11 @@ const DATA_OFFERINGS = {
                                     { k: 'symbol', label: 'Symbol (optional)', ph: 'USDC', opt: true }] },
     stablecoins:     { inputs: [] },
     bridges:         { inputs: [] },
-    wallet_pnl_deepdive: { inputs: [{ k: 'address', label: 'Wallet address to hire the deep-dive for', ph: '0x… wallet', addr: true },
-                                    { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' }] },
+    // Base mainnet only — the Alchemy-backed pipeline behind this offering
+    // (worker/src/dataHandlers.ts, rebuilt off Codex after its wallet-
+    // analytics fields turned out to be paid-plan-gated) has no other chain
+    // configured, so there's no real chain selector to show here.
+    wallet_pnl_deepdive: { inputs: [{ k: 'address', label: 'Wallet address to hire the deep-dive for', ph: '0x… wallet', addr: true }] },
 };
 
 const Hire = {
