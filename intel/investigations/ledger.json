@@ -1955,6 +1955,24 @@
     "symbol": "BRIUN",
     "times_investigated": 1
   },
+  "8453:0xb20000000000000000000024bdb2e92b8826ad30": {
+    "address": "0xB20000000000000000000024bDb2e92b8826AD30",
+    "chain": "8453",
+    "first_investigated": "2026-07-20T04:22:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-042257-0xB2000000.md",
+        "score": 40,
+        "ts": "2026-07-20T04:22:57Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T04:22:57Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "DUAL",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000029784108e9706a0001": {
     "address": "0xB20000000000000000000029784108e9706A0001",
     "chain": "8453",

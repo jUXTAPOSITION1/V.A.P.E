@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T04:12:31Z",
+  "generated": "2026-07-20T04:22:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 87,
-    "investigations": 245,
+    "investigations": 246,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260720-000416-0xA1AFFfE3.md",
-      "title": "Investigation \u2014 RFI",
-      "symbol": "RFI",
-      "name": "reflect.finance",
-      "date": "2026-07-20T00:04:16Z",
-      "target": "0xA1AFFfE3F4D611d252010E3EAf6f4D77088b0cd7",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $1,181 (rug/illiquid); [-10] Low liquidity $1,181. Positive evidence: Ownership renounced; 8129 holders \u2014 reasonably distributed; Trading 2050+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this toke",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-000416-0xA1AFFfE3.md"
+      "file": "investigation-20260720-042257-0xB2000000.md",
+      "title": "Investigation \u2014 DUAL",
+      "symbol": "DUAL",
+      "name": "DUAL",
+      "date": "2026-07-20T04:22:57Z",
+      "target": "0xB20000000000000000000024bDb2e92b8826AD30",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-042257-0xB2000000.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260720-042257-0xB2000000.md",
+      "title": "Investigation \u2014 DUAL",
+      "symbol": "DUAL",
+      "name": "DUAL",
+      "date": "2026-07-20T04:22:57Z",
+      "target": "0xB20000000000000000000024bDb2e92b8826AD30",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-042257-0xB2000000.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260720-000416-0xA1AFFfE3.md",
@@ -593,20 +607,6 @@
       "score": "55",
       "summary": "Risk factors: [-10] Owner not renounced (0x0f5f60ad3e43839d6b9d4a6d1d8eded24db73c32) \u2014 can still act on the contract; [-10] Violent 24h move +1460% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-183451-0xFdcD8be9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-171821-0xB2000000.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Coinbase Man",
-      "date": "2026-07-17T17:18:21Z",
-      "target": "0xB200000000000000000000EAe54086e2363C0eC1",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +3541% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-171821-0xB2000000.md"
     }
   ],
   "reports": [

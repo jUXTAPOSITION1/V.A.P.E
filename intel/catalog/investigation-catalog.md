@@ -341,3 +341,5 @@
 | 2026-07-19 | auto | 0x8B7DdE054BE9D180c1Be7FaE0874697374A49832 (PROS) | deep_investigation | CAUTION (70/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-20 | auto | 0xA1AFFfE3F4D611d252010E3EAf6f4D77088b0cd7 (RFI) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,181 (rug/illiquid) | +7d |
+
+| 2026-07-20 | auto | 0xB20000000000000000000024bDb2e92b8826AD30 (DUAL) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
