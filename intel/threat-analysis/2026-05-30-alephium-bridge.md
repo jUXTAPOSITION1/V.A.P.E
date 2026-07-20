@@ -3,7 +3,7 @@
 **Date:** 2026-05-30  
 **Loss:** $0.815M  
 **Chains:** Ethereum  
-**Analysis by:** oci_grok  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T20:38:53Z
 
 ---

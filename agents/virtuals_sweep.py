@@ -210,7 +210,7 @@ A single day's price move can no longer single-handedly swing this score.
 - CoinGecko + DefiLlama (`get_virtuals_snapshot`) — keyless, real-time
 - `data/reputation.json` — this repo's own published, git-derived activity ledger
 - Live web search ({search.get('provider') or 'unavailable'})
-- LLM synthesis: {provider or 'unavailable this cycle'}
+- Narrative synthesis: {'VAPE' if provider else 'unavailable this cycle'}
 
 ---
 

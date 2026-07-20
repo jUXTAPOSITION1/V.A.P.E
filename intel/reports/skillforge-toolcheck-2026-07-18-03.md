@@ -5,7 +5,7 @@
 
 ---
 
-## Analyst Briefing (Grok 4.1 Fast)
+## Analyst Briefing
 
 **Root cause (hack_feed):** The probe command executes inline Python (via curl + python3 -c) whose line 7 performs a division on a None value. The captured traceback is the only evidence; no other output, install step, or web research is present.
 

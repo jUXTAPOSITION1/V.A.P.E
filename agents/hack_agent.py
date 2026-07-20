@@ -4,11 +4,15 @@ HACK Agent — VAPE's per-incident threat-analysis writer.
 Every real incident in data/attack-feed.json's lookback window (the same
 feed security_sweep.py already writes from DeFiLlama's real hacks data) gets
 its own real, standalone markdown analysis — not just the single rule-based
-"lesson" tag the Threat Ledger already shows. Grounded ONLY in the real
-fields security_sweep.py already gathered (name/date/amount/technique/
-chains/lesson) plus one real web search for public writeups — the model is
-told never to invent a detail beyond what's given, and to say plainly when
-the real data is too thin to say more.
+"lesson" tag the Threat Ledger already shows. Grounded in the real fields
+security_sweep.py already gathered (name/date/amount/technique/chains/
+lesson), two differently-worded real web searches for public writeups, AND
+the model's own live web/X search (agents/llm.py::ask()'s search=True — see
+_write_analysis()'s comment for why: a real one-incident side-by-side
+against a direct Grok query exposed that the single pre-fetched search this
+used to run on alone was nowhere near enough). The model is told never to
+invent a detail beyond what it actually found or was given, and to say
+plainly when real research still turns up nothing.
 
 Written by OCI-hosted Grok 4.3 first (agents/llm.py::ask_oci_grok() —
 VAPE's newest, most capable currently-wired reasoning model), falling back
@@ -91,24 +95,48 @@ def _write_analysis(h):
     """Real LLM narrative for one incident. Returns (report_path, provider)
     or (None, None) if every provider in the chain is unreachable this run —
     never raises, matching agents/intel_common.py::grok_analysis()'s
-    contract."""
+    contract.
+
+    Grounded in two independent research passes, not one: the existing
+    Tavily/Brave pre-fetch (web_search_snippets, widened from 4 to 6 results
+    and a second, differently-worded query — post-mortems for a niche DeFi
+    incident often use different terms like "exploit analysis" or the
+    protocol's own incident-report wording rather than "post-mortem")
+    PLUS search=True on the LLM call itself, which opts into xAI's own Live
+    Search (see agents/llm.py::ask() docstring) so Grok researches the
+    incident directly the same way it does when a human asks it in chat —
+    real gap this closes: a 2026-07-20 side-by-side on this exact incident
+    (DefiTuna Lending) showed our own pipeline reporting "no public
+    writeups found" for a hack that a direct Grok query resolved in full,
+    down to the tx hash and attacker addresses, because our pipeline was
+    only ever grounded in the thin pre-fetch, never in live search."""
     from agents.llm import ask_oci_grok_safe, FRONTIER_ORDER
-    search = ic.web_search_snippets(f"{h['name']} hack exploit post-mortem {h['date']}", max_results=4)
+    search_a = ic.web_search_snippets(f"{h['name']} hack exploit post-mortem {h['date']}", max_results=6)
+    search_b = ic.web_search_snippets(f"{h['name']} exploit analysis attacker address root cause", max_results=6)
     grounding = _grounding(h)
-    search_section = ic.format_search_section("Public writeups found this run", search)
+    search_section = (
+        ic.format_search_section("Public writeups found this run (query 1)", search_a)
+        + "\n" + ic.format_search_section("Public writeups found this run (query 2)", search_b)
+    )
     system = (
         "You are VAPE's senior security analyst, writing a real, standalone threat-analysis "
         "report for one specific real hack, to be published on VAPE's public site. You are "
-        "given the real, verified facts VAPE's own pipeline gathered about this incident — "
-        "never invent a number, name, date, or detail beyond what's given here or what a "
-        "linked public writeup actually says. Explain what happened, the real technical root "
-        "cause if it's known, why it matters, and what a protocol team should take away from "
-        "it. If the real data is thin, say so honestly rather than padding with generic "
-        "security advice."
+        "given the real, verified facts VAPE's own pipeline gathered about this incident, plus "
+        "two pre-fetched web searches — but you also have live web/X search available to you "
+        "directly: use it to find the actual attack flow, transaction hashes, attacker "
+        "addresses, and root cause if any of that isn't already in what you were given. Never "
+        "invent a number, name, date, or detail — only report what you actually found (via the "
+        "pre-fetched searches, your own live search, or what's given above) or what a linked "
+        "public writeup actually says, and cite where each concrete fact came from. Explain "
+        "what happened, the real technical root cause if it's known, why it matters, and what a "
+        "protocol team should take away from it. If real research (yours or the pre-fetch) "
+        "truly turns up nothing, say so honestly rather than padding with generic security "
+        "advice — but exhaust your own live search first; thin pre-fetched snippets alone are "
+        "not sufficient grounds to conclude nothing is publicly known."
     )
     user = f"{grounding}\n\n{search_section}"
     text, provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                        temperature=0.5, max_tokens=1800)
+                                        temperature=0.5, max_tokens=1800, search=True)
     if (text or "").startswith("[llm unavailable"):
         return None, None
 
@@ -119,7 +147,7 @@ def _write_analysis(h):
         f"**Date:** {h['date']}  \n"
         f"**Loss:** ${h.get('amount_usd_m', 0)}M  \n"
         f"**Chains:** {', '.join(h.get('chains') or []) or 'unknown'}  \n"
-        f"**Analysis by:** {provider}  \n"
+        f"**Analysis by:** VAPE  \n"
         f"**Generated:** {ic.now_iso()}\n\n---\n\n"
     )
     with open(path, "w") as f:

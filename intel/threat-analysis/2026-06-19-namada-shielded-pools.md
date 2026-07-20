@@ -3,7 +3,7 @@
 **Date:** 2026-06-19  
 **Loss:** $0.6M  
 **Chains:** Namada  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T09:47:37Z
 
 ---

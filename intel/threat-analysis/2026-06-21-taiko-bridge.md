@@ -3,7 +3,7 @@
 **Date:** 2026-06-21  
 **Loss:** $1.7M  
 **Chains:** Taiko  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T09:46:25Z
 
 ---

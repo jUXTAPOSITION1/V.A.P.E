@@ -119,7 +119,7 @@ Previous reading: {fng.get('prev_value', 'unavailable')} ({fng.get('prev_classif
 ## Sources
 - Fear & Greed Index (`api.alternative.me/fng`) — keyless, real-time
 - Live web search ({virtuals_search.get('provider') or 'unavailable'})
-- LLM synthesis: {provider or 'unavailable this cycle'}
+- Narrative synthesis: {'VAPE' if provider else 'unavailable this cycle'}
 
 ---
 

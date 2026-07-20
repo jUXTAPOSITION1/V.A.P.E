@@ -152,7 +152,7 @@ docstring in `agents/macro_sweep.py` for the exact thresholds.
 - CoinGecko global market data — keyless
 - DefiLlama stablecoins — keyless
 - Live web search ({search.get('provider') or 'unavailable'})
-- LLM synthesis: {provider or 'unavailable this cycle'}
+- Narrative synthesis: {'VAPE' if provider else 'unavailable this cycle'}
 
 ---
 

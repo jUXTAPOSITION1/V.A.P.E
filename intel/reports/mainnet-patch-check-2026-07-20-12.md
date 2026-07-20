@@ -21,7 +21,7 @@ Re-checked 2 previously-flagged item(s) from the original Code4rena audit + atta
 
 ---
 
-## Analyst Briefing (Grok 4.1 Fast)
+## Analyst Briefing
 
 **Analyst Briefing**
 
@@ -59,7 +59,7 @@ canonical address to re-check automatically. That remains a manual/deep-dive ite
 - Etherscan V2 / Basescan verified source (`get_contract_source`)
 - Live web search (keyless)
 - Prior finding: `intel/reports/mainnet-patch-check-2026-06-10.md`, `intel/reports/attack-surface-map-2026-06-10.md`
-- Analyst Briefing: OCI-hosted Grok 4.3 (or the next available provider — Vertex-tuned Gemini, then `agents.llm.FRONTIER_ORDER`)
+- Analyst Briefing: VAPE
 
 ---
 

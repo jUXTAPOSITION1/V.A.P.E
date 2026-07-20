@@ -5,7 +5,7 @@
 
 ---
 
-## Analyst Briefing (Grok 4.1 Fast)
+## Analyst Briefing
 
 **Root cause (hack_feed):**  
 The captured traceback shows a direct `None / float` failure on line 7 of an inline Python string. Given the install method (curl + python3 stdlib) and the probe command, the script is fetching external data, assigning it to a variable, and immediately performing arithmetic without a guard. The only data we have is that the fetched value was `None` at runtime; nothing else (no network error, no HTTP status, no prior traceback) is present.

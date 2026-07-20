@@ -219,7 +219,7 @@ protocols below — see `agents/base_sweep.py::compute_health_score`.
 - DefiLlama TVL/protocols API — keyless
 - Base RPC (`mainnet.base.org`) — keyless
 - Live web search ({search.get('provider') or 'unavailable'})
-- LLM synthesis: {provider or 'unavailable this cycle'}
+- Narrative synthesis: {'VAPE' if provider else 'unavailable this cycle'}
 
 ---
 

@@ -106,6 +106,58 @@ def test_xai_non_429_error_retries_same_key_before_falling_through(monkeypatch):
     assert xai_attempts["n"] == 2  # fully exhausted its retry budget
 
 
+class TestSearchGrounding:
+    """search=True opts into xAI's real Live Search — gated strictly to the
+    xai_1 provider (the only one whose endpoint understands the field),
+    silently absent for every other provider even when search=True is
+    passed on the call."""
+
+    def test_search_true_adds_search_parameters_for_xai(self, monkeypatch):
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai with search")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask("sys", "usr", tier="frontier",
+                                      provider_order=llm.FRONTIER_ORDER, search=True)
+        assert provider == "xai_1"
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
+    def test_search_false_omits_search_parameters_for_xai(self, monkeypatch):
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai no search")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+        assert "search_parameters" not in captured["body"]
+
+    def test_search_true_does_not_leak_into_non_xai_provider_payload(self, monkeypatch):
+        """No xai_1 key configured this run (falls through to groq, the next
+        entry in FRONTIER_ORDER) — search=True must never add
+        search_parameters to a provider that doesn't support it, even
+        when explicitly requested on the call."""
+        monkeypatch.delenv("XAI_API_KEY_1", raising=False)
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask("sys", "usr", tier="frontier",
+                                      provider_order=llm.FRONTIER_ORDER, search=True)
+        assert provider == "groq"
+        assert "search_parameters" not in captured["body"]
+
+
 def test_default_fast_tier_call_never_reaches_xai_when_groq_available(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "groqkey")
     monkeypatch.setenv("XAI_API_KEY_1", "xaikey")

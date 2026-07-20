@@ -241,14 +241,17 @@ def available():
     return [name for name, env, _, _ in PROVIDERS if os.getenv(env)]
 
 
-def _call(url, key, model, system, user, temperature, max_tokens, timeout):
-    payload = json.dumps({
+def _call(url, key, model, system, user, temperature, max_tokens, timeout, extra=None):
+    body = {
         "model": model,
         "messages": [{"role": "system", "content": system},
                      {"role": "user", "content": user}],
         "temperature": temperature,
         "max_tokens": max_tokens,
-    }).encode()
+    }
+    if extra:
+        body.update(extra)
+    payload = json.dumps(body).encode()
     req = urllib.request.Request(url, data=payload, headers={
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
@@ -380,7 +383,7 @@ def _log_spend_cap_finding(provider, spend, cap):
 
 
 def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
-        timeout=45, retries_per_provider=2, provider_order=None):
+        timeout=45, retries_per_provider=2, provider_order=None, search=False):
     """
     Try each provider with a key, in order, until one succeeds.
 
@@ -390,13 +393,37 @@ def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
     "deep" model, then "fast" — so providers that don't define a distinct
     "frontier" model still work, just at their normal tier.
 
-    Returns (text, provider_name). Raises RuntimeError only if ALL fail/absent.
+    search=True opts into xAI's real "Live Search" (api.x.ai's own
+    `search_parameters` field — the model autonomously searches the live web/
+    X and cites sources, billed per-search on top of normal token cost).
+    Real gap this closes: every LLM call in this repo was grounded only in
+    whatever agents/intel_common.py::web_search_snippets() pre-fetched (one
+    Tavily/Brave query, a handful of snippets) — nothing close to what Grok's
+    own product surfaces when a human asks it directly, which is exactly the
+    quality gap a 2026-07-20 side-by-side (this repo's DefiTuna threat
+    analysis vs. a direct Grok query on the same incident) exposed: ours had
+    "no public writeups found"; Grok's had the tx hash, attacker addresses,
+    and a full CertiK-sourced attack-flow writeup. Only xAI's own API
+    supports this field — silently ignored (no-op) for every other provider,
+    so this is safe to pass on any ask()/ask_frontier() call regardless of
+    which provider actually ends up serving it. Only takes effect if/when
+    the provider loop below actually reaches "xai_1"; a dead OCI/Vertex layer
+    ahead of it in a caller's real chain (see ask_oci_grok's docstring)
+    doesn't get search grounding — a caller that specifically wants it needs
+    its real request to reach the frontier chain, e.g. via provider_order=
+    FRONTIER_ORDER or by relying on OCI/Vertex being unconfigured.
     """
     errors = []
     for name, env, url, models in (provider_order or PROVIDERS):
         key = os.getenv(env)
         if not key:
             continue
+        # xAI's Live Search is a real, billed-per-search feature of api.x.ai
+        # itself — not part of the generic OpenAI-compatible chat-completions
+        # shape every other provider here implements, so it's gated strictly
+        # to the one provider whose endpoint actually understands it.
+        extra = {"search_parameters": {"mode": "auto", "return_citations": True}} \
+            if (search and name == "xai_1") else None
         if name in PROVIDER_PRICING_USD_PER_M_TOKENS:
             cap = _daily_cap_usd(name)
             spend = _todays_paid_spend_usd(name)
@@ -409,7 +436,7 @@ def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
         model = models.get(tier) or models.get("deep") or models.get("fast")
         for attempt in range(retries_per_provider):
             try:
-                txt, usage = _call(url, key, model, system, user, temperature, max_tokens, timeout)
+                txt, usage = _call(url, key, model, system, user, temperature, max_tokens, timeout, extra=extra)
                 _log_usage(name, model, tier, usage, fallback_from=errors or None)
                 return txt, name
             except urllib.error.HTTPError as e:
@@ -547,7 +574,7 @@ def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
 
 
 def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
-                          tier="fast", provider_order=None):
+                          tier="fast", provider_order=None, search=False):
     """Calls VAPE's Vertex AI supervised-tuned Gemini model directly (see
     the Vertex AI Tuning console job that produced it) if
     VAPE_VERTEX_ACCESS_TOKEN is set this run, falling back to ask() if it's
@@ -580,7 +607,7 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
         except Exception as e:
             print(f"[llm] vertex_tuned:{type(e).__name__}:{e}", file=sys.stderr)
     return ask(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
-               timeout=timeout, provider_order=provider_order)
+               timeout=timeout, provider_order=provider_order, search=search)
 
 
 def ask_safe(system, user, **kw):
@@ -676,7 +703,7 @@ def _call_oci_grok(system, user, temperature, max_tokens, timeout):
 
 
 def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
-                  tier="fast", provider_order=None):
+                  tier="fast", provider_order=None, search=False):
     """Calls OCI-hosted Grok 4.3 directly if OCI_GENAI_API_KEY is set this
     run, falling back to ask_vertex_candidate() otherwise/on error/over the
     daily spend cap — VAPE's Vertex-tuned candidate, which itself falls back
@@ -695,7 +722,9 @@ def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
     tier/provider_order control ONLY the eventual ask() call at the bottom
     of the chain (via ask_vertex_candidate()'s own identical contract) —
     pass the caller's own normal tier/provider_order so a run where neither
-    OCI nor Vertex is configured degrades to EXACTLY its prior behavior."""
+    OCI nor Vertex is configured degrades to EXACTLY its prior behavior.
+    search similarly only matters once/if the chain reaches ask()'s xai_1
+    provider — see ask()'s own docstring for what it actually does."""
     if os.getenv("OCI_GENAI_API_KEY"):
         cap = _oci_grok_daily_cap_usd()
         spend = _todays_paid_spend_usd("oci_grok")
@@ -717,7 +746,7 @@ def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
             except Exception as e:
                 print(f"[llm] oci_grok:{type(e).__name__}:{e}", file=sys.stderr)
     return ask_vertex_candidate(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
-                                 timeout=timeout, provider_order=provider_order)
+                                 timeout=timeout, provider_order=provider_order, search=search)
 
 def ask_oci_grok_safe(system, user, **kw):
     """ask_oci_grok() with ask_safe()'s same never-raise guarantee."""

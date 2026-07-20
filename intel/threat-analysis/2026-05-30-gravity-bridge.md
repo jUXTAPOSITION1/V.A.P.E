@@ -3,7 +3,7 @@
 **Date:** 2026-05-30  
 **Loss:** $5.4M  
 **Chains:** Ethereum  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T20:39:11Z
 
 ---

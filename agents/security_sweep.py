@@ -642,7 +642,7 @@ tracked feed, {len(big_recent)} of which exceeded ${BIG_HACK_USD_M}M within the 
 ## Sources
 - DeFiLlama hacks feed (`api.llama.fi/hacks`) — keyless, real-time
 - Live web search ({search.get('provider') or 'unavailable'})
-- LLM synthesis: {provider or 'unavailable this cycle'}
+- Narrative synthesis: {'VAPE' if provider else 'unavailable this cycle'}
 
 ---
 
