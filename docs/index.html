@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=2">
+    <link rel="stylesheet" href="assets/site.css?v=3">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -441,7 +441,7 @@
                     <h3 class="text-sm text-zinc-500">Top Base Protocols</h3>
                     <button onclick="App.refresh()" class="term-btn term-btn-sm"><i class="fa-solid fa-rotate"></i> Refresh</button>
                 </div>
-                <p class="text-xs text-zinc-500 mb-4 leading-relaxed max-w-2xl">TVL, real fees generated, and a VAPE Score quality signal for each —
+                <p class="text-xs text-zinc-500 mb-4 leading-relaxed max-w-2xl">TVL and real fees generated for each —
                 click any row for a full report with its own 24h→all-time chart.</p>
                 <div class="flex gap-1 text-[11px] mb-5" id="proto-sort">
                     <button data-s="tvl" class="term-btn term-btn-sm term-btn-active">TVL</button>
@@ -467,8 +467,9 @@
                         <button data-m="volume" class="term-btn term-btn-sm">Volume</button>
                     </div>
                 </div>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most active token pairs on Base right now, with a VAPE Score for each —
-                a market-quality signal independent of the momentum ranking.</p>
+                <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The most active token pairs on Base right now.</p>
+                <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('movers', this.value)"
+                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
                 <div id="base-movers" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -478,7 +479,7 @@
 
             <section class="panel-sm mt-6">
                 <h3 class="text-sm text-zinc-500 mb-2">Virtuals Protocol</h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price, volume, and holder concentration, with a VAPE Score.</p>
+                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">VIRTUAL token price, volume, and holder concentration.</p>
                 <div id="virtuals-stats" class="stat-line">
                     <span class="stat-pair"><span class="stat-label">price</span><span id="v-price" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                     <span class="stat-pair"><span class="stat-label">mcap</span><span id="v-mcap" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
@@ -487,11 +488,22 @@
                     <span class="stat-pair"><span id="v-holders" class="stat-value skeleton">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                 </div>
                 <div style="position:relative;height:60px;width:100%;margin-top:12px"><canvas id="virtuals-sparkline"></canvas></div>
+                <div class="mt-6 pt-5 border-t border-white/10">
+                    <h4 class="text-xs text-zinc-500 uppercase tracking-wider mb-1">Top holders — wallet tracing</h4>
+                    <p class="text-xs text-zinc-500 mb-4 leading-relaxed max-w-2xl">The largest real VIRTUAL holder wallets on Base, with holder concentration above. Hire the P&amp;L deep-dive to trace any of them.</p>
+                    <div id="virtuals-top-wallets" class="diff-list">
+                        <div class="skeleton h-10 my-1"></div>
+                        <div class="skeleton h-10 my-1"></div>
+                        <div class="skeleton h-10 my-1"></div>
+                    </div>
+                </div>
             </section>
 
             <section class="panel-sm mt-6">
                 <h3 class="text-sm text-zinc-500 mb-2">Trending on Base</h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The most active tokens on Base right now, with a VAPE Score for each. Tokens from the Virtuals ecosystem are tagged.</p>
+                <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The most active tokens on Base right now. Tokens from the Virtuals ecosystem are tagged.</p>
+                <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('trending', this.value)"
+                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
                 <div id="trending-base" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -501,21 +513,13 @@
 
             <section class="panel-sm mt-6">
                 <h3 class="text-sm text-zinc-500 mb-2">New Launches</h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The newest tokens on Base by creation time, with a VAPE Score for each. Tokens from the Virtuals ecosystem are tagged.</p>
+                <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The newest tokens on Base by creation time. Tokens from the Virtuals ecosystem are tagged.</p>
+                <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('launches', this.value)"
+                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
                 <div id="new-launches" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
-                </div>
-            </section>
-
-            <section class="panel-sm mt-6">
-                <h3 class="text-sm text-zinc-500 mb-2">Top Wallets</h3>
-                <p class="text-xs text-zinc-500 mb-5 leading-relaxed max-w-2xl">The largest real VIRTUAL holder wallets on Base. Hire the P&amp;L deep-dive for any of them.</p>
-                <div id="virtuals-top-wallets" class="diff-list">
-                    <div class="skeleton h-10 my-1"></div>
-                    <div class="skeleton h-10 my-1"></div>
-                    <div class="skeleton h-10 my-1"></div>
                 </div>
             </section>
 
@@ -681,7 +685,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=20"></script>
+    <script src="assets/app.js?v=21"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

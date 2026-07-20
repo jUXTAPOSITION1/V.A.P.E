@@ -153,8 +153,17 @@ section[id] { scroll-margin-top: 4.5rem; }
    reports, investigations, tools, audits, feed rows). Never individually
    boxed/colored cards. */
 .diff-list { border-top: 1px solid var(--border); }
+/* No `display` here on purpose — every diff-row usage already carries its own
+   Tailwind `flex` or `block` utility class alongside diff-row, and Tailwind's
+   CDN stylesheet is injected at a DOM position whose load-order relative to
+   this file isn't guaranteed (network-timing dependent, worse on slow/mobile
+   connections). Declaring display:block here raced Tailwind's `.flex` at
+   equal specificity and intermittently won, collapsing every flex row (movers,
+   trending, new launches, wallets, prediction markets, protocol rows) into a
+   vertical stack on mobile — the exact "chopping off" bug reported live. Bare
+   <div class="diff-row"> (no utility) still defaults to block via the UA
+   stylesheet, so this is safe to omit entirely. */
 .diff-row {
-    display: block;
     padding: 0.875rem 0;
     border-bottom: 1px solid var(--border);
 }

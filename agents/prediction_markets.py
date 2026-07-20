@@ -28,6 +28,7 @@ free-tier key, hence going straight to Polymarket/Kalshi instead.
 import json
 import re
 import time
+from datetime import datetime, timezone
 
 try:
     from agents.data_fetchers import _get, _now_iso  # noqa
@@ -51,7 +52,10 @@ except Exception:  # pragma: no cover
             return {"error": str(e), "url": url}
 
 POLYMARKET_GAMMA = "https://gamma-api.polymarket.com"
-KALSHI_API = "https://trading-api.kalshi.com/trade-api/v2"
+# api.kalshi.com is a mirror of the same host — api.elections.kalshi.com is
+# Kalshi's current documented public host; trading-api.kalshi.com (used here
+# previously) is legacy and no longer reliable.
+KALSHI_API = "https://api.elections.kalshi.com/trade-api/v2"
 
 # Crypto/Base-ecosystem relevance filter, applied to each market's own
 # question/title text — deliberately keyword-based rather than relying on
@@ -72,6 +76,23 @@ def _err(x):
 
 def _is_crypto_relevant(*texts):
     return any(t and _CRYPTO_RE.search(str(t)) for t in texts)
+
+
+def _is_expired(end_date):
+    """True only if end_date parses AND is clearly in the past — Polymarket's
+    active=true&closed=false filter leaves resolved-but-not-yet-closed markets
+    in the list past their real end date, which read as "outdated" on the
+    site. Never excludes on a parse failure — an unparseable date is not
+    evidence the market is stale."""
+    if not end_date:
+        return False
+    try:
+        dt = datetime.fromisoformat(str(end_date).replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt < datetime.now(timezone.utc)
+    except (TypeError, ValueError):
+        return False
 
 
 def _parse_json_field(v):
@@ -103,12 +124,21 @@ def polymarket_crypto_markets(limit=20):
         question = m.get("question") or m.get("title") or ""
         if not _is_crypto_relevant(question, m.get("category")):
             continue
+        end_date = m.get("endDate")
+        if _is_expired(end_date):
+            continue
         prices = _parse_json_field(m.get("outcomePrices"))
         outcomes = _parse_json_field(m.get("outcomes"))
         try:
             prices = [float(p) for p in prices] if prices else None
         except (TypeError, ValueError):
             prices = None
+        # A market's own slug is only a valid /event/ path for single-outcome
+        # events; grouped/multi-outcome markets need the parent event's slug
+        # (the market's `events` array) or the link 404s.
+        events = m.get("events") or []
+        event_slug = events[0].get("slug") if events and isinstance(events[0], dict) else None
+        slug = event_slug or m.get("slug")
         out.append({
             "platform": "polymarket",
             "id": m.get("id"),
@@ -117,8 +147,8 @@ def polymarket_crypto_markets(limit=20):
             "prices": prices,
             "volume": _to_float(m.get("volume")),
             "liquidity": _to_float(m.get("liquidity")),
-            "end_date": m.get("endDate"),
-            "url": f"https://polymarket.com/event/{m['slug']}" if m.get("slug") else None,
+            "end_date": end_date,
+            "url": f"https://polymarket.com/event/{slug}" if slug else None,
         })
         if len(out) >= limit:
             break
@@ -140,6 +170,13 @@ def kalshi_crypto_markets(limit=20):
         title = m.get("title") or m.get("subtitle") or ""
         if not _is_crypto_relevant(title):
             continue
+        # Kalshi's site URLs are /markets/{series_ticker}/{event_ticker}
+        # (lowercased) — the full per-strike market ticker (e.g.
+        # "KXBTCD-25JUL19-B50000") never appears in the path on its own.
+        series_ticker = m.get("series_ticker")
+        event_ticker = m.get("event_ticker")
+        url = (f"https://kalshi.com/markets/{series_ticker.lower()}/{event_ticker.lower()}"
+               if series_ticker and event_ticker else None)
         out.append({
             "platform": "kalshi",
             "id": m.get("ticker"),
@@ -148,7 +185,7 @@ def kalshi_crypto_markets(limit=20):
             "yes_ask_cents": m.get("yes_ask"),
             "volume": _to_float(m.get("volume")),
             "end_date": m.get("close_time"),
-            "url": f"https://kalshi.com/markets/{m['ticker']}" if m.get("ticker") else None,
+            "url": url,
         })
         if len(out) >= limit:
             break

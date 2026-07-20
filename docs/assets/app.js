@@ -573,7 +573,11 @@ const App = {
         if (this._moversTab === 'gainers') items.sort((a,b) => (b.priceChange?.h24 ?? -Infinity) - (a.priceChange?.h24 ?? -Infinity));
         else if (this._moversTab === 'losers') items.sort((a,b) => (a.priceChange?.h24 ?? Infinity) - (b.priceChange?.h24 ?? Infinity));
         else if (this._moversTab === 'volume') items.sort((a,b) => (b.volume?.h24 || 0) - (a.volume?.h24 || 0));
-        items = items.slice(0, 12);
+        const term = this._searchTerms.movers;
+        const filtered = items.filter(p => this._matchesTokenSearch(p.baseToken?.symbol, p.baseToken?.name, term));
+        // 30, not 12 — both baseMovers() sources already fetch up to 30 real
+        // rows; the search box above needs the full set to search across.
+        items = filtered.slice(0, 30);
         el.innerHTML = items.length ? items.map((p,i) => {
             const chg = p.priceChange?.h24;
             const icon = p.info?.imageUrl || this._tokenIcon(p.baseToken?.address, 'base');
@@ -585,11 +589,10 @@ const App = {
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 min-w-0">
                         <span class="truncate">${this._esc(p.baseToken?.symbol||'?')}</span>
-                        ${this._scorePill(this._moverScore(p))}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(p.baseToken?.name||'')}</div>
                 </div>
-                <div class="text-right shrink-0 w-16 sm:w-24">
+                <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs">${typeof chg==='number'?pct(chg):'—'}</div>
                 </div>
@@ -598,7 +601,9 @@ const App = {
                     <div class="text-xs text-zinc-300">${fmtUsd(p.volume?.h24)}</div>
                 </div>
             </a>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>';
+        }).join('') : (this._movers.length
+            ? '<div class="text-zinc-500 text-sm">No tokens match your search.</div>'
+            : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>');
     },
 
     // ── Virtuals Protocol — VIRTUAL token stats + trending/new Base tokens ──
@@ -617,8 +622,12 @@ const App = {
         try {
             const [snapRes, trendRes, launchRes] = await Promise.allSettled([
                 fetch(`${WORKER_BASE}/virtuals-snapshot`).then(r=>r.json()),
-                fetch(`${WORKER_BASE}/trending-base?limit=12`).then(r=>r.json()),
-                fetch(`${WORKER_BASE}/new-launches?limit=12`).then(r=>r.json()),
+                // 30, not 12 — the worker route is edge-cached per exact query
+                // string (max-age=300), so a higher limit here doesn't cost any
+                // extra Codex requests, just gives the new search box (below)
+                // more rows to actually search across.
+                fetch(`${WORKER_BASE}/trending-base?limit=30`).then(r=>r.json()),
+                fetch(`${WORKER_BASE}/new-launches?limit=30`).then(r=>r.json()),
             ]);
             const snap = snapRes.status==='fulfilled' ? snapRes.value : null;
             if (snap && !snap.error) this._renderVirtualsStats(snap);
@@ -691,7 +700,7 @@ const App = {
         const chgEl = document.getElementById('v-chg');
         if (chgEl) chgEl.innerHTML = pct(detail.change24);
         const holdEl = document.getElementById('v-holders');
-        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span> ${this._scorePill(this._virtualsScore(detail, holders))}`;
+        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span>`;
         this._renderTopWallets(holders.items || []);
         this._renderVirtualsSparkline(snap.bars);
     },
@@ -767,17 +776,27 @@ const App = {
             el.innerHTML = res.markets.length ? res.markets.map((m) => {
                 const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
                     : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
-                const pctLabel = yesPrice != null ? Math.round(yesPrice * 100) + '% Yes' : '—';
-                const platformLabel = m.platform === 'polymarket' ? 'Polymarket' : 'Kalshi';
+                const yesPct = yesPrice != null ? Math.round(yesPrice * 100) : null;
+                const pctLabel = yesPct != null ? yesPct + '% Yes' : '—';
+                // Probability-read color, not a VAPE Score — a quick "which way is
+                // the market leaning" glance, same band language as the rest of
+                // the site (green/amber/rose) but scoped to this one number.
+                const pctColor = yesPct == null ? '#a1a1aa' : yesPct >= 65 ? '#4ade80' : yesPct <= 35 ? '#fb7185' : '#fbbf24';
+                const isPoly = m.platform === 'polymarket';
+                const platformLabel = isPoly ? 'Polymarket' : 'Kalshi';
+                const platformColor = isPoly ? '#818cf8' : '#34d399';
+                // Real link or nothing — never a dead "#" href.
+                const tag = m.url ? 'a' : 'div';
+                const linkAttrs = m.url ? `href="${this._esc(m.url)}" target="_blank" rel="noopener"` : '';
                 return `
-                <a href="${m.url || '#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                    <span class="text-[10px] px-1.5 py-0.5 border border-white/10 text-zinc-400 shrink-0 whitespace-nowrap">${platformLabel}</span>
+                <${tag} ${linkAttrs} class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                    <span class="text-[10px] px-1.5 py-0.5 border shrink-0 whitespace-nowrap" style="color:${platformColor};border-color:${platformColor}44">${platformLabel}</span>
                     <div class="min-w-0 flex-1 text-xs sm:text-sm truncate">${this._esc(m.question || '')}</div>
-                    <div class="text-right shrink-0 w-20">
-                        <div class="stat text-sm">${pctLabel}</div>
+                    <div class="text-right shrink-0 min-w-[4.5rem]">
+                        <div class="stat text-sm" style="color:${pctColor}">${pctLabel}</div>
                         <div class="text-[10px] text-zinc-500">${fmtUsd(m.volume)} vol</div>
                     </div>
-                </a>`;
+                </${tag}>`;
             }).join('') : '<div class="text-zinc-500 text-sm">No crypto-relevant prediction markets right now.</div>';
         } catch (e) {
             el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
@@ -802,10 +821,28 @@ const App = {
         return Math.max(0, Math.min(100, Math.round(score)));
     },
 
+    // Client-side search state for the three Codex-backed token lists —
+    // filters the already-fetched array, no extra network requests (the
+    // worker route is fetched once at a higher limit; see virtuals()).
+    _searchTerms: { trending: '', launches: '', movers: '' },
+    _setSearch(panel, term) {
+        this._searchTerms[panel] = (term || '').trim().toLowerCase();
+        if (panel === 'trending') this._renderTrendingBase();
+        else if (panel === 'launches') this._renderNewLaunches();
+        else if (panel === 'movers') this._renderMovers();
+    },
+    // Matches a token's symbol or name against the search term — substring,
+    // case-insensitive. Empty term matches everything.
+    _matchesTokenSearch(symbol, name, term) {
+        if (!term) return true;
+        return (symbol || '').toLowerCase().includes(term) || (name || '').toLowerCase().includes(term);
+    },
+
     _renderTrendingBase() {
         const el = document.getElementById('trending-base');
         if (!el) return;
-        const items = this._trendingBase;
+        const term = this._searchTerms.trending;
+        const items = this._trendingBase.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -817,11 +854,10 @@ const App = {
                     <div class="flex items-center gap-2 min-w-0">
                         <span class="truncate">${this._esc(tok.symbol||'?')}</span>
                         ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
-                        ${this._scorePill(this._trendingTokenScore(t))}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
                 </div>
-                <div class="text-right shrink-0 w-16 sm:w-24">
+                <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs">${typeof t.change24==='number'?pct(t.change24):'—'}</div>
                 </div>
@@ -830,7 +866,9 @@ const App = {
                     <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
                 </div>
             </a>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
+        }).join('') : (this._trendingBase.length
+            ? '<div class="text-zinc-500 text-sm">No tokens match your search.</div>'
+            : '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>');
     },
 
     // Human-readable "launched Xh ago" from a unix-seconds createdAt. Real
@@ -853,7 +891,8 @@ const App = {
     _renderNewLaunches() {
         const el = document.getElementById('new-launches');
         if (!el) return;
-        const items = this._newLaunches;
+        const term = this._searchTerms.launches;
+        const items = this._newLaunches.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -865,16 +904,17 @@ const App = {
                     <div class="flex items-center gap-2 min-w-0">
                         <span class="truncate">${this._esc(tok.symbol||'?')}</span>
                         ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
-                        ${this._scorePill(this._trendingTokenScore(t))}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
                 </div>
-                <div class="text-right shrink-0 w-16 sm:w-24">
+                <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs text-zinc-500">${this._launchAge(t.createdAt)}</div>
                 </div>
             </a>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">No new launches right now.</div>';
+        }).join('') : (this._newLaunches.length
+            ? '<div class="text-zinc-500 text-sm">No tokens match your search.</div>'
+            : '<div class="text-zinc-500 text-sm">No new launches right now.</div>');
     },
 
     _protoSort: 'tvl',
@@ -944,13 +984,12 @@ const App = {
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center gap-2 min-w-0">
                             <span class="truncate">${this._esc(p.name)}</span>
-                            <span class="proto-score shrink-0"></span>
                         </div>
                         <div class="text-xs text-zinc-500 truncate">${this._esc(p.cat||'')}</div>
                         <div class="text-[11px] text-zinc-600 proto-fees">Fees 24h …</div>
                     </div>
                     <div class="spark shrink-0 hidden sm:block" data-slug="${this._esc(p.slug||'')}" style="width:72px;height:26px"></div>
-                    <div class="text-right shrink-0 w-16 sm:w-24">
+                    <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                         <div class="stat text-sm sm:text-base">${fmtUsd(p.tvl)}</div>
                         <div class="text-[10px] text-zinc-600">${rangeLabel}</div>
                         <div class="text-xs">${pct(this._protoRangeVal(p))}</div>
@@ -1009,9 +1048,6 @@ const App = {
                 }
                 const feesEl = row?.querySelector('.proto-fees');
                 if (feesEl) feesEl.textContent = `Fees 24h ${detail.fees24h!=null ? fmtUsd(detail.fees24h) : '—'}`;
-                const scoreEl = row?.querySelector('.proto-score');
-                const p = (this._protoList||[]).find(x=>x.slug===slug);
-                if (scoreEl && p) scoreEl.innerHTML = this._scorePill(this._protocolScore({...p, fees24h: detail.fees24h, audits: detail.audits}));
                 // Only the 8→9 real network requests need the courtesy
                 // stagger to the free public API — a cache hit (from a
                 // #proto-sort re-render, e.g.) fills instantly.
@@ -1045,10 +1081,10 @@ const App = {
         return Math.max(0, Math.min(100, Math.round(score)));
     },
 
-    // Shared score-pill renderer — same visual language as PROCEED/CAUTION/
-    // REJECT verdicts elsewhere (_verdictColor/_pill), reused by both
-    // protocol rows and Base Movers rows so "VAPE Score" reads consistently
-    // site-wide regardless of what it's scoring.
+    // VAPE Score pill rendering is disabled site-wide for now — scores were
+    // reading wildly wrong for some tokens. _scorePill()/_scoreBand() and
+    // every *Score() function below are kept defined, just uncalled, pending
+    // an accuracy fix; nothing currently invokes _scorePill().
     _scoreBand(score) {
         if (score >= 70) return { label: 'Strong', color: '#10b981' };
         if (score >= 40) return { label: 'Fair', color: '#fbbf24' };
@@ -1181,13 +1217,7 @@ const App = {
         const body = document.getElementById('proto-report-body');
         try {
             const detail = await this._ensureProtoDetail(slug);
-            const scoreInput = { ...base, fees24h: detail.fees24h, audits: detail.audits };
-            const score = this._protocolScore(scoreInput);
             body.innerHTML = `
-                <div class="flex items-center gap-2 mb-4 flex-wrap">
-                    ${this._scorePill(score)}
-                    <span class="text-xs text-zinc-500">${this._esc(this._scoreBreakdown(scoreInput))}</span>
-                </div>
                 <div class="stat-line mb-5 pb-5 border-b border-white/10">
                     <span class="stat-pair"><span class="stat-label">tvl</span><span class="stat-value">${fmtUsd(base.tvl)}</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 24h</span><span id="proto-fees24" class="stat-value">${detail.fees24h!=null?fmtUsd(detail.fees24h):'—'}</span></span>

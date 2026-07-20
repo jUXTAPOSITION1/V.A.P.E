@@ -11,12 +11,14 @@
  * (keyword-filtered), not general politics/sports/macro markets — see the
  * Python module's docstring for why.
  *
- * Hosts: gamma-api.polymarket.com, trading-api.kalshi.com. Neither host is
+ * Hosts: gamma-api.polymarket.com, api.elections.kalshi.com. Neither host is
  * reachable from this dev sandbox (same constraint as every other external
  * API in this repo) — spot-check the first real response in production.
  */
 const POLYMARKET_GAMMA = "https://gamma-api.polymarket.com";
-const KALSHI_API = "https://trading-api.kalshi.com/trade-api/v2";
+// api.elections.kalshi.com is Kalshi's current documented public host;
+// trading-api.kalshi.com (used here previously) is legacy and no longer reliable.
+const KALSHI_API = "https://api.elections.kalshi.com/trade-api/v2";
 const UA = "VAPE/1.0 (+https://github.com/jUXTAPOSITION1/V.A.P.E)";
 
 export type PmResult = Record<string, unknown> & { error?: string };
@@ -45,6 +47,17 @@ function toFloat(v: unknown): number | null {
   if (v === null || v === undefined || v === "") return null;
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
+}
+
+// True only if end_date parses AND is clearly in the past — Polymarket's
+// active=true&closed=false filter leaves resolved-but-not-yet-closed markets
+// in the list past their real end date, which read as "outdated" on the
+// site. Never excludes on a parse failure — an unparseable date is not
+// evidence the market is stale.
+function isExpired(endDate: unknown): boolean {
+  if (!endDate) return false;
+  const t = Date.parse(String(endDate));
+  return Number.isFinite(t) && t < Date.now();
 }
 
 function parseJsonField(v: unknown): unknown[] | null {
@@ -88,8 +101,15 @@ export async function polymarketCryptoMarkets(limit = 20): Promise<PmResult> {
   for (const m of d) {
     const question: string = m.question || m.title || "";
     if (!isCryptoRelevant(question, m.category)) continue;
+    if (isExpired(m.endDate)) continue;
     const prices = parseJsonField(m.outcomePrices);
     const outcomes = parseJsonField(m.outcomes);
+    // A market's own slug is only a valid /event/ path for single-outcome
+    // events; grouped/multi-outcome markets need the parent event's slug
+    // (the market's `events` array) or the link 404s.
+    const events = Array.isArray(m.events) ? m.events : [];
+    const eventSlug = events[0] && typeof events[0] === "object" ? (events[0] as any).slug : null;
+    const slug = eventSlug || m.slug;
     out.push({
       platform: "polymarket",
       id: m.id,
@@ -99,7 +119,7 @@ export async function polymarketCryptoMarkets(limit = 20): Promise<PmResult> {
       volume: toFloat(m.volume),
       liquidity: toFloat(m.liquidity),
       end_date: m.endDate ?? null,
-      url: m.slug ? `https://polymarket.com/event/${m.slug}` : null,
+      url: slug ? `https://polymarket.com/event/${slug}` : null,
     });
     if (out.length >= limit) break;
   }
@@ -115,6 +135,14 @@ export async function kalshiCryptoMarkets(limit = 20): Promise<PmResult> {
   for (const m of markets) {
     const title: string = m.title || m.subtitle || "";
     if (!isCryptoRelevant(title)) continue;
+    // Kalshi's site URLs are /markets/{series_ticker}/{event_ticker}
+    // (lowercased) — the full per-strike market ticker (e.g.
+    // "KXBTCD-25JUL19-B50000") never appears in the path on its own.
+    const seriesTicker: string | undefined = m.series_ticker;
+    const eventTicker: string | undefined = m.event_ticker;
+    const url = seriesTicker && eventTicker
+      ? `https://kalshi.com/markets/${seriesTicker.toLowerCase()}/${eventTicker.toLowerCase()}`
+      : null;
     out.push({
       platform: "kalshi",
       id: m.ticker,
@@ -123,7 +151,7 @@ export async function kalshiCryptoMarkets(limit = 20): Promise<PmResult> {
       yes_ask_cents: m.yes_ask ?? null,
       volume: toFloat(m.volume),
       end_date: m.close_time ?? null,
-      url: m.ticker ? `https://kalshi.com/markets/${m.ticker}` : null,
+      url,
     });
     if (out.length >= limit) break;
   }

@@ -13,14 +13,17 @@
  * fetch+parse, no separate request-count cap needed (the edge cache already
  * bounds how often a shared public route actually reaches Codex).
  *
- * Field names below are sourced from Codex's public SDK examples
+ * Field names below are sourced from @codex-data/sdk's schema.graphql
  * (github.com/Codex-Data/sdk) — confirmed: filterTokens(filters, networks,
- * limit) -> results{priceUSD, volume24, token{name,symbol}}; holders(input)
- * -> {count, top10HoldersPercent, items}; token(address, networkId) exists
- * as a singular lookup. Not independently verified against a live response
- * (Codex's host is unreachable from this dev sandbox, same constraint as
- * every other external API in this repo) — spot-check the first real
- * response in production the way every other sweep here does.
+ * limit, tokens) -> results{priceUSD, volume24, token{name,symbol}};
+ * holders(input) -> {count, top10HoldersPercent, items}. Note: the singular
+ * token(input: TokenInput!) query returns metadata only (no price/volume/
+ * marketCap) — single-token price lookups use filterTokens' `tokens: [id]`
+ * argument instead (id format "address:networkId"), same shape as the list
+ * queries. Not independently verified against a live response (Codex's host
+ * is unreachable from this dev sandbox, same constraint as every other
+ * external API in this repo) — spot-check the first real response in
+ * production the way every other sweep here does.
  */
 const GRAPHQL_URL = "https://graph.codex.io/graphql";
 const UA = "VAPE/1.0 (+https://github.com/jUXTAPOSITION1/V.A.P.E)";
@@ -152,34 +155,44 @@ export async function tokenDetail(
   address: string,
   networkId: number,
 ): Promise<CodexResult> {
+  // Codex's singular token() query returns metadata only (no price/volume/
+  // marketCap fields exist on it) — filterTokens' `tokens` id-list argument
+  // ("address:networkId") is the documented way to get price data for one
+  // specific, known token, same result shape as trendingTokens()/newLaunches().
   const query = `
-    query TokenDetail($address: String!, $networkId: Int!) {
-      token(address: $address, networkId: $networkId) {
-        priceUSD
-        volume24
-        liquidity
-        marketCap
-        change24
-        name
-        symbol
+    query TokenDetail($tokenId: String!) {
+      filterTokens(tokens: [$tokenId], limit: 1) {
+        results {
+          priceUSD
+          volume24
+          liquidity
+          marketCap
+          change24
+          token { name symbol }
+        }
       }
     }`;
-  const d = await codexQuery(apiKey, query, { address, networkId });
+  const d = await codexQuery(apiKey, query, { tokenId: `${address}:${networkId}` });
   if (isErr(d)) return d;
-  return { address, networkId, ...(d.token || {}) };
+  const row = ((d.filterTokens && d.filterTokens.results) || [])[0] || {};
+  const { token, ...rest } = row;
+  return { address, networkId, ...rest, name: token?.name, symbol: token?.symbol };
 }
 
 export async function tokenHolders(
   apiKey: string | undefined,
-  tokenId: string,
+  address: string,
   networkId: number,
   limit = 10,
 ): Promise<CodexResult> {
+  // HoldersInput.tokenId is the composite "address:networkId" id — there's
+  // no separate networkId field on this input, unlike DetailedWalletStatsInput.
   const query = `
     query TokenHolders($input: HoldersInput!) {
       holders(input: $input) { count top10HoldersPercent items { address balance } }
     }`;
-  const d = await codexQuery(apiKey, query, { input: { tokenId, networkId, limit } });
+  const tokenId = `${address}:${networkId}`;
+  const d = await codexQuery(apiKey, query, { input: { tokenId, limit } });
   if (isErr(d)) return d;
   const h = d.holders || {};
   return { tokenId, count: h.count, top10HoldersPercent: h.top10HoldersPercent, items: h.items || [] };
