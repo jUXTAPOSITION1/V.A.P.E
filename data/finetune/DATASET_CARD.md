@@ -6,26 +6,26 @@ already-committed operating history, by
 Three sources, each with its own honesty story — see the module docstring for
 the full rationale:
 
-- **investigation** (111 examples) —
+- **investigation** (145 examples) —
   `intel/investigations/investigation-*.md`. INPUT is the real recon VAPE
   gathered (DexScreener, GoPlus, on-chain presence, contract verification,
   hack-feed correlation); OUTPUT is the verdict/score/rationale
   `agents/investigate.py::score()` actually produced — a DETERMINISTIC,
   rule-based function, not an LLM. The strongest signal in this corpus.
-- **sweep** (140 examples) —
+- **sweep** (167 examples) —
   `intel/reports/{security,base,virtuals,sentiment,macro}-*.md`. Same
   discipline across every domain VAPE covers. OUTPUT is ONLY each report's
   deterministic verdict heading + its immediate rule-based explanation — the
   LLM-written narrative sections further down each report are deliberately
   excluded from training.
-- **lesson** (23 examples) —
+- **lesson** (25 examples) —
   `skillforge/memory/lessons.jsonl`, VAPE's own logged operational history
   (self-improve builds, PR review outcomes, expert-assessment disagreements).
   Honesty note: this source is a MIX of deterministic outcomes and prior LLM
   commentary — included because the user wants VAPE to learn from its own
   operating history, not because every row here is as rock-solid as the two
   sources above.
-- **external** (0 examples) —
+- **external** (123 examples) —
   `data/finetune/external_corpus.jsonl`, produced separately by
   `scripts/build_external_corpus.py` (real network fetches: NVD CVE API +
   Code4rena audit-contest findings). OUTPUT is a severity label that comes
@@ -35,8 +35,8 @@ the full rationale:
   script's docstring for exactly which external sources qualified (verified
   real structure) and which didn't (SWC Registry, Sherlock — deferred, not
   silently dropped).
-- **pr_history** (0 examples, outcomes:
-  {}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
+- **pr_history** (17 examples, outcomes:
+  {'merged': 5, 'closed_unmerged': 12}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
   bot-authored PR history (`agents/self_improve.py`,
   `agents/skillforge_build.py`). INPUT is the real task/gap VAPE identified;
   OUTPUT is the actual code it generated. Honesty note: most of these PRs are
@@ -52,9 +52,9 @@ another model's guesses — with the lesson source's mixed provenance called
 out plainly rather than hidden.
 
 ## Stats
-- Total examples: **274** — {'investigation': 111, 'sweep': 140, 'lesson': 23}
-- Investigation verdict mix: {'CAUTION': 27, 'PROCEED': 36, 'REJECT': 48}
-- Split (deterministic, hashed per-example key): **240 train / 34 val**
+- Total examples: **477** — {'investigation': 145, 'sweep': 167, 'lesson': 25, 'external': 123, 'pr_history': 17}
+- Investigation verdict mix: {'CAUTION': 34, 'PROCEED': 44, 'REJECT': 67}
+- Split (deterministic, hashed per-example key): **424 train / 53 val**
 
 ## Intended use
 Fine-tune a small-to-mid open-weight instruct model (LoRA/QLoRA — verify the
