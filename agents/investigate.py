@@ -221,6 +221,11 @@ def dexscreener(address, chain="8453"):
         "socials": [{"type": s.get("type"), "url": s.get("url")}
                     for s in (info.get("socials") or []) if s.get("url")],
         "websites": [{"url": w.get("url")} for w in (info.get("websites") or []) if w.get("url")],
+        # The project's own real, hosted logo (same field acp_fulfill.py's
+        # _dl_token_logo() already reads for other offerings) — lets a
+        # deep-dive report show the audited project's actual branding
+        # instead of none at all.
+        "logo_url": info.get("imageUrl") or None,
     }
 
 

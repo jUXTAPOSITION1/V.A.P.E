@@ -206,6 +206,66 @@ const Hire = {
 
     _closeModal() {
         if (this._modal) { this._modal.remove(); this._modal = null; }
+        if (this._pollTimer) { clearInterval(this._pollTimer); this._pollTimer = null; }
+    },
+
+    // Live in-page polling for an async bounty_deep_dive job — worker/src/
+    // index.ts's GET /scan/bounty_deep_dive/status?job=<id>, backed by
+    // VAPE_JOBS KV. Keeps polling for the modal's lifetime (audits can run up
+    // to the workflow's 60-minute timeout, so a short fixed budget would give
+    // up on a real in-progress job) — _closeModal() above is what actually
+    // stops it once the buyer navigates away.
+    _pollBountyJob(jobId, offeringName, priceUsd, targetLabel) {
+        const startedAt = Date.now();
+        // The workflow itself times out at 60 minutes (deep-dive-bounty.yml /
+        // external-bounty-audit.yml) — this buffer covers queueing/dispatch
+        // lag on top of that. Without a ceiling, a job that crashes or hangs
+        // before ever POSTing to /callback would show "still running" forever.
+        const MAX_POLL_MS = 90 * 60 * 1000;
+        const giveUp = (message, cls) => {
+            clearInterval(this._pollTimer);
+            this._pollTimer = null;
+            const el = document.getElementById('hire-poll-elapsed');
+            if (el) { el.textContent = message; el.className = `mt-2 ${cls || 'text-zinc-500'}`; }
+        };
+        const tick = async () => {
+            if (Date.now() - startedAt > MAX_POLL_MS) {
+                giveUp("Still hasn't reported back after 90 minutes — unusual, but your payment is safe either way. The audit ledger (link above) is the source of truth if this modal gives up first.", 'text-amber-400');
+                return;
+            }
+            if (!window.WORKER_BASE) return;
+            let data;
+            try {
+                const res = await fetch(`${window.WORKER_BASE}/scan/bounty_deep_dive/status?job=${encodeURIComponent(jobId)}`);
+                if (!res.ok) return; // transient (404 while KV write races the first poll, 503, network) — just try again next tick
+                data = await res.json();
+            } catch (e) { return; }
+            if (data && data.status === 'done') {
+                clearInterval(this._pollTimer);
+                this._pollTimer = null;
+                await this._renderResult(offeringName, priceUsd, targetLabel, {
+                    status: 'ok', deliverable: data.result || {}, source: 'vape-real-data',
+                    disclaimer: 'Real on-chain data. Not investment advice.',
+                });
+                return;
+            }
+            if (data && data.status === 'failed') {
+                // giveUp() sets this via textContent, not innerHTML, so data.error
+                // (real but untrusted — VAPE's own dispatch-failure text, not
+                // attacker-controlled, but still external to this file) needs no
+                // escaping here; escaping it would double-escape and corrupt display.
+                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}) — your payment settled but the audit never started. Contact VAPE via ACP to resolve.`, 'text-rose-400');
+                return;
+            }
+            const el = document.getElementById('hire-poll-elapsed');
+            if (el) {
+                const mins = Math.floor((Date.now() - startedAt) / 60000);
+                el.textContent = mins < 1 ? 'just started' : `${mins} minute${mins === 1 ? '' : 's'} elapsed — still running`;
+            }
+        };
+        if (this._pollTimer) clearInterval(this._pollTimer);
+        this._pollTimer = setInterval(tick, 20000);
+        tick();
     },
 
     // params becomes the /scan/<offeringName> query string verbatim (e.g.
@@ -285,6 +345,26 @@ const Hire = {
                     CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: targetLabel, verdict: 'QUEUED', result });
                 }
             } catch (e) { /* non-fatal */ }
+            const trackUrl = escapeHtml(result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports');
+            if (result.job) {
+                // Live-polled path: worker minted a job id (VAPE_JOBS is configured),
+                // so this modal updates itself in place once the audit finishes,
+                // instead of only ever pointing the buyer at a GitHub tree link.
+                body.innerHTML = `
+                    <div class="text-center mb-4">
+                        <i class="fa-solid fa-spinner fa-spin text-zinc-300 text-3xl mb-2"></i>
+                        <div class="text-lg">Audit running</div>
+                        <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
+                    </div>
+                    <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">
+                        VAPE is running the full audit now — real static/symbolic tooling plus a frontier-tier LLM pass, not a canned check. This can take up to an hour; leave this open and the report will render right here, or close the tab — it'll still be in the audit ledger below.
+                        <div id="hire-poll-elapsed" class="text-zinc-500 mt-2">just started</div>
+                    </div>
+                    <a href="${trackUrl}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 term-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
+                    <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below.</div>`;
+                this._pollBountyJob(result.job, offeringName, priceUsd, targetLabel);
+                return;
+            }
             body.innerHTML = `
                 <div class="text-center mb-4">
                     <i class="fa-solid fa-clock text-zinc-300 text-3xl mb-2"></i>
@@ -292,7 +372,7 @@ const Hire = {
                     <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                 </div>
                 <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Audit queued — a submission-ready PoC report lands as soon as it completes.')}</div>
-                <a href="${escapeHtml(result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports')}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 term-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
+                <a href="${trackUrl}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 term-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
                 <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — check back for the finished report.</div>`;
             return;
         }

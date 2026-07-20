@@ -68,6 +68,10 @@ except Exception:
 AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "external-bounties")
 FINDINGS_PATH = os.path.join(ROOT, "skillforge", "memory", "findings.jsonl")
 
+# Same shape GitHub itself requires for a valid owner/repo — used here only to
+# gate building a github.com/<owner>.png avatar URL from caller-supplied input.
+GH_SLUG_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
+
 _UA = {"User-Agent": "VAPE-ExternalAudit/1.0"}
 _SOURCE_EXTENSIONS = {
     "move": (".move",),
@@ -354,13 +358,20 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
     slug = re.sub(r"[^a-z0-9]+", "-", f"{owner}-{repo}".lower()).strip("-")
     path = os.path.join(AUDIT_DIR, f"external-audit-{slug}-{stamp}.md")
 
-    L = [f"# External Bounty Engagement — {program_name or f'{owner}/{repo}'}", "",
-         f"**Target repo:** `{owner}/{repo}` @ `{ref}`  ",
+    # The audited program's own real, keyless-retrievable branding — its GitHub
+    # org/user avatar, never VAPE's own logo — the same principle applied to
+    # deep_dive_audit.py's on-chain DexScreener-sourced logo.
+    logo_url = f"https://github.com/{owner}.png" if GH_SLUG_RE.match(owner) else None
+
+    L = [f"# External Bounty Engagement — {program_name or f'{owner}/{repo}'}", ""]
+    if logo_url:
+        L += [f"![{owner} logo]({logo_url})", ""]
+    L += [f"**Target repo:** `{owner}/{repo}` @ `{ref}`  ",
          f"**Language:** {language}  ",
          f"**Files reviewed:** {len(files)} (`{', '.join(sorted(files)[:10])}"
          f"{', ...' if len(files) > 10 else ''}`)  ",
          f"**Date:** {now_iso()}  ",
-         f"**Engine:** Frontier LLM ({provider or 'unavailable'}) — real source review, no "
+         f"**Engine:** Frontier LLM ({'active' if provider else 'unavailable this cycle'}) — real source review, no "
          f"Solidity static/symbolic tooling applies to this target's language (see module "
          f"docstring for why)"
          f"{' + Move Prover formal verification' if prover_result.get('ran') else ''}  ",
@@ -387,9 +398,8 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
     L += ["## Methodology", "1. Real source fetched directly from the target's own public "
          "GitHub repository (raw.githubusercontent.com, keyless) — byte for byte, nothing "
          "invented or paraphrased before review.",
-         "2. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Groq as "
-         "fallback) reads the actual source and reasons per vulnerability class relevant "
-         "to the target language/platform.",
+         "2. A frontier-tier large language model reads the actual source and reasons per "
+         "vulnerability class relevant to the target language/platform.",
          "3. For Move targets: bounded formal verification via sui-prover against LLM-drafted "
          "specification properties compiled into a scaffolded package built from that same "
          "verified source — only if sui-prover is installed this run (see "
@@ -408,6 +418,10 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
 
     result = {"program": program_name or f"{owner}/{repo}", "repo": f"{owner}/{repo}", "ref": ref,
               "language": language, "files_reviewed": len(files), "report": rel,
+              # Full markdown text alongside `report`'s existing relative-path
+              # contract — see the identical comment in deep_dive_audit.py's
+              # run_audit() for why the callback needs the actual content.
+              "report_content": content, "logo_url": logo_url,
               "provider": provider, "verdict_summary": verdict_summary,
               "move_prover_ran": prover_result.get("ran", False)}
     _append_finding(result)
