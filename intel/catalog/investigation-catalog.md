@@ -343,3 +343,5 @@
 | 2026-07-20 | auto | 0xA1AFFfE3F4D611d252010E3EAf6f4D77088b0cd7 (RFI) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,181 (rug/illiquid) | +7d |
 
 | 2026-07-20 | auto | 0xB20000000000000000000024bDb2e92b8826AD30 (DUAL) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-20 | auto | 0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf (ZORS) | deep_investigation | CAUTION (55/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |

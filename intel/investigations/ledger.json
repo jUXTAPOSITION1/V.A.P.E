@@ -1344,6 +1344,25 @@
     "symbol": "TSG",
     "times_investigated": 1
   },
+  "8453:0x5110ee173d24cc03c1e836c2558c3ddaabc485bf": {
+    "address": "0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf",
+    "chain": "8453",
+    "creator_address": "0x54e2acab04c89a3fe02852bf8dd69ee8f526bc75",
+    "first_investigated": "2026-07-20T07:41:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-074137-0x5110EE17.md",
+        "score": 55,
+        "ts": "2026-07-20T07:41:37Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-20T07:41:37Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "ZORS",
+    "times_investigated": 1
+  },
   "8453:0x511ef9ad5e645e533d15df605b4628e3d0d0ff53": {
     "address": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
     "chain": "8453",
