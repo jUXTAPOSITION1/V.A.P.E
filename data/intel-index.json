@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-20T08:21:06Z",
+  "generated": "2026-07-20T09:16:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 306,
+    "reports": 307,
     "reports_by_type": {
+      "security": 53,
       "base": 55,
       "virtuals": 55,
-      "security": 52,
       "sentiment": 29,
       "macro": 15,
       "skillforge": 3,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-20-06.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-20T06:00Z",
+      "type": "security",
+      "file": "security-2026-07-20-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-20T09:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-20 06:08 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-20-06.md",
-      "bytes": 3383
+      "summary": "The real incident feed shows 7 incidents in the last 7 days (2026-07-11 through 2026-07-17), with zero incidents reaching or exceeding $50M in the prior 14 days. The incidents span Solana (Across, DefiTuna Lending), Arbitrum (Ostium $18.0M price oracle manipulation, Lumi Finance $0.27M silent auto-approval hack), Ethereum (BarnBridge $0.7",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-09.md",
+      "bytes": 5466
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-20-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-20T09:00Z",
+      "threat": null,
+      "summary": "The real incident feed shows 7 incidents in the last 7 days (2026-07-11 through 2026-07-17), with zero incidents reaching or exceeding $50M in the prior 14 days. The incidents span Solana (Across, DefiTuna Lending), Arbitrum (Ostium $18.0M price oracle manipulation, Lumi Finance $0.27M silent auto-approval hack), Ethereum (BarnBridge $0.7",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-09.md",
+      "bytes": 5466
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-16 05:32 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-16-05.md",
       "bytes": 2901
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-16-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-16T04:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-16 04:11 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-16-04.md",
-      "bytes": 2077
     }
   ],
   "broadcasts": [
