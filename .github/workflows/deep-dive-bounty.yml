@@ -40,8 +40,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - name: Restore cached security tools (best-effort — Slither if already cached)
-        uses: actions/cache/restore@v6
+      - name: Cache security tools (restore + save — a stable key so it actually
+          round-trips; skillforge/memory/tools-registry.json's own hash changes
+          every skillforge-toolcheck.yml run, which made the old restore-only
+          step here always miss)
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cyfrin
@@ -49,8 +52,13 @@ jobs:
             ~/.foundry
             ~/.local
             ~/.cache/pip
-          key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
-          restore-keys: skillforge-tools-
+          key: deep-dive-tools-v1-${{ runner.os }}
+      - name: Install Slither/Mythril/Halmos/Foundry/Aderyn (idempotent — no-op
+          on a cache hit, real install on a cold/partial cache)
+        run: |
+          bash skillforge/tools/install_all.sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.cyfrin/bin" >> "$GITHUB_PATH"
       - name: Run the deep-dive audit
         # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
         # string — that's classic GitHub Actions script injection, and callback_url
