@@ -2,7 +2,7 @@
 """SKILLFORGE synthesize — reads REAL memory (findings/lessons/registry), asks Groq to distill
 actionable skill playbooks + regenerate INDEX.md. Real data only; the model is instructed never
 to invent tools, CVEs, or results. Outputs go to a PR (not direct to main)."""
-import json, os, sys
+import json, os, re, sys
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,6 +79,17 @@ def main():
         content, provider = ask_oci_grok(sys_p, usr, temperature=0.4, max_tokens=2048,
                                           tier="deep", provider_order=FRONTIER_ORDER)
         content = content.strip()
+        # LLM sometimes wraps the whole file in a stray ```markdown ... ```
+        # fence despite being asked for GitHub markdown directly — same
+        # failure mode agents/builder.py's _extract_code_block() already
+        # guards against for code files. Strip it so the written skills/*.md
+        # matches every other skill's plain "# Skill: Title" convention
+        # instead of nesting the real content (and any YAML frontmatter)
+        # inside a fence that breaks skill-loading tooling expecting a
+        # heading on line 1.
+        fence_match = re.match(r"^```[a-zA-Z]*\n(.*)\n```\s*$", content, re.DOTALL)
+        if fence_match:
+            content = fence_match.group(1).strip()
         print(f"[synthesize] distilled via {provider}")
         # derive filename from first heading
         first = next((l for l in content.splitlines() if l.startswith("#")), "# distilled-skill")
