@@ -353,3 +353,5 @@
 | 2026-07-20 | auto | 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7 (WAVAX) | deep_investigation | PROCEED (100/100) | address has no contract code (EOA or not deployed) | +7d |
 
 | 2026-07-20 | auto | 0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2 (USDT) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-20 | auto | 0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845 (FWA) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) — can still act | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T22:02:19Z",
+  "generated": "2026-07-20T23:31:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 320,
@@ -15,7 +15,7 @@
       "bounty": 95
     },
     "broadcasts": 90,
-    "investigations": 261,
+    "investigations": 262,
     "tools": 16,
     "tools_verified": 16,
     "skills": 16
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260720-220216-0xfde4C96c.md",
-      "title": "Investigation \u2014 USDT",
-      "symbol": "USDT",
-      "name": "Tether USD",
-      "date": "2026-07-20T22:02:16Z",
-      "target": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 612036 holders ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-220216-0xfde4C96c.md"
+      "file": "investigation-20260720-233147-0xa0Df17B5.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "Fake World Assets",
+      "date": "2026-07-20T23:31:47Z",
+      "target": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) \u2014 can still act on the contract; [-10] Violent 24h move +741% (volatility/manipulation); [-10] Pair 4.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as un",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-233147-0xa0Df17B5.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260720-233147-0xa0Df17B5.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "Fake World Assets",
+      "date": "2026-07-20T23:31:47Z",
+      "target": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) \u2014 can still act on the contract; [-10] Violent 24h move +741% (volatility/manipulation); [-10] Pair 4.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as un",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-233147-0xa0Df17B5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260720-220216-0xfde4C96c.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $29,415; [-15] Pair only 2.3 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Posit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-162725-0xB2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-150620-0x152b9d0F.md",
-      "title": "Investigation \u2014 BTC.b",
-      "symbol": "BTC.b",
-      "name": "Bitcoin",
-      "date": "2026-07-18T15:06:20Z",
-      "target": "0x152b9d0FdC40C096757F570A51E494bd4b943E50",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 170933 holders \u2014 reasonably distributed; Deep liquidity ($2,440,100); Trading 304+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template);",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-150620-0x152b9d0F.md"
     }
   ],
   "reports": [
