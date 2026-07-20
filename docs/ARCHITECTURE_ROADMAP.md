@@ -185,16 +185,33 @@ its key is unset, so this table is "what's wired," not "what you personally have
   $10 — see `DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD`) reflects this much
   higher-volume role, sized independently of xai_1's own $3 default.
 - **`search=True` opts into xAI's real Live Search** (`agents/llm.py`'s
-  `ask()`/`ask_frontier()`/`ask_oci_grok()` all accept it; only takes effect
-  once/if a call actually reaches the `xai_1` provider — a real, billed-
-  per-search API feature, not the pre-fetched Tavily/Brave snippet grounding
-  every other call site uses). Added 2026-07-20 after a real gap: per-
+  `ask()`/`ask_frontier()`/`ask_oci_grok()`/`ask_vertex_candidate()`/
+  `ask_oci_grok_frontier()` all accept it; only takes effect once/if a call
+  actually reaches the `xai_1` provider — a real, billed-per-search API
+  feature, not the pre-fetched Tavily/Brave snippet grounding most call
+  sites also carry as backup). Added 2026-07-20 after a real gap: per-
   incident threat analyses (`agents/hack_agent.py`) were grounded only in
   one thin pre-fetched search and reported "no public writeups found" for
   an incident a direct Grok query resolved in full (tx hash, attacker
-  addresses, root cause). `hack_agent.py` is the first caller wired to it;
-  worth adding to other research-dependent narrative calls if the same gap
-  shows up there.
+  addresses, root cause). Rolled out the same day to every other narrative/
+  report-generating call site in the repo: `agents/intel_common.py`'s
+  shared `grok_analysis()` (covers `broadcast.py`, `bug_bounty_intel.py`,
+  `mainnet_patch_check.py`, `skillforge/toolcheck.py` with no per-file
+  change), the five intel sweeps (`security_sweep.py`, `base_sweep.py`,
+  `sentiment_sweep.py`, `macro_sweep.py`, `virtuals_sweep.py`), the live
+  investigation expert assessment (`investigate.py`) and bounty-radar
+  strategic briefing (`scout.py`), the audit narratives
+  (`deep_dive_audit.py`, `external_audit.py`, `acp_fulfill.py`'s quick
+  review), `bounty_ops.py`'s checklist generator, `skillforge_build.py`'s
+  build proposer, `agents/run.py`'s main bounty-report generator
+  (`ask_llm()` → `VAPE_REPORT_SYSTEM`), and `agents/redteam.py`'s
+  prompt-injection test (kept in lockstep with `run.py`'s real call so the
+  test still exercises production's actual capability). Excluded on
+  purpose: pure code-generation/code-review call sites
+  (`code_review.py`, `redteam_builder.py`, `scaffold_move_target.py`,
+  `scaffold_foundry_target.py`, `run.py`'s self-repo-review pass) and
+  `skillforge/synthesize.py`'s memory-only skill distillation, none of
+  which are meant to reach beyond the exact inputs they're given.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to

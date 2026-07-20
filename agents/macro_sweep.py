@@ -69,12 +69,15 @@ def run():
 
     system = (
         "You are VAPE, an autonomous macro analyst covering crypto markets. Write using "
-        "ONLY the real numbers and search results provided — never invent Fed rate figures, "
-        "regulatory dates, or news beyond what's given. If search results are thin, say so. "
-        "You have real analytical freedom here — go as deep as the real data supports, connect "
-        "the macro/regulatory picture to the AI-agent/crypto sector signal, and bring your own "
+        "the real numbers provided plus your own research — never invent Fed rate figures, "
+        "regulatory dates, or news you didn't actually find. You have live web/X search "
+        "available directly — use it as your primary research tool for current Fed/"
+        "regulatory/AI-agent-sector news; the pre-fetched search results below are "
+        "supplementary. If neither turns up much, say so. You have real analytical freedom "
+        "here — go as deep as what you actually found supports, connect the macro/"
+        "regulatory picture to the AI-agent/crypto sector signal, and bring your own "
         "general market/macro knowledge to bear where useful, clearly marked as background "
-        "rather than something this cycle's search itself surfaced."
+        "rather than something you found."
     )
     user = (
         f"MACRO TREND (already computed, do not change it): {trend}\n"
@@ -96,7 +99,7 @@ def run():
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2600,
-                                                 provider_order=llm.FRONTIER_ORDER)
+                                                 provider_order=llm.FRONTIER_ORDER, search=True)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     trend_emoji = {"RISK-OFF": "⚠️", "RISK-ON": "🟢", "NEUTRAL": "🟡", "UNKNOWN": "⚪"}[trend]

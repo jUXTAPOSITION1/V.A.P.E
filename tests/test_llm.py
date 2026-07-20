@@ -158,6 +158,70 @@ class TestSearchGrounding:
         assert "search_parameters" not in captured["body"]
 
 
+class TestSearchThreadsThroughFallbackChain:
+    """search=True was added to ask() first; ask_vertex_candidate(),
+    ask_oci_grok(), and ask_oci_grok_frontier() all sit above it in the
+    real fallback chain used by every report-generating call site, so each
+    must forward the kwarg rather than silently dropping it."""
+
+    def test_ask_vertex_candidate_forwards_search(self, monkeypatch):
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_vertex_candidate("sys", "usr", tier="frontier",
+                                      provider_order=llm.FRONTIER_ORDER, search=True)
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
+    def test_ask_oci_grok_forwards_search(self, monkeypatch):
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok("sys", "usr", tier="frontier",
+                              provider_order=llm.FRONTIER_ORDER, search=True)
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
+    def test_ask_oci_grok_frontier_forwards_search(self, monkeypatch):
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok_frontier("sys", "usr", search=True)
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
+    def test_search_defaults_false_through_the_chain(self, monkeypatch):
+        monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_oci_grok_frontier("sys", "usr")
+        assert "search_parameters" not in captured["body"]
+
+
 def test_default_fast_tier_call_never_reaches_xai_when_groq_available(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "groqkey")
     monkeypatch.setenv("XAI_API_KEY_1", "xaikey")

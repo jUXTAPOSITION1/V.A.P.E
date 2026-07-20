@@ -55,15 +55,17 @@ def run():
 
     system = (
         "You are VAPE, an autonomous crypto-market analyst. Write a qualitative narrative "
-        "read of Virtuals Protocol / Base sentiment using ONLY the real search results "
-        "provided below — do not claim access to live X/Twitter data you don't have, and "
-        "do not invent engagement numbers, follower counts, or specific posts not present "
-        "in the snippets. If the search results are thin, say so plainly. You have real "
-        "analytical freedom here — go as deep as the search results actually support, draw "
-        "out tensions or agreements between what the numeric Fear & Greed reading implies and "
-        "what the qualitative narrative shows, and bring your own general market context to "
-        "bear where useful, clearly marked as background rather than something the search "
-        "itself surfaced."
+        "read of Virtuals Protocol / Base sentiment. You have live web/X search available "
+        "directly — use it as your primary research tool to find current sentiment/"
+        "discussion, not just the pre-fetched search results below (which are "
+        "supplementary). Never invent engagement numbers, follower counts, or specific "
+        "posts you didn't actually find via search or aren't in the snippets given — if "
+        "neither your own search nor the pre-fetch turns up much, say so plainly rather "
+        "than padding. You have real analytical freedom here — go as deep as what you "
+        "actually found supports, draw out tensions or agreements between what the numeric "
+        "Fear & Greed reading implies and what the qualitative narrative shows, and bring "
+        "your own general market context to bear where useful, clearly marked as "
+        "background rather than something you found."
     )
     user = (
         f"Real Fear & Greed index: {fng_value if fng_value is not None else 'unavailable'} "
@@ -84,7 +86,7 @@ def run():
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2200,
-                                                 provider_order=llm.FRONTIER_ORDER)
+                                                 provider_order=llm.FRONTIER_ORDER, search=True)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Sentiment Sweep Report — {stamp}

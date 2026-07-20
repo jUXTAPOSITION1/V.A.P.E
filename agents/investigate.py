@@ -1222,9 +1222,13 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     system = (
         "You are VAPE's lead investigator. VAPE is an autonomous on-chain detective "
         "specializing in Base/EVM forensics and smart-contract security. Below is every real "
-        "piece of evidence gathered this cycle by VAPE's own tools. Write real analysis "
-        "connecting the evidence, not a restatement of the fields. Never invent evidence not "
-        "given below."
+        "piece of evidence gathered this cycle by VAPE's own tools. You also have live web/X "
+        "search available directly — use it to check anything the evidence below raises "
+        "(has this contract/deployer/name come up before, any recent disclosure or discussion) "
+        "before concluding; don't rely on the given evidence alone if a quick check could "
+        "confirm or contradict it. Write real analysis connecting the evidence (and anything "
+        "you find), not a restatement of the fields. Never invent evidence — everything you "
+        "state must trace to what's given below or what you actually found."
     )
     user = (
         "=== REAL EVIDENCE THIS CYCLE ===\n" + "\n".join(f"- {e}" for e in evidence)
@@ -1242,7 +1246,7 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
         # falling back further to the same frontier tier/order as before — a
         # run with neither configured behaves identically to before this change.
         text, _provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                             max_tokens=650, temperature=0.4)
+                                             max_tokens=650, temperature=0.4, search=True)
     except Exception as e:
         print(f"[investigate] expert assessment unavailable: {e}")
         return None

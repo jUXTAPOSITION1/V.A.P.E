@@ -186,6 +186,9 @@ Rules:
   small analysis module, a playbook-backed utility — not a multi-week project.
 - Never invent capability gaps, findings, patterns, or opportunities that aren't in the
   data given.
+- You have live web/X search available directly — use it if a signal below names a specific
+  tool/technique/program you'd want to verify is current before proposing a build around it.
+  The pre-fetched web research included below is supplementary, not a substitute.
 - No disclaimers, no hedging — a real decision or an honest "nothing justified."
 
 Output format (exactly, first line always one of these two):
@@ -213,6 +216,7 @@ def propose(signals):
             max_tokens=1600,
             temperature=0.5,
             provider_order=FRONTIER_ORDER,
+            search=True,
         )
     except Exception as e:
         print(f"[SkillforgeBuild] propose LLM call failed: {e}")

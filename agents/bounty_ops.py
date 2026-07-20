@@ -75,7 +75,9 @@ CHECKLIST_SYSTEM = (
     "actually do to engage with it for real — starting from confirming real scope/rules, through "
     "which of the two tools above to run and on what target, to what to check manually against a "
     "real vulnerability taxonomy (access control, oracle trust, reentrancy, business logic), to "
-    "what a real submission requires. One item per line, each starting with '- '. No preamble, "
+    "what a real submission requires. You have live web/X search available directly — use it "
+    "to check the program's actual current scope/rules/payout tiers if the details below leave "
+    "that unclear, rather than guessing. One item per line, each starting with '- '. No preamble, "
     "no numbering, no markdown headers — just the bullet lines."
 )
 
@@ -188,7 +190,8 @@ def generate_checklist(candidate):
     )
     try:
         text, _provider = ask_oci_grok_safe(CHECKLIST_SYSTEM, user, tier="frontier",
-                                             provider_order=FRONTIER_ORDER, max_tokens=700, temperature=0.3)
+                                             provider_order=FRONTIER_ORDER, max_tokens=700, temperature=0.3,
+                                             search=True)
     except Exception as e:
         print(f"[bounty_ops] checklist generation failed for {candidate.get('name')}: {e}")
         return []

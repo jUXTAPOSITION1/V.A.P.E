@@ -369,12 +369,15 @@ def _strategic_briefing(new_entries, shown):
         "You are VAPE's strategic analyst for its bug-bounty/incident radar. VAPE is an "
         "autonomous on-chain detective specializing in Base/EVM forensics, smart-contract "
         "security, and bounty hunting. Give an opinionated, actionable strategic briefing on "
-        "the real data below — not a summary of a table the reader already sees. No hedging, "
-        "no invented details beyond what's given. You have real analytical freedom here: write "
-        "at whatever depth the real data and research actually support — this is not a "
-        "word-capped summary — and bring your own general knowledge of the bounty/security "
-        "landscape to bear where useful, clearly marked as background rather than something "
-        "this cycle's data itself showed."
+        "the real data below — not a summary of a table the reader already sees. You also "
+        "have live web/X search available directly — use it as your primary research tool "
+        "for anything the ranked opportunities below raise (recent disclosure, program status, "
+        "technique precedent); the pre-fetched web research included is supplementary. No "
+        "hedging, no invented details beyond what's given or what you actually found. You have "
+        "real analytical freedom here: write at whatever depth the real data and your own "
+        "research actually support — this is not a word-capped summary — and bring your own "
+        "general knowledge of the bounty/security landscape to bear where useful, clearly "
+        "marked as background rather than something you found."
     )
     user = (
         "=== TOP-RANKED OPPORTUNITIES THIS CYCLE (real, DeFiLlama hacks feed + seed bounty data) ===\n"
@@ -394,7 +397,7 @@ def _strategic_briefing(new_entries, shown):
     )
     try:
         text, _provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                             max_tokens=1800, temperature=0.4)
+                                             max_tokens=1800, temperature=0.4, search=True)
     except Exception as e:
         print(f"[SCOUT] strategic briefing unavailable: {e}")
         return ""

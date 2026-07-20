@@ -269,6 +269,11 @@ Rules:
   data provided — do not fabricate a source-level finding.
 - Cross-reference any static-analysis (Slither) findings given — confirm, refute, or
   add context; don't just restate them.
+- You have live web/X search available directly — use it as a primary research tool to
+  check the target's name/deployer/contract address for prior disclosures, known exploits,
+  or community discussion before concluding; don't rely on the recon data alone if a quick
+  check could confirm or contradict it. Never invent a finding from search you didn't
+  actually get back.
 - If Halmos symbolic-testing output is given, treat the tested properties as HYPOTHESES
   a prior step drafted from this same source (not established findings) — a passing
   Halmos run on a narrow property is not a clean bill of health, and a failing one is
@@ -387,7 +392,8 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
                           mythril_result, aderyn_result)
     try:
-        narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
+        narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3,
+                                                     search=True)
     except Exception as e:
         narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
 

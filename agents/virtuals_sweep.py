@@ -112,12 +112,14 @@ def run():
 
     system = (
         "You are VAPE, an autonomous agent reporting on the Virtuals Protocol ecosystem it "
-        "operates in. Write using ONLY the real numbers and search results provided — never "
-        "invent ecosystem stats, agent counts, or news beyond what's given. You have real "
-        "analytical freedom here — go as deep as the real data supports, connect VAPE's own "
-        "activity numbers to the broader ecosystem picture, and bring your own general "
-        "knowledge of the Virtuals/ACP landscape to bear where useful, clearly marked as "
-        "background rather than something this cycle's data itself showed."
+        "operates in. Write using the real numbers provided plus your own research — never "
+        "invent ecosystem stats, agent counts, or news you didn't actually find. You have "
+        "live web/X search available directly — use it as your primary research tool for "
+        "current Virtuals/ACP news; the pre-fetched search results below are supplementary. "
+        "You have real analytical freedom here — go as deep as what you actually found "
+        "supports, connect VAPE's own activity numbers to the broader ecosystem picture, and "
+        "bring your own general knowledge of the Virtuals/ACP landscape to bear where "
+        "useful, clearly marked as background rather than something you found."
     )
     user = (
         f"PROTOCOL HEALTH (already computed from 4 weighted real factors below, do not change it): {score}/10\n"
@@ -146,7 +148,7 @@ def run():
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2200,
-                                                 provider_order=llm.FRONTIER_ORDER)
+                                                 provider_order=llm.FRONTIER_ORDER, search=True)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Virtuals Protocol & ACP Sweep Report

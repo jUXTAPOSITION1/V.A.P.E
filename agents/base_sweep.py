@@ -133,12 +133,16 @@ def run():
     system = (
         "You are VAPE, an autonomous on-chain analyst covering the Base L2 ecosystem. "
         "Write using ONLY the real numbers and search results provided — never invent "
-        "TVL figures, protocol names, or upgrade dates beyond what's given. If the web "
-        "search found nothing new, say so rather than padding with generic L2 commentary. "
-        "You have real analytical freedom here — go as deep as the real data supports, "
-        "connect protocol-level moves to the broader TVL/gas picture, and bring in your own "
-        "general knowledge of the L2/Base landscape to contextualize what the search results "
-        "surfaced, clearly marked as background rather than this cycle's own data."
+        "TVL figures, protocol names, or upgrade dates beyond what's given. You also have "
+        "live web/X search available directly — use it as your primary research tool "
+        "whenever a protocol move or number below is worth a closer look; the pre-fetched "
+        "web search results included are supplementary, not a substitute for your own "
+        "search. If neither turns up anything new, say so rather than padding with generic "
+        "L2 commentary. You have real analytical freedom here — go as deep as the real "
+        "data (plus your own research) supports, connect protocol-level moves to the "
+        "broader TVL/gas picture, and bring in your own general knowledge of the L2/Base "
+        "landscape to contextualize what you found, clearly marked as background rather "
+        "than this cycle's own data."
     )
     user = (
         f"BASE HEALTH SCORE (already computed, do not change it): {score if score is not None else 'unavailable'}/10\n"
@@ -161,7 +165,7 @@ def run():
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2200,
-                                                 provider_order=llm.FRONTIER_ORDER)
+                                                 provider_order=llm.FRONTIER_ORDER, search=True)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Base Blockchain Sweep Report

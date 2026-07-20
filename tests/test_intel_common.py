@@ -2,6 +2,8 @@
 they exist specifically because a raw f-string format spec crashes on the
 'unavailable'/None values every real fetcher degrades to — these pin the
 never-crash contract."""
+from unittest import mock
+
 from agents import intel_common as ic
 
 
@@ -34,3 +36,19 @@ def test_bool_is_not_treated_as_number():
     # contract is so a future refactor can't silently change it.
     # (bools are ints in Python, so this currently formats — pin it.)
     assert ic.fmt_usd(True) == "$1"
+
+
+def test_grok_analysis_defaults_search_true():
+    """search=True is grok_analysis()'s default — the 4 report generators
+    that call it with no explicit `search` kwarg (broadcast.py,
+    bug_bounty_intel.py, mainnet_patch_check.py, skillforge/toolcheck.py)
+    must inherit Live Search without needing their own edit."""
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis text", "xai_1")) as m:
+        ic.grok_analysis("analyst", "some real grounding data")
+    assert m.call_args.kwargs["search"] is True
+
+
+def test_grok_analysis_forwards_explicit_search_false():
+    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis text", "xai_1")) as m:
+        ic.grok_analysis("analyst", "some real grounding data", search=False)
+    assert m.call_args.kwargs["search"] is False

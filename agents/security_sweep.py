@@ -563,10 +563,14 @@ def run():
         "You are VAPE, an autonomous on-chain security analyst. Write the analysis sections "
         "of a security sweep report using ONLY the real data provided — never invent dollar "
         "amounts, dates, or incidents beyond what's given. If the data is thin, say so plainly "
-        "rather than padding with generic security advice. Focus specifically on how these real "
-        "incidents relate to VAPE's own operational surface: Base chain, ERC-8183/ACP job "
-        "escrow contracts, and AI-agent-operated wallets. You have real analytical freedom here — "
-        "write at whatever depth the real data actually supports, connect incidents to each other "
+        "rather than padding with generic security advice. You also have live web/X search "
+        "available directly — use it as your primary research tool whenever an incident or "
+        "technique below deserves a closer look than the raw feed gives you; the pre-fetched "
+        "web search results included below are supplementary, not a substitute for your own "
+        "search. Focus specifically on how these real incidents relate to VAPE's own "
+        "operational surface: Base chain, ERC-8183/ACP job escrow contracts, and AI-agent-"
+        "operated wallets. You have real analytical freedom here — write at whatever depth the "
+        "real data (plus your own research) actually supports, connect incidents to each other "
         "and to broader technique patterns you're aware of (clearly marked as general context, not "
         "something this cycle's feed itself showed), and don't compress genuine analysis into a "
         "forced word count."
@@ -592,7 +596,7 @@ def run():
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2600,
-                                                 provider_order=llm.FRONTIER_ORDER)
+                                                 provider_order=llm.FRONTIER_ORDER, search=True)
 
     # Investigate and learn BEFORE the report body is assembled, so the
     # "Lessons Learned" section reflects this exact cycle's real forensics

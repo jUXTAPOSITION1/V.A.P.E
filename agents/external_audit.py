@@ -221,6 +221,9 @@ what it does NOT:
   human's second look on specific named issues) and a short list of what a human
   reviewer should still manually verify (especially anything needing Move Prover
   formal verification or dynamic testing this static read can't confirm).
+- You have live web/X search available directly — use it as a primary research tool to
+  check whether this protocol/module has any prior disclosed vulnerabilities or audits;
+  never invent a finding from search you didn't actually get back.
 
 Output plain Markdown: an Executive Summary, then one section per real finding (skip
 padding if there's nothing concrete), a "Due Diligence — Checked and Confirmed Safe"
@@ -244,6 +247,9 @@ Rules:
   scenario, and the concrete impact.
 - End with a clear overall verdict and a short list of what a human reviewer should still
   manually verify.
+- You have live web/X search available directly — use it as a primary research tool to
+  check whether this protocol/module has any prior disclosed vulnerabilities or audits;
+  never invent a finding from search you didn't actually get back.
 
 Output plain Markdown: an Executive Summary, then one section per real finding, a "Due
 Diligence — Checked and Confirmed Safe" section, then "Recommended Human Follow-up".
@@ -309,7 +315,8 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
     system = MOVE_AUDIT_SYSTEM if language == "move" else GENERIC_AUDIT_SYSTEM
     prompt = build_prompt(program_name, owner, repo, ref, files)
     try:
-        narrative, provider = ask_oci_grok_frontier(system, prompt, max_tokens=max_tokens, temperature=0.25)
+        narrative, provider = ask_oci_grok_frontier(system, prompt, max_tokens=max_tokens, temperature=0.25,
+                                                     search=True)
     except Exception as e:
         narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
 
