@@ -118,8 +118,8 @@ const App = {
             auditEl.innerHTML = files.map(f => `
                 <a href="${f.url}" target="_blank" class="card-h diff-row block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-500'}"></i>
-                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-emerald-500'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
+                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-[#60a5fa]'}"></i>
+                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-[#60a5fa]'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
                     </div>
                     <div class="text-xs leading-snug capitalize">${this._esc(f.name)}</div>
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
@@ -1361,7 +1361,7 @@ const App = {
                         <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
                     </div>
                     <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
-                    ${b.vapeFitReason?`<div class="text-[10px] text-emerald-500/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
+                    ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
                     ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
                     ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
                         <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
@@ -1369,7 +1369,7 @@ const App = {
                     </div>`:''}
                     <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
                         <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
-                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-emerald-500/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
+                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
                     </div>
                 </div>`;
             }).join('');

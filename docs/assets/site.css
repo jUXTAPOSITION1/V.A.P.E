@@ -251,6 +251,18 @@ a { transition: color .15s; }
     color: #60a5fa;
 }
 
+/* ── Bounty Command Center console treatment ──────────────────────────────
+   Scoped to just this section (not a global --accent change) — swaps its
+   green touches (audit-filed / VAPE-fit / hire-CTA highlights, previously
+   text-emerald-*) for the same blue as .spotlight-* above, and gives the
+   section itself a left accent bar + tinted live indicator so it reads as
+   an operations console rather than another flat data panel. */
+#bounty-command-center {
+    border-left: 2px solid rgba(96, 165, 250, 0.35);
+}
+#bounty-command-center .eyebrow { color: #60a5fa; }
+#bounty-command-center #bcc-live { color: #60a5fa; }
+
 /* ── Wallet chip / profile ────────────────────────────────────────────── */
 .wallet-chip {
     border: 1px solid var(--border);
