@@ -102,6 +102,43 @@ const App = {
             document.getElementById('bcc-updated').textContent = 'radar telemetry unavailable';
         }
 
+        // Live task feed — real recent automated commits + one OCI-Grok
+        // synthesis line (agents/task_feed.py, data/task-feed.json). A
+        // separate try/catch from the telemetry/audit-list fetches above —
+        // this feed being unavailable shouldn't blank out either of those.
+        const taskFeedEl = document.getElementById('bcc-task-feed');
+        const synthesisEl = document.getElementById('bcc-task-synthesis');
+        const KIND_META = {
+            investigation: ['fa-magnifying-glass-chart', '#60a5fa'],
+            'bounty-radar': ['fa-satellite-dish', '#60a5fa'],
+            audit: ['fa-file-shield', '#60a5fa'],
+            broadcast: ['fa-tower-broadcast', '#a1a1aa'],
+            reputation: ['fa-chart-line', '#a1a1aa'],
+            sweep: ['fa-broom', '#a1a1aa'],
+            'data-agent': ['fa-database', '#a1a1aa'],
+            build: ['fa-code-merge', '#a1a1aa'],
+            automation: ['fa-gears', '#a1a1aa'],
+        };
+        try {
+            const feed = await (await fetch(`${RAW}/data/task-feed.json?t=`+Date.now())).json();
+            const tasks = Array.isArray(feed.tasks) ? feed.tasks : [];
+            this._set('bcc-tasks', tasks.length);
+            if (synthesisEl) synthesisEl.textContent = feed.synthesis || '';
+            if (!tasks.length) throw 0;
+            taskFeedEl.innerHTML = tasks.map(t => {
+                const [icon, col] = KIND_META[t.kind] || KIND_META.automation;
+                return `
+                <a href="${t.url||'#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
+                    <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
+                    <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message||'')}</div>
+                    <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
+                </a>`;
+            }).join('');
+        } catch(e) {
+            if (taskFeedEl) taskFeedEl.innerHTML = '<div class="text-zinc-500 text-sm">No recent automated activity recorded.</div>';
+            this._set('bcc-tasks', 0);
+        }
+
         const auditEl = document.getElementById('bcc-audit-list');
         try {
             const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/poc-reports`)).json();

@@ -355,11 +355,24 @@
             direct line to commission a paid engagement — from a $0.01 exploit check to a $1 submission-ready bounty audit,
             hireable directly from a matched program below.</p>
 
-            <div id="bcc-telemetry" class="stat-line mb-8 pb-8 border-b border-white/10">
+            <div id="bcc-telemetry" class="stat-line mb-6 pb-6 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">live now</span><span id="bcc-live" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">platforms</span><span id="bcc-platforms" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">audits filed</span><span id="bcc-audits" class="stat-value">—</span></span>
+                <span class="stat-pair"><span class="stat-label">tasks (recent)</span><span id="bcc-tasks" class="stat-value">—</span></span>
+            </div>
+
+            <!-- Live task feed — real recent automated commits + one
+                 OCI-Grok-authored synthesis line (agents/task_feed.py,
+                 data/task-feed.json). -->
+            <div class="mb-8 pb-8 border-b border-white/10">
+                <h3 class="text-sm text-zinc-500 mb-3">Live Automation Feed</h3>
+                <p id="bcc-task-synthesis" class="text-xs text-[#60a5fa] mb-4 leading-relaxed"></p>
+                <div id="bcc-task-feed" class="diff-list">
+                    <div class="skeleton h-10 my-1"></div>
+                    <div class="skeleton h-10 my-1"></div>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -702,7 +715,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=24"></script>
+    <script src="assets/app.js?v=25"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

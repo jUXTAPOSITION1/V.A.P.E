@@ -116,6 +116,15 @@ jobs:
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
         run: python -m skillforge.memory.index_db build || echo "memory index skipped"
+      # Bounty Command Center's live-task feed — real recent automated
+      # commits + one OCI-Grok-authored synthesis line (agents/task_feed.py).
+      # Runs on this workflow's own fast cadence so the site's "tasks" stat
+      # never sits stale; a failure here must never block the real
+      # investigation work already committed above, so it's non-fatal.
+      - name: Task feed (Bounty Command Center)
+        env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
+        run: python agents/task_feed.py || echo "task feed skipped"
       - name: Commit
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,6 +132,7 @@ jobs:
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add intel/investigations/ intel/catalog/ skillforge/memory/ data/intel-index.json
+          [ -f data/task-feed.json ] && git add data/task-feed.json || true
           # Only exists once the catalog sweep's first address-based hire ever
           # succeeds — `git add` on a not-yet-created path would abort this
           # step outright (GitHub Actions runs `run:` blocks with `set -e`),
