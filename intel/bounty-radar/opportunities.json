@@ -8287,7 +8287,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackerone",
@@ -8310,7 +8315,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8333,7 +8343,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8356,7 +8371,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8379,7 +8399,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8402,7 +8427,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8426,7 +8456,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8452,7 +8487,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8476,7 +8516,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8500,7 +8545,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8524,7 +8574,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8550,7 +8605,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8572,7 +8632,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8595,7 +8660,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -8618,7 +8688,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784567060.4272954,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -23597,5 +23672,25 @@
     "isNew": true,
     "firstSeen": "2026-07-17T16:43:17.515083Z",
     "track": "incident"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Allbridge Core-1784419200",
+    "name": "Allbridge Core (exploit $1,650,000)",
+    "prizeUsd": 1650000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "solana"
+    ],
+    "desc": "Flashloan Exploit on Solana. Lead for incident response + forensics.",
+    "fitScore": 72,
+    "isNew": true,
+    "firstSeen": "2026-07-20T17:04:20.427153Z"
   }
 ]

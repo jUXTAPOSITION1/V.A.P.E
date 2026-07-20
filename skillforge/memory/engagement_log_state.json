@@ -176,5 +176,6 @@
   "defillama-hack:Ostium (exploit $18,000,000)": "no_target_found",
   "defillama-hack:BarnBridge (exploit $776,000)": "no_target_found",
   "defillama-hack:Drips Network (exploit $24,900)": "no_target_found",
-  "defillama-hack:DefiTuna Lending (exploit $580,000)": "not_yet_attempted"
+  "defillama-hack:DefiTuna Lending (exploit $580,000)": "not_yet_attempted",
+  "defillama-hack:Allbridge Core (exploit $1,650,000)": "not_yet_attempted"
 }

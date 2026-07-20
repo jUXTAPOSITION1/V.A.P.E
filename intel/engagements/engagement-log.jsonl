@@ -188,3 +188,4 @@
 {"ts": "2026-07-15T18:41:47Z", "lead": "BarnBridge (exploit $776,000)", "platform": "defillama-hack", "prizeUsd": 776000, "fitScore": 79, "engagement": {"status": "no_target_found", "checked_at": "2026-07-15T18:41:35Z"}}
 {"ts": "2026-07-15T18:41:47Z", "lead": "Drips Network (exploit $24,900)", "platform": "defillama-hack", "prizeUsd": 24900, "fitScore": 64, "engagement": {"status": "no_target_found", "checked_at": "2026-07-15T18:41:37Z"}}
 {"ts": "2026-07-16T23:31:24Z", "lead": "DefiTuna Lending (exploit $580,000)", "platform": "defillama-hack", "prizeUsd": 580000, "fitScore": 68, "engagement": {"status": "not_yet_attempted"}}
+{"ts": "2026-07-20T17:04:36Z", "lead": "Allbridge Core (exploit $1,650,000)", "platform": "defillama-hack", "prizeUsd": 1650000, "fitScore": 72, "engagement": {"status": "not_yet_attempted"}}
