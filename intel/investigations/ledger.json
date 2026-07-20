@@ -672,6 +672,25 @@
     "symbol": "WETH.e",
     "times_investigated": 1
   },
+  "43114:0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7": {
+    "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "chain": "43114",
+    "creator_address": "0x808ce8dec9e10bed8d0892aceef9f1b8ec2f52bd",
+    "first_investigated": "2026-07-20T15:29:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-152927-0xB31f66AA.md",
+        "score": 100,
+        "ts": "2026-07-20T15:29:27Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-20T15:29:27Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "WAVAX",
+    "times_investigated": 1
+  },
   "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
     "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
     "chain": "56",

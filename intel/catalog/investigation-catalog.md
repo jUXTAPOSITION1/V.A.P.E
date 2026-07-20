@@ -349,3 +349,5 @@
 | 2026-07-20 | auto | 0x08574906C462A0B8dA0786ca061E0C2e0C644cA0 (PLAY) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-20 | auto | 0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf (cbBTC) | deep_investigation | CAUTION (74/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-20 | auto | 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7 (WAVAX) | deep_investigation | PROCEED (100/100) | address has no contract code (EOA or not deployed) | +7d |
