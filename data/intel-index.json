@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T21:56:11Z",
+  "generated": "2026-07-20T22:02:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 320,
@@ -15,7 +15,7 @@
       "bounty": 95
     },
     "broadcasts": 90,
-    "investigations": 260,
+    "investigations": 261,
     "tools": 16,
     "tools_verified": 16,
     "skills": 16
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260720-152927-0xB31f66AA.md",
-      "title": "Investigation \u2014 WAVAX",
-      "symbol": "WAVAX",
-      "name": "Wrapped AVAX",
-      "date": "2026-07-20T15:29:27Z",
-      "target": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: 351705 holders \u2014 reasonably distributed; Deep liquidity ($8,275,904); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1909+ days \u2014 independent longevity corroboration.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-152927-0xB31f66AA.md"
+      "file": "investigation-20260720-220216-0xfde4C96c.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "Tether USD",
+      "date": "2026-07-20T22:02:16Z",
+      "target": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 612036 holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-220216-0xfde4C96c.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260720-220216-0xfde4C96c.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "Tether USD",
+      "date": "2026-07-20T22:02:16Z",
+      "target": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 612036 holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-220216-0xfde4C96c.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260720-152927-0xB31f66AA.md",
@@ -593,20 +607,6 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 170933 holders \u2014 reasonably distributed; Deep liquidity ($2,440,100); Trading 304+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template);",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-150620-0x152b9d0F.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-135936-0x8c81B4c8.md",
-      "title": "Investigation \u2014 BRIUN",
-      "symbol": "BRIUN",
-      "name": "Briun Armstrung",
-      "date": "2026-07-18T13:59:36Z",
-      "target": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +481% (volatility/manipulation). Positive evidence: Ownership renounced; 71871 holders \u2014 reasonably distributed; Trading 864+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 852+ days \u2014 in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-135936-0x8c81B4c8.md"
     }
   ],
   "reports": [

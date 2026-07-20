@@ -2614,5 +2614,24 @@
     "last_verdict": "REJECT",
     "symbol": "SMB",
     "times_investigated": 1
+  },
+  "8453:0xfde4c96c8593536e31f229ea8f37b2ada2699bb2": {
+    "address": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
+    "chain": "8453",
+    "creator_address": "0x085909388fc0cE9E5761ac8608aF8f2F52cb8B89",
+    "first_investigated": "2026-07-20T22:02:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-220216-0xfde4C96c.md",
+        "score": 45,
+        "ts": "2026-07-20T22:02:16Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T22:02:16Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "USDT",
+    "times_investigated": 1
   }
 }
