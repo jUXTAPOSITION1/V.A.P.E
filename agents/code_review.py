@@ -40,6 +40,16 @@ from agents.llm import ask_safe, FRONTIER_ORDER  # noqa: E402
 from skillforge.mcp import GitHubMCPWrapper  # noqa: E402
 import code_lint  # noqa: E402
 
+# Optional Memory integration (same guarded-import pattern skillforge/mcp.py
+# already uses) — lets a human-verified false positive on a deterministic
+# finding "stick" across future runs instead of getting re-flagged and
+# re-litigated on every PR that touches the same file/pattern.
+try:
+    from skillforge.memory.retriever import append_to_memory, search_memory
+except Exception:
+    append_to_memory = None
+    search_memory = None
+
 REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
 
 # Kept short and specific rather than a generic OWASP checklist — this is
@@ -143,7 +153,101 @@ def run_deterministic_pass(head_sha, files):
         if text is None:
             continue
         code_lint.lint_text(path, text, findings)
-    return findings
+    return annotate_reviewed_exceptions(findings)
+
+
+# ============================================================================
+# Learned exceptions — teaching VAPE Reviewer from a human-verified false
+# positive so it stops re-flagging the exact same file/pattern every PR.
+#
+# This is deliberately narrow: a "lesson" only ever suppresses re-alarm on
+# the SAME (path, rule) pair a human actually looked at and confirmed safe
+# in context (e.g. hire.js's innerHTML sinks are always fed through
+# escapeHtml() at the call site, a shape code_lint's own docstring already
+# says it can't trace). It never silently drops the finding — the
+# deterministic scan still reports it, still feeds the LLM pass, and the
+# comment still shows it; it's annotated as "previously reviewed", not
+# deleted. A different file hitting the same regex, or the same file
+# hitting a different rule, gets no special treatment and is reviewed
+# fresh, matching this repo's "PR-gated, never auto-apply/auto-suppress"
+# law (agents/self_improve.py) applied to review findings instead of code
+# changes.
+# ============================================================================
+
+REVIEWED_EXCEPTION_TAG = "vape-reviewer-exception"
+
+# Ordered (substring-in-message, stable rule tag) pairs — one per code_lint.py
+# check. Matched top-to-bottom so more specific substrings can precede a
+# broader one if that's ever needed; order doesn't matter today since the
+# four checks produce disjoint message shapes.
+_RULE_SIGNATURES = [
+    ("innerHTML assigned directly from", "innerhtml-bare-var"),
+    ("assigned a literal string that looks like a real secret", "hardcoded-secret-literal"),
+    ("called on a dynamically-built string", "eval-exec-dynamic"),
+    ("pickle.loads() on a non-literal", "pickle-loads-non-literal"),
+    ("given a dynamically-built command string", "os-system-shell-injection"),
+    ("shell=True) given a dynamically-built command", "subprocess-shell-injection"),
+]
+
+
+def _rule_tag_for_message(msg):
+    for substring, tag in _RULE_SIGNATURES:
+        if substring in msg:
+            return tag
+    return "other"
+
+
+def record_reviewed_exception(path, msg, note, source="human-review"):
+    """Teach VAPE Reviewer that this exact (path, rule) finding is a
+    verified false positive, so future runs annotate rather than re-alarm.
+    Returns True on success, False if Memory is unavailable or the write
+    failed — never raises (same law as every other Memory-touching call in
+    this repo, see skillforge/mcp.py's own guarded append_to_memory use)."""
+    if not append_to_memory:
+        return False
+    rule_tag = _rule_tag_for_message(msg)
+    entry = append_to_memory(
+        category="lesson",
+        title=f"Reviewed exception: {rule_tag} in {path}",
+        content=note,
+        source=source,
+        tags=[REVIEWED_EXCEPTION_TAG, rule_tag],
+        confidence=0.9,
+        metadata={"path": path, "rule_tag": rule_tag, "original_finding": msg},
+    )
+    return bool(entry)
+
+
+def _find_reviewed_exception(path, msg):
+    """The recorded note for this (path, rule) pair, or None. Matches on
+    metadata["path"] exactly (not a substring/fuzzy match) — a lesson about
+    docs/assets/hire.js says nothing about any other file, even one with an
+    identical pattern, until a human reviews that file too."""
+    if not search_memory:
+        return None
+    rule_tag = _rule_tag_for_message(msg)
+    try:
+        hits = search_memory(rule_tag, category="lesson", tags=[REVIEWED_EXCEPTION_TAG, rule_tag], max_results=10)
+    except Exception:
+        return None
+    for hit in hits:
+        if hit.get("metadata", {}).get("path") == path and hit.get("metadata", {}).get("rule_tag") == rule_tag:
+            return hit.get("content") or "previously reviewed"
+    return None
+
+
+def annotate_reviewed_exceptions(findings):
+    """Marks findings that match a previously-recorded, human-verified
+    exception — informational only, never removes or downgrades severity
+    (that CI-exit-code gate already only trips on HIGH/CRITICAL, and
+    code_lint's innerHTML check is MEDIUM to begin with)."""
+    annotated = []
+    for sev, path, lineno, msg in findings:
+        note = _find_reviewed_exception(path, msg)
+        if note:
+            msg = f"{msg} [Previously reviewed and confirmed a false positive in this file: {note}]"
+        annotated.append((sev, path, lineno, msg))
+    return annotated
 
 
 def _format_deterministic_findings(findings):

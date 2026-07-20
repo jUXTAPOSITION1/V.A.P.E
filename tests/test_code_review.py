@@ -140,6 +140,82 @@ def test_run_deterministic_pass_no_head_sha_returns_empty():
     assert findings == []
 
 
+# ============================================================================
+# Learned exceptions — "teach VAPE" mechanism (Memory-backed, guarded import)
+# ============================================================================
+
+def test_rule_tag_for_message_maps_known_patterns():
+    assert cr._rule_tag_for_message("innerHTML assigned directly from 'msg' — pass it through...") \
+        == "innerhtml-bare-var"
+    assert cr._rule_tag_for_message("'API_SECRET' assigned a literal string that looks like a real secret") \
+        == "hardcoded-secret-literal"
+    assert cr._rule_tag_for_message("eval() called on a dynamically-built string") == "eval-exec-dynamic"
+    assert cr._rule_tag_for_message("something totally unrelated") == "other"
+
+
+def test_record_reviewed_exception_calls_append_to_memory(monkeypatch):
+    captured = {}
+
+    def fake_append(**kw):
+        captured.update(kw)
+        return {"id": "abc123"}
+
+    monkeypatch.setattr(cr, "append_to_memory", fake_append)
+    ok = cr.record_reviewed_exception(
+        "docs/assets/hire.js",
+        "innerHTML assigned directly from 'msg' — pass it through...",
+        "escaped via escapeHtml() at every real call site",
+    )
+    assert ok is True
+    assert captured["category"] == "lesson"
+    assert cr.REVIEWED_EXCEPTION_TAG in captured["tags"]
+    assert "innerhtml-bare-var" in captured["tags"]
+    assert captured["metadata"]["path"] == "docs/assets/hire.js"
+
+
+def test_record_reviewed_exception_false_when_memory_unavailable(monkeypatch):
+    monkeypatch.setattr(cr, "append_to_memory", None)
+    ok = cr.record_reviewed_exception("x.js", "innerHTML assigned directly from 'y'", "note")
+    assert ok is False
+
+
+def test_find_reviewed_exception_matches_path_and_rule(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", lambda *a, **kw: [
+        {"content": "escaped upstream", "metadata": {"path": "docs/assets/hire.js", "rule_tag": "innerhtml-bare-var"}},
+    ])
+    note = cr._find_reviewed_exception("docs/assets/hire.js", "innerHTML assigned directly from 'msg'")
+    assert note == "escaped upstream"
+
+
+def test_find_reviewed_exception_none_when_path_differs(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", lambda *a, **kw: [
+        {"content": "escaped upstream", "metadata": {"path": "docs/assets/other.js", "rule_tag": "innerhtml-bare-var"}},
+    ])
+    note = cr._find_reviewed_exception("docs/assets/hire.js", "innerHTML assigned directly from 'msg'")
+    assert note is None
+
+
+def test_find_reviewed_exception_none_when_memory_unavailable(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", None)
+    assert cr._find_reviewed_exception("docs/assets/hire.js", "innerHTML assigned directly from 'msg'") is None
+
+
+def test_annotate_reviewed_exceptions_appends_note_on_match(monkeypatch):
+    monkeypatch.setattr(cr, "_find_reviewed_exception", lambda path, msg: "escaped upstream")
+    findings = [("MEDIUM", "docs/assets/hire.js", 193, "innerHTML assigned directly from 'msg'")]
+    annotated = cr.annotate_reviewed_exceptions(findings)
+    assert "Previously reviewed" in annotated[0][3]
+    assert "escaped upstream" in annotated[0][3]
+    assert annotated[0][0] == "MEDIUM"  # severity untouched — annotation only, never suppressed
+
+
+def test_annotate_reviewed_exceptions_leaves_unmatched_findings_unchanged(monkeypatch):
+    monkeypatch.setattr(cr, "_find_reviewed_exception", lambda path, msg: None)
+    findings = [("HIGH", "agents/bad.py", 3, "eval() called on a dynamically-built string")]
+    annotated = cr.annotate_reviewed_exceptions(findings)
+    assert annotated == findings
+
+
 def test_build_review_prompt_includes_findings_and_diff():
     findings = [("HIGH", "x.py", 3, "eval() called on a dynamic string")]
     system, prompt = cr.build_review_prompt("diff --git a/x b/x\n+eval(x)\n", findings)
