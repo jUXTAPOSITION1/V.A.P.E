@@ -838,11 +838,27 @@ const App = {
         return (symbol || '').toLowerCase().includes(term) || (name || '').toLowerCase().includes(term);
     },
 
+    // Sorts one of the already-fetched Codex token arrays in place by a
+    // numeric field, descending, nulls/missing last — shared by Trending on
+    // Base and New Launches so both re-sort their existing 30-row fetch
+    // client-side (see virtuals() above for why limit=30 was chosen) rather
+    // than making a second network request per sort click.
+    _sortTokensBy(items, field) {
+        return [...items].sort((a, b) => {
+            const av = a[field], bv = b[field];
+            const an = typeof av === 'number' ? av : -Infinity;
+            const bn = typeof bv === 'number' ? bv : -Infinity;
+            return bn - an;
+        });
+    },
+
+    _trendingSort: 'volume24',
     _renderTrendingBase() {
         const el = document.getElementById('trending-base');
         if (!el) return;
         const term = this._searchTerms.trending;
-        const items = this._trendingBase.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const sorted = this._sortTokensBy(this._trendingBase, this._trendingSort);
+        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -864,6 +880,10 @@ const App = {
                 <div class="text-right shrink-0 hidden sm:block w-20">
                     <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
                     <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden md:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Mkt cap</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.marketCap)}</div>
                 </div>
             </a>`;
         }).join('') : (this._trendingBase.length
@@ -888,11 +908,13 @@ const App = {
     // _trendingTokenScore() as-is: brand-new tokens naturally read as
     // neutral "Fair" (liquidity/marketCap too new to score, not penalized)
     // unless something's already gone thin or wildly volatile.
+    _launchesSort: 'createdAt',
     _renderNewLaunches() {
         const el = document.getElementById('new-launches');
         if (!el) return;
         const term = this._searchTerms.launches;
-        const items = this._newLaunches.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const sorted = this._sortTokensBy(this._newLaunches, this._launchesSort);
+        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -910,6 +932,14 @@ const App = {
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs text-zinc-500">${this._launchAge(t.createdAt)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden sm:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden md:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Mkt cap</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.marketCap)}</div>
                 </div>
             </a>`;
         }).join('') : (this._newLaunches.length
@@ -1697,6 +1727,22 @@ window.addEventListener('load', () => {
         }
         App._renderProtocolRows();
         App._enrichProtocols();
+    });
+    // Trending on Base / New Launches sort — re-sorts the already-fetched
+    // 30-row Codex set (see App.virtuals()), no new request per click.
+    document.getElementById('trending-sort').addEventListener('click', e => {
+        const b = e.target.closest('button[data-s]'); if (!b) return;
+        App._trendingSort = b.dataset.s;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        App._renderTrendingBase();
+    });
+    document.getElementById('launches-sort').addEventListener('click', e => {
+        const b = e.target.closest('button[data-s]'); if (!b) return;
+        App._launchesSort = b.dataset.s;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        App._renderNewLaunches();
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });

@@ -503,7 +503,13 @@
                 <h3 class="text-sm text-zinc-500 mb-2">Trending on Base</h3>
                 <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The most active tokens on Base right now. Tokens from the Virtuals ecosystem are tagged.</p>
                 <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('trending', this.value)"
-                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                    class="w-full sm:w-64 mb-3 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                <div class="flex gap-1 text-[11px] mb-4" id="trending-sort">
+                    <button data-s="volume24" class="term-btn term-btn-sm term-btn-active">Volume</button>
+                    <button data-s="marketCap" class="term-btn term-btn-sm">Mkt cap</button>
+                    <button data-s="liquidity" class="term-btn term-btn-sm">Liquidity</button>
+                    <button data-s="change24" class="term-btn term-btn-sm">24h %</button>
+                </div>
                 <div id="trending-base" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -515,7 +521,13 @@
                 <h3 class="text-sm text-zinc-500 mb-2">New Launches</h3>
                 <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The newest tokens on Base by creation time. Tokens from the Virtuals ecosystem are tagged.</p>
                 <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('launches', this.value)"
-                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                    class="w-full sm:w-64 mb-3 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                <div class="flex gap-1 text-[11px] mb-4" id="launches-sort">
+                    <button data-s="createdAt" class="term-btn term-btn-sm term-btn-active">Newest</button>
+                    <button data-s="volume24" class="term-btn term-btn-sm">Volume</button>
+                    <button data-s="marketCap" class="term-btn term-btn-sm">Mkt cap</button>
+                    <button data-s="liquidity" class="term-btn term-btn-sm">Liquidity</button>
+                </div>
                 <div id="new-launches" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -685,7 +697,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=21"></script>
+    <script src="assets/app.js?v=22"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
