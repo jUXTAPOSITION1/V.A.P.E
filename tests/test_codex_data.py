@@ -40,6 +40,21 @@ def test_token_holders_parses(monkeypatch):
     assert r["items"][0]["address"] == "0xabc"
 
 
+def test_token_holders_sends_composite_token_id(monkeypatch):
+    # HoldersInput.tokenId is "address:networkId" — there's no separate
+    # networkId field on this input, unlike DetailedWalletStatsInput.
+    calls = []
+
+    def fake_query(query, variables, **kwargs):
+        calls.append(variables)
+        return {"holders": {}}
+
+    monkeypatch.setattr(cd, "_query", fake_query)
+    cd.token_holders("0xToken", 8453)
+    assert calls[0]["input"]["tokenId"] == "0xToken:8453"
+    assert "networkId" not in calls[0]["input"]
+
+
 def test_wallet_balances_parses(monkeypatch):
     _patch(monkeypatch, {"balances": {"items": [
         {"shiftedBalance": 12.3, "balanceUsd": 45.6, "token": {"symbol": "AERO", "networkId": 8453}},

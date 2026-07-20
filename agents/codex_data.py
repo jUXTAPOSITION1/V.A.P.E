@@ -161,10 +161,12 @@ def trending_tokens(network_ids=None, limit=20):
 
 
 # ── Holders (rug-risk / concentration signal) ────────────────────────────────
-def token_holders(token_id, network_id, limit=10):
+def token_holders(token_address, network_id, limit=10):
     """Top holders for a token by balance, plus the percent of supply held
-    by the top 10 wallets — a fast rug-risk/concentration signal. `token_id`
-    is the token contract address."""
+    by the top 10 wallets — a fast rug-risk/concentration signal.
+    `token_address` is the token contract address."""
+    # HoldersInput.tokenId is the composite "address:networkId" id — there's
+    # no separate networkId field on this input, unlike DetailedWalletStatsInput.
     query = """
     query TokenHolders($input: HoldersInput!) {
       holders(input: $input) {
@@ -173,8 +175,9 @@ def token_holders(token_id, network_id, limit=10):
         items { address balance }
       }
     }"""
-    d = _query(query, {"input": {"tokenId": token_id, "networkId": network_id, "limit": limit}},
-               ttl=900, cache_key=f"codex_holders_{network_id}_{token_id}_{limit}")
+    token_id = f"{token_address}:{network_id}"
+    d = _query(query, {"input": {"tokenId": token_id, "limit": limit}},
+               ttl=900, cache_key=f"codex_holders_{network_id}_{token_address}_{limit}")
     if _err(d):
         return d
     h = d.get("holders") or {}

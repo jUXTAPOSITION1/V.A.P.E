@@ -100,12 +100,12 @@ class GitHubMCPWrapper:
         try:
             if method == "GET":
                 req = urllib.request.Request(url, headers=headers, method="GET")
-            elif method == "POST":
+            elif method in ("POST", "PATCH"):
                 req = urllib.request.Request(
                     url,
                     data=json.dumps(data).encode() if data else None,
                     headers={**headers, "Content-Type": "application/json"},
-                    method="POST"
+                    method=method
                 )
             else:
                 return False, {"error": f"Unsupported method: {method}"}
@@ -273,6 +273,78 @@ class GitHubMCPWrapper:
         else:
             logger.error(f"[WRITE] PR creation failed: {result}")
             return False, result
+
+    def get_pr_head_sha(self, repo: str, pr_number: int) -> Tuple[bool, str]:
+        """Real head commit SHA for a PR (read-only, safe) — used to read
+        each changed file's actual content via read_file(..., ref=sha)
+        without ever checking out the PR's branch locally."""
+        success, result = self._call("GET", f"/repos/{repo}/pulls/{pr_number}")
+        if not success:
+            return False, ""
+        return True, (result.get("head") or {}).get("sha", "")
+
+    def get_pr_files(self, repo: str, pr_number: int) -> Tuple[bool, List[Dict[str, Any]]]:
+        """Changed files for a PR, each with GitHub's own computed unified-
+        diff patch text (read-only, safe — this is GitHub's API returning
+        data it already computed, not this process checking out or
+        executing the PR's code).
+
+        Use case: agents/code_review.py (VAPE Reviewer) builds its LLM
+        prompt from these patches and runs scripts/code_lint.py's
+        deterministic checks against each file's real content at the PR's
+        head (via get_pr_head_sha() + read_file()).
+        """
+        endpoint = f"/repos/{repo}/pulls/{pr_number}/files?per_page=100"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, list):
+            return False, []
+        files = [
+            {"path": f.get("filename"), "status": f.get("status"), "patch": f.get("patch", "")}
+            for f in result if isinstance(f, dict) and f.get("filename")
+        ]
+        return True, files
+
+    def create_pr_comment(self, repo: str, pr_number: int, body: str) -> Tuple[bool, Dict[str, Any]]:
+        """Post a comment on a PR (WRITE - GATED, audit logged). PRs are
+        issues under the hood for comments, so this is the Issues API.
+
+        Use case: agents/code_review.py (VAPE Reviewer) posting its
+        combined deterministic + LLM security review — advisory only,
+        never a merge gate.
+        """
+        body = body[:65000]  # headroom under GitHub's own comment-body length cap
+        logger.info(f"[WRITE] Commenting on {repo}#{pr_number}")
+        endpoint = f"/repos/{repo}/issues/{pr_number}/comments"
+        success, result = self._call("POST", endpoint, {"body": body})
+        if success:
+            logger.info(f"[WRITE] Comment posted: {result.get('html_url', 'unknown')}")
+            return True, {"url": result.get("html_url"), "status": "created"}
+        logger.error(f"[WRITE] Comment failed: {result}")
+        return False, result
+
+    def list_issue_comments(self, repo: str, pr_number: int) -> Tuple[bool, List[Dict[str, Any]]]:
+        """List comments on a PR (read-only, safe) — lets a caller find its
+        own prior comment (by a hidden marker in the body) and update it in
+        place rather than posting a new one on every push. Mirrors CodeRabbit's
+        own observed behavior on this repo: one comment per PR, edited across
+        pushes, not one new comment per push."""
+        endpoint = f"/repos/{repo}/issues/{pr_number}/comments?per_page=100"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, list):
+            return False, []
+        return True, result
+
+    def update_issue_comment(self, repo: str, comment_id: int, body: str) -> Tuple[bool, Dict[str, Any]]:
+        """Edit an existing PR comment in place (WRITE - GATED, audit logged)."""
+        body = body[:65000]  # same headroom as create_pr_comment
+        logger.info(f"[WRITE] Updating comment {comment_id} on {repo}")
+        endpoint = f"/repos/{repo}/issues/comments/{comment_id}"
+        success, result = self._call("PATCH", endpoint, {"body": body})
+        if success:
+            logger.info(f"[WRITE] Comment updated: {result.get('html_url', 'unknown')}")
+            return True, {"url": result.get("html_url"), "status": "updated"}
+        logger.error(f"[WRITE] Comment update failed: {result}")
+        return False, result
 
 
 # ============================================================================
