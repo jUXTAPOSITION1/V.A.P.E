@@ -3,7 +3,7 @@
 **Date:** 2026-06-17  
 **Loss:** $0.367M  
 **Chains:** BSC  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T09:48:11Z
 
 ---

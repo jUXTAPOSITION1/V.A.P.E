@@ -3,7 +3,7 @@
 **Date:** 2026-05-25  
 **Loss:** $3.98M  
 **Chains:** Ethereum, Base, Arbitrum  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T20:39:45Z
 
 ---

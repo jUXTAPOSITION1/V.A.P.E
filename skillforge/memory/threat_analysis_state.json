@@ -4,11 +4,6 @@
     "provider": "oci_grok",
     "written_at": "2026-07-19T05:14:49Z"
   },
-  "2026-07-16:DefiTuna Lending": {
-    "report": "intel/threat-analysis/2026-07-16-defituna-lending.md",
-    "provider": "xai_1",
-    "written_at": "2026-07-19T05:14:59Z"
-  },
   "2026-07-15:Ostium": {
     "report": "intel/threat-analysis/2026-07-15-ostium.md",
     "provider": "xai_1",

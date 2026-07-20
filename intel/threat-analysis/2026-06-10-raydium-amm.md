@@ -3,7 +3,7 @@
 **Date:** 2026-06-10  
 **Loss:** $1.34M  
 **Chains:** Solana  
-**Analysis by:** xai_1  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T14:48:37Z
 
 ---

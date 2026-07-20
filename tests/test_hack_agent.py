@@ -77,8 +77,33 @@ class TestWriteAnalysis:
         full_path = os.path.join(hack_agent.ic.ROOT, report)
         content = open(full_path).read()
         assert "# Across — Threat Analysis" in content
-        assert "**Analysis by:** oci_grok" in content
+        assert "**Analysis by:** VAPE" in content  # attribution is always VAPE, never the raw provider codename
         assert "Real analysis text." in content
+
+    def test_runs_two_differently_worded_searches_and_opts_into_live_search(self, tmp_path, monkeypatch):
+        """Real gap this covers: a single thin pre-fetched search used to be
+        the ONLY grounding an incident got, which produced an honestly-empty
+        report for a real incident a direct Grok query resolved in full.
+        Two queries plus search=True on the LLM call are the actual fix."""
+        monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
+        search_queries = []
+
+        def fake_search(query, max_results=5):
+            search_queries.append(query)
+            return {"available": False, "provider": None, "results": []}
+
+        captured_kwargs = {}
+
+        def fake_ask(system, user, **kw):
+            captured_kwargs.update(kw)
+            return ("Real analysis text.", "xai_1")
+
+        with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
+            with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=fake_ask):
+                hack_agent._write_analysis(_incident())
+        assert len(search_queries) == 2
+        assert search_queries[0] != search_queries[1]  # differently worded, not a repeat
+        assert captured_kwargs.get("search") is True
 
     def test_passes_frontier_order_and_tier_to_oci_grok(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))

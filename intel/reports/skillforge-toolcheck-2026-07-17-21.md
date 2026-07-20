@@ -5,7 +5,7 @@
 
 ---
 
-## Analyst Briefing (Grok 4.1 Fast)
+## Analyst Briefing
 
 **Root cause (hack_feed):**  
 The probe command `bash skillforge/tools/recon/hack_feed.sh latest 1` runs a curl+python3 pipeline whose inline Python hits `TypeError: unsupported operand type(s) for /: 'NoneType' and 'float'` at line 7. No other output or web research is present, so the only observable failure is that the script received (or produced) a `None` where a numeric value was required for division. This is consistent with an upstream data shape change in whatever feed the script consumes; nothing in the supplied data indicates a missing system dependency, install failure, or network error.

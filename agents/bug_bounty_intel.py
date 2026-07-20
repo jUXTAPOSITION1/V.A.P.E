@@ -133,7 +133,7 @@ Base-tagged entries seen in the last {LOOKBACK_DAYS} days.
 
 ---
 
-## Analyst Briefing (Grok 4.1 Fast)
+## Analyst Briefing
 
 {briefing}
 
@@ -159,7 +159,7 @@ Base-tagged entries seen in the last {LOOKBACK_DAYS} days.
 ## Sources
 - Live web search — targeted ({search.get('provider') or 'unavailable'}) + broader landscape ({landscape_search.get('provider') or 'unavailable'})
 - `intel/bounty-radar/opportunities.json` (real, maintained by `agents/scout.py` hourly)
-- Analyst Briefing: OCI-hosted Grok 4.3 (or the next available provider — Vertex-tuned Gemini, then `agents.llm.FRONTIER_ORDER`)
+- Analyst Briefing: VAPE
 
 ---
 

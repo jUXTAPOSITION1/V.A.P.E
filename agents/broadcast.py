@@ -246,8 +246,8 @@ def build_broadcast(window_hours=6):
     L.append("")
     L.append("*V.A.P.E. — Virtual Ape Private Eye — @based_vape*  ")
     L.append("*Real data only — every figure above traces to a live, keyless API call made at "
-              "generation time. The Analyst Briefing section is Grok 4.1 Fast's synthesis of that "
-              "data plus this cycle's web research, clearly separated from the deterministic figures.*")
+              "generation time. The Analyst Briefing section is VAPE's synthesis of that data "
+              "plus this cycle's web research, clearly separated from the deterministic figures.*")
 
     return "\n".join(L) + "\n", stamp
 

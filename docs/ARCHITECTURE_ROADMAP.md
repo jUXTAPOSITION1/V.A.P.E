@@ -184,6 +184,17 @@ its key is unset, so this table is "what's wired," not "what you personally have
   OCI Grok's own daily spend cap (`OCI_GROK_DAILY_SPEND_CAP_USD`, default
   $10 — see `DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD`) reflects this much
   higher-volume role, sized independently of xai_1's own $3 default.
+- **`search=True` opts into xAI's real Live Search** (`agents/llm.py`'s
+  `ask()`/`ask_frontier()`/`ask_oci_grok()` all accept it; only takes effect
+  once/if a call actually reaches the `xai_1` provider — a real, billed-
+  per-search API feature, not the pre-fetched Tavily/Brave snippet grounding
+  every other call site uses). Added 2026-07-20 after a real gap: per-
+  incident threat analyses (`agents/hack_agent.py`) were grounded only in
+  one thin pre-fetched search and reported "no public writeups found" for
+  an incident a direct Grok query resolved in full (tx hash, attacker
+  addresses, root cause). `hack_agent.py` is the first caller wired to it;
+  worth adding to other research-dependent narrative calls if the same gap
+  shows up there.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to

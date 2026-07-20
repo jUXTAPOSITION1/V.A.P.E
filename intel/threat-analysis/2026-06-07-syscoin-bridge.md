@@ -3,7 +3,7 @@
 **Date:** 2026-06-07  
 **Loss:** $8.0M  
 **Chains:** Syscoin  
-**Analysis by:** oci_grok  
+**Analysis by:** VAPE  
 **Generated:** 2026-07-19T14:49:36Z
 
 ---
