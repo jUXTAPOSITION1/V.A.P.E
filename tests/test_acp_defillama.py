@@ -33,15 +33,18 @@ DATA_TOOLS = {
     "yields", "stablecoins", "bridges",
 }
 # wallet_pnl_deepdive and prediction_market_odds are the two /data/* tools
-# NOT backed by DefiLlama — Codex-backed (agents/codex_data.py /
-# worker/src/lib/codex.ts, $0.25) and Polymarket/Kalshi-backed
-# (agents/prediction_markets.py / worker/src/lib/predictionMarkets.ts, $0.01)
-# respectively. Both share the same DATA_OFFERINGS dict / worker DL_OFFERINGS
-# array / route prefix as the 13 DefiLlama tools, so they're included in the
-# cross-surface-parity check below but excluded from the "13 DefiLlama
-# tools" identity assertions.
+# NOT backed by DefiLlama — Alchemy + CoinGecko-backed (worker/src/
+# dataHandlers.ts, $0.25, x402-only — see its ACP-removal note in
+# agents/acp_fulfill.py) and Polymarket/Kalshi-backed (agents/
+# prediction_markets.py / worker/src/lib/predictionMarkets.ts, $0.01,
+# both x402 AND ACP) respectively. Both share the same DATA_OFFERINGS dict /
+# worker DL_OFFERINGS array / route prefix as the 13 DefiLlama tools, so
+# they're included in the x402-surface-parity check below but excluded from
+# the "13 DefiLlama tools" identity assertions and from the ACP-fulfillable
+# check (wallet_pnl_deepdive specifically is not ACP-fulfillable).
 NON_DEFILLAMA_DATA_TOOLS = {"wallet_pnl_deepdive", "prediction_market_odds"}
 ALL_DATA_TOOLS = DATA_TOOLS | NON_DEFILLAMA_DATA_TOOLS
+ACP_FULFILLABLE_DATA_TOOLS = ALL_DATA_TOOLS - {"wallet_pnl_deepdive"}
 
 
 def test_data_offering_names_identical_across_all_surfaces():
@@ -52,9 +55,10 @@ def test_data_offering_names_identical_across_all_surfaces():
     # only place in that file that does), so this captures exactly the tier.
     worker = set(re.findall(r'name:\s*"([a-z_]+)"', (ROOT / "worker/src/dataHandlers.ts").read_text()))
     assert DL_NAMES == DATA_TOOLS                      # published DefiLlama-only catalog subset
-    assert set(DATA_OFFERINGS) == ALL_DATA_TOOLS       # x402 directory (DefiLlama + Codex)
+    assert set(DATA_OFFERINGS) == ALL_DATA_TOOLS       # x402 directory (DefiLlama + Alchemy/Codex)
     assert worker == ALL_DATA_TOOLS                    # paid worker routes
-    assert ALL_DATA_TOOLS <= set(HANDLERS)             # every data tool is ACP-fulfillable
+    assert ACP_FULFILLABLE_DATA_TOOLS <= set(HANDLERS)  # every ACP-eligible data tool is ACP-fulfillable
+    assert "wallet_pnl_deepdive" not in set(HANDLERS)   # x402-only, deliberately not ACP-fulfillable
 
 
 def test_data_offerings_all_priced_one_cent():
@@ -121,50 +125,6 @@ def test_slug_handler_errors_honestly_without_slug(monkeypatch):
     _stub_defillama(monkeypatch)
     from agents import acp_fulfill as A
     out = A.fulfill("protocol", {})  # no slug provided
-    assert out["deliverable"].get("error")
-
-
-def _stub_codex_data(monkeypatch):
-    """Same pattern as _stub_defillama above, for agents.codex_data — a fake
-    module recording calls, no network."""
-    import agents
-    fake = types.ModuleType("agents.codex_data")
-    calls = []
-
-    def rec(name):
-        def f(*a, **k):
-            calls.append((name, a, k))
-            return {"ok": name}
-        return f
-
-    for fn in ["wallet_balances", "wallet_pnl_stats", "wallet_pnl_chart"]:
-        setattr(fake, fn, rec(fn))
-    monkeypatch.setitem(sys.modules, "agents.codex_data", fake)
-    monkeypatch.setattr(agents, "codex_data", fake, raising=False)
-    return calls
-
-
-def test_wallet_pnl_deepdive_routes_address_and_network_id(monkeypatch):
-    calls = _stub_codex_data(monkeypatch)
-    from agents import acp_fulfill as A
-    wallet = "0x" + "b" * 40
-    out = A.fulfill("wallet_pnl_deepdive", {"address": wallet, "chain": "arbitrum"})
-    assert out["status"] == "ok"
-    d = out["deliverable"]
-    assert d["address"] == wallet
-    assert d["network_id"] == 42161  # arbitrum, per _CODEX_NETWORK_IDS
-    names_and_args = [(n, a) for n, a, _k in calls]
-    assert names_and_args == [
-        ("wallet_balances", (wallet, [42161])),
-        ("wallet_pnl_stats", (wallet, 42161)),
-        ("wallet_pnl_chart", (wallet, 42161)),
-    ]
-
-
-def test_wallet_pnl_deepdive_errors_honestly_without_address(monkeypatch):
-    _stub_codex_data(monkeypatch)
-    from agents import acp_fulfill as A
-    out = A.fulfill("wallet_pnl_deepdive", {})
     assert out["deliverable"].get("error")
 
 
