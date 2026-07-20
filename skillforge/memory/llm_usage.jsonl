@@ -413,3 +413,4 @@
 {"ts": "2026-07-20T15:14:11Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1063, "completion_tokens": 331, "total_tokens": 2068}
 {"ts": "2026-07-20T15:29:27Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 645, "completion_tokens": 142, "total_tokens": 1499}
 {"ts": "2026-07-20T15:31:44Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1576, "completion_tokens": 219, "total_tokens": 2226}
+{"ts": "2026-07-20T15:52:06Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2533, "completion_tokens": 167, "total_tokens": 3201}
