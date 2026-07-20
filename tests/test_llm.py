@@ -181,8 +181,8 @@ class TestSearchThreadsThroughFallbackChain:
             return _fake_response("via xai with search")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            text, provider = llm.ask_vertex_candidate("sys", "usr", tier="frontier",
-                                                        provider_order=llm.FRONTIER_ORDER, search=True)
+            _, provider = llm.ask_vertex_candidate("sys", "usr", tier="frontier",
+                                                     provider_order=llm.FRONTIER_ORDER, search=True)
         assert provider == "xai_1"
         assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
 
@@ -709,8 +709,8 @@ class TestOciGrok:
             return _fake_response("via xai with search")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            text, provider = llm.ask_oci_grok("sys", "usr", tier="frontier",
-                                               provider_order=llm.FRONTIER_ORDER, search=True)
+            _, provider = llm.ask_oci_grok("sys", "usr", tier="frontier",
+                                            provider_order=llm.FRONTIER_ORDER, search=True)
         assert provider == "xai_1"
         assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
 
