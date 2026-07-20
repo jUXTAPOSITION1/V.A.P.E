@@ -215,8 +215,18 @@ def main():
     ap = argparse.ArgumentParser(description="VAPE Reviewer — automated security-forward PR review")
     ap.add_argument("--pr", required=True, type=int, help="pull request number")
     args = ap.parse_args()
-    ok = run(args.pr)
-    sys.exit(0 if ok else 1)
+    # Advisory only, never a merge gate (see module docstring) — run() already
+    # degrades any handled failure (GitHub API unreachable, comment-post
+    # failure) into an honest posted comment rather than raising, so exit 0
+    # either way. A transient GitHub outage shouldn't turn this check red;
+    # only a genuinely unexpected crash (a real bug, not an external failure)
+    # should, so the CI job actually flags something worth looking at.
+    try:
+        run(args.pr)
+    except Exception as e:
+        print(f"[code_review] unexpected crash: {e}", file=sys.stderr)
+        sys.exit(1)
+    sys.exit(0)
 
 
 if __name__ == "__main__":
