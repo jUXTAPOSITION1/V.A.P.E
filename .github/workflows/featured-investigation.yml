@@ -77,6 +77,27 @@ jobs:
         env:
           VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
         run: python agents/investigate.py --auto || echo "no auto target this cycle"
+      # Unconditional — runs every cycle regardless of whether the step above
+      # found an auto-investigation target this time. Real production bug
+      # this fixes: DATA AGENT previously only ever got a hire opportunity
+      # from *inside* a successful auto-investigation (agents/investigate.py
+      # ::_data_agent_intel()), so a run of cycles where auto_target() came
+      # up empty meant hours with zero real x402 transactions — confirmed
+      # directly against live GitHub Actions logs. run_standalone() sources
+      # its own fresh Base candidate instead of needing one handed to it, so
+      # this stream fires on its own fixed cadence either way. Each
+      # instance/stream still enforces its own independent 30m/daily-cap
+      # gate (agents/data_agent.py) — this step can run every cycle with no
+      # risk of over-hiring past those caps.
+      - name: DATA AGENT standalone cycle + catalog sweep (unconditional cadence)
+        run: |
+          python -c "
+          import sys; sys.path.insert(0, '.')
+          from agents import data_agent, data_agent_vapor
+          print('cdp standalone:', data_agent.run_standalone())
+          print('vapor standalone:', data_agent_vapor.run_standalone())
+          print('cdp catalog sweep:', data_agent.run_catalog_sweep())
+          "
       # Manual-trigger convenience: force both DATA AGENT instances against a
       # known Base address, bypassing investigate.py's auto-target selection
       # (which may land on a non-Base target, or none at all, this cycle) —
@@ -102,6 +123,11 @@ jobs:
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add intel/investigations/ intel/catalog/ skillforge/memory/ data/intel-index.json
+          # Only exists once the catalog sweep's first address-based hire ever
+          # succeeds — `git add` on a not-yet-created path would abort this
+          # step outright (GitHub Actions runs `run:` blocks with `set -e`),
+          # so this is guarded separately from the always-present paths above.
+          [ -f data/token_database.jsonl ] && git add data/token_database.jsonl || true
           git commit -m "Featured investigation $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           for i in 1 2 3 4 5; do

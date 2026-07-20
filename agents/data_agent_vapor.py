@@ -28,6 +28,14 @@ def run_for_investigation(address, chain="8453"):
     return _run(address, chain, client_tag="data-agent-vapor", state=_VAPOR_STATE, log_prefix="data_agent_vapor")
 
 
+def run_standalone():
+    """VAPOR-pinned instance, decoupled from investigate.py entirely — see
+    data_agent.py::run_standalone()'s docstring for why this exists. The
+    catalog-sweep stream (data_agent.py::run_catalog_sweep()) deliberately
+    stays CDP-only, so this instance has no equivalent."""
+    return _run(None, "8453", client_tag="data-agent-vapor", state=_VAPOR_STATE, log_prefix="data_agent_vapor")
+
+
 if __name__ == "__main__":
     addr = sys.argv[1] if len(sys.argv) > 1 else None
     chain = sys.argv[2] if len(sys.argv) > 2 else "8453"
