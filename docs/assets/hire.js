@@ -3,6 +3,7 @@
 // Account Kit smart accounts that this zero-bundler site doesn't run).
 const ACP_AGENT_URL = 'https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe';
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
+const TX_HASH_RE = /^0x[a-fA-F0-9]{64}$/;
 // GitHub owner/repo names are [A-Za-z0-9_.-]+ per GitHub's own naming rules —
 // gate before either value is sent to the worker (see openBountyOps() below).
 const GH_SLUG_RE = /^[A-Za-z0-9_.-]+$/;
@@ -85,7 +86,13 @@ const Hire = {
         // verdict), so they get their own modal/result path.
         if (DATA_OFFERINGS[offeringName]) return this.openData(offeringName, priceUsd);
         this._closeModal();
-        const needsAddress = offeringName !== 'market_intel';
+        // tx_decode takes a 32-byte tx hash, not a 20-byte contract address —
+        // its own input shape/regex/param key. bulk_safety_bundle takes 5-25
+        // addresses at once, not a single one. Both distinct from every
+        // other scan offering below.
+        const isTxHash = offeringName === 'tx_decode';
+        const isBulk = offeringName === 'bulk_safety_bundle';
+        const needsAddress = !isTxHash && !isBulk && !['market_intel', 'community_intel_broadcast'].includes(offeringName);
         const modal = document.createElement('div');
         modal.id = 'hire-modal';
         modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
@@ -99,7 +106,13 @@ const Hire = {
                 <div id="hire-body">
                     <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g,' '))} <span class="text-zinc-200 font-mono">$${priceUsd}</span></div>
                     <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above — no gas fee, no subscription, settles on Base mainnet.</p>
-                    ${needsAddress ? `
+                    ${isTxHash ? `
+                    <label class="text-xs text-zinc-500 block mb-1">Transaction hash</label>
+                    <input id="hire-address" type="text" placeholder="0x… 32-byte tx hash to decode" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
+                    ` : isBulk ? `
+                    <label class="text-xs text-zinc-500 block mb-1">5-25 token addresses (one per line, or comma-separated)</label>
+                    <textarea id="hire-address" rows="5" placeholder="0x…&#10;0x…&#10;0x…" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4 resize-none"></textarea>
+                    ` : needsAddress ? `
                     <label class="text-xs text-zinc-500 block mb-1">Target contract address</label>
                     <input id="hire-address" type="text" placeholder="0x… token/contract to investigate" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
                     ` : '<div class="mb-4"></div>'}
@@ -112,16 +125,37 @@ const Hire = {
         modal.querySelectorAll('[data-close]').forEach(el => el.onclick = () => this._closeModal());
         modal.querySelector('#hire-submit').onclick = () => {
             const status = document.getElementById('hire-status');
-            let address = '';
+            let value = '';
+            if (isTxHash) {
+                value = (document.getElementById('hire-address').value || '').trim();
+                if (!TX_HASH_RE.test(value)) {
+                    status.innerHTML = 'Enter a valid 0x… 32-byte transaction hash.';
+                    status.className = 'text-xs mt-3 text-amber-400';
+                    return;
+                }
+                this._runX402(offeringName, priceUsd, { tx_hash: value }, value);
+                return;
+            }
+            if (isBulk) {
+                const list = (document.getElementById('hire-address').value || '')
+                    .split(/[\s,]+/).map(a => a.trim()).filter(Boolean);
+                if (list.length < 5 || list.length > 25 || !list.every(a => ADDRESS_RE.test(a))) {
+                    status.innerHTML = 'Enter 5-25 valid 0x… addresses (one per line or comma-separated).';
+                    status.className = 'text-xs mt-3 text-amber-400';
+                    return;
+                }
+                this._runX402(offeringName, priceUsd, { addresses: list.join(',') }, `${list.length} tokens`);
+                return;
+            }
             if (needsAddress) {
-                address = (document.getElementById('hire-address').value || '').trim();
-                if (!ADDRESS_RE.test(address)) {
+                value = (document.getElementById('hire-address').value || '').trim();
+                if (!ADDRESS_RE.test(value)) {
                     status.innerHTML = 'Enter a valid 0x… contract address.';
                     status.className = 'text-xs mt-3 text-amber-400';
                     return;
                 }
             }
-            this._runX402(offeringName, priceUsd, needsAddress ? { address } : {}, address);
+            this._runX402(offeringName, priceUsd, needsAddress ? { address: value } : {}, value);
         };
     },
 

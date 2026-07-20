@@ -51,6 +51,26 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
 | **bounty_deep_dive** | **1.00** | **async, no fixed SLA** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review — a submission-ready PoC with full technical detail. Supply an address (Solidity/EVM) or a GitHub owner/repo (any other language, e.g. Move/Sui, via `agents/external_audit.py`) to scope it to a specific bounty program. |
 
+x402-payable at the worker (`GET /scan/<name>`, real USDC-on-Base settlement,
+no ACP job needed): `exploit_check`, `token_safety_check`, `liquidity_check`,
+`rug_pull_alert`, `market_intel`, `dossier_check`, `bounty_deep_dive`, plus
+four that closed a real ACP/x402 parity gap this round — each was ACP-listed
+since launch but had no worker route until now:
+- `deep_contract_audit` — `GET /scan/deep_contract_audit`, an address-only
+  alias of `bounty_deep_dive`'s exact same async dispatch pipeline.
+- `tx_decode` — `GET /scan/tx_decode?tx_hash=0x...`, a new synchronous
+  decode (real Etherscan tx/receipt/logs + 4byte.directory signature lookup,
+  no LLM).
+- `community_intel_broadcast` — `GET /scan/community_intel_broadcast`
+  (zero-input), serves the same real broadcast this offering's ACP handler
+  already reads (`agents/acp_fulfill.py::_community_broadcast()`).
+- `bulk_safety_bundle` — `GET /scan/bulk_safety_bundle?addresses=0x...,0x...`
+  (5-25 comma-separated addresses), a batch wrapper around
+  `token_safety_check`.
+
+Not x402-payable: `partner_referral`, `wallet_recon`, `whale_watch` (no real
+data source picked yet), and `forensics_deep` — ACP-only, hired as a real job.
+
 ### Market-data tools
 15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
@@ -113,12 +133,19 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 22 of 30 offerings —
-  `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
-  `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
-  the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,
-  `wallet_recon`, `tx_decode`, `whale_watch`, `bulk_safety_bundle`,
-  `deep_contract_audit`, `forensics_deep`, and `bounty_deep_dive`'s async
-  escalation) still need manual or human-in-the-loop fulfillment.
+- [OK] End-to-end deliverable automation for 22 of 30 offerings on the ACP
+  side — `scripts/acp-monitor/auto_fulfill.py` imports
+  `agents/acp_fulfill.py`'s `HANDLERS` dict directly, so the monitor
+  auto-submits a real deliverable the moment escrow funds. [TBD] the
+  remaining 8 (`partner_referral`, `wallet_recon`, `tx_decode`, `whale_watch`,
+  `bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, and
+  `bounty_deep_dive`'s async escalation) still need manual or
+  human-in-the-loop fulfillment on the ACP side specifically — but 3 of those
+  8 (`deep_contract_audit`, `tx_decode`, `bulk_safety_bundle`) are now
+  separately x402-payable directly at the worker, alongside
+  `community_intel_broadcast` (already in the auto-fulfilled 22 on the ACP
+  side, but until now had no worker route at all). See the offering table
+  above — this closes the real gap where all four were ACP-listed since
+  launch with no way to pay for them via x402.
 - [TBD] Dynamic pricing from demand + dedup against `intel/catalog/`.
 - [TBD] Client-side delegation for compute-heavy audits.

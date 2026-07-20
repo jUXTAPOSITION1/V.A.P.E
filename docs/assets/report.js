@@ -192,7 +192,10 @@ function renderDeliverableHtml(obj, depth = 0) {
         // renders fine as a normal one-line field. report_content needs its
         // own full-width prose block (see simpleMarkdownToHtml above) instead
         // of the generic single-line key/value row every other field gets.
-        if (key === 'report_content' && typeof val === 'string' && val.length > 200) {
+        // community_intel_broadcast's deliverable carries the real broadcast
+        // Markdown in `content` (worker/src/lib/communityBroadcast.ts) —
+        // same "long markdown string" treatment as report_content above.
+        if ((key === 'report_content' || key === 'content') && typeof val === 'string' && val.length > 200) {
             return `<div class="mb-2 max-h-[420px] overflow-y-auto border border-white/10 p-3" ${indent}>
                 ${simpleMarkdownToHtml(val)}
             </div>`;
