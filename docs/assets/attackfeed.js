@@ -113,11 +113,21 @@ const AttackFeed = {
     // Name/amount/recency are always visible; the technique description
     // shares space with the name and shrinks first on narrow viewports
     // rather than disappearing outright, so mobile still gets some of it.
+    //
+    // Name uses flex:0 1 auto (capped by max-width) instead of flex-basis:0
+    // — with two 0%-basis flex items, the browser splits the *available*
+    // space strictly by their grow ratio regardless of actual content size,
+    // so a short name like "Across" still claimed 2/3 of the row even
+    // though it only needed a fraction of that, starving technique of room
+    // it could easily have used (invisible on mobile, truncated mid-word on
+    // desktop despite plenty of total width). Letting name size to its own
+    // content first and giving technique the sole flex-grow means technique
+    // gets everything name doesn't actually use.
     _tickerLineHtml(item) {
         const sev = severityClass(item.amount_usd_m);
         return `<span class="w-1.5 h-1.5 rounded-full ${sev.dot} shrink-0"></span>
             ${this._iconHtml(item.name, 'w-4 h-4')}
-            <span class="text-zinc-200 font-medium truncate min-w-0" style="flex:2 1 0%">${escapeHtml(item.name)}</span>
+            <span class="text-zinc-200 font-medium truncate min-w-0" style="flex:0 1 auto;max-width:40%">${escapeHtml(item.name)}</span>
             <span class="${sev.text} font-semibold shrink-0">${fmtLoss(item.amount_usd_m)}</span>
             <span class="text-zinc-600 truncate min-w-0" style="flex:1 1 0%">${escapeHtml(item.technique || '')}</span>
             <span class="text-zinc-700 shrink-0 font-mono text-[11px]">${escapeHtml(ago(item.date))}</span>`;
