@@ -339,3 +339,5 @@
 | 2026-07-19 | auto | 0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4 (GR4YS) | deep_investigation | REJECT (37/100) | Owner not renounced (0xe3b5d677199000d6f2d71bf9dd78a2c86029fca5) — can still act | +7d |
 
 | 2026-07-19 | auto | 0x8B7DdE054BE9D180c1Be7FaE0874697374A49832 (PROS) | deep_investigation | CAUTION (70/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-20 | auto | 0xA1AFFfE3F4D611d252010E3EAf6f4D77088b0cd7 (RFI) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,181 (rug/illiquid) | +7d |
