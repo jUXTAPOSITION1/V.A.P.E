@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-20T13:09:22Z",
+  "generated": "2026-07-20T14:09:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 312,
+    "reports": 313,
     "reports_by_type": {
+      "security": 54,
       "bug": 2,
       "mainnet": 2,
       "sentiment": 30,
       "base": 56,
       "virtuals": 56,
-      "security": 53,
       "macro": 15,
       "skillforge": 3,
       "bounty": 95
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "bug",
-      "file": "bug-bounty-intel-2026-07-20-13.md",
-      "title": "Bug Bounty Intelligence Report \u2014 Base & Virtuals Protocol",
-      "date": "2026-07-20T13:00Z",
+      "type": "security",
+      "file": "security-2026-07-20-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-20T14:00Z",
       "threat": null,
-      "summary": "Real check: searched for a live Virtuals Protocol Immunefi listing this cycle. No matching immunefi.com listing found in this cycle's search results.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/bug-bounty-intel-2026-07-20-13.md",
-      "bytes": 3056
+      "summary": "The feed shows 7 incidents across the last 7 days, all below the $50M threshold, with the largest losses coming from BonkDAO ($21.3M, malicious governance proposal on Solana) and Ostium ($18.0M, price oracle manipulation on Arbitrum). Other events include BarnBridge ($0.776M, malicious governance on Ethereum), Bonzo Lend ($10.05M, price o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-14.md",
+      "bytes": 5412
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-20-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-20T14:00Z",
+      "threat": null,
+      "summary": "The feed shows 7 incidents across the last 7 days, all below the $50M threshold, with the largest losses coming from BonkDAO ($21.3M, malicious governance proposal on Solana) and Ostium ($18.0M, price oracle manipulation on Arbitrum). Other events include BarnBridge ($0.776M, malicious governance on Ethereum), Bonzo Lend ($10.05M, price o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-14.md",
+      "bytes": 5412
+    },
     {
       "kind": "intel",
       "type": "bug",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-16 15:06 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-16-15.md",
       "bytes": 2299
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-16-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-16T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (25) and global market cap 24h change (-0.99%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-16-15.md",
-      "bytes": 2015
     }
   ],
   "broadcasts": [
