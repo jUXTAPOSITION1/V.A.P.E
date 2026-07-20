@@ -274,6 +274,54 @@ class GitHubMCPWrapper:
             logger.error(f"[WRITE] PR creation failed: {result}")
             return False, result
 
+    def get_pr_head_sha(self, repo: str, pr_number: int) -> Tuple[bool, str]:
+        """Real head commit SHA for a PR (read-only, safe) — used to read
+        each changed file's actual content via read_file(..., ref=sha)
+        without ever checking out the PR's branch locally."""
+        success, result = self._call("GET", f"/repos/{repo}/pulls/{pr_number}")
+        if not success:
+            return False, ""
+        return True, (result.get("head") or {}).get("sha", "")
+
+    def get_pr_files(self, repo: str, pr_number: int) -> Tuple[bool, List[Dict[str, Any]]]:
+        """Changed files for a PR, each with GitHub's own computed unified-
+        diff patch text (read-only, safe — this is GitHub's API returning
+        data it already computed, not this process checking out or
+        executing the PR's code).
+
+        Use case: agents/code_review.py (VAPE Reviewer) builds its LLM
+        prompt from these patches and runs scripts/code_lint.py's
+        deterministic checks against each file's real content at the PR's
+        head (via get_pr_head_sha() + read_file()).
+        """
+        endpoint = f"/repos/{repo}/pulls/{pr_number}/files?per_page=100"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, list):
+            return False, []
+        files = [
+            {"path": f.get("filename"), "status": f.get("status"), "patch": f.get("patch", "")}
+            for f in result if isinstance(f, dict) and f.get("filename")
+        ]
+        return True, files
+
+    def create_pr_comment(self, repo: str, pr_number: int, body: str) -> Tuple[bool, Dict[str, Any]]:
+        """Post a comment on a PR (WRITE - GATED, audit logged). PRs are
+        issues under the hood for comments, so this is the Issues API.
+
+        Use case: agents/code_review.py (VAPE Reviewer) posting its
+        combined deterministic + LLM security review — advisory only,
+        never a merge gate.
+        """
+        body = body[:65000]  # headroom under GitHub's own comment-body length cap
+        logger.info(f"[WRITE] Commenting on {repo}#{pr_number}")
+        endpoint = f"/repos/{repo}/issues/{pr_number}/comments"
+        success, result = self._call("POST", endpoint, {"body": body})
+        if success:
+            logger.info(f"[WRITE] Comment posted: {result.get('html_url', 'unknown')}")
+            return True, {"url": result.get("html_url"), "status": "created"}
+        logger.error(f"[WRITE] Comment failed: {result}")
+        return False, result
+
 
 # ============================================================================
 # Social/X MCP Wrapper — Safe Public Data Access

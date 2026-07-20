@@ -1,0 +1,63 @@
+name: VAPE Reviewer (automated security-forward PR review)
+
+# In-house PR reviewer, alongside CodeRabbit (which stays as-is — this
+# doesn't replace it, it fills the gap of a reviewer that actually knows
+# this repo's own security laws, see docs/SECURITY_PROTOCOL.md). Advisory
+# only, never a merge gate — see agents/code_review.py's module docstring.
+#
+# Deliberately `pull_request`, never `pull_request_target`: this job never
+# checks out the PR's own branch, only this repo's base-branch copy of
+# agents/code_review.py/scripts/code_lint.py. Every read of the PR's actual
+# content (diff, changed-file text) happens over the GitHub API
+# (skillforge/mcp.py's GitHubMCPWrapper) — text only, never a local
+# checkout or execution of fork/branch-controlled code. Same "never run
+# untrusted code with real secrets" property scripts/security_lint.py
+# itself enforces on every other workflow here.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: vape-reviewer-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    env:
+      HAS_ANY_LLM_KEY: >-
+        ${{ secrets.XAI_API_KEY_1 != '' || secrets.GROQ_API_KEY != '' ||
+            secrets.GEMINI_API_KEY != '' || secrets.CEREBRAS_API_KEY != '' ||
+            secrets.OPENROUTER_API_KEY != '' || secrets.GITHUB_MODELS_TOKEN != '' ||
+            secrets.TOGETHER_API_KEY != '' || secrets.OCI_GENAI_API_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Review PR
+        if: ${{ env.HAS_ANY_LLM_KEY == 'true' }}
+        run: python3 -m agents.code_review --pr "$PR_NUMBER"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+
+      - name: Skip review (no LLM secrets configured yet)
+        if: ${{ env.HAS_ANY_LLM_KEY == 'false' }}
+        run: echo "No LLM provider key set — VAPE Reviewer needs at least one (see .env.example). Skipping."
