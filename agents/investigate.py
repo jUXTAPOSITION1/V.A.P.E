@@ -717,7 +717,18 @@ def auto_target(chain=None):
     if not DF:
         return None
     chain = chain or _pick_chain_for_hour(datetime.now(timezone.utc).hour)
-    chains_to_try = [chain] if chain == "8453" else [chain, "8453"]
+    # Real bug this fixes: with 260+ investigations already in the ledger, a
+    # bare top-10-movers pool on a single chain (or two) now frequently comes
+    # up fully exhausted (every candidate already investigated) — confirmed
+    # directly in production: two consecutive real cycles (2026-07-20 17:03
+    # and 19:13 UTC) both logged "no auto target found this cycle" with
+    # chains_to_try == ["8453"] only, silently starving agents/data_agent.py
+    # (Base-only) of any recruitment opportunity for hours. Base is always
+    # tried first-or-second (whichever the hour-rotation didn't already
+    # pick), then every other known chain gets a turn too, so a temporarily
+    # exhausted pool on any single chain never zeroes out a whole cycle —
+    # "no target anywhere" is now a true last resort, not a common outcome.
+    chains_to_try = list(dict.fromkeys([chain, "8453"] + list(EVM_CHAINS.keys())))
 
     ledger = _load_ledger()
     for cid in chains_to_try:
@@ -725,8 +736,10 @@ def auto_target(chain=None):
         if not chain_info:
             continue
         get_movers = getattr(DF, "get_evm_movers", None)
-        movers = get_movers(chain_info["gecko"], limit=10) if get_movers else (
-            DF.get_base_movers(limit=10) if cid == "8453" else {})
+        # limit bumped 10 -> 40 for the same reason — a deeper well of
+        # candidates before a chain's pool counts as exhausted.
+        movers = get_movers(chain_info["gecko"], limit=40) if get_movers else (
+            DF.get_base_movers(limit=40) if cid == "8453" else {})
         cands = movers.get("biggest_movers") or []
         for m in cands:
             # movers from GeckoTerminal are pool-named; we need a token address, so we
