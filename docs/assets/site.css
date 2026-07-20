@@ -215,6 +215,42 @@ a { transition: color .15s; }
     .live-dot { animation: none; }
 }
 
+/* ── Featured Investigation spotlight ─────────────────────────────────────
+   The one section deliberately styled as a showcase rather than a flat
+   data row — VAPE's best real, verifiable work gets a genuine focal point.
+   Uses its own blue accent (#60a5fa, already used elsewhere for wallet/
+   Polymarket chips) rather than --accent, so it reads as "this is the
+   highlight" and not another verdict/status color. */
+.spotlight-section {
+    position: relative;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    background: radial-gradient(ellipse 120% 100% at 50% 0%, rgba(96, 165, 250, 0.08), transparent 60%);
+    padding: 1.5rem;
+    overflow: hidden;
+}
+@media (min-width: 640px) { .spotlight-section { padding: 2.25rem; } }
+.spotlight-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+}
+.spotlight-card {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+    transition: border-color 0.2s ease;
+}
+.spotlight-card:hover { border-color: rgba(96, 165, 250, 0.45); }
+.spotlight-kicker {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #60a5fa;
+}
+
 /* ── Wallet chip / profile ────────────────────────────────────────────── */
 .wallet-chip {
     border: 1px solid var(--border);

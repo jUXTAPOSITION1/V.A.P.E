@@ -1524,34 +1524,34 @@ const App = {
                 const explorer = this._explorerUrl(inv.target, inv.chain);
                 iel.innerHTML=`
                     <div class="flex items-center justify-between gap-2 mb-3">
-                        <div class="text-[10px] uppercase tracking-widest text-zinc-500">Deep Investigation</div>
+                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-magnifying-glass-chart"></i> Deep Investigation</div>
                         ${this._pill(inv.verdict)}
                     </div>
                     <a href="${explorer||'#'}" target="_blank" rel="noopener" class="flex items-center gap-3 mb-1 ${explorer?'hover:opacity-80':'pointer-events-none'}">
-                        ${this._iconImg(inv.target, inv.chain, 40)}
+                        ${this._iconImg(inv.target, inv.chain, 48)}
                         <div class="min-w-0">
-                            <div class="text-lg leading-tight truncate">${this._esc(heading)}</div>
+                            <div class="text-xl leading-tight truncate">${this._esc(heading)}</div>
                             ${showName?`<div class="text-xs text-zinc-400 truncate">${this._esc(inv.name)}</div>`:''}
                             ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                         </div>
                     </a>
-                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200">${inv.score}</span></div>`:''}
+                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200 text-sm">${inv.score}</span><span class="text-zinc-600">/100</span></div>`:''}
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
             // hero: latest report
             const rep=(d.latest_summary||{}).report;
             const rel=document.getElementById('inv-report');
             if(rep){
                 rel.innerHTML=`
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <div class="text-[10px] uppercase tracking-widest text-zinc-500">Latest Report · ${this._esc(rep.type||'')}</div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-file-shield"></i> Latest Report · ${this._esc(rep.type||'')}</div>
                         ${this._pill(rep.threat)}
                     </div>
-                    <div class="text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
-                    <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
+                    <div class="text-xl leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
+                    <div class="text-[11px] text-zinc-500 mb-3">${this._ago(rep.date)}</div>
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
-                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
             this._renderIntel();
         }catch(e){

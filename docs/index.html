@@ -194,17 +194,22 @@
         </section>
 
         <!-- ═══ 3. FEATURED INVESTIGATION (moved higher) ═══ -->
-        <section id="case-file" class="reveal panel mb-14">
+        <section id="case-file" class="reveal spotlight-section mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow">[ case study ]</div>
+                <div class="spotlight-kicker">[ spotlight ]</div>
                 <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
-            <h2 class="section-title text-lg mb-4">&gt; Featured Investigation</h2>
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
+                <h2 class="section-title text-lg sm:text-xl">&gt; Featured Investigation &amp; Latest Report</h2>
+                <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
+                    Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div id="inv-latest" class="panel-sm">
+                <div id="inv-latest" class="spotlight-card">
                     <div class="skeleton h-28"></div>
                 </div>
-                <div id="inv-report" class="panel-sm">
+                <div id="inv-report" class="spotlight-card">
                     <div class="skeleton h-28"></div>
                 </div>
             </div>
@@ -697,7 +702,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=22"></script>
+    <script src="assets/app.js?v=23"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
