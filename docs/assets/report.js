@@ -87,7 +87,14 @@ function simpleMarkdownToHtml(md) {
     let listTag = null;
     const inline = (s) => escapeHtml(s)
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/`([^`]+)`/g, '<code class="text-zinc-200">$1</code>');
+        .replace(/`([^`]+)`/g, '<code class="text-zinc-200">$1</code>')
+        // Image before link — deep_dive_audit.py/external_audit.py embed the
+        // audited project's real logo as `![alt](url)`; without this it shows
+        // up as literal broken Markdown text instead of the actual logo.
+        // Scheme-restricted to http(s) same as every other URL this file
+        // renders into an attribute.
+        .replace(/!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g, '<img src="$2" alt="$1" class="w-10 h-10 rounded-full object-contain inline-block mb-1" onerror="this.remove()">')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="text-zinc-200 hover:underline">$1</a>');
     const flushList = () => {
         if (listBuffer.length) {
             htmlParts.push(`<${listTag} class="${listTag === 'ol' ? 'list-decimal' : 'list-disc'} pl-4 mb-2 space-y-0.5">${listBuffer.join('')}</${listTag}>`);
@@ -468,7 +475,12 @@ const Report = {
         // report's branding should be the audited project's, not a stock
         // icon. tokenIconByAddress() is the fallback for every other
         // offering, which has no such field.
-        const assetIcon = deliverable.logo_url || (addr ? tokenIconByAddress(addr, deliverable.chain_id) : null);
+        const rawAssetIcon = deliverable.logo_url || (addr ? tokenIconByAddress(addr, deliverable.chain_id) : null);
+        // logo_url is real external data (a token's own declared DexScreener
+        // metadata, or a GitHub org avatar) — scheme-restrict to http(s) and
+        // escape before it ever reaches an attribute, same as every URL the
+        // Markdown renderer above interpolates.
+        const assetIcon = typeof rawAssetIcon === 'string' && /^https?:\/\//i.test(rawAssetIcon) ? escapeHtml(rawAssetIcon) : null;
         // Token identity (symbol + project name) belongs front-and-center next
         // to the icon, above the offering name — a buyer scans the card to
         // confirm "is this the token I paid to check" before anything else.

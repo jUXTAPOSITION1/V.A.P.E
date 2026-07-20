@@ -217,7 +217,22 @@ const Hire = {
     // stops it once the buyer navigates away.
     _pollBountyJob(jobId, offeringName, priceUsd, targetLabel) {
         const startedAt = Date.now();
+        // The workflow itself times out at 60 minutes (deep-dive-bounty.yml /
+        // external-bounty-audit.yml) — this buffer covers queueing/dispatch
+        // lag on top of that. Without a ceiling, a job that crashes or hangs
+        // before ever POSTing to /callback would show "still running" forever.
+        const MAX_POLL_MS = 90 * 60 * 1000;
+        const giveUp = (message, cls) => {
+            clearInterval(this._pollTimer);
+            this._pollTimer = null;
+            const el = document.getElementById('hire-poll-elapsed');
+            if (el) { el.textContent = message; el.className = `mt-2 ${cls || 'text-zinc-500'}`; }
+        };
         const tick = async () => {
+            if (Date.now() - startedAt > MAX_POLL_MS) {
+                giveUp("Still hasn't reported back after 90 minutes — unusual, but your payment is safe either way. The audit ledger (link above) is the source of truth if this modal gives up first.", 'text-amber-400');
+                return;
+            }
             if (!window.WORKER_BASE) return;
             let data;
             try {
@@ -232,6 +247,14 @@ const Hire = {
                     status: 'ok', deliverable: data.result || {}, source: 'vape-real-data',
                     disclaimer: 'Real on-chain data. Not investment advice.',
                 });
+                return;
+            }
+            if (data && data.status === 'failed') {
+                // giveUp() sets this via textContent, not innerHTML, so data.error
+                // (real but untrusted — VAPE's own dispatch-failure text, not
+                // attacker-controlled, but still external to this file) needs no
+                // escaping here; escaping it would double-escape and corrupt display.
+                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}) — your payment settled but the audit never started. Contact VAPE via ACP to resolve.`, 'text-rose-400');
                 return;
             }
             const el = document.getElementById('hire-poll-elapsed');

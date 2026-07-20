@@ -929,9 +929,29 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     }
   }
 
+  // Best-effort — a dispatch failure right after the KV write above is the
+  // one case this handler CAN detect synchronously (a workflow that crashes
+  // or times out mid-run without ever POSTing to /callback is not; that gap
+  // is bounded by BOUNTY_JOB_TTL_SECONDS's expiry and hire.js's own client-
+  // side poll timeout instead). Marking it "failed" here means a poller can
+  // tell "will never complete" from "still running" for this one case.
+  const markJobFailed = async (reason: string) => {
+    if (!jobId || !c.env.VAPE_JOBS) return;
+    try {
+      const existing = await c.env.VAPE_JOBS.get(`job:${jobId}`, { type: "json" });
+      await c.env.VAPE_JOBS.put(`job:${jobId}`, JSON.stringify({
+        ...(existing as Record<string, unknown> | null),
+        status: "failed", error: reason, completedAt: new Date().toISOString(),
+      }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
+    } catch {
+      // Best-effort — the error response below is still accurate either way.
+    }
+  };
+
   if (hasAddress) {
     const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
     if (!dispatch.ok) {
+      await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
       return c.json({
         offering: "bounty_deep_dive", status: "error",
         error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
@@ -952,6 +972,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     owner, repo, ref, programName, paths, callbackUrl,
   });
   if (!dispatch.ok) {
+    await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
     return c.json({
       offering: "bounty_deep_dive", status: "error",
       error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
@@ -996,7 +1017,7 @@ app.post("/scan/bounty_deep_dive/callback", rateLimiter("bounty-callback", 30, 6
 });
 
 // Polled by docs/assets/hire.js while a buyer's bounty_deep_dive audit runs.
-app.get("/scan/bounty_deep_dive/status", async (c) => {
+app.get("/scan/bounty_deep_dive/status", rateLimiter("bounty-status", 60, 60), async (c) => {
   if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
   const jobId = c.req.query("job") || "";
   if (!JOB_ID_RE.test(jobId)) return c.json({ error: "invalid job id" }, 400);
