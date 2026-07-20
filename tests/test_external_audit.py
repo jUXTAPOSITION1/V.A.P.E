@@ -110,7 +110,7 @@ def test_run_external_audit_writes_report_and_logs_finding(monkeypatch, tmp_path
     monkeypatch.setattr(ea, "FINDINGS_PATH", str(findings_path))
     monkeypatch.setattr(ea, "fetch_file", lambda owner, repo, ref, p, timeout=15: f"// content of {p}")
 
-    def fake_ask(system, prompt, max_tokens=None, temperature=None):
+    def fake_ask(system, prompt, max_tokens=None, temperature=None, search=None):
         assert "content of a.move" in prompt
         return ("## Executive Summary\nNo exploitable finding this pass — clean code.", "oci_grok")
 
@@ -136,7 +136,7 @@ def test_run_external_audit_handles_llm_unavailable(monkeypatch, tmp_path):
     monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
     monkeypatch.setattr(ea, "fetch_file", lambda owner, repo, ref, p, timeout=15: "content")
 
-    def fake_ask(system, prompt, max_tokens=None, temperature=None):
+    def fake_ask(system, prompt, max_tokens=None, temperature=None, search=None):
         raise RuntimeError("no keys")
 
     monkeypatch.setattr(ea, "ask_oci_grok_frontier", fake_ask)
