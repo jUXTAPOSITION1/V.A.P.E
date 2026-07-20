@@ -149,6 +149,16 @@ def test_build_review_prompt_includes_findings_and_diff():
     assert "Django" in system  # real-stack grounding, not a generic project
 
 
+def test_build_review_prompt_asks_for_summary_and_changes_sections():
+    # CodeRabbit-style walkthrough parity: a plain-language summary and a
+    # per-file changes list, ahead of the security-forward sections that
+    # actually distinguish this reviewer.
+    _, prompt = cr.build_review_prompt("diff --git a/x b/x\n+eval(x)\n", [])
+    assert "## Summary" in prompt
+    assert "## Changes" in prompt
+    assert prompt.index("## Summary") < prompt.index("## Security")
+
+
 def test_build_review_prompt_truncates_huge_diffs():
     huge_diff = "x" * (cr.MAX_DIFF_CHARS + 5000)
     _, prompt = cr.build_review_prompt(huge_diff, [])
