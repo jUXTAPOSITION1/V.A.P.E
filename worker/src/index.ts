@@ -865,6 +865,16 @@ const GH_SLUG_RE = /^[A-Za-z0-9_.-]+$/;
 //   - owner + repo (+ ref/program_name/paths): a bounty program's own source
 //     repo (Move/Sui or any other language) -> external-bounty-audit.yml ->
 //     agents/external_audit.py.
+// Bounty-job KV records live 24h — long enough to cover the workflow's own
+// 60-minute timeout plus a buyer coming back to a closed tab well after
+// completion, short enough not to accumulate forever in a KV namespace with
+// no other TTL-less writes.
+const BOUNTY_JOB_TTL_SECONDS = 24 * 60 * 60;
+// A UUID's ~128 bits of entropy is this job record's only access control —
+// nothing else gates who can POST a result to /callback or read /status, so
+// treat it like a bearer secret: never log it anywhere but the KV key itself.
+const JOB_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 app.get("/scan/bounty_deep_dive", async (c) => {
   const address = c.req.query("address") || "";
   const chain = c.req.query("chain") || "8453";
@@ -873,7 +883,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
   const ref = c.req.query("ref") || undefined;
   const programName = c.req.query("program_name") || undefined;
   const paths = c.req.query("paths") || undefined;
-  const callbackUrl = c.req.query("callback_url") || undefined;
+  const callerCallbackUrl = c.req.query("callback_url") || undefined;
 
   const hasAddress = ADDRESS_RE.test(address);
   const hasRepo = owner && repo && GH_SLUG_RE.test(owner) && GH_SLUG_RE.test(repo);
@@ -893,6 +903,32 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     }, 503);
   }
 
+  // The browser UI never sends its own callback_url today — when that's the
+  // case (true for every real site buyer) and VAPE_JOBS is configured, mint
+  // a job record so the site can poll for the result instead of only ever
+  // pointing the buyer at a GitHub tree link. A caller that DOES supply its
+  // own callback_url (a non-browser/API integration) is left completely
+  // unchanged — no KV tracking, exactly today's behavior.
+  let jobId: string | undefined;
+  let callbackUrl = callerCallbackUrl;
+  if (!callerCallbackUrl && c.env.VAPE_JOBS) {
+    jobId = crypto.randomUUID();
+    callbackUrl = `${new URL(c.req.url).origin}/scan/bounty_deep_dive/callback?job=${jobId}`;
+    try {
+      await c.env.VAPE_JOBS.put(`job:${jobId}`, JSON.stringify({
+        status: "pending",
+        offering: "bounty_deep_dive",
+        target: hasAddress ? { address, chain } : { owner, repo, ref: ref || "main" },
+        createdAt: new Date().toISOString(),
+      }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
+    } catch {
+      // KV hiccup — fail open exactly like rateLimiter above: dispatch the
+      // real audit either way, the buyer just loses live polling this time.
+      jobId = undefined;
+      callbackUrl = callerCallbackUrl;
+    }
+  }
+
   if (hasAddress) {
     const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
     if (!dispatch.ok) {
@@ -903,9 +939,10 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     }
     return c.json({
       offering: "bounty_deep_dive", status: "accepted", address, chain,
+      job: jobId,
       message: "Audit queued — a submission-ready PoC report lands in intel/audits/poc-reports/ "
         + "as soon as it completes."
-        + (callbackUrl ? " Will also POST the result to your callback_url." : ""),
+        + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
       track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
       source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
     });
@@ -922,12 +959,50 @@ app.get("/scan/bounty_deep_dive", async (c) => {
   }
   return c.json({
     offering: "bounty_deep_dive", status: "accepted", owner, repo, ref: ref || "main",
+    job: jobId,
     message: "Audit queued — a submission-ready PoC report lands in "
       + "intel/audits/external-bounties/ as soon as it completes."
-      + (callbackUrl ? " Will also POST the result to your callback_url." : ""),
+      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
     track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/external-bounties",
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
+});
+
+// Fired by deep_dive_audit.py / external_audit.py's own callback POST once the
+// GitHub Actions job finishes — see agents/deep_dive_audit.py::run_audit()'s
+// callback_url handling. No auth beyond the unguessable jobId itself (see
+// JOB_ID_RE's comment above) — this route is otherwise unauthenticated by
+// design, same trust model as the callback_url mechanism it fulfills.
+app.post("/scan/bounty_deep_dive/callback", rateLimiter("bounty-callback", 30, 60), async (c) => {
+  if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
+  const jobId = c.req.query("job") || "";
+  if (!JOB_ID_RE.test(jobId)) return c.json({ error: "invalid job id" }, 400);
+  const key = `job:${jobId}`;
+  const existing = await c.env.VAPE_JOBS.get(key, { type: "json" });
+  if (!existing) return c.json({ error: "unknown or expired job" }, 404);
+  let body: unknown;
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "invalid JSON body" }, 400);
+  }
+  await c.env.VAPE_JOBS.put(key, JSON.stringify({
+    ...(existing as Record<string, unknown>),
+    status: "done",
+    result: body,
+    completedAt: new Date().toISOString(),
+  }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
+  return c.json({ ok: true });
+});
+
+// Polled by docs/assets/hire.js while a buyer's bounty_deep_dive audit runs.
+app.get("/scan/bounty_deep_dive/status", async (c) => {
+  if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
+  const jobId = c.req.query("job") || "";
+  if (!JOB_ID_RE.test(jobId)) return c.json({ error: "invalid job id" }, 400);
+  const record = await c.env.VAPE_JOBS.get(`job:${jobId}`, { type: "json" });
+  if (!record) return c.json({ status: "unknown" }, 404);
+  return c.json(record);
 });
 
 export default app;

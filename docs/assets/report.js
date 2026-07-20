@@ -70,6 +70,57 @@ function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// The PoC-audit offerings (bounty_deep_dive's deep_dive_audit.py/
+// external_audit.py) return a long, real Markdown narrative in `report` —
+// headers, bullet lists, bold — not a compact structured verdict object
+// like every other offering's deliverable. Rendering it through the
+// generic key/value row below (renderDeliverableHtml's fallback) squashed
+// the whole multi-section report onto one line. This is a small, dependency-
+// free Markdown-lite renderer (no CDN parser pulled in for one field) —
+// escapes first, then only ever inserts this function's own controlled
+// tags around the escaped text, so nothing in a model-authored report can
+// inject real HTML.
+function simpleMarkdownToHtml(md) {
+    const lines = String(md ?? '').split('\n');
+    const htmlParts = [];
+    let listBuffer = [];
+    let listTag = null;
+    const inline = (s) => escapeHtml(s)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code class="text-zinc-200">$1</code>');
+    const flushList = () => {
+        if (listBuffer.length) {
+            htmlParts.push(`<${listTag} class="${listTag === 'ol' ? 'list-decimal' : 'list-disc'} pl-4 mb-2 space-y-0.5">${listBuffer.join('')}</${listTag}>`);
+        }
+        listBuffer = [];
+        listTag = null;
+    };
+    for (const rawLine of lines) {
+        const line = rawLine.trimEnd();
+        const heading = line.match(/^(#{1,6})\s+(.*)/);
+        const bullet = line.match(/^[-*]\s+(.*)/);
+        const numbered = line.match(/^\d+[.)]\s+(.*)/);
+        if (heading) {
+            flushList();
+            const size = heading[1].length <= 2 ? 'text-xs' : 'text-[11px]';
+            htmlParts.push(`<div class="${size} font-semibold text-zinc-200 mt-3 mb-1">${inline(heading[2])}</div>`);
+        } else if (bullet) {
+            if (listTag !== 'ul') { flushList(); listTag = 'ul'; }
+            listBuffer.push(`<li class="text-zinc-300">${inline(bullet[1])}</li>`);
+        } else if (numbered) {
+            if (listTag !== 'ol') { flushList(); listTag = 'ol'; }
+            listBuffer.push(`<li class="text-zinc-300">${inline(numbered[1])}</li>`);
+        } else if (line.trim() === '') {
+            flushList();
+        } else {
+            flushList();
+            htmlParts.push(`<p class="text-zinc-300 mb-1.5">${inline(line)}</p>`);
+        }
+    }
+    flushList();
+    return htmlParts.join('');
+}
+
 function verdictClass(v) {
     if (v === "PROCEED" || v === "LOW" || v === "GO") return 'border border-emerald-500 text-emerald-500';
     if (v === "CAUTION" || v === "MEDIUM") return 'border border-amber-400 text-amber-400';
@@ -85,7 +136,7 @@ function verdictClass(v) {
 // deliverable), so those chips render icon-less first and are filled in by
 // `enhanceIcons()` once the caller inserts this HTML into the DOM.
 function renderDeliverableHtml(obj, depth = 0) {
-    const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol']);
+    const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol', 'logo_url']);
     // A "<key>_classification" sibling (e.g. fear_greed / fear_greed_classification)
     // is a label for <key>'s value, not an independent fact — fold it into
     // one row instead of showing "Fear Greed 42" and "Fear Greed Classification
@@ -125,6 +176,18 @@ function renderDeliverableHtml(obj, depth = 0) {
                             ${escapeHtml(String(name))}
                         </span>`).join('')}
                 </div>
+            </div>`;
+        }
+        // bounty_deep_dive's PoC-audit deliverable (deep_dive_audit.py/
+        // external_audit.py) carries the real Markdown narrative in
+        // `report_content` — `report` itself stays the short intel/audits/
+        // relative file path (other callers depend on that contract) so it
+        // renders fine as a normal one-line field. report_content needs its
+        // own full-width prose block (see simpleMarkdownToHtml above) instead
+        // of the generic single-line key/value row every other field gets.
+        if (key === 'report_content' && typeof val === 'string' && val.length > 200) {
+            return `<div class="mb-2 max-h-[420px] overflow-y-auto border border-white/10 p-3" ${indent}>
+                ${simpleMarkdownToHtml(val)}
             </div>`;
         }
         if (val !== null && typeof val === 'object' && !Array.isArray(val)) {
@@ -242,7 +305,7 @@ const Report = {
         const rows = [
             ['Offering', humanLabel(opts.offering)],
             ...(pdfTokenParts.length ? [['Token', pdfTokenParts.join(' ')]] : []),
-            ['Fulfillment', opts.via === 'x402' ? 'Paid via x402 (on-chain, real-time)' : 'Free preview scan'],
+            ['Fulfillment', opts.via === 'x402' ? 'Paid via x402 (on-chain, real-time)' : 'Open-source preview scan'],
             ['Price', opts.priceUsd != null ? `$${opts.priceUsd}` : '—'],
             ['Target address', opts.requestedAddress || '—'],
             ['Hired by', opts.hiredBy || '—'],
@@ -334,7 +397,7 @@ const Report = {
     _renderObject(doc, obj, x, y, maxWidth, depth = 0) {
         const H = doc.internal.pageSize.getHeight();
         // Skip fields already surfaced in the header block or verdict badge above.
-        const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol']);
+        const skip = new Set(['flags', 'address', 'verdict', 'rug_risk', 'combined', 'token_verdict', 'name', 'symbol', 'logo_url']);
         for (const [key, val] of Object.entries(obj)) {
             if (skip.has(key) && depth === 0) continue;
             if (y > H - 90) { doc.addPage(); y = 48; }
@@ -399,10 +462,13 @@ const Report = {
         const addr = opts.requestedAddress;
         const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-zinc-300 hover:underline">${escapeHtml(addr)}</a>` : '—';
         const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
-        // Same real-token icon used for the `symbol` row above, surfaced once
-        // more at the top of the card — the case-report equivalent of the
-        // logo the user sees on every investigation/scan card elsewhere.
-        const assetIcon = addr ? tokenIconByAddress(addr, deliverable.chain_id) : null;
+        // The audited project's own real, fetched logo (deep_dive_audit.py's
+        // DexScreener-sourced logo_url, or external_audit.py's GitHub-org
+        // avatar) takes priority over the generic icon lookup — a bounty
+        // report's branding should be the audited project's, not a stock
+        // icon. tokenIconByAddress() is the fallback for every other
+        // offering, which has no such field.
+        const assetIcon = deliverable.logo_url || (addr ? tokenIconByAddress(addr, deliverable.chain_id) : null);
         // Token identity (symbol + project name) belongs front-and-center next
         // to the icon, above the offering name — a buyer scans the card to
         // confirm "is this the token I paid to check" before anything else.
@@ -428,7 +494,7 @@ const Report = {
                 </div>
                 <div class="text-[11px] text-zinc-500 mb-3 space-y-0.5">
                     <div>Target: ${addrHtml}</div>
-                    <div>${opts.via === 'x402' ? 'Paid via x402' : 'Free preview'} ${opts.priceUsd != null ? `· $${opts.priceUsd}` : ''} · ${escapeHtml(generated)}</div>
+                    <div>${opts.via === 'x402' ? 'Paid via x402' : 'Open-source preview'} ${opts.priceUsd != null ? `· $${opts.priceUsd}` : ''} · ${escapeHtml(generated)}</div>
                 </div>
                 <div class="mb-2">${renderDeliverableHtml(deliverable)}</div>
                 ${flags.length ? `

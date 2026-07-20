@@ -286,10 +286,18 @@ Rules:
   math functions) rather than inflating a verdict off raw tool count.
 - End with a clear PROCEED/CAUTION/REJECT verdict and a short list of what a human
   reviewer should still manually verify before relying on this report.
+- Open with a short "Project Overview" paragraph about the TARGET project/token itself
+  (not about VAPE or the tooling used to analyze it): what it claims to be/do, who
+  operates it if that's discoverable, and its official website/social links if the
+  recon data or your search surfaced them. Ground every sentence in the real recon
+  data or search results you actually have — if the project's purpose or background
+  can't be determined from what's available, say so plainly rather than inventing a
+  bio. This section exists so the report reads as being about the project being
+  audited, not about VAPE's own process.
 
-Output plain Markdown: an Executive Summary, then a section per vulnerability class you
-found evidence for (skip classes with nothing to say rather than padding), then
-"Recommended Human Follow-up".
+Output plain Markdown: a "Project Overview" paragraph first, then an Executive Summary,
+then a section per vulnerability class you found evidence for (skip classes with
+nothing to say rather than padding), then "Recommended Human Follow-up".
 """
 
 
@@ -392,6 +400,13 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     score, verdict, reasons, positive_signals = inv.score(gp, dex, onchain, verif_for_score, web_rep, deployer_repeat)
 
     sym = dex.get("symbol") or src.get("contract_name") or "unknown"
+    # Real, keyless project identity — DexScreener's own hosted logo + the
+    # project's own declared website/social links (never VAPE's). The only
+    # branding a report should carry is the audited project's, not VAPE's.
+    project_name = dex.get("name") or src.get("contract_name")
+    logo_url = dex.get("logo_url")
+    project_links = [w["url"] for w in (dex.get("websites") or [])] + \
+        [s["url"] for s in (dex.get("socials") or [])]
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
                           mythril_result, aderyn_result)
     try:
@@ -414,9 +429,16 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
               "VAPE Deep-Dive Bounty Audit")
     L.append(f"# {title} — {sym}")
     L.append("")
+    if logo_url:
+        L.append(f"![{sym} logo]({logo_url})")
+        L.append("")
+    if project_name and project_name != sym:
+        L.append(f"**Project:** {project_name} (${sym})" + (f" — {' · '.join(project_links)}" if project_links else "") + "  ")
+    elif project_links:
+        L.append(f"**Project links:** {' · '.join(project_links)}  ")
     L.append(f"**Target:** `{address}` (chain {chain})  ")
     L.append(f"**Date:** {now_iso()}  ")
-    L.append(f"**Engine:** Frontier LLM ({provider or 'unavailable'}) + real recon"
+    L.append(f"**Engine:** Frontier LLM ({'active' if provider else 'unavailable this cycle'}) + real recon"
              f"{' + Slither static analysis' if slither_result.get('ok') else ''}"
              f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}"
              f"{' + Mythril symbolic-execution scan' if mythril_result.get('ok') else ''}"
@@ -476,7 +498,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     L.append("## Methodology")
     L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
              "on-chain presence, DeFiLlama hack-technique correlation, public web search for "
-             "reputation flags — identical pipeline to every free VAPE investigation.")
+             "reputation flags — identical pipeline to every open-source VAPE investigation.")
     L.append("2. Etherscan V2 contract verification + full verified source (when available).")
     L.append("3. Slither static analysis, real tool output, only if pre-installed this run.")
     L.append("4. Halmos bounded symbolic testing against LLM-drafted check_* properties "
@@ -510,8 +532,16 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     print(f"[deep_dive_audit] wrote {rel}")
 
-    result = {"address": address, "chain": chain, "symbol": sym, "verdict": verdict,
-              "score": score, "report": rel, "provider": provider, "engagement": engagement}
+    result = {"address": address, "chain": chain, "symbol": sym, "name": project_name,
+              "logo_url": logo_url, "verdict": verdict, "score": score, "report": rel,
+              # Full markdown text, in addition to `report`'s existing relative-path
+              # contract (agents/hack_agent.py, security_sweep.py, engagements.py all
+              # already depend on `report` staying a path) — only the callback_url
+              # POST body needs the actual content, since the receiving worker can't
+              # read this runner's local filesystem and the git commit of `report`'s
+              # path happens in a later, separate CI step.
+              "report_content": content,
+              "provider": provider, "engagement": engagement}
 
     if callback_url:
         if not _is_safe_callback_url(callback_url):
