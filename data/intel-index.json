@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-20T11:08:41Z",
+  "generated": "2026-07-20T11:38:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 309,
+    "reports": 310,
     "reports_by_type": {
       "sentiment": 30,
+      "base": 56,
       "virtuals": 56,
       "security": 53,
-      "base": 55,
       "macro": 15,
       "skillforge": 3,
       "bounty": 95,
@@ -620,6 +620,17 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-20-11.md",
       "bytes": 1803
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-20-11.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-20T11:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-20 11:38 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-20-11.md",
+      "bytes": 3679
     },
     {
       "kind": "intel",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-16 10:50 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-16-10.md",
       "bytes": 3338
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-16-09.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-16T09:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-16 09:18 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-16-09.md",
-      "bytes": 2315
     }
   ],
   "broadcasts": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48872129",
+      "version": "48878782",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.42 eth_dom 9.85 mcap_chg_24h -0.71",
+      "version": "btc_dom 56.42 eth_dom 9.88 mcap_chg_24h -0.2",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xd68e72b29d2e WAV3 27619.9615225 from 0x71e64dcc to 0x833589fc",
+      "version": "0x619e775c3ac7 KAI 569363.0 from 0x1c064861 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
