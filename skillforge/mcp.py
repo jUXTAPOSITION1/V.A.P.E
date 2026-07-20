@@ -100,12 +100,12 @@ class GitHubMCPWrapper:
         try:
             if method == "GET":
                 req = urllib.request.Request(url, headers=headers, method="GET")
-            elif method == "POST":
+            elif method in ("POST", "PATCH"):
                 req = urllib.request.Request(
                     url,
                     data=json.dumps(data).encode() if data else None,
                     headers={**headers, "Content-Type": "application/json"},
-                    method="POST"
+                    method=method
                 )
             else:
                 return False, {"error": f"Unsupported method: {method}"}
@@ -320,6 +320,30 @@ class GitHubMCPWrapper:
             logger.info(f"[WRITE] Comment posted: {result.get('html_url', 'unknown')}")
             return True, {"url": result.get("html_url"), "status": "created"}
         logger.error(f"[WRITE] Comment failed: {result}")
+        return False, result
+
+    def list_issue_comments(self, repo: str, pr_number: int) -> Tuple[bool, List[Dict[str, Any]]]:
+        """List comments on a PR (read-only, safe) — lets a caller find its
+        own prior comment (by a hidden marker in the body) and update it in
+        place rather than posting a new one on every push. Mirrors CodeRabbit's
+        own observed behavior on this repo: one comment per PR, edited across
+        pushes, not one new comment per push."""
+        endpoint = f"/repos/{repo}/issues/{pr_number}/comments?per_page=100"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, list):
+            return False, []
+        return True, result
+
+    def update_issue_comment(self, repo: str, comment_id: int, body: str) -> Tuple[bool, Dict[str, Any]]:
+        """Edit an existing PR comment in place (WRITE - GATED, audit logged)."""
+        body = body[:65000]  # same headroom as create_pr_comment
+        logger.info(f"[WRITE] Updating comment {comment_id} on {repo}")
+        endpoint = f"/repos/{repo}/issues/comments/{comment_id}"
+        success, result = self._call("PATCH", endpoint, {"body": body})
+        if success:
+            logger.info(f"[WRITE] Comment updated: {result.get('html_url', 'unknown')}")
+            return True, {"url": result.get("html_url"), "status": "updated"}
+        logger.error(f"[WRITE] Comment update failed: {result}")
         return False, result
 
 

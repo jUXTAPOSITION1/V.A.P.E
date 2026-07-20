@@ -11,7 +11,8 @@ import agents.code_review as cr
 
 class _FakeGitHub:
     def __init__(self, head_ok=True, head_sha="abc123", files_ok=True, files=None,
-                 comment_ok=True, comment_err=None):
+                 comment_ok=True, comment_err=None, existing_comments=None,
+                 list_comments_ok=True):
         self.head_ok = head_ok
         self.head_sha = head_sha
         self.files_ok = files_ok
@@ -19,7 +20,10 @@ class _FakeGitHub:
         self.comment_ok = comment_ok
         self.comment_err = comment_err
         self.posted = []
+        self.updated = []
         self._file_contents = {}
+        self.existing_comments = existing_comments if existing_comments is not None else []
+        self.list_comments_ok = list_comments_ok
 
     def get_pr_head_sha(self, repo, pr_number):
         return self.head_ok, self.head_sha
@@ -36,6 +40,15 @@ class _FakeGitHub:
         self.posted.append(body)
         if self.comment_ok:
             return True, {"url": "https://example/comment", "status": "created"}
+        return False, {"error": self.comment_err or "failed"}
+
+    def list_issue_comments(self, repo, pr_number):
+        return self.list_comments_ok, self.existing_comments
+
+    def update_issue_comment(self, repo, comment_id, body):
+        self.updated.append((comment_id, body))
+        if self.comment_ok:
+            return True, {"url": "https://example/comment", "status": "updated"}
         return False, {"error": self.comment_err or "failed"}
 
 
@@ -175,12 +188,46 @@ def test_build_comment_body_notes_llm_unavailable():
     assert "unavailable this run" in body
 
 
-def test_post_review_comment_calls_github_wrapper(monkeypatch):
+def test_post_review_comment_creates_when_no_existing_comment(monkeypatch):
     fake = _FakeGitHub()
     monkeypatch.setattr(cr, "_gh", lambda: fake)
     ok, err = cr.post_review_comment(42, "hello world")
     assert ok is True
-    assert fake.posted == ["hello world"]
+    assert len(fake.posted) == 1
+    assert cr.COMMENT_MARKER in fake.posted[0]
+    assert "hello world" in fake.posted[0]
+    assert fake.updated == []
+
+
+def test_post_review_comment_updates_existing_comment_in_place(monkeypatch):
+    # Mirrors CodeRabbit's own observed behavior on this repo: one comment
+    # per PR, edited across pushes — not a new comment every run.
+    fake = _FakeGitHub(existing_comments=[
+        {"id": 999, "body": f"{cr.COMMENT_MARKER}\nold review"},
+    ])
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    ok, err = cr.post_review_comment(42, "new review")
+    assert ok is True
+    assert fake.posted == []
+    assert len(fake.updated) == 1
+    comment_id, body = fake.updated[0]
+    assert comment_id == 999
+    assert "new review" in body
+
+
+def test_find_existing_comment_id_ignores_other_bots_comments(monkeypatch):
+    fake = _FakeGitHub(existing_comments=[
+        {"id": 1, "body": "some CodeRabbit comment"},
+        {"id": 2, "body": f"{cr.COMMENT_MARKER}\nours"},
+    ])
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    assert cr.find_existing_comment_id(42) == 2
+
+
+def test_find_existing_comment_id_returns_none_on_failure(monkeypatch):
+    fake = _FakeGitHub(list_comments_ok=False)
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    assert cr.find_existing_comment_id(42) is None
 
 
 def test_run_degrades_honestly_when_head_and_files_both_fail(monkeypatch):

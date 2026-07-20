@@ -69,9 +69,30 @@ This repo's real, adopted security/design laws (not aspirational):
 
 MAX_DIFF_CHARS = 40000  # same courtesy-truncation pattern agents/run.py's market_context already uses
 
+# Hidden marker identifying VAPE Reviewer's own comment on a PR, so re-runs
+# (triggered on `synchronize` — every push) update that one comment in place
+# instead of piling up a new comment per push. Directly modeled on CodeRabbit's
+# own observed behavior on this repo: one evolving comment per PR, edited
+# across pushes, not a new one each time.
+COMMENT_MARKER = "<!-- vape-reviewer:auto -->"
+
 
 def _gh():
     return GitHubMCPWrapper()
+
+
+def find_existing_comment_id(pr_number):
+    """This bot's own prior comment on the PR, if any (identified by
+    COMMENT_MARKER), so post_review_comment can edit it in place. Returns
+    None on any failure — falls back to creating a new comment, never
+    raises."""
+    ok, comments = _gh().list_issue_comments(REPO_SLUG, pr_number)
+    if not ok:
+        return None
+    for c in comments:
+        if COMMENT_MARKER in (c.get("body") or ""):
+            return c.get("id")
+    return None
 
 
 def fetch_pr_head_and_files(pr_number):
@@ -174,7 +195,14 @@ def review_pr_diff(diff, deterministic_findings):
 
 
 def post_review_comment(pr_number, body):
-    return _gh().create_pr_comment(REPO_SLUG, pr_number, body)
+    """Updates this bot's own existing comment on the PR in place if one is
+    found (via COMMENT_MARKER), otherwise creates it — so `synchronize`
+    re-runs on every push don't pile up a new comment each time."""
+    body_with_marker = f"{COMMENT_MARKER}\n{body}"
+    existing_id = find_existing_comment_id(pr_number)
+    if existing_id:
+        return _gh().update_issue_comment(REPO_SLUG, existing_id, body_with_marker)
+    return _gh().create_pr_comment(REPO_SLUG, pr_number, body_with_marker)
 
 
 def build_comment_body(deterministic_findings, llm_text, llm_provider):
