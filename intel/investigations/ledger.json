@@ -2319,6 +2319,25 @@
     "symbol": "AERO",
     "times_investigated": 1
   },
+  "8453:0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
+    "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+    "chain": "8453",
+    "creator_address": "0xce97003ea2e0a565a9a0b6e36209c6ddaaa14b05",
+    "first_investigated": "2026-07-20T13:09:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-130922-0xcbB7C000.md",
+        "score": 74,
+        "ts": "2026-07-20T13:09:22Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-20T13:09:22Z",
+    "last_score": 74,
+    "last_verdict": "CAUTION",
+    "symbol": "cbBTC",
+    "times_investigated": 1
+  },
   "8453:0xcc67e54fc715246e5b27a97e69747ecd4c6375b6": {
     "address": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
     "chain": "8453",

@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-20T11:47:05Z — 26 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-20T13:09:22Z — 27 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| cbBTC | Base | `0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf` | 74/100 | 1 | 2026-07-20T13:09:22Z |
 | ERC20Token | Base | `0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6` | 70/100 | 4 | 2026-07-20T11:47:05Z |
 | ContentCoin | Base | `0x31A626996E36a302b06b27283C561d5926db6b7c` | 70/100 | 3 | 2026-07-20T11:46:42Z |
 | BASE | Base | `0xd07379a755A8f11B57610154861D694b2A0f615a` | 68/100 | 2 | 2026-07-20T11:46:27Z |

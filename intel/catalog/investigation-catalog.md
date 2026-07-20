@@ -347,3 +347,5 @@
 | 2026-07-20 | auto | 0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf (ZORS) | deep_investigation | CAUTION (55/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-20 | auto | 0x08574906C462A0B8dA0786ca061E0C2e0C644cA0 (PLAY) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-20 | auto | 0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf (cbBTC) | deep_investigation | CAUTION (74/100) | Upgradeable proxy (verify implementation) | +7d |
