@@ -921,6 +921,25 @@
     "symbol": "PLAY",
     "times_investigated": 1
   },
+  "8453:0x08574906c462a0b8da0786ca061e0c2e0c644ca0": {
+    "address": "0x08574906C462A0B8dA0786ca061E0C2e0C644cA0",
+    "chain": "8453",
+    "creator_address": "0x2618c1357ccde5563b97962875632e0336febe67",
+    "first_investigated": "2026-07-20T10:55:04Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-105504-0x08574906.md",
+        "score": 28,
+        "ts": "2026-07-20T10:55:04Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T10:55:04Z",
+    "last_score": 28,
+    "last_verdict": "REJECT",
+    "symbol": "PLAY",
+    "times_investigated": 1
+  },
   "8453:0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b": {
     "address": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b",
     "chain": "8453",

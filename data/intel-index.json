@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T10:15:33Z",
+  "generated": "2026-07-20T10:55:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 308,
@@ -15,7 +15,7 @@
       "mainnet": 1
     },
     "broadcasts": 88,
-    "investigations": 247,
+    "investigations": 248,
     "tools": 16,
     "tools_verified": 16,
     "skills": 15
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260720-074137-0x5110EE17.md",
-      "title": "Investigation \u2014 ZORS",
-      "symbol": "ZORS",
-      "name": "ZORS: Eternal Duality Orb",
-      "date": "2026-07-20T07:41:37Z",
-      "target": "0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf",
+      "file": "investigation-20260720-105504-0x08574906.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "Play",
+      "date": "2026-07-20T10:55:04Z",
+      "target": "0x08574906C462A0B8dA0786ca061E0C2e0C644cA0",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 2.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced facto",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-074137-0x5110EE17.md"
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: GITLAWB (0xB73a50850680c66CF6C14e5276A7f6149f0b7f63) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $29,936; [-10] Pair 11.7 days old \u2014 under two weeks, no track record yet; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-105504-0x08574906.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260720-105504-0x08574906.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "Play",
+      "date": "2026-07-20T10:55:04Z",
+      "target": "0x08574906C462A0B8dA0786ca061E0C2e0C644cA0",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: GITLAWB (0xB73a50850680c66CF6C14e5276A7f6149f0b7f63) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $29,936; [-10] Pair 11.7 days old \u2014 under two weeks, no track record yet; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-105504-0x08574906.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260720-074137-0x5110EE17.md",
@@ -593,20 +607,6 @@
       "score": "37",
       "summary": "Risk factors: [-10] Owner not renounced (0xaff5289591653038340645fdc1e1ed3a3b52e436) \u2014 can still act on the contract; [-8] Low holder count (125); [-25] Very low liquidity $77 (rug/illiquid); [-10] Low liquidity $77; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-212204-0x43976a12.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260717-200733-0x4c433F4E.md",
-      "title": "Investigation \u2014 TSG",
-      "symbol": "TSG",
-      "name": "the sleeping giant",
-      "date": "2026-07-17T20:07:33Z",
-      "target": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-10] Violent 24h move +444% (volatility/manipulation). Positive evidence: 4062 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260717-200733-0x4c433F4E.md"
     }
   ],
   "reports": [
