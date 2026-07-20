@@ -17,19 +17,17 @@
  * array, exactly the way the 6 security offerings work.
  */
 import * as dl from "./lib/defillama";
-import * as codex from "./lib/codex";
 import * as predictionMarkets from "./lib/predictionMarkets";
-
-// Chain slug -> Codex's numeric network id (same ids as EVM chainIds).
-const CHAIN_NETWORK_IDS: Record<string, number> = {
-  base: codex.BASE_NETWORK_ID, ethereum: 1, arbitrum: 42161, optimism: 10, polygon: 137,
-};
+import { getPortfolio } from "./lib/alchemy";
+import { getCurrentPrices } from "./lib/coingecko";
+import { estimateCostBasis } from "./lib/costBasis";
 
 // Structural subset of worker/src/index.ts's `Env` — avoids a circular
 // import (index.ts imports this file) while still typechecking `c.env`
 // (a superset) at every call site.
 export interface DlEnv {
-  CODEX_API_KEY?: string;
+  ALCHEMY_API_KEY?: string;
+  COINGECKO_API_KEY?: string;
 }
 
 export interface DlQuery {
@@ -274,42 +272,80 @@ export const DL_OFFERINGS: DlOffering[] = [
     run: async () => dl.bridges(),
   },
   {
+    // Originally Codex-backed (walletBalances/detailedWalletStats/walletChart),
+    // rebuilt on Alchemy + CoinGecko after Codex's own API rejected every one
+    // of those three fields with "Not authorized: please upgrade your plan" —
+    // real wallet-level analytics is gated behind a paid Codex plan, unlike
+    // the free token-market-data queries (filterTokens/holders) the trending/
+    // new-launches/virtuals-snapshot routes use. Two real buyers were charged
+    // $0.25 for a failure before this was caught (see worker's settlement fix
+    // in the same PR — a handler failure no longer settles payment either
+    // way, but this rebuild is what actually makes the offering deliver).
+    // Reuses the exact same free-tier pipeline /cost-basis already runs in
+    // production: getPortfolio() (Alchemy) for current holdings,
+    // getCurrentPrices() (CoinGecko) for USD value, estimateCostBasis() for
+    // a per-token first-acquisition-price P&L estimate — see lib/costBasis.ts
+    // for exactly what this does and doesn't compute. This is UNREALIZED P&L
+    // on current holdings (current value vs. price when first received),
+    // not REALIZED profit from actual sells — a materially smaller claim
+    // than Codex's realizedProfitUsd would have been, stated honestly rather
+    // than implied. Base mainnet only (Alchemy's setup here is Base-only).
     name: "wallet_pnl_deepdive",
     price: "$0.25",
-    description: "A real wallet P&L deep-dive via Codex: current token balances with USD values, "
-      + "realized profit/loss (USD and %), total trade volume, tokens traded, and a realized-P&L "
-      + "chart series over time — not a single-acquisition-point cost-basis estimate.",
+    description: "A real wallet holdings + P&L estimate via Alchemy + CoinGecko: current token "
+      + "balances with USD values, and an unrealized-P&L estimate per holding (current value vs. "
+      + "price at first incoming transfer) — an approximation, not full trade-by-trade accounting. "
+      + "Base mainnet only.",
     tags: ["wallet", "pnl", "portfolio", "base"],
     inputSchema: {
-      properties: {
-        address: { type: "string", description: "wallet address" },
-        chain: { type: "string", description: "chain slug, default 'base'" },
-      },
+      properties: { address: { type: "string", description: "wallet address" } },
       required: ["address"],
     },
-    inputExample: { address: "0x0000000000000000000000000000000000000000", chain: "base" },
+    inputExample: { address: "0x0000000000000000000000000000000000000000" },
     output: {
-      address: "0x...", network_id: 8453,
-      balances: { items: [{ symbol: "AERO", shiftedBalance: 120.5, balanceUsd: 45.6 }] },
-      pnl: { realized_profit_usd: 1234.5, realized_profit_pct: 12.3, volume_usd: 50000, tokens_traded: 7 },
-      pnl_chart: { points: [{ timestamp: 1720000000, realizedProfitUsd: 100 }] },
+      address: "0x...",
+      eth_balance: 0.42,
+      balances: { items: [{ symbol: "AERO", contractAddress: "0x...", balance: 120.5, valueUsd: 45.6 }] },
+      pnl_estimate: {
+        method: "first-acquisition-estimate",
+        total_current_value_usd: 45.6,
+        total_pnl_usd: 12.3,
+        tokens_priced: 3,
+        per_token: [{ symbol: "AERO", acquiredAt: "2026-01-01T00:00:00.000Z", costBasisUsd: 33.3, currentValueUsd: 45.6, pnlUsd: 12.3, pnlPct: 36.9 }],
+      },
     },
     run: async (q, env) => {
       const a = requireAddress(q);
-      const networkId = CHAIN_NETWORK_IDS[String(q.chain || "base").toLowerCase()] ?? codex.BASE_NETWORK_ID;
-      const [balances, pnl, pnlChart] = await Promise.all([
-        codex.walletBalances(env.CODEX_API_KEY, a, [networkId]),
-        codex.walletPnlStats(env.CODEX_API_KEY, a, networkId),
-        codex.walletPnlChart(env.CODEX_API_KEY, a, networkId),
-      ]);
-      // Codex functions never throw (design law: real data or an honest
-      // {error} object) — but that means a missing key/upstream miss would
-      // otherwise sail through as a "successful" $0.25 deliverable. Surface
-      // it as a real failure so the buyer isn't charged for an error.
-      for (const r of [balances, pnl, pnlChart]) {
-        if (r && typeof r === "object" && "error" in r) throw new Error(String((r as { error: unknown }).error));
+      if (!env.ALCHEMY_API_KEY || !env.COINGECKO_API_KEY) {
+        throw new Error("wallet P&L estimate requires ALCHEMY_API_KEY and COINGECKO_API_KEY to be configured");
       }
-      return { address: a, network_id: networkId, balances, pnl, pnl_chart: pnlChart };
+      const portfolio = await getPortfolio(env, a);
+      const priced = await getCurrentPrices(env, portfolio.tokens.map((t) => t.contractAddress.toLowerCase()));
+      const balanceItems = portfolio.tokens
+        .map((t) => ({
+          symbol: t.symbol,
+          contractAddress: t.contractAddress,
+          balance: t.balance,
+          valueUsd: t.balance * (priced[t.contractAddress.toLowerCase()]?.usd ?? 0),
+        }))
+        .filter((t) => t.balance > 0);
+      const tokensForEstimate = portfolio.tokens
+        .map((t) => ({ contractAddress: t.contractAddress, symbol: t.symbol, currentBalance: t.balance, currentPriceUsd: priced[t.contractAddress.toLowerCase()]?.usd ?? 0 }))
+        .filter((t) => t.currentBalance > 0 && t.currentPriceUsd > 0);
+      const perToken = await estimateCostBasis(env, a, tokensForEstimate);
+      const priceable = perToken.filter((r) => r.pnlUsd != null);
+      return {
+        address: a,
+        eth_balance: portfolio.ethBalance,
+        balances: { items: balanceItems },
+        pnl_estimate: {
+          method: "first-acquisition-estimate",
+          total_current_value_usd: priceable.reduce((s, r) => s + r.currentValueUsd, 0),
+          total_pnl_usd: priceable.length ? priceable.reduce((s, r) => s + (r.pnlUsd ?? 0), 0) : null,
+          tokens_priced: priceable.length,
+          per_token: perToken,
+        },
+      };
     },
   },
   {

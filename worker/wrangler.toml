@@ -45,24 +45,33 @@ VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"
 # missing, which the facilitator will reject with 401.
 #
 # ALCHEMY_API_KEY: a free-tier Alchemy app key scoped to Base Mainnet
-# (dashboard.alchemy.com), used only by the free /portfolio, /nfts,
-# /network-status, and /cost-basis routes (src/lib/alchemy.ts) — never by
-# the priced /scan/* offerings. Without it those routes return 503 and the
-# site falls back to its direct public-RPC path.
+# (dashboard.alchemy.com), used by the free /portfolio, /nfts,
+# /network-status, and /cost-basis routes (src/lib/alchemy.ts), and by the
+# priced /data/wallet_pnl_deepdive offering (dataHandlers.ts) — rebuilt onto
+# Alchemy after Codex's wallet-analytics fields turned out to be gated
+# behind a paid Codex plan ("Not authorized: please upgrade your plan").
+# Without it those routes return 503/error and the free ones fall back to
+# their direct public-RPC path.
 #
 # COINGECKO_API_KEY: a free CoinGecko Demo API key (coingecko.com/en/api —
 # no payment required, just a signup), used by /prices (better rate-limit
-# headroom than the fully anonymous public API) and /cost-basis (needs
-# CoinGecko's historical-price-by-contract endpoint, which requires this key
-# — that endpoint 403s without one). Both routes 503 without it.
+# headroom than the fully anonymous public API), /cost-basis, and
+# /data/wallet_pnl_deepdive (needs CoinGecko's historical-price-by-contract
+# endpoint, which requires this key — that endpoint 403s without one).
+# Without it those routes return 503/error.
 #
 # CODEX_API_KEY: a Codex.io GraphQL API key (dashboard.codex.io — free tier),
-# used only by the free /virtuals-snapshot and /trending-base routes
-# (src/lib/codex.ts). Codex requires a bearer key that can't ship to the
-# browser, unlike the keyless DefiLlama/CoinGecko calls the site makes
-# directly elsewhere — so this is a real, separate secret, not optional
-# polish. Without it those two routes return 503 and the corresponding site
-# panels show as unavailable.
+# used by the free /virtuals-snapshot, /trending-base, and /new-launches
+# routes (src/lib/codex.ts) — token-market-data queries only (filterTokens/
+# holders/getBars), which Codex's free tier does serve. NOT used by
+# /data/wallet_pnl_deepdive — that offering was rebuilt onto Alchemy +
+# CoinGecko after Codex rejected its wallet-analytics fields
+# (balances/detailedWalletStats/walletChart) with "Not authorized: please
+# upgrade your plan", a paid-plan gate, not a bug. Codex requires a bearer
+# key that can't ship to the browser, unlike the keyless DefiLlama/CoinGecko
+# calls the site makes directly elsewhere — so this is a real, separate
+# secret, not optional polish. Without it those three routes return 503 and
+# the corresponding site panels show as unavailable.
 #
 # GH_DISPATCH_TOKEN: a fine-grained GitHub PAT scoped to jUXTAPOSITION1/V.A.P.E
 # with "Actions: write" + "Contents: read", used only by /scan/bounty_deep_dive
