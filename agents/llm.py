@@ -592,8 +592,14 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
     code: the candidate path only activates when VAPE_VERTEX_ACCESS_TOKEN is
     actually set in that run's environment, which is a separate, deliberate
     rollout decision (e.g. adding the WIF auth step to a workflow), not
-    something this function does on its own."""
-    if os.getenv("VAPE_VERTEX_ACCESS_TOKEN"):
+    something this function does on its own.
+
+    search=True skips this direct Vertex call too and goes straight to
+    ask() — Vertex's generateContent request built in _call_vertex_tuned()
+    has no search-grounding equivalent wired here, so (same reasoning as
+    ask_oci_grok() above) a request for live search has to route around
+    it to reach a provider that actually has it."""
+    if os.getenv("VAPE_VERTEX_ACCESS_TOKEN") and not search:
         try:
             text, usage = _call_vertex_tuned(system, user, temperature, max_tokens, timeout)
             _log_usage("vertex_tuned", "vape-gemini-tuned", "fast", usage)
@@ -723,9 +729,21 @@ def ask_oci_grok(system, user, *, temperature=0.7, max_tokens=2048, timeout=45,
     of the chain (via ask_vertex_candidate()'s own identical contract) —
     pass the caller's own normal tier/provider_order so a run where neither
     OCI nor Vertex is configured degrades to EXACTLY its prior behavior.
-    search similarly only matters once/if the chain reaches ask()'s xai_1
-    provider — see ask()'s own docstring for what it actually does."""
-    if os.getenv("OCI_GENAI_API_KEY"):
+
+    search=True skips straight past OCI Grok's own direct call to
+    ask_vertex_candidate() (which itself does the same for Vertex-tuned
+    Gemini, see its docstring) rather than trying it first: confirmed real
+    bug this closes — OCI_GENAI_API_KEY is configured in every real
+    production workflow in this repo (OCI Grok is VAPE's primary reasoning
+    route by explicit 2026-07-19 direction), so ask_oci_grok() was winning
+    the race and returning at the OCI branch below on every single call,
+    every caller's search=True never actually reaching ask()'s xai_1
+    provider at all — search_parameters is an xAI Live Search feature, and
+    OCI's OpenAI-compatible endpoint has no equivalent, so a request for
+    live search has to route around a provider that can't provide it. A
+    caller not asking for search (the default) is completely unaffected —
+    OCI Grok is still tried first exactly as before."""
+    if os.getenv("OCI_GENAI_API_KEY") and not search:
         cap = _oci_grok_daily_cap_usd()
         spend = _todays_paid_spend_usd("oci_grok")
         if spend >= cap:

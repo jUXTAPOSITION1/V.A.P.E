@@ -164,6 +164,28 @@ class TestSearchThreadsThroughFallbackChain:
     real fallback chain used by every report-generating call site, so each
     must forward the kwarg rather than silently dropping it."""
 
+    def test_ask_vertex_candidate_skips_direct_call_when_search_true_even_with_token(self, monkeypatch):
+        """Same class of bug as ask_oci_grok()'s OCI branch: Vertex's own
+        generateContent call has no search-grounding equivalent, so
+        search=True must route around it even when VAPE_VERTEX_ACCESS_TOKEN
+        is configured, rather than the token winning the race."""
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-vertex-token")
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            hostname = urllib.parse.urlparse(req.full_url).hostname
+            if "aiplatform" in hostname:
+                raise AssertionError("search=True must not call Vertex's endpoint at all")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai with search")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys", "usr", tier="frontier",
+                                                        provider_order=llm.FRONTIER_ORDER, search=True)
+        assert provider == "xai_1"
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
     def test_ask_vertex_candidate_forwards_search(self, monkeypatch):
         monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
         monkeypatch.setenv("XAI_API_KEY_1", "key1")
@@ -665,6 +687,44 @@ class TestOciGrok:
             text, provider = llm.ask_oci_grok("sys", "usr")
         assert provider == "groq" and text == "via groq"
         assert len(calls) == 2
+
+    def test_search_true_skips_oci_direct_call_even_when_key_set(self, monkeypatch):
+        """Confirmed real bug this pins: OCI_GENAI_API_KEY is configured in
+        every real production workflow (OCI Grok is VAPE's primary
+        reasoning route), so ask_oci_grok() was winning the race and
+        returning at its own OCI branch on every call — meaning every
+        caller's search=True never actually reached ask()'s xai_1 provider
+        at all, silently making the entire Live Search rollout a no-op in
+        production. OCI's endpoint has no search-grounding equivalent, so
+        search=True must route around it."""
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+        monkeypatch.setenv("XAI_API_KEY_1", "key1")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            hostname = urllib.parse.urlparse(req.full_url).hostname
+            if hostname.startswith("inference.generativeai"):
+                raise AssertionError("search=True must not call OCI Grok's endpoint at all")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_response("via xai with search")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr", tier="frontier",
+                                               provider_order=llm.FRONTIER_ORDER, search=True)
+        assert provider == "xai_1"
+        assert captured["body"]["search_parameters"] == {"mode": "auto", "return_citations": True}
+
+    def test_search_false_still_reaches_oci_when_key_set(self, monkeypatch):
+        """The fix must not change any existing search=False (default)
+        behavior — OCI Grok is still tried first exactly as before."""
+        monkeypatch.setenv("OCI_GENAI_API_KEY", "fake-oci-key")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_response("grok via oci")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_oci_grok("sys", "usr")
+        assert provider == "oci_grok" and text == "grok via oci"
 
     def test_fallback_honors_caller_supplied_tier_and_provider_order(self, monkeypatch):
         monkeypatch.delenv("OCI_GENAI_API_KEY", raising=False)
