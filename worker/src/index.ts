@@ -1202,6 +1202,13 @@ app.get("/scan/bulk_safety_bundle", async (c) => {
   const raw = c.req.query("addresses") || "";
   const chain = c.req.query("chain");
   const chainId = chain ? Number(chain) : 8453;
+  // Unlike tx_decode (where a bad chain surfaces as a real upstream error and
+  // never settles), bulkSafetyBundle's per-address fulfill() calls don't
+  // necessarily fail on a garbage chain id — reject it here instead of
+  // settling a $0.50 payment against an all-error batch.
+  if (!Number.isInteger(chainId) || chainId <= 0) {
+    return c.json({ offering: "bulk_safety_bundle", status: "error", error: "invalid chain id" }, 400);
+  }
   const addresses = raw.split(",").map((a) => a.trim()).filter(Boolean);
   const invalid = addresses.filter((a) => !ADDRESS_RE.test(a));
   if (invalid.length) {

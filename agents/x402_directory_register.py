@@ -182,6 +182,12 @@ BOUNTY_OFFERINGS = {
     "bounty_deep_dive": ("1.00", "Submission-ready bug-bounty PoC: real recon + Slither/Halmos/"
                        "Mythril/Aderyn (when available) + a frontier-LLM source review, for a "
                        "Base/EVM contract address or an external bounty program's own GitHub repo."),
+    # Address-only alias of the exact same pipeline above (see
+    # worker/src/index.ts's DEEP_CONTRACT_AUDIT_PRICE/dispatchAddressAuditJob)
+    # — its own x402 listing/name since that's how ACP already knows it.
+    "deep_contract_audit": ("1.00", "slither+aderyn+mythril severity-rated audit + 0-100 score "
+                       "for a Base/EVM contract address — the same real-tool pipeline as "
+                       "bounty_deep_dive, address-only."),
 }
 
 # (name, (price, desc), route_prefix) across all tiers — one place that knows
