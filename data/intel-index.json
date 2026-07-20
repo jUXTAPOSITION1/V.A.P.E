@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T16:20:50Z",
+  "generated": "2026-07-20T17:03:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 316,
@@ -630,7 +630,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 15:14 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-20-15.md",
-      "bytes": 3187
+      "bytes": 3189
     },
     {
       "kind": "intel",
@@ -652,7 +652,7 @@
       "threat": null,
       "summary": "The feed shows 7 incidents across the last 7 days, all below the $50M threshold, with the largest losses coming from BonkDAO ($21.3M, malicious governance proposal on Solana) and Ostium ($18.0M, price oracle manipulation on Arbitrum). Other events include BarnBridge ($0.776M, malicious governance on Ethereum), Bonzo Lend ($10.05M, price o",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-14.md",
-      "bytes": 5412
+      "bytes": 5414
     },
     {
       "kind": "intel",
@@ -663,7 +663,7 @@
       "threat": null,
       "summary": "Real check: searched for a live Virtuals Protocol Immunefi listing this cycle. No matching immunefi.com listing found in this cycle's search results.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/bug-bounty-intel-2026-07-20-13.md",
-      "bytes": 3056
+      "bytes": 2934
     },
     {
       "kind": "intel",
@@ -674,7 +674,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 12:12 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live Basescan/Etherscan V2 verified source fetch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-07-20-12.md",
-      "bytes": 3039
+      "bytes": 2917
     },
     {
       "kind": "intel",
@@ -685,7 +685,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-20-11.md",
-      "bytes": 1803
+      "bytes": 1805
     },
     {
       "kind": "intel",
@@ -696,7 +696,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 11:38 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-20-11.md",
-      "bytes": 3679
+      "bytes": 3681
     },
     {
       "kind": "intel",
@@ -707,7 +707,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 10:15 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-20-10.md",
-      "bytes": 2959
+      "bytes": 2961
     },
     {
       "kind": "intel",
@@ -718,7 +718,7 @@
       "threat": null,
       "summary": "The real incident feed shows 7 incidents in the last 7 days (2026-07-11 through 2026-07-17), with zero incidents reaching or exceeding $50M in the prior 14 days. The incidents span Solana (Across, DefiTuna Lending), Arbitrum (Ostium $18.0M price oracle manipulation, Lumi Finance $0.27M silent auto-approval hack), Ethereum (BarnBridge $0.7",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-09.md",
-      "bytes": 5466
+      "bytes": 5468
     },
     {
       "kind": "intel",
@@ -729,7 +729,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 06:08 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-20-06.md",
-      "bytes": 3383
+      "bytes": 3385
     },
     {
       "kind": "intel",
@@ -740,7 +740,7 @@
       "threat": null,
       "summary": "Date: 2026-07-20 04:38 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-20-04.md",
-      "bytes": 3121
+      "bytes": 3123
     },
     {
       "kind": "intel",
@@ -751,7 +751,7 @@
       "threat": null,
       "summary": "The provided feed shows 7 incidents within the last 7 days, all under the $50M threshold, with a total of 14 tracked events across the broader window. The largest recent losses were Ostium ($18.0M, Arbitrum, Price Oracle Manipulation), BonkDAO ($21.3M, Solana, Malicious Governance Proposal), and Bonzo Lend ($10.05M, Hedera, Price Oracle M",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-20-03.md",
-      "bytes": 5203
+      "bytes": 5205
     },
     {
       "kind": "intel",
@@ -762,7 +762,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-19-21.md",
-      "bytes": 1860
+      "bytes": 1862
     },
     {
       "kind": "intel",
@@ -773,7 +773,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 21:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-21.md",
-      "bytes": 3307
+      "bytes": 3309
     },
     {
       "kind": "intel",
@@ -784,7 +784,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 20:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-19-20.md",
-      "bytes": 3196
+      "bytes": 3198
     },
     {
       "kind": "intel",
@@ -795,7 +795,7 @@
       "threat": null,
       "summary": "The feed records 7 incidents in the last 7 days and zero incidents at or above $50M in the last 14 days. The largest single loss shown is the $18.0M Ostium price-oracle manipulation on Arbitrum; the next-largest is the $10.05M Bonzo Lend oracle attack on Hedera. Two malicious-governance proposals appear (BarnBridge $0.776M on Ethereum, Bo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-19-19.md",
-      "bytes": 5213
+      "bytes": 5215
     },
     {
       "kind": "intel",
@@ -806,7 +806,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 15:49 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-15.md",
-      "bytes": 3510
+      "bytes": 3512
     },
     {
       "kind": "intel",
@@ -817,7 +817,7 @@
       "threat": null,
       "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.75%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-15.md",
-      "bytes": 2123
+      "bytes": 2125
     },
     {
       "kind": "intel",
@@ -828,7 +828,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 14:25 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-19-14.md",
-      "bytes": 3192
+      "bytes": 3194
     },
     {
       "kind": "intel",
@@ -839,7 +839,7 @@
       "threat": null,
       "summary": "The feed shows exactly 7 incidents in the last 7 days, all under $50M, with the largest being Ostium ($18.0M, price oracle manipulation on Arbitrum) and Bonzo Lend ($10.05M, price oracle manipulation on Hedera). Other events include DefiTuna Lending ($0.58M on Solana), BarnBridge ($0.776M, malicious governance proposal on Ethereum), Drips",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-19-13.md",
-      "bytes": 5581
+      "bytes": 5583
     },
     {
       "kind": "intel",
@@ -850,7 +850,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 10:20 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-10.md",
-      "bytes": 2874
+      "bytes": 2876
     },
     {
       "kind": "intel",
@@ -861,7 +861,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-19-09.md",
-      "bytes": 1601
+      "bytes": 1603
     },
     {
       "kind": "intel",
@@ -872,7 +872,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 09:07 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-19-09.md",
-      "bytes": 2987
+      "bytes": 2989
     },
     {
       "kind": "intel",
@@ -883,7 +883,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 05:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-05.md",
-      "bytes": 2905
+      "bytes": 2907
     },
     {
       "kind": "intel",
@@ -894,7 +894,7 @@
       "threat": null,
       "summary": "Date: 2026-07-19 04:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-19-04.md",
-      "bytes": 3028
+      "bytes": 3030
     },
     {
       "kind": "intel",
@@ -905,7 +905,7 @@
       "threat": null,
       "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.89%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-01.md",
-      "bytes": 2133
+      "bytes": 2135
     },
     {
       "kind": "intel",
@@ -916,7 +916,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 21:41 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-21.md",
-      "bytes": 2659
+      "bytes": 2664
     },
     {
       "kind": "intel",
@@ -927,7 +927,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-18-20.md",
-      "bytes": 1822
+      "bytes": 1827
     },
     {
       "kind": "intel",
@@ -938,7 +938,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 20:05 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-20.md",
-      "bytes": 2351
+      "bytes": 2356
     },
     {
       "kind": "intel",
@@ -949,7 +949,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-15.md",
-      "bytes": 3324
+      "bytes": 3329
     },
     {
       "kind": "intel",
@@ -960,7 +960,7 @@
       "threat": null,
       "summary": "Computed deterministically from real Fear & Greed (25) and global market cap 24h change (0.84%).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-18-15.md",
-      "bytes": 1984
+      "bytes": 1989
     },
     {
       "kind": "intel",
@@ -971,7 +971,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 14:21 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-14.md",
-      "bytes": 2278
+      "bytes": 2283
     },
     {
       "kind": "intel",
@@ -982,7 +982,7 @@
       "threat": null,
       "summary": "The last 7 days recorded 8 incidents totaling roughly $30.6M in losses across Solana, Arbitrum, Ethereum, Hedera, Polygon, and BSC. The two largest were BonkDAO ($21.3M, malicious governance proposal on Solana) and Ostium ($18M, price oracle manipulation on Arbitrum). Other notable entries include Bonzo Lend ($10.05M, price oracle manipul",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-18-13.md",
-      "bytes": 5626
+      "bytes": 5631
     },
     {
       "kind": "intel",
@@ -993,7 +993,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 10:12 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-10.md",
-      "bytes": 3217
+      "bytes": 3222
     },
     {
       "kind": "intel",
@@ -1004,7 +1004,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-18-09.md",
-      "bytes": 2020
+      "bytes": 2025
     },
     {
       "kind": "intel",
@@ -1015,7 +1015,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 08:50 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-08.md",
-      "bytes": 2385
+      "bytes": 2390
     },
     {
       "kind": "intel",
@@ -1026,7 +1026,7 @@
       "threat": null,
       "summary": "The real incident feed shows 8 events in the last 7 days, all under $50 M, with the largest single loss being the $18.0 M Ostium price-oracle manipulation on Arbitrum. The remaining incidents comprise two malicious-governance proposals (BarnBridge $0.776 M on Ethereum, BonkDAO $21.3 M on Solana), one donation attack (Lazy Summer $6.0 M on",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-18-07.md",
-      "bytes": 5845
+      "bytes": 5850
     },
     {
       "kind": "intel",
@@ -1037,7 +1037,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 05:17 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-05.md",
-      "bytes": 3043
+      "bytes": 3048
     },
     {
       "kind": "intel",
@@ -1048,7 +1048,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 03:47 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-18-03.md",
-      "bytes": 1450
+      "bytes": 1434
     },
     {
       "kind": "intel",
@@ -1059,7 +1059,7 @@
       "threat": null,
       "summary": "Date: 2026-07-18 03:57 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-03.md",
-      "bytes": 2276
+      "bytes": 2281
     },
     {
       "kind": "intel",
@@ -1070,7 +1070,7 @@
       "threat": null,
       "summary": "The feed records 8 incidents over the last 7 days, all under $50 M, with the largest being Ostium ($18.0 M, Arbitrum, price oracle manipulation) and BonkDAO ($21.3 M, Solana, malicious governance proposal). Other events cluster around similar vectors: two additional oracle manipulations (Bonzo Lend on Hedera, Edel on Ethereum), two govern",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-18-02.md",
-      "bytes": 5850
+      "bytes": 5855
     },
     {
       "kind": "bounty",
@@ -1092,7 +1092,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 21:43 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-17-21.md",
-      "bytes": 2842
+      "bytes": 2847
     },
     {
       "kind": "intel",
@@ -1103,7 +1103,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-17-21.md",
-      "bytes": 1786
+      "bytes": 1791
     },
     {
       "kind": "intel",
@@ -1114,7 +1114,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 21:31 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-17-21.md",
-      "bytes": 1878
+      "bytes": 1862
     },
     {
       "kind": "intel",
@@ -1125,7 +1125,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 20:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-20.md",
-      "bytes": 2342
+      "bytes": 2347
     },
     {
       "kind": "intel",
@@ -1136,7 +1136,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 17:46 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-17-17.md",
-      "bytes": 1674
+      "bytes": 1658
     },
     {
       "kind": "intel",
@@ -1147,7 +1147,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 16:08 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-17-16.md",
-      "bytes": 2950
+      "bytes": 2955
     },
     {
       "kind": "intel",
@@ -1158,7 +1158,7 @@
       "threat": null,
       "summary": "Computed deterministically from real Fear & Greed (27) and global market cap 24h change (-2.49%).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-17-15.md",
-      "bytes": 1948
+      "bytes": 1953
     },
     {
       "kind": "intel",
@@ -1169,7 +1169,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 14:46 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-14.md",
-      "bytes": 2413
+      "bytes": 2418
     },
     {
       "kind": "intel",
@@ -1180,7 +1180,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 10:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-17-10.md",
-      "bytes": 2960
+      "bytes": 2965
     },
     {
       "kind": "intel",
@@ -1191,7 +1191,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-17-10.md",
-      "bytes": 1818
+      "bytes": 1823
     },
     {
       "kind": "intel",
@@ -1202,7 +1202,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 09:12 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-09.md",
-      "bytes": 2227
+      "bytes": 2232
     },
     {
       "kind": "intel",
@@ -1213,7 +1213,7 @@
       "threat": null,
       "summary": "The real incident feed shows 7 exploits over the 7-day window from 2026-07-11 to 2026-07-16. The largest were Ostium ($18.0M, Arbitrum, price oracle manipulation) and Bonzo Lend ($10.05M, Hedera, price oracle manipulation). The remaining five were smaller: DefiTuna Lending ($0.58M, Solana), BarnBridge ($0.776M, Ethereum, malicious governa",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-17-08.md",
-      "bytes": 6058
+      "bytes": 6063
     },
     {
       "kind": "intel",
@@ -1224,7 +1224,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 05:34 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-17-05.md",
-      "bytes": 3038
+      "bytes": 3043
     },
     {
       "kind": "intel",
@@ -1235,7 +1235,7 @@
       "threat": null,
       "summary": "Date: 2026-07-17 04:10 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-04.md",
-      "bytes": 2083
+      "bytes": 2088
     },
     {
       "kind": "intel",
@@ -1246,7 +1246,7 @@
       "threat": null,
       "summary": "The feed shows 7 incidents in the last 7 days, all under $50M, with a cumulative loss profile dominated by two larger events (Ostium at $18.0M via price oracle manipulation on Arbitrum and Bonzo Lend at $10.05M via price oracle manipulation on Hedera). The remaining five incidents cluster on Ethereum and involve distinct vectors: maliciou",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-17-02.md",
-      "bytes": 6297
+      "bytes": 6302
     },
     {
       "kind": "intel",
@@ -1257,7 +1257,7 @@
       "threat": null,
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-16-21.md",
-      "bytes": 1903
+      "bytes": 1908
     },
     {
       "kind": "intel",
@@ -1268,7 +1268,7 @@
       "threat": null,
       "summary": "Date: 2026-07-16 21:57 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-16-21.md",
-      "bytes": 3176
+      "bytes": 3181
     }
   ],
   "broadcasts": [
