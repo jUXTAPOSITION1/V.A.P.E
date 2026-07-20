@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-19T19:08:33Z",
-  "source_report": "intel/reports/security-2026-07-19-19.md",
+  "generated_at": "2026-07-20T09:16:53Z",
+  "source_report": "intel/reports/security-2026-07-20-09.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -129,13 +129,6 @@
       ],
       "technique": "Malicious Governance Proposal",
       "source_url": null,
-      "lesson": {
-        "pattern": "governance",
-        "label": "Malicious governance proposal or vote manipulation",
-        "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
-        "covered_by": null,
-        "out_of_scope": false
-      },
       "analysis_report": "intel/threat-analysis/2026-07-06-bonkdao.md"
     },
     {
@@ -589,41 +582,6 @@
       "technique": "Private Key Compromised",
       "source_url": null,
       "analysis_report": "intel/threat-analysis/2026-05-27-stake-dao.md"
-    },
-    {
-      "date": "2026-05-25",
-      "name": "WUSD.fi/Glove",
-      "amount_usd_m": 0.2,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "Sybil Abuse",
-      "source_url": null,
-      "analysis_report": "intel/threat-analysis/2026-05-25-wusd-fi-glove.md"
-    },
-    {
-      "date": "2026-05-25",
-      "name": "New Market Trading",
-      "amount_usd_m": 3.98,
-      "chains": [
-        "Ethereum",
-        "Base",
-        "Arbitrum"
-      ],
-      "technique": "Access Control Exploit",
-      "source_url": null,
-      "analysis_report": "intel/threat-analysis/2026-05-25-new-market-trading.md"
-    },
-    {
-      "date": "2026-05-25",
-      "name": "Bitmor",
-      "amount_usd_m": 0.01,
-      "chains": [
-        "Base"
-      ],
-      "technique": "Access Control Exploit",
-      "source_url": null,
-      "analysis_report": "intel/threat-analysis/2026-05-25-bitmor.md"
     }
   ]
 }

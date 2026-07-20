@@ -1,21 +1,4 @@
 {
-  "0x044098a1b8b8e175035842952986bea0e2333b07": {
-    "address": "0x044098A1b8B8e175035842952986bea0E2333B07",
-    "first_investigated": "2026-07-04T10:11:33Z",
-    "history": [
-      {
-        "report": "intel/investigations/investigation-20260704-101133-0x044098A1.md",
-        "score": 90,
-        "ts": "2026-07-04T10:11:33Z",
-        "verdict": "PROCEED"
-      }
-    ],
-    "last_investigated": "2026-07-04T10:11:33Z",
-    "last_score": 90,
-    "last_verdict": "PROCEED",
-    "symbol": "America250",
-    "times_investigated": 1
-  },
   "0x30ec37e22ff8865e2e439d84e7d2ffd58296db07": {
     "address": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
     "first_investigated": "2026-07-04T23:10:34Z",
@@ -48,23 +31,6 @@
     "last_score": 45,
     "last_verdict": "REJECT",
     "symbol": "Claude",
-    "times_investigated": 1
-  },
-  "0xdb879f458a56d1919ae7d12e4a9662b1d8a3e892": {
-    "address": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
-    "first_investigated": "2026-07-04T18:06:03Z",
-    "history": [
-      {
-        "report": "intel/investigations/investigation-20260704-180603-0xDB879F45.md",
-        "score": 88,
-        "ts": "2026-07-04T18:06:03Z",
-        "verdict": "PROCEED"
-      }
-    ],
-    "last_investigated": "2026-07-04T18:06:03Z",
-    "last_score": 88,
-    "last_verdict": "PROCEED",
-    "symbol": "CLAUDE",
     "times_investigated": 1
   },
   "10:0x1f32b1c2345538c0c6f582fcb022739c4a194ebb": {
@@ -116,13 +82,19 @@
         "score": 70,
         "ts": "2026-07-11T06:17:18Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114616-0x42000000.md",
+        "score": 78,
+        "ts": "2026-07-20T11:46:16Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-11T06:17:18Z",
-    "last_score": 70,
+    "last_investigated": "2026-07-20T11:46:16Z",
+    "last_score": 78,
     "last_verdict": "CAUTION",
     "symbol": "OP",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "10:0x9560e827af36c94d2ac33a39bce1fe78631088db": {
     "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
@@ -515,13 +487,19 @@
         "score": 85,
         "ts": "2026-07-06T21:47:46Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114546-0x25118290.md",
+        "score": 100,
+        "ts": "2026-07-20T11:45:46Z",
+        "verdict": "PROCEED"
       }
     ],
-    "last_investigated": "2026-07-06T21:47:46Z",
-    "last_score": 85,
+    "last_investigated": "2026-07-20T11:45:46Z",
+    "last_score": 100,
     "last_verdict": "PROCEED",
     "symbol": "RAIN",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "42161:0x3b8db18e69d6686ad9371a423afe3dd1065c94f1": {
     "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
@@ -864,6 +842,31 @@
     "symbol": "DOJI",
     "times_investigated": 1
   },
+  "8453:0x044098a1b8b8e175035842952986bea0e2333b07": {
+    "address": "0x044098A1b8B8e175035842952986bea0E2333B07",
+    "chain": "8453",
+    "creator_address": "0xd9acd656a5f1b519c9e76a2a6092265a74186e58",
+    "first_investigated": "2026-07-04T10:11:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260704-101133-0x044098A1.md",
+        "score": 90,
+        "ts": "2026-07-04T10:11:33Z",
+        "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114502-0x044098A1.md",
+        "score": 30,
+        "ts": "2026-07-20T11:45:02Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T11:45:02Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "America250",
+    "times_investigated": 2
+  },
   "8453:0x0531f1e647b5ca694012eab6be2a9215b4070ba3": {
     "address": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
     "chain": "8453",
@@ -917,6 +920,25 @@
     ],
     "last_investigated": "2026-07-08T14:12:26Z",
     "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "PLAY",
+    "times_investigated": 1
+  },
+  "8453:0x08574906c462a0b8da0786ca061e0c2e0c644ca0": {
+    "address": "0x08574906C462A0B8dA0786ca061E0C2e0C644cA0",
+    "chain": "8453",
+    "creator_address": "0x2618c1357ccde5563b97962875632e0336febe67",
+    "first_investigated": "2026-07-20T10:55:04Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-105504-0x08574906.md",
+        "score": 28,
+        "ts": "2026-07-20T10:55:04Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T10:55:04Z",
+    "last_score": 28,
     "last_verdict": "REJECT",
     "symbol": "PLAY",
     "times_investigated": 1
@@ -1096,13 +1118,19 @@
         "score": 73,
         "ts": "2026-07-13T12:06:27Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114653-0x2228B383.md",
+        "score": 43,
+        "ts": "2026-07-20T11:46:53Z",
+        "verdict": "REJECT"
       }
     ],
-    "last_investigated": "2026-07-13T12:06:27Z",
-    "last_score": 73,
-    "last_verdict": "CAUTION",
+    "last_investigated": "2026-07-20T11:46:53Z",
+    "last_score": 43,
+    "last_verdict": "REJECT",
     "symbol": "FAFO",
-    "times_investigated": 2
+    "times_investigated": 3
   },
   "8453:0x2376a4fc1ae90a329b4b41fbb7611b9e76b9eb07": {
     "address": "0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07",
@@ -1235,13 +1263,19 @@
         "score": 70,
         "ts": "2026-07-13T12:06:14Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114642-0x31A62699.md",
+        "score": 70,
+        "ts": "2026-07-20T11:46:42Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-13T12:06:14Z",
+    "last_investigated": "2026-07-20T11:46:42Z",
     "last_score": 70,
     "last_verdict": "CAUTION",
     "symbol": "ContentCoin",
-    "times_investigated": 2
+    "times_investigated": 3
   },
   "8453:0x3221baeb0c2745e39a1dba73cd413361b7f5fe13": {
     "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13",
@@ -1344,6 +1378,25 @@
     "symbol": "TSG",
     "times_investigated": 1
   },
+  "8453:0x5110ee173d24cc03c1e836c2558c3ddaabc485bf": {
+    "address": "0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf",
+    "chain": "8453",
+    "creator_address": "0x54e2acab04c89a3fe02852bf8dd69ee8f526bc75",
+    "first_investigated": "2026-07-20T07:41:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-074137-0x5110EE17.md",
+        "score": 55,
+        "ts": "2026-07-20T07:41:37Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-20T07:41:37Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "ZORS",
+    "times_investigated": 1
+  },
   "8453:0x511ef9ad5e645e533d15df605b4628e3d0d0ff53": {
     "address": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
     "chain": "8453",
@@ -1355,13 +1408,19 @@
         "score": 90,
         "ts": "2026-07-07T19:07:22Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114600-0x511ef9Ad.md",
+        "score": 90,
+        "ts": "2026-07-20T11:46:00Z",
+        "verdict": "PROCEED"
       }
     ],
-    "last_investigated": "2026-07-07T19:07:22Z",
+    "last_investigated": "2026-07-20T11:46:00Z",
     "last_score": 90,
     "last_verdict": "PROCEED",
     "symbol": "VU",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "8453:0x5e1760831750dd0be92d115e90cfeef207c68b07": {
     "address": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
@@ -1709,13 +1768,19 @@
         "score": 100,
         "ts": "2026-07-06T19:59:56Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114530-0x853a7c99.md",
+        "score": 100,
+        "ts": "2026-07-20T11:45:30Z",
+        "verdict": "PROCEED"
       }
     ],
-    "last_investigated": "2026-07-06T19:59:56Z",
+    "last_investigated": "2026-07-20T11:45:30Z",
     "last_score": 100,
     "last_verdict": "PROCEED",
     "symbol": "PLAY",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "8453:0x89837420864ca27f36c6847b9d1e8dbe0c6eccdb": {
     "address": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
@@ -1953,6 +2018,24 @@
     "last_score": 5,
     "last_verdict": "REJECT",
     "symbol": "BRIUN",
+    "times_investigated": 1
+  },
+  "8453:0xb20000000000000000000024bdb2e92b8826ad30": {
+    "address": "0xB20000000000000000000024bDb2e92b8826AD30",
+    "chain": "8453",
+    "first_investigated": "2026-07-20T04:22:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-042257-0xB2000000.md",
+        "score": 40,
+        "ts": "2026-07-20T04:22:57Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-20T04:22:57Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "DUAL",
     "times_investigated": 1
   },
   "8453:0xb20000000000000000000029784108e9706a0001": {
@@ -2236,6 +2319,25 @@
     "symbol": "AERO",
     "times_investigated": 1
   },
+  "8453:0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
+    "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+    "chain": "8453",
+    "creator_address": "0xce97003ea2e0a565a9a0b6e36209c6ddaaa14b05",
+    "first_investigated": "2026-07-20T13:09:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260720-130922-0xcbB7C000.md",
+        "score": 74,
+        "ts": "2026-07-20T13:09:22Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-20T13:09:22Z",
+    "last_score": 74,
+    "last_verdict": "CAUTION",
+    "symbol": "cbBTC",
+    "times_investigated": 1
+  },
   "8453:0xcc67e54fc715246e5b27a97e69747ecd4c6375b6": {
     "address": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
     "chain": "8453",
@@ -2259,13 +2361,19 @@
         "score": 70,
         "ts": "2026-07-13T12:06:39Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114705-0xcC67e54F.md",
+        "score": 70,
+        "ts": "2026-07-20T11:47:05Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-13T12:06:39Z",
+    "last_investigated": "2026-07-20T11:47:05Z",
     "last_score": 70,
     "last_verdict": "CAUTION",
     "symbol": "ERC20Token",
-    "times_investigated": 3
+    "times_investigated": 4
   },
   "8453:0xd07379a755a8f11b57610154861d694b2a0f615a": {
     "address": "0xd07379a755A8f11B57610154861D694b2A0f615a",
@@ -2278,13 +2386,44 @@
         "score": 68,
         "ts": "2026-07-12T20:54:44Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114627-0xd07379a7.md",
+        "score": 68,
+        "ts": "2026-07-20T11:46:27Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-12T20:54:44Z",
+    "last_investigated": "2026-07-20T11:46:27Z",
     "last_score": 68,
     "last_verdict": "CAUTION",
     "symbol": "BASE",
-    "times_investigated": 1
+    "times_investigated": 2
+  },
+  "8453:0xdb879f458a56d1919ae7d12e4a9662b1d8a3e892": {
+    "address": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
+    "chain": "8453",
+    "creator_address": "0x8f7d66186efc5c999c5b0cda40be74bf90eba655",
+    "first_investigated": "2026-07-04T18:06:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260704-180603-0xDB879F45.md",
+        "score": 88,
+        "ts": "2026-07-04T18:06:03Z",
+        "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260720-114515-0xDB879F45.md",
+        "score": 50,
+        "ts": "2026-07-20T11:45:15Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-20T11:45:15Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "DropERC20",
+    "times_investigated": 2
   },
   "8453:0xe1b7a5096343164fae02db10353c03cd295787c5": {
     "address": "0xE1b7A5096343164FAe02Db10353C03cd295787c5",

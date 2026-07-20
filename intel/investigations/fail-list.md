@@ -1,9 +1,13 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-20T00:04:16Z — 64 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-20T13:09:22Z — 68 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| FAFO | Base | `0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F` | 43/100 | 3 | 2026-07-20T11:46:53Z |
+| America250 | Base | `0x044098A1b8B8e175035842952986bea0E2333B07` | 30/100 | 2 | 2026-07-20T11:45:02Z |
+| PLAY | Base | `0x08574906C462A0B8dA0786ca061E0C2e0C644cA0` | 28/100 | 1 | 2026-07-20T10:55:04Z |
+| DUAL | Base | `0xB20000000000000000000024bDb2e92b8826AD30` | 40/100 | 1 | 2026-07-20T04:22:57Z |
 | GR4YS | Base | `0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4` | 37/100 | 1 | 2026-07-19T21:56:30Z |
 | SOSO | Base | `0x624e2e7fDc8903165F64891672267AB0FCB98831` | 43/100 | 1 | 2026-07-19T20:54:03Z |
 | VORF | Base | `0x2690e2f94fdc03F590Bc68C7eF3f608a0F4A0532` | 38/100 | 1 | 2026-07-19T19:45:02Z |

@@ -1,9 +1,12 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-20T00:04:16Z — 38 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-20T13:09:22Z — 36 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VU | Base | `0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53` | 90/100 | 2 | 2026-07-20T11:46:00Z |
+| RAIN | Arbitrum | `0x25118290e6A5f4139381D072181157035864099d` | 100/100 | 2 | 2026-07-20T11:45:46Z |
+| PLAY | Base | `0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841` | 100/100 | 2 | 2026-07-20T11:45:30Z |
 | COQ | Avalanche | `0x420FcA0121DC28039145009570975747295f2329` | 100/100 | 1 | 2026-07-19T15:32:03Z |
 | BANK | BNB Chain | `0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF` | 80/100 | 1 | 2026-07-19T12:02:48Z |
 | IDL | Polygon | `0x4c18406Fa690fAa53E5efa899a971557251Af72d` | 88/100 | 1 | 2026-07-19T09:29:40Z |
@@ -37,8 +40,3 @@ _Regenerated 2026-07-20T00:04:16Z — 38 address(es) currently on record with a 
 | DEXE | Ethereum | `0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6` | 90/100 | 1 | 2026-07-11T00:02:46Z |
 | CTR | Base | `0x11030f79109269d796fd0FB956D6244e502757f7` | 82/100 | 1 | 2026-07-07T23:06:25Z |
 | CHIP | Arbitrum | `0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e` | 92/100 | 1 | 2026-07-07T21:29:21Z |
-| VU | Base | `0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53` | 90/100 | 1 | 2026-07-07T19:07:22Z |
-| RAIN | Arbitrum | `0x25118290e6A5f4139381D072181157035864099d` | 85/100 | 1 | 2026-07-06T21:47:46Z |
-| PLAY | Base | `0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841` | 100/100 | 1 | 2026-07-06T19:59:56Z |
-| CLAUDE | Base | `0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892` | 88/100 | 1 | 2026-07-04T18:06:03Z |
-| America250 | Base | `0x044098A1b8B8e175035842952986bea0E2333B07` | 90/100 | 1 | 2026-07-04T10:11:33Z |
