@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T17:25:02Z",
+  "generated": "2026-07-21T18:22:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 336,
@@ -15,7 +15,7 @@
       "skillforge": 3
     },
     "broadcasts": 93,
-    "investigations": 268,
+    "investigations": 269,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-151314-0xc2B8C664.md",
-      "title": "Investigation \u2014 misosoupqueen",
-      "symbol": "misosoupqueen",
-      "name": "misosoupqueen",
-      "date": "2026-07-21T15:13:14Z",
-      "target": "0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "17",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZORS (0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf) \u2014 CAUTION 55/100 \u2014 likely the same serial campaign; [-8] Low holder count (56); [-25] Very low liquidity $2,397 (rug/illiquid); [-10] Low liquidity $2,397; [-10] No known third-party audit o",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-151314-0xc2B8C664.md"
+      "file": "investigation-20260721-182217-0x28D4e499.md",
+      "title": "Investigation \u2014 HLX",
+      "symbol": "HLX",
+      "name": "Helix Token",
+      "date": "2026-07-21T18:22:17Z",
+      "target": "0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-8] Low holder count (155); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though few explicit red flags triggered. Positive evidence: Custom verified source (not",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-182217-0x28D4e499.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-182217-0x28D4e499.md",
+      "title": "Investigation \u2014 HLX",
+      "symbol": "HLX",
+      "name": "Helix Token",
+      "date": "2026-07-21T18:22:17Z",
+      "target": "0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-8] Low holder count (155); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though few explicit red flags triggered. Positive evidence: Custom verified source (not",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-182217-0x28D4e499.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-151314-0xc2B8C664.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Low liquidity $13,998. Positive evidence: 2570 holders \u2014 reasonably distributed; Trading 271+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-232830-0x02C4347E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-222453-0xb2000000.md",
-      "title": "Investigation \u2014 COBIE",
-      "symbol": "COBIE",
-      "name": "Baseapp Man",
-      "date": "2026-07-18T22:24:53Z",
-      "target": "0xb200000000000000000000cFe0745F0793F0206b",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 1.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-222453-0xb2000000.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "48927767",
+      "version": "48933688",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.94 eth_dom 9.92 mcap_chg_24h 2.99",
+      "version": "btc_dom 56.8 eth_dom 9.9 mcap_chg_24h 0.76",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

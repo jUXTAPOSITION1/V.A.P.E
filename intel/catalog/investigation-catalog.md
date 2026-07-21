@@ -367,3 +367,5 @@
 | 2026-07-21 | auto | 0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e (DEXE) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-21 | auto | 0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2 (misosoupqueen) | deep_investigation | REJECT (17/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ZORS (0x5110EE173d24 | +7d |
+
+| 2026-07-21 | auto | 0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525 (HLX) | deep_investigation | CAUTION (70/100) | Low holder count (155) | +7d |

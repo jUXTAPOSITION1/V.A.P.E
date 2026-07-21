@@ -267,6 +267,25 @@
     "symbol": "NES",
     "times_investigated": 1
   },
+  "1:0x28d4e499c4cde621e1cea7c9cbf9d43bf75a9525": {
+    "address": "0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525",
+    "chain": "1",
+    "creator_address": "0x71eba6651d6d889442c90d5276575b557bd705b3",
+    "first_investigated": "2026-07-21T18:22:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-182217-0x28D4e499.md",
+        "score": 70,
+        "ts": "2026-07-21T18:22:17Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-21T18:22:17Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "HLX",
+    "times_investigated": 1
+  },
   "1:0x36d527d75aa29101c86ae420ea46dd7be34b529a": {
     "address": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
     "chain": "1",
