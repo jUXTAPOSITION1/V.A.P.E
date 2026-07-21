@@ -83,6 +83,19 @@ EVM_CHAINS = {
     "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/Chain"},
 }
 
+# CoinGecko's own "asset platform" ids for its /coins/{platform}/contract/
+# endpoint (agents/data_fetchers.py::get_token_market_by_contract) — a THIRD,
+# independent slug family from EVM_CHAINS' "gecko" (GeckoTerminal network id)
+# and "dex" (DexScreener chainId) fields above; several diverge from both
+# (e.g. CoinGecko's platform id for Arbitrum is "arbitrum-one", not
+# GeckoTerminal's "arbitrum" or DexScreener's "arbitrum"). Used by
+# _stablecoin_context() below to address-verify a token against CoinGecko's
+# own listing rather than trusting its self-declared symbol.
+COINGECKO_PLATFORM = {
+    "8453": "base", "1": "ethereum", "42161": "arbitrum-one", "10": "optimistic-ethereum",
+    "137": "polygon-pos", "56": "binance-smart-chain", "43114": "avalanche",
+}
+
 # Real, non-crypto companies with zero legitimate on-chain token affiliation
 # on any permissionless EVM chain — a token adopting one of these exact
 # brand names is impersonation riding AI/tech hype, not coincidence.
@@ -436,7 +449,7 @@ MEME_FACTORY_NAME_PATTERNS = ("clanker",)
 
 # ── scoring ─────────────────────────────────────────────────────────────────
 def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, defillama=None,
-          deployer_cluster_size=None):
+          deployer_cluster_size=None, coingecko_contract=None):
     """Return (score_0_100, verdict, reasons[], positive_signals[]).
     Higher score = safer.
 
@@ -489,6 +502,38 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
     owner_present = bool(owner) and owner != zero_addr
     flag(owner_present, 10, f"Owner not renounced ({gp.get('owner_address')}) — can still act on the contract")
     signal(bool(owner) and not owner_present, "Ownership renounced")
+
+    # Recognized major stablecoin — real, address-verified (see
+    # _coingecko_contract_intel()/_stablecoin_context()'s docstrings for the
+    # exact real gap this closes: USDT scored 45/100 REJECT purely because
+    # mint/owner-controlled-blacklist/unrenounced-owner are the DEFINING,
+    # expected architecture of a compliant fiat-backed stablecoin — real
+    # redemption mint/burn and sanctions-list freezing, not a rug surface —
+    # yet tripped the exact same flags at full weight as an anonymous meme
+    # token's identical-looking function signatures. Refunds those three
+    # SPECIFIC penalties (never touches honeypot/hidden-owner/pausable-
+    # transfers/tax/liquidity/etc., which stay real red flags for any token,
+    # stablecoin or not) rather than skipping the flag() calls above, so the
+    # raw GoPlus observation stays visible in `reasons` for transparency.
+    stable_ctx = _stablecoin_context(coingecko_contract)
+    if stable_ctx:
+        refund = 0
+        if str(gp.get("is_mintable")) == "1":
+            refund += 12
+        if str(gp.get("owner_change_balance")) == "1":
+            refund += 25
+        if owner_present:
+            refund += 10
+        if refund:
+            s += refund
+            reasons.append(
+                f"[+{refund}] Verified major stablecoin (CoinGecko: {stable_ctx['name']}, "
+                f"${stable_ctx['market_cap_usd']:,.0f} circulating, ${stable_ctx['price_usd']:.4f} peg) — "
+                "mint/owner-controlled-freeze/retained-ownership are standard compliance mechanisms for "
+                "this category, not rug indicators; penalties above refunded"
+            )
+        signal(True, f"Verified as a real, CoinGecko-recognized major stablecoin "
+                     f"(${stable_ctx['market_cap_usd']:,.0f} circulating, ${stable_ctx['price_usd']:.4f} peg)")
 
     # Meme-factory template detection — real, deterministic (see
     # MEME_FACTORY_NAME_PATTERNS above), not a heuristic guess.
@@ -673,7 +718,9 @@ def quick_assess(address, chain="8453"):
     prelim_sym = dex.get("symbol") or verif.get("name") or "unknown"
     web_rep = web_reputation_check(prelim_sym, address)
     deployer_repeat = _deployer_repeat_offender(gp.get("creator_address"), chain, address)
-    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat)
+    cg_contract = _coingecko_contract_intel(address, chain)
+    s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat,
+                                                   coingecko_contract=cg_contract)
     cname = (verif.get("name") or "").lower()
     is_factory_template = any(p in cname for p in MEME_FACTORY_NAME_PATTERNS)
     return {
@@ -1115,6 +1162,69 @@ def _defillama_intel(address, chain):
         return None
 
 
+def _coingecko_contract_intel(address, chain):
+    """Best-effort CoinGecko contract-address lookup, or None. Real gap this
+    closes: score() previously had no way to tell "an anonymous token that
+    happens to have a mint function" apart from "a globally recognized,
+    fiat-backed stablecoin whose mint/blacklist/admin-key design is the
+    DEFINING, expected architecture of its category" — both tripped the
+    exact same is_mintable/owner_change_balance/owner-not-renounced flags at
+    full weight (confirmed real: USDT scored 45/100 REJECT on exactly this).
+
+    Deliberately verifies the ADDRESS, not just the declared symbol —
+    CoinGecko's /coins/{platform}/contract/{address} endpoint only returns
+    real market data when this EXACT address is the one it has independently
+    listed as that asset. A copycat contract self-declaring symbol "USDT"
+    gets either a 404 or its own (different, likely illiquid) CoinGecko
+    listing, never Tether's real data — closing the brand-impersonation
+    loophole a symbol-only check would have opened. Never raises — a
+    CoinGecko outage or an untracked token must never sink an investigation,
+    and this is intentionally silent about which of those two happened
+    (both mean "no real evidence either way," treated identically by
+    _stablecoin_context() below)."""
+    platform = COINGECKO_PLATFORM.get(str(chain))
+    if not platform:
+        return None
+    try:
+        from agents import data_fetchers as DF
+        result = DF.get_token_market_by_contract(address, platform=platform)
+        return result if isinstance(result, dict) and not result.get("error") else None
+    except Exception as e:
+        print(f"[investigate] coingecko contract intel unavailable: {e}")
+        return None
+
+
+# $100M matches agents/defillama.py::stablecoins()'s own quality bar for a
+# "real, major" stablecoin (as opposed to a thin/failed stablecoin
+# experiment) — one threshold, not two independently-chosen numbers.
+STABLECOIN_MIN_MCAP_USD = 1e8
+# A stablecoin trading meaningfully off its $1 peg is either already
+# depegging (a real, live risk, not a reason to waive anything) or the
+# CoinGecko match is wrong for some other reason — either way, not a case
+# for the compliance-mechanism exception below.
+STABLECOIN_PEG_TOLERANCE = 0.03
+
+
+def _stablecoin_context(cg_contract):
+    """Real, address-verified evidence that this exact contract is a live,
+    major, near-$1-pegged asset per CoinGecko's own data — or None if that
+    evidence doesn't exist. Never guessed from the token's own declared
+    name/symbol (see _coingecko_contract_intel()'s docstring for why that
+    matters)."""
+    if not isinstance(cg_contract, dict):
+        return None
+    price = cg_contract.get("price_usd")
+    mcap = cg_contract.get("market_cap_usd")
+    if not isinstance(price, (int, float)) or not isinstance(mcap, (int, float)):
+        return None
+    if mcap < STABLECOIN_MIN_MCAP_USD:
+        return None
+    if abs(price - 1.0) > STABLECOIN_PEG_TOLERANCE:
+        return None
+    return {"name": cg_contract.get("name"), "symbol": cg_contract.get("symbol"),
+            "market_cap_usd": mcap, "price_usd": price}
+
+
 def _data_agent_intel(address, chain):
     """Best-effort recruitment of BOTH DATA AGENT instances (agents/
     data_agent.py, CDP-pinned; agents/data_agent_vapor.py, VAPOR-pinned) to
@@ -1346,8 +1456,9 @@ def investigate(address, chain="8453", hint="", force=False):
     dl_intel = _defillama_intel(address, chain)
     cluster_size, siblings = _deployer_graph_intel(creator_address, address)
     data_agent_intel = _data_agent_intel(address, chain)
+    cg_contract = _coingecko_contract_intel(address, chain)
     s, verdict, reasons, positive_signals = score(gp, dex, onchain, verif, web_rep, deployer_repeat,
-                                                  dl_intel, cluster_size)
+                                                  dl_intel, cluster_size, coingecko_contract=cg_contract)
 
     # Same-cycle structural self-check (agents/critic.py) — deterministic,
     # never mutates the verdict; only surfaces a real internal inconsistency
