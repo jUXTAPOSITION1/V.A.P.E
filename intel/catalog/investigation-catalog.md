@@ -369,3 +369,5 @@
 | 2026-07-21 | auto | 0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2 (misosoupqueen) | deep_investigation | REJECT (17/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ZORS (0x5110EE173d24 | +7d |
 
 | 2026-07-21 | auto | 0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525 (HLX) | deep_investigation | CAUTION (70/100) | Low holder count (155) | +7d |
+
+| 2026-07-21 | auto | 0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3 (cbBTC) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |

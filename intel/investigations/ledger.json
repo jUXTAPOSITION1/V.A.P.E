@@ -1467,6 +1467,25 @@
     "symbol": "BRIAN",
     "times_investigated": 1
   },
+  "8453:0x40faa04e54a6f3c6f85b3114bb04890dc77b8be3": {
+    "address": "0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3",
+    "chain": "8453",
+    "creator_address": "0x01700072eec4c5c8dedbd3de4ab0db0995a20932",
+    "first_investigated": "2026-07-21T20:04:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-200430-0x40Faa04e.md",
+        "score": 88,
+        "ts": "2026-07-21T20:04:30Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-21T20:04:30Z",
+    "last_score": 88,
+    "last_verdict": "PROCEED",
+    "symbol": "cbBTC",
+    "times_investigated": 1
+  },
   "8453:0x43d6e8f4e413028365e9cf83d1e6c2181e8e3b07": {
     "address": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
     "chain": "8453",
