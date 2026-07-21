@@ -13,9 +13,18 @@
  * business writing to VAPE's own free investigation records.
  */
 import { webSearch, webScrape, type ResearchEnv } from "./webResearch";
+import { getContractMarketData, type CoingeckoContractMarket } from "./coingecko";
 
 const UA = { "User-Agent": "VAPE-PrivateEye/1.0" };
 const BASE_RPC = "https://mainnet.base.org";
+
+// CoinGecko's own "asset platform" id per chain — a distinct slug family
+// from GeckoTerminal's network id or DexScreener's chainId. Mirrors
+// agents/investigate.py::COINGECKO_PLATFORM.
+export const COINGECKO_PLATFORM: Record<number, string> = {
+  8453: "base", 1: "ethereum", 42161: "arbitrum-one", 10: "optimistic-ethereum",
+  137: "polygon-pos", 56: "binance-smart-chain", 43114: "avalanche",
+};
 
 async function safeGetJson(url: string, retries = 0): Promise<any> {
   for (let attempt = 0; attempt <= retries; attempt++) {
@@ -164,6 +173,35 @@ export async function webReputationCheck(env: ResearchEnv, symbol: string, addre
   return { available: true, provider: search.provider, hits, results: normalized };
 }
 
+// $100M matches agents/defillama.py::stablecoins()'s own quality bar for a
+// "real, major" stablecoin — one threshold, not two independently-chosen
+// numbers. Mirrors agents/investigate.py::STABLECOIN_MIN_MCAP_USD.
+const STABLECOIN_MIN_MCAP_USD = 1e8;
+// A stablecoin trading meaningfully off its $1 peg is either already
+// depegging (a real, live risk) or the CoinGecko match is wrong for some
+// other reason — either way, not a case for the exception below. Mirrors
+// agents/investigate.py::STABLECOIN_PEG_TOLERANCE.
+const STABLECOIN_PEG_TOLERANCE = 0.03;
+
+/**
+ * Real, address-verified evidence that this exact contract is a live,
+ * major, near-$1-pegged asset per CoinGecko's own data — or null if that
+ * evidence doesn't exist. Never guessed from the token's own declared
+ * name/symbol (a copycat contract self-declaring symbol "USDT" gets either
+ * a 404 or its own, different CoinGecko listing, never Tether's real data —
+ * closing the brand-impersonation loophole a symbol-only check would open).
+ * Field-for-field port of agents/investigate.py::_stablecoin_context().
+ */
+export function stablecoinContext(cg: CoingeckoContractMarket | null | undefined): CoingeckoContractMarket | null {
+  if (!cg) return null;
+  const price = cg.price_usd;
+  const mcap = cg.market_cap_usd;
+  if (typeof price !== "number" || typeof mcap !== "number") return null;
+  if (mcap < STABLECOIN_MIN_MCAP_USD) return null;
+  if (Math.abs(price - 1.0) > STABLECOIN_PEG_TOLERANCE) return null;
+  return { name: cg.name, symbol: cg.symbol, market_cap_usd: mcap, price_usd: price };
+}
+
 export interface ScoreVerif {
   checked: boolean;
   verified?: boolean | null;
@@ -182,7 +220,8 @@ export interface ScoreResult {
 /** Field-for-field port of agents/investigate.py::score() — same weights,
  * same thresholds, same messages. Keep both in sync on any change. */
 export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contract: boolean },
-                       verif: ScoreVerif, webRep?: WebReputation): ScoreResult {
+                       verif: ScoreVerif, webRep?: WebReputation,
+                       coingeckoContract?: CoingeckoContractMarket | null): ScoreResult {
   let s = 100;
   const reasons: string[] = [];
   const positiveSignals: string[] = [];
@@ -207,6 +246,29 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
   const ownerPresent = Boolean(owner) && owner !== zeroAddr;
   flag(ownerPresent, 10, `Owner not renounced (${gp.owner_address}) — can still act on the contract`);
   signal(Boolean(owner) && !ownerPresent, "Ownership renounced");
+
+  // Recognized major stablecoin — refunds ONLY the three specific
+  // compliance-mechanism penalties above (mint/owner-balance-change/
+  // unrenounced-owner — the DEFINING, expected architecture of a compliant
+  // fiat-backed stablecoin, not a rug surface), never honeypot/hidden-owner/
+  // pausable-transfers/tax/liquidity/etc., which stay real red flags for any
+  // token. Field-for-field port of agents/investigate.py::score()'s same block.
+  const stableCtx = stablecoinContext(coingeckoContract);
+  if (stableCtx) {
+    let refund = 0;
+    if (String(gp.is_mintable) === "1") refund += 12;
+    if (String(gp.owner_change_balance) === "1") refund += 25;
+    if (ownerPresent) refund += 10;
+    if (refund) {
+      s += refund;
+      reasons.push(`[+${refund}] Verified major stablecoin (CoinGecko: ${stableCtx.name}, `
+        + `$${stableCtx.market_cap_usd!.toLocaleString()} circulating, $${stableCtx.price_usd!.toFixed(4)} peg) — `
+        + "mint/owner-controlled-freeze/retained-ownership are standard compliance mechanisms for "
+        + "this category, not rug indicators; penalties above refunded");
+    }
+    signal(true, `Verified as a real, CoinGecko-recognized major stablecoin `
+      + `($${stableCtx.market_cap_usd!.toLocaleString()} circulating, $${stableCtx.price_usd!.toFixed(4)} peg)`);
+  }
 
   const cname = (verif.name || "").toLowerCase();
   const isFactoryTemplate = MEME_FACTORY_NAME_PATTERNS.some((p) => cname.includes(p));

@@ -6,8 +6,28 @@ A clean-looking but anonymous/young/undistributed token must not earn a
 PROCEED just because nothing tripped a red flag. If a future change (human or
 self-improvement bot) ever regresses that, these tests fail loudly.
 """
-from agents.investigate import score
+from agents.investigate import score, _stablecoin_context
 from tests.conftest import clean_gp, clean_dex, days_ago_ms
+
+
+def _real_usdt_shaped_inputs():
+    """Real, observed shape of the USDT-on-Base miss (user-reported):
+    is_mintable + owner_change_balance + owner-not-renounced all firing at
+    full weight on a globally recognized, deeply liquid stablecoin, with
+    only holder count as positive evidence — scored 45/100 REJECT before
+    the stablecoin-context fix. Owner address is Base's real predeploy
+    proxy admin (0x4200...000010, matches the report screenshot), not a
+    fabricated stand-in."""
+    gp = clean_gp(is_mintable="1", owner_change_balance="1",
+                  owner_address="0x4200000000000000000000000000000000000010",
+                  holder_count="612036")
+    dex = clean_dex(name="Tether USD", symbol="USDT", liquidity_usd=200000)
+    onchain = {"is_contract": True}
+    verif = {"checked": False}
+    return gp, dex, onchain, verif
+
+
+CG_USDT = {"name": "Tether", "symbol": "usdt", "price_usd": 0.999, "market_cap_usd": 1.6e11}
 
 
 def _legit_inputs():
@@ -137,3 +157,75 @@ def test_score_never_out_of_bounds():
                              web_rep={"hits": [1, 2]}, deployer_repeat_offender="0xBAD")
     assert 0 <= s <= 100
     assert verdict == "REJECT"
+
+
+# ── stablecoin context (real, address-verified CoinGecko contract lookup) ──
+
+def test_stablecoin_context_recognizes_real_verified_stablecoin():
+    ctx = _stablecoin_context(CG_USDT)
+    assert ctx is not None
+    assert ctx["market_cap_usd"] == CG_USDT["market_cap_usd"]
+
+
+def test_stablecoin_context_none_without_coingecko_match():
+    """No CoinGecko contract data at all (404/untracked/outage) — the
+    default, honest "no evidence either way" case for the vast majority of
+    tokens, which are not stablecoins."""
+    assert _stablecoin_context(None) is None
+
+
+def test_stablecoin_context_none_below_mcap_quality_bar():
+    """A thin/failed stablecoin experiment doesn't get the exception just
+    because its price happens to sit near $1 — matches
+    agents/defillama.py::stablecoins()'s own $100M quality bar."""
+    small = {"name": "Nano Dollar", "symbol": "nusd", "price_usd": 1.0, "market_cap_usd": 5e6}
+    assert _stablecoin_context(small) is None
+
+
+def test_stablecoin_context_none_when_depegging():
+    """A real asset that's actually depegging is a live risk signal, not a
+    case for waiving mint/admin-key penalties."""
+    depegged = {"name": "Some Stable", "symbol": "sst", "price_usd": 0.80, "market_cap_usd": 2e8}
+    assert _stablecoin_context(depegged) is None
+
+
+def test_stablecoin_context_none_on_missing_price_or_mcap_fields():
+    assert _stablecoin_context({"name": "X", "symbol": "x"}) is None
+
+
+def test_real_usdt_case_scores_proceed_with_coingecko_verification():
+    """Direct regression test for the user-reported bug: real USDT-shaped
+    inputs (mintable + owner-controlled-balance-change + unrenounced owner,
+    the exact three flags GoPlus reported) scored 45/100 REJECT before this
+    fix. With a real, address-verified CoinGecko match, those three specific
+    penalties are refunded and the verdict recovers to PROCEED."""
+    args = _real_usdt_shaped_inputs()
+    without_cg = score(*args)
+    with_cg = score(*args, coingecko_contract=CG_USDT)
+    assert without_cg[1] == "REJECT", f"sanity check: unfixed case should still reproduce REJECT, got {without_cg}"
+    assert with_cg[0] > without_cg[0]
+    assert with_cg[1] == "PROCEED", f"expected PROCEED with real stablecoin verification, got {with_cg}"
+    assert any("Verified major stablecoin" in r for r in with_cg[2])
+    assert any("CoinGecko-recognized major stablecoin" in p for p in with_cg[3])
+
+
+def test_stablecoin_refund_never_touches_unrelated_red_flags():
+    """The stablecoin context must only refund the three specific
+    compliance-mechanism flags — a genuinely honeypot-flagged or high-tax
+    token must still REJECT even if it happens to match a stablecoin lookup
+    (e.g. a compromised/malicious fork of a real asset)."""
+    gp = clean_gp(is_honeypot="1", is_mintable="1", owner_change_balance="1",
+                  owner_address="0x4200000000000000000000000000000000000010",
+                  holder_count="612036")
+    dex = clean_dex(name="Tether USD", symbol="USDT", liquidity_usd=200000)
+    s, verdict, reasons, _ = score(gp, dex, {"is_contract": True}, {"checked": False},
+                                   coingecko_contract=CG_USDT)
+    assert verdict == "REJECT"
+    assert any("HONEYPOT" in r for r in reasons)
+
+
+def test_stablecoin_context_none_is_a_noop_on_score():
+    gp, dex = clean_gp(), clean_dex()
+    a = score(gp, dex, {"is_contract": True}, {})[0]
+    b = score(gp, dex, {"is_contract": True}, {}, coingecko_contract=None)[0]
+    assert a == b

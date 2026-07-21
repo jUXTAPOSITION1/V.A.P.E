@@ -136,6 +136,10 @@ OFFERINGS = {
                          "intel broadcast — real committed output, not generated per-request."),
     "bulk_safety_bundle": ("0.50", "token_safety_check batched over 5-25 tokens in one job, "
                          "flat-priced."),
+    "website_review": ("0.15", "Phishing/scam-page red-flag read of a website URL — real scrape "
+                         "+ frontier-LLM read for fake contract addresses, wallet-drainer patterns, "
+                         "brand mismatch, and copy-paste scam-site boilerplate. Not a smart-contract "
+                         "audit (see bounty_deep_dive for that)."),
 }
 
 # Market-data micro-services — mirrors worker/src/dataHandlers.ts's

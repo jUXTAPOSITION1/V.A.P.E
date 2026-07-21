@@ -71,6 +71,19 @@ since launch but had no worker route until now:
 Not x402-payable: `partner_referral`, `wallet_recon`, `whale_watch` (no real
 data source picked yet), and `forensics_deep` — ACP-only, hired as a real job.
 
+**New, x402-only offering (not yet in the 30-offering ACP catalog above):**
+`website_review` — `GET /scan/website_review?url=https://...`, $0.15,
+`worker/src/lib/websiteReview.ts`. A phishing/scam-page content read of a
+plain website URL (real scrape + frontier-LLM read for fake contract
+addresses, wallet-drainer patterns, brand/template mismatch, copy-paste
+scam-site boilerplate) — deliberately distinct from `bounty_deep_dive`'s
+smart-contract audit, per the original Phase 4 plan for this offering.
+Listing it as a real, sellable ACP offering (not just x402-payable) needs
+`acp provider create-offering` run on the persistent ACP host (same signer
+constraint as `scripts/acp-monitor/virtuals_evaluator.py` above) — until
+then it's discoverable via `agents/x402_directory_register.py`'s external
+listings and x402-payable directly, same as any other worker route.
+
 ### Market-data tools
 15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain

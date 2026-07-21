@@ -77,6 +77,37 @@ const DATA_OFFERINGS = {
 const Hire = {
     _modal: null,
 
+    // Shared address/GitHub-repo toggle for bounty_deep_dive engagements —
+    // the same input shapes are needed whether the buyer is hiring against a
+    // specific Bounty Ops program (openBountyOps, pre-scoped, may default to
+    // repo mode) or through the generic Commission modal (openX402, address
+    // mode by default, no program context) — see docs/ACP_PROTOCOL.md's
+    // dual-routing note. One implementation so both stay in sync; the fields
+    // container is rendered by the caller (id may differ), so this only
+    // fills it in and wires the toggle buttons already present in `modal`.
+    _renderAddressRepoFields(fieldsEl, mode, hints) {
+        const h = hints || {};
+        fieldsEl.innerHTML = mode === 'repo' ? `
+            <label class="text-xs text-zinc-500 block mb-1">GitHub owner/repo${h.repo ? ` — ${h.repo}` : ' to audit'}</label>
+            <input id="hire-owner" type="text" placeholder="owner" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-2">
+            <input id="hire-repo" type="text" placeholder="repo" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
+        ` : `
+            <label class="text-xs text-zinc-500 block mb-1">Target contract address${h.address ? ` ${h.address}` : ' to investigate'}</label>
+            <input id="hire-address" type="text" placeholder="0x… token/contract" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
+        `;
+    },
+
+    _wireAddressRepoToggle(modal, fieldsEl, initialMode, hints) {
+        let mode = initialMode;
+        this._renderAddressRepoFields(fieldsEl, mode, hints);
+        modal.querySelectorAll('[data-mode]').forEach(btn => btn.onclick = () => {
+            mode = btn.dataset.mode;
+            modal.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('term-btn-active', b === btn));
+            this._renderAddressRepoFields(fieldsEl, mode, hints);
+        });
+        return () => mode;
+    },
+
     openAcp(offeringName) {
         window.open(ACP_AGENT_URL, '_blank', 'noopener');
     },
@@ -92,7 +123,18 @@ const Hire = {
         // other scan offering below.
         const isTxHash = offeringName === 'tx_decode';
         const isBulk = offeringName === 'bulk_safety_bundle';
-        const needsAddress = !isTxHash && !isBulk && !['market_intel', 'community_intel_broadcast'].includes(offeringName);
+        // bounty_deep_dive already accepts either an on-chain address or a
+        // GitHub owner/repo server-side (worker/src/index.ts's hasAddress/
+        // hasRepo branches) — openBountyOps() below already exposes both via
+        // its own toggle when hiring from a matched Bounty Ops program; this
+        // generic Commission modal previously only ever rendered the address
+        // field, so a repo-based engagement had no path in here at all.
+        const isRepoToggle = offeringName === 'bounty_deep_dive';
+        // website_review takes a plain website URL, not a contract address —
+        // a general phishing/scam-page content read, distinct from every
+        // address-based security offering (see worker/src/lib/websiteReview.ts).
+        const isUrl = offeringName === 'website_review';
+        const needsAddress = !isTxHash && !isBulk && !isRepoToggle && !isUrl && !['market_intel', 'community_intel_broadcast'].includes(offeringName);
         const modal = document.createElement('div');
         modal.id = 'hire-modal';
         modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
@@ -112,6 +154,15 @@ const Hire = {
                     ` : isBulk ? `
                     <label class="text-xs text-zinc-500 block mb-1">5-25 token addresses (one per line, or comma-separated)</label>
                     <textarea id="hire-address" rows="5" placeholder="0x…&#10;0x…&#10;0x…" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4 resize-none"></textarea>
+                    ` : isRepoToggle ? `
+                    <div class="flex gap-2 mb-4">
+                        <button data-mode="address" class="flex-1 term-btn term-btn-active">Contract address</button>
+                        <button data-mode="repo" class="flex-1 term-btn">GitHub repo</button>
+                    </div>
+                    <div id="hire-bounty-fields"></div>
+                    ` : isUrl ? `
+                    <label class="text-xs text-zinc-500 block mb-1">Website URL to review</label>
+                    <input id="hire-address" type="text" placeholder="https:// the site to check for phishing/scam red flags" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
                     ` : needsAddress ? `
                     <label class="text-xs text-zinc-500 block mb-1">Target contract address</label>
                     <input id="hire-address" type="text" placeholder="0x… token/contract to investigate" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
@@ -123,9 +174,38 @@ const Hire = {
         document.body.appendChild(modal);
         this._modal = modal;
         modal.querySelectorAll('[data-close]').forEach(el => el.onclick = () => this._closeModal());
+        const getMode = isRepoToggle
+            ? this._wireAddressRepoToggle(modal, modal.querySelector('#hire-bounty-fields'), 'address')
+            : null;
         modal.querySelector('#hire-submit').onclick = () => {
             const status = document.getElementById('hire-status');
             let value = '';
+            if (isRepoToggle) {
+                const fail = (msg) => { status.innerHTML = msg; status.className = 'text-xs mt-3 text-amber-400'; };
+                if (getMode() === 'address') {
+                    const address = (document.getElementById('hire-address').value || '').trim();
+                    if (!ADDRESS_RE.test(address)) return fail('Enter a valid 0x… contract address.');
+                    this._runX402(offeringName, priceUsd, { address }, address);
+                } else {
+                    const owner = (document.getElementById('hire-owner').value || '').trim();
+                    const repo = (document.getElementById('hire-repo').value || '').trim();
+                    if (!owner || !repo || !GH_SLUG_RE.test(owner) || !GH_SLUG_RE.test(repo)) return fail('Enter a valid GitHub owner and repo.');
+                    this._runX402(offeringName, priceUsd, { owner, repo }, `${owner}/${repo}`);
+                }
+                return;
+            }
+            if (isUrl) {
+                value = (document.getElementById('hire-address').value || '').trim();
+                let parsed;
+                try { parsed = new URL(value); } catch { parsed = null; }
+                if (!parsed || (parsed.protocol !== 'http:' && parsed.protocol !== 'https:')) {
+                    status.innerHTML = 'Enter a valid http(s) URL.';
+                    status.className = 'text-xs mt-3 text-amber-400';
+                    return;
+                }
+                this._runX402(offeringName, priceUsd, { url: value }, value);
+                return;
+            }
             if (isTxHash) {
                 value = (document.getElementById('hire-address').value || '').trim();
                 if (!TX_HASH_RE.test(value)) {
@@ -204,27 +284,13 @@ const Hire = {
         modal.querySelectorAll('[data-close]').forEach(el => el.onclick = () => this._closeModal());
 
         const fieldsEl = modal.querySelector('#hire-bounty-fields');
-        const renderFields = (mode) => {
-            fieldsEl.innerHTML = mode === 'repo' ? `
-                <label class="text-xs text-zinc-500 block mb-1">GitHub owner/repo — this program's own source repo</label>
-                <input id="hire-owner" type="text" placeholder="owner" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-2">
-                <input id="hire-repo" type="text" placeholder="repo" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
-            ` : `
-                <label class="text-xs text-zinc-500 block mb-1">Target contract address in this program's scope</label>
-                <input id="hire-address" type="text" placeholder="0x… token/contract" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
-            `;
-        };
-        let mode = repoDefault ? 'repo' : 'address';
-        renderFields(mode);
-        modal.querySelectorAll('[data-mode]').forEach(btn => btn.onclick = () => {
-            mode = btn.dataset.mode;
-            modal.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('term-btn-active', b === btn));
-            renderFields(mode);
-        });
+        const getMode = this._wireAddressRepoToggle(modal, fieldsEl, repoDefault ? 'repo' : 'address',
+            { repo: "this program's own source repo", address: "in this program's scope" });
 
         modal.querySelector('#hire-submit').onclick = () => {
             const status = document.getElementById('hire-status');
             const fail = (msg) => { status.innerHTML = msg; status.className = 'text-xs mt-3 text-amber-400'; };
+            const mode = getMode();
             if (mode === 'address') {
                 const address = (document.getElementById('hire-address').value || '').trim();
                 if (!ADDRESS_RE.test(address)) return fail('Enter a valid 0x… contract address.');

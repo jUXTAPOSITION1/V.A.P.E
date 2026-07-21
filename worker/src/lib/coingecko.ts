@@ -1,5 +1,5 @@
 /**
- * CoinGecko price reads for Base-chain tokens. Two tiers:
+ * CoinGecko price reads for Base-chain tokens. Three tiers:
  *  - Current price + 24h change (`getCurrentPrices`): works fully unkeyed
  *    against the public api.coingecko.com — the site's client-side JS
  *    already calls this directly; this worker-side copy exists so the free
@@ -10,6 +10,10 @@
  *    it unauthenticated and getting rejected. Only called when
  *    COINGECKO_API_KEY is configured; used for the cost-basis estimate
  *    (lib/costBasis.ts), which is out of reach without a key.
+ *  - Full market data by contract (`getContractMarketData`): keyless,
+ *    real-identity (address-verified, not symbol-guessed) name/price/mcap
+ *    lookup — mirrors agents/data_fetchers.py::get_token_market_by_contract,
+ *    used by investigateLite.ts's stablecoin-recognition exception.
  */
 interface CoingeckoEnv {
   COINGECKO_API_KEY?: string;
@@ -31,6 +35,39 @@ export async function getCurrentPrices(env: CoingeckoEnv, addresses: string[]): 
   const res = await fetch(url, { headers: authHeaders(env) });
   if (!res.ok) throw new Error(`CoinGecko HTTP ${res.status}`);
   return res.json();
+}
+
+export interface CoingeckoContractMarket {
+  name?: string;
+  symbol?: string;
+  price_usd?: number;
+  market_cap_usd?: number;
+}
+
+/**
+ * Real-identity (address-verified) name/price/market-cap lookup by contract.
+ * Keyless. Best-effort — returns null on any 404/error rather than throwing,
+ * since the vast majority of tokens simply aren't CoinGecko-tracked and
+ * that's an honest, expected outcome, not a fetch failure worth surfacing.
+ * Mirrors agents/data_fetchers.py::get_token_market_by_contract exactly.
+ */
+export async function getContractMarketData(env: CoingeckoEnv, address: string, platform = "base"): Promise<CoingeckoContractMarket | null> {
+  try {
+    const url = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${address}`;
+    const res = await fetch(url, { headers: authHeaders(env) });
+    if (!res.ok) return null;
+    const d: any = await res.json();
+    const m = d?.market_data;
+    if (!m) return null;
+    return {
+      name: d.name,
+      symbol: d.symbol,
+      price_usd: m.current_price?.usd,
+      market_cap_usd: m.market_cap?.usd,
+    };
+  } catch {
+    return null;
+  }
 }
 
 /**

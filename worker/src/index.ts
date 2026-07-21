@@ -38,6 +38,7 @@ import { dispatchDeepDiveAudit, dispatchExternalBountyAudit } from "./lib/github
 import { decodeTx } from "./lib/txDecode";
 import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
+import { reviewWebsite } from "./lib/websiteReview";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
@@ -295,6 +296,23 @@ const BULK_SAFETY_BUNDLE_DISCOVERY = {
   ] },
 };
 
+// website_review — synchronous, distinct from bounty_deep_dive (that's a
+// smart-contract audit; this is a general phishing/scam-page content read of
+// a plain website URL). See lib/websiteReview.ts for the real gap this
+// closes: docs/ACP_PROTOCOL.md's plan for this offering existed for a while
+// with no worker route or listing behind it.
+const WEBSITE_REVIEW_PRICE = "$0.15";
+const WEBSITE_REVIEW_DISCOVERY = {
+  description: "Phishing/scam-page red-flag read of a website: fake contract addresses, "
+    + "wallet-drainer patterns, brand mismatch, copy-paste scam-site boilerplate — real scrape + "
+    + "frontier-LLM read, not a smart-contract audit (see bounty_deep_dive for that).",
+  output: {
+    url: "https://example.com", scrape_provider: "firecrawl", reachable: true,
+    verdict: "SUSPICIOUS", red_flags: ["urgency/countdown pressure tactic", "unsolicited wallet-connect prompt"],
+    summary: "The page pressures visitors to connect a wallet immediately via a countdown timer...",
+  },
+};
+
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
 // c.executionCtx throws (not just returns undefined) when no ExecutionContext
@@ -345,6 +363,7 @@ app.get("/", (c) =>
       { name: "tx_decode", price: TX_DECODE_PRICE, route: "/scan/tx_decode" },
       { name: "community_intel_broadcast", price: COMMUNITY_BROADCAST_PRICE, route: "/scan/community_intel_broadcast" },
       { name: "bulk_safety_bundle", price: BULK_SAFETY_BUNDLE_PRICE, route: "/scan/bulk_safety_bundle" },
+      { name: "website_review", price: WEBSITE_REVIEW_PRICE, route: "/scan/website_review" },
       // Keyless market-data micro-services — real data, $0.01 each.
       ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
@@ -648,6 +667,7 @@ app.get("/admin/bazaar-status", rateLimiter("bazaar-status", 6, 300), cache({ ca
     `${origin}/scan/tx_decode`,
     `${origin}/scan/community_intel_broadcast`,
     `${origin}/scan/bulk_safety_bundle`,
+    `${origin}/scan/website_review`,
     ...DL_OFFERINGS.map((o) => `${origin}/data/${o.name}`),
   ];
   const indexed = allOfferings.filter((u) => indexedUrls.has(u));
@@ -892,6 +912,26 @@ app.use("*", async (c, next) => {
         required: ["addresses"],
       },
       output: { example: BULK_SAFETY_BUNDLE_DISCOVERY.output },
+    }),
+  };
+
+  // website_review: same x402 gate, own price/metadata (a plain website URL,
+  // not a contract address) — see lib/websiteReview.ts.
+  routes["GET /scan/website_review"] = {
+    accepts: { scheme: "exact", price: WEBSITE_REVIEW_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE website_review — ${WEBSITE_REVIEW_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["security", "phishing", "web"],
+    extensions: declareDiscoveryExtension({
+      input: { url: "https://example.com" },
+      inputSchema: {
+        properties: {
+          url: { type: "string", description: "http(s) URL of the website to review" },
+        },
+        required: ["url"],
+      },
+      output: { example: WEBSITE_REVIEW_DISCOVERY.output },
     }),
   };
 
@@ -1237,6 +1277,43 @@ app.get("/scan/bulk_safety_bundle", async (c) => {
     { offering: "bulk_safety_bundle", status: result.error ? "error" : "ok", deliverable: result,
       source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
     result.error ? 400 : 200
+  );
+});
+
+// website_review: a plain website URL, not a contract address — real scrape
+// + frontier-LLM read (see lib/websiteReview.ts). Rejects anything that
+// isn't a well-formed http(s) URL before ever attempting to fetch it.
+app.get("/scan/website_review", async (c) => {
+  const raw = c.req.query("url") || "";
+  let parsed: URL;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    return c.json({ offering: "website_review", status: "error", error: "provide a valid http(s) URL" }, 400);
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    return c.json({ offering: "website_review", status: "error", error: "only http(s) URLs are supported" }, 400);
+  }
+  const t0 = Date.now();
+  const result = await reviewWebsite(c.env, parsed.toString());
+  c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(),
+    offering: "website_review",
+    address: null,
+    chain_id: 8453,
+    symbol: null,
+    name: parsed.hostname,
+    verdict: result.verdict ?? null,
+    status: result.error ? "error" : "settled",
+    amount_usd: Number(WEBSITE_REVIEW_PRICE.replace("$", "")),
+    latency_ms: Date.now() - t0,
+    error: result.error ? String(result.error) : null,
+  });
+  return c.json(
+    { offering: "website_review", status: result.error ? "error" : "ok", deliverable: result,
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
+    result.error ? 502 : 200
   );
 });
 

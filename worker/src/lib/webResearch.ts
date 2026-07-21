@@ -213,6 +213,41 @@ export interface ScrapeResult {
   content: string | null;
 }
 
+// SSRF guard for keylessFetch below — the one scrape path that's a raw
+// fetch() FROM this Worker, unlike firecrawlScrape (Firecrawl's own
+// infrastructure does that fetch, out of this repo's control either way).
+// Blocks the well-known direct SSRF vectors: loopback, RFC1918 private
+// ranges, link-local (which covers the 169.254.169.254 cloud-metadata
+// address specifically), and other reserved/multicast ranges — on both the
+// literal hostname (IP-literal URLs) and, best-effort, on whatever the
+// Worker runtime resolves at fetch time isn't inspectable here (Workers
+// exposes no DNS-resolution API), so a hostname that only resolves to a
+// private address at request time (DNS rebinding) is a known residual gap,
+// same class of limitation as most fetch-a-user-URL features on this
+// platform. Re-applied to every redirect hop by keylessFetch's manual
+// redirect loop below, since a same-origin-looking initial URL can still
+// redirect to a private target.
+function isBlockedHost(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  if (h === "localhost" || h.endsWith(".localhost")) return true;
+  // IPv4 literal ranges.
+  const m = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+  if (m) {
+    const [a, b] = [Number(m[1]), Number(m[2])];
+    if (a === 127) return true; // loopback
+    if (a === 10) return true; // RFC1918
+    if (a === 172 && b >= 16 && b <= 31) return true; // RFC1918
+    if (a === 192 && b === 168) return true; // RFC1918
+    if (a === 169 && b === 254) return true; // link-local incl. cloud metadata 169.254.169.254
+    if (a === 0) return true; // "this network"
+    if (a >= 224) return true; // multicast/reserved (224-255)
+  }
+  // IPv6 loopback/link-local/unique-local literals (bracketed form already
+  // stripped of brackets by URL.hostname).
+  if (h === "::1" || h.startsWith("fe80:") || h.startsWith("fc") || h.startsWith("fd")) return true;
+  return false;
+}
+
 async function firecrawlScrape(apiKey: string, url: string): Promise<ScrapeResult> {
   const res = await fetch("https://api.firecrawl.dev/v2/scrape", {
     method: "POST",
@@ -226,11 +261,28 @@ async function firecrawlScrape(apiKey: string, url: string): Promise<ScrapeResul
 
 async function keylessFetch(url: string): Promise<ScrapeResult> {
   try {
-    const res = await fetch(url, { headers: { "User-Agent": "VAPE-PrivateEye/1.0" } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
-    const cleaned = extractText(html).replace(/\s+/g, " ").trim();
-    return { provider: "fetch-keyless", content: cleaned.slice(0, 8000) };
+    let current = url;
+    // Manual redirect handling (redirect: "manual") so each hop is
+    // re-validated against isBlockedHost before being followed — a public-
+    // looking initial URL redirecting to a private target would otherwise
+    // bypass the check fetch()'s default "follow" behavior does silently.
+    for (let hop = 0; hop < 5; hop++) {
+      const parsed = new URL(current);
+      if (parsed.protocol !== "http:" && parsed.protocol !== "https:") throw new Error("blocked: non-http(s) redirect target");
+      if (isBlockedHost(parsed.hostname)) throw new Error("blocked: private/reserved network target");
+      const res = await fetch(current, { headers: { "User-Agent": "VAPE-PrivateEye/1.0" }, redirect: "manual" });
+      if (res.status >= 300 && res.status < 400) {
+        const loc = res.headers.get("location");
+        if (!loc) throw new Error(`redirect with no Location (HTTP ${res.status})`);
+        current = new URL(loc, current).toString();
+        continue;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      const cleaned = extractText(html).replace(/\s+/g, " ").trim();
+      return { provider: "fetch-keyless", content: cleaned.slice(0, 8000) };
+    }
+    throw new Error("too many redirects");
   } catch {
     return { provider: "fetch-keyless", content: null };
   }

@@ -10,7 +10,8 @@ import { scan, type ScanResult } from "./scan";
 import { getContractSource } from "./lib/contractSource";
 import { marketIntel } from "./lib/marketIntel";
 import { goplusRaw, dexscreenerFull, onchainPresence, hackCorrelation, webReputationCheck, score,
-         type DexInfo } from "./lib/investigateLite";
+         COINGECKO_PLATFORM, type DexInfo } from "./lib/investigateLite";
+import { getContractMarketData } from "./lib/coingecko";
 import { webScrape, type ResearchEnv } from "./lib/webResearch";
 import { askFrontier, type LlmEnv } from "./lib/llm";
 
@@ -178,16 +179,18 @@ async function aiQuickReview(env: LlmEnv, verifChecked: boolean, verifNote: stri
 // before, plus a best-effort visit of the project's own declared website/
 // social URLs and a frontier-LLM quick read of the actual verified source.
 // Mirrors agents/acp_fulfill.py::_dossier_check() exactly.
-async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string } & ResearchEnv & LlmEnv) {
+async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string; COINGECKO_API_KEY?: string } & ResearchEnv & LlmEnv) {
   const a = addrFrom(req);
   if (!a) return { error: "no address" };
   const chain = chainFrom(req);
+  const cgPlatform = COINGECKO_PLATFORM[chain];
 
-  const [gp, dex, onchain, src] = await Promise.all([
+  const [gp, dex, onchain, src, cgContract] = await Promise.all([
     goplusRaw(a, chain),
     dexscreenerFull(a),
     onchainPresence(a),
     getContractSource(a, chain, env.ETHERSCAN_API_KEY),
+    cgPlatform ? getContractMarketData(env, a, cgPlatform) : Promise.resolve(null),
   ]);
   const verifChecked = !src.error;
   const verif = { checked: verifChecked, verified: src.verified ?? null, name: src.contract_name ?? null,
@@ -195,7 +198,7 @@ async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string 
   const corr = hackCorrelation(gp);
   const symbol = dex.symbol || verif.name || "unknown";
   const webRep = await webReputationCheck(env, symbol, a);
-  const { score: s, verdict, reasons, positive_signals } = score(gp, dex, onchain, verif, webRep);
+  const { score: s, verdict, reasons, positive_signals } = score(gp, dex, onchain, verif, webRep, cgContract);
   const cname = (verif.name || "").toLowerCase();
   const memeFactoryTemplate = ["clanker"].some((p) => cname.includes(p));
 
