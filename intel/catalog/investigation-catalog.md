@@ -373,3 +373,5 @@
 | 2026-07-21 | auto | 0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3 (cbBTC) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-21 | auto | 0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF (USDai) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-21 | auto | 0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b (:p) | deep_investigation | REJECT (40/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |

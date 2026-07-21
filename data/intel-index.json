@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T21:57:40Z",
+  "generated": "2026-07-21T22:30:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 342,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 94,
-    "investigations": 271,
+    "investigations": 272,
     "tools": 16,
     "tools_verified": 15,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-212308-0x0A1a1A10.md",
-      "title": "Investigation \u2014 USDai",
-      "symbol": "USDai",
-      "name": "USDai",
-      "date": "2026-07-21T21:23:08Z",
-      "target": "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $94 (rug/illiquid); [-10] Low liquidity $94. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($156,547,951 circulating, $0.9998 peg); 2776 holders \u2014 reasonably distributed; Trading 293+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-212308-0x0A1a1A10.md"
+      "file": "investigation-20260721-223041-0x31bC2932.md",
+      "title": "Investigation \u2014 :p",
+      "symbol": ":p",
+      "name": ":p",
+      "date": "2026-07-21T22:30:41Z",
+      "target": "0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-223041-0x31bC2932.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-223041-0x31bC2932.md",
+      "title": "Investigation \u2014 :p",
+      "symbol": ":p",
+      "name": ":p",
+      "date": "2026-07-21T22:30:41Z",
+      "target": "0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-223041-0x31bC2932.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-212308-0x0A1a1A10.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +2037% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-072820-0xb2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-045003-0x72f3a461.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Bullieve in Base",
-      "date": "2026-07-19T04:50:03Z",
-      "target": "0x72f3a461B2C631dffe9A2A6A95dC816b78279B07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $18,392; [-10] Pair 12.7 days old \u2014 under two w",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-045003-0x72f3a461.md"
     }
   ],
   "reports": [

@@ -1448,6 +1448,25 @@
     "symbol": "ContentCoin",
     "times_investigated": 3
   },
+  "8453:0x31bc2932d4a9b532da771c2681bda14b2d2ad98b": {
+    "address": "0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b",
+    "chain": "8453",
+    "creator_address": "0xaf2bfb6b69dfe6efd257fe8cd694175156a23812",
+    "first_investigated": "2026-07-21T22:30:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-223041-0x31bC2932.md",
+        "score": 40,
+        "ts": "2026-07-21T22:30:41Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-21T22:30:41Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": ":p",
+    "times_investigated": 1
+  },
   "8453:0x3221baeb0c2745e39a1dba73cd413361b7f5fe13": {
     "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13",
     "chain": "8453",
