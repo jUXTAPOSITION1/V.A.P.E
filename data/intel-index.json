@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T10:58:56Z",
+  "generated": "2026-07-21T11:26:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 330,
@@ -15,7 +15,7 @@
       "skillforge": 3
     },
     "broadcasts": 92,
-    "investigations": 265,
+    "investigations": 266,
     "tools": 16,
     "tools_verified": 16,
     "skills": 16
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-093349-0x431F2f58.md",
-      "title": "Investigation \u2014 RISE",
-      "symbol": "RISE",
-      "name": "RISE TOKEN",
-      "date": "2026-07-21T09:33:49Z",
-      "target": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260721-112638-0x230f1E24.md",
+      "title": "Investigation \u2014 NES",
+      "symbol": "NES",
+      "name": "Nesa",
+      "date": "2026-07-21T11:26:38Z",
+      "target": "0x230f1E241C621d5af670Dad83ebCdd18971E2995",
+      "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 2.0 days old (extreme fresh-launch risk); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 23205 holders \u2014 rea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-093349-0x431F2f58.md"
+      "score": "77",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-5] Pair 22.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 28616 holders \u2014 reasonably distributed; Deep liquidity ($1,604,717); C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-112638-0x230f1E24.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-112638-0x230f1E24.md",
+      "title": "Investigation \u2014 NES",
+      "symbol": "NES",
+      "name": "Nesa",
+      "date": "2026-07-21T11:26:38Z",
+      "target": "0x230f1E241C621d5af670Dad83ebCdd18971E2995",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-5] Pair 22.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 28616 holders \u2014 reasonably distributed; Deep liquidity ($1,604,717); C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-112638-0x230f1E24.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-093349-0x431F2f58.md",
@@ -593,20 +607,6 @@
       "score": "58",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $29,483; [-10] Pair 3.7 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 15369 holders \u2014 reasonably distributed; Cus",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-201317-0x24366661.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-193246-0xb2000000.md",
-      "title": "Investigation \u2014 BRIUN",
-      "symbol": "BRIUN",
-      "name": "Briun Armstrong",
-      "date": "2026-07-18T19:32:46Z",
-      "target": "0xb20000000000000000000038a46caFDcb2B3a301",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,891 (rug/illiquid); [-10] Low liquidity $1,891; [-10] Pair 3.2 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity fou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-193246-0xb2000000.md"
     }
   ],
   "reports": [
