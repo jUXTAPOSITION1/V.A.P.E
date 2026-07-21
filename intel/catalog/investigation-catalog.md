@@ -363,3 +363,5 @@
 | 2026-07-21 | auto | 0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2 (RISE) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-21 | auto | 0x230f1E241C621d5af670Dad83ebCdd18971E2995 (NES) | deep_investigation | CAUTION (77/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-21 | auto | 0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e (DEXE) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T11:50:33Z",
+  "generated": "2026-07-21T12:59:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 331,
@@ -15,25 +15,25 @@
       "skillforge": 3
     },
     "broadcasts": 92,
-    "investigations": 266,
+    "investigations": 267,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 16
+    "skills": 17
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-112638-0x230f1E24.md",
-      "title": "Investigation \u2014 NES",
-      "symbol": "NES",
-      "name": "Nesa",
-      "date": "2026-07-21T11:26:38Z",
-      "target": "0x230f1E241C621d5af670Dad83ebCdd18971E2995",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-5] Pair 22.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 28616 holders \u2014 reasonably distributed; Deep liquidity ($1,604,717); C",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-112638-0x230f1E24.md"
+      "file": "investigation-20260721-125936-0x6E88056E.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-21T12:59:36Z",
+      "target": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 47310 holders \u2014 reasonably distributed; Trading 776+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 2114+ days \u2014 independent longevity corrobor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-125936-0x6E88056E.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-125936-0x6E88056E.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-21T12:59:36Z",
+      "target": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 47310 holders \u2014 reasonably distributed; Trading 776+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 2114+ days \u2014 independent longevity corrobor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-125936-0x6E88056E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-112638-0x230f1E24.md",
@@ -593,20 +607,6 @@
       "score": "58",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $27,791; [-10] Pair 3.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 8620 holders \u2014 reasonably distributed; Cust",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-212532-0x21b8dfe7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-201317-0x24366661.md",
-      "title": "Investigation \u2014 BRIAN",
-      "symbol": "BRIAN",
-      "name": "Coinbase Man",
-      "date": "2026-07-18T20:13:17Z",
-      "target": "0x243666616819d6D0A106A769efB1Ee8890Ae2F73",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "58",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Low liquidity $29,483; [-10] Pair 3.7 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 15369 holders \u2014 reasonably distributed; Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-201317-0x24366661.md"
     }
   ],
   "reports": [
@@ -1646,6 +1646,12 @@
     }
   ],
   "skills": [
+    {
+      "file": "base-token-investigation.md",
+      "title": "Base Token Investigation",
+      "summary": "When-to-use Investigating Base-chain tokens (chain 8453) that return CAUTION verdicts (e.g. cbBTC at 0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf scoring 74/100) with flags for upgradeable proxies, unrenounced ownership, o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/base-token-investigation.md"
+    },
     {
       "file": "defi-protocol-security-audit-playbook.md",
       "title": "DeFi Protocol Security Audit Playbook",

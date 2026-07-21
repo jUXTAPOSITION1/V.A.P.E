@@ -4,3 +4,4 @@
 {"ts": "2026-07-21T06:38:19.870167Z", "target": "binance-cex", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-21T09:33:55.724105Z", "target": "base", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-21T11:26:45.994747Z", "target": "compound-v3", "hired": ["unlocks"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-21T12:59:43.391801Z", "target": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}

@@ -824,6 +824,25 @@
     "symbol": "BANK",
     "times_investigated": 1
   },
+  "56:0x6e88056e8376ae7709496ba64d37fa2f8015ce3e": {
+    "address": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
+    "chain": "56",
+    "creator_address": "0x4706501efaaaa4ccd2ad5f157af19a9bff221492",
+    "first_investigated": "2026-07-21T12:59:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-125936-0x6E88056E.md",
+        "score": 92,
+        "ts": "2026-07-21T12:59:36Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-21T12:59:36Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "DEXE",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",
