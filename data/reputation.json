@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T23:26:41Z",
+  "generated": "2026-07-21T03:49:09Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 202,
-    "intel_reports": 225,
+    "reports_published": 206,
+    "intel_reports": 226,
     "intel_broadcasts": 90,
-    "catalog_investigations": 170,
+    "catalog_investigations": 171,
     "token_scans_logged": 0,
     "skills_codified": 16,
     "tools_total": 16,
@@ -75,10 +75,10 @@
     "work_log_entries": 188,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260629",
-    "latest_report": "20260717"
+    "latest_report": "20260721"
   },
   "capabilities": {
-    "offerings_live": 30,
+    "offerings_live": 31,
     "auto_fulfilled_zero_llm": [
       "bridges",
       "chain_fees",
@@ -223,7 +223,7 @@
         "auto": false,
         "x402": true,
         "data": false,
-        "sla": "async — no fixed SLA (frontier-model)"
+        "sla": "async \u2014 no fixed SLA (frontier-model)"
       },
       {
         "name": "forensics_deep",
@@ -247,6 +247,15 @@
         "name": "wallet_pnl_deepdive",
         "price_usd": 0.25,
         "summary": "Real Base-mainnet wallet balances (via Alchemy) + an unrealized-P&L estimate per holding (current value vs. first-acquisition price, via CoinGecko) \u2014 x402 only, not ACP-fulfilled",
+        "auto": false,
+        "x402": true,
+        "data": false,
+        "sla": "instant"
+      },
+      {
+        "name": "website_review",
+        "price_usd": 0.15,
+        "summary": "Phishing/scam-page red-flag read of a website URL: real scrape + frontier-LLM read for fake contract addresses, wallet-drainer patterns, brand mismatch \u2014 x402 only, not yet ACP-listed",
         "auto": false,
         "x402": true,
         "data": false,
