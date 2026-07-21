@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T09:30:36Z",
+  "generated": "2026-07-21T09:33:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 328,
@@ -15,7 +15,7 @@
       "skillforge": 3
     },
     "broadcasts": 92,
-    "investigations": 264,
+    "investigations": 265,
     "tools": 16,
     "tools_verified": 16,
     "skills": 16
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-063812-0xA12CC123.md",
-      "title": "Investigation \u2014 ZAMA",
-      "symbol": "ZAMA",
-      "name": "Zama",
-      "date": "2026-07-21T06:38:12Z",
-      "target": "0xA12CC123ba206d4031D1c7f6223D1C2Ec249f4f3",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 4410 holders \u2014 reasonably distributed; Deep liquidity ($754,580); Trading 169+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-063812-0xA12CC123.md"
+      "file": "investigation-20260721-093349-0x431F2f58.md",
+      "title": "Investigation \u2014 RISE",
+      "symbol": "RISE",
+      "name": "RISE TOKEN",
+      "date": "2026-07-21T09:33:49Z",
+      "target": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 2.0 days old (extreme fresh-launch risk); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 23205 holders \u2014 rea",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-093349-0x431F2f58.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-093349-0x431F2f58.md",
+      "title": "Investigation \u2014 RISE",
+      "symbol": "RISE",
+      "name": "RISE TOKEN",
+      "date": "2026-07-21T09:33:49Z",
+      "target": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 2.0 days old (extreme fresh-launch risk); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 23205 holders \u2014 rea",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-093349-0x431F2f58.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-063812-0xA12CC123.md",
@@ -593,20 +607,6 @@
       "score": "10",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $1,891 (rug/illiquid); [-10] Low liquidity $1,891; [-10] Pair 3.2 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity fou",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-193246-0xb2000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260718-190921-0x89837420.md",
-      "title": "Investigation \u2014 MidnightProtocol",
-      "symbol": "MidnightProtocol",
-      "name": "MidnightProtocol",
-      "date": "2026-07-18T19:09:21Z",
-      "target": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +1095% (volatility/manipulation); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 2331 holders \u2014 reasonably distributed; Custom verified sourc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260718-190921-0x89837420.md"
     }
   ],
   "reports": [

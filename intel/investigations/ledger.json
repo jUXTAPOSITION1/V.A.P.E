@@ -153,6 +153,25 @@
     "symbol": "CES",
     "times_investigated": 1
   },
+  "137:0x431f2f58ab87d9fe8acef48b17e43a0f8d7e1eb2": {
+    "address": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
+    "chain": "137",
+    "creator_address": "0xcbf0e9ccb0b1f6a0edc098c156259739798e8b4d",
+    "first_investigated": "2026-07-21T09:33:49Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-093349-0x431F2f58.md",
+        "score": 63,
+        "ts": "2026-07-21T09:33:49Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-21T09:33:49Z",
+    "last_score": 63,
+    "last_verdict": "CAUTION",
+    "symbol": "RISE",
+    "times_investigated": 1
+  },
   "137:0x4c18406fa690faa53e5efa899a971557251af72d": {
     "address": "0x4c18406Fa690fAa53E5efa899a971557251Af72d",
     "chain": "137",

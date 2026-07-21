@@ -359,3 +359,5 @@
 | 2026-07-21 | auto | 0x47883e389BB6be3650B0C0935b300b50a95fc072 (FWA) | deep_investigation | REJECT (35/100) | Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) — can still act | +7d |
 
 | 2026-07-21 | auto | 0xA12CC123ba206d4031D1c7f6223D1C2Ec249f4f3 (ZAMA) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-21 | auto | 0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2 (RISE) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
