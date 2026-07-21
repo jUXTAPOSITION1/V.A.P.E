@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-21T00:00:23Z",
+  "generated": "2026-07-21T02:47:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 321,
+    "reports": 322,
     "reports_by_type": {
+      "security": 56,
       "bounty": 96,
       "sentiment": 31,
       "base": 58,
       "virtuals": 58,
-      "security": 55,
       "macro": 16,
       "bug": 2,
       "mainnet": 2,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-233147-0xa0Df17B5.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260720_235647.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-20T23:56:47Z",
-      "threat": "CAUTION",
-      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260720_235647.md",
-      "bytes": 11789
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-21-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-21T02:00Z",
+      "threat": null,
+      "summary": "The current threat landscape is characterized by a high frequency of incidents, with 6 incidents reported in the last 7 days. However, none of these incidents have exceeded $50M in losses over the last 14 days. The incidents are diverse in terms of the protocols affected, the blockchains used (including Solana, Ethereum, Arbitrum, and Hed",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-21-02.md",
+      "bytes": 6536
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-21-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-21T02:00Z",
+      "threat": null,
+      "summary": "The current threat landscape is characterized by a high frequency of incidents, with 6 incidents reported in the last 7 days. However, none of these incidents have exceeded $50M in losses over the last 14 days. The incidents are diverse in terms of the protocols affected, the blockchains used (including Solana, Ethereum, Arbitrum, and Hed",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-21-02.md",
+      "bytes": 6536
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-17 09:12 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-17-09.md",
       "bytes": 2232
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-17-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-17T08:00Z",
-      "threat": null,
-      "summary": "The real incident feed shows 7 exploits over the 7-day window from 2026-07-11 to 2026-07-16. The largest were Ostium ($18.0M, Arbitrum, price oracle manipulation) and Bonzo Lend ($10.05M, Hedera, price oracle manipulation). The remaining five were smaller: DefiTuna Lending ($0.58M, Solana), BarnBridge ($0.776M, Ethereum, malicious governa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-17-08.md",
-      "bytes": 6063
     }
   ],
   "broadcasts": [
