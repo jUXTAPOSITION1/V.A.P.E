@@ -3,14 +3,6 @@
     "ts": "2026-07-19T13:44:46Z",
     "value": 48.94
   },
-  "mover:BRIAN / ETH": {
-    "ts": "2026-07-19T02:49:57Z",
-    "value": 51.494
-  },
-  "mover:BRIUN / WETH 1%": {
-    "ts": "2026-07-19T02:49:57Z",
-    "value": -51.915
-  },
   "mover:Baseller / WETH 0.01%": {
     "ts": "2026-07-19T22:54:10Z",
     "value": 372.659
@@ -18,10 +10,6 @@
   "mover:DEGEN / WETH 0.3%": {
     "ts": "2026-07-19T05:55:20Z",
     "value": 25.337
-  },
-  "mover:MidnightProtocol / WETH 0.3%": {
-    "ts": "2026-07-19T02:49:57Z",
-    "value": -38.701
   },
   "mover:VORF / WETH 0.01%": {
     "ts": "2026-07-19T16:01:44Z",
