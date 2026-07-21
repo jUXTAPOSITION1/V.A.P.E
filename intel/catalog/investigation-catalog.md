@@ -371,3 +371,5 @@
 | 2026-07-21 | auto | 0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525 (HLX) | deep_investigation | CAUTION (70/100) | Low holder count (155) | +7d |
 
 | 2026-07-21 | auto | 0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3 (cbBTC) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-21 | auto | 0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF (USDai) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |

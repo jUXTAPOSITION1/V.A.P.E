@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-21T20:04:30Z — 31 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-21T21:23:08Z — 32 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| USDai | Arbitrum | `0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF` | 57/100 | 1 | 2026-07-21T21:23:08Z |
 | HLX | Ethereum | `0x28D4e499C4CdE621e1Cea7c9CBf9D43bf75a9525` | 70/100 | 1 | 2026-07-21T18:22:17Z |
 | NES | Ethereum | `0x230f1E241C621d5af670Dad83ebCdd18971E2995` | 77/100 | 1 | 2026-07-21T11:26:38Z |
 | RISE | Polygon | `0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2` | 63/100 | 1 | 2026-07-21T09:33:49Z |

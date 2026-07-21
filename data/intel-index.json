@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-21T21:18:59Z",
+  "generated": "2026-07-21T21:23:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 340,
@@ -15,7 +15,7 @@
       "skillforge": 3
     },
     "broadcasts": 94,
-    "investigations": 270,
+    "investigations": 271,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-200430-0x40Faa04e.md",
-      "title": "Investigation \u2014 cbBTC",
-      "symbol": "cbBTC",
-      "name": "Coinbase Wrappped BTC",
-      "date": "2026-07-21T20:04:30Z",
-      "target": "0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 28290 holders \u2014 reasonably distributed; Trading 164+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-200430-0x40Faa04e.md"
+      "file": "investigation-20260721-212308-0x0A1a1A10.md",
+      "title": "Investigation \u2014 USDai",
+      "symbol": "USDai",
+      "name": "USDai",
+      "date": "2026-07-21T21:23:08Z",
+      "target": "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $94 (rug/illiquid); [-10] Low liquidity $94. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($156,547,951 circulating, $0.9998 peg); 2776 holders \u2014 reasonably distributed; Trading 293+ days without a kno",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-212308-0x0A1a1A10.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260721-212308-0x0A1a1A10.md",
+      "title": "Investigation \u2014 USDai",
+      "symbol": "USDai",
+      "name": "USDai",
+      "date": "2026-07-21T21:23:08Z",
+      "target": "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $94 (rug/illiquid); [-10] Low liquidity $94. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($156,547,951 circulating, $0.9998 peg); 2776 holders \u2014 reasonably distributed; Trading 293+ days without a kno",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-212308-0x0A1a1A10.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-200430-0x40Faa04e.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $18,392; [-10] Pair 12.7 days old \u2014 under two w",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-045003-0x72f3a461.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-010507-0xb2000000.md",
-      "title": "Investigation \u2014 BRIUN",
-      "symbol": "BRIUN",
-      "name": "Briun Amstrong",
-      "date": "2026-07-19T01:05:07Z",
-      "target": "0xb20000000000000000000012141bf387DD37eB01",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $412 (rug/illiquid); [-10] Low liquidity $412; [-15] Pair only 2.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-010507-0xb2000000.md"
     }
   ],
   "reports": [
