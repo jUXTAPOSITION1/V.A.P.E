@@ -108,10 +108,22 @@ Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
 
 This keeps cost ≈ 0 while idle; the model only wakes when escrow money is on the table.
 
-## Client side (hiring other agents) [WIP]
+## Client side (hiring other agents) [WIP / OK for self-hire]
 VAPE can also delegate: `acp browse "<service>"` → `acp client create-job` → `fund` →
 `complete`. Used to obtain specialist work (data, compute, content) when cheaper than
 doing it in-house.
+
+**Live since this round:** `scripts/acp-monitor/virtuals_evaluator.py` — VAPE acting as
+its own ACP client, hiring one of its own already-live selling offerings
+(`token_safety_check`/`liquidity_check`/`rug_pull_alert`/`exploit_check`/
+`dossier_check`) to evaluate a real Virtuals-Protocol-tagged token, at a fixed cadence
+of 1 real on-chain job every 4 hours. Same wallet on both sides of a genuine
+USDC-escrow job — proves the ACP payment rail end-to-end the same way
+`agents/data_agent.py` already proves x402 end-to-end, and turns every run into a real,
+verifiable evaluation of a live Virtuals project. Runs on the same persistent host as
+the listener/drain daemons above (never GitHub Actions — see the module's own
+docstring for why the `restricted`-policy signer this needs can't live in an ephemeral
+CI runner). Delegation to *other* (non-VAPE) specialist agents is still [WIP].
 
 ## CLI surface (reference)
 All actions run through the ACP CLI (`acp`), never ad-hoc Web3 scripts:

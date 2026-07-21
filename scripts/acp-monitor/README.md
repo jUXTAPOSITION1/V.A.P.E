@@ -33,6 +33,10 @@ deliverables — at near-zero compute. Mirrors the bounty-radar "Option A" cost 
 ## Crons
 - `vape-acp-keepalive` (every 3h) — restarts drain daemon if dead (post-restart recovery)
 - `vape-acp-handler` (disabled schedule) — fired on-demand by the drain daemon
+- `vape-virtuals-evaluator` (every 4h, add via `crontab -e`: `0 */4 * * * cd DIR && python3 virtuals_evaluator.py >> virtuals_evaluator.log 2>&1`)
+  — VAPE self-hiring one of its own ACP offerings to evaluate a real Virtuals-tagged
+  token; see `virtuals_evaluator.py`'s own docstring. Client-side (buyer role), unlike
+  everything else in this directory (provider/selling role).
 
 ## Lifecycle (provider/selling)
 job.created → set-budget (offering price) → job.funded → run tool + submit deliverable → done.
