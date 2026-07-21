@@ -11,7 +11,11 @@ if ! command -v aderyn >/dev/null 2>&1; then
   # toolchain, no intermediate cyfrinup tool.
   echo "[aderyn.sh] installing prebuilt binary..." >&2
   mkdir -p "$HOME/.cyfrin/bin"
-  curl --proto '=https' --tlsv1.2 -fsSL https://github.com/cyfrin/aderyn/releases/latest/download/aderyn-installer.sh | bash >/dev/null 2>&1
+  ADERYN_INSTALLER=$(mktemp)
+  if curl --proto '=https' --tlsv1.2 -fsSL -o "$ADERYN_INSTALLER" https://github.com/cyfrin/aderyn/releases/latest/download/aderyn-installer.sh 2>/dev/null; then
+    bash "$ADERYN_INSTALLER" >/dev/null 2>&1
+  fi
+  rm -f "$ADERYN_INSTALLER"
 fi
 command -v aderyn >/dev/null 2>&1 || { echo '{"error":"aderyn install failed"}'; exit 1; }
 
