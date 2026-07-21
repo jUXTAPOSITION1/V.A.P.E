@@ -35,9 +35,19 @@ export PATH="$HOME/.local/bin:$PATH"
 
 echo "[install_all] aderyn..." >&2
 if ! command -v aderyn >/dev/null 2>&1; then
-  curl -fsSL https://raw.githubusercontent.com/Cyfrin/aderyn/dev/cyfrinup/install | bash >/dev/null 2>&1
-  export PATH="$HOME/.cyfrin/bin:$PATH"
-  command -v cyfrinup >/dev/null 2>&1 && cyfrinup >/dev/null 2>&1
+  # Confirmed broken: the old Cyfrin/aderyn/dev/cyfrinup/install URL 404s
+  # (verified directly — Cyfrin's real cyfrinup lives in the separate
+  # Cyfrin/up repo, not a branch of Cyfrin/aderyn), which silently no-opped
+  # this install on every single run. Cyfrin's own aderyn-installer.sh
+  # release asset (what cyfrinup's dynamic_script calls internally anyway)
+  # installs the prebuilt binary directly — one step, no Rust toolchain,
+  # no intermediate cyfrinup tool needed at all.
+  mkdir -p "$HOME/.cyfrin/bin"
+  ADERYN_INSTALLER=$(mktemp)
+  if curl --proto '=https' --tlsv1.2 -fsSL -o "$ADERYN_INSTALLER" https://github.com/cyfrin/aderyn/releases/latest/download/aderyn-installer.sh 2>/dev/null; then
+    bash "$ADERYN_INSTALLER" >/dev/null 2>&1
+  fi
+  rm -f "$ADERYN_INSTALLER"
 fi
 export PATH="$HOME/.cyfrin/bin:$PATH"
 

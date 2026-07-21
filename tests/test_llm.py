@@ -880,3 +880,36 @@ class TestRepoDigest:
         system_sent = captured["body"]["messages"][0]["content"]
         assert system_sent == "sys prompt"
         assert "REPO DIGEST" not in system_sent
+
+
+class TestDescribeUnavailable:
+    """describe_unavailable() is the ONLY form of an all-providers-failed
+    exception allowed into a customer-facing report (see
+    agents/deep_dive_audit.py/external_audit.py's except branches) — the raw
+    exception names internal provider identifiers (xai_1/groq/gemini/
+    cerebras/oci_grok) and can embed a provider's raw HTTP error body
+    verbatim, confirmed to include that provider's own internal account/org
+    identifier in a real observed failure, not just a generic message."""
+
+    def test_no_key_configured_case_is_generic(self):
+        exc = RuntimeError("no LLM provider key set (need one of: GROQ_API_KEY, XAI_API_KEY_1)")
+        msg = llm.describe_unavailable(exc)
+        assert "GROQ_API_KEY" not in msg
+        assert "XAI_API_KEY_1" not in msg
+        assert "configured" in msg.lower()
+
+    def test_all_providers_failed_case_never_leaks_provider_names_or_bodies(self):
+        exc = RuntimeError(
+            "all LLM providers failed/absent: xai_1:HTTP410 {\"error\":\"Live search is deprecated\"}, "
+            "groq:HTTP429 {\"error\":{\"message\":\"...org_01kvrrkqgsfk4thyv722a2ttvm...\"}}, "
+            "gemini:HTTP429 [...], cerebras:HTTP404 {...}"
+        )
+        msg = llm.describe_unavailable(exc)
+        for leaked in ("xai_1", "groq", "gemini", "cerebras", "org_01kvrrkqgsfk4thyv722a2ttvm", "HTTP410", "HTTP429"):
+            assert leaked not in msg, f"{leaked!r} leaked into customer-facing message: {msg!r}"
+        assert "unavailable" in msg.lower() or "unreachable" in msg.lower() or "rate-limited" in msg.lower()
+
+    def test_distinguishes_no_key_from_all_failed(self):
+        no_key = llm.describe_unavailable(RuntimeError("no LLM provider key set (need one of: X)"))
+        all_failed = llm.describe_unavailable(RuntimeError("all LLM providers failed/absent: xai_1:HTTP410 x"))
+        assert no_key != all_failed

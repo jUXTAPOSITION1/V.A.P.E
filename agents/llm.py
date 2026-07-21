@@ -465,6 +465,24 @@ def ask(system, user, *, tier="fast", temperature=0.7, max_tokens=2048,
                        + ", ".join(env for _, env, _, _ in (provider_order or PROVIDERS)) + ")")
 
 
+def describe_unavailable(exc):
+    """Safe, non-identifying summary of an ask()/ask_oci_grok()-family total-
+    failure exception, for embedding in a CUSTOMER-FACING report (unlike the
+    raw exception, which is fine in server-side stderr logs). The raw message
+    is internal diagnostic detail this repo's own de-branding discipline
+    already excludes from reports elsewhere (see agents/deep_dive_audit.py's
+    Methodology section): it names internal provider identifiers (xai_1,
+    groq, gemini, cerebras, oci_grok...) and, worse, can embed a provider's
+    raw HTTP error body verbatim — which has been observed to include that
+    provider's own internal account/org identifiers, not just a generic error
+    string. A paying buyer's report should say AI reasoning was unavailable
+    and why, in general terms, never repeat any of that."""
+    msg = str(exc)
+    if "no LLM provider key set" in msg:
+        return "no AI reasoning provider configured this run"
+    return "all AI reasoning providers were rate-limited or unreachable this cycle"
+
+
 def ask_frontier(system, user, **kw):
     """ask() pinned to the frontier tier + FRONTIER_ORDER: Grok 4.1 Fast
     first (key 1, then key 2), Groq/Gemini/the rest of the chain as fallback."""

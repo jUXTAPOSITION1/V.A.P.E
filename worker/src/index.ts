@@ -1046,8 +1046,12 @@ const GH_SLUG_RE = /^[A-Za-z0-9_.-]+$/;
 // actual settlement still happens after (see the onAfterSettle hook above),
 // and is cancelled automatically if this handler responds >= 400. This just
 // kicks off the real async job and returns immediately — the actual audit
-// runs in GitHub Actions, not here, so neither path logs an x402 job record
-// (see lib/jobLog.ts) or appears in the live feed.
+// runs in GitHub Actions, not here. Both paths still set a vapeJobDraft
+// (verdict/symbol left null — not known until the async job finishes) so the
+// real, settled payment logs to the live feed immediately, same as every
+// other offering; a confirmed real gap until this comment was updated
+// (bounty_deep_dive transactions genuinely settled but never appeared on
+// /x402/feed).
 //
 // Two fulfillment paths, chosen by which inputs the buyer supplies (the site's
 // hire-from-Bounty-Ops flow picks the right one per program automatically,
@@ -1076,6 +1080,14 @@ const JOB_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
 // which offering dispatched the job — deep_dive_audit.py's callback_url is an
 // opaque POST target it's handed, and /callback's own handler is keyed
 // entirely by the unguessable jobId (see JOB_ID_RE), never by offering name.
+// Real settled price per offering — both $1.00 today (same underlying
+// pipeline), kept as a lookup rather than a shared constant so a future
+// divergence in pricing doesn't silently mis-log revenue for one of them.
+const ADDRESS_AUDIT_PRICE: Record<"bounty_deep_dive" | "deep_contract_audit", string> = {
+  bounty_deep_dive: BOUNTY_DEEP_DIVE_PRICE,
+  deep_contract_audit: DEEP_CONTRACT_AUDIT_PRICE,
+};
+
 async function dispatchAddressAuditJob(
   c: Context<{ Bindings: Env; Variables: Variables }>,
   offeringName: "bounty_deep_dive" | "deep_contract_audit",
@@ -1083,9 +1095,33 @@ async function dispatchAddressAuditJob(
   chain: string,
   callerCallbackUrl: string | undefined,
 ) {
+  const t0 = Date.now();
+  // The real verdict/symbol only exist once the async GitHub Actions job
+  // finishes (minutes to an hour later) — this draft logs the real payment
+  // settlement to the live ledger THE MOMENT it happens (see onAfterSettle
+  // above), same as every other offering, rather than leaving bounty_deep_dive/
+  // deep_contract_audit as the one gap where a genuinely paid job never
+  // appears in /x402/feed at all.
+  const logDraft = (ok: boolean, error: string | null) => {
+    c.set("vapeJobDraft", {
+      id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+      ts: new Date().toISOString(),
+      offering: offeringName,
+      address,
+      chain_id: Number(chain) || 8453,
+      symbol: null,
+      name: null,
+      verdict: null,
+      status: ok ? "settled" : "error",
+      amount_usd: Number(ADDRESS_AUDIT_PRICE[offeringName].replace("$", "")),
+      latency_ms: Date.now() - t0,
+      error,
+    });
+  };
   if (!c.env.GH_DISPATCH_TOKEN) {
     // Payment already settled — this is a real config gap, not a client error, so 503
     // (not 400/402) tells the buyer to retry rather than re-check their request.
+    logDraft(false, "audit dispatch not configured (GH_DISPATCH_TOKEN unset)");
     return c.json({
       offering: offeringName, status: "error",
       error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
@@ -1140,11 +1176,13 @@ async function dispatchAddressAuditJob(
   const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
   if (!dispatch.ok) {
     await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
+    logDraft(false, `job dispatch failed (HTTP ${dispatch.status})`);
     return c.json({
       offering: offeringName, status: "error",
       error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
     }, 502);
   }
+  logDraft(true, null);
   return c.json({
     offering: offeringName, status: "accepted", address, chain,
     job: jobId,
@@ -1336,9 +1374,25 @@ app.get("/scan/bounty_deep_dive", async (c) => {
       error: "provide either a contract address or a GitHub owner/repo",
     }, 400);
   }
+
+  // Address target shares deep_contract_audit's exact same dispatch pipeline
+  // and ledger-logging (see dispatchAddressAuditJob above) — no need to
+  // duplicate it here.
+  if (hasAddress) {
+    return dispatchAddressAuditJob(c, "bounty_deep_dive", address, chain, callerCallbackUrl);
+  }
+
+  const t0 = Date.now();
   if (!c.env.GH_DISPATCH_TOKEN) {
     // Payment already settled — this is a real config gap, not a client error, so 503
     // (not 400/402) tells the buyer to retry rather than re-check their request.
+    c.set("vapeJobDraft", {
+      id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+      ts: new Date().toISOString(), offering: "bounty_deep_dive", address: `${owner}/${repo}`,
+      chain_id: 8453, symbol: null, name: null, verdict: null, status: "error",
+      amount_usd: Number(BOUNTY_DEEP_DIVE_PRICE.replace("$", "")), latency_ms: Date.now() - t0,
+      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset)",
+    });
     return c.json({
       offering: "bounty_deep_dive", status: "error",
       error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
@@ -1360,7 +1414,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
       await c.env.VAPE_JOBS.put(`job:${jobId}`, JSON.stringify({
         status: "pending",
         offering: "bounty_deep_dive",
-        target: hasAddress ? { address, chain } : { owner, repo, ref: ref || "main" },
+        target: { owner, repo, ref: ref || "main" },
         createdAt: new Date().toISOString(),
       }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
     } catch {
@@ -1390,36 +1444,26 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     }
   };
 
-  if (hasAddress) {
-    const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
-    if (!dispatch.ok) {
-      await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
-      return c.json({
-        offering: "bounty_deep_dive", status: "error",
-        error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
-      }, 502);
-    }
-    return c.json({
-      offering: "bounty_deep_dive", status: "accepted", address, chain,
-      job: jobId,
-      message: "Audit queued — a submission-ready PoC report lands in intel/audits/poc-reports/ "
-        + "as soon as it completes."
-        + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
-      track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
-      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
-    });
-  }
+  const logRepoDraft = (ok: boolean, error: string | null) => c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(), offering: "bounty_deep_dive", address: `${owner}/${repo}`,
+    chain_id: 8453, symbol: null, name: null, verdict: null,
+    status: ok ? "settled" : "error",
+    amount_usd: Number(BOUNTY_DEEP_DIVE_PRICE.replace("$", "")), latency_ms: Date.now() - t0, error,
+  });
 
   const dispatch = await dispatchExternalBountyAudit(c.env.GH_DISPATCH_TOKEN, {
     owner, repo, ref, programName, paths, callbackUrl,
   });
   if (!dispatch.ok) {
     await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
+    logRepoDraft(false, `job dispatch failed (HTTP ${dispatch.status})`);
     return c.json({
       offering: "bounty_deep_dive", status: "error",
       error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
     }, 502);
   }
+  logRepoDraft(true, null);
   return c.json({
     offering: "bounty_deep_dive", status: "accepted", owner, repo, ref: ref || "main",
     job: jobId,
