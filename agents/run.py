@@ -603,6 +603,35 @@ def _nonclean_digests(digests):
     return out
 
 
+def _format_nonclean_digest(d):
+    """Render one _recent_investigations()-style " | "-joined digest string
+    as real, separate Markdown lines instead of one giant flattened bullet.
+
+    Real bug this fixes: _recent_investigations() builds each digest by
+    joining a "# Investigation — SYMBOL" heading and several "- **Field:**
+    value" metadata lines with " | " into a single string (so it can be
+    logged/compared as one line elsewhere) — but _reconcile_report()'s
+    fallback path then wrapped that ALREADY-" | "-joined string in one more
+    outer bullet (f"- {d}"), so the heading and every "- **Field:**" marker
+    ended up mid-line, not at the start of their own line. Markdown only
+    recognizes a bullet/heading marker at the start of a line, so the
+    rendered result was a single wall-of-text bullet with literal "- **" and
+    "# " characters showing up as text instead of real structure — exactly
+    what shipped in reports/bounty_report_20260720_235647.md's fallback
+    section. Splitting back on " | " and re-emitting each piece as its own
+    line restores the real Markdown structure the two writers already
+    intended."""
+    parts = [p.strip() for p in (d or "").split(" | ") if p.strip()]
+    lines = []
+    for p in parts:
+        # The heading piece ("# Investigation — SYMBOL") needs to drop one
+        # level to nest cleanly under this section's own "## Investigation
+        # Findings" heading, otherwise it renders at the same level as the
+        # section heading itself.
+        lines.append(f"#{p}" if p.startswith("# ") else p)
+    return lines
+
+
 def _reconcile_report(report_text, digests):
     """Deterministic backstop against prompt injection via attacker-
     controlled token symbols (agents/redteam.py's fake-clean-verdict-via-
@@ -638,7 +667,10 @@ def _reconcile_report(report_text, digests):
                   "SIGNAL: marker, so it was not published as-is."]
         if nonclean:
             lines.append("Publishing this cycle's real investigation data directly instead:")
-            lines += [f"- {d}" for d in nonclean]
+            lines.append("")
+            for d in nonclean:
+                lines += _format_nonclean_digest(d)
+                lines.append("")
         else:
             lines.append("No non-clean investigation data this cycle to fall back to.")
         return "\n".join(lines), "HIGH"
@@ -649,8 +681,11 @@ def _reconcile_report(report_text, digests):
                   "The model reported SIGNAL: LOW this cycle, but the following real verdict(s) "
                   "were present in this cycle's own investigation data and are surfaced here "
                   "regardless of what the narrative below claims:"]
-        lines += [f"- {d}" for d in nonclean]
-        lines += ["", "---", "", text]
+        lines.append("")
+        for d in nonclean:
+            lines += _format_nonclean_digest(d)
+            lines.append("")
+        lines += ["---", "", text]
         return "\n".join(lines), "HIGH"
 
     return report_text, ("LOW" if claimed_low else "HIGH")

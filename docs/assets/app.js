@@ -909,6 +909,7 @@ const App = {
                         ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
+                    <div class="text-[10px] text-zinc-500 sm:hidden truncate">Vol ${fmtUsd(t.volume24)} · MCap ${fmtUsd(t.marketCap)}</div>
                 </div>
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
@@ -965,6 +966,7 @@ const App = {
                         ${t.isVirtuals?'<span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30 shrink-0">Virtuals</span>':''}
                     </div>
                     <div class="text-xs text-zinc-500 truncate">${this._esc(tok.name||'')}</div>
+                    <div class="text-[10px] text-zinc-500 sm:hidden truncate">Vol ${fmtUsd(t.volume24)} · MCap ${fmtUsd(t.marketCap)}</div>
                 </div>
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
