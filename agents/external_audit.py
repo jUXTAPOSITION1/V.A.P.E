@@ -59,10 +59,10 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 try:
-    from agents.llm import ask_oci_grok_frontier
+    from agents.llm import ask_oci_grok_frontier, describe_unavailable
     from agents.scaffold_move_target import scaffold_and_prove
 except Exception:
-    from llm import ask_oci_grok_frontier
+    from llm import ask_oci_grok_frontier, describe_unavailable
     from scaffold_move_target import scaffold_and_prove
 
 AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "external-bounties")
@@ -325,10 +325,16 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
     system = MOVE_AUDIT_SYSTEM if language == "move" else GENERIC_AUDIT_SYSTEM
     prompt = build_prompt(program_name, owner, repo, ref, files)
     try:
-        narrative, provider = ask_oci_grok_frontier(system, prompt, max_tokens=max_tokens, temperature=0.25,
-                                                     search=True)
+        # No search=True — see agents/deep_dive_audit.py's identical comment:
+        # that flag routes the request past OCI Grok (no live-search
+        # equivalent on OCI's endpoint) to the fallback chain instead, which
+        # defeats this offering's whole "OCI Grok 4.3 reads the real source"
+        # value proposition for a nice-to-have search assist.
+        narrative, provider = ask_oci_grok_frontier(system, prompt, max_tokens=max_tokens, temperature=0.25)
     except Exception as e:
-        narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
+        print(f"[external_audit] frontier LLM unavailable: {e}")
+        narrative, provider = f"[AI deep-dive analysis unavailable this cycle: {describe_unavailable(e)} — " \
+                               "every other section of this report is real and unaffected.]", None
 
     verdict_summary = "no real finding — LLM unavailable this cycle" if provider is None else \
         (re.search(r"(?im)^#+\s*executive summary\s*\n+(.+)", narrative)

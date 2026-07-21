@@ -81,6 +81,29 @@ def test_run_mythril_handles_invalid_json_output(monkeypatch):
     assert result["ran"] is True
     assert result["ok"] is False
     assert "no valid JSON" in result["reason"]
+    assert result["raw_tail"] == "mythril crashed"
+
+
+def test_append_raw_tail_renders_captured_diagnostic():
+    """Confirmed real gap: raw_tail was captured on every tool failure but
+    never rendered into the report, making 'no valid JSON' unactionable and
+    the report read as incomplete with no way to diagnose why a tool failed."""
+    lines = []
+    dda._append_raw_tail(lines, {"raw_tail": "mythril crashed: solc not found"})
+    joined = "\n".join(lines)
+    assert "mythril crashed: solc not found" in joined
+
+
+def test_append_raw_tail_noop_when_absent():
+    lines = []
+    dda._append_raw_tail(lines, {"reason": "mythril (myth) not installed in this environment this run"})
+    assert lines == []
+
+
+def test_append_raw_tail_noop_on_blank_tail():
+    lines = []
+    dda._append_raw_tail(lines, {"raw_tail": "   "})
+    assert lines == []
 
 
 def test_run_mythril_handles_timeout(monkeypatch):

@@ -58,12 +58,12 @@ SWEEP_AUDIT_DIR = os.path.join(ROOT, "intel", "audits", "hack-sweep-reports")
 try:
     from agents import investigate as inv
     from agents import data_fetchers as DF
-    from agents.llm import ask_oci_grok_frontier
+    from agents.llm import ask_oci_grok_frontier, describe_unavailable
     from agents.scaffold_foundry_target import scaffold_and_analyze
 except Exception:
     import investigate as inv
     import data_fetchers as DF
-    from llm import ask_oci_grok_frontier
+    from llm import ask_oci_grok_frontier, describe_unavailable
     from scaffold_foundry_target import scaffold_and_analyze
 
 
@@ -90,6 +90,20 @@ def _is_safe_callback_url(url):
         return True
     except Exception:
         return False
+
+
+def _append_raw_tail(lines, result):
+    """Surface a failed tool's actual stderr/stdout tail (already captured in
+    `raw_tail` by _run_slither/_run_mythril/_run_aderyn) in the report itself
+    — confirmed real gap: a generic "produced no valid JSON" reason with the
+    real diagnostic detail silently dropped made every one of these failures
+    unactionable and the report read as incomplete. Only fires when the tool
+    actually ran and failed (raw_tail is only ever set on that path) — a
+    clean "not installed"/"no key" skip has nothing to show."""
+    tail = (result.get("raw_tail") or "").strip()
+    if tail:
+        lines.append("  <details><summary>Raw tool output (last 500 chars)</summary>\n\n"
+                      f"  ```\n  {tail}\n  ```\n  </details>")
 
 
 def _run_slither(address, chain, timeout=180):
@@ -410,10 +424,22 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
                           mythril_result, aderyn_result)
     try:
-        narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3,
-                                                     search=True)
+        # No search=True here: that flag routes the request AWAY from OCI
+        # Grok (see ask_oci_grok()'s docstring — OCI's endpoint has no live-
+        # search equivalent, so a search=True request skips it deliberately)
+        # straight to whatever's next in the fallback chain. This offering's
+        # whole value proposition is OCI Grok 4.3 actually reading the real
+        # verified source (already embedded in `prompt` below, plus web_rep's
+        # own prior Tavily/Brave search) — losing that guaranteed for a
+        # nice-to-have live-search assist isn't the right trade for a paid
+        # premium audit, confirmed real regression (PR #238): every deep-dive
+        # audit since has skipped OCI Grok, several failing outright.
+        narrative, provider = ask_oci_grok_frontier(FRONTIER_SYSTEM, prompt, max_tokens=3000, temperature=0.3)
     except Exception as e:
-        narrative, provider = f"[frontier LLM unavailable this cycle: {e}]", None
+        print(f"[deep_dive_audit] frontier LLM unavailable: {e}")
+        narrative, provider = f"[AI deep-dive analysis unavailable this cycle: {describe_unavailable(e)} — " \
+                               "every other section of this report (recon, static/symbolic tooling) is real " \
+                               "and unaffected.]", None
 
     out_dir = SWEEP_AUDIT_DIR if engagement == "sweep" else AUDIT_DIR
     os.makedirs(out_dir, exist_ok=True)
@@ -467,6 +493,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
         L.append(f"- Raw findings: **{slither_result['total']}** — {slither_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {slither_result.get('reason')}")
+        _append_raw_tail(L, slither_result)
     L.append("")
     L.append("## Symbolic Testing (Halmos)")
     if symbolic_result.get("ran"):
@@ -488,12 +515,14 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
         L.append(f"- Raw issues: **{mythril_result['total']}** — {mythril_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {mythril_result.get('reason')}")
+        _append_raw_tail(L, mythril_result)
     L.append("")
     L.append("## Static Analysis (Aderyn)")
     if aderyn_result.get("ok"):
         L.append(f"- Raw issues: **{aderyn_result['total']}** — {aderyn_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {aderyn_result.get('reason')}")
+        _append_raw_tail(L, aderyn_result)
     L.append("")
     L.append("## Methodology")
     L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
@@ -508,8 +537,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
              "via the target chain's real public RPC — only if pre-installed this run.")
     L.append("6. Aderyn static AST analysis of that same scaffolded Foundry project — only if "
              "pre-installed this run and step 4's scaffolding stage was reached.")
-    L.append("7. A frontier-tier LLM (OCI-hosted Grok 4.3 first, Vertex-tuned Gemini/Gemini 2.5 "
-             "Pro/Groq as fallback) reads the actual verified source and reasons per "
+    L.append("7. A frontier-tier LLM reads the actual verified source and reasons per "
              "vulnerability class — this is VAPE's deepest automated pass, still followed by "
              "the human-verification list above.")
     L.append("8. White-hat only: read-only analysis, no exploitation attempted.")
