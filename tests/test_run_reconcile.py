@@ -22,9 +22,7 @@ def _assert_digest_rendered_as_real_lines(digest, text):
     the heading and every "- **Field:**" line must start their own line,
     not sit mid-line inside one giant bullet."""
     lines = text.splitlines()
-    for part in digest.split(" | "):
-        part = part.strip()
-        expected = f"#{part}" if part.startswith("# ") else part
+    for expected in run._format_nonclean_digest(digest):
         assert expected in lines, f"expected line {expected!r} not found in:\n{text}"
 
 

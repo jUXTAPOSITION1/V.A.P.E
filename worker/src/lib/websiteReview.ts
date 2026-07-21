@@ -23,7 +23,10 @@ export interface WebsiteReviewResult {
   red_flags?: string[];
   summary?: string;
   provider?: string;
+  truncated?: boolean;
 }
+
+const SCRAPE_REVIEW_LIMIT = 8000;
 
 const SYSTEM = "You are VAPE, an autonomous web-security reviewer giving a fast, paid read of a "
   + "single website's REAL scraped page content (below) for phishing/scam-site red flags: fake "
@@ -69,15 +72,34 @@ export async function reviewWebsite(env: ResearchEnv & LlmEnv, url: string): Pro
     };
   }
 
-  const user = `=== URL ===\n${url}\n\n=== SCRAPED PAGE CONTENT (via ${scrape.provider}, truncated) ===\n`
-    + scrape.content.slice(0, 8000);
+  // A real phishing/drainer pattern can sit anywhere on the page — truncating
+  // silently and still reporting a bare CLEAN would claim full coverage that
+  // was never actually reviewed. Tell the model the excerpt is partial (so it
+  // can hedge) AND surface that fact in the result itself rather than only
+  // in the prompt, since a CLEAN read of an incomplete page is a materially
+  // weaker finding than a CLEAN read of the whole thing.
+  const truncated = scrape.content.length > SCRAPE_REVIEW_LIMIT;
+  const excerpt = scrape.content.slice(0, SCRAPE_REVIEW_LIMIT);
+  const user = `=== URL ===\n${url}\n\n=== SCRAPED PAGE CONTENT (via ${scrape.provider}`
+    + (truncated ? `, showing the first ${SCRAPE_REVIEW_LIMIT} of ${scrape.content.length} characters — this is a PARTIAL excerpt, not the full page`
+                 : "")
+    + `) ===\n${excerpt}`;
   const result = await askFrontier(env, SYSTEM, user, { maxTokens: 400, temperature: 0.3, timeoutMs: 25000 });
   if (!result.available) {
     return {
       url, scrape_provider: scrape.provider, reachable: true, verdict: "UNKNOWN", red_flags: [],
-      summary: result.note || "LLM review unavailable this cycle.",
+      summary: result.note || "LLM review unavailable this cycle.", truncated,
     };
   }
   const { verdict, redFlags, summary } = parseVerdict(result.text || "");
-  return { url, scrape_provider: scrape.provider, reachable: true, verdict, red_flags: redFlags, summary, provider: result.provider };
+  // Never let a truncated review report an unqualified CLEAN — that would
+  // claim more coverage than actually happened. SUSPICIOUS/HIGH_RISK stay as
+  // reported (a real flag found in the reviewed portion is still a genuine,
+  // actionable finding regardless of what's beyond the cutoff).
+  const finalVerdict = truncated && verdict === "CLEAN" ? "UNKNOWN" : verdict;
+  const finalSummary = truncated
+    ? `${summary} [Only the first ${SCRAPE_REVIEW_LIMIT} of ${scrape.content.length} characters of this page were reviewed — a red flag beyond that cutoff would not have been caught.]`
+    : summary;
+  return { url, scrape_provider: scrape.provider, reachable: true, verdict: finalVerdict, red_flags: redFlags,
+           summary: finalSummary, provider: result.provider, truncated };
 }
