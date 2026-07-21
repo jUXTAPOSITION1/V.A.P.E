@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-21T16:17:30Z",
+  "generated": "2026-07-21T17:25:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 335,
+    "reports": 336,
     "reports_by_type": {
+      "bounty": 101,
       "base": 61,
       "virtuals": 61,
       "macro": 17,
-      "bounty": 100,
       "sentiment": 32,
       "security": 57,
       "bug": 2,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-151314-0xc2B8C664.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-21-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-21T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-21 16:17 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-21-16.md",
-      "bytes": 3415
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260721_172136.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-21T17:21:36Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_172136.md",
+      "bytes": 11948
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260721_172136.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-21T17:21:36Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_172136.md",
+      "bytes": 11948
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-18 03:47 UTC Registry status: 14/15 tools verified, 1 broken this cycle",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/skillforge-toolcheck-2026-07-18-03.md",
       "bytes": 1434
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-18-03.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-18T03:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-18 03:57 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-18-03.md",
-      "bytes": 2281
     }
   ],
   "broadcasts": [
