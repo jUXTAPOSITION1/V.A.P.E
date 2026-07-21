@@ -102,7 +102,13 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # has no ACP-side handler for them yet (still routed to the manual/SKILLFORGE
 # tier there, same as before this round). whale_watch was deliberately left
 # out this round (no real data source picked yet).
-X402 = AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive", "deep_contract_audit", "tx_decode", "bulk_safety_bundle"}
+#
+# website_review is a genuinely NEW offering (never previously ACP-listed,
+# unlike the four gap-closers above) — real scrape + frontier-LLM phishing/
+# scam-page read of a plain URL (worker/src/lib/websiteReview.ts), same
+# "x402-payable, not yet ACP-auto-fulfilled" shape as wallet_pnl_deepdive.
+X402 = AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive", "deep_contract_audit", "tx_decode",
+               "bulk_safety_bundle", "website_review"}
 # (AUTO already includes DL_NAMES, so the market-data tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
@@ -147,6 +153,9 @@ OFFERINGS = [
     ("wallet_pnl_deepdive", 0.25, "Real Base-mainnet wallet balances (via Alchemy) + an "
      "unrealized-P&L estimate per holding (current value vs. first-acquisition price, via "
      "CoinGecko) — x402 only, not ACP-fulfilled"),
+    ("website_review", 0.15, "Phishing/scam-page red-flag read of a website URL: real scrape + "
+     "frontier-LLM read for fake contract addresses, wallet-drainer patterns, brand mismatch — "
+     "x402 only, not yet ACP-listed"),
     ("prediction_market_odds", 0.01, "Live crypto/Base-relevant prediction-market odds from "
      "Polymarket and Kalshi, ranked by volume"),
     *DL_OFFERINGS,
