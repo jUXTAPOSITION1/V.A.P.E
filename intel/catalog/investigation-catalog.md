@@ -355,3 +355,5 @@
 | 2026-07-20 | auto | 0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2 (USDT) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-20 | auto | 0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845 (FWA) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) — can still act | +7d |
+
+| 2026-07-21 | auto | 0x47883e389BB6be3650B0C0935b300b50a95fc072 (FWA) | deep_investigation | REJECT (35/100) | Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) — can still act | +7d |
