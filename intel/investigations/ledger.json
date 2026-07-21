@@ -2414,6 +2414,25 @@
     "symbol": "VELVET",
     "times_investigated": 2
   },
+  "8453:0xc2b8c6647e7bca4ea7ccd27b52da849bb95652c2": {
+    "address": "0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2",
+    "chain": "8453",
+    "creator_address": "0x54e2acab04c89a3fe02852bf8dd69ee8f526bc75",
+    "first_investigated": "2026-07-21T15:13:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260721-151314-0xc2B8C664.md",
+        "score": 17,
+        "ts": "2026-07-21T15:13:14Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-21T15:13:14Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "misosoupqueen",
+    "times_investigated": 1
+  },
   "8453:0xc4aa3dc36ba618eaa0d76a89750430181cfc7b07": {
     "address": "0xC4aa3dc36ba618EAA0D76A89750430181cFc7b07",
     "chain": "8453",
