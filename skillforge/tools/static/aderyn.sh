@@ -17,6 +17,7 @@ if ! command -v aderyn >/dev/null 2>&1; then
   fi
   rm -f "$ADERYN_INSTALLER"
 fi
+export PATH="$HOME/.cyfrin/bin:$PATH"
 command -v aderyn >/dev/null 2>&1 || { echo '{"error":"aderyn install failed"}'; exit 1; }
 
 echo "[aderyn.sh] version: $(aderyn --version 2>&1)" >&2
