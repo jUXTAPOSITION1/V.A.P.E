@@ -165,7 +165,7 @@
         "price_usd": 0.05,
         "summary": "Plain-language tx decode + risk flags for any Base tx hash",
         "auto": false,
-        "x402": false,
+        "x402": true,
         "data": false,
         "sla": "instant"
       },
@@ -203,7 +203,7 @@
         "price_usd": 0.1,
         "summary": "6-hourly consolidated security+market intel broadcast",
         "auto": true,
-        "x402": false,
+        "x402": true,
         "data": false,
         "sla": "instant"
       },
@@ -212,7 +212,7 @@
         "price_usd": 0.5,
         "summary": "Scan 5-25 tokens in one job, 40% off",
         "auto": false,
-        "x402": false,
+        "x402": true,
         "data": false,
         "sla": "instant"
       },
@@ -221,9 +221,9 @@
         "price_usd": 1.0,
         "summary": "slither+aderyn+mythril severity-rated audit + 0-100 score",
         "auto": false,
-        "x402": false,
+        "x402": true,
         "data": false,
-        "sla": "instant"
+        "sla": "async — no fixed SLA (frontier-model)"
       },
       {
         "name": "forensics_deep",

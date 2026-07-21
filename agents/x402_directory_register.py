@@ -10,8 +10,13 @@ arbitrary external hosts outside this repo's normal keyless-API footprint
 (GoPlus/DexScreener/DefiLlama/CoinGecko), unreachable from this repo's dev
 sandbox; CI's unrestricted egress is required for this to actually work.
 
-Registers each of VAPE's 6 auto-fulfilled x402 offerings (docs/ACP_PROTOCOL.md
-/ data/reputation.json / worker/src/index.ts::OFFERING_PRICES) with:
+Registers each of VAPE's synchronous x402 "scan" offerings
+(docs/ACP_PROTOCOL.md / data/reputation.json / worker/src/index.ts::
+OFFERING_PRICES + the standalone tx_decode/community_intel_broadcast/
+bulk_safety_bundle routes), the two $1 async audit offerings
+(bounty_deep_dive and its deep_contract_audit alias — same file's
+BOUNTY_DEEP_DIVE_PRICE/DEEP_CONTRACT_AUDIT_PRICE), and the "data"
+micro-services (worker/src/dataHandlers.ts::DL_OFFERINGS) with:
   - 402 Index (https://402index.io) — documented, self-service REST API,
     POST /api/v1/register with {url, name, protocol, provider}. Confirmed
     schema at https://402index.io/api-docs.
@@ -125,6 +130,12 @@ OFFERINGS = {
                          "meme-factory-template detection, recent-hack correlation, public "
                          "web-reputation search, a live check of declared socials, and a "
                          "frontier-LLM quick source read."),
+    "tx_decode": ("0.05", "Plain-language transaction decode + risk flags for any Base/EVM tx "
+                         "hash — real Etherscan tx/receipt/logs + 4byte.directory signature lookup."),
+    "community_intel_broadcast": ("0.10", "VAPE's latest 6-hourly consolidated security + market "
+                         "intel broadcast — real committed output, not generated per-request."),
+    "bulk_safety_bundle": ("0.50", "token_safety_check batched over 5-25 tokens in one job, "
+                         "flat-priced."),
 }
 
 # Market-data micro-services — mirrors worker/src/dataHandlers.ts's
@@ -157,10 +168,34 @@ DATA_OFFERINGS = {
     "bridges": ("0.01", "Bridges ranked by daily volume — bridge-exploit threat data."),
 }
 
-# (name, (price, desc), route_prefix) across both tiers — one place that knows
+# bounty_deep_dive — real, x402-gated at /scan/bounty_deep_dive (see
+# worker/src/index.ts's BOUNTY_DEEP_DIVE_PRICE / BOUNTY_DEEP_DIVE_DISCOVERY),
+# but was never actually included in any external directory registration
+# below despite this script's own module docstring listing it as a live
+# offering — a real, silent discovery gap: other agents scanning 402index/
+# VAPOR for VAPE's services could never find it, unlike every other real
+# x402 route this repo serves. Kept in its own dict (not folded into
+# OFFERINGS) since its fulfillment shape is async (GitHub Actions dispatch),
+# not a same-request deterministic script — still genuinely x402-payable
+# at the same /scan/ route prefix, so it belongs in every registration pass.
+BOUNTY_OFFERINGS = {
+    "bounty_deep_dive": ("1.00", "Submission-ready bug-bounty PoC: real recon + Slither/Halmos/"
+                       "Mythril/Aderyn (when available) + a frontier-LLM source review, for a "
+                       "Base/EVM contract address or an external bounty program's own GitHub repo."),
+    # Address-only alias of the exact same pipeline above (see
+    # worker/src/index.ts's DEEP_CONTRACT_AUDIT_PRICE/dispatchAddressAuditJob)
+    # — its own x402 listing/name since that's how ACP already knows it.
+    "deep_contract_audit": ("1.00", "slither+aderyn+mythril severity-rated audit + 0-100 score "
+                       "for a Base/EVM contract address — the same real-tool pipeline as "
+                       "bounty_deep_dive, address-only."),
+}
+
+# (name, (price, desc), route_prefix) across all tiers — one place that knows
 # which offering lives at which route.
 def _all_offerings():
     for name, meta in OFFERINGS.items():
+        yield name, meta, "scan"
+    for name, meta in BOUNTY_OFFERINGS.items():
         yield name, meta, "scan"
     for name, meta in DATA_OFFERINGS.items():
         yield name, meta, "data"

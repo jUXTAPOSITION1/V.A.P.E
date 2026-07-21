@@ -194,17 +194,22 @@
         </section>
 
         <!-- ═══ 3. FEATURED INVESTIGATION (moved higher) ═══ -->
-        <section id="case-file" class="reveal panel mb-14">
+        <section id="case-file" class="reveal spotlight-section mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow">[ case study ]</div>
+                <div class="spotlight-kicker">[ spotlight ]</div>
                 <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
-            <h2 class="section-title text-lg mb-4">&gt; Featured Investigation</h2>
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
+                <h2 class="section-title text-lg sm:text-xl">&gt; Featured Investigation &amp; Latest Report</h2>
+                <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
+                    Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div id="inv-latest" class="panel-sm">
+                <div id="inv-latest" class="spotlight-card">
                     <div class="skeleton h-28"></div>
                 </div>
-                <div id="inv-report" class="panel-sm">
+                <div id="inv-report" class="spotlight-card">
                     <div class="skeleton h-28"></div>
                 </div>
             </div>
@@ -350,11 +355,24 @@
             direct line to commission a paid engagement — from a $0.01 exploit check to a $1 submission-ready bounty audit,
             hireable directly from a matched program below.</p>
 
-            <div id="bcc-telemetry" class="stat-line mb-8 pb-8 border-b border-white/10">
+            <div id="bcc-telemetry" class="stat-line mb-6 pb-6 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">live now</span><span id="bcc-live" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">platforms</span><span id="bcc-platforms" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">audits filed</span><span id="bcc-audits" class="stat-value">—</span></span>
+                <span class="stat-pair"><span class="stat-label">tasks (recent)</span><span id="bcc-tasks" class="stat-value">—</span></span>
+            </div>
+
+            <!-- Live task feed — real recent automated commits + one
+                 OCI-Grok-authored synthesis line (agents/task_feed.py,
+                 data/task-feed.json). -->
+            <div class="mb-8 pb-8 border-b border-white/10">
+                <h3 class="text-sm text-zinc-500 mb-3">Live Automation Feed</h3>
+                <p id="bcc-task-synthesis" class="text-xs text-[#60a5fa] mb-4 leading-relaxed"></p>
+                <div id="bcc-task-feed" class="diff-list">
+                    <div class="skeleton h-10 my-1"></div>
+                    <div class="skeleton h-10 my-1"></div>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -503,7 +521,13 @@
                 <h3 class="text-sm text-zinc-500 mb-2">Trending on Base</h3>
                 <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The most active tokens on Base right now. Tokens from the Virtuals ecosystem are tagged.</p>
                 <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('trending', this.value)"
-                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                    class="w-full sm:w-64 mb-3 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                <div class="flex gap-1 text-[11px] mb-4" id="trending-sort">
+                    <button data-s="volume24" class="term-btn term-btn-sm term-btn-active">Volume</button>
+                    <button data-s="marketCap" class="term-btn term-btn-sm">Mkt cap</button>
+                    <button data-s="liquidity" class="term-btn term-btn-sm">Liquidity</button>
+                    <button data-s="change24" class="term-btn term-btn-sm">24h %</button>
+                </div>
                 <div id="trending-base" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -515,7 +539,13 @@
                 <h3 class="text-sm text-zinc-500 mb-2">New Launches</h3>
                 <p class="text-xs text-zinc-500 mb-3 leading-relaxed max-w-2xl">The newest tokens on Base by creation time. Tokens from the Virtuals ecosystem are tagged.</p>
                 <input type="text" placeholder="Search symbol or name…" oninput="App._setSearch('launches', this.value)"
-                    class="w-full sm:w-64 mb-4 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                    class="w-full sm:w-64 mb-3 border border-white/10 bg-transparent text-xs px-3 py-1.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/30">
+                <div class="flex gap-1 text-[11px] mb-4" id="launches-sort">
+                    <button data-s="createdAt" class="term-btn term-btn-sm term-btn-active">Newest</button>
+                    <button data-s="volume24" class="term-btn term-btn-sm">Volume</button>
+                    <button data-s="marketCap" class="term-btn term-btn-sm">Mkt cap</button>
+                    <button data-s="liquidity" class="term-btn term-btn-sm">Liquidity</button>
+                </div>
                 <div id="new-launches" class="diff-list">
                     <div class="skeleton h-14 my-1"></div>
                     <div class="skeleton h-14 my-1"></div>
@@ -685,7 +715,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=21"></script>
+    <script src="assets/app.js?v=25"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

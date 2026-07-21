@@ -87,11 +87,22 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # has its own async /scan/bounty_deep_dive route (dispatches a real GitHub
 # Actions job rather than returning inline). Distinct from AUTO/"zero-LLM"
 # above: bounty_deep_dive uses a frontier-model LLM but is still x402-payable.
-# community_intel_broadcast is auto-fulfilled via ACP but has no worker route
-# (not in OFFERING_PRICES), so it's excluded here. wallet_pnl_deepdive is the
-# reverse case — x402-payable (worker/src/dataHandlers.ts, Alchemy-backed)
-# but not in AUTO since it's no longer ACP-auto-fulfilled.
-X402 = (AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive"}) - {"community_intel_broadcast"}
+# wallet_pnl_deepdive is the reverse case — x402-payable
+# (worker/src/dataHandlers.ts, Alchemy-backed) but not in AUTO since it's no
+# longer ACP-auto-fulfilled.
+#
+# deep_contract_audit / tx_decode / bulk_safety_bundle / community_intel_broadcast
+# closed a real discovery gap this round (task: ACP/x402 listing parity) —
+# each now has its own worker/src/index.ts route (deep_contract_audit aliases
+# bounty_deep_dive's async dispatch pipeline; tx_decode is a new synchronous
+# Etherscan+4byte.directory decode; bulk_safety_bundle batches
+# token_safety_check; community_intel_broadcast serves the same real
+# broadcast agents/acp_fulfill.py::_community_broadcast() already reads) —
+# but none of the first three are in AUTO above since agents/acp_fulfill.py
+# has no ACP-side handler for them yet (still routed to the manual/SKILLFORGE
+# tier there, same as before this round). whale_watch was deliberately left
+# out this round (no real data source picked yet).
+X402 = AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive", "deep_contract_audit", "tx_decode", "bulk_safety_bundle"}
 # (AUTO already includes DL_NAMES, so the market-data tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
@@ -307,7 +318,7 @@ def main():
             "offerings": [
                 {"name": n, "price_usd": p, "summary": s, "auto": n in AUTO, "x402": n in X402,
                  "data": n in DL_NAMES,
-                 "sla": "async — no fixed SLA (frontier-model)" if n == "bounty_deep_dive" else "instant",
+                 "sla": "async — no fixed SLA (frontier-model)" if n in ("bounty_deep_dive", "deep_contract_audit") else "instant",
                  **({"directory_url": f"https://402index.io/service/{_402INDEX_SERVICE_IDS[n]}"}
                     if n in _402INDEX_SERVICE_IDS else {})}
                 for n, p, s in OFFERINGS

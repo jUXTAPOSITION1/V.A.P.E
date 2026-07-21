@@ -8,7 +8,20 @@ name: VAPE Featured Investigation (auto-target deep dive)
 # cadence without bumping the cost/frequency of the rest of the hourly cycle.
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    # Odd minutes (:07/:37), not */30 — a */30 cron fires AT :00 and :30, the
+    # two most globally-congested minutes on GitHub's shared scheduler (every
+    # round-number cron on the platform targets them), and :00 specifically
+    # also collides with this repo's OWN bounty-cycle.yml (0 * * * *, hourly).
+    # Confirmed real effect: this workflow's actual fire times drift 1-2.5h
+    # apart despite the */30 intent (checked via actions_list against live
+    # run history), which silently starved DATA AGENT of the 2x/hr cadence
+    # PR #241 built for it — DATA AGENT itself settles 2-3 real x402
+    # transactions every single time this workflow actually runs (confirmed
+    # in a live job log), so the missing cadence was 100% this scheduling
+    # collision, not a bug in data_agent.py. Mirrors the same fix already
+    # applied to scout.yml (:37) / reputation.yml (:17) / skillforge-
+    # harvest.yml (:17) for the identical reason.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -116,6 +129,15 @@ jobs:
         run: python agents/build_intel_index.py
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
         run: python -m skillforge.memory.index_db build || echo "memory index skipped"
+      # Bounty Command Center's live-task feed — real recent automated
+      # commits + one OCI-Grok-authored synthesis line (agents/task_feed.py).
+      # Runs on this workflow's own fast cadence so the site's "tasks" stat
+      # never sits stale; a failure here must never block the real
+      # investigation work already committed above, so it's non-fatal.
+      - name: Task feed (Bounty Command Center)
+        env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
+        run: python agents/task_feed.py || echo "task feed skipped"
       - name: Commit
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,6 +145,7 @@ jobs:
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add intel/investigations/ intel/catalog/ skillforge/memory/ data/intel-index.json
+          [ -f data/task-feed.json ] && git add data/task-feed.json || true
           # Only exists once the catalog sweep's first address-based hire ever
           # succeeds — `git add` on a not-yet-created path would abort this
           # step outright (GitHub Actions runs `run:` blocks with `set -e`),

@@ -102,6 +102,43 @@ const App = {
             document.getElementById('bcc-updated').textContent = 'radar telemetry unavailable';
         }
 
+        // Live task feed — real recent automated commits + one OCI-Grok
+        // synthesis line (agents/task_feed.py, data/task-feed.json). A
+        // separate try/catch from the telemetry/audit-list fetches above —
+        // this feed being unavailable shouldn't blank out either of those.
+        const taskFeedEl = document.getElementById('bcc-task-feed');
+        const synthesisEl = document.getElementById('bcc-task-synthesis');
+        const KIND_META = {
+            investigation: ['fa-magnifying-glass-chart', '#60a5fa'],
+            'bounty-radar': ['fa-satellite-dish', '#60a5fa'],
+            audit: ['fa-file-shield', '#60a5fa'],
+            broadcast: ['fa-tower-broadcast', '#a1a1aa'],
+            reputation: ['fa-chart-line', '#a1a1aa'],
+            sweep: ['fa-broom', '#a1a1aa'],
+            'data-agent': ['fa-database', '#a1a1aa'],
+            build: ['fa-code-merge', '#a1a1aa'],
+            automation: ['fa-gears', '#a1a1aa'],
+        };
+        try {
+            const feed = await (await fetch(`${RAW}/data/task-feed.json?t=`+Date.now())).json();
+            const tasks = Array.isArray(feed.tasks) ? feed.tasks : [];
+            this._set('bcc-tasks', tasks.length);
+            if (synthesisEl) synthesisEl.textContent = feed.synthesis || '';
+            if (!tasks.length) throw 0;
+            taskFeedEl.innerHTML = tasks.map(t => {
+                const [icon, col] = KIND_META[t.kind] || KIND_META.automation;
+                return `
+                <a href="${t.url||'#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
+                    <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
+                    <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message||'')}</div>
+                    <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
+                </a>`;
+            }).join('');
+        } catch(e) {
+            if (taskFeedEl) taskFeedEl.innerHTML = '<div class="text-zinc-500 text-sm">No recent automated activity recorded.</div>';
+            this._set('bcc-tasks', 0);
+        }
+
         const auditEl = document.getElementById('bcc-audit-list');
         try {
             const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/poc-reports`)).json();
@@ -118,8 +155,8 @@ const App = {
             auditEl.innerHTML = files.map(f => `
                 <a href="${f.url}" target="_blank" class="card-h diff-row block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-emerald-500'}"></i>
-                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-emerald-500'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
+                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-[#60a5fa]'}"></i>
+                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-[#60a5fa]'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
                     </div>
                     <div class="text-xs leading-snug capitalize">${this._esc(f.name)}</div>
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
@@ -838,11 +875,27 @@ const App = {
         return (symbol || '').toLowerCase().includes(term) || (name || '').toLowerCase().includes(term);
     },
 
+    // Sorts one of the already-fetched Codex token arrays in place by a
+    // numeric field, descending, nulls/missing last — shared by Trending on
+    // Base and New Launches so both re-sort their existing 30-row fetch
+    // client-side (see virtuals() above for why limit=30 was chosen) rather
+    // than making a second network request per sort click.
+    _sortTokensBy(items, field) {
+        return [...items].sort((a, b) => {
+            const av = a[field], bv = b[field];
+            const an = typeof av === 'number' ? av : -Infinity;
+            const bn = typeof bv === 'number' ? bv : -Infinity;
+            return bn - an;
+        });
+    },
+
+    _trendingSort: 'volume24',
     _renderTrendingBase() {
         const el = document.getElementById('trending-base');
         if (!el) return;
         const term = this._searchTerms.trending;
-        const items = this._trendingBase.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const sorted = this._sortTokensBy(this._trendingBase, this._trendingSort);
+        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -864,6 +917,10 @@ const App = {
                 <div class="text-right shrink-0 hidden sm:block w-20">
                     <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
                     <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden md:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Mkt cap</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.marketCap)}</div>
                 </div>
             </a>`;
         }).join('') : (this._trendingBase.length
@@ -888,11 +945,13 @@ const App = {
     // _trendingTokenScore() as-is: brand-new tokens naturally read as
     // neutral "Fair" (liquidity/marketCap too new to score, not penalized)
     // unless something's already gone thin or wildly volatile.
+    _launchesSort: 'createdAt',
     _renderNewLaunches() {
         const el = document.getElementById('new-launches');
         if (!el) return;
         const term = this._searchTerms.launches;
-        const items = this._newLaunches.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const sorted = this._sortTokensBy(this._newLaunches, this._launchesSort);
+        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
@@ -910,6 +969,14 @@ const App = {
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
                     <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
                     <div class="text-xs text-zinc-500">${this._launchAge(t.createdAt)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden sm:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.volume24)}</div>
+                </div>
+                <div class="text-right shrink-0 hidden md:block w-20">
+                    <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Mkt cap</div>
+                    <div class="text-xs text-zinc-300">${fmtUsd(t.marketCap)}</div>
                 </div>
             </a>`;
         }).join('') : (this._newLaunches.length
@@ -1331,7 +1398,7 @@ const App = {
                         <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
                     </div>
                     <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
-                    ${b.vapeFitReason?`<div class="text-[10px] text-emerald-500/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
+                    ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
                     ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
                     ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
                         <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
@@ -1339,7 +1406,7 @@ const App = {
                     </div>`:''}
                     <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
                         <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
-                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-emerald-500/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
+                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
                     </div>
                 </div>`;
             }).join('');
@@ -1494,34 +1561,34 @@ const App = {
                 const explorer = this._explorerUrl(inv.target, inv.chain);
                 iel.innerHTML=`
                     <div class="flex items-center justify-between gap-2 mb-3">
-                        <div class="text-[10px] uppercase tracking-widest text-zinc-500">Deep Investigation</div>
+                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-magnifying-glass-chart"></i> Deep Investigation</div>
                         ${this._pill(inv.verdict)}
                     </div>
                     <a href="${explorer||'#'}" target="_blank" rel="noopener" class="flex items-center gap-3 mb-1 ${explorer?'hover:opacity-80':'pointer-events-none'}">
-                        ${this._iconImg(inv.target, inv.chain, 40)}
+                        ${this._iconImg(inv.target, inv.chain, 48)}
                         <div class="min-w-0">
-                            <div class="text-lg leading-tight truncate">${this._esc(heading)}</div>
+                            <div class="text-xl leading-tight truncate">${this._esc(heading)}</div>
                             ${showName?`<div class="text-xs text-zinc-400 truncate">${this._esc(inv.name)}</div>`:''}
                             ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
                         </div>
                     </a>
-                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200">${inv.score}</span></div>`:''}
+                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200 text-sm">${inv.score}</span><span class="text-zinc-600">/100</span></div>`:''}
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
             // hero: latest report
             const rep=(d.latest_summary||{}).report;
             const rel=document.getElementById('inv-report');
             if(rep){
                 rel.innerHTML=`
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <div class="text-[10px] uppercase tracking-widest text-zinc-500">Latest Report · ${this._esc(rep.type||'')}</div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-file-shield"></i> Latest Report · ${this._esc(rep.type||'')}</div>
                         ${this._pill(rep.threat)}
                     </div>
-                    <div class="text-lg leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
-                    <div class="text-[11px] text-zinc-500 mb-2">${this._ago(rep.date)}</div>
+                    <div class="text-xl leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
+                    <div class="text-[11px] text-zinc-500 mb-3">${this._ago(rep.date)}</div>
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
-                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-zinc-400 text-xs mt-3 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
             } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
             this._renderIntel();
         }catch(e){
@@ -1697,6 +1764,22 @@ window.addEventListener('load', () => {
         }
         App._renderProtocolRows();
         App._enrichProtocols();
+    });
+    // Trending on Base / New Launches sort — re-sorts the already-fetched
+    // 30-row Codex set (see App.virtuals()), no new request per click.
+    document.getElementById('trending-sort').addEventListener('click', e => {
+        const b = e.target.closest('button[data-s]'); if (!b) return;
+        App._trendingSort = b.dataset.s;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        App._renderTrendingBase();
+    });
+    document.getElementById('launches-sort').addEventListener('click', e => {
+        const b = e.target.closest('button[data-s]'); if (!b) return;
+        App._launchesSort = b.dataset.s;
+        [...e.currentTarget.children].forEach(x=>{x.className='term-btn term-btn-sm';});
+        b.className='term-btn term-btn-sm term-btn-active';
+        App._renderNewLaunches();
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });

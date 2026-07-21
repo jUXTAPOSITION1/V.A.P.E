@@ -1,8 +1,9 @@
 /**
- * VAPE x402 payment worker — pay-per-call access to 22 of the 30 "auto"
- * ACP offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the
- * full catalog; the other 8 need the SKILLFORGE tool tier and are hired via
- * a real ACP job instead). Also hosts a few free, unpaid Alchemy-backed
+ * VAPE x402 payment worker — pay-per-call access to 26 of the 30 ACP
+ * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
+ * catalog; the other 4 — partner_referral, wallet_recon, whale_watch,
+ * forensics_deep — need the SKILLFORGE tool tier and are hired via a real
+ * ACP job instead). Also hosts a few free, unpaid Alchemy-backed
  * reliability endpoints (/portfolio, /nfts, /network-status, /prices,
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
  * direct public-RPC calls when this worker is deployed and configured, plus
@@ -34,6 +35,9 @@ import { estimateCostBasis } from "./lib/costBasis";
 import * as codex from "./lib/codex";
 import * as predictionMarkets from "./lib/predictionMarkets";
 import { dispatchDeepDiveAudit, dispatchExternalBountyAudit } from "./lib/githubDispatch";
+import { decodeTx } from "./lib/txDecode";
+import { latestCommunityBroadcast } from "./lib/communityBroadcast";
+import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
@@ -96,6 +100,7 @@ type Variables = {
 };
 
 const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
+const TX_HASH_RE = /^0x[a-fA-F0-9]{64}$/;
 
 // Alchemy/CoinGecko URLs embed the API key as a path/query segment, so any
 // thrown error whose message echoes the request URL (e.g. a generic fetch
@@ -230,6 +235,66 @@ const BOUNTY_DEEP_DIVE_DISCOVERY = {
   },
 };
 
+// deep_contract_audit — the same offering as bounty_deep_dive (real recon +
+// Slither/Halmos/Mythril/Aderyn + frontier-LLM source review, priced at $1 in
+// data/reputation.json since day one), just address-only (no repo mode) and
+// listed under its own name since that's how ACP already knows it. Rather
+// than stand up a second async pipeline, this aliases straight onto
+// dispatchDeepDiveAudit() below (see handleContractAuditDispatch) — same
+// GitHub Actions workflow, same KV job record shape, same report destination
+// (intel/audits/poc-reports/). Real gap this closes: ACP has listed
+// deep_contract_audit since launch, but it was never actually x402-payable —
+// buyers discovering VAPE via 402index/x402 directories could never find it.
+const DEEP_CONTRACT_AUDIT_PRICE = "$1.00";
+const DEEP_CONTRACT_AUDIT_DISCOVERY = {
+  description: "slither+aderyn+mythril severity-rated audit + 0-100 score for a Base/EVM "
+    + "contract address — the same real-tool pipeline as bounty_deep_dive, address-only.",
+  output: {
+    status: "accepted",
+    address: "0x...",
+    message: "Audit queued — report lands in intel/audits/poc-reports/ as soon as it completes.",
+  },
+};
+
+// tx_decode — synchronous (real Etherscan + 4byte.directory lookups only,
+// well within a Worker's request window), unlike the two audit offerings
+// above. See lib/txDecode.ts for the real gap this closes: listed in
+// data/reputation.json since day one, never actually fulfilled anywhere.
+const TX_DECODE_PRICE = "$0.05";
+const TX_DECODE_DISCOVERY = {
+  description: "Plain-language transaction decode + risk flags for any Base/EVM tx hash — "
+    + "real Etherscan tx/receipt/logs + 4byte.directory method/event-signature lookup, "
+    + "no simulation.",
+  output: {
+    tx_hash: "0x...", chain_id: 8453, status: "success",
+    from: "0x...", to: "0x...", value_wei: "0",
+    method: { selector: "0xa9059cbb", signature: "transfer(address,uint256)" },
+    logs_decoded: [{ address: "0x...", topic0: "0x...", event: "Transfer(address,address,uint256)" }],
+    risk_flags: [], summary: "Transaction succeeded. Called `transfer(address,uint256)` on 0x....",
+  },
+};
+
+// community_intel_broadcast — synchronous, zero-input (reads VAPE's own
+// already-published broadcast, no address/tx_hash needed), same real gap
+// pattern as tx_decode above — see lib/communityBroadcast.ts.
+const COMMUNITY_BROADCAST_PRICE = "$0.10";
+const COMMUNITY_BROADCAST_DISCOVERY = {
+  description: "VAPE's latest 6-hourly consolidated security + market intel broadcast — real "
+    + "committed output from agents/broadcast.py, not generated per-request.",
+  output: { file: "broadcast-2026-07-20-14.md", content: "# VAPE Intel Broadcast — 2026-07-20 14:00 UTC\n..." },
+};
+
+// bulk_safety_bundle — synchronous, 5-25 comma-separated addresses, flat
+// price. See lib/bulkSafetyBundle.ts for the real gap this closes.
+const BULK_SAFETY_BUNDLE_PRICE = "$0.50";
+const BULK_SAFETY_BUNDLE_DISCOVERY = {
+  description: "token_safety_check batched over 5-25 tokens in one job, flat-priced.",
+  output: { count: 2, results: [
+    { address: "0x...", chain_id: 8453, status: "ok", deliverable: { verdict: "PROCEED", score: 82 } },
+    { address: "0x...", chain_id: 8453, status: "ok", deliverable: { verdict: "CAUTION", score: 41 } },
+  ] },
+};
+
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
 // c.executionCtx throws (not just returns undefined) when no ExecutionContext
@@ -276,6 +341,10 @@ app.get("/", (c) =>
     offerings: [
       ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
       { name: "bounty_deep_dive", price: BOUNTY_DEEP_DIVE_PRICE, route: "/scan/bounty_deep_dive", sla: "async — no fixed SLA" },
+      { name: "deep_contract_audit", price: DEEP_CONTRACT_AUDIT_PRICE, route: "/scan/deep_contract_audit", sla: "async — no fixed SLA" },
+      { name: "tx_decode", price: TX_DECODE_PRICE, route: "/scan/tx_decode" },
+      { name: "community_intel_broadcast", price: COMMUNITY_BROADCAST_PRICE, route: "/scan/community_intel_broadcast" },
+      { name: "bulk_safety_bundle", price: BULK_SAFETY_BUNDLE_PRICE, route: "/scan/bulk_safety_bundle" },
       // Keyless market-data micro-services — real data, $0.01 each.
       ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
@@ -575,6 +644,10 @@ app.get("/admin/bazaar-status", rateLimiter("bazaar-status", 6, 300), cache({ ca
   const allOfferings = [
     ...Object.keys(OFFERING_PRICES).map((name) => `${origin}/scan/${name}`),
     `${origin}/scan/bounty_deep_dive`,
+    `${origin}/scan/deep_contract_audit`,
+    `${origin}/scan/tx_decode`,
+    `${origin}/scan/community_intel_broadcast`,
+    `${origin}/scan/bulk_safety_bundle`,
     ...DL_OFFERINGS.map((o) => `${origin}/data/${o.name}`),
   ];
   const indexed = allOfferings.filter((u) => indexedUrls.has(u));
@@ -743,6 +816,85 @@ app.use("*", async (c, next) => {
     }),
   };
 
+  // deep_contract_audit: same x402 gate/dispatch pipeline as bounty_deep_dive
+  // above, address-only, listed under its own name (see const comment above).
+  routes["GET /scan/deep_contract_audit"] = {
+    accepts: { scheme: "exact", price: DEEP_CONTRACT_AUDIT_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE deep_contract_audit — ${DEEP_CONTRACT_AUDIT_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["security", "on-chain-forensics", "base", "premium"],
+    extensions: declareDiscoveryExtension({
+      input: { address: "0x0000000000000000000000000000000000dEaD" },
+      inputSchema: {
+        properties: {
+          address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
+          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+          callback_url: { type: "string", description: "optional webhook to POST the completed report to" },
+        },
+        required: ["address"],
+      },
+      output: { example: DEEP_CONTRACT_AUDIT_DISCOVERY.output },
+    }),
+  };
+
+  // tx_decode: same x402 gate, own price/metadata (a tx hash, not an
+  // address — doesn't fit the generic OFFERING_PRICES/HandlerName address
+  // loop below).
+  routes["GET /scan/tx_decode"] = {
+    accepts: { scheme: "exact", price: TX_DECODE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE tx_decode — ${TX_DECODE_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["security", "on-chain-forensics", "base"],
+    extensions: declareDiscoveryExtension({
+      input: { tx_hash: "0x0000000000000000000000000000000000000000000000000000000000000000" },
+      inputSchema: {
+        properties: {
+          tx_hash: { type: "string", description: "0x-prefixed 32-byte transaction hash" },
+          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+        },
+        required: ["tx_hash"],
+      },
+      output: { example: TX_DECODE_DISCOVERY.output },
+    }),
+  };
+
+  // community_intel_broadcast: same x402 gate, zero-input.
+  routes["GET /scan/community_intel_broadcast"] = {
+    accepts: { scheme: "exact", price: COMMUNITY_BROADCAST_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE community_intel_broadcast — ${COMMUNITY_BROADCAST_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["market-data", "base"],
+    extensions: declareDiscoveryExtension({
+      input: {},
+      inputSchema: { properties: {}, required: [] },
+      output: { example: COMMUNITY_BROADCAST_DISCOVERY.output },
+    }),
+  };
+
+  // bulk_safety_bundle: same x402 gate, own price/metadata (a comma-
+  // separated address list, not a single address).
+  routes["GET /scan/bulk_safety_bundle"] = {
+    accepts: { scheme: "exact", price: BULK_SAFETY_BUNDLE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    description: `VAPE bulk_safety_bundle — ${BULK_SAFETY_BUNDLE_DISCOVERY.description}`,
+    serviceName: "VAPE",
+    iconUrl: ICON_URL,
+    tags: ["security", "on-chain-forensics", "base"],
+    extensions: declareDiscoveryExtension({
+      input: { addresses: "0x0000000000000000000000000000000000dEaD,0x0000000000000000000000000000000000bEEF" },
+      inputSchema: {
+        properties: {
+          addresses: { type: "string", description: "5-25 comma-separated Base (chain 8453) token addresses" },
+          chain: { type: "string", description: "optional chain id override, defaults to 8453, applies to all addresses" },
+        },
+        required: ["addresses"],
+      },
+      output: { example: BULK_SAFETY_BUNDLE_DISCOVERY.output },
+    }),
+  };
+
   // Market-data micro-services — one $0.01 paid route per tool, same x402
   // gate and Bazaar discovery metadata as the security offerings above. Real
   // hosted token/protocol logos and rich data (see dataHandlers.ts).
@@ -874,6 +1026,219 @@ const BOUNTY_JOB_TTL_SECONDS = 24 * 60 * 60;
 // nothing else gates who can POST a result to /callback or read /status, so
 // treat it like a bearer secret: never log it anywhere but the KV key itself.
 const JOB_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// Shared address-only dispatch path for bounty_deep_dive's address branch AND
+// deep_contract_audit (which is address-only by design — see the const
+// comment above DEEP_CONTRACT_AUDIT_PRICE). Both offerings are the exact same
+// underlying pipeline (deep-dive-bounty.yml -> agents/deep_dive_audit.py),
+// just reached under two different x402 resource names/listings. The
+// callback route stays fixed at /scan/bounty_deep_dive/callback regardless of
+// which offering dispatched the job — deep_dive_audit.py's callback_url is an
+// opaque POST target it's handed, and /callback's own handler is keyed
+// entirely by the unguessable jobId (see JOB_ID_RE), never by offering name.
+async function dispatchAddressAuditJob(
+  c: Context<{ Bindings: Env; Variables: Variables }>,
+  offeringName: "bounty_deep_dive" | "deep_contract_audit",
+  address: string,
+  chain: string,
+  callerCallbackUrl: string | undefined,
+) {
+  if (!c.env.GH_DISPATCH_TOKEN) {
+    // Payment already settled — this is a real config gap, not a client error, so 503
+    // (not 400/402) tells the buyer to retry rather than re-check their request.
+    return c.json({
+      offering: offeringName, status: "error",
+      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
+    }, 503);
+  }
+
+  // The browser UI never sends its own callback_url today — when that's the
+  // case (true for every real site buyer) and VAPE_JOBS is configured, mint
+  // a job record so the site can poll for the result instead of only ever
+  // pointing the buyer at a GitHub tree link. A caller that DOES supply its
+  // own callback_url (a non-browser/API integration) is left completely
+  // unchanged — no KV tracking, exactly today's behavior.
+  let jobId: string | undefined;
+  let callbackUrl = callerCallbackUrl;
+  if (!callerCallbackUrl && c.env.VAPE_JOBS) {
+    jobId = crypto.randomUUID();
+    callbackUrl = `${new URL(c.req.url).origin}/scan/bounty_deep_dive/callback?job=${jobId}`;
+    try {
+      await c.env.VAPE_JOBS.put(`job:${jobId}`, JSON.stringify({
+        status: "pending",
+        offering: offeringName,
+        target: { address, chain },
+        createdAt: new Date().toISOString(),
+      }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
+    } catch {
+      // KV hiccup — fail open exactly like rateLimiter above: dispatch the
+      // real audit either way, the buyer just loses live polling this time.
+      jobId = undefined;
+      callbackUrl = callerCallbackUrl;
+    }
+  }
+
+  // Best-effort — a dispatch failure right after the KV write above is the
+  // one case this handler CAN detect synchronously (a workflow that crashes
+  // or times out mid-run without ever POSTing to /callback is not; that gap
+  // is bounded by BOUNTY_JOB_TTL_SECONDS's expiry and hire.js's own client-
+  // side poll timeout instead). Marking it "failed" here means a poller can
+  // tell "will never complete" from "still running" for this one case.
+  const markJobFailed = async (reason: string) => {
+    if (!jobId || !c.env.VAPE_JOBS) return;
+    try {
+      const existing = await c.env.VAPE_JOBS.get(`job:${jobId}`, { type: "json" });
+      await c.env.VAPE_JOBS.put(`job:${jobId}`, JSON.stringify({
+        ...(existing as Record<string, unknown> | null),
+        status: "failed", error: reason, completedAt: new Date().toISOString(),
+      }), { expirationTtl: BOUNTY_JOB_TTL_SECONDS });
+    } catch {
+      // Best-effort — the error response below is still accurate either way.
+    }
+  };
+
+  const dispatch = await dispatchDeepDiveAudit(c.env.GH_DISPATCH_TOKEN, address, chain, callbackUrl);
+  if (!dispatch.ok) {
+    await markJobFailed(`job dispatch failed (HTTP ${dispatch.status})`);
+    return c.json({
+      offering: offeringName, status: "error",
+      error: `job dispatch failed (HTTP ${dispatch.status})`, detail: dispatch.body.slice(0, 300),
+    }, 502);
+  }
+  return c.json({
+    offering: offeringName, status: "accepted", address, chain,
+    job: jobId,
+    message: "Audit queued — a submission-ready PoC report lands in intel/audits/poc-reports/ "
+      + "as soon as it completes."
+      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
+    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
+    source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
+  });
+}
+
+// deep_contract_audit: address-only alias of bounty_deep_dive's pipeline (see
+// dispatchAddressAuditJob above) — its own x402 listing/route so buyers
+// discovering VAPE via 402index/x402 directories (which index by resource
+// name) can actually find and pay for it, closing the real gap where ACP has
+// listed this offering since launch but it was never x402-payable.
+app.get("/scan/deep_contract_audit", async (c) => {
+  const address = c.req.query("address") || "";
+  const chain = c.req.query("chain") || "8453";
+  const callerCallbackUrl = c.req.query("callback_url") || undefined;
+  if (!ADDRESS_RE.test(address)) {
+    return c.json({
+      offering: "deep_contract_audit", status: "error",
+      error: "provide a contract address",
+    }, 400);
+  }
+  return dispatchAddressAuditJob(c, "deep_contract_audit", address, chain, callerCallbackUrl);
+});
+
+// tx_decode: fully synchronous — real Etherscan + 4byte.directory lookups
+// only (see lib/txDecode.ts), same job-draft/onAfterSettle logging pattern
+// as the generic /scan/* loop below (not part of that loop itself since its
+// input is a tx hash, not an address).
+app.get("/scan/tx_decode", async (c) => {
+  const txHash = c.req.query("tx_hash") || c.req.query("hash") || "";
+  const chain = c.req.query("chain");
+  const chainId = chain ? Number(chain) : 8453;
+  if (!TX_HASH_RE.test(txHash)) {
+    return c.json({ offering: "tx_decode", status: "error", error: "provide a valid 0x… 32-byte tx hash" }, 400);
+  }
+  const t0 = Date.now();
+  const result = await decodeTx(txHash, chainId, c.env.ETHERSCAN_API_KEY);
+  c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(),
+    offering: "tx_decode",
+    address: txHash,
+    chain_id: chainId,
+    symbol: null,
+    name: null,
+    verdict: (result.risk_flags && result.risk_flags.length) ? "CAUTION" : null,
+    status: result.error ? "error" : "settled",
+    amount_usd: Number(TX_DECODE_PRICE.replace("$", "")),
+    latency_ms: Date.now() - t0,
+    error: result.error ? String(result.error) : null,
+  });
+  // Same non-2xx-on-total-failure rule as the generic /scan/* loop below —
+  // a no_key/not_found result never delivers anything, so it shouldn't settle.
+  return c.json(
+    { offering: "tx_decode", status: result.error ? "error" : "ok", deliverable: result,
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
+    result.error ? 502 : 200
+  );
+});
+
+// community_intel_broadcast: zero-input, reads VAPE's own already-published
+// broadcast (see lib/communityBroadcast.ts) — no address to check against.
+app.get("/scan/community_intel_broadcast", async (c) => {
+  const t0 = Date.now();
+  const result = await latestCommunityBroadcast();
+  c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(),
+    offering: "community_intel_broadcast",
+    address: null,
+    chain_id: 8453,
+    symbol: null,
+    name: result.file ?? null,
+    verdict: null,
+    status: result.error ? "error" : "settled",
+    amount_usd: Number(COMMUNITY_BROADCAST_PRICE.replace("$", "")),
+    latency_ms: Date.now() - t0,
+    error: result.error ? String(result.error) : null,
+  });
+  return c.json(
+    { offering: "community_intel_broadcast", status: result.error ? "error" : "ok", deliverable: result,
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
+    result.error ? 502 : 200
+  );
+});
+
+// bulk_safety_bundle: 5-25 comma-separated addresses, one flat price (see
+// lib/bulkSafetyBundle.ts).
+app.get("/scan/bulk_safety_bundle", async (c) => {
+  const raw = c.req.query("addresses") || "";
+  const chain = c.req.query("chain");
+  const chainId = chain ? Number(chain) : 8453;
+  // Unlike tx_decode (where a bad chain surfaces as a real upstream error and
+  // never settles), bulkSafetyBundle's per-address fulfill() calls don't
+  // necessarily fail on a garbage chain id — reject it here instead of
+  // settling a $0.50 payment against an all-error batch.
+  if (!Number.isInteger(chainId) || chainId <= 0) {
+    return c.json({ offering: "bulk_safety_bundle", status: "error", error: "invalid chain id" }, 400);
+  }
+  const addresses = raw.split(",").map((a) => a.trim()).filter(Boolean);
+  const invalid = addresses.filter((a) => !ADDRESS_RE.test(a));
+  if (invalid.length) {
+    return c.json({
+      offering: "bulk_safety_bundle", status: "error",
+      error: `invalid address(es): ${invalid.slice(0, 5).join(", ")}`,
+    }, 400);
+  }
+  const t0 = Date.now();
+  const result = await bulkSafetyBundle(addresses, chainId, c.env);
+  c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(),
+    offering: "bulk_safety_bundle",
+    address: addresses[0] ?? null,
+    chain_id: chainId,
+    symbol: null,
+    name: result.count != null ? `${result.count} tokens` : null,
+    verdict: null,
+    status: result.error ? "error" : "settled",
+    amount_usd: Number(BULK_SAFETY_BUNDLE_PRICE.replace("$", "")),
+    latency_ms: Date.now() - t0,
+    error: result.error ? String(result.error) : null,
+  });
+  return c.json(
+    { offering: "bulk_safety_bundle", status: result.error ? "error" : "ok", deliverable: result,
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
+    result.error ? 400 : 200
+  );
+});
 
 app.get("/scan/bounty_deep_dive", async (c) => {
   const address = c.req.query("address") || "";
