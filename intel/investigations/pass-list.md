@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-21T03:58:44Z — 37 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-21T06:38:12Z — 38 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ZAMA | Ethereum | `0xA12CC123ba206d4031D1c7f6223D1C2Ec249f4f3` | 100/100 | 1 | 2026-07-21T06:38:12Z |
 | WAVAX | Avalanche | `0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7` | 100/100 | 1 | 2026-07-20T15:29:27Z |
 | VU | Base | `0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53` | 90/100 | 2 | 2026-07-20T11:46:00Z |
 | RAIN | Arbitrum | `0x25118290e6A5f4139381D072181157035864099d` | 100/100 | 2 | 2026-07-20T11:45:46Z |

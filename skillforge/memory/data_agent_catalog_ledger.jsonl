@@ -1,3 +1,4 @@
 {"ts": "2026-07-20T22:02:19.000513Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-20T23:31:53.759209Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02}
 {"ts": "2026-07-21T03:58:53.775477Z", "target": "base", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-21T06:38:19.870167Z", "target": "binance-cex", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01}
