@@ -2187,6 +2187,25 @@
     "symbol": "Claude",
     "times_investigated": 1
   },
+  "8453:0x9385bd6198ec6664567c456db8cee1c940d1cb07": {
+    "address": "0x9385Bd6198EC6664567c456Db8cEE1C940D1cB07",
+    "chain": "8453",
+    "creator_address": "0x7fd96bae5725667888dc32e7141d8a1255f5d968",
+    "first_investigated": "2026-07-22T16:05:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260722-160513-0x9385Bd61.md",
+        "score": 0,
+        "ts": "2026-07-22T16:05:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-22T16:05:13Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "Claude",
+    "times_investigated": 1
+  },
   "8453:0x940181a94a35a4569e4529a3cdfb74e38fd98631": {
     "address": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
     "chain": "8453",

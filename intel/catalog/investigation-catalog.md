@@ -387,3 +387,5 @@
 | 2026-07-22 | auto | 0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F (PROS) | deep_investigation | REJECT (48/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-22 | auto | 0x775387eFAbDad9816e8C52dA5672127185581f0b (VBV) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) — can still act | +7d |
+
+| 2026-07-22 | auto | 0x9385Bd6198EC6664567c456Db8cEE1C940D1cB07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

@@ -1,7 +1,77 @@
 {
-  "generated": "2026-07-22T14:17:58Z",
-  "synthesis": "VAPE's automation ran repeated repo reviews, bounty radar sweeps, investigations, skillforge builds, threat analyses, and self-improvement cycles on 2026-07-22.",
+  "generated": "2026-07-22T16:05:18Z",
+  "synthesis": "VAPE's automation ran repeated red-team scans, bounty sweeps, repo reviews, reputation snapshots, investigations, and self-improvement cycles on 2026-07-22.",
   "tasks": [
+    {
+      "sha": "a2819a1701",
+      "kind": "automation",
+      "message": "VAPE AI red-team deep scan 2026-07-22T15:49Z",
+      "date": "2026-07-22T15:49:14Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a2819a1701d18bbca554f83e99dcae93607d8550"
+    },
+    {
+      "sha": "0b125d8d80",
+      "kind": "automation",
+      "message": "VAPE repo review Wed Jul 22 15:46:46 UTC 2026",
+      "date": "2026-07-22T15:46:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0b125d8d804ba2c7b52f36cbed709d7a5495f217"
+    },
+    {
+      "sha": "f53d65d39c",
+      "kind": "sweep",
+      "message": "macro_sweep 2026-07-22T15:46Z",
+      "date": "2026-07-22T15:46:17Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f53d65d39c10be223dd4a82d3aeb9a4317be89ee"
+    },
+    {
+      "sha": "aa5f178031",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-22T15:22Z",
+      "date": "2026-07-22T15:22:09Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/aa5f1780315b63b25409e584514ec3c9c3a50f7c"
+    },
+    {
+      "sha": "ccf20e408b",
+      "kind": "sweep",
+      "message": "virtuals_sweep 2026-07-22T15:08Z",
+      "date": "2026-07-22T15:08:07Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ccf20e408b74064c3ccc697124cb672ee5ea5180"
+    },
+    {
+      "sha": "812861d04c",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-22T14:40Z",
+      "date": "2026-07-22T14:40:09Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/812861d04c36f13b8ac6ab92aba04f20a34c92cd"
+    },
+    {
+      "sha": "e2d41cccd9",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-22T14:33Z",
+      "date": "2026-07-22T14:33:09Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e2d41cccd9df867c55ff4252953b307c314dca2a"
+    },
+    {
+      "sha": "cc463e7f2e",
+      "kind": "automation",
+      "message": "VAPE AI red-team cycle 2026-07-22T14:32Z",
+      "date": "2026-07-22T14:32:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/cc463e7f2ec2e538242d88a7435946ad6b62589a"
+    },
+    {
+      "sha": "79ab043a6b",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-22T14:26Z",
+      "date": "2026-07-22T14:26:35Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/79ab043a6bf2188e74c9877fbc0e6202277448dd"
+    },
+    {
+      "sha": "645da476ac",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-22T14:18Z",
+      "date": "2026-07-22T14:18:00Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/645da476aca4d46fddd5a17f53ca3d63b38555e1"
+    },
     {
       "sha": "d5a59ff005",
       "kind": "automation",
@@ -36,76 +106,6 @@
       "message": "SCOUT bounty radar sweep 2026-07-22T13:07Z",
       "date": "2026-07-22T13:07:15Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/829e81eb866d926e75c02be7cd84c772628b2cb7"
-    },
-    {
-      "sha": "88bf006f34",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-22T12:05Z",
-      "date": "2026-07-22T12:05:39Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/88bf006f34690078b475c4e7ba19df297ab897f1"
-    },
-    {
-      "sha": "588ad54355",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-22T11:59Z",
-      "date": "2026-07-22T11:59:29Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/588ad543554c8862eed58a4c78d76d718d1cdbca"
-    },
-    {
-      "sha": "7014536a11",
-      "kind": "automation",
-      "message": "VAPE repo review Wed Jul 22 11:48:47 UTC 2026",
-      "date": "2026-07-22T11:48:47Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7014536a11e563f33bd7c11ef5f43f999d326e76"
-    },
-    {
-      "sha": "0eff1ffafc",
-      "kind": "automation",
-      "message": "VAPE skillforge build cycle 2026-07-22T11:04Z",
-      "date": "2026-07-22T11:04:53Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0eff1ffafc7a99583543de7c5a17181b501b6ffd"
-    },
-    {
-      "sha": "ec9eaa2cc6",
-      "kind": "sweep",
-      "message": "base_sweep 2026-07-22T11:00Z",
-      "date": "2026-07-22T11:00:11Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ec9eaa2cc66ddf6531d700446da7cd55ab99fa98"
-    },
-    {
-      "sha": "bd03dd6074",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-22T10:52Z",
-      "date": "2026-07-22T10:52:29Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bd03dd6074eda6bbd7f607f45d827db9957863dd"
-    },
-    {
-      "sha": "e94577e867",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-22T10:40Z",
-      "date": "2026-07-22T10:40:28Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e94577e867c938af7e578a9b9cb018d6bc24d1c8"
-    },
-    {
-      "sha": "f8b9685b05",
-      "kind": "sweep",
-      "message": "sentiment_sweep 2026-07-22T10:31Z",
-      "date": "2026-07-22T10:31:59Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f8b9685b05dc41fffd42c4eb7c47adcbae817e61"
-    },
-    {
-      "sha": "fe57a929ca",
-      "kind": "automation",
-      "message": "threat analysis: 2026-07-22T10:16Z",
-      "date": "2026-07-22T10:16:56Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fe57a929ca760dfbf5a062de095d54afc3853ab5"
-    },
-    {
-      "sha": "46f8d23aac",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-22T10:04Z",
-      "date": "2026-07-22T10:04:06Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/46f8d23aaca39ac9c2494a20b8fe77b4d26d227c"
     }
   ]
 }
