@@ -375,3 +375,5 @@
 | 2026-07-21 | auto | 0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF (USDai) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-21 | auto | 0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b (:p) | deep_investigation | REJECT (40/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |
+
+| 2026-07-22 | auto | 0x75F16b63e8f94F91dbc924845Aa42093396283e8 (ZAMA) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |

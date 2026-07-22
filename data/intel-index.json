@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T00:03:48Z",
+  "generated": "2026-07-22T01:02:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 344,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 94,
-    "investigations": 272,
+    "investigations": 273,
     "tools": 16,
     "tools_verified": 15,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260721-223041-0x31bC2932.md",
-      "title": "Investigation \u2014 :p",
-      "symbol": ":p",
-      "name": ":p",
-      "date": "2026-07-21T22:30:41Z",
-      "target": "0x31bC2932D4A9b532da771C2681BDA14b2D2Ad98b",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-223041-0x31bC2932.md"
+      "file": "investigation-20260722-010235-0x75F16b63.md",
+      "title": "Investigation \u2014 ZAMA",
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "date": "2026-07-22T01:02:35Z",
+      "target": "0x75F16b63e8f94F91dbc924845Aa42093396283e8",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Deep liquidity ($118,988,144); Trading 151+ day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-010235-0x75F16b63.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-010235-0x75F16b63.md",
+      "title": "Investigation \u2014 ZAMA",
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "date": "2026-07-22T01:02:35Z",
+      "target": "0x75F16b63e8f94F91dbc924845Aa42093396283e8",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Deep liquidity ($118,988,144); Trading 151+ day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-010235-0x75F16b63.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260721-223041-0x31bC2932.md",
@@ -593,20 +607,6 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 19429 holders \u2014 reasonably distributed; Deep liquidity ($2,976,471); Trading 248+ days without a known incident in this scan; Custom verified source (not a mass-produce",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-092940-0x4c18406F.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-072820-0xb2000000.md",
-      "title": "Investigation \u2014 Baseller",
-      "symbol": "Baseller",
-      "name": "Base Seller",
-      "date": "2026-07-19T07:28:20Z",
-      "target": "0xb200000000000000000000AC6A5D35756eB8Cd01",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +2037% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-072820-0xb2000000.md"
     }
   ],
   "reports": [
