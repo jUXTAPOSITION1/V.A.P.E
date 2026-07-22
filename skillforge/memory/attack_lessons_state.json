@@ -58,5 +58,15 @@
     "logged_at": "2026-07-20T19:45:20Z",
     "pattern": "oracle_flashloan",
     "has_backtest": false
+  },
+  "2026-07-21:Wanchain": {
+    "logged_at": "2026-07-22T19:22:16Z",
+    "pattern": "signature",
+    "has_backtest": false
+  },
+  "2026-07-21:42DAO": {
+    "logged_at": "2026-07-22T19:22:16Z",
+    "pattern": "oracle_flashloan",
+    "has_backtest": false
   }
 }
