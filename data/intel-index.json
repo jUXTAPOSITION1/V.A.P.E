@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T17:24:46Z",
+  "generated": "2026-07-22T17:37:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 356,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 97,
-    "investigations": 279,
+    "investigations": 280,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-160513-0x9385Bd61.md",
+      "file": "investigation-20260722-173741-0x6E97D914.md",
       "title": "Investigation \u2014 Claude",
       "symbol": "Claude",
       "name": "Claude",
-      "date": "2026-07-22T16:05:13Z",
-      "target": "0x9385Bd6198EC6664567c456Db8cEE1C940D1cB07",
+      "date": "2026-07-22T17:37:41Z",
+      "target": "0x6E97D91456C55a6097ef49234942d2C1e2AB8b07",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-160513-0x9385Bd61.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-173741-0x6E97D914.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-173741-0x6E97D914.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-22T17:37:41Z",
+      "target": "0x6E97D91456C55a6097ef49234942d2C1e2AB8b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-173741-0x6E97D914.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-160513-0x9385Bd61.md",
@@ -593,20 +607,6 @@
       "score": "38",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FAFO (0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F) \u2014 CAUTION 73/100 \u2014 likely the same serial campaign; [-10] Pair 13.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit o",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-194502-0x2690e2f9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-182839-0xDcB01cc4.md",
-      "title": "Investigation \u2014 YLD",
-      "symbol": "YLD",
-      "name": "Yield",
-      "date": "2026-07-19T18:28:39Z",
-      "target": "0xDcB01cc464238396E213a6fDd933E36796eAfF9f",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "8",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-25] Very low liquidity $1,885 (rug/illiquid); [-10] Low liquidity $1,885. Positive evidence: 1148 holders \u2014 reasonably distributed; Trading 2048+ days without a known incident in this scan; Custom v",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-182839-0xDcB01cc4.md"
     }
   ],
   "reports": [

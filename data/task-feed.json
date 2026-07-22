@@ -1,7 +1,49 @@
 {
-  "generated": "2026-07-22T16:05:18Z",
-  "synthesis": "VAPE's automation ran repeated red-team scans, bounty sweeps, repo reviews, reputation snapshots, investigations, and self-improvement cycles on 2026-07-22.",
+  "generated": "2026-07-22T17:37:45Z",
+  "synthesis": "VAPE's automation ran repeated bounty radar sweeps, repo reviews, reputation snapshots, red-team scans, and targeted macro/base/virtuals sweeps.",
   "tasks": [
+    {
+      "sha": "b01e015db6",
+      "kind": "automation",
+      "message": "Auto-generated bounty report Wed Jul 22 17:24:47 UTC 2026",
+      "date": "2026-07-22T17:24:47Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b01e015db6eed67437300c1a521de64d9f5b1434"
+    },
+    {
+      "sha": "db0871f1a5",
+      "kind": "automation",
+      "message": "VAPE repo review Wed Jul 22 17:21:15 UTC 2026",
+      "date": "2026-07-22T17:21:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/db0871f1a5386f70cf464e31a90f10cc164ae5c5"
+    },
+    {
+      "sha": "da1f019845",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-22T16:58Z",
+      "date": "2026-07-22T16:58:51Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/da1f0198454283a27f56d29c8502bc00e486de9d"
+    },
+    {
+      "sha": "ce39524a1e",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-22T16:50Z",
+      "date": "2026-07-22T16:50:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ce39524a1ebfc0355a4c72c40353e2b036df7b1d"
+    },
+    {
+      "sha": "a042da3424",
+      "kind": "sweep",
+      "message": "base_sweep 2026-07-22T16:15Z",
+      "date": "2026-07-22T16:15:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a042da3424a904a9de2dbbbd7beb32214003d023"
+    },
+    {
+      "sha": "52c961f3e7",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-22T16:05Z",
+      "date": "2026-07-22T16:05:20Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/52c961f3e7c2f5870bf03d93558da08c27f515b7"
+    },
     {
       "sha": "a2819a1701",
       "kind": "automation",
@@ -64,48 +106,6 @@
       "message": "reputation snapshot 2026-07-22T14:26Z",
       "date": "2026-07-22T14:26:35Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/79ab043a6bf2188e74c9877fbc0e6202277448dd"
-    },
-    {
-      "sha": "645da476ac",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-22T14:18Z",
-      "date": "2026-07-22T14:18:00Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/645da476aca4d46fddd5a17f53ca3d63b38555e1"
-    },
-    {
-      "sha": "d5a59ff005",
-      "kind": "automation",
-      "message": "VAPE self-improvement cycle 2026-07-22T14:14Z",
-      "date": "2026-07-22T14:14:26Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d5a59ff0058c8f7d7383ee045e9f8d6447075866"
-    },
-    {
-      "sha": "9e2cfed7a0",
-      "kind": "automation",
-      "message": "Auto-generated bounty report Wed Jul 22 14:01:28 UTC 2026",
-      "date": "2026-07-22T14:01:28Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9e2cfed7a0b9cef47967f8ab7c7ffcde08abd2c0"
-    },
-    {
-      "sha": "aac63a5e46",
-      "kind": "automation",
-      "message": "VAPE repo review Wed Jul 22 13:58:08 UTC 2026",
-      "date": "2026-07-22T13:58:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/aac63a5e46ef27d0ea063732bf99b24ecca06c4b"
-    },
-    {
-      "sha": "10ea7c4be9",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-22T13:28Z",
-      "date": "2026-07-22T13:28:57Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/10ea7c4be979ca1664311a5d219f3c84398e7c6e"
-    },
-    {
-      "sha": "829e81eb86",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-22T13:07Z",
-      "date": "2026-07-22T13:07:15Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/829e81eb866d926e75c02be7cd84c772628b2cb7"
     }
   ]
 }
