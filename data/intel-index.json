@@ -1,16 +1,16 @@
 {
-  "generated": "2026-07-22T01:02:43Z",
+  "generated": "2026-07-22T02:44:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 344,
+    "reports": 345,
     "reports_by_type": {
+      "security": 58,
       "bounty": 105,
       "base": 62,
       "skillforge": 4,
       "sentiment": 33,
       "virtuals": 62,
       "macro": 17,
-      "security": 57,
       "bug": 2,
       "mainnet": 2
     },
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-010235-0x75F16b63.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260722_000021.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-22T00:00:21Z",
-      "threat": "REJECT",
-      "summary": "Cycle: 20260722000021 \u00b7 Data timestamp (UTC): 2026-07-22T00:00:23Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260722_000021.md",
-      "bytes": 11646
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-22-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-22T02:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a high level of activity, with 4 incidents reported in the last 7 days. Although none of these incidents exceed $50M in losses over the last 14 days, the diversity of exploit techniques and affected platforms is notable. Flashloan exploits, price oracle manipulations, and malicious governance proposa",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-02.md",
+      "bytes": 6409
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-22-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-22T02:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a high level of activity, with 4 incidents reported in the last 7 days. Although none of these incidents exceed $50M in losses over the last 14 days, the diversity of exploit techniques and affected platforms is notable. Flashloan exploits, price oracle manipulations, and malicious governance proposa",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-02.md",
+      "bytes": 6409
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-18 15:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-18-15.md",
       "bytes": 3329
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-18-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-18T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (25) and global market cap 24h change (0.84%).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-18-15.md",
-      "bytes": 1989
     }
   ],
   "broadcasts": [
