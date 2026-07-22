@@ -1,3 +1,4 @@
 {"ts": "2026-07-20T23:31:53.758865Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-07-21T12:59:43.391486Z", "address": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b", "chain": "8453", "symbol": "VIRTUAL", "name": "VIRTUAL", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-22T04:26:57.795130Z", "address": "0x25118290e6A5f4139381D072181157035864099d", "chain": "42161", "symbol": "RAIN", "name": "RAIN", "source": "evm", "offering": "token_safety_check"}
+{"ts": "2026-07-22T07:16:39.475283Z", "address": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8", "chain": "42161", "symbol": "PENDLE", "name": "PENDLE", "source": "evm", "offering": "token_chart"}

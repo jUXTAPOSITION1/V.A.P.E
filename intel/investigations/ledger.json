@@ -1505,6 +1505,25 @@
     "symbol": "ETD",
     "times_investigated": 1
   },
+  "8453:0x33417dfda9845853266b3ba4686a397aa0ae8b07": {
+    "address": "0x33417DFDa9845853266b3bA4686A397aA0ae8B07",
+    "chain": "8453",
+    "creator_address": "0x7fd96bae5725667888dc32e7141d8a1255f5d968",
+    "first_investigated": "2026-07-22T07:16:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260722-071636-0x33417DFD.md",
+        "score": 0,
+        "ts": "2026-07-22T07:16:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-22T07:16:36Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0x3ecced5b416e58664f04a39dd18935eb71d33b15": {
     "address": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
     "chain": "8453",
