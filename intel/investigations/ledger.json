@@ -1417,6 +1417,25 @@
     "symbol": "ELSA",
     "times_investigated": 1
   },
+  "8453:0x2b225125765ecbbc4d4e4d2674f92e43c6340331": {
+    "address": "0x2B225125765ECBBc4d4E4D2674F92e43c6340331",
+    "chain": "8453",
+    "creator_address": "0xaa6016675bfa9167366648be96c643dffdfcaff9",
+    "first_investigated": "2026-07-22T10:04:00Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260722-100400-0x2B225125.md",
+        "score": 15,
+        "ts": "2026-07-22T10:04:00Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-22T10:04:00Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
     "address": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
     "chain": "8453",

@@ -381,3 +381,5 @@
 | 2026-07-22 | auto | 0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-22 | auto | 0x33417DFDa9845853266b3bA4686A397aA0ae8B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-22 | auto | 0x2B225125765ECBBc4d4E4D2674F92e43c6340331 (OpenAI) | deep_investigation | REJECT (15/100) | Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain | +7d |
