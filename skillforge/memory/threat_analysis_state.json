@@ -268,5 +268,10 @@
     "report": "intel/threat-analysis/2026-07-19-allbridge-core.md",
     "provider": "groq",
     "written_at": "2026-07-20T21:02:55Z"
+  },
+  "2026-07-22:Zilliqa": {
+    "report": "intel/threat-analysis/2026-07-22-zilliqa.md",
+    "provider": "groq",
+    "written_at": "2026-07-22T20:56:36Z"
   }
 }
