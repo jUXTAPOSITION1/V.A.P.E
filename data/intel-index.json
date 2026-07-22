@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-22T19:51:37Z",
+  "generated": "2026-07-22T20:13:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 357,
+    "reports": 358,
     "reports_by_type": {
+      "virtuals": 66,
       "security": 60,
       "bounty": 107,
       "base": 65,
-      "virtuals": 65,
       "macro": 18,
       "sentiment": 34,
       "skillforge": 4,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-22-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-22T19:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-22-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-22T20:00Z",
       "threat": null,
-      "summary": "Generated: 2026-07-22 19:22 UTC Trigger: agents/securitysweep.py (scheduled, GitHub Actions)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-19.md",
-      "bytes": 5326
+      "summary": "Date: 2026-07-22 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-20.md",
+      "bytes": 2903
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-22-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-22T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-22 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-20.md",
+      "bytes": 2903
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-19 15:49 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-15.md",
       "bytes": 3512
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-19-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-19T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.75%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-15.md",
-      "bytes": 2125
     }
   ],
   "broadcasts": [
