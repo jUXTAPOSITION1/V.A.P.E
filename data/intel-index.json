@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T11:00:11Z",
+  "generated": "2026-07-22T11:59:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 351,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 96,
-    "investigations": 276,
+    "investigations": 277,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-100400-0x2B225125.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-22T10:04:00Z",
-      "target": "0x2B225125765ECBBc4d4E4D2674F92e43c6340331",
+      "file": "investigation-20260722-115924-0x2D76fe86.md",
+      "title": "Investigation \u2014 PROS",
+      "symbol": "PROS",
+      "name": "Wrapped PROS",
+      "date": "2026-07-22T11:59:24Z",
+      "target": "0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-10] Violent 24h move +296% (volatility/manipulation); [-15] Pair only 1.8 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-1",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-100400-0x2B225125.md"
+      "score": "48",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x08574906C462A0B8dA0786ca061E0C2e0C644cA0) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,850. Positive evidence: 9022 holders \u2014 reasonably distributed; Custom verifi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-115924-0x2D76fe86.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-115924-0x2D76fe86.md",
+      "title": "Investigation \u2014 PROS",
+      "symbol": "PROS",
+      "name": "Wrapped PROS",
+      "date": "2026-07-22T11:59:24Z",
+      "target": "0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "48",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x08574906C462A0B8dA0786ca061E0C2e0C644cA0) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,850. Positive evidence: 9022 holders \u2014 reasonably distributed; Custom verifi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-115924-0x2D76fe86.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-100400-0x2B225125.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 109963 holders \u2014 reasonably distributed; Trading 955+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 954+ days ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-153203-0x420FcA01.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-140230-0xB2000000.md",
-      "title": "Investigation \u2014 BASELLER",
-      "symbol": "BASELLER",
-      "name": "Baseller",
-      "date": "2026-07-19T14:02:30Z",
-      "target": "0xB2000000000000000000002b40e71C8F8609a1C8",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: None found. Abs",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-140230-0xB2000000.md"
     }
   ],
   "reports": [
