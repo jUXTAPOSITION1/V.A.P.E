@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T20:13:33Z",
+  "generated": "2026-07-22T20:20:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 358,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 98,
-    "investigations": 281,
+    "investigations": 282,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-184548-0x0000C9AF.md",
-      "title": "Investigation \u2014 SWOGE",
-      "symbol": "SWOGE",
-      "name": "Swole Doge",
-      "date": "2026-07-22T18:45:48Z",
-      "target": "0x0000C9AF57138af42f22729A4DE46c650E602EF4",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Low holder count (146); [-10] Low liquidity $43,257; [-10] Violent 24h move +828% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Trading 667+ days without a known incide",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-184548-0x0000C9AF.md"
+      "file": "investigation-20260722-202007-0x4aC963E0.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-22T20:20:07Z",
+      "target": "0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-202007-0x4aC963E0.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-202007-0x4aC963E0.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-07-22T20:20:07Z",
+      "target": "0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-202007-0x4aC963E0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-184548-0x0000C9AF.md",
@@ -593,20 +607,6 @@
       "score": "37",
       "summary": "Risk factors: [-10] Owner not renounced (0xe3b5d677199000d6f2d71bf9dd78a2c86029fca5) \u2014 can still act on the contract; [-8] Low holder count (83); [-25] Very low liquidity $1,034 (rug/illiquid); [-10] Low liquidity $1,034; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-215630-0xE8556a46.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-205403-0x624e2e7f.md",
-      "title": "Investigation \u2014 SOSO",
-      "symbol": "SOSO",
-      "name": "SoSoValue",
-      "date": "2026-07-19T20:54:03Z",
-      "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner. Positive evidence: 89455 holders \u2014 reasonably distributed; Trading 238+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-205403-0x624e2e7f.md"
     }
   ],
   "reports": [
