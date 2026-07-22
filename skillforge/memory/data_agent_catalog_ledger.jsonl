@@ -20,3 +20,4 @@
 {"ts": "2026-07-22T17:37:44.309959Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-22T18:45:53.463284Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-22T20:20:09.567337Z", "target": "Polygon", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-22T21:40:30.135378Z", "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}

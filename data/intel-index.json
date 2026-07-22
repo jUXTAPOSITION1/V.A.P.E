@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T21:16:43Z",
+  "generated": "2026-07-22T21:40:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 360,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 98,
-    "investigations": 282,
+    "investigations": 283,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-202007-0x4aC963E0.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-22T20:20:07Z",
-      "target": "0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07",
+      "file": "investigation-20260722-214027-0x4C6e2953.md",
+      "title": "Investigation \u2014 play",
+      "symbol": "play",
+      "name": "play",
+      "date": "2026-07-22T21:40:27Z",
+      "target": "0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-202007-0x4aC963E0.md"
+      "score": "25",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-214027-0x4C6e2953.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-214027-0x4C6e2953.md",
+      "title": "Investigation \u2014 play",
+      "symbol": "play",
+      "name": "play",
+      "date": "2026-07-22T21:40:27Z",
+      "target": "0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-214027-0x4C6e2953.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-202007-0x4aC963E0.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x755853e1a893e69349c20ca505418883303885bb) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 3609 holders \u2014 reasonably distributed; Deep liquidity ($628,53",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-225730-0x8B7DdE05.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-215630-0xE8556a46.md",
-      "title": "Investigation \u2014 GR4YS",
-      "symbol": "GR4YS",
-      "name": "Little Gray Tokens",
-      "date": "2026-07-19T21:56:30Z",
-      "target": "0xE8556a4641c862aa3172f95d6b4eDdd9Ada8F8D4",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe3b5d677199000d6f2d71bf9dd78a2c86029fca5) \u2014 can still act on the contract; [-8] Low holder count (83); [-25] Very low liquidity $1,034 (rug/illiquid); [-10] Low liquidity $1,034; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-215630-0xE8556a46.md"
     }
   ],
   "reports": [

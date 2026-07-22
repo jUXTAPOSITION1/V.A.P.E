@@ -395,3 +395,5 @@
 | 2026-07-22 | auto | 0x0000C9AF57138af42f22729A4DE46c650E602EF4 (SWOGE) | deep_investigation | CAUTION (62/100) | Low holder count (146) | +7d |
 
 | 2026-07-22 | auto | 0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-22 | auto | 0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59 (play) | deep_investigation | REJECT (25/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |

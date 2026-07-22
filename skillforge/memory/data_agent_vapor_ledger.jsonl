@@ -38,3 +38,4 @@
 {"ts": "2026-07-22T17:37:38.817124Z", "target": "0x6E97D91456C55a6097ef49234942d2C1e2AB8b07", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-22T18:45:51.736290Z", "target": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-22T20:20:04.795491Z", "target": "0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-22T21:40:24.253433Z", "target": "0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
