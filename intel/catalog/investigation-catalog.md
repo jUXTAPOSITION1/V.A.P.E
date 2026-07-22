@@ -397,3 +397,5 @@
 | 2026-07-22 | auto | 0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-22 | auto | 0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59 (play) | deep_investigation | REJECT (25/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |
+
+| 2026-07-22 | auto | 0x7787548C57031023C031304F274BEda304dA734f (BTC) | deep_investigation | REJECT (37/100) | Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) — can still act | +7d |

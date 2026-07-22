@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T23:08:54Z",
+  "generated": "2026-07-22T23:12:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 362,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 98,
-    "investigations": 283,
+    "investigations": 284,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-214027-0x4C6e2953.md",
-      "title": "Investigation \u2014 play",
-      "symbol": "play",
-      "name": "play",
-      "date": "2026-07-22T21:40:27Z",
-      "target": "0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59",
+      "file": "investigation-20260722-231248-0x7787548C.md",
+      "title": "Investigation \u2014 BTC",
+      "symbol": "BTC",
+      "name": "Bitcoin Based",
+      "date": "2026-07-22T23:12:48Z",
+      "target": "0x7787548C57031023C031304F274BEda304dA734f",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-214027-0x4C6e2953.md"
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) \u2014 can still act on the contract; [-8] Low holder count (185); [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidity $2; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by de",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-231248-0x7787548C.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-231248-0x7787548C.md",
+      "title": "Investigation \u2014 BTC",
+      "symbol": "BTC",
+      "name": "Bitcoin Based",
+      "date": "2026-07-22T23:12:48Z",
+      "target": "0x7787548C57031023C031304F274BEda304dA734f",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) \u2014 can still act on the contract; [-8] Low holder count (185); [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidity $2; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by de",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-231248-0x7787548C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-214027-0x4C6e2953.md",
@@ -593,20 +607,6 @@
       "score": "65",
       "summary": "Risk factors: [-25] Very low liquidity $1,181 (rug/illiquid); [-10] Low liquidity $1,181. Positive evidence: Ownership renounced; 8129 holders \u2014 reasonably distributed; Trading 2050+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this toke",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-000416-0xA1AFFfE3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-225730-0x8B7DdE05.md",
-      "title": "Investigation \u2014 PROS",
-      "symbol": "PROS",
-      "name": "Wrapped PROS",
-      "date": "2026-07-19T22:57:30Z",
-      "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x755853e1a893e69349c20ca505418883303885bb) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 3609 holders \u2014 reasonably distributed; Deep liquidity ($628,53",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-225730-0x8B7DdE05.md"
     }
   ],
   "reports": [

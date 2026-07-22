@@ -1973,6 +1973,25 @@
     "symbol": "VBV",
     "times_investigated": 1
   },
+  "8453:0x7787548c57031023c031304f274beda304da734f": {
+    "address": "0x7787548C57031023C031304F274BEda304dA734f",
+    "chain": "8453",
+    "creator_address": "0x5cc575f1b197022be8bba1c6e4a9e5972daa397e",
+    "first_investigated": "2026-07-22T23:12:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260722-231248-0x7787548C.md",
+        "score": 37,
+        "ts": "2026-07-22T23:12:48Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-22T23:12:48Z",
+    "last_score": 37,
+    "last_verdict": "REJECT",
+    "symbol": "BTC",
+    "times_investigated": 1
+  },
   "8453:0x7991eed0fb1f7affd57c8c240305b8f90c707b07": {
     "address": "0x7991eeD0fB1F7affD57C8C240305b8F90C707b07",
     "chain": "8453",
