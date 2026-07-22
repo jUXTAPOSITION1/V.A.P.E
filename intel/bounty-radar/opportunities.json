@@ -18192,7 +18192,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -18215,7 +18220,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -18238,7 +18248,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -18261,7 +18276,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "self_hosted",
@@ -18286,7 +18306,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
-    "bountyFitScore": 39
+    "bountyFitScore": 49,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "self_hosted",
@@ -18311,7 +18336,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
-    "bountyFitScore": 39
+    "bountyFitScore": 49,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -18334,7 +18364,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -18357,7 +18392,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18381,7 +18421,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18406,7 +18451,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18431,7 +18481,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18454,7 +18509,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18478,7 +18538,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -18501,7 +18566,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "agentarena",
@@ -18524,7 +18594,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784745850.9103646,
+      "ok": true
+    }
   },
   {
     "platform": "agentarena",
@@ -25342,5 +25417,65 @@
     "fitScore": 72,
     "isNew": true,
     "firstSeen": "2026-07-20T17:04:20.427153Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Zilliqa-1784678400",
+    "name": "Zilliqa",
+    "prizeUsd": 0,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "zilliqa"
+    ],
+    "desc": "Hidden Number Problem (HNP) Exploit on Zilliqa. Lead for incident response + forensics.",
+    "fitScore": 40,
+    "isNew": true,
+    "firstSeen": "2026-07-22T18:44:10.910222Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Wanchain-1784592000",
+    "name": "Wanchain (exploit $6,500,000)",
+    "prizeUsd": 6500000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "cardano"
+    ],
+    "desc": "Signature Exploit on Cardano. Lead for incident response + forensics.",
+    "fitScore": 78,
+    "isNew": true,
+    "firstSeen": "2026-07-22T18:44:10.910222Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:42DAO-1784592000",
+    "name": "42DAO (exploit $912,000)",
+    "prizeUsd": 912000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Price Oracle Manipulation on BSC. Lead for incident response + forensics.",
+    "fitScore": 85,
+    "isNew": true,
+    "firstSeen": "2026-07-22T18:44:10.910222Z"
   }
 ]

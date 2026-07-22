@@ -177,5 +177,7 @@
   "defillama-hack:BarnBridge (exploit $776,000)": "no_target_found",
   "defillama-hack:Drips Network (exploit $24,900)": "no_target_found",
   "defillama-hack:DefiTuna Lending (exploit $580,000)": "not_yet_attempted",
-  "defillama-hack:Allbridge Core (exploit $1,650,000)": "not_yet_attempted"
+  "defillama-hack:Allbridge Core (exploit $1,650,000)": "not_yet_attempted",
+  "defillama-hack:42DAO (exploit $912,000)": "no_target_found",
+  "defillama-hack:Wanchain (exploit $6,500,000)": "not_yet_attempted"
 }

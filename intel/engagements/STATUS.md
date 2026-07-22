@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-22T16:58:51Z
+# VAPE Engagement Status — 2026-07-22T18:44:34Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -12,6 +12,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88) — checked 2026-07-13T05:05:09Z, honestly unresolved.
 - Grinex (exploit $15,000,000) ($15,000,000, fit 85) — checked 2026-07-13T05:05:26Z, honestly unresolved.
 - Resolv USR (exploit $24,500,000) ($24,500,000, fit 85) — checked 2026-07-13T05:05:28Z, honestly unresolved.
+- 42DAO (exploit $912,000) ($912,000, fit 85) — checked 2026-07-22T18:44:26Z, honestly unresolved.
 - Edel (exploit $403,000) ($403,000, fit 81) — checked 2026-07-13T05:05:15Z, honestly unresolved.
 - Truebit (exploit $26,400,000) ($26,400,000, fit 80) — checked 2026-07-13T05:05:32Z, honestly unresolved.
 - Hinkal (exploit $820,000) ($820,000, fit 79) — checked 2026-07-13T05:05:12Z, honestly unresolved.
@@ -46,6 +47,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - SolvBTC (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - Ribbon (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - SubQuery Network (exploit $60,000) ($60,000, fit 78, defillama-hack)
+- Wanchain (exploit $6,500,000) ($6,500,000, fit 78, defillama-hack)
 - Secret Network (exploit $4,670,000) ($4,670,000, fit 77, defillama-hack)
 - Cyrus Finance (exploit $5,000,000) ($5,000,000, fit 77, defillama-hack)
 - Stake DAO (exploit $176,000) ($176,000, fit 77, defillama-hack)
