@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T04:20:03Z",
+  "generated": "2026-07-22T04:26:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 346,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 95,
-    "investigations": 273,
+    "investigations": 274,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-010235-0x75F16b63.md",
-      "title": "Investigation \u2014 ZAMA",
-      "symbol": "ZAMA",
-      "name": "Zama",
-      "date": "2026-07-22T01:02:35Z",
-      "target": "0x75F16b63e8f94F91dbc924845Aa42093396283e8",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "58",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Deep liquidity ($118,988,144); Trading 151+ day",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-010235-0x75F16b63.md"
+      "file": "investigation-20260722-042655-0xFd15909C.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-22T04:26:55Z",
+      "target": "0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-042655-0xFd15909C.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-042655-0xFd15909C.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-07-22T04:26:55Z",
+      "target": "0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-042655-0xFd15909C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-010235-0x75F16b63.md",
@@ -593,20 +607,6 @@
       "score": "47",
       "summary": "Risk factors: [-8] Low holder count (74); [-10] Low liquidity $20,150; [-10] Violent 24h move +882% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cust",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-105637-0xE1b7A509.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-092940-0x4c18406F.md",
-      "title": "Investigation \u2014 IDL",
-      "symbol": "IDL",
-      "name": "InfinityDAO",
-      "date": "2026-07-19T09:29:40Z",
-      "target": "0x4c18406Fa690fAa53E5efa899a971557251Af72d",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 19429 holders \u2014 reasonably distributed; Deep liquidity ($2,976,471); Trading 248+ days without a known incident in this scan; Custom verified source (not a mass-produce",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-092940-0x4c18406F.md"
     }
   ],
   "reports": [
