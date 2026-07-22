@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-22T14:01:28Z",
+  "generated": "2026-07-22T14:17:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 352,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 96,
-    "investigations": 277,
+    "investigations": 278,
     "tools": 16,
     "tools_verified": 16,
     "skills": 17
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260722-115924-0x2D76fe86.md",
-      "title": "Investigation \u2014 PROS",
-      "symbol": "PROS",
-      "name": "Wrapped PROS",
-      "date": "2026-07-22T11:59:24Z",
-      "target": "0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F",
+      "file": "investigation-20260722-141754-0x775387eF.md",
+      "title": "Investigation \u2014 VBV",
+      "symbol": "VBV",
+      "name": "VELVET By VIRTUAL",
+      "date": "2026-07-22T14:17:54Z",
+      "target": "0x775387eFAbDad9816e8C52dA5672127185581f0b",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x08574906C462A0B8dA0786ca061E0C2e0C644cA0) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,850. Positive evidence: 9022 holders \u2014 reasonably distributed; Custom verifi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-115924-0x2D76fe86.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) \u2014 can still act on the contract. Positive evidence: 17618 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-141754-0x775387eF.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260722-141754-0x775387eF.md",
+      "title": "Investigation \u2014 VBV",
+      "symbol": "VBV",
+      "name": "VELVET By VIRTUAL",
+      "date": "2026-07-22T14:17:54Z",
+      "target": "0x775387eFAbDad9816e8C52dA5672127185581f0b",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) \u2014 can still act on the contract. Positive evidence: 17618 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-141754-0x775387eF.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260722-115924-0x2D76fe86.md",
@@ -593,20 +607,6 @@
       "score": "33",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or veri",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-170057-0xE2F09796.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260719-153203-0x420FcA01.md",
-      "title": "Investigation \u2014 COQ",
-      "symbol": "COQ",
-      "name": "COQINU",
-      "date": "2026-07-19T15:32:03Z",
-      "target": "0x420FcA0121DC28039145009570975747295f2329",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: Ownership renounced; 109963 holders \u2014 reasonably distributed; Trading 955+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 954+ days ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260719-153203-0x420FcA01.md"
     }
   ],
   "reports": [

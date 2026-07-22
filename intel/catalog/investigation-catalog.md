@@ -385,3 +385,5 @@
 | 2026-07-22 | auto | 0x2B225125765ECBBc4d4E4D2674F92e43c6340331 (OpenAI) | deep_investigation | REJECT (15/100) | Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain | +7d |
 
 | 2026-07-22 | auto | 0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F (PROS) | deep_investigation | REJECT (48/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-22 | auto | 0x775387eFAbDad9816e8C52dA5672127185581f0b (VBV) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) — can still act | +7d |
