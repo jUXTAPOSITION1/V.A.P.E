@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-22T16:05:17Z",
+  "generated": "2026-07-22T16:15:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 354,
+    "reports": 355,
     "reports_by_type": {
+      "base": 65,
       "virtuals": 65,
       "macro": 18,
       "bounty": 106,
-      "base": 64,
       "sentiment": 34,
       "security": 59,
       "skillforge": 4,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-22-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-22T15:00Z",
+      "type": "base",
+      "file": "base-2026-07-22-16.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-22T16:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-22 15:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-15.md",
-      "bytes": 2906
+      "summary": "Date: 2026-07-22 16:15 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-22-16.md",
+      "bytes": 3429
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-22-16.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-22T16:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-22 16:15 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-22-16.md",
+      "bytes": 3429
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1258,17 +1269,6 @@
       "summary": "The feed shows exactly 7 incidents in the last 7 days, all under $50M, with the largest being Ostium ($18.0M, price oracle manipulation on Arbitrum) and Bonzo Lend ($10.05M, price oracle manipulation on Hedera). Other events include DefiTuna Lending ($0.58M on Solana), BarnBridge ($0.776M, malicious governance proposal on Ethereum), Drips",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-19-13.md",
       "bytes": 5583
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-19-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-19T10:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-19 10:20 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-19-10.md",
-      "bytes": 2876
     }
   ],
   "broadcasts": [
