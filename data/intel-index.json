@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-22T10:04:03Z",
+  "generated": "2026-07-22T10:31:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 349,
+    "reports": 350,
     "reports_by_type": {
+      "sentiment": 34,
       "virtuals": 64,
       "security": 59,
       "base": 63,
       "bounty": 105,
       "skillforge": 4,
-      "sentiment": 33,
       "macro": 17,
       "bug": 2,
       "mainnet": 2
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-22-09.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-22T09:00Z",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-22-10.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-22 10:31 UTC",
+      "date": "2026-07-22T10:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-22 09:29 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-09.md",
-      "bytes": 2904
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-22-10.md",
+      "bytes": 2294
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-22-10.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-22 10:31 UTC",
+      "date": "2026-07-22T10:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-22-10.md",
+      "bytes": 2294
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-19 04:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-19-04.md",
       "bytes": 3030
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-19-01.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-19T01:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28, prior day 25) and global market cap 24h change (0.89%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-19-01.md",
-      "bytes": 2135
     }
   ],
   "broadcasts": [
