@@ -19087,7 +19087,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 52
+    "bountyFitScore": 62,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19110,7 +19115,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 51
+    "bountyFitScore": 61,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19133,7 +19143,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 50
+    "bountyFitScore": 60,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19156,7 +19171,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 50
+    "bountyFitScore": 60,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19179,7 +19199,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 49
+    "bountyFitScore": 59,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19202,7 +19227,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 49
+    "bountyFitScore": 59,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19225,7 +19255,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 49
+    "bountyFitScore": 59,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19248,7 +19283,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 48
+    "bountyFitScore": 58,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19271,7 +19311,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19294,7 +19339,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19317,7 +19367,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19340,7 +19395,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19363,7 +19423,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 47
+    "bountyFitScore": 57,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19386,7 +19451,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19409,7 +19479,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784759855.1675723,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
