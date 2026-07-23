@@ -403,3 +403,5 @@
 | 2026-07-23 | auto | 0x34628A64aBbcb562dfC668Ab8E76327759fc855f (USDC) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-23 | auto | 0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb (CHECK) | deep_investigation | PROCEED (82/100) | Owner not renounced (0x9de1abeeb6cc60ded81de4e8c11930c3793f8bdb) — can still act | +7d |
+
+| 2026-07-23 | auto | 0x2EFAc0a597A37050AafcF4beC627249D533DD9f8 ($checkr) | deep_investigation | CAUTION (60/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

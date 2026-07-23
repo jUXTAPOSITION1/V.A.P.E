@@ -1474,6 +1474,25 @@
     "symbol": "PROS",
     "times_investigated": 1
   },
+  "8453:0x2efac0a597a37050aafcf4bec627249d533dd9f8": {
+    "address": "0x2EFAc0a597A37050AafcF4beC627249D533DD9f8",
+    "chain": "8453",
+    "creator_address": "0x98397a068d413d3c92a506f98c5f25d33a9dac14",
+    "first_investigated": "2026-07-23T07:11:53Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260723-071153-0x2EFAc0a5.md",
+        "score": 60,
+        "ts": "2026-07-23T07:11:53Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-23T07:11:53Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "$checkr",
+    "times_investigated": 1
+  },
   "8453:0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
     "address": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
     "chain": "8453",

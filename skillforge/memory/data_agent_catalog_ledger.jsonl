@@ -23,3 +23,4 @@
 {"ts": "2026-07-22T21:40:30.135378Z", "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T01:06:16.557461Z", "target": "aave-v3", "hired": ["unlocks"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T04:28:43.318924Z", "target": "base", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-23T07:11:57.615812Z", "target": "gate", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01}
