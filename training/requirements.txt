@@ -7,7 +7,7 @@
 # package — the training box is set up once by the user per training/
 # setup_runner.sh and re-used across runs, not rebuilt fresh each time like a
 # GitHub-hosted runner's ephemeral environment.
-torch>=2.3
+torch>=2.13.0
 transformers>=4.44
 peft>=0.19.1
 bitsandbytes>=0.43
