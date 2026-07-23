@@ -400,6 +400,25 @@
     "symbol": "YIELD",
     "times_investigated": 1
   },
+  "1:0x88888880d5ca13018d2dc11e2e4744bd91a5656f": {
+    "address": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
+    "chain": "1",
+    "creator_address": "0xa6a1f137d07be21a0bf4d15b11d295a09df04d22",
+    "first_investigated": "2026-07-23T10:02:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260723-100236-0x88888880.md",
+        "score": 25,
+        "ts": "2026-07-23T10:02:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-23T10:02:36Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "BTBB",
+    "times_investigated": 1
+  },
   "1:0x904567252d8f48555b7447c67dca23f0372e16be": {
     "address": "0x904567252D8F48555b7447c67dCA23F0372E16be",
     "chain": "1",

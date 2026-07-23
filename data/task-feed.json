@@ -1,7 +1,70 @@
 {
-  "generated": "2026-07-23T07:11:58Z",
-  "synthesis": "VAPE's automation ran repeated reputation snapshots, sweeps, threat analyses, bounty reports, investigations, and tool checks on 23 July 2026.",
+  "generated": "2026-07-23T10:02:42Z",
+  "synthesis": "VAPE's automation ran repeated sweeps, reputation snapshots, repo reviews, bounty radars, and threat analyses throughout 2026-07-23.",
   "tasks": [
+    {
+      "sha": "6e00756940",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-23T09:38Z",
+      "date": "2026-07-23T09:38:44Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/6e007569402966c3273b01f3f36fa7624d5e85b0"
+    },
+    {
+      "sha": "07011763fe",
+      "kind": "sweep",
+      "message": "virtuals_sweep 2026-07-23T09:27Z",
+      "date": "2026-07-23T09:27:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/07011763fe877696356cd32013bbb66ec78bd1c6"
+    },
+    {
+      "sha": "c10d0fe72a",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-23T09:05Z",
+      "date": "2026-07-23T09:05:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c10d0fe72af9ee8625f837f5f84774787ea83ce8"
+    },
+    {
+      "sha": "872e6ed34d",
+      "kind": "automation",
+      "message": "VAPE repo review Thu Jul 23 08:34:52 UTC 2026",
+      "date": "2026-07-23T08:34:52Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/872e6ed34df271364d956856ea404b296640bd85"
+    },
+    {
+      "sha": "9721798117",
+      "kind": "sweep",
+      "message": "security_sweep 2026-07-23T08:32Z",
+      "date": "2026-07-23T08:32:55Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9721798117beb6e21e6476b543d4cf3aca5c5854"
+    },
+    {
+      "sha": "4c8ef2f26f",
+      "kind": "automation",
+      "message": "Seal findings chain 2026-07-23T08:19Z",
+      "date": "2026-07-23T08:19:58Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4c8ef2f26fd04f9d1721ccc0cbf31661ce2e568b"
+    },
+    {
+      "sha": "fd79800444",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-23T07:59Z",
+      "date": "2026-07-23T07:59:22Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fd79800444b00c065839136b3e6289a18ba5432d"
+    },
+    {
+      "sha": "3087d618a5",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-23T07:16Z",
+      "date": "2026-07-23T07:16:28Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3087d618a506750bd4a5d607a390587e9a7d3e85"
+    },
+    {
+      "sha": "6a708e050b",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-23T07:12Z",
+      "date": "2026-07-23T07:12:02Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/6a708e050b11f9f841a8e152d93b493698dce731"
+    },
     {
       "sha": "4fb26baa89",
       "kind": "reputation",
@@ -43,55 +106,6 @@
       "message": "SCOUT bounty radar sweep 2026-07-23T04:57Z",
       "date": "2026-07-23T04:57:23Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/054d46d06705667f0941535cae5b2e8e177f1596"
-    },
-    {
-      "sha": "0c6f4adadb",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-23T04:28Z",
-      "date": "2026-07-23T04:28:47Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0c6f4adadbe63860f9059523982e10497ee6b3d7"
-    },
-    {
-      "sha": "aafa26e555",
-      "kind": "sweep",
-      "message": "virtuals_sweep 2026-07-23T04:17Z",
-      "date": "2026-07-23T04:17:45Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/aafa26e55590781f1bb9b7594f06fd250e52b928"
-    },
-    {
-      "sha": "ab52296b1d",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-23T04:01Z",
-      "date": "2026-07-23T04:01:13Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ab52296b1d34efc353bfc260695790b9c851be4d"
-    },
-    {
-      "sha": "f24aa9f5ae",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-23T03:52Z",
-      "date": "2026-07-23T03:52:20Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f24aa9f5ae42c1afd4170111a0ee4d7e9b4ba89d"
-    },
-    {
-      "sha": "4b737b9cff",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-23T03:49Z",
-      "date": "2026-07-23T03:49:05Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4b737b9cff38eab4949129646408da94ec8f3adc"
-    },
-    {
-      "sha": "10671b61ab",
-      "kind": "automation",
-      "message": "Auto-generated bounty report Thu Jul 23 02:51:03 UTC 2026",
-      "date": "2026-07-23T02:51:03Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/10671b61abc20c3b4eaffe5ce8213d64ac3a3a85"
-    },
-    {
-      "sha": "4d216af225",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-23T02:09Z",
-      "date": "2026-07-23T02:09:47Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4d216af22547bcab42369ffc579908e2f97fc534"
     }
   ]
 }

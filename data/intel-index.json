@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T09:27:21Z",
+  "generated": "2026-07-23T10:02:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 367,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 100,
-    "investigations": 287,
+    "investigations": 288,
     "tools": 16,
     "tools_verified": 16,
     "skills": 18
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260723-071153-0x2EFAc0a5.md",
-      "title": "Investigation \u2014 $checkr",
-      "symbol": "$checkr",
-      "name": "Checkr",
-      "date": "2026-07-23T07:11:53Z",
-      "target": "0x2EFAc0a597A37050AafcF4beC627249D533DD9f8",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Low liquidity $49,983; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by def",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-071153-0x2EFAc0a5.md"
+      "file": "investigation-20260723-100236-0x88888880.md",
+      "title": "Investigation \u2014 BTBB",
+      "symbol": "BTBB",
+      "name": "BTB Bear",
+      "date": "2026-07-23T10:02:36Z",
+      "target": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) \u2014 can still act on the contract; [-20] Very few holders (28) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $177 (rug/illiquid); [-10] Low liquidity $177; [-10] No known third-party audit or verifiable team identity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-100236-0x88888880.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260723-100236-0x88888880.md",
+      "title": "Investigation \u2014 BTBB",
+      "symbol": "BTBB",
+      "name": "BTB Bear",
+      "date": "2026-07-23T10:02:36Z",
+      "target": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) \u2014 can still act on the contract; [-20] Very few holders (28) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $177 (rug/illiquid); [-10] Low liquidity $177; [-10] No known third-party audit or verifiable team identity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-100236-0x88888880.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260723-071153-0x2EFAc0a5.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x72f3a461B2C631dffe9A2A6A95dC816b78279B07) \u2014 REJECT 30/100 \u2014 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114502-0x044098A1.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-105504-0x08574906.md",
-      "title": "Investigation \u2014 PLAY",
-      "symbol": "PLAY",
-      "name": "Play",
-      "date": "2026-07-20T10:55:04Z",
-      "target": "0x08574906C462A0B8dA0786ca061E0C2e0C644cA0",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: GITLAWB (0xB73a50850680c66CF6C14e5276A7f6149f0b7f63) \u2014 CAUTION 78/100 \u2014 likely the same serial campaign; [-10] Low liquidity $29,936; [-10] Pair 11.7 days old \u2014 under two weeks, no track record yet; [-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-105504-0x08574906.md"
     }
   ],
   "reports": [

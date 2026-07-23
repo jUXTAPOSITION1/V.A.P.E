@@ -405,3 +405,5 @@
 | 2026-07-23 | auto | 0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb (CHECK) | deep_investigation | PROCEED (82/100) | Owner not renounced (0x9de1abeeb6cc60ded81de4e8c11930c3793f8bdb) — can still act | +7d |
 
 | 2026-07-23 | auto | 0x2EFAc0a597A37050AafcF4beC627249D533DD9f8 ($checkr) | deep_investigation | CAUTION (60/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-23 | auto | 0x88888880d5Ca13018D2dC11e2e4744BD91a5656f (BTBB) | deep_investigation | REJECT (25/100) | Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) — can still act | +7d |
