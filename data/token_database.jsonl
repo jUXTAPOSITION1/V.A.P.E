@@ -5,3 +5,4 @@
 {"ts": "2026-07-22T10:04:03.252870Z", "address": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-22T21:40:30.135128Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-07-23T10:02:42.026955Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-07-23T22:33:55.804911Z", "address": "0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01", "chain": "137", "symbol": "LGNS", "name": "LGNS", "source": "evm", "offering": "token_safety_check"}

@@ -417,3 +417,5 @@
 | 2026-07-23 | auto | 0xC720078b43083B0962467fde30B6517AC00F770f (USDT) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-23 | auto | 0x9A27f0A9d45Dd49230C026Ebe6A344A180877C79 (Del404) | deep_investigation | CAUTION (72/100) | Owner not renounced (0x36bcc86f3ff09ae379c1db8a33ad88fb117232f5) — can still act | +7d |
+
+| 2026-07-23 | auto | 0x99E980265Bf36516C442be982df1772a6cCb3233 (ASSET) | deep_investigation | PROCEED (100/100) | clean | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T22:08:34Z",
+  "generated": "2026-07-23T22:33:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 380,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 102,
-    "investigations": 293,
+    "investigations": 294,
     "tools": 16,
     "tools_verified": 16,
     "skills": 19
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260723-211733-0x9A27f0A9.md",
-      "title": "Investigation \u2014 Del404",
-      "symbol": "Del404",
-      "name": "Del404",
-      "date": "2026-07-23T21:17:33Z",
-      "target": "0x9A27f0A9d45Dd49230C026Ebe6A344A180877C79",
+      "file": "investigation-20260723-223348-0x99E98026.md",
+      "title": "Investigation \u2014 ASSET",
+      "symbol": "ASSET",
+      "name": "REAL",
+      "date": "2026-07-23T22:33:48Z",
+      "target": "0x99E980265Bf36516C442be982df1772a6cCb3233",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "72",
-      "summary": "Risk factors: [-10] Owner not renounced (0x36bcc86f3ff09ae379c1db8a33ad88fb117232f5) \u2014 can still act on the contract; [-8] Low holder count (97); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 885+ days without a known incident ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-211733-0x9A27f0A9.md"
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 22423 holders \u2014 reasonably distributed; Deep liquidity ($1,789,344); Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-223348-0x99E98026.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260723-223348-0x99E98026.md",
+      "title": "Investigation \u2014 ASSET",
+      "symbol": "ASSET",
+      "name": "REAL",
+      "date": "2026-07-23T22:33:48Z",
+      "target": "0x99E980265Bf36516C442be982df1772a6cCb3233",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 22423 holders \u2014 reasonably distributed; Deep liquidity ($1,789,344); Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-223348-0x99E98026.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260723-211733-0x9A27f0A9.md",
@@ -593,20 +607,6 @@
       "score": "68",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xfd5844867387cecc3a0393b3e0be32479ea9e61a) \u2014 can still act on the contract; [-10] Low liquidity $34,515. Positive evidence: 88209 holders \u2014 reasonably distributed; Trading 1085+ days without a known incident in this scan; Custom verified s",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114627-0xd07379a7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-114616-0x42000000.md",
-      "title": "Investigation \u2014 OP",
-      "symbol": "OP",
-      "name": "Optimism",
-      "date": "2026-07-20T11:46:16Z",
-      "target": "0x4200000000000000000000000000000000000042",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "78",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x5c4e7ba1e219e47948e6e3f55019a647ba501005) \u2014 can still act on the contract. Positive evidence: 1372386 holders \u2014 reasonably distributed; Trading 1546+ days without a known incident in this scan; Custom verified source (not a mass-produced ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114616-0x42000000.md"
     }
   ],
   "reports": [
