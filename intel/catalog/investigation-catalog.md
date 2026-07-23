@@ -399,3 +399,5 @@
 | 2026-07-22 | auto | 0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59 (play) | deep_investigation | REJECT (25/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |
 
 | 2026-07-22 | auto | 0x7787548C57031023C031304F274BEda304dA734f (BTC) | deep_investigation | REJECT (37/100) | Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) — can still act | +7d |
+
+| 2026-07-23 | auto | 0x34628A64aBbcb562dfC668Ab8E76327759fc855f (USDC) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
