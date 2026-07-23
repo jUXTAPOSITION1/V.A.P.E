@@ -1676,6 +1676,25 @@
     "symbol": "USDC",
     "times_investigated": 1
   },
+  "8453:0x372359b83c4b286b6a1084f07017957a3bd16ba3": {
+    "address": "0x372359b83C4B286b6a1084f07017957a3bd16Ba3",
+    "chain": "8453",
+    "creator_address": "0x30188cb65de879667cdfdcc2a26eb5a4ae0c0230",
+    "first_investigated": "2026-07-23T17:57:21Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260723-175721-0x372359b8.md",
+        "score": 50,
+        "ts": "2026-07-23T17:57:21Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-23T17:57:21Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "aero",
+    "times_investigated": 1
+  },
   "8453:0x3ecced5b416e58664f04a39dd18935eb71d33b15": {
     "address": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
     "chain": "8453",

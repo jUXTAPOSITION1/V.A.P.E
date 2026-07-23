@@ -89,3 +89,4 @@
 {"ts": "2026-07-23T10:02:38.749078Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T11:58:41.944678Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T16:11:07.594197Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-23T17:57:16.893396Z", "target": "0x372359b83C4B286b6a1084f07017957a3bd16Ba3", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
