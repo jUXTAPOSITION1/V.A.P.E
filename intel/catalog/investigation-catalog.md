@@ -409,3 +409,5 @@
 | 2026-07-23 | auto | 0x88888880d5Ca13018D2dC11e2e4744BD91a5656f (BTBB) | deep_investigation | REJECT (25/100) | Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) — can still act | +7d |
 
 | 2026-07-23 | auto | 0x3526989bA0dbc5E4163F4E453d20f9fedcC87081 (Del) | deep_investigation | PROCEED (90/100) | Low liquidity $22,125 | +7d |
+
+| 2026-07-23 | auto | 0xec6432B90e7fD4d9f872cc5C781f05B617DB861E (DEL) | deep_investigation | REJECT (8/100) | Mintable supply (dilution risk) | +7d |
