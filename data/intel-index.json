@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T21:13:25Z",
+  "generated": "2026-07-23T21:17:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 378,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 102,
-    "investigations": 292,
+    "investigations": 293,
     "tools": 16,
     "tools_verified": 16,
     "skills": 19
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260723-193951-0xC720078b.md",
-      "title": "Investigation \u2014 USDT",
-      "symbol": "USDT",
-      "name": "USDT",
-      "date": "2026-07-23T19:39:51Z",
-      "target": "0xC720078b43083B0962467fde30B6517AC00F770f",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2000 holders \u2014 reasonably distributed; Trading 184+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-193951-0xC720078b.md"
+      "file": "investigation-20260723-211733-0x9A27f0A9.md",
+      "title": "Investigation \u2014 Del404",
+      "symbol": "Del404",
+      "name": "Del404",
+      "date": "2026-07-23T21:17:33Z",
+      "target": "0x9A27f0A9d45Dd49230C026Ebe6A344A180877C79",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0x36bcc86f3ff09ae379c1db8a33ad88fb117232f5) \u2014 can still act on the contract; [-8] Low holder count (97); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 885+ days without a known incident ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-211733-0x9A27f0A9.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260723-211733-0x9A27f0A9.md",
+      "title": "Investigation \u2014 Del404",
+      "symbol": "Del404",
+      "name": "Del404",
+      "date": "2026-07-23T21:17:33Z",
+      "target": "0x9A27f0A9d45Dd49230C026Ebe6A344A180877C79",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0x36bcc86f3ff09ae379c1db8a33ad88fb117232f5) \u2014 can still act on the contract; [-8] Low holder count (97); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 885+ days without a known incident ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-211733-0x9A27f0A9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260723-193951-0xC720078b.md",
@@ -593,20 +607,6 @@
       "score": "78",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x5c4e7ba1e219e47948e6e3f55019a647ba501005) \u2014 can still act on the contract. Positive evidence: 1372386 holders \u2014 reasonably distributed; Trading 1546+ days without a known incident in this scan; Custom verified source (not a mass-produced ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114616-0x42000000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-114600-0x511ef9Ad.md",
-      "title": "Investigation \u2014 VU",
-      "symbol": "VU",
-      "name": "Velvet Unicorn by Virtuals",
-      "date": "2026-07-20T11:46:00Z",
-      "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84339 holders \u2014 reasonably distributed; Trading 632+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced th",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114600-0x511ef9Ad.md"
     }
   ],
   "reports": [
