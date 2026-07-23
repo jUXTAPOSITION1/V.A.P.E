@@ -539,3 +539,6 @@
 {"ts": "2026-07-23T04:17:45Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1087, "completion_tokens": 475, "total_tokens": 1562, "fallback_from": ["xai_1:HTTP410 {\"error\":\"Live search is deprecated. Please switch to the Agent Tools API: https://docs.x.ai/docs/guides/tools/overview\"}", "xai_1:HTTP410 {\"error\":\"Live search is deprecated. Please switch to the Agent Tools API: https://docs.x.ai/docs/guides/tools/overview\"}"]}
 {"ts": "2026-07-23T04:28:47Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1083, "completion_tokens": 27, "total_tokens": 1570}
 {"ts": "2026-07-23T05:56:04Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "deep", "prompt_tokens": 2434, "completion_tokens": 133, "total_tokens": 3294}
+{"ts": "2026-07-23T06:06:21Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 5067, "completion_tokens": 751, "total_tokens": 6495}
+{"ts": "2026-07-23T06:06:37Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 8415, "completion_tokens": 543, "total_tokens": 9424}
+{"ts": "2026-07-23T06:06:56Z", "provider": "xai_1", "model": "grok-4-1-fast-reasoning", "tier": "frontier", "prompt_tokens": 8368, "completion_tokens": 550, "total_tokens": 9527}
