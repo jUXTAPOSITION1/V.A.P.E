@@ -283,5 +283,10 @@
     "report": "intel/threat-analysis/2026-07-21-42dao.md",
     "provider": "groq",
     "written_at": "2026-07-23T05:18:23Z"
+  },
+  "2026-07-22:AFX Bridge": {
+    "report": "intel/threat-analysis/2026-07-22-afx-bridge.md",
+    "provider": "groq",
+    "written_at": "2026-07-23T10:13:07Z"
   }
 }
