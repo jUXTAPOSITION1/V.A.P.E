@@ -19507,7 +19507,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19530,7 +19535,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19553,7 +19563,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "sherlock",
@@ -19576,7 +19591,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 46
+    "bountyFitScore": 56,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19599,7 +19619,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19622,7 +19647,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19645,7 +19675,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19668,7 +19703,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19691,7 +19731,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19714,7 +19759,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 45
+    "bountyFitScore": 55,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19737,7 +19787,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19760,7 +19815,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19783,7 +19843,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19806,7 +19871,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -19829,7 +19899,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784782613.6684043,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -25627,5 +25702,25 @@
     "fitScore": 85,
     "isNew": true,
     "firstSeen": "2026-07-22T18:44:10.910222Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:AFX Bridge-1784678400",
+    "name": "AFX Bridge (exploit $24,150,000)",
+    "prizeUsd": 24150000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Private Key Compromised on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 95,
+    "isNew": true,
+    "firstSeen": "2026-07-23T04:56:53.668260Z"
   }
 ]

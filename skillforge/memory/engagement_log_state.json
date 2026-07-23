@@ -179,5 +179,6 @@
   "defillama-hack:DefiTuna Lending (exploit $580,000)": "not_yet_attempted",
   "defillama-hack:Allbridge Core (exploit $1,650,000)": "not_yet_attempted",
   "defillama-hack:42DAO (exploit $912,000)": "no_target_found",
-  "defillama-hack:Wanchain (exploit $6,500,000)": "not_yet_attempted"
+  "defillama-hack:Wanchain (exploit $6,500,000)": "not_yet_attempted",
+  "defillama-hack:AFX Bridge (exploit $24,150,000)": "no_target_found"
 }

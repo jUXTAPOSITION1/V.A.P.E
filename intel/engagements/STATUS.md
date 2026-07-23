@@ -1,10 +1,11 @@
-# VAPE Engagement Status — 2026-07-22T22:38:11Z
+# VAPE Engagement Status — 2026-07-23T04:57:23Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
 ## Searched, no verifiable on-chain target found
 
 - Ostium (exploit $18,000,000) ($18,000,000, fit 95) — checked 2026-07-15T18:41:33Z, honestly unresolved.
+- AFX Bridge (exploit $24,150,000) ($24,150,000, fit 95) — checked 2026-07-23T04:57:11Z, honestly unresolved.
 - Kelp (exploit $293,000,000) ($293,000,000, fit 90) — checked 2026-07-13T05:05:24Z, honestly unresolved.
 - Matcha (exploit $13,430,000) ($13,430,000, fit 90) — checked 2026-07-13T05:05:30Z, honestly unresolved.
 - Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90) — checked 2026-07-13T09:30:23Z, honestly unresolved.
