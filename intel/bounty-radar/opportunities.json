@@ -20793,7 +20793,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -20816,7 +20821,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 40
+    "bountyFitScore": 50,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20839,7 +20849,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20862,7 +20877,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20886,7 +20906,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20910,7 +20935,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20934,7 +20964,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20957,7 +20992,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -20983,7 +21023,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "agentarena",
@@ -21006,7 +21051,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "agentarena",
@@ -21029,7 +21079,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "agentarena",
@@ -21052,7 +21107,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 1,
+      "checkedAt": 1784812111.5760276,
+      "ok": false
+    }
   },
   {
     "platform": "hackenproof",
@@ -21075,7 +21135,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -21098,7 +21163,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
@@ -21122,7 +21192,12 @@
     "track": "bounty",
     "vapeFit": false,
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
-    "bountyFitScore": 0
+    "bountyFitScore": 0,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784812111.5760276,
+      "ok": true
+    }
   },
   {
     "platform": "hackenproof",
