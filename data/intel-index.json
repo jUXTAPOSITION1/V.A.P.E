@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T02:51:03Z",
+  "generated": "2026-07-23T03:52:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 363,
@@ -14,11 +14,11 @@
       "bug": 2,
       "mainnet": 2
     },
-    "broadcasts": 98,
+    "broadcasts": 99,
     "investigations": 285,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 17
+    "skills": 18
   },
   "latest_summary": {
     "investigation": {
@@ -1273,6 +1273,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-23-03.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-23T03:00Z",
+      "summary": "2 new VAPE investigation(s) in the last 6h and 4 rule-based anomaly flag(s) this cycle. Base TVL $4.64B, 157 targets on VAPE's permanent record (81 REJECT / 35 CAUTION / 41 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-23-03.md"
+    },
+    {
       "file": "broadcast-2026-07-22-19.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-22T19:00Z",
@@ -1474,13 +1481,6 @@
       "date": "2026-07-15T19:00Z",
       "summary": "4 new VAPE investigation(s) in the last 6h and 4 rule-based anomaly flag(s) this cycle. Base TVL $4.60B, 65 targets on VAPE's permanent record (32 REJECT / 12 CAUTION / 21 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-15-19.md"
-    },
-    {
-      "file": "broadcast-2026-07-15-14.md",
-      "title": "VAPE Community Intelligence Broadcast",
-      "date": "2026-07-15T14:00Z",
-      "summary": "3 new VAPE investigation(s) in the last 6h and 3 rule-based anomaly flag(s) this cycle. Base TVL $4.56B, 61 targets on VAPE's permanent record (30 REJECT / 10 CAUTION / 21 PROCEED).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-15-14.md"
     }
   ],
   "tools": [
@@ -1747,6 +1747,12 @@
       "title": "skills/ledger-drift-review.md",
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-ledger-drift-review-md.md"
+    },
+    {
+      "file": "skills-token-investigation-md.md",
+      "title": "skills/token_investigation.md",
+      "summary": "Distilled 2026-07-22T08:35:07Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-token-investigation-md.md"
     }
   ]
 }
