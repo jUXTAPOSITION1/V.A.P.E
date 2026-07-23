@@ -401,3 +401,5 @@
 | 2026-07-22 | auto | 0x7787548C57031023C031304F274BEda304dA734f (BTC) | deep_investigation | REJECT (37/100) | Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) — can still act | +7d |
 
 | 2026-07-23 | auto | 0x34628A64aBbcb562dfC668Ab8E76327759fc855f (USDC) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-23 | auto | 0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb (CHECK) | deep_investigation | PROCEED (82/100) | Owner not renounced (0x9de1abeeb6cc60ded81de4e8c11930c3793f8bdb) — can still act | +7d |

@@ -2257,6 +2257,25 @@
     "symbol": "BRIUN",
     "times_investigated": 1
   },
+  "8453:0x9126236476efba9ad8ab77855c60eb5bf37586eb": {
+    "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb",
+    "chain": "8453",
+    "creator_address": "0x9de1abeeb6cc60ded81de4e8c11930c3793f8bdb",
+    "first_investigated": "2026-07-23T04:28:40Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260723-042840-0x91262364.md",
+        "score": 82,
+        "ts": "2026-07-23T04:28:40Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-23T04:28:40Z",
+    "last_score": 82,
+    "last_verdict": "PROCEED",
+    "symbol": "CHECK",
+    "times_investigated": 1
+  },
   "8453:0x930389f6a4a8346698dc8a3d6b299ffcd9b1be65": {
     "address": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
     "chain": "8453",
