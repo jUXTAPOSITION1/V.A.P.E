@@ -609,6 +609,25 @@
     "symbol": "DEXE",
     "times_investigated": 1
   },
+  "1:0xe76278619dde1f71e5f8547d8af9076a76c1322d": {
+    "address": "0xe76278619DDe1f71E5f8547d8AF9076A76C1322D",
+    "chain": "1",
+    "creator_address": "0x6f4c892a500719726952d0cfa4b124db35033106",
+    "first_investigated": "2026-07-23T23:32:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260723-233223-0xe7627861.md",
+        "score": 28,
+        "ts": "2026-07-23T23:32:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-23T23:32:23Z",
+    "last_score": 28,
+    "last_verdict": "REJECT",
+    "symbol": "ASSET",
+    "times_investigated": 1
+  },
   "1:0xec6432b90e7fd4d9f872cc5c781f05b617db861e": {
     "address": "0xec6432B90e7fD4d9f872cc5C781f05B617DB861E",
     "chain": "1",

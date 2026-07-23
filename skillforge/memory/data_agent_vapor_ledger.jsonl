@@ -50,3 +50,4 @@
 {"ts": "2026-07-23T19:39:48.183829Z", "target": "0xC720078b43083B0962467fde30B6517AC00F770f", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T21:17:38.677930Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-23T22:33:53.547601Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-23T23:32:28.253488Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
