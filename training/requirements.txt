@@ -8,7 +8,7 @@
 # setup_runner.sh and re-used across runs, not rebuilt fresh each time like a
 # GitHub-hosted runner's ephemeral environment.
 torch>=2.3
-transformers>=4.44
+transformers>=5.14.1
 peft>=0.19.1
 bitsandbytes>=0.43
 accelerate>=1.14.0
