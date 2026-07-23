@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T14:06:36Z",
+  "generated": "2026-07-23T14:40:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 371,
@@ -14,11 +14,11 @@
       "bug": 2,
       "mainnet": 2
     },
-    "broadcasts": 100,
+    "broadcasts": 101,
     "investigations": 289,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 18
+    "skills": 19
   },
   "latest_summary": {
     "investigation": {
@@ -1273,6 +1273,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-07-23-14.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-07-23T14:00Z",
+      "summary": "2 new VAPE investigation(s) in the last 6h and 4 rule-based anomaly flag(s) this cycle. Base TVL $4.60B, 161 targets on VAPE's permanent record (82 REJECT / 36 CAUTION / 43 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-23-14.md"
+    },
+    {
       "file": "broadcast-2026-07-23-09.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-07-23T09:00Z",
@@ -1474,13 +1481,6 @@
       "date": "2026-07-16T08:00Z",
       "summary": "2 new VAPE investigation(s) in the last 6h and 5 rule-based anomaly flag(s) this cycle. Base TVL $4.59B, 71 targets on VAPE's permanent record (36 REJECT / 13 CAUTION / 22 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-16-08.md"
-    },
-    {
-      "file": "broadcast-2026-07-16-03.md",
-      "title": "VAPE Community Intelligence Broadcast",
-      "date": "2026-07-16T03:00Z",
-      "summary": "3 new VAPE investigation(s) in the last 6h and 4 rule-based anomaly flag(s) this cycle. Base TVL $4.59B, 69 targets on VAPE's permanent record (35 REJECT / 12 CAUTION / 22 PROCEED).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-16-03.md"
     }
   ],
   "tools": [
@@ -1735,6 +1735,12 @@
       "title": "reconcile-ai-report-pipeline-against-prompt-inject.md",
       "summary": "IyBTa2lsbDogUmVjb25jaWxlIEFJIFJlcG9ydCBQaXBlbGluZSBBZ2FpbnN0IFByb21wdCBJbmplY3Rpb24KCiMjIFdoZW4gdG8gdXNlCkFmdGVyIGFueSByYXcgbW9kZWwgb3V0cHV0ICh4YWlfMSBvciBzaW1pbGFyKSBpcyBnZW5lcmF0ZWQgZm9yIHNlY3VyaXR5IHN3ZWVwcywKaW52ZXN0",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/reconcile-ai-report-pipeline-against-prompt-inject.md"
+    },
+    {
+      "file": "skills-base-meme-token-vetting-md.md",
+      "title": "skills/base-meme-token-vetting.md",
+      "summary": "Distilled 2026-07-23T08:36:19Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-base-meme-token-vetting-md.md"
     },
     {
       "file": "skills-base-token-verdict-override-md.md",
