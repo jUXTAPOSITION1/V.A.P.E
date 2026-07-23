@@ -273,5 +273,15 @@
     "report": "intel/threat-analysis/2026-07-22-zilliqa.md",
     "provider": "groq",
     "written_at": "2026-07-22T20:56:36Z"
+  },
+  "2026-07-21:Wanchain": {
+    "report": "intel/threat-analysis/2026-07-21-wanchain.md",
+    "provider": "groq",
+    "written_at": "2026-07-23T05:18:14Z"
+  },
+  "2026-07-21:42DAO": {
+    "report": "intel/threat-analysis/2026-07-21-42dao.md",
+    "provider": "groq",
+    "written_at": "2026-07-23T05:18:23Z"
   }
 }

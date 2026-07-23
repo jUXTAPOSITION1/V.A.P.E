@@ -30,7 +30,8 @@
         "prevention": "EIP-712 domain separation with a nonce and expiry on every signed authorization; reject cross-chain replays.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-21-wanchain.md"
     },
     {
       "date": "2026-07-21",
@@ -47,7 +48,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-21-42dao.md"
     },
     {
       "date": "2026-07-19",
