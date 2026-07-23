@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-23T19:20:11Z",
+  "generated": "2026-07-23T19:39:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 376,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 101,
-    "investigations": 291,
+    "investigations": 292,
     "tools": 16,
     "tools_verified": 16,
     "skills": 19
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260723-175721-0x372359b8.md",
-      "title": "Investigation \u2014 aero",
-      "symbol": "aero",
-      "name": "aero agents",
-      "date": "2026-07-23T17:57:21Z",
-      "target": "0x372359b83C4B286b6a1084f07017957a3bd16Ba3",
+      "file": "investigation-20260723-193951-0xC720078b.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "USDT",
+      "date": "2026-07-23T19:39:51Z",
+      "target": "0xC720078b43083B0962467fde30B6517AC00F770f",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-20] Very few holders (36) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,974; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-175721-0x372359b8.md"
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2000 holders \u2014 reasonably distributed; Trading 184+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-193951-0xC720078b.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260723-193951-0xC720078b.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "USDT",
+      "date": "2026-07-23T19:39:51Z",
+      "target": "0xC720078b43083B0962467fde30B6517AC00F770f",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2000 holders \u2014 reasonably distributed; Trading 184+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-193951-0xC720078b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260723-175721-0x372359b8.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act on the contract. Positive evidence: 84339 holders \u2014 reasonably distributed; Trading 632+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced th",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114600-0x511ef9Ad.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-114546-0x25118290.md",
-      "title": "Investigation \u2014 RAIN",
-      "symbol": "RAIN",
-      "name": "RAIN",
-      "date": "2026-07-20T11:45:46Z",
-      "target": "0x25118290e6A5f4139381D072181157035864099d",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 170385 holders \u2014 reasonably distributed; Deep liquidity ($2,547,879); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 312+ days \u2014 independent longevity corroboration.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114546-0x25118290.md"
     }
   ],
   "reports": [

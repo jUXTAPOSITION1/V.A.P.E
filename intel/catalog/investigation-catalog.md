@@ -413,3 +413,5 @@
 | 2026-07-23 | auto | 0xec6432B90e7fD4d9f872cc5C781f05B617DB861E (DEL) | deep_investigation | REJECT (8/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-23 | auto | 0x372359b83C4B286b6a1084f07017957a3bd16Ba3 (aero) | deep_investigation | CAUTION (50/100) | Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) — can still act | +7d |
+
+| 2026-07-23 | auto | 0xC720078b43083B0962467fde30B6517AC00F770f (USDT) | deep_investigation | PROCEED (100/100) | clean | +7d |
