@@ -73,5 +73,15 @@
     "logged_at": "2026-07-23T08:32:54Z",
     "pattern": "access_control",
     "has_backtest": false
+  },
+  "2026-07-22:Verus-Ethereum Bridge": {
+    "logged_at": "2026-07-23T19:20:11Z",
+    "pattern": "bridge_exploit",
+    "has_backtest": false
+  },
+  "2026-07-11:BlueMove DEX": {
+    "logged_at": "2026-07-23T19:20:11Z",
+    "pattern": "donation_inflation",
+    "has_backtest": false
   }
 }
