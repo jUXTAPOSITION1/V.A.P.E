@@ -180,5 +180,7 @@
   "defillama-hack:Allbridge Core (exploit $1,650,000)": "not_yet_attempted",
   "defillama-hack:42DAO (exploit $912,000)": "no_target_found",
   "defillama-hack:Wanchain (exploit $6,500,000)": "not_yet_attempted",
-  "defillama-hack:AFX Bridge (exploit $24,150,000)": "no_target_found"
+  "defillama-hack:AFX Bridge (exploit $24,150,000)": "no_target_found",
+  "defillama-hack:Verus-Ethereum Bridge (exploit $7,530,000)": "not_yet_attempted",
+  "defillama-hack:BlueMove DEX (exploit $529,000)": "not_yet_attempted"
 }

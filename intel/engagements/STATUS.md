@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-23T17:03:14Z
+# VAPE Engagement Status — 2026-07-23T18:48:09Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -35,6 +35,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Bonzo Lend (exploit $10,050,000) ($10,050,000, fit 85, defillama-hack)
 - FOOM Cash (exploit $2,260,000) ($2,260,000, fit 84, defillama-hack)
 - IoTeX (exploit $8,000,000) ($8,000,000, fit 84, defillama-hack)
+- Verus-Ethereum Bridge (exploit $7,530,000) ($7,530,000, fit 84, defillama-hack)
 - Aztec Bridge (exploit $2,000,000) ($2,000,000, fit 83, defillama-hack)
 - Moonwell Lending (exploit $1,780,000) ($1,780,000, fit 83, defillama-hack)
 - Trust Wallet Wallet (exploit $7,000,000) ($7,000,000, fit 83, defillama-hack)
@@ -87,6 +88,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - DefiTuna Lending (exploit $580,000) ($580,000, fit 68, defillama-hack)
 - JB (exploit $50,000) ($50,000, fit 67, defillama-hack)
 - Revert Lend (exploit $50,000) ($50,000, fit 67, defillama-hack)
+- BlueMove DEX (exploit $529,000) ($529,000, fit 67, defillama-hack)
 - TrustedVolumes (exploit $6,700,000) ($6,700,000, fit 66, defillama-hack)
 - StablR (exploit $2,800,000) ($2,800,000, fit 66, defillama-hack)
 - Aztec Connect (exploit $2,100,000) ($2,100,000, fit 66, defillama-hack)

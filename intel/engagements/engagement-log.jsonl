@@ -192,3 +192,5 @@
 {"ts": "2026-07-22T18:44:34Z", "lead": "42DAO (exploit $912,000)", "platform": "defillama-hack", "prizeUsd": 912000, "fitScore": 85, "engagement": {"status": "no_target_found", "checked_at": "2026-07-22T18:44:26Z"}}
 {"ts": "2026-07-22T18:44:34Z", "lead": "Wanchain (exploit $6,500,000)", "platform": "defillama-hack", "prizeUsd": 6500000, "fitScore": 78, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-07-23T04:57:23Z", "lead": "AFX Bridge (exploit $24,150,000)", "platform": "defillama-hack", "prizeUsd": 24150000, "fitScore": 95, "engagement": {"status": "no_target_found", "checked_at": "2026-07-23T04:57:11Z"}}
+{"ts": "2026-07-23T18:48:09Z", "lead": "Verus-Ethereum Bridge (exploit $7,530,000)", "platform": "defillama-hack", "prizeUsd": 7530000, "fitScore": 84, "engagement": {"status": "not_yet_attempted"}}
+{"ts": "2026-07-23T18:48:09Z", "lead": "BlueMove DEX (exploit $529,000)", "platform": "defillama-hack", "prizeUsd": 529000, "fitScore": 67, "engagement": {"status": "not_yet_attempted"}}

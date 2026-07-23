@@ -22062,7 +22062,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22085,7 +22090,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22108,7 +22118,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22131,7 +22146,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 44
+    "bountyFitScore": 54,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22154,7 +22174,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22177,7 +22202,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22200,7 +22230,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22223,7 +22258,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 43
+    "bountyFitScore": 53,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22246,7 +22286,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 42
+    "bountyFitScore": 52,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22269,7 +22314,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 41
+    "bountyFitScore": 51,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22292,7 +22342,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 41
+    "bountyFitScore": 51,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22315,7 +22370,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 41
+    "bountyFitScore": 51,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22338,7 +22398,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 40
+    "bountyFitScore": 50,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22361,7 +22426,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 40
+    "bountyFitScore": 50,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -22384,7 +22454,12 @@
     "track": "bounty",
     "vapeFit": true,
     "vapeFitReason": "Solidity/EVM smart-contract scope \u2014 matches agents/deep_dive_audit.py",
-    "bountyFitScore": 40
+    "bountyFitScore": 50,
+    "liveCheck": {
+      "consecutiveFailures": 0,
+      "checkedAt": 1784832470.7729354,
+      "ok": true
+    }
   },
   {
     "platform": "cantina",
@@ -26097,5 +26172,45 @@
     "fitScore": 95,
     "isNew": true,
     "firstSeen": "2026-07-23T04:56:53.668260Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Verus-Ethereum Bridge-1784678400",
+    "name": "Verus-Ethereum Bridge (exploit $7,530,000)",
+    "prizeUsd": 7530000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "verus"
+    ],
+    "desc": "Bridge Verification Bypass on Verus. Lead for incident response + forensics.",
+    "fitScore": 84,
+    "isNew": true,
+    "firstSeen": "2026-07-23T18:47:50.772821Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:BlueMove DEX-1783728000",
+    "name": "BlueMove DEX (exploit $529,000)",
+    "prizeUsd": 529000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "sui"
+    ],
+    "desc": "LP-share Inflation on Sui. Lead for incident response + forensics.",
+    "fitScore": 67,
+    "isNew": true,
+    "firstSeen": "2026-07-23T18:47:50.772821Z"
   }
 ]
