@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T00:14:41Z",
+  "generated": "2026-07-24T03:49:05Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,9 +13,9 @@
   },
   "verifiable_activity": {
     "reports_published": 271,
-    "intel_reports": 266,
+    "intel_reports": 267,
     "intel_broadcasts": 102,
-    "catalog_investigations": 204,
+    "catalog_investigations": 205,
     "token_scans_logged": 0,
     "skills_codified": 19,
     "tools_total": 16,
@@ -47,10 +47,10 @@
         "number": 227,
         "title": "arbitrum-oracle-manip-tracer",
         "kind": "self-directed",
-        "status": "closed",
+        "status": "merged",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/227",
         "created_at": "2026-07-19T21:47:23Z",
-        "closed_at": "2026-07-19T22:53:03Z",
+        "closed_at": "2026-07-24T01:54:15Z",
         "verification": {
           "ok": 0,
           "warn": 0,
