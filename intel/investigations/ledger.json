@@ -3184,6 +3184,25 @@
     "symbol": "GR4YS",
     "times_investigated": 1
   },
+  "8453:0xe8d3f6f1c669f02964d1a7ee562ca99128180106": {
+    "address": "0xe8D3f6F1c669f02964d1A7Ee562cA99128180106",
+    "chain": "8453",
+    "creator_address": "0xaf2bfb6b69dfe6efd257fe8cd694175156a23812",
+    "first_investigated": "2026-07-24T07:13:19Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260724-071319-0xe8D3f6F1.md",
+        "score": 5,
+        "ts": "2026-07-24T07:13:19Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-24T07:13:19Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "CHECK",
+    "times_investigated": 1
+  },
   "8453:0xec0d015979077ebddb16f665ccf2b4022fa3ab07": {
     "address": "0xeC0d015979077ebDDB16f665cCF2b4022fa3Ab07",
     "chain": "8453",

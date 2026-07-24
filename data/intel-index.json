@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T05:42:16Z",
+  "generated": "2026-07-24T07:13:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 384,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 103,
-    "investigations": 297,
+    "investigations": 298,
     "tools": 16,
     "tools_verified": 16,
     "skills": 19
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-042407-0x2614f29C.md",
-      "title": "Investigation \u2014 HLX",
-      "symbol": "HLX",
-      "name": "HELIOS",
-      "date": "2026-07-24T04:24:07Z",
-      "target": "0x2614f29C39dE46468A921Fd0b41fdd99A01f2EDf",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "53",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Low liquidity $18,329. Positive evidence: 632 holders \u2014 reasonably distributed; Trading 486+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-042407-0x2614f29C.md"
+      "file": "investigation-20260724-071319-0xe8D3f6F1.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-07-24T07:13:19Z",
+      "target": "0xe8D3f6F1c669f02964d1A7Ee562cA99128180106",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $144 (rug/illiquid); [-10] Low liquidity $144",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-071319-0xe8D3f6F1.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-071319-0xe8D3f6F1.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-07-24T07:13:19Z",
+      "target": "0xe8D3f6F1c669f02964d1A7Ee562cA99128180106",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $144 (rug/illiquid); [-10] Low liquidity $144",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-071319-0xe8D3f6F1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-042407-0x2614f29C.md",
@@ -593,20 +607,6 @@
       "score": "74",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x5e8114643966b7fd7d5cfdd8695ffc5c51ff32c0) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 498073 holders \u2014 reasonably distributed; Deep liquidi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-130922-0xcbB7C000.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-114705-0xcC67e54F.md",
-      "title": "Investigation \u2014 ERC20Token",
-      "symbol": "ERC20Token",
-      "name": null,
-      "date": "2026-07-20T11:47:05Z",
-      "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-8] Low holder count (62); [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-114705-0xcC67e54F.md"
     }
   ],
   "reports": [
