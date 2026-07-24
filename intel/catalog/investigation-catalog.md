@@ -423,3 +423,5 @@
 | 2026-07-23 | auto | 0xe76278619DDe1f71E5f8547d8AF9076A76C1322D (ASSET) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-24 | auto | 0x0000000000000000000000000000000000000000 (ETH) | deep_investigation | PROCEED (80/100) | Holder count unavailable — cannot assess distribution | +7d |
+
+| 2026-07-24 | auto | 0x2614f29C39dE46468A921Fd0b41fdd99A01f2EDf (HLX) | deep_investigation | CAUTION (53/100) | Mintable supply (dilution risk) | +7d |
