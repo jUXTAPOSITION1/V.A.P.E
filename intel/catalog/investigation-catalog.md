@@ -441,3 +441,5 @@
 | 2026-07-24 | auto | 0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee (TOWER) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-24 | auto | 0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a (GMX) | deep_investigation | REJECT (25/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-24 | auto | 0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF (SAND) | deep_investigation | CAUTION (57/100) | Owner can change balances (rug surface) | +7d |

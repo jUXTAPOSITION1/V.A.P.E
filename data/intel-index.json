@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T22:09:01Z",
+  "generated": "2026-07-24T22:38:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 401,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 106,
-    "investigations": 305,
+    "investigations": 306,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-211531-0xfc5A1A6E.md",
-      "title": "Investigation \u2014 GMX",
-      "symbol": "GMX",
-      "name": "GMX",
-      "date": "2026-07-24T21:15:31Z",
-      "target": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x0a2962120b11a4a36700c5de00d4980e58a2d1c0) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evide",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-211531-0xfc5A1A6E.md"
+      "file": "investigation-20260724-223827-0xac531Eb2.md",
+      "title": "Investigation \u2014 SAND",
+      "symbol": "SAND",
+      "name": "SAND",
+      "date": "2026-07-24T22:38:27Z",
+      "target": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x18987794f808ee72ae9127058f1c7d079736ca45) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2206 holders \u2014 reasonably distributed; Custom verified",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-223827-0xac531Eb2.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-223827-0xac531Eb2.md",
+      "title": "Investigation \u2014 SAND",
+      "symbol": "SAND",
+      "name": "SAND",
+      "date": "2026-07-24T22:38:27Z",
+      "target": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x18987794f808ee72ae9127058f1c7d079736ca45) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2206 holders \u2014 reasonably distributed; Custom verified",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-223827-0xac531Eb2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-211531-0xfc5A1A6E.md",
@@ -593,20 +607,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 47310 holders \u2014 reasonably distributed; Trading 776+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 2114+ days \u2014 independent longevity corrobor",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-125936-0x6E88056E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-112638-0x230f1E24.md",
-      "title": "Investigation \u2014 NES",
-      "symbol": "NES",
-      "name": "Nesa",
-      "date": "2026-07-21T11:26:38Z",
-      "target": "0x230f1E241C621d5af670Dad83ebCdd18971E2995",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-5] Pair 22.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 28616 holders \u2014 reasonably distributed; Deep liquidity ($1,604,717); C",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-112638-0x230f1E24.md"
     }
   ],
   "reports": [
