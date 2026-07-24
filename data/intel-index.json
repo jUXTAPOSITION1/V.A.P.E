@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-24T09:59:02Z",
+  "generated": "2026-07-24T10:22:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 387,
+    "reports": 388,
     "reports_by_type": {
+      "bounty": 117,
       "virtuals": 72,
       "security": 64,
-      "bounty": 116,
       "base": 71,
       "sentiment": 37,
       "macro": 19,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-095859-0xeB51D9A3.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-24-09.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-24T09:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-24 09:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-24-09.md",
-      "bytes": 2908
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260724_101922.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-24T10:19:22Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised) \u00b7 Base mover: Robinhood / USDC 0.01% +1001560% 24h (liq $10885.3236) \u2014 volatility/rug wat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_101922.md",
+      "bytes": 11928
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260724_101922.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-24T10:19:22Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised) \u00b7 Base mover: Robinhood / USDC 0.01% +1001560% 24h (liq $10885.3236) \u2014 volatility/rug wat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_101922.md",
+      "bytes": 11928
+    },
+    {
       "kind": "intel",
       "type": "virtuals",
       "file": "virtuals-2026-07-24-09.md",
@@ -700,17 +711,6 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-23-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-23T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-23 21:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-23-21.md",
-      "bytes": 3992
-    },
-    {
-      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-07-23-21.md",
       "title": "Sentiment Sweep Report \u2014 2026-07-23 21:13 UTC",
@@ -719,6 +719,17 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-23-21.md",
       "bytes": 2213
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-23-21.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-23T21:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-23 21:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-23-21.md",
+      "bytes": 3992
     },
     {
       "kind": "intel",
@@ -909,17 +920,6 @@
     },
     {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-22-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-22 21:16 UTC",
-      "date": "2026-07-22T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-22-21.md",
-      "bytes": 2360
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-07-22-21.md",
       "title": "Base Blockchain Sweep Report",
@@ -928,6 +928,17 @@
       "summary": "Date: 2026-07-22 21:59 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-22-21.md",
       "bytes": 3431
+    },
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-22-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-22 21:16 UTC",
+      "date": "2026-07-22T21:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-22-21.md",
+      "bytes": 2360
     },
     {
       "kind": "intel",
@@ -975,17 +986,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-22-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-22T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (33, prior day 25) and global market cap 24h change (-0.61%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-22-15.md",
-      "bytes": 2584
-    },
-    {
-      "kind": "intel",
       "type": "virtuals",
       "file": "virtuals-2026-07-22-15.md",
       "title": "Virtuals Protocol & ACP Sweep Report",
@@ -994,6 +994,17 @@
       "summary": "Date: 2026-07-22 15:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-15.md",
       "bytes": 2906
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-22-15.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-22T15:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (33, prior day 25) and global market cap 24h change (-0.61%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-22-15.md",
+      "bytes": 2584
     },
     {
       "kind": "bounty",
@@ -1118,6 +1129,17 @@
     },
     {
       "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-21-21.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-21T21:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-21 21:57 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-21-21.md",
+      "bytes": 3418
+    },
+    {
+      "kind": "intel",
       "type": "skillforge",
       "file": "skillforge-toolcheck-2026-07-21-21.md",
       "title": "SKILLFORGE Tool Gap Report",
@@ -1137,17 +1159,6 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-21-21.md",
       "bytes": 2222
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-21-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-21T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-21 21:57 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-21-21.md",
-      "bytes": 3418
     },
     {
       "kind": "intel",
@@ -1239,17 +1250,6 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-21-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-21T10:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-21 10:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-21-10.md",
-      "bytes": 3417
-    },
-    {
-      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-07-21-10.md",
       "title": "Sentiment Sweep Report \u2014 2026-07-21 10:31 UTC",
@@ -1261,14 +1261,14 @@
     },
     {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-21-09.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-21T09:00Z",
+      "type": "base",
+      "file": "base-2026-07-21-10.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-21T10:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-21 09:30 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-21-09.md",
-      "bytes": 2905
+      "summary": "Date: 2026-07-21 10:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-21-10.md",
+      "bytes": 3417
     }
   ],
   "broadcasts": [
