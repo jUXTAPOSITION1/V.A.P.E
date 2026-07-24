@@ -435,3 +435,5 @@
 | 2026-07-24 | auto | 0x87c6c398F811A462d623D24cAfEcaf0F0E553b08 (CHECK) | deep_investigation | REJECT (35/100) | Very few holders (23) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-24 | auto | 0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b (PHAR) | deep_investigation | REJECT (43/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-24 | auto | 0x7404AC09aDf614603D9c16a7CE85A1101F3514ba (PLAY) | deep_investigation | CAUTION (55/100) | Owner not renounced (0x5e0fdc32c24a7f2b49ed81abefcc5484775fa4e7) — can still act | +7d |

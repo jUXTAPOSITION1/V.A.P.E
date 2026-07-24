@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T16:48:55Z",
+  "generated": "2026-07-24T17:46:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 395,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 105,
-    "investigations": 302,
+    "investigations": 303,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-154054-0xAAAB9D12.md",
-      "title": "Investigation \u2014 PHAR",
-      "symbol": "PHAR",
-      "name": "PHARAOH",
-      "date": "2026-07-24T15:40:54Z",
-      "target": "0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xaaa823aa799bda3193d46476539bcb1da5b71330) \u2014 can still act on the contract; [-25] Very low liquidity $1,919 (rug/illiquid); [-10] Low liquidity $1,919; [note] address has no contract code (EOA or not deployed). Positive evidence: 11238 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-154054-0xAAAB9D12.md"
+      "file": "investigation-20260724-174646-0x7404AC09.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "PLAY",
+      "date": "2026-07-24T17:46:46Z",
+      "target": "0x7404AC09aDf614603D9c16a7CE85A1101F3514ba",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5e0fdc32c24a7f2b49ed81abefcc5484775fa4e7) \u2014 can still act on the contract; [-25] Very low liquidity $5 (rug/illiquid); [-10] Low liquidity $5. Positive evidence: 19560 holders \u2014 reasonably distributed; Trading 379+ days without a known incident in this scan; Custom verified so",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-174646-0x7404AC09.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-174646-0x7404AC09.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "PLAY",
+      "date": "2026-07-24T17:46:46Z",
+      "target": "0x7404AC09aDf614603D9c16a7CE85A1101F3514ba",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5e0fdc32c24a7f2b49ed81abefcc5484775fa4e7) \u2014 can still act on the contract; [-25] Very low liquidity $5 (rug/illiquid); [-10] Low liquidity $5. Positive evidence: 19560 holders \u2014 reasonably distributed; Trading 379+ days without a known incident in this scan; Custom verified so",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-174646-0x7404AC09.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-154054-0xAAAB9D12.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 4410 holders \u2014 reasonably distributed; Deep liquidity ($754,580); Trading 169+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-063812-0xA12CC123.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-035844-0x47883e38.md",
-      "title": "Investigation \u2014 FWA",
-      "symbol": "FWA",
-      "name": "Fake World Assets",
-      "date": "2026-07-21T03:58:44Z",
-      "target": "0x47883e389BB6be3650B0C0935b300b50a95fc072",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-10] Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FWA (0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845) \u2014 CAUTION 60/100 \u2014 likely the same serial campaign; [-10] Low liquidity $32,133; [-5] P",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-035844-0x47883e38.md"
     }
   ],
   "reports": [
