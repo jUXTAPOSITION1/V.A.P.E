@@ -38,3 +38,4 @@
 {"ts": "2026-07-24T09:59:02.339892Z", "target": "none", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-07-24T11:50:50.318905Z", "target": "Arbitrum", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-24T14:05:23.396382Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-24T15:41:02.008339Z", "target": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02}

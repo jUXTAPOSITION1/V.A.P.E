@@ -1013,6 +1013,25 @@
     "symbol": "WETH.e",
     "times_investigated": 1
   },
+  "43114:0xaaab9d12a30504559b0c5a9a5977fee4a6081c6b": {
+    "address": "0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b",
+    "chain": "43114",
+    "creator_address": "0x95120704f4e2d545aea8b6b3c16d9da1fa32e30f",
+    "first_investigated": "2026-07-24T15:40:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260724-154054-0xAAAB9D12.md",
+        "score": 43,
+        "ts": "2026-07-24T15:40:54Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-24T15:40:54Z",
+    "last_score": 43,
+    "last_verdict": "REJECT",
+    "symbol": "PHAR",
+    "times_investigated": 1
+  },
   "43114:0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7": {
     "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
     "chain": "43114",

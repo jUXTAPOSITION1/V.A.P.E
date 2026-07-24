@@ -7,3 +7,4 @@
 {"ts": "2026-07-23T10:02:42.026955Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-07-23T22:33:55.804911Z", "address": "0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01", "chain": "137", "symbol": "LGNS", "name": "LGNS", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-24T14:05:23.396168Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "exploit_check"}
+{"ts": "2026-07-24T15:41:02.008100Z", "address": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845", "chain": "1", "symbol": "FWA", "name": "FWA", "source": "evm", "offering": "liquidity_check"}
