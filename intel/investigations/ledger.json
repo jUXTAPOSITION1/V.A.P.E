@@ -3393,6 +3393,25 @@
     "symbol": "SMB",
     "times_investigated": 1
   },
+  "8453:0xf7c1cefcf7e1dd8161e00099facd3e1db9e528ee": {
+    "address": "0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee",
+    "chain": "8453",
+    "creator_address": "0x2B4d0F7E40f7e86958FB74317fd98d49B3ac1EAE",
+    "first_investigated": "2026-07-24T19:42:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260724-194245-0xf7C1CEfC.md",
+        "score": 45,
+        "ts": "2026-07-24T19:42:45Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-24T19:42:45Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "TOWER",
+    "times_investigated": 1
+  },
   "8453:0xfd15909c86bcd27f195b0b9f9a791c17eb87eb07": {
     "address": "0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07",
     "chain": "8453",
