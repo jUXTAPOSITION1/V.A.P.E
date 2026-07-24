@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-24T03:52:20Z",
+  "generated": "2026-07-24T04:18:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 382,
+    "reports": 383,
     "reports_by_type": {
+      "virtuals": 71,
       "security": 63,
       "bounty": 115,
       "sentiment": 37,
       "base": 70,
-      "virtuals": 70,
       "macro": 19,
       "skillforge": 4,
       "bug": 2,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-24-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-24T02:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-24-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-24T04:00Z",
       "threat": null,
-      "summary": "The current threat landscape is marked by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Spoofing,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-02.md",
-      "bytes": 7856
+      "summary": "Date: 2026-07-24 04:18 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-24-04.md",
+      "bytes": 4113
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-24-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-24T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-24 04:18 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-24-04.md",
+      "bytes": 4113
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-21 04:17 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-21-04.md",
       "bytes": 2906
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260721_031639.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-21T03:16:39Z",
-      "threat": "CAUTION",
-      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_031639.md",
-      "bytes": 11734
     }
   ],
   "broadcasts": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49026790",
+      "version": "49038124",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.7 eth_dom 9.87 mcap_chg_24h -1.43",
+      "version": "btc_dom 56.84 eth_dom 9.83 mcap_chg_24h -0.69",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1638,7 +1638,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "31 Fear",
+      "version": "28 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
