@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-24T12:23:22Z",
+  "generated": "2026-07-24T13:47:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 391,
+    "reports": 392,
     "reports_by_type": {
+      "security": 65,
       "bounty": 118,
       "base": 72,
       "sentiment": 38,
       "virtuals": 72,
-      "security": 64,
       "macro": 19,
       "skillforge": 4,
       "bug": 2,
@@ -18,7 +18,7 @@
     "investigations": 300,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 19
+    "skills": 20
   },
   "latest_summary": {
     "investigation": {
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260724_121953.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T12:19:53Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_121953.md",
-      "bytes": 12349
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-24-13.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-24T13:00Z",
+      "threat": null,
+      "summary": "The current threat landscape is characterized by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Sp",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-13.md",
+      "bytes": 7642
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-24-13.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-24T13:00Z",
+      "threat": null,
+      "summary": "The current threat landscape is characterized by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Sp",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-13.md",
+      "bytes": 7642
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Computed deterministically from real Fear & Greed (25, prior day 29) and global market cap 24h change (1.28%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-21-15.md",
       "bytes": 2582
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260721_135327.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-21T13:53:27Z",
-      "threat": "CAUTION",
-      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_135327.md",
-      "bytes": 11744
     }
   ],
   "broadcasts": [
@@ -1723,6 +1723,12 @@
       "title": "Smart Contract Investigation and Tool Gap Analysis",
       "summary": "Distilled 2026-07-06T10:45:48Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/smart-contract-investigation-and-tool-gap-analysis.md"
+    },
+    {
+      "file": "token-investigation-playbook.md",
+      "title": "Token Investigation Playbook",
+      "summary": "Distilled 2026-07-24T08:32:51Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-investigation-playbook.md"
     },
     {
       "file": "token-investigation-workflow.md",
