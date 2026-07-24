@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T13:47:46Z",
+  "generated": "2026-07-24T14:05:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 392,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 104,
-    "investigations": 300,
+    "investigations": 301,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-115048-0x5b290eCd.md",
+      "file": "investigation-20260724-140520-0x87c6c398.md",
       "title": "Investigation \u2014 CHECK",
       "symbol": "CHECK",
       "name": "CHECK",
-      "date": "2026-07-24T11:50:48Z",
-      "target": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
+      "date": "2026-07-24T14:05:20Z",
+      "target": "0x87c6c398F811A462d623D24cAfEcaf0F0E553b08",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $146 (rug/illiquid); [-10] Low liquid",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $138 (rug/illiquid); [-10] Low liquidity $138; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 91+ days without a known i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-140520-0x87c6c398.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-140520-0x87c6c398.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-07-24T14:05:20Z",
+      "target": "0x87c6c398F811A462d623D24cAfEcaf0F0E553b08",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $138 (rug/illiquid); [-10] Low liquidity $138; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 91+ days without a known i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-140520-0x87c6c398.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-115048-0x5b290eCd.md",
@@ -593,20 +607,6 @@
       "score": "60",
       "summary": "Risk factors: [-10] Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) \u2014 can still act on the contract; [-10] Violent 24h move +741% (volatility/manipulation); [-10] Pair 4.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as un",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-233147-0xa0Df17B5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-220216-0xfde4C96c.md",
-      "title": "Investigation \u2014 USDT",
-      "symbol": "USDT",
-      "name": "Tether USD",
-      "date": "2026-07-20T22:02:16Z",
-      "target": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 612036 holders ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-220216-0xfde4C96c.md"
     }
   ],
   "reports": [
