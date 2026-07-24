@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-24T17:46:49Z",
+  "generated": "2026-07-24T18:22:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 395,
+    "reports": 396,
     "reports_by_type": {
-      "bounty": 119,
+      "bounty": 120,
       "macro": 20,
       "virtuals": 73,
       "security": 65,
@@ -38,13 +38,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260724_164507.md",
+      "file": "bounty_report_20260724_181844.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T16:45:07Z",
-      "threat": "REJECT",
+      "date": "2026-07-24T18:18:44Z",
+      "threat": "CAUTION",
       "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_164507.md",
-      "bytes": 11961
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_181844.md",
+      "bytes": 12316
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260724_181844.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-24T18:18:44Z",
+      "threat": "CAUTION",
+      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_181844.md",
+      "bytes": 12316
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_192443.md",
       "bytes": 11585
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260721_172136.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-21T17:21:36Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Allbridge Core $1.65M on ['Solana'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260721_172136.md",
-      "bytes": 11948
     }
   ],
   "broadcasts": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49056923",
+      "version": "49063553",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.5 eth_dom 9.86 mcap_chg_24h -1.31",
+      "version": "btc_dom 56.53 eth_dom 9.88 mcap_chg_24h -0.7",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x6c4de6542aa7 AIP 7.0 from 0xaa7f03de to 0x833589fc",
+      "version": "0x9f31e5f63726 AIP 7.0 from 0xaa7f03de to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
