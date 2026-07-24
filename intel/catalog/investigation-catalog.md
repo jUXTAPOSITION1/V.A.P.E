@@ -439,3 +439,5 @@
 | 2026-07-24 | auto | 0x7404AC09aDf614603D9c16a7CE85A1101F3514ba (PLAY) | deep_investigation | CAUTION (55/100) | Owner not renounced (0x5e0fdc32c24a7f2b49ed81abefcc5484775fa4e7) — can still act | +7d |
 
 | 2026-07-24 | auto | 0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee (TOWER) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-24 | auto | 0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a (GMX) | deep_investigation | REJECT (25/100) | Mintable supply (dilution risk) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T21:12:52Z",
+  "generated": "2026-07-24T21:15:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 399,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 106,
-    "investigations": 304,
+    "investigations": 305,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-194245-0xf7C1CEfC.md",
-      "title": "Investigation \u2014 TOWER",
-      "symbol": "TOWER",
-      "name": "TOWER",
-      "date": "2026-07-24T19:42:45Z",
-      "target": "0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260724-211531-0xfc5A1A6E.md",
+      "title": "Investigation \u2014 GMX",
+      "symbol": "GMX",
+      "name": "GMX",
+      "date": "2026-07-24T21:15:31Z",
+      "target": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
+      "chain": "42161 (Arbitrum)",
       "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 69585 holders \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-194245-0xf7C1CEfC.md"
+      "score": "25",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x0a2962120b11a4a36700c5de00d4980e58a2d1c0) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evide",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-211531-0xfc5A1A6E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-211531-0xfc5A1A6E.md",
+      "title": "Investigation \u2014 GMX",
+      "symbol": "GMX",
+      "name": "GMX",
+      "date": "2026-07-24T21:15:31Z",
+      "target": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x0a2962120b11a4a36700c5de00d4980e58a2d1c0) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evide",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-211531-0xfc5A1A6E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-194245-0xf7C1CEfC.md",
@@ -593,20 +607,6 @@
       "score": "77",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-5] Pair 22.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 28616 holders \u2014 reasonably distributed; Deep liquidity ($1,604,717); C",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-112638-0x230f1E24.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-093349-0x431F2f58.md",
-      "title": "Investigation \u2014 RISE",
-      "symbol": "RISE",
-      "name": "RISE TOKEN",
-      "date": "2026-07-21T09:33:49Z",
-      "target": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Pair only 2.0 days old (extreme fresh-launch risk); [note] address has no contract code (EOA or not deployed); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 23205 holders \u2014 rea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-093349-0x431F2f58.md"
     }
   ],
   "reports": [

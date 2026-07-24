@@ -41,3 +41,4 @@
 {"ts": "2026-07-24T15:41:02.008339Z", "target": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02}
 {"ts": "2026-07-24T17:46:49.580225Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-24T19:42:49.330592Z", "target": "avax", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-24T21:15:37.700587Z", "target": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}

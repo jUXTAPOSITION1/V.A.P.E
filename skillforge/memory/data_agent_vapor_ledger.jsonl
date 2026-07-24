@@ -60,3 +60,4 @@
 {"ts": "2026-07-24T15:40:59.998462Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-24T17:46:43.836120Z", "target": "0x7404AC09aDf614603D9c16a7CE85A1101F3514ba", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-24T19:42:42.509078Z", "target": "0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-24T21:15:35.860970Z", "target": "0x33417DFDa9845853266b3bA4686A397aA0ae8B07", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}

@@ -9,3 +9,4 @@
 {"ts": "2026-07-24T14:05:23.396168Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-24T15:41:02.008100Z", "address": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845", "chain": "1", "symbol": "FWA", "name": "FWA", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-07-24T17:46:49.579902Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-07-24T21:15:37.700306Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "exploit_check"}
