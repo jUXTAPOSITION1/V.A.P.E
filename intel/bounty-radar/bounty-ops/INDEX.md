@@ -1,4 +1,4 @@
-# VAPE Bounty Ops — 2026-07-24T21:41:14Z
+# VAPE Bounty Ops — 2026-07-24T23:37:04Z
 
 Real, classified, checklist-tracked live bug-bounty programs VAPE has actually vetted as matching its own tooling (Solidity/EVM via agents/deep_dive_audit.py, or Move/Sui via agents/external_audit.py) — never historical exploits (those live in the Threat Ledger) and never a post-incident recovery/negotiation offer regardless of its headline dollar size. See agents/scout.py and agents/bounty_ops.py for the real classification/scoring and checklist-generation logic.
 
