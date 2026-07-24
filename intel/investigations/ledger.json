@@ -1991,6 +1991,25 @@
     "symbol": "VU",
     "times_investigated": 2
   },
+  "8453:0x5b290ecdf0c4d2d8f2b69661a61b73e6be2dd04a": {
+    "address": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
+    "chain": "8453",
+    "creator_address": "0x048ef1062cbb39b338ac2685da72adf104b4cef5",
+    "first_investigated": "2026-07-24T11:50:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260724-115048-0x5b290eCd.md",
+        "score": 5,
+        "ts": "2026-07-24T11:50:48Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-24T11:50:48Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "CHECK",
+    "times_investigated": 1
+  },
   "8453:0x5e1760831750dd0be92d115e90cfeef207c68b07": {
     "address": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
     "chain": "8453",

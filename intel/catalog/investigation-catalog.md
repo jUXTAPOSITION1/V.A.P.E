@@ -429,3 +429,5 @@
 | 2026-07-24 | auto | 0xe8D3f6F1c669f02964d1A7Ee562cA99128180106 (CHECK) | deep_investigation | REJECT (5/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |
 
 | 2026-07-24 | auto | 0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01 (LGNS) | deep_investigation | PROCEED (88/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-24 | auto | 0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A (CHECK) | deep_investigation | REJECT (5/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A62 | +7d |

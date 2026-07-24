@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-24T10:55:41Z",
+  "generated": "2026-07-24T11:50:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 390,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 104,
-    "investigations": 299,
+    "investigations": 300,
     "tools": 16,
     "tools_verified": 16,
     "skills": 19
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-095859-0xeB51D9A3.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-07-24T09:58:59Z",
-      "target": "0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 2463027 holders \u2014 reasonably distributed; Deep liquidity ($208,517,708); Trading 870+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-095859-0xeB51D9A3.md"
+      "file": "investigation-20260724-115048-0x5b290eCd.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-07-24T11:50:48Z",
+      "target": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $146 (rug/illiquid); [-10] Low liquid",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260724-115048-0x5b290eCd.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-07-24T11:50:48Z",
+      "target": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $146 (rug/illiquid); [-10] Low liquid",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-095859-0xeB51D9A3.md",
@@ -593,20 +607,6 @@
       "score": "45",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 612036 holders ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-220216-0xfde4C96c.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260720-152927-0xB31f66AA.md",
-      "title": "Investigation \u2014 WAVAX",
-      "symbol": "WAVAX",
-      "name": "Wrapped AVAX",
-      "date": "2026-07-20T15:29:27Z",
-      "target": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: [note] address has no contract code (EOA or not deployed). Positive evidence: 351705 holders \u2014 reasonably distributed; Deep liquidity ($8,275,904); Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1909+ days \u2014 independent longevity corroboration.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260720-152927-0xB31f66AA.md"
     }
   ],
   "reports": [
