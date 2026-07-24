@@ -229,6 +229,24 @@
     "symbol": "RISE",
     "times_investigated": 1
   },
+  "1:0x0000000000000000000000000000000000000000": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "chain": "1",
+    "first_investigated": "2026-07-24T01:01:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260724-010123-0x00000000.md",
+        "score": 80,
+        "ts": "2026-07-24T01:01:23Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-24T01:01:23Z",
+    "last_score": 80,
+    "last_verdict": "PROCEED",
+    "symbol": "ETH",
+    "times_investigated": 1
+  },
   "1:0x0000c9af57138af42f22729a4de46c650e602ef4": {
     "address": "0x0000C9AF57138af42f22729A4DE46c650E602EF4",
     "chain": "1",
