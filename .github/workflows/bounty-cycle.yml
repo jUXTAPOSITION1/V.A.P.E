@@ -6,12 +6,18 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  id-token: write  # for the WIF auth steps below (agents/llm.py::ask_vertex_candidate())
+  contents: read
 
 jobs:
   bounty-hunt:
     runs-on: ubuntu-latest
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's own WIF auth step
+    # (agents/llm.py::ask_vertex_candidate()); contents: write is for the
+    # commit step below.
+    permissions:
+      contents: write
+      id-token: write
     env:                              # ← ADDED: job-level env for all MCP/research keys
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
@@ -99,6 +105,10 @@ jobs:
 
   repo-review:
     runs-on: ubuntu-latest
+    # Scoped here (not at workflow level) — see bounty-hunt job's own comment.
+    permissions:
+      contents: write
+      id-token: write
     env:                              # ← ADDED: job-level env for all MCP/research keys
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}

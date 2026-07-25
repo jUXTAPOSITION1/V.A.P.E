@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  issues: write
-  id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
+  contents: read
 
 concurrency:
   group: skillforge-toolcheck
@@ -17,6 +15,14 @@ concurrency:
 jobs:
   toolcheck:
     runs-on: ubuntu-latest
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's WIF auth step
+    # (agents/llm.py::ask_vertex_candidate()); contents/issues: write are for
+    # the commit + broken-tools-issue steps below.
+    permissions:
+      contents: write
+      issues: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
