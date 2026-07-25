@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T19:41:22Z",
+  "generated": "2026-07-25T19:43:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 413,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 326,
+    "investigations": 327,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-192832-0xB2000000.md",
-      "title": "Investigation \u2014 NTFS",
-      "symbol": "NTFS",
-      "name": "National Trust Fund System",
-      "date": "2026-07-25T19:28:32Z",
-      "target": "0xB200000000000000000000109019757367070Eb0",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +1646% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-192832-0xB2000000.md"
+      "file": "investigation-20260725-194337-0xc8Fb80fC.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-07-25T19:43:37Z",
+      "target": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 4725 holders \u2014 reasonably distributed; Top holders control only 15% of supply \u2014 broad distribution; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-194337-0xc8Fb80fC.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-194337-0xc8Fb80fC.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-07-25T19:43:37Z",
+      "target": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 4725 holders \u2014 reasonably distributed; Top holders control only 15% of supply \u2014 broad distribution; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-194337-0xc8Fb80fC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-192832-0xB2000000.md",
@@ -593,20 +607,6 @@
       "score": "25",
       "summary": "Risk factors: [-10] Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) \u2014 can still act on the contract; [-20] Very few holders (28) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $177 (rug/illiquid); [-10] Low liquidity $177; [-10] No known third-party audit or verifiable team identity ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-100236-0x88888880.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-071153-0x2EFAc0a5.md",
-      "title": "Investigation \u2014 $checkr",
-      "symbol": "$checkr",
-      "name": "Checkr",
-      "date": "2026-07-23T07:11:53Z",
-      "target": "0x2EFAc0a597A37050AafcF4beC627249D533DD9f8",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-10] Low liquidity $49,983; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by def",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-071153-0x2EFAc0a5.md"
     }
   ],
   "reports": [

@@ -483,3 +483,5 @@
 | 2026-07-25 | auto | 0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5 (NTFS) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0xB200000000000000000000109019757367070Eb0 (NTFS) | deep_investigation | REJECT (15/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-25 | auto | 0xc8Fb80fCc03f699C70ff0CC08C09106288888888 (CTM) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) — can still act | +7d |

@@ -722,6 +722,25 @@
     "symbol": "TRUMP28",
     "times_investigated": 1
   },
+  "1:0xc8fb80fcc03f699c70ff0cc08c09106288888888": {
+    "address": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
+    "chain": "1",
+    "creator_address": "0xbb8489871d2b9dfd27025f3ccc51f1e984258a70",
+    "first_investigated": "2026-07-25T19:43:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-194337-0xc8Fb80fC.md",
+        "score": 75,
+        "ts": "2026-07-25T19:43:37Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T19:43:37Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "CTM",
+    "times_investigated": 1
+  },
   "1:0xd60abfb751db36514a592963fd71dd50c6cf9ba9": {
     "address": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
     "chain": "1",
