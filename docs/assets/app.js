@@ -307,6 +307,52 @@ const App = {
     // that guarantee — this browser path is the manually-reviewed third).
     _HARD_REJECT_FIELDS: ['is_blacklisted', 'selfdestruct', 'is_airdrop_scam'],
 
+    // Addresses whose held balance is permanently removed from circulation —
+    // excluded from concentration math or a healthy burn/deflationary
+    // mechanism would flag as a whale-risk false positive. Mirrors
+    // agents/token_scan.py::BURN_ADDRESSES / worker/src/scan.ts's
+    // BURN_ADDRESSES — keep in sync.
+    _BURN_ADDRESSES: ['0x0000000000000000000000000000000000000000', '0x000000000000000000000000000000000000dead'],
+
+    // Real top-holder concentration + LP-lock status from GoPlus's own
+    // per-holder "holders"/"lp_holders" arrays — already inside the SAME
+    // `gp` object this scan already fetches (keyless, no new API call), but
+    // never read; only the scalar holder_count/lp_holder_count were. Mirrors
+    // agents/token_scan.py::_top_holder_concentration_pct()/_lp_locked_pct()
+    // — see those functions' docstrings for the full context.
+    _topHolderConcentrationPct(gp) {
+        const holders = gp && gp.holders;
+        if (!Array.isArray(holders) || holders.length===0) return null;
+        let total=0, counted=0;
+        for (const h of holders.slice(0,10)) {
+            if (!h || typeof h!=='object') continue;
+            const addr = String(h.address||'').toLowerCase();
+            if (this._BURN_ADDRESSES.includes(addr)) continue;
+            const tag = String(h.tag||'').toLowerCase();
+            if (tag.includes('lp') || tag.includes('pool') || tag.includes('burn')) continue;
+            let pct = parseFloat(h.percent);
+            if (isNaN(pct)) continue;
+            if (pct>1) pct/=100;
+            total+=pct; counted++;
+        }
+        return counted===0 ? null : total*100;
+    },
+    _lpLockedPct(gp) {
+        const lpHolders = gp && gp.lp_holders;
+        if (!Array.isArray(lpHolders) || lpHolders.length===0) return null;
+        let total=0, locked=0, counted=0;
+        for (const h of lpHolders) {
+            if (!h || typeof h!=='object') continue;
+            let pct = parseFloat(h.percent);
+            if (isNaN(pct)) continue;
+            if (pct>1) pct/=100;
+            total+=pct;
+            if (String(h.is_locked)==='1') locked+=pct;
+            counted++;
+        }
+        return (counted===0 || total<=0) ? null : (locked/total)*100;
+    },
+
     // DexScreener fronts its API through Cloudflare, and its anti-bot layer
     // occasionally rate-limits datacenter/browser-proxy egress with an HTML
     // block page (Cloudflare "error code: 1015") instead of a clean 429 —
@@ -362,6 +408,10 @@ const App = {
         if (pairCreatedMs && (Date.now()-pairCreatedMs)/86400000 < 3) flags.push('fresh launch (<3 days)');
         const hasSocials = pairs.some(p => (p.info?.socials?.length>0) || (p.info?.websites?.length>0));
         if (!hasSocials) flags.push('no declared socials');
+        const topHolderPct = this._topHolderConcentrationPct(gp);
+        if (topHolderPct!=null && topHolderPct>=70) flags.push(`concentrated holders (${topHolderPct.toFixed(0)}%)`);
+        const lpLockedPct = this._lpLockedPct(gp);
+        if (lpLockedPct!=null && lpLockedPct<50) flags.push(`LP mostly unlocked (${lpLockedPct.toFixed(0)}%)`);
         const hardReject = gp.is_honeypot==='1' || this._HARD_REJECT_FIELDS.some(field => gp[field]==='1');
         const verdict = hardReject ? ['REJECT','#fb7185'] : (flags.length>=2 ? ['CAUTION','#fbbf24'] : ['PROCEED','#10b981']);
         const vc = verdict[1];

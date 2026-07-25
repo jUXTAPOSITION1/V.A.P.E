@@ -94,6 +94,88 @@ def _fetch_liquidity_fallback(address, chain_id):
 # used above. Kept in its own list so scan.ts/app.js port identically.
 HARD_REJECT_FIELDS = ("is_blacklisted", "selfdestruct", "is_airdrop_scam")
 
+# Addresses whose held balance is permanently removed from circulation —
+# excluded from concentration math or a healthy burn/deflationary mechanism
+# would flag as a whale-risk false positive. Mirrors
+# agents/investigate.py::_BURN_ADDRESSES. Kept in its own constant so
+# scan.ts/app.js port identically.
+BURN_ADDRESSES = (
+    "0x0000000000000000000000000000000000000000",
+    "0x000000000000000000000000000000000000dead",
+)
+
+
+def _top_holder_concentration_pct(gp):
+    """Real top-holder concentration from GoPlus's own per-holder "holders"
+    array — already inside the SAME `gp` dict this scan() already fetches
+    (keyless, no new API call), but never read; only the scalar
+    holder_count was. Real gap this closes (same one fixed in
+    agents/investigate.py::_holder_concentration() — see that function's
+    docstring for the full context): a raw holder count alone can't tell
+    broad organic distribution apart from a few whales plus a long dust
+    tail. Returns None on any missing/malformed shape (GoPlus's exact live
+    schema couldn't be verified from this sandbox — see investigate.py's
+    same caveat) rather than ever guessing wrong. Kept in its own function
+    (not shared with investigate.py) since this module is deliberately
+    self-contained for 1:1 parity with scan.ts/app.js, which can't import
+    Python."""
+    holders = gp.get("holders")
+    if not isinstance(holders, list) or not holders:
+        return None
+    total = 0.0
+    counted = 0
+    for h in holders[:10]:
+        if not isinstance(h, dict):
+            continue
+        addr = str(h.get("address") or "").lower()
+        if addr in BURN_ADDRESSES:
+            continue
+        tag = str(h.get("tag") or "").lower()
+        if "lp" in tag or "pool" in tag or "burn" in tag:
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        if pct > 1:
+            pct /= 100.0
+        total += pct
+        counted += 1
+    if counted == 0:
+        return None
+    return total * 100.0
+
+
+def _lp_locked_pct(gp):
+    """Real liquidity-lock percentage from GoPlus's own "lp_holders" array
+    — same already-fetched `gp` dict, keyless, never read before (only the
+    scalar lp_holder_count was, via the cruder "lp_concentrated" flag
+    below). Mirrors agents/investigate.py::_lp_lock_status(); see that
+    function's docstring for the schema-uncertainty caveat. Returns None on
+    any missing/malformed shape."""
+    lp_holders = gp.get("lp_holders")
+    if not isinstance(lp_holders, list) or not lp_holders:
+        return None
+    total = 0.0
+    locked = 0.0
+    counted = 0
+    for h in lp_holders:
+        if not isinstance(h, dict):
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        if pct > 1:
+            pct /= 100.0
+        total += pct
+        if str(h.get("is_locked")) == "1":
+            locked += pct
+        counted += 1
+    if counted == 0 or total <= 0:
+        return None
+    return (locked / total) * 100.0
+
 
 def scan(address, chain_id=8453):
     """Return a structured verdict dict from real GoPlus + DexScreener data.
@@ -193,6 +275,19 @@ def scan(address, chain_id=8453):
             pass
     if not has_socials:
         flags.append("no_declared_socials")
+
+    # Real top-holder concentration + LP-lock status from GoPlus's own
+    # already-fetched "holders"/"lp_holders" arrays — see
+    # _top_holder_concentration_pct()/_lp_locked_pct()'s docstrings. Kept as
+    # separate, more informative flags alongside the cruder scalar-count
+    # checks above (lp_concentrated/low_holder_count), not a replacement —
+    # those still catch the "count is basically zero" edge case this can't.
+    top_holder_pct = _top_holder_concentration_pct(gp)
+    if top_holder_pct is not None and top_holder_pct >= 70:
+        flags.append(f"concentrated_holders_{top_holder_pct:.0f}pct")
+    lp_locked_pct = _lp_locked_pct(gp)
+    if lp_locked_pct is not None and lp_locked_pct < 50:
+        flags.append(f"lp_mostly_unlocked_{lp_locked_pct:.0f}pct")
 
     hard_reject = gp.get("is_honeypot") == "1" or any(gp.get(field) == "1" for field in HARD_REJECT_FIELDS)
     if hard_reject:
