@@ -298,5 +298,15 @@
     "report": "intel/threat-analysis/2026-07-11-bluemove-dex.md",
     "provider": "groq",
     "written_at": "2026-07-24T10:09:17Z"
+  },
+  "2026-07-24:DeBond": {
+    "report": "intel/threat-analysis/2026-07-24-debond.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-25T09:29:59Z"
+  },
+  "2026-07-23:Lien": {
+    "report": "intel/threat-analysis/2026-07-23-lien.md",
+    "provider": "groq",
+    "written_at": "2026-07-25T09:30:08Z"
   }
 }
