@@ -9,7 +9,16 @@ only through fakes.
 import json
 import os
 
+import pytest
+
 from agents import data_agent, data_fetchers
+
+
+@pytest.fixture(autouse=True)
+def _isolated_growth_epoch(tmp_path, monkeypatch):
+    """See tests/test_data_agent.py's identical fixture — never let a test
+    touch the real, shared skillforge/memory/data_agent_growth.json."""
+    monkeypatch.setattr(data_agent, "GROWTH_EPOCH_PATH", str(tmp_path / "growth_epoch.json"))
 
 
 class _FakeResponse:
@@ -187,17 +196,19 @@ def test_catalog_sweep_no_input_offering_needs_no_candidate(monkeypatch, tmp_pat
 
 
 def test_catalog_sweep_gate_is_independent_of_main_stream(monkeypatch, tmp_path):
-    # Exhaust the main stream's daily cap — the catalog stream must be
-    # completely unaffected, since each has its own _State file.
+    # Exhaust the main stream's own share of today's growing target — the
+    # catalog stream must be completely unaffected, since each has its own
+    # _State file and its own half-share of the combined target.
+    main_target, _ = data_agent._daily_targets()
     main_state = _fresh_state(tmp_path, "main_exhausted")
-    main_state.record_hires(data_agent.DAILY_CAP)
+    main_state.record_hires(main_target)
     monkeypatch.setattr(data_agent, "_CDP_STATE", main_state)
     monkeypatch.setattr(data_agent, "_CDP_CATALOG_STATE", _fresh_state(tmp_path, "catalog_fresh"))
     monkeypatch.setattr(data_agent.random, "choice", lambda seq: ("bridges", "data", "none"))
     monkeypatch.setattr(data_agent, "_build_session", lambda tag: _FakeSession(_ok_responder))
 
     main_result = data_agent.run_for_investigation("0x" + "11" * 20, chain="8453")
-    assert "cap reached" in main_result["note"]
+    assert "not due yet" in main_result["note"]
 
     catalog_result = data_agent.run_catalog_sweep()
     assert catalog_result["hired"][0]["paid"] is True
