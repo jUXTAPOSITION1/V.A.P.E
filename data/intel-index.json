@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T11:47:42Z",
+  "generated": "2026-07-25T13:00:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 409,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 108,
-    "investigations": 313,
+    "investigations": 314,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-114740-0x712be9C5.md",
-      "title": "Investigation \u2014 VCNT",
-      "symbol": "VCNT",
-      "name": "ViciCoin",
-      "date": "2026-07-25T11:47:40Z",
-      "target": "0x712be9C5b93d4aC284382593327Ae29e59977b07",
+      "file": "investigation-20260725-130038-0xa8Ec9351.md",
+      "title": "Investigation \u2014 dexcheckai",
+      "symbol": "dexcheckai",
+      "name": "dexcheckai",
+      "date": "2026-07-25T13:00:38Z",
+      "target": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-114740-0x712be9C5.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign. Positive evidence: 898 holders \u2014 reasonably distributed; Trading 223+ days without a known incident in this scan; Custom verified s",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-130038-0xa8Ec9351.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-130038-0xa8Ec9351.md",
+      "title": "Investigation \u2014 dexcheckai",
+      "symbol": "dexcheckai",
+      "name": "dexcheckai",
+      "date": "2026-07-25T13:00:38Z",
+      "target": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign. Positive evidence: 898 holders \u2014 reasonably distributed; Trading 223+ days without a known incident in this scan; Custom verified s",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-130038-0xa8Ec9351.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-114740-0x712be9C5.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-071636-0x33417DFD.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-042655-0xFd15909C.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-07-22T04:26:55Z",
-      "target": "0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-042655-0xFd15909C.md"
     }
   ],
   "reports": [
@@ -1649,7 +1649,7 @@
     {
       "file": "base-token-investigation.md",
       "title": "Base Token Investigation",
-      "summary": "When-to-use Investigating Base-chain tokens (chain 8453) that return CAUTION verdicts (e.g. cbBTC at 0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf scoring 74/100) with flags for upgradeable proxies, unrenounced ownership, o",
+      "summary": "Distilled 2026-07-25T08:11:52Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/base-token-investigation.md"
     },
     {

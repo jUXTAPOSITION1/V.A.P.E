@@ -457,3 +457,5 @@
 | 2026-07-25 | auto | 0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0 (VCNT) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-25 | auto | 0x712be9C5b93d4aC284382593327Ae29e59977b07 (VCNT) | deep_investigation | REJECT (35/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-07-25 | auto | 0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581 (dexcheckai) | deep_investigation | CAUTION (70/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A62 | +7d |
