@@ -316,6 +316,8 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
     program themselves — see external-bounty-audit.yml's own "Commit the
     report" step, which now only ever commits this report to the PUBLIC
     repo when engagement != "paid"."""
+    if engagement not in ("paid", "validation"):
+        raise ValueError(f"engagement must be 'paid' or 'validation', got {engagement!r}")
     if paths is None:
         all_paths = fetch_repo_tree(owner, repo, ref)
         lang_probe = detect_language(all_paths)
@@ -444,7 +446,16 @@ def run_external_audit(owner, repo, ref="main", paths=None, program_name=None, m
               "report_content": content, "logo_url": logo_url,
               "provider": provider, "verdict_summary": verdict_summary,
               "move_prover_ran": prover_result.get("ran", False), "engagement": engagement}
-    _append_finding(result)
+    # Real gap this closes (CodeRabbit, PR #277): this used to append a
+    # finding to FINDINGS_PATH (skillforge/memory/, committed to this public
+    # repo) after every audit regardless of engagement — a "paid" buyer's
+    # program name + verdict summary + report path would leak into a public
+    # file even though the report itself is correctly kept private. Matches
+    # this file's own public-commit convention below (engagement ==
+    # "validation" opts IN to public; anything else, including an unknown/
+    # malformed value, stays private by default) rather than the inverse.
+    if engagement == "validation":
+        _append_finding(result)
 
     if callback_url:
         if not _is_safe_callback_url(callback_url):
@@ -480,8 +491,9 @@ def main():
     result = run_external_audit(args.owner, args.repo, args.ref, paths, args.program_name,
                                  callback_url=args.callback_url, engagement=args.engagement)
     # See deep_dive_audit.py's identical comment: never print report_content
-    # (a real paid buyer's actual PoC text) to stdout — GitHub Actions logs
-    # it verbatim on this public repo regardless of engagement.
+    # (a real paid buyer's actual PoC text) to stdout for a "paid" run —
+    # GitHub Actions logs it verbatim on this public repo. "validation" runs
+    # intentionally print it in full (no real buyer, nothing sensitive).
     log_result = dict(result)
     if args.engagement != "validation" and log_result.get("report_content"):
         log_result["report_content"] = f"[redacted — {len(result['report_content'])} chars, delivered privately]"

@@ -105,6 +105,8 @@ def test_run_external_audit_no_files_fetched_returns_error(monkeypatch, tmp_path
 
 
 def test_run_external_audit_writes_report_and_logs_finding(monkeypatch, tmp_path):
+    """Uses engagement='validation' — this is the only mode that appends to
+    the public FINDINGS_PATH ledger (see the paid-doesn't-leak test below)."""
     monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
     findings_path = tmp_path / "findings.jsonl"
     monkeypatch.setattr(ea, "FINDINGS_PATH", str(findings_path))
@@ -116,7 +118,8 @@ def test_run_external_audit_writes_report_and_logs_finding(monkeypatch, tmp_path
 
     monkeypatch.setattr(ea, "ask_oci_grok_frontier", fake_ask)
     result = ea.run_external_audit("mmt-finance", "v3-core", "main", paths=["a.move"],
-                                    program_name="Momentum Smart Contracts Core")
+                                    program_name="Momentum Smart Contracts Core",
+                                    engagement="validation")
     assert result["provider"] == "oci_grok"
     assert result["language"] == "move"
     assert result["files_reviewed"] == 1
@@ -129,6 +132,33 @@ def test_run_external_audit_writes_report_and_logs_finding(monkeypatch, tmp_path
     findings = [json.loads(l) for l in findings_path.read_text().splitlines()]
     assert len(findings) == 1
     assert findings[0]["source"] == "agents/external_audit.py"
+
+
+def test_run_external_audit_paid_engagement_does_not_leak_finding(monkeypatch, tmp_path):
+    """Real gap this pins (CodeRabbit, PR #277): _append_finding() used to
+    run unconditionally, writing a paid buyer's program name + verdict
+    summary + report path into FINDINGS_PATH (skillforge/memory/, committed
+    to this public repo) even though the report itself is correctly kept
+    private for a paid engagement."""
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    findings_path = tmp_path / "findings.jsonl"
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(findings_path))
+    monkeypatch.setattr(ea, "fetch_file", lambda owner, repo, ref, p, timeout=15: "content")
+    monkeypatch.setattr(ea, "ask_oci_grok_frontier",
+                         lambda *a, **kw: ("## Executive Summary\nclean", "oci_grok"))
+    result = ea.run_external_audit("owner", "repo", "main", paths=["a.move"])  # default: paid
+    assert result["engagement"] == "paid"
+    assert not findings_path.exists()
+
+
+def test_run_external_audit_rejects_unknown_engagement(monkeypatch, tmp_path):
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
+    try:
+        ea.run_external_audit("owner", "repo", "main", paths=["a.move"], engagement="sweep")
+        assert False, "expected ValueError"
+    except ValueError:
+        pass
 
 
 def test_run_external_audit_defaults_to_paid_engagement(monkeypatch, tmp_path):

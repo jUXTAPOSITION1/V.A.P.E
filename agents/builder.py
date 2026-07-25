@@ -253,7 +253,7 @@ class Builder:
         # real report-generating workflow in this repo can run as) would
         # report llm_ready=False and refuse to generate here even though the
         # real call would have worked.
-        oci_ready = bool(os.getenv("OCI_GENAI_API_KEY"))
+        oci_ready = bool(os.getenv("OCI_GENAI_API_KEY")) and callable(llm_ask)
         if not llm_available() and not oci_ready:
             logger.warning("No LLM provider available. Builder will not function.")
             self.llm_ready = False

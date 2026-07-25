@@ -124,6 +124,34 @@ function errDetail(e: unknown, env: Env): string {
   return msg;
 }
 
+// Mirrors agents/deep_dive_audit.py's _is_safe_callback_url() — callback_url
+// is an x402 buyer's own query param, passed through unvalidated, and the
+// GitHub Actions runner later POSTs the finished report to it. Real gap
+// this closes (CodeRabbit, PR #277): dispatchAddressAuditJob()/the repo-
+// target equivalent treated ANY truthy callback_url as a usable private
+// delivery channel, so an obviously-unsafe one (loopback/private/link-local
+// literal) skipped the KV jobId fallback entirely — with paid reports no
+// longer committed publicly, that buyer would have had no way to ever
+// retrieve their report. Workers have no synchronous DNS resolution API
+// (unlike Python's socket.getaddrinfo), so this only catches IP-literal
+// SSRF targets, not hostnames that resolve to one — same documented scope
+// limitation as the Python version ("not a complete SSRF defense... just
+// the cheap, high-value checks").
+function isSafeCallbackUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
+    const host = parsed.hostname.toLowerCase();
+    if (!host || host === "localhost") return false;
+    if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(host)) return false;
+    if (/^172\.(1[6-9]|2\d|3[01])\./.test(host)) return false;
+    if (host === "::1" || host.startsWith("fe80:") || host.startsWith("fc") || host.startsWith("fd")) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Builds the facilitator's `createAuthHeaders` callback. Only CDP's hosted
  * facilitator (api.cdp.coinbase.com) needs Bearer JWT auth; the public
@@ -1137,10 +1165,16 @@ async function dispatchAddressAuditJob(
   // a job record so the site can poll for the result instead of only ever
   // pointing the buyer at a GitHub tree link. A caller that DOES supply its
   // own callback_url (a non-browser/API integration) is left completely
-  // unchanged — no KV tracking, exactly today's behavior.
+  // unchanged — no KV tracking, exactly today's behavior. Real gap this
+  // closes (CodeRabbit, PR #277): a raw truthy check accepted ANY string as
+  // "usable", so an unsafe/malformed callback_url (SSRF target, typo, etc.)
+  // skipped the KV fallback entirely and dispatched with no real delivery
+  // channel at all. isSafeCallbackUrl() mirrors the same check the GitHub
+  // Actions runner applies before actually POSTing to it.
+  const usableCallerCallback = callerCallbackUrl && isSafeCallbackUrl(callerCallbackUrl) ? callerCallbackUrl : undefined;
   let jobId: string | undefined;
-  let callbackUrl = callerCallbackUrl;
-  if (!callerCallbackUrl && c.env.VAPE_JOBS) {
+  let callbackUrl = usableCallerCallback;
+  if (!usableCallerCallback && c.env.VAPE_JOBS) {
     jobId = crypto.randomUUID();
     callbackUrl = `${new URL(c.req.url).origin}/scan/bounty_deep_dive/callback?job=${jobId}`;
     try {
@@ -1154,7 +1188,7 @@ async function dispatchAddressAuditJob(
       // KV hiccup — fail open exactly like rateLimiter above: dispatch the
       // real audit either way, the buyer just loses live polling this time.
       jobId = undefined;
-      callbackUrl = callerCallbackUrl;
+      callbackUrl = usableCallerCallback;
     }
   }
 
@@ -1167,8 +1201,10 @@ async function dispatchAddressAuditJob(
   // already settled by this point — same as the GH_DISPATCH_TOKEN-missing
   // case above, refuse with 503 (not 400/402, so the buyer retries rather
   // than re-checking their request) instead of dispatching into a void.
-  if (!callerCallbackUrl && !jobId) {
-    logDraft(false, "no private delivery channel available (VAPE_JOBS not configured/write failed, no callback_url)");
+  if (!usableCallerCallback && !jobId) {
+    logDraft(false, callerCallbackUrl && !usableCallerCallback
+      ? "no private delivery channel available (callback_url failed safety validation, VAPE_JOBS not configured/write failed)"
+      : "no private delivery channel available (VAPE_JOBS not configured/write failed, no callback_url)");
     return c.json({
       offering: offeringName, status: "error",
       error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via ACP instead",
@@ -1215,7 +1251,7 @@ async function dispatchAddressAuditJob(
     // this job id (poll GET /scan/bounty_deep_dive/status?job=<id>, same as
     // the site's own hire.js) and/or callback_url.
     message: "Audit queued — delivered privately once it completes, never published publicly."
-      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
+      + (usableCallerCallback ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
 }
@@ -1430,10 +1466,14 @@ app.get("/scan/bounty_deep_dive", async (c) => {
   // a job record so the site can poll for the result instead of only ever
   // pointing the buyer at a GitHub tree link. A caller that DOES supply its
   // own callback_url (a non-browser/API integration) is left completely
-  // unchanged — no KV tracking, exactly today's behavior.
+  // unchanged — no KV tracking, exactly today's behavior. See
+  // dispatchAddressAuditJob's identical comment above: isSafeCallbackUrl()
+  // stops an unsafe/malformed callback_url from silently skipping the KV
+  // fallback and leaving no real delivery channel at all.
+  const usableCallerCallback = callerCallbackUrl && isSafeCallbackUrl(callerCallbackUrl) ? callerCallbackUrl : undefined;
   let jobId: string | undefined;
-  let callbackUrl = callerCallbackUrl;
-  if (!callerCallbackUrl && c.env.VAPE_JOBS) {
+  let callbackUrl = usableCallerCallback;
+  if (!usableCallerCallback && c.env.VAPE_JOBS) {
     jobId = crypto.randomUUID();
     callbackUrl = `${new URL(c.req.url).origin}/scan/bounty_deep_dive/callback?job=${jobId}`;
     try {
@@ -1447,7 +1487,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
       // KV hiccup — fail open exactly like rateLimiter above: dispatch the
       // real audit either way, the buyer just loses live polling this time.
       jobId = undefined;
-      callbackUrl = callerCallbackUrl;
+      callbackUrl = usableCallerCallback;
     }
   }
 
@@ -1456,7 +1496,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
   // id means a real paid audit runs with nowhere for the buyer to ever
   // retrieve it. Refuse before dispatch (payment already settled, so 503
   // asks for a retry, not a re-check).
-  if (!callerCallbackUrl && !jobId) {
+  if (!usableCallerCallback && !jobId) {
     c.set("vapeJobDraft", {
       id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
       ts: new Date().toISOString(), offering: "bounty_deep_dive", address: `${owner}/${repo}`,
@@ -1515,7 +1555,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     // See dispatchAddressAuditJob's identical comment above — never
     // advertise a public GitHub location for a paid buyer's report anymore.
     message: "Audit queued — delivered privately once it completes, never published publicly."
-      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
+      + (usableCallerCallback ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
 });
