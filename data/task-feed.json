@@ -1,7 +1,56 @@
 {
-  "generated": "2026-07-25T14:44:10Z",
-  "synthesis": "`[sweep] virtual",
+  "generated": "2026-07-25T15:51:50Z",
+  "synthesis": "VAPE's automation performed various sweeps, audits, and self-improvement cycles, including repository reviews and red-team scans.",
   "tasks": [
+    {
+      "sha": "86c9f94349",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-25T15:44Z",
+      "date": "2026-07-25T15:44:29Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/86c9f943499d680c603751bb780eef063ca604f6"
+    },
+    {
+      "sha": "b278d6f698",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-25T15:30Z",
+      "date": "2026-07-25T15:30:14Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b278d6f69815df2060e778750d4ede38c0d545f9"
+    },
+    {
+      "sha": "f3e92967b7",
+      "kind": "automation",
+      "message": "VAPE AI red-team deep scan 2026-07-25T15:16Z",
+      "date": "2026-07-25T15:16:17Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f3e92967b7290260e51a6290ee292f5bc514ea48"
+    },
+    {
+      "sha": "f07804d31b",
+      "kind": "sweep",
+      "message": "macro_sweep 2026-07-25T15:11Z",
+      "date": "2026-07-25T15:11:30Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f07804d31b17a46c8ec5c03249db72d1087dc73c"
+    },
+    {
+      "sha": "51849c093f",
+      "kind": "automation",
+      "message": "VAPE repo review Sat Jul 25 15:04:09 UTC 2026",
+      "date": "2026-07-25T15:04:09Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/51849c093fdb2a5e1b9732582e4276d91fad10b5"
+    },
+    {
+      "sha": "86c7a98632",
+      "kind": "audit",
+      "message": "External bounty audit: jUXTAPOSITION1/V.A.P.E",
+      "date": "2026-07-25T14:51:37Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/86c7a9863246a1a53ab2d09b633b15d4c62f9db8"
+    },
+    {
+      "sha": "d63c9344a9",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T14:44Z",
+      "date": "2026-07-25T14:44:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d63c9344a977d8c06244fae199c2d2b720eb7b97"
+    },
     {
       "sha": "ab83373ece",
       "kind": "sweep",
@@ -57,55 +106,6 @@
       "message": "VAPE repo review Sat Jul 25 13:36:08 UTC 2026",
       "date": "2026-07-25T13:36:08Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3c1518fccd5e14b9943b31276f9cc4b6ca10e4e2"
-    },
-    {
-      "sha": "1f89111962",
-      "kind": "audit",
-      "message": "Deep-dive bounty audit: 0xf4d97f2da56e8c3098f3a8d538db630a2606a024",
-      "date": "2026-07-25T13:22:34Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1f891119623d054951ed5ced8345ae8f1701b818"
-    },
-    {
-      "sha": "2a55729945",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-25T13:10Z",
-      "date": "2026-07-25T13:10:45Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2a55729945747f27827e114e494ebc39ff5d392b"
-    },
-    {
-      "sha": "41070056db",
-      "kind": "audit",
-      "message": "Deep-dive bounty audit: 0xf4d97f2da56e8c3098f3a8d538db630a2606a024",
-      "date": "2026-07-25T13:09:50Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/41070056dbfb4e198901c842eaaa817372587062"
-    },
-    {
-      "sha": "56bf88e458",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-25T13:00Z",
-      "date": "2026-07-25T13:00:45Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/56bf88e45885288ccdeda357db54f715383f265a"
-    },
-    {
-      "sha": "ed92415376",
-      "kind": "audit",
-      "message": "Deep-dive bounty audit: 0xF4d97F2da56e8c3098f3a8D538DB630A2606a024",
-      "date": "2026-07-25T12:56:17Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ed9241537626a66cab416a5b569a5310ae98431f"
-    },
-    {
-      "sha": "5f997b55e7",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-25T12:35Z",
-      "date": "2026-07-25T12:35:55Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5f997b55e725136612107cad3e015b4a341cc528"
-    },
-    {
-      "sha": "ea2966bffe",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-25T12:10Z",
-      "date": "2026-07-25T12:10:43Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ea2966bffe2db5173ed62f01da174ba601c69040"
     }
   ]
 }

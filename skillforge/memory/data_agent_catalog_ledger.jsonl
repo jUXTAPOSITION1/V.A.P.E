@@ -51,3 +51,4 @@
 {"ts": "2026-07-25T11:47:42.128766Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 50}
 {"ts": "2026-07-25T13:00:40.800608Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T14:44:09.620727Z", "target": "grove-finance", "hired": ["unlocks"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
+{"ts": "2026-07-25T15:51:49.345171Z", "target": "Polygon", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
