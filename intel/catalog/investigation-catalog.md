@@ -463,3 +463,5 @@
 | 2026-07-25 | auto | 0xf30d3221a6d46645423FF82C324875586c0fAB07 (OpenAI) | deep_investigation | REJECT (20/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-25 | auto | 0xB8d7710f7d8349A506b75dD184F05777c82dAd0C (ARENA) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-25 | auto | 0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb (DAI) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |

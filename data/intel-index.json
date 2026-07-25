@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T15:58:42Z",
+  "generated": "2026-07-25T17:12:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 316,
+    "investigations": 317,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-155143-0xB8d7710f.md",
-      "title": "Investigation \u2014 ARENA",
-      "symbol": "ARENA",
-      "name": "ArenaToken",
-      "date": "2026-07-25T15:51:43Z",
-      "target": "0xB8d7710f7d8349A506b75dD184F05777c82dAd0C",
-      "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 40824 holders \u2014 reasonably distributed; Trading 633+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 633+ days \u2014 independent l",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-155143-0xB8d7710f.md"
+      "file": "investigation-20260725-171202-0x50c57259.md",
+      "title": "Investigation \u2014 DAI",
+      "symbol": "DAI",
+      "name": "Dai Stablecoin",
+      "date": "2026-07-25T17:12:02Z",
+      "target": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 52% of supply \u2014 meaningful concentration. Positive evidence: 382595 holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-171202-0x50c57259.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-171202-0x50c57259.md",
+      "title": "Investigation \u2014 DAI",
+      "symbol": "DAI",
+      "name": "Dai Stablecoin",
+      "date": "2026-07-25T17:12:02Z",
+      "target": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 52% of supply \u2014 meaningful concentration. Positive evidence: 382595 holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-171202-0x50c57259.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-155143-0xB8d7710f.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) \u2014 can still act on the contract. Positive evidence: 17618 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-141754-0x775387eF.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-115924-0x2D76fe86.md",
-      "title": "Investigation \u2014 PROS",
-      "symbol": "PROS",
-      "name": "Wrapped PROS",
-      "date": "2026-07-22T11:59:24Z",
-      "target": "0x2D76fe86d39a7bfF9EE814110A46fDE2412F933F",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "48",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x08574906C462A0B8dA0786ca061E0C2e0C644cA0) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-10] Low liquidity $30,850. Positive evidence: 9022 holders \u2014 reasonably distributed; Custom verifi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-115924-0x2D76fe86.md"
     }
   ],
   "reports": [

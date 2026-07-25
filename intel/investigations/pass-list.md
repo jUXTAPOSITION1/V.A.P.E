@@ -1,6 +1,6 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-25T15:51:43Z — 51 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-25T17:12:02Z — 51 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|

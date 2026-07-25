@@ -2061,6 +2061,25 @@
     "symbol": "play",
     "times_investigated": 1
   },
+  "8453:0x50c5725949a6f0c72e6c4a641f24049a917db0cb": {
+    "address": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+    "chain": "8453",
+    "creator_address": "0xd1236a6a111879d9862f8374ba15344b6b233fbd",
+    "first_investigated": "2026-07-25T17:12:02Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-171202-0x50c57259.md",
+        "score": 45,
+        "ts": "2026-07-25T17:12:02Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T17:12:02Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "DAI",
+    "times_investigated": 1
+  },
   "8453:0x5110ee173d24cc03c1e836c2558c3ddaabc485bf": {
     "address": "0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf",
     "chain": "8453",

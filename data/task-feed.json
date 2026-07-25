@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-25T15:51:50Z",
-  "synthesis": "VAPE's automation performed various sweeps, audits, and self-improvement cycles, including repository reviews and red-team scans.",
+  "generated": "2026-07-25T17:12:05Z",
+  "synthesis": "VAPE's",
   "tasks": [
+    {
+      "sha": "1c9f268f8d",
+      "kind": "automation",
+      "message": "VAPE repo review Sat Jul 25 16:59:23 UTC 2026",
+      "date": "2026-07-25T16:59:23Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1c9f268f8d0c86c8278c869397b6fbd5266064ca"
+    },
+    {
+      "sha": "7121277f05",
+      "kind": "sweep",
+      "message": "base_sweep 2026-07-25T15:58Z",
+      "date": "2026-07-25T15:58:42Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7121277f0514ec3804492a906035a2ab1a1e5086"
+    },
+    {
+      "sha": "0d2b733a49",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T15:51Z",
+      "date": "2026-07-25T15:51:53Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0d2b733a49a78f6ba7b6e4d08e6328f6adb62110"
+    },
     {
       "sha": "86c9f94349",
       "kind": "bounty-radar",
@@ -85,27 +106,6 @@
       "message": "VAPE AI red-team cycle 2026-07-25T14:07Z",
       "date": "2026-07-25T14:07:49Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/abd6bb5b54b9cded5f31b89ab4bfe44fec829ad6"
-    },
-    {
-      "sha": "f7751132d6",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-25T14:04Z",
-      "date": "2026-07-25T14:04:18Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f7751132d6fc71e14a169e400bad51dbcf7266bc"
-    },
-    {
-      "sha": "c1422a6c8c",
-      "kind": "automation",
-      "message": "VAPE self-improvement cycle 2026-07-25T13:53Z",
-      "date": "2026-07-25T13:53:07Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c1422a6c8c6e973b4d0e20cac53928709a875ab4"
-    },
-    {
-      "sha": "3c1518fccd",
-      "kind": "automation",
-      "message": "VAPE repo review Sat Jul 25 13:36:08 UTC 2026",
-      "date": "2026-07-25T13:36:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3c1518fccd5e14b9943b31276f9cc4b6ca10e4e2"
     }
   ]
 }
