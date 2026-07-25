@@ -182,5 +182,7 @@
   "defillama-hack:Wanchain (exploit $6,500,000)": "not_yet_attempted",
   "defillama-hack:AFX Bridge (exploit $24,150,000)": "no_target_found",
   "defillama-hack:Verus-Ethereum Bridge (exploit $7,530,000)": "not_yet_attempted",
-  "defillama-hack:BlueMove DEX (exploit $529,000)": "not_yet_attempted"
+  "defillama-hack:BlueMove DEX (exploit $529,000)": "not_yet_attempted",
+  "defillama-hack:DeBond (exploit $542,000)": "no_target_found",
+  "defillama-hack:Lien (exploit $542,000)": "no_target_found"
 }

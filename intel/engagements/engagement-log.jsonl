@@ -194,3 +194,5 @@
 {"ts": "2026-07-23T04:57:23Z", "lead": "AFX Bridge (exploit $24,150,000)", "platform": "defillama-hack", "prizeUsd": 24150000, "fitScore": 95, "engagement": {"status": "no_target_found", "checked_at": "2026-07-23T04:57:11Z"}}
 {"ts": "2026-07-23T18:48:09Z", "lead": "Verus-Ethereum Bridge (exploit $7,530,000)", "platform": "defillama-hack", "prizeUsd": 7530000, "fitScore": 84, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-07-23T18:48:09Z", "lead": "BlueMove DEX (exploit $529,000)", "platform": "defillama-hack", "prizeUsd": 529000, "fitScore": 67, "engagement": {"status": "not_yet_attempted"}}
+{"ts": "2026-07-25T04:48:59Z", "lead": "DeBond (exploit $542,000)", "platform": "defillama-hack", "prizeUsd": 542000, "fitScore": 77, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T04:48:51Z"}}
+{"ts": "2026-07-25T04:48:59Z", "lead": "Lien (exploit $542,000)", "platform": "defillama-hack", "prizeUsd": 542000, "fitScore": 77, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T04:48:54Z"}}

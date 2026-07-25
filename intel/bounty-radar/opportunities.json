@@ -26582,5 +26582,45 @@
     "fitScore": 67,
     "isNew": true,
     "firstSeen": "2026-07-23T18:47:50.772821Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:DeBond-1784851200",
+    "name": "DeBond (exploit $542,000)",
+    "prizeUsd": 542000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Accounting Error on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 77,
+    "isNew": true,
+    "firstSeen": "2026-07-25T04:48:41.023334Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Lien-1784764800",
+    "name": "Lien (exploit $542,000)",
+    "prizeUsd": 542000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum"
+    ],
+    "desc": "Input Validation Flaw on Ethereum. Lead for incident response + forensics.",
+    "fitScore": 77,
+    "isNew": true,
+    "firstSeen": "2026-07-25T04:48:41.023334Z"
   }
 ]
