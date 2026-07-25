@@ -447,3 +447,5 @@
 | 2026-07-25 | auto | 0xe9A53C43a0B58706e67341C4055de861e29Ee943 (ELMNT) | deep_investigation | CAUTION (65/100) | Very low liquidity $7,927 (rug/illiquid) | +7d |
 
 | 2026-07-25 | auto | 0x30B9F6FccBf69b8CAbe37A6867373BAD78278420 (VELVET) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88 (USDC) | deep_investigation | CAUTION (68/100) | Mintable supply (dilution risk) | +7d |
