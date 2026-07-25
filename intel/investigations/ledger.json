@@ -3583,6 +3583,25 @@
     "symbol": "SMB",
     "times_investigated": 1
   },
+  "8453:0xf30d3221a6d46645423ff82c324875586c0fab07": {
+    "address": "0xf30d3221a6d46645423FF82C324875586c0fAB07",
+    "chain": "8453",
+    "creator_address": "0x76e29353e58edc68da51ff4fd43582596b229163",
+    "first_investigated": "2026-07-25T14:44:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-144407-0xf30d3221.md",
+        "score": 20,
+        "ts": "2026-07-25T14:44:07Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T14:44:07Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0xf7c1cefcf7e1dd8161e00099facd3e1db9e528ee": {
     "address": "0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee",
     "chain": "8453",

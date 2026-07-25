@@ -69,3 +69,4 @@
 {"ts": "2026-07-25T10:12:56.523941Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-25T11:47:39.304576Z", "target": "0x712be9C5b93d4aC284382593327Ae29e59977b07", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-25T13:00:31.294696Z", "target": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-25T14:44:02.177814Z", "target": "0xf30d3221a6d46645423FF82C324875586c0fAB07", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
