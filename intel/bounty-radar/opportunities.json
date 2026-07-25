@@ -26622,5 +26622,27 @@
     "fitScore": 77,
     "isNew": true,
     "firstSeen": "2026-07-25T04:48:41.023334Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Triple-A-1784851200",
+    "name": "Triple-A (exploit $9,700,000)",
+    "prizeUsd": 9700000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "tron",
+      "arbitrum"
+    ],
+    "desc": "Hot Wallet Compromise on Ethereum,Tron,Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 90,
+    "isNew": true,
+    "firstSeen": "2026-07-25T18:35:18.351979Z"
   }
 ]
