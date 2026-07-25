@@ -1869,13 +1869,17 @@ window.addEventListener('load', () => {
         // can actually transition instead of an abrupt cut — see site.css.
         const OPEN = ['visible', 'opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto'];
         const CLOSED = ['invisible', 'opacity-0', 'scale-[0.98]', '-translate-y-1', 'pointer-events-none'];
-        const navIcon = document.getElementById('nav-menu-icon');
+        // Two inline SVGs swapped by `hidden`, rather than reclassing one
+        // Font Awesome <i> between fa-bars/fa-xmark — the icon font is a
+        // third-party CDN dependency and this control has to render without it.
+        const navBars = document.getElementById('nav-menu-bars');
+        const navClose = document.getElementById('nav-menu-close');
         const setOpen = (open) => {
             navPanel.classList.remove(...(open ? CLOSED : OPEN));
             navPanel.classList.add(...(open ? OPEN : CLOSED));
             navToggle.setAttribute('aria-expanded', String(open));
-            navIcon?.classList.toggle('fa-bars', !open);
-            navIcon?.classList.toggle('fa-xmark', open);
+            navBars?.classList.toggle('hidden', open);
+            navClose?.classList.toggle('hidden', !open);
         };
         navToggle.addEventListener('click', () => setOpen(navPanel.classList.contains('invisible')));
         navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
