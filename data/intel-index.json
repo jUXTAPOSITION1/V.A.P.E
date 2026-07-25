@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T03:46:09Z",
+  "generated": "2026-07-25T03:52:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 403,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 107,
-    "investigations": 307,
+    "investigations": 308,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-001251-0xe9A53C43.md",
-      "title": "Investigation \u2014 ELMNT",
-      "symbol": "ELMNT",
-      "name": "Element 280",
-      "date": "2026-07-25T00:12:51Z",
-      "target": "0xe9A53C43a0B58706e67341C4055de861e29Ee943",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $7,927 (rug/illiquid); [-10] Low liquidity $7,927. Positive evidence: Ownership renounced; 747 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-001251-0xe9A53C43.md"
+      "file": "investigation-20260725-035158-0x30B9F6Fc.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "velvet",
+      "date": "2026-07-25T03:51:58Z",
+      "target": "0x30B9F6FccBf69b8CAbe37A6867373BAD78278420",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $2 (r",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-035158-0x30B9F6Fc.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-035158-0x30B9F6Fc.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "velvet",
+      "date": "2026-07-25T03:51:58Z",
+      "target": "0x30B9F6FccBf69b8CAbe37A6867373BAD78278420",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $2 (r",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-035158-0x30B9F6Fc.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-001251-0xe9A53C43.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-8] Low holder count (155); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default; [capped at 70] Only 1 positive legitimacy signal(s) found \u2014 score capped even though few explicit red flags triggered. Positive evidence: Custom verified source (not",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-182217-0x28D4e499.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-151314-0xc2B8C664.md",
-      "title": "Investigation \u2014 misosoupqueen",
-      "symbol": "misosoupqueen",
-      "name": "misosoupqueen",
-      "date": "2026-07-21T15:13:14Z",
-      "target": "0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "17",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZORS (0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf) \u2014 CAUTION 55/100 \u2014 likely the same serial campaign; [-8] Low holder count (56); [-25] Very low liquidity $2,397 (rug/illiquid); [-10] Low liquidity $2,397; [-10] No known third-party audit o",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-151314-0xc2B8C664.md"
     }
   ],
   "reports": [

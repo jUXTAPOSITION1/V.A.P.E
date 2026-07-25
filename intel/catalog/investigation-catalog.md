@@ -445,3 +445,5 @@
 | 2026-07-24 | auto | 0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF (SAND) | deep_investigation | CAUTION (57/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-25 | auto | 0xe9A53C43a0B58706e67341C4055de861e29Ee943 (ELMNT) | deep_investigation | CAUTION (65/100) | Very low liquidity $7,927 (rug/illiquid) | +7d |
+
+| 2026-07-25 | auto | 0x30B9F6FccBf69b8CAbe37A6867373BAD78278420 (VELVET) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
