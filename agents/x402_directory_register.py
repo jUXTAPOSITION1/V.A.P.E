@@ -78,24 +78,24 @@ for the full writeup):
     research — no evidence found that this actually exists; not referenced
     or implemented anywhere.
 
-Deliberately NOT scheduled: repeated calls to an unfamiliar directory's
-/register endpoint with unknown dedup behavior risk creating duplicate
-listings. Trigger manually (workflow_dispatch) when the offering list,
-prices, or worker URL change — see .github/workflows/x402-directory.yml.
+Deliberately NOT scheduled: trigger manually (workflow_dispatch) when the
+offering list, prices, or worker URL change — see
+.github/workflows/x402-directory.yml.
 
-Duplicate-listing avoidance (2026-07-25): the 2026-07-05 run registered 22
+State-file skip (2026-07-25, revised): the 2026-07-05 run registered 22
 offerings with 402index.io; 5 more (tx_decode, community_intel_broadcast,
 bulk_safety_bundle, deep_contract_audit, website_review) were added to the
 worker on 2026-07-20 but never registered anywhere, since this script was
-never re-run in between. Re-sending all 27 to 402index.io's still-
-undocumented-dedup /register endpoint would risk duplicating the 22
-already-listed ones. STATE_PATH now records which offering names have
+never re-run in between. STATE_PATH records which offering names have
 already been successfully registered with 402index.io; register_402index()
-skips those on every future run unless --force-all is passed, so re-running
-this script after adding a new offering is always safe by default. VAPOR's
-own /discovery/register is a real upsert (per its own docs), so
-register_vapor() is intentionally NOT filtered by this state — it always
-sends the full current list.
+skips those on every future run unless --force-all is passed — this is now
+confirmed (per the real POST /api/v1/register docs: "Re-registering an
+existing URL+protocol updates the record") to be a pacing/no-op-avoidance
+default, not a duplication-risk workaround, so --force-all is a real,
+safe way to push a metadata-only change (e.g. a price or description edit)
+to already-listed offerings. VAPOR's own /discovery/register is a real
+upsert (per its own docs), so register_vapor() is intentionally NOT
+filtered by this state — it always sends the full current list.
 """
 import argparse
 import json
@@ -276,19 +276,43 @@ def _save_state(state):
         f.write("\n")
 
 
+def _category_for(name):
+    """402index.io's `category` field is a plain prefix-matched string (its
+    own docs example: "bitcoin", "ai/text") — there's no fixed taxonomy to
+    conform to, just pick something a filter/search would reasonably match."""
+    if name in BOUNTY_OFFERINGS:
+        return "crypto/security/audit"
+    if name in DATA_OFFERINGS:
+        return "crypto/market-data"
+    return "crypto/security"
+
+
 def register_402index(only=None, force_all=False):
     """Registers each offering with 402index.io — but SKIPS any offering
     already recorded in STATE_PATH as previously registered, unless
-    force_all is set, since 402index.io's /register dedup behavior is
-    undocumented and re-sending an already-listed offering risks creating a
-    duplicate listing (see module docstring). `only`, if given, further
-    restricts this run to that explicit set of offering names (e.g. just the
-    newly-added ones) regardless of state."""
+    force_all is set. `only`, if given, further restricts this run to that
+    explicit set of offering names (e.g. just the newly-added ones)
+    regardless of state.
+
+    Confirmed via the real api-docs POST /api/v1/register section (2026-07-25,
+    read past the truncation that hid it on the first fetch): "Re-registering
+    an existing URL+protocol updates the record" — so re-sending an
+    already-listed offering is a real, documented upsert, not a duplication
+    risk. The state-file skip is kept anyway as a pacing/no-op-avoidance
+    default (no reason to re-POST 27 unchanged listings every run), but
+    --force-all is now a safe, real "refresh metadata" mechanism, not just a
+    theoretical escape hatch.
+
+    Real gap this closes: the payload previously sent only {url, name,
+    protocol, provider} — none of the documented price_usd/description/
+    category/payment_asset/payment_network fields — which is exactly why
+    every VAPE listing shows a blank "—" price on 402index.io's own directory
+    page instead of its real x402 price."""
     state = _load_state()
     already = set(state.get("registered_402index", []))
     results = []
     newly_registered = []
-    for name, _meta, prefix in _all_offerings():
+    for name, (price, desc), prefix in _all_offerings():
         if only is not None and name not in only:
             continue
         if not force_all and name in already:
@@ -302,6 +326,11 @@ def register_402index(only=None, force_all=False):
             "name": f"VAPE {name}",
             "protocol": "x402",
             "provider": PROVIDER,
+            "description": desc,
+            "price_usd": float(price),
+            "payment_asset": "USDC",
+            "payment_network": "Base",
+            "category": _category_for(name),
         }
         code, body = _post("https://402index.io/api/v1/register", payload)
         ok = 200 <= code < 300
