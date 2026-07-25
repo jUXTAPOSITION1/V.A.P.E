@@ -9,7 +9,18 @@ CG="https://api.coingecko.com/api/v3"
 LLAMA="https://api.llama.fi"
 case "${1:-}" in
   price)  curl -s "$CG/simple/price?ids=$2&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true";;
-  global) curl -s "$CG/global" | python3 -c "import sys,json;d=json.load(sys.stdin)['data'];print('btc_dom',round(d['market_cap_percentage']['btc'],2),'eth_dom',round(d['market_cap_percentage']['eth'],2),'mcap_chg_24h',round(d['market_cap_change_percentage_24h_usd'],2))";;
+  global) curl -s "$CG/global" | python3 -c "
+import sys,json
+try:
+    body=json.load(sys.stdin)
+except ValueError:
+    print('market_data global: CoinGecko returned a non-JSON response (likely rate-limited)', file=sys.stderr); sys.exit(1)
+d=body.get('data')
+if not d:
+    err=(body.get('status') or {}).get('error_message') or 'no data field in response (likely rate-limited)'
+    print(f'market_data global: {err}', file=sys.stderr); sys.exit(1)
+print('btc_dom',round(d['market_cap_percentage']['btc'],2),'eth_dom',round(d['market_cap_percentage']['eth'],2),'mcap_chg_24h',round(d['market_cap_change_percentage_24h_usd'],2))
+";;
   chaintvl) curl -s "$LLAMA/v2/chains" | python3 -c "import sys,json;n='$2'.lower();[print(x['name'],'TVL',round(x['tvl'],2),'chainId',x.get('chainId')) for x in json.load(sys.stdin) if x.get('name','').lower()==n]";;
   *) echo "usage: market_data.sh {price <ids>|global|chaintvl <Chain>}" >&2; exit 1;;
 esac
