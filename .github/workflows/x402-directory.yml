@@ -17,11 +17,15 @@ on:
         default: 'false'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   register:
     runs-on: ubuntu-latest
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # contents: write is only needed by this job's own commit-state step below.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
         with:
