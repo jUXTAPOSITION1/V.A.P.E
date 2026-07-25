@@ -3336,6 +3336,25 @@
     "symbol": "DropERC20",
     "times_investigated": 2
   },
+  "8453:0xdcf5130274753c8050ab061b1a1dcbf583f5bfd0": {
+    "address": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0",
+    "chain": "8453",
+    "creator_address": "0x4c1833Cb42FF2f07Bd332D04A2100ebB570A7112",
+    "first_investigated": "2026-07-25T10:12:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-101257-0xdCf51302.md",
+        "score": 92,
+        "ts": "2026-07-25T10:12:57Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-25T10:12:57Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "VCNT",
+    "times_investigated": 1
+  },
   "8453:0xe1b7a5096343164fae02db10353c03cd295787c5": {
     "address": "0xE1b7A5096343164FAe02Db10353C03cd295787c5",
     "chain": "8453",
