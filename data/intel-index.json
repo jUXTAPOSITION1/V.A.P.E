@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-25T04:13:25Z",
+  "generated": "2026-07-25T04:14:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 403,
+    "reports": 404,
     "reports_by_type": {
+      "virtuals": 75,
       "security": 67,
       "bounty": 122,
       "sentiment": 39,
       "base": 73,
-      "virtuals": 74,
       "macro": 20,
       "skillforge": 4,
       "bug": 2,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-25-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-25T02:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-25-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-25T04:00Z",
       "threat": null,
-      "summary": "The current threat landscape shows a high level of activity, with 6 incidents reported in the last 7 days. The incidents involve a range of attack vectors, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, and Flashloan Exploit. The affected pl",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-25-02.md",
-      "bytes": 7323
+      "summary": "Date: 2026-07-25 04:14 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-04.md",
+      "bytes": 2836
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-25-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-25T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-25 04:14 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-04.md",
+      "bytes": 2836
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1258,17 +1269,6 @@
       "summary": "The current threat landscape indicates a high level of activity, with 4 incidents reported in the last 7 days. Although none of these incidents exceed $50M in losses over the last 14 days, the diversity of exploit techniques and affected platforms is notable. Flashloan exploits, price oracle manipulations, and malicious governance proposa",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-02.md",
       "bytes": 6409
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260722_000021.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-22T00:00:21Z",
-      "threat": "REJECT",
-      "summary": "Cycle: 20260722000021 \u00b7 Data timestamp (UTC): 2026-07-22T00:00:23Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260722_000021.md",
-      "bytes": 11646
     }
   ],
   "broadcasts": [
