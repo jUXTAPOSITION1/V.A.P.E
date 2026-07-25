@@ -97,19 +97,25 @@ def _write_analysis(h):
     never raises, matching agents/intel_common.py::grok_analysis()'s
     contract.
 
-    Grounded in two independent research passes, not one: the existing
-    Tavily/Brave pre-fetch (web_search_snippets, widened from 4 to 6 results
-    and a second, differently-worded query — post-mortems for a niche DeFi
+    Grounded in two independent research passes: the existing Tavily/Brave
+    pre-fetch (web_search_snippets, widened from 4 to 6 results and a
+    second, differently-worded query — post-mortems for a niche DeFi
     incident often use different terms like "exploit analysis" or the
-    protocol's own incident-report wording rather than "post-mortem")
-    PLUS search=True on the LLM call itself, which opts into xAI's own Live
-    Search (see agents/llm.py::ask() docstring) so Grok researches the
-    incident directly the same way it does when a human asks it in chat —
-    real gap this closes: a 2026-07-20 side-by-side on this exact incident
-    (DefiTuna Lending) showed our own pipeline reporting "no public
-    writeups found" for a hack that a direct Grok query resolved in full,
-    down to the tx hash and attacker addresses, because our pipeline was
-    only ever grounded in the thin pre-fetch, never in live search."""
+    protocol's own incident-report wording rather than "post-mortem") plus
+    whatever the model itself already knows/can reason about from that
+    grounding. search is left at its default (False) as of 2026-07-25 —
+    xAI's Live Search (this function used to pass search=True specifically
+    to reach it) was deprecated by xAI in favor of a new "Agent Tools API"
+    this repo hasn't migrated to (confirmed real HTTP 410 in production),
+    and search=True would skip past OCI Grok/Vertex (this function's real
+    primary route via ask_oci_grok_safe below) into a free chain that can't
+    provide search either — see agents/intel_common.py::grok_analysis()'s
+    docstring for the full story. The historical reason this flag existed
+    (a 2026-07-20 side-by-side on the DefiTuna Lending incident showed the
+    pre-fetch-only pipeline reporting "no public writeups found" for a hack
+    a direct Grok Live Search query resolved in full) still motivates
+    re-adding real search grounding once a working replacement is wired
+    in — just not this specific, now-dead mechanism."""
     from agents.llm import ask_oci_grok_safe, FRONTIER_ORDER
     search_a = ic.web_search_snippets(f"{h['name']} hack exploit post-mortem {h['date']}", max_results=6)
     search_b = ic.web_search_snippets(f"{h['name']} exploit analysis attacker address root cause", max_results=6)
@@ -136,7 +142,7 @@ def _write_analysis(h):
     )
     user = f"{grounding}\n\n{search_section}"
     text, provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                        temperature=0.5, max_tokens=1800, search=True)
+                                        temperature=0.5, max_tokens=1800)
     if (text or "").startswith("[llm unavailable"):
         return None, None
 

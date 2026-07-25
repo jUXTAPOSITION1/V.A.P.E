@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   issues: write
+  id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
 
 concurrency:
   group: skillforge-toolcheck
@@ -37,7 +38,20 @@ jobs:
             ~/.cache/pip
           key: skillforge-tools-${{ hashFiles('skillforge/memory/tools-registry.json') }}
           restore-keys: skillforge-tools-
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Verify + version-pin registered tools
+        # Real, confirmed gap this closes: skillforge/toolcheck.py's own
+        # Analyst Briefing goes through agents/intel_common.py::grok_analysis()
+        # (OCI Grok 4.3 primary, falling back to this Vertex-tuned model, then
+        # the free FRONTIER_ORDER chain) — but this workflow never gave it
+        # OCI_GENAI_API_KEY or VAPE_VERTEX_ACCESS_TOKEN, so every run skipped
+        # straight to the free chain regardless of what grok_analysis() was
+        # actually designed to try first.
         run: python skillforge/toolcheck.py
         env:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
@@ -47,6 +61,9 @@ jobs:
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
           BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}

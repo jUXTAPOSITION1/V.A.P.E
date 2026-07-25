@@ -43,10 +43,10 @@ if ROOT not in sys.path:
 
 try:
     from agents import data_fetchers as DF
-    from agents.llm import ask_frontier
+    from agents.llm import ask_oci_grok_frontier
 except Exception:
     import data_fetchers as DF
-    from llm import ask_frontier
+    from llm import ask_oci_grok_frontier
 
 FOUNDRY_TOML_TEMPLATE = """[profile.default]
 src = "src"
@@ -199,11 +199,16 @@ def run_forge_build(project_dir, timeout=180):
 
 def draft_symbolic_properties(files, contract_name):
     """Real check #3 (see module docstring): the one LLM-generated piece.
-    Returns (code_or_none, provider_or_reason)."""
+    Returns (code_or_none, provider_or_reason). Uses ask_oci_grok_frontier()
+    (OCI Grok 4.3 primary, matching agents/scaffold_move_target.py's sibling
+    draft function and the rest of VAPE's report-generation surface) rather
+    than a bare ask_frontier() call — real, previously-live inconsistency
+    fixed 2026-07-25: this was the one drafting step in the bounty-audit
+    pipeline still bypassing OCI Grok entirely."""
     source_excerpt = "\n\n".join(f"// {path}\n{content}" for path, content in list(files.items())[:5])[:20000]
     user = f"Contract: {contract_name or 'unknown'}\n\n{source_excerpt}"
     try:
-        code, provider = ask_frontier(HALMOS_DRAFT_SYSTEM, user, max_tokens=2000, temperature=0.2)
+        code, provider = ask_oci_grok_frontier(HALMOS_DRAFT_SYSTEM, user, max_tokens=2000, temperature=0.2)
     except Exception as e:
         return None, f"LLM unavailable: {e}"
     match = re.search(r"```(?:solidity)?\n(.*?)```", code, re.DOTALL)
@@ -227,13 +232,16 @@ def draft_exploit_test(files, contract_name, address, extra_context=""):
     draft_symbolic_properties()'s own role for Halmos). Returns
     (code_or_none, provider_or_reason) — `code` is None both when the LLM is
     unavailable AND when it honestly found no exploitable path, so callers
-    must inspect the reason string to tell those two apart if needed."""
+    must inspect the reason string to tell those two apart if needed. Uses
+    ask_oci_grok_frontier() — see draft_symbolic_properties()'s docstring
+    for why (OCI Grok primary, matching the rest of this offering's report
+    generation, not a bare frontier-chain call)."""
     source_excerpt = "\n\n".join(f"// {path}\n{content}" for path, content in list(files.items())[:5])[:20000]
     user = f"ADDRESS: {address}\nContract: {contract_name or 'unknown'}\n\n{source_excerpt}"
     if extra_context:
         user += f"\n\n=== PRIOR STATIC/SYMBOLIC ANALYSIS (context only, not verified findings) ===\n{extra_context[:3000]}"
     try:
-        code, provider = ask_frontier(EXPLOIT_DRAFT_SYSTEM, user, max_tokens=2500, temperature=0.2)
+        code, provider = ask_oci_grok_frontier(EXPLOIT_DRAFT_SYSTEM, user, max_tokens=2500, temperature=0.2)
     except Exception as e:
         return None, f"LLM unavailable: {e}"
     if "NO_EXPLOIT_FOUND" in code:

@@ -100,8 +100,14 @@ def run():
     # VAPE's Vertex-tuned model (if VAPE_VERTEX_ACCESS_TOKEN is set), falling
     # back further to the same frontier tier/order as before — a run with
     # neither configured behaves identically to before this change.
+    # search left at its default (False, since 2026-07-25) deliberately —
+    # search=True would skip OCI Grok/Vertex entirely (neither has a
+    # search-grounding equivalent) straight to a free chain whose own
+    # search feature (xAI Live Search) is itself deprecated/HTTP 410; see
+    # agents/intel_common.py::grok_analysis()'s docstring for the full story.
     narrative, provider = llm.ask_oci_grok_safe(system, user, tier="frontier", max_tokens=2600,
-                                                 provider_order=llm.FRONTIER_ORDER, search=True)
+                                                 provider_order=llm.FRONTIER_ORDER)
+    narrative = ic.safe_narrative(narrative)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     trend_emoji = {"RISK-OFF": "⚠️", "RISK-ON": "🟢", "NEUTRAL": "🟡", "UNKNOWN": "⚪"}[trend]

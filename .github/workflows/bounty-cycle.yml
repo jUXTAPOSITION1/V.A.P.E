@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write  # for the WIF auth steps below (agents/llm.py::ask_vertex_candidate())
 
 jobs:
   bounty-hunt:
@@ -35,9 +36,26 @@ jobs:
         run: |
           pip install -r agents/requirements.txt
           pip install slither-analyzer
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Run Bounty Cycle
+        # Real, confirmed gap this closes: agents/run.py's bounty_report
+        # generation goes through agents.llm.ask_oci_grok() (OCI Grok 4.3
+        # primary, falling back to this Vertex-tuned model, then the free
+        # FRONTIER_ORDER chain) — but this workflow never gave it
+        # OCI_GENAI_API_KEY or VAPE_VERTEX_ACCESS_TOKEN, so every run
+        # skipped straight to the free chain, which was frequently
+        # exhausted/broken, producing the "did not start with the required
+        # SIGNAL: marker" fallback on every recent cycle.
         run: python agents/run.py
         env:
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -98,9 +116,21 @@ jobs:
           cache-dependency-path: agents/requirements.txt
       - name: Install
         run: pip install -r agents/requirements.txt
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: VAPE Repo Review
+        # Same OCI Grok/Vertex-tuned-candidate wiring as the bounty-hunt job
+        # above — --review-repo goes through the exact same main()/ask_llm()
+        # pipeline in agents/run.py.
         run: python agents/run.py --review-repo
         env:
+          OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+          OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

@@ -80,11 +80,16 @@ class TestWriteAnalysis:
         assert "**Analysis by:** VAPE" in content  # attribution is always VAPE, never the raw provider codename
         assert "Real analysis text." in content
 
-    def test_runs_two_differently_worded_searches_and_opts_into_live_search(self, tmp_path, monkeypatch):
+    def test_runs_two_differently_worded_searches_without_bypassing_oci_grok(self, tmp_path, monkeypatch):
         """Real gap this covers: a single thin pre-fetched search used to be
         the ONLY grounding an incident got, which produced an honestly-empty
-        report for a real incident a direct Grok query resolved in full.
-        Two queries plus search=True on the LLM call are the actual fix."""
+        report for a real incident a direct Grok query resolved in full —
+        the two differently-worded pre-fetch queries are the real, still-live
+        fix. search=True (this function's OLD attempt at a second fix, via
+        xAI's now-deprecated Live Search — HTTP 410 in production, 2026-07)
+        is deliberately NOT passed anymore: it would skip past this
+        function's real primary route (OCI Grok, via ask_oci_grok_safe)
+        into a free chain that can't provide search either."""
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
         search_queries = []
 
@@ -103,7 +108,7 @@ class TestWriteAnalysis:
                 hack_agent._write_analysis(_incident())
         assert len(search_queries) == 2
         assert search_queries[0] != search_queries[1]  # differently worded, not a repeat
-        assert captured_kwargs.get("search") is True
+        assert captured_kwargs.get("search") is not True
 
     def test_passes_frontier_order_and_tier_to_oci_grok(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))

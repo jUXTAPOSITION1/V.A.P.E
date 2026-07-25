@@ -138,7 +138,7 @@ def fmt_price(value):
     return "unavailable"
 
 
-def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperature=0.55, search=True):
+def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperature=0.55, search=False):
     """OCI-hosted Grok 4.3 first (falling back to VAPE's Vertex-tuned model,
     then FRONTIER_ORDER — see agents/llm.py::ask_oci_grok()) narrative
     synthesis for every intel sweep/report that calls this shared helper
@@ -154,15 +154,23 @@ def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperatu
     depth, so the report reflects genuine analysis rather than a
     restatement of the bullets it was handed.
 
-    search=True (the default) opts into xAI's real Live Search — see
-    agents/llm.py::ask()'s docstring for the mechanics (only takes effect
-    once/if the call actually reaches the xai_1 provider; a no-op
-    everywhere else). Any pre-fetched Tavily/Brave snippets a caller folded
-    into `grounding` are real grounding too and stay in the prompt — Live
-    Search is the PRIMARY research tool now (the model can go find things
-    itself, same as it does in a direct chat query), the pre-fetch is
-    backup/supplementary for when Live Search doesn't surface something or
-    the call falls through to a non-xai provider that can't search at all.
+    search defaults to False now (was True) — confirmed real production bug
+    this fixes: ask_oci_grok()'s own docstring explains that search=True
+    deliberately SKIPS PAST OCI Grok and the Vertex candidate entirely
+    (neither has a search-grounding equivalent), landing straight on
+    ask()'s FRONTIER_ORDER chain. xAI's Live Search (the entire reason
+    search=True existed) was deprecated by xAI in favor of a new "Agent
+    Tools API" this repo hasn't migrated to (confirmed real HTTP 410 in
+    production, 2026-07) — so search=True was silently routing EVERY sweep/
+    report/broadcast that calls this function past VAPE's real, working
+    primary reasoning route (OCI Grok) into a chain that (a) can't provide
+    search either and (b) was frequently exhausted on its own free-tier
+    quotas (Groq/Gemini) or hitting a stale model id (Cerebras), producing
+    "unavailable this cycle" across multiple real report categories for
+    days. Any pre-fetched Tavily/Brave snippets a caller folded into
+    `grounding` remain real grounding either way and stay in the prompt —
+    pass search=True explicitly only once/if a real replacement for xAI's
+    dead Live Search is wired in.
 
     tier="frontier" (not "deep") matters even though xai_1 maps both tiers
     to the same model: if Grok is down and this falls through to Gemini,
@@ -211,6 +219,26 @@ def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperatu
     if (text or "").startswith("[llm unavailable"):
         return "_Analyst narrative unavailable this cycle (no LLM provider reachable)._"
     return text.strip()
+
+
+def safe_narrative(text):
+    """Same substitution grok_analysis() already applies internally (see
+    above) — for callers that hit agents.llm.ask_oci_grok_safe()/ask_safe()
+    directly (base_sweep.py, security_sweep.py, sentiment_sweep.py,
+    macro_sweep.py, virtuals_sweep.py all do, rather than going through
+    grok_analysis()) and therefore need the same guard before embedding the
+    result in a report. Confirmed real, previously-live bug this closes:
+    those five sweeps embedded the raw ask_safe() failure string directly
+    in their committed, public reports on every total-failure cycle —
+    `[llm unavailable: all LLM providers failed/absent: xai_1:HTTP410 ...,
+    groq:HTTP429 {"...": "...org_0...`, leaking internal provider names and
+    a real HTTP error body (observed to include an actual Groq account/org
+    identifier) straight into git history. Never call this on text that
+    might legitimately start with those literal words for another reason —
+    it isn't a general sanitizer, just this one specific known prefix."""
+    if (text or "").startswith("[llm unavailable"):
+        return "_Analyst narrative unavailable this cycle (no LLM provider reachable)._"
+    return text
 
 
 def format_search_section(heading, search_result):

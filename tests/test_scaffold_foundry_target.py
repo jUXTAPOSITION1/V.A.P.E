@@ -184,14 +184,14 @@ def test_scaffold_and_analyze_uses_pre_fetched_src_without_refetching(monkeypatc
 def test_draft_exploit_test_reports_llm_unavailable(monkeypatch):
     def _boom(system, user, **kw):
         raise RuntimeError("no provider configured")
-    monkeypatch.setattr(sft, "ask_frontier", _boom)
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier", _boom)
     code, reason = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
     assert code is None
     assert "LLM unavailable" in reason
 
 
 def test_draft_exploit_test_honors_no_exploit_found(monkeypatch):
-    monkeypatch.setattr(sft, "ask_frontier",
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier",
                          lambda system, user, **kw: ("NO_EXPLOIT_FOUND: no exploitable path in this contract", "grok"))
     code, reason = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
     assert code is None
@@ -200,14 +200,14 @@ def test_draft_exploit_test_honors_no_exploit_found(monkeypatch):
 
 def test_draft_exploit_test_strips_markdown_fence(monkeypatch):
     fenced = "```solidity\n// SPDX-License-Identifier: MIT\ncontract Exploit {}\n```"
-    monkeypatch.setattr(sft, "ask_frontier", lambda system, user, **kw: (fenced, "grok"))
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier", lambda system, user, **kw: (fenced, "grok"))
     code, provider = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
     assert code == "// SPDX-License-Identifier: MIT\ncontract Exploit {}"
     assert provider == "grok"
 
 
 def test_draft_exploit_test_passes_through_unfenced_code(monkeypatch):
-    monkeypatch.setattr(sft, "ask_frontier",
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier",
                          lambda system, user, **kw: ("// SPDX-License-Identifier: MIT\ncontract Exploit {}", "grok"))
     code, provider = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
     assert code == "// SPDX-License-Identifier: MIT\ncontract Exploit {}"
