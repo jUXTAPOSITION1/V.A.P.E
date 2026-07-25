@@ -27,6 +27,7 @@ import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, type PaidRoute } from "./lib/openapiSpec";
+import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
 import { fulfill, type HandlerName } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
@@ -573,6 +574,22 @@ app.get("/", (c) =>
 // matches the 402 challenge that route actually serves.
 app.get("/openapi.json", (c) =>
   c.json(buildOpenApiDocument(new URL(c.req.url).origin, PAID_ROUTES, CONTACT_EMAIL)));
+
+// Service icon for x402 directories. x402scan's discovery spec asks a
+// registered origin to "serve a /favicon.ico at your API root to display an
+// icon" — without it a listing renders with a blank placeholder. Free and
+// unpaid for the same reason /openapi.json is: a registration probe fetches it
+// before any payment relationship exists. Served from bytes embedded in
+// lib/favicon.ts rather than redirected to the GitHub Pages copy, so a crawler
+// that doesn't follow 3xx still gets the image and the route has no runtime
+// dependency on a third-party host.
+app.get("/favicon.ico", (c) =>
+  c.body(FAVICON_PNG.buffer as ArrayBuffer, 200, {
+    "Content-Type": FAVICON_CONTENT_TYPE,
+    // Immutable in practice — the icon only changes when the worker is
+    // redeployed, which mints a fresh response anyway.
+    "Cache-Control": "public, max-age=86400",
+  }));
 
 // Domain-ownership proof for 402index.io's listing-claim flow (see
 // agents/x402_index_claim.py) — must serve ONLY this hash, as plain text,
