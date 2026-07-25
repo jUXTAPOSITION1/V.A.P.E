@@ -131,6 +131,34 @@ def test_run_external_audit_writes_report_and_logs_finding(monkeypatch, tmp_path
     assert findings[0]["source"] == "agents/external_audit.py"
 
 
+def test_run_external_audit_defaults_to_paid_engagement(monkeypatch, tmp_path):
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
+    monkeypatch.setattr(ea, "fetch_file", lambda owner, repo, ref, p, timeout=15: "content")
+    monkeypatch.setattr(ea, "ask_oci_grok_frontier",
+                        lambda *a, **kw: ("## Executive Summary\nclean", "oci_grok"))
+    result = ea.run_external_audit("owner", "repo", "main", paths=["a.move"])
+    assert result["engagement"] == "paid"
+    content = list((tmp_path / "audits").iterdir())[0].read_text()
+    assert "pipeline-validation run" not in content
+
+
+def test_run_external_audit_validation_engagement_framed_honestly(monkeypatch, tmp_path):
+    """Real gap this pins: a manual validation dispatch against a real repo
+    must never read as a real client engagement — mirrors deep_dive_audit.py's
+    identical validation-framing requirement."""
+    monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
+    monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))
+    monkeypatch.setattr(ea, "fetch_file", lambda owner, repo, ref, p, timeout=15: "content")
+    monkeypatch.setattr(ea, "ask_oci_grok_frontier",
+                        lambda *a, **kw: ("## Executive Summary\nclean", "oci_grok"))
+    result = ea.run_external_audit("owner", "repo", "main", paths=["a.move"], engagement="validation")
+    assert result["engagement"] == "validation"
+    content = list((tmp_path / "audits").iterdir())[0].read_text()
+    assert "pipeline-validation run against a real target" in content
+    assert "no payment was made" in content
+
+
 def test_run_external_audit_handles_llm_unavailable(monkeypatch, tmp_path):
     monkeypatch.setattr(ea, "AUDIT_DIR", str(tmp_path / "audits"))
     monkeypatch.setattr(ea, "FINDINGS_PATH", str(tmp_path / "findings.jsonl"))

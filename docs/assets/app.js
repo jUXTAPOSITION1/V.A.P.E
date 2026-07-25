@@ -86,7 +86,9 @@ const App = {
 
     // Bounty Command Center telemetry strip + VAPE's own audit track record.
     // opportunities.json is the same real feed bounties() renders cards from;
-    // this just adds the aggregate counts and the separate poc-reports ledger.
+    // this just adds the aggregate counts and the separate hack-sweep-reports
+    // ledger (VAPE's own proactive research — never a paid buyer's PoC, which
+    // is delivered privately and never committed to this public repo).
     async bountyCommand() {
         try {
             const data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
@@ -139,15 +141,26 @@ const App = {
             this._set('bcc-tasks', 0);
         }
 
+        // intel/audits/hack-sweep-reports/ — VAPE's own proactive daily HACK
+        // sweep, never a specific buyer's paid engagement — deliberately NOT
+        // intel/audits/poc-reports/, which used to live here. Real privacy
+        // gap this fixes: a paid buyer's PoC report may be the exact
+        // technical detail they still need to submit to a bounty program
+        // themselves; publicly listing it here (and it being committed to
+        // this public repo at all — see deep-dive-bounty.yml's matching
+        // fix) could let the audited project or another researcher see it
+        // before the buyer submits. Paid engagement reports no longer land
+        // in a publicly-committed directory at all as of that fix, so this
+        // widget now only ever shows VAPE's own non-buyer-specific work.
         const auditEl = document.getElementById('bcc-audit-list');
         try {
-            const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/poc-reports`)).json();
+            const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/hack-sweep-reports`)).json();
             const files = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
                 .map(f=>{
                     const stopped = /-STOPPED/.test(f.name);
                     const m = f.name.match(/(\d{4}-\d{2}-\d{2})/);
-                    const base = f.name.replace(/\.md$/,'').replace(/-STOPPED/,'').replace(/^(audit|lead)-/,'').replace(/-\d{4}-\d{2}-\d{2}$/,'');
-                    return { name: base.replace(/-/g,' '), stopped, date: m?m[1]:'', url: f.html_url, isAudit: f.name.startsWith('audit-') };
+                    const base = f.name.replace(/\.md$/,'').replace(/-STOPPED/,'').replace(/^(audit|lead|hack-sweep)-/,'').replace(/-\d{4}-\d{2}-\d{2}$/,'');
+                    return { name: base.replace(/-/g,' '), stopped, date: m?m[1]:'', url: f.html_url, isAudit: !stopped };
                 })
                 .sort((a,b)=>b.date.localeCompare(a.date));
             this._set('bcc-audits', files.filter(f=>f.isAudit).length);
@@ -162,7 +175,7 @@ const App = {
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
                 </a>`).join('');
         } catch(e) {
-            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/poc-reports" target="_blank">browse the audit ledger</a>.</div>';
+            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">browse the audit ledger</a>.</div>';
         }
     },
 

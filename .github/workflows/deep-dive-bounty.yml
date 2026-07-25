@@ -119,11 +119,36 @@ jobs:
       - name: Commit the report
         env:
           TARGET_ADDRESS: ${{ github.event.inputs.address }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/audits/poc-reports/ skillforge/memory/ || true
+          # Real, confirmed privacy gap this closes: this used to unconditionally
+          # commit every report to this PUBLIC repo regardless of engagement —
+          # a real paid buyer's PoC (which they alone need to submit to a bounty
+          # program, and which naming the actual vulnerability before they do
+          # could let someone else front-run, or tip off the project before
+          # disclosure) was permanently public the moment this step ran, and
+          # docs/assets/app.js additionally listed it on the live site as a
+          # "Bounty Command Center" ledger entry. A real x402 buyer already has
+          # a private delivery path (callback_url -> worker KV job -> their own
+          # browser's poll/render/PDF-download, wired in Phase 2) — this public
+          # commit was pure redundant exposure for "paid", never load-bearing.
+          # ACP-fulfilled jobs bypass this workflow entirely (HANDLER_BRIEF.md:
+          # they run agents/deep_dive_audit.py directly on the acp-monitor
+          # host and submit the deliverable via `acp provider submit`, never
+          # via this repo), so skipping the public commit here doesn't touch
+          # that delivery path either. Only "sweep"/"validation" — VAPE's own
+          # non-buyer-specific research, never paid-for PoC content — still
+          # get committed publicly; "paid" is also the safe default when this
+          # input is left unset.
+          if [ "$TARGET_ENGAGEMENT" != "sweep" ] && [ "$TARGET_ENGAGEMENT" != "validation" ]; then
+            echo "paid engagement — report already delivered privately; skipping public commit"
+            git add skillforge/memory/ || true
+          else
+            git add intel/audits/ skillforge/memory/ || true
+          fi
           git commit -m "Deep-dive bounty audit: $TARGET_ADDRESS" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           # Confirmed real gap: this loop's last-executed command on a total

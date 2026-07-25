@@ -236,8 +236,7 @@ const BOUNTY_DEEP_DIVE_DISCOVERY = {
   output: {
     status: "accepted",
     address: "0x...",
-    message: "Audit queued — report lands in intel/audits/poc-reports/ (or external-bounties/ "
-      + "for a repo-based target) as soon as it completes.",
+    message: "Audit queued — delivered privately (poll status or callback_url) once it completes, never published publicly.",
   },
 };
 
@@ -247,8 +246,8 @@ const BOUNTY_DEEP_DIVE_DISCOVERY = {
 // listed under its own name since that's how ACP already knows it. Rather
 // than stand up a second async pipeline, this aliases straight onto
 // dispatchDeepDiveAudit() below (see handleContractAuditDispatch) — same
-// GitHub Actions workflow, same KV job record shape, same report destination
-// (intel/audits/poc-reports/). Real gap this closes: ACP has listed
+// GitHub Actions workflow, same KV job record shape, same private delivery
+// (job-id polling + callback_url — never a public repo commit). Real gap this closes: ACP has listed
 // deep_contract_audit since launch, but it was never actually x402-payable —
 // buyers discovering VAPE via 402index/x402 directories could never find it.
 const DEEP_CONTRACT_AUDIT_PRICE = "$1.00";
@@ -258,7 +257,7 @@ const DEEP_CONTRACT_AUDIT_DISCOVERY = {
   output: {
     status: "accepted",
     address: "0x...",
-    message: "Audit queued — report lands in intel/audits/poc-reports/ as soon as it completes.",
+    message: "Audit queued — delivered privately (poll status or callback_url) once it completes, never published publicly.",
   },
 };
 
@@ -1191,10 +1190,15 @@ async function dispatchAddressAuditJob(
   return c.json({
     offering: offeringName, status: "accepted", address, chain,
     job: jobId,
-    message: "Audit queued — a submission-ready PoC report lands in intel/audits/poc-reports/ "
-      + "as soon as it completes."
-      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
-    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports",
+    // Real privacy gap this closes: this used to advertise a public GitHub
+    // tree link (`track`) as where the report lands — a paid buyer's PoC is
+    // exactly the sensitive detail they alone still need to submit to a
+    // bounty program, and it's never committed to this public repo anymore
+    // (see deep-dive-bounty.yml's matching fix). Delivered privately only:
+    // this job id (poll GET /scan/bounty_deep_dive/status?job=<id>, same as
+    // the site's own hire.js) and/or callback_url.
+    message: "Audit queued — delivered privately once it completes, never published publicly."
+      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
 }
@@ -1472,10 +1476,10 @@ app.get("/scan/bounty_deep_dive", async (c) => {
   return c.json({
     offering: "bounty_deep_dive", status: "accepted", owner, repo, ref: ref || "main",
     job: jobId,
-    message: "Audit queued — a submission-ready PoC report lands in "
-      + "intel/audits/external-bounties/ as soon as it completes."
-      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : ""),
-    track: "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/external-bounties",
+    // See dispatchAddressAuditJob's identical comment above — never
+    // advertise a public GitHub location for a paid buyer's report anymore.
+    message: "Audit queued — delivered privately once it completes, never published publicly."
+      + (callerCallbackUrl ? " Will also POST the result to your callback_url." : " Poll GET /scan/bounty_deep_dive/status?job=" + jobId + " for the result."),
     source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice.",
   });
 });

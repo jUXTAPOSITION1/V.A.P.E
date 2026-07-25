@@ -49,6 +49,10 @@ on:
       callback_url:
         description: 'Optional webhook to POST the completed report to (x402 async path)'
         required: false
+      engagement:
+        description: 'paid (default, real x402/ACP job) | validation (manual pipeline check, no payment claimed)'
+        required: false
+        default: 'paid'
 
 permissions:
   contents: read
@@ -102,6 +106,7 @@ jobs:
           TARGET_PROGRAM: ${{ github.event.inputs.program_name }}
           TARGET_PATHS: ${{ github.event.inputs.paths }}
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
           VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
@@ -122,6 +127,9 @@ jobs:
           if [ -n "$TARGET_CALLBACK_URL" ]; then
             ARGS+=(--callback-url "$TARGET_CALLBACK_URL")
           fi
+          if [ -n "$TARGET_ENGAGEMENT" ]; then
+            ARGS+=(--engagement "$TARGET_ENGAGEMENT")
+          fi
           python -m agents.external_audit "${ARGS[@]}"
 
       - name: Commit the report
@@ -129,10 +137,22 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_OWNER: ${{ github.event.inputs.owner }}
           TARGET_REPO: ${{ github.event.inputs.repo }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/audits/external-bounties/ skillforge/memory/ || true
+          # See deep-dive-bounty.yml's matching comment: a real paid buyer's
+          # PoC must never be committed to this PUBLIC repo — they already
+          # get it privately via callback_url (x402) or `acp provider submit`
+          # (ACP, which bypasses this workflow entirely). Only a "validation"
+          # dispatch (no real buyer, non-sensitive) gets committed publicly;
+          # "paid" is also the safe default when this input is left unset.
+          if [ "$TARGET_ENGAGEMENT" != "validation" ]; then
+            echo "paid engagement — report already delivered privately; skipping public commit"
+            git add skillforge/memory/ || true
+          else
+            git add intel/audits/external-bounties/ skillforge/memory/ || true
+          fi
           git commit -m "External bounty audit: $TARGET_OWNER/$TARGET_REPO" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           # See deep-dive-bounty.yml's matching comment: the old loop's last
