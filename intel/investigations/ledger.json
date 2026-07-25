@@ -1126,6 +1126,25 @@
     "symbol": "RAIN",
     "times_investigated": 1
   },
+  "42161:0x6f09344d2a9a7ab1470a19cb014423334f3c57e4": {
+    "address": "0x6f09344D2a9a7AB1470a19cb014423334F3C57E4",
+    "chain": "42161",
+    "creator_address": "0xc03d772d1246cadac225189285f73b5f83cc462a",
+    "first_investigated": "2026-07-25T21:15:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-211533-0x6f09344D.md",
+        "score": 20,
+        "ts": "2026-07-25T21:15:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T21:15:33Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "AUGU",
+    "times_investigated": 1
+  },
   "42161:0x6fbbbd8bfb1cd3986b1d05e7861a0f62f87db74b": {
     "address": "0x6fBBbD8bFB1cd3986B1D05e7861a0f62F87DB74b",
     "chain": "42161",

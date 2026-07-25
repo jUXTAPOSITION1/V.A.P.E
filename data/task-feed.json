@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-25T21:00:20Z",
-  "synthesis": "[investigation]",
+  "generated": "2026-07-25T21:15:40Z",
+  "synthesis": "*",
   "tasks": [
+    {
+      "sha": "c3fdafb357",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-25T21:10Z",
+      "date": "2026-07-25T21:10:39Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c3fdafb35754890ff7aba414ca22efc904623663"
+    },
+    {
+      "sha": "7a47fc48ff",
+      "kind": "sweep",
+      "message": "sentiment_sweep 2026-07-25T21:01Z",
+      "date": "2026-07-25T21:01:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7a47fc48ff82f797802f6c9e8b346249712d4584"
+    },
+    {
+      "sha": "ad67f65808",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T21:00Z",
+      "date": "2026-07-25T21:00:25Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ad67f65808923f78fba1b0d33a95e15ae78210e5"
+    },
     {
       "sha": "58bad35b20",
       "kind": "investigation",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-25T19:28Z",
       "date": "2026-07-25T19:28:39Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b0232e05a14aad75a5e23bc9661eac21c88eb4b7"
-    },
-    {
-      "sha": "6cb3b763fc",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-25T19:13Z",
-      "date": "2026-07-25T19:13:24Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/6cb3b763fc48695bad9948d241268289ff275670"
-    },
-    {
-      "sha": "d918594465",
-      "kind": "sweep",
-      "message": "security_sweep 2026-07-25T19:08Z",
-      "date": "2026-07-25T19:08:54Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d918594465f2c90b8482cc4a33e458850d208374"
-    },
-    {
-      "sha": "ce8c4b1170",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-25T18:58Z",
-      "date": "2026-07-25T18:58:46Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ce8c4b117094cbc4888ffc9e7e90f138c062124e"
     }
   ]
 }
