@@ -35,3 +35,4 @@
 {"ts": "2026-07-24T08:14:45Z", "sealed_through_line": 700, "new_lines_sealed": 10, "chain_hash": "0b9778f5b5f9aaf2e55b6bf43bcc8d5d70dc1d9f6ff281c779a9649d8a77e764"}
 {"ts": "2026-07-24T13:23:54Z", "sealed_through_line": 709, "new_lines_sealed": 9, "chain_hash": "c315fec1fc688c5882e1de7e6f6d91e18189239b2d26418b03513cc8a7cc59fa"}
 {"ts": "2026-07-24T19:16:44Z", "sealed_through_line": 718, "new_lines_sealed": 9, "chain_hash": "7ad63c8ab33f39e752ae53c4fa2677b08cb5724ec07abacf870fbce1eb3a6e69"}
+{"ts": "2026-07-25T02:05:03Z", "sealed_through_line": 729, "new_lines_sealed": 11, "chain_hash": "5c2f602022ffa05da1aad89860ebcfeb75f80b693b8a15836a85cdabb744984c"}
