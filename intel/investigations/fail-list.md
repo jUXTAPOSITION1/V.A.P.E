@@ -1,9 +1,18 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-25T17:12:02Z — 94 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-25T21:46:33Z — 103 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| AUGU | Arbitrum | `0x6f09344D2a9a7AB1470a19cb014423334F3C57E4` | 20/100 | 1 | 2026-07-25T21:15:33Z |
+| CTM | Ethereum | `0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a` | 0/100 | 1 | 2026-07-25T21:00:13Z |
+| SHIB | Ethereum | `0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0` | 0/100 | 1 | 2026-07-25T20:44:49Z |
+| FWAres | Ethereum | `0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5` | 30/100 | 1 | 2026-07-25T20:14:26Z |
+| CTM | Ethereum | `0x014522b4199Fa89674F45917D39f9ad46268A5da` | 28/100 | 1 | 2026-07-25T19:58:50Z |
+| NTFS | Base | `0xB200000000000000000000109019757367070Eb0` | 15/100 | 1 | 2026-07-25T19:28:32Z |
+| NTFS | Base | `0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5` | 13/100 | 1 | 2026-07-25T19:13:15Z |
+| H420 | Ethereum | `0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30` | 32/100 | 1 | 2026-07-25T18:42:44Z |
+| axlUSDC | Base | `0xEB466342C4d449BC9f53A865D5Cb90586f405215` | 23/100 | 1 | 2026-07-25T17:27:17Z |
 | DAI | Base | `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb` | 45/100 | 1 | 2026-07-25T17:12:02Z |
 | OpenAI | Base | `0xf30d3221a6d46645423FF82C324875586c0fAB07` | 20/100 | 1 | 2026-07-25T14:44:07Z |
 | VCNT | Base | `0x712be9C5b93d4aC284382593327Ae29e59977b07` | 35/100 | 1 | 2026-07-25T11:47:40Z |

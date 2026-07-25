@@ -465,3 +465,39 @@
 | 2026-07-25 | auto | 0xB8d7710f7d8349A506b75dD184F05777c82dAd0C (ARENA) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-25 | auto | 0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb (DAI) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xEB466342C4d449BC9f53A865D5Cb90586f405215 (axlUSDC) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa (TRUMP28) | deep_investigation | PROCEED (80/100) | Low liquidity $25,871 | +7d |
+
+| 2026-07-25 | auto | 0x32708538a107253b51a735A724330A23106ca4cA (01) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-25 | auto | 0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48 (AI) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-25 | auto | 0x2598c30330D5771AE9F983979209486aE26dE875 (AI) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-25 | auto | 0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30 (H420) | deep_investigation | REJECT (32/100) | Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) — can still act | +7d |
+
+| 2026-07-25 | auto | 0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9 (JAKEX) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,778 (rug/illiquid) | +7d |
+
+| 2026-07-25 | auto | 0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5 (NTFS) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xB200000000000000000000109019757367070Eb0 (NTFS) | deep_investigation | REJECT (15/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-25 | auto | 0xc8Fb80fCc03f699C70ff0CC08C09106288888888 (CTM) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) — can still act | +7d |
+
+| 2026-07-25 | auto | 0x014522b4199Fa89674F45917D39f9ad46268A5da (CTM) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5 (FWAres) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-25 | auto | 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE (SHIB) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 64% of supply — meaningful concentration | +7d |
+
+| 2026-07-25 | auto | 0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0 (SHIB) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a (CTM) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x6f09344D2a9a7AB1470a19cb014423334F3C57E4 (AUGU) | deep_investigation | REJECT (20/100) | Top 10 non-LP/burn holders control 94% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-25 | auto | 0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684 (ANT) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 81% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-25 | auto | 0x271415A029602f9c370D022aDEba703F172c79fF (VC) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 105% of supply — concentrated, easily manipul | +7d |

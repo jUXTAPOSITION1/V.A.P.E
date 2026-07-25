@@ -1,9 +1,15 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-25T17:12:02Z — 44 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-25T21:46:33Z — 50 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VC | Base | `0x271415A029602f9c370D022aDEba703F172c79fF` | 60/100 | 1 | 2026-07-25T21:46:33Z |
+| ANT | Arbitrum | `0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684` | 70/100 | 1 | 2026-07-25T21:31:13Z |
+| SHIB | Ethereum | `0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE` | 77/100 | 1 | 2026-07-25T20:29:38Z |
+| CTM | Ethereum | `0xc8Fb80fCc03f699C70ff0CC08C09106288888888` | 75/100 | 1 | 2026-07-25T19:43:37Z |
+| JAKEX | Ethereum | `0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9` | 65/100 | 1 | 2026-07-25T18:57:58Z |
+| AI | Ethereum | `0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48` | 62/100 | 1 | 2026-07-25T18:12:42Z |
 | dexcheckai | Base | `0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581` | 70/100 | 1 | 2026-07-25T13:00:38Z |
 | USDC | Base | `0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88` | 68/100 | 1 | 2026-07-25T04:13:24Z |
 | ELMNT | Ethereum | `0xe9A53C43a0B58706e67341C4055de861e29Ee943` | 65/100 | 1 | 2026-07-25T00:12:51Z |

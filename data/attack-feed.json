@@ -1,9 +1,22 @@
 {
-  "generated_at": "2026-07-25T08:08:21Z",
-  "source_report": "intel/reports/security-2026-07-25-08.md",
+  "generated_at": "2026-07-25T19:08:53Z",
+  "source_report": "intel/reports/security-2026-07-25-19.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
+    {
+      "date": "2026-07-24",
+      "name": "Triple-A",
+      "amount_usd_m": 9.7,
+      "chains": [
+        "Ethereum",
+        "Tron",
+        "Arbitrum"
+      ],
+      "technique": "Hot Wallet Compromise",
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-24-triple-a.md"
+    },
     {
       "date": "2026-07-24",
       "name": "DeBond",

@@ -308,5 +308,10 @@
     "report": "intel/threat-analysis/2026-07-23-lien.md",
     "provider": "groq",
     "written_at": "2026-07-25T09:30:08Z"
+  },
+  "2026-07-24:Triple-A": {
+    "report": "intel/threat-analysis/2026-07-24-triple-a.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-25T20:41:50Z"
   }
 }
