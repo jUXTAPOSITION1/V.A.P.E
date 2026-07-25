@@ -138,12 +138,16 @@ jobs:
           # See deep-dive-bounty.yml's matching comment: the old loop's last
           # command on total failure was always `sleep` (always exits 0), so
           # every push attempt failing still reported this step as
-          # successful, silently dropping the report.
+          # successful, silently dropping the report. Also mirrors its two
+          # other confirmed fixes: rebase onto $GITHUB_REF_NAME (not a
+          # hardcoded "main" — wrong for any non-main dispatch, given this
+          # job's shallow fetch-depth:1 checkout), and push with an explicit
+          # ref so it works even when actions/checkout leaves HEAD detached.
           pushed=false
           for i in 1 2 3 4 5; do
             git rebase --abort >/dev/null 2>&1 || true
-            git pull --rebase --autostash origin main || true
-            if git push; then pushed=true; break; fi
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
+            if git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"; then pushed=true; break; fi
             echo "push race retry $i"; sleep $((i*3))
           done
           if [ "$pushed" != "true" ]; then
