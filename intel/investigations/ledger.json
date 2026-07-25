@@ -2036,6 +2036,25 @@
     "symbol": "aero",
     "times_investigated": 1
   },
+  "8453:0x3cfadb7f1fd7c786a98c3fa37131ff1537e554c5": {
+    "address": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5",
+    "chain": "8453",
+    "creator_address": "0x1d5dd246bf5454db64d0328ebd3ba3454e15efd2",
+    "first_investigated": "2026-07-25T19:13:15Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-191315-0x3CfaDB7f.md",
+        "score": 13,
+        "ts": "2026-07-25T19:13:15Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T19:13:15Z",
+    "last_score": 13,
+    "last_verdict": "REJECT",
+    "symbol": "NTFS",
+    "times_investigated": 1
+  },
   "8453:0x3ecced5b416e58664f04a39dd18935eb71d33b15": {
     "address": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
     "chain": "8453",

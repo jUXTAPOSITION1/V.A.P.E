@@ -479,3 +479,5 @@
 | 2026-07-25 | auto | 0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30 (H420) | deep_investigation | REJECT (32/100) | Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) — can still act | +7d |
 
 | 2026-07-25 | auto | 0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9 (JAKEX) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,778 (rug/illiquid) | +7d |
+
+| 2026-07-25 | auto | 0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5 (NTFS) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |

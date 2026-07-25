@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T19:08:53Z",
+  "generated": "2026-07-25T19:13:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 413,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 324,
+    "investigations": 325,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-185758-0xD60ABFB7.md",
-      "title": "Investigation \u2014 JAKEX",
-      "symbol": "JAKEX",
-      "name": "JakeX",
-      "date": "2026-07-25T18:57:58Z",
-      "target": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $1,778 (rug/illiquid); [-10] Low liquidity $1,778. Positive evidence: Ownership renounced; Trading 705+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-185758-0xD60ABFB7.md"
+      "file": "investigation-20260725-191315-0x3CfaDB7f.md",
+      "title": "Investigation \u2014 NTFS",
+      "symbol": "NTFS",
+      "name": "National Trust Fund System",
+      "date": "2026-07-25T19:13:15Z",
+      "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "13",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: USDC (0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88) \u2014 CAUTION 68/100 \u2014 likely the same serial campaign; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] On",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-191315-0x3CfaDB7f.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-191315-0x3CfaDB7f.md",
+      "title": "Investigation \u2014 NTFS",
+      "symbol": "NTFS",
+      "name": "National Trust Fund System",
+      "date": "2026-07-25T19:13:15Z",
+      "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "13",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: USDC (0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88) \u2014 CAUTION 68/100 \u2014 likely the same serial campaign; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] On",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-191315-0x3CfaDB7f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-185758-0xD60ABFB7.md",
@@ -593,20 +607,6 @@
       "score": "82",
       "summary": "Risk factors: [-10] Owner not renounced (0x9de1abeeb6cc60ded81de4e8c11930c3793f8bdb) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 11102 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-042840-0x91262364.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-010614-0x34628A64.md",
-      "title": "Investigation \u2014 USDC",
-      "symbol": "USDC",
-      "name": "United States Down Cat",
-      "date": "2026-07-23T01:06:14Z",
-      "target": "0x34628A64aBbcb562dfC668Ab8E76327759fc855f",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "73",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-5] Pair 23.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 21771 holders \u2014 reasonably distributed; Custom verified source (not a mass-prod",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-010614-0x34628A64.md"
     }
   ],
   "reports": [
