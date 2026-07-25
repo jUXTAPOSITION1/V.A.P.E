@@ -481,3 +481,5 @@
 | 2026-07-25 | auto | 0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9 (JAKEX) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,778 (rug/illiquid) | +7d |
 
 | 2026-07-25 | auto | 0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5 (NTFS) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xB200000000000000000000109019757367070Eb0 (NTFS) | deep_investigation | REJECT (15/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |

@@ -3084,6 +3084,24 @@
     "symbol": "mr_lightspeed",
     "times_investigated": 1
   },
+  "8453:0xb200000000000000000000109019757367070eb0": {
+    "address": "0xB200000000000000000000109019757367070Eb0",
+    "chain": "8453",
+    "first_investigated": "2026-07-25T19:28:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-192832-0xB2000000.md",
+        "score": 15,
+        "ts": "2026-07-25T19:28:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T19:28:32Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "NTFS",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000012141bf387dd37eb01": {
     "address": "0xb20000000000000000000012141bf387DD37eB01",
     "chain": "8453",
