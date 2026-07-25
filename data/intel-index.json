@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T19:43:44Z",
+  "generated": "2026-07-25T19:58:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 413,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 327,
+    "investigations": 328,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-194337-0xc8Fb80fC.md",
+      "file": "investigation-20260725-195850-0x014522b4.md",
       "title": "Investigation \u2014 CTM",
       "symbol": "CTM",
       "name": "c8ntinuum",
-      "date": "2026-07-25T19:43:37Z",
-      "target": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
+      "date": "2026-07-25T19:58:50Z",
+      "target": "0x014522b4199Fa89674F45917D39f9ad46268A5da",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 4725 holders \u2014 reasonably distributed; Top holders control only 15% of supply \u2014 broad distribution; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-194337-0xc8Fb80fC.md"
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-195850-0x014522b4.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-195850-0x014522b4.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-07-25T19:58:50Z",
+      "target": "0x014522b4199Fa89674F45917D39f9ad46268A5da",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-195850-0x014522b4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-194337-0xc8Fb80fC.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Low liquidity $22,125. Positive evidence: Ownership renounced; 762 holders \u2014 reasonably distributed; Trading 888+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-115838-0x3526989b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-100236-0x88888880.md",
-      "title": "Investigation \u2014 BTBB",
-      "symbol": "BTBB",
-      "name": "BTB Bear",
-      "date": "2026-07-23T10:02:36Z",
-      "target": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0x98834162fe037a3d213a908162db5e2ded8cba77) \u2014 can still act on the contract; [-20] Very few holders (28) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $177 (rug/illiquid); [-10] Low liquidity $177; [-10] No known third-party audit or verifiable team identity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-100236-0x88888880.md"
     }
   ],
   "reports": [
