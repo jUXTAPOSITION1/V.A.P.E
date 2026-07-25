@@ -689,3 +689,5 @@
 {"ts": "2026-07-25T17:27:14Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1161, "completion_tokens": 386, "total_tokens": 2081}
 {"ts": "2026-07-25T17:27:25Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 79586, "completion_tokens": 4, "total_tokens": 79702}
 {"ts": "2026-07-25T17:36:17Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1620, "completion_tokens": 389, "total_tokens": 2661}
+{"ts": "2026-07-25T17:42:20Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 964, "completion_tokens": 271, "total_tokens": 1630}
+{"ts": "2026-07-25T17:42:35Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 79585, "completion_tokens": 4, "total_tokens": 79701}

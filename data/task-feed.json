@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-25T17:27:22Z",
-  "synthesis": "2)",
+  "generated": "2026-07-25T17:42:31Z",
+  "synthesis": "(automation)",
   "tasks": [
+    {
+      "sha": "39fb244a0d",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-25T17:40Z",
+      "date": "2026-07-25T17:40:02Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/39fb244a0d4c020faf262d046e4538cbe84c722e"
+    },
+    {
+      "sha": "972bb7c969",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-25T17:36Z",
+      "date": "2026-07-25T17:36:17Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/972bb7c96993b5793636550d6f7ad6fbb7818c54"
+    },
+    {
+      "sha": "23db5c0c26",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T17:27Z",
+      "date": "2026-07-25T17:27:25Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/23db5c0c26b808be180753549090f89277fe2737"
+    },
     {
       "sha": "edf5464ce7",
       "kind": "reputation",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-25T14:44Z",
       "date": "2026-07-25T14:44:15Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d63c9344a977d8c06244fae199c2d2b720eb7b97"
-    },
-    {
-      "sha": "ab83373ece",
-      "kind": "sweep",
-      "message": "virtuals_sweep 2026-07-25T14:39Z",
-      "date": "2026-07-25T14:39:12Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ab83373ece77a813ea62f8abb1d0bd02dbae9ad5"
-    },
-    {
-      "sha": "c83987c5f0",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-25T14:17Z",
-      "date": "2026-07-25T14:17:33Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c83987c5f0b3508095c9b14c098ecabaea257130"
-    },
-    {
-      "sha": "240008e532",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-25T14:15Z",
-      "date": "2026-07-25T14:15:06Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/240008e5329f20cca1549882ee39ecc0dfd621a5"
     }
   ]
 }

@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-25T17:27:17Z — 51 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-25T17:42:23Z — 52 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| TRUMP28 | Ethereum | `0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa` | 80/100 | 1 | 2026-07-25T17:42:23Z |
 | ARENA | Avalanche | `0xB8d7710f7d8349A506b75dD184F05777c82dAd0C` | 100/100 | 1 | 2026-07-25T15:51:43Z |
 | VCNT | Base | `0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0` | 92/100 | 1 | 2026-07-25T10:12:57Z |
 | USOR OIL | Base | `0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be` | 90/100 | 1 | 2026-07-25T08:33:34Z |

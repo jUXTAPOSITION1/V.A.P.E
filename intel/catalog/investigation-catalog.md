@@ -467,3 +467,5 @@
 | 2026-07-25 | auto | 0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb (DAI) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0xEB466342C4d449BC9f53A865D5Cb90586f405215 (axlUSDC) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa (TRUMP28) | deep_investigation | PROCEED (80/100) | Low liquidity $25,871 | +7d |
