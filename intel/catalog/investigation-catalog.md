@@ -487,3 +487,5 @@
 | 2026-07-25 | auto | 0xc8Fb80fCc03f699C70ff0CC08C09106288888888 (CTM) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) — can still act | +7d |
 
 | 2026-07-25 | auto | 0x014522b4199Fa89674F45917D39f9ad46268A5da (CTM) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5 (FWAres) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
