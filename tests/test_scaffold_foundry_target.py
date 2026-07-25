@@ -178,6 +178,29 @@ def test_extract_declared_remappings_no_settings_returns_empty():
     assert sft._extract_declared_remappings(wrapped) == []
 
 
+def test_extract_declared_remappings_rejects_absolute_target_path():
+    """Real bug this pins: checking `.startswith('/')`/`'..' in` against the
+    RAW `prefix=path` string only ever catches an absolute/traversal
+    PREFIX (which no real remapping ever is, e.g. '@openzeppelin/') — it
+    never inspects the PATH half, so '@evil/=/etc/' or an empty-prefix
+    '=/etc/passwd' sailed straight through untouched. These strings are
+    written verbatim into foundry.toml and honored by solc's own import
+    resolution when `forge build` runs against a malicious contract's
+    self-declared Etherscan verification metadata — an absolute or
+    traversal-escaping PATH must be rejected regardless of which side of
+    '=' it's on."""
+    wrapped = "{" + json.dumps({"sources": {}, "settings": {"remappings": [
+        "@evil/=/etc/",
+        "@evil2/=/root/.ssh/",
+        "=/etc/passwd",
+        "../escape/=lib/",
+        "@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/",
+    ]}}) + "}"
+    assert sft._extract_declared_remappings(wrapped) == [
+        "@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/"
+    ]
+
+
 def test_extract_declared_remappings_ignores_malformed_entries():
     wrapped = "{" + json.dumps({"sources": {}, "settings": {"remappings": [
         "ok/=path/", "no-equals-sign", "../escape/=path/", 42, None,

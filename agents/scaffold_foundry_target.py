@@ -176,9 +176,19 @@ def _extract_declared_remappings(source_code):
     (plain `prefix=path` strings, the exact format Foundry's own
     foundry.toml `remappings` array expects) — this just needs to be read
     and passed through, not re-derived. Defensively validated (must be a
-    non-empty string containing '=', no '..' traversal) since it's still
-    externally-supplied data, same trust level as the rest of the verified
-    source already scaffolded to disk here."""
+    non-empty string containing '=', with neither side an absolute path or
+    containing '..') since it's still externally-supplied data, same trust
+    level as the rest of the verified source already scaffolded to disk
+    here — these strings are written into foundry.toml and honored by
+    forge/solc's own import resolution when scaffold_project()'s caller
+    runs `forge build`, so a remapping whose PATH (not just the whole
+    string) is absolute (e.g. '@evil/=/etc/') would let a malicious
+    contract's own self-declared verification metadata point solc's import
+    resolution at arbitrary files on the runner outside the scaffold
+    directory. Splitting on '=' and checking each side independently is
+    required here — checking the raw joined string only ever catches a
+    remapping whose PREFIX (not its target path) happens to start with '/'
+    or contain '..', which real prefixes (e.g. '@openzeppelin/') never do."""
     if not source_code:
         return []
     text = source_code.strip()
@@ -195,8 +205,12 @@ def _extract_declared_remappings(source_code):
         return []
     out = []
     for r in remappings:
-        if isinstance(r, str) and "=" in r and ".." not in r and not r.startswith("/"):
-            out.append(r)
+        if not isinstance(r, str) or "=" not in r:
+            continue
+        prefix, path = r.split("=", 1)
+        if any(".." in part or part.startswith("/") for part in (prefix, path)):
+            continue
+        out.append(r)
     return out
 
 
