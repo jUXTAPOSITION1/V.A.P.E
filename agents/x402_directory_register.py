@@ -231,16 +231,19 @@ def _post(url, payload, timeout=15, max_retries=1, backoff_base=10):
     exponentially, capped so one bad/huge Retry-After value can't stall the
     job for hours.
 
-    max_retries defaults to 1, not 3: the api-docs' real, endpoint-specific
-    limit for POST /api/v1/register is "10 registrations per hour per IP" —
-    a hard hourly quota, not a short transient throttle (that's a separate,
-    much looser 100 req/min free-tier limit on the read endpoints). Once
-    that quota is hit, no backoff shorter than the remaining window (up to
-    ~60 minutes) can ever succeed, so burning 3 retries x up to 120s each
-    per offering (confirmed in practice: this is exactly what made a 27-
-    offering force-all run grind through only 2 successes in 25+ minutes)
-    just wastes CI time for a guaranteed-failed call. One quick retry still
-    covers a genuinely transient blip; register_402index() below stops
+    max_retries defaults to 1, not 3: the api-docs' page text claims "10
+    registrations per hour per IP" for POST /api/v1/register, but the
+    server's own 429 body is the real ground truth and says otherwise —
+    confirmed live (2026-07-25): {"error": "Too many registrations. Limit:
+    50 per hour per IP."}. Either way it's a hard hourly quota, not a short
+    transient throttle (that's a separate, much looser 100 req/min free-tier
+    limit on the read endpoints). Once that quota is hit, no backoff shorter
+    than the remaining window (up to ~60 minutes) can ever succeed, so
+    burning 3 retries x up to 120s each per offering (confirmed in practice:
+    this is exactly what made a 27-offering force-all run grind through only
+    2 successes in 25+ minutes) just wastes CI time for a guaranteed-failed
+    call. One quick retry still covers a genuinely transient blip;
+    register_402index() below stops
     attempting further offerings entirely once it sees a real 429, since at
     that point every remaining call in this run is going to fail too."""
     data = json.dumps(payload).encode()
