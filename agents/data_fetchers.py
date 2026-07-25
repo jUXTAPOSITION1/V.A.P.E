@@ -14,6 +14,7 @@ Sources (all free; key OPTIONAL only for BaseScan account endpoints):
 """
 import json
 import os
+import re
 import time
 import urllib.request
 import urllib.parse
@@ -185,16 +186,47 @@ def get_token_price(ids="ethereum", vs="usd"):
 
 
 def get_token_market_by_contract(contract, platform="base"):
-    """Market data for a token by its Base contract address. Keyless."""
+    """Market data for a token by its Base contract address. Keyless.
+
+    Real gap this closes: this used to discard most of CoinGecko's own
+    /coins/{platform}/contract/{address} response (a single already-paid-for
+    call) down to just 4 price/volume fields, even though the SAME response
+    also carries real supply/FDV/description/homepage/twitter data -- exactly
+    the "tokenomics" and "what is this project" context a real report needs
+    (confirmed missing in a live report, investigation-20260725-155143-
+    0xB8d7710f.md, an ARENA/Avalanche investigation with zero tokenomics or
+    project-narrative content despite CoinGecko tracking all of it). No new
+    API call, no new key -- just stops throwing away data already fetched.
+    """
     d = _get(f"https://api.coingecko.com/api/v3/coins/{platform}/contract/{contract}",
              ttl=600, cache_key=f"cg_contract_{platform}_{contract}")
     if isinstance(d, dict) and d.get("market_data"):
         m = d["market_data"]
+        links = d.get("links") or {}
+        homepages = [h for h in (links.get("homepage") or []) if h]
+        # CoinGecko's own project description (English), HTML-stripped --
+        # real, sourced text, never fabricated. Truncated to keep reports
+        # readable, not to hide anything.
+        desc_raw = (d.get("description") or {}).get("en") or ""
+        desc = re.sub(r"<[^>]+>", " ", desc_raw)
+        desc = re.sub(r"\s+", " ", desc).strip()
         return {"name": d.get("name"), "symbol": d.get("symbol"),
+                # CoinGecko's own coin-id slug (e.g. "arena-2") -- the only
+                # reliable way to build a real https://coingecko.com/en/coins/
+                # page link; distinct from the "platform" id (e.g. "base")
+                # passed into this function.
+                "coingecko_id": d.get("id"),
                 "price_usd": (m.get("current_price") or {}).get("usd"),
                 "market_cap_usd": (m.get("market_cap") or {}).get("usd"),
                 "vol_24h_usd": (m.get("total_volume") or {}).get("usd"),
-                "change_24h_pct": m.get("price_change_percentage_24h")}
+                "change_24h_pct": m.get("price_change_percentage_24h"),
+                "fdv_usd": (m.get("fully_diluted_valuation") or {}).get("usd"),
+                "total_supply": m.get("total_supply"),
+                "circulating_supply": m.get("circulating_supply"),
+                "max_supply": m.get("max_supply"),
+                "homepage": homepages[0] if homepages else None,
+                "twitter": links.get("twitter_screen_name") or None,
+                "description": desc[:600] if desc else None}
     return d
 
 

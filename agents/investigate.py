@@ -80,7 +80,27 @@ EVM_CHAINS = {
     "10":    {"name": "Optimism",  "gecko": "optimism",     "dex": "optimism",  "rpc": "https://mainnet.optimism.io"},
     "137":   {"name": "Polygon",   "gecko": "polygon_pos",  "dex": "polygon",   "rpc": "https://polygon-rpc.com"},
     "56":    {"name": "BNB Chain", "gecko": "bsc",          "dex": "bsc",       "rpc": "https://bsc-dataseed.binance.org"},
-    "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/Chain"},
+    # Real bug this fixes (from a live report, investigation-20260725-155143-
+    # 0xB8d7710f.md: "On-chain Presence (Avalanche RPC): unavailable this
+    # cycle (HTTP Error 404: Not Found)"): the C-Chain's real JSON-RPC path
+    # is /ext/bc/C/rpc, not /ext/bc/C/Chain (confirmed against viem's own
+    # chain definition, worker/node_modules/viem/chains/definitions/
+    # avalanche.ts) -- the old URL 404'd on every single Avalanche
+    # investigation, always downgrading a real onchain_presence() result to
+    # is_contract=None ("unknown").
+    "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/rpc"},
+}
+
+# Human-facing block explorer per chain — used ONLY to build a real,
+# clickable "verify this yourself" link in the report's Sources section
+# (agents/data_fetchers.py::get_contract_source() already calls Etherscan
+# V2's unified API for the raw verification data; this is the matching
+# human-readable site for the SAME chain, not a new data source).
+EXPLORER_URLS = {
+    "8453": "https://basescan.org", "1": "https://etherscan.io",
+    "42161": "https://arbiscan.io", "10": "https://optimistic.etherscan.io",
+    "137": "https://polygonscan.com", "56": "https://bscscan.com",
+    "43114": "https://snowtrace.io",
 }
 
 # CoinGecko's own "asset platform" ids for its /coins/{platform}/contract/
@@ -242,6 +262,9 @@ def dexscreener(address, chain="8453"):
         "change_24h_pct": (p.get("priceChange") or {}).get("h24"),
         "pair_created_ms": p.get("pairCreatedAt"),
         "dex": p.get("dexId"),
+        # DexScreener's own pair page URL — a real, direct source link for
+        # the report's Sources section, not reconstructed/guessed.
+        "pair_url": p.get("url"),
         # Raw declared URLs (not just the has-any-socials boolean
         # agents/token_scan.py computes) — used by acp_fulfill.py's
         # dossier_check to actually visit these, not just count them.
@@ -878,7 +901,7 @@ def auto_target(chain=None):
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
                  defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None,
-                 expert_assessment=None):
+                 expert_assessment=None, coingecko_contract=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -952,6 +975,74 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- DEX: {dex.get('dex')}")
     else:
         L.append("- No DEX pair data (illiquid / not listed).")
+    L.append("")
+    # Real gap this closes: dexscreener()'s "websites"/"socials"/"logo_url"
+    # fields were already fetched every single cycle but never rendered
+    # anywhere in this free report -- only the paid deep-dive audit surfaced
+    # them (agents/deep_dive_audit.py). A real report has to name what the
+    # project actually is and link to its own claimed official presence
+    # (confirmed missing: investigation-20260725-155143-0xB8d7710f.md, an
+    # ARENA/Avalanche report with no official links at all despite
+    # DexScreener tracking a real website + X account for it).
+    L.append("## Project Links (as declared on DexScreener)")
+    site_links = [w.get("url") for w in (dex.get("websites") or []) if w.get("url")]
+    social_links = [f"{soc.get('type') or 'link'}: {soc.get('url')}"
+                    for soc in (dex.get("socials") or []) if soc.get("url")]
+    if site_links or social_links:
+        for u in site_links:
+            L.append(f"- Website: {u}")
+        for s_line in social_links:
+            L.append(f"- {s_line}")
+    else:
+        L.append("- No official website/social links declared on this token's DexScreener listing.")
+    L.append("")
+    # Real gap this closes: get_token_market_by_contract() already fetches
+    # CoinGecko's full contract-address response (needed for the stablecoin-
+    # verification check above) but used to discard supply/FDV/description --
+    # exactly the "tokenomics" and "what is this" context a real report needs
+    # and this one previously had none of. Only rendered when CoinGecko
+    # actually tracks this exact address -- absence stays an honest "not
+    # available", never a fabricated number.
+    L.append("## Tokenomics (CoinGecko, address-verified)")
+    if coingecko_contract and isinstance(coingecko_contract, dict):
+        cg = coingecko_contract
+        had_any = False
+        if cg.get("circulating_supply") is not None:
+            L.append(f"- Circulating supply: {cg['circulating_supply']:,.0f} {cg.get('symbol', '').upper()}")
+            had_any = True
+        if cg.get("total_supply") is not None:
+            L.append(f"- Total supply: {cg['total_supply']:,.0f}")
+            had_any = True
+        if cg.get("max_supply") is not None:
+            L.append(f"- Max supply: {cg['max_supply']:,.0f}")
+            had_any = True
+        if cg.get("market_cap_usd") is not None:
+            L.append(f"- Market cap: ${cg['market_cap_usd']:,.0f}")
+            had_any = True
+        if cg.get("fdv_usd") is not None:
+            L.append(f"- Fully diluted valuation: ${cg['fdv_usd']:,.0f}")
+            had_any = True
+        if cg.get("market_cap_usd") and cg.get("fdv_usd"):
+            ratio = cg["fdv_usd"] / cg["market_cap_usd"] if cg["market_cap_usd"] else None
+            if ratio:
+                L.append(f"- FDV/Market-cap ratio: {ratio:.2f}x — "
+                         f"{'a meaningful share of supply is still non-circulating (dilution risk)' if ratio > 1.3 else 'most of supply is already circulating'}")
+                had_any = True
+        if cg.get("homepage"):
+            L.append(f"- Homepage: {cg['homepage']}")
+            had_any = True
+        if cg.get("twitter"):
+            L.append(f"- X/Twitter: https://x.com/{cg['twitter']}")
+            had_any = True
+        if cg.get("description"):
+            L.append("")
+            L.append(f"> {cg['description']}")
+            had_any = True
+        if not had_any:
+            L.append("- CoinGecko tracks this address but returned no supply/valuation fields this cycle.")
+    else:
+        L.append("- Not available this cycle (CoinGecko does not track this exact contract address, "
+                 "or the token isn't listed there yet) — absence noted, not penalized.")
     L.append("")
     L.append("## Token Security (GoPlus)")
     if gp:
@@ -1053,6 +1144,25 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- No structural inconsistencies found — reasons, positive signals, verdict and "
                  "score all agree with the raw evidence and score()'s own invariants.")
+    L.append("")
+    # Real gap this closes: every claim above was already backed by a real
+    # source, but none of those sources were ever linked for a reader to
+    # independently re-verify -- confirmed missing in a live report,
+    # investigation-20260725-155143-0xB8d7710f.md ("Sources, Methodology,
+    # Limitations" flagged as absent). Every link here is either a direct,
+    # already-known field (DexScreener's own pair URL) or built from a
+    # static, versioned map (EXPLORER_URLS) -- never a guessed/constructed
+    # third-party URL.
+    L.append("## Sources & Verification Links")
+    explorer = EXPLORER_URLS.get(str(chain))
+    if explorer:
+        L.append(f"- Block explorer: {explorer}/address/{target}")
+    if dex and dex.get("pair_url"):
+        L.append(f"- DexScreener pair: {dex['pair_url']}")
+    if coingecko_contract and coingecko_contract.get("coingecko_id"):
+        L.append(f"- CoinGecko: https://www.coingecko.com/en/coins/{coingecko_contract['coingecko_id']}")
+    L.append("- GoPlus Security, Etherscan V2 API, and DeFiLlama were queried directly for the "
+             "sections above; this list only covers human-clickable pages for independent re-verification.")
     L.append("")
     L.append("---")
     L.append("")
@@ -1598,7 +1708,7 @@ def investigate(address, chain="8453", hint="", force=False):
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
                                     positive_signals, web_rep, dl_intel, siblings, critic_result,
-                                    data_agent_intel, expert_assessment)
+                                    data_agent_intel, expert_assessment, coingecko_contract=cg_contract)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
