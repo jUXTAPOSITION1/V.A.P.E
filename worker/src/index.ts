@@ -26,6 +26,7 @@ import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
+import { buildOpenApiDocument, type PaidRoute } from "./lib/openapiSpec";
 import { fulfill, type HandlerName } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
@@ -345,6 +346,141 @@ const WEBSITE_REVIEW_DISCOVERY = {
   },
 };
 
+// Single source of truth for every x402-gated route: both the paymentMiddleware()
+// config below AND the /openapi.json discovery document are generated from this
+// one array. x402scan's discovery spec makes that non-optional in spirit —
+// "Runtime 402 behavior is authoritative over static metadata" — so a
+// hand-maintained second copy of prices/schemas would eventually disagree with
+// the real gate and get resources rejected at registration probe time.
+type VapeRoute = PaidRoute & {
+  inputExample: Record<string, unknown>;
+  output: Record<string, unknown>;
+};
+
+const SCAN_TAGS = ["security", "on-chain-forensics", "base"];
+const ADDRESS_INPUT_SCHEMA = {
+  properties: {
+    address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
+    chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+  },
+  required: ["address"],
+};
+const AUDIT_INPUT_SCHEMA = {
+  properties: {
+    address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
+    chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+    callback_url: { type: "string", description: "optional webhook to POST the completed report to" },
+  },
+  required: ["address"],
+};
+const DEAD_ADDRESS = "0x0000000000000000000000000000000000dEaD";
+
+const PAID_ROUTES: VapeRoute[] = [
+  ...(Object.entries(OFFERING_PRICES) as [HandlerName, string][]).map(([name, price]) => ({
+    name,
+    path: `/scan/${name}`,
+    price,
+    description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real GoPlus/DexScreener data, no simulation.`,
+    tags: SCAN_TAGS,
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: DEAD_ADDRESS },
+    output: OFFERING_DISCOVERY[name].output,
+  })),
+  {
+    name: "bounty_deep_dive",
+    path: "/scan/bounty_deep_dive",
+    price: BOUNTY_DEEP_DIVE_PRICE,
+    description: `VAPE bounty_deep_dive — ${BOUNTY_DEEP_DIVE_DISCOVERY.description}`,
+    tags: [...SCAN_TAGS, "premium"],
+    inputSchema: AUDIT_INPUT_SCHEMA,
+    inputExample: { address: DEAD_ADDRESS },
+    output: BOUNTY_DEEP_DIVE_DISCOVERY.output,
+  },
+  {
+    name: "deep_contract_audit",
+    path: "/scan/deep_contract_audit",
+    price: DEEP_CONTRACT_AUDIT_PRICE,
+    description: `VAPE deep_contract_audit — ${DEEP_CONTRACT_AUDIT_DISCOVERY.description}`,
+    tags: [...SCAN_TAGS, "premium"],
+    inputSchema: AUDIT_INPUT_SCHEMA,
+    inputExample: { address: DEAD_ADDRESS },
+    output: DEEP_CONTRACT_AUDIT_DISCOVERY.output,
+  },
+  {
+    name: "tx_decode",
+    path: "/scan/tx_decode",
+    price: TX_DECODE_PRICE,
+    description: `VAPE tx_decode — ${TX_DECODE_DISCOVERY.description}`,
+    tags: SCAN_TAGS,
+    inputSchema: {
+      properties: {
+        tx_hash: { type: "string", description: "0x-prefixed 32-byte transaction hash" },
+        chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+      },
+      required: ["tx_hash"],
+    },
+    inputExample: { tx_hash: `0x${"0".repeat(64)}` },
+    output: TX_DECODE_DISCOVERY.output,
+  },
+  {
+    name: "community_intel_broadcast",
+    path: "/scan/community_intel_broadcast",
+    price: COMMUNITY_BROADCAST_PRICE,
+    description: `VAPE community_intel_broadcast — ${COMMUNITY_BROADCAST_DISCOVERY.description}`,
+    tags: ["market-data", "base"],
+    inputSchema: { properties: {}, required: [] },
+    inputExample: {},
+    output: COMMUNITY_BROADCAST_DISCOVERY.output,
+  },
+  {
+    name: "bulk_safety_bundle",
+    path: "/scan/bulk_safety_bundle",
+    price: BULK_SAFETY_BUNDLE_PRICE,
+    description: `VAPE bulk_safety_bundle — ${BULK_SAFETY_BUNDLE_DISCOVERY.description}`,
+    tags: SCAN_TAGS,
+    inputSchema: {
+      properties: {
+        addresses: { type: "string", description: "5-25 comma-separated Base (chain 8453) token addresses" },
+        chain: { type: "string", description: "optional chain id override, defaults to 8453, applies to all addresses" },
+      },
+      required: ["addresses"],
+    },
+    inputExample: { addresses: `${DEAD_ADDRESS},0x0000000000000000000000000000000000bEEF` },
+    output: BULK_SAFETY_BUNDLE_DISCOVERY.output,
+  },
+  {
+    name: "website_review",
+    path: "/scan/website_review",
+    price: WEBSITE_REVIEW_PRICE,
+    description: `VAPE website_review — ${WEBSITE_REVIEW_DISCOVERY.description}`,
+    tags: ["security", "phishing", "web"],
+    inputSchema: {
+      properties: {
+        url: { type: "string", description: "http(s) URL of the website to review" },
+      },
+      required: ["url"],
+    },
+    inputExample: { url: "https://example.com" },
+    output: WEBSITE_REVIEW_DISCOVERY.output,
+  },
+  ...DL_OFFERINGS.map((o) => ({
+    name: o.name,
+    path: `/data/${o.name}`,
+    price: o.price,
+    description: `VAPE ${o.name} — ${o.description}`,
+    tags: o.tags,
+    inputSchema: o.inputSchema,
+    inputExample: o.inputExample,
+    output: o.output,
+  })),
+];
+
+// Contact address published in the OpenAPI document. Per x402scan's discovery
+// spec this "lets them verify ownership of their origin, allows users to
+// contact them, and lets them customize their merchant pages" — a real,
+// monitored address rather than a noreply, since it's an ownership signal.
+const CONTACT_EMAIL = "apevape007@gmail.com";
+
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
 // c.executionCtx throws (not just returns undefined) when no ExecutionContext
@@ -383,6 +519,31 @@ app.use("*", cors({
   exposeHeaders: ["PAYMENT-REQUIRED", "PAYMENT-RESPONSE", "X-PAYMENT-RESPONSE"],
 }));
 
+// RFC 8288 service-desc link advertising /openapi.json below. Registered
+// ahead of every route so it lands on ALL of them — including "/" itself,
+// which is exactly what x402scan's POST /api/x402/registry/register-origin
+// probes. This is how a crawler handed any single VAPE URL finds the spec;
+// x402scan's own site serves the identical header, and its "Add your API"
+// probe reported "No discovery document found" against VAPE purely because
+// this header and /openapi.json did not exist yet.
+app.use("*", async (c, next) => {
+  await next();
+  try {
+    c.res.headers.append(
+      "Link",
+      '</openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"',
+    );
+  } catch {
+    // Deliberately swallowed: a Response served out of the Cloudflare Cache API
+    // (hono/cache backs /x402/feed and /x402/stats) has immutable headers, and
+    // appending to one throws. A discovery hint is strictly additive metadata —
+    // failing to attach it must never turn a real, working response into a 500.
+    // Those two routes are free, unpaid ledger reads that no directory crawler
+    // needs to discover anyway; every x402-gated route is uncached and does get
+    // the header.
+  }
+});
+
 app.get("/", (c) =>
   c.json({
     agent: "VAPE",
@@ -402,6 +563,16 @@ app.get("/", (c) =>
     docs: "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md",
   })
 );
+
+// OpenAPI 3.1 discovery document — the canonical machine-readable contract for
+// x402 directory crawlers (x402scan.com's discovery spec: "OpenAPI is the
+// canonical discovery contract. Publish your spec at /openapi.json."). Free and
+// unpaid on purpose: a registration probe has to be able to read it before any
+// payment exists. Generated from PAID_ROUTES, the same catalog the x402 payment
+// middleware is built from, so the documented price/schema for a route always
+// matches the 402 challenge that route actually serves.
+app.get("/openapi.json", (c) =>
+  c.json(buildOpenApiDocument(new URL(c.req.url).origin, PAID_ROUTES, CONTACT_EMAIL)));
 
 // Domain-ownership proof for 402index.io's listing-claim flow (see
 // agents/x402_index_claim.py) — must serve ONLY this hash, as plain text,
@@ -823,164 +994,21 @@ app.use("*", async (c, next) => {
       safeWaitUntil(c, logJob(c.env.VAPE_JOBS, record));
     });
 
+  // Built from the shared PAID_ROUTES catalog so the x402 gate and the
+  // /openapi.json discovery document can never disagree about a route's price
+  // or input schema (see PAID_ROUTES' comment for why that matters).
   const routes: Record<string, unknown> = {};
-  for (const [name, price] of Object.entries(OFFERING_PRICES)) {
-    const meta = OFFERING_DISCOVERY[name as HandlerName];
-    routes[`GET /scan/${name}`] = {
-      accepts: { scheme: "exact", price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-      description: `VAPE ${name} — ${meta.description} Real GoPlus/DexScreener data, no simulation.`,
+  for (const r of PAID_ROUTES) {
+    routes[`GET ${r.path}`] = {
+      accepts: { scheme: "exact", price: r.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+      description: r.description,
       serviceName: "VAPE",
       iconUrl: ICON_URL,
-      tags: ["security", "on-chain-forensics", "base"],
+      tags: r.tags,
       extensions: declareDiscoveryExtension({
-        input: { address: "0x0000000000000000000000000000000000dEaD" },
-        inputSchema: {
-          properties: {
-            address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
-            chain: { type: "string", description: "optional chain id override, defaults to 8453" },
-          },
-          required: ["address"],
-        },
-        output: { example: meta.output },
-      }),
-    };
-  }
-
-  // bounty_deep_dive: same x402 gate, but its own price/metadata since it isn't part
-  // of the synchronous OFFERING_PRICES/HandlerName set (see the handler below).
-  routes["GET /scan/bounty_deep_dive"] = {
-    accepts: { scheme: "exact", price: BOUNTY_DEEP_DIVE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE bounty_deep_dive — ${BOUNTY_DEEP_DIVE_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["security", "on-chain-forensics", "base", "premium"],
-    extensions: declareDiscoveryExtension({
-      input: { address: "0x0000000000000000000000000000000000dEaD" },
-      inputSchema: {
-        properties: {
-          address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
-          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
-          callback_url: { type: "string", description: "optional webhook to POST the completed report to" },
-        },
-        required: ["address"],
-      },
-      output: { example: BOUNTY_DEEP_DIVE_DISCOVERY.output },
-    }),
-  };
-
-  // deep_contract_audit: same x402 gate/dispatch pipeline as bounty_deep_dive
-  // above, address-only, listed under its own name (see const comment above).
-  routes["GET /scan/deep_contract_audit"] = {
-    accepts: { scheme: "exact", price: DEEP_CONTRACT_AUDIT_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE deep_contract_audit — ${DEEP_CONTRACT_AUDIT_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["security", "on-chain-forensics", "base", "premium"],
-    extensions: declareDiscoveryExtension({
-      input: { address: "0x0000000000000000000000000000000000dEaD" },
-      inputSchema: {
-        properties: {
-          address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
-          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
-          callback_url: { type: "string", description: "optional webhook to POST the completed report to" },
-        },
-        required: ["address"],
-      },
-      output: { example: DEEP_CONTRACT_AUDIT_DISCOVERY.output },
-    }),
-  };
-
-  // tx_decode: same x402 gate, own price/metadata (a tx hash, not an
-  // address — doesn't fit the generic OFFERING_PRICES/HandlerName address
-  // loop below).
-  routes["GET /scan/tx_decode"] = {
-    accepts: { scheme: "exact", price: TX_DECODE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE tx_decode — ${TX_DECODE_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["security", "on-chain-forensics", "base"],
-    extensions: declareDiscoveryExtension({
-      input: { tx_hash: "0x0000000000000000000000000000000000000000000000000000000000000000" },
-      inputSchema: {
-        properties: {
-          tx_hash: { type: "string", description: "0x-prefixed 32-byte transaction hash" },
-          chain: { type: "string", description: "optional chain id override, defaults to 8453" },
-        },
-        required: ["tx_hash"],
-      },
-      output: { example: TX_DECODE_DISCOVERY.output },
-    }),
-  };
-
-  // community_intel_broadcast: same x402 gate, zero-input.
-  routes["GET /scan/community_intel_broadcast"] = {
-    accepts: { scheme: "exact", price: COMMUNITY_BROADCAST_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE community_intel_broadcast — ${COMMUNITY_BROADCAST_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["market-data", "base"],
-    extensions: declareDiscoveryExtension({
-      input: {},
-      inputSchema: { properties: {}, required: [] },
-      output: { example: COMMUNITY_BROADCAST_DISCOVERY.output },
-    }),
-  };
-
-  // bulk_safety_bundle: same x402 gate, own price/metadata (a comma-
-  // separated address list, not a single address).
-  routes["GET /scan/bulk_safety_bundle"] = {
-    accepts: { scheme: "exact", price: BULK_SAFETY_BUNDLE_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE bulk_safety_bundle — ${BULK_SAFETY_BUNDLE_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["security", "on-chain-forensics", "base"],
-    extensions: declareDiscoveryExtension({
-      input: { addresses: "0x0000000000000000000000000000000000dEaD,0x0000000000000000000000000000000000bEEF" },
-      inputSchema: {
-        properties: {
-          addresses: { type: "string", description: "5-25 comma-separated Base (chain 8453) token addresses" },
-          chain: { type: "string", description: "optional chain id override, defaults to 8453, applies to all addresses" },
-        },
-        required: ["addresses"],
-      },
-      output: { example: BULK_SAFETY_BUNDLE_DISCOVERY.output },
-    }),
-  };
-
-  // website_review: same x402 gate, own price/metadata (a plain website URL,
-  // not a contract address) — see lib/websiteReview.ts.
-  routes["GET /scan/website_review"] = {
-    accepts: { scheme: "exact", price: WEBSITE_REVIEW_PRICE, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    description: `VAPE website_review — ${WEBSITE_REVIEW_DISCOVERY.description}`,
-    serviceName: "VAPE",
-    iconUrl: ICON_URL,
-    tags: ["security", "phishing", "web"],
-    extensions: declareDiscoveryExtension({
-      input: { url: "https://example.com" },
-      inputSchema: {
-        properties: {
-          url: { type: "string", description: "http(s) URL of the website to review" },
-        },
-        required: ["url"],
-      },
-      output: { example: WEBSITE_REVIEW_DISCOVERY.output },
-    }),
-  };
-
-  // Market-data micro-services — one $0.01 paid route per tool, same x402
-  // gate and Bazaar discovery metadata as the security offerings above. Real
-  // hosted token/protocol logos and rich data (see dataHandlers.ts).
-  for (const o of DL_OFFERINGS) {
-    routes[`GET /data/${o.name}`] = {
-      accepts: { scheme: "exact", price: o.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-      description: `VAPE ${o.name} — ${o.description}`,
-      serviceName: "VAPE",
-      iconUrl: ICON_URL,
-      tags: o.tags,
-      extensions: declareDiscoveryExtension({
-        input: o.inputExample,
-        inputSchema: o.inputSchema,
-        output: { example: o.output },
+        input: r.inputExample,
+        inputSchema: r.inputSchema,
+        output: { example: r.output },
       }),
     };
   }
