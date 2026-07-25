@@ -138,3 +138,4 @@
 {"ts": "2026-07-25T22:48:12.127892Z", "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T23:03:15.589316Z", "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 50}
 {"ts": "2026-07-25T23:18:36.451335Z", "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
+{"ts": "2026-07-25T23:33:59.809785Z", "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}

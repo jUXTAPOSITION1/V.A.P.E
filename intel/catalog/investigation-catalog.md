@@ -511,3 +511,5 @@
 | 2026-07-25 | auto | 0xAFF2565091E7207191dBe340B8528D02FA78d044 (ASTEROID) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-25 | auto | 0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10 (ASTEROID) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x375488F097176507e39B9653b88FDc52cDE736Bf (TAROT) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |

@@ -71,6 +71,25 @@
     "symbol": "TAROT",
     "times_investigated": 1
   },
+  "10:0x375488f097176507e39b9653b88fdc52cde736bf": {
+    "address": "0x375488F097176507e39B9653b88FDc52cDE736Bf",
+    "chain": "10",
+    "creator_address": "0xfa9da51631268a30ec3ddd1ccbf46c65fad99251",
+    "first_investigated": "2026-07-25T23:33:55Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-233355-0x375488F0.md",
+        "score": 0,
+        "ts": "2026-07-25T23:33:55Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T23:33:55Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "TAROT",
+    "times_investigated": 1
+  },
   "10:0x3c8b650257cfb5f272f799f5e2b4e65093a11a05": {
     "address": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
     "chain": "10",
