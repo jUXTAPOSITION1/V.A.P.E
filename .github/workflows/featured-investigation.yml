@@ -8,23 +8,25 @@ name: VAPE Featured Investigation (auto-target deep dive)
 # cadence without bumping the cost/frequency of the rest of the hourly cycle.
 on:
   schedule:
-    # Confirmed via live run history (actions_list against this exact
-    # workflow) that the :07/:37 offset from PR #272 was NOT enough: real
-    # fire times were still drifting 90-130min apart despite the 2x/hr
-    # intent — GitHub's shared scheduler silently drops/delays a real
-    # fraction of `schedule` triggers on public repos under platform load,
-    # independent of which minute you pick. The only lever we have from
-    # inside a workflow file is to submit MORE scheduled opportunities so
-    # the same drop rate still nets a usable real cadence — going to 4x/hr
-    # (still off :00/:15/:30/:45, the globally-congested round marks, and
-    # off this repo's own :17/:37 slots used by reputation.yml/scout.yml/
-    # skillforge-harvest.yml) roughly doubles the realized fire rate versus
-    # the prior 2x/hr intent. DATA AGENT itself settles 2-3 real x402
-    # transactions every single time this workflow actually runs (confirmed
-    # in a live job log) — cadence, not data_agent.py's own pacing logic, is
-    # the real ceiling on its daily transaction count.
+    # Real, confirmed severity (live run history checked again after the 4x/hr
+    # bump landed): even at 4 scheduled opportunities/hour this workflow still
+    # only actually fired ONCE in a 1h43m window — roughly 1 real fire per
+    # 7 intended ones. The job itself completes in well under a minute (no
+    # concurrency/overlap issue), so this is GitHub's own `schedule` event
+    # simply not delivering on public repos under platform load, at a rate
+    # far worse than a "drop some fraction" model — tightening the cron
+    # further would not meaningfully help. This cron is now only a low-
+    # reliability SAFETY NET that can (re)start the self-dispatch chain
+    # below if it ever stops; the real cadence comes from the "Schedule
+    # next cycle" step at the end of this job, which is not subject to
+    # `schedule`'s own unreliability at all (it's an explicit API call).
     - cron: '4,19,34,49 * * * *'
   workflow_dispatch:
+    inputs:
+      chained:
+        description: 'internal: set by the self-dispatch chain step, never by a human — distinguishes a chain continuation from a real manual test dispatch'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read
@@ -36,10 +38,13 @@ concurrency:
 jobs:
   investigate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Bumped from 20: the self-dispatch chain's own ~14min sleep (see the
+    # last step) needs headroom on top of the real work above it.
+    timeout-minutes: 25
     permissions:
       contents: write
       id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
+      actions: write  # to dispatch the next cycle of this same workflow (see last step)
     env:
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
@@ -126,8 +131,13 @@ jobs:
       # useful for spot-checking the CDP/VAPOR split without waiting on
       # chance. VAPOR still enforces a fixed 30m-interval gate; CDP's own
       # gate is now the adaptive, growth-target one described above.
+      # Real bug this guards against: the self-dispatch chain step below
+      # ALSO fires via workflow_dispatch, so a bare `event_name ==
+      # 'workflow_dispatch'` check would run this forced hire every ~15min
+      # forever instead of only on a genuine human-triggered test — the
+      # `chained` input (set only by that chain step) tells them apart.
       - name: Force both DATA AGENT instances (manual trigger only)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.chained != 'true' }}
         run: |
           python -c "
           import sys; sys.path.insert(0, '.')
@@ -174,3 +184,31 @@ jobs:
             echo "::error::failed to push after 5 retries -- changes were NOT committed"
             exit 1
           fi
+      # Real cadence mechanism (see the `on.schedule` comment above for why):
+      # GitHub's own `schedule` trigger drops the vast majority of this
+      # workflow's intended firings, independent of cron frequency — the fix
+      # is to stop depending on it. This step self-dispatches the NEXT cycle
+      # via the Actions API instead, which isn't subject to `schedule`'s
+      # unreliability at all. `!cancelled()` (not `always()`, per CodeRabbit
+      # on PR #280 — always() also runs on an explicitly cancelled job,
+      # which would keep the chain alive even when someone deliberately
+      # cancels a run to stop it) so a failure anywhere above (a bad
+      # investigation target, a flaky commit, etc.) still doesn't break the
+      # chain, but a real cancellation does. Sleeps out the rest of the
+      # ~15min interval first (real work above takes well under a minute)
+      # so cadence stays close to 15min rather than back-to-back-firing
+      # continuously.
+      - name: Schedule next cycle in ~15 minutes (self-dispatch chain)
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sleep 850
+          # --fail (per CodeRabbit on PR #280): plain -sS still exits 0 on a
+          # 4xx/5xx response body (e.g. a token/permission problem), which
+          # would silently break the chain with no visible error in the log.
+          curl --fail --silent --show-error -X POST \
+            -H "Authorization: token ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/featured-investigation.yml/dispatches" \
+            -d '{"ref":"main","inputs":{"chained":"true"}}'
