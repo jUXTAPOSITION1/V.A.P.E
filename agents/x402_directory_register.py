@@ -223,13 +223,26 @@ def _all_offerings():
         yield name, meta, "data"
 
 
-def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
+def _post(url, payload, timeout=15, max_retries=1, backoff_base=10):
     """POST with retry-on-429. GitHub-hosted runners share IP pools across
     countless unrelated CI jobs, so a small public API's per-IP rate limit
-    (confirmed hit in practice: 402index.io caps at 50/hour/IP) can trip from
-    traffic that has nothing to do with this repo. Honors a real Retry-After
-    header when the server sends one; otherwise backs off exponentially,
-    capped so one bad/huge Retry-After value can't stall the job for hours."""
+    can trip from traffic that has nothing to do with this repo. Honors a
+    real Retry-After header when the server sends one; otherwise backs off
+    exponentially, capped so one bad/huge Retry-After value can't stall the
+    job for hours.
+
+    max_retries defaults to 1, not 3: the api-docs' real, endpoint-specific
+    limit for POST /api/v1/register is "10 registrations per hour per IP" —
+    a hard hourly quota, not a short transient throttle (that's a separate,
+    much looser 100 req/min free-tier limit on the read endpoints). Once
+    that quota is hit, no backoff shorter than the remaining window (up to
+    ~60 minutes) can ever succeed, so burning 3 retries x up to 120s each
+    per offering (confirmed in practice: this is exactly what made a 27-
+    offering force-all run grind through only 2 successes in 25+ minutes)
+    just wastes CI time for a guaranteed-failed call. One quick retry still
+    covers a genuinely transient blip; register_402index() below stops
+    attempting further offerings entirely once it sees a real 429, since at
+    that point every remaining call in this run is going to fail too."""
     data = json.dumps(payload).encode()
     code, body = 0, {"error": "not attempted"}
     for attempt in range(max_retries + 1):
@@ -338,6 +351,22 @@ def register_402index(only=None, force_all=False):
         print(f"[402index] {name}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
         if ok:
             newly_registered.append(name)
+        elif code == 429:
+            # Real hourly quota, confirmed exhausted for this run's IP — every
+            # remaining offering would also 429 (the retry inside _post()
+            # already tried once and failed), so stop here instead of
+            # grinding through the rest one-by-one for no benefit. Re-run
+            # later (the quota resets ~60min after its first counted request)
+            # to pick up where this left off.
+            attempted = {r["offering"] for r in results}
+            remaining = [n for n, _meta, _prefix in _all_offerings()
+                         if (only is None or n in only) and n not in attempted]
+            print(f"[402index] 429 — hourly per-IP registration quota exhausted after "
+                  f"{len(newly_registered)} success(es) this run. Stopping early rather "
+                  f"than retrying the remaining {len(remaining)} offering(s) into a "
+                  f"guaranteed failure: {remaining}. Re-dispatch (same --force-all/--only "
+                  f"flags) once the quota window resets to pick up the rest.")
+            break
 
     if newly_registered:
         state["registered_402index"] = sorted(already | set(newly_registered))
