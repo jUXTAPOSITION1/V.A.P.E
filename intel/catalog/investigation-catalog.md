@@ -455,3 +455,5 @@
 | 2026-07-25 | auto | 0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be (USOR OIL) | deep_investigation | PROCEED (90/100) | Low liquidity $41,326 | +7d |
 
 | 2026-07-25 | auto | 0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0 (VCNT) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-25 | auto | 0x712be9C5b93d4aC284382593327Ae29e59977b07 (VCNT) | deep_investigation | REJECT (35/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
