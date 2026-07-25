@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-25T23:33:55Z — 51 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-25T23:49:24Z — 52 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| AIPF | Polygon | `0x2c72D25530191EBD244Eb6325E1892480b0e6E28` | 73/100 | 1 | 2026-07-25T23:49:24Z |
 | TAROT | Optimism | `0x1F514A61bcde34F94Bc39731235690ab9da737F7` | 63/100 | 1 | 2026-07-25T22:16:56Z |
 | VC | Base | `0x271415A029602f9c370D022aDEba703F172c79fF` | 60/100 | 1 | 2026-07-25T21:46:33Z |
 | ANT | Arbitrum | `0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684` | 70/100 | 1 | 2026-07-25T21:31:13Z |

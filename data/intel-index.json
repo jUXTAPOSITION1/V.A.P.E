@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T23:34:02Z",
+  "generated": "2026-07-25T23:49:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 341,
+    "investigations": 342,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-233355-0x375488F0.md",
-      "title": "Investigation \u2014 TAROT",
-      "symbol": "TAROT",
-      "name": "Tarot",
-      "date": "2026-07-25T23:33:55Z",
-      "target": "0x375488F097176507e39B9653b88FDc52cDE736Bf",
-      "chain": "10 (Optimism)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-233355-0x375488F0.md"
+      "file": "investigation-20260725-234924-0x2c72D255.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-07-25T23:49:24Z",
+      "target": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "73",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 36635 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($8,361,314); Trading 249+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-234924-0x2c72D255.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-234924-0x2c72D255.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-07-25T23:49:24Z",
+      "target": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "73",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 36635 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($8,361,314); Trading 249+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-234924-0x2c72D255.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-233355-0x375488F0.md",
@@ -593,20 +607,6 @@
       "score": "55",
       "summary": "Risk factors: [-10] Owner not renounced (0x5e0fdc32c24a7f2b49ed81abefcc5484775fa4e7) \u2014 can still act on the contract; [-25] Very low liquidity $5 (rug/illiquid); [-10] Low liquidity $5. Positive evidence: 19560 holders \u2014 reasonably distributed; Trading 379+ days without a known incident in this scan; Custom verified so",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-174646-0x7404AC09.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-154054-0xAAAB9D12.md",
-      "title": "Investigation \u2014 PHAR",
-      "symbol": "PHAR",
-      "name": "PHARAOH",
-      "date": "2026-07-24T15:40:54Z",
-      "target": "0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xaaa823aa799bda3193d46476539bcb1da5b71330) \u2014 can still act on the contract; [-25] Very low liquidity $1,919 (rug/illiquid); [-10] Low liquidity $1,919; [note] address has no contract code (EOA or not deployed). Positive evidence: 11238 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-154054-0xAAAB9D12.md"
     }
   ],
   "reports": [

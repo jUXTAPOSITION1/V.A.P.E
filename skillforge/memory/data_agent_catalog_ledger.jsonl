@@ -77,3 +77,4 @@
 {"ts": "2026-07-25T23:03:17.454112Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T23:18:40.272412Z", "target": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T23:34:02.032435Z", "target": "Arbitrum", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
+{"ts": "2026-07-25T23:49:31.266167Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
