@@ -59,12 +59,12 @@ try:
     from agents import investigate as inv
     from agents import data_fetchers as DF
     from agents.llm import ask_oci_grok_frontier, describe_unavailable
-    from agents.scaffold_foundry_target import scaffold_and_analyze
+    from agents.scaffold_foundry_target import scaffold_and_analyze, scaffold_and_run_exploit_poc
 except Exception:
     import investigate as inv
     import data_fetchers as DF
     from llm import ask_oci_grok_frontier, describe_unavailable
-    from scaffold_foundry_target import scaffold_and_analyze
+    from scaffold_foundry_target import scaffold_and_analyze, scaffold_and_run_exploit_poc
 
 
 def now_iso():
@@ -266,23 +266,67 @@ def _run_aderyn(project_dir, timeout=120):
                 pass
 
 
-FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor, performing VAPE's
-deepest, highest-rigor automated audit tier — whether this run is a paid bug bounty
-engagement or VAPE's own proactive daily sweep, the bar is the same: be precise,
-evidence-based, and honest.
+def _run_exploit_poc(address, chain, src, project_dir=None, context=""):
+    """The primary deliverable for a paid bounty-audit engagement — Grok
+    drafts a real Foundry exploit test (agents/scaffold_foundry_target.py::
+    scaffold_and_run_exploit_poc), which forge then actually RUNS against
+    the target's real forked on-chain state via --fork-url. This is a real
+    executed proof-of-concept, not a narrative-only description. Mirrors
+    _run_symbolic's own "skip cleanly if the toolchain isn't here this run"
+    gate; reuses _run_symbolic's already-scaffolded project_dir when
+    available to avoid a second scaffold+build cycle."""
+    if not shutil.which("forge"):
+        return {"ran": False, "reason": "forge not installed in this environment this run"}
+    chain_info = inv.EVM_CHAINS.get(str(chain))
+    rpc_url = chain_info["rpc"] if chain_info else None
+    if not rpc_url:
+        return {"ran": False, "reason": f"no known RPC endpoint for chain {chain}"}
+    try:
+        return scaffold_and_run_exploit_poc(address, int(chain), rpc_url=rpc_url,
+                                             workdir=project_dir, pre_fetched_src=src,
+                                             extra_context=context)
+    except Exception as e:
+        return {"ran": False, "reason": str(e)}
+
+
+def _exploit_context(slither_result, mythril_result, aderyn_result):
+    """Short real-findings digest handed to the exploit-drafting LLM as
+    context (not verified findings) — same static/symbolic tools already
+    run for this same target, so a real lead any of them found (e.g.
+    reentrancy, access-control gap) can point the drafted attack somewhere
+    concrete instead of starting from nothing."""
+    parts = []
+    for label, result in (("Slither", slither_result), ("Mythril", mythril_result), ("Aderyn", aderyn_result)):
+        if result.get("ok") and result.get("total"):
+            parts.append(f"{label}: {result['total']} raw findings, severity counts {result.get('counts')}")
+    return "\n".join(parts)
+
+
+FRONTIER_SYSTEM = """You are VAPE, an autonomous on-chain security auditor. This is a real
+bug-bounty proof-of-concept engagement: the PRIMARY deliverable is a simulated attack —
+a real exploit test another step already drafted and RAN with forge against the target's
+actual forked on-chain state (--fork-url; entirely local and read-only against the real
+chain, no transaction ever broadcast to it). Your job is to write the analysis AROUND
+that real, already-executed result — not to describe VAPE's own tooling or process.
 
 Rules:
+- Lead with the executed exploit-PoC result given below (SIMULATED ATTACK — EXECUTED
+  PROOF-OF-CONCEPT). If it ran and passed, explain exactly what impact it proves and why,
+  citing the real assertion(s) that held. If it ran and failed, or found no exploitable
+  path, say so plainly — that is a legitimate, honest outcome, not a shortcoming to
+  paper over. Never claim a successful exploit that the real result doesn't support.
 - Base every claim on the ACTUAL verified source code and recon data given below — never
   invent function names, line numbers, or behavior you weren't shown.
-- Reason explicitly through these vulnerability classes against the real code: reentrancy,
-  access control (owner/role gating), oracle manipulation / price feed trust, integer
-  overflow/precision loss, upgrade/proxy risk (storage collisions, unprotected
-  initializers), unbounded loops / DoS, front-running / MEV surface, and any honeypot/
-  rug mechanics GoPlus already flagged.
+- Beyond the executed PoC, reason explicitly through these vulnerability classes against
+  the real code: reentrancy, access control (owner/role gating), oracle manipulation /
+  price feed trust, integer overflow/precision loss, upgrade/proxy risk (storage
+  collisions, unprotected initializers), unbounded loops / DoS, front-running / MEV
+  surface, and any honeypot/rug mechanics GoPlus already flagged — these support the
+  primary attack finding, they don't replace it.
 - If source code was not available, say so plainly and reason only from the real recon
   data provided — do not fabricate a source-level finding.
-- Cross-reference any static-analysis (Slither) findings given — confirm, refute, or
-  add context; don't just restate them.
+- Cross-reference any static-analysis (Slither/Mythril/Aderyn) findings given — confirm,
+  refute, or add context; don't just restate them.
 - You have live web/X search available directly — use it as a primary research tool to
   check the target's name/deployer/contract address for prior disclosures, known exploits,
   or community discussion before concluding; don't rely on the recon data alone if a quick
@@ -316,8 +360,26 @@ nothing to say rather than padding), then "Recommended Human Follow-up".
 
 
 def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
-                  mythril_result=None, aderyn_result=None):
+                  mythril_result=None, aderyn_result=None, exploit_result=None):
     parts = [f"=== TARGET ===\naddress: {address}\nchain: {chain}"]
+    exploit_result = exploit_result or {}
+    if exploit_result.get("ran"):
+        test_result = exploit_result.get("test_result", {})
+        if test_result.get("ran"):
+            status = "PASSED (rc=0) — the drafted attack's own assertions held after its actions ran" \
+                if test_result.get("passed") else \
+                f"FAILED (rc={test_result.get('returncode')}) — the drafted attempt did not hold up"
+            parts.append(f"=== SIMULATED ATTACK — EXECUTED PROOF-OF-CONCEPT (real forge run, "
+                         f"--fork-url against this chain's real state) ===\nStatus: {status}\n\n"
+                         f"Drafted exploit test:\n{exploit_result.get('drafted_code', '')[:3000]}\n\n"
+                         f"forge test output:\n{test_result.get('output', test_result.get('reason', ''))[:3000]}")
+        else:
+            parts.append(f"=== SIMULATED ATTACK — EXECUTED PROOF-OF-CONCEPT ===\n"
+                         f"Exploit test drafted but could not be run: {test_result.get('reason', 'unknown')}\n\n"
+                         f"Drafted exploit test:\n{exploit_result.get('drafted_code', '')[:3000]}")
+    else:
+        parts.append(f"=== SIMULATED ATTACK — EXECUTED PROOF-OF-CONCEPT ===\nNot available this run: "
+                     f"{exploit_result.get('reason', 'unknown')}")
     parts.append(f"=== GOPLUS TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
     parts.append(f"=== DEXSCREENER MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
     parts.append(f"=== ON-CHAIN PRESENCE (real, Base RPC) ===\n{json.dumps(onchain, indent=2)}")
@@ -404,6 +466,12 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     symbolic_result = _run_symbolic(address, chain, src)
     mythril_result = _run_mythril(address, chain)
     aderyn_result = _run_aderyn(symbolic_result.get("project_dir"))
+    # The primary deliverable of this offering (see module docstring): a real,
+    # forge-executed exploit proof-of-concept, not a narrative-only claim.
+    # Reuses _run_symbolic's already-scaffolded project (if it got that far)
+    # instead of scaffolding + building a second throwaway Foundry project.
+    exploit_context = _exploit_context(slither_result, mythril_result, aderyn_result)
+    exploit_result = _run_exploit_poc(address, chain, src, symbolic_result.get("project_dir"), exploit_context)
 
     # Reuse investigate.py's scoring engine for a baseline consistent with every other
     # VAPE verdict — the frontier LLM pass adds depth on top, it doesn't replace this.
@@ -422,7 +490,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     project_links = [w["url"] for w in (dex.get("websites") or [])] + \
         [s["url"] for s in (dex.get("socials") or [])]
     prompt = build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_result, symbolic_result,
-                          mythril_result, aderyn_result)
+                          mythril_result, aderyn_result, exploit_result)
     try:
         # No search=True here: that flag routes the request AWAY from OCI
         # Grok (see ask_oci_grok()'s docstring — OCI's endpoint has no live-
@@ -465,6 +533,7 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     L.append(f"**Target:** `{address}` (chain {chain})  ")
     L.append(f"**Date:** {now_iso()}  ")
     L.append(f"**Engine:** Frontier LLM ({'active' if provider else 'unavailable this cycle'}) + real recon"
+             f"{' + executed exploit PoC' if exploit_result.get('ran') else ''}"
              f"{' + Slither static analysis' if slither_result.get('ok') else ''}"
              f"{' + Halmos symbolic testing' if symbolic_result.get('ran') else ''}"
              f"{' + Mythril symbolic-execution scan' if mythril_result.get('ok') else ''}"
@@ -474,28 +543,80 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     L.append("")
     L.append("---")
     L.append("")
-    L.append("## AI Deep-Dive Analysis")
+    L.append("## Simulated Attack — Proof of Concept")
+    L.append("*The primary deliverable of this engagement: a real exploit test, drafted by a "
+             "frontier LLM against this contract's actual verified source, then RUN with "
+             "`forge test --fork-url` against a live fork of this chain's real on-chain state. "
+             "This is executed, not narrated — a pass means the drafted attack's own assertions "
+             "held after its actions ran against real forked state; entirely local and read-only "
+             "against the real chain, no transaction is ever broadcast to it.*")
+    L.append("")
+    test_result = exploit_result.get("test_result", {})
+    if exploit_result.get("ran") and test_result.get("ran"):
+        if test_result.get("passed"):
+            L.append("### Result: EXPLOIT SUCCEEDED (forge test passed against forked chain state)")
+        else:
+            L.append(f"### Result: exploit attempt did not succeed (forge exit code "
+                     f"{test_result.get('returncode')})")
+        if exploit_result.get("drafted_by"):
+            L.append("- Drafted by: frontier LLM")
+        L.append("")
+        L.append("**Exploit test (Solidity, run against forked on-chain state):**")
+        L.append("```solidity")
+        L.append(exploit_result.get("drafted_code", "")[:4000])
+        L.append("```")
+        L.append("")
+        L.append("**forge test output:**")
+        L.append("```")
+        L.append((test_result.get("output") or test_result.get("reason") or "")[:4000])
+        L.append("```")
+    elif exploit_result.get("ran"):
+        L.append(f"### Exploit test drafted but could not be executed: {test_result.get('reason', 'unknown')}")
+        if exploit_result.get("drafted_code"):
+            L.append("**Drafted exploit test (not executed):**")
+            L.append("```solidity")
+            L.append(exploit_result["drafted_code"][:4000])
+            L.append("```")
+    else:
+        L.append(f"### Not run this engagement: {exploit_result.get('reason', 'unknown')}")
+        if exploit_result.get("drafted_code"):
+            L.append("**Drafted exploit test (compile failed or not reached):**")
+            L.append("```solidity")
+            L.append(exploit_result["drafted_code"][:4000])
+            L.append("```")
+        if exploit_result.get("forge_output"):
+            L.append("```")
+            L.append(exploit_result["forge_output"][:2000])
+            L.append("```")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Vulnerability Analysis")
     L.append(narrative)
     L.append("")
     L.append("---")
     L.append("")
-    L.append("## Baseline Recon (same checks as every VAPE investigation)")
-    L.append("### Verdict Rationale")
+    L.append("## Supporting Analysis")
+    L.append("*Baseline recon and static/symbolic tooling that fed the simulated attack and "
+             "vulnerability analysis above — supporting evidence, not the primary finding.*")
+    L.append("")
+    L.append("### Baseline Recon")
+    L.append("**Verdict Rationale**")
     for r in reasons or ["No risk penalties triggered — clean across all automated checks."]:
         L.append(f"- {r}")
     L.append("")
-    L.append("### Positive Signals")
+    L.append("**Positive Signals**")
     for p in positive_signals or ["None found."]:
         L.append(f"- {p}")
     L.append("")
-    L.append("## Static Analysis (Slither)")
+    L.append("### Static Analysis (Slither)")
     if slither_result.get("ok"):
         L.append(f"- Raw findings: **{slither_result['total']}** — {slither_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {slither_result.get('reason')}")
         _append_raw_tail(L, slither_result)
     L.append("")
-    L.append("## Symbolic Testing (Halmos)")
+    L.append("### Symbolic Testing (Halmos)")
     if symbolic_result.get("ran"):
         halmos = symbolic_result.get("halmos", {})
         L.append("- Ran bounded symbolic tests (Z3-backed) against properties an earlier step "
@@ -510,37 +631,23 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
     else:
         L.append(f"- Not run this cycle: {symbolic_result.get('reason')}")
     L.append("")
-    L.append("## Static Analysis (Mythril)")
+    L.append("### Static Analysis (Mythril)")
     if mythril_result.get("ok"):
         L.append(f"- Raw issues: **{mythril_result['total']}** — {mythril_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {mythril_result.get('reason')}")
         _append_raw_tail(L, mythril_result)
     L.append("")
-    L.append("## Static Analysis (Aderyn)")
+    L.append("### Static Analysis (Aderyn)")
     if aderyn_result.get("ok"):
         L.append(f"- Raw issues: **{aderyn_result['total']}** — {aderyn_result['counts']}")
     else:
         L.append(f"- Not run this cycle: {aderyn_result.get('reason')}")
         _append_raw_tail(L, aderyn_result)
     L.append("")
-    L.append("## Methodology")
-    L.append("1. Real keyless recon: GoPlus token security, DexScreener liquidity, Base RPC "
-             "on-chain presence, DeFiLlama hack-technique correlation, public web search for "
-             "reputation flags — identical pipeline to every open-source VAPE investigation.")
-    L.append("2. Etherscan V2 contract verification + full verified source (when available).")
-    L.append("3. Slither static analysis, real tool output, only if pre-installed this run.")
-    L.append("4. Halmos bounded symbolic testing against LLM-drafted check_* properties "
-             "compiled into a scaffolded Foundry project built from that same verified "
-             "source — only if forge and halmos are both installed this run.")
-    L.append("5. Mythril symbolic-execution scan of the deployed bytecode on-chain by address, "
-             "via the target chain's real public RPC — only if pre-installed this run.")
-    L.append("6. Aderyn static AST analysis of that same scaffolded Foundry project — only if "
-             "pre-installed this run and step 4's scaffolding stage was reached.")
-    L.append("7. A frontier-tier LLM reads the actual verified source and reasons per "
-             "vulnerability class — this is VAPE's deepest automated pass, still followed by "
-             "the human-verification list above.")
-    L.append("8. White-hat only: read-only analysis, no exploitation attempted.")
+    L.append("*White-hat only: the simulated attack above executes exclusively against a local, "
+             "forked simulation of on-chain state (`forge test --fork-url`) — read-only against "
+             "the real chain, no live transaction is ever broadcast.*")
     L.append("")
     if engagement == "paid":
         L.append("*This is VAPE's premium bounty-engagement tier — a submission-ready "
@@ -569,6 +676,8 @@ def run_audit(address, chain="8453", callback_url=None, engagement="paid"):
               # read this runner's local filesystem and the git commit of `report`'s
               # path happens in a later, separate CI step.
               "report_content": content,
+              "exploit_ran": bool(exploit_result.get("ran") and exploit_result.get("test_result", {}).get("ran")),
+              "exploit_passed": bool(exploit_result.get("test_result", {}).get("passed")),
               "provider": provider, "engagement": engagement}
 
     if callback_url:

@@ -69,6 +69,37 @@ padding with a generic template. Output ONLY the Solidity file contents
 (starting with '// SPDX-License-Identifier' and a pragma line) — no prose
 outside the code."""
 
+EXPLOIT_DRAFT_SYSTEM = """You are VAPE, drafting a REAL, EXECUTABLE proof-of-concept
+exploit test for a live bug-bounty submission — this is the primary deliverable of a
+paid bounty-audit engagement, not a hypothesis exercise.
+
+Given a real, verified smart contract's source (already deployed on-chain at a known
+address) and any static/symbolic-analysis findings already surfaced, write ONE Foundry
+test contract (Solidity, extending forge-std's Test) that:
+- Targets the real deployed contract directly at its actual address (declare
+  `address constant TARGET = <the given address>;` and wrap it with the real
+  interface/contract type from the given source) — the test runner supplies
+  `--fork-url` for the whole run, so real on-chain state is already live; you do not
+  need vm.createSelectFork() yourself.
+- Contains exactly one test function, test_exploit_<short_name>(), that attempts to
+  concretely exploit a real vulnerability you can point to in the given source —
+  drain funds, bypass access control, manipulate a price/oracle read, break an
+  invariant, etc. Use only real function signatures from the given source — never
+  invent an interface member that isn't shown.
+- Asserts the exploit's actual impact directly (e.g. attacker balance increased,
+  protocol balance decreased, a should-be-guarded state changed) so a passing test IS
+  the proof of impact, not a placeholder assertion.
+- If, after actually reasoning through the code, you find no concretely exploitable
+  path (this is a legitimate, honest outcome — most audited contracts are not
+  exploitable), output NO Solidity code at all: just the single line
+  `NO_EXPLOIT_FOUND: <one-sentence reason>` — never pad with a fake or trivial
+  "exploit" just to produce code.
+
+Never fabricate a function, storage layout, or balance that the given source doesn't
+actually show. Output ONLY the Solidity file contents (starting with
+'// SPDX-License-Identifier' and a pragma line) or the single NO_EXPLOIT_FOUND line —
+no prose outside of that."""
+
 
 def _sanitize_path(path):
     """Strips leading slashes/parent-dir segments from an Etherscan-supplied
@@ -174,6 +205,102 @@ def run_halmos(project_dir, timeout=600):
         return {"ran": False, "reason": "halmos not installed in this environment"}
     except subprocess.TimeoutExpired:
         return {"ran": True, "returncode": None, "output": f"halmos timed out after {timeout}s"}
+
+
+def draft_exploit_test(files, contract_name, address, extra_context=""):
+    """The one LLM-generated piece of the exploit-PoC pipeline (mirrors
+    draft_symbolic_properties()'s own role for Halmos). Returns
+    (code_or_none, provider_or_reason) — `code` is None both when the LLM is
+    unavailable AND when it honestly found no exploitable path, so callers
+    must inspect the reason string to tell those two apart if needed."""
+    source_excerpt = "\n\n".join(f"// {path}\n{content}" for path, content in list(files.items())[:5])[:20000]
+    user = f"ADDRESS: {address}\nContract: {contract_name or 'unknown'}\n\n{source_excerpt}"
+    if extra_context:
+        user += f"\n\n=== PRIOR STATIC/SYMBOLIC ANALYSIS (context only, not verified findings) ===\n{extra_context[:3000]}"
+    try:
+        code, provider = ask_frontier(EXPLOIT_DRAFT_SYSTEM, user, max_tokens=2500, temperature=0.2)
+    except Exception as e:
+        return None, f"LLM unavailable: {e}"
+    if "NO_EXPLOIT_FOUND" in code:
+        m = re.search(r"NO_EXPLOIT_FOUND:\s*(.+)", code)
+        return None, "no exploit found: " + (m.group(1).strip() if m else "no reason given")
+    match = re.search(r"```(?:solidity)?\n(.*?)```", code, re.DOTALL)
+    if match:
+        code = match.group(1)
+    return code.strip(), provider
+
+
+def run_forge_test_exploit(project_dir, fork_url, timeout=300):
+    """Actually RUNS the drafted exploit test against the real chain's forked
+    state — `--fork-url` forks for the whole test run, entirely local and
+    read-only against the real chain (no transaction is ever broadcast to
+    it), matching VAPE's white-hat-only principle. A passing test (rc 0)
+    means the drafted attack's own assertions held after its actions ran —
+    real, concrete impact evidence, not a narrative claim."""
+    try:
+        p = subprocess.run(
+            ["forge", "test", "--match-path", "test/Exploit.t.sol", "--fork-url", fork_url, "-vvv"],
+            cwd=project_dir, capture_output=True, text=True, timeout=timeout,
+        )
+        return {"ran": True, "passed": p.returncode == 0, "returncode": p.returncode,
+                "output": (p.stdout + p.stderr)[-6000:]}
+    except FileNotFoundError:
+        return {"ran": False, "reason": "forge not installed in this environment"}
+    except subprocess.TimeoutExpired:
+        return {"ran": True, "passed": False, "returncode": None,
+                "reason": f"forge test timed out after {timeout}s"}
+
+
+def scaffold_and_run_exploit_poc(address, chain_id=8453, rpc_url=None, workdir=None,
+                                  pre_fetched_src=None, extra_context=""):
+    """The primary deliverable of a paid bounty-audit engagement: a REAL,
+    forge-executed exploit proof-of-concept run against the target's actual
+    forked on-chain state — not a narrative-only description. Never raises to
+    its caller (mirrors scaffold_and_analyze()'s own honest-failure
+    convention); every stage failure is a real, reported reason.
+
+    `workdir`, when given an already-scaffolded project_dir (e.g. from a
+    prior scaffold_and_analyze() call for the same address in the same run),
+    reuses it instead of scaffolding + building a second throwaway project —
+    scaffold_project()'s file writes are idempotent so this is safe even if
+    that prior project already has its own Symbolic.t.sol test file sitting
+    alongside the new Exploit.t.sol this writes."""
+    src = pre_fetched_src if pre_fetched_src is not None else DF.get_contract_source(address, chain_id)
+    if not isinstance(src, dict) or src.get("error"):
+        reason = src.get("error") if isinstance(src, dict) else str(src)
+        return {"ran": False, "reason": f"source lookup failed: {reason}"}
+    if not src.get("verified") or not src.get("source_code"):
+        return {"ran": False, "reason": "contract unverified or no source available"}
+    if not rpc_url:
+        return {"ran": False, "reason": f"no known RPC endpoint for chain {chain_id}"}
+
+    files = parse_verified_source(src["source_code"], src.get("contract_name"))
+    if not files:
+        return {"ran": False, "reason": "verified source could not be parsed into any file"}
+
+    out_dir = workdir or tempfile.mkdtemp(prefix="vape-foundry-exploit-")
+    scaffold_project(files, src.get("compiler"), out_dir)
+
+    build = run_forge_build(out_dir)
+    if not build["ok"]:
+        return {"ran": False, "reason": "scaffolded project does not compile",
+                "forge_output": build["output"], "project_dir": out_dir}
+
+    code, provider = draft_exploit_test(files, src.get("contract_name"), address, extra_context)
+    if not code:
+        return {"ran": False, "reason": provider or "no exploit drafted", "project_dir": out_dir}
+
+    with open(os.path.join(out_dir, "test", "Exploit.t.sol"), "w", encoding="utf-8") as f:
+        f.write(code)
+
+    build2 = run_forge_build(out_dir)
+    if not build2["ok"]:
+        return {"ran": False, "reason": "LLM-drafted exploit test failed to compile",
+                "drafted_code": code, "forge_output": build2["output"], "project_dir": out_dir}
+
+    test_result = run_forge_test_exploit(out_dir, rpc_url)
+    return {"ran": True, "project_dir": out_dir, "drafted_by": provider,
+            "drafted_code": code, "test_result": test_result}
 
 
 def scaffold_and_analyze(address, chain_id=8453, workdir=None, pre_fetched_src=None):
