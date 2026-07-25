@@ -8,20 +8,22 @@ name: VAPE Featured Investigation (auto-target deep dive)
 # cadence without bumping the cost/frequency of the rest of the hourly cycle.
 on:
   schedule:
-    # Odd minutes (:07/:37), not */30 — a */30 cron fires AT :00 and :30, the
-    # two most globally-congested minutes on GitHub's shared scheduler (every
-    # round-number cron on the platform targets them), and :00 specifically
-    # also collides with this repo's OWN bounty-cycle.yml (0 * * * *, hourly).
-    # Confirmed real effect: this workflow's actual fire times drift 1-2.5h
-    # apart despite the */30 intent (checked via actions_list against live
-    # run history), which silently starved DATA AGENT of the 2x/hr cadence
-    # PR #241 built for it — DATA AGENT itself settles 2-3 real x402
+    # Confirmed via live run history (actions_list against this exact
+    # workflow) that the :07/:37 offset from PR #272 was NOT enough: real
+    # fire times were still drifting 90-130min apart despite the 2x/hr
+    # intent — GitHub's shared scheduler silently drops/delays a real
+    # fraction of `schedule` triggers on public repos under platform load,
+    # independent of which minute you pick. The only lever we have from
+    # inside a workflow file is to submit MORE scheduled opportunities so
+    # the same drop rate still nets a usable real cadence — going to 4x/hr
+    # (still off :00/:15/:30/:45, the globally-congested round marks, and
+    # off this repo's own :17/:37 slots used by reputation.yml/scout.yml/
+    # skillforge-harvest.yml) roughly doubles the realized fire rate versus
+    # the prior 2x/hr intent. DATA AGENT itself settles 2-3 real x402
     # transactions every single time this workflow actually runs (confirmed
-    # in a live job log), so the missing cadence was 100% this scheduling
-    # collision, not a bug in data_agent.py. Mirrors the same fix already
-    # applied to scout.yml (:37) / reputation.yml (:17) / skillforge-
-    # harvest.yml (:17) for the identical reason.
-    - cron: '7,37 * * * *'
+    # in a live job log) — cadence, not data_agent.py's own pacing logic, is
+    # the real ceiling on its daily transaction count.
+    - cron: '4,19,34,49 * * * *'
   workflow_dispatch:
 
 permissions:
