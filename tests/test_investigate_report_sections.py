@@ -30,8 +30,8 @@ def test_project_links_rendered_from_dexscreener_data(tmp_path, monkeypatch):
     )
     content = open(path).read()
     assert "## Project Links (as declared on DexScreener)" in content
-    assert "https://arena.social" in content
-    assert "twitter: https://x.com/TheArenaApp" in content
+    assert "- Website: https://arena.social" in content
+    assert "- twitter: https://x.com/TheArenaApp" in content
 
 
 def test_project_links_honest_when_absent(tmp_path, monkeypatch):
@@ -90,9 +90,9 @@ def test_sources_section_links_explorer_dexscreener_and_coingecko(tmp_path, monk
     )
     content = open(path).read()
     assert "## Sources & Verification Links" in content
-    assert f"https://snowtrace.io/address/{target}" in content
-    assert "https://dexscreener.com/avalanche/0xpair" in content
-    assert "https://www.coingecko.com/en/coins/arena-2" in content
+    assert f"- Block explorer: https://snowtrace.io/address/{target}" in content
+    assert "- DexScreener pair: https://dexscreener.com/avalanche/0xpair" in content
+    assert "- CoinGecko: https://www.coingecko.com/en/coins/arena-2" in content
 
 
 def test_sources_section_omits_missing_links_gracefully(tmp_path, monkeypatch):
