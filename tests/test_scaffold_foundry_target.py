@@ -241,8 +241,33 @@ def test_scaffold_project_declared_remapping_takes_precedence(tmp_path):
     sft.scaffold_project(files, "v0.8.19+commit.7dd6d404", str(tmp_path),
                           declared_remappings=["@openzeppelin/=dependencies/oz/"])
     toml = (tmp_path / "foundry.toml").read_text()
-    assert "@openzeppelin/=dependencies/oz/" in toml
+    assert "@openzeppelin/=src/dependencies/oz/" in toml
     assert "dependencies/=src/dependencies/" in toml
+
+
+def test_scaffold_project_declared_remapping_path_gets_src_prefix(tmp_path):
+    """Real bug this pins (live DIEM validation run, 2026-07-25T13:22Z,
+    post-declared-remappings-fix but pre-this-fix): a declared remapping's
+    path is relative to whatever root the ORIGINAL verified project
+    compiled from, but scaffold_project() always writes every bundled file
+    under out_dir/src/ (see the `files` loop above) — using the declared
+    path verbatim resolved to out_dir/dependencies/@openzeppelin.../ (the
+    actual real forge error: "No such file or directory") instead of where
+    the file really landed, out_dir/src/dependencies/@openzeppelin.../.
+    Every declared remapping's path needs the same 'src/' prefix
+    _generate_remappings() already gives its own path-derived remappings."""
+    files = {
+        "dependencies/@openzeppelin-contracts-5.2.0-rc.1/token/ERC20/ERC20.sol": "contract ERC20 {}",
+    }
+    sft.scaffold_project(
+        files, "v0.8.26", str(tmp_path),
+        declared_remappings=["@openzeppelin-contracts-5.2.0-rc.1/=dependencies/@openzeppelin-contracts-5.2.0-rc.1/"],
+    )
+    toml = (tmp_path / "foundry.toml").read_text()
+    assert "@openzeppelin-contracts-5.2.0-rc.1/=src/dependencies/@openzeppelin-contracts-5.2.0-rc.1/" in toml
+    # The file must actually exist at the path the fixed remapping now points to.
+    resolved = tmp_path / "src" / "dependencies" / "@openzeppelin-contracts-5.2.0-rc.1" / "token" / "ERC20" / "ERC20.sol"
+    assert resolved.is_file()
 
 
 def test_scaffold_project_no_declared_remappings_falls_back_to_derived(tmp_path):
