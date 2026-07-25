@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T21:46:34Z",
+  "generated": "2026-07-25T22:01:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 335,
+    "investigations": 336,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-214633-0x271415A0.md",
-      "title": "Investigation \u2014 VC",
-      "symbol": "VC",
-      "name": "Vibe Coding",
-      "date": "2026-07-25T21:46:33Z",
-      "target": "0x271415A029602f9c370D022aDEba703F172c79fF",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 105% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $36,417; [-15] Contract source UNVERIFIED. Positive evidence: Trading 108+ days without a known incident in this scan.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-214633-0x271415A0.md"
+      "file": "investigation-20260725-220151-0x2A168c00.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "Cheatmoon",
+      "date": "2026-07-25T22:01:51Z",
+      "target": "0x2A168c00310451E7024E1149A433c796c72d515D",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "38",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbe1769f3d571108cc79a9a2045bfa547e6516114) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-220151-0x2A168c00.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-220151-0x2A168c00.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "Cheatmoon",
+      "date": "2026-07-25T22:01:51Z",
+      "target": "0x2A168c00310451E7024E1149A433c796c72d515D",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "38",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbe1769f3d571108cc79a9a2045bfa547e6516114) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-220151-0x2A168c00.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-214633-0x271415A0.md",
@@ -593,20 +607,6 @@
       "score": "53",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Low liquidity $18,329. Positive evidence: 632 holders \u2014 reasonably distributed; Trading 486+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-042407-0x2614f29C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-010123-0x00000000.md",
-      "title": "Investigation \u2014 ETH",
-      "symbol": "ETH",
-      "name": "Ether",
-      "date": "2026-07-24T01:01:23Z",
-      "target": "0x0000000000000000000000000000000000000000",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-15] Contract source UNVERIFIED; [note] address has no contract code (EOA or not deployed). Positive evidence: Deep liquidity ($33,461,054); Trading 545+ days without a known incident in this scan; DefiLlama has priced this token for 4004+ days ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-010123-0x00000000.md"
     }
   ],
   "reports": [
