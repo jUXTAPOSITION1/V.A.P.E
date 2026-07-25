@@ -66,6 +66,28 @@ def test_tokenomics_rendered_from_coingecko_contract(tmp_path, monkeypatch):
     assert "The Arena is a SocialFi platform." in content
 
 
+def test_market_section_shows_liquidity_market_cap_ratio_when_both_known(tmp_path, monkeypatch):
+    monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
+    gp, dex, onchain, verif = _base_args()  # liquidity_usd=239369
+    cg = {"market_cap_usd": 5_500_000}
+    path, _sym, _emoji = inv.write_report(
+        "0x" + "aa" * 20, "43114", gp, dex, onchain, verif, [], 100, "PROCEED", [], [],
+        coingecko_contract=cg,
+    )
+    content = open(path).read()
+    assert "Liquidity/Market-cap ratio: 4.4% — reasonable depth for its size" in content
+
+
+def test_market_section_omits_ratio_when_market_cap_unknown(tmp_path, monkeypatch):
+    monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
+    gp, dex, onchain, verif = _base_args()
+    path, _sym, _emoji = inv.write_report(
+        "0x" + "aa" * 20, "43114", gp, dex, onchain, verif, [], 100, "PROCEED", [], [],
+    )
+    content = open(path).read()
+    assert "Liquidity/Market-cap ratio" not in content
+
+
 def test_tokenomics_honest_when_coingecko_untracked(tmp_path, monkeypatch):
     monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
     gp, dex, onchain, verif = _base_args()

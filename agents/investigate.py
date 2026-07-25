@@ -334,7 +334,12 @@ def contract_verification(address, chain="8453"):
                     "name": _sanitize_symbol(r.get("ContractName")),
                     "compiler": r.get("CompilerVersion") or None,
                     "proxy": r.get("Proxy") == "1",
-                    "implementation": r.get("Implementation") or None}
+                    "implementation": r.get("Implementation") or None,
+                    # Raw verified source — see _scan_privileged_functions()'s
+                    # docstring for why this is now passed through instead
+                    # of discarded (same already-fetched-but-unused pattern
+                    # as this session's other fixes).
+                    "source_code": r.get("SourceCode") or None}
         except Exception:
             return {"checked": True, "verified": None}
     r = DF.get_contract_source(address, chainid=chain)
@@ -344,7 +349,54 @@ def contract_verification(address, chain="8453"):
             "name": _sanitize_symbol(r.get("contract_name")),
             "compiler": r.get("compiler"),
             "proxy": r.get("proxy"),
-            "implementation": r.get("implementation")}
+            "implementation": r.get("implementation"),
+            "source_code": r.get("source_code")}
+
+
+# Notable/privileged-sounding function name substrings — informational only
+# (see _scan_privileged_functions()'s docstring for why this never feeds
+# score() penalties). Not exhaustive; a text-based name scan can't tell a
+# genuinely dangerous mint() apart from a standard, harmless one — this is
+# a transparency aid pointing a human reader at what to go look at, not a
+# verdict.
+_PRIVILEGED_FUNCTION_PATTERNS = (
+    "mint", "burn", "pause", "blacklist", "whitelist", "setfee",
+    "settax", "withdraw", "rescue", "sweep", "seize", "confiscate",
+    "transferownership", "renounceownership", "setowner", "upgradeto",
+    "setimplementation",
+)
+_FUNCTION_NAME_RE = re.compile(r"\bfunction\s+([A-Za-z_]\w*)\s*\(")
+
+
+def _scan_privileged_functions(source_code):
+    """Deterministic, non-LLM scan of already-fetched verified source code
+    (contract_verification()'s source_code field) for notable/privileged-
+    sounding function names and known dangerous patterns (selfdestruct,
+    delegatecall). Real gap this closes: the user flagged "no insight into
+    constructor plus any role or treasury functions... even though
+    ownership renounced now" as missing from a live report (investigation-
+    20260725-155143-0xB8d7710f.md).
+
+    Deliberately kept purely informational — surfaced in the report, never
+    fed into score(). A text-based function-name match can't distinguish a
+    genuinely dangerous privileged function from a standard, harmless one
+    with a similar name (e.g. a compliant stablecoin's own mint()), so
+    treating this as a scoring signal would risk exactly the kind of
+    false-positive noise this repo's existing GoPlus-flag-based penalties
+    are built to avoid. Returns None if no source is available."""
+    if not source_code or not isinstance(source_code, str):
+        return None
+    names_seen = set()
+    for m in _FUNCTION_NAME_RE.finditer(source_code):
+        name = m.group(1)
+        if any(p in name.lower() for p in _PRIVILEGED_FUNCTION_PATTERNS):
+            names_seen.add(name)
+    low_src = source_code.lower()
+    return {
+        "functions": sorted(names_seen),
+        "has_selfdestruct": "selfdestruct(" in low_src or "suicide(" in low_src,
+        "has_delegatecall": "delegatecall(" in low_src,
+    }
 
 
 def hack_correlation(gp):
@@ -946,33 +998,66 @@ _RISK_CATEGORIES = (
 )
 
 
+def _bucket_for_report_reason(text):
+    """First category (in _RISK_CATEGORIES' declared order) whose keyword
+    appears in `text`, or "Other" if none match. Shared by
+    _categorize_report_reasons() and _category_subscores() below so the two
+    views (which flags/signals landed where, and each category's derived
+    sub-score) can never silently drift apart."""
+    low = text.lower()
+    for name, keywords in _RISK_CATEGORIES:
+        if any(k in low for k in keywords):
+            return name
+    return "Other"
+
+
 def _categorize_report_reasons(reasons, positive_signals):
     """Buckets score()'s already-computed reasons/positive_signals into
     named risk categories, purely for report presentation — no new data
     fetched, no scoring change; the multi-dimensional "how does this rank"
     view requested directly by the user, built from what score() already
-    produces. Keyword-matched (first category whose keyword appears in the
-    lowercased text wins); anything matching none of the buckets lands in
-    "Other". Never raises — an unexpected reason string just falls through
+    produces. Never raises — an unexpected reason string just falls through
     to "Other" rather than crashing report generation."""
     buckets = {name: {"flags": [], "signals": []} for name, _ in _RISK_CATEGORIES}
     buckets["Other"] = {"flags": [], "signals": []}
-
-    def _bucket_for(text):
-        low = text.lower()
-        for name, keywords in _RISK_CATEGORIES:
-            if any(k in low for k in keywords):
-                return name
-        return "Other"
-
     for r in reasons or []:
-        buckets[_bucket_for(r)]["flags"].append(r)
+        buckets[_bucket_for_report_reason(r)]["flags"].append(r)
     for p in positive_signals or []:
-        buckets[_bucket_for(p)]["signals"].append(p)
+        buckets[_bucket_for_report_reason(p)]["signals"].append(p)
     # Preserve category declaration order, then "Other" last; drop empty ones.
     ordered_names = [name for name, _ in _RISK_CATEGORIES] + ["Other"]
     return [(name, buckets[name]) for name in ordered_names
             if buckets[name]["flags"] or buckets[name]["signals"]]
+
+
+# Matches score()'s own flag()/stablecoin-refund reason-string convention:
+# "[-N] ..." for a penalty, "[+N] ..." for the stablecoin-exception refund.
+# Does NOT match "[capped at N] ..." (the global legitimacy cap) — that's a
+# whole-score adjustment, not attributable to any one category.
+_REASON_WEIGHT_RE = re.compile(r"^\[([+-])(\d+)\]")
+
+
+def _category_subscores(reasons):
+    """Best-effort, clearly-derived per-category sub-scores for the
+    Executive Summary's composite ranking view (the user's explicit ask:
+    "Security 95/100, Fundamentals 70/100, Tokenomics 60/100 -> overall
+    rank"). NOT a second scoring engine — score() never computes categories
+    in isolation (some penalties interact with the overall legitimacy cap
+    that this simple per-category net can't see), so this is a readability
+    aid, not an independent source of truth; the real score/verdict from
+    score() remains authoritative and is always shown alongside it. Starts
+    every one of the 4 fixed categories at 100 and nets each of its own
+    weighted reasons against that, clamped to [0, 100]."""
+    totals = {name: 100 for name, _ in _RISK_CATEGORIES}
+    for r in reasons or []:
+        m = _REASON_WEIGHT_RE.match(r)
+        if not m:
+            continue
+        delta = int(m.group(2)) * (1 if m.group(1) == "+" else -1)
+        name = _bucket_for_report_reason(r)
+        if name in totals:
+            totals[name] += delta
+    return {name: max(0, min(100, totals[name])) for name in totals}
 
 
 # ── report + persistence ────────────────────────────────────────────────────
@@ -1017,6 +1102,26 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append(f"- **Verdict:** {verdict} ({s}/100)")
     L.append("")
     L.append("---")
+    L.append("")
+    # Real gap this closes: a single flat score/verdict doesn't show WHERE a
+    # token is strong vs. weak, and there was no top-level composite view at
+    # all — the user's explicit template ask ("Executive Summary + Overall
+    # Ranking Score, composite with category breakdown ... -> overall
+    # rank"). Derived entirely from score()'s own output (see
+    # _category_subscores()'s docstring for why this is a presentation aid,
+    # not a second scoring engine) — the authoritative score/verdict above
+    # is unchanged either way.
+    L.append("## Executive Summary")
+    L.append(f"**Overall: {verdict} ({s}/100)**")
+    L.append("")
+    L.append("| Category | Score |")
+    L.append("|---|---|")
+    for name, sub in _category_subscores(reasons).items():
+        L.append(f"| {name} | {sub}/100 |")
+    L.append("")
+    L.append("*Category scores are a derived readability aid (net effect of that "
+             "category's own flags against a 100 baseline) — the Overall score above, "
+             "computed by the full scoring engine, is the authoritative verdict.*")
     L.append("")
     L.append("## Verdict Rationale (risk factors)")
     if reasons:
@@ -1069,6 +1174,21 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- 24h Volume: ${dex.get('vol_24h_usd')}")
         L.append(f"- 24h Change: {dex.get('change_24h_pct')}%")
         L.append(f"- DEX: {dex.get('dex')}")
+        # Real gap this closes: liquidity and market cap were both already
+        # fetched (DexScreener + CoinGecko contract lookup, the same call
+        # already used for the Tokenomics section below) but the ratio
+        # between them -- a standard "how deep is this market relative to
+        # its size" metric -- was never computed. Only shown when both real
+        # numbers are on hand; never estimated.
+        try:
+            liq_val = float(dex.get("liquidity_usd") or 0)
+        except (TypeError, ValueError):
+            liq_val = 0
+        mcap_val = coingecko_contract.get("market_cap_usd") if isinstance(coingecko_contract, dict) else None
+        if liq_val > 0 and isinstance(mcap_val, (int, float)) and mcap_val > 0:
+            ratio_pct = (liq_val / mcap_val) * 100
+            L.append(f"- Liquidity/Market-cap ratio: {ratio_pct:.1f}% — "
+                     f"{'thin relative to market cap' if ratio_pct < 3 else 'reasonable depth for its size'}")
     else:
         L.append("- No DEX pair data (illiquid / not listed).")
     L.append("")
@@ -1184,6 +1304,26 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- Verified: {verif.get('verified')}")
         L.append(f"- Name: {verif.get('name')} · Compiler: {verif.get('compiler')}")
         L.append(f"- Proxy: {verif.get('proxy')} · Implementation: {verif.get('implementation')}")
+        # Real gap this closes: the verified source was already fetched
+        # (same call, no extra API cost) but discarded -- the user flagged
+        # "no insight into constructor plus any role or treasury functions"
+        # as missing from a live report. Purely informational: a text-based
+        # function-name scan can't tell a dangerous privileged function
+        # apart from a harmless one with a similar name, so this is never
+        # fed into score() (see _scan_privileged_functions()'s docstring).
+        scan = _scan_privileged_functions(verif.get("source_code"))
+        if scan:
+            if scan["functions"]:
+                L.append(f"- Notable functions found in verified source (informational, not scored): "
+                         f"{', '.join(scan['functions'])}")
+            else:
+                L.append("- No notable privileged-sounding function names found in verified source.")
+            if scan["has_selfdestruct"]:
+                L.append("- ⚠️ Verified source contains a `selfdestruct`-family call.")
+            if scan["has_delegatecall"]:
+                L.append("- Verified source contains `delegatecall` (expected for proxies; worth a manual look otherwise).")
+        else:
+            L.append("- Verified source not available to scan this cycle.")
     else:
         L.append(f"- {verif.get('note', 'not checked')}")
     L.append("")
