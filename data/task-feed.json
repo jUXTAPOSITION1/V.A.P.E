@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-25T21:31:22Z",
-  "synthesis": "UT bounty",
+  "generated": "2026-07-25T21:46:35Z",
+  "synthesis": "`\n    *",
   "tasks": [
+    {
+      "sha": "fc5ff13820",
+      "kind": "sweep",
+      "message": "base_sweep 2026-07-25T21:45Z",
+      "date": "2026-07-25T21:45:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fc5ff138208ca12c06b75a337ad3cb3f286c9d90"
+    },
+    {
+      "sha": "b49d39fe4a",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-25T21:33Z",
+      "date": "2026-07-25T21:33:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b49d39fe4a06d32e23a4e166a10f7daba5ecd2a2"
+    },
+    {
+      "sha": "e63e3fc018",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T21:31Z",
+      "date": "2026-07-25T21:31:26Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e63e3fc018675e6c1e4859342f7bac85b0e6f705"
+    },
     {
       "sha": "8d2396d3db",
       "kind": "bounty-radar",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-25T19:59Z",
       "date": "2026-07-25T19:59:05Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3f064cb15e958ad6dfc5a21d85ee1d0a269d135e"
-    },
-    {
-      "sha": "cd0deb3f1e",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-25T19:51Z",
-      "date": "2026-07-25T19:51:21Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/cd0deb3f1ef240710daf1b14b565df3e3d3a5ef6"
-    },
-    {
-      "sha": "fc1f25a722",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-25T19:43Z",
-      "date": "2026-07-25T19:43:47Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fc1f25a722fc5c7e22f3ff5081000ffc68c4dac9"
-    },
-    {
-      "sha": "f32578c908",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-25T19:41Z",
-      "date": "2026-07-25T19:41:22Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f32578c90875c5e09750b15f25abfe96c32d4459"
     }
   ]
 }

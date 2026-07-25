@@ -1909,6 +1909,25 @@
     "symbol": "VORF",
     "times_investigated": 1
   },
+  "8453:0x271415a029602f9c370d022adeba703f172c79ff": {
+    "address": "0x271415A029602f9c370D022aDEba703F172c79fF",
+    "chain": "8453",
+    "creator_address": "0x23d8a839d8e392a341d167d3bdd0fc69f3c85b0e",
+    "first_investigated": "2026-07-25T21:46:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-214633-0x271415A0.md",
+        "score": 60,
+        "ts": "2026-07-25T21:46:33Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T21:46:33Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "VC",
+    "times_investigated": 1
+  },
   "8453:0x28ce689e12d8d9ff18651e8684aac88f1334fb07": {
     "address": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
     "chain": "8453",
