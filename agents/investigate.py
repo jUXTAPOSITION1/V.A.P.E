@@ -249,8 +249,31 @@ def onchain_presence(address, chain="8453"):
     # is_contract/code_size, or worse, coincidentally real-looking bytecode
     # for an unrelated Base contract at the same address).
     rpc_url = (EVM_CHAINS.get(str(chain)) or {}).get("rpc", BASE_RPC)
-    code = _rpc("eth_getCode", [address, "latest"], rpc_url=rpc_url)
-    c = code.get("result", "0x") if isinstance(code, dict) else "0x"
+    # Real, confirmed bug this fixes (2026-07-25, from a live report:
+    # audit-deep-dive-virtual-2026-07-23.md reported the real, heavily-
+    # traded VIRTUAL token contract as an EOA with zero code): _rpc() had
+    # no retries at all, and ANY failure (timeout, rate limit, a transient
+    # RPC error) returns {"error": ...} with no "result" key — which
+    # code.get("result", "0x") silently defaulted to "0x", indistinguishable
+    # from a real, confirmed "no code here" response. A single free public
+    # RPC hiccup was enough to make a real contract permanently look like a
+    # non-existent EOA in the report, with no sign anything had gone wrong.
+    # Now retried like every other network call in this module
+    # (_get_with_retries()'s same backoff pattern), and a still-failing call
+    # returns an explicit is_contract=None ("unknown", not "confirmed EOA")
+    # rather than a fabricated False — callers already check
+    # `is_contract is False` (strict identity, e.g. score()'s own check
+    # below), so None correctly never triggers the "no contract code" path.
+    code = None
+    for attempt in range(3):
+        code = _rpc("eth_getCode", [address, "latest"], rpc_url=rpc_url)
+        if isinstance(code, dict) and "result" in code:
+            break
+        time.sleep(0.4 * (attempt + 1))
+    if not isinstance(code, dict) or "result" not in code:
+        err = code.get("error") if isinstance(code, dict) else "RPC call failed"
+        return {"is_contract": None, "code_size_bytes": None, "error": err or "RPC call failed"}
+    c = code.get("result", "0x")
     return {"is_contract": bool(c and c != "0x"), "code_size_bytes": max(0, (len(c) - 2) // 2)}
 
 
@@ -894,8 +917,11 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append("- GoPlus returned no security profile for this token.")
     L.append("")
     L.append(f"## On-chain Presence ({chain_display} RPC)")
-    L.append(f"- Is contract: {onchain.get('is_contract')}")
-    L.append(f"- Code size: {onchain.get('code_size_bytes')} bytes")
+    if onchain.get("is_contract") is None:
+        L.append(f"- Is contract: unavailable this cycle ({onchain.get('error', 'RPC call failed')})")
+    else:
+        L.append(f"- Is contract: {onchain.get('is_contract')}")
+        L.append(f"- Code size: {onchain.get('code_size_bytes')} bytes")
     L.append("")
     L.append("## Contract Verification")
     if verif.get("checked"):

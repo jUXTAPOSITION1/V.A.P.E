@@ -166,10 +166,21 @@ def _run_mythril(address, chain, timeout=200):
     (agents/investigate.py::EVM_CHAINS). Mythril's --rpc flag takes a bare
     HOST:PORT (confirmed against its real CLI source, mythril/interfaces/
     cli.py — there is no --rpc-url flag), so the chain's RPC URL is parsed
-    down to host:port here; --rpctls is passed whenever that RPC is https.
-    --execution-timeout is set well under the outer subprocess timeout as a
-    backstop against a documented Mythril bug where it doesn't always respect
-    its own internal timeout."""
+    down to host:port here. --rpctls is declared `type=bool` in Mythril's
+    own argparse setup (mythril/interfaces/cli.py's get_rpc_parser()) —
+    NOT `action="store_true"` — so it always consumes the next argv token
+    as its value; a bare `--rpctls` with nothing after it is a real,
+    confirmed argparse error ("--rpctls: expected one argument"), which is
+    exactly what every deep-dive audit against an https RPC (i.e. every
+    real chain in agents/investigate.py::EVM_CHAINS) hit before this fix —
+    Mythril has never once successfully run in production. Always pass an
+    explicit value now; Mythril's own argparse `type=bool` coerces ANY
+    non-empty string to True (a well-known argparse footgun, not something
+    this code can work around), so "True"/"False" both just need to be
+    non-empty, but pass the semantically correct one anyway. --execution-
+    timeout is set well under the outer subprocess timeout as a backstop
+    against a documented Mythril bug where it doesn't always respect its
+    own internal timeout."""
     if not shutil.which("myth"):
         return {"ran": False, "reason": "mythril (myth) not installed in this environment this run"}
     chain_info = inv.EVM_CHAINS.get(str(chain))
@@ -184,7 +195,7 @@ def _run_mythril(address, chain, timeout=200):
     cmd = ["myth", "analyze", "-a", address, "--rpc", f"{host}:{port}",
            "--execution-timeout", "90", "-o", "jsonv2"]
     if parsed.scheme == "https":
-        cmd.append("--rpctls")
+        cmd += ["--rpctls", "True"]
     try:
         p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
         try:

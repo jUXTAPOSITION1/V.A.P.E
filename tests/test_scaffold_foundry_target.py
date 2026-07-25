@@ -120,6 +120,33 @@ def test_scaffold_project_handles_empty_files_dict(tmp_path):
     assert (tmp_path / "src").is_dir()
     assert (tmp_path / "test").is_dir()
     assert (tmp_path / "foundry.toml").exists()
+    toml = (tmp_path / "foundry.toml").read_text()
+    assert "remappings = []" in toml
+
+
+def test_scaffold_project_writes_remapping_for_bundled_library_import():
+    """Real gap this covers (audit-deep-dive-diem-2026-07-21.md): Etherscan's
+    multi-file verified source bundles an imported library (e.g.
+    OpenZeppelin) under a `sources` key that IS the literal absolute import
+    path used elsewhere — forge needs an explicit remapping to resolve that
+    import to where scaffold_project() actually wrote the file, or
+    `forge build` fails outright with "File not found... Searched the
+    following locations: ''" before Halmos/Aderyn ever get a chance to run."""
+    files = {
+        "contracts/Token.sol": 'import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";\ncontract Token {}',
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol": "contract ERC20 {}",
+    }
+    remappings = sft._generate_remappings(files)
+    assert "@openzeppelin/=src/@openzeppelin/" in remappings
+    assert "contracts/=src/contracts/" in remappings
+
+
+def test_generate_remappings_ignores_single_file_at_root():
+    assert sft._generate_remappings({"Token.sol": "contract Token {}"}) == []
+
+
+def test_generate_remappings_empty_input_returns_empty():
+    assert sft._generate_remappings({}) == []
 
 
 # ── run_forge_build / run_halmos fallback paths ─────────────────────────────

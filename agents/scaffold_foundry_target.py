@@ -54,6 +54,7 @@ test = "test"
 out = "out"
 libs = ["lib"]
 solc_version = "{solc_version}"
+remappings = {remappings}
 """
 # Deliberately no `ffi = true` and no `fs_permissions` entry above — Foundry
 # denies both the ffi and filesystem cheatcodes by default unless a profile
@@ -168,11 +169,40 @@ def _compiler_to_solc_version(compiler):
     return "0.8.19"
 
 
+def _generate_remappings(files):
+    """One remapping per distinct top-level path segment among the verified
+    source's own file paths, e.g. '@openzeppelin/=src/@openzeppelin/'.
+
+    Real, previously-live bug this fixes (confirmed against a real report,
+    audit-deep-dive-diem-2026-07-21.md): Etherscan's Standard JSON Input
+    (parse_verified_source()'s multi-file branch above) bundles every file
+    the compiler actually used — including imported libraries like
+    OpenZeppelin — under a `sources` key that IS the literal absolute
+    import path used elsewhere in the bundle (e.g.
+    '@openzeppelin/contracts/token/ERC20/ERC20.sol'). scaffold_project()
+    below writes each file to src/<that same path>, but forge only
+    auto-remaps its own lib/ folder convention, not arbitrary paths under
+    src/ — so any contract importing a bundled library this way (the
+    overwhelmingly common case for real tokens) failed `forge build`
+    outright with "File not found... Searched the following locations: ''"
+    (zero remappings ever existed), cascading into Halmos AND Aderyn being
+    skipped for that entire audit regardless of whether either tool was
+    actually installed. A relative import (e.g. `import "./Helper.sol"`)
+    is resolved by solc relative to the importing file's own directory and
+    is unaffected by remappings, so generating one for every top-level
+    segment is safe — it only ever helps an absolute import resolve, never
+    interferes with a relative one."""
+    segments = sorted({relpath.split("/", 1)[0] for relpath in files if "/" in relpath})
+    return [f"{seg}/=src/{seg}/" for seg in segments]
+
+
 def scaffold_project(files, compiler_version, out_dir):
-    """Writes verified source into out_dir/src/ plus a minimal foundry.toml.
-    An empty `files` dict still scaffolds a valid (source-less) project —
-    the next real step (forge build) is what honestly fails on that, rather
-    than this function silently declaring success on nothing."""
+    """Writes verified source into out_dir/src/ plus a minimal foundry.toml
+    (including remappings for any bundled-library import paths — see
+    _generate_remappings() above). An empty `files` dict still scaffolds a
+    valid (source-less) project — the next real step (forge build) is what
+    honestly fails on that, rather than this function silently declaring
+    success on nothing."""
     src_dir = os.path.join(out_dir, "src")
     os.makedirs(src_dir, exist_ok=True)
     os.makedirs(os.path.join(out_dir, "test"), exist_ok=True)
@@ -182,7 +212,10 @@ def scaffold_project(files, compiler_version, out_dir):
         with open(full, "w", encoding="utf-8") as f:
             f.write(content)
     with open(os.path.join(out_dir, "foundry.toml"), "w", encoding="utf-8") as f:
-        f.write(FOUNDRY_TOML_TEMPLATE.format(solc_version=_compiler_to_solc_version(compiler_version)))
+        f.write(FOUNDRY_TOML_TEMPLATE.format(
+            solc_version=_compiler_to_solc_version(compiler_version),
+            remappings=json.dumps(_generate_remappings(files)),
+        ))
     return out_dir
 
 
