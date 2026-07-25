@@ -18,3 +18,4 @@
 {"ts": "2026-07-25T19:43:44.343322Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "exploit_check"}
 {"ts": "2026-07-25T20:29:43.289119Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-07-25T20:44:55.613378Z", "address": "0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa", "chain": "1", "symbol": "TRUMP28", "name": "TRUMP28", "source": "evm", "offering": "token_safety_check"}
+{"ts": "2026-07-25T21:00:19.818957Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "token_intel"}

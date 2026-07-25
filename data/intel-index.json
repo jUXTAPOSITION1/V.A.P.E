@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T20:44:55Z",
+  "generated": "2026-07-25T21:00:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 414,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 331,
+    "investigations": 332,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-204449-0x55f622B7.md",
-      "title": "Investigation \u2014 SHIB",
-      "symbol": "SHIB",
-      "name": "SHIBA INU",
-      "date": "2026-07-25T20:44:49Z",
-      "target": "0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0",
+      "file": "investigation-20260725-210013-0x279a9C40.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-07-25T21:00:13Z",
+      "target": "0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x75F16b63e8f94F91dbc924845Aa42093396283e8) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-204449-0x55f622B7.md"
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SHIB (0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-210013-0x279a9C40.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-210013-0x279a9C40.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-07-25T21:00:13Z",
+      "target": "0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SHIB (0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-210013-0x279a9C40.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-204449-0x55f622B7.md",
@@ -593,20 +607,6 @@
       "score": "72",
       "summary": "Risk factors: [-10] Owner not renounced (0x36bcc86f3ff09ae379c1db8a33ad88fb117232f5) \u2014 can still act on the contract; [-8] Low holder count (97); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 885+ days without a known incident ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-211733-0x9A27f0A9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-193951-0xC720078b.md",
-      "title": "Investigation \u2014 USDT",
-      "symbol": "USDT",
-      "name": "USDT",
-      "date": "2026-07-23T19:39:51Z",
-      "target": "0xC720078b43083B0962467fde30B6517AC00F770f",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2000 holders \u2014 reasonably distributed; Trading 184+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-193951-0xC720078b.md"
     }
   ],
   "reports": [
