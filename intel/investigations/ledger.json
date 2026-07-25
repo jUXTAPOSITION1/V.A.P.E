@@ -684,6 +684,25 @@
     "symbol": "ASSET",
     "times_investigated": 1
   },
+  "1:0xe9a53c43a0b58706e67341c4055de861e29ee943": {
+    "address": "0xe9A53C43a0B58706e67341C4055de861e29Ee943",
+    "chain": "1",
+    "creator_address": "0xdc0364230f2552734384fa346e82904f49633ff2",
+    "first_investigated": "2026-07-25T00:12:51Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-001251-0xe9A53C43.md",
+        "score": 65,
+        "ts": "2026-07-25T00:12:51Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T00:12:51Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "ELMNT",
+    "times_investigated": 1
+  },
   "1:0xec6432b90e7fd4d9f872cc5c781f05b617db861e": {
     "address": "0xec6432B90e7fD4d9f872cc5C781f05B617DB861E",
     "chain": "1",

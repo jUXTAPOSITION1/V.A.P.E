@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T00:08:10Z",
+  "generated": "2026-07-25T00:13:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 402,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 106,
-    "investigations": 306,
+    "investigations": 307,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260724-223827-0xac531Eb2.md",
-      "title": "Investigation \u2014 SAND",
-      "symbol": "SAND",
-      "name": "SAND",
-      "date": "2026-07-24T22:38:27Z",
-      "target": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260725-001251-0xe9A53C43.md",
+      "title": "Investigation \u2014 ELMNT",
+      "symbol": "ELMNT",
+      "name": "Element 280",
+      "date": "2026-07-25T00:12:51Z",
+      "target": "0xe9A53C43a0B58706e67341C4055de861e29Ee943",
+      "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x18987794f808ee72ae9127058f1c7d079736ca45) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2206 holders \u2014 reasonably distributed; Custom verified",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-223827-0xac531Eb2.md"
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $7,927 (rug/illiquid); [-10] Low liquidity $7,927. Positive evidence: Ownership renounced; 747 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-001251-0xe9A53C43.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-001251-0xe9A53C43.md",
+      "title": "Investigation \u2014 ELMNT",
+      "symbol": "ELMNT",
+      "name": "Element 280",
+      "date": "2026-07-25T00:12:51Z",
+      "target": "0xe9A53C43a0B58706e67341C4055de861e29Ee943",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $7,927 (rug/illiquid); [-10] Low liquidity $7,927. Positive evidence: Ownership renounced; 747 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-001251-0xe9A53C43.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260724-223827-0xac531Eb2.md",
@@ -593,20 +607,6 @@
       "score": "17",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZORS (0x5110EE173d24Cc03c1E836c2558C3dDaABC485bf) \u2014 CAUTION 55/100 \u2014 likely the same serial campaign; [-8] Low holder count (56); [-25] Very low liquidity $2,397 (rug/illiquid); [-10] Low liquidity $2,397; [-10] No known third-party audit o",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-151314-0xc2B8C664.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-125936-0x6E88056E.md",
-      "title": "Investigation \u2014 DEXE",
-      "symbol": "DEXE",
-      "name": "Dexe",
-      "date": "2026-07-21T12:59:36Z",
-      "target": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 47310 holders \u2014 reasonably distributed; Trading 776+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 2114+ days \u2014 independent longevity corrobor",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-125936-0x6E88056E.md"
     }
   ],
   "reports": [

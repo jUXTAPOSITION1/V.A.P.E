@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-24T22:38:27Z — 41 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-25T00:12:51Z — 42 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ELMNT | Ethereum | `0xe9A53C43a0B58706e67341C4055de861e29Ee943` | 65/100 | 1 | 2026-07-25T00:12:51Z |
 | SAND | Base | `0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF` | 57/100 | 1 | 2026-07-24T22:38:27Z |
 | PLAY | Base | `0x7404AC09aDf614603D9c16a7CE85A1101F3514ba` | 55/100 | 1 | 2026-07-24T17:46:46Z |
 | HLX | Ethereum | `0x2614f29C39dE46468A921Fd0b41fdd99A01f2EDf` | 53/100 | 1 | 2026-07-24T04:24:07Z |
