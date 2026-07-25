@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T22:17:00Z",
+  "generated": "2026-07-25T22:48:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 337,
+    "investigations": 338,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-221656-0x1F514A61.md",
-      "title": "Investigation \u2014 TAROT",
-      "symbol": "TAROT",
-      "name": "Tarot",
-      "date": "2026-07-25T22:16:56Z",
-      "target": "0x1F514A61bcde34F94Bc39731235690ab9da737F7",
-      "chain": "10 (Optimism)",
-      "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x5b0390bccca1f040d8993eb6e4ce8ded93721765) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated. Positive evidence: 2449 holders \u2014 reasonably distributed; Trading 957+ ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-221656-0x1F514A61.md"
+      "file": "investigation-20260725-224809-0xf280B16E.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-25T22:48:09Z",
+      "target": "0xf280B16EF293D8e534e370794ef26bF312694126",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 27376 holders \u2014 reasonably distributed; Top holders control only 16% of supply \u2014 broad distribution; 96% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($1,889,338); Trading 684+ days ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-224809-0xf280B16E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-224809-0xf280B16E.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-25T22:48:09Z",
+      "target": "0xf280B16EF293D8e534e370794ef26bF312694126",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 27376 holders \u2014 reasonably distributed; Top holders control only 16% of supply \u2014 broad distribution; 96% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($1,889,338); Trading 684+ days ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-224809-0xf280B16E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-221656-0x1F514A61.md",
@@ -593,20 +607,6 @@
       "score": "88",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 2463027 holders \u2014 reasonably distributed; Deep liquidity ($208,517,708); Trading 870+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templat",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-095859-0xeB51D9A3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-071319-0xe8D3f6F1.md",
-      "title": "Investigation \u2014 CHECK",
-      "symbol": "CHECK",
-      "name": "CHECK",
-      "date": "2026-07-24T07:13:19Z",
-      "target": "0xe8D3f6F1c669f02964d1A7Ee562cA99128180106",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $144 (rug/illiquid); [-10] Low liquidity $144",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-071319-0xe8D3f6F1.md"
     }
   ],
   "reports": [

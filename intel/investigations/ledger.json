@@ -1006,6 +1006,25 @@
     "symbol": "BLINK",
     "times_investigated": 1
   },
+  "1:0xf280b16ef293d8e534e370794ef26bf312694126": {
+    "address": "0xf280B16EF293D8e534e370794ef26bF312694126",
+    "chain": "1",
+    "creator_address": "0x055751c87b1caa5c3c3b95681bb275456f022278",
+    "first_investigated": "2026-07-25T22:48:09Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-224809-0xf280B16E.md",
+        "score": 100,
+        "ts": "2026-07-25T22:48:09Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-25T22:48:09Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "1:0xf94b5c5651c888d928439ab6514b93944eee6f48": {
     "address": "0xF94b5C5651c888d928439aB6514B93944eEE6F48",
     "chain": "1",
