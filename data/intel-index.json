@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T20:29:43Z",
+  "generated": "2026-07-25T20:44:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 414,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 330,
+    "investigations": 331,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-202938-0x95aD61b0.md",
+      "file": "investigation-20260725-204449-0x55f622B7.md",
       "title": "Investigation \u2014 SHIB",
       "symbol": "SHIB",
       "name": "SHIBA INU",
-      "date": "2026-07-25T20:29:38Z",
-      "target": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+      "date": "2026-07-25T20:44:49Z",
+      "target": "0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 1681924 holders \u2014 reasonably distributed; Deep liquidity ($2,384,022); Trading 1846+ days without a known incident in this",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-202938-0x95aD61b0.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x75F16b63e8f94F91dbc924845Aa42093396283e8) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-204449-0x55f622B7.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-204449-0x55f622B7.md",
+      "title": "Investigation \u2014 SHIB",
+      "symbol": "SHIB",
+      "name": "SHIBA INU",
+      "date": "2026-07-25T20:44:49Z",
+      "target": "0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x75F16b63e8f94F91dbc924845Aa42093396283e8) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-204449-0x55f622B7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-202938-0x95aD61b0.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 2000 holders \u2014 reasonably distributed; Trading 184+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-193951-0xC720078b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-175721-0x372359b8.md",
-      "title": "Investigation \u2014 aero",
-      "symbol": "aero",
-      "name": "aero agents",
-      "date": "2026-07-23T17:57:21Z",
-      "target": "0x372359b83C4B286b6a1084f07017957a3bd16Ba3",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-20] Very few holders (36) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,974; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-175721-0x372359b8.md"
     }
   ],
   "reports": [
