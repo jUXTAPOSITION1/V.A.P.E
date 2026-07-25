@@ -107,13 +107,20 @@ def status(service_url):
     req = urllib.request.Request(service_url, headers=GET_UA, method="GET")
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
-            code, body = r.getcode(), r.read().decode(errors="replace")
+            code, headers, body = r.getcode(), dict(r.headers), r.read().decode(errors="replace")
     except urllib.error.HTTPError as e:
-        code, body = e.code, e.read().decode(errors="replace")
+        code, headers, body = e.code, dict(e.headers or {}), e.read().decode(errors="replace")
     except Exception as e:
         print(f"[status] FAILED to fetch {service_url}: {e}", file=sys.stderr)
         sys.exit(1)
     print(f"[status] GET {service_url} -> HTTP {code}")
+    # x402 v2 (@x402/core 2.19.0, what this repo's worker runs) puts the real
+    # payment challenge in the PAYMENT-REQUIRED response header, not the JSON
+    # body — confirmed by reading worker/node_modules/@x402/core's own
+    # createHTTPResponse(): body is `unpaidResponse ? unpaidResponse.body : {}`
+    # unless a route defines unpaidResponseBody, so an empty `{}` body on a
+    # real 402 is expected, not broken. Print headers so this is visible.
+    print(f"[status] headers: {json.dumps(headers)}")
     print(body)
     if code >= 400:
         sys.exit(1)

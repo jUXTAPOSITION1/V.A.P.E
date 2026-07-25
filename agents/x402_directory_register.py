@@ -78,24 +78,24 @@ for the full writeup):
     research — no evidence found that this actually exists; not referenced
     or implemented anywhere.
 
-Deliberately NOT scheduled: repeated calls to an unfamiliar directory's
-/register endpoint with unknown dedup behavior risk creating duplicate
-listings. Trigger manually (workflow_dispatch) when the offering list,
-prices, or worker URL change — see .github/workflows/x402-directory.yml.
+Deliberately NOT scheduled: trigger manually (workflow_dispatch) when the
+offering list, prices, or worker URL change — see
+.github/workflows/x402-directory.yml.
 
-Duplicate-listing avoidance (2026-07-25): the 2026-07-05 run registered 22
+State-file skip (2026-07-25, revised): the 2026-07-05 run registered 22
 offerings with 402index.io; 5 more (tx_decode, community_intel_broadcast,
 bulk_safety_bundle, deep_contract_audit, website_review) were added to the
 worker on 2026-07-20 but never registered anywhere, since this script was
-never re-run in between. Re-sending all 27 to 402index.io's still-
-undocumented-dedup /register endpoint would risk duplicating the 22
-already-listed ones. STATE_PATH now records which offering names have
+never re-run in between. STATE_PATH records which offering names have
 already been successfully registered with 402index.io; register_402index()
-skips those on every future run unless --force-all is passed, so re-running
-this script after adding a new offering is always safe by default. VAPOR's
-own /discovery/register is a real upsert (per its own docs), so
-register_vapor() is intentionally NOT filtered by this state — it always
-sends the full current list.
+skips those on every future run unless --force-all is passed — this is now
+confirmed (per the real POST /api/v1/register docs: "Re-registering an
+existing URL+protocol updates the record") to be a pacing/no-op-avoidance
+default, not a duplication-risk workaround, so --force-all is a real,
+safe way to push a metadata-only change (e.g. a price or description edit)
+to already-listed offerings. VAPOR's own /discovery/register is a real
+upsert (per its own docs), so register_vapor() is intentionally NOT
+filtered by this state — it always sends the full current list.
 """
 import argparse
 import json
@@ -223,13 +223,29 @@ def _all_offerings():
         yield name, meta, "data"
 
 
-def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
+def _post(url, payload, timeout=15, max_retries=1, backoff_base=10):
     """POST with retry-on-429. GitHub-hosted runners share IP pools across
     countless unrelated CI jobs, so a small public API's per-IP rate limit
-    (confirmed hit in practice: 402index.io caps at 50/hour/IP) can trip from
-    traffic that has nothing to do with this repo. Honors a real Retry-After
-    header when the server sends one; otherwise backs off exponentially,
-    capped so one bad/huge Retry-After value can't stall the job for hours."""
+    can trip from traffic that has nothing to do with this repo. Honors a
+    real Retry-After header when the server sends one; otherwise backs off
+    exponentially, capped so one bad/huge Retry-After value can't stall the
+    job for hours.
+
+    max_retries defaults to 1, not 3: the api-docs' page text claims "10
+    registrations per hour per IP" for POST /api/v1/register, but the
+    server's own 429 body is the real ground truth and says otherwise —
+    confirmed live (2026-07-25): {"error": "Too many registrations. Limit:
+    50 per hour per IP."}. Either way it's a hard hourly quota, not a short
+    transient throttle (that's a separate, much looser 100 req/min free-tier
+    limit on the read endpoints). Once that quota is hit, no backoff shorter
+    than the remaining window (up to ~60 minutes) can ever succeed, so
+    burning 3 retries x up to 120s each per offering (confirmed in practice:
+    this is exactly what made a 27-offering force-all run grind through only
+    2 successes in 25+ minutes) just wastes CI time for a guaranteed-failed
+    call. One quick retry still covers a genuinely transient blip;
+    register_402index() below stops
+    attempting further offerings entirely once it sees a real 429, since at
+    that point every remaining call in this run is going to fail too."""
     data = json.dumps(payload).encode()
     code, body = 0, {"error": "not attempted"}
     for attempt in range(max_retries + 1):
@@ -276,19 +292,43 @@ def _save_state(state):
         f.write("\n")
 
 
+def _category_for(name):
+    """402index.io's `category` field is a plain prefix-matched string (its
+    own docs example: "bitcoin", "ai/text") — there's no fixed taxonomy to
+    conform to, just pick something a filter/search would reasonably match."""
+    if name in BOUNTY_OFFERINGS:
+        return "crypto/security/audit"
+    if name in DATA_OFFERINGS:
+        return "crypto/market-data"
+    return "crypto/security"
+
+
 def register_402index(only=None, force_all=False):
     """Registers each offering with 402index.io — but SKIPS any offering
     already recorded in STATE_PATH as previously registered, unless
-    force_all is set, since 402index.io's /register dedup behavior is
-    undocumented and re-sending an already-listed offering risks creating a
-    duplicate listing (see module docstring). `only`, if given, further
-    restricts this run to that explicit set of offering names (e.g. just the
-    newly-added ones) regardless of state."""
+    force_all is set. `only`, if given, further restricts this run to that
+    explicit set of offering names (e.g. just the newly-added ones)
+    regardless of state.
+
+    Confirmed via the real api-docs POST /api/v1/register section (2026-07-25,
+    read past the truncation that hid it on the first fetch): "Re-registering
+    an existing URL+protocol updates the record" — so re-sending an
+    already-listed offering is a real, documented upsert, not a duplication
+    risk. The state-file skip is kept anyway as a pacing/no-op-avoidance
+    default (no reason to re-POST 27 unchanged listings every run), but
+    --force-all is now a safe, real "refresh metadata" mechanism, not just a
+    theoretical escape hatch.
+
+    Real gap this closes: the payload previously sent only {url, name,
+    protocol, provider} — none of the documented price_usd/description/
+    category/payment_asset/payment_network fields — which is exactly why
+    every VAPE listing shows a blank "—" price on 402index.io's own directory
+    page instead of its real x402 price."""
     state = _load_state()
     already = set(state.get("registered_402index", []))
     results = []
     newly_registered = []
-    for name, _meta, prefix in _all_offerings():
+    for name, (price, desc), prefix in _all_offerings():
         if only is not None and name not in only:
             continue
         if not force_all and name in already:
@@ -302,6 +342,11 @@ def register_402index(only=None, force_all=False):
             "name": f"VAPE {name}",
             "protocol": "x402",
             "provider": PROVIDER,
+            "description": desc,
+            "price_usd": float(price),
+            "payment_asset": "USDC",
+            "payment_network": "Base",
+            "category": _category_for(name),
         }
         code, body = _post("https://402index.io/api/v1/register", payload)
         ok = 200 <= code < 300
@@ -309,6 +354,22 @@ def register_402index(only=None, force_all=False):
         print(f"[402index] {name}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
         if ok:
             newly_registered.append(name)
+        elif code == 429:
+            # Real hourly quota, confirmed exhausted for this run's IP — every
+            # remaining offering would also 429 (the retry inside _post()
+            # already tried once and failed), so stop here instead of
+            # grinding through the rest one-by-one for no benefit. Re-run
+            # later (the quota resets ~60min after its first counted request)
+            # to pick up where this left off.
+            attempted = {r["offering"] for r in results}
+            remaining = [n for n, _meta, _prefix in _all_offerings()
+                         if (only is None or n in only) and n not in attempted]
+            print(f"[402index] 429 — hourly per-IP registration quota exhausted after "
+                  f"{len(newly_registered)} success(es) this run. Stopping early rather "
+                  f"than retrying the remaining {len(remaining)} offering(s) into a "
+                  f"guaranteed failure: {remaining}. Re-dispatch (same --force-all/--only "
+                  f"flags) once the quota window resets to pick up the rest.")
+            break
 
     if newly_registered:
         state["registered_402index"] = sorted(already | set(newly_registered))
