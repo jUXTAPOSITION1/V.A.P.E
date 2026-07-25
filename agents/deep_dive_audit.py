@@ -740,9 +740,20 @@ def main():
     ap.add_argument("--address", required=True, help="target contract/token address (0x...)")
     ap.add_argument("--chain", default="8453", help="chain id (default Base 8453)")
     ap.add_argument("--callback-url", default=None, help="optional webhook to POST the result to on completion")
+    # Real gap this closes: run_audit()'s own engagement param (paid/sweep/
+    # validation) already exists to keep a pipeline-validation run from
+    # falsely reading as a real paid deliverable, but this CLI — the only
+    # entrypoint deep-dive-bounty.yml's workflow_dispatch can reach — had no
+    # way to ever pass anything but the "paid" default, so a manual
+    # verification dispatch against a real target always got committed
+    # under intel/audits/poc-reports/ with "This is VAPE's premium
+    # bounty-engagement tier" framing even though nobody paid for it.
+    ap.add_argument("--engagement", default="paid", choices=["paid", "validation", "sweep"],
+                     help="paid (default, real x402/ACP job) | validation (pipeline check, no payment) | "
+                          "sweep (VAPE's own proactive daily HACK sweep)")
     args = ap.parse_args()
 
-    result = run_audit(args.address, args.chain, args.callback_url)
+    result = run_audit(args.address, args.chain, args.callback_url, engagement=args.engagement)
     print(json.dumps(result, indent=2))
 
 
