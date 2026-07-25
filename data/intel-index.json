@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T17:12:04Z",
+  "generated": "2026-07-25T17:27:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 317,
+    "investigations": 318,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-171202-0x50c57259.md",
-      "title": "Investigation \u2014 DAI",
-      "symbol": "DAI",
-      "name": "Dai Stablecoin",
-      "date": "2026-07-25T17:12:02Z",
-      "target": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "file": "investigation-20260725-172717-0xEB466342.md",
+      "title": "Investigation \u2014 axlUSDC",
+      "symbol": "axlUSDC",
+      "name": "Axelar Wrapped USDC",
+      "date": "2026-07-25T17:27:17Z",
+      "target": "0xEB466342C4d449BC9f53A865D5Cb90586f405215",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 52% of supply \u2014 meaningful concentration. Positive evidence: 382595 holders ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-171202-0x50c57259.md"
+      "score": "23",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xe432150cce91c13a887f7d836923d5597add8e31) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 79% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-172717-0xEB466342.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-172717-0xEB466342.md",
+      "title": "Investigation \u2014 axlUSDC",
+      "symbol": "axlUSDC",
+      "name": "Axelar Wrapped USDC",
+      "date": "2026-07-25T17:27:17Z",
+      "target": "0xEB466342C4d449BC9f53A865D5Cb90586f405215",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "23",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xe432150cce91c13a887f7d836923d5597add8e31) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 79% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-172717-0xEB466342.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-171202-0x50c57259.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-160513-0x9385Bd61.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-141754-0x775387eF.md",
-      "title": "Investigation \u2014 VBV",
-      "symbol": "VBV",
-      "name": "VELVET By VIRTUAL",
-      "date": "2026-07-22T14:17:54Z",
-      "target": "0x775387eFAbDad9816e8C52dA5672127185581f0b",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x5fcbbd899d608559b14a2d2cc6a886ee9776fbf8) \u2014 can still act on the contract. Positive evidence: 17618 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-141754-0x775387eF.md"
     }
   ],
   "reports": [
