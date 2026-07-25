@@ -477,3 +477,5 @@
 | 2026-07-25 | auto | 0x2598c30330D5771AE9F983979209486aE26dE875 (AI) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-25 | auto | 0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30 (H420) | deep_investigation | REJECT (32/100) | Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) — can still act | +7d |
+
+| 2026-07-25 | auto | 0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9 (JAKEX) | deep_investigation | CAUTION (65/100) | Very low liquidity $1,778 (rug/illiquid) | +7d |

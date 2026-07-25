@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T18:42:51Z",
+  "generated": "2026-07-25T18:58:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 323,
+    "investigations": 324,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-184244-0xaa26754d.md",
-      "title": "Investigation \u2014 H420",
-      "symbol": "H420",
-      "name": "H420",
-      "date": "2026-07-25T18:42:44Z",
-      "target": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
+      "file": "investigation-20260725-185758-0xD60ABFB7.md",
+      "title": "Investigation \u2014 JAKEX",
+      "symbol": "JAKEX",
+      "name": "JakeX",
+      "date": "2026-07-25T18:57:58Z",
+      "target": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) \u2014 can still act on the contract; [-8] Low holder count (97); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-184244-0xaa26754d.md"
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $1,778 (rug/illiquid); [-10] Low liquidity $1,778. Positive evidence: Ownership renounced; Trading 705+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-185758-0xD60ABFB7.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-185758-0xD60ABFB7.md",
+      "title": "Investigation \u2014 JAKEX",
+      "symbol": "JAKEX",
+      "name": "JakeX",
+      "date": "2026-07-25T18:57:58Z",
+      "target": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $1,778 (rug/illiquid); [-10] Low liquidity $1,778. Positive evidence: Ownership renounced; Trading 705+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-185758-0xD60ABFB7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-184244-0xaa26754d.md",
@@ -593,20 +607,6 @@
       "score": "73",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-5] Pair 23.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 21771 holders \u2014 reasonably distributed; Custom verified source (not a mass-prod",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-010614-0x34628A64.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-231248-0x7787548C.md",
-      "title": "Investigation \u2014 BTC",
-      "symbol": "BTC",
-      "name": "Bitcoin Based",
-      "date": "2026-07-22T23:12:48Z",
-      "target": "0x7787548C57031023C031304F274BEda304dA734f",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-10] Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) \u2014 can still act on the contract; [-8] Low holder count (185); [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidity $2; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by de",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-231248-0x7787548C.md"
     }
   ],
   "reports": [
