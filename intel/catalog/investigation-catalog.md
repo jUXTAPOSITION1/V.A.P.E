@@ -469,3 +469,5 @@
 | 2026-07-25 | auto | 0xEB466342C4d449BC9f53A865D5Cb90586f405215 (axlUSDC) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa (TRUMP28) | deep_investigation | PROCEED (80/100) | Low liquidity $25,871 | +7d |
+
+| 2026-07-25 | auto | 0x32708538a107253b51a735A724330A23106ca4cA (01) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |

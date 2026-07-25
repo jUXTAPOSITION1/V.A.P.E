@@ -361,6 +361,25 @@
     "symbol": "HLX",
     "times_investigated": 1
   },
+  "1:0x32708538a107253b51a735a724330a23106ca4ca": {
+    "address": "0x32708538a107253b51a735A724330A23106ca4cA",
+    "chain": "1",
+    "creator_address": "0x9ef1391971ddc48cab6535383753ef8062d29c9e",
+    "first_investigated": "2026-07-25T17:57:39Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-175739-0x32708538.md",
+        "score": 85,
+        "ts": "2026-07-25T17:57:39Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-25T17:57:39Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "01",
+    "times_investigated": 1
+  },
   "1:0x3526989ba0dbc5e4163f4e453d20f9fedcc87081": {
     "address": "0x3526989bA0dbc5E4163F4E453d20f9fedcC87081",
     "chain": "1",
