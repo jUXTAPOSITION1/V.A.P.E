@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-25T18:12:49Z",
-  "synthesis": "VAPE's",
+  "generated": "2026-07-25T18:27:49Z",
+  "synthesis": "V",
   "tasks": [
+    {
+      "sha": "fc60cae6a9",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-25T18:12Z",
+      "date": "2026-07-25T18:12:51Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fc60cae6a9fe0bdc43e0771298a6277176e0ea7a"
+    },
     {
       "sha": "4de4039db5",
       "kind": "automation",
@@ -99,13 +106,6 @@
       "message": "VAPE AI red-team deep scan 2026-07-25T15:16Z",
       "date": "2026-07-25T15:16:17Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f3e92967b7290260e51a6290ee292f5bc514ea48"
-    },
-    {
-      "sha": "f07804d31b",
-      "kind": "sweep",
-      "message": "macro_sweep 2026-07-25T15:11Z",
-      "date": "2026-07-25T15:11:30Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f07804d31b17a46c8ec5c03249db72d1087dc73c"
     }
   ]
 }

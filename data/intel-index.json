@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T18:12:49Z",
+  "generated": "2026-07-25T18:27:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 321,
+    "investigations": 322,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-181242-0x4d7078DD.md",
+      "file": "investigation-20260725-182745-0x2598c303.md",
       "title": "Investigation \u2014 AI",
       "symbol": "AI",
-      "name": "Gensyn",
-      "date": "2026-07-25T18:12:42Z",
-      "target": "0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48",
+      "name": "Any Inu",
+      "date": "2026-07-25T18:27:45Z",
+      "target": "0x2598c30330D5771AE9F983979209486aE26dE875",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5004 holders \u2014 reasonably distributed; Custom verified source (no",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-181242-0x4d7078DD.md"
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 3923 holders \u2014 reasonably distributed; Top holders control only 1% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 938+ days without a known incident in this scan; Custom verif",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-182745-0x2598c303.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-182745-0x2598c303.md",
+      "title": "Investigation \u2014 AI",
+      "symbol": "AI",
+      "name": "Any Inu",
+      "date": "2026-07-25T18:27:45Z",
+      "target": "0x2598c30330D5771AE9F983979209486aE26dE875",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 3923 holders \u2014 reasonably distributed; Top holders control only 1% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 938+ days without a known incident in this scan; Custom verif",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-182745-0x2598c303.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-181242-0x4d7078DD.md",
@@ -593,20 +607,6 @@
       "score": "25",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No know",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-214027-0x4C6e2953.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-202007-0x4aC963E0.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-07-22T20:20:07Z",
-      "target": "0x4aC963E04EcCD97A98bBe6BCB6d3bc2A649E0b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-202007-0x4aC963E0.md"
     }
   ],
   "reports": [
