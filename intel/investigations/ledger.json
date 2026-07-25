@@ -684,6 +684,25 @@
     "symbol": "RFI",
     "times_investigated": 1
   },
+  "1:0xaa26754dd0c8310cb70f3b66daeab52c8cff3c30": {
+    "address": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
+    "chain": "1",
+    "creator_address": "0x050177aa43247511936c3504b2e65d0257e8f418",
+    "first_investigated": "2026-07-25T18:42:44Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-184244-0xaa26754d.md",
+        "score": 32,
+        "ts": "2026-07-25T18:42:44Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T18:42:44Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "H420",
+    "times_investigated": 1
+  },
   "1:0xc4fa51e5208b835bc6db3144f25067aa194befba": {
     "address": "0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa",
     "chain": "1",

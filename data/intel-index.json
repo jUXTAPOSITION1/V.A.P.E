@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T18:27:49Z",
+  "generated": "2026-07-25T18:42:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 322,
+    "investigations": 323,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-182745-0x2598c303.md",
-      "title": "Investigation \u2014 AI",
-      "symbol": "AI",
-      "name": "Any Inu",
-      "date": "2026-07-25T18:27:45Z",
-      "target": "0x2598c30330D5771AE9F983979209486aE26dE875",
+      "file": "investigation-20260725-184244-0xaa26754d.md",
+      "title": "Investigation \u2014 H420",
+      "symbol": "H420",
+      "name": "H420",
+      "date": "2026-07-25T18:42:44Z",
+      "target": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 3923 holders \u2014 reasonably distributed; Top holders control only 1% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 938+ days without a known incident in this scan; Custom verif",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-182745-0x2598c303.md"
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) \u2014 can still act on the contract; [-8] Low holder count (97); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-184244-0xaa26754d.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-184244-0xaa26754d.md",
+      "title": "Investigation \u2014 H420",
+      "symbol": "H420",
+      "name": "H420",
+      "date": "2026-07-25T18:42:44Z",
+      "target": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) \u2014 can still act on the contract; [-8] Low holder count (97); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-184244-0xaa26754d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-182745-0x2598c303.md",
@@ -593,20 +607,6 @@
       "score": "37",
       "summary": "Risk factors: [-10] Owner not renounced (0x5cc575f1b197022be8bba1c6e4a9e5972daa397e) \u2014 can still act on the contract; [-8] Low holder count (185); [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidity $2; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by de",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-231248-0x7787548C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-214027-0x4C6e2953.md",
-      "title": "Investigation \u2014 play",
-      "symbol": "play",
-      "name": "play",
-      "date": "2026-07-22T21:40:27Z",
-      "target": "0x4C6e295398B2A4eE255928eBF0D210dd49EDFD59",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-214027-0x4C6e2953.md"
     }
   ],
   "reports": [
