@@ -2838,6 +2838,25 @@
     "symbol": "USOR OIL",
     "times_investigated": 1
   },
+  "8453:0xa8ec9351397e29e4a93d08f09badd56f3bd0b581": {
+    "address": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581",
+    "chain": "8453",
+    "creator_address": "0x048ef1062cbb39b338ac2685da72adf104b4cef5",
+    "first_investigated": "2026-07-25T13:00:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-130038-0xa8Ec9351.md",
+        "score": 70,
+        "ts": "2026-07-25T13:00:38Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T13:00:38Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "dexcheckai",
+    "times_investigated": 1
+  },
   "8453:0xac531eb26ca1d21b85126de8fb87e80e09002dcf": {
     "address": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
     "chain": "8453",
