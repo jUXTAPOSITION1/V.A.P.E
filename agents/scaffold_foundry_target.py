@@ -55,6 +55,21 @@ out = "out"
 libs = ["lib"]
 solc_version = "{solc_version}"
 """
+# Deliberately no `ffi = true` and no `fs_permissions` entry above — Foundry
+# denies both the ffi and filesystem cheatcodes by default unless a profile
+# explicitly opts in. This project scaffolds and RUNS an LLM-drafted exploit
+# test (run_forge_test_exploit() below) against a real contract's real
+# verified source, which is attacker-controlled input (anyone can deploy a
+# contract with a prompt-injection payload embedded in its source comments,
+# hoping to steer the draft into exfiltrating something) — never opt into
+# either cheatcode class here.
+
+# Environment-variable read cheatcodes (vm.envString/vm.envUint/etc.) are
+# NOT gated by a foundry.toml flag the way ffi/fs are — they always work,
+# reading the real OS process environment of whatever ran `forge test`. See
+# _forge_subprocess_env() below for why that subprocess never gets a real
+# secret to read in the first place, rather than trying to scrub one out of
+# forge's output after the fact.
 
 HALMOS_DRAFT_SYSTEM = """You are VAPE, drafting HYPOTHESES for symbolic testing — not
 findings. Given a real, verified smart contract's source, write 2-4 Halmos
@@ -230,17 +245,44 @@ def draft_exploit_test(files, contract_name, address, extra_context=""):
     return code.strip(), provider
 
 
+def _forge_subprocess_env():
+    """A minimal environment for running the LLM-drafted exploit test — NOT
+    the full inherited os.environ. The test contract is Solidity generated
+    from a real target contract's verified source (attacker-controlled: any
+    address's own Etherscan-verified source can carry a prompt-injection
+    payload in its comments, aimed at getting the draft to embed something
+    like vm.envString("SOME_SECRET")), and Foundry's env-read cheatcodes
+    (unlike ffi/fs, see FOUNDRY_TOML_TEMPLATE's comment) aren't gated by any
+    config flag — they just read whatever's really in the process
+    environment. This CI job's real environment holds every LLM-provider key
+    plus GITHUB_TOKEN (.github/workflows/deep-dive-bounty.yml's `env:`
+    block); forge's captured stdout/stderr becomes part of `test_result`,
+    which flows straight into the audit report this same job commits to a
+    PUBLIC repo. Passing a bare, secret-free environment closes that
+    exfiltration path at the source, rather than trying to regex-scrub a
+    secret back out of forge's output after the fact once it may already be
+    committed to git history. PATH/HOME (needed for forge/solc to run at
+    all) are the only two carried over unconditionally, plus whichever of
+    TMPDIR/TEMP/TERM/LANG happen to be set (harmless, not secrets, and
+    occasionally needed by a toolchain's own temp-file or locale handling)."""
+    safe_keys = ("PATH", "HOME", "TMPDIR", "TEMP", "TERM", "LANG")
+    return {k: os.environ[k] for k in safe_keys if k in os.environ}
+
+
 def run_forge_test_exploit(project_dir, fork_url, timeout=300):
     """Actually RUNS the drafted exploit test against the real chain's forked
     state — `--fork-url` forks for the whole test run, entirely local and
     read-only against the real chain (no transaction is ever broadcast to
     it), matching VAPE's white-hat-only principle. A passing test (rc 0)
     means the drafted attack's own assertions held after its actions ran —
-    real, concrete impact evidence, not a narrative claim."""
+    real, concrete impact evidence, not a narrative claim. Runs with a
+    secret-free environment (_forge_subprocess_env()) — see that function's
+    docstring for why."""
     try:
         p = subprocess.run(
             ["forge", "test", "--match-path", "test/Exploit.t.sol", "--fork-url", fork_url, "-vvv"],
             cwd=project_dir, capture_output=True, text=True, timeout=timeout,
+            env=_forge_subprocess_env(),
         )
         return {"ran": True, "passed": p.returncode == 0, "returncode": p.returncode,
                 "output": (p.stdout + p.stderr)[-6000:]}

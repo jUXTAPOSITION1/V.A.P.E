@@ -213,6 +213,32 @@ def test_draft_exploit_test_passes_through_unfenced_code(monkeypatch):
     assert code == "// SPDX-License-Identifier: MIT\ncontract Exploit {}"
 
 
+# ── _forge_subprocess_env ────────────────────────────────────────────────────
+
+def test_forge_subprocess_env_strips_secrets(monkeypatch):
+    monkeypatch.setenv("PATH", "/usr/bin")
+    monkeypatch.setenv("HOME", "/home/x")
+    monkeypatch.setenv("XAI_API_KEY_1", "super-secret-key")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghp_super_secret")
+    monkeypatch.setenv("ETHERSCAN_API_KEY", "another-secret")
+    env = sft._forge_subprocess_env()
+    assert env["PATH"] == "/usr/bin"
+    assert env["HOME"] == "/home/x"
+    assert "XAI_API_KEY_1" not in env
+    assert "GITHUB_TOKEN" not in env
+    assert "ETHERSCAN_API_KEY" not in env
+
+
+def test_forge_subprocess_env_omits_unset_optional_keys(monkeypatch):
+    monkeypatch.setenv("PATH", "/usr/bin")
+    monkeypatch.delenv("HOME", raising=False)
+    monkeypatch.delenv("TMPDIR", raising=False)
+    env = sft._forge_subprocess_env()
+    assert "HOME" not in env
+    assert "TMPDIR" not in env
+    assert set(env) <= {"PATH", "HOME", "TMPDIR", "TEMP", "TERM", "LANG"}
+
+
 # ── run_forge_test_exploit ────────────────────────────────────────────────────
 
 def test_run_forge_test_exploit_reports_missing_binary_cleanly(tmp_path, monkeypatch):
@@ -240,7 +266,7 @@ def test_run_forge_test_exploit_reports_timeout(tmp_path, monkeypatch):
 def test_run_forge_test_exploit_reports_pass(tmp_path, monkeypatch):
     import subprocess
 
-    def fake_run(cmd, cwd, capture_output, text, timeout):
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
         assert cmd[:2] == ["forge", "test"]
         assert "--fork-url" in cmd
         assert cmd[cmd.index("--fork-url") + 1] == "https://example-rpc.test"
@@ -253,11 +279,32 @@ def test_run_forge_test_exploit_reports_pass(tmp_path, monkeypatch):
 def test_run_forge_test_exploit_reports_failure(tmp_path, monkeypatch):
     import subprocess
 
-    def fake_run(cmd, cwd, capture_output, text, timeout):
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
         return subprocess.CompletedProcess(cmd, 1, stdout="", stderr="test failed")
     monkeypatch.setattr(subprocess, "run", fake_run)
     result = sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
     assert result == {"ran": True, "passed": False, "returncode": 1, "output": "test failed"}
+
+
+def test_run_forge_test_exploit_never_passes_real_secrets_to_subprocess(tmp_path, monkeypatch):
+    """Confirmed real gap (CodeRabbit, PR #275): forge test previously
+    inherited the full CI environment, including every LLM-provider key and
+    GITHUB_TOKEN — a malicious verified-source prompt injection could steer
+    the LLM-drafted test into reading one via vm.envString and leaking it
+    into forge's captured output, which flows straight into a committed,
+    public report."""
+    import subprocess
+    monkeypatch.setenv("XAI_API_KEY_1", "super-secret-key")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghp_super_secret")
+    captured = {}
+
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
+        captured["env"] = env
+        return subprocess.CompletedProcess(cmd, 0, stdout="ok", stderr="")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
+    assert "XAI_API_KEY_1" not in captured["env"]
+    assert "GITHUB_TOKEN" not in captured["env"]
 
 
 # ── scaffold_and_run_exploit_poc — orchestration short-circuits ─────────────
