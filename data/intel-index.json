@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T23:03:17Z",
+  "generated": "2026-07-25T23:18:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 339,
+    "investigations": 340,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-230314-0xAFF25650.md",
+      "file": "investigation-20260725-231833-0x3134be4a.md",
       "title": "Investigation \u2014 ASTEROID",
       "symbol": "ASTEROID",
-      "name": "Asteroid",
-      "date": "2026-07-25T23:03:14Z",
-      "target": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-25T23:18:33Z",
+      "target": "0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 3587 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 684+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-230314-0xAFF25650.md"
+      "verdict": "REJECT",
+      "score": "23",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 23.9 days old \u2014",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-231833-0x3134be4a.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-231833-0x3134be4a.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-25T23:18:33Z",
+      "target": "0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "23",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 23.9 days old \u2014",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-231833-0x3134be4a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-230314-0xAFF25650.md",
@@ -593,20 +607,6 @@
       "score": "35",
       "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $138 (rug/illiquid); [-10] Low liquidity $138; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Trading 91+ days without a known i",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-140520-0x87c6c398.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-115048-0x5b290eCd.md",
-      "title": "Investigation \u2014 CHECK",
-      "symbol": "CHECK",
-      "name": "CHECK",
-      "date": "2026-07-24T11:50:48Z",
-      "target": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $146 (rug/illiquid); [-10] Low liquid",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
     }
   ],
   "reports": [
