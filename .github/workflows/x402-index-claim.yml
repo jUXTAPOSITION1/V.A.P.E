@@ -4,11 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'claim (get token+hash) or verify (after the hash is deployed)'
+        description: 'claim (get token+hash) / verify (after the hash is deployed) / status (read-only GET of a service-detail URL)'
         required: true
         type: choice
-        options: [claim, verify]
+        options: [claim, verify, status]
         default: claim
+      service_url:
+        description: 'Service-detail URL to fetch — required only for the status action (e.g. https://402index.io/service/<uuid>)'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -26,4 +30,10 @@ jobs:
       - name: Run 402 Index ${{ inputs.action }}
         env:
           INPUT_ACTION: ${{ inputs.action }}
-        run: python agents/x402_index_claim.py "$INPUT_ACTION"
+          INPUT_SERVICE_URL: ${{ inputs.service_url }}
+        run: |
+          if [ "$INPUT_ACTION" = "status" ]; then
+            python agents/x402_index_claim.py status --url "$INPUT_SERVICE_URL"
+          else
+            python agents/x402_index_claim.py "$INPUT_ACTION"
+          fi
