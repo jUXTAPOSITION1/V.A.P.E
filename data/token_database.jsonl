@@ -16,3 +16,4 @@
 {"ts": "2026-07-25T17:57:44.348111Z", "address": "0x49DDee75D588b79a3eB1225dd386644eeeeeaF08", "chain": "137", "symbol": "EBCC", "name": "EBCC", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-25T18:12:48.648813Z", "address": "0x33417DFDa9845853266b3bA4686A397aA0ae8B07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-07-25T19:43:44.343322Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "exploit_check"}
+{"ts": "2026-07-25T20:29:43.289119Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_safety_check"}

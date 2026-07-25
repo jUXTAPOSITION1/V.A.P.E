@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T20:14:36Z",
+  "generated": "2026-07-25T20:29:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 414,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 329,
+    "investigations": 330,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-201426-0xd8526e86.md",
-      "title": "Investigation \u2014 FWAres",
-      "symbol": "FWAres",
-      "name": "FWA Reserve",
-      "date": "2026-07-25T20:14:26Z",
-      "target": "0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5",
+      "file": "investigation-20260725-202938-0x95aD61b0.md",
+      "title": "Investigation \u2014 SHIB",
+      "symbol": "SHIB",
+      "name": "SHIBA INU",
+      "date": "2026-07-25T20:29:38Z",
+      "target": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +15054% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-201426-0xd8526e86.md"
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 1681924 holders \u2014 reasonably distributed; Deep liquidity ($2,384,022); Trading 1846+ days without a known incident in this",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-202938-0x95aD61b0.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-202938-0x95aD61b0.md",
+      "title": "Investigation \u2014 SHIB",
+      "symbol": "SHIB",
+      "name": "SHIBA INU",
+      "date": "2026-07-25T20:29:38Z",
+      "target": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 1681924 holders \u2014 reasonably distributed; Deep liquidity ($2,384,022); Trading 1846+ days without a known incident in this",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-202938-0x95aD61b0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-201426-0xd8526e86.md",
@@ -593,20 +607,6 @@
       "score": "50",
       "summary": "Risk factors: [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-20] Very few holders (36) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,974; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-175721-0x372359b8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-161105-0xec6432B9.md",
-      "title": "Investigation \u2014 DEL",
-      "symbol": "DEL",
-      "name": "Decimalchain",
-      "date": "2026-07-23T16:11:05Z",
-      "target": "0xec6432B90e7fD4d9f872cc5C781f05B617DB861E",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "8",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-20] Very few holders (41) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $8 (rug/illiquid); [-10] Low liquidity $8; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-161105-0xec6432B9.md"
     }
   ],
   "reports": [

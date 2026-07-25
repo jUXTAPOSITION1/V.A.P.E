@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-25T20:14:26Z — 47 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-25T20:29:38Z — 48 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SHIB | Ethereum | `0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE` | 77/100 | 1 | 2026-07-25T20:29:38Z |
 | CTM | Ethereum | `0xc8Fb80fCc03f699C70ff0CC08C09106288888888` | 75/100 | 1 | 2026-07-25T19:43:37Z |
 | JAKEX | Ethereum | `0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9` | 65/100 | 1 | 2026-07-25T18:57:58Z |
 | AI | Ethereum | `0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48` | 62/100 | 1 | 2026-07-25T18:12:42Z |
