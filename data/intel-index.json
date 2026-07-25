@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-25T09:02:30Z",
+  "generated": "2026-07-25T09:56:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 407,
+    "reports": 408,
     "reports_by_type": {
       "virtuals": 76,
+      "sentiment": 40,
       "security": 68,
       "base": 74,
       "bounty": 122,
-      "sentiment": 39,
       "macro": 20,
       "skillforge": 4,
       "bug": 2,
@@ -620,6 +620,17 @@
       "summary": "Date: 2026-07-25 09:02 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-09.md",
       "bytes": 3103
+    },
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-07-25-09.md",
+      "title": "Sentiment Sweep Report \u2014 2026-07-25 09:56 UTC",
+      "date": "2026-07-25T09:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-25-09.md",
+      "bytes": 1595
     },
     {
       "kind": "intel",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-22 09:29 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-09.md",
       "bytes": 2904
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-22-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-22T08:00Z",
-      "threat": null,
-      "summary": "The threat landscape over the last 14 days is characterized by a series of incidents affecting various DeFi protocols across multiple blockchain platforms, including Solana, Ethereum, Arbitrum, Hedera, and BSC. The incidents involve a range of exploit techniques, including flashloan exploits, price oracle manipulation, liquidity manipulat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-08.md",
-      "bytes": 6824
     }
   ],
   "broadcasts": [
