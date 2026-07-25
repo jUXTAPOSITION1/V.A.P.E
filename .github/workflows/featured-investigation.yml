@@ -189,19 +189,25 @@ jobs:
       # workflow's intended firings, independent of cron frequency — the fix
       # is to stop depending on it. This step self-dispatches the NEXT cycle
       # via the Actions API instead, which isn't subject to `schedule`'s
-      # unreliability at all. `if: always()` so a failure anywhere above
-      # (a bad investigation target, a flaky commit, etc.) never breaks the
-      # chain — keeping the heartbeat alive matters more than any single
-      # cycle's own success. Sleeps out the rest of the ~15min interval
-      # first (real work above takes well under a minute) so cadence stays
-      # close to 15min rather than back-to-back-firing continuously.
+      # unreliability at all. `!cancelled()` (not `always()`, per CodeRabbit
+      # on PR #280 — always() also runs on an explicitly cancelled job,
+      # which would keep the chain alive even when someone deliberately
+      # cancels a run to stop it) so a failure anywhere above (a bad
+      # investigation target, a flaky commit, etc.) still doesn't break the
+      # chain, but a real cancellation does. Sleeps out the rest of the
+      # ~15min interval first (real work above takes well under a minute)
+      # so cadence stays close to 15min rather than back-to-back-firing
+      # continuously.
       - name: Schedule next cycle in ~15 minutes (self-dispatch chain)
-        if: always()
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sleep 850
-          curl -sS -X POST \
+          # --fail (per CodeRabbit on PR #280): plain -sS still exits 0 on a
+          # 4xx/5xx response body (e.g. a token/permission problem), which
+          # would silently break the chain with no visible error in the log.
+          curl --fail --silent --show-error -X POST \
             -H "Authorization: token ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/actions/workflows/featured-investigation.yml/dispatches" \
