@@ -2800,6 +2800,25 @@
     "symbol": "claude",
     "times_investigated": 2
   },
+  "8453:0xa3d36e8b5ca7a74b95c6427e546da586de5607be": {
+    "address": "0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be",
+    "chain": "8453",
+    "creator_address": "0xbdbebd58cc8153ce74530bb342427579315915b2",
+    "first_investigated": "2026-07-25T08:33:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-083334-0xA3d36e8B.md",
+        "score": 90,
+        "ts": "2026-07-25T08:33:34Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-25T08:33:34Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "USOR OIL",
+    "times_investigated": 1
+  },
   "8453:0xac531eb26ca1d21b85126de8fb87e80e09002dcf": {
     "address": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
     "chain": "8453",

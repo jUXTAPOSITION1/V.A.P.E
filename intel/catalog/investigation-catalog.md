@@ -451,3 +451,5 @@
 | 2026-07-25 | auto | 0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88 (USDC) | deep_investigation | CAUTION (68/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0x2B11834Ed1FeAEd4b4b3a86A6F571315E25A884D (MENTE) | deep_investigation | PROCEED (82/100) | Owner not renounced (0xcc29169da9063f893d7958e8c021e788446e7229) — can still act | +7d |
+
+| 2026-07-25 | auto | 0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be (USOR OIL) | deep_investigation | PROCEED (90/100) | Low liquidity $41,326 | +7d |

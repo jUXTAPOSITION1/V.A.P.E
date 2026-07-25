@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T08:29:54Z",
+  "generated": "2026-07-25T08:33:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 406,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 108,
-    "investigations": 310,
+    "investigations": 311,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-062625-0x2B11834E.md",
-      "title": "Investigation \u2014 MENTE",
-      "symbol": "MENTE",
-      "name": "Ethoswarm",
-      "date": "2026-07-25T06:26:25Z",
-      "target": "0x2B11834Ed1FeAEd4b4b3a86A6F571315E25A884D",
+      "file": "investigation-20260725-083334-0xA3d36e8B.md",
+      "title": "Investigation \u2014 USOR OIL",
+      "symbol": "USOR OIL",
+      "name": "U.S. Oil Reserve (USOR)",
+      "date": "2026-07-25T08:33:34Z",
+      "target": "0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be",
       "chain": "8453 (Base)",
       "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-10] Owner not renounced (0xcc29169da9063f893d7958e8c021e788446e7229) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 610779 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-062625-0x2B11834E.md"
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $41,326. Positive evidence: 27117 holders \u2014 reasonably distributed; Trading 190+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-083334-0xA3d36e8B.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-083334-0xA3d36e8B.md",
+      "title": "Investigation \u2014 USOR OIL",
+      "symbol": "USOR OIL",
+      "name": "U.S. Oil Reserve (USOR)",
+      "date": "2026-07-25T08:33:34Z",
+      "target": "0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $41,326. Positive evidence: 27117 holders \u2014 reasonably distributed; Trading 190+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-083334-0xA3d36e8B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-062625-0x2B11834E.md",
@@ -593,20 +607,6 @@
       "score": "40",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-223041-0x31bC2932.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-212308-0x0A1a1A10.md",
-      "title": "Investigation \u2014 USDai",
-      "symbol": "USDai",
-      "name": "USDai",
-      "date": "2026-07-21T21:23:08Z",
-      "target": "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $94 (rug/illiquid); [-10] Low liquidity $94. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($156,547,951 circulating, $0.9998 peg); 2776 holders \u2014 reasonably distributed; Trading 293+ days without a kno",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-212308-0x0A1a1A10.md"
     }
   ],
   "reports": [
