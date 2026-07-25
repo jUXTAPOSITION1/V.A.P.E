@@ -52,6 +52,25 @@
     "symbol": "wstETH",
     "times_investigated": 1
   },
+  "10:0x1f514a61bcde34f94bc39731235690ab9da737f7": {
+    "address": "0x1F514A61bcde34F94Bc39731235690ab9da737F7",
+    "chain": "10",
+    "creator_address": "0x5b0390bccca1f040d8993eb6e4ce8ded93721765",
+    "first_investigated": "2026-07-25T22:16:56Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-221656-0x1F514A61.md",
+        "score": 63,
+        "ts": "2026-07-25T22:16:56Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T22:16:56Z",
+    "last_score": 63,
+    "last_verdict": "CAUTION",
+    "symbol": "TAROT",
+    "times_investigated": 1
+  },
   "10:0x3c8b650257cfb5f272f799f5e2b4e65093a11a05": {
     "address": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
     "chain": "10",
