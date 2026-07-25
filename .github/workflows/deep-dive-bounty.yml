@@ -22,7 +22,7 @@ on:
         required: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: deep-dive-bounty-${{ github.event.inputs.address }}
@@ -32,6 +32,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's own WIF auth step below
+    # (agents/llm.py::ask_vertex_candidate()); contents: write is for the
+    # commit step at the end.
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -40,6 +47,21 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - id: vertex-auth
+        # Real, confirmed gap this closes: agents/deep_dive_audit.py's real
+        # audit call (ask_oci_grok_frontier — OCI Grok 4.3 primary, falling
+        # back to this Vertex-tuned model, then the free FRONTIER_ORDER
+        # chain) never had this WIF step wired in, unlike every other real
+        # report-generating workflow in this repo — meaning VAPE's own $1
+        # premium paid offering had no Vertex safety net if OCI Grok ever
+        # failed/rate-limited/hit its daily spend cap mid-audit, falling
+        # straight to the weakest free-tier fallback for the highest-stakes
+        # paid product.
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Cache security tools (restore + save — a stable key so it actually
           round-trips; skillforge/memory/tools-registry.json's own hash changes
           every skillforge-toolcheck.yml run, which made the old restore-only
@@ -71,6 +93,7 @@ jobs:
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

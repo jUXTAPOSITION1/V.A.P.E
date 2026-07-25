@@ -61,8 +61,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's own WIF auth step below
+    # (agents/llm.py::ask_vertex_candidate()); contents: write is for the
+    # commit step at the end.
     permissions:
       contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
@@ -71,6 +76,17 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.11'
+      - id: vertex-auth
+        # Real, confirmed gap this closes — see deep-dive-bounty.yml's
+        # matching comment: agents/external_audit.py's real audit call also
+        # goes OCI Grok -> this Vertex-tuned model -> the free FRONTIER_ORDER
+        # chain, but this workflow never had the WIF step wired in, leaving
+        # this paid offering's repo-target path with no Vertex safety net.
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
 
       - name: Run the external bounty engagement audit
         # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
@@ -88,6 +104,7 @@ jobs:
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

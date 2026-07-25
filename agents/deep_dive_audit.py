@@ -106,6 +106,29 @@ def _append_raw_tail(lines, result):
                       f"  ```\n  {tail}\n  ```\n  </details>")
 
 
+
+# Real, confirmed bug this fixes (2026-07-25): Slither has never once
+# succeeded in production for any non-Ethereum-mainnet target (i.e. every
+# real deep-dive audit sampled — Base is VAPE's default chain). Confirmed
+# directly against crytic-compile's own real source
+# (crytic_compile/platform/etherscan.py::EtherscanCompilationUnit.compile()):
+# a bare `0xADDRESS` with no network prefix always resolves to
+# `ETHERSCAN_BASE_V2 % ("1", target)` — hardcoded chainid 1 (Ethereum
+# mainnet) — regardless of what chain the contract is actually deployed on.
+# A Base-only-verified contract (never verified on Ethereum mainnet, the
+# overwhelming majority of real Base tokens) gets a real "not found" from
+# Etherscan for that lookup, which is exactly why every sampled report
+# shows "slither produced no valid JSON (rc=1)". The fix: prefix the
+# target with the exact network key crytic-compile's own
+# SUPPORTED_NETWORK_V2 dict expects (confirmed against that same file) —
+# `slither base:0xADDRESS ...` resolves the real Etherscan V2 chainid=8453
+# lookup instead.
+_SLITHER_NETWORK_PREFIX = {
+    "8453": "base", "1": "mainnet", "42161": "arbi", "10": "optim",
+    "137": "poly", "56": "bsc", "43114": "avax",
+}
+
+
 def _run_slither(address, chain, timeout=180):
     """Best-effort real static analysis — only if slither is already installed on
     PATH (e.g. via skillforge/toolcheck.py's cache) and an Etherscan key is set, so
@@ -116,9 +139,11 @@ def _run_slither(address, chain, timeout=180):
     key = os.getenv("ETHERSCAN_API_KEY")
     if not key:
         return {"ran": False, "reason": "no ETHERSCAN_API_KEY — slither needs it to fetch+compile by address"}
+    prefix = _SLITHER_NETWORK_PREFIX.get(str(chain))
+    target = f"{prefix}:{address}" if prefix else address
     try:
         p = subprocess.run(
-            ["slither", address, "--etherscan-apikey", key, "--json", "-"],
+            ["slither", target, "--etherscan-apikey", key, "--json", "-"],
             capture_output=True, text=True, timeout=timeout,
         )
         try:
