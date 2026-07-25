@@ -19,18 +19,37 @@ def _call(response_text):
 
 
 def test_agree_response_is_parsed_correctly():
-    result, m = _call("AGREE: this is clearly a honeypot, the verdict is correct.")
+    result, m = _call(
+        "This is clearly a honeypot given the flagged mint function and zero holders.\n\n"
+        "VERDICT ALIGNMENT: AGREE"
+    )
     assert result["disagrees"] is False
-    assert result["text"].startswith("AGREE:")
+    assert "honeypot" in result["text"]
+    assert "VERDICT ALIGNMENT" not in result["text"]  # marker line stripped from rendered text
     _, kwargs = m.call_args
     assert kwargs["tier"] == "frontier"
     assert kwargs["provider_order"] == FRONTIER_ORDER
+    assert kwargs.get("search") is not True  # must not bypass OCI Grok/Vertex
 
 
 def test_disagree_response_is_parsed_correctly():
-    result, _m = _call("DISAGREE: the liquidity depth argues against this being a scam.")
+    result, _m = _call(
+        "The liquidity depth and holder distribution argue against this being a scam.\n\n"
+        "VERDICT ALIGNMENT: DISAGREE"
+    )
     assert result["disagrees"] is True
-    assert result["text"].startswith("DISAGREE:")
+    assert "liquidity depth" in result["text"]
+    assert "VERDICT ALIGNMENT" not in result["text"]
+
+
+def test_malformed_response_without_marker_defaults_to_agree():
+    """A response missing the required trailing marker is a formatting
+    miss, not evidence of disagreement — same 'never claim disagreement
+    without a real, parseable signal' principle as everywhere else in this
+    pipeline that degrades honestly rather than guessing."""
+    result, _m = _call("Some real analysis text with no marker line at all.")
+    assert result["disagrees"] is False
+    assert result["text"] == "Some real analysis text with no marker line at all."
 
 
 def test_llm_unavailable_returns_none():
