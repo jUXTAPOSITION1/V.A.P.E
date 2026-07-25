@@ -211,6 +211,22 @@ const STABLECOIN_MIN_MCAP_USD = 1e8;
 // agents/investigate.py::STABLECOIN_PEG_TOLERANCE.
 const STABLECOIN_PEG_TOLERANCE = 0.03;
 
+// Major fiat-backed stablecoin brand tickers/names — used ONLY to detect
+// impersonation (see the stablecoin-brand-impersonation check in score()
+// below), never to grant the verified-stablecoin exception itself (that's
+// address-verified via stablecoinContext(), never guessed from a declared
+// name/symbol). Tickers are matched EXACTLY against the declared symbol
+// (not as a substring) — a short ticker like "dai" would false-positive on
+// any unrelated symbol that happens to contain those letters (e.g. "DAIYA").
+// Mirrors agents/investigate.py::STABLECOIN_BRAND_TICKERS.
+const STABLECOIN_BRAND_TICKERS = new Set([
+  "usdc", "usdt", "dai", "busd", "tusd", "usde", "usds", "frax", "gusd", "pyusd",
+]);
+// Full descriptive-name phrases are long/distinctive enough to stay safe as
+// substrings of the token's declared name. Mirrors
+// agents/investigate.py::STABLECOIN_BRAND_NAME_PHRASES.
+const STABLECOIN_BRAND_NAME_PHRASES = ["usd coin", "tether"];
+
 /**
  * Real, address-verified evidence that this exact contract is a live,
  * major, near-$1-pegged asset per CoinGecko's own data — or null if that
@@ -296,6 +312,30 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
     }
     signal(true, `Verified as a real, CoinGecko-recognized major stablecoin `
       + `($${stableCtx.market_cap_usd!.toLocaleString()} circulating, $${stableCtx.price_usd!.toFixed(4)} peg)`);
+  }
+
+  // Stablecoin-brand impersonation — the inverse of the verified-stablecoin
+  // exception above. Real gap this closes: a token self-declaring symbol
+  // "USDC" scored only 68/100 CAUTION (intel/investigations/investigation-
+  // 20260725-041324-0x8dB2be2b.md) despite actually being "United States of
+  // Doge CashCat," trading at $0.0001865 — nowhere near the real $1 peg it
+  // trades on the strength of its stolen ticker — and never verified by
+  // CoinGecko as the genuine address. Deliberately requires BOTH a matching
+  // brand name/symbol AND a real, far-off-peg (or missing) price — not just
+  // "unverified by CoinGecko," which a legitimate but thinly-tracked
+  // bridged/wrapped stablecoin variant could also trip. Field-for-field port
+  // of agents/investigate.py::score()'s same block.
+  const dexNameL = (dex.name || "").toLowerCase();
+  const dexSymStripped = (dex.symbol || "").toLowerCase().trim();
+  const claimsStablecoinBrand = STABLECOIN_BRAND_TICKERS.has(dexSymStripped)
+    || STABLECOIN_BRAND_NAME_PHRASES.some((p) => dexNameL.includes(p));
+  if (claimsStablecoinBrand && !stableCtx) {
+    const dexPrice = Number(dex.price_usd) || 0;
+    const priceOffPeg = dexPrice <= 0 || Math.abs(dexPrice - 1.0) > 0.15;
+    flag(priceOffPeg, 40,
+      `Token name/symbol (${dex.name} / ${dex.symbol}) claims a major stablecoin `
+      + `brand but trades at $${dexPrice.toFixed(6)}, nowhere near the real $1 peg, and is not the `
+      + "CoinGecko-verified real asset at this address — brand impersonation, not a real stablecoin");
   }
 
   const cname = (verif.name || "").toLowerCase();

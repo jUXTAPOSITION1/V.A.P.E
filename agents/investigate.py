@@ -111,6 +111,20 @@ IMPERSONATED_BRAND_PATTERNS = (
     "perplexity ai", "midjourney", "stability ai",
 )
 
+# Major fiat-backed stablecoin brand tickers/names — used ONLY to detect
+# impersonation (see the stablecoin-brand-impersonation check in score()
+# below), never to grant the verified-stablecoin exception itself (that's
+# address-verified via _stablecoin_context(), never guessed from a declared
+# name/symbol). Tickers are matched EXACTLY against the declared symbol
+# (not as a substring) — a short ticker like "dai" would false-positive on
+# any unrelated symbol that happens to contain those letters (e.g. "DAIYA").
+STABLECOIN_BRAND_TICKERS = {
+    "usdc", "usdt", "dai", "busd", "tusd", "usde", "usds", "frax", "gusd", "pyusd",
+}
+# Full descriptive-name phrases are long/distinctive enough to stay safe as
+# substrings of the token's declared name.
+STABLECOIN_BRAND_NAME_PHRASES = ("usd coin", "tether")
+
 try:
     from agents import data_fetchers as DF
 except Exception:
@@ -578,6 +592,39 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
     flag(is_brand_impersonation, 35,
          f"Token name/symbol ({dex.get('name')} / {dex.get('symbol')}) impersonates a real company "
          "with no on-chain affiliation — a hype-riding impersonation pattern, not coincidence")
+
+    # Stablecoin-brand impersonation — the inverse of the verified-stablecoin
+    # exception above. Real gap this closes: a token self-declaring symbol
+    # "USDC" scored only 68/100 CAUTION (intel/investigations/investigation-
+    # 20260725-041324-0x8dB2be2b.md) despite actually being "United States of
+    # Doge CashCat," trading at $0.0001865 — nowhere near the real $1 peg it
+    # trades on the strength of its stolen ticker — and never verified by
+    # CoinGecko as the genuine address. Deliberately requires BOTH a matching
+    # brand name/symbol AND a real, far-off-peg (or missing) price — not just
+    # "unverified by CoinGecko," which a legitimate but thinly-tracked
+    # bridged/wrapped stablecoin variant could also trip. A genuine ~$1 asset
+    # that merely isn't in CoinGecko's contract index stays neutral here
+    # (no bonus, no penalty); only an unmistakable price mismatch trips this.
+    # Exact-symbol match (not substring) for short tickers — "dai" as a raw
+    # substring would false-positive on any unrelated symbol that happens to
+    # contain those three letters (e.g. "DAIYA"); the full descriptive-name
+    # phrases ("usd coin", "tether") are long/distinctive enough to stay
+    # safe as substrings of the declared name.
+    dex_sym_stripped = dex_sym_l.strip()
+    claims_stablecoin_brand = (
+        dex_sym_stripped in STABLECOIN_BRAND_TICKERS
+        or any(p in dex_name_l for p in STABLECOIN_BRAND_NAME_PHRASES)
+    )
+    if claims_stablecoin_brand and not stable_ctx:
+        try:
+            dex_price = float(dex.get("price_usd") or 0)
+        except (TypeError, ValueError):
+            dex_price = 0.0
+        price_off_peg = dex_price <= 0 or abs(dex_price - 1.0) > 0.15
+        flag(price_off_peg, 40,
+             f"Token name/symbol ({dex.get('name')} / {dex.get('symbol')}) claims a major stablecoin "
+             f"brand but trades at ${dex_price:.6f}, nowhere near the real $1 peg, and is not the "
+             "CoinGecko-verified real asset at this address — brand impersonation, not a real stablecoin")
 
     # Deployer repeat-offender — real, ledger-derived (see
     # _deployer_repeat_offender() in the target-selection section below).
