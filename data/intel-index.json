@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T17:57:44Z",
+  "generated": "2026-07-25T18:12:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 109,
-    "investigations": 320,
+    "investigations": 321,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-175739-0x32708538.md",
-      "title": "Investigation \u2014 01",
-      "symbol": "01",
-      "name": "01",
-      "date": "2026-07-25T17:57:39Z",
-      "target": "0x32708538a107253b51a735A724330A23106ca4cA",
+      "file": "investigation-20260725-181242-0x4d7078DD.md",
+      "title": "Investigation \u2014 AI",
+      "symbol": "AI",
+      "name": "Gensyn",
+      "date": "2026-07-25T18:12:42Z",
+      "target": "0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 3870 holders \u2014 reasonably distributed; Top holders control only 9% of supply \u2014 broad distribution; Deep liquidity ($1,082,016); Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-175739-0x32708538.md"
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5004 holders \u2014 reasonably distributed; Custom verified source (no",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-181242-0x4d7078DD.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-181242-0x4d7078DD.md",
+      "title": "Investigation \u2014 AI",
+      "symbol": "AI",
+      "name": "Gensyn",
+      "date": "2026-07-25T18:12:42Z",
+      "target": "0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5004 holders \u2014 reasonably distributed; Custom verified source (no",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-181242-0x4d7078DD.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-175739-0x32708538.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-202007-0x4aC963E0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260722-184548-0x0000C9AF.md",
-      "title": "Investigation \u2014 SWOGE",
-      "symbol": "SWOGE",
-      "name": "Swole Doge",
-      "date": "2026-07-22T18:45:48Z",
-      "target": "0x0000C9AF57138af42f22729A4DE46c650E602EF4",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Low holder count (146); [-10] Low liquidity $43,257; [-10] Violent 24h move +828% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Trading 667+ days without a known incide",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260722-184548-0x0000C9AF.md"
     }
   ],
   "reports": [
