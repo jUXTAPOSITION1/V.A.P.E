@@ -51,6 +51,63 @@ export interface ScanResult {
 // field-for-field identical.
 const HARD_REJECT_FIELDS = ["is_blacklisted", "selfdestruct", "is_airdrop_scam"] as const;
 
+// Addresses whose held balance is permanently removed from circulation —
+// excluded from concentration math or a healthy burn/deflationary mechanism
+// would flag as a whale-risk false positive. Mirrors
+// agents/token_scan.py::BURN_ADDRESSES. Kept in its own constant so
+// agents/token_scan.py / docs/assets/app.js port identically.
+const BURN_ADDRESSES = new Set([
+  "0x0000000000000000000000000000000000000000",
+  "0x000000000000000000000000000000000000dead",
+]);
+
+// Real top-holder concentration + LP-lock status from GoPlus's own
+// per-holder "holders"/"lp_holders" arrays — already inside the SAME `gp`
+// object this scan() already fetches (keyless, no new API call), but never
+// read; only the scalar holder_count/lp_holder_count were. Field-for-field
+// port of agents/token_scan.py::_top_holder_concentration_pct()/
+// _lp_locked_pct() — see those functions' docstrings for the full context
+// and the schema-uncertainty caveat that also applies here.
+function topHolderConcentrationPct(gp: Record<string, any>): number | null {
+  const holders = gp?.holders;
+  if (!Array.isArray(holders) || holders.length === 0) return null;
+  let total = 0;
+  let counted = 0;
+  for (const h of holders.slice(0, 10)) {
+    if (!h || typeof h !== "object") continue;
+    const addr = String(h.address || "").toLowerCase();
+    if (BURN_ADDRESSES.has(addr)) continue;
+    const tag = String(h.tag || "").toLowerCase();
+    if (tag.includes("lp") || tag.includes("pool") || tag.includes("burn")) continue;
+    let pct = Number(h.percent);
+    if (!Number.isFinite(pct)) continue;
+    if (pct > 1) pct /= 100;
+    total += pct;
+    counted += 1;
+  }
+  if (counted === 0) return null;
+  return total * 100;
+}
+
+function lpLockedPct(gp: Record<string, any>): number | null {
+  const lpHolders = gp?.lp_holders;
+  if (!Array.isArray(lpHolders) || lpHolders.length === 0) return null;
+  let total = 0;
+  let locked = 0;
+  let counted = 0;
+  for (const h of lpHolders) {
+    if (!h || typeof h !== "object") continue;
+    let pct = Number(h.percent);
+    if (!Number.isFinite(pct)) continue;
+    if (pct > 1) pct /= 100;
+    total += pct;
+    if (String(h.is_locked) === "1") locked += pct;
+    counted += 1;
+  }
+  if (counted === 0 || total <= 0) return null;
+  return (locked / total) * 100;
+}
+
 async function safeGet(url: string, retries = 1): Promise<any> {
   for (let attempt = 0; ; attempt++) {
     try {
@@ -179,6 +236,15 @@ export async function scan(address: string, chainId = 8453): Promise<ScanResult>
   if (holders !== null && !Number.isNaN(holders) && holders < 50) flags.push("low_holder_count");
   if (pairCreatedMs && (Date.now() - pairCreatedMs) / 86400000 < 3) flags.push("fresh_launch");
   if (!hasSocials) flags.push("no_declared_socials");
+
+  // Real top-holder concentration + LP-lock status — see
+  // topHolderConcentrationPct()/lpLockedPct()'s docstrings. Kept as
+  // separate, more informative flags alongside the cruder scalar-count
+  // checks above (lp_concentrated/low_holder_count), not a replacement.
+  const topHolderPct = topHolderConcentrationPct(gp);
+  if (topHolderPct !== null && topHolderPct >= 70) flags.push(`concentrated_holders_${topHolderPct.toFixed(0)}pct`);
+  const lpLocked = lpLockedPct(gp);
+  if (lpLocked !== null && lpLocked < 50) flags.push(`lp_mostly_unlocked_${lpLocked.toFixed(0)}pct`);
 
   const hardReject = gp.is_honeypot === "1" || HARD_REJECT_FIELDS.some((field) => gp[field] === "1");
   let verdict: ScanResult["verdict"];

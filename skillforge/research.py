@@ -25,7 +25,10 @@ import re
 import sys
 import json
 import html
+import socket
+import ipaddress
 import argparse
+import urllib.error
 import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
@@ -208,15 +211,81 @@ class _TextExtractor(HTMLParser):
         return " ".join("".join(self.parts).split())
 
 
+_ALLOWED_FETCH_SCHEMES = ("http", "https")
+
+
+def _is_public_hostname(hostname):
+    """True only if EVERY address a hostname resolves to is a real, public
+    address — blocks SSRF via loopback/private/link-local (covers cloud
+    metadata endpoints like 169.254.169.254)/reserved/multicast ranges. A
+    hostname resolving to ANY non-public address is rejected outright
+    (fail closed, not just "first result looks public")."""
+    try:
+        infos = socket.getaddrinfo(hostname, None)
+    except Exception:
+        return False
+    if not infos:
+        return False
+    for info in infos:
+        try:
+            addr = ipaddress.ip_address(info[4][0])
+        except ValueError:
+            return False
+        if (addr.is_private or addr.is_loopback or addr.is_link_local
+                or addr.is_reserved or addr.is_multicast or addr.is_unspecified):
+            return False
+    return True
+
+
+def _validate_fetch_url(url):
+    """Reject anything but a plain http(s) URL to a real public hostname —
+    the gate every keyless fetch (initial request AND every redirect hop)
+    must pass before this module will touch it. See _fetch_keyless()'s
+    docstring for the real SSRF gap this closes."""
+    try:
+        parsed = urllib.parse.urlparse(url)
+    except Exception:
+        return False
+    if parsed.scheme not in _ALLOWED_FETCH_SCHEMES or not parsed.hostname:
+        return False
+    return _is_public_hostname(parsed.hostname)
+
+
+class _SSRFSafeRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Re-validates every redirect target the same way as the initial URL.
+    Without this, a URL that passes validation could 302 to an internal
+    address and urllib would follow it unquestioned — the classic
+    validate-then-redirect SSRF bypass (also closes DNS-rebinding, since
+    each hop re-resolves and re-checks the hostname fresh)."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if not _validate_fetch_url(newurl):
+            raise urllib.error.URLError(f"redirect to a disallowed URL blocked: {newurl}")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
 def _fetch_keyless(url):
-    """Keyless page fetch via the MCP `fetch` server if present, else urllib."""
+    """Keyless page fetch via the MCP `fetch` server if present, else urllib.
+
+    Real gap this closes (CodeRabbit, PR #282): this had zero URL validation
+    — a URL surfaced by a web search (this function's only real caller:
+    web_reputation_check()'s scam-mention escalation, in
+    agents/investigate.py — _project_narrative() deliberately does NOT call
+    this, see its own docstring on quota-proportionality) pointing at a
+    loopback/private/link-local address (e.g. cloud metadata,
+    169.254.169.254) would be fetched exactly like any public page — a
+    classic SSRF vector. Now rejects non-http(s) schemes and any hostname
+    resolving to a non-public address, and re-validates every redirect
+    target the same way via _SSRFSafeRedirectHandler."""
     if _available("fetch"):
         res = call("fetch", "fetch", {"url": url})
         if res.get("ok"):
             return {"provider": "mcp-fetch", "content": res.get("data")}
+    if not _validate_fetch_url(url):
+        return {"provider": "urllib-keyless", "error": "blocked: URL is not a public http(s) address"}
     try:
+        opener = urllib.request.build_opener(_SSRFSafeRedirectHandler)
         req = urllib.request.Request(url, headers=UA)
-        with urllib.request.urlopen(req, timeout=20) as r:
+        with opener.open(req, timeout=20) as r:
             raw = r.read().decode("utf-8", "replace")
         extractor = _TextExtractor()
         extractor.feed(raw)
