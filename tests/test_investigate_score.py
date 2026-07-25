@@ -229,3 +229,55 @@ def test_stablecoin_context_none_is_a_noop_on_score():
     a = score(gp, dex, {"is_contract": True}, {})[0]
     b = score(gp, dex, {"is_contract": True}, {}, coingecko_contract=None)[0]
     assert a == b
+
+
+# ── stablecoin-brand impersonation (the inverse of the exception above) ──
+
+def test_fake_usdc_claiming_ticker_far_off_peg_is_penalized():
+    """Direct regression test for the user-reported bug: a token
+    self-declaring symbol "USDC" but actually named "United States of Doge
+    CashCat" and trading at $0.0001865 (real report: intel/investigations/
+    investigation-20260725-041324-0x8dB2be2b.md) scored only 68/100 CAUTION
+    with no penalty at all for stealing the ticker. With no CoinGecko
+    verification and a price nowhere near $1, this must now take a real
+    impersonation penalty."""
+    gp = clean_gp(is_mintable="1", holder_count="24581")
+    dex = clean_dex(name="United States of Doge CashCat", symbol="USDC",
+                     liquidity_usd=158553.85, price_usd=0.0001865,
+                     pair_created_ms=days_ago_ms(8.5))
+    s, verdict, reasons, _ = score(gp, dex, {"is_contract": True},
+                                   {"checked": True, "verified": True, "name": "DropERC20"})
+    assert any("brand impersonation" in r for r in reasons), reasons
+    assert verdict != "PROCEED"
+
+
+def test_stablecoin_brand_impersonation_does_not_trip_on_real_verified_stablecoin():
+    """A real, CoinGecko-address-verified stablecoin claiming its own real
+    ticker (e.g. real USDT) must never trip the impersonation penalty —
+    stable_ctx being truthy short-circuits the check entirely."""
+    args = _real_usdt_shaped_inputs()
+    _s, _verdict, reasons, _ = score(*args, coingecko_contract=CG_USDT)
+    assert not any("brand impersonation" in r for r in reasons)
+
+
+def test_stablecoin_brand_impersonation_stays_neutral_on_unindexed_but_pegged_asset():
+    """A genuine ~$1 asset that simply isn't in CoinGecko's contract index
+    (thin/bridged/wrapped variant, never independently verified) must stay
+    neutral -- no bonus, no penalty -- rather than being treated as an
+    impersonator merely for lacking CoinGecko coverage."""
+    gp = clean_gp()
+    dex = clean_dex(name="Wrapped USD Coin (Bridge)", symbol="USDC",
+                     liquidity_usd=50000, price_usd=1.01)
+    _s, _verdict, reasons, _ = score(gp, dex, {"is_contract": True}, {"checked": False})
+    assert not any("brand impersonation" in r for r in reasons)
+
+
+def test_stablecoin_brand_impersonation_does_not_trip_on_unrelated_symbol_substring():
+    """Exact-ticker matching guard: an unrelated token whose symbol merely
+    contains a stablecoin ticker's letters (e.g. "DAIYA" containing "dai")
+    must not false-positive -- only an exact symbol match counts."""
+    gp = clean_gp()
+    dex = clean_dex(name="Daiya Token", symbol="DAIYA",
+                     liquidity_usd=50000, price_usd=0.002)
+    _s, _verdict, reasons, _ = score(gp, dex, {"is_contract": True}, {"checked": False})
+    assert not any("brand impersonation" in r for r in reasons)

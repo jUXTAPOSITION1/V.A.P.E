@@ -80,7 +80,27 @@ EVM_CHAINS = {
     "10":    {"name": "Optimism",  "gecko": "optimism",     "dex": "optimism",  "rpc": "https://mainnet.optimism.io"},
     "137":   {"name": "Polygon",   "gecko": "polygon_pos",  "dex": "polygon",   "rpc": "https://polygon-rpc.com"},
     "56":    {"name": "BNB Chain", "gecko": "bsc",          "dex": "bsc",       "rpc": "https://bsc-dataseed.binance.org"},
-    "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/Chain"},
+    # Real bug this fixes (from a live report, investigation-20260725-155143-
+    # 0xB8d7710f.md: "On-chain Presence (Avalanche RPC): unavailable this
+    # cycle (HTTP Error 404: Not Found)"): the C-Chain's real JSON-RPC path
+    # is /ext/bc/C/rpc, not /ext/bc/C/Chain (confirmed against viem's own
+    # chain definition, worker/node_modules/viem/chains/definitions/
+    # avalanche.ts) -- the old URL 404'd on every single Avalanche
+    # investigation, always downgrading a real onchain_presence() result to
+    # is_contract=None ("unknown").
+    "43114": {"name": "Avalanche", "gecko": "avax",         "dex": "avalanche", "rpc": "https://api.avax.network/ext/bc/C/rpc"},
+}
+
+# Human-facing block explorer per chain — used ONLY to build a real,
+# clickable "verify this yourself" link in the report's Sources section
+# (agents/data_fetchers.py::get_contract_source() already calls Etherscan
+# V2's unified API for the raw verification data; this is the matching
+# human-readable site for the SAME chain, not a new data source).
+EXPLORER_URLS = {
+    "8453": "https://basescan.org", "1": "https://etherscan.io",
+    "42161": "https://arbiscan.io", "10": "https://optimistic.etherscan.io",
+    "137": "https://polygonscan.com", "56": "https://bscscan.com",
+    "43114": "https://snowtrace.io",
 }
 
 # CoinGecko's own "asset platform" ids for its /coins/{platform}/contract/
@@ -110,6 +130,20 @@ IMPERSONATED_BRAND_PATTERNS = (
     "openai", "chatgpt", "anthropic", "claude", "deepmind",
     "perplexity ai", "midjourney", "stability ai",
 )
+
+# Major fiat-backed stablecoin brand tickers/names — used ONLY to detect
+# impersonation (see the stablecoin-brand-impersonation check in score()
+# below), never to grant the verified-stablecoin exception itself (that's
+# address-verified via _stablecoin_context(), never guessed from a declared
+# name/symbol). Tickers are matched EXACTLY against the declared symbol
+# (not as a substring) — a short ticker like "dai" would false-positive on
+# any unrelated symbol that happens to contain those letters (e.g. "DAIYA").
+STABLECOIN_BRAND_TICKERS = {
+    "usdc", "usdt", "dai", "busd", "tusd", "usde", "usds", "frax", "gusd", "pyusd",
+}
+# Full descriptive-name phrases are long/distinctive enough to stay safe as
+# substrings of the token's declared name.
+STABLECOIN_BRAND_NAME_PHRASES = ("usd coin", "tether")
 
 try:
     from agents import data_fetchers as DF
@@ -228,6 +262,9 @@ def dexscreener(address, chain="8453"):
         "change_24h_pct": (p.get("priceChange") or {}).get("h24"),
         "pair_created_ms": p.get("pairCreatedAt"),
         "dex": p.get("dexId"),
+        # DexScreener's own pair page URL — a real, direct source link for
+        # the report's Sources section, not reconstructed/guessed.
+        "pair_url": p.get("url"),
         # Raw declared URLs (not just the has-any-socials boolean
         # agents/token_scan.py computes) — used by acp_fulfill.py's
         # dossier_check to actually visit these, not just count them.
@@ -297,7 +334,12 @@ def contract_verification(address, chain="8453"):
                     "name": _sanitize_symbol(r.get("ContractName")),
                     "compiler": r.get("CompilerVersion") or None,
                     "proxy": r.get("Proxy") == "1",
-                    "implementation": r.get("Implementation") or None}
+                    "implementation": r.get("Implementation") or None,
+                    # Raw verified source — see _scan_privileged_functions()'s
+                    # docstring for why this is now passed through instead
+                    # of discarded (same already-fetched-but-unused pattern
+                    # as this session's other fixes).
+                    "source_code": r.get("SourceCode") or None}
         except Exception:
             return {"checked": True, "verified": None}
     r = DF.get_contract_source(address, chainid=chain)
@@ -307,7 +349,54 @@ def contract_verification(address, chain="8453"):
             "name": _sanitize_symbol(r.get("contract_name")),
             "compiler": r.get("compiler"),
             "proxy": r.get("proxy"),
-            "implementation": r.get("implementation")}
+            "implementation": r.get("implementation"),
+            "source_code": r.get("source_code")}
+
+
+# Notable/privileged-sounding function name substrings — informational only
+# (see _scan_privileged_functions()'s docstring for why this never feeds
+# score() penalties). Not exhaustive; a text-based name scan can't tell a
+# genuinely dangerous mint() apart from a standard, harmless one — this is
+# a transparency aid pointing a human reader at what to go look at, not a
+# verdict.
+_PRIVILEGED_FUNCTION_PATTERNS = (
+    "mint", "burn", "pause", "blacklist", "whitelist", "setfee",
+    "settax", "withdraw", "rescue", "sweep", "seize", "confiscate",
+    "transferownership", "renounceownership", "setowner", "upgradeto",
+    "setimplementation",
+)
+_FUNCTION_NAME_RE = re.compile(r"\bfunction\s+([A-Za-z_]\w*)\s*\(")
+
+
+def _scan_privileged_functions(source_code):
+    """Deterministic, non-LLM scan of already-fetched verified source code
+    (contract_verification()'s source_code field) for notable/privileged-
+    sounding function names and known dangerous patterns (selfdestruct,
+    delegatecall). Real gap this closes: the user flagged "no insight into
+    constructor plus any role or treasury functions... even though
+    ownership renounced now" as missing from a live report (investigation-
+    20260725-155143-0xB8d7710f.md).
+
+    Deliberately kept purely informational — surfaced in the report, never
+    fed into score(). A text-based function-name match can't distinguish a
+    genuinely dangerous privileged function from a standard, harmless one
+    with a similar name (e.g. a compliant stablecoin's own mint()), so
+    treating this as a scoring signal would risk exactly the kind of
+    false-positive noise this repo's existing GoPlus-flag-based penalties
+    are built to avoid. Returns None if no source is available."""
+    if not source_code or not isinstance(source_code, str):
+        return None
+    names_seen = set()
+    for m in _FUNCTION_NAME_RE.finditer(source_code):
+        name = m.group(1)
+        if any(p in name.lower() for p in _PRIVILEGED_FUNCTION_PATTERNS):
+            names_seen.add(name)
+    low_src = source_code.lower()
+    return {
+        "functions": sorted(names_seen),
+        "has_selfdestruct": "selfdestruct(" in low_src or "suicide(" in low_src,
+        "has_delegatecall": "delegatecall(" in low_src,
+    }
 
 
 def hack_correlation(gp):
@@ -579,6 +668,39 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
          f"Token name/symbol ({dex.get('name')} / {dex.get('symbol')}) impersonates a real company "
          "with no on-chain affiliation — a hype-riding impersonation pattern, not coincidence")
 
+    # Stablecoin-brand impersonation — the inverse of the verified-stablecoin
+    # exception above. Real gap this closes: a token self-declaring symbol
+    # "USDC" scored only 68/100 CAUTION (intel/investigations/investigation-
+    # 20260725-041324-0x8dB2be2b.md) despite actually being "United States of
+    # Doge CashCat," trading at $0.0001865 — nowhere near the real $1 peg it
+    # trades on the strength of its stolen ticker — and never verified by
+    # CoinGecko as the genuine address. Deliberately requires BOTH a matching
+    # brand name/symbol AND a real, far-off-peg (or missing) price — not just
+    # "unverified by CoinGecko," which a legitimate but thinly-tracked
+    # bridged/wrapped stablecoin variant could also trip. A genuine ~$1 asset
+    # that merely isn't in CoinGecko's contract index stays neutral here
+    # (no bonus, no penalty); only an unmistakable price mismatch trips this.
+    # Exact-symbol match (not substring) for short tickers — "dai" as a raw
+    # substring would false-positive on any unrelated symbol that happens to
+    # contain those three letters (e.g. "DAIYA"); the full descriptive-name
+    # phrases ("usd coin", "tether") are long/distinctive enough to stay
+    # safe as substrings of the declared name.
+    dex_sym_stripped = dex_sym_l.strip()
+    claims_stablecoin_brand = (
+        dex_sym_stripped in STABLECOIN_BRAND_TICKERS
+        or any(p in dex_name_l for p in STABLECOIN_BRAND_NAME_PHRASES)
+    )
+    if claims_stablecoin_brand and not stable_ctx:
+        try:
+            dex_price = float(dex.get("price_usd") or 0)
+        except (TypeError, ValueError):
+            dex_price = 0.0
+        price_off_peg = dex_price <= 0 or abs(dex_price - 1.0) > 0.15
+        flag(price_off_peg, 40,
+             f"Token name/symbol ({dex.get('name')} / {dex.get('symbol')}) claims a major stablecoin "
+             f"brand but trades at ${dex_price:.6f}, nowhere near the real $1 peg, and is not the "
+             "CoinGecko-verified real asset at this address — brand impersonation, not a real stablecoin")
+
     # Deployer repeat-offender — real, ledger-derived (see
     # _deployer_repeat_offender() in the target-selection section below).
     # Confirmed real gap: several of the impersonation tokens above shared a
@@ -615,6 +737,29 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
         signal(holders >= 500, f"{holders} holders — reasonably distributed")
     else:
         flag(True, 5, "Holder count unavailable — cannot assess distribution")
+
+    # Real top-holder concentration + LP-lock status — both already sitting
+    # in GoPlus's own response every cycle (see _holder_concentration()/
+    # _lp_lock_status() docstrings) but never previously read. Deliberately
+    # moderate weights (smaller than the honeypot/mint/proxy penalties
+    # above) since this is a newly-wired signal on a GoPlus response shape
+    # this sandbox couldn't verify live — conservative until a real
+    # production cycle confirms the field shapes match.
+    concentration = _holder_concentration(gp)
+    if concentration:
+        top_pct = concentration["top_holders_pct"]
+        flag(top_pct >= 70, 15, f"Top {concentration['holders_counted']} non-LP/burn holders control "
+                                f"{top_pct:.0f}% of supply — concentrated, easily manipulated")
+        flag(50 <= top_pct < 70, 8, f"Top {concentration['holders_counted']} non-LP/burn holders control "
+                                    f"{top_pct:.0f}% of supply — meaningful concentration")
+        signal(top_pct < 20, f"Top holders control only {top_pct:.0f}% of supply — broad distribution")
+
+    lp_lock = _lp_lock_status(gp)
+    if lp_lock:
+        locked_pct = lp_lock["locked_pct"]
+        flag(locked_pct < 50, 15, f"Only {locked_pct:.0f}% of liquidity is locked — "
+                                  "the deployer can pull the rest at any time")
+        signal(locked_pct >= 80, f"{locked_pct:.0f}% of liquidity is locked — reduced rug-pull risk")
 
     liq = dex.get("liquidity_usd") or 0
     try:
@@ -828,10 +973,97 @@ def auto_target(chain=None):
     return None
 
 
+# Ordered (category, keywords) buckets for _categorize_report_reasons() below
+# — order matters, first match wins, so more specific categories are listed
+# before general ones (e.g. a stablecoin-peg reason mentions "supply" too,
+# but "peg"/"stablecoin" should bucket it under Tokenomics, not Distribution).
+_RISK_CATEGORIES = (
+    ("Security & Contract Risk", (
+        "honeypot", "mintable", "mint function", "ownership can be reclaimed",
+        "take back ownership", "change balances", "hidden owner", "proxy",
+        "pausable", "buy tax", "sell tax", "not renounced", "renounced",
+    )),
+    ("Tokenomics & Track Record", (
+        "peg", "stablecoin", "impersonat", "days old", "track record", "violent",
+        "volatility", "24h move", "fdv", "dilution",
+    )),
+    ("Holder Distribution & Liquidity", (
+        "holder", "liquidity", "supply", "locked", "concentrat", "distribution",
+        "manipulated",
+    )),
+    ("Transparency & Provenance", (
+        "audit", "verified source", "unverified", "factory", "template",
+        "deployer", "web search", "scam", "rug", "eoa", "no contract code",
+    )),
+)
+
+
+def _bucket_for_report_reason(text):
+    """First category (in _RISK_CATEGORIES' declared order) whose keyword
+    appears in `text`, or "Other" if none match. Shared by
+    _categorize_report_reasons() and _category_subscores() below so the two
+    views (which flags/signals landed where, and each category's derived
+    sub-score) can never silently drift apart."""
+    low = text.lower()
+    for name, keywords in _RISK_CATEGORIES:
+        if any(k in low for k in keywords):
+            return name
+    return "Other"
+
+
+def _categorize_report_reasons(reasons, positive_signals):
+    """Buckets score()'s already-computed reasons/positive_signals into
+    named risk categories, purely for report presentation — no new data
+    fetched, no scoring change; the multi-dimensional "how does this rank"
+    view requested directly by the user, built from what score() already
+    produces. Never raises — an unexpected reason string just falls through
+    to "Other" rather than crashing report generation."""
+    buckets = {name: {"flags": [], "signals": []} for name, _ in _RISK_CATEGORIES}
+    buckets["Other"] = {"flags": [], "signals": []}
+    for r in reasons or []:
+        buckets[_bucket_for_report_reason(r)]["flags"].append(r)
+    for p in positive_signals or []:
+        buckets[_bucket_for_report_reason(p)]["signals"].append(p)
+    # Preserve category declaration order, then "Other" last; drop empty ones.
+    ordered_names = [name for name, _ in _RISK_CATEGORIES] + ["Other"]
+    return [(name, buckets[name]) for name in ordered_names
+            if buckets[name]["flags"] or buckets[name]["signals"]]
+
+
+# Matches score()'s own flag()/stablecoin-refund reason-string convention:
+# "[-N] ..." for a penalty, "[+N] ..." for the stablecoin-exception refund.
+# Does NOT match "[capped at N] ..." (the global legitimacy cap) — that's a
+# whole-score adjustment, not attributable to any one category.
+_REASON_WEIGHT_RE = re.compile(r"^\[([+-])(\d+)\]")
+
+
+def _category_subscores(reasons):
+    """Best-effort, clearly-derived per-category sub-scores for the
+    Executive Summary's composite ranking view (the user's explicit ask:
+    "Security 95/100, Fundamentals 70/100, Tokenomics 60/100 -> overall
+    rank"). NOT a second scoring engine — score() never computes categories
+    in isolation (some penalties interact with the overall legitimacy cap
+    that this simple per-category net can't see), so this is a readability
+    aid, not an independent source of truth; the real score/verdict from
+    score() remains authoritative and is always shown alongside it. Starts
+    every one of the 4 fixed categories at 100 and nets each of its own
+    weighted reasons against that, clamped to [0, 100]."""
+    totals = {name: 100 for name, _ in _RISK_CATEGORIES}
+    for r in reasons or []:
+        m = _REASON_WEIGHT_RE.match(r)
+        if not m:
+            continue
+        delta = int(m.group(2)) * (1 if m.group(1) == "+" else -1)
+        name = _bucket_for_report_reason(r)
+        if name in totals:
+            totals[name] += delta
+    return {name: max(0, min(100, totals[name])) for name in totals}
+
+
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
                  defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None,
-                 expert_assessment=None):
+                 expert_assessment=None, coingecko_contract=None):
     os.makedirs(INVEST_DIR, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     short = target[:10]
@@ -871,6 +1103,26 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append("")
     L.append("---")
     L.append("")
+    # Real gap this closes: a single flat score/verdict doesn't show WHERE a
+    # token is strong vs. weak, and there was no top-level composite view at
+    # all — the user's explicit template ask ("Executive Summary + Overall
+    # Ranking Score, composite with category breakdown ... -> overall
+    # rank"). Derived entirely from score()'s own output (see
+    # _category_subscores()'s docstring for why this is a presentation aid,
+    # not a second scoring engine) — the authoritative score/verdict above
+    # is unchanged either way.
+    L.append("## Executive Summary")
+    L.append(f"**Overall: {verdict} ({s}/100)**")
+    L.append("")
+    L.append("| Category | Score |")
+    L.append("|---|---|")
+    for name, sub in _category_subscores(reasons).items():
+        L.append(f"| {name} | {sub}/100 |")
+    L.append("")
+    L.append("*Category scores are a derived readability aid (net effect of that "
+             "category's own flags against a 100 baseline) — the Overall score above, "
+             "computed by the full scoring engine, is the authoritative verdict.*")
+    L.append("")
     L.append("## Verdict Rationale (risk factors)")
     if reasons:
         for r in reasons:
@@ -886,6 +1138,25 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append("- None found. Absence of red flags is not evidence of safety — a clean sweep "
                   "with zero positive signals still caps the score below PROCEED tier.")
     L.append("")
+    # Real gap this closes: a flat single score/verdict doesn't tell a reader
+    # WHERE a token is strong vs. weak (e.g. clean security but concentrated
+    # holders, or the reverse) -- flagged directly by the user as a missing
+    # "rank across categories, not just pass/fail" view. Pure presentation
+    # over the exact reasons/positive_signals already computed above; no new
+    # scoring, no new data.
+    L.append("## Risk Breakdown by Category")
+    categorized = _categorize_report_reasons(reasons, positive_signals)
+    if categorized:
+        for name, bucket in categorized:
+            L.append(f"**{name}** — {len(bucket['flags'])} flag(s), {len(bucket['signals'])} positive signal(s)")
+            for r in bucket["flags"]:
+                L.append(f"  - {r}")
+            for p in bucket["signals"]:
+                L.append(f"  - (positive) {p}")
+        L.append("")
+    else:
+        L.append("- Nothing to categorize this cycle.")
+        L.append("")
     L.append("## Expert Assessment")
     if expert_assessment and expert_assessment.get("text"):
         tag = "⚠️ **DISAGREES with the verdict above**" if expert_assessment["disagrees"] else "Agrees with the verdict above"
@@ -903,8 +1174,91 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- 24h Volume: ${dex.get('vol_24h_usd')}")
         L.append(f"- 24h Change: {dex.get('change_24h_pct')}%")
         L.append(f"- DEX: {dex.get('dex')}")
+        # Real gap this closes: liquidity and market cap were both already
+        # fetched (DexScreener + CoinGecko contract lookup, the same call
+        # already used for the Tokenomics section below) but the ratio
+        # between them -- a standard "how deep is this market relative to
+        # its size" metric -- was never computed. Only shown when both real
+        # numbers are on hand; never estimated.
+        try:
+            liq_val = float(dex.get("liquidity_usd") or 0)
+        except (TypeError, ValueError):
+            liq_val = 0
+        mcap_val = coingecko_contract.get("market_cap_usd") if isinstance(coingecko_contract, dict) else None
+        if liq_val > 0 and isinstance(mcap_val, (int, float)) and mcap_val > 0:
+            ratio_pct = (liq_val / mcap_val) * 100
+            L.append(f"- Liquidity/Market-cap ratio: {ratio_pct:.1f}% — "
+                     f"{'thin relative to market cap' if ratio_pct < 3 else 'reasonable depth for its size'}")
     else:
         L.append("- No DEX pair data (illiquid / not listed).")
+    L.append("")
+    # Real gap this closes: dexscreener()'s "websites"/"socials"/"logo_url"
+    # fields were already fetched every single cycle but never rendered
+    # anywhere in this free report -- only the paid deep-dive audit surfaced
+    # them (agents/deep_dive_audit.py). A real report has to name what the
+    # project actually is and link to its own claimed official presence
+    # (confirmed missing: investigation-20260725-155143-0xB8d7710f.md, an
+    # ARENA/Avalanche report with no official links at all despite
+    # DexScreener tracking a real website + X account for it).
+    L.append("## Project Links (as declared on DexScreener)")
+    site_links = [w.get("url") for w in (dex.get("websites") or []) if w.get("url")]
+    social_links = [f"{soc.get('type') or 'link'}: {soc.get('url')}"
+                    for soc in (dex.get("socials") or []) if soc.get("url")]
+    if site_links or social_links:
+        for u in site_links:
+            L.append(f"- Website: {u}")
+        for s_line in social_links:
+            L.append(f"- {s_line}")
+    else:
+        L.append("- No official website/social links declared on this token's DexScreener listing.")
+    L.append("")
+    # Real gap this closes: get_token_market_by_contract() already fetches
+    # CoinGecko's full contract-address response (needed for the stablecoin-
+    # verification check above) but used to discard supply/FDV/description --
+    # exactly the "tokenomics" and "what is this" context a real report needs
+    # and this one previously had none of. Only rendered when CoinGecko
+    # actually tracks this exact address -- absence stays an honest "not
+    # available", never a fabricated number.
+    L.append("## Tokenomics (CoinGecko, address-verified)")
+    if coingecko_contract and isinstance(coingecko_contract, dict):
+        cg = coingecko_contract
+        had_any = False
+        if cg.get("circulating_supply") is not None:
+            L.append(f"- Circulating supply: {cg['circulating_supply']:,.0f} {cg.get('symbol', '').upper()}")
+            had_any = True
+        if cg.get("total_supply") is not None:
+            L.append(f"- Total supply: {cg['total_supply']:,.0f}")
+            had_any = True
+        if cg.get("max_supply") is not None:
+            L.append(f"- Max supply: {cg['max_supply']:,.0f}")
+            had_any = True
+        if cg.get("market_cap_usd") is not None:
+            L.append(f"- Market cap: ${cg['market_cap_usd']:,.0f}")
+            had_any = True
+        if cg.get("fdv_usd") is not None:
+            L.append(f"- Fully diluted valuation: ${cg['fdv_usd']:,.0f}")
+            had_any = True
+        if cg.get("market_cap_usd") and cg.get("fdv_usd"):
+            ratio = cg["fdv_usd"] / cg["market_cap_usd"] if cg["market_cap_usd"] else None
+            if ratio:
+                L.append(f"- FDV/Market-cap ratio: {ratio:.2f}x — "
+                         f"{'a meaningful share of supply is still non-circulating (dilution risk)' if ratio > 1.3 else 'most of supply is already circulating'}")
+                had_any = True
+        if cg.get("homepage"):
+            L.append(f"- Homepage: {cg['homepage']}")
+            had_any = True
+        if cg.get("twitter"):
+            L.append(f"- X/Twitter: https://x.com/{cg['twitter']}")
+            had_any = True
+        if cg.get("description"):
+            L.append("")
+            L.append(f"> {cg['description']}")
+            had_any = True
+        if not had_any:
+            L.append("- CoinGecko tracks this address but returned no supply/valuation fields this cycle.")
+    else:
+        L.append("- Not available this cycle (CoinGecko does not track this exact contract address, "
+                 "or the token isn't listed there yet) — absence noted, not penalized.")
     L.append("")
     L.append("## Token Security (GoPlus)")
     if gp:
@@ -915,6 +1269,28 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
                 L.append(f"- {k}: `{gp.get(k)}`")
     else:
         L.append("- GoPlus returned no security profile for this token.")
+    L.append("")
+    # Real gap this closes: GoPlus's own "holders"/"lp_holders" arrays
+    # (per-address concentration, per-LP-holder lock status) were already
+    # fetched inside `gp` every cycle but never surfaced anywhere -- a raw
+    # holder_count alone can't distinguish broad organic distribution from
+    # a few whales plus a long dust tail, and no report ever showed whether
+    # liquidity was actually locked. See _holder_concentration()/
+    # _lp_lock_status() docstrings for the honest-degradation caveat on
+    # GoPlus's exact field shape.
+    L.append("## Holder Distribution & Liquidity Lock (GoPlus)")
+    concentration = _holder_concentration(gp)
+    lp_lock = _lp_lock_status(gp)
+    if concentration:
+        L.append(f"- Top {concentration['holders_counted']} non-LP/burn holders control "
+                 f"{concentration['top_holders_pct']:.1f}% of supply")
+    else:
+        L.append("- Top-holder concentration not available this cycle.")
+    if lp_lock:
+        L.append(f"- {lp_lock['locked_pct']:.1f}% of tracked liquidity-pool tokens are locked "
+                 f"(across {lp_lock['lp_holders_counted']} LP holder(s))")
+    else:
+        L.append("- Liquidity-lock status not available this cycle.")
     L.append("")
     L.append(f"## On-chain Presence ({chain_display} RPC)")
     if onchain.get("is_contract") is None:
@@ -928,6 +1304,26 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- Verified: {verif.get('verified')}")
         L.append(f"- Name: {verif.get('name')} · Compiler: {verif.get('compiler')}")
         L.append(f"- Proxy: {verif.get('proxy')} · Implementation: {verif.get('implementation')}")
+        # Real gap this closes: the verified source was already fetched
+        # (same call, no extra API cost) but discarded -- the user flagged
+        # "no insight into constructor plus any role or treasury functions"
+        # as missing from a live report. Purely informational: a text-based
+        # function-name scan can't tell a dangerous privileged function
+        # apart from a harmless one with a similar name, so this is never
+        # fed into score() (see _scan_privileged_functions()'s docstring).
+        scan = _scan_privileged_functions(verif.get("source_code"))
+        if scan:
+            if scan["functions"]:
+                L.append(f"- Notable functions found in verified source (informational, not scored): "
+                         f"{', '.join(scan['functions'])}")
+            else:
+                L.append("- No notable privileged-sounding function names found in verified source.")
+            if scan["has_selfdestruct"]:
+                L.append("- ⚠️ Verified source contains a `selfdestruct`-family call.")
+            if scan["has_delegatecall"]:
+                L.append("- Verified source contains `delegatecall` (expected for proxies; worth a manual look otherwise).")
+        else:
+            L.append("- Verified source not available to scan this cycle.")
     else:
         L.append(f"- {verif.get('note', 'not checked')}")
     L.append("")
@@ -1006,6 +1402,25 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- No structural inconsistencies found — reasons, positive signals, verdict and "
                  "score all agree with the raw evidence and score()'s own invariants.")
+    L.append("")
+    # Real gap this closes: every claim above was already backed by a real
+    # source, but none of those sources were ever linked for a reader to
+    # independently re-verify -- confirmed missing in a live report,
+    # investigation-20260725-155143-0xB8d7710f.md ("Sources, Methodology,
+    # Limitations" flagged as absent). Every link here is either a direct,
+    # already-known field (DexScreener's own pair URL) or built from a
+    # static, versioned map (EXPLORER_URLS) -- never a guessed/constructed
+    # third-party URL.
+    L.append("## Sources & Verification Links")
+    explorer = EXPLORER_URLS.get(str(chain))
+    if explorer:
+        L.append(f"- Block explorer: {explorer}/address/{target}")
+    if dex and dex.get("pair_url"):
+        L.append(f"- DexScreener pair: {dex['pair_url']}")
+    if coingecko_contract and coingecko_contract.get("coingecko_id"):
+        L.append(f"- CoinGecko: https://www.coingecko.com/en/coins/{coingecko_contract['coingecko_id']}")
+    L.append("- GoPlus Security, Etherscan V2 API, and DeFiLlama were queried directly for the "
+             "sections above; this list only covers human-clickable pages for independent re-verification.")
     L.append("")
     L.append("---")
     L.append("")
@@ -1249,6 +1664,94 @@ def _stablecoin_context(cg_contract):
         return None
     return {"name": cg_contract.get("name"), "symbol": cg_contract.get("symbol"),
             "market_cap_usd": mcap, "price_usd": price}
+
+
+# Addresses whose held balance is permanently removed from circulation, not
+# a whale who can dump — must be excluded from concentration math or a
+# healthy burn/deflationary mechanism would score as a whale-risk red flag.
+_BURN_ADDRESSES = {
+    "0x0000000000000000000000000000000000000000",
+    "0x000000000000000000000000000000000000dead",
+}
+
+
+def _holder_concentration(gp):
+    """Real top-holder concentration from GoPlus's own per-holder "holders"
+    array (percent of supply per address) — a genuine, already-fetched
+    signal that used to sit completely unused: every investigation already
+    calls goplus_security() and gets this back inside the raw dict, but only
+    the scalar holder_count was ever read, never the per-holder breakdown
+    that would reveal whether "40k holders" means broad organic distribution
+    or a handful of whales plus a long dust tail (flagged directly as a
+    missing factor against a live report, investigation-20260725-155143-
+    0xB8d7710f.md, where a raw holder count was the ONLY distribution signal
+    available). Excludes burn addresses (that supply can never move) and
+    addresses GoPlus itself tags as an LP/pool (that's liquidity, not a
+    whale). Returns None on any missing/malformed shape — GoPlus's exact
+    schema couldn't be verified against a live response from this sandbox
+    (network access is blocked here, same as every other external API in
+    this repo), so this degrades honestly to "no signal" rather than ever
+    guessing wrong. Never raises."""
+    holders = gp.get("holders") if isinstance(gp, dict) else None
+    if not isinstance(holders, list) or not holders:
+        return None
+    total_pct = 0.0
+    counted = 0
+    for h in holders[:10]:
+        if not isinstance(h, dict):
+            continue
+        addr = str(h.get("address") or "").lower()
+        if addr in _BURN_ADDRESSES:
+            continue
+        tag = str(h.get("tag") or "").lower()
+        if "lp" in tag or "pool" in tag or "burn" in tag:
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        # GoPlus reports percent as a 0-1 fraction in this API family (same
+        # convention as buy_tax/sell_tax elsewhere in this file); guard
+        # against a 0-100 shape too so a schema surprise never inflates
+        # 10x instead of silently misreading.
+        if pct > 1:
+            pct = pct / 100.0
+        total_pct += pct
+        counted += 1
+    if counted == 0:
+        return None
+    return {"top_holders_pct": total_pct * 100.0, "holders_counted": counted}
+
+
+def _lp_lock_status(gp):
+    """Real liquidity-lock status from GoPlus's own "lp_holders" array
+    (is_locked per LP-token holder) — the classic, concrete "can the dev
+    just pull liquidity and rug" check, already fetched every cycle via
+    goplus_security() and never read. Returns None on any missing/malformed
+    shape (see _holder_concentration()'s docstring for why — same
+    unverified-live-schema caveat, same honest-degradation rule)."""
+    lp_holders = gp.get("lp_holders") if isinstance(gp, dict) else None
+    if not isinstance(lp_holders, list) or not lp_holders:
+        return None
+    total_pct = 0.0
+    locked_pct = 0.0
+    counted = 0
+    for h in lp_holders:
+        if not isinstance(h, dict):
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        if pct > 1:
+            pct = pct / 100.0
+        total_pct += pct
+        if str(h.get("is_locked")) == "1":
+            locked_pct += pct
+        counted += 1
+    if counted == 0 or total_pct <= 0:
+        return None
+    return {"locked_pct": (locked_pct / total_pct) * 100.0, "lp_holders_counted": counted}
 
 
 def _data_agent_intel(address, chain):
@@ -1551,7 +2054,7 @@ def investigate(address, chain="8453", hint="", force=False):
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
                                     positive_signals, web_rep, dl_intel, siblings, critic_result,
-                                    data_agent_intel, expert_assessment)
+                                    data_agent_intel, expert_assessment, coingecko_contract=cg_contract)
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
     log_memory(address, sym, verdict, s, reasons, rel, chain)
     update_catalog(address, sym, verdict, s, reasons, rel)
