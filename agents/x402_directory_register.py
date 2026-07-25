@@ -82,13 +82,31 @@ Deliberately NOT scheduled: repeated calls to an unfamiliar directory's
 /register endpoint with unknown dedup behavior risk creating duplicate
 listings. Trigger manually (workflow_dispatch) when the offering list,
 prices, or worker URL change — see .github/workflows/x402-directory.yml.
+
+Duplicate-listing avoidance (2026-07-25): the 2026-07-05 run registered 22
+offerings with 402index.io; 5 more (tx_decode, community_intel_broadcast,
+bulk_safety_bundle, deep_contract_audit, website_review) were added to the
+worker on 2026-07-20 but never registered anywhere, since this script was
+never re-run in between. Re-sending all 27 to 402index.io's still-
+undocumented-dedup /register endpoint would risk duplicating the 22
+already-listed ones. STATE_PATH now records which offering names have
+already been successfully registered with 402index.io; register_402index()
+skips those on every future run unless --force-all is passed, so re-running
+this script after adding a new offering is always safe by default. VAPOR's
+own /discovery/register is a real upsert (per its own docs), so
+register_vapor() is intentionally NOT filtered by this state — it always
+sends the full current list.
 """
+import argparse
 import json
 import os
 import sys
 import time
 import urllib.request
 import urllib.error
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATE_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "x402_directory_state.json")
 
 WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 PROVIDER = "VAPE"
@@ -243,10 +261,41 @@ def _post(url, payload, timeout=15, max_retries=3, backoff_base=10):
     return code, body
 
 
-def register_402index():
+def _load_state():
+    try:
+        with open(STATE_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {"registered_402index": []}
+
+
+def _save_state(state):
+    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+    with open(STATE_PATH, "w") as f:
+        json.dump(state, f, indent=2, sort_keys=True)
+        f.write("\n")
+
+
+def register_402index(only=None, force_all=False):
+    """Registers each offering with 402index.io — but SKIPS any offering
+    already recorded in STATE_PATH as previously registered, unless
+    force_all is set, since 402index.io's /register dedup behavior is
+    undocumented and re-sending an already-listed offering risks creating a
+    duplicate listing (see module docstring). `only`, if given, further
+    restricts this run to that explicit set of offering names (e.g. just the
+    newly-added ones) regardless of state."""
+    state = _load_state()
+    already = set(state.get("registered_402index", []))
     results = []
-    for i, (name, _meta, prefix) in enumerate(_all_offerings()):
-        if i > 0:
+    newly_registered = []
+    for name, _meta, prefix in _all_offerings():
+        if only is not None and name not in only:
+            continue
+        if not force_all and name in already:
+            print(f"[402index] {name}: skipped — already registered on a previous run "
+                  f"(pass --force-all to re-send anyway)")
+            continue
+        if results:
             time.sleep(2)  # pace requests — be a good citizen on someone else's free API
         payload = {
             "url": f"{WORKER_BASE}/{prefix}/{name}",
@@ -258,6 +307,14 @@ def register_402index():
         ok = 200 <= code < 300
         results.append({"offering": name, "status": code, "ok": ok, "response": body})
         print(f"[402index] {name}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
+        if ok:
+            newly_registered.append(name)
+
+    if newly_registered:
+        state["registered_402index"] = sorted(already | set(newly_registered))
+        _save_state(state)
+        print(f"[402index] recorded {len(newly_registered)} newly-registered offering(s) in "
+              f"{os.path.relpath(STATE_PATH, _REPO_ROOT)}: {newly_registered}")
     return results
 
 
@@ -338,18 +395,30 @@ def build_awesome_x402_entry():
     has no write access to it, so a human has to actually open that PR."""
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
-        f"(ERC-8004 #54988). 6 instant x402 security offerings ($0.01-$0.10: exploit/token-safety/"
-        f"liquidity/rug-pull/dossier/market-intel checks) + 13 market-data micro-services "
-        f"($0.01 each: token price-oracle intel, TVL/fees/unlocks/treasury, yields, stablecoin "
-        f"depeg, bridge volumes) + a $1 deep-dive bounty audit (recon + Slither + frontier-model "
-        f"review — a submission-ready PoC and full technical detail). Docs: "
+        f"(ERC-8004 #54988). {len(OFFERINGS)} instant x402 offerings ($0.01-$0.50: exploit/"
+        f"token-safety/liquidity/rug-pull/dossier/tx-decode/community-intel/bulk-safety/"
+        f"website-review checks) + {len(DATA_OFFERINGS)} market-data micro-services ($0.01-$0.25 "
+        f"each: token price-oracle intel, wallet P&L, TVL/fees/unlocks/treasury, yields, stablecoin "
+        f"depeg, bridge volumes, prediction-market odds) + a $1 deep-dive bounty audit / address-only "
+        f"deep_contract_audit alias (recon + Slither/Halmos/Mythril/Aderyn + frontier-model review — "
+        f"a submission-ready PoC and full technical detail). Docs: "
         f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"
     )
 
 
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--only", help="Comma-separated offering names to register with 402index.io "
+                     "this run (e.g. newly-added offerings only). Omit to register every offering "
+                     "not already recorded as registered in the state file.")
+    ap.add_argument("--force-all", action="store_true", help="Re-send every offering to 402index.io "
+                     "even if already recorded as registered — use only if you know the directory "
+                     "dedupes by URL, or intend an explicit re-listing.")
+    args = ap.parse_args()
+    only = set(n.strip() for n in args.only.split(",") if n.strip()) if args.only else None
+
     print(f"=== VAPE x402 directory registration — worker: {WORKER_BASE} ===\n")
-    idx_results = register_402index()
+    idx_results = register_402index(only=only, force_all=args.force_all)
 
     manifest = build_x402_list_manifest()
     for directory_name, url in (

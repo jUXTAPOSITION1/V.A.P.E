@@ -7,9 +7,17 @@ on:
         description: 'Why this run (e.g. "initial listing", "offering price change")'
         required: false
         default: 'manual trigger'
+      only:
+        description: 'Comma-separated offering names to register with 402index.io this run (blank = every offering not already recorded as registered)'
+        required: false
+        default: ''
+      force_all:
+        description: 'Re-send every offering to 402index.io even if already recorded as registered'
+        required: false
+        default: 'false'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   register:
@@ -23,9 +31,42 @@ jobs:
         with:
           python-version: '3.11'
       - name: Register VAPE's x402 offerings with discovery directories
-        run: python agents/x402_directory_register.py
+        # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
+        # script (shell-injection risk) — pass through env vars instead, same
+        # pattern as deep-dive-bounty.yml / external-bounty-audit.yml.
+        run: |
+          ARGS=()
+          if [ -n "$INPUT_ONLY" ]; then
+            ARGS+=(--only "$INPUT_ONLY")
+          fi
+          if [ "$INPUT_FORCE_ALL" = "true" ]; then
+            ARGS+=(--force-all)
+          fi
+          python agents/x402_directory_register.py "${ARGS[@]}"
         env:
+          INPUT_ONLY: ${{ github.event.inputs.only }}
+          INPUT_FORCE_ALL: ${{ github.event.inputs.force_all }}
           # Optional — only needed once VAPOR's operator issues a key
           # (VAPOR's production deployment may be running with no
           # API_KEYS configured at all, in which case this is unused).
           VAPOR_API_KEY: ${{ secrets.VAPOR_API_KEY }}
+      - name: Commit updated 402index registration state, if changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skillforge/memory/x402_directory_state.json || true
+          git commit -m "x402 directory registration $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+          pushed=false
+          for i in 1 2 3 4 5; do
+            git rebase --abort >/dev/null 2>&1 || true
+            git pull --rebase --autostash origin main || true
+            if git push; then pushed=true; break; fi
+            echo "push race retry $i"; sleep $((i*3))
+          done
+          if [ "$pushed" != "true" ]; then
+            echo "::error::failed to push after 5 retries -- changes were NOT committed"
+            exit 1
+          fi

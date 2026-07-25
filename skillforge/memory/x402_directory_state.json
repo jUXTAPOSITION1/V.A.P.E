@@ -1,0 +1,10 @@
+{
+  "_comment": "Tracks which offering names have already been successfully registered with 402index.io, so agents/x402_directory_register.py doesn't re-send an already-listed offering to an unfamiliar directory API with undocumented dedup behavior (risk: duplicate listings). Seeded 2026-07-25 by inspecting the actual commit checked out during the last successful registration workflow run (dc8fb2f1, 2026-07-05T20:57Z): at that commit the script only knew about exploit_check/token_safety_check/liquidity_check/rug_pull_alert/safety_preflight/market_intel (dossier_check/tx_decode/community_intel_broadcast/bulk_safety_bundle/website_review/bounty_deep_dive/deep_contract_audit/all DATA_OFFERINGS didn't exist in the script yet). safety_preflight was renamed to dossier_check (with a new /scan/dossier_check route) the same night, AFTER that registration run -- so the old 'safety_preflight' listing is now a stale/dead 402index.io entry pointing at a 404 route, and dossier_check itself was never registered under its current name+URL. Only the 5 offerings below still have a valid, unchanged name+URL match to what's actually live in production.",
+  "registered_402index": [
+    "exploit_check",
+    "token_safety_check",
+    "liquidity_check",
+    "rug_pull_alert",
+    "market_intel"
+  ]
+}
