@@ -49,6 +49,10 @@ on:
       callback_url:
         description: 'Optional webhook to POST the completed report to (x402 async path)'
         required: false
+      engagement:
+        description: 'paid (default, real x402/ACP job) | validation (manual pipeline check, no payment claimed)'
+        required: false
+        default: 'paid'
 
 permissions:
   contents: read
@@ -61,8 +65,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's own WIF auth step below
+    # (agents/llm.py::ask_vertex_candidate()); contents: write is for the
+    # commit step at the end.
     permissions:
       contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
@@ -71,6 +80,17 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.11'
+      - id: vertex-auth
+        # Real, confirmed gap this closes — see deep-dive-bounty.yml's
+        # matching comment: agents/external_audit.py's real audit call also
+        # goes OCI Grok -> this Vertex-tuned model -> the free FRONTIER_ORDER
+        # chain, but this workflow never had the WIF step wired in, leaving
+        # this paid offering's repo-target path with no Vertex safety net.
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
 
       - name: Run the external bounty engagement audit
         # SECURITY: never interpolate github.event.inputs.* directly into a `run:`
@@ -86,8 +106,10 @@ jobs:
           TARGET_PROGRAM: ${{ github.event.inputs.program_name }}
           TARGET_PATHS: ${{ github.event.inputs.paths }}
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -105,6 +127,9 @@ jobs:
           if [ -n "$TARGET_CALLBACK_URL" ]; then
             ARGS+=(--callback-url "$TARGET_CALLBACK_URL")
           fi
+          if [ -n "$TARGET_ENGAGEMENT" ]; then
+            ARGS+=(--engagement "$TARGET_ENGAGEMENT")
+          fi
           python -m agents.external_audit "${ARGS[@]}"
 
       - name: Commit the report
@@ -112,21 +137,37 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_OWNER: ${{ github.event.inputs.owner }}
           TARGET_REPO: ${{ github.event.inputs.repo }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/audits/external-bounties/ skillforge/memory/ || true
+          # See deep-dive-bounty.yml's matching comment: a real paid buyer's
+          # PoC must never be committed to this PUBLIC repo — they already
+          # get it privately via callback_url (x402) or `acp provider submit`
+          # (ACP, which bypasses this workflow entirely). Only a "validation"
+          # dispatch (no real buyer, non-sensitive) gets committed publicly;
+          # "paid" is also the safe default when this input is left unset.
+          if [ "$TARGET_ENGAGEMENT" != "validation" ]; then
+            echo "paid engagement — report already delivered privately; skipping public commit"
+            git add skillforge/memory/ || true
+          else
+            git add intel/audits/external-bounties/ skillforge/memory/ || true
+          fi
           git commit -m "External bounty audit: $TARGET_OWNER/$TARGET_REPO" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
           # See deep-dive-bounty.yml's matching comment: the old loop's last
           # command on total failure was always `sleep` (always exits 0), so
           # every push attempt failing still reported this step as
-          # successful, silently dropping the report.
+          # successful, silently dropping the report. Also mirrors its two
+          # other confirmed fixes: rebase onto $GITHUB_REF_NAME (not a
+          # hardcoded "main" — wrong for any non-main dispatch, given this
+          # job's shallow fetch-depth:1 checkout), and push with an explicit
+          # ref so it works even when actions/checkout leaves HEAD detached.
           pushed=false
           for i in 1 2 3 4 5; do
             git rebase --abort >/dev/null 2>&1 || true
-            git pull --rebase --autostash origin main || true
-            if git push; then pushed=true; break; fi
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
+            if git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"; then pushed=true; break; fi
             echo "push race retry $i"; sleep $((i*3))
           done
           if [ "$pushed" != "true" ]; then

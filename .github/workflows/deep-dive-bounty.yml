@@ -20,9 +20,13 @@ on:
       callback_url:
         description: 'Optional webhook to POST the completed report to'
         required: false
+      engagement:
+        description: 'paid (default, real x402/ACP job) | validation (manual pipeline check, no payment claimed)'
+        required: false
+        default: 'paid'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: deep-dive-bounty-${{ github.event.inputs.address }}
@@ -32,6 +36,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Scoped here (not at workflow level) per zizmor's least-privilege check —
+    # id-token: write is only needed by this job's own WIF auth step below
+    # (agents/llm.py::ask_vertex_candidate()); contents: write is for the
+    # commit step at the end.
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -40,6 +51,21 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - id: vertex-auth
+        # Real, confirmed gap this closes: agents/deep_dive_audit.py's real
+        # audit call (ask_oci_grok_frontier — OCI Grok 4.3 primary, falling
+        # back to this Vertex-tuned model, then the free FRONTIER_ORDER
+        # chain) never had this WIF step wired in, unlike every other real
+        # report-generating workflow in this repo — meaning VAPE's own $1
+        # premium paid offering had no Vertex safety net if OCI Grok ever
+        # failed/rate-limited/hit its daily spend cap mid-audit, falling
+        # straight to the weakest free-tier fallback for the highest-stakes
+        # paid product.
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
       - name: Cache security tools (restore + save — a stable key so it actually
           round-trips; skillforge/memory/tools-registry.json's own hash changes
           every skillforge-toolcheck.yml run, which made the old restore-only
@@ -69,8 +95,10 @@ jobs:
           TARGET_ADDRESS: ${{ github.event.inputs.address }}
           TARGET_CHAIN: ${{ github.event.inputs.chain }}
           TARGET_CALLBACK_URL: ${{ github.event.inputs.callback_url }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
           OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
           OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -84,15 +112,43 @@ jobs:
           if [ -n "$TARGET_CALLBACK_URL" ]; then
             ARGS+=(--callback-url "$TARGET_CALLBACK_URL")
           fi
+          if [ -n "$TARGET_ENGAGEMENT" ]; then
+            ARGS+=(--engagement "$TARGET_ENGAGEMENT")
+          fi
           python -m agents.deep_dive_audit "${ARGS[@]}"
       - name: Commit the report
         env:
           TARGET_ADDRESS: ${{ github.event.inputs.address }}
+          TARGET_ENGAGEMENT: ${{ github.event.inputs.engagement }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "VAPE Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add intel/audits/poc-reports/ skillforge/memory/ || true
+          # Real, confirmed privacy gap this closes: this used to unconditionally
+          # commit every report to this PUBLIC repo regardless of engagement —
+          # a real paid buyer's PoC (which they alone need to submit to a bounty
+          # program, and which naming the actual vulnerability before they do
+          # could let someone else front-run, or tip off the project before
+          # disclosure) was permanently public the moment this step ran, and
+          # docs/assets/app.js additionally listed it on the live site as a
+          # "Bounty Command Center" ledger entry. A real x402 buyer already has
+          # a private delivery path (callback_url -> worker KV job -> their own
+          # browser's poll/render/PDF-download, wired in Phase 2) — this public
+          # commit was pure redundant exposure for "paid", never load-bearing.
+          # ACP-fulfilled jobs bypass this workflow entirely (HANDLER_BRIEF.md:
+          # they run agents/deep_dive_audit.py directly on the acp-monitor
+          # host and submit the deliverable via `acp provider submit`, never
+          # via this repo), so skipping the public commit here doesn't touch
+          # that delivery path either. Only "sweep"/"validation" — VAPE's own
+          # non-buyer-specific research, never paid-for PoC content — still
+          # get committed publicly; "paid" is also the safe default when this
+          # input is left unset.
+          if [ "$TARGET_ENGAGEMENT" != "sweep" ] && [ "$TARGET_ENGAGEMENT" != "validation" ]; then
+            echo "paid engagement — report already delivered privately; skipping public commit"
+            git add skillforge/memory/ || true
+          else
+            git add intel/audits/ skillforge/memory/ || true
+          fi
           git commit -m "Deep-dive bounty audit: $TARGET_ADDRESS" || { echo "no changes"; exit 0; }
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           # Confirmed real gap: this loop's last-executed command on a total
@@ -103,11 +159,25 @@ jobs:
           # scripts/acp-monitor/HANDLER_BRIEF.md IS this commit — no
           # callback_url is ever passed there). Track success explicitly and
           # fail loudly if every retry is exhausted.
+          #
+          # Two more confirmed real bugs fixed here (found via a real
+          # manual-dispatch validation run against this branch, not main):
+          # 1. Hardcoding `origin main` broke every non-main dispatch — with
+          #    this job's fetch-depth:1 checkout, main shares no history with
+          #    a feature branch, so the rebase saw every file the branch
+          #    touched as a spurious add/add conflict. Rebase onto whatever
+          #    ref actually triggered this run ($GITHUB_REF_NAME, always
+          #    "main" for every real x402/ACP dispatch — unchanged there).
+          # 2. A bare `git push` fails outright ("You are not currently on a
+          #    branch") whenever actions/checkout leaves HEAD detached for
+          #    this ref — confirmed in that same run's logs. `git push
+          #    origin HEAD:refs/heads/<ref>` is the fix git's own error
+          #    message suggests, and works whether HEAD is attached or not.
           pushed=false
           for i in 1 2 3 4 5; do
             git rebase --abort >/dev/null 2>&1 || true
-            git pull --rebase --autostash origin main || true
-            if git push; then pushed=true; break; fi
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
+            if git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"; then pushed=true; break; fi
             echo "push race retry $i"; sleep $((i*3))
           done
           if [ "$pushed" != "true" ]; then

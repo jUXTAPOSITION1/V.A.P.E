@@ -453,11 +453,19 @@ const Hire = {
                     CaseHistory.save({ offering: offeringName, priceUsd, via: 'x402', walletAddress, targetAddress: targetLabel, verdict: 'QUEUED', result });
                 }
             } catch (e) { /* non-fatal */ }
-            const trackUrl = escapeHtml(result.track || 'https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/audits/poc-reports');
+            // Real privacy gap this closes: this used to fall back to a public
+            // GitHub-tree link ("Track the audit ledger") into intel/audits/
+            // poc-reports/ — but a paid audit's PoC is exactly the sensitive
+            // technical detail the buyer alone still needs to submit to a
+            // bounty program, and that directory no longer gets a buyer's
+            // report committed to it at all (see deep-dive-bounty.yml's
+            // matching fix). The private, already-working delivery path
+            // (worker KV job polling below, or CaseHistory's own localStorage
+            // record) is now the ONLY path — no public fallback link.
             if (result.job) {
-                // Live-polled path: worker minted a job id (VAPE_JOBS is configured),
-                // so this modal updates itself in place once the audit finishes,
-                // instead of only ever pointing the buyer at a GitHub tree link.
+                // Live-polled path: worker minted a job id (VAPE_JOBS is
+                // configured), so this modal updates itself in place once
+                // the audit finishes.
                 body.innerHTML = `
                     <div class="text-center mb-4">
                         <i class="fa-solid fa-spinner fa-spin text-zinc-300 text-3xl mb-2"></i>
@@ -465,11 +473,10 @@ const Hire = {
                         <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                     </div>
                     <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">
-                        VAPE is running the full audit now — real static/symbolic tooling plus a frontier-tier LLM pass, not a canned check. This can take up to an hour; leave this open and the report will render right here, or close the tab — it'll still be in the audit ledger below.
+                        VAPE is running the full audit now — real static/symbolic tooling plus a frontier-tier LLM pass, not a canned check. This can take up to an hour; leave this open and the report will render right here — it's private to this engagement, never published anywhere.
                         <div id="hire-poll-elapsed" class="text-zinc-500 mt-2">just started</div>
                     </div>
-                    <a href="${trackUrl}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 term-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
-                    <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below.</div>`;
+                    <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — reopen this page (same wallet) if you close the tab.</div>`;
                 this._pollBountyJob(result.job, offeringName, priceUsd, targetLabel);
                 return;
             }
@@ -479,8 +486,7 @@ const Hire = {
                     <div class="text-lg">Paid — audit queued</div>
                     <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                 </div>
-                <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Audit queued — a submission-ready PoC report lands as soon as it completes.')}</div>
-                <a href="${trackUrl}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 term-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Track the audit ledger</a>
+                <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Audit queued — a submission-ready PoC report lands as soon as it completes, delivered privately, never published.')}</div>
                 <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — check back for the finished report.</div>`;
             return;
         }

@@ -128,6 +128,18 @@ function simpleMarkdownToHtml(md) {
     return htmlParts.join('');
 }
 
+// Plain-text fallback for the jsPDF narrative renderer below: jsPDF has no
+// mixed-style-run text primitive cheap enough to justify here, so inline
+// emphasis is flattened to its underlying text (a link keeps its visible
+// label, drops the URL) rather than rendering literal "**"/"`"/"[]()" syntax.
+function stripInlineMarkdown(text) {
+    return String(text ?? '')
+        .replace(/!\[[^\]]*\]\(https?:\/\/[^)\s]+\)/g, '')
+        .replace(/\[([^\]]+)\]\(https?:\/\/[^)\s]+\)/g, '$1')
+        .replace(/\*\*(.+?)\*\*/g, '$1')
+        .replace(/`([^`]+)`/g, '$1');
+}
+
 function verdictClass(v) {
     if (v === "PROCEED" || v === "LOW" || v === "GO") return 'border border-emerald-500 text-emerald-500';
     if (v === "CAUTION" || v === "MEDIUM") return 'border border-amber-400 text-amber-400';
@@ -353,17 +365,40 @@ const Report = {
         }
 
         // ── Deliverable detail table ────────────────────────────────
+        // bounty_deep_dive's PoC-audit deliverable (deep_dive_audit.py/
+        // external_audit.py) carries its entire real narrative — recon, the
+        // simulated-attack PoC (drafted exploit + forge test output),
+        // per-vulnerability-class analysis, and raw Slither/Halmos/Mythril/
+        // Aderyn tool output — in `report_content`
+        // (community_intel_broadcast's equivalent field is `content`).
+        // Rendering that multi-KB Markdown string through the generic
+        // key/value _renderObject() below (its only prior behavior here)
+        // dumped it as one giant word-wrapped blob of literal "**bold**"/
+        // "## heading" syntax under a "Report Content:" label in the PDF —
+        // unreadable, and nowhere near a submittable PoC deliverable, even
+        // though the HTML preview (buildHtmlSummary below) already rendered
+        // it properly via simpleMarkdownToHtml. Give the PDF path the same
+        // real treatment instead of the generic table; every shorter,
+        // structured-verdict offering keeps using the untouched table.
+        const reportMd = typeof deliverable.report_content === 'string' && deliverable.report_content.length > 200
+            ? deliverable.report_content
+            : (typeof deliverable.content === 'string' && deliverable.content.length > 200 ? deliverable.content : null);
+
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(11);
         doc.setTextColor(...INK);
-        doc.text('FINDINGS', margin, y);
+        doc.text(reportMd ? 'FULL AUDIT REPORT' : 'FINDINGS', margin, y);
         y += 4;
         doc.setDrawColor(220, 220, 225);
         doc.setLineWidth(0.75);
         doc.line(margin, y, W - margin, y);
         y += 16;
 
-        y = this._renderObject(doc, deliverable, margin, y, W - margin * 2);
+        if (reportMd) {
+            y = this._renderMarkdownBlock(doc, reportMd, margin, y, W - margin * 2);
+        } else {
+            y = this._renderObject(doc, deliverable, margin, y, W - margin * 2);
+        }
 
         // ── Flags list, if present ──────────────────────────────────
         if (Array.isArray(deliverable.flags) && deliverable.flags.length) {
@@ -445,6 +480,76 @@ const Report = {
             doc.text(lines, x + 150, y);
             y += 14 * Math.max(1, lines.length);
         }
+        return y;
+    },
+
+    // Real Markdown-lite -> jsPDF renderer for the deep-dive/broadcast
+    // narrative fields (see the "FULL AUDIT REPORT" branch in build() above)
+    // — headings, bullets, numbered lists, ```code``` blocks (monospace,
+    // unwrapped emphasis stripped via stripInlineMarkdown), and `---` rules,
+    // all paginating like _renderObject() already does. No inline bold/link
+    // runs (jsPDF has no cheap mixed-style-per-line primitive) — a heading's
+    // own bold treatment and a paragraph's plain text both stay legible
+    // without literal "**"/"[]()" syntax leaking through.
+    _renderMarkdownBlock(doc, md, x, y, maxWidth) {
+        const H = doc.internal.pageSize.getHeight();
+        const ensureRoom = (needed = 13) => {
+            if (y > H - 90 - needed + 13) { doc.addPage(); y = 48; }
+        };
+        const paragraph = (text, opts = {}) => {
+            const { bold = false, size = 9.5, color = INK, indent = 0, font = 'helvetica', lineH = 13 } = opts;
+            doc.setFont(font, bold ? 'bold' : 'normal');
+            doc.setFontSize(size);
+            doc.setTextColor(...color);
+            const wrapped = doc.splitTextToSize(text || ' ', maxWidth - indent);
+            for (const ln of wrapped) {
+                ensureRoom(lineH);
+                doc.text(ln, x + indent, y);
+                y += lineH;
+            }
+        };
+        let inCode = false;
+        let codeBuf = [];
+        const flushCode = () => {
+            if (codeBuf.length) paragraph(codeBuf.join('\n'), { size: 7.5, color: MUTED, indent: 10, font: 'courier', lineH: 10 });
+            y += 4;
+            codeBuf = [];
+            inCode = false;
+        };
+        for (const raw of String(md ?? '').split('\n')) {
+            const line = raw.trimEnd();
+            const trimmed = line.trim();
+            if (trimmed.startsWith('```')) {
+                if (inCode) flushCode(); else inCode = true;
+                continue;
+            }
+            if (inCode) { codeBuf.push(raw); continue; }
+            if (/^!\[[^\]]*\]\(https?:\/\/[^)\s]+\)\s*$/.test(trimmed)) continue; // logo already in the letterhead
+            if (/^-{3,}$/.test(trimmed)) {
+                ensureRoom(10);
+                doc.setDrawColor(220, 220, 225);
+                doc.setLineWidth(0.5);
+                doc.line(x, y, x + maxWidth, y);
+                y += 10;
+                continue;
+            }
+            const heading = line.match(/^(#{1,6})\s+(.*)/);
+            const bullet = line.match(/^[-*]\s+(.*)/);
+            const numbered = line.match(/^\d+[.)]\s+(.*)/);
+            if (heading) {
+                y += 5;
+                paragraph(stripInlineMarkdown(heading[2]), { bold: true, size: heading[1].length <= 2 ? 12 : 10 });
+            } else if (bullet) {
+                paragraph(`•  ${stripInlineMarkdown(bullet[1])}`, { indent: 4 });
+            } else if (numbered) {
+                paragraph(stripInlineMarkdown(line), { indent: 4 });
+            } else if (trimmed === '') {
+                y += 5;
+            } else {
+                paragraph(stripInlineMarkdown(line));
+            }
+        }
+        flushCode();
         return y;
     },
 

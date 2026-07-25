@@ -54,6 +54,7 @@ test = "test"
 out = "out"
 libs = ["lib"]
 solc_version = "{solc_version}"
+remappings = {remappings}
 """
 # Deliberately no `ffi = true` and no `fs_permissions` entry above — Foundry
 # denies both the ffi and filesystem cheatcodes by default unless a profile
@@ -157,6 +158,70 @@ def parse_verified_source(source_code, contract_name):
     return {f"{name}.sol": source_code}
 
 
+def _extract_declared_remappings(source_code):
+    """Pulls the ORIGINAL compiler's own `settings.remappings` out of
+    Etherscan's Standard JSON Input blob, when present.
+
+    Real, confirmed gap this fixes (audit-validation-diem-2026-07-25.md):
+    _generate_remappings() below only derives a remapping from the bundled
+    source's own file-path segments — which is correct when a bundled
+    library's path IS the literal import alias (e.g. a file stored at
+    '@openzeppelin/contracts/...'). It is NOT correct for a contract
+    verified with an explicit dependency-manager-style remapping — e.g.
+    DIEM's own OpenZeppelin imports resolve via `@openzeppelin/=dependencies/
+    @openzeppelin-contracts@X.Y.Z/`, so the bundle's actual top-level segment
+    is 'dependencies' (or 'lib'), never '@openzeppelin' — no file-path-
+    derived heuristic can ever reconstruct that alias. solc's own Standard
+    JSON Input already carries the answer directly in `settings.remappings`
+    (plain `prefix=path` strings, the exact format Foundry's own
+    foundry.toml `remappings` array expects) — this just needs to be read
+    and passed through, not re-derived. Defensively validated (must be a
+    non-empty string containing '=', with neither side an absolute path or
+    containing '..') since it's still externally-supplied data, same trust
+    level as the rest of the verified source already scaffolded to disk
+    here — these strings are written into foundry.toml and honored by
+    forge/solc's own import resolution when scaffold_project()'s caller
+    runs `forge build`, so a remapping whose PATH (not just the whole
+    string) is absolute (e.g. '@evil/=/etc/') would let a malicious
+    contract's own self-declared verification metadata point solc's import
+    resolution at arbitrary files on the runner outside the scaffold
+    directory. Splitting on '=' and checking each side independently is
+    required here — checking the raw joined string only ever catches a
+    remapping whose PREFIX (not its target path) happens to start with '/'
+    or contain '..', which real prefixes (e.g. '@openzeppelin/') never do."""
+    if not source_code:
+        return []
+    text = source_code.strip()
+    if text.startswith("{{") and text.endswith("}}"):
+        text = text[1:-1]
+    if not text.startswith("{"):
+        return []
+    try:
+        parsed = json.loads(text)
+    except (ValueError, TypeError):
+        return []
+    # Real bug this fixes (CodeRabbit, PR #277): `.get("settings", {})` only
+    # supplies the {} default when the key is ABSENT — if the (externally-
+    # supplied, potentially adversarial per this function's own docstring)
+    # verified-source JSON has "settings" present but set to a non-dict
+    # (string/number/list), `.get("remappings")` on it raises AttributeError,
+    # uncaught — breaking this function's callers' own documented "never
+    # raises to its caller" contract for any target with malformed metadata.
+    settings = parsed.get("settings") if isinstance(parsed, dict) else None
+    remappings = settings.get("remappings") if isinstance(settings, dict) else None
+    if not isinstance(remappings, list):
+        return []
+    out = []
+    for r in remappings:
+        if not isinstance(r, str) or "=" not in r:
+            continue
+        prefix, path = r.split("=", 1)
+        if any(".." in part or part.startswith("/") for part in (prefix, path)):
+            continue
+        out.append(r)
+    return out
+
+
 def _compiler_to_solc_version(compiler):
     """Etherscan's CompilerVersion looks like 'v0.8.19+commit.7dd6d404' —
     Foundry's solc_version wants just '0.8.19'. Falls back to a documented
@@ -168,11 +233,47 @@ def _compiler_to_solc_version(compiler):
     return "0.8.19"
 
 
-def scaffold_project(files, compiler_version, out_dir):
-    """Writes verified source into out_dir/src/ plus a minimal foundry.toml.
-    An empty `files` dict still scaffolds a valid (source-less) project —
-    the next real step (forge build) is what honestly fails on that, rather
-    than this function silently declaring success on nothing."""
+def _generate_remappings(files):
+    """One remapping per distinct top-level path segment among the verified
+    source's own file paths, e.g. '@openzeppelin/=src/@openzeppelin/'.
+
+    Real, previously-live bug this fixes (confirmed against a real report,
+    audit-deep-dive-diem-2026-07-21.md): Etherscan's Standard JSON Input
+    (parse_verified_source()'s multi-file branch above) bundles every file
+    the compiler actually used — including imported libraries like
+    OpenZeppelin — under a `sources` key that IS the literal absolute
+    import path used elsewhere in the bundle (e.g.
+    '@openzeppelin/contracts/token/ERC20/ERC20.sol'). scaffold_project()
+    below writes each file to src/<that same path>, but forge only
+    auto-remaps its own lib/ folder convention, not arbitrary paths under
+    src/ — so any contract importing a bundled library this way (the
+    overwhelmingly common case for real tokens) failed `forge build`
+    outright with "File not found... Searched the following locations: ''"
+    (zero remappings ever existed), cascading into Halmos AND Aderyn being
+    skipped for that entire audit regardless of whether either tool was
+    actually installed. A relative import (e.g. `import "./Helper.sol"`)
+    is resolved by solc relative to the importing file's own directory and
+    is unaffected by remappings, so generating one for every top-level
+    segment is safe — it only ever helps an absolute import resolve, never
+    interferes with a relative one."""
+    segments = sorted({relpath.split("/", 1)[0] for relpath in files if "/" in relpath})
+    return [f"{seg}/=src/{seg}/" for seg in segments]
+
+
+def scaffold_project(files, compiler_version, out_dir, declared_remappings=None):
+    """Writes verified source into out_dir/src/ plus a minimal foundry.toml
+    (including remappings for any bundled-library import paths — see
+    _generate_remappings() above). An empty `files` dict still scaffolds a
+    valid (source-less) project — the next real step (forge build) is what
+    honestly fails on that, rather than this function silently declaring
+    success on nothing.
+
+    `declared_remappings` (from _extract_declared_remappings() — the
+    original compiler's own settings.remappings, when Etherscan's verified
+    source included them) take precedence over the path-derived ones below:
+    they're authoritative when present, since they're the exact aliases the
+    contract's own source imports actually use, not a guess reconstructed
+    from bundled file paths."""
     src_dir = os.path.join(out_dir, "src")
     os.makedirs(src_dir, exist_ok=True)
     os.makedirs(os.path.join(out_dir, "test"), exist_ok=True)
@@ -181,8 +282,16 @@ def scaffold_project(files, compiler_version, out_dir):
         os.makedirs(os.path.dirname(full), exist_ok=True)
         with open(full, "w", encoding="utf-8") as f:
             f.write(content)
+    remappings = list(declared_remappings or [])
+    declared_prefixes = {r.split("=", 1)[0] for r in remappings}
+    for r in _generate_remappings(files):
+        if r.split("=", 1)[0] not in declared_prefixes:
+            remappings.append(r)
     with open(os.path.join(out_dir, "foundry.toml"), "w", encoding="utf-8") as f:
-        f.write(FOUNDRY_TOML_TEMPLATE.format(solc_version=_compiler_to_solc_version(compiler_version)))
+        f.write(FOUNDRY_TOML_TEMPLATE.format(
+            solc_version=_compiler_to_solc_version(compiler_version),
+            remappings=json.dumps(remappings),
+        ))
     return out_dir
 
 
@@ -329,7 +438,8 @@ def scaffold_and_run_exploit_poc(address, chain_id=8453, rpc_url=None, workdir=N
         return {"ran": False, "reason": "verified source could not be parsed into any file"}
 
     out_dir = workdir or tempfile.mkdtemp(prefix="vape-foundry-exploit-")
-    scaffold_project(files, src.get("compiler"), out_dir)
+    scaffold_project(files, src.get("compiler"), out_dir,
+                      declared_remappings=_extract_declared_remappings(src["source_code"]))
 
     build = run_forge_build(out_dir)
     if not build["ok"]:
@@ -375,7 +485,8 @@ def scaffold_and_analyze(address, chain_id=8453, workdir=None, pre_fetched_src=N
         return {"ran": False, "reason": "verified source could not be parsed into any file"}
 
     out_dir = workdir or tempfile.mkdtemp(prefix="vape-foundry-scaffold-")
-    scaffold_project(files, src.get("compiler"), out_dir)
+    scaffold_project(files, src.get("compiler"), out_dir,
+                      declared_remappings=_extract_declared_remappings(src["source_code"]))
 
     build = run_forge_build(out_dir)
     if not build["ok"]:

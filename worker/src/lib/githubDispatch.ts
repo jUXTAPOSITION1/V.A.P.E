@@ -43,8 +43,10 @@ export async function dispatchDeepDiveAudit(
   );
   // GitHub returns 204 No Content on a successful dispatch — no run ID is
   // handed back synchronously (dispatch is fire-and-forget by design), so
-  // job tracking is via the committed report landing in
-  // intel/audits/poc-reports/, or the optional callback_url webhook.
+  // job tracking is via the worker's own KV job record (index.ts's jobId ->
+  // /scan/bounty_deep_dive/callback -> /status polling) or the optional
+  // callback_url webhook — never a public repo commit (a paid buyer's PoC
+  // is never committed to this public repo).
   const body = res.status === 204 ? "" : await res.text().catch(() => "");
   return { ok: res.status === 204, status: res.status, body };
 }

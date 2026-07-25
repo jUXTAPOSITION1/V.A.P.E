@@ -120,6 +120,136 @@ def test_scaffold_project_handles_empty_files_dict(tmp_path):
     assert (tmp_path / "src").is_dir()
     assert (tmp_path / "test").is_dir()
     assert (tmp_path / "foundry.toml").exists()
+    toml = (tmp_path / "foundry.toml").read_text()
+    assert "remappings = []" in toml
+
+
+def test_scaffold_project_writes_remapping_for_bundled_library_import():
+    """Real gap this covers (audit-deep-dive-diem-2026-07-21.md): Etherscan's
+    multi-file verified source bundles an imported library (e.g.
+    OpenZeppelin) under a `sources` key that IS the literal absolute import
+    path used elsewhere — forge needs an explicit remapping to resolve that
+    import to where scaffold_project() actually wrote the file, or
+    `forge build` fails outright with "File not found... Searched the
+    following locations: ''" before Halmos/Aderyn ever get a chance to run."""
+    files = {
+        "contracts/Token.sol": 'import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";\ncontract Token {}',
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol": "contract ERC20 {}",
+    }
+    remappings = sft._generate_remappings(files)
+    assert "@openzeppelin/=src/@openzeppelin/" in remappings
+    assert "contracts/=src/contracts/" in remappings
+
+
+def test_generate_remappings_ignores_single_file_at_root():
+    assert sft._generate_remappings({"Token.sol": "contract Token {}"}) == []
+
+
+def test_generate_remappings_empty_input_returns_empty():
+    assert sft._generate_remappings({}) == []
+
+
+# ── _extract_declared_remappings ────────────────────────────────────────────
+
+def test_extract_declared_remappings_reads_settings_remappings():
+    """Real gap this covers (audit-validation-diem-2026-07-25.md): a
+    contract's OpenZeppelin imports resolve via a dependency-manager-style
+    alias (`@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/`)
+    that has no relation to the bundled files' own top-level path segment
+    ('dependencies') — _generate_remappings()'s path-derived heuristic can
+    never reconstruct that alias; it has to come from the original
+    compiler's own settings.remappings."""
+    wrapped = "{" + json.dumps({
+        "sources": {"src/Diem.sol": {"content": "contract Diem {}"}},
+        "settings": {"remappings": ["@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/"]},
+    }) + "}"
+    assert sft._extract_declared_remappings(wrapped) == [
+        "@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/"
+    ]
+
+
+def test_extract_declared_remappings_handles_double_brace_wrapping():
+    inner = json.dumps({"sources": {}, "settings": {"remappings": ["lib/=deps/lib/"]}})
+    assert sft._extract_declared_remappings("{" + inner + "}") == ["lib/=deps/lib/"]
+
+
+def test_extract_declared_remappings_no_settings_returns_empty():
+    wrapped = "{" + json.dumps({"sources": {}}) + "}"
+    assert sft._extract_declared_remappings(wrapped) == []
+
+
+def test_extract_declared_remappings_non_dict_settings_does_not_raise():
+    """Real bug this pins (CodeRabbit, PR #277): `settings` present but set
+    to a non-dict (string/number/list) used to raise AttributeError from
+    `.get("settings", {}).get("remappings")` — the {} default only ever
+    applies when the key is absent, not when it's present with the wrong
+    type. Must degrade to [] like every other malformed-input case here."""
+    for bad_settings in ("a string", 42, ["a", "list"], None):
+        wrapped = "{" + json.dumps({"sources": {}, "settings": bad_settings}) + "}"
+        assert sft._extract_declared_remappings(wrapped) == []
+
+
+def test_extract_declared_remappings_rejects_absolute_target_path():
+    """Real bug this pins: checking `.startswith('/')`/`'..' in` against the
+    RAW `prefix=path` string only ever catches an absolute/traversal
+    PREFIX (which no real remapping ever is, e.g. '@openzeppelin/') — it
+    never inspects the PATH half, so '@evil/=/etc/' or an empty-prefix
+    '=/etc/passwd' sailed straight through untouched. These strings are
+    written verbatim into foundry.toml and honored by solc's own import
+    resolution when `forge build` runs against a malicious contract's
+    self-declared Etherscan verification metadata — an absolute or
+    traversal-escaping PATH must be rejected regardless of which side of
+    '=' it's on."""
+    wrapped = "{" + json.dumps({"sources": {}, "settings": {"remappings": [
+        "@evil/=/etc/",
+        "@evil2/=/root/.ssh/",
+        "=/etc/passwd",
+        "../escape/=lib/",
+        "@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/",
+    ]}}) + "}"
+    assert sft._extract_declared_remappings(wrapped) == [
+        "@openzeppelin/=dependencies/@openzeppelin-contracts@5.0.2/"
+    ]
+
+
+def test_extract_declared_remappings_ignores_malformed_entries():
+    wrapped = "{" + json.dumps({"sources": {}, "settings": {"remappings": [
+        "ok/=path/", "no-equals-sign", "../escape/=path/", 42, None,
+    ]}}) + "}"
+    assert sft._extract_declared_remappings(wrapped) == ["ok/=path/"]
+
+
+def test_extract_declared_remappings_plain_single_file_returns_empty():
+    assert sft._extract_declared_remappings("contract C {}") == []
+
+
+def test_extract_declared_remappings_empty_input_returns_empty():
+    assert sft._extract_declared_remappings(None) == []
+    assert sft._extract_declared_remappings("") == []
+
+
+def test_extract_declared_remappings_unparseable_json_returns_empty():
+    assert sft._extract_declared_remappings("{not valid json") == []
+
+
+def test_scaffold_project_declared_remapping_takes_precedence(tmp_path):
+    """When Etherscan's own settings.remappings declares an alias, it must
+    win over the path-derived guess for the same prefix rather than both
+    being written (a Foundry duplicate-remapping-prefix warning at best,
+    or the wrong target directory at worst)."""
+    files = {"dependencies/oz/ERC20.sol": "contract ERC20 {}"}
+    sft.scaffold_project(files, "v0.8.19+commit.7dd6d404", str(tmp_path),
+                          declared_remappings=["@openzeppelin/=dependencies/oz/"])
+    toml = (tmp_path / "foundry.toml").read_text()
+    assert "@openzeppelin/=dependencies/oz/" in toml
+    assert "dependencies/=src/dependencies/" in toml
+
+
+def test_scaffold_project_no_declared_remappings_falls_back_to_derived(tmp_path):
+    files = {"lib/Safe.sol": "library Safe {}"}
+    sft.scaffold_project(files, None, str(tmp_path), declared_remappings=None)
+    toml = (tmp_path / "foundry.toml").read_text()
+    assert "lib/=src/lib/" in toml
 
 
 # ── run_forge_build / run_halmos fallback paths ─────────────────────────────

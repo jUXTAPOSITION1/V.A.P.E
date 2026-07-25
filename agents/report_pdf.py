@@ -188,9 +188,12 @@ def build_investigation_pdf(pdf_path, target, chain, sym, verdict, score, reason
     pdf.set_x(margin)
     _section_heading(pdf, "ON-CHAIN PRESENCE (BASE RPC)")
     pdf.set_x(margin)
-    _kv_row(pdf, "Is contract", onchain.get("is_contract"))
-    pdf.set_x(margin)
-    _kv_row(pdf, "Code size", f"{onchain.get('code_size_bytes')} bytes")
+    if onchain.get("is_contract") is None:
+        _kv_row(pdf, "Is contract", f"unavailable this cycle ({onchain.get('error', 'RPC call failed')})")
+    else:
+        _kv_row(pdf, "Is contract", onchain.get("is_contract"))
+        pdf.set_x(margin)
+        _kv_row(pdf, "Code size", f"{onchain.get('code_size_bytes')} bytes")
 
     # ── Contract verification ────────────────────────────────────
     pdf.set_x(margin)

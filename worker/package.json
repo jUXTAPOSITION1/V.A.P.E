@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@x402/core": "2.18.0",
+    "@x402/core": "2.19.0",
     "@x402/evm": "2.19.0",
     "@x402/extensions": "2.19.0",
     "@x402/hono": "2.19.0",
@@ -22,6 +22,6 @@
     "@cloudflare/workers-types": "5.20260723.1",
     "tsx": "4.23.1",
     "typescript": "7.0.2",
-    "wrangler": "4.113.0"
+    "wrangler": "^4.114.0"
   }
 }

@@ -85,19 +85,47 @@ export async function dexscreenerFull(address: string): Promise<DexInfo> {
   };
 }
 
-export async function onchainPresence(address: string): Promise<{ is_contract: boolean; code_size_bytes: number }> {
-  try {
-    const res = await fetch(BASE_RPC, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...UA },
-      body: JSON.stringify({ jsonrpc: "2.0", method: "eth_getCode", params: [address, "latest"], id: 1 }),
-    });
-    const data: any = await res.json();
-    const code: string = data?.result || "0x";
-    return { is_contract: Boolean(code && code !== "0x"), code_size_bytes: Math.max(0, (code.length - 2) / 2) };
-  } catch {
-    return { is_contract: false, code_size_bytes: 0 };
+// Real, confirmed bug this fixes (2026-07-25 — same root cause pinned in
+// agents/investigate.py::onchain_presence()'s Python twin, from a live
+// report that mislabeled the real, heavily-traded VIRTUAL token contract
+// as a codeless EOA): a single failed/erroring RPC call — timeout, rate
+// limit, malformed response — used to fall through to `is_contract: false`
+// with zero retries, indistinguishable from a real, confirmed empty
+// eth_getCode response. Now retried, and a still-failing call reports an
+// honest is_contract=null ("unknown") rather than a fabricated false —
+// score()'s own `onchain.is_contract === false` check below already uses
+// strict equality, so null correctly never triggers the "no contract code"
+// penalty.
+export async function onchainPresence(
+  address: string,
+): Promise<{ is_contract: boolean | null; code_size_bytes: number | null; error?: string }> {
+  let lastErr = "RPC call failed";
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(BASE_RPC, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...UA },
+        body: JSON.stringify({ jsonrpc: "2.0", method: "eth_getCode", params: [address, "latest"], id: 1 }),
+        // Real gap this closes (CodeRabbit, PR #277): with no timeout, a
+        // single hanging RPC could block this whole 3-attempt retry loop
+        // for however long the platform's own outer request timeout allows
+        // — AbortSignal.timeout() is a standard Worker-supported API, so a
+        // stuck attempt now fails fast into the existing catch/retry path
+        // instead of exhausting the request budget on one hung call.
+        signal: AbortSignal.timeout(8000),
+      });
+      const data: any = await res.json();
+      if (typeof data?.result === "string") {
+        const code: string = data.result;
+        return { is_contract: Boolean(code && code !== "0x"), code_size_bytes: Math.max(0, (code.length - 2) / 2) };
+      }
+      lastErr = data?.error?.message || `HTTP ${res.status}`;
+    } catch (e: any) {
+      lastErr = e?.message || String(e);
+    }
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
   }
+  return { is_contract: null, code_size_bytes: null, error: lastErr };
 }
 
 // Known permissionless meme-token factory templates on Base — see
@@ -219,7 +247,7 @@ export interface ScoreResult {
 
 /** Field-for-field port of agents/investigate.py::score() — same weights,
  * same thresholds, same messages. Keep both in sync on any change. */
-export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contract: boolean },
+export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contract: boolean | null },
                        verif: ScoreVerif, webRep?: WebReputation,
                        coingeckoContract?: CoingeckoContractMarket | null): ScoreResult {
   let s = 100;

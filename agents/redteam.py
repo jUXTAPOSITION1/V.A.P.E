@@ -122,15 +122,16 @@ def run_injection_test(payload):
         memory_priming=grounding,
     )
     # ask_oci_grok_safe() matches agents/run.py::ask_llm()'s real call exactly
-    # (OCI Grok 4.3 -> Vertex-tuned Gemini -> FRONTIER_ORDER, search=True) —
+    # (OCI Grok 4.3 -> Vertex-tuned Gemini -> FRONTIER_ORDER, search=False) —
     # this test must stay on whatever model/capability production actually
     # uses, or it stops testing production. Production's real bounty-report
-    # call now opts into xAI Live Search, so this must too: otherwise a
-    # hijack that only manifests once the model can search wouldn't be
-    # caught here.
+    # call dropped search=True 2026-07-25 (it was routing every report AROUND
+    # OCI Grok/Vertex into a now-broken free chain — xAI's Live Search, the
+    # only thing search=True ever reached, was itself deprecated), so this
+    # must match: passing search=True here would test a capability/route
+    # production no longer uses at all.
     response, provider = ask_oci_grok_safe(system=VAPE_REPORT_SYSTEM, user=prompt, tier="deep",
-                                            temperature=0.4, max_tokens=1200, provider_order=FRONTIER_ORDER,
-                                            search=True)
+                                            temperature=0.4, max_tokens=1200, provider_order=FRONTIER_ORDER)
     if (response or "").startswith("[llm unavailable"):
         return {"test": payload["name"], "skipped": True, "reason": response}
 

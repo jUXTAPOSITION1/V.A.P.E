@@ -106,6 +106,29 @@ def _append_raw_tail(lines, result):
                       f"  ```\n  {tail}\n  ```\n  </details>")
 
 
+
+# Real, confirmed bug this fixes (2026-07-25): Slither has never once
+# succeeded in production for any non-Ethereum-mainnet target (i.e. every
+# real deep-dive audit sampled — Base is VAPE's default chain). Confirmed
+# directly against crytic-compile's own real source
+# (crytic_compile/platform/etherscan.py::EtherscanCompilationUnit.compile()):
+# a bare `0xADDRESS` with no network prefix always resolves to
+# `ETHERSCAN_BASE_V2 % ("1", target)` — hardcoded chainid 1 (Ethereum
+# mainnet) — regardless of what chain the contract is actually deployed on.
+# A Base-only-verified contract (never verified on Ethereum mainnet, the
+# overwhelming majority of real Base tokens) gets a real "not found" from
+# Etherscan for that lookup, which is exactly why every sampled report
+# shows "slither produced no valid JSON (rc=1)". The fix: prefix the
+# target with the exact network key crytic-compile's own
+# SUPPORTED_NETWORK_V2 dict expects (confirmed against that same file) —
+# `slither base:0xADDRESS ...` resolves the real Etherscan V2 chainid=8453
+# lookup instead.
+_SLITHER_NETWORK_PREFIX = {
+    "8453": "base", "1": "mainnet", "42161": "arbi", "10": "optim",
+    "137": "poly", "56": "bsc", "43114": "avax",
+}
+
+
 def _run_slither(address, chain, timeout=180):
     """Best-effort real static analysis — only if slither is already installed on
     PATH (e.g. via skillforge/toolcheck.py's cache) and an Etherscan key is set, so
@@ -116,9 +139,11 @@ def _run_slither(address, chain, timeout=180):
     key = os.getenv("ETHERSCAN_API_KEY")
     if not key:
         return {"ran": False, "reason": "no ETHERSCAN_API_KEY — slither needs it to fetch+compile by address"}
+    prefix = _SLITHER_NETWORK_PREFIX.get(str(chain))
+    target = f"{prefix}:{address}" if prefix else address
     try:
         p = subprocess.run(
-            ["slither", address, "--etherscan-apikey", key, "--json", "-"],
+            ["slither", target, "--etherscan-apikey", key, "--json", "-"],
             capture_output=True, text=True, timeout=timeout,
         )
         try:
@@ -166,10 +191,21 @@ def _run_mythril(address, chain, timeout=200):
     (agents/investigate.py::EVM_CHAINS). Mythril's --rpc flag takes a bare
     HOST:PORT (confirmed against its real CLI source, mythril/interfaces/
     cli.py — there is no --rpc-url flag), so the chain's RPC URL is parsed
-    down to host:port here; --rpctls is passed whenever that RPC is https.
-    --execution-timeout is set well under the outer subprocess timeout as a
-    backstop against a documented Mythril bug where it doesn't always respect
-    its own internal timeout."""
+    down to host:port here. --rpctls is declared `type=bool` in Mythril's
+    own argparse setup (mythril/interfaces/cli.py's get_rpc_parser()) —
+    NOT `action="store_true"` — so it always consumes the next argv token
+    as its value; a bare `--rpctls` with nothing after it is a real,
+    confirmed argparse error ("--rpctls: expected one argument"), which is
+    exactly what every deep-dive audit against an https RPC (i.e. every
+    real chain in agents/investigate.py::EVM_CHAINS) hit before this fix —
+    Mythril has never once successfully run in production. Always pass an
+    explicit value now; Mythril's own argparse `type=bool` coerces ANY
+    non-empty string to True (a well-known argparse footgun, not something
+    this code can work around), so "True"/"False" both just need to be
+    non-empty, but pass the semantically correct one anyway. --execution-
+    timeout is set well under the outer subprocess timeout as a backstop
+    against a documented Mythril bug where it doesn't always respect its
+    own internal timeout."""
     if not shutil.which("myth"):
         return {"ran": False, "reason": "mythril (myth) not installed in this environment this run"}
     chain_info = inv.EVM_CHAINS.get(str(chain))
@@ -184,7 +220,7 @@ def _run_mythril(address, chain, timeout=200):
     cmd = ["myth", "analyze", "-a", address, "--rpc", f"{host}:{port}",
            "--execution-timeout", "90", "-o", "jsonv2"]
     if parsed.scheme == "https":
-        cmd.append("--rpctls")
+        cmd += ["--rpctls", "True"]
     try:
         p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
         try:
@@ -704,10 +740,32 @@ def main():
     ap.add_argument("--address", required=True, help="target contract/token address (0x...)")
     ap.add_argument("--chain", default="8453", help="chain id (default Base 8453)")
     ap.add_argument("--callback-url", default=None, help="optional webhook to POST the result to on completion")
+    # Real gap this closes: run_audit()'s own engagement param (paid/sweep/
+    # validation) already exists to keep a pipeline-validation run from
+    # falsely reading as a real paid deliverable, but this CLI — the only
+    # entrypoint deep-dive-bounty.yml's workflow_dispatch can reach — had no
+    # way to ever pass anything but the "paid" default, so a manual
+    # verification dispatch against a real target always got committed
+    # under intel/audits/poc-reports/ with "This is VAPE's premium
+    # bounty-engagement tier" framing even though nobody paid for it.
+    ap.add_argument("--engagement", default="paid", choices=["paid", "validation", "sweep"],
+                     help="paid (default, real x402/ACP job) | validation (pipeline check, no payment) | "
+                          "sweep (VAPE's own proactive daily HACK sweep)")
     args = ap.parse_args()
 
-    result = run_audit(args.address, args.chain, args.callback_url)
-    print(json.dumps(result, indent=2))
+    result = run_audit(args.address, args.chain, args.callback_url, engagement=args.engagement)
+    # Real gap this closes (CodeRabbit, PR #277): this used to always print
+    # the full result to stdout, including report_content — a real paid
+    # buyer's actual PoC text — and GitHub Actions logs that verbatim for
+    # anyone to read on this public repo, regardless of engagement. That's
+    # the same exposure the "Commit the report" step's engagement gating
+    # closes for the git history; stdout needed the identical treatment.
+    # Only report_content is redacted — every other field (address, verdict,
+    # score, provider, etc.) still prints for real debugging visibility.
+    log_result = dict(result)
+    if args.engagement not in ("sweep", "validation") and log_result.get("report_content"):
+        log_result["report_content"] = f"[redacted — {len(result['report_content'])} chars, delivered privately]"
+    print(json.dumps(log_result, indent=2))
 
 
 if __name__ == "__main__":

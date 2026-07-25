@@ -27,16 +27,28 @@ Usage:
 """
 
 import json
+import os
 import sys
 from datetime import datetime
 from typing import Dict, Any, Tuple, List
 
-# Multi-provider LLM (already proven in agents/llm.py)
+# Multi-provider LLM (already proven in agents/llm.py). ask_oci_grok_safe()
+# (not the bare ask()) — real, previously-live gap this closes (confirmed
+# via a full-repo audit, 2026-07-25): Builder always called the bare
+# FRONTIER_ORDER chain directly, even though every caller (build_request.py,
+# self_improve.py, skillforge_build.py) explicitly passes
+# provider_order=FRONTIER_ORDER expecting VAPE's real primary route —
+# meaning reports/build_request_*.md and reports/self_improve_*.md never
+# actually reached OCI Grok 4.3 for code generation, unlike every other real
+# report-generating call site in this repo. ask_oci_grok_safe() never
+# raises (see its own never-raise contract) — generate_code()/
+# generate_project() below already handle a failure via their own explicit
+# "[llm unavailable" prefix check rather than relying on an exception.
 try:
-    from agents.llm import ask as llm_ask, available as llm_available
+    from agents.llm import ask_oci_grok_safe as llm_ask, available as llm_available
 except Exception:
     try:
-        from llm import ask as llm_ask, available as llm_available
+        from llm import ask_oci_grok_safe as llm_ask, available as llm_available
     except Exception:
         llm_ask = None
         llm_available = lambda: []
@@ -233,12 +245,21 @@ class Builder:
         self.created_at = datetime.utcnow().isoformat()
         self.outputs = []  # Track all outputs (for audit trail)
         
-        if not llm_available():
+        # Real bug this fixes (CodeRabbit, PR #277): llm_available() only
+        # checks PROVIDERS/FRONTIER_ORDER — it has no idea ask_oci_grok_safe()
+        # (the actual call this class makes, see the import comment above)
+        # reads OCI_GENAI_API_KEY directly and bypasses PROVIDERS entirely.
+        # An OCI-only deployment (no Groq/Gemini/xAI keys set, which every
+        # real report-generating workflow in this repo can run as) would
+        # report llm_ready=False and refuse to generate here even though the
+        # real call would have worked.
+        oci_ready = bool(os.getenv("OCI_GENAI_API_KEY")) and callable(llm_ask)
+        if not llm_available() and not oci_ready:
             logger.warning("No LLM provider available. Builder will not function.")
             self.llm_ready = False
         else:
             self.llm_ready = True
-            logger.info(f"Builder initialized with LLM providers: {llm_available()}")
+            logger.info(f"Builder initialized with LLM providers: {(['oci_grok'] if oci_ready else []) + llm_available()}")
     
     def _ground_in_memory(self, task: str) -> str:
         """Search Memory for relevant context to ground task."""
@@ -327,7 +348,10 @@ class Builder:
         except Exception as e:
             logger.error(f"LLM call failed: {e}")
             return "", {}
-        
+        if (response or "").startswith("[llm unavailable"):
+            logger.error(f"LLM unavailable this call: {response}")
+            return "", {}
+
         # Extract code from response (assume it's marked with ```python ... ```)
         code = self._extract_code_block(response)
         
@@ -404,6 +428,9 @@ class Builder:
             logger.info(f"LLM generation complete (provider: {provider})")
         except Exception as e:
             logger.error(f"LLM call failed: {e}")
+            return {}, {}
+        if (response or "").startswith("[llm unavailable"):
+            logger.error(f"LLM unavailable this call: {response}")
             return {}, {}
 
         files = self._extract_files(response)

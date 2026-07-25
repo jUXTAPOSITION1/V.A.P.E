@@ -40,6 +40,13 @@ def test_run_mythril_builds_correct_command_for_https_rpc(monkeypatch):
     rpc_arg = cmd[cmd.index("--rpc") + 1]
     assert ":" in rpc_arg and " " not in rpc_arg
     assert "--rpctls" in cmd
+    # Real bug this pins (confirmed against Mythril's own real CLI source,
+    # mythril/interfaces/cli.py's get_rpc_parser(): --rpctls is declared
+    # type=bool, not action="store_true", so it always consumes the next
+    # argv token — a bare `--rpctls` with nothing after it is a real,
+    # confirmed argparse error ("expected one argument"), which every real
+    # deep-dive audit against an https RPC hit before this fix.
+    assert cmd[cmd.index("--rpctls") + 1] == "True"
     assert captured["timeout"] == 200
     assert result == {"ran": True, "ok": True, "counts": {}, "findings": [], "total": 0}
 
