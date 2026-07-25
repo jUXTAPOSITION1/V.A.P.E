@@ -66,6 +66,11 @@ export interface Env {
   TAVILY_API_KEY?: string;
   BRAVE_API_KEY?: string;
   FIRECRAWL_API_KEY?: string;
+  // OCI-hosted Grok 4.3 — lib/llm.ts::askFrontier()'s real primary route
+  // (matches agents/llm.py::ask_oci_grok()); GEMINI/GROQ below are only the
+  // fallback if this isn't configured or errors.
+  OCI_GENAI_API_KEY?: string;
+  OCI_COMPARTMENT_OCID?: string;
   GEMINI_API_KEY?: string;
   GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;

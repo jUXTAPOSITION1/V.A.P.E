@@ -32,10 +32,32 @@ VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"
 #   wrangler secret put ALCHEMY_API_KEY
 #   wrangler secret put COINGECKO_API_KEY
 #   wrangler secret put CODEX_API_KEY
+#   wrangler secret put TAVILY_API_KEY
+#   wrangler secret put BRAVE_API_KEY
+#   wrangler secret put FIRECRAWL_API_KEY
+#   wrangler secret put OCI_GENAI_API_KEY
+#   wrangler secret put OCI_COMPARTMENT_OCID
+#   wrangler secret put GEMINI_API_KEY
+#   wrangler secret put GROQ_API_KEY
 #
 # ETHERSCAN_API_KEY: only exploit_check / dossier_check need it; the other
 # 4 offerings work without it (degrade to {"verified": null}, matching
 # agents/data_fetchers.py).
+#
+# TAVILY_API_KEY / BRAVE_API_KEY / FIRECRAWL_API_KEY: dossier_check's web-
+# reputation search + declared-social scrape (src/lib/webResearch.ts) —
+# each optional, tried in order, degrading to "unavailable" if none are set.
+#
+# OCI_GENAI_API_KEY / OCI_COMPARTMENT_OCID / GEMINI_API_KEY / GROQ_API_KEY:
+# src/lib/llm.ts::askFrontier()'s frontier-LLM chain, backing dossier_check's
+# AI quick review and website_review's red-flag read. OCI_GENAI_API_KEY (a
+# plain Bearer secret from OCI's Generative AI service, matching
+# agents/llm.py::ask_oci_grok()) is the real primary route — GEMINI_API_KEY/
+# GROQ_API_KEY are only the fallback if it's unset or errors.
+# OCI_COMPARTMENT_OCID is optional (only some OCI tenancy configs require
+# the CompartmentId header). Without any of these four, both offerings
+# still settle payment correctly but return an honest "AI review
+# unavailable this cycle" instead of a real read.
 #
 # CDP_API_KEY_ID / CDP_API_KEY_SECRET: a CDP Secret API Key (portal.cdp.
 # coinbase.com) used to mint the Bearer JWT src/lib/cdpAuth.ts signs for
