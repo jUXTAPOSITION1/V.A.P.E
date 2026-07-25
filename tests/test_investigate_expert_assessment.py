@@ -52,6 +52,34 @@ def test_malformed_response_without_marker_defaults_to_agree():
     assert result["text"] == "Some real analysis text with no marker line at all."
 
 
+def test_early_marker_occurrence_does_not_hijack_final_verdict():
+    """Real bug this pins (CodeRabbit, PR #277): the old re.search() matched
+    the FIRST 'VERDICT ALIGNMENT: ...' occurrence anywhere in the text — an
+    earlier mention (e.g. the model quoting/restating the instruction, or
+    injected content) with the opposite verdict from the model's real final
+    line would silently flip `disagrees`. Only the last non-empty line is a
+    valid marker."""
+    result, _m = _call(
+        "VERDICT ALIGNMENT: AGREE\n\n"
+        "Some analysis discusses the above, then reconsiders.\n\n"
+        "VERDICT ALIGNMENT: DISAGREE"
+    )
+    assert result["disagrees"] is True
+    assert "VERDICT ALIGNMENT: AGREE" in result["text"]  # not the final line, so left in the rendered analysis
+    assert "VERDICT ALIGNMENT: DISAGREE" not in result["text"]  # the final marker line is stripped
+
+
+def test_marker_not_on_its_own_final_line_is_not_matched():
+    """A marker embedded mid-sentence on the final line (not a standalone
+    'VERDICT ALIGNMENT: X') must not match — re.fullmatch() on the trimmed
+    final line requires the whole line to be exactly the marker."""
+    result, _m = _call(
+        "Some analysis.\n\n"
+        "In summary the VERDICT ALIGNMENT: DISAGREE with the stated risk."
+    )
+    assert result["disagrees"] is False
+
+
 def test_llm_unavailable_returns_none():
     with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("[llm unavailable: no keys]", None)):
         result = inv._expert_assessment(

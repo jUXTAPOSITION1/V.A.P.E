@@ -178,6 +178,17 @@ def test_extract_declared_remappings_no_settings_returns_empty():
     assert sft._extract_declared_remappings(wrapped) == []
 
 
+def test_extract_declared_remappings_non_dict_settings_does_not_raise():
+    """Real bug this pins (CodeRabbit, PR #277): `settings` present but set
+    to a non-dict (string/number/list) used to raise AttributeError from
+    `.get("settings", {}).get("remappings")` — the {} default only ever
+    applies when the key is absent, not when it's present with the wrong
+    type. Must degrade to [] like every other malformed-input case here."""
+    for bad_settings in ("a string", 42, ["a", "list"], None):
+        wrapped = "{" + json.dumps({"sources": {}, "settings": bad_settings}) + "}"
+        assert sft._extract_declared_remappings(wrapped) == []
+
+
 def test_extract_declared_remappings_rejects_absolute_target_path():
     """Real bug this pins: checking `.startswith('/')`/`'..' in` against the
     RAW `prefix=path` string only ever catches an absolute/traversal

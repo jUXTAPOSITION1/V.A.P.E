@@ -200,7 +200,15 @@ def _extract_declared_remappings(source_code):
         parsed = json.loads(text)
     except (ValueError, TypeError):
         return []
-    remappings = parsed.get("settings", {}).get("remappings") if isinstance(parsed, dict) else None
+    # Real bug this fixes (CodeRabbit, PR #277): `.get("settings", {})` only
+    # supplies the {} default when the key is ABSENT — if the (externally-
+    # supplied, potentially adversarial per this function's own docstring)
+    # verified-source JSON has "settings" present but set to a non-dict
+    # (string/number/list), `.get("remappings")` on it raises AttributeError,
+    # uncaught — breaking this function's callers' own documented "never
+    # raises to its caller" contract for any target with malformed metadata.
+    settings = parsed.get("settings") if isinstance(parsed, dict) else None
+    remappings = settings.get("remappings") if isinstance(settings, dict) else None
     if not isinstance(remappings, list):
         return []
     out = []

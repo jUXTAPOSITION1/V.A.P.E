@@ -106,6 +106,13 @@ export async function onchainPresence(
         method: "POST",
         headers: { "Content-Type": "application/json", ...UA },
         body: JSON.stringify({ jsonrpc: "2.0", method: "eth_getCode", params: [address, "latest"], id: 1 }),
+        // Real gap this closes (CodeRabbit, PR #277): with no timeout, a
+        // single hanging RPC could block this whole 3-attempt retry loop
+        // for however long the platform's own outer request timeout allows
+        // — AbortSignal.timeout() is a standard Worker-supported API, so a
+        // stuck attempt now fails fast into the existing catch/retry path
+        // instead of exhausting the request budget on one hung call.
+        signal: AbortSignal.timeout(8000),
       });
       const data: any = await res.json();
       if (typeof data?.result === "string") {

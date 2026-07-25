@@ -27,6 +27,7 @@ Usage:
 """
 
 import json
+import os
 import sys
 from datetime import datetime
 from typing import Dict, Any, Tuple, List
@@ -244,12 +245,21 @@ class Builder:
         self.created_at = datetime.utcnow().isoformat()
         self.outputs = []  # Track all outputs (for audit trail)
         
-        if not llm_available():
+        # Real bug this fixes (CodeRabbit, PR #277): llm_available() only
+        # checks PROVIDERS/FRONTIER_ORDER — it has no idea ask_oci_grok_safe()
+        # (the actual call this class makes, see the import comment above)
+        # reads OCI_GENAI_API_KEY directly and bypasses PROVIDERS entirely.
+        # An OCI-only deployment (no Groq/Gemini/xAI keys set, which every
+        # real report-generating workflow in this repo can run as) would
+        # report llm_ready=False and refuse to generate here even though the
+        # real call would have worked.
+        oci_ready = bool(os.getenv("OCI_GENAI_API_KEY"))
+        if not llm_available() and not oci_ready:
             logger.warning("No LLM provider available. Builder will not function.")
             self.llm_ready = False
         else:
             self.llm_ready = True
-            logger.info(f"Builder initialized with LLM providers: {llm_available()}")
+            logger.info(f"Builder initialized with LLM providers: {(['oci_grok'] if oci_ready else []) + llm_available()}")
     
     def _ground_in_memory(self, task: str) -> str:
         """Search Memory for relevant context to ground task."""

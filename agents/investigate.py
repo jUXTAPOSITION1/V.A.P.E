@@ -1445,13 +1445,22 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     if not text or text.startswith("[llm unavailable"):
         return None
     text = text.strip()
-    m = re.search(r"VERDICT ALIGNMENT:\s*(AGREE|DISAGREE)\b", text, re.IGNORECASE)
+    # Real gap this fixes (CodeRabbit, PR #277): re.search() over the whole
+    # response matches the FIRST "VERDICT ALIGNMENT: ..." occurrence anywhere
+    # in the text — untrusted evidence quoted/echoed earlier in the model's
+    # own analysis (or, worse, prompt-injected content) containing that exact
+    # phrase would hijack `disagrees` before the model's real, final verdict
+    # is ever reached. Only the last non-empty line is a valid marker.
+    lines = text.splitlines()
+    while lines and not lines[-1].strip():
+        lines.pop()
+    m = re.fullmatch(r"VERDICT ALIGNMENT:\s*(AGREE|DISAGREE)", lines[-1].strip(), re.IGNORECASE) if lines else None
     disagrees = bool(m) and m.group(1).upper() == "DISAGREE"
     # Strip the machine-parsed marker line out of the rendered text — it's a
     # parsing aid for `disagrees` above, not part of the actual analysis a
     # reader wants to see.
     if m:
-        text = (text[:m.start()] + text[m.end():]).strip()
+        text = "\n".join(lines[:-1]).strip()
     return {"text": text, "disagrees": disagrees}
 
 

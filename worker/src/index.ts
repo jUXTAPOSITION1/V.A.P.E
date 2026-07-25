@@ -1158,6 +1158,23 @@ async function dispatchAddressAuditJob(
     }
   }
 
+  // Real regression this closes (CodeRabbit, PR #277): paid reports no
+  // longer get committed to the public repo, which used to be the fallback
+  // delivery path whenever KV wasn't configured or its write failed. With
+  // that gone, dispatching anyway here means a real paid audit runs to
+  // completion with literally nowhere for the buyer to ever retrieve it
+  // (this response would even advertise "poll job=undefined"). Payment has
+  // already settled by this point — same as the GH_DISPATCH_TOKEN-missing
+  // case above, refuse with 503 (not 400/402, so the buyer retries rather
+  // than re-checking their request) instead of dispatching into a void.
+  if (!callerCallbackUrl && !jobId) {
+    logDraft(false, "no private delivery channel available (VAPE_JOBS not configured/write failed, no callback_url)");
+    return c.json({
+      offering: offeringName, status: "error",
+      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via ACP instead",
+    }, 503);
+  }
+
   // Best-effort — a dispatch failure right after the KV write above is the
   // one case this handler CAN detect synchronously (a workflow that crashes
   // or times out mid-run without ever POSTing to /callback is not; that gap
@@ -1432,6 +1449,25 @@ app.get("/scan/bounty_deep_dive", async (c) => {
       jobId = undefined;
       callbackUrl = callerCallbackUrl;
     }
+  }
+
+  // See dispatchAddressAuditJob's identical comment above: with public
+  // report commits gone, dispatching with neither a callback nor a KV job
+  // id means a real paid audit runs with nowhere for the buyer to ever
+  // retrieve it. Refuse before dispatch (payment already settled, so 503
+  // asks for a retry, not a re-check).
+  if (!callerCallbackUrl && !jobId) {
+    c.set("vapeJobDraft", {
+      id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+      ts: new Date().toISOString(), offering: "bounty_deep_dive", address: `${owner}/${repo}`,
+      chain_id: 8453, symbol: null, name: null, verdict: null, status: "error",
+      amount_usd: Number(BOUNTY_DEEP_DIVE_PRICE.replace("$", "")), latency_ms: Date.now() - t0,
+      error: "no private delivery channel available (VAPE_JOBS not configured/write failed, no callback_url)",
+    });
+    return c.json({
+      offering: "bounty_deep_dive", status: "error",
+      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via ACP instead",
+    }, 503);
   }
 
   // Best-effort — a dispatch failure right after the KV write above is the

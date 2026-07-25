@@ -479,7 +479,13 @@ def main():
     paths = [p.strip() for p in args.paths.split(",")] if args.paths else None
     result = run_external_audit(args.owner, args.repo, args.ref, paths, args.program_name,
                                  callback_url=args.callback_url, engagement=args.engagement)
-    print(json.dumps(result, indent=2))
+    # See deep_dive_audit.py's identical comment: never print report_content
+    # (a real paid buyer's actual PoC text) to stdout — GitHub Actions logs
+    # it verbatim on this public repo regardless of engagement.
+    log_result = dict(result)
+    if args.engagement != "validation" and log_result.get("report_content"):
+        log_result["report_content"] = f"[redacted — {len(result['report_content'])} chars, delivered privately]"
+    print(json.dumps(log_result, indent=2))
 
 
 if __name__ == "__main__":

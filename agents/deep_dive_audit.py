@@ -754,7 +754,18 @@ def main():
     args = ap.parse_args()
 
     result = run_audit(args.address, args.chain, args.callback_url, engagement=args.engagement)
-    print(json.dumps(result, indent=2))
+    # Real gap this closes (CodeRabbit, PR #277): this used to always print
+    # the full result to stdout, including report_content — a real paid
+    # buyer's actual PoC text — and GitHub Actions logs that verbatim for
+    # anyone to read on this public repo, regardless of engagement. That's
+    # the same exposure the "Commit the report" step's engagement gating
+    # closes for the git history; stdout needed the identical treatment.
+    # Only report_content is redacted — every other field (address, verdict,
+    # score, provider, etc.) still prints for real debugging visibility.
+    log_result = dict(result)
+    if args.engagement not in ("sweep", "validation") and log_result.get("report_content"):
+        log_result["report_content"] = f"[redacted — {len(result['report_content'])} chars, delivered privately]"
+    print(json.dumps(log_result, indent=2))
 
 
 if __name__ == "__main__":
