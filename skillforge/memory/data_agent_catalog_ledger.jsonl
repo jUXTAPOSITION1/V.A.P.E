@@ -48,3 +48,4 @@
 {"ts": "2026-07-25T06:26:27.939705Z", "target": "layerzero-v2", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T08:33:36.704923Z", "target": "bybit", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-25T10:13:00.657749Z", "target": "base", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
+{"ts": "2026-07-25T11:47:42.128766Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 50}

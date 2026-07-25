@@ -2257,6 +2257,25 @@
     "symbol": "Claude",
     "times_investigated": 1
   },
+  "8453:0x712be9c5b93d4ac284382593327ae29e59977b07": {
+    "address": "0x712be9C5b93d4aC284382593327Ae29e59977b07",
+    "chain": "8453",
+    "creator_address": "0xb3accf0d065c41d9993d5c09af4a221b8e51683f",
+    "first_investigated": "2026-07-25T11:47:40Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-114740-0x712be9C5.md",
+        "score": 35,
+        "ts": "2026-07-25T11:47:40Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-25T11:47:40Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "VCNT",
+    "times_investigated": 1
+  },
   "8453:0x71a64aa011566a33f79ee48ed1491752aec254b6": {
     "address": "0x71A64AA011566A33F79eE48ed1491752AEc254b6",
     "chain": "8453",
