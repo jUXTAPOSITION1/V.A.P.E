@@ -273,7 +273,19 @@ def scaffold_project(files, compiler_version, out_dir, declared_remappings=None)
     source included them) take precedence over the path-derived ones below:
     they're authoritative when present, since they're the exact aliases the
     contract's own source imports actually use, not a guess reconstructed
-    from bundled file paths."""
+    from bundled file paths.
+
+    Real, confirmed gap this fixes (live DIEM validation run,
+    2026-07-25T13:22Z, post-declared-remappings-fix): a declared remapping's
+    path is relative to whatever root the ORIGINAL verified project
+    compiled from — this scaffold always writes bundled files under
+    out_dir/src/ instead (every relpath in `files` lands there, a few lines
+    above), so using the declared path verbatim resolves to
+    out_dir/<path> and misses the actual files sitting at
+    out_dir/src/<path>. _generate_remappings() below already prefixes its
+    own path-derived remappings with 'src/' for exactly this reason;
+    declared_remappings need the identical treatment, not a verbatim
+    pass-through."""
     src_dir = os.path.join(out_dir, "src")
     os.makedirs(src_dir, exist_ok=True)
     os.makedirs(os.path.join(out_dir, "test"), exist_ok=True)
@@ -282,8 +294,12 @@ def scaffold_project(files, compiler_version, out_dir, declared_remappings=None)
         os.makedirs(os.path.dirname(full), exist_ok=True)
         with open(full, "w", encoding="utf-8") as f:
             f.write(content)
-    remappings = list(declared_remappings or [])
-    declared_prefixes = {r.split("=", 1)[0] for r in remappings}
+    remappings = []
+    declared_prefixes = set()
+    for r in (declared_remappings or []):
+        prefix, path = r.split("=", 1)
+        remappings.append(f"{prefix}=src/{path}")
+        declared_prefixes.add(prefix)
     for r in _generate_remappings(files):
         if r.split("=", 1)[0] not in declared_prefixes:
             remappings.append(r)
