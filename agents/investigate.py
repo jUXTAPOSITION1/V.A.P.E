@@ -686,6 +686,29 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
     else:
         flag(True, 5, "Holder count unavailable — cannot assess distribution")
 
+    # Real top-holder concentration + LP-lock status — both already sitting
+    # in GoPlus's own response every cycle (see _holder_concentration()/
+    # _lp_lock_status() docstrings) but never previously read. Deliberately
+    # moderate weights (smaller than the honeypot/mint/proxy penalties
+    # above) since this is a newly-wired signal on a GoPlus response shape
+    # this sandbox couldn't verify live — conservative until a real
+    # production cycle confirms the field shapes match.
+    concentration = _holder_concentration(gp)
+    if concentration:
+        top_pct = concentration["top_holders_pct"]
+        flag(top_pct >= 70, 15, f"Top {concentration['holders_counted']} non-LP/burn holders control "
+                                f"{top_pct:.0f}% of supply — concentrated, easily manipulated")
+        flag(50 <= top_pct < 70, 8, f"Top {concentration['holders_counted']} non-LP/burn holders control "
+                                    f"{top_pct:.0f}% of supply — meaningful concentration")
+        signal(top_pct < 20, f"Top holders control only {top_pct:.0f}% of supply — broad distribution")
+
+    lp_lock = _lp_lock_status(gp)
+    if lp_lock:
+        locked_pct = lp_lock["locked_pct"]
+        flag(locked_pct < 50, 15, f"Only {locked_pct:.0f}% of liquidity is locked — "
+                                  "the deployer can pull the rest at any time")
+        signal(locked_pct >= 80, f"{locked_pct:.0f}% of liquidity is locked — reduced rug-pull risk")
+
     liq = dex.get("liquidity_usd") or 0
     try:
         liq = float(liq)
@@ -898,6 +921,60 @@ def auto_target(chain=None):
     return None
 
 
+# Ordered (category, keywords) buckets for _categorize_report_reasons() below
+# — order matters, first match wins, so more specific categories are listed
+# before general ones (e.g. a stablecoin-peg reason mentions "supply" too,
+# but "peg"/"stablecoin" should bucket it under Tokenomics, not Distribution).
+_RISK_CATEGORIES = (
+    ("Security & Contract Risk", (
+        "honeypot", "mintable", "mint function", "ownership can be reclaimed",
+        "take back ownership", "change balances", "hidden owner", "proxy",
+        "pausable", "buy tax", "sell tax", "not renounced", "renounced",
+    )),
+    ("Tokenomics & Track Record", (
+        "peg", "stablecoin", "impersonat", "days old", "track record", "violent",
+        "volatility", "24h move", "fdv", "dilution",
+    )),
+    ("Holder Distribution & Liquidity", (
+        "holder", "liquidity", "supply", "locked", "concentrat", "distribution",
+        "manipulated",
+    )),
+    ("Transparency & Provenance", (
+        "audit", "verified source", "unverified", "factory", "template",
+        "deployer", "web search", "scam", "rug", "eoa", "no contract code",
+    )),
+)
+
+
+def _categorize_report_reasons(reasons, positive_signals):
+    """Buckets score()'s already-computed reasons/positive_signals into
+    named risk categories, purely for report presentation — no new data
+    fetched, no scoring change; the multi-dimensional "how does this rank"
+    view requested directly by the user, built from what score() already
+    produces. Keyword-matched (first category whose keyword appears in the
+    lowercased text wins); anything matching none of the buckets lands in
+    "Other". Never raises — an unexpected reason string just falls through
+    to "Other" rather than crashing report generation."""
+    buckets = {name: {"flags": [], "signals": []} for name, _ in _RISK_CATEGORIES}
+    buckets["Other"] = {"flags": [], "signals": []}
+
+    def _bucket_for(text):
+        low = text.lower()
+        for name, keywords in _RISK_CATEGORIES:
+            if any(k in low for k in keywords):
+                return name
+        return "Other"
+
+    for r in reasons or []:
+        buckets[_bucket_for(r)]["flags"].append(r)
+    for p in positive_signals or []:
+        buckets[_bucket_for(p)]["signals"].append(p)
+    # Preserve category declaration order, then "Other" last; drop empty ones.
+    ordered_names = [name for name, _ in _RISK_CATEGORIES] + ["Other"]
+    return [(name, buckets[name]) for name in ordered_names
+            if buckets[name]["flags"] or buckets[name]["signals"]]
+
+
 # ── report + persistence ────────────────────────────────────────────────────
 def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reasons, positive_signals, web_rep=None,
                  defillama=None, deployer_siblings=None, critic_result=None, data_agent_intel=None,
@@ -956,6 +1033,25 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append("- None found. Absence of red flags is not evidence of safety — a clean sweep "
                   "with zero positive signals still caps the score below PROCEED tier.")
     L.append("")
+    # Real gap this closes: a flat single score/verdict doesn't tell a reader
+    # WHERE a token is strong vs. weak (e.g. clean security but concentrated
+    # holders, or the reverse) -- flagged directly by the user as a missing
+    # "rank across categories, not just pass/fail" view. Pure presentation
+    # over the exact reasons/positive_signals already computed above; no new
+    # scoring, no new data.
+    L.append("## Risk Breakdown by Category")
+    categorized = _categorize_report_reasons(reasons, positive_signals)
+    if categorized:
+        for name, bucket in categorized:
+            L.append(f"**{name}** — {len(bucket['flags'])} flag(s), {len(bucket['signals'])} positive signal(s)")
+            for r in bucket["flags"]:
+                L.append(f"  - {r}")
+            for p in bucket["signals"]:
+                L.append(f"  - (positive) {p}")
+        L.append("")
+    else:
+        L.append("- Nothing to categorize this cycle.")
+        L.append("")
     L.append("## Expert Assessment")
     if expert_assessment and expert_assessment.get("text"):
         tag = "⚠️ **DISAGREES with the verdict above**" if expert_assessment["disagrees"] else "Agrees with the verdict above"
@@ -1053,6 +1149,28 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
                 L.append(f"- {k}: `{gp.get(k)}`")
     else:
         L.append("- GoPlus returned no security profile for this token.")
+    L.append("")
+    # Real gap this closes: GoPlus's own "holders"/"lp_holders" arrays
+    # (per-address concentration, per-LP-holder lock status) were already
+    # fetched inside `gp` every cycle but never surfaced anywhere -- a raw
+    # holder_count alone can't distinguish broad organic distribution from
+    # a few whales plus a long dust tail, and no report ever showed whether
+    # liquidity was actually locked. See _holder_concentration()/
+    # _lp_lock_status() docstrings for the honest-degradation caveat on
+    # GoPlus's exact field shape.
+    L.append("## Holder Distribution & Liquidity Lock (GoPlus)")
+    concentration = _holder_concentration(gp)
+    lp_lock = _lp_lock_status(gp)
+    if concentration:
+        L.append(f"- Top {concentration['holders_counted']} non-LP/burn holders control "
+                 f"{concentration['top_holders_pct']:.1f}% of supply")
+    else:
+        L.append("- Top-holder concentration not available this cycle.")
+    if lp_lock:
+        L.append(f"- {lp_lock['locked_pct']:.1f}% of tracked liquidity-pool tokens are locked "
+                 f"(across {lp_lock['lp_holders_counted']} LP holder(s))")
+    else:
+        L.append("- Liquidity-lock status not available this cycle.")
     L.append("")
     L.append(f"## On-chain Presence ({chain_display} RPC)")
     if onchain.get("is_contract") is None:
@@ -1406,6 +1524,94 @@ def _stablecoin_context(cg_contract):
         return None
     return {"name": cg_contract.get("name"), "symbol": cg_contract.get("symbol"),
             "market_cap_usd": mcap, "price_usd": price}
+
+
+# Addresses whose held balance is permanently removed from circulation, not
+# a whale who can dump — must be excluded from concentration math or a
+# healthy burn/deflationary mechanism would score as a whale-risk red flag.
+_BURN_ADDRESSES = {
+    "0x0000000000000000000000000000000000000000",
+    "0x000000000000000000000000000000000000dead",
+}
+
+
+def _holder_concentration(gp):
+    """Real top-holder concentration from GoPlus's own per-holder "holders"
+    array (percent of supply per address) — a genuine, already-fetched
+    signal that used to sit completely unused: every investigation already
+    calls goplus_security() and gets this back inside the raw dict, but only
+    the scalar holder_count was ever read, never the per-holder breakdown
+    that would reveal whether "40k holders" means broad organic distribution
+    or a handful of whales plus a long dust tail (flagged directly as a
+    missing factor against a live report, investigation-20260725-155143-
+    0xB8d7710f.md, where a raw holder count was the ONLY distribution signal
+    available). Excludes burn addresses (that supply can never move) and
+    addresses GoPlus itself tags as an LP/pool (that's liquidity, not a
+    whale). Returns None on any missing/malformed shape — GoPlus's exact
+    schema couldn't be verified against a live response from this sandbox
+    (network access is blocked here, same as every other external API in
+    this repo), so this degrades honestly to "no signal" rather than ever
+    guessing wrong. Never raises."""
+    holders = gp.get("holders") if isinstance(gp, dict) else None
+    if not isinstance(holders, list) or not holders:
+        return None
+    total_pct = 0.0
+    counted = 0
+    for h in holders[:10]:
+        if not isinstance(h, dict):
+            continue
+        addr = str(h.get("address") or "").lower()
+        if addr in _BURN_ADDRESSES:
+            continue
+        tag = str(h.get("tag") or "").lower()
+        if "lp" in tag or "pool" in tag or "burn" in tag:
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        # GoPlus reports percent as a 0-1 fraction in this API family (same
+        # convention as buy_tax/sell_tax elsewhere in this file); guard
+        # against a 0-100 shape too so a schema surprise never inflates
+        # 10x instead of silently misreading.
+        if pct > 1:
+            pct = pct / 100.0
+        total_pct += pct
+        counted += 1
+    if counted == 0:
+        return None
+    return {"top_holders_pct": total_pct * 100.0, "holders_counted": counted}
+
+
+def _lp_lock_status(gp):
+    """Real liquidity-lock status from GoPlus's own "lp_holders" array
+    (is_locked per LP-token holder) — the classic, concrete "can the dev
+    just pull liquidity and rug" check, already fetched every cycle via
+    goplus_security() and never read. Returns None on any missing/malformed
+    shape (see _holder_concentration()'s docstring for why — same
+    unverified-live-schema caveat, same honest-degradation rule)."""
+    lp_holders = gp.get("lp_holders") if isinstance(gp, dict) else None
+    if not isinstance(lp_holders, list) or not lp_holders:
+        return None
+    total_pct = 0.0
+    locked_pct = 0.0
+    counted = 0
+    for h in lp_holders:
+        if not isinstance(h, dict):
+            continue
+        try:
+            pct = float(h.get("percent") or 0)
+        except (TypeError, ValueError):
+            continue
+        if pct > 1:
+            pct = pct / 100.0
+        total_pct += pct
+        if str(h.get("is_locked")) == "1":
+            locked_pct += pct
+        counted += 1
+    if counted == 0 or total_pct <= 0:
+        return None
+    return {"locked_pct": (locked_pct / total_pct) * 100.0, "lp_holders_counted": counted}
 
 
 def _data_agent_intel(address, chain):

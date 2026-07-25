@@ -246,6 +246,68 @@ export function stablecoinContext(cg: CoingeckoContractMarket | null | undefined
   return { name: cg.name, symbol: cg.symbol, market_cap_usd: mcap, price_usd: price };
 }
 
+// Addresses whose held balance is permanently removed from circulation —
+// must be excluded from concentration math or a healthy burn/deflationary
+// mechanism would score as a whale-risk red flag. Mirrors
+// agents/investigate.py::_BURN_ADDRESSES.
+const BURN_ADDRESSES = new Set([
+  "0x0000000000000000000000000000000000000000",
+  "0x000000000000000000000000000000000000dead",
+]);
+
+/** Real top-holder concentration from GoPlus's own per-holder "holders"
+ * array — already fetched inside goplusRaw() every call but never read
+ * (only the scalar holder_count was). Excludes burn addresses and any
+ * holder GoPlus itself tags as an LP/pool. Returns null on any missing/
+ * malformed shape — GoPlus's exact schema couldn't be verified live from
+ * the dev sandbox this was written in, so this degrades honestly to "no
+ * signal" rather than ever guessing wrong. Field-for-field port of
+ * agents/investigate.py::_holder_concentration(). */
+export function holderConcentration(gp: Record<string, any>): { top_holders_pct: number; holders_counted: number } | null {
+  const holders = gp?.holders;
+  if (!Array.isArray(holders) || holders.length === 0) return null;
+  let totalPct = 0;
+  let counted = 0;
+  for (const h of holders.slice(0, 10)) {
+    if (!h || typeof h !== "object") continue;
+    const addr = String(h.address || "").toLowerCase();
+    if (BURN_ADDRESSES.has(addr)) continue;
+    const tag = String(h.tag || "").toLowerCase();
+    if (tag.includes("lp") || tag.includes("pool") || tag.includes("burn")) continue;
+    let pct = Number(h.percent);
+    if (!Number.isFinite(pct)) continue;
+    if (pct > 1) pct = pct / 100;
+    totalPct += pct;
+    counted += 1;
+  }
+  if (counted === 0) return null;
+  return { top_holders_pct: totalPct * 100, holders_counted: counted };
+}
+
+/** Real liquidity-lock status from GoPlus's own "lp_holders" array
+ * (is_locked per LP-token holder) — the classic "can the dev pull
+ * liquidity" check, already fetched but never read. Same honest-
+ * degradation caveat as holderConcentration() above. Field-for-field port
+ * of agents/investigate.py::_lp_lock_status(). */
+export function lpLockStatus(gp: Record<string, any>): { locked_pct: number; lp_holders_counted: number } | null {
+  const lpHolders = gp?.lp_holders;
+  if (!Array.isArray(lpHolders) || lpHolders.length === 0) return null;
+  let totalPct = 0;
+  let lockedPct = 0;
+  let counted = 0;
+  for (const h of lpHolders) {
+    if (!h || typeof h !== "object") continue;
+    let pct = Number(h.percent);
+    if (!Number.isFinite(pct)) continue;
+    if (pct > 1) pct = pct / 100;
+    totalPct += pct;
+    if (String(h.is_locked) === "1") lockedPct += pct;
+    counted += 1;
+  }
+  if (counted === 0 || totalPct <= 0) return null;
+  return { locked_pct: (lockedPct / totalPct) * 100, lp_holders_counted: counted };
+}
+
 export interface ScoreVerif {
   checked: boolean;
   verified?: boolean | null;
@@ -354,6 +416,28 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
     signal(holders >= 500, `${holders} holders — reasonably distributed`);
   } else {
     flag(true, 5, "Holder count unavailable — cannot assess distribution");
+  }
+
+  // Real top-holder concentration + LP-lock status — both already sitting
+  // in GoPlus's own response every call but never previously read. Field-
+  // for-field port of agents/investigate.py::score()'s same block
+  // (deliberately moderate weights — see that block's comment for why).
+  const concentration = holderConcentration(gp);
+  if (concentration) {
+    const topPct = concentration.top_holders_pct;
+    flag(topPct >= 70, 15, `Top ${concentration.holders_counted} non-LP/burn holders control `
+      + `${topPct.toFixed(0)}% of supply — concentrated, easily manipulated`);
+    flag(topPct >= 50 && topPct < 70, 8, `Top ${concentration.holders_counted} non-LP/burn holders control `
+      + `${topPct.toFixed(0)}% of supply — meaningful concentration`);
+    signal(topPct < 20, `Top holders control only ${topPct.toFixed(0)}% of supply — broad distribution`);
+  }
+
+  const lpLock = lpLockStatus(gp);
+  if (lpLock) {
+    const lockedPct = lpLock.locked_pct;
+    flag(lockedPct < 50, 15, `Only ${lockedPct.toFixed(0)}% of liquidity is locked — `
+      + "the deployer can pull the rest at any time");
+    signal(lockedPct >= 80, `${lockedPct.toFixed(0)}% of liquidity is locked — reduced rug-pull risk`);
   }
 
   const liq = Number(dex.liquidity_usd) || 0;
