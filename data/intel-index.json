@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T05:36:14Z",
+  "generated": "2026-07-25T06:26:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 405,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 107,
-    "investigations": 309,
+    "investigations": 310,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-041324-0x8dB2be2b.md",
-      "title": "Investigation \u2014 USDC",
-      "symbol": "USDC",
-      "name": "United States of Doge CashCat",
-      "date": "2026-07-25T04:13:24Z",
-      "target": "0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88",
+      "file": "investigation-20260725-062625-0x2B11834E.md",
+      "title": "Investigation \u2014 MENTE",
+      "symbol": "MENTE",
+      "name": "Ethoswarm",
+      "date": "2026-07-25T06:26:25Z",
+      "target": "0x2B11834Ed1FeAEd4b4b3a86A6F571315E25A884D",
       "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "68",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Pair 8.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 24581 holders \u2014 reasonably distributed; Custom verified source (not a ma",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-041324-0x8dB2be2b.md"
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-10] Owner not renounced (0xcc29169da9063f893d7958e8c021e788446e7229) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 610779 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-062625-0x2B11834E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-062625-0x2B11834E.md",
+      "title": "Investigation \u2014 MENTE",
+      "symbol": "MENTE",
+      "name": "Ethoswarm",
+      "date": "2026-07-25T06:26:25Z",
+      "target": "0x2B11834Ed1FeAEd4b4b3a86A6F571315E25A884D",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-10] Owner not renounced (0xcc29169da9063f893d7958e8c021e788446e7229) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 610779 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-062625-0x2B11834E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-041324-0x8dB2be2b.md",
@@ -593,20 +607,6 @@
       "score": "57",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-25] Very low liquidity $94 (rug/illiquid); [-10] Low liquidity $94. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($156,547,951 circulating, $0.9998 peg); 2776 holders \u2014 reasonably distributed; Trading 293+ days without a kno",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-212308-0x0A1a1A10.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260721-200430-0x40Faa04e.md",
-      "title": "Investigation \u2014 cbBTC",
-      "symbol": "cbBTC",
-      "name": "Coinbase Wrappped BTC",
-      "date": "2026-07-21T20:04:30Z",
-      "target": "0x40Faa04e54a6f3C6F85B3114bb04890Dc77b8be3",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk). Positive evidence: 28290 holders \u2014 reasonably distributed; Trading 164+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260721-200430-0x40Faa04e.md"
     }
   ],
   "reports": [

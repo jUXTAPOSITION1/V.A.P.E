@@ -45,3 +45,4 @@
 {"ts": "2026-07-24T22:38:30.478693Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-25T00:13:00.195819Z", "target": "velodrome-v2", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-25T03:52:00.719577Z", "target": "0x33417DFDa9845853266b3bA4686A397aA0ae8B07", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-25T06:26:27.939705Z", "target": "layerzero-v2", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
