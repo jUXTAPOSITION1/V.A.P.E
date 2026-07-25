@@ -177,3 +177,188 @@ def test_scaffold_and_analyze_uses_pre_fetched_src_without_refetching(monkeypatc
     result = sft.scaffold_and_analyze(
         "0xdead", pre_fetched_src={"verified": False, "source_code": None})
     assert result == {"ran": False, "reason": "contract unverified or no source available"}
+
+
+# ── draft_exploit_test ────────────────────────────────────────────────────────
+
+def test_draft_exploit_test_reports_llm_unavailable(monkeypatch):
+    def _boom(system, user, **kw):
+        raise RuntimeError("no provider configured")
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier", _boom)
+    code, reason = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
+    assert code is None
+    assert "LLM unavailable" in reason
+
+
+def test_draft_exploit_test_honors_no_exploit_found(monkeypatch):
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier",
+                         lambda system, user, **kw: ("NO_EXPLOIT_FOUND: no exploitable path in this contract", "grok"))
+    code, reason = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
+    assert code is None
+    assert reason == "no exploit found: no exploitable path in this contract"
+
+
+def test_draft_exploit_test_strips_markdown_fence(monkeypatch):
+    fenced = "```solidity\n// SPDX-License-Identifier: MIT\ncontract Exploit {}\n```"
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier", lambda system, user, **kw: (fenced, "grok"))
+    code, provider = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
+    assert code == "// SPDX-License-Identifier: MIT\ncontract Exploit {}"
+    assert provider == "grok"
+
+
+def test_draft_exploit_test_passes_through_unfenced_code(monkeypatch):
+    monkeypatch.setattr(sft, "ask_oci_grok_frontier",
+                         lambda system, user, **kw: ("// SPDX-License-Identifier: MIT\ncontract Exploit {}", "grok"))
+    code, provider = sft.draft_exploit_test({"Token.sol": "contract Token {}"}, "Token", "0xdead")
+    assert code == "// SPDX-License-Identifier: MIT\ncontract Exploit {}"
+
+
+# ── _forge_subprocess_env ────────────────────────────────────────────────────
+
+def test_forge_subprocess_env_strips_secrets(monkeypatch):
+    monkeypatch.setenv("PATH", "/usr/bin")
+    monkeypatch.setenv("HOME", "/home/x")
+    monkeypatch.setenv("XAI_API_KEY_1", "super-secret-key")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghp_super_secret")
+    monkeypatch.setenv("ETHERSCAN_API_KEY", "another-secret")
+    env = sft._forge_subprocess_env()
+    assert env["PATH"] == "/usr/bin"
+    assert env["HOME"] == "/home/x"
+    assert "XAI_API_KEY_1" not in env
+    assert "GITHUB_TOKEN" not in env
+    assert "ETHERSCAN_API_KEY" not in env
+
+
+def test_forge_subprocess_env_omits_unset_optional_keys(monkeypatch):
+    monkeypatch.setenv("PATH", "/usr/bin")
+    monkeypatch.delenv("HOME", raising=False)
+    monkeypatch.delenv("TMPDIR", raising=False)
+    env = sft._forge_subprocess_env()
+    assert "HOME" not in env
+    assert "TMPDIR" not in env
+    assert set(env) <= {"PATH", "HOME", "TMPDIR", "TEMP", "TERM", "LANG"}
+
+
+# ── run_forge_test_exploit ────────────────────────────────────────────────────
+
+def test_run_forge_test_exploit_reports_missing_binary_cleanly(tmp_path, monkeypatch):
+    import subprocess
+
+    def _raise(*a, **k):
+        raise FileNotFoundError()
+    monkeypatch.setattr(subprocess, "run", _raise)
+    result = sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
+    assert result == {"ran": False, "reason": "forge not installed in this environment"}
+
+
+def test_run_forge_test_exploit_reports_timeout(tmp_path, monkeypatch):
+    import subprocess
+
+    def _raise(*a, **k):
+        raise subprocess.TimeoutExpired(cmd=["forge"], timeout=5)
+    monkeypatch.setattr(subprocess, "run", _raise)
+    result = sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test", timeout=5)
+    assert result["ran"] is True
+    assert result["passed"] is False
+    assert "timed out after 5s" in result["reason"]
+
+
+def test_run_forge_test_exploit_reports_pass(tmp_path, monkeypatch):
+    import subprocess
+
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
+        assert cmd[:2] == ["forge", "test"]
+        assert "--fork-url" in cmd
+        assert cmd[cmd.index("--fork-url") + 1] == "https://example-rpc.test"
+        return subprocess.CompletedProcess(cmd, 0, stdout="test passed", stderr="")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    result = sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
+    assert result == {"ran": True, "passed": True, "returncode": 0, "output": "test passed"}
+
+
+def test_run_forge_test_exploit_reports_failure(tmp_path, monkeypatch):
+    import subprocess
+
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
+        return subprocess.CompletedProcess(cmd, 1, stdout="", stderr="test failed")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    result = sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
+    assert result == {"ran": True, "passed": False, "returncode": 1, "output": "test failed"}
+
+
+def test_run_forge_test_exploit_never_passes_real_secrets_to_subprocess(tmp_path, monkeypatch):
+    """Confirmed real gap (CodeRabbit, PR #275): forge test previously
+    inherited the full CI environment, including every LLM-provider key and
+    GITHUB_TOKEN — a malicious verified-source prompt injection could steer
+    the LLM-drafted test into reading one via vm.envString and leaking it
+    into forge's captured output, which flows straight into a committed,
+    public report."""
+    import subprocess
+    monkeypatch.setenv("XAI_API_KEY_1", "super-secret-key")
+    monkeypatch.setenv("GITHUB_TOKEN", "ghp_super_secret")
+    captured = {}
+
+    def fake_run(cmd, cwd, capture_output, text, timeout, env):
+        captured["env"] = env
+        return subprocess.CompletedProcess(cmd, 0, stdout="ok", stderr="")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    sft.run_forge_test_exploit(str(tmp_path), "https://example-rpc.test")
+    assert "XAI_API_KEY_1" not in captured["env"]
+    assert "GITHUB_TOKEN" not in captured["env"]
+
+
+# ── scaffold_and_run_exploit_poc — orchestration short-circuits ─────────────
+
+def test_scaffold_and_run_exploit_poc_reports_unverified_contract(monkeypatch):
+    monkeypatch.setattr(sft.DF, "get_contract_source",
+                         lambda addr, chain: {"verified": False, "source_code": None})
+    result = sft.scaffold_and_run_exploit_poc("0xdead", rpc_url="https://example-rpc.test")
+    assert result == {"ran": False, "reason": "contract unverified or no source available"}
+
+
+def test_scaffold_and_run_exploit_poc_reports_missing_rpc(monkeypatch):
+    monkeypatch.setattr(sft.DF, "get_contract_source",
+                         lambda addr, chain: {"verified": True, "source_code": "contract C {}",
+                                               "contract_name": "C", "compiler": "v0.8.19"})
+    result = sft.scaffold_and_run_exploit_poc("0xdead", rpc_url=None)
+    assert result == {"ran": False, "reason": "no known RPC endpoint for chain 8453"}
+
+
+def test_scaffold_and_run_exploit_poc_reports_source_lookup_error(monkeypatch):
+    monkeypatch.setattr(sft.DF, "get_contract_source",
+                         lambda addr, chain: {"error": "no api key"})
+    result = sft.scaffold_and_run_exploit_poc("0xdead", rpc_url="https://example-rpc.test")
+    assert result["ran"] is False
+    assert "source lookup failed" in result["reason"]
+
+
+def test_scaffold_and_run_exploit_poc_stops_when_no_exploit_drafted(monkeypatch, tmp_path):
+    monkeypatch.setattr(sft.DF, "get_contract_source",
+                         lambda addr, chain: {"verified": True, "source_code": "contract C {}",
+                                               "contract_name": "C", "compiler": "v0.8.19"})
+    monkeypatch.setattr(sft, "run_forge_build", lambda project_dir, timeout=180: {"ok": True, "output": ""})
+    monkeypatch.setattr(sft, "draft_exploit_test",
+                         lambda files, name, address, extra_context="": (None, "no exploit found: nothing concrete"))
+    result = sft.scaffold_and_run_exploit_poc(
+        "0xdead", rpc_url="https://example-rpc.test", workdir=str(tmp_path))
+    assert result["ran"] is False
+    assert result["reason"] == "no exploit found: nothing concrete"
+    assert result["project_dir"] == str(tmp_path)
+
+
+def test_scaffold_and_run_exploit_poc_runs_full_pipeline_on_success(monkeypatch, tmp_path):
+    monkeypatch.setattr(sft.DF, "get_contract_source",
+                         lambda addr, chain: {"verified": True, "source_code": "contract C {}",
+                                               "contract_name": "C", "compiler": "v0.8.19"})
+    monkeypatch.setattr(sft, "run_forge_build", lambda project_dir, timeout=180: {"ok": True, "output": ""})
+    monkeypatch.setattr(sft, "draft_exploit_test",
+                         lambda files, name, address, extra_context="": ("contract Exploit {}", "grok"))
+    monkeypatch.setattr(sft, "run_forge_test_exploit",
+                         lambda project_dir, fork_url, timeout=300: {"ran": True, "passed": True, "returncode": 0, "output": "ok"})
+    result = sft.scaffold_and_run_exploit_poc(
+        "0xdead", rpc_url="https://example-rpc.test", workdir=str(tmp_path))
+    assert result["ran"] is True
+    assert result["drafted_by"] == "grok"
+    assert result["drafted_code"] == "contract Exploit {}"
+    assert result["test_result"]["passed"] is True
+    assert (tmp_path / "test" / "Exploit.t.sol").read_text() == "contract Exploit {}"

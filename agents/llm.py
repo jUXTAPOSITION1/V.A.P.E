@@ -23,24 +23,27 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     GitHub Models, despite GitHub Models technically
                                     also offering premium models today.
     together    TOGETHER_API_KEY    70B free endpoints — when 8B isn't enough
-    xai         XAI_API_KEY_1       Grok 4.1 Fast — paid, primary model for VAPE's
-                                    highest-stakes work (see FRONTIER_ORDER below).
-                                    Not in the default PROVIDERS chain a bare ask()
-                                    call uses — only reachable via provider_order=
-                                    FRONTIER_ORDER / ask_frontier(), so ordinary
-                                    fast/bulk-tier calls never touch it and stay on
-                                    the free chain, matching the operating policy:
-                                    Grok for reports/investigations/the $1 x402
-                                    audit/intel/Builder/SKILLFORGE; Groq/Gemini for
-                                    everything else. A single key, not a rotated
-                                    pair — a second key (XAI_API_KEY_2) was tried
-                                    briefly but its xAI team had no credits/license,
-                                    so it's not worth the added complexity of a
-                                    two-key fallthrough for a key that can't serve
-                                    real traffic anyway; revisit if a genuinely
-                                    funded second key is ever needed.
-                                    OpenAI-compatible endpoint (api.x.ai/v1), same
-                                    _call() as everything else.
+    xai         XAI_API_KEY_1       Grok 4.1 Fast — paid, the LAST-resort entry in
+                                    FRONTIER_ORDER as of 2026-07-25 (see that
+                                    constant's own comment for why: it's the only
+                                    paid tier in this chain, and its Live Search
+                                    feature is currently dead — HTTP 410,
+                                    deprecated in favor of xAI's new "Agent Tools
+                                    API", not yet migrated here). VAPE's actual
+                                    primary reasoning route for high-stakes work is
+                                    OCI-hosted Grok 4.3 (ask_oci_grok()), not this
+                                    direct xai_1 entry. Not in the default PROVIDERS
+                                    chain a bare ask() call uses — only reachable via
+                                    provider_order=FRONTIER_ORDER / ask_frontier(),
+                                    so ordinary fast/bulk-tier calls never touch it.
+                                    A single key, not a rotated pair — a second key
+                                    (XAI_API_KEY_2) was tried briefly but its xAI
+                                    team had no credits/license, so it's not worth
+                                    the added complexity of a two-key fallthrough
+                                    for a key that can't serve real traffic anyway;
+                                    revisit if a genuinely funded second key is ever
+                                    needed. OpenAI-compatible endpoint (api.x.ai/v1),
+                                    same _call() as everything else.
 
 VAPE's own fine-tuned candidate (see training/train_lora.py +
 .github/workflows/train-vape-model.yml) is deliberately NOT in the PROVIDERS
@@ -140,7 +143,15 @@ PROVIDERS = [
     }),
     ("cerebras", "CEREBRAS_API_KEY", "https://api.cerebras.ai/v1/chat/completions", {
         "fast": "llama3.1-8b",
-        "deep": "llama-3.3-70b",
+        # llama-3.3-70b (this entry's value until 2026-07) was deprecated/
+        # removed by Cerebras 2026-02-16 — confirmed real HTTP 404
+        # model_not_found in production. gpt-oss-120b is Cerebras' own
+        # documented migration target for that exact deprecation (per
+        # inference-docs.cerebras.ai/support/deprecation, re-verified via
+        # web search 2026-07 since the doc page itself 403s to automated
+        # fetches) — re-verify against Cerebras' real /models endpoint if
+        # this ever 404s again rather than re-guessing.
+        "deep": "gpt-oss-120b",
         "bulk": "llama3.1-8b",
     }),
     ("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1/chat/completions", {
@@ -183,13 +194,23 @@ PROVIDERS = [
     }),
 ]
 
-# Frontier-tier provider order — VAPE's "smart LLM" chain for the highest-stakes
-# work: Grok 4.1 Fast -> Groq -> Gemini -> the rest of the free chain
-# (Cerebras/OpenRouter/GitHub Models/Together — VAPE's own "local/custom" free
-# fallback tier; there's no separate self-hosted model wired in yet, so this
-# honestly IS that tier today). Providers without a distinct "frontier" model
-# reuse their "deep" model (see ask()'s model-resolution fallback).
-_FRONTIER_NAMES = ("xai_1", "groq", "gemini")
+# Frontier-tier provider order — the FALLBACK chain used only once BOTH of
+# VAPE's real primary reasoning routes (OCI-hosted Grok 4.3 and the Vertex-
+# tuned candidate — see ask_oci_grok()'s own docstring) have already failed
+# or aren't configured for this call. By explicit direction (2026-07-25):
+# Groq -> Gemini -> Grok 4.1 Fast (direct xAI) -> the rest of the free chain
+# (Cerebras/OpenRouter/GitHub Models/Together). Direct xAI is deliberately
+# LAST here now, for two independent reasons: (1) it's the only paid entry
+# in this whole chain (see PROVIDER_PRICING_USD_PER_M_TOKENS) — free-tier
+# Groq/Gemini should be exhausted first; (2) its Live Search feature
+# (search=True's whole reason to reach it specifically) was deprecated by
+# xAI in favor of a new "Agent Tools API" this repo hasn't migrated to yet
+# (confirmed real HTTP 410 in production, 2026-07) — until that migration
+# happens, reaching xai_1 buys nothing search-wise, so there's no reason to
+# rank it above the free tiers anymore. Providers without a distinct
+# "frontier" model reuse their "deep" model (see ask()'s model-resolution
+# fallback).
+_FRONTIER_NAMES = ("groq", "gemini", "xai_1")
 FRONTIER_ORDER = (
     [p for name in _FRONTIER_NAMES for p in PROVIDERS if p[0] == name]
     + [p for p in PROVIDERS if p[0] not in _FRONTIER_NAMES]
@@ -484,8 +505,13 @@ def describe_unavailable(exc):
 
 
 def ask_frontier(system, user, **kw):
-    """ask() pinned to the frontier tier + FRONTIER_ORDER: Grok 4.1 Fast
-    first (key 1, then key 2), Groq/Gemini/the rest of the chain as fallback."""
+    """ask() pinned to the frontier tier + FRONTIER_ORDER: free-tier Groq
+    first, then Gemini, then direct paid xAI Grok 4.1 Fast as the last
+    resort, then the rest of the chain — see FRONTIER_ORDER's own comment
+    for why xAI moved to last. Most production report/investigation call
+    sites should prefer ask_oci_grok_frontier() instead, which tries OCI's
+    hosted Grok 4.3 (VAPE's real primary reasoning route) before ever
+    reaching this fallback chain at all."""
     kw.setdefault("tier", "frontier")
     kw.setdefault("provider_order", FRONTIER_ORDER)
     return ask(system, user, **kw)

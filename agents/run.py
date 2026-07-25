@@ -762,12 +762,18 @@ def main(review_repo=False):
         # intel and calls out what CHANGED instead of repeating boilerplate.
         memory_priming, investigation_digests = _build_grounding()
 
+        # search left at its default (False) deliberately — see
+        # agents/intel_common.py::grok_analysis()'s docstring: search=True
+        # skips ask_llm()'s real primary route (OCI Grok/Vertex) entirely
+        # and lands on a free FRONTIER_ORDER chain whose own xAI Live
+        # Search is itself deprecated/HTTP 410 as of 2026-07 — confirmed
+        # real contributor to this report's own "did not start with the
+        # required SIGNAL: marker" fallback firing on every recent cycle.
         report = _ask_with_signal_retry(
             VAPE_REPORT_SYSTEM,
             _build_report_prompt(market_json, slither_result, memory_priming),
             tier="frontier",
             temperature=0.4,
-            search=True,
         )
         report_path = f"reports/bounty_report_{timestamp}.md"
         # Deterministic backstop — never trust the model's own SIGNAL/narrative

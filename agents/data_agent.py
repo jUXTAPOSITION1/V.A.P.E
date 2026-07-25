@@ -25,23 +25,34 @@ gated, deterministic agents. Each instance has its OWN quota/ledger state
 (see _State below) so neither's 30-minute gate or daily cap blocks the
 other — both can genuinely hire in the same investigation cycle.
 
-Rate limits (hard caps enforced HERE, not the worker's job), per instance:
+Rate limits, VAPOR-pinned instance (agents/data_agent_vapor.py) — UNCHANGED,
+fixed caps, per the module's original design:
   - Exactly 1 offering hired per invocation of run_for_investigation()/
-    run_standalone() — this agent runs on a fixed 2x/hour cadence (see
-    MIN_INTERVAL_SECONDS), so "1 per run" is what maps that cadence onto
-    "$0.01 per run" cleanly.
-  - 60 hires/day across every investigation (buffer above the 2/hour x 24h =
-    48 theoretical ceiling — real consequence of run_standalone() below no
-    longer needing a successful auto-investigation to fire, more cycles now
-    actually reach this gate than before), tracked in a per-instance quota
-    file (same durable-counter shape as skillforge/research.py's
-    MONTHLY_QUOTA pattern, just per-day). Once hit, this becomes a
-    documented no-op for the rest of the day rather than erroring the
-    investigation that recruited it.
-  - A 30-minute minimum interval between hire attempts, independent of the
-    daily cap above — lets agents/investigate.py run on a much tighter
-    cadence (the site's Featured Investigation spotlight) without either
-    instance firing any more often than 2x/hour.
+    run_standalone(), no more than once every 30 minutes, capped at
+    DAILY_CAP (60) hires/day. See _run() below.
+
+Rate limits, CDP-pinned instance (this file's own run_for_investigation()/
+run_standalone()/run_catalog_sweep()) — a GROWING MINIMUM instead of a fixed
+cap, deliberately: VAPE wants real, ever-increasing x402 settlement volume
+through its own worker, not a plateau. GROWTH_BASE_DAILY (100) combined
+transactions on day one, compounding GROWTH_RATE_PER_DAY (1%) higher every
+day after — unbounded, forever (see _daily_target_combined()). That combined
+target is split across this file's two independent CDP streams (the main
+investigation/standalone stream and the catalog-sweep stream), each pacing
+itself with a deadline-driven "how much is still owed today, how much of the
+day is left" calculation (_due_now()) rather than a fixed interval — a
+missed or delayed poll doesn't lose its slot, the next call just finds a
+shorter required wait and catches up. This is a REAL, IMPORTANT limiting
+factor to keep in mind long-term: however often
+.github/workflows/featured-investigation.yml's cron actually polls this
+module sets a hard ceiling on throughput (at most one real hire per poll)
+regardless of how large the growing target gets — once the target's implied
+pace exceeds that poll cadence, actual daily volume flattens at
+(polls/day) x (number of CDP streams) until the workflow's own cron is
+tightened, since no in-process rate limiter can invent extra polls that
+never fired. This is by design, not silently masked: the growing target
+always represents the honest daily MINIMUM being aimed for, and this module
+never claims to have hit it if the polls simply weren't frequent enough.
 
 Restricted to offerings that only need a token address, a chain slug, or no
 input at all. Also restricted to Base (chain 8453) for run_for_investigation()/
@@ -64,6 +75,7 @@ missing key must never sink the underlying investigation it was recruited
 into.
 """
 import json
+import math
 import os
 import random
 import urllib.parse
@@ -74,10 +86,88 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 NETWORK = "eip155:8453"  # Base mainnet — same network the worker's PAY_TO_ADDRESS settles on
 
-DAILY_CAP = 60  # buffer above the 2/hour x 24h = 48 theoretical ceiling, see module docstring
+DAILY_CAP = 60  # VAPOR-pinned instance only now (agents/data_agent_vapor.py) — see module docstring
 HIRES_PER_RUN = 1
-MIN_INTERVAL_SECONDS = 30 * 60  # 30m floor between hire attempts, see module docstring
-CATALOG_DAILY_CAP = 48  # same 2/hour x 24h ceiling, own independent gate — see run_catalog_sweep()
+MIN_INTERVAL_SECONDS = 30 * 60  # VAPOR-pinned instance only now — see module docstring
+CATALOG_DAILY_CAP = 48  # no longer enforced by run_catalog_sweep() itself (growth-paced instead,
+                        # see _daily_targets()) — kept only as a historical reference value
+
+# ── CDP-pinned growing-minimum target (see module docstring) ────────────────
+GROWTH_BASE_DAILY = 100       # combined target across both CDP streams, day one
+GROWTH_RATE_PER_DAY = 0.01    # +1% more, compounding, every day after — unbounded
+GROWTH_EPOCH_PATH = os.path.join(ROOT, "skillforge", "memory", "data_agent_growth.json")
+# Sanity floor only — never fire more than once/minute regardless of what the
+# pacing math computes (e.g. a corrupted/missing epoch file), independent of
+# how large the growing target ever gets.
+ABSOLUTE_MIN_INTERVAL_SECONDS = 60
+
+
+def _growth_epoch():
+    """The date the CDP growing-minimum mechanism first activated —
+    persisted once, read forever after (today == epoch means day one,
+    GROWTH_BASE_DAILY transactions; every day after compounds
+    GROWTH_RATE_PER_DAY higher). Never raises: any read/write failure just
+    restarts the curve at "today" rather than blocking the agent."""
+    try:
+        with open(GROWTH_EPOCH_PATH) as f:
+            epoch = json.load(f).get("epoch")
+        if epoch:
+            return epoch
+    except Exception:
+        pass
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        os.makedirs(os.path.dirname(GROWTH_EPOCH_PATH), exist_ok=True)
+        with open(GROWTH_EPOCH_PATH, "w") as f:
+            json.dump({"epoch": today}, f)
+    except Exception:
+        pass
+    return today
+
+
+def _daily_target_combined():
+    """Today's combined minimum x402-transaction count across BOTH CDP
+    streams (main + catalog) — GROWTH_BASE_DAILY on day one, compounding
+    GROWTH_RATE_PER_DAY higher every day after, forever. VAPOR
+    (agents/data_agent_vapor.py) is deliberately not part of this."""
+    try:
+        epoch = datetime.strptime(_growth_epoch(), "%Y-%m-%d").date()
+        day_index = max(0, (datetime.now(timezone.utc).date() - epoch).days)
+    except Exception:
+        day_index = 0
+    return GROWTH_BASE_DAILY * ((1 + GROWTH_RATE_PER_DAY) ** day_index)
+
+
+def _daily_targets():
+    """(main_target, catalog_target) whole-number split of today's combined
+    growing target — ceil on the whole and on the main half so the two
+    always sum to at least the true (fractional) combined target, never
+    less, after independent rounding."""
+    combined = math.ceil(_daily_target_combined())
+    main = math.ceil(combined / 2)
+    return main, combined - main
+
+
+def _due_now(state, target_today):
+    """Deadline-driven pacing toward a growing MINIMUM, recomputed fresh on
+    every call from how much of today's target is still outstanding and how
+    much of the day is left — not a fixed cadence. A missed or delayed poll
+    doesn't lose that slot forever: the next call simply finds a shorter
+    required wait and catches up, the same principle as a leaky-bucket
+    limiter aimed at a floor instead of a ceiling. Once today's target is
+    already met, this stays not-due for the rest of the day (a real
+    overshoot from another stream firing independently is fine and expected
+    — never corrected downward). Returns (due: bool, remaining_target: int)."""
+    remaining = target_today - state.count_today()
+    if remaining <= 0:
+        return False, 0
+    now = datetime.now(timezone.utc)
+    seconds_left_today = 86400 - (now.hour * 3600 + now.minute * 60 + now.second)
+    needed_interval = max(ABSOLUTE_MIN_INTERVAL_SECONDS, seconds_left_today / remaining)
+    since_last = state.seconds_since_last_attempt()
+    if since_last is not None and since_last < needed_interval:
+        return False, remaining
+    return True, remaining
 
 # Mirrors agents/investigate.py::EVM_CHAINS' name/gecko/dex fields exactly —
 # duplicated here rather than imported to keep this module's only real
@@ -328,6 +418,16 @@ class _State:
             return DAILY_CAP
         return max(0, DAILY_CAP - q.get("count", 0))
 
+    def count_today(self):
+        """Raw hires-so-far-today count, with no fixed-cap assumption baked
+        in (unlike remaining_today(), which is DAILY_CAP-relative and only
+        meaningful for the VAPOR-pinned instance now) — what the CDP
+        growth-paced gate (_due_now()) actually needs."""
+        q = self._load_quota()
+        if q.get("date") != self._today():
+            return 0
+        return q.get("count", 0)
+
     def seconds_since_last_attempt(self):
         """None if there's no record yet (never gates a fresh install)."""
         last_ts = self._load_quota().get("last_ts")
@@ -429,12 +529,17 @@ def hire(session, offering, params, prefix="data"):
 
 
 def _run(address, chain, *, client_tag, state, log_prefix):
-    """Shared core for both facilitator-pinned instances — see module
-    docstring. Hires 1 random $0.01 x402 offering against `address` (capped
-    at DAILY_CAP total paid hires/day, and no more often than once every 30m
-    regardless of how often this is called) and returns what it bought so a
-    caller (agents/investigate.py's report, or run_standalone() below) can
-    fold it in.
+    """Original fixed-cap/fixed-interval core — now used ONLY by the
+    VAPOR-pinned instance (agents/data_agent_vapor.py), left completely
+    unchanged on purpose (see module docstring: the CDP-pinned instance's
+    own run_for_investigation()/run_standalone() below call _run_growth()
+    instead, a separate function rather than a new parameter here, so
+    VAPOR's behavior can never be accidentally altered by a change aimed at
+    CDP's growth pacing). Hires 1 random $0.01 x402 offering against
+    `address` (capped at DAILY_CAP total paid hires/day, and no more often
+    than once every 30m regardless of how often this is called) and returns
+    what it bought so a caller (agents/investigate.py's report, or
+    run_standalone() below) can fold it in.
 
     address=None means "pick your own fresh Base candidate" — this is what
     decouples the cadence from needing a successful auto-investigation to
@@ -489,22 +594,79 @@ def _run(address, chain, *, client_tag, state, log_prefix):
     return {"hired": hired, "cost_usd": cost_usd}
 
 
-def _run_catalog(*, client_tag, state, log_prefix):
-    """The catalog-sweep stream — see module docstring. Own 30m/
-    CATALOG_DAILY_CAP gate, independent of _run()'s. Picks 1 random offering
-    from CATALOG_OFFERINGS, resolves a real input for it (a fresh token
-    address, a real DefiLlama protocol slug, a chain name, or none), hires
-    it, and — for address-based offerings — records the observation into
-    data/token_database.jsonl. Never raises.
-    """
-    since_last = state.seconds_since_last_attempt()
-    if since_last is not None and since_last < MIN_INTERVAL_SECONDS:
-        wait_min = round((MIN_INTERVAL_SECONDS - since_last) / 60)
-        return {"hired": [], "note": f"30m interval not yet up ({wait_min}m remaining) — skipped this cycle"}
+def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
+    """CDP-only growth-paced sibling of _run() — see module docstring's
+    "Rate limits, CDP-pinned instance" section. Deliberately a separate
+    function rather than a parameter on _run() itself: agents/
+    data_agent_vapor.py calls _run() directly and must keep its own original
+    fixed 30-min/DAILY_CAP behavior completely unchanged, so _run()'s gating
+    logic is left untouched here — this duplicates its hire-and-log body
+    with _due_now()'s adaptive gate in place of the fixed interval+cap pair.
 
-    remaining = state.remaining_today()
-    if remaining < HIRES_PER_RUN:
-        return {"hired": [], "note": f"daily cap reached ({CATALOG_DAILY_CAP}/day) — skipped this cycle"}
+    address=None means "pick your own fresh Base candidate" (see _run()'s
+    own docstring for why) — chain is always "8453" in that case.
+    """
+    if str(chain) != "8453":
+        return {"hired": [], "note": "data agent only wired for Base (8453) investigations"}
+
+    due, remaining = _due_now(state, target_today)
+    if not due:
+        return {"hired": [], "note": f"not due yet ({remaining}/{target_today} still owed today "
+                                      "— pacing to the growing minimum, not a fixed cadence)"}
+
+    if address is None:
+        found = _fresh_candidate(only_base=True)
+        if not found:
+            return {"hired": [], "note": "no fresh Base candidate found this cycle — skipped"}
+        address = found[0]
+
+    session = _build_session(client_tag)
+    if session is None:
+        return {"hired": [], "note": "DATA_AGENT_PRIVATE_KEY not configured or invalid — skipped"}
+
+    state.mark_attempt()
+
+    picks = random.sample(list(OFFERING_PARAMS.keys()), HIRES_PER_RUN)
+
+    hired = []
+    paid_count = 0
+    for name in picks:
+        params = OFFERING_PARAMS[name](address)
+        deliverable, paid = hire(session, name, params)
+        hired.append({"offering": name, "params": params, "deliverable": deliverable, "paid": paid})
+        if paid:
+            paid_count += 1
+
+    state.record_hires(paid_count)
+    cost_usd = round(paid_count * 0.01, 2)
+    state.log_ledger({
+        "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "target": address,
+        "hired": [h["offering"] for h in hired],
+        "paid": paid_count,
+        "cost_usd": cost_usd,
+        "daily_target": target_today,
+    })
+    print(f"[{log_prefix}] {address}: hired {[h['offering'] for h in hired]}, "
+          f"paid {paid_count}, ${cost_usd:.2f} (day target {target_today}, "
+          f"{remaining - paid_count} still owed today)")
+    return {"hired": hired, "cost_usd": cost_usd}
+
+
+def _run_catalog(*, client_tag, state, log_prefix):
+    """The catalog-sweep stream — see module docstring. Own growth-paced
+    gate (_due_now(), against this stream's own half-share of the growing
+    combined target — see _daily_targets()), independent of _run_growth()'s.
+    Picks 1 random offering from CATALOG_OFFERINGS, resolves a real input
+    for it (a fresh token address, a real DefiLlama protocol slug, a chain
+    name, or none), hires it, and — for address-based offerings — records
+    the observation into data/token_database.jsonl. Never raises.
+    """
+    _, catalog_target = _daily_targets()
+    due, remaining = _due_now(state, catalog_target)
+    if not due:
+        return {"hired": [], "note": f"not due yet ({remaining}/{catalog_target} still owed today "
+                                      "— pacing to the growing minimum, not a fixed cadence)"}
 
     name, prefix, kind = random.choice(CATALOG_OFFERINGS)
     params = {}
@@ -565,8 +727,10 @@ def _run_catalog(*, client_tag, state, log_prefix):
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": params.get("address") or params.get("slug") or params.get("chain") or "none",
         "hired": [name], "paid": 1 if paid else 0, "cost_usd": cost_usd,
+        "daily_target": catalog_target,
     })
-    print(f"[{log_prefix}] catalog sweep: hired {name} ({params}), paid={paid}, ${cost_usd:.2f}")
+    print(f"[{log_prefix}] catalog sweep: hired {name} ({params}), paid={paid}, ${cost_usd:.2f} "
+          f"(day target {catalog_target}, {remaining - (1 if paid else 0)} still owed today)")
     return {"hired": [{"offering": name, "params": params, "deliverable": deliverable, "paid": paid}],
             "cost_usd": cost_usd}
 
@@ -577,21 +741,27 @@ _CDP_CATALOG_STATE = _State("data_agent_catalog")
 
 def run_for_investigation(address, chain="8453"):
     """Recruited by agents/investigate.py::investigate() for every real
-    report — CDP-pinned instance (X-VAPE-Client: data-agent)."""
-    return _run(address, chain, client_tag="data-agent", state=_CDP_STATE, log_prefix="data_agent")
+    report — CDP-pinned instance (X-VAPE-Client: data-agent). Paced toward
+    the growing daily minimum (see module docstring), not a fixed cap."""
+    main_target, _ = _daily_targets()
+    return _run_growth(address, chain, client_tag="data-agent", state=_CDP_STATE,
+                       log_prefix="data_agent", target_today=main_target)
 
 
 def run_standalone():
     """CDP-pinned instance, decoupled from investigate.py entirely — self-
     sources a fresh Base candidate every call. Called on a fixed schedule
     (see .github/workflows/featured-investigation.yml) regardless of whether
-    that cycle's auto-investigation found anything, per the module docstring."""
-    return _run(None, "8453", client_tag="data-agent", state=_CDP_STATE, log_prefix="data_agent")
+    that cycle's auto-investigation found anything, per the module docstring.
+    Paced toward the growing daily minimum, not a fixed cap."""
+    main_target, _ = _daily_targets()
+    return _run_growth(None, "8453", client_tag="data-agent", state=_CDP_STATE,
+                       log_prefix="data_agent", target_today=main_target)
 
 
 def run_catalog_sweep():
     """CDP-pinned instance only (see module docstring for why this stream
-    isn't doubled across both facilitator instances) — the "2 extra
-    transactions per hour" sweep through every x402 offering priced $0.02
-    or less."""
+    isn't doubled across both facilitator instances) — sweeps through every
+    x402 offering priced $0.02 or less, paced toward its own half-share of
+    the growing daily minimum."""
     return _run_catalog(client_tag="data-agent", state=_CDP_CATALOG_STATE, log_prefix="data_agent")

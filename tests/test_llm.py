@@ -56,10 +56,26 @@ def test_default_providers_order_unchanged_xai_appended_last():
     assert names[6:] == ["xai_1"]
 
 
-def test_frontier_order_is_grok_then_groq_then_gemini_then_rest():
+def test_frontier_order_is_groq_then_gemini_then_grok_then_rest():
+    """By explicit direction (2026-07-25): xai_1 (direct paid xAI) is the
+    fallback BELOW free-tier groq/gemini, not the primary pick — OCI Grok
+    4.3/Vertex (agents/llm.py::ask_oci_grok()) remain the real primary route
+    ahead of this whole chain; FRONTIER_ORDER is only reached once both of
+    those have failed or aren't configured."""
     names = [p[0] for p in llm.FRONTIER_ORDER]
-    assert names[:3] == ["xai_1", "groq", "gemini"]
+    assert names[:3] == ["groq", "gemini", "xai_1"]
     assert set(names) == set(p[0] for p in llm.PROVIDERS)  # nothing dropped
+
+
+def _xai_then_groq_order():
+    """An explicit [xai_1, groq] provider_order for tests of the generic
+    retry-then-fallthrough mechanics, independent of FRONTIER_ORDER's real
+    ordering (which, by explicit direction 2026-07-25, now tries groq/gemini
+    BEFORE xai_1 — see test_frontier_order_is_groq_then_gemini_then_grok_
+    then_rest). These tests care about the fallthrough behavior itself, not
+    which provider happens to be first in the real chain."""
+    by_name = {p[0]: p for p in llm.PROVIDERS}
+    return [by_name["xai_1"], by_name["groq"]]
 
 
 def test_xai_429_falls_through_to_next_provider(monkeypatch):
@@ -78,7 +94,7 @@ def test_xai_429_falls_through_to_next_provider(monkeypatch):
 
     with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
         text, provider = llm.ask("sys", "usr", tier="frontier",
-                                 provider_order=llm.FRONTIER_ORDER,
+                                 provider_order=_xai_then_groq_order(),
                                  retries_per_provider=2)
     assert provider == "groq" and text == "via groq"
     assert xai_attempts["n"] == 1  # one try, immediate fallthrough — not hammered
@@ -100,7 +116,7 @@ def test_xai_non_429_error_retries_same_key_before_falling_through(monkeypatch):
     with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen), \
          mock.patch("time.sleep"):  # skip the real backoff delay in tests
         text, provider = llm.ask("sys", "usr", tier="frontier",
-                                 provider_order=llm.FRONTIER_ORDER,
+                                 provider_order=_xai_then_groq_order(),
                                  retries_per_provider=2)
     assert provider == "groq" and text == "via groq"
     assert xai_attempts["n"] == 2  # fully exhausted its retry budget
@@ -361,7 +377,7 @@ class TestDailySpendCap:
             return _fake_response("via groq")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            text, provider = llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+            text, provider = llm.ask("sys", "usr", tier="frontier", provider_order=_xai_then_groq_order())
 
         assert provider == "groq" and text == "via groq"
         assert xai_attempts["n"] == 0  # never even attempted, no wasted retry/backoff
@@ -388,8 +404,8 @@ class TestDailySpendCap:
             return _fake_response("via groq")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
-            llm.ask("sys", "usr", tier="frontier", provider_order=llm.FRONTIER_ORDER)
+            llm.ask("sys", "usr", tier="frontier", provider_order=_xai_then_groq_order())
+            llm.ask("sys", "usr", tier="frontier", provider_order=_xai_then_groq_order())
 
         assert len(findings_log.read_text().strip().splitlines()) == 1
 

@@ -56,8 +56,13 @@ jobs:
       # DATA AGENT's own funded wallet, shared by both facilitator-pinned
       # instances (agents/data_agent.py -> CDP, agents/data_agent_vapor.py ->
       # VAPOR) — recruited mid-investigation to each independently hire 1 of
-      # VAPE's own $0.01 x402 data offerings; each instance's own 30m-interval
-      # gate + 48/day cap apply regardless of how often this workflow fires.
+      # VAPE's own $0.01 x402 data offerings. VAPOR still enforces its own
+      # fixed 30m-interval/48-per-day cap regardless of how often this
+      # workflow fires; the CDP-pinned instance instead paces itself toward
+      # a growing daily MINIMUM that compounds 1% higher every day, forever
+      # (agents/data_agent.py's module docstring) — how often THIS workflow's
+      # own cron actually fires is the real ceiling on how fast that growth
+      # can be delivered, since no in-process limiter can invent extra runs.
       DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v7
@@ -98,10 +103,12 @@ jobs:
       # up empty meant hours with zero real x402 transactions — confirmed
       # directly against live GitHub Actions logs. run_standalone() sources
       # its own fresh Base candidate instead of needing one handed to it, so
-      # this stream fires on its own fixed cadence either way. Each
-      # instance/stream still enforces its own independent 30m/daily-cap
-      # gate (agents/data_agent.py) — this step can run every cycle with no
-      # risk of over-hiring past those caps.
+      # this stream fires on its own fixed cadence either way. VAPOR still
+      # gates itself against a fixed 30m-interval/daily-cap; the CDP-pinned
+      # main + catalog streams instead self-pace toward their own growing
+      # daily minimum (agents/data_agent.py) — this step can run every cycle
+      # with no risk of over-hiring, since each stream's own gate decides
+      # whether it's actually due.
       - name: DATA AGENT standalone cycle + catalog sweep (unconditional cadence)
         run: |
           python -c "
@@ -115,7 +122,8 @@ jobs:
       # known Base address, bypassing investigate.py's auto-target selection
       # (which may land on a non-Base target, or none at all, this cycle) —
       # useful for spot-checking the CDP/VAPOR split without waiting on
-      # chance. Each instance still enforces its own 30m-interval gate.
+      # chance. VAPOR still enforces a fixed 30m-interval gate; CDP's own
+      # gate is now the adaptive, growth-target one described above.
       - name: Force both DATA AGENT instances (manual trigger only)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |

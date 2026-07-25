@@ -88,13 +88,23 @@ const Hire = {
     _renderAddressRepoFields(fieldsEl, mode, hints) {
         const h = hints || {};
         fieldsEl.innerHTML = mode === 'repo' ? `
-            <label class="text-xs text-zinc-500 block mb-1">GitHub owner/repo${h.repo ? ` — ${h.repo}` : ' to audit'}</label>
-            <input id="hire-owner" type="text" placeholder="owner" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-2">
-            <input id="hire-repo" type="text" placeholder="repo" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
+            <label class="text-xs text-zinc-500 block mb-1">GitHub repo${h.repo ? ` — ${h.repo}` : ' to audit'}</label>
+            <input id="hire-repo" type="text" placeholder="owner/repo" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
         ` : `
             <label class="text-xs text-zinc-500 block mb-1">Target contract address${h.address ? ` ${h.address}` : ' to investigate'}</label>
             <input id="hire-address" type="text" placeholder="0x… token/contract" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
         `;
+    },
+
+    // Single "owner/repo" field (not separate owner + repo inputs) — parsed
+    // here right before submission. Returns {owner, repo} or null on anything
+    // that doesn't look like a real GitHub slug pair.
+    _parseOwnerRepo(value) {
+        const parts = (value || '').trim().split('/');
+        if (parts.length !== 2) return null;
+        const [owner, repo] = parts.map(p => p.trim());
+        if (!owner || !repo || !GH_SLUG_RE.test(owner) || !GH_SLUG_RE.test(repo)) return null;
+        return { owner, repo };
     },
 
     _wireAddressRepoToggle(modal, fieldsEl, initialMode, hints) {
@@ -187,10 +197,9 @@ const Hire = {
                     if (!ADDRESS_RE.test(address)) return fail('Enter a valid 0x… contract address.');
                     this._runX402(offeringName, priceUsd, { address }, address);
                 } else {
-                    const owner = (document.getElementById('hire-owner').value || '').trim();
-                    const repo = (document.getElementById('hire-repo').value || '').trim();
-                    if (!owner || !repo || !GH_SLUG_RE.test(owner) || !GH_SLUG_RE.test(repo)) return fail('Enter a valid GitHub owner and repo.');
-                    this._runX402(offeringName, priceUsd, { owner, repo }, `${owner}/${repo}`);
+                    const parsed = this._parseOwnerRepo(document.getElementById('hire-repo').value);
+                    if (!parsed) return fail('Enter a valid GitHub repo as owner/repo.');
+                    this._runX402(offeringName, priceUsd, parsed, `${parsed.owner}/${parsed.repo}`);
                 }
                 return;
             }
@@ -296,10 +305,9 @@ const Hire = {
                 if (!ADDRESS_RE.test(address)) return fail('Enter a valid 0x… contract address.');
                 this._runX402('bounty_deep_dive', 1, { address }, address);
             } else {
-                const owner = (document.getElementById('hire-owner').value || '').trim();
-                const repo = (document.getElementById('hire-repo').value || '').trim();
-                if (!owner || !repo || !GH_SLUG_RE.test(owner) || !GH_SLUG_RE.test(repo)) return fail('Enter a valid GitHub owner and repo.');
-                this._runX402('bounty_deep_dive', 1, { owner, repo, program_name: record.name }, `${owner}/${repo}`);
+                const parsed = this._parseOwnerRepo(document.getElementById('hire-repo').value);
+                if (!parsed) return fail('Enter a valid GitHub repo as owner/repo.');
+                this._runX402('bounty_deep_dive', 1, { ...parsed, program_name: record.name }, `${parsed.owner}/${parsed.repo}`);
             }
         };
     },

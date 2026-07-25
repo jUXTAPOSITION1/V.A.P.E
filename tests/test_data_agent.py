@@ -11,9 +11,21 @@ so tests never interfere with each other or with real automated runs.
 """
 import json
 
+import pytest
 from eth_account import Account
 
 from agents import data_agent
+
+
+@pytest.fixture(autouse=True)
+def _isolated_growth_epoch(tmp_path, monkeypatch):
+    """run_for_investigation()/run_standalone() now compute a growing daily
+    target on every call (see data_agent.py's module docstring), which reads/
+    writes a real, shared epoch file on first use — never let a test touch
+    that real repo file. Every test in this module gets its own fresh epoch
+    (day_index always 0, i.e. today == epoch) unless it explicitly backdates
+    the epoch itself."""
+    monkeypatch.setattr(data_agent, "GROWTH_EPOCH_PATH", str(tmp_path / "growth_epoch.json"))
 
 
 class _FakeResponse:
@@ -83,9 +95,10 @@ def test_quota_tracking_persists_and_resets_daily(tmp_path):
     assert state.remaining_today() == data_agent.DAILY_CAP
 
 
-def test_daily_cap_reached_skips_without_touching_session(monkeypatch, tmp_path):
+def test_growth_target_already_met_today_skips_without_touching_session(monkeypatch, tmp_path):
     state = _fresh_state(tmp_path)
-    state.record_hires(data_agent.DAILY_CAP)  # no slots left
+    main_target, _ = data_agent._daily_targets()
+    state.record_hires(main_target)  # today's growing minimum already hit
     monkeypatch.setattr(data_agent, "_CDP_STATE", state)
 
     monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", "0x" + "11" * 32)
@@ -93,8 +106,8 @@ def test_daily_cap_reached_skips_without_touching_session(monkeypatch, tmp_path)
     monkeypatch.setattr(data_agent, "_build_session", lambda tag: called.update(n=called["n"] + 1))
     result = data_agent.run_for_investigation("0x" + "aa" * 20, chain="8453")
     assert result["hired"] == []
-    assert "cap reached" in result["note"]
-    assert called["n"] == 0  # never even tried to build a session once capped
+    assert "not due yet" in result["note"]
+    assert called["n"] == 0  # never even tried to build a session once today's target is met
 
 
 def test_run_for_investigation_hires_exactly_one(monkeypatch, tmp_path):
@@ -111,7 +124,7 @@ def test_run_for_investigation_hires_exactly_one(monkeypatch, tmp_path):
     assert n == data_agent.HIRES_PER_RUN == 1
     assert all(h["paid"] for h in result["hired"])
     assert result["cost_usd"] == round(n * 0.01, 2)
-    assert data_agent._CDP_STATE.remaining_today() == data_agent.DAILY_CAP - n
+    assert data_agent._CDP_STATE.count_today() == n
     ledger_path = data_agent._CDP_STATE.ledger_path
     assert __import__("os").path.exists(ledger_path)
     logged = json.loads(open(ledger_path).read().strip().splitlines()[-1])
@@ -125,7 +138,7 @@ def test_hire_reports_unpaid_on_non_200():
     assert "error" in deliverable
 
 
-def test_second_call_within_30m_is_skipped_without_touching_session(monkeypatch, tmp_path):
+def test_immediate_second_call_is_not_yet_due_without_touching_session(monkeypatch, tmp_path):
     monkeypatch.setattr(data_agent, "_CDP_STATE", _fresh_state(tmp_path))
 
     def responder(url, params):
@@ -141,11 +154,11 @@ def test_second_call_within_30m_is_skipped_without_touching_session(monkeypatch,
     monkeypatch.setattr(data_agent, "_build_session", lambda tag: called.update(n=called["n"] + 1))
     second = data_agent.run_for_investigation("0x" + "dd" * 20, chain="8453")
     assert second["hired"] == []
-    assert "30m interval" in second["note"]
+    assert "not due yet" in second["note"]
     assert called["n"] == 0  # gated before ever building a session
 
 
-def test_call_after_30m_elapsed_is_allowed(monkeypatch, tmp_path):
+def test_call_after_1hr_elapsed_is_allowed(monkeypatch, tmp_path):
     state = _fresh_state(tmp_path)
     from datetime import datetime, timedelta, timezone
     stale_ts = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat().replace("+00:00", "Z")
