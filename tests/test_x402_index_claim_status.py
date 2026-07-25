@@ -28,6 +28,10 @@ class _FakeResponse:
     def read(self):
         return self._body.encode()
 
+    @property
+    def headers(self):
+        return {"Content-Type": "text/html"}
+
 
 def test_status_prints_body_on_200(capsys):
     with mock.patch.object(claim.urllib.request, "urlopen",
