@@ -497,3 +497,5 @@
 | 2026-07-25 | auto | 0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a (CTM) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0x6f09344D2a9a7AB1470a19cb014423334F3C57E4 (AUGU) | deep_investigation | REJECT (20/100) | Top 10 non-LP/burn holders control 94% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-25 | auto | 0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684 (ANT) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 81% of supply — concentrated, easily manipula | +7d |

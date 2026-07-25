@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T21:15:40Z",
+  "generated": "2026-07-25T21:31:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 415,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 333,
+    "investigations": 334,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-211533-0x6f09344D.md",
-      "title": "Investigation \u2014 AUGU",
-      "symbol": "AUGU",
-      "name": "Augustus",
-      "date": "2026-07-25T21:15:33Z",
-      "target": "0x6f09344D2a9a7AB1470a19cb014423334F3C57E4",
+      "file": "investigation-20260725-213113-0xa78d8321.md",
+      "title": "Investigation \u2014 ANT",
+      "symbol": "ANT",
+      "name": "Autonomi",
+      "date": "2026-07-25T21:31:13Z",
+      "target": "0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684",
       "chain": "42161 (Arbitrum)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +3171% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-15] Contract so",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-211533-0x6f09344D.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 51805 holders \u2014 reasonably distributed; Trading 529+ days without a known incident in this scan; Custom verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-213113-0xa78d8321.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-213113-0xa78d8321.md",
+      "title": "Investigation \u2014 ANT",
+      "symbol": "ANT",
+      "name": "Autonomi",
+      "date": "2026-07-25T21:31:13Z",
+      "target": "0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 51805 holders \u2014 reasonably distributed; Trading 529+ days without a known incident in this scan; Custom verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-213113-0xa78d8321.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-211533-0x6f09344D.md",
@@ -593,20 +607,6 @@
       "score": "28",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x75F16b63e8f94F91dbc924845Aa42093396283e8) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-10] No known third-party audi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-233223-0xe7627861.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260723-223348-0x99E98026.md",
-      "title": "Investigation \u2014 ASSET",
-      "symbol": "ASSET",
-      "name": "REAL",
-      "date": "2026-07-23T22:33:48Z",
-      "target": "0x99E980265Bf36516C442be982df1772a6cCb3233",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 22423 holders \u2014 reasonably distributed; Deep liquidity ($1,789,344); Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260723-223348-0x99E98026.md"
     }
   ],
   "reports": [

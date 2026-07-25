@@ -1183,6 +1183,25 @@
     "symbol": "ARB",
     "times_investigated": 1
   },
+  "42161:0xa78d8321b20c4ef90ecd72f2588aa985a4bdb684": {
+    "address": "0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684",
+    "chain": "42161",
+    "creator_address": "0xf14176fe20d87fb763ef908c378b0fbf595c32a1",
+    "first_investigated": "2026-07-25T21:31:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260725-213113-0xa78d8321.md",
+        "score": 70,
+        "ts": "2026-07-25T21:31:13Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-25T21:31:13Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "ANT",
+    "times_investigated": 1
+  },
   "42161:0xb23bb8c2c6cb9169eeac8f2bd42fcf333a1a8c55": {
     "address": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
     "chain": "42161",
