@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-25T22:48:16Z",
+  "generated": "2026-07-25T23:03:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 338,
+    "investigations": 339,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260725-224809-0xf280B16E.md",
+      "file": "investigation-20260725-230314-0xAFF25650.md",
       "title": "Investigation \u2014 ASTEROID",
       "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-25T22:48:09Z",
-      "target": "0xf280B16EF293D8e534e370794ef26bF312694126",
+      "name": "Asteroid",
+      "date": "2026-07-25T23:03:14Z",
+      "target": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
       "chain": "1 (Ethereum)",
       "verdict": "PROCEED",
       "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 27376 holders \u2014 reasonably distributed; Top holders control only 16% of supply \u2014 broad distribution; 96% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($1,889,338); Trading 684+ days ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-224809-0xf280B16E.md"
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 3587 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 684+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-230314-0xAFF25650.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260725-230314-0xAFF25650.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid",
+      "date": "2026-07-25T23:03:14Z",
+      "target": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 3587 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 684+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-230314-0xAFF25650.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260725-224809-0xf280B16E.md",
@@ -593,20 +607,6 @@
       "score": "5",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $146 (rug/illiquid); [-10] Low liquid",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-115048-0x5b290eCd.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-095859-0xeB51D9A3.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-07-24T09:58:59Z",
-      "target": "0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "88",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [note] address has no contract code (EOA or not deployed). Positive evidence: 2463027 holders \u2014 reasonably distributed; Deep liquidity ($208,517,708); Trading 870+ days without a known incident in this scan; Custom verified source (not a mass-produced factory templat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-095859-0xeB51D9A3.md"
     }
   ],
   "reports": [

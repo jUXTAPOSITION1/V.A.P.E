@@ -507,3 +507,5 @@
 | 2026-07-25 | auto | 0x1F514A61bcde34F94Bc39731235690ab9da737F7 (TAROT) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0xf280B16EF293D8e534e370794ef26bF312694126 (ASTEROID) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-25 | auto | 0xAFF2565091E7207191dBe340B8528D02FA78d044 (ASTEROID) | deep_investigation | PROCEED (100/100) | clean | +7d |
