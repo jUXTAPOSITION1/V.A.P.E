@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-25T19:58:55Z",
+  "generated": "2026-07-25T20:13:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 413,
+    "reports": 414,
     "reports_by_type": {
+      "virtuals": 78,
       "security": 69,
       "macro": 21,
       "base": 76,
-      "virtuals": 77,
       "sentiment": 40,
       "bounty": 122,
       "skillforge": 4,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-25-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-25T19:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-25-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-25T20:00Z",
       "threat": null,
-      "summary": "The provided incident feed shows 9 events within the last 7 days and zero incidents exceeding $50M in the prior 14 days. The listed events span hot wallet compromises (Triple-A on Ethereum/Tron/Arbitrum and AFX Bridge on Arbitrum), bridge verification bypass (Verus-Ethereum Bridge), private key compromise (AFX Bridge), signature exploit (",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-25-19.md",
-      "bytes": 6481
+      "summary": "Date: 2026-07-25 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-20.md",
+      "bytes": 3276
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-25-20.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-25T20:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-25 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-20.md",
+      "bytes": 3276
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-22 16:15 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-22-16.md",
       "bytes": 3429
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-22-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-22T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (33, prior day 25) and global market cap 24h change (-0.61%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-22-15.md",
-      "bytes": 2584
     }
   ],
   "broadcasts": [
