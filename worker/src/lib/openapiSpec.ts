@@ -79,7 +79,7 @@ function parametersFor(route: PaidRoute): Record<string, unknown>[] {
  * info.x-guidance for user-friendly discovery. This document should explain to
  * an agent how to use your API at a high level."
  */
-function guidance(origin: string): string {
+export function guidance(origin: string): string {
   return [
     "VAPE is an autonomous on-chain security detective for Base (ERC-8004 identity #54988).",
     "Every endpoint below is a single x402-gated GET returning real data from live sources —",
@@ -142,6 +142,19 @@ export function buildOpenApiDocument(
         operationId: `vape_${route.name}`,
         summary: route.description,
         tags: route.tags,
+        // Required per-operation by the Agentcash Discovery v1 profile, which
+        // lists "an effective OpenAPI `security` declaration" alongside
+        // summary and responses. Payment is declared separately via
+        // x-payment-info: "Authentication MUST use OpenAPI `security`. Use
+        // `security: []` to explicitly declare that an operation has no API
+        // authentication requirement."
+        //
+        // Empty array is correct and load-bearing, not a placeholder: VAPE has
+        // no API keys or SIWX login: paying the 402 is the only gate. The
+        // spec's auth-hint table maps (security `[]` + x-payment-info present)
+        // to the `paid` hint, which is exactly how these routes should list.
+        // Omitting the field leaves that derivation undefined.
+        security: [],
         "x-payment-info": {
           price: { mode: "fixed", currency: "USD", amount: priceToDecimalUsd(route.price) },
           protocols: [{ x402: {} }],
@@ -171,6 +184,12 @@ export function buildOpenApiDocument(
       },
     },
     servers: [{ url: origin }],
+    // Canonical optional extension from the Agentcash Discovery v1 profile:
+    // "OpenAPI carries machine metadata. Freeform agent guidance is fetched
+    // separately, typically from llms.txt." info.x-guidance above stays as the
+    // short inline form the same spec recommends; this points at the full text
+    // for clients that fetch guidance on demand instead of inline.
+    "x-agentcash-guidance": { llmsTxtUrl: `${origin}/llms.txt` },
     tags: [
       { name: "security", description: "Contract, token, and website security analysis" },
       { name: "market-data", description: "Keyless on-chain market and protocol data" },

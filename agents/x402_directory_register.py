@@ -223,6 +223,21 @@ def _all_offerings():
         yield name, meta, "data"
 
 
+# Substrings of the response headers worth logging on a 429. Matched
+# case-insensitively against the header name, so this covers the common
+# spellings (RateLimit-Reset, X-RateLimit-Remaining, Retry-After, ...)
+# without needing to know which convention 402index.io happens to use.
+_RATELIMIT_HEADER_HINTS = ("ratelimit", "rate-limit", "retry-after", "reset")
+
+
+def _ratelimit_headers(headers):
+    """Subset of `headers` that describes the rate-limit state, for logging."""
+    if not headers:
+        return {}
+    return {k: v for k, v in dict(headers).items()
+            if any(hint in k.lower() for hint in _RATELIMIT_HEADER_HINTS)}
+
+
 def _post(url, payload, timeout=15, max_retries=1, backoff_base=10):
     """POST with retry-on-429. GitHub-hosted runners share IP pools across
     countless unrelated CI jobs, so a small public API's per-IP rate limit
@@ -260,17 +275,27 @@ def _post(url, payload, timeout=15, max_retries=1, backoff_base=10):
             except Exception:
                 body = {"raw": raw}
             code = e.code
-            if code == 429 and attempt < max_retries:
-                retry_after = e.headers.get("Retry-After") if e.headers else None
-                try:
-                    wait = float(retry_after) if retry_after else backoff_base * (2 ** attempt)
-                except Exception:
-                    wait = backoff_base * (2 ** attempt)
-                wait = min(wait, 120)
-                print(f"[402index] 429 rate-limited, retrying in {wait:.0f}s "
-                      f"(attempt {attempt + 1}/{max_retries})...")
-                time.sleep(wait)
-                continue
+            if code == 429:
+                # The only authoritative answer to *when* the quota rolls over.
+                # 402index.io's api-docs page and its own 429 body already
+                # disagree about the limit itself (10 vs 50 per hour per IP),
+                # and neither states when the window resets — so without these
+                # headers, "re-run later" is guesswork. Logging them turns the
+                # backfill into something schedulable.
+                rl = _ratelimit_headers(e.headers)
+                print(f"[402index] 429 rate-limit headers: "
+                      f"{json.dumps(rl) if rl else '(server sent none)'}")
+                if attempt < max_retries:
+                    retry_after = e.headers.get("Retry-After") if e.headers else None
+                    try:
+                        wait = float(retry_after) if retry_after else backoff_base * (2 ** attempt)
+                    except Exception:
+                        wait = backoff_base * (2 ** attempt)
+                    wait = min(wait, 120)
+                    print(f"[402index] 429 rate-limited, retrying in {wait:.0f}s "
+                          f"(attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(wait)
+                    continue
             return code, body
         except Exception as e:
             return 0, {"error": str(e)}
