@@ -53,7 +53,7 @@ def test_prompt_includes_declared_socials_and_coingecko_description():
     args, _kwargs = m_llm.call_args
     system, user = args[0], args[1]
     assert "The Arena is a SocialFi platform." in user
-    assert "https://arena.social" in user
+    assert "Declared homepage: https://arena.social" in user
     assert "twitter: https://x.com/TheArenaApp" in user
     assert "untrusted external content" in system
 
