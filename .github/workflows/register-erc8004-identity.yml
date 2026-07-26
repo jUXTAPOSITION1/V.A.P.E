@@ -10,6 +10,14 @@ on:
 permissions:
   contents: read
 
+# Serializes overlapping manual dispatches so the balanceOf() idempotency
+# guard in register_erc8004_identity.py can't be raced: two runs started
+# close together would otherwise both observe balance==0 before either
+# register() call confirms, and both mint a separate agentId.
+concurrency:
+  group: register-erc8004-identity
+  cancel-in-progress: false
+
 jobs:
   register:
     runs-on: ubuntu-latest
