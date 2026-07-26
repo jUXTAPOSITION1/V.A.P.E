@@ -627,3 +627,5 @@
 | 2026-07-26 | auto | 0x911828FF4036f5c1AcF0c0Da3c71900dd937C8A9 (CATE) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0x67E5481ED9F785Db6508761eef45b85a19Ee0Df3 (DIM) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x181cd4706322EF57a51c5dA6AdE1fC56FF694444 (DCA) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xcB362b3701eF6 | +7d |
