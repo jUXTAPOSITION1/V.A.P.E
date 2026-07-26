@@ -1235,6 +1235,24 @@
     "symbol": "Del404",
     "times_investigated": 1
   },
+  "1:0x9be98a036f654040d39caf0f4530e95a4f890274": {
+    "address": "0x9BE98a036f654040d39caF0F4530e95A4f890274",
+    "chain": "1",
+    "first_investigated": "2026-07-26T17:41:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-174131-0x9BE98a03.md",
+        "score": 20,
+        "ts": "2026-07-26T17:41:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T17:41:31Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "DIM",
+    "times_investigated": 1
+  },
   "1:0xa0df17b5ac76ababa36e1450e2cbcd18a620c845": {
     "address": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845",
     "chain": "1",
