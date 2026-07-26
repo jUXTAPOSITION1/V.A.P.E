@@ -36,7 +36,29 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "cdp_bazaar_check_state.json")
 FINDINGS_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "findings.jsonl")
 STATUS_URL = "https://vape-x402.vapex402.workers.dev/admin/bazaar-status"
+VALIDATE_URL = "https://vape-x402.vapex402.workers.dev/admin/bazaar-validate"
 UA = {"User-Agent": "VAPE-cdp-bazaar-check/1.0", "Accept": "application/json"}
+
+
+def _fetch_validate():
+    """Calls the worker's new /admin/bazaar-validate probe (CDP's own
+    POST /v2/x402/validate diagnostic, passed through verbatim) — logged
+    raw to CI output only, not persisted as a finding yet, since the exact
+    response schema is still unverified as of when this was added. Once a
+    real response has been observed, promote the useful fields into a
+    proper finding the same way _fetch_status()'s caller does."""
+    req = urllib.request.Request(VALIDATE_URL, headers=UA, method="GET")
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raw = e.read().decode(errors="replace")
+        try:
+            return json.loads(raw)
+        except Exception:
+            return {"error": f"HTTP {e.code}: {raw[:300]}"}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 def _fetch_status():
@@ -83,6 +105,9 @@ def _append_finding(entry):
 
 
 def main():
+    validate_result = _fetch_validate()
+    print(f"[cdp_bazaar_check] /admin/bazaar-validate raw response: {json.dumps(validate_result)}")
+
     status = _fetch_status()
 
     if status.get("error") or not status.get("cdp_reachable", True):
