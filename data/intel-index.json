@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-26T08:25:15Z",
+  "generated": "2026-07-26T08:28:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 422,
+    "reports": 423,
     "reports_by_type": {
+      "security": 71,
       "bounty": 125,
       "base": 78,
       "virtuals": 79,
-      "security": 70,
       "sentiment": 41,
       "macro": 21,
       "skillforge": 4,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-072528-0x4c28f484.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260726_073621.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-26T07:36:21Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-26-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-26T08:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error) \u00b7 Base mover: NTFS / WETH 0.01% +1272% 24h (liq $121020.5195) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_073621.md",
-      "bytes": 12293
+      "summary": "The feed records 9 incidents over the reported 7-day window. The largest single loss was the AFX Bridge incident on Arbitrum ($24.15M, private-key compromise). The next-largest was Ostium on Arbitrum ($23.75M, price-oracle manipulation). Remaining events were smaller: Triple-A hot-wallet compromise across Ethereum/Tron/Arbitrum ($9.7M), V",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-08.md",
+      "bytes": 6707
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-26-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-26T08:00Z",
+      "threat": null,
+      "summary": "The feed records 9 incidents over the reported 7-day window. The largest single loss was the AFX Bridge incident on Arbitrum ($24.15M, private-key compromise). The next-largest was Ostium on Arbitrum ($23.75M, price-oracle manipulation). Remaining events were smaller: Triple-A hot-wallet compromise across Ethereum/Tron/Arbitrum ($9.7M), V",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-08.md",
+      "bytes": 6707
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-23 04:17 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-23-04.md",
       "bytes": 3984
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260723_025049.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-23T02:50:49Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised) \u00b7 RECENT EXPLOIT: Wanchain $6.5M on ['Cardano'] (Signature Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260723_025049.md",
-      "bytes": 12956
     }
   ],
   "broadcasts": [
