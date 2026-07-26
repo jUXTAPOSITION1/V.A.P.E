@@ -36,6 +36,42 @@
     {
       "item": "Submit report through the Hackenproof platform following their exact disclosure rules",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Sui Protocol bug bounty program directly on the Hackenproof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Fetch the latest source code from the Sui Protocol's official GitHub repository to prepare for auditing.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the fetched Move code to perform source fetch, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the audit results from agents/external_audit.py to identify potential vulnerabilities and areas that require manual review.",
+      "done": false
+    },
+    {
+      "item": "Manually review the code against a real vulnerability taxonomy, checking for issues such as access control, oracle trust, reentrancy, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Use the results from the automated audit and manual review to identify and document potential vulnerabilities, including steps to reproduce and proposed fixes.",
+      "done": false
+    },
+    {
+      "item": "Check the Hackenproof website for specific submission guidelines, including required information and formatting for bug reports.",
+      "done": false
+    },
+    {
+      "item": "Submit the documented vulnerabilities to the Sui Protocol bug bounty program through the Hackenproof platform, ensuring that all required information is included and the submission meets the program's guidelines.",
+      "done": false
+    },
+    {
+      "item": "Monitor the submission status and respond to any follow-up questions or requests for additional information from the Sui Protocol team or Hackenproof.",
+      "done": false
     }
   ],
   "progress": [
@@ -50,9 +86,13 @@
     {
       "ts": "2026-07-19T14:07:47.696538Z",
       "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md"
+    },
+    {
+      "ts": "2026-07-26T11:46:34.200714Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461202.9812753,
+  "checklistGeneratedAt": 1785066392.773578,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Sui Protocol",
   "platform": "hackenproof",
@@ -67,6 +107,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T14:07:47.696469Z",
+  "updatedAt": "2026-07-26T11:46:32.773581Z",
   "vapeReportKind": "external-audit"
 }

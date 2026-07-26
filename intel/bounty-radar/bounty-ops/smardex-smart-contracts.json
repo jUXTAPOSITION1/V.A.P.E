@@ -32,6 +32,42 @@
     {
       "item": "Prepare a Hackenproof submission containing contract addresses, minimal PoC, severity rating and reproduction steps.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the SmarDex Smart Contracts bug bounty program directly on the HackenProof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the specific smart contracts included in the scope of the program, including any relevant repositories or contract addresses on Ethereum, Polygon, Arbitrum, BSC, or Base.",
+      "done": false
+    },
+    {
+      "item": "Use agents/deep_dive_audit.py to perform a deep dive audit on the identified smart contracts, leveraging tools like Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review to detect potential vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Analyze the audit results to identify potential issues related to access control, oracle trust, reentrancy, business logic, and other relevant vulnerability categories.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contracts and audit results to validate findings, prioritize potential vulnerabilities, and ensure that all issues are properly understood and documented.",
+      "done": false
+    },
+    {
+      "item": "Check the program's rules and guidelines to ensure that any potential submissions comply with the required format and content, including any necessary proof-of-concept or replication instructions.",
+      "done": false
+    },
+    {
+      "item": "Prepare a detailed submission report for any validated vulnerabilities, including a clear description of the issue, steps to reproduce, and any relevant code snippets or transaction traces.",
+      "done": false
+    },
+    {
+      "item": "Submit the report to the SmarDex Smart Contracts bug bounty program through the HackenProof platform, ensuring that all required information is included and that the submission is properly formatted and easy to understand.",
+      "done": false
+    },
+    {
+      "item": "Monitor the program's response and follow up as necessary to ensure that the submission is properly reviewed and addressed, and to provide any additional information or clarification that may be required.",
+      "done": false
     }
   ],
   "progress": [
@@ -42,9 +78,13 @@
     {
       "ts": "2026-07-19T11:38:59.695919Z",
       "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-26T11:46:27.534665Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461129.43217,
+  "checklistGeneratedAt": 1785066385.7472143,
   "vapeReportUrl": null,
   "name": "SmarDex Smart Contracts",
   "platform": "hackenproof",
@@ -63,5 +103,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:38:49.432176Z"
+  "updatedAt": "2026-07-26T11:46:25.747217Z"
 }

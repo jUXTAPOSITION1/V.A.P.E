@@ -36,6 +36,42 @@
     {
       "item": "Prepare the Hackenproof submission with clear reproduction steps, affected contracts, and severity rationale.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Citrea Protocol & Smart Contracts bug bounty program directly on the Hackenproof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the specific smart contracts and repositories included in the scope, focusing on those written in Solidity for the Ethereum and BSC blockchains.",
+      "done": false
+    },
+    {
+      "item": "Clone or download the targeted Solidity smart contracts to a local environment for analysis.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned contracts to perform a deep dive audit, utilizing tools like Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Manually review the audit results against a real vulnerability taxonomy, checking for issues such as access control, oracle trust, reentrancy, and business logic vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Analyze the results to identify potential vulnerabilities and prioritize them based on severity and potential impact on the Citrea Protocol & Smart Contracts.",
+      "done": false
+    },
+    {
+      "item": "Document the findings in a clear and concise manner, including steps to reproduce, expected behavior, and actual behavior for each identified vulnerability.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the submission meets the Hackenproof requirements, including proper formatting and the provision of any necessary supporting evidence or proof-of-concept code.",
+      "done": false
+    },
+    {
+      "item": "Submit the findings through the Hackenproof platform, following their guidelines for bug bounty submissions to be eligible for the $250,000 prize.",
+      "done": false
     }
   ],
   "progress": [
@@ -48,7 +84,7 @@
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461139.6963396,
+  "checklistGeneratedAt": 1785066387.5351164,
   "vapeReportUrl": null,
   "name": "Citrea Protocol & Smart Contracts",
   "platform": "hackenproof",
@@ -68,5 +104,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:38:59.696344Z"
+  "updatedAt": "2026-07-26T11:46:27.535119Z"
 }

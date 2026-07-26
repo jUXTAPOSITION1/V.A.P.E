@@ -36,6 +36,42 @@
     {
       "item": "Submit report through the Hackenproof platform and retain all supporting artifacts",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the MetaMask Validator Staking Smart Contracts bug bounty program directly on the Hackenproof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the specific Solidity/EVM smart contracts that are within the scope of the program, which may involve reviewing the program's description, attached files, or linked repositories.",
+      "done": false
+    },
+    {
+      "item": "Clone or download the relevant smart contract code from the specified repository or location to prepare it for analysis with VAPE's tools.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the identified smart contract code to perform a comprehensive analysis using tools like Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Manually review the analysis results against a real vulnerability taxonomy, focusing on potential issues such as access control, oracle trust, reentrancy, and business logic vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Investigate any potential vulnerabilities identified during the analysis, and attempt to exploit or verify them to determine their validity and impact.",
+      "done": false
+    },
+    {
+      "item": "Document all findings, including any potential vulnerabilities, their exploitation methods, and recommended fixes, to prepare a comprehensive report for submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the report adheres to the program's submission guidelines and includes all required information, such as a detailed description of the vulnerability, proof-of-concept code, and proposed mitigation strategies.",
+      "done": false
+    },
+    {
+      "item": "Submit the report to the MetaMask Validator Staking Smart Contracts bug bounty program through the Hackenproof platform, following the specified submission process and ensuring that all required information is included.",
+      "done": false
     }
   ],
   "progress": [
@@ -48,7 +84,7 @@
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461170.1292799,
+  "checklistGeneratedAt": 1785066395.9492688,
   "vapeReportUrl": null,
   "name": "MetaMask Validator Staking Smart Contracts",
   "platform": "hackenproof",
@@ -65,5 +101,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:39:30.129284Z"
+  "updatedAt": "2026-07-26T11:46:35.949273Z"
 }

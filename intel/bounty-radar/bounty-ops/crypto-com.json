@@ -32,6 +32,42 @@
     {
       "item": "Draft report with scope reference, reproduction, and suggested fix then submit via HackerOne.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Crypto.com bug bounty program on the HackerOne page to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify and fetch the relevant Solidity smart contracts from Crypto.com's publicly available repositories or the Ethereum blockchain, focusing on contracts that handle sensitive operations or valuable assets.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the fetched Solidity contracts to perform a deep dive audit, utilizing tools like Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review to identify potential vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Analyze the audit results from agents/deep_dive_audit.py, checking for common vulnerabilities such as access control issues, oracle trust problems, reentrancy vulnerabilities, and business logic flaws, and prioritize potential findings based on severity and exploitability.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contracts and audit results against a real vulnerability taxonomy to ensure that all potential issues are properly identified and evaluated, and to provide additional context and insights into the findings.",
+      "done": false
+    },
+    {
+      "item": "Document all potential vulnerabilities and findings in a clear and concise manner, including steps to reproduce, proof-of-concept code or transactions, and recommendations for remediation, to facilitate a comprehensive and well-structured submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the submission meets all the requirements and guidelines outlined on the HackerOne page for the Crypto.com bug bounty program, including formatting, content, and communication expectations.",
+      "done": false
+    },
+    {
+      "item": "Submit the findings and supporting documentation to the Crypto.com bug bounty program through the HackerOne platform, and engage with the program's administrators and security team as needed to discuss and refine the submission.",
+      "done": false
+    },
+    {
+      "item": "Monitor the submission's status and respond to any follow-up questions or requests from the Crypto.com security team, providing additional information or clarification as necessary to facilitate the review and validation process.",
+      "done": false
     }
   ],
   "progress": [
@@ -42,9 +78,13 @@
     {
       "ts": "2026-07-19T11:39:30.128888Z",
       "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-26T11:46:32.773170Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461160.9753451,
+  "checklistGeneratedAt": 1785066390.7824063,
   "vapeReportUrl": null,
   "name": "Crypto.com",
   "platform": "hackerone",
@@ -61,5 +101,5 @@
     "bugbounty",
     "via:hackerone"
   ],
-  "updatedAt": "2026-07-19T11:39:20.975349Z"
+  "updatedAt": "2026-07-26T11:46:30.782414Z"
 }

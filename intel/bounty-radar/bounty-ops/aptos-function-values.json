@@ -32,6 +32,42 @@
     {
       "item": "Draft submission containing PoC, root-cause explanation, impact, and severity rating that matches Hackenproof template requirements.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Aptos Function Values bug bounty program directly on the HackenProof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the target Move smart contracts for the audit, which are likely hosted in a Git repository associated with the Aptos Function Values program.",
+      "done": false
+    },
+    {
+      "item": "Clone the target Git repository to obtain the latest version of the Move smart contracts.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the cloned repository, focusing on the Move smart contracts to perform source fetch, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the output from agents/external_audit.py to identify potential vulnerabilities, paying close attention to common issues such as access control, oracle trust, reentrancy, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contracts against a real vulnerability taxonomy to ensure thorough coverage and identify any potential issues that may have been missed by the automated tools.",
+      "done": false
+    },
+    {
+      "item": "Document all findings, including potential vulnerabilities, and prepare a clear, concise report that includes steps to reproduce and recommended mitigations.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the report meets the submission requirements outlined in the Aptos Function Values bug bounty program rules, including any specific formatting or content guidelines.",
+      "done": false
+    },
+    {
+      "item": "Submit the report to the HackenProof platform, following the program's guidelines for submission and ensuring that all required information is included to facilitate review and potential reward.",
+      "done": false
     }
   ],
   "progress": [
@@ -42,15 +78,19 @@
     {
       "ts": "2026-07-19T11:40:24.678904Z",
       "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-26T11:46:35.948860Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461212.9642403,
+  "checklistGeneratedAt": 1785066394.2011259,
   "vapeReportUrl": null,
   "name": "Aptos Function Values",
   "platform": "hackenproof",
   "url": "https://hackenproof.com/programs/aptos-function-values",
   "prizeUsd": 1000000,
-  "bountyFitScore": 63,
+  "bountyFitScore": 73,
   "vapeFitReason": "Move/Sui smart-contract scope \u2014 matches agents/external_audit.py",
   "tags": [
     "git_repo",
@@ -59,5 +99,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:40:12.964243Z"
+  "updatedAt": "2026-07-26T11:46:34.201130Z"
 }

@@ -36,6 +36,42 @@
     {
       "item": "Submit the report through the Hackenproof platform only after confirming the finding is not already disclosed or out of scope.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the TETU Smart Contracts bug bounty program directly on the Hackenproof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the specific smart contracts and repositories included in the scope, focusing on those written in Solidity for Ethereum and Polygon.",
+      "done": false
+    },
+    {
+      "item": "Clone or download the relevant Solidity contracts from the specified git repository to prepare them for analysis.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the cloned Solidity contracts to perform a comprehensive analysis using Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Manually review the analysis results against a real vulnerability taxonomy, checking for issues such as access control, oracle trust, reentrancy, and business logic vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Investigate any potential vulnerabilities identified during the analysis, verifying their exploitability and impact on the contracts.",
+      "done": false
+    },
+    {
+      "item": "Document all findings, including steps to reproduce, exploit code (if applicable), and recommendations for remediation, to prepare a comprehensive submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure the submission meets all the requirements outlined in the program's rules and guidelines, including formatting and content expectations.",
+      "done": false
+    },
+    {
+      "item": "Submit the findings through the Hackenproof platform, following the specified procedure for the TETU Smart Contracts bug bounty program.",
+      "done": false
     }
   ],
   "progress": [
@@ -48,7 +84,7 @@
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461150.0971937,
+  "checklistGeneratedAt": 1785066389.0752804,
   "vapeReportUrl": null,
   "name": "TETU Smart Contracts",
   "platform": "hackenproof",
@@ -66,5 +102,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:39:10.097198Z"
+  "updatedAt": "2026-07-26T11:46:29.075294Z"
 }

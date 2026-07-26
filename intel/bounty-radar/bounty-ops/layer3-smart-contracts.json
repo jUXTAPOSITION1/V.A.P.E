@@ -36,6 +36,38 @@
     {
       "item": "Submit report through the Hackenproof platform UI, attaching only the allowed artifacts and respecting their disclosure policy.",
       "done": false
+    },
+    {
+      "item": "Verify current in-scope contracts, rules, exclusions, and payout tiers directly on https://hackenproof.com/programs/layer3-smart-contracts before any further action",
+      "done": false
+    },
+    {
+      "item": "Extract the official Git repository URL and commit hash or branch from the confirmed program page",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the full repository with Slither, Mythril, Halmos symbolic execution, Aderyn, and frontier-LLM review enabled",
+      "done": false
+    },
+    {
+      "item": "Manually inspect all contracts for access-control misconfigurations, reentrancy vectors, oracle trust assumptions, and upgradeability flaws",
+      "done": false
+    },
+    {
+      "item": "Review business-logic flows for incorrect state transitions, reward-calculation errors, and cross-contract interaction issues not covered by automated tools",
+      "done": false
+    },
+    {
+      "item": "Validate any findings against real EVM execution traces and confirm they are not mitigated by existing tests or modifiers",
+      "done": false
+    },
+    {
+      "item": "Draft submission with clear reproduction steps, affected contract addresses or files, severity justification, and minimal PoC code per Hackenproof format",
+      "done": false
+    },
+    {
+      "item": "Submit report only after internal triage confirms the issue is in-scope and previously unreported",
+      "done": false
     }
   ],
   "progress": [
@@ -46,9 +78,13 @@
     {
       "ts": "2026-07-19T11:39:49.911105Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-26T11:46:49.418720Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784461179.4379597,
+  "checklistGeneratedAt": 1785066397.6808074,
   "vapeReportUrl": null,
   "name": "Layer3 Smart Contracts",
   "platform": "hackenproof",
@@ -64,5 +100,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T11:39:39.437964Z"
+  "updatedAt": "2026-07-26T11:46:37.680814Z"
 }
