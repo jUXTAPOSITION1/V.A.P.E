@@ -945,6 +945,72 @@ app.get("/admin/bazaar-status", rateLimiter("bazaar-status", 6, 300), cache({ ca
   });
 });
 
+// CDP documents a live diagnostic, `POST /v2/x402/validate`, that "probes
+// your URL live and reports whether it is reachable, returns 402,
+// advertises a parseable extensions.bazaar block, and would be accepted
+// for indexing — without running a payment" (docs.cdp.coinbase.com/x402/
+// bazaar). We could not get a verified exact request/response schema for
+// it (the docs page itself 403s automated fetchers, ironically the same
+// symptom class as the indexing bug this is meant to diagnose) — so this
+// is written as an honest PROBE, not a parser: it sends the one shape the
+// docs text actually confirms (`{url}`) using the exact same manual-JWT
+// pattern already proven correct by /admin/bazaar-status above (not the
+// SDK's withBazaar() helper, whose createAuthHeaders("bazaar") has no
+// matching key in buildCreateAuthHeaders() and would silently send an
+// unauthenticated request), and returns CDP's raw response body verbatim
+// rather than assuming field names. Same free/rate-limited posture as
+// /admin/bazaar-status: read-only, no payment involved.
+app.get("/admin/bazaar-validate", rateLimiter("bazaar-validate", 6, 300), async (c) => {
+  if (!c.env.CDP_API_KEY_ID || !c.env.CDP_API_KEY_SECRET) {
+    return c.json({ error: "CDP credentials not configured" }, 503);
+  }
+  const origin = new URL(c.req.url).origin;
+  const targetUrl = c.req.query("url") || `${origin}/scan/exploit_check`;
+  if (!targetUrl.startsWith(origin)) {
+    return c.json({ error: "url must be one of this worker's own routes" }, 400);
+  }
+
+  const base = c.env.X402_FACILITATOR_URL;
+  const host = new URL(base).host;
+  const path = `${new URL(base).pathname}/validate`;
+
+  let jwt: string;
+  try {
+    jwt = await generateCdpJwt({
+      apiKeyId: c.env.CDP_API_KEY_ID,
+      apiKeySecret: c.env.CDP_API_KEY_SECRET,
+      requestMethod: "POST",
+      requestHost: host,
+      requestPath: path,
+    });
+  } catch (e) {
+    return c.json({ error: `failed to build CDP auth: ${errDetail(e, c.env)}` }, 502);
+  }
+
+  try {
+    const r = await fetch(`${base}/validate`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ url: targetUrl }),
+    });
+    const text = await r.text();
+    let parsed: unknown = null;
+    try { parsed = JSON.parse(text); } catch { /* not JSON — report raw text instead */ }
+    return c.json({
+      checked_at: new Date().toISOString(),
+      probed_url: targetUrl,
+      cdp_http_status: r.status,
+      cdp_response: parsed ?? text,
+    });
+  } catch (e) {
+    return c.json({ error: `CDP validate fetch failed: ${errDetail(e, c.env)}` }, 502);
+  }
+});
+
 app.use("*", async (c, next) => {
   // withBazaar() extends the facilitator client so its getSupported()/
   // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
