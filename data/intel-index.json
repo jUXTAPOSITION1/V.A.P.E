@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T05:26:00Z",
+  "generated": "2026-07-26T05:40:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 362,
+    "investigations": 363,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-051055-0x8f3Cf7ad.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-07-26T05:10:55Z",
-      "target": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 62% of supply \u2014 meaningful concentration. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($557,194,496 circulating, $0.9997 peg); 3822846 holders \u2014 reasonably distributed; Deep liquidity ($204,479,564); Trading 872+ days without a known",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-051055-0x8f3Cf7ad.md"
+      "file": "investigation-20260726-054059-0xB6fc4bc6.md",
+      "title": "Investigation \u2014 $PLY",
+      "symbol": "$PLY",
+      "name": "PLAY",
+      "date": "2026-07-26T05:40:59Z",
+      "target": "0xB6fc4bc614BC3275C36D609B7a9E1f5017274aB1",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $8,183 (rug/illiquid); [-10] Low liquidity $8,183; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-054059-0xB6fc4bc6.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-054059-0xB6fc4bc6.md",
+      "title": "Investigation \u2014 $PLY",
+      "symbol": "$PLY",
+      "name": "PLAY",
+      "date": "2026-07-26T05:40:59Z",
+      "target": "0xB6fc4bc614BC3275C36D609B7a9E1f5017274aB1",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $8,183 (rug/illiquid); [-10] Low liquidity $8,183; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-054059-0xB6fc4bc6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-051055-0x8f3Cf7ad.md",
@@ -593,20 +607,6 @@
       "score": "65",
       "summary": "Risk factors: [-25] Very low liquidity $1,778 (rug/illiquid); [-10] Low liquidity $1,778. Positive evidence: Ownership renounced; Trading 705+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-185758-0xD60ABFB7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-184244-0xaa26754d.md",
-      "title": "Investigation \u2014 H420",
-      "symbol": "H420",
-      "name": "H420",
-      "date": "2026-07-25T18:42:44Z",
-      "target": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) \u2014 can still act on the contract; [-8] Low holder count (97); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-184244-0xaa26754d.md"
     }
   ],
   "reports": [
