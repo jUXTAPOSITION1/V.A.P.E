@@ -903,3 +903,4 @@
 {"ts": "2026-07-26T15:56:35Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1140, "completion_tokens": 295, "total_tokens": 2012}
 {"ts": "2026-07-26T15:56:47Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91952, "completion_tokens": 1, "total_tokens": 92068}
 {"ts": "2026-07-26T16:02:26Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2585, "completion_tokens": 210, "total_tokens": 3325}
+{"ts": "2026-07-26T16:03:02Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 97499, "completion_tokens": 1011, "total_tokens": 100695}
