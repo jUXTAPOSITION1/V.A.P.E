@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T11:41:04Z",
+  "generated": "2026-07-26T11:56:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 372,
+    "investigations": 373,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-114102-0xd17c2AE3.md",
-      "title": "Investigation \u2014 MV",
-      "symbol": "MV",
-      "name": "MV Token",
-      "date": "2026-07-26T11:41:02Z",
-      "target": "0xd17c2AE3FB89448991D26bCd877692122341f1D6",
+      "file": "investigation-20260726-115623-0x204820B6.md",
+      "title": "Investigation \u2014 ROND",
+      "symbol": "ROND",
+      "name": "ROND Coin",
+      "date": "2026-07-26T11:56:23Z",
+      "target": "0x204820B6e6FEae805e376D2C6837446186e57981",
       "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,101 (rug/illiquid); [-10] Low liquidity $1,101; [-10] Pair 8.1 days old \u2014 under",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-114102-0xd17c2AE3.md"
+      "score": "40",
+      "summary": "Risk factors: [-10] Owner not renounced (0x78a3b0a018b9763a67dcfbae7ba7e2e47b9e341f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $141 (rug/illiquid); [-10] Low liquidity $141. Positive evidence: 12549 holders \u2014 reasonably d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-115623-0x204820B6.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-115623-0x204820B6.md",
+      "title": "Investigation \u2014 ROND",
+      "symbol": "ROND",
+      "name": "ROND Coin",
+      "date": "2026-07-26T11:56:23Z",
+      "target": "0x204820B6e6FEae805e376D2C6837446186e57981",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-10] Owner not renounced (0x78a3b0a018b9763a67dcfbae7ba7e2e47b9e341f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $141 (rug/illiquid); [-10] Low liquidity $141. Positive evidence: 12549 holders \u2014 reasonably d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-115623-0x204820B6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-114102-0xd17c2AE3.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 51805 holders \u2014 reasonably distributed; Trading 529+ days without a known incident in this scan; Custom verified ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-213113-0xa78d8321.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-211533-0x6f09344D.md",
-      "title": "Investigation \u2014 AUGU",
-      "symbol": "AUGU",
-      "name": "Augustus",
-      "date": "2026-07-25T21:15:33Z",
-      "target": "0x6f09344D2a9a7AB1470a19cb014423334F3C57E4",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +3171% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-15] Contract so",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-211533-0x6f09344D.md"
     }
   ],
   "reports": [

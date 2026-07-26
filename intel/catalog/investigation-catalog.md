@@ -575,3 +575,5 @@
 | 2026-07-26 | auto | 0xA3c322Ad15218fBFAEd26bA7f616249f7705D945 (MV) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-26 | auto | 0xd17c2AE3FB89448991D26bCd877692122341f1D6 (MV) | deep_investigation | REJECT (0/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-26 | auto | 0x204820B6e6FEae805e376D2C6837446186e57981 (ROND) | deep_investigation | REJECT (40/100) | Owner not renounced (0x78a3b0a018b9763a67dcfbae7ba7e2e47b9e341f) — can still act | +7d |
