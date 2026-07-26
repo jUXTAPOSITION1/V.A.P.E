@@ -1,0 +1,37 @@
+# Merge behaviour for VAPE's machine-written memory files.
+#
+# Why this file exists: VAPE runs many scheduled workflows that each append to
+# the same ledgers and then commit. When two runs overlap, `git pull --rebase`
+# reports a textual conflict at the same file position even though the two
+# sides never actually disagree — they simply each added their own lines. The
+# rebase then stops, leaving the runner on a detached HEAD, and every
+# subsequent `git push` fails with "You are not currently on a branch". That is
+# a deterministic failure, not a race: retrying re-hits the identical conflict,
+# which is exactly how the 2026-07-26 bounty-cycle run burned all five push
+# retries and lost a completed cycle's output.
+#
+# `union` is a git built-in merge driver (no client-side config required): on
+# conflict it keeps the lines from BOTH sides instead of failing. For an
+# append-only ledger that is precisely the correct history.
+skillforge/memory/*.jsonl                 merge=union
+skillforge/memory/*.log                   merge=union
+
+# DELIBERATE EXCEPTION — do not add this to the union rule above.
+# findings.chain.jsonl is a hash chain sealing findings.jsonl (see
+# skillforge/findings_chain.py): each entry commits to `sealed_through_line`
+# plus a `chain_hash` replayed over the whole file. Unioning two divergent
+# chains would interleave seals covering overlapping line ranges with
+# incompatible hashes — quietly destroying the tamper-evidence property that is
+# the file's only reason to exist. A conflict here is a REAL conflict and must
+# be resolved by re-sealing, never by concatenation. `!merge` restores git's
+# default text merge so it fails loudly.
+skillforge/memory/findings.chain.jsonl    !merge
+
+# JSON state blobs are objects keyed by observation, not line-oriented logs, so
+# `union` would emit syntactically invalid JSON. They get a real semantic merge
+# instead — see scripts/git_merge_json_state.py. The driver is registered by
+# scripts/ci_commit_push.sh; without that registration git falls back to a
+# normal (conflicting) text merge, which is a safe default rather than silent
+# corruption.
+skillforge/memory/anomaly_state.json      merge=json-state
+skillforge/memory/*_quota.json            merge=json-state

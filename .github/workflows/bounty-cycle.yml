@@ -78,28 +78,20 @@ jobs:
       - name: Rebuild Memory SQLite index (queryable recall; derived, not committed)
         run: python -m skillforge.memory.index_db build || echo "memory index skipped"
       - name: Commit Reports
+        # run.py appends grounded findings to Memory; investigate.py writes
+        # investigations + catalog + findings; build_intel_index.py refreshes
+        # data/intel-index.json for the dashboard. Stage all so the tree is clean.
+        #
+        # The inline retry loop this replaces failed the whole job on
+        # 2026-07-26 even though the cycle itself succeeded: a concurrent run
+        # had appended to skillforge/memory/llm_usage.jsonl and
+        # anomaly_state.json, `git pull --rebase` conflicted, the rebase
+        # stopped on a detached HEAD, and all five "retries" then pushed from
+        # no branch at all. See scripts/ci_commit_push.sh for the full story.
         run: |
-          git config user.name "VAPE Bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # run.py appends grounded findings to Memory; investigate.py writes
-          # investigations + catalog + findings; build_intel_index.py refreshes
-          # data/intel-index.json for the dashboard. Stage all so the tree is clean.
-          git add reports/ skillforge/memory/ intel/ data/ || true
-          git commit -m "Auto-generated bounty report $(date)" || { echo "No new reports"; exit 0; }
-          # persist-credentials: false on checkout (see #157) means push has no
-          # credential unless re-injected here, scoped to just this step.
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
-          pushed=false
-          for i in 1 2 3 4 5; do
-            git rebase --abort >/dev/null 2>&1 || true
-            git pull --rebase --autostash origin main || true
-            if git push; then pushed=true; break; fi
-            echo "push race retry $i"; sleep $((i*3))
-          done
-          if [ "$pushed" != "true" ]; then
-            echo "::error::failed to push after 5 retries -- changes were NOT committed"
-            exit 1
-          fi
+          scripts/ci_commit_push.sh \
+            "Auto-generated bounty report $(date -u +%Y-%m-%dT%H:%MZ)" \
+            reports/ skillforge/memory/ intel/ data/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -149,22 +141,14 @@ jobs:
           GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
       - name: Commit Review
+        # Same shared helper as the bounty-hunt job above. This job runs
+        # concurrently with it and writes the same skillforge/memory/ ledgers,
+        # so it is one of the two racers that produced the conflict in the
+        # first place — it needs the identical merge policy, not a copy of the
+        # loop that could drift.
         run: |
-          git config user.name "VAPE Bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/ skillforge/memory/ || true
-          git commit -m "VAPE repo review $(date)" || { echo "No new reviews"; exit 0; }
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
-          pushed=false
-          for i in 1 2 3 4 5; do
-            git rebase --abort >/dev/null 2>&1 || true
-            git pull --rebase --autostash origin main || true
-            if git push; then pushed=true; break; fi
-            echo "push race retry $i"; sleep $((i*3))
-          done
-          if [ "$pushed" != "true" ]; then
-            echo "::error::failed to push after 5 retries -- changes were NOT committed"
-            exit 1
-          fi
+          scripts/ci_commit_push.sh \
+            "VAPE repo review $(date -u +%Y-%m-%dT%H:%MZ)" \
+            reports/ skillforge/memory/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
