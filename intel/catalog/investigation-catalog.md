@@ -579,3 +579,5 @@
 | 2026-07-26 | auto | 0x204820B6e6FEae805e376D2C6837446186e57981 (ROND) | deep_investigation | REJECT (40/100) | Owner not renounced (0x78a3b0a018b9763a67dcfbae7ba7e2e47b9e341f) — can still act | +7d |
 
 | 2026-07-26 | auto | 0xEd2EE58908eA569A994a1ac77da4A947807A4444 (DCA) | deep_investigation | CAUTION (55/100) | Low liquidity $42,250 | +7d |
+
+| 2026-07-26 | auto | 0x095576F441006679a79a53ddF9136b550095dD1C (DCA) | deep_investigation | REJECT (30/100) | Very few holders (15) — thin, easily manipulated distribution | +7d |
