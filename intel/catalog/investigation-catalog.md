@@ -515,3 +515,5 @@
 | 2026-07-25 | auto | 0x375488F097176507e39B9653b88FDc52cDE736Bf (TAROT) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-25 | auto | 0x2c72D25530191EBD244Eb6325E1892480b0e6E28 (AIPF) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0x1e9909F1c7051aD4Bf4496A345736dCEdC2A3Cfd (LTZ) | deep_investigation | REJECT (5/100) | Very few holders (32) — thin, easily manipulated distribution | +7d |
