@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T15:26:33Z",
+  "generated": "2026-07-26T15:41:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 383,
+    "investigations": 384,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-152627-0x60781C25.md",
-      "title": "Investigation \u2014 PNG",
-      "symbol": "PNG",
-      "name": "Pangolin",
-      "date": "2026-07-26T15:26:27Z",
-      "target": "0x60781C2586D68229fde47564546784ab3fACA982",
+      "file": "investigation-20260726-154131-0x8D88e484.md",
+      "title": "Investigation \u2014 CNR",
+      "symbol": "CNR",
+      "name": "Canary",
+      "date": "2026-07-26T15:41:31Z",
+      "target": "0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf",
       "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 87% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 38682 holders \u2014 reasonably dist",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-152627-0x60781C25.md"
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,178 (rug/illiquid); [-10] Low liquidity $4,178. Positive evidence: 2803 holders \u2014 reasonably distributed",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-154131-0x8D88e484.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-154131-0x8D88e484.md",
+      "title": "Investigation \u2014 CNR",
+      "symbol": "CNR",
+      "name": "Canary",
+      "date": "2026-07-26T15:41:31Z",
+      "target": "0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,178 (rug/illiquid); [-10] Low liquidity $4,178. Positive evidence: 2803 holders \u2014 reasonably distributed",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-154131-0x8D88e484.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-152627-0x60781C25.md",
@@ -593,20 +607,6 @@
       "score": "74",
       "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract; [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 53843 holders \u2014 reas",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-003507-0xB5C064F9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-001959-0x49DDee75.md",
-      "title": "Investigation \u2014 EBCC",
-      "symbol": "EBCC",
-      "name": "EBCC_coin",
-      "date": "2026-07-26T00:19:59Z",
-      "target": "0x49DDee75D588b79a3eB1225dd386644eeeeeaF08",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 4610 holders \u2014 reasonably distributed; Trading 233+ days without a known incident in this sc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-001959-0x49DDee75.md"
     }
   ],
   "reports": [

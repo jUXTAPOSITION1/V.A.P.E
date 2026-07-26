@@ -2038,6 +2038,25 @@
     "symbol": "QI",
     "times_investigated": 1
   },
+  "43114:0x8d88e48465f30acfb8dac0b3e35c9d6d7d36abaf": {
+    "address": "0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf",
+    "chain": "43114",
+    "creator_address": "0xda17025e88c493184ebbbc1d281436725962dc49",
+    "first_investigated": "2026-07-26T15:41:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-154131-0x8D88e484.md",
+        "score": 35,
+        "ts": "2026-07-26T15:41:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T15:41:31Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "CNR",
+    "times_investigated": 1
+  },
   "43114:0xaaab9d12a30504559b0c5a9a5977fee4a6081c6b": {
     "address": "0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b",
     "chain": "43114",

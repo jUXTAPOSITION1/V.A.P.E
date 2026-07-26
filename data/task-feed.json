@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T15:26:34Z",
-  "synthesis": "VAPE's automation performed various scans, sweeps, and analyses, including red-team deep scans and bounty reports.",
+  "generated": "2026-07-26T15:41:35Z",
+  "synthesis": "1)",
   "tasks": [
+    {
+      "sha": "5d20eb5bb0",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-26T15:31Z",
+      "date": "2026-07-26T15:31:56Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5d20eb5bb075d194552d7eae786b9399dd4a794f"
+    },
+    {
+      "sha": "3bfe1c0457",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T15:26Z",
+      "date": "2026-07-26T15:26:39Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3bfe1c0457579d0d4b07aabecb24a0d31eb619ca"
+    },
     {
       "sha": "c1570b62d2",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "community broadcast 2026-07-26T14:06Z",
       "date": "2026-07-26T14:06:36Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7c75fea9bac7ec0d964d726fa3f2fcb899844b88"
-    },
-    {
-      "sha": "dee07e45c0",
-      "kind": "automation",
-      "message": "VAPE AI red-team cycle 2026-07-26T14:06Z",
-      "date": "2026-07-26T14:06:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dee07e45c0b8a58266f3646d71d0b74e648c58b0"
-    },
-    {
-      "sha": "d61db72398",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-26T14:02Z",
-      "date": "2026-07-26T14:02:07Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d61db723982378927b8a0ccc4c5066132873fc29"
     }
   ]
 }

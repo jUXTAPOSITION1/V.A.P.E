@@ -597,3 +597,5 @@
 | 2026-07-26 | auto | 0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5 (QI) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 68% of supply — meaningful concentration | +7d |
 
 | 2026-07-26 | auto | 0x60781C2586D68229fde47564546784ab3fACA982 (PNG) | deep_investigation | CAUTION (62/100) | Top 10 non-LP/burn holders control 87% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-26 | auto | 0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf (CNR) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 85% of supply — concentrated, easily manipula | +7d |
