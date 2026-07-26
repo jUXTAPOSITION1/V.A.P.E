@@ -615,3 +615,5 @@
 | 2026-07-26 | auto | 0xa2a17b400CD9Bc8AF04714AA3E99Bee86374F90e (DIM) | deep_investigation | REJECT (0/100) | Very few holders (41) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0xc883e1910b9A2e39840E7c26BB7B7A3f80dB4f98 (sosocupid) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x87c6c398F81 | +7d |
+
+| 2026-07-26 | auto | 0xcB362b3701eF6F811DCdCd702482812D0Cf34444 (DCA) | deep_investigation | REJECT (40/100) | Very few holders (5) — thin, easily manipulated distribution | +7d |

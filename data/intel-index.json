@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T18:27:04Z",
+  "generated": "2026-07-26T18:42:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 433,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 392,
+    "investigations": 393,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-182703-0xc883e191.md",
-      "title": "Investigation \u2014 sosocupid",
-      "symbol": "sosocupid",
-      "name": "sosocupid",
-      "date": "2026-07-26T18:27:03Z",
-      "target": "0xc883e1910b9A2e39840E7c26BB7B7A3f80dB4f98",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260726-184225-0xcB362b37.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "DCA",
+      "date": "2026-07-26T18:42:25Z",
+      "target": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x87c6c398F811A462d623D24cAfEcaf0F0E553b08) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-182703-0xc883e191.md"
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-184225-0xcB362b37.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-184225-0xcB362b37.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "DCA",
+      "date": "2026-07-26T18:42:25Z",
+      "target": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-184225-0xcB362b37.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-182703-0xc883e191.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($21,786,595); Trading 1050+ days without a known incident in this scan; Custom verified source (",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-025250-0x79774Bf5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-023714-0x99a57E6C.md",
-      "title": "Investigation \u2014 sLGNS",
-      "symbol": "sLGNS",
-      "name": "Staked Longinus",
-      "date": "2026-07-26T02:37:14Z",
-      "target": "0x99a57E6C8558BC6689f894e068733ADf83C19725",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe979f492f934556c56fb9c1f6a82fecc7abb867e) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-023714-0x99a57E6C.md"
     }
   ],
   "reports": [
