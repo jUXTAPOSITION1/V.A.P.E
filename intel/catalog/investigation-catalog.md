@@ -537,3 +537,5 @@
 | 2026-07-26 | auto | 0x77719EAA4B9C24425bfCd39ac84F1e2E9C88568f (RW) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x6597cbb2d2ef74c0d037c07f0d41a4fd51386fd0) — can still act | +7d |
 
 | 2026-07-26 | auto | 0x99a57E6C8558BC6689f894e068733ADf83C19725 (sLGNS) | deep_investigation | REJECT (25/100) | Owner not renounced (0xe979f492f934556c56fb9c1f6a82fecc7abb867e) — can still act | +7d |
+
+| 2026-07-26 | auto | 0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2 (BTC) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
