@@ -2000,6 +2000,25 @@
     "symbol": "WETH.e",
     "times_investigated": 1
   },
+  "43114:0x60781c2586d68229fde47564546784ab3faca982": {
+    "address": "0x60781C2586D68229fde47564546784ab3fACA982",
+    "chain": "43114",
+    "creator_address": "0x808ce8dec9e10bed8d0892aceef9f1b8ec2f52bd",
+    "first_investigated": "2026-07-26T15:26:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-152627-0x60781C25.md",
+        "score": 62,
+        "ts": "2026-07-26T15:26:27Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T15:26:27Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "PNG",
+    "times_investigated": 1
+  },
   "43114:0x8729438eb15e2c8b576fcc6aecda6a148776c0f5": {
     "address": "0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5",
     "chain": "43114",
