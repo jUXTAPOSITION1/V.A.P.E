@@ -583,3 +583,5 @@
 | 2026-07-26 | auto | 0x095576F441006679a79a53ddF9136b550095dD1C (DCA) | deep_investigation | REJECT (30/100) | Very few holders (15) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0xfDf82991f00caE63062fD1d52e7f340693A34444 (DCA) | deep_investigation | REJECT (40/100) | Very few holders (33) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x1460d468466D17F65FF1426571E18059d23a9eBD (dca) | deep_investigation | REJECT (47/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
