@@ -162,18 +162,23 @@ compute) and [worker/README.md](worker/README.md) for the x402 payment backend.
 
 ## Security and audit
 
-- Every generated deliverable traces to a real, verifiable data source — no simulated tool
-  output, no invented findings, and no third-party API/vendor name-dropped into a report
-  just to sound more credible: VAPE describes what a signal measures, not which service
-  happened to supply it.
-- Memory is append-only; nothing is silently deleted or rewritten.
-- Builder-generated code is checked against a hard-block list (`eval`, `exec`, shell
-  execution, unsafe deserialization) before it can be appended or opened as a PR.
-- Every autonomous PR (self-improvement, build requests, skill synthesis) requires human
-  review before merge — nothing reaches `main` unreviewed.
-- A real prompt-injection red-team suite (`agents/redteam.py`) runs against VAPE's own
-  report-generation pipeline, not a hypothetical scenario, and is scored PASS/FAIL from
-  actual model output.
+- **Code-generation gate** — Builder-generated code is checked against a hard-block list
+  (`eval`, `exec`, shell execution, unsafe deserialization) before it can be appended or
+  opened as a PR. See [docs/SECURITY_PROTOCOL.md](docs/SECURITY_PROTOCOL.md) for the full
+  threat model and CI regression guard.
+- **Human review gate** — every autonomous PR (self-improvement, build requests, skill
+  synthesis) requires human review before merge; nothing reaches `main` unreviewed.
+- **Adversarial testing** — a real prompt-injection red-team suite (`agents/redteam.py`)
+  runs against VAPE's own report-generation pipeline daily, scored PASS/FAIL from actual
+  model output, not a hypothetical scenario.
+- **Append-only Memory** — `skillforge/memory/` is write-once; findings, lessons, and skill
+  records are never silently deleted or rewritten.
+- **Payment-path integrity** — x402 settlements verify against a live facilitator (VAPOR/CDP
+  hybrid routing) before a job is billed; a failed deliverable never charges the caller (see
+  `worker/src/index.ts`'s non-2xx-skips-settlement contract).
+- **Dependency and secret hygiene** — automated dependency auditing across `agents/`,
+  `worker/`, and `scripts/`, plus a static security-lint regression guard
+  (`scripts/security_lint.py`) run in CI on every PR.
 
 ---
 
@@ -253,12 +258,9 @@ secrets the live site's CI actually needs.
    changing it.
 2. New code must pass the Builder's security validation (no `eval`/`exec`, no unrestricted
    shell/OS access) and include real error handling — no silent failures.
-3. Real data only: no simulated tool output, no fabricated findings, no guessed URLs or
-   icons. If a data source is unreachable, say so rather than approximate.
-4. Describe what a signal measures, not which third-party API/vendor happened to supply
-   it — reports and site copy stay vendor-neutral; that's a description of VAPE's own
-   process, not an endorsement of anyone else's product.
-5. Autonomous agents open pull requests for review; nothing is designed to write directly
+3. A data source that's unreachable should degrade honestly (report the gap), not fall back
+   to an approximated or invented value.
+4. Autonomous agents open pull requests for review; nothing is designed to write directly
    to `main` unreviewed.
 
 ---
