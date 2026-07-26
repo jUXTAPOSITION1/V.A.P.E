@@ -83,8 +83,8 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
 - **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
-- **Commerce** — 28 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 13 DefiLlama data tools, and more), payable
+- **Commerce** — 31 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, 15 DefiLlama data tools, and more), payable
   through ACP escrow or instant x402 on Base mainnet, with results delivered as a rendered
   report on-site or a downloadable PDF.
 
@@ -201,15 +201,15 @@ V.A.P.E/
 
 **Live and running:** Featured Investigations every 30 minutes, hourly bounty/market
 sweeps, the SKILLFORGE tool
-ecosystem (16 tools registered, 16 verified), ACP + x402 job fulfillment across 29 live
-offerings (21 auto-fulfilled with zero manual work), x402 payments on Base mainnet via
-Coinbase Developer Platform's hosted facilitator, wallet-connect portfolio, the Central
-Memory system, the standard MCP server (17 tools), and the Builder self-improvement
-pipeline.
+ecosystem (16 tools registered, 16 verified), ACP + x402 job fulfillment across 31 live
+offerings (27 x402-payable, 21 auto-fulfilled with zero manual work), x402 payments on
+Base mainnet via Coinbase Developer Platform's hosted facilitator, wallet-connect
+portfolio, the Central Memory system, the standard MCP server (17 tools), and the
+Builder self-improvement pipeline.
 
-**In progress:** real auto-handlers for the remaining 8 ACP-only offerings
-(`forensics_deep`/`wallet_recon`/`deep_contract_audit`/etc. — the underlying tools like
-`wallet_trace` already work, nothing calls them automatically yet), a dashboard
+**In progress:** real auto-handlers for the remaining 4 ACP-only offerings
+(`forensics_deep`/`wallet_recon`/`whale_watch`/`partner_referral` — the underlying tools
+like `wallet_trace` already work, nothing calls them automatically yet), a dashboard
 reputation loop, richer social-sentiment intel beyond the current keyless aggregate.
 `app.py` is an unconnected placeholder stub (it doesn't call any real VAPE agent code) that
 exists only to satisfy this repo's synced Hugging Face Space's Gradio entry point — the
@@ -312,7 +312,7 @@ job.created ──► set-budget ──► job.funded ──► submit ──►
 | `submitted` | client | `acp client complete` / `reject` |
 | `completed` | — | escrow released to VAPE (terminal) |
 
-## Live offerings (29)
+## Live offerings (30)
 Each offering maps to a verified SKILLFORGE tool that produces **real data only**.
 
 | Offering | Price (USDC) | SLA | Backing tool |
@@ -331,20 +331,57 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | bulk_safety_bundle | 0.50 | 15m | token_safety × N |
 | deep_contract_audit | 1.00 | 30m | slither + aderyn + mythril |
 | forensics_deep | 2.00 | 60m | wallet_trace + contract_recon |
-| **bounty_deep_dive** | **50.00** | **24h** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review |
+| **bounty_deep_dive** | **1.00** | **async, no fixed SLA** | full recon + Slither + `agents/deep_dive_audit.py`'s frontier-tier LLM (Gemini 2.5 Pro, Groq fallback) source review — a submission-ready PoC with full technical detail. Supply an address (Solidity/EVM) or a GitHub owner/repo (any other language, e.g. Move/Sui, via `agents/external_audit.py`) to scope it to a specific bounty program. |
 
-### Market-data tools — 0.01 USDC each
-13 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+x402-payable at the worker (`GET /scan/<name>`, real USDC-on-Base settlement,
+no ACP job needed): `exploit_check`, `token_safety_check`, `liquidity_check`,
+`rug_pull_alert`, `market_intel`, `dossier_check`, `bounty_deep_dive`, plus
+four that closed a real ACP/x402 parity gap this round — each was ACP-listed
+since launch but had no worker route until now:
+- `deep_contract_audit` — `GET /scan/deep_contract_audit`, an address-only
+  alias of `bounty_deep_dive`'s exact same async dispatch pipeline.
+- `tx_decode` — `GET /scan/tx_decode?tx_hash=0x...`, a new synchronous
+  decode (real Etherscan tx/receipt/logs + 4byte.directory signature lookup,
+  no LLM).
+- `community_intel_broadcast` — `GET /scan/community_intel_broadcast`
+  (zero-input), serves the same real broadcast this offering's ACP handler
+  already reads (`agents/acp_fulfill.py::_community_broadcast()`).
+- `bulk_safety_bundle` — `GET /scan/bulk_safety_bundle?addresses=0x...,0x...`
+  (5-25 comma-separated addresses), a batch wrapper around
+  `token_safety_check`.
+
+Not x402-payable: `partner_referral`, `wallet_recon`, `whale_watch` (no real
+data source picked yet), and `forensics_deep` — ACP-only, hired as a real job.
+
+**New, x402-only offering (not yet in the 30-offering ACP catalog above):**
+`website_review` — `GET /scan/website_review?url=https://...`, $0.15,
+`worker/src/lib/websiteReview.ts`. A phishing/scam-page content read of a
+plain website URL (real scrape + frontier-LLM read for fake contract
+addresses, wallet-drainer patterns, brand/template mismatch, copy-paste
+scam-site boilerplate) — deliberately distinct from `bounty_deep_dive`'s
+smart-contract audit, per the original Phase 4 plan for this offering.
+Listing it as a real, sellable ACP offering (not just x402-payable) needs
+`acp provider create-offering` run on the persistent ACP host (same signer
+constraint as `scripts/acp-monitor/virtuals_evaluator.py` above) — until
+then it's discoverable via `agents/x402_directory_register.py`'s external
+listings and x402-payable directly, same as any other worker route.
+
+### Market-data tools
+15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
 tools carry real hosted logos; token tools carry the token's DexScreener logo.
-Every result is real data or an honest `{error}` — never fabricated.
+Every result is real data or an honest `{error}` — never fabricated. 14 are
+0.01 USDC each (13 backed by the keyless DefiLlama API, plus
+`prediction_market_odds` backed by the keyless Polymarket/Kalshi APIs);
+`wallet_pnl_deepdive` is priced separately since it's a richer, Alchemy +
+CoinGecko-backed deliverable (Base mainnet only).
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|
 | token_intel | 0.01 | 5m | `address`, `chain`, optional `slug` | Price + 0-1 confidence, oracle-derived token age, optional fees/unlocks/treasury, + logo |
 | token_chart | 0.01 | 5m | `address`, `chain`, `span` | Daily price series (default 30d) + logo |
 | protocol | 0.01 | 5m | `slug` | Full protocol record: per-chain TVL, category, audits, logo |
-| protocol_fees | 0.01 | 5m | `slug` | Real earned fees + revenue (24h/7d/30d) |
+| protocol_fees | 0.01 | 5m | `slug` | Real earned fees + revenue (24h/7d/30d/1y/all-time) |
 | unlocks | 0.01 | 5m | `slug` | Next upcoming token-unlock (dump-risk) event |
 | treasury | 0.01 | 5m | `slug` | Treasury composition + own-token fragility share |
 | chain_protocols | 0.01 | 5m | `chain` | Top protocols on a chain by TVL, each with logo |
@@ -354,6 +391,8 @@ Every result is real data or an honest `{error}` — never fabricated.
 | yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
+| **wallet_pnl_deepdive** | **0.25** | 5m | `address` | Real Base-mainnet balances (via Alchemy) + an unrealized-P&L estimate per holding (current value vs. first-acquisition price, via CoinGecko) |
+| prediction_market_odds | 0.01 | 5m | optional `limit` | Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume |
 
 ## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
@@ -364,10 +403,22 @@ Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
 
 This keeps cost ≈ 0 while idle; the model only wakes when escrow money is on the table.
 
-## Client side (hiring other agents) [WIP]
+## Client side (hiring other agents) [WIP / OK for self-hire]
 VAPE can also delegate: `acp browse "<service>"` → `acp client create-job` → `fund` →
 `complete`. Used to obtain specialist work (data, compute, content) when cheaper than
 doing it in-house.
+
+**Live since this round:** `scripts/acp-monitor/virtuals_evaluator.py` — VAPE acting as
+its own ACP client, hiring one of its own already-live selling offerings
+(`token_safety_check`/`liquidity_check`/`rug_pull_alert`/`exploit_check`/
+`dossier_check`) to evaluate a real Virtuals-Protocol-tagged token, at a fixed cadence
+of 1 real on-chain job every 4 hours. Same wallet on both sides of a genuine
+USDC-escrow job — proves the ACP payment rail end-to-end the same way
+`agents/data_agent.py` already proves x402 end-to-end, and turns every run into a real,
+verifiable evaluation of a live Virtuals project. Runs on the same persistent host as
+the listener/drain daemons above (never GitHub Actions — see the module's own
+docstring for why the `restricted`-policy signer this needs can't live in an ephemeral
+CI runner). Delegation to *other* (non-VAPE) specialist agents is still [WIP].
 
 ## CLI surface (reference)
 All actions run through the ACP CLI (`acp`), never ad-hoc Web3 scripts:
@@ -389,13 +440,20 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 20 of 28 offerings —
-  `scripts/acp-monitor/auto_fulfill.py` imports `agents/acp_fulfill.py`'s
-  `HANDLERS` dict directly, so the monitor auto-submits a real deliverable
-  the moment escrow funds. [TBD] the remaining 8 (`partner_referral`,
-  `wallet_recon`, `tx_decode`, `whale_watch`, `bulk_safety_bundle`,
-  `deep_contract_audit`, `forensics_deep`, and `bounty_deep_dive`'s 24h
-  async escalation) still need manual or human-in-the-loop fulfillment.
+- [OK] End-to-end deliverable automation for 21 of 31 offerings on the ACP
+  side — `scripts/acp-monitor/auto_fulfill.py` imports
+  `agents/acp_fulfill.py`'s `HANDLERS` dict directly, so the monitor
+  auto-submits a real deliverable the moment escrow funds. [TBD] the
+  remaining 8 (`partner_referral`, `wallet_recon`, `tx_decode`, `whale_watch`,
+  `bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, and
+  `bounty_deep_dive`'s async escalation) still need manual or
+  human-in-the-loop fulfillment on the ACP side specifically — but 3 of those
+  8 (`deep_contract_audit`, `tx_decode`, `bulk_safety_bundle`) are now
+  separately x402-payable directly at the worker, alongside
+  `community_intel_broadcast` (already in the auto-fulfilled 22 on the ACP
+  side, but until now had no worker route at all). See the offering table
+  above — this closes the real gap where all four were ACP-listed since
+  launch with no way to pay for them via x402.
 - [TBD] Dynamic pricing from demand + dedup against `intel/catalog/`.
 - [TBD] Client-side delegation for compute-heavy audits.
 
@@ -456,11 +514,12 @@ can call them directly; see component 6 below.
 
 ### How VAPE gets paid — two independent, real-money rails
 
-28 live offerings total: 20 are x402-payable (instant, no account needed), 8 need a
-real ACP job (manual/SKILLFORGE-tool-tier work no synchronous HTTP route can do in a
-few seconds). Both rails pay into the same wallet; neither is a demo — the x402 side
-runs on **Base mainnet** via Coinbase Developer Platform's hosted facilitator, real
-USDC, real settlement transactions.
+31 live offerings total (`data/reputation.json`'s `capabilities.offerings_live`): 27 are
+x402-payable (instant, no account needed), 4 need a real ACP job (manual/
+SKILLFORGE-tool-tier work no synchronous HTTP route can do in a few seconds). Both
+rails pay into the same wallet; neither is a demo — the x402 side runs on **Base
+mainnet** via Coinbase Developer Platform's hosted facilitator, real USDC, real
+settlement transactions.
 
 ```
 ┌─────────────────────────────┐        ┌──────────────────────────────────────┐
@@ -479,10 +538,10 @@ USDC, real settlement transactions.
 │      │                      │        │  settles on-chain                     │
 │      ▼                      │        │      │                                │
 │  escrow released to VAPE    │        │      ▼                                │
-│  (8 ACP-only offerings:     │        │  onAfterSettle logs real payer/tx_hash │
-│  wallet_recon, tx_decode,   │        │  to KV (lib/jobLog.ts) ──► live feed   │
-│  deep_contract_audit,       │        │  (docs/assets/x402feed.js), tx linked  │
-│  forensics_deep, etc.)      │        │  straight to Basescan                  │
+│  (4 ACP-only offerings:     │        │  onAfterSettle logs real payer/tx_hash │
+│  wallet_recon, whale_watch, │        │  to KV (lib/jobLog.ts) ──► live feed   │
+│  forensics_deep,            │        │  (docs/assets/x402feed.js), tx linked  │
+│  partner_referral)          │        │  straight to Basescan                  │
 └─────────────────────────────┘        └──────────────────────────────────────┘
               │                                          │
               └────────────────┬─────────────────────────┘
@@ -498,15 +557,22 @@ USDC, real settlement transactions.
      human buyer would use, capped at 48 hires/day (2/hour).
 ```
 
-The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
-$0.01-$0.10) + `bounty_deep_dive` ($50, async — pays, then dispatches
-`.github/workflows/deep-dive-bounty.yml` and returns immediately since a real
+The 27 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+$0.01-$0.10) + `bounty_deep_dive` ($1, async — pays, then dispatches either
+`.github/workflows/deep-dive-bounty.yml` (an on-chain address target — real
 Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
-Aderyn static AST analysis + frontier-model source review can't finish inside
-a Worker's request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
-`chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
-retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
-with no free equivalent). Advertised for discovery
+Aderyn static AST analysis + frontier-model source review) or
+`.github/workflows/external-bounty-audit.yml` (a GitHub owner/repo target,
+e.g. Move/Sui or any bounty program's own source repo — `agents/external_audit.py`),
+returning immediately either way since neither can finish inside a Worker's
+request window) + 5 more offerings closing the earlier ACP/x402 parity gap
+(`deep_contract_audit`, `tx_decode`, `community_intel_broadcast`,
+`bulk_safety_bundle`, and the new synchronous `website_review`) + 15 DefiLlama/
+market-data micro-tools ($0.01-$0.25 each — `token_intel`, `chain_overview`,
+`yields`, `stablecoins`, `bridges`, `wallet_pnl_deepdive`,
+`prediction_market_odds`, etc. — `derivatives` was retired 2026-07-14 when
+DefiLlama paywalled its overview/derivatives endpoint with no free equivalent).
+Advertised for discovery
 via the x402 Bazaar extension and a claimed listing on
 [402index.io](https://402index.io) (`/.well-known/402index-verify.txt` proves domain
 ownership). A handful of free, unpaid Alchemy-backed routes (`/portfolio`, `/nfts`,
@@ -523,17 +589,19 @@ component's state changes.
 |---|---|---|
 | `agents/run.py` | [OK] | Hourly bounty-cycle orchestration |
 | `agents/investigate.py` | [OK] | Deep-investigation engine, real recon+scoring, cross-chain |
-| `agents/scout.py` | [OK] | Bounty-radar triage + strategic briefing + real, cross-chain incident-forensics action |
+| `agents/scout.py` | [OK] | Bounty-radar triage (real bounty/incident track separation + VAPE-fit classification) + strategic briefing + real, cross-chain incident-forensics action |
+| `agents/bounty_ops.py` | [OK] | Bounty Ops: Grok-4.3 checklists + progress tracking for VAPE-fit live bounty programs |
 | `agents/security_sweep.py` | [OK] | Incident-forensics pipeline (any chain `EVM_CHAINS` supports, high-value leads act regardless of age) |
 | `agents/engagements.py` | [OK] | Real per-lead engagement status (never a fabricated outreach/signup) |
 | `agents/defillama.py` | [OK] | Full DefiLlama API surface: TVL, yields, fees, stablecoins, bridges, token intel |
+| `agents/codex_data.py` / `worker/src/lib/codex.ts` | [OK] | Codex.io GraphQL client (Python + TS port) — trending tokens, holders, wallet PnL. Live on-site via the worker's free `/virtuals-snapshot` + `/trending-base` routes (Virtuals Protocol panel + Trending on Base list); wallet PnL still needs the paid deep-dive offering wired. Launchpad tracking is subscription-only on Codex's side, not yet wired |
 | `agents/data_agent.py` | [OK] | DATA AGENT — VAPE's own paying customer, real x402 hires per investigation |
 | LLM tier | [OK] | Frontier model + multi-provider free fallback chain, see `agents/llm.py` |
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 20 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 28 total: 20 x402-payable, 8 ACP-only — see component 4 |
+| `worker/` (x402) | [OK] | 27 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 31 total: 27 x402-payable, 4 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
@@ -578,11 +646,31 @@ the hourly cycle.
 - **`token_scan.py`** [OK] — free Hunt console + paid x402 quick-check, same keyless checks as
   `investigate.py` minus the ones needing an optional Etherscan key. Ported field-for-field to
   `worker/src/scan.ts` and `docs/assets/app.js`, kept honest by `scan-parity.yml`.
-- **`scout.py`** [OK] — bounty-radar triage, numeric fit-score ranking, a frontier-model
-  strategic briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates
-  to `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports —
-  not just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
+- **`scout.py`** [OK] — bounty-radar triage. Every opportunity is classified into a real
+  `track` — `"incident"` (historical DeFiLlama hacks, a forensics lead — see the Threat Ledger)
+  or `"bounty"` (a real live program) — and every bounty-track entry additionally gets
+  `vapeFit`/`vapeFitReason` (does its real scope match Solidity/EVM `deep_dive_audit.py` or
+  Move/Sui `external_audit.py` — excluding web/mobile-only scope and post-incident
+  recovery/negotiation "bounties") and its own `bountyFitScore` (fit + reward + chain + freshness,
+  deliberately NOT the incident formula's raw-dollar-size weighting — this was the fix for a real
+  bug where a $58M post-incident recovery offer was outranking a $250k real smart-contract review
+  program). A capped, honest liveness recheck (`_recheck_liveness()`) HTTP-pings stale bounty URLs
+  so static seed data doesn't silently rot forever. Also runs the frontier-model strategic
+  briefing every cycle, and a real action step (`_act_on_incidents()`) that delegates to
+  `security_sweep.py`'s address-resolution pipeline on any chain `investigate.py` supports — not
+  just Base, and large leads (Kelp/Balancer V2/Matcha-scale) qualify regardless of age
   (`ATTACK_RESPONSE_HIGH_VALUE_USD_M`). Hourly via `scout.yml`.
+- **`bounty_ops.py`** [OK] — Bounty Ops: selects the top VAPE-fit live bounty programs from
+  `scout.py`'s classification and, for each one VAPE actively tracks, generates/refreshes a real
+  Grok-4.3 checklist (what to do, which of VAPE's two real tools to run, what to check against
+  `skillforge/memory/security_standards.json`'s real taxonomy) with a recurring, append-only
+  progress log — a checklist item's done-state is never reset by a later run. Cross-references
+  VAPE's own real audit output (`intel/audits/poc-reports/`, `hack-sweep-reports/`,
+  `external-bounties/`) by filename token overlap so a program links straight to VAPE's own
+  report the moment one exists. Output: `intel/bounty-radar/bounty-ops/<slug>.json` + `INDEX.md`.
+  Renders on the site as the Bounty Command Center's "Bounty Ops — VAPE-Fit, Live" panel
+  (`docs/assets/app.js::bounties()`), searchable client-side, separate from the Threat Ledger's
+  historical-incident feed. Runs after SCOUT hourly, via `scout.yml`.
 - **`engagements.py`** [OK] — revives `intel/engagements/`, replacing pre-repo fabricated seed
   data (a templated audit stub, cold-outreach emails to real hack victims — see
   `intel/archive/legacy-seed-engagements/README.md`) with a real per-lead status derived from
@@ -612,7 +700,11 @@ the hourly cycle.
   virtuals 4x/day, sentiment 2x/day, macro daily, the two follow-up checks weekly.
   `security_sweep.py` also writes `data/attack-feed.json` (real, dated incidents over a
   rolling 56-day/8-week window from the same hacks feed, powering the site's homepage
-  ticker + "Threat Ledger" section — see `docs/assets/attackfeed.js`) and, for any new
+  ticker + "Threat Ledger" section — see `docs/assets/attackfeed.js`). Each incident carries
+  its own real `source_url` when DeFiLlama's raw feed actually has one (the original
+  disclosure/article — `agents/data_fetchers.py::_incident_source_url()`, checked
+  defensively, never fabricated), separate from VAPE's own `analysis_report` link below —
+  the Threat Ledger links both independently when present. And, for any new
   Base-chain incident it can resolve a real on-chain address for via web search, runs
   `investigate.py`'s actual forensics pipeline against it (`attempt_incident_forensics()`)
   — never a fabricated address, honestly skipped when one can't be found.
@@ -647,7 +739,7 @@ the hourly cycle.
   small number of CAUTION-verdict entries already in `investigate.py`'s own ledger (real
   addresses from the free hourly auto-cycle) to `deep_dive_audit.py`'s full heavy tool
   suite (Slither/Halmos/Mythril/Aderyn + OCI Grok 4.3 frontier reasoning) — the same
-  pipeline paying x402/ACP buyers get for the $50 `bounty_deep_dive` offering, run here
+  pipeline paying x402/ACP buyers get for the $1 `bounty_deep_dive` offering, run here
   free against VAPE's own initiative (`engagement="sweep"`, reports land in
   `intel/audits/hack-sweep-reports/`, clearly labeled as non-paid). Own dedup state
   (`skillforge/memory/hack_sweep_state.json`) and daily schedule (`hack-sweep.yml`).
@@ -661,15 +753,20 @@ the hourly cycle.
   from what it doesn't). Deliberately does not invoke Slither/Mythril/Aderyn/Halmos —
   those are Solidity-specific and need either a live on-chain address or a compilable
   Foundry project; a genuinely Solidity on-chain target should go through
-  `deep_dive_audit.py` instead. For Move targets, also runs bounded formal verification
+  `deep_dive_audit.py` instead. Reachable two ways: manual `workflow_dispatch`
+  (`external-bounty-audit.yml`) for a deliberate scoped engagement, or the same
+  x402 `/scan/bounty_deep_dive` route as `deep_dive_audit.py` — supply an
+  `owner`+`repo` instead of an `address` and the worker dispatches this pipeline
+  instead (see docs/assets/hire.js's per-Bounty-Ops-program "Hire VAPE" flow).
+  For Move targets, also runs bounded formal verification
   (`agents/scaffold_move_target.py`): scaffolds a real local Move package from the
   target's own fetched source + real Move.toml, has the frontier LLM draft speculative
   Move Prover spec properties (mirrors `scaffold_foundry_target.py`'s Halmos-hypothesis
   pattern, since real external targets rarely ship existing spec blocks), and runs
   `sui-prover` against them if it's installed this run — deliberately not
   auto-installed in any workflow (no Linux release published; needs a from-source
-  build with Boogie + Z3). Manual `workflow_dispatch`
-  (`external-bounty-audit.yml`) per engagement, not scheduled.
+  build with Boogie + Z3). Not scheduled — dispatched per engagement (manually,
+  or via the x402 route above).
 - **`self_improve.py`** [OK] — finds one real, evidence-backed issue, priority order: (1)
   unaddressed CRITICAL/HIGH findings from the AI red-team tools below — closes the loop
   from "VAPE discovers it's vulnerable" to "VAPE proposes to fix itself" — then (2) pyflakes
@@ -758,7 +855,7 @@ and rebuildable) is the read-side complement: append-only JSONL stays the source
 the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
 
 ### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
-28 live offerings across two independent, real-money rails — see the payment-rails
+31 live offerings across two independent, real-money rails — see the payment-rails
 diagram above for the full flow. Both settle into the same wallet
 (`0xa1420293a7df49bc8380f543a1fe7b8d6f582879`); neither is a demo.
 
@@ -766,12 +863,14 @@ diagram above for the full flow. Both settle into the same wallet
 funds → completes at near-zero compute. 3 layers: persistent `acp events listen`
 daemon (zero LLM) → drain+triage loop (zero LLM) → reasoning handler that fires only
 on a real funded job. Escrow-backed on Base, `docs/ACP_PROTOCOL.md` is the full
-reference. *(Operational layer; runs on the host alongside the repo.)* 8 offerings are
-ACP-only (`wallet_recon`, `tx_decode`, `whale_watch`, `community_intel_broadcast`,
-`bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, `partner_referral`) —
-manual or SKILLFORGE-tool-tier work no synchronous HTTP route can complete in seconds.
+reference. *(Operational layer; runs on the host alongside the repo.)* Only 4
+offerings remain ACP-only (`wallet_recon`, `whale_watch`, `forensics_deep`,
+`partner_referral`) — manual or SKILLFORGE-tool-tier work no synchronous HTTP route
+can complete in seconds. `tx_decode`, `community_intel_broadcast`,
+`bulk_safety_bundle`, and `deep_contract_audit` used to be ACP-only too, until the
+x402/ACP parity work gave each a real x402 route (see component 4's x402 list below).
 
-**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 20
+**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 27
 routes with `@x402/hono` middleware against **Base mainnet** — real EIP-3009 signed
 authorizations, real on-chain settlement, not a testnet demo. Every request is
 routed through a real 50/50 hybrid split between VAPOR (our own facilitator,
@@ -803,12 +902,14 @@ the header that's supposed to confirm Bazaar indexing succeeded
 ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112),
 still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
 (`cdp-bazaar-check.yml`, weekly) check CDP's own discovery catalog directly
-instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($50) is the
-one async exception: pays via x402, then dispatches
-`.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`) and returns
-immediately, since a real Slither run + Halmos symbolic testing + Mythril
-symbolic-execution scan + Aderyn static AST analysis + frontier-model source
-review can't complete inside a Worker's request window. Symbolic testing
+instead of trusting a signal CDP doesn't send. The `bounty_deep_dive` route ($1) is the
+one async exception: pays via x402, then dispatches either
+`.github/workflows/deep-dive-bounty.yml` (`agents/deep_dive_audit.py`, address
+target) or `.github/workflows/external-bounty-audit.yml` (`agents/external_audit.py`,
+owner/repo target) and returns immediately, since a real Slither run + Halmos
+symbolic testing + Mythril symbolic-execution scan + Aderyn static AST analysis +
+frontier-model source review can't complete inside a Worker's request window.
+Symbolic testing
 (`agents/scaffold_foundry_target.py`) scaffolds the target's own verified
 source into a throwaway Foundry project, drafts a handful of Halmos `check_*`
 properties with the frontier LLM (explicitly labeled hypotheses, never
@@ -925,14 +1026,14 @@ while holding the line: **maximum capability, lowest possible compute, real data
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 28 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 31 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
-**20 of 28 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+**21 of 31 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
 `HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
 the x402 side) covers all of them:
 
@@ -944,13 +1045,17 @@ the x402 side) covers all of them:
 | exploit_check | 0.01 | `data_fetchers.get_contract_source` | [OK] auto, x402 (needs Etherscan key on runner) |
 | market_intel | 0.07 | `build_market_context()` | [OK] auto, x402 |
 | dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto, x402 |
-| bounty_deep_dive | 50.00 | `agents/deep_dive_audit.py` — real Slither + Halmos symbolic testing (`agents/scaffold_foundry_target.py`) + frontier-model source review, dispatched async via `deep-dive-bounty.yml` (x402 pays first, GH Actions job runs, report lands in `intel/audits/poc-reports/` within 24h) | [OK] auto (async), x402 |
-| community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
+| bounty_deep_dive | 1.00 | Address target: `agents/deep_dive_audit.py` — real Slither + Halmos symbolic testing (`agents/scaffold_foundry_target.py`) + frontier-model source review, dispatched async via `deep-dive-bounty.yml`. Owner/repo target (e.g. Move/Sui, or any bounty program's own source repo): `agents/external_audit.py`, dispatched async via `external-bounty-audit.yml`. Either way: x402 pays first, GH Actions job runs, a submission-ready PoC report lands in `intel/audits/poc-reports/` or `intel/audits/external-bounties/` as soon as it completes — no fixed turnaround. | [OK] auto (async), x402 |
+| community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` (x402: `worker/src/lib/communityBroadcast.ts`) | [OK] auto, x402 + ACP |
 | 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
-| deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
+| wallet_pnl_deepdive | 0.25 | x402 (`worker/src/dataHandlers.ts`): Alchemy balances + CoinGecko-priced unrealized-P&L estimate, Base only — rebuilt off Codex after its wallet-analytics fields turned out to be paid-plan-gated ("Not authorized: please upgrade your plan"). ACP path (`agents/acp_fulfill.py`/`agents/codex_data.py`) still calls Codex directly and hits that same gate — not yet ported to the Alchemy path. | [OK] auto, x402 · [TBD] ACP path still Codex-gated |
+| prediction_market_odds | 0.01 | `agents/prediction_markets.py` / `worker/src/lib/predictionMarkets.ts` (Polymarket + Kalshi: crypto/Base-relevant odds, ranked by volume) | [OK] auto, x402 |
+| deep_contract_audit | 1.00 | x402: address-only alias of `bounty_deep_dive`'s same real async audit pipeline (`worker/src/index.ts`'s `dispatchAddressAuditJob`) — Slither/Halmos/Mythril/Aderyn + frontier-model review, dispatched via `deep-dive-bounty.yml` | [OK] auto (async), x402 · [TBD] ACP path still manual (not in `acp_fulfill.py`'s `HANDLERS`) |
+| tx_decode | 0.05 | x402 (`worker/src/lib/txDecode.ts`): synchronous Etherscan + 4byte.directory decode | [OK] auto, x402 · [TBD] ACP path still manual |
+| bulk_safety_bundle | 0.50 | x402 (`worker/src/lib/bulkSafetyBundle.ts`): 5-25 addresses, one flat price | [OK] auto, x402 · [TBD] ACP path still manual |
 | forensics_deep | 2.00 | wallet_trace + contract_recon | [TBD] manual — wallet_trace itself is now [OK] Alchemy-backed and live-verified (PR #145); an auto-handler for this offering still isn't wired |
 | wallet_recon | 0.03 | base_rpc / wallet_trace | [TBD] manual, same gap as forensics_deep |
-| whale_watch / tx_decode / bulk_safety_bundle / partner_referral | 0.10 / 0.05 / 0.50 / 0.01 | mapped, monitor handler | [TBD] manual |
+| whale_watch / partner_referral | 0.10 / 0.01 | mapped, monitor handler | [TBD] manual, no x402 route either |
 
 ### Data flow (the loop that earns)
 ```
@@ -968,7 +1073,10 @@ ACP job.funded  ─► reasoning handler ─► acp_fulfill.fulfill(offering, re
 ### Next ACP steps
 1. [OK] shipped — **`scripts/acp-monitor/auto_fulfill.py`** imports `acp_fulfill.fulfill`/
    `HANDLERS` directly: the monitor calls it for all 21 auto-offerings, only escalating to
-   a human/manual path for the remaining 8. Most jobs settle with **zero LLM cost** (pure
+   a human/manual path for the remaining 10 on the ACP rail — several of those (`deep_contract_audit`,
+   `tx_decode`, `bulk_safety_bundle`) already auto-fulfill on the x402 rail since the
+   recent parity work gave each a real route there; only their ACP path still needs a
+   human/runner. Most jobs settle with **zero LLM cost** (pure
    tool output) — `dossier_check`/`community_intel_broadcast` are the only auto-offerings
    that spend an LLM call at all.
 2. [TBD] proposed — **Self-listing refresh from GitHub**: a workflow that regenerates
@@ -993,7 +1101,7 @@ all running in the **existing free GitHub Actions** (no new infra):
 
 | Agent | Role | Backing tools (already built) | Compute |
 |---|---|---|---|
-| **SCOUT** [OK] | Bounty-radar triage — ranks DeFiLlama hack/incident leads by numeric fit score (`agents/scout.py`); Immunefi/Sherlock have no stable public API so those stay static seed data until one exists (Code4rena wound down in May 2026, Immunefi absorbed its programs — its seed entries are historical only). Every cycle gets a "Strategic Briefing" (why the top opportunities matter, what VAPE capability each exercises, one next action) on top of the numeric table — insight is also ACTED on, not just narrated: `_act_on_incidents()` delegates to `agents/security_sweep.py`'s verified address-resolution pipeline to trigger a real `agents/investigate.py` investigation whenever an incident's address checks out, on any chain investigate.py supports (not just Base — large leads like Kelp/Balancer V2/Matcha also qualify regardless of age; see `ATTACK_RESPONSE_HIGH_VALUE_USD_M`), shown in the digest's "Actions Taken This Cycle" section | `intel/bounty-radar/*`, DeFiLlama hacks feed, the frontier model via `agents/llm.py`'s `FRONTIER_ORDER` (every cycle, not gated on new entries), `agents/security_sweep.py`'s incident-forensics pipeline | hourly (`.github/workflows/scout.yml`) |
+| **SCOUT** [OK] | Bounty-radar triage — every opportunity gets a real `track` (`"incident"`: DeFiLlama hack leads, forensics-only, shown in the Threat Ledger; `"bounty"`: a real live program) plus, for bounty-track entries, `vapeFit`/`vapeFitReason` (Solidity/EVM `deep_dive_audit.py` or Move/Sui `external_audit.py` scope only — excludes web/mobile-only and post-incident recovery/negotiation "bounties") and a dedicated `bountyFitScore` (fit + reward + chain + freshness — never raw dollar size, which is exactly what let a $58M recovery offer used to outrank a real $250k program). A capped, honest HTTP liveness recheck keeps static seed entries from silently going stale forever (`agents/scout.py`); Immunefi/Sherlock have no stable public API so those stay static seed data until one exists (Code4rena wound down in May 2026, Immunefi absorbed its programs — its seed entries are historical only). Every cycle gets a "Strategic Briefing" on top of the incident table — insight is also ACTED on, not just narrated: `_act_on_incidents()` delegates to `agents/security_sweep.py`'s verified address-resolution pipeline to trigger a real `agents/investigate.py` investigation whenever an incident's address checks out, on any chain investigate.py supports (not just Base — large leads like Kelp/Balancer V2/Matcha also qualify regardless of age; see `ATTACK_RESPONSE_HIGH_VALUE_USD_M`), shown in the digest's "Actions Taken This Cycle" section. **BOUNTY OPS** [OK] (`agents/bounty_ops.py`) then selects the top VAPE-fit bounty programs and maintains a real, Grok-4.3-generated, append-only-progress checklist per program VAPE tracks — rendered on the site as its own classified, searchable panel, separate from historical incidents | `intel/bounty-radar/*`, DeFiLlama hacks feed, the frontier model via `agents/llm.py`'s `FRONTIER_ORDER` (every cycle, not gated on new entries), `agents/security_sweep.py`'s incident-forensics pipeline | hourly (`.github/workflows/scout.yml`) |
 | **LEDGER** [TBD] | Wallet/fund-flow forensics — chain-of-custody graphs | wallet_trace (Alchemy-backed), base_rpc | on-demand |
 | **ORACLE** [OK] | Market-anomaly watcher — TVL outflow / depeg / gas-spike / fresh-exploit / extreme-F&G alerts, published to `intel/broadcasts/` (`agents/broadcast.py`) | `data_fetchers.build_market_context()`'s rule-based `anomaly_flags` | every 6h (`.github/workflows/broadcast.yml`), fixed numeric thresholds |
 | **CURATOR** [OK] | SKILLFORGE — two real halves: `synthesize.py` distills harvested intel into markdown playbooks; `skillforge_build.py` proposes AND builds real multi-file tools grounded in tool-registry gaps + Memory findings/lessons, opening a PR for review — both go through `agents/llm.py`'s `FRONTIER_ORDER` (Grok 4.1 Fast first, free fallbacks after) | harvest/Memory + `FRONTIER_ORDER` + `builder.py`'s `generate_project()` | daily PR (synthesize) / 2x-daily PR (build) |
@@ -1093,6 +1201,34 @@ its key is unset, so this table is "what's wired," not "what you personally have
   OCI Grok's own daily spend cap (`OCI_GROK_DAILY_SPEND_CAP_USD`, default
   $10 — see `DEFAULT_OCI_GROK_DAILY_SPEND_CAP_USD`) reflects this much
   higher-volume role, sized independently of xai_1's own $3 default.
+- **`search=True` opts into xAI's real Live Search** (`agents/llm.py`'s
+  `ask()`/`ask_frontier()`/`ask_oci_grok()`/`ask_vertex_candidate()`/
+  `ask_oci_grok_frontier()` all accept it; only takes effect once/if a call
+  actually reaches the `xai_1` provider — a real, billed-per-search API
+  feature, not the pre-fetched Tavily/Brave snippet grounding most call
+  sites also carry as backup). Added 2026-07-20 after a real gap: per-
+  incident threat analyses (`agents/hack_agent.py`) were grounded only in
+  one thin pre-fetched search and reported "no public writeups found" for
+  an incident a direct Grok query resolved in full (tx hash, attacker
+  addresses, root cause). Rolled out the same day to every other narrative/
+  report-generating call site in the repo: `agents/intel_common.py`'s
+  shared `grok_analysis()` (covers `broadcast.py`, `bug_bounty_intel.py`,
+  `mainnet_patch_check.py`, `skillforge/toolcheck.py` with no per-file
+  change), the five intel sweeps (`security_sweep.py`, `base_sweep.py`,
+  `sentiment_sweep.py`, `macro_sweep.py`, `virtuals_sweep.py`), the live
+  investigation expert assessment (`investigate.py`) and bounty-radar
+  strategic briefing (`scout.py`), the audit narratives
+  (`deep_dive_audit.py`, `external_audit.py`, `acp_fulfill.py`'s quick
+  review), `bounty_ops.py`'s checklist generator, `skillforge_build.py`'s
+  build proposer, `agents/run.py`'s main bounty-report generator
+  (`ask_llm()` → `VAPE_REPORT_SYSTEM`), and `agents/redteam.py`'s
+  prompt-injection test (kept in lockstep with `run.py`'s real call so the
+  test still exercises production's actual capability). Excluded on
+  purpose: pure code-generation/code-review call sites
+  (`code_review.py`, `redteam_builder.py`, `scaffold_move_target.py`,
+  `scaffold_foundry_target.py`, `run.py`'s self-repo-review pass) and
+  `skillforge/synthesize.py`'s memory-only skill distillation, none of
+  which are meant to reach beyond the exact inputs they're given.
 
 ### GitHub Models — the natural unlock
 CI already runs in GitHub. **GitHub Models** gives free OpenAI-compatible inference tied to
@@ -1102,7 +1238,8 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 20 of 28 offerings auto-fulfill.
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 31 offerings auto-fulfill
+   on ACP; 27 total are x402-payable (see the offerings table above).
 2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/
@@ -1356,8 +1493,8 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ---
 
 ## E. x402 payment worker (pay-per-call hiring)
-`worker/` is a Cloudflare Worker gating 20 of VAPE's 28 offerings behind Coinbase's x402
-HTTP payment protocol (the other 8 need the SKILLFORGE tool tier — hire those via a real
+`worker/` is a Cloudflare Worker gating 27 of VAPE's 31 offerings behind Coinbase's x402
+HTTP payment protocol (the other 4 need the SKILLFORGE tool tier — hire those via a real
 ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
 Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was
 proven first on Base Sepolia + the free public facilitator before that switch.
@@ -2191,6 +2328,8 @@ protocol — it's a report. These make this one keep working after today:
   LICENSE
   README.md
   app.py
+  image-23.jpg
+  image-33.jpg
   package-lock.json
   package.json
   pytest.ini
@@ -2199,6 +2338,7 @@ protocol — it's a report. These make this one keep working after today:
     _build_pr.py
     acp_fulfill.py
     base_sweep.py
+    bounty_ops.py
     broadcast.py
     bug_bounty_intel.py
     build_intel_index.py
@@ -2206,6 +2346,8 @@ protocol — it's a report. These make this one keep working after today:
     build_request.py
     builder.py
     cdp_bazaar_check.py
+    code_review.py
+    codex_data.py
     critic.py
     data_agent.py
     data_agent_vapor.py
@@ -2223,9 +2365,11 @@ protocol — it's a report. These make this one keep working after today:
     llm.py
     macro_sweep.py
     mainnet_patch_check.py
+    prediction_markets.py
     publish_reputation.py
     redteam.py
     redteam_builder.py
+    repo_hygiene.py
     report_format.py
     report_pdf.py
     requirements.txt
@@ -2238,16 +2382,22 @@ protocol — it's a report. These make this one keep working after today:
     self_improve.py
     sentiment_sweep.py
     skillforge_build.py
+    task_feed.py
     token_scan.py
     vape_system.md
     virtuals_sweep.py
     x402_directory_register.py
     x402_index_claim.py
     x402_ledger_backfill.py
+  build-requests/
+    skillforge-arbitrum-oracle-manip-tracer-20260719/
+    skillforge-defillama-tvl-and-price-data-scraper-20260721/
   data/
     attack-feed.json
     intel-index.json
     reputation.json
+    task-feed.json
+    token_database.jsonl
     finetune/
   docs/
     ACP_PROTOCOL.md
@@ -2283,117 +2433,6 @@ protocol — it's a report. These make this one keep working after today:
     vape_mcp.py
   reports/
     bounty
-    bounty_report_20260623_024349.md
-    bounty_report_20260623_024902.md
-    bounty_report_20260623_025252.md
-    bounty_report_20260623_025952.md
-    bounty_report_20260623_030536.md
-    bounty_report_20260623_030940.md
-    bounty_report_20260623_034750.md
-    bounty_report_20260623_035151.md
-    bounty_report_20260623_035505.md
-    bounty_report_20260623_035934.md
-    bounty_report_20260623_040313.md
-    bounty_report_20260623_050338.md
-    bounty_report_20260623_094227.md
-    bounty_report_20260623_123417.md
-    bounty_report_20260623_154954.md
-    bounty_report_20260623_173739.md
-    bounty_report_20260623_175749.md
-    bounty_report_20260623_180359.md
-    bounty_report_20260623_183449.md
-    bounty_report_20260623_183859.md
-    bounty_report_20260623_184134.md
-    bounty_report_20260623_184739.md
-    bounty_report_20260623_190052.md
-    bounty_report_20260623_190402.md
-    bounty_report_20260623_190702.md
-    bounty_report_20260623_194634.md
-    bounty_report_20260623_195911.md
-    bounty_report_20260623_200105.md
-    bounty_report_20260623_200514.md
-    bounty_report_20260623_200815.md
-    bounty_report_20260623_201133.md
-    bounty_report_20260623_201715.md
-    bounty_report_20260623_203452.md
-    bounty_report_20260623_203730.md
-    bounty_report_20260623_203935.md
-    bounty_report_20260623_204224.md
-    bounty_report_20260623_204452.md
-    bounty_report_20260623_204714.md
-    bounty_report_20260623_205008.md
-    bounty_report_20260623_205234.md
-    bounty_report_20260623_205439.md
-    bounty_report_20260623_205652.md
-    bounty_report_20260623_210016.md
-    bounty_report_20260623_210220.md
-    bounty_report_20260623_210833.md
-    bounty_report_20260623_211113.md
-    bounty_report_20260623_211326.md
-    bounty_report_20260623_212320.md
-    bounty_report_20260623_212614.md
-    bounty_report_20260623_212906.md
-    bounty_report_20260623_213712.md
-    bounty_report_20260623_215059.md
-    bounty_report_20260623_215405.md
-    bounty_report_20260623_215712.md
-    bounty_report_20260623_220054.md
-    bounty_report_20260623_220506.md
-    bounty_report_20260623_220745.md
-    bounty_report_20260623_221008.md
-    bounty_report_20260623_221227.md
-    bounty_report_20260623_221448.md
-    bounty_report_20260623_221506.md
-    bounty_report_20260623_221846.md
-    bounty_report_20260623_235915.md
-    bounty_report_20260624_041901.md
-    bounty_report_20260624_082303.md
-    bounty_report_20260624_114608.md
-    bounty_report_20260624_143431.md
-    bounty_report_20260624_170637.md
-    bounty_report_20260624_194833.md
-    bounty_report_20260624_212425.md
-    bounty_report_20260624_230504.md
-    bounty_report_20260624_230914.md
-    bounty_report_20260625_001013.md
-    bounty_report_20260625_001236.md
-    bounty_report_20260625_034221.md
-    bounty_report_20260625_074436.md
-    bounty_report_20260625_104402.md
-    bounty_report_20260625_132057.md
-    bounty_report_20260625_162646.md
-    bounty_report_20260625_190545.md
-    bounty_report_20260625_214445.md
-    bounty_report_20260625_231945.md
-    bounty_report_20260626_035258.md
-    bounty_report_20260626_053946.md
-    bounty_report_20260626_054334.md
-    bounty_report_20260626_075550.md
-    bounty_report_20260626_105416.md
-    bounty_report_20260626_131328.md
-    bounty_report_20260626_161903.md
-    bounty_report_20260626_185310.md
-    bounty_report_20260626_204751.md
-    bounty_report_20260626_221540.md
-    bounty_report_20260627_000951.md
-    bounty_report_20260627_045446.md
-    bounty_report_20260627_075042.md
-    bounty_report_20260627_101052.md
-    bounty_report_20260627_120956.md
-    bounty_report_20260627_144323.md
-    bounty_report_20260627_160608.md
-    bounty_report_20260627_180520.md
-    bounty_report_20260627_200936.md
-    bounty_report_20260628_000416.md
-    bounty_report_20260628_051812.md
-    bounty_report_20260628_085431.md
-    bounty_report_20260628_110855.md
-    bounty_report_20260628_134935.md
-    bounty_report_20260628_151847.md
-    bounty_report_20260628_171403.md
-    bounty_report_20260628_192238.md
-    bounty_report_20260628_210323.md
-    bounty_report_20260628_230351.md
     bounty_report_20260629_040514.md
     bounty_report_20260629_092708.md
     bounty_report_20260629_140548.md
@@ -2489,103 +2528,70 @@ protocol — it's a report. These make this one keep working after today:
     bounty_report_20260712_215217.md
     bounty_report_20260713_102813.md
     bounty_report_20260717_215907.md
-    redteam_20260706_155817.md
-    redteam_20260707_152312.md
-    redteam_20260708_144527.md
-    redteam_20260709_153930.md
-    redteam_20260710_150842.md
-    redteam_20260711_135933.md
-    redteam_20260712_140201.md
+    bounty_report_20260720_235647.md
+    bounty_report_20260721_031639.md
+    bounty_report_20260721_062903.md
+    bounty_report_20260721_114703.md
+    bounty_report_20260721_135327.md
+    bounty_report_20260721_172136.md
+    bounty_report_20260721_192443.md
+    bounty_report_20260721_211100.md
+    bounty_report_20260721_225822.md
+    bounty_report_20260722_000021.md
+    bounty_report_20260722_135802.md
+    bounty_report_20260722_172110.md
+    bounty_report_20260722_210943.md
+    bounty_report_20260722_230520.md
+    bounty_report_20260723_025049.md
+    bounty_report_20260723_111122.md
+    bounty_report_20260723_140302.md
+    bounty_report_20260723_181325.md
+    bounty_report_20260723_220502.md
+    bounty_report_20260724_000113.md
+    bounty_report_20260724_073209.md
+    bounty_report_20260724_101922.md
+    bounty_report_20260724_121953.md
+    bounty_report_20260724_164507.md
+    bounty_report_20260724_181844.md
+    bounty_report_20260724_220530.md
+    bounty_report_20260725_000440.md
+    bounty_report_20260726_030708.md
+    bounty_report_20260726_042708.md
     redteam_20260713_151835.md
     redteam_20260715_141723.md
     redteam_20260716_143027.md
     redteam_20260717_141040.md
     redteam_20260718_135456.md
+    redteam_20260719_135828.md
+    redteam_20260720_143645.md
+    redteam_20260721_143106.md
+    redteam_20260722_143157.md
+    redteam_20260723_143908.md
+    redteam_20260724_141820.md
+    redteam_20260725_140732.md
     redteam_builder_20260715_141741.md
     redteam_builder_20260716_143044.md
     redteam_builder_20260717_141059.md
     redteam_builder_20260718_135509.md
-    redteam_deepteam_20260706_161702.md
-    redteam_deepteam_20260707_154219.md
-    redteam_deepteam_20260708_151608.md
-    redteam_deepteam_20260709_155450.md
-    redteam_deepteam_20260710_152923.md
-    redteam_deepteam_20260711_142016.md
-    redteam_deepteam_20260712_142447.md
+    redteam_builder_20260719_135849.md
+    redteam_builder_20260720_143714.md
+    redteam_builder_20260721_143119.md
+    redteam_builder_20260722_143208.md
+    redteam_builder_20260723_143915.md
+    redteam_builder_20260724_141833.md
+    redteam_builder_20260725_140735.md
     redteam_deepteam_20260713_154426.md
     redteam_deepteam_20260715_144455.md
     redteam_deepteam_20260716_145643.md
     redteam_deepteam_20260717_142909.md
     redteam_deepteam_20260718_141823.md
-    repo_review_20260706_000802.md
-    repo_review_20260706_051307.md
-    repo_review_20260706_102540.md
-    repo_review_20260706_142702.md
-    repo_review_20260706_174457.md
-    repo_review_20260706_195940.md
-    repo_review_20260706_214420.md
-    repo_review_20260707_033230.md
-    repo_review_20260707_074028.md
-    repo_review_20260707_105834.md
-    repo_review_20260707_132434.md
-    repo_review_20260707_163251.md
-    repo_review_20260707_190351.md
-    repo_review_20260707_212547.md
-    repo_review_20260707_230246.md
-    repo_review_20260708_024820.md
-    repo_review_20260708_055329.md
-    repo_review_20260708_083048.md
-    repo_review_20260708_110608.md
-    repo_review_20260708_141209.md
-    repo_review_20260708_164015.md
-    repo_review_20260708_181851.md
-    repo_review_20260708_202140.md
-    repo_review_20260708_220753.md
-    repo_review_20260709_001146.md
-    repo_review_20260709_045421.md
-    repo_review_20260709_083917.md
-    repo_review_20260709_120840.md
-    repo_review_20260709_155650.md
-    repo_review_20260709_180141.md
-    repo_review_20260709_204732.md
-    repo_review_20260709_222814.md
-    repo_review_20260710_000541.md
-    repo_review_20260710_045231.md
-    repo_review_20260710_082328.md
-    repo_review_20260710_115252.md
-    repo_review_20260710_142915.md
-    repo_review_20260710_165710.md
-    repo_review_20260710_182541.md
-    repo_review_20260710_202433.md
-    repo_review_20260710_220506.md
-    repo_review_20260710_235908.md
-    repo_review_20260711_033243.md
-    repo_review_20260711_061415.md
-    repo_review_20260711_084809.md
-    repo_review_20260711_101604.md
-    repo_review_20260711_115319.md
-    repo_review_20260711_132157.md
-    repo_review_20260711_145523.md
-    repo_review_20260711_155745.md
-    repo_review_20260711_170648.md
-    repo_review_20260711_190524.md
-    repo_review_20260711_205016.md
-    repo_review_20260711_215124.md
-    repo_review_20260711_225029.md
-    repo_review_20260711_235618.md
-    repo_review_20260712_032139.md
-    repo_review_20260712_063355.md
-    repo_review_20260712_090252.md
-    repo_review_20260712_111414.md
-    repo_review_20260712_132233.md
-    repo_review_20260712_145806.md
-    repo_review_20260712_160427.md
-    repo_review_20260712_175926.md
-    repo_review_20260712_191806.md
-    repo_review_20260712_205110.md
-    repo_review_20260712_215217.md
-    repo_review_20260712_225115.md
-    repo_review_20260712_235556.md
+    redteam_deepteam_20260719_142217.md
+    redteam_deepteam_20260720_150725.md
+    redteam_deepteam_20260721_150055.md
+    redteam_deepteam_20260722_150111.md
+    redteam_deepteam_20260723_150443.md
+    redteam_deepteam_20260724_145036.md
+    redteam_deepteam_20260725_142826.md
     repo_review_20260713_032023.md
     repo_review_20260713_065403.md
     repo_review_20260713_132447.md
@@ -2634,32 +2640,94 @@ protocol — it's a report. These make this one keep working after today:
     repo_review_20260718_235509.md
     repo_review_20260719_024954.md
     repo_review_20260719_055516.md
-    self_improve_20260706_155110.md
-    self_improve_20260707_145511.md
-    self_improve_20260708_143315.md
-    self_improve_20260709_152833.md
-    self_improve_20260710_144537.md
-    self_improve_20260711_134424.md
-    self_improve_20260712_134517.md
+    repo_review_20260719_082105.md
+    repo_review_20260719_103607.md
+    repo_review_20260719_115936.md
+    repo_review_20260719_134443.md
+    repo_review_20260719_145704.md
+    repo_review_20260719_160134.md
+    repo_review_20260719_175748.md
+    repo_review_20260719_191722.md
+    repo_review_20260719_205121.md
+    repo_review_20260719_215433.md
+    repo_review_20260719_225407.md
+    repo_review_20260719_235855.md
+    repo_review_20260720_035414.md
+    repo_review_20260720_064801.md
+    repo_review_20260720_101305.md
+    repo_review_20260720_130744.md
+    repo_review_20260720_155153.md
+    repo_review_20260720_180450.md
+    repo_review_20260720_202223.md
+    repo_review_20260720_220045.md
+    repo_review_20260720_235633.md
+    repo_review_20260721_031636.md
+    repo_review_20260721_062859.md
+    repo_review_20260721_092718.md
+    repo_review_20260721_114658.md
+    repo_review_20260721_135322.md
+    repo_review_20260721_154506.md
+    repo_review_20260721_172134.md
+    repo_review_20260721_192449.md
+    repo_review_20260721_211059.md
+    repo_review_20260721_225823.md
+    repo_review_20260722_000014.md
+    repo_review_20260722_033538.md
+    repo_review_20260722_062917.md
+    repo_review_20260722_092716.md
+    repo_review_20260722_114838.md
+    repo_review_20260722_135800.md
+    repo_review_20260722_154632.md
+    repo_review_20260722_172106.md
+    repo_review_20260722_192204.md
+    repo_review_20260722_210934.md
+    repo_review_20260722_230508.md
+    repo_review_20260723_055552.md
+    repo_review_20260723_083439.md
+    repo_review_20260723_111117.md
+    repo_review_20260723_140258.md
+    repo_review_20260723_162735.md
+    repo_review_20260723_181322.md
+    repo_review_20260723_201323.md
+    repo_review_20260723_220459.md
+    repo_review_20260724_000113.md
+    repo_review_20260724_041530.md
+    repo_review_20260724_073208.md
+    repo_review_20260724_101923.md
+    repo_review_20260724_121951.md
+    repo_review_20260724_145606.md
+    repo_review_20260724_164507.md
+    repo_review_20260724_181844.md
+    repo_review_20260724_202049.md
+    repo_review_20260724_220521.md
+    repo_review_20260725_000439.md
+    repo_review_20260725_041143.md
+    repo_review_20260725_071831.md
+    repo_review_20260725_094849.md
+    repo_review_20260725_111125.md
+    repo_review_20260725_133601.md
+    repo_review_20260725_150404.md
+    repo_review_20260725_165916.md
+    repo_review_20260725_180242.md
+    repo_review_20260725_201121.md
+    repo_review_20260725_215719.md
+    repo_review_20260725_225948.md
+    repo_review_20260726_000729.md
+    repo_review_20260726_010908.md
+    repo_review_20260726_030707.md
+    repo_review_20260726_042708.md
     self_improve_20260713_145315.md
     self_improve_20260715_140049.md
     self_improve_20260716_141219.md
     self_improve_20260717_135558.md
     self_improve_20260718_133920.md
-    skillforge_build_20260706_124227.md
-    skillforge_build_20260706_221017.md
-    skillforge_build_20260707_114334.md
-    skillforge_build_20260707_220834.md
-    skillforge_build_20260708_110023.md
-    skillforge_build_20260708_220156.md
-    skillforge_build_20260709_115325.md
-    skillforge_build_20260709_221803.md
-    skillforge_build_20260710_114654.md
-    skillforge_build_20260710_215709.md
-    skillforge_build_20260711_101150.md
-    skillforge_build_20260711_214353.md
-    skillforge_build_20260712_102300.md
-    skillforge_build_20260712_214339.md
+    self_improve_20260719_134143.md
+    self_improve_20260720_142549.md
+    self_improve_20260721_141125.md
+    self_improve_20260722_141426.md
+    self_improve_20260723_142347.md
+    self_improve_20260724_140218.md
+    self_improve_20260725_135306.md
     skillforge_build_20260713_115719.md
     skillforge_build_20260715_215455.md
     skillforge_build_20260716_105429.md
@@ -2668,6 +2736,20 @@ protocol — it's a report. These make this one keep working after today:
     skillforge_build_20260717_214738.md
     skillforge_build_20260718_101516.md
     skillforge_build_20260718_214505.md
+    skillforge_build_20260719_102320.md
+    skillforge_build_20260719_214654.md
+    skillforge_build_20260720_114059.md
+    skillforge_build_20260720_215704.md
+    skillforge_build_20260721_110355.md
+    skillforge_build_20260721_220040.md
+    skillforge_build_20260722_110435.md
+    skillforge_build_20260722_220100.md
+    skillforge_build_20260723_110557.md
+    skillforge_build_20260723_220101.md
+    skillforge_build_20260724_105928.md
+    skillforge_build_20260724_220112.md
+    skillforge_build_20260725_102330.md
+    skillforge_build_20260725_215058.md
   scripts/
     INTEL_RUNBOOK.md
     REBUILD_STATE.md
@@ -2677,7 +2759,10 @@ protocol — it's a report. These make this one keep working after today:
     build_pr_history_dataset.py
     build_repo_digest.py
     check_site_versions.py
+    ci_commit_push.sh
+    code_lint.py
     convert_dataset_vertex.py
+    git_merge_json_state.py
     intel_sync.sh
     repo_stats.py
     security_lint.py
@@ -2699,17 +2784,27 @@ protocol — it's a report. These make this one keep working after today:
     conftest.py
     test_acp_defillama.py
     test_archive_reports.py
+    test_bounty_ops.py
     test_build_external_corpus.py
     test_build_ledger_wiring.py
     test_build_pr_history_dataset.py
     test_build_repo_digest.py
     test_builder_validate_security.py
     test_cdp_bazaar_check.py
+    test_code_lint.py
+    test_code_review.py
+    test_codex_data.py
     test_convert_dataset_vertex.py
     test_critic.py
     test_data_agent.py
+    test_data_agent_catalog.py
+    test_data_agent_growth.py
+    test_data_fetchers_coingecko_contract.py
+    test_data_fetchers_hack_feed.py
     test_deep_dive_aderyn.py
+    test_deep_dive_exploit_poc.py
     test_deep_dive_mythril.py
+    test_deep_dive_slither.py
     test_deep_dive_symbolic.py
     test_defillama.py
     test_engagements.py
@@ -2717,25 +2812,44 @@ protocol — it's a report. These make this one keep working after today:
     test_external_audit.py
     test_findings_chain.py
     test_finetune_dataset.py
+    test_git_merge_json_state.py
     test_hack_agent.py
     test_hack_sweep.py
     test_intel_common.py
+    test_investigate_auto_target.py
+    test_investigate_executive_summary.py
     test_investigate_expert_assessment.py
+    test_investigate_holder_concentration.py
+    test_investigate_onchain_presence.py
+    test_investigate_privileged_functions.py
+    test_investigate_project_narrative.py
+    test_investigate_report_sections.py
+    test_investigate_risk_breakdown.py
     test_investigate_sanitize.py
     test_investigate_score.py
     test_llm.py
     test_llm_critical_wiring.py
     test_memory_graph.py
+    test_prediction_markets.py
     test_redteam.py
     test_redteam_builder.py
+    test_repo_hygiene.py
+    test_research_ssrf.py
+    test_run_ask_llm.py
     test_run_reconcile.py
     test_scaffold_foundry_target.py
     test_scaffold_move_target.py
+    test_scout_bounty_classification.py
     test_scout_strategic_briefing.py
     test_security_lint.py
     test_security_standards_knowledge_base.py
     test_security_sweep.py
     test_skillforge_build_bounty_signal.py
+    test_task_feed.py
+    test_token_scan_holder_concentration.py
+    test_virtuals_evaluator.py
+    test_x402_directory_register.py
+    test_x402_index_claim_status.py
   training/
     eval_candidate.py
     requirements.txt
@@ -2791,6 +2905,47 @@ TVL/gas movement, not eyeballed. One bounded web search adds qualitative
 ecosystem news (upgrades, launches) the numeric feeds can't see.
 
 Usage: python agents/base_sweep.py
+
+### agents/bounty_ops.py
+
+BOUNTY OPS — Task #197: VAPE's classified, checklist-tracked live bounty-ops
+system, built directly on top of agents/scout.py's track/vapeFit fix (Task
+#196): opportunities.json now distinguishes real live bounty PROGRAMS
+(track="bounty") that genuinely match VAPE's own tooling (Solidity/EVM via
+agents/deep_dive_audit.py, or Move/Sui via agents/external_audit.py) from
+historical DeFiLlama hack INCIDENTS (track="incident", a separate forensics
+workflow with its own home — the Threat Ledger).
+
+This module selects the top VAPE-fit bounty programs and, for each one VAPE
+is actually tracking, generates/refreshes a real checklist via Grok 4.3 —
+what to actually do, what VAPE tooling to run, what to check against
+skillforge/memory/security_standards.json's real vulnerability taxonomy —
+and maintains a recurring progress log. Never a fabricated task list: on
+any LLM failure the entry is written with an empty checklist and honestly
+marked so, exactly like every other LLM call in this repo
+(agents/scout.py::_strategic_briefing, agents/external_audit.py, etc).
+
+Cross-references VAPE's own real audit output (intel/audits/poc-reports/,
+intel/audits/hack-sweep-reports/, intel/audits/external-bounties/) by
+filename token overlap, so a bounty-ops entry links straight to VAPE's real
+report the moment one exists — never a fabricated "in progress" claim.
+
+Idempotent, append-only-on-change (same discipline as agents/engagements.py):
+- A checklist item's `done` state, once set, is NEVER reset by a later run —
+  only genuinely new items (no existing item's text is a close match) get
+  appended.
+- The checklist TEXT itself is only regenerated (a real LLM call) if the
+  program has no checklist yet, or its last generation is more than
+  CHECKLIST_REFRESH_DAYS old — recurring, but bounded, matching the "no
+  cheap LLM-cost churn on every run" pattern.
+- progress_log gains a new entry only when something actually changed this
+  run (new program tracked, checklist regenerated, VAPE report newly
+  linked) — never a duplicate no-op entry.
+
+Output: intel/bounty-radar/bounty-ops/<slug>.json per tracked program +
+intel/bounty-radar/bounty-ops/INDEX.md (human rollup, regenerated each run).
+
+Usage: python -m agents.bounty_ops
 
 ### agents/broadcast.py
 
@@ -2964,6 +3119,84 @@ have no support in the actual x402 protocol spec
 (coinbase/x402's docs/extensions/bazaar.mdx) — so this script does not
 attempt or recommend any wallet-custody change.
 
+### agents/code_review.py
+
+VAPE Reviewer — an in-house, security-forward automated PR review bot.
+
+CodeRabbit already reviews every PR on this repo, but it's a third-party
+SaaS app with no knowledge of VAPE's own design laws (never fabricate data,
+honest {error} degradation, x402 payment-verification correctness,
+untrusted-data framing for anything an LLM here consumes). This fills that
+specific gap: turn a PR's real diff into a posted review comment, combining
+a fast deterministic security-pattern pass (scripts/code_lint.py) with an
+LLM pass grounded in the actual diff plus this repo's own real security
+posture — not a generic checklist.
+
+Same design laws as every other agent here:
+- Advisory only, never a merge gate (matches how this repo already
+  describes CodeRabbit itself — see docs/SECURITY_PROTOCOL.md).
+- Never auto-applies a fix. agents/self_improve.py already owns that job,
+  gated behind its own PR + human review. This module only reports.
+- Never checks out or executes the PR's own code. Every read here — the
+  diff, each changed file's content — comes from GitHub's REST API via
+  skillforge/mcp.py's GitHubMCPWrapper (get_pr_files/get_pr_head_sha/
+  read_file), which is text-only. The workflow that calls this
+  (.github/workflows/vape-reviewer.yml) triggers on `pull_request`, never
+  `pull_request_target`, and checks out only this repo's own base-branch
+  copy of this file — the exact same "never run fork-controlled code with
+  real secrets" property scripts/security_lint.py itself enforces on every
+  other workflow.
+- Never raises past main(). A failed run posts an honest "review
+  unavailable this cycle" comment rather than going silent — same law every
+  data fetcher in this repo already follows.
+
+Usage: python3 -m agents.code_review --pr <number>
+
+### agents/codex_data.py
+
+VAPE's Codex.io intelligence layer — real-time, enriched on-chain data via
+Codex's GraphQL API (graph.codex.io/graphql): token discovery/trending,
+holders, wallet PnL, and launchpad activity across 80+ networks.
+
+Design (matches agents/defillama.py / agents/data_fetchers.py): one cached
+POST helper, every function returns real data or a `{"error": ...}` dict and
+NEVER raises — so a caller always degrades honestly rather than crashing.
+Unlike DefiLlama, Codex requires an API key (CODEX_API_KEY) and is a paid
+service with a free tier — `_query()` enforces a conservative, overridable
+daily request cap (CODEX_DAILY_REQUEST_CAP, default 200) so a bug or a
+tight polling loop can't quietly blow through free-tier quota; requests
+past the cap return `{"error": "daily_request_cap_reached", ...}` rather
+than firing.
+
+Query field names below are sourced from Codex's public SDK examples
+(github.com/Codex-Data/sdk) and docs.codex.io/agents/codex-skills — live
+network is blocked from this dev sandbox (same as every other external API
+in this repo), so exact schema shapes should be spot-checked against a real
+response the first time each function actually runs in GitHub Actions,
+exactly like the existing sweeps.
+
+Confirmed gaps (as of this module's introduction):
+- Prediction markets (Polymarket/Kalshi) are beta-gated to Codex's paid
+  Growth/Enterprise plans — not reachable on a free-tier key. VAPE sources
+  prediction-market data straight from Polymarket's own free, keyless
+  Gamma API instead (see agents/prediction_markets.py), not through Codex.
+
+Budget note: the Free-tier plan this key runs on caps out at 10,000
+requests/month total, shared with every worker-side Codex route
+(worker/src/lib/codex.ts's /virtuals-snapshot, /trending-base,
+/new-launches, and wallet_pnl_deepdive). DEFAULT_DAILY_REQUEST_CAP below
+is a conservative per-process safety net for THIS module specifically
+(mainly hit by buyer-driven wallet_pnl_deepdive ACP jobs, not a cron
+sweep) — the worker's cache TTLs (see index.ts) are the primary defense
+against the shared key exceeding the monthly ceiling, since the worker
+has no per-key request budget of its own.
+
+new_launchpad_tokens() was originally left as an honest placeholder,
+believing Codex only exposed launch events via a GraphQL subscription
+(onLaunchpadTokenEvent/Batch) this urllib-based client can't hold open.
+Codex's own docs confirm filterTokens supports ranking by `createdAt`
+DESC — a plain poll-friendly query — so it's now implemented for real.
+
 ### agents/critic.py
 
 VAPE Critic — a deterministic, same-cycle consistency check on score()'s own
@@ -3016,27 +3249,50 @@ gated, deterministic agents. Each instance has its OWN quota/ledger state
 (see _State below) so neither's 30-minute gate or daily cap blocks the
 other — both can genuinely hire in the same investigation cycle.
 
-Rate limits (hard caps enforced HERE, not the worker's job), per instance:
-  - Exactly 1 offering hired per invocation — this agent runs on a fixed 2x/
-    hour cadence (see MIN_INTERVAL_SECONDS), so "1 per run" is what maps that
-    cadence onto "$0.01 per run" cleanly.
-  - 48 hires/day total across every investigation (2/hour x 24h), tracked in
-    a per-instance quota file (same durable-counter shape as
-    skillforge/research.py's MONTHLY_QUOTA pattern, just per-day). Once hit,
-    this becomes a documented no-op for the rest of the day rather than
-    erroring the investigation that recruited it.
-  - A 30-minute minimum interval between hire attempts, independent of the
-    daily cap above — lets agents/investigate.py run on a much tighter
-    cadence (the site's Featured Investigation spotlight) without either
-    instance firing any more often than 2x/hour.
+Rate limits, VAPOR-pinned instance (agents/data_agent_vapor.py) — UNCHANGED,
+fixed caps, per the module's original design:
+  - Exactly 1 offering hired per invocation of run_for_investigation()/
+    run_standalone(), no more than once every 30 minutes, capped at
+    DAILY_CAP (60) hires/day. See _run() below.
 
-Restricted to offerings that only need the address already under
-investigation, a chain slug, or no input at all — protocol/protocol_fees/
-unlocks/treasury need a specific DefiLlama protocol *slug* that isn't
-derivable from an arbitrary token address without guessing one, and guessing
-a slug is exactly the kind of fabrication this repo's real-data-only rule
-forbids. Also restricted to Base (chain 8453) investigations, since that's
-the only chain whose DefiLlama chain-slug mapping is confirmed correct here.
+Rate limits, CDP-pinned instance (this file's own run_for_investigation()/
+run_standalone()/run_catalog_sweep()) — a GROWING MINIMUM instead of a fixed
+cap, deliberately: VAPE wants real, ever-increasing x402 settlement volume
+through its own worker, not a plateau. GROWTH_BASE_DAILY (100) combined
+transactions on day one, compounding GROWTH_RATE_PER_DAY (1%) higher every
+day after — unbounded, forever (see _daily_target_combined()). That combined
+target is split across this file's two independent CDP streams (the main
+investigation/standalone stream and the catalog-sweep stream), each pacing
+itself with a deadline-driven "how much is still owed today, how much of the
+day is left" calculation (_due_now()) rather than a fixed interval — a
+missed or delayed poll doesn't lose its slot, the next call just finds a
+shorter required wait and catches up. This is a REAL, IMPORTANT limiting
+factor to keep in mind long-term: however often
+.github/workflows/featured-investigation.yml's cron actually polls this
+module sets a hard ceiling on throughput (at most one real hire per poll)
+regardless of how large the growing target gets — once the target's implied
+pace exceeds that poll cadence, actual daily volume flattens at
+(polls/day) x (number of CDP streams) until the workflow's own cron is
+tightened, since no in-process rate limiter can invent extra polls that
+never fired. This is by design, not silently masked: the growing target
+always represents the honest daily MINIMUM being aimed for, and this module
+never claims to have hit it if the polls simply weren't frequent enough.
+
+Restricted to offerings that only need a token address, a chain slug, or no
+input at all. Also restricted to Base (chain 8453) for run_for_investigation()/
+run_standalone(), since that's the only chain whose DefiLlama chain-slug
+mapping is confirmed correct for THIS hire path's fixed offering set.
+
+run_catalog_sweep() below is a second, independently-gated stream (own 30m/
+48-per-day cap, own quota/ledger file) added specifically to (a) exercise
+every one of VAPE's own x402 offerings priced $0.02 or less — including
+protocol/protocol_fees/unlocks/treasury, sourcing a real DefiLlama slug via
+protocols_on_chain() rather than guessing one — and (b) build a real,
+growing dataset of tokens/projects VAPE has actually seen (data/
+token_database.jsonl), sourced fresh each cycle from Base movers, other EVM
+chains, and Virtuals-tagged tokens (the worker's own free /trending-base
+route), avoiding recently-seen addresses so the same handful of tokens don't
+dominate the dataset.
 
 Never raises to its caller — a data-agent outage, an empty wallet, or a
 missing key must never sink the underlying investigation it was recruited
@@ -3076,7 +3332,8 @@ Sources (all free; key OPTIONAL only for BaseScan account endpoints):
 
 ### agents/deep_dive_audit.py
 
-VAPE Deep-Dive Bounty Audit — the 50 USDC / 24h-SLA premium offering.
+VAPE Deep-Dive Bounty Audit — the 1 USDC premium offering: a submission-ready
+PoC with full technical detail, not a time-boxed audit.
 
 The cheapest 6 x402 offerings and agents/investigate.py's free auto-cycle are all
 deliberately zero/light-LLM, keyless-first, sub-5-minute checks. This is the other
@@ -3090,11 +3347,12 @@ executes in — never a hard dependency, since a fresh multi-minute toolchain in
 no place in a script whose whole point is a reliable result, not gambling on a slow
 install succeeding.
 
-"24h SLA" is a turnaround promise to the buyer, not a literal runtime — this completes
-in one run (recon + optional Slither + one frontier LLM call), matching
-intel/audits/poc-reports/'s existing hand-written audit format and rigor (see e.g.
-audit-aerodrome-aero-2026-06-18.md: real tool output, honest triage of false positives,
-explicit methodology) so the automated version holds the same bar.
+No fixed turnaround is promised — the deliverable is the point: a submission-ready
+PoC and all supporting detail a buyer needs to actually file a bounty submission.
+This completes in one run (recon + optional Slither + one frontier LLM call),
+matching intel/audits/poc-reports/'s existing hand-written audit format and rigor
+(see e.g. audit-aerodrome-aero-2026-06-18.md: real tool output, honest triage of
+false positives, explicit methodology) so the automated version holds the same bar.
 
 Fulfillment paths:
   - ACP: scripts/acp-monitor/HANDLER_BRIEF.md maps the `bounty_deep_dive` offering to
@@ -3235,11 +3493,15 @@ HACK Agent — VAPE's per-incident threat-analysis writer.
 Every real incident in data/attack-feed.json's lookback window (the same
 feed security_sweep.py already writes from DeFiLlama's real hacks data) gets
 its own real, standalone markdown analysis — not just the single rule-based
-"lesson" tag the Threat Ledger already shows. Grounded ONLY in the real
-fields security_sweep.py already gathered (name/date/amount/technique/
-chains/lesson) plus one real web search for public writeups — the model is
-told never to invent a detail beyond what's given, and to say plainly when
-the real data is too thin to say more.
+"lesson" tag the Threat Ledger already shows. Grounded in the real fields
+security_sweep.py already gathered (name/date/amount/technique/chains/
+lesson), two differently-worded real web searches for public writeups, AND
+the model's own live web/X search (agents/llm.py::ask()'s search=True — see
+_write_analysis()'s comment for why: a real one-incident side-by-side
+against a direct Grok query exposed that the single pre-fetched search this
+used to run on alone was nowhere near enough). The model is told never to
+invent a detail beyond what it actually found or was given, and to say
+plainly when real research still turns up nothing.
 
 Written by OCI-hosted Grok 4.3 first (agents/llm.py::ask_oci_grok() —
 VAPE's newest, most capable currently-wired reasoning model), falling back
@@ -3374,7 +3636,7 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
     openrouter  OPENROUTER_API_KEY  20+ free models — fallback marketplace
     gemini      GEMINI_API_KEY      real frontier tier (gemini-2.5-pro) — free tier is
                                     quota-limited (5 RPM / 50 RPD) but that's plenty for
-                                    an occasional premium job like the 24h deep-dive
+                                    an occasional premium job like the deep-dive
                                     bounty audit, not a high-volume path. Get a free key
                                     at https://aistudio.google.com/apikey.
     github      GITHUB_MODELS_TOKEN GitHub Models (DeepSeek-R1). GitHub is FULLY
@@ -3386,24 +3648,27 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     GitHub Models, despite GitHub Models technically
                                     also offering premium models today.
     together    TOGETHER_API_KEY    70B free endpoints — when 8B isn't enough
-    xai         XAI_API_KEY_1       Grok 4.1 Fast — paid, primary model for VAPE's
-                                    highest-stakes work (see FRONTIER_ORDER below).
-                                    Not in the default PROVIDERS chain a bare ask()
-                                    call uses — only reachable via provider_order=
-                                    FRONTIER_ORDER / ask_frontier(), so ordinary
-                                    fast/bulk-tier calls never touch it and stay on
-                                    the free chain, matching the operating policy:
-                                    Grok for reports/investigations/the $50 x402
-                                    audit/intel/Builder/SKILLFORGE; Groq/Gemini for
-                                    everything else. A single key, not a rotated
-                                    pair — a second key (XAI_API_KEY_2) was tried
-                                    briefly but its xAI team had no credits/license,
-                                    so it's not worth the added complexity of a
-                                    two-key fallthrough for a key that can't serve
-                                    real traffic anyway; revisit if a genuinely
-                                    funded second key is ever needed.
-                                    OpenAI-compatible endpoint (api.x.ai/v1), same
-                                    _call() as everything else.
+    xai         XAI_API_KEY_1       Grok 4.1 Fast — paid, the LAST-resort entry in
+                                    FRONTIER_ORDER as of 2026-07-25 (see that
+                                    constant's own comment for why: it's the only
+                                    paid tier in this chain, and its Live Search
+                                    feature is currently dead — HTTP 410,
+                                    deprecated in favor of xAI's new "Agent Tools
+                                    API", not yet migrated here). VAPE's actual
+                                    primary reasoning route for high-stakes work is
+                                    OCI-hosted Grok 4.3 (ask_oci_grok()), not this
+                                    direct xai_1 entry. Not in the default PROVIDERS
+                                    chain a bare ask() call uses — only reachable via
+                                    provider_order=FRONTIER_ORDER / ask_frontier(),
+                                    so ordinary fast/bulk-tier calls never touch it.
+                                    A single key, not a rotated pair — a second key
+                                    (XAI_API_KEY_2) was tried briefly but its xAI
+                                    team had no credits/license, so it's not worth
+                                    the added complexity of a two-key fallthrough
+                                    for a key that can't serve real traffic anyway;
+                                    revisit if a genuinely funded second key is ever
+                                    needed. OpenAI-compatible endpoint (api.x.ai/v1),
+                                    same _call() as everything else.
 
 VAPE's own fine-tuned candidate (see training/train_lora.py +
 .github/workflows/train-vape-model.yml) is deliberately NOT in the PROVIDERS
@@ -3433,7 +3698,7 @@ Tiers pick a model per task:
     fast      -> small/quick (hourly reports)
     deep      -> larger reasoning (daily synthesis, audits)
     bulk      -> high daily volume (harvest passes)
-    frontier  -> the real premium model for the highest-stakes work (the 24h deep-dive
+    frontier  -> the real premium model for the highest-stakes work (the deep-dive
                  bounty audit, investigations' AI quick review, and — via explicit
                  provider_order=FRONTIER_ORDER at each call site — the intel sweeps'
                  narrative, Builder, SKILLFORGE synthesis, and the AI red-team). Falls
@@ -3497,6 +3762,34 @@ fabricate one. Those remain a manual/deep-dive item, exactly as the
 original report scoped them.
 
 Usage: python agents/mainnet_patch_check.py
+
+### agents/prediction_markets.py
+
+VAPE's prediction-markets intelligence layer — real crypto/Base-relevant
+prediction-market odds from Polymarket's free, keyless Gamma API and
+Kalshi's free, keyless markets API.
+
+Scope is deliberately narrow: crypto/Base-ecosystem-relevant markets only
+(keyword-filtered from each platform's full active-market list), not general
+politics/sports/macro markets — this stays a security/intel signal (market-
+implied odds on hacks, depegs, price thresholds, protocol milestones) rather
+than turning into a general betting-odds aggregator that doesn't fit VAPE's
+brand.
+
+Design (matches agents/defillama.py exactly): reuse data_fetchers' cached
+`_get` + `_now_iso` so this traffic shares one disk cache and one UA identity;
+every function returns real data or a `{"error": ...}` dict and NEVER raises,
+so a caller always degrades honestly rather than crashing or fabricating.
+
+Live network is blocked from this dev sandbox (same constraint as every other
+external API in this repo) — field names below are sourced from Polymarket's
+and Kalshi's public API docs, not independently verified against a live
+response; spot-check the first real response in production, exactly like the
+existing sweeps.
+
+Codex.io's own prediction-market data is beta-gated to paid Growth/Enterprise
+plans (see agents/codex_data.py's module docstring) — not reachable on a
+free-tier key, hence going straight to Polymarket/Kalshi instead.
 
 ### agents/publish_reputation.py
 
@@ -3600,6 +3893,27 @@ Records both `complied` (the raw model followed the injected instruction —
 a model property this repo doesn't control) and `bypassed` (the dangerous
 code would actually have been returned to a caller — the property this
 repo does control, and the one that matters).
+
+### agents/repo_hygiene.py
+
+VAPE repo-hygiene memory — the same "teach VAPE and make it stick" pattern
+agents/code_review.py already uses for false-positive findings, generalized
+to the other class of judgment call a human makes constantly on this repo:
+triaging PRs and issues (merge vs. close, is a major-version bump actually
+safe, is a CI check worth keeping).
+
+Without this, every one of those judgment calls lives only in a PR comment
+or a chat reply — gone the moment the conversation scrolls past. This module
+gives them one place to land (skillforge/memory/retriever.py's existing
+"lesson" category, same storage every other lesson in this repo already
+uses) and one place to be looked up again, so the next PR/issue triage
+(human or automated) starts from precedent instead of re-deriving it.
+
+Deliberately thin: no new storage, no new file format, no automatic
+triage decisions. record_hygiene_lesson() is called AFTER a human (or an
+automated check with a clear, stated rule) has already made the call —
+this only makes that call persistent. search_hygiene_lessons() is the
+read side for whatever calls it next.
 
 ### agents/report_format.py
 
@@ -3778,6 +4092,36 @@ set) are never rewritten — only genuinely new incidents get appended, with
 isNew=True and firstSeen=now. seen.json tracks lastSeen for every incident
 touched this run so future runs can tell "still around" from "new."
 
+=== Bounty Ops vs. Incident Leads (fix for the exploits-vs-bounties bug) ===
+opportunities.json used to mix two fundamentally different things under one
+fitScore: real, live bug-bounty PROGRAMS (status=live/active from the static
+HackenProof/HackerOne/Cantina/Sherlock/Immunefi/AgentArena seed set) and
+historical DeFiLlama HACK INCIDENTS (status=incident, huge dollar amounts,
+forensics leads not code-review bounties). One incident-oriented formula
+(amount dominates) applied to both meant a $58M "recovery bounty" for a hack
+that already happened could outrank a real, gettable $250k smart-contract
+review program — and the site's own #bounties card (docs/assets/app.js)
+sorted the raw combined list by prizeUsd, so exploits regularly drowned out
+actual bounty ops. Historical incidents already have their own dedicated
+home: the Threat Ledger (data/attack-feed.json / #threat-ledger) — they were
+never supposed to double as "Active Bounty Programs" too.
+
+Fix: every opportunity now carries a `track` ("incident" or "bounty"), and
+every bounty-track entry carries `vapeFit`/`vapeFitReason` (does this
+program's scope actually match a capability VAPE's tools can exercise —
+Solidity/EVM via agents/deep_dive_audit.py, or Move/Sui via
+agents/external_audit.py — as opposed to web/mobile-only scope, or a
+post-incident recovery/negotiation "bounty" that isn't a code-review
+engagement at all) and its own `bountyFitScore` (_bounty_fit_score() below),
+scored on fit + reward + chain relevance + freshness — never on raw dollar
+size the way incidents are. _migrate_entry() backfills these fields onto
+every pre-existing seed entry the first time this module runs after the
+fix, non-destructively (no existing field is ever overwritten). The digest
+below renders Bounty Ops (VAPE-fit, live) and Historical Incident Leads as
+two separate tables; agents/bounty_ops.py (Task #197) builds the
+classified, checklist-tracked site section on top of the same `vapeFit`
+bounty track this module now produces.
+
 ### agents/security_sweep.py
 
 VAPE Security Sweep — revives the "vape-security-sweep" cron that ran as an
@@ -3871,6 +4215,21 @@ checking more often, not forcing two PRs a day.
 CLI:
   python -m agents.skillforge_build
 
+### agents/task_feed.py
+
+Live "tasks" feed for the site's Bounty Command Center.
+
+Real gap this closes: the Command Center has never had a live-task feed —
+"tasks" doesn't exist as a stat anywhere in the codebase prior to this. Every
+entry here is a REAL commit VAPE's own scheduled automation made to this
+repo's main branch (committed as "VAPE Bot" / github-actions[bot] — see any
+of the *.yml workflows' `git config user.name "VAPE Bot"` step), each one a
+genuine, verifiable unit of automated work: an investigation logged, an
+audit filed, a broadcast published, a sweep run, DATA AGENT/SCOUT cycling,
+etc. Never fabricated, never a simulated "systems status" widget.
+
+Writes: data/task-feed.json (committed; dashboard fetches it raw from GitHub)
+
 ### agents/token_scan.py
 
 VAPE token scan-and-log — the agent-side twin of the dashboard Hunt console.
@@ -3914,8 +4273,13 @@ arbitrary external hosts outside this repo's normal keyless-API footprint
 (GoPlus/DexScreener/DefiLlama/CoinGecko), unreachable from this repo's dev
 sandbox; CI's unrestricted egress is required for this to actually work.
 
-Registers each of VAPE's 6 auto-fulfilled x402 offerings (docs/ACP_PROTOCOL.md
-/ data/reputation.json / worker/src/index.ts::OFFERING_PRICES) with:
+Registers each of VAPE's synchronous x402 "scan" offerings
+(docs/ACP_PROTOCOL.md / data/reputation.json / worker/src/index.ts::
+OFFERING_PRICES + the standalone tx_decode/community_intel_broadcast/
+bulk_safety_bundle routes), the two $1 async audit offerings
+(bounty_deep_dive and its deep_contract_audit alias — same file's
+BOUNTY_DEEP_DIVE_PRICE/DEEP_CONTRACT_AUDIT_PRICE), and the "data"
+micro-services (worker/src/dataHandlers.ts::DL_OFFERINGS) with:
   - 402 Index (https://402index.io) — documented, self-service REST API,
     POST /api/v1/register with {url, name, protocol, provider}. Confirmed
     schema at https://402index.io/api-docs.
@@ -3977,10 +4341,24 @@ for the full writeup):
     research — no evidence found that this actually exists; not referenced
     or implemented anywhere.
 
-Deliberately NOT scheduled: repeated calls to an unfamiliar directory's
-/register endpoint with unknown dedup behavior risk creating duplicate
-listings. Trigger manually (workflow_dispatch) when the offering list,
-prices, or worker URL change — see .github/workflows/x402-directory.yml.
+Deliberately NOT scheduled: trigger manually (workflow_dispatch) when the
+offering list, prices, or worker URL change — see
+.github/workflows/x402-directory.yml.
+
+State-file skip (2026-07-25, revised): the 2026-07-05 run registered 22
+offerings with 402index.io; 5 more (tx_decode, community_intel_broadcast,
+bulk_safety_bundle, deep_contract_audit, website_review) were added to the
+worker on 2026-07-20 but never registered anywhere, since this script was
+never re-run in between. STATE_PATH records which offering names have
+already been successfully registered with 402index.io; register_402index()
+skips those on every future run unless --force-all is passed — this is now
+confirmed (per the real POST /api/v1/register docs: "Re-registering an
+existing URL+protocol updates the record") to be a pacing/no-op-avoidance
+default, not a duplication-risk workaround, so --force-all is a real,
+safe way to push a metadata-only change (e.g. a price or description edit)
+to already-listed offerings. VAPOR's own /discovery/register is a real
+upsert (per its own docs), so register_vapor() is intentionally NOT
+filtered by this state — it always sends the full current list.
 
 ### agents/x402_index_claim.py
 
@@ -3994,6 +4372,19 @@ Real, documented flow (https://402index.io/api-docs, "Claim Your Listings"):
              (worker/src/index.ts's WELLKNOWN_402INDEX_HASH constant — a separate,
              manual step between running this script's `claim` and `verify` actions)
   3. verify: POST /api/v1/claim/verify {domain} -> {status: "verified", services_count}
+
+Confirmed 2026-07-25 (job log of the 2026-07-15 workflow_dispatch run): re-running
+`verify` after the domain is already verified correctly returns HTTP 409 "Domain
+already verified" — the earlier 2026-07-05 `claim`+`verify` run had already
+succeeded, so that 409 is confirmation of success, not a real failure (the
+workflow's own exit-1 handling doesn't know the difference; read the job log body,
+not just the exit code, when checking domain-verification status).
+
+A 4th action, `status --url <service-detail-url>`, is a read-only GET of a real
+402index.io service-detail page (e.g. https://402index.io/service/<uuid>) — no
+guessed/undocumented list-all-services endpoint is called, since 402index.io's
+api-docs don't document one; this just fetches the exact URL given and prints the
+raw page for a human to read the listed name/URL/health state from.
 
 Must run from GitHub Actions (workflow_dispatch, one action per run) — 402index.io
 is unreachable from this repo's dev sandbox, same reason as x402_directory_register.py.
@@ -4091,6 +4482,80 @@ ZERO LLM cost: pure parse + state. Prints a JSON summary; exit code signals acti
 Exit codes:
   0  nothing actionable (idle)
   10 actionable job event(s) present -> caller should wake the handler
+
+### scripts/acp-monitor/virtuals_evaluator.py
+
+VIRTUALS EVALUATOR — VAPE's own paying customer, on ACP rails.
+
+Same real story as agents/data_agent.py (see that module's own docstring for
+the full rationale) — the "prove the payment rail end to end, and turn the
+proof into a real, growing dataset" pattern — but for the OTHER payment rail
+VAPE runs, not a second x402 client. data_agent.py already proves x402 works
+by hiring VAPE's own $0.01 market-data offerings against a real Base token on
+a fixed cadence; ACP has never had an equivalent, and the "Client side
+(hiring other agents)" capability docs/ACP_PROTOCOL.md has documented since
+launch has sat [WIP]/unused. This module is that: VAPE, acting as its own ACP
+CLIENT, hires one of its own already-live ACP SELLING offerings to evaluate a
+real Virtuals Protocol project — the same wallet on both sides of a genuine
+on-chain USDC-escrow job (create -> fund -> submit -> complete), at a fixed
+cadence of 1 job every 4 hours.
+
+Why this can't just be a GitHub Actions cron like data_agent.py's: ACP
+transactions go exclusively through the `acp` CLI (never a raw private key
++ SDK — see docs/ACP_PROTOCOL.md's Security section), signed by a
+`restricted`-policy signer that's provisioned per-environment via a one-time
+BROWSER approval (acp agent add-signer). That signer only exists on the
+persistent host already running the rest of VAPE's ACP automation (the
+listener/drain daemons in this same directory — see README.md) — an ephemeral
+GitHub Actions runner gets a fresh, unapproved environment every single run,
+so it structurally cannot hold that signer. This script is designed to run
+on THAT host, invoked the same way as the daemons above (see "Wiring" below),
+not as a workflow step.
+
+Candidate sourcing: a real Virtuals-tagged token, resolved the exact same way
+agents/data_agent.py::_fresh_candidate()'s virtuals branch already does — the
+worker's own free /trending-base feed, filtered to isVirtuals=true — kept as
+its own small fetch here (not imported) since this module runs in a different
+process/host context than data_agent.py's CI-side one and has no need for
+that module's other (non-Virtuals) candidate sources.
+
+Offering picked per run: one of VAPE's own cheap ($0.01-$0.10), address-based,
+zero-LLM-at-the-monitor-level ACP offerings (see scripts/acp-monitor/
+auto_fulfill.py's AUTO set) — the same monitor already running on this host
+catches the funded job and submits a real deliverable with no extra wiring
+needed here. dossier_check is the one exception that calls an LLM inside its
+own deliverable (still zero-LLM at the monitor-dispatch level); it's kept in
+the mix deliberately since it's the one offering actually described as
+producing a rounded "evaluation" rather than a single safety flag.
+
+Rate limit (hard cap enforced HERE): exactly 1 job created per invocation,
+gated to no more than once every MIN_INTERVAL_SECONDS (4h) regardless of how
+often this script is invoked, plus a DAILY_CAP that's just that 4h cadence's
+own real ceiling (24h / 4h = 6) — no slack needed since the interval gate
+already is the hard limiter; the cap only guards against a clock/state bug
+letting the interval check pass more often than it should.
+
+CLI flag disclaimer: `acp client create-job`'s exact flags have never been
+pinned down anywhere in this repo before now (docs/index.html's own CLI demo
+literally shows `acp client create-job ...` with the args elided) — every
+other ACP CLI invocation already merged (scripts/acp-monitor/auto_fulfill.py,
+triage.py) only ever needed the PROVIDER-side verbs (set-budget/submit/events
+drain/job history), which this repo had already used in production and
+confirmed working. The client-side verbs (browse/create-job/fund/complete)
+below are constructed by direct analogy to that already-verified flag
+grammar (--job-id/--amount/--chain-id/--json, kebab-case subcommands) since
+this sandbox has no access to the `acp` binary itself to confirm via --help.
+_ACP() below is the single choke point for every invocation, so if any one
+flag name is off, there is exactly one place to fix it.
+
+Wiring (manual, one-time, on the ACP host — mirrors keepalive.sh's own cron):
+  0 */4 * * * cd /home/node/.openclaw/acp-monitor && python3 virtuals_evaluator.py >> virtuals_evaluator.log 2>&1
+Safe to invoke more often than every 4h (e.g. from drain_daemon.sh's existing
+120s loop, exactly how data_agent.py rides featured-investigation.yml's much
+tighter cadence) — the interval gate below makes any extra call a fast no-op.
+
+Never raises. A CLI/network hiccup here must never be treated as a fatal
+error by whatever cron or loop invokes this script.
 
 ### scripts/archive_reports.py
 
@@ -4390,6 +4855,56 @@ API can change across majors and there is no compiler here to catch a
 broken call site in a page-relative <script> tag, so that needs a human to
 check actual usage before bumping.
 
+### scripts/code_lint.py
+
+Deterministic security-pattern scanner for source code.
+
+Sibling to scripts/security_lint.py, which covers .github/workflows/*.yml
+only — this one covers the actual Python/TypeScript/JS source, the class of
+bug that linter was never scoped to catch. Same design law: pure text/AST
+pattern matching on real files, no network, no LLM, deterministic — safe to
+run on every PR, and its findings are exactly the kind of thing worth
+feeding to an LLM reviewer as grounding rather than making it re-derive them
+from scratch (see agents/code_review.py, the caller this was built for).
+
+Checks (the specific bug classes this repo has actually hit before, not a
+generic OWASP grab bag):
+
+1. `eval(`/`exec(`/`pickle.loads(` called on anything that isn't a string
+   literal — Python AST, not regex, so it can't be fooled by whitespace or
+   miss a multi-line call.
+2. `subprocess.*`/`os.system(`/`os.popen(` given a shell command built from
+   an f-string, `%`-format, `.format(`, or `+` string concatenation instead
+   of a literal — the exact shape `agents/*.py`'s own `_run()` helpers
+   avoid by always passing a list, never a shell string.
+3. A variable named `*_KEY`/`*_SECRET`/`*_TOKEN`/`*_PASSWORD` (case-
+   insensitive) assigned a literal string that isn't an obvious placeholder
+   (`your_..._here`, `xxx`, `changeme`, empty) — the exact hardcoded-secret
+   shape manually grepped for during this repo's 2026-07-19 secrets audit,
+   now codified as a standing check instead of a one-off.
+4. `.innerHTML =`/`.innerHTML +=` assigned directly from a bare variable
+   (not a literal, not a call) in `docs/assets/*.js` or `worker/src/**/*.ts`
+   — this repo has an established `_esc()`/`escapeHtml()` convention for
+   template-literal interpolation everywhere else; a bare-variable
+   assignment bypasses that convention entirely and is the classic vanilla-
+   JS DOM-XSS shape.
+
+NOT covered by design: multi-line template-literal interpolation (`` `...
+${x}...` ``) is NOT traced here — this repo's own convention already wraps
+untrusted values in `_esc(`/`escapeHtml(` at the interpolation site in the
+overwhelming majority of real usages, and a per-line regex trying to prove
+absence of escaping across a multi-line template would false-positive
+constantly. Only the narrow, unambiguous bare-variable-assignment shape is
+flagged. A real regression in the template-literal path needs a human (or a
+future AST-based JS/TS parser) to notice — same accepted-gap framing
+scripts/security_lint.py already uses for its own blind spot.
+
+Usage: python3 scripts/code_lint.py <file_or_dir> [<file_or_dir> ...]
+Exit code 0 if clean, 1 if any HIGH/CRITICAL finding (MEDIUM findings are
+printed but don't fail the run — same "some things are worth flagging
+without blocking" tier security_lint.py's own missing-permissions check
+uses).
+
 ### scripts/convert_dataset_vertex.py
 
 Converts VAPE's fine-tune corpus (data/finetune/vape_finetune.{train,val}.jsonl
@@ -4418,6 +4933,40 @@ Usage:
 Then upload to GCS before creating the tuning job:
     gsutil cp data/finetune/vertex/vape_finetune.train.vertex.jsonl gs://<your-bucket>/vape/
     gsutil cp data/finetune/vertex/vape_finetune.val.vertex.jsonl   gs://<your-bucket>/vape/
+
+### scripts/git_merge_json_state.py
+
+A git merge driver for VAPE's JSON state blobs (see .gitattributes).
+
+These files — skillforge/memory/anomaly_state.json, *_quota.json — are flat
+objects keyed by observation, written independently by concurrent scheduled
+workflows. Two runs that touch different keys still produce a textual conflict,
+which halts a rebase mid-flight and strands the runner on a detached HEAD (the
+2026-07-26 bounty-cycle failure). They can't use git's built-in `union` driver
+the way the append-only .jsonl ledgers do: concatenating two JSON objects
+yields syntactically invalid JSON.
+
+So merge them the way they're actually meant to combine — per key:
+
+  * key only on one side          -> keep it (neither side deleted it; they
+                                     simply observed different things)
+  * key on both sides, same value -> keep it
+  * key on both sides, different  -> keep whichever carries the newer "ts",
+                                     because that is exactly the last-write-
+                                     wins semantics the writers assume
+  * no usable "ts" to compare     -> keep the local ("ours") value, since the
+                                     run performing the merge just computed it
+
+Deletions are intentionally NOT propagated. Reviving a key that one side pruned
+costs at most one duplicate anomaly alert; dropping a key that the other side
+still needs would suppress a real one. For state whose whole job is "have I
+already reported this?", over-reporting is the safe direction to fail.
+
+Git invokes a merge driver as:  driver %O %A %B
+  %O  ancestor version   %A  ours (also the OUTPUT path)   %B  theirs
+Exit 0 = merged cleanly, non-zero = conflict. On any parse failure this exits
+non-zero and leaves %A untouched, so a malformed file degrades to a normal
+git conflict rather than being silently overwritten.
 
 ### scripts/repo_stats.py
 
@@ -4788,8 +5337,12 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
 ### worker/src/dataHandlers.ts
 
 /**
- * VAPE's market-data tool tier — one x402 endpoint per tool, priced at
- * $0.01. Backed by lib/defillama.ts.
+ * VAPE's market-data tool tier — one x402 endpoint per tool. Most are priced
+ * at $0.01 and backed by lib/defillama.ts (keyless); prediction_market_odds
+ * is also $0.01 but backed by lib/predictionMarkets.ts (also keyless);
+ * wallet_pnl_deepdive is priced separately at $0.25 and backed by
+ * lib/codex.ts (needs a server-side CODEX_API_KEY, hence the `env`
+ * parameter on `run` below — every other offering here ignores it).
  *
  * Token logos + rich data: every protocol/chain/fee/dex tool carries a real
  * hosted `logo` URL; token-level tools (intel, chart) are enriched here with
@@ -4816,13 +5369,20 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
 ### worker/src/index.ts
 
 /**
- * VAPE x402 payment worker — pay-per-call access to 21 of the 29 "auto" ACP
+ * VAPE x402 payment worker — pay-per-call access to 26 of the 30 ACP
  * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
- * 29-offering catalog; the other 8 need the SKILLFORGE tool tier and are
- * hired via a real ACP job instead). Also hosts a few free, unpaid Alchemy-
- * backed reliability endpoints (/portfolio, /nfts, /network-status, /prices,
+ * catalog; the other 4 — partner_referral, wallet_recon, whale_watch,
+ * forensics_deep — need the SKILLFORGE tool tier and are hired via a real
+ * ACP job instead). Also hosts a few free, unpaid Alchemy-backed
+ * reliability endpoints (/portfolio, /nfts, /network-status, /prices,
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
- * direct public-RPC calls when this worker is deployed and configured.
+ * direct public-RPC calls when this worker is deployed and configured, plus
+ * three free Codex.io-backed routes (/virtuals-snapshot, /trending-base,
+ * /new-launches) for the Live Intelligence Feed's Virtuals Protocol panel,
+ * trending-tokens list, and newest-launches feed — Codex needs a bearer key
+ * that can't ship to the browser, so these can't be a direct client-side
+ * fetch the way DefiLlama/CoinGecko are — and one free, fully keyless
+ * Polymarket/Kalshi-backed route (/prediction-markets).
  *
  * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
  * facilitator) and Coinbase Developer Platform's hosted one — see
@@ -4841,6 +5401,20 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  * falls back to when this isn't configured.
  */
 
+### worker/src/lib/bulkSafetyBundle.ts
+
+/**
+ * bulk_safety_bundle — scan 5-25 tokens in one job at a flat price (per
+ * data/reputation.json: $0.50 for up to 25, vs. $0.02 x 25 = $0.50 standalone
+ * — the "40% off" in its summary refers to ACP's per-seat/negotiated pricing
+ * history, not a discount this route computes; the flat $0.50 ceiling price
+ * already reflects it). Real gap this closes: listed since day one
+ * (auto:false, x402:false) with no code ever fulfilling it — this is a thin
+ * batch wrapper around the exact same token_safety_check pipeline every
+ * other token gets scanned with (worker/src/handlers.ts::fulfill()), not a
+ * new scoring path.
+ */
+
 ### worker/src/lib/cdpAuth.ts
 
 /**
@@ -4855,10 +5429,40 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  * Supports both CDP key formats: EC (PEM, ES256) and Ed25519 (base64, EdDSA).
  */
 
+### worker/src/lib/codex.ts
+
+/**
+ * TypeScript port of agents/codex_data.py — VAPE's Codex.io GraphQL data
+ * layer, server-side only. Codex requires a bearer API key that can never
+ * ship to the browser, unlike the keyless DefiLlama/CoinGecko calls the
+ * site makes directly — so unlike lib/defillama.ts, nothing here is ever
+ * called client-side; it's only reachable through the worker's own routes
+ * (see index.ts's /virtuals-snapshot and /trending-base).
+ *
+ * Same design law as every other lib/*.ts here: every function returns real
+ * data or an `{ error }` object and NEVER throws. Per-route HTTP caching +
+ * rate limiting is handled by Hono's `cache` + `rateLimiter` middleware in
+ * index.ts (same pattern as /portfolio, /nfts) — this layer is a thin
+ * fetch+parse, no separate request-count cap needed (the edge cache already
+ * bounds how often a shared public route actually reaches Codex).
+ *
+ * Field names below are sourced from @codex-data/sdk's schema.graphql
+ * (github.com/Codex-Data/sdk) — confirmed: filterTokens(filters, networks,
+ * limit, tokens) -> results{priceUSD, volume24, token{name,symbol}};
+ * holders(input) -> {count, top10HoldersPercent, items}. Note: the singular
+ * token(input: TokenInput!) query returns metadata only (no price/volume/
+ * marketCap) — single-token price lookups use filterTokens' `tokens: [id]`
+ * argument instead (id format "address:networkId"), same shape as the list
+ * queries. Not independently verified against a live response (Codex's host
+ * is unreachable from this dev sandbox, same constraint as every other
+ * external API in this repo) — spot-check the first real response in
+ * production the way every other sweep here does.
+ */
+
 ### worker/src/lib/coingecko.ts
 
 /**
- * CoinGecko price reads for Base-chain tokens. Two tiers:
+ * CoinGecko price reads for Base-chain tokens. Three tiers:
  *  - Current price + 24h change (`getCurrentPrices`): works fully unkeyed
  *    against the public api.coingecko.com — the site's client-side JS
  *    already calls this directly; this worker-side copy exists so the free
@@ -4869,6 +5473,23 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  *    it unauthenticated and getting rejected. Only called when
  *    COINGECKO_API_KEY is configured; used for the cost-basis estimate
  *    (lib/costBasis.ts), which is out of reach without a key.
+ *  - Full market data by contract (`getContractMarketData`): keyless,
+ *    real-identity (address-verified, not symbol-guessed) name/price/mcap
+ *    lookup — mirrors agents/data_fetchers.py::get_token_market_by_contract,
+ *    used by investigateLite.ts's stablecoin-recognition exception.
+ */
+
+### worker/src/lib/communityBroadcast.ts
+
+/**
+ * community_intel_broadcast — VAPE's latest 6-hourly consolidated security +
+ * market intel broadcast (agents/broadcast.py's real output, committed to
+ * intel/broadcasts/broadcast-*.md on every run). Real gap this closes: this
+ * offering has been listed (auto:true) and fulfilled via ACP
+ * (agents/acp_fulfill.py::_community_broadcast()) since day one, but was
+ * never x402-payable (x402:false) — this ports the exact same "find the
+ * newest broadcast file" logic to the Worker, reading the public repo's own
+ * committed content directly rather than duplicating any generation logic.
  */
 
 ### worker/src/lib/contractSource.ts
@@ -4934,6 +5555,31 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  * EIP-3009's nonce is one-time-use on-chain, so a second settle attempt
  * for an already-consumed authorization simply reverts (no double
  * payment) rather than re-charging the payer.
+ */
+
+### worker/src/lib/favicon.ts
+
+/**
+ * VAPE's 32x32 icon, embedded as base64 so the Worker can serve /favicon.ico
+ * itself with no redirect and no external fetch.
+ *
+ * Why this exists: x402scan's discovery spec asks a registered origin to
+ * "serve a /favicon.ico at your API root to display an icon" — it's what the
+ * explorer/marketplace renders next to the listing. A 302 to the GitHub Pages
+ * copy would work in a browser but is not reliably followed by directory
+ * crawlers, and a runtime fetch would make an unpaid discovery route depend on
+ * a third-party host being up. Inlining 2.4KB avoids both.
+ *
+ * Source of truth is docs/assets/favicon-32.png — the same V mark as
+ * icon-512.png (what ICON_URL in index.ts points at for the x402 Bazaar
+ * `iconUrl` extension; that one needs to stay full-res since directories
+ * render it as a large profile avatar, not a tab icon). Regenerate after
+ * changing the PNG:
+ *   python3 -c "import base64;print(base64.b64encode(open('docs/assets/favicon-32.png','rb').read()).decode())"
+ *
+ * Served as image/png despite the .ico path: every browser and crawler
+ * dispatches on Content-Type, not the extension, and PNG favicons have been
+ * universally supported for years.
  */
 
 ### worker/src/lib/githubDispatch.ts
@@ -5005,17 +5651,32 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
 ### worker/src/lib/llm.ts
 
 /**
- * Frontier-LLM client for the Worker/x402 side — TypeScript port of
- * agents/llm.py's ask_frontier(), scoped down to the two providers this
- * repo's own docs already frame as the real chain ("a frontier-tier model
- * (Gemini 2.5 Pro, Groq fallback)" — see worker/README.md,
- * agents/deep_dive_audit.py). The Python version tries five OpenAI-
- * compatible providers; porting all five here would need Worker secrets for
- * providers nothing on the x402 side has ever asked for. Gemini + Groq
- * covers the documented "real chain" without inventing new scope.
+ * Frontier-LLM client for the Worker/x402 side. Tries OCI-hosted Grok 4.3
+ * first — the same primary reasoning route agents/llm.py::ask_oci_grok()
+ * uses for every real Python call site (VAPE's actual "frontier" model,
+ * by explicit 2026-07-19 direction) — falling back to Gemini/Groq only if
+ * OCI_GENAI_API_KEY isn't configured or the call errors.
  *
- * Both providers speak the same OpenAI-compatible /chat/completions shape,
- * so one _call() covers both — identical pattern to agents/llm.py's _call().
+ * Real, previously-live gap this closes (confirmed via a full-repo audit,
+ * 2026-07-25): this file used to be permanently capped at Gemini->Groq —
+ * dossier_check ($0.10) and website_review ($0.15), the x402 Worker's own
+ * two paid LLM-backed offerings, NEVER reached OCI Grok, ever, regardless
+ * of what every other real report-generating call site in this repo does.
+ *
+ * Vertex (agents/llm.py::ask_vertex_candidate(), the other half of VAPE's
+ * real primary chain) is deliberately NOT ported here — its access token
+ * is minted via GitHub Actions' WIF OIDC exchange
+ * (google-github-actions/auth), which needs a refresh mechanism a
+ * stateless Worker request can't run itself. OCI's API key is a plain,
+ * static Bearer secret, so it ports directly as a Worker secret with no
+ * such problem.
+ *
+ * OCI's OpenAI-compatible endpoint and Gemini/Groq's own OpenAI-compatible
+ * endpoints share the same request/response shape (model/messages/
+ * temperature/max_tokens in, choices[0].message.content out) — OCI just
+ * needs its own function for the region-templated URL + optional
+ * CompartmentId header, matching agents/llm.py::_call_oci_grok()'s exact
+ * shape.
  */
 
 ### worker/src/lib/marketIntel.ts
@@ -5030,6 +5691,75 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  * narrative report (agents/run.py) — that rule-based scan is out of scope
  * for a single paid x402 call, so anomaly_flags is omitted here rather than
  * faked.
+ */
+
+### worker/src/lib/openapiSpec.ts
+
+/**
+ * OpenAPI 3.1 discovery document for VAPE's x402 offerings.
+ *
+ * Why this exists: x402scan.com's discovery spec (https://www.x402scan.com/discovery/spec)
+ * states plainly that "OpenAPI is the canonical discovery contract. Publish your
+ * spec at /openapi.json." Before this module, VAPE served neither /openapi.json
+ * nor the RFC 8288 `Link: <...>; rel="service-desc"` header pointing at one, so
+ * x402scan's "Add your API" probe reported "No discovery document found" for
+ * every VAPE route — despite each route serving a complete, spec-correct x402 v2
+ * PAYMENT-REQUIRED challenge. The gap was purely the missing static contract,
+ * not the runtime payment gate.
+ *
+ * The same doc is what x402scan's POST /api/x402/registry/register-origin reads
+ * to discover and register every resource from an origin in one call, instead of
+ * a human pasting 27 URLs into the single-URL "Add" form one at a time.
+ *
+ * Two rules from that spec are load-bearing here and easy to get wrong:
+ *
+ *  1. "Runtime 402 behavior is authoritative over static metadata." So this
+ *     document is generated from the SAME PaidRoute catalog that builds the
+ *     paymentMiddleware() route config in index.ts — never a hand-maintained
+ *     second copy that could silently drift out of agreement with the real gate.
+ *
+ *  2. "OpenAPI x-payment-info.price.amount is decimal USD; runtime x402 v2
+ *     accepts[].amount is token atomic units (for USDC, 0.01 => '10000')." The
+ *     two are deliberately different units — priceToDecimalUsd() below produces
+ *     the decimal-USD form for this document only; the atomic-unit conversion
+ *     stays where it already was, inside the x402 middleware.
+ */
+
+### worker/src/lib/predictionMarkets.ts
+
+/**
+ * TypeScript port of agents/prediction_markets.py — VAPE's prediction-markets
+ * data layer (Polymarket's free, keyless Gamma API + Kalshi's free, keyless
+ * markets API), made available to the x402 market-data tool tier.
+ *
+ * Field-for-field faithful to the Python module so the x402 result and the
+ * ACP deliverable never disagree. Same design law: every function returns
+ * real data or an `{ error }` object and NEVER throws.
+ *
+ * Scope is deliberately narrow: crypto/Base-ecosystem-relevant markets only
+ * (keyword-filtered), not general politics/sports/macro markets — see the
+ * Python module's docstring for why.
+ *
+ * Hosts: gamma-api.polymarket.com, api.elections.kalshi.com. Neither host is
+ * reachable from this dev sandbox (same constraint as every other external
+ * API in this repo) — spot-check the first real response in production.
+ */
+
+### worker/src/lib/txDecode.ts
+
+/**
+ * tx_decode — plain-language transaction decode + risk flags for a Base/EVM
+ * tx hash. Real data only, no simulation, no LLM:
+ *   - Etherscan V2 unified API (eth_getTransactionByHash/eth_getTransactionReceipt)
+ *     for the tx itself and its emitted logs — same ETHERSCAN_API_KEY and
+ *     endpoint convention as lib/contractSource.ts.
+ *   - 4byte.directory's public, keyless method/event-signature database to
+ *     turn raw selectors/topic0 hashes into a real human-readable signature
+ *     (e.g. `transfer(address,uint256)`), when a match exists.
+ * Real gap this closes: data/reputation.json has listed tx_decode ($0.05)
+ * since day one, but it was ACP-only (auto:false, x402:false) — no code ever
+ * actually fulfilled it. This is a genuinely new, deterministic pipeline, not
+ * a relisting of an existing handler.
  */
 
 ### worker/src/lib/webResearch.ts
@@ -5050,6 +5780,22 @@ Requires HF_TOKEN in the environment if the chosen checkpoint is gated
  * quota guard either (skillforge/research.py's MONTHLY_QUOTA is a durable
  * file-backed counter — the Worker has no equivalent durable store wired
  * up); each provider's own account-level rate limit is the real backstop.
+ */
+
+### worker/src/lib/websiteReview.ts
+
+/**
+ * website_review — a fast, paid read of a single website's REAL scraped page
+ * content for phishing/scam-site red flags: fake contract addresses
+ * advertised, wallet-drainer script/button patterns, brand/template
+ * mismatch, copy-paste scam-site boilerplate, urgency/pressure tactics, and
+ * unsolicited wallet-connect prompts. Deliberately NOT a third mode of the
+ * $1 bounty_deep_dive smart-contract audit — a distinct, lighter-weight,
+ * general-web-content read (see docs/ACP_PROTOCOL.md's Phase 4 note).
+ *
+ * One real scrape (lib/webResearch.ts's Firecrawl -> keyless-fetch chain) +
+ * one frontier-LLM read (lib/llm.ts) — synchronous, no GitHub Actions
+ * dispatch, no KV, no polling, same tier as dossier_check.
  */
 
 ### worker/src/scan.ts
