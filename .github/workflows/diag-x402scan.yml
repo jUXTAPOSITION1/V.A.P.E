@@ -1,0 +1,57 @@
+name: Diagnose x402scan staleness
+
+on:
+  workflow_dispatch:
+
+# Read-only diagnostic: curls our own worker's free /openapi.json discovery
+# document and x402scan.com's real current page, to determine whether a
+# reported stale address/logo on x402scan.com reflects our own live worker
+# serving stale data, or is purely a cache on x402scan's/the viewer's side.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Our own worker's live discovery document
+        run: |
+          echo "=== GET https://vape-x402.vapex402.workers.dev/openapi.json ==="
+          curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/openapi.json" -o openapi.json
+          echo "--- contact / payTo / icon fields ---"
+          grep -o '"payTo"[^,}]*' openapi.json | sort -u
+          grep -o '"iconUrl"[^,}]*' openapi.json | sort -u
+          grep -o '"x-icon"[^,}]*' openapi.json | sort -u
+          echo "--- full doc (first 4000 chars) ---"
+          head -c 4000 openapi.json
+          echo
+      - name: Our own worker's icon bytes (hash + size, to prove which asset is actually served)
+        run: |
+          echo "=== GET https://vape-x402.vapex402.workers.dev/favicon.ico ==="
+          curl -sS -m 20 -D - "https://vape-x402.vapex402.workers.dev/favicon.ico" -o favicon_from_worker.bin
+          echo "--- size / sha256 ---"
+          ls -la favicon_from_worker.bin
+          sha256sum favicon_from_worker.bin
+          echo "=== GET https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png ==="
+          curl -sS -m 20 -D - "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png" -o icon512.png
+          ls -la icon512.png
+          sha256sum icon512.png
+      - name: CDP Bazaar-status (our own worker's proxy to CDP's discovery catalog)
+        run: |
+          echo "=== GET https://vape-x402.vapex402.workers.dev/admin/bazaar-status ==="
+          curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/admin/bazaar-status" || true
+          echo
+      - name: x402scan.com's real current page for VAPE's listing
+        run: |
+          echo "=== GET https://x402scan.com/server/3c8 ==="
+          curl -sS -m 20 -A "Mozilla/5.0 (compatible; VAPE-diag/1.0)" "https://x402scan.com/server/3c8" -o x402scan_page.html || true
+          ls -la x402scan_page.html || true
+          echo "--- grep for address-looking strings (0x...) ---"
+          grep -oE '0x[a-fA-F0-9]{40}' x402scan_page.html | sort -u || true
+          echo "--- grep for icon/image src referencing our assets or an old path ---"
+          grep -oE '(src|href|content)="[^"]*(icon|favicon|avatar)[^"]*"' x402scan_page.html | sort -u || true
+          echo "--- Look for x402scan's own API/JSON backing this page, if discoverable ---"
+          grep -oE '/api/[a-zA-Z0-9/_-]+' x402scan_page.html | sort -u | head -20 || true
+      - name: x402scan.com's own API (best-effort, may not exist / may be JS-rendered)
+        run: |
+          echo "=== GET https://x402scan.com/api/server/3c8 (best effort) ==="
+          curl -sS -m 20 -A "Mozilla/5.0 (compatible; VAPE-diag/1.0)" "https://x402scan.com/api/server/3c8" || true
+          echo
