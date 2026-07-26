@@ -73,9 +73,9 @@ def test_gainers_and_losers_split_by_sign():
 
 def test_get_token_price_falls_back_to_defillama_on_coingecko_failure():
     def fake_get(url, *args, **kwargs):
-        if "coingecko.com" in url:
+        if "simple/price" in url:
             return {}  # the exact silent-empty shape observed in production
-        if "coins.llama.fi" in url:
+        if "prices/current" in url:
             return {"coins": {"coingecko:ethereum": {"price": 2500.0},
                                "coingecko:bitcoin": {"price": 97000.0}}}
         return {"error": "unexpected url"}
@@ -87,9 +87,9 @@ def test_get_token_price_falls_back_to_defillama_on_coingecko_failure():
 
 def test_get_token_price_fills_only_missing_ids_from_fallback():
     def fake_get(url, *args, **kwargs):
-        if "coingecko.com" in url:
+        if "simple/price" in url:
             return {"ethereum": {"usd": 2600.0}}  # bitcoin missing
-        if "coins.llama.fi" in url:
+        if "prices/current" in url:
             return {"coins": {"coingecko:bitcoin": {"price": 98000.0}}}
         return {"error": "unexpected url"}
     with mock.patch.object(df, "_get", side_effect=fake_get):
@@ -100,7 +100,7 @@ def test_get_token_price_fills_only_missing_ids_from_fallback():
 
 def test_get_token_price_returns_full_coingecko_result_untouched_when_complete():
     def fake_get(url, *args, **kwargs):
-        assert "coins.llama.fi" not in url, "fallback must not be called when CoinGecko already has everything"
+        assert "prices/current" not in url, "fallback must not be called when CoinGecko already has everything"
         return {"ethereum": {"usd": 2500.0}, "bitcoin": {"usd": 97000.0}}
     with mock.patch.object(df, "_get", side_effect=fake_get):
         out = df.get_token_price("ethereum,bitcoin")
