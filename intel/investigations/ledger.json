@@ -305,6 +305,25 @@
     "symbol": "IDL",
     "times_investigated": 1
   },
+  "137:0x4c28f48448720e9000907bc2611f73022fdce1fa": {
+    "address": "0x4c28f48448720e9000907BC2611F73022fdcE1fA",
+    "chain": "137",
+    "creator_address": "0x74665b21461f8d9b23bab7d599bfd7566a95fd70",
+    "first_investigated": "2026-07-26T07:25:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-072528-0x4c28f484.md",
+        "score": 60,
+        "ts": "2026-07-26T07:25:28Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T07:25:28Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "WETH",
+    "times_investigated": 1
+  },
   "137:0x6a92b1e99de09f71cd96bc91f934826d96b8b26e": {
     "address": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
     "chain": "137",
