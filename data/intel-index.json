@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T17:41:31Z",
+  "generated": "2026-07-26T17:56:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 432,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 389,
+    "investigations": 390,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-174131-0x9BE98a03.md",
+      "file": "investigation-20260726-175640-0x1257d823.md",
       "title": "Investigation \u2014 DIM",
       "symbol": "DIM",
       "name": "Dormant Inventory Mechanism",
-      "date": "2026-07-26T17:41:31Z",
-      "target": "0x9BE98a036f654040d39caF0F4530e95A4f890274",
+      "date": "2026-07-26T17:56:40Z",
+      "target": "0x1257d823Fcb0abAe72eAB01c59456F463cA3c35a",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,171; [-10] Violent 24h move +171% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-174131-0x9BE98a03.md"
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 200% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $11,961; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-175640-0x1257d823.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-175640-0x1257d823.md",
+      "title": "Investigation \u2014 DIM",
+      "symbol": "DIM",
+      "name": "Dormant Inventory Mechanism",
+      "date": "2026-07-26T17:56:40Z",
+      "target": "0x1257d823Fcb0abAe72eAB01c59456F463cA3c35a",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 200% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $11,961; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-175640-0x1257d823.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-174131-0x9BE98a03.md",
@@ -593,20 +607,6 @@
       "score": "53",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated. Positive evidence: 409711 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($15,620,901); Trading 409+ d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-020634-0x6A92B1E9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-015123-0xC5667DC0.md",
-      "title": "Investigation \u2014 EUL",
-      "symbol": "EUL",
-      "name": "Euler",
-      "date": "2026-07-26T01:51:23Z",
-      "target": "0xC5667DC06597ab4d2276EcE522918d7Fd8A578a4",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-015123-0xC5667DC0.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49143009",
+      "version": "49149193",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.51 eth_dom 9.95 mcap_chg_24h 0.83",
+      "version": "btc_dom 56.43 eth_dom 10.03 mcap_chg_24h 0.74",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xc946c947ee3a Vow 65362558.0 from 0x725c6ac0 to 0x833589fc",
+      "version": "0xf3185f830a2a EVOLUTION 25.0 from 0xaa7f03de to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

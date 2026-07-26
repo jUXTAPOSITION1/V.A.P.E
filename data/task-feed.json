@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-26T17:41:32Z",
-  "synthesis": "[bounty-radar",
+  "generated": "2026-07-26T17:56:41Z",
+  "synthesis": "VAPE's automation registered directories, checked tools, and generated reports, with frequent featured investigation updates.",
   "tasks": [
+    {
+      "sha": "992c518b4a",
+      "kind": "automation",
+      "message": "x402 directory registration 2026-07-26T17:47Z",
+      "date": "2026-07-26T17:47:58Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/992c518b4a8d1cc5bacc0f5fc7f4148dafe9ba48"
+    },
+    {
+      "sha": "770da9cf4b",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-26T17:42Z",
+      "date": "2026-07-26T17:42:20Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/770da9cf4b375acf9441abd1aa7b4a48d3e530bb"
+    },
+    {
+      "sha": "7261b4fcb2",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T17:41Z",
+      "date": "2026-07-26T17:41:36Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7261b4fcb2f9e1e1a706adca2fd7cf439636710a"
+    },
     {
       "sha": "39a30679d1",
       "kind": "bounty-radar",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-26T15:56Z",
       "date": "2026-07-26T15:56:47Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a97bc48e174d1e3f61d2bc721b959b24903bbaab"
-    },
-    {
-      "sha": "74aadbea00",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-26T15:43Z",
-      "date": "2026-07-26T15:43:05Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/74aadbea003b865676e646ab1b1af4279e87acbb"
-    },
-    {
-      "sha": "d2ebfa91ce",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T15:41Z",
-      "date": "2026-07-26T15:41:38Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d2ebfa91ce11fcecad4a7fe59cb03feffd82ac3f"
-    },
-    {
-      "sha": "5d20eb5bb0",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-26T15:31Z",
-      "date": "2026-07-26T15:31:56Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5d20eb5bb075d194552d7eae786b9399dd4a794f"
     }
   ]
 }
