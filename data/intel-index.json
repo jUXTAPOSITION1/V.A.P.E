@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T14:11:44Z",
+  "generated": "2026-07-26T14:26:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 429,
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49136094",
+      "version": "49143009",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.47 eth_dom 9.92 mcap_chg_24h 0.8",
+      "version": "btc_dom 56.51 eth_dom 9.95 mcap_chg_24h 0.83",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xccfae3137505 AIP 9.0 from 0xaa7f03de to 0x833589fc",
+      "version": "0xc946c947ee3a Vow 65362558.0 from 0x725c6ac0 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1762,8 +1762,8 @@
     },
     {
       "file": "skills-token-investigation-md.md",
-      "title": "skills/token_investigation.md",
-      "summary": "Distilled 2026-07-22T08:35:07Z from real SKILLFORGE memory.",
+      "title": "skills/token-investigation.md",
+      "summary": "Distilled 2026-07-26T08:31:49Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-token-investigation-md.md"
     }
   ]
