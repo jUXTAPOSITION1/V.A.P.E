@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T10:07:35Z",
+  "generated": "2026-07-26T10:10:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 368,
+    "investigations": 369,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-092524-0x6a4e26FA.md",
-      "title": "Investigation \u2014 PUPPY",
-      "symbol": "PUPPY",
-      "name": "Puppy",
-      "date": "2026-07-26T09:25:24Z",
-      "target": "0x6a4e26FA2f769A3d98b47A9e0e3C2177Cd5C88BF",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Low holder count (90); [-15] Top 9 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,509 (rug/illiquid); [-10] Low liquidity $4,509; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-092524-0x6a4e26FA.md"
+      "file": "investigation-20260726-101017-0x289ba170.md",
+      "title": "Investigation \u2014 LPT",
+      "symbol": "LPT",
+      "name": "Livepeer Token",
+      "date": "2026-07-26T10:10:17Z",
+      "target": "0x289ba1701C2F088cf0faf8B3705246331cB8A839",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 260574 holders \u2014 reasonably distributed; Trading 1612+ days without a know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-101017-0x289ba170.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-101017-0x289ba170.md",
+      "title": "Investigation \u2014 LPT",
+      "symbol": "LPT",
+      "name": "Livepeer Token",
+      "date": "2026-07-26T10:10:17Z",
+      "target": "0x289ba1701C2F088cf0faf8B3705246331cB8A839",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 260574 holders \u2014 reasonably distributed; Trading 1612+ days without a know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-101017-0x289ba170.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-092524-0x6a4e26FA.md",
@@ -593,20 +607,6 @@
       "score": "77",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 1681924 holders \u2014 reasonably distributed; Deep liquidity ($2,384,022); Trading 1846+ days without a known incident in this",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-202938-0x95aD61b0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-201426-0xd8526e86.md",
-      "title": "Investigation \u2014 FWAres",
-      "symbol": "FWAres",
-      "name": "FWA Reserve",
-      "date": "2026-07-25T20:14:26Z",
-      "target": "0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +15054% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-201426-0xd8526e86.md"
     }
   ],
   "reports": [

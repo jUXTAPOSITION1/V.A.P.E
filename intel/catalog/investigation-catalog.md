@@ -567,3 +567,5 @@
 | 2026-07-26 | auto | 0xd6a20E0E2d2399c925e315732E76538F3883a1d6 (EBCC) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0x6a4e26FA2f769A3d98b47A9e0e3C2177Cd5C88BF (PUPPY) | deep_investigation | REJECT (32/100) | Low holder count (90) | +7d |
+
+| 2026-07-26 | auto | 0x289ba1701C2F088cf0faf8B3705246331cB8A839 (LPT) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |

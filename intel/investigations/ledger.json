@@ -1658,6 +1658,25 @@
     "symbol": "RAIN",
     "times_investigated": 2
   },
+  "42161:0x289ba1701c2f088cf0faf8b3705246331cb8a839": {
+    "address": "0x289ba1701C2F088cf0faf8B3705246331cB8A839",
+    "chain": "42161",
+    "creator_address": "0xb5af4138f0f33be0d6414eb25271b9c2dc245fb5",
+    "first_investigated": "2026-07-26T10:10:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-101017-0x289ba170.md",
+        "score": 58,
+        "ts": "2026-07-26T10:10:17Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T10:10:17Z",
+    "last_score": 58,
+    "last_verdict": "CAUTION",
+    "symbol": "LPT",
+    "times_investigated": 1
+  },
   "42161:0x3b8db18e69d6686ad9371a423afe3dd1065c94f1": {
     "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
     "chain": "42161",

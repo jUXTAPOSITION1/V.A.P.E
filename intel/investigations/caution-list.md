@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-26T09:25:24Z — 62 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-26T10:10:17Z — 63 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| LPT | Arbitrum | `0x289ba1701C2F088cf0faf8B3705246331cB8A839` | 58/100 | 1 | 2026-07-26T10:10:17Z |
 | PUPPY | Ethereum | `0x8cDDd6EeA1067b78B77255e49861843F69D4703D` | 50/100 | 1 | 2026-07-26T08:55:18Z |
 | WETH | Polygon | `0x4c28f48448720e9000907BC2611F73022fdcE1fA` | 60/100 | 1 | 2026-07-26T07:25:28Z |
 | DIM | Ethereum | `0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0` | 50/100 | 1 | 2026-07-26T03:54:24Z |
