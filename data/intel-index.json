@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T13:24:59Z",
+  "generated": "2026-07-26T13:26:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 429,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 378,
+    "investigations": 379,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-131143-0xb932933E.md",
-      "title": "Investigation \u2014 OPENAI",
-      "symbol": "OPENAI",
-      "name": "OpenAI BOT",
-      "date": "2026-07-26T13:11:43Z",
-      "target": "0xb932933E3504F85c330aa20Ed3Ce7610851C96E4",
+      "file": "investigation-20260726-132645-0xDB9d15E4.md",
+      "title": "Investigation \u2014 NTFS",
+      "symbol": "NTFS",
+      "name": "National Trust Fund System",
+      "date": "2026-07-26T13:26:45Z",
+      "target": "0xDB9d15E484368facB45f5784A99A0A5fECEed624",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-35] Token name/symbol (OpenAI BOT / OPENAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily m",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-131143-0xb932933E.md"
+      "score": "43",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 26.8 days old \u2014 under a month, still unproven; [-10] No known third-party audit or",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-132645-0xDB9d15E4.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-132645-0xDB9d15E4.md",
+      "title": "Investigation \u2014 NTFS",
+      "symbol": "NTFS",
+      "name": "National Trust Fund System",
+      "date": "2026-07-26T13:26:45Z",
+      "target": "0xDB9d15E484368facB45f5784A99A0A5fECEed624",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "43",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 26.8 days old \u2014 under a month, still unproven; [-10] No known third-party audit or",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-132645-0xDB9d15E4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-131143-0xb932933E.md",
@@ -593,20 +607,6 @@
       "score": "23",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 23.9 days old \u2014",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-231833-0x3134be4a.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-230314-0xAFF25650.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid",
-      "date": "2026-07-25T23:03:14Z",
-      "target": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 3587 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 684+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-230314-0xAFF25650.md"
     }
   ],
   "reports": [

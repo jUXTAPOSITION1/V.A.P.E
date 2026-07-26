@@ -4550,6 +4550,25 @@
     "symbol": "DropERC20",
     "times_investigated": 2
   },
+  "8453:0xdb9d15e484368facb45f5784a99a0a5feceed624": {
+    "address": "0xDB9d15E484368facB45f5784A99A0A5fECEed624",
+    "chain": "8453",
+    "creator_address": "0x0f325bd174c70440fa62c31dce9f69d54baf717e",
+    "first_investigated": "2026-07-26T13:26:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-132645-0xDB9d15E4.md",
+        "score": 43,
+        "ts": "2026-07-26T13:26:45Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T13:26:45Z",
+    "last_score": 43,
+    "last_verdict": "REJECT",
+    "symbol": "NTFS",
+    "times_investigated": 1
+  },
   "8453:0xdcf5130274753c8050ab061b1a1dcbf583f5bfd0": {
     "address": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0",
     "chain": "8453",
