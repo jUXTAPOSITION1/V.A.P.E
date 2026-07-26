@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T23:42:15Z",
+  "generated": "2026-07-26T23:57:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 439,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 399,
+    "investigations": 400,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-225719-0x181cd470.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "DCA",
-      "date": "2026-07-26T22:57:19Z",
-      "target": "0x181cd4706322EF57a51c5dA6AdE1fC56FF694444",
+      "file": "investigation-20260726-235721-0x8682BaCE.md",
+      "title": "Investigation \u2014 Subject 3",
+      "symbol": "Subject 3",
+      "name": "Subject 3",
+      "date": "2026-07-26T23:57:21Z",
+      "target": "0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xcB362b3701eF6F811DCdCd702482812D0Cf34444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-225719-0x181cd470.md"
+      "score": "40",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 49% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-235721-0x8682BaCE.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-235721-0x8682BaCE.md",
+      "title": "Investigation \u2014 Subject 3",
+      "symbol": "Subject 3",
+      "name": "Subject 3",
+      "date": "2026-07-26T23:57:21Z",
+      "target": "0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 49% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-235721-0x8682BaCE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-225719-0x181cd470.md",
@@ -593,20 +607,6 @@
       "score": "7",
       "summary": "Risk factors: [-8] Low holder count (68); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $41 (rug/illiquid); [-10] Low liquidity $41; [-10] Violent 24h move +166% (vola",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-045525-0x85bAbbd6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-044005-0x0Fa73480.md",
-      "title": "Investigation \u2014 SHIB",
-      "symbol": "SHIB",
-      "name": "SHIBA INU",
-      "date": "2026-07-26T04:40:05Z",
-      "target": "0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EUL (0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-044005-0x0Fa73480.md"
     }
   ],
   "reports": [
