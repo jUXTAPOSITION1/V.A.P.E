@@ -407,7 +407,17 @@ def _protocol_fees(req):
 
 def _unlocks(req):
     s = _dl_need_slug(req)
-    return _dl().unlocks(s) if s else {"error": "no protocol slug in requirement"}
+    if not s:
+        raise ValueError("no protocol slug in requirement")
+    out = _dl().unlocks(s)
+    # unlocks() never raises (real data or a real fallback estimate, or an
+    # {"error"} dict) — a still-present error here means neither the primary
+    # unlock-calendar source nor the CoinGecko supply-gap fallback had
+    # anything usable, so fulfill()'s caller should treat this as a failed
+    # job (no charge) rather than deliver the raw error string as paid output.
+    if isinstance(out, dict) and out.get("error"):
+        raise RuntimeError(out["error"])
+    return out
 
 
 def _treasury(req):
@@ -441,7 +451,13 @@ def _stablecoins(req):
 
 
 def _bridges(req):
-    return _dl().bridges()
+    out = _dl().bridges()
+    # Same fail-closed contract as _unlocks() above: bridges() never raises,
+    # so a still-present error means the bridge-volume list AND the
+    # bridge-incident fallback both came up empty this cycle.
+    if isinstance(out, dict) and out.get("error"):
+        raise RuntimeError(out["error"])
+    return out
 
 
 

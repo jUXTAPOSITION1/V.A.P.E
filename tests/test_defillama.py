@@ -117,6 +117,65 @@ def test_unlocks_surfaces_next_upcoming(monkeypatch):
     assert 9 <= r["next_unlock"]["in_days"] <= 11
 
 
+def test_unlocks_falls_back_to_supply_gap_when_emission_endpoint_gated(monkeypatch):
+    # Real, confirmed 2026-07-26 shape: DefiLlama moved /emission behind its
+    # Pro API tier, so the primary call now 402s unconditionally.
+    def fake_get(url, *a, **k):
+        if "/emission/" in url:
+            return {"error": "HTTP 402", "url": url}
+        if "/protocol/" in url:
+            return {"name": "Aptos", "gecko_id": "aptos"}
+        if "coingecko.com/api/v3/coins/" in url:
+            return {"market_data": {"total_supply": 1_000_000_000, "circulating_supply": 500_000_000,
+                                     "max_supply": 1_000_000_000}}
+        return {"error": "unexpected url"}
+
+    monkeypatch.setattr(dl, "_get", fake_get)
+    r = dl.unlocks("aptos")
+    assert r["locked_supply_pct"] == 50.0
+    assert r["next_unlock"] is None
+    assert "estimate" in r["data_source"]
+    assert not r.get("error")
+
+
+def test_unlocks_returns_honest_error_when_no_gecko_id_and_no_fallback(monkeypatch):
+    def fake_get(url, *a, **k):
+        if "/emission/" in url:
+            return {"error": "HTTP 402", "url": url}
+        if "/protocol/" in url:
+            return {"name": "NoToken"}  # no gecko_id -> no supply-gap fallback possible
+        return {"error": "unexpected url"}
+
+    monkeypatch.setattr(dl, "_get", fake_get)
+    r = dl.unlocks("no-token-proto")
+    assert r["error"] == "HTTP 402"
+
+
+def test_bridges_falls_back_to_bridge_incident_feed_when_list_endpoint_fails(monkeypatch):
+    monkeypatch.setattr(dl, "_get", lambda *a, **k: {"error": "HTTP 402"})
+    monkeypatch.setattr(dl, "get_hack_feed", lambda limit=8, chain=None: [
+        {"date": "2026-07-01", "name": "Some Bridge Hack", "amount_usd_m": 5.0,
+         "chains": ["Ethereum"], "technique": "Bridge Hack", "source_url": None},
+        {"date": "2026-06-01", "name": "Unrelated Rug", "amount_usd_m": 1.0,
+         "chains": ["Base"], "technique": "Rug Pull", "source_url": None},
+    ])
+    r = dl.bridges()
+    assert not r.get("error")
+    assert len(r["recent_bridge_incidents"]) == 1
+    assert r["recent_bridge_incidents"][0]["name"] == "Some Bridge Hack"
+    assert "incident feed" in r["data_source"]
+
+
+def test_bridges_returns_honest_error_when_no_bridge_incidents_either(monkeypatch):
+    monkeypatch.setattr(dl, "_get", lambda *a, **k: {"error": "HTTP 402"})
+    monkeypatch.setattr(dl, "get_hack_feed", lambda limit=8, chain=None: [
+        {"date": "2026-06-01", "name": "Unrelated Rug", "amount_usd_m": 1.0,
+         "chains": ["Base"], "technique": "Rug Pull", "source_url": None},
+    ])
+    r = dl.bridges()
+    assert r["error"] == "HTTP 402"
+
+
 def test_token_intel_degrades_per_field(monkeypatch):
     # price errors, first-price ok — the good field survives the bad one.
     calls = {"n": 0}

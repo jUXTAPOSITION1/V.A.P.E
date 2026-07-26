@@ -169,7 +169,16 @@ export const DL_OFFERINGS: DlOffering[] = [
     inputSchema: { properties: { slug: { type: "string", description: "protocol slug" } }, required: ["slug"] },
     inputExample: { slug: "aptos" },
     output: { slug: "aptos", next_unlock: { in_days: 9.5, description: "cliff", amount: 1000000 }, tracked_events: 42 },
-    run: async (q) => dl.unlocks(requireSlug(q)),
+    // dl.unlocks() never throws (real data, a real supply-gap fallback
+    // estimate, or an {error} shape) — a still-present error means neither
+    // source had anything usable, so this route should fail the job (no
+    // charge, see index.ts's /data/* handler) rather than sell a raw
+    // upstream error string as the $0.01 deliverable.
+    run: async (q) => {
+      const out = await dl.unlocks(requireSlug(q));
+      if (out.error) throw new Error(String(out.error));
+      return out;
+    },
   },
   {
     name: "treasury",
@@ -269,7 +278,12 @@ export const DL_OFFERINGS: DlOffering[] = [
     inputSchema: { properties: {}, required: [] },
     inputExample: {},
     output: { count: 25, bridges: [{ name: "Across", last_daily_volume: 5000000, chains: ["Base"] }] },
-    run: async () => dl.bridges(),
+    // Same fail-closed contract as unlocks() above.
+    run: async () => {
+      const out = await dl.bridges();
+      if (out.error) throw new Error(String(out.error));
+      return out;
+    },
   },
   {
     // Originally Codex-backed (walletBalances/detailedWalletStats/walletChart),

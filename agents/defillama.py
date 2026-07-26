@@ -39,7 +39,7 @@ import urllib.error
 # local minimal fetcher if data_fetchers can't be imported (keeps this module
 # runnable stand-alone / in the worker-port test harness).
 try:
-    from agents.data_fetchers import _get, _now_iso  # noqa
+    from agents.data_fetchers import _get, _now_iso, get_hack_feed  # noqa
 except Exception:  # pragma: no cover
     _UA = {"User-Agent": "VAPE/1.0 (+https://github.com/jUXTAPOSITION1/V.A.P.E)"}
 
@@ -55,6 +55,9 @@ except Exception:  # pragma: no cover
             return {"error": f"HTTP {e.code}", "url": url}
         except Exception as e:
             return {"error": str(e), "url": url}
+
+    def get_hack_feed(limit=8, chain=None):  # pragma: no cover
+        return {"error": "hack feed unavailable in standalone mode"}
 
 API = "https://api.llama.fi"
 COINS = "https://coins.llama.fi"
@@ -293,16 +296,37 @@ def bridges(limit=25):
     per-bridge chain breakdown, which DefiLlama now gates behind its Pro API
     (this call was observed 402ing in production with that param — see
     worker/src/lib/defillama.ts::bridges() for the parallel fix). Dropping it
-    keeps this offering deliverable; `chains` is simply absent now."""
+    keeps this offering deliverable; `chains` is simply absent now.
+
+    Real gap this closes (2026-07-26, direct user report: the live offering
+    was shipping a bare "HTTP 402" as its entire $0.01 deliverable): the plain
+    list endpoint above has ALSO started failing in production, on top of the
+    known includeChains gate. Falls back to a real, always-free signal —
+    recent bridge-category incidents from the same keyless hack feed
+    security_sweep.py already uses — so "is bridge risk elevated right now"
+    still gets a genuine answer instead of a raw upstream error string. Never
+    raises (matches this module's law); the caller decides whether a
+    still-error result should skip billing (see acp_fulfill.py's _bridges)."""
     d = _get(f"{BRIDGES}/bridges", ttl=1800, cache_key="dl_bridges")
-    if _err(d):
-        return d
-    rows = [{"id": b.get("id"), "name": b.get("displayName") or b.get("name"),
-             "chains": b.get("chains"), "last_daily_volume": b.get("lastDailyVolume"),
-             "weekly_volume": b.get("weeklyVolume")}
-            for b in (d.get("bridges") or [])]
-    rows.sort(key=lambda r: r["last_daily_volume"] or 0, reverse=True)
-    return {"ts": _now_iso(), "count": len(rows), "bridges": rows[:limit]}
+    if not _err(d):
+        rows = [{"id": b.get("id"), "name": b.get("displayName") or b.get("name"),
+                 "chains": b.get("chains"), "last_daily_volume": b.get("lastDailyVolume"),
+                 "weekly_volume": b.get("weeklyVolume")}
+                for b in (d.get("bridges") or [])]
+        rows.sort(key=lambda r: r["last_daily_volume"] or 0, reverse=True)
+        return {"ts": _now_iso(), "count": len(rows), "bridges": rows[:limit]}
+
+    feed = get_hack_feed(limit=50)
+    bridge_incidents = [h for h in feed if "bridge" in str(h.get("technique") or "").lower()
+                         or "bridge" in str(h.get("name") or "").lower()][:limit] \
+        if isinstance(feed, list) else []
+    if not bridge_incidents:
+        return {"error": d.get("error", "bridge data unavailable"), "url": d.get("url")}
+    return {"ts": _now_iso(), "count": len(bridge_incidents),
+            "data_source": "bridge-exploit incident feed (bridge volume list unavailable this cycle)",
+            "recent_bridge_incidents": bridge_incidents,
+            "note": "Live bridge-volume ranking unavailable this cycle; showing recent bridge-category "
+                    "exploit incidents instead as the nearer-term threat signal."}
 
 
 def bridge_volume(chain="Base"):
@@ -325,28 +349,58 @@ def unlocks(slug):
     """Token unlock / emission schedule for a protocol — an imminent large
     unlock is a concrete dump-risk an investigator must flag. Returns the next
     upcoming unlock event and the total still-locked share where DefiLlama has
-    it. Degrades honestly when a token isn't tracked."""
+    it. Degrades honestly when a token isn't tracked.
+
+    Real gap this closes (2026-07-26, direct user report: the live offering
+    was shipping a bare "HTTP 402" as its entire $0.01 deliverable): DefiLlama
+    moved this exact endpoint behind its $300/mo Pro API tier — confirmed via
+    web search, not assumed — so it now 402s unconditionally on the free tier.
+    Falls back to a circulating-vs-total-supply gap pulled from the protocol's
+    own CoinGecko listing (via the gecko_id DefiLlama's own /protocol/{slug}
+    already carries, no new provider) — a coarser but real and always-free
+    future-dilution signal, honestly labeled as an estimate rather than an
+    exact unlock date. Never raises (matches this module's law); the caller
+    decides whether a still-error result should skip billing."""
     d = _get(f"{API}/emission/{urllib.parse.quote(slug)}", ttl=21600, cache_key=f"dl_emission_{slug}")
-    if _err(d):
-        return d
-    # Shape varies; surface the fields that exist without asserting a schema.
-    events = d.get("events") or d.get("unlocks") or []
-    now = time.time()
-    upcoming = None
-    best_ts = None
-    # Scan every event and keep the EARLIEST future one — `events` isn't
-    # guaranteed sorted (some payloads are newest-first), so stopping at the
-    # first future item can surface a later unlock than the one that's next.
-    for e in events:
-        ts = e.get("timestamp") or e.get("date")
-        if isinstance(ts, (int, float)) and ts > now and (best_ts is None or ts < best_ts):
-            best_ts = ts
-            upcoming = {"timestamp": ts,
-                        "in_days": round((ts - now) / 86400, 1),
-                        "description": e.get("description") or e.get("category"),
-                        "amount": e.get("noOfTokens") or e.get("amount")}
-    return {"ts": _now_iso(), "slug": slug, "name": d.get("name"),
-            "next_unlock": upcoming, "tracked_events": len(events)}
+    if not _err(d):
+        # Shape varies; surface the fields that exist without asserting a schema.
+        events = d.get("events") or d.get("unlocks") or []
+        now = time.time()
+        upcoming = None
+        best_ts = None
+        # Scan every event and keep the EARLIEST future one — `events` isn't
+        # guaranteed sorted (some payloads are newest-first), so stopping at
+        # the first future item can surface a later unlock than the next.
+        for e in events:
+            ts = e.get("timestamp") or e.get("date")
+            if isinstance(ts, (int, float)) and ts > now and (best_ts is None or ts < best_ts):
+                best_ts = ts
+                upcoming = {"timestamp": ts,
+                            "in_days": round((ts - now) / 86400, 1),
+                            "description": e.get("description") or e.get("category"),
+                            "amount": e.get("noOfTokens") or e.get("amount")}
+        return {"ts": _now_iso(), "slug": slug, "name": d.get("name"),
+                "next_unlock": upcoming, "tracked_events": len(events)}
+
+    proto = _get(f"{API}/protocol/{urllib.parse.quote(slug)}", ttl=1800, cache_key=f"dl_proto_{slug}")
+    gecko_id = proto.get("gecko_id") if isinstance(proto, dict) else None
+    if not gecko_id:
+        return {"error": d.get("error", "unlock data unavailable"), "url": d.get("url")}
+    cg = _get(f"https://api.coingecko.com/api/v3/coins/{urllib.parse.quote(gecko_id)}"
+              f"?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false",
+              ttl=3600, cache_key=f"cg_coin_{gecko_id}")
+    m = (cg.get("market_data") or {}) if isinstance(cg, dict) else {}
+    total = m.get("total_supply")
+    circ = m.get("circulating_supply")
+    if not (isinstance(total, (int, float)) and total > 0 and isinstance(circ, (int, float))):
+        return {"error": d.get("error", "unlock data unavailable"), "url": d.get("url")}
+    locked_pct = round((total - circ) / total * 100, 2)
+    return {"ts": _now_iso(), "slug": slug, "name": proto.get("name"),
+            "data_source": "supply-gap estimate (unlock calendar unavailable this cycle)",
+            "circulating_supply": circ, "total_supply": total, "max_supply": m.get("max_supply"),
+            "locked_supply_pct": locked_pct, "next_unlock": None, "tracked_events": 0,
+            "note": "Exact next-unlock date unavailable this cycle; this is the gap between circulating "
+                    "and total supply as a coarser future-dilution signal."}
 
 
 # ── Treasury (api.llama.fi) ──────────────────────────────────────────────────
