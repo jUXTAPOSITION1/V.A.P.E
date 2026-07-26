@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T13:26:48Z",
+  "generated": "2026-07-26T13:41:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 429,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 379,
+    "investigations": 380,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-132645-0xDB9d15E4.md",
-      "title": "Investigation \u2014 NTFS",
-      "symbol": "NTFS",
-      "name": "National Trust Fund System",
-      "date": "2026-07-26T13:26:45Z",
-      "target": "0xDB9d15E484368facB45f5784A99A0A5fECEed624",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260726-134149-0xBA103bbd.md",
+      "title": "Investigation \u2014 PUPPY",
+      "symbol": "PUPPY",
+      "name": "Puppy",
+      "date": "2026-07-26T13:41:49Z",
+      "target": "0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "43",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 26.8 days old \u2014 under a month, still unproven; [-10] No known third-party audit or",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-132645-0xDB9d15E4.md"
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +242% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-134149-0xBA103bbd.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-134149-0xBA103bbd.md",
+      "title": "Investigation \u2014 PUPPY",
+      "symbol": "PUPPY",
+      "name": "Puppy",
+      "date": "2026-07-26T13:41:49Z",
+      "target": "0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +242% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-134149-0xBA103bbd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-132645-0xDB9d15E4.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-233355-0x375488F0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-231833-0x3134be4a.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-25T23:18:33Z",
-      "target": "0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "23",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 23.9 days old \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-231833-0x3134be4a.md"
     }
   ],
   "reports": [

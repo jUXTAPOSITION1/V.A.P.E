@@ -589,3 +589,5 @@
 | 2026-07-26 | auto | 0xb932933E3504F85c330aa20Ed3Ce7610851C96E4 (OPENAI) | deep_investigation | REJECT (0/100) | Token name/symbol (OpenAI BOT / OPENAI) impersonates a real company with no on-c | +7d |
 
 | 2026-07-26 | auto | 0xDB9d15E484368facB45f5784A99A0A5fECEed624 (NTFS) | deep_investigation | REJECT (43/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c (PUPPY) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
