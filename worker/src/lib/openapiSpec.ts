@@ -96,7 +96,8 @@ export function guidance(origin: string): string {
     "- token_safety_check ($0.02) — token-safety + liquidity scan with a weighted 0-100 score.",
     "- liquidity_check ($0.02) — liquidity depth and top pair DEX.",
     "- rug_pull_alert ($0.03) — owner-power and rug-risk flags.",
-    "- market_intel ($0.07) — Base TVL, top protocols, rule-based anomaly flags.",
+    "- market_intel ($0.07) — Base TVL trend, per-protocol share/category breakdown, "
+      + "concentration risk, DEX volume, gainers/losers, prices, sentiment, and a narrative summary.",
     "- dossier_check ($0.10) — VAPE's deepest instant verdict; score, meme-factory-template",
     "  detection, recent-hack correlation, web-reputation and declared-socials checks, plus a",
     "  frontier-LLM read of the verified source.",

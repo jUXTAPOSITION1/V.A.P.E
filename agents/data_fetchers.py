@@ -91,16 +91,23 @@ def _post_rpc(method, params, timeout=12):
 
 # ── 1. DefiLlama: TVL / flows / anomaly signal ────────────────────────────────
 def get_base_tvl_and_protocols(top_n=10):
-    """Base chain TVL + 24h/7d change + top protocols by TVL. Keyless."""
+    """Base chain TVL + 24h/7d change + top protocols by TVL, plus the
+    derived signals a raw protocol list can't show on its own: each top
+    protocol's real share of total Base TVL, a category breakdown across
+    EVERY real Base protocol (not just the top_n slice, so "where the money
+    actually is" isn't skewed by the cutoff), and a concentration-risk read
+    off the top-3 share. All computed from fields DefiLlama's own
+    /protocols response already carries — no new fetch. Keyless."""
     chains = _get("https://api.llama.fi/v2/chains", ttl=900, cache_key="llama_chains")
     if isinstance(chains, dict) and chains.get("error"):
         return chains
     base = next((c for c in chains if str(c.get("name", "")).lower() == "base"), None)
     if not base:
         return {"error": "Base chain not found in DefiLlama"}
+    tvl_usd = base.get("tvl")
     out = {
         "ts": _now_iso(),
-        "tvl_usd": base.get("tvl"),
+        "tvl_usd": tvl_usd,
         "tvl_24h_change_pct": base.get("change_1d"),
         "tvl_7d_change_pct": base.get("change_7d"),
     }
@@ -116,13 +123,65 @@ def get_base_tvl_and_protocols(top_n=10):
                        and (p.get("category") or "") not in ("CEX",)
                        and base_tvl(p) > 0]
         base_protos.sort(key=base_tvl, reverse=True)
+
+        def share_pct(v):
+            return round(v / tvl_usd * 100, 2) if isinstance(tvl_usd, (int, float)) and tvl_usd else None
+
+        top = base_protos[:top_n]
         out["top_protocols"] = [
             {"name": p.get("name"), "base_tvl_usd": base_tvl(p),
+             "share_of_base_pct": share_pct(base_tvl(p)),
              "change_1d": p.get("change_1d"), "change_7d": p.get("change_7d"),
              "change_1m": p.get("change_1m"), "category": p.get("category")}
-            for p in base_protos[:top_n]
+            for p in top
         ]
+
+        # Category breakdown over ALL real Base protocols (not just top_n) —
+        # a top_n-only view would misrepresent "where the money is" once
+        # smaller protocols in an under-represented category are cut off.
+        cat_totals = {}
+        for p in base_protos:
+            cat = p.get("category") or "Other"
+            cat_totals[cat] = cat_totals.get(cat, 0) + base_tvl(p)
+        if isinstance(tvl_usd, (int, float)) and tvl_usd:
+            out["category_breakdown_pct"] = {
+                cat: round(v / tvl_usd * 100, 2)
+                for cat, v in sorted(cat_totals.items(), key=lambda kv: kv[1], reverse=True)
+            }
+
+        # Concentration risk — top-3 share of total TVL. Thresholds match
+        # this codebase's existing rule-based severity framing elsewhere
+        # (score()'s penalty tiers), not an arbitrary new scale.
+        top3_share = sum(share_pct(base_tvl(p)) or 0 for p in top[:3])
+        if top3_share >= 60:
+            level = "HIGH"
+        elif top3_share >= 40:
+            level = "MEDIUM"
+        else:
+            level = "LOW"
+        out["concentration_risk"] = f"{level} — top 3 protocols hold {top3_share:.1f}% of Base TVL"
+
+        # Real 24h movers among the top_n set only (a protocol outside the
+        # top_n has no business being called a "top gainer/loser" here).
+        movers = [p for p in top if isinstance(p.get("change_1d"), (int, float))]
+        gainers = sorted((p for p in movers if p["change_1d"] > 0), key=lambda p: p["change_1d"], reverse=True)
+        losers = sorted((p for p in movers if p["change_1d"] < 0), key=lambda p: p["change_1d"])
+        out["top_gainers_24h"] = [{"name": p["name"], "change_1d": p["change_1d"]} for p in gainers[:3]]
+        out["top_losers_24h"] = [{"name": p["name"], "change_1d": p["change_1d"]} for p in losers[:3]]
     return out
+
+
+def get_base_dex_volume():
+    """Real Base DEX trading volume (24h/7d) — the actual-activity counterpart
+    to TVL (parked capital can sit idle; volume is money actually moving).
+    Keyless. Deliberately its own small fetch here rather than importing
+    agents/defillama.py's near-identical dex_volumes() — that module imports
+    _get/_now_iso FROM this one, so the reverse import would be circular."""
+    url = "https://api.llama.fi/overview/dexs/base?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true"
+    d = _get(url, ttl=3600, cache_key="dl_dexs_base")
+    if isinstance(d, dict) and d.get("error"):
+        return d
+    return {"ts": _now_iso(), "vol_24h_usd": d.get("total24h"), "vol_7d_usd": d.get("total7d")}
 
 
 def get_protocol_tvl(slug="aerodrome"):
@@ -178,11 +237,54 @@ def get_recent_block_activity(block="latest", full_txs=False):
 
 # ── 3. CoinGecko: price / token market data ───────────────────────────────────
 def get_token_price(ids="ethereum", vs="usd"):
-    """Spot prices for coin ids (comma-sep). Keyless."""
+    """Spot prices for coin ids (comma-sep). Keyless.
+
+    Real gap this closes: on a CoinGecko failure/rate-limit this used to
+    return {} silently (either a genuine empty JSON body, or an {"error":
+    ...} dict a caller that only reads coin-id keys would never notice) —
+    confirmed live in a paid market_intel deliverable that shipped an empty
+    "prices" object. Falls back to DefiLlama's coins.llama.fi (a second,
+    independent free price oracle already used elsewhere in this codebase)
+    rather than silently returning nothing."""
     q = urllib.parse.urlencode({"ids": ids, "vs_currencies": vs,
                                 "include_24hr_change": "true"})
-    return _get(f"https://api.coingecko.com/api/v3/simple/price?{q}",
-                ttl=300, cache_key=f"cg_price_{ids}_{vs}")
+    d = _get(f"https://api.coingecko.com/api/v3/simple/price?{q}",
+             ttl=300, cache_key=f"cg_price_{ids}_{vs}")
+    id_list = [i.strip() for i in ids.split(",") if i.strip()]
+    have_all = isinstance(d, dict) and not d.get("error") and all(
+        isinstance(d.get(i), dict) and d[i].get(vs) is not None for i in id_list
+    )
+    if have_all:
+        return d
+    fallback = _get_defillama_coin_prices(id_list)
+    if not isinstance(d, dict) or d.get("error"):
+        return fallback
+    # Partial CoinGecko result — fill only the missing ids from the fallback
+    # rather than discarding whatever CoinGecko did return.
+    merged = dict(d)
+    for i in id_list:
+        if not (isinstance(merged.get(i), dict) and merged[i].get(vs) is not None) and i in fallback:
+            merged[i] = fallback[i]
+    return merged
+
+
+def _get_defillama_coin_prices(coingecko_ids):
+    """DefiLlama's coins.llama.fi price oracle, keyed by `coingecko:{id}` —
+    same shape as CoinGecko's own simple/price response (just {usd: price}
+    per id) so callers of get_token_price() don't need to special-case
+    which source actually answered."""
+    keys = ",".join(f"coingecko:{i}" for i in coingecko_ids)
+    d = _get(f"https://coins.llama.fi/prices/current/{urllib.parse.quote(keys)}",
+             ttl=300, cache_key=f"dl_price_{keys}")
+    if not isinstance(d, dict) or d.get("error"):
+        return {}
+    coins = d.get("coins") or {}
+    out = {}
+    for i in coingecko_ids:
+        c = coins.get(f"coingecko:{i}")
+        if isinstance(c, dict) and c.get("price") is not None:
+            out[i] = {"usd": c["price"]}
+    return out
 
 
 def get_token_market_by_contract(contract, platform="base"):
@@ -587,6 +689,40 @@ def _filter_stale_mover_anomalies(mover_flags):
     return kept
 
 
+def _market_overview_narrative(tvl, dex_vol, fng, glob_m):
+    """Deterministic, template-built narrative from the real numbers already
+    fetched — NOT an LLM call. market_intel is priced/positioned as a fast,
+    cheap snapshot (see agents/acp_fulfill.py::_market_intel()); a frontier-
+    model call would add real latency/cost for a sentence a template can
+    build honestly from numbers already on hand. Every clause below reads
+    directly off a real field — never invents a claim the data doesn't
+    support, and omits a clause outright when its underlying field is
+    missing rather than guessing."""
+    parts = []
+    tvl_usd, chg = tvl.get("tvl_usd"), tvl.get("tvl_24h_change_pct")
+    if isinstance(tvl_usd, (int, float)):
+        direction = "up" if isinstance(chg, (int, float)) and chg >= 0 else "down"
+        chg_clause = f", {direction} {abs(chg):.1f}% over 24h" if isinstance(chg, (int, float)) else ""
+        parts.append(f"Base TVL sits at ${tvl_usd:,.0f}{chg_clause}.")
+    top = tvl.get("top_protocols") or []
+    cats = tvl.get("category_breakdown_pct") or {}
+    if top and cats:
+        top_cat = max(cats, key=cats.get)
+        leader = top[0]
+        parts.append(
+            f"{top_cat} leads the ecosystem at {cats[top_cat]:.1f}% of TVL, "
+            f"with {leader['name']} alone holding {leader.get('share_of_base_pct') or 0:.1f}% of the chain's total."
+        )
+    if isinstance(dex_vol.get("vol_24h_usd"), (int, float)):
+        parts.append(f"24h DEX volume on Base is ${dex_vol['vol_24h_usd']:,.0f}.")
+    if isinstance(fng.get("value"), int):
+        parts.append(f"Macro sentiment reads {fng['value']} ({fng.get('classification')}).")
+    if isinstance(glob_m.get("mcap_change_24h_pct"), (int, float)):
+        direction = "up" if glob_m["mcap_change_24h_pct"] >= 0 else "down"
+        parts.append(f"Global crypto market cap is {direction} {abs(glob_m['mcap_change_24h_pct']):.1f}% over 24h.")
+    return " ".join(parts) if parts else "Insufficient real data this cycle to summarize."
+
+
 # ── orchestrator: one grounded-context blob for the LLM ───────────────────────
 def build_market_context():
     """Single call the agent uses to ground a full, multi-domain report.
@@ -596,6 +732,7 @@ def build_market_context():
     sub-fetch degrades gracefully to {"error": ...} so a report always renders.
     """
     tvl = get_base_tvl_and_protocols()
+    dex_vol = get_base_dex_volume()
     activity = get_chain_activity()
     eth = get_token_price("ethereum,bitcoin")
     stables = get_stablecoin_flows()
@@ -605,6 +742,7 @@ def build_market_context():
     virtuals = get_virtuals_snapshot()
     base_fees = get_base_fees()
     movers = get_base_movers()
+    market_overview = _market_overview_narrative(tvl, dex_vol, fng, glob)
 
     # keyless rule-based anomaly heuristics (no LLM) across all domains
     anomalies = []
@@ -645,6 +783,7 @@ def build_market_context():
     return {
         "generated_at": _now_iso(),
         "base_tvl": tvl,
+        "base_dex_volume": dex_vol,
         "base_fees": base_fees,
         "chain_activity": activity,
         "prices": eth,
@@ -654,6 +793,7 @@ def build_market_context():
         "security_hacks": hacks,
         "virtuals": virtuals,
         "base_movers": movers,
+        "market_overview": market_overview,
         "anomaly_flags": anomalies or ["none detected by rule-based pass"],
     }
 

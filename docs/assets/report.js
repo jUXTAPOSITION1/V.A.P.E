@@ -185,7 +185,8 @@ function renderDeliverableHtml(obj, depth = 0) {
                 }).join('')}
             </div>`;
         }
-        if (key === 'top_protocols' && Array.isArray(val)) {
+        if (key === 'top_protocols' && Array.isArray(val) && val.length && typeof val[0] === 'string') {
+            // Historical shape (pre-2026-07-26 case-file entries): names only.
             return `<div class="mb-1.5" ${indent}>
                 <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
                 <div class="flex flex-wrap gap-1.5">
@@ -195,6 +196,71 @@ function renderDeliverableHtml(obj, depth = 0) {
                             ${escapeHtml(String(name))}
                         </span>`).join('')}
                 </div>
+            </div>`;
+        }
+        // Current shape (2026-07-26+): one object per protocol, carrying its
+        // real TVL/share/category/momentum — rendered as a real per-row
+        // breakdown instead of a bare name chip.
+        if (key === 'top_protocols' && Array.isArray(val) && val.length && typeof val[0] === 'object') {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                <div class="space-y-1">
+                    ${val.map(p => `
+                        <div class="flex items-center justify-between gap-2 text-xs py-1 border-b border-white/5">
+                            <span class="protocol-chip flex items-center gap-1.5 text-zinc-300 shrink-0" data-protocol="${escapeHtml(String(p.name))}">
+                                <img class="protocol-chip-icon w-3.5 h-3.5 rounded-full shrink-0" alt="" style="display:none" onerror="this.style.display='none'" onload="this.style.display=''">
+                                ${escapeHtml(String(p.name))}
+                                ${p.category ? `<span class="text-zinc-600">· ${escapeHtml(String(p.category))}</span>` : ''}
+                            </span>
+                            <span class="text-zinc-400 text-right shrink-0 flex items-center gap-1.5">
+                                <span>${fmtUsdCompact(p.tvl_usd)}${typeof p.share_of_base_pct === 'number' ? ` (${p.share_of_base_pct.toFixed(1)}%)` : ''}</span>
+                                ${typeof p.change_24h_pct === 'number' ? pctHtml(p.change_24h_pct) : ''}
+                            </span>
+                        </div>`).join('')}
+                </div>
+            </div>`;
+        }
+        // top_gainers_24h / top_losers_24h: {name, change_24h_pct}[] — same
+        // compact row treatment, no TVL/category (already shown above).
+        if ((key === 'top_gainers_24h' || key === 'top_losers_24h') && Array.isArray(val) && val.length) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                <div class="space-y-1">
+                    ${val.map(p => `
+                        <div class="flex items-center justify-between gap-2 text-xs py-1 border-b border-white/5">
+                            <span class="text-zinc-300">${escapeHtml(String(p.name))}</span>
+                            ${typeof p.change_24h_pct === 'number' ? pctHtml(p.change_24h_pct) : '—'}
+                        </div>`).join('')}
+                </div>
+            </div>`;
+        }
+        // category_breakdown_pct: flat {category: pct} — render as labeled
+        // percent rows instead of the generic nested-object block (which
+        // would show raw numbers with no "%" and no sign coloring).
+        if (key === 'category_breakdown_pct' && val !== null && typeof val === 'object' && !Array.isArray(val)) {
+            return `<div class="mb-1.5" ${indent}>
+                <div class="text-[11px] font-semibold text-zinc-300 mb-1">${escapeHtml(humanLabel(key))}</div>
+                ${Object.entries(val).map(([cat, pct]) => `
+                    <div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5">
+                        <span class="text-zinc-500 shrink-0">${escapeHtml(cat)}</span>
+                        <span class="text-zinc-300 text-right">${typeof pct === 'number' ? pct.toFixed(1) + '%' : '—'}</span>
+                    </div>`).join('')}
+            </div>`;
+        }
+        // market_overview: a real prose sentence (agents/data_fetchers.py::
+        // _market_overview_narrative() / marketIntel.ts::buildOverviewNarrative()),
+        // not a fact to squeeze into a label/value row.
+        if (key === 'market_overview' && typeof val === 'string' && val) {
+            return `<div class="mb-2 text-xs text-zinc-300 leading-relaxed border-l-2 border-white/10 pl-2.5" ${indent}>${escapeHtml(val)}</div>`;
+        }
+        // concentration_risk: "HIGH — top 3 protocols hold 71.2% of Base TVL"
+        // — color the leading risk word the same way verdict badges already do.
+        if (key === 'concentration_risk' && typeof val === 'string' && val) {
+            const level = val.split(' ')[0];
+            const color = level === 'HIGH' ? 'text-rose-400' : level === 'MEDIUM' ? 'text-amber-400' : 'text-emerald-400';
+            return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5" ${indent}>
+                <span class="text-zinc-500 shrink-0">${escapeHtml(humanLabel(key))}</span>
+                <span class="text-right ${color}">${escapeHtml(val)}</span>
             </div>`;
         }
         // bounty_deep_dive's PoC-audit deliverable (deep_dive_audit.py/

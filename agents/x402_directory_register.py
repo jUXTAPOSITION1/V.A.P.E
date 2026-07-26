@@ -143,7 +143,8 @@ OFFERINGS = {
     "token_safety_check": ("0.02", "Full token safety + liquidity scan with a weighted 0-100 risk score."),
     "liquidity_check": ("0.02", "Liquidity depth + top pair DEX for a Base token."),
     "rug_pull_alert": ("0.03", "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration)."),
-    "market_intel": ("0.07", "Base TVL, top protocols, prices, and rule-based anomaly flags."),
+    "market_intel": ("0.07", "Base TVL trend, per-protocol share/category breakdown, concentration "
+                         "risk, DEX volume, top gainers/losers, prices, sentiment, and a narrative summary."),
     "dossier_check": ("0.10", "VAPE's deepest instant verdict: weighted 0-100 risk score, "
                          "meme-factory-template detection, recent-hack correlation, public "
                          "web-reputation search, a live check of declared socials, and a "

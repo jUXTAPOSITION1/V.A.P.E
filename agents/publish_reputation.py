@@ -139,7 +139,8 @@ OFFERINGS = [
     ("wallet_recon", 0.03, "Address profiling: holdings, patterns, risk flags"),
     ("rug_pull_alert", 0.03, "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags"),
     ("tx_decode", 0.05, "Plain-language tx decode + risk flags for any Base tx hash"),
-    ("market_intel", 0.07, "Real-time price/TVL/liquidity + actionable signal"),
+    ("market_intel", 0.07, "Base TVL trend, per-protocol share/concentration risk, DEX volume, "
+     "gainers/losers, prices, sentiment, and a narrative summary"),
     ("dossier_check", 0.10, "VAPE's deepest instant verdict: weighted 0-100 risk score, "
      "meme-factory-template detection, recent-hack correlation, public web-reputation search, "
      "a live check of declared socials, and a frontier-LLM quick source read"),
