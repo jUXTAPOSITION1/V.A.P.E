@@ -563,3 +563,5 @@
 | 2026-07-26 | auto | 0x4c28f48448720e9000907BC2611F73022fdcE1fA (WETH) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 90% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-26 | auto | 0x8cDDd6EeA1067b78B77255e49861843F69D4703D (PUPPY) | deep_investigation | CAUTION (50/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-26 | auto | 0xd6a20E0E2d2399c925e315732E76538F3883a1d6 (EBCC) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |

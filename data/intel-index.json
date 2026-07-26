@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T08:55:26Z",
+  "generated": "2026-07-26T09:10:27Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 423,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 366,
+    "investigations": 367,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-085518-0x8cDDd6Ee.md",
-      "title": "Investigation \u2014 PUPPY",
-      "symbol": "PUPPY",
-      "name": "Puppy",
-      "date": "2026-07-26T08:55:18Z",
-      "target": "0x8cDDd6EeA1067b78B77255e49861843F69D4703D",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +16882% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-085518-0x8cDDd6Ee.md"
+      "file": "investigation-20260726-091027-0xd6a20E0E.md",
+      "title": "Investigation \u2014 EBCC",
+      "symbol": "EBCC",
+      "name": "EBCC_coin",
+      "date": "2026-07-26T09:10:27Z",
+      "target": "0xd6a20E0E2d2399c925e315732E76538F3883a1d6",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,751 (rug/illiquid); [-10] Low liquidity $5,751; [-10] Pair 4.7 d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-091027-0xd6a20E0E.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-091027-0xd6a20E0E.md",
+      "title": "Investigation \u2014 EBCC",
+      "symbol": "EBCC",
+      "name": "EBCC_coin",
+      "date": "2026-07-26T09:10:27Z",
+      "target": "0xd6a20E0E2d2399c925e315732E76538F3883a1d6",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,751 (rug/illiquid); [-10] Low liquidity $5,751; [-10] Pair 4.7 d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-091027-0xd6a20E0E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-085518-0x8cDDd6Ee.md",
@@ -593,20 +607,6 @@
       "score": "28",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-195850-0x014522b4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-194337-0xc8Fb80fC.md",
-      "title": "Investigation \u2014 CTM",
-      "symbol": "CTM",
-      "name": "c8ntinuum",
-      "date": "2026-07-25T19:43:37Z",
-      "target": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Owner not renounced (0x70f279fa72c82110a0bb4745d6283b790190c33f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 4725 holders \u2014 reasonably distributed; Top holders control only 15% of supply \u2014 broad distribution; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-194337-0xc8Fb80fC.md"
     }
   ],
   "reports": [
