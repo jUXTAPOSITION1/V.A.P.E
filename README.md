@@ -4,8 +4,9 @@
 # V.A.P.E.
 ### Virtual Ape Private Eye
 
-**An autonomous on-chain intelligence system for Base and the Virtuals ecosystem.**
-**Real recon, real verdicts, zero fabrication.**
+**An autonomous on-chain intelligence system for Base and the Virtuals ecosystem** — live
+investigations, market intelligence, security auditing, and 31 priced offerings settled
+on-chain.
 
 <br/>
 

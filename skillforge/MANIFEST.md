@@ -1,7 +1,6 @@
 # VAPE SKILLFORGE — Persistent Skill & Memory Ecosystem
 
 A self-reinforcing loop that constantly sharpens VAPE/HACK's bug-bounty & white-hat skill set.
-**Real data only. No hypotheticals, no fiction, no simulated tool output.**
 
 ## Architecture: two compute tiers
 
