@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T01:51:29Z",
+  "generated": "2026-07-26T02:06:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 350,
+    "investigations": 351,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-015123-0xC5667DC0.md",
-      "title": "Investigation \u2014 EUL",
-      "symbol": "EUL",
-      "name": "Euler",
-      "date": "2026-07-26T01:51:23Z",
-      "target": "0xC5667DC06597ab4d2276EcE522918d7Fd8A578a4",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-015123-0xC5667DC0.md"
+      "file": "investigation-20260726-020634-0x6A92B1E9.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Token",
+      "date": "2026-07-26T02:06:34Z",
+      "target": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "53",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated. Positive evidence: 409711 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($15,620,901); Trading 409+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-020634-0x6A92B1E9.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-020634-0x6A92B1E9.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Token",
+      "date": "2026-07-26T02:06:34Z",
+      "target": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "53",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated. Positive evidence: 409711 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($15,620,901); Trading 409+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-020634-0x6A92B1E9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-015123-0xC5667DC0.md",
@@ -593,20 +607,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 6342 holders \u2014 reasonably distributed; Trading 759+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1072+ days \u2014 independent longevity corrobora",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-101257-0xdCf51302.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-083334-0xA3d36e8B.md",
-      "title": "Investigation \u2014 USOR OIL",
-      "symbol": "USOR OIL",
-      "name": "U.S. Oil Reserve (USOR)",
-      "date": "2026-07-25T08:33:34Z",
-      "target": "0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $41,326. Positive evidence: 27117 holders \u2014 reasonably distributed; Trading 190+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-083334-0xA3d36e8B.md"
     }
   ],
   "reports": [

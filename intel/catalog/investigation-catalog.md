@@ -531,3 +531,5 @@
 | 2026-07-26 | auto | 0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b (EUL) | deep_investigation | CAUTION (65/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0xC5667DC06597ab4d2276EcE522918d7Fd8A578a4 (EUL) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0x6A92B1E99De09f71CD96BC91F934826d96B8b26E (AS) | deep_investigation | CAUTION (53/100) | Mintable supply (dilution risk) | +7d |
