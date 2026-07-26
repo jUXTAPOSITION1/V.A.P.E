@@ -158,7 +158,7 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 22 of 30 offerings on the ACP
+- [OK] End-to-end deliverable automation for 21 of 31 offerings on the ACP
   side — `scripts/acp-monitor/auto_fulfill.py` imports
   `agents/acp_fulfill.py`'s `HANDLERS` dict directly, so the monitor
   auto-submits a real deliverable the moment escrow funds. [TBD] the

@@ -75,8 +75,8 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
 - **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
-- **Commerce** — 28 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 13 DefiLlama data tools, and more), payable
+- **Commerce** — 31 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, 15 DefiLlama data tools, and more), payable
   through ACP escrow or instant x402 on Base mainnet, with results delivered as a rendered
   report on-site or a downloadable PDF.
 
@@ -193,15 +193,15 @@ V.A.P.E/
 
 **Live and running:** Featured Investigations every 30 minutes, hourly bounty/market
 sweeps, the SKILLFORGE tool
-ecosystem (16 tools registered, 16 verified), ACP + x402 job fulfillment across 29 live
-offerings (21 auto-fulfilled with zero manual work), x402 payments on Base mainnet via
-Coinbase Developer Platform's hosted facilitator, wallet-connect portfolio, the Central
-Memory system, the standard MCP server (17 tools), and the Builder self-improvement
-pipeline.
+ecosystem (16 tools registered, 16 verified), ACP + x402 job fulfillment across 31 live
+offerings (27 x402-payable, 21 auto-fulfilled with zero manual work), x402 payments on
+Base mainnet via Coinbase Developer Platform's hosted facilitator, wallet-connect
+portfolio, the Central Memory system, the standard MCP server (17 tools), and the
+Builder self-improvement pipeline.
 
-**In progress:** real auto-handlers for the remaining 8 ACP-only offerings
-(`forensics_deep`/`wallet_recon`/`deep_contract_audit`/etc. — the underlying tools like
-`wallet_trace` already work, nothing calls them automatically yet), a dashboard
+**In progress:** real auto-handlers for the remaining 4 ACP-only offerings
+(`forensics_deep`/`wallet_recon`/`whale_watch`/`partner_referral` — the underlying tools
+like `wallet_trace` already work, nothing calls them automatically yet), a dashboard
 reputation loop, richer social-sentiment intel beyond the current keyless aggregate.
 `app.py` is an unconnected placeholder stub (it doesn't call any real VAPE agent code) that
 exists only to satisfy this repo's synced Hugging Face Space's Gradio entry point — the
