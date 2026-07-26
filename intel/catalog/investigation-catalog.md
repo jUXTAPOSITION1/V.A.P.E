@@ -581,3 +581,5 @@
 | 2026-07-26 | auto | 0xEd2EE58908eA569A994a1ac77da4A947807A4444 (DCA) | deep_investigation | CAUTION (55/100) | Low liquidity $42,250 | +7d |
 
 | 2026-07-26 | auto | 0x095576F441006679a79a53ddF9136b550095dD1C (DCA) | deep_investigation | REJECT (30/100) | Very few holders (15) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0xfDf82991f00caE63062fD1d52e7f340693A34444 (DCA) | deep_investigation | REJECT (40/100) | Very few holders (33) — thin, easily manipulated distribution | +7d |

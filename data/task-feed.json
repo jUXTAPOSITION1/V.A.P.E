@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-26T12:26:40Z",
-  "synthesis": "VAPE",
+  "generated": "2026-07-26T12:41:38Z",
+  "synthesis": "VAPE'",
   "tasks": [
+    {
+      "sha": "5a25531b25",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T12:26Z",
+      "date": "2026-07-26T12:26:45Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5a25531b2536b4808314ee7fcc31ed53d0001b6d"
+    },
     {
       "sha": "92b78d4fc7",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-07-26T10:25Z",
       "date": "2026-07-26T10:25:19Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d5bc9b9abc6172e8daacc091bb9ca669200deca2"
-    },
-    {
-      "sha": "54a7d5d62b",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-26T10:20Z",
-      "date": "2026-07-26T10:20:38Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/54a7d5d62b785542b0c502ecbb60fc2bc73ea9bc"
     }
   ]
 }
