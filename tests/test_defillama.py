@@ -138,6 +138,34 @@ def test_unlocks_falls_back_to_supply_gap_when_emission_endpoint_gated(monkeypat
     assert not r.get("error")
 
 
+def test_unlocks_falls_back_to_chain_lookup_for_l1_native_tokens(monkeypatch):
+    # Real, confirmed 2026-07-26 bug (direct user report): "aptos" -- the
+    # module's own built-in example for this field -- still shipped a raw
+    # "HTTP 402" because /protocol/{slug} only covers DeFi protocols, not L1
+    # chains. Aptos is tracked under /v2/chains instead, keyed by chain name.
+    def fake_get(url, *a, **k):
+        if "/emission/" in url:
+            return {"error": "HTTP 402", "url": url}
+        if "/protocol/" in url:
+            return {"error": "HTTP 404", "url": url}  # not a listed DeFi protocol
+        if url.endswith("/v2/chains"):
+            return [
+                {"name": "Ethereum", "tvl": 5_000_000_000, "tokenSymbol": None, "gecko_id": None},
+                {"name": "Aptos", "tvl": 300_000_000, "tokenSymbol": "APT", "gecko_id": "aptos"},
+            ]
+        if "coingecko.com/api/v3/coins/" in url:
+            return {"market_data": {"total_supply": 1_100_000_000, "circulating_supply": 550_000_000,
+                                     "max_supply": None}}
+        return {"error": "unexpected url"}
+
+    monkeypatch.setattr(dl, "_get", fake_get)
+    r = dl.unlocks("aptos")
+    assert not r.get("error")
+    assert r["name"] == "Aptos"
+    assert r["locked_supply_pct"] == 50.0
+    assert "estimate" in r["data_source"]
+
+
 def test_unlocks_returns_honest_error_when_no_gecko_id_and_no_fallback(monkeypatch):
     def fake_get(url, *a, **k):
         if "/emission/" in url:

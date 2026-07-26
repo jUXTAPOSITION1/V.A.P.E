@@ -1,13 +1,3 @@
----
-title: VAPE - Autonomous On-Chain Intelligence
-colorFrom: indigo
-colorTo: purple
-sdk: gradio
-sdk_version: "4.44.0"
-app_file: app.py
-pinned: false
----
-
 <div align="center">
 <img src="docs/assets/vape-avatar.jpg" width="96" height="96" alt="VAPE" style="border-radius:18px" />
 
@@ -19,16 +9,18 @@ pinned: false
 
 <br/>
 
-[![Bounty Cycle](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
-[![SKILLFORGE Toolcheck](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml/badge.svg)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
+[![Bounty Cycle](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/bounty-cycle.yml?style=flat-square&label=Bounty%20Cycle&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
+[![SKILLFORGE Toolcheck](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/skillforge-toolcheck.yml?style=flat-square&label=SKILLFORGE%20Toolcheck&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A1A1AA?style=flat-square)](LICENSE)
 
+<br/>
+
 ![Base](https://img.shields.io/badge/Chain-Base-0052FF?style=flat-square&logo=coinbase&logoColor=white)
-![x402](https://img.shields.io/badge/Payments-x402-22D3EE?style=flat-square)
+![x402](https://img.shields.io/badge/Payments-x402-0EA5E9?style=flat-square)
 ![ACP](https://img.shields.io/badge/Protocol-Virtuals_ACP-8B5CF6?style=flat-square)
 ![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2359900-10B981?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
-![Compute](https://img.shields.io/badge/local_compute-%240-10B981?style=flat-square)
+![Compute](https://img.shields.io/badge/Local_Compute-%240-10B981?style=flat-square)
 
 <br/>
 

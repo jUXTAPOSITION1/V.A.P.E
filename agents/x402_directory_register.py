@@ -110,10 +110,15 @@ STATE_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "x402_directory_st
 
 WORKER_BASE = "https://vape-x402.vapex402.workers.dev"
 PROVIDER = "VAPE"
-# Literally VAPE's favicon (the same file served at docs/index.html's
-# <link rel="icon">), not a separate logo asset — reused here so every
-# external listing matches the icon a human sees in their own browser tab.
-ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png"
+# The 512px V-mark render, NOT docs/index.html's 32px browser-tab favicon —
+# mirrors worker/src/index.ts's own ICON_URL (used for the x402 Bazaar
+# iconUrl extension). Confirmed live: directories like x402scan.com render
+# this as a large profile-page avatar, and the 32px source was being
+# upscaled ~3-4x there, which is exactly what made it look fuzzy (see
+# worker/src/lib/favicon.ts's docstring for the full diagnosis). This
+# script's own listings (402index.io/VAPOR/x402-list) render icons the same
+# way, so they need the same full-res asset, not the tab-sized one.
+ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png"
 PAY_TO = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 # Real, already-verified USDC-on-Base contract (same address used by
 # agents/x402_ledger_backfill.py — never re-typed from memory here).

@@ -384,6 +384,20 @@ def unlocks(slug):
 
     proto = _get(f"{API}/protocol/{urllib.parse.quote(slug)}", ttl=1800, cache_key=f"dl_proto_{slug}")
     gecko_id = proto.get("gecko_id") if isinstance(proto, dict) else None
+    name = proto.get("name") if isinstance(proto, dict) else None
+    if not gecko_id:
+        # Real gap this closes (direct user report: "Aptos" — the built-in
+        # example for this very field — still shipped the raw upstream 402):
+        # /protocol/{slug} only covers DeFi protocols (Uniswap, Aave, ...),
+        # not L1 chains. A real, common "unlocks" target is an L1's own
+        # native token (Aptos, Sui, ...), which DefiLlama tracks under
+        # /v2/chains instead, keyed by chain NAME not protocol slug. Reuse
+        # chain_overview()'s own already-fetched chains list rather than a
+        # second endpoint/provider.
+        chains = chain_overview(slug)
+        if not _err(chains):
+            gecko_id = chains.get("gecko_id")
+            name = chains.get("chain")
     if not gecko_id:
         return {"error": d.get("error", "unlock data unavailable"), "url": d.get("url")}
     cg = _get(f"https://api.coingecko.com/api/v3/coins/{urllib.parse.quote(gecko_id)}"
@@ -395,7 +409,7 @@ def unlocks(slug):
     if not (isinstance(total, (int, float)) and total > 0 and isinstance(circ, (int, float))):
         return {"error": d.get("error", "unlock data unavailable"), "url": d.get("url")}
     locked_pct = round((total - circ) / total * 100, 2)
-    return {"ts": _now_iso(), "slug": slug, "name": proto.get("name"),
+    return {"ts": _now_iso(), "slug": slug, "name": name,
             "data_source": "supply-gap estimate (unlock calendar unavailable this cycle)",
             "circulating_supply": circ, "total_supply": total, "max_supply": m.get("max_supply"),
             "locked_supply_pct": locked_pct, "next_unlock": None, "tracked_events": 0,
