@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T17:11:28Z",
-  "synthesis": "[investigation] Featured",
+  "generated": "2026-07-26T17:26:29Z",
+  "synthesis": "V",
   "tasks": [
+    {
+      "sha": "7791dc37c7",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-26T17:18Z",
+      "date": "2026-07-26T17:18:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7791dc37c7db45c7e24c59fe5343878696806332"
+    },
+    {
+      "sha": "1fca2dd13b",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T17:11Z",
+      "date": "2026-07-26T17:11:30Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1fca2dd13b9c380d051bf9f1bd7085de5847ea78"
+    },
     {
       "sha": "5ce732d888",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "VAPE AI red-team deep scan 2026-07-26T15:14Z",
       "date": "2026-07-26T15:14:20Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c1570b62d2a64a3226f76c8e8e619891edde8720"
-    },
-    {
-      "sha": "f47a531132",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T15:11Z",
-      "date": "2026-07-26T15:11:31Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f47a531132c0f5551d9d98eb5c85ed07c76ba78a"
-    },
-    {
-      "sha": "93a54a2f7c",
-      "kind": "automation",
-      "message": "threat analysis: 2026-07-26T14:57Z",
-      "date": "2026-07-26T14:57:42Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/93a54a2f7c671fef96108f2627642dc0a77cfeb2"
     }
   ]
 }

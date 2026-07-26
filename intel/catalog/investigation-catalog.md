@@ -605,3 +605,5 @@
 | 2026-07-26 | auto | 0xCBc5b4b1a171fc4f86106e3E36853592AC16aaaa (DCA) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 85% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-26 | auto | 0xeA4D009DD99cb83FF4e27C533e279e6120364444 (DCA) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xfDf82991f00ca | +7d |
+
+| 2026-07-26 | auto | 0xf72a7beA38b6f61B731b496EbB67A97AD9c8C68A (DIM) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
