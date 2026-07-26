@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-26T18:11:46Z — 136 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-26T18:27:03Z — 137 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| sosocupid | Base | `0xc883e1910b9A2e39840E7c26BB7B7A3f80dB4f98` | 0/100 | 1 | 2026-07-26T18:27:03Z |
 | DIM | Ethereum | `0xa2a17b400CD9Bc8AF04714AA3E99Bee86374F90e` | 0/100 | 1 | 2026-07-26T18:11:46Z |
 | DIM | Ethereum | `0x1257d823Fcb0abAe72eAB01c59456F463cA3c35a` | 30/100 | 1 | 2026-07-26T17:56:40Z |
 | DIM | Ethereum | `0x9BE98a036f654040d39caF0F4530e95A4f890274` | 20/100 | 1 | 2026-07-26T17:41:31Z |
