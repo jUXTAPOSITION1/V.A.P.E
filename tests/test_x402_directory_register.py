@@ -80,3 +80,34 @@ def test_register_402index_does_not_record_failed_attempts(tmp_path, monkeypatch
         results = reg.register_402index(only={"dossier_check"})
     assert results[0]["ok"] is False
     assert reg._load_state()["registered_402index"] == []
+
+
+def test_ratelimit_headers_picks_only_rate_limit_fields():
+    """_ratelimit_headers() exists so a 429 log tells us *when* the quota
+    resets. It must match the common header spellings case-insensitively
+    (402index.io's convention isn't documented) without dragging along
+    unrelated headers."""
+    headers = {
+        "Content-Type": "application/json",
+        "Retry-After": "1800",
+        "X-RateLimit-Limit": "50",
+        "x-ratelimit-remaining": "0",
+        "RateLimit-Reset": "1785020000",
+        "X-Rate-Limit-Window": "3600",
+        "Server": "nginx",
+        "Date": "Sat, 25 Jul 2026 22:00:00 GMT",
+    }
+    got = reg._ratelimit_headers(headers)
+    assert got == {
+        "Retry-After": "1800",
+        "X-RateLimit-Limit": "50",
+        "x-ratelimit-remaining": "0",
+        "RateLimit-Reset": "1785020000",
+        "X-Rate-Limit-Window": "3600",
+    }
+
+
+def test_ratelimit_headers_handles_missing_headers():
+    assert reg._ratelimit_headers(None) == {}
+    assert reg._ratelimit_headers({}) == {}
+    assert reg._ratelimit_headers({"Server": "nginx"}) == {}

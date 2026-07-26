@@ -26,7 +26,7 @@ import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
-import { buildOpenApiDocument, type PaidRoute } from "./lib/openapiSpec";
+import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
 import { fulfill, type HandlerName } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
@@ -574,6 +574,14 @@ app.get("/", (c) =>
 // matches the 402 challenge that route actually serves.
 app.get("/openapi.json", (c) =>
   c.json(buildOpenApiDocument(new URL(c.req.url).origin, PAID_ROUTES, CONTACT_EMAIL)));
+
+// Freeform agent guidance, pointed at by the document's
+// x-agentcash-guidance.llmsTxtUrl. The Agentcash Discovery v1 profile keeps
+// this out of the OpenAPI body on purpose — "Clients SHOULD keep first-pass
+// discovery token-light and fetch large guidance only on demand" — so it's the
+// same text as info.x-guidance, served where a client can choose to fetch it.
+app.get("/llms.txt", (c) =>
+  c.text(guidance(new URL(c.req.url).origin)));
 
 // Service icon for x402 directories. x402scan's discovery spec asks a
 // registered origin to "serve a /favicon.ico at your API root to display an
