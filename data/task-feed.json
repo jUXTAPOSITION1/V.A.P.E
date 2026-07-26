@@ -1,7 +1,35 @@
 {
-  "generated": "2026-07-26T13:56:57Z",
-  "synthesis": "[",
+  "generated": "2026-07-26T14:11:45Z",
+  "synthesis": "VAPE's automation ran repeated featured investigations alongside red-team and self-improvement cycles, security sweeps, reputation snapshots, and bounty reporting.",
   "tasks": [
+    {
+      "sha": "7c75fea9ba",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-26T14:06Z",
+      "date": "2026-07-26T14:06:36Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7c75fea9bac7ec0d964d726fa3f2fcb899844b88"
+    },
+    {
+      "sha": "dee07e45c0",
+      "kind": "automation",
+      "message": "VAPE AI red-team cycle 2026-07-26T14:06Z",
+      "date": "2026-07-26T14:06:08Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dee07e45c0b8a58266f3646d71d0b74e648c58b0"
+    },
+    {
+      "sha": "d61db72398",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-26T14:02Z",
+      "date": "2026-07-26T14:02:07Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d61db723982378927b8a0ccc4c5066132873fc29"
+    },
+    {
+      "sha": "2344a1c524",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T13:57Z",
+      "date": "2026-07-26T13:57:01Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2344a1c52476a29582fe85fc0836bb418bf806cf"
+    },
     {
       "sha": "42bb18626e",
       "kind": "automation",
@@ -78,34 +106,6 @@
       "message": "Auto-generated bounty report 2026-07-26T12:04Z",
       "date": "2026-07-26T12:04:52Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0580da595ee931f47df7adbc029376da95d308fe"
-    },
-    {
-      "sha": "090cf9caa6",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-26T12:04Z",
-      "date": "2026-07-26T12:04:22Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/090cf9caa6ade5117c872a010b2e00ff68188cb7"
-    },
-    {
-      "sha": "ef0aee9198",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T11:56Z",
-      "date": "2026-07-26T11:56:31Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ef0aee91988e69025275395cdf3c05110c407df9"
-    },
-    {
-      "sha": "3848f80e8a",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-26T11:46Z",
-      "date": "2026-07-26T11:46:49Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3848f80e8a21691c1e718e76f42c7523ce340036"
-    },
-    {
-      "sha": "c7e319c518",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T11:41Z",
-      "date": "2026-07-26T11:41:07Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c7e319c518723b55fc367b72690c022b5b069910"
     }
   ]
 }
