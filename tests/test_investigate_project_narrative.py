@@ -115,7 +115,7 @@ def test_address_identity_verified_when_coingecko_contract_present():
     assert result["address_identity_verified"] is True
     args, _kwargs = m_llm.call_args
     _system, user = args[0], args[1]
-    assert "CONFIRMED — CoinGecko independently verified" in user
+    assert "CONFIRMED — an independent market-data lookup verified" in user
     assert "NOT CONFIRMED" not in user
 
 

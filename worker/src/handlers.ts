@@ -93,8 +93,7 @@ async function exploitCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string 
 }
 
 async function marketIntelHandler(_req: Requirement) {
-  const ctx = await marketIntel();
-  return { base_tvl: ctx.base_tvl, top_protocols: ctx.top_protocols, prices: ctx.prices };
+  return marketIntel();
 }
 
 // Best-effort: actually VISIT each DexScreener-declared website/social URL

@@ -315,6 +315,7 @@ const Hire = {
     _closeModal() {
         if (this._modal) { this._modal.remove(); this._modal = null; }
         if (this._pollTimer) { clearInterval(this._pollTimer); this._pollTimer = null; }
+        if (this._dataChart) { this._dataChart.destroy(); this._dataChart = null; }
     },
 
     // Live in-page polling for an async bounty_deep_dive job — worker/src/
@@ -646,6 +647,7 @@ const Hire = {
                 <button id="hire-copy" class="flex-1 term-btn"><i class="fa-solid fa-copy"></i> Copy JSON</button>
             </div>
             <div id="hire-copy-status" class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below.</div>`;
+        this._renderDataChart(deliverable.prices);
         document.getElementById('hire-download').onclick = () => Report.downloadPdf(reportOpts);
         document.getElementById('hire-copy').onclick = async () => {
             await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
@@ -695,10 +697,19 @@ const Hire = {
             }
             rows.push(`<div class="text-xs mb-1 flex justify-between gap-3"><span class="text-zinc-500 font-mono">${escapeHtml(k)}</span><span class="text-zinc-200 text-right">${fmt(v)}</span></div>`);
         }
+        // token_chart's `prices` ([{timestamp,price}]) is a real chart series,
+        // not a row table — render an actual canvas (see _renderDataChart,
+        // wired up by the caller once this HTML is in the DOM) instead of
+        // dropping the field entirely, which is what happened before this fix
+        // (the whole point of the offering silently missing from its own
+        // deliverable).
+        if (Array.isArray(d.prices) && d.prices.length && typeof d.prices[0] === 'object') {
+            rows.push(`<div class="mt-2 chart-shell-sm"><canvas id="hire-data-chart"></canvas></div>`);
+        }
         // Arrays of rows (protocols, dexs, bridges, stablecoins, pools, venues…).
         // Respect the same skip set as the scalar pass so the raw `prices`
-        // series (token_chart's [{timestamp,price}]) isn't rendered as a
-        // blank generic row list — it's a chart series, not a row table.
+        // series (already handled as a chart above) isn't ALSO rendered as a
+        // blank generic row list.
         for (const [k, v] of Object.entries(d)) {
             if (skip.has(k)) continue;
             if (!Array.isArray(v) || !v.length || typeof v[0] !== 'object') continue;
@@ -712,6 +723,39 @@ const Hire = {
             rows.push(`<div class="mt-2"><div class="text-[10px] uppercase tracking-wider text-zinc-500 mb-1">${escapeHtml(k)} (${v.length})</div>${items}</div>`);
         }
         return rows.join('') || `<pre class="text-[11px] text-zinc-400 whitespace-pre-wrap">${escapeHtml(JSON.stringify(d, null, 2))}</pre>`;
+    },
+
+    // token_chart's actual deliverable — a daily price series — rendered as a
+    // real line chart on the '#hire-data-chart' canvas _dataHtml() leaves
+    // behind. Mirrors app.js's _renderProtoChart styling. No-op (not an
+    // error) for every other market-data tool, none of which return `prices`
+    // as a timestamp/price series.
+    _dataChart: null,
+    _renderDataChart(prices) {
+        if (this._dataChart) { this._dataChart.destroy(); this._dataChart = null; }
+        if (!Array.isArray(prices) || !prices.length) return;
+        const canvas = document.getElementById('hire-data-chart');
+        if (!canvas || typeof Chart === 'undefined') return;
+        const points = prices.filter(p => p && typeof p.price === 'number' && (p.timestamp || p.timestamp === 0));
+        if (!points.length) return;
+        const labels = points.map(p => new Date(p.timestamp * (p.timestamp < 1e12 ? 1000 : 1)).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
+        const data = points.map(p => p.price);
+        const g = canvas.getContext('2d').createLinearGradient(0, 0, 0, 160);
+        g.addColorStop(0, 'rgba(74,222,128,0.30)'); g.addColorStop(1, 'rgba(74,222,128,0)');
+        this._dataChart = new Chart(canvas, {
+            type: 'line',
+            data: { labels, datasets: [{ data, borderColor: '#4ade80', backgroundColor: g, fill: true, tension: 0.25, pointRadius: 0, borderWidth: 2 }] },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: c => `$${c.parsed.y.toLocaleString(undefined, { maximumFractionDigits: 6 })}` } },
+                },
+                scales: {
+                    y: { ticks: { color: '#52525b', maxTicksLimit: 5 }, grid: { color: 'rgba(255,255,255,0.04)' } },
+                    x: { ticks: { color: '#52525b', maxTicksLimit: 6 }, grid: { display: false } },
+                },
+            },
+        });
     },
 };
 

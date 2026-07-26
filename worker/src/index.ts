@@ -223,7 +223,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
   },
   token_safety_check: {
-    description: "Full GoPlus + DexScreener token safety scan with CertiK-style scoring.",
+    description: "Full token safety + liquidity scan with a weighted 0-100 risk score.",
     output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
   },
   liquidity_check: {
@@ -235,7 +235,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
   },
   dossier_check: {
-    description: "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template "
+    description: "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template "
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
     output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
@@ -244,8 +244,21 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
               ai_review: { available: true, provider: "gemini", summary: "..." } },
   },
   market_intel: {
-    description: "Base TVL, top protocols, prices, and rule-based anomaly flags.",
-    output: { base_tvl: 4100000000, top_protocols: ["Morpho", "Aerodrome"], anomaly_flags: [] },
+    description: "Base TVL with 24h/7d change, per-protocol share/category breakdown, "
+      + "concentration risk, 24h DEX volume, top gainers/losers, ETH/BTC prices, "
+      + "Fear & Greed index, global market cap, and a real-data narrative summary.",
+    output: {
+      base_tvl_usd: 4100000000, base_tvl_24h_change_pct: 1.8, dex_volume_24h_usd: 210000000,
+      top_protocols: [{ name: "Morpho", tvl_usd: 900000000, share_of_base_pct: 22.0, category: "Lending", change_24h_pct: 2.1 }],
+      category_breakdown_pct: { Lending: 34.2, Dexes: 21.5 },
+      concentration_risk: "MEDIUM — top 3 protocols hold 48.3% of Base TVL",
+      top_gainers_24h: [{ name: "Morpho", change_24h_pct: 2.1 }],
+      top_losers_24h: [],
+      prices: { ethereum: 3200.5, bitcoin: 97000.0 },
+      fear_greed: 54, fear_greed_classification: "Neutral",
+      global_market_cap_usd: 2500000000000, global_market_cap_change_24h_pct: 0.6,
+      market_overview: "Base TVL sits at $4,100,000,000, up 1.8% over 24h. Lending leads the ecosystem at 34.2% of TVL...",
+    },
   },
 };
 
@@ -301,7 +314,7 @@ const DEEP_CONTRACT_AUDIT_DISCOVERY = {
 const TX_DECODE_PRICE = "$0.05";
 const TX_DECODE_DISCOVERY = {
   description: "Plain-language transaction decode + risk flags for any Base/EVM tx hash — "
-    + "real Etherscan tx/receipt/logs + 4byte.directory method/event-signature lookup, "
+    + "real on-chain tx/receipt/logs plus method/event-signature lookup, "
     + "no simulation.",
   output: {
     tx_hash: "0x...", chain_id: 8453, status: "success",
@@ -384,7 +397,7 @@ const PAID_ROUTES: VapeRoute[] = [
     name,
     path: `/scan/${name}`,
     price,
-    description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real GoPlus/DexScreener data, no simulation.`,
+    description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real on-chain/market data, no simulation.`,
     tags: SCAN_TAGS,
     inputSchema: ADDRESS_INPUT_SCHEMA,
     inputExample: { address: DEAD_ADDRESS },

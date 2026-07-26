@@ -29,7 +29,7 @@ def test_project_links_rendered_from_dexscreener_data(tmp_path, monkeypatch):
         "0x" + "aa" * 20, "43114", gp, dex, onchain, verif, [], 100, "PROCEED", [], [],
     )
     content = open(path).read()
-    assert "## Project Links (as declared on DexScreener)" in content
+    assert "## Project Links" in content
     assert "- Website: https://arena.social" in content
     assert "- twitter: https://x.com/TheArenaApp" in content
 
@@ -58,7 +58,7 @@ def test_tokenomics_rendered_from_coingecko_contract(tmp_path, monkeypatch):
         coingecko_contract=cg,
     )
     content = open(path).read()
-    assert "## Tokenomics (CoinGecko, address-verified)" in content
+    assert "## Tokenomics (address-verified)" in content
     assert "Circulating supply: 4,700,000,000 ARENA" in content
     assert "Fully diluted valuation: $11,700,000" in content
     assert "FDV/Market-cap ratio: 2.13x" in content
@@ -96,7 +96,7 @@ def test_tokenomics_honest_when_coingecko_untracked(tmp_path, monkeypatch):
         coingecko_contract=None,
     )
     content = open(path).read()
-    assert "## Tokenomics (CoinGecko, address-verified)" in content
+    assert "## Tokenomics (address-verified)" in content
     assert "Not available this cycle" in content
     assert "absence noted, not penalized" in content
 
@@ -113,8 +113,8 @@ def test_sources_section_links_explorer_dexscreener_and_coingecko(tmp_path, monk
     content = open(path).read()
     assert "## Sources & Verification Links" in content
     assert f"- Block explorer: https://snowtrace.io/address/{target}" in content
-    assert "- DexScreener pair: https://dexscreener.com/avalanche/0xpair" in content
-    assert "- CoinGecko: https://www.coingecko.com/en/coins/arena-2" in content
+    assert "- Market pair: https://dexscreener.com/avalanche/0xpair" in content
+    assert "- Market data: https://www.coingecko.com/en/coins/arena-2" in content
 
 
 def test_sources_section_omits_missing_links_gracefully(tmp_path, monkeypatch):
@@ -126,5 +126,5 @@ def test_sources_section_omits_missing_links_gracefully(tmp_path, monkeypatch):
     )
     content = open(path).read()
     assert "## Sources & Verification Links" in content
-    assert "DexScreener pair:" not in content
-    assert "CoinGecko:" not in content
+    assert "Market pair:" not in content
+    assert "Market data:" not in content

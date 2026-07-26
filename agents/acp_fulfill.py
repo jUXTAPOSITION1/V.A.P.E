@@ -99,27 +99,43 @@ def _exploit_check(req):
 
 
 def _market_intel(req):
-    # Was base_tvl/top_protocols/prices/anomaly_flags only — thin for a paid
-    # snapshot when build_market_context() already fetches fear_greed and
-    # global_market for the free site's own "Wire" section. Surfacing the
-    # same real, already-fetched fields here instead of a second API call.
-    # anomaly_flags is dropped rather than kept ACP-only: it needs the full
-    # multi-vertical fetch (hacks/movers/chain-activity), which is real
-    # parity work worker/src/lib/marketIntel.ts can't cheaply match for a
-    # single lean paid call — better to keep both fulfillment paths
-    # identical in scope than let the ACP buyer see a field the x402 buyer
-    # never gets for the same offering.
+    # Real gap this closed (2026-07-26, direct user report against a live
+    # $0.07 purchase): the deliverable was base_tvl/top_protocols(names-only)/
+    # prices/anomaly_flags — thin even for a lightweight offering, and
+    # `prices` shipped outright empty in production (see
+    # data_fetchers.get_token_price()'s docstring for the root cause and
+    # fallback fix). get_base_tvl_and_protocols() already computes real
+    # per-protocol share/category/concentration/gainers-losers signals — this
+    # just stops discarding them down to bare names. anomaly_flags stays
+    # dropped (needs the full multi-vertical fetch worker/src/lib/
+    # marketIntel.ts can't cheaply match for a single lean paid call) so
+    # both fulfillment paths stay identical in scope.
     ctx = build_market_context()
+    tvl = ctx.get("base_tvl") or {}
+    dex_vol = ctx.get("base_dex_volume") or {}
     fng = ctx.get("fear_greed") or {}
     glob_m = ctx.get("global_market") or {}
-    return {"base_tvl": ctx.get("base_tvl", {}).get("tvl_usd"),
-            "base_tvl_24h_change_pct": ctx.get("base_tvl", {}).get("tvl_24h_change_pct"),
-            "top_protocols": [p["name"] for p in ctx.get("base_tvl", {}).get("top_protocols", [])[:5]],
+    return {"base_tvl_usd": tvl.get("tvl_usd"),
+            "base_tvl_24h_change_pct": tvl.get("tvl_24h_change_pct"),
+            "base_tvl_7d_change_pct": tvl.get("tvl_7d_change_pct"),
+            "dex_volume_24h_usd": dex_vol.get("vol_24h_usd"),
+            "top_protocols": [
+                {"name": p.get("name"), "tvl_usd": p.get("base_tvl_usd"),
+                 "share_of_base_pct": p.get("share_of_base_pct"), "category": p.get("category"),
+                 "change_24h_pct": p.get("change_1d"), "change_7d_pct": p.get("change_7d")}
+                for p in tvl.get("top_protocols", [])[:5]
+            ],
+            "category_breakdown_pct": tvl.get("category_breakdown_pct"),
+            "concentration_risk": tvl.get("concentration_risk"),
+            "top_gainers_24h": tvl.get("top_gainers_24h"),
+            "top_losers_24h": tvl.get("top_losers_24h"),
             "prices": ctx.get("prices"),
             "fear_greed": fng.get("value"),
             "fear_greed_classification": fng.get("classification"),
             "global_market_cap_usd": glob_m.get("total_mcap_usd"),
-            "global_market_cap_change_24h_pct": glob_m.get("mcap_change_24h_pct")}
+            "global_market_cap_change_24h_pct": glob_m.get("mcap_change_24h_pct"),
+            "market_overview": ctx.get("market_overview"),
+            "generated_at": ctx.get("generated_at")}
 
 
 def _verify_socials(dex):
@@ -391,7 +407,17 @@ def _protocol_fees(req):
 
 def _unlocks(req):
     s = _dl_need_slug(req)
-    return _dl().unlocks(s) if s else {"error": "no protocol slug in requirement"}
+    if not s:
+        raise ValueError("no protocol slug in requirement")
+    out = _dl().unlocks(s)
+    # unlocks() never raises (real data or a real fallback estimate, or an
+    # {"error"} dict) — a still-present error here means neither the primary
+    # unlock-calendar source nor the CoinGecko supply-gap fallback had
+    # anything usable, so fulfill()'s caller should treat this as a failed
+    # job (no charge) rather than deliver the raw error string as paid output.
+    if isinstance(out, dict) and out.get("error"):
+        raise RuntimeError(out["error"])
+    return out
 
 
 def _treasury(req):
@@ -425,7 +451,13 @@ def _stablecoins(req):
 
 
 def _bridges(req):
-    return _dl().bridges()
+    out = _dl().bridges()
+    # Same fail-closed contract as _unlocks() above: bridges() never raises,
+    # so a still-present error means the bridge-volume list AND the
+    # bridge-incident fallback both came up empty this cycle.
+    if isinstance(out, dict) and out.get("error"):
+        raise RuntimeError(out["error"])
+    return out
 
 
 

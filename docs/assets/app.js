@@ -434,7 +434,7 @@ const App = {
                 </div>
                 <div class="mt-3 text-xs">${flags.length?flags.map(f=>`<span class="inline-block border px-2 py-0.5 mr-1 mb-1" style="color:${vc};border-color:${vc}">${f}</span>`).join(''):'<span class="text-emerald-500">No risk flags from real on-chain scan.</span>'}</div>
                 ${note?`<div class="mt-2 text-[10px] text-amber-400">${this._esc(note)}</div>`:''}
-                <div class="mt-2 text-[10px] text-zinc-600">Real data: GoPlus token_security + DexScreener liquidity. Not investment advice.</div>
+                <div class="mt-2 text-[10px] text-zinc-600">Real on-chain token-safety and liquidity data. Not investment advice.</div>
             </div>`;
         return verdict[0];
     },
@@ -444,13 +444,13 @@ const App = {
         const addr = (document.getElementById('hunt-target').value||'').trim();
         const chain = document.getElementById('hunt-chain').value;
         if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { el.innerHTML = '<span class="text-amber-400">Enter a valid 0x… 40-hex contract address.</span>'; return; }
-        el.innerHTML = '<span class="text-zinc-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real data (GoPlus + DexScreener)…</span>';
+        el.innerHTML = '<span class="text-zinc-400"><i class="fa-solid fa-spinner fa-spin"></i> Assessing real on-chain data…</span>';
         try {
             const [gpRaw, dsRaw] = await Promise.all([
                 this._safeFetchJson(`https://api.gopluslabs.io/api/v1/token_security/${chain}?contract_addresses=${addr}`),
                 this._safeFetchJson(`https://api.dexscreener.com/latest/dex/tokens/${addr}`)
             ]);
-            if (gpRaw?._error) { el.innerHTML = `<span class="text-amber-400">GoPlus security data unavailable (${this._esc(gpRaw._error)}). Try again shortly.</span>`; return; }
+            if (gpRaw?._error) { el.innerHTML = `<span class="text-amber-400">Token security data unavailable (${this._esc(gpRaw._error)}). Try again shortly.</span>`; return; }
             const gp = Object.values(gpRaw.result||{})[0] || {};
             let pairs = dsRaw?.pairs || [];
             let liq = pairs.reduce((s,p)=>s+(p.liquidity?.usd||0),0);
@@ -463,9 +463,9 @@ const App = {
                 const fallback = await this._fetchLiquidityFallback(addr, chain);
                 if (fallback) {
                     liq = fallback.liquidity_usd;
-                    note = `Liquidity from GeckoTerminal (DexScreener temporarily unavailable: ${dsRaw._error}).`;
+                    note = `Liquidity from an alternate source (primary market-data source temporarily unavailable: ${dsRaw._error}).`;
                 } else {
-                    note = `DexScreener unavailable (${dsRaw._error}) — liquidity may be understated.`;
+                    note = `Market data unavailable (${dsRaw._error}) — liquidity may be understated.`;
                 }
             }
             this.renderScanResult(el, addr, chain, gp, liq, pairs, note);

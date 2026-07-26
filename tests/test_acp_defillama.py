@@ -128,6 +128,37 @@ def test_slug_handler_errors_honestly_without_slug(monkeypatch):
     assert out["deliverable"].get("error")
 
 
+def test_unlocks_and_bridges_fail_the_job_when_no_fallback_data_either(monkeypatch):
+    # Real gap this closes (2026-07-26, direct user report): unlocks()/
+    # bridges() never raise on their own (module law: always a dict, real
+    # fallback data or an {"error"} shape) — a still-present "error" key means
+    # even the fallback came up empty, and fulfill() must mark the job failed
+    # rather than deliver the raw upstream error string as paid output.
+    _stub_defillama(monkeypatch)
+    from agents import acp_fulfill as A
+    # Override just unlocks/bridges to return an unrecovered error shape.
+    import agents
+    agents.defillama.unlocks = lambda *a, **k: {"error": "HTTP 402", "url": "https://x"}
+    agents.defillama.bridges = lambda *a, **k: {"error": "HTTP 402", "url": "https://x"}
+    out = A.fulfill("unlocks", {"slug": "aave"})
+    assert out["status"] == "error"
+    assert "HTTP 402" in out["error"]
+    out = A.fulfill("bridges", {})
+    assert out["status"] == "error"
+    assert "HTTP 402" in out["error"]
+
+
+def test_unlocks_and_bridges_deliver_normally_when_data_present(monkeypatch):
+    _stub_defillama(monkeypatch)  # stub returns {"ok": name} — no "error" key
+    from agents import acp_fulfill as A
+    out = A.fulfill("unlocks", {"slug": "aave"})
+    assert out["status"] == "ok"
+    assert out["deliverable"] == {"ok": "unlocks"}
+    out = A.fulfill("bridges", {})
+    assert out["status"] == "ok"
+    assert out["deliverable"] == {"ok": "bridges"}
+
+
 def _stub_prediction_markets(monkeypatch):
     """Same pattern as _stub_codex_data above, for agents.prediction_markets."""
     import agents

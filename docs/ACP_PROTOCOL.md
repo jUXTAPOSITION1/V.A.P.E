@@ -42,7 +42,7 @@ Each offering maps to a verified SKILLFORGE tool that produces **real data only*
 | wallet_recon | 0.03 | 5m | recon/wallet_trace.sh / base_rpc |
 | rug_pull_alert | 0.03 | 5m | token_safety.sh (mint/owner) |
 | tx_decode | 0.05 | 5m | contract_recon (abi) + RPC |
-| market_intel | 0.07 | 5m | recon/market_data.sh |
+| market_intel | 0.07 | 5m | `agents/data_fetchers.py`'s Base TVL/DEX-volume/price feeds — per-protocol share, category breakdown, concentration risk, gainers/losers, sentiment, and a real-data narrative summary |
 | dossier_check | 0.10 | 5m | `agents/investigate.py`'s real heuristic engine (weighted score, meme-factory detection, hack correlation, web-reputation search) + a live check of declared socials + a frontier-LLM quick source read |
 | whale_watch | 0.10 | 5m | wallet_trace + market_data |
 | community_intel_broadcast | 0.10 | 5m | intel/broadcasts + market_data |
@@ -59,8 +59,7 @@ since launch but had no worker route until now:
 - `deep_contract_audit` — `GET /scan/deep_contract_audit`, an address-only
   alias of `bounty_deep_dive`'s exact same async dispatch pipeline.
 - `tx_decode` — `GET /scan/tx_decode?tx_hash=0x...`, a new synchronous
-  decode (real Etherscan tx/receipt/logs + 4byte.directory signature lookup,
-  no LLM).
+  decode (real on-chain tx/receipt/logs plus signature lookup, no LLM).
 - `community_intel_broadcast` — `GET /scan/community_intel_broadcast`
   (zero-input), serves the same real broadcast this offering's ACP handler
   already reads (`agents/acp_fulfill.py::_community_broadcast()`).
@@ -87,12 +86,12 @@ listings and x402-payable directly, same as any other worker route.
 ### Market-data tools
 15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
-tools carry real hosted logos; token tools carry the token's DexScreener logo.
+tools carry real hosted logos; token tools carry the token's own hosted logo.
 Every result is real data or an honest `{error}` — never fabricated. 14 are
-0.01 USDC each (13 backed by the keyless DefiLlama API, plus
+0.01 USDC each (13 backed by keyless market-data aggregation, plus
 `prediction_market_odds` backed by the keyless Polymarket/Kalshi APIs);
-`wallet_pnl_deepdive` is priced separately since it's a richer, Alchemy +
-CoinGecko-backed deliverable (Base mainnet only).
+`wallet_pnl_deepdive` is priced separately since it's a richer, real
+Base-mainnet-balance deliverable.
 
 | Offering | Price (USDC) | SLA | Input | What it returns |
 |---|---|---|---|---|
@@ -109,7 +108,7 @@ CoinGecko-backed deliverable (Base mainnet only).
 | yields | 0.01 | 5m | `chain`/`project`/`symbol` | Yield pools TVL-ranked — trap detection |
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
-| **wallet_pnl_deepdive** | **0.25** | 5m | `address` | Real Base-mainnet balances (via Alchemy) + an unrealized-P&L estimate per holding (current value vs. first-acquisition price, via CoinGecko) |
+| **wallet_pnl_deepdive** | **0.25** | 5m | `address` | Real Base-mainnet balances + an unrealized-P&L estimate per holding (current value vs. first-acquisition price) |
 | prediction_market_odds | 0.01 | 5m | optional `limit` | Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume |
 
 ## The autonomous monitor ([OK])

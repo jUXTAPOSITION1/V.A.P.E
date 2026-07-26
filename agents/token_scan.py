@@ -347,7 +347,7 @@ def log_scan(result):
         f.write(f"- **Owner:** {result.get('owner_address')}\n")
         f.write(f"- **Declared socials/website (self-reported, unverified):** {result.get('has_declared_socials')}\n")
         f.write(f"- **Flags:** {', '.join(result['flags']) if result['flags'] else 'none'}\n\n")
-        f.write("_Real data: GoPlus token_security + DexScreener. Not investment advice._\n")
+        f.write("_Real on-chain token-safety and market data. Not investment advice._\n")
     with open(os.path.join(SCAN_DIR, "scans.jsonl"), "a") as f:
         f.write(json.dumps(result) + "\n")
     return md_path

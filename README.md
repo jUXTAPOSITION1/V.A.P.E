@@ -24,9 +24,9 @@ pinned: false
 [![License: MIT](https://img.shields.io/badge/License-MIT-A1A1AA?style=flat-square)](LICENSE)
 
 ![Base](https://img.shields.io/badge/Chain-Base-0052FF?style=flat-square&logo=coinbase&logoColor=white)
+![x402](https://img.shields.io/badge/Payments-x402-22D3EE?style=flat-square)
 ![ACP](https://img.shields.io/badge/Protocol-Virtuals_ACP-8B5CF6?style=flat-square)
 ![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2354988-10B981?style=flat-square)
-![x402](https://img.shields.io/badge/Payments-x402-22D3EE?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Compute](https://img.shields.io/badge/local_compute-%240-10B981?style=flat-square)
 
@@ -35,6 +35,7 @@ pinned: false
 [Live Dashboard](https://juxtaposition1.github.io/V.A.P.E/) ·
 [Architecture](docs/ARCHITECTURE.md) ·
 [Quick Start](#quick-start) ·
+[x402 Worker](worker/README.md) ·
 [ACP Protocol](docs/ACP_PROTOCOL.md) ·
 [Deployment](docs/DEPLOYMENT.md) ·
 [@based_vape](https://x.com/based_vape)
@@ -52,9 +53,14 @@ investigation — with the evidence attached, never just a conclusion.
 
 It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #54988**,
 wallet `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, settling every paid engagement in USDC
-on Base. Both hiring paths are real and live — an escrow-backed engagement through Virtuals
-Protocol's Agent Commerce Protocol (ACP), or an instant, wallet-signed payment through x402 —
-see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Options section.
+on Base. **x402 is VAPE's primary commerce rail** — 27 of its 31 offerings are hireable
+instantly with a wallet-signed HTTP payment, no account or escrow step, settled directly
+against a hosted x402 facilitator on Base mainnet. The remaining offerings (deeper,
+async work — full contract audits, wallet forensics, whale-wallet tracing) run through an
+escrow-backed engagement via Virtuals Protocol's Agent Commerce Protocol (ACP) instead. See
+[worker/README.md](worker/README.md) for the x402 side and
+[docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) for ACP, or just use the site's Engagement
+Options section.
 
 **X:** [@based_vape](https://x.com/based_vape) · **Live dashboard:** [juxtaposition1.github.io/V.A.P.E](https://juxtaposition1.github.io/V.A.P.E/)
 
@@ -63,10 +69,10 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
 ## What it actually does
 
 - **Deep investigations** — every cycle, VAPE auto-selects the highest-signal live Base
-  target, runs multi-source recon (GoPlus token security, DexScreener liquidity, Base RPC,
-  Etherscan V2 contract verification, recent-hack technique correlation, and a real web
-  search for public rug/scam mentions), scores it 0-100, and publishes a verdict — PROCEED,
-  CAUTION, or REJECT — to `intel/investigations/` and the live dashboard.
+  target, runs multi-source recon (token-safety and holder/liquidity data, on-chain contract
+  verification, recent-hack technique correlation, and a real web search for public
+  rug/scam mentions), scores it 0-100, and publishes a verdict — PROCEED, CAUTION, or
+  REJECT — to `intel/investigations/` and the live dashboard.
 - **Market intelligence** — TVL, gas, Fear & Greed, global market cap, and Base's top
   protocols and trending pairs, refreshed continuously and shown live on the site.
 - **Security auditing** — a real prompt-injection red-team suite runs against VAPE's own
@@ -76,9 +82,10 @@ see [docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) and the site's Engagement Optio
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
 - **Commerce** — 31 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 15 DefiLlama data tools, and more), payable
-  through ACP escrow or instant x402 on Base mainnet, with results delivered as a rendered
-  report on-site or a downloadable PDF.
+  market intelligence, full contract audits, 15 market-data tools, and more). 27 are
+  x402-payable — hireable instantly with a signed wallet payment, no account needed; the
+  rest are ACP-escrow engagements for deeper async work. Results render inline on-site or
+  download as a PDF.
 
 ---
 
@@ -89,15 +96,17 @@ primary way to see and use VAPE — not a static status page, a working product 
 
 - Live network/market data (Base TVL, gas, top protocols, trending pairs, Fear & Greed)
 - A wallet-connect portfolio view (injected wallets, Coinbase Wallet, WalletConnect) with
-  real Base holdings, balances, and price history — no paid indexer, nothing fabricated
+  real Base holdings, balances, and price history — no fabricated numbers
 - Instant x402 payment for any auto-fulfilled offering, signed directly from a connected
   wallet, with the report rendered inline and downloadable as a letterheaded PDF
+- A live, paginated, searchable job ledger of every real x402 settlement VAPE has taken
 - A fully linkable investigation archive, indexed automatically from every report VAPE
   has ever published — nothing curated after the fact
 - A free token-security preview tool, open to anyone, no wallet required
 
 Built with zero bundler (plain HTML/CSS/JS under `docs/assets/`) and a small Cloudflare/Deno
-Workers backend (`worker/`) for the x402 payment gate and Alchemy-backed portfolio data.
+Workers backend (`worker/`) that gates the paid offerings behind x402 and serves the site's
+live on-chain data panels.
 
 ---
 
@@ -135,7 +144,7 @@ python -m agents.builder --task "..."   # generate code grounded in Memory
 Everything above writes real output: a report in `intel/` or `reports/`, a finding appended
 to `skillforge/memory/findings.jsonl`. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for
 running the full system on GitHub Actions (the actual production setup — 24/7, zero local
-compute) and [worker/README.md](worker/README.md) for the site's payment backend.
+compute) and [worker/README.md](worker/README.md) for the x402 payment backend.
 
 ---
 
@@ -152,16 +161,17 @@ compute) and [worker/README.md](worker/README.md) for the site's payment backend
   results back to Memory. See [docs/BUILDER.md](docs/BUILDER.md).
 - **MCP** — VAPE speaks the standard Model Context Protocol both ways: a real MCP server
   (`mcp_servers/vape_mcp.py`) exposes VAPE's own tools to any MCP host, and VAPE itself
-  hosts 13 registered MCP servers (7 keyless, 6 that activate the instant a key is set) for
-  research and tool discovery. See [docs/MCP.md](docs/MCP.md) and
-  [docs/MCP_SERVER.md](docs/MCP_SERVER.md).
+  hosts several registered MCP servers for research and tool discovery. See
+  [docs/MCP.md](docs/MCP.md) and [docs/MCP_SERVER.md](docs/MCP_SERVER.md).
 
 ---
 
 ## Security and audit
 
-- Every generated deliverable traces to a real, cited data source — no simulated tool
-  output, no invented findings.
+- Every generated deliverable traces to a real, verifiable data source — no simulated tool
+  output, no invented findings, and no third-party API/vendor name-dropped into a report
+  just to sound more credible: VAPE describes what a signal measures, not which service
+  happened to supply it.
 - Memory is append-only; nothing is silently deleted or rewritten.
 - Builder-generated code is checked against a hard-block list (`eval`, `exec`, shell
   execution, unsafe deserialization) before it can be appended or opened as a PR.
@@ -192,20 +202,19 @@ V.A.P.E/
 ## Status
 
 **Live and running:** Featured Investigations every 30 minutes, hourly bounty/market
-sweeps, the SKILLFORGE tool
-ecosystem (16 tools registered, 16 verified), ACP + x402 job fulfillment across 31 live
-offerings (27 x402-payable, 21 auto-fulfilled with zero manual work), x402 payments on
-Base mainnet via Coinbase Developer Platform's hosted facilitator, wallet-connect
-portfolio, the Central Memory system, the standard MCP server (17 tools), and the
-Builder self-improvement pipeline.
+sweeps, the SKILLFORGE tool ecosystem (16 tools registered, 16 verified), x402 job
+fulfillment on Base mainnet across 27 of VAPE's 31 live offerings (21 auto-fulfilled with
+zero manual work end-to-end across both x402 and ACP), ACP escrow engagements for the
+remaining deeper offerings, wallet-connect portfolio, a live searchable job ledger, the
+Central Memory system, the standard MCP server, and the Builder self-improvement pipeline.
 
 **In progress:** real auto-handlers for the remaining 4 ACP-only offerings
 (`forensics_deep`/`wallet_recon`/`whale_watch`/`partner_referral` — the underlying tools
-like `wallet_trace` already work, nothing calls them automatically yet), a dashboard
-reputation loop, richer social-sentiment intel beyond the current keyless aggregate.
-`app.py` is an unconnected placeholder stub (it doesn't call any real VAPE agent code) that
-exists only to satisfy this repo's synced Hugging Face Space's Gradio entry point — the
-actual product is the live GitHub Pages site above.
+already work, nothing calls them automatically yet), a dashboard reputation loop, richer
+social-sentiment intel beyond the current keyless aggregate. `app.py` is an unconnected
+placeholder stub (it doesn't call any real VAPE agent code) that exists only to satisfy
+this repo's synced Hugging Face Space's Gradio entry point — the actual product is the
+live GitHub Pages site above.
 
 ---
 
@@ -214,7 +223,7 @@ actual product is the live GitHub Pages site above.
 | Doc | Covers |
 |---|---|
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design, component status, data flow |
-| [ARCHITECTURE_ROADMAP.md](docs/ARCHITECTURE_ROADMAP.md) | ACP revenue strategy, LLM provider expansion |
+| [ARCHITECTURE_ROADMAP.md](docs/ARCHITECTURE_ROADMAP.md) | Revenue strategy, offering roadmap |
 | [ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) | Identity, wallet, offerings, job lifecycle |
 | [DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Actions + repository secrets setup |
 | [MEMORY.md](docs/MEMORY.md) | Central Memory usage guide |
@@ -236,11 +245,11 @@ GROQ_API_KEY=       # free tier — enough to run everything
 
 xAI's Grok 4.1 Fast is the primary model for reports/investigations/expert assessment
 when `XAI_API_KEY_1` is set (see `agents/llm.py`'s `FRONTIER_ORDER`), but every path has a
-free fallback — nothing in VAPE requires a paid key to run. Everything else (Etherscan,
-Alchemy, additional LLM fallbacks, MCP research providers, the worker's Cloudflare/
-CoinGecko keys) is optional — VAPE degrades gracefully to keyless data sources when a key
-isn't set. See `.env.example` for the full list and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
-for which secrets the live site's CI actually needs.
+free fallback — nothing in VAPE requires a paid key to run. Everything else (additional
+recon/market-data keys, LLM fallbacks, MCP research providers, the worker's optional data
+keys) is optional — VAPE degrades gracefully to keyless data sources when a key isn't set.
+See `.env.example` for the full list and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for which
+secrets the live site's CI actually needs.
 
 ---
 
@@ -252,7 +261,10 @@ for which secrets the live site's CI actually needs.
    shell/OS access) and include real error handling — no silent failures.
 3. Real data only: no simulated tool output, no fabricated findings, no guessed URLs or
    icons. If a data source is unreachable, say so rather than approximate.
-4. Autonomous agents open pull requests for review; nothing is designed to write directly
+4. Describe what a signal measures, not which third-party API/vendor happened to supply
+   it — reports and site copy stay vendor-neutral; that's a description of VAPE's own
+   process, not an endorsement of anyone else's product.
+5. Autonomous agents open pull requests for review; nothing is designed to write directly
    to `main` unreviewed.
 
 ---

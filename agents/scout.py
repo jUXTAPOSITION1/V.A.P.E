@@ -376,10 +376,12 @@ def _strategic_briefing(new_entries, shown):
         "You have real analytical freedom here: write at whatever depth the real data actually "
         "supports — this is not a word-capped summary — and bring your own general knowledge "
         "of the bounty/security landscape to bear where useful, clearly marked as background "
-        "rather than something this cycle's data itself showed."
+        "rather than something this cycle's data itself showed. Never name the specific "
+        "third-party API/vendor a piece of data came from — describe it by what it measures "
+        "instead."
     )
     user = (
-        "=== TOP-RANKED OPPORTUNITIES THIS CYCLE (real, DeFiLlama hacks feed + seed bounty data) ===\n"
+        "=== TOP-RANKED OPPORTUNITIES THIS CYCLE (real, hack-incident feed + seed bounty data) ===\n"
         + "\n".join(lines)
         + "\n\n=== NEW THIS CYCLE ===\n" + ("\n".join(new_lines) if new_lines else "(none — same top set as last cycle)")
         + f"\n\n=== WEB RESEARCH on top-ranked entry ({research.get('provider') or 'unavailable'}) ===\n"

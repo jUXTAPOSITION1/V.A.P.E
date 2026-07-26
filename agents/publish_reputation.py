@@ -134,13 +134,14 @@ _402INDEX_SERVICE_IDS = {
 OFFERINGS = [
     ("exploit_check", 0.01, "Exploit & scam-database check for any Base wallet/contract"),
     ("partner_referral", 0.01, "Earn USDC commission referring clients to VAPE"),
-    ("token_safety_check", 0.02, "Honeypot detector + 0-100 safety score (GoPlus+DexScreener)"),
+    ("token_safety_check", 0.02, "Honeypot detector + 0-100 safety score"),
     ("liquidity_check", 0.02, "DEX liquidity depth, LP burn, slippage + SAFE/THIN/DANGEROUS"),
     ("wallet_recon", 0.03, "Address profiling: holdings, patterns, risk flags"),
     ("rug_pull_alert", 0.03, "Rug risk LOW/MEDIUM/HIGH/EXTREME with specific red flags"),
     ("tx_decode", 0.05, "Plain-language tx decode + risk flags for any Base tx hash"),
-    ("market_intel", 0.07, "Real-time price/TVL/liquidity + actionable signal"),
-    ("dossier_check", 0.10, "VAPE's deepest instant verdict: weighted CertiK-style score, "
+    ("market_intel", 0.07, "Base TVL trend, per-protocol share/concentration risk, DEX volume, "
+     "gainers/losers, prices, sentiment, and a narrative summary"),
+    ("dossier_check", 0.10, "VAPE's deepest instant verdict: weighted 0-100 risk score, "
      "meme-factory-template detection, recent-hack correlation, public web-reputation search, "
      "a live check of declared socials, and a frontier-LLM quick source read"),
     ("whale_watch", 0.10, "Whale buys/sells + BULLISH/BEARISH/NEUTRAL net-flow"),
@@ -150,9 +151,9 @@ OFFERINGS = [
     ("forensics_deep", 2.00, "Full wallet trace + chain-of-custody graph"),
     ("bounty_deep_dive", 1.00, "Submission-ready PoC and full technical detail: full recon + "
      "Slither + frontier-model line-by-line source review, real committed report"),
-    ("wallet_pnl_deepdive", 0.25, "Real Base-mainnet wallet balances (via Alchemy) + an "
-     "unrealized-P&L estimate per holding (current value vs. first-acquisition price, via "
-     "CoinGecko) — x402 only, not ACP-fulfilled"),
+    ("wallet_pnl_deepdive", 0.25, "Real Base-mainnet wallet balances + an "
+     "unrealized-P&L estimate per holding (current value vs. first-acquisition price) — "
+     "x402 only, not ACP-fulfilled"),
     ("website_review", 0.15, "Phishing/scam-page red-flag read of a website URL: real scrape + "
      "frontier-LLM read for fake contract addresses, wallet-drainer patterns, brand mismatch — "
      "x402 only, not yet ACP-listed"),

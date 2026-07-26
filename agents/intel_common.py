@@ -211,7 +211,9 @@ def grok_analysis(role, grounding, instructions=None, max_tokens=2400, temperatu
         "opinionated, expert analysis at whatever length the real data actually supports "
         "— this is not a word-capped summary, and thin data (even after your own search) "
         "should produce a short honest section, not padding. No generic crypto-newsletter "
-        "voice, no hedging beyond what's factually warranted."
+        "voice, no hedging beyond what's factually warranted. Never name the specific "
+        "third-party API/vendor a piece of given data came from (e.g. don't write "
+        "'according to DeFiLlama') — describe it by what it measures instead."
     )
     user = grounding if not instructions else f"{grounding}\n\n---\n{instructions}"
     text, _ = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,

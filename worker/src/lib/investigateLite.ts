@@ -334,8 +334,8 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
   const flag = (cond: boolean, penalty: number, msg: string) => { if (cond) { s -= penalty; reasons.push(`[-${penalty}] ${msg}`); } };
   const signal = (cond: boolean, msg: string) => { if (cond) positiveSignals.push(msg); };
 
-  flag(String(gp.is_honeypot) === "1", 60, "GoPlus: HONEYPOT detected");
-  flag(String(gp.cannot_sell_all) === "1", 30, "GoPlus: cannot sell all tokens");
+  flag(String(gp.is_honeypot) === "1", 60, "HONEYPOT detected");
+  flag(String(gp.cannot_sell_all) === "1", 30, "Cannot sell all tokens");
   flag(String(gp.is_mintable) === "1", 12, "Mintable supply (dilution risk)");
   flag(String(gp.can_take_back_ownership) === "1", 18, "Ownership can be reclaimed");
   flag(String(gp.owner_change_balance) === "1", 25, "Owner can change balances (rug surface)");
@@ -367,12 +367,12 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
     if (ownerPresent) refund += 10;
     if (refund) {
       s += refund;
-      reasons.push(`[+${refund}] Verified major stablecoin (CoinGecko: ${stableCtx.name}, `
+      reasons.push(`[+${refund}] Verified major stablecoin (${stableCtx.name}, `
         + `$${stableCtx.market_cap_usd!.toLocaleString()} circulating, $${stableCtx.price_usd!.toFixed(4)} peg) — `
         + "mint/owner-controlled-freeze/retained-ownership are standard compliance mechanisms for "
         + "this category, not rug indicators; penalties above refunded");
     }
-    signal(true, `Verified as a real, CoinGecko-recognized major stablecoin `
+    signal(true, `Verified as a real, market-data-recognized major stablecoin `
       + `($${stableCtx.market_cap_usd!.toLocaleString()} circulating, $${stableCtx.price_usd!.toFixed(4)} peg)`);
   }
 
@@ -397,7 +397,7 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
     flag(priceOffPeg, 40,
       `Token name/symbol (${dex.name} / ${dex.symbol}) claims a major stablecoin `
       + `brand but trades at $${dexPrice.toFixed(6)}, nowhere near the real $1 peg, and is not the `
-      + "CoinGecko-verified real asset at this address — brand impersonation, not a real stablecoin");
+      + "independently-verified real asset at this address — brand impersonation, not a real stablecoin");
   }
 
   const cname = (verif.name || "").toLowerCase();

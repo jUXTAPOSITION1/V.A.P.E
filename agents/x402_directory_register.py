@@ -140,16 +140,17 @@ VAPOR_API_KEY = os.environ.get("VAPOR_API_KEY")
 # change there, update here too.
 OFFERINGS = {
     "exploit_check": ("0.01", "Contract verification + proxy-swap surface check."),
-    "token_safety_check": ("0.02", "Full GoPlus + DexScreener token safety scan with CertiK-style scoring."),
+    "token_safety_check": ("0.02", "Full token safety + liquidity scan with a weighted 0-100 risk score."),
     "liquidity_check": ("0.02", "Liquidity depth + top pair DEX for a Base token."),
     "rug_pull_alert": ("0.03", "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration)."),
-    "market_intel": ("0.07", "Base TVL, top protocols, prices, and rule-based anomaly flags."),
-    "dossier_check": ("0.10", "VAPE's deepest instant verdict: weighted CertiK-style score, "
+    "market_intel": ("0.07", "Base TVL trend, per-protocol share/category breakdown, concentration "
+                         "risk, DEX volume, top gainers/losers, prices, sentiment, and a narrative summary."),
+    "dossier_check": ("0.10", "VAPE's deepest instant verdict: weighted 0-100 risk score, "
                          "meme-factory-template detection, recent-hack correlation, public "
                          "web-reputation search, a live check of declared socials, and a "
                          "frontier-LLM quick source read."),
     "tx_decode": ("0.05", "Plain-language transaction decode + risk flags for any Base/EVM tx "
-                         "hash — real Etherscan tx/receipt/logs + 4byte.directory signature lookup."),
+                         "hash — real on-chain tx/receipt/logs plus signature lookup."),
     "community_intel_broadcast": ("0.10", "VAPE's latest 6-hourly consolidated security + market "
                          "intel broadcast — real committed output, not generated per-request."),
     "bulk_safety_bundle": ("0.50", "token_safety_check batched over 5-25 tokens in one job, "
@@ -169,9 +170,9 @@ OFFERINGS = {
 # (Base mainnet only — rebuilt off Codex after its wallet-analytics fields
 # turned out to be paid-plan-gated).
 DATA_OFFERINGS = {
-    "wallet_pnl_deepdive": ("0.25", "Real Base-mainnet wallet balances (Alchemy) + an "
+    "wallet_pnl_deepdive": ("0.25", "Real Base-mainnet wallet balances + an "
                        "unrealized-P&L estimate per holding (current value vs. first-"
-                       "acquisition price, via CoinGecko)."),
+                       "acquisition price)."),
     "prediction_market_odds": ("0.01", "Live crypto/Base-relevant prediction-market odds from "
                        "Polymarket and Kalshi, ranked by volume."),
     "token_intel": ("0.01", "Price + confidence, oracle-derived token age, optional "

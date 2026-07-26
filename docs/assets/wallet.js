@@ -251,7 +251,7 @@ const Wallet = {
             <div class="flex flex-col gap-1.5">
                 <button id="wallet-pop-case-file" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-id-card-clip w-5 text-center text-zinc-400"></i> View portfolio</button>
                 <button id="wallet-pop-copy" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-copy w-5 text-center"></i> Copy address</button>
-                <a href="https://basescan.org/address/${this._account}" target="_blank" rel="noopener" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-arrow-up-right-from-square w-5 text-center"></i> View on Basescan</a>
+                <a href="https://basescan.org/address/${this._account}" target="_blank" rel="noopener" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm"><i class="fa-solid fa-arrow-up-right-from-square w-5 text-center"></i> View on block explorer</a>
                 <button id="wallet-pop-disconnect" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/10 text-left text-sm text-rose-400"><i class="fa-solid fa-right-from-bracket w-5 text-center"></i> Disconnect</button>
             </div>`;
         document.body.appendChild(pop);

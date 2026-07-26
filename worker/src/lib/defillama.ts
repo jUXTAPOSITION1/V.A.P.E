@@ -220,6 +220,22 @@ export async function stablecoins(minMcap = 1e8, limit = 25): Promise<DlResult> 
   return { ts: nowIso(), count: rows.length, stablecoins: rows.slice(0, limit) };
 }
 
+// Recent DeFi exploits/hacks (api.llama.fi/hacks, keyless) — TS port of
+// agents/data_fetchers.py::get_hack_feed(), kept minimal (just what
+// bridges()'s fallback below needs: name + technique to filter on).
+async function hackFeed(limit = 50): Promise<Record<string, unknown>[] | null> {
+  const d = await dlGet(`${API}/hacks`);
+  if (!Array.isArray(d)) return null;
+  return d
+    .slice()
+    .sort((a: any, b: any) => (b.date || 0) - (a.date || 0))
+    .slice(0, limit)
+    .map((h: any) => ({
+      date: h.date, name: h.name, amount_usd_m: Math.round(((h.amount || 0) / 1e6) * 1000) / 1000,
+      chains: h.chain || [], technique: h.technique,
+    }));
+}
+
 // ── Bridges (bridges.llama.fi) — feeds threat work ───────────────────────────
 export async function bridges(limit = 25): Promise<DlResult> {
   // Plain /bridges (list only) stays free; `includeChains=true` pulls the
@@ -227,14 +243,36 @@ export async function bridges(limit = 25): Promise<DlResult> {
   // (this call was observed 402ing in production with that param — see
   // agents/defillama.py::bridges() for the parallel fix). Dropping it keeps
   // this offering deliverable; `chains` is simply absent from the result now.
+  //
+  // Real gap this closes (2026-07-26, direct user report: the live offering
+  // was shipping a bare "HTTP 402" as its entire $0.01 deliverable): the
+  // plain list endpoint above has ALSO started failing in production, on top
+  // of the known includeChains gate. Falls back to recent bridge-category
+  // incidents from the same keyless hack feed (a real, always-free signal)
+  // so "is bridge risk elevated right now" still gets a genuine answer.
   const d = await dlGet(`${BRIDGES}/bridges`);
-  if (isErr(d)) return d;
-  const rows = (d.bridges || []).map((b: any) => ({
-    id: b.id, name: b.displayName || b.name, chains: b.chains,
-    last_daily_volume: b.lastDailyVolume, weekly_volume: b.weeklyVolume,
-  }));
-  rows.sort((a: any, b: any) => (b.last_daily_volume || 0) - (a.last_daily_volume || 0));
-  return { ts: nowIso(), count: rows.length, bridges: rows.slice(0, limit) };
+  if (!isErr(d)) {
+    const rows = (d.bridges || []).map((b: any) => ({
+      id: b.id, name: b.displayName || b.name, chains: b.chains,
+      last_daily_volume: b.lastDailyVolume, weekly_volume: b.weeklyVolume,
+    }));
+    rows.sort((a: any, b: any) => (b.last_daily_volume || 0) - (a.last_daily_volume || 0));
+    return { ts: nowIso(), count: rows.length, bridges: rows.slice(0, limit) };
+  }
+
+  const feed = await hackFeed(50);
+  const bridgeIncidents = (feed || []).filter(h =>
+    String(h.technique || "").toLowerCase().includes("bridge")
+    || String(h.name || "").toLowerCase().includes("bridge")
+  ).slice(0, limit);
+  if (!bridgeIncidents.length) return d;
+  return {
+    ts: nowIso(), count: bridgeIncidents.length,
+    data_source: "bridge-exploit incident feed (bridge volume list unavailable this cycle)",
+    recent_bridge_incidents: bridgeIncidents,
+    note: "Live bridge-volume ranking unavailable this cycle; showing recent bridge-category "
+      + "exploit incidents instead as the nearer-term threat signal.",
+  };
 }
 
 export async function bridgeVolume(chain = "Base"): Promise<DlResult> {
@@ -250,25 +288,53 @@ export async function bridgeVolume(chain = "Base"): Promise<DlResult> {
 
 // ── Unlocks / emissions (api.llama.fi) ───────────────────────────────────────
 export async function unlocks(slug: string): Promise<DlResult> {
+  // Real gap this closes (2026-07-26, direct user report: the live offering
+  // was shipping a bare "HTTP 402" as its entire $0.01 deliverable): DefiLlama
+  // moved this exact endpoint behind its $300/mo Pro API tier (confirmed via
+  // web search, not assumed), so it now 402s unconditionally on the free
+  // tier. Falls back to a circulating-vs-total-supply gap pulled from the
+  // protocol's own CoinGecko listing (via the gecko_id DefiLlama's own
+  // /protocol/{slug} already carries, no new provider) — a coarser but real
+  // and always-free future-dilution signal, honestly labeled as an estimate.
   const d = await dlGet(`${API}/emission/${encodeURIComponent(slug)}`);
-  if (isErr(d)) return d;
-  const events = d.events || d.unlocks || [];
-  const now = Date.now() / 1000;
-  let upcoming: Record<string, unknown> | null = null;
-  let bestTs: number | null = null;
-  // Keep the EARLIEST future event — `events` isn't guaranteed sorted, so
-  // stopping at the first future item can surface a later unlock than the next.
-  for (const e of events) {
-    const ts = e.timestamp ?? e.date;
-    if (typeof ts === "number" && ts > now && (bestTs === null || ts < bestTs)) {
-      bestTs = ts;
-      upcoming = {
-        timestamp: ts, in_days: Math.round(((ts - now) / 86400) * 10) / 10,
-        description: e.description || e.category, amount: e.noOfTokens ?? e.amount,
-      };
+  if (!isErr(d)) {
+    const events = d.events || d.unlocks || [];
+    const now = Date.now() / 1000;
+    let upcoming: Record<string, unknown> | null = null;
+    let bestTs: number | null = null;
+    // Keep the EARLIEST future event — `events` isn't guaranteed sorted, so
+    // stopping at the first future item can surface a later unlock than the next.
+    for (const e of events) {
+      const ts = e.timestamp ?? e.date;
+      if (typeof ts === "number" && ts > now && (bestTs === null || ts < bestTs)) {
+        bestTs = ts;
+        upcoming = {
+          timestamp: ts, in_days: Math.round(((ts - now) / 86400) * 10) / 10,
+          description: e.description || e.category, amount: e.noOfTokens ?? e.amount,
+        };
+      }
     }
+    return { ts: nowIso(), slug, name: d.name, next_unlock: upcoming, tracked_events: events.length };
   }
-  return { ts: nowIso(), slug, name: d.name, next_unlock: upcoming, tracked_events: events.length };
+
+  const proto = await dlGet(`${API}/protocol/${encodeURIComponent(slug)}`);
+  const geckoId = !isErr(proto) ? proto.gecko_id : null;
+  if (!geckoId) return d;
+  const cg = await dlGet(`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(geckoId)}`
+    + `?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`);
+  const m = !isErr(cg) ? (cg.market_data || {}) : {};
+  const total = m.total_supply;
+  const circ = m.circulating_supply;
+  if (!(typeof total === "number" && total > 0 && typeof circ === "number")) return d;
+  const lockedPct = Math.round(((total - circ) / total) * 10000) / 100;
+  return {
+    ts: nowIso(), slug, name: proto.name,
+    data_source: "supply-gap estimate (unlock calendar unavailable this cycle)",
+    circulating_supply: circ, total_supply: total, max_supply: m.max_supply,
+    locked_supply_pct: lockedPct, next_unlock: null, tracked_events: 0,
+    note: "Exact next-unlock date unavailable this cycle; this is the gap between circulating "
+      + "and total supply as a coarser future-dilution signal.",
+  };
 }
 
 // ── Treasury (api.llama.fi) ──────────────────────────────────────────────────
