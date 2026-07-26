@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T00:04:52Z",
+  "generated": "2026-07-26T00:20:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 343,
+    "investigations": 344,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-000452-0x1e9909F1.md",
-      "title": "Investigation \u2014 LTZ",
-      "symbol": "LTZ",
-      "name": "b-Lifmi b-Tzuo-x Zxah",
-      "date": "2026-07-26T00:04:52Z",
-      "target": "0x1e9909F1c7051aD4Bf4496A345736dCEdC2A3Cfd",
+      "file": "investigation-20260726-001959-0x49DDee75.md",
+      "title": "Investigation \u2014 EBCC",
+      "symbol": "EBCC",
+      "name": "EBCC_coin",
+      "date": "2026-07-26T00:19:59Z",
+      "target": "0x49DDee75D588b79a3eB1225dd386644eeeeeaF08",
       "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (32) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,370 (rug/illiquid); [-10] Low liquidity $3,370; [-15] Contract source UNVERIFIED; [-10] No known third-party audit or",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-000452-0x1e9909F1.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 4610 holders \u2014 reasonably distributed; Trading 233+ days without a known incident in this sc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-001959-0x49DDee75.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-001959-0x49DDee75.md",
+      "title": "Investigation \u2014 EBCC",
+      "symbol": "EBCC",
+      "name": "EBCC_coin",
+      "date": "2026-07-26T00:19:59Z",
+      "target": "0x49DDee75D588b79a3eB1225dd386644eeeeeaF08",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 4610 holders \u2014 reasonably distributed; Trading 233+ days without a known incident in this sc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-001959-0x49DDee75.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-000452-0x1e9909F1.md",
@@ -593,20 +607,6 @@
       "score": "25",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x0a2962120b11a4a36700c5de00d4980e58a2d1c0) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evide",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-211531-0xfc5A1A6E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-194245-0xf7C1CEfC.md",
-      "title": "Investigation \u2014 TOWER",
-      "symbol": "TOWER",
-      "name": "TOWER",
-      "date": "2026-07-24T19:42:45Z",
-      "target": "0xf7C1CEfCf7E1dd8161e00099facD3E1Db9e528ee",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 69585 holders \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-194245-0xf7C1CEfC.md"
     }
   ],
   "reports": [

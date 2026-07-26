@@ -517,3 +517,5 @@
 | 2026-07-25 | auto | 0x2c72D25530191EBD244Eb6325E1892480b0e6E28 (AIPF) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0x1e9909F1c7051aD4Bf4496A345736dCEdC2A3Cfd (LTZ) | deep_investigation | REJECT (5/100) | Very few holders (32) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x49DDee75D588b79a3eB1225dd386644eeeeeaF08 (EBCC) | deep_investigation | CAUTION (70/100) | Top 9 non-LP/burn holders control 100% of supply — concentrated, easily manipula | +7d |
