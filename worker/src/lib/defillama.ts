@@ -318,7 +318,22 @@ export async function unlocks(slug: string): Promise<DlResult> {
   }
 
   const proto = await dlGet(`${API}/protocol/${encodeURIComponent(slug)}`);
-  const geckoId = !isErr(proto) ? proto.gecko_id : null;
+  let geckoId = !isErr(proto) ? proto.gecko_id : null;
+  let name = !isErr(proto) ? proto.name : null;
+  if (!geckoId) {
+    // Real gap this closes (direct user report: "Aptos" — the built-in
+    // example for this very field — still shipped the raw upstream 402):
+    // /protocol/{slug} only covers DeFi protocols (Uniswap, Aave, ...), not
+    // L1 chains. A real, common "unlocks" target is an L1's own native
+    // token (Aptos, Sui, ...), which DefiLlama tracks under /v2/chains
+    // instead, keyed by chain NAME not protocol slug. Reuse chainOverview's
+    // own already-fetched chains list rather than a second endpoint.
+    const chains = await chainOverview(slug);
+    if (!isErr(chains)) {
+      geckoId = chains.gecko_id as string | null;
+      name = chains.chain as string | null;
+    }
+  }
   if (!geckoId) return d;
   const cg = await dlGet(`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(geckoId)}`
     + `?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`);
@@ -328,7 +343,7 @@ export async function unlocks(slug: string): Promise<DlResult> {
   if (!(typeof total === "number" && total > 0 && typeof circ === "number")) return d;
   const lockedPct = Math.round(((total - circ) / total) * 10000) / 100;
   return {
-    ts: nowIso(), slug, name: proto.name,
+    ts: nowIso(), slug, name,
     data_source: "supply-gap estimate (unlock calendar unavailable this cycle)",
     circulating_supply: circ, total_supply: total, max_supply: m.max_supply,
     locked_supply_pct: lockedPct, next_unlock: null, tracked_events: 0,
