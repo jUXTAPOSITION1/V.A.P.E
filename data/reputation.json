@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T15:31:55Z",
+  "generated": "2026-07-26T17:18:45Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,10 +13,10 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 329,
+    "reports_published": 331,
     "intel_reports": 303,
     "intel_broadcasts": 113,
-    "catalog_investigations": 292,
+    "catalog_investigations": 296,
     "token_scans_logged": 0,
     "skills_codified": 20,
     "tools_total": 16,
@@ -167,7 +167,7 @@
       {
         "name": "token_safety_check",
         "price_usd": 0.02,
-        "summary": "Honeypot detector + 0-100 safety score (GoPlus+DexScreener)",
+        "summary": "Honeypot detector + 0-100 safety score",
         "auto": true,
         "x402": true,
         "data": false,
@@ -215,7 +215,7 @@
       {
         "name": "market_intel",
         "price_usd": 0.07,
-        "summary": "Real-time price/TVL/liquidity + actionable signal",
+        "summary": "Base TVL trend, per-protocol share/concentration risk, DEX volume, gainers/losers, prices, sentiment, and a narrative summary",
         "auto": true,
         "x402": true,
         "data": false,
@@ -225,7 +225,7 @@
       {
         "name": "dossier_check",
         "price_usd": 0.1,
-        "summary": "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template detection, recent-hack correlation, public web-reputation search, a live check of declared socials, and a frontier-LLM quick source read",
+        "summary": "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template detection, recent-hack correlation, public web-reputation search, a live check of declared socials, and a frontier-LLM quick source read",
         "auto": true,
         "x402": true,
         "data": false,
@@ -289,7 +289,7 @@
       {
         "name": "wallet_pnl_deepdive",
         "price_usd": 0.25,
-        "summary": "Real Base-mainnet wallet balances (via Alchemy) + an unrealized-P&L estimate per holding (current value vs. first-acquisition price, via CoinGecko) \u2014 x402 only, not ACP-fulfilled",
+        "summary": "Real Base-mainnet wallet balances + an unrealized-P&L estimate per holding (current value vs. first-acquisition price) \u2014 x402 only, not ACP-fulfilled",
         "auto": false,
         "x402": true,
         "data": false,
