@@ -197,3 +197,4 @@
 {"ts": "2026-07-25T04:48:59Z", "lead": "DeBond (exploit $542,000)", "platform": "defillama-hack", "prizeUsd": 542000, "fitScore": 77, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T04:48:51Z"}}
 {"ts": "2026-07-25T04:48:59Z", "lead": "Lien (exploit $542,000)", "platform": "defillama-hack", "prizeUsd": 542000, "fitScore": 77, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T04:48:54Z"}}
 {"ts": "2026-07-25T18:35:39Z", "lead": "Triple-A (exploit $9,700,000)", "platform": "defillama-hack", "prizeUsd": 9700000, "fitScore": 90, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T18:35:30Z"}}
+{"ts": "2026-07-26T21:31:58Z", "lead": "Garden (exploit $450,000)", "platform": "defillama-hack", "prizeUsd": 450000, "fitScore": 87, "engagement": {"status": "no_target_found", "checked_at": "2026-07-26T21:31:50Z"}}

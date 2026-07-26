@@ -185,5 +185,6 @@
   "defillama-hack:BlueMove DEX (exploit $529,000)": "not_yet_attempted",
   "defillama-hack:DeBond (exploit $542,000)": "no_target_found",
   "defillama-hack:Lien (exploit $542,000)": "no_target_found",
-  "defillama-hack:Triple-A (exploit $9,700,000)": "no_target_found"
+  "defillama-hack:Triple-A (exploit $9,700,000)": "no_target_found",
+  "defillama-hack:Garden (exploit $450,000)": "no_target_found"
 }

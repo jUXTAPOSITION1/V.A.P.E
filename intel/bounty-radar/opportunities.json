@@ -3537,7 +3537,7 @@
     "bountyFitScore": 51,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3566,7 +3566,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3597,7 +3597,7 @@
     "bountyFitScore": 59,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3626,7 +3626,7 @@
     "bountyFitScore": 49,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3656,7 +3656,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3685,7 +3685,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3713,7 +3713,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3743,7 +3743,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3772,7 +3772,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3803,7 +3803,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3834,7 +3834,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3865,7 +3865,7 @@
     "bountyFitScore": 57,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3898,7 +3898,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3927,7 +3927,7 @@
     "bountyFitScore": 47,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -3961,7 +3961,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784486054.983083,
+      "checkedAt": 1785101501.8068502,
       "ok": true
     }
   },
@@ -26644,5 +26644,28 @@
     "fitScore": 90,
     "isNew": true,
     "firstSeen": "2026-07-25T18:35:18.351979Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Garden-1785024000",
+    "name": "Garden (exploit $450,000)",
+    "prizeUsd": 450000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "base",
+      "arbitrum",
+      "bsc"
+    ],
+    "desc": "Incident lead for forensics on Ethereum,Base,Arbitrum,BSC.",
+    "fitScore": 87,
+    "isNew": true,
+    "firstSeen": "2026-07-26T21:31:41.806766Z"
   }
 ]
