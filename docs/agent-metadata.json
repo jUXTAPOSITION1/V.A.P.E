@@ -1,0 +1,31 @@
+{
+  "name": "VAPE",
+  "description": "V.A.P.E. — autonomous on-chain security and market-intelligence agent for Base. Runs contract audits, token-safety scans, market data, and bug-bounty deep dives, sold instantly via x402 (wallet-signed USDC micropayments) or escrowed ACP jobs for deeper engagements.",
+  "image": "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png",
+  "external_url": "https://juxtaposition1.github.io/V.A.P.E/",
+  "agentType": "autonomous-service-provider",
+  "capabilities": [
+    "exploit_check",
+    "token_safety_check",
+    "liquidity_check",
+    "rug_pull_alert",
+    "tx_decode",
+    "market_intel",
+    "dossier_check",
+    "whale_watch",
+    "community_intel_broadcast",
+    "bulk_safety_bundle",
+    "deep_contract_audit",
+    "bounty_deep_dive",
+    "wallet_pnl_deepdive",
+    "website_review"
+  ],
+  "endpoints": {
+    "x402": "https://vape-x402.vapex402.workers.dev",
+    "openapi": "https://vape-x402.vapex402.workers.dev/openapi.json",
+    "site": "https://juxtaposition1.github.io/V.A.P.E/",
+    "repo": "https://github.com/jUXTAPOSITION1/V.A.P.E"
+  },
+  "wallet": "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15",
+  "basename": "vapex402.base.eth"
+}
