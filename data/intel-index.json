@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T03:39:18Z",
+  "generated": "2026-07-26T03:54:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 418,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 356,
+    "investigations": 357,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-033917-0xAc9ce277.md",
-      "title": "Investigation \u2014 SOSO",
-      "symbol": "SOSO",
-      "name": "SOSO",
-      "date": "2026-07-26T03:39:17Z",
-      "target": "0xAc9ce2775B918C4d4fddEcB772064637c292C295",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,908; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Posit",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-033917-0xAc9ce277.md"
+      "file": "investigation-20260726-035424-0x35e9e9A7.md",
+      "title": "Investigation \u2014 DIM",
+      "symbol": "DIM",
+      "name": "DIM",
+      "date": "2026-07-26T03:54:24Z",
+      "target": "0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +493% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-035424-0x35e9e9A7.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-035424-0x35e9e9A7.md",
+      "title": "Investigation \u2014 DIM",
+      "symbol": "DIM",
+      "name": "DIM",
+      "date": "2026-07-26T03:54:24Z",
+      "target": "0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +493% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-035424-0x35e9e9A7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-033917-0xAc9ce277.md",
@@ -593,20 +607,6 @@
       "score": "23",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xe432150cce91c13a887f7d836923d5597add8e31) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 79% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-172717-0xEB466342.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-171202-0x50c57259.md",
-      "title": "Investigation \u2014 DAI",
-      "symbol": "DAI",
-      "name": "Dai Stablecoin",
-      "date": "2026-07-25T17:12:02Z",
-      "target": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x4200000000000000000000000000000000000010) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 52% of supply \u2014 meaningful concentration. Positive evidence: 382595 holders ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-171202-0x50c57259.md"
     }
   ],
   "reports": [

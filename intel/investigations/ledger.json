@@ -741,6 +741,25 @@
     "symbol": "Del",
     "times_investigated": 1
   },
+  "1:0x35e9e9a79756e952b9ea358be79d7faa8d9381a0": {
+    "address": "0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0",
+    "chain": "1",
+    "creator_address": "0x0e8b10f1bf94d1734d4f8af0bb25362776ab21b0",
+    "first_investigated": "2026-07-26T03:54:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-035424-0x35e9e9A7.md",
+        "score": 50,
+        "ts": "2026-07-26T03:54:24Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T03:54:24Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "DIM",
+    "times_investigated": 1
+  },
   "1:0x36d527d75aa29101c86ae420ea46dd7be34b529a": {
     "address": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
     "chain": "1",
