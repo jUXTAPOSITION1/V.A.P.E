@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T05:52:41Z",
+  "generated": "2026-07-26T05:56:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 421,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 363,
+    "investigations": 364,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-054059-0xB6fc4bc6.md",
-      "title": "Investigation \u2014 $PLY",
-      "symbol": "$PLY",
-      "name": "PLAY",
-      "date": "2026-07-26T05:40:59Z",
-      "target": "0xB6fc4bc614BC3275C36D609B7a9E1f5017274aB1",
+      "file": "investigation-20260726-055607-0x0Cb9610b.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "Playlouts",
+      "date": "2026-07-26T05:56:07Z",
+      "target": "0x0Cb9610b0b3C6f0758aee0082e149b861a667E99",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $8,183 (rug/illiquid); [-10] Low liquidity $8,183; [-10] No known third-party audit or verifiable team identity found \u2014 tr",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-054059-0xB6fc4bc6.md"
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-055607-0x0Cb9610b.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-055607-0x0Cb9610b.md",
+      "title": "Investigation \u2014 PLAY",
+      "symbol": "PLAY",
+      "name": "Playlouts",
+      "date": "2026-07-26T05:56:07Z",
+      "target": "0x0Cb9610b0b3C6f0758aee0082e149b861a667E99",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-055607-0x0Cb9610b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-054059-0xB6fc4bc6.md",
@@ -593,20 +607,6 @@
       "score": "13",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: USDC (0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88) \u2014 CAUTION 68/100 \u2014 likely the same serial campaign; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] On",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-191315-0x3CfaDB7f.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-185758-0xD60ABFB7.md",
-      "title": "Investigation \u2014 JAKEX",
-      "symbol": "JAKEX",
-      "name": "JakeX",
-      "date": "2026-07-25T18:57:58Z",
-      "target": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $1,778 (rug/illiquid); [-10] Low liquidity $1,778. Positive evidence: Ownership renounced; Trading 705+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-185758-0xD60ABFB7.md"
     }
   ],
   "reports": [

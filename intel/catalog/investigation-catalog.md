@@ -557,3 +557,5 @@
 | 2026-07-26 | auto | 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063 (LGNS) | deep_investigation | PROCEED (92/100) | Top 10 non-LP/burn holders control 62% of supply — meaningful concentration | +7d |
 
 | 2026-07-26 | auto | 0xB6fc4bc614BC3275C36D609B7a9E1f5017274aB1 ($PLY) | deep_investigation | REJECT (20/100) | Very few holders (8) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x0Cb9610b0b3C6f0758aee0082e149b861a667E99 (PLAY) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |

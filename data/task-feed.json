@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T05:41:00Z",
-  "synthesis": "[investigation]",
+  "generated": "2026-07-26T05:56:10Z",
+  "synthesis": "VAPE has",
   "tasks": [
+    {
+      "sha": "2cc0bad97b",
+      "kind": "sweep",
+      "message": "base_sweep 2026-07-26T05:52Z",
+      "date": "2026-07-26T05:52:41Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2cc0bad97b61cde5210a9155cecae3956d0e4a33"
+    },
+    {
+      "sha": "a4fce79273",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T05:41Z",
+      "date": "2026-07-26T05:41:03Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a4fce79273b576ce348e61467fa3558b4673747f"
+    },
     {
       "sha": "48c81d48b6",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "community broadcast 2026-07-26T04:05Z",
       "date": "2026-07-26T04:05:11Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5622c2e1f644e425d262f52bd7f8ccc92629fd8f"
-    },
-    {
-      "sha": "eb61cff6d2",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-26T04:02Z",
-      "date": "2026-07-26T04:02:49Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/eb61cff6d2e3a0239ba767635f00cf1844d4c8cb"
-    },
-    {
-      "sha": "d3be1c323f",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T03:54Z",
-      "date": "2026-07-26T03:54:42Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d3be1c323ff4d516e74dfcef438b9af4b6e227f9"
     }
   ]
 }
