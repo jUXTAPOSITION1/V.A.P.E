@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T18:42:26Z",
+  "generated": "2026-07-26T18:57:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 433,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 393,
+    "investigations": 394,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-184225-0xcB362b37.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "DCA",
-      "date": "2026-07-26T18:42:25Z",
-      "target": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-184225-0xcB362b37.md"
+      "file": "investigation-20260726-185724-0xa0045305.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Cate",
+      "date": "2026-07-26T18:57:24Z",
+      "target": "0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +667% (volatility/manipulation). Positive evidence: Ownership renounced; 7333 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 685+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-185724-0xa0045305.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-185724-0xa0045305.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Cate",
+      "date": "2026-07-26T18:57:24Z",
+      "target": "0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +667% (volatility/manipulation). Positive evidence: Ownership renounced; 7333 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 685+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-185724-0xa0045305.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-184225-0xcB362b37.md",
@@ -593,20 +607,6 @@
       "score": "50",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +11704% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-032403-0x82ce191D.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-025250-0x79774Bf5.md",
-      "title": "Investigation \u2014 BTC",
-      "symbol": "BTC",
-      "name": "Bitcoin",
-      "date": "2026-07-26T02:52:50Z",
-      "target": "0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($21,786,595); Trading 1050+ days without a known incident in this scan; Custom verified source (",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-025250-0x79774Bf5.md"
     }
   ],
   "reports": [
