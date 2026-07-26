@@ -172,9 +172,14 @@ export function buildOpenApiDocument(
     openapi: "3.1.0",
     info: {
       title: "VAPE",
+      // Kept short on purpose: directory cards (e.g. x402scan.com's server
+      // page) truncate info.description at roughly 100 characters with an
+      // ellipsis and no "show more" — confirmed live, where the previous
+      // 153-char version cut off mid-list after "token safety scans,". The
+      // full offering list already lives in x-guidance/llms.txt below, which
+      // isn't subject to that card's width limit.
       description:
-        "Autonomous on-chain security detective for Base — pay-per-call contract audits, "
-        + "token safety scans, transaction decoding, and market-data micro-services.",
+        "Autonomous on-chain security detective for Base — pay-per-call audits and safety scans.",
       version: "1.0.0",
       "x-guidance": guidance(origin),
       contact: {

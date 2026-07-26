@@ -41,7 +41,7 @@ import { decodeTx } from "./lib/txDecode";
 import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
-import { logJob, getFeed, getStats, type KVLike, type JobRecord } from "./lib/jobLog";
+import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
 import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
@@ -202,10 +202,13 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   dossier_check: "$0.10",
 };
 
-// Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
-// here so the x402 Bazaar listing shows the same icon a human sees in their
-// browser tab, not a separate logo asset.
-const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png";
+// Same V-mark asset as docs/index.html's <link rel="icon">, but the 512px
+// render rather than the 32px browser-tab favicon: directories like
+// x402scan.com render this iconUrl as a large profile-page avatar (confirmed
+// live — the 32px source was being upscaled ~3-4x there, which is exactly
+// what made it look fuzzy), not a 16-32px tab icon. icon-512.png is the same
+// V mark at a resolution that stays crisp at avatar size.
+const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png";
 
 // Per-offering discovery metadata for the x402 Bazaar (see
 // x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
@@ -822,21 +825,52 @@ app.get("/prediction-markets", rateLimiter("prediction-markets", 20, 60), cache(
   }
 });
 
+const FEED_SORTS: ReadonlySet<FeedSort> = new Set([
+  "ts_desc", "ts_asc", "amount_desc", "amount_asc", "latency_desc", "latency_asc",
+]);
+
 // Live x402 job ledger — free, unpaid (this is the showcase, not a priced
 // offering). Backed by lib/jobLog.ts's KV-backed record; 503s exactly like
 // /portfolio above when VAPE_JOBS isn't wired yet (see worker/README.md).
+//
+// Supports Basescan/Etherscan-style paging over VAPE's FULL job history (up
+// to jobLog.ts's RECENT_CAP), not just a fixed recent-N preview:
+//   ?limit=50&offset=0          pagination — `total` in the response is the
+//                               filtered row count, so offset/limit walks
+//                               exactly what the current filters produced
+//   ?q=<text>                   substring match across offering/symbol/name/
+//                               address/payer/tx_hash/verdict
+//   ?offering=<name>&status=settled|error
+//   ?sort=ts_desc|ts_asc|amount_desc|amount_asc|latency_desc|latency_asc
+//
+// This document's own /openapi.json guidance names /x402/feed as a public,
+// documented endpoint, so a bare `?limit=N` call from an existing consumer
+// keeps behaving exactly as before (no filters, natural ts_desc order) —
+// `total` is purely additive for callers that only ever read `.jobs`.
 app.get("/x402/feed", cache({ cacheName: "vape-x402-feed", cacheControl: "max-age=10" }), async (c) => {
   if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
-  const limit = Math.min(Number(c.req.query("limit")) || 50, 200);
-  const jobs = await getFeed(c.env.VAPE_JOBS, limit);
-  return c.json({ jobs });
+  const q = c.req.query();
+  const status = q.status === "settled" || q.status === "error" ? q.status : undefined;
+  const sort = FEED_SORTS.has(q.sort as FeedSort) ? (q.sort as FeedSort) : undefined;
+  const page = await queryFeed(c.env.VAPE_JOBS, {
+    q: q.q,
+    offering: q.offering || undefined,
+    status,
+    sort,
+    limit: Math.min(Number(q.limit) || 50, 200),
+    offset: Math.max(0, Number(q.offset) || 0),
+  });
+  return c.json(page);
 });
 
 app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-age=30" }), async (c) => {
   if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
   // 400-day cap matches jobLog.ts's DAILY_HISTORY_CAP — safe now that
   // getStats() reads one history record instead of one KV key per day.
-  const days = Math.min(Number(c.req.query("days")) || 30, 400);
+  // `days=all` asks getStats() for the full retained history instead of a
+  // fixed window (see its own comment on why first_job_ts drives that span).
+  const daysParam = c.req.query("days");
+  const days: number | "all" = daysParam === "all" ? "all" : Math.min(Number(daysParam) || 30, 400);
   const stats = await getStats(c.env.VAPE_JOBS, days);
   return c.json(stats);
 });

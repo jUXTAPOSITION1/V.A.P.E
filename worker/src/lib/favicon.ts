@@ -9,9 +9,11 @@
  * crawlers, and a runtime fetch would make an unpaid discovery route depend on
  * a third-party host being up. Inlining 2.4KB avoids both.
  *
- * Source of truth is docs/assets/favicon-32.png (the same file ICON_URL in
- * index.ts points at, so the site, the x402 Bazaar `iconUrl` extension, and
- * this route all show the identical mark). Regenerate after changing that PNG:
+ * Source of truth is docs/assets/favicon-32.png — the same V mark as
+ * icon-512.png (what ICON_URL in index.ts points at for the x402 Bazaar
+ * `iconUrl` extension; that one needs to stay full-res since directories
+ * render it as a large profile avatar, not a tab icon). Regenerate after
+ * changing the PNG:
  *   python3 -c "import base64;print(base64.b64encode(open('docs/assets/favicon-32.png','rb').read()).decode())"
  *
  * Served as image/png despite the .ico path: every browser and crawler
@@ -39,7 +41,6 @@ const FAVICON_PNG_BASE64 =
   "e6ZpTJNkOoDWGhk/3HZkdHTUNE3GWCbjbtiwfvbs0ubm71Op1PHjJ5AZ+onL+ZkBUlq3b/d1dXfbth0Eged5ZWVlddvrurq6" +
   "9u//6s6dO0JIPYW9UUznAQBwzr3sw6Zde1pbmtPpNAA4jvNzT09NzQecG2ras88IEOmwbWvjxo3RRQsEBNDRcd51M4ZhTNWd" +
   "zwAAACIKfO/JN6awGGNPzT5TACIwNu4mmElxopiuwwpB9AwZi+K5/13/Bw/SvUZ/LgkLAAAAAElFTkSuQmCC";
-  "f955J5ulVVW32q3zm1u9ft/VZb5YBGFgrSVicV5E+2dH3cmk3elUdb3I8/8FaT0j6B8rT24AAAAASUVORK5CYII=";
 
 function decode(b64: string): Uint8Array {
   const bin = atob(b64);
