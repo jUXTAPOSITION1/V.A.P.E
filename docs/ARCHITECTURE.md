@@ -438,8 +438,9 @@ honest by `scan-parity.yml`'s cross-language diff check), so a $0.01 x402 call a
 free ACP job never disagree. Every real settlement is logged to a Cloudflare KV job
 ledger (`worker/src/lib/jobLog.ts`) with the actual payer address and on-chain tx
 hash — surfaced on the site's live feed, linked straight to Basescan, not just VAPE's
-own word. Advertised via the x402 Bazaar discovery extension and a claimed
-[402index.io](https://402index.io) listing — since CDP's facilitator never emits
+own word. Advertised via the x402 Bazaar discovery extension and live listings on
+[x402scan](https://www.x402scan.com/server/3c8645af-892e-4860-a96d-f0718505eafd) and
+[402 Index](https://402index.io/directory?q=vape-x402) — since CDP's facilitator never emits
 the header that's supposed to confirm Bazaar indexing succeeded
 ([x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112),
 still open), `GET /admin/bazaar-status` + `agents/cdp_bazaar_check.py`
