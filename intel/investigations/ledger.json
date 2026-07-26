@@ -874,6 +874,25 @@
     "symbol": "YIELD",
     "times_investigated": 1
   },
+  "1:0x82ce191d049ed69bcb00870e95478c401c3002c8": {
+    "address": "0x82ce191D049Ed69bCb00870e95478C401C3002c8",
+    "chain": "1",
+    "creator_address": "0xd59c7520cbd50879babcbe0d0c040a3c4354e053",
+    "first_investigated": "2026-07-26T03:24:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-032403-0x82ce191D.md",
+        "score": 50,
+        "ts": "2026-07-26T03:24:03Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T03:24:03Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "DIM",
+    "times_investigated": 1
+  },
   "1:0x88888880d5ca13018d2dc11e2e4744bd91a5656f": {
     "address": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
     "chain": "1",

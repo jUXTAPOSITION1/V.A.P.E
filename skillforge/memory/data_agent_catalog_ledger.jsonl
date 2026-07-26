@@ -83,3 +83,4 @@
 {"ts": "2026-07-26T01:36:18.299138Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-26T02:06:37.215741Z", "target": "bitget", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}
 {"ts": "2026-07-26T02:37:17.337274Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 50}
+{"ts": "2026-07-26T03:24:14.109599Z", "target": "arbitrum-bridge", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 50}

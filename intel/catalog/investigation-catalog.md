@@ -539,3 +539,5 @@
 | 2026-07-26 | auto | 0x99a57E6C8558BC6689f894e068733ADf83C19725 (sLGNS) | deep_investigation | REJECT (25/100) | Owner not renounced (0xe979f492f934556c56fb9c1f6a82fecc7abb867e) — can still act | +7d |
 
 | 2026-07-26 | auto | 0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2 (BTC) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
+
+| 2026-07-26 | auto | 0x82ce191D049Ed69bCb00870e95478C401C3002c8 (DIM) | deep_investigation | CAUTION (50/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
