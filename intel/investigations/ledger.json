@@ -2338,6 +2338,25 @@
     "symbol": "DEXE",
     "times_investigated": 1
   },
+  "56:0x9b38d8bc5e35c074e7dfe45cbf9a9818b4c04444": {
+    "address": "0x9b38D8BC5E35c074e7DFE45CBF9A9818B4c04444",
+    "chain": "56",
+    "creator_address": "0x38d0a7bc7e50632abe2df38e061680455fb89266",
+    "first_investigated": "2026-07-26T21:42:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-214227-0x9b38D8BC.md",
+        "score": 40,
+        "ts": "2026-07-26T21:42:27Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T21:42:27Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "DCA",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",

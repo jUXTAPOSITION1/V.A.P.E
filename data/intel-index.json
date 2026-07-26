@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T21:27:18Z",
+  "generated": "2026-07-26T21:42:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 437,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 395,
+    "investigations": 396,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-211213-0xF39e4b21.md",
-      "title": "Investigation \u2014 ESPORTS",
-      "symbol": "ESPORTS",
-      "name": "Yooldo Games",
-      "date": "2026-07-26T21:12:13Z",
-      "target": "0xF39e4b21c84e737Df08e2C3b32541d856f508E48",
+      "file": "investigation-20260726-214227-0x9b38D8BC.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "Dollar Cost Averagin",
+      "date": "2026-07-26T21:42:27Z",
+      "target": "0x9b38D8BC5E35c074e7DFE45CBF9A9818B4c04444",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "40",
-      "summary": "Risk factors: [-20] Hidden owner; [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x1552160b3c36492f17cc9c468a082f9e6cc1f1e3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated. Positive evidence: 87895 holders \u2014 reasonably distr",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-211213-0xF39e4b21.md"
+      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-214227-0x9b38D8BC.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-214227-0x9b38D8BC.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "Dollar Cost Averagin",
+      "date": "2026-07-26T21:42:27Z",
+      "target": "0x9b38D8BC5E35c074e7DFE45CBF9A9818B4c04444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-214227-0x9b38D8BC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-211213-0xF39e4b21.md",
@@ -593,20 +607,6 @@
       "score": "50",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +493% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-035424-0x35e9e9A7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-033917-0xAc9ce277.md",
-      "title": "Investigation \u2014 SOSO",
-      "symbol": "SOSO",
-      "name": "SOSO",
-      "date": "2026-07-26T03:39:17Z",
-      "target": "0xAc9ce2775B918C4d4fddEcB772064637c292C295",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,908; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Posit",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-033917-0xAc9ce277.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49149193",
+      "version": "49156185",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.43 eth_dom 10.03 mcap_chg_24h 0.74",
+      "version": "btc_dom 56.44 eth_dom 10.07 mcap_chg_24h 0.86",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xf3185f830a2a EVOLUTION 25.0 from 0xaa7f03de to 0x833589fc",
+      "version": "0xf5e84b04b461 USDXSMART 78.0 from 0xaecc6dd4 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1628,7 +1628,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-24 Triple-A 9.7 M ['Ethereum', 'Tron', 'Arbitrum'] Hot Wallet Compromise",
+      "version": "2026-07-26 Garden 0.45 M ['Ethereum', 'Base', 'Arbitrum', 'BSC'] None",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
