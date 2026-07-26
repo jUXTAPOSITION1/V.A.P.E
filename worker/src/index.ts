@@ -202,10 +202,13 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
   dossier_check: "$0.10",
 };
 
-// Literally VAPE's favicon (docs/index.html's <link rel="icon">), reused
-// here so the x402 Bazaar listing shows the same icon a human sees in their
-// browser tab, not a separate logo asset.
-const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png";
+// Same V-mark asset as docs/index.html's <link rel="icon">, but the 512px
+// render rather than the 32px browser-tab favicon: directories like
+// x402scan.com render this iconUrl as a large profile-page avatar (confirmed
+// live — the 32px source was being upscaled ~3-4x there, which is exactly
+// what made it look fuzzy), not a 16-32px tab icon. icon-512.png is the same
+// V mark at a resolution that stays crisp at avatar size.
+const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png";
 
 // Per-offering discovery metadata for the x402 Bazaar (see
 // x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
