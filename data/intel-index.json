@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T02:06:37Z",
+  "generated": "2026-07-26T02:21:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 351,
+    "investigations": 352,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-020634-0x6A92B1E9.md",
-      "title": "Investigation \u2014 AS",
-      "symbol": "AS",
-      "name": "AS Token",
-      "date": "2026-07-26T02:06:34Z",
-      "target": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
+      "file": "investigation-20260726-022151-0x77719EAA.md",
+      "title": "Investigation \u2014 RW",
+      "symbol": "RW",
+      "name": "RWA Coin",
+      "date": "2026-07-26T02:21:51Z",
+      "target": "0x77719EAA4B9C24425bfCd39ac84F1e2E9C88568f",
       "chain": "137 (Polygon)",
       "verdict": "CAUTION",
-      "score": "53",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated. Positive evidence: 409711 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($15,620,901); Trading 409+ d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-020634-0x6A92B1E9.md"
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x6597cbb2d2ef74c0d037c07f0d41a4fd51386fd0) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated. Positive evidence: 6381 holders \u2014 reasonably distributed; Deep liquidity ($2,006,092); Trading 290+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-022151-0x77719EAA.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-022151-0x77719EAA.md",
+      "title": "Investigation \u2014 RW",
+      "symbol": "RW",
+      "name": "RWA Coin",
+      "date": "2026-07-26T02:21:51Z",
+      "target": "0x77719EAA4B9C24425bfCd39ac84F1e2E9C88568f",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x6597cbb2d2ef74c0d037c07f0d41a4fd51386fd0) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated. Positive evidence: 6381 holders \u2014 reasonably distributed; Deep liquidity ($2,006,092); Trading 290+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-022151-0x77719EAA.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-020634-0x6A92B1E9.md",
@@ -593,20 +607,6 @@
       "score": "35",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-114740-0x712be9C5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-101257-0xdCf51302.md",
-      "title": "Investigation \u2014 VCNT",
-      "symbol": "VCNT",
-      "name": "ViciCoin",
-      "date": "2026-07-25T10:12:57Z",
-      "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 6342 holders \u2014 reasonably distributed; Trading 759+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1072+ days \u2014 independent longevity corrobora",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-101257-0xdCf51302.md"
     }
   ],
   "reports": [
