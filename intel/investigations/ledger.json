@@ -1082,6 +1082,25 @@
     "symbol": "FWAres",
     "times_investigated": 1
   },
+  "1:0xd9fcd98c322942075a5c3860693e9f4f03aae07b": {
+    "address": "0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b",
+    "chain": "1",
+    "creator_address": "0xee009faf00cf54c1b4387829af7a8dc5f0c8c8c5",
+    "first_investigated": "2026-07-26T01:36:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-013614-0xd9Fcd98c.md",
+        "score": 65,
+        "ts": "2026-07-26T01:36:14Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T01:36:14Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "EUL",
+    "times_investigated": 1
+  },
   "1:0xdcb01cc464238396e213a6fdd933e36796eaff9f": {
     "address": "0xDcB01cc464238396E213a6fDd933E36796eAfF9f",
     "chain": "1",

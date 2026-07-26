@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T01:21:09Z",
+  "generated": "2026-07-26T01:36:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 348,
+    "investigations": 349,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-012103-0x3c499c54.md",
-      "title": "Investigation \u2014 USDC",
-      "symbol": "USDC",
-      "name": "USD Coin",
-      "date": "2026-07-26T01:21:03Z",
-      "target": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
-      "chain": "137 (Polygon)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x9238e612387ebba4d4fa0d76dbfba99b453417b3) \u2014 can still act on the contract; [+10] Verified major stablecoin (CoinGecko: USDC, $72,537,554,405 circulating, $0.9998 peg) \u2014 mint/owner-controlled-freeze/retained-ownership are standard",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-012103-0x3c499c54.md"
+      "file": "investigation-20260726-013614-0xd9Fcd98c.md",
+      "title": "Investigation \u2014 EUL",
+      "symbol": "EUL",
+      "name": "Euler",
+      "date": "2026-07-26T01:36:14Z",
+      "target": "0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Top 10 non-LP/burn holders control 56% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5366 holders \u2014 reasonably distributed; Deep liquidity ($1,127,747); Trading 289+ da",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-013614-0xd9Fcd98c.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-013614-0xd9Fcd98c.md",
+      "title": "Investigation \u2014 EUL",
+      "symbol": "EUL",
+      "name": "Euler",
+      "date": "2026-07-26T01:36:14Z",
+      "target": "0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Top 10 non-LP/burn holders control 56% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5366 holders \u2014 reasonably distributed; Deep liquidity ($1,127,747); Trading 289+ da",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-013614-0xd9Fcd98c.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-012103-0x3c499c54.md",
@@ -593,20 +607,6 @@
       "score": "82",
       "summary": "Risk factors: [-10] Owner not renounced (0xcc29169da9063f893d7958e8c021e788446e7229) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 610779 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-062625-0x2B11834E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-041324-0x8dB2be2b.md",
-      "title": "Investigation \u2014 USDC",
-      "symbol": "USDC",
-      "name": "United States of Doge CashCat",
-      "date": "2026-07-25T04:13:24Z",
-      "target": "0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "68",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Pair 8.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 24581 holders \u2014 reasonably distributed; Custom verified source (not a ma",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-041324-0x8dB2be2b.md"
     }
   ],
   "reports": [
