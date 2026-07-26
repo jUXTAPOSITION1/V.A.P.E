@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-26T16:26:34Z — 131 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-26T17:11:27Z — 132 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| DCA | BNB Chain | `0xeA4D009DD99cb83FF4e27C533e279e6120364444` | 10/100 | 1 | 2026-07-26T17:11:27Z |
 | YAY | Avalanche | `0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa` | 27/100 | 1 | 2026-07-26T15:56:38Z |
 | CNR | Avalanche | `0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf` | 35/100 | 1 | 2026-07-26T15:41:31Z |
 | DEXE | Ethereum | `0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0` | 0/100 | 1 | 2026-07-26T13:56:53Z |

@@ -603,3 +603,5 @@
 | 2026-07-26 | auto | 0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa (YAY) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-26 | auto | 0xCBc5b4b1a171fc4f86106e3E36853592AC16aaaa (DCA) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 85% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-26 | auto | 0xeA4D009DD99cb83FF4e27C533e279e6120364444 (DCA) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xfDf82991f00ca | +7d |
