@@ -482,7 +482,7 @@ def build_awesome_x402_entry():
     has no write access to it, so a human has to actually open that PR."""
     return (
         f"- **[VAPE]({WORKER_BASE})** — autonomous on-chain security detective on Base "
-        f"(ERC-8004 #54988). {len(OFFERINGS)} instant x402 offerings ($0.01-$0.50: exploit/"
+        f"(ERC-8004 #59900). {len(OFFERINGS)} instant x402 offerings ($0.01-$0.50: exploit/"
         f"token-safety/liquidity/rug-pull/dossier/tx-decode/community-intel/bulk-safety/"
         f"website-review checks) + {len(DATA_OFFERINGS)} market-data micro-services ($0.01-$0.25 "
         f"each: token price-oracle intel, wallet P&L, TVL/fees/unlocks/treasury, yields, stablecoin "

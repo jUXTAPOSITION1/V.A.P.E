@@ -11,7 +11,7 @@ Sources (all verifiable):
   - skillforge/memory/tools-registry.json                       (real tool tiers)
   - skillforge/memory/lessons.jsonl                             (real job/work log)
   - agents/acp_fulfill.py HANDLERS + price map                  (live offerings)
-  - on-chain identity constants (wallet, ERC-8004, agent id)    (publicly checkable)
+  - on-chain identity constants (wallet, ERC-8004 agent id, basename)   (publicly checkable)
   - GitHub PR search (real "VAPE build:"/"VAPE self-build:" PRs)  (live build ledger)
 
 Zero new deps (stdlib only). Runs on the free GitHub runner.
@@ -29,17 +29,22 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data", "reputation.json")
 REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
 
-# Publicly verifiable on-chain identity (anyone can check these).
+# Publicly verifiable on-chain identity (anyone can check these). Note the
+# ERC-8004 identity wallet below is a DIFFERENT wallet than the one that
+# settles ACP/x402 revenue (0xa1420293a7df49bc8380f543a1fe7b8d6f582879, see
+# docs/ACP_PROTOCOL.md / worker/wrangler.toml's PAY_TO_ADDRESS) — identity
+# and payment settlement are two separate rails.
 IDENTITY = {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
-    "wallet": "0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-    "erc8004_id": 54988,
-    "agent_id": "019eaf60-592a-7f5c-99a2-3e85199303fe",
+    "wallet": "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15",
+    "basename": "vapex402.base.eth",
+    "erc8004_id": 59900,
+    "erc8004_contract": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
     "vape_token": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
     "chain": "Base",
     "x": "https://x.com/based_vape",
-    "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe",
+    "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900",
 }
 
 # 13 real-time market-data tools (agents/defillama.py / acp_fulfill.py's

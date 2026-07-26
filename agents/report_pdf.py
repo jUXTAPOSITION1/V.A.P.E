@@ -96,7 +96,7 @@ def build_investigation_pdf(pdf_path, target, chain, sym, verdict, score, reason
     pdf.set_xy(margin + 68, 48)
     pdf.set_font("helvetica", "", 9)
     pdf.set_text_color(*CYAN)
-    pdf.cell(0, 14, "AUTONOMOUS ON-CHAIN DETECTIVE  ·  ERC-8004 #54988  ·  BASE", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 14, "AUTONOMOUS ON-CHAIN DETECTIVE  ·  ERC-8004 #59900  ·  BASE", new_x="LMARGIN", new_y="NEXT")
     pdf.set_xy(margin + 68, 62)
     pdf.set_font("helvetica", "", 9)
     pdf.set_text_color(160, 160, 165)

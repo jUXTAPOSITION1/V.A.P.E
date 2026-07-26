@@ -365,7 +365,7 @@ const Report = {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
         doc.setTextColor(...ACCENT);
-        doc.text('ON-CHAIN INTELLIGENCE SYSTEM  ·  ERC-8004 #54988  ·  BASE', margin + 68, 62);
+        doc.text('ON-CHAIN INTELLIGENCE SYSTEM  ·  ERC-8004 #59900  ·  BASE', margin + 68, 62);
         doc.setTextColor(160, 160, 165);
         doc.textWithLink('github.com/jUXTAPOSITION1/V.A.P.E', margin + 68, 76, { url: 'https://github.com/jUXTAPOSITION1/V.A.P.E' });
         y = 128;
