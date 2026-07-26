@@ -324,6 +324,44 @@
     "symbol": "AS",
     "times_investigated": 1
   },
+  "137:0x77719eaa4b9c24425bfcd39ac84f1e2e9c88568f": {
+    "address": "0x77719EAA4B9C24425bfCd39ac84F1e2E9C88568f",
+    "chain": "137",
+    "creator_address": "0x6597cbb2d2ef74c0d037c07f0d41a4fd51386fd0",
+    "first_investigated": "2026-07-26T02:21:51Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-022151-0x77719EAA.md",
+        "score": 75,
+        "ts": "2026-07-26T02:21:51Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T02:21:51Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "RW",
+    "times_investigated": 1
+  },
+  "137:0x79774bf5867ac4e014a48b471cbd94a01cc9a4d2": {
+    "address": "0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2",
+    "chain": "137",
+    "creator_address": "0x6cd76d07384c87489c81879542cf45e9d06e0472",
+    "first_investigated": "2026-07-26T02:52:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-025250-0x79774Bf5.md",
+        "score": 70,
+        "ts": "2026-07-26T02:52:50Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T02:52:50Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "BTC",
+    "times_investigated": 1
+  },
   "137:0x831753dd7087cac61ab5644b308642cc1c33dc13": {
     "address": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
     "chain": "137",
@@ -341,6 +379,25 @@
     "last_score": 90,
     "last_verdict": "PROCEED",
     "symbol": "QUICK",
+    "times_investigated": 1
+  },
+  "137:0x99a57e6c8558bc6689f894e068733adf83c19725": {
+    "address": "0x99a57E6C8558BC6689f894e068733ADf83C19725",
+    "chain": "137",
+    "creator_address": "0x5e4e7cadb7c3d10e3bc96fb830a724448d9b4351",
+    "first_investigated": "2026-07-26T02:37:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-023714-0x99a57E6C.md",
+        "score": 25,
+        "ts": "2026-07-26T02:37:14Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T02:37:14Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "sLGNS",
     "times_investigated": 1
   },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {

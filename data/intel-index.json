@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-26T02:06:37Z",
+  "generated": "2026-07-26T02:54:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 416,
+    "reports": 417,
     "reports_by_type": {
+      "security": 70,
       "sentiment": 41,
       "base": 77,
       "virtuals": 78,
-      "security": 69,
       "macro": 21,
       "bounty": 122,
       "skillforge": 4,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 351,
+    "investigations": 354,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,31 +23,73 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-020634-0x6A92B1E9.md",
-      "title": "Investigation \u2014 AS",
-      "symbol": "AS",
-      "name": "AS Token",
-      "date": "2026-07-26T02:06:34Z",
-      "target": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
+      "file": "investigation-20260726-025250-0x79774Bf5.md",
+      "title": "Investigation \u2014 BTC",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "date": "2026-07-26T02:52:50Z",
+      "target": "0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2",
       "chain": "137 (Polygon)",
       "verdict": "CAUTION",
-      "score": "53",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated. Positive evidence: 409711 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($15,620,901); Trading 409+ d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-020634-0x6A92B1E9.md"
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($21,786,595); Trading 1050+ days without a known incident in this scan; Custom verified source (",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-025250-0x79774Bf5.md"
     },
     "report": {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-25-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-25 21:01 UTC",
-      "date": "2026-07-25T21:00Z",
+      "type": "security",
+      "file": "security-2026-07-26-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-26T02:00Z",
       "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-25-21.md",
-      "bytes": 1642
+      "summary": "The feed records exactly 9 incidents over the 7-day window ending 2026-07-24. Aggregate loss is dominated by four events above $1 M: AFX Bridge ($24.15 M, Arbitrum, Private Key Compromised), Ostium ($23.75 M, Arbitrum, Price Oracle Manipulation), Verus-Ethereum Bridge ($7.53 M, Bridge Verification Bypass), and Wanchain ($6.5 M, Signature ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-02.md",
+      "bytes": 6380
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-025250-0x79774Bf5.md",
+      "title": "Investigation \u2014 BTC",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "date": "2026-07-26T02:52:50Z",
+      "target": "0x79774Bf5867ac4e014A48B471CBd94A01cc9a4D2",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($21,786,595); Trading 1050+ days without a known incident in this scan; Custom verified source (",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-025250-0x79774Bf5.md"
+    },
+    {
+      "source": "report",
+      "file": "investigation-20260726-023714-0x99a57E6C.md",
+      "title": "Investigation \u2014 sLGNS",
+      "symbol": "sLGNS",
+      "name": "Staked Longinus",
+      "date": "2026-07-26T02:37:14Z",
+      "target": "0x99a57E6C8558BC6689f894e068733ADf83C19725",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe979f492f934556c56fb9c1f6a82fecc7abb867e) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-023714-0x99a57E6C.md"
+    },
+    {
+      "source": "report",
+      "file": "investigation-20260726-022151-0x77719EAA.md",
+      "title": "Investigation \u2014 RW",
+      "symbol": "RW",
+      "name": "RWA Coin",
+      "date": "2026-07-26T02:21:51Z",
+      "target": "0x77719EAA4B9C24425bfCd39ac84F1e2E9C88568f",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x6597cbb2d2ef74c0d037c07f0d41a4fd51386fd0) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated. Positive evidence: 6381 holders \u2014 reasonably distributed; Deep liquidity ($2,006,092); Trading 290+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-022151-0x77719EAA.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-020634-0x6A92B1E9.md",
@@ -565,51 +607,20 @@
       "score": "20",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-144407-0xf30d3221.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-130038-0xa8Ec9351.md",
-      "title": "Investigation \u2014 dexcheckai",
-      "symbol": "dexcheckai",
-      "name": "dexcheckai",
-      "date": "2026-07-25T13:00:38Z",
-      "target": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign. Positive evidence: 898 holders \u2014 reasonably distributed; Trading 223+ days without a known incident in this scan; Custom verified s",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-130038-0xa8Ec9351.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-114740-0x712be9C5.md",
-      "title": "Investigation \u2014 VCNT",
-      "symbol": "VCNT",
-      "name": "ViciCoin",
-      "date": "2026-07-25T11:47:40Z",
-      "target": "0x712be9C5b93d4aC284382593327Ae29e59977b07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-114740-0x712be9C5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-101257-0xdCf51302.md",
-      "title": "Investigation \u2014 VCNT",
-      "symbol": "VCNT",
-      "name": "ViciCoin",
-      "date": "2026-07-25T10:12:57Z",
-      "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: 6342 holders \u2014 reasonably distributed; Trading 759+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token for 1072+ days \u2014 independent longevity corrobora",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-101257-0xdCf51302.md"
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-26-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-26T02:00Z",
+      "threat": null,
+      "summary": "The feed records exactly 9 incidents over the 7-day window ending 2026-07-24. Aggregate loss is dominated by four events above $1 M: AFX Bridge ($24.15 M, Arbitrum, Private Key Compromised), Ostium ($23.75 M, Arbitrum, Price Oracle Manipulation), Verus-Ethereum Bridge ($7.53 M, Bridge Verification Bypass), and Wanchain ($6.5 M, Signature ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-02.md",
+      "bytes": 6380
+    },
     {
       "kind": "intel",
       "type": "sentiment",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-22 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-22-20.md",
       "bytes": 2903
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-22-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-22T19:00Z",
-      "threat": null,
-      "summary": "Generated: 2026-07-22 19:22 UTC Trigger: agents/securitysweep.py (scheduled, GitHub Actions)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-22-19.md",
-      "bytes": 5326
     }
   ],
   "broadcasts": [
