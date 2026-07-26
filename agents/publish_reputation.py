@@ -29,11 +29,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data", "reputation.json")
 REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
 
-# Publicly verifiable on-chain identity (anyone can check these). Note the
-# ERC-8004 identity wallet below is a DIFFERENT wallet than the one that
-# settles ACP/x402 revenue (0xa1420293a7df49bc8380f543a1fe7b8d6f582879, see
-# docs/ACP_PROTOCOL.md / worker/wrangler.toml's PAY_TO_ADDRESS) — identity
-# and payment settlement are two separate rails.
+# Publicly verifiable on-chain identity (anyone can check these). This wallet
+# now doubles as VAPE's x402 revenue wallet (worker/wrangler.toml's
+# PAY_TO_ADDRESS) -- it's DIFFERENT from VAPE's separate ACP wallet
+# (0xa1420293a7df49bc8380f543a1fe7b8d6f582879, see docs/ACP_PROTOCOL.md),
+# since ACP escrow and x402 revenue settle on two separate rails.
 IDENTITY = {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",

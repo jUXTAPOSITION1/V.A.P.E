@@ -54,10 +54,12 @@ can call them directly; see component 6 below.
 
 31 live offerings total (`data/reputation.json`'s `capabilities.offerings_live`): 27 are
 x402-payable (instant, no account needed), 4 need a real ACP job (manual/
-SKILLFORGE-tool-tier work no synchronous HTTP route can do in a few seconds). Both
-rails pay into the same wallet; neither is a demo — the x402 side runs on **Base
-mainnet** via Coinbase Developer Platform's hosted facilitator, real USDC, real
-settlement transactions.
+SKILLFORGE-tool-tier work no synchronous HTTP route can do in a few seconds). Each
+rail settles into its own wallet — x402 revenue into `PAY_TO_ADDRESS`
+(`worker/wrangler.toml`, the same wallet holding VAPE's self-registered ERC-8004
+identity NFT), ACP escrow into VAPE's separate ACP wallet (`docs/ACP_PROTOCOL.md`)
+— neither is a demo; the x402 side runs on **Base mainnet** via Coinbase Developer
+Platform's hosted facilitator, real USDC, real settlement transactions.
 
 ```
 ┌─────────────────────────────┐        ┌──────────────────────────────────────┐
@@ -81,18 +83,19 @@ settlement transactions.
 │  forensics_deep,            │        │  (docs/assets/x402feed.js), tx linked  │
 │  partner_referral)          │        │  straight to Basescan                  │
 └─────────────────────────────┘        └──────────────────────────────────────┘
-              │                                          │
-              └────────────────┬─────────────────────────┘
-                                ▼
-                  USDC settles on Base mainnet into
-              0xa1420293a7df49bc8380f543a1fe7b8d6f582879
-                                ▲
-                                │
+              │                                          │                                          │
+              ▼                                          ▼
+   USDC settles on Base mainnet into          USDC settles on Base mainnet into
+   VAPE's ACP wallet (docs/ACP_PROTOCOL.md)   PAY_TO_ADDRESS, 0x8aAB9a6d...Ce15
+                                                          ▲
+                                                          │
      DATA AGENT (agents/data_agent.py) closes the loop from the OTHER side:
-     every real investigate.py run recruits VAPE's own funded wallet to hire
-     1 of the x402 offerings above against the token under review — real
-     USDC leaves DATA AGENT's wallet through the exact same rail an external
-     human buyer would use, capped at 48 hires/day (2/hour).
+     every real investigate.py run recruits its own dedicated, funded wallet
+     (a separate wallet from PAY_TO_ADDRESS — DATA AGENT is the payer here,
+     not the payee) to hire 1 of the x402 offerings above against the token
+     under review — real USDC leaves DATA AGENT's wallet through the exact
+     same rail an external human buyer would use, capped at 48 hires/day
+     (2/hour).
 ```
 
 The 27 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
@@ -394,8 +397,9 @@ the DB is a derived queryable index so agents can ask real questions instead of 
 
 ### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
 31 live offerings across two independent, real-money rails — see the payment-rails
-diagram above for the full flow. Both settle into the same wallet
-(`0xa1420293a7df49bc8380f543a1fe7b8d6f582879`); neither is a demo.
+diagram above for the full flow. Each settles into its own wallet (x402 revenue
+into `PAY_TO_ADDRESS`, ACP escrow into VAPE's separate ACP wallet); neither is a
+demo.
 
 **ACP job monitor** (`scripts/acp-*`) catches incoming ACP jobs and negotiates →
 funds → completes at near-zero compute. 3 layers: persistent `acp events listen`

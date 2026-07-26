@@ -56,7 +56,7 @@ import time
 import urllib.error
 import urllib.request
 
-PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
+PAY_TO_ADDRESS = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 CHAIN_ID = 8453
 BASE_RPC = "https://mainnet.base.org"
