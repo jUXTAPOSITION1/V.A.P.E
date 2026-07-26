@@ -93,7 +93,19 @@ export interface DailyEntry {
 const RECENT_KEY = "RECENT_JOBS";
 const TOTALS_KEY = "TOTALS";
 const DAILY_HISTORY_KEY = "DAILY_HISTORY";
-const RECENT_CAP = 200;
+// Raised from 200: the site's Recent Jobs table (docs/assets/x402feed.js) is
+// meant to hold VAPE's real job history end-to-end, Basescan-style, not just
+// a shallow "last few" preview — 200 records was under two weeks of runway at
+// real observed volume (~27 jobs/day per the live x402scan listing) before
+// the oldest jobs silently fell off the end of this array.
+// 10,000 records is still a single small KV value: each JobRecord serializes
+// to roughly 400-500 bytes, so the whole array tops out around 4-5MB — well
+// under Cloudflare KV's 25MB per-value ceiling, with the same 2-read-per-
+// request cost as before (RECENT_KEY is one GET regardless of array length).
+// At current volume this is well over a year of full per-job detail; TOTALS
+// (all-time, never trimmed) still holds the true lifetime aggregate even
+// once the oldest individual records eventually age out of this array.
+const RECENT_CAP = 10000;
 // ~13 months of daily entries — comfortably covers the site's longest
 // chart view (1 year) with room to spare, while keeping this a single
 // small KV value rather than one key per day. That per-day-key design
@@ -248,7 +260,82 @@ export async function getFeed(kv: KVLike | undefined, limit = 50): Promise<JobRe
   return recent.slice(0, Math.max(1, Math.min(limit, RECENT_CAP)));
 }
 
-export async function getStats(kv: KVLike | undefined, days = 30) {
+export type FeedSort = "ts_desc" | "ts_asc" | "amount_desc" | "amount_asc" | "latency_desc" | "latency_asc";
+
+export interface FeedQuery {
+  /** Case-insensitive substring match against offering/symbol/name/address/payer/tx_hash. */
+  q?: string;
+  offering?: string;
+  status?: "settled" | "error";
+  sort?: FeedSort;
+  limit?: number;
+  offset?: number;
+}
+
+export interface FeedPage {
+  jobs: JobRecord[];
+  /** Count after filtering, before pagination — what the UI paginates over. */
+  total: number;
+}
+
+const SORTERS: Record<FeedSort, (a: JobRecord, b: JobRecord) => number> = {
+  // RECENT_JOBS is already stored newest-first (logJob prepends), so ts_desc
+  // is a pure passthrough — every other sort explicitly re-orders it.
+  ts_desc: (a, b) => b.ts.localeCompare(a.ts),
+  ts_asc: (a, b) => a.ts.localeCompare(b.ts),
+  amount_desc: (a, b) => b.amount_usd - a.amount_usd,
+  amount_asc: (a, b) => a.amount_usd - b.amount_usd,
+  // Nulls (never measured, e.g. async/backfilled jobs) sort last regardless
+  // of direction — "unknown latency" is not the same claim as "zero" or
+  // "infinite" latency, so it shouldn't win either sort.
+  latency_desc: (a, b) => (b.latency_ms ?? -1) - (a.latency_ms ?? -1),
+  latency_asc: (a, b) => (a.latency_ms ?? Infinity) - (b.latency_ms ?? Infinity),
+};
+
+function matchesQuery(job: JobRecord, q: string): boolean {
+  const haystack = [job.offering, job.symbol, job.name, job.address, job.payer, job.tx_hash, job.verdict]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(q);
+}
+
+/**
+ * Server-side search/filter/sort/paginate over the job feed. Safe to do this
+ * way (rather than needing a real database) only because RECENT_JOBS is
+ * already a single KV value fully read into memory for every /x402/feed
+ * request — filtering and sorting an in-memory array of up to RECENT_CAP
+ * records costs nothing extra over the read that already happens. This is the
+ * server-side counterpart to a Basescan/Etherscan address-history table: the
+ * client sends a page + filters, the server returns exactly that page plus
+ * the total row count the filters produced, so pagination controls (page X
+ * of Y) reflect the filtered set, not the unfiltered one.
+ */
+export async function queryFeed(kv: KVLike | undefined, query: FeedQuery): Promise<FeedPage> {
+  if (!kv) return { jobs: [], total: 0 };
+  const recent = await readJson<JobRecord[]>(kv, RECENT_KEY, []);
+
+  let filtered = recent;
+  if (query.status) filtered = filtered.filter((j) => j.status === query.status);
+  if (query.offering) filtered = filtered.filter((j) => j.offering === query.offering);
+  if (query.q) {
+    const q = query.q.trim().toLowerCase();
+    if (q) filtered = filtered.filter((j) => matchesQuery(j, q));
+  }
+
+  const sorter = SORTERS[query.sort ?? "ts_desc"] ?? SORTERS.ts_desc;
+  // Only re-sort when a real order change is requested — the array is
+  // already newest-first, so this skips a needless copy+sort on the by far
+  // most common request (the default view, no explicit sort).
+  const ordered = query.sort && query.sort !== "ts_desc" ? [...filtered].sort(sorter) : filtered;
+
+  const total = ordered.length;
+  const offset = Math.max(0, query.offset ?? 0);
+  const limit = Math.max(1, Math.min(query.limit ?? 50, RECENT_CAP));
+  return { jobs: ordered.slice(offset, offset + limit), total };
+}
+
+export async function getStats(kv: KVLike | undefined, days: number | "all" = 30) {
   if (!kv) return null;
   // Exactly 2 KV reads regardless of `days` — the old design did one GET
   // per requested day, which meant a 90-day chart alone could approach
@@ -264,8 +351,22 @@ export async function getStats(kv: KVLike | undefined, days = 30) {
   totals.by_facilitator = totals.by_facilitator ?? {};
   const byDate = new Map(dailyHistory.map((d) => [d.date, d]));
   const now = new Date();
+  // "all" means every day DAILY_HISTORY actually retains (bounded by
+  // DAILY_HISTORY_CAP, not literally infinite — first_job_ts on `totals`
+  // remains the true never-trimmed all-time start date for anything older).
+  // first_job_ts is authoritative because dailyHistory itself has no entry
+  // at all for a day with zero jobs, so its own earliest key can understate
+  // how far back activity actually goes on a sparse ledger.
+  const spanDays = days === "all"
+    ? Math.max(1, Math.min(
+        DAILY_HISTORY_CAP,
+        totals.first_job_ts
+          ? Math.ceil((now.getTime() - new Date(totals.first_job_ts).getTime()) / 86400000) + 1
+          : dailyHistory.length || 1,
+      ))
+    : days;
   const daily: DailyEntry[] = [];
-  for (let i = days - 1; i >= 0; i--) {
+  for (let i = spanDays - 1; i >= 0; i--) {
     const ds = new Date(now.getTime() - i * 86400000).toISOString().slice(0, 10);
     const found = byDate.get(ds);
     daily.push({ date: ds, jobs: found?.jobs ?? 0, revenue_usd: found?.revenue_usd ?? 0 });
