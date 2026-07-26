@@ -41,6 +41,17 @@ ABI = [
         "stateMutability": "nonpayable",
         "type": "function",
     },
+    # Standard ERC-721 balanceOf -- used only as an idempotency guard below,
+    # since this workflow has no schedule/auto-trigger but IS re-dispatchable
+    # by hand, and a second register() call would silently mint a second,
+    # separate agentId under the same wallet rather than erroring.
+    {
+        "inputs": [{"internalType": "address", "name": "owner", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "stateMutability": "view",
+        "type": "function",
+    },
     {
         "anonymous": False,
         "inputs": [
@@ -74,6 +85,13 @@ def main():
 
     registry = w3.eth.contract(address=IDENTITY_REGISTRY, abi=ABI)
 
+    existing_balance = registry.functions.balanceOf(account.address).call()
+    if existing_balance > 0:
+        print(f"::error::{account.address} already holds {existing_balance} agent NFT(s) on "
+              f"{IDENTITY_REGISTRY} -- refusing to register a second one. If this is intentional "
+              f"(e.g. a genuinely new identity), remove this guard deliberately.", file=sys.stderr)
+        sys.exit(1)
+
     # Simulate first (eth_call, no state change) so a revert (wrong network,
     # contract paused, etc.) is caught before any real gas is spent.
     try:
@@ -94,9 +112,12 @@ def main():
 
     signed = account.sign_transaction(tx)
     raw = getattr(signed, "raw_transaction", None) or signed.rawTransaction
-    tx_hash = w3.eth.send_raw_transaction(raw)
-    print(f"Sent tx: {tx_hash.hex()}")
-    print(f"Basescan: https://basescan.org/tx/{tx_hash.hex()}")
+    tx_hash_raw = w3.eth.send_raw_transaction(raw)
+    # HexBytes.hex() (bytes.hex(), never overridden) omits the "0x" prefix a
+    # real explorer URL needs -- Web3.to_hex() is the one that includes it.
+    tx_hash = Web3.to_hex(tx_hash_raw)
+    print(f"Sent tx: {tx_hash}")
+    print(f"Basescan: https://basescan.org/tx/{tx_hash}")
 
     receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=180)
     if receipt.status != 1:
@@ -115,22 +136,22 @@ def main():
     result = {
         "agent_id": agent_id,
         "wallet": account.address,
-        "tx_hash": tx_hash.hex(),
+        "tx_hash": tx_hash,
         "contract": IDENTITY_REGISTRY,
         "agent_uri": AGENT_URI,
-        "basescan_tx": f"https://basescan.org/tx/{tx_hash.hex()}",
+        "basescan_tx": f"https://basescan.org/tx/{tx_hash}",
         "basescan_token": (f"https://basescan.org/token/{IDENTITY_REGISTRY}?a={agent_id}"
                             if agent_id is not None else None),
         "registered_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
-    print(f"::notice::VAPE ERC-8004 agentId={agent_id} wallet={account.address} tx={tx_hash.hex()}")
+    print(f"::notice::VAPE ERC-8004 agentId={agent_id} wallet={account.address} tx={tx_hash}")
     print(json.dumps(result, indent=2))
 
     out_path = os.getenv("GITHUB_OUTPUT")
     if out_path and agent_id is not None:
         with open(out_path, "a") as f:
             f.write(f"agent_id={agent_id}\n")
-            f.write(f"tx_hash={tx_hash.hex()}\n")
+            f.write(f"tx_hash={tx_hash}\n")
 
 
 if __name__ == "__main__":
