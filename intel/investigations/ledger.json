@@ -1177,6 +1177,24 @@
     "symbol": "KITE",
     "times_investigated": 1
   },
+  "1:0x911828ff4036f5c1acf0c0da3c71900dd937c8a9": {
+    "address": "0x911828FF4036f5c1AcF0c0Da3c71900dd937C8A9",
+    "chain": "1",
+    "first_investigated": "2026-07-26T21:57:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-215734-0x911828FF.md",
+        "score": 30,
+        "ts": "2026-07-26T21:57:34Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T21:57:34Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "CATE",
+    "times_investigated": 1
+  },
   "1:0x936ad605716234b77b7a61cdb95d6b6a188da8e8": {
     "address": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
     "chain": "1",
