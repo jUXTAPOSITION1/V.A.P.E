@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T00:35:08Z",
+  "generated": "2026-07-26T00:50:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 345,
+    "investigations": 346,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-003507-0xB5C064F9.md",
+      "file": "investigation-20260726-005027-0x831753DD.md",
       "title": "Investigation \u2014 QUICK",
       "symbol": "QUICK",
-      "name": "QuickSwap",
-      "date": "2026-07-26T00:35:07Z",
-      "target": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
+      "name": "Quickswap",
+      "date": "2026-07-26T00:50:27Z",
+      "target": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
       "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "74",
-      "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract; [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 53843 holders \u2014 reas",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-003507-0xB5C064F9.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract. Positive evidence: 87145 holders \u2014 reasonably distributed; Top holders control only 3% of supply \u2014 broad distribution; Trading 2115+ days without a known incident in this scan; Custom verified source (n",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-005027-0x831753DD.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-005027-0x831753DD.md",
+      "title": "Investigation \u2014 QUICK",
+      "symbol": "QUICK",
+      "name": "Quickswap",
+      "date": "2026-07-26T00:50:27Z",
+      "target": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract. Positive evidence: 87145 holders \u2014 reasonably distributed; Top holders control only 3% of supply \u2014 broad distribution; Trading 2115+ days without a known incident in this scan; Custom verified source (n",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-005027-0x831753DD.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-003507-0xB5C064F9.md",
@@ -593,20 +607,6 @@
       "score": "65",
       "summary": "Risk factors: [-25] Very low liquidity $7,927 (rug/illiquid); [-10] Low liquidity $7,927. Positive evidence: Ownership renounced; 747 holders \u2014 reasonably distributed; Trading 650+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this token ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-001251-0xe9A53C43.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260724-223827-0xac531Eb2.md",
-      "title": "Investigation \u2014 SAND",
-      "symbol": "SAND",
-      "name": "SAND",
-      "date": "2026-07-24T22:38:27Z",
-      "target": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x18987794f808ee72ae9127058f1c7d079736ca45) \u2014 can still act on the contract; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 2206 holders \u2014 reasonably distributed; Custom verified",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260724-223827-0xac531Eb2.md"
     }
   ],
   "reports": [

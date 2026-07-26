@@ -521,3 +521,5 @@
 | 2026-07-26 | auto | 0x49DDee75D588b79a3eB1225dd386644eeeeeaF08 (EBCC) | deep_investigation | CAUTION (70/100) | Top 9 non-LP/burn holders control 100% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-26 | auto | 0xB5C064F955D8e7F38fE0460C556a72987494eE17 (QUICK) | deep_investigation | CAUTION (74/100) | Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) — can still act | +7d |
+
+| 2026-07-26 | auto | 0x831753DD7087CaC61aB5644b308642cc1c33Dc13 (QUICK) | deep_investigation | PROCEED (90/100) | Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) — can still act | +7d |
