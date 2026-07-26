@@ -362,6 +362,25 @@
     "symbol": "QUICK",
     "times_investigated": 1
   },
+  "137:0x99a57e6c8558bc6689f894e068733adf83c19725": {
+    "address": "0x99a57E6C8558BC6689f894e068733ADf83C19725",
+    "chain": "137",
+    "creator_address": "0x5e4e7cadb7c3d10e3bc96fb830a724448d9b4351",
+    "first_investigated": "2026-07-26T02:37:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-023714-0x99a57E6C.md",
+        "score": 25,
+        "ts": "2026-07-26T02:37:14Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T02:37:14Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "sLGNS",
+    "times_investigated": 1
+  },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {
     "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
     "chain": "137",
