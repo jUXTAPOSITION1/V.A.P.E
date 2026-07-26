@@ -1962,6 +1962,25 @@
     "symbol": "ARENA",
     "times_investigated": 1
   },
+  "56:0x0e63b9c287e32a05e6b9ab8ee8df88a2760225a9": {
+    "address": "0x0E63B9C287E32A05E6b9AB8ee8dF88A2760225A9",
+    "chain": "56",
+    "creator_address": "0x7a37945bf6c4a3a9454c4c808080ba6063304590",
+    "first_investigated": "2026-07-26T10:40:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-104037-0x0E63B9C2.md",
+        "score": 18,
+        "ts": "2026-07-26T10:40:37Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T10:40:37Z",
+    "last_score": 18,
+    "last_verdict": "REJECT",
+    "symbol": "PIEVERSE",
+    "times_investigated": 1
+  },
   "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
     "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
     "chain": "56",
