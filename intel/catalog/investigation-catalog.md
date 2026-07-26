@@ -571,3 +571,5 @@
 | 2026-07-26 | auto | 0x289ba1701C2F088cf0faf8B3705246331cB8A839 (LPT) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0x0E63B9C287E32A05E6b9AB8ee8dF88A2760225A9 (PIEVERSE) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0xA3c322Ad15218fBFAEd26bA7f616249f7705D945 (MV) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |

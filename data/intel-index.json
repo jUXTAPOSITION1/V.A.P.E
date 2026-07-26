@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T11:10:42Z",
+  "generated": "2026-07-26T11:26:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 370,
+    "investigations": 371,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-104037-0x0E63B9C2.md",
-      "title": "Investigation \u2014 PIEVERSE",
-      "symbol": "PIEVERSE",
-      "name": "Pieverse Token",
-      "date": "2026-07-26T10:40:37Z",
-      "target": "0x0E63B9C287E32A05E6b9AB8ee8dF88A2760225A9",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "18",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-10] Owner not renounced (0xd18d0d81b640ec77dada51ea2178659e835caaa5) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-104037-0x0E63B9C2.md"
+      "file": "investigation-20260726-112556-0xA3c322Ad.md",
+      "title": "Investigation \u2014 MV",
+      "symbol": "MV",
+      "name": "Metaverse (PoS)",
+      "date": "2026-07-26T11:25:56Z",
+      "target": "0xA3c322Ad15218fBFAEd26bA7f616249f7705D945",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,907. Positive evidence: 12726 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-112556-0xA3c322Ad.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-112556-0xA3c322Ad.md",
+      "title": "Investigation \u2014 MV",
+      "symbol": "MV",
+      "name": "Metaverse (PoS)",
+      "date": "2026-07-26T11:25:56Z",
+      "target": "0xA3c322Ad15218fBFAEd26bA7f616249f7705D945",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,907. Positive evidence: 12726 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-112556-0xA3c322Ad.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-104037-0x0E63B9C2.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SHIB (0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-210013-0x279a9C40.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-204449-0x55f622B7.md",
-      "title": "Investigation \u2014 SHIB",
-      "symbol": "SHIB",
-      "name": "SHIBA INU",
-      "date": "2026-07-25T20:44:49Z",
-      "target": "0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x75F16b63e8f94F91dbc924845Aa42093396283e8) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-204449-0x55f622B7.md"
     }
   ],
   "reports": [
