@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-26T21:57:39Z",
+  "generated": "2026-07-26T22:01:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 438,
+    "reports": 439,
     "reports_by_type": {
+      "bounty": 132,
       "base": 80,
       "sentiment": 43,
-      "bounty": 131,
       "virtuals": 82,
       "security": 73,
       "macro": 21,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-215734-0x911828FF.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-26-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-26T21:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260726_220030.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-26T22:00:30Z",
       "threat": null,
-      "summary": "Date: 2026-07-26 21:51 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-26-21.md",
-      "bytes": 3501
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_220030.md",
+      "bytes": 16882
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260726_220030.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-26T22:00:30Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_220030.md",
+      "bytes": 16882
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260723_220502.md",
       "bytes": 12100
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-23-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-23T21:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-23 21:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-23-21.md",
-      "bytes": 3992
     }
   ],
   "broadcasts": [
