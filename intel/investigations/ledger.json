@@ -1924,6 +1924,25 @@
     "symbol": "GMX",
     "times_investigated": 1
   },
+  "43114:0x01c2086facfd7aa38f69a6bd8c91bef3bb5adfca": {
+    "address": "0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa",
+    "chain": "43114",
+    "creator_address": "0x038cf43b3292cb3b43e09722302d68798480e6e6",
+    "first_investigated": "2026-07-26T15:56:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-155638-0x01C2086f.md",
+        "score": 27,
+        "ts": "2026-07-26T15:56:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T15:56:38Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "YAY",
+    "times_investigated": 1
+  },
   "43114:0x13a466998ce03db73abc2d4df3bbd845ed1f28e7": {
     "address": "0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7",
     "chain": "43114",

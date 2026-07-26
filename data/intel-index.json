@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T15:41:34Z",
+  "generated": "2026-07-26T15:56:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 384,
+    "investigations": 385,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-154131-0x8D88e484.md",
-      "title": "Investigation \u2014 CNR",
-      "symbol": "CNR",
-      "name": "Canary",
-      "date": "2026-07-26T15:41:31Z",
-      "target": "0x8D88e48465F30Acfb8daC0b3E35c9D6D7d36abaf",
+      "file": "investigation-20260726-155638-0x01C2086f.md",
+      "title": "Investigation \u2014 YAY",
+      "symbol": "YAY",
+      "name": "YAY Games",
+      "date": "2026-07-26T15:56:38Z",
+      "target": "0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa",
       "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,178 (rug/illiquid); [-10] Low liquidity $4,178. Positive evidence: 2803 holders \u2014 reasonably distributed",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-154131-0x8D88e484.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,014 (rug/illiquid); [-10] Low liquidity $4,014. Positive",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-155638-0x01C2086f.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-155638-0x01C2086f.md",
+      "title": "Investigation \u2014 YAY",
+      "symbol": "YAY",
+      "name": "YAY Games",
+      "date": "2026-07-26T15:56:38Z",
+      "target": "0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,014 (rug/illiquid); [-10] Low liquidity $4,014. Positive",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-155638-0x01C2086f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-154131-0x8D88e484.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract. Positive evidence: 87145 holders \u2014 reasonably distributed; Top holders control only 3% of supply \u2014 broad distribution; Trading 2115+ days without a known incident in this scan; Custom verified source (n",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-005027-0x831753DD.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-003507-0xB5C064F9.md",
-      "title": "Investigation \u2014 QUICK",
-      "symbol": "QUICK",
-      "name": "QuickSwap",
-      "date": "2026-07-26T00:35:07Z",
-      "target": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "74",
-      "summary": "Risk factors: [-10] Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) \u2014 can still act on the contract; [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 53843 holders \u2014 reas",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-003507-0xB5C064F9.md"
     }
   ],
   "reports": [

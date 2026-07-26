@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T15:41:35Z",
-  "synthesis": "1)",
+  "generated": "2026-07-26T15:56:44Z",
+  "synthesis": "UT",
   "tasks": [
+    {
+      "sha": "74aadbea00",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-26T15:43Z",
+      "date": "2026-07-26T15:43:05Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/74aadbea003b865676e646ab1b1af4279e87acbb"
+    },
+    {
+      "sha": "d2ebfa91ce",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T15:41Z",
+      "date": "2026-07-26T15:41:38Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d2ebfa91ce11fcecad4a7fe59cb03feffd82ac3f"
+    },
     {
       "sha": "5d20eb5bb0",
       "kind": "reputation",
@@ -92,20 +106,6 @@
       "message": "SCOUT bounty radar sweep 2026-07-26T14:12Z",
       "date": "2026-07-26T14:12:05Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e1f2e38b1eabc436795cb4090837688f777d9cd4"
-    },
-    {
-      "sha": "a17f897f66",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T14:11Z",
-      "date": "2026-07-26T14:11:47Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a17f897f6655bf9db050dc4accf9463a2e44d893"
-    },
-    {
-      "sha": "7c75fea9ba",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-26T14:06Z",
-      "date": "2026-07-26T14:06:36Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7c75fea9bac7ec0d964d726fa3f2fcb899844b88"
     }
   ]
 }
