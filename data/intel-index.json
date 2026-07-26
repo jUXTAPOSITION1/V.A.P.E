@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T04:28:43Z",
+  "generated": "2026-07-26T04:40:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 359,
+    "investigations": 360,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-042501-0xbB0191DA.md",
-      "title": "Investigation \u2014 EUL",
-      "symbol": "EUL",
-      "name": "Euler",
-      "date": "2026-07-26T04:25:01Z",
-      "target": "0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C",
+      "file": "investigation-20260726-044005-0x0Fa73480.md",
+      "title": "Investigation \u2014 SHIB",
+      "symbol": "SHIB",
+      "name": "SHIBA INU",
+      "date": "2026-07-26T04:40:05Z",
+      "target": "0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-042501-0xbB0191DA.md"
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EUL (0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-044005-0x0Fa73480.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-044005-0x0Fa73480.md",
+      "title": "Investigation \u2014 SHIB",
+      "symbol": "SHIB",
+      "name": "SHIBA INU",
+      "date": "2026-07-26T04:40:05Z",
+      "target": "0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EUL (0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-044005-0x0Fa73480.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-042501-0xbB0191DA.md",
@@ -593,20 +607,6 @@
       "score": "62",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5004 holders \u2014 reasonably distributed; Custom verified source (no",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-181242-0x4d7078DD.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-175739-0x32708538.md",
-      "title": "Investigation \u2014 01",
-      "symbol": "01",
-      "name": "01",
-      "date": "2026-07-25T17:57:39Z",
-      "target": "0x32708538a107253b51a735A724330A23106ca4cA",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 3870 holders \u2014 reasonably distributed; Top holders control only 9% of supply \u2014 broad distribution; Deep liquidity ($1,082,016); Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-175739-0x32708538.md"
     }
   ],
   "reports": [

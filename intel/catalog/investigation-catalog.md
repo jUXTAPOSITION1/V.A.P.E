@@ -549,3 +549,5 @@
 | 2026-07-26 | auto | 0xAF895F7718dBc701418FcFeFaBadA961848a79b2 (DIM) | deep_investigation | REJECT (17/100) | Low holder count (51) | +7d |
 
 | 2026-07-26 | auto | 0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C (EUL) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E (SHIB) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
