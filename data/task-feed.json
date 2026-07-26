@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T06:10:56Z",
-  "synthesis": "VAPE has been",
+  "generated": "2026-07-26T06:25:53Z",
+  "synthesis": "VAPE's automation ran repeated sweeps, featured investigations, threat analysis, bounty radar sweeps, and generated bounty reports plus repo reviews.",
   "tasks": [
+    {
+      "sha": "351b9b369b",
+      "kind": "sweep",
+      "message": "HACK sweep: 2026-07-26T06:11Z",
+      "date": "2026-07-26T06:11:50Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/351b9b369b027fbd2e3b73ec447fb27d7375642d"
+    },
+    {
+      "sha": "45985927e6",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T06:11Z",
+      "date": "2026-07-26T06:11:00Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/45985927e6409ae2c24971a4d1f913ddd73da43b"
+    },
     {
       "sha": "731b7f0ea2",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-26T04:25Z",
       "date": "2026-07-26T04:25:10Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/eb2cbef68e3c0b47e1642314a61ad43ea6c82458"
-    },
-    {
-      "sha": "c710ed4ca9",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-26T04:12Z",
-      "date": "2026-07-26T04:12:54Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c710ed4ca95c00544106765b509dded3e9af05f0"
-    },
-    {
-      "sha": "fc9f3b5232",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T04:09Z",
-      "date": "2026-07-26T04:09:37Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fc9f3b5232848e3d3cc2bac8ba85d08c2c0a00c5"
     }
   ]
 }
