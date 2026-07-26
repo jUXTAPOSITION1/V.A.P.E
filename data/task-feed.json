@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T11:26:01Z",
-  "synthesis": "VAPE's automation performed various sweeps, investigations, and repository reviews between 09:26Z and 11:10Z on 2026-07-26.",
+  "generated": "2026-07-26T11:41:04Z",
+  "synthesis": "[reputation] reputation",
   "tasks": [
+    {
+      "sha": "71546dbcbd",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-26T11:38Z",
+      "date": "2026-07-26T11:38:53Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/71546dbcbd8e4396e5c59c078836f5142bd99d47"
+    },
+    {
+      "sha": "cf2e6694d3",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T11:26Z",
+      "date": "2026-07-26T11:26:04Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/cf2e6694d39faa391b7a4503ba691c509a302c0e"
+    },
     {
       "sha": "f5b5366830",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "threat analysis: 2026-07-26T09:51Z",
       "date": "2026-07-26T09:51:58Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4b7abbf49b39b6d8e24b533478bf16ee00273b39"
-    },
-    {
-      "sha": "dbafa6e9e9",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T09:40Z",
-      "date": "2026-07-26T09:40:19Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dbafa6e9e960b80415e2bacced127363cebfada9"
-    },
-    {
-      "sha": "bb269c0a40",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-26T09:26Z",
-      "date": "2026-07-26T09:26:12Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bb269c0a400ebdf302b1951095c4f4b9726df916"
     }
   ]
 }
