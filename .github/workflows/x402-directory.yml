@@ -1,6 +1,20 @@
-name: x402 Directory Registration (manual, one-off announcement)
+name: x402 Directory Registration
 
 on:
+  # 402index.io's per-IP registration quota is hard-capped at roughly 2-50
+  # successful POSTs/hour depending on which limit their own docs vs. their
+  # own 429 body you believe (see agents/x402_directory_register.py::_post's
+  # docstring) -- with 30+ offerings, one manual dispatch can never finish a
+  # backfill in a single run, and nobody reliably re-dispatched this by hand
+  # through the following hourly windows. That's the actual reason VAPE's
+  # 402index.io listings sat stuck on stale/blank prices for weeks. Hourly
+  # or non-force runs are cheap once caught up: register_402index() skips
+  # every offering already recorded in skillforge/memory/x402_directory_state.json,
+  # so a steady-state run just checks the manifest and exits without a
+  # single POST. Offset to :52 to avoid the :00/:17/:37 congestion window
+  # this repo's other scheduled workflows already occupy.
+  schedule:
+    - cron: '52 * * * *'
   workflow_dispatch:
     inputs:
       reason:
