@@ -593,3 +593,5 @@
 | 2026-07-26 | auto | 0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c (PUPPY) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0 (DEXE) | deep_investigation | REJECT (0/100) | Very few holders (16) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5 (QI) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 68% of supply — meaningful concentration | +7d |
