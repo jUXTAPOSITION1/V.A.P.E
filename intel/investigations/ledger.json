@@ -1007,6 +1007,25 @@
     "symbol": "BTBB",
     "times_investigated": 1
   },
+  "1:0x8cddd6eea1067b78b77255e49861843f69d4703d": {
+    "address": "0x8cDDd6EeA1067b78B77255e49861843F69D4703D",
+    "chain": "1",
+    "creator_address": "0x2e516874976ef3e5dbf1ffca4c2126def535550a",
+    "first_investigated": "2026-07-26T08:55:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-085518-0x8cDDd6Ee.md",
+        "score": 50,
+        "ts": "2026-07-26T08:55:18Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T08:55:18Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "PUPPY",
+    "times_investigated": 1
+  },
   "1:0x904567252d8f48555b7447c67dca23f0372e16be": {
     "address": "0x904567252D8F48555b7447c67dCA23F0372E16be",
     "chain": "1",
