@@ -1,4 +1,31 @@
 {
   "_comment": "Tracks which offering names have already been successfully registered with 402index.io, so agents/x402_directory_register.py doesn't re-send an already-listed offering to an unfamiliar directory API with undocumented dedup behavior (risk: duplicate listings). Reset to empty 2026-07-26: the previous 5 entries (exploit_check/token_safety_check/liquidity_check/rug_pull_alert/market_intel) were all registered on 2026-07-05, before the price_usd/description/category/payment_asset/payment_network fields were added to the POST payload -- so every one of them was stuck showing a blank price on 402index.io's own directory page, and the skip-if-already-registered logic silently blocked them from ever picking up the fix on a normal (non --force-all) run. Clearing the list lets the next scheduled run(s) re-send all offerings with full price metadata; 402index.io's own api-docs confirm re-registering an existing URL+protocol is a documented upsert, not a duplicate-listing risk.",
-  "registered_402index": []
+  "registered_402index": [
+    "bounty_deep_dive",
+    "bridges",
+    "bulk_safety_bundle",
+    "chain_fees",
+    "chain_overview",
+    "chain_protocols",
+    "community_intel_broadcast",
+    "deep_contract_audit",
+    "dex_volumes",
+    "dossier_check",
+    "exploit_check",
+    "liquidity_check",
+    "market_intel",
+    "prediction_market_odds",
+    "protocol",
+    "protocol_fees",
+    "rug_pull_alert",
+    "stablecoins",
+    "token_chart",
+    "token_intel",
+    "token_safety_check",
+    "tx_decode",
+    "unlocks",
+    "wallet_pnl_deepdive",
+    "website_review",
+    "yields"
+  ]
 }
