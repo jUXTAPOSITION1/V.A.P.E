@@ -547,3 +547,5 @@
 | 2026-07-26 | auto | 0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0 (DIM) | deep_investigation | CAUTION (50/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-07-26 | auto | 0xAF895F7718dBc701418FcFeFaBadA961848a79b2 (DIM) | deep_investigation | REJECT (17/100) | Low holder count (51) | +7d |
+
+| 2026-07-26 | auto | 0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C (EUL) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |

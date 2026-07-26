@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T04:09:34Z",
+  "generated": "2026-07-26T04:25:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 418,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 358,
+    "investigations": 359,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-040933-0xAF895F77.md",
-      "title": "Investigation \u2014 DIM",
-      "symbol": "DIM",
-      "name": "DIM",
-      "date": "2026-07-26T04:09:33Z",
-      "target": "0xAF895F7718dBc701418FcFeFaBadA961848a79b2",
+      "file": "investigation-20260726-042501-0xbB0191DA.md",
+      "title": "Investigation \u2014 EUL",
+      "symbol": "EUL",
+      "name": "Euler",
+      "date": "2026-07-26T04:25:01Z",
+      "target": "0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "17",
-      "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 157% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-040933-0xAF895F77.md"
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-042501-0xbB0191DA.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-042501-0xbB0191DA.md",
+      "title": "Investigation \u2014 EUL",
+      "symbol": "EUL",
+      "name": "Euler",
+      "date": "2026-07-26T04:25:01Z",
+      "target": "0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "28",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-042501-0xbB0191DA.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-040933-0xAF895F77.md",
@@ -593,20 +607,6 @@
       "score": "85",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 3870 holders \u2014 reasonably distributed; Top holders control only 9% of supply \u2014 broad distribution; Deep liquidity ($1,082,016); Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-175739-0x32708538.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-174223-0xC4FA51E5.md",
-      "title": "Investigation \u2014 TRUMP28",
-      "symbol": "TRUMP28",
-      "name": "Trump 2028",
-      "date": "2026-07-25T17:42:23Z",
-      "target": "0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-10] Low liquidity $25,871; [-10] Violent 24h move +1046% (volatility/manipulation). Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 457+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-174223-0xC4FA51E5.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49112936",
+      "version": "49124910",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.5 eth_dom 9.89 mcap_chg_24h 0.39",
+      "version": "btc_dom 56.5 eth_dom 9.91 mcap_chg_24h 0.63",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1638,7 +1638,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "27 Fear",
+      "version": "26 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
