@@ -585,3 +585,5 @@
 | 2026-07-26 | auto | 0xfDf82991f00caE63062fD1d52e7f340693A34444 (DCA) | deep_investigation | REJECT (40/100) | Very few holders (33) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0x1460d468466D17F65FF1426571E18059d23a9eBD (dca) | deep_investigation | REJECT (47/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0xb932933E3504F85c330aa20Ed3Ce7610851C96E4 (OPENAI) | deep_investigation | REJECT (0/100) | Token name/symbol (OpenAI BOT / OPENAI) impersonates a real company with no on-c | +7d |

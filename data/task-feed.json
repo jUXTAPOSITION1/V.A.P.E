@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T12:56:44Z",
-  "synthesis": "[investigation]",
+  "generated": "2026-07-26T13:11:47Z",
+  "synthesis": "VAPE's",
   "tasks": [
+    {
+      "sha": "20cc0b532b",
+      "kind": "automation",
+      "message": "Seal findings chain 2026-07-26T13:06Z",
+      "date": "2026-07-26T13:06:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/20cc0b532b2f2c044408ad69a86b2b75dcd812cd"
+    },
+    {
+      "sha": "a38d47e8e0",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T12:56Z",
+      "date": "2026-07-26T12:56:47Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a38d47e8e0ec9758b5052397e42f48ec8f70610f"
+    },
     {
       "sha": "7a04e2550f",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-26T10:40Z",
       "date": "2026-07-26T10:40:46Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/81de321cf8cf1543eda3a9685b8e737731bd98ce"
-    },
-    {
-      "sha": "40a87242ac",
-      "kind": "sweep",
-      "message": "base_sweep 2026-07-26T10:37Z",
-      "date": "2026-07-26T10:37:09Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/40a87242ac4ef52aae81aadbb3a01660135e637a"
-    },
-    {
-      "sha": "fd076cb834",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-26T10:25Z",
-      "date": "2026-07-26T10:25:42Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fd076cb8345f00c1df56be9f69d89170b04f1c61"
     }
   ]
 }

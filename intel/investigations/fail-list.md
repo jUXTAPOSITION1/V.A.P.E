@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-26T12:56:37Z — 125 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-26T13:11:43Z — 126 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| OPENAI | Base | `0xb932933E3504F85c330aa20Ed3Ce7610851C96E4` | 0/100 | 1 | 2026-07-26T13:11:43Z |
 | dca | BNB Chain | `0x1460d468466D17F65FF1426571E18059d23a9eBD` | 47/100 | 1 | 2026-07-26T12:56:37Z |
 | DCA | BNB Chain | `0xfDf82991f00caE63062fD1d52e7f340693A34444` | 40/100 | 1 | 2026-07-26T12:41:35Z |
 | DCA | BNB Chain | `0x095576F441006679a79a53ddF9136b550095dD1C` | 30/100 | 1 | 2026-07-26T12:26:35Z |

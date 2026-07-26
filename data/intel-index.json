@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T12:56:43Z",
+  "generated": "2026-07-26T13:11:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 377,
+    "investigations": 378,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-125637-0x1460d468.md",
-      "title": "Investigation \u2014 dca",
-      "symbol": "dca",
-      "name": "dollarcostaveraging",
-      "date": "2026-07-26T12:56:37Z",
-      "target": "0x1460d468466D17F65FF1426571E18059d23a9eBD",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260726-131143-0xb932933E.md",
+      "title": "Investigation \u2014 OPENAI",
+      "symbol": "OPENAI",
+      "name": "OpenAI BOT",
+      "date": "2026-07-26T13:11:43Z",
+      "target": "0xb932933E3504F85c330aa20Ed3Ce7610851C96E4",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-8] No pair-creation timestamp available \u2014 cannot establish track record length; [-10] No known third-party audit or verifiable team identity foun",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-125637-0x1460d468.md"
+      "score": "0",
+      "summary": "Risk factors: [-35] Token name/symbol (OpenAI BOT / OPENAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily m",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-131143-0xb932933E.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-131143-0xb932933E.md",
+      "title": "Investigation \u2014 OPENAI",
+      "symbol": "OPENAI",
+      "name": "OpenAI BOT",
+      "date": "2026-07-26T13:11:43Z",
+      "target": "0xb932933E3504F85c330aa20Ed3Ce7610851C96E4",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-35] Token name/symbol (OpenAI BOT / OPENAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily m",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-131143-0xb932933E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-125637-0x1460d468.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 3587 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 684+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-230314-0xAFF25650.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-224809-0xf280B16E.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-25T22:48:09Z",
-      "target": "0xf280B16EF293D8e534e370794ef26bF312694126",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 27376 holders \u2014 reasonably distributed; Top holders control only 16% of supply \u2014 broad distribution; 96% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($1,889,338); Trading 684+ days ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-224809-0xf280B16E.md"
     }
   ],
   "reports": [
