@@ -529,3 +529,5 @@
 | 2026-07-26 | auto | 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359 (USDC) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-26 | auto | 0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b (EUL) | deep_investigation | CAUTION (65/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0xC5667DC06597ab4d2276EcE522918d7Fd8A578a4 (EUL) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
