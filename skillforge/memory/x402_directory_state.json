@@ -22,6 +22,7 @@
     "token_chart",
     "token_intel",
     "token_safety_check",
+    "treasury",
     "tx_decode",
     "unlocks",
     "wallet_pnl_deepdive",
