@@ -229,6 +229,25 @@
     "symbol": "AIPF",
     "times_investigated": 1
   },
+  "137:0x3c499c542cef5e3811e1192ce70d8cc03d5c3359": {
+    "address": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+    "chain": "137",
+    "creator_address": "0xd4f1ff97298f6793839fae27e759da45ace057c3",
+    "first_investigated": "2026-07-26T01:21:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-012103-0x3c499c54.md",
+        "score": 92,
+        "ts": "2026-07-26T01:21:03Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-26T01:21:03Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "USDC",
+    "times_investigated": 1
+  },
   "137:0x431f2f58ab87d9fe8acef48b17e43a0f8d7e1eb2": {
     "address": "0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2",
     "chain": "137",

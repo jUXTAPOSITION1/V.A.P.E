@@ -525,3 +525,5 @@
 | 2026-07-26 | auto | 0x831753DD7087CaC61aB5644b308642cc1c33Dc13 (QUICK) | deep_investigation | PROCEED (90/100) | Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) — can still act | +7d |
 
 | 2026-07-26 | auto | 0xD90b9773f9922A34F763087665B3A4649E710326 (ARBI) | deep_investigation | REJECT (32/100) | Low holder count (162) | +7d |
+
+| 2026-07-26 | auto | 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359 (USDC) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |

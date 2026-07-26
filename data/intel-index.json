@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T01:05:46Z",
+  "generated": "2026-07-26T01:21:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 110,
-    "investigations": 347,
+    "investigations": 348,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-010545-0xD90b9773.md",
-      "title": "Investigation \u2014 ARBI",
-      "symbol": "ARBI",
-      "name": "ArbiBot",
-      "date": "2026-07-26T01:05:45Z",
-      "target": "0xD90b9773f9922A34F763087665B3A4649E710326",
+      "file": "investigation-20260726-012103-0x3c499c54.md",
+      "title": "Investigation \u2014 USDC",
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "date": "2026-07-26T01:21:03Z",
+      "target": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
       "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Low holder count (162); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,360 (rug/illiquid); [-10] Low liquidity $6,360; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-010545-0xD90b9773.md"
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x9238e612387ebba4d4fa0d76dbfba99b453417b3) \u2014 can still act on the contract; [+10] Verified major stablecoin (CoinGecko: USDC, $72,537,554,405 circulating, $0.9998 peg) \u2014 mint/owner-controlled-freeze/retained-ownership are standard",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-012103-0x3c499c54.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-012103-0x3c499c54.md",
+      "title": "Investigation \u2014 USDC",
+      "symbol": "USDC",
+      "name": "USD Coin",
+      "date": "2026-07-26T01:21:03Z",
+      "target": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x9238e612387ebba4d4fa0d76dbfba99b453417b3) \u2014 can still act on the contract; [+10] Verified major stablecoin (CoinGecko: USDC, $72,537,554,405 circulating, $0.9998 peg) \u2014 mint/owner-controlled-freeze/retained-ownership are standard",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-012103-0x3c499c54.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-010545-0xD90b9773.md",
@@ -593,20 +607,6 @@
       "score": "68",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Pair 8.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 24581 holders \u2014 reasonably distributed; Custom verified source (not a ma",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-041324-0x8dB2be2b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-035158-0x30B9F6Fc.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "velvet",
-      "date": "2026-07-25T03:51:58Z",
-      "target": "0x30B9F6FccBf69b8CAbe37A6867373BAD78278420",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x243666616819d6D0A106A769efB1Ee8890Ae2F73) \u2014 CAUTION 58/100 \u2014 likely the same serial campaign; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $2 (r",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-035158-0x30B9F6Fc.md"
     }
   ],
   "reports": [
