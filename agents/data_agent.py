@@ -236,7 +236,13 @@ TOKEN_DB_RECENT_SCAN_LINES = 3000
 # exact address (see _build_session()). Both facilitator-pinned instances
 # share the same wallet: the facilitator is just the settlement rail, not
 # the payer's identity, so there's no reason to need a second funded wallet.
-EXPECTED_WALLET = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
+#
+# A separate, dedicated wallet from PAY_TO_ADDRESS (worker/wrangler.toml) --
+# DATA AGENT is the payer here, not the payee. It previously reused the
+# same wallet that now holds VAPE's ERC-8004 identity NFT
+# (0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15); moved to this dedicated
+# wallet so the identity/revenue wallet never needs to sign anything.
+EXPECTED_WALLET = "0xE5b81a1B5C457FB2687E5eD9EB5894EEc22bC474"
 
 # name -> (address) -> query params, for run_for_investigation()/
 # run_standalone() — Base-only, no protocol-slug offerings (see module

@@ -19,8 +19,13 @@ workers_dev = true
 # proven first against Base Sepolia + the public facilitator.x402.org
 # testnet facilitator before ever switching to real funds; see git history
 # on this file for the testnet values.
+# PAY_TO_ADDRESS is VAPE's real x402 revenue wallet -- also the wallet
+# holding VAPE's self-registered ERC-8004 identity NFT (basename
+# vapex402.base.eth). Deliberately NOT the ACP wallet (see docs/
+# ACP_PROTOCOL.md) -- ACP job-escrow and x402 revenue settle to two
+# separate wallets by design.
 [vars]
-PAY_TO_ADDRESS = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
+PAY_TO_ADDRESS = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 X402_NETWORK = "eip155:8453"
 X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
 VAPOR_FACILITATOR_URL = "https://x402.duckdns.org"

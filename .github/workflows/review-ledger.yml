@@ -35,7 +35,9 @@ jobs:
       BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
-      DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
+      # Sourced from INTEL_WORKER_KEY -- see agents/data_agent.py's
+      # EXPECTED_WALLET comment for why this was rotated to a dedicated wallet.
+      DATA_AGENT_PRIVATE_KEY: ${{ secrets.INTEL_WORKER_KEY }}
       # agents/investigate.py's Grok expert assessment (agents/llm.py's
       # FRONTIER_ORDER) runs on every real re-check below — was previously
       # unwired here entirely, so it silently no-op'd on every run.

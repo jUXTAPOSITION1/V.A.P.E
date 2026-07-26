@@ -70,7 +70,11 @@ jobs:
       # (agents/data_agent.py's module docstring) — how often THIS workflow's
       # own cron actually fires is the real ceiling on how fast that growth
       # can be delivered, since no in-process limiter can invent extra runs.
-      DATA_AGENT_PRIVATE_KEY: ${{ secrets.DATA_AGENT_PRIVATE_KEY }}
+      # Sourced from INTEL_WORKER_KEY (not DATA_AGENT_PRIVATE_KEY) -- DATA
+      # AGENT's signing key was rotated to its own dedicated wallet, kept
+      # separate from the identity/revenue wallet. Env var name kept as
+      # DATA_AGENT_PRIVATE_KEY since that's what agents/data_agent.py reads.
+      DATA_AGENT_PRIVATE_KEY: ${{ secrets.INTEL_WORKER_KEY }}
     steps:
       - uses: actions/checkout@v7
         with:

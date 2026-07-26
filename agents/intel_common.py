@@ -104,7 +104,7 @@ def web_search_snippets(query, max_results=5):
     return {"available": True, "provider": res.get("provider"), "results": out}
 
 
-VAPE_WALLET = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"  # real ACP wallet, same constant used in publish_reputation.py/x402_directory_register.py
+VAPE_WALLET = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"  # real ACP wallet (job-escrow only) -- deliberately NOT the x402 revenue wallet (worker/wrangler.toml's PAY_TO_ADDRESS); the two are separate wallets by design, see docs/ACP_PROTOCOL.md
 
 
 def get_vape_eth_balance():

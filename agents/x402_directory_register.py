@@ -114,7 +114,7 @@ PROVIDER = "VAPE"
 # <link rel="icon">), not a separate logo asset — reused here so every
 # external listing matches the icon a human sees in their own browser tab.
 ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/favicon-32.png"
-PAY_TO = "0xa1420293a7df49bc8380f543a1fe7b8d6f582879"
+PAY_TO = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 # Real, already-verified USDC-on-Base contract (same address used by
 # agents/x402_ledger_backfill.py — never re-typed from memory here).
 USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
