@@ -168,17 +168,16 @@ const X402Feed = {
         }
     },
 
+    // The primary x402scan/402index listing links now live as static cards
+    // directly in index.html's "Listed On" block (real, hand-verified URLs
+    // that don't need a fetch to render) — this only fills in the per-offering
+    // 402index.io deep links underneath, once reputation.json resolves.
     async _renderDirectoryLinks() {
         const el = document.getElementById('x402-directory-links');
         if (!el) return;
-        // x402scan doesn't depend on reputation.json, so it renders immediately
-        // rather than waiting on a fetch that only the 402index links need.
-        el.innerHTML = `<a href="https://www.x402scan.com/" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-magnifying-glass"></i> Browse x402scan</a>`;
         const links = await directoryLinks();
         if (!links.length) return;
-        const parts = [el.innerHTML,
-            `<a href="https://402index.io/" target="_blank" rel="noopener" class="term-btn term-btn-sm"><i class="fa-solid fa-book"></i> 402 Index directory</a>`,
-        ];
+        const parts = [`<span class="text-zinc-600 w-full mb-1">Per-offering 402index.io listings:</span>`];
         links.forEach(o => {
             parts.push(`<a href="${escapeHtml(o.directory_url)}" target="_blank" rel="noopener" class="term-btn term-btn-sm font-mono">${escapeHtml(o.name)} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>`);
         });
