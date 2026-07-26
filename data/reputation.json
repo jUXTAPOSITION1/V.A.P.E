@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T00:16:52Z",
+  "generated": "2026-07-26T04:02:48Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -12,10 +12,10 @@
     "verify_identity": "https://app.virtuals.io/acp/agent/019eaf60-592a-7f5c-99a2-3e85199303fe"
   },
   "verifiable_activity": {
-    "reports_published": 312,
-    "intel_reports": 294,
+    "reports_published": 315,
+    "intel_reports": 295,
     "intel_broadcasts": 110,
-    "catalog_investigations": 252,
+    "catalog_investigations": 266,
     "token_scans_logged": 0,
     "skills_codified": 20,
     "tools_total": 16,
@@ -33,10 +33,10 @@
         "number": 284,
         "title": "Arbitrum Transaction Tracer for Incident Response",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/284",
         "created_at": "2026-07-25T21:51:16Z",
-        "closed_at": null,
+        "closed_at": "2026-07-26T02:17:50Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -100,10 +100,10 @@
         }
       }
     ],
-    "work_log_entries": 223,
+    "work_log_entries": 224,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260629",
-    "latest_report": "20260725"
+    "latest_report": "20260726"
   },
   "capabilities": {
     "offerings_live": 31,
