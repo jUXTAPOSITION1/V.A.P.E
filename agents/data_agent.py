@@ -242,7 +242,7 @@ TOKEN_DB_RECENT_SCAN_LINES = 3000
 # same wallet that now holds VAPE's ERC-8004 identity NFT
 # (0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15); moved to this dedicated
 # wallet so the identity/revenue wallet never needs to sign anything.
-EXPECTED_WALLET = "0xDB3f4A653A655EcA7647a8488119aDd3D4e1fEb1"
+EXPECTED_WALLET = "0x52af3E6D13f7C13EC887A2E69058A1432aa5B768"
 
 # name -> (address) -> query params, for run_for_investigation()/
 # run_standalone() — Base-only, no protocol-slug offerings (see module
