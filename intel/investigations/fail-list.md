@@ -1,6 +1,6 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-26T04:55:25Z — 115 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-26T05:10:55Z — 115 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T04:55:37Z",
+  "generated": "2026-07-26T05:10:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 361,
+    "investigations": 362,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-045525-0x85bAbbd6.md",
-      "title": "Investigation \u2014 gLGNS",
-      "symbol": "gLGNS",
-      "name": "gLGNS",
-      "date": "2026-07-26T04:55:25Z",
-      "target": "0x85bAbbd6124589F5Ef3AE12a2745267cc1852f42",
+      "file": "investigation-20260726-051055-0x8f3Cf7ad.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Longinus",
+      "date": "2026-07-26T05:10:55Z",
+      "target": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
       "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "7",
-      "summary": "Risk factors: [-8] Low holder count (68); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $41 (rug/illiquid); [-10] Low liquidity $41; [-10] Violent 24h move +166% (vola",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-045525-0x85bAbbd6.md"
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 62% of supply \u2014 meaningful concentration. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($557,194,496 circulating, $0.9997 peg); 3822846 holders \u2014 reasonably distributed; Deep liquidity ($204,479,564); Trading 872+ days without a known",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-051055-0x8f3Cf7ad.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-051055-0x8f3Cf7ad.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Longinus",
+      "date": "2026-07-26T05:10:55Z",
+      "target": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+      "chain": "137 (Polygon)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 62% of supply \u2014 meaningful concentration. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($557,194,496 circulating, $0.9997 peg); 3822846 holders \u2014 reasonably distributed; Deep liquidity ($204,479,564); Trading 872+ days without a known",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-051055-0x8f3Cf7ad.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-045525-0x85bAbbd6.md",
@@ -593,20 +607,6 @@
       "score": "32",
       "summary": "Risk factors: [-10] Owner not renounced (0xe449a29a89738303cea0e43461df716103d5ea45) \u2014 can still act on the contract; [-8] Low holder count (97); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-184244-0xaa26754d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-182745-0x2598c303.md",
-      "title": "Investigation \u2014 AI",
-      "symbol": "AI",
-      "name": "Any Inu",
-      "date": "2026-07-25T18:27:45Z",
-      "target": "0x2598c30330D5771AE9F983979209486aE26dE875",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 3923 holders \u2014 reasonably distributed; Top holders control only 1% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 938+ days without a known incident in this scan; Custom verif",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-182745-0x2598c303.md"
     }
   ],
   "reports": [

@@ -553,3 +553,5 @@
 | 2026-07-26 | auto | 0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E (SHIB) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0x85bAbbd6124589F5Ef3AE12a2745267cc1852f42 (gLGNS) | deep_investigation | REJECT (7/100) | Low holder count (68) | +7d |
+
+| 2026-07-26 | auto | 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063 (LGNS) | deep_investigation | PROCEED (92/100) | Top 10 non-LP/burn holders control 62% of supply — meaningful concentration | +7d |
