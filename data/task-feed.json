@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-26T19:41:48Z",
-  "synthesis": "VAPE automation repeatedly generated featured investigations while running security sweeps, reputation snapshots, bounty reports, repo reviews, and tool registrations.",
+  "generated": "2026-07-26T19:56:37Z",
+  "synthesis": "VAPE's automation repeatedly generated featured investigations while running bounty radar sweeps, security sweeps, reputation snapshots, findings sealing, and auto reports.",
   "tasks": [
+    {
+      "sha": "3fdd2295e7",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-26T19:47Z",
+      "date": "2026-07-26T19:47:04Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3fdd2295e710add8b30d486a8fefd711ec7f03c0"
+    },
+    {
+      "sha": "652579c9bf",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T19:41Z",
+      "date": "2026-07-26T19:41:51Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/652579c9bfeb996ad80faabdb52250bfd4c7dbed"
+    },
     {
       "sha": "40d67a5ce0",
       "kind": "reputation",
@@ -92,20 +106,6 @@
       "message": "x402 directory registration 2026-07-26T17:47Z",
       "date": "2026-07-26T17:47:58Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/992c518b4a8d1cc5bacc0f5fc7f4148dafe9ba48"
-    },
-    {
-      "sha": "770da9cf4b",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-26T17:42Z",
-      "date": "2026-07-26T17:42:20Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/770da9cf4b375acf9441abd1aa7b4a48d3e530bb"
-    },
-    {
-      "sha": "7261b4fcb2",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-26T17:41Z",
-      "date": "2026-07-26T17:41:36Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7261b4fcb2f9e1e1a706adca2fd7cf439636710a"
     }
   ]
 }
