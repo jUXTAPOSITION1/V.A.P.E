@@ -684,6 +684,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x047653a3c6c97c8a4dd2cfbf996f157d166f17a0": {
+    "address": "0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0",
+    "chain": "1",
+    "creator_address": "0x24fb801ee20e551c201157bc1a09f8a2828d67bb",
+    "first_investigated": "2026-07-26T13:56:53Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-135653-0x047653a3.md",
+        "score": 0,
+        "ts": "2026-07-26T13:56:53Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T13:56:53Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "DEXE",
+    "times_investigated": 1
+  },
   "1:0x0f020434ffa8649b6994781eed1d1522411807ee": {
     "address": "0x0f020434fFa8649B6994781EeD1D1522411807Ee",
     "chain": "1",

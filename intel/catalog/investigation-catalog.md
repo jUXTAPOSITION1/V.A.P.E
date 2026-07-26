@@ -591,3 +591,5 @@
 | 2026-07-26 | auto | 0xDB9d15E484368facB45f5784A99A0A5fECEed624 (NTFS) | deep_investigation | REJECT (43/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-26 | auto | 0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c (PUPPY) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0 (DEXE) | deep_investigation | REJECT (0/100) | Very few holders (16) — thin, easily manipulated distribution | +7d |

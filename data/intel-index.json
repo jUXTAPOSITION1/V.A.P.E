@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T13:41:54Z",
+  "generated": "2026-07-26T13:56:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 429,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 380,
+    "investigations": 381,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-134149-0xBA103bbd.md",
-      "title": "Investigation \u2014 PUPPY",
-      "symbol": "PUPPY",
-      "name": "Puppy",
-      "date": "2026-07-26T13:41:49Z",
-      "target": "0xBA103bbd78C76E87D1067Dc383cc2A78fb70687c",
+      "file": "investigation-20260726-135653-0x047653a3.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-26T13:56:53Z",
+      "target": "0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +242% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-134149-0xBA103bbd.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,716 (rug/illiquid); [-10] Low liqui",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-135653-0x047653a3.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-135653-0x047653a3.md",
+      "title": "Investigation \u2014 DEXE",
+      "symbol": "DEXE",
+      "name": "Dexe",
+      "date": "2026-07-26T13:56:53Z",
+      "target": "0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,716 (rug/illiquid); [-10] Low liqui",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-135653-0x047653a3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-134149-0xBA103bbd.md",
@@ -593,20 +607,6 @@
       "score": "73",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 36635 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($8,361,314); Trading 249+ d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-234924-0x2c72D255.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-233355-0x375488F0.md",
-      "title": "Investigation \u2014 TAROT",
-      "symbol": "TAROT",
-      "name": "Tarot",
-      "date": "2026-07-25T23:33:55Z",
-      "target": "0x375488F097176507e39B9653b88FDc52cDE736Bf",
-      "chain": "10 (Optimism)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-233355-0x375488F0.md"
     }
   ],
   "reports": [
