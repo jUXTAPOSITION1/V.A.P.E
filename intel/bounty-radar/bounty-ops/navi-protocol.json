@@ -32,6 +32,42 @@
     {
       "item": "Draft the Hackenproof report with clear steps, affected contracts, severity justification, and a minimal PoC transaction.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the NAVI Protocol bug bounty program directly on the Hackenproof website to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Fetch the latest Move smart contract source code from the designated git repository to prepare for analysis.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the fetched Move smart contract code to perform source fetch, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Manually review the audit results against a real vulnerability taxonomy, focusing on access control, oracle trust, reentrancy, and business logic vulnerabilities.",
+      "done": false
+    },
+    {
+      "item": "Identify and isolate potential vulnerabilities discovered during the audit and review process for further analysis and confirmation.",
+      "done": false
+    },
+    {
+      "item": "Validate the potential vulnerabilities to ensure they are genuine and not false positives, and to determine their severity and impact.",
+      "done": false
+    },
+    {
+      "item": "Document the confirmed vulnerabilities in a clear and concise manner, including steps to reproduce, expected behavior, and actual behavior.",
+      "done": false
+    },
+    {
+      "item": "Prepare a submission for the Hackenproof bug bounty program, including all required information such as vulnerability description, proof-of-concept, and recommended fix.",
+      "done": false
+    },
+    {
+      "item": "Submit the report to the NAVI Protocol bug bounty program through the Hackenproof platform, ensuring adherence to the program's rules and guidelines.",
+      "done": false
     }
   ],
   "progress": [
@@ -42,9 +78,13 @@
     {
       "ts": "2026-07-19T16:32:07.565641Z",
       "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-07-26T17:38:48.523515Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784478720.8558242,
+  "checklistGeneratedAt": 1785087526.8965967,
   "vapeReportUrl": null,
   "name": "NAVI Protocol",
   "platform": "hackenproof",
@@ -58,5 +98,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T16:32:00.855826Z"
+  "updatedAt": "2026-07-26T17:38:46.896598Z"
 }

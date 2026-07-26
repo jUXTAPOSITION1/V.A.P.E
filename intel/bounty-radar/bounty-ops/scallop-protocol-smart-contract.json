@@ -36,6 +36,42 @@
     {
       "item": "Prepare the final submission package containing the exact commit hash, reproduction transaction examples, and severity mapping required by Hackenproof.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Scallop Protocol smart contract bug bounty program directly on the Hackenproof program page to ensure accuracy and avoid assumptions.",
+      "done": false
+    },
+    {
+      "item": "Identify the Move/Sui smart contract code repository, likely linked from the Hackenproof program page or available through a git repository, to prepare for auditing.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the identified Move/Sui smart contract code to perform source fetching, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the output from agents/external_audit.py for potential vulnerabilities, focusing on common issues such as access control, oracle trust, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contract's code against a real vulnerability taxonomy, checking for reentrancy, front-running, and other attack vectors that may not be caught by automated tools.",
+      "done": false
+    },
+    {
+      "item": "Investigate the contract's interactions with external systems, such as oracles or other smart contracts, to identify potential trust or dependency issues.",
+      "done": false
+    },
+    {
+      "item": "Document all findings, including potential vulnerabilities, their severity, and steps to reproduce or exploit them, in preparation for submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure that all submissions adhere to the Hackenproof program's guidelines and requirements, including format, content, and disclosure expectations.",
+      "done": false
+    },
+    {
+      "item": "Submit the findings to the Hackenproof platform, following their specific submission process and ensuring that all required information is included to be eligible for the bounty.",
+      "done": false
     }
   ],
   "progress": [
@@ -50,9 +86,13 @@
     {
       "ts": "2026-07-19T16:32:22.785301Z",
       "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md"
+    },
+    {
+      "ts": "2026-07-26T17:38:51.976729Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784478736.2210479,
+  "checklistGeneratedAt": 1785087530.23294,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Scallop Protocol (Smart Contract)",
   "platform": "hackenproof",
@@ -67,6 +107,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T16:32:16.221051Z",
+  "updatedAt": "2026-07-26T17:38:50.232944Z",
   "vapeReportKind": "external-audit"
 }

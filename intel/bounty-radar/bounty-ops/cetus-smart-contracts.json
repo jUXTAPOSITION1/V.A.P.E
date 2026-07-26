@@ -32,6 +32,42 @@
     {
       "item": "Draft submission with contract addresses, exact Move module versions, step-by-step reproduction, and severity justification matching Hackenproof template.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Cetus Smart Contracts bug bounty program on the HackenProof platform by checking the program's page directly at https://hackenproof.com/programs/cetus-smart-contracts.",
+      "done": false
+    },
+    {
+      "item": "Identify the target Move/Sui smart contracts to audit, which should be accessible via a provided git repository or other means as specified in the program details.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the identified target smart contracts to perform source fetching, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the output from agents/external_audit.py for potential vulnerabilities, focusing on common issues such as access control, oracle trust, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Manually review the smart contracts against a real vulnerability taxonomy to check for reentrancy, front-running, and other potential attack vectors that may not have been caught by automated tools.",
+      "done": false
+    },
+    {
+      "item": "Investigate any findings from the automated and manual reviews to confirm their validity and assess their potential impact on the Cetus Smart Contracts.",
+      "done": false
+    },
+    {
+      "item": "Document all confirmed vulnerabilities, including steps to reproduce, expected behavior, and actual behavior, to prepare a comprehensive submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the submission adheres to the format and guidelines specified by the Cetus Smart Contracts bug bounty program on HackenProof.",
+      "done": false
+    },
+    {
+      "item": "Submit the documented vulnerabilities to the program, ensuring that all required information is included and that the submission is made within the program's specified timeframe and guidelines.",
+      "done": false
     }
   ],
   "progress": [
@@ -46,9 +82,13 @@
     {
       "ts": "2026-07-19T16:32:16.220661Z",
       "event": "Linked VAPE's own real external-audit report: intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md"
+    },
+    {
+      "ts": "2026-07-26T17:38:50.232302Z",
+      "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1784478727.5661285,
+  "checklistGeneratedAt": 1785087528.5240827,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md",
   "name": "Cetus Smart Contracts",
   "platform": "hackenproof",
@@ -62,6 +102,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-19T16:32:07.566154Z",
+  "updatedAt": "2026-07-26T17:38:48.524086Z",
   "vapeReportKind": "external-audit"
 }
