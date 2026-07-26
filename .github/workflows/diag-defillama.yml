@@ -1,0 +1,32 @@
+name: DefiLlama Diagnostic (manual, read-only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      function:
+        description: 'agents/defillama.py function to call (e.g. unlocks, chain_overview, protocol_fees)'
+        required: true
+        default: 'unlocks'
+      arg:
+        description: 'Single positional argument to pass (slug/chain name)'
+        required: true
+        default: 'aptos'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Run diagnostic
+        env:
+          INPUT_FUNCTION: ${{ inputs.function }}
+          INPUT_ARG: ${{ inputs.arg }}
+        run: python scripts/diag_defillama.py "$INPUT_FUNCTION" "$INPUT_ARG"
