@@ -2132,6 +2132,25 @@
     "symbol": "AKE",
     "times_investigated": 1
   },
+  "56:0xed2ee58908ea569a994a1ac77da4a947807a4444": {
+    "address": "0xEd2EE58908eA569A994a1ac77da4A947807A4444",
+    "chain": "56",
+    "creator_address": "0x7eaf232fff53499fd3ead3c93924671b149e4837",
+    "first_investigated": "2026-07-26T12:11:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-121128-0xEd2EE589.md",
+        "score": 55,
+        "ts": "2026-07-26T12:11:28Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-26T12:11:28Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "DCA",
+    "times_investigated": 1
+  },
   "56:0xf4b385849f2e817e92bffbfb9aeb48f950ff4444": {
     "address": "0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444",
     "chain": "56",

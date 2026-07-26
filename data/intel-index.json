@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T12:04:51Z",
+  "generated": "2026-07-26T12:11:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 112,
-    "investigations": 373,
+    "investigations": 374,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-115623-0x204820B6.md",
-      "title": "Investigation \u2014 ROND",
-      "symbol": "ROND",
-      "name": "ROND Coin",
-      "date": "2026-07-26T11:56:23Z",
-      "target": "0x204820B6e6FEae805e376D2C6837446186e57981",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-10] Owner not renounced (0x78a3b0a018b9763a67dcfbae7ba7e2e47b9e341f) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $141 (rug/illiquid); [-10] Low liquidity $141. Positive evidence: 12549 holders \u2014 reasonably d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-115623-0x204820B6.md"
+      "file": "investigation-20260726-121128-0xEd2EE589.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "Dog Cat Ape",
+      "date": "2026-07-26T12:11:28Z",
+      "target": "0xEd2EE58908eA569A994a1ac77da4A947807A4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $42,250; [-10] Violent 24h move +230% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 1599 holder",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-121128-0xEd2EE589.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-121128-0xEd2EE589.md",
+      "title": "Investigation \u2014 DCA",
+      "symbol": "DCA",
+      "name": "Dog Cat Ape",
+      "date": "2026-07-26T12:11:28Z",
+      "target": "0xEd2EE58908eA569A994a1ac77da4A947807A4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $42,250; [-10] Violent 24h move +230% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 1599 holder",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-121128-0xEd2EE589.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-115623-0x204820B6.md",
@@ -593,20 +607,6 @@
       "score": "60",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 105% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $36,417; [-15] Contract source UNVERIFIED. Positive evidence: Trading 108+ days without a known incident in this scan.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-214633-0x271415A0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-213113-0xa78d8321.md",
-      "title": "Investigation \u2014 ANT",
-      "symbol": "ANT",
-      "name": "Autonomi",
-      "date": "2026-07-25T21:31:13Z",
-      "target": "0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 51805 holders \u2014 reasonably distributed; Trading 529+ days without a known incident in this scan; Custom verified ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-213113-0xa78d8321.md"
     }
   ],
   "reports": [

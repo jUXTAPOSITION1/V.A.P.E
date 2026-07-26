@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-26T11:56:28Z",
-  "synthesis": "[bounty-",
+  "generated": "2026-07-26T12:11:30Z",
+  "synthesis": "report",
   "tasks": [
+    {
+      "sha": "0580da595e",
+      "kind": "automation",
+      "message": "Auto-generated bounty report 2026-07-26T12:04Z",
+      "date": "2026-07-26T12:04:52Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0580da595ee931f47df7adbc029376da95d308fe"
+    },
+    {
+      "sha": "090cf9caa6",
+      "kind": "automation",
+      "message": "VAPE repo review 2026-07-26T12:04Z",
+      "date": "2026-07-26T12:04:22Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/090cf9caa6ade5117c872a010b2e00ff68188cb7"
+    },
+    {
+      "sha": "ef0aee9198",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-26T11:56Z",
+      "date": "2026-07-26T11:56:31Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ef0aee91988e69025275395cdf3c05110c407df9"
+    },
     {
       "sha": "3848f80e8a",
       "kind": "bounty-radar",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-26T10:10Z",
       "date": "2026-07-26T10:10:27Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ada35530272d96fd43aba3eaff30c99a79237fc6"
-    },
-    {
-      "sha": "296f4e9c6f",
-      "kind": "sweep",
-      "message": "sentiment_sweep 2026-07-26T10:07Z",
-      "date": "2026-07-26T10:07:35Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/296f4e9c6f2566e9c7b71b5b43677e3adae9a449"
-    },
-    {
-      "sha": "39cf2153b7",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-07-26T10:02Z",
-      "date": "2026-07-26T10:02:58Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/39cf2153b7803e1a854e7f9719645d71fa987a7c"
-    },
-    {
-      "sha": "7a59f38d77",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-26T10:02Z",
-      "date": "2026-07-26T10:02:15Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7a59f38d779c24b6d39eee656a93503cd1056098"
     }
   ]
 }
