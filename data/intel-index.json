@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T21:51:53Z",
+  "generated": "2026-07-26T21:57:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 438,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 396,
+    "investigations": 397,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-214227-0x9b38D8BC.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "Dollar Cost Averagin",
-      "date": "2026-07-26T21:42:27Z",
-      "target": "0x9b38D8BC5E35c074e7DFE45CBF9A9818B4c04444",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260726-215734-0x911828FF.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "CATE",
+      "date": "2026-07-26T21:57:34Z",
+      "target": "0x911828FF4036f5c1AcF0c0Da3c71900dd937C8A9",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-214227-0x9b38D8BC.md"
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +2705% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-215734-0x911828FF.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-215734-0x911828FF.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "CATE",
+      "date": "2026-07-26T21:57:34Z",
+      "target": "0x911828FF4036f5c1AcF0c0Da3c71900dd937C8A9",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +2705% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-215734-0x911828FF.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-214227-0x9b38D8BC.md",
@@ -593,20 +607,6 @@
       "score": "17",
       "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 157% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-040933-0xAF895F77.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-035424-0x35e9e9A7.md",
-      "title": "Investigation \u2014 DIM",
-      "symbol": "DIM",
-      "name": "DIM",
-      "date": "2026-07-26T03:54:24Z",
-      "target": "0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +493% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-035424-0x35e9e9A7.md"
     }
   ],
   "reports": [
