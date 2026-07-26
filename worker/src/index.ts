@@ -223,7 +223,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
   },
   token_safety_check: {
-    description: "Full GoPlus + DexScreener token safety scan with CertiK-style scoring.",
+    description: "Full token safety + liquidity scan with a weighted 0-100 risk score.",
     output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
   },
   liquidity_check: {
@@ -235,7 +235,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
     output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
   },
   dossier_check: {
-    description: "VAPE's deepest instant verdict: weighted CertiK-style score, meme-factory-template "
+    description: "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template "
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
     output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
@@ -301,7 +301,7 @@ const DEEP_CONTRACT_AUDIT_DISCOVERY = {
 const TX_DECODE_PRICE = "$0.05";
 const TX_DECODE_DISCOVERY = {
   description: "Plain-language transaction decode + risk flags for any Base/EVM tx hash — "
-    + "real Etherscan tx/receipt/logs + 4byte.directory method/event-signature lookup, "
+    + "real on-chain tx/receipt/logs plus method/event-signature lookup, "
     + "no simulation.",
   output: {
     tx_hash: "0x...", chain_id: 8453, status: "success",
@@ -384,7 +384,7 @@ const PAID_ROUTES: VapeRoute[] = [
     name,
     path: `/scan/${name}`,
     price,
-    description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real GoPlus/DexScreener data, no simulation.`,
+    description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real on-chain/market data, no simulation.`,
     tags: SCAN_TAGS,
     inputSchema: ADDRESS_INPUT_SCHEMA,
     inputExample: { address: DEAD_ADDRESS },

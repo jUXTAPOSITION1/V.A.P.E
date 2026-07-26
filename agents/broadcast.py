@@ -164,7 +164,7 @@ def build_broadcast(window_hours=6):
             L.append(f"- **{h.get('date')}** {h.get('name')} — ${h.get('amount_usd_m')}M on "
                       f"{', '.join(h.get('chains') or [])} ({h.get('technique') or 'technique unknown'})")
     else:
-        L.append("No incidents in DeFiLlama's feed this cycle.")
+        L.append("No incidents in the hack-incident feed this cycle.")
     L.append("")
 
     # ── Market Pulse (real Fear&Greed + global market) ──────────────────────
@@ -217,7 +217,7 @@ def build_broadcast(window_hours=6):
         f"Recent VAPE casework (last {window_hours}h): {len(recent)} investigation(s). "
         f"Ledger totals: {counts['REJECT']} REJECT / {counts['CAUTION']} CAUTION / {counts['PROCEED']} PROCEED.\n"
         f"Rule-based anomaly flags this cycle: {flags if not clean else 'none'}\n"
-        f"Recent DeFiLlama hack feed: {[(h.get('date'), h.get('name'), h.get('amount_usd_m')) for h in hacks[:5]] or 'none'}\n"
+        f"Recent hack-incident feed: {[(h.get('date'), h.get('name'), h.get('amount_usd_m')) for h in hacks[:5]] or 'none'}\n"
         f"Fear & Greed: {fng.get('value')} ({fng.get('classification')}), prev {fng.get('prev_value')}\n"
         f"Global crypto mcap: {_usd(glob_m.get('total_mcap_usd'))} ({_pct(glob_m.get('mcap_change_24h_pct'))} 24h)\n"
         f"Base TVL: {_usd(tvl.get('tvl_usd'))} ({_pct(tvl.get('tvl_24h_change_pct'))} 24h), "

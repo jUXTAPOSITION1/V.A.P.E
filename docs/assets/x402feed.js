@@ -296,7 +296,7 @@ const X402Feed = {
             ? `<span class="px-1.5 py-0.5 text-[10px] ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
             : '<span class="text-zinc-700 text-[10px]">—</span>';
         const tx = j.tx_hash
-            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on Basescan" class="text-zinc-300 hover:text-white underline decoration-zinc-700">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
+            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on block explorer" class="text-zinc-300 hover:text-white underline decoration-zinc-700">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
             : '<span class="text-zinc-700">unsettled</span>';
         // Each of the 6 auto offerings has a real, verified 402index.io service
         // listing (see agents/publish_reputation.py's _402INDEX_SERVICE_IDS) —

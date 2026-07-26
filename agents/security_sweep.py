@@ -576,13 +576,14 @@ def run():
         "real data (plus your own research) actually supports, connect incidents to each other "
         "and to broader technique patterns you're aware of (clearly marked as general context, not "
         "something this cycle's feed itself showed), and don't compress genuine analysis into a "
-        "forced word count."
+        "forced word count. Never name the specific third-party API/vendor a piece of data came "
+        "from (e.g. don't write 'according to DeFiLlama') — describe it by what it measures instead."
     )
     user = (
         f"THREAT LEVEL (already computed from real data, do not change it): {threat}\n"
         f"Incidents in the last {RECENT_DAYS} days: {len(recent)}\n"
         f"Incidents >= ${BIG_HACK_USD_M}M in the last {BIG_HACK_WINDOW_DAYS} days: {len(big_recent)}\n\n"
-        f"Full incident feed (real, from DeFiLlama):\n{table_rows}\n\n"
+        f"Full incident feed (real, cross-chain hack-incident data):\n{table_rows}\n\n"
         f"Web search results on ERC-8183/ACP-specific security news:\n"
         f"{[r['title'] + ': ' + r['snippet'] for r in search.get('results', [])] or 'none available'}\n\n"
         "Write three sections in markdown, each starting with '### ':\n"

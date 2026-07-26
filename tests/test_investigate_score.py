@@ -206,7 +206,7 @@ def test_real_usdt_case_scores_proceed_with_coingecko_verification():
     assert with_cg[0] > without_cg[0]
     assert with_cg[1] == "PROCEED", f"expected PROCEED with real stablecoin verification, got {with_cg}"
     assert any("Verified major stablecoin" in r for r in with_cg[2])
-    assert any("CoinGecko-recognized major stablecoin" in p for p in with_cg[3])
+    assert any("market-data-recognized major stablecoin" in p for p in with_cg[3])
 
 
 def test_stablecoin_refund_never_touches_unrelated_red_flags():

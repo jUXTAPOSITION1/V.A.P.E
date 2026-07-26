@@ -292,7 +292,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     // than implied. Base mainnet only (Alchemy's setup here is Base-only).
     name: "wallet_pnl_deepdive",
     price: "$0.25",
-    description: "A real wallet holdings + P&L estimate via Alchemy + CoinGecko: current token "
+    description: "A real wallet holdings + P&L estimate: current token "
       + "balances with USD values, and an unrealized-P&L estimate per holding (current value vs. "
       + "price at first incoming transfer) — an approximation, not full trade-by-trade accounting. "
       + "Base mainnet only.",

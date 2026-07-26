@@ -416,10 +416,10 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
     else:
         parts.append(f"=== SIMULATED ATTACK — EXECUTED PROOF-OF-CONCEPT ===\nNot available this run: "
                      f"{exploit_result.get('reason', 'unknown')}")
-    parts.append(f"=== GOPLUS TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
-    parts.append(f"=== DEXSCREENER MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
-    parts.append(f"=== ON-CHAIN PRESENCE (real, Base RPC) ===\n{json.dumps(onchain, indent=2)}")
-    parts.append(f"=== CONTRACT VERIFICATION (real, Etherscan V2) ===\n"
+    parts.append(f"=== TOKEN SECURITY (real) ===\n{json.dumps(gp, indent=2)[:2000]}")
+    parts.append(f"=== MARKET DATA (real) ===\n{json.dumps(dex, indent=2)[:1000]}")
+    parts.append(f"=== ON-CHAIN PRESENCE (real) ===\n{json.dumps(onchain, indent=2)}")
+    parts.append(f"=== CONTRACT VERIFICATION (real) ===\n"
                  f"verified: {src.get('verified')}, name: {src.get('contract_name')}, "
                  f"compiler: {src.get('compiler')}, proxy: {src.get('proxy')}, "
                  f"implementation: {src.get('implementation')}")
@@ -428,8 +428,8 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
                      f"{src['source_code'][:40000]}")
     else:
         parts.append("=== VERIFIED SOURCE CODE ===\nNOT AVAILABLE — contract unverified or no "
-                     "ETHERSCAN_API_KEY set. Do not fabricate source-level findings; reason "
-                     "only from the other real recon data here.")
+                     "contract-verification key configured. Do not fabricate source-level "
+                     "findings; reason only from the other real recon data here.")
     if slither_result.get("ran") and slither_result.get("ok"):
         parts.append(f"=== SLITHER STATIC ANALYSIS (real, {slither_result['total']} raw findings) ===\n"
                      f"Severity counts: {slither_result['counts']}\n"
@@ -463,7 +463,7 @@ def build_prompt(address, chain, gp, dex, onchain, src, corr, web_rep, slither_r
         parts.append(f"=== ADERYN STATIC AST ANALYSIS ===\nNot available this run: "
                      f"{aderyn_result.get('reason', 'unknown')}")
     if corr:
-        parts.append("=== RECENT-HACK TECHNIQUE CORRELATION (real, DeFiLlama feed) ===\n"
+        parts.append("=== RECENT-HACK TECHNIQUE CORRELATION (real, cross-chain hack feed) ===\n"
                      + "\n".join(f"- {c}" for c in corr))
     if web_rep and web_rep.get("hits"):
         parts.append("=== PUBLIC WEB REPUTATION FLAGS (real search results) ===\n"

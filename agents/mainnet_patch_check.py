@@ -143,7 +143,7 @@ def run():
 
 **Date:** {stamp}
 **Contract:** `{AGENT_NFT_V2_IMPL}` (AgentNftV2 implementation, Base 8453)
-**Source:** live Basescan/Etherscan V2 verified source fetch
+**Source:** live on-chain verified source fetch
 
 ---
 
