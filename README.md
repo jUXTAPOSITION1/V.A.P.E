@@ -26,7 +26,7 @@ pinned: false
 ![Base](https://img.shields.io/badge/Chain-Base-0052FF?style=flat-square&logo=coinbase&logoColor=white)
 ![x402](https://img.shields.io/badge/Payments-x402-22D3EE?style=flat-square)
 ![ACP](https://img.shields.io/badge/Protocol-Virtuals_ACP-8B5CF6?style=flat-square)
-![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2354988-10B981?style=flat-square)
+![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2359900-10B981?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Compute](https://img.shields.io/badge/local_compute-%240-10B981?style=flat-square)
 
@@ -51,8 +51,10 @@ on GitHub Actions at zero local compute cost, watching Base and the Virtuals eco
 publishes exactly what it finds — a token security scan, a market anomaly, a completed
 investigation — with the evidence attached, never just a conclusion.
 
-It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #54988**,
-wallet `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, settling every paid engagement in USDC
+It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #59900**
+(wallet `0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15`, basename `vapex402.base.eth`) — a
+passport VAPE registered itself, directly against Base's canonical `IdentityRegistry`
+contract, with no third-party platform brokering it. Every paid engagement settles in USDC
 on Base. **x402 is VAPE's primary commerce rail** — 27 of its 31 offerings are hireable
 instantly with a wallet-signed HTTP payment, no account or escrow step, settled directly
 against a hosted x402 facilitator on Base mainnet. The remaining offerings (deeper,

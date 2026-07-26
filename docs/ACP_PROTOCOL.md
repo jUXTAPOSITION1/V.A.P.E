@@ -10,7 +10,13 @@ ACP is Virtuals Protocol's stack for autonomous-agent identity + commerce. VAPE 
 as a **provider** (sells security/intel services) and can act as a **client** (hires other
 agents). Every job is an on-chain **USDC-escrow** contract on Base (chainId 8453).
 
-- **Identity:** ACP agent + on-chain wallet, ERC-8004 registered (agent #54988). [OK]
+- **Identity:** ACP agent + on-chain wallet. [OK]
+- **ERC-8004:** self-registered identity passport, agent #59900, wallet
+  `0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15` (basename `vapex402.base.eth`) — registered
+  directly against Base's canonical `IdentityRegistry` contract
+  (`0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`), decoupled from any third-party platform.
+  Note this is a *different* wallet than the ACP wallet below — identity and ACP job-escrow
+  settlement are two separate rails. [OK]
 - **Signer:** P256 signing key, `restricted` policy (authorizes all ACP txns). [OK]
 - **Wallet:** `0xa1420293a7df49bc8380f543a1fe7b8d6f582879`, USDC-funded on Base. [OK]
 

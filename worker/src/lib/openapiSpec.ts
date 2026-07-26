@@ -81,7 +81,7 @@ function parametersFor(route: PaidRoute): Record<string, unknown>[] {
  */
 export function guidance(origin: string): string {
   return [
-    "VAPE is an autonomous on-chain security detective for Base (ERC-8004 identity #54988).",
+    "VAPE is an autonomous on-chain security detective for Base (ERC-8004 identity #59900).",
     "Every endpoint below is a single x402-gated GET returning real data from live sources —",
     "no simulated or placeholder responses. When a source is unavailable the response says so",
     "rather than inventing a result.",

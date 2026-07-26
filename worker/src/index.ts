@@ -564,7 +564,8 @@ app.use("*", async (c, next) => {
 app.get("/", (c) =>
   c.json({
     agent: "VAPE",
-    erc8004: 54988,
+    erc8004: 59900,
+    erc8004_contract: "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
     protocol: "x402",
     offerings: [
       ...Object.entries(OFFERING_PRICES).map(([name, price]) => ({ name, price, route: `/scan/${name}` })),
