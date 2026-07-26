@@ -1200,8 +1200,31 @@ for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
 // registered in the middleware above. Same job-draft/onAfterSettle logging as
 // /scan/* so these show up in the live x402 feed too. address is optional here
 // (many of these tools are chain- or protocol-scoped, not token-scoped).
+//
+// Real gap this closes (direct user report: unlocks("aptos") -- this repo's
+// own built-in example -- intermittently still 402'd live even after
+// defillama.ts's fallback logic was fixed and confirmed correct against real
+// upstream data from a GitHub Actions run): worker/src/lib/defillama.ts's own
+// module docstring says per-route caching is "handled by Hono's `cache`
+// middleware in index.ts", but none of these /data/* routes actually had it
+// wired in -- every single request re-fetched DefiLlama AND CoinGecko fully
+// fresh, for every visitor, all day. CoinGecko's free tier has a strict
+// per-IP rate limit, and Cloudflare Workers share a small pool of egress IPs
+// across unrelated tenants' traffic -- exactly the kind of shared-IP quota
+// exhaustion this repo already hit and documented for GitHub-hosted runners
+// (see agents/x402_directory_register.py's _post() docstring); a live 429
+// from either upstream would flow through unlocks()'s existing honest-error
+// path and surface as the same raw 402 the emission-endpoint fallback was
+// built to avoid, unpredictably, load-dependently, and invisibly to this
+// session's own testing (GitHub Actions runners use different egress IPs
+// than Cloudflare's, so a live run there can't reproduce a Cloudflare-side
+// rate limit). cache()'s default cacheableStatusCodes is [200] only, so a
+// transient upstream failure (502 here) is never cached -- only a real,
+// successful deliverable is, and only for a short, deliberately-conservative
+// window given some of these fields (prices) are more time-sensitive than
+// others (chain TVL, treasury composition).
 for (const o of DL_OFFERINGS) {
-  app.get(`/data/${o.name}`, async (c) => {
+  app.get(`/data/${o.name}`, cache({ cacheName: `vape-data-${o.name}`, cacheControl: "max-age=180" }), async (c) => {
     const q: DlQuery = {
       address: c.req.query("address") || undefined,
       chain: c.req.query("chain") || undefined,
