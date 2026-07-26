@@ -14,14 +14,14 @@ while holding the line: **maximum capability, lowest possible compute, real data
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 30 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 31 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
-**22 of 30 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+**21 of 31 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
 `HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
 the x402 side) covers all of them:
 
@@ -34,14 +34,16 @@ the x402 side) covers all of them:
 | market_intel | 0.07 | `build_market_context()` | [OK] auto, x402 |
 | dossier_check | 0.10 | `investigate.quick_assess` (score + meme-factory + hack corr + web-reputation search) + declared-socials scrape + frontier-LLM quick source read | [OK] auto, x402 |
 | bounty_deep_dive | 1.00 | Address target: `agents/deep_dive_audit.py` — real Slither + Halmos symbolic testing (`agents/scaffold_foundry_target.py`) + frontier-model source review, dispatched async via `deep-dive-bounty.yml`. Owner/repo target (e.g. Move/Sui, or any bounty program's own source repo): `agents/external_audit.py`, dispatched async via `external-bounty-audit.yml`. Either way: x402 pays first, GH Actions job runs, a submission-ready PoC report lands in `intel/audits/poc-reports/` or `intel/audits/external-bounties/` as soon as it completes — no fixed turnaround. | [OK] auto (async), x402 |
-| community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` | [OK] auto, ACP-only |
+| community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` (x402: `worker/src/lib/communityBroadcast.ts`) | [OK] auto, x402 + ACP |
 | 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
 | wallet_pnl_deepdive | 0.25 | x402 (`worker/src/dataHandlers.ts`): Alchemy balances + CoinGecko-priced unrealized-P&L estimate, Base only — rebuilt off Codex after its wallet-analytics fields turned out to be paid-plan-gated ("Not authorized: please upgrade your plan"). ACP path (`agents/acp_fulfill.py`/`agents/codex_data.py`) still calls Codex directly and hits that same gate — not yet ported to the Alchemy path. | [OK] auto, x402 · [TBD] ACP path still Codex-gated |
 | prediction_market_odds | 0.01 | `agents/prediction_markets.py` / `worker/src/lib/predictionMarkets.ts` (Polymarket + Kalshi: crypto/Base-relevant odds, ranked by volume) | [OK] auto, x402 |
-| deep_contract_audit | 1.00 | SKILLFORGE static tier (slither/aderyn/mythril) | [TBD] manual — needs the runner/tool tier, not yet an auto-handler |
+| deep_contract_audit | 1.00 | x402: address-only alias of `bounty_deep_dive`'s same real async audit pipeline (`worker/src/index.ts`'s `dispatchAddressAuditJob`) — Slither/Halmos/Mythril/Aderyn + frontier-model review, dispatched via `deep-dive-bounty.yml` | [OK] auto (async), x402 · [TBD] ACP path still manual (not in `acp_fulfill.py`'s `HANDLERS`) |
+| tx_decode | 0.05 | x402 (`worker/src/lib/txDecode.ts`): synchronous Etherscan + 4byte.directory decode | [OK] auto, x402 · [TBD] ACP path still manual |
+| bulk_safety_bundle | 0.50 | x402 (`worker/src/lib/bulkSafetyBundle.ts`): 5-25 addresses, one flat price | [OK] auto, x402 · [TBD] ACP path still manual |
 | forensics_deep | 2.00 | wallet_trace + contract_recon | [TBD] manual — wallet_trace itself is now [OK] Alchemy-backed and live-verified (PR #145); an auto-handler for this offering still isn't wired |
 | wallet_recon | 0.03 | base_rpc / wallet_trace | [TBD] manual, same gap as forensics_deep |
-| whale_watch / tx_decode / bulk_safety_bundle / partner_referral | 0.10 / 0.05 / 0.50 / 0.01 | mapped, monitor handler | [TBD] manual |
+| whale_watch / partner_referral | 0.10 / 0.01 | mapped, monitor handler | [TBD] manual, no x402 route either |
 
 ### Data flow (the loop that earns)
 ```
@@ -59,7 +61,10 @@ ACP job.funded  ─► reasoning handler ─► acp_fulfill.fulfill(offering, re
 ### Next ACP steps
 1. [OK] shipped — **`scripts/acp-monitor/auto_fulfill.py`** imports `acp_fulfill.fulfill`/
    `HANDLERS` directly: the monitor calls it for all 21 auto-offerings, only escalating to
-   a human/manual path for the remaining 8. Most jobs settle with **zero LLM cost** (pure
+   a human/manual path for the remaining 10 on the ACP rail — several of those (`deep_contract_audit`,
+   `tx_decode`, `bulk_safety_bundle`) already auto-fulfill on the x402 rail since the
+   recent parity work gave each a real route there; only their ACP path still needs a
+   human/runner. Most jobs settle with **zero LLM cost** (pure
    tool output) — `dossier_check`/`community_intel_broadcast` are the only auto-offerings
    that spend an LLM call at all.
 2. [TBD] proposed — **Self-listing refresh from GitHub**: a workflow that regenerates
@@ -221,7 +226,8 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 22 of 30 offerings auto-fulfill.
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 31 offerings auto-fulfill
+   on ACP; 27 total are x402-payable (see the offerings table above).
 2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/

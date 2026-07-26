@@ -52,11 +52,12 @@ can call them directly; see component 6 below.
 
 ### How VAPE gets paid — two independent, real-money rails
 
-28 live offerings total: 20 are x402-payable (instant, no account needed), 8 need a
-real ACP job (manual/SKILLFORGE-tool-tier work no synchronous HTTP route can do in a
-few seconds). Both rails pay into the same wallet; neither is a demo — the x402 side
-runs on **Base mainnet** via Coinbase Developer Platform's hosted facilitator, real
-USDC, real settlement transactions.
+31 live offerings total (`data/reputation.json`'s `capabilities.offerings_live`): 27 are
+x402-payable (instant, no account needed), 4 need a real ACP job (manual/
+SKILLFORGE-tool-tier work no synchronous HTTP route can do in a few seconds). Both
+rails pay into the same wallet; neither is a demo — the x402 side runs on **Base
+mainnet** via Coinbase Developer Platform's hosted facilitator, real USDC, real
+settlement transactions.
 
 ```
 ┌─────────────────────────────┐        ┌──────────────────────────────────────┐
@@ -75,10 +76,10 @@ USDC, real settlement transactions.
 │      │                      │        │  settles on-chain                     │
 │      ▼                      │        │      │                                │
 │  escrow released to VAPE    │        │      ▼                                │
-│  (8 ACP-only offerings:     │        │  onAfterSettle logs real payer/tx_hash │
-│  wallet_recon, tx_decode,   │        │  to KV (lib/jobLog.ts) ──► live feed   │
-│  deep_contract_audit,       │        │  (docs/assets/x402feed.js), tx linked  │
-│  forensics_deep, etc.)      │        │  straight to Basescan                  │
+│  (4 ACP-only offerings:     │        │  onAfterSettle logs real payer/tx_hash │
+│  wallet_recon, whale_watch, │        │  to KV (lib/jobLog.ts) ──► live feed   │
+│  forensics_deep,            │        │  (docs/assets/x402feed.js), tx linked  │
+│  partner_referral)          │        │  straight to Basescan                  │
 └─────────────────────────────┘        └──────────────────────────────────────┘
               │                                          │
               └────────────────┬─────────────────────────┘
@@ -94,7 +95,7 @@ USDC, real settlement transactions.
      human buyer would use, capped at 48 hires/day (2/hour).
 ```
 
-The 20 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+The 27 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($1, async — pays, then dispatches either
 `.github/workflows/deep-dive-bounty.yml` (an on-chain address target — real
 Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
@@ -102,10 +103,14 @@ Aderyn static AST analysis + frontier-model source review) or
 `.github/workflows/external-bounty-audit.yml` (a GitHub owner/repo target,
 e.g. Move/Sui or any bounty program's own source repo — `agents/external_audit.py`),
 returning immediately either way since neither can finish inside a Worker's
-request window) + 13 DefiLlama market-data micro-tools ($0.01 each — `token_intel`,
-`chain_overview`, `yields`, `stablecoins`, `bridges`, etc. — `derivatives` was
-retired 2026-07-14 when DefiLlama paywalled its overview/derivatives endpoint
-with no free equivalent). Advertised for discovery
+request window) + 5 more offerings closing the earlier ACP/x402 parity gap
+(`deep_contract_audit`, `tx_decode`, `community_intel_broadcast`,
+`bulk_safety_bundle`, and the new synchronous `website_review`) + 15 DefiLlama/
+market-data micro-tools ($0.01-$0.25 each — `token_intel`, `chain_overview`,
+`yields`, `stablecoins`, `bridges`, `wallet_pnl_deepdive`,
+`prediction_market_odds`, etc. — `derivatives` was retired 2026-07-14 when
+DefiLlama paywalled its overview/derivatives endpoint with no free equivalent).
+Advertised for discovery
 via the x402 Bazaar extension and a claimed listing on
 [402index.io](https://402index.io) (`/.well-known/402index-verify.txt` proves domain
 ownership). A handful of free, unpaid Alchemy-backed routes (`/portfolio`, `/nfts`,
@@ -133,8 +138,8 @@ component's state changes.
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
 | `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 22 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 30 total: 22 x402-payable, 8 ACP-only — see component 4 |
+| `worker/` (x402) | [OK] | 27 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 31 total: 27 x402-payable, 4 ACP-only — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
@@ -388,7 +393,7 @@ and rebuildable) is the read-side complement: append-only JSONL stays the source
 the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
 
 ### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
-28 live offerings across two independent, real-money rails — see the payment-rails
+31 live offerings across two independent, real-money rails — see the payment-rails
 diagram above for the full flow. Both settle into the same wallet
 (`0xa1420293a7df49bc8380f543a1fe7b8d6f582879`); neither is a demo.
 
@@ -396,12 +401,14 @@ diagram above for the full flow. Both settle into the same wallet
 funds → completes at near-zero compute. 3 layers: persistent `acp events listen`
 daemon (zero LLM) → drain+triage loop (zero LLM) → reasoning handler that fires only
 on a real funded job. Escrow-backed on Base, `docs/ACP_PROTOCOL.md` is the full
-reference. *(Operational layer; runs on the host alongside the repo.)* 8 offerings are
-ACP-only (`wallet_recon`, `tx_decode`, `whale_watch`, `community_intel_broadcast`,
-`bulk_safety_bundle`, `deep_contract_audit`, `forensics_deep`, `partner_referral`) —
-manual or SKILLFORGE-tool-tier work no synchronous HTTP route can complete in seconds.
+reference. *(Operational layer; runs on the host alongside the repo.)* Only 4
+offerings remain ACP-only (`wallet_recon`, `whale_watch`, `forensics_deep`,
+`partner_referral`) — manual or SKILLFORGE-tool-tier work no synchronous HTTP route
+can complete in seconds. `tx_decode`, `community_intel_broadcast`,
+`bulk_safety_bundle`, and `deep_contract_audit` used to be ACP-only too, until the
+x402/ACP parity work gave each a real x402 route (see component 4's x402 list below).
 
-**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 20
+**x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 27
 routes with `@x402/hono` middleware against **Base mainnet** — real EIP-3009 signed
 authorizations, real on-chain settlement, not a testnet demo. Every request is
 routed through a real 50/50 hybrid split between VAPOR (our own facilitator,
