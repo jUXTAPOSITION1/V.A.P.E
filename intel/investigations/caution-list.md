@@ -1,9 +1,15 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-25T22:01:51Z — 50 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-26T02:06:34Z — 56 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| AS | Polygon | `0x6A92B1E99De09f71CD96BC91F934826d96B8b26E` | 53/100 | 1 | 2026-07-26T02:06:34Z |
+| EUL | Ethereum | `0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b` | 65/100 | 1 | 2026-07-26T01:36:14Z |
+| QUICK | Polygon | `0xB5C064F955D8e7F38fE0460C556a72987494eE17` | 74/100 | 1 | 2026-07-26T00:35:07Z |
+| EBCC | Polygon | `0x49DDee75D588b79a3eB1225dd386644eeeeeaF08` | 70/100 | 1 | 2026-07-26T00:19:59Z |
+| AIPF | Polygon | `0x2c72D25530191EBD244Eb6325E1892480b0e6E28` | 73/100 | 1 | 2026-07-25T23:49:24Z |
+| TAROT | Optimism | `0x1F514A61bcde34F94Bc39731235690ab9da737F7` | 63/100 | 1 | 2026-07-25T22:16:56Z |
 | VC | Base | `0x271415A029602f9c370D022aDEba703F172c79fF` | 60/100 | 1 | 2026-07-25T21:46:33Z |
 | ANT | Arbitrum | `0xa78d8321B20c4Ef90eCd72f2588AA985A4BDb684` | 70/100 | 1 | 2026-07-25T21:31:13Z |
 | SHIB | Ethereum | `0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE` | 77/100 | 1 | 2026-07-25T20:29:38Z |

@@ -503,3 +503,33 @@
 | 2026-07-25 | auto | 0x271415A029602f9c370D022aDEba703F172c79fF (VC) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 105% of supply — concentrated, easily manipul | +7d |
 
 | 2026-07-25 | auto | 0x2A168c00310451E7024E1149A433c796c72d515D (CTM) | deep_investigation | REJECT (38/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x1F514A61bcde34F94Bc39731235690ab9da737F7 (TAROT) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0xf280B16EF293D8e534e370794ef26bF312694126 (ASTEROID) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-25 | auto | 0xAFF2565091E7207191dBe340B8528D02FA78d044 (ASTEROID) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-25 | auto | 0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10 (ASTEROID) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x375488F097176507e39B9653b88FDc52cDE736Bf (TAROT) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-25 | auto | 0x2c72D25530191EBD244Eb6325E1892480b0e6E28 (AIPF) | deep_investigation | CAUTION (73/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0x1e9909F1c7051aD4Bf4496A345736dCEdC2A3Cfd (LTZ) | deep_investigation | REJECT (5/100) | Very few holders (32) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-26 | auto | 0x49DDee75D588b79a3eB1225dd386644eeeeeaF08 (EBCC) | deep_investigation | CAUTION (70/100) | Top 9 non-LP/burn holders control 100% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-26 | auto | 0xB5C064F955D8e7F38fE0460C556a72987494eE17 (QUICK) | deep_investigation | CAUTION (74/100) | Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) — can still act | +7d |
+
+| 2026-07-26 | auto | 0x831753DD7087CaC61aB5644b308642cc1c33Dc13 (QUICK) | deep_investigation | PROCEED (90/100) | Owner not renounced (0xa6fa4fb5f76172d178d61b04b0ecd319c5d1c0aa) — can still act | +7d |
+
+| 2026-07-26 | auto | 0xD90b9773f9922A34F763087665B3A4649E710326 (ARBI) | deep_investigation | REJECT (32/100) | Low holder count (162) | +7d |
+
+| 2026-07-26 | auto | 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359 (USDC) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-26 | auto | 0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b (EUL) | deep_investigation | CAUTION (65/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0xC5667DC06597ab4d2276EcE522918d7Fd8A578a4 (EUL) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-26 | auto | 0x6A92B1E99De09f71CD96BC91F934826d96B8b26E (AS) | deep_investigation | CAUTION (53/100) | Mintable supply (dilution risk) | +7d |
