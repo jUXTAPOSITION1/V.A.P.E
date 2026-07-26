@@ -4421,7 +4421,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4449,7 +4449,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4479,7 +4479,7 @@
     "bountyFitScore": 55,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4508,7 +4508,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4536,7 +4536,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4565,7 +4565,7 @@
     "bountyFitScore": 65,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4594,7 +4594,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4622,7 +4622,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4650,7 +4650,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4681,7 +4681,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4709,7 +4709,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4738,7 +4738,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4765,7 +4765,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4793,7 +4793,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -4830,7 +4830,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784496534.4938145,
+      "checkedAt": 1785109026.3615408,
       "ok": true
     }
   },
@@ -26667,5 +26667,25 @@
     "fitScore": 87,
     "isNew": true,
     "firstSeen": "2026-07-26T21:31:41.806766Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Cascade Liquidity Strategy-1784073600",
+    "name": "Cascade Liquidity Strategy (exploit $1,340,000)",
+    "prizeUsd": 1340000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "arbitrum"
+    ],
+    "desc": "Price Oracle Manipulation on Arbitrum. Lead for incident response + forensics.",
+    "fitScore": 86,
+    "isNew": true,
+    "firstSeen": "2026-07-26T23:37:06.361390Z"
   }
 ]
