@@ -545,3 +545,5 @@
 | 2026-07-26 | auto | 0xAc9ce2775B918C4d4fddEcB772064637c292C295 (SOSO) | deep_investigation | REJECT (30/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0x35e9e9A79756e952B9EA358Be79D7faa8D9381a0 (DIM) | deep_investigation | CAUTION (50/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-26 | auto | 0xAF895F7718dBc701418FcFeFaBadA961848a79b2 (DIM) | deep_investigation | REJECT (17/100) | Low holder count (51) | +7d |

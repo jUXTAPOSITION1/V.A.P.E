@@ -1102,6 +1102,25 @@
     "symbol": "H420",
     "times_investigated": 1
   },
+  "1:0xaf895f7718dbc701418fcfefabada961848a79b2": {
+    "address": "0xAF895F7718dBc701418FcFeFaBadA961848a79b2",
+    "chain": "1",
+    "creator_address": "0x05eb9c73e62afee982520b35cc4e58aee8f33d6c",
+    "first_investigated": "2026-07-26T04:09:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-040933-0xAF895F77.md",
+        "score": 17,
+        "ts": "2026-07-26T04:09:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T04:09:33Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "DIM",
+    "times_investigated": 1
+  },
   "1:0xaff2565091e7207191dbe340b8528d02fa78d044": {
     "address": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
     "chain": "1",
