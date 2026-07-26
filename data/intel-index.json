@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T04:40:05Z",
+  "generated": "2026-07-26T04:55:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 111,
-    "investigations": 360,
+    "investigations": 361,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-044005-0x0Fa73480.md",
-      "title": "Investigation \u2014 SHIB",
-      "symbol": "SHIB",
-      "name": "SHIBA INU",
-      "date": "2026-07-26T04:40:05Z",
-      "target": "0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260726-045525-0x85bAbbd6.md",
+      "title": "Investigation \u2014 gLGNS",
+      "symbol": "gLGNS",
+      "name": "gLGNS",
+      "date": "2026-07-26T04:55:25Z",
+      "target": "0x85bAbbd6124589F5Ef3AE12a2745267cc1852f42",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EUL (0xbB0191DA27aff1ad391F85B8DFAa2eBb0219342C) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders c",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-044005-0x0Fa73480.md"
+      "score": "7",
+      "summary": "Risk factors: [-8] Low holder count (68); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $41 (rug/illiquid); [-10] Low liquidity $41; [-10] Violent 24h move +166% (vola",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-045525-0x85bAbbd6.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260726-045525-0x85bAbbd6.md",
+      "title": "Investigation \u2014 gLGNS",
+      "symbol": "gLGNS",
+      "name": "gLGNS",
+      "date": "2026-07-26T04:55:25Z",
+      "target": "0x85bAbbd6124589F5Ef3AE12a2745267cc1852f42",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-8] Low holder count (68); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $41 (rug/illiquid); [-10] Low liquidity $41; [-10] Violent 24h move +166% (vola",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-045525-0x85bAbbd6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-044005-0x0Fa73480.md",
@@ -593,20 +607,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: 3923 holders \u2014 reasonably distributed; Top holders control only 1% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 938+ days without a known incident in this scan; Custom verif",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-182745-0x2598c303.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260725-181242-0x4d7078DD.md",
-      "title": "Investigation \u2014 AI",
-      "symbol": "AI",
-      "name": "Gensyn",
-      "date": "2026-07-25T18:12:42Z",
-      "target": "0x4d7078DDd6cCFED2F85dB5B7D3Ff16828d378d48",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5004 holders \u2014 reasonably distributed; Custom verified source (no",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260725-181242-0x4d7078DD.md"
     }
   ],
   "reports": [

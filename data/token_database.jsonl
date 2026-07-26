@@ -21,3 +21,4 @@
 {"ts": "2026-07-25T21:00:19.818957Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-25T23:18:40.272129Z", "address": "0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5", "chain": "8453", "symbol": "NTFS", "name": "NTFS", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-26T02:37:17.336958Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-07-26T04:55:37.263584Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "liquidity_check"}
