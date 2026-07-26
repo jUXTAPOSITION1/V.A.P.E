@@ -26,3 +26,4 @@
 {"ts": "2026-07-26T11:56:27.580473Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-26T16:26:38.588789Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-26T20:42:16.090547Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "exploit_check"}
+{"ts": "2026-07-26T21:12:20.592190Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "token_chart"}

@@ -619,3 +619,5 @@
 | 2026-07-26 | auto | 0xcB362b3701eF6F811DCdCd702482812D0Cf34444 (DCA) | deep_investigation | REJECT (40/100) | Very few holders (5) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-26 | auto | 0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8 (CATE) | deep_investigation | PROCEED (90/100) | Violent 24h move +667% (volatility/manipulation) | +7d |
+
+| 2026-07-26 | auto | 0xF39e4b21c84e737Df08e2C3b32541d856f508E48 (ESPORTS) | deep_investigation | REJECT (40/100) | Hidden owner | +7d |

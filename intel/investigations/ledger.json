@@ -2451,6 +2451,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0xf39e4b21c84e737df08e2c3b32541d856f508e48": {
+    "address": "0xF39e4b21c84e737Df08e2C3b32541d856f508E48",
+    "chain": "56",
+    "creator_address": "0x30bce4fd778db6e9168b67857cbd85d48fe02370",
+    "first_investigated": "2026-07-26T21:12:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260726-211213-0xF39e4b21.md",
+        "score": 40,
+        "ts": "2026-07-26T21:12:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-26T21:12:13Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "ESPORTS",
+    "times_investigated": 1
+  },
   "56:0xf4b385849f2e817e92bffbfb9aeb48f950ff4444": {
     "address": "0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444",
     "chain": "56",
