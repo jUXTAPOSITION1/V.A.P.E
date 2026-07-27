@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T15:16:37Z",
+  "generated": "2026-07-27T17:13:15Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,12 +13,12 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 193,
-    "intel_reports": 304,
-    "intel_broadcasts": 115,
-    "catalog_investigations": 333,
+    "reports_published": 197,
+    "intel_reports": 307,
+    "intel_broadcasts": 116,
+    "catalog_investigations": 336,
     "token_scans_logged": 0,
-    "skills_codified": 20,
+    "skills_codified": 21,
     "tools_total": 16,
     "tools_verified": 16,
     "tool_tiers": {
@@ -34,10 +34,10 @@
         "number": 316,
         "title": "Arbitrum Transaction Tracer for Defillama-Hack Incidents",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/316",
         "created_at": "2026-07-27T12:17:26Z",
-        "closed_at": null,
+        "closed_at": "2026-07-27T15:39:24Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -129,7 +129,7 @@
         }
       }
     ],
-    "work_log_entries": 256,
+    "work_log_entries": 257,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260706",
     "latest_report": "20260727"
