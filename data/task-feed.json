@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-27T10:55:48Z",
-  "synthesis": "VAPE's automation ran repeated featured investigations, security and bounty sweeps, a community broadcast, cache refreshes, findings sealing, and report archiving.",
+  "generated": "2026-07-27T11:10:33Z",
+  "synthesis": "VAPE's automation repeatedly generated featured investigations while running sweeps, a community broadcast, cache refresh, findings sealing, and bounty radar tasks.",
   "tasks": [
+    {
+      "sha": "f69a254dd5",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T10:55Z",
+      "date": "2026-07-27T10:55:50Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f69a254dd5b3519d50614608ea5cb386ace6f4bd"
+    },
     {
       "sha": "c4aecefcad",
       "kind": "sweep",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-07-27T08:56Z",
       "date": "2026-07-27T08:56:27Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8317ffcf7635873757989ec0ca2c4915219b1d3c"
-    },
-    {
-      "sha": "8d459ef6c6",
-      "kind": "automation",
-      "message": "archive: fold aged reports into intel/archive/ 2026-07-27T08:51Z",
-      "date": "2026-07-27T08:51:46Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8d459ef6c6cdb8816c546951e451dbae6fa2b438"
     }
   ]
 }
