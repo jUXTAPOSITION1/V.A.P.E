@@ -1307,6 +1307,24 @@
     "symbol": "DIM",
     "times_investigated": 1
   },
+  "1:0x9d02e97177073fb92a0f3f75ca36d56fdafe2bca": {
+    "address": "0x9d02E97177073FB92A0F3F75CA36D56fdAfe2bcA",
+    "chain": "1",
+    "first_investigated": "2026-07-27T01:27:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-012738-0x9d02E971.md",
+        "score": 20,
+        "ts": "2026-07-27T01:27:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T01:27:38Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "SHIB",
+    "times_investigated": 1
+  },
   "1:0xa00453052a36d43a99ac1ca145dfe4a952ca33b8": {
     "address": "0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8",
     "chain": "1",
