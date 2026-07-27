@@ -667,3 +667,5 @@
 | 2026-07-27 | auto | 0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581 (RWA) | deep_investigation | REJECT (32/100) | Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) — can still act | +7d |
 
 | 2026-07-27 | auto | 0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C (RWA) | deep_investigation | CAUTION (60/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-27 | auto | 0xf3610Dbfe8E3e469cbF8594aD9830efb12aa4444 (AEON) | deep_investigation | CAUTION (57/100) | Top 10 non-LP/burn holders control 64% of supply — meaningful concentration | +7d |

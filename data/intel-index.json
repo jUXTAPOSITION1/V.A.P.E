@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T17:59:51Z",
+  "generated": "2026-07-27T18:15:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 382,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 428,
+    "investigations": 429,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-171331-0xfCF79856.md",
-      "title": "Investigation \u2014 RWA",
-      "symbol": "RWA",
-      "name": "RWA-AI",
-      "date": "2026-07-27T17:13:31Z",
-      "target": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260727-181455-0xf3610Dbf.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON Binance",
+      "date": "2026-07-27T18:14:55Z",
+      "target": "0xf3610Dbfe8E3e469cbF8594aD9830efb12aa4444",
+      "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $18,513. Positive evidence: Ownership renounced; 722 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 837+ da",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-171331-0xfCF79856.md"
+      "score": "57",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-10] Violent 24h move +4923% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-181455-0xf3610Dbf.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-181455-0xf3610Dbf.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON Binance",
+      "date": "2026-07-27T18:14:55Z",
+      "target": "0xf3610Dbfe8E3e469cbF8594aD9830efb12aa4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-10] Violent 24h move +4923% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-181455-0xf3610Dbf.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-171331-0xfCF79856.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 200% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $11,961; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-175640-0x1257d823.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-174131-0x9BE98a03.md",
-      "title": "Investigation \u2014 DIM",
-      "symbol": "DIM",
-      "name": "Dormant Inventory Mechanism",
-      "date": "2026-07-26T17:41:31Z",
-      "target": "0x9BE98a036f654040d39caF0F4530e95A4f890274",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,171; [-10] Violent 24h move +171% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-174131-0x9BE98a03.md"
     }
   ],
   "reports": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49188456",
+      "version": "49193311",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.51 eth_dom 10.16 mcap_chg_24h -0.21",
+      "version": "btc_dom 56.56 eth_dom 10.17 mcap_chg_24h 0.23",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xe04f00072c0c PONS 7.0 from 0x9153a610 to 0x833589fc",
+      "version": "0x1e959c517ea5 (RNDR) 639.25880132 from 0x3935fa9a to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

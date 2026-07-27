@@ -2902,6 +2902,25 @@
     "symbol": "NightDriver",
     "times_investigated": 1
   },
+  "56:0xf3610dbfe8e3e469cbf8594ad9830efb12aa4444": {
+    "address": "0xf3610Dbfe8E3e469cbF8594aD9830efb12aa4444",
+    "chain": "56",
+    "creator_address": "0x44448e8dee435a8041619ab5df0b2fdc116b07b0",
+    "first_investigated": "2026-07-27T18:14:55Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-181455-0xf3610Dbf.md",
+        "score": 57,
+        "ts": "2026-07-27T18:14:55Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T18:14:55Z",
+    "last_score": 57,
+    "last_verdict": "CAUTION",
+    "symbol": "AEON",
+    "times_investigated": 1
+  },
   "56:0xf39e4b21c84e737df08e2c3b32541d856f508e48": {
     "address": "0xF39e4b21c84e737Df08e2C3b32541d856f508E48",
     "chain": "56",
