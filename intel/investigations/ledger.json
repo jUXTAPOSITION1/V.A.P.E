@@ -1935,6 +1935,25 @@
     "symbol": "YLD",
     "times_investigated": 1
   },
+  "1:0xfcf7985661d2c3f62208970cbe25e70bcce73e7c": {
+    "address": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
+    "chain": "1",
+    "creator_address": "0x4b4a94b06cfbba289bf6013aea154a46a9a09705",
+    "first_investigated": "2026-07-27T17:13:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-171331-0xfCF79856.md",
+        "score": 60,
+        "ts": "2026-07-27T17:13:31Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T17:13:31Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "RWA",
+    "times_investigated": 1
+  },
   "1:0xfdcd8be9dd37cf982472d30eeee4ec50a0296953": {
     "address": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
     "chain": "1",

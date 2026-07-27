@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-27T16:58:36Z",
-  "synthesis": "VAPE's automation ran repeated sweeps, featured investigations, threat analyses, x402 registrations, repo reviews, and tool checks on 2026-07-27.",
+  "generated": "2026-07-27T17:13:36Z",
+  "synthesis": "VAPE",
   "tasks": [
+    {
+      "sha": "da7e26ae0b",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-27T17:13Z",
+      "date": "2026-07-27T17:13:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/da7e26ae0b95cc96e9b2d89c374253cc167166c6"
+    },
+    {
+      "sha": "43750409dc",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T16:58Z",
+      "date": "2026-07-27T16:58:38Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/43750409dcfe2190d48774eb62e09518576b3d52"
+    },
     {
       "sha": "ec82140b4b",
       "kind": "sweep",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-27T15:42Z",
       "date": "2026-07-27T15:42:18Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bab1c3c0cf5c3e1b85bc6f5ecede10359923e530"
-    },
-    {
-      "sha": "9a58633dc6",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-27T15:31Z",
-      "date": "2026-07-27T15:31:05Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9a58633dc62bb074c50f527ac0f7960fc4d90bf0"
-    },
-    {
-      "sha": "fb719ca66a",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-27T15:22Z",
-      "date": "2026-07-27T15:22:16Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fb719ca66af1f468ad4eff7467d2d740a5ccfc2b"
     }
   ]
 }

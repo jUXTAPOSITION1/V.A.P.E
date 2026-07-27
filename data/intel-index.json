@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T16:58:35Z",
+  "generated": "2026-07-27T17:13:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 381,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 427,
+    "investigations": 428,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-161238-0xA64aC4eC.md",
+      "file": "investigation-20260727-171331-0xfCF79856.md",
       "title": "Investigation \u2014 RWA",
       "symbol": "RWA",
-      "name": "Real World Acquisitions",
-      "date": "2026-07-27T16:12:38Z",
-      "target": "0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581",
+      "name": "RWA-AI",
+      "date": "2026-07-27T17:13:31Z",
+      "target": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) \u2014 can still act on the contract; [-8] Low holder count (66); [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +634% (volatility/manipulation); [-15] Pair only 0.8 days ol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-161238-0xA64aC4eC.md"
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $18,513. Positive evidence: Ownership renounced; 722 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 837+ da",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-171331-0xfCF79856.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-171331-0xfCF79856.md",
+      "title": "Investigation \u2014 RWA",
+      "symbol": "RWA",
+      "name": "RWA-AI",
+      "date": "2026-07-27T17:13:31Z",
+      "target": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $18,513. Positive evidence: Ownership renounced; 722 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 837+ da",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-171331-0xfCF79856.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-161238-0xA64aC4eC.md",
@@ -593,20 +607,6 @@
       "score": "20",
       "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,171; [-10] Violent 24h move +171% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-174131-0x9BE98a03.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-172628-0xf72a7beA.md",
-      "title": "Investigation \u2014 DIM",
-      "symbol": "DIM",
-      "name": "Dormant Inventory Mechanism",
-      "date": "2026-07-26T17:26:28Z",
-      "target": "0xf72a7beA38b6f61B731b496EbB67A97AD9c8C68A",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $25,871; [-10] Violent 24h move +242% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-172628-0xf72a7beA.md"
     }
   ],
   "reports": [

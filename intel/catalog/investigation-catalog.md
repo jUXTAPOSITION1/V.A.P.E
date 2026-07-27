@@ -665,3 +665,5 @@
 | 2026-07-27 | auto | 0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce (fBOMB) | deep_investigation | CAUTION (77/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-27 | auto | 0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581 (RWA) | deep_investigation | REJECT (32/100) | Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) — can still act | +7d |
+
+| 2026-07-27 | auto | 0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C (RWA) | deep_investigation | CAUTION (60/100) | Transfers can be paused by owner | +7d |
