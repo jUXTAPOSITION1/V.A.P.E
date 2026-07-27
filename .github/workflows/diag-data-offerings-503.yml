@@ -1,0 +1,24 @@
+name: Diagnose DL_OFFERINGS 503s (one-off)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# See scripts/diag_data_offerings_503.py -- reproduces, from a real runner
+# (the dev sandbox's egress proxy blocks the worker's own domain), the
+# "endpoint returned HTTP 503 instead of 402" failures a 402index.io
+# registration backfill hit for 11 of 15 /data/* routes.
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: python scripts/diag_data_offerings_503.py
