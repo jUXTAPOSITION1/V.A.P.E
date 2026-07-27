@@ -289,6 +289,7 @@ const AttackFeed = {
         wrap.addEventListener('mouseleave', () => this._resumeTicker());
         wrap.addEventListener('focusin', () => this._pauseTicker());
         wrap.addEventListener('focusout', () => this._resumeTicker());
+        this._wireTickerSwipe(wrap, line);
 
         this._slideIn();
     },
@@ -308,10 +309,15 @@ const AttackFeed = {
     _holdPhase() {
         this._phase = 'hold';
         this._runProgress();
-        this._rotateHandle = setTimeout(() => this._slideOut(), this.HOLD_MS);
+        this._rotateHandle = setTimeout(() => this._slideOut(1), this.HOLD_MS);
     },
 
-    _slideOut() {
+    // dir: 1 = advance (headline exits left, next enters from right — the
+    // existing auto-rotate direction), -1 = go back (headline exits right,
+    // previous entry re-enters from the left) — used by the swipe/drag
+    // gesture below so a manual "previous" feels like the mirror image of
+    // the automatic "next" rather than a different, unrelated motion.
+    _slideOut(dir) {
         const line = this._tickerLine;
         this._phase = 'out';
         if (this._tickerProgress) {
@@ -319,16 +325,95 @@ const AttackFeed = {
             this._tickerProgress.style.left = '105%';
         }
         line.style.transition = `transform ${this.SLIDE_MS}ms cubic-bezier(.6,0,.8,.2)`;
-        line.style.transform = 'translateX(-100%)';
+        line.style.transform = `translateX(${dir > 0 ? '-100%' : '100%'})`;
         this._rotateHandle = setTimeout(() => {
-            this._rotateIdx = (this._rotateIdx + 1) % this._tickerIncidents.length;
+            const len = this._tickerIncidents.length;
+            this._rotateIdx = (this._rotateIdx + dir + len) % len;
             line.style.transition = 'none';
-            line.style.transform = 'translateX(100%)';
+            line.style.transform = `translateX(${dir > 0 ? '100%' : '-100%'})`;
             line.innerHTML = this._tickerLineHtml(this._tickerIncidents[this._rotateIdx]);
             this._enhanceIcons(line);
             void line.offsetWidth;
             this._slideIn();
         }, this.SLIDE_MS);
+    },
+
+    // Manual swipe/drag navigation (touch on mobile, click-drag on desktop)
+    // — the ticker was auto-rotate-only before, with no way to deliberately
+    // go back to a headline that already scrolled past. Reuses the exact
+    // same slide pipeline as the auto-rotation so a manual nudge looks
+    // identical to the automatic one, just fired on demand and in either
+    // direction. Locked out mid-transition (_phase 'in'/'out') so a fast
+    // double-swipe can't desync _rotateIdx from what's actually on screen.
+    _manualNav(dir) {
+        if (!this._tickerIncidents || this._tickerIncidents.length < 2) return;
+        if (this._phase === 'in' || this._phase === 'out') return;
+        this._clearTickerTimer();
+        this._slideOut(dir);
+    },
+
+    // Pointer Events unify touch/mouse/pen in one listener set — swipe on a
+    // phone and click-drag with a mouse both work without separate touch*
+    // handlers. Threshold-gated (SWIPE_PX) so a normal tap still follows the
+    // wrapping <a href="#threat-ledger"> link instead of being eaten as a
+    // zero-distance "swipe"; only a real drag past the threshold both
+    // triggers navigation AND suppresses that click (see the capturing
+    // click listener below).
+    SWIPE_PX: 40,
+    _wireTickerSwipe(wrap, line) {
+        if (this._swipeWired) return;
+        this._swipeWired = true;
+        let startX = 0, dragging = false, moved = false, pointerId = null;
+
+        // Move/up are bound to window only while a drag is active (added on
+        // pointerdown, torn down on pointerup/cancel) rather than relying on
+        // Pointer Capture — besides tracking correctly if the pointer leaves
+        // the ticker's own bounds mid-swipe, this sidesteps a real headless-
+        // Chromium quirk confirmed while testing this: calling
+        // setPointerCapture() from inside the pointerdown handler could
+        // itself provoke an immediate synthetic `pointercancel` (clientX 0)
+        // moments later, which read as a huge spurious swipe.
+        const onMove = (e) => {
+            if (!dragging || e.pointerId !== pointerId) return;
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) > 6) moved = true;
+            // Clamp so a long drag doesn't fling the headline fully offscreen
+            // before release — it should feel like a rubber-banded nudge.
+            const clamped = Math.max(-120, Math.min(120, dx));
+            line.style.transform = `translateX(${clamped}px)`;
+        };
+        const endDrag = (e) => {
+            if (!dragging || e.pointerId !== pointerId) return;
+            dragging = false;
+            window.removeEventListener('pointermove', onMove);
+            window.removeEventListener('pointerup', endDrag);
+            window.removeEventListener('pointercancel', endDrag);
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) >= this.SWIPE_PX) {
+                // dx < 0 -> dragged left -> advance (dir 1); dx > 0 -> back (dir -1).
+                this._manualNav(dx < 0 ? 1 : -1);
+            } else {
+                line.style.transition = `transform ${this.SLIDE_MS}ms cubic-bezier(.22,.9,.32,1)`;
+                line.style.transform = 'translateX(0%)';
+                this._resumeTicker();
+            }
+        };
+        const onDown = (e) => {
+            if (!this._tickerIncidents || this._tickerIncidents.length < 2) return;
+            startX = e.clientX;
+            dragging = true;
+            moved = false;
+            pointerId = e.pointerId;
+            this._pauseTicker();
+            line.style.transition = 'none';
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', endDrag);
+            window.addEventListener('pointercancel', endDrag);
+        };
+        wrap.addEventListener('pointerdown', onDown);
+        // Capturing so this runs before the <a> follows its href — a real
+        // drag (not a tap) must not also navigate to #threat-ledger.
+        wrap.addEventListener('click', (e) => { if (moved) { e.preventDefault(); moved = false; } }, true);
     },
 
     _runProgress() {
