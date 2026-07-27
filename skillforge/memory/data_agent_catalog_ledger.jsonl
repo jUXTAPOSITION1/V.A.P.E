@@ -131,3 +131,4 @@
 {"ts": "2026-07-27T02:27:28.190527Z", "target": "none", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
 {"ts": "2026-07-27T02:57:40.350644Z", "target": "none", "hired": ["stablecoins"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
 {"ts": "2026-07-27T04:57:04.906479Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
+{"ts": "2026-07-27T05:27:15.725630Z", "target": "polygon", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
