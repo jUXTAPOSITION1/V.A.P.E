@@ -1,89 +1,114 @@
-/* VAPE — sleek, restrained desktop-terminal design system, modeled on the
-   VAPOR sister site (github.com/jUXTAPOSITION1/VAPOR/docs/assets/site.css).
-   Tailwind CDN handles utilities; this file holds the tokens, motion, and
-   the handful of custom classes Tailwind's utility set can't express:
-   flat hairline-bordered panels (no fill, no blur, no radius), a single
-   accent color, and terminal-style type. Functional data-colors (verdict
+/* VAPE — sleek, restrained dark UI, modeled on x402scan.com's card layout:
+   a clean sans-serif for UI text (titles, labels, body, buttons), monospace
+   reserved for real data (addresses, tx hashes, tabular numbers, CLI
+   examples) — filled, rounded-corner panels one shade lighter than the page
+   background, not flat hairline boxes. Functional data-colors (verdict
    severity, threat level, P&L sign, honeypot flag) are the one deliberate
-   exception — they stay wherever the markup/JS defines them, since they're
-   real data encoding, not chrome. */
+   exception to "everything else is white/zinc" — they stay wherever the
+   markup/JS defines them, since they're real data encoding, not chrome. */
 
 :root {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-sans);
     /* One accent, used sparingly (live dot, hairline highlights) — every
        other color on the page is white/zinc unless it's encoding real data. */
     --accent: #4ade80;
     --accent-dim: rgba(74, 222, 128, 0.14);
     --border: rgba(255, 255, 255, 0.10);
+    /* Page background stays near-black; panels sit one step lighter so they
+       read as distinct cards, matching x402scan's dark-grey-on-black offset. */
+    --bg-page: #09090b;
+    --bg-panel: #131316;
+    --bg-panel-sm: #15151a;
+    --radius-lg: 14px;
+    --radius-md: 10px;
+    --radius-sm: 8px;
 }
 
+/* Site-wide base scale — the previous 16px root made every Tailwind rem-based
+   utility (text-sm, text-xs, padding, gaps) read oversized once real content
+   density went up (search bars, pagination, dense data rows). 14px root
+   tightens all of that proportionally in one place rather than hand-editing
+   hundreds of utility classes. */
+html { scroll-behavior: smooth; font-size: 87.5%; }
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 
 body {
-    background: #09090b;
+    background: var(--bg-page);
     color: #d4d4d8;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
 }
 
-.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.font-mono { font-family: var(--font-mono); }
 
 /* Anchor-linked sections need headroom under the sticky nav, or a jump-to-#id
    click hides the heading right behind the bar. */
 section[id] { scroll-margin-top: 4.5rem; }
 
-/* Section headings: same size/weight/color as body text — a "> " prompt
-   prefix (written directly in the markup, not a ::before) marks it as a
-   heading instead of bold/oversized display type. */
+/* Section headings: the primary, bold title for each section — sans-serif,
+   clearly heavier/larger than sub-labels (h3s) and body copy, matching
+   x402scan's title/sub-label contrast (bold title, small muted labels below
+   it) rather than every heading reading at body weight. */
 .section-title {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #e4e4e7;
-    letter-spacing: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #f4f4f5;
+    letter-spacing: -0.01em;
 }
 
-/* Hero headline is the one deliberately-larger piece of type on the page —
-   still monospace, still with a "> " prefix, just set a step up from
-   .section-title for identity/impact rather than VAPOR's fully flat hero. */
+/* Hero headline is the single largest, boldest piece of type on the page —
+   sans-serif, same "> " prompt prefix kept for identity. */
 .hero-title {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-sans);
     font-size: 1.375rem;
-    line-height: 1.35;
-    font-weight: 500;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -0.015em;
     color: #f4f4f5;
 }
 @media (min-width: 640px) {
-    .hero-title { font-size: 1.75rem; }
+    .hero-title { font-size: 1.625rem; }
 }
 
-/* Bracket-tag eyebrow — replaces every colored icon-chip + uppercase
-   tracking-wide badge that used to precede a section title. */
+/* Bracket-tag eyebrow — small, muted sub-label ahead of a section title,
+   matching x402scan's "Resources / Tags / Activity" treatment. */
 .eyebrow {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+    font-weight: 500;
     color: #71717a;
     white-space: normal;
 }
+.eyebrow i { margin-right: 0.25rem; }
 
-/* A "panel" is a plain bordered section, not a filled card: no background
-   fill, no border-radius, no shadow — a hairline frame so content stays
-   legible without reading as a UI "widget". */
+/* A "panel" is a filled, rounded card — one shade lighter than the page
+   background — matching x402scan's dark-grey-card-on-black offset, not a
+   flat hairline frame. */
 .panel {
+    background: var(--bg-panel);
     border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     padding: 1.25rem;
 }
 @media (min-width: 640px) {
     .panel { padding: 1.75rem; }
 }
 .panel-sm {
+    background: var(--bg-panel-sm);
     border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     padding: 0.875rem;
 }
 
-/* A "popover" needs a solid fill (unlike .panel) since it floats over page
-   content — a fully transparent bordered box isn't legible there. */
+/* A "popover" floats over page content, so it always needed a solid fill —
+   now rounded to match every other panel. */
 .popover {
     border: 1px solid var(--border);
-    background: #09090b;
+    background: var(--bg-page);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
 }
 
 .term-btn {
@@ -93,9 +118,11 @@ section[id] { scroll-margin-top: 4.5rem; }
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     color: #e4e4e7;
     font-size: 0.875rem;
-    background: transparent;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.03);
     transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
 }
 .term-btn:hover {
@@ -110,6 +137,7 @@ section[id] { scroll-margin-top: 4.5rem; }
 .term-btn-sm {
     padding: 0.35rem 0.75rem;
     font-size: 0.75rem;
+    border-radius: 6px;
 }
 
 /* Live pulse dot — the one place motion + the accent color draw attention,
@@ -120,7 +148,10 @@ section[id] { scroll-margin-top: 4.5rem; }
     50% { opacity: .4; transform: scale(.85); }
 }
 
-.stat { font-variant-numeric: tabular-nums; }
+/* Numeric/tabular data stays monospace even though the rest of the UI is
+   sans-serif now — tabular-nums alone doesn't align digits across a
+   proportional-width sans face the way it does in a true monospace one. */
+.stat { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
 
 /* Live stat readout: a wrapping status line (label + tabular-nums value
    pairs), not a grid of individually-boxed tiles — reads as a terminal
@@ -146,7 +177,7 @@ section[id] { scroll-margin-top: 4.5rem; }
 .stat-pair-link:hover { color: #fff; }
 .stat-pair-link:hover .stat-value { text-decoration: underline; }
 .stat-label { color: #71717a; }
-.stat-value { color: #d4d4d8; font-variant-numeric: tabular-nums; }
+.stat-value { color: #d4d4d8; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
 
 /* Plain stacked list divided by hairlines — replaces essentially every
    JS-rendered card grid on the page (protocols, movers, bounty ops,
@@ -236,7 +267,9 @@ a { transition: color .15s; }
 .flagship-section {
     position: relative;
     border: 1px solid rgba(251, 191, 36, 0.28);
-    background: radial-gradient(ellipse 140% 100% at 15% 0%, rgba(251, 191, 36, 0.10), transparent 55%),
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-panel);
+    background-image: radial-gradient(ellipse 140% 100% at 15% 0%, rgba(251, 191, 36, 0.10), transparent 55%),
                 radial-gradient(ellipse 120% 100% at 100% 100%, rgba(167, 139, 250, 0.08), transparent 60%);
     padding: 1.75rem;
     overflow: hidden;
@@ -315,7 +348,9 @@ a { transition: color .15s; }
 .spotlight-section {
     position: relative;
     border: 1px solid rgba(96, 165, 250, 0.25);
-    background: radial-gradient(ellipse 120% 100% at 50% 0%, rgba(96, 165, 250, 0.08), transparent 60%);
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-panel);
+    background-image: radial-gradient(ellipse 120% 100% at 50% 0%, rgba(96, 165, 250, 0.08), transparent 60%);
     padding: 1.5rem;
     overflow: hidden;
 }
@@ -330,7 +365,8 @@ a { transition: color .15s; }
 .spotlight-card {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    background: var(--bg-panel-sm);
     padding: 1.25rem;
     transition: border-color 0.2s ease;
 }
@@ -378,24 +414,28 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
     position: relative;
     display: inline-block;
 }
+/* Outlined rounded-square icon button — modeled on x402scan.com's nav/utility
+   icon buttons (globe/search/wallet/GitHub/theme row): a visible border at
+   rest, not just on hover, so the button reads as a real control immediately
+   rather than a bare glyph that happens to get a border when touched. */
 .icon-dropdown-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     padding: 0;
-    background: transparent;
-    border: 1px solid transparent;
-    color: #71717a;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: #a1a1aa;
     cursor: pointer;
     transition: all 0.15s ease;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 .icon-dropdown-btn:hover {
     color: #e4e4e7;
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.07);
 }
 .icon-dropdown-menu {
     position: absolute;
@@ -405,13 +445,14 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
     min-width: 160px;
     background: #09090b;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
     transition: all 0.15s ease;
     z-index: 1000;
+    overflow: hidden;
 }
 .icon-dropdown.active .icon-dropdown-menu {
     opacity: 1;
@@ -453,8 +494,9 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
 /* ── Modifiable Sections Container ──────────────────────────────────── */
 .modifiable-section {
+    background: var(--bg-panel);
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: var(--radius-md);
     padding: 1.25rem;
     transition: border-color 0.2s ease;
 }
@@ -469,27 +511,63 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .search-sort-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 2;
-    margin-bottom: 4;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
     align-items: center;
 }
-.search-sort-bar input,
-.search-sort-bar select {
-    background: transparent;
+.search-sort-bar input {
+    background: var(--bg-panel-sm);
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     color: #d4d4d8;
-    padding: 6px 8px;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    transition: border-color 0.15s ease;
+    padding: 6px 10px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
-.search-sort-bar input:focus,
-.search-sort-bar select:focus {
+.search-sort-bar input:focus {
     outline: none;
     border-color: rgba(255, 255, 255, 0.3);
 }
 .search-sort-bar input::placeholder {
     color: #71717a;
+}
+
+/* ── Pill Dropdown Selects (x402scan-style: rounded pill, chevron, dark-grey
+   offset background) — used for every sort/filter/chain select site-wide. ── */
+select.select-pill {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--bg-panel-sm);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: #d4d4d8;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 28px 6px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+select.select-pill:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+select.select-pill:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+select.select-pill-lg {
+    padding: 12px 32px 12px 14px;
+    font-size: 14px;
+    border-radius: var(--radius-md);
+    background-position: right 14px center;
+    background-size: 11px 7px;
 }
 
 /* ── Pagination Controls ───────────────────────────────────────────── */
