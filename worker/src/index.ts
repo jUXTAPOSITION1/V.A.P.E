@@ -564,6 +564,7 @@ app.use("*", async (c, next) => {
 app.get("/", (c) =>
   c.json({
     agent: "VAPE",
+    debug_build_marker: "SENTINEL-BUILD-e2f683af-CHECK",
     erc8004: 59900,
     erc8004_contract: "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
     protocol: "x402",
