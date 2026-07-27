@@ -657,3 +657,5 @@
 | 2026-07-27 | auto | 0x604448c8f009135e913C7e0E4Bef692B0003A02A (ON) | deep_investigation | PROCEED (85/100) | Top 10 non-LP/burn holders control 88% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-27 | auto | 0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28 (SCR) | deep_investigation | REJECT (19/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-27 | auto | 0x6982508145454Ce325dDbE47a25d4ec3d2311933 (PEPE) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |

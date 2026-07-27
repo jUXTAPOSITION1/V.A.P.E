@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-27T13:56:18Z — 56 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-27T15:11:11Z — 57 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| PEPE | Ethereum | `0x6982508145454Ce325dDbE47a25d4ec3d2311933` | 85/100 | 1 | 2026-07-27T15:11:11Z |
 | ON | BNB Chain | `0x604448c8f009135e913C7e0E4Bef692B0003A02A` | 85/100 | 1 | 2026-07-27T12:56:31Z |
 | CATE | Ethereum | `0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8` | 90/100 | 1 | 2026-07-26T18:57:24Z |
 | LGNS | Polygon | `0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063` | 92/100 | 1 | 2026-07-26T05:10:55Z |
