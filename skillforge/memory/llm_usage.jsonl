@@ -1045,3 +1045,13 @@
 {"ts": "2026-07-27T12:17:22Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1074, "completion_tokens": 290, "total_tokens": 1364}
 {"ts": "2026-07-27T12:17:24Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "deep", "prompt_tokens": 801, "completion_tokens": 846, "total_tokens": 1647}
 {"ts": "2026-07-27T12:24:47Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2489, "completion_tokens": 97, "total_tokens": 3092}
+{"ts": "2026-07-27T12:23:06Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 975, "completion_tokens": 558, "total_tokens": 1533}
+{"ts": "2026-07-27T12:23:22Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1012, "completion_tokens": 578, "total_tokens": 1590}
+{"ts": "2026-07-27T12:23:33Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1000, "completion_tokens": 477, "total_tokens": 1477}
+{"ts": "2026-07-27T12:23:45Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 939, "completion_tokens": 435, "total_tokens": 1374}
+{"ts": "2026-07-27T12:23:58Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 946, "completion_tokens": 522, "total_tokens": 1468}
+{"ts": "2026-07-27T12:24:10Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 890, "completion_tokens": 466, "total_tokens": 1356}
+{"ts": "2026-07-27T12:24:21Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1019, "completion_tokens": 509, "total_tokens": 1528}
+{"ts": "2026-07-27T12:24:32Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 924, "completion_tokens": 431, "total_tokens": 1355}
+{"ts": "2026-07-27T12:24:43Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1037, "completion_tokens": 524, "total_tokens": 1561}
+{"ts": "2026-07-27T12:24:55Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 895, "completion_tokens": 425, "total_tokens": 1320}

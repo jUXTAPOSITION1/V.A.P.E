@@ -1,6 +1,6 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-27T12:10:35Z — 60 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-27T12:24:57Z — 55 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
@@ -59,8 +59,3 @@ _Regenerated 2026-07-27T12:10:35Z — 60 address(es) currently on record with a 
 | BASE | Base | `0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346` | 100/100 | 1 | 2026-07-13T10:40:37Z |
 | ARB | Arbitrum | `0x912CE59144191C1204E64559FE8253a0e49E6548` | 92/100 | 1 | 2026-07-12T21:55:38Z |
 | VELO | Optimism | `0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db` | 88/100 | 1 | 2026-07-12T06:34:18Z |
-| AERO | Base | `0x940181a94A35A4569E4529A3CDfB74e38FD98631` | 88/100 | 1 | 2026-07-11T16:01:02Z |
-| NOX | Arbitrum | `0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55` | 100/100 | 1 | 2026-07-11T03:33:26Z |
-| DEXE | Ethereum | `0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6` | 90/100 | 1 | 2026-07-11T00:02:46Z |
-| CTR | Base | `0x11030f79109269d796fd0FB956D6244e502757f7` | 82/100 | 1 | 2026-07-07T23:06:25Z |
-| CHIP | Arbitrum | `0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e` | 92/100 | 1 | 2026-07-07T21:29:21Z |
