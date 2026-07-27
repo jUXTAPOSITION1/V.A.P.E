@@ -33,6 +33,17 @@ on:
 permissions:
   contents: read
 
+# Confirmed real gap (2026-07-27): this workflow had no concurrency guard, so
+# an hourly cron firing (schedule above) could overlap a manual dispatch --
+# or two manual dispatches could overlap each other -- and race on both
+# 402index.io's own per-listing state and this repo's local
+# skillforge/memory/x402_directory_state.json + git push. `cancel-in-progress:
+# false` (queue, don't kill) since a half-finished registration run isn't
+# safe to abandon mid-POST.
+concurrency:
+  group: x402-directory-registration
+  cancel-in-progress: false
+
 jobs:
   register:
     runs-on: ubuntu-latest
@@ -64,6 +75,14 @@ jobs:
         env:
           INPUT_ONLY: ${{ github.event.inputs.only }}
           INPUT_FORCE_ALL: ${{ github.event.inputs.force_all }}
+          # The worker's domain was already claimed + verified with
+          # 402index.io back on 2026-07-05 (agents/x402_index_claim.py +
+          # .github/workflows/x402-index-claim.yml) — this is that same
+          # claim's verification_token, needed so register_402index() can
+          # PATCH-edit listings directly instead of the anonymous,
+          # review-queued POST /api/v1/register. See
+          # agents/x402_directory_register.py's module docstring.
+          X402INDEX_VERIFICATION_TOKEN: ${{ secrets.X402INDEX_VERIFICATION_TOKEN }}
           # Optional — only needed once VAPOR's operator issues a key
           # (VAPOR's production deployment may be running with no
           # API_KEYS configured at all, in which case this is unused).
