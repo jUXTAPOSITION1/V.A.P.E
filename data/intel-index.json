@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-27T09:41:18Z",
+  "generated": "2026-07-27T09:54:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 370,
+    "reports": 371,
     "reports_by_type": {
+      "security": 72,
       "bounty": 73,
       "base": 78,
       "virtuals": 80,
-      "security": 71,
       "sentiment": 40,
       "macro": 20,
       "skillforge": 4,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-091131-0xAC0F6637.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_083145.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T08:31:45Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-27-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-27T09:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +125% 24h (liq $592181.0329) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_083145.md",
-      "bytes": 17308
+      "summary": "The feed records 9 incidents over the last 7 days with no events reaching or exceeding $50M in the prior 14-day window. Losses cluster on Ethereum, Arbitrum, and Solana, with Base appearing in only one entry (Garden, $0.45M). Dominant techniques include price oracle manipulation (Ostium $23.75M on Arbitrum, Cascade Liquidity Strategy $1.3",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-09.md",
+      "bytes": 7011
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-27-09.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-27T09:00Z",
+      "threat": null,
+      "summary": "The feed records 9 incidents over the last 7 days with no events reaching or exceeding $50M in the prior 14-day window. Losses cluster on Ethereum, Arbitrum, and Solana, with Base appearing in only one entry (Garden, $0.45M). Dominant techniques include price oracle manipulation (Ostium $23.75M on Arbitrum, Cascade Liquidity Strategy $1.3",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-09.md",
+      "bytes": 7011
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-24 09:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-24-09.md",
       "bytes": 2908
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-24-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-24T08:00Z",
-      "threat": null,
-      "summary": "The current threat landscape is characterized by a high frequency of incidents, with 7 incidents reported in the last 7 days. However, none of these incidents exceeded $50M in the last 14 days. The types of exploits vary, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-08.md",
-      "bytes": 8093
     }
   ],
   "broadcasts": [
