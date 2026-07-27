@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T04:57:05Z",
+  "generated": "2026-07-27T05:12:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 443,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 114,
-    "investigations": 403,
+    "investigations": 404,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-025734-0xCBf4AB00.md",
-      "title": "Investigation \u2014 MegaDoge",
-      "symbol": "MegaDoge",
-      "name": "MegaDoge.Org",
-      "date": "2026-07-27T02:57:34Z",
-      "target": "0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 5% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,067 (rug/illiquid); [-10] Low liquidity $6,067. Positive evidence: 992126 holders \u2014 reasonably distributed; Trading 182+ days without a known incident in this scan; Custom verified source (not a ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-025734-0xCBf4AB00.md"
+      "file": "investigation-20260727-051223-0x93ecd8e9.md",
+      "title": "Investigation \u2014 KABOSU",
+      "symbol": "KABOSU",
+      "name": "Kabosu",
+      "date": "2026-07-27T05:12:23Z",
+      "target": "0x93ecd8e9156E6b217514BCFE59837b3807D8F53D",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $12 (rug/i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-051223-0x93ecd8e9.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-051223-0x93ecd8e9.md",
+      "title": "Investigation \u2014 KABOSU",
+      "symbol": "KABOSU",
+      "name": "Kabosu",
+      "date": "2026-07-27T05:12:23Z",
+      "target": "0x93ecd8e9156E6b217514BCFE59837b3807D8F53D",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $12 (rug/i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-051223-0x93ecd8e9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-025734-0xCBf4AB00.md",
@@ -593,20 +607,6 @@
       "score": "60",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,929. Positive evidence: 1266 holders \u2014 reasonably distributed; Trading 2115+ days without a known incident i",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-072528-0x4c28f484.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-055607-0x0Cb9610b.md",
-      "title": "Investigation \u2014 PLAY",
-      "symbol": "PLAY",
-      "name": "Playlouts",
-      "date": "2026-07-26T05:56:07Z",
-      "target": "0x0Cb9610b0b3C6f0758aee0082e149b861a667E99",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-055607-0x0Cb9610b.md"
     }
   ],
   "reports": [

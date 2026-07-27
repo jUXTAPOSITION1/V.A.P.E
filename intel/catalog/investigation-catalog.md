@@ -637,3 +637,5 @@
 | 2026-07-27 | auto | 0x9d02E97177073FB92A0F3F75CA36D56fdAfe2bcA (SHIB) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-27 | auto | 0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3 (MegaDoge) | deep_investigation | CAUTION (50/100) | Only 5% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-27 | auto | 0x93ecd8e9156E6b217514BCFE59837b3807D8F53D (KABOSU) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
