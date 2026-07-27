@@ -29,5 +29,20 @@
     "website_review",
     "yields"
   ],
-  "service_ids": {}
+  "service_ids": {
+    "bounty_deep_dive": "7a6e7aa3-6dac-4044-b5c3-3605289af1fd",
+    "bulk_safety_bundle": "88ff753f-9ffc-403e-b4e6-40039cf65f4b",
+    "community_intel_broadcast": "0bc3812b-5297-4272-aa3d-4507339502ec",
+    "deep_contract_audit": "aa93ac31-9bfc-407c-96d2-d18348602865",
+    "dossier_check": "79980871-7ffd-4d86-85a3-3e7f285a1236",
+    "exploit_check": "b5e3344f-d3a7-4125-ba91-71855e32e3cc",
+    "liquidity_check": "10208324-4a29-4d43-8d1a-ca59c9b78fc2",
+    "market_intel": "8ae726ba-7daf-4946-8bf3-d0209fdae463",
+    "prediction_market_odds": "f478d270-925d-4c8e-8491-5ca272273ca7",
+    "rug_pull_alert": "68074b35-edd0-40f6-ad69-e2a91f4c36f8",
+    "token_safety_check": "bc2d3fd2-cfb1-4bf9-93d0-b4ddb87a5ac6",
+    "tx_decode": "440ab864-04d9-43d6-affa-771d580859cf",
+    "wallet_pnl_deepdive": "bec80978-5620-4146-991b-596306899e1a",
+    "website_review": "60174206-3494-4c07-ab7d-6d07b5e0f16f"
+  }
 }
