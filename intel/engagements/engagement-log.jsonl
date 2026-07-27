@@ -199,3 +199,5 @@
 {"ts": "2026-07-25T18:35:39Z", "lead": "Triple-A (exploit $9,700,000)", "platform": "defillama-hack", "prizeUsd": 9700000, "fitScore": 90, "engagement": {"status": "no_target_found", "checked_at": "2026-07-25T18:35:30Z"}}
 {"ts": "2026-07-26T21:31:58Z", "lead": "Garden (exploit $450,000)", "platform": "defillama-hack", "prizeUsd": 450000, "fitScore": 87, "engagement": {"status": "no_target_found", "checked_at": "2026-07-26T21:31:50Z"}}
 {"ts": "2026-07-26T23:37:28Z", "lead": "Cascade Liquidity Strategy (exploit $1,340,000)", "platform": "defillama-hack", "prizeUsd": 1340000, "fitScore": 86, "engagement": {"status": "no_target_found", "checked_at": "2026-07-26T23:37:19Z"}}
+{"ts": "2026-07-27T18:09:29Z", "lead": "WEMIX (exploit $730,000)", "platform": "defillama-hack", "prizeUsd": 730000, "fitScore": 74, "engagement": {"status": "not_yet_attempted"}}
+{"ts": "2026-07-27T18:09:29Z", "lead": "Solido Cash (exploit $510,000)", "platform": "defillama-hack", "prizeUsd": 510000, "fitScore": 72, "engagement": {"status": "not_yet_attempted"}}

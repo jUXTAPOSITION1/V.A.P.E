@@ -7019,7 +7019,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7048,7 +7048,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7076,7 +7076,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7104,7 +7104,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7132,7 +7132,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7161,7 +7161,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7189,7 +7189,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7217,7 +7217,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7245,7 +7245,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7273,7 +7273,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7302,7 +7302,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7331,7 +7331,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7359,7 +7359,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7387,7 +7387,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -7416,7 +7416,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784546691.7982054,
+      "checkedAt": 1785175753.9556289,
       "ok": true
     }
   },
@@ -26687,5 +26687,45 @@
     "fitScore": 86,
     "isNew": true,
     "firstSeen": "2026-07-26T23:37:06.361390Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:WEMIX-1785024000",
+    "name": "WEMIX (exploit $730,000)",
+    "prizeUsd": 730000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "wemix3.0"
+    ],
+    "desc": "Access Control Exploit on WEMIX3.0. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-27T18:09:13.955470Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Solido Cash-1784764800",
+    "name": "Solido Cash (exploit $510,000)",
+    "prizeUsd": 510000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "supra"
+    ],
+    "desc": "Oracle Misconfiguration Exploit on Supra. Lead for incident response + forensics.",
+    "fitScore": 72,
+    "isNew": true,
+    "firstSeen": "2026-07-27T18:09:13.955470Z"
   }
 ]

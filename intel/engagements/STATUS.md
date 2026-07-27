@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-27T16:00:49Z
+# VAPE Engagement Status — 2026-07-27T18:09:29Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -71,6 +71,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - SecondFi (exploit $2,400,000) ($2,400,000, fit 74, defillama-hack)
 - Royal.io (exploit $263,000) ($263,000, fit 74, defillama-hack)
 - Aave V3 (exploit $862,000) ($862,000, fit 74, defillama-hack)
+- WEMIX (exploit $730,000) ($730,000, fit 74, defillama-hack)
 - Namada Shielded Pools (exploit $600,000) ($600,000, fit 73, defillama-hack)
 - Rari Capital (exploit $2,000,000) ($2,000,000, fit 73, defillama-hack)
 - Token of Power (exploit $1,580,000) ($1,580,000, fit 72, defillama-hack)
@@ -78,6 +79,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Taiko Bridge (exploit $1,700,000) ($1,700,000, fit 72, defillama-hack)
 - BSC TMM/USDT (exploit $1,665,000) ($1,665,000, fit 72, defillama-hack)
 - Allbridge Core (exploit $1,650,000) ($1,650,000, fit 72, defillama-hack)
+- Solido Cash (exploit $510,000) ($510,000, fit 72, defillama-hack)
 - Molt EVM (exploit $127,000) ($127,000, fit 71, defillama-hack)
 - Ploutos Money (exploit $390,000) ($390,000, fit 71, defillama-hack)
 - TMX TRIBE (exploit $1,400,000) ($1,400,000, fit 71, defillama-hack)
