@@ -77,6 +77,7 @@ export function withCdpV1RequirementsCompat<T extends FacilitatorClient>(client:
   };
   client.settle = async (paymentPayload, requirements) => {
     const patched = addV1RequirementsCompat(requirements, paymentPayload);
+    throw new Error(`SENTINEL-COMPAT-PATCH-ENGAGED requirements=${JSON.stringify(patched)}`);
     try {
       return await originalSettle(paymentPayload, patched);
     } catch (err) {
