@@ -58,6 +58,8 @@ const THREAT_BADGE = {
     LOW: '<span class="text-emerald-400"><i class="fa-solid fa-circle text-[7px] align-middle mr-1"></i>THREAT LEVEL: LOW</span>',
 };
 
+const LEDGER_PAGE_SIZE = 10;
+
 const AttackFeed = {
     _data: null,
     _rotateHandle: null,
@@ -66,6 +68,11 @@ const AttackFeed = {
     _phase: 'in',
     HOLD_MS: 3200,
     SLIDE_MS: 600,
+    // Client-side search/filter/sort/pagination state for the Threat Ledger —
+    // the full incident list is already in memory (one small JSON fetch), so
+    // this filters/sorts/paginates in-browser rather than round-tripping to a
+    // server, unlike x402feed.js's server-paginated /x402/feed.
+    _ledger: { q: '', severity: '', sort: 'date_desc', page: 0 },
 
     async init() {
         try {
@@ -75,7 +82,105 @@ const AttackFeed = {
             this._data = null;
         }
         this._renderTicker();
+        this._wireLedgerControls();
         this._renderLedger();
+    },
+
+    _wireLedgerControls() {
+        const search = document.getElementById('threat-ledger-search');
+        const severity = document.getElementById('threat-ledger-severity');
+        const sort = document.getElementById('threat-ledger-sort');
+        const prev = document.getElementById('threat-ledger-prev');
+        const next = document.getElementById('threat-ledger-next');
+        if (search) {
+            search.addEventListener('input', () => {
+                this._ledger.q = search.value.trim().toLowerCase();
+                this._ledger.page = 0;
+                this._renderLedger();
+            });
+        }
+        if (severity) {
+            severity.addEventListener('change', () => {
+                this._ledger.severity = severity.value;
+                this._ledger.page = 0;
+                this._renderLedger();
+            });
+        }
+        if (sort) {
+            sort.addEventListener('change', () => {
+                this._ledger.sort = sort.value;
+                this._ledger.page = 0;
+                this._renderLedger();
+            });
+        }
+        if (prev) {
+            prev.addEventListener('click', () => {
+                this._ledger.page = Math.max(0, this._ledger.page - 1);
+                this._renderLedger();
+            });
+        }
+        if (next) {
+            next.addEventListener('click', () => {
+                this._ledger.page += 1;
+                this._renderLedger();
+            });
+        }
+    },
+
+    // "extreme"/"high"/"medium"/"low" mirror severityClass()'s own
+    // >=10 / >=1 / else thresholds, but split >=10 into extreme(>=50)/high
+    // so the filter has 3 real buckets above "low" instead of collapsing
+    // every $10M+ hack into one bucket.
+    _severityBucket(amountUsdM) {
+        const n = Number(amountUsdM) || 0;
+        if (n >= 50) return 'extreme';
+        if (n >= 10) return 'high';
+        if (n >= 1) return 'medium';
+        return 'low';
+    },
+
+    _filteredSortedIncidents() {
+        let list = this._incidents();
+        const { q, severity, sort } = this._ledger;
+        if (q) {
+            list = list.filter(i => {
+                const chains = (i.chains || []).join(' ').toLowerCase();
+                return (i.name || '').toLowerCase().includes(q)
+                    || (i.technique || '').toLowerCase().includes(q)
+                    || chains.includes(q)
+                    || fmtLoss(i.amount_usd_m).toLowerCase().includes(q);
+            });
+        }
+        if (severity) {
+            list = list.filter(i => this._severityBucket(i.amount_usd_m) === severity);
+        }
+        list = [...list].sort((a, b) => {
+            if (sort === 'date_asc') return new Date(a.date) - new Date(b.date);
+            if (sort === 'amount_desc') return (Number(b.amount_usd_m) || 0) - (Number(a.amount_usd_m) || 0);
+            if (sort === 'amount_asc') return (Number(a.amount_usd_m) || 0) - (Number(b.amount_usd_m) || 0);
+            return new Date(b.date) - new Date(a.date); // date_desc, default
+        });
+        return list;
+    },
+
+    _renderLedgerPagination(total) {
+        const countEl = document.getElementById('threat-ledger-count');
+        const pageEl = document.getElementById('threat-ledger-page');
+        const prev = document.getElementById('threat-ledger-prev');
+        const next = document.getElementById('threat-ledger-next');
+        const page = this._ledger.page;
+        const pages = Math.max(1, Math.ceil(total / LEDGER_PAGE_SIZE));
+        if (countEl) {
+            if (!total) countEl.textContent = 'No incidents match this filter.';
+            else {
+                const from = page * LEDGER_PAGE_SIZE + 1;
+                const to = Math.min(total, (page + 1) * LEDGER_PAGE_SIZE);
+                countEl.textContent = `Showing ${from}–${to} of ${total}`;
+            }
+        }
+        if (pageEl) pageEl.textContent = `Page ${page + 1} of ${pages}`;
+        if (prev) prev.disabled = page <= 0;
+        if (next) next.disabled = page + 1 >= pages;
     },
 
     _incidents() {
@@ -311,7 +416,6 @@ const AttackFeed = {
         if (!body) return;
 
         const data = this._data;
-        const incidents = this._incidents();
 
         if (!data) {
             body.innerHTML = `<div class="text-center py-10 text-zinc-500 text-xs">
@@ -319,18 +423,24 @@ const AttackFeed = {
                 Live threat feed temporarily unavailable — try again shortly.
             </div>`;
             if (updated) updated.textContent = 'unavailable';
+            this._renderLedgerPagination(0);
             return;
         }
 
-        if (!incidents.length) {
+        const filtered = this._filteredSortedIncidents();
+        const page = this._ledger.page;
+        const pageItems = filtered.slice(page * LEDGER_PAGE_SIZE, (page + 1) * LEDGER_PAGE_SIZE);
+
+        if (!filtered.length) {
             body.innerHTML = `<div class="text-center py-10 text-zinc-500 text-xs">
                 <i class="fa-solid fa-shield-halved text-xl mb-2 opacity-50 block"></i>
-                No incidents in the tracked feed's lookback window right now.
+                ${this._ledger.q || this._ledger.severity ? 'No incidents match this filter.' : "No incidents in the tracked feed's lookback window right now."}
             </div>`;
         } else {
-            body.innerHTML = incidents.map(i => this._ledgerRow(i)).join('');
+            body.innerHTML = pageItems.map(i => this._ledgerRow(i)).join('');
             this._enhanceIcons(body);
         }
+        this._renderLedgerPagination(filtered.length);
 
         if (updated && data.generated_at) {
             const d = new Date(data.generated_at);

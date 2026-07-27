@@ -33,6 +33,41 @@ const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400'
 // case: JS's Array.slice(-Infinity) already returns the whole array.
 const RANGE_DAYS = { '24h': 2, '7d': 7, '30d': 30, '90d': 90, '1y': 365, 'all': Infinity };
 
+// Contextual icons for each x402 service offering — paired by subject/purpose
+// (security audit → audit icon, market data → chart icon, etc.)
+const OFFERING_ICONS = {
+    // scan/* security offerings
+    'exploit_check': 'fa-shield-halved',
+    'token_safety_check': 'fa-shield-virus',
+    'rug_pull_alert': 'fa-triangle-exclamation',
+    'dossier_check': 'fa-magnifying-glass',
+    'tx_decode': 'fa-link',
+    'community_intel_broadcast': 'fa-bullhorn',
+    'liquidity_check': 'fa-chart-line',
+    'market_intel': 'fa-chart-column',
+    'bulk_safety_bundle': 'fa-box',
+    'website_review': 'fa-globe',
+    // bounty offerings
+    'bounty_deep_dive': 'fa-microscope',
+    'deep_contract_audit': 'fa-file-contract',
+    // data/* market-data offerings
+    'wallet_pnl_deepdive': 'fa-wallet',
+    'token_intel': 'fa-coins',
+    'token_chart': 'fa-chart-area',
+    'protocol': 'fa-cube',
+    'protocol_fees': 'fa-hand-holding-dollar',
+    'unlocks': 'fa-lock-open',
+    'treasury': 'fa-vault',
+    'chain_protocols': 'fa-link-chain',
+    'chain_overview': 'fa-globe',
+    'chain_fees': 'fa-coins',
+    'dex_volumes': 'fa-chart-bar',
+    'yields': 'fa-arrow-trend-up',
+    'stablecoins': 'fa-circles',
+    'bridges': 'fa-person-hiking',
+    'prediction_market_odds': 'fa-crystal-ball'
+};
+
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
 // the paying wallet) so "Portfolio Intelligence" can show a persistent
 // engagement history with no backend — same zero-cost, keyless philosophy as
@@ -201,31 +236,43 @@ const App = {
             const manual = allOfferings.filter(o=>!(o.x402 ?? o.auto));
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
-                const card = o=>`
+                const card = o=>{
+                    const icon = OFFERING_ICONS[o.name] || 'fa-circle-dot';
+                    return `
                     <div class="relative group">
-                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
-                      <div class="flex items-center justify-between gap-2">
-                        <span class="text-xs text-zinc-200">${o.name}</span>
-                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="offering-card w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid ${icon} offering-card-icon text-sm shrink-0"></i>
+                        <div class="flex-1 flex items-center justify-between gap-2 min-w-0">
+                          <span class="text-xs text-zinc-200 truncate">${o.name}</span>
+                          <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        </div>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
                       <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
                     </button>
                     ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-zinc-200 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
                     </div>`;
+                };
                 grid.innerHTML = x402able.map(card).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {
-                acpGrid.innerHTML = manual.map(o=>`
-                    <button onclick="Hire.openAcp('${o.name}')" class="text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
-                      <div class="flex items-center justify-between gap-2">
-                        <span class="text-xs text-zinc-200">${o.name}</span>
-                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                acpGrid.innerHTML = manual.map(o=>{
+                    const icon = OFFERING_ICONS[o.name] || 'fa-circle-dot';
+                    return `
+                    <button onclick="Hire.openAcp('${o.name}')" class="offering-card text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid ${icon} offering-card-icon text-sm shrink-0"></i>
+                        <div class="flex-1 flex items-center justify-between gap-2 min-w-0">
+                          <span class="text-xs text-zinc-200 truncate">${o.name}</span>
+                          <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        </div>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
                       <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-scale-balanced"></i> ACP · select to commission</span>
-                    </button>`).join('');
+                    </button>`;
+                }).join('');
             }
             const disc = document.getElementById('rep-disclaimer');
             if (disc) disc.textContent = (r.disclaimer||'') + (a.first_report?` · Active since ${a.first_report.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')}.`:'');
@@ -239,20 +286,103 @@ const App = {
     // (agents/build_request.py, agents/skillforge_build.py), pre-fetched and
     // filtered server-side in agents/publish_reputation.py::tool_builds() so
     // the browser never needs its own GitHub Search API call/rate limit.
+    // Client-side search/status-filter/sort/pagination over that already-
+    // fetched list — the full array's already in memory, no extra fetch.
+    WORKSHOP_PAGE_SIZE: 8,
+    _workshop: { builds: [], q: '', status: '', sort: 'created_desc', page: 0 },
+
     _renderWorkshop(builds, generatedAt) {
+        this._workshop.builds = builds || [];
+        this._workshop.generatedAt = generatedAt;
+        this._wireWorkshopControls();
+        this._renderWorkshopBody();
+    },
+
+    _wireWorkshopControls() {
+        if (this._workshopWired) return;
+        this._workshopWired = true;
+        const search = document.getElementById('workshop-search');
+        const status = document.getElementById('workshop-status');
+        const sort = document.getElementById('workshop-sort');
+        const prev = document.getElementById('workshop-prev');
+        const next = document.getElementById('workshop-next');
+        if (search) {
+            search.addEventListener('input', () => {
+                this._workshop.q = search.value.trim().toLowerCase();
+                this._workshop.page = 0;
+                this._renderWorkshopBody();
+            });
+        }
+        if (status) {
+            status.addEventListener('change', () => {
+                this._workshop.status = status.value;
+                this._workshop.page = 0;
+                this._renderWorkshopBody();
+            });
+        }
+        if (sort) {
+            sort.addEventListener('change', () => {
+                this._workshop.sort = sort.value;
+                this._workshop.page = 0;
+                this._renderWorkshopBody();
+            });
+        }
+        if (prev) {
+            prev.addEventListener('click', () => {
+                this._workshop.page = Math.max(0, this._workshop.page - 1);
+                this._renderWorkshopBody();
+            });
+        }
+        if (next) {
+            next.addEventListener('click', () => {
+                this._workshop.page += 1;
+                this._renderWorkshopBody();
+            });
+        }
+    },
+
+    _filteredSortedWorkshop() {
+        let list = this._workshop.builds;
+        const { q, status, sort } = this._workshop;
+        if (q) {
+            list = list.filter(b => (b.title || '').toLowerCase().includes(q) || String(b.number).includes(q));
+        }
+        if (status) {
+            list = list.filter(b => (b.status || 'closed') === status);
+        }
+        list = [...list].sort((a, b) => sort === 'created_asc'
+            ? new Date(a.created_at) - new Date(b.created_at)
+            : new Date(b.created_at) - new Date(a.created_at));
+        return list;
+    },
+
+    _renderWorkshopBody() {
         const el = document.getElementById('workshop-body');
         if (!el) return;
         const upd = document.getElementById('workshop-updated');
-        if (upd) upd.textContent = 'ledger ' + this._ago(generatedAt);
-        if (!builds.length) {
+        if (upd) upd.textContent = 'ledger ' + this._ago(this._workshop.generatedAt);
+
+        if (!this._workshop.builds.length) {
             el.innerHTML = `<div class="md:col-span-2 text-center py-8 text-zinc-500 text-sm">
                 No open build proposals right now — the last cycle found no gap worth building against
                 (tool registry clean, no fresh findings to ground a proposal in). Checks run 2x/day automatically.
             </div>`;
+            this._renderWorkshopPagination(0);
             return;
         }
+
+        const filtered = this._filteredSortedWorkshop();
+        const page = this._workshop.page;
+        const pageItems = filtered.slice(page * this.WORKSHOP_PAGE_SIZE, (page + 1) * this.WORKSHOP_PAGE_SIZE);
+
+        if (!filtered.length) {
+            el.innerHTML = `<div class="md:col-span-2 text-center py-8 text-zinc-500 text-sm">No builds match this filter.</div>`;
+            this._renderWorkshopPagination(0);
+            return;
+        }
+
         const statusStyle = { merged: ['#4ade80','Merged'], open: ['#a1a1aa','Open · awaiting review'], closed: ['#52525b','Closed'] };
-        el.innerHTML = builds.map(b => {
+        el.innerHTML = pageItems.map(b => {
             const [col, label] = statusStyle[b.status] || statusStyle.closed;
             const v = b.verification || {};
             const vBits = [];
@@ -272,6 +402,24 @@ const App = {
                 </div>
             </a>`;
         }).join('');
+        this._renderWorkshopPagination(filtered.length);
+    },
+
+    _renderWorkshopPagination(total) {
+        const countEl = document.getElementById('workshop-count');
+        const pageEl = document.getElementById('workshop-page');
+        const prev = document.getElementById('workshop-prev');
+        const next = document.getElementById('workshop-next');
+        const page = this._workshop.page;
+        const pages = Math.max(1, Math.ceil(total / this.WORKSHOP_PAGE_SIZE));
+        if (countEl) {
+            countEl.textContent = total
+                ? `Showing ${page * this.WORKSHOP_PAGE_SIZE + 1}–${Math.min(total, (page + 1) * this.WORKSHOP_PAGE_SIZE)} of ${total}`
+                : 'No builds match this filter.';
+        }
+        if (pageEl) pageEl.textContent = `Page ${page + 1} of ${pages}`;
+        if (prev) prev.disabled = page <= 0;
+        if (next) next.disabled = page + 1 >= pages;
     },
 
     _tvlHist: null, _chart: null,
@@ -1534,6 +1682,8 @@ const App = {
 
     // ── Intel index: investigation summary + explorer (from data/intel-index.json)
     _intel: null, _tab: 'investigations', _typeFilter: null,
+    INTEL_PAGE_SIZE: 10,
+    _intelQuery: '', _intelSort: 'date_desc', _intelPage: 0,
     _verdictColor(v){
         v=(v||'').toUpperCase();
         if(/REJECT|CRITICAL|HIGH|BEARISH|RISK-OFF|FEAR/.test(v)) return '#fb7185';
@@ -1665,7 +1815,7 @@ const App = {
     // Archive tab instead of dropping the visitor on the section and making
     // them find it themselves.
     gotoArchive(tab){
-        this._tab = tab; this._typeFilter = null;
+        this._tab = tab; this._typeFilter = null; this._intelPage = 0;
         const tabsEl = document.getElementById('intel-tabs');
         if (tabsEl) {
             [...tabsEl.querySelectorAll('button[data-tab]')].forEach(b=>{
@@ -1676,8 +1826,66 @@ const App = {
         document.getElementById('the-archive')?.scrollIntoView({ behavior:'smooth', block:'start' });
     },
 
+    // Generic search text + date extractor per tab's differently-shaped
+    // items — lets one search box/sort control work across all 4 tabs
+    // without each tab needing its own filter UI.
+    _intelSearchText(tab, item){
+        if(tab==='investigations') return [item.title, item.symbol, item.name, item.target, item.date].filter(Boolean).join(' ');
+        if(tab==='reports') return [item.title, item.file, item.type, item.date].filter(Boolean).join(' ');
+        if(tab==='broadcasts') return [item.title, item.file, item.date].filter(Boolean).join(' ');
+        if(tab==='tools') return [item.name, item.tier, item.purpose, item.status].filter(Boolean).join(' ');
+        return '';
+    },
+    _intelTitle(tab, item){
+        return (tab==='tools' ? item.name : (item.title||item.file)) || '';
+    },
+    _intelDate(item){ return item.date ? new Date(item.date) : null; },
+
+    _wireIntelControls(){
+        if(this._intelWired) return;
+        this._intelWired = true;
+        const search = document.getElementById('intel-search');
+        const sort = document.getElementById('intel-sort');
+        const prev = document.getElementById('intel-prev');
+        const next = document.getElementById('intel-next');
+        if(search) search.addEventListener('input', ()=>{
+            this._intelQuery = search.value.trim().toLowerCase();
+            this._intelPage = 0;
+            this._renderIntel();
+        });
+        if(sort) sort.addEventListener('change', ()=>{
+            this._intelSort = sort.value;
+            this._intelPage = 0;
+            this._renderIntel();
+        });
+        if(prev) prev.addEventListener('click', ()=>{
+            this._intelPage = Math.max(0, this._intelPage - 1);
+            this._renderIntel();
+        });
+        if(next) next.addEventListener('click', ()=>{
+            this._intelPage += 1;
+            this._renderIntel();
+        });
+    },
+
+    _renderIntelPagination(total){
+        const countEl=document.getElementById('intel-count');
+        const pageEl=document.getElementById('intel-page');
+        const prev=document.getElementById('intel-prev');
+        const next=document.getElementById('intel-next');
+        const page=this._intelPage;
+        const pages=Math.max(1, Math.ceil(total/this.INTEL_PAGE_SIZE));
+        if(countEl) countEl.textContent = total
+            ? `Showing ${page*this.INTEL_PAGE_SIZE+1}–${Math.min(total,(page+1)*this.INTEL_PAGE_SIZE)} of ${total}`
+            : 'No entries match this filter.';
+        if(pageEl) pageEl.textContent = `Page ${page+1} of ${pages}`;
+        if(prev) prev.disabled = page<=0;
+        if(next) next.disabled = page+1>=pages;
+    },
+
     _renderIntel(){
         const d=this._intel; if(!d) return;
+        this._wireIntelControls();
         const body=document.getElementById('intel-body');
         const fw=document.getElementById('intel-filter-wrap');
         const tab=this._tab;
@@ -1692,9 +1900,27 @@ const App = {
                 }).join('');
         } else { fw.classList.add('hidden'); }
 
+        // Search + sort across whichever tab is active, then paginate —
+        // applied uniformly here so each per-tab branch below only needs to
+        // render whatever page slice it's handed.
+        const rawByTab = { investigations: d.investigations||[], reports: d.reports||[], broadcasts: d.broadcasts||[], tools: d.tools||[] };
+        let allItems = rawByTab[tab] || [];
+        if(tab==='reports' && this._typeFilter) allItems = allItems.filter(r=>r.type===this._typeFilter);
+        if(this._intelQuery) allItems = allItems.filter(item => this._intelSearchText(tab,item).toLowerCase().includes(this._intelQuery));
+        allItems = [...allItems].sort((a,b)=>{
+            if(this._intelSort==='title_asc') return this._intelTitle(tab,a).localeCompare(this._intelTitle(tab,b));
+            const da=this._intelDate(a), db=this._intelDate(b);
+            if(!da && !db) return 0;
+            if(!da) return 1;
+            if(!db) return -1;
+            return this._intelSort==='date_asc' ? da-db : db-da;
+        });
+        const page=this._intelPage;
+        const items = allItems.slice(page*this.INTEL_PAGE_SIZE, (page+1)*this.INTEL_PAGE_SIZE);
+        this._renderIntelPagination(allItems.length);
+
         let rows='';
         if(tab==='investigations'){
-            const items=d.investigations||[];
             rows=items.length?items.map(i=>{
                 const sym = i.symbol || this._symFromTitle(i.title);
                 const showName = i.name && i.name.toLowerCase() !== (sym||'').toLowerCase();
@@ -1720,9 +1946,7 @@ const App = {
                 </a>`;
             }).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
         } else if(tab==='reports'){
-            let items=d.reports||[];
-            if(this._typeFilter) items=items.filter(r=>r.type===this._typeFilter);
-            rows=items.slice(0,40).map(r=>`
+            rows=items.length?items.map(r=>`
                 <a href="${r.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
                     ${this._iconGlyph('fa-file-lines')}
                     <div class="min-w-0 flex-1">
@@ -1733,9 +1957,8 @@ const App = {
                         ${this._metaChips([this._esc(r.type), this._esc(this._ago(r.date))])}
                         ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(r.summary)}</div>`:''}
                     </div>
-                </a>`).join('')||'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
+                </a>`).join(''):'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
         } else if(tab==='broadcasts'){
-            const items=d.broadcasts||[];
             rows=items.length?items.map(b=>`
                 <a href="${b.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
                     ${this._iconGlyph('fa-tower-broadcast')}
@@ -1746,7 +1969,6 @@ const App = {
                     </div>
                 </a>`).join(''):'<div class="text-zinc-500 text-sm">No broadcasts yet.</div>';
         } else if(tab==='tools'){
-            const items=d.tools||[];
             rows=items.length?items.map(t=>{
                 const ok=t.status==='verified'; const lim=t.known_limitation;
                 const col=ok?'#4ade80':(lim?'#fbbf24':'#a1a1aa');
@@ -1851,7 +2073,7 @@ window.addEventListener('load', () => {
     // Intel Explorer tab switching
     document.getElementById('intel-tabs').addEventListener('click', e=>{
         const b=e.target.closest('button[data-tab]'); if(!b) return;
-        App._tab=b.dataset.tab; App._typeFilter=null;
+        App._tab=b.dataset.tab; App._typeFilter=null; App._intelPage=0;
         [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='term-btn term-btn-sm');
         b.className='term-btn term-btn-sm term-btn-active';
         App._renderIntel();
@@ -1859,7 +2081,7 @@ window.addEventListener('load', () => {
     // Report type filter
     document.getElementById('intel-filter').addEventListener('click', e=>{
         const b=e.target.closest('button[data-type]'); if(!b) return;
-        App._typeFilter=b.dataset.type||null; App._renderIntel();
+        App._typeFilter=b.dataset.type||null; App._intelPage=0; App._renderIntel();
     });
     // Sticky nav — mobile menu toggle + auto-close on link click
     const navToggle = document.getElementById('nav-menu-toggle');
@@ -1887,4 +2109,18 @@ window.addEventListener('load', () => {
             if (!navPanel.classList.contains('invisible') && !navPanel.contains(e.target) && !navToggle.contains(e.target)) setOpen(false);
         });
     }
+    // Icon Dropdowns — GitHub-style menus for section actions
+    document.addEventListener('click', (e) => {
+        const dropdown = e.target.closest('.icon-dropdown');
+        if (!dropdown) {
+            // Close all open dropdowns when clicking outside
+            document.querySelectorAll('.icon-dropdown.active').forEach(d => d.classList.remove('active'));
+            return;
+        }
+        // Toggle the clicked dropdown and close all others
+        document.querySelectorAll('.icon-dropdown.active').forEach(d => {
+            if (d !== dropdown) d.classList.remove('active');
+        });
+        dropdown.classList.toggle('active');
+    });
 });
