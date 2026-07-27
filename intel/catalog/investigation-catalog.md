@@ -653,3 +653,5 @@
 | 2026-07-27 | auto | 0x49E60D05319f6f9945012067E0718a2B6267cF58 (BTW) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 99% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-27 | auto | 0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33 (HRC) | deep_investigation | REJECT (15/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-07-27 | auto | 0x604448c8f009135e913C7e0E4Bef692B0003A02A (ON) | deep_investigation | PROCEED (85/100) | Top 10 non-LP/burn holders control 88% of supply — concentrated, easily manipula | +7d |
