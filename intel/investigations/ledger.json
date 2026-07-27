@@ -2599,6 +2599,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0x277add739c6e0477616948357af9e79fe1ec9b80": {
+    "address": "0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80",
+    "chain": "56",
+    "creator_address": "0x5c188f29bcb439f3462ce8f9e36c409a10d227e3",
+    "first_investigated": "2026-07-27T18:45:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-184518-0x277aDD73.md",
+        "score": 0,
+        "ts": "2026-07-27T18:45:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T18:45:18Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "AEON",
+    "times_investigated": 1
+  },
   "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
     "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
     "chain": "56",

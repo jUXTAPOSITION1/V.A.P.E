@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T18:30:03Z",
+  "generated": "2026-07-27T18:45:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 382,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 430,
+    "investigations": 431,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-182956-0x2f6A9340.md",
-      "title": "Investigation \u2014 LFWA",
-      "symbol": "LFWA",
-      "name": "LFWA",
-      "date": "2026-07-27T18:29:56Z",
-      "target": "0x2f6A9340C84E94413d01afCEEf85f1A8D1f27aD7",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260727-184518-0x277aDD73.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON",
+      "date": "2026-07-27T18:45:18Z",
+      "target": "0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Low holder count (169); [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +264% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-lau",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-182956-0x2f6A9340.md"
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $21,509; [-15",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-184518-0x277aDD73.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-184518-0x277aDD73.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON",
+      "date": "2026-07-27T18:45:18Z",
+      "target": "0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $21,509; [-15",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-184518-0x277aDD73.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-182956-0x2f6A9340.md",
@@ -593,20 +607,6 @@
       "score": "0",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x87c6c398F811A462d623D24cAfEcaf0F0E553b08) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated,",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-182703-0xc883e191.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-181146-0xa2a17b40.md",
-      "title": "Investigation \u2014 DIM",
-      "symbol": "DIM",
-      "name": "Dormant Inventory Mechanism",
-      "date": "2026-07-26T18:11:46Z",
-      "target": "0xa2a17b400CD9Bc8AF04714AA3E99Bee86374F90e",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (41) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 166% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-181146-0xa2a17b40.md"
     }
   ],
   "reports": [

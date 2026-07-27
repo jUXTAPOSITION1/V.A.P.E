@@ -671,3 +671,5 @@
 | 2026-07-27 | auto | 0xf3610Dbfe8E3e469cbF8594aD9830efb12aa4444 (AEON) | deep_investigation | CAUTION (57/100) | Top 10 non-LP/burn holders control 64% of supply — meaningful concentration | +7d |
 
 | 2026-07-27 | auto | 0x2f6A9340C84E94413d01afCEEf85f1A8D1f27aD7 (LFWA) | deep_investigation | REJECT (27/100) | Low holder count (169) | +7d |
+
+| 2026-07-27 | auto | 0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80 (AEON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
