@@ -14,17 +14,17 @@
  * fetch the way DefiLlama/CoinGecko are — and one free, fully keyless
  * Polymarket/Kalshi-backed route (/prediction-markets).
  *
- * Runs on Base mainnet, real funds, against a 50/50 hybrid of VAPOR (our own
- * facilitator) and Coinbase Developer Platform's hosted one — see
- * wrangler.toml for the network/facilitator config and required secrets,
- * and lib/facilitatorClient.ts for the hybrid routing itself.
+ * Runs on Base mainnet, real funds, against Coinbase Developer Platform's
+ * hosted x402 facilitator — see wrangler.toml for the network/facilitator
+ * config and required secrets, and lib/facilitatorClient.ts's
+ * DirectCdpFacilitatorClient for the client itself. (VAPOR, our own
+ * in-house facilitator, was removed from this path 2026-07-27.)
  */
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { cache } from "hono/cache";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
-import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
@@ -42,7 +42,7 @@ import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
 import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
-import { FallbackFacilitatorClient, DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
+import { DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -77,16 +77,11 @@ export interface Env {
   GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
-  // CDP's hosted facilitator — one half of the real 50/50 hybrid split with
-  // VAPOR (see lib/facilitatorClient.ts). Kept as the required var since
-  // every existing deployment already has it configured; it's also the sole
-  // facilitator whenever VAPOR_FACILITATOR_URL isn't set.
+  // CDP's hosted facilitator — the sole facilitator (see
+  // lib/facilitatorClient.ts's DirectCdpFacilitatorClient). VAPOR's hybrid
+  // 50/50 split was removed 2026-07-27 (explicit decision while diagnosing
+  // the real transaction outage that led to DirectCdpFacilitatorClient).
   X402_FACILITATOR_URL: string;
-  // VAPOR (our own facilitator, x402.duckdns.org) — the other half of the
-  // hybrid split when set. Each request picks VAPOR or CDP as primary with
-  // even odds, falling back to the other on any error so an outage on
-  // either side never takes real revenue down with it.
-  VAPOR_FACILITATOR_URL?: string;
   // In-house x402 job ledger (see lib/jobLog.ts) — optional exactly like the
   // API keys above: wire it once `VAPE_JOBS_KV_ID` is set (see
   // worker/README.md), and until then every /scan/* route still works
@@ -1040,71 +1035,16 @@ app.use("*", async (c, next) => {
   // CDP's REST API, so there is no wrapped instance to fail to intercept.
   // (Loses withBazaar()'s bazaar-discovery-index metadata -- acceptable,
   // that's not on the real-money verify/settle path this protects.)
-  const cdpClient = new DirectCdpFacilitatorClient(c.env.X402_FACILITATOR_URL, buildCreateAuthHeaders(c.env));
+  const facilitatorClient = new DirectCdpFacilitatorClient(c.env.X402_FACILITATOR_URL, buildCreateAuthHeaders(c.env));
 
-  // Hybrid facilitator routing: real production traffic is deliberately
-  // split ~50/50 between VAPOR (our own facilitator) and CDP's hosted one,
-  // per request — not "prefer one, only touch the other on any failure".
-  // VAPOR needs genuine, ongoing settlement volume to prove itself as a
-  // real facilitator (not just a cold failover path); CDP stays
-  // continuously exercised too, not relegated to an outage-only role.
-  // Each request still falls back to the other facilitator if its
-  // randomly-chosen primary throws — resilience isn't traded away for the
-  // split (see lib/facilitatorClient.ts for why blind retry-on-fallback is
-  // safe here even for settle). DATA AGENT's own hires (agents/data_agent.py)
-  // go through these exact same routes, so they get the same 50/50 split
-  // as any external buyer — there's no separate code path for them.
-  //
-  // One deliberate carve-out: a real human paying in-browser via the site's
-  // own wallet-connect flow (docs/assets/hire.js) tags its request with
-  // X-VAPE-Client: site. Basescan only recognizes/labels CDP's facilitator
-  // addresses as "x402 payment" (its own manually-curated Name Tags, not
-  // anything derived from the on-chain data) — VAPOR's settlement wallet has
-  // no such label. A person paying through the site is the one traffic class
-  // most likely to go check Basescan afterward and expect to see it
-  // classified correctly, so that traffic always gets CDP as primary (VAPOR
-  // still stands in as fallback if CDP itself throws — this narrows WHERE
-  // the split applies, it doesn't remove the resilience).
-  //
-  // A second carve-out: DATA AGENT runs as two independent, explicitly-
-  // pinned instances (agents/data_agent.py tags X-VAPE-Client: data-agent
-  // for CDP, agents/data_agent_vapor.py tags data-agent-vapor for VAPOR)
-  // rather than one instance alternating between the two. An earlier
-  // version tried a persisted KV toggle (see git history on
-  // lib/dataAgentAlternator.ts, now removed) meant to flip 50/50 from a
-  // single agent — it turned out to be the wrong tool for proving VAPOR
-  // out reliably: debugging it required adding temporary debug fields to
-  // real job records to see what was actually happening call-to-call, and
-  // by the time that was in place, two thin always-CDP / always-VAPOR
-  // agents were simply less to get wrong than one agent coordinating state
-  // through a shared, rarely-written toggle. Any other automated/agent
-  // traffic keeps the random 50/50 split, since Basescan's label doesn't
-  // matter to a script.
-  const isSiteTraffic = c.req.header("X-VAPE-Client") === "site";
-  const isDataAgentCdp = c.req.header("X-VAPE-Client") === "data-agent";
-  const isDataAgentVapor = c.req.header("X-VAPE-Client") === "data-agent-vapor";
-  const vaporClient = c.env.VAPOR_FACILITATOR_URL
-    ? new HTTPFacilitatorClient({ url: c.env.VAPOR_FACILITATOR_URL })
-    : null;
-  let usesVaporPrimary = false;
-  if (vaporClient !== null && !isSiteTraffic && !isDataAgentCdp) {
-    usesVaporPrimary = isDataAgentVapor ? true : Math.random() < 0.5;
-  }
-  const hybridClient = vaporClient
-    ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
-    : null;
-  const facilitatorClient = hybridClient ?? cdpClient;
-  // What ACTUALLY settled this request's payment, accounting for a
-  // fallback having occurred — not just which one was picked as primary.
-  // Read from lib/facilitatorClient.ts's lastUsed after the real
-  // verify/settle calls happen below (onAfterSettle), never assumed here.
-  const facilitatorUsed = (): "vapor" | "cdp" => {
-    if (!hybridClient) return "cdp";
-    const primaryWasVapor = usesVaporPrimary;
-    return hybridClient.lastUsed === "primary"
-      ? (primaryWasVapor ? "vapor" : "cdp")
-      : (primaryWasVapor ? "cdp" : "vapor");
-  };
+  // CDP is the sole facilitator going forward — VAPOR's hybrid 50/50 split
+  // and the isSiteTraffic/isDataAgentCdp/isDataAgentVapor traffic-routing
+  // carve-outs it needed are gone (explicit user decision, 2026-07-27, made
+  // while diagnosing this same real transaction outage). No fallback: an
+  // infrastructure failure on CDP now surfaces directly rather than being
+  // silently retried against a second facilitator, which stays simpler
+  // while CDP's own settle path is what's actively being fixed.
+  const facilitatorUsed = (): "cdp" => "cdp";
   const resourceServer = new x402ResourceServer(facilitatorClient)
     .register(c.env.X402_NETWORK, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension)
