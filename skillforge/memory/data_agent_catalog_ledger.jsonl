@@ -170,3 +170,4 @@
 {"ts": "2026-07-27T20:45:19.018525Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
 {"ts": "2026-07-27T21:15:25.628108Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 51}
 {"ts": "2026-07-27T21:30:19.329017Z", "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
+{"ts": "2026-07-27T21:45:17.875245Z", "target": "0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
