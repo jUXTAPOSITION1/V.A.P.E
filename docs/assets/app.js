@@ -1013,14 +1013,10 @@ const App = {
     // Swaps the four skeleton stat spans for an honest "unavailable" line —
     // this panel has no keyless fallback (Codex needs a worker-side key), so
     // an error here should read as "not available", not sit as a permanent
-    // skeleton that looks like it's still loading. Top Wallets is sourced
-    // from this same /virtuals-snapshot call (see _renderVirtualsStats),
-    // so it needs the same honest fallback here too, not just the stats line.
+    // skeleton that looks like it's still loading.
     _renderVirtualsUnavailable() {
         const el = document.getElementById('virtuals-stats');
         if (el) el.innerHTML = '<span class="text-zinc-500 text-sm">Unavailable right now.</span>';
-        const walletsEl = document.getElementById('virtuals-top-wallets');
-        if (walletsEl) walletsEl.innerHTML = '<div class="text-zinc-500 text-sm">Holder data unavailable right now.</div>';
     },
 
     // 0-100, neutral start 50 — VIRTUAL's health from Codex-native signals:
@@ -1054,7 +1050,6 @@ const App = {
         if (chgEl) chgEl.innerHTML = pct(detail.change24);
         const holdEl = document.getElementById('v-holders');
         if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span>`;
-        this._renderTopWallets(holders.items || []);
         this._renderVirtualsSparkline(snap.bars);
     },
 
@@ -1085,31 +1080,6 @@ const App = {
                     scales: { x: { display: false }, y: { display: false } } },
             });
         } catch (e) { /* non-fatal — the rest of the Virtuals panel still stands */ }
-    },
-
-    // Real top-holder wallets for VIRTUAL, from the same Codex holders() call
-    // /virtuals-snapshot already makes for the concentration stat above —
-    // no new backend route or Codex request. Codex has no chain-wide
-    // "most active/profitable wallets" query to build a fabricated global
-    // leaderboard from, so this is scoped honestly: the real wallets actually
-    // holding this token, each one hireable for the $0.25 P&L deep-dive.
-    _renderTopWallets(items) {
-        const el = document.getElementById('virtuals-top-wallets');
-        if (!el) return;
-        el.innerHTML = items.length ? items.slice(0, 10).map((h,i) => {
-            const addr = h.address || '';
-            const short = addr ? addr.slice(0,6)+'…'+addr.slice(-4) : '—';
-            return `
-            <div class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
-                <div class="min-w-0 flex-1">
-                    <div class="font-mono text-xs truncate">${this._esc(short)}</div>
-                </div>
-                <div class="text-right shrink-0 text-xs text-zinc-300">${h.balance!=null?Number(h.balance).toLocaleString(undefined,{maximumFractionDigits:2}):'—'}</div>
-                <button onclick="Hire.openData('wallet_pnl_deepdive', 0.25, {address:'${this._esc(addr)}'})"
-                    class="shrink-0 text-[10px] px-2 py-1 border border-white/10 hover:border-white/30 whitespace-nowrap">Hire deep-dive</button>
-            </div>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">Holder data unavailable right now.</div>';
     },
 
     // Crypto/Base-relevant prediction-market odds from Polymarket + Kalshi

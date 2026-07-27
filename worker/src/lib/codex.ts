@@ -183,19 +183,21 @@ export async function tokenHolders(
   apiKey: string | undefined,
   address: string,
   networkId: number,
-  limit = 10,
 ): Promise<CodexResult> {
   // HoldersInput.tokenId is the composite "address:networkId" id — there's
   // no separate networkId field on this input, unlike DetailedWalletStatsInput.
+  // Only count/top10HoldersPercent are needed (concentration stat + score
+  // input) — the per-wallet `items` list backed the removed Top Wallets UI
+  // and isn't fetched anymore.
   const query = `
     query TokenHolders($input: HoldersInput!) {
-      holders(input: $input) { count top10HoldersPercent items { address balance } }
+      holders(input: $input) { count top10HoldersPercent }
     }`;
   const tokenId = `${address}:${networkId}`;
-  const d = await codexQuery(apiKey, query, { input: { tokenId, limit } });
+  const d = await codexQuery(apiKey, query, { input: { tokenId } });
   if (isErr(d)) return d;
   const h = d.holders || {};
-  return { tokenId, count: h.count, top10HoldersPercent: h.top10HoldersPercent, items: h.items || [] };
+  return { tokenId, count: h.count, top10HoldersPercent: h.top10HoldersPercent };
 }
 
 export async function walletBalances(

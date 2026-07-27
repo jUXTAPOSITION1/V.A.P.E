@@ -766,7 +766,7 @@ app.get("/virtuals-snapshot", rateLimiter("virtuals-snapshot", 20, 60), cache({ 
   try {
     const [detail, holders, bars] = await Promise.all([
       codex.tokenDetail(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID),
-      codex.tokenHolders(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID, 10),
+      codex.tokenHolders(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID),
       codex.tokenBars(c.env.CODEX_API_KEY, VIRTUAL_TOKEN_ADDRESS, codex.BASE_NETWORK_ID, "1D", 30),
     ]);
     return c.json({ ts: new Date().toISOString(), address: VIRTUAL_TOKEN_ADDRESS, detail, holders, bars });
