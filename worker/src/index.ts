@@ -42,7 +42,7 @@ import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
 import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
-import { FallbackFacilitatorClient } from "./lib/facilitatorClient";
+import { FallbackFacilitatorClient, withCdpV1RequirementsCompat } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -1034,10 +1034,10 @@ app.use("*", async (c, next) => {
   // (withBazaar's .extensions.bazaar reads the wrapped client's own .url/
   // createAuthHeaders internally) — that's fine, discovery listing isn't on
   // the real-money verify/settle path the fallback below actually protects.
-  const cdpClient = withBazaar(new HTTPFacilitatorClient({
+  const cdpClient = withBazaar(withCdpV1RequirementsCompat(new HTTPFacilitatorClient({
     url: c.env.X402_FACILITATOR_URL,
     createAuthHeaders: buildCreateAuthHeaders(c.env),
-  }));
+  })));
 
   // Hybrid facilitator routing: real production traffic is deliberately
   // split ~50/50 between VAPOR (our own facilitator) and CDP's hosted one,
