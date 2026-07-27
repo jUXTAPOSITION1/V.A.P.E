@@ -464,8 +464,16 @@ def register_402index(only=None, force_all=False):
         print(f"[402index] {name} via {via}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
         if ok:
             newly_registered.append(name)
-            if isinstance(body, dict) and body.get("id") and not service_id:
-                service_ids[name] = body["id"]
+            # Confirmed live (backfill run, 2026-07-27): a successful POST
+            # /register response nests the id under body["service"]["id"],
+            # e.g. {"message": "...", "service": {"id": "...", ...}} — NOT a
+            # top-level body["id"]. A prior version of this check looked at
+            # the top level, so it silently never fired (service_ids stayed
+            # {} across a real 16-offering registration run) despite every
+            # response actually containing a usable id.
+            new_id = body.get("service", {}).get("id") if isinstance(body, dict) else None
+            if new_id and not service_id:
+                service_ids[name] = new_id
                 service_ids_changed = True
         elif code == 429:
             # Real hourly quota, confirmed exhausted for this run's IP — every
