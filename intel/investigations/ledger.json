@@ -4727,6 +4727,25 @@
     "symbol": "AERO",
     "times_investigated": 2
   },
+  "8453:0x97fbf25645a67a78ce9cb49498b281928518dcf0": {
+    "address": "0x97Fbf25645a67A78ce9cb49498b281928518DCF0",
+    "chain": "8453",
+    "creator_address": "0x617573225eea06e56c454471d049fa239d9b07a4",
+    "first_investigated": "2026-07-27T22:15:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-221530-0x97Fbf256.md",
+        "score": 22,
+        "ts": "2026-07-27T22:15:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T22:15:30Z",
+    "last_score": 22,
+    "last_verdict": "REJECT",
+    "symbol": "CHECK",
+    "times_investigated": 1
+  },
   "8453:0x9999955f3dd86230d90c545f7c9b239514ecb999": {
     "address": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
     "chain": "8453",
