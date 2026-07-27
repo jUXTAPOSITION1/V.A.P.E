@@ -643,3 +643,5 @@
 | 2026-07-27 | auto | 0xc02179dda49187A8761156F011F40D7E41FaCAAF (velvet) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A62 | +7d |
 
 | 2026-07-27 | auto | 0xAC0F66379A6d7801D7726d5a943356A172549Adb (GEOD) | deep_investigation | REJECT (35/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-27 | auto | 0x0e4F6209eD984b21EDEA43acE6e09559eD051D48 (ON) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 61% of supply — meaningful concentration | +7d |
