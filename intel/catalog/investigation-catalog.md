@@ -659,3 +659,5 @@
 | 2026-07-27 | auto | 0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28 (SCR) | deep_investigation | REJECT (19/100) | Transfers can be paused by owner | +7d |
 
 | 2026-07-27 | auto | 0x6982508145454Ce325dDbE47a25d4ec3d2311933 (PEPE) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-27 | auto | 0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7 (abcPHAR) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T15:22:16Z",
+  "generated": "2026-07-27T15:42:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 378,
@@ -15,25 +15,25 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 424,
+    "investigations": 425,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 20
+    "skills": 21
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-151111-0x69825081.md",
-      "title": "Investigation \u2014 PEPE",
-      "symbol": "PEPE",
-      "name": "Pepe",
-      "date": "2026-07-27T15:11:11Z",
-      "target": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 573440 holders \u2014 reasonably distributed; Deep liquidity ($21,839,710); Trading 1200+ days without a known incident in this scan; Custom verified source (not a mass-produced factory te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-151111-0x69825081.md"
+      "file": "investigation-20260727-154206-0xd5d0A9b3.md",
+      "title": "Investigation \u2014 abcPHAR",
+      "symbol": "abcPHAR",
+      "name": "abcPHAR",
+      "date": "2026-07-27T15:42:06Z",
+      "target": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x383ea12347e56932e08638767b8a2b3c18700493) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-154206-0xd5d0A9b3.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-154206-0xd5d0A9b3.md",
+      "title": "Investigation \u2014 abcPHAR",
+      "symbol": "abcPHAR",
+      "name": "abcPHAR",
+      "date": "2026-07-27T15:42:06Z",
+      "target": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x383ea12347e56932e08638767b8a2b3c18700493) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-154206-0xd5d0A9b3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-151111-0x69825081.md",
@@ -593,20 +607,6 @@
       "score": "70",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($1,024,451); Trading 107+ days without a known incident in this scan; Custom verified source (not",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-162634-0xCBc5b4b1.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-155638-0x01C2086f.md",
-      "title": "Investigation \u2014 YAY",
-      "symbol": "YAY",
-      "name": "YAY Games",
-      "date": "2026-07-26T15:56:38Z",
-      "target": "0x01C2086faCFD7aA38f69A6Bd8C91BEF3BB5adFCa",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,014 (rug/illiquid); [-10] Low liquidity $4,014. Positive",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-155638-0x01C2086f.md"
     }
   ],
   "reports": [
@@ -1528,7 +1528,7 @@
       "name": "echidna",
       "tier": "fuzzing",
       "status": "verified",
-      "version": "Echidna 2.3.2",
+      "version": "Echidna 2.3.3",
       "purpose": "Property-based smart contract fuzzer.",
       "repo": "crytic/echidna",
       "known_limitation": false,
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49182117",
+      "version": "49188456",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.41 eth_dom 10.21 mcap_chg_24h 1.13",
+      "version": "btc_dom 56.51 eth_dom 10.16 mcap_chg_24h -0.21",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1608,7 +1608,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x32aac5510968 Eric 26580258.0 from 0x8e1696b5 to 0x833589fc",
+      "version": "0xe04f00072c0c PONS 7.0 from 0x9153a610 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1735,6 +1735,12 @@
       "title": "Token Investigation Workflow",
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-investigation-workflow.md"
+    },
+    {
+      "file": "token-risk-investigation-playbook.md",
+      "title": "Token Risk Investigation Playbook",
+      "summary": "When-to-use High-signal bounty cycles (e.g., 4/5 REJECT verdicts) or new token deployments on Ethereum/Base/BNB Chain showing honeypot, mintable-supply, hidden-owner, or concentrated-holder flags. Use immediately after h",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-risk-investigation-playbook.md"
     },
     {
       "file": "reconcile-ai-report-pipeline-against-prompt-inject.md",
