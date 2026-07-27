@@ -137,7 +137,7 @@
              Threat Ledger — tappable on mobile, not just a desktop-only
              "Full Ledger" label. Rose is the one deliberate functional
              danger-color exception (threat severity), not decoration. -->
-        <a href="#threat-ledger" id="attack-ticker" class="reveal mb-3 block group">
+        <a href="#threat-ledger" id="attack-ticker" draggable="false" class="reveal mb-3 block group">
             <div class="panel-sm border-rose-500/20 transition-colors group-hover:border-rose-500/40">
                 <div class="flex items-center justify-between gap-3 mb-2">
                     <div class="flex items-center gap-2 shrink-0">
@@ -311,10 +311,10 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                             <div class="icon-dropdown-menu">
-                                <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank">View source</a>
-                                <button onclick="App.refresh()">Refresh</button>
+                                <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank"><i class="fa-solid fa-code"></i>View source</a>
+                                <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
                                 <div class="icon-dropdown-divider"></div>
-                                <button onclick="document.getElementById('x402-feed-search').value=''; App.renderX402Feed()">Clear filters</button>
+                                <button onclick="document.getElementById('x402-feed-search').value=''; App.renderX402Feed()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
                             </div>
                         </div>
                     </div>
@@ -498,10 +498,10 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>
                         <div class="icon-dropdown-menu">
-                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank">View reports</a>
-                            <button onclick="App.refresh()">Refresh</button>
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank"><i class="fa-solid fa-file-lines"></i>View reports</a>
+                            <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
                             <div class="icon-dropdown-divider"></div>
-                            <button onclick="document.getElementById('threat-ledger-search').value=''; document.getElementById('threat-ledger-severity').value=''; AttackFeed._ledger.q=''; AttackFeed._ledger.severity=''; AttackFeed._ledger.page=0; AttackFeed._renderLedger()">Clear filters</button>
+                            <button onclick="document.getElementById('threat-ledger-search').value=''; document.getElementById('threat-ledger-severity').value=''; AttackFeed._ledger.q=''; AttackFeed._ledger.severity=''; AttackFeed._ledger.page=0; AttackFeed._renderLedger()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
                         </div>
                     </div>
                 </div>
@@ -561,11 +561,11 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>
                         <div class="icon-dropdown-menu">
-                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank">View logic</a>
-                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank">Build ledger</a>
-                            <button onclick="App.refresh()">Refresh</button>
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank"><i class="fa-solid fa-code"></i>View logic</a>
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank"><i class="fa-solid fa-list-check"></i>Build ledger</a>
+                            <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
                             <div class="icon-dropdown-divider"></div>
-                            <button onclick="document.getElementById('workshop-search').value=''; document.getElementById('workshop-status').value=''; App._workshop.q=''; App._workshop.status=''; App._workshop.page=0; App._renderWorkshopBody()">Clear filters</button>
+                            <button onclick="document.getElementById('workshop-search').value=''; document.getElementById('workshop-status').value=''; App._workshop.q=''; App._workshop.status=''; App._workshop.page=0; App._renderWorkshopBody()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
                         </div>
                     </div>
                 </div>
@@ -946,10 +946,10 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </button>
                     <div class="icon-dropdown-menu">
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank">View index</a>
-                        <button onclick="App.refresh()">Refresh</button>
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank"><i class="fa-solid fa-list"></i>View index</a>
+                        <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
                         <div class="icon-dropdown-divider"></div>
-                        <button onclick="document.getElementById('intel-search').value=''; App._intelQuery=''; App._typeFilter=null; App._intelPage=0; App._renderIntel()">Clear filters</button>
+                        <button onclick="document.getElementById('intel-search').value=''; App._intelQuery=''; App._typeFilter=null; App._intelPage=0; App._renderIntel()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
                     </div>
                 </div>
             </div>

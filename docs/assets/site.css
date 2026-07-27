@@ -400,6 +400,19 @@ a { transition: color .15s; }
 .chain-badge-warn { animation: chainpulse 1.6s infinite; }
 @keyframes chainpulse { 0%,100%{opacity:1} 50%{opacity:.6} }
 
+/* Threat ticker: allow the browser to handle vertical page scroll while our
+   own JS drag/swipe handler owns horizontal movement (swipe to the next/
+   previous headline) — without this, touch-dragging the ticker on mobile
+   fights the page scroll instead of just navigating the ticker. */
+#attack-ticker-line { touch-action: pan-y; user-select: none; }
+/* Chromium treats a plain <a> as natively draggable — a mouse press-drag
+   over one starts native link drag-and-drop, which cancels the in-flight
+   Pointer Event sequence (a real `pointercancel`, confirmed while testing
+   the swipe gesture below) before our own drag logic ever sees a pointerup.
+   draggable="false" on the element is the primary fix; -webkit-user-drag
+   covers the same case for engines that only honor the CSS property. */
+#attack-ticker { -webkit-user-drag: none; user-drag: none; }
+
 code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
 ::selection { background: rgba(74, 222, 128, 0.25); }
@@ -462,7 +475,9 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 }
 .icon-dropdown-menu a,
 .icon-dropdown-menu button {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     width: 100%;
     text-align: left;
     padding: 8px 12px;
@@ -474,6 +489,7 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
     cursor: pointer;
     transition: all 0.15s ease;
 }
+.icon-dropdown-menu i { width: 14px; text-align: center; color: #71717a; font-size: 11px; flex-shrink: 0; }
 .icon-dropdown-menu a:hover,
 .icon-dropdown-menu button:hover {
     background: rgba(255, 255, 255, 0.08);
