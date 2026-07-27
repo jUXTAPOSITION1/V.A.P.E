@@ -41,3 +41,4 @@
 {"ts": "2026-07-27T21:30:19.328702Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-07-27T21:45:17.874907Z", "address": "0x8dB2be2bf9C90b7c7B11Af0F46bcafe4FAb6Dd88", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-27T22:00:24.667787Z", "address": "0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444", "chain": "56", "symbol": "\u5e01\u6709", "name": "\u5e01\u6709", "source": "evm", "offering": "exploit_check"}
+{"ts": "2026-07-27T23:00:24.006147Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_safety_check"}
