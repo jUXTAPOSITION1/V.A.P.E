@@ -674,6 +674,10 @@ const Hire = {
         if (!d || typeof d !== 'object') return `<div class="text-xs text-zinc-400">${escapeHtml(String(d))}</div>`;
         if (d.error) return `<div class="text-xs text-amber-400">${escapeHtml(String(d.error))}</div>`;
         const img = (url) => url ? `<img src="${escapeHtml(url)}" class="w-5 h-5 rounded-full inline-block align-middle mr-1.5" onerror="this.style.display='none'">` : '';
+        // http(s)-only guard before ever putting a provider-supplied string into
+        // an href — an <a> (unlike <img src>) will happily execute a
+        // javascript: URI on click, so this can't just reuse img()'s pattern.
+        const safeHref = (url) => typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
         const fmt = (v) => {
             if (v == null) return '—';
             if (typeof v === 'number') return v.toLocaleString(undefined, { maximumFractionDigits: 6 });
@@ -718,7 +722,18 @@ const Hire = {
                 const metricKey = ['depeg', 'apy', 'tvl_usd', 'vol_24h', 'fees_24h', 'circulating_usd', 'last_daily_volume']
                     .find(mk => row[mk] != null);
                 const metric = metricKey ? `<span class="text-zinc-400 font-mono text-[11px] whitespace-nowrap">${escapeHtml(metricKey)}: ${fmt(row[metricKey])}</span>` : '';
-                return `<div class="flex items-center justify-between gap-2 py-0.5"><span class="flex items-center min-w-0 text-xs text-zinc-200">${img(row.logo)}<span class="truncate">${escapeHtml(title)}</span></span>${metric}</div>`;
+                // yields' pool_url/project_url (worker/src/lib/defillama.ts::
+                // yieldPools()) — a pool's `pool` id is an opaque UUID with no
+                // other human-readable source, so without a link the buyer has
+                // no way to verify a listed yield is real before depositing.
+                // Any future row shape with a plain `url` (e.g. the hacks feed)
+                // gets the same treatment for free.
+                const linkUrl = safeHref(row.pool_url || row.project_url || row.url);
+                const titleHtml = escapeHtml(title);
+                const titleEl = linkUrl
+                    ? `<a href="${escapeHtml(linkUrl)}" target="_blank" rel="noopener" class="truncate hover:underline">${titleHtml}</a>`
+                    : `<span class="truncate">${titleHtml}</span>`;
+                return `<div class="flex items-center justify-between gap-2 py-0.5"><span class="flex items-center min-w-0 text-xs text-zinc-200">${img(row.logo)}${titleEl}</span>${metric}</div>`;
             }).join('');
             rows.push(`<div class="mt-2"><div class="text-[10px] uppercase tracking-wider text-zinc-500 mb-1">${escapeHtml(k)} (${v.length})</div>${items}</div>`);
         }

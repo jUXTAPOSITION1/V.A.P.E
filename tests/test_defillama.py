@@ -63,6 +63,11 @@ def test_yield_pools_flags_trap_shape(monkeypatch):
     ]})
     r = dl.yield_pools(chain="Base", min_tvl=10000)
     assert r["count"] == 1 and r["pools"][0]["project"] == "aave-v3"
+    # A pool's `pool` id is an opaque UUID with no other human-readable
+    # source, so the deliverable needs a real link before a buyer can verify
+    # a listed yield is real rather than fabricated.
+    assert r["pools"][0]["pool_url"] == "https://defillama.com/yields/pool/p1"
+    assert r["pools"][0]["project_url"] == "https://defillama.com/protocol/aave-v3"
 
 
 def test_stablecoins_computes_depeg(monkeypatch):

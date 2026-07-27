@@ -252,12 +252,20 @@ def yield_pools(chain=None, project=None, symbol=None, min_tvl=10000, limit=25):
             continue
         if (p.get("tvlUsd") or 0) < min_tvl:
             continue
+        pool_id = p.get("pool")
+        project = p.get("project")
         rows.append({
-            "pool": p.get("pool"), "chain": p.get("chain"), "project": p.get("project"),
+            "pool": pool_id, "chain": p.get("chain"), "project": project,
             "symbol": p.get("symbol"), "tvl_usd": p.get("tvlUsd"), "apy": p.get("apy"),
             "apy_base": p.get("apyBase"), "apy_reward": p.get("apyReward"),
             "il_risk": p.get("ilRisk"), "exposure": p.get("exposure"),
             "stablecoin": p.get("stablecoin"),
+            # DefiLlama's own per-pool/per-protocol page URLs (see the mirrored
+            # TS comment in worker/src/lib/defillama.ts::yieldPools()) — `pool`
+            # is an opaque UUID with no other human-readable source, so this is
+            # the only way a buyer can verify a pool is real before depositing.
+            "pool_url": f"https://defillama.com/yields/pool/{pool_id}" if pool_id else None,
+            "project_url": f"https://defillama.com/protocol/{project}" if project else None,
         })
     rows.sort(key=lambda r: r["tvl_usd"] or 0, reverse=True)
     return {"ts": _now_iso(), "count": len(rows), "pools": rows[:limit]}
