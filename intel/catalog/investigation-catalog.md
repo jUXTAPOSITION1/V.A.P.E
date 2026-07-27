@@ -631,3 +631,5 @@
 | 2026-07-26 | auto | 0x181cd4706322EF57a51c5dA6AdE1fC56FF694444 (DCA) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xcB362b3701eF6 | +7d |
 
 | 2026-07-26 | auto | 0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471 (Subject 3) | deep_investigation | REJECT (40/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-27 | auto | 0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063 (NightDriver) | deep_investigation | REJECT (7/100) | Owner not renounced (0xbf71ff1f8284abbc4eb11297bce7f979acf959f7) — can still act | +7d |

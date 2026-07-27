@@ -2544,6 +2544,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0xf26662c4298e6be93f7ac22778bf6e2bf96f8063": {
+    "address": "0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063",
+    "chain": "56",
+    "creator_address": "0xe7c06b24a75e56fa1df222fd66fa0101dc3edc74",
+    "first_investigated": "2026-07-27T00:12:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-001238-0xF26662c4.md",
+        "score": 7,
+        "ts": "2026-07-27T00:12:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T00:12:38Z",
+    "last_score": 7,
+    "last_verdict": "REJECT",
+    "symbol": "NightDriver",
+    "times_investigated": 1
+  },
   "56:0xf39e4b21c84e737df08e2c3b32541d856f508e48": {
     "address": "0xF39e4b21c84e737Df08e2C3b32541d856f508E48",
     "chain": "56",

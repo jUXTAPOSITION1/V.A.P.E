@@ -121,3 +121,4 @@
 {"ts": "2026-07-26T22:27:15.302785Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-26T22:57:22.445613Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-26T23:42:13.159192Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-27T00:12:41.869250Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}

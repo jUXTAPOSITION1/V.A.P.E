@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-26T23:57:21Z — 144 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-27T00:12:38Z — 145 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| NightDriver | BNB Chain | `0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063` | 7/100 | 1 | 2026-07-27T00:12:38Z |
 | Subject 3 | BNB Chain | `0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471` | 40/100 | 1 | 2026-07-26T23:57:21Z |
 | DCA | BNB Chain | `0x181cd4706322EF57a51c5dA6AdE1fC56FF694444` | 10/100 | 1 | 2026-07-26T22:57:19Z |
 | DIM | Ethereum | `0x67E5481ED9F785Db6508761eef45b85a19Ee0Df3` | 30/100 | 1 | 2026-07-26T22:42:14Z |

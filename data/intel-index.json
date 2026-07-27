@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T00:01:07Z",
+  "generated": "2026-07-27T00:12:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 440,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 113,
-    "investigations": 400,
+    "investigations": 401,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260726-235721-0x8682BaCE.md",
-      "title": "Investigation \u2014 Subject 3",
-      "symbol": "Subject 3",
-      "name": "Subject 3",
-      "date": "2026-07-26T23:57:21Z",
-      "target": "0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471",
+      "file": "investigation-20260727-001238-0xF26662c4.md",
+      "title": "Investigation \u2014 NightDriver",
+      "symbol": "NightDriver",
+      "name": "NightDriver",
+      "date": "2026-07-27T00:12:38Z",
+      "target": "0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 49% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-235721-0x8682BaCE.md"
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0xbf71ff1f8284abbc4eb11297bce7f979acf959f7) \u2014 can still act on the contract; [-8] Low holder count (55); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-001238-0xF26662c4.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-001238-0xF26662c4.md",
+      "title": "Investigation \u2014 NightDriver",
+      "symbol": "NightDriver",
+      "name": "NightDriver",
+      "date": "2026-07-27T00:12:38Z",
+      "target": "0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0xbf71ff1f8284abbc4eb11297bce7f979acf959f7) \u2014 can still act on the contract; [-8] Low holder count (55); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-001238-0xF26662c4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260726-235721-0x8682BaCE.md",
@@ -593,20 +607,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 62% of supply \u2014 meaningful concentration. Positive evidence: Verified as a real, CoinGecko-recognized major stablecoin ($557,194,496 circulating, $0.9997 peg); 3822846 holders \u2014 reasonably distributed; Deep liquidity ($204,479,564); Trading 872+ days without a known",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-051055-0x8f3Cf7ad.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-045525-0x85bAbbd6.md",
-      "title": "Investigation \u2014 gLGNS",
-      "symbol": "gLGNS",
-      "name": "gLGNS",
-      "date": "2026-07-26T04:55:25Z",
-      "target": "0x85bAbbd6124589F5Ef3AE12a2745267cc1852f42",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "7",
-      "summary": "Risk factors: [-8] Low holder count (68); [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $41 (rug/illiquid); [-10] Low liquidity $41; [-10] Violent 24h move +166% (vola",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-045525-0x85bAbbd6.md"
     }
   ],
   "reports": [
