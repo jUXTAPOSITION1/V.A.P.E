@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-27T12:13:22Z",
+  "generated": "2026-07-27T12:25:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 374,
+    "reports": 375,
     "reports_by_type": {
+      "bounty": 74,
       "base": 79,
       "sentiment": 41,
       "virtuals": 81,
       "security": 72,
-      "bounty": 73,
       "macro": 20,
       "skillforge": 4,
       "bug": 2,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-121035-0x49E60D05.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-27-12.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-27T12:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260727_122446.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-27T12:24:46Z",
       "threat": null,
-      "summary": "Date: 2026-07-27 12:13 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-27-12.md",
-      "bytes": 3665
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +153% 24h (liq $624602.6755) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_122446.md",
+      "bytes": 17150
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260727_122446.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-27T12:24:46Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +153% 24h (liq $624602.6755) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_122446.md",
+      "bytes": 17150
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1258,17 +1269,6 @@
       "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_121953.md",
       "bytes": 12349
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260724_101922.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T10:19:22Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised) \u00b7 Base mover: Robinhood / USDC 0.01% +1001560% 24h (liq $10885.3236) \u2014 volatility/rug wat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_101922.md",
-      "bytes": 11928
     }
   ],
   "broadcasts": [
