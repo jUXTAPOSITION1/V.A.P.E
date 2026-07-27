@@ -57,34 +57,101 @@ function addV1RequirementsCompat(
   } as PaymentRequirements;
 }
 
+/** Same BigInt-safe serialization @x402/core's own HTTPFacilitatorClient uses internally. */
+function toJsonSafe(obj: unknown): unknown {
+  return JSON.parse(JSON.stringify(obj, (_, v) => (typeof v === "bigint" ? v.toString() : v)));
+}
+
 /**
- * Wraps a facilitator client's verify()/settle() so every outgoing call
- * gets the v1-compat fields above. Mutates and returns the same instance
- * (rather than a copy) so callers that read other properties off it
- * afterwards (e.g. withBazaar() reading .url/.createAuthHeaders, or
- * .extensions set later) keep working unchanged.
+ * A from-scratch FacilitatorClient for CDP, used in place of
+ * @x402/core's own HTTPFacilitatorClient.
+ *
+ * Why this exists instead of wrapping/monkeypatching HTTPFacilitatorClient's
+ * verify()/settle(): that was tried first (duplicate the v1-compat fields in
+ * onto the requirements object passed to the real client's methods) and,
+ * separately, tested with an unconditional sentinel throw replacing the
+ * method body entirely -- confirmed via a live deploy (the "/" route's
+ * debug_build_marker proved the new code was genuinely live) that neither
+ * change ever altered the observed settlement error by even one character,
+ * across multiple real $0.01 job attempts. That means whatever object
+ * ends up invoked for a real settle() is not the instance being patched --
+ * despite @x402/core's own source showing only two `.settle(` call sites in
+ * the whole dependency tree, both of which trace back to the exact
+ * `resourceServer`/`facilitatorClient` this file constructs. Rather than
+ * keep reverse-engineering an opaque, unexplained non-effect, this
+ * implements verify/settle/getSupported directly against CDP's REST API
+ * (the same three endpoints HTTPFacilitatorClient itself calls, using the
+ * same request/response shapes and the same createAuthHeaders mechanism),
+ * so there is no wrapped instance to fail to intercept -- this class *is*
+ * the whole call. It also surfaces CDP's full (untruncated) rejection body
+ * instead of @x402/core's internal 200-char responseExcerpt(), which was
+ * making this bug harder to diagnose than it needed to be.
  */
-export function withCdpV1RequirementsCompat<T extends FacilitatorClient>(client: T): T {
-  const originalVerify = client.verify.bind(client);
-  const originalSettle = client.settle.bind(client);
-  client.verify = async (paymentPayload, requirements) => {
+export class DirectCdpFacilitatorClient implements FacilitatorClient {
+  constructor(
+    private readonly url: string,
+    private readonly createAuthHeaders?: () => Promise<{
+      verify: Record<string, string>;
+      settle: Record<string, string>;
+      supported: Record<string, string>;
+    }>
+  ) {}
+
+  private async headersFor(op: "verify" | "settle" | "supported"): Promise<Record<string, string>> {
+    if (!this.createAuthHeaders) return {};
+    const all = await this.createAuthHeaders();
+    return all[op] ?? {};
+  }
+
+  private async call(
+    op: "verify" | "settle",
+    paymentPayload: PaymentPayload,
+    requirements: PaymentRequirements
+  ): Promise<VerifyResponse | SettleResponse> {
     const patched = addV1RequirementsCompat(requirements, paymentPayload);
-    try {
-      return await originalVerify(paymentPayload, patched);
-    } catch (err) {
-      throw new Error(`${errMessage(err)} | [compat-debug sent-requirements: ${JSON.stringify(patched)}]`);
+    const headers = {
+      "Content-Type": "application/json",
+      ...(await this.headersFor(op)),
+    };
+    const response = await fetch(`${this.url}/${op}`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        x402Version: paymentPayload.x402Version,
+        paymentPayload: toJsonSafe(paymentPayload),
+        paymentRequirements: toJsonSafe(patched),
+      }),
+    });
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`CDP direct ${op} failed (${response.status}): ${text.slice(0, 2000)}`);
     }
-  };
-  client.settle = async (paymentPayload, requirements) => {
-    const patched = addV1RequirementsCompat(requirements, paymentPayload);
-    throw new Error(`SENTINEL-COMPAT-PATCH-ENGAGED requirements=${JSON.stringify(patched)}`);
+    let data: unknown;
     try {
-      return await originalSettle(paymentPayload, patched);
-    } catch (err) {
-      throw new Error(`${errMessage(err)} | [compat-debug sent-requirements: ${JSON.stringify(patched)}]`);
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(`CDP direct ${op} returned non-JSON (${response.status}): ${text.slice(0, 2000)}`);
     }
-  };
-  return client;
+    return data as VerifyResponse | SettleResponse;
+  }
+
+  async verify(paymentPayload: PaymentPayload, requirements: PaymentRequirements): Promise<VerifyResponse> {
+    return this.call("verify", paymentPayload, requirements) as Promise<VerifyResponse>;
+  }
+
+  async settle(paymentPayload: PaymentPayload, requirements: PaymentRequirements): Promise<SettleResponse> {
+    return this.call("settle", paymentPayload, requirements) as Promise<SettleResponse>;
+  }
+
+  async getSupported(): Promise<SupportedResponse> {
+    const headers = await this.headersFor("supported");
+    const response = await fetch(`${this.url}/supported`, { method: "GET", headers });
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`CDP direct getSupported failed (${response.status}): ${text.slice(0, 2000)}`);
+    }
+    return JSON.parse(text) as SupportedResponse;
+  }
 }
 
 export class FallbackFacilitatorClient implements FacilitatorClient {

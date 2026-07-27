@@ -25,7 +25,7 @@ import { cache } from "hono/cache";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
-import { declareDiscoveryExtension, bazaarResourceServerExtension, withBazaar } from "@x402/extensions/bazaar";
+import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
 import { fulfill, type HandlerName } from "./handlers";
@@ -42,7 +42,7 @@ import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
 import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
-import { FallbackFacilitatorClient, withCdpV1RequirementsCompat } from "./lib/facilitatorClient";
+import { FallbackFacilitatorClient, DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -564,7 +564,6 @@ app.use("*", async (c, next) => {
 app.get("/", (c) =>
   c.json({
     agent: "VAPE",
-    debug_build_marker: "SENTINEL-BUILD-e2f683af-CHECK",
     erc8004: 59900,
     erc8004_contract: "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
     protocol: "x402",
@@ -1027,18 +1026,21 @@ app.get("/admin/bazaar-validate", rateLimiter("bazaar-validate", 6, 300), async 
 });
 
 app.use("*", async (c, next) => {
-  // withBazaar() extends the facilitator client so its getSupported()/
-  // settle responses carry the EXTENSION-RESPONSES metadata the Bazaar
-  // discovery index reads — without this wrapper, registerExtension() below
-  // declares the route metadata but the facilitator has no signal to
-  // actually catalog it. Bazaar discovery stays tied to CDP specifically
-  // (withBazaar's .extensions.bazaar reads the wrapped client's own .url/
-  // createAuthHeaders internally) — that's fine, discovery listing isn't on
-  // the real-money verify/settle path the fallback below actually protects.
-  const cdpClient = withBazaar(withCdpV1RequirementsCompat(new HTTPFacilitatorClient({
-    url: c.env.X402_FACILITATOR_URL,
-    createAuthHeaders: buildCreateAuthHeaders(c.env),
-  })));
+  // A from-scratch client, not @x402/core's own HTTPFacilitatorClient --
+  // see DirectCdpFacilitatorClient's own docstring in lib/facilitatorClient.ts
+  // for why: two separate live-tested attempts to wrap/monkeypatch
+  // HTTPFacilitatorClient's settle() (duplicate v1-compat fields onto the
+  // outgoing requirements; later an unconditional sentinel throw) never
+  // changed the observed settlement error by even one character across
+  // multiple real deploys confirmed live via a temporary build marker --
+  // meaning the wrapped instance's methods were never actually the ones
+  // invoked for a real settle call, for reasons that don't resolve from
+  // reading @x402/core's own source. This bypasses that ambiguity
+  // entirely by implementing verify/settle/getSupported directly against
+  // CDP's REST API, so there is no wrapped instance to fail to intercept.
+  // (Loses withBazaar()'s bazaar-discovery-index metadata -- acceptable,
+  // that's not on the real-money verify/settle path this protects.)
+  const cdpClient = new DirectCdpFacilitatorClient(c.env.X402_FACILITATOR_URL, buildCreateAuthHeaders(c.env));
 
   // Hybrid facilitator routing: real production traffic is deliberately
   // split ~50/50 between VAPOR (our own facilitator) and CDP's hosted one,
@@ -1091,9 +1093,7 @@ app.use("*", async (c, next) => {
   const hybridClient = vaporClient
     ? new FallbackFacilitatorClient(usesVaporPrimary ? vaporClient : cdpClient, usesVaporPrimary ? cdpClient : vaporClient)
     : null;
-  const facilitatorClient = hybridClient
-    ? Object.assign(hybridClient, { extensions: cdpClient.extensions })
-    : cdpClient;
+  const facilitatorClient = hybridClient ?? cdpClient;
   // What ACTUALLY settled this request's payment, accounting for a
   // fallback having occurred — not just which one was picked as primary.
   // Read from lib/facilitatorClient.ts's lastUsed after the real
