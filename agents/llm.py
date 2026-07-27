@@ -45,6 +45,12 @@ Providers (all OpenAI-compatible) — enabled when their key env is set:
                                     needed. OpenAI-compatible endpoint (api.x.ai/v1),
                                     same _call() as everything else.
 
+generate_image() (bottom of this file) is a separate xAI product on this same
+XAI_API_KEY_1 key — real text-to-image via api.x.ai's /v1/images/generations
+endpoint, not /chat/completions, so it doesn't go through ask()/_call() at
+all and isn't part of any tier/provider_order chain above. Billed per-image
+(flat rate), capped by its own daily image count, not the token-spend cap.
+
 VAPE's own fine-tuned candidate (see training/train_lora.py +
 .github/workflows/train-vape-model.yml) is deliberately NOT in the PROVIDERS
 list above and NOT reachable via a bare ask() call — it's an opt-in-only
@@ -829,6 +835,103 @@ def ask_oci_grok_frontier(system, user, **kw):
     kw.setdefault("tier", "frontier")
     kw.setdefault("provider_order", FRONTIER_ORDER)
     return ask_oci_grok(system, user, **kw)
+
+
+# ── Image generation (xAI Grok Image) ───────────────────────────────────────
+# A genuinely different product from everything above: xAI's real image model
+# is served from its OWN endpoint (api.x.ai/v1/images/generations, the
+# OpenAI-compatible Images API shape — prompt/model/n/response_format, no
+# `messages` array) rather than /chat/completions, so it can't reuse _call().
+# Gated on the same XAI_API_KEY_1 secret ask_frontier()'s xai_1 chat entry
+# already uses, but billed per-image at a flat rate (xAI's published Grok
+# Image price was $0.07/image as of 2026-07 on x.ai/api — re-verify before
+# trusting this number), not per-token — PROVIDER_PRICING_USD_PER_M_TOKENS'
+# token-based spend cap doesn't apply here, so this gets its own simple
+# daily-count cap instead (mirrors skillforge/research.py's quota pattern,
+# not agents/llm.py's token-spend one).
+#
+# NOT verified against a live call — this environment's sandbox network
+# can't reach api.x.ai, so the request shape below is built from xAI's
+# documented API only. Re-verify with one real workflow dispatch (check
+# skillforge/memory/llm_usage.jsonl-adjacent xai_image_usage.json for a
+# successful entry, and confirm a real image URL landed in a report) before
+# assuming this is bug-free in production.
+IMAGE_USAGE_PATH = os.path.join(MEMORY_DIR, "xai_image_usage.json")
+DEFAULT_IMAGE_DAILY_CAP = 15  # ~$1.05/day at $0.07/image -- comfortable headroom over the ~8 stories/day news-intel cadence this exists for
+XAI_IMAGE_MODEL = "grok-2-image-1212"
+
+
+def _image_daily_cap():
+    try:
+        return int(os.getenv("XAI_IMAGE_DAILY_CAP", DEFAULT_IMAGE_DAILY_CAP))
+    except (TypeError, ValueError):
+        return DEFAULT_IMAGE_DAILY_CAP
+
+
+def _image_quota_ok():
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        with open(IMAGE_USAGE_PATH) as f:
+            usage = json.load(f)
+    except Exception:
+        usage = {}
+    return usage.get("date") != today or usage.get("count", 0) < _image_daily_cap()
+
+
+def _record_image_usage():
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        with open(IMAGE_USAGE_PATH) as f:
+            usage = json.load(f)
+    except Exception:
+        usage = {}
+    if usage.get("date") != today:
+        usage = {"date": today, "count": 0}
+    usage["count"] = usage.get("count", 0) + 1
+    try:
+        os.makedirs(os.path.dirname(IMAGE_USAGE_PATH), exist_ok=True)
+        with open(IMAGE_USAGE_PATH, "w") as f:
+            json.dump(usage, f)
+    except Exception:
+        pass
+
+
+def generate_image(prompt, timeout=45):
+    """Real text-to-image call against xAI's Grok Image model. Returns a
+    real image URL on success, or None (never raises) if XAI_API_KEY_1 isn't
+    set, today's daily cap is already hit, or the call errors for any
+    reason — callers must degrade to a real-photo/logo fallback, never a
+    broken image or a crash."""
+    key = os.getenv("XAI_API_KEY_1")
+    if not key:
+        return None
+    if not _image_quota_ok():
+        print(f"[llm] xAI image daily cap ({_image_daily_cap()}) reached — skipping generation")
+        return None
+    body = json.dumps({
+        "model": XAI_IMAGE_MODEL,
+        "prompt": prompt[:1000],
+        "n": 1,
+        "response_format": "url",
+    }).encode()
+    req = urllib.request.Request(
+        "https://api.x.ai/v1/images/generations",
+        data=body,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = json.loads(r.read().decode("utf-8", "replace"))
+        item = data["data"][0]
+        url = item.get("url")
+        if not url:
+            return None
+        _record_image_usage()
+        return url
+    except Exception as e:
+        print(f"[llm] xAI image generation failed: {e}")
+        return None
 
 
 if __name__ == "__main__":

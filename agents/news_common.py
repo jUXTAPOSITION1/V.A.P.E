@@ -24,6 +24,7 @@ v1):
      a documented gap rather than a fake/broken integration; wire it in
      once a real API key or replacement method exists.
 """
+import io
 import os
 import re
 import sys
@@ -46,6 +47,9 @@ UA = {"User-Agent": "VAPE-NewsDesk/1.0"}
 NEWS_DIR = os.path.join(ROOT, "intel", "news")
 STATE_PATH = os.path.join(ROOT, "skillforge", "memory", "news_state.json")
 FEED_PATH = os.path.join(ROOT, "data", "news-feed.json")
+NEWS_IMAGES_DIR = os.path.join(ROOT, "docs", "assets", "news-images")
+LOGO_PATH = os.path.join(ROOT, "docs", "assets", "logo-v-256.png")
+BRAND_WORDMARK = "THE V.A.P.E REPORT"
 
 # (topic key, Google News search query, display label) — covers exactly the
 # beats the user asked for: blockchain/crypto/Base, security/exploits,
@@ -283,3 +287,80 @@ def write_news_report(slug, body_md):
     with open(path, "w") as f:
         f.write(body_md)
     return path
+
+
+def _fetch_image_bytes(source):
+    """Real bytes for `source` — a remote http(s) URL (SSRF-guarded exactly
+    like extract_og_image's fetch, reusing the same validated opener) or a
+    docs/-relative local asset path (e.g. FALLBACK_IMAGE). Returns None
+    (never raises) on any failure."""
+    if source.startswith("http"):
+        if not _validate_fetch_url(source):
+            return None
+        try:
+            opener = urllib.request.build_opener(_SSRFSafeRedirectHandler)
+            req = urllib.request.Request(source, headers=UA)
+            with opener.open(req, timeout=20) as r:
+                return r.read()
+        except Exception:
+            return None
+    try:
+        with open(os.path.join(ROOT, "docs", source), "rb") as f:
+            return f.read()
+    except Exception:
+        return None
+
+
+def brand_image(source, slug):
+    """Every VAPE Wire story needs to read as VAPE Wire's own on sight, the
+    same way a real wire service stamps its logo on a photo before
+    distribution — this downloads/reads `source` (a real photo URL, an
+    AI-generated image URL, or a local fallback asset path), crops it to a
+    consistent 16:9 frame, and stamps VAPE's real V-mark + wordmark into a
+    bottom scrim. Writes the branded JPEG to docs/assets/news-images/
+    <slug>.jpg and returns the site-relative path ("assets/news-images/
+    <slug>.jpg") the card <img> should use.
+
+    Returns None (never raises) if Pillow isn't installed, the source can't
+    be fetched, or the composite fails for any reason — callers must fall
+    back to the unbranded source/logo, never break the pipeline over a
+    cosmetic step."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont, ImageOps
+    except ImportError:
+        return None
+    raw = _fetch_image_bytes(source)
+    if not raw:
+        return None
+    try:
+        base = Image.open(io.BytesIO(raw)).convert("RGBA")
+        base = ImageOps.fit(base, (1200, 675), Image.LANCZOS)
+
+        scrim_h = 110
+        scrim = Image.new("RGBA", base.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(scrim)
+        top = base.size[1] - scrim_h
+        for y in range(top, base.size[1]):
+            alpha = int(190 * (y - top) / scrim_h)
+            draw.line([(0, y), (base.size[0], y)], fill=(0, 0, 0, alpha))
+        branded = Image.alpha_composite(base, scrim)
+
+        logo = Image.open(LOGO_PATH).convert("RGBA")
+        logo_size = 44
+        logo = logo.resize((logo_size, logo_size), Image.LANCZOS)
+        logo_pos = (24, base.size[1] - logo_size - 24)
+        branded.paste(logo, logo_pos, logo)
+
+        # load_default(size=...) is Pillow's built-in scalable font (>=10.1,
+        # pinned in agents/requirements.txt) -- no external .ttf to vendor
+        # or fail to find on a fresh CI runner.
+        font = ImageFont.load_default(size=24)
+        text_pos = (logo_pos[0] + logo_size + 14, logo_pos[1] + 9)
+        ImageDraw.Draw(branded).text(text_pos, BRAND_WORDMARK, font=font, fill=(255, 255, 255, 235))
+
+        os.makedirs(NEWS_IMAGES_DIR, exist_ok=True)
+        out_path = os.path.join(NEWS_IMAGES_DIR, f"{slug}.jpg")
+        branded.convert("RGB").save(out_path, "JPEG", quality=85)
+        return f"assets/news-images/{slug}.jpg"
+    except Exception:
+        return None

@@ -155,3 +155,44 @@ def test_extract_og_image_parses_meta_tag():
         opener.open.return_value.__enter__.return_value.read.return_value = html_body
         img = nc.extract_og_image("https://example.com/story")
     assert img == "https://cdn.example/pic.jpg"
+
+
+def _make_test_jpeg(path, size=(400, 300), color=(30, 60, 90)):
+    from PIL import Image
+    Image.new("RGB", size, color).save(path, "JPEG")
+
+
+def test_brand_image_stamps_local_source_and_writes_expected_path(tmp_path, monkeypatch):
+    monkeypatch.setattr(nc, "NEWS_IMAGES_DIR", str(tmp_path / "news-images"))
+    src_dir = tmp_path / "docs"
+    src_dir.mkdir()
+    _make_test_jpeg(src_dir / "source.jpg")
+    # brand_image() reads local (non-http) sources relative to docs/ under
+    # ROOT -- point ROOT-derived docs/ lookup at our tmp dir instead.
+    monkeypatch.setattr(nc, "_fetch_image_bytes", lambda source: (src_dir / "source.jpg").read_bytes())
+
+    out = nc.brand_image("source.jpg", "my-slug")
+    assert out == "assets/news-images/my-slug.jpg"
+
+    written = tmp_path / "news-images" / "my-slug.jpg"
+    assert written.exists()
+
+    from PIL import Image
+    img = Image.open(written)
+    assert img.size == (1200, 675)
+
+
+def test_brand_image_returns_none_when_source_unfetchable(tmp_path, monkeypatch):
+    monkeypatch.setattr(nc, "NEWS_IMAGES_DIR", str(tmp_path / "news-images"))
+    monkeypatch.setattr(nc, "_fetch_image_bytes", lambda source: None)
+    assert nc.brand_image("https://example.com/missing.jpg", "slug") is None
+
+
+def test_brand_image_returns_none_on_corrupt_image_bytes(tmp_path, monkeypatch):
+    monkeypatch.setattr(nc, "NEWS_IMAGES_DIR", str(tmp_path / "news-images"))
+    monkeypatch.setattr(nc, "_fetch_image_bytes", lambda source: b"not a real image")
+    assert nc.brand_image("https://example.com/broken.jpg", "slug") is None
+
+
+def test_fetch_image_bytes_rejects_non_public_url():
+    assert nc._fetch_image_bytes("http://169.254.169.254/latest/meta-data/") is None

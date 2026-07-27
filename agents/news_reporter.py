@@ -18,6 +18,15 @@ _editorial_pass() reviews that draft against the same sourced material with
 a second, independent call before it ships — catching unsupported claims
 the drafting prompt's own instructions missed, not just restating them.
 
+Images, in priority order: (1) a real photo the discovered story already
+carried (CoinGecko's own thumbnail), (2) a real photo scraped from the
+source article's or a corroborating source's og:image, (3) only if neither
+exists, a genuine AI-generated illustration via agents/llm.py::generate_image()
+(xAI Grok Image — real cost, capped, see that function's docstring), (4)
+VAPE's own brand mark as the final, always-available fallback. Every report
+records which tier it actually got via the Image source field — an AI
+illustration is never presented as a real photo.
+
 Picks NEWS_REPORTER_PICKS stories per run (env, default 1) — run cadence
 (the calling workflow) controls daily volume, not this script.
 
@@ -32,8 +41,30 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import news_common as nc  # noqa: E402
 from agents import intel_common as ic  # noqa: E402
+from agents import llm  # noqa: E402
 
-FALLBACK_IMAGE = "assets/logo-v-256.png"  # VAPE's own brand mark -- used only when no real source image is found; never a fabricated stock photo
+FALLBACK_IMAGE = "assets/logo-v-256.png"  # VAPE's own brand mark -- used only when no real photo AND no generated image are available
+
+# Which of the two illustration styles fits each beat best (per user
+# direction: vary style by story rather than picking one house look).
+# "editorial" = photojournalistic/serious-wire-service; "abstract" =
+# clean geometric/chart/network motifs -- see STYLE_PROMPTS below.
+ABSTRACT_STYLE_TOPICS = {"crypto-markets", "macro", "stocks"}
+STYLE_PROMPTS = {
+    "editorial": ("photojournalistic editorial illustration, serious financial-news wire-service "
+                  "style, cinematic lighting, realistic"),
+    "abstract": ("abstract data-driven illustration, clean geometric shapes, network and chart "
+                 "motifs, financial-news color palette"),
+}
+
+
+def _image_prompt(headline, dek, topic_key, topic_label):
+    style = "abstract" if topic_key in ABSTRACT_STYLE_TOPICS else "editorial"
+    return (
+        f"{STYLE_PROMPTS[style]}. No text, no logos, no watermarks, no legible letters anywhere "
+        f"in the image. Editorial image for a news story about: {headline}. "
+        f"Context: {dek or topic_label}."
+    )
 
 
 def _load_ticker():
@@ -109,11 +140,11 @@ def _editorial_pass(grounding, draft_body):
 def write_story(candidate):
     corroboration = ic.web_search_snippets(candidate["title"], max_results=5)
 
-    image = candidate.get("image") or nc.extract_og_image(candidate["url"])
-    if not image:
+    real_image = candidate.get("image") or nc.extract_og_image(candidate["url"])
+    if not real_image:
         for r in corroboration.get("results", []):
-            image = nc.extract_og_image(r["url"])
-            if image:
+            real_image = nc.extract_og_image(r["url"])
+            if real_image:
                 break
 
     topic_label = nc.TOPIC_LABELS.get(candidate.get("topic"), candidate.get("topic") or "General")
@@ -153,6 +184,21 @@ def write_story(candidate):
     headline, dek, body = _parse_llm_output(raw, candidate["title"])
     body, fact_checked = _editorial_pass(grounding, body)
 
+    image, image_source = real_image, "Source photo"
+    if not image:
+        generated = llm.generate_image(_image_prompt(headline, dek, candidate.get("topic"), topic_label))
+        if generated:
+            image, image_source = generated, "AI-generated illustration (xAI Grok Image)"
+    if not image:
+        image, image_source = FALLBACK_IMAGE, "VAPE brand mark (no photo or illustration available this cycle)"
+    else:
+        # Every real/generated image gets VAPE Wire's own V-mark + wordmark
+        # stamped on before publication -- see brand_image()'s docstring.
+        # The already-100%-branded logo fallback above skips this step.
+        branded = nc.brand_image(image, nc.slugify(headline))
+        if branded:
+            image, image_source = branded, f"{image_source} — VAPE Wire branded"
+
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     source_lines = [f"- [{candidate['title']}]({candidate['url']}) — {candidate.get('source') or 'source'}"]
     for r in corroboration.get("results", []):
@@ -165,7 +211,8 @@ def write_story(candidate):
 **Date:** {stamp}
 **Topic:** {topic_label}
 **Dek:** {dek}
-**Image:** {image or FALLBACK_IMAGE}
+**Image:** {image}
+**Image source:** {image_source}
 **Fact-checked:** {"Yes — copy desk review completed" if fact_checked else "Draft not independently reviewed this cycle (copy desk unavailable)"}
 
 ---
