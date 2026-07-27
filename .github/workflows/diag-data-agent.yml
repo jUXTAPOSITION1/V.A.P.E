@@ -1,0 +1,28 @@
+name: Diagnose DATA AGENT transaction gap
+
+on:
+  workflow_dispatch:
+
+# Read-only diagnostic for a real live report ("no transactions in an
+# hour"): checks the DATA AGENT wallet's actual on-chain USDC/ETH balance
+# on Base (the most likely explanation for every paid attempt suddenly
+# returning a bare HTTP 402 across both facilitators and multiple
+# unrelated offerings), plus the live /x402/feed to see the real last
+# few settled/error jobs.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: DATA AGENT wallet balance (Base, public RPC, no key needed)
+        run: python scripts/diag_data_agent_balance.py 0x52af3E6D13f7C13EC887A2E69058A1432aa5B768
+      - name: Live /x402/feed -- most recent jobs (any facilitator, any status)
+        run: |
+          curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/x402/feed?limit=10" | python3 -m json.tool
+      - name: Live /x402/stats -- last 24h totals
+        run: |
+          curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/x402/stats?days=1" | python3 -m json.tool
