@@ -635,3 +635,5 @@
 | 2026-07-27 | auto | 0xF26662c4298e6be93F7ac22778Bf6e2Bf96F8063 (NightDriver) | deep_investigation | REJECT (7/100) | Owner not renounced (0xbf71ff1f8284abbc4eb11297bce7f979acf959f7) — can still act | +7d |
 
 | 2026-07-27 | auto | 0x9d02E97177073FB92A0F3F75CA36D56fdAfe2bcA (SHIB) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-27 | auto | 0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3 (MegaDoge) | deep_investigation | CAUTION (50/100) | Only 5% of liquidity is locked — the deployer can pull the rest at any time | +7d |

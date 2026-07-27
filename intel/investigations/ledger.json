@@ -533,6 +533,25 @@
     "symbol": "RISE",
     "times_investigated": 1
   },
+  "137:0xcbf4ab00b6aa19b4d5d29c7c3508b393a1c01fe3": {
+    "address": "0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3",
+    "chain": "137",
+    "creator_address": "0x38a5f90f91f29fcf94db8f2d4250338330c7a4df",
+    "first_investigated": "2026-07-27T02:57:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-025734-0xCBf4AB00.md",
+        "score": 50,
+        "ts": "2026-07-27T02:57:34Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T02:57:34Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "MegaDoge",
+    "times_investigated": 1
+  },
   "137:0xcfb287565201763743a77c556dca44a673d0a777": {
     "address": "0xCFB287565201763743A77c556dcA44A673d0a777",
     "chain": "137",
