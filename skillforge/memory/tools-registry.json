@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-07-27T11:59:47Z",
+  "updated": "2026-07-27T15:10:52Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -76,7 +76,7 @@
         "status": "verified",
         "last_verified": "2026-07-27T11:57:01Z",
         "version": "Echidna 2.3.2",
-        "latest_release": "v2.3.2"
+        "latest_release": "v2.3.3"
       },
       {
         "name": "foundry",
