@@ -5,10 +5,14 @@ on:
 
 # Read-only diagnostic for a real live report ("no transactions in an
 # hour"): checks the DATA AGENT wallet's actual on-chain USDC/ETH balance
-# on Base (the most likely explanation for every paid attempt suddenly
-# returning a bare HTTP 402 across both facilitators and multiple
-# unrelated offerings), plus the live /x402/feed to see the real last
-# few settled/error jobs.
+# on Base (ruled out -- 5.12 USDC, plenty), the live /x402/feed +
+# /x402/stats to see the real recent job history (confirmed: last
+# settlement was over an hour before the report, both CDP and VAPOR
+# facilitator paths stopped simultaneously), and now also the raw
+# unauthenticated 402 challenge on a real paid route -- to see whether
+# the CHALLENGE itself (not a real payment attempt) is well-formed right
+# now, which narrows down whether this is a worker-side response bug or
+# purely a facilitator/payment-verification-side rejection.
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -26,3 +30,13 @@ jobs:
       - name: Live /x402/stats -- last 24h totals
         run: |
           curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/x402/stats?days=1" | python3 -m json.tool
+      - name: Raw unauthenticated 402 challenge on a real paid route (no payment attempted)
+        run: |
+          echo "=== GET /data/bridges (no X-PAYMENT header) ==="
+          curl -sS -m 20 -i "https://vape-x402.vapex402.workers.dev/data/bridges"
+          echo
+          echo "=== GET /scan/token_safety_check?address=0x0000000000000000000000000000000000000000 (no X-PAYMENT header) ==="
+          curl -sS -m 20 -i "https://vape-x402.vapex402.workers.dev/scan/token_safety_check?address=0x0000000000000000000000000000000000000000"
+      - name: Admin bazaar-status (also proxies a real CDP API call -- confirms CDP itself is reachable right now)
+        run: |
+          curl -sS -m 20 "https://vape-x402.vapex402.workers.dev/admin/bazaar-status"
