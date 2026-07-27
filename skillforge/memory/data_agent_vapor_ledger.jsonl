@@ -139,3 +139,4 @@
 {"ts": "2026-07-27T11:25:20.480446Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-27T11:55:31.451920Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-27T12:41:34.350499Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-07-27T13:26:32.494380Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
