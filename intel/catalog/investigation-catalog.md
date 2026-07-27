@@ -677,3 +677,5 @@
 | 2026-07-27 | auto | 0xE441E2e14b0A2704D73F9d34FAB479682a22A897 (SLGNS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-27 | auto | 0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E (CATE) | deep_investigation | CAUTION (55/100) | Low liquidity $26,479 | +7d |
+
+| 2026-07-27 | auto | 0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444 (币有) | deep_investigation | CAUTION (75/100) | Violent 24h move +591% (volatility/manipulation) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T21:58:02Z",
+  "generated": "2026-07-27T22:00:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 387,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 117,
-    "investigations": 433,
+    "investigations": 434,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-213015-0x84481040.md",
-      "title": "Investigation \u2014 CATE",
-      "symbol": "CATE",
-      "name": "Catecoin",
-      "date": "2026-07-27T21:30:15Z",
-      "target": "0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260727-220018-0xd0bc8Ab3.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
+      "date": "2026-07-27T22:00:18Z",
+      "target": "0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444",
+      "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $26,479; [-10] Violent 24h move +4168% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 921 holder",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-213015-0x84481040.md"
+      "score": "75",
+      "summary": "Risk factors: [-10] Violent 24h move +591% (volatility/manipulation); [-5] Pair 25.4 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 9245 holders \u2014 reasonably distributed; 10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-220018-0xd0bc8Ab3.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-220018-0xd0bc8Ab3.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
+      "date": "2026-07-27T22:00:18Z",
+      "target": "0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Violent 24h move +591% (volatility/manipulation); [-5] Pair 25.4 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 9245 holders \u2014 reasonably distributed; 10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-220018-0xd0bc8Ab3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-213015-0x84481040.md",
@@ -593,20 +607,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Hidden owner; [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x1552160b3c36492f17cc9c468a082f9e6cc1f1e3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated. Positive evidence: 87895 holders \u2014 reasonably distr",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-211213-0xF39e4b21.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-185724-0xa0045305.md",
-      "title": "Investigation \u2014 CATE",
-      "symbol": "CATE",
-      "name": "Cate",
-      "date": "2026-07-26T18:57:24Z",
-      "target": "0xa00453052A36D43A99Ac1ca145DFe4A952cA33B8",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +667% (volatility/manipulation). Positive evidence: Ownership renounced; 7333 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 685+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-185724-0xa0045305.md"
     }
   ],
   "reports": [
