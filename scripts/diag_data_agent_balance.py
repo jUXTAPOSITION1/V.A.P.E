@@ -18,7 +18,9 @@ def _rpc(method, params):
     req = urllib.request.Request(
         BASE_RPC,
         data=json.dumps({"jsonrpc": "2.0", "id": 1, "method": method, "params": params}).encode(),
-        headers={"Content-Type": "application/json"},
+        # mainnet.base.org's public RPC 403s the default urllib User-Agent
+        # (bot-like UAs get blocked) -- a real browser-style UA is enough.
+        headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"},
     )
     with urllib.request.urlopen(req, timeout=15) as r:
         return json.loads(r.read().decode())
