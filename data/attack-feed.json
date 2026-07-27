@@ -15,7 +15,8 @@
         "BSC"
       ],
       "technique": null,
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-26-garden.md"
     },
     {
       "date": "2026-07-24",
@@ -27,7 +28,8 @@
         "Arbitrum"
       ],
       "technique": "Hot Wallet Compromise",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-24-triple-a.md"
     },
     {
       "date": "2026-07-24",
@@ -37,7 +39,8 @@
         "Ethereum"
       ],
       "technique": "Accounting Error",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-24-debond.md"
     },
     {
       "date": "2026-07-23",
@@ -47,7 +50,8 @@
         "Ethereum"
       ],
       "technique": "Input Validation Flaw",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-23-lien.md"
     },
     {
       "date": "2026-07-22",
@@ -57,7 +61,8 @@
         "Zilliqa"
       ],
       "technique": "Hidden Number Problem (HNP) Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-22-zilliqa.md"
     },
     {
       "date": "2026-07-22",
@@ -74,7 +79,8 @@
         "prevention": "Require independent verification of cross-chain messages from more than one relayer; avoid single-verifier bridge designs.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-22-verus-ethereum-bridge.md"
     },
     {
       "date": "2026-07-22",
@@ -91,7 +97,8 @@
         "prevention": "Multisig + timelock on every privileged function; alert in real time on owner/admin changes.",
         "covered_by": "investigate.py's score() flags an owner able to reclaim ownership or alter balances (can_take_back_ownership / owner_change_balance).",
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-22-afx-bridge.md"
     },
     {
       "date": "2026-07-21",
@@ -108,7 +115,8 @@
         "prevention": "EIP-712 domain separation with a nonce and expiry on every signed authorization; reject cross-chain replays.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-21-wanchain.md"
     },
     {
       "date": "2026-07-21",
@@ -125,7 +133,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-21-42dao.md"
     },
     {
       "date": "2026-07-19",
@@ -142,7 +151,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-19-allbridge-core.md"
     },
     {
       "date": "2026-07-17",
@@ -152,7 +162,8 @@
         "Solana"
       ],
       "technique": "Log Spoofing",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-17-across.md"
     },
     {
       "date": "2026-07-16",
@@ -162,7 +173,8 @@
         "Solana"
       ],
       "technique": "Liquidity Manipulation Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-16-defituna-lending.md"
     },
     {
       "date": "2026-07-15",
@@ -179,7 +191,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-15-ostium.md"
     },
     {
       "date": "2026-07-15",
@@ -196,7 +209,8 @@
         "prevention": "Use TWAP or multi-source oracles; never accept a single-block spot price for collateral or liquidation math.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-15-cascade-liquidity-strategy.md"
     },
     {
       "date": "2026-07-14",
@@ -213,7 +227,8 @@
         "prevention": "Timelock + quorum thresholds on execution; auto-flag any proposal that grants broad fund/token-transfer rights.",
         "covered_by": null,
         "out_of_scope": false
-      }
+      },
+      "analysis_report": "intel/threat-analysis/2026-07-14-barnbridge.md"
     },
     {
       "date": "2026-07-14",
@@ -223,7 +238,8 @@
         "Ethereum"
       ],
       "technique": "Math Mistake Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-14-drips-network.md"
     },
     {
       "date": "2026-07-13",
@@ -233,7 +249,8 @@
         "Arbitrum"
       ],
       "technique": "Silent Auto-Approval Hack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-13-lumi-finance.md"
     },
     {
       "date": "2026-07-13",
@@ -243,7 +260,8 @@
         "Ethereum"
       ],
       "technique": "Flashloan Accounting Logic Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-13-chi-protocol.md"
     },
     {
       "date": "2026-07-11",
@@ -253,7 +271,8 @@
         "Sui"
       ],
       "technique": "LP-share Inflation",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-11-bluemove-dex.md"
     },
     {
       "date": "2026-07-11",
@@ -263,7 +282,8 @@
         "Hedera"
       ],
       "technique": "Price Oracle Manipulation",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-11-bonzo-lend.md"
     },
     {
       "date": "2026-07-06",
@@ -273,7 +293,8 @@
         "Solana"
       ],
       "technique": "Malicious Governance Proposal",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-06-bonkdao.md"
     },
     {
       "date": "2026-07-05",
@@ -283,7 +304,8 @@
         "Ethereum"
       ],
       "technique": "Donation Attack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-05-lazy-summer-protocol.md"
     },
     {
       "date": "2026-07-02",
@@ -293,7 +315,8 @@
         "Ethereum"
       ],
       "technique": "prooflessDeposit() Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-07-02-hinkal.md"
     },
     {
       "date": "2026-06-30",
@@ -303,7 +326,8 @@
         "Ethereum"
       ],
       "technique": "Flashloan Price Oracle Attack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-30-edel.md"
     },
     {
       "date": "2026-06-28",
@@ -313,7 +337,8 @@
         "BSC"
       ],
       "technique": "Burn-from-LP Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-28-aidc.md"
     },
     {
       "date": "2026-06-25",
@@ -323,7 +348,8 @@
         "Polygon"
       ],
       "technique": "Front-end Vulnerability",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-25-polymarket-international.md"
     },
     {
       "date": "2026-06-25",
@@ -333,7 +359,8 @@
         "Ethereum"
       ],
       "technique": "Broken Signature Verification",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-25-lixir-finance.md"
     },
     {
       "date": "2026-06-23",
@@ -343,7 +370,8 @@
         "Cardano"
       ],
       "technique": "Predictable Private Key Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-23-secondfi.md"
     },
     {
       "date": "2026-06-23",
@@ -353,7 +381,8 @@
         "Polygon"
       ],
       "technique": "Hook Manipulation Hack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-23-royal-io.md"
     },
     {
       "date": "2026-06-21",
@@ -363,7 +392,8 @@
         "Quicksilver"
       ],
       "technique": "Unchecked Proof Minting",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-21-quicksilver-zone.md"
     },
     {
       "date": "2026-06-21",
@@ -373,7 +403,8 @@
         "Taiko"
       ],
       "technique": "Fake Proof Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-21-taiko-bridge.md"
     },
     {
       "date": "2026-06-20",
@@ -383,7 +414,8 @@
         "BSC"
       ],
       "technique": "Deflationary Reserve Poisoning",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-20-labubu-olpc.md"
     },
     {
       "date": "2026-06-20",
@@ -393,7 +425,8 @@
         "Ethereum"
       ],
       "technique": "Reverse MEV Honeypot",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-20-jaredfromsubway-mev-bot.md"
     },
     {
       "date": "2026-06-19",
@@ -403,7 +436,8 @@
         "BSC"
       ],
       "technique": "Flashloan Price Manipulation",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-19-jb.md"
     },
     {
       "date": "2026-06-19",
@@ -413,7 +447,8 @@
         "Starknet"
       ],
       "technique": "CL Pool Accounting Hack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-19-myswap-cl.md"
     },
     {
       "date": "2026-06-19",
@@ -423,7 +458,8 @@
         "Namada"
       ],
       "technique": "IBC Transfer Logic Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-19-namada-shielded-pools.md"
     },
     {
       "date": "2026-06-19",
@@ -433,7 +469,8 @@
         "Secret"
       ],
       "technique": "Unbacked Mint via ICS-20",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-19-secret-network.md"
     },
     {
       "date": "2026-06-17",
@@ -443,7 +480,8 @@
         "BSC"
       ],
       "technique": "Transfer/Sell Logic Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-17-dip.md"
     },
     {
       "date": "2026-06-17",
@@ -453,7 +491,8 @@
         "BSC"
       ],
       "technique": "Oracle Manipulation",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-17-little-boy-plus.md"
     },
     {
       "date": "2026-06-17",
@@ -463,7 +502,8 @@
         "Ethereum"
       ],
       "technique": "escapeHatch Function Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-17-aztec-bridge.md"
     },
     {
       "date": "2026-06-16",
@@ -473,7 +513,8 @@
         "Monero"
       ],
       "technique": "ACK Frontrun Attack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-16-retoswap.md"
     },
     {
       "date": "2026-06-15",
@@ -483,7 +524,8 @@
         "Ethereum"
       ],
       "technique": "Low-Supply Share Pricing Hack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-15-thetanuts-finance.md"
     },
     {
       "date": "2026-06-14",
@@ -493,7 +535,8 @@
         "Ethereum"
       ],
       "technique": "ZK proof verification Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-14-aztec-connect.md"
     },
     {
       "date": "2026-06-10",
@@ -503,7 +546,8 @@
         "Solana"
       ],
       "technique": "Fake LP Mint Attack",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-10-raydium-amm.md"
     },
     {
       "date": "2026-06-09",
@@ -513,7 +557,8 @@
         "Ethereum"
       ],
       "technique": "DN404 Forge Loop",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-09-asterix.md"
     },
     {
       "date": "2026-06-09",
@@ -523,7 +568,8 @@
         "Ethereum"
       ],
       "technique": "Dividend Snapshot Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-09-novabox.md"
     },
     {
       "date": "2026-06-09",
@@ -533,7 +579,8 @@
         "Ethereum"
       ],
       "technique": "Malicious Governance Proposal",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-09-token-of-power.md"
     },
     {
       "date": "2026-06-08",
@@ -543,7 +590,8 @@
         "Ethereum"
       ],
       "technique": "DN404 Forge Loop",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-08-flooring-protocol.md"
     },
     {
       "date": "2026-06-08",
@@ -554,7 +602,8 @@
         "BSC"
       ],
       "technique": "Private Key Compromised",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-08-humanity.md"
     },
     {
       "date": "2026-06-07",
@@ -564,7 +613,8 @@
         "Syscoin"
       ],
       "technique": "Fake Proof Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-07-syscoin-bridge.md"
     },
     {
       "date": "2026-06-07",
@@ -574,7 +624,8 @@
         "Ethereum"
       ],
       "technique": "Flashloan Accounting Logic Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-07-ambient.md"
     },
     {
       "date": "2026-06-03",
@@ -584,7 +635,8 @@
         "Ethereum"
       ],
       "technique": "Social Engineering",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-03-gpu-net.md"
     },
     {
       "date": "2026-06-03",
@@ -594,7 +646,8 @@
         "BSC"
       ],
       "technique": "Tax Logic Exploit",
-      "source_url": null
+      "source_url": null,
+      "analysis_report": "intel/threat-analysis/2026-06-03-atm.md"
     }
   ]
 }
