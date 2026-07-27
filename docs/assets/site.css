@@ -266,7 +266,7 @@ a { transition: color .15s; }
    three "this matters" colors collide. */
 .flagship-section {
     position: relative;
-    border: 1px solid rgba(251, 191, 36, 0.28);
+    border: 1px solid rgba(251, 191, 36, 0.12);
     border-radius: var(--radius-lg);
     background-color: var(--bg-panel);
     background-image: radial-gradient(ellipse 140% 100% at 15% 0%, rgba(251, 191, 36, 0.10), transparent 55%),

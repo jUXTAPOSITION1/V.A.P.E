@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=8">
+    <link rel="stylesheet" href="assets/site.css?v=9">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -155,7 +155,7 @@
         <!-- ═══ 1. HERO ═══ -->
         <header class="reveal pt-2 sm:pt-3 pb-8 sm:pb-12">
             <h1 class="hero-title">
-                &gt; Intelligence, verified on-chain.
+                Intelligence, verified on-chain.
             </h1>
             <p class="text-zinc-400 mt-5 text-sm sm:text-base max-w-xl leading-relaxed">
                 VAPE continuously monitors Base and the Virtuals ecosystem — live investigations,
@@ -171,7 +171,7 @@
         <!-- ═══ 2. PLATFORM OVERVIEW ═══ -->
         <section id="the-file" class="reveal panel mb-14">
             <div class="eyebrow mb-3"><i class="fa-solid fa-satellite-dish"></i>[ system overview ]</div>
-            <h2 class="section-title text-lg mb-4">&gt; A single system, watching everything that matters on Base.</h2>
+            <h2 class="section-title text-lg mb-4">A single system, watching everything that matters on Base.</h2>
             <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-10">VAPE turns the constant noise of on-chain activity into a small number of things worth
             knowing — which tokens are safe to touch, which capital flows are shifting, and which threats deserve attention right now. It runs
             continuously and cites its sources.</p>
@@ -180,7 +180,7 @@
             <div class="pt-8 border-t border-white/10">
                 <div class="flex items-center justify-between flex-wrap gap-2 mb-5">
                     <div>
-                        <h3 class="section-title"><i class="fa-solid fa-chart-column text-zinc-500 text-sm mr-1.5"></i>&gt; Track Record</h3>
+                        <h3 class="section-title"><i class="fa-solid fa-chart-column text-zinc-500 text-sm mr-1.5"></i>Track Record</h3>
                         <p class="text-xs text-zinc-500 mt-1">Every number below updates automatically from this repository and VAPE's on-chain identity.</p>
                     </div>
                 </div>
@@ -202,64 +202,13 @@
             </div>
         </section>
 
-        <!-- ═══ 2.5. FLAGSHIP: COMMISSION A BOUNTY ═══
-             VAPE's primary paid offering, elevated to a real focal point right
-             after the hero — not a filed-away line item further down the page.
-             Same handlers/offering key the detailed card in Bounty Command
-             Center already uses (Hire.openX402/openAcp('bounty_deep_dive', 1))
-             so both entry points dispatch identically; this one just sells it. -->
-        <section id="commission-flagship" class="reveal flagship-section mb-14">
-            <div class="flex flex-wrap items-center gap-2 mb-4">
-                <span class="relative flex h-1.5 w-1.5">
-                    <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
-                </span>
-                <div class="flagship-kicker">[ flagship offering ]</div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-end">
-                <div class="lg:col-span-7">
-                    <h2 class="hero-title !text-xl sm:!text-2xl mb-4">&gt; Commission a real exploit against a real contract.</h2>
-                    <p class="text-zinc-300 text-sm sm:text-[15px] max-w-xl leading-relaxed mb-5">
-                        Give VAPE a contract address or GitHub repo. It runs full recon, static and symbolic analysis, then a
-                        frontier model drafts an actual exploit test — which VAPE then <span class="text-amber-200">executes with
-                        Foundry against a live fork of that contract's real on-chain state</span>. A pass is real, measured
-                        impact evidence, not a narrative claim. This is a genuine bug-bounty proof-of-concept, built to submit.
-                    </p>
-                    <div class="flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-400 mb-7">
-                        <span>✓ Executed exploit test, not narrated</span>
-                        <span>✓ Real forked on-chain state</span>
-                        <span>✓ Frontier-LLM vulnerability reasoning</span>
-                        <span>✓ Submission-ready report</span>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="flagship-btn">Authorize via x402 →</button>
-                        <button onclick="Hire.openAcp('bounty_deep_dive')" class="flagship-btn-ghost">Engage via ACP</button>
-                        <a href="#bounty-command-center" class="flagship-btn-ghost">See a sample report</a>
-                    </div>
-                </div>
-                <div class="lg:col-span-5">
-                    <div class="spotlight-card !border-amber-400/25">
-                        <div class="text-xs text-zinc-500 mb-1">Bounty Deep-Dive Audit</div>
-                        <div class="flagship-price">$1<span class="text-base text-zinc-500 font-normal"> USDC</span></div>
-                        <p class="text-xs text-zinc-500 mt-2 mb-5">Settles instantly on Base. No fixed turnaround — delivered the moment the simulated attack completes.</p>
-                        <div class="stat-line text-[11px]">
-                            <span class="stat-label">contract address or repo</span>
-                            <span class="stat-label">·</span>
-                            <span class="stat-label">x402 or ACP escrow</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- ═══ 3. LIVE X402 LEDGER (prioritized right after the flagship offering) ═══ -->
+        <!-- ═══ 3. LIVE X402 LEDGER ═══ -->
         <section id="x402-ledger" class="reveal panel mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
                 <div class="eyebrow"><i class="fa-solid fa-money-bill-transfer"></i>[ on-chain settlement ]</div>
                 <span id="x402-updated" class="text-[11px] text-zinc-500 flex items-center gap-1.5">syncing…</span>
             </div>
-            <h2 class="section-title text-lg mb-3">&gt; The Ledger</h2>
+            <h2 class="section-title text-lg mb-3">The Ledger</h2>
             <p class="text-zinc-400 text-sm mb-7 max-w-3xl leading-relaxed">Every x402 job VAPE settles for another agent or paying client — successful or not,
             logged the instant payment clears. Each entry is anchored to its real settlement on Base.</p>
 
@@ -418,7 +367,7 @@
         <!-- ═══ ENGAGEMENT OPTIONS (moved to right after Recent Jobs) ═══ -->
         <section id="retain" class="reveal mb-14 panel">
             <div class="eyebrow mb-3"><i class="fa-solid fa-handshake"></i>[ commission vape ]</div>
-            <h2 class="section-title text-lg mb-4">&gt; Engagement Options</h2>
+            <h2 class="section-title text-lg mb-4">Engagement Options</h2>
             <p class="text-zinc-400 text-sm mb-7 max-w-2xl leading-relaxed">Two ways to work with VAPE, both settling instantly in USDC on Base.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -454,6 +403,58 @@
             </div>
         </section>
 
+        <!-- ═══ 3.5. FLAGSHIP: COMMISSION A BOUNTY ═══
+             VAPE's primary paid offering, elevated to a real focal point right
+             after Engagement Options — not a filed-away line item further down
+             the page. Same handlers/offering key the detailed card in Bounty
+             Command Center already uses (Hire.openX402/openAcp('bounty_deep_dive',
+             1)) so both entry points dispatch identically; this one just sells it. -->
+        <section id="commission-flagship" class="reveal flagship-section mb-14">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
+                </span>
+                <div class="flagship-kicker">[ flagship offering ]</div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+                <div class="lg:col-span-7">
+                    <h2 class="hero-title !text-xl sm:!text-2xl mb-4">Commission a real exploit against a real contract.</h2>
+                    <p class="text-zinc-300 text-sm sm:text-[15px] max-w-xl leading-relaxed mb-5">
+                        Give VAPE a contract address or GitHub repo. It runs full recon, static and symbolic analysis, then a
+                        frontier model drafts an actual exploit test — which VAPE then <span class="text-amber-200">executes with
+                        Foundry against a live fork of that contract's real on-chain state</span>. A pass is real, measured
+                        impact evidence, not a narrative claim. This is a genuine bug-bounty proof-of-concept, built to submit.
+                    </p>
+                    <div class="flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-400 mb-7">
+                        <span>✓ Executed exploit test, not narrated</span>
+                        <span>✓ Real forked on-chain state</span>
+                        <span>✓ Frontier-LLM vulnerability reasoning</span>
+                        <span>✓ Submission-ready report</span>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="flagship-btn">Authorize via x402 →</button>
+                        <button onclick="Hire.openAcp('bounty_deep_dive')" class="flagship-btn-ghost">Engage via ACP</button>
+                        <a href="#bounty-command-center" class="flagship-btn-ghost">See a sample report</a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="spotlight-card !border-amber-400/25">
+                        <div class="text-xs text-zinc-500 mb-1">Bounty Deep-Dive Audit</div>
+                        <div class="flagship-price">$1<span class="text-base text-zinc-500 font-normal"> USDC</span></div>
+                        <p class="text-xs text-zinc-500 mt-2 mb-5">Settles instantly on Base. No fixed turnaround — delivered the moment the simulated attack completes.</p>
+                        <div class="stat-line text-[11px]">
+                            <span class="stat-label">contract address or repo</span>
+                            <span class="stat-label">·</span>
+                            <span class="stat-label">x402 or ACP escrow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
         <!-- ═══ 4. FEATURED INVESTIGATION (moved higher) ═══ -->
         <section id="case-file" class="reveal spotlight-section mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
@@ -461,7 +462,7 @@
                 <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
             <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
-                <h2 class="section-title text-lg sm:text-xl">&gt; Featured Investigation &amp; Latest Report</h2>
+                <h2 class="section-title text-lg sm:text-xl">Featured Investigation &amp; Latest Report</h2>
                 <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
                     Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </button>
@@ -495,7 +496,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="section-title text-lg mb-3">&gt; Every attack, tracked as it happens.</h2>
+            <h2 class="section-title text-lg mb-3">Every attack, tracked as it happens.</h2>
             <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of real exploits across DeFi from roughly the past two months —
             technique, amount, and where the next incident is likely to land.</p>
 
@@ -559,7 +560,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="section-title text-lg mb-3">&gt; Development Ledger</h2>
+            <h2 class="section-title text-lg mb-3">Development Ledger</h2>
             <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-6">VAPE builds and improves its own tooling. On a regular schedule — and whenever a
             maintainer requests it — VAPE proposes a concrete improvement, implements it, and submits it for review.</p>
             <div class="stat-line mb-6 pb-6 border-b border-white/10">
@@ -611,7 +612,7 @@
                 <div class="eyebrow"><i class="fa-solid fa-user-shield"></i>[ security operations ]</div>
                 <span id="bcc-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
-            <h2 class="section-title text-lg mb-3">&gt; Bounty Command Center</h2>
+            <h2 class="section-title text-lg mb-3">Bounty Command Center</h2>
             <p class="text-zinc-400 text-sm mb-8 max-w-3xl leading-relaxed">Active bug-bounty programs, VAPE's own audit record, and a
             direct line to commission a paid engagement — from a $0.01 exploit check to a $1 submission-ready bounty audit,
             hireable directly from a matched program below.</p>
@@ -724,7 +725,7 @@
         <!-- ═══ 9. LIVE INTELLIGENCE FEED / BASE TRACKING (moved lower) ═══ -->
         <section id="the-wire" class="reveal panel mb-14">
             <div class="eyebrow mb-3"><i class="fa-solid fa-chart-line"></i>[ live data ]</div>
-            <h2 class="section-title text-lg mb-3">&gt; Live Intelligence Feed</h2>
+            <h2 class="section-title text-lg mb-3">Live Intelligence Feed</h2>
             <p class="text-zinc-400 text-sm mb-7 max-w-2xl leading-relaxed">The broader market and Base itself — capital flows, network health,
             protocol activity — refreshed every five minutes, never a cached snapshot.</p>
 
@@ -894,7 +895,7 @@
         <!-- ═══ 10. TOKEN SECURITY ASSESSMENT (free preview) ═══ -->
         <section id="run-a-scan" class="reveal panel mb-14">
             <div class="eyebrow mb-3"><i class="fa-solid fa-code"></i>[ open-source tool ]</div>
-            <h2 class="section-title text-lg mb-3">&gt; Token Security Assessment</h2>
+            <h2 class="section-title text-lg mb-3">Token Security Assessment</h2>
             <p class="text-sm text-zinc-400 mb-6 max-w-2xl leading-relaxed">Enter any Base token contract for an instant security and liquidity assessment —
             open source, and available to anyone.</p>
             <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-3">
@@ -913,7 +914,7 @@
         <!-- ═══ 11. PORTFOLIO INTELLIGENCE (wallet profile) ═══ -->
         <section id="your-case-file" class="reveal panel mb-14">
             <div class="eyebrow mb-3"><i class="fa-solid fa-wallet"></i>[ wallet ]</div>
-            <h2 class="section-title text-lg mb-3">&gt; Portfolio Intelligence</h2>
+            <h2 class="section-title text-lg mb-3">Portfolio Intelligence</h2>
             <p class="text-sm text-zinc-400 mb-6 max-w-2xl leading-relaxed">Connect a wallet to see a complete picture of your Base holdings —
             balances, valuations, and performance. Nothing is stored server-side; history lives only in this browser.</p>
             <div id="profile-root">
@@ -928,7 +929,7 @@
             <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
                 <div>
                     <div class="eyebrow mb-3"><i class="fa-solid fa-box-archive"></i>[ records ]</div>
-                    <h2 class="section-title text-lg">&gt; Investigation Archive</h2>
+                    <h2 class="section-title text-lg">Investigation Archive</h2>
                 </div>
                 <div class="icon-dropdown">
                     <button class="icon-dropdown-btn" title="Archive options" aria-label="Menu">
@@ -991,7 +992,7 @@
                 <img src="assets/image-7.jpg" alt="VAPE" class="w-28 h-28 sm:w-32 sm:h-32 object-cover mx-auto sm:mx-0 border border-white/10" onerror="this.remove()">
                 <div>
                     <div class="eyebrow mb-2"><i class="fa-solid fa-microchip"></i>[ the agent ]</div>
-                    <h2 class="section-title text-lg mb-3">&gt; VAPE</h2>
+                    <h2 class="section-title text-lg mb-3">VAPE</h2>
                     <p class="text-sm text-zinc-400 leading-relaxed mb-5 max-w-2xl">An autonomous on-chain intelligence system operating continuously on Base — verified
                     identity, escrowed commerce, real evidence behind every finding.</p>
                     <div class="stat-line text-xs">
