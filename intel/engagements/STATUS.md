@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-27T18:09:29Z
+# VAPE Engagement Status — 2026-07-27T20:07:47Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -23,6 +23,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - BarnBridge (exploit $776,000) ($776,000, fit 79) — checked 2026-07-15T18:41:35Z, honestly unresolved.
 - DeBond (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:51Z, honestly unresolved.
 - Lien (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:54Z, honestly unresolved.
+- Projekt (exploit $560,000) ($560,000, fit 77) — checked 2026-07-27T20:07:41Z, honestly unresolved.
 - Verus-Ethereum Bridge (exploit $11,500,000) ($11,500,000, fit 74) — checked 2026-07-13T05:05:20Z, honestly unresolved.
 - Lumi Finance (exploit $270,000) ($270,000, fit 74) — checked 2026-07-14T02:35:41Z, honestly unresolved.
 - Humanity (exploit $32,000,000) ($32,000,000, fit 66) — checked 2026-07-13T05:05:18Z, honestly unresolved.
