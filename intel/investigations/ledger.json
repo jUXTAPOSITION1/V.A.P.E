@@ -495,6 +495,25 @@
     "symbol": "MV",
     "times_investigated": 1
   },
+  "137:0xac0f66379a6d7801d7726d5a943356a172549adb": {
+    "address": "0xAC0F66379A6d7801D7726d5a943356A172549Adb",
+    "chain": "137",
+    "creator_address": "0xe8074a74a32d3ef58dee3e1b7e549483cf2ba52a",
+    "first_investigated": "2026-07-27T09:11:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-091131-0xAC0F6637.md",
+        "score": 35,
+        "ts": "2026-07-27T09:11:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T09:11:31Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "GEOD",
+    "times_investigated": 1
+  },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {
     "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
     "chain": "137",

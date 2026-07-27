@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T08:56:22Z",
+  "generated": "2026-07-27T09:11:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 370,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 114,
-    "investigations": 405,
+    "investigations": 406,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-071143-0xc02179dd.md",
-      "title": "Investigation \u2014 velvet",
-      "symbol": "velvet",
-      "name": "velvet",
-      "date": "2026-07-27T07:11:43Z",
-      "target": "0xc02179dda49187A8761156F011F40D7E41FaCAAF",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260727-091131-0xAC0F6637.md",
+      "title": "Investigation \u2014 GEOD",
+      "symbol": "GEOD",
+      "name": "Geodnet Token",
+      "date": "2026-07-27T09:11:31Z",
+      "target": "0xAC0F66379A6d7801D7726d5a943356A172549Adb",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concen",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-071143-0xc02179dd.md"
+      "score": "35",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot est",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-091131-0xAC0F6637.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-091131-0xAC0F6637.md",
+      "title": "Investigation \u2014 GEOD",
+      "symbol": "GEOD",
+      "name": "Geodnet Token",
+      "date": "2026-07-27T09:11:31Z",
+      "target": "0xAC0F66379A6d7801D7726d5a943356A172549Adb",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot est",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-091131-0xAC0F6637.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-071143-0xc02179dd.md",
@@ -593,20 +607,6 @@
       "score": "3",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,751 (rug/illiquid); [-10] Low liquidity $5,751; [-10] Pair 4.7 d",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-091027-0xd6a20E0E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-085518-0x8cDDd6Ee.md",
-      "title": "Investigation \u2014 PUPPY",
-      "symbol": "PUPPY",
-      "name": "Puppy",
-      "date": "2026-07-26T08:55:18Z",
-      "target": "0x8cDDd6EeA1067b78B77255e49861843F69D4703D",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +16882% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-085518-0x8cDDd6Ee.md"
     }
   ],
   "reports": [
