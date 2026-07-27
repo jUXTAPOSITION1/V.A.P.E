@@ -199,6 +199,29 @@ def scan_reports():
     return out
 
 
+def scan_news():
+    """intel/news/*.md (agents/news_reporter.py's own investigative stories)
+    -> metadata list, newest first. Distinct from scan_reports()'s intel/
+    reports/ sweeps -- these are per-story articles, not category digests."""
+    out = []
+    for fp in glob.glob(os.path.join(ROOT, "intel/news/*.md")):
+        name = os.path.basename(fp)
+        txt = _read(fp)
+        image = _field(txt, "Image") or ""
+        out.append({
+            "file": name,
+            "title": _first_heading(txt, name),
+            "byline": _field(txt, "Byline") or "VAPE Reporter",
+            "date": _field(txt, "Date") or _date_from_name(name),
+            "topic": _field(txt, "Topic"),
+            "dek": _field(txt, "Dek") or _summary(txt, 200),
+            "image": image if image.startswith("http") else (f"{BLOB}/docs/{image}" if image else None),
+            "url": f"{BLOB}/{_rel(fp)}",
+        })
+    out.sort(key=lambda r: r["date"], reverse=True)
+    return out
+
+
 def scan_broadcasts():
     out = []
     for fp in glob.glob(os.path.join(ROOT, "intel/broadcasts/*.md")):

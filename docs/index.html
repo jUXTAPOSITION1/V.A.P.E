@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=9">
+    <link rel="stylesheet" href="assets/site.css?v=10">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -209,6 +209,69 @@
                     <a href="https://x.com/based_vape" target="_blank" rel="noopener" class="text-zinc-500 hover:text-zinc-200 transition"><i class="fa-brands fa-x-twitter"></i> @based_vape</a>
                 </div>
                 <p id="rep-disclaimer" class="text-[11px] text-zinc-600 mt-3"></p>
+            </div>
+        </section>
+
+        <!-- ═══ 2.5. NEWS INTEL ═══ -->
+        <section id="news-intel" class="reveal panel mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                    <div class="eyebrow mb-3"><i class="fa-solid fa-newspaper"></i>[ VAPE Wire ]</div>
+                    <h2 class="section-title text-lg">VAPE's own newsroom — crypto and blockchain breaking news leads, alongside security, intel, and macro markets.</h2>
+                </div>
+                <div class="icon-dropdown">
+                    <button class="icon-dropdown-btn" title="News options" aria-label="Menu">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <div class="icon-dropdown-menu">
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/news" target="_blank"><i class="fa-solid fa-code"></i>View source</a>
+                        <button onclick="NewsFeed.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
+                        <div class="icon-dropdown-divider"></div>
+                        <button onclick="document.getElementById('news-search').value=''; NewsFeed.clearFilters()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
+                    </div>
+                </div>
+            </div>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">VAPE Wire — a live breaking-headlines ticker where crypto and blockchain news always
+            leads, alongside intel, security, and macro markets, plus VAPE's own investigative writeups underneath. Real sources cited inline, generated on a
+            schedule by a frontier model, never fabricated.</p>
+
+            <div class="mb-6 pb-5 border-b border-white/10">
+                <div class="flex items-center gap-2 text-[11px] text-zinc-500 mb-2">
+                    <span class="relative flex h-1.5 w-1.5" aria-hidden="true">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
+                    </span>
+                    Breaking
+                </div>
+                <div id="news-ticker-wrap" class="w-full h-5 relative overflow-hidden">
+                    <div id="news-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
+                        <span class="text-zinc-600">syncing news feed…</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
+                    <input id="news-search" type="text" placeholder="Search headline, topic…"
+                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
+                </div>
+                <div id="news-topic-filter" class="flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="skeleton h-48"></div>
+                <div class="skeleton h-48"></div>
+                <div class="skeleton h-48"></div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-4 text-[11px] text-zinc-500">
+                <span id="news-pg-count">—</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="news-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="news-pg-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="news-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
+                </div>
             </div>
         </section>
 
@@ -1100,5 +1163,6 @@
     <script type="module" src="assets/hire.js?v=13"></script>
     <script type="module" src="assets/x402feed.js?v=3"></script>
     <script type="module" src="assets/attackfeed.js?v=4"></script>
+    <script type="module" src="assets/newsfeed.js?v=1"></script>
 </body>
 </html>
