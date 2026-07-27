@@ -1532,6 +1532,25 @@
     "symbol": "DIM",
     "times_investigated": 1
   },
+  "1:0xa64ac4ecc7302ba4dcf1f9cc8856ac5c2ed2c581": {
+    "address": "0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581",
+    "chain": "1",
+    "creator_address": "0xdbc9465f85fdb7f776ca2f24ec69e3fe8bb1b457",
+    "first_investigated": "2026-07-27T16:12:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-161238-0xA64aC4eC.md",
+        "score": 32,
+        "ts": "2026-07-27T16:12:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T16:12:38Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "RWA",
+    "times_investigated": 1
+  },
   "1:0xaa26754dd0c8310cb70f3b66daeab52c8cff3c30": {
     "address": "0xaa26754dD0C8310cB70F3B66DAeAb52c8cFf3c30",
     "chain": "1",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T15:57:11Z",
+  "generated": "2026-07-27T16:12:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 379,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 426,
+    "investigations": 427,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-155707-0x5C09A9cE.md",
-      "title": "Investigation \u2014 fBOMB",
-      "symbol": "fBOMB",
-      "name": "Fantom Bomb",
-      "date": "2026-07-27T15:57:07Z",
-      "target": "0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce",
-      "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated. Positive evidence: 1352 holders \u2014 reasonably distributed; Trading 279+ days without a known incident in this scan; Custom verified source (not a mass-produced factory ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-155707-0x5C09A9cE.md"
+      "file": "investigation-20260727-161238-0xA64aC4eC.md",
+      "title": "Investigation \u2014 RWA",
+      "symbol": "RWA",
+      "name": "Real World Acquisitions",
+      "date": "2026-07-27T16:12:38Z",
+      "target": "0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) \u2014 can still act on the contract; [-8] Low holder count (66); [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +634% (volatility/manipulation); [-15] Pair only 0.8 days ol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-161238-0xA64aC4eC.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-161238-0xA64aC4eC.md",
+      "title": "Investigation \u2014 RWA",
+      "symbol": "RWA",
+      "name": "Real World Acquisitions",
+      "date": "2026-07-27T16:12:38Z",
+      "target": "0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) \u2014 can still act on the contract; [-8] Low holder count (66); [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +634% (volatility/manipulation); [-15] Pair only 0.8 days ol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-161238-0xA64aC4eC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-155707-0x5C09A9cE.md",
@@ -593,20 +607,6 @@
       "score": "5",
       "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $25,871; [-10] Violent 24h move +242% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-172628-0xf72a7beA.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-171127-0xeA4D009D.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "Dollar CZ Average",
-      "date": "2026-07-26T17:11:27Z",
-      "target": "0xeA4D009DD99cb83FF4e27C533e279e6120364444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xfDf82991f00caE63062fD1d52e7f340693A34444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 99% of supply \u2014 concentrated, ea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-171127-0xeA4D009D.md"
     }
   ],
   "reports": [
