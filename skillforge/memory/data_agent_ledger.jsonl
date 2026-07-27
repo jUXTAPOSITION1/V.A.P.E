@@ -192,3 +192,4 @@
 {"ts": "2026-07-27T00:27:39.379824Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-27T00:57:36.964063Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-27T01:27:41.164140Z", "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
+{"ts": "2026-07-27T01:57:55.487584Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["token_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
