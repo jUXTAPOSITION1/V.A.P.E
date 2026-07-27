@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=9">
+    <link rel="stylesheet" href="assets/site.css?v=11">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -88,6 +88,7 @@
 
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-500">
                 <a href="#the-file" class="hover:text-zinc-100 transition">Overview</a>
+                <a href="news.html" class="hover:text-zinc-100 transition">News</a>
                 <a href="#case-file" class="hover:text-zinc-100 transition">Investigation</a>
                 <a href="#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
                 <a href="#retain" class="hover:text-zinc-100 transition">Engagement</a>
@@ -113,6 +114,7 @@
         <div id="nav-menu-panel" class="lg:hidden absolute top-full left-0 right-0 border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl invisible opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out origin-top">
             <div class="max-w-[1600px] mx-auto px-5 py-3 flex flex-col gap-1 text-sm text-zinc-300">
                 <a href="#the-file" class="px-2 py-2.5 hover:bg-white/5">Overview</a>
+                <a href="news.html" class="px-2 py-2.5 hover:bg-white/5">News</a>
                 <a href="#case-file" class="px-2 py-2.5 hover:bg-white/5">Investigation</a>
                 <a href="#threat-ledger" class="px-2 py-2.5 hover:bg-white/5">Threats</a>
                 <a href="#retain" class="px-2 py-2.5 hover:bg-white/5">Engagement</a>
@@ -210,6 +212,49 @@
                 </div>
                 <p id="rep-disclaimer" class="text-[11px] text-zinc-600 mt-3"></p>
             </div>
+        </section>
+
+        <!-- ═══ 2.5. NEWS INTEL ═══
+             A teaser only — the full searchable/filterable archive and
+             every individual full-page article live on news.html/
+             article.html (docs/assets/newspage.js / article.js), a separate
+             page built to read like a real news site rather than a
+             dashboard section. This block's job is just to surface the
+             ticker + latest stories and send readers there. -->
+        <section id="news-intel" class="reveal panel mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                    <div class="eyebrow mb-3"><i class="fa-solid fa-newspaper"></i>[ VAPE Wire ]</div>
+                    <h2 class="section-title text-lg">VAPE's own newsroom — crypto and blockchain breaking news leads, alongside security, intel, and macro markets.</h2>
+                </div>
+                <a href="news.html" class="term-btn term-btn-sm shrink-0">Full VAPE Report <i class="fa-solid fa-arrow-right text-[9px] ml-1"></i></a>
+            </div>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">A live breaking-headlines ticker where crypto and blockchain news always
+            leads, alongside intel, security, and macro markets, plus VAPE's own investigative writeups underneath. Real sources cited inline, generated on a
+            schedule by a frontier model and independently fact-checked, never fabricated.</p>
+
+            <div class="mb-6 pb-5 border-b border-white/10">
+                <div class="flex items-center gap-2 text-[11px] text-zinc-500 mb-2">
+                    <span class="relative flex h-1.5 w-1.5" aria-hidden="true">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
+                    </span>
+                    Breaking
+                </div>
+                <div id="news-ticker-wrap" class="w-full h-5 relative overflow-hidden">
+                    <div id="news-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
+                        <span class="text-zinc-600">syncing news feed…</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="skeleton h-48"></div>
+                <div class="skeleton h-48"></div>
+                <div class="skeleton h-48"></div>
+            </div>
+
+            <a href="news.html" class="term-btn mt-5 inline-block">Read the full VAPE Report <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
         </section>
 
         <!-- ═══ 3. LIVE X402 LEDGER ═══ -->
@@ -1100,5 +1145,6 @@
     <script type="module" src="assets/hire.js?v=13"></script>
     <script type="module" src="assets/x402feed.js?v=3"></script>
     <script type="module" src="assets/attackfeed.js?v=4"></script>
+    <script type="module" src="assets/newsfeed.js?v=1"></script>
 </body>
 </html>

@@ -1,0 +1,112 @@
+name: VAPE Wire (news-intel discovery + reporting)
+
+# Two-step pipeline, run together every 3 hours (8x/day):
+#   1. agents/news_scan.py  -- discovery only (Google News search + CoinGecko's
+#      news feed + one bounded web search), writes data/news-feed.json (the
+#      site's breaking-headlines ticker).
+#   2. agents/news_reporter.py -- reads that same feed, picks NEWS_REPORTER_PICKS
+#      not-yet-covered stories (default 1/run -> ~8 stories/day at this cadence),
+#      and writes VAPE's own investigative writeup for each under intel/news/.
+# See agents/news_common.py's module docstring for the full source rundown and
+# agents/intel_common.py's for the "real data first, LLM narrates" design rule
+# every sweep in this repo follows.
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
+    inputs:
+      picks:
+        description: 'How many new stories to report this run (default 1)'
+        required: false
+        default: '1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: news-intel
+  cancel-in-progress: false
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      id-token: write  # for the WIF auth step below (agents/llm.py::ask_vertex_candidate())
+    env:
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      BRIGHTDATA_API_TOKEN: ${{ secrets.BRIGHTDATA_API_TOKEN }}
+      OCI_GENAI_API_KEY: ${{ secrets.OCI_GENAI_API_KEY }}
+      OCI_COMPARTMENT_OCID: ${{ secrets.OCI_COMPARTMENT_OCID }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      XAI_API_KEY_1: ${{ secrets.XAI_API_KEY_1 }}
+      CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      NEWS_REPORTER_PICKS: ${{ github.event.inputs.picks || '1' }}
+    steps:
+      # persist-credentials: false -- news_scan.py/news_reporter.py spawn
+      # third-party npm packages via npx (skillforge/research.py's Tavily/
+      # Firecrawl/Bright Data MCP servers), a supply-chain vector that could
+      # otherwise read the contents:write-scoped GITHUB_TOKEN straight out of
+      # .git/config for the job's full duration. Wired back explicitly, scoped
+      # to just the commit/push step, right before it's needed.
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: agents/requirements.txt
+      - name: Cache npm (research.py spawns Tavily/Firecrawl/Bright Data MCP servers via npx)
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: npm-research-mcp-${{ runner.os }}
+      - name: Install
+        run: pip install -r agents/requirements.txt
+
+      - id: vertex-auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: 'projects/87858016172/locations/global/workloadIdentityPools/github-actions-pool/providers/vape'
+          service_account: 'vape-caller@project-ad5c5b86-3088-4903-97e.iam.gserviceaccount.com'
+          token_format: 'access_token'
+
+      - name: Discover headlines (news_scan.py)
+        run: python agents/news_scan.py
+
+      - name: Report on top stories (news_reporter.py)
+        env:
+          VAPE_VERTEX_ACCESS_TOKEN: ${{ steps.vertex-auth.outputs.access_token }}
+        run: python agents/news_reporter.py
+
+      - name: Build Intel Index (site data)
+        run: python agents/build_intel_index.py
+
+      - name: Commit report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "VAPE Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add intel/news/ data/news-feed.json skillforge/memory/ data/intel-index.json docs/assets/news-images/
+          git commit -m "news-intel $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "no changes"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          pushed=false
+          for i in 1 2 3 4 5; do
+            git rebase --abort >/dev/null 2>&1 || true
+            git pull --rebase --autostash origin main || true
+            if git push; then pushed=true; break; fi
+            echo "push race retry $i"; sleep $((i*3))
+          done
+          if [ "$pushed" != "true" ]; then
+            echo "::error::failed to push after 5 retries -- changes were NOT committed"
+            exit 1
+          fi
