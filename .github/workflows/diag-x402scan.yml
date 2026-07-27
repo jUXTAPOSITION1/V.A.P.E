@@ -3,6 +3,9 @@ name: Diagnose x402scan staleness
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 # Read-only diagnostic: curls our own worker's free /openapi.json discovery
 # document and x402scan.com's real current page, to determine whether a
 # reported stale address/logo on x402scan.com reflects our own live worker

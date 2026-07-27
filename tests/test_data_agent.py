@@ -29,10 +29,11 @@ def _isolated_growth_epoch(tmp_path, monkeypatch):
 
 
 class _FakeResponse:
-    def __init__(self, status_code=200, body=None, text=""):
+    def __init__(self, status_code=200, body=None, text="", headers=None):
         self.status_code = status_code
         self._body = body if body is not None else {}
         self.text = text
+        self.headers = headers if headers is not None else {}
 
     def json(self):
         return self._body
@@ -136,6 +137,23 @@ def test_hire_reports_unpaid_on_non_200():
     deliverable, paid = data_agent.hire(session, "token_intel", {"address": "0x" + "aa" * 20})
     assert paid is False
     assert "error" in deliverable
+    assert "settlement" not in deliverable  # no PAYMENT-RESPONSE header -> nothing to decode
+
+
+def test_hire_surfaces_decoded_settlement_error_on_rejected_payment():
+    # The worker's 402 body is always the literal `{}` regardless of whether
+    # a payment was ever attempted -- the x402 SDK instead puts the real
+    # settlement outcome (success/error_reason/error_message) base64-encoded
+    # in the PAYMENT-RESPONSE header on a rejected paid retry.
+    import base64
+    settle = {"success": False, "error_reason": "insufficient_funds",
+              "error_message": "payer balance too low", "transaction": "0xdead"}
+    header = base64.b64encode(json.dumps(settle).encode()).decode()
+    session = _FakeSession(lambda url, params: _FakeResponse(
+        402, text="{}", headers={"PAYMENT-RESPONSE": header}))
+    deliverable, paid = data_agent.hire(session, "token_intel", {"address": "0x" + "aa" * 20})
+    assert paid is False
+    assert deliverable["settlement"]["error_reason"] == "insufficient_funds"
 
 
 def test_immediate_second_call_is_not_yet_due_without_touching_session(monkeypatch, tmp_path):

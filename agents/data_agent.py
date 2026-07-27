@@ -505,6 +505,31 @@ def _build_session(client_tag):
     return session
 
 
+def _decode_payment_response_header(headers):
+    """Best-effort decode of the x402 v2 settlement outcome.
+
+    The worker's 402 response body is ALWAYS the literal 2-byte `{}` by
+    design (the x402 v2 protocol puts the real challenge/outcome in headers,
+    not the body) — so r.text has never once carried any diagnostic value on
+    a paid-retry failure. The x402 Python SDK's own x402HTTPAdapter (see
+    x402/http/clients/requests.py) instead base64-encodes a SettleResponse
+    (success, error_reason, error_message, transaction, network, payer) into
+    the PAYMENT-RESPONSE header (or X-PAYMENT-RESPONSE for v1) on every
+    completed payment attempt, success or failure. Returns None if absent/
+    undecodable (e.g. a genuine unpaid 402 where no payment was ever
+    attempted) so callers can distinguish "never tried to pay" from "tried
+    to pay and got rejected."
+    """
+    import base64
+    header = headers.get("PAYMENT-RESPONSE") or headers.get("X-PAYMENT-RESPONSE")
+    if not header:
+        return None
+    try:
+        return json.loads(base64.b64decode(header).decode("utf-8"))
+    except Exception as e:
+        return {"undecodable": str(e)}
+
+
 def hire(session, offering, params, prefix="data"):
     """Pay for and fetch one x402 offering at /<prefix>/<offering> — prefix
     is "data" for the DL_OFFERINGS market-data tier (the only tier this
@@ -525,6 +550,11 @@ def hire(session, offering, params, prefix="data"):
         print(f"[data_agent] {offering} request failed: {e}")
         return {"error": str(e)}, False
     if r.status_code != 200:
+        settle = _decode_payment_response_header(r.headers)
+        if settle is not None:
+            print(f"[data_agent] {offering} failed: HTTP {r.status_code} "
+                  f"settlement={settle}")
+            return {"error": f"HTTP {r.status_code}", "settlement": settle}, False
         print(f"[data_agent] {offering} failed: HTTP {r.status_code} {r.text[:200]}")
         return {"error": f"HTTP {r.status_code}"}, False
     try:

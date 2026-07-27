@@ -3,6 +3,9 @@ name: Diagnose DATA AGENT transaction gap
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 # Read-only diagnostic for a real live report ("no transactions in an
 # hour"): checks the DATA AGENT wallet's actual on-chain USDC/ETH balance
 # on Base (ruled out -- 5.12 USDC, plenty), the live /x402/feed +
