@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-27T10:41:03Z",
-  "synthesis": "VAPE's automation repeatedly generated featured investigations while running security sweeps, cache refreshes, findings sealing, bounty radar sweeps, archiving, and report generation.",
+  "generated": "2026-07-27T10:55:48Z",
+  "synthesis": "VAPE's automation ran repeated featured investigations, security and bounty sweeps, a community broadcast, cache refreshes, findings sealing, and report archiving.",
   "tasks": [
+    {
+      "sha": "c4aecefcad",
+      "kind": "sweep",
+      "message": "virtuals_sweep 2026-07-27T10:46Z",
+      "date": "2026-07-27T10:46:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c4aecefcadf6f68999e0a196d923ee40c8b7c487"
+    },
+    {
+      "sha": "40893debe8",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T10:41Z",
+      "date": "2026-07-27T10:41:05Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/40893debe8eb13a31acf02b057316193780afc1f"
+    },
     {
       "sha": "b9ae5143d4",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "archive: fold aged reports into intel/archive/ 2026-07-27T08:51Z",
       "date": "2026-07-27T08:51:46Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8d459ef6c6cdb8816c546951e451dbae6fa2b438"
-    },
-    {
-      "sha": "c5a086bfbc",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-27T08:41Z",
-      "date": "2026-07-27T08:41:34Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c5a086bfbc9e9c8873b1a4fbb7e24e1b9551db9b"
-    },
-    {
-      "sha": "11ae53ee88",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-07-27T08:32Z",
-      "date": "2026-07-27T08:32:32Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/11ae53ee88801a1b63c7ab4642fd8e39b95466d5"
     }
   ]
 }

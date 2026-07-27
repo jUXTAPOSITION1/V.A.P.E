@@ -29,3 +29,4 @@
 {"ts": "2026-07-26T21:12:20.592190Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "token_chart"}
 {"ts": "2026-07-26T22:42:19.818270Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-27T05:57:00.135508Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "exploit_check"}
+{"ts": "2026-07-27T10:55:47.280194Z", "address": "0xAC0F66379A6d7801D7726d5a943356A172549Adb", "chain": "137", "symbol": "GEOD", "name": "GEOD", "source": "evm", "offering": "token_intel"}
