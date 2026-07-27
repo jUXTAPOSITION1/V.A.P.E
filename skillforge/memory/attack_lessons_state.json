@@ -83,5 +83,10 @@
     "logged_at": "2026-07-23T19:20:11Z",
     "pattern": "donation_inflation",
     "has_backtest": false
+  },
+  "2026-07-15:Cascade Liquidity Strategy": {
+    "logged_at": "2026-07-27T03:18:36Z",
+    "pattern": "oracle_flashloan",
+    "has_backtest": false
   }
 }

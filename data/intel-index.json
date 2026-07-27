@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-27T02:57:40Z",
+  "generated": "2026-07-27T03:18:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 440,
+    "reports": 441,
     "reports_by_type": {
+      "security": 74,
       "bounty": 133,
       "base": 80,
       "sentiment": 43,
       "virtuals": 82,
-      "security": 73,
       "macro": 21,
       "skillforge": 4,
       "bug": 2,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-025734-0xCBf4AB00.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_000036.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T00:00:36Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_000036.md",
-      "bytes": 16584
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-27-03.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-27T03:00Z",
+      "threat": null,
+      "summary": "The feed records nine incidents across the most recent seven-day window, all below the $50M threshold. Affected chains include Ethereum (Garden $0.45M, DeBond $0.542M, Lien $0.542M, BarnBridge $0.776M), Base (Garden), Arbitrum (Garden, Triple-A $9.7M, AFX Bridge $24.15M, Ostium $23.75M, Cascade Liquidity Strategy $1.34M), BSC (Garden, 42D",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-03.md",
+      "bytes": 7013
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-27-03.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-27T03:00Z",
+      "threat": null,
+      "summary": "The feed records nine incidents across the most recent seven-day window, all below the $50M threshold. Affected chains include Ethereum (Garden $0.45M, DeBond $0.542M, Lien $0.542M, BarnBridge $0.776M), Base (Garden), Arbitrum (Garden, Triple-A $9.7M, AFX Bridge $24.15M, Ostium $23.75M, Cascade Liquidity Strategy $1.34M), BSC (Garden, 42D",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-03.md",
+      "bytes": 7013
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "The current threat landscape is marked by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Spoofing,",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-02.md",
       "bytes": 7856
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260724_000113.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T00:01:13Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_000113.md",
-      "bytes": 11591
     }
   ],
   "broadcasts": [
