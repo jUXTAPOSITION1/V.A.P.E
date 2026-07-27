@@ -33,6 +33,41 @@ const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400'
 // case: JS's Array.slice(-Infinity) already returns the whole array.
 const RANGE_DAYS = { '24h': 2, '7d': 7, '30d': 30, '90d': 90, '1y': 365, 'all': Infinity };
 
+// Contextual icons for each x402 service offering — paired by subject/purpose
+// (security audit → audit icon, market data → chart icon, etc.)
+const OFFERING_ICONS = {
+    // scan/* security offerings
+    'exploit_check': 'fa-shield-halved',
+    'token_safety_check': 'fa-shield-virus',
+    'rug_pull_alert': 'fa-triangle-exclamation',
+    'dossier_check': 'fa-magnifying-glass',
+    'tx_decode': 'fa-link',
+    'community_intel_broadcast': 'fa-bullhorn',
+    'liquidity_check': 'fa-chart-line',
+    'market_intel': 'fa-chart-column',
+    'bulk_safety_bundle': 'fa-box',
+    'website_review': 'fa-globe',
+    // bounty offerings
+    'bounty_deep_dive': 'fa-microscope',
+    'deep_contract_audit': 'fa-file-contract',
+    // data/* market-data offerings
+    'wallet_pnl_deepdive': 'fa-wallet',
+    'token_intel': 'fa-coins',
+    'token_chart': 'fa-chart-area',
+    'protocol': 'fa-cube',
+    'protocol_fees': 'fa-hand-holding-dollar',
+    'unlocks': 'fa-lock-open',
+    'treasury': 'fa-vault',
+    'chain_protocols': 'fa-link-chain',
+    'chain_overview': 'fa-globe',
+    'chain_fees': 'fa-coins',
+    'dex_volumes': 'fa-chart-bar',
+    'yields': 'fa-arrow-trend-up',
+    'stablecoins': 'fa-circles',
+    'bridges': 'fa-person-hiking',
+    'prediction_market_odds': 'fa-crystal-ball'
+};
+
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
 // the paying wallet) so "Portfolio Intelligence" can show a persistent
 // engagement history with no backend — same zero-cost, keyless philosophy as
@@ -201,31 +236,43 @@ const App = {
             const manual = allOfferings.filter(o=>!(o.x402 ?? o.auto));
             const grid = document.getElementById('rep-offerings-grid');
             if (grid) {
-                const card = o=>`
+                const card = o=>{
+                    const icon = OFFERING_ICONS[o.name] || 'fa-circle-dot';
+                    return `
                     <div class="relative group">
-                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
-                      <div class="flex items-center justify-between gap-2">
-                        <span class="text-xs text-zinc-200">${o.name}</span>
-                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="offering-card w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid ${icon} offering-card-icon text-sm shrink-0"></i>
+                        <div class="flex-1 flex items-center justify-between gap-2 min-w-0">
+                          <span class="text-xs text-zinc-200 truncate">${o.name}</span>
+                          <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        </div>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
                       <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-bolt"></i> x402 · ${o.sla && o.sla!=='instant' ? this._esc(o.sla) : 'select to initiate'}</span>
                     </button>
                     ${o.directory_url ? `<a href="${o.directory_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="View on 402 Index" class="absolute top-2.5 right-2.5 text-zinc-600 hover:text-zinc-200 transition text-[10px] opacity-0 group-hover:opacity-100"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
                     </div>`;
+                };
                 grid.innerHTML = x402able.map(card).join('');
             }
             const acpGrid = document.getElementById('acp-offerings-grid');
             if (acpGrid) {
-                acpGrid.innerHTML = manual.map(o=>`
-                    <button onclick="Hire.openAcp('${o.name}')" class="text-left panel-sm hover:border-white/30 transition flex flex-col gap-1 cursor-pointer">
-                      <div class="flex items-center justify-between gap-2">
-                        <span class="text-xs text-zinc-200">${o.name}</span>
-                        <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                acpGrid.innerHTML = manual.map(o=>{
+                    const icon = OFFERING_ICONS[o.name] || 'fa-circle-dot';
+                    return `
+                    <button onclick="Hire.openAcp('${o.name}')" class="offering-card text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid ${icon} offering-card-icon text-sm shrink-0"></i>
+                        <div class="flex-1 flex items-center justify-between gap-2 min-w-0">
+                          <span class="text-xs text-zinc-200 truncate">${o.name}</span>
+                          <span class="text-zinc-100 text-sm whitespace-nowrap">$${o.price_usd}</span>
+                        </div>
                       </div>
                       <div class="text-[11px] text-zinc-500 leading-snug">${o.summary}</div>
                       <span class="text-[9px] text-zinc-500 uppercase tracking-wider"><i class="fa-solid fa-scale-balanced"></i> ACP · select to commission</span>
-                    </button>`).join('');
+                    </button>`;
+                }).join('');
             }
             const disc = document.getElementById('rep-disclaimer');
             if (disc) disc.textContent = (r.disclaimer||'') + (a.first_report?` · Active since ${a.first_report.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')}.`:'');

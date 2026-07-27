@@ -504,3 +504,46 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
     gap: 8px;
     font-size: 11px;
 }
+
+/* ── Offering Cards with Contextual Icons ──────────────────────────────── */
+/* Each offering card icon is contextual (shield for security, chart for data,
+   microscope for audit, etc.) with subtle color accents on hover that stay
+   professional within the monochrome palette. */
+
+[data-offering*="audit"],
+[data-offering*="deep_dive"],
+[data-offering*="exploit"],
+[data-offering*="check"] {
+    --icon-hover-color: #f87171;
+}
+
+[data-offering*="market"],
+[data-offering*="chart"],
+[data-offering*="volume"],
+[data-offering*="intel"],
+[data-offering*="yield"] {
+    --icon-hover-color: #60a5fa;
+}
+
+[data-offering*="wallet"],
+[data-offering*="treasury"],
+[data-offering*="liquidity"],
+[data-offering*="fees"],
+[data-offering*="pnl"] {
+    --icon-hover-color: #34d399;
+}
+
+[data-offering*="broadcast"],
+[data-offering*="website"],
+[data-offering*="globe"] {
+    --icon-hover-color: #a78bfa;
+}
+
+.offering-card-icon {
+    color: #71717a;
+    transition: color 0.25s ease;
+}
+
+.offering-card:hover .offering-card-icon {
+    color: var(--icon-hover-color, #d4d4d8);
+}
