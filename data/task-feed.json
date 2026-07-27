@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-27T11:40:26Z",
-  "synthesis": "VAPE'",
+  "generated": "2026-07-27T11:55:34Z",
+  "synthesis": "1)",
   "tasks": [
+    {
+      "sha": "1e599c9211",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-27T11:42Z",
+      "date": "2026-07-27T11:42:58Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1e599c9211552a761ae607b963fd674e2638fcf4"
+    },
+    {
+      "sha": "7664b86d9c",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T11:40Z",
+      "date": "2026-07-27T11:40:31Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7664b86d9cf40d5570db620a32a504dee3cc77e5"
+    },
     {
       "sha": "6b678086bc",
       "kind": "sweep",
@@ -92,20 +106,6 @@
       "message": "training corpus: refresh external + pr_history caches 2026-07-27T09:46Z",
       "date": "2026-07-27T09:46:23Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4c219ff559eb9a2c30db63476afb9d944998f053"
-    },
-    {
-      "sha": "a5d477ff2f",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-27T09:41Z",
-      "date": "2026-07-27T09:41:21Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a5d477ff2fa6bd5b7ed1768c60a3c0faad0e3192"
-    },
-    {
-      "sha": "fcab6f35bd",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-27T09:38Z",
-      "date": "2026-07-27T09:38:52Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fcab6f35bd92952dc557787d3294ede84d0a80c2"
     }
   ]
 }

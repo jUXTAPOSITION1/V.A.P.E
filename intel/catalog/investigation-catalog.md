@@ -647,3 +647,5 @@
 | 2026-07-27 | auto | 0x0e4F6209eD984b21EDEA43acE6e09559eD051D48 (ON) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 61% of supply — meaningful concentration | +7d |
 
 | 2026-07-27 | auto | 0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA (BTW) | deep_investigation | CAUTION (65/100) | Owner not renounced (0x8dafd691ef82f90b23fddb10a67d782f04073bd3) — can still act | +7d |
+
+| 2026-07-27 | auto | 0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680 (USD₮) | deep_investigation | CAUTION (50/100) | Very few holders (8) — thin, easily manipulated distribution | +7d |

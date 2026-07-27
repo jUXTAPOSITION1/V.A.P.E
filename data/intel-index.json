@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T11:40:25Z",
+  "generated": "2026-07-27T11:55:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 373,
@@ -15,7 +15,7 @@
       "mainnet": 2
     },
     "broadcasts": 115,
-    "investigations": 408,
+    "investigations": 409,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-114025-0x444045B0.md",
-      "title": "Investigation \u2014 BTW",
-      "symbol": "BTW",
-      "name": "Bitway Token",
-      "date": "2026-07-27T11:40:25Z",
-      "target": "0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260727-115527-0xEa59Fa56.md",
+      "title": "Investigation \u2014 USD\u20ae",
+      "symbol": "USD\u20ae",
+      "name": "USD\u20ae",
+      "date": "2026-07-27T11:55:27Z",
+      "target": "0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680",
+      "chain": "137 (Polygon)",
       "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8dafd691ef82f90b23fddb10a67d782f04073bd3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $31,092. Positive evidence: 45758 holders \u2014 reasonably distributed; Trading 147+ days witho",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-114025-0x444045B0.md"
+      "score": "50",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-5] Pair 23.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-115527-0xEa59Fa56.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-115527-0xEa59Fa56.md",
+      "title": "Investigation \u2014 USD\u20ae",
+      "symbol": "USD\u20ae",
+      "name": "USD\u20ae",
+      "date": "2026-07-27T11:55:27Z",
+      "target": "0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-5] Pair 23.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-115527-0xEa59Fa56.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-114025-0x444045B0.md",
@@ -593,20 +607,6 @@
       "score": "18",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-10] Owner not renounced (0xd18d0d81b640ec77dada51ea2178659e835caaa5) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-104037-0x0E63B9C2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-101017-0x289ba170.md",
-      "title": "Investigation \u2014 LPT",
-      "symbol": "LPT",
-      "name": "Livepeer Token",
-      "date": "2026-07-26T10:10:17Z",
-      "target": "0x289ba1701C2F088cf0faf8B3705246331cB8A839",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "CAUTION",
-      "score": "58",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 260574 holders \u2014 reasonably distributed; Trading 1612+ days without a know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-101017-0x289ba170.md"
     }
   ],
   "reports": [
