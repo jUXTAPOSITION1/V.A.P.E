@@ -184,6 +184,25 @@
     "symbol": "WPOL",
     "times_investigated": 1
   },
+  "137:0x0ffd960881c83cd63a50d5c944c9f2b866f55a28": {
+    "address": "0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28",
+    "chain": "137",
+    "creator_address": "0x48808568033ae06eda42def343102de46b2a343f",
+    "first_investigated": "2026-07-27T13:56:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-135618-0x0ffd9608.md",
+        "score": 19,
+        "ts": "2026-07-27T13:56:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T13:56:18Z",
+    "last_score": 19,
+    "last_verdict": "REJECT",
+    "symbol": "SCR",
+    "times_investigated": 1
+  },
   "137:0x1bdf71ede1a4777db1eebe7232bcda20d6fc1610": {
     "address": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
     "chain": "137",

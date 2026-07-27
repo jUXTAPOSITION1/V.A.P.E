@@ -655,3 +655,5 @@
 | 2026-07-27 | auto | 0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33 (HRC) | deep_investigation | REJECT (15/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-27 | auto | 0x604448c8f009135e913C7e0E4Bef692B0003A02A (ON) | deep_investigation | PROCEED (85/100) | Top 10 non-LP/burn holders control 88% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-27 | auto | 0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28 (SCR) | deep_investigation | REJECT (19/100) | Transfers can be paused by owner | +7d |

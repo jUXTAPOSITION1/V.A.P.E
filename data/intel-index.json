@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T13:41:22Z",
+  "generated": "2026-07-27T13:56:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 377,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 115,
-    "investigations": 422,
+    "investigations": 423,
     "tools": 16,
     "tools_verified": 16,
     "skills": 20
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-125631-0x604448c8.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "OneCoin",
-      "date": "2026-07-27T12:56:31Z",
-      "target": "0x604448c8f009135e913C7e0E4Bef692B0003A02A",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 7217 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 435+ days without a known incident in this scan; Custom verified source (not",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-125631-0x604448c8.md"
+      "file": "investigation-20260727-135618-0x0ffd9608.md",
+      "title": "Investigation \u2014 SCR",
+      "symbol": "SCR",
+      "name": "Strategic Crypto Reserve",
+      "date": "2026-07-27T13:56:18Z",
+      "target": "0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "19",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x48808568033ae06eda42def343102de46b2a343f) \u2014 can still act on the contract; [-8] Low holder count (59); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-135618-0x0ffd9608.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-135618-0x0ffd9608.md",
+      "title": "Investigation \u2014 SCR",
+      "symbol": "SCR",
+      "name": "Strategic Crypto Reserve",
+      "date": "2026-07-27T13:56:18Z",
+      "target": "0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "19",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x48808568033ae06eda42def343102de46b2a343f) \u2014 can still act on the contract; [-8] Low holder count (59); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-135618-0x0ffd9608.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-125631-0x604448c8.md",
@@ -593,20 +607,6 @@
       "score": "35",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,178 (rug/illiquid); [-10] Low liquidity $4,178. Positive evidence: 2803 holders \u2014 reasonably distributed",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-154131-0x8D88e484.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-152627-0x60781C25.md",
-      "title": "Investigation \u2014 PNG",
-      "symbol": "PNG",
-      "name": "Pangolin",
-      "date": "2026-07-26T15:26:27Z",
-      "target": "0x60781C2586D68229fde47564546784ab3fACA982",
-      "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 87% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 38682 holders \u2014 reasonably dist",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-152627-0x60781C25.md"
     }
   ],
   "reports": [
