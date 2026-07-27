@@ -28,5 +28,6 @@
     "wallet_pnl_deepdive",
     "website_review",
     "yields"
-  ]
+  ],
+  "service_ids": {}
 }
