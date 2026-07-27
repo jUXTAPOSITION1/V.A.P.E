@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-27T18:45:23Z",
-  "synthesis": "Data",
+  "generated": "2026-07-27T19:00:24Z",
+  "synthesis": "VAPE's automation has repeatedly generated featured investigations every 15 minutes, plus reputation snapshots, bounty sweeps, reports, and repo reviews.",
   "tasks": [
+    {
+      "sha": "b7fe9e5d53",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-27T18:49Z",
+      "date": "2026-07-27T18:49:56Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b7fe9e5d537a19c8e6e65bc4a4be69b08fda0401"
+    },
+    {
+      "sha": "98daedc05f",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T18:45Z",
+      "date": "2026-07-27T18:45:38Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/98daedc05f266e8f394d1505769dae0fae5bd5a6"
+    },
     {
       "sha": "1d35434823",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-27T16:43Z",
       "date": "2026-07-27T16:43:37Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bfcc5d72a925516bbd42dac56fc6de435e959109"
-    },
-    {
-      "sha": "9815e21854",
-      "kind": "automation",
-      "message": "VAPE AI red-team deep scan 2026-07-27T16:27Z",
-      "date": "2026-07-27T16:27:06Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9815e218541ced65141879d99cbd217214c15c36"
-    },
-    {
-      "sha": "5c1a0b6af8",
-      "kind": "sweep",
-      "message": "macro_sweep 2026-07-27T16:27Z",
-      "date": "2026-07-27T16:27:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5c1a0b6af8fecec45cbe59c8d4605453aa5fe21d"
     }
   ]
 }
