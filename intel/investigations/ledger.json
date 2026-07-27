@@ -684,6 +684,25 @@
     "symbol": "ARBI",
     "times_investigated": 1
   },
+  "137:0xe441e2e14b0a2704d73f9d34fab479682a22a897": {
+    "address": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
+    "chain": "137",
+    "creator_address": "0xcbf0e9ccb0b1f6a0edc098c156259739798e8b4d",
+    "first_investigated": "2026-07-27T21:00:21Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-210021-0xE441E2e1.md",
+        "score": 27,
+        "ts": "2026-07-27T21:00:21Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T21:00:21Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "SLGNS",
+    "times_investigated": 1
+  },
   "137:0xea59fa56e4ff71d690baa76ebb3a7325490e9680": {
     "address": "0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680",
     "chain": "137",

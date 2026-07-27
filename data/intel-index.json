@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T20:45:19Z",
+  "generated": "2026-07-27T21:00:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 384,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 117,
-    "investigations": 431,
+    "investigations": 432,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-184518-0x277aDD73.md",
-      "title": "Investigation \u2014 AEON",
-      "symbol": "AEON",
-      "name": "AEON",
-      "date": "2026-07-27T18:45:18Z",
-      "target": "0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260727-210021-0xE441E2e1.md",
+      "title": "Investigation \u2014 SLGNS",
+      "symbol": "SLGNS",
+      "name": "Staked Longinus",
+      "date": "2026-07-27T21:00:21Z",
+      "target": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $21,509; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-184518-0x277aDD73.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-210021-0xE441E2e1.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-210021-0xE441E2e1.md",
+      "title": "Investigation \u2014 SLGNS",
+      "symbol": "SLGNS",
+      "name": "Staked Longinus",
+      "date": "2026-07-27T21:00:21Z",
+      "target": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-210021-0xE441E2e1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-184518-0x277aDD73.md",
@@ -593,20 +607,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-184225-0xcB362b37.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-182703-0xc883e191.md",
-      "title": "Investigation \u2014 sosocupid",
-      "symbol": "sosocupid",
-      "name": "sosocupid",
-      "date": "2026-07-26T18:27:03Z",
-      "target": "0xc883e1910b9A2e39840E7c26BB7B7A3f80dB4f98",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x87c6c398F811A462d623D24cAfEcaf0F0E553b08) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-182703-0xc883e191.md"
     }
   ],
   "reports": [
