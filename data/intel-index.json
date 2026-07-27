@@ -1,9 +1,10 @@
 {
-  "generated": "2026-07-27T16:12:47Z",
+  "generated": "2026-07-27T16:27:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 379,
+    "reports": 380,
     "reports_by_type": {
+      "macro": 21,
       "virtuals": 82,
       "security": 73,
       "bug": 3,
@@ -11,7 +12,6 @@
       "mainnet": 3,
       "base": 79,
       "sentiment": 41,
-      "macro": 20,
       "skillforge": 4
     },
     "broadcasts": 116,
@@ -37,14 +37,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-27-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-27T15:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-27 15:45 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-27-15.md",
-      "bytes": 3135
+      "type": "macro",
+      "file": "macro-2026-07-27-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-27T16:00Z",
+      "threat": "NEUTRAL",
+      "summary": "Computed deterministically from real Fear & Greed (30, prior day 26) and global market cap 24h change (-0.41%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-27-16.md",
+      "bytes": 2238
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-07-27-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-07-27T16:00Z",
+      "threat": "NEUTRAL",
+      "summary": "Computed deterministically from real Fear & Greed (30, prior day 26) and global market cap 24h change (-0.41%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-27-16.md",
+      "bytes": 2238
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1258,17 +1269,6 @@
       "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_181844.md",
       "bytes": 12316
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260724_164507.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T16:45:07Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_164507.md",
-      "bytes": 11961
     }
   ],
   "broadcasts": [
