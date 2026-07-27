@@ -639,3 +639,5 @@
 | 2026-07-27 | auto | 0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3 (MegaDoge) | deep_investigation | CAUTION (50/100) | Only 5% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-07-27 | auto | 0x93ecd8e9156E6b217514BCFE59837b3807D8F53D (KABOSU) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-27 | auto | 0xc02179dda49187A8761156F011F40D7E41FaCAAF (velvet) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A62 | +7d |
