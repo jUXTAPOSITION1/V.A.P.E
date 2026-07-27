@@ -34,38 +34,48 @@ const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400'
 const RANGE_DAYS = { '24h': 2, '7d': 7, '30d': 30, '90d': 90, '1y': 365, 'all': Infinity };
 
 // Contextual icons for each x402 service offering — paired by subject/purpose
-// (security audit → audit icon, market data → chart icon, etc.)
+// (security audit → audit icon, market data → chart icon, etc.). Every class
+// here is a long-established Font Awesome Free solid icon (no FA6/7 additions
+// this couldn't verify from the sandbox) — a handful of earlier guesses
+// (fa-vault, fa-link-chain, fa-circles, fa-crystal-ball) turned out to be
+// invalid/uncertain class names, which render nothing rather than a fallback
+// glyph. Also covers 4 offerings (agents/publish_reputation.py::OFFERINGS)
+// that were missing here entirely and silently fell back to the generic dot.
 const OFFERING_ICONS = {
     // scan/* security offerings
     'exploit_check': 'fa-shield-halved',
-    'token_safety_check': 'fa-shield-virus',
+    'token_safety_check': 'fa-shield',
     'rug_pull_alert': 'fa-triangle-exclamation',
     'dossier_check': 'fa-magnifying-glass',
     'tx_decode': 'fa-link',
     'community_intel_broadcast': 'fa-bullhorn',
     'liquidity_check': 'fa-chart-line',
-    'market_intel': 'fa-chart-column',
+    'market_intel': 'fa-chart-pie',
     'bulk_safety_bundle': 'fa-box',
     'website_review': 'fa-globe',
+    'partner_referral': 'fa-handshake',
+    'wallet_recon': 'fa-user-secret',
+    'whale_watch': 'fa-eye',
     // bounty offerings
     'bounty_deep_dive': 'fa-microscope',
     'deep_contract_audit': 'fa-file-contract',
+    'forensics_deep': 'fa-magnifying-glass-chart',
     // data/* market-data offerings
     'wallet_pnl_deepdive': 'fa-wallet',
     'token_intel': 'fa-coins',
     'token_chart': 'fa-chart-area',
     'protocol': 'fa-cube',
-    'protocol_fees': 'fa-hand-holding-dollar',
+    'protocol_fees': 'fa-dollar-sign',
     'unlocks': 'fa-lock-open',
-    'treasury': 'fa-vault',
-    'chain_protocols': 'fa-link-chain',
+    'treasury': 'fa-building-columns',
+    'chain_protocols': 'fa-sitemap',
     'chain_overview': 'fa-globe',
     'chain_fees': 'fa-coins',
     'dex_volumes': 'fa-chart-bar',
     'yields': 'fa-arrow-trend-up',
-    'stablecoins': 'fa-circles',
-    'bridges': 'fa-person-hiking',
-    'prediction_market_odds': 'fa-crystal-ball'
+    'stablecoins': 'fa-sack-dollar',
+    'bridges': 'fa-right-left',
+    'prediction_market_odds': 'fa-dice'
 };
 
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
