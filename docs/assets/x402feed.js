@@ -75,7 +75,11 @@ const crosshairPlugin = {
 
 // Simple moving average over whatever bucket granularity is on screen
 // (daily/weekly/monthly) — a real indicator, not decoration: it's the same
-// smoothing a trader would want to see through day-to-day noise.
+// smoothing a trader would want to see through day-to-day noise. Callers
+// exclude any still-forming current bucket before calling this (see
+// _renderChart) — folding a partial period into the average would drag it
+// down every single time the period rolls over, which is a real analytical
+// error, not just a display quirk.
 function movingAverage(values, window) {
     const out = [];
     for (let i = 0; i < values.length; i++) {
@@ -86,17 +90,29 @@ function movingAverage(values, window) {
     return out;
 }
 
+// Compact axis-tick formatting for USD values — "$1.2K" beyond 1000 rather
+// than a wide "$1234.00" that eats into the plot area, standard practice on
+// any real trading/analytics y-axis.
+function fmtUsdCompact(v) {
+    const abs = Math.abs(v);
+    if (abs >= 1_000_000) return '$' + (v / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (abs >= 1000) return '$' + (v / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    return '$' + v.toFixed(2);
+}
+
 const X402Feed = {
     _chart: null,
     _pollHandle: null,
     _days: 30,
     _rawDaily: [],
+    _revenueStyle: 'bar',
     _feed: { q: '', status: '', sort: 'ts_desc', offset: 0 },
     _feedTotal: 0,
     _feedInFlight: 0,
 
     async init() {
         this._wireRangeToggle();
+        this._wireStyleToggle();
         this._wireFeedControls();
         await Promise.all([this._loadStats(), this._loadFeed(), this._renderDirectoryLinks()]);
         // 25s: cheap enough not to hammer the worker's edge cache (both
@@ -123,6 +139,25 @@ const X402Feed = {
                     b.setAttribute('aria-pressed', String(active));
                 });
                 this._loadStats();
+            });
+        });
+    },
+
+    _wireStyleToggle() {
+        const wrap = document.getElementById('x402-style-toggle');
+        if (!wrap) return;
+        wrap.querySelectorAll('.x402-style-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const style = btn.dataset.style;
+                if (style === this._revenueStyle) return;
+                this._revenueStyle = style;
+                wrap.querySelectorAll('.x402-style-btn').forEach(b => {
+                    const active = b === btn;
+                    b.classList.remove(...RANGE_BTN_ACTIVE);
+                    if (active) b.classList.add(...RANGE_BTN_ACTIVE);
+                    b.setAttribute('aria-pressed', String(active));
+                });
+                this._renderChart(this._rawDaily);
             });
         });
     },
@@ -345,36 +380,79 @@ const X402Feed = {
         const labels = bucketed.map(d => new Date(d.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
         const revenue = bucketed.map(d => d.revenue_usd);
         const jobs = bucketed.map(d => d.jobs);
+
+        // The backend buckets by UTC calendar day (worker/src/lib/jobLog.ts),
+        // so the rightmost bucket — whenever its date is today in UTC — is
+        // still accumulating and will look like it "resets" the moment the
+        // next UTC day begins (00:00 UTC, a fixed but non-obvious local
+        // clock time depending on the viewer's own timezone). That's not a
+        // bug in the data, but silently treating a partial period exactly
+        // like a closed one is a real, well-known charting mistake — every
+        // real trading/analytics dashboard (TradingView, exchange candles,
+        // DefiLlama, etc.) marks the in-progress current period distinctly
+        // instead. Doing the same here: lighter fill for that one bar, and
+        // excluded from the moving average below so a fresh/partial bucket
+        // doesn't drag the average down every single rollover.
+        const todayUtc = new Date().toISOString().slice(0, 10);
+        const lastIsPartial = bucketed.length > 0 && bucketed[bucketed.length - 1].date === todayUtc;
+
         const maWindow = Math.min(7, Math.max(3, Math.round(bucketed.length / 6)));
-        const ma = bucketed.length >= 3 ? movingAverage(revenue, maWindow) : [];
+        const maInput = lastIsPartial ? revenue.slice(0, -1) : revenue;
+        const maRaw = maInput.length >= 3 ? movingAverage(maInput, maWindow) : [];
+        const ma = lastIsPartial ? [...maRaw, null] : maRaw;
+
         // Running cumulative revenue across the visible range — the third
         // "advanced chart" dimension traders expect alongside a per-bar
         // value and its moving average.
         let running = 0;
         const cumulative = revenue.map(v => (running += v));
+
         if (this._chart) this._chart.destroy();
         const ctx = canvas.getContext('2d');
-        // Emerald is the site's one deliberate accent color, used here for
-        // the Revenue bars, with the Jobs line kept neutral white/grey so
-        // it reads as data, not decoration.
+
+        // Blue (Jobs line) + amber/gold (Revenue) is a standard dual-series
+        // pairing on real trading terminals — high contrast against each
+        // other and against the dark background, and blue is the site's
+        // existing secondary accent (#60a5fa, used by Featured Investigation/
+        // Bounty Command Center) rather than a color invented just for this.
+        const REVENUE_COLOR = '#fbbf24';
+        const REVENUE_PARTIAL_COLOR = 'rgba(251,191,36,0.35)';
+        const JOBS_COLOR = '#60a5fa';
+        const MA_COLOR = '#a78bfa';
+        const CUMULATIVE_COLOR = '#2dd4bf';
+
         const h = canvas.parentElement?.clientHeight || 256;
-        const g = ctx.createLinearGradient(0, 0, 0, h);
-        g.addColorStop(0, 'rgba(74,222,128,0.30)'); g.addColorStop(1, 'rgba(74,222,128,0)');
-        // The canvas sits in a height-controlled wrapper (see docs/index.html)
-        // rather than deriving its height from a fixed aspect ratio — on
-        // narrow viewports a 2:1 ratio squashed the chart into an unreadable
-        // sliver, so maintainAspectRatio is off and the wrapper's own
-        // responsive Tailwind height (h-64 sm:h-72 lg:h-80) drives the size.
+        const gFull = ctx.createLinearGradient(0, 0, 0, h);
+        gFull.addColorStop(0, 'rgba(251,191,36,0.30)'); gFull.addColorStop(1, 'rgba(251,191,36,0)');
+        const gPartial = ctx.createLinearGradient(0, 0, 0, h);
+        gPartial.addColorStop(0, 'rgba(251,191,36,0.12)'); gPartial.addColorStop(1, 'rgba(251,191,36,0)');
+
+        // Per-bar color arrays so only the still-forming bucket gets the
+        // lighter "in progress" treatment — every closed period looks
+        // identical and fully readable.
+        const revenueBg = revenue.map((_, i) => (lastIsPartial && i === revenue.length - 1) ? gPartial : gFull);
+        const revenueBorder = revenue.map((_, i) => (lastIsPartial && i === revenue.length - 1) ? REVENUE_PARTIAL_COLOR : REVENUE_COLOR);
+
+        // The canvas sits in a height-controlled wrapper (.chart-shell-lg in
+        // docs/index.html) rather than deriving its height from a fixed
+        // aspect ratio — on narrow viewports a 2:1 ratio squashed the chart
+        // into an unreadable sliver, so maintainAspectRatio is off and the
+        // wrapper's own responsive clamp() height drives the size.
         const narrow = window.innerWidth < 640;
+        const wide = window.innerWidth >= 1024;
+        const revenueIsArea = this._revenueStyle === 'area';
+
         this._chart = new Chart(canvas, {
             type: 'bar',
             data: {
                 labels,
                 datasets: [
-                    { label: 'Revenue (USD)', data: revenue, backgroundColor: g, borderColor: '#4ade80', borderWidth: 1, yAxisID: 'y', order: 3 },
-                    { label: 'Jobs', data: jobs, type: 'line', borderColor: '#d4d4d8', backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, yAxisID: 'y1', order: 2 },
-                    { label: `${maWindow}-period MA`, data: ma, type: 'line', borderColor: '#f0abfc', backgroundColor: 'transparent', borderDash: [4, 3], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y', order: 1 },
-                    { label: 'Cumulative', data: cumulative, type: 'line', borderColor: 'rgba(250,204,21,0.55)', backgroundColor: 'transparent', borderWidth: 1, pointRadius: 0, yAxisID: 'y2', order: 0, hidden: true },
+                    revenueIsArea
+                        ? { label: 'Revenue (USD)', data: revenue, type: 'line', borderColor: REVENUE_COLOR, backgroundColor: gFull, fill: true, tension: 0.25, pointRadius: 0, borderWidth: 1.5, yAxisID: 'y', order: 3 }
+                        : { label: 'Revenue (USD)', data: revenue, backgroundColor: revenueBg, borderColor: revenueBorder, borderWidth: 1, yAxisID: 'y', order: 3 },
+                    { label: 'Jobs', data: jobs, type: 'line', borderColor: JOBS_COLOR, backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, pointBackgroundColor: JOBS_COLOR, borderWidth: 1.5, yAxisID: 'y1', order: 2 },
+                    { label: `${maWindow}-period MA`, data: ma, type: 'line', borderColor: MA_COLOR, backgroundColor: 'transparent', borderDash: [4, 3], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y', order: 1, spanGaps: false },
+                    { label: 'Cumulative', data: cumulative, type: 'line', borderColor: CUMULATIVE_COLOR, backgroundColor: 'transparent', borderWidth: 1, pointRadius: 0, yAxisID: 'y2', order: 0, hidden: true },
                 ],
             },
             plugins: [crosshairPlugin],
@@ -382,24 +460,47 @@ const X402Feed = {
                 responsive: true, maintainAspectRatio: false,
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: { display: true, labels: { color: '#a1a1aa', boxWidth: 10, font: { size: narrow ? 9 : 10 } } },
+                    legend: { display: true, position: 'top', labels: { color: '#a1a1aa', boxWidth: 10, usePointStyle: true, font: { size: narrow ? 9 : 11 } } },
                     tooltip: {
+                        backgroundColor: 'rgba(9,9,11,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
                         callbacks: {
-                            title: items => items[0]?.label ?? '',
+                            title: items => {
+                                const idx = items[0]?.dataIndex;
+                                const base = items[0]?.label ?? '';
+                                return idx === bucketed.length - 1 && lastIsPartial ? `${base} (today, in progress)` : base;
+                            },
                             label: item => {
-                                if (item.dataset.label === 'Revenue (USD)') return `Revenue: $${item.parsed.y.toFixed(2)}`;
                                 if (item.dataset.label === 'Jobs') return `Jobs: ${item.parsed.y}`;
-                                if (item.dataset.label === 'Cumulative') return `Cumulative: $${item.parsed.y.toFixed(2)}`;
-                                return `${item.dataset.label}: $${item.parsed.y.toFixed(2)}`;
+                                if (item.parsed.y == null) return null;
+                                return `${item.dataset.label}: ${fmtUsdCompact(item.parsed.y)}`;
                             },
                         },
                     },
                 },
                 scales: {
-                    y: { position: 'left', ticks: { color: '#52525b', font: { size: narrow ? 9 : 11 }, callback: v => '$' + v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.04)' } },
-                    y1: { position: 'right', ticks: { color: '#52525b', stepSize: 1, font: { size: narrow ? 9 : 11 } }, grid: { display: false } },
+                    y: {
+                        position: 'left',
+                        title: { display: !narrow, text: 'Revenue (USD)', color: '#71717a', font: { size: 10 } },
+                        ticks: { color: '#71717a', font: { size: narrow ? 9 : 11 }, callback: v => fmtUsdCompact(v), maxTicksLimit: wide ? 8 : 5 },
+                        grid: { color: 'rgba(255,255,255,0.06)' },
+                        border: { color: 'rgba(255,255,255,0.1)' },
+                        beginAtZero: true,
+                    },
+                    y1: {
+                        position: 'right',
+                        title: { display: !narrow, text: 'Jobs settled', color: '#71717a', font: { size: 10 } },
+                        ticks: { color: '#71717a', stepSize: 1, precision: 0, font: { size: narrow ? 9 : 11 } },
+                        grid: { display: false },
+                        border: { color: 'rgba(255,255,255,0.1)' },
+                        beginAtZero: true,
+                    },
                     y2: { display: false },
-                    x: { ticks: { color: '#52525b', maxTicksLimit: narrow ? 4 : 8, font: { size: narrow ? 9 : 11 } }, grid: { display: false } },
+                    x: {
+                        title: { display: !narrow, text: 'Date (UTC)', color: '#71717a', font: { size: 10 } },
+                        ticks: { color: '#71717a', maxTicksLimit: wide ? 12 : (narrow ? 4 : 8), font: { size: narrow ? 9 : 11 } },
+                        grid: { display: false },
+                        border: { color: 'rgba(255,255,255,0.1)' },
+                    },
                 },
             },
         });
