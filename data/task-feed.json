@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-27T19:45:46Z",
-  "synthesis": "VAPE's automation has repeatedly generated featured investigations, bounty reports, repo reviews, and scheduled sweeps like skillforge checks and reputation snapshots.",
+  "generated": "2026-07-27T20:00:50Z",
+  "synthesis": "VAPE's automation has generated featured investigations every 15 minutes while also running bounty reports, repo reviews, reputation snapshots, and radar sweeps.",
   "tasks": [
+    {
+      "sha": "d3b4dc30c5",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-27T19:45Z",
+      "date": "2026-07-27T19:45:49Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d3b4dc30c50d6d82081f697c65fca2435d7046ec"
+    },
     {
       "sha": "eb813cca1f",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "Auto-generated bounty report 2026-07-27T17:43Z",
       "date": "2026-07-27T17:43:51Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3738cd168757abe1a3c5c2a47c96e3fb286aac9e"
-    },
-    {
-      "sha": "a146977f21",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-27T17:43Z",
-      "date": "2026-07-27T17:43:12Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a146977f21f8be9db1820f19f1568fd073840e3a"
     }
   ]
 }
