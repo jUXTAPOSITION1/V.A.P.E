@@ -1,18 +1,18 @@
 {
-  "generated": "2026-07-27T12:41:35Z",
+  "generated": "2026-07-27T12:52:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 375,
+    "reports": 376,
     "reports_by_type": {
       "bounty": 74,
+      "mainnet": 3,
       "base": 79,
       "sentiment": 41,
       "virtuals": 81,
       "security": 72,
       "macro": 20,
       "skillforge": 4,
-      "bug": 2,
-      "mainnet": 2
+      "bug": 2
     },
     "broadcasts": 115,
     "investigations": 421,
@@ -620,6 +620,17 @@
       "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +153% 24h (liq $624602.6755) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_122446.md",
       "bytes": 17150
+    },
+    {
+      "kind": "intel",
+      "type": "mainnet",
+      "file": "mainnet-patch-check-2026-07-27-12.md",
+      "title": "Mainnet Patch Status Check \u2014 Virtuals Protocol AgentNftV2",
+      "date": "2026-07-27T12:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-27 12:52 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live on-chain verified source fetch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-07-27-12.md",
+      "bytes": 2993
     },
     {
       "kind": "intel",
@@ -1258,17 +1269,6 @@
       "summary": "The current threat landscape is characterized by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Sp",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-13.md",
       "bytes": 7642
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260724_121953.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-24T12:19:53Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Zilliqa $0.0M on ['Zilliqa'] (Hidden Number Problem (HNP) Exploit) \u00b7 RECENT EXPLOIT: Verus-Ethereum Bridge $7.53M on ['Verus'] (Bridge Verification Bypass) \u00b7 RECENT EXPLOIT: AFX Bridge $24.15M on ['Arbitrum'] (Private Key Compromised)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260724_121953.md",
-      "bytes": 12349
     }
   ],
   "broadcasts": [
