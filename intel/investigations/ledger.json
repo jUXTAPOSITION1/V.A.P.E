@@ -2295,6 +2295,25 @@
     "symbol": "WETH.e",
     "times_investigated": 1
   },
+  "43114:0x5c09a9ce08c4b332ef1cc5f7cadb1158c32767ce": {
+    "address": "0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce",
+    "chain": "43114",
+    "creator_address": "0x43834c6a65c64a4529e048ba55a685ff5aa43cb4",
+    "first_investigated": "2026-07-27T15:57:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-155707-0x5C09A9cE.md",
+        "score": 77,
+        "ts": "2026-07-27T15:57:07Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T15:57:07Z",
+    "last_score": 77,
+    "last_verdict": "CAUTION",
+    "symbol": "fBOMB",
+    "times_investigated": 1
+  },
   "43114:0x60781c2586d68229fde47564546784ab3faca982": {
     "address": "0x60781C2586D68229fde47564546784ab3fACA982",
     "chain": "43114",

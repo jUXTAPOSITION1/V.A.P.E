@@ -661,3 +661,5 @@
 | 2026-07-27 | auto | 0x6982508145454Ce325dDbE47a25d4ec3d2311933 (PEPE) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-07-27 | auto | 0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7 (abcPHAR) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-27 | auto | 0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce (fBOMB) | deep_investigation | CAUTION (77/100) | Upgradeable proxy (verify implementation) | +7d |

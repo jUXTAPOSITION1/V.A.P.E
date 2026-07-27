@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T15:45:20Z",
+  "generated": "2026-07-27T15:57:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 379,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 116,
-    "investigations": 425,
+    "investigations": 426,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-154206-0xd5d0A9b3.md",
-      "title": "Investigation \u2014 abcPHAR",
-      "symbol": "abcPHAR",
-      "name": "abcPHAR",
-      "date": "2026-07-27T15:42:06Z",
-      "target": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
+      "file": "investigation-20260727-155707-0x5C09A9cE.md",
+      "title": "Investigation \u2014 fBOMB",
+      "symbol": "fBOMB",
+      "name": "Fantom Bomb",
+      "date": "2026-07-27T15:57:07Z",
+      "target": "0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce",
       "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x383ea12347e56932e08638767b8a2b3c18700493) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-154206-0xd5d0A9b3.md"
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated. Positive evidence: 1352 holders \u2014 reasonably distributed; Trading 279+ days without a known incident in this scan; Custom verified source (not a mass-produced factory ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-155707-0x5C09A9cE.md"
     },
     "report": {
       "kind": "intel",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-155707-0x5C09A9cE.md",
+      "title": "Investigation \u2014 fBOMB",
+      "symbol": "fBOMB",
+      "name": "Fantom Bomb",
+      "date": "2026-07-27T15:57:07Z",
+      "target": "0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce",
+      "chain": "43114 (Avalanche)",
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated. Positive evidence: 1352 holders \u2014 reasonably distributed; Trading 279+ days without a known incident in this scan; Custom verified source (not a mass-produced factory ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-155707-0x5C09A9cE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-154206-0xd5d0A9b3.md",
@@ -593,20 +607,6 @@
       "score": "10",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xfDf82991f00caE63062fD1d52e7f340693A34444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 99% of supply \u2014 concentrated, ea",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-171127-0xeA4D009D.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-162634-0xCBc5b4b1.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "DCA protocol",
-      "date": "2026-07-26T16:26:34Z",
-      "target": "0xCBc5b4b1a171fc4f86106e3E36853592AC16aaaa",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Deep liquidity ($1,024,451); Trading 107+ days without a known incident in this scan; Custom verified source (not",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-162634-0xCBc5b4b1.md"
     }
   ],
   "reports": [
