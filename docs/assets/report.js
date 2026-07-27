@@ -66,7 +66,7 @@ function basescanUrl(address) {
 // token's name, a flag's free-text description) can themselves be
 // attacker-influenced (e.g. a malicious token's on-chain name()) — same
 // class of risk already handled in profile.js, so escape before innerHTML.
-function escapeHtml(s) {
+export function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
@@ -80,7 +80,7 @@ function escapeHtml(s) {
 // escapes first, then only ever inserts this function's own controlled
 // tags around the escaped text, so nothing in a model-authored report can
 // inject real HTML.
-function simpleMarkdownToHtml(md) {
+export function simpleMarkdownToHtml(md) {
     const lines = String(md ?? '').split('\n');
     const htmlParts = [];
     let listBuffer = [];
