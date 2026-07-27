@@ -38,3 +38,4 @@
 {"ts": "2026-07-27T20:00:49.266503Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-27T20:45:19.018164Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-27T21:15:25.627836Z", "address": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "chain": "8453", "symbol": "VCNT", "name": "VCNT", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-07-27T21:30:19.328702Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "token_intel"}

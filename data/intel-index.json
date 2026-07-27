@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T21:18:13Z",
+  "generated": "2026-07-27T21:30:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 386,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 117,
-    "investigations": 432,
+    "investigations": 433,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-210021-0xE441E2e1.md",
-      "title": "Investigation \u2014 SLGNS",
-      "symbol": "SLGNS",
-      "name": "Staked Longinus",
-      "date": "2026-07-27T21:00:21Z",
-      "target": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-210021-0xE441E2e1.md"
+      "file": "investigation-20260727-213015-0x84481040.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-07-27T21:30:15Z",
+      "target": "0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $26,479; [-10] Violent 24h move +4168% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 921 holder",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-213015-0x84481040.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-213015-0x84481040.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-07-27T21:30:15Z",
+      "target": "0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $26,479; [-10] Violent 24h move +4168% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 921 holder",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-213015-0x84481040.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-210021-0xE441E2e1.md",
@@ -593,20 +607,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Violent 24h move +667% (volatility/manipulation). Positive evidence: Ownership renounced; 7333 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 685+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-185724-0xa0045305.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-184225-0xcB362b37.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "DCA",
-      "date": "2026-07-26T18:42:25Z",
-      "target": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-184225-0xcB362b37.md"
     }
   ],
   "reports": [
