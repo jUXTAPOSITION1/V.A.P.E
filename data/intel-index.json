@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-27T04:12:02Z",
+  "generated": "2026-07-27T04:37:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 441,
+    "reports": 442,
     "reports_by_type": {
+      "bounty": 134,
       "security": 74,
-      "bounty": 133,
       "base": 80,
       "sentiment": 43,
       "virtuals": 82,
@@ -36,15 +36,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-025734-0xCBf4AB00.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-27-03.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-27T03:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260727_043658.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-27T04:36:58Z",
       "threat": null,
-      "summary": "The feed records nine incidents across the most recent seven-day window, all below the $50M threshold. Affected chains include Ethereum (Garden $0.45M, DeBond $0.542M, Lien $0.542M, BarnBridge $0.776M), Base (Garden), Arbitrum (Garden, Triple-A $9.7M, AFX Bridge $24.15M, Ostium $23.75M, Cascade Liquidity Strategy $1.34M), BSC (Garden, 42D",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-03.md",
-      "bytes": 7013
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +77% 24h (liq $535667.007) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_043658.md",
+      "bytes": 17352
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260727_043658.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-27T04:36:58Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +77% 24h (liq $535667.007) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_043658.md",
+      "bytes": 17352
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-24 04:18 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-24-04.md",
       "bytes": 4113
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-24-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-24T02:00Z",
-      "threat": null,
-      "summary": "The current threat landscape is marked by a high threat level, with 7 incidents reported in the last 7 days. The incidents involve a range of exploit techniques, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, Flashloan Exploit, Log Spoofing,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-24-02.md",
-      "bytes": 7856
     }
   ],
   "broadcasts": [
@@ -1578,7 +1578,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49156185",
+      "version": "49168584",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1588,7 +1588,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.44 eth_dom 10.07 mcap_chg_24h 0.86",
+      "version": "btc_dom 56.46 eth_dom 10.17 mcap_chg_24h 1.25",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1638,7 +1638,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "26 Fear",
+      "version": "30 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
