@@ -156,3 +156,4 @@
 {"ts": "2026-07-27T16:43:33.265369Z", "target": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
 {"ts": "2026-07-27T16:58:35.231159Z", "target": "proxy", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
 {"ts": "2026-07-27T17:13:35.996091Z", "target": "Polygon", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 51}
+{"ts": "2026-07-27T17:28:43.841853Z", "target": "asseto-aoabt", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
