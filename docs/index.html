@@ -489,6 +489,8 @@
                         <div class="icon-dropdown-menu">
                             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank">View reports</a>
                             <button onclick="App.refresh()">Refresh</button>
+                            <div class="icon-dropdown-divider"></div>
+                            <button onclick="document.getElementById('threat-ledger-search').value=''; App._renderThreatLedger()">Clear filters</button>
                         </div>
                     </div>
                 </div>
@@ -496,16 +498,44 @@
             <h2 class="section-title text-lg mb-3">&gt; Every attack, tracked as it happens.</h2>
             <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of real exploits across DeFi from roughly the past two months —
             technique, amount, and where the next incident is likely to land.</p>
-            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 text-xs">
-                <span id="threat-ledger-threat" class="inline-flex items-center gap-1.5"></span>
-                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source intelligence report</a>
+
+            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
+                    <input id="threat-ledger-search" type="text" placeholder="Search protocol, chain, amount…"
+                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
+                </div>
+                <select id="threat-ledger-severity" class="bg-black border border-white/10 focus:border-white/30 outline-none px-2 py-1.5 text-[11px] text-zinc-300">
+                    <option value="">All severity</option>
+                    <option value="extreme">Extreme</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select id="threat-ledger-sort" class="bg-black border border-white/10 focus:border-white/30 outline-none px-2 py-1.5 text-[11px] text-zinc-300">
+                    <option value="date_desc">Newest first</option>
+                    <option value="date_asc">Oldest first</option>
+                    <option value="amount_desc">Amount: high → low</option>
+                    <option value="amount_asc">Amount: low → high</option>
+                </select>
             </div>
+
             <div id="threat-ledger-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
                 <div class="skeleton h-14 my-1"></div>
                 <div class="skeleton h-14 my-1"></div>
                 <div class="skeleton h-14 my-1"></div>
             </div>
-            <p class="text-[11px] text-zinc-600 mt-5">Each incident is checked against known attack patterns for a concrete prevention takeaway.
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
+                <span id="threat-ledger-count">—</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="threat-ledger-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="threat-ledger-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="threat-ledger-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-zinc-600 mt-4">Each incident is checked against known attack patterns for a concrete prevention takeaway.
             See <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for the resulting case files.</p>
         </section>
 
@@ -535,11 +565,40 @@
                 <span class="stat-pair"><span class="stat-label">verified</span><span class="stat-value">tested automatically</span></span>
                 <span class="stat-pair"><span class="stat-label">reviewed</span><span class="stat-value">a maintainer signs off</span></span>
             </div>
+
+            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
+                    <input id="workshop-search" type="text" placeholder="Search PR title, number…"
+                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
+                </div>
+                <select id="workshop-status" class="bg-black border border-white/10 focus:border-white/30 outline-none px-2 py-1.5 text-[11px] text-zinc-300">
+                    <option value="">All status</option>
+                    <option value="merged">Merged</option>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <select id="workshop-sort" class="bg-black border border-white/10 focus:border-white/30 outline-none px-2 py-1.5 text-[11px] text-zinc-300">
+                    <option value="created_desc">Newest first</option>
+                    <option value="created_asc">Oldest first</option>
+                </select>
+            </div>
+
             <div id="workshop-body" class="diff-list">
                 <div class="skeleton h-24 my-1"></div>
                 <div class="skeleton h-24 my-1"></div>
             </div>
-            <p class="text-[11px] text-zinc-600 mt-5">Sourced live from GitHub — every entry links to a real pull request. Most cycles find nothing worth building, by design.
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
+                <span id="workshop-count">—</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="workshop-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="workshop-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="workshop-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-zinc-600 mt-4">Sourced live from GitHub — every entry links to a real pull request. Most cycles find nothing worth building, by design.
             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-zinc-400 hover:underline">View the underlying logic</a> ·
             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank" class="text-zinc-400 hover:underline">Read the build ledger</a>.</p>
         </section>
@@ -811,25 +870,46 @@
                         <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank">View index</a>
                         <button onclick="App.refresh()">Refresh</button>
                         <div class="icon-dropdown-divider"></div>
-                        <button onclick="document.getElementById('intel-filter').innerHTML=''; App._typeFilter=null; App._renderIntel()">Clear filters</button>
+                        <button onclick="document.getElementById('intel-search').value=''; App._renderIntel()">Clear filters</button>
                     </div>
                 </div>
             </div>
-            <p class="text-zinc-400 text-sm mb-6 max-w-2xl leading-relaxed">The complete, unedited case log — every investigation, report, broadcast, and
+            <p class="text-zinc-400 text-sm mb-4 max-w-2xl leading-relaxed">The complete, unedited case log — every investigation, report, broadcast, and
             internal tool VAPE has published, indexed automatically as it happens.</p>
-            <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs mb-6">
+
+            <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs mb-4">
                 <button data-tab="investigations" class="term-btn term-btn-sm term-btn-active">Investigations <span id="c-investigations" class="opacity-70"></span></button>
                 <button data-tab="reports" class="term-btn term-btn-sm">Reports <span id="c-reports" class="opacity-70"></span></button>
                 <button data-tab="broadcasts" class="term-btn term-btn-sm">Broadcasts <span id="c-broadcasts" class="opacity-70"></span></button>
                 <button data-tab="tools" class="term-btn term-btn-sm">Tools <span id="c-tools" class="opacity-70"></span></button>
             </div>
-            <div id="intel-filter-wrap" class="mb-4 hidden">
-                <div id="intel-filter" class="flex flex-wrap gap-1.5 text-[11px]"></div>
+
+            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
+                    <input id="intel-search" type="text" placeholder="Search title, symbol, date…"
+                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
+                </div>
+                <select id="intel-sort" class="bg-black border border-white/10 focus:border-white/30 outline-none px-2 py-1.5 text-[11px] text-zinc-300">
+                    <option value="date_desc">Newest first</option>
+                    <option value="date_asc">Oldest first</option>
+                    <option value="title_asc">Title A–Z</option>
+                </select>
             </div>
-            <div id="intel-body" class="diff-list">
+
+            <div id="intel-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
                 <div class="skeleton h-16 my-1"></div>
                 <div class="skeleton h-16 my-1"></div>
                 <div class="skeleton h-16 my-1"></div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
+                <span id="intel-count">—</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="intel-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="intel-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="intel-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
+                </div>
             </div>
         </section>
 
@@ -930,7 +1010,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=29"></script>
+    <script src="assets/app.js?v=30"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
