@@ -63,13 +63,28 @@ for the full writeup):
     would need a funded, signing-capable wallet — a materially bigger, more
     sensitive lift than a plain POST. Needs an explicit decision before
     building, not a silent addition.
-  - 402index.io domain verification (POST /api/v1/claim -> publish the
-    returned verification_hash at /.well-known/402index-verify.txt on the
-    worker -> POST /api/v1/claim/verify) would upgrade our existing
-    "pending review" listings to instantly-approved. Real and documented,
-    but the claim's verification_token is an ongoing edit credential that
-    needs to be stored as a real secret — this script/session has no way to
-    write a new encrypted GitHub Actions secret, so this needs a human step.
+  - 402index.io domain verification — ALREADY DONE (agents/x402_index_claim.py
+    + .github/workflows/x402-index-claim.yml; the worker already serves the
+    real verification hash at /.well-known/402index-verify.txt). Confirmed
+    directly from 402index.io's own api-docs (fetched via a CI diagnostic,
+    diag-402index-docs.yml, since that page 403s automated fetchers from the
+    normal dev sandbox) exactly WHY that alone was never enough: POST
+    /api/v1/register itself says "Registrations are reviewed before
+    appearing in the directory" — every listing starts life as
+    `status: "pending"`, and this script's own STATE_PATH only ever tracked
+    "did our POST succeed," never 402index.io's own review/approval state —
+    that's the real, confirmed explanation for VAPE's 402index.io listings
+    periodically showing blank/partial pricing even after a fully successful
+    registration pass. The domain claim's verification_token is the
+    documented fix (PATCH /api/v1/services/:id {domain, verification_token,
+    ...fields} edits a listing directly as its verified owner, bypassing the
+    anonymous-POST review queue entirely — see edit_listing() below) — but
+    that token was only ever printed once to a job log
+    (agents/x402_index_claim.py's own documented one-shot-reveal design) and
+    nothing downstream of that ever consumed it. Set it as this repo's
+    X402INDEX_VERIFICATION_TOKEN secret to close the loop; until then,
+    register_402index() keeps using the anonymous POST /api/v1/register path
+    unchanged.
   - _x402 DNS TXT record discovery — a real IETF draft
     (draft-jeftovic-x402-dns-discovery-00), but still an early-stage draft
     (not a ratified standard) and requires adding a DNS record in the
@@ -125,11 +140,12 @@ PAY_TO = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 UA = {"User-Agent": "VAPE-x402-directory-register/1.0", "Content-Type": "application/json"}
 
-# VAPOR (jUXTAPOSITION1/VAPOR) — VAPE's own x402 facilitator, settling half
-# of VAPE's real x402 traffic in a 50/50 hybrid split with CDP (see
-# worker/src/lib/facilitatorClient.ts), and also a Bazaar-compatible
-# discovery service in its own right (see its docs/API.md's "Discovery
-# (x402 Bazaar)" section).
+# VAPOR (jUXTAPOSITION1/VAPOR) — VAPE's own x402 facilitator; also a
+# Bazaar-compatible discovery service in its own right (see its docs/
+# API.md's "Discovery (x402 Bazaar)" section), independent of whether it's
+# still in VAPE's own payment-settlement path (as of 2026-07-27 it isn't —
+# see worker/src/lib/facilitatorClient.ts's DirectCdpFacilitatorClient —
+# but that's an unrelated decision from this discovery registration).
 VAPOR_BASE = "https://x402.duckdns.org"
 # Optional: only needed if VAPOR's production deployment has API_KEYS
 # configured (see VAPOR's src/config/api-keys.ts) — if VAPOR is running
@@ -334,6 +350,51 @@ def _category_for(name):
     return "crypto/security"
 
 
+X402INDEX_DOMAIN = "vape-x402.vapex402.workers.dev"
+# Domain ownership was already claimed AND verified back on 2026-07-05 (see
+# agents/x402_index_claim.py + worker/src/index.ts's WELLKNOWN_402INDEX_HASH
+# route) — re-confirmed live as recently as 2026-07-25 (a repeat `claim`
+# attempt correctly got HTTP 409 "Domain already verified", not an error).
+# What was never done is store that claim's verification_token as a durable
+# secret so THIS script could use it — it was only ever printed once to a
+# job log (agents/x402_index_claim.py's own documented, intentional
+# one-shot-reveal design), and nothing downstream of that ever consumed it.
+# Set X402INDEX_VERIFICATION_TOKEN as a repo secret to close that gap; until
+# then this is None and register_402index() uses only the anonymous POST
+# /api/v1/register path, exactly as before.
+X402INDEX_VERIFICATION_TOKEN = os.environ.get("X402INDEX_VERIFICATION_TOKEN")
+
+
+def edit_listing(service_id, domain, verification_token, **fields):
+    """PATCH /api/v1/services/:id {domain, verification_token, ...fields} —
+    edits a listing directly as its verified domain owner. Per 402index.io's
+    own docs this is a materially different path from POST /api/v1/register:
+    register() explicitly states "Registrations are reviewed before
+    appearing in the directory" (every anonymous POST — new or a re-send of
+    an existing URL — enters/re-enters that review queue), while this PATCH
+    requires proof of domain ownership up front and is not documented as
+    review-gated. This is the confirmed, documented fix for VAPE's
+    402index.io listings periodically losing their price/description after
+    a successful registration (see module docstring)."""
+    payload = {"domain": domain, "verification_token": verification_token, **fields}
+    req = urllib.request.Request(
+        f"https://402index.io/api/v1/services/{service_id}",
+        data=json.dumps(payload).encode(), headers=UA, method="PATCH",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return r.getcode(), json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raw = e.read().decode(errors="replace")
+        try:
+            body = json.loads(raw)
+        except Exception:
+            body = {"raw": raw}
+        return e.code, body
+    except Exception as e:
+        return 0, {"error": str(e)}
+
+
 def register_402index(only=None, force_all=False):
     """Registers each offering with 402index.io — but SKIPS any offering
     already recorded in STATE_PATH as previously registered, unless
@@ -350,13 +411,27 @@ def register_402index(only=None, force_all=False):
     --force-all is now a safe, real "refresh metadata" mechanism, not just a
     theoretical escape hatch.
 
-    Real gap this closes: the payload previously sent only {url, name,
-    protocol, provider} — none of the documented price_usd/description/
-    category/payment_asset/payment_network fields — which is exactly why
-    every VAPE listing shows a blank "—" price on 402index.io's own directory
-    page instead of its real x402 price."""
+    Real gap this closed originally: the payload previously sent only {url,
+    name, protocol, provider} — none of the documented price_usd/
+    description/category/payment_asset/payment_network fields.
+
+    Real gap this closes NOW (2026-07-27): every anonymous POST here —
+    confirmed straight from 402index.io's own docs — re-enters an admin
+    review queue ("Registrations are reviewed before appearing in the
+    directory"), which is why a fully-successful registration pass could
+    still end with listings back to blank/partial pricing later; this
+    script's STATE_PATH had no way to see that review-state, only whether
+    our own POST succeeded. When X402INDEX_VERIFICATION_TOKEN is set (see
+    module docstring) and this offering already has a known service id in
+    STATE_PATH, this now uses edit_listing()'s domain-verified PATCH instead
+    of the anonymous POST — not review-gated, per 402index.io's docs. A
+    first-ever registration for a brand-new offering still has to go through
+    POST /api/v1/register once (there is no create-via-PATCH), since only
+    that call ever learns the offering's service id in the first place."""
     state = _load_state()
     already = set(state.get("registered_402index", []))
+    service_ids = state.get("service_ids", {})
+    service_ids_changed = False
     results = []
     newly_registered = []
     for name, (price, desc), prefix in _all_offerings():
@@ -368,23 +443,30 @@ def register_402index(only=None, force_all=False):
             continue
         if results:
             time.sleep(2)  # pace requests — be a good citizen on someone else's free API
-        payload = {
-            "url": f"{WORKER_BASE}/{prefix}/{name}",
+        fields = {
             "name": f"VAPE {name}",
-            "protocol": "x402",
-            "provider": PROVIDER,
             "description": desc,
             "price_usd": float(price),
             "payment_asset": "USDC",
             "payment_network": "Base",
             "category": _category_for(name),
         }
-        code, body = _post("https://402index.io/api/v1/register", payload)
+        service_id = service_ids.get(name)
+        if X402INDEX_VERIFICATION_TOKEN and service_id:
+            code, body = edit_listing(service_id, X402INDEX_DOMAIN, X402INDEX_VERIFICATION_TOKEN, **fields)
+            via = "PATCH (domain-verified)"
+        else:
+            payload = {"url": f"{WORKER_BASE}/{prefix}/{name}", "protocol": "x402", "provider": PROVIDER, **fields}
+            code, body = _post("https://402index.io/api/v1/register", payload)
+            via = "POST /register"
         ok = 200 <= code < 300
         results.append({"offering": name, "status": code, "ok": ok, "response": body})
-        print(f"[402index] {name}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
+        print(f"[402index] {name} via {via}: HTTP {code} {'OK' if ok else 'FAILED'} — {json.dumps(body)[:200]}")
         if ok:
             newly_registered.append(name)
+            if isinstance(body, dict) and body.get("id") and not service_id:
+                service_ids[name] = body["id"]
+                service_ids_changed = True
         elif code == 429:
             # Real hourly quota, confirmed exhausted for this run's IP — every
             # remaining offering would also 429 (the retry inside _post()
@@ -402,8 +484,9 @@ def register_402index(only=None, force_all=False):
                   f"flags) once the quota window resets to pick up the rest.")
             break
 
-    if newly_registered:
+    if newly_registered or service_ids_changed:
         state["registered_402index"] = sorted(already | set(newly_registered))
+        state["service_ids"] = service_ids
         _save_state(state)
         print(f"[402index] recorded {len(newly_registered)} newly-registered offering(s) in "
               f"{os.path.relpath(STATE_PATH, _REPO_ROOT)}: {newly_registered}")

@@ -17,6 +17,13 @@ on:
 permissions:
   contents: read
 
+# Shares the same 402index.io per-domain claim state as x402-directory.yml's
+# PATCH-based edit path (agents/x402_directory_register.py) -- both worth
+# serializing against each other, not just against themselves.
+concurrency:
+  group: x402-directory-registration
+  cancel-in-progress: false
+
 jobs:
   claim-or-verify:
     runs-on: ubuntu-latest
