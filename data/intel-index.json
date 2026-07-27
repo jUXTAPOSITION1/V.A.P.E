@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-27T23:00:24Z",
+  "generated": "2026-07-27T23:03:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 387,
+    "reports": 388,
     "reports_by_type": {
-      "bounty": 77,
+      "bounty": 78,
       "sentiment": 42,
       "base": 81,
       "virtuals": 83,
@@ -38,13 +38,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260727_211126.md",
+      "file": "bounty_report_20260727_230257.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T21:11:26Z",
+      "date": "2026-07-27T23:02:57Z",
       "threat": null,
       "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Projekt $0.56M on ['Ethereum'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_211126.md",
-      "bytes": 17916
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_230257.md",
+      "bytes": 16235
     }
   },
   "investigations": [
@@ -610,6 +610,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260727_230257.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-27T23:02:57Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Projekt $0.56M on ['Ethereum'] (Flashloan Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_230257.md",
+      "bytes": 16235
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1258,17 +1269,6 @@
       "summary": "Date: 2026-07-25 04:14 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-04.md",
       "bytes": 2836
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-25-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-25T02:00Z",
-      "threat": null,
-      "summary": "The current threat landscape shows a high level of activity, with 6 incidents reported in the last 7 days. The incidents involve a range of attack vectors, including Hidden Number Problem (HNP) Exploit, Bridge Verification Bypass, Private Key Compromised, Signature Exploit, Price Oracle Manipulation, and Flashloan Exploit. The affected pl",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-25-02.md",
-      "bytes": 7323
     }
   ],
   "broadcasts": [
