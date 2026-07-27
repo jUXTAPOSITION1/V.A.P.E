@@ -212,3 +212,48 @@ def test_build_session_tags_client_header(monkeypatch):
     monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", fake_key)
     session = data_agent._build_session("data-agent-vapor")
     assert session.headers["X-VAPE-Client"] == "data-agent-vapor"
+
+
+def test_patch_x402_missing_scheme_network_injects_top_level_fields(monkeypatch):
+    # Confirmed via a live payload capture (scripts/diag_x402_payload.py):
+    # CDP's real /settle endpoint rejects every v2 paymentPayload with HTTP
+    # 400 "invalid request body" because the x402 SDK's own V2 model omits
+    # top-level scheme/network (it only nests them under `accepted`, per the
+    # SDK's own get_scheme()/get_network() docstrings: "V2 uses
+    # accepted.scheme"/"accepted.network"). This asserts the wire-level
+    # patch actually adds them back without touching the signed payload.
+    monkeypatch.setattr(data_agent, "_X402_SCHEME_NETWORK_PATCHED", False)
+    data_agent._patch_x402_missing_scheme_network()
+
+    import base64
+
+    from x402.http import x402_http_client_base as base_mod
+    from x402.schemas import PaymentPayload, PaymentRequirements
+
+    req = PaymentRequirements(
+        scheme="exact",
+        network="eip155:8453",
+        asset="0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        amount="10000",
+        payTo="0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15",
+        maxTimeoutSeconds=300,
+        extra={"name": "USD Coin", "version": "2"},
+    )
+    payload = PaymentPayload(
+        x402Version=2,
+        payload={
+            "authorization": {
+                "from": "0xabc", "to": "0xdef", "value": "10000",
+                "validAfter": "0", "validBefore": "123", "nonce": "0x00",
+            },
+            "signature": "0xsig",
+        },
+        accepted=req,
+    )
+    header_val = base_mod.encode_payment_signature_header(payload)
+    decoded = json.loads(base64.b64decode(header_val))
+    assert decoded["scheme"] == "exact"
+    assert decoded["network"] == "eip155:8453"
+    # the signed authorization + signature themselves are untouched
+    assert decoded["payload"]["signature"] == "0xsig"
+    assert decoded["payload"]["authorization"]["nonce"] == "0x00"

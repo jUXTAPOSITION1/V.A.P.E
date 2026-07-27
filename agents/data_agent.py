@@ -467,6 +467,58 @@ class _State:
             f.write(json.dumps(entry) + "\n")
 
 
+_X402_SCHEME_NETWORK_PATCHED = False
+
+
+def _patch_x402_missing_scheme_network():
+    """Work around a real x402-SDK/CDP-facilitator interop gap.
+
+    Confirmed via a live payload capture (scripts/diag_x402_payload.py):
+    every real settlement has been failing with HTTP 400 "invalid request
+    body", fieldErrors.paymentPayload: ["Invalid input: expected \"exact\"",
+    "Invalid input: expected string, received undefined"] — CDP's real
+    /settle endpoint validates the outgoing paymentPayload against a schema
+    that requires top-level `scheme`/`network` fields. But the x402 Python
+    SDK's own V2 PaymentPayload model (x402/schemas/payments.py) deliberately
+    omits them at the top level — its own get_scheme()/get_network() methods
+    say "V2 uses accepted.scheme"/"accepted.network" instead, which matches
+    the officially documented x402 v2 wire shape. Neither side is "wrong" by
+    its own spec reading, but the mismatch means every payload we send is
+    missing fields CDP requires — this isn't a bug in VAPE's own code (we
+    never construct this payload ourselves; the SDK does), and there's no
+    upstream SDK fix to pin to yet.
+
+    Patches x402HTTPClientBase.encode_payment_signature_header (the exact
+    call x402HTTPAdapter.send() makes right before base64-encoding the
+    signed payload into the outgoing header) to duplicate accepted.scheme/
+    accepted.network at the top level for v2 payloads. Doesn't touch
+    signing/verification at all — the EIP-3009 authorization + signature are
+    unchanged, only the JSON wrapper around them gains the two fields CDP's
+    schema is missing.
+    """
+    global _X402_SCHEME_NETWORK_PATCHED
+    if _X402_SCHEME_NETWORK_PATCHED:
+        return
+    try:
+        from x402.http import x402_http_client_base as _base_mod
+        from x402.http.utils import safe_base64_encode
+    except Exception as e:
+        print(f"[data_agent] could not apply x402 scheme/network patch: {e}")
+        return
+    _original_encode = _base_mod.encode_payment_signature_header
+
+    def _patched_encode(payload):
+        if getattr(payload, "x402_version", None) == 2:
+            data = json.loads(payload.model_dump_json(by_alias=True, exclude_none=True))
+            data.setdefault("scheme", payload.accepted.scheme)
+            data.setdefault("network", str(payload.accepted.network))
+            return safe_base64_encode(json.dumps(data))
+        return _original_encode(payload)
+
+    _base_mod.encode_payment_signature_header = _patched_encode
+    _X402_SCHEME_NETWORK_PATCHED = True
+
+
 def _build_session(client_tag):
     """Build a requests.Session that transparently pays x402 402 challenges
     with DATA_AGENT's own funded wallet. Returns None if the key is unset,
@@ -492,6 +544,7 @@ def _build_session(client_tag):
     except Exception as e:
         print(f"[data_agent] x402 SDK unavailable: {e}")
         return None
+    _patch_x402_missing_scheme_network()
     client = x402ClientSync()
     client.register(NETWORK, ExactEvmScheme(signer=account))
     session = x402_requests(client)
