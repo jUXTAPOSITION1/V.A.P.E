@@ -12,7 +12,10 @@ from agents import x402_directory_register as reg
 
 
 def _fake_post_ok(url, payload, **kwargs):
-    return 201, {"id": "fake", "status": "pending review"}
+    # Real shape (confirmed live, 2026-07-27): the id is nested under
+    # body["service"]["id"], not top-level — see edit_listing()'s docstring
+    # and register_402index()'s id-capture comment for the bug this caught.
+    return 201, {"message": "Service registered and live.", "service": {"id": "fake"}}
 
 
 def test_all_offerings_count_matches_worker_routes():
