@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-27T08:41:31Z",
+  "generated": "2026-07-27T08:51:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 445,
+    "reports": 370,
     "reports_by_type": {
-      "bounty": 135,
-      "base": 81,
-      "virtuals": 83,
-      "security": 74,
-      "sentiment": 43,
-      "macro": 21,
+      "bounty": 73,
+      "base": 78,
+      "virtuals": 80,
+      "security": 71,
+      "sentiment": 40,
+      "macro": 20,
       "skillforge": 4,
       "bug": 2,
       "mainnet": 2
