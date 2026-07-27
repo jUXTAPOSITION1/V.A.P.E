@@ -314,9 +314,9 @@ def _fetch_image_bytes(source):
 def brand_image(source, slug):
     """Every VAPE Wire story needs to read as VAPE Wire's own on sight, the
     same way a real wire service stamps its logo on a photo before
-    distribution — this downloads/reads `source` (a real photo URL, an
-    AI-generated image URL, or a local fallback asset path), crops it to a
-    consistent 16:9 frame, and stamps VAPE's real V-mark + wordmark into a
+    distribution — this downloads/reads `source` (a real photo URL or a
+    local fallback asset path), crops it to a consistent 16:9 frame, and
+    stamps VAPE's real V-mark + wordmark into a
     bottom scrim. Writes the branded JPEG to docs/assets/news-images/
     <slug>.jpg and returns the site-relative path ("assets/news-images/
     <slug>.jpg") the card <img> should use.

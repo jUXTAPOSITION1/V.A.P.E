@@ -432,20 +432,6 @@ a { transition: color .15s; }
 .news-card-img { position: relative; width: 100%; height: 128px; background: rgba(255, 255, 255, 0.04); overflow: hidden; }
 .news-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .news-card-img img.news-card-img-fallback { object-fit: contain; padding: 1.75rem; opacity: 0.55; }
-.news-card-img-tag {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    font-size: 9px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: #d4d4d8;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    padding: 2px 6px;
-    backdrop-filter: blur(2px);
-}
 .news-card-body { padding: 0.875rem 1rem 1rem; display: flex; flex-direction: column; flex: 1; }
 .news-card-topic {
     align-self: flex-start;

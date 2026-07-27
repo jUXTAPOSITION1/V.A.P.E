@@ -100,24 +100,21 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
     assert "brand mark" in text
 
 
-def test_write_story_uses_ai_generated_image_when_no_real_photo(tmp_path, monkeypatch):
+def test_write_story_brands_real_source_photo(tmp_path, monkeypatch):
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
-                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets"}
+                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
+                 "image": "https://example.com/real-photo.jpg"}
 
     with mock.patch("agents.intel_common.web_search_snippets",
                      return_value={"available": False, "provider": None, "results": []}), \
-         mock.patch.object(nc, "extract_og_image", return_value=None), \
          mock.patch("agents.intel_common.grok_analysis",
                      side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
-         mock.patch("agents.llm.generate_image", return_value="https://xai.example/generated.png") as gen:
+         mock.patch.object(nc, "brand_image", return_value="assets/news-images/rally-deepens.jpg") as brand:
         path = news_reporter.write_story(candidate)
 
     text = open(path).read()
-    assert "**Image:** https://xai.example/generated.png" in text
-    assert "AI-generated illustration" in text
-    gen.assert_called_once()
-    # crypto-markets is one of the abstract-style topics -- confirm the
-    # style guidance actually reached the prompt, not just any text.
-    assert "abstract" in gen.call_args[0][0].lower()
+    assert "**Image:** assets/news-images/rally-deepens.jpg" in text
+    assert "Source photo — VAPE Wire branded" in text
+    brand.assert_called_once_with("https://example.com/real-photo.jpg", "rally-deepens")

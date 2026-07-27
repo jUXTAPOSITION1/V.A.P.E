@@ -122,13 +122,11 @@ export function renderPage(page, items, pageSize) {
 // ── story tile (shared by the home teaser and the full news.html grid) ────
 export function storyCardHtml(s) {
     const img = s.image || 'assets/logo-v-256.png';
-    const isGenerated = (s.image_source || '').startsWith('AI-generated');
     return `
     <a href="${escapeHtml(articleUrl(s))}" class="news-card">
         <div class="news-card-img">
             <img src="${escapeHtml(img)}" alt="" loading="lazy"
                  onerror="this.src='assets/logo-v-256.png'; this.classList.add('news-card-img-fallback')">
-            ${isGenerated ? '<span class="news-card-img-tag">AI illustration</span>' : ''}
         </div>
         <div class="news-card-body">
             <span class="news-card-topic">${escapeHtml(s.topic || 'News')}</span>
