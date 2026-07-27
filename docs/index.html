@@ -490,7 +490,7 @@
                             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank">View reports</a>
                             <button onclick="App.refresh()">Refresh</button>
                             <div class="icon-dropdown-divider"></div>
-                            <button onclick="document.getElementById('threat-ledger-search').value=''; App._renderThreatLedger()">Clear filters</button>
+                            <button onclick="document.getElementById('threat-ledger-search').value=''; document.getElementById('threat-ledger-severity').value=''; AttackFeed._ledger.q=''; AttackFeed._ledger.severity=''; AttackFeed._ledger.page=0; AttackFeed._renderLedger()">Clear filters</button>
                         </div>
                     </div>
                 </div>
@@ -553,6 +553,8 @@
                             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank">View logic</a>
                             <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank">Build ledger</a>
                             <button onclick="App.refresh()">Refresh</button>
+                            <div class="icon-dropdown-divider"></div>
+                            <button onclick="document.getElementById('workshop-search').value=''; document.getElementById('workshop-status').value=''; App._workshop.q=''; App._workshop.status=''; App._workshop.page=0; App._renderWorkshopBody()">Clear filters</button>
                         </div>
                     </div>
                 </div>
@@ -870,7 +872,7 @@
                         <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank">View index</a>
                         <button onclick="App.refresh()">Refresh</button>
                         <div class="icon-dropdown-divider"></div>
-                        <button onclick="document.getElementById('intel-search').value=''; App._renderIntel()">Clear filters</button>
+                        <button onclick="document.getElementById('intel-search').value=''; App._intelQuery=''; App._typeFilter=null; App._intelPage=0; App._renderIntel()">Clear filters</button>
                     </div>
                 </div>
             </div>
@@ -1010,12 +1012,12 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=30"></script>
+    <script src="assets/app.js?v=31"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
     <script type="module" src="assets/hire.js?v=13"></script>
     <script type="module" src="assets/x402feed.js?v=3"></script>
-    <script type="module" src="assets/attackfeed.js?v=3"></script>
+    <script type="module" src="assets/attackfeed.js?v=4"></script>
 </body>
 </html>
