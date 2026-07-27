@@ -172,15 +172,10 @@ const App = {
             this._set('bcc-tasks', tasks.length);
             if (synthesisEl) synthesisEl.textContent = feed.synthesis || '';
             if (!tasks.length) throw 0;
-            taskFeedEl.innerHTML = tasks.map(t => {
-                const [icon, col] = KIND_META[t.kind] || KIND_META.automation;
-                return `
-                <a href="${t.url||'#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
-                    <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
-                    <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message||'')}</div>
-                    <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
-                </a>`;
-            }).join('');
+            this._taskFeedItems = tasks;
+            this._taskFeedKindMeta = KIND_META;
+            this._wireTaskFeedControls();
+            this._renderTaskFeed();
         } catch(e) {
             if (taskFeedEl) taskFeedEl.innerHTML = '<div class="text-zinc-500 text-sm">No recent automated activity recorded.</div>';
             this._set('bcc-tasks', 0);
@@ -210,7 +205,67 @@ const App = {
                 .sort((a,b)=>b.date.localeCompare(a.date));
             this._set('bcc-audits', files.filter(f=>f.isAudit).length);
             if (!files.length) throw 0;
-            auditEl.innerHTML = files.map(f => `
+            this._auditFiles = files;
+            this._wireAuditListControls();
+            this._renderAuditList();
+        } catch(e) {
+            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">browse the audit ledger</a>.</div>';
+        }
+    },
+
+    // Live Automation Feed — search + pagination over the already-fetched
+    // task-feed.json entries.
+    _taskFeedItems: [], _taskFeedKindMeta: {}, _taskFeedQuery: '',
+    _wireTaskFeedControls() {
+        if (this._taskFeedWired) return;
+        this._taskFeedWired = true;
+        const search = document.getElementById('bcc-task-search');
+        if (search) search.addEventListener('input', () => {
+            this._taskFeedQuery = search.value.trim().toLowerCase();
+            this._pgReset('bcc-task-pg');
+            this._renderTaskFeed();
+        });
+        this._pgWire('bcc-task-pg', 8, () => this._renderTaskFeed());
+    },
+    _renderTaskFeed() {
+        const taskFeedEl = document.getElementById('bcc-task-feed');
+        if (!taskFeedEl) return;
+        let tasks = this._taskFeedItems;
+        if (this._taskFeedQuery) tasks = tasks.filter(t => (t.message||'').toLowerCase().includes(this._taskFeedQuery) || (t.kind||'').toLowerCase().includes(this._taskFeedQuery));
+        const items = this._pgSlice('bcc-task-pg', tasks, 8);
+        taskFeedEl.innerHTML = items.length ? items.map(t => {
+            const [icon, col] = this._taskFeedKindMeta[t.kind] || this._taskFeedKindMeta.automation || ['fa-gears', '#a1a1aa'];
+            return `
+            <a href="${t.url||'#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
+                <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
+                <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message||'')}</div>
+                <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
+            </a>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">No automated activity matches this filter.</div>';
+    },
+
+    _rep: null,
+    // Audit Track Record — search + pagination over the already-fetched
+    // hack-sweep-reports directory listing.
+    _auditFiles: [], _auditQuery: '',
+    _wireAuditListControls() {
+        if (this._auditWired) return;
+        this._auditWired = true;
+        const search = document.getElementById('bcc-audit-search');
+        if (search) search.addEventListener('input', () => {
+            this._auditQuery = search.value.trim().toLowerCase();
+            this._pgReset('bcc-audit-pg');
+            this._renderAuditList();
+        });
+        this._pgWire('bcc-audit-pg', 8, () => this._renderAuditList());
+    },
+    _renderAuditList() {
+        const auditEl = document.getElementById('bcc-audit-list');
+        if (!auditEl) return;
+        let files = this._auditFiles;
+        if (this._auditQuery) files = files.filter(f => f.name.includes(this._auditQuery));
+        const items = this._pgSlice('bcc-audit-pg', files, 8);
+        auditEl.innerHTML = items.length ? items.map(f => `
                 <a href="${f.url}" target="_blank" class="card-h diff-row block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-[#60a5fa]'}"></i>
@@ -218,13 +273,9 @@ const App = {
                     </div>
                     <div class="text-xs leading-snug capitalize">${this._esc(f.name)}</div>
                     <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
-                </a>`).join('');
-        } catch(e) {
-            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">browse the audit ledger</a>.</div>';
-        }
+                </a>`).join('') : '<div class="text-zinc-500 text-sm">No audits match this filter.</div>';
     },
 
-    _rep: null,
     async reputation() {
         try {
             if (!this._rep) this._rep = await (await fetch(`${RAW}/data/reputation.json?t=`+Date.now())).json();
@@ -824,6 +875,50 @@ const App = {
         return Math.max(0, Math.min(100, Math.round(score)));
     },
 
+    // ── Generic client-side pagination — same "Showing X–Y of Z / Page N of
+    // M / Prev/Next" footer as Recent Jobs, reused across every data list on
+    // the site that has its own search/sort/filter logic already (this only
+    // owns the page-slice + footer, not the filtering). One state bag keyed
+    // by an arbitrary string id so unrelated lists don't collide.
+    _pg: {},
+    _pgWire(key, pageSize, onChange) {
+        if (this._pg[key]) return; // wire the buttons once per key
+        this._pg[key] = { page: 0, pageSize, onChange };
+        const prev = document.getElementById(key + '-prev');
+        const next = document.getElementById(key + '-next');
+        if (prev) prev.addEventListener('click', () => {
+            const st = this._pg[key];
+            st.page = Math.max(0, st.page - 1);
+            st.onChange();
+        });
+        if (next) next.addEventListener('click', () => {
+            const st = this._pg[key];
+            st.page += 1;
+            st.onChange();
+        });
+    },
+    _pgPage(key) { return this._pg[key] ? this._pg[key].page : 0; },
+    _pgReset(key) { if (this._pg[key]) this._pg[key].page = 0; },
+    // Slices `items` to the current page for `key` and updates that key's
+    // count/page/prev/next footer elements (ids: `${key}-count/-page/-prev/-next`).
+    _pgSlice(key, items, pageSize) {
+        const st = this._pg[key];
+        const size = pageSize || (st && st.pageSize) || 10;
+        const total = items.length;
+        const pages = Math.max(1, Math.ceil(total / size));
+        let page = st ? st.page : 0;
+        if (page > pages - 1) { page = pages - 1; if (st) st.page = page; }
+        const countEl = document.getElementById(key + '-count');
+        const pageEl = document.getElementById(key + '-page');
+        const prev = document.getElementById(key + '-prev');
+        const next = document.getElementById(key + '-next');
+        if (countEl) countEl.textContent = total ? `Showing ${page*size+1}–${Math.min(total,(page+1)*size)} of ${total}` : 'No entries match this filter.';
+        if (pageEl) pageEl.textContent = `Page ${page+1} of ${pages}`;
+        if (prev) prev.disabled = page <= 0;
+        if (next) next.disabled = page + 1 >= pages;
+        return items.slice(page * size, (page + 1) * size);
+    },
+
     _renderMovers() {
         const el = document.getElementById('base-movers');
         if (!el || !this._movers) return;
@@ -833,16 +928,16 @@ const App = {
         else if (this._moversTab === 'volume') items.sort((a,b) => (b.volume?.h24 || 0) - (a.volume?.h24 || 0));
         const term = this._searchTerms.movers;
         const filtered = items.filter(p => this._matchesTokenSearch(p.baseToken?.symbol, p.baseToken?.name, term));
-        // 30, not 12 — both baseMovers() sources already fetch up to 30 real
-        // rows; the search box above needs the full set to search across.
-        items = filtered.slice(0, 30);
+        this._pgWire('movers-pg', 10, () => this._renderMovers());
+        const moversOffset = this._pgPage('movers-pg') * 10;
+        items = this._pgSlice('movers-pg', filtered, 10);
         el.innerHTML = items.length ? items.map((p,i) => {
             const chg = p.priceChange?.h24;
             const icon = p.info?.imageUrl || this._tokenIcon(p.baseToken?.address, 'base');
             const priceUsd = p.priceUsd != null ? Number(p.priceUsd) : null;
             return `
             <a href="${p.url}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${moversOffset+i+1}</span>
                 ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 min-w-0">
@@ -1021,44 +1116,66 @@ const App = {
     // (both free, keyless) via the worker's /prediction-markets route
     // (worker/src/lib/predictionMarkets.ts) — same free-display + paid-x402
     // dual pattern as everything else on this panel.
+    _predictionMarkets: [], _predictionQuery: '',
+    _wirePredictionControls() {
+        if (this._predictionWired) return;
+        this._predictionWired = true;
+        const search = document.getElementById('prediction-search');
+        if (search) search.addEventListener('input', () => {
+            this._predictionQuery = search.value.trim().toLowerCase();
+            this._pgReset('prediction-pg');
+            this._renderPredictionMarkets();
+        });
+        this._pgWire('prediction-pg', 8, () => this._renderPredictionMarkets());
+    },
     async predictionMarkets() {
         const el = document.getElementById('prediction-markets');
         if (!el) return;
         if (!WORKER_BASE) { el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>'; return; }
         try {
-            const res = await fetch(`${WORKER_BASE}/prediction-markets?limit=10`).then(r => r.json());
+            const res = await fetch(`${WORKER_BASE}/prediction-markets?limit=25`).then(r => r.json());
             if (!res || res.error || !Array.isArray(res.markets)) {
                 el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
                 return;
             }
-            el.innerHTML = res.markets.length ? res.markets.map((m) => {
-                const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
-                    : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
-                const yesPct = yesPrice != null ? Math.round(yesPrice * 100) : null;
-                const pctLabel = yesPct != null ? yesPct + '% Yes' : '—';
-                // Probability-read color, not a VAPE Score — a quick "which way is
-                // the market leaning" glance, same band language as the rest of
-                // the site (green/amber/rose) but scoped to this one number.
-                const pctColor = yesPct == null ? '#a1a1aa' : yesPct >= 65 ? '#4ade80' : yesPct <= 35 ? '#fb7185' : '#fbbf24';
-                const isPoly = m.platform === 'polymarket';
-                const platformLabel = isPoly ? 'Polymarket' : 'Kalshi';
-                const platformColor = isPoly ? '#818cf8' : '#34d399';
-                // Real link or nothing — never a dead "#" href.
-                const tag = m.url ? 'a' : 'div';
-                const linkAttrs = m.url ? `href="${this._esc(m.url)}" target="_blank" rel="noopener"` : '';
-                return `
-                <${tag} ${linkAttrs} class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                    <span class="text-[10px] px-1.5 py-0.5 border shrink-0 whitespace-nowrap" style="color:${platformColor};border-color:${platformColor}44">${platformLabel}</span>
-                    <div class="min-w-0 flex-1 text-xs sm:text-sm truncate">${this._esc(m.question || '')}</div>
-                    <div class="text-right shrink-0 min-w-[4.5rem]">
-                        <div class="stat text-sm" style="color:${pctColor}">${pctLabel}</div>
-                        <div class="text-[10px] text-zinc-500">${fmtUsd(m.volume)} vol</div>
-                    </div>
-                </${tag}>`;
-            }).join('') : '<div class="text-zinc-500 text-sm">No crypto-relevant prediction markets right now.</div>';
+            this._predictionMarkets = res.markets;
+            this._wirePredictionControls();
+            this._renderPredictionMarkets();
         } catch (e) {
             el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
         }
+    },
+    _renderPredictionMarkets() {
+        const el = document.getElementById('prediction-markets');
+        if (!el) return;
+        let markets = this._predictionMarkets;
+        if (this._predictionQuery) markets = markets.filter(m => (m.question||'').toLowerCase().includes(this._predictionQuery));
+        const items = this._pgSlice('prediction-pg', markets, 8);
+        el.innerHTML = items.length ? items.map((m) => {
+            const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
+                : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
+            const yesPct = yesPrice != null ? Math.round(yesPrice * 100) : null;
+            const pctLabel = yesPct != null ? yesPct + '% Yes' : '—';
+            // Probability-read color, not a VAPE Score — a quick "which way is
+            // the market leaning" glance, same band language as the rest of
+            // the site (green/amber/rose) but scoped to this one number.
+            const pctColor = yesPct == null ? '#a1a1aa' : yesPct >= 65 ? '#4ade80' : yesPct <= 35 ? '#fb7185' : '#fbbf24';
+            const isPoly = m.platform === 'polymarket';
+            const platformLabel = isPoly ? 'Polymarket' : 'Kalshi';
+            const platformColor = isPoly ? '#818cf8' : '#34d399';
+            // Real link or nothing — never a dead "#" href.
+            const tag = m.url ? 'a' : 'div';
+            const linkAttrs = m.url ? `href="${this._esc(m.url)}" target="_blank" rel="noopener"` : '';
+            return `
+            <${tag} ${linkAttrs} class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
+                <span class="text-[10px] px-1.5 py-0.5 border shrink-0 whitespace-nowrap" style="color:${platformColor};border-color:${platformColor}44">${platformLabel}</span>
+                <div class="min-w-0 flex-1 text-xs sm:text-sm truncate">${this._esc(m.question || '')}</div>
+                <div class="text-right shrink-0 min-w-[4.5rem]">
+                    <div class="stat text-sm" style="color:${pctColor}">${pctLabel}</div>
+                    <div class="text-[10px] text-zinc-500">${fmtUsd(m.volume)} vol</div>
+                </div>
+            </${tag}>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">No crypto-relevant prediction markets match this filter.</div>';
     },
 
     // VAPE Score for a trending Base token — same 0-100/neutral-50/skip-on-
@@ -1116,13 +1233,16 @@ const App = {
         if (!el) return;
         const term = this._searchTerms.trending;
         const sorted = this._sortTokensBy(this._trendingBase, this._trendingSort);
-        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const filtered = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        this._pgWire('trending-pg', 10, () => this._renderTrendingBase());
+        const trendingOffset = this._pgPage('trending-pg') * 10;
+        const items = this._pgSlice('trending-pg', filtered, 10);
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
             return `
             <a href="https://dexscreener.com/base/${this._esc(tok.address||'')}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${trendingOffset+i+1}</span>
                 ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 min-w-0">
@@ -1173,13 +1293,16 @@ const App = {
         if (!el) return;
         const term = this._searchTerms.launches;
         const sorted = this._sortTokensBy(this._newLaunches, this._launchesSort);
-        const items = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        const filtered = sorted.filter(t => this._matchesTokenSearch(t.token?.symbol, t.token?.name, term));
+        this._pgWire('launches-pg', 10, () => this._renderNewLaunches());
+        const launchesOffset = this._pgPage('launches-pg') * 10;
+        const items = this._pgSlice('launches-pg', filtered, 10);
         el.innerHTML = items.length ? items.map((t,i) => {
             const tok = t.token || {};
             const icon = this._tokenIcon(tok.address, 'base');
             return `
             <a href="https://dexscreener.com/base/${this._esc(tok.address||'')}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                <span class="text-zinc-600 text-sm w-4 shrink-0">${i+1}</span>
+                <span class="text-zinc-600 text-sm w-4 shrink-0">${launchesOffset+i+1}</span>
                 ${icon?`<img src="${icon}" alt="" width="28" height="28" class="rounded-full bg-white/5 object-cover shrink-0" onerror="this.remove()">`:''}
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 min-w-0">
@@ -1589,6 +1712,7 @@ const App = {
         return this._bountyOpsPromise;
     },
 
+    _bountyOpsData: [], _bountyOpsMap: {},
     async bounties() {
         const el = document.getElementById('bounties');
         const searchEl = document.getElementById('bounty-ops-search');
@@ -1600,52 +1724,69 @@ const App = {
             // in the Threat Ledger) and never a program whose scope doesn't
             // actually match VAPE's own tooling, regardless of headline $.
             data = data.filter(b => b.track === 'bounty' && b.vapeFit === true)
-                       .sort((a,b)=>(b.bountyFitScore||0)-(a.bountyFitScore||0)).slice(0,12);
+                       .sort((a,b)=>(b.bountyFitScore||0)-(a.bountyFitScore||0)).slice(0,30);
             if (!data.length) throw 0;
             const opsMap = await this._loadBountyOps();
+            this._bountyOpsData = data;
+            this._bountyOpsMap = opsMap;
             // Keyed lookup so docs/assets/hire.js::openBountyOps() can read back
             // full program context (name/platform/prize/vapeFitReason/tags) by
             // slug without stuffing a JSON blob into an inline onclick string.
             this._bountyOpsList = {};
-            el.innerHTML = data.map(b=>{
+            data.forEach(b => {
                 const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
                 this._bountyOpsList[slug] = b;
-                const ops = opsMap[slug];
-                const done = ops ? (ops.checklist||[]).filter(i=>i.done).length : 0;
-                const total = ops ? (ops.checklist||[]).length : 0;
-                const search = `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase();
-                return `
-                <div data-search="${this._esc(search)}" class="diff-row">
-                    <div class="flex items-start justify-between gap-2">
-                        <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
-                        <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
-                    </div>
-                    <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
-                    ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
-                    ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
-                    ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
-                        <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
-                        ${ops.vapeReportUrl?`<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
-                    </div>`:''}
-                    <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
-                        <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
-                        <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
-                    </div>
-                </div>`;
-            }).join('');
+            });
             if (searchEl) {
                 searchEl.classList.remove('hidden');
                 searchEl.oninput = () => {
-                    const q = searchEl.value.trim().toLowerCase();
-                    el.querySelectorAll('[data-search]').forEach(card => {
-                        card.style.display = !q || card.dataset.search.includes(q) ? '' : 'none';
-                    });
+                    this._bountyOpsQuery = searchEl.value.trim().toLowerCase();
+                    this._pgReset('bounty-ops-pg');
+                    this._renderBounties();
                 };
             }
+            this._pgWire('bounty-ops-pg', 6, () => this._renderBounties());
+            this._renderBounties();
         } catch(e){
             el.innerHTML = `<div class="text-zinc-500 text-sm">No VAPE-fit live bounty program currently tracked — <a class="text-zinc-400 hover:underline" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
             if (searchEl) searchEl.classList.add('hidden');
         }
+    },
+    _bountyOpsQuery: '',
+    _renderBounties() {
+        const el = document.getElementById('bounties');
+        if (!el) return;
+        const opsMap = this._bountyOpsMap;
+        let data = this._bountyOpsData;
+        if (this._bountyOpsQuery) {
+            const q = this._bountyOpsQuery;
+            data = data.filter(b => `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase().includes(q));
+        }
+        const items = this._pgSlice('bounty-ops-pg', data, 6);
+        el.innerHTML = items.length ? items.map(b=>{
+            const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            const ops = opsMap[slug];
+            const done = ops ? (ops.checklist||[]).filter(i=>i.done).length : 0;
+            const total = ops ? (ops.checklist||[]).length : 0;
+            return `
+            <div class="diff-row">
+                <div class="flex items-start justify-between gap-2">
+                    <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
+                    <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
+                </div>
+                <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
+                ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
+                ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
+                ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
+                    <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
+                    ${ops.vapeReportUrl?`<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
+                </div>`:''}
+                <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
+                    <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
+                    <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
+                </div>
+            </div>`;
+        }).join('') : '<div class="text-zinc-500 text-sm">No bounty programs match this filter.</div>';
     },
 
     // Prefers the generated intel index (real title/type/verdict/summary per
