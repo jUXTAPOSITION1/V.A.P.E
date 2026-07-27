@@ -67,10 +67,22 @@ function addV1RequirementsCompat(
 export function withCdpV1RequirementsCompat<T extends FacilitatorClient>(client: T): T {
   const originalVerify = client.verify.bind(client);
   const originalSettle = client.settle.bind(client);
-  client.verify = (paymentPayload, requirements) =>
-    originalVerify(paymentPayload, addV1RequirementsCompat(requirements, paymentPayload));
-  client.settle = (paymentPayload, requirements) =>
-    originalSettle(paymentPayload, addV1RequirementsCompat(requirements, paymentPayload));
+  client.verify = async (paymentPayload, requirements) => {
+    const patched = addV1RequirementsCompat(requirements, paymentPayload);
+    try {
+      return await originalVerify(paymentPayload, patched);
+    } catch (err) {
+      throw new Error(`${errMessage(err)} | [compat-debug sent-requirements: ${JSON.stringify(patched)}]`);
+    }
+  };
+  client.settle = async (paymentPayload, requirements) => {
+    const patched = addV1RequirementsCompat(requirements, paymentPayload);
+    try {
+      return await originalSettle(paymentPayload, patched);
+    } catch (err) {
+      throw new Error(`${errMessage(err)} | [compat-debug sent-requirements: ${JSON.stringify(patched)}]`);
+    }
+  };
   return client;
 }
 
