@@ -637,3 +637,23 @@
 | 2026-07-27 | auto | 0x9d02E97177073FB92A0F3F75CA36D56fdAfe2bcA (SHIB) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-27 | auto | 0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3 (MegaDoge) | deep_investigation | CAUTION (50/100) | Only 5% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-27 | auto | 0x93ecd8e9156E6b217514BCFE59837b3807D8F53D (KABOSU) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-27 | auto | 0xc02179dda49187A8761156F011F40D7E41FaCAAF (velvet) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A62 | +7d |
+
+| 2026-07-27 | auto | 0xAC0F66379A6d7801D7726d5a943356A172549Adb (GEOD) | deep_investigation | REJECT (35/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-27 | auto | 0x0e4F6209eD984b21EDEA43acE6e09559eD051D48 (ON) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 61% of supply — meaningful concentration | +7d |
+
+| 2026-07-27 | auto | 0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA (BTW) | deep_investigation | CAUTION (65/100) | Owner not renounced (0x8dafd691ef82f90b23fddb10a67d782f04073bd3) — can still act | +7d |
+
+| 2026-07-27 | auto | 0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680 (USD₮) | deep_investigation | CAUTION (50/100) | Very few holders (8) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-27 | auto | 0x49E60D05319f6f9945012067E0718a2B6267cF58 (BTW) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 99% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-27 | auto | 0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33 (HRC) | deep_investigation | REJECT (15/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-07-27 | auto | 0x604448c8f009135e913C7e0E4Bef692B0003A02A (ON) | deep_investigation | PROCEED (85/100) | Top 10 non-LP/burn holders control 88% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-27 | auto | 0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28 (SCR) | deep_investigation | REJECT (19/100) | Transfers can be paused by owner | +7d |

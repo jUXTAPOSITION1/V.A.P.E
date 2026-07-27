@@ -44,13 +44,19 @@
         "score": 74,
         "ts": "2026-07-15T06:36:49Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122445-0x1F32b1c2.md",
+        "score": 44,
+        "ts": "2026-07-27T12:24:45Z",
+        "verdict": "REJECT"
       }
     ],
-    "last_investigated": "2026-07-15T06:36:49Z",
-    "last_score": 74,
-    "last_verdict": "CAUTION",
+    "last_investigated": "2026-07-27T12:24:45Z",
+    "last_score": 44,
+    "last_verdict": "REJECT",
     "symbol": "wstETH",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "10:0x1f514a61bcde34f94bc39731235690ab9da737f7": {
     "address": "0x1F514A61bcde34F94Bc39731235690ab9da737F7",
@@ -101,13 +107,19 @@
         "score": 68,
         "ts": "2026-07-14T06:35:25Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122424-0x3c8B6502.md",
+        "score": 38,
+        "ts": "2026-07-27T12:24:24Z",
+        "verdict": "REJECT"
       }
     ],
-    "last_investigated": "2026-07-14T06:35:25Z",
-    "last_score": 68,
-    "last_verdict": "CAUTION",
+    "last_investigated": "2026-07-27T12:24:24Z",
+    "last_score": 38,
+    "last_verdict": "REJECT",
     "symbol": "VELO",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "10:0x4200000000000000000000000000000000000042": {
     "address": "0x4200000000000000000000000000000000000042",
@@ -170,6 +182,25 @@
     "last_score": 100,
     "last_verdict": "PROCEED",
     "symbol": "WPOL",
+    "times_investigated": 1
+  },
+  "137:0x0ffd960881c83cd63a50d5c944c9f2b866f55a28": {
+    "address": "0x0ffd960881C83Cd63a50d5C944C9F2B866f55a28",
+    "chain": "137",
+    "creator_address": "0x48808568033ae06eda42def343102de46b2a343f",
+    "first_investigated": "2026-07-27T13:56:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-135618-0x0ffd9608.md",
+        "score": 19,
+        "ts": "2026-07-27T13:56:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T13:56:18Z",
+    "last_score": 19,
+    "last_verdict": "REJECT",
+    "symbol": "SCR",
     "times_investigated": 1
   },
   "137:0x1bdf71ede1a4777db1eebe7232bcda20d6fc1610": {
@@ -495,6 +526,25 @@
     "symbol": "MV",
     "times_investigated": 1
   },
+  "137:0xac0f66379a6d7801d7726d5a943356a172549adb": {
+    "address": "0xAC0F66379A6d7801D7726d5a943356A172549Adb",
+    "chain": "137",
+    "creator_address": "0xe8074a74a32d3ef58dee3e1b7e549483cf2ba52a",
+    "first_investigated": "2026-07-27T09:11:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-091131-0xAC0F6637.md",
+        "score": 35,
+        "ts": "2026-07-27T09:11:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T09:11:31Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "GEOD",
+    "times_investigated": 1
+  },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {
     "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
     "chain": "137",
@@ -563,13 +613,19 @@
         "score": 70,
         "ts": "2026-07-15T09:11:10Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122457-0xCFB28756.md",
+        "score": 75,
+        "ts": "2026-07-27T12:24:57Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-15T09:11:10Z",
-    "last_score": 70,
+    "last_investigated": "2026-07-27T12:24:57Z",
+    "last_score": 75,
     "last_verdict": "CAUTION",
     "symbol": "RISE",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "137:0xd17c2ae3fb89448991d26bcd877692122341f1d6": {
     "address": "0xd17c2AE3FB89448991D26bCd877692122341f1D6",
@@ -626,6 +682,25 @@
     "last_score": 32,
     "last_verdict": "REJECT",
     "symbol": "ARBI",
+    "times_investigated": 1
+  },
+  "137:0xea59fa56e4ff71d690baa76ebb3a7325490e9680": {
+    "address": "0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680",
+    "chain": "137",
+    "creator_address": "0x4837193e11e20370ed52136f3b41c9e87b328091",
+    "first_investigated": "2026-07-27T11:55:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-115527-0xEa59Fa56.md",
+        "score": 50,
+        "ts": "2026-07-27T11:55:27Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T11:55:27Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "USD\u20ae",
     "times_investigated": 1
   },
   "137:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01": {
@@ -1676,13 +1751,19 @@
         "score": 90,
         "ts": "2026-07-11T00:02:46Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122337-0xde4EE805.md",
+        "score": 60,
+        "ts": "2026-07-27T12:23:37Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-11T00:02:46Z",
-    "last_score": 90,
-    "last_verdict": "PROCEED",
+    "last_investigated": "2026-07-27T12:23:37Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
     "symbol": "DEXE",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "1:0xe76278619dde1f71e5f8547d8af9076a76c1322d": {
     "address": "0xe76278619DDe1f71E5f8547d8AF9076A76C1322D",
@@ -1865,13 +1946,19 @@
         "score": 92,
         "ts": "2026-07-07T21:29:21Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122310-0x0C1c1C10.md",
+        "score": 62,
+        "ts": "2026-07-27T12:23:10Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-07T21:29:21Z",
-    "last_score": 92,
-    "last_verdict": "PROCEED",
+    "last_investigated": "2026-07-27T12:23:10Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
     "symbol": "CHIP",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "42161:0x0c880f6761f1af8d9aa9c466984b80dab9a8c9e8": {
     "address": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8",
@@ -2061,13 +2148,19 @@
         "score": 100,
         "ts": "2026-07-11T03:33:26Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122350-0xb23bB8c2.md",
+        "score": 70,
+        "ts": "2026-07-27T12:23:50Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-11T03:33:26Z",
-    "last_score": 100,
-    "last_verdict": "PROCEED",
+    "last_investigated": "2026-07-27T12:23:50Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
     "symbol": "NOX",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "42161:0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a": {
     "address": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
@@ -2316,6 +2409,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0x0e4f6209ed984b21edea43ace6e09559ed051d48": {
+    "address": "0x0e4F6209eD984b21EDEA43acE6e09559eD051D48",
+    "chain": "56",
+    "creator_address": "0xfac0a659a1baa6c4fd5b4b16d4fbf820da210d5d",
+    "first_investigated": "2026-07-27T09:56:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-095629-0x0e4F6209.md",
+        "score": 77,
+        "ts": "2026-07-27T09:56:29Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T09:56:29Z",
+    "last_score": 77,
+    "last_verdict": "CAUTION",
+    "symbol": "ON",
+    "times_investigated": 1
+  },
   "56:0x0e63b9c287e32a05e6b9ab8ee8df88a2760225a9": {
     "address": "0x0E63B9C287E32A05E6b9AB8ee8dF88A2760225A9",
     "chain": "56",
@@ -2411,6 +2523,63 @@
     "symbol": "BANK",
     "times_investigated": 1
   },
+  "56:0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa": {
+    "address": "0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA",
+    "chain": "56",
+    "creator_address": "0x1942c5b6b3072ba2cf859c5648b338afad978419",
+    "first_investigated": "2026-07-27T11:40:25Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-114025-0x444045B0.md",
+        "score": 65,
+        "ts": "2026-07-27T11:40:25Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-27T11:40:25Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "BTW",
+    "times_investigated": 1
+  },
+  "56:0x49e60d05319f6f9945012067e0718a2b6267cf58": {
+    "address": "0x49E60D05319f6f9945012067E0718a2B6267cF58",
+    "chain": "56",
+    "creator_address": "0xd44a4fb9d94ccacb346138f4c5176ac615bca15b",
+    "first_investigated": "2026-07-27T12:10:35Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-121035-0x49E60D05.md",
+        "score": 35,
+        "ts": "2026-07-27T12:10:35Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T12:10:35Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "BTW",
+    "times_investigated": 1
+  },
+  "56:0x604448c8f009135e913c7e0e4bef692b0003a02a": {
+    "address": "0x604448c8f009135e913C7e0E4Bef692B0003A02A",
+    "chain": "56",
+    "creator_address": "0x900a8e1bef10fad93319a74a55d9dcd01b703456",
+    "first_investigated": "2026-07-27T12:56:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-125631-0x604448c8.md",
+        "score": 85,
+        "ts": "2026-07-27T12:56:31Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-27T12:56:31Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "ON",
+    "times_investigated": 1
+  },
   "56:0x6e88056e8376ae7709496ba64d37fa2f8015ce3e": {
     "address": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
     "chain": "56",
@@ -2447,6 +2616,25 @@
     "last_score": 40,
     "last_verdict": "REJECT",
     "symbol": "Subject 3",
+    "times_investigated": 1
+  },
+  "56:0x93ecd8e9156e6b217514bcfe59837b3807d8f53d": {
+    "address": "0x93ecd8e9156E6b217514BCFE59837b3807D8F53D",
+    "chain": "56",
+    "creator_address": "0x26ff577818a40d1333944b7492e23619303f5d84",
+    "first_investigated": "2026-07-27T05:12:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-051223-0x93ecd8e9.md",
+        "score": 0,
+        "ts": "2026-07-27T05:12:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T05:12:23Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "KABOSU",
     "times_investigated": 1
   },
   "56:0x9b38d8bc5e35c074e7dfe45cbf9a9818b4c04444": {
@@ -2541,6 +2729,25 @@
     "last_score": 70,
     "last_verdict": "CAUTION",
     "symbol": "DCA",
+    "times_investigated": 1
+  },
+  "56:0xde8d34cc700055aa6bc8f7614851a051ca14bf33": {
+    "address": "0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33",
+    "chain": "56",
+    "creator_address": "0x759fe3a464b80e9594dad8ed2d42cb42909190bc",
+    "first_investigated": "2026-07-27T12:41:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-124131-0xdE8D34cc.md",
+        "score": 15,
+        "ts": "2026-07-27T12:41:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T12:41:31Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "HRC",
     "times_investigated": 1
   },
   "56:0xea4d009dd99cb83ff4e27c533e279e6120364444": {
@@ -2908,13 +3115,19 @@
         "score": 82,
         "ts": "2026-07-07T23:06:25Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122325-0x11030f79.md",
+        "score": 52,
+        "ts": "2026-07-27T12:23:25Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-07T23:06:25Z",
-    "last_score": 82,
-    "last_verdict": "PROCEED",
+    "last_investigated": "2026-07-27T12:23:25Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
     "symbol": "CTR",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "8453:0x18cd0ef93be7f3bb052885bc2d66947ac7799b07": {
     "address": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
@@ -3331,13 +3544,19 @@
         "score": 50,
         "ts": "2026-07-14T14:54:53Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122435-0x3221BAEB.md",
+        "score": 47,
+        "ts": "2026-07-27T12:24:35Z",
+        "verdict": "REJECT"
       }
     ],
-    "last_investigated": "2026-07-14T14:54:53Z",
-    "last_score": 50,
-    "last_verdict": "CAUTION",
+    "last_investigated": "2026-07-27T12:24:35Z",
+    "last_score": 47,
+    "last_verdict": "REJECT",
     "symbol": "ETD",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "8453:0x33417dfda9845853266b3ba4686a397aa0ae8b07": {
     "address": "0x33417DFDa9845853266b3bA4686A397aA0ae8B07",
@@ -3982,13 +4201,19 @@
         "score": 54,
         "ts": "2026-07-13T12:06:52Z",
         "verdict": "CAUTION"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122413-0x7CfA2a05.md",
+        "score": 31,
+        "ts": "2026-07-27T12:24:13Z",
+        "verdict": "REJECT"
       }
     ],
-    "last_investigated": "2026-07-13T12:06:52Z",
-    "last_score": 54,
-    "last_verdict": "CAUTION",
+    "last_investigated": "2026-07-27T12:24:13Z",
+    "last_score": 31,
+    "last_verdict": "REJECT",
     "symbol": "ClankerToken",
-    "times_investigated": 2
+    "times_investigated": 3
   },
   "8453:0x7db93b6c49f8d0b4eebfe2532a8a734de49dcb07": {
     "address": "0x7db93b6C49f8D0b4eEBfE2532A8A734dE49dcB07",
@@ -4279,13 +4504,19 @@
         "score": 88,
         "ts": "2026-07-11T16:01:02Z",
         "verdict": "PROCEED"
+      },
+      {
+        "report": "intel/investigations/investigation-20260727-122401-0x940181a9.md",
+        "score": 65,
+        "ts": "2026-07-27T12:24:01Z",
+        "verdict": "CAUTION"
       }
     ],
-    "last_investigated": "2026-07-11T16:01:02Z",
-    "last_score": 88,
-    "last_verdict": "PROCEED",
+    "last_investigated": "2026-07-27T12:24:01Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
     "symbol": "AERO",
-    "times_investigated": 1
+    "times_investigated": 2
   },
   "8453:0x9999955f3dd86230d90c545f7c9b239514ecb999": {
     "address": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
@@ -4797,6 +5028,25 @@
     "last_verdict": "PROCEED",
     "symbol": "VELVET",
     "times_investigated": 2
+  },
+  "8453:0xc02179dda49187a8761156f011f40d7e41facaaf": {
+    "address": "0xc02179dda49187A8761156F011F40D7E41FaCAAF",
+    "chain": "8453",
+    "creator_address": "0x048ef1062cbb39b338ac2685da72adf104b4cef5",
+    "first_investigated": "2026-07-27T07:11:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260727-071143-0xc02179dd.md",
+        "score": 10,
+        "ts": "2026-07-27T07:11:43Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-27T07:11:43Z",
+    "last_score": 10,
+    "last_verdict": "REJECT",
+    "symbol": "velvet",
+    "times_investigated": 1
   },
   "8453:0xc2b8c6647e7bca4ea7ccd27b52da849bb95652c2": {
     "address": "0xc2B8C6647e7bCa4Ea7CCD27b52DA849bB95652c2",
