@@ -195,6 +195,14 @@ export async function yieldPools(f: YieldFilter = {}): Promise<DlResult> {
       pool: p.pool, chain: p.chain, project: p.project, symbol: p.symbol, tvl_usd: p.tvlUsd,
       apy: p.apy, apy_base: p.apyBase, apy_reward: p.apyReward, il_risk: p.ilRisk,
       exposure: p.exposure, stablecoin: p.stablecoin,
+      // DefiLlama's own per-pool/per-protocol page URLs, built from the exact
+      // `pool`/`project` slugs its API just returned — same convention the
+      // site already uses for protocol pages (docs/assets/app.js's
+      // `https://defillama.com/protocol/${slug}`). `pool` is an opaque UUID
+      // with no other human-readable source, so without this link a buyer
+      // has no way to verify a pool is real before depositing into it.
+      pool_url: p.pool ? `https://defillama.com/yields/pool/${p.pool}` : null,
+      project_url: p.project ? `https://defillama.com/protocol/${p.project}` : null,
     });
   }
   rows.sort((a, b) => ((b.tvl_usd as number) || 0) - ((a.tvl_usd as number) || 0));

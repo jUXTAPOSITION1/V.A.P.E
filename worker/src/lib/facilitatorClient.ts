@@ -1,22 +1,3 @@
-/**
- * Prefer-primary-fallback-to-secondary facilitator client. index.ts uses
- * this for a real 50/50 hybrid split between VAPOR (our own facilitator)
- * and CDP's hosted one: which one is "primary" is decided randomly per
- * request (see index.ts), not fixed — this class just guarantees that
- * whichever one is picked, a genuine infrastructure failure on it doesn't
- * take the payment down, by retrying against the other.
- *
- * This is safe to retry blindly on settle too: both VAPOR and CDP respond
- * 200 with `{ success: false, ... }` for a legitimate on-chain/business
- * rejection (insufficient balance, expired authorization, etc) — the
- * HTTPFacilitatorClient only throws for actual infrastructure failures
- * (network error, non-2xx, malformed JSON). And even if the primary
- * attempt secretly succeeded on-chain before erroring back to us, retrying
- * the identical payload against the other facilitator is still safe:
- * EIP-3009's nonce is one-time-use on-chain, so a second settle attempt
- * for an already-consumed authorization simply reverts (no double
- * payment) rather than re-charging the payer.
- */
 import type { FacilitatorClient } from "@x402/core/server";
 import type { PaymentPayload, PaymentRequirements, SettleResponse, SupportedResponse, VerifyResponse } from "@x402/core/types";
 
@@ -32,13 +13,12 @@ import type { PaymentPayload, PaymentRequirements, SettleResponse, SupportedResp
  * `description`, or `maxAmountRequired` fields -- exactly the three
  * required strings v1's schema has that v2 doesn't. CDP's schema still
  * appears to validate against the v1 shape for these fields even for a v2
- * request. This patches only the outgoing call to CDP specifically
- * (VAPOR is our own facilitator and already accepts whatever we send it)
- * by duplicating the v1-required fields onto the v2 requirements object
- * before it's serialized -- `resource`/`description` sourced from the
- * signed paymentPayload's own `resource` echo (present on a v2 payload per
- * PaymentPayloadV2Schema), `maxAmountRequired` duplicating `amount`. Never
- * touches scheme/network/asset/payTo/amount/the signature itself.
+ * request. This duplicates the v1-required fields onto the outgoing
+ * requirements object before it's serialized -- `resource`/`description`
+ * sourced from the signed paymentPayload's own `resource` echo (present on
+ * a v2 payload per PaymentPayloadV2Schema), `maxAmountRequired` duplicating
+ * `amount`. Never touches scheme/network/asset/payTo/amount/the signature
+ * itself.
  */
 function addV1RequirementsCompat(
   requirements: PaymentRequirements,
@@ -57,73 +37,99 @@ function addV1RequirementsCompat(
   } as PaymentRequirements;
 }
 
-/**
- * Wraps a facilitator client's verify()/settle() so every outgoing call
- * gets the v1-compat fields above. Mutates and returns the same instance
- * (rather than a copy) so callers that read other properties off it
- * afterwards (e.g. withBazaar() reading .url/.createAuthHeaders, or
- * .extensions set later) keep working unchanged.
- */
-export function withCdpV1RequirementsCompat<T extends FacilitatorClient>(client: T): T {
-  const originalVerify = client.verify.bind(client);
-  const originalSettle = client.settle.bind(client);
-  client.verify = (paymentPayload, requirements) =>
-    originalVerify(paymentPayload, addV1RequirementsCompat(requirements, paymentPayload));
-  client.settle = (paymentPayload, requirements) =>
-    originalSettle(paymentPayload, addV1RequirementsCompat(requirements, paymentPayload));
-  return client;
+/** Same BigInt-safe serialization @x402/core's own HTTPFacilitatorClient uses internally. */
+function toJsonSafe(obj: unknown): unknown {
+  return JSON.parse(JSON.stringify(obj, (_, v) => (typeof v === "bigint" ? v.toString() : v)));
 }
 
-export class FallbackFacilitatorClient implements FacilitatorClient {
-  // Which facilitator actually handled the most recent call on this
-  // instance — index.ts constructs a fresh instance per request, so this
-  // is never stale/cross-request. Lets a caller log which facilitator
-  // *really* settled a given payment (not just which one was picked as
-  // primary), since a hybrid-split primary can still silently fail over.
-  public lastUsed: "primary" | "fallback" = "primary";
-
+/**
+ * A from-scratch FacilitatorClient for CDP, used in place of
+ * @x402/core's own HTTPFacilitatorClient.
+ *
+ * Why this exists instead of wrapping/monkeypatching HTTPFacilitatorClient's
+ * verify()/settle(): that was tried first (duplicate the v1-compat fields
+ * onto the requirements object passed to the real client's methods) and,
+ * separately, tested with an unconditional sentinel throw replacing the
+ * method body entirely -- confirmed via a live deploy (a temporary build
+ * marker on "/" proved the new code was genuinely live) that neither
+ * change ever altered the observed settlement error by even one character,
+ * across multiple real $0.01 job attempts. That means whatever object
+ * ends up invoked for a real settle() was not the instance being patched --
+ * despite @x402/core's own source showing only two `.settle(` call sites in
+ * the whole dependency tree, both of which trace back to the exact
+ * `resourceServer`/`facilitatorClient` this file constructs. Rather than
+ * keep reverse-engineering an opaque, unexplained non-effect, this
+ * implements verify/settle/getSupported directly against CDP's REST API
+ * (the same three endpoints HTTPFacilitatorClient itself calls, using the
+ * same request/response shapes and the same createAuthHeaders mechanism),
+ * so there is no wrapped instance to fail to intercept -- this class *is*
+ * the whole call. It also surfaces CDP's full rejection body (up to 2000
+ * chars) instead of @x402/core's internal 200-char responseExcerpt(),
+ * which was making this bug harder to diagnose than it needed to be.
+ */
+export class DirectCdpFacilitatorClient implements FacilitatorClient {
   constructor(
-    private readonly primary: FacilitatorClient,
-    private readonly fallback: FacilitatorClient
+    private readonly url: string,
+    private readonly createAuthHeaders?: () => Promise<{
+      verify: Record<string, string>;
+      settle: Record<string, string>;
+      supported: Record<string, string>;
+    }>
   ) {}
 
-  async verify(paymentPayload: PaymentPayload, paymentRequirements: PaymentRequirements): Promise<VerifyResponse> {
-    try {
-      const r = await this.primary.verify(paymentPayload, paymentRequirements);
-      this.lastUsed = "primary";
-      return r;
-    } catch (err) {
-      console.warn(`[x402] primary facilitator verify() failed, falling back: ${errMessage(err)}`);
-      this.lastUsed = "fallback";
-      return this.fallback.verify(paymentPayload, paymentRequirements);
-    }
+  private async headersFor(op: "verify" | "settle" | "supported"): Promise<Record<string, string>> {
+    if (!this.createAuthHeaders) return {};
+    const all = await this.createAuthHeaders();
+    return all[op] ?? {};
   }
 
-  async settle(paymentPayload: PaymentPayload, paymentRequirements: PaymentRequirements): Promise<SettleResponse> {
-    try {
-      const r = await this.primary.settle(paymentPayload, paymentRequirements);
-      this.lastUsed = "primary";
-      return r;
-    } catch (err) {
-      console.warn(`[x402] primary facilitator settle() failed, falling back: ${errMessage(err)}`);
-      this.lastUsed = "fallback";
-      return this.fallback.settle(paymentPayload, paymentRequirements);
+  private async call(
+    op: "verify" | "settle",
+    paymentPayload: PaymentPayload,
+    requirements: PaymentRequirements
+  ): Promise<VerifyResponse | SettleResponse> {
+    const patched = addV1RequirementsCompat(requirements, paymentPayload);
+    const headers = {
+      "Content-Type": "application/json",
+      ...(await this.headersFor(op)),
+    };
+    const response = await fetch(`${this.url}/${op}`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        x402Version: paymentPayload.x402Version,
+        paymentPayload: toJsonSafe(paymentPayload),
+        paymentRequirements: toJsonSafe(patched),
+      }),
+    });
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`CDP direct ${op} failed (${response.status}): ${text.slice(0, 2000)}`);
     }
+    let data: unknown;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(`CDP direct ${op} returned non-JSON (${response.status}): ${text.slice(0, 2000)}`);
+    }
+    return data as VerifyResponse | SettleResponse;
+  }
+
+  async verify(paymentPayload: PaymentPayload, requirements: PaymentRequirements): Promise<VerifyResponse> {
+    return this.call("verify", paymentPayload, requirements) as Promise<VerifyResponse>;
+  }
+
+  async settle(paymentPayload: PaymentPayload, requirements: PaymentRequirements): Promise<SettleResponse> {
+    return this.call("settle", paymentPayload, requirements) as Promise<SettleResponse>;
   }
 
   async getSupported(): Promise<SupportedResponse> {
-    try {
-      const r = await this.primary.getSupported();
-      this.lastUsed = "primary";
-      return r;
-    } catch (err) {
-      console.warn(`[x402] primary facilitator getSupported() failed, falling back: ${errMessage(err)}`);
-      this.lastUsed = "fallback";
-      return this.fallback.getSupported();
+    const headers = await this.headersFor("supported");
+    const response = await fetch(`${this.url}/supported`, { method: "GET", headers });
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`CDP direct getSupported failed (${response.status}): ${text.slice(0, 2000)}`);
     }
+    return JSON.parse(text) as SupportedResponse;
   }
-}
-
-function errMessage(err: unknown): string {
-  return err instanceof Error ? err.message : String(err);
 }
