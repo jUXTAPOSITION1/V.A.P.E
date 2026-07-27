@@ -187,6 +187,15 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     height: clamp(200px, 22vw, 260px);
     width: 100%;
 }
+/* The x402 Ledger's Volume & Revenue chart is the site's one "advanced
+   technical chart" — deliberately taller than .chart-shell so it reads as
+   a real desktop trading-terminal panel rather than a small preview sparkline,
+   using the extra vertical room .panel-sm's full section width already gives it. */
+.chart-shell-lg {
+    position: relative;
+    height: clamp(320px, 34vw, 520px);
+    width: 100%;
+}
 
 .skeleton {
     background: linear-gradient(90deg, rgba(255,255,255,.04) 25%, rgba(255,255,255,.09) 37%, rgba(255,255,255,.04) 63%);
