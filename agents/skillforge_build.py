@@ -58,6 +58,7 @@ except Exception:
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORTS_DIR = os.path.join(_REPO_ROOT, "reports")
 REGISTRY_PATH = os.path.join(_REPO_ROOT, "skillforge", "memory", "tools-registry.json")
+BUILD_REQUESTS_DIR = os.path.join(_REPO_ROOT, "build-requests")
 
 
 def _now_stamp():
@@ -83,6 +84,32 @@ def _tool_gaps():
             elif status == "needs_key":
                 gaps.append(f"{name} ({tier}) blocked on missing {t.get('requires_key', '?')}: {t.get('purpose', '')}")
     return gaps
+
+
+def _already_built_titles():
+    """De-slugified names of every prior self-directed build, read straight
+    off disk (build-requests/skillforge-<slug>-<date>/) rather than a
+    memory-search query — deterministic and complete, unlike
+    _memory_signal()'s semantic search, which has no guarantee of surfacing
+    every past title. Confirmed real gap (2026-07-27): with no such signal
+    at all, propose() had no way to know "Arbitrum Transaction Tracer for
+    Defillama-Hack Incidents" had already been proposed and merged (PR #293,
+    2026-07-26) before proposing the identical tool again the very next day
+    (PR #316) — the same underlying tool-registry/bounty-radar signal simply
+    hadn't changed, so the LLM re-derived the same conclusion with nothing
+    telling it that conclusion was already acted on."""
+    try:
+        names = sorted(os.listdir(BUILD_REQUESTS_DIR))
+    except Exception:
+        return []
+    titles = []
+    for name in names:
+        if not name.startswith("skillforge-"):
+            continue
+        # skillforge-<slug>-<YYYYMMDD> -> "<slug with spaces>"
+        stripped = re.sub(r"-\d{8}$", "", name[len("skillforge-"):])
+        titles.append(stripped.replace("-", " "))
+    return titles
 
 
 def _bounty_radar_signal(max_items=8):
@@ -161,6 +188,18 @@ def gather_signals():
     except Exception as e:
         print(f"[SkillforgeBuild] web research signal skipped: {e}")
 
+    if not parts:
+        # Nothing to ground a proposal in this cycle — "already built" isn't
+        # itself a justification, so don't let it alone turn an otherwise
+        # empty cycle into a real (wasted) LLM call.
+        return ""
+
+    already_built = _already_built_titles()
+    if already_built:
+        parts.insert(0, "=== ALREADY BUILT — DO NOT PROPOSE ANY OF THESE AGAIN, INCLUDING "
+                         "RENAMED/REPHRASED VARIANTS (real, build-requests/ on disk) ===\n"
+                         + "\n".join(f"- {t}" for t in already_built))
+
     return "\n\n".join(parts)
 
 
@@ -175,6 +214,11 @@ no-bundler JS for docs/assets/ — match whichever area the proposal targets.
 
 Rules:
 - Propose EXACTLY ONE concrete, buildable tool/skill/mini-app — not a vague idea.
+- Check the ALREADY BUILT list (if present) FIRST. If your proposal would duplicate, or
+  is a renamed/rephrased/narrower/broader variant of, anything on that list, do NOT
+  propose it — the underlying signal not having changed since a prior cycle is not a
+  reason to re-propose an already-built tool, no matter how well it fits. Only propose
+  something from that same signal if it's a genuinely different capability.
 - It MUST be justified by a SPECIFIC signal in the data below — quote or closely
   reference it. If nothing below genuinely justifies a new build, say so.
 - A TOP BOUNTY-RADAR OPPORTUNITY is a high-priority justification category: if a real,
