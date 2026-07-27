@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-27T23:30:18Z",
+  "generated": "2026-07-27T23:45:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 388,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 117,
-    "investigations": 435,
+    "investigations": 436,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -23,17 +23,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260727-221530-0x97Fbf256.md",
-      "title": "Investigation \u2014 CHECK",
-      "symbol": "CHECK",
-      "name": "Checkmate",
-      "date": "2026-07-27T22:15:30Z",
-      "target": "0x97Fbf25645a67A78ce9cb49498b281928518DCF0",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260727-234525-0xd04981C2.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u90fd\u6709",
+      "date": "2026-07-27T23:45:25Z",
+      "target": "0xd04981C24dE192665A59D4BEeAdFA58BD9994444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x71A64AA011566A33F79eE48ed1491752AEc254b6) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-221530-0x97Fbf256.md"
+      "score": "30",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 120% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,319 (rug/illiquid); [-10] Low liquidity $6,319; [-10] Pair 6.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-234525-0xd04981C2.md"
     },
     "report": {
       "kind": "bounty",
@@ -48,6 +48,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260727-234525-0xd04981C2.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u90fd\u6709",
+      "date": "2026-07-27T23:45:25Z",
+      "target": "0xd04981C24dE192665A59D4BEeAdFA58BD9994444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 120% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,319 (rug/illiquid); [-10] Low liquidity $6,319; [-10] Pair 6.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-234525-0xd04981C2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260727-221530-0x97Fbf256.md",
@@ -593,20 +607,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +2705% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-215734-0x911828FF.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-214227-0x9b38D8BC.md",
-      "title": "Investigation \u2014 DCA",
-      "symbol": "DCA",
-      "name": "Dollar Cost Averagin",
-      "date": "2026-07-26T21:42:27Z",
-      "target": "0x9b38D8BC5E35c074e7DFE45CBF9A9818B4c04444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-214227-0x9b38D8BC.md"
     }
   ],
   "reports": [
