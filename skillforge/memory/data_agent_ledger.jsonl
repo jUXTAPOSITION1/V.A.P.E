@@ -237,3 +237,4 @@
 {"ts": "2026-07-27T20:30:21.056847Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-27T20:45:15.305653Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-27T21:00:23.597043Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
+{"ts": "2026-07-27T21:15:21.309440Z", "target": "0xdCf5130274753c8050aB061B1a1DCbf583f5bFd0", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
