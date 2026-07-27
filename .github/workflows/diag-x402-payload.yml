@@ -1,0 +1,31 @@
+name: Diagnose real outgoing x402 PaymentPayload
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Spends one real $0.01 job to capture the EXACT PaymentPayload the x402
+# Python SDK signs and sends to CDP's facilitator -- CDP has been rejecting
+# real payments with two different errors ("invalid request body" on
+# paymentPayload, and separately "a valid payment method is required"), and
+# CDP's own error text truncates the payload it's complaining about. This is
+# the only way from here to see what we're actually sending, short of a
+# packet capture. See scripts/diag_x402_payload.py.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install -r agents/requirements.txt
+      - name: Capture real outgoing PaymentPayload
+        env:
+          DATA_AGENT_PRIVATE_KEY: ${{ secrets.INTEL_WORKER_KEY }}
+        run: python scripts/diag_x402_payload.py
