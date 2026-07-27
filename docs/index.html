@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=3">
+    <link rel="stylesheet" href="assets/site.css?v=4">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -345,7 +345,20 @@
 
             <div>
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <h3 class="text-sm text-zinc-500">Recent Jobs</h3>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-sm text-zinc-500">Recent Jobs</h3>
+                        <div class="icon-dropdown">
+                            <button class="icon-dropdown-btn" title="Recent Jobs options" aria-label="Menu">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <div class="icon-dropdown-menu">
+                                <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank">View source</a>
+                                <button onclick="App.refresh()">Refresh</button>
+                                <div class="icon-dropdown-divider"></div>
+                                <button onclick="document.getElementById('x402-feed-search').value=''; App.renderX402Feed()">Clear filters</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex flex-wrap items-center gap-2 text-[11px]">
                         <div class="relative">
                             <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
@@ -401,75 +414,9 @@
             <div id="x402-directory-links" class="flex flex-wrap items-center gap-2 mt-8 text-[11px]"></div>
             <p class="text-[11px] text-zinc-600 mt-4">Logged the moment the x402 facilitator confirms settlement (<a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/worker/src/lib/jobLog.ts" target="_blank" class="text-zinc-400 hover:underline">worker/src/lib/jobLog.ts</a>) — every transaction hash links to a live block explorer.</p>
         </section>
-        <!-- ═══ 4. FEATURED INVESTIGATION (moved higher) ═══ -->
-        <section id="case-file" class="reveal spotlight-section mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="spotlight-kicker">[ spotlight ]</div>
-                <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
-            </div>
-            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
-                <h2 class="section-title text-lg sm:text-xl">&gt; Featured Investigation &amp; Latest Report</h2>
-                <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
-                    Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                </button>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div id="inv-latest" class="spotlight-card">
-                    <div class="skeleton h-28"></div>
-                </div>
-                <div id="inv-report" class="spotlight-card">
-                    <div class="skeleton h-28"></div>
-                </div>
-            </div>
-        </section>
 
-        <!-- ═══ 5. THREAT LEDGER (live attack tracking) ═══ -->
-        <section id="threat-ledger" class="reveal panel mb-14 border-rose-500/15">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow">[ threat intelligence ]</div>
-                <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
-            </div>
-            <h2 class="section-title text-lg mb-3">&gt; Every attack, tracked as it happens.</h2>
-            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of real exploits across DeFi from roughly the past two months —
-            technique, amount, and where the next incident is likely to land.</p>
-            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 text-xs">
-                <span id="threat-ledger-threat" class="inline-flex items-center gap-1.5"></span>
-                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source intelligence report</a>
-            </div>
-            <div id="threat-ledger-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
-                <div class="skeleton h-14 my-1"></div>
-                <div class="skeleton h-14 my-1"></div>
-                <div class="skeleton h-14 my-1"></div>
-            </div>
-            <p class="text-[11px] text-zinc-600 mt-5">Each incident is checked against known attack patterns for a concrete prevention takeaway.
-            See <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for the resulting case files.</p>
-        </section>
-
-        <!-- ═══ 6. DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
-        <section id="the-workshop" class="reveal panel mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow">[ autonomous engineering ]</div>
-                <span id="workshop-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
-            </div>
-            <h2 class="section-title text-lg mb-3">&gt; Development Ledger</h2>
-            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-6">VAPE builds and improves its own tooling. On a regular schedule — and whenever a
-            maintainer requests it — VAPE proposes a concrete improvement, implements it, and submits it for review.</p>
-            <div class="stat-line mb-6 pb-6 border-b border-white/10">
-                <span class="stat-pair"><span class="stat-label">isolated</span><span class="stat-value">kept separate until reviewed</span></span>
-                <span class="stat-pair"><span class="stat-label">verified</span><span class="stat-value">tested automatically</span></span>
-                <span class="stat-pair"><span class="stat-label">reviewed</span><span class="stat-value">a maintainer signs off</span></span>
-            </div>
-            <div id="workshop-body" class="diff-list">
-                <div class="skeleton h-24 my-1"></div>
-                <div class="skeleton h-24 my-1"></div>
-            </div>
-            <p class="text-[11px] text-zinc-600 mt-5">Sourced live from GitHub — every entry links to a real pull request. Most cycles find nothing worth building, by design.
-            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-zinc-400 hover:underline">View the underlying logic</a> ·
-            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank" class="text-zinc-400 hover:underline">Read the build ledger</a>.</p>
-        </section>
-
-        <!-- ═══ 7. ENGAGEMENT OPTIONS (hiring) ═══ -->
-        <section id="retain" class="reveal mb-14">
+        <!-- ═══ ENGAGEMENT OPTIONS (moved to right after Recent Jobs) ═══ -->
+        <section id="retain" class="reveal mb-14 panel">
             <div class="eyebrow mb-3">[ commission vape ]</div>
             <h2 class="section-title text-lg mb-4">&gt; Engagement Options</h2>
             <p class="text-zinc-400 text-sm mb-7 max-w-2xl leading-relaxed">Two ways to work with VAPE, both settling instantly in USDC on Base.</p>
@@ -505,6 +452,96 @@
                     <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md" target="_blank" class="inline-flex items-center gap-1.5 text-xs mt-4 text-zinc-400 hover:text-zinc-100 transition">Full ACP protocol documentation →</a>
                 </section>
             </div>
+        </section>
+
+        <!-- ═══ 4. FEATURED INVESTIGATION (moved higher) ═══ -->
+        <section id="case-file" class="reveal spotlight-section mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="spotlight-kicker">[ spotlight ]</div>
+                <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
+            </div>
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
+                <h2 class="section-title text-lg sm:text-xl">&gt; Featured Investigation &amp; Latest Report</h2>
+                <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
+                    Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div id="inv-latest" class="spotlight-card">
+                    <div class="skeleton h-28"></div>
+                </div>
+                <div id="inv-report" class="spotlight-card">
+                    <div class="skeleton h-28"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ 5. THREAT LEDGER (live attack tracking) ═══ -->
+        <section id="threat-ledger" class="reveal panel mb-14 border-rose-500/15">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="eyebrow">[ threat intelligence ]</div>
+                <div class="flex items-center gap-2">
+                    <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
+                    <div class="icon-dropdown">
+                        <button class="icon-dropdown-btn" title="Threat Ledger options" aria-label="Menu">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <div class="icon-dropdown-menu">
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank">View reports</a>
+                            <button onclick="App.refresh()">Refresh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title text-lg mb-3">&gt; Every attack, tracked as it happens.</h2>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of real exploits across DeFi from roughly the past two months —
+            technique, amount, and where the next incident is likely to land.</p>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 text-xs">
+                <span id="threat-ledger-threat" class="inline-flex items-center gap-1.5"></span>
+                <a id="threat-ledger-source" href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank" rel="noopener" class="text-rose-400 hover:underline inline-flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-[10px]"></i> View source intelligence report</a>
+            </div>
+            <div id="threat-ledger-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
+                <div class="skeleton h-14 my-1"></div>
+                <div class="skeleton h-14 my-1"></div>
+                <div class="skeleton h-14 my-1"></div>
+            </div>
+            <p class="text-[11px] text-zinc-600 mt-5">Each incident is checked against known attack patterns for a concrete prevention takeaway.
+            See <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for the resulting case files.</p>
+        </section>
+
+        <!-- ═══ 6. DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
+        <section id="the-workshop" class="reveal panel mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="eyebrow">[ autonomous engineering ]</div>
+                <div class="flex items-center gap-2">
+                    <span id="workshop-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
+                    <div class="icon-dropdown">
+                        <button class="icon-dropdown-btn" title="Development Ledger options" aria-label="Menu">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <div class="icon-dropdown-menu">
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank">View logic</a>
+                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank">Build ledger</a>
+                            <button onclick="App.refresh()">Refresh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title text-lg mb-3">&gt; Development Ledger</h2>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-6">VAPE builds and improves its own tooling. On a regular schedule — and whenever a
+            maintainer requests it — VAPE proposes a concrete improvement, implements it, and submits it for review.</p>
+            <div class="stat-line mb-6 pb-6 border-b border-white/10">
+                <span class="stat-pair"><span class="stat-label">isolated</span><span class="stat-value">kept separate until reviewed</span></span>
+                <span class="stat-pair"><span class="stat-label">verified</span><span class="stat-value">tested automatically</span></span>
+                <span class="stat-pair"><span class="stat-label">reviewed</span><span class="stat-value">a maintainer signs off</span></span>
+            </div>
+            <div id="workshop-body" class="diff-list">
+                <div class="skeleton h-24 my-1"></div>
+                <div class="skeleton h-24 my-1"></div>
+            </div>
+            <p class="text-[11px] text-zinc-600 mt-5">Sourced live from GitHub — every entry links to a real pull request. Most cycles find nothing worth building, by design.
+            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/skillforge_build.py" target="_blank" class="text-zinc-400 hover:underline">View the underlying logic</a> ·
+            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/memory/BUILD_LEDGER.md" target="_blank" class="text-zinc-400 hover:underline">Read the build ledger</a>.</p>
         </section>
 
         <!-- ═══ 8. BOUNTY COMMAND CENTER ═══ -->
@@ -761,8 +798,23 @@
 
         <!-- ═══ 12. INVESTIGATION ARCHIVE (Intel Explorer) ═══ -->
         <section id="the-archive" class="reveal panel mb-14">
-            <div class="eyebrow mb-3">[ records ]</div>
-            <h2 class="section-title text-lg mb-3">&gt; Investigation Archive</h2>
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                    <div class="eyebrow mb-3">[ records ]</div>
+                    <h2 class="section-title text-lg">&gt; Investigation Archive</h2>
+                </div>
+                <div class="icon-dropdown">
+                    <button class="icon-dropdown-btn" title="Archive options" aria-label="Menu">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <div class="icon-dropdown-menu">
+                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank">View index</a>
+                        <button onclick="App.refresh()">Refresh</button>
+                        <div class="icon-dropdown-divider"></div>
+                        <button onclick="document.getElementById('intel-filter').innerHTML=''; App._typeFilter=null; App._renderIntel()">Clear filters</button>
+                    </div>
+                </div>
+            </div>
             <p class="text-zinc-400 text-sm mb-6 max-w-2xl leading-relaxed">The complete, unedited case log — every investigation, report, broadcast, and
             internal tool VAPE has published, indexed automatically as it happens.</p>
             <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs mb-6">
@@ -878,7 +930,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=27"></script>
+    <script src="assets/app.js?v=28"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>

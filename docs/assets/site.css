@@ -371,3 +371,136 @@ code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
    a hamburger's worth of hidden information (the toggle here opens a full
    mobile menu panel, distinct from the desktop inline row). */
 #site-nav-links a { white-space: nowrap; }
+
+/* ── Icon Dropdowns (GitHub-style monochrome with brand color) ───────────
+   Used throughout the site for action menus on modifiable sections. */
+.icon-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.icon-dropdown-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-radius: 4px;
+}
+.icon-dropdown-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+}
+.icon-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+    min-width: 160px;
+    background: #09090b;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: all 0.15s ease;
+    z-index: 1000;
+}
+.icon-dropdown.active .icon-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.icon-dropdown-menu a,
+.icon-dropdown-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: #d4d4d8;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.icon-dropdown-menu a:hover,
+.icon-dropdown-menu button:hover {
+    background: var(--accent-dim);
+    color: var(--accent);
+}
+.icon-dropdown-menu a:first-child,
+.icon-dropdown-menu button:first-child {
+    border-radius: 3px 3px 0 0;
+}
+.icon-dropdown-menu a:last-child,
+.icon-dropdown-menu button:last-child {
+    border-radius: 0 0 3px 3px;
+}
+.icon-dropdown-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+}
+
+/* ── Modifiable Sections Container ──────────────────────────────────── */
+.modifiable-section {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.25rem;
+    transition: border-color 0.2s ease;
+}
+.modifiable-section:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+@media (min-width: 640px) {
+    .modifiable-section { padding: 1.75rem; }
+}
+
+/* ── Enhanced Search/Sort Container ─────────────────────────────────── */
+.search-sort-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2;
+    margin-bottom: 4;
+    align-items: center;
+}
+.search-sort-bar input,
+.search-sort-bar select {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #d4d4d8;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    transition: border-color 0.15s ease;
+}
+.search-sort-bar input:focus,
+.search-sort-bar select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.search-sort-bar input::placeholder {
+    color: #71717a;
+}
+
+/* ── Pagination Controls ───────────────────────────────────────────── */
+.pagination-info {
+    font-size: 11px;
+    color: #a1a1aa;
+    margin: 8px 0;
+}
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}

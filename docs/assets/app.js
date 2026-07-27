@@ -1887,4 +1887,18 @@ window.addEventListener('load', () => {
             if (!navPanel.classList.contains('invisible') && !navPanel.contains(e.target) && !navToggle.contains(e.target)) setOpen(false);
         });
     }
+    // Icon Dropdowns — GitHub-style menus for section actions
+    document.addEventListener('click', (e) => {
+        const dropdown = e.target.closest('.icon-dropdown');
+        if (!dropdown) {
+            // Close all open dropdowns when clicking outside
+            document.querySelectorAll('.icon-dropdown.active').forEach(d => d.classList.remove('active'));
+            return;
+        }
+        // Toggle the clicked dropdown and close all others
+        document.querySelectorAll('.icon-dropdown.active').forEach(d => {
+            if (d !== dropdown) d.classList.remove('active');
+        });
+        dropdown.classList.toggle('active');
+    });
 });
