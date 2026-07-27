@@ -1,0 +1,26 @@
+name: Diagnose 402index.io claim/verify API docs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Read-only: 402index.io/api-docs returns HTTP 403 to automated fetchers from
+# this repo's normal dev sandbox (confirmed 2026-07-27) -- CI's real,
+# unrestricted egress is the only way to read the claim/verify domain-
+# verification flow's real request/response shape before implementing it.
+# See scripts/diag_402index_claim_docs.py.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Fetch 402index.io docs
+        run: python scripts/diag_402index_claim_docs.py
