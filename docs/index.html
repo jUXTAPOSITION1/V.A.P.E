@@ -53,7 +53,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <!-- Self-hosted (not CDN) — the previous cdnjs reference pointed at Font
+         Awesome version "7.3.1", which was never a real published release
+         (confirmed against the project's own GitHub releases; latest Free
+         is 6.7.2), so every icon on the site silently failed to render for
+         real visitors. Vendoring the actual 6.7.2 Free build removes any
+         third-party CDN as a point of failure for icons, same rationale as
+         the inline SVG used for the mobile nav toggle above. -->
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/site.css?v=9">
