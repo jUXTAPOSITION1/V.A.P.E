@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T08:21:13Z",
+  "generated": "2026-07-28T08:34:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 118,
     "investigations": 448,
-    "news": 9,
+    "news": 10,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-strategy-hits-a-5-week-pause-on-bitcoin-using-25m-to-quietly.md",
+      "title": "Strategy hits a 5 week pause on Bitcoin, using $25M to quietly buy back its own discounted stock",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 08:34 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-28 08:34 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-strategy-hits-a-5-week-pause-on-bitcoin-using-25m-to-quietly.md"
+    },
     {
       "file": "news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md",
       "title": "Global Risk-Off Wave Triggers 10% Kospi Crash and Bitcoin Slide as Senate Delays Key Crypto Bill",
