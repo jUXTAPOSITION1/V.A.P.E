@@ -220,8 +220,19 @@ def gather_headlines():
     items = []
     for key, query, _label in TOPICS:
         items.extend(google_news_search(query, max_results=6, topic=key))
-    items.extend(coingecko_news(max_results=10))
-    items.extend(web_headline_search())
+    gnews_count = len(items)
+    cg = coingecko_news(max_results=10)
+    items.extend(cg)
+    web = web_headline_search()
+    items.extend(web)
+    # Visibility into a lane that's silently best-effort (see module
+    # docstring): CoinGecko's news endpoint isn't part of its documented
+    # free API surface and may 404/410/402 with zero warning otherwise --
+    # without this line a 0-count cycle is indistinguishable in the CI log
+    # from "CoinGecko just had nothing new," which made it impossible to
+    # tell whether the lane was actually working.
+    print(f"[news_common] lanes -- google_news:{gnews_count} coingecko:{len(cg)} web_search:{len(web)}",
+          file=sys.stderr)
     return dedupe(items)
 
 
@@ -274,6 +285,42 @@ def extract_og_image(url):
     return img if img.startswith("http") else None
 
 
+def scrape_article_text(url, max_len=3000):
+    """Real full-page scrape (skillforge/research.py's Firecrawl -> Bright
+    Data -> keyless-fetch chain) instead of relying on a bare headline or a
+    ~200-char search snippet. This is the fix for a confirmed real quality
+    problem: every early news-intel report was written from nothing but a
+    headline (no article body was ever fetched), so the reporter had no
+    actual substance to report on and every story degraded into "thin
+    sourcing, cannot verify anything" filler. Mirrors
+    agents/investigate.py::_scrape_excerpt()'s raw-shape normalization
+    (Firecrawl/Bright Data return markdown/content/text under different
+    keys; the keyless fallback returns a flat "content" string) but with a
+    much longer cap, since this is the reporter's actual source material,
+    not a corroboration snippet. Returns None (never raises) on any
+    failure — callers must treat a missing scrape as "no extra body text
+    this cycle," not an error."""
+    try:
+        from skillforge.research import scrape as web_scrape
+    except Exception:
+        return None
+    try:
+        res = web_scrape(url)
+    except Exception:
+        return None
+    raw = res.get("raw")
+    content = None
+    if isinstance(raw, dict):
+        content = raw.get("markdown") or raw.get("content") or raw.get("text")
+    elif isinstance(raw, list) and raw and isinstance(raw[0], dict):
+        content = raw[0].get("markdown") or raw[0].get("text") or raw[0].get("content")
+    if not content:
+        content = res.get("content")  # keyless-fetch shape (skillforge.research._fetch_keyless)
+    if not isinstance(content, str) or not content.strip():
+        return None
+    return " ".join(content.split())[:max_len]
+
+
 def write_news_report(slug, body_md):
     """intel/news/news-<YYYY-MM-DD>-<slug>.md — a sibling convention to
     intel_common.write_report(), kept in its own directory since news
@@ -290,10 +337,13 @@ def write_news_report(slug, body_md):
 
 
 def _fetch_image_bytes(source):
-    """Real bytes for `source` — a remote http(s) URL (SSRF-guarded exactly
-    like extract_og_image's fetch, reusing the same validated opener) or a
-    docs/-relative local asset path (e.g. FALLBACK_IMAGE). Returns None
-    (never raises) on any failure."""
+    """Real bytes for `source` — already-decoded bytes (the AI-generation
+    tier hands these over directly, no fetch needed), a remote http(s) URL
+    (SSRF-guarded exactly like extract_og_image's fetch, reusing the same
+    validated opener), or a docs/-relative local asset path (e.g.
+    FALLBACK_IMAGE). Returns None (never raises) on any failure."""
+    if isinstance(source, bytes):
+        return source
     if source.startswith("http"):
         if not _validate_fetch_url(source):
             return None
@@ -314,10 +364,11 @@ def _fetch_image_bytes(source):
 def brand_image(source, slug):
     """Every VAPE Wire story needs to read as VAPE Wire's own on sight, the
     same way a real wire service stamps its logo on a photo before
-    distribution — this downloads/reads `source` (a real photo URL or a
-    local fallback asset path), crops it to a consistent 16:9 frame, and
-    stamps VAPE's real V-mark + wordmark into a
-    bottom scrim. Writes the branded JPEG to docs/assets/news-images/
+    distribution — this reads `source` (raw image bytes already in memory,
+    e.g. from llm.ask_gemini_image(); a real photo URL; or a local fallback
+    asset path), crops it to a consistent 16:9 frame, and stamps VAPE's
+    real V-mark + wordmark into a bottom scrim. Writes the branded JPEG to
+    docs/assets/news-images/
     <slug>.jpg and returns the site-relative path ("assets/news-images/
     <slug>.jpg") the card <img> should use.
 

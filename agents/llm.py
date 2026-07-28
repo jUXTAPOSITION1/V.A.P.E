@@ -94,6 +94,7 @@ where the per-token price came from.
 
 Backwards compatible: run.py can keep calling its own ask_llm; this is opt-in.
 """
+import base64
 import json
 import os
 import sys
@@ -658,6 +659,101 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
             print(f"[llm] vertex_tuned:{type(e).__name__}:{e}", file=sys.stderr)
     return ask(system, user, tier=tier, temperature=temperature, max_tokens=max_tokens,
                timeout=timeout, provider_order=provider_order, search=search)
+
+
+GEMINI_IMAGE_DEFAULT_MODEL = "gemini-3.1-flash-lite-image"
+GEMINI_IMAGE_DEFAULT_LOCATION = "us-central1"
+
+
+def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
+    """Google Cloud's native Gemini image-generation model ("Nano Banana"),
+    called directly against Vertex AI's publisher-model generateContent
+    endpoint — VAPE's real image-generation route (explicit direction,
+    2026-07-28, replacing the xAI-based generate_image() that was built and
+    then fully removed the day before over an unrelated xAI credit
+    constraint — image generation is Google Cloud's own infrastructure,
+    not a third-party paid API, so that constraint doesn't apply here).
+
+    Same auth as _call_vertex_tuned() above (a short-lived WIF access
+    token, VAPE_VERTEX_ACCESS_TOKEN — returns None immediately if unset,
+    never attempts an unauthenticated call) but a different endpoint shape:
+    a publisher model (.../publishers/google/models/<model>:generateContent),
+    not a deployed tuned endpoint, so the region handling differs — this
+    model is presumed single-region or "global", not the "us"/"eu"
+    multi-region values the tuned candidate's own endpoint reports.
+
+    Returns raw image bytes (already base64-decoded) on success, or None on
+    any failure/misconfiguration — callers must degrade to a real scraped
+    photo, then VAPE's brand mark, exactly like every other best-effort
+    image tier in this repo. Never raises.
+
+    Honest caveat: the exact request shape below could not be fully
+    confirmed against Google's own docs from this environment — direct
+    fetches of ai.google.dev/docs.cloud.google.com pages returned HTTP 403
+    (bot-blocked) during development, so this is built from what COULD be
+    confirmed (Google Cloud's own "Ultimate prompting guide for Nano
+    Banana" blog post, which loaded successfully and covers prompting
+    style/imageConfig fields; the general Vertex generateContent contract
+    already proven working in _call_vertex_tuned() above; and the specific
+    model ID the user supplied directly, gemini-3.1-flash-lite-image).
+    responseModalities is set to ["IMAGE"] alone on the assumption that
+    this is a dedicated image-generation model (unlike the older
+    general-purpose gemini-2.0-flash-exp-image-generation, which requires
+    ["TEXT","IMAGE"] together or the call is rejected) — if that assumption
+    is wrong for this specific model, the call fails cleanly here (the
+    HTTP error body is printed to stderr) and the pipeline falls through to
+    the next image tier rather than breaking. Check the first real
+    dispatch's job logs for a "[llm] gemini_image:HTTP4xx ..." line to
+    confirm or correct this before relying on it as the primary tier."""
+    token = os.getenv("VAPE_VERTEX_ACCESS_TOKEN")
+    if not token:
+        return None
+    project = (os.getenv("VAPE_GEMINI_IMAGE_PROJECT")
+               or os.getenv("VAPE_VERTEX_PROJECT_NUMBER", VERTEX_TUNED_DEFAULT_PROJECT_NUMBER))
+    location = os.getenv("VAPE_GEMINI_IMAGE_LOCATION", GEMINI_IMAGE_DEFAULT_LOCATION)
+    model = os.getenv("VAPE_GEMINI_IMAGE_MODEL", GEMINI_IMAGE_DEFAULT_MODEL)
+    if location == "global":
+        host = "aiplatform.googleapis.com"
+    elif location in ("us", "eu"):
+        host = f"aiplatform.{location}.rep.googleapis.com"
+    else:
+        host = f"{location}-aiplatform.googleapis.com"
+    url = (f"https://{host}/v1/projects/{project}/locations/{location}"
+           f"/publishers/google/models/{model}:generateContent")
+    payload = json.dumps({
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "responseModalities": ["IMAGE"],
+            "imageConfig": {"aspectRatio": aspect_ratio},
+        },
+    }).encode()
+    req = urllib.request.Request(url, data=payload, headers={
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        try:
+            body = e.read().decode(errors="replace")[:500]
+        except Exception:
+            body = ""
+        print(f"[llm] gemini_image:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
+        return None
+    except Exception as e:
+        print(f"[llm] gemini_image:{type(e).__name__}:{e}", file=sys.stderr)
+        return None
+    try:
+        for cand in data.get("candidates", []):
+            for part in cand.get("content", {}).get("parts", []):
+                inline = part.get("inlineData") or part.get("inline_data")
+                if inline and inline.get("data"):
+                    return base64.b64decode(inline["data"])
+    except Exception as e:
+        print(f"[llm] gemini_image:parse:{type(e).__name__}:{e}", file=sys.stderr)
+    return None
 
 
 def ask_safe(system, user, **kw):

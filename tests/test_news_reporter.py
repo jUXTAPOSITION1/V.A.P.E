@@ -84,6 +84,8 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
                                    "results": [{"title": "Corroborating piece", "url": "https://example.com/corr",
                                                 "snippet": "confirms the patch"}]}), \
          mock.patch.object(nc, "extract_og_image", return_value=None), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
          mock.patch("agents.intel_common.grok_analysis",
                      side_effect=["HEADLINE: The Patch That Saved Millions\nDEK: A close call.\n---\n## Details\nBody text.",
                                   "## Details\nEdited body text."]), \
@@ -100,7 +102,7 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
     assert "brand mark" in text
 
 
-def test_write_story_brands_real_source_photo(tmp_path, monkeypatch):
+def test_write_story_brands_real_source_photo_when_no_ai_image(tmp_path, monkeypatch):
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
                  "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
@@ -108,6 +110,8 @@ def test_write_story_brands_real_source_photo(tmp_path, monkeypatch):
 
     with mock.patch("agents.intel_common.web_search_snippets",
                      return_value={"available": False, "provider": None, "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
          mock.patch("agents.intel_common.grok_analysis",
                      side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
@@ -118,3 +122,58 @@ def test_write_story_brands_real_source_photo(tmp_path, monkeypatch):
     assert "**Image:** assets/news-images/rally-deepens.jpg" in text
     assert "Source photo — VAPE Wire branded" in text
     brand.assert_called_once_with("https://example.com/real-photo.jpg", "rally-deepens")
+
+
+def test_write_story_prefers_ai_generated_image_over_real_photo(tmp_path, monkeypatch):
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
+                 "image": "https://example.com/real-photo.jpg"}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": False, "provider": None, "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image",
+                            return_value="assets/news-images/rally-deepens.jpg") as gen_ai, \
+         mock.patch("agents.intel_common.grok_analysis",
+                     side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
+         mock.patch.object(nc, "brand_image") as brand:
+        path = news_reporter.write_story(candidate)
+
+    text = open(path).read()
+    assert "**Image:** assets/news-images/rally-deepens.jpg" in text
+    assert "AI-generated (Google Gemini) — VAPE Wire branded" in text
+    gen_ai.assert_called_once()
+    brand.assert_not_called()  # the real-photo tier must never even attempt branding once tier 1 succeeds
+
+
+def test_image_prompt_returns_none_when_llm_unavailable():
+    with mock.patch("agents.intel_common.grok_analysis",
+                     return_value="_Analyst narrative unavailable this cycle (no LLM provider reachable)._"):
+        assert news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets") is None
+
+
+def test_image_prompt_returns_stripped_text():
+    with mock.patch("agents.intel_common.grok_analysis", return_value="  A close-up of gold coins.  "):
+        assert news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets") == "A close-up of gold coins."
+
+
+def test_generate_ai_image_returns_none_when_no_prompt():
+    with mock.patch.object(news_reporter, "_image_prompt", return_value=None):
+        assert news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug") is None
+
+
+def test_generate_ai_image_returns_none_when_gemini_call_fails():
+    with mock.patch.object(news_reporter, "_image_prompt", return_value="a prompt"), \
+         mock.patch("agents.llm.ask_gemini_image", return_value=None):
+        assert news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug") is None
+
+
+def test_generate_ai_image_brands_the_generated_bytes():
+    with mock.patch.object(news_reporter, "_image_prompt", return_value="a prompt"), \
+         mock.patch("agents.llm.ask_gemini_image", return_value=b"fake-png-bytes"), \
+         mock.patch.object(nc, "brand_image", return_value="assets/news-images/slug.jpg") as brand:
+        result = news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug")
+    assert result == "assets/news-images/slug.jpg"
+    brand.assert_called_once_with(b"fake-png-bytes", "slug")
