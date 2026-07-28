@@ -1,7 +1,31 @@
 {
-  "generated": "2026-07-28T02:33:15Z",
+  "generated": "2026-07-28T05:46:36Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Bitcoin slides 2% after U.S. close while Korea\u2019s Kospi plunges 10%",
+      "url": "https://www.coindesk.com/markets/2026/07/28/bitcoin-slides-2-after-u-s-close-while-korea-s-kospi-plunges-10",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 04:32:39 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US judge temporarily blocks Minnesota prediction market ban",
+      "url": "https://cointelegraph.com/news/us-judge-blocks-minnesota-prediction-market-ban?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 04:28:10 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Zimbabwe admits seven fintech projects to regulatory sandbox",
+      "url": "https://cointelegraph.com/news/zimbabwe-seven-fintech-projects-regulatory-sandbox?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 03:17:10 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Hong Kong prepares banks for quantum threats amid tokenization push",
       "url": "https://cointelegraph.com/news/hong-kong-banks-quantum-threats-tokenization?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
@@ -15,6 +39,14 @@
       "url": "https://cointelegraph.com/magazine/india-bans-bitchat-binance-phishs-its-own-staff-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Tue, 28 Jul 2026 01:23:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "What Is KuCoin?",
+      "url": "https://www.theblock.co/learn/409571/what-is-kucoin?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 28 Jul 2026 01:14:22 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -115,22 +147,6 @@
       "crypto": true
     },
     {
-      "title": "Bitmine keeps buying Ether as ETH outperforms Bitcoin",
-      "url": "https://cointelegraph.com/news/bitmine-keeps-buying-ether-as-eth-outperforms-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Mon, 27 Jul 2026 19:22:59 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Mon, 27 Jul 2026 18:51:58 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Compromised contract let hackers print 5.2 million WEMIX stablecoins, forcing a complete network freeze",
       "url": "https://cryptoslate.com/wemix-owner-breach-minted-5-23m-tokens-outside-its-100-backed-stablecoin-controls/",
       "source": "CryptoSlate",
@@ -195,14 +211,6 @@
       "crypto": true
     },
     {
-      "title": "What are perps, anyway? Everything you need to know about crypto\u2019s hottest trading instrument",
-      "url": "https://www.coindesk.com/business/2026/07/27/what-are-perps-anyway-everything-you-need-to-know-about-crypto-s-hottest-trading-instrument",
-      "source": "CoinDesk",
-      "published": "Mon, 27 Jul 2026 15:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Securitize expands regulated platform with SEC adviser license",
       "url": "https://www.theblock.co/post/409821/securitize-expands-regulated-platform-with-sec-adviser-license?utm_source=rss&utm_medium=rss",
       "source": "The Block",
@@ -215,14 +223,6 @@
       "url": "https://cryptoslate.com/how-morphos-new-vault-structure-could-trigger-the-secs-crackdown-on-hidden-crypto-managers/",
       "source": "CryptoSlate",
       "published": "Mon, 27 Jul 2026 13:50:05 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "TD Cowen cuts David Bailey\u2019s Nakamoto target 58% after bitcoin outlook reset",
-      "url": "https://www.theblock.co/post/409797/td-cowen-cuts-david-bailey-nakamoto-target-58-bitcoin-outlook-reset?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Mon, 27 Jul 2026 13:10:25 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -243,18 +243,26 @@
       "crypto": true
     },
     {
-      "title": "Crypto Market Today, July 27: Bitcoin Steadies as Ahead of Fed Meeting",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQajIxTGljZ2xKMDlJeEZ6STQ4SEQtRXMxb1BXeDNaSjc2YmJVMEFfa0N1NWxpemF0UEQyQnVwbVRpM1owY1RJUnhaODNMOWRrMXZRTVBMcTctMnl4UU5UUTVzU28tdnV3RzV2c3BhMjhualBnck8yR3hXbVdVQWpfa3AtQ09iNlp0ei1Da1FrbDBpa2ZuLXFpLXU4THozT0ZFU3YzQUczcXY3MFkySDc4djRmYk14ME9TcWI1eE14aHpUVktBaDhBMg?oc=5",
-      "source": "The Motley Fool",
-      "published": "Mon, 27 Jul 2026 22:51:00 GMT",
+      "title": "Schumer Submits SEC and CFTC Nominees to White House in Crypto Bill Talks, Source Says",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5RVl9LQk9TeFl1b25nRktlT1U2NlZ1Sko1WjdHMFhrSmxnbDM0a2N5RnIyTURRYVdGTWZ1dTFTcGpEZHVRQS1fVkFRaHZfUWVKZ2wxTjN3?oc=5",
+      "source": "Cryptonews.net",
+      "published": "Tue, 28 Jul 2026 02:55:18 GMT",
+      "topic": "Regulation",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin, Ethereum, XRP, Dogecoin Plummet Even as SEC Chair Paul Atkins Sees Crypto Bill Advancing: Analyst Says BTC's Big Move 'Just Around the Corner'",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYmY2ckxLMDhORU5yQWRBWHVKVmZlWlRpdlE4M3ZVcm5EdWRwQlVvem5lWXB6VlJvOTAyVy1HamRBdFFWZ3B4TnFOWl9nV0ZzNnlyMnZ2bjRYLUp2NnU1eXFSck1uMVBTUGttMjhoVTNBTC1ORC13eHBPYVA1cHJhNVNQa0NvLTIyLTNpLUJDVU5zZGpLU19fb3JxUG5EbWJwSXpYcQ?oc=5",
+      "source": "Yahoo Finance",
+      "published": "Tue, 28 Jul 2026 02:13:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bitcoin (BTC) price may fall to $52,000 as demand remains elusive, Nansen analyst says",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOeTVodjdoV0w3NFgzMmxOWjlxNXZYbDJyM1dMTklMZzY2ZjRqNW1xZTVwVEotYnVZSG85ZjRNN2dsTFZqOVpSN2FURXRlQ3hKakhNVG54TlNwaElyZGlMZF9hNVN1QzVZTjRRVk5GOGxYVnp6UzFpc0c5Q2JSNmNlM0dUYnpNcHhJLWczOTEzeXNlX0poMENOR3hqbUV0dkZ6ZVVkRHBFX0dUbzd3Wi04c3BxZm81S25qcDk2S001NExvVS1KMV80Ng?oc=5",
-      "source": "CoinDesk",
-      "published": "Mon, 27 Jul 2026 19:59:21 GMT",
+      "title": "Crypto Market Today, July 27: Bitcoin Steadies as Ahead of Fed Meeting",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQajIxTGljZ2xKMDlJeEZ6STQ4SEQtRXMxb1BXeDNaSjc2YmJVMEFfa0N1NWxpemF0UEQyQnVwbVRpM1owY1RJUnhaODNMOWRrMXZRTVBMcTctMnl4UU5UUTVzU28tdnV3RzV2c3BhMjhualBnck8yR3hXbVdVQWpfa3AtQ09iNlp0ei1Da1FrbDBpa2ZuLXFpLXU4THozT0ZFU3YzQUczcXY3MFkySDc4djRmYk14ME9TcWI1eE14aHpUVktBaDhBMg?oc=5",
+      "source": "The Motley Fool",
+      "published": "Mon, 27 Jul 2026 22:51:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -272,14 +280,6 @@
       "source": "Benzinga",
       "published": "Mon, 27 Jul 2026 16:49:53 GMT",
       "topic": "Stablecoins",
-      "crypto": true
-    },
-    {
-      "title": "Why Is XRP Underperforming? 3 Reasons Ripple Still Can't Catch Up With the Crypto Market",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQN1ZCeWQ4UlFma3cwV21Yd1c1RWdYakVyVTk5RkxyLVR2aXZFcF9SdUkxbnBKeXBFRGJ5dllMZXFUQmhZa05uM1BfM3BicEhZMnRLaW9BbWIwT0FJV3ZRX01QRU5uYTBJYjFKZ0lHdDBZcW15a0JoVEhXalRISmVaTTRsdzRSaC00aGZfd3ExVEtKa1NQZk9HNHlLVHZNNmxrQ3pqTURGUml4ZVk2TkxQdzBSN3BWOFcwa3pFU2ZHZDJyUjFfWmp2dC1TYw?oc=5",
-      "source": "Bitcoin Foundation",
-      "published": "Mon, 27 Jul 2026 14:37:14 GMT",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -323,14 +323,6 @@
       "crypto": true
     },
     {
-      "title": "CLARITY Act Odds Collapse to 37% After Senate Leader Says Crypto Bill Won't Pass Before Recess",
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOOHFyYXZOckI0dVlwYVFneGlaUmFQUXR4XzFmVEFINEx3bGZkeVJ1Xzh5WmtOZkx4WlUzblY1M01RakdLZVhJMzV3QzZOZWtWM0tNeEVqVWloQzNaQjk4TU5Cazk5cnpacGNmcFlMUTQ0M24tQzN2Y0xlNFhRcjFrVUJEajV2Z2xLMFROSDdqVHpCNGdFU29jaXloWXFDTTJhSWhOdXF1ZDd1Wk9XMUhFUFlycHg5b01qSUNzR1hKbk5IU3lITjNqMEhDYzF6ZGtaWGtucnRHZWVjdFNf?oc=5",
-      "source": "Tech Times",
-      "published": "Fri, 24 Jul 2026 14:10:36 GMT",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
       "title": "The CLARITY Act in Mid-2026: Where US Crypto Market Structure Actually Stands",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE02c2pTUDFSQWdKejAwTnUxdEs5dW0tWExkZ1pjQmtNamFFNmFqZWxWdEJOY01uUzk0TzVteGJLaXhveXN0OFFtWmJxZXdFM2tlOVVMMjFyckQ3cG5Xemc?oc=5",
       "source": "tech-insider.org",
@@ -355,7 +347,7 @@
       "crypto": true
     },
     {
-      "title": "Two Cross-Chain Bridges Hacked in One Day \u2014 $31.5M Lost",
+      "title": "Two Cross-Chain Bridges Hacked in One Day \u2014 AFX Loses $24 Million, Verus $7.5 Million",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVzVjY1h0dnd1bDQzOUwyS1hiUlpEOHFNOHpQbzF0c0IyMzFycTNTYnhGTVVTU3FFZmUxaWI5Q0xQQVFzd2dVMHdHRTZuS3B0UmxQV1lBTjdMaUM5Y0tMQTVpaHMwLWFZb1lZX0p6MksyOFE0NTRMY0lsNDZZZ2pwdQ?oc=5",
       "source": "Bitcoin Foundation",
       "published": "Thu, 23 Jul 2026 10:37:12 GMT",
@@ -379,11 +371,11 @@
       "crypto": true
     },
     {
-      "title": "Crypto Market Regulation Is Running Out of Time at the Finish Line",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPR0htRk9CU3lOcjJzVVBRMGxiSExvNHFzclE5Tjh1d2xyNWVlejBSaWRYSTI1aExwem4wLW90QkZ1c01IMG8yd05VOGpybDZzRkh6Z2JEcWZuVFcyTHB5ZnhzNmJHWmM1VTZkMTFWeF95aE40cGJScUx6eWNNbGRfby1RWGVjTUhxUWhXS1diMC1Bd1JmbjVYdDJzdTk1cy1Qa1E?oc=5",
-      "source": "PYMNTS.com",
-      "published": "Mon, 20 Jul 2026 16:08:34 GMT",
-      "topic": "Regulation",
+      "title": "Top 5 Altcoins for the Next 100x Crypto \u2013 Best Crypto to Buy Now 2026",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5zX3E0WVd3SGkwcTVnTW0wOUx2cGZtMHA2ZWxxWG1NT3hpMUpqR3d6ZjdvRm56emotdTQwREkyMnN5dWdFQVk4eTdBUU5mVXdaekl6eHhMbW9GM2ZIQmxYR25wSU1TQ0VHWVNUUE9EVHBpYmc?oc=5",
+      "source": "Bitcoin Foundation",
+      "published": "Wed, 22 Jul 2026 06:55:59 GMT",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -392,6 +384,14 @@
       "source": "CoinMarketCap",
       "published": "Mon, 20 Jul 2026 05:15:17 GMT",
       "topic": "Stablecoins",
+      "crypto": true
+    },
+    {
+      "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
+      "source": "Crowdfund Insider",
+      "published": "Thu, 16 Jul 2026 20:25:13 GMT",
+      "topic": "Base",
       "crypto": true
     },
     {
@@ -467,19 +467,19 @@
       "crypto": true
     },
     {
+      "title": "Senate Banking Committee Advances Crypto Market Structure Bill",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUmxuZkdiaEVxdEtyanFSZDRCVE01SS1BekV0MVlfd0VUVGhPb3I4cV9UZWpUT0xUbmdSTmpaSVd6dGphQldZMHkwSE1wUzVxMFdGVk92amJ4U21hN0I0Tko0NkFzYmVmNWh4NXY0QW9naTVqNmdKNDZTMXNVdy03dDI1TGxKbEc5ZFdVekl6MFhCT1ltY3JaTUQ2VUxQTTBXVFFDbzVMS1JXeVlP?oc=5",
+      "source": "Davis Wright Tremaine",
+      "published": "Thu, 21 May 2026 07:00:00 GMT",
+      "topic": "Regulation",
+      "crypto": true
+    },
+    {
       "title": "May\u2019s DeFi Hack Tally Grows as Verus Bridge Reportedly Loses $11.58 Million",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQlM3TkZzZXZXUzVZdG1wUk1IT3BTV1FuWDZ5QkZQb1FuOUItdnBYN19NeXliZU84NWcwejJsSllzdE1ZYnM0UWdwdzdSV2piZUROYVZzekRSOXdWbVB1dEVQb1Q5eTBHSnhzZm1UVlFVNTI1SlNZblYyMVM5TXNfUTRwSi1oeWoxN3VIc2psU2xqd3dE?oc=5",
       "source": "Yahoo Finance",
       "published": "Sun, 17 May 2026 07:00:00 GMT",
       "topic": "Security",
-      "crypto": true
-    },
-    {
-      "title": "More Stablecoins, More Markets, More Flexibility: How Global Payments Infrastructure is Evolving",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcVJXVldSdXVZTkZkZm8yVGhqQk9XeENmUXBGSHozTFhJMkJ0SlRHYzRNYUFRTXV5TnZfRmFfQWZETERDUUc1dWhVVk5yRFVaYjhxTno3REFSSmRnMUxVRjJZU2VONGtpVklUem1uWDVmTGxvWjhjNDU5Qi1BMGRPTkNlalRHdmVmRmlNYVVEZ3ZKNlZFb3dmTlVnbUtTVGk0RS14ZG50NmNvOUM3Szg2a1BPLW1CdU5YOXRxdXQ0UQ?oc=5",
-      "source": "Ripple",
-      "published": "Fri, 24 Apr 2026 07:00:00 GMT",
-      "topic": "Stablecoins",
       "crypto": true
     }
   ]

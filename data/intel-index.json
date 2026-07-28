@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T05:39:34Z",
+  "generated": "2026-07-28T05:47:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 118,
     "investigations": 443,
-    "news": 8,
+    "news": 9,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md",
+      "title": "Global Risk-Off Wave Triggers 10% Kospi Crash and Bitcoin Slide as Senate Delays Key Crypto Bill",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 05:47 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A violent sell-off in Asian equities collides with US legislative delays to send digital assets lower ahead of the congressional summer recess.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md"
+    },
     {
       "file": "news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md",
       "title": "Coinbase Flags 100M AI Payments on Base but Provides No Supporting Data",
