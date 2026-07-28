@@ -47,3 +47,4 @@
 {"ts": "2026-07-27T09:38:52Z", "sealed_through_line": 893, "new_lines_sealed": 14, "chain_hash": "1b2131727034e665b55f5ac2e7a5950f5575cbe77c0a01f0c800bee3db6d7863"}
 {"ts": "2026-07-27T14:17:44Z", "sealed_through_line": 918, "new_lines_sealed": 25, "chain_hash": "d69ccba98bd69f16f4f61697ca719d93e35a59ade3c31676b0af3c69178edd96"}
 {"ts": "2026-07-27T19:18:17Z", "sealed_through_line": 933, "new_lines_sealed": 15, "chain_hash": "b5fc149dc5008a0e2eab414921f9f4bc9358a087d7d9e7c93aeb9f747a1a878e"}
+{"ts": "2026-07-28T01:58:27Z", "sealed_through_line": 953, "new_lines_sealed": 20, "chain_hash": "b66f5af441c60ad2f94008cff8b25078d2bbd4037a6ef9f9bba53ee321b77a6c"}
