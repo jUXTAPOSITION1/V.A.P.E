@@ -2,5 +2,9 @@
   "tavily": {
     "count": 800,
     "month": "2026-07"
+  },
+  "firecrawl": {
+    "month": "2026-07",
+    "count": 1
   }
 }

@@ -1,13 +1,21 @@
 {
-  "generated": "2026-07-28T00:04:42Z",
+  "generated": "2026-07-28T01:25:41Z",
   "count": 47,
   "headlines": [
     {
       "title": "Crypto Market Today, July 27: Bitcoin Steadies as Ahead of Fed Meeting",
-      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNUGF2QWYta2RleGJXaHlId2xzT0tmcVdYYVZLNWlHOVplSTRESXhpY2Riel9OQnN3X3RaRm94eWhXcWV2b25KekFjTWNjQVhSZDlfdnJDaWkwT3RvVTl2QkxYUGYzZ0V3Mm1Heno2a09nSjlDbFh2MkVuODVrb0w0eXp2RGQyVl9JVVRydWNoYS1aYUJoc0c4Mi16akZ2c1lzckI0b3VtX3hjanJjc3k5dFJGakhpZ0Y1VFBaejh0aEloQjZDR1hSRDdUTHYwQjhCVnZ4VG82UDFiUWJSdkNvNFY3bzJiek4zd3c?oc=5",
-      "source": "The Globe and Mail",
-      "published": "Mon, 27 Jul 2026 22:11:17 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQajIxTGljZ2xKMDlJeEZ6STQ4SEQtRXMxb1BXeDNaSjc2YmJVMEFfa0N1NWxpemF0UEQyQnVwbVRpM1owY1RJUnhaODNMOWRrMXZRTVBMcTctMnl4UU5UUTVzU28tdnV3RzV2c3BhMjhualBnck8yR3hXbVdVQWpfa3AtQ09iNlp0ei1Da1FrbDBpa2ZuLXFpLXU4THozT0ZFU3YzQUczcXY3MFkySDc4djRmYk14ME9TcWI1eE14aHpUVktBaDhBMg?oc=5",
+      "source": "The Motley Fool",
+      "published": "Mon, 27 Jul 2026 22:51:00 GMT",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Robinhood Chain Outpaces Base in App Revenue as PONS Token Launchpad Reaches New Heights",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQemVWMmcxYjZIRnFuZjJxLXVQeU8ySTFsR1dRWXJYNWdRcEFJNzZZRlNlX3FSaDdvNFdYWTRJeGlvbmRxelpxRFM4UFduNVgyeng5WW1MaEwtS3FQa0c0bHFZdDIwQzI1Vk5JaXVVZnk1X0R5YU1yV1I5Q0RCSXVtLTRacUdFZVBENENDdWI5Ym9wOGZnZkpRUE9mUVF6bm45UlBPUUxXM0xjWU5jZHFDVnphYw?oc=5",
+      "source": "Tekedia",
+      "published": "Mon, 27 Jul 2026 21:18:01 GMT",
+      "topic": "Base",
       "crypto": true
     },
     {
@@ -43,18 +51,18 @@
       "crypto": true
     },
     {
-      "title": "Prediction Markets Are Booming, Crypto Markets Are Not. Here's What That Means for Crypto Investors",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPOEl4NVIwSDNibHV4dERTWUcxNzE3cDM4M1prdE5KVjY3dkZTYllWa29lYmJxdnI4Q0JRc3R1cFhMY1MySktEWUtxTDFRRmJDZEdXSWc4Z3RqQjkxLXU4S0dnM1Y2eTFWajFTN0FQNGxUellsTzkwQ0Q1OG15UGFUOEpwNVFoMUFMNVZjQ2pjc0lCTlRBVGU0?oc=5",
-      "source": "The Motley Fool",
-      "published": "Mon, 27 Jul 2026 12:15:00 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Why Ethereum And Hyperliquid Are Leaving Bitcoin Behind Today",
       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPUVEwY2dmT3A2dGZrd0NqX1JOZlJTU2VCelc2VUVpeVJpZEtFRjVKckxPaEJQckYteUNPVTlJMnBoUWFfa0xBU2xzR3RUZUZYOG1hVHloZFJxWnlXR0dMMFpXcHZFUGZ6dmtjMHR4Y1ZJU25aQmlKYVRJVnAwQ1kyOHBVYkMxN0o1RFFMby1tRWxDS1VoUG53VzE0OVpOdTR6RGM0T1ItUkJRckVHVVlHaE9FZjFaaDVfVmlhZkw0M2FsSG92TmNhdC14QS1oUQ?oc=5",
       "source": "Stocktwits",
       "published": "Mon, 27 Jul 2026 12:01:26 GMT",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "How Will Bitcoin, Ethereum and XRP React if CLARITY Act Passes or Fails?",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPWUdsbzhRLVYweVFlZU5fOXJsb0Vyb1NBRHF3R3RkcjlzbXB0cGNQRkRLQll1ZnlYcW1pZldVUVhuLVh4Tjh0R3pLNDUzbjhFNjZwY3ViYXBVTkxTQnB0T0ZiMEJoMmF5Y1I2Nzc0ZE5NTTE0UnprUFBlUkVCdHAtTXpNT1c4a3paTzR6M2JjLTFjQVdOX3ptWTlqSVhwaVXSAaQBQVVfeXFMTlJkVVF2Y3ZqWkNuMkRXbVlRRUZWNGdWbXpmamVzeVRDeXBBR3JKczJYeW12REdscGQ3RzRlY2tYdHRmbU91WmUtcUNUa3p2N1ZiMzVGb215Nl9PRFVPeDJDVUVlblRqOWRCQ1ZkWmEwS2hTX3FtakZFVkxheXZmNWstTUtmQWc3Tnhtc181NmttRHpoV3kzcmZRSU1QR1dmZ0xfNEE?oc=5",
+      "source": "Coinpedia",
+      "published": "Mon, 27 Jul 2026 11:35:55 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -64,6 +72,14 @@
       "source": "FXStreet",
       "published": "Mon, 27 Jul 2026 11:00:00 GMT",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Coinbase\u2019s Layer-2 Base Launches on Mainnet",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaU03YXFyMGstb1JuQS1zaWNmdVlhYlNJX0JUd2RhNEZnZEtqdXM3VGFheEVzYWZxVm5aODNkY0NLeXA4aW9uN1pYUE5QZkx5Q1ZlRzlsTURwSmo5czFyd3RPMGw1QW9vRGVCWUIwd0d2dW9rOHlXSFg0OW5JY1lzQWdCOTRyTjVTa0tacw?oc=5",
+      "source": "CoinMarketCap",
+      "published": "Sun, 26 Jul 2026 21:40:20 GMT",
+      "topic": "Base",
       "crypto": true
     },
     {
@@ -211,14 +227,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase pushes further into AI payments with new MCP for Base network",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNVkFDSEhUcVIyVmluaVdXY2N0T1A5MTRMcHRPd2lidk52X3dGaUNhMzkyb3k4SlU0YkQyaWRaeGxUY2IzeC1lYUdyRlhJTWNCd3dEWDFBTnViUUNLSXlldm12cFhBN1NNVHdXRkJhRVhvNEozeVJZR1NFWE8zUjA1V2ZFbFFIR0M3SFBkMnNoSE5jX2RycDBLcmszNnlvUlNRc0dWbw?oc=5",
-      "source": "Fortune",
-      "published": "Tue, 26 May 2026 07:00:00 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "May\u2019s DeFi Hack Tally Grows as Verus Bridge Reportedly Loses $11.58 Million",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQlM3TkZzZXZXUzVZdG1wUk1IT3BTV1FuWDZ5QkZQb1FuOUItdnBYN19NeXliZU84NWcwejJsSllzdE1ZYnM0UWdwdzdSV2piZUROYVZzekRSOXdWbVB1dEVQb1Q5eTBHSnhzZm1UVlFVNTI1SlNZblYyMVM5TXNfUTRwSi1oeWoxN3VIc2psU2xqd3dE?oc=5",
       "source": "Yahoo Finance",
@@ -283,11 +291,27 @@
       "crypto": true
     },
     {
-      "title": "Economists share their Fed expectations",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQd1JVLXZHRERUTzJYcXNqTHpyeTBkZHZGdnhSanBOMmJUQ1JwYnpOQXB4c3NjNy1UdzdGNGI1SGc1WVhIcDFBd2NhWGluT2RIV3RkR0FaRTJVSVR0Ul8yajhHSW5DOF9xeHZ2U09qS2NyUGcyN0g3UnhyUWI3M2sySVhMU1pNVVZBajFGbzFkYU9uNV9QVkN3VWE2cU1CdTB0STBmWEVsMA?oc=5",
-      "source": "marketplace.org",
-      "published": "Mon, 27 Jul 2026 22:44:13 GMT",
-      "topic": "Macro",
+      "title": "Investors focus on tech earnings on Wall Street",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQaHpVWVN4dTdFWlQzcVd3Z0N3bFpwZ25pYktiYlZZVklFVThvY2cwcWFZSzdjWHQwYlQtT3VlTFREdzhlVGpSRTctSlhCZ3RwMV9lVmx3eHdRUUpSaXRpeDZqdkFZbUpUVUFFcFlNZmc4NTF4Ni1YbDBmU0F0M3ZsckNDVS1CbFhVWXFpbWRzRjdkNkYtZjliTlh2VTlTX3JoSjBaMnIwQ3UyRUk2dGxZOThmdzFWbzVwdVpr?oc=5",
+      "source": "CommBank",
+      "published": "Tue, 28 Jul 2026 01:10:03 GMT",
+      "topic": "US Stocks",
+      "crypto": false
+    },
+    {
+      "title": "Wall Street futures retreat as oil rally overshadows optimism before Big Tech earnings: Dow Jones, S&P, Nasdaq",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdXBNNjZoR2VIbWpzOE9BMmwwX2x3UnFMMjk4VDNzZjB6WFRkTjdfSTZQQmIzZW9aOWtWVWRZOUR2dUVEdjRzX0d6Tm9SWUJjbDhtd2xUcTBFamJKTzVhUGZjNVRuTk9RM1ZMSmg3ekI4Y3ZKbVFMN1hWaTVaQ2NzeDYzbG01VHZLTUE?oc=5",
+      "source": "Yahoo Finance UK",
+      "published": "Mon, 27 Jul 2026 23:00:31 GMT",
+      "topic": "US Stocks",
+      "crypto": false
+    },
+    {
+      "title": "Wall Street ends mixed as investors focus on tech earnings",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPbWNrM2R3eVRRWVNNdGhKSnJLUzVjQ0Qwb21PVmFUcXd2OEpDRnVsZDVCMGtFV3RTbE5aM3ZuS2xRWkZtcDZ1VWFseVBLSXBoZWVqV083TV9TQVAyUVYzLXQ5S2g4WDdLRDJQbUhodXhGSlg1a28yaU5laUFEbG8zaWp0X0xESkxsYkV0d2lYZnc2VTRIYlE?oc=5",
+      "source": "Reuters",
+      "published": "Mon, 27 Jul 2026 22:55:06 GMT",
+      "topic": "US Stocks",
       "crypto": false
     },
     {
@@ -299,11 +323,11 @@
       "crypto": false
     },
     {
-      "title": "Wall Street ends mixed as investors focus on tech earnings",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPbWNrM2R3eVRRWVNNdGhKSnJLUzVjQ0Qwb21PVmFUcXd2OEpDRnVsZDVCMGtFV3RTbE5aM3ZuS2xRWkZtcDZ1VWFseVBLSXBoZWVqV083TV9TQVAyUVYzLXQ5S2g4WDdLRDJQbUhodXhGSlg1a28yaU5laUFEbG8zaWp0X0xESkxsYkV0d2lYZnc2VTRIYlE?oc=5",
-      "source": "Reuters",
-      "published": "Mon, 27 Jul 2026 20:17:02 GMT",
-      "topic": "US Stocks",
+      "title": "Economists share their Fed expectations",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQd1JVLXZHRERUTzJYcXNqTHpyeTBkZHZGdnhSanBOMmJUQ1JwYnpOQXB4c3NjNy1UdzdGNGI1SGc1WVhIcDFBd2NhWGluT2RIV3RkR0FaRTJVSVR0Ul8yajhHSW5DOF9xeHZ2U09qS2NyUGcyN0g3UnhyUWI3M2sySVhMU1pNVVZBajFGbzFkYU9uNV9QVkN3VWE2cU1CdTB0STBmWEVsMA?oc=5",
+      "source": "marketplace.org",
+      "published": "Mon, 27 Jul 2026 20:28:00 GMT",
+      "topic": "Macro",
       "crypto": false
     },
     {
@@ -336,30 +360,6 @@
       "source": "CNBC",
       "published": "Mon, 27 Jul 2026 12:15:01 GMT",
       "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "Wall Street looks to Big Tech earnings as easing Middle East tensions lift sentiment: Dow Jones, S&P, Nasdaq, Futures",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNNVVJaGtGeWdVOEdXZkZQbFdyaDFwd2VZdWM5d0NaWVo4Z05UYXlLdTBaeG43LUFQeXVvUHFjRlhBNEwxUTV1MDk2N1BkQ2RxaGdJQndaY1FHZVlqdG9ySDhES2NKa0RLQ0V1SENWRkozNm5XbGZlVzBCaG5TT0ZkZQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "published": "Mon, 27 Jul 2026 09:53:35 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "U.S. markets eye earnings season as Middle East tensions ease: Dow Jones, S&P, Nasdaq, Wall Street Futures",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNS0RzZ2VRakJVWHdtc2dld0plTndfamF3ZjgwRHRYbFAtUVlVY1I0UXpWTS1sMWl1Tld5OHV6Z204ekZkX2h2UFltTmZkVzBRMV94UExQOVAxcUxQYmVFM3BRM1NrM2tjbDJPUVlkRnZmZ0NnWXFYLUdKUUowR09oc3pTV2FWVmttTGJodzA3NTlRcFpPWVB5ZTFn?oc=5",
-      "source": "Yahoo Finance",
-      "published": "Mon, 27 Jul 2026 09:53:26 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "Wall St Week Ahead US stocks face tests from Fed decision, tech-led earnings deluge",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQajIyMHNIZTNQeFlkNHB6ekVuZjNtbFhOcXgtRFhXR095VXRnaUJHSDhwRjFaX19BVTY2RlBoY0d2bEk0cEdxSXlxZ2otVHcwUDNjbGtMWi12U182MkhIR1FrS2dWY1p3NEdSZHAxSmFDZ1BWT2sxSU8tYWxDd255TmpTUGFBeWY3M3VUWlBJb3ZybDdnWm8tM2tGT25XbUZQZmkwX1NlU3BjZl9pcUVHWTBQWDBpTEZrQmFTSVNXaw?oc=5",
-      "source": "Reuters",
-      "published": "Fri, 24 Jul 2026 10:05:00 GMT",
-      "topic": "US Stocks",
       "crypto": false
     },
     {

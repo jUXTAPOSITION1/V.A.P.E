@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T01:16:46Z",
+  "generated": "2026-07-28T01:26:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 388,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 117,
     "investigations": 438,
-    "news": 4,
+    "news": 5,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md",
+      "title": "Bitcoin Holds Position Ahead of Federal Reserve Policy Signals",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 01:26 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The sole available data point shows Bitcoin stabilizing without elaboration on drivers or market breadth.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md"
+    },
     {
       "file": "news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md",
       "title": "Bitcoin Foundation Headline Alleges XRP Lags Broader Market but Supplies No Evidence or Data",
