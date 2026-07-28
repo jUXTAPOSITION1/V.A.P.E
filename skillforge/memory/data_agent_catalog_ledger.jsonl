@@ -194,3 +194,4 @@
 {"ts": "2026-07-28T06:49:38.099174Z", "target": "0xAC0F66379A6d7801D7726d5a943356A172549Adb", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T07:20:30.017994Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T07:51:05.514290Z", "target": "bsc", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
+{"ts": "2026-07-28T08:21:13.347382Z", "target": "gate", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}

@@ -705,3 +705,5 @@
 | 2026-07-28 | auto | 0x227f7D025B140D9881A00fB4F3f76A4eDa72581f (币有) | deep_investigation | REJECT (25/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87 (AS) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-28 | auto | 0xeBd6d1E042bD16893a51a3F9E5c495998a4D4444 (币有) | deep_investigation | REJECT (10/100) | Top 10 non-LP/burn holders control 98% of supply — concentrated, easily manipula | +7d |
