@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-28T05:34:19Z",
+  "generated": "2026-07-28T05:39:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 390,
+    "reports": 391,
     "reports_by_type": {
+      "base": 82,
       "virtuals": 84,
       "bounty": 79,
       "sentiment": 42,
-      "base": 81,
       "macro": 21,
       "security": 73,
       "bug": 3,
@@ -38,14 +38,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-28-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-28T04:00Z",
+      "type": "base",
+      "file": "base-2026-07-28-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-28T05:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-28 04:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-28-04.md",
-      "bytes": 3161
+      "summary": "Date: 2026-07-28 05:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-05.md",
+      "bytes": 3633
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-28-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-28T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-28 05:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-05.md",
+      "bytes": 3633
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1259,17 +1270,6 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-25-09.md",
       "bytes": 1595
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-25-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-25T08:00Z",
-      "threat": null,
-      "summary": "The real incident feed shows 8 incidents over the last 7 days with a cumulative loss of approximately $65.9M, none reaching the $50M threshold. The largest events were the $24.15M private-key compromise on the AFX Bridge (Arbitrum) and the $23.75M price-oracle manipulation on Ostium (Arbitrum). Other notable losses included the $7.53M bri",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-25-08.md",
-      "bytes": 6341
     }
   ],
   "broadcasts": [
