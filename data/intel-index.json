@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T22:01:19Z",
+  "generated": "2026-07-28T22:05:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 404,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 121,
     "investigations": 477,
-    "news": 13,
+    "news": 14,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md",
+      "title": "Decrypt Headline Claims AI Cracked Post-Quantum Crypto, But Article Body Contains Only Unrelated Price Data",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 22:05 UTC",
+      "topic": "Crypto Markets",
+      "dek": "No verifiable details on the claimed breakthrough appear in the provided source material.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md"
+    },
     {
       "file": "news-2026-07-28-ai-firms-are-shredding-physical-books-because-copyright-law-.md",
       "title": "AI firms are shredding physical books because copyright law is quietly rewarding them",
