@@ -3053,6 +3053,25 @@
     "symbol": "HRC",
     "times_investigated": 1
   },
+  "56:0xe22b36db6bcdb931e4a4833f5a24d3d4036d4444": {
+    "address": "0xe22b36dB6bCDb931e4a4833F5A24d3D4036D4444",
+    "chain": "56",
+    "creator_address": "0x495770ffeb84864e1d4a0af70c882c020f1ec7b9",
+    "first_investigated": "2026-07-28T05:18:56Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-051856-0xe22b36dB.md",
+        "score": 40,
+        "ts": "2026-07-28T05:18:56Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T05:18:56Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "\u5e01\u6709",
+    "times_investigated": 1
+  },
   "56:0xea4d009dd99cb83ff4e27c533e279e6120364444": {
     "address": "0xeA4D009DD99cb83FF4e27C533e279e6120364444",
     "chain": "56",
