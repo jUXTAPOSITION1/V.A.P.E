@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T14:57:52Z",
+  "generated": "2026-07-28T15:09:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 463,
+    "investigations": 464,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-145401-0xAfB97Dd6.md",
-      "title": "Investigation \u2014 DOGE1",
-      "symbol": "DOGE1",
-      "name": "DOGE-1",
-      "date": "2026-07-28T14:54:01Z",
-      "target": "0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260728-150906-0x26e9dbe7.md",
+      "title": "Investigation \u2014 fBOMB",
+      "symbol": "fBOMB",
+      "name": "Fantom Bomb",
+      "date": "2026-07-28T15:09:06Z",
+      "target": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
+      "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
-      "score": "18",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-145401-0xAfB97Dd6.md"
+      "score": "30",
+      "summary": "Risk factors: [-10] Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PHAR (0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7) \u2014 CAUTION 72/100 \u2014 likely the same serial campaign; [-20] Very few holders (33) \u2014 thin",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-150906-0x26e9dbe7.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-150906-0x26e9dbe7.md",
+      "title": "Investigation \u2014 fBOMB",
+      "symbol": "fBOMB",
+      "name": "Fantom Bomb",
+      "date": "2026-07-28T15:09:06Z",
+      "target": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-10] Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PHAR (0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7) \u2014 CAUTION 72/100 \u2014 likely the same serial campaign; [-20] Very few holders (33) \u2014 thin",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-150906-0x26e9dbe7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-145401-0xAfB97Dd6.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x383ea12347e56932e08638767b8a2b3c18700493) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-154206-0xd5d0A9b3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-151111-0x69825081.md",
-      "title": "Investigation \u2014 PEPE",
-      "symbol": "PEPE",
-      "name": "Pepe",
-      "date": "2026-07-27T15:11:11Z",
-      "target": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 573440 holders \u2014 reasonably distributed; Deep liquidity ($21,839,710); Trading 1200+ days without a known incident in this scan; Custom verified source (not a mass-produced factory te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-151111-0x69825081.md"
     }
   ],
   "reports": [
@@ -1713,7 +1713,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49223629",
+      "version": "49230922",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1723,7 +1723,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.42 eth_dom 10.04 mcap_chg_24h -2.78",
+      "version": "btc_dom 56.37 eth_dom 10.1 mcap_chg_24h -1.65",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

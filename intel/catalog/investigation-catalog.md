@@ -737,3 +737,5 @@
 | 2026-07-28 | auto | 0xFfE203b59393593965842439ce1E7D7c78109b46 (Doge-1) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-07-28 | auto | 0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805 (DOGE1) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-28 | auto | 0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9 (fBOMB) | deep_investigation | REJECT (30/100) | Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) — can still act | +7d |
