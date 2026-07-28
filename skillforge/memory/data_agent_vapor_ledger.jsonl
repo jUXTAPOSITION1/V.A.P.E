@@ -193,3 +193,4 @@
 {"ts": "2026-07-28T18:59:00.597972Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-28T19:29:46.224644Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-28T20:15:28.156515Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-28T20:45:36.694577Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
