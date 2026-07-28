@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T06:19:17Z",
+  "generated": "2026-07-28T06:34:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 118,
-    "investigations": 443,
+    "investigations": 444,
     "news": 9,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-053418-0xD8Db7919.md",
+      "file": "investigation-20260728-063411-0x93849a00.md",
       "title": "Investigation \u2014 \u5e01\u6709",
       "symbol": "\u5e01\u6709",
-      "name": "\u5e01\u6709",
-      "date": "2026-07-28T05:34:18Z",
-      "target": "0xD8Db79190FB3Ddb6A30f27d0Ba11634b05a54444",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u90fd\u6709",
+      "date": "2026-07-28T06:34:11Z",
+      "target": "0x93849a00A16C39a3F32DF6490b66a6b015A090C3",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-10] Low liquidity $1; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-053418-0xD8Db7919.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-063411-0x93849a00.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-063411-0x93849a00.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u90fd\u6709",
+      "date": "2026-07-28T06:34:11Z",
+      "target": "0x93849a00A16C39a3F32DF6490b66a6b015A090C3",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-063411-0x93849a00.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-053418-0xD8Db7919.md",
@@ -594,20 +608,6 @@
       "score": "10",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concen",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-071143-0xc02179dd.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-051223-0x93ecd8e9.md",
-      "title": "Investigation \u2014 KABOSU",
-      "symbol": "KABOSU",
-      "name": "Kabosu",
-      "date": "2026-07-27T05:12:23Z",
-      "target": "0x93ecd8e9156E6b217514BCFE59837b3807D8F53D",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $12 (rug/i",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-051223-0x93ecd8e9.md"
     }
   ],
   "reports": [
