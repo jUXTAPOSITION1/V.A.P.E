@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-28T15:09:09Z",
+  "generated": "2026-07-28T15:23:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 394,
+    "reports": 395,
     "reports_by_type": {
+      "virtuals": 85,
       "base": 83,
       "sentiment": 43,
       "bounty": 80,
-      "virtuals": 84,
       "macro": 21,
       "security": 73,
       "bug": 3,
@@ -38,14 +38,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-28-11.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-28T11:00Z",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-28-15.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-28T15:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-28 11:10 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-11.md",
-      "bytes": 3631
+      "summary": "Date: 2026-07-28 15:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-28-15.md",
+      "bytes": 3277
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-28-15.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-28T15:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-28 15:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-28-15.md",
+      "bytes": 3277
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-25 15:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-25-15.md",
       "bytes": 3807
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-25-14.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-25T14:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-25 14:39 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-14.md",
-      "bytes": 3100
     }
   ],
   "broadcasts": [
