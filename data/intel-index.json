@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T12:53:28Z",
+  "generated": "2026-07-28T13:08:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 457,
+    "investigations": 458,
     "news": 11,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-125322-0x6e6B8968.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u5e01\u6709",
-      "date": "2026-07-28T12:53:22Z",
-      "target": "0x6e6B8968D304B106F2f0f283e857971e9C9D036e",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $16,656; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-125322-0x6e6B8968.md"
+      "file": "investigation-20260728-130826-0x7987f034.md",
+      "title": "Investigation \u2014 V4",
+      "symbol": "V4",
+      "name": "Programmable",
+      "date": "2026-07-28T13:08:26Z",
+      "target": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +10841% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-130826-0x7987f034.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-130826-0x7987f034.md",
+      "title": "Investigation \u2014 V4",
+      "symbol": "V4",
+      "name": "Programmable",
+      "date": "2026-07-28T13:08:26Z",
+      "target": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +10841% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-130826-0x7987f034.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-125322-0x6e6B8968.md",
@@ -594,20 +608,6 @@
       "score": "44",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull th",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122445-0x1F32b1c2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122435-0x3221BAEB.md",
-      "title": "Investigation \u2014 ETD",
-      "symbol": "ETD",
-      "name": "EDYNE Technologies",
-      "date": "2026-07-27T12:24:35Z",
-      "target": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-20] Very few holders (40) \u2014 thin, easily manipulated distribution; [-8] Top 10 non-LP/burn holders control 56% of supply \u2014 meaningful concentration; [-10] Low liquidity $14,091; [-5] Pair 16.2 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122435-0x3221BAEB.md"
     }
   ],
   "reports": [
