@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T06:49:38Z",
+  "generated": "2026-07-28T07:04:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 118,
-    "investigations": 445,
+    "investigations": 446,
     "news": 9,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-064932-0x95057017.md",
+      "file": "investigation-20260728-070449-0x227f7D02.md",
       "title": "Investigation \u2014 \u5e01\u6709",
       "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
-      "date": "2026-07-28T06:49:32Z",
-      "target": "0x95057017d55fd324987A96d8219674081Ece377b",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T07:04:49Z",
+      "target": "0x227f7D025B140D9881A00fB4F3f76A4eDa72581f",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (13) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,505 (rug/illiquid); [-10] Low liquidity $2,505; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No kn",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-064932-0x95057017.md"
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-070449-0x227f7D02.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-070449-0x227f7D02.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T07:04:49Z",
+      "target": "0x227f7D025B140D9881A00fB4F3f76A4eDa72581f",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-070449-0x227f7D02.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-064932-0x95057017.md",
@@ -594,20 +608,6 @@
       "score": "77",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 61% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 2331 holders \u2014 reasonably distributed; Deep liquidity ($1,006,584); Trading 278+ days without a known",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-095629-0x0e4F6209.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-091131-0xAC0F6637.md",
-      "title": "Investigation \u2014 GEOD",
-      "symbol": "GEOD",
-      "name": "Geodnet Token",
-      "date": "2026-07-27T09:11:31Z",
-      "target": "0xAC0F66379A6d7801D7726d5a943356A172549Adb",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot est",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-091131-0xAC0F6637.md"
     }
   ],
   "reports": [
