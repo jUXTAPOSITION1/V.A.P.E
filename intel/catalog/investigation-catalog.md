@@ -759,3 +759,5 @@
 | 2026-07-28 | auto | 0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-28 | auto | 0xfb1561214348ee8D8198C06ea0D21232872cDEFd (AS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-28 | auto | 0x46dDcc662A045770CE1e264819542C9617547777 (BANK) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
