@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-28T21:00:37Z",
-  "synthesis": "VAPE's automation generated repeated featured investigations, bounty and security sweeps, reports, and snapshots across a two-hour window on 2026-07-28.",
+  "generated": "2026-07-28T21:15:29Z",
+  "synthesis": "Data",
   "tasks": [
+    {
+      "sha": "c3fbf1d5cd",
+      "kind": "sweep",
+      "message": "sentiment_sweep 2026-07-28T21:14Z",
+      "date": "2026-07-28T21:14:35Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c3fbf1d5cd37c265e2fdff9eb644ffc42c50fbcf"
+    },
+    {
+      "sha": "11f1593354",
+      "kind": "automation",
+      "message": "threat analysis: 2026-07-28T21:01Z",
+      "date": "2026-07-28T21:01:02Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/11f15933544a0456e6d441e7d86cd8e39e72bc06"
+    },
+    {
+      "sha": "7fcb10df7c",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-28T21:00Z",
+      "date": "2026-07-28T21:00:41Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7fcb10df7cdac41928257b39a84c2561276ddb76"
+    },
     {
       "sha": "f5ae2d1c19",
       "kind": "bounty-radar",
@@ -85,27 +106,6 @@
       "message": "security_sweep 2026-07-28T19:26Z",
       "date": "2026-07-28T19:26:31Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5cfeefde9e0a48d5bb4992e269a521b23040c711"
-    },
-    {
-      "sha": "870e0195e2",
-      "kind": "automation",
-      "message": "news-intel 2026-07-28T19:24Z",
-      "date": "2026-07-28T19:24:26Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/870e0195e27c2f6fa09222df1775002ad18e5e29"
-    },
-    {
-      "sha": "682437678a",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-28T19:14Z",
-      "date": "2026-07-28T19:14:59Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/682437678a86c02eb74fc8ba66a57e6af72a9ad4"
-    },
-    {
-      "sha": "99d71c7a31",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-07-28T19:14Z",
-      "date": "2026-07-28T19:14:33Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/99d71c7a31a04712f0beadcb866e0e4f66388166"
     }
   ]
 }
