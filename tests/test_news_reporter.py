@@ -177,3 +177,30 @@ def test_generate_ai_image_brands_the_generated_bytes():
         result = news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug")
     assert result == "assets/news-images/slug.jpg"
     brand.assert_called_once_with(b"fake-png-bytes", "slug")
+
+
+def test_write_story_includes_native_rss_snippet_in_grounding(tmp_path, monkeypatch):
+    """A candidate discovered via the native-RSS lane carries the outlet's
+    own feed summary as candidate["snippet"] -- confirms it reaches the
+    grounding text passed to the drafting call, not just the corroboration
+    search results."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Bitcoin Rallies Past $100K", "url": "https://www.coindesk.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "Bitcoin surged past $100,000 as spot ETF inflows accelerated this week."}
+    captured = {}
+
+    def fake_grok_analysis(role, grounding, **kw):
+        captured["grounding"] = grounding
+        return "HEADLINE: Bitcoin Tops $100K\nDEK: A milestone.\n---\nBody text."
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": False, "provider": None, "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
+         mock.patch("agents.intel_common.grok_analysis", side_effect=fake_grok_analysis), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
+        news_reporter.write_story(candidate)
+
+    assert "Source outlet's own summary:" in captured["grounding"]
+    assert "Bitcoin surged past $100,000" in captured["grounding"]

@@ -124,6 +124,56 @@ def test_google_news_search_malformed_xml_returns_empty():
         assert nc.google_news_search("anything") == []
 
 
+def test_strip_html_removes_tags_and_unescapes_entities():
+    assert nc._strip_html("<p>Bitcoin &amp; Ethereum <b>rally</b></p>") == "Bitcoin & Ethereum rally"
+
+
+def test_strip_html_handles_none_and_empty():
+    assert nc._strip_html(None) == ""
+    assert nc._strip_html("") == ""
+
+
+_SAMPLE_NATIVE_RSS = b"""<?xml version="1.0"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+<item>
+  <title>Bitcoin Rallies Past $100K on ETF Inflows</title>
+  <link>https://www.coindesk.com/markets/2026/07/28/bitcoin-rallies</link>
+  <pubDate>Tue, 28 Jul 2026 09:00:00 GMT</pubDate>
+  <description>&lt;p&gt;Bitcoin surged past $100,000 as spot ETF inflows accelerated.&lt;/p&gt;</description>
+  <content:encoded><![CDATA[<p>Bitcoin surged past $100,000 as spot ETF inflows accelerated this week, with BlackRock's IBIT leading net creations.</p>]]></content:encoded>
+</item>
+<item>
+  <title>No Link Item</title>
+  <pubDate>Tue, 28 Jul 2026 08:00:00 GMT</pubDate>
+</item>
+</channel></rss>"""
+
+
+def test_native_rss_feed_parses_real_shape_and_prefers_content_encoded():
+    with mock.patch("urllib.request.urlopen", return_value=_fake_urlopen(_SAMPLE_NATIVE_RSS)):
+        out = nc.native_rss_feed("https://www.coindesk.com/arc/outboundfeeds/rss/", "CoinDesk", "crypto-markets")
+    assert len(out) == 1  # the linkless second item is skipped
+    item = out[0]
+    assert item["title"] == "Bitcoin Rallies Past $100K on ETF Inflows"
+    assert item["url"] == "https://www.coindesk.com/markets/2026/07/28/bitcoin-rallies"
+    assert item["source"] == "CoinDesk"
+    assert item["topic"] == "crypto-markets"
+    # content:encoded (the fuller field) wins over the shorter description
+    assert "BlackRock's IBIT" in item["snippet"]
+    assert "<p>" not in item["snippet"]
+
+
+def test_native_rss_feed_network_failure_returns_empty_not_raise():
+    with mock.patch("urllib.request.urlopen", side_effect=urllib.error.URLError("boom")):
+        assert nc.native_rss_feed("https://example.com/feed", "Example", "crypto-markets") == []
+
+
+def test_native_rss_feed_malformed_xml_returns_empty():
+    with mock.patch("urllib.request.urlopen", return_value=_fake_urlopen(b"not xml")):
+        assert nc.native_rss_feed("https://example.com/feed", "Example", "crypto-markets") == []
+
+
 def test_coingecko_news_best_effort_empty_on_failure():
     with mock.patch("urllib.request.urlopen", side_effect=urllib.error.HTTPError(
             "url", 404, "not found", {}, None)):

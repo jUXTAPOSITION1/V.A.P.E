@@ -19,7 +19,11 @@ corroborating search hits) via agents/news_common.py::scrape_article_text()
 report written before this was drafted from nothing but a bare headline,
 which is why so many degraded into "thin sourcing, cannot verify" filler
 regardless of how the prompt was worded; the model was telling the truth
-about the material it actually had.
+about the material it actually had. Candidates from the native-RSS discovery
+lane (news_common.py's NATIVE_RSS_FEEDS) also carry the outlet's own feed
+summary as `candidate["snippet"]`, included in the grounding as real,
+authoritative material in its own right -- not just a fallback for when a
+live scrape fails.
 
 Two model calls per story, mirroring how a real newsroom splits reporting
 from editing: write_story() drafts under a reporter byline, then
@@ -221,6 +225,11 @@ def write_story(candidate):
         f"SOURCE URL: {candidate['url']}\n"
         f"PUBLISHED: {candidate.get('published') or 'unknown'}\n"
         f"BEAT: {topic_label}\n\n"
+        # The outlet's own feed summary (native RSS lane -- see
+        # news_common.py's NATIVE_RSS_FEEDS) is real, authoritative material
+        # in its own right, not just a fallback for when scraping fails --
+        # included whenever present regardless of scrape outcome.
+        + (f"Source outlet's own summary:\n{candidate['snippet']}\n\n" if candidate.get("snippet") else "")
         + (f"Scraped article body:\n{article_text}\n\n" if article_text else
            "No article body could be scraped this cycle -- only the headline and any web search "
            "results below are real, verified material.\n\n")
