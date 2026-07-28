@@ -1,10 +1,10 @@
 {
-  "generated": "2026-07-28T18:13:33Z",
+  "generated": "2026-07-28T18:16:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 398,
+    "reports": 399,
     "reports_by_type": {
-      "bounty": 81,
+      "bounty": 82,
       "base": 84,
       "macro": 22,
       "virtuals": 85,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260728_164045.md",
+      "file": "bounty_report_20260728_181453.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-28T16:40:45Z",
+      "date": "2026-07-28T18:14:53Z",
       "threat": null,
       "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_164045.md",
-      "bytes": 16149
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_181453.md",
+      "bytes": 16900
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260728_181453.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-28T18:14:53Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_181453.md",
+      "bytes": 16900
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-25 21:45 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-25-21.md",
       "bytes": 3526
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-25-20.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-25T20:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-25 20:13 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-25-20.md",
-      "bytes": 3276
     }
   ],
   "broadcasts": [
