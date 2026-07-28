@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-28T15:03:06Z
+# VAPE Engagement Status — 2026-07-28T17:04:53Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
