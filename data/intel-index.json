@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T17:27:33Z",
+  "generated": "2026-07-28T17:42:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 398,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 469,
+    "investigations": 470,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-172729-0xa10C39aB.md",
-      "title": "Investigation \u2014 FERRET",
-      "symbol": "FERRET",
+      "file": "investigation-20260728-174240-0x317C63Fd.md",
+      "title": "Investigation \u2014 Ferret",
+      "symbol": "Ferret",
       "name": "The SpaceX Ferret",
-      "date": "2026-07-28T17:27:29Z",
-      "target": "0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24",
+      "date": "2026-07-28T17:42:40Z",
+      "target": "0x317C63Fdf448779923fe9b845E4A58CB4d224e56",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $26,431; [-10] Violent 24h move +669% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 100% of liq",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-172729-0xa10C39aB.md"
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (191); [-10] Low liquidity $14,117; [-10] Violent 24h move +442% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-174240-0x317C63Fd.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-174240-0x317C63Fd.md",
+      "title": "Investigation \u2014 Ferret",
+      "symbol": "Ferret",
+      "name": "The SpaceX Ferret",
+      "date": "2026-07-28T17:42:40Z",
+      "target": "0x317C63Fdf448779923fe9b845E4A58CB4d224e56",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (191); [-10] Low liquidity $14,117; [-10] Violent 24h move +442% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-174240-0x317C63Fd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-172729-0xa10C39aB.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $21,509; [-15",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-184518-0x277aDD73.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-182956-0x2f6A9340.md",
-      "title": "Investigation \u2014 LFWA",
-      "symbol": "LFWA",
-      "name": "LFWA",
-      "date": "2026-07-27T18:29:56Z",
-      "target": "0x2f6A9340C84E94413d01afCEEf85f1A8D1f27aD7",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Low holder count (169); [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +264% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-lau",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-182956-0x2f6A9340.md"
     }
   ],
   "reports": [
