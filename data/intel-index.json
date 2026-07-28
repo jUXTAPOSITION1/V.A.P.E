@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T10:53:40Z",
+  "generated": "2026-07-28T11:08:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 393,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 452,
+    "investigations": 453,
     "news": 10,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-102335-0x32B0007f.md",
-      "title": "Investigation \u2014 DXCHCK",
-      "symbol": "DXCHCK",
-      "name": "Dexcheckai",
-      "date": "2026-07-28T10:23:35Z",
-      "target": "0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260728-110839-0x57c4ABE2.md",
+      "title": "Investigation \u2014 Blinky",
+      "symbol": "Blinky",
+      "name": "Blinky",
+      "date": "2026-07-28T11:08:39Z",
+      "target": "0x57c4ABE2560C41F97519C43dbe874e844D63F3BC",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-102335-0x32B0007f.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7,415 (rug/illiquid); [-10] Low liquidity $7,415. Positive evidence: Trading 634+ days without a known inc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-110839-0x57c4ABE2.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-110839-0x57c4ABE2.md",
+      "title": "Investigation \u2014 Blinky",
+      "symbol": "Blinky",
+      "name": "Blinky",
+      "date": "2026-07-28T11:08:39Z",
+      "target": "0x57c4ABE2560C41F97519C43dbe874e844D63F3BC",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7,415 (rug/illiquid); [-10] Low liquidity $7,415. Positive evidence: Trading 634+ days without a known inc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-110839-0x57c4ABE2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-102335-0x32B0007f.md",
@@ -594,20 +608,6 @@
       "score": "70",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 9823 holders \u2014 reasonably distributed; Deep liquidity ($1,084,230); Trading 134+ days without a known incident i",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122350-0xb23bB8c2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122337-0xde4EE805.md",
-      "title": "Investigation \u2014 DEXE",
-      "symbol": "DEXE",
-      "name": "Dexe",
-      "date": "2026-07-27T12:23:37Z",
-      "target": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-10] Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5040 hold",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122337-0xde4EE805.md"
     }
   ],
   "reports": [
@@ -1691,7 +1691,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49217048",
+      "version": "49223629",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1701,7 +1701,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.4 eth_dom 10.07 mcap_chg_24h -2.58",
+      "version": "btc_dom 56.42 eth_dom 10.04 mcap_chg_24h -2.78",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
