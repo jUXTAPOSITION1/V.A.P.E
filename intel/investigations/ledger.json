@@ -2884,6 +2884,25 @@
     "symbol": "EVAA",
     "times_investigated": 1
   },
+  "56:0xaf412164e9af710d3868a088d759478a5a004444": {
+    "address": "0xaf412164E9af710d3868A088d759478a5A004444",
+    "chain": "56",
+    "creator_address": "0x9d89714ebe810647270f3ed8841fb1e06ae018cc",
+    "first_investigated": "2026-07-28T01:46:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-014633-0xaf412164.md",
+        "score": 40,
+        "ts": "2026-07-28T01:46:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T01:46:33Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "\u5e01\u6709",
+    "times_investigated": 1
+  },
   "56:0xb33f6e70535584c2aca18335305797c16f1ad589": {
     "address": "0xB33F6E70535584c2aCa18335305797C16f1ad589",
     "chain": "56",

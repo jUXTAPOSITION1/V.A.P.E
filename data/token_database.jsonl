@@ -43,3 +43,4 @@
 {"ts": "2026-07-27T22:00:24.667787Z", "address": "0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444", "chain": "56", "symbol": "\u5e01\u6709", "name": "\u5e01\u6709", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-07-27T23:00:24.006147Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-28T00:46:28.893102Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "token_intel"}
+{"ts": "2026-07-28T01:46:41.391384Z", "address": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82", "chain": "8453", "symbol": "SOL", "name": "SOL", "source": "base", "offering": "token_chart"}
