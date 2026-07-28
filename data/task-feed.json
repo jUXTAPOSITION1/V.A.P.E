@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-28T13:38:32Z",
-  "synthesis": "VAPE's automation repeatedly featured investigations every 15 minutes while running bounty radar sweeps, reputation snapshots, repo reviews, news-intel, skillforge builds, and base sweeps.",
+  "generated": "2026-07-28T13:53:28Z",
+  "synthesis": "VAPE's automation repeatedly committed featured investigations at 15-minute intervals while running occasional bounty sweeps, reputation snapshots, and repo/news tasks.",
   "tasks": [
+    {
+      "sha": "465bab6285",
+      "kind": "automation",
+      "message": "Seal findings chain 2026-07-28T13:50Z",
+      "date": "2026-07-28T13:50:00Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/465bab6285b92c8688e431ed43ef0f201748e29d"
+    },
+    {
+      "sha": "110a482f43",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-28T13:38Z",
+      "date": "2026-07-28T13:38:34Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/110a482f43cd0fd809f454569d5975ee823c7be6"
+    },
     {
       "sha": "86372bd641",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "news-intel 2026-07-28T11:18Z",
       "date": "2026-07-28T11:18:27Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ae4ef8b927a9f3ac605b6da98642401cc3929d1b"
-    },
-    {
-      "sha": "cc250298e8",
-      "kind": "automation",
-      "message": "VAPE skillforge build cycle 2026-07-28T11:13Z",
-      "date": "2026-07-28T11:13:36Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/cc250298e85630a493bb96708548fec7ccd7543c"
-    },
-    {
-      "sha": "ec3e221a96",
-      "kind": "sweep",
-      "message": "base_sweep 2026-07-28T11:10Z",
-      "date": "2026-07-28T11:10:17Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ec3e221a962493c20ad31f5cfb8f16af17ecc19a"
     }
   ]
 }
