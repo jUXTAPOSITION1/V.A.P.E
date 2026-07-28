@@ -48,3 +48,4 @@
 {"ts": "2026-07-28T06:49:38.098870Z", "address": "0xAC0F66379A6d7801D7726d5a943356A172549Adb", "chain": "137", "symbol": "GEOD", "name": "GEOD", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-07-28T11:23:31.631189Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-07-28T11:53:27.481609Z", "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "chain": "137", "symbol": "AIPF", "name": "AIPF", "source": "evm", "offering": "token_chart"}
+{"ts": "2026-07-28T12:53:28.171636Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_safety_check"}
