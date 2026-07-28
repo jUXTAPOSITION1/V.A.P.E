@@ -1,7 +1,247 @@
 {
-  "generated": "2026-07-28T02:30:19Z",
-  "count": 47,
+  "generated": "2026-07-28T02:33:15Z",
+  "count": 60,
   "headlines": [
+    {
+      "title": "Hong Kong prepares banks for quantum threats amid tokenization push",
+      "url": "https://cointelegraph.com/news/hong-kong-banks-quantum-threats-tokenization?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 02:21:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Binance phishs its own staff monthly, India censors BitChat code: Asia Express",
+      "url": "https://cointelegraph.com/magazine/india-bans-bitchat-binance-phishs-its-own-staff-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 01:23:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "U.S. Senate puts off crypto Clarity Act for now as it focuses limited bandwidth elsewhere",
+      "url": "https://www.coindesk.com/policy/2026/07/27/u-s-senate-puts-off-crypto-clarity-act-for-now-as-it-focuses-limited-bandwidth-elsewhere",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 23:55:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Kalshi, Polymarket win pause against Minnesota's prediction market ban",
+      "url": "https://www.coindesk.com/policy/2026/07/27/kalshi-polymarket-win-pause-against-minnesota-s-prediction-market-ban",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 23:29:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Elon Musk: Humans Will Lose Control of AI Within a Decade",
+      "url": "https://decrypt.co/374488/elon-musk-humans-lose-control-ai-decade",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 23:00:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "New York AG warns CLARITY Act could weaken state crypto enforcement",
+      "url": "https://cointelegraph.com/news/new-york-ag-clarity-act-state-crypto-enforcement?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Mon, 27 Jul 2026 22:55:44 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "OpenAI\u2019s GPT-6 Will Arrive by September, Markets Predict",
+      "url": "https://decrypt.co/374472/openai-gpt-6-will-arrive-september-prediction-market",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 22:31:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "What Is a Digital Commodity?",
+      "url": "https://www.theblock.co/learn/409682/what-is-a-digital-commodity?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 21:55:46 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Cross River to enable P2P payments, banking services for X Money",
+      "url": "https://cointelegraph.com/news/x-money-cross-river-embedded-banking-p2p-payments?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Mon, 27 Jul 2026 21:05:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Searchable NYC Property Database Puts Wealthy Residents at Risk, Critics Warn",
+      "url": "https://decrypt.co/374484/searchable-nyc-property-database-could-put-wealthy-residents-at-risk-crypto-execs-warn",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 21:05:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Prediction Market Traders Brace for Surprise Fed Rate Hike",
+      "url": "https://decrypt.co/374453/prediction-market-traders-brace-for-surprise-fed-rate-hike",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 20:43:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SparkKitty Malware Found in App Stores Targets Crypto Wallet Seed Phrases",
+      "url": "https://decrypt.co/374450/sparkkitty-malware-mobile-apps-crypto-wallet",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 20:09:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin shrugs off AI selloff but high-stakes Fed meeting could determine what's next",
+      "url": "https://www.coindesk.com/markets/2026/07/27/bitcoin-shrugs-off-ai-selloff-but-high-stakes-fed-meeting-could-determine-what-s-next",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 19:55:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Fanatics Buys CFTC-Registered Exchange in Prediction Markets Land Grab",
+      "url": "https://decrypt.co/374449/fanatics-buys-cftc-registered-exchange-prediction-markets",
+      "source": "Decrypt",
+      "published": "Mon, 27 Jul 2026 19:45:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitmine keeps buying Ether as ETH outperforms Bitcoin",
+      "url": "https://cointelegraph.com/news/bitmine-keeps-buying-ether-as-eth-outperforms-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Mon, 27 Jul 2026 19:22:59 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Mon, 27 Jul 2026 18:51:58 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Compromised contract let hackers print 5.2 million WEMIX stablecoins, forcing a complete network freeze",
+      "url": "https://cryptoslate.com/wemix-owner-breach-minted-5-23m-tokens-outside-its-100-backed-stablecoin-controls/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 18:05:48 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Crypto\u2019s favorite $90 trillion trading product is coming to Wall Street, but big banks are taking it slow",
+      "url": "https://www.coindesk.com/markets/2026/07/22/crypto-s-favorite-usd90-trillion-trading-product-is-coming-to-wall-street-but-big-banks-are-taking-it-slow",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 18:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "NFL urges CFTC to strengthen rules on sports prediction markets: report",
+      "url": "https://www.theblock.co/post/409846/nfl-urges-cftc-to-strengthen-rules-on-sports-prediction-markets-report?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 17:57:24 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Digital asset trading platform Uphold cuts 17% of global headcount as crypto winter bites",
+      "url": "https://www.coindesk.com/business/2026/07/27/digital-asset-trading-platform-uphold-cuts-17-of-global-headcount-as-crypto-winter-bites",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 16:47:06 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Lawsuit claims BitMEX used server freezes and internal trading to seize 622 Bitcoin ahead of its September closure",
+      "url": "https://cryptoslate.com/lawsuit-claims-bitmex-used-server-freezes-and-internal-trading-to-seize-622-bitcoin-ahead-of-its-september-closure/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 16:35:08 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "NY Attorney General Letitia James warns Clarity Act would \u2018dilute\u2019 states\u2019 ability to go after fraud as pressure mounts",
+      "url": "https://www.theblock.co/post/409831/ny-attorney-general-letitia-james-warns-clarity-act-dilute-states-ability-fraud-pressure-mounts?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 16:31:57 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "On-chain data shows 5,280 ETH draining into single address following quiet Triple-A wallet breach",
+      "url": "https://cryptoslate.com/onchain-data-shows-5280-eth-draining-into-single-address-following-quiet-triple-a-wallet-breach/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 15:05:06 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ethereum, Solana and Avalanche get busier and cheaper even as token prices fall: Bitwise",
+      "url": "https://www.theblock.co/post/409799/ethereum-solana-avalanche-get-busier-cheaper-even-as-token-prices-fall-bitwise?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 15:00:16 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "What are perps, anyway? Everything you need to know about crypto\u2019s hottest trading instrument",
+      "url": "https://www.coindesk.com/business/2026/07/27/what-are-perps-anyway-everything-you-need-to-know-about-crypto-s-hottest-trading-instrument",
+      "source": "CoinDesk",
+      "published": "Mon, 27 Jul 2026 15:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Securitize expands regulated platform with SEC adviser license",
+      "url": "https://www.theblock.co/post/409821/securitize-expands-regulated-platform-with-sec-adviser-license?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 14:08:44 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SEC warning over crypto yield vaults puts DeFi\u2019s secret human controllers in the crosshairs",
+      "url": "https://cryptoslate.com/how-morphos-new-vault-structure-could-trigger-the-secs-crackdown-on-hidden-crypto-managers/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 13:50:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "TD Cowen cuts David Bailey\u2019s Nakamoto target 58% after bitcoin outlook reset",
+      "url": "https://www.theblock.co/post/409797/td-cowen-cuts-david-bailey-nakamoto-target-58-bitcoin-outlook-reset?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 27 Jul 2026 13:10:25 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "BitMart\u2019s sudden shutdown triggers withdrawal delays and on-chain panic, echoing the ghosts of 2022",
+      "url": "https://cryptoslate.com/bitmarts-sudden-shutdown-triggers-withdrawal-delays-and-on-chain-panic-echoing-the-ghosts-of-2022/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 12:47:27 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin\u2019s $65,000 rebound looks like a relief rally, but Wednesday\u2019s Fed decision could turn it into a trap",
+      "url": "https://cryptoslate.com/bitcoins-65000-rebound-looks-like-a-relief-rally-but-wednesdays-fed-decision-could-turn-it-into-a-trap/",
+      "source": "CryptoSlate",
+      "published": "Mon, 27 Jul 2026 10:42:09 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Crypto Market Today, July 27: Bitcoin Steadies as Ahead of Fed Meeting",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQajIxTGljZ2xKMDlJeEZ6STQ4SEQtRXMxb1BXeDNaSjc2YmJVMEFfa0N1NWxpemF0UEQyQnVwbVRpM1owY1RJUnhaODNMOWRrMXZRTVBMcTctMnl4UU5UUTVzU28tdnV3RzV2c3BhMjhualBnck8yR3hXbVdVQWpfa3AtQ09iNlp0ei1Da1FrbDBpa2ZuLXFpLXU4THozT0ZFU3YzQUczcXY3MFkySDc4djRmYk14ME9TcWI1eE14aHpUVktBaDhBMg?oc=5",
@@ -99,6 +339,14 @@
       "crypto": true
     },
     {
+      "title": "Mubadala Capital tokenizes private markets fund on Solana, Sui, Base as Coinbase takes exposure",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPaWJ5NjlBYzlRZmp1SWdVZmQ3QlZxN19XR05sOXBhYnk3Wjg4M1J1N1hhd1JyNVRaUm15R01LTzBQZk15Qi1tRmQyd0xTRFo3MzhkZ0oyd1F0bjk4QlRvaVVlQ2xFS2xSNDI0ZEQ1Y0NZWWE2UmVXTHNrUldYMDR0cW4yVXJpTHdSS0pFZy1vX3R3MGE5TDFRZ2hrV0VLMEFtRG5kNmpnQmpQMzhBZ0tNQlFpaU5zYVJieUdTaEEzM2Y4N2FpMFQtclNFWDJYTjU0azI4?oc=5",
+      "source": "CoinDesk",
+      "published": "Thu, 23 Jul 2026 12:35:06 GMT",
+      "topic": "Base",
+      "crypto": true
+    },
+    {
       "title": "Senate Republican Crypto Bill Is Here: Why the Next 15 Days Could Change the Entire Crypto Market",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNTURwamtUVF9EZ2tDUVM2cVcwT0NkUXk0cU5vSjFCZ1ZWU1Uwd3JJR0Y1Q1JIVEtJb1hwVDdSOGg4XzNTWDFxNjROZW5tYlF0bkk0RU8xclBudEpfZVhDUWFBcEtlaFNjUnBuSHd0VldlWUE3enpCZ0RwR2duN3N2bHppYUVMbUZIdXlKdFVTbFZrVTVnYVZHT05BVEQ1ZDViZUVGS0dRbENEZlpZZF9fWDlTMlE4Z3lHVVg3QTV1WHMtZU44aFkxaVRfLXRkWDlkVml2ZVo5TlZUT2c?oc=5",
       "source": "Bitcoin Foundation",
@@ -179,14 +427,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase's Base blockchain resumes after two-hour outage disrupted network",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPcDZ6Q0FranM2Z0hBR3QtQnVHT1QzZWdiNXJkMWJaZnU1Y2pNd1lSbXkwc1hoS19zcFAwSjJ0b3gzdmlOOEo4b0J4SUJDVzQxRERPTDI0eW5zN18tWkFnTWdsc1J2U2lOc3R6c0NtRTlLVjBxcENhdzJGdjlSaVIzcEZJTEFVTUc2YzdsOHRfajBYN3F1OHJvamRfY0VNLWQwd1VPWXJYRW9iN3NmRHJNc19aYUVrUQ?oc=5",
-      "source": "CoinDesk",
-      "published": "Thu, 25 Jun 2026 07:00:00 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "Coinbase-Backed Ethereum Network Base Recovers After Block Production Issue",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPQUJjanpjNjVyZXZPZXRrVC1CVEdCa2hETXpWODNnamFSSTVZNERWTWdnR3preWctVzNBSW03SHE5bnB0ZVZGQmc1MUhuTWxUdkZRZTBRcGFPaWJldWJZdlhuOXZxWGJVSlExSElDSURzQkV6eHhKWjYzeU1mWlJHcWZEdGloanlUbnZoRThuVEVzUQ?oc=5",
       "source": "Decrypt",
@@ -241,142 +481,6 @@
       "published": "Fri, 24 Apr 2026 07:00:00 GMT",
       "topic": "Stablecoins",
       "crypto": true
-    },
-    {
-      "title": "Hackers target DeFi protocol Kelp DAO in massive $300m exploit",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPeVY2OUJtUEF2a21FdENLbWNaUnJzWi11aVBFOTJTN0lobVNJMURtMmo2bUczYkk3bC11U3psR3VGM3A4Y2dFYm5SVGYyQVBUbTFfR3ZIN2tDR1VKT0h3aG1zMDhqRHQ2MGVqdlY4eGhFNG5XRlBVMVlmTU1BSEhpY0luMFAzRXlZWFNB?oc=5",
-      "source": "dlnews.com",
-      "published": "Sat, 18 Apr 2026 07:00:00 GMT",
-      "topic": "Security",
-      "crypto": true
-    },
-    {
-      "title": "Solana-Based DeFi Exchange Suffers $285 Million Hack",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUUNvdk9ad3I2czJqLWJNa0JrMUNHRG1nd0VSUjc0OTJldzBnTGFpWTd6eGZVTGU5QUZleVhOblExUVQyMWtxU2RRT0hiXy13cGFRdjZTaENYaGtERnhxME5va2xYM3h1TEtPSVpLaWxVWFR4NFAwa3NjU3V5RVlzTlVVaFowUWZZOHpSWmt6NEpaYmlUdmwwb0d0MA?oc=5",
-      "source": "PYMNTS.com",
-      "published": "Thu, 02 Apr 2026 07:00:00 GMT",
-      "topic": "Security",
-      "crypto": true
-    },
-    {
-      "title": "The Agentic Flywheel: How Zero-Human Companies Will Reshape Onchain Markets",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNS0JJSnYzb2NrUXdOZnJuVXExYXBnQWNCU0JqRUZjdE5nYTdiQVRVTjllTWoyQXVaNXBVS19jS0xvZERUNFl2ZHJ6ajZ3X2ZCNDNyYkw0dWp5SEExTlFiSVQwRXZnTF80MWFPUk9mUlV3OE0tS0MxWUYzZmhSZGFGV2xhZmIxQ2dmcVRJ?oc=5",
-      "source": "galaxy.com",
-      "published": "Tue, 24 Mar 2026 07:00:00 GMT",
-      "topic": "AI Agents",
-      "crypto": true
-    },
-    {
-      "title": "A Guide To Stablecoins: Majority Fiat-Backed Stablecoins\u2014USDT, USDC, PYUSD",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQR2c5c2o0eXAtRmRjN3NtOGI4TlhLRi1jNGpXYnBLaGtSOHBUdWp2SWREU2xzd0Q5azJJX3A2dW1pNVZfLXpaZFRGeWxKWTU1ZUtIS1JvTk5renh4OXlwbE9hUGdzUEEyYm1QTGdKWW42dktiUzRheWQ4SElkQl80ZkUwM1JpSG9FR0huUnFuaVJKcnVzbmFSRENqdTlwUTJMRU8w?oc=5",
-      "source": "Ark Invest",
-      "published": "Thu, 19 Mar 2026 07:00:00 GMT",
-      "topic": "Stablecoins",
-      "crypto": true
-    },
-    {
-      "title": "What Is Base? The Ethereum Layer-2 Network Launched by Coinbase",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQc2RDSks2c2tSejRKNC1zdUlxSW1Yc3BTNVhHbloyck1Pbjc3YjVwYlBOMEZCRDNHemVBbEo5b1AySTJDaG9ubjAzcmRiY2FZUWtnN3B3T0g2NVZuMUdSaU5mam54a0J6V1d4ZXBhTEF1X2hsUVI3c1ltSnI1bFRrRnFlbnBfdw?oc=5",
-      "source": "Yahoo Finance",
-      "published": "Thu, 19 Feb 2026 08:00:00 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
-      "title": "Stablecoin Risks: Some Warning Bells",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBYZjYyLTlhTXd4dklxY0RCTEhqRHhUZGl0b3VmLU1FdTVXM1hiWXVvR0NORWQ1QWVHbFRNZzYxVmZHazZUS093NlE2OFIwRVJOR3RvcE9QUEZFTDhQcjdHWVJn?oc=5",
-      "source": "Bank Policy Institute",
-      "published": "Mon, 03 Nov 2025 08:00:00 GMT",
-      "topic": "Stablecoins",
-      "crypto": true
-    },
-    {
-      "title": "U.S. stock futures steady as investors await Fed, megacap earnings By Investing.com",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNbEs0QllFbjYwWE8yTlZ1OGJBVU94YUpTeXFCTThDYmpZRGd6S0hLcy1EcWQ4SmhfT1Fabm1Wdmd1Z3hyLTliWGU1MTRYcjRuQ3JRc0FuUXJQWVh2Vm9FazNYenE2Q2ZDY1Q3RXR2S3ZkcU9YSWVlT3NTX1ZXcV9TTXRab3RnQnBxVHE5U0VYd2FQNWp1aWsxV2JBemlpd3N4SVFBZWxyeUxGbVRxZFllanpkTllYTVNNUXVWTQ?oc=5",
-      "source": "Investing.com",
-      "published": "Tue, 28 Jul 2026 00:42:03 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "Wall Street futures retreat as oil rally overshadows optimism before Big Tech earnings: Dow Jones, S&P, Nasdaq",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdXBNNjZoR2VIbWpzOE9BMmwwX2x3UnFMMjk4VDNzZjB6WFRkTjdfSTZQQmIzZW9aOWtWVWRZOUR2dUVEdjRzX0d6Tm9SWUJjbDhtd2xUcTBFamJKTzVhUGZjNVRuTk9RM1ZMSmg3ekI4Y3ZKbVFMN1hWaTVaQ2NzeDYzbG01VHZLTUE?oc=5",
-      "source": "Yahoo Finance UK",
-      "published": "Mon, 27 Jul 2026 23:00:31 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "Wall Street ends mixed as investors focus on tech earnings",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPbWNrM2R3eVRRWVNNdGhKSnJLUzVjQ0Qwb21PVmFUcXd2OEpDRnVsZDVCMGtFV3RTbE5aM3ZuS2xRWkZtcDZ1VWFseVBLSXBoZWVqV083TV9TQVAyUVYzLXQ5S2g4WDdLRDJQbUhodXhGSlg1a28yaU5laUFEbG8zaWp0X0xESkxsYkV0d2lYZnc2VTRIYlE?oc=5",
-      "source": "Reuters",
-      "published": "Mon, 27 Jul 2026 22:55:06 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "Inflation sparks Fed interest-rate debate as July decision looms",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdENudXVHZGRaS0VRV3h6bE5kbjNES3U3em5hWjZIRG01S1JKcHRRQVhMVnZySnd5VG5TbEtqNjNla3dFZWtvMXpWS2R0RUNHalRDdXJPYWJPTTR4WjItTVlJT0dkTmJKQ3NNcnB4dWcxNmxEc2daVHprRUxCZWpRYk1laFBWN3J5S051MFoxQ0liZUUtMjJzcmtUckRiZm1BR0FQTmVuS1FzZ1p0eXhBdkhtSQ?oc=5",
-      "source": "thestreet.com",
-      "published": "Mon, 27 Jul 2026 20:50:09 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "Economists share their Fed expectations",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQd1JVLXZHRERUTzJYcXNqTHpyeTBkZHZGdnhSanBOMmJUQ1JwYnpOQXB4c3NjNy1UdzdGNGI1SGc1WVhIcDFBd2NhWGluT2RIV3RkR0FaRTJVSVR0Ul8yajhHSW5DOF9xeHZ2U09qS2NyUGcyN0g3UnhyUWI3M2sySVhMU1pNVVZBajFGbzFkYU9uNV9QVkN3VWE2cU1CdTB0STBmWEVsMA?oc=5",
-      "source": "marketplace.org",
-      "published": "Mon, 27 Jul 2026 20:28:00 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "Wall Street Faces \u2018Make or Break\u2019 Run of Earnings, Data and a Fed Rate Decision.",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOSHdkUGlaMVR0OWdvSmtDVGU3SUZDQXRHWHhoLU5Vd3B3ZXR4QUgxYUZlY3ZjeWEzVEN2RzgycHMzQ2NaNWxQQXdNaTJnLVBGQk9PTFFDd3RkLXdYWWxtRDBMNElaUmkzR0k5cUVTckd1UkFlckFxYlZHOEFxTXN2MDEtek9xNk1C?oc=5",
-      "source": "Barron's",
-      "published": "Mon, 27 Jul 2026 18:39:00 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "What to Expect from the July Fed Meeting",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9lN3NWVEpqZHFvOHB2LUVGOS0ydnFIdVdXSEJhQU1kdEs1TThvM08zLU5JZUJMMnhSOXJfTFZVNEhDdktjR3l0OXFSTWR2b2Nxb1pUZ3A5N0h2ZUhSWGNsVGFvQmRJZXJ0XzhpYzhqRkVWNXB5SGxrUkZRYkFVdw?oc=5",
-      "source": "Morningstar",
-      "published": "Mon, 27 Jul 2026 16:49:28 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "Wall Street Climbs After US, Iran Pause Conflict; Focus on Fed, Earnings",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQNHpuRXA3SlpRQkJiTnB0cUIxM3hUTGZwdl8ybWdyWnAyVzB3WFRvTnJSZGp0VS1ZMHVzVEN3VUVVMW9qVkVJX1p4czBfNkRpaUZhUzMtZi1TNERyTFQxdmlLOU0yS1BlRExZVURKYTVrVjNNaVViVW5udkk4ekhfMFlfVzFLRGpvc2o4MWQ0ZERuTGo0REJFWWgxYzhtd05peFE?oc=5",
-      "source": "GV Wire",
-      "published": "Mon, 27 Jul 2026 14:37:49 GMT",
-      "topic": "US Stocks",
-      "crypto": false
-    },
-    {
-      "title": "The Fed\u2019s New Chairman Faces His Biggest Test Yet",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQR1EydHJJUktRZlBvZW9ONjlka182UTludjVpUndYYzhweXJ1Qlh6OGZERHp2YTVrNWk5cVhiV0tSU0g0aU94YlIwT3EtVDJOakZ3QmVUX2RBbXJIUWZZT0RBeGotLVpkWFc2bG91RnlmbzdCbXBGRVNmWjJscExTcGVTN2d6Mm9QVHNxMTJqQ2cxam14NHBwT3ZVTGJGZw?oc=5",
-      "source": "The New York Times",
-      "published": "Mon, 27 Jul 2026 13:13:17 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "Federal Reserve is likely to hold interest rates steady. Here's what that means for consumers",
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5kR3lXVW0teFY1aGxteXlZRzRvVlJBbDVpQ2MxbHkzSThtY0txbkJHNmdLSmctRUJVcDJlUXJVcHlNdDhKcHNrNjVZVXhvSzdxanN1eWZaMmo2NXRnSHJrVWlFNHFPVEdodnVlTdIBckFVX3lxTE80TE5EaWozeEYtMVY2ZEZMb214S21qMXlNZHpIQ05nMmNCVnVtaXBWMDZEVVdwaTdEYm5iYlRHZE9HbmoxV2xlalR3OUhqbFhrbFUyeVFNR1ExOXZJWkJfTVVmS2pnOC1BaEZoUzI3QXBQQQ?oc=5",
-      "source": "CNBC",
-      "published": "Mon, 27 Jul 2026 12:15:01 GMT",
-      "topic": "Macro",
-      "crypto": false
-    },
-    {
-      "title": "U.S. Stocks Fall as Tech Selloff Deepens, Oil Prices Hit $100 a Barrel",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNMEYtMzJOZ2tzUEUxdUFZQVBVeHhjQS1uVzNWQ3ZPcTdud2RYUjJ2dFNpMnctYVUtTjRLLVU2VWxQeXkwemFKZFFHcXQ0N1hrdkx0S1pWWDYxNFRIVXFpWGpBSHRVUjY2dVRrNUttWTdGWkhwN0pJQTNGNGRGN1FYcU9qV0lKTkhjNVFrdFlCWjRYdUZYSnZF?oc=5",
-      "source": "WSJ",
-      "published": "Thu, 23 Jul 2026 18:22:00 GMT",
-      "topic": "US Stocks",
-      "crypto": false
     }
   ]
 }

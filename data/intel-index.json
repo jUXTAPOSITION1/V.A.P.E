@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T02:31:01Z",
+  "generated": "2026-07-28T02:35:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 388,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 117,
     "investigations": 439,
-    "news": 6,
+    "news": 8,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,28 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md",
+      "title": "Coinbase Flags 100M AI Payments on Base but Provides No Supporting Data",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 02:35 UTC",
+      "topic": "Base",
+      "dek": "A headline-only claim from Coinbase's CEO leaves the scale and mechanics of agentic finance on Base unverified.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md"
+    },
+    {
+      "file": "news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md",
+      "title": "Hong Kong's Tokenization Drive Exposes Banks to Quantum Risks With Sector at Just 2.3/10 Readiness",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 02:34 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The HKMA is forcing banks to confront quantum decryption threats to current cryptography exactly as tokenized deposits and bonds move onto ledgers, with half the sector lacking any post-quantum plans.",
+      "image": "assets/news-images/hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.jpg",
+      "image_source": "Source photo \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md"
+    },
     {
       "file": "news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md",
       "title": "Nansen Flags Elusive Bitcoin Demand, Warns of Possible Slide to $52,000",
