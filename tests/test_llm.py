@@ -614,6 +614,96 @@ class TestVertexTunedCandidate:
         assert "INVALID_ARGUMENT" in capsys.readouterr().err
 
 
+def _fake_image_response(image_b64, mime="image/png"):
+    body = {"candidates": [{"content": {"parts": [{"inlineData": {"mimeType": mime, "data": image_b64}}]}}]}
+    payload = json.dumps(body).encode()
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            pass
+
+        def read(self):
+            return payload
+    return Resp()
+
+
+class TestGeminiImage:
+    """agents/llm.py::ask_gemini_image() — VAPE's real image-generation
+    route (Google Cloud's own Gemini image model, "Nano Banana"), called
+    the same opt-in way as the Vertex-tuned candidate (gated on
+    VAPE_VERTEX_ACCESS_TOKEN) but against a publisher-model endpoint."""
+
+    def test_returns_none_when_token_unset(self, monkeypatch):
+        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+        with mock.patch("urllib.request.urlopen") as mocked:
+            assert llm.ask_gemini_image("a photo of coins") is None
+        mocked.assert_not_called()
+
+    def test_reaches_gemini_image_endpoint_and_decodes_bytes(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        import base64
+        raw_bytes = b"\x89PNG-fake-image-bytes"
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            captured["auth"] = req.get_header("Authorization")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_image_response(base64.b64encode(raw_bytes).decode())
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            result = llm.ask_gemini_image("a close-up of gold coins on a dark table")
+        assert result == raw_bytes
+        assert captured["auth"] == "Bearer fake-token"
+        assert captured["url"] == (
+            "https://us-central1-aiplatform.googleapis.com/v1/projects/87858016172"
+            "/locations/us-central1/publishers/google/models/gemini-3.1-flash-lite-image:generateContent")
+        assert captured["body"]["contents"] == [
+            {"role": "user", "parts": [{"text": "a close-up of gold coins on a dark table"}]}]
+        assert captured["body"]["generationConfig"]["responseModalities"] == ["IMAGE"]
+        assert captured["body"]["generationConfig"]["imageConfig"]["aspectRatio"] == "16:9"
+
+    def test_honors_env_overrides_for_project_location_model(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("VAPE_GEMINI_IMAGE_PROJECT", "999")
+        monkeypatch.setenv("VAPE_GEMINI_IMAGE_LOCATION", "global")
+        monkeypatch.setenv("VAPE_GEMINI_IMAGE_MODEL", "some-other-image-model")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            return _fake_image_response("")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_gemini_image("prompt")
+        assert captured["url"] == (
+            "https://aiplatform.googleapis.com/v1/projects/999"
+            "/locations/global/publishers/google/models/some-other-image-model:generateContent")
+
+    def test_returns_none_on_http_error(self, monkeypatch, capsys):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+
+        def fake_urlopen(req, timeout=None):
+            raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", {},
+                                          io.BytesIO(b'{"error":{"message":"bad modality"}}'))
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_gemini_image("prompt") is None
+        assert "bad modality" in capsys.readouterr().err
+
+    def test_returns_none_when_response_has_no_inline_image(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_vertex_response("just text, no image")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_gemini_image("prompt") is None
+
+
 class TestOciGrok:
     """agents/llm.py's third candidate — Oracle Cloud's hosted xAI Grok 4.3,
     reached via OCI's OpenAI-compatible endpoint (same request/response

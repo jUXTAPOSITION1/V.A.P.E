@@ -196,3 +196,66 @@ def test_brand_image_returns_none_on_corrupt_image_bytes(tmp_path, monkeypatch):
 
 def test_fetch_image_bytes_rejects_non_public_url():
     assert nc._fetch_image_bytes("http://169.254.169.254/latest/meta-data/") is None
+
+
+def test_fetch_image_bytes_passes_through_raw_bytes_unchanged():
+    """The AI-generation tier hands brand_image() already-decoded image
+    bytes directly (llm.ask_gemini_image()'s return value) -- no URL/path
+    fetch needed, unlike the real-photo/local-asset cases."""
+    raw = b"\x89PNG-already-decoded-bytes"
+    assert nc._fetch_image_bytes(raw) == raw
+
+
+def test_brand_image_stamps_raw_bytes_source(tmp_path, monkeypatch):
+    """Confirms the AI-image-generation tier can go straight from
+    ask_gemini_image()'s in-memory bytes to a branded file, with no
+    intermediate fetch/save-then-refetch round trip."""
+    monkeypatch.setattr(nc, "NEWS_IMAGES_DIR", str(tmp_path / "news-images"))
+    import io as _io
+    from PIL import Image
+    buf = _io.BytesIO()
+    Image.new("RGB", (500, 400), (10, 20, 30)).save(buf, "PNG")
+
+    out = nc.brand_image(buf.getvalue(), "ai-slug")
+    assert out == "assets/news-images/ai-slug.jpg"
+    assert (tmp_path / "news-images" / "ai-slug.jpg").exists()
+
+
+def test_scrape_article_text_normalizes_firecrawl_shape(monkeypatch):
+    import agents.news_common as nc_mod
+
+    def fake_scrape(url):
+        return {"raw": {"markdown": "  Real   article   body   text.  "}}
+
+    monkeypatch.setattr("skillforge.research.scrape", fake_scrape)
+    assert nc_mod.scrape_article_text("https://example.com/story") == "Real article body text."
+
+
+def test_scrape_article_text_normalizes_keyless_fetch_shape(monkeypatch):
+    def fake_scrape(url):
+        return {"content": "Keyless fetch extracted body text here."}
+
+    monkeypatch.setattr("skillforge.research.scrape", fake_scrape)
+    assert nc.scrape_article_text("https://example.com/story") == "Keyless fetch extracted body text here."
+
+
+def test_scrape_article_text_truncates_to_max_len(monkeypatch):
+    def fake_scrape(url):
+        return {"content": "word " * 2000}
+
+    monkeypatch.setattr("skillforge.research.scrape", fake_scrape)
+    result = nc.scrape_article_text("https://example.com/story", max_len=50)
+    assert len(result) == 50
+
+
+def test_scrape_article_text_returns_none_on_failure(monkeypatch):
+    def fake_scrape(url):
+        raise RuntimeError("network down")
+
+    monkeypatch.setattr("skillforge.research.scrape", fake_scrape)
+    assert nc.scrape_article_text("https://example.com/story") is None
+
+
+def test_scrape_article_text_returns_none_when_content_empty(monkeypatch):
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": "   "})
+    assert nc.scrape_article_text("https://example.com/story") is None
