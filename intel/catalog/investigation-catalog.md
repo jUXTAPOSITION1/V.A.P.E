@@ -691,3 +691,5 @@
 | 2026-07-28 | auto | 0xaf412164E9af710d3868A088d759478a5A004444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4 (WPOL) | deep_investigation | CAUTION (55/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-28 | auto | 0x7142b752A1259F5D37A58e47ef60451F5F8038eD (CATE) | deep_investigation | CAUTION (65/100) | Violent 24h move +3641% (volatility/manipulation) | +7d |
