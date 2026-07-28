@@ -323,5 +323,20 @@
     "report": "intel/threat-analysis/2026-07-15-cascade-liquidity-strategy.md",
     "provider": "groq",
     "written_at": "2026-07-27T05:42:11Z"
+  },
+  "2026-07-26:WEMIX": {
+    "report": "intel/threat-analysis/2026-07-26-wemix.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-28T21:00:41Z"
+  },
+  "2026-07-25:Projekt": {
+    "report": "intel/threat-analysis/2026-07-25-projekt.md",
+    "provider": "groq",
+    "written_at": "2026-07-28T21:00:46Z"
+  },
+  "2026-07-23:Solido Cash": {
+    "report": "intel/threat-analysis/2026-07-23-solido-cash.md",
+    "provider": "xai_1",
+    "written_at": "2026-07-28T21:01:01Z"
   }
 }
