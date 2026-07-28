@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T00:01:40Z",
+  "generated": "2026-07-28T00:05:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 388,
@@ -16,6 +16,7 @@
     },
     "broadcasts": 117,
     "investigations": 436,
+    "news": 4,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1481,6 +1482,52 @@
       "date": "2026-07-20T09:00Z",
       "summary": "2 new VAPE investigation(s) in the last 6h. Base TVL $4.54B, 129 targets on VAPE's permanent record (65 REJECT / 26 CAUTION / 38 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-20-09.md"
+    }
+  ],
+  "news": [
+    {
+      "file": "news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md",
+      "title": "Bitcoin Foundation Headline Alleges XRP Lags Broader Market but Supplies No Evidence or Data",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 00:05 UTC",
+      "topic": "Crypto Markets",
+      "dek": "An unverified claim of three unspecified reasons for Ripple's underperformance appears in a July 2026 post whose body and supporting metrics remain unavailable.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md"
+    },
+    {
+      "file": "news-2026-07-28-thin-sourcing-leaves-usdc-usdt-split-claim-unverifiable.md",
+      "title": "Thin Sourcing Leaves USDC-USDT Split Claim Unverifiable",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 00:01 UTC",
+      "topic": "Stablecoins",
+      "dek": "A headline alone supplies no evidence for claims of two distinct stablecoin economies.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-thin-sourcing-leaves-usdc-usdt-split-claim-unverifiable.md"
+    },
+    {
+      "file": "news-2026-07-28-sparse-data-limits-insight-into-macro-expert-s-alleged-crypt.md",
+      "title": "Sparse Data Limits Insight Into Macro Expert's Alleged Crypto Rotation Call",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 00:00 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A Benzinga headline flags a possible macro-driven shift from AI assets into Bitcoin and Ethereum, yet supplies no supporting details, expert identity, or market context for verification.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-sparse-data-limits-insight-into-macro-expert-s-alleged-crypt.md"
+    },
+    {
+      "file": "news-2026-07-27-thin-data-limits-insight-into-bitcoin-s-stability-ahead-of-f.md",
+      "title": "Thin Data Limits Insight Into Bitcoin's Stability Ahead of Fed Meeting",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-27 23:58 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A single headline offers no figures or context on why Bitcoin steadied before the Federal Reserve decision, leaving market implications unclear.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-27-thin-data-limits-insight-into-bitcoin-s-stability-ahead-of-f.md"
     }
   ],
   "tools": [
