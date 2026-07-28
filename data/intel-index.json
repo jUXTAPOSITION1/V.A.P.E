@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T07:04:53Z",
+  "generated": "2026-07-28T07:20:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 391,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 118,
-    "investigations": 446,
+    "investigations": 447,
     "news": 9,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-070449-0x227f7D02.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u5e01\u6709",
-      "date": "2026-07-28T07:04:49Z",
-      "target": "0x227f7D025B140D9881A00fB4F3f76A4eDa72581f",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260728-072025-0x53DDBC55.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "PROJECT AS TOKEN",
+      "date": "2026-07-28T07:20:25Z",
+      "target": "0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-070449-0x227f7D02.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-072025-0x53DDBC55.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-072025-0x53DDBC55.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "PROJECT AS TOKEN",
+      "date": "2026-07-28T07:20:25Z",
+      "target": "0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-072025-0x53DDBC55.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-070449-0x227f7D02.md",
@@ -594,20 +608,6 @@
       "score": "65",
       "summary": "Risk factors: [-10] Owner not renounced (0x8dafd691ef82f90b23fddb10a67d782f04073bd3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $31,092. Positive evidence: 45758 holders \u2014 reasonably distributed; Trading 147+ days witho",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-114025-0x444045B0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-095629-0x0e4F6209.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-27T09:56:29Z",
-      "target": "0x0e4F6209eD984b21EDEA43acE6e09559eD051D48",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 61% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 2331 holders \u2014 reasonably distributed; Deep liquidity ($1,006,584); Trading 278+ days without a known",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-095629-0x0e4F6209.md"
     }
   ],
   "reports": [

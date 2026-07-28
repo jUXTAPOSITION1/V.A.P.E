@@ -703,3 +703,5 @@
 | 2026-07-28 | auto | 0x95057017d55fd324987A96d8219674081Ece377b (币有) | deep_investigation | REJECT (5/100) | Very few holders (13) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0x227f7D025B140D9881A00fB4F3f76A4eDa72581f (币有) | deep_investigation | REJECT (25/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-28 | auto | 0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87 (AS) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |

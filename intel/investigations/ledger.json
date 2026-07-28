@@ -392,6 +392,24 @@
     "symbol": "WETH",
     "times_investigated": 1
   },
+  "137:0x53ddbc55613f4cf51f26e477c9be46fe351cad87": {
+    "address": "0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87",
+    "chain": "137",
+    "first_investigated": "2026-07-28T07:20:25Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-072025-0x53DDBC55.md",
+        "score": 47,
+        "ts": "2026-07-28T07:20:25Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T07:20:25Z",
+    "last_score": 47,
+    "last_verdict": "REJECT",
+    "symbol": "AS",
+    "times_investigated": 1
+  },
   "137:0x6a92b1e99de09f71cd96bc91f934826d96b8b26e": {
     "address": "0x6A92B1E99De09f71CD96BC91F934826d96B8b26E",
     "chain": "137",
