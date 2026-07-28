@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-28T15:56:46Z — 185 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-28T16:27:16Z — 186 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| 币有 | BNB Chain | `0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444` | 40/100 | 1 | 2026-07-28T16:27:16Z |
 | LAMBO | Avalanche | `0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b` | 35/100 | 1 | 2026-07-28T15:56:46Z |
 | fBOMB | Avalanche | `0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9` | 30/100 | 1 | 2026-07-28T15:09:06Z |
 | DOGE1 | Ethereum | `0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805` | 18/100 | 1 | 2026-07-28T14:54:01Z |

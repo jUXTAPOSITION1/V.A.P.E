@@ -743,3 +743,5 @@
 | 2026-07-28 | auto | 0x18E3605B13F10016901eAC609b9E188CF7c18973 (HEFE) | deep_investigation | CAUTION (75/100) | Low liquidity $35,536 | +7d |
 
 | 2026-07-28 | auto | 0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b (LAMBO) | deep_investigation | REJECT (35/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-07-28 | auto | 0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |

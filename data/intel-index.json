@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T16:12:10Z",
+  "generated": "2026-07-28T16:27:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 396,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 466,
+    "investigations": 467,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-155646-0x6F43fF77.md",
-      "title": "Investigation \u2014 LAMBO",
-      "symbol": "LAMBO",
-      "name": "LAMBO",
-      "date": "2026-07-28T15:56:46Z",
-      "target": "0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b",
-      "chain": "43114 (Avalanche)",
+      "file": "investigation-20260728-162716-0xa7Aee6cB.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5e01",
+      "date": "2026-07-28T16:27:16Z",
+      "target": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,017. Positive evidence: Ownership renounced; 17984 holders \u2014 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-155646-0x6F43fF77.md"
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-162716-0xa7Aee6cB.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-162716-0xa7Aee6cB.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u4f55\u5e01",
+      "date": "2026-07-28T16:27:16Z",
+      "target": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-162716-0xa7Aee6cB.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-155646-0x6F43fF77.md",
@@ -594,20 +608,6 @@
       "score": "60",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $18,513. Positive evidence: Ownership renounced; 722 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 837+ da",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-171331-0xfCF79856.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-161238-0xA64aC4eC.md",
-      "title": "Investigation \u2014 RWA",
-      "symbol": "RWA",
-      "name": "Real World Acquisitions",
-      "date": "2026-07-27T16:12:38Z",
-      "target": "0xA64aC4eCc7302Ba4dCF1F9Cc8856Ac5C2eD2C581",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-10] Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) \u2014 can still act on the contract; [-8] Low holder count (66); [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +634% (volatility/manipulation); [-15] Pair only 0.8 days ol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-161238-0xA64aC4eC.md"
     }
   ],
   "reports": [
