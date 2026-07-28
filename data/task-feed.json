@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-28T13:23:38Z",
-  "synthesis": "[investigation]",
+  "generated": "2026-07-28T13:38:32Z",
+  "synthesis": "VAPE's automation repeatedly featured investigations every 15 minutes while running bounty radar sweeps, reputation snapshots, repo reviews, news-intel, skillforge builds, and base sweeps.",
   "tasks": [
+    {
+      "sha": "86372bd641",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-28T13:23Z",
+      "date": "2026-07-28T13:23:50Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/86372bd64122077758ac3554834a7c669731835c"
+    },
     {
       "sha": "3fea2d78fc",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "base_sweep 2026-07-28T11:10Z",
       "date": "2026-07-28T11:10:17Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ec3e221a962493c20ad31f5cfb8f16af17ecc19a"
-    },
-    {
-      "sha": "5fa6ad2e2c",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-28T11:08Z",
-      "date": "2026-07-28T11:08:46Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5fa6ad2e2ca060b333592a6186629be34c565c07"
     }
   ]
 }
