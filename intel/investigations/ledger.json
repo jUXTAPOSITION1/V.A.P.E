@@ -1645,6 +1645,25 @@
     "symbol": "FWA",
     "times_investigated": 1
   },
+  "1:0xa10c39aba4a9a392683414ff9d8809cd5fc03f24": {
+    "address": "0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24",
+    "chain": "1",
+    "creator_address": "0x1046258fb5bfd449fda4597e156404c25a310eb7",
+    "first_investigated": "2026-07-28T17:27:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-172729-0xa10C39aB.md",
+        "score": 55,
+        "ts": "2026-07-28T17:27:29Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-28T17:27:29Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "FERRET",
+    "times_investigated": 1
+  },
   "1:0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3": {
     "address": "0xA12CC123ba206d4031D1c7f6223D1C2Ec249f4f3",
     "chain": "1",

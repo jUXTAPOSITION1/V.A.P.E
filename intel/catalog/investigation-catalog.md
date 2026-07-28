@@ -747,3 +747,5 @@
 | 2026-07-28 | auto | 0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0xDDB3422497E61e13543BeA06989C0789117555c5 (COTI) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-28 | auto | 0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24 (FERRET) | deep_investigation | CAUTION (55/100) | Low liquidity $26,431 | +7d |

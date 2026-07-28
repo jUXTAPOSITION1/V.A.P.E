@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-28T17:12:22Z — 85 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-28T17:27:29Z — 86 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| FERRET | Ethereum | `0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24` | 55/100 | 1 | 2026-07-28T17:27:29Z |
 | COTI | Ethereum | `0xDDB3422497E61e13543BeA06989C0789117555c5` | 63/100 | 1 | 2026-07-28T17:12:22Z |
 | HEFE | Avalanche | `0x18E3605B13F10016901eAC609b9E188CF7c18973` | 75/100 | 1 | 2026-07-28T15:41:11Z |
 | DOGE-1 | Ethereum | `0xc5b0251daCFaB74bc2deBaa52072a2A4c939c105` | 75/100 | 1 | 2026-07-28T14:08:37Z |
