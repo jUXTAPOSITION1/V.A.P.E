@@ -2180,6 +2180,25 @@
     "symbol": "IBNAi",
     "times_investigated": 1
   },
+  "1:0xffe203b59393593965842439ce1e7d7c78109b46": {
+    "address": "0xFfE203b59393593965842439ce1E7D7c78109b46",
+    "chain": "1",
+    "creator_address": "0xb8c41e0ac70fcad3d58294e91510d12bb71b8b56",
+    "first_investigated": "2026-07-28T14:39:00Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-143900-0xFfE203b5.md",
+        "score": 100,
+        "ts": "2026-07-28T14:39:00Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-28T14:39:00Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "Doge-1",
+    "times_investigated": 1
+  },
   "42161:0x0a1a1a107e45b7ced86833863f482bc5f4ed82ef": {
     "address": "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
     "chain": "42161",

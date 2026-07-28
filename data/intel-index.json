@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T14:23:39Z",
+  "generated": "2026-07-28T14:39:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 461,
+    "investigations": 462,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-142334-0xD7217065.md",
-      "title": "Investigation \u2014 DOGE1",
-      "symbol": "DOGE1",
-      "name": "DOGE-1",
-      "date": "2026-07-28T14:23:34Z",
-      "target": "0xD721706581d97eCd202bBab5c71b5a85f0F78E69",
+      "file": "investigation-20260728-143900-0xFfE203b5.md",
+      "title": "Investigation \u2014 Doge-1",
+      "symbol": "Doge-1",
+      "name": "Satellite Doge-1 Mission",
+      "date": "2026-07-28T14:39:00Z",
+      "target": "0xFfE203b59393593965842439ce1E7D7c78109b46",
       "chain": "1 (Ethereum)",
       "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Violent 24h move +169% (volatility/manipulation). Positive evidence: Ownership renounced; 3578 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1029+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-142334-0xD7217065.md"
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 5455 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1032+ days without a known incident in this scan; Custom verified source (not a mass-produced factor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-143900-0xFfE203b5.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-143900-0xFfE203b5.md",
+      "title": "Investigation \u2014 Doge-1",
+      "symbol": "Doge-1",
+      "name": "Satellite Doge-1 Mission",
+      "date": "2026-07-28T14:39:00Z",
+      "target": "0xFfE203b59393593965842439ce1E7D7c78109b46",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 5455 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1032+ days without a known incident in this scan; Custom verified source (not a mass-produced factor",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-143900-0xFfE203b5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-142334-0xD7217065.md",
@@ -594,20 +608,6 @@
       "score": "19",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x48808568033ae06eda42def343102de46b2a343f) \u2014 can still act on the contract; [-8] Low holder count (59); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-135618-0x0ffd9608.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-125631-0x604448c8.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "OneCoin",
-      "date": "2026-07-27T12:56:31Z",
-      "target": "0x604448c8f009135e913C7e0E4Bef692B0003A02A",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 7217 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 435+ days without a known incident in this scan; Custom verified source (not",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-125631-0x604448c8.md"
     }
   ],
   "reports": [

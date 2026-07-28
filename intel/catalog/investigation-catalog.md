@@ -733,3 +733,5 @@
 | 2026-07-28 | auto | 0xc5b0251daCFaB74bc2deBaa52072a2A4c939c105 (DOGE-1) | deep_investigation | CAUTION (75/100) | Transfers can be paused by owner | +7d |
 
 | 2026-07-28 | auto | 0xD721706581d97eCd202bBab5c71b5a85f0F78E69 (DOGE1) | deep_investigation | PROCEED (90/100) | Violent 24h move +169% (volatility/manipulation) | +7d |
+
+| 2026-07-28 | auto | 0xFfE203b59393593965842439ce1E7D7c78109b46 (Doge-1) | deep_investigation | PROCEED (100/100) | clean | +7d |
