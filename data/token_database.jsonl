@@ -55,3 +55,4 @@
 {"ts": "2026-07-28T17:42:45.196543Z", "address": "0x912CE59144191C1204E64559FE8253a0e49E6548", "chain": "42161", "symbol": "ARB", "name": "ARB", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-28T19:29:48.729877Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-07-28T20:45:40.012541Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "exploit_check"}
+{"ts": "2026-07-28T22:32:06.070418Z", "address": "0x25118290e6A5f4139381D072181157035864099d", "chain": "42161", "symbol": "RAIN", "name": "RAIN", "source": "evm", "offering": "token_safety_check"}
