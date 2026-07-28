@@ -755,3 +755,5 @@
 | 2026-07-28 | auto | 0xBcBDA13Bd60bC0e91745186E274D1445078D6b33 (FERRET) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 65% of supply — meaningful concentration | +7d |
 
 | 2026-07-28 | auto | 0xAf2CA40d3fc4459436D11B94d21FA4b8A89fB51d (gCOTI) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-28 | auto | 0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |

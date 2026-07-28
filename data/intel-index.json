@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T18:16:03Z",
+  "generated": "2026-07-28T18:28:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 399,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 472,
+    "investigations": 473,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-181324-0xAf2CA40d.md",
-      "title": "Investigation \u2014 gCOTI",
-      "symbol": "gCOTI",
-      "name": "gCOTI Token",
-      "date": "2026-07-28T18:13:24Z",
-      "target": "0xAf2CA40d3fc4459436D11B94d21FA4b8A89fB51d",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $9,476 (rug/illiquid); [-10] Low liquidity $9,476. Positive evidence: 624 holders \u2014 reasonably distributed; Trading 993+ days without a known ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-181324-0xAf2CA40d.md"
+      "file": "investigation-20260728-182850-0x1884Cc72.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI POWERED FINANCE",
+      "date": "2026-07-28T18:28:50Z",
+      "target": "0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 15450 holders \u2014 reasonably distributed; Trading 120+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-182850-0x1884Cc72.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-182850-0x1884Cc72.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI POWERED FINANCE",
+      "date": "2026-07-28T18:28:50Z",
+      "target": "0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 15450 holders \u2014 reasonably distributed; Trading 120+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-182850-0x1884Cc72.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-181324-0xAf2CA40d.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-10] Violent 24h move +591% (volatility/manipulation); [-5] Pair 25.4 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 9245 holders \u2014 reasonably distributed; 10",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-220018-0xd0bc8Ab3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-213015-0x84481040.md",
-      "title": "Investigation \u2014 CATE",
-      "symbol": "CATE",
-      "name": "Catecoin",
-      "date": "2026-07-27T21:30:15Z",
-      "target": "0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $26,479; [-10] Violent 24h move +4168% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 921 holder",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-213015-0x84481040.md"
     }
   ],
   "reports": [
