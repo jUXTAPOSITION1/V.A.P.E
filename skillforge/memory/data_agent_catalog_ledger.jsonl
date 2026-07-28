@@ -179,3 +179,4 @@
 {"ts": "2026-07-27T23:15:24.483696Z", "target": "polygon", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
 {"ts": "2026-07-27T23:45:32.037088Z", "target": "sphere-finance", "hired": ["treasury"], "paid": 0, "cost_usd": 0.0, "daily_target": 51}
 {"ts": "2026-07-28T00:16:18.325842Z", "target": "stargate-v2", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
+{"ts": "2026-07-28T00:46:28.893389Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
