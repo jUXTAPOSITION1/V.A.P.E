@@ -2883,6 +2883,25 @@
     "symbol": "KABOSU",
     "times_investigated": 1
   },
+  "56:0x95057017d55fd324987a96d8219674081ece377b": {
+    "address": "0x95057017d55fd324987A96d8219674081Ece377b",
+    "chain": "56",
+    "creator_address": "0xb4deb4e6e390f996cde0190f8a5633073d908f82",
+    "first_investigated": "2026-07-28T06:49:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-064932-0x95057017.md",
+        "score": 5,
+        "ts": "2026-07-28T06:49:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T06:49:32Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "\u5e01\u6709",
+    "times_investigated": 1
+  },
   "56:0x9a6cb2c43a3454c8db4e89e4e031fdcfc8769a02": {
     "address": "0x9a6Cb2C43A3454c8DB4e89e4e031FDcFC8769A02",
     "chain": "56",

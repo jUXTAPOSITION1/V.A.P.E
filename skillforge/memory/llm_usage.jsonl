@@ -1207,3 +1207,5 @@
 {"ts": "2026-07-28T06:19:20Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1180, "completion_tokens": 40, "total_tokens": 1667}
 {"ts": "2026-07-28T06:34:09Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1096, "completion_tokens": 336, "total_tokens": 1912}
 {"ts": "2026-07-28T06:34:23Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91935, "completion_tokens": 3, "total_tokens": 92051}
+{"ts": "2026-07-28T06:49:29Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1083, "completion_tokens": 283, "total_tokens": 2048}
+{"ts": "2026-07-28T06:49:43Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1027, "completion_tokens": 21, "total_tokens": 1048}
