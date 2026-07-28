@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-28T18:44:08Z",
-  "synthesis": "1)",
+  "generated": "2026-07-28T18:59:01Z",
+  "synthesis": "VAPE's automation repeatedly generated featured investigations while running bounty radar sweeps, skillforge harvests, and repo reviews.",
   "tasks": [
+    {
+      "sha": "e629443971",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-28T18:54Z",
+      "date": "2026-07-28T18:54:28Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e6294439710c26492fc9bc8eb8081d35b3936975"
+    },
+    {
+      "sha": "97b81ca99d",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-28T18:48Z",
+      "date": "2026-07-28T18:48:55Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/97b81ca99d0f5e09a26989a1ddf49f2c0d15591e"
+    },
+    {
+      "sha": "20108f4b0c",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-28T18:44Z",
+      "date": "2026-07-28T18:44:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/20108f4b0cb30411f06ca515862b3060b8c38df5"
+    },
     {
       "sha": "2b3cf9cc8f",
       "kind": "automation",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-28T16:57Z",
       "date": "2026-07-28T16:57:30Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2b2af5ab79c5b824c5945b64bdef95be5eeb0cd4"
-    },
-    {
-      "sha": "d32f303a94",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-28T16:52Z",
-      "date": "2026-07-28T16:52:31Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d32f303a949306e0df4945a25d45355606432bd1"
-    },
-    {
-      "sha": "1cb050b902",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-28T16:42Z",
-      "date": "2026-07-28T16:42:44Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1cb050b902df4b25fdea29316cac129ab2430e14"
-    },
-    {
-      "sha": "2c7937bcdf",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-07-28T16:41Z",
-      "date": "2026-07-28T16:41:27Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2c7937bcdf32951e5b971ac0c1845284a8cda217"
     }
   ]
 }
