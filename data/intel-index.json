@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T13:53:27Z",
+  "generated": "2026-07-28T14:06:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 119,
     "investigations": 459,
-    "news": 11,
+    "news": 12,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-ai-payments-surge-past-100m-on-base-as-storj-bankruptcy-sign.md",
+      "title": "AI Payments Surge Past 100M on Base as Storj Bankruptcy Signals Decentralized Storage Stress",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 14:06 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Coinbase CEO Brian Armstrong champions \"AiFi\" machine-to-machine payments as a major industry catalyst, even as legacy decentralized infrastructure provider Storj enters Chapter 11 restructuring.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-ai-payments-surge-past-100m-on-base-as-storj-bankruptcy-sign.md"
+    },
     {
       "file": "news-2026-07-28-double-blow-for-crypto-south-korean-market-rout-and-shelved-.md",
       "title": "Double Blow for Crypto: South Korean Market Rout and Shelved Senate Bill Trigger Risk-Off Sell-Off",
