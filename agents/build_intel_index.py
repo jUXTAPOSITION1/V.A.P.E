@@ -367,6 +367,7 @@ def main():
     reports = scan_reports()
     broadcasts = scan_broadcasts()
     investigations = scan_investigations()
+    news = scan_news()
     tools = scan_tools()
     skills = scan_skills()
 
@@ -386,6 +387,7 @@ def main():
             "reports_by_type": by_type,
             "broadcasts": len(broadcasts),
             "investigations": len(investigations),
+            "news": len(news),
             "tools": len(tools),
             "tools_verified": sum(1 for t in tools if t.get("status") == "verified"),
             "skills": len(skills),
@@ -397,6 +399,7 @@ def main():
         "investigations": investigations[:40],
         "reports": reports[:60],
         "broadcasts": broadcasts[:30],
+        "news": news[:60],
         "tools": tools,
         "skills": skills,
     }
