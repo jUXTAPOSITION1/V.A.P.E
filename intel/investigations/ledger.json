@@ -3071,6 +3071,25 @@
     "symbol": "AKE",
     "times_investigated": 1
   },
+  "56:0xb7e4183260bfc5ed9965f723bf739451c7757f89": {
+    "address": "0xb7E4183260BfC5ED9965f723bF739451c7757f89",
+    "chain": "56",
+    "creator_address": "0x6984c0efbdd62505542b3cad5e97f2b020f15d19",
+    "first_investigated": "2026-07-28T09:53:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-095316-0xb7E41832.md",
+        "score": 25,
+        "ts": "2026-07-28T09:53:16Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T09:53:16Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "\u5e01\u6709",
+    "times_investigated": 1
+  },
   "56:0xcb362b3701ef6f811dcdcd702482812d0cf34444": {
     "address": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
     "chain": "56",

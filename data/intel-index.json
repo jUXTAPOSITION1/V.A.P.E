@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T09:38:07Z",
+  "generated": "2026-07-28T09:53:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 392,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 450,
+    "investigations": 451,
     "news": 10,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-093806-0x22D418A8.md",
+      "file": "investigation-20260728-095316-0xb7E41832.md",
       "title": "Investigation \u2014 \u5e01\u6709",
       "symbol": "\u5e01\u6709",
       "name": "\u5e01\u6709",
-      "date": "2026-07-28T09:38:06Z",
-      "target": "0x22D418A8d69d5AacfaeDf84653448a8591d5e63B",
+      "date": "2026-07-28T09:53:16Z",
+      "target": "0xb7E4183260BfC5ED9965f723bF739451c7757f89",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-093806-0x22D418A8.md"
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-095316-0xb7E41832.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-095316-0xb7E41832.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T09:53:16Z",
+      "target": "0xb7E4183260BfC5ED9965f723bF739451c7757f89",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-095316-0xb7E41832.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-093806-0x22D418A8.md",
@@ -594,20 +608,6 @@
       "score": "52",
       "summary": "Risk factors: [-10] Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timest",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122325-0x11030f79.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122310-0x0C1c1C10.md",
-      "title": "Investigation \u2014 CHIP",
-      "symbol": "CHIP",
-      "name": "Chip",
-      "date": "2026-07-27T12:23:10Z",
-      "target": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
-      "chain": "42161 (Arbitrum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 76% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5196 holders \u2014 reasonably distributed; Deep liquidity ($1,126,315",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122310-0x0C1c1C10.md"
     }
   ],
   "reports": [
