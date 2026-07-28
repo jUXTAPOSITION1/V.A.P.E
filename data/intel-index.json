@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T12:08:21Z",
+  "generated": "2026-07-28T12:23:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 454,
+    "investigations": 455,
     "news": 11,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-120818-0x6224e0f5.md",
+      "file": "investigation-20260728-122318-0x942AC36b.md",
       "title": "Investigation \u2014 \u5e01\u6709",
       "symbol": "\u5e01\u6709",
-      "name": "\u4e0d\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u5565\u90fd\u6709",
-      "date": "2026-07-28T12:08:18Z",
-      "target": "0x6224e0f53de461fEEfD4D755dc314FA0324a4444",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T12:23:18Z",
+      "target": "0x942AC36bfB89944CA07EE465A8893201e0764444",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-120818-0x6224e0f5.md"
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-122318-0x942AC36b.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-122318-0x942AC36b.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T12:23:18Z",
+      "target": "0x942AC36bfB89944CA07EE465A8893201e0764444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-122318-0x942AC36b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-120818-0x6224e0f5.md",
@@ -594,20 +608,6 @@
       "score": "31",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-8] Low holder count (81); [-8] Top 10 non-LP/burn holders control 58% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidit",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122413-0x7CfA2a05.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122401-0x940181a9.md",
-      "title": "Investigation \u2014 AERO",
-      "symbol": "AERO",
-      "name": "Aerodrome",
-      "date": "2026-07-27T12:24:01Z",
-      "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Top 10 non-LP/burn holders control 67% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 749599 holders \u2014 reasonably distributed; Deep liquidity ($25,801,038); Trading 1054",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122401-0x940181a9.md"
     }
   ],
   "reports": [
