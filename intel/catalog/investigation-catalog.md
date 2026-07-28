@@ -689,3 +689,5 @@
 | 2026-07-28 | auto | 0x9a6Cb2C43A3454c8DB4e89e4e031FDcFC8769A02 (币有) | deep_investigation | REJECT (0/100) | Very few holders (25) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0xaf412164E9af710d3868A088d759478a5A004444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-28 | auto | 0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4 (WPOL) | deep_investigation | CAUTION (55/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |

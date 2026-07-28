@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-28T01:46:33Z — 79 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-28T02:48:36Z — 80 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| WPOL | Polygon | `0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4` | 55/100 | 1 | 2026-07-28T02:48:36Z |
 | 币有 | BNB Chain | `0x3C0541e68CE0F1F9073E4BA3Db81b730Eb614444` | 55/100 | 1 | 2026-07-28T00:16:13Z |
 | 币有 | BNB Chain | `0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444` | 75/100 | 1 | 2026-07-27T22:00:18Z |
 | CATE | Ethereum | `0x844810406C9a8dD3EBeAB658F526dF0A3172aa1E` | 55/100 | 1 | 2026-07-27T21:30:15Z |

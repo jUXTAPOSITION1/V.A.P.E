@@ -336,6 +336,24 @@
     "symbol": "EBCC",
     "times_investigated": 1
   },
+  "137:0x49fcf04b7eb04d1dfebd8e5fe3dfcf42f69505e4": {
+    "address": "0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4",
+    "chain": "137",
+    "first_investigated": "2026-07-28T02:48:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-024836-0x49Fcf04B.md",
+        "score": 55,
+        "ts": "2026-07-28T02:48:36Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-28T02:48:36Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "WPOL",
+    "times_investigated": 1
+  },
   "137:0x4c18406fa690faa53e5efa899a971557251af72d": {
     "address": "0x4c18406Fa690fAa53E5efa899a971557251Af72d",
     "chain": "137",

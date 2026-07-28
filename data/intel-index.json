@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T02:38:17Z",
+  "generated": "2026-07-28T02:48:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 389,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 117,
-    "investigations": 439,
+    "investigations": 440,
     "news": 8,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-014633-0xaf412164.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5565\u90fd\u6709",
-      "date": "2026-07-28T01:46:33Z",
-      "target": "0xaf412164E9af710d3868A088d759478a5A004444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 1.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-014633-0xaf412164.md"
+      "file": "investigation-20260728-024836-0x49Fcf04B.md",
+      "title": "Investigation \u2014 WPOL",
+      "symbol": "WPOL",
+      "name": "Wrapped Polygon",
+      "date": "2026-07-28T02:48:36Z",
+      "target": "0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Deep liquidity ($3,764,724); Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-024836-0x49Fcf04B.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-024836-0x49Fcf04B.md",
+      "title": "Investigation \u2014 WPOL",
+      "symbol": "WPOL",
+      "name": "Wrapped Polygon",
+      "date": "2026-07-28T02:48:36Z",
+      "target": "0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Deep liquidity ($3,764,724); Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-024836-0x49Fcf04B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-014633-0xaf412164.md",
@@ -594,20 +608,6 @@
       "score": "7",
       "summary": "Risk factors: [-10] Owner not renounced (0xbf71ff1f8284abbc4eb11297bce7f979acf959f7) \u2014 can still act on the contract; [-8] Low holder count (55); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-001238-0xF26662c4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260726-235721-0x8682BaCE.md",
-      "title": "Investigation \u2014 Subject 3",
-      "symbol": "Subject 3",
-      "name": "Subject 3",
-      "date": "2026-07-26T23:57:21Z",
-      "target": "0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 49% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260726-235721-0x8682BaCE.md"
     }
   ],
   "reports": [
