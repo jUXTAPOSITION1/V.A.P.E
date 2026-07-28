@@ -815,6 +815,25 @@
     "symbol": "LGNS",
     "times_investigated": 1
   },
+  "137:0xfb1561214348ee8d8198c06ea0d21232872cdefd": {
+    "address": "0xfb1561214348ee8D8198C06ea0D21232872cDEFd",
+    "chain": "137",
+    "creator_address": "0xa53ea273252d38f2a9acf89f9544262545cf64fe",
+    "first_investigated": "2026-07-28T18:44:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-184403-0xfb156121.md",
+        "score": 27,
+        "ts": "2026-07-28T18:44:03Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T18:44:03Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "AS",
+    "times_investigated": 1
+  },
   "1:0x0000000000000000000000000000000000000000": {
     "address": "0x0000000000000000000000000000000000000000",
     "chain": "1",

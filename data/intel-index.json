@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T18:28:52Z",
+  "generated": "2026-07-28T18:44:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 399,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 473,
+    "investigations": 474,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-182850-0x1884Cc72.md",
-      "title": "Investigation \u2014 AIPF",
-      "symbol": "AIPF",
-      "name": "AI POWERED FINANCE",
-      "date": "2026-07-28T18:28:50Z",
-      "target": "0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02",
+      "file": "investigation-20260728-184403-0xfb156121.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Tokken",
+      "date": "2026-07-28T18:44:03Z",
+      "target": "0xfb1561214348ee8D8198C06ea0D21232872cDEFd",
       "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 15450 holders \u2014 reasonably distributed; Trading 120+ days withou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-182850-0x1884Cc72.md"
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,517 (rug/illiquid); [-10] Low liquidity $5,517. Positiv",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-184403-0xfb156121.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-184403-0xfb156121.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Tokken",
+      "date": "2026-07-28T18:44:03Z",
+      "target": "0xfb1561214348ee8D8198C06ea0D21232872cDEFd",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,517 (rug/illiquid); [-10] Low liquidity $5,517. Positiv",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-184403-0xfb156121.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-182850-0x1884Cc72.md",
@@ -594,20 +608,6 @@
       "score": "22",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x71A64AA011566A33F79eE48ed1491752AEc254b6) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-221530-0x97Fbf256.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-220018-0xd0bc8Ab3.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
-      "date": "2026-07-27T22:00:18Z",
-      "target": "0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Violent 24h move +591% (volatility/manipulation); [-5] Pair 25.4 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 9245 holders \u2014 reasonably distributed; 10",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-220018-0xd0bc8Ab3.md"
     }
   ],
   "reports": [
