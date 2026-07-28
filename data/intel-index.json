@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T17:58:03Z",
+  "generated": "2026-07-28T18:13:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 398,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 471,
+    "investigations": 472,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-175758-0xBcBDA13B.md",
-      "title": "Investigation \u2014 FERRET",
-      "symbol": "FERRET",
-      "name": "Ferret AI",
-      "date": "2026-07-28T17:57:58Z",
-      "target": "0xBcBDA13Bd60bC0e91745186E274D1445078D6b33",
+      "file": "investigation-20260728-181324-0xAf2CA40d.md",
+      "title": "Investigation \u2014 gCOTI",
+      "symbol": "gCOTI",
+      "name": "gCOTI Token",
+      "date": "2026-07-28T18:13:24Z",
+      "target": "0xAf2CA40d3fc4459436D11B94d21FA4b8A89fB51d",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-10] Low liquidity $21,191. Positive evidence: Ownership renounced; 2316 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 924+ days without a known incident in this scan; Custom",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-175758-0xBcBDA13B.md"
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $9,476 (rug/illiquid); [-10] Low liquidity $9,476. Positive evidence: 624 holders \u2014 reasonably distributed; Trading 993+ days without a known ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-181324-0xAf2CA40d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-181324-0xAf2CA40d.md",
+      "title": "Investigation \u2014 gCOTI",
+      "symbol": "gCOTI",
+      "name": "gCOTI Token",
+      "date": "2026-07-28T18:13:24Z",
+      "target": "0xAf2CA40d3fc4459436D11B94d21FA4b8A89fB51d",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $9,476 (rug/illiquid); [-10] Low liquidity $9,476. Positive evidence: 624 holders \u2014 reasonably distributed; Trading 993+ days without a known ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-181324-0xAf2CA40d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-175758-0xBcBDA13B.md",
@@ -594,20 +608,6 @@
       "score": "55",
       "summary": "Risk factors: [-10] Low liquidity $26,479; [-10] Violent 24h move +4168% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 921 holder",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-213015-0x84481040.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-210021-0xE441E2e1.md",
-      "title": "Investigation \u2014 SLGNS",
-      "symbol": "SLGNS",
-      "name": "Staked Longinus",
-      "date": "2026-07-27T21:00:21Z",
-      "target": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-210021-0xE441E2e1.md"
     }
   ],
   "reports": [
@@ -1713,7 +1713,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49230922",
+      "version": "49236251",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1723,7 +1723,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.37 eth_dom 10.1 mcap_chg_24h -1.65",
+      "version": "btc_dom 56.39 eth_dom 10.12 mcap_chg_24h -1.87",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

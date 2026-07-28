@@ -753,3 +753,5 @@
 | 2026-07-28 | auto | 0x317C63Fdf448779923fe9b845E4A58CB4d224e56 (Ferret) | deep_investigation | REJECT (47/100) | Low holder count (191) | +7d |
 
 | 2026-07-28 | auto | 0xBcBDA13Bd60bC0e91745186E274D1445078D6b33 (FERRET) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 65% of supply — meaningful concentration | +7d |
+
+| 2026-07-28 | auto | 0xAf2CA40d3fc4459436D11B94d21FA4b8A89fB51d (gCOTI) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
