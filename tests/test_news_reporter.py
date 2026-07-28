@@ -83,7 +83,6 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
                      return_value={"available": True, "provider": "tavily",
                                    "results": [{"title": "Corroborating piece", "url": "https://example.com/corr",
                                                 "snippet": "confirms the patch"}]}), \
-         mock.patch.object(nc, "extract_og_image", return_value=None), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
          mock.patch("agents.intel_common.grok_analysis",
@@ -102,39 +101,22 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
     assert "brand mark" in text
 
 
-def test_write_story_brands_real_source_photo_when_no_ai_image(tmp_path, monkeypatch):
+def test_write_story_falls_back_to_brand_mark_when_no_ai_image(tmp_path, monkeypatch):
+    """VAPE never republishes a source outlet's own photo (legal/copyright
+    exposure, explicit direction 2026-07-28) -- when AI generation is
+    unavailable this cycle, the only fallback is VAPE's own brand mark, even
+    if the candidate carries a real photo URL from its discovery lane."""
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
                  "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
                  "image": "https://example.com/real-photo.jpg"}
 
     with mock.patch("agents.intel_common.web_search_snippets",
-                     return_value={"available": False, "provider": None, "results": []}), \
+                     return_value={"available": True, "provider": "tavily",
+                                   "results": [{"title": "Corroborating piece", "url": "https://example.com/corr",
+                                                "snippet": "confirms the rally"}]}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis",
-                     side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
-         mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
-         mock.patch.object(nc, "brand_image", return_value="assets/news-images/rally-deepens.jpg") as brand:
-        path = news_reporter.write_story(candidate)
-
-    text = open(path).read()
-    assert "**Image:** assets/news-images/rally-deepens.jpg" in text
-    assert "Source photo — VAPE Wire branded" in text
-    brand.assert_called_once_with("https://example.com/real-photo.jpg", "rally-deepens")
-
-
-def test_write_story_prefers_ai_generated_image_over_real_photo(tmp_path, monkeypatch):
-    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
-    candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
-                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
-                 "image": "https://example.com/real-photo.jpg"}
-
-    with mock.patch("agents.intel_common.web_search_snippets",
-                     return_value={"available": False, "provider": None, "results": []}), \
-         mock.patch.object(nc, "scrape_article_text", return_value=None), \
-         mock.patch.object(news_reporter, "_generate_ai_image",
-                            return_value="assets/news-images/rally-deepens.jpg") as gen_ai, \
          mock.patch("agents.intel_common.grok_analysis",
                      side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
@@ -142,10 +124,32 @@ def test_write_story_prefers_ai_generated_image_over_real_photo(tmp_path, monkey
         path = news_reporter.write_story(candidate)
 
     text = open(path).read()
+    assert "**Image:** assets/logo-v-256.png" in text
+    assert "brand mark" in text
+    brand.assert_not_called()  # no source-photo tier exists to call it from
+
+
+def test_write_story_uses_ai_generated_image_when_available(tmp_path, monkeypatch):
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets"}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily",
+                                   "results": [{"title": "Corroborating piece", "url": "https://example.com/corr",
+                                                "snippet": "confirms the rally"}]}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image",
+                            return_value="assets/news-images/rally-deepens.jpg") as gen_ai, \
+         mock.patch("agents.intel_common.grok_analysis",
+                     side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
+        path = news_reporter.write_story(candidate)
+
+    text = open(path).read()
     assert "**Image:** assets/news-images/rally-deepens.jpg" in text
-    assert "AI-generated (Google Gemini) — VAPE Wire branded" in text
+    assert "AI-generated — VAPE Wire branded" in text
     gen_ai.assert_called_once()
-    brand.assert_not_called()  # the real-photo tier must never even attempt branding once tier 1 succeeds
 
 
 def test_image_prompt_returns_none_when_llm_unavailable():
@@ -204,3 +208,89 @@ def test_write_story_includes_native_rss_snippet_in_grounding(tmp_path, monkeypa
 
     assert "Source outlet's own summary:" in captured["grounding"]
     assert "Bitcoin surged past $100,000" in captured["grounding"]
+
+
+def test_write_story_returns_none_when_nothing_sourceable(tmp_path, monkeypatch):
+    """The 'only report on what we can source' gate (explicit direction,
+    2026-07-28): a bare headline with no scraped body, no outlet snippet,
+    and no corroborating search hit must never reach the drafting LLM call
+    -- it has nothing real to report on."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some thin headline", "url": "https://example.com/thin",
+                 "source": "Nowhere", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets"}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.intel_common.grok_analysis") as grok:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    grok.assert_not_called()  # no LLM spend on a candidate with nothing real to report
+
+
+def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):
+    """A native-RSS candidate.get('snippet') alone is enough real substance
+    to clear the gate, even with no scrape and no corroboration."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some thin headline", "url": "https://example.com/thin",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary of what happened."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
+         mock.patch("agents.intel_common.grok_analysis",
+                     side_effect=["HEADLINE: Title\nDEK: Dek.\n---\nBody.", "Body."]), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
+        result = news_reporter.write_story(candidate)
+
+    assert result is not None
+
+
+def test_run_retries_next_candidate_when_one_has_no_substance(tmp_path, monkeypatch):
+    """run()'s bounded retry loop: a thin, unsourceable headline is marked
+    reported and skipped without stopping the cycle -- the next candidate
+    still gets a real shot at NEWS_REPORTER_PICKS."""
+    monkeypatch.setattr(nc, "FEED_PATH", str(tmp_path / "news-feed.json"))
+    monkeypatch.setattr(nc, "STATE_PATH", str(tmp_path / "news-state.json"))
+    monkeypatch.setenv("NEWS_REPORTER_PICKS", "1")
+    with open(nc.FEED_PATH, "w") as f:
+        json.dump({"headlines": [
+            {"title": "Thin headline", "url": "https://a.example/1", "topic": "base"},
+            {"title": "Real headline", "url": "https://b.example/2", "topic": "macro"},
+        ]}, f)
+
+    calls = {"n": 0}
+
+    def fake_write_story(candidate):
+        calls["n"] += 1
+        return None if candidate["url"] == "https://a.example/1" else f"{tmp_path}/written.md"
+
+    with mock.patch.object(news_reporter, "write_story", side_effect=fake_write_story):
+        written = news_reporter.run()
+
+    assert written == [f"{tmp_path}/written.md"]
+    assert calls["n"] == 2
+    state = nc.load_state()
+    assert nc.is_reported(state, "https://a.example/1")
+    assert nc.is_reported(state, "https://b.example/2")
+
+
+def test_run_stops_after_bounded_attempts_on_an_all_thin_feed(tmp_path, monkeypatch):
+    """A feed where every headline is unsourceable must not retry forever --
+    bounded at max(n*3, 3) attempts."""
+    monkeypatch.setattr(nc, "FEED_PATH", str(tmp_path / "news-feed.json"))
+    monkeypatch.setattr(nc, "STATE_PATH", str(tmp_path / "news-state.json"))
+    monkeypatch.setenv("NEWS_REPORTER_PICKS", "1")
+    with open(nc.FEED_PATH, "w") as f:
+        json.dump({"headlines": [
+            {"title": f"Thin {i}", "url": f"https://a.example/{i}", "topic": "base"} for i in range(5)
+        ]}, f)
+
+    with mock.patch.object(news_reporter, "write_story", return_value=None) as ws:
+        written = news_reporter.run()
+
+    assert written == []
+    assert ws.call_count == 3  # max(1*3, 3)

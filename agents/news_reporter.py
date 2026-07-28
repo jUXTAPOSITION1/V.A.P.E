@@ -31,26 +31,26 @@ _editorial_pass() reviews that draft against the same sourced material with
 a second, independent call before it ships — catching unsupported claims
 the drafting prompt's own instructions missed, not just restating them.
 
-Images, in priority order (explicit direction, 2026-07-28):
-  1. AI-generated via Google Cloud's own Gemini image model ("Nano Banana",
-     agents/llm.py::ask_gemini_image()) -- a fresh, editorial-style
-     illustration described by a dedicated LLM call (_image_prompt())
-     grounded in this specific story's real headline/dek/body, not a
-     generic template. This is VAPE's real image-generation route now that
-     it's Google Cloud's own infrastructure, not a third-party paid API
-     (the earlier xAI-based generate_image(), removed 2026-07-27, was
-     scrapped specifically because it billed against a separate, credit-
-     constrained xAI account -- that constraint doesn't apply to VAPE's own
-     Vertex AI project).
-  2. A real photo -- one the discovered story already carried (e.g.
-     CoinGecko's own thumbnail) or scraped from the source/corroborating
-     article's og:image -- as the backup if AI generation is unavailable
-     or fails this cycle.
-  3. VAPE's own brand mark as the final, always-available fallback.
-Every real photo AND every AI-generated image gets VAPE Wire's V-mark +
-wordmark stamped on via brand_image() before publication; the logo-only
-fallback (tier 3) is already 100% branded and skips that step. Every report
-records which tier it actually got via the Image source field.
+Images, in priority order (explicit direction, 2026-07-28 -- revised same
+day to drop the real-photo tier entirely: republishing another outlet's own
+photo of a story it broke is a real copyright exposure VAPE shouldn't carry,
+regardless of technical feasibility):
+  1. AI-generated, described by a fresh, story-specific prompt
+     (_image_prompt(), grounded in the real headline/dek/body, not a
+     generic template) and tried against two independent models in order:
+     Google's Gemini image model first (agents/llm.py::ask_gemini_image(),
+     a free attempt -- VAPE's own Vertex AI project, no separate per-image
+     billing beyond what's provisioned there once enabled), then xAI's Grok
+     Image (agents/llm.py::ask_xai_image()) as the model that actually works
+     today, since Gemini's free tier can't yet serve this specific model
+     (confirmed real HTTP 429 "quota exceeded ... limit: 0" from a live
+     dispatch).
+  2. VAPE's own brand mark as the always-available fallback if both AI
+     models are unavailable or fail this cycle -- no source-photo tier.
+Every AI-generated image gets VAPE Wire's V-mark + wordmark stamped on via
+brand_image() before publication; the logo-only fallback (tier 2) is
+already 100% branded and skips that step. Every report records which tier
+it actually got via the Image source field.
 
 Picks NEWS_REPORTER_PICKS stories per run (env, default 1) — run cadence
 (the calling workflow) controls daily volume, not this script.
@@ -180,30 +180,31 @@ def _image_prompt(headline, dek, body, topic_label):
 
 
 def _generate_ai_image(headline, dek, body, topic_label, slug):
-    """Tier 1 of the image chain (see module docstring): Google Cloud's own
-    Gemini image model, described by a fresh prompt grounded in this
-    specific story. Returns the branded site-relative path on success, or
-    None on any failure (no description, no Vertex credentials this run,
-    the model call itself fails) -- callers fall through to the real-photo
-    tier exactly as if this function didn't exist."""
+    """Tier 1 of the image chain (see module docstring): one fresh prompt,
+    grounded in this specific story, tried against two independent image
+    models in order -- Google's Gemini image model first (ask_gemini_image()
+    -- VAPE's own Vertex AI project, no separate per-image billing beyond
+    what's already provisioned there once enabled), then xAI's Grok Image
+    (ask_xai_image()) as a working fallback while Gemini's free tier can't
+    yet serve this specific model (confirmed real HTTP 429 "quota exceeded
+    ... limit: 0" from a live dispatch). Returns the branded site-relative
+    path on success, or None if the prompt step fails or both models do --
+    callers fall through to the real-photo tier exactly as if this
+    function didn't exist."""
     prompt = _image_prompt(headline, dek, body, topic_label)
     if not prompt:
         return None
     image_bytes = llm.ask_gemini_image(prompt)
-    if not image_bytes:
-        return None
-    return nc.brand_image(image_bytes, slug)
+    if image_bytes:
+        return nc.brand_image(image_bytes, slug)
+    image_url = llm.ask_xai_image(prompt)
+    if image_url:
+        return nc.brand_image(image_url, slug)
+    return None
 
 
 def write_story(candidate):
     corroboration = ic.web_search_snippets(candidate["title"], max_results=5)
-
-    real_image = candidate.get("image") or nc.extract_og_image(candidate["url"])
-    if not real_image:
-        for r in corroboration.get("results", []):
-            real_image = nc.extract_og_image(r["url"])
-            if real_image:
-                break
 
     # Real substance for the model to actually report on -- see module
     # docstring's "Real substance, not just a headline" note. The primary
@@ -217,6 +218,21 @@ def write_story(candidate):
             article_text = nc.scrape_article_text(r["url"])
             if article_text:
                 break
+
+    # "Only report on what we can source" (explicit direction, 2026-07-28):
+    # a bare headline with no scraped body, no outlet-provided summary, and
+    # no corroborating search hit is not enough real material to write an
+    # actual story from -- every such story before this gate degraded into
+    # the same "thin sourcing, cannot verify anything" filler regardless of
+    # how the drafting prompt was worded (the model was telling the truth
+    # about what little it had). Skip it here, before ever spending an LLM
+    # call, rather than publish a report with nothing in it. Callers must
+    # treat None as "no report written this candidate" and move on to the
+    # next one -- see run()'s retry loop.
+    has_substance = bool(article_text) or bool((candidate.get("snippet") or "").strip()) \
+        or bool(corroboration.get("results"))
+    if not has_substance:
+        return None
 
     topic_label = nc.TOPIC_LABELS.get(candidate.get("topic"), candidate.get("topic") or "General")
     grounding = (
@@ -264,18 +280,11 @@ def write_story(candidate):
     body, fact_checked = _editorial_pass(grounding, body)
 
     slug = nc.slugify(headline)
-    image, image_source = None, None
     ai_image = _generate_ai_image(headline, dek, body, topic_label, slug)
     if ai_image:
-        image, image_source = ai_image, "AI-generated (Google Gemini) — VAPE Wire branded"
-    elif real_image:
-        # Every real photo gets VAPE Wire's own V-mark + wordmark stamped on
-        # before publication -- see brand_image()'s docstring.
-        branded = nc.brand_image(real_image, slug)
-        if branded:
-            image, image_source = branded, "Source photo — VAPE Wire branded"
-    if not image:
-        image, image_source = FALLBACK_IMAGE, "VAPE brand mark (no AI image or source photo available this cycle)"
+        image, image_source = ai_image, "AI-generated — VAPE Wire branded"
+    else:
+        image, image_source = FALLBACK_IMAGE, "VAPE brand mark (no AI image available this cycle)"
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     source_lines = [f"- [{candidate['title']}]({candidate['url']}) — {candidate.get('source') or 'source'}"]
@@ -316,19 +325,38 @@ def write_story(candidate):
 def run():
     n = int(os.getenv("NEWS_REPORTER_PICKS", "1"))
     state = nc.load_state()
-    candidates = _pick_candidates(state, n)
-    if not candidates:
-        print("[news_reporter] no unreported headlines available this cycle")
-        return []
     written = []
-    for c in candidates:
+    attempts = 0
+    # Bounded retry so an unusually thin feed (several headlines in a row
+    # with no scrapable body, no outlet summary, and no corroboration --
+    # see write_story()'s "only report on what we can source" gate) can't
+    # burn an unbounded amount of this cycle's scrape/LLM budget chasing a
+    # full n stories that may not exist.
+    max_attempts = max(n * 3, 3)
+    while len(written) < n and attempts < max_attempts:
+        candidates = _pick_candidates(state, 1)
+        if not candidates:
+            break
+        c = candidates[0]
+        attempts += 1
         try:
             path = write_story(c)
-            nc.mark_reported(state, c["url"])
-            written.append(path)
-            print(f"[news_reporter] wrote {os.path.relpath(path, nc.ROOT)}")
         except Exception as e:
             print(f"[news_reporter] failed on '{c['title'][:60]}': {e}")
+            nc.mark_reported(state, c["url"])
+            continue
+        # Marked reported either way (wrote a real story, or genuinely had
+        # nothing sourceable) -- a headline that can't be scraped now won't
+        # magically become scrapable next cycle, so retrying it forever
+        # would just waste budget indefinitely.
+        nc.mark_reported(state, c["url"])
+        if path:
+            written.append(path)
+            print(f"[news_reporter] wrote {os.path.relpath(path, nc.ROOT)}")
+        else:
+            print(f"[news_reporter] skipped '{c['title'][:60]}' -- no sourceable substance this cycle")
+    if not written and attempts == 0:
+        print("[news_reporter] no unreported headlines available this cycle")
     nc.save_state(state)
     return written
 

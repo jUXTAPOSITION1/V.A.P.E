@@ -9,6 +9,7 @@ import io
 import json
 import urllib.error
 import urllib.parse
+from datetime import datetime, timezone
 from unittest import mock
 
 import pytest
@@ -704,6 +705,110 @@ class TestGeminiImage:
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             assert llm.ask_gemini_image("prompt") is None
+
+
+def _fake_xai_image_response(url):
+    payload = json.dumps({"data": [{"url": url}]}).encode()
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            pass
+
+        def read(self):
+            return payload
+    return Resp()
+
+
+class TestXaiImage:
+    """agents/llm.py::ask_xai_image() — the AI-image tier's working fallback
+    (reinstated 2026-07-28) behind xAI's Grok Image (grok-2-image-1212),
+    a separate billed-per-image product from every other xAI text use in
+    this file, hence its own daily-count cap file rather than the
+    token-based rate limiting used elsewhere."""
+
+    def test_returns_none_when_key_unset(self, monkeypatch):
+        monkeypatch.delenv("XAI_API_KEY_1", raising=False)
+        with mock.patch("urllib.request.urlopen") as mocked:
+            assert llm.ask_xai_image("a photo of coins") is None
+        mocked.assert_not_called()
+
+    def test_reaches_xai_and_returns_url(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            captured["auth"] = req.get_header("Authorization")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_xai_image_response("https://xai.example/generated.png")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            result = llm.ask_xai_image("a close-up of gold coins on a dark table")
+        assert result == "https://xai.example/generated.png"
+        assert captured["url"] == "https://api.x.ai/v1/images/generations"
+        assert captured["auth"] == "Bearer fake-xai-key"
+        assert captured["body"]["model"] == "grok-2-image-1212"
+        assert captured["body"]["prompt"] == "a close-up of gold coins on a dark table"
+
+    def test_records_usage_on_success(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        usage_path = tmp_path / "xai_image_usage.json"
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(usage_path))
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_xai_image_response("https://xai.example/one.png")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_xai_image("prompt")
+        assert json.loads(usage_path.read_text())["count"] == 1
+
+    def test_returns_none_once_daily_cap_reached(self, monkeypatch, tmp_path, capsys):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setenv("XAI_IMAGE_DAILY_CAP", "1")
+        usage_path = tmp_path / "xai_image_usage.json"
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(usage_path))
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        usage_path.write_text(json.dumps({"date": today, "count": 1}))
+
+        with mock.patch("urllib.request.urlopen") as mocked:
+            assert llm.ask_xai_image("prompt") is None
+        mocked.assert_not_called()
+        assert "daily cap" in capsys.readouterr().out
+
+    def test_returns_none_on_http_error(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+
+        def fake_urlopen(req, timeout=None):
+            raise urllib.error.HTTPError(req.full_url, 500, "Server Error", {}, io.BytesIO(b"boom"))
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_xai_image("prompt") is None
+
+    def test_returns_none_when_response_has_no_url(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+
+        def fake_urlopen(req, timeout=None):
+            payload = json.dumps({"data": [{}]}).encode()
+
+            class Resp:
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *a):
+                    pass
+
+                def read(self):
+                    return payload
+            return Resp()
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_xai_image("prompt") is None
 
 
 class TestOciGrok:
