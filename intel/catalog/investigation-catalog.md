@@ -727,3 +727,5 @@
 | 2026-07-28 | auto | 0x6e6B8968D304B106F2f0f283e857971e9C9D036e (币有) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0x7987f03462200b3D8A072E02C89A8A41dCB124EE (V4) | deep_investigation | CAUTION (50/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-28 | auto | 0xaB71d6C5611182D23c631fa8471D2fA7ac544444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

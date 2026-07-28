@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T13:08:30Z",
+  "generated": "2026-07-28T13:23:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 458,
+    "investigations": 459,
     "news": 11,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-130826-0x7987f034.md",
-      "title": "Investigation \u2014 V4",
-      "symbol": "V4",
-      "name": "Programmable",
-      "date": "2026-07-28T13:08:26Z",
-      "target": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +10841% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-130826-0x7987f034.md"
+      "file": "investigation-20260728-132332-0xaB71d6C5.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T13:23:32Z",
+      "target": "0xaB71d6C5611182D23c631fa8471D2fA7ac544444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-132332-0xaB71d6C5.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-132332-0xaB71d6C5.md",
+      "title": "Investigation \u2014 \u5e01\u6709",
+      "symbol": "\u5e01\u6709",
+      "name": "\u5e01\u6709",
+      "date": "2026-07-28T13:23:32Z",
+      "target": "0xaB71d6C5611182D23c631fa8471D2fA7ac544444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-132332-0xaB71d6C5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-130826-0x7987f034.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-15] Only 50% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 37679 holders \u2014 reasonably distributed; Deep liquidity ($5,522,273); Trading 109+ days without a kn",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122457-0xCFB28756.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122445-0x1F32b1c2.md",
-      "title": "Investigation \u2014 wstETH",
-      "symbol": "wstETH",
-      "name": "Wrapped liquid staked Ether 2.0",
-      "date": "2026-07-27T12:24:45Z",
-      "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
-      "chain": "10 (Optimism)",
-      "verdict": "REJECT",
-      "score": "44",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xefa0db536d2c8089685630fafe88cf7805966fc3) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull th",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122445-0x1F32b1c2.md"
     }
   ],
   "reports": [
