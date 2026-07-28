@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-28T15:41:20Z",
-  "synthesis": "VAPE's automation ran repeated featured investigations interleaved with self-improvement cycles, red-team checks, sweeps, reputation snapshots, and intel broadcasts.",
+  "generated": "2026-07-28T15:56:47Z",
+  "synthesis": "202",
   "tasks": [
+    {
+      "sha": "5490d67b1f",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-28T15:41Z",
+      "date": "2026-07-28T15:41:45Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5490d67b1f504affb63ce76e7df625fdc6ece7a5"
+    },
     {
       "sha": "a3516996a2",
       "kind": "sweep",
@@ -99,13 +106,6 @@
       "message": "news-intel 2026-07-28T14:06Z",
       "date": "2026-07-28T14:06:46Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2d11e385280c231aadbee66d2e18bede77c0c851"
-    },
-    {
-      "sha": "2d367b2e6e",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-28T13:53Z",
-      "date": "2026-07-28T13:53:31Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2d367b2e6eaf10ec18a3f4551717bda7eacb03ec"
     }
   ]
 }

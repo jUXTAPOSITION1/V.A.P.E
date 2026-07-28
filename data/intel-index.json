@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T15:41:20Z",
+  "generated": "2026-07-28T15:56:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 395,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 465,
+    "investigations": 466,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-154111-0x18E3605B.md",
-      "title": "Investigation \u2014 HEFE",
-      "symbol": "HEFE",
-      "name": "HEFE",
-      "date": "2026-07-28T15:41:11Z",
-      "target": "0x18E3605B13F10016901eAC609b9E188CF7c18973",
+      "file": "investigation-20260728-155646-0x6F43fF77.md",
+      "title": "Investigation \u2014 LAMBO",
+      "symbol": "LAMBO",
+      "name": "LAMBO",
+      "date": "2026-07-28T15:56:46Z",
+      "target": "0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b",
       "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Low liquidity $35,536; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 5393 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 259+ days without a known incident in this scan; DefiLlama has priced this token for 820+ days \u2014 indepe",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-154111-0x18E3605B.md"
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,017. Positive evidence: Ownership renounced; 17984 holders \u2014 ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-155646-0x6F43fF77.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-155646-0x6F43fF77.md",
+      "title": "Investigation \u2014 LAMBO",
+      "symbol": "LAMBO",
+      "name": "LAMBO",
+      "date": "2026-07-28T15:56:46Z",
+      "target": "0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,017. Positive evidence: Ownership renounced; 17984 holders \u2014 ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-155646-0x6F43fF77.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-154111-0x18E3605B.md",
@@ -594,20 +608,6 @@
       "score": "32",
       "summary": "Risk factors: [-10] Owner not renounced (0xe1450d7708de452b1d89cbf9b83e0cba97719d39) \u2014 can still act on the contract; [-8] Low holder count (66); [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +634% (volatility/manipulation); [-15] Pair only 0.8 days ol",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-161238-0xA64aC4eC.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-155707-0x5C09A9cE.md",
-      "title": "Investigation \u2014 fBOMB",
-      "symbol": "fBOMB",
-      "name": "Fantom Bomb",
-      "date": "2026-07-27T15:57:07Z",
-      "target": "0x5C09A9cE08C4B332Ef1CC5f7caDB1158C32767Ce",
-      "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated. Positive evidence: 1352 holders \u2014 reasonably distributed; Trading 279+ days without a known incident in this scan; Custom verified source (not a mass-produced factory ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-155707-0x5C09A9cE.md"
     }
   ],
   "reports": [

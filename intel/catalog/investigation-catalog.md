@@ -741,3 +741,5 @@
 | 2026-07-28 | auto | 0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9 (fBOMB) | deep_investigation | REJECT (30/100) | Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) — can still act | +7d |
 
 | 2026-07-28 | auto | 0x18E3605B13F10016901eAC609b9E188CF7c18973 (HEFE) | deep_investigation | CAUTION (75/100) | Low liquidity $35,536 | +7d |
+
+| 2026-07-28 | auto | 0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b (LAMBO) | deep_investigation | REJECT (35/100) | Owner can change balances (rug surface) | +7d |

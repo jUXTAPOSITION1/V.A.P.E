@@ -2654,6 +2654,25 @@
     "symbol": "PNG",
     "times_investigated": 1
   },
+  "43114:0x6f43ff77a9c0cf552b5b653268fbfe26a052429b": {
+    "address": "0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b",
+    "chain": "43114",
+    "creator_address": "0xcffde4a2e9211a3fee2344d0c86e224eab7926ff",
+    "first_investigated": "2026-07-28T15:56:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-155646-0x6F43fF77.md",
+        "score": 35,
+        "ts": "2026-07-28T15:56:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T15:56:46Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "LAMBO",
+    "times_investigated": 1
+  },
   "43114:0x8729438eb15e2c8b576fcc6aecda6a148776c0f5": {
     "address": "0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5",
     "chain": "43114",
