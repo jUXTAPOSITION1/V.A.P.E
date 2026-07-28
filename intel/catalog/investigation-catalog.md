@@ -751,3 +751,5 @@
 | 2026-07-28 | auto | 0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24 (FERRET) | deep_investigation | CAUTION (55/100) | Low liquidity $26,431 | +7d |
 
 | 2026-07-28 | auto | 0x317C63Fdf448779923fe9b845E4A58CB4d224e56 (Ferret) | deep_investigation | REJECT (47/100) | Low holder count (191) | +7d |
+
+| 2026-07-28 | auto | 0xBcBDA13Bd60bC0e91745186E274D1445078D6b33 (FERRET) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 65% of supply — meaningful concentration | +7d |

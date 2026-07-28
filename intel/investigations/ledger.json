@@ -1872,6 +1872,25 @@
     "symbol": "EUL",
     "times_investigated": 1
   },
+  "1:0xbcbda13bd60bc0e91745186e274d1445078d6b33": {
+    "address": "0xBcBDA13Bd60bC0e91745186E274D1445078D6b33",
+    "chain": "1",
+    "creator_address": "0x5f49311d1a8b366f51411004199aaf7a6ca179ed",
+    "first_investigated": "2026-07-28T17:57:58Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-175758-0xBcBDA13B.md",
+        "score": 82,
+        "ts": "2026-07-28T17:57:58Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-28T17:57:58Z",
+    "last_score": 82,
+    "last_verdict": "PROCEED",
+    "symbol": "FERRET",
+    "times_investigated": 1
+  },
   "1:0xc4fa51e5208b835bc6db3144f25067aa194befba": {
     "address": "0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa",
     "chain": "1",

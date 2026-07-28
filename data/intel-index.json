@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T17:42:45Z",
+  "generated": "2026-07-28T17:58:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 398,
@@ -15,26 +15,26 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 470,
+    "investigations": 471,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 21
+    "skills": 22
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-174240-0x317C63Fd.md",
-      "title": "Investigation \u2014 Ferret",
-      "symbol": "Ferret",
-      "name": "The SpaceX Ferret",
-      "date": "2026-07-28T17:42:40Z",
-      "target": "0x317C63Fdf448779923fe9b845E4A58CB4d224e56",
+      "file": "investigation-20260728-175758-0xBcBDA13B.md",
+      "title": "Investigation \u2014 FERRET",
+      "symbol": "FERRET",
+      "name": "Ferret AI",
+      "date": "2026-07-28T17:57:58Z",
+      "target": "0xBcBDA13Bd60bC0e91745186E274D1445078D6b33",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Low holder count (191); [-10] Low liquidity $14,117; [-10] Violent 24h move +442% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-174240-0x317C63Fd.md"
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-10] Low liquidity $21,191. Positive evidence: Ownership renounced; 2316 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 924+ days without a known incident in this scan; Custom",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-175758-0xBcBDA13B.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-175758-0xBcBDA13B.md",
+      "title": "Investigation \u2014 FERRET",
+      "symbol": "FERRET",
+      "name": "Ferret AI",
+      "date": "2026-07-28T17:57:58Z",
+      "target": "0xBcBDA13Bd60bC0e91745186E274D1445078D6b33",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-10] Low liquidity $21,191. Positive evidence: Ownership renounced; 2316 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 924+ days without a known incident in this scan; Custom",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-175758-0xBcBDA13B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-174240-0x317C63Fd.md",
@@ -594,20 +608,6 @@
       "score": "27",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-210021-0xE441E2e1.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-184518-0x277aDD73.md",
-      "title": "Investigation \u2014 AEON",
-      "symbol": "AEON",
-      "name": "AEON",
-      "date": "2026-07-27T18:45:18Z",
-      "target": "0x277aDD739c6E0477616948357AF9E79Fe1Ec9B80",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $21,509; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-184518-0x277aDD73.md"
     }
   ],
   "reports": [
@@ -1894,6 +1894,12 @@
       "title": "skills/base-token-verdict-override.md",
       "summary": "",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-base-token-verdict-override-md.md"
+    },
+    {
+      "file": "skills-bsc-token-investigation-md.md",
+      "title": "skills/bsc_token_investigation.md",
+      "summary": "Distilled 2026-07-28T08:40:57Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-bsc-token-investigation-md.md"
     },
     {
       "file": "skills-ledger-drift-review-md.md",

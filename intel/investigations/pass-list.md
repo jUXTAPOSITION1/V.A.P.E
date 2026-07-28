@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-28T17:42:40Z — 59 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-28T17:57:58Z — 60 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| FERRET | Ethereum | `0xBcBDA13Bd60bC0e91745186E274D1445078D6b33` | 82/100 | 1 | 2026-07-28T17:57:58Z |
 | Doge-1 | Ethereum | `0xFfE203b59393593965842439ce1E7D7c78109b46` | 100/100 | 1 | 2026-07-28T14:39:00Z |
 | DOGE1 | Ethereum | `0xD721706581d97eCd202bBab5c71b5a85f0F78E69` | 90/100 | 1 | 2026-07-28T14:23:34Z |
 | PEPE | Ethereum | `0x6982508145454Ce325dDbE47a25d4ec3d2311933` | 85/100 | 1 | 2026-07-27T15:11:11Z |
