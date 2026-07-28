@@ -1758,6 +1758,25 @@
     "symbol": "DIM",
     "times_investigated": 1
   },
+  "1:0xafb97dd6630f1930b5ce8c542afe7b988e40e805": {
+    "address": "0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805",
+    "chain": "1",
+    "creator_address": "0xedb43ebf3306dce578d24b0555240d07e4778afc",
+    "first_investigated": "2026-07-28T14:54:01Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-145401-0xAfB97Dd6.md",
+        "score": 18,
+        "ts": "2026-07-28T14:54:01Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T14:54:01Z",
+    "last_score": 18,
+    "last_verdict": "REJECT",
+    "symbol": "DOGE1",
+    "times_investigated": 1
+  },
   "1:0xaff2565091e7207191dbe340b8528d02fa78d044": {
     "address": "0xAFF2565091E7207191dBe340B8528D02FA78d044",
     "chain": "1",
