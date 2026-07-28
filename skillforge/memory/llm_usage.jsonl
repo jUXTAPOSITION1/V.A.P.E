@@ -1245,3 +1245,7 @@
 {"ts": "2026-07-28T11:10:16Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1218, "completion_tokens": 394, "total_tokens": 2254}
 {"ts": "2026-07-28T11:13:14Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1250, "completion_tokens": 311, "total_tokens": 1561}
 {"ts": "2026-07-28T11:13:36Z", "provider": "gemini", "model": "gemini-2.5-flash", "tier": "deep", "prompt_tokens": 855, "completion_tokens": 157, "total_tokens": 4851, "fallback_from": ["groq:HTTP429 {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kvrrkqgsfk4thyv722a2ttvm` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 96116,"]}
+{"ts": "2026-07-28T11:17:29Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 4096, "completion_tokens": 649, "total_tokens": 5912}
+{"ts": "2026-07-28T11:17:53Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 92919, "completion_tokens": 740, "total_tokens": 95115}
+{"ts": "2026-07-28T11:18:14Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 93406, "completion_tokens": 82, "total_tokens": 95602}
+{"ts": "2026-07-28T11:18:26Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91607, "completion_tokens": 11, "total_tokens": 91903}
