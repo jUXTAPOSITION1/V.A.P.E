@@ -769,3 +769,5 @@
 | 2026-07-28 | auto | 0x9c891326Fd8b1a713974f73bb604677E1E63396D (ISLAMI) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-28 | auto | 0x6664347791C8d58E266EB8F824CE774a2624Fa07 (TRUMP2028) | deep_investigation | REJECT (25/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-28 | auto | 0xBaf069e57AE635e28f33Da73534008dDdCC99F76 (BEAT) | deep_investigation | CAUTION (65/100) | Very low liquidity $2,456 (rug/illiquid) | +7d |

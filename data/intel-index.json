@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T23:32:39Z",
+  "generated": "2026-07-28T23:48:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 404,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 121,
-    "investigations": 479,
+    "investigations": 480,
     "news": 14,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-224659-0x66643477.md",
-      "title": "Investigation \u2014 TRUMP2028",
-      "symbol": "TRUMP2028",
-      "name": "Trump 2028",
-      "date": "2026-07-28T22:46:59Z",
-      "target": "0x6664347791C8d58E266EB8F824CE774a2624Fa07",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 110% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $48,671; [-10] Violent 24h move +105% (volatility/manipulation); [-15] Pair only 1.1 days old (extreme fresh-launch risk); [-10] No known third-party audi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-224659-0x66643477.md"
+      "file": "investigation-20260728-234825-0xBaf069e5.md",
+      "title": "Investigation \u2014 BEAT",
+      "symbol": "BEAT",
+      "name": "Audiera AI",
+      "date": "2026-07-28T23:48:25Z",
+      "target": "0xBaf069e57AE635e28f33Da73534008dDdCC99F76",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $2,456 (rug/illiquid); [-10] Low liquidity $2,456. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-234825-0xBaf069e5.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-234825-0xBaf069e5.md",
+      "title": "Investigation \u2014 BEAT",
+      "symbol": "BEAT",
+      "name": "Audiera AI",
+      "date": "2026-07-28T23:48:25Z",
+      "target": "0xBaf069e57AE635e28f33Da73534008dDdCC99F76",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $2,456 (rug/illiquid); [-10] Low liquidity $2,456. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-234825-0xBaf069e5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-224659-0x66643477.md",
@@ -594,20 +608,6 @@
       "score": "65",
       "summary": "Risk factors: [-10] Violent 24h move +3641% (volatility/manipulation); [-15] Pair only 1.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-034850-0x7142b752.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-024836-0x49Fcf04B.md",
-      "title": "Investigation \u2014 WPOL",
-      "symbol": "WPOL",
-      "name": "Wrapped Polygon",
-      "date": "2026-07-28T02:48:36Z",
-      "target": "0x49Fcf04B7eB04D1DfEBd8E5FE3dFCF42f69505E4",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Deep liquidity ($3,764,724); Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-024836-0x49Fcf04B.md"
     }
   ],
   "reports": [
