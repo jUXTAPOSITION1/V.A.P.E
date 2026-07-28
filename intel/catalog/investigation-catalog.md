@@ -713,3 +713,5 @@
 | 2026-07-28 | auto | 0x22D418A8d69d5AacfaeDf84653448a8591d5e63B (币有) | deep_investigation | REJECT (25/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0xb7E4183260BfC5ED9965f723bF739451c7757f89 (币有) | deep_investigation | REJECT (25/100) | Very few holders (6) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-28 | auto | 0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07 (DXCHCK) | deep_investigation | REJECT (10/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

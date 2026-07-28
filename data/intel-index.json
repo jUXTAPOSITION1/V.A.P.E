@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T10:08:27Z",
+  "generated": "2026-07-28T10:23:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 392,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 451,
+    "investigations": 452,
     "news": 10,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-095316-0xb7E41832.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u5e01\u6709",
-      "date": "2026-07-28T09:53:16Z",
-      "target": "0xb7E4183260BfC5ED9965f723bF739451c7757f89",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260728-102335-0x32B0007f.md",
+      "title": "Investigation \u2014 DXCHCK",
+      "symbol": "DXCHCK",
+      "name": "Dexcheckai",
+      "date": "2026-07-28T10:23:35Z",
+      "target": "0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-095316-0xb7E41832.md"
+      "score": "10",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-102335-0x32B0007f.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-102335-0x32B0007f.md",
+      "title": "Investigation \u2014 DXCHCK",
+      "symbol": "DXCHCK",
+      "name": "Dexcheckai",
+      "date": "2026-07-28T10:23:35Z",
+      "target": "0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "10",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-102335-0x32B0007f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-095316-0xb7E41832.md",
@@ -594,20 +608,6 @@
       "score": "60",
       "summary": "Risk factors: [-10] Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 5040 hold",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122337-0xde4EE805.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-122325-0x11030f79.md",
-      "title": "Investigation \u2014 CTR",
-      "symbol": "CTR",
-      "name": "CTR",
-      "date": "2026-07-27T12:23:25Z",
-      "target": "0x11030f79109269d796fd0FB956D6244e502757f7",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timest",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-122325-0x11030f79.md"
     }
   ],
   "reports": [
