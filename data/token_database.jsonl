@@ -50,3 +50,4 @@
 {"ts": "2026-07-28T11:53:27.481609Z", "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "chain": "137", "symbol": "AIPF", "name": "AIPF", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-28T12:53:28.171636Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-28T13:53:27.509770Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_safety_check"}
+{"ts": "2026-07-28T14:23:39.267012Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "liquidity_check"}

@@ -1910,6 +1910,25 @@
     "symbol": "JAKEX",
     "times_investigated": 1
   },
+  "1:0xd721706581d97ecd202bbab5c71b5a85f0f78e69": {
+    "address": "0xD721706581d97eCd202bBab5c71b5a85f0F78E69",
+    "chain": "1",
+    "creator_address": "0x5f4752ff6c8624d129f6174d15685cd496c49089",
+    "first_investigated": "2026-07-28T14:23:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-142334-0xD7217065.md",
+        "score": 90,
+        "ts": "2026-07-28T14:23:34Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-28T14:23:34Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "DOGE1",
+    "times_investigated": 1
+  },
   "1:0xd8526e86fdbcaf9b4d104d995e2c8023f73954c5": {
     "address": "0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5",
     "chain": "1",

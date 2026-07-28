@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T14:08:41Z",
+  "generated": "2026-07-28T14:23:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 394,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 119,
-    "investigations": 460,
+    "investigations": 461,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-140837-0xc5b0251d.md",
-      "title": "Investigation \u2014 DOGE-1",
-      "symbol": "DOGE-1",
-      "name": "Satellite Doge-1",
-      "date": "2026-07-28T14:08:37Z",
-      "target": "0xc5b0251daCFaB74bc2deBaa52072a2A4c939c105",
+      "file": "investigation-20260728-142334-0xD7217065.md",
+      "title": "Investigation \u2014 DOGE1",
+      "symbol": "DOGE1",
+      "name": "DOGE-1",
+      "date": "2026-07-28T14:23:34Z",
+      "target": "0xD721706581d97eCd202bBab5c71b5a85f0F78E69",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Violent 24h move +175% (volatility/manipulation). Positive evidence: Ownership renounced; 845 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1218+ days without a known incident in this scan; Custom verified sourc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-140837-0xc5b0251d.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +169% (volatility/manipulation). Positive evidence: Ownership renounced; 3578 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1029+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-142334-0xD7217065.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-142334-0xD7217065.md",
+      "title": "Investigation \u2014 DOGE1",
+      "symbol": "DOGE1",
+      "name": "DOGE-1",
+      "date": "2026-07-28T14:23:34Z",
+      "target": "0xD721706581d97eCd202bBab5c71b5a85f0F78E69",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Violent 24h move +169% (volatility/manipulation). Positive evidence: Ownership renounced; 3578 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1029+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-142334-0xD7217065.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-140837-0xc5b0251d.md",
@@ -594,20 +608,6 @@
       "score": "85",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 7217 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 435+ days without a known incident in this scan; Custom verified source (not",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-125631-0x604448c8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-124131-0xdE8D34cc.md",
-      "title": "Investigation \u2014 HRC",
-      "symbol": "HRC",
-      "name": "HRC",
-      "date": "2026-07-27T12:41:31Z",
-      "target": "0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x759fe3a464b80e9594dad8ed2d42cb42909190bc) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $339 (rug/illiquid); [-10] Low liquidity $339. ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-124131-0xdE8D34cc.md"
     }
   ],
   "reports": [

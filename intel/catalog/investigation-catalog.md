@@ -731,3 +731,5 @@
 | 2026-07-28 | auto | 0xaB71d6C5611182D23c631fa8471D2fA7ac544444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-28 | auto | 0xc5b0251daCFaB74bc2deBaa52072a2A4c939c105 (DOGE-1) | deep_investigation | CAUTION (75/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-28 | auto | 0xD721706581d97eCd202bBab5c71b5a85f0F78E69 (DOGE1) | deep_investigation | PROCEED (90/100) | Violent 24h move +169% (volatility/manipulation) | +7d |
