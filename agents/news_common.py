@@ -5,10 +5,15 @@ investigative reports). Same design rule as agents/intel_common.py: real,
 fetched data first, LLM only for narrative synthesis — never invent a
 headline, source, or quote.
 
-Four source lanes, all keyless (no vendor account needed to ship a working
+Five source lanes, all keyless (no vendor account needed to ship a working
 v1):
   1. Google News RSS search (news.google.com/rss/search) — no API key, no
      quota, works for any query string. This is the main discovery lane.
+     Real, confirmed limitation: its <link> is a news.google.com redirect
+     to the actual publisher, and a meaningful fraction of publishers
+     (Motley Fool, Benzinga, etc.) block scraper traffic outright, so
+     scrape_article_text() legitimately comes up empty for some of these
+     — see lane 5 below for outlets chosen specifically to reduce that.
   2. CoinGecko's public news endpoint — best-effort only. It isn't part of
      CoinGecko's documented free API surface and may 404/410/402 depending
      on current API tier; every caller here must treat empty/error as a
@@ -23,6 +28,14 @@ v1):
      grounding, was deprecated — HTTP 410 in production, 2026-07). Left as
      a documented gap rather than a fake/broken integration; wire it in
      once a real API key or replacement method exists.
+  5. Native RSS feeds from crypto-native outlets (NATIVE_RSS_FEEDS below) —
+     CoinDesk, Cointelegraph, Decrypt, The Block, CryptoSlate. Added
+     2026-07-28 specifically so write_story() has real article substance
+     to work from more often: these feeds' own <description>/
+     <content:encoded> fields are captured as each item's "snippet" (used
+     as grounding even when a later live scrape of the full page fails),
+     and their publishers are generally more scraper-tolerant than the
+     financial-media sites Google News often surfaces.
 """
 import io
 import os
@@ -134,6 +147,64 @@ def google_news_search(query, max_results=8, topic=None):
     return out
 
 
+# Crypto-native outlets with their own public RSS feeds, chosen deliberately
+# (not an exhaustive list) for two reasons: their <description>/
+# <content:encoded> fields carry a real summary paragraph (not just a bare
+# headline like Google News), and their sites are generally more tolerant of
+# non-browser HTTP requests than the financial-media sites (Motley Fool,
+# Benzinga) Google News often surfaces -- see module docstring, lane 5.
+NATIVE_RSS_FEEDS = [
+    ("https://www.coindesk.com/arc/outboundfeeds/rss/", "CoinDesk", "crypto-markets"),
+    ("https://cointelegraph.com/rss", "Cointelegraph", "crypto-markets"),
+    ("https://decrypt.co/feed", "Decrypt", "crypto-markets"),
+    ("https://www.theblock.co/rss.xml", "The Block", "crypto-markets"),
+    ("https://cryptoslate.com/feed/", "CryptoSlate", "crypto-markets"),
+]
+
+
+def _strip_html(s):
+    """Bare-bones tag stripper for an RSS <description>'s small HTML blob --
+    not a general-purpose HTML-to-text converter (see skillforge/research.py's
+    _TextExtractor for that), just enough to turn a feed summary into plain
+    text for grounding."""
+    return " ".join(html.unescape(re.sub(r"<[^>]+>", " ", s or "")).split())
+
+
+def native_rss_feed(feed_url, source_name, topic, max_results=8):
+    """One outlet's own RSS feed -> the same normalized headline shape every
+    other lane returns, plus a real "snippet" field from the feed's own
+    description/content:encoded (used as grounding by news_reporter.py even
+    when a later live scrape of the full article page fails). Returns []
+    (never raises) on any network/parse failure, matching every other
+    keyless lane's degradation contract."""
+    try:
+        req = urllib.request.Request(feed_url, headers=UA)
+        with urllib.request.urlopen(req, timeout=15) as r:
+            raw = r.read()
+        root = ET.fromstring(raw)
+    except Exception:
+        return []
+    ns = {"content": "http://purl.org/rss/1.0/modules/content/"}
+    out = []
+    for item in root.findall("./channel/item")[:max_results]:
+        title = html.unescape((item.findtext("title") or "").strip())
+        link = (item.findtext("link") or "").strip()
+        pub = (item.findtext("pubDate") or "").strip()
+        if not title or not link:
+            continue
+        encoded = item.findtext("content:encoded", namespaces=ns)
+        desc = encoded or item.findtext("description") or ""
+        out.append({
+            "title": title,
+            "url": link,
+            "source": source_name,
+            "published": pub,
+            "snippet": _strip_html(desc)[:2000],
+            "topic": topic,
+        })
+    return out
+
+
 def coingecko_news(max_results=10):
     """Best-effort only — see module docstring. Any non-200/parse failure
     silently contributes nothing; never treated as an error by callers."""
@@ -221,18 +292,22 @@ def gather_headlines():
     for key, query, _label in TOPICS:
         items.extend(google_news_search(query, max_results=6, topic=key))
     gnews_count = len(items)
+    native = []
+    for feed_url, source_name, topic in NATIVE_RSS_FEEDS:
+        native.extend(native_rss_feed(feed_url, source_name, topic, max_results=6))
+    items.extend(native)
     cg = coingecko_news(max_results=10)
     items.extend(cg)
     web = web_headline_search()
     items.extend(web)
-    # Visibility into a lane that's silently best-effort (see module
+    # Visibility into lanes that are silently best-effort (see module
     # docstring): CoinGecko's news endpoint isn't part of its documented
     # free API surface and may 404/410/402 with zero warning otherwise --
     # without this line a 0-count cycle is indistinguishable in the CI log
-    # from "CoinGecko just had nothing new," which made it impossible to
-    # tell whether the lane was actually working.
-    print(f"[news_common] lanes -- google_news:{gnews_count} coingecko:{len(cg)} web_search:{len(web)}",
-          file=sys.stderr)
+    # from "nothing new this cycle," which made it impossible to tell
+    # whether a lane was actually working.
+    print(f"[news_common] lanes -- google_news:{gnews_count} native_rss:{len(native)} "
+          f"coingecko:{len(cg)} web_search:{len(web)}", file=sys.stderr)
     return dedupe(items)
 
 

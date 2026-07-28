@@ -632,44 +632,46 @@ def _fake_image_response(image_b64, mime="image/png"):
 
 class TestGeminiImage:
     """agents/llm.py::ask_gemini_image() — VAPE's real image-generation
-    route (Google Cloud's own Gemini image model, "Nano Banana"), called
-    the same opt-in way as the Vertex-tuned candidate (gated on
-    VAPE_VERTEX_ACCESS_TOKEN) but against a publisher-model endpoint."""
+    route (Google's Gemini image model, "Nano Banana"), called against the
+    Gemini Developer API (generativelanguage.googleapis.com), NOT Vertex AI
+    -- confirmed necessary by a real HTTP 404 from a live dispatch that
+    tried the Vertex publisher-model path first (this model launched on
+    the Gemini API surface, not yet mirrored into Vertex's Model Garden).
+    Gated on GEMINI_API_KEY -- the same key already used by the 'gemini'
+    free-tier text provider in PROVIDERS, not a new secret."""
 
-    def test_returns_none_when_token_unset(self, monkeypatch):
-        monkeypatch.delenv("VAPE_VERTEX_ACCESS_TOKEN", raising=False)
+    def test_returns_none_when_key_unset(self, monkeypatch):
+        monkeypatch.delenv("GEMINI_API_KEY", raising=False)
         with mock.patch("urllib.request.urlopen") as mocked:
             assert llm.ask_gemini_image("a photo of coins") is None
         mocked.assert_not_called()
 
-    def test_reaches_gemini_image_endpoint_and_decodes_bytes(self, monkeypatch):
-        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+    def test_reaches_gemini_developer_api_and_decodes_bytes(self, monkeypatch):
+        monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
         import base64
         raw_bytes = b"\x89PNG-fake-image-bytes"
         captured = {}
 
         def fake_urlopen(req, timeout=None):
             captured["url"] = req.full_url
-            captured["auth"] = req.get_header("Authorization")
+            captured["api_key_header"] = req.get_header("X-goog-api-key")
             captured["body"] = json.loads(req.data.decode())
             return _fake_image_response(base64.b64encode(raw_bytes).decode())
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             result = llm.ask_gemini_image("a close-up of gold coins on a dark table")
         assert result == raw_bytes
-        assert captured["auth"] == "Bearer fake-token"
+        assert captured["api_key_header"] == "fake-gemini-key"
         assert captured["url"] == (
-            "https://us-central1-aiplatform.googleapis.com/v1/projects/87858016172"
-            "/locations/us-central1/publishers/google/models/gemini-3.1-flash-lite-image:generateContent")
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            "gemini-3.1-flash-lite-image:generateContent")
         assert captured["body"]["contents"] == [
             {"role": "user", "parts": [{"text": "a close-up of gold coins on a dark table"}]}]
         assert captured["body"]["generationConfig"]["responseModalities"] == ["IMAGE"]
         assert captured["body"]["generationConfig"]["imageConfig"]["aspectRatio"] == "16:9"
 
-    def test_honors_env_overrides_for_project_location_model(self, monkeypatch):
-        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
-        monkeypatch.setenv("VAPE_GEMINI_IMAGE_PROJECT", "999")
-        monkeypatch.setenv("VAPE_GEMINI_IMAGE_LOCATION", "global")
+    def test_honors_env_override_for_model(self, monkeypatch):
+        monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
         monkeypatch.setenv("VAPE_GEMINI_IMAGE_MODEL", "some-other-image-model")
         captured = {}
 
@@ -680,11 +682,11 @@ class TestGeminiImage:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_gemini_image("prompt")
         assert captured["url"] == (
-            "https://aiplatform.googleapis.com/v1/projects/999"
-            "/locations/global/publishers/google/models/some-other-image-model:generateContent")
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            "some-other-image-model:generateContent")
 
     def test_returns_none_on_http_error(self, monkeypatch, capsys):
-        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
 
         def fake_urlopen(req, timeout=None):
             raise urllib.error.HTTPError(req.full_url, 400, "Bad Request", {},
@@ -695,7 +697,7 @@ class TestGeminiImage:
         assert "bad modality" in capsys.readouterr().err
 
     def test_returns_none_when_response_has_no_inline_image(self, monkeypatch):
-        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
 
         def fake_urlopen(req, timeout=None):
             return _fake_vertex_response("just text, no image")
