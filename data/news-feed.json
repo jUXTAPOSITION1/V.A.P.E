@@ -1,12 +1,196 @@
 {
-  "generated": "2026-07-28T14:05:53Z",
+  "generated": "2026-07-28T19:23:25Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "AI firms are shredding physical books because copyright law is quietly rewarding them",
+      "url": "https://cryptoslate.com/why-copyright-law-is-quietly-rewarding-ai-firms-for-shredding-physical-books/",
+      "source": "CryptoSlate",
+      "published": "Tue, 28 Jul 2026 19:20:39 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Morgan Stanley Expands Crypto Push With Ethereum and Solana ETPs",
+      "url": "https://decrypt.co/374592/morgan-stanley-crypto-ethereum-solana-etps",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 19:14:14 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "AmericanFortress proposes quantum-safe crypto wallet protection without fund migration",
+      "url": "https://cointelegraph.com/news/americanfortress-proposes-quantum-safe-crypto-wallet-protection-without-fund-migration?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 18:47:26 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "XRP Price Slides as Senate Drops Clarity Act and Fed Decision Looms",
+      "url": "https://decrypt.co/374579/xrp-price-slides-senate-clarity-act-fed-rate-looms",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 18:35:37 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Zcash Activates Ironwood Upgrade After Counterfeiting Scare",
+      "url": "https://decrypt.co/374577/zcash-ironwood-upgrade-counterfeiting-scare",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 18:24:19 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Here\u2019s what happened in crypto today",
       "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 13:42:17 +0000",
+      "published": "Tue, 28 Jul 2026 18:15:25 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Apple\u2019s App Store promoted fake Bitcoin wallet that stole $1.8M after developer spent a year warning them",
+      "url": "https://cryptoslate.com/apples-app-store-security-promise-faces-test-as-fake-crypto-wallets-keep-getting-through/",
+      "source": "CryptoSlate",
+      "published": "Tue, 28 Jul 2026 18:10:55 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Galaxy, MARA Holdings deepen Texas expansion with land acquisitions",
+      "url": "https://cointelegraph.com/news/galaxy-mara-texas-land-deals-ai-bitcoin-data-centers?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 18:08:32 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "The Dumbest-Looking AI Prompt Just Beat Months of Careful Game-Design Prompt Engineering",
+      "url": "https://decrypt.co/374560/dumbest-ai-prompt-claude-beat-careful-game-design",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 18:04:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Wall Street veteran Don Wilson says regulators are getting perps all wrong",
+      "url": "https://www.coindesk.com/markets/2026/07/28/wall-street-veteran-don-wilson-says-regulators-are-getting-crypto-s-biggest-trading-innovation-all-wrong",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 17:23:35 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Inside the brutal 2-minute flash crash sending a $400M South Korean market plunging on Hyperliquid",
+      "url": "https://cryptoslate.com/inside-the-brutal-2-minute-flash-crash-sending-a-400m-south-korean-market-plunging-on-hyperliquid/",
+      "source": "CryptoSlate",
+      "published": "Tue, 28 Jul 2026 17:05:53 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "First ChatGPT, Now Claude: Frontier AI Models Are Escaping Their Sandboxes",
+      "url": "https://decrypt.co/374557/chatgpt-claude-ai-models-escaping-sandboxes-cowork",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 16:54:11 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin lows pierce $63K as Asia chip-stock crash spreads to Wall Street",
+      "url": "https://cointelegraph.com/markets/bitcoin-lows-pierce-63k-as-asia-chip-stock-crash-spills?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 16:27:46 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why the Bitcoin Rally Seems More Like a Bull Trap",
+      "url": "https://decrypt.co/374539/bitcoin-price-rally-bull-trap",
+      "source": "Decrypt",
+      "published": "Tue, 28 Jul 2026 16:22:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Kraken opens Jersey Mike\u2019s IPO to retail investors through tokenized shares and direct allocations",
+      "url": "https://cointelegraph.com/news/kraken-opens-jersey-mikes-ipo-to-retail-investors-through-tokenized-shares-and-direct-allocations?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 16:20:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "BlackRock, Fidelity, other Wall Street giants back the Clarity Act",
+      "url": "https://www.coindesk.com/policy/2026/07/28/blackrock-fidelity-other-wall-street-giants-back-the-clarity-act",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 16:08:19 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Federal court shields Kalshi and Polymarket from Minnesota\u2019s felony crackdown days before deadline",
+      "url": "https://cryptoslate.com/minnesota-judge-blocks-aug-1-prediction-market-felony-law-for-registered-exchanges-but-only-for-now/",
+      "source": "CryptoSlate",
+      "published": "Tue, 28 Jul 2026 15:50:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Core Scientific revenue doubles in Q2 as AI colocation expansion accelerates",
+      "url": "https://cointelegraph.com/markets/core-scientific-revenue-doubles-q2-ai-colocation-expansion-accelerate?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 28 Jul 2026 15:47:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ethereum startup EthSystems bets privacy is key to getting banks on public blockchains",
+      "url": "https://www.coindesk.com/tech/2026/07/28/ethereum-startup-ethsystems-bets-privacy-is-key-to-getting-banks-on-public-blockchains",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 15:46:33 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Russia outlines new digital depository rules ahead of fall crypto framework roll-out",
+      "url": "https://www.coindesk.com/policy/2026/07/28/russia-outlines-new-digital-depository-rules-ahead-of-fall-crypto-framework-roll-out",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 14:49:50 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hyperliquid is taking crypto perps deep into DeFi\u2019s \u2018money LEGO\u2019 land",
+      "url": "https://www.coindesk.com/business/2026/07/28/hyperliquid-is-taking-crypto-perps-deep-into-defi-s-money-lego-land",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 14:49:01 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Crypto holders face a July 29 Maine deadline as state manual conflicts on when abandoned funds trigger seizure",
+      "url": "https://cryptoslate.com/maines-new-crypto-dormancy-law-leaves-holders-waiting-for-the-reporting-guidance-they-need/",
+      "source": "CryptoSlate",
+      "published": "Tue, 28 Jul 2026 14:45:02 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Zcash seals $1.7 billion shielded pool as Ironwood upgrade activates",
+      "url": "https://www.coindesk.com/tech/2026/07/28/zcash-seals-usd1-7-billion-shielded-pool-as-ironwood-upgrade-activates",
+      "source": "CoinDesk",
+      "published": "Tue, 28 Jul 2026 14:35:28 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ethereum L2 ecosystem loses momentum as TVL drops to two-year low",
+      "url": "https://www.theblock.co/post/409811/ethereum-l2-ecosystem-loses-momentum-as-tvl-drops-to-two-year-low?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 28 Jul 2026 14:21:02 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -19,226 +203,58 @@
       "crypto": true
     },
     {
-      "title": "The real reason DeFi projects that survived 2022 crash are shutting down now",
-      "url": "https://cointelegraph.com/magazine/the-2022-bear-market-didnt-kill-these-defi-projects-what-changed?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 13:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Markets eye Bank of Japan meeting on Friday as yen repeats 40-year US dollar lows",
-      "url": "https://cointelegraph.com/markets/markets-eye-bank-of-japan-meeting-on-friday-as-yen-repeats-40-year-us-dollar-lows?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 13:11:28 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Ethereum, Solana led crypto hack losses in H1 2026: Blockaid",
-      "url": "https://cointelegraph.com/news/ethereum-solana-led-crypto-hack-losses-h1-2026-blockaid?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 13:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Core Scientific lands AMD AI deal as bitcoin mining operation winds down",
-      "url": "https://www.coindesk.com/business/2026/07/28/core-scientific-lands-amd-ai-deal-as-bitcoin-mining-operation-winds-down",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 12:46:05 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin traders just stripped away crash protection \u2013 right as the Fed prepares its most unpredictable rate decision in years",
-      "url": "https://cryptoslate.com/bitcoin-traders-drop-hedges-before-fed-most-uncertain-meeting/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 12:35:11 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Binance makes fighting crypto crime more difficult, says new report",
-      "url": "https://www.coindesk.com/business/2026/07/28/binance-makes-fighting-crypto-crime-more-difficult-says-new-nyt-article",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 12:24:02 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "PayPal expands stablecoin push as crypto assets factor into Q2 results",
-      "url": "https://cointelegraph.com/news/paypal-expands-stablecoin-push-crypto-assets-q2-results?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 12:07:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Apple kept fake bitcoin wallet on App Store after $875,000 theft report, lawsuit alleges",
-      "url": "https://www.coindesk.com/business/2026/07/28/apple-kept-fake-bitcoin-wallet-on-app-store-after-usd875-000-theft-report-lawsuit-alleges",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 11:59:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Morning Minute: Strategy Chooses Cash, STRC Over BTC",
-      "url": "https://decrypt.co/374535/morning-minute-strategy-chooses-cash-strc-over-btc",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 11:57:58 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "1inch's Shared Liquidity Layer Aqua Goes Live",
-      "url": "https://decrypt.co/374533/1inchs-shared-liquidity-layer-aqua-goes-live",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 11:53:26 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin\u2019s recent stability hasn't been enough to spark a broader altcoin rally",
-      "url": "https://www.coindesk.com/daybook-us/2026/07/28/bitcoin-s-recent-stability-hasn-t-been-enough-to-spark-a-broader-altcoin-rally",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 11:37:31 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Zcash Miner Fortitude Powers Up Nebraska Facility as It Eyes Public Listing",
-      "url": "https://decrypt.co/374491/zcash-miner-fortitude-nebraska-mining-facility",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 11:31:03 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "How a crypto exchange secretly hid $53M in stolen crypto to prevent a bank run \u2013 as the SEC  targets its directors",
-      "url": "https://cryptoslate.com/how-a-crypto-exchange-secretly-hid-53m-in-stolen-crypto-to-prevent-a-bank-run-and-why-the-sec-is-finally-coming-for-its-directors/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 11:30:14 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Myanmar Approves Death Penalty for Forced Scam Labor, Life for Crypto Fraud",
-      "url": "https://decrypt.co/374519/myanmar-approves-death-penalty-for-forced-scam-labor-life-for-crypto-fraud",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 11:29:21 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin drops as South Korean stocks tumble, Senate shelves crypto Clarity Act",
-      "url": "https://www.coindesk.com/markets/2026/07/28/bitcoin-drops-as-south-korean-stocks-tumble-senate-shelves-crypto-clarity-act",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 11:09:16 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "1inch opens Aqua liquidity protocol across 13 chains",
-      "url": "https://www.coindesk.com/web3/2026/07/27/1inch-opens-aqua-liquidity-protocol-across-13-chains",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 11:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "1Inch moves to unite DeFi liquidity across 13 chains with Aqua",
-      "url": "https://cointelegraph.com/news/1inch-moves-to-unite-defi-liquidity-across-11-chains-with-aqua?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 28 Jul 2026 11:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Is the Web3 startup extinction event here, as Wall Street silently inherits crypto architecture?",
-      "url": "https://cryptoslate.com/is-the-web3-startup-extinction-event-here-as-wall-street-silently-inherits-crypto-architecture/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 10:20:35 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "'Running Away Balloon' Artist Sues AI Meme Generator Over Ad Templates",
-      "url": "https://decrypt.co/374501/running-away-balloon-artist-sues-ai-meme-generator-over-ad-templates",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 10:08:09 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Core Scientific ties its AI pivot to AMD in multi-gigawatt infrastructure deal",
-      "url": "https://www.theblock.co/post/409887/core-scientific-ties-ai-pivot-amd-multi-gigawatt-infrastructure-deal?utm_source=rss&utm_medium=rss",
+      "title": "Zcash activates Ironwood upgrade, launching new shielded pool after Orchard vulnerability",
+      "url": "https://www.theblock.co/post/409934/zcash-ironwood-upgrade-launching-new-shielded-pool-after-orchard-vulnerability?utm_source=rss&utm_medium=rss",
       "source": "The Block",
-      "published": "Tue, 28 Jul 2026 09:36:11 -0400",
+      "published": "Tue, 28 Jul 2026 13:26:31 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Russia\u2019s central bank drafts first rules for \u2018organized\u2019 crypto trading",
-      "url": "https://www.theblock.co/post/409877/russias-central-bank-drafts-first-rules-for-organized-crypto-trading?utm_source=rss&utm_medium=rss",
+      "title": "Robinhood Chain deposits climb but volume and users fade after memecoin-fueled launch",
+      "url": "https://www.theblock.co/post/409813/robinhood-chain-deposits-climb-volume-users-fade-memecoin-fueled-launch?utm_source=rss&utm_medium=rss",
       "source": "The Block",
-      "published": "Tue, 28 Jul 2026 09:22:21 -0400",
+      "published": "Tue, 28 Jul 2026 12:02:48 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Circle is arming USDC with 1,000 IBM patents to secure its grip on global banking rails",
-      "url": "https://cryptoslate.com/circle-is-arming-usdc-with-1000-ibm-patents-to-secure-its-grip-on-global-banking-rails/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 09:15:33 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Kalshi, Polymarket Score Win as Judge Blocks Minnesota Prediction Market Ban\u2014For Now",
-      "url": "https://decrypt.co/374498/kalshi-polymarket-score-win-as-judge-blocks-minnesota-prediction-market-ban-for-now",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 09:04:19 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "1inch launches Aqua publicly, a shared liquidity layer for DeFi across 13 chains",
-      "url": "https://www.theblock.co/post/409866/1inch-launches-aqua-publicly-a-shared-liquidity-layer-for-defi-across-13-chains?utm_source=rss&utm_medium=rss",
+      "title": "Galaxy Digital buys 500 acres in McGregor for second Texas AI data center campus",
+      "url": "https://www.theblock.co/post/409911/galaxy-digital-buys-500-acres-in-mcgregor-for-second-texas-ai-data-center-campus?utm_source=rss&utm_medium=rss",
       "source": "The Block",
-      "published": "Tue, 28 Jul 2026 08:19:48 -0400",
+      "published": "Tue, 28 Jul 2026 11:31:00 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Strategy hits a 5 week pause on Bitcoin, using $25M to quietly buy back its own discounted stock",
-      "url": "https://cryptoslate.com/strategy-hits-a-five-week-pause-on-bitcoin-using-25-million-to-quietly-buy-back-its-own-discounted-stock/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 08:05:30 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Judge blocks Minnesota from enforcing prediction market ban in win for Kalshi, Polymarket",
-      "url": "https://www.theblock.co/post/409861/judge-blocks-minnesota-prediction-market-ban?utm_source=rss&utm_medium=rss",
+      "title": "Nansen CEO bets on AI agents to overtake human traders within two years",
+      "url": "https://www.theblock.co/post/409914/nansen-ceo-bets-on-ai-agents-to-overtake-human-traders-within-two-years?utm_source=rss&utm_medium=rss",
       "source": "The Block",
-      "published": "Tue, 28 Jul 2026 03:22:20 -0400",
+      "published": "Tue, 28 Jul 2026 11:22:12 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "What Is KuCoin?",
-      "url": "https://www.theblock.co/learn/409571/what-is-kucoin?utm_source=rss&utm_medium=rss",
+      "title": "Barry Silbert-backed Zcash miner Fortitude brings Nebraska facility online to cut its ZEC production costs",
+      "url": "https://www.theblock.co/post/409899/barry-silbert-zcash-miner-fortitude-nebraska-facility-online-cut-zec-mining-costs?utm_source=rss&utm_medium=rss",
       "source": "The Block",
-      "published": "Tue, 28 Jul 2026 01:14:22 -0400",
+      "published": "Tue, 28 Jul 2026 11:13:41 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "What Is a Digital Commodity?",
-      "url": "https://www.theblock.co/learn/409682/what-is-a-digital-commodity?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Mon, 27 Jul 2026 21:55:46 -0400",
+      "title": "Tom Lee Reveals Why CLARITY Act Matters for Bitcoin, Ethereum, XRP and Crypto",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQdGxLSVRzMWpmZ3pnb1FqTmRvUVQ0aGM1eWtNQUFvN1JaYXVsbGlGeGdmMVlKLXhDa242OFpjTk9ydUZGbjltd1c5QmlvVVpLNHNjMlJwUXFRVW8wZ0RtMHNMMkhlcWQ5ak9BOXFOR1pnQ01oc0hRMkUwdldneFBMT3dMV3VYcU0zcEJoMDVJbGlfdlk2MTU0ZzBKT2tfY3JleDVzV3VqclV6OHYxNGRYY2IwZw?oc=5",
+      "source": "CryptoRank",
+      "published": "Tue, 28 Jul 2026 15:43:31 GMT",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Will Crypto Market Recover by End of 2026? 5 Factors That Could Decide Crypto\u2019s Future",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZlRWcWRnOXRuNGJmWGxHNE9jd0NHWU02OEdwXzVwc1Z3cktLTFRHSlg2OFZtY2N4VjNFZUpSb200ZW9NSWJHdzR3NURRN0Q0ZGx4dEc4UUxhbklVajFRQWxoOEl6MU9heTZIVjRGR3pOQlVkWGJJaTJKcDNnaE5kdURkcDhhNHlxZHFmWlY3SzBPX29MU1BUTVJ6VGU1TEdTMWQtV3Z1T2JsTEJpTEhCeXF0TEFDZWsxd3pmeVd1elZmclZUZ0VB?oc=5",
+      "source": "Bitcoin Foundation",
+      "published": "Tue, 28 Jul 2026 14:17:24 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -267,14 +283,6 @@
       "crypto": true
     },
     {
-      "title": "Schumer Submits SEC and CFTC Nominees to White House in Crypto Bill Talks, Source Says",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5RVl9LQk9TeFl1b25nRktlT1U2NlZ1Sko1WjdHMFhrSmxnbDM0a2N5RnIyTURRYVdGTWZ1dTFTcGpEZHVRQS1fVkFRaHZfUWVKZ2wxTjN3?oc=5",
-      "source": "Cryptonews.net",
-      "published": "Tue, 28 Jul 2026 02:55:18 GMT",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin, Ethereum, XRP, Dogecoin Plummet Even as SEC Chair Paul Atkins Sees Crypto Bill Advancing: Analyst Says BTC's Big Move 'Just Around the Corner'",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYmY2ckxLMDhORU5yQWRBWHVKVmZlWlRpdlE4M3ZVcm5EdWRwQlVvem5lWXB6VlJvOTAyVy1HamRBdFFWZ3B4TnFOWl9nV0ZzNnlyMnZ2bjRYLUp2NnU1eXFSck1uMVBTUGttMjhoVTNBTC1ORC13eHBPYVA1cHJhNVNQa0NvLTIyLTNpLUJDVU5zZGpLU19fb3JxUG5EbWJwSXpYcQ?oc=5",
       "source": "Yahoo Finance",
@@ -283,26 +291,18 @@
       "crypto": true
     },
     {
+      "title": "Schumer Submits SEC and CFTC Nominees to White House in Crypto Bill Talks, Source Says",
+      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5CbEg4djN6MTdzSEttd1lhSUVJWjV6SmtQbVVkQzVFcjgxbkU1WDlVdmFTWU5hcWczMDZHYkhXcjlpY3NGRzQxZzVMb3JuRmpqeUtpRXdYY05MdFVUbXNrTlRVVdIBY0FVX3lxTE5CbEg4djN6MTdzSEttd1lhSUVJWjV6SmtQbVVkQzVFcjgxbkU1WDlVdmFTWU5hcWczMDZHYkhXcjlpY3NGRzQxZzVMb3JuRmpqeUtpRXdYY05MdFVUbXNrTlRVVQ?oc=5",
+      "source": "Bitget",
+      "published": "Tue, 28 Jul 2026 01:33:40 GMT",
+      "topic": "Regulation",
+      "crypto": true
+    },
+    {
       "title": "Crypto Market Today, July 27: Bitcoin Steadies as Ahead of Fed Meeting",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQajIxTGljZ2xKMDlJeEZ6STQ4SEQtRXMxb1BXeDNaSjc2YmJVMEFfa0N1NWxpemF0UEQyQnVwbVRpM1owY1RJUnhaODNMOWRrMXZRTVBMcTctMnl4UU5UUTVzU28tdnV3RzV2c3BhMjhualBnck8yR3hXbVdVQWpfa3AtQ09iNlp0ei1Da1FrbDBpa2ZuLXFpLXU4THozT0ZFU3YzQUczcXY3MFkySDc4djRmYk14ME9TcWI1eE14aHpUVktBaDhBMg?oc=5",
       "source": "The Motley Fool",
       "published": "Mon, 27 Jul 2026 22:51:00 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin (BTC) price may fall to $52,000 as demand remains elusive, Nansen analyst says",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOeTVodjdoV0w3NFgzMmxOWjlxNXZYbDJyM1dMTklMZzY2ZjRqNW1xZTVwVEotYnVZSG85ZjRNN2dsTFZqOVpSN2FURXRlQ3hKakhNVG54TlNwaElyZGlMZF9hNVN1QzVZTjRRVk5GOGxYVnp6UzFpc0c5Q2JSNmNlM0dUYnpNcHhJLWczOTEzeXNlX0poMENOR3hqbUV0dkZ6ZVVkRHBFX0dUbzd3Wi04c3BxZm81S25qcDk2S001NExvVS1KMV80Ng?oc=5",
-      "source": "CoinDesk",
-      "published": "Mon, 27 Jul 2026 19:59:21 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin, Ethereum's Turn? 'The AI Trade's Over,' Prominent Macro Expert Says",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPUXA4Zm94QWdldy0yeUZJakNpeGFQbEg1MWVHTnVsSHVwVHB5YjlJbjBVS1B0ZUg2ei1uaXpBcFFxbEJLZTNYd0JhNkVmalAtMFZJRDJzOXE2dVhNWnNVM0JQWGV3a0tjM3M4WXhTTHg2Mmc4Q2VOS2NfakNDbG1rUi1BY0pPX2NXdjVPVXlrcTBLNlVhY2ltbmFnRlpGMEJ3YlVWeDhMV1JrRlg3emx5V3lkWDNDV2VkQVYydXpub1dqU0FjQzZDLWhnbw?oc=5",
-      "source": "Benzinga",
-      "published": "Mon, 27 Jul 2026 17:16:57 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
