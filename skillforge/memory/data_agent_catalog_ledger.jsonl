@@ -225,3 +225,4 @@
 {"ts": "2026-07-28T21:15:28.742549Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T21:30:27.493258Z", "target": "avax", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T21:45:37.388549Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
+{"ts": "2026-07-28T22:01:19.018756Z", "target": "vaneck-treasury-fund", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}

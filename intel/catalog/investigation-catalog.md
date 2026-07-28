@@ -763,3 +763,5 @@
 | 2026-07-28 | auto | 0x46dDcc662A045770CE1e264819542C9617547777 (BANK) | deep_investigation | PROCEED (92/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-28 | auto | 0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676 (CES) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-28 | auto | 0x5bAd40E938230A0C347a86995D82Ba92bEE2cD2C (CES) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |

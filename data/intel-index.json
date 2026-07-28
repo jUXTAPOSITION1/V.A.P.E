@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T21:56:41Z",
+  "generated": "2026-07-28T22:01:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 404,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 121,
-    "investigations": 476,
+    "investigations": 477,
     "news": 13,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-214532-0x3f234f3A.md",
+      "file": "investigation-20260728-220112-0x5bAd40E9.md",
       "title": "Investigation \u2014 CES",
       "symbol": "CES",
-      "name": "WHALEBIT",
-      "date": "2026-07-28T21:45:32Z",
-      "target": "0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676",
+      "name": "WHaleBit",
+      "date": "2026-07-28T22:01:12Z",
+      "target": "0x5bAd40E938230A0C347a86995D82Ba92bEE2cD2C",
       "chain": "137 (Polygon)",
       "verdict": "REJECT",
       "score": "12",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-214532-0x3f234f3A.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CES (0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-220112-0x5bAd40E9.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-220112-0x5bAd40E9.md",
+      "title": "Investigation \u2014 CES",
+      "symbol": "CES",
+      "name": "WHaleBit",
+      "date": "2026-07-28T22:01:12Z",
+      "target": "0x5bAd40E938230A0C347a86995D82Ba92bEE2cD2C",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CES (0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-220112-0x5bAd40E9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-214532-0x3f234f3A.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Very few holders (25) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 87% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-10] Low liquidity",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-004620-0x9a6Cb2C4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-001613-0x3C0541e6.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
-      "date": "2026-07-28T00:16:13Z",
-      "target": "0x3C0541e68CE0F1F9073E4BA3Db81b730Eb614444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-001613-0x3C0541e6.md"
     }
   ],
   "reports": [
