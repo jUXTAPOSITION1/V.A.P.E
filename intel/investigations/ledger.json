@@ -2901,6 +2901,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x6224e0f53de461feefd4d755dc314fa0324a4444": {
+    "address": "0x6224e0f53de461fEEfD4D755dc314FA0324a4444",
+    "chain": "56",
+    "creator_address": "0xbf480f8e3c1e67a78d726acd32492abda1170119",
+    "first_investigated": "2026-07-28T12:08:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-120818-0x6224e0f5.md",
+        "score": 40,
+        "ts": "2026-07-28T12:08:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-28T12:08:18Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "\u5e01\u6709",
+    "times_investigated": 1
+  },
   "56:0x6e88056e8376ae7709496ba64d37fa2f8015ce3e": {
     "address": "0x6E88056E8376Ae7709496Ba64d37fa2f8015ce3e",
     "chain": "56",

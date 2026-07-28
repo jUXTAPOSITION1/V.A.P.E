@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-28T11:08:39Z — 177 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-28T12:08:18Z — 178 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| 币有 | BNB Chain | `0x6224e0f53de461fEEfD4D755dc314FA0324a4444` | 40/100 | 1 | 2026-07-28T12:08:18Z |
 | Blinky | Ethereum | `0x57c4ABE2560C41F97519C43dbe874e844D63F3BC` | 35/100 | 1 | 2026-07-28T11:08:39Z |
 | DXCHCK | Base | `0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07` | 10/100 | 1 | 2026-07-28T10:23:35Z |
 | 币有 | BNB Chain | `0xb7E4183260BfC5ED9965f723bF739451c7757f89` | 25/100 | 1 | 2026-07-28T09:53:16Z |

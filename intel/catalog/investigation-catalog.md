@@ -717,3 +717,5 @@
 | 2026-07-28 | auto | 0x32B0007f0E3eDd1F55c015bD7445EA5556cF4B07 (DXCHCK) | deep_investigation | REJECT (10/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-07-28 | auto | 0x57c4ABE2560C41F97519C43dbe874e844D63F3BC (Blinky) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 86% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-28 | auto | 0x6224e0f53de461fEEfD4D755dc314FA0324a4444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
