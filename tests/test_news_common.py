@@ -193,20 +193,6 @@ def test_coingecko_news_parses_real_shape():
     assert out[0]["image"] == "https://x.example/img.jpg"
 
 
-def test_extract_og_image_rejects_non_public_url():
-    assert nc.extract_og_image("http://169.254.169.254/latest/meta-data/") is None
-
-
-def test_extract_og_image_parses_meta_tag():
-    html_body = b'<html><head><meta property="og:image" content="https://cdn.example/pic.jpg"></head></html>'
-    with mock.patch("agents.news_common._validate_fetch_url", return_value=True), \
-         mock.patch("urllib.request.build_opener") as build_opener:
-        opener = build_opener.return_value
-        opener.open.return_value.__enter__.return_value.read.return_value = html_body
-        img = nc.extract_og_image("https://example.com/story")
-    assert img == "https://cdn.example/pic.jpg"
-
-
 def _make_test_jpeg(path, size=(400, 300), color=(30, 60, 90)):
     from PIL import Image
     Image.new("RGB", size, color).save(path, "JPEG")
@@ -309,3 +295,64 @@ def test_scrape_article_text_returns_none_on_failure(monkeypatch):
 def test_scrape_article_text_returns_none_when_content_empty(monkeypatch):
     monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": "   "})
     assert nc.scrape_article_text("https://example.com/story") is None
+
+
+def test_scrape_category_page_extracts_and_validates_links(monkeypatch):
+    page_markdown = (
+        "# CoinDesk News\n\n"
+        "[Bitcoin Rallies Past $100K](https://www.coindesk.com/markets/bitcoin-100k)\n\n"
+        "[Ethereum Upgrade Ships](https://www.coindesk.com/tech/eth-upgrade)\n\n"
+        "[Sponsored: Buy Crypto Now](https://ads.example/sponsored)\n"
+    )
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"raw": {"markdown": page_markdown}})
+    llm_json = json.dumps([
+        {"title": "Bitcoin Rallies Past $100K", "url": "https://www.coindesk.com/markets/bitcoin-100k"},
+        {"title": "Ethereum Upgrade Ships", "url": "https://www.coindesk.com/tech/eth-upgrade"},
+        {"title": "Hallucinated Story", "url": "https://www.coindesk.com/not-really-there"},
+    ])
+    with mock.patch("agents.intel_common.grok_analysis", return_value=llm_json):
+        out = nc.scrape_category_page("https://www.coindesk.com/coindesk-news", "CoinDesk", "crypto-markets")
+
+    assert len(out) == 2  # the hallucinated third url is dropped -- not present in the scraped content
+    assert {o["url"] for o in out} == {
+        "https://www.coindesk.com/markets/bitcoin-100k",
+        "https://www.coindesk.com/tech/eth-upgrade",
+    }
+    assert all(o["source"] == "CoinDesk" and o["topic"] == "crypto-markets" for o in out)
+
+
+def test_scrape_category_page_returns_empty_on_scrape_failure(monkeypatch):
+    def fake_scrape(url):
+        raise RuntimeError("network down")
+
+    monkeypatch.setattr("skillforge.research.scrape", fake_scrape)
+    assert nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets") == []
+
+
+def test_scrape_category_page_returns_empty_when_content_empty(monkeypatch):
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": "   "})
+    with mock.patch("agents.intel_common.grok_analysis") as grok:
+        assert nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets") == []
+    grok.assert_not_called()  # nothing real to extract from -- never spend an LLM call
+
+
+def test_scrape_category_page_returns_empty_when_llm_unavailable(monkeypatch):
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": "[Story](https://example.com/a)"})
+    with mock.patch("agents.intel_common.grok_analysis",
+                     return_value="_Analyst narrative unavailable this cycle (no LLM provider reachable)._"):
+        assert nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets") == []
+
+
+def test_scrape_category_page_returns_empty_on_malformed_json(monkeypatch):
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": "[Story](https://example.com/a)"})
+    with mock.patch("agents.intel_common.grok_analysis", return_value="not json at all"):
+        assert nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets") == []
+
+
+def test_scrape_category_page_respects_max_results(monkeypatch):
+    content = " ".join(f"[Story {i}](https://example.com/{i})" for i in range(5))
+    monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": content})
+    llm_json = json.dumps([{"title": f"Story {i}", "url": f"https://example.com/{i}"} for i in range(5)])
+    with mock.patch("agents.intel_common.grok_analysis", return_value=llm_json):
+        out = nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets", max_results=2)
+    assert len(out) == 2

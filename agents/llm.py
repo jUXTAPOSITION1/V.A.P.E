@@ -738,6 +738,98 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
     return None
 
 
+# --- xAI Grok Image (fallback for the AI-image tier) ---
+# Reinstated 2026-07-28 as ask_gemini_image()'s fallback, not primary --
+# Gemini's image model is Google Cloud's own infrastructure (VAPE's real
+# route once billing is enabled on that project; see ask_gemini_image()'s
+# docstring for the free-tier quota wall a live dispatch hit), while this
+# is a separate, billed-per-image xAI product on the same XAI_API_KEY_1 key
+# used elsewhere in this file for text -- briefly removed entirely
+# (2026-07-27) over an xAI credit-budget concern, explicitly reinstated by
+# direction (2026-07-28) as a working fallback while that budget concern is
+# accepted as a real, known tradeoff. Same daily image-count cap design as
+# before removal, since it's billed per-image, not per-token, unlike every
+# other xAI use in this file.
+IMAGE_USAGE_PATH = os.path.join(MEMORY_DIR, "xai_image_usage.json")
+DEFAULT_IMAGE_DAILY_CAP = 15  # ~$1.05/day at $0.07/image -- comfortable headroom over the ~8 stories/day news-intel cadence this exists for
+XAI_IMAGE_MODEL = "grok-2-image-1212"
+
+
+def _xai_image_daily_cap():
+    try:
+        return int(os.getenv("XAI_IMAGE_DAILY_CAP", DEFAULT_IMAGE_DAILY_CAP))
+    except (TypeError, ValueError):
+        return DEFAULT_IMAGE_DAILY_CAP
+
+
+def _xai_image_quota_ok():
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        with open(IMAGE_USAGE_PATH) as f:
+            usage = json.load(f)
+    except Exception:
+        usage = {}
+    return usage.get("date") != today or usage.get("count", 0) < _xai_image_daily_cap()
+
+
+def _record_xai_image_usage():
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        with open(IMAGE_USAGE_PATH) as f:
+            usage = json.load(f)
+    except Exception:
+        usage = {}
+    if usage.get("date") != today:
+        usage = {"date": today, "count": 0}
+    usage["count"] = usage.get("count", 0) + 1
+    try:
+        os.makedirs(os.path.dirname(IMAGE_USAGE_PATH), exist_ok=True)
+        with open(IMAGE_USAGE_PATH, "w") as f:
+            json.dump(usage, f)
+    except Exception:
+        pass
+
+
+def ask_xai_image(prompt, timeout=45):
+    """Real text-to-image call against xAI's Grok Image model. Returns a
+    real image URL on success, or None (never raises) if XAI_API_KEY_1
+    isn't set, today's daily cap is already hit, or the call errors for any
+    reason — callers must degrade to the brand-mark logo fallback, never a
+    broken image or a crash. The returned URL is a plain http(s) string,
+    not bytes — pass it straight to news_common.brand_image() exactly like
+    already-decoded bytes; no separate fetch step needed here."""
+    key = os.getenv("XAI_API_KEY_1")
+    if not key:
+        return None
+    if not _xai_image_quota_ok():
+        print(f"[llm] xAI image daily cap ({_xai_image_daily_cap()}) reached — skipping generation")
+        return None
+    body = json.dumps({
+        "model": XAI_IMAGE_MODEL,
+        "prompt": prompt[:1000],
+        "n": 1,
+        "response_format": "url",
+    }).encode()
+    req = urllib.request.Request(
+        "https://api.x.ai/v1/images/generations",
+        data=body,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = json.loads(r.read().decode("utf-8", "replace"))
+        item = data["data"][0]
+        url = item.get("url")
+        if not url:
+            return None
+        _record_xai_image_usage()
+        return url
+    except Exception as e:
+        print(f"[llm] xai_image:{type(e).__name__}:{e}", file=sys.stderr)
+        return None
+
+
 def ask_safe(system, user, **kw):
     """Never raises — returns (text_or_error_string, provider_or_None)."""
     try:

@@ -5,7 +5,7 @@ investigative reports). Same design rule as agents/intel_common.py: real,
 fetched data first, LLM only for narrative synthesis — never invent a
 headline, source, or quote.
 
-Five source lanes, all keyless (no vendor account needed to ship a working
+Six source lanes, all keyless (no vendor account needed to ship a working
 v1):
   1. Google News RSS search (news.google.com/rss/search) — no API key, no
      quota, works for any query string. This is the main discovery lane.
@@ -36,6 +36,13 @@ v1):
      as grounding even when a later live scrape of the full page fails),
      and their publishers are generally more scraper-tolerant than the
      financial-media sites Google News often surfaces.
+  6. Outlets' own category/listing pages (CATEGORY_PAGES below), scraped
+     via skillforge.research.scrape() and LLM-extracted into {title, url}
+     pairs (scrape_category_page()) — added 2026-07-28 for outlets whose
+     listing page itself is a real source of more headlines than their RSS
+     feed surfaces alone. Every extracted url is verified to actually
+     appear in the scraped page content before being trusted, guarding
+     against the extraction model inventing or altering a link.
 """
 import io
 import os
@@ -205,6 +212,100 @@ def native_rss_feed(feed_url, source_name, topic, max_results=8):
     return out
 
 
+def _is_llm_unavailable(text):
+    return (text or "").strip().startswith("_Analyst narrative unavailable")
+
+
+# Outlets' own category/listing pages, scraped and LLM-extracted rather than
+# via RSS -- for sources whose RSS feed is thin/absent but whose listing page
+# itself already carries a real story-by-story text presence, giving
+# write_story() more candidates with real substance to work from (see module
+# docstring's lane 5 and its "only report what we can source" companion rule
+# in news_reporter.py). Deliberately short: each entry costs one scrape + one
+# LLM extraction call per discovery cycle.
+CATEGORY_PAGES = [
+    ("https://www.coindesk.com/coindesk-news", "CoinDesk", "crypto-markets"),
+]
+
+
+def scrape_category_page(url, source_name, topic, max_results=10):
+    """One category/listing page -> up to max_results {title, url} pairs,
+    via a real scrape (skillforge/research.py's Firecrawl/Bright Data/
+    keyless chain, same normalization as scrape_article_text()) followed by
+    one LLM extraction call rather than brittle CSS-selector scraping —
+    listing-page markup varies too much across outlets and changes without
+    notice, while the scraped markdown's actual link text is stable.
+
+    Anti-hallucination guard: every extracted url must appear verbatim in
+    the scraped content itself, otherwise it's dropped — the model is
+    reading a real page, not inventing links from its own training data, and
+    this is the only way to catch it if it does. Returns [] (never raises)
+    on any failure — network, parse, or an LLM response with nothing real
+    in it — matching every other lane's degradation contract."""
+    try:
+        from skillforge.research import scrape as web_scrape
+    except Exception:
+        return []
+    try:
+        res = web_scrape(url)
+    except Exception:
+        return []
+    raw = res.get("raw")
+    content = None
+    if isinstance(raw, dict):
+        content = raw.get("markdown") or raw.get("content") or raw.get("text")
+    elif isinstance(raw, list) and raw and isinstance(raw[0], dict):
+        content = raw[0].get("markdown") or raw[0].get("text") or raw[0].get("content")
+    if not content:
+        content = res.get("content")  # keyless-fetch shape
+    if not isinstance(content, str) or not content.strip():
+        return []
+    content = content.strip()
+
+    try:
+        from agents import intel_common as ic
+    except Exception:
+        return []
+    instructions = (
+        f"Below is the raw scraped markdown of {source_name}'s news listing page. Extract up to "
+        f"{max_results} distinct real news article headlines with their links -- actual story "
+        "links only, never navigation, tag/category, author, or advertisement links. Respond with "
+        "ONLY a JSON array, no other text, each element exactly "
+        '{"title": "<exact headline text>", "url": "<exact link>"}. Copy every url character-for-'
+        "character as it appears in the markdown below -- never invent, guess, complete, or modify "
+        "a url. If you find no real article links, respond with an empty JSON array []."
+    )
+    out_text = ic.grok_analysis(
+        "news editor extracting article links from a scraped listing page",
+        content[:15000], instructions=instructions, max_tokens=1500, temperature=0.0,
+    )
+    if _is_llm_unavailable(out_text):
+        return []
+    match = re.search(r"\[.*\]", out_text or "", re.S)
+    if not match:
+        return []
+    try:
+        parsed = json.loads(match.group(0))
+    except Exception:
+        return []
+    if not isinstance(parsed, list):
+        return []
+    out = []
+    for item in parsed:
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("title") or "").strip()
+        link = str(item.get("url") or "").strip()
+        if not title or not link or not link.startswith("http"):
+            continue
+        if link not in content:  # anti-hallucination guard -- see docstring
+            continue
+        out.append({"title": title, "url": link, "source": source_name, "published": "", "topic": topic})
+        if len(out) >= max_results:
+            break
+    return out
+
+
 def coingecko_news(max_results=10):
     """Best-effort only — see module docstring. Any non-200/parse failure
     silently contributes nothing; never treated as an error by callers."""
@@ -296,6 +397,10 @@ def gather_headlines():
     for feed_url, source_name, topic in NATIVE_RSS_FEEDS:
         native.extend(native_rss_feed(feed_url, source_name, topic, max_results=6))
     items.extend(native)
+    category = []
+    for page_url, source_name, topic in CATEGORY_PAGES:
+        category.extend(scrape_category_page(page_url, source_name, topic))
+    items.extend(category)
     cg = coingecko_news(max_results=10)
     items.extend(cg)
     web = web_headline_search()
@@ -307,7 +412,7 @@ def gather_headlines():
     # from "nothing new this cycle," which made it impossible to tell
     # whether a lane was actually working.
     print(f"[news_common] lanes -- google_news:{gnews_count} native_rss:{len(native)} "
-          f"coingecko:{len(cg)} web_search:{len(web)}", file=sys.stderr)
+          f"category_pages:{len(category)} coingecko:{len(cg)} web_search:{len(web)}", file=sys.stderr)
     return dedupe(items)
 
 
@@ -335,29 +440,6 @@ def mark_reported(state, url, max_keep=500):
         reported.append(url)
     if len(reported) > max_keep:
         del reported[: len(reported) - max_keep]
-
-
-def extract_og_image(url):
-    """Best-effort og:image scrape from the source article's own page, reusing
-    research.py's SSRF-safe fetch machinery rather than re-deriving URL/
-    redirect validation. Returns None (never raises) if the page can't be
-    fetched or has no og:image — callers must treat a missing image as
-    "no real source image available," not an error."""
-    if not _validate_fetch_url(url):
-        return None
-    try:
-        opener = urllib.request.build_opener(_SSRFSafeRedirectHandler)
-        req = urllib.request.Request(url, headers=UA)
-        with opener.open(req, timeout=12) as r:
-            raw = r.read(300000).decode("utf-8", "replace")
-    except Exception:
-        return None
-    m = (re.search(r'<meta[^>]+property=["\']og:image["\'][^>]*content=["\']([^"\']+)["\']', raw, re.I)
-         or re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']', raw, re.I))
-    if not m:
-        return None
-    img = html.unescape(m.group(1)).strip()
-    return img if img.startswith("http") else None
 
 
 def scrape_article_text(url, max_len=3000):
@@ -414,9 +496,9 @@ def write_news_report(slug, body_md):
 def _fetch_image_bytes(source):
     """Real bytes for `source` — already-decoded bytes (the AI-generation
     tier hands these over directly, no fetch needed), a remote http(s) URL
-    (SSRF-guarded exactly like extract_og_image's fetch, reusing the same
-    validated opener), or a docs/-relative local asset path (e.g.
-    FALLBACK_IMAGE). Returns None (never raises) on any failure."""
+    (SSRF-guarded, reusing skillforge/research.py's validated opener), or a
+    docs/-relative local asset path (e.g. FALLBACK_IMAGE). Returns None
+    (never raises) on any failure."""
     if isinstance(source, bytes):
         return source
     if source.startswith("http"):
