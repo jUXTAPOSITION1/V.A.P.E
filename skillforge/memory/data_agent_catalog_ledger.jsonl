@@ -196,3 +196,4 @@
 {"ts": "2026-07-28T07:51:05.514290Z", "target": "bsc", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T08:21:13.347382Z", "target": "gate", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-28T08:52:44.831679Z", "target": "mexc", "hired": ["protocol"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
+{"ts": "2026-07-28T09:22:49.426958Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
