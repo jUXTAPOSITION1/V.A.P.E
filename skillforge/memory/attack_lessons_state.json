@@ -88,5 +88,15 @@
     "logged_at": "2026-07-27T03:18:36Z",
     "pattern": "oracle_flashloan",
     "has_backtest": false
+  },
+  "2026-07-26:WEMIX": {
+    "logged_at": "2026-07-28T19:26:31Z",
+    "pattern": "access_control",
+    "has_backtest": false
+  },
+  "2026-07-25:Projekt": {
+    "logged_at": "2026-07-28T19:26:31Z",
+    "pattern": "oracle_flashloan",
+    "has_backtest": false
   }
 }
