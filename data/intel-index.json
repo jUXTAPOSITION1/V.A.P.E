@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T16:57:27Z",
+  "generated": "2026-07-28T17:12:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 398,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 467,
+    "investigations": 468,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-162716-0xa7Aee6cB.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5e01",
-      "date": "2026-07-28T16:27:16Z",
-      "target": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-162716-0xa7Aee6cB.md"
+      "file": "investigation-20260728-171222-0xDDB34224.md",
+      "title": "Investigation \u2014 COTI",
+      "symbol": "COTI",
+      "name": "COTI Token",
+      "date": "2026-07-28T17:12:22Z",
+      "target": "0xDDB3422497E61e13543BeA06989C0789117555c5",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xe0e42c70880d57230fb843db5eba6800533e91ae) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 29331 holders \u2014 reasonably distributed; Trading 2161+ days wi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-171222-0xDDB34224.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-171222-0xDDB34224.md",
+      "title": "Investigation \u2014 COTI",
+      "symbol": "COTI",
+      "name": "COTI Token",
+      "date": "2026-07-28T17:12:22Z",
+      "target": "0xDDB3422497E61e13543BeA06989C0789117555c5",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "63",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xe0e42c70880d57230fb843db5eba6800533e91ae) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 29331 holders \u2014 reasonably distributed; Trading 2161+ days wi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-171222-0xDDB34224.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-162716-0xa7Aee6cB.md",
@@ -594,20 +608,6 @@
       "score": "57",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-10] Violent 24h move +4923% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-181455-0xf3610Dbf.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-171331-0xfCF79856.md",
-      "title": "Investigation \u2014 RWA",
-      "symbol": "RWA",
-      "name": "RWA-AI",
-      "date": "2026-07-27T17:13:31Z",
-      "target": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $18,513. Positive evidence: Ownership renounced; 722 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 837+ da",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-171331-0xfCF79856.md"
     }
   ],
   "reports": [

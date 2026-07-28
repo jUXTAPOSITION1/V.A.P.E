@@ -745,3 +745,5 @@
 | 2026-07-28 | auto | 0x6F43fF77A9C0Cf552b5b653268fBFe26A052429b (LAMBO) | deep_investigation | REJECT (35/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-28 | auto | 0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444 (币有) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-28 | auto | 0xDDB3422497E61e13543BeA06989C0789117555c5 (COTI) | deep_investigation | CAUTION (63/100) | Mintable supply (dilution risk) | +7d |
