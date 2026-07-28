@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T02:16:21Z",
+  "generated": "2026-07-28T02:31:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 388,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 117,
     "investigations": 439,
-    "news": 5,
+    "news": 6,
     "tools": 16,
     "tools_verified": 16,
     "skills": 21
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md",
+      "title": "Nansen Flags Elusive Bitcoin Demand, Warns of Possible Slide to $52,000",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 02:31 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Thin sourcing leaves open whether the warning reflects fresh on-chain data or broader market caution.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md"
+    },
     {
       "file": "news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md",
       "title": "Bitcoin Holds Position Ahead of Federal Reserve Policy Signals",
