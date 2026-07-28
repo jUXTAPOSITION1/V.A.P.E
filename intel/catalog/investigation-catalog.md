@@ -765,3 +765,5 @@
 | 2026-07-28 | auto | 0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676 (CES) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-28 | auto | 0x5bAd40E938230A0C347a86995D82Ba92bEE2cD2C (CES) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-28 | auto | 0x9c891326Fd8b1a713974f73bb604677E1E63396D (ISLAMI) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
