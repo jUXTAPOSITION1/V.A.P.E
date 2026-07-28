@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T15:23:53Z",
+  "generated": "2026-07-28T15:41:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 395,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 120,
-    "investigations": 464,
+    "investigations": 465,
     "news": 12,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-150906-0x26e9dbe7.md",
-      "title": "Investigation \u2014 fBOMB",
-      "symbol": "fBOMB",
-      "name": "Fantom Bomb",
-      "date": "2026-07-28T15:09:06Z",
-      "target": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
+      "file": "investigation-20260728-154111-0x18E3605B.md",
+      "title": "Investigation \u2014 HEFE",
+      "symbol": "HEFE",
+      "name": "HEFE",
+      "date": "2026-07-28T15:41:11Z",
+      "target": "0x18E3605B13F10016901eAC609b9E188CF7c18973",
       "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-10] Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PHAR (0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7) \u2014 CAUTION 72/100 \u2014 likely the same serial campaign; [-20] Very few holders (33) \u2014 thin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-150906-0x26e9dbe7.md"
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Low liquidity $35,536; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 5393 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 259+ days without a known incident in this scan; DefiLlama has priced this token for 820+ days \u2014 indepe",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-154111-0x18E3605B.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260728-154111-0x18E3605B.md",
+      "title": "Investigation \u2014 HEFE",
+      "symbol": "HEFE",
+      "name": "HEFE",
+      "date": "2026-07-28T15:41:11Z",
+      "target": "0x18E3605B13F10016901eAC609b9E188CF7c18973",
+      "chain": "43114 (Avalanche)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Low liquidity $35,536; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 5393 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 259+ days without a known incident in this scan; DefiLlama has priced this token for 820+ days \u2014 indepe",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-154111-0x18E3605B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-150906-0x26e9dbe7.md",
@@ -594,20 +608,6 @@
       "score": "77",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated. Positive evidence: 1352 holders \u2014 reasonably distributed; Trading 279+ days without a known incident in this scan; Custom verified source (not a mass-produced factory ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-155707-0x5C09A9cE.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260727-154206-0xd5d0A9b3.md",
-      "title": "Investigation \u2014 abcPHAR",
-      "symbol": "abcPHAR",
-      "name": "abcPHAR",
-      "date": "2026-07-27T15:42:06Z",
-      "target": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-10] Owner not renounced (0x383ea12347e56932e08638767b8a2b3c18700493) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260727-154206-0xd5d0A9b3.md"
     }
   ],
   "reports": [

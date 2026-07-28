@@ -2540,6 +2540,25 @@
     "symbol": "BTC.b",
     "times_investigated": 1
   },
+  "43114:0x18e3605b13f10016901eac609b9e188cf7c18973": {
+    "address": "0x18E3605B13F10016901eAC609b9E188CF7c18973",
+    "chain": "43114",
+    "creator_address": "0x5568938bf4188bb868dbf31614091062c4a44b1e",
+    "first_investigated": "2026-07-28T15:41:11Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260728-154111-0x18E3605B.md",
+        "score": 75,
+        "ts": "2026-07-28T15:41:11Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-28T15:41:11Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "HEFE",
+    "times_investigated": 1
+  },
   "43114:0x26e9dbe75aed331e41272bece932ff1b48926ca9": {
     "address": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
     "chain": "43114",

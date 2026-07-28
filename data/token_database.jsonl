@@ -51,3 +51,4 @@
 {"ts": "2026-07-28T12:53:28.171636Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-28T13:53:27.509770Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-07-28T14:23:39.267012Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-07-28T15:41:19.640019Z", "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "chain": "42161", "symbol": "ESP", "name": "ESP", "source": "evm", "offering": "liquidity_check"}
