@@ -3300,6 +3300,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0x40b8129b786d766267a7a118cf8c07e31cdb6fde": {
+    "address": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde",
+    "chain": "56",
+    "creator_address": "0xf0a45416394ce78f18ac4ce8ae6c6ff8cfb4455f",
+    "first_investigated": "2026-07-29T03:05:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-030507-0x40b8129B.md",
+        "score": 60,
+        "ts": "2026-07-29T03:05:07Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-29T03:05:07Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "UB",
+    "times_investigated": 1
+  },
   "56:0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa": {
     "address": "0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA",
     "chain": "56",

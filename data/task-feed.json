@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-29T02:49:42Z",
-  "synthesis": "VAPE's automation repeatedly ran featured investigations every 15 minutes, with occasional security sweeps, bounty radar, reputation snapshots, and findings sealing.",
+  "generated": "2026-07-29T03:05:12Z",
+  "synthesis": "[investigation]",
   "tasks": [
+    {
+      "sha": "d72c9c9b39",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T02:49Z",
+      "date": "2026-07-29T02:49:44Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d72c9c9b39f569aede8a9a66fd10aff2b3038b1c"
+    },
     {
       "sha": "f6384faf51",
       "kind": "sweep",
@@ -99,13 +106,6 @@
       "message": "reputation snapshot 2026-07-29T00:11Z",
       "date": "2026-07-29T00:11:08Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/837257840f1f5a21d0353d408b09813f2440fbcc"
-    },
-    {
-      "sha": "f21bd74c5a",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T00:03Z",
-      "date": "2026-07-29T00:03:39Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f21bd74c5a0785400e01dc81535e3fec15308c46"
     }
   ]
 }

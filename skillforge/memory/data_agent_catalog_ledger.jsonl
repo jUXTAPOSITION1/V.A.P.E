@@ -238,3 +238,4 @@
 {"ts": "2026-07-29T01:34:12.205763Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["token_safety_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-29T02:04:30.653676Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-29T02:34:45.680609Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
+{"ts": "2026-07-29T03:05:11.206498Z", "target": "vaneck-treasury-fund", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
