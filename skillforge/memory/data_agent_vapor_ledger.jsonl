@@ -210,3 +210,4 @@
 {"ts": "2026-07-29T04:35:23.930456Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-29T05:20:38.437219Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-29T06:05:16.233984Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-29T06:35:24.010934Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}

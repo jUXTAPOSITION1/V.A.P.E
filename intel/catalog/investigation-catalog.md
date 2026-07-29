@@ -793,3 +793,5 @@
 | 2026-07-29 | auto | 0x2C69ff812F62e664Fe23f2dC781C773D8c404cCc (Buddy) | deep_investigation | REJECT (0/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
 
 | 2026-07-29 | auto | 0xe0AeE745b22c522DE621F826a9453f534808DFD0 (MCU) | deep_investigation | REJECT (35/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-29 | auto | 0x31397372b6FE190a08ceb99B83b09d5CbB4c9cC3 (策略01) | deep_investigation | REJECT (17/100) | Low holder count (65) | +7d |

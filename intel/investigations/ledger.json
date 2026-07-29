@@ -1231,6 +1231,25 @@
     "symbol": "ASTEROID",
     "times_investigated": 1
   },
+  "1:0x31397372b6fe190a08ceb99b83b09d5cbb4c9cc3": {
+    "address": "0x31397372b6FE190a08ceb99B83b09d5CbB4c9cC3",
+    "chain": "1",
+    "creator_address": "0xbb45d5418c1e4c1c551cfe74c4a109f2ebf6b7e3",
+    "first_investigated": "2026-07-29T06:35:21Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-063521-0x31397372.md",
+        "score": 17,
+        "ts": "2026-07-29T06:35:21Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T06:35:21Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "\u7b56\u756501",
+    "times_investigated": 1
+  },
   "1:0x317c63fdf448779923fe9b845e4a58cb4d224e56": {
     "address": "0x317C63Fdf448779923fe9b845E4A58CB4d224e56",
     "chain": "1",
