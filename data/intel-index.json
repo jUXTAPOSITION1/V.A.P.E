@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-29T15:08:53Z",
+  "generated": "2026-07-29T15:10:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 418,
+    "reports": 419,
     "reports_by_type": {
       "bounty": 89,
+      "virtuals": 89,
       "security": 77,
       "base": 87,
       "sentiment": 45,
-      "virtuals": 88,
       "macro": 22,
       "bug": 3,
       "mainnet": 3,
@@ -621,6 +621,17 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_150819.md",
       "bytes": 15594
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-29-15.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-29T15:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-29 15:10 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-29-15.md",
+      "bytes": 3063
     },
     {
       "kind": "intel",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-26 20:12 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-26-20.md",
       "bytes": 4378
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-26-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-26T19:00Z",
-      "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 9 incidents reported in the last 7 days. Although none of these incidents exceeded $50M in the last 14 days, the frequency and variety of attacks suggest a persistent and evolving threat environment. Hot wallet compromises, accounting errors, input validation flaws, and brid",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-19.md",
-      "bytes": 6867
     }
   ],
   "broadcasts": [
