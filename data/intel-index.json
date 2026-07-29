@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T03:50:50Z",
+  "generated": "2026-07-29T04:05:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 407,
@@ -1735,7 +1735,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49242948",
+      "version": "49254060",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1745,7 +1745,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.39 eth_dom 10.19 mcap_chg_24h -1.14",
+      "version": "btc_dom 56.48 eth_dom 10.11 mcap_chg_24h 0.38",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1785,7 +1785,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-26 WEMIX 0.73 M ['WEMIX3.0'] Access Control Exploit",
+      "version": "2026-07-28 Crypto DAO 8.2 M ['BSC'] None",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
