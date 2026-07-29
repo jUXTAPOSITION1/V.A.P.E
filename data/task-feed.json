@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-29T08:35:32Z",
-  "synthesis": "[automation]",
+  "generated": "2026-07-29T08:50:26Z",
+  "synthesis": "VAPE's automation ran eight featured investigations plus security sweeps, news intel, bounty radar, tool checks, findings sealing, and a reputation snapshot.",
   "tasks": [
+    {
+      "sha": "937ac18ab3",
+      "kind": "sweep",
+      "message": "security_sweep 2026-07-29T08:42Z",
+      "date": "2026-07-29T08:42:30Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/937ac18ab3ec8ecb3787c91e719f1ee98bf59a83"
+    },
+    {
+      "sha": "c7c18e3149",
+      "kind": "automation",
+      "message": "news-intel 2026-07-29T08:41Z",
+      "date": "2026-07-29T08:41:44Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c7c18e3149e8d534a1950bf75f552703690d7ffd"
+    },
+    {
+      "sha": "e04d36d388",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T08:35Z",
+      "date": "2026-07-29T08:35:35Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e04d36d38897bf469acd5e51b813f5e21f2bcf92"
+    },
     {
       "sha": "68666a4684",
       "kind": "automation",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-29T06:35Z",
       "date": "2026-07-29T06:35:53Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/aad22c70ca4617e06d635e195c8ef31ca0e37f3a"
-    },
-    {
-      "sha": "dc3bee7b89",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-07-29T06:32Z",
-      "date": "2026-07-29T06:32:04Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dc3bee7b8955ad2ea8d862334a0ab736cf888b27"
-    },
-    {
-      "sha": "73ce20ff2b",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-29T06:32Z",
-      "date": "2026-07-29T06:32:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/73ce20ff2b83a8d309e77fc802d56df4bc1dc6ae"
-    },
-    {
-      "sha": "f94371f738",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T06:20Z",
-      "date": "2026-07-29T06:20:28Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f94371f738d8ab444b8070c607f5a23608617a25"
     }
   ]
 }
