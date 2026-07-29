@@ -66,3 +66,4 @@
 {"ts": "2026-07-29T20:17:06.811300Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-07-29T22:05:45.552224Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-07-29T22:35:49.402376Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_safety_check"}
+{"ts": "2026-07-29T23:05:49.949494Z", "address": "0xe0AeE745b22c522DE621F826a9453f534808DFD0", "chain": "1", "symbol": "MCU", "name": "MCU", "source": "evm", "offering": "token_intel"}
