@@ -1487,3 +1487,5 @@
 {"ts": "2026-07-29T14:12:24Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1073, "completion_tokens": 474, "total_tokens": 2364}
 {"ts": "2026-07-29T14:24:19Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1181, "completion_tokens": 28, "total_tokens": 2212}
 {"ts": "2026-07-29T14:26:20Z", "provider": "gemini", "model": "gemini-2.5-flash", "tier": "deep", "prompt_tokens": 1397, "completion_tokens": 1234, "total_tokens": 2709, "fallback_from": ["groq:HTTP429 {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kvrrkqgsfk4thyv722a2ttvm` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98839,"]}
+{"ts": "2026-07-29T14:55:35Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1095, "completion_tokens": 328, "total_tokens": 1968}
+{"ts": "2026-07-29T14:55:51Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1036, "completion_tokens": 15, "total_tokens": 1051}

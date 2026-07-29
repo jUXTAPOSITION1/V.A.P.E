@@ -3281,6 +3281,25 @@
     "symbol": "PIEVERSE",
     "times_investigated": 1
   },
+  "56:0x143e73837fd47cc9477c694b37123ccbd4c0eb93": {
+    "address": "0x143E73837FD47cC9477c694B37123ccbd4C0eB93",
+    "chain": "56",
+    "creator_address": "0x0b1cd6c28958cc14bbd31b8a618eddf350bc39c8",
+    "first_investigated": "2026-07-29T14:55:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-145537-0x143E7383.md",
+        "score": 0,
+        "ts": "2026-07-29T14:55:37Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T14:55:37Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ON",
+    "times_investigated": 1
+  },
   "56:0x1460d468466d17f65ff1426571e18059d23a9ebd": {
     "address": "0x1460d468466D17F65FF1426571E18059d23a9eBD",
     "chain": "56",

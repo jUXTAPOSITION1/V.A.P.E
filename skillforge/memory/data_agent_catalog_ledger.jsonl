@@ -260,3 +260,4 @@
 {"ts": "2026-07-29T13:09:28.459290Z", "target": "Base", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-29T13:39:32.169864Z", "target": "zerobase-cedefi", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-29T14:09:17.431453Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 52}
+{"ts": "2026-07-29T14:55:46.726544Z", "target": "base", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}

@@ -821,3 +821,5 @@
 | 2026-07-29 | auto | 0x1217D587a72928c03B802ad0e62154F62D5c2A17 (01) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-29 | auto | 0x862F3BF49c2bDDC027ED7e4031C1a45d6c0C8521 (COTI) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-29 | auto | 0x143E73837FD47cC9477c694B37123ccbd4C0eB93 (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
