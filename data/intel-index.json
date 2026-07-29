@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-29T09:36:18Z",
+  "generated": "2026-07-29T09:38:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 411,
+    "reports": 412,
     "reports_by_type": {
+      "bounty": 87,
       "security": 76,
-      "bounty": 86,
       "base": 86,
       "virtuals": 87,
       "sentiment": 44,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-093613-0xE7E7E741.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-29-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-29T08:00Z",
-      "threat": null,
-      "summary": "The provided incident feed records 12 events over the seven-day window ending 2026-07-28, with aggregate losses below the $50 M threshold in any single case. The largest single loss was the AFX Bridge incident ($24.15 M) attributed to private-key compromise on Arbitrum. Two other bridge-related events appear: Verus-Ethereum Bridge ($7.53 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-08.md",
-      "bytes": 7493
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260729_093809.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-29T09:38:09Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_093809.md",
+      "bytes": 14304
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260729_093809.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-29T09:38:09Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_093809.md",
+      "bytes": 14304
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error) \u00b7 Base mover: NTFS / WETH 0.01% +161% 24h (liq $122571.8847) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_120411.md",
       "bytes": 14766
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260726_100217.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-26T10:02:17Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_100217.md",
-      "bytes": 11415
     }
   ],
   "broadcasts": [
