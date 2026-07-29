@@ -277,3 +277,4 @@
 {"ts": "2026-07-29T20:34:05.229842Z", "target": "none", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-29T20:49:21.876629Z", "target": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF", "hired": ["exploit_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
 {"ts": "2026-07-29T21:20:04.652510Z", "target": "Ethereum", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
+{"ts": "2026-07-29T21:35:12.097251Z", "target": "gauntlet", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}

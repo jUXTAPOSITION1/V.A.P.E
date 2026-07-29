@@ -849,3 +849,5 @@
 | 2026-07-29 | auto | 0x26837B64F1302afB1E364082a9e6a0076Bb88888 (Bank) | deep_investigation | REJECT (20/100) | Transfers can be paused by owner | +7d |
 
 | 2026-07-29 | auto | 0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628 (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-29 | auto | 0x76c7185d1505a427Ab67b48ac1EBA3615A5a2eD8 (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
