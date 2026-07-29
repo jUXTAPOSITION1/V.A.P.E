@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T05:50:20Z",
+  "generated": "2026-07-29T05:53:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 409,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 122,
     "investigations": 489,
-    "news": 14,
+    "news": 15,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md",
+      "title": "Fed Credibility vs. Crypto Liquidity: Citadel's Surprise Hike Bet Clashes With Bitcoin Pause Consensus",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-29 05:53 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A high-stakes FOMC showdown pits Wall Street's premier macro fund against digital asset analysts, setting up a binary volatility trigger for Bitcoin.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md"
+    },
     {
       "file": "news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md",
       "title": "Decrypt Headline Claims AI Cracked Post-Quantum Crypto, But Article Body Contains Only Unrelated Price Data",
