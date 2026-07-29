@@ -348,5 +348,10 @@
     "report": "intel/threat-analysis/2026-07-26-wemix-fi-lend.md",
     "provider": "groq",
     "written_at": "2026-07-29T05:14:03Z"
+  },
+  "2026-07-28:LULA": {
+    "report": "intel/threat-analysis/2026-07-28-lula.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-29T10:31:57Z"
   }
 }
