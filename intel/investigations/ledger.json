@@ -4021,6 +4021,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0x9a30355775c45fa437e1ac041d1261bad44563e2": {
+    "address": "0x9a30355775c45fa437E1AC041D1261BaD44563E2",
+    "chain": "56",
+    "creator_address": "0x3873e4491dc32403e8e517741e21b299a0f9f61a",
+    "first_investigated": "2026-07-29T22:05:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-220538-0x9a303557.md",
+        "score": 32,
+        "ts": "2026-07-29T22:05:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T22:05:38Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "QToken",
+    "times_investigated": 1
+  },
   "56:0x9a6cb2c43a3454c8db4e89e4e031fdcfc8769a02": {
     "address": "0x9a6Cb2C43A3454c8DB4e89e4e031FDcFC8769A02",
     "chain": "56",

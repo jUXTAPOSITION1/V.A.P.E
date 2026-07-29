@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T22:02:02Z",
+  "generated": "2026-07-29T22:05:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 521,
+    "investigations": 522,
     "news": 19,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-215017-0x4C891F27.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T21:50:17Z",
-      "target": "0x4C891F271E70D23DeCC53C59abf8636a44b6AB0a",
+      "file": "investigation-20260729-220538-0x9a303557.md",
+      "title": "Investigation \u2014 QToken",
+      "symbol": "QToken",
+      "name": null,
+      "date": "2026-07-29T22:05:38Z",
+      "target": "0x9a30355775c45fa437E1AC041D1261BaD44563E2",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-215017-0x4C891F27.md"
+      "score": "32",
+      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-220538-0x9a303557.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-220538-0x9a303557.md",
+      "title": "Investigation \u2014 QToken",
+      "symbol": "QToken",
+      "name": null,
+      "date": "2026-07-29T22:05:38Z",
+      "target": "0x9a30355775c45fa437E1AC041D1261BaD44563E2",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish tr",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-220538-0x9a303557.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-215017-0x4C891F27.md",
@@ -594,20 +608,6 @@
       "score": "27",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,433 (rug/illiquid); [-10] Low liquidity $5,433. Positive",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-010405-0x5b650B61.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-001840-0x259186E6.md",
-      "title": "Investigation \u2014 GTAVI",
-      "symbol": "GTAVI",
-      "name": "GTA VI",
-      "date": "2026-07-29T00:18:40Z",
-      "target": "0x259186E64E35ce5DF3CA31364BD521F665BeE73D",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,437. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 981+ days without a known incident in this scan; Custom verified source (not a mass-p",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-001840-0x259186E6.md"
     }
   ],
   "reports": [

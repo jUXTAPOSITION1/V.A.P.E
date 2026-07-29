@@ -853,3 +853,5 @@
 | 2026-07-29 | auto | 0x76c7185d1505a427Ab67b48ac1EBA3615A5a2eD8 (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-29 | auto | 0x4C891F271E70D23DeCC53C59abf8636a44b6AB0a (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-29 | auto | 0x9a30355775c45fa437E1AC041D1261BaD44563E2 (QToken) | deep_investigation | REJECT (32/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
