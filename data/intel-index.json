@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-29T09:38:42Z",
+  "generated": "2026-07-29T09:40:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 412,
+    "reports": 413,
     "reports_by_type": {
       "bounty": 87,
+      "virtuals": 88,
       "security": 76,
       "base": 86,
-      "virtuals": 87,
       "sentiment": 44,
       "macro": 22,
       "bug": 3,
@@ -621,6 +621,17 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_093809.md",
       "bytes": 14304
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-29-09.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-29T09:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-29 09:40 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-29-09.md",
+      "bytes": 2968
     },
     {
       "kind": "intel",
@@ -1259,17 +1270,6 @@
       "summary": "In the last 7 days, 9 incidents were recorded with zero incidents reaching or exceeding $50M in the prior 14 days. The feed shows repeated use of wallet and key compromises (Triple-A $9.7M hot wallet on Ethereum/Tron/Arbitrum 2026-07-24; AFX Bridge $24.15M private key on Arbitrum 2026-07-22), oracle and price manipulation (Ostium $23.75M ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-26-13.md",
       "bytes": 6413
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260726_120411.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-26T12:04:11Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error) \u00b7 Base mover: NTFS / WETH 0.01% +161% 24h (liq $122571.8847) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_120411.md",
-      "bytes": 14766
     }
   ],
   "broadcasts": [
