@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T18:01:05Z",
+  "generated": "2026-07-29T18:16:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 422,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 513,
+    "investigations": 514,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-174558-0x3E5d4f8a.md",
-      "title": "Investigation \u2014 UAI",
-      "symbol": "UAI",
-      "name": "UnifAI",
-      "date": "2026-07-29T17:45:58Z",
-      "target": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0",
+      "file": "investigation-20260729-181618-0xed9Ae3DE.md",
+      "title": "Investigation \u2014 BLUAI",
+      "symbol": "BLUAI",
+      "name": "Bluwhale AI",
+      "date": "2026-07-29T18:16:18Z",
+      "target": "0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 92% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,942 (rug/illiquid); [-10] Low liquidity $6,942. Positive evidence: 6290 holders \u2014 reasonably distributed",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-174558-0x3E5d4f8a.md"
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 38901 hol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-181618-0xed9Ae3DE.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-181618-0xed9Ae3DE.md",
+      "title": "Investigation \u2014 BLUAI",
+      "symbol": "BLUAI",
+      "name": "Bluwhale AI",
+      "date": "2026-07-29T18:16:18Z",
+      "target": "0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 38901 hol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-181618-0xed9Ae3DE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-174558-0x3E5d4f8a.md",
@@ -594,20 +608,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: Ownership renounced; 19545 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 114+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-191420-0x46dDcc66.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-184403-0xfb156121.md",
-      "title": "Investigation \u2014 AS",
-      "symbol": "AS",
-      "name": "AS Tokken",
-      "date": "2026-07-28T18:44:03Z",
-      "target": "0xfb1561214348ee8D8198C06ea0D21232872cDEFd",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,517 (rug/illiquid); [-10] Low liquidity $5,517. Positiv",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-184403-0xfb156121.md"
     }
   ],
   "reports": [
