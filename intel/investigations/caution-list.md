@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-29T22:20:52Z — 96 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-29T23:21:13Z — 97 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| XPULS | BNB Chain | `0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228` | 75/100 | 1 | 2026-07-29T23:21:13Z |
 | BLUAI | BNB Chain | `0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD` | 60/100 | 1 | 2026-07-29T18:16:18Z |
 | VIBE | Ethereum | `0x8e7A9f9817eCf2649c0316b22Fea274D522C7b9B` | 50/100 | 1 | 2026-07-29T17:00:18Z |
 | SOON | BNB Chain | `0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721` | 62/100 | 1 | 2026-07-29T16:45:05Z |

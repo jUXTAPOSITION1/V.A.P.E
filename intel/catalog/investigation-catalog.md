@@ -857,3 +857,5 @@
 | 2026-07-29 | auto | 0x9a30355775c45fa437E1AC041D1261BaD44563E2 (QToken) | deep_investigation | REJECT (32/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-29 | auto | 0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9 (Beat) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-29 | auto | 0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228 (XPULS) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) — can still act | +7d |

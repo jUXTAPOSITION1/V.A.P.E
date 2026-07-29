@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T23:05:50Z",
+  "generated": "2026-07-29T23:21:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 523,
+    "investigations": 524,
     "news": 19,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-222052-0x535fdE72.md",
-      "title": "Investigation \u2014 Beat",
-      "symbol": "Beat",
-      "name": "Beat",
-      "date": "2026-07-29T22:20:52Z",
-      "target": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
+      "file": "investigation-20260729-232113-0xabAe909c.md",
+      "title": "Investigation \u2014 XPULS",
+      "symbol": "XPULS",
+      "name": "XPULS",
+      "date": "2026-07-29T23:21:13Z",
+      "target": "0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,475; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-222052-0x535fdE72.md"
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) \u2014 can still act on the contract; [-15] Only 35% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 6046 holders \u2014 reasonably distributed; Trading 201+ days without a known incident in this scan; Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-232113-0xabAe909c.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-232113-0xabAe909c.md",
+      "title": "Investigation \u2014 XPULS",
+      "symbol": "XPULS",
+      "name": "XPULS",
+      "date": "2026-07-29T23:21:13Z",
+      "target": "0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) \u2014 can still act on the contract; [-15] Only 35% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 6046 holders \u2014 reasonably distributed; Trading 201+ days without a known incident in this scan; Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-232113-0xabAe909c.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-222052-0x535fdE72.md",
@@ -594,20 +608,6 @@
       "score": "15",
       "summary": "Risk factors: [-10] Owner not renounced (0x8c5b872d0aaa28ac6ac0af71fc6360779c9f290a) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $34,842;",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-020426-0x9A8E5a37.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-014914-0x2f67D3BC.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "ON",
-      "date": "2026-07-29T01:49:14Z",
-      "target": "0x2f67D3BCdbc5030A79De0B217B934781A181c706",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (27) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-014914-0x2f67D3BC.md"
     }
   ],
   "reports": [
