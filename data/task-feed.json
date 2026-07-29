@@ -1,7 +1,35 @@
 {
-  "generated": "2026-07-29T11:09:12Z",
-  "synthesis": "UT",
+  "generated": "2026-07-29T11:23:59Z",
+  "synthesis": "VAPE's automation ran repeated featured investigations, multiple sweeps, skillforge builds/checks, threat analysis, bounty radar sweeps, and a reputation snapshot on 2026-07-29.",
   "tasks": [
+    {
+      "sha": "40b5aa9cb0",
+      "kind": "automation",
+      "message": "VAPE skillforge build cycle 2026-07-29T11:21Z",
+      "date": "2026-07-29T11:21:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/40b5aa9cb05039d736b284d6482f6cf7b5eb6d09"
+    },
+    {
+      "sha": "2622b5bfd4",
+      "kind": "sweep",
+      "message": "base_sweep 2026-07-29T11:15Z",
+      "date": "2026-07-29T11:15:40Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2622b5bfd4bed541d76372bd07df36102f7abf29"
+    },
+    {
+      "sha": "66f050ff35",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-29T11:10Z",
+      "date": "2026-07-29T11:10:12Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/66f050ff358d5ae63c3a16081cba916da0adb7b0"
+    },
+    {
+      "sha": "12a7bcca5d",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T11:09Z",
+      "date": "2026-07-29T11:09:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/12a7bcca5dd8690dbca40a427b06d96ae09bfb89"
+    },
     {
       "sha": "159d932fd3",
       "kind": "bounty-radar",
@@ -78,34 +106,6 @@
       "message": "Auto-generated bounty report 2026-07-29T09:38Z",
       "date": "2026-07-29T09:38:42Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/995e80fe8dd68c3c7154a50ff6f0f7e0a1535d7d"
-    },
-    {
-      "sha": "055998e6d0",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-29T09:37Z",
-      "date": "2026-07-29T09:37:59Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/055998e6d086988fed3a926190af95512a74437d"
-    },
-    {
-      "sha": "83cae4fdce",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T09:36Z",
-      "date": "2026-07-29T09:36:21Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/83cae4fdce441264f95560a6a19d41ba1ace008b"
-    },
-    {
-      "sha": "c4ad602993",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-29T09:19Z",
-      "date": "2026-07-29T09:19:53Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c4ad602993e514a13ae6f1cddb7e8a37aad1609e"
-    },
-    {
-      "sha": "026691a6e8",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T09:05Z",
-      "date": "2026-07-29T09:05:23Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/026691a6e8dfd73948259d396eb0eb172e8a4c6e"
     }
   ]
 }
