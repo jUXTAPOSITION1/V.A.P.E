@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T12:54:28Z",
+  "generated": "2026-07-29T13:09:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 123,
-    "investigations": 503,
+    "investigations": 504,
     "news": 17,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-125427-0xC608CfC7.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T12:54:27Z",
-      "target": "0xC608CfC79c5C0fAa9257d0C959B56e8aC280c7d1",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260729-130923-0x1217D587.md",
+      "title": "Investigation \u2014 01",
+      "symbol": "01",
+      "name": "01",
+      "date": "2026-07-29T13:09:23Z",
+      "target": "0x1217D587a72928c03B802ad0e62154F62D5c2A17",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-125427-0xC608CfC7.md"
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbd48b8aa8782f22a7c7d058fe89fa71d7ccb83fa) \u2014 can still act on the contract; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-130923-0x1217D587.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-130923-0x1217D587.md",
+      "title": "Investigation \u2014 01",
+      "symbol": "01",
+      "name": "01",
+      "date": "2026-07-29T13:09:23Z",
+      "target": "0x1217D587a72928c03B802ad0e62154F62D5c2A17",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "3",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbd48b8aa8782f22a7c7d058fe89fa71d7ccb83fa) \u2014 can still act on the contract; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-130923-0x1217D587.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-125427-0xC608CfC7.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-10] Low liquidity $35,536; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 5393 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 259+ days without a known incident in this scan; DefiLlama has priced this token for 820+ days \u2014 indepe",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-154111-0x18E3605B.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-150906-0x26e9dbe7.md",
-      "title": "Investigation \u2014 fBOMB",
-      "symbol": "fBOMB",
-      "name": "Fantom Bomb",
-      "date": "2026-07-28T15:09:06Z",
-      "target": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-10] Owner not renounced (0xcbeb24e8fc568001e83430ec4929ce56b29ba9a2) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PHAR (0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7) \u2014 CAUTION 72/100 \u2014 likely the same serial campaign; [-20] Very few holders (33) \u2014 thin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-150906-0x26e9dbe7.md"
     }
   ],
   "reports": [

@@ -1023,6 +1023,25 @@
     "symbol": "SHIB",
     "times_investigated": 1
   },
+  "1:0x1217d587a72928c03b802ad0e62154f62d5c2a17": {
+    "address": "0x1217D587a72928c03B802ad0e62154F62D5c2A17",
+    "chain": "1",
+    "creator_address": "0xbd48b8aa8782f22a7c7d058fe89fa71d7ccb83fa",
+    "first_investigated": "2026-07-29T13:09:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-130923-0x1217D587.md",
+        "score": 3,
+        "ts": "2026-07-29T13:09:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T13:09:23Z",
+    "last_score": 3,
+    "last_verdict": "REJECT",
+    "symbol": "01",
+    "times_investigated": 1
+  },
   "1:0x1257d823fcb0abae72eab01c59456f463ca3c35a": {
     "address": "0x1257d823Fcb0abAe72eAB01c59456F463cA3c35a",
     "chain": "1",
