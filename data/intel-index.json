@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T10:54:14Z",
+  "generated": "2026-07-29T11:09:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 414,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 123,
-    "investigations": 497,
+    "investigations": 498,
     "news": 16,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-095423-0xA7bef5ab.md",
-      "title": "Investigation \u2014 BAY",
-      "symbol": "BAY",
-      "name": "Marina Protocol",
-      "date": "2026-07-29T09:54:23Z",
-      "target": "0xA7bef5abd9265Ab97EE43D2fc4A56e0Ba25ACA25",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $25,374. Positive evidence: 54082 holders \u2014 reasonably distributed; Trading 270+ days without a known incident i",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-095423-0xA7bef5ab.md"
+      "file": "investigation-20260729-110910-0xb111B769.md",
+      "title": "Investigation \u2014 FUN",
+      "symbol": "FUN",
+      "name": "Feral USD Network",
+      "date": "2026-07-29T11:09:10Z",
+      "target": "0xb111B7690F6420Fc27d63D6870AaD4450Dbe22D0",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Low holder count (79); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,079 (rug/illiquid); [-10] Low liquidity $1,079; [-10] No known third-party ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-110910-0xb111B769.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-110910-0xb111B769.md",
+      "title": "Investigation \u2014 FUN",
+      "symbol": "FUN",
+      "name": "Feral USD Network",
+      "date": "2026-07-29T11:09:10Z",
+      "target": "0xb111B7690F6420Fc27d63D6870AaD4450Dbe22D0",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Low holder count (79); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,079 (rug/illiquid); [-10] Low liquidity $1,079; [-10] No known third-party ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-110910-0xb111B769.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-095423-0xA7bef5ab.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-132332-0xaB71d6C5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-130826-0x7987f034.md",
-      "title": "Investigation \u2014 V4",
-      "symbol": "V4",
-      "name": "Programmable",
-      "date": "2026-07-28T13:08:26Z",
-      "target": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +10841% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-130826-0x7987f034.md"
     }
   ],
   "reports": [

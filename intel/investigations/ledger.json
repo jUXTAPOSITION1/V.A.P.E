@@ -6061,6 +6061,25 @@
     "symbol": "Gitlawb",
     "times_investigated": 1
   },
+  "8453:0xb111b7690f6420fc27d63d6870aad4450dbe22d0": {
+    "address": "0xb111B7690F6420Fc27d63D6870AaD4450Dbe22D0",
+    "chain": "8453",
+    "creator_address": "0xff0d79bc777c44e1d128b24d4522019f3bc9242f",
+    "first_investigated": "2026-07-29T11:09:10Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-110910-0xb111B769.md",
+        "score": 17,
+        "ts": "2026-07-29T11:09:10Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T11:09:10Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "FUN",
+    "times_investigated": 1
+  },
   "8453:0xb162b75f641a88e2c7d32aac7f490fe830b5b11d": {
     "address": "0xb162B75f641a88E2c7d32AAC7F490fe830B5b11D",
     "chain": "8453",
