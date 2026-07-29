@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T03:48:00Z",
+  "generated": "2026-07-29T03:50:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 407,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 122,
-    "investigations": 486,
+    "investigations": 487,
     "news": 14,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-030507-0x40b8129B.md",
-      "title": "Investigation \u2014 UB",
-      "symbol": "UB",
-      "name": "Unibase",
-      "date": "2026-07-29T03:05:07Z",
-      "target": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-10] Owner not renounced (0xc82c31b242d49db07f9282295b6e8e391771a588) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 70353 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-030507-0x40b8129B.md"
+      "file": "investigation-20260729-035044-0xd94128D6.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "FakeWorldAssets\u2122",
+      "date": "2026-07-29T03:50:44Z",
+      "target": "0xd94128D66BD0020888e380E8dF515Cb0B840dadD",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7 (rug/illiquid); [-10] Low liquidity $7; [-5] Pair 29.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-035044-0xd94128D6.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-035044-0xd94128D6.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "FakeWorldAssets\u2122",
+      "date": "2026-07-29T03:50:44Z",
+      "target": "0xd94128D66BD0020888e380E8dF515Cb0B840dadD",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7 (rug/illiquid); [-10] Low liquidity $7; [-5] Pair 29.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-035044-0xd94128D6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-030507-0x40b8129B.md",
@@ -594,20 +608,6 @@
       "score": "10",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-10] Low liquidity $1; [-15] Pair only 1.8 days old (extreme fresh-launch risk); [-10] ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-082105-0xeBd6d1E0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-072025-0x53DDBC55.md",
-      "title": "Investigation \u2014 AS",
-      "symbol": "AS",
-      "name": "PROJECT AS TOKEN",
-      "date": "2026-07-28T07:20:25Z",
-      "target": "0x53DDBC55613f4cf51F26e477C9BE46Fe351cad87",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: C",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-072025-0x53DDBC55.md"
     }
   ],
   "reports": [
