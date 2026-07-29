@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T09:19:52Z",
+  "generated": "2026-07-29T09:36:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 123,
-    "investigations": 495,
+    "investigations": 496,
     "news": 16,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-083531-0x56BBbC01.md",
-      "title": "Investigation \u2014 Beat",
-      "symbol": "Beat",
-      "name": "Beat",
-      "date": "2026-07-29T08:35:31Z",
-      "target": "0x56BBbC01a416Fb9b995949d105a5697c2338Cd09",
+      "file": "investigation-20260729-093613-0xE7E7E741.md",
+      "title": "Investigation \u2014 EV",
+      "symbol": "EV",
+      "name": "Everything",
+      "date": "2026-07-29T09:36:13Z",
+      "target": "0xE7E7E741C23a4767831A56A8C99F522c5aC1E7E7",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-083531-0x56BBbC01.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 103% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $292 (rug/illiquid); [-10] Low liquidity $292. Positive ev",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-093613-0xE7E7E741.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-093613-0xE7E7E741.md",
+      "title": "Investigation \u2014 EV",
+      "symbol": "EV",
+      "name": "Everything",
+      "date": "2026-07-29T09:36:13Z",
+      "target": "0xE7E7E741C23a4767831A56A8C99F522c5aC1E7E7",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 103% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $292 (rug/illiquid); [-10] Low liquidity $292. Positive ev",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-093613-0xE7E7E741.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-083531-0x56BBbC01.md",
@@ -594,20 +608,6 @@
       "score": "45",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $16,656; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-125322-0x6e6B8968.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-123821-0xFB4EA38d.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5fc5\u4e1c\u5954\u897f\u8d70 \u5e01\u5b89\u5168\u90e8\u90fd\u6709",
-      "date": "2026-07-28T12:38:21Z",
-      "target": "0xFB4EA38d713afBb3eD35869B790aec3CA53B0000",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +1560% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive ev",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-123821-0xFB4EA38d.md"
     }
   ],
   "reports": [
