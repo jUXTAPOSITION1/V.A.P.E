@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T16:23:02Z",
+  "generated": "2026-07-29T16:28:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 421,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 509,
+    "investigations": 510,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-161213-0xA36d14E4.md",
-      "title": "Investigation \u2014 WMATIC",
-      "symbol": "WMATIC",
-      "name": "Wrapped Polygon",
-      "date": "2026-07-29T16:12:13Z",
-      "target": "0xA36d14E43b1a049983B86166A2f0210a9519f80a",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: USD\u20ae (0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680) \u2014 CAUTION 50/100 \u2014 likely the same serial campaign; [-20] Very few holders (22) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrate",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-161213-0xA36d14E4.md"
+      "file": "investigation-20260729-162828-0x1F74b4D3.md",
+      "title": "Investigation \u2014 PRO",
+      "symbol": "PRO",
+      "name": "Prospera DAO",
+      "date": "2026-07-29T16:28:28Z",
+      "target": "0x1F74b4D3Ad8d64226928aa3c07D291cD650c454C",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,894 (rug/illiquid); [-10] Low liquidity $1,894. Positive evidence: Ownership renounced; 1874 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-162828-0x1F74b4D3.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-162828-0x1F74b4D3.md",
+      "title": "Investigation \u2014 PRO",
+      "symbol": "PRO",
+      "name": "Prospera DAO",
+      "date": "2026-07-29T16:28:28Z",
+      "target": "0x1F74b4D3Ad8d64226928aa3c07D291cD650c454C",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,894 (rug/illiquid); [-10] Low liquidity $1,894. Positive evidence: Ownership renounced; 1874 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-162828-0x1F74b4D3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-161213-0xA36d14E4.md",
@@ -594,20 +608,6 @@
       "score": "82",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-10] Low liquidity $21,191. Positive evidence: Ownership renounced; 2316 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 924+ days without a known incident in this scan; Custom",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-175758-0xBcBDA13B.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-174240-0x317C63Fd.md",
-      "title": "Investigation \u2014 Ferret",
-      "symbol": "Ferret",
-      "name": "The SpaceX Ferret",
-      "date": "2026-07-28T17:42:40Z",
-      "target": "0x317C63Fdf448779923fe9b845E4A58CB4d224e56",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Low holder count (191); [-10] Low liquidity $14,117; [-10] Violent 24h move +442% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-174240-0x317C63Fd.md"
     }
   ],
   "reports": [
