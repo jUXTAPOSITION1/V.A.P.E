@@ -3736,6 +3736,25 @@
     "symbol": "BANK",
     "times_investigated": 1
   },
+  "56:0x4879d5c0d925a6cf3a76633e6c0f7b15aa4c5628": {
+    "address": "0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628",
+    "chain": "56",
+    "creator_address": "0x0b1cd6c28958cc14bbd31b8a618eddf350bc39c8",
+    "first_investigated": "2026-07-29T20:49:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-204917-0x4879d5c0.md",
+        "score": 0,
+        "ts": "2026-07-29T20:49:17Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T20:49:17Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ON",
+    "times_investigated": 1
+  },
   "56:0x49e60d05319f6f9945012067e0718a2b6267cf58": {
     "address": "0x49E60D05319f6f9945012067E0718a2B6267cF58",
     "chain": "56",

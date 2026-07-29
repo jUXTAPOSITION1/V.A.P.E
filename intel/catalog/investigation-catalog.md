@@ -847,3 +847,5 @@
 | 2026-07-29 | auto | 0x3DEe42295A9F6fDC9bB258DD0aA61c5F7a8208B8 (V4) | deep_investigation | REJECT (35/100) | Holder count unavailable — cannot assess distribution | +7d |
 
 | 2026-07-29 | auto | 0x26837B64F1302afB1E364082a9e6a0076Bb88888 (Bank) | deep_investigation | REJECT (20/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-29 | auto | 0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628 (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
