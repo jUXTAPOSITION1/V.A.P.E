@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-29T05:50:21Z",
-  "synthesis": "VAPE's automation repeatedly generated featured investigations while running sweeps, threat analysis, tool checks, broadcasts, and reputation snapshots.",
+  "generated": "2026-07-29T06:05:17Z",
+  "synthesis": ":**\n    *",
   "tasks": [
+    {
+      "sha": "71a8cd57ce",
+      "kind": "sweep",
+      "message": "HACK sweep: 2026-07-29T05:58Z",
+      "date": "2026-07-29T05:58:34Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/71a8cd57ce7cc937224fa2f61afb1b1db55ebfee"
+    },
+    {
+      "sha": "9d06d61c31",
+      "kind": "automation",
+      "message": "news-intel 2026-07-29T05:53Z",
+      "date": "2026-07-29T05:53:33Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9d06d61c31affdd34a4811bca1bb73707c63cc96"
+    },
+    {
+      "sha": "a1873169f6",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T05:50Z",
+      "date": "2026-07-29T05:50:24Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a1873169f6231d392959f5e6ae3408a7fb19ba6c"
+    },
     {
       "sha": "53576982c7",
       "kind": "sweep",
@@ -85,27 +106,6 @@
       "message": "skillforge toolcheck 2026-07-29T03:57Z",
       "date": "2026-07-29T03:57:52Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/23976c0f5900fedae231255f34413153d9eba488"
-    },
-    {
-      "sha": "f80d7293fc",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T03:50Z",
-      "date": "2026-07-29T03:50:54Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f80d7293fca1341d3c8fbb59fd9461edb6ea5e0e"
-    },
-    {
-      "sha": "5ca7394e04",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-29T03:48Z",
-      "date": "2026-07-29T03:48:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5ca7394e043e5b34a0beab8763dbde9bcdc07228"
-    },
-    {
-      "sha": "18d54ccf4c",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-29T03:44Z",
-      "date": "2026-07-29T03:44:04Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/18d54ccf4c73854619c953bbbddbe0f6fc4850bd"
     }
   ]
 }

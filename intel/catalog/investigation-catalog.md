@@ -789,3 +789,5 @@
 | 2026-07-29 | auto | 0x89Cf5C1b3bc04ea54795B37A85258F1dfC9c31dF (Swing) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 64% of supply — meaningful concentration | +7d |
 
 | 2026-07-29 | auto | 0xfb3bcd142ab83505d57c446e1718D8429424DE3b (ZAMA) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-29 | auto | 0x2C69ff812F62e664Fe23f2dC781C773D8c404cCc (Buddy) | deep_investigation | REJECT (0/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
