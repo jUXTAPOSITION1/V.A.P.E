@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T08:35:31Z",
+  "generated": "2026-07-29T08:41:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 122,
     "investigations": 495,
-    "news": 15,
+    "news": 16,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md",
+      "title": "Insider Trading in the Prediction Era: White House Teleprompter Operator Out of Government After $100K Speech-Betting Scandal",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-29 08:41 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The departure of Gabriel Perez highlights the growing regulatory and ethical battlefields facing prediction markets as real-world insiders exploit regulated betting pools.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md"
+    },
     {
       "file": "news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md",
       "title": "Fed Credibility vs. Crypto Liquidity: Citadel's Surprise Hike Bet Clashes With Bitcoin Pause Consensus",

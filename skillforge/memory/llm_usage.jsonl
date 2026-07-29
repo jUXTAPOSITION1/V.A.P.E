@@ -1433,3 +1433,7 @@
 {"ts": "2026-07-29T08:20:27Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1183, "completion_tokens": 26, "total_tokens": 1650}
 {"ts": "2026-07-29T08:35:29Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1033, "completion_tokens": 328, "total_tokens": 2006}
 {"ts": "2026-07-29T08:35:35Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91941, "completion_tokens": 3, "total_tokens": 92057}
+{"ts": "2026-07-29T08:40:25Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 4096, "completion_tokens": 649, "total_tokens": 5908}
+{"ts": "2026-07-29T08:40:56Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 92669, "completion_tokens": 628, "total_tokens": 94865}
+{"ts": "2026-07-29T08:41:08Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 93062, "completion_tokens": 142, "total_tokens": 95258}
+{"ts": "2026-07-29T08:41:43Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91631, "completion_tokens": 11, "total_tokens": 91927}
