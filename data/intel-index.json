@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T22:05:45Z",
+  "generated": "2026-07-29T22:20:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 522,
+    "investigations": 523,
     "news": 19,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-220538-0x9a303557.md",
-      "title": "Investigation \u2014 QToken",
-      "symbol": "QToken",
-      "name": null,
-      "date": "2026-07-29T22:05:38Z",
-      "target": "0x9a30355775c45fa437E1AC041D1261BaD44563E2",
+      "file": "investigation-20260729-222052-0x535fdE72.md",
+      "title": "Investigation \u2014 Beat",
+      "symbol": "Beat",
+      "name": "Beat",
+      "date": "2026-07-29T22:20:52Z",
+      "target": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish tr",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-220538-0x9a303557.md"
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,475; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-222052-0x535fdE72.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-222052-0x535fdE72.md",
+      "title": "Investigation \u2014 Beat",
+      "symbol": "Beat",
+      "name": "Beat",
+      "date": "2026-07-29T22:20:52Z",
+      "target": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,475; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-222052-0x535fdE72.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-220538-0x9a303557.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-20] Very few holders (27) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-014914-0x2f67D3BC.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-010405-0x5b650B61.md",
-      "title": "Investigation \u2014 AS",
-      "symbol": "AS",
-      "name": "Americans USA",
-      "date": "2026-07-29T01:04:05Z",
-      "target": "0x5b650B618B988090A0D30831846cA3105B527d70",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $5,433 (rug/illiquid); [-10] Low liquidity $5,433. Positive",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-010405-0x5b650B61.md"
     }
   ],
   "reports": [
