@@ -1466,3 +1466,4 @@
 {"ts": "2026-07-29T11:38:58Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1082, "completion_tokens": 297, "total_tokens": 2068}
 {"ts": "2026-07-29T11:39:31Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91941, "completion_tokens": 1, "total_tokens": 92057}
 {"ts": "2026-07-29T11:54:27Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1184, "completion_tokens": 33, "total_tokens": 2223}
+{"ts": "2026-07-29T12:01:51Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2598, "completion_tokens": 34, "total_tokens": 3298}
