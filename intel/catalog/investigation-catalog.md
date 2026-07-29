@@ -815,3 +815,5 @@
 | 2026-07-29 | auto | 0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-29 | auto | 0xB5D1AA718725FF1Ff3A56c8B30b4e8Ac41a1637A (ON) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed0 | +7d |
+
+| 2026-07-29 | auto | 0xC608CfC79c5C0fAa9257d0C959B56e8aC280c7d1 (ON) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed0 | +7d |
