@@ -1136,6 +1136,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x2e5ef97c96d6a44ccb8db9c30f2f5dcec04bb6f9": {
+    "address": "0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9",
+    "chain": "1",
+    "creator_address": "0x9bff85e0b98fecabd6b7294c3bddeef4e04cfa88",
+    "first_investigated": "2026-07-29T00:03:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-000332-0x2e5ef97C.md",
+        "score": 85,
+        "ts": "2026-07-29T00:03:32Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-29T00:03:32Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "GTAVI",
+    "times_investigated": 1
+  },
   "1:0x2f6a9340c84e94413d01afceef85f1a8d1f27ad7": {
     "address": "0x2f6A9340C84E94413d01afCEEf85f1A8D1f27aD7",
     "chain": "1",

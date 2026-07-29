@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28T23:58:28Z",
+  "generated": "2026-07-29T00:03:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 405,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 121,
-    "investigations": 480,
+    "investigations": 481,
     "news": 14,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260728-234825-0xBaf069e5.md",
-      "title": "Investigation \u2014 BEAT",
-      "symbol": "BEAT",
-      "name": "Audiera AI",
-      "date": "2026-07-28T23:48:25Z",
-      "target": "0xBaf069e57AE635e28f33Da73534008dDdCC99F76",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $2,456 (rug/illiquid); [-10] Low liquidity $2,456. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-234825-0xBaf069e5.md"
+      "file": "investigation-20260729-000332-0x2e5ef97C.md",
+      "title": "Investigation \u2014 GTAVI",
+      "symbol": "GTAVI",
+      "name": "Grand Theft Auto VI",
+      "date": "2026-07-29T00:03:32Z",
+      "target": "0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-5] Pair 23.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3067 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-000332-0x2e5ef97C.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-000332-0x2e5ef97C.md",
+      "title": "Investigation \u2014 GTAVI",
+      "symbol": "GTAVI",
+      "name": "Grand Theft Auto VI",
+      "date": "2026-07-29T00:03:32Z",
+      "target": "0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-5] Pair 23.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3067 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-000332-0x2e5ef97C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260728-234825-0xBaf069e5.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 1.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-051856-0xe22b36dB.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-034850-0x7142b752.md",
-      "title": "Investigation \u2014 CATE",
-      "symbol": "CATE",
-      "name": "Catecoin",
-      "date": "2026-07-28T03:48:50Z",
-      "target": "0x7142b752A1259F5D37A58e47ef60451F5F8038eD",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +3641% (volatility/manipulation); [-15] Pair only 1.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-034850-0x7142b752.md"
     }
   ],
   "reports": [

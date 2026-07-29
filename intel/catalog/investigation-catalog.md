@@ -771,3 +771,5 @@
 | 2026-07-28 | auto | 0x6664347791C8d58E266EB8F824CE774a2624Fa07 (TRUMP2028) | deep_investigation | REJECT (25/100) | Transfers can be paused by owner | +7d |
 
 | 2026-07-28 | auto | 0xBaf069e57AE635e28f33Da73534008dDdCC99F76 (BEAT) | deep_investigation | CAUTION (65/100) | Very low liquidity $2,456 (rug/illiquid) | +7d |
+
+| 2026-07-29 | auto | 0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9 (GTAVI) | deep_investigation | PROCEED (85/100) | Pair 23.3 days old — under a month, still unproven | +7d |
