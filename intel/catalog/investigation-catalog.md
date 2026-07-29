@@ -843,3 +843,5 @@
 | 2026-07-29 | auto | 0x228067CC6FBE188627De42391646A7b298aE035E (Beat) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-29 | auto | 0x012ea6A89cf28Fa1C5Cc6e6f7363702AA4CCB9a2 (AEON) | deep_investigation | REJECT (35/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-29 | auto | 0x3DEe42295A9F6fDC9bB258DD0aA61c5F7a8208B8 (V4) | deep_investigation | REJECT (35/100) | Holder count unavailable — cannot assess distribution | +7d |

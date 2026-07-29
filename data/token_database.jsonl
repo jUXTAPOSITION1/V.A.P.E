@@ -63,3 +63,4 @@
 {"ts": "2026-07-29T12:09:21.851443Z", "address": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "chain": "8453", "symbol": "AERO", "name": "AERO", "source": "base", "offering": "token_chart"}
 {"ts": "2026-07-29T14:09:17.431160Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-07-29T17:30:30.150749Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-07-29T20:17:06.811300Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "liquidity_check"}
