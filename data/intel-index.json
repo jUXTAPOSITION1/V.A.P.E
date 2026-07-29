@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T15:10:28Z",
+  "generated": "2026-07-29T15:26:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 506,
+    "investigations": 507,
     "news": 17,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-145537-0x143E7383.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T14:55:37Z",
-      "target": "0x143E73837FD47cC9477c694B37123ccbd4C0eB93",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260729-152646-0xE1C110E1.md",
+      "title": "Investigation \u2014 ELK",
+      "symbol": "ELK",
+      "name": "Elk",
+      "date": "2026-07-29T15:26:46Z",
+      "target": "0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C",
+      "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-8] Low holder count (151); [-15] Top 9 non-LP/burn holders control 500% of supply \u2014 concentrated, eas",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-145537-0x143E7383.md"
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,715 (rug/illiquid); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-152646-0xE1C110E1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-152646-0xE1C110E1.md",
+      "title": "Investigation \u2014 ELK",
+      "symbol": "ELK",
+      "name": "Elk",
+      "date": "2026-07-29T15:26:46Z",
+      "target": "0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,715 (rug/illiquid); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-152646-0xE1C110E1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-145537-0x143E7383.md",
@@ -594,20 +608,6 @@
       "score": "63",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xe0e42c70880d57230fb843db5eba6800533e91ae) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 29331 holders \u2014 reasonably distributed; Trading 2161+ days wi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-171222-0xDDB34224.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-162716-0xa7Aee6cB.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4f55\u5e01",
-      "date": "2026-07-28T16:27:16Z",
-      "target": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-162716-0xa7Aee6cB.md"
     }
   ],
   "reports": [

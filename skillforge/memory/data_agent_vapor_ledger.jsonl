@@ -225,3 +225,4 @@
 {"ts": "2026-07-29T13:39:30.111963Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-07-29T14:24:14.676751Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-29T14:55:43.973021Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-07-29T15:26:52.178576Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}

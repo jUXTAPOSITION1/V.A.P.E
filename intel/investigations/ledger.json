@@ -3224,6 +3224,25 @@
     "symbol": "abcPHAR",
     "times_investigated": 1
   },
+  "43114:0xe1c110e1b1b4a1ded0caf3e42bfbdbb7b5d7ce1c": {
+    "address": "0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C",
+    "chain": "43114",
+    "creator_address": "0x4ef1e724fc7b1f6920936f4732120af46389cfbe",
+    "first_investigated": "2026-07-29T15:26:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-152646-0xE1C110E1.md",
+        "score": 0,
+        "ts": "2026-07-29T15:26:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T15:26:46Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ELK",
+    "times_investigated": 1
+  },
   "56:0x095576f441006679a79a53ddf9136b550095dd1c": {
     "address": "0x095576F441006679a79a53ddF9136b550095dD1C",
     "chain": "56",
