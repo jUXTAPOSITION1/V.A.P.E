@@ -2352,6 +2352,25 @@
     "symbol": "DEXE",
     "times_investigated": 2
   },
+  "1:0xe0aee745b22c522de621f826a9453f534808dfd0": {
+    "address": "0xe0AeE745b22c522DE621F826a9453f534808DFD0",
+    "chain": "1",
+    "creator_address": "0x36f59e2d04d7753b7023e2f29f3cd74a23cdff49",
+    "first_investigated": "2026-07-29T06:20:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-062018-0xe0AeE745.md",
+        "score": 35,
+        "ts": "2026-07-29T06:20:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T06:20:18Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "MCU",
+    "times_investigated": 1
+  },
   "1:0xe76278619dde1f71e5f8547d8af9076a76c1322d": {
     "address": "0xe76278619DDe1f71E5f8547d8AF9076A76C1322D",
     "chain": "1",

@@ -791,3 +791,5 @@
 | 2026-07-29 | auto | 0xfb3bcd142ab83505d57c446e1718D8429424DE3b (ZAMA) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-29 | auto | 0x2C69ff812F62e664Fe23f2dC781C773D8c404cCc (Buddy) | deep_investigation | REJECT (0/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
+
+| 2026-07-29 | auto | 0xe0AeE745b22c522DE621F826a9453f534808DFD0 (MCU) | deep_investigation | REJECT (35/100) | Transfers can be paused by owner | +7d |
