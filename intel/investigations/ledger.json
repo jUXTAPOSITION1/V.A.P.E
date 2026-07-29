@@ -2484,6 +2484,25 @@
     "symbol": "YLD",
     "times_investigated": 1
   },
+  "1:0xfb3bcd142ab83505d57c446e1718d8429424de3b": {
+    "address": "0xfb3bcd142ab83505d57c446e1718D8429424DE3b",
+    "chain": "1",
+    "creator_address": "0xb261b848ad613a85c22da39ea5e097fd42a03565",
+    "first_investigated": "2026-07-29T05:35:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-053534-0xfb3bcd14.md",
+        "score": 40,
+        "ts": "2026-07-29T05:35:34Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T05:35:34Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "ZAMA",
+    "times_investigated": 1
+  },
   "1:0xfcf7985661d2c3f62208970cbe25e70bcce73e7c": {
     "address": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
     "chain": "1",

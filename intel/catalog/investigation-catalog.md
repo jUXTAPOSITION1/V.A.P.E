@@ -787,3 +787,5 @@
 | 2026-07-29 | auto | 0xd94128D66BD0020888e380E8dF515Cb0B840dadD (FWA) | deep_investigation | REJECT (35/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-07-29 | auto | 0x89Cf5C1b3bc04ea54795B37A85258F1dfC9c31dF (Swing) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 64% of supply — meaningful concentration | +7d |
+
+| 2026-07-29 | auto | 0xfb3bcd142ab83505d57c446e1718D8429424DE3b (ZAMA) | deep_investigation | REJECT (40/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T05:20:38Z",
+  "generated": "2026-07-29T05:35:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 408,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 122,
-    "investigations": 488,
+    "investigations": 489,
     "news": 14,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-050515-0x89Cf5C1b.md",
-      "title": "Investigation \u2014 Swing",
-      "symbol": "Swing",
-      "name": "Swing",
-      "date": "2026-07-29T05:05:15Z",
-      "target": "0x89Cf5C1b3bc04ea54795B37A85258F1dfC9c31dF",
+      "file": "investigation-20260729-053534-0xfb3bcd14.md",
+      "title": "Investigation \u2014 ZAMA",
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "date": "2026-07-29T05:35:34Z",
+      "target": "0xfb3bcd142ab83505d57c446e1718D8429424DE3b",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-5] Pair 20.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 1163 holders \u2014 reasonably distribute",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-050515-0x89Cf5C1b.md"
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-053534-0xfb3bcd14.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-053534-0xfb3bcd14.md",
+      "title": "Investigation \u2014 ZAMA",
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "date": "2026-07-29T05:35:34Z",
+      "target": "0xfb3bcd142ab83505d57c446e1718D8429424DE3b",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-053534-0xfb3bcd14.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-050515-0x89Cf5C1b.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-093806-0x22D418A8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-092242-0x05FA81Ae.md",
-      "title": "Investigation \u2014 STEM",
-      "symbol": "STEM",
-      "name": "STEM",
-      "date": "2026-07-28T09:22:42Z",
-      "target": "0x05FA81Ae340098c8C7fcd310469195F9f8410858",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "13",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xb2c07a77e7740356a037fa6befd437bbe21853ba) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 72% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-092242-0x05FA81Ae.md"
     }
   ],
   "reports": [
