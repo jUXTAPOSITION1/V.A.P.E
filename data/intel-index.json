@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T06:50:57Z",
+  "generated": "2026-07-29T07:05:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 122,
-    "investigations": 492,
+    "investigations": 493,
     "news": 15,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-063521-0x31397372.md",
-      "title": "Investigation \u2014 \u7b56\u756501",
-      "symbol": "\u7b56\u756501",
-      "name": "\u7b56\u7565 01",
-      "date": "2026-07-29T06:35:21Z",
-      "target": "0x31397372b6FE190a08ceb99B83b09d5CbB4c9cC3",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260729-070550-0xb162B75f.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "Velvoo",
+      "date": "2026-07-29T07:05:50Z",
+      "target": "0xb162B75f641a88E2c7d32AAC7F490fe830B5b11D",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "17",
-      "summary": "Risk factors: [-8] Low holder count (65); [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $36,866; [-10] Violent 24h move +185% (volatility/manipulation); [-15] Pair only 0.7",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-063521-0x31397372.md"
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0xb518bbf70f4fbb51420c6766e237b70758ef331b) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (0) \u2014 th",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-070550-0xb162B75f.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-070550-0xb162B75f.md",
+      "title": "Investigation \u2014 VELVET",
+      "symbol": "VELVET",
+      "name": "Velvoo",
+      "date": "2026-07-29T07:05:50Z",
+      "target": "0xb162B75f641a88E2c7d32AAC7F490fe830B5b11D",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0xb518bbf70f4fbb51420c6766e237b70758ef331b) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (0) \u2014 th",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-070550-0xb162B75f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-063521-0x31397372.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-120818-0x6224e0f5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-110839-0x57c4ABE2.md",
-      "title": "Investigation \u2014 Blinky",
-      "symbol": "Blinky",
-      "name": "Blinky",
-      "date": "2026-07-28T11:08:39Z",
-      "target": "0x57c4ABE2560C41F97519C43dbe874e844D63F3BC",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7,415 (rug/illiquid); [-10] Low liquidity $7,415. Positive evidence: Trading 634+ days without a known inc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-110839-0x57c4ABE2.md"
     }
   ],
   "reports": [

@@ -5985,6 +5985,24 @@
     "symbol": "Gitlawb",
     "times_investigated": 1
   },
+  "8453:0xb162b75f641a88e2c7d32aac7f490fe830b5b11d": {
+    "address": "0xb162B75f641a88E2c7d32AAC7F490fe830B5b11D",
+    "chain": "8453",
+    "first_investigated": "2026-07-29T07:05:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-070550-0xb162B75f.md",
+        "score": 25,
+        "ts": "2026-07-29T07:05:50Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T07:05:50Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "VELVET",
+    "times_investigated": 1
+  },
   "8453:0xb20000000000000000000009a08ff22fac1d7f82": {
     "address": "0xb20000000000000000000009a08Ff22fAC1d7F82",
     "chain": "8453",
