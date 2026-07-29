@@ -657,6 +657,25 @@
     "symbol": "ISLAMI",
     "times_investigated": 1
   },
+  "137:0xa36d14e43b1a049983b86166a2f0210a9519f80a": {
+    "address": "0xA36d14E43b1a049983B86166A2f0210a9519f80a",
+    "chain": "137",
+    "creator_address": "0x4837193e11e20370ed52136f3b41c9e87b328091",
+    "first_investigated": "2026-07-29T16:12:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-161213-0xA36d14E4.md",
+        "score": 10,
+        "ts": "2026-07-29T16:12:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T16:12:13Z",
+    "last_score": 10,
+    "last_verdict": "REJECT",
+    "symbol": "WMATIC",
+    "times_investigated": 1
+  },
   "137:0xa3c322ad15218fbfaed26ba7f616249f7705d945": {
     "address": "0xA3c322Ad15218fBFAEd26bA7f616249f7705D945",
     "chain": "137",

@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-29T15:56:54Z",
-  "synthesis": "VAPE's automation ran repeated red-team scans, threat analyses, macro/virtuals/bounty sweeps, investigations, reputation snapshots, and self-improvement cycles in a 90-minute burst.",
+  "generated": "2026-07-29T16:12:13Z",
+  "synthesis": "[investigation] Featured",
   "tasks": [
+    {
+      "sha": "5c4ee2baa8",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T15:56Z",
+      "date": "2026-07-29T15:56:57Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5c4ee2baa82644e8d2f8e69eedcbfe66c037409d"
+    },
     {
       "sha": "1a5b2036a1",
       "kind": "sweep",
@@ -99,13 +106,6 @@
       "message": "VAPE AI red-team cycle 2026-07-29T14:38Z",
       "date": "2026-07-29T14:38:04Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f6c90bf04325d6b107101607b3841b528d168a0f"
-    },
-    {
-      "sha": "bd064317f8",
-      "kind": "automation",
-      "message": "VAPE self-improvement cycle 2026-07-29T14:26Z",
-      "date": "2026-07-29T14:26:22Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bd064317f84ea942bbb985c7186594b1778042d5"
     }
   ]
 }

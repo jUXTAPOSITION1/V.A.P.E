@@ -827,3 +827,5 @@
 | 2026-07-29 | auto | 0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C (ELK) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-29 | auto | 0x488F73cddDA1DE3664775fFd91623637383D6404 (YTS) | deep_investigation | REJECT (27/100) | Top 10 non-LP/burn holders control 84% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-29 | auto | 0xA36d14E43b1a049983B86166A2f0210a9519f80a (WMATIC) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: USD₮ (0xEa59Fa56e4ff | +7d |
