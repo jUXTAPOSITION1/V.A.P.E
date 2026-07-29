@@ -338,5 +338,15 @@
     "report": "intel/threat-analysis/2026-07-23-solido-cash.md",
     "provider": "xai_1",
     "written_at": "2026-07-28T21:01:01Z"
+  },
+  "2026-07-28:Crypto DAO": {
+    "report": "intel/threat-analysis/2026-07-28-crypto-dao.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-29T05:13:57Z"
+  },
+  "2026-07-26:WEMIX.FI Lend": {
+    "report": "intel/threat-analysis/2026-07-26-wemix-fi-lend.md",
+    "provider": "groq",
+    "written_at": "2026-07-29T05:14:03Z"
   }
 }
