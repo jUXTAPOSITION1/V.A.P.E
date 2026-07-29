@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T11:23:59Z",
+  "generated": "2026-07-29T11:27:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 415,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 123,
     "investigations": 498,
-    "news": 16,
+    "news": 17,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md",
+      "title": "Schwab rebrands $232M crypto ETF with NLP buzzword without changing a single investment",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-29 11:27 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-29 11:27 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md"
+    },
     {
       "file": "news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md",
       "title": "Insider Trading in the Prediction Era: White House Teleprompter Operator Out of Government After $100K Speech-Betting Scandal",

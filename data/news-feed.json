@@ -1,7 +1,111 @@
 {
-  "generated": "2026-07-29T08:40:28Z",
+  "generated": "2026-07-29T11:26:31Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Schwab rebrands $232M crypto ETF with NLP buzzword without changing a single investment",
+      "url": "https://cryptoslate.com/why-schwab-added-natural-language-processing-to-a-232m-etf-holding-trump-media-and-bitcoin-miners/",
+      "source": "CryptoSlate",
+      "published": "Wed, 29 Jul 2026 11:20:34 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Telegram founder Pavel Durov internationally wanted, Russia\u2019s FSB says",
+      "url": "https://cointelegraph.com/news/telegram-founder-wanted-internationally-russia?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 29 Jul 2026 11:18:19 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "3 reasons Wednesday's Fed meeting is pivotal for BTC",
+      "url": "https://www.coindesk.com/daybook-us/2026/07/29/3-reasons-wednesday-s-fed-meeting-is-pivotal-for-btc",
+      "source": "CoinDesk",
+      "published": "Wed, 29 Jul 2026 11:15:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Binance disappears from Google Play in certain EU countries",
+      "url": "https://cointelegraph.com/news/binance-disappears-android-google-play-certain-eu-countries?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 29 Jul 2026 11:00:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin steadies above $64,000 as crypto looks to Fed interest-rate decision",
+      "url": "https://www.coindesk.com/markets/2026/07/29/bitcoin-steadies-above-usd64-000-as-crypto-looks-to-fed-interest-rate-decision",
+      "source": "CoinDesk",
+      "published": "Wed, 29 Jul 2026 10:34:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Apple Sued After Fake iPhone Wallet App Drained $1.8M in Bitcoin",
+      "url": "https://decrypt.co/374628/apple-sued-after-fake-iphone-wallet-app-drained-1-8m-in-bitcoin",
+      "source": "Decrypt",
+      "published": "Wed, 29 Jul 2026 10:22:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Trump promised to save crypto, but his personal business might kill its landmark CLARITY law",
+      "url": "https://cryptoslate.com/crypto-was-warned-that-trump-could-politicize-the-industry-clarity-is-testing-that-bet/",
+      "source": "CryptoSlate",
+      "published": "Wed, 29 Jul 2026 10:15:14 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Binance offers gold and silver options after commodity futures pull in billions in daily volume",
+      "url": "https://www.coindesk.com/markets/2026/07/29/binance-offers-gold-and-silver-options-after-commodity-futures-pull-in-billions-in-daily-volume",
+      "source": "CoinDesk",
+      "published": "Wed, 29 Jul 2026 10:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Crypto TradFi grows fivefold to $6.6B as exchanges expand into stocks, commodities: Report",
+      "url": "https://cointelegraph.com/news/crypto-exchanges-tokenized-assets-market-6-6-billion?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 29 Jul 2026 10:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ionic Digital jumps 26% in Nasdaq debut, giving Celsius Network claimholders an exit route",
+      "url": "https://www.coindesk.com/business/2026/07/29/ionic-digital-jumps-26-in-nasdaq-debut-giving-celsius-network-claimholders-an-exit-route",
+      "source": "CoinDesk",
+      "published": "Wed, 29 Jul 2026 09:22:24 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hungary repeals crypto checks as first MiCA license is granted",
+      "url": "https://cointelegraph.com/news/hungary-repeals-crypto-checks-first-mica-license-granted?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 29 Jul 2026 09:15:36 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Russia charges Telegram founder Pavel Durov with aiding terrorism",
+      "url": "https://www.coindesk.com/policy/2026/07/29/russia-charges-telegram-founder-pavel-durov-with-aiding-terrorism",
+      "source": "CoinDesk",
+      "published": "Wed, 29 Jul 2026 09:10:54 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "XRP is running a $2.4B debt trap that could wipe out spot buyers the second the Fed speaks",
+      "url": "https://cryptoslate.com/xrp-is-running-a-2-4-billion-debt-trap-that-could-wipe-out-spot-buyers-the-second-the-fed-speaks/",
+      "source": "CryptoSlate",
+      "published": "Wed, 29 Jul 2026 09:10:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Trump teleprompter operator accused over Kalshi bets leaves government: AP",
       "url": "https://cointelegraph.com/news/trump-teleprompter-kalshi-bets-government-ap?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
@@ -35,66 +139,10 @@
       "crypto": true
     },
     {
-      "title": "UK policy sprint finds cross-border payments are stablecoins\u2019 top use case",
-      "url": "https://cointelegraph.com/news/uk-policy-cross-border-payments-stablecoins-use-case?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 07:11:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Telegram founder Pavel Durov internationally wanted, Russia\u2019s FSB says",
-      "url": "https://cointelegraph.com/news/telegram-founder-wanted-internationally-russia?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 06:32:25 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Live updates: Bitcoin clears $64,000 in Asia hours ahead of Fed decision",
-      "url": "https://www.coindesk.com/tech/2026/07/29/live-updates-bitcoin-clears-usd64-000-in-asia-hours-ahead-of-fed-decision",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 06:25:21 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Company behind AI trade that caused $60 million crypto liquidations to cover all losses",
-      "url": "https://www.coindesk.com/markets/2026/07/29/company-behind-ai-trade-that-caused-usd60-million-crypto-liquidations-to-cover-all-losses",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 06:03:28 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Citadel bets on a Fed rate hike Wednesday as bitcoin analysts call a hold. Someone will be wrong.",
-      "url": "https://www.coindesk.com/markets/2026/07/29/citadel-bets-on-a-fed-rate-hike-wednesday-as-bitcoin-analysts-call-a-hold-someone-will-be-wrong",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 05:37:38 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin rises toward $64,000 as Korea's record chip crash leaves crypto untouched",
-      "url": "https://www.coindesk.com/markets/2026/07/29/bitcoin-rises-toward-usd64-000-as-korea-s-record-chip-crash-leaves-crypto-untouched",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 05:32:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Trade.xyz to cover SK Hynix perp liquidation losses tied to price anomaly",
-      "url": "https://cointelegraph.com/news/trade-xyz-sk-hynix-perp-liquidations-price-anomaly?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 05:29:48 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Uniswap founder rejects claims v4 fees reduce LP earnings",
-      "url": "https://cointelegraph.com/news/uniswap-founder-rejects-v4-fees-reduce-lp-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 05:02:07 +0000",
+      "title": "\u2018Sleepy July\u2019: K33 says bitcoin spot volume on track for weakest month since late 2023",
+      "url": "https://www.theblock.co/post/410017/sleepy-july-k33-says-bitcoin-spot-volume-on-track-for-weakest-month-since-late-2023?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Wed, 29 Jul 2026 06:59:48 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -119,14 +167,6 @@
       "url": "https://www.theblock.co/post/410002/ark-invest-buys-spacex-trims-block-bullish-robinhood?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Wed, 29 Jul 2026 03:28:37 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Coinbase wants to be Canada\u2019s \u2018everything exchange,\u2019 but says clearer rules are needed first",
-      "url": "https://www.coindesk.com/policy/2026/07/28/coinbase-wants-to-be-canada-s-everything-exchange-but-says-clearer-rules-are-needed-first",
-      "source": "CoinDesk",
-      "published": "Tue, 28 Jul 2026 23:50:38 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -163,26 +203,10 @@
       "crypto": true
     },
     {
-      "title": "Michael Saylor: Bitcoin Code Is a Constitution, Changes Are Attacks on 'Economic Rights'",
-      "url": "https://decrypt.co/374588/michael-saylor-bitcoin-constitution-bip-110",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 19:36:03 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "AI firms are shredding physical books because copyright law is quietly rewarding them",
       "url": "https://cryptoslate.com/why-copyright-law-is-quietly-rewarding-ai-firms-for-shredding-physical-books/",
       "source": "CryptoSlate",
       "published": "Tue, 28 Jul 2026 19:20:39 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Morgan Stanley Expands Crypto Push With Ethereum and Solana ETPs",
-      "url": "https://decrypt.co/374592/morgan-stanley-crypto-ethereum-solana-etps",
-      "source": "Decrypt",
-      "published": "Tue, 28 Jul 2026 19:14:14 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -195,14 +219,6 @@
       "crypto": true
     },
     {
-      "title": "Inside the brutal 2-minute flash crash sending a $400M South Korean market plunging on Hyperliquid",
-      "url": "https://cryptoslate.com/inside-the-brutal-2-minute-flash-crash-sending-a-400m-south-korean-market-plunging-on-hyperliquid/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 17:05:53 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Ionic Digital jumps 25% in Nasdaq debut after expanding Celsius bitcoin mining assets into AI infrastructure",
       "url": "https://www.theblock.co/post/409945/ionic-digital-jumps-22-nasdaq-debut-celsius-bitcoin-mining-assets-ai-infrastructure?utm_source=rss&utm_medium=rss",
       "source": "The Block",
@@ -211,34 +227,10 @@
       "crypto": true
     },
     {
-      "title": "Federal court shields Kalshi and Polymarket from Minnesota\u2019s felony crackdown days before deadline",
-      "url": "https://cryptoslate.com/minnesota-judge-blocks-aug-1-prediction-market-felony-law-for-registered-exchanges-but-only-for-now/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 15:50:45 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Crypto hacks hit record high in H1 2026 as losses top $1 billion, Blockaid says",
       "url": "https://www.theblock.co/post/409944/crypto-hacks-hit-record-high-in-h1-2026-as-losses-top-1-billion-blockaid-says?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Tue, 28 Jul 2026 15:45:26 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto holders face a July 29 Maine deadline as state manual conflicts on when abandoned funds trigger seizure",
-      "url": "https://cryptoslate.com/maines-new-crypto-dormancy-law-leaves-holders-waiting-for-the-reporting-guidance-they-need/",
-      "source": "CryptoSlate",
-      "published": "Tue, 28 Jul 2026 14:45:02 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Ethereum L2 ecosystem loses momentum as TVL drops to 2-year low",
-      "url": "https://www.theblock.co/post/409811/ethereum-l2-ecosystem-loses-momentum-as-tvl-drops-to-two-year-low?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 28 Jul 2026 14:21:02 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -480,6 +472,14 @@
       "source": "Yahoo Finance",
       "published": "Sun, 17 May 2026 07:00:00 GMT",
       "topic": "Security",
+      "crypto": true
+    },
+    {
+      "title": "More Stablecoins, More Markets, More Flexibility: How Global Payments Infrastructure is Evolving",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcVJXVldSdXVZTkZkZm8yVGhqQk9XeENmUXBGSHozTFhJMkJ0SlRHYzRNYUFRTXV5TnZfRmFfQWZETERDUUc1dWhVVk5yRFVaYjhxTno3REFSSmRnMUxVRjJZU2VONGtpVklUem1uWDVmTGxvWjhjNDU5Qi1BMGRPTkNlalRHdmVmRmlNYVVEZ3ZKNlZFb3dmTlVnbUtTVGk0RS14ZG50NmNvOUM3Szg2a1BPLW1CdU5YOXRxdXQ0UQ?oc=5",
+      "source": "Ripple",
+      "published": "Fri, 24 Apr 2026 07:00:00 GMT",
+      "topic": "Stablecoins",
       "crypto": true
     }
   ]
