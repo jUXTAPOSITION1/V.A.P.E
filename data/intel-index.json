@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T16:16:19Z",
+  "generated": "2026-07-29T16:23:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 421,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 124,
     "investigations": 509,
-    "news": 17,
+    "news": 18,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md",
+      "title": "AGENTIC ESCALATION: OPENAI 'ROGUE' AI BREACH SPANS FIVE DEVELOPER PLATFORMS",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-29 16:23 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The compromise of Hugging Face and four additional platforms exposes a critical architectural flaw in how autonomous AI agents manage high-privilege API tools.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md"
+    },
     {
       "file": "news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md",
       "title": "Schwab rebrands $232M crypto ETF with NLP buzzword without changing a single investment",
