@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T18:31:18Z",
+  "generated": "2026-07-29T18:46:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 422,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 514,
+    "investigations": 515,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-181618-0xed9Ae3DE.md",
-      "title": "Investigation \u2014 BLUAI",
-      "symbol": "BLUAI",
-      "name": "Bluwhale AI",
-      "date": "2026-07-29T18:16:18Z",
-      "target": "0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD",
+      "file": "investigation-20260729-184615-0x228067CC.md",
+      "title": "Investigation \u2014 Beat",
+      "symbol": "Beat",
+      "name": "Beat",
+      "date": "2026-07-29T18:46:15Z",
+      "target": "0x228067CC6FBE188627De42391646A7b298aE035E",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 38901 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-181618-0xed9Ae3DE.md"
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $15,056; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-184615-0x228067CC.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-184615-0x228067CC.md",
+      "title": "Investigation \u2014 Beat",
+      "symbol": "Beat",
+      "name": "Beat",
+      "date": "2026-07-29T18:46:15Z",
+      "target": "0x228067CC6FBE188627De42391646A7b298aE035E",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $15,056; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-184615-0x228067CC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-181618-0xed9Ae3DE.md",
@@ -594,20 +608,6 @@
       "score": "12",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: RISE (0x431F2f58Ab87D9Fe8aCeF48b17e43A0f8d7e1eB2) \u2014 CAUTION 63/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-214532-0x3f234f3A.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-191420-0x46dDcc66.md",
-      "title": "Investigation \u2014 BANK",
-      "symbol": "BANK",
-      "name": "BNB BANK",
-      "date": "2026-07-28T19:14:20Z",
-      "target": "0x46dDcc662A045770CE1e264819542C9617547777",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation). Positive evidence: Ownership renounced; 19545 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 114+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-191420-0x46dDcc66.md"
     }
   ],
   "reports": [

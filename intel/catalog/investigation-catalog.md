@@ -839,3 +839,5 @@
 | 2026-07-29 | auto | 0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0 (UAI) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 92% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-29 | auto | 0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD (BLUAI) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) — can still act | +7d |
+
+| 2026-07-29 | auto | 0x228067CC6FBE188627De42391646A7b298aE035E (Beat) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
