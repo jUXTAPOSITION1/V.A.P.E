@@ -3300,6 +3300,25 @@
     "symbol": "ELK",
     "times_investigated": 1
   },
+  "56:0x012ea6a89cf28fa1c5cc6e6f7363702aa4ccb9a2": {
+    "address": "0x012ea6A89cf28Fa1C5Cc6e6f7363702AA4CCB9a2",
+    "chain": "56",
+    "creator_address": "0x827ffea756caadb634f4dbd4f675c2b702aaf93f",
+    "first_investigated": "2026-07-29T19:01:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-190136-0x012ea6A8.md",
+        "score": 35,
+        "ts": "2026-07-29T19:01:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T19:01:36Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "AEON",
+    "times_investigated": 1
+  },
   "56:0x095576f441006679a79a53ddf9136b550095dd1c": {
     "address": "0x095576F441006679a79a53ddF9136b550095dD1C",
     "chain": "56",
