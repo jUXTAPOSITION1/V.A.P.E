@@ -1761,6 +1761,25 @@
     "symbol": "Del404",
     "times_investigated": 1
   },
+  "1:0x9a8e5a3732080cacc2bb52fad1cd065129801e50": {
+    "address": "0x9A8E5a3732080cACc2Bb52fad1cD065129801e50",
+    "chain": "1",
+    "creator_address": "0x8c5b872d0aaa28ac6ac0af71fc6360779c9f290a",
+    "first_investigated": "2026-07-29T02:04:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-020426-0x9A8E5a37.md",
+        "score": 15,
+        "ts": "2026-07-29T02:04:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T02:04:26Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "0B0L",
+    "times_investigated": 1
+  },
   "1:0x9be98a036f654040d39caf0f4530e95a4f890274": {
     "address": "0x9BE98a036f654040d39caF0F4530e95A4f890274",
     "chain": "1",
