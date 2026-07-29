@@ -1591,6 +1591,25 @@
     "symbol": "V4",
     "times_investigated": 1
   },
+  "1:0x7c6aa5126da2691f62ebb2d2f082f908513983d0": {
+    "address": "0x7c6aa5126dA2691f62EBb2D2f082F908513983d0",
+    "chain": "1",
+    "creator_address": "0x1b489007416575df4bc8720b6025e0612498123e",
+    "first_investigated": "2026-07-29T11:39:00Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-113900-0x7c6aa512.md",
+        "score": 27,
+        "ts": "2026-07-29T11:39:00Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T11:39:00Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "TRUMP2028",
+    "times_investigated": 1
+  },
   "1:0x82ce191d049ed69bcb00870e95478c401c3002c8": {
     "address": "0x82ce191D049Ed69bCb00870e95478C401C3002c8",
     "chain": "1",

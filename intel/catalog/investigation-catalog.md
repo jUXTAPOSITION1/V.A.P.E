@@ -807,3 +807,5 @@
 | 2026-07-29 | auto | 0xA7bef5abd9265Ab97EE43D2fc4A56e0Ba25ACA25 (BAY) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 97% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-29 | auto | 0xb111B7690F6420Fc27d63D6870AaD4450Dbe22D0 (FUN) | deep_investigation | REJECT (17/100) | Low holder count (79) | +7d |
+
+| 2026-07-29 | auto | 0x7c6aa5126dA2691f62EBb2D2f082F908513983d0 (TRUMP2028) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
