@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T12:24:30Z",
+  "generated": "2026-07-29T12:39:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 123,
-    "investigations": 501,
+    "investigations": 502,
     "news": 17,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-122426-0x7DB662F5.md",
+      "file": "investigation-20260729-123928-0xB5D1AA71.md",
       "title": "Investigation \u2014 ON",
       "symbol": "ON",
       "name": "Orochi Network Token",
-      "date": "2026-07-29T12:24:26Z",
-      "target": "0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C",
+      "date": "2026-07-29T12:39:28Z",
+      "target": "0xB5D1AA718725FF1Ff3A56c8B30b4e8Ac41a1637A",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0xf64859A8A25175Ec8a35c4366C44EB2722fE154D) \u2014 REJECT 15/100 \u2014 likely the same serial campaign; [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-122426-0x7DB662F5.md"
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +34441058861939% (volatility/manipulation); [-15] P",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-123928-0xB5D1AA71.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-123928-0xB5D1AA71.md",
+      "title": "Investigation \u2014 ON",
+      "symbol": "ON",
+      "name": "Orochi Network Token",
+      "date": "2026-07-29T12:39:28Z",
+      "target": "0xB5D1AA718725FF1Ff3A56c8B30b4e8Ac41a1637A",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +34441058861939% (volatility/manipulation); [-15] P",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-123928-0xB5D1AA71.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-122426-0x7DB662F5.md",
@@ -594,20 +608,6 @@
       "score": "18",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-145401-0xAfB97Dd6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-143900-0xFfE203b5.md",
-      "title": "Investigation \u2014 Doge-1",
-      "symbol": "Doge-1",
-      "name": "Satellite Doge-1 Mission",
-      "date": "2026-07-28T14:39:00Z",
-      "target": "0xFfE203b59393593965842439ce1E7D7c78109b46",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 5455 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1032+ days without a known incident in this scan; Custom verified source (not a mass-produced factor",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-143900-0xFfE203b5.md"
     }
   ],
   "reports": [

@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-29T12:24:30Z",
-  "synthesis": "VAPE's automation generated reports, performed sweeps, and updated investigations between 10:46Z and 12:23Z.",
+  "generated": "2026-07-29T12:39:33Z",
+  "synthesis": "[investigation] Featured",
   "tasks": [
+    {
+      "sha": "4f61430c26",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T12:24Z",
+      "date": "2026-07-29T12:24:35Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4f61430c262207af5f7bc74f98d647b6492cc2dd"
+    },
     {
       "sha": "f1894bed70",
       "kind": "reputation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-07-29T10:54Z",
       "date": "2026-07-29T10:54:17Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a0541f344904f501ac486b2de4a9293d52511b5a"
-    },
-    {
-      "sha": "7ff44ec43c",
-      "kind": "sweep",
-      "message": "sentiment_sweep 2026-07-29T10:46Z",
-      "date": "2026-07-29T10:46:11Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7ff44ec43cdb182c65af53fe841916ca69d87271"
     }
   ]
 }
