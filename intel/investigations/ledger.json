@@ -3034,6 +3034,25 @@
     "symbol": "COQ",
     "times_investigated": 1
   },
+  "43114:0x488f73cddda1de3664775ffd91623637383d6404": {
+    "address": "0x488F73cddDA1DE3664775fFd91623637383D6404",
+    "chain": "43114",
+    "creator_address": "0x90a42628289896041c2ba358463259b4b7ea242c",
+    "first_investigated": "2026-07-29T15:41:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-154150-0x488F73cd.md",
+        "score": 27,
+        "ts": "2026-07-29T15:41:50Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T15:41:50Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "YTS",
+    "times_investigated": 1
+  },
   "43114:0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab": {
     "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
     "chain": "43114",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T15:26:54Z",
+  "generated": "2026-07-29T15:41:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 507,
+    "investigations": 508,
     "news": 17,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-152646-0xE1C110E1.md",
-      "title": "Investigation \u2014 ELK",
-      "symbol": "ELK",
-      "name": "Elk",
-      "date": "2026-07-29T15:26:46Z",
-      "target": "0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C",
+      "file": "investigation-20260729-154150-0x488F73cd.md",
+      "title": "Investigation \u2014 YTS",
+      "symbol": "YTS",
+      "name": "YetiSwap",
+      "date": "2026-07-29T15:41:50Z",
+      "target": "0x488F73cddDA1DE3664775fFd91623637383D6404",
       "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,715 (rug/illiquid); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-152646-0xE1C110E1.md"
+      "score": "27",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,703 (rug/illiquid); [-10] Low liquidity $2,703; [-8] No pair-creation timestamp available \u2014 cannot estab",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-154150-0x488F73cd.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-154150-0x488F73cd.md",
+      "title": "Investigation \u2014 YTS",
+      "symbol": "YTS",
+      "name": "YetiSwap",
+      "date": "2026-07-29T15:41:50Z",
+      "target": "0x488F73cddDA1DE3664775fFd91623637383D6404",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,703 (rug/illiquid); [-10] Low liquidity $2,703; [-8] No pair-creation timestamp available \u2014 cannot estab",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-154150-0x488F73cd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-152646-0xE1C110E1.md",
@@ -594,20 +608,6 @@
       "score": "55",
       "summary": "Risk factors: [-10] Low liquidity $26,431; [-10] Violent 24h move +669% (volatility/manipulation); [-15] Pair only 2.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 100% of liq",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-172729-0xa10C39aB.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-171222-0xDDB34224.md",
-      "title": "Investigation \u2014 COTI",
-      "symbol": "COTI",
-      "name": "COTI Token",
-      "date": "2026-07-28T17:12:22Z",
-      "target": "0xDDB3422497E61e13543BeA06989C0789117555c5",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "63",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xe0e42c70880d57230fb843db5eba6800533e91ae) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 29331 holders \u2014 reasonably distributed; Trading 2161+ days wi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-171222-0xDDB34224.md"
     }
   ],
   "reports": [
