@@ -14725,7 +14725,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14753,7 +14753,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14781,7 +14781,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14808,7 +14808,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14836,7 +14836,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14864,7 +14864,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14892,7 +14892,7 @@
     "bountyFitScore": 43,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14920,7 +14920,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14948,7 +14948,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -14977,7 +14977,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -15005,7 +15005,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -15034,7 +15034,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -15062,7 +15062,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -15091,7 +15091,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -15119,7 +15119,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784673020.692907,
+      "checkedAt": 1785339143.5278018,
       "ok": true
     }
   },
@@ -26830,5 +26830,28 @@
     "fitScore": 74,
     "isNew": true,
     "firstSeen": "2026-07-29T04:51:42.611620Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:ChainConnect-1785024000",
+    "name": "ChainConnect (exploit $650,000)",
+    "prizeUsd": 650000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "ethereum",
+      "bsc",
+      "avalanche",
+      "polygon"
+    ],
+    "desc": "Unauthorized Access on Ethereum,BSC,Avalanche,Polygon. Lead for incident response + forensics.",
+    "fitScore": 78,
+    "isNew": true,
+    "firstSeen": "2026-07-29T15:32:23.527637Z"
   }
 ]

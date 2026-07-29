@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-29T13:18:50Z
+# VAPE Engagement Status — 2026-07-29T15:32:37Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -24,6 +24,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Hinkal (exploit $820,000) ($820,000, fit 79) — checked 2026-07-13T05:05:12Z, honestly unresolved.
 - BarnBridge (exploit $776,000) ($776,000, fit 79) — checked 2026-07-15T18:41:35Z, honestly unresolved.
 - LULA (exploit $578,000) ($578,000, fit 78) — checked 2026-07-29T04:51:51Z, honestly unresolved.
+- ChainConnect (exploit $650,000) ($650,000, fit 78) — checked 2026-07-29T15:32:27Z, honestly unresolved.
 - DeBond (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:51Z, honestly unresolved.
 - Lien (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:54Z, honestly unresolved.
 - Projekt (exploit $560,000) ($560,000, fit 77) — checked 2026-07-27T20:07:41Z, honestly unresolved.
