@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-29T13:24:25Z",
-  "synthesis": "Constraints",
+  "generated": "2026-07-29T13:39:33Z",
+  "synthesis": "VAPE's automation has repeatedly committed featured investigations while also running bounty radar sweeps, reputation snapshots, and assorted reports.",
   "tasks": [
+    {
+      "sha": "1fef9fa3a1",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T13:24Z",
+      "date": "2026-07-29T13:24:39Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1fef9fa3a1643b25cabafa036c62ba9f2bc10a59"
+    },
     {
       "sha": "79c9a05746",
       "kind": "bounty-radar",
@@ -99,13 +106,6 @@
       "message": "VAPE skillforge build cycle 2026-07-29T11:21Z",
       "date": "2026-07-29T11:21:16Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/40b5aa9cb05039d736b284d6482f6cf7b5eb6d09"
-    },
-    {
-      "sha": "2622b5bfd4",
-      "kind": "sweep",
-      "message": "base_sweep 2026-07-29T11:15Z",
-      "date": "2026-07-29T11:15:40Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2622b5bfd4bed541d76372bd07df36102f7abf29"
     }
   ]
 }
