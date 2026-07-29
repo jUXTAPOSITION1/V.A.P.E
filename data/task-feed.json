@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-29T02:34:46Z",
-  "synthesis": "Data",
+  "generated": "2026-07-29T02:49:42Z",
+  "synthesis": "VAPE's automation repeatedly ran featured investigations every 15 minutes, with occasional security sweeps, bounty radar, reputation snapshots, and findings sealing.",
   "tasks": [
+    {
+      "sha": "f6384faf51",
+      "kind": "sweep",
+      "message": "security_sweep 2026-07-29T02:44Z",
+      "date": "2026-07-29T02:44:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f6384faf5175bfb16dcc488ff73aca1ae68c232d"
+    },
+    {
+      "sha": "3fc6397dc2",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T02:34Z",
+      "date": "2026-07-29T02:34:50Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3fc6397dc2ae94a8dfad6909fb1027b8dea5f840"
+    },
     {
       "sha": "d8dc6e9236",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-29T00:03Z",
       "date": "2026-07-29T00:03:39Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f21bd74c5a0785400e01dc81535e3fec15308c46"
-    },
-    {
-      "sha": "b01749931b",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-07-28T23:58Z",
-      "date": "2026-07-28T23:58:29Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b01749931bda9a4908f313f774b601ada77993d8"
-    },
-    {
-      "sha": "6d6dbef4c2",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-07-28T23:58Z",
-      "date": "2026-07-28T23:58:14Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/6d6dbef4c2844b83398b491e6c5e1ce29963e020"
     }
   ]
 }
