@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T00:03:35Z",
+  "generated": "2026-07-29T00:18:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 405,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 121,
-    "investigations": 481,
+    "investigations": 482,
     "news": 14,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-000332-0x2e5ef97C.md",
+      "file": "investigation-20260729-001840-0x259186E6.md",
       "title": "Investigation \u2014 GTAVI",
       "symbol": "GTAVI",
-      "name": "Grand Theft Auto VI",
-      "date": "2026-07-29T00:03:32Z",
-      "target": "0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9",
+      "name": "GTA VI",
+      "date": "2026-07-29T00:18:40Z",
+      "target": "0x259186E64E35ce5DF3CA31364BD521F665BeE73D",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-5] Pair 23.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3067 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-000332-0x2e5ef97C.md"
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,437. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 981+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-001840-0x259186E6.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-001840-0x259186E6.md",
+      "title": "Investigation \u2014 GTAVI",
+      "symbol": "GTAVI",
+      "name": "GTA VI",
+      "date": "2026-07-29T00:18:40Z",
+      "target": "0x259186E64E35ce5DF3CA31364BD521F665BeE73D",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,437. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 981+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-001840-0x259186E6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-000332-0x2e5ef97C.md",
@@ -594,20 +608,6 @@
       "score": "10",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-10] Low liquidity $1; [-15] Pair only 2.7 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-053418-0xD8Db7919.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-051856-0xe22b36dB.md",
-      "title": "Investigation \u2014 \u5e01\u6709",
-      "symbol": "\u5e01\u6709",
-      "name": "\u4e0d\u5fc5\u4e1c\u5954\u897f\u8d70\uff0c\u5e01\u5b89\u5565\u5565\u90fd\u6709",
-      "date": "2026-07-28T05:18:56Z",
-      "target": "0xe22b36dB6bCDb931e4a4833F5A24d3D4036D4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 1.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-051856-0xe22b36dB.md"
     }
   ],
   "reports": [

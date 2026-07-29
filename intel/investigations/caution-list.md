@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-29T00:03:32Z — 88 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-29T00:18:40Z — 89 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| GTAVI | Ethereum | `0x259186E64E35ce5DF3CA31364BD521F665BeE73D` | 75/100 | 1 | 2026-07-29T00:18:40Z |
 | BEAT | BNB Chain | `0xBaf069e57AE635e28f33Da73534008dDdCC99F76` | 65/100 | 1 | 2026-07-28T23:48:25Z |
 | AIPF | Polygon | `0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02` | 62/100 | 1 | 2026-07-28T18:28:50Z |
 | FERRET | Ethereum | `0xa10C39aBA4a9A392683414Ff9D8809Cd5fC03F24` | 55/100 | 1 | 2026-07-28T17:27:29Z |
