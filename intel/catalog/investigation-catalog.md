@@ -811,3 +811,5 @@
 | 2026-07-29 | auto | 0x7c6aa5126dA2691f62EBb2D2f082F908513983d0 (TRUMP2028) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-29 | auto | 0xf64859A8A25175Ec8a35c4366C44EB2722fE154D (ON) | deep_investigation | REJECT (15/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-29 | auto | 0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C (ON) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
