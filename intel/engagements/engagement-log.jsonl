@@ -202,3 +202,5 @@
 {"ts": "2026-07-27T18:09:29Z", "lead": "WEMIX (exploit $730,000)", "platform": "defillama-hack", "prizeUsd": 730000, "fitScore": 74, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-07-27T18:09:29Z", "lead": "Solido Cash (exploit $510,000)", "platform": "defillama-hack", "prizeUsd": 510000, "fitScore": 72, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-07-27T20:07:47Z", "lead": "Projekt (exploit $560,000)", "platform": "defillama-hack", "prizeUsd": 560000, "fitScore": 77, "engagement": {"status": "no_target_found", "checked_at": "2026-07-27T20:07:41Z"}}
+{"ts": "2026-07-29T01:03:17Z", "lead": "Crypto DAO (exploit $8,200,000)", "platform": "defillama-hack", "prizeUsd": 8200000, "fitScore": 89, "engagement": {"status": "no_target_found", "checked_at": "2026-07-29T01:03:08Z"}}
+{"ts": "2026-07-29T01:03:17Z", "lead": "Garden Solver (exploit $450,000)", "platform": "defillama-hack", "prizeUsd": 450000, "fitScore": 87, "engagement": {"status": "no_target_found", "checked_at": "2026-07-29T01:03:10Z"}}

@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-28T22:38:12Z
+# VAPE Engagement Status — 2026-07-29T01:03:17Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -10,9 +10,11 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Matcha (exploit $13,430,000) ($13,430,000, fit 90) — checked 2026-07-13T05:05:30Z, honestly unresolved.
 - Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90) — checked 2026-07-13T09:30:23Z, honestly unresolved.
 - Triple-A (exploit $9,700,000) ($9,700,000, fit 90) — checked 2026-07-25T18:35:30Z, honestly unresolved.
+- Crypto DAO (exploit $8,200,000) ($8,200,000, fit 89) — checked 2026-07-29T01:03:08Z, honestly unresolved.
 - Thorchain DEX (exploit $10,000,000) ($10,000,000, fit 88) — checked 2026-07-13T05:05:22Z, honestly unresolved.
 - Lazy Summer Protocol (exploit $6,000,000) ($6,000,000, fit 88) — checked 2026-07-13T05:05:09Z, honestly unresolved.
 - Garden (exploit $450,000) ($450,000, fit 87) — checked 2026-07-26T21:31:50Z, honestly unresolved.
+- Garden Solver (exploit $450,000) ($450,000, fit 87) — checked 2026-07-29T01:03:10Z, honestly unresolved.
 - Cascade Liquidity Strategy (exploit $1,340,000) ($1,340,000, fit 86) — checked 2026-07-26T23:37:19Z, honestly unresolved.
 - Grinex (exploit $15,000,000) ($15,000,000, fit 85) — checked 2026-07-13T05:05:26Z, honestly unresolved.
 - Resolv USR (exploit $24,500,000) ($24,500,000, fit 85) — checked 2026-07-13T05:05:28Z, honestly unresolved.
