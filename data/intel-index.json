@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T20:17:07Z",
+  "generated": "2026-07-29T20:34:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 424,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 517,
+    "investigations": 518,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-201656-0x3DEe4229.md",
-      "title": "Investigation \u2014 V4",
-      "symbol": "V4",
-      "name": "UniCASHCAT",
-      "date": "2026-07-29T20:16:56Z",
-      "target": "0x3DEe42295A9F6fDC9bB258DD0aA61c5F7a8208B8",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260729-203402-0x26837B64.md",
+      "title": "Investigation \u2014 Bank",
+      "symbol": "Bank",
+      "name": "Bank",
+      "date": "2026-07-29T20:34:02Z",
+      "target": "0x26837B64F1302afB1E364082a9e6a0076Bb88888",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-25] Very low liquidity $2,945 (rug/illiquid); [-10] Low liquidity $2,945; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-201656-0x3DEe4229.md"
+      "score": "20",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 29% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $128 (rug/illiquid); [-10] Low liquidity $128. Positive evidence: O",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-203402-0x26837B64.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-203402-0x26837B64.md",
+      "title": "Investigation \u2014 Bank",
+      "symbol": "Bank",
+      "name": "Bank",
+      "date": "2026-07-29T20:34:02Z",
+      "target": "0x26837B64F1302afB1E364082a9e6a0076Bb88888",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 29% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $128 (rug/illiquid); [-10] Low liquidity $128. Positive evidence: O",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-203402-0x26837B64.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-201656-0x3DEe4229.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 110% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $48,671; [-10] Violent 24h move +105% (volatility/manipulation); [-15] Pair only 1.1 days old (extreme fresh-launch risk); [-10] No known third-party audi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-224659-0x66643477.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-221659-0x9c891326.md",
-      "title": "Investigation \u2014 ISLAMI",
-      "symbol": "ISLAMI",
-      "name": "ISLAMICOIN",
-      "date": "2026-07-28T22:16:59Z",
-      "target": "0x9c891326Fd8b1a713974f73bb604677E1E63396D",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3 (rug/illiquid); [-10] Low liquidity $3. Positive evi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-221659-0x9c891326.md"
     }
   ],
   "reports": [
