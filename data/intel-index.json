@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T21:35:12Z",
+  "generated": "2026-07-29T21:50:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 520,
+    "investigations": 521,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-213507-0x76c7185d.md",
+      "file": "investigation-20260729-215017-0x4C891F27.md",
       "title": "Investigation \u2014 ON",
       "symbol": "ON",
       "name": "Orochi Network Token",
-      "date": "2026-07-29T21:35:07Z",
-      "target": "0x76c7185d1505a427Ab67b48ac1EBA3615A5a2eD8",
+      "date": "2026-07-29T21:50:17Z",
+      "target": "0x4C891F271E70D23DeCC53C59abf8636a44b6AB0a",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-213507-0x76c7185d.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-215017-0x4C891F27.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-215017-0x4C891F27.md",
+      "title": "Investigation \u2014 ON",
+      "symbol": "ON",
+      "name": "Orochi Network Token",
+      "date": "2026-07-29T21:50:17Z",
+      "target": "0x4C891F271E70D23DeCC53C59abf8636a44b6AB0a",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-215017-0x4C891F27.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-213507-0x76c7185d.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,437. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 981+ days without a known incident in this scan; Custom verified source (not a mass-p",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-001840-0x259186E6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-000332-0x2e5ef97C.md",
-      "title": "Investigation \u2014 GTAVI",
-      "symbol": "GTAVI",
-      "name": "Grand Theft Auto VI",
-      "date": "2026-07-29T00:03:32Z",
-      "target": "0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-5] Pair 23.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 3067 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-000332-0x2e5ef97C.md"
     }
   ],
   "reports": [
@@ -1779,7 +1779,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49279188",
+      "version": "49285773",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1789,7 +1789,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.52 eth_dom 10.1 mcap_chg_24h 0.27",
+      "version": "btc_dom 56.46 eth_dom 10.09 mcap_chg_24h -0.83",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
