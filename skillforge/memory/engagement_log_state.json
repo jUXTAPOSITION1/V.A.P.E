@@ -192,5 +192,7 @@
   "defillama-hack:Solido Cash (exploit $510,000)": "not_yet_attempted",
   "defillama-hack:Projekt (exploit $560,000)": "no_target_found",
   "defillama-hack:Crypto DAO (exploit $8,200,000)": "no_target_found",
-  "defillama-hack:Garden Solver (exploit $450,000)": "no_target_found"
+  "defillama-hack:Garden Solver (exploit $450,000)": "no_target_found",
+  "defillama-hack:LULA (exploit $578,000)": "no_target_found",
+  "defillama-hack:WEMIX.FI Lend (exploit $730,000)": "not_yet_attempted"
 }

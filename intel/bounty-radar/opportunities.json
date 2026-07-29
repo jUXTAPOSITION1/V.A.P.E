@@ -13015,7 +13015,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13043,7 +13043,7 @@
     "bountyFitScore": 45,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13071,7 +13071,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13100,7 +13100,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13129,7 +13129,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13157,7 +13157,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13186,7 +13186,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13214,7 +13214,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13242,7 +13242,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13270,7 +13270,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13298,7 +13298,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13326,7 +13326,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13354,7 +13354,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13382,7 +13382,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -13410,7 +13410,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1784647444.4675272,
+      "checkedAt": 1785300702.611782,
       "ok": true
     }
   },
@@ -26790,5 +26790,45 @@
     "fitScore": 87,
     "isNew": true,
     "firstSeen": "2026-07-29T01:03:05.611473Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:LULA-1785196800",
+    "name": "LULA (exploit $578,000)",
+    "prizeUsd": 578000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Price Manipulation Attack on BSC. Lead for incident response + forensics.",
+    "fitScore": 78,
+    "isNew": true,
+    "firstSeen": "2026-07-29T04:51:42.611620Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:WEMIX.FI Lend-1785024000",
+    "name": "WEMIX.FI Lend (exploit $730,000)",
+    "prizeUsd": 730000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "wemix3.0"
+    ],
+    "desc": "Access Control Exploit on WEMIX3.0. Lead for incident response + forensics.",
+    "fitScore": 74,
+    "isNew": true,
+    "firstSeen": "2026-07-29T04:51:42.611620Z"
   }
 ]
