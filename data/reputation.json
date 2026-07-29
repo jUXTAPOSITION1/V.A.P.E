@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T12:23:02Z",
+  "generated": "2026-07-29T15:21:04Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,10 +13,10 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 237,
-    "intel_reports": 328,
-    "intel_broadcasts": 123,
-    "catalog_investigations": 409,
+    "reports_published": 242,
+    "intel_reports": 330,
+    "intel_broadcasts": 124,
+    "catalog_investigations": 415,
     "token_scans_logged": 0,
     "skills_codified": 22,
     "tools_total": 16,
@@ -34,10 +34,10 @@
         "number": 340,
         "title": "Unlimited Approval Exploit Detector for Base and Ethereum",
         "kind": "self-directed",
-        "status": "open",
+        "status": "merged",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/340",
         "created_at": "2026-07-29T11:21:16Z",
-        "closed_at": null,
+        "closed_at": "2026-07-29T14:05:22Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -157,7 +157,7 @@
         }
       }
     ],
-    "work_log_entries": 276,
+    "work_log_entries": 278,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260706",
     "latest_report": "20260729"
