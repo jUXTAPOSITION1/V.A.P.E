@@ -3737,6 +3737,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xa7bef5abd9265ab97ee43d2fc4a56e0ba25aca25": {
+    "address": "0xA7bef5abd9265Ab97EE43D2fc4A56e0Ba25ACA25",
+    "chain": "56",
+    "creator_address": "0x26d0309e4adae39cbbd4a03e1827cea7bca20f94",
+    "first_investigated": "2026-07-29T09:54:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-095423-0xA7bef5ab.md",
+        "score": 60,
+        "ts": "2026-07-29T09:54:23Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-29T09:54:23Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "BAY",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",

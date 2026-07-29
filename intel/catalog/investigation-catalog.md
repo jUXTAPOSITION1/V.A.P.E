@@ -803,3 +803,5 @@
 | 2026-07-29 | auto | 0x56BBbC01a416Fb9b995949d105a5697c2338Cd09 (Beat) | deep_investigation | REJECT (25/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-29 | auto | 0xE7E7E741C23a4767831A56A8C99F522c5aC1E7E7 (EV) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-29 | auto | 0xA7bef5abd9265Ab97EE43D2fc4A56e0Ba25ACA25 (BAY) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 97% of supply — concentrated, easily manipula | +7d |
