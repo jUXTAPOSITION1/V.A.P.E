@@ -777,3 +777,5 @@
 | 2026-07-29 | auto | 0x259186E64E35ce5DF3CA31364BD521F665BeE73D (GTAVI) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 84% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-29 | auto | 0x5b650B618B988090A0D30831846cA3105B527d70 (AS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-29 | auto | 0x2f67D3BCdbc5030A79De0B217B934781A181c706 (ON) | deep_investigation | REJECT (25/100) | Very few holders (27) — thin, easily manipulated distribution | +7d |
