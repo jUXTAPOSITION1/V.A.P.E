@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-29T14:09:17Z",
+  "generated": "2026-07-29T14:12:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 416,
+    "reports": 417,
     "reports_by_type": {
+      "security": 77,
       "bounty": 88,
       "base": 87,
       "sentiment": 45,
       "virtuals": 88,
-      "security": 76,
       "macro": 22,
       "bug": 3,
       "mainnet": 3,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-132424-0x862F3BF4.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260729_120144.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-29T12:01:44Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-29-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-29T14:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_120144.md",
-      "bytes": 14526
+      "summary": "The feed records 12 incidents over the seven-day window ending 28 July 2026. Aggregate losses remain below the $50 M threshold for any single event, with the largest single loss being the AFX Bridge compromise at $24.15 M on Arbitrum. Two incidents exceeded $5 M (AFX Bridge $24.15 M and Verus-Ethereum Bridge $7.53 M), while the remaining ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-14.md",
+      "bytes": 7128
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-29-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-29T14:00Z",
+      "threat": null,
+      "summary": "The feed records 12 incidents over the seven-day window ending 28 July 2026. Aggregate losses remain below the $50 M threshold for any single event, with the largest single loss being the AFX Bridge compromise at $24.15 M on Arbitrum. Two incidents exceeded $5 M (AFX Bridge $24.15 M and Verus-Ethereum Bridge $7.53 M), while the remaining ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-14.md",
+      "bytes": 7128
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_180152.md",
       "bytes": 16760
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260726_160222.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-26T16:02:22Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Triple-A $9.7M on ['Ethereum', 'Tron', 'Arbitrum'] (Hot Wallet Compromise) \u00b7 RECENT EXPLOIT: DeBond $0.542M on ['Ethereum'] (Accounting Error)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260726_160222.md",
-      "bytes": 18027
     }
   ],
   "broadcasts": [
