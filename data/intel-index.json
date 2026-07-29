@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T21:52:27Z",
+  "generated": "2026-07-29T22:02:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 125,
     "investigations": 521,
-    "news": 18,
+    "news": 19,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md",
+      "title": "Binance.US Targets Prediction Markets Expansion With Upcoming CFTC Derivatives License Bid",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-29 22:02 UTC",
+      "topic": "Crypto Markets",
+      "dek": "CEO Steve Gregory reveals plans to apply for a Designated Contract Market license in August, setting up a regulated clash with Kalshi and Robinhood.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md"
+    },
     {
       "file": "news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md",
       "title": "AGENTIC ESCALATION: OPENAI 'ROGUE' AI BREACH SPANS FIVE DEVELOPER PLATFORMS",
