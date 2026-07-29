@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-29T19:47:02Z",
-  "synthesis": "VAPE's automation generated eight featured investigations, two reputation snapshots, multiple bounty and repo reports, and one SCOUT radar sweep.",
+  "generated": "2026-07-29T20:01:59Z",
+  "synthesis": "VAPE's automation repeatedly committed featured investigations while running bounty radar sweeps, reputation snapshots, and assorted automated reports.",
   "tasks": [
+    {
+      "sha": "b05d91fa64",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-29T19:55Z",
+      "date": "2026-07-29T19:55:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b05d91fa6402b629f06602cb22ed3de755e6a8c9"
+    },
+    {
+      "sha": "1f5b260981",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-29T19:51Z",
+      "date": "2026-07-29T19:51:19Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1f5b260981c160982c38f6d50a7263a089097265"
+    },
+    {
+      "sha": "61dc33d84a",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T19:47Z",
+      "date": "2026-07-29T19:47:06Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/61dc33d84a60f0021f42c84eee7d8cff315177e9"
+    },
     {
       "sha": "14ea916dbc",
       "kind": "reputation",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-29T18:01Z",
       "date": "2026-07-29T18:01:09Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/abef962e963c6e4ffad1b8cb09fd9a2106a32209"
-    },
-    {
-      "sha": "170a90963b",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-29T17:55Z",
-      "date": "2026-07-29T17:55:29Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/170a90963bbd7725ca8c7237cef14597388e5e70"
-    },
-    {
-      "sha": "d4e85b05af",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T17:46Z",
-      "date": "2026-07-29T17:46:18Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d4e85b05afc4fe420a7c4107867e04bc0f746927"
-    },
-    {
-      "sha": "f5683d7393",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-29T17:40Z",
-      "date": "2026-07-29T17:40:29Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f5683d7393e9a093a48d9c59fd0493a34ea45643"
     }
   ]
 }

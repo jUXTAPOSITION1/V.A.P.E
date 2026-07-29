@@ -272,3 +272,4 @@
 {"ts": "2026-07-29T19:01:46.873141Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-29T19:16:51.535268Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 52}
 {"ts": "2026-07-29T19:31:40.030084Z", "target": "layerzero-v2", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
+{"ts": "2026-07-29T20:01:58.411803Z", "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 52}
