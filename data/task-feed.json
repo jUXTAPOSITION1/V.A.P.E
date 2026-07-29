@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-29T17:46:08Z",
-  "synthesis": "1)",
+  "generated": "2026-07-29T18:01:05Z",
+  "synthesis": "VAPE automation mostly generated featured investigations while running toolchecks, bounty reports, reputation snapshots, news intel, repo reviews, and sweeps.",
   "tasks": [
+    {
+      "sha": "170a90963b",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-29T17:55Z",
+      "date": "2026-07-29T17:55:29Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/170a90963bbd7725ca8c7237cef14597388e5e70"
+    },
+    {
+      "sha": "d4e85b05af",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T17:46Z",
+      "date": "2026-07-29T17:46:18Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d4e85b05afc4fe420a7c4107867e04bc0f746927"
+    },
     {
       "sha": "f5683d7393",
       "kind": "reputation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-29T15:56Z",
       "date": "2026-07-29T15:56:57Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5c4ee2baa82644e8d2f8e69eedcbfe66c037409d"
-    },
-    {
-      "sha": "1a5b2036a1",
-      "kind": "sweep",
-      "message": "macro_sweep 2026-07-29T15:55Z",
-      "date": "2026-07-29T15:55:51Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1a5b2036a189d9c5dda44343fc0f51d184a9dc39"
-    },
-    {
-      "sha": "76d05080a1",
-      "kind": "automation",
-      "message": "VAPE AI red-team deep scan 2026-07-29T15:54Z",
-      "date": "2026-07-29T15:54:18Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/76d05080a161848fe58e6386e17b1dd0fa2d0f63"
     }
   ]
 }
