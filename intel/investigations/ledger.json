@@ -1629,6 +1629,25 @@
     "symbol": "BTBB",
     "times_investigated": 1
   },
+  "1:0x89cf5c1b3bc04ea54795b37a85258f1dfc9c31df": {
+    "address": "0x89Cf5C1b3bc04ea54795B37A85258F1dfC9c31dF",
+    "chain": "1",
+    "creator_address": "0x37f99bf9c2eb7ba2d862e871b303634ff5658c91",
+    "first_investigated": "2026-07-29T05:05:15Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-050515-0x89Cf5C1b.md",
+        "score": 77,
+        "ts": "2026-07-29T05:05:15Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-29T05:05:15Z",
+    "last_score": 77,
+    "last_verdict": "CAUTION",
+    "symbol": "Swing",
+    "times_investigated": 1
+  },
   "1:0x8cddd6eea1067b78b77255e49861843f69d4703d": {
     "address": "0x8cDDd6EeA1067b78B77255e49861843F69D4703D",
     "chain": "1",
