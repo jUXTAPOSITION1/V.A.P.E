@@ -58,3 +58,4 @@
 {"ts": "2026-07-28T22:32:06.070418Z", "address": "0x25118290e6A5f4139381D072181157035864099d", "chain": "42161", "symbol": "RAIN", "name": "RAIN", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-29T02:04:30.653356Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-29T06:20:23.396295Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-07-29T08:20:24.201002Z", "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "chain": "137", "symbol": "AIPF", "name": "AIPF", "source": "evm", "offering": "exploit_check"}
