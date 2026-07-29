@@ -1667,6 +1667,25 @@
     "symbol": "CATE",
     "times_investigated": 1
   },
+  "1:0x862f3bf49c2bddc027ed7e4031c1a45d6c0c8521": {
+    "address": "0x862F3BF49c2bDDC027ED7e4031C1a45d6c0C8521",
+    "chain": "1",
+    "creator_address": "0xbd48b8aa8782f22a7c7d058fe89fa71d7ccb83fa",
+    "first_investigated": "2026-07-29T13:24:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-132424-0x862F3BF4.md",
+        "score": 0,
+        "ts": "2026-07-29T13:24:24Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-29T13:24:24Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "COTI",
+    "times_investigated": 1
+  },
   "1:0x88888880d5ca13018d2dc11e2e4744bd91a5656f": {
     "address": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
     "chain": "1",
