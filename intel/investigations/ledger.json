@@ -4040,6 +4040,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xb9e1fd5a02d3a33b25a14d661414e6ed6954a721": {
+    "address": "0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721",
+    "chain": "56",
+    "creator_address": "0x1d4c6be5659e3d801c68ec6fc0fdf88b588b70a2",
+    "first_investigated": "2026-07-29T16:45:05Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-164505-0xb9E1Fd5A.md",
+        "score": 62,
+        "ts": "2026-07-29T16:45:05Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-29T16:45:05Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "SOON",
+    "times_investigated": 1
+  },
   "56:0xbaf069e57ae635e28f33da73534008dddcc99f76": {
     "address": "0xBaf069e57AE635e28f33Da73534008dDdCC99F76",
     "chain": "56",

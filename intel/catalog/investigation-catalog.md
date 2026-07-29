@@ -831,3 +831,5 @@
 | 2026-07-29 | auto | 0xA36d14E43b1a049983B86166A2f0210a9519f80a (WMATIC) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: USD₮ (0xEa59Fa56e4ff | +7d |
 
 | 2026-07-29 | auto | 0x1F74b4D3Ad8d64226928aa3c07D291cD650c454C (PRO) | deep_investigation | CAUTION (50/100) | Top 10 non-LP/burn holders control 99% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-29 | auto | 0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721 (SOON) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-29T16:28:47Z",
+  "generated": "2026-07-29T16:45:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 421,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 124,
-    "investigations": 510,
+    "investigations": 511,
     "news": 18,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-162828-0x1F74b4D3.md",
-      "title": "Investigation \u2014 PRO",
-      "symbol": "PRO",
-      "name": "Prospera DAO",
-      "date": "2026-07-29T16:28:28Z",
-      "target": "0x1F74b4D3Ad8d64226928aa3c07D291cD650c454C",
+      "file": "investigation-20260729-164505-0xb9E1Fd5A.md",
+      "title": "Investigation \u2014 SOON",
+      "symbol": "SOON",
+      "name": "SOON Token",
+      "date": "2026-07-29T16:45:05Z",
+      "target": "0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721",
       "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,894 (rug/illiquid); [-10] Low liquidity $1,894. Positive evidence: Ownership renounced; 1874 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-162828-0x1F74b4D3.md"
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 92% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10949 holders \u2014 reasonably distributed; Deep liquidity ($511,499)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-164505-0xb9E1Fd5A.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260729-164505-0xb9E1Fd5A.md",
+      "title": "Investigation \u2014 SOON",
+      "symbol": "SOON",
+      "name": "SOON Token",
+      "date": "2026-07-29T16:45:05Z",
+      "target": "0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 92% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10949 holders \u2014 reasonably distributed; Deep liquidity ($511,499)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-164505-0xb9E1Fd5A.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-162828-0x1F74b4D3.md",
@@ -594,20 +608,6 @@
       "score": "42",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $9,476 (rug/illiquid); [-10] Low liquidity $9,476. Positive evidence: 624 holders \u2014 reasonably distributed; Trading 993+ days without a known ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-181324-0xAf2CA40d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260728-175758-0xBcBDA13B.md",
-      "title": "Investigation \u2014 FERRET",
-      "symbol": "FERRET",
-      "name": "Ferret AI",
-      "date": "2026-07-28T17:57:58Z",
-      "target": "0xBcBDA13Bd60bC0e91745186E274D1445078D6b33",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-10] Low liquidity $21,191. Positive evidence: Ownership renounced; 2316 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 924+ days without a known incident in this scan; Custom",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260728-175758-0xBcBDA13B.md"
     }
   ],
   "reports": [
