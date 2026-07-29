@@ -1762,6 +1762,25 @@
     "symbol": "PUPPY",
     "times_investigated": 1
   },
+  "1:0x8e7a9f9817ecf2649c0316b22fea274d522c7b9b": {
+    "address": "0x8e7A9f9817eCf2649c0316b22Fea274D522C7b9B",
+    "chain": "1",
+    "creator_address": "0x7b3403ec5a1ca8791b0aa358dd8a6efe5efea7f5",
+    "first_investigated": "2026-07-29T17:00:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260729-170018-0x8e7A9f98.md",
+        "score": 50,
+        "ts": "2026-07-29T17:00:18Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-29T17:00:18Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "VIBE",
+    "times_investigated": 1
+  },
   "1:0x904567252d8f48555b7447c67dca23f0372e16be": {
     "address": "0x904567252D8F48555b7447c67dCA23F0372E16be",
     "chain": "1",
