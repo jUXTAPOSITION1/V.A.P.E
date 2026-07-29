@@ -809,3 +809,5 @@
 | 2026-07-29 | auto | 0xb111B7690F6420Fc27d63D6870AaD4450Dbe22D0 (FUN) | deep_investigation | REJECT (17/100) | Low holder count (79) | +7d |
 
 | 2026-07-29 | auto | 0x7c6aa5126dA2691f62EBb2D2f082F908513983d0 (TRUMP2028) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-29 | auto | 0xf64859A8A25175Ec8a35c4366C44EB2722fE154D (ON) | deep_investigation | REJECT (15/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

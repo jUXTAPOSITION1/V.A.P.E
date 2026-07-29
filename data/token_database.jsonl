@@ -60,3 +60,4 @@
 {"ts": "2026-07-29T06:20:23.396295Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-07-29T08:20:24.201002Z", "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "chain": "137", "symbol": "AIPF", "name": "AIPF", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-07-29T09:36:17.765961Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-07-29T12:09:21.851443Z", "address": "0x940181a94A35A4569E4529A3CDfB74e38FD98631", "chain": "8453", "symbol": "AERO", "name": "AERO", "source": "base", "offering": "token_chart"}
