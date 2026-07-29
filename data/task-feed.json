@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-29T17:30:31Z",
-  "synthesis": "VAPE's automation generated bounty reports, repo reviews, multiple featured investigations, bounty radar sweeps, news intel, base and macro sweeps, red-team scans, and threat analyses.",
+  "generated": "2026-07-29T17:46:08Z",
+  "synthesis": "1)",
   "tasks": [
+    {
+      "sha": "f5683d7393",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-29T17:40Z",
+      "date": "2026-07-29T17:40:29Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f5683d7393e9a093a48d9c59fd0493a34ea45643"
+    },
+    {
+      "sha": "2de7f88da0",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T17:30Z",
+      "date": "2026-07-29T17:30:33Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2de7f88da04b7e185a9b94e308bab379124a1a4c"
+    },
     {
       "sha": "8db8204195",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "VAPE AI red-team deep scan 2026-07-29T15:54Z",
       "date": "2026-07-29T15:54:18Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/76d05080a161848fe58e6386e17b1dd0fa2d0f63"
-    },
-    {
-      "sha": "f8d4fec3ce",
-      "kind": "automation",
-      "message": "threat analysis: 2026-07-29T15:45Z",
-      "date": "2026-07-29T15:45:00Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f8d4fec3ce493088565f2391514cd785b3444c6e"
-    },
-    {
-      "sha": "2302e86dc9",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-29T15:42Z",
-      "date": "2026-07-29T15:42:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2302e86dc98a18526a990e4f8a075ef59c40cfb8"
     }
   ]
 }

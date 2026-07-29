@@ -835,3 +835,5 @@
 | 2026-07-29 | auto | 0xb9E1Fd5A02D3A33b25a14d661414E6ED6954a721 (SOON) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-29 | auto | 0x8e7A9f9817eCf2649c0316b22Fea274D522C7b9B (VIBE) | deep_investigation | CAUTION (50/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-29 | auto | 0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0 (UAI) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 92% of supply — concentrated, easily manipula | +7d |
