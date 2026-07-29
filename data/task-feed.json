@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-29T00:48:54Z",
-  "synthesis": "VAPE's automation has repeatedly committed featured investigations, plus reputation snapshots, bounty reports, repo reviews, and bounty radar sweeps.",
+  "generated": "2026-07-29T01:04:09Z",
+  "synthesis": "UT",
   "tasks": [
+    {
+      "sha": "4ba2f68e89",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-29T01:03Z",
+      "date": "2026-07-29T01:03:17Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4ba2f68e899853e4130344eeeae09f240548f719"
+    },
+    {
+      "sha": "55df42473b",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-29T00:48Z",
+      "date": "2026-07-29T00:48:57Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/55df42473bbe7d193eef3b401d1f8eba46637666"
+    },
     {
       "sha": "3121b09b17",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-28T22:32Z",
       "date": "2026-07-28T22:32:09Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/940ea976cb73046e8f8c3fde7d3e204e58e1c0d2"
-    },
-    {
-      "sha": "5adc3b510e",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-28T22:18Z",
-      "date": "2026-07-28T22:18:10Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5adc3b510e6ce0a732b8b36b1acdcf7a441e35ef"
-    },
-    {
-      "sha": "3a12b9c102",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-28T22:17Z",
-      "date": "2026-07-28T22:17:12Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3a12b9c1025f65d4634f442671cd32e839f67e31"
     }
   ]
 }

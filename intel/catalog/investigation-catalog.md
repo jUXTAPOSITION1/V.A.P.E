@@ -775,3 +775,5 @@
 | 2026-07-29 | auto | 0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9 (GTAVI) | deep_investigation | PROCEED (85/100) | Pair 23.3 days old — under a month, still unproven | +7d |
 
 | 2026-07-29 | auto | 0x259186E64E35ce5DF3CA31364BD521F665BeE73D (GTAVI) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 84% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-29 | auto | 0x5b650B618B988090A0D30831846cA3105B527d70 (AS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
