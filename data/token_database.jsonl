@@ -68,3 +68,4 @@
 {"ts": "2026-07-29T22:35:49.402376Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-07-29T23:05:49.949494Z", "address": "0xe0AeE745b22c522DE621F826a9453f534808DFD0", "chain": "1", "symbol": "MCU", "name": "MCU", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-07-30T02:21:21.553904Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_intel"}
+{"ts": "2026-07-30T02:51:17.429161Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "exploit_check"}
