@@ -1,14 +1,14 @@
 {
-  "generated": "2026-07-30T04:06:29Z",
+  "generated": "2026-07-30T04:08:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 430,
+    "reports": 431,
     "reports_by_type": {
+      "virtuals": 91,
       "bounty": 94,
       "security": 78,
       "sentiment": 46,
       "base": 89,
-      "virtuals": 90,
       "macro": 23,
       "bug": 3,
       "mainnet": 3,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-033629-0x67b47971.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260730_035744.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-30T03:57:44Z",
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-30-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-30T04:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_035744.md",
-      "bytes": 17556
+      "summary": "Date: 2026-07-30 04:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-04.md",
+      "bytes": 3131
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-30-04.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-30T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-30 04:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-04.md",
+      "bytes": 3131
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-27 10:46 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-27-10.md",
       "bytes": 3265
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-27-09.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-27T09:00Z",
-      "threat": null,
-      "summary": "The feed records 9 incidents over the last 7 days with no events reaching or exceeding $50M in the prior 14-day window. Losses cluster on Ethereum, Arbitrum, and Solana, with Base appearing in only one entry (Garden, $0.45M). Dominant techniques include price oracle manipulation (Ostium $23.75M on Arbitrum, Cascade Liquidity Strategy $1.3",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-09.md",
-      "bytes": 7011
     }
   ],
   "broadcasts": [
