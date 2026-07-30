@@ -337,3 +337,4 @@
 {"ts": "2026-07-30T22:10:11.796324Z", "target": "none", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
 {"ts": "2026-07-30T22:25:36.707459Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
 {"ts": "2026-07-30T22:40:47.654816Z", "target": "arbitrum", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
+{"ts": "2026-07-30T22:56:06.734738Z", "target": "steakhouse-financial", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}

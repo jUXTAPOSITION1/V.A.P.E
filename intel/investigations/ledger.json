@@ -1892,6 +1892,25 @@
     "symbol": "CATE",
     "times_investigated": 1
   },
+  "1:0x851f679a5edfb16e7cf1ad157c6995b7e7f333f2": {
+    "address": "0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2",
+    "chain": "1",
+    "creator_address": "0x0c6ac3fcea667fd6c62483ce1dbbce6f6ce0fb1f",
+    "first_investigated": "2026-07-30T22:56:01Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-225601-0x851F679A.md",
+        "score": 52,
+        "ts": "2026-07-30T22:56:01Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T22:56:01Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "TrumpBucks",
+    "times_investigated": 1
+  },
   "1:0x862f3bf49c2bddc027ed7e4031c1a45d6c0c8521": {
     "address": "0x862F3BF49c2bDDC027ED7e4031C1a45d6c0C8521",
     "chain": "1",
