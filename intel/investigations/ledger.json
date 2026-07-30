@@ -4344,6 +4344,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xb037894418a4758086e7de170a666b045c764444": {
+    "address": "0xB037894418a4758086E7de170a666b045c764444",
+    "chain": "56",
+    "creator_address": "0x93c379682a95edb1e129b0037b17da2842947f9c",
+    "first_investigated": "2026-07-30T07:36:51Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-073651-0xB0378944.md",
+        "score": 55,
+        "ts": "2026-07-30T07:36:51Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T07:36:51Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "\u55b5\u55b5\u5e01",
+    "times_investigated": 1
+  },
   "56:0xb33f6e70535584c2aca18335305797c16f1ad589": {
     "address": "0xB33F6E70535584c2aCa18335305797C16f1ad589",
     "chain": "56",

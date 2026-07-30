@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T07:21:44Z",
+  "generated": "2026-07-30T07:36:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 433,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 126,
-    "investigations": 532,
+    "investigations": 533,
     "news": 21,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-072138-0x1f9840a8.md",
-      "title": "Investigation \u2014 UNI",
-      "symbol": "UNI",
-      "name": "Uniswap",
-      "date": "2026-07-30T07:21:38Z",
-      "target": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x1a9c8182c09f50c8318d769245bea52c32be35bc) \u2014 can still act on the contract. Positive evidence: 389006 holders \u2014 reasonably distributed; Deep liquidity ($15,803,349); Trading 1912+ days without a known incident in this scan; Custom verified source (not a mass-produced factory te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-072138-0x1f9840a8.md"
+      "file": "investigation-20260730-073651-0xB0378944.md",
+      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
+      "symbol": "\u55b5\u55b5\u5e01",
+      "name": "\u55b5\u55b5\u5e01",
+      "date": "2026-07-30T07:36:51Z",
+      "target": "0xB037894418a4758086E7de170a666b045c764444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-073651-0xB0378944.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-073651-0xB0378944.md",
+      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
+      "symbol": "\u55b5\u55b5\u5e01",
+      "name": "\u55b5\u55b5\u5e01",
+      "date": "2026-07-30T07:36:51Z",
+      "target": "0xB037894418a4758086E7de170a666b045c764444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-073651-0xB0378944.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-072138-0x1f9840a8.md",
@@ -594,20 +608,6 @@
       "score": "37",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (57); [-8] Top 10 non-LP/burn holders control 57% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,102; [-15] Pair only 2.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 t",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-080526-0xcf3232B8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-070550-0xb162B75f.md",
-      "title": "Investigation \u2014 VELVET",
-      "symbol": "VELVET",
-      "name": "Velvoo",
-      "date": "2026-07-29T07:05:50Z",
-      "target": "0xb162B75f641a88E2c7d32AAC7F490fe830B5b11D",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0xb518bbf70f4fbb51420c6766e237b70758ef331b) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (0) \u2014 th",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-070550-0xb162B75f.md"
     }
   ],
   "reports": [
@@ -1812,7 +1812,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49296950",
+      "version": "49303368",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1822,7 +1822,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.54 eth_dom 10.12 mcap_chg_24h 0.59",
+      "version": "btc_dom 56.52 eth_dom 10.11 mcap_chg_24h -0.58",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1842,7 +1842,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xa5ac689ca187 STARRISM 1909.09 from 0x61ad525d to 0x833589fc",
+      "version": "0xafa9a1bc5ccc SUBBD 5943444.87755574 from 0xf9346bab to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
