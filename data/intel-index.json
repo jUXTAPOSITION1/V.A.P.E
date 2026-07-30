@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T17:53:32Z",
+  "generated": "2026-07-30T18:08:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 444,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 553,
+    "investigations": 554,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-175324-0xD036f173.md",
-      "title": "Investigation \u2014 UNI",
-      "symbol": "UNI",
-      "name": "Unicorn",
-      "date": "2026-07-30T17:53:24Z",
-      "target": "0xD036f17315D159B48cc154bBc70aa4FA06210DE9",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260730-180847-0xC22Bd38d.md",
+      "title": "Investigation \u2014 CES",
+      "symbol": "CES",
+      "name": "WhaleBit",
+      "date": "2026-07-30T18:08:47Z",
+      "target": "0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $26,029; [-10] Violent 24h move +2900% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-175324-0xD036f173.md"
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CES (0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-180847-0xC22Bd38d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-180847-0xC22Bd38d.md",
+      "title": "Investigation \u2014 CES",
+      "symbol": "CES",
+      "name": "WhaleBit",
+      "date": "2026-07-30T18:08:47Z",
+      "target": "0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CES (0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-180847-0xC22Bd38d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-175324-0xD036f173.md",
@@ -594,20 +608,6 @@
       "score": "45",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $15,056; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-184615-0x228067CC.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-181618-0xed9Ae3DE.md",
-      "title": "Investigation \u2014 BLUAI",
-      "symbol": "BLUAI",
-      "name": "Bluwhale AI",
-      "date": "2026-07-29T18:16:18Z",
-      "target": "0xed9Ae3DEF8d6F052971Bb8b6d1975FF267Cf9aaD",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 38901 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-181618-0xed9Ae3DE.md"
     }
   ],
   "reports": [
@@ -1845,7 +1845,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49317036",
+      "version": "49322621",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1855,7 +1855,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.62 eth_dom 10.1 mcap_chg_24h 1.03",
+      "version": "btc_dom 56.62 eth_dom 10.08 mcap_chg_24h 0.52",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

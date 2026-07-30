@@ -771,6 +771,25 @@
     "symbol": "RISE",
     "times_investigated": 1
   },
+  "137:0xc22bd38d997d80d3dc0e852be4ab62f3f86c135b": {
+    "address": "0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b",
+    "chain": "137",
+    "creator_address": "0xcbf0e9ccb0b1f6a0edc098c156259739798e8b4d",
+    "first_investigated": "2026-07-30T18:08:47Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-180847-0xC22Bd38d.md",
+        "score": 32,
+        "ts": "2026-07-30T18:08:47Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T18:08:47Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "CES",
+    "times_investigated": 1
+  },
   "137:0xcbf4ab00b6aa19b4d5d29c7c3508b393a1c01fe3": {
     "address": "0xCBf4AB00b6Aa19B4d5D29C7c3508B393a1C01Fe3",
     "chain": "137",

@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T17:53:33Z",
-  "synthesis": "VAPE has been running",
+  "generated": "2026-07-30T18:08:49Z",
+  "synthesis": "202",
   "tasks": [
+    {
+      "sha": "08fd34a8c1",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-07-30T18:03Z",
+      "date": "2026-07-30T18:03:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/08fd34a8c18ecb334ed0d7b10a9823be50c9eb1e"
+    },
+    {
+      "sha": "f1be01fbe1",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T17:53Z",
+      "date": "2026-07-30T17:53:37Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f1be01fbe1948a1ee7c449f617c14e252dbbfe96"
+    },
     {
       "sha": "4ff094c9ba",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "VAPE AI red-team deep scan 2026-07-30T15:57Z",
       "date": "2026-07-30T15:57:23Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/85deeb742874c497ccb335f5264058e08536cc46"
-    },
-    {
-      "sha": "8b21b3c950",
-      "kind": "sweep",
-      "message": "macro_sweep 2026-07-30T15:55Z",
-      "date": "2026-07-30T15:55:26Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8b21b3c950d9278eec969d1593cc99691a2d5c06"
-    },
-    {
-      "sha": "c5754a96a4",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T15:52Z",
-      "date": "2026-07-30T15:52:36Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c5754a96a48e8354f4bc8c6d261a6e914ba9dd20"
     }
   ]
 }
