@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-30T19:38:26Z — 246 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-30T19:53:32Z — 247 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VIBE | Ethereum | `0x5cBC670ae9a18D9B20144bEC724b34daddf8b365` | 0/100 | 1 | 2026-07-30T19:53:32Z |
 | CES | Polygon | `0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b` | 32/100 | 1 | 2026-07-30T18:08:47Z |
 | UNI | Ethereum | `0xD036f17315D159B48cc154bBc70aa4FA06210DE9` | 40/100 | 1 | 2026-07-30T17:53:24Z |
 | V4STR | Ethereum | `0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c` | 0/100 | 1 | 2026-07-30T17:23:22Z |

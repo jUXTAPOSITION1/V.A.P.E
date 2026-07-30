@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T19:38:32Z",
+  "generated": "2026-07-30T19:53:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 446,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 555,
+    "investigations": 556,
     "news": 25,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-193826-0x99991c6A.md",
-      "title": "Investigation \u2014 CAP",
-      "symbol": "CAP",
-      "name": "Cap",
-      "date": "2026-07-30T19:38:26Z",
-      "target": "0x99991c6AAbba5a096f24f250b73580F5179b9999",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,585. Positive evidence: 6697 holders \u2014 reasonably distribute",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-193826-0x99991c6A.md"
+      "file": "investigation-20260730-195332-0x5cBC670a.md",
+      "title": "Investigation \u2014 VIBE",
+      "symbol": "VIBE",
+      "name": "Vibe Trade",
+      "date": "2026-07-30T19:53:32Z",
+      "target": "0x5cBC670ae9a18D9B20144bEC724b34daddf8b365",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-195332-0x5cBC670a.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-195332-0x5cBC670a.md",
+      "title": "Investigation \u2014 VIBE",
+      "symbol": "VIBE",
+      "name": "Vibe Trade",
+      "date": "2026-07-30T19:53:32Z",
+      "target": "0x5cBC670ae9a18D9B20144bEC724b34daddf8b365",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-195332-0x5cBC670a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-193826-0x99991c6A.md",
@@ -594,20 +608,6 @@
       "score": "35",
       "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-25] Very low liquidity $2,945 (rug/illiquid); [-10] Low liquidity $2,945; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-201656-0x3DEe4229.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-190136-0x012ea6A8.md",
-      "title": "Investigation \u2014 AEON",
-      "symbol": "AEON",
-      "name": "AEON",
-      "date": "2026-07-29T19:01:36Z",
-      "target": "0x012ea6A89cf28Fa1C5Cc6e6f7363702AA4CCB9a2",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +214% (volatility/manipulation); [-15] Pair only 1.7 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treate",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-190136-0x012ea6A8.md"
     }
   ],
   "reports": [

@@ -1591,6 +1591,24 @@
     "symbol": "Blinky",
     "times_investigated": 1
   },
+  "1:0x5cbc670ae9a18d9b20144bec724b34daddf8b365": {
+    "address": "0x5cBC670ae9a18D9B20144bEC724b34daddf8b365",
+    "chain": "1",
+    "first_investigated": "2026-07-30T19:53:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-195332-0x5cBC670a.md",
+        "score": 0,
+        "ts": "2026-07-30T19:53:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T19:53:32Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "VIBE",
+    "times_investigated": 1
+  },
   "1:0x61900eb95db9fee1910c58cbc4e9b510b4032d3c": {
     "address": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
     "chain": "1",

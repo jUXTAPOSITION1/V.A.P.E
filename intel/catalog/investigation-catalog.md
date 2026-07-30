@@ -921,3 +921,5 @@
 | 2026-07-30 | auto | 0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b (CES) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0x99991c6AAbba5a096f24f250b73580F5179b9999 (CAP) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0x5cBC670ae9a18D9B20144bEC724b34daddf8b365 (VIBE) | deep_investigation | REJECT (0/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
