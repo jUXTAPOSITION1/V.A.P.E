@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-07-30T03:21:14Z — 62 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-07-30T03:36:29Z — 63 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| LUCKY | BNB Chain | `0x67b47971426bb2180453b3993FF2ec319e704444` | 92/100 | 1 | 2026-07-30T03:36:29Z |
 | GTAVI | Ethereum | `0x2e5ef97C96D6a44CcB8Db9C30f2F5DCec04BB6f9` | 85/100 | 1 | 2026-07-29T00:03:32Z |
 | BANK | BNB Chain | `0x46dDcc662A045770CE1e264819542C9617547777` | 92/100 | 1 | 2026-07-28T19:14:20Z |
 | FERRET | Ethereum | `0xBcBDA13Bd60bC0e91745186E274D1445078D6b33` | 82/100 | 1 | 2026-07-28T17:57:58Z |

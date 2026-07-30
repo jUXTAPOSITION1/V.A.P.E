@@ -869,3 +869,5 @@
 | 2026-07-30 | auto | 0x2C974B2d0BA1716E644c1FC59982a89DDD2fF724 (VIB) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-30 | auto | 0x91BC9DA0fDcD8a6fba21C773d8bA082E3C57a090 (ON) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47c | +7d |
+
+| 2026-07-30 | auto | 0x67b47971426bb2180453b3993FF2ec319e704444 (LUCKY) | deep_investigation | PROCEED (92/100) | Top 10 non-LP/burn holders control 66% of supply — meaningful concentration | +7d |
