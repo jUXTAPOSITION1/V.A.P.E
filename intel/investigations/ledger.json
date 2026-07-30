@@ -2730,6 +2730,25 @@
     "symbol": "ZAMA",
     "times_investigated": 1
   },
+  "1:0xfce7c90cf19b847690a7b7267e8817b8cc9822e6": {
+    "address": "0xFCe7C90cf19b847690A7B7267e8817B8cC9822e6",
+    "chain": "1",
+    "creator_address": "0xf6b3029077e7d4b5e6ff46fd8e40fe2f28cf4242",
+    "first_investigated": "2026-07-30T13:37:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-133718-0xFCe7C90c.md",
+        "score": 40,
+        "ts": "2026-07-30T13:37:18Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T13:37:18Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "GOD",
+    "times_investigated": 1
+  },
   "1:0xfcf7985661d2c3f62208970cbe25e70bcce73e7c": {
     "address": "0xfCF7985661d2c3F62208970cBE25e70BCCe73E7C",
     "chain": "1",
