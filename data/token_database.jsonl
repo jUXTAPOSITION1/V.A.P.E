@@ -80,3 +80,4 @@
 {"ts": "2026-07-30T15:37:26.463855Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-30T16:07:42.857927Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-30T18:23:59.391158Z", "address": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "chain": "8453", "symbol": "DUAL", "name": "DUAL", "source": "base", "offering": "token_intel"}
+{"ts": "2026-07-30T19:23:15.800213Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_intel"}
