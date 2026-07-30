@@ -929,3 +929,5 @@
 | 2026-07-30 | auto | 0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A (AAPLB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0xFeDC5f4a6c38211c1338aa411018DFAf26612c08 (SPYon) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe (STONKS) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T22:10:12Z",
+  "generated": "2026-07-30T22:25:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 559,
+    "investigations": 560,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-221003-0xFeDC5f4a.md",
-      "title": "Investigation \u2014 SPYon",
-      "symbol": "SPYon",
-      "name": "SPDR S&P 500 ETF (Ondo Tokenized)",
-      "date": "2026-07-30T22:10:03Z",
-      "target": "0xFeDC5f4a6c38211c1338aa411018DFAf26612c08",
+      "file": "investigation-20260730-222532-0xFf7bd587.md",
+      "title": "Investigation \u2014 STONKS",
+      "symbol": "STONKS",
+      "name": "STONKS",
+      "date": "2026-07-30T22:25:32Z",
+      "target": "0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $25,509. Positive evidence: 1704 holders \u2014 reasonably distribute",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-221003-0xFeDC5f4a.md"
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $27,585; [-10] Violent 24h move +1643% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-222532-0xFf7bd587.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-222532-0xFf7bd587.md",
+      "title": "Investigation \u2014 STONKS",
+      "symbol": "STONKS",
+      "name": "STONKS",
+      "date": "2026-07-30T22:25:32Z",
+      "target": "0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $27,585; [-10] Violent 24h move +1643% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-222532-0xFf7bd587.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-221003-0xFeDC5f4a.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-215017-0x4C891F27.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-213507-0x76c7185d.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T21:35:07Z",
-      "target": "0x76c7185d1505a427Ab67b48ac1EBA3615A5a2eD8",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-213507-0x76c7185d.md"
     }
   ],
   "reports": [

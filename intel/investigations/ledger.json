@@ -2956,6 +2956,25 @@
     "symbol": "SPYon",
     "times_investigated": 1
   },
+  "1:0xff7bd587109ed8e022a510c5e29dd3bcdeb6b1fe": {
+    "address": "0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe",
+    "chain": "1",
+    "creator_address": "0x5094e658f06a90058abdbbd97b09c95856c81534",
+    "first_investigated": "2026-07-30T22:25:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-222532-0xFf7bd587.md",
+        "score": 40,
+        "ts": "2026-07-30T22:25:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T22:25:32Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "STONKS",
+    "times_investigated": 1
+  },
   "1:0xffe203b59393593965842439ce1e7d7c78109b46": {
     "address": "0xFfE203b59393593965842439ce1E7D7c78109b46",
     "chain": "1",
