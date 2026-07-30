@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-30T23:26:06Z — 252 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-30T23:41:04Z — 253 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| NASDUCK | Ethereum | `0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2` | 5/100 | 1 | 2026-07-30T23:41:04Z |
 | SPX | Ethereum | `0xC19Caef8f179cdf7eE77423868b1677a572db5Cd` | 0/100 | 1 | 2026-07-30T23:26:06Z |
 | INVEST | Ethereum | `0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82` | 0/100 | 1 | 2026-07-30T22:40:38Z |
 | STONKS | Ethereum | `0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe` | 40/100 | 1 | 2026-07-30T22:25:32Z |

@@ -1023,6 +1023,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x02d47b47ec0f0cde925fb57e7a4d22a783717bd2": {
+    "address": "0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2",
+    "chain": "1",
+    "creator_address": "0x0aeda175d27d2208092a01aab9fbfb2da7d72b32",
+    "first_investigated": "2026-07-30T23:41:04Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-234104-0x02D47B47.md",
+        "score": 5,
+        "ts": "2026-07-30T23:41:04Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T23:41:04Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "NASDUCK",
+    "times_investigated": 1
+  },
   "1:0x047653a3c6c97c8a4dd2cfbf996f157d166f17a0": {
     "address": "0x047653a3C6c97C8a4dD2cFbf996f157d166F17A0",
     "chain": "1",
