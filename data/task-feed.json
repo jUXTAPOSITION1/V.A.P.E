@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T21:09:50Z",
-  "synthesis": "VAPE's automation ran repeated featured investigations, bounty/security/virtuals sweeps, threat analyses, reputation snapshots, and auto-generated reports throughout 2026-07-30.",
+  "generated": "2026-07-30T21:24:37Z",
+  "synthesis": "VAPE automation generated eight featured investigations plus repeated sweeps, threat analyses, bounty reports, reputation snapshots and a community broadcast.",
   "tasks": [
+    {
+      "sha": "f77ec3d43a",
+      "kind": "sweep",
+      "message": "sentiment_sweep 2026-07-30T21:18Z",
+      "date": "2026-07-30T21:18:04Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f77ec3d43a768afcef483b7f025c80dc9ecc11e5"
+    },
+    {
+      "sha": "00056f57df",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T21:09Z",
+      "date": "2026-07-30T21:09:52Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/00056f57df84eb14263e941ed230bdf2093cd58d"
+    },
     {
       "sha": "4495d95af8",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-30T19:38Z",
       "date": "2026-07-30T19:38:35Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/80b83572046f16a2b98d616f52be892e1ba2d8fc"
-    },
-    {
-      "sha": "158bb287ab",
-      "kind": "sweep",
-      "message": "security_sweep 2026-07-30T19:27Z",
-      "date": "2026-07-30T19:27:23Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/158bb287aba0cb695f2aab6f577f048d8d2d9e8b"
-    },
-    {
-      "sha": "8e0b4c8bf3",
-      "kind": "automation",
-      "message": "news-intel 2026-07-30T19:26Z",
-      "date": "2026-07-30T19:26:43Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8e0b4c8bf3251e67c02791ca4e2678a1a0807c01"
     }
   ]
 }
