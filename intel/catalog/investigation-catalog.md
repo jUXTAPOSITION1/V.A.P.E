@@ -865,3 +865,5 @@
 | 2026-07-30 | auto | 0x70c629478707c8A4eAe7FDc0EE54A9F61bEE4901 (JPF) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-30 | auto | 0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48 (DBC) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-07-30 | auto | 0x2C974B2d0BA1716E644c1FC59982a89DDD2fF724 (VIB) | deep_investigation | REJECT (13/100) | Mintable supply (dilution risk) | +7d |
