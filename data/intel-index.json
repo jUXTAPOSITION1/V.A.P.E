@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-30T03:51:34Z",
+  "generated": "2026-07-30T03:58:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 429,
+    "reports": 430,
     "reports_by_type": {
+      "bounty": 94,
       "security": 78,
-      "bounty": 93,
       "sentiment": 46,
       "base": 89,
       "virtuals": 90,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-033629-0x67b47971.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-30-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-30T02:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260730_035744.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-30T03:57:44Z",
       "threat": null,
-      "summary": "The feed records 10 incidents over the last 7 days with a computed HIGH threat level and zero events reaching or exceeding $50M in the prior 14 days. Losses range from negligible ($0.0M on Zilliqa) to $24.15M (AFX Bridge private-key compromise on Arbitrum), with other notable figures including $9.7M (Triple-A hot-wallet compromise across ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-02.md",
-      "bytes": 7288
+      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_035744.md",
+      "bytes": 17556
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260730_035744.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-30T03:57:44Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_035744.md",
+      "bytes": 17556
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "The feed records 9 incidents over the last 7 days with no events reaching or exceeding $50M in the prior 14-day window. Losses cluster on Ethereum, Arbitrum, and Solana, with Base appearing in only one entry (Garden, $0.45M). Dominant techniques include price oracle manipulation (Ostium $23.75M on Arbitrum, Cascade Liquidity Strategy $1.3",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-27-09.md",
       "bytes": 7011
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_083145.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T08:31:45Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +125% 24h (liq $592181.0329) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_083145.md",
-      "bytes": 17308
     }
   ],
   "broadcasts": [
