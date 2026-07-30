@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-30T15:07:20Z — 240 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-30T15:22:30Z — 241 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SUSHI.e | Avalanche | `0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76` | 45/100 | 1 | 2026-07-30T15:22:30Z |
 | LINK | Avalanche | `0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651` | 0/100 | 1 | 2026-07-30T15:07:20Z |
 | V4STR | Ethereum | `0xC904A449E4D12d3bFa49E3b4bE29a3247D8Fe19C` | 0/100 | 1 | 2026-07-30T14:52:13Z |
 | V4STR | Ethereum | `0x6D7AE59Eb1FbeF5BcB7d52064279B1e003CabA1a` | 40/100 | 1 | 2026-07-30T14:37:04Z |

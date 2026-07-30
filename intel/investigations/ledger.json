@@ -3223,6 +3223,25 @@
     "symbol": "fBOMB",
     "times_investigated": 1
   },
+  "43114:0x37b608519f91f70f2eeb0e5ed9af4061722e4f76": {
+    "address": "0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76",
+    "chain": "43114",
+    "creator_address": "0x50ff3b278fcc70ec7a9465063d68029ab460ea04",
+    "first_investigated": "2026-07-30T15:22:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-152230-0x37B60851.md",
+        "score": 45,
+        "ts": "2026-07-30T15:22:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T15:22:30Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "SUSHI.e",
+    "times_investigated": 1
+  },
   "43114:0x420fca0121dc28039145009570975747295f2329": {
     "address": "0x420FcA0121DC28039145009570975747295f2329",
     "chain": "43114",

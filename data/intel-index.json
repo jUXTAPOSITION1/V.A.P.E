@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T15:14:13Z",
+  "generated": "2026-07-30T15:22:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 441,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 547,
+    "investigations": 548,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-150720-0xB3fe5374.md",
-      "title": "Investigation \u2014 LINK",
-      "symbol": "LINK",
-      "name": "ChainLink Token",
-      "date": "2026-07-30T15:07:20Z",
-      "target": "0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651",
+      "file": "investigation-20260730-152230-0x37B60851.md",
+      "title": "Investigation \u2014 SUSHI.e",
+      "symbol": "SUSHI.e",
+      "name": "SushiToken",
+      "date": "2026-07-30T15:22:30Z",
+      "target": "0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76",
       "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liqu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-150720-0xB3fe5374.md"
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Very low liquidity $634 (rug/illiquid); [-10] Low liquidity $634; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 5927 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory tem",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-152230-0x37B60851.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-152230-0x37B60851.md",
+      "title": "Investigation \u2014 SUSHI.e",
+      "symbol": "SUSHI.e",
+      "name": "SushiToken",
+      "date": "2026-07-30T15:22:30Z",
+      "target": "0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Very low liquidity $634 (rug/illiquid); [-10] Low liquidity $634; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 5927 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory tem",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-152230-0x37B60851.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-150720-0xB3fe5374.md",
@@ -594,20 +608,6 @@
       "score": "10",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: USD\u20ae (0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680) \u2014 CAUTION 50/100 \u2014 likely the same serial campaign; [-20] Very few holders (22) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrate",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-161213-0xA36d14E4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-154150-0x488F73cd.md",
-      "title": "Investigation \u2014 YTS",
-      "symbol": "YTS",
-      "name": "YetiSwap",
-      "date": "2026-07-29T15:41:50Z",
-      "target": "0x488F73cddDA1DE3664775fFd91623637383D6404",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,703 (rug/illiquid); [-10] Low liquidity $2,703; [-8] No pair-creation timestamp available \u2014 cannot estab",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-154150-0x488F73cd.md"
     }
   ],
   "reports": [

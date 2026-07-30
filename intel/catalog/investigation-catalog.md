@@ -905,3 +905,5 @@
 | 2026-07-30 | auto | 0xC904A449E4D12d3bFa49E3b4bE29a3247D8Fe19C (V4STR) | deep_investigation | REJECT (0/100) | Very few holders (24) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651 (LINK) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-30 | auto | 0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76 (SUSHI.e) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
