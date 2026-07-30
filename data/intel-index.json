@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T04:51:19Z",
+  "generated": "2026-07-30T05:06:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 126,
-    "investigations": 530,
+    "investigations": 531,
     "news": 20,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-033629-0x67b47971.md",
-      "title": "Investigation \u2014 LUCKY",
-      "symbol": "LUCKY",
-      "name": "B-Lucky",
-      "date": "2026-07-30T03:36:29Z",
-      "target": "0x67b47971426bb2180453b3993FF2ec319e704444",
+      "file": "investigation-20260730-050644-0xd9D3dAd2.md",
+      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
+      "symbol": "\u55b5\u55b5\u5e01",
+      "name": "\u55b5\u55b5\u5e01",
+      "date": "2026-07-30T05:06:44Z",
+      "target": "0xd9D3dAd2EfeD7eE99F1363FAC549f5E476F19A5a",
       "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration. Positive evidence: Ownership renounced; 4231 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 275+ days without a known incident in this scan; Custom verified source (not a mass-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-033629-0x67b47971.md"
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x005ccee4f3024d7343e4c244eea3873783c84f04) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +382%",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-050644-0xd9D3dAd2.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-050644-0xd9D3dAd2.md",
+      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
+      "symbol": "\u55b5\u55b5\u5e01",
+      "name": "\u55b5\u55b5\u5e01",
+      "date": "2026-07-30T05:06:44Z",
+      "target": "0xd9D3dAd2EfeD7eE99F1363FAC549f5E476F19A5a",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x005ccee4f3024d7343e4c244eea3873783c84f04) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +382%",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-050644-0xd9D3dAd2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-033629-0x67b47971.md",
@@ -594,20 +608,6 @@
       "score": "17",
       "summary": "Risk factors: [-8] Low holder count (65); [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $36,866; [-10] Violent 24h move +185% (volatility/manipulation); [-15] Pair only 0.7",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-063521-0x31397372.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-062018-0xe0AeE745.md",
-      "title": "Investigation \u2014 MCU",
-      "symbol": "MCU",
-      "name": "MemeCoinUniverse",
-      "date": "2026-07-29T06:20:18Z",
-      "target": "0xe0AeE745b22c522DE621F826a9453f534808DFD0",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] High buy tax 12%; [-10] Owner not renounced (0x36f59e2d04d7753b7023e2f29f3cd74a23cdff49) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +27840093% (volatility/m",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-062018-0xe0AeE745.md"
     }
   ],
   "reports": [
