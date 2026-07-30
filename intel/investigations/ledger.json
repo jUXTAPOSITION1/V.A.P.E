@@ -279,6 +279,25 @@
     "symbol": "LTZ",
     "times_investigated": 1
   },
+  "137:0x1f9467804cb4a916147fa529c3d335257874e071": {
+    "address": "0x1f9467804cB4A916147fA529c3D335257874e071",
+    "chain": "137",
+    "creator_address": "0xd2daa35ae4b2be511c5af00eff156c1221bf02f1",
+    "first_investigated": "2026-07-30T00:36:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-003616-0x1f946780.md",
+        "score": 62,
+        "ts": "2026-07-30T00:36:16Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T00:36:16Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "AIPF",
+    "times_investigated": 1
+  },
   "137:0x204820b6e6feae805e376d2c6837446186e57981": {
     "address": "0x204820B6e6FEae805e376D2C6837446186e57981",
     "chain": "137",

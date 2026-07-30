@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T00:21:18Z",
+  "generated": "2026-07-30T00:36:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 524,
+    "investigations": 525,
     "news": 19,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260729-232113-0xabAe909c.md",
-      "title": "Investigation \u2014 XPULS",
-      "symbol": "XPULS",
-      "name": "XPULS",
-      "date": "2026-07-29T23:21:13Z",
-      "target": "0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260730-003616-0x1f946780.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-07-30T00:36:16Z",
+      "target": "0x1f9467804cB4A916147fA529c3D335257874e071",
+      "chain": "137 (Polygon)",
       "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) \u2014 can still act on the contract; [-15] Only 35% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 6046 holders \u2014 reasonably distributed; Trading 201+ days without a known incident in this scan; Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-232113-0xabAe909c.md"
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 18242 holders \u2014 reasonably distributed; Trading 139+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-003616-0x1f946780.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-003616-0x1f946780.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-07-30T00:36:16Z",
+      "target": "0x1f9467804cB4A916147fA529c3D335257874e071",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 18242 holders \u2014 reasonably distributed; Trading 139+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-003616-0x1f946780.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260729-232113-0xabAe909c.md",
@@ -594,20 +608,6 @@
       "score": "60",
       "summary": "Risk factors: [-10] Owner not renounced (0xc82c31b242d49db07f9282295b6e8e391771a588) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 70353 hol",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-030507-0x40b8129B.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-020426-0x9A8E5a37.md",
-      "title": "Investigation \u2014 0B0L",
-      "symbol": "0B0L",
-      "name": "0b0l",
-      "date": "2026-07-29T02:04:26Z",
-      "target": "0x9A8E5a3732080cACc2Bb52fad1cD065129801e50",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-10] Owner not renounced (0x8c5b872d0aaa28ac6ac0af71fc6360779c9f290a) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $34,842;",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-020426-0x9A8E5a37.md"
     }
   ],
   "reports": [

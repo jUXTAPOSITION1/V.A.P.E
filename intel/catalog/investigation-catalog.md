@@ -859,3 +859,5 @@
 | 2026-07-29 | auto | 0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9 (Beat) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-29 | auto | 0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228 (XPULS) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) — can still act | +7d |
+
+| 2026-07-30 | auto | 0x1f9467804cB4A916147fA529c3D335257874e071 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
