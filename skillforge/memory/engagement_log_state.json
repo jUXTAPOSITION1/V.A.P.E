@@ -195,5 +195,6 @@
   "defillama-hack:Garden Solver (exploit $450,000)": "no_target_found",
   "defillama-hack:LULA (exploit $578,000)": "no_target_found",
   "defillama-hack:WEMIX.FI Lend (exploit $730,000)": "not_yet_attempted",
-  "defillama-hack:ChainConnect (exploit $650,000)": "no_target_found"
+  "defillama-hack:ChainConnect (exploit $650,000)": "no_target_found",
+  "defillama-hack:Set Protocol (exploit $9,600)": "no_target_found"
 }

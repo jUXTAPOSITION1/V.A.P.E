@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-07-30T17:06:17Z
+# VAPE Engagement Status — 2026-07-30T18:58:15Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -33,6 +33,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Humanity (exploit $32,000,000) ($32,000,000, fit 66) — checked 2026-07-13T05:05:18Z, honestly unresolved.
 - Chi Protocol (exploit $8,500) ($8,500, fit 64) — checked 2026-07-14T19:22:27Z, honestly unresolved.
 - Drips Network (exploit $24,900) ($24,900, fit 64) — checked 2026-07-15T18:41:37Z, honestly unresolved.
+- Set Protocol (exploit $9,600) ($9,600, fit 60) — checked 2026-07-30T18:58:07Z, honestly unresolved.
 
 ## Not yet attempted this cycle
 
