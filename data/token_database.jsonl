@@ -71,3 +71,4 @@
 {"ts": "2026-07-30T02:51:17.429161Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-07-30T03:51:34.218485Z", "address": "0x4c18406Fa690fAa53E5efa899a971557251Af72d", "chain": "137", "symbol": "IDL", "name": "IDL", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-07-30T05:06:51.318136Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_intel"}
+{"ts": "2026-07-30T06:06:46.716363Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "token_safety_check"}
