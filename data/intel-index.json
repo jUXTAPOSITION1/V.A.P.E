@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T08:21:27Z",
+  "generated": "2026-07-30T08:27:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 433,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 126,
     "investigations": 533,
-    "news": 21,
+    "news": 22,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md",
+      "title": "Microsoft OneDrive\u2019s Quiet Face-Scanning Push Sparks Fresh Biometric Privacy Backlash",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 08:27 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A newly deployed Windows feature prompting users to scan and group photos by facial recognition reignites the debate over big tech\u2019s biometric data collection.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md"
+    },
     {
       "file": "news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md",
       "title": "BINANCE.US PLOTS REGULATORY REHABILITATION WITH AUGUST CFTC PREDICTION MARKET BID",

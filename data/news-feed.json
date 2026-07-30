@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T05:41:37Z",
+  "generated": "2026-07-30T08:26:31Z",
   "count": 60,
   "headlines": [
     {
@@ -31,14 +31,6 @@
       "url": "https://decrypt.co/374693/robinhood-earnings-best-quarter-ever-crypto",
       "source": "Decrypt",
       "published": "Wed, 29 Jul 2026 22:01:24 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Robinhood posts record quarter, but crypto revenue slides 38%",
-      "url": "https://cointelegraph.com/news/robinhood-record-quarter-crypto-revenue-slides?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 21:53:35 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -107,22 +99,6 @@
       "crypto": true
     },
     {
-      "title": "As crypto perpetual futures boom, Ethereum\u2019s role is shifting",
-      "url": "https://www.coindesk.com/tech/2026/07/29/as-crypto-perpetual-futures-boom-ethereum-s-role-is-shifting",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 18:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Fed holds rates steady, extending pause as markets await Kevin Warsh's policy roadmap",
-      "url": "https://www.coindesk.com/markets/2026/07/29/fomc-hold-fed-holds-rates-steady-extending-pause-as-markets-await-warsh-s-policy-roadmap",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 17:58:33 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Hyperscale Data sits on $71 million in Bitcoin with a $56 million market cap \u2013 Here is why its not a bargain",
       "url": "https://cryptoslate.com/hyperscale-data-sits-on-71-million-in-bitcoin-with-a-56-million-market-cap-here-is-why-its-not-a-bargain/",
       "source": "CryptoSlate",
@@ -171,10 +147,42 @@
       "crypto": true
     },
     {
-      "title": "\u2018Ethereum Cypherpunk Manifesto\u2019 author joins Ethereum Foundation as fourth board member",
-      "url": "https://www.theblock.co/post/410083/ethereum-cypherpunk-manifesto-author-ethereum-foundation-fourth-board-member?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 29 Jul 2026 13:22:33 -0400",
+      "title": "Chinese newspaper warns of Bitcoin extortion scam using its name",
+      "url": "https://cointelegraph.com/news/chinese-newspaper-bitcoin-extortion-scam-name?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 07:28:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin ETF inflows return as Ether funds slip into outflows",
+      "url": "https://cointelegraph.com/markets/bitcoin-etf-inflows-return-ether-funds-outflows?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 07:05:23 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin, ether whipsaw wipes out $286 million in leveraged bets",
+      "url": "https://www.coindesk.com/markets/2026/07/30/bitcoin-ether-whipsaw-wipes-out-usd280-million-even-as-prices-remain-flat-over-24-hours",
+      "source": "CoinDesk",
+      "published": "Thu, 30 Jul 2026 06:59:10 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin analysts agree the Fed's hold was hawkish. They are split on what happens next.",
+      "url": "https://www.coindesk.com/markets/2026/07/30/bitcoin-analysts-agree-the-fed-s-hold-was-hawkish-they-don-t-agree-on-what-happens-next",
+      "source": "CoinDesk",
+      "published": "Thu, 30 Jul 2026 06:28:58 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "South Korea report proposes stablecoin rules before crypto law",
+      "url": "https://cointelegraph.com/news/south-korea-report-stablecoin-rules-crypto-law?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 05:33:57 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -219,10 +227,10 @@
       "crypto": true
     },
     {
-      "title": "Ethereum Foundation adds SEAL 911 co-founder to board as privacy focus grows",
-      "url": "https://cointelegraph.com/news/ethereum-foundation-seal-911-pascal-caversaccio-board?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 30 Jul 2026 01:34:26 +0000",
+      "title": "Ostium blames off-chain breach for $24 million exploit, rules out smart contract flaw",
+      "url": "https://www.theblock.co/post/410122/ostium-post-mortem-exploit?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 30 Jul 2026 02:25:55 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -231,14 +239,6 @@
       "url": "https://www.theblock.co/post/410117/russia-detains-bitriver-founder?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Thu, 30 Jul 2026 01:13:34 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "US arbitration giant launches specialist panel for crypto disputes",
-      "url": "https://cointelegraph.com/news/aaa-web3-panel-crypto-blockchain-disputes?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 30 Jul 2026 00:29:11 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -259,9 +259,17 @@
       "crypto": true
     },
     {
+      "title": "The CLARITY Act\u2019s 11th-Hour Push (and the SEC\u2019s Backup Plan)",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPVDRtbk9MRmhaSXcwWWp3ZmxsZy1WSldiS3hzcTdiXzN0WDZtU19JRVZUaUZRelFnZ1JES1VxOVplcS1FS2lLUHRlNEtNTnlabG4zb1NkYkpfT2FfNUIzUXNRaWFCX1UzSVgzb2NRSjh3NElrYThSVGd4LXpaMWRlNk90N1NIZ0FxQkZvUnZkMTNhWGd3VmcxSV9tOWxrWm40ZlIzTDF0RlJ4YUo3S0E?oc=5",
+      "source": "Brownstone Research",
+      "published": "Wed, 29 Jul 2026 21:48:51 GMT",
+      "topic": "Regulation",
+      "crypto": true
+    },
+    {
       "title": "SEC Chair Paul Atkins Says Agency Can Deliver Crypto Rules Without CLARITY Act",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdFo5SEpQc1RPTEFsc2dfVm9hcVd1WTZFV3NOWHJkVW9vY3p4NDltOWdoYU9kNkdPWmdxUXV6Q3hUU0xfYzR5cUNMOFVGOVdTSnhwcTBfUGhuMzJ2aXZEcU10Q29VcERMUWlxMTkzNnNnSkxRdnQ0Nnd0UUVVaGZyTTlwaUVscWww?oc=5",
-      "source": "ccn.com",
+      "source": "CCN.com",
       "published": "Wed, 29 Jul 2026 18:15:22 GMT",
       "topic": "Regulation",
       "crypto": true
@@ -325,7 +333,7 @@
     {
       "title": "House Subcommittee Advances Clarity Act on Digital Assets",
       "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFA1U1RJOTc5UnVHTm9qOWFQMlB4bEpaM0dseHlwU09xeDhtem5xcDk5LUEyNmwzVnlqcmRzWWZoTDdfZlotM3diWXJPaEV2dHVGdXY4VF9DcTlpOUtrUFV6Q2JsVkJqakNyUmNQai14dUlpUE1oYlNDaw?oc=5",
-      "source": "Legis1",
+      "source": "legis1.com",
       "published": "Sat, 25 Jul 2026 17:00:50 GMT",
       "topic": "Regulation",
       "crypto": true
@@ -335,14 +343,6 @@
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE02c2pTUDFSQWdKejAwTnUxdEs5dW0tWExkZ1pjQmtNamFFNmFqZWxWdEJOY01uUzk0TzVteGJLaXhveXN0OFFtWmJxZXdFM2tlOVVMMjFyckQ3cG5Xemc?oc=5",
       "source": "tech-insider.org",
       "published": "Fri, 24 Jul 2026 13:01:53 GMT",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "Senate Republican Crypto Bill Is Here: Why the Next 15 Days Could Change the Entire Crypto Market",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNTURwamtUVF9EZ2tDUVM2cVcwT0NkUXk0cU5vSjFCZ1ZWU1Uwd3JJR0Y1Q1JIVEtJb1hwVDdSOGg4XzNTWDFxNjROZW5tYlF0bkk0RU8xclBudEpfZVhDUWFBcEtlaFNjUnBuSHd0VldlWUE3enpCZ0RwR2duN3N2bHppYUVMbUZIdXlKdFVTbFZrVTVnYVZHT05BVEQ1ZDViZUVGS0dRbENEZlpZZF9fWDlTMlE4Z3lHVVg3QTV1WHMtZU44aFkxaVRfLXRkWDlkVml2ZVo5TlZUT2c?oc=5",
-      "source": "Bitcoin Foundation",
-      "published": "Thu, 23 Jul 2026 12:13:10 GMT",
       "topic": "Regulation",
       "crypto": true
     },
@@ -437,7 +437,7 @@
     {
       "title": "Best AI-Agent Crypto Coins to Buy in 2026",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5sOTBhY2NSSEYzMzJ4Um9OclVoSHdfUjc5M1d3T2RITkxNS0hjQTAzeC1CMHZXNUF1STBoY1A5bmdnd1pZa21WY0h3Q3BGYkVWZmh0elpwMlR2bUZKVGFELU1yWHJ3Ymgxb1BrZVFR?oc=5",
-      "source": "Changelly",
+      "source": "changelly.com",
       "published": "Fri, 05 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
@@ -461,7 +461,7 @@
     {
       "title": "Biggest DeFi Hacks and Exploits of 2026: $1 Billion+ Lost and Counting",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQbk9wTmRMdzhqUW04T1dyM1dwbEVYNnU0U21uenoyN0J2U1VoOC1pRC1zQU1uanA1N0xzb1UySWQzSUZDYkhGenRmM1NWc1ZQZDR3aVluX1h2aU9zZElybVVHV3hiQmYxTE1oV19WcE1iZExIQlJnYXFRSlNXanNSVDNBNER4VklVMHo0?oc=5",
-      "source": "ccn.com",
+      "source": "CCN.com",
       "published": "Tue, 19 May 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
