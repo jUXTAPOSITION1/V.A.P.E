@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T02:21:22Z",
+  "generated": "2026-07-30T02:23:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 125,
     "investigations": 527,
-    "news": 19,
+    "news": 20,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md",
+      "title": "Senators ready to send stricter ethics rules on Trump's crypto ventures to White House, sources say",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 02:23 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 02:23 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md"
+    },
     {
       "file": "news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md",
       "title": "Binance.US Targets Prediction Markets Expansion With Upcoming CFTC Derivatives License Bid",
