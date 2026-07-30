@@ -909,3 +909,5 @@
 | 2026-07-30 | auto | 0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76 (SUSHI.e) | deep_investigation | REJECT (45/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-30 | auto | 0x63f3851f26bD241bb51c1F30A5B2212151B6ca14 (VIBE) | deep_investigation | REJECT (25/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-30 | auto | 0x46F2564E0FA8248d15125E7e54173cfbdEf91Be7 (GRVT) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
