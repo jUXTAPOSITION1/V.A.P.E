@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T21:39:28Z",
+  "generated": "2026-07-30T21:55:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 449,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 557,
+    "investigations": 558,
     "news": 25,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-200920-0x205812Cd.md",
-      "title": "Investigation \u2014 QQQB",
-      "symbol": "QQQB",
-      "name": "Invesqo QQQ",
-      "date": "2026-07-30T20:09:20Z",
-      "target": "0x205812CdBed920aFf76C6580abD681a46D11efc7",
+      "file": "investigation-20260730-215455-0x431a3BEE.md",
+      "title": "Investigation \u2014 AAPLB",
+      "symbol": "AAPLB",
+      "name": "Apple",
+      "date": "2026-07-30T21:54:55Z",
+      "target": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 20.5 days old \u2014 under a month, still unproven; [-10] No known third-party ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-215455-0x431a3BEE.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-215455-0x431a3BEE.md",
+      "title": "Investigation \u2014 AAPLB",
+      "symbol": "AAPLB",
+      "name": "Apple",
+      "date": "2026-07-30T21:54:55Z",
+      "target": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-215455-0x431a3BEE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-200920-0x205812Cd.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-204917-0x4879d5c0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-203402-0x26837B64.md",
-      "title": "Investigation \u2014 Bank",
-      "symbol": "Bank",
-      "name": "Bank",
-      "date": "2026-07-29T20:34:02Z",
-      "target": "0x26837B64F1302afB1E364082a9e6a0076Bb88888",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 29% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $128 (rug/illiquid); [-10] Low liquidity $128. Positive evidence: O",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-203402-0x26837B64.md"
     }
   ],
   "reports": [
@@ -1856,7 +1856,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49322621",
+      "version": "49329405",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1866,7 +1866,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.62 eth_dom 10.08 mcap_chg_24h 0.52",
+      "version": "btc_dom 56.57 eth_dom 10.1 mcap_chg_24h 1.49",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1886,7 +1886,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xafa9a1bc5ccc SUBBD 5943444.87755574 from 0xf9346bab to 0x833589fc",
+      "version": "0xa486a82b7fa8 APUS 5.0 from 0xcb857fb1 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1906,7 +1906,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-28 Crypto DAO 8.2 M ['BSC'] None",
+      "version": "2026-07-30 Set Protocol 0.01 M ['Ethereum'] Malicious SetToken & Manager Contrac",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,

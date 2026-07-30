@@ -84,3 +84,4 @@
 {"ts": "2026-07-30T19:53:41.670521Z", "address": "0x6D7AE59Eb1FbeF5BcB7d52064279B1e003CabA1a", "chain": "1", "symbol": "V4STR", "name": "V4STR", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-30T20:40:04.319647Z", "address": "0xD036f17315D159B48cc154bBc70aa4FA06210DE9", "chain": "1", "symbol": "UNI", "name": "UNI", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-30T20:54:58.590804Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
+{"ts": "2026-07-30T21:55:04.348374Z", "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2", "chain": "8453", "symbol": "USDT", "name": "Tether USD", "source": "base_trending", "offering": "token_chart"}

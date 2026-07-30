@@ -4038,6 +4038,25 @@
     "symbol": "UB",
     "times_investigated": 1
   },
+  "56:0x431a3bee82e2ca41e49895cbece5bb0f76a89b7a": {
+    "address": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
+    "chain": "56",
+    "creator_address": "0x64fdaf82d69d5a8ab409331e3042042e8a178d53",
+    "first_investigated": "2026-07-30T21:54:55Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-215455-0x431a3BEE.md",
+        "score": 22,
+        "ts": "2026-07-30T21:54:55Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T21:54:55Z",
+    "last_score": 22,
+    "last_verdict": "REJECT",
+    "symbol": "AAPLB",
+    "times_investigated": 1
+  },
   "56:0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa": {
     "address": "0x444045B0EE1ee319A660a5E3d604CA0ffA35ACaA",
     "chain": "56",
