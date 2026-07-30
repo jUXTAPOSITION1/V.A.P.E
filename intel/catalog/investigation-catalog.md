@@ -873,3 +873,5 @@
 | 2026-07-30 | auto | 0x67b47971426bb2180453b3993FF2ec319e704444 (LUCKY) | deep_investigation | PROCEED (92/100) | Top 10 non-LP/burn holders control 66% of supply — meaningful concentration | +7d |
 
 | 2026-07-30 | auto | 0xd9D3dAd2EfeD7eE99F1363FAC549f5E476F19A5a (喵喵币) | deep_investigation | REJECT (25/100) | Owner not renounced (0x005ccee4f3024d7343e4c244eea3873783c84f04) — can still act | +7d |
+
+| 2026-07-30 | auto | 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984 (UNI) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x1a9c8182c09f50c8318d769245bea52c32be35bc) — can still act | +7d |
