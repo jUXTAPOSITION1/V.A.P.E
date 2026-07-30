@@ -911,3 +911,5 @@
 | 2026-07-30 | auto | 0x63f3851f26bD241bb51c1F30A5B2212151B6ca14 (VIBE) | deep_investigation | REJECT (25/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0x46F2564E0FA8248d15125E7e54173cfbdEf91Be7 (GRVT) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0xE0172DF6f4076949cb04e188A61528a2175d4444 (龙一) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 75% of supply — concentrated, easily manipula | +7d |
