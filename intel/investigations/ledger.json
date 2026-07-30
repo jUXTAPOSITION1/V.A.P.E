@@ -2937,6 +2937,25 @@
     "symbol": "IBNAi",
     "times_investigated": 1
   },
+  "1:0xfedc5f4a6c38211c1338aa411018dfaf26612c08": {
+    "address": "0xFeDC5f4a6c38211c1338aa411018DFAf26612c08",
+    "chain": "1",
+    "creator_address": "0x61eac1f1c50c501af35a48d6ab7c42c24b399536",
+    "first_investigated": "2026-07-30T22:10:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-221003-0xFeDC5f4a.md",
+        "score": 52,
+        "ts": "2026-07-30T22:10:03Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T22:10:03Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "SPYon",
+    "times_investigated": 1
+  },
   "1:0xffe203b59393593965842439ce1e7d7c78109b46": {
     "address": "0xFfE203b59393593965842439ce1E7D7c78109b46",
     "chain": "1",

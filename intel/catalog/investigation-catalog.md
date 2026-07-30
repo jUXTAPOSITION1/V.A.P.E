@@ -927,3 +927,5 @@
 | 2026-07-30 | auto | 0x205812CdBed920aFf76C6580abD681a46D11efc7 (QQQB) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A (AAPLB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0xFeDC5f4a6c38211c1338aa411018DFAf26612c08 (SPYon) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |

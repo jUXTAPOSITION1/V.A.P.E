@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-30T21:54:55Z — 107 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-30T22:10:03Z — 108 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SPYon | Ethereum | `0xFeDC5f4a6c38211c1338aa411018DFAf26612c08` | 52/100 | 1 | 2026-07-30T22:10:03Z |
 | CAP | BNB Chain | `0x99991c6AAbba5a096f24f250b73580F5179b9999` | 52/100 | 1 | 2026-07-30T19:38:26Z |
 | 龙一 | BNB Chain | `0xE0172DF6f4076949cb04e188A61528a2175d4444` | 75/100 | 1 | 2026-07-30T16:53:32Z |
 | GOD | Ethereum | `0x4c746Edf20762dC201aC40135e0C13e400d23D58` | 62/100 | 1 | 2026-07-30T13:52:26Z |

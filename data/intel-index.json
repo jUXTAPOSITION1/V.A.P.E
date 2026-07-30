@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T22:06:38Z",
+  "generated": "2026-07-30T22:10:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 558,
+    "investigations": 559,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-215455-0x431a3BEE.md",
-      "title": "Investigation \u2014 AAPLB",
-      "symbol": "AAPLB",
-      "name": "Apple",
-      "date": "2026-07-30T21:54:55Z",
-      "target": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-215455-0x431a3BEE.md"
+      "file": "investigation-20260730-221003-0xFeDC5f4a.md",
+      "title": "Investigation \u2014 SPYon",
+      "symbol": "SPYon",
+      "name": "SPDR S&P 500 ETF (Ondo Tokenized)",
+      "date": "2026-07-30T22:10:03Z",
+      "target": "0xFeDC5f4a6c38211c1338aa411018DFAf26612c08",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $25,509. Positive evidence: 1704 holders \u2014 reasonably distribute",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-221003-0xFeDC5f4a.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-221003-0xFeDC5f4a.md",
+      "title": "Investigation \u2014 SPYon",
+      "symbol": "SPYon",
+      "name": "SPDR S&P 500 ETF (Ondo Tokenized)",
+      "date": "2026-07-30T22:10:03Z",
+      "target": "0xFeDC5f4a6c38211c1338aa411018DFAf26612c08",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $25,509. Positive evidence: 1704 holders \u2014 reasonably distribute",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-221003-0xFeDC5f4a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-215455-0x431a3BEE.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-213507-0x76c7185d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-204917-0x4879d5c0.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T20:49:17Z",
-      "target": "0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders con",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-204917-0x4879d5c0.md"
     }
   ],
   "reports": [
