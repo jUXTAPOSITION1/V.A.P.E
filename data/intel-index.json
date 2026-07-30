@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T14:52:16Z",
+  "generated": "2026-07-30T15:07:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 440,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 546,
+    "investigations": 547,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-145213-0xC904A449.md",
-      "title": "Investigation \u2014 V4STR",
-      "symbol": "V4STR",
-      "name": "Programmable Strategy",
-      "date": "2026-07-30T14:52:13Z",
-      "target": "0xC904A449E4D12d3bFa49E3b4bE29a3247D8Fe19C",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260730-150720-0xB3fe5374.md",
+      "title": "Investigation \u2014 LINK",
+      "symbol": "LINK",
+      "name": "ChainLink Token",
+      "date": "2026-07-30T15:07:20Z",
+      "target": "0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651",
+      "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 223% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-15] Contract sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-145213-0xC904A449.md"
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-150720-0xB3fe5374.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-150720-0xB3fe5374.md",
+      "title": "Investigation \u2014 LINK",
+      "symbol": "LINK",
+      "name": "ChainLink Token",
+      "date": "2026-07-30T15:07:20Z",
+      "target": "0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-150720-0xB3fe5374.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-145213-0xC904A449.md",
@@ -594,20 +608,6 @@
       "score": "27",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,703 (rug/illiquid); [-10] Low liquidity $2,703; [-8] No pair-creation timestamp available \u2014 cannot estab",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-154150-0x488F73cd.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-152646-0xE1C110E1.md",
-      "title": "Investigation \u2014 ELK",
-      "symbol": "ELK",
-      "name": "Elk",
-      "date": "2026-07-29T15:26:46Z",
-      "target": "0xE1C110E1B1b4A1deD0cAf3E42BfBdbB7b5d7cE1C",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1,715 (rug/illiquid); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-152646-0xE1C110E1.md"
     }
   ],
   "reports": [
@@ -1845,7 +1845,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49309717",
+      "version": "49317036",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1855,7 +1855,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.62 eth_dom 10.11 mcap_chg_24h 0.21",
+      "version": "btc_dom 56.62 eth_dom 10.1 mcap_chg_24h 1.03",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

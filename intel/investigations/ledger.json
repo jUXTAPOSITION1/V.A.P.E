@@ -3413,6 +3413,25 @@
     "symbol": "WAVAX",
     "times_investigated": 1
   },
+  "43114:0xb3fe5374f67d7a22886a0ee082b2e2f9d2651651": {
+    "address": "0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651",
+    "chain": "43114",
+    "creator_address": "0xa407dc3f6ffdff073b4f6e4ff840eb391c58b86c",
+    "first_investigated": "2026-07-30T15:07:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-150720-0xB3fe5374.md",
+        "score": 0,
+        "ts": "2026-07-30T15:07:20Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T15:07:20Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "LINK",
+    "times_investigated": 1
+  },
   "43114:0xb8d7710f7d8349a506b75dd184f05777c82dad0c": {
     "address": "0xB8d7710f7d8349A506b75dD184F05777c82dAd0C",
     "chain": "43114",
