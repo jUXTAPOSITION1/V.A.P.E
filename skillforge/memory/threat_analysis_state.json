@@ -353,5 +353,10 @@
     "report": "intel/threat-analysis/2026-07-28-lula.md",
     "provider": "oci_grok",
     "written_at": "2026-07-29T10:31:57Z"
+  },
+  "2026-07-26:ChainConnect": {
+    "report": "intel/threat-analysis/2026-07-26-chainconnect.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-30T04:50:36Z"
   }
 }
