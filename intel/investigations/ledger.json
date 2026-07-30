@@ -3584,6 +3584,25 @@
     "symbol": "AEON",
     "times_investigated": 1
   },
+  "56:0x279ed3c4bdb5d5cf68ac48ab03d0cf8df5913b48": {
+    "address": "0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48",
+    "chain": "56",
+    "creator_address": "0x565e18ee26092ecd6d2048bb8a72f8b741526d8f",
+    "first_investigated": "2026-07-30T01:36:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-013623-0x279ed3c4.md",
+        "score": 0,
+        "ts": "2026-07-30T01:36:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T01:36:23Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "DBC",
+    "times_investigated": 1
+  },
   "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
     "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
     "chain": "56",

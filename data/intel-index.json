@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T01:21:23Z",
+  "generated": "2026-07-30T01:36:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 428,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 125,
-    "investigations": 526,
+    "investigations": 527,
     "news": 19,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-005122-0x70c62947.md",
-      "title": "Investigation \u2014 JPF",
-      "symbol": "JPF",
-      "name": "Julius personal farm",
-      "date": "2026-07-30T00:51:22Z",
-      "target": "0x70c629478707c8A4eAe7FDc0EE54A9F61bEE4901",
+      "file": "investigation-20260730-013623-0x279ed3c4.md",
+      "title": "Investigation \u2014 DBC",
+      "symbol": "DBC",
+      "name": "dabaic",
+      "date": "2026-07-30T01:36:23Z",
+      "target": "0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-10] Owner not renounced (0xa52c7ab305f5b5366b79b8959466e02cc5219b2f) \u2014 can still act on the contract; [-8] Low holder count (114); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-1",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-005122-0x70c62947.md"
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x565e18ee26092ecd6d2048bb8a72f8b741526d8f) \u2014 can still act on the contract; [-20] Very few holders (29) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-013623-0x279ed3c4.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-013623-0x279ed3c4.md",
+      "title": "Investigation \u2014 DBC",
+      "symbol": "DBC",
+      "name": "dabaic",
+      "date": "2026-07-30T01:36:23Z",
+      "target": "0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x565e18ee26092ecd6d2048bb8a72f8b741526d8f) \u2014 can still act on the contract; [-20] Very few holders (29) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-013623-0x279ed3c4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-005122-0x70c62947.md",
@@ -594,20 +608,6 @@
       "score": "77",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-5] Pair 20.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 1163 holders \u2014 reasonably distribute",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-050515-0x89Cf5C1b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-035044-0xd94128D6.md",
-      "title": "Investigation \u2014 FWA",
-      "symbol": "FWA",
-      "name": "FakeWorldAssets\u2122",
-      "date": "2026-07-29T03:50:44Z",
-      "target": "0xd94128D66BD0020888e380E8dF515Cb0B840dadD",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $7 (rug/illiquid); [-10] Low liquidity $7; [-5] Pair 29.3 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-035044-0xd94128D6.md"
     }
   ],
   "reports": [

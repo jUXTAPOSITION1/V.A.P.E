@@ -863,3 +863,5 @@
 | 2026-07-30 | auto | 0x1f9467804cB4A916147fA529c3D335257874e071 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0x70c629478707c8A4eAe7FDc0EE54A9F61bEE4901 (JPF) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-30 | auto | 0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48 (DBC) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
