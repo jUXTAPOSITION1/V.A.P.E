@@ -915,3 +915,5 @@
 | 2026-07-30 | auto | 0xE0172DF6f4076949cb04e188A61528a2175d4444 (龙一) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 75% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-30 | auto | 0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c (V4STR) | deep_investigation | REJECT (0/100) | High buy tax 25% | +7d |
+
+| 2026-07-30 | auto | 0xD036f17315D159B48cc154bBc70aa4FA06210DE9 (UNI) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |

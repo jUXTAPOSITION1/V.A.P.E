@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T17:38:24Z",
+  "generated": "2026-07-30T17:53:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 444,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 552,
+    "investigations": 553,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-172322-0x61900eb9.md",
-      "title": "Investigation \u2014 V4STR",
-      "symbol": "V4STR",
-      "name": "Programmable Strategy",
-      "date": "2026-07-30T17:23:22Z",
-      "target": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
+      "file": "investigation-20260730-175324-0xD036f173.md",
+      "title": "Investigation \u2014 UNI",
+      "symbol": "UNI",
+      "name": "Unicorn",
+      "date": "2026-07-30T17:53:24Z",
+      "target": "0xD036f17315D159B48cc154bBc70aa4FA06210DE9",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-15] High buy tax 25%; [-20] High sell tax 40%; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-172322-0x61900eb9.md"
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $26,029; [-10] Violent 24h move +2900% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-175324-0xD036f173.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-175324-0xD036f173.md",
+      "title": "Investigation \u2014 UNI",
+      "symbol": "UNI",
+      "name": "Unicorn",
+      "date": "2026-07-30T17:53:24Z",
+      "target": "0xD036f17315D159B48cc154bBc70aa4FA06210DE9",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $26,029; [-10] Violent 24h move +2900% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-175324-0xD036f173.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-172322-0x61900eb9.md",
@@ -594,20 +608,6 @@
       "score": "60",
       "summary": "Risk factors: [-10] Owner not renounced (0x8f8063ac8917a4c752f0bf0c16d0f22f1ce454fd) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 38901 hol",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-181618-0xed9Ae3DE.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-174558-0x3E5d4f8a.md",
-      "title": "Investigation \u2014 UAI",
-      "symbol": "UAI",
-      "name": "UnifAI",
-      "date": "2026-07-29T17:45:58Z",
-      "target": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 92% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,942 (rug/illiquid); [-10] Low liquidity $6,942. Positive evidence: 6290 holders \u2014 reasonably distributed",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-174558-0x3E5d4f8a.md"
     }
   ],
   "reports": [
