@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@x402/core": "2.19.0",
+    "@x402/core": "2.20.0",
     "@x402/evm": "2.19.0",
     "@x402/extensions": "2.19.0",
     "@x402/hono": "2.19.0",
