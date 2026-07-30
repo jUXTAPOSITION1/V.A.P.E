@@ -931,3 +931,5 @@
 | 2026-07-30 | auto | 0xFeDC5f4a6c38211c1338aa411018DFAf26612c08 (SPYon) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0xFf7bd587109ED8e022a510c5E29Dd3BCdEB6B1Fe (STONKS) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-30 | auto | 0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82 (INVEST) | deep_investigation | REJECT (0/100) | Low holder count (56) | +7d |

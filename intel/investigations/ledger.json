@@ -1383,6 +1383,25 @@
     "symbol": "Ferret",
     "times_investigated": 1
   },
+  "1:0x31fcdee0aea658e0f7a3d275fd126f6faf3b6d82": {
+    "address": "0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82",
+    "chain": "1",
+    "creator_address": "0x5e3cdb002e48c1391138abca7c4bd5f2998d7485",
+    "first_investigated": "2026-07-30T22:40:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-224038-0x31fcdee0.md",
+        "score": 0,
+        "ts": "2026-07-30T22:40:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T22:40:38Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "INVEST",
+    "times_investigated": 1
+  },
   "1:0x32708538a107253b51a735a724330a23106ca4ca": {
     "address": "0x32708538a107253b51a735A724330A23106ca4cA",
     "chain": "1",
