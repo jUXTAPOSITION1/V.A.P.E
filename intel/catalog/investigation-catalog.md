@@ -897,3 +897,5 @@
 | 2026-07-30 | auto | 0xcE06606040Cdad5800b6B130A06d58F897Dc4591 (BPay) | deep_investigation | REJECT (42/100) | Low holder count (105) | +7d |
 
 | 2026-07-30 | auto | 0xFCe7C90cf19b847690A7B7267e8817B8cC9822e6 (GOD) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-07-30 | auto | 0x4c746Edf20762dC201aC40135e0C13e400d23D58 (GOD) | deep_investigation | CAUTION (62/100) | Hidden owner | +7d |
