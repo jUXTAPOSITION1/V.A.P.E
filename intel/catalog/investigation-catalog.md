@@ -937,3 +937,5 @@
 | 2026-07-30 | auto | 0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2 (TrumpBucks) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4 (STONKS) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-30 | auto | 0xC19Caef8f179cdf7eE77423868b1677a572db5Cd (SPX) | deep_investigation | REJECT (0/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |

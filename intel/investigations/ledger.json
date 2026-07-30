@@ -2477,6 +2477,25 @@
     "symbol": "FERRET",
     "times_investigated": 1
   },
+  "1:0xc19caef8f179cdf7ee77423868b1677a572db5cd": {
+    "address": "0xC19Caef8f179cdf7eE77423868b1677a572db5Cd",
+    "chain": "1",
+    "creator_address": "0x347ffc6db9acc54ac2019795173b9599e8b82bd9",
+    "first_investigated": "2026-07-30T23:26:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-232606-0xC19Caef8.md",
+        "score": 0,
+        "ts": "2026-07-30T23:26:06Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T23:26:06Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "SPX",
+    "times_investigated": 1
+  },
   "1:0xc4fa51e5208b835bc6db3144f25067aa194befba": {
     "address": "0xC4FA51E5208b835Bc6dB3144F25067aA194BEfBa",
     "chain": "1",

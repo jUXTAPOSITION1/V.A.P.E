@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T23:11:14Z",
+  "generated": "2026-07-30T23:26:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 563,
+    "investigations": 564,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-231107-0x7D4A2383.md",
-      "title": "Investigation \u2014 STONKS",
-      "symbol": "STONKS",
-      "name": "Stonks",
-      "date": "2026-07-30T23:11:07Z",
-      "target": "0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4",
+      "file": "investigation-20260730-232606-0xC19Caef8.md",
+      "title": "Investigation \u2014 SPX",
+      "symbol": "SPX",
+      "name": "SPX6900",
+      "date": "2026-07-30T23:26:06Z",
+      "target": "0xC19Caef8f179cdf7eE77423868b1677a572db5Cd",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 2739 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 820+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-231107-0x7D4A2383.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,494 (rug/illiquid); [-10] Low liqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-232606-0xC19Caef8.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-232606-0xC19Caef8.md",
+      "title": "Investigation \u2014 SPX",
+      "symbol": "SPX",
+      "name": "SPX6900",
+      "date": "2026-07-30T23:26:06Z",
+      "target": "0xC19Caef8f179cdf7eE77423868b1677a572db5Cd",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,494 (rug/illiquid); [-10] Low liqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-232606-0xC19Caef8.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-231107-0x7D4A2383.md",
@@ -594,20 +608,6 @@
       "score": "62",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 18242 holders \u2014 reasonably distributed; Trading 139+ days withou",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-003616-0x1f946780.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-232113-0xabAe909c.md",
-      "title": "Investigation \u2014 XPULS",
-      "symbol": "XPULS",
-      "name": "XPULS",
-      "date": "2026-07-29T23:21:13Z",
-      "target": "0xabAe909cd93Bc2ddf90086f9aA6C3f8e154E8228",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) \u2014 can still act on the contract; [-15] Only 35% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 6046 holders \u2014 reasonably distributed; Trading 201+ days without a known incident in this scan; Cus",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-232113-0xabAe909c.md"
     }
   ],
   "reports": [

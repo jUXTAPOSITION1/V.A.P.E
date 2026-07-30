@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-30T23:11:15Z",
-  "synthesis": "*",
+  "generated": "2026-07-30T23:26:12Z",
+  "synthesis": "[investigation]",
   "tasks": [
+    {
+      "sha": "04ad7a0ae8",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T23:11Z",
+      "date": "2026-07-30T23:11:18Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/04ad7a0ae8c9199ba3fe7d481b024fc790bdb4e1"
+    },
     {
       "sha": "3c56d97245",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-07-30T21:24Z",
       "date": "2026-07-30T21:24:40Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c2bb90df2cdd77d15e55f4263589eda6e24e2b23"
-    },
-    {
-      "sha": "f77ec3d43a",
-      "kind": "sweep",
-      "message": "sentiment_sweep 2026-07-30T21:18Z",
-      "date": "2026-07-30T21:18:04Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f77ec3d43a768afcef483b7f025c80dc9ecc11e5"
     }
   ]
 }
