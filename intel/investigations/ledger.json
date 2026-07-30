@@ -1778,6 +1778,25 @@
     "symbol": "V4STR",
     "times_investigated": 1
   },
+  "1:0x7075ddc6b9d265a372b697296a9114ed1af3f9d7": {
+    "address": "0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7",
+    "chain": "1",
+    "creator_address": "0x78667855f74bbe1e64718a97f33a824fab79ff09",
+    "first_investigated": "2026-07-30T23:55:58Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-235558-0x7075DdC6.md",
+        "score": 5,
+        "ts": "2026-07-30T23:55:58Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T23:55:58Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "401K",
+    "times_investigated": 1
+  },
   "1:0x7142b752a1259f5d37a58e47ef60451f5f8038ed": {
     "address": "0x7142b752A1259F5D37A58e47ef60451F5F8038eD",
     "chain": "1",

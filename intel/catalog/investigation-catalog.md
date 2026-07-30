@@ -941,3 +941,5 @@
 | 2026-07-30 | auto | 0xC19Caef8f179cdf7eE77423868b1677a572db5Cd (SPX) | deep_investigation | REJECT (0/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2 (NASDUCK) | deep_investigation | REJECT (5/100) | Very few holders (10) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-30 | auto | 0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7 (401K) | deep_investigation | REJECT (5/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |

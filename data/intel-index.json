@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T23:41:10Z",
+  "generated": "2026-07-30T23:56:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 565,
+    "investigations": 566,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-234104-0x02D47B47.md",
-      "title": "Investigation \u2014 NASDUCK",
-      "symbol": "NASDUCK",
-      "name": "Nasduck",
-      "date": "2026-07-30T23:41:04Z",
-      "target": "0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2",
+      "file": "investigation-20260730-235558-0x7075DdC6.md",
+      "title": "Investigation \u2014 401K",
+      "symbol": "401K",
+      "name": "Buy & Retire",
+      "date": "2026-07-30T23:55:58Z",
+      "target": "0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (10) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liquidity $3,683; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No kn",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-234104-0x02D47B47.md"
+      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,018 (rug/illiquid); [-10] Low liquidity $3,018; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-235558-0x7075DdC6.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-235558-0x7075DdC6.md",
+      "title": "Investigation \u2014 401K",
+      "symbol": "401K",
+      "name": "Buy & Retire",
+      "date": "2026-07-30T23:55:58Z",
+      "target": "0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,018 (rug/illiquid); [-10] Low liquidity $3,018; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-235558-0x7075DdC6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-234104-0x02D47B47.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x565e18ee26092ecd6d2048bb8a72f8b741526d8f) \u2014 can still act on the contract; [-20] Very few holders (29) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipula",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-013623-0x279ed3c4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-005122-0x70c62947.md",
-      "title": "Investigation \u2014 JPF",
-      "symbol": "JPF",
-      "name": "Julius personal farm",
-      "date": "2026-07-30T00:51:22Z",
-      "target": "0x70c629478707c8A4eAe7FDc0EE54A9F61bEE4901",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-10] Owner not renounced (0xa52c7ab305f5b5366b79b8959466e02cc5219b2f) \u2014 can still act on the contract; [-8] Low holder count (114); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-1",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-005122-0x70c62947.md"
     }
   ],
   "reports": [
