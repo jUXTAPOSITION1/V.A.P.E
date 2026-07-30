@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-30T05:37:05Z",
-  "synthesis": "VAPE automation ran seven featured investigations plus sweeps, threat analysis, bounty reports, repo reviews, and related tasks on 2026-07-30.",
+  "generated": "2026-07-30T05:52:00Z",
+  "synthesis": "VAPE's automation generated repeated featured investigations alongside sweeps, news-intel, threat analysis, bounty reports, and repo reviews.",
   "tasks": [
+    {
+      "sha": "90a84cd342",
+      "kind": "sweep",
+      "message": "HACK sweep: 2026-07-30T05:48Z",
+      "date": "2026-07-30T05:48:25Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/90a84cd342592a22b199fecce8d951a6e25c0413"
+    },
+    {
+      "sha": "6e4b2c1a70",
+      "kind": "automation",
+      "message": "news-intel 2026-07-30T05:42Z",
+      "date": "2026-07-30T05:42:18Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/6e4b2c1a7071c2ee71db1f161dea7f17bdc9939e"
+    },
+    {
+      "sha": "54ff47d559",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T05:37Z",
+      "date": "2026-07-30T05:37:08Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/54ff47d55982968fde8fdf8d34cef2bc7b1d84bc"
+    },
     {
       "sha": "14de79ed26",
       "kind": "sweep",
@@ -85,27 +106,6 @@
       "message": "Featured investigation 2026-07-30T03:51Z",
       "date": "2026-07-30T03:51:37Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0616bf9dd3f03cd8833fe06cc23d816443b4382c"
-    },
-    {
-      "sha": "39527640ff",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-30T03:47Z",
-      "date": "2026-07-30T03:47:33Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/39527640ff4ff4582eb3eca9f89a14df47ba7261"
-    },
-    {
-      "sha": "813c8b038d",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-30T03:44Z",
-      "date": "2026-07-30T03:44:02Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/813c8b038d0941c1f92cd9015b698cef983d9e88"
-    },
-    {
-      "sha": "7fa677bb5e",
-      "kind": "broadcast",
-      "message": "community broadcast 2026-07-30T03:40Z",
-      "date": "2026-07-30T03:40:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7fa677bb5e681d3c0bf7425babfbe0a6ce531b8b"
     }
   ]
 }
