@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T11:07:02Z",
+  "generated": "2026-07-30T11:09:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 438,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 127,
     "investigations": 538,
-    "news": 22,
+    "news": 23,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md",
+      "title": "Robinhood Posts Best Quarter Ever as Prediction Market and Robinhood Chain Take Off",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 11:09 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 11:09 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md"
+    },
     {
       "file": "news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md",
       "title": "Microsoft OneDrive\u2019s Quiet Face-Scanning Push Sparks Fresh Biometric Privacy Backlash",
