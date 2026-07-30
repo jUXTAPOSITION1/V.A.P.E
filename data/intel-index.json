@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T05:37:04Z",
+  "generated": "2026-07-30T05:42:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 432,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 126,
     "investigations": 531,
-    "news": 20,
+    "news": 21,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md",
+      "title": "BINANCE.US PLOTS REGULATORY REHABILITATION WITH AUGUST CFTC PREDICTION MARKET BID",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 05:42 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The embattled exchange looks to capture a slice of the booming US event-betting market while rebuilding its fractured relationship with federal derivatives regulators.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md"
+    },
     {
       "file": "news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md",
       "title": "Senators ready to send stricter ethics rules on Trump's crypto ventures to White House, sources say",

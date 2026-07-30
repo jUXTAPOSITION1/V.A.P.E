@@ -1,7 +1,15 @@
 {
-  "generated": "2026-07-30T02:22:44Z",
+  "generated": "2026-07-30T05:41:37Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Binance.US to apply for CFTC license in August for prediction market platform",
+      "url": "https://www.theblock.co/post/410110/binance-us-cftc-license?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Wed, 29 Jul 2026 23:17:36 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Senators ready to send stricter ethics rules on Trump's crypto ventures to White House, sources say",
       "url": "https://www.coindesk.com/policy/2026/07/29/senators-said-to-strike-idea-to-toughen-trump-s-concession-on-clarity-act-s-crypto-limits",
@@ -35,14 +43,6 @@
       "crypto": true
     },
     {
-      "title": "Binance.US to attempt prediction markets entry as CFTC-licensed entity, says CEO",
-      "url": "https://cointelegraph.com/news/binance-us-prediction-markets-cftc-designated-contract-market?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 21:52:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Three key demand drivers stall at once, leaving Bitcoin\u2019s $64,000 support to long-term holders",
       "url": "https://cryptoslate.com/three-key-demand-drivers-stall-at-once-leaving-bitcoins-64000-support-to-long-term-holders/",
       "source": "CryptoSlate",
@@ -63,22 +63,6 @@
       "url": "https://www.coindesk.com/markets/2026/07/29/robinhood-slides-4-despite-earnings-beat-as-crypto-revenue-cools",
       "source": "CoinDesk",
       "published": "Wed, 29 Jul 2026 20:40:43 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto entering biggest consolidation phase in history, says ARK analyst",
-      "url": "https://cointelegraph.com/news/crypto-entering-biggest-consolidation-phase-in-history-says-ark-analyst?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 20:40:38 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Tennessee county passes another ban on crypto operations",
-      "url": "https://cointelegraph.com/news/tennessee-county-ban-crypto-operations?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 29 Jul 2026 20:11:27 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -163,14 +147,6 @@
       "crypto": true
     },
     {
-      "title": "The traditional 9-to-5 banking day is officially dying, says Morgan Stanley execs",
-      "url": "https://www.coindesk.com/markets/2026/07/29/morgan-stanley-execs-admit-the-traditional-9-to-5-banking-day-is-officially-dying",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 16:09:32 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Core Scientific lost 56% on Bitcoin mining but $80M in profit from its pivot to AI hosting",
       "url": "https://cryptoslate.com/core-scientific-lost-56-on-bitcoin-mining-but-80m-in-profit-from-its-pivot-to-ai-hosting/",
       "source": "CryptoSlate",
@@ -183,14 +159,6 @@
       "url": "https://www.theblock.co/post/410092/fed-holds-rates-steady-three-officials-push-hike-crypto-market-stays-flat?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Wed, 29 Jul 2026 15:38:31 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Stablecoin firm Brale says new protocol can remove a major hurdle to scaling custom tokens",
-      "url": "https://www.coindesk.com/business/2026/07/29/stablecoin-firm-brale-says-new-protocol-can-remove-a-major-hurdle-to-scaling-custom-tokens",
-      "source": "CoinDesk",
-      "published": "Wed, 29 Jul 2026 15:27:30 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -211,18 +179,42 @@
       "crypto": true
     },
     {
-      "title": "Visa CEO sidesteps labeling Open USD a challenger to Tether and USDC: \u2018Our role is not to pick winners\u2019",
-      "url": "https://www.theblock.co/post/410064/visa-ceo-downplays-open-usd-challenger-tether-usdc-our-role-is-not-pick-winners?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 29 Jul 2026 13:06:06 -0400",
+      "title": "US sanctions Iranian maritime firm, says it accepted Bitcoin to evade restrictions",
+      "url": "https://cointelegraph.com/news/us-sanctions-iran-hormuzsafe-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 05:23:59 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Anchorage Digital says Fed\u2019s proposed payment account is no \u2018workable substitute\u2019 for master account",
-      "url": "https://www.theblock.co/post/410068/anchorage-digital-feds-proposed-payment-account-no-substitute-master-account?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 29 Jul 2026 13:01:02 -0400",
+      "title": "Ether, XRP flat as chip stocks steady on Samsung's 250-fold profit surge",
+      "url": "https://www.coindesk.com/markets/2026/07/30/ether-xrp-flat-as-chip-stocks-steady-on-samsung-s-250-fold-profit-surge",
+      "source": "CoinDesk",
+      "published": "Thu, 30 Jul 2026 05:19:47 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin's quantum plan assumes some algorithms break. AI just weakened one in 60 hours",
+      "url": "https://www.coindesk.com/tech/2026/07/29/bitcoin-s-quantum-plan-assumes-some-algorithms-break-ai-just-weakened-one-in-60-hours",
+      "source": "CoinDesk",
+      "published": "Thu, 30 Jul 2026 04:16:30 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Luno cuts 20% of staff as crypto layoffs spread across 12 firms in July",
+      "url": "https://cointelegraph.com/news/luno-cuts-staff-crypto-layoffs-july?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 04:13:34 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Japanese game developer launches Bitcoin, altcoin fund with SBI",
+      "url": "https://cointelegraph.com/news/japanese-game-developer-bitcoin-altcoin-fund?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 30 Jul 2026 03:19:58 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -235,11 +227,27 @@
       "crypto": true
     },
     {
+      "title": "Russia detains crypto mining firm BitRiver founder on fraud charges: report",
+      "url": "https://www.theblock.co/post/410117/russia-detains-bitriver-founder?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 30 Jul 2026 01:13:34 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "US arbitration giant launches specialist panel for crypto disputes",
       "url": "https://cointelegraph.com/news/aaa-web3-panel-crypto-blockchain-disputes?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Thu, 30 Jul 2026 00:29:11 +0000",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Coinbase Wrapped XRP Expands DeFi Utility Through Doppler Finance on Base",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBzeFRpS1Z5cTE5ZjhkT2NJS28tcUdkZTVYTndhQzQyb3h4cWx6WXBCZG1LdHhmOUk1cU54RXhsMk1ORHhYdXVUVjhiUjVNcllBNkx0QWRpOUFsZw?oc=5",
+      "source": "Cryptonews.net",
+      "published": "Thu, 30 Jul 2026 04:41:28 GMT",
+      "topic": "Base",
       "crypto": true
     },
     {
@@ -253,7 +261,7 @@
     {
       "title": "SEC Chair Paul Atkins Says Agency Can Deliver Crypto Rules Without CLARITY Act",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdFo5SEpQc1RPTEFsc2dfVm9hcVd1WTZFV3NOWHJkVW9vY3p4NDltOWdoYU9kNkdPWmdxUXV6Q3hUU0xfYzR5cUNMOFVGOVdTSnhwcTBfUGhuMzJ2aXZEcU10Q29VcERMUWlxMTkzNnNnSkxRdnQ0Nnd0UUVVaGZyTTlwaUVscWww?oc=5",
-      "source": "CCN.com",
+      "source": "ccn.com",
       "published": "Wed, 29 Jul 2026 18:15:22 GMT",
       "topic": "Regulation",
       "crypto": true
@@ -261,17 +269,9 @@
     {
       "title": "The SEC pledges its assistance to Congress to regulate the crypto market",
       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBmMXJpak1BbzByM3dpSW9rZ0RLWFJyaUx1MnMtY0tZNGxpUkVKVjlMRFJHYzh1cjlfcFlMaUJoRFpQTWowT0xmN1JEOGlOY0M2UFVMRDR4U2xsai1vYVpZbUJPSEtiQW1hVWdqQVRydmVFVnJpTl9DQnhR?oc=5",
-      "source": "cointribune.com",
+      "source": "Cointribune",
       "published": "Wed, 29 Jul 2026 18:05:00 GMT",
       "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "Crypto Today: Where are BTC, ETH and XRP heading ahead Fed rate decision?",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOZm9ULXVDZ0FJWWZrMlRHalhWWGt5SXZyRUVyVDJkc0VKRElwWk5iSUZvSVU5Q19ZU2M0X1J5VU9SSEFKU2dLV1lzWm9zRmJ6RkNSc2ZLOUZoTFh5YW9DYklTSU1xT1RvQ0pYd01NNjN4OEx0T3I1bmdQaXBPaWp3NHBBcXhGY040SXpmcXh3bUlQMXJrWE5hMU9iRF9HakVBQnlqUGxxYnFhVXJhbm9sNThKdWtMZmx4MEdOZEF3cEQ3M3JZRnBvcl8yVWRSaGVPT3NDWA?oc=5",
-      "source": "FXStreet",
-      "published": "Wed, 29 Jul 2026 11:29:41 GMT",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -379,14 +379,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
-      "source": "Crowdfund Insider",
-      "published": "Thu, 16 Jul 2026 20:25:13 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "Base Creator Jesse Pollak Steps Back From App Leadership After Admitting Social Bet 'Was Wrong'",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPSDlBREhCd0NEeFZ4czVWYk9ydUF3a0doT2ZrOEwwei1ZSjdSNzh6YmhPWWpqYWV5NDJOTEoyWnctcFdWSmFLLVVVNTJEbXFqejdBcXRmRnAwMU1IS3NyWk4wNWFIREFXLTF2VG5XUEN2ZkJINHVOSFBfWlhxc1Y2ZHBUNHRzOVk1TUdMXzBac3JZSl9idFNCYUdhcFU?oc=5",
       "source": "Yahoo Finance",
@@ -469,7 +461,7 @@
     {
       "title": "Biggest DeFi Hacks and Exploits of 2026: $1 Billion+ Lost and Counting",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQbk9wTmRMdzhqUW04T1dyM1dwbEVYNnU0U21uenoyN0J2U1VoOC1pRC1zQU1uanA1N0xzb1UySWQzSUZDYkhGenRmM1NWc1ZQZDR3aVluX1h2aU9zZElybVVHV3hiQmYxTE1oV19WcE1iZExIQlJnYXFRSlNXanNSVDNBNER4VklVMHo0?oc=5",
-      "source": "CCN.com",
+      "source": "ccn.com",
       "published": "Tue, 19 May 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
@@ -480,6 +472,14 @@
       "source": "Yahoo Finance",
       "published": "Sun, 17 May 2026 07:00:00 GMT",
       "topic": "Security",
+      "crypto": true
+    },
+    {
+      "title": "More Stablecoins, More Markets, More Flexibility: How Global Payments Infrastructure is Evolving",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcVJXVldSdXVZTkZkZm8yVGhqQk9XeENmUXBGSHozTFhJMkJ0SlRHYzRNYUFRTXV5TnZfRmFfQWZETERDUUc1dWhVVk5yRFVaYjhxTno3REFSSmRnMUxVRjJZU2VONGtpVklUem1uWDVmTGxvWjhjNDU5Qi1BMGRPTkNlalRHdmVmRmlNYVVEZ3ZKNlZFb3dmTlVnbUtTVGk0RS14ZG50NmNvOUM3Szg2a1BPLW1CdU5YOXRxdXQ0UQ?oc=5",
+      "source": "Ripple",
+      "published": "Fri, 24 Apr 2026 15:58:43 GMT",
+      "topic": "Stablecoins",
       "crypto": true
     }
   ]
