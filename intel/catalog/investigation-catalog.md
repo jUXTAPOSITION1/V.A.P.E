@@ -891,3 +891,5 @@
 | 2026-07-30 | auto | 0x6C1dd3308e495889eEa9485EE8393117adac7185 (ON) | deep_investigation | REJECT (25/100) | Very few holders (23) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0x8432dB07e8FA11D096b7757Ac81cc068558d4444 (HEYI) | deep_investigation | CAUTION (52/100) | Low holder count (87) | +7d |
+
+| 2026-07-30 | auto | 0xB4722D06bC8Fe9bea95A7839FB550bc7c68B4444 (HEYI) | deep_investigation | CAUTION (52/100) | Low holder count (99) | +7d |

@@ -1,7 +1,14 @@
 {
-  "generated": "2026-07-30T12:22:18Z",
-  "synthesis": "List:**",
+  "generated": "2026-07-30T12:37:12Z",
+  "synthesis": "[investigation] Featured",
   "tasks": [
+    {
+      "sha": "0431ab2709",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T12:22Z",
+      "date": "2026-07-30T12:22:21Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0431ab2709a5e2441aef4ee619fe5f4a5fd1a8e5"
+    },
     {
       "sha": "8d510ee8c6",
       "kind": "bounty-radar",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-07-30T10:52Z",
       "date": "2026-07-30T10:52:19Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/92456f865982036679d748ce12921ba07627f3bb"
-    },
-    {
-      "sha": "e146a5f4f9",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T10:37Z",
-      "date": "2026-07-30T10:37:31Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e146a5f4f9797837fbe04ab5469b967613627ccf"
     }
   ]
 }

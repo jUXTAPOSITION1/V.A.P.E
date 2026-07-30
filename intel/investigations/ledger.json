@@ -4495,6 +4495,25 @@
     "symbol": "AKE",
     "times_investigated": 1
   },
+  "56:0xb4722d06bc8fe9bea95a7839fb550bc7c68b4444": {
+    "address": "0xB4722D06bC8Fe9bea95A7839FB550bc7c68B4444",
+    "chain": "56",
+    "creator_address": "0x051a53d095d277e22e3d905b10d3bbe75f0ac508",
+    "first_investigated": "2026-07-30T12:37:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-123706-0xB4722D06.md",
+        "score": 52,
+        "ts": "2026-07-30T12:37:06Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T12:37:06Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "HEYI",
+    "times_investigated": 1
+  },
   "56:0xb5d1aa718725ff1ff3a56c8b30b4e8ac41a1637a": {
     "address": "0xB5D1AA718725FF1Ff3A56c8B30b4e8Ac41a1637A",
     "chain": "56",
