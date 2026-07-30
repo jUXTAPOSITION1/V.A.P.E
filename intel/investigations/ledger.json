@@ -4230,6 +4230,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0x991035c1f2e0ef75831c78b184958cb9b9da4444": {
+    "address": "0x991035c1F2E0EF75831c78b184958Cb9B9da4444",
+    "chain": "56",
+    "creator_address": "0x314e0b9a3a6499adefe3e1eae59bf4edb5c0a19d",
+    "first_investigated": "2026-07-30T10:22:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-102226-0x991035c1.md",
+        "score": 62,
+        "ts": "2026-07-30T10:22:26Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T10:22:26Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "HEYI",
+    "times_investigated": 1
+  },
   "56:0x9a30355775c45fa437e1ac041d1261bad44563e2": {
     "address": "0x9a30355775c45fa437E1AC041D1261BaD44563E2",
     "chain": "56",

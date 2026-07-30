@@ -885,3 +885,5 @@
 | 2026-07-30 | auto | 0x2b922264c23Fc0292Aba13BC2Ba853035EB29A5a (喵喵币) | deep_investigation | REJECT (0/100) | Transfers can be paused by owner | +7d |
 
 | 2026-07-30 | auto | 0x4cE634563BB2F72961483357dc31b4C146A24444 (HEYI) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 76% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-30 | auto | 0x991035c1F2E0EF75831c78b184958Cb9B9da4444 (HEYI) | deep_investigation | CAUTION (62/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
