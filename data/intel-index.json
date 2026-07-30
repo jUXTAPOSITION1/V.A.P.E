@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T12:06:39Z",
+  "generated": "2026-07-30T12:22:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 439,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 127,
-    "investigations": 539,
+    "investigations": 540,
     "news": 23,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-120635-0x6C1dd330.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "ON",
-      "date": "2026-07-30T12:06:35Z",
-      "target": "0x6C1dd3308e495889eEa9485EE8393117adac7185",
+      "file": "investigation-20260730-122213-0x8432dB07.md",
+      "title": "Investigation \u2014 HEYI",
+      "symbol": "HEYI",
+      "name": "The Final Form Cow",
+      "date": "2026-07-30T12:22:13Z",
+      "target": "0x8432dB07e8FA11D096b7757Ac81cc068558d4444",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10]",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-120635-0x6C1dd330.md"
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Low holder count (87); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,972; [-5] Pair 25.2 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-122213-0x8432dB07.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-122213-0x8432dB07.md",
+      "title": "Investigation \u2014 HEYI",
+      "symbol": "HEYI",
+      "name": "The Final Form Cow",
+      "date": "2026-07-30T12:22:13Z",
+      "target": "0x8432dB07e8FA11D096b7757Ac81cc068558d4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Low holder count (87); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,972; [-5] Pair 25.2 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-122213-0x8432dB07.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-120635-0x6C1dd330.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0xf64859A8A25175Ec8a35c4366C44EB2722fE154D) \u2014 REJECT 15/100 \u2014 likely the same serial campaign; [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders co",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-122426-0x7DB662F5.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-120919-0xf64859A8.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T12:09:19Z",
-      "target": "0xf64859A8A25175Ec8a35c4366C44EB2722fE154D",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +73070970775763% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFI",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-120919-0xf64859A8.md"
     }
   ],
   "reports": [

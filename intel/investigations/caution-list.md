@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-30T12:06:35Z — 102 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-30T12:22:13Z — 103 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| HEYI | BNB Chain | `0x8432dB07e8FA11D096b7757Ac81cc068558d4444` | 52/100 | 1 | 2026-07-30T12:22:13Z |
 | HEYI | BNB Chain | `0x991035c1F2E0EF75831c78b184958Cb9B9da4444` | 62/100 | 1 | 2026-07-30T10:22:26Z |
 | HEYI | BNB Chain | `0x4cE634563BB2F72961483357dc31b4C146A24444` | 70/100 | 1 | 2026-07-30T09:52:16Z |
 | VIBESTR | Ethereum | `0xd0cC2b0eFb168bFe1f94a948D8df70FA10257196` | 52/100 | 1 | 2026-07-30T09:06:17Z |

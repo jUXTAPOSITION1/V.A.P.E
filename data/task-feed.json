@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T12:06:39Z",
-  "synthesis": "[reputation] reputation",
+  "generated": "2026-07-30T12:22:18Z",
+  "synthesis": "List:**",
   "tasks": [
+    {
+      "sha": "8d510ee8c6",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-30T12:13Z",
+      "date": "2026-07-30T12:13:56Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8d510ee8c63cf6060cb3a6fc7ef328e35ba0c2c3"
+    },
+    {
+      "sha": "b5af2bf043",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T12:06Z",
+      "date": "2026-07-30T12:06:42Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b5af2bf04380dcd0c11a701b43ed4b36fddfccb0"
+    },
     {
       "sha": "8a691852dd",
       "kind": "reputation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-30T10:37Z",
       "date": "2026-07-30T10:37:31Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e146a5f4f9797837fbe04ab5469b967613627ccf"
-    },
-    {
-      "sha": "39d00546aa",
-      "kind": "sweep",
-      "message": "sentiment_sweep 2026-07-30T10:31Z",
-      "date": "2026-07-30T10:31:24Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/39d00546aa7df7146dc2a847fc42d06fcdbb29c1"
-    },
-    {
-      "sha": "7e48c5466b",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T10:22Z",
-      "date": "2026-07-30T10:22:32Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7e48c5466bf52553680027437503e3e4608cbe93"
     }
   ]
 }
