@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T12:37:12Z",
+  "generated": "2026-07-30T12:52:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 439,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 127,
-    "investigations": 541,
+    "investigations": 542,
     "news": 23,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-123706-0xB4722D06.md",
-      "title": "Investigation \u2014 HEYI",
-      "symbol": "HEYI",
-      "name": "The Final Form Cow",
-      "date": "2026-07-30T12:37:06Z",
-      "target": "0xB4722D06bC8Fe9bea95A7839FB550bc7c68B4444",
+      "file": "investigation-20260730-125212-0xcE066060.md",
+      "title": "Investigation \u2014 BPay",
+      "symbol": "BPay",
+      "name": "BullPay",
+      "date": "2026-07-30T12:52:12Z",
+      "target": "0xcE06606040Cdad5800b6B130A06d58F897Dc4591",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Low holder count (99); [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,733; [-5] Pair 22.0 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-123706-0xB4722D06.md"
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Low holder count (105); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,828; [-10] No known third-party audit or verifiable team identity found \u2014 trea",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-125212-0xcE066060.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-125212-0xcE066060.md",
+      "title": "Investigation \u2014 BPay",
+      "symbol": "BPay",
+      "name": "BullPay",
+      "date": "2026-07-30T12:52:12Z",
+      "target": "0xcE06606040Cdad5800b6B130A06d58F897Dc4591",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Low holder count (105); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,828; [-10] No known third-party audit or verifiable team identity found \u2014 trea",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-125212-0xcE066060.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-123706-0xB4722D06.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at a",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-125427-0xC608CfC7.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-123928-0xB5D1AA71.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-29T12:39:28Z",
-      "target": "0xB5D1AA718725FF1Ff3A56c8B30b4e8Ac41a1637A",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +34441058861939% (volatility/manipulation); [-15] P",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-123928-0xB5D1AA71.md"
     }
   ],
   "reports": [

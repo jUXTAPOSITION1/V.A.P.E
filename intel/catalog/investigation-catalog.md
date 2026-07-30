@@ -893,3 +893,5 @@
 | 2026-07-30 | auto | 0x8432dB07e8FA11D096b7757Ac81cc068558d4444 (HEYI) | deep_investigation | CAUTION (52/100) | Low holder count (87) | +7d |
 
 | 2026-07-30 | auto | 0xB4722D06bC8Fe9bea95A7839FB550bc7c68B4444 (HEYI) | deep_investigation | CAUTION (52/100) | Low holder count (99) | +7d |
+
+| 2026-07-30 | auto | 0xcE06606040Cdad5800b6B130A06d58F897Dc4591 (BPay) | deep_investigation | REJECT (42/100) | Low holder count (105) | +7d |
