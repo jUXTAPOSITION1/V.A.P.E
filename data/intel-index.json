@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T14:22:18Z",
+  "generated": "2026-07-30T14:37:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 440,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 127,
-    "investigations": 544,
+    "investigations": 545,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-135226-0x4c746Edf.md",
-      "title": "Investigation \u2014 GOD",
-      "symbol": "GOD",
-      "name": "GOD",
-      "date": "2026-07-30T13:52:26Z",
-      "target": "0x4c746Edf20762dC201aC40135e0C13e400d23D58",
+      "file": "investigation-20260730-143704-0x6D7AE59E.md",
+      "title": "Investigation \u2014 V4STR",
+      "symbol": "V4STR",
+      "name": "Programmable Strategy",
+      "date": "2026-07-30T14:37:04Z",
+      "target": "0x6D7AE59Eb1FbeF5BcB7d52064279B1e003CabA1a",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-20] Hidden owner; [-8] Top 10 non-LP/burn holders control 60% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,978. Positive evidence: Ownership renounced; 1297 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1166+ days without a known incident",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-135226-0x4c746Edf.md"
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,713; [-10] Violent 24h move +3941% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-143704-0x6D7AE59E.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-143704-0x6D7AE59E.md",
+      "title": "Investigation \u2014 V4STR",
+      "symbol": "V4STR",
+      "name": "Programmable Strategy",
+      "date": "2026-07-30T14:37:04Z",
+      "target": "0x6D7AE59Eb1FbeF5BcB7d52064279B1e003CabA1a",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,713; [-10] Violent 24h move +3941% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-143704-0x6D7AE59E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-135226-0x4c746Edf.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-8] Low holder count (151); [-15] Top 9 non-LP/burn holders control 500% of supply \u2014 concentrated, eas",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-145537-0x143E7383.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-132424-0x862F3BF4.md",
-      "title": "Investigation \u2014 COTI",
-      "symbol": "COTI",
-      "name": "COTI",
-      "date": "2026-07-29T13:24:24Z",
-      "target": "0x862F3BF49c2bDDC027ED7e4031C1a45d6c0C8521",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbd48b8aa8782f22a7c7d058fe89fa71d7ccb83fa) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 01 (0x1217D587a72928c03B802ad0e62154F62D5c2A17) \u2014 REJECT 3/100 \u2014 likely the same serial campaign;",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-132424-0x862F3BF4.md"
     }
   ],
   "reports": [
