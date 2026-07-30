@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T17:08:27Z",
+  "generated": "2026-07-30T17:23:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 444,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 128,
-    "investigations": 551,
+    "investigations": 552,
     "news": 24,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-165332-0xE0172DF6.md",
-      "title": "Investigation \u2014 \u9f99\u4e00",
-      "symbol": "\u9f99\u4e00",
-      "name": "heyi",
-      "date": "2026-07-30T16:53:32Z",
-      "target": "0xE0172DF6f4076949cb04e188A61528a2175d4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $11,402. Positive evidence: Ownership renounced; 1834 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 237+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-165332-0xE0172DF6.md"
+      "file": "investigation-20260730-172322-0x61900eb9.md",
+      "title": "Investigation \u2014 V4STR",
+      "symbol": "V4STR",
+      "name": "Programmable Strategy",
+      "date": "2026-07-30T17:23:22Z",
+      "target": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-15] High buy tax 25%; [-20] High sell tax 40%; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-172322-0x61900eb9.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-172322-0x61900eb9.md",
+      "title": "Investigation \u2014 V4STR",
+      "symbol": "V4STR",
+      "name": "Programmable Strategy",
+      "date": "2026-07-30T17:23:22Z",
+      "target": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-15] High buy tax 25%; [-20] High sell tax 40%; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-172322-0x61900eb9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-165332-0xE0172DF6.md",
@@ -594,20 +608,6 @@
       "score": "35",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 92% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $6,942 (rug/illiquid); [-10] Low liquidity $6,942. Positive evidence: 6290 holders \u2014 reasonably distributed",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-174558-0x3E5d4f8a.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-170018-0x8e7A9f98.md",
-      "title": "Investigation \u2014 VIBE",
-      "symbol": "VIBE",
-      "name": "VIBE AI",
-      "date": "2026-07-29T17:00:18Z",
-      "target": "0x8e7A9f9817eCf2649c0316b22Fea274D522C7b9B",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-25] Very low liquidity $4,789 (rug/illiquid); [-10] Low liquidity $4,789. Positive evidence: Ownership renounced; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 427+ days without a known incident in this scan; Custom verified source (not a mass-produc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-170018-0x8e7A9f98.md"
     }
   ],
   "reports": [

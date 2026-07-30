@@ -913,3 +913,5 @@
 | 2026-07-30 | auto | 0x46F2564E0FA8248d15125E7e54173cfbdEf91Be7 (GRVT) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-30 | auto | 0xE0172DF6f4076949cb04e188A61528a2175d4444 (龙一) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 75% of supply — concentrated, easily manipula | +7d |
+
+| 2026-07-30 | auto | 0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c (V4STR) | deep_investigation | REJECT (0/100) | High buy tax 25% | +7d |
