@@ -2384,6 +2384,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0xd0cc2b0efb168bfe1f94a948d8df70fa10257196": {
+    "address": "0xd0cC2b0eFb168bFe1f94a948D8df70FA10257196",
+    "chain": "1",
+    "creator_address": "0x019817ad02a31b990433542097be29d97613e8cb",
+    "first_investigated": "2026-07-30T09:06:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-090617-0xd0cC2b0e.md",
+        "score": 52,
+        "ts": "2026-07-30T09:06:17Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T09:06:17Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "VIBESTR",
+    "times_investigated": 1
+  },
   "1:0xd60abfb751db36514a592963fd71dd50c6cf9ba9": {
     "address": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
     "chain": "1",

@@ -879,3 +879,5 @@
 | 2026-07-30 | auto | 0xB037894418a4758086E7de170a666b045c764444 (喵喵币) | deep_investigation | CAUTION (55/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0xD9a072f08513bF0cfDcca2F8f19940Ec60719A5a (喵喵币) | deep_investigation | REJECT (0/100) | High sell tax 59% | +7d |
+
+| 2026-07-30 | auto | 0xd0cC2b0eFb168bFe1f94a948D8df70FA10257196 (VIBESTR) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
