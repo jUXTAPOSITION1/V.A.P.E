@@ -3907,6 +3907,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x4ce634563bb2f72961483357dc31b4c146a24444": {
+    "address": "0x4cE634563BB2F72961483357dc31b4C146A24444",
+    "chain": "56",
+    "creator_address": "0x1bff8f0ade179dfa1beddb54fa5d7d6dc814191a",
+    "first_investigated": "2026-07-30T09:52:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-095216-0x4cE63456.md",
+        "score": 70,
+        "ts": "2026-07-30T09:52:16Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-30T09:52:16Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "HEYI",
+    "times_investigated": 1
+  },
   "56:0x535fde726f4fec5d501dab93378643a6bf6e9fc9": {
     "address": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
     "chain": "56",
