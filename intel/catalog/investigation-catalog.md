@@ -887,3 +887,5 @@
 | 2026-07-30 | auto | 0x4cE634563BB2F72961483357dc31b4C146A24444 (HEYI) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 76% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-30 | auto | 0x991035c1F2E0EF75831c78b184958Cb9B9da4444 (HEYI) | deep_investigation | CAUTION (62/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
+
+| 2026-07-30 | auto | 0x6C1dd3308e495889eEa9485EE8393117adac7185 (ON) | deep_investigation | REJECT (25/100) | Very few holders (23) — thin, easily manipulated distribution | +7d |
