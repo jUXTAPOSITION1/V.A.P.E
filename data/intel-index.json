@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-30T20:09:34Z",
+  "generated": "2026-07-30T20:15:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 446,
+    "reports": 447,
     "reports_by_type": {
+      "bounty": 100,
       "security": 81,
-      "bounty": 99,
       "base": 92,
       "macro": 24,
       "virtuals": 93,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-30-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-30T19:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260730_201519.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-30T20:15:19Z",
       "threat": null,
-      "summary": "The last 7 days recorded 11 incidents totaling under $60M in losses, with no single event reaching $50M. The largest was the AFX Bridge private-key compromise on Arbitrum ($24.15M), followed by Crypto DAO on BSC ($8.2M), the Verus-Ethereum Bridge verification bypass ($7.53M), and the Wanchain signature exploit on Cardano ($6.5M). Remainin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-19.md",
-      "bytes": 6651
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_201519.md",
+      "bytes": 17975
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260730_201519.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-30T20:15:19Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_201519.md",
+      "bytes": 17975
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Projekt $0.56M on ['Ethereum'] (Flashloan Exploit)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_230257.md",
       "bytes": 16235
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_211126.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T21:11:26Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Projekt $0.56M on ['Ethereum'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_211126.md",
-      "bytes": 17916
     }
   ],
   "broadcasts": [
