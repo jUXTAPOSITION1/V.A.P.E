@@ -1,15 +1,15 @@
 {
-  "generated": "2026-07-30T16:07:43Z",
+  "generated": "2026-07-30T16:21:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 442,
+    "reports": 443,
     "reports_by_type": {
+      "base": 92,
       "macro": 24,
       "virtuals": 93,
       "security": 80,
       "bounty": 97,
       "sentiment": 47,
-      "base": 91,
       "bug": 3,
       "mainnet": 3,
       "skillforge": 4
@@ -38,14 +38,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-30-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-30T15:00Z",
+      "type": "base",
+      "file": "base-2026-07-30-16.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-30T16:00Z",
       "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28, prior day 29) and global market cap 24h change (1.26%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-30-15.md",
-      "bytes": 2222
+      "summary": "Date: 2026-07-30 16:21 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-16.md",
+      "bytes": 3533
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-30-16.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-30T16:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-30 16:21 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-16.md",
+      "bytes": 3533
+    },
     {
       "kind": "intel",
       "type": "macro",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-27 20:25 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-27-20.md",
       "bytes": 3370
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_192827.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T19:28:27Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 RECENT EXPLOIT: Projekt $0.56M on ['Ethereum'] (Flashloan Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_192827.md",
-      "bytes": 17093
     }
   ],
   "broadcasts": [
