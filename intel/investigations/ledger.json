@@ -3660,6 +3660,25 @@
     "symbol": "DBC",
     "times_investigated": 1
   },
+  "56:0x2b922264c23fc0292aba13bc2ba853035eb29a5a": {
+    "address": "0x2b922264c23Fc0292Aba13BC2Ba853035EB29A5a",
+    "chain": "56",
+    "creator_address": "0x0a713b0158ebc408bb1581a40072eecff1e4e0c6",
+    "first_investigated": "2026-07-30T09:36:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-093626-0x2b922264.md",
+        "score": 0,
+        "ts": "2026-07-30T09:36:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-30T09:36:26Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "\u55b5\u55b5\u5e01",
+    "times_investigated": 1
+  },
   "56:0x2c3a8ee94ddd97244a93bc48298f97d2c412f7db": {
     "address": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
     "chain": "56",

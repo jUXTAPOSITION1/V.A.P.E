@@ -881,3 +881,5 @@
 | 2026-07-30 | auto | 0xD9a072f08513bF0cfDcca2F8f19940Ec60719A5a (喵喵币) | deep_investigation | REJECT (0/100) | High sell tax 59% | +7d |
 
 | 2026-07-30 | auto | 0xd0cC2b0eFb168bFe1f94a948D8df70FA10257196 (VIBESTR) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0x2b922264c23Fc0292Aba13BC2Ba853035EB29A5a (喵喵币) | deep_investigation | REJECT (0/100) | Transfers can be paused by owner | +7d |
