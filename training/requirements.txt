@@ -9,7 +9,7 @@
 # GitHub-hosted runner's ephemeral environment.
 torch>=2.13.0
 transformers>=4.44
-peft>=0.19.1
+peft>=0.20.0
 bitsandbytes>=0.43
 accelerate>=1.14.0
 datasets>=5.0.0
