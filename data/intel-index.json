@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T13:52:32Z",
+  "generated": "2026-07-30T14:01:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 439,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 127,
     "investigations": 544,
-    "news": 23,
+    "news": 24,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md",
+      "title": "Triple Demand Stall Strips Bitcoin of Bullish Catalysts, Putting $64,000 Support in the Hands of Long-Term Holders",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 14:01 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A convergence of massive US spot ETF outflows, weakening perpetual futures buying, and flatlining on-chain capital inflows has left Bitcoin without its primary upward drivers, forcing long-term holders to act as the market's final line of defense.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md"
+    },
     {
       "file": "news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md",
       "title": "Robinhood Posts Best Quarter Ever as Prediction Market and Robinhood Chain Take Off",
