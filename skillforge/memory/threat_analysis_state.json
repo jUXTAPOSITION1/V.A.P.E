@@ -358,5 +358,10 @@
     "report": "intel/threat-analysis/2026-07-26-chainconnect.md",
     "provider": "oci_grok",
     "written_at": "2026-07-30T04:50:36Z"
+  },
+  "2026-07-30:Set Protocol": {
+    "report": "intel/threat-analysis/2026-07-30-set-protocol.md",
+    "provider": "oci_grok",
+    "written_at": "2026-07-30T20:58:06Z"
   }
 }
