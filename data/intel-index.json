@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T22:56:07Z",
+  "generated": "2026-07-30T23:11:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 562,
+    "investigations": 563,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-225601-0x851F679A.md",
-      "title": "Investigation \u2014 TrumpBucks",
-      "symbol": "TrumpBucks",
-      "name": "Trump Bucks",
-      "date": "2026-07-30T22:56:01Z",
-      "target": "0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2",
+      "file": "investigation-20260730-231107-0x7D4A2383.md",
+      "title": "Investigation \u2014 STONKS",
+      "symbol": "STONKS",
+      "name": "Stonks",
+      "date": "2026-07-30T23:11:07Z",
+      "target": "0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $17,930. Positive evidence: Trading 544+ days without a known in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-225601-0x851F679A.md"
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 2739 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 820+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-231107-0x7D4A2383.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-231107-0x7D4A2383.md",
+      "title": "Investigation \u2014 STONKS",
+      "symbol": "STONKS",
+      "name": "Stonks",
+      "date": "2026-07-30T23:11:07Z",
+      "target": "0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "100",
+      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 2739 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 820+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-231107-0x7D4A2383.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-225601-0x851F679A.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-10] Owner not renounced (0x22ef3a24c1ed3f6dca365bcd36eeafabb8f3eaaa) \u2014 can still act on the contract; [-15] Only 35% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 6046 holders \u2014 reasonably distributed; Trading 201+ days without a known incident in this scan; Cus",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-232113-0xabAe909c.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-222052-0x535fdE72.md",
-      "title": "Investigation \u2014 Beat",
-      "symbol": "Beat",
-      "name": "Beat",
-      "date": "2026-07-29T22:20:52Z",
-      "target": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $12,475; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-222052-0x535fdE72.md"
     }
   ],
   "reports": [

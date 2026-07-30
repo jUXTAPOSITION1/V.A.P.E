@@ -1854,6 +1854,25 @@
     "symbol": "TRUMP2028",
     "times_investigated": 1
   },
+  "1:0x7d4a23832fad83258b32ce4fd3109ceef4332af4": {
+    "address": "0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4",
+    "chain": "1",
+    "creator_address": "0x70f60e58007d67a05538e8581e774a99f4dabf2b",
+    "first_investigated": "2026-07-30T23:11:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260730-231107-0x7D4A2383.md",
+        "score": 100,
+        "ts": "2026-07-30T23:11:07Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-30T23:11:07Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "STONKS",
+    "times_investigated": 1
+  },
   "1:0x82ce191d049ed69bcb00870e95478c401c3002c8": {
     "address": "0x82ce191D049Ed69bCb00870e95478C401C3002c8",
     "chain": "1",

@@ -935,3 +935,5 @@
 | 2026-07-30 | auto | 0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82 (INVEST) | deep_investigation | REJECT (0/100) | Low holder count (56) | +7d |
 
 | 2026-07-30 | auto | 0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2 (TrumpBucks) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4 (STONKS) | deep_investigation | PROCEED (100/100) | clean | +7d |
