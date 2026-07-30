@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T22:00:16Z",
+  "generated": "2026-07-30T22:06:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 129,
     "investigations": 558,
-    "news": 25,
+    "news": 26,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md",
+      "title": "Bipartisan Senate Coalition Presses White House on Strict Crypto Ethics Rules Under CLARITY Act",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 22:06 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Lawmakers demand executive branch alignment on digital asset disclosures and foreign blockchain restrictions to safeguard national security.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md"
+    },
     {
       "file": "news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md",
       "title": "Researchers Tried Letting AI Do Science. It Failed",
