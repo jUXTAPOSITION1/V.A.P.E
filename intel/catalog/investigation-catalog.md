@@ -919,3 +919,5 @@
 | 2026-07-30 | auto | 0xD036f17315D159B48cc154bBc70aa4FA06210DE9 (UNI) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-07-30 | auto | 0xC22Bd38d997D80D3DC0e852Be4ab62F3f86C135b (CES) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-30 | auto | 0x99991c6AAbba5a096f24f250b73580F5179b9999 (CAP) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
