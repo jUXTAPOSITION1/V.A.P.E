@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T19:23:16Z",
+  "generated": "2026-07-30T19:26:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 445,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 128,
     "investigations": 554,
-    "news": 24,
+    "news": 25,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md",
+      "title": "Researchers Tried Letting AI Do Science. It Failed",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 19:26 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 19:26 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md"
+    },
     {
       "file": "news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md",
       "title": "Triple Demand Stall Strips Bitcoin of Bullish Catalysts, Putting $64,000 Support in the Hands of Long-Term Holders",
