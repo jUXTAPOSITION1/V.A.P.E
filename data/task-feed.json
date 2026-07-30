@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T09:06:26Z",
-  "synthesis": "VAPE has primarily",
+  "generated": "2026-07-30T09:21:18Z",
+  "synthesis": "VAPE's automation repeatedly committed featured investigations every 15 minutes, with occasional security sweeps, news intel, seal findings, skillforge checks, and bounty radar updates.",
   "tasks": [
+    {
+      "sha": "dfdbd00511",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-30T09:11Z",
+      "date": "2026-07-30T09:11:38Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dfdbd0051198cb0fb7a48c7eac1969f34967604e"
+    },
+    {
+      "sha": "b11053be68",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T09:06Z",
+      "date": "2026-07-30T09:06:33Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b11053be68edb78d7f12b8b0245111bcf3f5c5a7"
+    },
     {
       "sha": "664c2e359f",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-30T07:06Z",
       "date": "2026-07-30T07:06:36Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/63417bd74450f9b55cbb81a037db5aa5b06f0c29"
-    },
-    {
-      "sha": "a4f3465caa",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T06:51Z",
-      "date": "2026-07-30T06:51:40Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a4f3465caa7bdb2bdfef6c986784359a5128f170"
-    },
-    {
-      "sha": "bd7fa22c86",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-07-30T06:43Z",
-      "date": "2026-07-30T06:43:41Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bd7fa22c863c47a53328e70b128e983fcba3d570"
     }
   ]
 }
