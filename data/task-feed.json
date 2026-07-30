@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T20:40:05Z",
-  "synthesis": "VAPE's automation generated reputation snapshots, multiple featured investigations, security/virtuals sweeps, bounty reports, repo reviews, community broadcasts, news-intel, and bounty radar sweeps.",
+  "generated": "2026-07-30T20:54:59Z",
+  "synthesis": "VAPE's automation ran repeated featured investigations, bounty radar sweeps, security and virtuals sweeps, reputation snapshots, and generated bounty reports plus news intel.",
   "tasks": [
+    {
+      "sha": "aefde117ca",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-07-30T20:45Z",
+      "date": "2026-07-30T20:45:31Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/aefde117ca2e47d32fff37a91960a748d093aee1"
+    },
+    {
+      "sha": "7ac2c2a78a",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T20:40Z",
+      "date": "2026-07-30T20:40:09Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7ac2c2a78ab364e2a084638628e8977c001922cb"
+    },
     {
       "sha": "0f2e533c4e",
       "kind": "reputation",
@@ -92,20 +106,6 @@
       "message": "Seal findings chain 2026-07-30T19:15Z",
       "date": "2026-07-30T19:15:59Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9e9fe20da48ed91188946d4048503c2300084b67"
-    },
-    {
-      "sha": "2dabd90a02",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T19:08Z",
-      "date": "2026-07-30T19:08:24Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2dabd90a025d821282b96f22a8d9f37697367e52"
-    },
-    {
-      "sha": "8a547aeed3",
-      "kind": "bounty-radar",
-      "message": "SCOUT bounty radar sweep 2026-07-30T18:58Z",
-      "date": "2026-07-30T18:58:15Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8a547aeed3b9da2e7cbd8c09b7666b848403f758"
     }
   ]
 }
