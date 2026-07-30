@@ -877,3 +877,5 @@
 | 2026-07-30 | auto | 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984 (UNI) | deep_investigation | PROCEED (90/100) | Owner not renounced (0x1a9c8182c09f50c8318d769245bea52c32be35bc) — can still act | +7d |
 
 | 2026-07-30 | auto | 0xB037894418a4758086E7de170a666b045c764444 (喵喵币) | deep_investigation | CAUTION (55/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-30 | auto | 0xD9a072f08513bF0cfDcca2F8f19940Ec60719A5a (喵喵币) | deep_investigation | REJECT (0/100) | High sell tax 59% | +7d |

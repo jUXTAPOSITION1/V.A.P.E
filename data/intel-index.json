@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T08:36:15Z",
+  "generated": "2026-07-30T08:51:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 434,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 126,
-    "investigations": 533,
+    "investigations": 534,
     "news": 22,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-073651-0xB0378944.md",
+      "file": "investigation-20260730-085110-0xD9a072f0.md",
       "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
       "symbol": "\u55b5\u55b5\u5e01",
       "name": "\u55b5\u55b5\u5e01",
-      "date": "2026-07-30T07:36:51Z",
-      "target": "0xB037894418a4758086E7de170a666b045c764444",
+      "date": "2026-07-30T08:51:10Z",
+      "target": "0xD9a072f08513bF0cfDcca2F8f19940Ec60719A5a",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-073651-0xB0378944.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] High sell tax 59%; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-085110-0xD9a072f0.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-085110-0xD9a072f0.md",
+      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
+      "symbol": "\u55b5\u55b5\u5e01",
+      "name": "\u55b5\u55b5\u5e01",
+      "date": "2026-07-30T08:51:10Z",
+      "target": "0xD9a072f08513bF0cfDcca2F8f19940Ec60719A5a",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] High sell tax 59%; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiqu",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-085110-0xD9a072f0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-073651-0xB0378944.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-083531-0x56BBbC01.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-080526-0xcf3232B8.md",
-      "title": "Investigation \u2014 Beat",
-      "symbol": "Beat",
-      "name": "Beat Token",
-      "date": "2026-07-29T08:05:26Z",
-      "target": "0xcf3232B85b43BCa90E51D38cc06Cc8bB8C8A3E36",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Low holder count (57); [-8] Top 10 non-LP/burn holders control 57% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,102; [-15] Pair only 2.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 t",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-080526-0xcf3232B8.md"
     }
   ],
   "reports": [
