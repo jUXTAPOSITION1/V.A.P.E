@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-30T09:32:49Z",
+  "generated": "2026-07-30T09:33:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 435,
+    "reports": 436,
     "reports_by_type": {
       "bounty": 96,
+      "virtuals": 92,
       "security": 79,
       "base": 90,
-      "virtuals": 91,
       "sentiment": 46,
       "macro": 23,
       "bug": 3,
@@ -621,6 +621,17 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_093212.md",
       "bytes": 14403
+    },
+    {
+      "kind": "intel",
+      "type": "virtuals",
+      "file": "virtuals-2026-07-30-09.md",
+      "title": "Virtuals Protocol & ACP Sweep Report",
+      "date": "2026-07-30T09:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-30 09:33 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-09.md",
+      "bytes": 3211
     },
     {
       "kind": "intel",
@@ -1259,17 +1270,6 @@
       "summary": "Real check: searched for a live Virtuals Protocol Immunefi listing this cycle. No matching immunefi.com listing found in this cycle's search results.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/bug-bounty-intel-2026-07-27-13.md",
       "bytes": 3407
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260727_122446.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-27T12:24:46Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None) \u00b7 Base mover: OTHQ / USDC 0.01% +153% 24h (liq $624602.6755) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260727_122446.md",
-      "bytes": 17150
     }
   ],
   "broadcasts": [
