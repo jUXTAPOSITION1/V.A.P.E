@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T19:59:28Z",
+  "generated": "2026-07-30T20:09:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 446,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 556,
+    "investigations": 557,
     "news": 25,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-195332-0x5cBC670a.md",
-      "title": "Investigation \u2014 VIBE",
-      "symbol": "VIBE",
-      "name": "Vibe Trade",
-      "date": "2026-07-30T19:53:32Z",
-      "target": "0x5cBC670ae9a18D9B20144bEC724b34daddf8b365",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260730-200920-0x205812Cd.md",
+      "title": "Investigation \u2014 QQQB",
+      "symbol": "QQQB",
+      "name": "Invesqo QQQ",
+      "date": "2026-07-30T20:09:20Z",
+      "target": "0x205812CdBed920aFf76C6580abD681a46D11efc7",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-195332-0x5cBC670a.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 20.5 days old \u2014 under a month, still unproven; [-10] No known third-party ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260730-200920-0x205812Cd.md",
+      "title": "Investigation \u2014 QQQB",
+      "symbol": "QQQB",
+      "name": "Invesqo QQQ",
+      "date": "2026-07-30T20:09:20Z",
+      "target": "0x205812CdBed920aFf76C6580abD681a46D11efc7",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 20.5 days old \u2014 under a month, still unproven; [-10] No known third-party ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-195332-0x5cBC670a.md",
@@ -594,20 +608,6 @@
       "score": "20",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 9 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 29% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $128 (rug/illiquid); [-10] Low liquidity $128. Positive evidence: O",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-203402-0x26837B64.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260729-201656-0x3DEe4229.md",
-      "title": "Investigation \u2014 V4",
-      "symbol": "V4",
-      "name": "UniCASHCAT",
-      "date": "2026-07-29T20:16:56Z",
-      "target": "0x3DEe42295A9F6fDC9bB258DD0aA61c5F7a8208B8",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-25] Very low liquidity $2,945 (rug/illiquid); [-10] Low liquidity $2,945; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260729-201656-0x3DEe4229.md"
     }
   ],
   "reports": [

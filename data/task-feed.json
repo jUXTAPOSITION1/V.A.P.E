@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-30T19:53:42Z",
-  "synthesis": "7 instances:",
+  "generated": "2026-07-30T20:09:35Z",
+  "synthesis": "VAPE has been running",
   "tasks": [
+    {
+      "sha": "0c9df42a7d",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-07-30T19:59Z",
+      "date": "2026-07-30T19:59:29Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0c9df42a7d5c45df0a754ecda3da60c8288910a0"
+    },
+    {
+      "sha": "d1987dcf9d",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-30T19:53Z",
+      "date": "2026-07-30T19:53:46Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d1987dcf9d873aaf49fd7c2f9b457e4aca5a6aed"
+    },
     {
       "sha": "80b8357204",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Auto-generated bounty report 2026-07-30T18:17Z",
       "date": "2026-07-30T18:17:21Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/752279c0d41ca299dcbbffbebce0cfb06de16cc6"
-    },
-    {
-      "sha": "5c7c9bd78c",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-30T18:08Z",
-      "date": "2026-07-30T18:08:53Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5c7c9bd78c73ff501c7cbe98d2fee482ec232fae"
-    },
-    {
-      "sha": "08fd34a8c1",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-07-30T18:03Z",
-      "date": "2026-07-30T18:03:15Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/08fd34a8c18ecb334ed0d7b10a9823be50c9eb1e"
     }
   ]
 }
