@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-31T08:41:35Z",
+  "generated": "2026-07-31T08:51:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 456,
+    "reports": 457,
     "reports_by_type": {
+      "security": 83,
       "bounty": 103,
       "base": 94,
       "virtuals": 95,
-      "security": 82,
       "sentiment": 48,
       "macro": 24,
       "bug": 3,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-065655-0xDbE20ADb.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_075118.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T07:51:18Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-31-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-31T08:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_075118.md",
-      "bytes": 17030
+      "summary": "The feed records exactly 9 incidents over the 7-day window ending 2026-07-30, with zero events reaching or exceeding $50M in the prior 14 days. Losses range from $0.01M (Set Protocol malicious SetToken on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Prominent vectors include private-key compromise (Garden on Ether",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-08.md",
+      "bytes": 7125
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-07-31-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-07-31T08:00Z",
+      "threat": null,
+      "summary": "The feed records exactly 9 incidents over the 7-day window ending 2026-07-30, with zero events reaching or exceeding $50M in the prior 14 days. Losses range from $0.01M (Set Protocol malicious SetToken on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Prominent vectors include private-key compromise (Garden on Ether",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-08.md",
+      "bytes": 7125
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_164045.md",
       "bytes": 16149
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-28-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-28T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-28 16:29 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-16.md",
-      "bytes": 3675
     }
   ],
   "broadcasts": [
