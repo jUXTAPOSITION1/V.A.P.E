@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T20:33:50Z",
+  "generated": "2026-07-31T20:48:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 133,
-    "investigations": 596,
+    "investigations": 597,
     "news": 31,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-203326-0xbe9D1568.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SpaceX",
-      "date": "2026-07-31T20:33:26Z",
-      "target": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260731-204846-0x5B58e731.md",
+      "title": "Investigation \u2014 FRONG",
+      "symbol": "FRONG",
+      "name": "Uniswap Frong",
+      "date": "2026-07-31T20:48:46Z",
+      "target": "0x5B58e73137647364e7497eC07E3D51bfFc3ac39b",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-203326-0xbe9D1568.md"
+      "score": "25",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 125% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $34,331; [-10] Violent 24h move +7698% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party aud",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-204846-0x5B58e731.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-204846-0x5B58e731.md",
+      "title": "Investigation \u2014 FRONG",
+      "symbol": "FRONG",
+      "name": "Uniswap Frong",
+      "date": "2026-07-31T20:48:46Z",
+      "target": "0x5B58e73137647364e7497eC07E3D51bfFc3ac39b",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 125% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $34,331; [-10] Violent 24h move +7698% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party aud",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-204846-0x5B58e731.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-203326-0xbe9D1568.md",
@@ -594,20 +608,6 @@
       "score": "22",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-215455-0x431a3BEE.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-200920-0x205812Cd.md",
-      "title": "Investigation \u2014 QQQB",
-      "symbol": "QQQB",
-      "name": "Invesqo QQQ",
-      "date": "2026-07-30T20:09:20Z",
-      "target": "0x205812CdBed920aFf76C6580abD681a46D11efc7",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 20.5 days old \u2014 under a month, still unproven; [-10] No known third-party ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
     }
   ],
   "reports": [

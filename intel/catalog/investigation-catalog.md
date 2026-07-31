@@ -1003,3 +1003,5 @@
 | 2026-07-31 | auto | 0x20b688F40b8E6a55e76131D5E3b84AFC89a30c93 (TRUMP2028) | deep_investigation | REJECT (10/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-31 | auto | 0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1 (SPCXB) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-31 | auto | 0x5B58e73137647364e7497eC07E3D51bfFc3ac39b (FRONG) | deep_investigation | REJECT (25/100) | Transfers can be paused by owner | +7d |
