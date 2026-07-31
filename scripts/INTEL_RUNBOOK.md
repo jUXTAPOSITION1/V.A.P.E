@@ -10,13 +10,14 @@ First commandment: **max efficiency, lowest compute.** Do the whole sweep in ONE
 Naming: `<type>-YYYY-MM-DD-HH.md` (UTC hour, 2-digit).
 
 1. **security-** — blockchain security sweep (exploits, incidents). web_search recent hacks/Immunefi/rekt.
-2. **sentiment-** — X/narrative sentiment (use xurl/web_search on @based_vape lane + Base/Virtuals).
+2. **sentiment-** — X/narrative sentiment (use xurl/web_search on @based_vape lane + Base/Ethereum).
 3. **base-** — Base chain health (TVL via DeFiLlama, gas, ecosystem). Include VAPE wallet line.
-4. **virtuals-** — Virtuals Protocol & ACP (VIRTUAL price, new agents, ACP marketplace).
-5. **macro-** — every other cycle only (macro & micro news, regulatory).
-6. **broadcast-** — `intel/broadcasts/broadcast-YYYY-MM-DD-HH.md` consolidating the above.
+4. **macro-** — every other cycle only (macro & micro news, regulatory).
+5. **broadcast-** — `intel/broadcasts/broadcast-YYYY-MM-DD-HH.md` consolidating the above.
 
-Optionally update `intel/catalog/investigation-catalog.md` if a new ACP audit/job ran.
+(The **virtuals-** sweep type and ACP job/audit tracking were sunset 2026-07-31 — VAPE
+refocused on Base/all-EVM/Ethereum with x402 as its sole commerce rail. Don't produce a
+`virtuals-*.md` report or check for ACP activity in this runbook anymore.)
 
 ## Data sources (free, no LLM): 
 - DeFiLlama: api.llama.fi/protocols , /v2/chains

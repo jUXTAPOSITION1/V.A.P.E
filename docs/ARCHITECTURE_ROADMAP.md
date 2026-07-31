@@ -1,13 +1,20 @@
 # V.A.P.E. — Architecture Roadmap: More Agents, More LLMs
 
-Strategy for deepening ACP integration and expanding the agent/LLM framework —
-while holding the line: **maximum capability, lowest possible compute, real data only.**
+> **Direction change (2026-07-31):** Section 1 below ("Deeper ACP Integration") describes
+> a strategy VAPE is no longer pursuing — ACP was sunset as VAPE refocused on
+> Base/all-EVM/Ethereum with **x402 as its sole commerce rail**. It's left in place as a
+> historical record of what shipped and why, not a live roadmap; do not build against it.
+> The rest of this document (agent/LLM framework expansion) is unaffected and still current.
+
+Strategy for expanding the agent/LLM framework — while holding the line: **maximum
+capability, lowest possible compute, real data only.** (Section 1's ACP-deepening
+strategy is superseded — see notice above.)
 
 > Status: [OK] live · [WIP] in progress · [TBD] proposed
 
 ---
 
-## 1. Deeper ACP Integration (GitHub + VAPE → revenue)
+## 1. Deeper ACP Integration (GitHub + VAPE → revenue) — SUPERSEDED, see notice at top
 
 ### The bridge ([OK] shipped)
 `agents/acp_fulfill.py` maps **ACP offerings → verified real-data tools**, producing a

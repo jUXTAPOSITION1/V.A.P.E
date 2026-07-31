@@ -1,23 +1,28 @@
-name: VAPE Intel Sweeps (security/base/sentiment/virtuals/macro/patch-check/bounty-intel)
+name: VAPE Intel Sweeps (security/base/sentiment/macro/patch-check/bounty-intel)
 
-# Revives the 5 core intel sweeps (see intel/reports/{security,base,sentiment,
-# virtuals,macro}-*.md) plus two follow-up checks (mainnet-patch-check,
+# Revives the core intel sweeps (see intel/reports/{security,base,sentiment,
+# macro}-*.md) plus two follow-up checks (mainnet-patch-check,
 # bug-bounty-intel), all of which ran as ad hoc Claude Code sessions — never
 # committed code — for weeks, then silently stopped 2026-07-01 with zero
 # trace in git history. See agents/intel_common.py's module docstring for
 # the full story and the design rule every sweep here follows.
 #
-# One workflow, one job, dispatched by github.event.schedule — 7 near-
-# identical workflow files would just be copy-pasted boilerplate; the cron
-# string itself tells this job which sweep fired, matching cadences roughly
-# derived from each category's historical density (security/base/virtuals
-# ran densest; sentiment/macro were always sparser; the two follow-up
-# checks are weekly since their real-world triggers are rare events).
+# virtuals_sweep -- SUNSET (2026-07-31): VAPE is refocusing on Base/all-EVM/
+# Ethereum + x402, not the Virtuals ecosystem specifically. The cron trigger
+# and workflow_dispatch option below were removed so this sweep no longer
+# runs automatically or on demand; agents/virtuals_sweep.py itself is left
+# in place (not deleted) in case this is revisited later.
+#
+# One workflow, one job, dispatched by github.event.schedule — one-workflow-
+# per-sweep would just be copy-pasted boilerplate; the cron string itself
+# tells this job which sweep fired, matching cadences roughly derived from
+# each category's historical density (security/base ran densest; sentiment/
+# macro were always sparser; the two follow-up checks are weekly since their
+# real-world triggers are rare events).
 on:
   schedule:
     - cron: '0 0,6,12,18 * * *'   # security_sweep — 4x/day
     - cron: '0 3,9,15,21 * * *'   # base_sweep — 4x/day, offset from security
-    - cron: '0 1,7,13,19 * * *'   # virtuals_sweep — 4x/day, offset from both
     - cron: '0 8,20 * * *'        # sentiment_sweep — 2x/day (quality over frequency)
     - cron: '0 14 * * *'          # macro_sweep — 1x/day (macro moves slowest)
     - cron: '0 10 * * 1'          # mainnet_patch_check — weekly, Monday
@@ -30,7 +35,6 @@ on:
         options:
           - security_sweep
           - base_sweep
-          - virtuals_sweep
           - sentiment_sweep
           - macro_sweep
           - mainnet_patch_check
@@ -107,7 +111,6 @@ jobs:
           case "$EVENT_SCHEDULE" in
             '0 0,6,12,18 * * *') echo "script=security_sweep" >> "$GITHUB_OUTPUT" ;;
             '0 3,9,15,21 * * *') echo "script=base_sweep" >> "$GITHUB_OUTPUT" ;;
-            '0 1,7,13,19 * * *') echo "script=virtuals_sweep" >> "$GITHUB_OUTPUT" ;;
             '0 8,20 * * *') echo "script=sentiment_sweep" >> "$GITHUB_OUTPUT" ;;
             '0 14 * * *') echo "script=macro_sweep" >> "$GITHUB_OUTPUT" ;;
             '0 10 * * 1') echo "script=mainnet_patch_check" >> "$GITHUB_OUTPUT" ;;

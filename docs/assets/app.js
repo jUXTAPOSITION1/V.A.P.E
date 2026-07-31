@@ -112,7 +112,11 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.virtuals(), this.predictionMarkets(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
+        // this.virtuals() sunset 2026-07-31 (VAPE is refocusing on Base/all-EVM/
+        // Ethereum + x402, not the Virtuals ecosystem specifically) -- the
+        // function and its #virtuals-stats/#virtuals-sparkline render targets
+        // are left in place, just no longer invoked here.
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },

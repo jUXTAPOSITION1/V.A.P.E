@@ -1,5 +1,12 @@
 # VAPE ACP Job Monitor
 
+> **SUNSET (2026-07-31):** These daemons are no longer running. VAPE refocused on
+> Base/all-EVM/Ethereum with x402 as its sole commerce rail rather than the Virtuals
+> ecosystem/ACP specifically. Nothing here was deleted — if the host this ran on still has
+> a crontab entry for `listener_guard.sh`/`keepalive.sh`/`triage_and_escalate.sh`, that
+> entry should be removed there (this repo has no way to reach that host's crontab
+> directly). This document describes how the integration worked, not current behavior.
+
 Catches incoming ACP jobs, negotiates (set-budget), funds/completes, and submits real
 deliverables — at near-zero compute. Mirrors the bounty-radar "Option A" cost design.
 

@@ -118,6 +118,10 @@ const Hire = {
         return () => mode;
     },
 
+    // ACP engagement sunset from the site 2026-07-31 (x402 is now VAPE's sole
+    // commerce rail) -- every "Engage via ACP" call site was removed from
+    // index.html, so this is no longer reachable from the UI. Left in place
+    // (not deleted) rather than stripped from the repo.
     openAcp(offeringName) {
         window.open(ACP_AGENT_URL, '_blank', 'noopener');
     },
@@ -363,7 +367,7 @@ const Hire = {
                 // (real but untrusted — VAPE's own dispatch-failure text, not
                 // attacker-controlled, but still external to this file) needs no
                 // escaping here; escaping it would double-escape and corrupt display.
-                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}) — your payment settled but the audit never started. Contact VAPE via ACP to resolve.`, 'text-rose-400');
+                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}) — your payment settled but the audit never started. Contact VAPE via X (@based_vape) to resolve.`, 'text-rose-400');
                 return;
             }
             const el = document.getElementById('hire-poll-elapsed');

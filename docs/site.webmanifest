@@ -1,7 +1,7 @@
 {
   "name": "The V.A.P.E Report — On-Chain Intelligence System",
   "short_name": "VAPE Report",
-  "description": "Autonomous on-chain intelligence for Base & Virtuals — real-time chain telemetry, contract security analysis, and a live bounty command center.",
+  "description": "Autonomous on-chain intelligence for Base & Ethereum/EVM — real-time chain telemetry, contract security analysis, and a live bounty command center.",
   "start_url": "./",
   "scope": "./",
   "display": "browser",

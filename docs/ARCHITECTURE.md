@@ -1,5 +1,14 @@
 # V.A.P.E. Architecture
 
+> **Direction change (2026-07-31):** VAPE has sunset its ACP (Agent Commerce Protocol)
+> commerce rail and its dedicated Virtuals Protocol tracking/reporting sweep, refocusing on
+> Base/all-EVM/Ethereum with **x402 as its sole commerce rail**. Every "ACP MONITOR" /
+> "Virtuals ACP" box in the diagrams below, and every `[OK]`/"live" status attached to ACP
+> in this document, describes that now-inactive prior state — none of it was deleted from
+> the repo, it's just no longer running or advertised. Read this document as architecture
+> history for that piece; everything else (the Python engine, SKILLFORGE, the x402 rail,
+> MCP server) is current and unaffected.
+
 > Status legend: [OK] implemented & running · [WIP] partial/scaffolded · [TBD] planned
 
 V.A.P.E. is an autonomous on-chain security & intelligence operation. It runs as
@@ -50,16 +59,15 @@ tools (investigation, wallet forensics, DefiLlama intel, bounty radar, Memory) o
 the standard Model Context Protocol so any MCP host (Claude, Cursor, a custom agent)
 can call them directly; see component 6 below.
 
-### How VAPE gets paid — two independent, real-money rails
+### How VAPE gets paid — x402, its sole commerce rail
 
-31 live offerings total (`data/reputation.json`'s `capabilities.offerings_live`): 27 are
-x402-payable (instant, no account needed), 4 need a real ACP job (manual/
-SKILLFORGE-tool-tier work no synchronous HTTP route can do in a few seconds). Each
-rail settles into its own wallet — x402 revenue into `PAY_TO_ADDRESS`
+31 live offerings total (`data/reputation.json`'s `capabilities.offerings_live`), all
+x402-payable (instant, no account needed) — settling into `PAY_TO_ADDRESS`
 (`worker/wrangler.toml`, the same wallet holding VAPE's self-registered ERC-8004
-identity NFT), ACP escrow into VAPE's separate ACP wallet (`docs/ACP_PROTOCOL.md`)
-— neither is a demo; the x402 side runs on **Base mainnet** via Coinbase Developer
-Platform's hosted facilitator, real USDC, real settlement transactions.
+identity NFT) on **Base mainnet** via Coinbase Developer Platform's hosted facilitator,
+real USDC, real settlement transactions; not a demo. (The ACP rail described in the
+diagram below and `docs/ACP_PROTOCOL.md` was sunset 2026-07-31 — see the notice at the
+top of this document.)
 
 ```
 ┌─────────────────────────────┐        ┌──────────────────────────────────────┐
@@ -135,14 +143,14 @@ component's state changes.
 | `agents/security_sweep.py` | [OK] | Incident-forensics pipeline (any chain `EVM_CHAINS` supports, high-value leads act regardless of age) |
 | `agents/engagements.py` | [OK] | Real per-lead engagement status (never a fabricated outreach/signup) |
 | `agents/defillama.py` | [OK] | Full DefiLlama API surface: TVL, yields, fees, stablecoins, bridges, token intel |
-| `agents/codex_data.py` / `worker/src/lib/codex.ts` | [OK] | Codex.io GraphQL client (Python + TS port) — trending tokens, holders, wallet PnL. Live on-site via the worker's free `/virtuals-snapshot` + `/trending-base` routes (Virtuals Protocol panel + Trending on Base list); wallet PnL still needs the paid deep-dive offering wired. Launchpad tracking is subscription-only on Codex's side, not yet wired |
+| `agents/codex_data.py` / `worker/src/lib/codex.ts` | [OK] | Codex.io GraphQL client (Python + TS port) — trending tokens, holders, wallet PnL. Live on-site via the worker's free `/trending-base` route (Trending on Base list); the `/virtuals-snapshot` route + its site panel are sunset (2026-07-31), code left in place but no longer called. Wallet PnL still needs the paid deep-dive offering wired. Launchpad tracking is subscription-only on Codex's side, not yet wired |
 | `agents/data_agent.py` | [OK] | DATA AGENT — VAPE's own paying customer, real x402 hires per investigation |
 | LLM tier | [OK] | Frontier model + multi-provider free fallback chain, see `agents/llm.py` |
 | `mcp_servers/vape_mcp.py` | [OK] | Standard MCP server, 17 real tools — see component 6 |
 | `skillforge/tools/static/slither.sh` | [OK] | Static analysis wrapper |
-| `agents/acp_fulfill.py` | [OK] | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate |
-| `worker/` (x402) | [OK] | 27 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
-| Live offerings | [OK] | 31 total: 27 x402-payable, 4 ACP-only — see component 4 |
+| `agents/acp_fulfill.py` | sunset | ACP job fulfillment bridge — real deliverables from token_scan/data_fetchers/investigate; no longer invoked automatically since the ACP rail was sunset 2026-07-31 |
+| `worker/` (x402) | [OK] | 31 real, mainnet-settled routes (Cloudflare + Hono) — see component 4 |
+| Live offerings | [OK] | 31 total, all x402-payable — see component 4 |
 | `skillforge/harvest.py` | [OK] | Hourly CVE/tool harvest |
 | `skillforge/toolcheck.py` | [OK] | 6x/day tool smoke-test |
 | `skillforge/synthesize.py` | [OK] | Daily skill distillation → PR |
@@ -395,22 +403,21 @@ The SQLite memory projection (`skillforge/memory/index_db.py`, `data/memory.db`,
 and rebuildable) is the read-side complement: append-only JSONL stays the source of truth,
 the DB is a derived queryable index so agents can ask real questions instead of scanning flat files.
 
-### 4. Commerce — ACP job monitor + x402 payment worker [OK] (autonomous revenue)
-31 live offerings across two independent, real-money rails — see the payment-rails
-diagram above for the full flow. Each settles into its own wallet (x402 revenue
-into `PAY_TO_ADDRESS`, ACP escrow into VAPE's separate ACP wallet); neither is a
-demo.
+### 4. Commerce — x402 payment worker [OK] (autonomous revenue); ACP job monitor SUNSET
+31 live offerings, all x402-payable — see the payment-rails diagram above for the
+flow (the ACP half of that diagram is historical, not live). Revenue settles into
+`PAY_TO_ADDRESS`.
 
-**ACP job monitor** (`scripts/acp-*`) catches incoming ACP jobs and negotiates →
-funds → completes at near-zero compute. 3 layers: persistent `acp events listen`
-daemon (zero LLM) → drain+triage loop (zero LLM) → reasoning handler that fires only
-on a real funded job. Escrow-backed on Base, `docs/ACP_PROTOCOL.md` is the full
-reference. *(Operational layer; runs on the host alongside the repo.)* Only 4
-offerings remain ACP-only (`wallet_recon`, `whale_watch`, `forensics_deep`,
-`partner_referral`) — manual or SKILLFORGE-tool-tier work no synchronous HTTP route
-can complete in seconds. `tx_decode`, `community_intel_broadcast`,
-`bulk_safety_bundle`, and `deep_contract_audit` used to be ACP-only too, until the
-x402/ACP parity work gave each a real x402 route (see component 4's x402 list below).
+**ACP job monitor** (`scripts/acp-*`) used to catch incoming ACP jobs and negotiate →
+fund → complete at near-zero compute — 3 layers: persistent `acp events listen`
+daemon (zero LLM) → drain+triage loop (zero LLM) → reasoning handler that fired only
+on a real funded job, escrow-backed on Base (`docs/ACP_PROTOCOL.md` is the full
+reference). **Sunset 2026-07-31**: the daemons are no longer running; the code is
+left in place, not deleted. Every offering that once required ACP (`wallet_recon`,
+`whale_watch`, `forensics_deep`, `partner_referral`) now needs a manual/SKILLFORGE-
+tool-tier follow-up instead. `tx_decode`, `community_intel_broadcast`,
+`bulk_safety_bundle`, and `deep_contract_audit` already had a real x402 route from
+the earlier x402/ACP parity work, so those are unaffected.
 
 **x402 payment worker** (`worker/`, Cloudflare Workers + Hono, TypeScript) gates 27
 routes with `@x402/hono` middleware against **Base mainnet** — real EIP-3009 signed
@@ -481,10 +488,10 @@ Gradio app (`app.py`, `requirements.txt: gradio`) for the HF Space; `docs/index.
 VAPE's public site — narrative case-file pages over the same real data (investigations,
 reputation, TVL, Intel Explorer), wallet connect + a wallet profile — portfolio, 24h P&L,
 an Alchemy+CoinGecko-backed cost-basis estimate, and case history
-(`docs/assets/wallet.js`/`profile.js`) — and hiring surfaces for both payment rails: an
-x402 pay-per-call panel backed by `worker/` (Cloudflare Worker/Deno Deploy, see
-`docs/DEPLOYMENT.md` section E) and an ACP panel surfacing the real job lifecycle in
-`docs/ACP_PROTOCOL.md`.
+(`docs/assets/wallet.js`/`profile.js`) — and a hiring surface for VAPE's sole payment
+rail: an x402 pay-per-call panel backed by `worker/` (Cloudflare Worker/Deno Deploy, see
+`docs/DEPLOYMENT.md` section E). The site's ACP engagement panel was removed 2026-07-31
+alongside the ACP rail sunset (see the notice at the top of this document).
 Still zero-build — `docs/assets/*.js` are plain files, no bundler.
 
 ### 6. MCP Server — `mcp_servers/vape_mcp.py` [OK]
