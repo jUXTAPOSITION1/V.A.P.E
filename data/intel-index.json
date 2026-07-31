@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T15:24:38Z",
+  "generated": "2026-07-31T15:30:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 465,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 586,
+    "investigations": 587,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-151545-0xba0Dda87.md",
-      "title": "Investigation \u2014 OX",
-      "symbol": "OX",
-      "name": "OX Coin",
-      "date": "2026-07-31T15:15:45Z",
-      "target": "0xba0Dda8762C24dA9487f5FA026a9B64b695A07Ea",
+      "file": "investigation-20260731-153056-0x63dc3cA0.md",
+      "title": "Investigation \u2014 ZUM",
+      "symbol": "ZUM",
+      "name": "Zum Token",
+      "date": "2026-07-31T15:30:56Z",
+      "target": "0x63dc3cA01ff09E714C8108Ffd6F8A3E0b8CD13e4",
       "chain": "43114 (Avalanche)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0x4f9f7f28be01de1ffb24c00b00744bb3cb49b9ce) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $66 (rug/illiquid); [-10] Low liquidity $66; [-15] Contract source UNVERIFIED. Positi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,978 (rug/illiquid); [-10] Low liquidity $1,978; [-15] Contract source UNVERIFIED. Positive evidence: 740 holders \u2014 reasonably distributed; Trading 550+ days without a known incident in th",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-153056-0x63dc3cA0.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-153056-0x63dc3cA0.md",
+      "title": "Investigation \u2014 ZUM",
+      "symbol": "ZUM",
+      "name": "Zum Token",
+      "date": "2026-07-31T15:30:56Z",
+      "target": "0x63dc3cA01ff09E714C8108Ffd6F8A3E0b8CD13e4",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,978 (rug/illiquid); [-10] Low liquidity $1,978; [-15] Contract source UNVERIFIED. Positive evidence: 740 holders \u2014 reasonably distributed; Trading 550+ days without a known incident in th",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-153056-0x63dc3cA0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-151545-0xba0Dda87.md",
@@ -594,20 +608,6 @@
       "score": "45",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Very low liquidity $634 (rug/illiquid); [-10] Low liquidity $634; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 5927 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory tem",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-152230-0x37B60851.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-150720-0xB3fe5374.md",
-      "title": "Investigation \u2014 LINK",
-      "symbol": "LINK",
-      "name": "ChainLink Token",
-      "date": "2026-07-30T15:07:20Z",
-      "target": "0xB3fe5374F67D7a22886A0eE082b2E2f9d2651651",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liqu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-150720-0xB3fe5374.md"
     }
   ],
   "reports": [
