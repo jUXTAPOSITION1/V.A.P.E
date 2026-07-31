@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-07-31T22:48:24Z — 112 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-07-31T23:18:45Z — 113 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ElonCoin | BNB Chain | `0xECe99d73444c99008f87d0EbE6211CF8EEF27777` | 57/100 | 1 | 2026-07-31T23:18:45Z |
 | AIPF | Polygon | `0x15e096f13f04A866C933071C85231ca590b41343` | 62/100 | 1 | 2026-07-31T17:46:22Z |
 | AKE | BNB Chain | `0x28bBbE607DBABC83Acde091f25eEC3BEA922cB93` | 55/100 | 1 | 2026-07-31T12:27:11Z |
 | MarsCoin | BNB Chain | `0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777` | 62/100 | 1 | 2026-07-31T01:56:18Z |

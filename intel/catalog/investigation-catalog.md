@@ -1009,3 +1009,5 @@
 | 2026-07-31 | auto | 0xAcfe7750B14Ec7563A4d4D64EbC74701B8871742 (XFWA) | deep_investigation | REJECT (5/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-31 | auto | 0x627D4c16c2AF9e8eC9a275E683e3Ddcc1a3103e1 (SPCXB) | deep_investigation | REJECT (0/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
+
+| 2026-07-31 | auto | 0xECe99d73444c99008f87d0EbE6211CF8EEF27777 (ElonCoin) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |

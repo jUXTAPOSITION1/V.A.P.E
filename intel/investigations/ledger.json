@@ -5934,6 +5934,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xece99d73444c99008f87d0ebe6211cf8eef27777": {
+    "address": "0xECe99d73444c99008f87d0EbE6211CF8EEF27777",
+    "chain": "56",
+    "creator_address": "0x94ef678304a19700b51d59dff50e99ab173beff0",
+    "first_investigated": "2026-07-31T23:18:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-231845-0xECe99d73.md",
+        "score": 57,
+        "ts": "2026-07-31T23:18:45Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-31T23:18:45Z",
+    "last_score": 57,
+    "last_verdict": "CAUTION",
+    "symbol": "ElonCoin",
+    "times_investigated": 1
+  },
   "56:0xed2ee58908ea569a994a1ac77da4a947807a4444": {
     "address": "0xEd2EE58908eA569A994a1ac77da4A947807A4444",
     "chain": "56",
