@@ -4,4 +4,4 @@ requests>=2.34.2
 groq>=1.6.0
 eth-account>=0.13.7
 x402>=2.16.0
-Pillow>=10.1.0
+Pillow>=12.3.0
