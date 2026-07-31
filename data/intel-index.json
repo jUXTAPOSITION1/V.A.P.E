@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T20:17:52Z",
+  "generated": "2026-07-31T20:33:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 133,
-    "investigations": 595,
+    "investigations": 596,
     "news": 31,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-200241-0x20b688F4.md",
-      "title": "Investigation \u2014 TRUMP2028",
-      "symbol": "TRUMP2028",
-      "name": "SAVE AMERICA",
-      "date": "2026-07-31T20:02:41Z",
-      "target": "0x20b688F40b8E6a55e76131D5E3b84AFC89a30c93",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260731-203326-0xbe9D1568.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-07-31T20:33:26Z",
+      "target": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "10",
-      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,897 (rug/illiquid); [-10] Low liquidity $1,897; [-10] Pair 5.0 days old \u2014 under two weeks, no track record yet; [-10] N",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-200241-0x20b688F4.md"
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-203326-0xbe9D1568.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-203326-0xbe9D1568.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-07-31T20:33:26Z",
+      "target": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-203326-0xbe9D1568.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-200241-0x20b688F4.md",
@@ -594,20 +608,6 @@
       "score": "47",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 91% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 20.5 days old \u2014 under a month, still unproven; [-10] No known third-party ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-200920-0x205812Cd.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-195332-0x5cBC670a.md",
-      "title": "Investigation \u2014 VIBE",
-      "symbol": "VIBE",
-      "name": "Vibe Trade",
-      "date": "2026-07-30T19:53:32Z",
-      "target": "0x5cBC670ae9a18D9B20144bEC724b34daddf8b365",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-195332-0x5cBC670a.md"
     }
   ],
   "reports": [

@@ -94,3 +94,4 @@
 {"ts": "2026-07-31T15:46:03.378796Z", "address": "0xB8d7710f7d8349A506b75dD184F05777c82dAd0C", "chain": "43114", "symbol": "ARENA", "name": "ARENA", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-31T17:01:15.445238Z", "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "chain": "1", "symbol": "V4", "name": "V4", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-31T18:31:54.383720Z", "address": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "chain": "8453", "symbol": "DUAL", "name": "DUAL", "source": "base", "offering": "token_safety_check"}
+{"ts": "2026-07-31T20:33:50.330666Z", "address": "0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5", "chain": "43114", "symbol": "NOCHILL", "name": "NOCHILL", "source": "evm", "offering": "token_chart"}
