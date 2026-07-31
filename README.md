@@ -4,7 +4,7 @@
 # V.A.P.E.
 ### Virtual Ape Private Eye
 
-**An autonomous on-chain intelligence system for Base and the Virtuals ecosystem** — live
+**An autonomous on-chain intelligence system for Base and Ethereum/EVM** — live
 investigations, market intelligence, security auditing, and 31 priced offerings settled
 on-chain.
 
@@ -17,8 +17,8 @@ on-chain.
 <br/>
 
 ![Base](https://img.shields.io/badge/Chain-Base-0052FF?style=flat-square&logo=coinbase&logoColor=white)
+![Ethereum](https://img.shields.io/badge/Chain-Ethereum%2FEVM-627EEA?style=flat-square&logo=ethereum&logoColor=white)
 ![x402](https://img.shields.io/badge/Payments-x402-0EA5E9?style=flat-square)
-![ACP](https://img.shields.io/badge/Protocol-Virtuals_ACP-8B5CF6?style=flat-square)
 ![ERC-8004](https://img.shields.io/badge/Identity-ERC--8004_%2359900-10B981?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Compute](https://img.shields.io/badge/Local_Compute-%240-10B981?style=flat-square)
@@ -29,7 +29,6 @@ on-chain.
 [Architecture](docs/ARCHITECTURE.md) ·
 [Quick Start](#quick-start) ·
 [x402 Worker](worker/README.md) ·
-[ACP Protocol](docs/ACP_PROTOCOL.md) ·
 [Deployment](docs/DEPLOYMENT.md) ·
 [@based_vape](https://x.com/based_vape)
 
@@ -40,22 +39,23 @@ on-chain.
 ## Overview
 
 V.A.P.E. is a fully autonomous AI detective for the on-chain ecosystem. It runs continuously
-on GitHub Actions at zero local compute cost, watching Base and the Virtuals economy, and
-publishes exactly what it finds — a token security scan, a market anomaly, a completed
-investigation — with the evidence attached, never just a conclusion.
+on GitHub Actions at zero local compute cost, watching Base, Ethereum, and the wider EVM
+ecosystem, and publishes exactly what it finds — a token security scan, a market anomaly, a
+completed investigation — with the evidence attached, never just a conclusion.
 
 It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #59900**
 (wallet `0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15`, basename `vapex402.base.eth`) — a
 passport VAPE registered itself, directly against Base's canonical `IdentityRegistry`
 contract, with no third-party platform brokering it. Every paid engagement settles in USDC
-on Base. **x402 is VAPE's primary commerce rail** — 27 of its 31 offerings are hireable
+on Base. **x402 is VAPE's sole commerce rail** — all 31 offerings are hireable
 instantly with a wallet-signed HTTP payment, no account or escrow step, settled directly
-against a hosted x402 facilitator on Base mainnet. The remaining offerings (deeper,
-async work — full contract audits, wallet forensics, whale-wallet tracing) run through an
-escrow-backed engagement via Virtuals Protocol's Agent Commerce Protocol (ACP) instead. See
-[worker/README.md](worker/README.md) for the x402 side and
-[docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) for ACP, or just use the site's Engagement
-Options section.
+against a hosted x402 facilitator on Base mainnet; deeper, async work (full contract audits,
+wallet forensics, whale-wallet tracing) dispatches a GitHub Actions job and delivers the
+report inline once it completes. See [worker/README.md](worker/README.md) for the x402
+side, or just use the site's Engagement Options section. (VAPE previously also offered an
+escrow-backed engagement via Virtuals Protocol's Agent Commerce Protocol — ACP — sunset
+2026-07-31 as VAPE refocused on Base/Ethereum/EVM + x402; see
+[docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) for that prior integration.)
 
 **X:** [@based_vape](https://x.com/based_vape) · **Live dashboard:** [juxtaposition1.github.io/V.A.P.E](https://juxtaposition1.github.io/V.A.P.E/)
 
@@ -77,10 +77,9 @@ Options section.
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
 - **Commerce** — 31 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 15 market-data tools, and more). 27 are
-  x402-payable — hireable instantly with a signed wallet payment, no account needed; the
-  rest are ACP-escrow engagements for deeper async work. Results render inline on-site or
-  download as a PDF.
+  market intelligence, full contract audits, 15 market-data tools, and more), all
+  x402-payable — hireable instantly with a signed wallet payment, no account needed.
+  Results render inline on-site or download as a PDF.
 
 ---
 
@@ -193,7 +192,7 @@ V.A.P.E/
 ├── docs/                Site (docs/index.html) + architecture/deployment/protocol docs
 ├── worker/              Cloudflare/Deno Workers backend — x402 payments, portfolio data
 ├── mcp_servers/         Standard MCP server exposing VAPE's tools
-├── scripts/acp-monitor/ ACP job listener/fulfillment daemons
+├── scripts/acp-monitor/ ACP job listener/fulfillment daemons (sunset 2026-07-31, kept for reference)
 └── reports/             Timestamped bounty-cycle and self-review output
 ```
 
@@ -203,18 +202,21 @@ V.A.P.E/
 
 **Live and running:** Featured Investigations every 30 minutes, hourly bounty/market
 sweeps, the SKILLFORGE tool ecosystem (16 tools registered, 16 verified), x402 job
-fulfillment on Base mainnet across 27 of VAPE's 31 live offerings (21 auto-fulfilled with
-zero manual work end-to-end across both x402 and ACP), ACP escrow engagements for the
-remaining deeper offerings, wallet-connect portfolio, a live searchable job ledger, the
+fulfillment on Base mainnet across all 31 of VAPE's live offerings (21 auto-fulfilled with
+zero manual work end-to-end), wallet-connect portfolio, a live searchable job ledger, the
 Central Memory system, the standard MCP server, and the Builder self-improvement pipeline.
 
-**In progress:** real auto-handlers for the remaining 4 ACP-only offerings
-(`forensics_deep`/`wallet_recon`/`whale_watch`/`partner_referral` — the underlying tools
-already work, nothing calls them automatically yet), a dashboard reputation loop, richer
-social-sentiment intel beyond the current keyless aggregate. `app.py` is an unconnected
-placeholder stub (it doesn't call any real VAPE agent code) that exists only to satisfy
-this repo's synced Hugging Face Space's Gradio entry point — the actual product is the
-live GitHub Pages site above.
+**Sunset (2026-07-31):** VAPE's ACP (Agent Commerce Protocol) escrow-engagement rail and
+its dedicated Virtuals Protocol tracking/reporting sweep — VAPE is refocusing on
+Base/all-EVM/Ethereum + x402 as its sole commerce rail rather than the Virtuals ecosystem
+specifically. The underlying code (`scripts/acp-monitor/`, `agents/acp_fulfill.py`,
+`agents/virtuals_sweep.py`) is left in the repo, just no longer scheduled/advertised; see
+[docs/ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) for the prior integration.
+
+**In progress:** a dashboard reputation loop, richer social-sentiment intel beyond the
+current keyless aggregate. `app.py` is an unconnected placeholder stub (it doesn't call any
+real VAPE agent code) that exists only to satisfy this repo's synced Hugging Face Space's
+Gradio entry point — the actual product is the live GitHub Pages site above.
 
 ---
 
@@ -224,7 +226,7 @@ live GitHub Pages site above.
 |---|---|
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design, component status, data flow |
 | [ARCHITECTURE_ROADMAP.md](docs/ARCHITECTURE_ROADMAP.md) | Revenue strategy, offering roadmap |
-| [ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) | Identity, wallet, offerings, job lifecycle |
+| [ACP_PROTOCOL.md](docs/ACP_PROTOCOL.md) | Prior ACP integration (sunset 2026-07-31) — identity, wallet, offerings, job lifecycle |
 | [DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Actions + repository secrets setup |
 | [MEMORY.md](docs/MEMORY.md) | Central Memory usage guide |
 | [BUILDER.md](docs/BUILDER.md) | Builder agent reference |

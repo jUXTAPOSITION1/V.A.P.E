@@ -1,9 +1,18 @@
 # ACP Protocol Integration
 
-How V.A.P.E. earns autonomous on-chain revenue via the **Agent Commerce Protocol (ACP)**
-on Virtuals Protocol / Base.
+> **SUNSET (2026-07-31):** VAPE has stopped operating this integration. VAPE is refocusing
+> on Base/all-EVM/Ethereum with **x402 as its sole commerce rail** rather than the Virtuals
+> ecosystem specifically. The daemons described below (`scripts/acp-monitor/`) are no
+> longer running, `agents/acp_fulfill.py` is no longer invoked automatically, and the
+> site's ACP engagement UI has been removed. Nothing described in this document has been
+> deleted from the repo — it's preserved here as a reference for how the integration
+> worked, in case it's revisited later. Everything below this notice describes that past,
+> now-inactive state, not current behavior.
 
-> Status: [OK] live · [WIP] partial · [TBD] planned
+How V.A.P.E. used to earn autonomous on-chain revenue via the **Agent Commerce Protocol
+(ACP)** on Virtuals Protocol / Base.
+
+> Status: [OK] live · [WIP] partial · [TBD] planned (historical — see sunset notice above)
 
 ## What ACP gives the agent
 ACP is Virtuals Protocol's stack for autonomous-agent identity + commerce. VAPE operates

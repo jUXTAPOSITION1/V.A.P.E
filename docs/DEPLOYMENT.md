@@ -1,14 +1,16 @@
 # Deployment Guide
 
 V.A.P.E. runs on free tiers. There are several independently deployable surfaces —
-**(A) the autonomous CI engine**, **(C) the UI**, **(D) the ACP job monitor**,
+**(A) the autonomous CI engine**, **(C) the UI**,
 **(E) the x402 payment worker** — plus **(B) local Python runs** for one-off,
-non-deployed invocations.
+non-deployed invocations. Section **(D) the ACP job monitor** below describes a rail
+that was sunset 2026-07-31 (x402 is now VAPE's sole commerce rail); kept for reference,
+not something to newly deploy.
 
 ## Prerequisites
 - GitHub account (free Actions minutes; public repo = unlimited)
 - Groq API key (free) — `GROQ_API_KEY`
-- Optional: Gemini key, Etherscan V2 key, Base RPC URL, Virtuals/ACP credentials
+- Optional: Gemini key, Etherscan V2 key, Base RPC URL
 - Python 3.11+ (for local Python runs)
 - Node.js 18+ (only for the `worker/` Cloudflare Worker, section E)
 
@@ -88,13 +90,16 @@ README/Space config.
 ### C2. GitHub Pages (public site)
 `docs/index.html` is VAPE's public site — narrative "case file" pages, live Base/market
 data, wallet connect, a wallet profile (portfolio, P&L, cost-basis estimate, case
-history), and the hiring panels (x402 + ACP).
+history), and the hiring panel (x402).
 Enable Pages: `Settings → Pages → Source: Deploy from branch → main /docs`.
 Zero build step — `docs/assets/*.js` are plain files, no bundler required.
 
 ---
 
-## D. ACP job monitor (autonomous revenue)
+## D. ACP job monitor (autonomous revenue) — SUNSET 2026-07-31, kept for reference
+Not part of a current deployment — VAPE's commerce is x402-only now. The steps below
+describe how the monitor used to be brought up when this rail was live.
+
 The provider monitor (catch → negotiate → fund → complete) runs on a host with the ACP
 CLI configured. One-time setup:
 ```bash
@@ -108,9 +113,8 @@ See `docs/ACP_PROTOCOL.md` for the full lifecycle.
 ---
 
 ## E. x402 payment worker (pay-per-call hiring)
-`worker/` is a Cloudflare Worker gating 27 of VAPE's 31 offerings behind Coinbase's x402
-HTTP payment protocol (the other 4 need the SKILLFORGE tool tier — hire those via a real
-ACP job instead, see section D). Runs on Base mainnet against Coinbase Developer
+`worker/` is a Cloudflare Worker gating all 31 of VAPE's offerings behind Coinbase's x402
+HTTP payment protocol. Runs on Base mainnet against Coinbase Developer
 Platform's hosted facilitator (real funds) — the full pay → verify → settle loop was
 proven first on Base Sepolia + the free public facilitator before that switch.
 It also hosts five free, unpaid endpoints (`/portfolio`, `/nfts`, `/network-status`,
@@ -173,7 +177,6 @@ account-level subdomain bug recurs — switching is just updating `WORKER_BASE` 
 - [ ] Manual workflow run produced a new `reports/` file
 - [ ] SKILLFORGE toolcheck shows tools verified (Actions log)
 - [ ] (Python) `python -m agents.run` connects to Base RPC and logs a cycle
-- [ ] (ACP) `acp agent whoami` shows agent + signer; offerings listed
 - [ ] (Pages) status dashboard reachable
 - [ ] No secrets in git history (`git log -p -- .env` should be empty/placeholder)
 

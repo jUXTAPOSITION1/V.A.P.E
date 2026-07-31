@@ -1,18 +1,20 @@
 /**
- * VAPE x402 payment worker — pay-per-call access to 26 of the 30 ACP
- * offerings (see docs/ACP_PROTOCOL.md / data/reputation.json for the full
- * catalog; the other 4 — partner_referral, wallet_recon, whale_watch,
- * forensics_deep — need the SKILLFORGE tool tier and are hired via a real
- * ACP job instead). Also hosts a few free, unpaid Alchemy-backed
+ * VAPE x402 payment worker — pay-per-call access to all 30 of VAPE's
+ * offerings (see data/reputation.json for the full catalog; the ACP-only
+ * fulfillment path for partner_referral/wallet_recon/whale_watch/
+ * forensics_deep was sunset 2026-07-31, see docs/ACP_PROTOCOL.md's sunset
+ * notice — those now need a manual/SKILLFORGE-tool-tier follow-up instead
+ * of a synchronous route here). Also hosts a few free, unpaid Alchemy-backed
  * reliability endpoints (/portfolio, /nfts, /network-status, /prices,
  * /cost-basis) that the site's wallet profile and metrics strip prefer over
  * direct public-RPC calls when this worker is deployed and configured, plus
- * three free Codex.io-backed routes (/virtuals-snapshot, /trending-base,
- * /new-launches) for the Live Intelligence Feed's Virtuals Protocol panel,
- * trending-tokens list, and newest-launches feed — Codex needs a bearer key
- * that can't ship to the browser, so these can't be a direct client-side
- * fetch the way DefiLlama/CoinGecko are — and one free, fully keyless
- * Polymarket/Kalshi-backed route (/prediction-markets).
+ * two free Codex.io-backed routes (/trending-base, /new-launches) for the
+ * Live Intelligence Feed's trending-tokens list and newest-launches feed
+ * (a third, /virtuals-snapshot, is sunset alongside the site's Virtuals
+ * Protocol panel — left running here, just no longer called) — Codex needs
+ * a bearer key that can't ship to the browser, so these can't be a direct
+ * client-side fetch the way DefiLlama/CoinGecko are — and one free, fully
+ * keyless Polymarket/Kalshi-backed route (/prediction-markets).
  *
  * Runs on Base mainnet, real funds, against Coinbase Developer Platform's
  * hosted x402 facilitator — see wrangler.toml for the network/facilitator
@@ -1287,7 +1289,7 @@ async function dispatchAddressAuditJob(
     logDraft(false, "audit dispatch not configured (GH_DISPATCH_TOKEN unset)");
     return c.json({
       offering: offeringName, status: "error",
-      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
+      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via X (@based_vape) to resolve",
     }, 503);
   }
 
@@ -1338,7 +1340,7 @@ async function dispatchAddressAuditJob(
       : "no private delivery channel available (VAPE_JOBS not configured/write failed, no callback_url)");
     return c.json({
       offering: offeringName, status: "error",
-      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via ACP instead",
+      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via X (@based_vape) to resolve",
     }, 503);
   }
 
@@ -1588,7 +1590,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     });
     return c.json({
       offering: "bounty_deep_dive", status: "error",
-      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via ACP instead",
+      error: "audit dispatch not configured (GH_DISPATCH_TOKEN unset) — contact VAPE via X (@based_vape) to resolve",
     }, 503);
   }
 
@@ -1637,7 +1639,7 @@ app.get("/scan/bounty_deep_dive", async (c) => {
     });
     return c.json({
       offering: "bounty_deep_dive", status: "error",
-      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via ACP instead",
+      error: "audit cannot be delivered right now (no private delivery channel configured) — contact VAPE via X (@based_vape) to resolve",
     }, 503);
   }
 
