@@ -957,3 +957,5 @@
 | 2026-07-31 | auto | 0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777 (MarsCoin) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-31 | auto | 0x1Fd448D0361c3212961a70930f3129A45f425B68 (Mars) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-07-31 | auto | 0xD0D5bCa9Eaa78A5056A28d4064438af3fA1352a9 (SNP500) | deep_investigation | REJECT (40/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |

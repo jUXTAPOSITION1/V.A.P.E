@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-31T02:26:28Z — 259 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-31T02:41:47Z — 260 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SNP500 | Ethereum | `0xD0D5bCa9Eaa78A5056A28d4064438af3fA1352a9` | 40/100 | 1 | 2026-07-31T02:41:47Z |
 | KUMA | Ethereum | `0x53e7C84188E47b220e15aDD5C83b450474f73c89` | 40/100 | 1 | 2026-07-31T01:11:16Z |
 | SNP500 | Ethereum | `0xD6B7e95d90904Ec69F40092DD4f55A60F0176304` | 5/100 | 1 | 2026-07-31T00:56:04Z |
 | SPX | Ethereum | `0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16` | 0/100 | 1 | 2026-07-31T00:41:04Z |

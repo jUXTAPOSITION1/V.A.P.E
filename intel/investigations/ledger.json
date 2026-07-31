@@ -2743,6 +2743,24 @@
     "symbol": "VIBESTR",
     "times_investigated": 1
   },
+  "1:0xd0d5bca9eaa78a5056a28d4064438af3fa1352a9": {
+    "address": "0xD0D5bCa9Eaa78A5056A28d4064438af3fA1352a9",
+    "chain": "1",
+    "first_investigated": "2026-07-31T02:41:47Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-024147-0xD0D5bCa9.md",
+        "score": 40,
+        "ts": "2026-07-31T02:41:47Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T02:41:47Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "SNP500",
+    "times_investigated": 1
+  },
   "1:0xd60abfb751db36514a592963fd71dd50c6cf9ba9": {
     "address": "0xD60ABFB751dB36514a592963fD71DD50c6CF9Ba9",
     "chain": "1",
