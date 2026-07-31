@@ -4226,6 +4226,25 @@
     "symbol": "DBC",
     "times_investigated": 1
   },
+  "56:0x28bbbe607dbabc83acde091f25eec3bea922cb93": {
+    "address": "0x28bBbE607DBABC83Acde091f25eEC3BEA922cB93",
+    "chain": "56",
+    "creator_address": "0xc681cbc6f40c05de5f892745d5ae5ecfff879820",
+    "first_investigated": "2026-07-31T12:27:11Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-122711-0x28bBbE60.md",
+        "score": 55,
+        "ts": "2026-07-31T12:27:11Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-31T12:27:11Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "AKE",
+    "times_investigated": 1
+  },
   "56:0x2b922264c23fc0292aba13bc2ba853035eb29a5a": {
     "address": "0x2b922264c23Fc0292Aba13BC2Ba853035EB29A5a",
     "chain": "56",
