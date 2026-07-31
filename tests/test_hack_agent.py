@@ -1,9 +1,11 @@
 """Tests for agents/hack_agent.py — the per-incident threat-analysis writer
 that patches data/attack-feed.json with a real analysis_report path per
-incident. Hermetic: agents.llm.ask_oci_grok_safe and
-agents.intel_common.web_search_snippets are mocked, no real network call;
-all paths (ATTACK_FEED_PATH/STATE_PATH/ANALYSIS_DIR) are monkeypatched to
-tmp_path so nothing touches the real repo state.
+incident. Hermetic: agents.research_engine.layered_research/synthesize/
+review_output/log_review_finding are mocked at the module boundary (no real
+network call, no real LLM call — research_engine's own internals are
+covered by tests/test_research_engine.py); all paths (ATTACK_FEED_PATH/
+STATE_PATH/ANALYSIS_DIR) are monkeypatched to tmp_path so nothing touches
+the real repo state.
 """
 import json
 import os
@@ -34,16 +36,18 @@ def test_slug_lowercases_and_strips_punctuation():
 
 def test_grounding_includes_real_fields_only():
     h = _incident(name="Foo", technique="Reentrancy", chains=["Base", "Ethereum"])
-    text = hack_agent._grounding(h)
-    assert "Foo" in text and "Reentrancy" in text and "Base, Ethereum" in text
-    assert "prevention" not in text.lower()  # no lesson given — must not fabricate one
+    facts = hack_agent._grounding(h)
+    assert facts["protocol"] == "Foo"
+    assert facts["technique"] == "Reentrancy"
+    assert facts["chains"] == "Base, Ethereum"
+    assert "known_prevention_measure" not in facts  # no lesson given — must not fabricate one
 
 
 def test_grounding_includes_lesson_when_present():
     h = _incident(lesson={"label": "Oracle manipulation", "prevention": "Use TWAP oracles"})
-    text = hack_agent._grounding(h)
-    assert "Oracle manipulation" in text
-    assert "Use TWAP oracles" in text
+    facts = hack_agent._grounding(h)
+    assert facts["technique_classification_vape"] == "Oracle manipulation"
+    assert facts["known_prevention_measure"] == "Use TWAP oracles"
 
 
 def test_state_round_trips(tmp_path, monkeypatch):
@@ -54,24 +58,33 @@ def test_state_round_trips(tmp_path, monkeypatch):
     assert hack_agent._load_state() == {"2026-07-01:Foo": {"report": "intel/threat-analysis/x.md"}}
 
 
+def _fake_result(task_type="threat_analysis"):
+    return {"topic": "x", "task_type": task_type, "known_facts": {}, "findings": [],
+            "deep_extracts": [], "log": {"queries": [], "unique_sources_found": 0}}
+
+
 class TestWriteAnalysis:
-    def test_returns_none_when_llm_unavailable(self, tmp_path, monkeypatch):
+    def test_returns_none_when_synthesis_unavailable(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe",
-                             return_value=("[llm unavailable: no keys]", None)):
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "_Synthesis unavailable this cycle (LLM call failed)._",
+                                           "gaps": [], "provider": None}):
                 report, provider = hack_agent._write_analysis(_incident())
         assert report is None and provider is None
         assert not os.listdir(tmp_path)  # nothing written on failure
 
-    def test_writes_real_file_with_header_on_success(self, tmp_path, monkeypatch):
+    def test_writes_real_file_with_header_gaps_and_methodology_on_success(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe",
-                             return_value=("Real analysis text.", "oci_grok")):
-                report, provider = hack_agent._write_analysis(_incident(name="Across", date="2026-07-17"))
+        fake_synth = {"narrative": "## Known Facts\nReal analysis text.",
+                      "gaps": [{"description": "attacker identity unconfirmed", "confidence": 0.4,
+                                "next_action": "monitor on-chain flow"}],
+                      "provider": "oci_grok"}
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize", return_value=fake_synth):
+                with mock.patch("agents.research_engine.review_output",
+                                 return_value={"ok": True, "issues": []}) as mock_review:
+                    report, provider = hack_agent._write_analysis(_incident(name="Across", date="2026-07-17"))
         assert provider == "oci_grok"
         assert report.endswith("2026-07-17-across.md")
         full_path = os.path.join(hack_agent.ic.ROOT, report)
@@ -79,48 +92,54 @@ class TestWriteAnalysis:
         assert "# Across — Threat Analysis" in content
         assert "**Analysis by:** VAPE" in content  # attribution is always VAPE, never the raw provider codename
         assert "Real analysis text." in content
+        assert "## Gaps & Confidence" in content
+        assert "attacker identity unconfirmed" in content
+        assert "## Research Methodology and Sources" in content
+        mock_review.assert_called_once()
 
-    def test_runs_two_differently_worded_searches_without_bypassing_oci_grok(self, tmp_path, monkeypatch):
-        """Real gap this covers: a single thin pre-fetched search used to be
-        the ONLY grounding an incident got, which produced an honestly-empty
-        report for a real incident a direct Grok query resolved in full —
-        the two differently-worded pre-fetch queries are the real, still-live
-        fix. search=True (this function's OLD attempt at a second fix, via
-        xAI's now-deprecated Live Search — HTTP 410 in production, 2026-07)
-        is deliberately NOT passed anymore: it would skip past this
-        function's real primary route (OCI Grok, via ask_oci_grok_safe)
-        into a free chain that can't provide search either."""
+    def test_uses_threat_analysis_task_type_and_real_known_facts(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
-        search_queries = []
+        captured = {}
 
-        def fake_search(query, max_results=5):
-            search_queries.append(query)
-            return {"available": False, "provider": None, "results": []}
+        def fake_layered(topic, task_type=None, known_facts=None, **kw):
+            captured["topic"] = topic
+            captured["task_type"] = task_type
+            captured["known_facts"] = known_facts
+            return _fake_result(task_type)
 
-        captured_kwargs = {}
+        with mock.patch("agents.research_engine.layered_research", side_effect=fake_layered):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "text", "gaps": [], "provider": "oci_grok"}):
+                with mock.patch("agents.research_engine.log_review_finding"):
+                    hack_agent._write_analysis(_incident(name="Foo", technique="Reentrancy", chains=["Base"]))
+        assert captured["task_type"] == "threat_analysis"
+        assert captured["known_facts"]["protocol"] == "Foo"
+        assert captured["known_facts"]["technique"] == "Reentrancy"
 
-        def fake_ask(system, user, **kw):
-            captured_kwargs.update(kw)
-            return ("Real analysis text.", "xai_1")
-
-        with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
-            with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=fake_ask):
-                hack_agent._write_analysis(_incident())
-        assert len(search_queries) == 2
-        assert search_queries[0] != search_queries[1]  # differently worded, not a repeat
-        assert captured_kwargs.get("search") is not True
-
-    def test_passes_frontier_order_and_tier_to_oci_grok(self, tmp_path, monkeypatch):
+    def test_logs_review_finding_when_review_flags_issues(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
-        from agents.llm import FRONTIER_ORDER
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe",
-                             return_value=("text", "oci_grok")) as m:
-                hack_agent._write_analysis(_incident())
-        _, kwargs = m.call_args
-        assert kwargs["tier"] == "frontier"
-        assert kwargs["provider_order"] == FRONTIER_ORDER
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "text", "gaps": [], "provider": "oci_grok"}):
+                with mock.patch("agents.research_engine.review_output",
+                                 return_value={"ok": False, "issues": ["missing expected section: Timeline"]}):
+                    with mock.patch("agents.research_engine.log_review_finding") as mock_log:
+                        hack_agent._write_analysis(_incident())
+        mock_log.assert_called_once()
+        args, _ = mock_log.call_args
+        assert args[1] == "threat_analysis"
+        assert args[2] == ["missing expected section: Timeline"]
+
+    def test_does_not_log_review_finding_when_review_ok(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "text", "gaps": [], "provider": "oci_grok"}):
+                with mock.patch("agents.research_engine.review_output",
+                                 return_value={"ok": True, "issues": []}):
+                    with mock.patch("agents.research_engine.log_review_finding") as mock_log:
+                        hack_agent._write_analysis(_incident())
+        mock_log.assert_not_called()
 
 
 class TestRun:
@@ -145,10 +164,11 @@ class TestRun:
     def test_every_incident_gets_analyzed_and_patched_onto_feed(self, tmp_path, monkeypatch):
         incidents = [_incident(name="Foo", date="2026-07-01"), _incident(name="Bar", date="2026-07-02")]
         feed_path, _ = self._setup(tmp_path, monkeypatch, incidents)
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis", "oci_grok")):
-                result = hack_agent.run()
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "analysis", "gaps": [], "provider": "oci_grok"}):
+                with mock.patch("agents.research_engine.log_review_finding"):
+                    result = hack_agent.run()
         assert result == {"analyzed": 2, "patched": 0}
         feed = json.loads(feed_path.read_text())
         assert all("analysis_report" in h for h in feed["incidents"])
@@ -156,11 +176,12 @@ class TestRun:
     def test_already_analyzed_incident_is_patched_not_reanalyzed(self, tmp_path, monkeypatch):
         incidents = [_incident(name="Foo", date="2026-07-01")]
         feed_path, _ = self._setup(tmp_path, monkeypatch, incidents)
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis", "oci_grok")) as m:
-                hack_agent.run()  # first run: writes it
-                result = hack_agent.run()  # second run: should just patch
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "analysis", "gaps": [], "provider": "oci_grok"}) as m:
+                with mock.patch("agents.research_engine.log_review_finding"):
+                    hack_agent.run()  # first run: writes it
+                    result = hack_agent.run()  # second run: should just patch
         assert m.call_count == 1  # only ever called once across both runs
         assert result == {"analyzed": 0, "patched": 1}
 
@@ -168,10 +189,11 @@ class TestRun:
         monkeypatch.setattr(hack_agent, "MAX_ANALYSES_PER_RUN", 2)
         incidents = [_incident(name=f"Foo{i}", date="2026-07-01") for i in range(5)]
         self._setup(tmp_path, monkeypatch, incidents)
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis", "oci_grok")) as m:
-                result = hack_agent.run()
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "analysis", "gaps": [], "provider": "oci_grok"}) as m:
+                with mock.patch("agents.research_engine.log_review_finding"):
+                    result = hack_agent.run()
         assert result == {"analyzed": 2, "patched": 0}
         assert m.call_count == 2
 
@@ -184,9 +206,10 @@ class TestRun:
         state_path.write_text(json.dumps({
             "2026-07-01:Foo": {"report": "intel/threat-analysis/does-not-exist.md", "provider": "oci_grok"}
         }))
-        with mock.patch("agents.intel_common.web_search_snippets",
-                        return_value={"available": False, "provider": None, "results": []}):
-            with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("analysis", "oci_grok")) as m:
-                result = hack_agent.run()
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize",
+                             return_value={"narrative": "analysis", "gaps": [], "provider": "oci_grok"}) as m:
+                with mock.patch("agents.research_engine.log_review_finding"):
+                    result = hack_agent.run()
         assert m.call_count == 1
         assert result == {"analyzed": 1, "patched": 0}
