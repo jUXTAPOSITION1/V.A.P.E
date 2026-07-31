@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T17:54:54Z",
+  "generated": "2026-07-31T19:54:59Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,10 +13,10 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 294,
-    "intel_reports": 361,
+    "reports_published": 295,
+    "intel_reports": 362,
     "intel_broadcasts": 132,
-    "catalog_investigations": 500,
+    "catalog_investigations": 503,
     "token_scans_logged": 0,
     "skills_codified": 22,
     "tools_total": 16,
@@ -34,10 +34,10 @@
         "number": 367,
         "title": "Arbitrum Private Key Compromised Detector",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/367",
         "created_at": "2026-07-31T11:26:48Z",
-        "closed_at": null,
+        "closed_at": "2026-07-31T19:10:58Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -48,10 +48,10 @@
         "number": 365,
         "title": "Composable Stable Pools Exploit Detector for Balancer V2 on Multiple Chains",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/365",
         "created_at": "2026-07-30T22:05:15Z",
-        "closed_at": null,
+        "closed_at": "2026-07-31T19:11:01Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -62,10 +62,10 @@
         "number": 363,
         "title": "Composable Stable Pools Exploit Detector for Balancer V2",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/363",
         "created_at": "2026-07-30T11:03:31Z",
-        "closed_at": null,
+        "closed_at": "2026-07-31T19:11:00Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -76,10 +76,10 @@
         "number": 342,
         "title": "Arbitrum Private Key Compromised Detector",
         "kind": "self-directed",
-        "status": "open",
+        "status": "closed",
         "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/pull/342",
         "created_at": "2026-07-29T21:56:27Z",
-        "closed_at": null,
+        "closed_at": "2026-07-31T19:10:57Z",
         "verification": {
           "ok": 0,
           "warn": 0,
@@ -213,7 +213,7 @@
         }
       }
     ],
-    "work_log_entries": 299,
+    "work_log_entries": 300,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260706",
     "latest_report": "20260731"
