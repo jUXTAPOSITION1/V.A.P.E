@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T17:01:15Z",
+  "generated": "2026-07-31T17:16:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 467,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 589,
+    "investigations": 590,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-160124-0x49083d8E.md",
-      "title": "Investigation \u2014 BANK",
-      "symbol": "BANK",
-      "name": "BANK",
-      "date": "2026-07-31T16:01:24Z",
-      "target": "0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C",
+      "file": "investigation-20260731-171620-0xa0e0b50D.md",
+      "title": "Investigation \u2014 ON",
+      "symbol": "ON",
+      "name": "O.N",
+      "date": "2026-07-31T17:16:20Z",
+      "target": "0xa0e0b50DD30f9fAA6c7Ac7f8b32CB95781E574A9",
       "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $23,208. Positive evidence: Ownership renounced; 3230 holders \u2014 reasonably distributed; 81% of liquidity is locked \u2014 reduced rug-pull risk; Trading 448+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-160124-0x49083d8E.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-171620-0xa0e0b50D.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-171620-0xa0e0b50D.md",
+      "title": "Investigation \u2014 ON",
+      "symbol": "ON",
+      "name": "O.N",
+      "date": "2026-07-31T17:16:20Z",
+      "target": "0xa0e0b50DD30f9fAA6c7Ac7f8b32CB95781E574A9",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-171620-0xa0e0b50D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-160124-0x49083d8E.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $11,402. Positive evidence: Ownership renounced; 1834 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 237+ days without a known incident in this sca",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-165332-0xE0172DF6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-163808-0x46F2564E.md",
-      "title": "Investigation \u2014 GRVT",
-      "symbol": "GRVT",
-      "name": "GRVT",
-      "date": "2026-07-30T16:38:08Z",
-      "target": "0x46F2564E0FA8248d15125E7e54173cfbdEf91Be7",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-163808-0x46F2564E.md"
     }
   ],
   "reports": [

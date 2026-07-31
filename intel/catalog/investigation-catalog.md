@@ -989,3 +989,5 @@
 | 2026-07-31 | auto | 0x223a368Ad0E7396165FC629976d77596a51F155C (GURS) | deep_investigation | REJECT (25/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-07-31 | auto | 0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C (BANK) | deep_investigation | PROCEED (90/100) | Low liquidity $23,208 | +7d |
+
+| 2026-07-31 | auto | 0xa0e0b50DD30f9fAA6c7Ac7f8b32CB95781E574A9 (ON) | deep_investigation | REJECT (0/100) | Very few holders (16) — thin, easily manipulated distribution | +7d |
