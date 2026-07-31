@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T07:26:32Z",
+  "generated": "2026-07-31T07:41:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 455,
@@ -1889,7 +1889,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49340782",
+      "version": "49346833",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1899,7 +1899,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.52 eth_dom 10.08 mcap_chg_24h 0.64",
+      "version": "btc_dom 56.48 eth_dom 10.02 mcap_chg_24h 0.13",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
