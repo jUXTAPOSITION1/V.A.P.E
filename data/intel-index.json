@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-31T04:11:26Z",
+  "generated": "2026-07-31T04:23:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 452,
+    "reports": 453,
     "reports_by_type": {
+      "bounty": 102,
       "security": 82,
-      "bounty": 101,
       "base": 93,
       "sentiment": 48,
       "virtuals": 94,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-031204-0x6631eE65.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-31-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-31T02:00Z",
-      "threat": null,
-      "summary": "Nine incidents occurred across the last seven days, none exceeding $50M. The largest losses were the $24.15M AFX Bridge private-key compromise on Arbitrum and the $9.7M Triple-A hot-wallet compromise spanning Ethereum, Tron, and Arbitrum. Other notable events include the $8.2M Crypto DAO incident on BSC, the $7.53M Verus-Ethereum Bridge v",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-02.md",
-      "bytes": 7348
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_042309.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T04:23:09Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_042309.md",
+      "bytes": 17096
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_042309.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T04:23:09Z",
+      "threat": "REJECT",
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_042309.md",
+      "bytes": 17096
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-28 11:10 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-11.md",
       "bytes": 3631
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-28-10.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-28 10:42 UTC",
-      "date": "2026-07-28T10:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-28-10.md",
-      "bytes": 1670
     }
   ],
   "broadcasts": [
