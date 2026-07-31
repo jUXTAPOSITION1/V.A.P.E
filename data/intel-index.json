@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T12:27:20Z",
+  "generated": "2026-07-31T12:42:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 461,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 131,
-    "investigations": 579,
+    "investigations": 580,
     "news": 29,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-122711-0x28bBbE60.md",
-      "title": "Investigation \u2014 AKE",
-      "symbol": "AKE",
-      "name": "AKE",
-      "date": "2026-07-31T12:27:11Z",
-      "target": "0x28bBbE607DBABC83Acde091f25eEC3BEA922cB93",
+      "file": "investigation-20260731-124220-0x1706f1e0.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-07-31T12:42:20Z",
+      "target": "0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $10,291; [-10] Pair 9.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-122711-0x28bBbE60.md"
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2F72961483357dc31b4C146A24444) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.9 days old \u2014 under a month, still ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-124220-0x1706f1e0.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-07-31T12:42:20Z",
+      "target": "0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2F72961483357dc31b4C146A24444) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.9 days old \u2014 under a month, still ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-122711-0x28bBbE60.md",
@@ -594,20 +608,6 @@
       "score": "52",
       "summary": "Risk factors: [-8] Low holder count (99); [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,733; [-5] Pair 22.0 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-123706-0xB4722D06.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-122213-0x8432dB07.md",
-      "title": "Investigation \u2014 HEYI",
-      "symbol": "HEYI",
-      "name": "The Final Form Cow",
-      "date": "2026-07-30T12:22:13Z",
-      "target": "0x8432dB07e8FA11D096b7757Ac81cc068558d4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Low holder count (87); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,972; [-5] Pair 25.2 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-122213-0x8432dB07.md"
     }
   ],
   "reports": [
