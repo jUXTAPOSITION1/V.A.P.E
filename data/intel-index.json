@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T22:03:34Z",
+  "generated": "2026-07-31T22:06:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 473,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 133,
     "investigations": 598,
-    "news": 31,
+    "news": 32,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md",
+      "title": "Aave Eyes Wind-Down of V3 Markets on Six Low-Volume Chains Holding $4.1 Million in Debt",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 22:06 UTC",
+      "topic": "Crypto Markets",
+      "dek": "LlamaRisk's proposal would first freeze reserves and redirect interest to the treasury on deployments generating under $5,000 per quarter, leaving borrower positions initially intact but exposing them to later parameter changes.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md"
+    },
     {
       "file": "news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md",
       "title": "Vesting Cutoff: Pump.fun Layoffs Cost Fired Staff Millions in Unvested PUMP Tokens",
