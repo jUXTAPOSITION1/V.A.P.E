@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T02:41:47Z",
+  "generated": "2026-07-31T02:48:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 129,
     "investigations": 574,
-    "news": 26,
+    "news": 27,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md",
+      "title": "Solana Treasury Trap: Inside Supernova\u2019s High-Stakes Gamble to Borrow Against $2.5M in Crypto with Just $4,000 Cash Left",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 02:48 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A UK crypto firm is scrambling for replacement financing to avoid liquidating its millions in Solana and Bittensor to cover looming short-term liabilities.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md"
+    },
     {
       "file": "news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md",
       "title": "Bipartisan Senate Coalition Presses White House on Strict Crypto Ethics Rules Under CLARITY Act",

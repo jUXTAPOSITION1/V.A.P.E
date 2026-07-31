@@ -1,12 +1,36 @@
 {
-  "generated": "2026-07-30T22:05:50Z",
+  "generated": "2026-07-31T02:46:57Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Down to its last $4,000 in cash, a crypto firm holding millions in Solana is seeking a loan to survive $1.5M debt",
+      "url": "https://cryptoslate.com/down-to-its-last-4000-in-cash-a-crypto-firm-holding-millions-in-solana-is-seeking-a-loan-to-survive-1-5m-debt/",
+      "source": "CryptoSlate",
+      "published": "Thu, 30 Jul 2026 23:55:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Stablecoin Reserve Requirements Explained",
+      "url": "https://www.theblock.co/learn/410234/stablecoin-reserve-requirements-explained?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 30 Jul 2026 22:31:26 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "US Senators sent revised ethics rules to White House for CLARITY Act: Report",
       "url": "https://cointelegraph.com/news/us-senators-revised-ethics-rules-white-house-clarity-act?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Thu, 30 Jul 2026 21:54:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Stablecoins and Cross-Border Payments: How Digital Dollars Move Across Borders",
+      "url": "https://www.theblock.co/learn/410227/stablecoins-and-cross-border-payments?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 30 Jul 2026 21:53:33 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -83,22 +107,6 @@
       "crypto": true
     },
     {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 30 Jul 2026 20:10:16 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Telegram\u2019s Pavel Durov responds to Russia\u2019s terrorism designation",
-      "url": "https://cointelegraph.com/news/pavel-durov-responds-russia-terrorism-designation-cites-mass-surveillance-censorship?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 30 Jul 2026 19:54:06 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Treasury Secretary Invokes Bitcoin Creator Satoshi Nakamoto in Plea for Clarity Act",
       "url": "https://decrypt.co/374758/treasury-secretary-bitcoin-satoshi-nakamoto-clarity-act",
       "source": "Decrypt",
@@ -119,22 +127,6 @@
       "url": "https://decrypt.co/374755/researchers-tried-letting-ai-do-science-it-failed",
       "source": "Decrypt",
       "published": "Thu, 30 Jul 2026 19:13:46 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BitMEX wipes out 35 derivatives as exchange shutdown approaches with punishing post-closure fees",
-      "url": "https://cryptoslate.com/bitmex-wipes-out-35-derivatives-as-september-exchange-shutdown-approaches-with-punishing-post-closure-fees/",
-      "source": "CryptoSlate",
-      "published": "Thu, 30 Jul 2026 18:30:07 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "A 90% shareholder rebellion just forced this public company to dump its entire Bitcoin treasury at a crushing \u00a339,984 per-coin loss",
-      "url": "https://cryptoslate.com/a-90-shareholder-rebellion-just-forced-this-public-company-to-dump-its-entire-668-bitcoin-treasury-at-a-crushing-39984-per-coin-loss/",
-      "source": "CryptoSlate",
-      "published": "Thu, 30 Jul 2026 17:40:34 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -227,26 +219,34 @@
       "crypto": true
     },
     {
-      "title": "Quantum Solutions loses top Japan ETH treasury spot after another $1.9 million sale",
-      "url": "https://www.theblock.co/post/410175/quantum-solutions-loses-top-japan-eth-treasury-spot-1-9-million-sale?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Thu, 30 Jul 2026 14:16:45 -0400",
+      "title": "Coldcard issues Mk3 warning as experts examine $38M Bitcoin wallet drain",
+      "url": "https://cointelegraph.com/news/coldcard-mk3-warning-594-btc-sweep?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Fri, 31 Jul 2026 02:38:09 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "JPMorgan says crypto bill\u2019s fading odds hurt outlook, warns parts could discourage institutional adoption",
-      "url": "https://www.theblock.co/post/410185/jpmorgan-crypto-bill-clarity-act-market-outlook?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Thu, 30 Jul 2026 13:49:56 -0400",
+      "title": "A cleaning company with just $4.1M in cash and a stash of Dogecoin just committed $500M to an AI mega-deal",
+      "url": "https://cryptoslate.com/from-cleaning-products-and-dogecoin-to-an-800-million-ai-contract-inside-cleancores-high-risk-minnesota-venture/",
+      "source": "CryptoSlate",
+      "published": "Fri, 31 Jul 2026 02:35:43 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bitcoin, Ethereum Remain Popular Among Institutional Investors, Wintermute Research Reports",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQNXFCZ1JvUkRlQk9KeW5IYzl4RGl4TzRLbFVPM3VVNnRBR3AySE1JSEFIX2h3Zl9DX01oS2hRSFB4d1YzRVJqYXEyZWpTRVdmT1FEajdLa1NlM0hldDY5UUVhUEdFOUkzZlVlNi1oQjFvRlVpNXpkWWF5YXB0dUFJdGdHdHBNNUVNYlFlaEVLUUpYM19IZlg1OC1hMGYwVFg2T3haM0IwZW9JdXZiWGFuOVg4a2J2ZDFxcE1LYVVVZ0ZKZlNoOWYyVy1waG9JUDJPc29EWTYyV0s4a3RQM09OSTRtUTJ6Zw?oc=5",
+      "title": "Bhutan\u2019s Gelephu taps 3iQ to manage part of Bitcoin treasury",
+      "url": "https://cointelegraph.com/news/bhutan-gelephu-3iq-bitcoin-treasury?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Fri, 31 Jul 2026 00:31:21 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxONFFCdHBUVTBJNTB3R0RDZ1Y2WlNHM1djYUJkd0NQS3ZuOWtrUG5LVVpHRUxEZTQ0R19zeS1od2d4UzN5eUhzbTVuc21hbnh4MTFEb1Y3eXUtcjZtTW1hWi1WVVZ3NEUtNFgxdEUxOG9xMkdvUnVSamlqM0drOHlpUHhOODJXM2hDZ2VPWVNkaUt2ZjRRVE90MkhOWFRtYnYxaUxfUXRNdHY4S3VKRnhLNnRydGs2WG1xemUwUnA0dmtaSGtxZ1BNag?oc=5",
       "source": "Benzinga",
-      "published": "Thu, 30 Jul 2026 20:42:30 GMT",
+      "published": "Fri, 31 Jul 2026 02:17:29 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -271,14 +271,6 @@
       "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQM1NsaWYwdzhRRF9PeDRzUHVhNmNXX0JVQ19CdWNodi10b3JNU0lvektzU21CajlfRTJMX3BvN0JjVVJBRmg5V2wzdnJVRnJRUTJNT181WmIwRXprcjJQVGstdkpIMDdnaXRiUEhJTUJYUzVwVnYzWUVSdFp6Q2QtNnV5aDN1WTZZUHJiMDB4X19JRmVrb3dhU1ZSeU5SMjA1M3k3WF9CNXIyRm1pYVUtNVpTNUNIT3VJUmNBNG9nbHQ0THdlOWNEdjdycHBBbE0?oc=5",
       "source": "Bitcoin Foundation",
       "published": "Thu, 30 Jul 2026 13:36:48 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "A Little-Known Token Just Left Bitcoin and Ethereum in the Dust This Week\u2014 Here's Why It's Surging",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPMWVQS0NCVENsUzFxb3g3VDVldEpnYk9DRWpWcTE5SWpaY3hNbjBjdlFnUXh0dm0wUFYwQlNmbkV4RGtyMzZSeTZOTkhaQlZTZG1HUDZIOUhDb3dxdy1pREVBWUdLVWF3d09RaTl3WmtyUzN3RFJZdV90OWdBZXltSm9mX2dfbEJNZUxoY3BhMG1fU0RmYzRKZE9Ob3dxZVZIRXhITm9adVIxRDh6RUwxQkZVXzdFUGt1TEJ3ZTgyN3VkNkQwVHRNMDMxWERFOHUxVDFIMU1KLTJaVkFFVTJMYV8zZTk3RHNQRWJzWA?oc=5",
-      "source": "TradingView",
-      "published": "Thu, 30 Jul 2026 10:04:25 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -312,6 +304,22 @@
       "source": "Brownstone Research",
       "published": "Wed, 29 Jul 2026 21:48:51 GMT",
       "topic": "Regulation",
+      "crypto": true
+    },
+    {
+      "title": "AEON hits $475M in cumulative on-chain volume, eyes AI agent payment infrastructure",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE84TGFYajBoek9zYnI3Wkx1VUlTLTQ1NHFJeFZFZGoyelc1Z2F2eVJ3Sndwb3NWa3hDR2JjLVpnNVRPc3JwZmdiLUFwT19CZ1BTUGxqNlMxYw?oc=5",
+      "source": "Cryptonews.net",
+      "published": "Wed, 29 Jul 2026 18:51:47 GMT",
+      "topic": "AI Agents",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin\u2019s breakdown puts Ethereum, Breadth and ALT risk back in focus",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUmZ3a2ZyWWo1THBFSXpqWFpsU1djZ2JpVWtHaXl4MmRlNTVvUjhmUElwOGJRQ1NNdWtWSG1BUml2MVF5amVmVU1iT2VaOW5mZzRzRnFBN29BODRyamFNNi1xTFZscXpNX0w0S2FOVk5YeUNpN2x1LXRXRFBmSk9xZHVUQ1YtMVZFak12OVhiRkdLMmEwZzlmMGF4ajIyRHJxWUNFYTFKRVQ?oc=5",
+      "source": "KITCO",
+      "published": "Tue, 28 Jul 2026 16:58:00 GMT",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -403,18 +411,18 @@
       "crypto": true
     },
     {
+      "title": "The Stablecoin Wars: Which Regulations Will Create the Next Winners and Losers?",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQa1VLRGJhZTlBMXE2LUg5TkZQTE1PejM1UkJMc21lWUtHczFOaDBzSDBtclJpRTd1a3c2dDhZcnJBMnhUUnF4RmMwNExVcVU0RTJCX3RCWktWMmNGZ19kMTFMMERfRzNUTXRPTkpOZW5fYVZha04zdDdBVkFRcnExbm9qYk90bVJzblVIalY2Um5sTWNiRjJXdU5B?oc=5",
+      "source": "Bitcoin Foundation",
+      "published": "Wed, 08 Jul 2026 07:00:00 GMT",
+      "topic": "Stablecoins",
+      "crypto": true
+    },
+    {
       "title": "OKX Launches Agentic Wallet, Bringing Autonomous Onchain Execution to AI Agents",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQSVBKeFkwOU1HbUx4ak1JVXk2QkFLYjM2S25kZXNDNnVwdFduLVp0S2p4YURwLWduSFpFc1hzNFNiV29wbWpjQTlnNF96ZmNmTlQ0dWtIVml2aVJmSVlBX2poelctLWtxMzNHUkZGdEQ2MWxxbWZldXV5ck5PcmhiZlZWLXdWRTU0alFiejRlOGtrb05zVFQ3b1pHT3JkaVlCWDgwS19jRlhSakNqcWc?oc=5",
       "source": "FF News",
       "published": "Fri, 03 Jul 2026 07:00:00 GMT",
-      "topic": "AI Agents",
-      "crypto": true
-    },
-    {
-      "title": "Crypto exchange OKX wants AI agents to hire and pay each other",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOYXpiT0FseWx5bnMxb2RKcWpOQ2RzV0JYaUlTclhVMEhJa1JGN044LU54SmZmQnVNcWFoZ2F5ZXBzdFpwakZSZGk4Q29NX3NJUDdnT0NXSWtWa2l1S29jM2taVVg5aTUxWlZob0p4SWNQNks2QjU0d2sxRVBFNk9INnE5WGVPUzlzYkpzTlBSM2YtVUxfN2RtUzhDcmpwdw?oc=5",
-      "source": "TechCrunch",
-      "published": "Tue, 30 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
     },
@@ -448,14 +456,6 @@
       "source": "Changelly",
       "published": "Fri, 05 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
-      "crypto": true
-    },
-    {
-      "title": "Stablecoins Explained: USDT, USDC, and DAI Compared",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOF8xZjlDOWUzYUFpYWNfc3RZNnduaXkwSkI0WWc0bFFiZ25EMHIxWnFaRlllbDJYcktodDBHRFRLdXBHWXNkcFJFMVE5U3dOTXlrSFFkci1zT0xxNmFpV2ZBZVB5VXpWelh4dVo3YUVIbUhWeDdUbGFNdmVROWZZZGRUajZrSWppbDhLSG1LUW1aa2dGUHJUa2pscUVFVS1WelE?oc=5",
-      "source": "Bitcoin Foundation",
-      "published": "Wed, 27 May 2026 07:00:00 GMT",
-      "topic": "Stablecoins",
       "crypto": true
     },
     {
