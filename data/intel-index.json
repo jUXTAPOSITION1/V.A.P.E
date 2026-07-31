@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T00:56:13Z",
+  "generated": "2026-07-31T01:11:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 570,
+    "investigations": 571,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-005604-0xD6B7e95d.md",
-      "title": "Investigation \u2014 SNP500",
-      "symbol": "SNP500",
-      "name": "Sock And Pussy 500",
-      "date": "2026-07-31T00:56:04Z",
-      "target": "0xD6B7e95d90904Ec69F40092DD4f55A60F0176304",
+      "file": "investigation-20260731-011116-0x53e7C841.md",
+      "title": "Investigation \u2014 KUMA",
+      "symbol": "KUMA",
+      "name": "kuma",
+      "date": "2026-07-31T01:11:16Z",
+      "target": "0x53e7C84188E47b220e15aDD5C83b450474f73c89",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,665 (rug/illiquid); [-10] Low liquidity $2,665; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-005604-0xD6B7e95d.md"
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-011116-0x53e7C841.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-011116-0x53e7C841.md",
+      "title": "Investigation \u2014 KUMA",
+      "symbol": "KUMA",
+      "name": "kuma",
+      "date": "2026-07-31T01:11:16Z",
+      "target": "0x53e7C84188E47b220e15aDD5C83b450474f73c89",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-011116-0x53e7C841.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-005604-0xD6B7e95d.md",
@@ -594,20 +608,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Owner not renounced (0x1a9c8182c09f50c8318d769245bea52c32be35bc) \u2014 can still act on the contract. Positive evidence: 389006 holders \u2014 reasonably distributed; Deep liquidity ($15,803,349); Trading 1912+ days without a known incident in this scan; Custom verified source (not a mass-produced factory te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-072138-0x1f9840a8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-050644-0xd9D3dAd2.md",
-      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
-      "symbol": "\u55b5\u55b5\u5e01",
-      "name": "\u55b5\u55b5\u5e01",
-      "date": "2026-07-30T05:06:44Z",
-      "target": "0xd9D3dAd2EfeD7eE99F1363FAC549f5E476F19A5a",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0x005ccee4f3024d7343e4c244eea3873783c84f04) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +382%",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-050644-0xd9D3dAd2.md"
     }
   ],
   "reports": [

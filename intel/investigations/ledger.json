@@ -1629,6 +1629,25 @@
     "symbol": "AI",
     "times_investigated": 1
   },
+  "1:0x53e7c84188e47b220e15add5c83b450474f73c89": {
+    "address": "0x53e7C84188E47b220e15aDD5C83b450474f73c89",
+    "chain": "1",
+    "creator_address": "0x70ab92f4dbff5270830e61bf8358a64614a01817",
+    "first_investigated": "2026-07-31T01:11:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-011116-0x53e7C841.md",
+        "score": 40,
+        "ts": "2026-07-31T01:11:16Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T01:11:16Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "KUMA",
+    "times_investigated": 1
+  },
   "1:0x55f622b7834a81436eb49138c0d3d2c7d1ffbfc0": {
     "address": "0x55f622B7834a81436EB49138c0d3D2C7D1ffbFc0",
     "chain": "1",
