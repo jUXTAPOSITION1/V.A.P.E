@@ -1099,6 +1099,25 @@
     "symbol": "SHIB",
     "times_investigated": 1
   },
+  "1:0x0ffd8add68ed4d1c3305baa2bf66b5d6440206f7": {
+    "address": "0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7",
+    "chain": "1",
+    "creator_address": "0x78667855f74bbe1e64718a97f33a824fab79ff09",
+    "first_investigated": "2026-07-31T00:26:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-002603-0x0Ffd8Add.md",
+        "score": 0,
+        "ts": "2026-07-31T00:26:03Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T00:26:03Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "MEMESTOCK",
+    "times_investigated": 1
+  },
   "1:0x1217d587a72928c03b802ad0e62154f62d5c2a17": {
     "address": "0x1217D587a72928c03B802ad0e62154F62D5c2A17",
     "chain": "1",

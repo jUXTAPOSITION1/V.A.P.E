@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T00:11:10Z",
+  "generated": "2026-07-31T00:26:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 567,
+    "investigations": 568,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-001109-0x761a2c1C.md",
-      "title": "Investigation \u2014 RWA",
-      "symbol": "RWA",
-      "name": "Real World Asses",
-      "date": "2026-07-31T00:11:09Z",
-      "target": "0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369",
+      "file": "investigation-20260731-002603-0x0Ffd8Add.md",
+      "title": "Investigation \u2014 MEMESTOCK",
+      "symbol": "MEMESTOCK",
+      "name": "MEMESTOCK",
+      "date": "2026-07-31T00:26:03Z",
+      "target": "0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-001109-0x761a2c1C.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-002603-0x0Ffd8Add.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-002603-0x0Ffd8Add.md",
+      "title": "Investigation \u2014 MEMESTOCK",
+      "symbol": "MEMESTOCK",
+      "name": "MEMESTOCK",
+      "date": "2026-07-31T00:26:03Z",
+      "target": "0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-002603-0x0Ffd8Add.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-001109-0x761a2c1C.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, eas",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-032114-0x91BC9DA0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-023616-0x2C974B2d.md",
-      "title": "Investigation \u2014 VIB",
-      "symbol": "VIB",
-      "name": "Vibe",
-      "date": "2026-07-30T02:36:16Z",
-      "target": "0x2C974B2d0BA1716E644c1FC59982a89DDD2fF724",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "13",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-10] Owner not renounced (0xeaa4137505e6defbdf987e7895b5d02b45e2e7d1) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $677 (rug/illiq",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-023616-0x2C974B2d.md"
     }
   ],
   "reports": [

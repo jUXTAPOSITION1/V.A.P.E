@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-31T00:11:10Z",
-  "synthesis": "report",
+  "generated": "2026-07-31T00:26:14Z",
+  "synthesis": "` (",
   "tasks": [
+    {
+      "sha": "4960906ad9",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-07-31T00:16Z",
+      "date": "2026-07-31T00:16:38Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4960906ad9a83aaf80f30a1aec51c8675a91a773"
+    },
+    {
+      "sha": "d720d8f6e2",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-31T00:11Z",
+      "date": "2026-07-31T00:11:18Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d720d8f6e2fc6012271f21f88ecd99df0c0b58d4"
+    },
     {
       "sha": "6dcb52e10e",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "VAPE repo review 2026-07-30T22:07Z",
       "date": "2026-07-30T22:07:48Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fec7b4ad713b25d9a7cf2ee5303cdfaaee34b664"
-    },
-    {
-      "sha": "0786fd388d",
-      "kind": "automation",
-      "message": "news-intel 2026-07-30T22:06Z",
-      "date": "2026-07-30T22:06:38Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0786fd388db8433fdc384e52bfa842fb4b4d02da"
-    },
-    {
-      "sha": "d2fe11399c",
-      "kind": "automation",
-      "message": "VAPE skillforge build cycle 2026-07-30T22:05Z",
-      "date": "2026-07-30T22:05:16Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d2fe11399c3320ddfdc15ac83e55d19e35f86ce1"
     }
   ]
 }

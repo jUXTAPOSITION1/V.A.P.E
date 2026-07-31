@@ -945,3 +945,5 @@
 | 2026-07-30 | auto | 0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7 (401K) | deep_investigation | REJECT (5/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-31 | auto | 0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369 (RWA) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D2 | +7d |
+
+| 2026-07-31 | auto | 0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7 (MEMESTOCK) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D2 | +7d |
