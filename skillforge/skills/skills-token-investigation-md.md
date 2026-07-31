@@ -1,25 +1,24 @@
-# skills/token-investigation.md
+# skills/token_investigation.md
 
-## Token Safety Investigation
+**title**: Ethereum Token Safety Assessment via agents/investigate.py
 
-### When-to-use
-Run before interacting with any ERC-20 on Polygon (137) or Ethereum (1) when holder concentration, mint authority, ownership, or liquidity lock status is unknown. Use on targets surfaced by hack_feed or market_data.
+**when-to-use**: Before any interaction, approval, or position in a new/low-cap ERC20 on chain 1 when holder distribution, liquidity lock status, or pair age are unknown.
 
-### Step-by-step procedure
-1. `contract_recon --chain 137 --address 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359` (or chain 1 equivalent) to map proxy/implementation and owner.
-2. `token_safety --chain 137 --address 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359` to extract mintable flag, top-holder distribution, and LP-lock percentage.
-3. `agents/investigate.py --target 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359 --chain 137` to aggregate penalties and produce verdict + report.
-4. Cross-check any owner address with `wallet_trace --address [OWNER]` and recent `hack_feed` entries.
-5. Record final score and verdict in intel/investigations/.
+**step-by-step procedure**:
+1. Execute `python agents/investigate.py --target <contract> --chain 1` (example targets: 0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82, 0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2).
+2. Capture the generated report at `intel/investigations/investigation-*.md` and the numeric score/verdict.
+3. Apply thresholds directly from observed runs: score 0 = REJECT, 52 = CAUTION, 100 = PROCEED.
+4. Cross-check any non-zero risk factors listed in the report content (holder count, top-10 concentration, liquidity lock %, pair age, audit status).
+5. Re-run the identical command on the same target after 24 h if initial verdict is CAUTION.
 
-### Quality gates
-- All 16 tools return verified (toolcheck outcome 16/16) before proceeding.
-- Report must contain explicit numeric score (0-100) and one of {PROCEED, CAUTION, REJECT}.
-- At minimum: proxy status, owner status, mint flag, top-10 holder %, LP-lock % must be populated.
+**quality gates**:
+- Report must contain explicit score and verdict fields.
+- All automated checks listed in content must be present; missing fields trigger re-execution.
+- Only accept PROCEED when score = 100 and content states “clean across automated checks”.
 
-### Limitations
-- Does not cover code-level bugs (use slither/aderyn separately).
-- Relies on public on-chain data only; unaudited or anonymous teams default to penalty.
-- Liquidity-lock data is snapshot-based and can change after investigation timestamp.
+**limitations**:
+- Limited to chain 1; no coverage for other networks.
+- Snapshot is time-bound (pair age and liquidity values change rapidly).
+- Does not replace manual review of upgradeability or proxy implementation.
 
-_Distilled 2026-07-26T08:31:49Z from real SKILLFORGE memory._
+_Distilled 2026-07-31T08:55:31Z from real SKILLFORGE memory._
