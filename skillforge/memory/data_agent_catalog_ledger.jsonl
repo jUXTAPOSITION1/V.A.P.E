@@ -350,3 +350,4 @@
 {"ts": "2026-07-31T02:57:07.683784Z", "target": "Arbitrum", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
 {"ts": "2026-07-31T03:26:53.949208Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["exploit_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 53}
 {"ts": "2026-07-31T03:56:38.734550Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
+{"ts": "2026-07-31T04:26:20.473122Z", "target": "base", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
