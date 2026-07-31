@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-31T00:26:03Z — 256 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-31T00:41:04Z — 257 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SPX | Ethereum | `0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16` | 0/100 | 1 | 2026-07-31T00:41:04Z |
 | MEMESTOCK | Ethereum | `0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7` | 0/100 | 1 | 2026-07-31T00:26:03Z |
 | RWA | Ethereum | `0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369` | 0/100 | 1 | 2026-07-31T00:11:09Z |
 | 401K | Ethereum | `0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7` | 5/100 | 1 | 2026-07-30T23:55:58Z |

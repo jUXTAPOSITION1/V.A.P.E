@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T00:26:14Z",
+  "generated": "2026-07-31T00:41:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 568,
+    "investigations": 569,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-002603-0x0Ffd8Add.md",
-      "title": "Investigation \u2014 MEMESTOCK",
-      "symbol": "MEMESTOCK",
-      "name": "MEMESTOCK",
-      "date": "2026-07-31T00:26:03Z",
-      "target": "0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7",
+      "file": "investigation-20260731-004104-0x0C42cC85.md",
+      "title": "Investigation \u2014 SPX",
+      "symbol": "SPX",
+      "name": "spx6900",
+      "date": "2026-07-31T00:41:04Z",
+      "target": "0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-002603-0x0Ffd8Add.md"
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MEMESTOCK (0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-004104-0x0C42cC85.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-004104-0x0C42cC85.md",
+      "title": "Investigation \u2014 SPX",
+      "symbol": "SPX",
+      "name": "spx6900",
+      "date": "2026-07-31T00:41:04Z",
+      "target": "0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MEMESTOCK (0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-004104-0x0C42cC85.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-002603-0x0Ffd8Add.md",
@@ -594,20 +608,6 @@
       "score": "92",
       "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration. Positive evidence: Ownership renounced; 4231 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 275+ days without a known incident in this scan; Custom verified source (not a mass-",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-033629-0x67b47971.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-032114-0x91BC9DA0.md",
-      "title": "Investigation \u2014 ON",
-      "symbol": "ON",
-      "name": "Orochi Network Token",
-      "date": "2026-07-30T03:21:14Z",
-      "target": "0x91BC9DA0fDcD8a6fba21C773d8bA082E3C57a090",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, eas",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-032114-0x91BC9DA0.md"
     }
   ],
   "reports": [

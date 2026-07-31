@@ -947,3 +947,5 @@
 | 2026-07-31 | auto | 0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369 (RWA) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D2 | +7d |
 
 | 2026-07-31 | auto | 0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7 (MEMESTOCK) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D2 | +7d |
+
+| 2026-07-31 | auto | 0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16 (SPX) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: MEMESTOCK (0x0Ffd8Ad | +7d |
