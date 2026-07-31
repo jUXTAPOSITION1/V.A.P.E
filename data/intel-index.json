@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T19:27:35Z",
+  "generated": "2026-07-31T19:32:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 469,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 592,
+    "investigations": 593,
     "news": 31,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-191702-0x93AA70E6.md",
+      "file": "investigation-20260731-193213-0xA6dbdd59.md",
       "title": "Investigation \u2014 ASTEROID",
       "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-31T19:17:02Z",
-      "target": "0x93AA70E6a08811F1572DF864417D08C52fB4A84c",
+      "name": "Asteroid",
+      "date": "2026-07-31T19:32:13Z",
+      "target": "0xA6dbdd59318e212ad3Eb6Ca002D5De47195cA27c",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-191702-0x93AA70E6.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-193213-0xA6dbdd59.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-193213-0xA6dbdd59.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid",
+      "date": "2026-07-31T19:32:13Z",
+      "target": "0xA6dbdd59318e212ad3Eb6Ca002D5De47195cA27c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-193213-0xA6dbdd59.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-191702-0x93AA70E6.md",
@@ -594,20 +608,6 @@
       "score": "32",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CES (0x3f234f3Ab2B79dcF243Ab387939d2F7e2530b676) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-180847-0xC22Bd38d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-175324-0xD036f173.md",
-      "title": "Investigation \u2014 UNI",
-      "symbol": "UNI",
-      "name": "Unicorn",
-      "date": "2026-07-30T17:53:24Z",
-      "target": "0xD036f17315D159B48cc154bBc70aa4FA06210DE9",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $26,029; [-10] Violent 24h move +2900% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-175324-0xD036f173.md"
     }
   ],
   "reports": [
