@@ -987,3 +987,5 @@
 | 2026-07-31 | auto | 0x63dc3cA01ff09E714C8108Ffd6F8A3E0b8CD13e4 (ZUM) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 94% of supply — concentrated, easily manipula | +7d |
 
 | 2026-07-31 | auto | 0x223a368Ad0E7396165FC629976d77596a51F155C (GURS) | deep_investigation | REJECT (25/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-07-31 | auto | 0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C (BANK) | deep_investigation | PROCEED (90/100) | Low liquidity $23,208 | +7d |

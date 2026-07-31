@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-31T15:46:04Z",
-  "synthesis": "15 commits):",
+  "generated": "2026-07-31T16:01:25Z",
+  "synthesis": "[automation] threat",
   "tasks": [
+    {
+      "sha": "f08cc9e104",
+      "kind": "automation",
+      "message": "threat analysis: 2026-07-31T15:56Z",
+      "date": "2026-07-31T15:56:13Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f08cc9e1046cc7470474713d977f13d47f3e99c4"
+    },
+    {
+      "sha": "fbc3e0f37a",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-31T15:46Z",
+      "date": "2026-07-31T15:46:12Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fbc3e0f37a315320ef03d51a035c577d7ec3b03e"
+    },
     {
       "sha": "3437e3a2e3",
       "kind": "bounty-radar",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-31T14:30Z",
       "date": "2026-07-31T14:30:38Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fd6b7be809f43a355c63a778d66d95bd35f18872"
-    },
-    {
-      "sha": "3fa872d8c6",
-      "kind": "automation",
-      "message": "VAPE self-improvement cycle 2026-07-31T14:26Z",
-      "date": "2026-07-31T14:26:22Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3fa872d8c6a1d01465eff6bffbc0f1687f13e770"
-    },
-    {
-      "sha": "4cff33c389",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-31T14:15Z",
-      "date": "2026-07-31T14:15:16Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4cff33c389f2960730596747bf9433774f00811e"
     }
   ]
 }

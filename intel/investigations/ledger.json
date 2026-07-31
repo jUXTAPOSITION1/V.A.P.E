@@ -4625,6 +4625,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x49083d8e7daada7ede74c04ed52ec512fd9f006c": {
+    "address": "0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C",
+    "chain": "56",
+    "creator_address": "0x7f5bb49a8ce76ed80b5f9f218efe60cbd5b70525",
+    "first_investigated": "2026-07-31T16:01:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-160124-0x49083d8E.md",
+        "score": 90,
+        "ts": "2026-07-31T16:01:24Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-31T16:01:24Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "BANK",
+    "times_investigated": 1
+  },
   "56:0x49e60d05319f6f9945012067e0718a2b6267cf58": {
     "address": "0x49E60D05319f6f9945012067E0718a2B6267cF58",
     "chain": "56",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T15:46:03Z",
+  "generated": "2026-07-31T16:01:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 465,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 588,
+    "investigations": 589,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-154556-0x223a368A.md",
-      "title": "Investigation \u2014 GURS",
-      "symbol": "GURS",
-      "name": "GURS",
-      "date": "2026-07-31T15:45:56Z",
-      "target": "0x223a368Ad0E7396165FC629976d77596a51F155C",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-25] Very low liquidity $5,058 (rug/illiquid); [-10] Low liquidity $5,058; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 21026 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 944+ days",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-154556-0x223a368A.md"
+      "file": "investigation-20260731-160124-0x49083d8E.md",
+      "title": "Investigation \u2014 BANK",
+      "symbol": "BANK",
+      "name": "BANK",
+      "date": "2026-07-31T16:01:24Z",
+      "target": "0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $23,208. Positive evidence: Ownership renounced; 3230 holders \u2014 reasonably distributed; 81% of liquidity is locked \u2014 reduced rug-pull risk; Trading 448+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-160124-0x49083d8E.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-160124-0x49083d8E.md",
+      "title": "Investigation \u2014 BANK",
+      "symbol": "BANK",
+      "name": "BANK",
+      "date": "2026-07-31T16:01:24Z",
+      "target": "0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $23,208. Positive evidence: Ownership renounced; 3230 holders \u2014 reasonably distributed; 81% of liquidity is locked \u2014 reduced rug-pull risk; Trading 448+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-160124-0x49083d8E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-154556-0x223a368A.md",
@@ -594,20 +608,6 @@
       "score": "37",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-163808-0x46F2564E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-162250-0x63f3851f.md",
-      "title": "Investigation \u2014 VIBE",
-      "symbol": "VIBE",
-      "name": "VibeCoded",
-      "date": "2026-07-30T16:22:50Z",
-      "target": "0x63f3851f26bD241bb51c1F30A5B2212151B6ca14",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Contract source UNVERIFIED; [-10] No known third-party a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-162250-0x63f3851f.md"
     }
   ],
   "reports": [
