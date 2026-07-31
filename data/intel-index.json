@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-31T20:02:51Z",
+  "generated": "2026-07-31T20:10:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 469,
+    "reports": 470,
     "reports_by_type": {
+      "bounty": 108,
       "security": 85,
-      "bounty": 107,
       "base": 96,
       "macro": 25,
       "virtuals": 97,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-200241-0x20b688F4.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-31-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-31T19:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_201025.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T20:10:25Z",
       "threat": null,
-      "summary": "The current threat level is assessed as HIGH, driven by a significant volume of nine security incidents recorded across the broader DeFi ecosystem in the last seven days. While no ultra-high-severity exploits (exceeding $50M) occurred in the last two weeks, the sheer frequency of attacks and the diversity of vectors point to an active and",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-19.md",
-      "bytes": 5782
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_201025.md",
+      "bytes": 16943
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_201025.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T20:10:25Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_201025.md",
+      "bytes": 16943
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "The provided incident feed records 12 events over the seven-day window ending 2026-07-28, with aggregate losses below the $50 M threshold in any single case. The largest single loss was the AFX Bridge incident ($24.15 M) attributed to private-key compromise on Arbitrum. Two other bridge-related events appear: Verus-Ethereum Bridge ($7.53 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-08.md",
       "bytes": 7493
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260729_063153.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-29T06:31:53Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_063153.md",
-      "bytes": 15451
     }
   ],
   "broadcasts": [
