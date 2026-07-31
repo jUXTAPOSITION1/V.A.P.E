@@ -8,7 +8,6 @@ actually returns right now, and prints the raw body so the real cause (worker
 bug vs. a transient DefiLlama/Cloudflare blip at registration time) is
 visible directly rather than inferred from code reading.
 """
-import json
 import urllib.error
 import urllib.request
 

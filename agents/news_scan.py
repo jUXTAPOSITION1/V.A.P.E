@@ -14,7 +14,7 @@ Usage: python agents/news_scan.py
 import os
 import sys
 import json
-from datetime import datetime, timezone
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import news_common as nc  # noqa: E402
