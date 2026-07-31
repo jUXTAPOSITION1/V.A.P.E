@@ -3865,6 +3865,25 @@
     "symbol": "PHAR",
     "times_investigated": 1
   },
+  "43114:0xacfb898cff266e53278cc0124fc2c7c94c8cb9a5": {
+    "address": "0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5",
+    "chain": "43114",
+    "creator_address": "0xab0fb9ea07cc64703e7954611cf37903bf2cacdf",
+    "first_investigated": "2026-07-31T15:00:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-150036-0xAcFb898C.md",
+        "score": 90,
+        "ts": "2026-07-31T15:00:36Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-31T15:00:36Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "NOCHILL",
+    "times_investigated": 1
+  },
   "43114:0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7": {
     "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
     "chain": "43114",

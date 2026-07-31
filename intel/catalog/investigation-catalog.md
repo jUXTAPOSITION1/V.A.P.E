@@ -979,3 +979,5 @@
 | 2026-07-31 | auto | 0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C (CRO) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-31 | auto | 0xAad934604B7A94Af52e831cf958284610Fb33a87 (GRVT) | deep_investigation | REJECT (42/100) | Top 10 non-LP/burn holders control 54% of supply — meaningful concentration | +7d |
+
+| 2026-07-31 | auto | 0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5 (NOCHILL) | deep_investigation | PROCEED (90/100) | Low liquidity $48,007 | +7d |
