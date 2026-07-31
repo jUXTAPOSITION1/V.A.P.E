@@ -222,6 +222,25 @@
     "symbol": "SCR",
     "times_investigated": 1
   },
+  "137:0x15e096f13f04a866c933071c85231ca590b41343": {
+    "address": "0x15e096f13f04A866C933071C85231ca590b41343",
+    "chain": "137",
+    "creator_address": "0x6daa79dc6c4941f1df92e1197ae7b4db28b10495",
+    "first_investigated": "2026-07-31T17:46:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-174622-0x15e096f1.md",
+        "score": 62,
+        "ts": "2026-07-31T17:46:22Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-31T17:46:22Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "AIPF",
+    "times_investigated": 1
+  },
   "137:0x1884cc728574aad4fa06e556e9d9dccf95b4bf02": {
     "address": "0x1884Cc728574AAd4Fa06e556E9d9DCcF95B4BF02",
     "chain": "137",

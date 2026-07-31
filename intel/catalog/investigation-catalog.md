@@ -991,3 +991,5 @@
 | 2026-07-31 | auto | 0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C (BANK) | deep_investigation | PROCEED (90/100) | Low liquidity $23,208 | +7d |
 
 | 2026-07-31 | auto | 0xa0e0b50DD30f9fAA6c7Ac7f8b32CB95781E574A9 (ON) | deep_investigation | REJECT (0/100) | Very few holders (16) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-31 | auto | 0x15e096f13f04A866C933071C85231ca590b41343 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
