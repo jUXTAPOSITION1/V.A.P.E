@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T00:03:37Z",
+  "generated": "2026-07-31T00:11:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 566,
+    "investigations": 567,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260730-235558-0x7075DdC6.md",
-      "title": "Investigation \u2014 401K",
-      "symbol": "401K",
-      "name": "Buy & Retire",
-      "date": "2026-07-30T23:55:58Z",
-      "target": "0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7",
+      "file": "investigation-20260731-001109-0x761a2c1C.md",
+      "title": "Investigation \u2014 RWA",
+      "symbol": "RWA",
+      "name": "Real World Asses",
+      "date": "2026-07-31T00:11:09Z",
+      "target": "0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,018 (rug/illiquid); [-10] Low liquidity $3,018; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-235558-0x7075DdC6.md"
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-001109-0x761a2c1C.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-001109-0x761a2c1C.md",
+      "title": "Investigation \u2014 RWA",
+      "symbol": "RWA",
+      "name": "Real World Asses",
+      "date": "2026-07-31T00:11:09Z",
+      "target": "0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-001109-0x761a2c1C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260730-235558-0x7075DdC6.md",
@@ -594,20 +608,6 @@
       "score": "13",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-10] Owner not renounced (0xeaa4137505e6defbdf987e7895b5d02b45e2e7d1) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $677 (rug/illiq",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-023616-0x2C974B2d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-013623-0x279ed3c4.md",
-      "title": "Investigation \u2014 DBC",
-      "symbol": "DBC",
-      "name": "dabaic",
-      "date": "2026-07-30T01:36:23Z",
-      "target": "0x279ed3c4BdB5d5Cf68Ac48aB03D0cF8DF5913b48",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x565e18ee26092ecd6d2048bb8a72f8b741526d8f) \u2014 can still act on the contract; [-20] Very few holders (29) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipula",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-013623-0x279ed3c4.md"
     }
   ],
   "reports": [

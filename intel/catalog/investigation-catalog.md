@@ -943,3 +943,5 @@
 | 2026-07-30 | auto | 0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2 (NASDUCK) | deep_investigation | REJECT (5/100) | Very few holders (10) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-30 | auto | 0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7 (401K) | deep_investigation | REJECT (5/100) | Very few holders (4) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-31 | auto | 0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369 (RWA) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D2 | +7d |

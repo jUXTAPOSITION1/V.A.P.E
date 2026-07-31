@@ -1835,6 +1835,25 @@
     "symbol": "ZAMA",
     "times_investigated": 1
   },
+  "1:0x761a2c1c91d80ac54be3daccc2ae47be2e75a369": {
+    "address": "0x761a2c1C91d80AC54Be3daCCc2AE47be2E75a369",
+    "chain": "1",
+    "creator_address": "0x78667855f74bbe1e64718a97f33a824fab79ff09",
+    "first_investigated": "2026-07-31T00:11:09Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-001109-0x761a2c1C.md",
+        "score": 0,
+        "ts": "2026-07-31T00:11:09Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T00:11:09Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "RWA",
+    "times_investigated": 1
+  },
   "1:0x769607fcc19a53d2b56771617e8afc4ac4e4c0cc": {
     "address": "0x769607fcC19a53d2b56771617E8aFC4AC4E4C0cc",
     "chain": "1",
