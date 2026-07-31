@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T14:14:51Z",
+  "generated": "2026-07-31T14:30:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 463,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 131,
-    "investigations": 583,
+    "investigations": 584,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-141443-0xAdA58DF0.md",
-      "title": "Investigation \u2014 CRO",
-      "symbol": "CRO",
-      "name": "CRO (PoS)",
-      "date": "2026-07-31T14:14:43Z",
-      "target": "0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260731-143018-0xAad93460.md",
+      "title": "Investigation \u2014 GRVT",
+      "symbol": "GRVT",
+      "name": "Grvt",
+      "date": "2026-07-31T14:30:18Z",
+      "target": "0xAad934604B7A94Af52e831cf958284610Fb33a87",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $53 (rug/illiquid); [-10] Low liquidity $53. Positive evide",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-141443-0xAdA58DF0.md"
+      "score": "42",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2364% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-143018-0xAad93460.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-143018-0xAad93460.md",
+      "title": "Investigation \u2014 GRVT",
+      "symbol": "GRVT",
+      "name": "Grvt",
+      "date": "2026-07-31T14:30:18Z",
+      "target": "0xAad934604B7A94Af52e831cf958284610Fb33a87",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2364% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-143018-0xAad93460.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-141443-0xAdA58DF0.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,713; [-10] Violent 24h move +3941% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-143704-0x6D7AE59E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-135226-0x4c746Edf.md",
-      "title": "Investigation \u2014 GOD",
-      "symbol": "GOD",
-      "name": "GOD",
-      "date": "2026-07-30T13:52:26Z",
-      "target": "0x4c746Edf20762dC201aC40135e0C13e400d23D58",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-20] Hidden owner; [-8] Top 10 non-LP/burn holders control 60% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,978. Positive evidence: Ownership renounced; 1297 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1166+ days without a known incident",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-135226-0x4c746Edf.md"
     }
   ],
   "reports": [
