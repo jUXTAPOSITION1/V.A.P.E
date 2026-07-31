@@ -1,6 +1,9 @@
 """Tests for agents/investigate.py's expert assessment — the real synthesis
-layer added on top of score()'s deterministic verdict. Hermetic:
-agents.llm.ask_oci_grok_safe is mocked, no real network/LLM call.
+layer added on top of score()'s deterministic verdict, routed through
+agents/research_engine.py::synthesize() (see PR #373's evidence_lines/
+verdict_options additions). Hermetic: agents.llm.ask_oci_grok_safe is
+mocked (synthesize() imports it fresh per call, so patching the module
+attribute still intercepts it) — no real network/LLM call.
 """
 from unittest import mock
 
@@ -49,7 +52,8 @@ def test_malformed_response_without_marker_defaults_to_agree():
     pipeline that degrades honestly rather than guessing."""
     result, _m = _call("Some real analysis text with no marker line at all.")
     assert result["disagrees"] is False
-    assert result["text"] == "Some real analysis text with no marker line at all."
+    assert result["text"].startswith("Some real analysis text with no marker line at all.")
+    assert "## Gaps & Confidence" in result["text"]  # always appended, even when the model flagged none
 
 
 def test_early_marker_occurrence_does_not_hijack_final_verdict():
