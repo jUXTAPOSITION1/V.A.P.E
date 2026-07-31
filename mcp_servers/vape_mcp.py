@@ -105,6 +105,22 @@ def _mcp_servers(**kw):
     return {'servers': status_all()}
 
 
+def _web_research(**kw):
+    """Intelligent research crawler (agents/web_sourcer.py): search +
+    robots.txt-respecting scrape, with optional LLM-scored depth>1
+    link-following and persistent cross-run dedup/cache. Richer and slower
+    than research_search/research_scrape above (which return raw
+    provider results) — this returns tagged, deduplicated leads ready for
+    downstream use. depth>1 costs one small LLM call per level for link
+    scoring; keep max_pages modest for interactive use."""
+    query = kw.get("query", "")
+    if not query:
+        return {"error": "query required"}
+    from agents.web_sourcer import research
+    return research(query, max_pages=int(kw.get("max_pages", 8)),
+                     max_depth=int(kw.get("max_depth", 1)))
+
+
 def _wallet_trace(**kw):
     """Real wallet/address forensics — shells out to the real, Alchemy-backed
     skillforge/tools/recon/wallet_trace.sh rather than re-implementing it
@@ -253,6 +269,22 @@ TOOLS = {
         "List the MCP servers VAPE can host (reference + community search/scrape) "
         "and whether each is live, key-gated, or needs a runtime.",
         {"type": "object", "properties": {}},
+    ),
+    "web_research": (
+        _web_research,
+        "Intelligent research crawler: search + robots.txt-respecting scrape into "
+        "tagged, deduplicated leads (on-chain addresses/tx hashes/CVEs/$TICKERs "
+        "auto-extracted). max_depth>1 turns on LLM-scored link-following (finds "
+        "e.g. a news article's linked exploit report or GitHub issue). Persistent "
+        "cross-run cache/dedup under data/cache/web_sourcer/. Same free-to-call "
+        "in-process capability other VAPE agents use internally; the external, "
+        "x402-payable equivalent for third-party agents is the /scan/web_research "
+        "Worker route ($0.01/call).",
+        {"type": "object", "properties": {
+            "query": {"type": "string"},
+            "max_pages": {"type": "integer", "description": "default 8"},
+            "max_depth": {"type": "integer", "description": "default 1 (no link-following); 2+ enables it"}},
+         "required": ["query"]},
     ),
     "wallet_trace": (
         _wallet_trace,

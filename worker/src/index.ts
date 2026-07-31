@@ -43,6 +43,7 @@ import { decodeTx } from "./lib/txDecode";
 import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
+import { researchQuery } from "./lib/webSourcer";
 import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
 import { DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
@@ -360,6 +361,30 @@ const WEBSITE_REVIEW_DISCOVERY = {
   },
 };
 
+// web_research — a general-purpose web lookup (search + scrape a handful of
+// results + tag + summarize), distinct from every address/URL-specific
+// offering above. The external, x402-payable counterpart to
+// agents/web_sourcer.py's research crawler (which VAPE's own agents call
+// for free, in-process, via mcp_servers/vape_mcp.py's `web_research` tool
+// — see lib/webSourcer.ts's own docstring for why this is a from-scratch
+// TS port rather than a call back into that Python module). Priced at the
+// low end of the catalog since it's a quick single-hop lookup, not a
+// multi-page crawl (that richer depth>1 capability stays free/internal
+// only — an LLM-scored link-following crawl doesn't fit one paid HTTP
+// request's time budget anyway).
+const WEB_RESEARCH_PRICE = "$0.01";
+const WEB_RESEARCH_DISCOVERY = {
+  description: "General web research: search + scrape a handful of real results, tag on-chain "
+    + "addresses/tx hashes/CVEs/$TICKERs, and return a dense, agent-consumable summary grounded "
+    + "only in what was actually found. Built for AI-agent callers (structured JSON, no marketing "
+    + "prose) as much as human ones.",
+  output: {
+    query: "base bridge exploit 2026", sources: [{ url: "https://example.com/article", domain: "example.com", scrape_provider: "firecrawl", reachable: true }],
+    entities: ["0x0000000000000000000000000000000000dead", "cve-2026-12345"],
+    summary: "Sourced content indicates...",
+  },
+};
+
 // Single source of truth for every x402-gated route: both the paymentMiddleware()
 // config below AND the /openapi.json discovery document are generated from this
 // one array. x402scan's discovery spec makes that non-optional in spirit —
@@ -477,6 +502,21 @@ const PAID_ROUTES: VapeRoute[] = [
     inputExample: { url: "https://example.com" },
     output: WEBSITE_REVIEW_DISCOVERY.output,
   },
+  {
+    name: "web_research",
+    path: "/scan/web_research",
+    price: WEB_RESEARCH_PRICE,
+    description: `VAPE web_research — ${WEB_RESEARCH_DISCOVERY.description}`,
+    tags: ["research", "web", "agent-tooling"],
+    inputSchema: {
+      properties: {
+        query: { type: "string", description: "research query" },
+      },
+      required: ["query"],
+    },
+    inputExample: { query: "base bridge exploit 2026" },
+    output: WEB_RESEARCH_DISCOVERY.output,
+  },
   ...DL_OFFERINGS.map((o) => ({
     name: o.name,
     path: `/data/${o.name}`,
@@ -572,6 +612,7 @@ app.get("/", (c) =>
       { name: "community_intel_broadcast", price: COMMUNITY_BROADCAST_PRICE, route: "/scan/community_intel_broadcast" },
       { name: "bulk_safety_bundle", price: BULK_SAFETY_BUNDLE_PRICE, route: "/scan/bulk_safety_bundle" },
       { name: "website_review", price: WEBSITE_REVIEW_PRICE, route: "/scan/website_review" },
+      { name: "web_research", price: WEB_RESEARCH_PRICE, route: "/scan/web_research" },
       // Keyless market-data micro-services — real data, $0.01 each.
       ...DL_OFFERINGS.map((o) => ({ name: o.name, price: o.price, route: `/data/${o.name}` })),
     ],
@@ -1545,6 +1586,37 @@ app.get("/scan/website_review", async (c) => {
   });
   return c.json(
     { offering: "website_review", status: result.error ? "error" : "ok", deliverable: result,
+      source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
+    result.error ? 502 : 200
+  );
+});
+
+// web_research: a free-text query, not an address/URL — real search +
+// scrape + tag (see lib/webSourcer.ts). Rejects empty/whitespace-only
+// queries before ever calling out.
+app.get("/scan/web_research", async (c) => {
+  const query = (c.req.query("query") || "").trim();
+  if (!query) {
+    return c.json({ offering: "web_research", status: "error", error: "provide a non-empty query" }, 400);
+  }
+  const t0 = Date.now();
+  const result = await researchQuery(c.env, query);
+  c.set("vapeJobDraft", {
+    id: `${new Date().toISOString()}-${Math.random().toString(36).slice(2, 8)}`,
+    ts: new Date().toISOString(),
+    offering: "web_research",
+    address: null,
+    chain_id: 8453,
+    symbol: null,
+    name: query.slice(0, 80),
+    verdict: null,
+    status: result.error ? "error" : "settled",
+    amount_usd: Number(WEB_RESEARCH_PRICE.replace("$", "")),
+    latency_ms: Date.now() - t0,
+    error: result.error ? String(result.error) : null,
+  });
+  return c.json(
+    { offering: "web_research", status: result.error ? "error" : "ok", deliverable: result,
       source: "vape-real-data", disclaimer: "Real on-chain data. Not investment advice." },
     result.error ? 502 : 200
   );

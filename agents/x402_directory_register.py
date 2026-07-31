@@ -180,6 +180,9 @@ OFFERINGS = {
                          "+ frontier-LLM read for fake contract addresses, wallet-drainer patterns, "
                          "brand mismatch, and copy-paste scam-site boilerplate. Not a smart-contract "
                          "audit (see bounty_deep_dive for that)."),
+    "web_research": ("0.01", "General web research: search + scrape a handful of real results, "
+                         "tag on-chain addresses/tx hashes/CVEs/$TICKERs, and return a dense, "
+                         "agent-consumable summary. Built for AI-agent callers as much as human ones."),
 }
 
 # Market-data micro-services — mirrors worker/src/dataHandlers.ts's

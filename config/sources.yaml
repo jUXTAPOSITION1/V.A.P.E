@@ -1,0 +1,44 @@
+# V.A.P.E. curated research sources — real, currently-used feeds only.
+#
+# Loaded by agents/web_sourcer.py::WebSourcer.load_sources_from_yaml() to
+# seed a crawl without duplicating source lists across modules. These are
+# the exact same outlets agents/news_common.py's NATIVE_RSS_FEEDS and
+# CATEGORY_PAGES already fetch for the news-intel pipeline — this file is
+# the shared, declarative source of truth both that pipeline and
+# web_sourcer.py's crawler can read from; it does not replace
+# news_common.py's own constants (changing behavior there is a separate,
+# deliberate decision), it just gives other tools a way to reuse the same
+# real list without importing a news-specific module.
+#
+# Schema per entry:
+#   name:      human-readable outlet name
+#   rss_url:   real RSS/Atom feed URL (omit if the source has no feed)
+#   base_url:  a listing/category page to scrape instead of/alongside rss_url
+#   priority:  1 (primary) or 2 (supplementary) — lower fetched first
+#   topics:    list of topic tags this source is filtered under via
+#              load_sources_from_yaml(topic=...)
+sources:
+  - name: CoinDesk
+    rss_url: https://www.coindesk.com/arc/outboundfeeds/rss/
+    priority: 1
+    topics: [crypto-markets]
+  - name: Cointelegraph
+    rss_url: https://cointelegraph.com/rss
+    priority: 1
+    topics: [crypto-markets]
+  - name: Decrypt
+    rss_url: https://decrypt.co/feed
+    priority: 1
+    topics: [crypto-markets]
+  - name: The Block
+    rss_url: https://www.theblock.co/rss.xml
+    priority: 1
+    topics: [crypto-markets]
+  - name: CryptoSlate
+    rss_url: https://cryptoslate.com/feed/
+    priority: 1
+    topics: [crypto-markets]
+  - name: CoinDesk (news listing)
+    base_url: https://www.coindesk.com/coindesk-news
+    priority: 2
+    topics: [crypto-markets]

@@ -3,7 +3,7 @@
   "protocol": "2024-11-05",
   "servers": {
     "vape": {
-      "purpose": "V.A.P.E.'s own detective tools (investigate, scan, wallet trace, contract source, DefiLlama intel, bounty radar, memory, hacks, fear/greed)",
+      "purpose": "V.A.P.E.'s own detective tools (investigate, scan, wallet trace, contract source, DefiLlama intel, bounty radar, memory, hacks, fear/greed, web research crawler)",
       "command": "python3",
       "args": ["${ROOT}/mcp_servers/vape_mcp.py"],
       "keyless": true,
