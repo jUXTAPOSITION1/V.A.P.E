@@ -10,7 +10,7 @@
 torch>=2.13.0
 transformers>=4.44
 peft>=0.20.0
-bitsandbytes>=0.43
+bitsandbytes>=0.50.0
 accelerate>=1.14.0
 datasets>=5.0.1
 huggingface_hub>=1.24.0
