@@ -1,13 +1,13 @@
 {
-  "generated": "2026-07-31T05:56:37Z",
+  "generated": "2026-07-31T05:57:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 454,
+    "reports": 455,
     "reports_by_type": {
+      "base": 94,
       "bounty": 102,
       "virtuals": 95,
       "security": 82,
-      "base": 93,
       "sentiment": 48,
       "macro": 24,
       "bug": 3,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-031204-0x6631eE65.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_042309.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T04:23:09Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_042309.md",
-      "bytes": 17096
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-31-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-31T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-31 05:57 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-05.md",
+      "bytes": 3867
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-07-31-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-07-31T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-07-31 05:57 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-05.md",
+      "bytes": 3867
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Computed deterministically from real Fear & Greed (29, prior day 30) and global market cap 24h change (-1.29%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-28-16.md",
       "bytes": 2017
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-28-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-28T15:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-28 15:23 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-28-15.md",
-      "bytes": 3277
     }
   ],
   "broadcasts": [
