@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T02:57:08Z",
+  "generated": "2026-07-31T03:12:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 452,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 574,
+    "investigations": 575,
     "news": 27,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-024147-0xD0D5bCa9.md",
-      "title": "Investigation \u2014 SNP500",
-      "symbol": "SNP500",
-      "name": "Sock and Pussy 500",
-      "date": "2026-07-31T02:41:47Z",
-      "target": "0xD0D5bCa9Eaa78A5056A28d4064438af3fA1352a9",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260731-031204-0x6631eE65.md",
+      "title": "Investigation \u2014 A",
+      "symbol": "A",
+      "name": "A",
+      "date": "2026-07-31T03:12:04Z",
+      "target": "0x6631eE651DA438Db2BE611B5A44dFE2Ca04590C5",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-024147-0xD0D5bCa9.md"
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: sLGNS (0x99a57E6C8558BC6689f894e068733ADf83C19725) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-031204-0x6631eE65.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-031204-0x6631eE65.md",
+      "title": "Investigation \u2014 A",
+      "symbol": "A",
+      "name": "A",
+      "date": "2026-07-31T03:12:04Z",
+      "target": "0x6631eE651DA438Db2BE611B5A44dFE2Ca04590C5",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: sLGNS (0x99a57E6C8558BC6689f894e068733ADf83C19725) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-031204-0x6631eE65.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-024147-0xD0D5bCa9.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x0a713b0158ebc408bb1581a40072eecff1e4e0c6) \u2014 can still act on the contract; [-20] Very few holders (40) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; [-",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-093626-0x2b922264.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-090617-0xd0cC2b0e.md",
-      "title": "Investigation \u2014 VIBESTR",
-      "symbol": "VIBESTR",
-      "name": "VibeStrategy",
-      "date": "2026-07-30T09:06:17Z",
-      "target": "0xd0cC2b0eFb168bFe1f94a948D8df70FA10257196",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x019817ad02a31b990433542097be29d97613e8cb) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: FWA (0x47883e389BB6be3650B0C0935b300b50a95fc072) \u2014 REJECT 35/100 \u2014 likely the same seria",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-090617-0xd0cC2b0e.md"
     }
   ],
   "reports": [
