@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T01:41:20Z",
+  "generated": "2026-07-31T01:56:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 129,
-    "investigations": 571,
+    "investigations": 572,
     "news": 26,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-011116-0x53e7C841.md",
-      "title": "Investigation \u2014 KUMA",
-      "symbol": "KUMA",
-      "name": "kuma",
-      "date": "2026-07-31T01:11:16Z",
-      "target": "0x53e7C84188E47b220e15aDD5C83b450474f73c89",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-011116-0x53e7C841.md"
+      "file": "investigation-20260731-015618-0xFe189E97.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-07-31T01:56:18Z",
+      "target": "0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +876% (volatility/manipulation); [-10] Pair 3.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownersh",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-015618-0xFe189E97.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-015618-0xFe189E97.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-07-31T01:56:18Z",
+      "target": "0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +876% (volatility/manipulation); [-10] Pair 3.5 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownersh",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-015618-0xFe189E97.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-011116-0x53e7C841.md",
@@ -594,20 +608,6 @@
       "score": "55",
       "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-073651-0xB0378944.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-072138-0x1f9840a8.md",
-      "title": "Investigation \u2014 UNI",
-      "symbol": "UNI",
-      "name": "Uniswap",
-      "date": "2026-07-30T07:21:38Z",
-      "target": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Owner not renounced (0x1a9c8182c09f50c8318d769245bea52c32be35bc) \u2014 can still act on the contract. Positive evidence: 389006 holders \u2014 reasonably distributed; Deep liquidity ($15,803,349); Trading 1912+ days without a known incident in this scan; Custom verified source (not a mass-produced factory te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-072138-0x1f9840a8.md"
     }
   ],
   "reports": [

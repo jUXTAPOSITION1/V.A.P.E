@@ -5594,6 +5594,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0xfe189e97832da1573e4e4ff034f4ffc3a15c7777": {
+    "address": "0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777",
+    "chain": "56",
+    "creator_address": "0x85de3316eeca740ba049a8d9c9d68ab21cb282e5",
+    "first_investigated": "2026-07-31T01:56:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-015618-0xFe189E97.md",
+        "score": 62,
+        "ts": "2026-07-31T01:56:18Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-07-31T01:56:18Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "MarsCoin",
+    "times_investigated": 1
+  },
   "8453:0x0027da8d030dc3092e7ddb6488c52e1ee65580bc": {
     "address": "0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc",
     "chain": "8453",

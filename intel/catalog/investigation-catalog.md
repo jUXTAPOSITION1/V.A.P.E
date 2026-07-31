@@ -953,3 +953,5 @@
 | 2026-07-31 | auto | 0xD6B7e95d90904Ec69F40092DD4f55A60F0176304 (SNP500) | deep_investigation | REJECT (5/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-31 | auto | 0x53e7C84188E47b220e15aDD5C83b450474f73c89 (KUMA) | deep_investigation | REJECT (40/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-31 | auto | 0xFe189E97832DA1573e4e4Ff034F4fFC3a15c7777 (MarsCoin) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
