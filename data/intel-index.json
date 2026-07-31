@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T19:17:08Z",
+  "generated": "2026-07-31T19:25:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 468,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 132,
     "investigations": 592,
-    "news": 30,
+    "news": 31,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md",
+      "title": "Vesting Cutoff: Pump.fun Layoffs Cost Fired Staff Millions in Unvested PUMP Tokens",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 19:25 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Employees were reportedly let go just two months before a major one-year cliff unlock, raising sharp questions about the memecoin launchpad's corporate governance.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
+    },
     {
       "file": "news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md",
       "title": "AI Company Sues Town for Trying to Block Data Center Near National Park",
