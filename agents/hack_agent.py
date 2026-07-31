@@ -61,6 +61,19 @@ def _incident_id(h):
     return f"{h['date']}:{h['name']}"
 
 
+def _safe_date(date):
+    """Sanitizes h['date'] before it's used to build a report filename.
+    Real gap this closes (flagged by CodeRabbit on PR #372): _slug() was
+    already applied to h['name'] right next to this in the same f-string,
+    but h['date'] was spliced in raw — a '/' or '..' in that field could
+    escape ANALYSIS_DIR. The attack feed always writes real ISO dates
+    (YYYY-MM-DD), so this never changes a well-formed value; it only
+    strips anything that isn't a digit or dash, exactly like _slug() does
+    for the name."""
+    s = re.sub(r"[^0-9-]+", "-", (date or "").strip()).strip("-")
+    return s or "unknown-date"
+
+
 def _slug(name):
     s = re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
     return s or "incident"
@@ -85,8 +98,8 @@ def _grounding(h):
     already gathered for this incident, nothing invented — fed into
     research_engine.layered_research()/synthesize() as known_facts."""
     facts = {
-        "protocol": h["name"],
-        "date": h["date"],
+        "protocol": h.get("name") or "unknown",
+        "date": h.get("date") or "unknown",
         "loss_usd_m": h.get("amount_usd_m", 0),
         "chains": ", ".join(h.get("chains") or []) or "unknown",
         "technique": h.get("technique") or "unspecified",
@@ -126,7 +139,7 @@ def _write_analysis(h):
         return None, None
 
     os.makedirs(ANALYSIS_DIR, exist_ok=True)
-    path = os.path.join(ANALYSIS_DIR, f"{h['date']}-{_slug(h['name'])}.md")
+    path = os.path.join(ANALYSIS_DIR, f"{_safe_date(h.get('date'))}-{_slug(h.get('name'))}.md")
     header = (
         f"# {h['name']} — Threat Analysis\n\n"
         f"**Date:** {h['date']}  \n"

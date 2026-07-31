@@ -30,6 +30,16 @@ generic OWASP grab bag):
    template-literal interpolation everywhere else; a bare-variable
    assignment bypasses that convention entirely and is the classic vanilla-
    JS DOM-XSS shape.
+5. `os.path.join(...)`/`open(...)`/`pathlib.Path(...)` given an f-string
+   that splices in a bare dict/list subscript (e.g. `f"{h['date']}-x.md"`)
+   with no sanitizing function call around it — the real, shipped shape
+   found in agents/hack_agent.py by an external reviewer (CodeRabbit) that
+   this scanner's first version had no check for at all: `_slug(h['name'])`
+   was wrapped, its sibling `h['date']` was spliced in raw right next to
+   it, letting a `/` or `..` in that field escape the intended directory.
+   Flags the *asymmetry* (one sibling sanitized, one not), not bare
+   subscripts in general — every value going into a path template needs a
+   sanitizing call, or none of this fires.
 
 NOT covered by design: multi-line template-literal interpolation (`` `...
 ${x}...` ``) is NOT traced here — this repo's own convention already wraps
@@ -138,10 +148,57 @@ def _check_python_ast(path, text, findings):
                 findings.append(("HIGH", path, node.lineno,
                                   f"subprocess.{name}(..., shell=True) given a dynamically-built command "
                                   "string — shell injection risk. Pass a list of args and drop shell=True."))
+        elif _is_path_building_call(func) and node.args:
+            for arg in node.args:
+                if _fstring_has_asymmetric_sanitization(arg):
+                    findings.append(("MEDIUM", path, node.lineno,
+                                      f"{name}(...) builds a path from an f-string where one spliced-in "
+                                      "value is wrapped in a sanitizing call and a sibling value is a bare "
+                                      "dict/list subscript — if that unsanitized field can contain '/' or "
+                                      "'..', it can escape the intended directory. Sanitize it the same way."))
 
 
 def _module_name(node):
     return node.id if isinstance(node, ast.Name) else None
+
+
+def _is_path_building_call(func):
+    """True if func is os.path.join(...), open(...), or pathlib.Path(...) —
+    the three call shapes this repo actually uses to build a filesystem
+    path from parts (see agents/hack_agent.py, agents/token_scan.py, etc)."""
+    if isinstance(func, ast.Name):
+        return func.id in ("open", "Path")
+    if isinstance(func, ast.Attribute):
+        if func.attr == "Path":
+            return True
+        if func.attr == "join" and isinstance(func.value, ast.Attribute) and func.value.attr == "path" \
+                and isinstance(func.value.value, ast.Name) and func.value.value.id == "os":
+            return True
+    return False
+
+
+def _fstring_has_asymmetric_sanitization(node):
+    """True if an f-string has at least one spliced-in value wrapped in a
+    function call (a sanitizer, e.g. `_slug(h['name'])`) AND at least one
+    sibling value that's a bare dict/list subscript with no call around it
+    at all (e.g. `h['date']`) — the exact real shape found in
+    agents/hack_agent.py: one field sanitized, the field right next to it
+    spliced in raw. Doesn't fire on an f-string where nothing is sanitized
+    (that's a broader, noisier pattern this check deliberately leaves
+    alone) or where every subscript is already wrapped."""
+    if not isinstance(node, ast.JoinedStr):
+        return False
+    has_sanitized_call = False
+    has_bare_subscript = False
+    for value in node.values:
+        if not isinstance(value, ast.FormattedValue):
+            continue
+        expr = value.value
+        if isinstance(expr, ast.Call):
+            has_sanitized_call = True
+        elif isinstance(expr, ast.Subscript):
+            has_bare_subscript = True
+    return has_sanitized_call and has_bare_subscript
 
 
 def _check_hardcoded_secrets(path, text, findings):

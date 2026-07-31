@@ -34,6 +34,24 @@ def test_slug_lowercases_and_strips_punctuation():
     assert hack_agent._slug(None) == "incident"
 
 
+def test_safe_date_passes_through_a_real_iso_date_unchanged():
+    assert hack_agent._safe_date("2026-07-17") == "2026-07-17"
+
+
+def test_safe_date_strips_path_traversal_segments():
+    # Real gap CodeRabbit flagged on PR #372: _slug() sanitized h['name']
+    # right next to h['date'], which was spliced in raw — a '/' or '..'
+    # here used to be able to escape ANALYSIS_DIR when joined into a path.
+    assert "/" not in hack_agent._safe_date("../../etc/passwd")
+    assert ".." not in hack_agent._safe_date("../../etc/passwd")
+    assert hack_agent._safe_date("2026/07-17") == "2026-07-17"
+
+
+def test_safe_date_empty_or_none_falls_back():
+    assert hack_agent._safe_date("") == "unknown-date"
+    assert hack_agent._safe_date(None) == "unknown-date"
+
+
 def test_grounding_includes_real_fields_only():
     h = _incident(name="Foo", technique="Reentrancy", chains=["Base", "Ethereum"])
     facts = hack_agent._grounding(h)
@@ -96,6 +114,16 @@ class TestWriteAnalysis:
         assert "attacker identity unconfirmed" in content
         assert "## Research Methodology and Sources" in content
         mock_review.assert_called_once()
+
+    def test_malicious_date_cannot_escape_analysis_dir(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
+        fake_synth = {"narrative": "text", "gaps": [], "provider": "oci_grok"}
+        with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
+            with mock.patch("agents.research_engine.synthesize", return_value=fake_synth):
+                with mock.patch("agents.research_engine.review_output", return_value={"ok": True, "issues": []}):
+                    report, _ = hack_agent._write_analysis(_incident(name="Foo", date="../../etc/passwd"))
+        full_path = os.path.join(hack_agent.ic.ROOT, report)
+        assert os.path.commonpath([os.path.abspath(full_path), str(tmp_path)]) == str(tmp_path)
 
     def test_uses_threat_analysis_task_type_and_real_known_facts(self, tmp_path, monkeypatch):
         monkeypatch.setattr(hack_agent, "ANALYSIS_DIR", str(tmp_path))
@@ -175,7 +203,7 @@ class TestRun:
 
     def test_already_analyzed_incident_is_patched_not_reanalyzed(self, tmp_path, monkeypatch):
         incidents = [_incident(name="Foo", date="2026-07-01")]
-        feed_path, _ = self._setup(tmp_path, monkeypatch, incidents)
+        self._setup(tmp_path, monkeypatch, incidents)
         with mock.patch("agents.research_engine.layered_research", return_value=_fake_result()):
             with mock.patch("agents.research_engine.synthesize",
                              return_value={"narrative": "analysis", "gaps": [], "provider": "oci_grok"}) as m:
