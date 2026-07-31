@@ -377,3 +377,4 @@
 {"ts": "2026-07-31T17:01:15.445540Z", "target": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
 {"ts": "2026-07-31T17:31:24.631926Z", "target": "etherfi-borrowing-market", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 53}
 {"ts": "2026-07-31T17:46:25.734466Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
+{"ts": "2026-07-31T18:01:39.370466Z", "target": "uniswap-v4", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 53}
