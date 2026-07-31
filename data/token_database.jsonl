@@ -92,3 +92,4 @@
 {"ts": "2026-07-31T06:56:59.938531Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-31T07:26:32.454245Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_chart"}
 {"ts": "2026-07-31T15:46:03.378796Z", "address": "0xB8d7710f7d8349A506b75dD184F05777c82dAd0C", "chain": "43114", "symbol": "ARENA", "name": "ARENA", "source": "evm", "offering": "token_chart"}
+{"ts": "2026-07-31T17:01:15.445238Z", "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "chain": "1", "symbol": "V4", "name": "V4", "source": "evm", "offering": "token_chart"}
