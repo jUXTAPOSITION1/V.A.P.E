@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T11:57:21Z",
+  "generated": "2026-07-31T12:12:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 461,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 131,
-    "investigations": 577,
+    "investigations": 578,
     "news": 29,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-102610-0x7eA8e859.md",
-      "title": "Investigation \u2014 TRUMP2028",
-      "symbol": "TRUMP2028",
-      "name": "Trump 2028",
-      "date": "2026-07-31T10:26:10Z",
-      "target": "0x7eA8e8590fB12e81A828FCb121eb9324d5CFDa44",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260731-121211-0xD29D072d.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "AKE",
+      "date": "2026-07-31T12:12:11Z",
+      "target": "0xD29D072d5772D31266dF046A771B8e3519C7Dd36",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,580 (rug/illiquid); [-10] Low liqu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-102610-0x7eA8e859.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $86 (rug/illiquid); [-10] Low liquidity $86. Positive evidence: Ownership renounced; 28252 holders \u2014 reaso",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-121211-0xD29D072d.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-121211-0xD29D072d.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "AKE",
+      "date": "2026-07-31T12:12:11Z",
+      "target": "0xD29D072d5772D31266dF046A771B8e3519C7Dd36",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $86 (rug/illiquid); [-10] Low liquidity $86. Positive evidence: Ownership renounced; 28252 holders \u2014 reaso",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-121211-0xD29D072d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-102610-0x7eA8e859.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10]",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-120635-0x6C1dd330.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-102226-0x991035c1.md",
-      "title": "Investigation \u2014 HEYI",
-      "symbol": "HEYI",
-      "name": "Meme Queen",
-      "date": "2026-07-30T10:22:26Z",
-      "target": "0x991035c1F2E0EF75831c78b184958Cb9B9da4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 53% of supply \u2014 meaningful concentration; [-10] Low liquidity $18,338; [-10] Pair 5.3 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-102226-0x991035c1.md"
     }
   ],
   "reports": [

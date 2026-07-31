@@ -965,3 +965,5 @@
 | 2026-07-31 | auto | 0xDbE20ADb609420Db52cc3093478aB334D1E3f57A (WMATIC) | deep_investigation | REJECT (40/100) | Very few holders (8) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-31 | auto | 0x7eA8e8590fB12e81A828FCb121eb9324d5CFDa44 (TRUMP2028) | deep_investigation | REJECT (0/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-31 | auto | 0xD29D072d5772D31266dF046A771B8e3519C7Dd36 (AKE) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
