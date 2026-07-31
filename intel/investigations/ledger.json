@@ -5479,6 +5479,24 @@
     "symbol": "\u55b5\u55b5\u5e01",
     "times_investigated": 1
   },
+  "56:0xdbde3e2ba260d988e16bb61acaeb4331b0884444": {
+    "address": "0xDbDE3E2bA260d988E16bB61aCAeB4331b0884444",
+    "chain": "56",
+    "first_investigated": "2026-07-31T13:29:12Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-132912-0xDbDE3E2b.md",
+        "score": 45,
+        "ts": "2026-07-31T13:29:12Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T13:29:12Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "CZ Moon",
+    "times_investigated": 1
+  },
   "56:0xde8d34cc700055aa6bc8f7614851a051ca14bf33": {
     "address": "0xdE8D34cc700055aA6Bc8F7614851a051ca14bF33",
     "chain": "56",

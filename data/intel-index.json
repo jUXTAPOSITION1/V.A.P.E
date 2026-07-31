@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T13:14:14Z",
+  "generated": "2026-07-31T13:29:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 462,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 131,
-    "investigations": 581,
+    "investigations": 582,
     "news": 29,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-131406-0xC6F05bc3.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "LordGenesis",
-      "date": "2026-07-31T13:14:06Z",
-      "target": "0xC6F05bc34b698c2190d19FDeB669b92448f786f6",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260731-132912-0xDbDE3E2b.md",
+      "title": "Investigation \u2014 CZ Moon",
+      "symbol": "CZ Moon",
+      "name": "CZ Moon",
+      "date": "2026-07-31T13:29:12Z",
+      "target": "0xDbDE3E2bA260d988E16bB61aCAeB4331b0884444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: NTFS (0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5) \u2014 REJECT 13/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated. ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-131406-0xC6F05bc3.md"
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +245% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-132912-0xDbDE3E2b.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-132912-0xDbDE3E2b.md",
+      "title": "Investigation \u2014 CZ Moon",
+      "symbol": "CZ Moon",
+      "name": "CZ Moon",
+      "date": "2026-07-31T13:29:12Z",
+      "target": "0xDbDE3E2bA260d988E16bB61aCAeB4331b0884444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +245% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-132912-0xDbDE3E2b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-131406-0xC6F05bc3.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $25,349; [-10] Violent 24h move +1623% (volatility/manipulation); [-15] Pair only 2.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-133718-0xFCe7C90c.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-125212-0xcE066060.md",
-      "title": "Investigation \u2014 BPay",
-      "symbol": "BPay",
-      "name": "BullPay",
-      "date": "2026-07-30T12:52:12Z",
-      "target": "0xcE06606040Cdad5800b6B130A06d58F897Dc4591",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Low holder count (105); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,828; [-10] No known third-party audit or verifiable team identity found \u2014 trea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-125212-0xcE066060.md"
     }
   ],
   "reports": [
