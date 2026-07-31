@@ -3656,6 +3656,25 @@
     "symbol": "HEFE",
     "times_investigated": 1
   },
+  "43114:0x223a368ad0e7396165fc629976d77596a51f155c": {
+    "address": "0x223a368Ad0E7396165FC629976d77596a51F155C",
+    "chain": "43114",
+    "creator_address": "0xf8d0a200589126d397d0c93fdc70d0688c5ac13b",
+    "first_investigated": "2026-07-31T15:45:56Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-154556-0x223a368A.md",
+        "score": 25,
+        "ts": "2026-07-31T15:45:56Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T15:45:56Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "GURS",
+    "times_investigated": 1
+  },
   "43114:0x26e9dbe75aed331e41272bece932ff1b48926ca9": {
     "address": "0x26e9dbe75aed331E41272BEcE932Ff1B48926Ca9",
     "chain": "43114",
