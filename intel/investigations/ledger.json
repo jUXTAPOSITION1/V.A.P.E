@@ -2309,6 +2309,25 @@
     "symbol": "YIELD",
     "times_investigated": 1
   },
+  "1:0x93aa70e6a08811f1572df864417d08c52fb4a84c": {
+    "address": "0x93AA70E6a08811F1572DF864417D08C52fB4A84c",
+    "chain": "1",
+    "creator_address": "0x6f4c892a500719726952d0cfa4b124db35033106",
+    "first_investigated": "2026-07-31T19:17:02Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-191702-0x93AA70E6.md",
+        "score": 0,
+        "ts": "2026-07-31T19:17:02Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T19:17:02Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "1:0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce": {
     "address": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
     "chain": "1",

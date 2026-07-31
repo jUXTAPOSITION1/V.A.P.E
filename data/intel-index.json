@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T19:02:01Z",
+  "generated": "2026-07-31T19:17:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 468,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 591,
+    "investigations": 592,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-174622-0x15e096f1.md",
-      "title": "Investigation \u2014 AIPF",
-      "symbol": "AIPF",
-      "name": "AI Powered Finance",
-      "date": "2026-07-31T17:46:22Z",
-      "target": "0x15e096f13f04A866C933071C85231ca590b41343",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 9776 holders \u2014 reasonably distributed; Trading 102+ days without",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-174622-0x15e096f1.md"
+      "file": "investigation-20260731-191702-0x93AA70E6.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-31T19:17:02Z",
+      "target": "0x93AA70E6a08811F1572DF864417D08C52fB4A84c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-191702-0x93AA70E6.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-191702-0x93AA70E6.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-07-31T19:17:02Z",
+      "target": "0x93AA70E6a08811F1572DF864417D08C52fB4A84c",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-191702-0x93AA70E6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-174622-0x15e096f1.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $26,029; [-10] Violent 24h move +2900% (volatility/manipulation); [-15] Pair only 0.9 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-175324-0xD036f173.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-172322-0x61900eb9.md",
-      "title": "Investigation \u2014 V4STR",
-      "symbol": "V4STR",
-      "name": "Programmable Strategy",
-      "date": "2026-07-30T17:23:22Z",
-      "target": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-15] High buy tax 25%; [-20] High sell tax 40%; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-172322-0x61900eb9.md"
     }
   ],
   "reports": [
@@ -2107,8 +2107,8 @@
     },
     {
       "file": "skills-token-investigation-md.md",
-      "title": "skills/token-investigation.md",
-      "summary": "Distilled 2026-07-26T08:31:49Z from real SKILLFORGE memory.",
+      "title": "skills/token_investigation.md",
+      "summary": "title: Ethereum Token Safety Assessment via agents/investigate.py",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/skills-token-investigation-md.md"
     }
   ]

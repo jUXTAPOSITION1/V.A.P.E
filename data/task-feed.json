@@ -1,7 +1,21 @@
 {
-  "generated": "2026-07-31T19:02:02Z",
-  "synthesis": "VAPE automation repeatedly generated featured investigations while running bounty sweeps, tool checks, reputation snapshots, and repo reviews.",
+  "generated": "2026-07-31T19:17:09Z",
+  "synthesis": "VAPE's automation",
   "tasks": [
+    {
+      "sha": "0674a2b468",
+      "kind": "automation",
+      "message": "Seal findings chain 2026-07-31T19:15Z",
+      "date": "2026-07-31T19:15:01Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0674a2b46821ac1c2f28f1b5e85127a758238a77"
+    },
+    {
+      "sha": "b8e15eae95",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-31T19:02Z",
+      "date": "2026-07-31T19:02:04Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b8e15eae95d414b4b142cb995d8b110d39447ba4"
+    },
     {
       "sha": "4146ae60a6",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-31T17:01Z",
       "date": "2026-07-31T17:01:18Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4d7110d4e751bceed3eb9e4d24ad7525fa504d42"
-    },
-    {
-      "sha": "e755839aac",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-31T16:46Z",
-      "date": "2026-07-31T16:46:20Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e755839aac401741bbea7af001a8eb5c6b0241e0"
-    },
-    {
-      "sha": "5690982f5b",
-      "kind": "sweep",
-      "message": "base_sweep 2026-07-31T16:40Z",
-      "date": "2026-07-31T16:40:25Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5690982f5b1fe699d785c6c5c03805bf8e8b90e0"
     }
   ]
 }

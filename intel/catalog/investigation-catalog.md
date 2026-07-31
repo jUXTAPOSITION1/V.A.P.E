@@ -993,3 +993,5 @@
 | 2026-07-31 | auto | 0xa0e0b50DD30f9fAA6c7Ac7f8b32CB95781E574A9 (ON) | deep_investigation | REJECT (0/100) | Very few holders (16) — thin, easily manipulated distribution | +7d |
 
 | 2026-07-31 | auto | 0x15e096f13f04A866C933071C85231ca590b41343 (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-07-31 | auto | 0x93AA70E6a08811F1572DF864417D08C52fB4A84c (ASTEROID) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
