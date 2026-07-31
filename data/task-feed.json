@@ -1,7 +1,28 @@
 {
-  "generated": "2026-07-31T16:01:25Z",
-  "synthesis": "[automation] threat",
+  "generated": "2026-07-31T16:16:28Z",
+  "synthesis": "VAPE's automation ran repeated featured investigations alongside red-team scans, threat analyses, bounty sweeps, repo reviews, and reputation snapshots.",
   "tasks": [
+    {
+      "sha": "ebb08149d8",
+      "kind": "sweep",
+      "message": "macro_sweep 2026-07-31T16:05Z",
+      "date": "2026-07-31T16:05:26Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ebb08149d8a3a1f067997ad95dca08a2a925ebe4"
+    },
+    {
+      "sha": "1d85576899",
+      "kind": "automation",
+      "message": "VAPE AI red-team deep scan 2026-07-31T16:03Z",
+      "date": "2026-07-31T16:03:32Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1d855768990c3438a6f84b7bff2113342c8c8ceb"
+    },
+    {
+      "sha": "4711cc5173",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-07-31T16:01Z",
+      "date": "2026-07-31T16:01:28Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4711cc5173105b846b32d25139412e48e96e339d"
+    },
     {
       "sha": "f08cc9e104",
       "kind": "automation",
@@ -85,27 +106,6 @@
       "message": "community broadcast 2026-07-31T14:56Z",
       "date": "2026-07-31T14:56:00Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f43139f43b6085db2ef4cf8d783740894a2439b5"
-    },
-    {
-      "sha": "8249a6e747",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-31T14:45Z",
-      "date": "2026-07-31T14:45:35Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8249a6e7470aa76d1db832a79501461f0d13f214"
-    },
-    {
-      "sha": "7f3f98221c",
-      "kind": "automation",
-      "message": "VAPE AI red-team cycle 2026-07-31T14:44Z",
-      "date": "2026-07-31T14:44:54Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7f3f98221cb3fe7963c5d8959d714a4009f14b6a"
-    },
-    {
-      "sha": "fd6b7be809",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-31T14:30Z",
-      "date": "2026-07-31T14:30:38Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fd6b7be809f43a355c63a778d66d95bd35f18872"
     }
   ]
 }
