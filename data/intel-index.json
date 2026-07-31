@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T13:59:33Z",
+  "generated": "2026-07-31T14:06:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 462,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 131,
     "investigations": 582,
-    "news": 29,
+    "news": 30,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md",
+      "title": "AI Company Sues Town for Trying to Block Data Center Near National Park",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 14:06 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 14:06 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md"
+    },
     {
       "file": "news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md",
       "title": "STABLECOIN RESERVE REQUIREMENTS: THE REGULATORY BATTLEGROUND SHAPING CRYPTO'S LIQUIDITY BACKBONE",
