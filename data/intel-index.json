@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-31T15:22:44Z",
+  "generated": "2026-07-31T15:24:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 464,
+    "reports": 465,
     "reports_by_type": {
+      "bounty": 106,
       "virtuals": 97,
       "security": 84,
-      "bounty": 105,
       "base": 95,
       "sentiment": 49,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-31-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-31T15:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_152355.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T15:23:55Z",
       "threat": null,
-      "summary": "Date: 2026-07-31 15:22 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-31-15.md",
-      "bytes": 3113
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_152355.md",
+      "bytes": 18273
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_152355.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T15:23:55Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_152355.md",
+      "bytes": 18273
+    },
     {
       "kind": "intel",
       "type": "virtuals",
@@ -1259,17 +1270,6 @@
       "summary": "The real incident feed records 11 events in the last 7 days, none of which reached or exceeded $50M. Losses cluster around private-key and access-control failures (Garden $0.45M across Ethereum/Base/Arbitrum/BSC, Triple-A $9.7M on Ethereum/Tron/Arbitrum, AFX Bridge $24.15M on Arbitrum) and bridge-specific flaws (Verus-Ethereum Bridge $7.5",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-02.md",
       "bytes": 6417
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260728_235809.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-28T23:58:09Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_235809.md",
-      "bytes": 15291
     }
   ],
   "broadcasts": [
