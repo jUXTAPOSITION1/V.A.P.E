@@ -1,12 +1,12 @@
 {
-  "generated": "2026-07-30T23:56:04Z",
+  "generated": "2026-07-31T00:03:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 450,
+    "reports": 451,
     "reports_by_type": {
+      "bounty": 101,
       "base": 93,
       "sentiment": 48,
-      "bounty": 100,
       "virtuals": 94,
       "security": 81,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-235558-0x7075DdC6.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-30-22.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-30T22:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_000300.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T00:03:00Z",
       "threat": null,
-      "summary": "Date: 2026-07-30 22:00 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-22.md",
-      "bytes": 3443
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_000300.md",
+      "bytes": 16907
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260731_000300.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-07-31T00:03:00Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_000300.md",
+      "bytes": 16907
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: WEMIX $0.73M on ['WEMIX3.0'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: Garden $0.45M on ['Ethereum', 'Base', 'Arbitrum', 'BSC'] (None)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260728_083543.md",
       "bytes": 16655
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-28-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-28T05:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-28 05:39 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-28-05.md",
-      "bytes": 3633
     }
   ],
   "broadcasts": [
