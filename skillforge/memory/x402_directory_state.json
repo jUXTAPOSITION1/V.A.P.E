@@ -26,6 +26,7 @@
     "tx_decode",
     "unlocks",
     "wallet_pnl_deepdive",
+    "web_research",
     "website_review",
     "yields"
   ],
@@ -43,6 +44,7 @@
     "token_safety_check": "bc2d3fd2-cfb1-4bf9-93d0-b4ddb87a5ac6",
     "tx_decode": "440ab864-04d9-43d6-affa-771d580859cf",
     "wallet_pnl_deepdive": "bec80978-5620-4146-991b-596306899e1a",
+    "web_research": "c309728b-68a3-4bf9-a2e4-4f40ac55419f",
     "website_review": "60174206-3494-4c07-ab7d-6d07b5e0f16f"
   }
 }
