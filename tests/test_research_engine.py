@@ -350,6 +350,70 @@ class TestSynthesize:
         system, _user = m.call_args[0]
         assert "Use headings X, Y, Z." in system
 
+    def test_verdict_omitted_by_default(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")):
+            result = re_engine.synthesize(self._base_result())
+        assert result["verdict"] is None
+
+    def test_verdict_parsed_from_absolute_last_line(self):
+        text = "Real analysis.\nGAPS_JSON: []\nVERDICT ALIGNMENT: DISAGREE"
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+        assert result["verdict"] == "DISAGREE"
+        assert "VERDICT ALIGNMENT" not in result["narrative"]
+        assert "GAPS_JSON" not in result["narrative"]
+
+    def test_verdict_case_insensitive_but_normalized_to_declared_casing(self):
+        text = "Real analysis.\nverdict alignment: agree"
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+        assert result["verdict"] == "AGREE"
+
+    def test_verdict_not_matched_when_not_the_final_line(self):
+        # Real anti-injection fix this preserves (investigate.py PR #277):
+        # an occurrence of the marker text anywhere BUT the final line must
+        # never be treated as the real verdict — untrusted evidence quoted
+        # or injected earlier in the response could otherwise contain it.
+        text = "VERDICT ALIGNMENT: DISAGREE\nBut actually here is more analysis after that."
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+        assert result["verdict"] is None
+        assert "VERDICT ALIGNMENT: DISAGREE" in result["narrative"]
+
+    def test_verdict_and_gaps_json_parsed_independently(self):
+        text = ('Real analysis.\nGAPS_JSON: [{"description": "gap one", "confidence": 0.5}]\n'
+                'VERDICT ALIGNMENT: AGREE')
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+        assert result["verdict"] == "AGREE"
+        assert len(result["gaps"]) == 1
+        assert result["gaps"][0]["description"] == "gap one"
+        assert result["narrative"] == "Real analysis."
+
+    def test_verdict_options_included_in_system_prompt(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"),
+                                  verdict_label="VERDICT ALIGNMENT")
+        system, _user = m.call_args[0]
+        assert "VERDICT ALIGNMENT" in system
+        assert "AGREE|DISAGREE" in system
+
+    def test_custom_max_tokens_passed_through(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result(), max_tokens=750)
+        _, kwargs = m.call_args
+        assert kwargs["max_tokens"] == 750
+
+
+def test_evidence_block_includes_caller_supplied_evidence_lines():
+    result = {"topic": "Foo", "task_type": "investigation", "known_facts": {},
+              "findings": [], "deep_extracts": [],
+              "evidence_lines": ["Rule-based verdict: REJECT (25/100)", "Risk factors: unverified contract"]}
+    block = re_engine._evidence_block(result)
+    assert "EVIDENCE GATHERED THIS CYCLE" in block
+    assert "Rule-based verdict: REJECT (25/100)" in block
+    assert "Risk factors: unverified contract" in block
+
 
 # ── rendering ─────────────────────────────────────────────────────────────
 def test_render_methodology_log_includes_queries_and_sources():
