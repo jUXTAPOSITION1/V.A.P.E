@@ -3999,6 +3999,25 @@
     "symbol": "PRO",
     "times_investigated": 1
   },
+  "56:0x1fd448d0361c3212961a70930f3129a45f425b68": {
+    "address": "0x1Fd448D0361c3212961a70930f3129A45f425B68",
+    "chain": "56",
+    "creator_address": "0xf8fb6ec010f7bfb64dc37ab065cc2485ece2b71d",
+    "first_investigated": "2026-07-31T02:26:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-022628-0x1Fd448D0.md",
+        "score": 100,
+        "ts": "2026-07-31T02:26:28Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-07-31T02:26:28Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "Mars",
+    "times_investigated": 1
+  },
   "56:0x205812cdbed920aff76c6580abd681a46d11efc7": {
     "address": "0x205812CdBed920aFf76C6580abD681a46D11efc7",
     "chain": "56",

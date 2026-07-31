@@ -86,3 +86,4 @@
 {"ts": "2026-07-30T20:54:58.590804Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-30T21:55:04.348374Z", "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2", "chain": "8453", "symbol": "USDT", "name": "Tether USD", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-07-31T00:56:13.476949Z", "address": "0x3AeE7602b612de36088F3ffEd8c8f10E86EbF2bF", "chain": "56", "symbol": "BANK", "name": "BANK", "source": "evm", "offering": "liquidity_check"}
+{"ts": "2026-07-31T02:26:35.774933Z", "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "chain": "8453", "symbol": "ETD", "name": "ETD", "source": "base", "offering": "token_safety_check"}
