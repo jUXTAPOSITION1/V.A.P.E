@@ -112,8 +112,12 @@ ZERO_LLM = AUTO - {"dossier_check"}
 # unlike the four gap-closers above) — real scrape + frontier-LLM phishing/
 # scam-page read of a plain URL (worker/src/lib/websiteReview.ts), same
 # "x402-payable, not yet ACP-auto-fulfilled" shape as wallet_pnl_deepdive.
+# web_research is the same shape again: search + scrape + tag (worker/src/
+# lib/webSourcer.ts) — x402-only, no ACP handler, VAPE's own agents get the
+# free in-process equivalent via mcp_servers/vape_mcp.py's `web_research`
+# tool (agents/web_sourcer.py) instead of paying their own x402 rail.
 X402 = AUTO | {"bounty_deep_dive", "wallet_pnl_deepdive", "deep_contract_audit", "tx_decode",
-               "bulk_safety_bundle", "website_review"}
+               "bulk_safety_bundle", "website_review", "web_research"}
 # (AUTO already includes DL_NAMES, so the market-data tools are x402-flagged too.)
 # Real 402index.io service IDs, transcribed from the actual response bodies
 # logged by the 2026-07-05T20:57Z run of agents/x402_directory_register.py
@@ -161,6 +165,9 @@ OFFERINGS = [
      "x402 only, not ACP-fulfilled"),
     ("website_review", 0.15, "Phishing/scam-page red-flag read of a website URL: real scrape + "
      "frontier-LLM read for fake contract addresses, wallet-drainer patterns, brand mismatch — "
+     "x402 only, not yet ACP-listed"),
+    ("web_research", 0.01, "General web research: search + scrape a handful of real results, tag "
+     "on-chain addresses/tx hashes/CVEs/$TICKERs, and return a dense, agent-consumable summary — "
      "x402 only, not yet ACP-listed"),
     ("prediction_market_odds", 0.01, "Live crypto/Base-relevant prediction-market odds from "
      "Polymarket and Kalshi, ranked by volume"),

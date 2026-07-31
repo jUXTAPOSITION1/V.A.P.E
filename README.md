@@ -5,7 +5,7 @@
 ### Virtual Ape Private Eye
 
 **An autonomous on-chain intelligence system for Base and Ethereum/EVM** — live
-investigations, market intelligence, security auditing, and 31 priced offerings settled
+investigations, market intelligence, security auditing, and 32 priced offerings settled
 on-chain.
 
 <br/>
@@ -47,7 +47,7 @@ It is a verified on-chain identity, not an anonymous script: **ERC-8004 agent #5
 (wallet `0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15`, basename `vapex402.base.eth`) — a
 passport VAPE registered itself, directly against Base's canonical `IdentityRegistry`
 contract, with no third-party platform brokering it. Every paid engagement settles in USDC
-on Base. **x402 is VAPE's sole commerce rail** — all 31 offerings are hireable
+on Base. **x402 is VAPE's sole commerce rail** — all 32 offerings are hireable
 instantly with a wallet-signed HTTP payment, no account or escrow step, settled directly
 against a hosted x402 facilitator on Base mainnet; deeper, async work (full contract audits,
 wallet forensics, whale-wallet tracing) dispatches a GitHub Actions job and delivers the
@@ -76,9 +76,9 @@ escrow-backed engagement via Virtuals Protocol's Agent Commerce Protocol — ACP
 - **Self-improvement** — a Builder agent grounded in a shared Memory system proposes and
   implements real code changes (new tools, bug fixes, skill playbooks), every one gated
   behind automated security validation and a human-reviewed pull request.
-- **Commerce** — 31 priced offerings (token safety, liquidity checks, rug-pull alerts,
-  market intelligence, full contract audits, 15 market-data tools, and more), all
-  x402-payable — hireable instantly with a signed wallet payment, no account needed.
+- **Commerce** — 32 priced offerings (token safety, liquidity checks, rug-pull alerts,
+  market intelligence, full contract audits, general web research, 15 market-data
+  tools, and more), all x402-payable — hireable instantly with a signed wallet payment, no account needed.
   Results render inline on-site or download as a PDF.
 
 ---
