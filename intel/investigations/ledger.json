@@ -2743,6 +2743,24 @@
     "symbol": "JAKEX",
     "times_investigated": 1
   },
+  "1:0xd6b7e95d90904ec69f40092dd4f55a60f0176304": {
+    "address": "0xD6B7e95d90904Ec69F40092DD4f55A60F0176304",
+    "chain": "1",
+    "first_investigated": "2026-07-31T00:56:04Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-005604-0xD6B7e95d.md",
+        "score": 5,
+        "ts": "2026-07-31T00:56:04Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T00:56:04Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "SNP500",
+    "times_investigated": 1
+  },
   "1:0xd721706581d97ecd202bbab5c71b5a85f0f78e69": {
     "address": "0xD721706581d97eCd202bBab5c71b5a85f0F78E69",
     "chain": "1",
