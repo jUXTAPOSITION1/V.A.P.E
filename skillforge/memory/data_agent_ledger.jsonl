@@ -429,3 +429,4 @@
 {"ts": "2026-07-31T07:56:33.831799Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-07-31T08:26:34.280615Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-07-31T08:56:32.800366Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-07-31T09:26:25.594967Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
