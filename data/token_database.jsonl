@@ -89,3 +89,4 @@
 {"ts": "2026-07-31T02:26:35.774933Z", "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "chain": "8453", "symbol": "ETD", "name": "ETD", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-07-31T05:26:47.646253Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-07-31T06:26:55.888636Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-07-31T06:56:59.938531Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_intel"}

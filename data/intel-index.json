@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T06:41:53Z",
+  "generated": "2026-07-31T06:57:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 455,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 130,
-    "investigations": 575,
+    "investigations": 576,
     "news": 28,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-031204-0x6631eE65.md",
-      "title": "Investigation \u2014 A",
-      "symbol": "A",
-      "name": "A",
-      "date": "2026-07-31T03:12:04Z",
-      "target": "0x6631eE651DA438Db2BE611B5A44dFE2Ca04590C5",
+      "file": "investigation-20260731-065655-0xDbE20ADb.md",
+      "title": "Investigation \u2014 WMATIC",
+      "symbol": "WMATIC",
+      "name": "Wrapped Polygon",
+      "date": "2026-07-31T06:56:55Z",
+      "target": "0xDbE20ADb609420Db52cc3093478aB334D1E3f57A",
       "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: sLGNS (0x99a57E6C8558BC6689f894e068733ADf83C19725) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated;",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-031204-0x6631eE65.md"
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-065655-0xDbE20ADb.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-065655-0xDbE20ADb.md",
+      "title": "Investigation \u2014 WMATIC",
+      "symbol": "WMATIC",
+      "name": "Wrapped Polygon",
+      "date": "2026-07-31T06:56:55Z",
+      "target": "0xDbE20ADb609420Db52cc3093478aB334D1E3f57A",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] No known third-party audit or verifiable team identity fou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-065655-0xDbE20ADb.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-031204-0x6631eE65.md",
@@ -594,20 +608,6 @@
       "score": "70",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 76% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.5 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 55746 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-095216-0x4cE63456.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-093626-0x2b922264.md",
-      "title": "Investigation \u2014 \u55b5\u55b5\u5e01",
-      "symbol": "\u55b5\u55b5\u5e01",
-      "name": "\u7784\u7784\u5e01",
-      "date": "2026-07-30T09:36:26Z",
-      "target": "0x2b922264c23Fc0292Aba13BC2Ba853035EB29A5a",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x0a713b0158ebc408bb1581a40072eecff1e4e0c6) \u2014 can still act on the contract; [-20] Very few holders (40) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; [-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-093626-0x2b922264.md"
     }
   ],
   "reports": [

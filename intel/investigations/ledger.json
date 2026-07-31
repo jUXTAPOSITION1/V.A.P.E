@@ -910,6 +910,25 @@
     "symbol": "ARBI",
     "times_investigated": 1
   },
+  "137:0xdbe20adb609420db52cc3093478ab334d1e3f57a": {
+    "address": "0xDbE20ADb609420Db52cc3093478aB334D1E3f57A",
+    "chain": "137",
+    "creator_address": "0xeeeede01cda0d2006b49c399b4af85427f7a4355",
+    "first_investigated": "2026-07-31T06:56:55Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-065655-0xDbE20ADb.md",
+        "score": 40,
+        "ts": "2026-07-31T06:56:55Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T06:56:55Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "WMATIC",
+    "times_investigated": 1
+  },
   "137:0xe441e2e14b0a2704d73f9d34fab479682a22a897": {
     "address": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
     "chain": "137",
