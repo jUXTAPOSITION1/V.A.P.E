@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T11:27:18Z",
+  "generated": "2026-07-31T11:30:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 461,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 131,
     "investigations": 577,
-    "news": 28,
+    "news": 29,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md",
+      "title": "STABLECOIN RESERVE REQUIREMENTS: THE REGULATORY BATTLEGROUND SHAPING CRYPTO'S LIQUIDITY BACKBONE",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 11:30 UTC",
+      "topic": "Crypto Markets",
+      "dek": "As global regulators tighten the screws on fiat-pegged digital assets, the battle over what constitutes a \"safe\" reserve is redrawing the lines between compliance and decentralization.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md"
+    },
     {
       "file": "news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md",
       "title": "\u2018Funds may be at risk\u2019: Coinkite issues warning for Coldcard Mk3 users amid 594 BTC theft reports",
