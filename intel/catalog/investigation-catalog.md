@@ -1005,3 +1005,5 @@
 | 2026-07-31 | auto | 0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1 (SPCXB) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-31 | auto | 0x5B58e73137647364e7497eC07E3D51bfFc3ac39b (FRONG) | deep_investigation | REJECT (25/100) | Transfers can be paused by owner | +7d |
+
+| 2026-07-31 | auto | 0xAcfe7750B14Ec7563A4d4D64EbC74701B8871742 (XFWA) | deep_investigation | REJECT (5/100) | Owner can change balances (rug surface) | +7d |
