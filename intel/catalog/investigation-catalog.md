@@ -975,3 +975,5 @@
 | 2026-07-31 | auto | 0xC6F05bc34b698c2190d19FDeB669b92448f786f6 (LGNS) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-07-31 | auto | 0xDbDE3E2bA260d988E16bB61aCAeB4331b0884444 (CZ Moon) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-07-31 | auto | 0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C (CRO) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |

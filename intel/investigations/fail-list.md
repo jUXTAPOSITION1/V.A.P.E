@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-07-31T13:29:12Z — 267 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-07-31T14:14:43Z — 268 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| CRO | Polygon | `0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C` | 27/100 | 1 | 2026-07-31T14:14:43Z |
 | CZ Moon | BNB Chain | `0xDbDE3E2bA260d988E16bB61aCAeB4331b0884444` | 45/100 | 1 | 2026-07-31T13:29:12Z |
 | LGNS | Polygon | `0xC6F05bc34b698c2190d19FDeB669b92448f786f6` | 47/100 | 1 | 2026-07-31T13:14:06Z |
 | MarsCoin | BNB Chain | `0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444` | 40/100 | 1 | 2026-07-31T12:42:20Z |

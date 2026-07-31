@@ -752,6 +752,25 @@
     "symbol": "GEOD",
     "times_investigated": 1
   },
+  "137:0xada58df0f643d959c2a47c9d4d4c1a4defe3f11c": {
+    "address": "0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C",
+    "chain": "137",
+    "creator_address": "0x63ec5767f54f6943750a70eb6117ea2d9ca77313",
+    "first_investigated": "2026-07-31T14:14:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-141443-0xAdA58DF0.md",
+        "score": 27,
+        "ts": "2026-07-31T14:14:43Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T14:14:43Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "CRO",
+    "times_investigated": 1
+  },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {
     "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
     "chain": "137",
