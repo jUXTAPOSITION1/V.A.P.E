@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T06:11:46Z",
+  "generated": "2026-07-31T06:14:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 455,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 130,
     "investigations": 575,
-    "news": 27,
+    "news": 28,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md",
+      "title": "\u2018Funds may be at risk\u2019: Coinkite issues warning for Coldcard Mk3 users amid 594 BTC theft reports",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 06:14 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 06:14 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md"
+    },
     {
       "file": "news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md",
       "title": "Solana Treasury Trap: Inside Supernova\u2019s High-Stakes Gamble to Borrow Against $2.5M in Crypto with Just $4,000 Cash Left",

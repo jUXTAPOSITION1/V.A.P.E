@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T02:46:57Z",
+  "generated": "2026-07-31T06:14:08Z",
   "count": 60,
   "headlines": [
     {
@@ -7,6 +7,14 @@
       "url": "https://cryptoslate.com/down-to-its-last-4000-in-cash-a-crypto-firm-holding-millions-in-solana-is-seeking-a-loan-to-survive-1-5m-debt/",
       "source": "CryptoSlate",
       "published": "Thu, 30 Jul 2026 23:55:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "\u2018Funds may be at risk\u2019: Coinkite issues warning for Coldcard Mk3 users amid 594 BTC theft reports",
+      "url": "https://www.theblock.co/post/410235/coinkite-coldcard-mk3-warning?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 30 Jul 2026 22:56:53 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -19,7 +27,7 @@
       "crypto": true
     },
     {
-      "title": "US Senators sent revised ethics rules to White House for CLARITY Act: Report",
+      "title": "US senators sent revised ethics rules to White House for CLARITY Act: Report",
       "url": "https://cointelegraph.com/news/us-senators-revised-ethics-rules-white-house-clarity-act?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Thu, 30 Jul 2026 21:54:38 +0000",
@@ -75,14 +83,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase Q2 profit misses estimates despite record crypto market share",
-      "url": "https://cointelegraph.com/markets/coinbase-q2-earnings-record-crypto-market-share?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 30 Jul 2026 20:47:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin struggles to turn US GDP miss into bullish catalyst as strong spending backs Fed caution",
       "url": "https://cryptoslate.com/bitcoin-struggles-to-turn-us-gdp-miss-into-bullish-catalyst-as-strong-spending-backs-fed-caution/",
       "source": "CryptoSlate",
@@ -111,14 +111,6 @@
       "url": "https://decrypt.co/374758/treasury-secretary-bitcoin-satoshi-nakamoto-clarity-act",
       "source": "Decrypt",
       "published": "Thu, 30 Jul 2026 19:32:19 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Morgan Stanley Ethereum and Solana ETFs outperform rivals as second-day inflows reach $33 million",
-      "url": "https://cryptoslate.com/morgan-stanley-ethereum-and-solana-etfs-outperform-rivals-as-second-day-inflows-reach-33-million/",
-      "source": "CryptoSlate",
-      "published": "Thu, 30 Jul 2026 19:30:53 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -195,26 +187,26 @@
       "crypto": true
     },
     {
-      "title": "Crypto for Advisors: Is the Clarity Act dead?",
-      "url": "https://www.coindesk.com/coindesk-indices/2026/07/30/crypto-for-advisors-is-the-clarity-act-dead",
+      "title": "Major bitcoin wallet flaw drains 594 BTC in 25-minute sweep",
+      "url": "https://www.coindesk.com/tech/2026/07/31/major-bitcoin-wallet-flaw-drains-594-btc-in-25-minute-sweep",
       "source": "CoinDesk",
-      "published": "Thu, 30 Jul 2026 15:00:49 +0000",
+      "published": "Fri, 31 Jul 2026 05:12:55 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "CME's Duffy warns an overlooked tax risk looms over U.S. perpetual futures",
-      "url": "https://www.coindesk.com/policy/2026/07/30/cme-s-duffy-warns-an-overlooked-tax-risk-looms-over-u-s-perpetual-futures",
-      "source": "CoinDesk",
-      "published": "Thu, 30 Jul 2026 14:33:02 +0000",
+      "title": "Crypto\u2019s next altseason may have fewer winners: Wintermute",
+      "url": "https://cointelegraph.com/news/crypto-next-altseason-fewer-winners-wintermute?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Fri, 31 Jul 2026 04:46:14 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bipartisan Sens. Tillis and Gallego send new ethics compromise to White House in Clarity Act push",
-      "url": "https://www.theblock.co/post/410193/bipartisan-sens-tillis-gallego-new-ethics-compromise-white-house-clarity-act-push?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Thu, 30 Jul 2026 14:30:42 -0400",
+      "title": "Bitcoin ETFs just broke a brutal $500M losing streak, but the entire recovery is an illusion propped up by BlackRock",
+      "url": "https://cryptoslate.com/bitcoin-etfs-just-broke-a-brutal-500m-losing-streak-but-the-entire-recovery-is-an-illusion-propped-up-by-blackrock/",
+      "source": "CryptoSlate",
+      "published": "Fri, 31 Jul 2026 04:15:34 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -243,19 +235,43 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxONFFCdHBUVTBJNTB3R0RDZ1Y2WlNHM1djYUJkd0NQS3ZuOWtrUG5LVVpHRUxEZTQ0R19zeS1od2d4UzN5eUhzbTVuc21hbnh4MTFEb1Y3eXUtcjZtTW1hWi1WVVZ3NEUtNFgxdEUxOG9xMkdvUnVSamlqM0drOHlpUHhOODJXM2hDZ2VPWVNkaUt2ZjRRVE90MkhOWFRtYnYxaUxfUXRNdHY4S3VKRnhLNnRydGs2WG1xemUwUnA0dmtaSGtxZ1BNag?oc=5",
-      "source": "Benzinga",
-      "published": "Fri, 31 Jul 2026 02:17:29 GMT",
+      "title": "Bitcoin flat near $64,000 as Kospi's record 17% surge leaves crypto untouched",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPb09PYW1idEVFZlpuTkt1Zk9KYVZmeFNvR1U0RDdDbWNWei1CTVVmSmFVTTM1a1FYZl85bkgteXNVS2oyakVHWllpbTZGNFVvWldoLWN2blBlNllVb1J3d1lpZjFsdzIyTGgxS1ZqakhkUW8yem8tVi1WX1E5TUJtN1BvdmRZOGQwR3RWQ21qdEpYUFpyWTEwalVISy1rQ3lyeHh5RVQwYnQzUFNRYjg2MnhTWGtqRUFsUDNWZDBKWQ?oc=5",
+      "source": "CoinDesk",
+      "published": "Fri, 31 Jul 2026 05:44:08 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bitcoin, Ethereum Outperform Markets in July as Chip Stocks Plunge 22%",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZHhqZmRCNTBBZzlLU1FYTmhjS3FJckFRNDdhcG5LdzBEbmNNLUVOdnNCV0NSSlMydjRHX1dPYU5uOGV2WmlzNmljcVJLM0k0dC1uRmRsVVRzQm5JbWdYU0lwd3JiejROX0dQN25qektlNmE0QUZESWNuQ1NaTm5hUlNUMUpXX3FtZDRaRXc4MUE3dWs1VFE0S053?oc=5",
-      "source": "CryptoPotato",
-      "published": "Thu, 30 Jul 2026 20:04:00 GMT",
+      "title": "Top 3 Price Prediction: Bitcoin, Ethereum, Ripple \u2013 BTC eyes 50-day EMA breakout, ETH consolidates, XRP steadies",
+      "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPNDM1aHJ5U2J5TDc3bER0QnZrbEdJeE13eWpTQmltQkY3N3NNeWdzSFZxY1BtdmRodW43X0NySEQ3U19jOS1DSDNaTDhlY0ZBemtTRVVCWXA5eFpNcnAwcklxb1NmSWJiMlNEd3BENlRRUU1KTktndkg5cTgtc256X0NCRVlsRW9rT3Q5amRZS21GSXRic05uejRoSWpTUWxVU3Rya1lweGhHNUdYYzBVTnpYMHVidVEya0V3dXNOXzdfUmp4OUNkakN1LV93LVRMRU4wX3NpV0h0T1YzWXQzRXhXVWdMTzk2Zlh4dTJNSm05NUJEaU9zLQ?oc=5",
+      "source": "FXStreet",
+      "published": "Fri, 31 Jul 2026 04:06:50 GMT",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC Dropping to $60,000",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd2xXZHpwZ2pmcmZwckFzb2R4RjJGVXpXelowLUk5ZTFob0tna2NHQmZRaHg1ZE5DLUJWU3A3WkxFQ0ZaYVdvZ3E1cmZqYTkzTzJmSW1ibXBhWkdLNXpjcGJHWlU4YWpBM3lmMHlfZXZYVmlYSXUtMWFxYnZPVEhHb1pyRjlGWUYzdFZuNnlqVXR5MzFCZWxOcGlwWEd0UHNqWkE?oc=5",
+      "source": "Yahoo Finance",
+      "published": "Fri, 31 Jul 2026 02:17:00 GMT",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin, Ethereum Remain Popular Among Institutional Investors, Wintermute Research Reports",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQNXFCZ1JvUkRlQk9KeW5IYzl4RGl4TzRLbFVPM3VVNnRBR3AySE1JSEFIX2h3Zl9DX01oS2hRSFB4d1YzRVJqYXEyZWpTRVdmT1FEajdLa1NlM0hldDY5UUVhUEdFOUkzZlVlNi1oQjFvRlVpNXpkWWF5YXB0dUFJdGdHdHBNNUVNYlFlaEVLUUpYM19IZlg1OC1hMGYwVFg2T3haM0IwZW9JdXZiWGFuOVg4a2J2ZDFxcE1LYVVVZ0ZKZlNoOWYyVy1waG9JUDJPc29EWTYyV0s4a3RQM09OSTRtUTJ6Zw?oc=5",
+      "source": "Benzinga",
+      "published": "Thu, 30 Jul 2026 20:42:30 GMT",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SEC Chair Ready to Provide Crypto Rules if CLARITY Act Fails",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNTlhlVF9yYzF6RTdqMHVCbUM1WE5aNnRIRlRSMDNDbVd1RUFVUk54Ynd6SUNrRjkyY085SnpjSkxESUlyWC16REViVUJLMGNUYmdncnNNUEpHVFhseE95b0tZN1JIY1ljdDVyLWNVLWZRV1dGZEdaTGJ5cGE2Rk9CWEpHZWkzTUxOLVVwZXFPNGhsb0dhQTZKcTROc3J5MnBtb3Y3Q3RBWG53LUloUTByVnJB?oc=5",
+      "source": "PYMNTS.com",
+      "published": "Thu, 30 Jul 2026 17:27:23 GMT",
+      "topic": "Regulation",
       "crypto": true
     },
     {
@@ -283,14 +299,6 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin and ether markets are ruled by perps. SpaceX showed how far their influence can go",
-      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQX01NX2w5SDNMemdGb0Z4ZzV3NVpjZE82Vk1POFBveDZSeElLOGwzYUVPS3cxSFlEeEZNQ3Z5ajJWRlhoMzFlVmV0Yllkek9uaWNIWG1TUFU4b2JESWg2ejBlNEFBU0F3V05YQ1ZaaDZ3Z1FLVHZnaUc4ZnZfOVMwSUtjSFNlUjQzZ2NFa3hqWXFyYkFxUHdPVnhzOWI4aXI5OEMwa1M0RFd3VDJWVkVvSXBYREJ6SXZrYUNsdzFXeS1lTHowQkk3WTE1QlplQQ?oc=5",
-      "source": "CoinDesk",
-      "published": "Thu, 30 Jul 2026 09:00:00 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Coinbase Wrapped XRP Expands DeFi Utility Through Doppler Finance on Base",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBzeFRpS1Z5cTE5ZjhkT2NJS28tcUdkZTVYTndhQzQyb3h4cWx6WXBCZG1LdHhmOUk1cU54RXhsMk1ORHhYdXVUVjhiUjVNcllBNkx0QWRpOUFsZw?oc=5",
       "source": "Cryptonews.net",
@@ -315,22 +323,6 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin\u2019s breakdown puts Ethereum, Breadth and ALT risk back in focus",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUmZ3a2ZyWWo1THBFSXpqWFpsU1djZ2JpVWtHaXl4MmRlNTVvUjhmUElwOGJRQ1NNdWtWSG1BUml2MVF5amVmVU1iT2VaOW5mZzRzRnFBN29BODRyamFNNi1xTFZscXpNX0w0S2FOVk5YeUNpN2x1LXRXRFBmSk9xZHVUQ1YtMVZFak12OVhiRkdLMmEwZzlmMGF4ajIyRHJxWUNFYTFKRVQ?oc=5",
-      "source": "KITCO",
-      "published": "Tue, 28 Jul 2026 16:58:00 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin, Ethereum, XRP, Dogecoin Plummet Even as SEC Chair Paul Atkins Sees Crypto Bill Advancing: Analyst Says BTC's Big Move 'Just Around the Corner'",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYmY2ckxLMDhORU5yQWRBWHVKVmZlWlRpdlE4M3ZVcm5EdWRwQlVvem5lWXB6VlJvOTAyVy1HamRBdFFWZ3B4TnFOWl9nV0ZzNnlyMnZ2bjRYLUp2NnU1eXFSck1uMVBTUGttMjhoVTNBTC1ORC13eHBPYVA1cHJhNVNQa0NvLTIyLTNpLUJDVU5zZGpLU19fb3JxUG5EbWJwSXpYcQ?oc=5",
-      "source": "Yahoo Finance",
-      "published": "Tue, 28 Jul 2026 02:13:00 GMT",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "USDC Vs. USDT: The Stablecoin Market Has Split Into Two Economies",
       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOMEIxd3hzaE1NcVVBb2hCSl9wSGVHSnVKZEtObExmRUQwSW1qdU9ZRmVnd2VIQ29lY0Izc3g4TS1mc1RzNXNBNnFjOFZvRHZNX3NJNE1OdW80S1pNay0xTmU1ZV92djhTQThFTGdpbFBrUS11andVRHc0TU9Hb2pzRjBjOGdKZk9WRUNGSUpGSTNzY2xZLW5GTDZFbkJ2dlpJMDZiZzNqUDdqRTZ1TXFrVg?oc=5",
       "source": "Benzinga",
@@ -344,14 +336,6 @@
       "source": "CoinMarketCap",
       "published": "Sun, 26 Jul 2026 21:40:20 GMT",
       "topic": "Base",
-      "crypto": true
-    },
-    {
-      "title": "House Subcommittee Advances Clarity Act on Digital Assets",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFA1U1RJOTc5UnVHTm9qOWFQMlB4bEpaM0dseHlwU09xeDhtem5xcDk5LUEyNmwzVnlqcmRzWWZoTDdfZlotM3diWXJPaEV2dHVGdXY4VF9DcTlpOUtrUFV6Q2JsVkJqakNyUmNQai14dUlpUE1oYlNDaw?oc=5",
-      "source": "Legis1",
-      "published": "Sat, 25 Jul 2026 17:00:50 GMT",
-      "topic": "Regulation",
       "crypto": true
     },
     {
@@ -421,7 +405,7 @@
     {
       "title": "OKX Launches Agentic Wallet, Bringing Autonomous Onchain Execution to AI Agents",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQSVBKeFkwOU1HbUx4ak1JVXk2QkFLYjM2S25kZXNDNnVwdFduLVp0S2p4YURwLWduSFpFc1hzNFNiV29wbWpjQTlnNF96ZmNmTlQ0dWtIVml2aVJmSVlBX2poelctLWtxMzNHUkZGdEQ2MWxxbWZldXV5ck5PcmhiZlZWLXdWRTU0alFiejRlOGtrb05zVFQ3b1pHT3JkaVlCWDgwS19jRlhSakNqcWc?oc=5",
-      "source": "FF News",
+      "source": "ffnews.com",
       "published": "Fri, 03 Jul 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
@@ -479,6 +463,22 @@
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQlM3TkZzZXZXUzVZdG1wUk1IT3BTV1FuWDZ5QkZQb1FuOUItdnBYN19NeXliZU84NWcwejJsSllzdE1ZYnM0UWdwdzdSV2piZUROYVZzekRSOXdWbVB1dEVQb1Q5eTBHSnhzZm1UVlFVNTI1SlNZblYyMVM5TXNfUTRwSi1oeWoxN3VIc2psU2xqd3dE?oc=5",
       "source": "Yahoo Finance",
       "published": "Sun, 17 May 2026 07:00:00 GMT",
+      "topic": "Security",
+      "crypto": true
+    },
+    {
+      "title": "More Stablecoins, More Markets, More Flexibility: How Global Payments Infrastructure is Evolving",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcVJXVldSdXVZTkZkZm8yVGhqQk9XeENmUXBGSHozTFhJMkJ0SlRHYzRNYUFRTXV5TnZfRmFfQWZETERDUUc1dWhVVk5yRFVaYjhxTno3REFSSmRnMUxVRjJZU2VONGtpVklUem1uWDVmTGxvWjhjNDU5Qi1BMGRPTkNlalRHdmVmRmlNYVVEZ3ZKNlZFb3dmTlVnbUtTVGk0RS14ZG50NmNvOUM3Szg2a1BPLW1CdU5YOXRxdXQ0UQ?oc=5",
+      "source": "Ripple",
+      "published": "Fri, 24 Apr 2026 15:58:43 GMT",
+      "topic": "Stablecoins",
+      "crypto": true
+    },
+    {
+      "title": "'DeFi is dead': Here is how crypto community is reacting after massive $292 million hack",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNYlBVNDNnNmpoNUZ1d3pTVHFXenplTmJZZVVyRHN5SWdBbmxRUkVtUnVvbmlnZnZFMmJIU1lGb2Voa29Fem9wV1lOUTVFQm1kc1hlYllLYldQLWdQNlpBb3JlM0Nocm5rNHMwcXRKY2JjNjNCTVgzYTN3OFp2aGNYZWpyM25PN2o4R2RxUi12ZXZhTm5rdnB5d2VBU2V0NEM5MUZfVEF1V3RRVmhNdEczLU9FaWFac0RwMjR6UVBsNDdPM0RBRkFYVFp0VkJDWnNoXzdFZWlRaGM?oc=5",
+      "source": "CoinDesk",
+      "published": "Sun, 19 Apr 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
     }
