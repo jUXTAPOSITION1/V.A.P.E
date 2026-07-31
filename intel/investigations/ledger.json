@@ -1288,6 +1288,25 @@
     "symbol": "UNI",
     "times_investigated": 1
   },
+  "1:0x20b688f40b8e6a55e76131d5e3b84afc89a30c93": {
+    "address": "0x20b688F40b8E6a55e76131D5E3b84AFC89a30c93",
+    "chain": "1",
+    "creator_address": "0xf1957e1cbf238e7ede0808cdc23774769984ea9b",
+    "first_investigated": "2026-07-31T20:02:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-200241-0x20b688F4.md",
+        "score": 10,
+        "ts": "2026-07-31T20:02:41Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T20:02:41Z",
+    "last_score": 10,
+    "last_verdict": "REJECT",
+    "symbol": "TRUMP2028",
+    "times_investigated": 1
+  },
   "1:0x230f1e241c621d5af670dad83ebcdd18971e2995": {
     "address": "0x230f1E241C621d5af670Dad83ebCdd18971E2995",
     "chain": "1",

@@ -999,3 +999,5 @@
 | 2026-07-31 | auto | 0xA6dbdd59318e212ad3Eb6Ca002D5De47195cA27c (ASTEROID) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-07-31 | auto | 0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63 (ASTEROID) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-07-31 | auto | 0x20b688F40b8E6a55e76131D5E3b84AFC89a30c93 (TRUMP2028) | deep_investigation | REJECT (10/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
