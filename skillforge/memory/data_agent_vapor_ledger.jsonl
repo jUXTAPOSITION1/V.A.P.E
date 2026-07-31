@@ -298,3 +298,4 @@
 {"ts": "2026-07-31T07:56:35.574301Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-31T08:26:37.462245Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-07-31T09:11:23.970420Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-07-31T09:56:15.624341Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
