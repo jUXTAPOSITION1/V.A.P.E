@@ -249,7 +249,7 @@ def write_story(candidate):
         + (f"Scraped article body:\n{article_text}\n\n" if article_text else
            "No article body could be scraped this cycle -- only the headline and any web search "
            "results below are real, verified material.\n\n")
-        + f"Corroborating web search results:\n"
+        + "Corroborating web search results:\n"
         + "\n".join(f"- [{r['title']}]({r['url']}) — {r['snippet']}" for r in corroboration.get("results", []))
     )
     instructions = (
