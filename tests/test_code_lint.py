@@ -124,6 +124,52 @@ def test_innerhtml_check_skipped_for_python_files():
     assert findings == []
 
 
+def test_path_join_asymmetric_sanitization_flagged():
+    # The real, shipped shape (agents/hack_agent.py): _slug(h['name']) is
+    # sanitized, its sibling h['date'] is spliced in raw right next to it.
+    findings = _lint("x.py", "import os\n"
+                              "path = os.path.join(D, f\"{h['date']}-{_slug(h['name'])}.md\")\n")
+    assert any(sev == "MEDIUM" and "sanitiz" in msg for sev, _, _, msg in findings)
+
+
+def test_open_asymmetric_sanitization_flagged():
+    findings = _lint("x.py", "open(f\"{DIR}/{h['date']}-{_slug(h['name'])}.md\")\n")
+    assert any("sanitiz" in msg for _, _, _, msg in findings)
+
+
+def test_pathlib_path_asymmetric_sanitization_flagged():
+    findings = _lint("x.py", "from pathlib import Path\n"
+                              "p = Path(f\"{h['date']}-{_slug(h['name'])}.md\")\n")
+    assert any("sanitiz" in msg for _, _, _, msg in findings)
+
+
+def test_path_join_fully_sanitized_not_flagged():
+    findings = _lint("x.py", "import os\n"
+                              "path = os.path.join(D, f\"{_slug(h['date'])}-{_slug(h['name'])}.md\")\n")
+    assert findings == []
+
+
+def test_path_join_fully_unsanitized_not_flagged():
+    # No sibling is wrapped in a sanitizing call at all — a different,
+    # broader pattern this check deliberately doesn't fire on (would be
+    # far noisier across the codebase; see code_lint.py's own docstring).
+    findings = _lint("x.py", "import os\n"
+                              "path = os.path.join(D, f\"{h['date']}-{h['name']}.md\")\n")
+    assert findings == []
+
+
+def test_path_join_no_subscript_not_flagged():
+    findings = _lint("x.py", "import os\n"
+                              "path = os.path.join(D, f\"{stamp}-{_slug(name)}.md\")\n")
+    assert findings == []
+
+
+def test_path_join_literal_string_not_flagged():
+    findings = _lint("x.py", "import os\n"
+                              "path = os.path.join(D, 'report.md')\n")
+    assert findings == []
+
+
 def test_run_returns_files_and_findings(tmp_path):
     bad = tmp_path / "bad.py"
     bad.write_text("eval(input())\n")

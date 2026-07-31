@@ -37,6 +37,11 @@ def test_default_queries_includes_known_date():
     assert any("2026-05-25" in q["q"] for q in result["queries"])
 
 
+def test_default_queries_respects_max_queries():
+    result = re_engine._default_queries("Bitmor", "threat_analysis", max_queries=2)
+    assert len(result["queries"]) == 2
+
+
 # ── generate_queries ─────────────────────────────────────────────────────
 class TestGenerateQueries:
     def test_falls_back_when_llm_module_not_importable(self):
@@ -98,6 +103,15 @@ class TestGenerateQueries:
             result = re_engine.generate_queries("Foo", "general", max_queries=3)
         assert len(result["queries"]) == 3
 
+    def test_respects_max_queries_on_fallback_path(self):
+        # Real bug CodeRabbit flagged on PR #372: the fallback path used to
+        # always return up to MAX_QUERIES_DEFAULT regardless of what the
+        # caller asked for, so a caller requesting max_queries=2 could get
+        # 8 back whenever the LLM was unavailable/unparseable.
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("not json", "oci_grok")):
+            result = re_engine.generate_queries("Foo", "threat_analysis", max_queries=2)
+        assert len(result["queries"]) == 2
+
 
 # ── credibility tiering ──────────────────────────────────────────────────
 def test_domain_extraction_strips_www():
@@ -143,6 +157,24 @@ class TestBroadDiscovery:
             result = re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call)
         assert result["findings"] == []
         assert result["prioritized_urls"] == []
+
+    def test_search_provider_failure_does_not_abort_the_round(self):
+        # broad_discovery's own docstring promises it never raises — one
+        # query's search call raising shouldn't stop the remaining queries
+        # from running, even though web_search_snippets is documented not
+        # to raise on its own (defense in depth, not reachable today).
+        calls = {"n": 0}
+
+        def flaky_search(query, max_results=5):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise RuntimeError("provider down")
+            return {"provider": "tavily", "results": [{"url": "https://rekt.news/r", "title": "t", "snippet": "s"}]}
+
+        with mock.patch("agents.intel_common.web_search_snippets", side_effect=flaky_search):
+            result = re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call)
+        assert result["prioritized_urls"] == ["https://rekt.news/r"]
+        assert calls["n"] == 2
 
 
 # ── deep_extract ─────────────────────────────────────────────────────────
@@ -280,6 +312,15 @@ class TestSynthesize:
         assert result["gaps"] == []
         assert "Real narrative text." in result["narrative"]
 
+    def test_malformed_gaps_json_is_logged_not_silently_dropped(self, capsys):
+        # Bracket-closed (so the regex matches and json.loads is actually
+        # attempted) but not valid JSON — exercises the real parse-failure
+        # branch, unlike an unterminated trailer that never matches at all.
+        text = "Real narrative text.\nGAPS_JSON: [{not: valid, json}]"
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            re_engine.synthesize(self._base_result())
+        assert "GAPS_JSON parse failed" in capsys.readouterr().out
+
     def test_no_gaps_trailer_returns_empty_gaps_list(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Just narrative, no trailer.", "groq")):
             result = re_engine.synthesize(self._base_result())
@@ -331,6 +372,27 @@ def test_render_methodology_log_handles_empty_log():
     assert "0" in rendered
 
 
+def test_render_methodology_log_escapes_backticks_in_query_and_rationale():
+    # An LLM-authored rationale/query string containing a backtick used to
+    # be spliced straight into a `...` Markdown code span, breaking it.
+    result = {"log": {"queries": [{"q": "foo `bar` baz", "rationale": "uses `eval()` internally",
+                                    "hit_count": 1, "provider": "tavily"}]}}
+    rendered = re_engine.render_methodology_log(result)
+    assert "`bar`" not in rendered
+    assert "`eval()`" not in rendered
+    assert "foo 'bar' baz" in rendered
+    assert "uses 'eval()' internally" in rendered
+
+
+def test_render_methodology_log_uses_autolink_for_urls_not_bracket_link():
+    # A ')' in a real search-result URL would close a [text](url)-style
+    # Markdown link early — angle-bracket autolinks avoid that entirely.
+    result = {"log": {"deep_extracted_urls": ["https://en.wikipedia.org/wiki/Foo_(bar)"]}}
+    rendered = re_engine.render_methodology_log(result)
+    assert "<https://en.wikipedia.org/wiki/Foo_(bar)>" in rendered
+    assert "](https://en.wikipedia.org/wiki/Foo_(bar))" not in rendered
+
+
 def test_render_gaps_section_with_gaps():
     gaps = [{"description": "unclear attacker identity", "confidence": 0.42, "next_action": "trace wallet"}]
     rendered = re_engine.render_gaps_section(gaps)
@@ -375,6 +437,19 @@ class TestReviewOutput:
                 "## Research Methodology and Sources\n...")
         review = re_engine.review_output(text, task_type="general")
         assert review == {"ok": True, "issues": []}
+
+    def test_section_mention_in_prose_without_a_heading_still_flagged_missing(self):
+        # Real gap CodeRabbit flagged: matching anywhere in the body (not
+        # just headings) let prose that merely mentions "the impact was..."
+        # satisfy the check even with no real "## Impact" section.
+        text = ("## Known Facts\nThe impact was severe and the timeline moved fast, "
+                "with a clear root cause and a fast response and mitigation.\n"
+                "## Gaps & Confidence\n...\n## Research Methodology and Sources\n...")
+        review = re_engine.review_output(text, task_type="threat_analysis")
+        assert not review["ok"]
+        assert any("Timeline" in issue for issue in review["issues"])
+        assert any("Impact" in issue for issue in review["issues"])
+        assert any("Root Cause" in issue for issue in review["issues"])
 
     def test_never_raises_on_none_input(self):
         review = re_engine.review_output(None, task_type="general")

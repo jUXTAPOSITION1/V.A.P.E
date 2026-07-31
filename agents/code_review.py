@@ -75,6 +75,14 @@ This repo's real, adopted security/design laws (not aspirational):
   never trust a client-supplied "paid" flag, log the payment proof/tx hash.
 - No secrets, private keys, or API keys ever committed as literals —
   env vars / GitHub secrets / `wrangler secret put` only.
+- Any value that ends up in a filesystem path (os.path.join/open/Path) and
+  ultimately traces back to a scraped/fetched/API-sourced field (not a
+  value this process itself generated) needs a sanitizing call before
+  being spliced in — check every field going into the SAME path template
+  got the same treatment, not just some of them. Real, shipped miss this
+  reviewer should have caught: agents/hack_agent.py's report-path f-string
+  wrapped one sibling field in `_slug()` and left the other (an incident's
+  reported date) unsanitized right next to it (fixed, PR #372's follow-up).
 """
 
 MAX_DIFF_CHARS = 40000  # same courtesy-truncation pattern agents/run.py's market_context already uses
@@ -289,8 +297,11 @@ def build_review_prompt(diff, deterministic_findings):
         "of what changed in it, not a generic \"updated file\")\n\n"
         "## Security\n"
         "(injection, secrets, auth/authz, data-fabrication-law violations, "
-        "untrusted-data framing gaps, x402/ACP payment-verification issues — "
-        "or \"Nothing found.\")\n\n"
+        "untrusted-data framing gaps, x402/ACP payment-verification issues, "
+        "path traversal — especially a field spliced into a path/filename "
+        "with NO sanitizing call around it while a sibling field in the same "
+        "template gets one, which is exactly the shape this repo has "
+        "actually shipped before — or \"Nothing found.\")\n\n"
         "## Correctness\n"
         "(real logic bugs, missing error handling, edge cases — or \"Nothing found.\")\n\n"
         "## Notes\n"
