@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T15:00:36Z",
+  "generated": "2026-07-31T15:16:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 463,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 132,
-    "investigations": 585,
+    "investigations": 586,
     "news": 30,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-150036-0xAcFb898C.md",
-      "title": "Investigation \u2014 NOCHILL",
-      "symbol": "NOCHILL",
-      "name": "AVAX HAS NO CHILL",
-      "date": "2026-07-31T15:00:36Z",
-      "target": "0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5",
+      "file": "investigation-20260731-151545-0xba0Dda87.md",
+      "title": "Investigation \u2014 OX",
+      "symbol": "OX",
+      "name": "OX Coin",
+      "date": "2026-07-31T15:15:45Z",
+      "target": "0xba0Dda8762C24dA9487f5FA026a9B64b695A07Ea",
       "chain": "43114 (Avalanche)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $48,007. Positive evidence: Ownership renounced; 44361 holders \u2014 reasonably distributed; 98% of liquidity is locked \u2014 reduced rug-pull risk; Trading 956+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-150036-0xAcFb898C.md"
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x4f9f7f28be01de1ffb24c00b00744bb3cb49b9ce) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $66 (rug/illiquid); [-10] Low liquidity $66; [-15] Contract source UNVERIFIED. Positi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-151545-0xba0Dda87.md",
+      "title": "Investigation \u2014 OX",
+      "symbol": "OX",
+      "name": "OX Coin",
+      "date": "2026-07-31T15:15:45Z",
+      "target": "0xba0Dda8762C24dA9487f5FA026a9B64b695A07Ea",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x4f9f7f28be01de1ffb24c00b00744bb3cb49b9ce) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $66 (rug/illiquid); [-10] Low liquidity $66; [-15] Contract source UNVERIFIED. Positi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-150036-0xAcFb898C.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Transfers can be paused by owner; [-8] Top 10 non-LP/burn holders control 64% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liqu",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-150720-0xB3fe5374.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-145213-0xC904A449.md",
-      "title": "Investigation \u2014 V4STR",
-      "symbol": "V4STR",
-      "name": "Programmable Strategy",
-      "date": "2026-07-30T14:52:13Z",
-      "target": "0xC904A449E4D12d3bFa49E3b4bE29a3247D8Fe19C",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 223% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-15] Contract sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-145213-0xC904A449.md"
     }
   ],
   "reports": [
@@ -1911,7 +1911,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49353513",
+      "version": "49360603",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1921,7 +1921,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.47 eth_dom 10.03 mcap_chg_24h -0.93",
+      "version": "btc_dom 56.11 eth_dom 10.02 mcap_chg_24h -2.42",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -1941,7 +1941,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xc99cee53dab4 Cole 86533265.0 from 0x58c1c0ea to 0x833589fc",
+      "version": "0xdcddfd4457e4 Cole 2100.03 from 0x58c1c0ea to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

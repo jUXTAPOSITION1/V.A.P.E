@@ -3941,6 +3941,25 @@
     "symbol": "ARENA",
     "times_investigated": 1
   },
+  "43114:0xba0dda8762c24da9487f5fa026a9b64b695a07ea": {
+    "address": "0xba0Dda8762C24dA9487f5FA026a9B64b695A07Ea",
+    "chain": "43114",
+    "creator_address": "0x2f5ebbc43c3e40f5b9e36264c8f0edd0caeebaf3",
+    "first_investigated": "2026-07-31T15:15:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260731-151545-0xba0Dda87.md",
+        "score": 25,
+        "ts": "2026-07-31T15:15:45Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-07-31T15:15:45Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "OX",
+    "times_investigated": 1
+  },
   "43114:0xd5d0a9b3f2c264b955ae7161cfa6d38a7aea60a7": {
     "address": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
     "chain": "43114",
