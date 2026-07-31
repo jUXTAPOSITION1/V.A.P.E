@@ -971,3 +971,5 @@
 | 2026-07-31 | auto | 0x28bBbE607DBABC83Acde091f25eEC3BEA922cB93 (AKE) | deep_investigation | CAUTION (55/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
 
 | 2026-07-31 | auto | 0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444 (MarsCoin) | deep_investigation | REJECT (40/100) | Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2 | +7d |
+
+| 2026-07-31 | auto | 0xC6F05bc34b698c2190d19FDeB669b92448f786f6 (LGNS) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |

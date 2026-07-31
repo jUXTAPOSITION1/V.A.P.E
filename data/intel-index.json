@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-31T12:57:39Z",
+  "generated": "2026-07-31T13:14:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 462,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 131,
-    "investigations": 580,
+    "investigations": 581,
     "news": 29,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260731-124220-0x1706f1e0.md",
-      "title": "Investigation \u2014 MarsCoin",
-      "symbol": "MarsCoin",
-      "name": "MarsCoin",
-      "date": "2026-07-31T12:42:20Z",
-      "target": "0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260731-131406-0xC6F05bc3.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "LordGenesis",
+      "date": "2026-07-31T13:14:06Z",
+      "target": "0xC6F05bc34b698c2190d19FDeB669b92448f786f6",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2F72961483357dc31b4C146A24444) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.9 days old \u2014 under a month, still ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: NTFS (0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5) \u2014 REJECT 13/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated. ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-131406-0xC6F05bc3.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260731-131406-0xC6F05bc3.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "LordGenesis",
+      "date": "2026-07-31T13:14:06Z",
+      "target": "0xC6F05bc34b698c2190d19FDeB669b92448f786f6",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: NTFS (0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5) \u2014 REJECT 13/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated. ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-131406-0xC6F05bc3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260731-124220-0x1706f1e0.md",
@@ -594,20 +608,6 @@
       "score": "42",
       "summary": "Risk factors: [-8] Low holder count (105); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,828; [-10] No known third-party audit or verifiable team identity found \u2014 trea",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-125212-0xcE066060.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-123706-0xB4722D06.md",
-      "title": "Investigation \u2014 HEYI",
-      "symbol": "HEYI",
-      "name": "The Final Form Cow",
-      "date": "2026-07-30T12:37:06Z",
-      "target": "0xB4722D06bC8Fe9bea95A7839FB550bc7c68B4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Low holder count (99); [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $14,733; [-5] Pair 22.0 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-123706-0xB4722D06.md"
     }
   ],
   "reports": [
