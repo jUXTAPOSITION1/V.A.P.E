@@ -97,3 +97,4 @@
 {"ts": "2026-07-31T20:33:50.330666Z", "address": "0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5", "chain": "43114", "symbol": "NOCHILL", "name": "NOCHILL", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-07-31T20:48:51.537336Z", "address": "0x7c6aa5126dA2691f62EBb2D2f082F908513983d0", "chain": "1", "symbol": "TRUMP2028", "name": "TRUMP2028", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-07-31T21:18:50.265411Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_safety_check"}
+{"ts": "2026-07-31T22:03:33.594480Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_chart"}
