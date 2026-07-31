@@ -98,3 +98,4 @@
 {"ts": "2026-07-31T20:48:51.537336Z", "address": "0x7c6aa5126dA2691f62EBb2D2f082F908513983d0", "chain": "1", "symbol": "TRUMP2028", "name": "TRUMP2028", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-07-31T21:18:50.265411Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-07-31T22:03:33.594480Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "token_chart"}
+{"ts": "2026-07-31T23:33:53.269533Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
