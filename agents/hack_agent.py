@@ -6,13 +6,20 @@ feed security_sweep.py already writes from DeFiLlama's real hacks data) gets
 its own real, standalone markdown analysis — not just the single rule-based
 "lesson" tag the Threat Ledger already shows. Grounded in the real fields
 security_sweep.py already gathered (name/date/amount/technique/chains/
-lesson), two differently-worded real web searches for public writeups, AND
-the model's own live web/X search (agents/llm.py::ask()'s search=True — see
-_write_analysis()'s comment for why: a real one-incident side-by-side
-against a direct Grok query exposed that the single pre-fetched search this
-used to run on alone was nowhere near enough). The model is told never to
-invent a detail beyond what it actually found or was given, and to say
-plainly when real research still turns up nothing.
+lesson) plus agents/research_engine.py's layered research pipeline: diverse
+LLM-planned search queries (with a deterministic fallback so a query round
+never comes up empty), rule-based source-credibility triage, robots-safe
+deep extraction of the top sources, and a strict-grounding synthesis that
+produces an explicit gaps/confidence assessment alongside the narrative.
+
+This replaced an earlier version that ran exactly two hardcoded search
+phrasings and handed the LLM whatever those two searches returned, with no
+fallback strategy and no record of what was searched — a real, live
+consequence is documented in intel/threat-analysis/2026-05-25-bitmor.md,
+where both hardcoded queries returned nothing and the resulting report has
+no root cause, no timeline, and generic advice ungrounded in anything
+specific to that incident. See agents/research_engine.py's own docstring
+for the full design.
 
 Written by OCI-hosted Grok 4.3 first (agents/llm.py::ask_oci_grok() —
 VAPE's newest, most capable currently-wired reasoning model), falling back
@@ -74,76 +81,48 @@ def _save_state(state):
 
 
 def _grounding(h):
+    """Real, verified known-facts dict — the fields security_sweep.py
+    already gathered for this incident, nothing invented — fed into
+    research_engine.layered_research()/synthesize() as known_facts."""
+    facts = {
+        "protocol": h["name"],
+        "date": h["date"],
+        "loss_usd_m": h.get("amount_usd_m", 0),
+        "chains": ", ".join(h.get("chains") or []) or "unknown",
+        "technique": h.get("technique") or "unspecified",
+    }
     lesson = h.get("lesson") or {}
-    lines = [
-        f"Protocol: {h['name']}",
-        f"Date: {h['date']}",
-        f"Loss: ${h.get('amount_usd_m', 0)}M",
-        f"Chains: {', '.join(h.get('chains') or []) or 'unknown'}",
-        f"Technique (as classified by DeFiLlama's real hacks feed): {h.get('technique') or 'unspecified'}",
-    ]
     if lesson.get("label"):
-        lines.append(f"VAPE's rule-based technique classification: {lesson['label']}")
+        facts["technique_classification_vape"] = lesson["label"]
     if lesson.get("prevention"):
-        lines.append(f"Known prevention measure for this vulnerability class: {lesson['prevention']}")
+        facts["known_prevention_measure"] = lesson["prevention"]
     if lesson.get("backtest"):
-        lines.append(f"Backtest of VAPE's own scoring model against this incident: {lesson['backtest']}")
-    return "\n".join(lines)
+        facts["vape_scoring_backtest"] = lesson["backtest"]
+    return facts
+
+
+_SECTION_INSTRUCTIONS = (
+    "Structure your narrative using these exact Markdown headings, in this order: "
+    "## Known Facts, ## Timeline, ## Root Cause, ## Impact, ## Response & Mitigation. "
+    "Only fill in what the research actually supports — if a section genuinely has nothing "
+    "to add, say so briefly under that heading rather than omitting it."
+)
 
 
 def _write_analysis(h):
-    """Real LLM narrative for one incident. Returns (report_path, provider)
-    or (None, None) if every provider in the chain is unreachable this run —
-    never raises, matching agents/intel_common.py::grok_analysis()'s
-    contract.
+    """Real threat-analysis narrative for one incident, via
+    agents.research_engine's layered research pipeline. Returns
+    (report_path, provider) or (None, None) if synthesis is unavailable
+    this run — never raises, matching research_engine.synthesize()'s
+    contract."""
+    from agents import research_engine
 
-    Grounded in two independent research passes: the existing Tavily/Brave
-    pre-fetch (web_search_snippets, widened from 4 to 6 results and a
-    second, differently-worded query — post-mortems for a niche DeFi
-    incident often use different terms like "exploit analysis" or the
-    protocol's own incident-report wording rather than "post-mortem") plus
-    whatever the model itself already knows/can reason about from that
-    grounding. search is left at its default (False) as of 2026-07-25 —
-    xAI's Live Search (this function used to pass search=True specifically
-    to reach it) was deprecated by xAI in favor of a new "Agent Tools API"
-    this repo hasn't migrated to (confirmed real HTTP 410 in production),
-    and search=True would skip past OCI Grok/Vertex (this function's real
-    primary route via ask_oci_grok_safe below) into a free chain that can't
-    provide search either — see agents/intel_common.py::grok_analysis()'s
-    docstring for the full story. The historical reason this flag existed
-    (a 2026-07-20 side-by-side on the DefiTuna Lending incident showed the
-    pre-fetch-only pipeline reporting "no public writeups found" for a hack
-    a direct Grok Live Search query resolved in full) still motivates
-    re-adding real search grounding once a working replacement is wired
-    in — just not this specific, now-dead mechanism."""
-    from agents.llm import ask_oci_grok_safe, FRONTIER_ORDER
-    search_a = ic.web_search_snippets(f"{h['name']} hack exploit post-mortem {h['date']}", max_results=6)
-    search_b = ic.web_search_snippets(f"{h['name']} exploit analysis attacker address root cause", max_results=6)
-    grounding = _grounding(h)
-    search_section = (
-        ic.format_search_section("Public writeups found this run (query 1)", search_a)
-        + "\n" + ic.format_search_section("Public writeups found this run (query 2)", search_b)
-    )
-    system = (
-        "You are VAPE's senior security analyst, writing a real, standalone threat-analysis "
-        "report for one specific real hack, to be published on VAPE's public site. You are "
-        "given the real, verified facts VAPE's own pipeline gathered about this incident, plus "
-        "two pre-fetched web searches — but you also have live web/X search available to you "
-        "directly: use it to find the actual attack flow, transaction hashes, attacker "
-        "addresses, and root cause if any of that isn't already in what you were given. Never "
-        "invent a number, name, date, or detail — only report what you actually found (via the "
-        "pre-fetched searches, your own live search, or what's given above) or what a linked "
-        "public writeup actually says, and cite where each concrete fact came from. Explain "
-        "what happened, the real technical root cause if it's known, why it matters, and what a "
-        "protocol team should take away from it. If real research (yours or the pre-fetch) "
-        "truly turns up nothing, say so honestly rather than padding with generic security "
-        "advice — but exhaust your own live search first; thin pre-fetched snippets alone are "
-        "not sufficient grounds to conclude nothing is publicly known."
-    )
-    user = f"{grounding}\n\n{search_section}"
-    text, provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
-                                        temperature=0.5, max_tokens=1800)
-    if (text or "").startswith("[llm unavailable"):
+    topic = f"{h['name']} hack exploit"
+    known_facts = _grounding(h)
+    result = research_engine.layered_research(topic, task_type="threat_analysis", known_facts=known_facts)
+    synth = research_engine.synthesize(result, role="security analyst", extra_instructions=_SECTION_INSTRUCTIONS)
+    text = (synth.get("narrative") or "").strip()
+    if not text or text.startswith("_Synthesis unavailable"):
         return None, None
 
     os.makedirs(ANALYSIS_DIR, exist_ok=True)
@@ -156,9 +135,17 @@ def _write_analysis(h):
         f"**Analysis by:** VAPE  \n"
         f"**Generated:** {ic.now_iso()}\n\n---\n\n"
     )
+    gaps_section = research_engine.render_gaps_section(synth.get("gaps") or [])
+    methodology = research_engine.render_methodology_log(result)
+    body = f"{text}\n\n{gaps_section}\n{methodology}"
     with open(path, "w") as f:
-        f.write(header + text.strip() + "\n")
-    return os.path.relpath(path, ic.ROOT).replace(os.sep, "/"), provider
+        f.write(header + body)
+
+    review = research_engine.review_output(header + body, task_type="threat_analysis")
+    if not review["ok"]:
+        research_engine.log_review_finding(topic, "threat_analysis", review["issues"])
+
+    return os.path.relpath(path, ic.ROOT).replace(os.sep, "/"), synth.get("provider")
 
 
 def run():
