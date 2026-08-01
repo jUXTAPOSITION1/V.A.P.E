@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T02:15:51Z",
+  "generated": "2026-08-01T02:19:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 477,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 134,
-    "investigations": 604,
+    "investigations": 605,
     "news": 32,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-010432-0x3C5Cd672.md",
-      "title": "Investigation \u2014 BSW",
-      "symbol": "BSW",
-      "name": "Lydia",
-      "date": "2026-08-01T01:04:32Z",
-      "target": "0x3C5Cd672b204bA0FC48E93B98C0922920A87912D",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-5] Pair 21.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or veri",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-010432-0x3C5Cd672.md"
+      "file": "investigation-20260801-021931-0x330990Da.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-08-01T02:19:31Z",
+      "target": "0x330990DaE53BCa4C5811C5362B44C33a47db7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +13145% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership r",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-021931-0x330990Da.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-021931-0x330990Da.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-08-01T02:19:31Z",
+      "target": "0x330990DaE53BCa4C5811C5362B44C33a47db7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +13145% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership r",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-021931-0x330990Da.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-010432-0x3C5Cd672.md",
@@ -594,20 +608,6 @@
       "score": "5",
       "summary": "Risk factors: [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,018 (rug/illiquid); [-10] Low liquidity $3,018; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-235558-0x7075DdC6.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-234104-0x02D47B47.md",
-      "title": "Investigation \u2014 NASDUCK",
-      "symbol": "NASDUCK",
-      "name": "Nasduck",
-      "date": "2026-07-30T23:41:04Z",
-      "target": "0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (10) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,683 (rug/illiquid); [-10] Low liquidity $3,683; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No kn",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-234104-0x02D47B47.md"
     }
   ],
   "reports": [

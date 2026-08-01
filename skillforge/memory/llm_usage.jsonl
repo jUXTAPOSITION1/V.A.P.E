@@ -2011,3 +2011,5 @@
 {"ts": "2026-08-01T02:09:37Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1257, "completion_tokens": 448, "total_tokens": 2510}
 {"ts": "2026-08-01T02:12:04Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 734, "completion_tokens": 242, "total_tokens": 1438}
 {"ts": "2026-08-01T02:15:51Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 724, "completion_tokens": 176, "total_tokens": 1547}
+{"ts": "2026-08-01T02:19:28Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91917, "completion_tokens": 24, "total_tokens": 92663}
+{"ts": "2026-08-01T02:19:42Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1037, "completion_tokens": 20, "total_tokens": 1057}

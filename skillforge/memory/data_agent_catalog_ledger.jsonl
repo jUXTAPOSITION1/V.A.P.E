@@ -402,3 +402,4 @@
 {"ts": "2026-08-01T00:18:53.384363Z", "target": "Ethereum", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T01:04:35.392750Z", "target": "none", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T01:49:29.513057Z", "target": "asseto-aoabt", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-01T02:19:37.617712Z", "target": "polygon", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
