@@ -327,6 +327,20 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     transition: filter 0.15s ease, box-shadow 0.15s ease;
     cursor: pointer;
 }
+/* Auto margin on the first bar only: when the bucket count is narrower than
+   the tile (no scrolling needed — e.g. a wide desktop viewport with a modest
+   bar count), the free space collapses onto this margin instead of being
+   left dangling after the last (most recent) bar, so the chart still ends
+   flush against the tile's right edge. When the bucket count DOES overflow
+   the tile, an auto margin has no free space to absorb and computes to 0,
+   so this has zero effect on the horizontal scrolling above — confirmed
+   empirically (justify-content:flex-end looked like the obvious fix here,
+   but Chromium doesn't register flex-end's start-side overflow as
+   scrollable at all, which would have made older bars permanently
+   unreachable; this margin trick avoids that failure mode entirely). */
+.activity-sparkline-bar:first-child {
+    margin-left: auto;
+}
 .activity-sparkline-bar:hover,
 .activity-sparkline-bar.is-latest {
     filter: brightness(1.15) saturate(1.1);
@@ -335,27 +349,40 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 
 /* Custom "sleek popup" shown on hover/touch for a sparkline bar, replacing
    the plain native title-attribute tooltip — see x402feed.js's
-   _showSparklineTooltip()/_wireSparklineTooltips(). */
+   _showSparklineTooltip()/_wireSparklineTooltips(). Styled to match the
+   Volume & Revenue Chart.js tooltip just below it (same near-black fill,
+   same hairline border) rather than as a bare one-line label — a small
+   muted date/time line on top, a bolder labeled metric value below, the
+   same title/value hierarchy Chart.js's own tooltip callback renders. */
 .activity-tooltip {
     position: fixed;
     z-index: 60;
-    padding: 0.375rem 0.625rem;
-    background: rgba(15, 15, 18, 0.96);
+    padding: 0.5rem 0.75rem;
+    background: rgba(9, 9, 11, 0.96);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
-    font-size: 11px;
+    border-radius: 8px;
     font-family: var(--font-mono);
-    color: #e4e4e7;
     white-space: nowrap;
     pointer-events: none;
     opacity: 0;
     transform: translateY(4px);
     transition: opacity 0.12s ease, transform 0.12s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 .activity-tooltip.is-visible {
     opacity: 1;
     transform: translateY(0);
+}
+.activity-tooltip-date {
+    font-size: 10px;
+    color: #71717a;
+    margin-bottom: 0.2rem;
+}
+.activity-tooltip-value {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #f4f4f5;
+    font-variant-numeric: tabular-nums;
 }
 
 .skeleton {

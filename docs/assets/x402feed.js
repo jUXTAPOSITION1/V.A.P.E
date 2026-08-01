@@ -195,9 +195,9 @@ const X402Feed = {
             // count wasn't available for some reason.
             const rangeBuyers = buckets.rangeBuyers ?? buckets.reduce((s, b) => s + (b.buyers || 0), 0);
             setTxt('x402-activity-buyers-value', rangeBuyers ? rangeBuyers.toLocaleString() : '—');
-            this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs);
-            this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd);
-            this._renderSparkline('x402-activity-buyers-spark', buckets, b => b.buyers || 0);
+            this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs, 'Transactions', v => v.toLocaleString());
+            this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd, 'Volume', fmtUsdCompact);
+            this._renderSparkline('x402-activity-buyers-spark', buckets, b => b.buyers || 0, 'Buyers', v => v.toLocaleString());
         } catch (e) {
             // Leave the last-good values on screen rather than blanking a
             // live number over one flaky poll.
@@ -243,9 +243,11 @@ const X402Feed = {
     // sparklines (one per Activity tile), not an interactive chart; a few
     // hundred absolutely-positioned divs is cheaper and simpler than
     // standing up a whole Chart.js instance three times over for the same
-    // effect. Tooltip mirrors the reference widget's own hover behavior
-    // (exact bucket time + value), not just the bare number.
-    _renderSparkline(id, buckets, valueOf) {
+    // effect. metricLabel/formatValue let the tooltip say something real
+    // ("Transactions: 1,024", "Volume: $17.91") instead of a bare number —
+    // matching the level of detail the Volume & Revenue Chart.js tooltip
+    // below already gives each of its series.
+    _renderSparkline(id, buckets, valueOf, metricLabel, formatValue) {
         const el = document.getElementById(id);
         if (!el) return;
         if (!buckets.length) { el.innerHTML = ''; return; }
@@ -255,30 +257,58 @@ const X402Feed = {
             const v = values[i];
             const pct = Math.max(3, Math.round((v / max) * 100));
             const latest = i === buckets.length - 1 ? ' is-latest' : '';
-            const when = new Date(b.ts).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric' });
-            const label = `${when}: ${String(v)}`;
+            const when = this._fmtBucketWhen(b.ts);
+            const valueText = `${metricLabel}: ${formatValue(v)}`;
             // title is a real accessibility fallback (keyboard/screen-reader
-            // users get it for free from the browser), kept alongside
-            // data-label rather than replaced by it.
-            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" data-label="${escapeHtml(label)}" title="${escapeHtml(label)}" tabindex="0"></div>`;
+            // users get it for free from the browser), kept alongside the
+            // data-when/data-value pair the custom tooltip reads.
+            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" data-when="${escapeHtml(when)}" data-value="${escapeHtml(valueText)}" title="${escapeHtml(when)} — ${escapeHtml(valueText)}" tabindex="0"></div>`;
         }).join('');
-        // Fixed-width bars inside a horizontally-scrollable track (not
-        // shrink-to-fit) render at a real, readable size on any viewport —
-        // default the view to the most-recent (rightmost) bars.
+        // Bars are fixed-width, packed from the left by default, with an
+        // auto left-margin on the first one (site.css) so a bucket count
+        // narrower than the tile still ends flush against the right edge
+        // instead of leaving a dead gap after the most-recent bar. When the
+        // bucket count DOES overflow the tile, this scrollLeft assignment is
+        // what actually shows the most-recent (rightmost) bars by default —
+        // the CSS margin trick has no effect on that overflowing case.
         el.scrollLeft = el.scrollWidth;
         this._wireSparklineTooltips(el);
     },
 
+    // Compact date/time label for a bucket tooltip — full month+day always,
+    // an hour suffix only for sub-daily buckets (exact UTC-midnight buckets
+    // are whole calendar days, per _activityBucketsFromStats). Lowercased,
+    // no comma-space padding ("Jul 30 · 2am") — a secondary, de-emphasized
+    // line under the tooltip's real content (the labeled metric value).
+    _fmtBucketWhen(ts) {
+        const d = new Date(ts);
+        const month = d.toLocaleString(undefined, { month: 'short' });
+        const day = d.getDate();
+        if (d.getUTCHours() === 0 && d.getUTCMinutes() === 0) return `${month} ${day}`;
+        const hour = d.toLocaleString(undefined, { hour: 'numeric' }).replace(/\s+/g, '').toLowerCase();
+        return `${month} ${day} · ${hour}`;
+    },
+
     // Custom floating tooltip shown on hover (desktop) and touch (mobile),
     // replacing the plain `title` attribute — one shared element reused
-    // across all three sparklines rather than one per bar.
+    // across all three sparklines rather than one per bar. Two-line layout
+    // (small muted date, bolder labeled value) mirrors the Volume & Revenue
+    // Chart.js tooltip's own title/value hierarchy just below it, instead of
+    // a single flat "date: number" string.
     _ensureSparklineTooltip() {
         if (this._sparkTooltipEl) return this._sparkTooltipEl;
         const el = document.createElement('div');
         el.className = 'activity-tooltip';
         el.setAttribute('role', 'tooltip');
+        const dateEl = document.createElement('div');
+        dateEl.className = 'activity-tooltip-date';
+        const valueEl = document.createElement('div');
+        valueEl.className = 'activity-tooltip-value';
+        el.append(dateEl, valueEl);
         document.body.appendChild(el);
         this._sparkTooltipEl = el;
+        this._sparkTooltipDateEl = dateEl;
+        this._sparkTooltipValueEl = valueEl;
         // A touch tap has no hover-out, so a touch-shown tooltip is dismissed
         // by the next tap anywhere outside a bar instead (see
         // _wireSparklineTooltips' pointerleave handling below).
@@ -290,7 +320,8 @@ const X402Feed = {
 
     _showSparklineTooltip(bar) {
         const tip = this._ensureSparklineTooltip();
-        tip.textContent = bar.dataset.label || '';
+        this._sparkTooltipDateEl.textContent = bar.dataset.when || '';
+        this._sparkTooltipValueEl.textContent = bar.dataset.value || '';
         tip.classList.add('is-visible');
         const barRect = bar.getBoundingClientRect();
         const tipRect = tip.getBoundingClientRect();
