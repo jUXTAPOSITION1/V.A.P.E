@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T17:25:19Z",
+  "generated": "2026-08-01T17:40:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 637,
+    "investigations": 638,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-172512-0x23104dcb.md",
+      "file": "investigation-20260801-174034-0xC0999aC3.md",
       "title": "Investigation \u2014 ZAMA",
       "symbol": "ZAMA",
-      "name": "ZAMA",
-      "date": "2026-08-01T17:25:12Z",
-      "target": "0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f",
+      "name": "Zama",
+      "date": "2026-08-01T17:40:34Z",
+      "target": "0xC0999aC376d383bd7744B59dFcee0c25F5C26393",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "23",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-5] Pair 15.5 days old \u2014",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-172512-0x23104dcb.md"
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f) \u2014 REJECT 23/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-174034-0xC0999aC3.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-174034-0xC0999aC3.md",
+      "title": "Investigation \u2014 ZAMA",
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "date": "2026-08-01T17:40:34Z",
+      "target": "0xC0999aC376d383bd7744B59dFcee0c25F5C26393",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f) \u2014 REJECT 23/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-174034-0xC0999aC3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-172512-0x23104dcb.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-20] Very few holders (21) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-224824-0x627D4c16.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-214834-0xAcfe7750.md",
-      "title": "Investigation \u2014 XFWA",
-      "symbol": "XFWA",
-      "name": "xfake world assets",
-      "date": "2026-07-31T21:48:34Z",
-      "target": "0xAcfe7750B14Ec7563A4d4D64EbC74701B8871742",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xa4b63e4f6d8c2676455707595edb9f2c00675442) \u2014 can still act on the contract; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-214834-0xAcfe7750.md"
     }
   ],
   "reports": [

@@ -1075,3 +1075,5 @@
 | 2026-08-01 | auto | 0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9 (AAVE) | deep_investigation | CAUTION (69/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-01 | auto | 0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f (ZAMA) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0xC0999aC376d383bd7744B59dFcee0c25F5C26393 (ZAMA) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
