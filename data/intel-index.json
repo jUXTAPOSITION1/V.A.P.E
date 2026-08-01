@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T21:58:24Z",
+  "generated": "2026-08-01T22:12:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 495,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 644,
+    "investigations": 645,
     "news": 45,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-204228-0xC4e9A27D.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-08-01T20:42:28Z",
-      "target": "0xC4e9A27D5a1C6857823fBf8dCCc607b8d7E32b07",
+      "file": "investigation-20260801-221236-0x78a087d7.md",
+      "title": "Investigation \u2014 BSWAP",
+      "symbol": "BSWAP",
+      "name": "Baseswap Token",
+      "date": "2026-08-01T22:12:36Z",
+      "target": "0x78a087d713Be963Bf307b18F2Ff8122EF9A63ae9",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-204228-0xC4e9A27D.md"
+      "verdict": "CAUTION",
+      "score": "53",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x2b0a43dccbd7d42c18f6a83f86d1a19fa58d541a) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $20,408. Positive evidence: 107241 holders \u2014 reasonably dist",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-221236-0x78a087d7.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-221236-0x78a087d7.md",
+      "title": "Investigation \u2014 BSWAP",
+      "symbol": "BSWAP",
+      "name": "Baseswap Token",
+      "date": "2026-08-01T22:12:36Z",
+      "target": "0x78a087d713Be963Bf307b18F2Ff8122EF9A63ae9",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "53",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x2b0a43dccbd7d42c18f6a83f86d1a19fa58d541a) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $20,408. Positive evidence: 107241 holders \u2014 reasonably dist",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-221236-0x78a087d7.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-204228-0xC4e9A27D.md",
@@ -594,20 +608,6 @@
       "score": "65",
       "summary": "Risk factors: [-10] Violent 24h move +1599% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory template",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-023446-0x9A833F5b.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-021931-0x330990Da.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-08-01T02:19:31Z",
-      "target": "0x330990DaE53BCa4C5811C5362B44C33a47db7777",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +13145% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership r",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-021931-0x330990Da.md"
     }
   ],
   "reports": [

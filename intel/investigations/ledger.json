@@ -8073,6 +8073,25 @@
     "symbol": "BTC",
     "times_investigated": 1
   },
+  "8453:0x78a087d713be963bf307b18f2ff8122ef9a63ae9": {
+    "address": "0x78a087d713Be963Bf307b18F2Ff8122EF9A63ae9",
+    "chain": "8453",
+    "creator_address": "0x03d4C4b1B115c068Ef864De2e21E724a758892A2",
+    "first_investigated": "2026-08-01T22:12:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-221236-0x78a087d7.md",
+        "score": 53,
+        "ts": "2026-08-01T22:12:36Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T22:12:36Z",
+    "last_score": 53,
+    "last_verdict": "CAUTION",
+    "symbol": "BSWAP",
+    "times_investigated": 1
+  },
   "8453:0x7991eed0fb1f7affd57c8c240305b8f90c707b07": {
     "address": "0x7991eeD0fB1F7affD57C8C240305b8F90C707b07",
     "chain": "8453",

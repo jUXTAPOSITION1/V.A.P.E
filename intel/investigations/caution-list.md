@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-01T20:42:28Z — 131 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-01T22:12:36Z — 132 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BSWAP | Base | `0x78a087d713Be963Bf307b18F2Ff8122EF9A63ae9` | 53/100 | 1 | 2026-08-01T22:12:36Z |
 | AIPF | Polygon | `0xE5D66322db2922dA6f8cc878d56430b1585f351F` | 62/100 | 1 | 2026-08-01T18:26:37Z |
 | AAVE | Ethereum | `0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9` | 69/100 | 1 | 2026-08-01T17:10:14Z |
 | REDWOLF | Avalanche | `0xAFc1D137a8F0764833d2E74eFb2F0b171BC2cd87` | 50/100 | 1 | 2026-08-01T15:54:43Z |
