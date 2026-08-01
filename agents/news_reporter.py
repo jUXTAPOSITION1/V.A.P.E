@@ -338,8 +338,8 @@ def _editorial_pass(grounding, draft_body):
 # default to photorealism if the instructions themselves name a different
 # style outright. One entry deliberately keeps a photorealistic option
 # alive (news imagery sometimes genuinely calls for it), the rest span
-# historical, painterly, print, and contemporary design movements so no two
-# consecutive stories look like they came out of the same generator.
+# historical, painterly, print, and contemporary design movements instead of
+# locking every story to one photorealistic/high-tech look.
 IMAGE_STYLES = [
     # Classic & historical
     "mid-century modern graphic design, limited color palette, geometric shapes, clean Swiss-inspired layout, 1950s-60s corporate aesthetic",

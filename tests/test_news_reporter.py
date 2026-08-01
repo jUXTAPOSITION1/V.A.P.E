@@ -282,7 +282,8 @@ def test_image_prompt_returns_stripped_text():
 
 
 def test_image_styles_are_all_nonempty_strings():
-    assert len(news_reporter.IMAGE_STYLES) > 10
+    assert len(news_reporter.IMAGE_STYLES) == 30
+    assert len(set(news_reporter.IMAGE_STYLES)) == len(news_reporter.IMAGE_STYLES)
     for style in news_reporter.IMAGE_STYLES:
         assert isinstance(style, str) and style.strip()
 
@@ -305,14 +306,18 @@ def test_image_prompt_style_rotation_produces_more_than_one_style_across_many_ca
     actually gets exercised (e.g. a copy-paste bug that always indexes [0])
     would look correct at a glance but always emit the same style anyway."""
     seen_styles = set()
-    with mock.patch("agents.intel_common.grok_analysis") as grok:
+    chosen_styles = [news_reporter.IMAGE_STYLES[0], news_reporter.IMAGE_STYLES[1]]
+    with mock.patch(
+        "agents.news_reporter.random.choice",
+        side_effect=chosen_styles * 30,
+    ), mock.patch("agents.intel_common.grok_analysis") as grok:
         def _capture(*_args, **kwargs):
             seen_styles.add(next(s for s in news_reporter.IMAGE_STYLES if s in kwargs["instructions"]))
             return "a prompt"
         grok.side_effect = _capture
         for _ in range(60):
             news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets")
-    assert len(seen_styles) > 1
+    assert seen_styles == set(chosen_styles)
 
 
 def test_generate_ai_image_returns_none_when_no_prompt():
