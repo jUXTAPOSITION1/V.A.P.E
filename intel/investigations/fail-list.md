@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-01T15:24:19Z — 290 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-01T15:39:40Z — 291 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| PHARM | Avalanche | `0x91a1C5a6001e6Aa628f49094658C65A19794D7f6` | 32/100 | 1 | 2026-08-01T15:39:40Z |
 | tRUSH | Avalanche | `0x395Ded77F105BBEf099f8add6Eb4f238d1fB49bd` | 25/100 | 1 | 2026-08-01T15:24:19Z |
 | WMTX | Base | `0xE112Bc165f37eF842E66326E01A291927Bf9B468` | 12/100 | 1 | 2026-08-01T14:37:30Z |
 | OFC | Base | `0xD14cEFcaF95BBE72F363CBDFF1ca18DAe1D3C858` | 20/100 | 1 | 2026-08-01T13:36:48Z |

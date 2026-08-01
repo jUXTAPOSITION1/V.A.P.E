@@ -4192,6 +4192,25 @@
     "symbol": "CNR",
     "times_investigated": 1
   },
+  "43114:0x91a1c5a6001e6aa628f49094658c65a19794d7f6": {
+    "address": "0x91a1C5a6001e6Aa628f49094658C65A19794D7f6",
+    "chain": "43114",
+    "creator_address": "0xdea4dd42fce639c0af984796c33f2f0fc6ab9cab",
+    "first_investigated": "2026-08-01T15:39:40Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-153940-0x91a1C5a6.md",
+        "score": 32,
+        "ts": "2026-08-01T15:39:40Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T15:39:40Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "PHARM",
+    "times_investigated": 1
+  },
   "43114:0xaaab9d12a30504559b0c5a9a5977fee4a6081c6b": {
     "address": "0xAAAB9D12A30504559b0C5a9A5977fEE4A6081c6b",
     "chain": "43114",
