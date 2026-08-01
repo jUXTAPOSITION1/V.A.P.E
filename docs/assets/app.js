@@ -304,8 +304,8 @@ const App = {
                 const card = o=>{
                     const icon = OFFERING_ICONS[o.name] || 'fa-circle-dot';
                     return `
-                    <div class="relative group">
-                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="offering-card w-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
+                    <div class="relative group shrink-0 w-64">
+                    <button onclick="Hire.openX402('${o.name}', ${o.price_usd})" class="offering-card w-full h-full text-left panel-sm hover:border-white/30 transition flex flex-col gap-2 cursor-pointer" data-offering="${o.name}">
                       <div class="flex items-center gap-2">
                         <i class="fa-solid ${icon} offering-card-icon text-sm shrink-0"></i>
                         <div class="flex-1 flex items-center justify-between gap-2 min-w-0">

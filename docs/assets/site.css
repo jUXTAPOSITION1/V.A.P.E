@@ -228,6 +228,83 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     width: 100%;
 }
 
+/* Offerings row — side-by-side cards with a visible horizontal scrollbar
+   instead of a vertically stacked grid, so the full offering catalog (30+
+   entries) doesn't push the rest of the Engagement Options panel down the
+   page. Each card gets a fixed width + shrink-0 (see app.js's card
+   template) since a flex row, unlike a grid, won't size children on its
+   own. Scroll-snap makes the row settle on a card boundary rather than
+   stopping mid-card after a swipe/scroll. */
+.offerings-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.625rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+.offerings-scroll > * {
+    scroll-snap-align: start;
+}
+.offerings-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+.offerings-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+.offerings-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+.offerings-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* x402 Activity tiles — Transactions / Volume / Buyers, each a big number
+   plus a small bar-sparkline of the same real per-day data backing the main
+   Volume & Revenue chart below. Deliberately its own compact tri-widget
+   layout (not a re-skin of .chart-shell) — the reference this was modeled
+   on (a wallet-app "Overview" activity module) reads at a glance precisely
+   because each metric gets its own small, focused chart rather than sharing
+   one busy multi-series one. */
+.activity-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+.activity-tile-label {
+    font-size: 0.6875rem;
+    color: #71717a;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.activity-tile-value {
+    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    color: #f4f4f5;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+}
+.activity-sparkline {
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    height: 72px;
+    margin-top: 0.5rem;
+}
+.activity-sparkline-bar {
+    flex: 1 1 0%;
+    min-width: 2px;
+    background: rgba(96, 165, 250, 0.55);
+    border-radius: 2px 2px 0 0;
+    transition: background 0.15s ease;
+    cursor: default;
+}
+.activity-sparkline-bar:hover,
+.activity-sparkline-bar.is-latest {
+    background: #60a5fa;
+}
+
 .skeleton {
     background: linear-gradient(90deg, rgba(255,255,255,.04) 25%, rgba(255,255,255,.09) 37%, rgba(255,255,255,.04) 63%);
     background-size: 400% 100%;

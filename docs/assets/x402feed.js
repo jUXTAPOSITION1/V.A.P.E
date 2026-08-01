@@ -106,6 +106,7 @@ const X402Feed = {
     _days: 30,
     _rawDaily: [],
     _revenueStyle: 'bar',
+    _activityDays: 30,
     _feed: { q: '', status: '', sort: 'ts_desc', offset: 0 },
     _feedTotal: 0,
     _feedInFlight: 0,
@@ -113,14 +114,136 @@ const X402Feed = {
     async init() {
         this._wireRangeToggle();
         this._wireStyleToggle();
+        this._wireActivityRangeToggle();
         this._wireFeedControls();
-        await Promise.all([this._loadStats(), this._loadFeed(), this._renderDirectoryLinks()]);
+        await Promise.all([this._loadStats(), this._loadActivity(), this._loadFeed(), this._renderDirectoryLinks()]);
         // 25s: cheap enough not to hammer the worker's edge cache (both
         // endpoints cache 10-30s server-side anyway), frequent enough that
         // "live" isn't a lie.
         if (!this._pollHandle) {
-            this._pollHandle = setInterval(() => { this._loadStats(); this._loadFeed(); }, 25000);
+            this._pollHandle = setInterval(() => { this._loadStats(); this._loadActivity(); this._loadFeed(); }, 25000);
         }
+    },
+
+    _wireActivityRangeToggle() {
+        const wrap = document.getElementById('x402-activity-range');
+        if (!wrap) return;
+        wrap.querySelectorAll('.x402-activity-range-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const days = Number(btn.dataset.days) || 30;
+                if (days === this._activityDays) return;
+                this._activityDays = days;
+                wrap.querySelectorAll('.x402-activity-range-btn').forEach(b => {
+                    const active = b === btn;
+                    b.classList.remove(...RANGE_BTN_ACTIVE);
+                    if (active) b.classList.add(...RANGE_BTN_ACTIVE);
+                    b.setAttribute('aria-pressed', String(active));
+                });
+                this._loadActivity();
+            });
+        });
+    },
+
+    // Real, sub-day bucketing, not a re-skin of the daily /x402/stats feed —
+    // this is the concrete fix for "it buckets everyday regardless of
+    // range" (explicit direction 2026-08-01). /x402/feed carries each job's
+    // real settlement timestamp (worker/src/lib/jobLog.ts's JobRecord.ts),
+    // so short/medium windows get genuine hourly/multi-hour resolution
+    // instead of one bar per calendar day — matching the reference widget,
+    // whose own tooltips show hour-level buckets ("Jul 27 17:00") even at a
+    // 7-day view. Only the 90D+ tier falls back to the pre-aggregated daily
+    // /x402/stats feed, where daily resolution is already the right call
+    // (2000+ hourly bars would be unreadable, and infeasible to fetch raw).
+    _activityBucketMinutes(days) {
+        if (days <= 7) return 60;      // hourly
+        if (days <= 30) return 180;    // every 3 hours
+        return null;                   // fall back to daily /x402/stats
+    },
+
+    async _loadActivity() {
+        const setTxt = (id, v) => { const n = document.getElementById(id); if (n) n.textContent = v; };
+        const days = this._activityDays;
+        try {
+            const bucketMin = this._activityBucketMinutes(days);
+            const buckets = bucketMin
+                ? await this._activityBucketsFromFeed(days, bucketMin)
+                : await this._activityBucketsFromStats(days);
+            const jobs = buckets.reduce((s, b) => s + b.jobs, 0);
+            const volume = buckets.reduce((s, b) => s + b.revenue_usd, 0);
+            const buyers = new Set();
+            buckets.forEach(b => (b.payers || []).forEach(p => buyers.add(p)));
+            setTxt('x402-activity-jobs-value', jobs.toLocaleString());
+            setTxt('x402-activity-volume-value', '$' + volume.toLocaleString(undefined, { maximumFractionDigits: 2 }));
+            setTxt('x402-activity-buyers-value', buyers.size ? buyers.size.toLocaleString() : (buckets.reduce((s, b) => s + (b.buyers || 0), 0) || '—'));
+            this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs);
+            this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd);
+            this._renderSparkline('x402-activity-buyers-spark', buckets, b => (b.payers ? b.payers.size : (b.buyers || 0)));
+        } catch (e) {
+            // Leave the last-good values on screen rather than blanking a
+            // live number over one flaky poll.
+        }
+    },
+
+    // Fetches real per-job records (real `ts`/`payer`, not a pre-aggregate)
+    // and buckets them client-side at `bucketMin`-minute resolution over the
+    // trailing `days` window. `limit` is generous relative to VAPE's real
+    // observed volume (~27 jobs/day per the live x402scan listing) — 30 days
+    // of full volume is ~800 records, well under RECENT_CAP.
+    async _activityBucketsFromFeed(days, bucketMin) {
+        const r = await fetch(`${window.WORKER_BASE}/x402/feed?limit=2000&sort=ts_desc`);
+        if (r.status === 503) return [];
+        const { jobs } = await r.json();
+        const bucketMs = bucketMin * 60000;
+        const now = Date.now();
+        const count = Math.ceil((days * 1440) / bucketMin);
+        const start = now - count * bucketMs;
+        const buckets = [];
+        for (let i = 0; i < count; i++) {
+            buckets.push({ ts: start + i * bucketMs, jobs: 0, revenue_usd: 0, payers: new Set() });
+        }
+        for (const j of (jobs || [])) {
+            const t = Date.parse(j.ts);
+            if (isNaN(t) || t < start) continue;
+            const idx = Math.min(count - 1, Math.floor((t - start) / bucketMs));
+            const b = buckets[idx];
+            if (!b) continue;
+            b.jobs += 1;
+            if (j.status === 'settled') b.revenue_usd += Number(j.amount_usd) || 0;
+            if (j.payer) b.payers.add(String(j.payer).toLowerCase());
+        }
+        return buckets;
+    },
+
+    // Fallback for windows too wide to bucket sub-daily from raw records —
+    // reuses the same pre-aggregated daily array the big Volume & Revenue
+    // chart below already fetches, just shaped to match _renderSparkline's
+    // expectations (`ts` instead of `date`).
+    async _activityBucketsFromStats(days) {
+        const r = await fetch(`${window.WORKER_BASE}/x402/stats?days=${days}`);
+        if (r.status === 503) return [];
+        const stats = await r.json();
+        return (stats.daily || []).map(d => ({ ts: Date.parse(d.date + 'T00:00:00Z'), jobs: d.jobs, revenue_usd: d.revenue_usd, buyers: d.buyers || 0 }));
+    },
+
+    // Plain div bars, not Chart.js — these are decorative, glanceable
+    // sparklines (one per Activity tile), not an interactive chart; a few
+    // hundred absolutely-positioned divs is cheaper and simpler than
+    // standing up a whole Chart.js instance three times over for the same
+    // effect. Tooltip mirrors the reference widget's own hover behavior
+    // (exact bucket time + value), not just the bare number.
+    _renderSparkline(id, buckets, valueOf) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (!buckets.length) { el.innerHTML = ''; return; }
+        const values = buckets.map(valueOf);
+        const max = Math.max(1, ...values);
+        el.innerHTML = buckets.map((b, i) => {
+            const v = values[i];
+            const pct = Math.max(3, Math.round((v / max) * 100));
+            const latest = i === buckets.length - 1 ? ' is-latest' : '';
+            const when = new Date(b.ts).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric' });
+            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" title="${escapeHtml(when)}: ${escapeHtml(String(v))}"></div>`;
+        }).join('');
     },
 
     _wireRangeToggle() {
