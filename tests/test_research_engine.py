@@ -486,6 +486,51 @@ class TestSynthesize:
         system, _user = m.call_args[0]
         assert "Use headings X, Y, Z." in system
 
+    # ── thin-evidence prompt path ─────────────────────────────────────────
+    def _rich_result(self):
+        return {"topic": "Foo", "task_type": "threat_analysis", "known_facts": {},
+                "findings": [{"url": f"https://rekt.news/{i}", "credibility": "security_research",
+                              "title": f"t{i}", "snippet": "s"} for i in range(3)],
+                "deep_extracts": [{"url": "https://rekt.news/0", "credibility": "security_research",
+                                    "content": "real extracted content"}],
+                "log": {}}
+
+    def test_thin_evidence_uses_the_short_honest_answer_prompt(self):
+        # _base_result() has no findings/deep_extracts -> thin by definition.
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result())
+        system, _user = m.call_args[0]
+        assert "Do NOT try to fill out a full structured report" in system
+        assert "Connect evidence across sources" not in system
+
+    def test_rich_evidence_uses_the_full_structured_prompt(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._rich_result())
+        system, _user = m.call_args[0]
+        assert "Connect evidence across sources" in system
+        assert "Do NOT try to fill out a full structured report" not in system
+
+    def test_thin_evidence_still_appends_header_and_trailer_instructions(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
+        system, _user = m.call_args[0]
+        assert "Do NOT try to fill out a full structured report" in system
+        assert "VERDICT ALIGNMENT" in system
+
+    def test_short_raw_user_block_is_treated_as_thin(self):
+        result = {"topic": "Foo", "task_type": "general", "raw_user_block": "Nothing found.", "log": {}}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "Do NOT try to fill out a full structured report" in system
+
+    def test_long_raw_user_block_is_not_treated_as_thin(self):
+        result = {"topic": "Foo", "task_type": "general", "raw_user_block": "x" * 500, "log": {}}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "Do NOT try to fill out a full structured report" not in system
+
     _GAPS_AND_VERDICT_TRAILERS = [
         {"type": "json", "name": "gaps", "label": "GAPS_JSON"},
         {"type": "enum", "name": "verdict", "label": "VERDICT ALIGNMENT", "options": ("AGREE", "DISAGREE")},

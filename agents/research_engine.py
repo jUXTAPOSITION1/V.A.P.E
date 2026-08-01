@@ -640,6 +640,21 @@ def _parse_trailers(text, trailers):
     return named, text
 
 
+def _is_thin_evidence(result):
+    """Rule-based (not LLM) thin-evidence detector. Real gap this closes:
+    synthesize() used to hand the model the exact same full structured-
+    section prompt whether it had a dozen deep-extracted pages or nothing
+    at all, and with near-empty evidence that pressure produced empty-
+    looking sections plus a generic conclusion instead of an honest short
+    answer. A caller using raw_user_block (its own grounding text) is
+    judged by that text's length instead, since it never populates
+    findings/deep_extracts."""
+    raw = result.get("raw_user_block")
+    if raw:
+        return len(raw.strip()) < 200
+    return not (result.get("deep_extracts") or []) and len(result.get("findings") or []) < 2
+
+
 def synthesize(result, role="research analyst", extra_instructions=None,
                header_fields=None, header_delimiter="---",
                trailers=None, max_tokens=2400, temperature=0.5):
@@ -653,6 +668,13 @@ def synthesize(result, role="research analyst", extra_instructions=None,
     of paraphrasing everything, connect evidence across sources rather
     than listing findings in isolation, and end with a task-type-specific
     recommendation grounded in a specific finding — never generic advice.
+
+    When _is_thin_evidence(result) is true (near-zero real findings/deep
+    extracts, or a very short raw_user_block), a structurally different
+    and shorter system prompt is used instead of the full template above —
+    a short honest "here's what was searched and it came back thin"
+    answer, rather than the same section-filling pressure producing
+    empty-looking sections and generic padding.
 
     header_fields: optional ordered list of {"name", "label"} dicts
     requesting the model open its ENTIRE response with `LABEL: value` lines
@@ -715,7 +737,7 @@ def synthesize(result, role="research analyst", extra_instructions=None,
         return {"narrative": "_Synthesis unavailable this cycle (LLM layer not importable)._", **unavailable}
 
     try:
-        system = (
+        shared_rules = (
             f"You are VAPE's senior {role}, writing a real, evidence-grounded analysis from the "
             "real search snippets and deep-extracted source content given below. Rules:\n"
             "- Never invent a fact, number, name, date, or quote beyond what's given below or your "
@@ -728,17 +750,46 @@ def synthesize(result, role="research analyst", extra_instructions=None,
             "- Wherever both a headline/reported figure and a realized/confirmed figure could apply "
             "(e.g. an exploit's reported vs. recovered loss), explicitly distinguish them — never "
             "conflate them into one number.\n"
-            "- Quote or closely paraphrase key primary statements (official announcements, named "
-            "quotes) rather than paraphrasing everything into generic prose.\n"
-            "- Connect evidence across sources — note where sources agree, disagree, or one is the "
-            f"only source for a claim — rather than listing findings in isolation.\n"
-            f"- End with {framing}.\n"
-            "- If the evidence is genuinely thin, say so plainly rather than padding with generic "
-            "advice not grounded in anything found this round.\n"
-            + (f"\nAdditional instructions: {extra_instructions}" if extra_instructions else "")
-            + _build_header_instructions(header_fields, header_delimiter)
-            + _build_trailer_instructions(trailers)
         )
+        if _is_thin_evidence(result):
+            # Real gap this closes: the full structured-section prompt below
+            # applies the same pressure to fill every section whether there's
+            # a dozen deep-extracted pages or almost nothing — with near-empty
+            # evidence that pressure produces empty-looking sections plus a
+            # generic conclusion instead of an honest short answer. This path
+            # is structurally shorter, not just an extra bullet the model can
+            # ignore under the same template pressure.
+            system = (
+                shared_rules +
+                "- This round's evidence is genuinely thin (very few or no real search hits or "
+                "extracted pages). Do NOT try to fill out a full structured report or force content "
+                "into every section any instructions below describe — that produces empty-sounding "
+                "sections and generic padding, which is worse than a short honest answer.\n"
+                "- Instead, write a short, honest narrative (a handful of sentences): state plainly "
+                "that the evidence is thin, mention any single concrete fact or quote that IS "
+                "actually available below, and skip sections or headings you have nothing real to "
+                "put under.\n"
+                f"- Only end with {framing} if it's grounded in something actually found below — "
+                "otherwise state plainly that no grounded recommendation is possible yet.\n"
+                + (f"\nTask context (adapt to the short honest-answer approach above, don't force "
+                   f"its full structure): {extra_instructions}" if extra_instructions else "")
+                + _build_header_instructions(header_fields, header_delimiter)
+                + _build_trailer_instructions(trailers)
+            )
+        else:
+            system = (
+                shared_rules +
+                "- Quote or closely paraphrase key primary statements (official announcements, named "
+                "quotes) rather than paraphrasing everything into generic prose.\n"
+                "- Connect evidence across sources — note where sources agree, disagree, or one is the "
+                f"only source for a claim — rather than listing findings in isolation.\n"
+                f"- End with {framing}.\n"
+                "- If the evidence is genuinely thin, say so plainly rather than padding with generic "
+                "advice not grounded in anything found this round.\n"
+                + (f"\nAdditional instructions: {extra_instructions}" if extra_instructions else "")
+                + _build_header_instructions(header_fields, header_delimiter)
+                + _build_trailer_instructions(trailers)
+            )
         user = _evidence_block(result)
     except Exception as e:
         # "Never raises" holds even for a malformed `result` dict a caller
