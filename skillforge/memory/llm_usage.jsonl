@@ -2126,3 +2126,4 @@
 {"ts": "2026-08-01T11:35:26Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1187, "completion_tokens": 38, "total_tokens": 1768}
 {"ts": "2026-08-01T11:47:32Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1842, "completion_tokens": 173, "total_tokens": 2625}
 {"ts": "2026-08-01T11:50:22Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1192, "completion_tokens": 34, "total_tokens": 1812}
+{"ts": "2026-08-01T12:03:20Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2558, "completion_tokens": 92, "total_tokens": 3337}
