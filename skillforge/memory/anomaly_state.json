@@ -1,4 +1,8 @@
 {
+  "mover:Claude / USDC": {
+    "ts": "2026-08-01T18:02:20Z",
+    "value": 62.282
+  },
   "mover:OpenAI / USDC": {
     "ts": "2026-08-01T16:01:50Z",
     "value": 993535.761
