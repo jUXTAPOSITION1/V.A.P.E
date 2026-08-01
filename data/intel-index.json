@@ -1,17 +1,17 @@
 {
-  "generated": "2026-08-01T02:09:37Z",
+  "generated": "2026-08-01T02:12:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 475,
+    "reports": 476,
     "reports_by_type": {
       "security": 86,
+      "mainnet": 4,
       "bounty": 110,
       "sentiment": 50,
       "base": 97,
       "macro": 25,
       "virtuals": 97,
       "bug": 3,
-      "mainnet": 3,
       "skillforge": 4
     },
     "broadcasts": 134,
@@ -621,6 +621,17 @@
       "summary": "The feed records 7 incidents in the last 7 days, none exceeding $50M in the prior 14 days. Documented events include a $0.01M malicious SetToken & Manager Contract on Ethereum (2026-07-30), an $8.2M incident on BSC (2026-07-28), a $0.578M price manipulation on BSC (2026-07-28), a $0.73M access-control exploit on WEMIX3.0 (2026-07-26), a $",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-02.md",
       "bytes": 6921
+    },
+    {
+      "kind": "intel",
+      "type": "mainnet",
+      "file": "mainnet-patch-check-2026-08-01-02.md",
+      "title": "Mainnet Patch Status Check \u2014 Virtuals Protocol AgentNftV2",
+      "date": "2026-08-01T02:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-01 02:12 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live on-chain verified source fetch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-08-01-02.md",
+      "bytes": 2981
     },
     {
       "kind": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "The feed records 12 incidents over the seven-day window ending 28 July 2026. Aggregate losses remain below the $50 M threshold for any single event, with the largest single loss being the AFX Bridge compromise at $24.15 M on Arbitrum. Two incidents exceeded $5 M (AFX Bridge $24.15 M and Verus-Ethereum Bridge $7.53 M), while the remaining ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-29-14.md",
       "bytes": 7128
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260729_120144.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-29T12:01:44Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_120144.md",
-      "bytes": 14526
     }
   ],
   "broadcasts": [
