@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-01T13:05:40Z — 287 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-01T13:36:48Z — 288 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| OFC | Base | `0xD14cEFcaF95BBE72F363CBDFF1ca18DAe1D3C858` | 20/100 | 1 | 2026-08-01T13:36:48Z |
 | ASTEROID | BNB Chain | `0x8FD3437A13B298dD2e98Db902c56970a9d3C4985` | 45/100 | 1 | 2026-08-01T12:05:15Z |
 | ClankerToken | Base | `0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07` | 0/100 | 2 | 2026-08-01T10:46:38Z |
 | ClankerToken | Base | `0x006b340bEE30F8425cf65f064712F57B2BC0bB07` | 0/100 | 2 | 2026-08-01T10:46:18Z |
