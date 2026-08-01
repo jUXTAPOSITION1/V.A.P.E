@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-01T08:21:44Z",
+  "generated": "2026-08-01T08:23:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 480,
+    "reports": 481,
     "reports_by_type": {
+      "security": 88,
       "bounty": 111,
       "base": 98,
-      "security": 87,
       "bug": 4,
       "mainnet": 4,
       "sentiment": 50,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-080430-0xA04bDB1f.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_070810.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T07:08:10Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T08:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_070810.md",
-      "bytes": 14827
+      "summary": "The feed shows 7 incidents in the last 7 days, all under $10M and none reaching the $50M threshold in the prior 14 days. Confirmed events include Set Protocol malicious SetToken & Manager contract on Ethereum ($0.01M), Crypto DAO on BSC ($8.2M), LULA price manipulation on BSC ($0.578M), WEMIX.FI Lend access control exploit on WEMIX3.0 ($0",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-08.md",
+      "bytes": 7115
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T08:00Z",
+      "threat": null,
+      "summary": "The feed shows 7 incidents in the last 7 days, all under $10M and none reaching the $50M threshold in the prior 14 days. Confirmed events include Set Protocol malicious SetToken & Manager contract on Ethereum ($0.01M), Crypto DAO on BSC ($8.2M), LULA price manipulation on BSC ($0.578M), WEMIX.FI Lend access control exploit on WEMIX3.0 ($0",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-08.md",
+      "bytes": 7115
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_171603.md",
       "bytes": 17725
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-29-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-29T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-29 16:16 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-29-16.md",
-      "bytes": 3331
     }
   ],
   "broadcasts": [
