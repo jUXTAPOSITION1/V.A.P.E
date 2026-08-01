@@ -1043,3 +1043,5 @@
 | 2026-08-01 | auto | 0x444400cAe63d2aEC462701d75aC65DBE0d044900 (ASTEROID) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 95% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-01 | auto | 0x3B4de3c7855C03bB9F50ea252cD2c9FA1125Ab07 (IDOL) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 84% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-01 | auto | 0x752C5a95d202972E124390F30a50154409d3c858 (OFC) | deep_investigation | CAUTION (52/100) | Owner not renounced (0x80b12bd0f1793bf6cea767fa83eb2068eaa17dc8) — can still act | +7d |
