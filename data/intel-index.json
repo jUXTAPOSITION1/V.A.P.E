@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T00:33:57Z",
+  "generated": "2026-08-01T00:49:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 474,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 133,
-    "investigations": 602,
+    "investigations": 603,
     "news": 32,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-003357-0xC28475DE.md",
-      "title": "Investigation \u2014 jSTABLE",
-      "symbol": "jSTABLE",
-      "name": "JustStableIndex",
-      "date": "2026-08-01T00:33:57Z",
-      "target": "0xC28475DE46305BDf8E8522Fc282CC13106812ccC",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260801-004929-0x059aB32a.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "Akedo Games",
+      "date": "2026-08-01T00:49:29Z",
+      "target": "0x059aB32a5907ed5F09e6394D081A913F32f4da86",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Very few holders (31) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-003357-0xC28475DE.md"
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $21,922; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-004929-0x059aB32a.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-004929-0x059aB32a.md",
+      "title": "Investigation \u2014 AKE",
+      "symbol": "AKE",
+      "name": "Akedo Games",
+      "date": "2026-08-01T00:49:29Z",
+      "target": "0x059aB32a5907ed5F09e6394D081A913F32f4da86",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $21,922; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-004929-0x059aB32a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-003357-0xC28475DE.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,494 (rug/illiquid); [-10] Low liqu",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-232606-0xC19Caef8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-231107-0x7D4A2383.md",
-      "title": "Investigation \u2014 STONKS",
-      "symbol": "STONKS",
-      "name": "Stonks",
-      "date": "2026-07-30T23:11:07Z",
-      "target": "0x7D4A23832FaD83258B32ce4Fd3109Ceef4332aF4",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 2739 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 820+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-231107-0x7D4A2383.md"
     }
   ],
   "reports": [
