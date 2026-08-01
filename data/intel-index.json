@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T14:37:32Z",
+  "generated": "2026-08-01T14:52:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 487,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 627,
+    "investigations": 628,
     "news": 43,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-143730-0xE112Bc16.md",
-      "title": "Investigation \u2014 WMTX",
-      "symbol": "WMTX",
-      "name": "WMTX",
-      "date": "2026-08-01T14:37:30Z",
-      "target": "0xE112Bc165f37eF842E66326E01A291927Bf9B468",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "12",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (8) \u2014 thin, easily manipulated distribution; [-15] Top 8 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,524 (rug/illiquid); [-10] Low liquidity $1,524; [-10] No known third-pa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-143730-0xE112Bc16.md"
+      "file": "investigation-20260801-145256-0xA3f75166.md",
+      "title": "Investigation \u2014 APEPE",
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "date": "2026-08-01T14:52:56Z",
+      "target": "0xA3f751662e282E83EC3cBc387d225Ca56dD63D3A",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,592. Positive evidence: Ownership renounced; 416359 holders \u2014 reasonably distributed; Trading 1150+ days without a known incident in this scan; Custom verified source (not a mass-produced factory tem",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-145256-0xA3f75166.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-145256-0xA3f75166.md",
+      "title": "Investigation \u2014 APEPE",
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "date": "2026-08-01T14:52:56Z",
+      "target": "0xA3f751662e282E83EC3cBc387d225Ca56dD63D3A",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $11,592. Positive evidence: Ownership renounced; 416359 holders \u2014 reasonably distributed; Trading 1150+ days without a known incident in this scan; Custom verified source (not a mass-produced factory tem",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-145256-0xA3f75166.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-143730-0xE112Bc16.md",
@@ -594,20 +608,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Low liquidity $23,208. Positive evidence: Ownership renounced; 3230 holders \u2014 reasonably distributed; 81% of liquidity is locked \u2014 reduced rug-pull risk; Trading 448+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-160124-0x49083d8E.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-154556-0x223a368A.md",
-      "title": "Investigation \u2014 GURS",
-      "symbol": "GURS",
-      "name": "GURS",
-      "date": "2026-07-31T15:45:56Z",
-      "target": "0x223a368Ad0E7396165FC629976d77596a51F155C",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-25] Very low liquidity $5,058 (rug/illiquid); [-10] Low liquidity $5,058; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 21026 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 944+ days",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-154556-0x223a368A.md"
     }
   ],
   "reports": [

@@ -1055,3 +1055,5 @@
 | 2026-08-01 | auto | 0x3e31966d4f81C72D2a55310A6365A56A4393E98D (WMTX) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-01 | auto | 0xE112Bc165f37eF842E66326E01A291927Bf9B468 (WMTX) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-01 | auto | 0xA3f751662e282E83EC3cBc387d225Ca56dD63D3A (APEPE) | deep_investigation | CAUTION (75/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
