@@ -35,3 +35,22 @@ skillforge/memory/findings.chain.jsonl    !merge
 # corruption.
 skillforge/memory/anomaly_state.json      merge=json-state
 skillforge/memory/*_quota.json            merge=json-state
+
+# data/intel-index.json is a fully-regenerated derived snapshot, never read
+# back or updated incrementally — agents/build_intel_index.py rebuilds it from
+# scratch every run by re-scanning reports/, intel/, and skillforge/ from disk.
+# At least 6 scheduled workflows (bounty-cycle, archive-reports, broadcast,
+# featured-investigation, intel-sweeps, news-intel) regenerate and commit it,
+# so two overlapping runs reliably produce a same-line textual conflict on it
+# even though neither side's *content* actually matters once committed — the
+# very next cycle (typically within the hour) overwrites it wholesale again
+# regardless of which side "won". A rebase conflict here is therefore always
+# spurious and was failing this exact set of workflows on a rolling basis
+# (2026-08-01). `keep-fresh` (registered by scripts/ci_commit_push.sh) keeps
+# THIS run's freshly-regenerated version on conflict — note that during a
+# `git rebase`, git's "ours"/"theirs" are the reverse of what they mean in a
+# normal merge (`ours` = the upstream being rebased onto, `theirs` = the local
+# commit being replayed), confirmed empirically before shipping this; a naive
+# `driver true` (git's usual "keep ours" idiom) would have kept origin's STALE
+# copy instead.
+data/intel-index.json                     merge=keep-fresh
