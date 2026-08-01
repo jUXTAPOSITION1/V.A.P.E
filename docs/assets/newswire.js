@@ -134,7 +134,7 @@ export function storyCardHtml(s) {
             <div class="news-card-dek">${escapeHtml(s.dek || '')}</div>
             <div class="news-card-meta">
                 <span>${escapeHtml(s.byline || 'VAPE Reporter')}</span>
-                <span>${ago(s.date)}</span>
+                <span title="${escapeHtml(s.published_et || '')}">${s.published_et ? escapeHtml(s.published_et) : ago(s.date)}</span>
             </div>
         </div>
     </a>`;

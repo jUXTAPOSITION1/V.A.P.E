@@ -218,6 +218,7 @@ def scan_news():
             "title": _first_heading(txt, name),
             "byline": _field(txt, "Byline") or "VAPE Reporter",
             "date": _field(txt, "Date") or _date_from_name(name),
+            "published_et": _field(txt, "Published"),
             "topic": _field(txt, "Topic"),
             "dek": _field(txt, "Dek") or _summary(txt, 200),
             "image": image,

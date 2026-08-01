@@ -61,7 +61,7 @@ async function init() {
     const headline = firstHeading(text) || 'Untitled';
     const byline = field(text, 'Byline') || 'VAPE Reporter';
     const agency = field(text, 'Agency') || 'VAPE Wire';
-    const dateStr = field(text, 'Date');
+    const dateStr = field(text, 'Published') || field(text, 'Date');
     const topic = field(text, 'Topic');
     const dek = field(text, 'Dek');
     const image = field(text, 'Image');

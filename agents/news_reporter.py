@@ -55,12 +55,25 @@ it actually got via the Image source field.
 Picks NEWS_REPORTER_PICKS stories per run (env, default 1) — run cadence
 (the calling workflow) controls daily volume, not this script.
 
+Headline/timestamp/formatting quality bar (explicit direction, 2026-08-01):
+early reports too often just reworded the source outlet's own headline, gave
+readers only a UTC stamp buried in frontmatter, and produced flat, single-
+block prose without the structure real journalism uses. write_story()'s
+drafting instructions now require an original, non-derivative headline (see
+the HEADLINE section of `instructions` below); _publish_stamp() adds a
+human-facing US Eastern-time "Published" line alongside the machine-
+parseable UTC "Date" field (front-end date math in docs/assets/newswire.js's
+ago() still reads the latter); and the body instructions require a strong
+lede, ## subheadings every 150-250 words, and short paragraphs instead of
+academic-style blocks.
+
 Usage: python agents/news_reporter.py
 """
 import os
 import sys
 import json
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import news_common as nc  # noqa: E402
@@ -69,6 +82,29 @@ from agents import llm  # noqa: E402
 from agents import research_engine  # noqa: E402
 
 FALLBACK_IMAGE = "assets/logo-v-256.png"  # VAPE's own brand mark -- used only when no AI image or source photo is available
+EASTERN = ZoneInfo("America/New_York")
+
+
+def _publish_stamp(now_utc=None):
+    """(date_iso, published_et) for a report's frontmatter.
+
+    date_iso: machine-parseable UTC timestamp with a trailing 'Z'
+    (docs/assets/newswire.js's ago() feeds this straight into `new Date()`
+    for the "3h ago" card label) -- replaces the old "%Y-%m-%d %H:%M UTC"
+    format, which isn't reliably parseable by JS's Date constructor across
+    browsers.
+
+    published_et: human-facing US Eastern-time stamp (e.g. "August 1, 2026
+    · 3:04 AM EDT") for readers -- real financial/crypto news
+    outlets timestamp in the market's own timezone, not UTC. EST vs. EDT is
+    resolved from the real date via zoneinfo, never hardcoded, since VAPE
+    publishes across both halves of the year."""
+    now_utc = now_utc or datetime.now(timezone.utc)
+    now_et = now_utc.astimezone(EASTERN)
+    hour12 = now_et.hour % 12 or 12
+    date_iso = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    published_et = f"{now_et:%B} {now_et.day}, {now_et.year} · {hour12}:{now_et:%M %p %Z}"
+    return date_iso, published_et
 
 
 def _load_ticker():
@@ -249,16 +285,29 @@ def write_story(candidate):
         "operation, not a summary tool. Write with the authority and confidence of a staff reporter "
         "at a top-tier outlet, not a disclaimer-laden assistant: no hedging like 'as an AI' or 'I "
         "cannot verify' language — state plainly what the sourced material shows and what it "
-        "doesn't. Write an in-depth, genuinely investigative report — the kind of reporting worthy "
-        "of leading a major outlet's front page: dig into WHY this is happening, who is affected, "
-        "what the second-order consequences are, and what a sharp reader should watch for next. Do "
-        "not just restate the headline. Cite your sources inline with markdown links as you use "
-        "them (the original story and anything from your own search). If your search corroborates "
+        "doesn't.\n\n"
+        "HEADLINE: Write your own original headline in VAPE Wire's voice — sharp, specific, and "
+        "genuinely catchy the way a skilled editor's would be. It must NOT be a copy, near-copy, or "
+        "minor rewording of the ORIGINAL HEADLINE given below — find the real angle, stakes, or "
+        "sharpest fact in the story and lead with that, the way a competing outlet covering the same "
+        "news would write its own distinct headline, not the wire-service one. Avoid generic filler "
+        "phrasing ('X Sees Y', 'Everything You Need to Know About X'). The DEK is a genuine one-"
+        "sentence sub-headline that adds new information or stakes the headline didn't cover — never "
+        "just a restatement of the headline in other words.\n\n"
+        "BODY: Write an in-depth, genuinely investigative report — the kind of reporting worthy of "
+        "leading a major outlet's front page. Open with a strong lede paragraph (2-3 sentences) that "
+        "leads with the single most important, concrete fact — not a throat-clearing summary of the "
+        "topic. Then dig into WHY this is happening, who is affected, what the second-order "
+        "consequences are, and what a sharp reader should watch for next — do not just restate the "
+        "headline. Use ## subheadings roughly every 150-250 words to break the piece into real "
+        "sections (e.g. what happened, why it matters, what's next) — never one unbroken wall of "
+        "text. Keep paragraphs short (2-4 sentences), the way real online journalism is written for "
+        "readability, not academic prose blocks. Cite your sources inline with markdown links as you "
+        "use them (the original story and anything from your own search). If your search corroborates "
         "or complicates the original story, say so explicitly. The one hard rule that never bends "
         "even under this house style: never invent a quote, figure, or fact not in the material "
         "above or in a real source you found — authority of voice, not invention, is the standard. "
-        "Write the full report body in markdown, using ## subheadings, at least 400 words if the "
-        "material genuinely supports it."
+        "At least 400 words if the material genuinely supports it."
     )
     result = {
         "topic": candidate["title"], "task_type": "news_report", "known_facts": {},
@@ -287,7 +336,7 @@ def write_story(candidate):
     else:
         image, image_source = FALLBACK_IMAGE, "VAPE brand mark (no AI image available this cycle)"
 
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    date_iso, published_et = _publish_stamp()
     source_lines = [f"- [{candidate['title']}]({candidate['url']}) — {candidate.get('source') or 'source'}"]
     for r in corroboration.get("results", []):
         source_lines.append(f"- [{r['title']}]({r['url']}) — {r.get('snippet', '')[:120]}")
@@ -296,7 +345,8 @@ def write_story(candidate):
 
 **Agency:** VAPE Wire
 **Byline:** VAPE Reporter
-**Date:** {stamp}
+**Date:** {date_iso}
+**Published:** {published_et}
 **Topic:** {topic_label}
 **Dek:** {dek}
 **Image:** {image}
