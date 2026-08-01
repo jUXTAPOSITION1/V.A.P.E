@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-01T14:22:28Z",
+  "generated": "2026-08-01T14:27:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 486,
+    "reports": 487,
     "reports_by_type": {
+      "bounty": 114,
       "security": 89,
-      "bounty": 113,
       "base": 99,
       "sentiment": 51,
       "bug": 4,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-142227-0x3e31966d.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-01-13.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-01T13:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260801_142710.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-01T14:27:10Z",
       "threat": null,
-      "summary": "The feed shows 7 incidents in the last 7 days and 0 incidents = $50M in the prior 14 days. Reported losses range from $0.01M (Set Protocol malicious SetToken & Manager Contract on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum), with other confirmed figures including $9.7M (Triple-A hot-wallet compromise), $8.2M (Cryp",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-13.md",
-      "bytes": 6830
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: WMTX / WETH +58% 24h (liq $17880.5626) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_142710.md",
+      "bytes": 16523
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260801_142710.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-01T14:27:10Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: WMTX / WETH +58% 24h (liq $17880.5626) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_142710.md",
+      "bytes": 16523
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_000049.md",
       "bytes": 15635
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-29-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-29 21:04 UTC",
-      "date": "2026-07-29T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-29-21.md",
-      "bytes": 1612
     }
   ],
   "broadcasts": [
