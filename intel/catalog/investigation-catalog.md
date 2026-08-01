@@ -1057,3 +1057,5 @@
 | 2026-08-01 | auto | 0xE112Bc165f37eF842E66326E01A291927Bf9B468 (WMTX) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-01 | auto | 0xA3f751662e282E83EC3cBc387d225Ca56dD63D3A (APEPE) | deep_investigation | CAUTION (75/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-08-01 | auto | 0x395Ded77F105BBEf099f8add6Eb4f238d1fB49bd (tRUSH) | deep_investigation | REJECT (25/100) | Owner not renounced (0x4638d23cebf6621c4686541ea4603318eb31ac85) — can still act | +7d |

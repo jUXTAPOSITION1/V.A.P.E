@@ -4002,6 +4002,25 @@
     "symbol": "SUSHI.e",
     "times_investigated": 1
   },
+  "43114:0x395ded77f105bbef099f8add6eb4f238d1fb49bd": {
+    "address": "0x395Ded77F105BBEf099f8add6Eb4f238d1fB49bd",
+    "chain": "43114",
+    "creator_address": "0xb6825509564064800958cd07138c12028d47d964",
+    "first_investigated": "2026-08-01T15:24:19Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-152419-0x395Ded77.md",
+        "score": 25,
+        "ts": "2026-08-01T15:24:19Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T15:24:19Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "tRUSH",
+    "times_investigated": 1
+  },
   "43114:0x420fca0121dc28039145009570975747295f2329": {
     "address": "0x420FcA0121DC28039145009570975747295f2329",
     "chain": "43114",
