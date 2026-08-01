@@ -1047,3 +1047,5 @@
 | 2026-08-01 | auto | 0x752C5a95d202972E124390F30a50154409d3c858 (OFC) | deep_investigation | CAUTION (52/100) | Owner not renounced (0x80b12bd0f1793bf6cea767fa83eb2068eaa17dc8) — can still act | +7d |
 
 | 2026-08-01 | auto | 0xD14cEFcaF95BBE72F363CBDFF1ca18DAe1D3C858 (OFC) | deep_investigation | REJECT (20/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0xc8EF4398664b2eeD5ee560544f659083d98A3888 (CTM) | deep_investigation | CAUTION (65/100) | Very low liquidity $9,414 (rug/illiquid) | +7d |

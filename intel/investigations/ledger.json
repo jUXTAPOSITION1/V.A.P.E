@@ -2994,6 +2994,25 @@
     "symbol": "DOGE-1",
     "times_investigated": 1
   },
+  "1:0xc8ef4398664b2eed5ee560544f659083d98a3888": {
+    "address": "0xc8EF4398664b2eeD5ee560544f659083d98A3888",
+    "chain": "1",
+    "creator_address": "0x606d27f1ce3321dfffeff762a89d6deb527834cc",
+    "first_investigated": "2026-08-01T13:52:03Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-135203-0xc8EF4398.md",
+        "score": 65,
+        "ts": "2026-08-01T13:52:03Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T13:52:03Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "CTM",
+    "times_investigated": 1
+  },
   "1:0xc8fb80fcc03f699c70ff0cc08c09106288888888": {
     "address": "0xc8Fb80fCc03f699C70ff0CC08C09106288888888",
     "chain": "1",

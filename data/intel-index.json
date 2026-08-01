@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T13:36:52Z",
+  "generated": "2026-08-01T13:52:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 486,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 136,
-    "investigations": 623,
+    "investigations": 624,
     "news": 43,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-133648-0xD14cEFca.md",
-      "title": "Investigation \u2014 OFC",
-      "symbol": "OFC",
-      "name": "OFC",
-      "date": "2026-08-01T13:36:48Z",
-      "target": "0xD14cEFcaF95BBE72F363CBDFF1ca18DAe1D3C858",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x936323159e83c8e92b6dda95bc134902749cf213) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-133648-0xD14cEFca.md"
+      "file": "investigation-20260801-135203-0xc8EF4398.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-08-01T13:52:03Z",
+      "target": "0xc8EF4398664b2eeD5ee560544f659083d98A3888",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $9,414 (rug/illiquid); [-10] Low liquidity $9,414. Positive evidence: 1563 holders \u2014 reasonably distributed; Top holders control only 14% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 474+ days without a known incident in this scan; C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-135203-0xc8EF4398.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-135203-0xc8EF4398.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-08-01T13:52:03Z",
+      "target": "0xc8EF4398664b2eeD5ee560544f659083d98A3888",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-25] Very low liquidity $9,414 (rug/illiquid); [-10] Low liquidity $9,414. Positive evidence: 1563 holders \u2014 reasonably distributed; Top holders control only 14% of supply \u2014 broad distribution; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 474+ days without a known incident in this scan; C",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-135203-0xc8EF4398.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-133648-0xD14cEFca.md",
@@ -594,20 +608,6 @@
       "score": "90",
       "summary": "Risk factors: [-10] Low liquidity $48,007. Positive evidence: Ownership renounced; 44361 holders \u2014 reasonably distributed; 98% of liquidity is locked \u2014 reduced rug-pull risk; Trading 956+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced this",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-150036-0xAcFb898C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-143018-0xAad93460.md",
-      "title": "Investigation \u2014 GRVT",
-      "symbol": "GRVT",
-      "name": "Grvt",
-      "date": "2026-07-31T14:30:18Z",
-      "target": "0xAad934604B7A94Af52e831cf958284610Fb33a87",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2364% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-143018-0xAad93460.md"
     }
   ],
   "reports": [
