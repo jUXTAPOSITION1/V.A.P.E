@@ -153,6 +153,47 @@ def test_credibility_tier_classification():
     assert re_engine._credibility_tier("https://randomblog.example.com") == "unclassified"
 
 
+def test_credibility_tier_recognizes_expanded_domain_sets():
+    # Real, verifiable additions to each tier -- not exhaustive, just
+    # pinning that the expansion actually landed in the right buckets.
+    assert re_engine._credibility_tier("https://halborn.com/foo") == "security_research"
+    assert re_engine._credibility_tier("https://blockworks.co/foo") == "news"
+    assert re_engine._credibility_tier("https://basescan.org/address/0x1") == "primary_platform"
+    assert re_engine._credibility_tier("https://defillama.com/protocol/foo") == "primary_platform"
+
+
+def test_credibility_tier_promotes_unclassified_domain_with_topic_and_incident_language():
+    # Real gap this closes: a project's own custom domain can never be
+    # fully enumerated in a fixed list -- when the page's own title/snippet
+    # names the researched topic AND uses incident-disclosure language, it
+    # should be promoted out of "unclassified" rather than stuck there.
+    tier = re_engine._credibility_tier(
+        "https://setprotocol.example/blog/incident",
+        topic="Set Protocol",
+        text="Set Protocol Official Incident Report: what happened",
+    )
+    assert tier == "primary_platform"
+
+
+def test_credibility_tier_does_not_promote_without_both_signals():
+    # Topic present but no incident-disclosure keyword -> still unclassified.
+    assert re_engine._credibility_tier(
+        "https://setprotocol.example/blog/update",
+        topic="Set Protocol", text="Set Protocol ships a new feature",
+    ) == "unclassified"
+    # Incident-disclosure keyword present but topic never mentioned -> still
+    # unclassified, since it could be an unrelated protocol's post-mortem.
+    assert re_engine._credibility_tier(
+        "https://randomblog.example.com",
+        topic="Set Protocol", text="Official post-mortem of a totally different incident",
+    ) == "unclassified"
+
+
+def test_credibility_tier_secondary_signal_is_optional():
+    # No topic/text given at all -> behaves exactly as before this change.
+    assert re_engine._credibility_tier("https://randomblog.example.com") == "unclassified"
+
+
 # ── broad_discovery ──────────────────────────────────────────────────────
 class TestBroadDiscovery:
     def _fake_query_call(self, topic, task_type, known_facts, max_queries):
@@ -175,6 +216,16 @@ class TestBroadDiscovery:
         assert result["log"]["queries"][0]["q"] == "query one"
         assert result["log"]["follow_up_strategy"] == "widen if thin"
         assert result["task_type"] == "threat_analysis"
+
+    def test_promotes_unclassified_hit_using_topic_plus_title_and_snippet(self):
+        def fake_search(query, max_results=5):
+            return {"provider": "tavily", "results": [
+                {"url": "https://setprotocol.example/post", "title": "Set Protocol Official Incident Report",
+                 "snippet": "what happened and next steps"},
+            ]}
+        with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
+            result = re_engine.broad_discovery("Set Protocol", "threat_analysis", query_call=self._fake_query_call)
+        assert result["findings"][0]["credibility"] == "primary_platform"
 
     def test_no_hits_returns_empty_findings_not_error(self):
         with mock.patch("agents.intel_common.web_search_snippets",
@@ -270,6 +321,30 @@ class TestDeepExtract:
             instance.fetch_page.return_value = None
             re_engine.deep_extract("https://example.com")
         MockSourcer.assert_called_once()
+
+    def test_promotes_unclassified_domain_using_topic_and_page_content(self):
+        # Real gap this closes: a project's own custom domain (not in any
+        # fixed tier list) with a page that actually names the topic and
+        # uses incident-disclosure language should be promoted out of
+        # "unclassified" -- deep_extract has no separate title/snippet the
+        # way a search hit does, so it reads the page's own leading content.
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.return_value = {
+            "url": "https://setprotocol.example/post", "domain": "setprotocol.example",
+            "provider": "firecrawl", "content": "Set Protocol Official Incident Report...", "entities": [],
+        }
+        extract = re_engine.deep_extract("https://setprotocol.example/post", sourcer=fake_sourcer,
+                                          topic="Set Protocol")
+        assert extract["credibility"] == "primary_platform"
+
+    def test_no_topic_given_leaves_unclassified_domain_unclassified(self):
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.return_value = {
+            "url": "https://setprotocol.example/post", "domain": "setprotocol.example",
+            "provider": "firecrawl", "content": "Set Protocol Official Incident Report...", "entities": [],
+        }
+        extract = re_engine.deep_extract("https://setprotocol.example/post", sourcer=fake_sourcer)
+        assert extract["credibility"] == "unclassified"
 
 
 # ── layered_research (orchestration) ────────────────────────────────────

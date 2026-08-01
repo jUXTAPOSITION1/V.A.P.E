@@ -263,11 +263,29 @@ def generate_queries(topic, task_type="general", known_facts=None, max_queries=M
 # this is a display/prioritization aid, not a trust gate that blocks
 # anything from being used.
 _SECURITY_RESEARCH_DOMAINS = {"immunefi.com", "certik.com", "peckshield.com", "slowmist.com",
-                               "rekt.news", "blog.chainalysis.com", "cyfrin.io", "trailofbits.com"}
+                               "rekt.news", "blog.chainalysis.com", "chainalysis.com", "cyfrin.io",
+                               "trailofbits.com", "hacken.io", "quantstamp.com", "openzeppelin.com",
+                               "consensys.io", "zellic.io", "spearbit.com", "sherlock.xyz",
+                               "code4rena.com", "beosin.com", "certora.com", "halborn.com",
+                               "elliptic.co", "trmlabs.com"}
 _NEWS_DOMAINS = {"coindesk.com", "cointelegraph.com", "theblock.co", "decrypt.co", "cryptoslate.com",
-                  "reuters.com", "bloomberg.com", "wsj.com"}
-_PRIMARY_PLATFORM_DOMAINS = {"github.com", "medium.com", "mirror.xyz", "notion.site"}
+                  "reuters.com", "bloomberg.com", "wsj.com", "blockworks.co", "dlnews.com", "protos.com"}
+_PRIMARY_PLATFORM_DOMAINS = {"github.com", "github.io", "medium.com", "mirror.xyz", "notion.site",
+                              "hackmd.io", "gitbook.io", "defillama.com", "dune.com",
+                              "etherscan.io", "basescan.org", "bscscan.com", "polygonscan.com",
+                              "arbiscan.io", "snowtrace.io"}
 _SOCIAL_DOMAINS = {"twitter.com", "x.com", "reddit.com", "t.me"}
+
+# Rule-based secondary signal (still no LLM call): a source on an otherwise
+# "unclassified" domain — e.g. a project's own arbitrary custom domain,
+# which can never be fully enumerated in a fixed list above — is promoted
+# to the same "primary_platform" tier (a heuristic, not a guarantee; see
+# _credibility_tier's own docstring) when its title/snippet/excerpt both
+# names the topic being researched AND uses official-incident-disclosure
+# language. Requiring both avoids promoting an unrelated page that merely
+# mentions the topic in passing, or an official-sounding page about a
+# different protocol entirely.
+_PRIMARY_SOURCE_KEYWORDS = ("post-mortem", "postmortem", "incident", "official")
 
 
 def _domain(url):
@@ -277,11 +295,25 @@ def _domain(url):
         return ""
 
 
-def _credibility_tier(url):
+def _looks_like_primary_source(topic, text):
+    topic = str(topic or "").strip().lower()
+    if not topic:
+        return False
+    text = str(text or "").lower()
+    return topic in text and any(kw in text for kw in _PRIMARY_SOURCE_KEYWORDS)
+
+
+def _credibility_tier(url, topic=None, text=None):
     """Deterministic domain-based tier — no LLM call. 'primary_platform'
     is a heuristic (project post-mortems are often self-published on
-    Medium/GitHub/Mirror) not a guarantee of official status; callers
-    should still read the actual content, this just orders it sensibly."""
+    Medium/GitHub/Mirror, or on the project's own unlisted domain) not a
+    guarantee of official status; callers should still read the actual
+    content, this just orders it sensibly.
+
+    topic/text are optional — when given (a search hit's title+snippet, or
+    a deep-extracted page's own leading content), a domain that doesn't
+    match any tier above falls back to _looks_like_primary_source() before
+    settling for "unclassified"."""
     domain = _domain(url)
     if domain in _SECURITY_RESEARCH_DOMAINS:
         return "security_research"
@@ -291,6 +323,8 @@ def _credibility_tier(url):
         return "primary_platform"
     if domain in _SOCIAL_DOMAINS:
         return "social_unverified"
+    if _looks_like_primary_source(topic, text):
+        return "primary_platform"
     return "unclassified"
 
 
@@ -356,7 +390,9 @@ def broad_discovery(topic, task_type="general", known_facts=None, max_queries=MA
             if not url or url in seen_urls:
                 continue
             seen_urls.add(url)
-            findings.append({**hit, "domain": _domain(url), "credibility": _credibility_tier(url),
+            hit_text = f"{hit.get('title', '')} {hit.get('snippet', '')}"
+            findings.append({**hit, "domain": _domain(url),
+                              "credibility": _credibility_tier(url, topic=topic, text=hit_text),
                               "from_query": query_text})
 
     findings.sort(key=lambda f: _TIER_RANK.get(f["credibility"], 3))
@@ -371,21 +407,28 @@ def broad_discovery(topic, task_type="general", known_facts=None, max_queries=MA
 
 
 # ── Layer 2: deep targeted extraction ───────────────────────────────────────
-def deep_extract(url, sourcer=None):
+def deep_extract(url, sourcer=None, topic=None):
     """Layer 2: fetch one URL's real content, robots.txt-respecting and
     cached — reuses agents.web_sourcer.WebSourcer rather than
     re-implementing fetch logic (that module already solved robots.txt
     compliance, cross-run dedup, and SSRF-safe fallback via
     skillforge.research.scrape()). Returns None (never raises) if the
     fetch is disallowed/empty, exactly matching WebSourcer.fetch_page()'s
-    own contract."""
+    own contract.
+
+    topic, if given, feeds _credibility_tier()'s secondary primary-source
+    signal against this page's own leading content — a fetched page has no
+    separate title/snippet the way a search hit does, so the credibility
+    check reads the start of the extracted content instead."""
     from agents.web_sourcer import WebSourcer
     sourcer = sourcer or WebSourcer()
     lead = sourcer.fetch_page(url)
     if not lead or lead.get("error"):
         return None
-    return {"url": url, "domain": lead.get("domain"), "credibility": _credibility_tier(url),
-            "provider": lead.get("provider"), "content": lead.get("content", ""),
+    content = lead.get("content", "")
+    return {"url": url, "domain": lead.get("domain"),
+            "credibility": _credibility_tier(url, topic=topic, text=content[:500]),
+            "provider": lead.get("provider"), "content": content,
             "entities": lead.get("entities", [])}
 
 
@@ -433,7 +476,7 @@ def layered_research(topic, task_type="general", known_facts=None, max_queries=M
             if url in extracted_urls:
                 continue
             extracted_urls.add(url)
-            extract = deep_extract(url, sourcer=sourcer)
+            extract = deep_extract(url, sourcer=sourcer, topic=topic)
             if extract:
                 deep_extracts.append(extract)
                 new_this_round += 1
