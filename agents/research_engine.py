@@ -672,6 +672,34 @@ def _parse_trailers(text, trailers):
     return named, text
 
 
+# These two sections are never written by the model itself — render_gaps_
+# section()/render_methodology_log() render their own identical heading and
+# are appended by the caller after synthesize() returns, so asking the model
+# to also produce them would just duplicate the heading in the final report.
+_MECHANICALLY_RENDERED_SECTIONS = {"Gaps & Confidence", "Research Methodology and Sources"}
+
+
+def _required_sections_instruction(task_type):
+    """Real gap this closes: required_sections was previously only checked
+    post-hoc by review_output() (log, don't block) plus one caller's own
+    hand-written heading instructions (agents/hack_agent.py) — every other
+    task type had no heading structure requested in the prompt at all. Now
+    baked into every non-thin synthesize() call's own core prompt, generic
+    across all task types, so review_output() is a safety net catching a
+    model that ignored this instruction, not the only enforcement that
+    exists. Returns "" if a task type has no model-facing sections (should
+    not happen for any currently-defined task type)."""
+    sections = [s for s in TASK_TYPES[task_type]["required_sections"] if s not in _MECHANICALLY_RENDERED_SECTIONS]
+    if not sections:
+        return ""
+    headings = ", ".join(f"## {s}" for s in sections)
+    return (
+        f"- Structure your narrative using these exact Markdown headings, in this order: {headings}. "
+        "Only fill in what the research actually supports — if a section genuinely has nothing to "
+        "add, say so briefly under that heading rather than omitting it.\n"
+    )
+
+
 def _is_thin_evidence(result):
     """Rule-based (not LLM) thin-evidence detector. Real gap this closes:
     synthesize() used to hand the model the exact same full structured-
@@ -811,6 +839,7 @@ def synthesize(result, role="research analyst", extra_instructions=None,
         else:
             system = (
                 shared_rules +
+                _required_sections_instruction(task_type) +
                 "- Quote or closely paraphrase key primary statements (official announcements, named "
                 "quotes) rather than paraphrasing everything into generic prose.\n"
                 "- Connect evidence across sources — note where sources agree, disagree, or one is the "
