@@ -1067,3 +1067,5 @@
 | 2026-08-01 | auto | 0x3Bf254aF3338C89974b97a67D2E1E6066AA29B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-01 | auto | 0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92 (SQLITESTUDIO) | deep_investigation | REJECT (32/100) | Low holder count (126) | +7d |
+
+| 2026-08-01 | auto | 0x0f9Cb62980D7eE19cCaf1959b885F56Fe5E357A2 (EDM) | deep_investigation | REJECT (35/100) | Transfers can be paused by owner | +7d |

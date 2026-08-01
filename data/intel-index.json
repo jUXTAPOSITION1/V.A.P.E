@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T16:25:04Z",
+  "generated": "2026-08-01T16:39:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 633,
+    "investigations": 634,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-162459-0xADFa1A1C.md",
-      "title": "Investigation \u2014 SQLITESTUDIO",
-      "symbol": "SQLITESTUDIO",
-      "name": "SQLITESTUDIO github.com/pawelsalawa/SQLITESTUDIO",
-      "date": "2026-08-01T16:24:59Z",
-      "target": "0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260801-163958-0x0f9Cb629.md",
+      "title": "Investigation \u2014 EDM",
+      "symbol": "EDM",
+      "name": "Emperor Dogeus Maximus",
+      "date": "2026-08-01T16:39:58Z",
+      "target": "0x0f9Cb62980D7eE19cCaf1959b885F56Fe5E357A2",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Low holder count (126); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,715 (rug/illiquid); [-10] Low liquidity $5,715; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-162459-0xADFa1A1C.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 117% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +107234% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team ident",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-163958-0x0f9Cb629.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-163958-0x0f9Cb629.md",
+      "title": "Investigation \u2014 EDM",
+      "symbol": "EDM",
+      "name": "Emperor Dogeus Maximus",
+      "date": "2026-08-01T16:39:58Z",
+      "target": "0x0f9Cb62980D7eE19cCaf1959b885F56Fe5E357A2",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 117% of supply \u2014 concentrated, easily manipulated; [-10] Violent 24h move +107234% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team ident",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-163958-0x0f9Cb629.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-162459-0xADFa1A1C.md",
@@ -594,20 +608,6 @@
       "score": "10",
       "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,897 (rug/illiquid); [-10] Low liquidity $1,897; [-10] Pair 5.0 days old \u2014 under two weeks, no track record yet; [-10] N",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-200241-0x20b688F4.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-194729-0x5a0CF2dB.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-31T19:47:29Z",
-      "target": "0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DOGE1 (0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805) \u2014 REJECT 18/100 \u2014 likely the same serial campa",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-194729-0x5a0CF2dB.md"
     }
   ],
   "reports": [
