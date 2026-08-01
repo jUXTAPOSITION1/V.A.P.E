@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T16:55:15Z",
+  "generated": "2026-08-01T17:10:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 635,
+    "investigations": 636,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-165505-0x06257012.md",
-      "title": "Investigation \u2014 VM888",
-      "symbol": "VM888",
-      "name": "VaultedMetrics",
-      "date": "2026-08-01T16:55:05Z",
-      "target": "0x062570121e9519C77CB71C7936B6C1f76C7B1119",
+      "file": "investigation-20260801-171014-0x7Fc66500.md",
+      "title": "Investigation \u2014 AAVE",
+      "symbol": "AAVE",
+      "name": "Aave Token",
+      "date": "2026-08-01T17:10:14Z",
+      "target": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "80",
-      "summary": "Risk factors: [-20] High sell tax 15%. Positive evidence: Ownership renounced; 708 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 146+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-165505-0x06257012.md"
+      "verdict": "CAUTION",
+      "score": "69",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 202101 holders \u2014 reasonably distributed; Deep liquidity ($11,620,516); Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-171014-0x7Fc66500.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-171014-0x7Fc66500.md",
+      "title": "Investigation \u2014 AAVE",
+      "symbol": "AAVE",
+      "name": "Aave Token",
+      "date": "2026-08-01T17:10:14Z",
+      "target": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "69",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 202101 holders \u2014 reasonably distributed; Deep liquidity ($11,620,516); Cus",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-171014-0x7Fc66500.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-165505-0x06257012.md",
@@ -594,20 +608,6 @@
       "score": "25",
       "summary": "Risk factors: [-15] Transfers can be paused by owner; [-15] Top 10 non-LP/burn holders control 125% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $34,331; [-10] Violent 24h move +7698% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party aud",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-204846-0x5B58e731.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-203326-0xbe9D1568.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SpaceX",
-      "date": "2026-07-31T20:33:26Z",
-      "target": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-203326-0xbe9D1568.md"
     }
   ],
   "reports": [

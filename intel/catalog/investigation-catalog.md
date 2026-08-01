@@ -1071,3 +1071,5 @@
 | 2026-08-01 | auto | 0x0f9Cb62980D7eE19cCaf1959b885F56Fe5E357A2 (EDM) | deep_investigation | REJECT (35/100) | Transfers can be paused by owner | +7d |
 
 | 2026-08-01 | auto | 0x062570121e9519C77CB71C7936B6C1f76C7B1119 (VM888) | deep_investigation | PROCEED (80/100) | High sell tax 15% | +7d |
+
+| 2026-08-01 | auto | 0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9 (AAVE) | deep_investigation | CAUTION (69/100) | Upgradeable proxy (verify implementation) | +7d |
