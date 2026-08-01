@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-01T20:57:42Z",
+  "generated": "2026-08-01T21:01:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 492,
+    "reports": 493,
     "reports_by_type": {
+      "sentiment": 52,
       "bounty": 116,
       "security": 91,
       "macro": 26,
       "base": 99,
-      "sentiment": 51,
       "bug": 4,
       "mainnet": 4,
       "virtuals": 97,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-204228-0xC4e9A27D.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_201023.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T20:10:23Z",
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-08-01-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-08-01 21:01 UTC",
+      "date": "2026-08-01T21:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_201023.md",
-      "bytes": 16449
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-01-21.md",
+      "bytes": 1538
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-08-01-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-08-01 21:01 UTC",
+      "date": "2026-08-01T21:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-01-21.md",
+      "bytes": 1538
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "The 10 incidents over the last 7 days produced a HIGH threat level, with total losses distributed across 12 distinct chains or layer combinations and no single event reaching $50M. The largest recorded losses were the $24.15M AFX Bridge private-key compromise on Arbitrum, the $9.7M Triple-A hot-wallet compromise spanning Ethereum, Tron an",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-08.md",
       "bytes": 7173
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260730_063435.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-30T06:34:35Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_063435.md",
-      "bytes": 17056
     }
   ],
   "broadcasts": [
