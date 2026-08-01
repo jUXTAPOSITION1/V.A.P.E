@@ -867,7 +867,7 @@ def _fake_xai_image_response(url):
 class TestXaiImage:
     """agents/llm.py::ask_xai_image() — VAPE's real, working image-gen route
     (promoted to primary 2026-08-01, since Gemini/Vertex are both confirmed
-    dead ends right now), behind xAI's Grok Image (grok-imagine-image-quality
+    dead ends right now), behind xAI's Grok Imagine Image (grok-imagine-image
     -- grok-2-image-1212 was deprecated by xAI 2026-02-28 and 404s), a
     separate billed-per-image product from every other xAI text use in this
     file, hence its own daily-count cap file rather than the token-based
@@ -895,7 +895,7 @@ class TestXaiImage:
         assert result == "https://xai.example/generated.png"
         assert captured["url"] == "https://api.x.ai/v1/images/generations"
         assert captured["auth"] == "Bearer fake-xai-key"
-        assert captured["body"]["model"] == "grok-imagine-image-quality"
+        assert captured["body"]["model"] == "grok-imagine-image"
         assert captured["body"]["prompt"] == "a close-up of gold coins on a dark table"
         assert captured["body"]["aspect_ratio"] == "16:9"
 

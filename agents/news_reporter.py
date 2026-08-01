@@ -38,8 +38,8 @@ regardless of technical feasibility; revised again 2026-08-01, see below):
   1. AI-generated, described by a fresh, director-style, story-specific
      prompt (_image_prompt(), grounded in the real headline/dek/body, not a
      generic template) and tried against two independent models in order:
-     xAI's Grok Image first (agents/llm.py::ask_xai_image(),
-     grok-imagine-image-quality -- the model that actually works today),
+     xAI's Grok Imagine Image first (agents/llm.py::ask_xai_image(),
+     grok-imagine-image -- the model that actually works today),
      then Google's Gemini image model (agents/llm.py::ask_gemini_image()) as
      a fallback. Reordered 2026-08-01: confirmed via a live dispatch's logs
      that BOTH of Gemini's own paths are currently dead ends on every call

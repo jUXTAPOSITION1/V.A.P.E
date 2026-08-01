@@ -834,9 +834,8 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
 # deprecated by xAI on 2026-02-28 (superseded by grok-imagine-image /
 # grok-imagine-image-quality) -- every real call was hitting a live HTTP 404
 # "Not Found" as a result, confirmed from a real news-intel.yml run's logs.
-# grok-imagine-image-quality is xAI's own recommended model for new
-# integrations (higher fidelity, up to 2k, better text/brand/entity
-# rendering) -- see ask_xai_image()'s docstring.
+# Explicit direction, 2026-08-01: use the base "grok-imagine-image" model
+# (not the "-quality" tier) -- see ask_xai_image()'s docstring.
 #
 # Reinstated 2026-07-28 as (at the time) ask_gemini_image()'s fallback --
 # a separate, billed-per-image xAI product on the same XAI_API_KEY_1 key
@@ -848,7 +847,7 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
 # other xAI use in this file.
 IMAGE_USAGE_PATH = os.path.join(MEMORY_DIR, "xai_image_usage.json")
 DEFAULT_IMAGE_DAILY_CAP = 15  # ~$1.05/day at $0.07/image -- comfortable headroom over the ~8 stories/day news-intel cadence this exists for
-XAI_IMAGE_MODEL = "grok-imagine-image-quality"
+XAI_IMAGE_MODEL = "grok-imagine-image"
 
 
 def _xai_image_daily_cap():
@@ -887,8 +886,9 @@ def _record_xai_image_usage():
 
 
 def ask_xai_image(prompt, *, aspect_ratio="16:9", timeout=45):
-    """Real text-to-image call against xAI's Grok Image model
-    (grok-imagine-image-quality). Returns a real image URL on success, or
+    """Real text-to-image call against xAI's Grok Imagine Image model
+    (grok-imagine-image, explicit direction 2026-08-01 -- not the pricier
+    "-quality" tier). Returns a real image URL on success, or
     None (never raises) if XAI_API_KEY_1 isn't set, today's daily cap is
     already hit, or the call errors for any reason — callers must degrade
     to the brand-mark logo fallback, never a broken image or a crash. The
