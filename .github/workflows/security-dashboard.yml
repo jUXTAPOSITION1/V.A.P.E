@@ -1,0 +1,50 @@
+name: Security Dashboard (aggregate real security signals)
+
+# Real-data aggregation only, no LLM call: agents/build_security_dashboard.py
+# reads skillforge/memory/findings.jsonl, its tamper-evidence chain
+# (findings.chain.jsonl), data/attack-feed.json, and GitHub's own Actions
+# Runs / Code Scanning Alerts APIs, then writes one fully-regenerated
+# snapshot (data/security-dashboard.json) plus one appended history line
+# (data/security-dashboard-history.jsonl) for the site's Security Dashboard
+# section to render. Scheduled 20 minutes after findings-seal.yml's own
+# */6 cron so this always reflects a just-attempted seal, not a stale one.
+on:
+  schedule:
+    - cron: '20 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-dashboard
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      security-events: read  # GitHub Code Scanning Alerts API (CodeQL lane)
+      actions: read           # GitHub Actions Runs API (every workflow lane's last-run status)
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Build security dashboard snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 agents/build_security_dashboard.py
+
+      - name: Commit snapshot + history
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          scripts/ci_commit_push.sh \
+            "security-dashboard $(date -u +%Y-%m-%dT%H:%MZ)" \
+            data/security-dashboard.json data/security-dashboard-history.jsonl
