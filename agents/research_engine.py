@@ -464,37 +464,55 @@ def _parse_header(text, header_fields, header_delimiter):
     FULL text as the body — never invents a field, never loses the
     narrative over a formatting miss. Field values are matched by label
     anywhere in the header block, order-independent, so a model that
-    reorders two header lines still parses correctly."""
+    reorders two header lines still parses correctly.
+
+    A candidate delimiter line only counts as the real header/body split if
+    at least one configured label actually matched before it — otherwise a
+    plain markdown thematic break (a bare "---" the model wrote as part of
+    the narrative itself, e.g. a section rule) would be mistaken for the
+    header delimiter, silently discarding every real paragraph before it
+    with no header fields to show for it either (CodeRabbit, PR #375).
+    Every occurrence in the text is tried in order until one actually
+    contains a real header, or none do and the full text is kept intact."""
     empty = {f["name"]: None for f in header_fields}
     if not header_fields:
         return empty, text
     try:
         delim_re = re.compile(rf"^[ \t]*{re.escape(header_delimiter)}[ \t]*$", re.MULTILINE)
-        m = delim_re.search(text)
-        if not m:
-            return empty, text
-        block, body = text[:m.start()], text[m.end():]
-        header = dict(empty)
-        for f in header_fields:
-            fm = re.search(rf"^[ \t]*{re.escape(f['label'])}:[ \t]*(.*)$", block, re.MULTILINE | re.IGNORECASE)
-            if fm:
-                header[f["name"]] = fm.group(1).strip()
-        return header, body.strip()
+        for m in delim_re.finditer(text):
+            block = text[:m.start()]
+            header = dict(empty)
+            matched_any = False
+            for f in header_fields:
+                fm = re.search(rf"^[ \t]*{re.escape(f['label'])}:[ \t]*(.*)$", block, re.MULTILINE | re.IGNORECASE)
+                if fm:
+                    header[f["name"]] = fm.group(1).strip()
+                    matched_any = True
+            if matched_any:
+                return header, text[m.end():].strip()
+        return empty, text
     except Exception as e:
         print(f"[research_engine] header parse failed: {e}")
         return dict(empty), text
 
 
 def _parse_trailers(text, trailers):
-    """(gaps_list, verdict_value, remaining_body_text). Processes trailers
-    in REVERSE declared order — the prompt asks for the LAST-declared
-    trailer to be the physically last line of the response, so working
-    backward means each trailer's parse never depends on a sibling trailer's
-    exact contents. "enum" trailers are only ever matched against the
-    current last non-empty line (never raises); a mismatch or absence just
-    leaves that trailer at its default and moves on — never loses the
-    narrative or a sibling trailer over one malformed/missing block."""
-    gaps, verdict = [], None
+    """(named_dict, remaining_body_text). named_dict maps each trailer's own
+    declared "name" to its parsed value ([] for an unmatched/absent "json"
+    trailer, None for an unmatched/absent "enum" trailer) — keyed by name
+    rather than hardcoded to "gaps"/"verdict" so two distinct json trailers
+    (or an enum trailer that isn't a verdict) don't collide into the same
+    slot (CodeRabbit, PR #375). Processes trailers in REVERSE declared
+    order — the prompt asks for the LAST-declared trailer to be the
+    physically last line of the response, so working backward means each
+    trailer's parse never depends on a sibling trailer's exact contents.
+    "enum" trailers are only ever matched against the current last non-empty
+    line (never raises); a mismatch or absence just leaves that trailer at
+    its default and moves on — never loses the narrative or a sibling
+    trailer over one malformed/missing block."""
+    named = {}
+    for t in trailers or []:
+        named[t["name"]] = [] if t["type"] == "json" else None
     for t in reversed(trailers or []):
         try:
             if t["type"] == "enum":
@@ -508,13 +526,14 @@ def _parse_trailers(text, trailers):
                 vm = re.fullmatch(pattern, lines[-1].strip(), re.IGNORECASE)
                 if vm:
                     matched = vm.group(1).upper()
-                    verdict = next((o for o in t["options"] if o.upper() == matched), matched)
+                    named[t["name"]] = next((o for o in t["options"] if o.upper() == matched), matched)
                     text = "\n".join(lines[:-1]).strip()
             elif t["type"] == "json":
                 m = re.search(rf"{re.escape(t['label'])}:\s*(\[.*\])\s*$", text, re.S)
                 if m:
                     parsed = json.loads(m.group(1))
                     if isinstance(parsed, list):
+                        items = []
                         for g in parsed:
                             if not isinstance(g, dict) or not g.get("description"):
                                 continue
@@ -522,9 +541,10 @@ def _parse_trailers(text, trailers):
                                 confidence = float(g.get("confidence", 0.5))
                             except (TypeError, ValueError):
                                 confidence = 0.5
-                            gaps.append({"description": str(g["description"]).strip(),
-                                         "confidence": max(0.0, min(1.0, confidence)),
-                                         "next_action": str(g.get("next_action") or "").strip()})
+                            items.append({"description": str(g["description"]).strip(),
+                                          "confidence": max(0.0, min(1.0, confidence)),
+                                          "next_action": str(g.get("next_action") or "").strip()})
+                        named[t["name"]] = items
                     text = text[:m.start()].strip()
         except Exception as e:
             # Not silently dropped: a malformed trailer means the model DID
@@ -532,7 +552,7 @@ def _parse_trailers(text, trailers):
             # other degradation this module prints on. The narrative itself
             # is never lost over it.
             print(f"[research_engine] {t.get('label')} trailer parse failed: {e}")
-    return gaps, verdict, text
+    return named, text
 
 
 def synthesize(result, role="research analyst", extra_instructions=None,
@@ -585,15 +605,23 @@ def synthesize(result, role="research analyst", extra_instructions=None,
     well-formed grounding block (see agents/news_reporter.py) and just
     wants this function's shared parsing/grounding discipline on top of it.
 
-    Returns {"narrative": str, "header": {name: str|None, ...}, "gaps": [...],
-    "verdict": str|None, "provider": str|None}. "header" always has every
-    requested field's name as a key; "gaps"/"verdict" are always present
-    (empty list / None by default) regardless of whether a matching trailer
-    was requested. Never raises."""
+    Returns {"narrative": str, "header": {name: str|None, ...},
+    "trailers": {name: value, ...}, "gaps": [...], "verdict": str|None,
+    "provider": str|None}. "header" always has every requested field's name
+    as a key; "trailers" always has every requested trailer's own declared
+    name as a key. "gaps"/"verdict" are kept as top-level convenience
+    aliases for the trailers literally named "gaps"/"verdict" (every current
+    caller's names, and _DEFAULT_TRAILERS') — always present (empty list /
+    None by default) regardless of whether a matching trailer was requested;
+    a caller declaring a differently-named trailer reads it from "trailers"
+    instead. Never raises."""
     header_fields = header_fields or []
     trailers = _DEFAULT_TRAILERS if trailers is None else trailers
     empty_header = {f["name"]: None for f in header_fields}
-    unavailable = {"header": empty_header, "gaps": [], "provider": None, "verdict": None}
+    empty_trailers = {t["name"]: [] if t["type"] == "json" else None for t in trailers}
+    unavailable = {"header": empty_header, "trailers": empty_trailers,
+                   "gaps": empty_trailers.get("gaps", []), "verdict": empty_trailers.get("verdict"),
+                   "provider": None}
     task_type = classify_task(result.get("task_type"))
     framing = TASK_TYPES[task_type]["framing"]
     try:
@@ -647,8 +675,10 @@ def synthesize(result, role="research analyst", extra_instructions=None,
 
     text = text.strip()
     header, text = _parse_header(text, header_fields, header_delimiter)
-    gaps, verdict, text = _parse_trailers(text, trailers)
-    return {"narrative": text, "header": header, "gaps": gaps, "verdict": verdict, "provider": provider}
+    named_trailers, text = _parse_trailers(text, trailers)
+    return {"narrative": text, "header": header, "trailers": named_trailers,
+            "gaps": named_trailers.get("gaps", []), "verdict": named_trailers.get("verdict"),
+            "provider": provider}
 
 
 # ── Layer 3: methodology log + gap rendering ────────────────────────────────

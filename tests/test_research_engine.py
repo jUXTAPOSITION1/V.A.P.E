@@ -423,6 +423,30 @@ class TestSynthesize:
         assert "VERDICT ALIGNMENT" in system
         assert "AGREE|DISAGREE" in system
 
+    def test_distinctly_named_trailers_do_not_collide(self):
+        """Real gap this pins (CodeRabbit, PR #375): _parse_trailers used to
+        route every "json" trailer into "gaps" and every "enum" trailer into
+        "verdict" regardless of its own declared name — a second json
+        trailer would merge into the same list as the first, and a
+        non-verdict enum would silently overwrite the real verdict. Each
+        trailer's own name must be its own slot in result["trailers"],
+        independent of type and of any other trailer's name."""
+        text = ("Real analysis.\n"
+                'CITATIONS_JSON: [{"description": "cite one", "confidence": 0.9}]\n'
+                "SEVERITY: HIGH")
+        trailers = [
+            {"type": "json", "name": "citations", "label": "CITATIONS_JSON"},
+            {"type": "enum", "name": "severity", "label": "SEVERITY", "options": ("LOW", "HIGH")},
+        ]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), trailers=trailers)
+        assert result["trailers"]["citations"][0]["description"] == "cite one"
+        assert result["trailers"]["severity"] == "HIGH"
+        # Neither collides into the legacy gaps/verdict convenience aliases,
+        # which stay at their defaults since no trailer here is named that.
+        assert result["gaps"] == []
+        assert result["verdict"] is None
+
     def test_custom_max_tokens_passed_through(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
             re_engine.synthesize(self._base_result(), max_tokens=750)
@@ -441,6 +465,21 @@ class TestSynthesize:
 
     def test_header_fields_missing_delimiter_degrades_to_none_not_lost_narrative(self):
         text = "Just plain prose, no header markers at all."
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers, trailers=[])
+        assert result["header"] == {"headline": None, "dek": None}
+        assert result["narrative"] == text
+
+    def test_header_delimiter_ignores_markdown_rule_with_no_real_header(self):
+        """Real bug this pins (CodeRabbit, PR #375): a bare markdown
+        thematic break ('---') the model wrote as part of its own narrative
+        must not be mistaken for the header delimiter just because it's the
+        first '---' line in the text — only a delimiter preceded by at
+        least one actual configured label counts. Otherwise every opening
+        paragraph before an unrelated '---' silently vanishes with no
+        header fields to show for it either."""
+        text = "Opening paragraph the model wrote.\n\n---\n\nMore narrative after a markdown rule."
         headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
             result = re_engine.synthesize(self._base_result(), header_fields=headers, trailers=[])
