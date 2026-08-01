@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-01T21:42:35Z",
+  "generated": "2026-08-01T21:46:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 493,
+    "reports": 494,
     "reports_by_type": {
+      "base": 100,
       "sentiment": 52,
       "bounty": 116,
       "security": 91,
       "macro": 26,
-      "base": 99,
       "bug": 4,
       "mainnet": 4,
       "virtuals": 97,
@@ -38,14 +38,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-08-01-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-08-01 21:01 UTC",
+      "type": "base",
+      "file": "base-2026-08-01-21.md",
+      "title": "Base Blockchain Sweep Report",
       "date": "2026-08-01T21:00Z",
       "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-01-21.md",
-      "bytes": 1538
+      "summary": "Date: 2026-08-01 21:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-01-21.md",
+      "bytes": 7826
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-01-21.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-01T21:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-01 21:46 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-01-21.md",
+      "bytes": 7826
+    },
     {
       "kind": "intel",
       "type": "sentiment",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 09:33 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-09.md",
       "bytes": 3211
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-30-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-30T08:00Z",
-      "threat": null,
-      "summary": "The 10 incidents over the last 7 days produced a HIGH threat level, with total losses distributed across 12 distinct chains or layer combinations and no single event reaching $50M. The largest recorded losses were the $24.15M AFX Bridge private-key compromise on Arbitrum, the $9.7M Triple-A hot-wallet compromise spanning Ethereum, Tron an",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-08.md",
-      "bytes": 7173
     }
   ],
   "broadcasts": [
