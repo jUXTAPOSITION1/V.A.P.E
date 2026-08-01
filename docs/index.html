@@ -317,11 +317,17 @@
                             <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
                         </div>
                     </div>
-                    <div class="chart-shell-sm"><canvas id="secdashTimelineChart"></canvas></div>
+                    <div class="chart-shell-sm">
+                        <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
+                        <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
+                    </div>
                 </div>
                 <div class="panel-sm secdash-panel">
                     <h3 class="secdash-panel-title">Findings per Status</h3>
-                    <div class="chart-shell-sm"><canvas id="secdashVerdictChart"></canvas></div>
+                    <div class="chart-shell-sm">
+                        <canvas id="secdashVerdictChart" role="img" aria-label="Findings per status"></canvas>
+                        <div id="secdash-verdict-empty" class="secdash-chart-empty" hidden></div>
+                    </div>
                 </div>
             </div>
 

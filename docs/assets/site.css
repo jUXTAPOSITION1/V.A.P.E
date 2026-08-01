@@ -363,11 +363,11 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-lane-detail { display: flex; flex-direction: column; gap: 0.3rem; min-height: 62px; justify-content: center; }
 .secdash-lane-dots { display: flex; align-items: center; justify-content: center; gap: 0.3rem; margin-top: 0.5rem; }
 .secdash-lane-dot {
-    width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.18);
-    border: none; padding: 0; cursor: pointer;
+    width: 24px; height: 24px; border-radius: 999px; border: none; padding: 9px;
+    background: rgba(255, 255, 255, 0.18) content-box; box-sizing: border-box; cursor: pointer;
 }
-.secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35); }
-.secdash-lane-dot.is-active { background: #60a5fa; }
+.secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35) content-box; }
+.secdash-lane-dot.is-active { background: #60a5fa content-box; }
 
 /* Risk Breakdown cards — one compact row of six (not a wrapping grid of
    larger cards), each: a small ring + single-letter severity badge (the
@@ -384,13 +384,17 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     font-size: 12px; font-weight: 600; font-family: var(--font-mono);
 }
 .secdash-card-title { font-size: 11px; color: #d4d4d8; line-height: 1.25; }
-.secdash-card-delta { font-size: 9.5px; color: #71717a; }
+.secdash-card-delta { font-size: 10px; color: #71717a; }
 .secdash-tick-bar {
     display: flex; height: 6px; width: 100%; border-radius: 999px; overflow: hidden;
     background: var(--bg-panel-sm); gap: 1px;
 }
 .secdash-tick-seg { height: 100%; min-width: 2px; }
-.secdash-tick-labels { display: flex; justify-content: space-between; font-size: 8.5px; font-family: var(--font-mono); color: #52525b; }
+.secdash-tick-labels { display: flex; justify-content: space-between; font-size: 10px; font-family: var(--font-mono); color: #52525b; }
+.secdash-chart-empty {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 0 1rem; font-size: 13px; color: #71717a;
+}
 
 /* x402 Activity tiles — Transactions / Volume / Buyers, each a big number
    plus a small bar-sparkline of the same real per-day data backing the main

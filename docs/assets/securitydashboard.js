@@ -63,6 +63,9 @@ const SecurityDashboard = {
     _data: null,
     _history: [],
     _lanes: [],
+    _gaugeChart: null,
+    _sevChart: null,
+    _verdictChart: null,
     _timelineChart: null,
     _timelineSeries: 'severity',
 
@@ -75,13 +78,13 @@ const SecurityDashboard = {
             return;
         }
         this._renderUpdated();
-        this._renderGauge();
-        this._renderSeverityDonut();
-        this._renderLanes();
-        this._renderCards();
-        this._renderTimeline();
-        this._renderVerdictChart();
-        this._wireTimelineToggle();
+        // Each panel renders independently — one throwing (a malformed field
+        // in a given lane, a missing canvas) must not leave its siblings
+        // stuck in their skeleton state.
+        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanes,
+            this._renderCards, this._renderTimeline, this._renderVerdictChart, this._wireTimelineToggle]) {
+            try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
+        }
     },
 
     async _fetchJson() {
@@ -112,6 +115,16 @@ const SecurityDashboard = {
         if (el) el.textContent = 'unavailable this cycle';
         const gaugeLabel = document.getElementById('secdash-gauge-label');
         if (gaugeLabel) gaugeLabel.innerHTML = '<span class="text-zinc-500 text-xs">No snapshot yet</span>';
+        const sevList = document.getElementById('secdash-sev-list');
+        if (sevList) sevList.innerHTML = '<li class="text-zinc-500">Snapshot unavailable.</li>';
+        const laneDetail = document.getElementById('secdash-lane-detail');
+        if (laneDetail) laneDetail.innerHTML = '<span class="text-zinc-500 text-xs">Snapshot unavailable.</span>';
+        const cards = document.getElementById('secdash-cards');
+        if (cards) {
+            cards.innerHTML = CARD_DEFS.map(def =>
+                `<div class="panel-sm secdash-card"><div class="secdash-card-title">${escapeHtml(def.title)}</div>` +
+                `<span class="secdash-card-delta">Unavailable.</span></div>`).join('');
+        }
     },
 
     _renderUpdated() {
@@ -164,13 +177,17 @@ const SecurityDashboard = {
         const deltaEl = document.getElementById('secdash-gauge-delta');
         if (deltaEl) {
             const prev = this._history.length >= 2 ? this._history[this._history.length - 2] : null;
+            const prevIdx = prev ? THREAT_ORDER.indexOf((prev.overall_threat_level || '').toUpperCase()) : -1;
             if (!prev) {
                 deltaEl.textContent = 'tracking since launch';
+            } else if (idx < 0 || prevIdx < 0) {
+                deltaEl.textContent = 'no comparable signal';
+            } else if (prevIdx === idx) {
+                deltaEl.textContent = 'steady vs last check';
+            } else if (idx > prevIdx) {
+                deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('HIGH'))}">&#9650; worsened</span> vs last check`;
             } else {
-                const prevIdx = THREAT_ORDER.indexOf((prev.overall_threat_level || '').toUpperCase());
-                if (prevIdx === idx) deltaEl.textContent = 'steady vs last check';
-                else if (idx > prevIdx) deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('HIGH'))}">&#9650; worsened</span> vs last check`;
-                else deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('LOW'))}">&#9660; improved</span> vs last check`;
+                deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('LOW'))}">&#9660; improved</span> vs last check`;
             }
         }
     },
@@ -245,7 +262,7 @@ const SecurityDashboard = {
         select.innerHTML = lanes.map((l, i) => `<option value="${i}">${escapeHtml(l.label || l.id)}</option>`).join('');
         select.addEventListener('change', () => this._renderLaneDetail(Number(select.value)));
         if (dots) {
-            dots.innerHTML = lanes.map((_, i) => `<button type="button" class="secdash-lane-dot" data-idx="${i}" aria-label="Lane ${i + 1}"></button>`).join('');
+            dots.innerHTML = lanes.map((l, i) => `<button type="button" class="secdash-lane-dot" data-idx="${i}" aria-current="false" aria-label="${escapeHtml(l.label || l.id)}"></button>`).join('');
             dots.querySelectorAll('.secdash-lane-dot').forEach(btn => {
                 btn.addEventListener('click', () => this._renderLaneDetail(Number(btn.dataset.idx)));
             });
@@ -266,7 +283,10 @@ const SecurityDashboard = {
             ${statusBadge(lane.headline || lane.last_run_conclusion || 'unavailable', color, icon)}
             <span class="text-[10px] text-zinc-600">${lane.last_run_at ? escapeHtml(ago(lane.last_run_at)) : 'no runs yet'}</span>
         `;
-        if (dots) dots.querySelectorAll('.secdash-lane-dot').forEach((d, i) => d.classList.toggle('is-active', i === idx));
+        if (dots) dots.querySelectorAll('.secdash-lane-dot').forEach((d, i) => {
+            d.classList.toggle('is-active', i === idx);
+            d.setAttribute('aria-current', String(i === idx));
+        });
         if (select) select.value = String(idx);
     },
 
@@ -298,21 +318,28 @@ const SecurityDashboard = {
             </div>`;
         }
         const primary = lanes[0];
-        let segs, letter, letterColor, delta, ticks;
+        // ringStatus drives the ring fill fraction explicitly (never derived
+        // from comparing rendered colors, which breaks if two severity
+        // tokens ever resolve to the same hex): 'low' = full ring (all
+        // clear), 'info' = empty ring (no signal), anything else = a
+        // partial ring indicating an open issue.
+        let segs, letter, letterColor, delta, ticks, ringStatus;
 
         if (def.id === 'codeql') {
             const open = primary.open_alerts;
             const persisted = primary.persisted_high_critical_30d || 0;
             const clear = open === 0 && persisted === 0;
             letter = open == null ? '?' : clear ? 'OK' : 'H';
-            letterColor = open == null ? sevColor('INFO') : clear ? sevColor('LOW') : sevColor('HIGH');
+            ringStatus = open == null ? 'info' : clear ? 'low' : 'other';
+            letterColor = ringStatus === 'info' ? sevColor('INFO') : ringStatus === 'low' ? sevColor('LOW') : sevColor('HIGH');
             delta = open == null ? 'unavailable' : `${persisted} persisted, 30d`;
             segs = open == null ? [] : (clear ? [{ v: 1, c: sevColor('LOW') }] : [{ v: Math.max(open, 1), c: sevColor('HIGH') }, { v: persisted, c: sevColor('CRITICAL') }]);
             ticks = open == null ? [] : [open, persisted];
         } else if (def.id === 'dependency-audit' || def.id === 'security-lint') {
             const ok = primary.last_run_conclusion === 'success';
             letter = ok ? 'OK' : primary.last_run_conclusion == null ? '?' : '!';
-            letterColor = ok ? sevColor('LOW') : primary.last_run_conclusion == null ? sevColor('INFO') : sevColor('CRITICAL');
+            ringStatus = ok ? 'low' : primary.last_run_conclusion == null ? 'info' : 'other';
+            letterColor = ringStatus === 'low' ? sevColor('LOW') : ringStatus === 'info' ? sevColor('INFO') : sevColor('CRITICAL');
             delta = primary.last_run_at ? ago(primary.last_run_at) : 'never run';
             segs = primary.last_run_conclusion == null ? [] : [{ v: 1, c: ok ? sevColor('LOW') : sevColor('CRITICAL') }];
             ticks = [];
@@ -321,14 +348,17 @@ const SecurityDashboard = {
             const total = SEV_ORDER.reduce((s, k) => s + (bd[k] || 0), 0);
             const bad = (bd.CRITICAL || 0) + (bd.HIGH || 0);
             letter = total === 0 ? 'OK' : bad > 0 ? 'H' : 'L';
-            letterColor = (total === 0 || bad === 0) ? sevColor('LOW') : sevColor('HIGH');
+            ringStatus = (total === 0 || bad === 0) ? 'low' : 'other';
+            letterColor = ringStatus === 'low' ? sevColor('LOW') : sevColor('HIGH');
             delta = `${total} findings, 30d`;
             segs = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => ({ v: bd[k], c: sevColor(k) }));
             ticks = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => bd[k]);
         } else if (def.id === 'intel-sweeps') {
             const ratio = typeof primary.coverage_ratio === 'number' ? primary.coverage_ratio : null;
             letter = primary.threat_level === 'HIGH' ? 'H' : primary.threat_level === 'MEDIUM' ? 'M' : primary.threat_level === 'LOW' ? 'L' : '?';
-            letterColor = primary.threat_level === 'HIGH' ? sevColor('CRITICAL') : primary.threat_level === 'MEDIUM' ? sevColor('MEDIUM') : sevColor('LOW');
+            ringStatus = primary.threat_level === 'LOW' ? 'low' : (primary.threat_level === 'HIGH' || primary.threat_level === 'MEDIUM') ? 'other' : 'info';
+            letterColor = primary.threat_level === 'HIGH' ? sevColor('CRITICAL') : primary.threat_level === 'MEDIUM' ? sevColor('MEDIUM')
+                : primary.threat_level === 'LOW' ? sevColor('LOW') : sevColor('INFO');
             const gaps = (primary.gap_patterns || []).length;
             delta = ratio == null ? 'unavailable' : `${Math.round(ratio * 100)}% covered, ${gaps} gap(s)`;
             segs = ratio == null ? [] : [{ v: ratio, c: sevColor('LOW') }, { v: 1 - ratio, c: sevColor('MEDIUM') }];
@@ -338,7 +368,8 @@ const SecurityDashboard = {
             const drift = lanes.find(l => l.id === 'review-ledger');
             const intact = seal.chain_intact;
             letter = intact === true ? 'OK' : intact === false ? '!' : '?';
-            letterColor = intact === true ? sevColor('LOW') : intact === false ? sevColor('CRITICAL') : sevColor('INFO');
+            ringStatus = intact === true ? 'low' : intact === false ? 'other' : 'info';
+            letterColor = ringStatus === 'low' ? sevColor('LOW') : ringStatus === 'info' ? sevColor('INFO') : sevColor('CRITICAL');
             const worsened = drift ? (drift.worsened_30d || 0) : 0;
             const improved = drift ? (drift.improved_30d || 0) : 0;
             delta = `${worsened} worse / ${improved} better, 30d`;
@@ -346,7 +377,7 @@ const SecurityDashboard = {
             ticks = (worsened + improved) === 0 ? [] : [worsened, improved];
         }
 
-        const ringFrac = letterColor === sevColor('LOW') ? 1 : letterColor === sevColor('INFO') ? 0 : 0.7;
+        const ringFrac = ringStatus === 'low' ? 1 : ringStatus === 'info' ? 0 : 0.7;
         const ringSvg = this._ringSvg(ringFrac, letterColor);
         const barHtml = segs.length
             ? `<div class="secdash-tick-bar">${segs.map(s => `<div class="secdash-tick-seg" style="flex:${Math.max(s.v, 0.02)} 0 auto; background:${escapeHtml(s.c)}"></div>`).join('')}</div>`
@@ -386,16 +417,32 @@ const SecurityDashboard = {
     // history before this dashboard shipped, so it starts sparse and grows
     // forward with every real run appended to security-dashboard-history.jsonl
     // — never backfilled or faked to look fuller than it is.
+    // Empty states toggle a sibling node rather than replacing
+    // canvas.parentElement.innerHTML — destroying the canvas element would
+    // permanently break every later render call (the severity/threat-level
+    // toggle above all) since _renderTimeline/_renderVerdictChart both
+    // guard on `if (!canvas) return`.
+    _setChartEmpty(emptyEl, canvas, message) {
+        if (message) {
+            if (emptyEl) { emptyEl.textContent = message; emptyEl.hidden = false; }
+            canvas.style.visibility = 'hidden';
+        } else {
+            if (emptyEl) emptyEl.hidden = true;
+            canvas.style.visibility = '';
+        }
+    },
+
     _renderTimeline() {
         const canvas = document.getElementById('secdashTimelineChart');
+        const emptyEl = document.getElementById('secdash-timeline-empty');
         if (!canvas || typeof Chart === 'undefined') return;
-        if (this._timelineChart) this._timelineChart.destroy();
+        if (this._timelineChart) { this._timelineChart.destroy(); this._timelineChart = null; }
 
         let cfg;
         if (this._timelineSeries === 'severity') {
             const timeline = this._data.findings_timeline || [];
             if (!timeline.length) {
-                canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No timeline data yet.</div>';
+                this._setChartEmpty(emptyEl, canvas, 'No timeline data yet.');
                 return;
             }
             cfg = {
@@ -411,7 +458,7 @@ const SecurityDashboard = {
         } else {
             const points = this._history;
             if (!points.length) {
-                canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">Tracking since launch — no history yet.</div>';
+                this._setChartEmpty(emptyEl, canvas, 'Tracking since launch — no history yet.');
                 return;
             }
             const levelToY = { LOW: 1, MEDIUM: 2, HIGH: 3 };
@@ -433,6 +480,7 @@ const SecurityDashboard = {
                 },
             };
         }
+        this._setChartEmpty(emptyEl, canvas, null);
         this._timelineChart = new Chart(canvas, cfg);
     },
 
@@ -450,16 +498,18 @@ const SecurityDashboard = {
 
     _renderVerdictChart() {
         const canvas = document.getElementById('secdashVerdictChart');
+        const emptyEl = document.getElementById('secdash-verdict-empty');
         if (!canvas || typeof Chart === 'undefined') return;
         const byVerdict = this._data.findings_by_verdict || {};
         const order = ['PROCEED', 'CAUTION', 'REJECT'];
         const colors = { PROCEED: sevColor('LOW'), CAUTION: sevColor('MEDIUM'), REJECT: sevColor('HIGH') };
         const labels = order.filter(k => (byVerdict[k] || 0) > 0);
+        if (this._verdictChart) { this._verdictChart.destroy(); this._verdictChart = null; }
         if (!labels.length) {
-            canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No verdict-bearing findings yet.</div>';
+            this._setChartEmpty(emptyEl, canvas, 'No verdict-bearing findings yet.');
             return;
         }
-        if (this._verdictChart) this._verdictChart.destroy();
+        this._setChartEmpty(emptyEl, canvas, null);
         this._verdictChart = new Chart(canvas, {
             type: 'bar',
             data: { labels, datasets: [{ data: labels.map(k => byVerdict[k]), backgroundColor: labels.map(k => colors[k]), borderRadius: 4 }] },
