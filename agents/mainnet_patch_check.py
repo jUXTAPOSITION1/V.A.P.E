@@ -36,6 +36,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.data_fetchers import get_contract_source  # noqa: E402
 from agents import intel_common as ic  # noqa: E402
+from agents import research_engine  # noqa: E402
 
 # Real address quoted in intel/reports/mainnet-patch-check-2026-06-10.md —
 # AgentNftV2's implementation on Base, per that report's Basescan lookup.
@@ -119,16 +120,18 @@ def run():
     else:
         verdict = "ALL CLEAR"
 
-    briefing = ic.grok_analysis(
-        "smart-contract security analyst",
-        (
-            f"VERDICT (deterministic pattern check, do not change): {verdict}\n"
-            f"Contract: AgentNftV2 implementation {AGENT_NFT_V2_IMPL} (Base, chain 8453)\n"
-            f"Pattern-check results:\n{check_rows}\n\n"
-            f"Web research this cycle ({search.get('provider') or 'unavailable'}):\n"
-            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none available")
-        ),
-        instructions=(
+    grounding = (
+        f"VERDICT (deterministic pattern check, do not change): {verdict}\n"
+        f"Contract: AgentNftV2 implementation {AGENT_NFT_V2_IMPL} (Base, chain 8453)\n"
+        f"Pattern-check results:\n{check_rows}\n\n"
+        f"Web research this cycle ({search.get('provider') or 'unavailable'}):\n"
+        + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none available")
+    )
+    synth = research_engine.synthesize(
+        {"topic": "AgentNftV2 mainnet patch status", "task_type": "investigation",
+         "known_facts": {}, "findings": [], "deep_extracts": [], "raw_user_block": grounding, "log": {}},
+        role="smart-contract security analyst",
+        extra_instructions=(
             "Write the 'Analyst Briefing' section of this mainnet patch-status report. Interpret what "
             "the pattern-check status plus this cycle's web research actually implies — call out "
             "specifically if the web research surfaces anything (a disclosure, a discussion, a PoC) "
@@ -136,7 +139,9 @@ def run():
             "contract 'safe' — a NEEDS REVIEW result always warrants a real human look regardless of "
             "what the web research does or doesn't show."
         ),
+        trailers=[], max_tokens=900, temperature=0.5,
     )
+    briefing = synth["narrative"]
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Mainnet Patch Status Check — Virtuals Protocol AgentNftV2

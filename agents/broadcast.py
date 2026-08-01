@@ -52,6 +52,7 @@ except Exception:
     append_to_memory = None
 
 from agents import intel_common as ic
+from agents import research_engine
 
 
 def now_iso():
@@ -226,17 +227,20 @@ def build_broadcast(window_hours=6):
         f"VIRTUAL: {virtuals.get('virtual_price_usd')} ({_pct(virtuals.get('virtual_change_24h_pct'))} 24h)\n\n"
         f"Web research this cycle ({search.get('provider') or 'unavailable'}):\n{search_lines}"
     )
-    briefing = ic.grok_analysis(
-        "on-chain intelligence analyst",
-        grounding,
-        instructions=(
+    synth = research_engine.synthesize(
+        {"topic": "VAPE community intelligence broadcast", "task_type": "market_intel",
+         "known_facts": {}, "findings": [], "deep_extracts": [], "raw_user_block": grounding, "log": {}},
+        role="on-chain intelligence analyst",
+        extra_instructions=(
             "Write the 'Analyst Briefing' section of a community intelligence broadcast. "
             "Synthesize what this cycle's real data + web research actually implies for Base, "
             "Virtuals/AI-agent activity, and VAPE's own casework — don't just restate the numbers "
             "above, interpret them. If nothing notable stands out, say that plainly rather than "
             "manufacturing a narrative."
         ),
+        trailers=[], max_tokens=900, temperature=0.5,
     )
+    briefing = synth["narrative"]
     L.append("## Analyst Briefing")
     L.append("")
     L.append(briefing)
