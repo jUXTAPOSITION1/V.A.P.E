@@ -466,55 +466,12 @@ def test_run_stops_after_bounded_attempts_on_an_all_thin_feed(tmp_path, monkeypa
     assert ws.call_count == 3
 
 
-# ── deep-dive mode (explicit direction, 2026-08-01, after a real user report
-#    on a thin single-source rewrite of a major story) ─────────────────────
+# ── multi-source depth on every story (explicit direction, 2026-08-01, after
+#    a real user report on a thin single-source rewrite of a major story --
+#    and a same-day correction that this is how every VAPE Wire article gets
+#    written, not a special tier for security/large-dollar stories) ────────
 
-def test_mentions_large_dollar_amount_true_for_millions():
-    assert news_reporter._mentions_large_dollar_amount("Attackers stole $70 million in BTC") is True
-
-
-def test_mentions_large_dollar_amount_true_for_abbreviated_form():
-    assert news_reporter._mentions_large_dollar_amount("Exploit drains $1.2B from a bridge") is True
-
-
-def test_mentions_large_dollar_amount_false_for_small_figure():
-    assert news_reporter._mentions_large_dollar_amount("User loses $500 in a phishing scam") is False
-
-
-def test_mentions_large_dollar_amount_false_when_absent():
-    assert news_reporter._mentions_large_dollar_amount("Bitcoin rallies past resistance") is False
-
-
-def test_is_deep_dive_candidate_true_for_security_topic():
-    assert news_reporter._is_deep_dive_candidate({"title": "Minor bug fixed", "topic": "defi-security"}) is True
-
-
-def test_is_deep_dive_candidate_true_for_large_dollar_headline():
-    assert news_reporter._is_deep_dive_candidate(
-        {"title": "Hackers steal $70 million from cold wallets", "topic": "crypto-markets"}) is True
-
-
-def test_is_deep_dive_candidate_false_for_routine_story():
-    assert news_reporter._is_deep_dive_candidate(
-        {"title": "Bitcoin rallies past $100K", "topic": "crypto-markets"}) is False
-
-
-def test_gather_corroboration_single_query_for_routine_story():
-    calls = []
-
-    def fake_search(query, max_results=5):
-        calls.append((query, max_results))
-        return {"available": True, "provider": "tavily",
-                "results": [{"title": "Hit", "url": "https://x.example/1", "snippet": "s"}]}
-
-    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
-        out = news_reporter._gather_corroboration({"title": "Crypto markets rally", "topic": "crypto-markets"},
-                                                   deep_dive=False)
-    assert calls == [("Crypto markets rally", 5)]
-    assert out["results"] == [{"title": "Hit", "url": "https://x.example/1", "snippet": "s"}]
-
-
-def test_gather_corroboration_runs_multiple_queries_and_dedupes_for_deep_dive():
+def test_gather_corroboration_runs_three_queries_and_dedupes_for_security_topic():
     calls = []
 
     def fake_search(query, max_results=5):
@@ -528,13 +485,38 @@ def test_gather_corroboration_runs_multiple_queries_and_dedupes_for_deep_dive():
 
     candidate = {"title": "Coldcard firmware flaw drains $70M", "topic": "defi-security"}
     with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
-        out = news_reporter._gather_corroboration(candidate, deep_dive=True)
+        out = news_reporter._gather_corroboration(candidate)
     # Original headline + "explained analysis" + the security-beat root-cause query.
-    assert len(calls) == 3
-    assert calls[0] == "Coldcard firmware flaw drains $70M"
+    assert calls == [
+        "Coldcard firmware flaw drains $70M",
+        "Coldcard firmware flaw drains $70M explained analysis",
+        "Coldcard firmware flaw drains $70M technical root cause",
+    ]
     shared_hits = [r for r in out["results"] if r["url"] == "https://shared.example/1"]
     assert len(shared_hits) == 1
     assert len(out["results"]) == 4  # 1 shared + 3 query-unique hits
+
+
+def test_gather_corroboration_uses_fact_check_query_for_non_security_topic():
+    """Every story gets the same three-query depth -- the third query is
+    just topic-aware: a fact-check angle for anything outside the security
+    beat, since a market-commentary story fact-checking another outlet's
+    unsupported claim needs real cross-referencing aimed at the claim
+    itself, not a technical mechanism."""
+    calls = []
+
+    def fake_search(query, max_results=5):
+        calls.append(query)
+        return {"available": True, "provider": "tavily", "results": []}
+
+    candidate = {"title": "Bitcoin Foundation says XRP lags the market", "topic": "crypto-markets"}
+    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
+        news_reporter._gather_corroboration(candidate)
+    assert calls == [
+        "Bitcoin Foundation says XRP lags the market",
+        "Bitcoin Foundation says XRP lags the market explained analysis",
+        "Bitcoin Foundation says XRP lags the market fact check",
+    ]
 
 
 def test_scrape_multiple_sources_collects_real_bodies_and_skips_failures():
@@ -553,12 +535,12 @@ def test_scrape_multiple_sources_respects_max_sources_cap():
     assert len(scraped) == 2
 
 
-def test_write_story_deep_dive_builds_multi_source_grounding_with_longer_budget(tmp_path, monkeypatch):
-    """A high-impact security story (the real user-reported gap: a thin
-    single-source rewrite of a major story) must trigger deep-dive mode:
-    multiple search queries, multiple scraped source bodies presented as
-    separate labeled blocks, a larger drafting/editorial token budget, and
-    a Fact-checked field that says so."""
+def test_write_story_builds_multi_source_grounding_with_larger_budget_for_security_story(tmp_path, monkeypatch):
+    """A security-beat story (the real user-reported gap: a thin
+    single-source rewrite of a major story) gets the full multi-source
+    treatment: multiple search queries, multiple scraped source bodies
+    presented as separate labeled blocks, a larger drafting/editorial token
+    budget, and a Fact-checked field that says so."""
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "Coldcard firmware flaw drains $70 million from cold wallets",
                  "url": "https://example.com/primary", "source": "The Block",
@@ -606,9 +588,9 @@ def test_write_story_deep_dive_builds_multi_source_grounding_with_longer_budget(
     assert path is not None
     text = open(path).read()
     assert "The Entropy Mirage" in text
-    assert "Fact-checked:** Yes — multi-source deep-dive review completed" in text
+    assert "Fact-checked:** Yes — multi-source review completed" in text
 
-    # Multiple search queries actually ran (deep-dive, not the single-query path).
+    # Multiple search queries actually ran.
     assert len(search_calls) == 3
 
     # Multiple real source bodies were scraped and presented as separate,
@@ -625,9 +607,12 @@ def test_write_story_deep_dive_builds_multi_source_grounding_with_longer_budget(
     assert "numeric precision" in editor_calls[0]["instructions"]
 
 
-def test_write_story_routine_story_keeps_original_single_query_budget(tmp_path, monkeypatch):
-    """A routine, non-high-impact story must NOT trigger deep-dive mode --
-    same single search query and original token budgets as before."""
+def test_write_story_gives_the_same_multi_source_depth_to_a_routine_market_story(tmp_path, monkeypatch):
+    """The explicit correction this codebase now enforces: multi-source
+    depth is not a special tier for security/large-dollar stories, it's how
+    every VAPE Wire article gets written -- confirmed here with an ordinary
+    crypto-markets story that would have been the old single-query,
+    lower-budget path."""
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
                  "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
@@ -661,7 +646,8 @@ def test_write_story_routine_story_keeps_original_single_query_budget(tmp_path, 
 
     assert path is not None
     text = open(path).read()
-    assert "Fact-checked:** Yes — copy desk review completed" in text
-    assert len(search_calls) == 1
-    assert captured["max_tokens"] == 2200
-    assert editor_calls[0] == 2200
+    assert "Fact-checked:** Yes — multi-source review completed" in text
+    assert len(search_calls) == 3
+    assert search_calls[-1][0] == "Crypto markets rally fact check"
+    assert captured["max_tokens"] == 3600
+    assert editor_calls[0] == 3200
