@@ -1,7 +1,47 @@
 {
-  "generated": "2026-08-01T08:20:45Z",
+  "generated": "2026-08-01T10:40:37Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Russia expands crypto mining ban to Moscow through 2032",
+      "url": "https://cointelegraph.com/news/russia-expands-crypto-mining-ban-moscow-2032?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 01 Aug 2026 10:23:41 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why 110 corporate blockchains are headed for a massive shakeout \u2013 and Coinbase\u2019s secret plan to absorb them",
+      "url": "https://cryptoslate.com/why-110-corporate-blockchains-are-headed-for-a-massive-shakeout-and-coinbases-secret-token-plan-to-absorb-them/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 09:55:01 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Coldcard Bitcoin loss estimate rises to $70M after Galaxy analysis",
+      "url": "https://cointelegraph.com/news/coldcard-bitcoin-loss-estimate-70-million-galaxy-analysis?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 01 Aug 2026 09:23:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Binance founder CZ calls for wallet diversification after $70 million Coldcard exploit",
+      "url": "https://www.coindesk.com/markets/2026/08/01/binance-founder-cz-says-diversify-your-wallets-following-usd70-million-coldcard-exploit",
+      "source": "CoinDesk",
+      "published": "Sat, 01 Aug 2026 09:01:08 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin miners saved Texas power grid from collapse, but their lucrative pivot to AI is stripping away the emergency brake",
+      "url": "https://cryptoslate.com/bitcoin-miners-saved-the-texas-power-grid-from-collapse-but-their-lucrative-pivot-to-ai-is-stripping-away-the-emergency-brake/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 08:55:34 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Coinbase spent 5 years building a life raft away from Bitcoin and still managed to lose $359M",
       "url": "https://cryptoslate.com/coinbase-spent-5-years-building-a-life-raft-away-from-bitcoin-trading-and-still-managed-to-lose-359-million/",
@@ -91,14 +131,6 @@
       "crypto": true
     },
     {
-      "title": "Why a $20 billion Bitstamp slump makes Robinhood\u2019s retail app look far weaker than it really is",
-      "url": "https://cryptoslate.com/bitstamp-drove-77-of-robinhoods-crypto-volume-decline/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 19:50:01 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "US Is Banning Foreign Robots\u2014Even Roombas",
       "url": "https://decrypt.co/374799/fcc-bans-foreign-humanoid-robots-china-roombas",
       "source": "Decrypt",
@@ -111,14 +143,6 @@
       "url": "https://cointelegraph.com/news/pump-fun-employees-fired-tokens-vest?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Fri, 31 Jul 2026 19:16:19 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "New Bitcoin study shows the strongest recurring liquidation warning signs cannot warn of an individual crash",
-      "url": "https://cryptoslate.com/new-bitcoin-study-shows-the-strongest-recurring-liquidation-warning-signs-cannot-warn-of-an-individual-crash/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 18:45:08 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -151,30 +175,6 @@
       "url": "https://decrypt.co/374796/tether-reports-1-5b-q2-profit-usdt-supply-grows",
       "source": "Decrypt",
       "published": "Fri, 31 Jul 2026 17:10:49 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Coldcard's $38 million (so far) exploit shakes faith in self-custody, may push investors to ETFs",
-      "url": "https://www.coindesk.com/business/2026/07/31/coldcard-s-usd38-million-so-far-exploit-shakes-faith-in-self-custody-may-push-investors-to-etfs",
-      "source": "CoinDesk",
-      "published": "Fri, 31 Jul 2026 17:07:30 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Ex-FTX users report funds being released in $900M distribution round",
-      "url": "https://cointelegraph.com/news/ftx-users-funds-released-fifth-distribution-round?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 31 Jul 2026 16:56:31 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Tether earns $1.5B in Q2 as US Treasury holdings fuel profits",
-      "url": "https://cointelegraph.com/news/tether-q2-profit-us-treasury-holdings-usdt-supply?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 31 Jul 2026 16:25:47 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -262,7 +262,7 @@
       "title": "Why Are Bitcoin, Ethereum and XRP Prices Crashing Today?",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4xN2d2Sy1zYnNNOFVZSG5fNFo0ZV9nQnFTanhMa3dFdFlXOGo2WktKVFJfUXNJVUxQQ0ZjLVlkbUtZRHk1ZllSRHo0ZDFhNFhSbUg2dEdFeWZhdEU?oc=5",
       "source": "Cryptonews.net",
-      "published": "Fri, 31 Jul 2026 20:52:25 GMT",
+      "published": "Fri, 31 Jul 2026 20:51:29 GMT",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -277,7 +277,7 @@
     {
       "title": "Bitcoin slides on the final day of July while equities boom",
       "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZk5EWFRRVHU1YzNENnFLT1ZBLWdtSHNKU2QwSlFlS21fNzJuVkluYzhXQ1BDRUV5Wlhfak1YcExCNVNVd19xYUg4cHJIY0VoV1VLRzJyaW5nMG9PMlZ1UVJsR29iNXJyUGVEX05KNUcxbGtiSHNyNF9ManlXblJZcWtvS3JpdTBVdk1McE5FWGN2dU43S0RMOF8tMWxRWHc3UVRqdUliREt3WnhWZFFneDR2NFpqRE5SRUdRQjdRQ3VXUkQwZGNtMjNhdzVJTl9kWGpqcA?oc=5",
-      "source": "CoinDesk",
+      "source": "coindesk.com",
       "published": "Fri, 31 Jul 2026 11:08:21 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -333,7 +333,7 @@
     {
       "title": "Ostium Confirms $23.75M Hack Originated From Off-Chain Infrastructure Breach",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE92VWRZcTZRYnV6UGZVcEc3dFpUZ2ZfdzQyaWZndnQ0TkZ6Q2phREdrNEpIMHktajAyc0psWkVJc21IcXFIeHpMVmprY1dGM2t6SV9fczZwR2trZmM2NjNJZVIwQ2Y3bGU4V3dUcW5LZ2trUm50VTBEQlZtUVo?oc=5",
-      "source": "bitcoinworld.co.in",
+      "source": "Bitcoin World",
       "published": "Thu, 30 Jul 2026 07:20:11 GMT",
       "topic": "Security",
       "crypto": true
@@ -421,7 +421,7 @@
     {
       "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
-      "source": "Crowdfund Insider",
+      "source": "crowdfundinsider.com",
       "published": "Thu, 16 Jul 2026 20:25:13 GMT",
       "topic": "Base",
       "crypto": true
@@ -445,7 +445,7 @@
     {
       "title": "OKX Launches Agentic Wallet, Bringing Autonomous Onchain Execution to AI Agents",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQSVBKeFkwOU1HbUx4ak1JVXk2QkFLYjM2S25kZXNDNnVwdFduLVp0S2p4YURwLWduSFpFc1hzNFNiV29wbWpjQTlnNF96ZmNmTlQ0dWtIVml2aVJmSVlBX2poelctLWtxMzNHUkZGdEQ2MWxxbWZldXV5ck5PcmhiZlZWLXdWRTU0alFiejRlOGtrb05zVFQ3b1pHT3JkaVlCWDgwS19jRlhSakNqcWc?oc=5",
-      "source": "ffnews.com",
+      "source": "FF News",
       "published": "Fri, 03 Jul 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
@@ -453,7 +453,7 @@
     {
       "title": "Private keys, not smart contracts, caused 40% of crypto's $16 billion hack losses. Here's whats being done.",
       "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOaGJwX2ItUlN0LUlQU1RQWDg3emg5cUJsQlkwdVNqT0JGUUVoeG5wR2I3a2RaQk1oNFprbzFwWE1uMUFicDd0YldhcDVxTkdMQUE3akVZbG5tZTNuSll1VTdkdU9jVElVZkdkNHdhcGRmNjJqcEtya0M0LU9VdTRiYXZrVXpIb1U3TXgtQ0FsQUtjS2tPQi1NdE0taWJMV1U0aF9sZjJHallqOE5pU052TjVoU0hjQTU4NkVuS3lwaFR0RElLZmplMUl4YUNnLVBjR2dzbkNHY2NMTUNUb1E?oc=5",
-      "source": "CoinDesk",
+      "source": "coindesk.com",
       "published": "Mon, 29 Jun 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
@@ -461,7 +461,7 @@
     {
       "title": "Coinbase's Base blockchain resumes after two-hour outage disrupted network",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPcDZ6Q0FranM2Z0hBR3QtQnVHT1QzZWdiNXJkMWJaZnU1Y2pNd1lSbXkwc1hoS19zcFAwSjJ0b3gzdmlOOEo4b0J4SUJDVzQxRERPTDI0eW5zN18tWkFnTWdsc1J2U2lOc3R6c0NtRTlLVjBxcENhdzJGdjlSaVIzcEZJTEFVTUc2YzdsOHRfajBYN3F1OHJvamRfY0VNLWQwd1VPWXJYRW9iN3NmRHJNc19aYUVrUQ?oc=5",
-      "source": "CoinDesk",
+      "source": "coindesk.com",
       "published": "Thu, 25 Jun 2026 07:00:00 GMT",
       "topic": "Base",
       "crypto": true

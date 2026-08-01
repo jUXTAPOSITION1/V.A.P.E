@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T10:35:23Z",
+  "generated": "2026-08-01T10:41:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 484,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 136,
     "investigations": 611,
-    "news": 41,
+    "news": 42,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-russia-s-energy-crunch-claims-moscow-s-crypto-miners-in-seve.md",
+      "title": "Russia\u2019s Energy Crunch Claims Moscow\u2019s Crypto Miners in Seven-Year Ban",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T10:41:48Z",
+      "published_et": "August 1, 2026 \u00b7 6:41 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Prime Minister Mikhail Mishustin signs Resolution No. 936, outlawing mining operations in the capital region and conflict-adjacent Kursk through 2032 to protect a strained electrical grid.",
+      "image": "assets/news-images/russia-s-energy-crunch-claims-moscow-s-crypto-miners-in-seve.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-russia-s-energy-crunch-claims-moscow-s-crypto-miners-in-seve.md"
+    },
     {
       "file": "news-2026-08-01-altcoin-and-layer-2-pivots-fail-to-shield-coinbase-from-a-35.md",
       "title": "Altcoin and Layer-2 Pivots Fail to Shield Coinbase from a $359M Quarterly Storm",
