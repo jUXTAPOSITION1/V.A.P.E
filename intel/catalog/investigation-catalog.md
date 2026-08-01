@@ -1017,3 +1017,5 @@
 | 2026-08-01 | auto | 0xC28475DE46305BDf8E8522Fc282CC13106812ccC (jSTABLE) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-01 | auto | 0x059aB32a5907ed5F09e6394D081A913F32f4da86 (AKE) | deep_investigation | REJECT (45/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-01 | auto | 0x3C5Cd672b204bA0FC48E93B98C0922920A87912D (BSW) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
