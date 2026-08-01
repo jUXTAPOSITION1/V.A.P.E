@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T02:34:49Z",
+  "generated": "2026-08-01T02:37:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 477,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 134,
     "investigations": 606,
-    "news": 32,
+    "news": 33,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-ai-data-center-pivot-hits-collateral-wall-inside-quantum-s-4.md",
+      "title": "AI Data Center Pivot Hits Collateral Wall: Inside Quantum's 4,375 ETH Selloff",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01 02:37 UTC",
+      "topic": "Crypto Markets",
+      "dek": "A Tokyo-listed firm's aggressive strategy to liquidate its crypto treasury for AI infrastructure hits a snag as locked collateral limits further sales.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-ai-data-center-pivot-hits-collateral-wall-inside-quantum-s-4.md"
+    },
     {
       "file": "news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md",
       "title": "Aave Eyes Wind-Down of V3 Markets on Six Low-Volume Chains Holding $4.1 Million in Debt",
