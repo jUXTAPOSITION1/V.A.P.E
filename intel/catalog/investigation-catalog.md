@@ -1031,3 +1031,5 @@
 | 2026-08-01 | auto | 0x30277ce8c9a46E679E0263677318F692f1fEdE23 (CHEESE) | deep_investigation | REJECT (30/100) | Hidden owner | +7d |
 
 | 2026-08-01 | auto | 0xA04bDB1f11413a84D1F6C1d4d4FeD0208F2e68bF (CHEESE) | deep_investigation | REJECT (17/100) | Low holder count (94) | +7d |
+
+| 2026-08-01 | auto | 0x248918D672E5523F9d64C0f3D4511513D7397777 (ASTEROID) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |

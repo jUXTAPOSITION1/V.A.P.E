@@ -4586,6 +4586,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0x248918d672e5523f9d64c0f3d4511513d7397777": {
+    "address": "0x248918D672E5523F9d64C0f3D4511513D7397777",
+    "chain": "56",
+    "creator_address": "0x1b9b790b5504bc6ef0d73e62126bee376ca46cc4",
+    "first_investigated": "2026-08-01T09:04:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-090429-0x248918D6.md",
+        "score": 62,
+        "ts": "2026-08-01T09:04:29Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T09:04:29Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "56:0x26837b64f1302afb1e364082a9e6a0076bb88888": {
     "address": "0x26837B64F1302afB1E364082a9e6a0076Bb88888",
     "chain": "56",
