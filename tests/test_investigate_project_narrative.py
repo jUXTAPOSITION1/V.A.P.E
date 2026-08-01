@@ -1,7 +1,7 @@
 """Tests for agents/investigate.py::_project_narrative() — the user's
 explicit "Project Overview & Narrative" + "Team, Community & Social
-Signals" template ask. Hermetic: skillforge.research.search/scrape and
-agents.llm.ask_oci_grok_safe are all mocked, no real network/LLM call.
+Signals" template ask. Hermetic: skillforge.research.search and
+agents.research_engine.synthesize are all mocked, no real network/LLM call.
 Real gap this closes: _expert_assessment() alone can't cover a project's
 actual history/team/community (it only reasons over structured evidence +
 the model's own possibly-stale training knowledge) -- this runs a REAL,
@@ -22,12 +22,17 @@ _SEARCH_RESULTS = {
 }
 
 
-def _call(llm_response=("Real grounded narrative text.", "xai_1"), search_return=_SEARCH_RESULTS,
+def _synth(narrative="Real grounded narrative text."):
+    return {"narrative": narrative, "header": {}, "trailers": {}, "gaps": [], "verdict": None,
+            "provider": "xai_1"}
+
+
+def _call(narrative="Real grounded narrative text.", search_return=_SEARCH_RESULTS,
           dex=None, cg=None):
     dex = dex if dex is not None else {"websites": [{"url": "https://arena.social"}],
                                         "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
     with mock.patch("skillforge.research.search", return_value=search_return) as m_search, \
-         mock.patch("agents.llm.ask_oci_grok_safe", return_value=llm_response) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth(narrative)) as m_llm:
         result = inv._project_narrative("ARENA", "ArenaToken", dex, cg, "0x" + "aa" * 20, "43114")
     return result, m_search, m_llm
 
@@ -38,7 +43,7 @@ def test_returns_grounded_narrative_with_sources():
     assert result["text"] == "Real grounded narrative text."
     assert result["sources"] == ["https://example.com/arena"]
     _, kwargs = m_llm.call_args
-    assert kwargs["tier"] == "frontier"
+    assert kwargs["max_tokens"] == 500
 
 
 def test_prompt_includes_declared_socials_and_coingecko_description():
@@ -46,19 +51,20 @@ def test_prompt_includes_declared_socials_and_coingecko_description():
     dex = {"websites": [{"url": "https://arena.social"}],
            "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
     with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
-         mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "xai_1")) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm:
         inv._project_narrative("ARENA", "ArenaToken", dex, cg, "0x" + "aa" * 20, "43114")
-    args, _kwargs = m_llm.call_args
-    system, user = args[0], args[1]
-    assert "The Arena is a SocialFi platform." in user
-    assert "Declared homepage: https://arena.social" in user
-    assert "twitter: https://x.com/TheArenaApp" in user
-    assert "untrusted external content" in system
+    args, kwargs = m_llm.call_args
+    result_arg = args[0]
+    grounding = result_arg["raw_user_block"]
+    assert "The Arena is a SocialFi platform." in grounding
+    assert "Declared homepage: https://arena.social" in grounding
+    assert "twitter: https://x.com/TheArenaApp" in grounding
+    assert "address-level identity" in kwargs["extra_instructions"].lower()
 
 
 def test_returns_none_when_no_project_name_available():
     with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
-         mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "xai_1")) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm:
         result = inv._project_narrative("", "", {}, None, "0x" + "aa" * 20, "43114")
     assert result is None
     m_llm.assert_not_called()
@@ -66,7 +72,7 @@ def test_returns_none_when_no_project_name_available():
 
 def test_returns_none_when_search_unavailable():
     with mock.patch("skillforge.research.search", side_effect=RuntimeError("boom")), \
-         mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "xai_1")) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm:
         result = inv._project_narrative("ARENA", "ArenaToken", {}, None, "0x" + "aa" * 20, "43114")
     assert result is None
     m_llm.assert_not_called()
@@ -79,17 +85,7 @@ def test_returns_none_when_search_yields_no_usable_results():
 
 
 def test_returns_none_when_llm_unavailable():
-    result, _m_search, _m_llm = _call(llm_response=("[llm unavailable: no keys]", None))
-    assert result is None
-
-
-def test_returns_none_when_llm_raises():
-    with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
-         mock.patch("agents.llm.ask_oci_grok_safe", side_effect=RuntimeError("boom")):
-        result = inv._project_narrative(
-            "ARENA", "ArenaToken",
-            {"websites": [], "socials": []}, None, "0x" + "aa" * 20, "43114",
-        )
+    result, _m_search, _m_llm = _call(narrative="_Synthesis unavailable this cycle (no LLM provider reachable)._")
     assert result is None
 
 
@@ -99,10 +95,10 @@ def test_address_identity_unverified_when_no_coingecko_contract():
     say so (CodeRabbit, PR #282: identity-binding gap)."""
     result, m_search, m_llm = _call(cg=None)
     assert result["address_identity_verified"] is False
-    args, _kwargs = m_llm.call_args
-    system, user = args[0], args[1]
-    assert "NOT CONFIRMED" in user
-    assert "address-level identity" in system.lower()
+    args, kwargs = m_llm.call_args
+    grounding = args[0]["raw_user_block"]
+    assert "NOT CONFIRMED" in grounding
+    assert "address-level identity" in kwargs["extra_instructions"].lower()
 
 
 def test_address_identity_verified_when_coingecko_contract_present():
@@ -114,9 +110,9 @@ def test_address_identity_verified_when_coingecko_contract_present():
     result, _m_search, m_llm = _call(cg=cg)
     assert result["address_identity_verified"] is True
     args, _kwargs = m_llm.call_args
-    _system, user = args[0], args[1]
-    assert "CONFIRMED — an independent market-data lookup verified" in user
-    assert "NOT CONFIRMED" not in user
+    grounding = args[0]["raw_user_block"]
+    assert "CONFIRMED — an independent market-data lookup verified" in grounding
+    assert "NOT CONFIRMED" not in grounding
 
 
 def test_write_report_renders_project_narrative_section(tmp_path, monkeypatch):
