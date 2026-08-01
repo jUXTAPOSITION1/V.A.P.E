@@ -608,7 +608,25 @@ def _call_vertex_tuned(system, user, temperature, max_tokens, timeout):
     })
     with urllib.request.urlopen(req, timeout=timeout) as r:
         data = json.loads(r.read().decode())
-    text = data["candidates"][0]["content"]["parts"][0]["text"]
+    candidate = data["candidates"][0]
+    # Confirmed real, live bug (2026-08-01): a security-adjacent XRP Ledger
+    # news story published via this path cut off mid-sentence inside an
+    # unclosed markdown link, because this code took candidate["content"]
+    # ["parts"][0]["text"] as a complete answer regardless of how the
+    # generation actually ended. "STOP" is the only finishReason confirming
+    # a genuinely complete response -- SAFETY/RECITATION/MAX_TOKENS/OTHER
+    # all mean the text above is a real but PARTIAL fragment Gemini cut off
+    # partway through (a security/exploit-adjacent news story is exactly
+    # the kind of content that can trip a safety or recitation classifier
+    # mid-generation). Raising here is caught by ask_vertex_candidate()'s
+    # own except clause below, which already falls through to the next
+    # real provider in the chain -- this makes that existing degradation
+    # path actually trigger for a bad candidate instead of silently
+    # shipping a truncated one as if it were a success.
+    finish_reason = candidate.get("finishReason")
+    if finish_reason and finish_reason != "STOP":
+        raise RuntimeError(f"vertex_tuned candidate did not finish cleanly (finishReason={finish_reason})")
+    text = candidate["content"]["parts"][0]["text"]
     usage_meta = data.get("usageMetadata") or {}
     usage = {
         "prompt_tokens": usage_meta.get("promptTokenCount"),

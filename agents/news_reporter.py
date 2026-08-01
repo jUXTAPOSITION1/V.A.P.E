@@ -93,6 +93,7 @@ Usage: python agents/news_reporter.py
 """
 import difflib
 import os
+import re
 import sys
 import json
 from datetime import datetime, timezone
@@ -183,6 +184,31 @@ def _is_derivative_headline(headline, source_title):
     if h == s:
         return True
     return difflib.SequenceMatcher(None, h, s).ratio() > 0.85
+
+
+_UNCLOSED_MD_LINK_RE = re.compile(r"\[[^\]\n]*\]\([^)\n]*$")
+
+
+def _looks_truncated(body):
+    """Rule-based (not LLM) check for a body cut off mid-generation rather
+    than genuinely finished -- confirmed real, live bug (2026-08-01): a
+    Vertex-tuned Gemini candidate with a non-STOP finishReason (SAFETY/
+    RECITATION/MAX_TOKENS/etc, see agents/llm.py::_call_vertex_tuned())
+    returned a real but partial fragment that news_reporter published
+    unchanged, stopping mid-sentence inside an unclosed markdown link.
+    That specific provider-side bug is now fixed at the source, but this
+    gate exists as the same kind of defense-in-depth every other
+    deterministic check in this function already provides -- ANY future
+    truncation (a different provider's own quirk, a network hiccup) should
+    never reach publication either. Catches an unclosed markdown link
+    right at the end of the text, or a body that doesn't end on genuine
+    sentence-final punctuation or closing markdown."""
+    text = (body or "").rstrip()
+    if not text:
+        return True
+    if _UNCLOSED_MD_LINK_RE.search(text):
+        return True
+    return text[-1] not in ".!?\"'”’)]`*_"
 
 
 def _gather_corroboration(candidate):
@@ -490,6 +516,12 @@ def write_story(candidate):
     if not dek:
         return None
     body, fact_checked = _editorial_pass(grounding, body)
+    # Never publish a body cut off mid-generation -- see _looks_truncated()'s
+    # docstring for the real bug this closes. Same "skip this candidate,
+    # try the next headline" degradation as every other gate above, not a
+    # crash or a broken report shipped anyway.
+    if _looks_truncated(body):
+        return None
 
     slug = nc.slugify(headline)
     ai_image = _generate_ai_image(headline, dek, body, topic_label, slug)

@@ -115,6 +115,65 @@ def test_editorial_pass_keeps_draft_when_editor_unavailable():
     assert fact_checked is False
 
 
+# ── _looks_truncated() -- real, live bug (2026-08-01): a Vertex-tuned
+#    Gemini candidate with a non-STOP finishReason (see agents/llm.py's
+#    _call_vertex_tuned() fix) returned a real but partial fragment that
+#    got published cut off mid-sentence inside an unclosed markdown link.
+#    This gate is the news_reporter-side defense-in-depth on top of that
+#    upstream fix -- catches ANY future truncation regardless of cause. ──
+
+def test_looks_truncated_true_for_unclosed_markdown_link():
+    body = ("Next week the network is expected to review the release, "
+             "according to a [CoinDesk report](https://www.coindesk.com/tech/2026/08/01/xrp")
+    assert news_reporter._looks_truncated(body) is True
+
+
+def test_looks_truncated_true_for_body_ending_mid_word_no_punctuation():
+    assert news_reporter._looks_truncated("The upgrade will reintroduce two features previously withdrawn due to") is True
+
+
+def test_looks_truncated_false_for_a_genuinely_complete_body():
+    body = ("## What Happened\n\nThe XRP Ledger is preparing for a network upgrade next week. "
+             "Read the [full report](https://example.com/report) for details.")
+    assert news_reporter._looks_truncated(body) is False
+
+
+def test_looks_truncated_false_for_body_ending_in_closing_markdown():
+    assert news_reporter._looks_truncated("Watch for the next disclosure from the *validator set*") is False
+    assert news_reporter._looks_truncated("Watch for the next disclosure from the validator set.") is False
+
+
+def test_looks_truncated_true_for_empty_body():
+    assert news_reporter._looks_truncated("") is True
+    assert news_reporter._looks_truncated(None) is True
+
+
+def test_write_story_returns_none_when_editorial_output_looks_truncated(tmp_path, monkeypatch):
+    """End-to-end: a body that survives the derivative-headline/blank-dek
+    gates but comes back from the editorial pass cut off mid-sentence must
+    still never be published -- same real bug this closes as the unit
+    tests above, exercised through the actual write_story() path."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "XRP Ledger upgrade brings back features once pulled over critical bugs",
+                 "url": "https://example.com/story", "source": "CoinDesk",
+                 "published": "2026-08-01T00:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+    truncated_body = ("Next week the validator network is expected to review the release, according "
+                       "to a [CoinDesk report](https://www.coindesk.com/tech/2026/08/01/xrp")
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Second Time's the Charm?", "A dek.", "Full untruncated draft.")), \
+         mock.patch("agents.intel_common.grok_analysis", return_value=truncated_body), \
+         mock.patch("agents.intel_common.log_sweep_memory") as memlog:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    memlog.assert_not_called()  # never reaches the "wrote a real report" bookkeeping
+
+
 def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypatch):
     monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
     candidate = {"title": "DeFi protocol patches bug", "url": "https://example.com/story",

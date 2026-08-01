@@ -466,8 +466,10 @@ class TestCandidateProvider:
         assert provider == "groq" and text == "via groq"
 
 
-def _fake_vertex_response(text, usage_meta=None):
+def _fake_vertex_response(text, usage_meta=None, finish_reason=None):
     body = {"candidates": [{"content": {"parts": [{"text": text}]}}]}
+    if finish_reason is not None:
+        body["candidates"][0]["finishReason"] = finish_reason
     if usage_meta is not None:
         body["usageMetadata"] = usage_meta
     payload = json.dumps(body).encode()
@@ -527,6 +529,41 @@ class TestVertexTunedCandidate:
             "/locations/us/endpoints/7011119457397374976:generateContent")
         assert captured["body"]["contents"] == [{"role": "user", "parts": [{"text": "usr prompt"}]}]
         assert captured["body"]["systemInstruction"] == {"parts": [{"text": "sys prompt"}]}
+
+    def test_accepts_candidate_with_explicit_stop_finish_reason(self, monkeypatch):
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+
+        def fake_urlopen(req, timeout=None):
+            return _fake_vertex_response("a complete reply.", finish_reason="STOP")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys", "usr")
+        assert provider == "vertex_tuned" and text == "a complete reply."
+
+    def test_rejects_truncated_candidate_and_falls_through_to_free_chain(self, monkeypatch):
+        """Real, live bug (2026-08-01): a security-adjacent news story
+        tripped Gemini's own safety/recitation classifier mid-generation,
+        and this code used to take the resulting partial candidate as a
+        complete answer regardless of finishReason, publishing a story cut
+        off mid-sentence inside an unclosed markdown link. A non-STOP
+        finishReason (SAFETY here, but the same applies to RECITATION,
+        MAX_TOKENS, OTHER, etc.) must now be treated as a failed call that
+        falls through to the next real provider, not a success."""
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
+        monkeypatch.setenv("GROQ_API_KEY", "groqkey")
+        calls = []
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(urllib.parse.urlparse(req.full_url).hostname)
+            if calls[-1] == "aiplatform.us.rep.googleapis.com":
+                return _fake_vertex_response("...cut off mid-sentence about the [CoinDesk report](https://x",
+                                              finish_reason="SAFETY")
+            return _fake_response("via groq")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            text, provider = llm.ask_vertex_candidate("sys", "usr")
+        assert provider == "groq" and text == "via groq"
+        assert len(calls) == 2
 
     def test_honors_env_overrides_for_project_location_endpoint(self, monkeypatch):
         monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-token")
