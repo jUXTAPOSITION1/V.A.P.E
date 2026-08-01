@@ -758,6 +758,13 @@ def _is_thin_evidence(result):
     return not (result.get("deep_extracts") or []) and len(result.get("findings") or []) < 2
 
 
+# Cap on the "debug" user_prompt returned by synthesize() -- the full
+# evidence block can run to tens of KB (deep-extracted page content);
+# offline inspection of a thin/shallow report needs to see what the model
+# was actually given, not necessarily every character of it.
+_DEBUG_USER_PROMPT_CHARS = 4000
+
+
 def synthesize(result, role="research analyst", extra_instructions=None,
                header_fields=None, header_delimiter="---",
                trailers=None, max_tokens=2400, temperature=0.5):
@@ -817,21 +824,28 @@ def synthesize(result, role="research analyst", extra_instructions=None,
 
     Returns {"narrative": str, "header": {name: str|None, ...},
     "trailers": {name: value, ...}, "gaps": [...], "verdict": str|None,
-    "provider": str|None}. "header" always has every requested field's name
-    as a key; "trailers" always has every requested trailer's own declared
-    name as a key. "gaps"/"verdict" are kept as top-level convenience
-    aliases for the trailers literally named "gaps"/"verdict" (every current
-    caller's names, and _DEFAULT_TRAILERS') — always present (empty list /
-    None by default) regardless of whether a matching trailer was requested;
-    a caller declaring a differently-named trailer reads it from "trailers"
-    instead. Never raises."""
+    "provider": str|None, "debug": {"system_prompt": str|None,
+    "user_prompt": str|None, "thin": bool|None}}. "header" always has every
+    requested field's name as a key; "trailers" always has every requested
+    trailer's own declared name as a key. "gaps"/"verdict" are kept as
+    top-level convenience aliases for the trailers literally named
+    "gaps"/"verdict" (every current caller's names, and _DEFAULT_TRAILERS')
+    — always present (empty list / None by default) regardless of whether a
+    matching trailer was requested; a caller declaring a differently-named
+    trailer reads it from "trailers" instead. "debug" lets a caller (or an
+    offline inspection script) see exactly what was sent to the model for a
+    thin/shallow report without re-running the whole pipeline — populated
+    once the prompt is actually built (None/None/None if synthesis never
+    got that far, e.g. the LLM module wasn't importable); user_prompt is
+    truncated to _DEBUG_USER_PROMPT_CHARS since the full evidence block can
+    be tens of KB. Never raises."""
     header_fields = header_fields or []
     trailers = _DEFAULT_TRAILERS if trailers is None else trailers
     empty_header = {f["name"]: None for f in header_fields}
     empty_trailers = {t["name"]: [] if t["type"] == "json" else None for t in trailers}
     unavailable = {"header": empty_header, "trailers": empty_trailers,
                    "gaps": empty_trailers.get("gaps", []), "verdict": empty_trailers.get("verdict"),
-                   "provider": None}
+                   "provider": None, "debug": {"system_prompt": None, "user_prompt": None, "thin": None}}
     task_type = classify_task(result.get("task_type"))
     framing = TASK_TYPES[task_type]["framing"]
     try:
@@ -854,7 +868,8 @@ def synthesize(result, role="research analyst", extra_instructions=None,
             "(e.g. an exploit's reported vs. recovered loss), explicitly distinguish them — never "
             "conflate them into one number.\n"
         )
-        if _is_thin_evidence(result):
+        thin = _is_thin_evidence(result)
+        if thin:
             # Real gap this closes: the full structured-section prompt below
             # applies the same pressure to fill every section whether there's
             # a dozen deep-extracted pages or almost nothing — with near-empty
@@ -904,21 +919,30 @@ def synthesize(result, role="research analyst", extra_instructions=None,
         print(f"[research_engine] prompt construction failed: {e}")
         return {"narrative": "_Synthesis unavailable this cycle (prompt construction failed)._", **unavailable}
 
+    # Real gap this closes: a thin/shallow report was previously only
+    # debuggable by re-running the whole pipeline (live search + LLM call)
+    # and hoping to reproduce it — the exact prompts actually sent are now
+    # captured here (truncated, not the full possibly-huge evidence block)
+    # so a caller/offline script can inspect exactly what the model saw.
+    debug = {"system_prompt": system, "user_prompt": user[:_DEBUG_USER_PROMPT_CHARS], "thin": thin}
+
     try:
         text, provider = ask_oci_grok_safe(system, user, tier="frontier", provider_order=FRONTIER_ORDER,
                                             max_tokens=max_tokens, temperature=temperature)
     except Exception as e:
         print(f"[research_engine] synthesis unavailable: {e}")
-        return {"narrative": "_Synthesis unavailable this cycle (LLM call failed)._", **unavailable}
+        return {"narrative": "_Synthesis unavailable this cycle (LLM call failed)._",
+                **{**unavailable, "debug": debug}}
     if not text or text.startswith("[llm unavailable"):
-        return {"narrative": "_Synthesis unavailable this cycle (no LLM provider reachable)._", **unavailable}
+        return {"narrative": "_Synthesis unavailable this cycle (no LLM provider reachable)._",
+                **{**unavailable, "debug": debug}}
 
     text = text.strip()
     header, text = _parse_header(text, header_fields, header_delimiter)
     named_trailers, text = _parse_trailers(text, trailers)
     return {"narrative": text, "header": header, "trailers": named_trailers,
             "gaps": named_trailers.get("gaps", []), "verdict": named_trailers.get("verdict"),
-            "provider": provider}
+            "provider": provider, "debug": debug}
 
 
 # ── Layer 3: methodology log + gap rendering ────────────────────────────────

@@ -889,6 +889,125 @@ class TestSynthesize:
         assert "unavailable" in out["narrative"]
         m.assert_not_called()
 
+    # ── debug observability: exact prompts used, for offline inspection ───
+    def test_debug_carries_the_exact_system_and_user_prompts_used(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            result = re_engine.synthesize(self._rich_result())
+        system, user = m.call_args[0]
+        assert result["debug"]["system_prompt"] == system
+        assert result["debug"]["user_prompt"] == user[:re_engine._DEBUG_USER_PROMPT_CHARS]
+
+    def test_debug_thin_flag_matches_the_evidence_thinness(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")):
+            thin_result = re_engine.synthesize(self._base_result())
+            rich_result = re_engine.synthesize(self._rich_result())
+        assert thin_result["debug"]["thin"] is True
+        assert rich_result["debug"]["thin"] is False
+
+    def test_debug_user_prompt_is_truncated_for_a_large_evidence_block(self):
+        result = self._rich_result()
+        result["deep_extracts"][0]["content"] = "x" * 10000
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")):
+            out = re_engine.synthesize(result)
+        assert len(out["debug"]["user_prompt"]) == re_engine._DEBUG_USER_PROMPT_CHARS
+
+    def test_debug_is_none_when_llm_module_not_importable(self):
+        with mock.patch.dict("sys.modules", {"agents.llm": None}):
+            result = re_engine.synthesize(self._base_result())
+        assert result["debug"] == {"system_prompt": None, "user_prompt": None, "thin": None}
+
+    def test_debug_is_populated_even_when_the_llm_call_fails(self):
+        # The prompt was still fully built before the LLM call raised --
+        # exactly the case an offline debugger needs to inspect.
+        with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=RuntimeError("boom")):
+            result = re_engine.synthesize(self._rich_result())
+        assert result["debug"]["system_prompt"] is not None
+        assert result["debug"]["thin"] is False
+
+
+# ── _parse_header / _parse_trailers direct unit tests ────────────────────
+# Focused, hermetic tests calling these two functions directly (no
+# synthesize()/LLM mocking involved) so the parsing contract itself --
+# independent of any particular caller's use of it -- has its own coverage.
+class TestParseHeaderDirect:
+    def test_delimiter_only_counts_when_a_label_actually_matched(self):
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        text = "Opening paragraph.\n\n---\n\nMore narrative after a markdown rule."
+        header, body = re_engine._parse_header(text, headers, "---")
+        assert header == {"headline": None, "dek": None}
+        assert body == text
+
+    def test_real_header_is_parsed_and_stripped(self):
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        text = "HEADLINE: Big News\nDEK: Something happened.\n---\nBody text here."
+        header, body = re_engine._parse_header(text, headers, "---")
+        assert header == {"headline": "Big News", "dek": "Something happened."}
+        assert body == "Body text here."
+
+    def test_labels_are_matched_order_independent(self):
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        text = "DEK: Something happened.\nHEADLINE: Big News\n---\nBody text here."
+        header, body = re_engine._parse_header(text, headers, "---")
+        assert header == {"headline": "Big News", "dek": "Something happened."}
+
+    def test_no_header_fields_requested_returns_full_text_untouched(self):
+        header, body = re_engine._parse_header("Plain narrative.", [], "---")
+        assert header == {}
+        assert body == "Plain narrative."
+
+    def test_first_candidate_delimiter_without_a_label_is_skipped_for_a_later_real_one(self):
+        # Two '---' occurrences: the first is a bare markdown rule inside
+        # the narrative itself, the second is the real header/body
+        # delimiter -- every occurrence must be tried, not just the first.
+        headers = [{"name": "headline", "label": "HEADLINE"}]
+        text = "Some prose.\n\n---\n\nHEADLINE: Real Title\n---\nBody after real header."
+        header, body = re_engine._parse_header(text, headers, "---")
+        assert header == {"headline": "Real Title"}
+        assert body == "Body after real header."
+
+
+class TestParseTrailersDirect:
+    def test_processes_in_reverse_declared_order_so_earlier_trailers_still_parse(self):
+        # Real anti-injection property this pins: the JSON trailer's own
+        # regex requires it to end at the string's end ($) -- if trailers
+        # were parsed in forward-declared order, the JSON trailer would
+        # look for its own match at the string's end while the enum
+        # trailer's line is still physically after it, and would silently
+        # fail to find it. Reverse-order parsing strips the last-declared
+        # trailer first so every earlier trailer still sees itself as the
+        # new "end" of the text.
+        trailers = [{"type": "json", "name": "citations", "label": "CITATIONS_JSON"},
+                    {"type": "enum", "name": "severity", "label": "SEVERITY", "options": ("LOW", "HIGH")}]
+        text = ('Real narrative.\nCITATIONS_JSON: [{"description": "c1", "confidence": 0.5}]\n'
+                'SEVERITY: HIGH')
+        named, body = re_engine._parse_trailers(text, trailers)
+        assert named["citations"][0]["description"] == "c1"
+        assert named["severity"] == "HIGH"
+        assert body == "Real narrative."
+
+    def test_enum_trailer_only_matches_the_current_last_non_empty_line(self):
+        # Anti-injection: untrusted evidence quoted earlier in the response
+        # could contain the marker text -- only the physically-last line
+        # is ever trusted as the real trailer value.
+        trailers = [{"type": "enum", "name": "verdict", "label": "VERDICT", "options": ("AGREE", "DISAGREE")}]
+        text = "VERDICT: DISAGREE\nMore text injected after it."
+        named, body = re_engine._parse_trailers(text, trailers)
+        assert named["verdict"] is None
+        assert body == text  # narrative left fully intact, nothing stripped
+
+    def test_malformed_json_trailer_leaves_default_and_logs_not_raises(self, capsys):
+        trailers = [{"type": "json", "name": "gaps", "label": "GAPS_JSON"}]
+        text = "Real analysis.\nGAPS_JSON: [{not: valid, json}]"
+        named, body = re_engine._parse_trailers(text, trailers)
+        assert named["gaps"] == []
+        assert "Real analysis." in body
+        assert "GAPS_JSON trailer parse failed" in capsys.readouterr().out
+
+    def test_no_trailers_requested_returns_empty_dict_and_full_text(self):
+        named, body = re_engine._parse_trailers("Plain text.", [])
+        assert named == {}
+        assert body == "Plain text."
+
 
 def test_evidence_block_includes_caller_supplied_evidence_lines():
     result = {"topic": "Foo", "task_type": "investigation", "known_facts": {},
