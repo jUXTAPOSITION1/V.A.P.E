@@ -130,7 +130,8 @@ const X402Feed = {
         if (!wrap) return;
         wrap.querySelectorAll('.x402-activity-range-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const days = Number(btn.dataset.days) || 30;
+                const raw = btn.dataset.days;
+                const days = raw === 'all' ? 'all' : (Number(raw) || 30);
                 if (days === this._activityDays) return;
                 this._activityDays = days;
                 wrap.querySelectorAll('.x402-activity-range-btn').forEach(b => {
@@ -156,8 +157,12 @@ const X402Feed = {
     // Resolution is chosen to land around ~55-60 bars regardless of range —
     // enough to read as a real bar chart rather than a needle-thin comb,
     // while staying meaningfully sub-daily (3h/12h buckets, not one bucket
-    // per calendar day).
+    // per calendar day). Bars themselves are fixed-width (see
+    // .activity-sparkline-bar in site.css) inside a horizontally-scrollable
+    // track, so this bar count no longer has to be squeezed to fit a fixed
+    // container width — it just decides scroll depth.
     _activityBucketMinutes(days) {
+        if (days === 'all') return null; // fall back to daily /x402/stats
         if (days <= 7) return 180;     // 3-hour buckets, ~56 bars over 7D
         if (days <= 30) return 720;    // 12-hour buckets, ~60 bars over 30D
         return null;                   // fall back to daily /x402/stats
@@ -251,8 +256,77 @@ const X402Feed = {
             const pct = Math.max(3, Math.round((v / max) * 100));
             const latest = i === buckets.length - 1 ? ' is-latest' : '';
             const when = new Date(b.ts).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric' });
-            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" title="${escapeHtml(when)}: ${escapeHtml(String(v))}"></div>`;
+            const label = `${when}: ${String(v)}`;
+            // title is a real accessibility fallback (keyboard/screen-reader
+            // users get it for free from the browser), kept alongside
+            // data-label rather than replaced by it.
+            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" data-label="${escapeHtml(label)}" title="${escapeHtml(label)}" tabindex="0"></div>`;
         }).join('');
+        // Fixed-width bars inside a horizontally-scrollable track (not
+        // shrink-to-fit) render at a real, readable size on any viewport —
+        // default the view to the most-recent (rightmost) bars.
+        el.scrollLeft = el.scrollWidth;
+        this._wireSparklineTooltips(el);
+    },
+
+    // Custom floating tooltip shown on hover (desktop) and touch (mobile),
+    // replacing the plain `title` attribute — one shared element reused
+    // across all three sparklines rather than one per bar.
+    _ensureSparklineTooltip() {
+        if (this._sparkTooltipEl) return this._sparkTooltipEl;
+        const el = document.createElement('div');
+        el.className = 'activity-tooltip';
+        el.setAttribute('role', 'tooltip');
+        document.body.appendChild(el);
+        this._sparkTooltipEl = el;
+        // A touch tap has no hover-out, so a touch-shown tooltip is dismissed
+        // by the next tap anywhere outside a bar instead (see
+        // _wireSparklineTooltips' pointerleave handling below).
+        document.addEventListener('pointerdown', (e) => {
+            if (!e.target.closest || !e.target.closest('.activity-sparkline-bar')) this._hideSparklineTooltip();
+        });
+        return el;
+    },
+
+    _showSparklineTooltip(bar) {
+        const tip = this._ensureSparklineTooltip();
+        tip.textContent = bar.dataset.label || '';
+        tip.classList.add('is-visible');
+        const barRect = bar.getBoundingClientRect();
+        const tipRect = tip.getBoundingClientRect();
+        let left = barRect.left + barRect.width / 2 - tipRect.width / 2;
+        left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
+        const top = barRect.top - tipRect.height - 8;
+        tip.style.left = `${left}px`;
+        tip.style.top = `${Math.max(8, top)}px`;
+    },
+
+    _hideSparklineTooltip() {
+        if (this._sparkTooltipEl) this._sparkTooltipEl.classList.remove('is-visible');
+    },
+
+    _wireSparklineTooltips(container) {
+        if (container.dataset.tooltipWired) return;
+        container.dataset.tooltipWired = '1';
+        // pointerover/pointermove cover mouse hover; pointerdown covers a
+        // tap without blocking the container's own native touch-scroll
+        // (no preventDefault, no touch-action override).
+        const onPoint = (e) => {
+            const bar = e.target.closest && e.target.closest('.activity-sparkline-bar');
+            if (bar) this._showSparklineTooltip(bar);
+            else this._hideSparklineTooltip();
+        };
+        container.addEventListener('pointerover', onPoint);
+        container.addEventListener('pointermove', onPoint);
+        container.addEventListener('pointerdown', onPoint);
+        // A touch pointerup always fires pointerleave right after — hiding
+        // here for touch would make a tap's tooltip disappear the instant
+        // the finger lifts. Only a real hover-out (mouse) should dismiss it;
+        // a touch-shown tooltip stays until the next tap elsewhere (handled
+        // by _ensureSparklineTooltip's document-level pointerdown listener).
+        container.addEventListener('pointerleave', (e) => {
+            if (e.pointerType !== 'touch') this._hideSparklineTooltip();
+        });
     },
 
     _wireRangeToggle() {
