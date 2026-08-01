@@ -1028,6 +1028,25 @@
     "symbol": "SLGNS",
     "times_investigated": 1
   },
+  "137:0xe5d66322db2922da6f8cc878d56430b1585f351f": {
+    "address": "0xE5D66322db2922dA6f8cc878d56430b1585f351F",
+    "chain": "137",
+    "creator_address": "0x46dd5eea1cd2dac0a248730d60a65370bc7d7c28",
+    "first_investigated": "2026-08-01T18:26:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-182637-0xE5D66322.md",
+        "score": 62,
+        "ts": "2026-08-01T18:26:37Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T18:26:37Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "AIPF",
+    "times_investigated": 1
+  },
   "137:0xea59fa56e4ff71d690baa76ebb3a7325490e9680": {
     "address": "0xEa59Fa56e4ff71D690BaA76EbB3A7325490E9680",
     "chain": "137",

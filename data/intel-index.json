@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T18:19:51Z",
+  "generated": "2026-08-01T18:26:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 490,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 640,
+    "investigations": 641,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-181110-0x60dE974a.md",
-      "title": "Investigation \u2014 JEJEG",
-      "symbol": "JEJEG",
-      "name": "JEJEG",
-      "date": "2026-08-01T18:11:10Z",
-      "target": "0x60dE974aF1215b5C1b5F1189B08235c67F7F35a1",
+      "file": "investigation-20260801-182637-0xE5D66322.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-08-01T18:26:37Z",
+      "target": "0xE5D66322db2922dA6f8cc878d56430b1585f351F",
       "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $211 (rug/illiquid); [-10] Low liquidity $211. Positive evidence: 231174 holders \u2014 rea",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-181110-0x60dE974a.md"
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 17113 holders \u2014 reasonably distributed; Trading 121+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-182637-0xE5D66322.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-182637-0xE5D66322.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Finance",
+      "date": "2026-08-01T18:26:37Z",
+      "target": "0xE5D66322db2922dA6f8cc878d56430b1585f351F",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 17113 holders \u2014 reasonably distributed; Trading 121+ days withou",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-182637-0xE5D66322.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-181110-0x60dE974a.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Very few holders (31) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-003357-0xC28475DE.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-000357-0x65c0E98a.md",
-      "title": "Investigation \u2014 SRC",
-      "symbol": "SRC",
-      "name": "SOURCE",
-      "date": "2026-08-01T00:03:57Z",
-      "target": "0x65c0E98a4fE050e64E16754119C76EEbd4E660cc",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +4743% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-prod",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-000357-0x65c0E98a.md"
     }
   ],
   "reports": [
