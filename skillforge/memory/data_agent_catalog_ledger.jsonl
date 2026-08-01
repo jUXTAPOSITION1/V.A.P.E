@@ -413,3 +413,4 @@
 {"ts": "2026-08-01T06:33:47.403468Z", "target": "optimism", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T07:03:43.674799Z", "target": "bybit", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T07:34:03.207485Z", "target": "0xCFB287565201763743A77c556dcA44A673d0a777", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 54}
+{"ts": "2026-08-01T08:04:33.474132Z", "target": "0x65c0E98a4fE050e64E16754119C76EEbd4E660cc", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}

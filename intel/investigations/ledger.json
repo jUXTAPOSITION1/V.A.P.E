@@ -2630,6 +2630,25 @@
     "symbol": "CATE",
     "times_investigated": 1
   },
+  "1:0xa04bdb1f11413a84d1f6c1d4d4fed0208f2e68bf": {
+    "address": "0xA04bDB1f11413a84D1F6C1d4d4FeD0208F2e68bF",
+    "chain": "1",
+    "creator_address": "0x8d2f28785293796f8f46feceaea644b974002a78",
+    "first_investigated": "2026-08-01T08:04:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-080430-0xA04bDB1f.md",
+        "score": 17,
+        "ts": "2026-08-01T08:04:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T08:04:30Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "CHEESE",
+    "times_investigated": 1
+  },
   "1:0xa0df17b5ac76ababa36e1450e2cbcd18a620c845": {
     "address": "0xa0Df17B5aC76ABaBA36E1450E2cbCd18A620C845",
     "chain": "1",

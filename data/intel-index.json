@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T07:49:19Z",
+  "generated": "2026-08-01T08:04:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 135,
-    "investigations": 609,
+    "investigations": 610,
     "news": 40,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-074914-0x30277ce8.md",
+      "file": "investigation-20260801-080430-0xA04bDB1f.md",
       "title": "Investigation \u2014 CHEESE",
       "symbol": "CHEESE",
-      "name": "Cheese Head",
-      "date": "2026-08-01T07:49:14Z",
-      "target": "0x30277ce8c9a46E679E0263677318F692f1fEdE23",
+      "name": "Cheese",
+      "date": "2026-08-01T08:04:30Z",
+      "target": "0xA04bDB1f11413a84D1F6C1d4d4FeD0208F2e68bF",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,620 (rug/illiquid); [-10] Low liquidity $4,620. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 488+ days without a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-074914-0x30277ce8.md"
+      "score": "17",
+      "summary": "Risk factors: [-8] Low holder count (94); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,793 (rug/illiquid); [-10] Low liquidity $8,793; [-10] No known third-party a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-080430-0xA04bDB1f.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-080430-0xA04bDB1f.md",
+      "title": "Investigation \u2014 CHEESE",
+      "symbol": "CHEESE",
+      "name": "Cheese",
+      "date": "2026-08-01T08:04:30Z",
+      "target": "0xA04bDB1f11413a84D1F6C1d4d4FeD0208F2e68bF",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Low holder count (94); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,793 (rug/illiquid); [-10] Low liquidity $8,793; [-10] No known third-party a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-080430-0xA04bDB1f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-074914-0x30277ce8.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-011116-0x53e7C841.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-005604-0xD6B7e95d.md",
-      "title": "Investigation \u2014 SNP500",
-      "symbol": "SNP500",
-      "name": "Sock And Pussy 500",
-      "date": "2026-07-31T00:56:04Z",
-      "target": "0xD6B7e95d90904Ec69F40092DD4f55A60F0176304",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,665 (rug/illiquid); [-10] Low liquidity $2,665; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-005604-0xD6B7e95d.md"
     }
   ],
   "reports": [
