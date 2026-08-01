@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-01T14:07:18Z — 126 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-01T14:22:27Z — 127 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| WMTX | Base | `0x3e31966d4f81C72D2a55310A6365A56A4393E98D` | 58/100 | 1 | 2026-08-01T14:22:27Z |
 | WINR | Arbitrum | `0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E` | 50/100 | 1 | 2026-08-01T14:07:18Z |
 | CTM | Ethereum | `0xc8EF4398664b2eeD5ee560544f659083d98A3888` | 65/100 | 1 | 2026-08-01T13:52:03Z |
 | OFC | Base | `0x752C5a95d202972E124390F30a50154409d3c858` | 52/100 | 1 | 2026-08-01T13:05:40Z |

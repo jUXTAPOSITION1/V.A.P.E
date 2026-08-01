@@ -1051,3 +1051,5 @@
 | 2026-08-01 | auto | 0xc8EF4398664b2eeD5ee560544f659083d98A3888 (CTM) | deep_investigation | CAUTION (65/100) | Very low liquidity $9,414 (rug/illiquid) | +7d |
 
 | 2026-08-01 | auto | 0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E (WINR) | deep_investigation | CAUTION (50/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0x3e31966d4f81C72D2a55310A6365A56A4393E98D (WMTX) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |

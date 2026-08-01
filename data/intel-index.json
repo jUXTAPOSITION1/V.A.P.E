@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T14:07:22Z",
+  "generated": "2026-08-01T14:22:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 486,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 625,
+    "investigations": 626,
     "news": 43,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-140718-0xD77B108d.md",
-      "title": "Investigation \u2014 WINR",
-      "symbol": "WINR",
-      "name": "WINR",
-      "date": "2026-08-01T14:07:18Z",
-      "target": "0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E",
-      "chain": "42161 (Arbitrum)",
+      "file": "investigation-20260801-142227-0x3e31966d.md",
+      "title": "Investigation \u2014 WMTX",
+      "symbol": "WMTX",
+      "name": "WorldMobileToken",
+      "date": "2026-08-01T14:22:27Z",
+      "target": "0x3e31966d4f81C72D2a55310A6365A56A4393E98D",
+      "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 70% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive ev",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-140718-0xD77B108d.md"
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10145 holders \u2014 reasonably distributed; Custom verified source (not a mass",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-142227-0x3e31966d.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-142227-0x3e31966d.md",
+      "title": "Investigation \u2014 WMTX",
+      "symbol": "WMTX",
+      "name": "WorldMobileToken",
+      "date": "2026-08-01T14:22:27Z",
+      "target": "0x3e31966d4f81C72D2a55310A6365A56A4393E98D",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "58",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10145 holders \u2014 reasonably distributed; Custom verified source (not a mass",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-142227-0x3e31966d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-140718-0xD77B108d.md",
@@ -594,20 +608,6 @@
       "score": "35",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,978 (rug/illiquid); [-10] Low liquidity $1,978; [-15] Contract source UNVERIFIED. Positive evidence: 740 holders \u2014 reasonably distributed; Trading 550+ days without a known incident in th",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-153056-0x63dc3cA0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-151545-0xba0Dda87.md",
-      "title": "Investigation \u2014 OX",
-      "symbol": "OX",
-      "name": "OX Coin",
-      "date": "2026-07-31T15:15:45Z",
-      "target": "0xba0Dda8762C24dA9487f5FA026a9B64b695A07Ea",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-10] Owner not renounced (0x4f9f7f28be01de1ffb24c00b00744bb3cb49b9ce) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 102% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $66 (rug/illiquid); [-10] Low liquidity $66; [-15] Contract source UNVERIFIED. Positi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
     }
   ],
   "reports": [
@@ -2097,7 +2097,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49395187",
+      "version": "49402097",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -2107,7 +2107,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.27 eth_dom 10.01 mcap_chg_24h -1.09",
+      "version": "btc_dom 56.26 eth_dom 10.03 mcap_chg_24h 0.41",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -2127,7 +2127,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x4678dcf4cfcf Outlier 506306.0 from 0x2b59ebe1 to 0x833589fc",
+      "version": "0xc14fbbfd678c Outlier 1598.18 from 0x2b59ebe1 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

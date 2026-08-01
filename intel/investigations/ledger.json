@@ -7276,6 +7276,25 @@
     "symbol": "NTFS",
     "times_investigated": 1
   },
+  "8453:0x3e31966d4f81c72d2a55310a6365a56a4393e98d": {
+    "address": "0x3e31966d4f81C72D2a55310A6365A56A4393E98D",
+    "chain": "8453",
+    "creator_address": "0xF4E55757CaE99b8Be73F345b7353C34f2c5dc161",
+    "first_investigated": "2026-08-01T14:22:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-142227-0x3e31966d.md",
+        "score": 58,
+        "ts": "2026-08-01T14:22:27Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T14:22:27Z",
+    "last_score": 58,
+    "last_verdict": "CAUTION",
+    "symbol": "WMTX",
+    "times_investigated": 1
+  },
   "8453:0x3ecced5b416e58664f04a39dd18935eb71d33b15": {
     "address": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
     "chain": "8453",
