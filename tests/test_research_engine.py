@@ -112,6 +112,31 @@ class TestGenerateQueries:
             result = re_engine.generate_queries("Foo", "threat_analysis", max_queries=2)
         assert len(result["queries"]) == 2
 
+    def test_refinement_hint_is_included_in_the_prompt(self):
+        # Multi-round iteration (layered_research) feeds a thin first
+        # round's own follow_up_strategy back in here as refinement_hint —
+        # the LLM must actually see it, not just accept it silently.
+        captured = {}
+
+        def fake_ask(system, user, **kwargs):
+            captured["user"] = user
+            return (json.dumps({"queries": [{"q": "q1", "priority": 5}]}), "oci_grok")
+
+        with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=fake_ask):
+            re_engine.generate_queries("Foo", "general", refinement_hint="try official announcements next")
+        assert "try official announcements next" in captured["user"]
+
+    def test_no_refinement_hint_omits_the_extra_prompt_section(self):
+        captured = {}
+
+        def fake_ask(system, user, **kwargs):
+            captured["user"] = user
+            return (json.dumps({"queries": [{"q": "q1", "priority": 5}]}), "oci_grok")
+
+        with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=fake_ask):
+            re_engine.generate_queries("Foo", "general")
+        assert "prior research round" not in captured["user"]
+
 
 # ── credibility tiering ──────────────────────────────────────────────────
 def test_domain_extraction_strips_www():
@@ -175,6 +200,45 @@ class TestBroadDiscovery:
             result = re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call)
         assert result["prioritized_urls"] == ["https://rekt.news/r"]
         assert calls["n"] == 2
+
+    def test_excludes_urls_already_in_an_externally_supplied_seen_urls_set(self):
+        # layered_research() shares one seen_urls set across rounds so a
+        # second round's findings are genuinely new, not a repeat.
+        with mock.patch("agents.intel_common.web_search_snippets",
+                         return_value={"provider": "tavily", "results": [
+                             {"url": "https://rekt.news/a", "title": "t", "snippet": "s"}]}):
+            result = re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call,
+                                                seen_urls={"https://rekt.news/a"})
+        assert result["findings"] == []
+        assert result["prioritized_urls"] == []
+
+    def test_mutates_the_given_seen_urls_set_with_newly_found_urls(self):
+        seen = set()
+        with mock.patch("agents.intel_common.web_search_snippets",
+                         return_value={"provider": "tavily", "results": [
+                             {"url": "https://rekt.news/a", "title": "t", "snippet": "s"}]}):
+            re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call, seen_urls=seen)
+        assert "https://rekt.news/a" in seen
+
+    def test_passes_refinement_hint_to_a_query_call_that_accepts_it(self):
+        captured = {}
+
+        def query_call(topic, task_type, known_facts, max_queries, refinement_hint=None):
+            captured["hint"] = refinement_hint
+            return {"queries": [{"q": "q1", "priority": 5}], "follow_up_strategy": ""}
+
+        with mock.patch("agents.intel_common.web_search_snippets", return_value={"provider": None, "results": []}):
+            re_engine.broad_discovery("Foo", "general", query_call=query_call, refinement_hint="widen scope")
+        assert captured["hint"] == "widen scope"
+
+    def test_omits_refinement_hint_for_a_fixed_arity_query_call(self):
+        # A caller-supplied query_call from before refinement_hint existed
+        # (like this class's own _fake_query_call) must not blow up with a
+        # TypeError just because layered_research() now offers a hint.
+        with mock.patch("agents.intel_common.web_search_snippets", return_value={"provider": None, "results": []}):
+            result = re_engine.broad_discovery("Foo", "general", query_call=self._fake_query_call,
+                                                refinement_hint="widen scope")
+        assert result["findings"] == []  # no exception raised
 
 
 # ── deep_extract ─────────────────────────────────────────────────────────
@@ -251,6 +315,78 @@ class TestLayeredResearch:
         with mock.patch("agents.research_engine.broad_discovery", return_value=discovery):
             re_engine.layered_research("Foo", max_deep_urls=2, sourcer=fake_sourcer)
         assert fake_sourcer.fetch_page.call_count == 2
+
+
+# ── layered_research multi-round iteration ──────────────────────────────
+class TestLayeredResearchMultiRound:
+    def _discovery(self, url, follow_up_strategy=""):
+        return {
+            "topic": "Foo", "task_type": "general",
+            "findings": [{"url": url, "credibility": "unclassified", "title": "t", "snippet": "s"}],
+            "prioritized_urls": [url],
+            "log": {"queries": [{"q": "q1", "rationale": "", "provider": "tavily", "hit_count": 1}],
+                    "follow_up_strategy": follow_up_strategy, "unique_sources_found": 1},
+        }
+
+    def test_thin_first_round_triggers_a_second_round_with_the_refinement_hint(self):
+        round1 = self._discovery("https://a.com/1", follow_up_strategy="try official announcements")
+        round2 = self._discovery("https://b.com/2")
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.side_effect = lambda url: {
+            "url": url, "domain": "x", "provider": "firecrawl", "content": "c", "entities": []}
+        with mock.patch("agents.research_engine.broad_discovery", side_effect=[round1, round2]) as m_bd:
+            result = re_engine.layered_research("Foo", sourcer=fake_sourcer)
+        assert m_bd.call_count == 2
+        _, kwargs = m_bd.call_args_list[1]
+        assert kwargs["refinement_hint"] == "try official announcements"
+        assert len(result["deep_extracts"]) == 2
+        assert result["log"]["rounds_run"] == 2
+        assert result["log"]["deep_extracted_count"] == 2
+        fake_sourcer.save_seen.assert_called_once()
+
+    def test_stops_after_one_round_once_the_target_is_already_met(self):
+        discovery = {
+            "topic": "Foo", "task_type": "general",
+            "findings": [{"url": f"https://a.com/{i}", "credibility": "unclassified",
+                          "title": "t", "snippet": "s"} for i in range(3)],
+            "prioritized_urls": [f"https://a.com/{i}" for i in range(3)],
+            "log": {"queries": [], "follow_up_strategy": "some hint", "unique_sources_found": 3},
+        }
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.side_effect = lambda url: {
+            "url": url, "domain": "x", "provider": "firecrawl", "content": "c", "entities": []}
+        with mock.patch("agents.research_engine.broad_discovery", return_value=discovery) as m_bd:
+            result = re_engine.layered_research("Foo", sourcer=fake_sourcer)
+        m_bd.assert_called_once()  # 3 extracts already hits MIN_DEEP_EXTRACTS_TARGET, no 2nd round
+        assert len(result["deep_extracts"]) == 3
+
+    def test_stops_early_when_a_round_finds_nothing_new_even_with_rounds_left(self):
+        # Same discovery returned every round (e.g. a genuinely thin topic
+        # where refined queries still land on the same sources) must not
+        # burn through every remaining round doing repeat work.
+        discovery = self._discovery("https://a.com/1", follow_up_strategy="widen scope")
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.side_effect = lambda url: {
+            "url": url, "domain": "x", "provider": "firecrawl", "content": "c", "entities": []}
+        with mock.patch("agents.research_engine.broad_discovery", return_value=discovery) as m_bd:
+            result = re_engine.layered_research("Foo", sourcer=fake_sourcer, max_rounds=4)
+        assert m_bd.call_count == 2  # round 2 found nothing new -> stop, don't try rounds 3/4
+        assert len(result["deep_extracts"]) == 1
+
+    def test_never_exceeds_max_rounds(self):
+        # Every round finds exactly one NEW url (so the "zero new findings"
+        # early-stop never fires) but never reaches MIN_DEEP_EXTRACTS_TARGET
+        # -- max_rounds itself must still be the thing that stops it.
+        counter = iter(range(1, 100))
+        fake_sourcer = mock.Mock()
+        fake_sourcer.fetch_page.side_effect = lambda url: {
+            "url": url, "domain": "x", "provider": "firecrawl", "content": "c", "entities": []}
+        with mock.patch("agents.research_engine.broad_discovery",
+                         side_effect=lambda *a, **kw: self._discovery(f"https://a.com/{next(counter)}",
+                                                                       follow_up_strategy="keep trying")) as m_bd:
+            result = re_engine.layered_research("Foo", sourcer=fake_sourcer, max_rounds=2)
+        assert m_bd.call_count == 2
+        assert len(result["deep_extracts"]) == 2
 
 
 # ── _evidence_block ──────────────────────────────────────────────────────
