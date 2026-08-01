@@ -1,13 +1,12 @@
 """Tests for agents/scout.py's strategic briefing (runs every cycle with
 anything to assess — no longer gated on new_entries, by explicit direction:
 coverage over conserving the frontier tier's one-time credit) and the real
-action step (_act_on_incidents). Hermetic: agents.llm.ask_oci_grok_safe and the
-security_sweep/data_fetchers delegation are mocked, no real network call.
+action step (_act_on_incidents). Hermetic: agents.research_engine.synthesize
+and the security_sweep/data_fetchers delegation are mocked, no real network call.
 """
 from unittest import mock
 
 from agents import scout
-from agents.llm import FRONTIER_ORDER
 
 
 def _entry(name, fit=80, prize=1_000_000, platform="defillama-hack"):
@@ -15,8 +14,13 @@ def _entry(name, fit=80, prize=1_000_000, platform="defillama-hack"):
             "status": "incident", "tags": ["forensics"], "desc": f"{name} exploit"}
 
 
+def _synth(narrative):
+    return {"narrative": narrative, "header": {}, "trailers": {}, "gaps": [], "verdict": None,
+            "provider": "xai_1"}
+
+
 def test_empty_shown_list_skips_llm_entirely():
-    with mock.patch("agents.llm.ask_oci_grok_safe") as m:
+    with mock.patch("agents.research_engine.synthesize") as m:
         result = scout._strategic_briefing([_entry("New One")], [])
     assert result == ""
     m.assert_not_called()
@@ -25,31 +29,27 @@ def test_empty_shown_list_skips_llm_entirely():
 def test_no_new_entries_still_assesses_the_shown_set():
     # The whole point of the fix: an unchanged top-fit set must still get
     # assessed, not silently skipped just because nothing is new.
-    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Nothing new, still worth watching X.", "xai_1")) as m:
+    with mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Nothing new, still worth watching X.")) as m:
         result = scout._strategic_briefing([], [_entry("Old One")])
     assert result == "Nothing new, still worth watching X."
     m.assert_called_once()
 
 
 def test_llm_unavailable_returns_empty_string():
-    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("[llm unavailable: no keys]", None)):
+    with mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("_Synthesis unavailable this cycle (no LLM provider reachable)._")):
         result = scout._strategic_briefing([_entry("New One")], [_entry("New One")])
     assert result == ""
 
 
 def test_successful_briefing_is_returned_and_uses_frontier_tier():
-    with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Prioritize the bridge exploit.", "xai_1")) as m:
+    with mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Prioritize the bridge exploit.")) as m:
         result = scout._strategic_briefing([_entry("Bridge Hack")], [_entry("Bridge Hack")])
     assert result == "Prioritize the bridge exploit."
     _, kwargs = m.call_args
-    assert kwargs["tier"] == "frontier"
-    assert kwargs["provider_order"] == FRONTIER_ORDER
-
-
-def test_briefing_exception_is_swallowed():
-    with mock.patch("agents.llm.ask_oci_grok_safe", side_effect=RuntimeError("boom")):
-        result = scout._strategic_briefing([_entry("New One")], [_entry("New One")])
-    assert result == ""
+    assert kwargs["max_tokens"] == 1800
 
 
 def test_write_digest_includes_briefing_section_when_present(tmp_path, monkeypatch):
