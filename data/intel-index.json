@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T16:01:58Z",
+  "generated": "2026-08-01T16:09:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 631,
+    "investigations": 632,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-155443-0xAFc1D137.md",
-      "title": "Investigation \u2014 REDWOLF",
-      "symbol": "REDWOLF",
-      "name": "Red Wolf",
-      "date": "2026-08-01T15:54:43Z",
-      "target": "0xAFc1D137a8F0764833d2E74eFb2F0b171BC2cd87",
-      "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-25] Very low liquidity $380 (rug/illiquid); [-10] Low liquidity $380; [-15] Contract source UNVERIFIED. Positive evidence: Ownership renounced; 651 holders \u2014 reasonably distributed; 97% of liquidity is locked \u2014 reduced rug-pull risk; Trading 937+ days without a known incident in this scan.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-155443-0xAFc1D137.md"
+      "file": "investigation-20260801-160954-0x3Bf254aF.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-01T16:09:54Z",
+      "target": "0x3Bf254aF3338C89974b97a67D2E1E6066AA29B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-160954-0x3Bf254aF.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-160954-0x3Bf254aF.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-01T16:09:54Z",
+      "target": "0x3Bf254aF3338C89974b97a67D2E1E6066AA29B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-160954-0x3Bf254aF.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-155443-0xAFc1D137.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-193213-0xA6dbdd59.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-191702-0x93AA70E6.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-07-31T19:17:02Z",
-      "target": "0x93AA70E6a08811F1572DF864417D08C52fB4A84c",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-191702-0x93AA70E6.md"
     }
   ],
   "reports": [
