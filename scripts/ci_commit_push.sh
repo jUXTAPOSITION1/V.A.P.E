@@ -46,6 +46,18 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git config merge.json-state.name "VAPE JSON state merge (newest ts per key wins)"
 git config merge.json-state.driver "python3 '$REPO_ROOT/scripts/git_merge_json_state.py' %O %A %B"
 
+# Registered for data/intel-index.json (see .gitattributes) — a fully
+# regenerated derived snapshot with no incremental state a conflict could
+# ever lose, so the freshest side should just win outright. NOT git's usual
+# "keep ours" idiom (`driver true`): during a `git rebase`, "ours" is the
+# upstream being rebased ONTO and "theirs" is the local commit being replayed
+# — the opposite of a normal merge — so `true` would silently keep origin's
+# STALE copy instead of the one this run just computed. `cp -f %B %A` copies
+# theirs (the local commit) over ours (the upstream), which is what actually
+# keeps the fresh version; verified against a scratch repo before shipping.
+git config merge.keep-fresh.name "keep the freshest side (fully-regenerated derived files)"
+git config merge.keep-fresh.driver "cp -f %B %A"
+
 # checkout@v7 can leave HEAD detached; committing there would strand the work.
 if ! git symbolic-ref -q HEAD >/dev/null; then
   echo "[commit-push] HEAD is detached — reattaching to $BRANCH"

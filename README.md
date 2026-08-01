@@ -11,6 +11,12 @@ on-chain.
 <br/>
 
 [![Bounty Cycle](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/bounty-cycle.yml?style=flat-square&label=Bounty%20Cycle&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/bounty-cycle.yml)
+[![Featured Investigation](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/featured-investigation.yml?style=flat-square&label=Featured%20Investigation&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/featured-investigation.yml)
+[![Intel Sweeps](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/intel-sweeps.yml?style=flat-square&label=Intel%20Sweeps&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/intel-sweeps.yml)
+[![News Intel](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/news-intel.yml?style=flat-square&label=News%20Intel&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/news-intel.yml)
+[![Bounty Radar](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/scout.yml?style=flat-square&label=Bounty%20Radar&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/scout.yml)
+[![Self-Improve](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/self-improve.yml?style=flat-square&label=Self-Improve&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/self-improve.yml)
+[![Reputation](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/reputation.yml?style=flat-square&label=Reputation&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/reputation.yml)
 [![SKILLFORGE Toolcheck](https://img.shields.io/github/actions/workflow/status/jUXTAPOSITION1/V.A.P.E/skillforge-toolcheck.yml?style=flat-square&label=SKILLFORGE%20Toolcheck&logo=github&logoColor=white)](https://github.com/jUXTAPOSITION1/V.A.P.E/actions/workflows/skillforge-toolcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A1A1AA?style=flat-square)](LICENSE)
 
