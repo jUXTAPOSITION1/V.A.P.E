@@ -53,18 +53,22 @@ same "surface, don't override" spirit as agents/critic.py: it verifies the
 rendered report actually contains the sections a given task type requires
 and an explicit gaps statement, logging (never blocking) when it doesn't.
 
-Scope note: this module is deliberately generic and is being adopted one
-real call site at a time rather than rewired everywhere in a single pass —
-agents/hack_agent.py's threat-analysis path is the first, concrete
-integration (matching the exact shallow-output gap documented above).
-agents/investigate.py's _expert_assessment, agents/news_reporter.py, and
-the scheduled sweeps (security_sweep.py etc.) already do real, carefully-
-tuned single-pass grounded synthesis with their own hard-won fixes (see
-their docstrings for the specific search=True/provider-ordering bugs this
-repo has already found and fixed) — migrating each to layered_research() is
-real follow-up work, not something to do blind in one pass without
-verifying each site individually against its own history.
+Adoption status: every real evidence-to-narrative call site in this repo
+(agents/hack_agent.py, agents/investigate.py's _expert_assessment and
+_project_narrative, agents/news_reporter.py, agents/broadcast.py,
+agents/bug_bounty_intel.py, agents/mainnet_patch_check.py, the 5 scheduled
+sweeps, agents/scout.py's strategic briefing) now routes through this
+module's synthesize(), not a bespoke single-pass LLM call.
+
+layered_research() runs up to a small, bounded number of discovery rounds
+(see max_rounds) rather than a single discovery+extract pass — a round
+that comes back thin (few/no deep extracts) triggers one more round using
+the prior round's own follow_up_strategy as a refinement hint, so a
+narrow/misphrased first query set isn't the end of the story. Rounds stop
+as soon as enough evidence is found, the deep-extract cap is hit, a round
+turns up nothing new, or max_rounds is reached — never unbounded.
 """
+import inspect
 import json
 import os
 import re
@@ -79,6 +83,8 @@ from agents import intel_common as ic  # noqa: E402
 
 MAX_QUERIES_DEFAULT = 8
 MAX_DEEP_URLS_DEFAULT = 5
+MAX_ROUNDS_DEFAULT = 2
+MIN_DEEP_EXTRACTS_TARGET = 3
 
 # ── Layer 0: task classification ────────────────────────────────────────────
 # Each task type carries the extra query "lenses" layer 1 asks the LLM to
@@ -160,11 +166,14 @@ _QUERY_SYSTEM = (
 _QUERY_JSON_RE = re.compile(r"\{.*\}", re.S)
 
 
-def _default_queries(topic, task_type, known_facts=None, max_queries=MAX_QUERIES_DEFAULT):
+def _default_queries(topic, task_type, known_facts=None, max_queries=MAX_QUERIES_DEFAULT, refinement_hint=None):
     """Deterministic fallback query set — used whenever the LLM is
     unavailable or returns unparseable output, so layer 1 NEVER produces
     zero queries. Templated directly off the task type's own lenses, so
-    even the fallback path is task-aware, not a single generic search."""
+    even the fallback path is task-aware, not a single generic search.
+    refinement_hint is accepted for call-signature parity with
+    generate_queries() but not used — the deterministic template already
+    covers every lens every time, so there's nothing for a hint to refine."""
     lenses = TASK_TYPES[classify_task(task_type)]["lenses"]
     facts_bit = ""
     if known_facts:
@@ -179,16 +188,19 @@ def _default_queries(topic, task_type, known_facts=None, max_queries=MAX_QUERIES
                                    "layer is reachable for a more targeted set."}
 
 
-def generate_queries(topic, task_type="general", known_facts=None, max_queries=MAX_QUERIES_DEFAULT):
+def generate_queries(topic, task_type="general", known_facts=None, max_queries=MAX_QUERIES_DEFAULT,
+                      refinement_hint=None):
     """Layer 1 step 1: an LLM-planned, diverse set of search queries.
     Never raises; falls back to _default_queries() on any LLM/parse
-    failure so callers always get a usable query set."""
+    failure so callers always get a usable query set. refinement_hint, if
+    given (a prior round's own follow_up_strategy), asks this round to
+    target genuinely different angles rather than repeat the same ground."""
     task_type = classify_task(task_type)
     lenses = TASK_TYPES[task_type]["lenses"]
     try:
         from agents.llm import ask_oci_grok_safe
     except Exception:
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
 
     facts_text = ""
     if known_facts:
@@ -204,25 +216,28 @@ def generate_queries(topic, task_type="general", known_facts=None, max_queries=M
         f"Cover these lenses (adapt wording, don't just restate them as queries):\n"
         + "\n".join(f"- {lens}" for lens in lenses)
         + f"\n\nGenerate {max_queries} queries."
+        + (f"\n\nA prior research round came back thin. Its own assessment of what to try "
+           f"next: {refinement_hint}\nGenerate queries that genuinely test different angles, "
+           f"phrasings, or sources than a first pass would — not near-repeats." if refinement_hint else "")
     )
     try:
         text, _provider = ask_oci_grok_safe(_QUERY_SYSTEM, user, tier="fast", max_tokens=900, temperature=0.4)
     except Exception:
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
     if not text or text.startswith("[llm unavailable"):
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
 
     match = _QUERY_JSON_RE.search(text)
     if not match:
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
     try:
         parsed = json.loads(match.group(0))
     except Exception:
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
 
     raw_queries = parsed.get("queries") if isinstance(parsed, dict) else None
     if not isinstance(raw_queries, list) or not raw_queries:
-        return _default_queries(topic, task_type, known_facts, max_queries)
+        return _default_queries(topic, task_type, known_facts, max_queries, refinement_hint)
 
     queries = []
     for q in raw_queries:
@@ -282,20 +297,45 @@ def _credibility_tier(url):
 _TIER_RANK = {"security_research": 0, "primary_platform": 1, "news": 2, "unclassified": 3, "social_unverified": 4}
 
 
+def _accepts_refinement_hint(fn):
+    """Rule-based check (no try/except probing) for whether a query_call
+    callable declares a refinement_hint parameter (or **kwargs) — lets
+    broad_discovery pass the hint to generate_queries() while staying
+    call-compatible with older/simpler query_call fixtures and callers
+    that only ever declared the original 4-arg shape."""
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return False
+    return "refinement_hint" in params or any(
+        p.kind == inspect.Parameter.VAR_KEYWORD for p in params.values())
+
+
 def broad_discovery(topic, task_type="general", known_facts=None, max_queries=MAX_QUERIES_DEFAULT,
-                     max_results_per_query=5, query_call=None):
+                     max_results_per_query=5, query_call=None, seen_urls=None, refinement_hint=None):
     """Layer 1: generate queries, run them all through the existing
     web_search_snippets plumbing, de-duplicate by URL, and rank by rule-
     based source credibility. Returns a dict with 'findings' (normalized
     search hits), 'prioritized_urls' (deduped, credibility-sorted), and a
     'log' entry recording exactly what was searched (for layer 3's
-    methodology section). Never raises."""
+    methodology section). Never raises.
+
+    seen_urls, if given, is an externally-owned set mutated in place —
+    layered_research() shares one across multiple discovery rounds so a
+    second round's findings are new, not a repeat of the first round's
+    URLs. refinement_hint, if given and the resolved query_call accepts
+    it, asks query generation to target different angles than a prior
+    thin round already tried."""
     task_type = classify_task(task_type)
-    query_plan = (query_call or generate_queries)(topic, task_type, known_facts, max_queries)
+    query_call = query_call or generate_queries
+    if refinement_hint and _accepts_refinement_hint(query_call):
+        query_plan = query_call(topic, task_type, known_facts, max_queries, refinement_hint=refinement_hint)
+    else:
+        query_plan = query_call(topic, task_type, known_facts, max_queries)
     queries = query_plan.get("queries") or []
 
     findings = []
-    seen_urls = set()
+    seen_urls = seen_urls if seen_urls is not None else set()
     queries_run = []
     for q in queries:
         query_text = q["q"]
@@ -350,27 +390,72 @@ def deep_extract(url, sourcer=None):
 
 
 def layered_research(topic, task_type="general", known_facts=None, max_queries=MAX_QUERIES_DEFAULT,
-                      max_deep_urls=MAX_DEEP_URLS_DEFAULT, sourcer=None, query_call=None):
-    """Orchestrates layers 0-2: classify, broad discovery, then deep
-    extraction of the top max_deep_urls credibility-ranked sources. Returns
-    a single research-result dict ready for synthesize(). Never raises —
-    every sub-step already degrades gracefully on its own."""
+                      max_deep_urls=MAX_DEEP_URLS_DEFAULT, sourcer=None, query_call=None,
+                      max_rounds=MAX_ROUNDS_DEFAULT):
+    """Orchestrates layers 0-2: classify, then discovery+extraction for up
+    to max_rounds rounds, then deep extraction of the top max_deep_urls
+    credibility-ranked sources across all rounds combined. Returns a
+    single research-result dict ready for synthesize(). Never raises —
+    every sub-step already degrades gracefully on its own.
+
+    A round that comes back thin (fewer than MIN_DEEP_EXTRACTS_TARGET
+    total deep extracts so far, and the deep-extract cap isn't already
+    hit) triggers one more round, feeding that round's own
+    follow_up_strategy back into generate_queries() as a refinement hint
+    so the retry targets genuinely different angles rather than repeating
+    the same searches. Stops early the moment a round adds zero new deep
+    extracts (repeating rounds on an already-exhausted topic wastes calls
+    without improving the result) or max_rounds is reached."""
     task_type = classify_task(task_type)
-    discovery = broad_discovery(topic, task_type, known_facts, max_queries, query_call=query_call)
 
     from agents.web_sourcer import WebSourcer
     sourcer = sourcer or WebSourcer()
+
+    seen_urls = set()
+    extracted_urls = set()
+    all_findings = []
     deep_extracts = []
-    for url in discovery["prioritized_urls"][:max_deep_urls]:
-        extract = deep_extract(url, sourcer=sourcer)
-        if extract:
-            deep_extracts.append(extract)
+    rounds_log = []
+    follow_up_strategy = ""
+    refinement_hint = None
+
+    for round_num in range(1, max(1, max_rounds) + 1):
+        discovery = broad_discovery(topic, task_type, known_facts, max_queries, query_call=query_call,
+                                     seen_urls=seen_urls, refinement_hint=refinement_hint)
+        all_findings.extend(discovery["findings"])
+        follow_up_strategy = discovery["log"].get("follow_up_strategy", "") or follow_up_strategy
+        rounds_log.append({"round": round_num, **discovery["log"]})
+
+        new_this_round = 0
+        for url in discovery["prioritized_urls"]:
+            if len(deep_extracts) >= max_deep_urls:
+                break
+            if url in extracted_urls:
+                continue
+            extracted_urls.add(url)
+            extract = deep_extract(url, sourcer=sourcer)
+            if extract:
+                deep_extracts.append(extract)
+                new_this_round += 1
+
+        if len(deep_extracts) >= max_deep_urls or len(deep_extracts) >= MIN_DEEP_EXTRACTS_TARGET:
+            break
+        if round_num >= max_rounds:
+            break
+        if new_this_round == 0 and round_num > 1:
+            break
+        refinement_hint = follow_up_strategy or None
+
     sourcer.save_seen()
 
     return {
         "topic": topic, "task_type": task_type, "known_facts": known_facts or {},
-        "findings": discovery["findings"], "deep_extracts": deep_extracts,
-        "log": {**discovery["log"], "deep_extracted_count": len(deep_extracts),
+        "findings": all_findings, "deep_extracts": deep_extracts,
+        "log": {"queries": [q for r in rounds_log for q in r.get("queries", [])],
+                "follow_up_strategy": follow_up_strategy,
+                "unique_sources_found": len(all_findings),
+                "rounds_run": len(rounds_log), "rounds": rounds_log,
+                "deep_extracted_count": len(deep_extracts),
                 "deep_extracted_urls": [d["url"] for d in deep_extracts]},
     }
 
@@ -712,7 +797,9 @@ def render_methodology_log(result):
             # the Markdown link early.
             lines.append(f"- <{u}> — `{_credibility_tier(u)}`")
         lines.append("")
-    lines.append(f"**Unique sources found this round:** {log.get('unique_sources_found', 0)}")
+    rounds_run = log.get("rounds_run", 1)
+    round_word = f"across {rounds_run} rounds" if rounds_run and rounds_run > 1 else "this round"
+    lines.append(f"**Unique sources found {round_word}:** {log.get('unique_sources_found', 0)}")
     return "\n".join(lines) + "\n"
 
 
