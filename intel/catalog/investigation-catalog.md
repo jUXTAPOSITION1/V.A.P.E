@@ -1087,3 +1087,5 @@
 | 2026-08-01 | auto | 0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD (OVPP) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-08-01 | auto | 0xCD743f1a54f4b665286864c4867A7216805fe09A (IDOL) | deep_investigation | REJECT (40/100) | Owner not renounced (0xc42e9af3f22da50d741d560dfdce4d338e3a6e94) — can still act | +7d |
+
+| 2026-08-01 | auto | 0xC4e9A27D5a1C6857823fBf8dCCc607b8d7E32b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

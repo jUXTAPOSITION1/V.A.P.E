@@ -111,3 +111,4 @@
 {"ts": "2026-08-01T18:56:36.601795Z", "address": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-08-01T19:11:35.218762Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-01T19:57:01.332371Z", "address": "0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E", "chain": "42161", "symbol": "WINR", "name": "WINR", "source": "evm", "offering": "liquidity_check"}
+{"ts": "2026-08-01T20:42:31.365687Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "liquidity_check"}

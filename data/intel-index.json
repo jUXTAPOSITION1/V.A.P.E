@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T20:27:31Z",
+  "generated": "2026-08-01T20:42:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 492,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 643,
+    "investigations": 644,
     "news": 45,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-202725-0xCD743f1a.md",
-      "title": "Investigation \u2014 IDOL",
-      "symbol": "IDOL",
-      "name": "IDOL Land Coin",
-      "date": "2026-08-01T20:27:25Z",
-      "target": "0xCD743f1a54f4b665286864c4867A7216805fe09A",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260801-204228-0xC4e9A27D.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-08-01T20:42:28Z",
+      "target": "0xC4e9A27D5a1C6857823fBf8dCCc607b8d7E32b07",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-10] Owner not renounced (0xc42e9af3f22da50d741d560dfdce4d338e3a6e94) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,118 (rug/illiquid); [-10] Low liquidity $6,118. Positive evidence: 81% of liquidity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-202725-0xCD743f1a.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-204228-0xC4e9A27D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-204228-0xC4e9A27D.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-08-01T20:42:28Z",
+      "target": "0xC4e9A27D5a1C6857823fBf8dCCc607b8d7E32b07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-204228-0xC4e9A27D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-202725-0xCD743f1a.md",
@@ -594,20 +608,6 @@
       "score": "57",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Violent 24h move +13145% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership r",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-021931-0x330990Da.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-010432-0x3C5Cd672.md",
-      "title": "Investigation \u2014 BSW",
-      "symbol": "BSW",
-      "name": "Lydia",
-      "date": "2026-08-01T01:04:32Z",
-      "target": "0x3C5Cd672b204bA0FC48E93B98C0922920A87912D",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-5] Pair 21.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or veri",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-010432-0x3C5Cd672.md"
     }
   ],
   "reports": [
