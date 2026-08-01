@@ -1035,3 +1035,5 @@
 | 2026-08-01 | auto | 0x248918D672E5523F9d64C0f3D4511513D7397777 (ASTEROID) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-01 | auto | 0x020D6c73897651988438E1fED554964aBFfa6666 (ASTEROID) | deep_investigation | CAUTION (75/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-08-01 | auto | 0x8FD3437A13B298dD2e98Db902c56970a9d3C4985 (ASTEROID) | deep_investigation | REJECT (45/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

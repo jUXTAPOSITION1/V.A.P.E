@@ -5274,6 +5274,25 @@
     "symbol": "Subject 3",
     "times_investigated": 1
   },
+  "56:0x8fd3437a13b298dd2e98db902c56970a9d3c4985": {
+    "address": "0x8FD3437A13B298dD2e98Db902c56970a9d3C4985",
+    "chain": "56",
+    "creator_address": "0x5f2d7b79d8cdd86df4927d379bd29d602b59467c",
+    "first_investigated": "2026-08-01T12:05:15Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-120515-0x8FD3437A.md",
+        "score": 45,
+        "ts": "2026-08-01T12:05:15Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T12:05:15Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "56:0x91bc9da0fdcd8a6fba21c773d8ba082e3c57a090": {
     "address": "0x91BC9DA0fDcD8a6fba21C773d8bA082E3C57a090",
     "chain": "56",
