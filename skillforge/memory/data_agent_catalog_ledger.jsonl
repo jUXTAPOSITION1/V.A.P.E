@@ -420,3 +420,4 @@
 {"ts": "2026-08-01T10:04:16.197867Z", "target": "Optimism", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T10:35:22.916707Z", "target": "Base", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T11:05:34.675828Z", "target": "Optimism", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-01T11:50:19.126847Z", "target": "benqi-lending", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
