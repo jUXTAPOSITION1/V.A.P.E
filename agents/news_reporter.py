@@ -34,17 +34,19 @@ the drafting prompt's own instructions missed, not just restating them.
 Images, in priority order (explicit direction, 2026-07-28 -- revised same
 day to drop the real-photo tier entirely: republishing another outlet's own
 photo of a story it broke is a real copyright exposure VAPE shouldn't carry,
-regardless of technical feasibility):
-  1. AI-generated, described by a fresh, story-specific prompt
-     (_image_prompt(), grounded in the real headline/dek/body, not a
+regardless of technical feasibility; revised again 2026-08-01, see below):
+  1. AI-generated, described by a fresh, director-style, story-specific
+     prompt (_image_prompt(), grounded in the real headline/dek/body, not a
      generic template) and tried against two independent models in order:
-     Google's Gemini image model first (agents/llm.py::ask_gemini_image(),
-     a free attempt -- VAPE's own Vertex AI project, no separate per-image
-     billing beyond what's provisioned there once enabled), then xAI's Grok
-     Image (agents/llm.py::ask_xai_image()) as the model that actually works
-     today, since Gemini's free tier can't yet serve this specific model
-     (confirmed real HTTP 429 "quota exceeded ... limit: 0" from a live
-     dispatch).
+     xAI's Grok Imagine Image first (agents/llm.py::ask_xai_image(),
+     grok-imagine-image -- the model that actually works today),
+     then Google's Gemini image model (agents/llm.py::ask_gemini_image()) as
+     a fallback. Reordered 2026-08-01: confirmed via a live dispatch's logs
+     that BOTH of Gemini's own paths are currently dead ends on every call
+     (Vertex Imagen 404s pending a Model Garden access grant; the Gemini
+     Developer API's image model 429s on its $0 free tier) -- Gemini stays
+     wired as a no-cost-to-remove fallback that resumes working the moment
+     either block clears.
   2. VAPE's own brand mark as the always-available fallback if both AI
      models are unavailable or fail this cycle -- no source-photo tier.
 Every AI-generated image gets VAPE Wire's V-mark + wordmark stamped on via
@@ -194,36 +196,44 @@ def _editorial_pass(grounding, draft_body):
 
 
 def _image_prompt(headline, dek, body, topic_label):
-    """One vivid, narrative text-to-image prompt for this specific story --
-    not a generic per-topic template. Follows Google Cloud's own "Ultimate
-    prompting guide for Nano Banana" formula (Subject + Action + Location/
-    context + Composition + Style, full descriptive sentences rather than a
-    keyword list) and asks for real photojournalism/editorial-illustration
-    style grounded in the story's actual subject matter -- a coin macro shot,
-    a trading floor, a courthouse, a data center, whatever the story is
-    actually about -- never a fabricated likeness of a real named person
-    (defamation/deepfake risk) and never any rendered text or logos (VAPE's
-    own wordmark gets stamped on separately by brand_image(); a third
-    party's brand/trademark has no business appearing in VAPE's own
-    illustration). Returns a plain-text prompt string, or None if the LLM
-    call fails -- callers must treat that as "skip AI generation this
-    story," never invent a placeholder prompt."""
+    """One vivid, director-style text-to-image prompt for this specific
+    story -- not a generic per-topic template. Follows the formula xAI's
+    Grok Imagine responds best to (confirmed 2026-08-01, matches Google
+    Cloud's own "Ultimate prompting guide for Nano Banana" too): Subject +
+    Scene/Action + Setting + Mood/Atmosphere + Lighting + Style + Camera/
+    Composition, written as flowing natural-language sentences (never a
+    keyword list), 40-80 words, grounded in the story's actual subject
+    matter -- a coin macro shot, a trading floor, a courthouse, a data
+    center, whatever the story is actually about -- never a fabricated
+    likeness of a real named person (defamation/deepfake risk) and never
+    any rendered text or logos (VAPE's own wordmark gets stamped on
+    separately by brand_image(); a third party's brand/trademark has no
+    business appearing in VAPE's own illustration). Returns a plain-text
+    prompt string, or None if the LLM call fails -- callers must treat that
+    as "skip AI generation this story," never invent a placeholder prompt."""
     instructions = (
-        "Write ONE image-generation prompt for the photo that should accompany this news story. "
-        "Follow this exact structure as flowing descriptive sentences (not a keyword list): what the "
-        "photo actually shows (a concrete, real-world subject grounded in the story below -- e.g. a "
-        "close-up of physical coins/currency, a trading floor, server racks, a courthouse exterior, a "
-        "city skyline, hands at a keyboard -- never an abstract 'crypto' cliche unless the story truly "
-        "has no more concrete subject), what's happening in the frame, where it's set, how it's "
-        "composed (shot type, angle), and a photographic/editorial-illustration style (lighting, lens, "
-        "color grading). Do NOT include any text, words, numbers, logos, or brand marks anywhere in "
-        "the image -- describe a clean photographic scene only. Do NOT depict any specific named real "
-        "person's likeness. Output ONLY the prompt itself, one paragraph, no preamble, no quotation "
-        "marks, no commentary.\n\n"
+        "Write ONE image-generation prompt for the photo that should accompany this news story, "
+        "40-80 words, as flowing natural-language sentences -- never a keyword list. Cover, in order: "
+        "SUBJECT (a concrete, real-world subject grounded in the story below -- e.g. a close-up of "
+        "physical coins/currency, a trading floor, server racks, a courthouse exterior, a city skyline, "
+        "hands at a keyboard -- never an abstract 'crypto' cliche unless the story truly has no more "
+        "concrete subject; lead with the subject, the first words carry the most weight); SCENE/ACTION "
+        "(what's happening in the frame); SETTING (where); MOOD/ATMOSPHERE (grounded in the story's real "
+        "stakes -- for security/exploit/hack stories lean into a tense, high-tech, slightly noir "
+        "atmosphere rather than flat stock photography); LIGHTING (be specific -- e.g. dramatic side "
+        "lighting, cold blue monitor glow, golden hour, harsh overheads); STYLE (photorealistic or "
+        "cinematic-documentary, suitable for a professional news report); CAMERA/COMPOSITION (shot type, "
+        "angle, lens feel -- e.g. wide establishing shot, shallow depth of field, 35mm lens look). Avoid "
+        "empty filler words like 'stunning', 'beautiful', 'high quality', or 'detailed' -- earn the "
+        "impression through concrete specifics instead. Do NOT include any text, words, numbers, logos, "
+        "or brand marks anywhere in the image -- describe a clean photographic scene only. Do NOT "
+        "depict any specific named real person's likeness. Output ONLY the prompt itself, one "
+        "paragraph, no preamble, no quotation marks, no commentary.\n\n"
         f"HEADLINE: {headline}\nDEK: {dek}\nBEAT: {topic_label}\n\nSTORY BODY:\n{body[:1500]}"
     )
     prompt = ic.grok_analysis(
-        "photo editor at VAPE Wire choosing today's lead image",
+        "director-level visual prompt engineer for VAPE Wire, specializing in Grok Imagine "
+        "photorealistic news imagery",
         f"{headline}\n{dek}", instructions=instructions, max_tokens=300, temperature=0.7,
     )
     if _is_llm_unavailable(prompt) or not prompt.strip():
@@ -234,24 +244,36 @@ def _image_prompt(headline, dek, body, topic_label):
 def _generate_ai_image(headline, dek, body, topic_label, slug):
     """Tier 1 of the image chain (see module docstring): one fresh prompt,
     grounded in this specific story, tried against two independent image
-    models in order -- Google's Gemini image model first (ask_gemini_image()
-    -- VAPE's own Vertex AI project, no separate per-image billing beyond
-    what's already provisioned there once enabled), then xAI's Grok Image
-    (ask_xai_image()) as a working fallback while Gemini's free tier can't
-    yet serve this specific model (confirmed real HTTP 429 "quota exceeded
-    ... limit: 0" from a live dispatch). Returns the branded site-relative
-    path on success, or None if the prompt step fails or both models do --
-    callers fall through to the real-photo tier exactly as if this
-    function didn't exist."""
+    models in order -- xAI's Grok Image (ask_xai_image()) first, then
+    Google's Gemini image model (ask_gemini_image()) as a fallback.
+
+    Promoted xAI to primary 2026-08-01: confirmed via a real news-intel.yml
+    run's logs that BOTH of Gemini's own paths are currently dead ends on
+    every single call -- Vertex Imagen 404s ("Publisher model ... was not
+    found", a Model Garden access grant Google's console hasn't approved
+    yet) and the Gemini Developer API's image model 429s ("quota exceeded
+    ... limit: 0", its free tier). Trying xAI first means real images ship
+    immediately instead of two guaranteed-dead round trips first; Gemini
+    stays wired as a fallback that springs back to life for free the
+    moment either Google-side block clears, no code change needed.
+
+    Returns the branded site-relative path on success, or None if the
+    prompt step fails or both models do -- callers fall through to the
+    real-photo tier exactly as if this function didn't exist."""
     prompt = _image_prompt(headline, dek, body, topic_label)
     if not prompt:
         return None
+    image_url = llm.ask_xai_image(prompt)
+    if image_url:
+        branded = nc.brand_image(image_url, slug)
+        if branded:
+            return branded
+        # brand_image() itself failed (URL fetch/composite error) -- fall
+        # through to Gemini rather than giving up on a real xAI image just
+        # because the branding step choked on it.
     image_bytes = llm.ask_gemini_image(prompt)
     if image_bytes:
         return nc.brand_image(image_bytes, slug)
-    image_url = llm.ask_xai_image(prompt)
-    if image_url:
-        return nc.brand_image(image_url, slug)
     return None
 
 

@@ -105,11 +105,30 @@ def get_base_tvl_and_protocols(top_n=10):
     if not base:
         return {"error": "Base chain not found in DefiLlama"}
     tvl_usd = base.get("tvl")
+    change_1d, change_7d = base.get("change_1d"), base.get("change_7d")
+    needs_fallback_1d, needs_fallback_7d = change_1d is None, change_7d is None
+    if needs_fallback_1d or needs_fallback_7d:
+        # /v2/chains has stopped populating change_1d/change_7d for Base —
+        # fall back to the historical chain-TVL series (still reliable,
+        # clean daily points) and derive the same deltas ourselves.
+        fb_1d, fb_7d = _base_historical_tvl_deltas()
+        change_1d = fb_1d if needs_fallback_1d else change_1d
+        change_7d = fb_7d if needs_fallback_7d else change_7d
+    if needs_fallback_1d and needs_fallback_7d:
+        tvl_change_source = "historical_fallback"
+    elif needs_fallback_1d or needs_fallback_7d:
+        # Only one of the two /v2/chains fields was missing — distinct from
+        # the fully-fallback case so a downstream report doesn't claim BOTH
+        # change fields were unavailable when only one actually was.
+        tvl_change_source = "partial_historical_fallback"
+    else:
+        tvl_change_source = "llama_chains"
     out = {
         "ts": _now_iso(),
         "tvl_usd": tvl_usd,
-        "tvl_24h_change_pct": base.get("change_1d"),
-        "tvl_7d_change_pct": base.get("change_7d"),
+        "tvl_24h_change_pct": change_1d,
+        "tvl_7d_change_pct": change_7d,
+        "tvl_change_source": tvl_change_source,
     }
     protos = _get("https://api.llama.fi/protocols", ttl=1800, cache_key="llama_protocols")
     if isinstance(protos, list):
@@ -169,6 +188,34 @@ def get_base_tvl_and_protocols(top_n=10):
         out["top_gainers_24h"] = [{"name": p["name"], "change_1d": p["change_1d"]} for p in gainers[:3]]
         out["top_losers_24h"] = [{"name": p["name"], "change_1d": p["change_1d"]} for p in losers[:3]]
     return out
+
+
+def _base_historical_tvl_deltas():
+    """Fallback 1d/7d TVL % change for Base, derived from DefiLlama's
+    historical chain-TVL series (a separate endpoint from /v2/chains, still
+    returning clean daily points as of Aug 2026 even though /v2/chains'
+    own change_1d/change_7d fields have gone null for Base). Same
+    closest-point-to-target-timestamp technique already used for the
+    Virtuals TVL trend in get_virtuals_snapshot(). Returns (None, None) on
+    any failure so the caller can leave the field blank rather than crash."""
+    hist = _get("https://api.llama.fi/v2/historicalChainTvl/Base",
+                ttl=1800, cache_key="llama_base_hist_tvl")
+    if not isinstance(hist, list) or len(hist) < 2:
+        return None, None
+    try:
+        # Defensive sort -- DefiLlama's own docs don't explicitly guarantee
+        # ascending chronological order, and an out-of-order response would
+        # otherwise silently resolve "latest"/day-ago/week-ago to the wrong
+        # points and still return numeric-looking (but wrong) percentages.
+        hist = sorted(hist, key=lambda h: h.get("date") or 0)
+        latest = hist[-1]
+        latest_tvl = latest.get("tvl")
+        now_s = latest.get("date") or 0
+        day_ago_tvl = min(hist[:-1], key=lambda h: abs((h.get("date") or 0) - (now_s - 24 * 3600))).get("tvl")
+        week_ago_tvl = min(hist, key=lambda h: abs((h.get("date") or 0) - (now_s - 7 * 24 * 3600))).get("tvl")
+        return _pct_change(day_ago_tvl, latest_tvl), _pct_change(week_ago_tvl, latest_tvl)
+    except (IndexError, TypeError, ValueError, AttributeError):
+        return None, None
 
 
 def get_base_dex_volume():

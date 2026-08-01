@@ -71,6 +71,67 @@ def test_gainers_and_losers_split_by_sign():
     assert loser_names[0] == "Beta DEX"  # -5%, the only loser
 
 
+_HIST_NOW_S = 30 * 86400  # arbitrary anchor far enough past epoch that day_ago/week_ago stay >= 0
+_HIST = [
+    {"date": _HIST_NOW_S - 7 * 86400, "tvl": 800_000.0},
+    {"date": _HIST_NOW_S - 6 * 86400, "tvl": 820_000.0},
+    {"date": _HIST_NOW_S - 5 * 86400, "tvl": 840_000.0},
+    {"date": _HIST_NOW_S - 4 * 86400, "tvl": 860_000.0},
+    {"date": _HIST_NOW_S - 3 * 86400, "tvl": 880_000.0},
+    {"date": _HIST_NOW_S - 2 * 86400, "tvl": 900_000.0},
+    {"date": _HIST_NOW_S - 1 * 86400, "tvl": 950_000.0},
+    {"date": _HIST_NOW_S, "tvl": 1_000_000.0},
+]
+
+
+def _fake_get_no_change_fields(url, *args, **kwargs):
+    if "v2/chains" in url:
+        return [{"name": "Base", "tvl": 1_000_000.0, "change_1d": None, "change_7d": None}]
+    if "historicalChainTvl" in url:
+        return _HIST
+    if "/protocols" in url:
+        return []
+    return {"error": "unexpected url in test", "url": url}
+
+
+def test_tvl_change_falls_back_to_historical_series_when_chains_omits_it():
+    with mock.patch.object(df, "_get", side_effect=_fake_get_no_change_fields):
+        out = df.get_base_tvl_and_protocols(top_n=10)
+    assert out["tvl_change_source"] == "historical_fallback"
+    # (1,000,000 - 950,000) / 950,000 * 100
+    assert out["tvl_24h_change_pct"] == 5.26
+    # (1,000,000 - 800,000) / 800,000 * 100
+    assert out["tvl_7d_change_pct"] == 25.0
+
+
+def test_tvl_change_source_is_llama_chains_when_fields_present():
+    with mock.patch.object(df, "_get", side_effect=_fake_get):
+        out = df.get_base_tvl_and_protocols(top_n=10)
+    assert out["tvl_change_source"] == "llama_chains"
+    assert out["tvl_24h_change_pct"] == 2.0
+
+
+def test_tvl_change_source_is_partial_when_only_one_field_missing():
+    """Only change_7d missing this cycle -- change_1d must be kept from
+    /v2/chains untouched (not silently overwritten by the historical
+    fallback), and the source label must reflect that only one field was
+    backfilled, not both."""
+    def fake_get(url, *args, **kwargs):
+        if "v2/chains" in url:
+            return [{"name": "Base", "tvl": 1_000_000.0, "change_1d": 3.5, "change_7d": None}]
+        if "historicalChainTvl" in url:
+            return _HIST
+        if "/protocols" in url:
+            return []
+        return {"error": "unexpected url in test", "url": url}
+
+    with mock.patch.object(df, "_get", side_effect=fake_get):
+        out = df.get_base_tvl_and_protocols(top_n=10)
+    assert out["tvl_change_source"] == "partial_historical_fallback"
+    assert out["tvl_24h_change_pct"] == 3.5  # kept from /v2/chains, not overwritten
+    assert out["tvl_7d_change_pct"] == 25.0  # backfilled from the historical series
+
+
 def test_get_token_price_falls_back_to_defillama_on_coingecko_failure():
     def fake_get(url, *args, **kwargs):
         if "simple/price" in url:
