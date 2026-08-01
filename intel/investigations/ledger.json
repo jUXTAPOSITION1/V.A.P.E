@@ -1516,6 +1516,25 @@
     "symbol": "LFWA",
     "times_investigated": 1
   },
+  "1:0x30277ce8c9a46e679e0263677318f692f1fede23": {
+    "address": "0x30277ce8c9a46E679E0263677318F692f1fEdE23",
+    "chain": "1",
+    "creator_address": "0x912c03d3f80012e14b6c7f644ddd4096b9253070",
+    "first_investigated": "2026-08-01T07:49:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-074914-0x30277ce8.md",
+        "score": 30,
+        "ts": "2026-08-01T07:49:14Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T07:49:14Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "CHEESE",
+    "times_investigated": 1
+  },
   "1:0x3134be4a8d5e42bc9237f7dbeab14f72e4089c10": {
     "address": "0x3134be4a8D5E42Bc9237F7dbeAb14F72E4089c10",
     "chain": "1",

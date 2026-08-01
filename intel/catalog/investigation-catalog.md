@@ -1027,3 +1027,5 @@
 | 2026-08-01 | auto | 0x5949f201bE7A159D551d9480B900570ddCADAb7b (CHEESE) | deep_investigation | CAUTION (55/100) | Low liquidity $10,045 | +7d |
 
 | 2026-08-01 | auto | 0x44444e3196faeF2FBe917622202CdD2dcCcB021B (CHEESE) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 72% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-01 | auto | 0x30277ce8c9a46E679E0263677318F692f1fEdE23 (CHEESE) | deep_investigation | REJECT (30/100) | Hidden owner | +7d |
