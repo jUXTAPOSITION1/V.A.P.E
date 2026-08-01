@@ -160,21 +160,36 @@ const X402Feed = {
         return null;                   // fall back to daily /x402/stats
     },
 
+    _activityRequestId: 0,
+
     async _loadActivity() {
         const setTxt = (id, v) => { const n = document.getElementById(id); if (n) n.textContent = v; };
         const days = this._activityDays;
+        // Rapid range switching (7D -> 30D before the 7D fetch resolves) can
+        // otherwise let a stale response land last and overwrite the newer
+        // range's numbers until the next 25s poll — a request token makes a
+        // superseded response a no-op instead.
+        const requestId = ++this._activityRequestId;
         try {
             const bucketMin = this._activityBucketMinutes(days);
             const buckets = bucketMin
                 ? await this._activityBucketsFromFeed(days, bucketMin)
                 : await this._activityBucketsFromStats(days);
+            if (requestId !== this._activityRequestId) return;
             const jobs = buckets.reduce((s, b) => s + b.jobs, 0);
             const volume = buckets.reduce((s, b) => s + b.revenue_usd, 0);
             const buyers = new Set();
             buckets.forEach(b => (b.payers || []).forEach(p => buyers.add(p)));
             setTxt('x402-activity-jobs-value', jobs.toLocaleString());
             setTxt('x402-activity-volume-value', '$' + volume.toLocaleString(undefined, { maximumFractionDigits: 2 }));
-            setTxt('x402-activity-buyers-value', buyers.size ? buyers.size.toLocaleString() : (buckets.reduce((s, b) => s + (b.buyers || 0), 0) || '—'));
+            // buyers.size covers feed-backed buckets (real per-job payer
+            // sets); buckets.rangeBuyers is the stats path's own true
+            // whole-window unique count (worker's range_buyers) — summing
+            // each bucket's own `buyers` would double-count any wallet that
+            // paid across more than one bucket, so that sum is a last resort
+            // only if neither real count is available.
+            const rangeBuyers = buyers.size || buckets.rangeBuyers || buckets.reduce((s, b) => s + (b.buyers || 0), 0);
+            setTxt('x402-activity-buyers-value', rangeBuyers ? rangeBuyers.toLocaleString() : '—');
             this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs);
             this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd);
             this._renderSparkline('x402-activity-buyers-spark', buckets, b => (b.payers ? b.payers.size : (b.buyers || 0)));
@@ -222,7 +237,13 @@ const X402Feed = {
         const r = await fetch(`${window.WORKER_BASE}/x402/stats?days=${days}`);
         if (r.status === 503) return [];
         const stats = await r.json();
-        return (stats.daily || []).map(d => ({ ts: Date.parse(d.date + 'T00:00:00Z'), jobs: d.jobs, revenue_usd: d.revenue_usd, buyers: d.buyers || 0 }));
+        const buckets = (stats.daily || []).map(d => ({ ts: Date.parse(d.date + 'T00:00:00Z'), jobs: d.jobs, revenue_usd: d.revenue_usd, buyers: d.buyers || 0 }));
+        // The true whole-window unique-payer count (worker's getStats()) —
+        // attached to the array so _loadActivity can use it as the
+        // authoritative buyers total instead of summing each day's own
+        // unique count, which would double-count a repeat buyer.
+        buckets.rangeBuyers = stats.range_buyers ?? null;
+        return buckets;
     },
 
     // Plain div bars, not Chart.js — these are decorative, glanceable

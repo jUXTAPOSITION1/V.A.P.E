@@ -291,6 +291,10 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     gap: 1px;
     height: 72px;
     margin-top: 0.5rem;
+    /* At 2px min-width each, 240 buckets (30D's 3-hour resolution) need more
+       width than an activity-tile actually has on most viewports — clip
+       rather than let bars spill past the tile's edge. */
+    overflow: hidden;
 }
 .activity-sparkline-bar {
     flex: 1 1 0%;

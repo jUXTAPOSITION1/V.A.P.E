@@ -384,7 +384,12 @@ export async function getStats(kv: KVLike | undefined, days: number | "all" = 30
   const daily: DailyEntry[] = [];
   // True unique-payer count across the *whole* selected window — deliberately
   // not "sum of each day's buyers" (buyersByDate above), which would double
-  // count any wallet that paid on more than one day in range.
+  // count any wallet that paid on more than one day in range. Same caveat as
+  // DailyEntry.buyers though: both are derived from RECENT_JOBS alone, which
+  // only retains RECENT_CAP records (~370+ days at current volume) — a
+  // `days` request wider than that (up to 400 is allowed) silently omits
+  // payers from whatever portion of the window RECENT_JOBS no longer covers,
+  // rather than fabricating a "complete" count for days it can't see.
   const rangeBuyers = new Set<string>();
   for (let i = spanDays - 1; i >= 0; i--) {
     const ds = new Date(now.getTime() - i * 86400000).toISOString().slice(0, 10);
