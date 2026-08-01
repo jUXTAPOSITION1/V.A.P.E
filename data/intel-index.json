@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T18:56:37Z",
+  "generated": "2026-08-01T19:08:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 490,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 137,
     "investigations": 641,
-    "news": 44,
+    "news": 45,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.md",
+      "title": "Centralization Crisis Deepens as Japanese Mining Giant SBI Crypto Shuts Down Bitcoin Pool",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T19:08:33Z",
+      "published_et": "August 1, 2026 \u00b7 3:08 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The Japanese financial giant\u2019s exit removes a key independent operator just as the top three mega-pools consolidate nearly two-thirds of the global hashrate.",
+      "image": "assets/news-images/centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.md"
+    },
     {
       "file": "news-2026-08-01-the-great-hashrate-retreat-bitcoin-mining-difficulty-slides-.md",
       "title": "The Great Hashrate Retreat: Bitcoin Mining Difficulty Slides 14% as Rigs Go Dark",
