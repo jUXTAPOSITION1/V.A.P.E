@@ -1893,6 +1893,25 @@
     "symbol": "VIBE",
     "times_investigated": 1
   },
+  "1:0x65c0e98a4fe050e64e16754119c76eebd4e660cc": {
+    "address": "0x65c0E98a4fE050e64E16754119C76EEbd4E660cc",
+    "chain": "1",
+    "creator_address": "0x083f8aaf60e6729d1b6b9b4eda340d83f8b08650",
+    "first_investigated": "2026-08-01T00:03:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-000357-0x65c0E98a.md",
+        "score": 65,
+        "ts": "2026-08-01T00:03:57Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T00:03:57Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "SRC",
+    "times_investigated": 1
+  },
   "1:0x6664347791c8d58e266eb8f824ce774a2624fa07": {
     "address": "0x6664347791C8d58E266EB8F824CE774a2624Fa07",
     "chain": "1",

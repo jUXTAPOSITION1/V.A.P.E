@@ -1011,3 +1011,5 @@
 | 2026-07-31 | auto | 0x627D4c16c2AF9e8eC9a275E683e3Ddcc1a3103e1 (SPCXB) | deep_investigation | REJECT (0/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
 
 | 2026-07-31 | auto | 0xECe99d73444c99008f87d0EbE6211CF8EEF27777 (ElonCoin) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-01 | auto | 0x65c0E98a4fE050e64E16754119C76EEbd4E660cc (SRC) | deep_investigation | CAUTION (65/100) | Violent 24h move +4743% (volatility/manipulation) | +7d |
