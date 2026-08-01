@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T12:20:32Z",
+  "generated": "2026-08-01T12:35:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 485,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 136,
-    "investigations": 619,
+    "investigations": 620,
     "news": 42,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-122026-0x4BABA631.md",
+      "file": "investigation-20260801-123529-0x444400cA.md",
       "title": "Investigation \u2014 ASTEROID",
       "symbol": "ASTEROID",
       "name": "ASTEROID",
-      "date": "2026-08-01T12:20:26Z",
-      "target": "0x4BABA6318cbDd731DA9adA934B29Ca530D804444",
+      "date": "2026-08-01T12:35:29Z",
+      "target": "0x444400cAe63d2aEC462701d75aC65DBE0d044900",
       "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
       "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,512. Positive evidence: Ownership renounced; 1966 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 309+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-122026-0x4BABA631.md"
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $16,160. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-123529-0x444400cA.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-123529-0x444400cA.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "ASTEROID",
+      "date": "2026-08-01T12:35:29Z",
+      "target": "0x444400cAe63d2aEC462701d75aC65DBE0d044900",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $16,160. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-123529-0x444400cA.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-122026-0x4BABA631.md",
@@ -594,20 +608,6 @@
       "score": "47",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: NTFS (0x3CfaDB7f1fD7C786a98c3Fa37131ff1537E554C5) \u2014 REJECT 13/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated. ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-131406-0xC6F05bc3.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-124220-0x1706f1e0.md",
-      "title": "Investigation \u2014 MarsCoin",
-      "symbol": "MarsCoin",
-      "name": "MarsCoin",
-      "date": "2026-07-31T12:42:20Z",
-      "target": "0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2F72961483357dc31b4C146A24444) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.9 days old \u2014 under a month, still ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
     }
   ],
   "reports": [

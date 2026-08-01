@@ -1039,3 +1039,5 @@
 | 2026-08-01 | auto | 0x8FD3437A13B298dD2e98Db902c56970a9d3C4985 (ASTEROID) | deep_investigation | REJECT (45/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-01 | auto | 0x4BABA6318cbDd731DA9adA934B29Ca530D804444 (ASTEROID) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 75% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-01 | auto | 0x444400cAe63d2aEC462701d75aC65DBE0d044900 (ASTEROID) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 95% of supply — concentrated, easily manipula | +7d |

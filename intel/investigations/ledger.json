@@ -4875,6 +4875,25 @@
     "symbol": "BTW",
     "times_investigated": 1
   },
+  "56:0x444400cae63d2aec462701d75ac65dbe0d044900": {
+    "address": "0x444400cAe63d2aEC462701d75aC65DBE0d044900",
+    "chain": "56",
+    "creator_address": "0x6f083fcaf5aa70a6dbe3dcafd340ffbb18f093f9",
+    "first_investigated": "2026-08-01T12:35:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-123529-0x444400cA.md",
+        "score": 75,
+        "ts": "2026-08-01T12:35:29Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T12:35:29Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "56:0x46ddcc662a045770ce1e264819542c9617547777": {
     "address": "0x46dDcc662A045770CE1e264819542C9617547777",
     "chain": "56",
