@@ -616,22 +616,24 @@ const X402Feed = {
         if (this._chart) this._chart.destroy();
         const ctx = canvas.getContext('2d');
 
-        // Blue (Jobs line) + amber/gold (Revenue) is a standard dual-series
-        // pairing on real trading terminals — high contrast against each
-        // other and against the dark background, and blue is the site's
-        // existing secondary accent (#60a5fa, used by Featured Investigation/
-        // Bounty Command Center) rather than a color invented just for this.
-        const REVENUE_COLOR = '#fbbf24';
-        const REVENUE_PARTIAL_COLOR = 'rgba(251,191,36,0.35)';
+        // Revenue was originally an amber/gold line, which read as an odd
+        // color choice sitting next to the Activity tiles' blue-family
+        // gradient bars just above — switched to a muted, cool off-white
+        // (slate-200) that complements rather than competes with the blues
+        // here (Jobs, Cumulative) and above, while still standing out
+        // clearly against the dark panel background without being a glaring
+        // pure white.
+        const REVENUE_COLOR = '#e2e8f0';
+        const REVENUE_PARTIAL_COLOR = 'rgba(226,232,240,0.35)';
         const JOBS_COLOR = '#60a5fa';
         const MA_COLOR = '#a78bfa';
         const CUMULATIVE_COLOR = '#2dd4bf';
 
         const h = canvas.parentElement?.clientHeight || 256;
         const gFull = ctx.createLinearGradient(0, 0, 0, h);
-        gFull.addColorStop(0, 'rgba(251,191,36,0.30)'); gFull.addColorStop(1, 'rgba(251,191,36,0)');
+        gFull.addColorStop(0, 'rgba(226,232,240,0.30)'); gFull.addColorStop(1, 'rgba(226,232,240,0)');
         const gPartial = ctx.createLinearGradient(0, 0, 0, h);
-        gPartial.addColorStop(0, 'rgba(251,191,36,0.12)'); gPartial.addColorStop(1, 'rgba(251,191,36,0)');
+        gPartial.addColorStop(0, 'rgba(226,232,240,0.12)'); gPartial.addColorStop(1, 'rgba(226,232,240,0)');
 
         // Per-bar color arrays so only the still-forming bucket gets the
         // lighter "in progress" treatment — every closed period looks
@@ -658,7 +660,12 @@ const X402Feed = {
                         : { label: 'Revenue (USD)', data: revenue, backgroundColor: revenueBg, borderColor: revenueBorder, borderWidth: 1, yAxisID: 'y', order: 3 },
                     { label: 'Jobs', data: jobs, type: 'line', borderColor: JOBS_COLOR, backgroundColor: 'transparent', tension: 0.3, pointRadius: 2, pointBackgroundColor: JOBS_COLOR, borderWidth: 1.5, yAxisID: 'y1', order: 2 },
                     { label: `${maWindow}-period MA`, data: ma, type: 'line', borderColor: MA_COLOR, backgroundColor: 'transparent', borderDash: [4, 3], borderWidth: 1.5, tension: 0.3, pointRadius: 0, yAxisID: 'y', order: 1, spanGaps: false },
-                    { label: 'Cumulative', data: cumulative, type: 'line', borderColor: CUMULATIVE_COLOR, backgroundColor: 'transparent', borderWidth: 1, pointRadius: 0, yAxisID: 'y2', order: 0, hidden: true },
+                    // Always on by default (not `hidden: true`) — _renderChart
+                    // rebuilds the whole Chart.js instance from scratch on every
+                    // range switch and 25s poll, so a viewer's own legend-click
+                    // toggle-on was otherwise getting silently reverted within
+                    // seconds. Still togglable off via the legend for a session.
+                    { label: 'Cumulative', data: cumulative, type: 'line', borderColor: CUMULATIVE_COLOR, backgroundColor: 'transparent', borderWidth: 1, pointRadius: 0, yAxisID: 'y2', order: 0 },
                 ],
             },
             plugins: [crosshairPlugin],

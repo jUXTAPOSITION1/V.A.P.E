@@ -318,8 +318,11 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     min-width: 9px;
     /* "Sophisticated shading" — a light-to-dark gradient fill (matching the
        reference widget's own bars) instead of a flat solid color, giving
-       each bar visible depth rather than a flat block. */
-    background: linear-gradient(180deg, rgba(219, 234, 254, 0.95) 0%, rgba(96, 165, 250, 0.85) 45%, rgba(37, 99, 235, 0.55) 100%);
+       each bar visible depth rather than a flat block. Top stop toned down
+       from an earlier near-white (rgba(219,234,254,0.95)) — read as too
+       bright/blown-out against the dark panel — to a softer light blue that
+       still reads as "lit from above" without glaring. */
+    background: linear-gradient(180deg, rgba(191, 219, 254, 0.7) 0%, rgba(96, 165, 250, 0.8) 45%, rgba(37, 99, 235, 0.6) 100%);
     border-radius: 3px 3px 0 0;
     transition: filter 0.15s ease, box-shadow 0.15s ease;
     cursor: pointer;
