@@ -8331,6 +8331,25 @@
     "symbol": "PROS",
     "times_investigated": 1
   },
+  "8453:0x8c0d3adcf8ce094e1ae437557ec90a6374dc9bdd": {
+    "address": "0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD",
+    "chain": "8453",
+    "creator_address": "0x5d020c0510dac638588dc0e2d097c92ad08d7243",
+    "first_investigated": "2026-08-01T20:12:10Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-201210-0x8C0d3ADC.md",
+        "score": 85,
+        "ts": "2026-08-01T20:12:10Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-01T20:12:10Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "OVPP",
+    "times_investigated": 1
+  },
   "8453:0x8c81b4c816d66d36c4bf348bdec01dbcbc70e987": {
     "address": "0x8c81B4c816d66D36c4bF348BdeC01dBCbC70E987",
     "chain": "8453",

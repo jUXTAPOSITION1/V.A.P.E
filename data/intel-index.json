@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T20:11:07Z",
+  "generated": "2026-08-01T20:12:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 492,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 641,
+    "investigations": 642,
     "news": 45,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-182637-0xE5D66322.md",
-      "title": "Investigation \u2014 AIPF",
-      "symbol": "AIPF",
-      "name": "AI Powered Finance",
-      "date": "2026-08-01T18:26:37Z",
-      "target": "0xE5D66322db2922dA6f8cc878d56430b1585f351F",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 17113 holders \u2014 reasonably distributed; Trading 121+ days withou",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-182637-0xE5D66322.md"
+      "file": "investigation-20260801-201210-0x8C0d3ADC.md",
+      "title": "Investigation \u2014 OVPP",
+      "symbol": "OVPP",
+      "name": "OpenVPP",
+      "date": "2026-08-01T20:12:10Z",
+      "target": "0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 8679 holders \u2014 reasonably distributed; Trading 138+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced thi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-201210-0x8C0d3ADC.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-201210-0x8C0d3ADC.md",
+      "title": "Investigation \u2014 OVPP",
+      "symbol": "OVPP",
+      "name": "OpenVPP",
+      "date": "2026-08-01T20:12:10Z",
+      "target": "0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD",
+      "chain": "8453 (Base)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 8679 holders \u2014 reasonably distributed; Trading 138+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced thi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-201210-0x8C0d3ADC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-182637-0xE5D66322.md",
@@ -594,20 +608,6 @@
       "score": "45",
       "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $21,922; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-004929-0x059aB32a.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-003357-0xC28475DE.md",
-      "title": "Investigation \u2014 jSTABLE",
-      "symbol": "jSTABLE",
-      "name": "JustStableIndex",
-      "date": "2026-08-01T00:33:57Z",
-      "target": "0xC28475DE46305BDf8E8522Fc282CC13106812ccC",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Very few holders (31) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-003357-0xC28475DE.md"
     }
   ],
   "reports": [

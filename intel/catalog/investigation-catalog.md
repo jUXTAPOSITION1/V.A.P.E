@@ -1083,3 +1083,5 @@
 | 2026-08-01 | auto | 0x60dE974aF1215b5C1b5F1189B08235c67F7F35a1 (JEJEG) | deep_investigation | REJECT (40/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
 
 | 2026-08-01 | auto | 0xE5D66322db2922dA6f8cc878d56430b1585f351F (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-01 | auto | 0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD (OVPP) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
