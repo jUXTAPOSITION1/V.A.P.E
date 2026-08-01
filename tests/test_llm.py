@@ -1005,6 +1005,64 @@ class TestXaiImage:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             assert llm.ask_xai_image("prompt") is None
 
+    def test_retries_once_after_a_transient_failure_then_succeeds(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+        calls = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise urllib.error.HTTPError(req.full_url, 500, "Server Error", {}, io.BytesIO(b"boom"))
+            return _fake_xai_image_response("https://xai.example/second-try.png")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            result = llm.ask_xai_image("prompt")
+        assert result == "https://xai.example/second-try.png"
+        assert calls["n"] == 2
+
+    def test_returns_none_after_exhausting_retries(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+        calls = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            raise urllib.error.HTTPError(req.full_url, 500, "Server Error", {}, io.BytesIO(b"boom"))
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_xai_image("prompt") is None
+        assert calls["n"] == 2  # one original attempt + one retry, default retries=1
+
+    def test_retries_param_zero_disables_retry(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+        calls = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            raise urllib.error.HTTPError(req.full_url, 500, "Server Error", {}, io.BytesIO(b"boom"))
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_xai_image("prompt", retries=0) is None
+        assert calls["n"] == 1
+
+    def test_retry_does_not_double_count_daily_usage_on_eventual_success(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        usage_path = tmp_path / "xai_image_usage.json"
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(usage_path))
+        calls = {"n": 0}
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise urllib.error.HTTPError(req.full_url, 500, "Server Error", {}, io.BytesIO(b"boom"))
+            return _fake_xai_image_response("https://xai.example/ok.png")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_xai_image("prompt")
+        assert json.loads(usage_path.read_text())["count"] == 1
+
 
 class TestOciGrok:
     """agents/llm.py's third candidate — Oracle Cloud's hosted xAI Grok 4.3,
