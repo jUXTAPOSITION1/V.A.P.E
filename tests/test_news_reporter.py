@@ -37,6 +37,28 @@ def test_publish_stamp_crosses_a_calendar_date_going_from_utc_to_et():
     assert published_et == "July 31, 2026 · 11:04 PM EDT"
 
 
+def test_is_derivative_headline_true_when_blank():
+    assert news_reporter._is_derivative_headline(None, "Some Source Headline") is True
+    assert news_reporter._is_derivative_headline("   ", "Some Source Headline") is True
+
+
+def test_is_derivative_headline_true_for_exact_match_case_and_whitespace_insensitive():
+    assert news_reporter._is_derivative_headline(
+        "  Bitcoin Rallies Past $100K  ", "bitcoin rallies past $100k") is True
+
+
+def test_is_derivative_headline_true_for_near_duplicate():
+    assert news_reporter._is_derivative_headline(
+        "Bitcoin Rallies Past $100000", "Bitcoin Rallies Past $100K") is True
+
+
+def test_is_derivative_headline_false_for_genuinely_distinct_headline():
+    assert news_reporter._is_derivative_headline(
+        "Bitcoin Tops $100K", "Bitcoin Rallies Past $100K") is False
+    assert news_reporter._is_derivative_headline(
+        "Rally Deepens", "Crypto markets rally") is False
+
+
 def test_pick_candidates_skips_already_reported(tmp_path, monkeypatch):
     monkeypatch.setattr(nc, "FEED_PATH", str(tmp_path / "news-feed.json"))
     with open(nc.FEED_PATH, "w") as f:
@@ -275,6 +297,49 @@ def test_write_story_skips_candidate_when_synthesis_unavailable(tmp_path, monkey
 
     assert result is None
     editor.assert_not_called()  # no copy-desk spend on a story that was never drafted
+
+
+def test_write_story_returns_none_when_headline_is_blank(tmp_path, monkeypatch):
+    """The HEADLINE drafting instruction is prompt-only -- write_story()
+    must not fall back to candidate["title"] (the source's own headline)
+    when the model returns a blank headline, since that would silently
+    publish the exact copy the originality requirement exists to prevent
+    (CodeRabbit, PR #390)."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some real headline", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth(None, "A dek.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()  # no copy-desk spend on a headline that failed the guard
+
+
+def test_write_story_returns_none_when_headline_copies_source_title(tmp_path, monkeypatch):
+    """Same guard, the other failure mode: the model returns the source
+    outlet's own headline verbatim instead of writing an original one."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Bitcoin Rallies Past $100K", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Bitcoin Rallies Past $100K", "A dek.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()
 
 
 def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):

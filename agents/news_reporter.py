@@ -69,6 +69,7 @@ academic-style blocks.
 
 Usage: python agents/news_reporter.py
 """
+import difflib
 import os
 import sys
 import json
@@ -137,6 +138,29 @@ def _pick_candidates(state, n):
 
 def _is_llm_unavailable(text):
     return (text or "").strip().startswith("_Analyst narrative unavailable")
+
+
+def _is_derivative_headline(headline, source_title):
+    """True if `headline` is blank, or a verbatim/near-verbatim copy of the
+    source outlet's own headline -- the deterministic guard write_story()
+    uses to enforce the "write your own original headline" drafting
+    instruction (CodeRabbit, PR #390: a prompt instruction alone doesn't
+    stop the model from returning the source headline unchanged, or
+    write_story() from silently falling back to it when blank).
+
+    Exact match (case/whitespace-insensitive) plus a fuzzy-similarity
+    threshold via difflib to also catch trivial rewordings, not just
+    verbatim copies -- 0.85 is comfortably above every genuinely-distinct
+    headline/source-title pair sampled from this repo's own test fixtures
+    (highest observed: ~0.68) and comfortably below 1.0, so it only trips
+    on headlines that are substantially the same string."""
+    h = (headline or "").strip().lower()
+    s = (source_title or "").strip().lower()
+    if not h:
+        return True
+    if h == s:
+        return True
+    return difflib.SequenceMatcher(None, h, s).ratio() > 0.85
 
 
 def _editorial_pass(grounding, draft_body):
@@ -325,7 +349,17 @@ def write_story(candidate):
     body = (synth.get("narrative") or "").strip()
     if not body or body.startswith("_Synthesis unavailable"):
         return None
-    headline = synth["header"].get("headline") or candidate["title"]
+    # The HEADLINE instruction above only asks the model to write an
+    # original headline -- it doesn't enforce it (CodeRabbit, PR #390).
+    # Falling back to candidate["title"] here when the model returns a
+    # blank/copied headline would silently publish the exact source
+    # headline this house rule exists to avoid, so a blank or derivative
+    # headline is treated as a failed draft (skip this candidate, same as
+    # every other "nothing real to publish" gate in this function) rather
+    # than quietly downgrading to the copy.
+    if _is_derivative_headline(synth["header"].get("headline"), candidate["title"]):
+        return None
+    headline = synth["header"]["headline"].strip()
     dek = synth["header"].get("dek") or ""
     body, fact_checked = _editorial_pass(grounding, body)
 
