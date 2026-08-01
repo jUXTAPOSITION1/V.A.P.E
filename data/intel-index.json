@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T17:40:37Z",
+  "generated": "2026-08-01T17:55:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 638,
+    "investigations": 639,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-174034-0xC0999aC3.md",
-      "title": "Investigation \u2014 ZAMA",
-      "symbol": "ZAMA",
-      "name": "Zama",
-      "date": "2026-08-01T17:40:34Z",
-      "target": "0xC0999aC376d383bd7744B59dFcee0c25F5C26393",
+      "file": "investigation-20260801-175541-0x080272BB.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-08-01T17:55:41Z",
+      "target": "0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f) \u2014 REJECT 23/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-174034-0xC0999aC3.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-175541-0x080272BB.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-175541-0x080272BB.md",
+      "title": "Investigation \u2014 CTM",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "date": "2026-08-01T17:55:41Z",
+      "target": "0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ZAMA (0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f) \u2014 REJECT 23/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-175541-0x080272BB.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-174034-0xC0999aC3.md",
@@ -594,20 +608,6 @@
       "score": "57",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $31,496; [-15] Pair only 1.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 2769 holders \u2014 reas",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-231845-0xECe99d73.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-224824-0x627D4c16.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SPCXB",
-      "date": "2026-07-31T22:48:24Z",
-      "target": "0x627D4c16c2AF9e8eC9a275E683e3Ddcc1a3103e1",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-20] Very few holders (21) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-224824-0x627D4c16.md"
     }
   ],
   "reports": [
@@ -2109,7 +2109,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49402097",
+      "version": "49408353",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -2119,7 +2119,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.26 eth_dom 10.03 mcap_chg_24h 0.41",
+      "version": "btc_dom 56.22 eth_dom 10.03 mcap_chg_24h -0.66",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

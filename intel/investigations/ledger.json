@@ -1179,6 +1179,25 @@
     "symbol": "VM888",
     "times_investigated": 1
   },
+  "1:0x080272bbf71bfc9da5a2e8bc1ec3ecf5626062cd": {
+    "address": "0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD",
+    "chain": "1",
+    "creator_address": "0x39718095694c258b13bb511f1082652a50574306",
+    "first_investigated": "2026-08-01T17:55:42Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-175541-0x080272BB.md",
+        "score": 0,
+        "ts": "2026-08-01T17:55:42Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T17:55:42Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "CTM",
+    "times_investigated": 1
+  },
   "1:0x0c42cc855ad919717e1bb3618a440f6a59a5ca16": {
     "address": "0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16",
     "chain": "1",

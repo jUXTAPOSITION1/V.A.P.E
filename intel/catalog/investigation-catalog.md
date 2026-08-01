@@ -1077,3 +1077,5 @@
 | 2026-08-01 | auto | 0x23104dcbb1d26424404d7481B3aA3B7f0FB2f17f (ZAMA) | deep_investigation | REJECT (23/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-01 | auto | 0xC0999aC376d383bd7744B59dFcee0c25F5C26393 (ZAMA) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD (CTM) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |

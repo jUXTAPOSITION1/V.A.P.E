@@ -432,3 +432,4 @@
 {"ts": "2026-08-01T16:55:15.380638Z", "target": "proxy", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T17:25:18.663207Z", "target": "optimism", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T17:40:37.244259Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-01T17:55:55.524359Z", "target": "mexc", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
