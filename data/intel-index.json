@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T07:18:54Z",
+  "generated": "2026-08-01T07:25:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 135,
     "investigations": 607,
-    "news": 38,
+    "news": 39,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-second-time-s-the-charm-xrp-ledger-risks-reintroducing-featu.md",
+      "title": "Second Time\u2019s the Charm? XRP Ledger Risks Reintroducing Features Previously Axed for Fee-Draining Bugs",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T07:25:45Z",
+      "published_et": "August 1, 2026 \u00b7 3:25 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The upcoming xrpld 3.3.0 release features five proposed amendments, including two revised protocols that once threatened the network with unauthorized transactions.",
+      "image": "assets/news-images/second-time-s-the-charm-xrp-ledger-risks-reintroducing-featu.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-second-time-s-the-charm-xrp-ledger-risks-reintroducing-featu.md"
+    },
     {
       "file": "news-2026-08-01-the-entropy-mirage-how-70m-in-bitcoin-cold-storage-melted-aw.md",
       "title": "The Entropy Mirage: How $70M in Bitcoin 'Cold' Storage Melted Away Offline",
