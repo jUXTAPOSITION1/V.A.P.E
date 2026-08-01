@@ -427,3 +427,4 @@
 {"ts": "2026-08-01T14:07:22.391549Z", "target": "0x752C5a95d202972E124390F30a50154409d3c858", "hired": ["liquidity_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
 {"ts": "2026-08-01T14:37:32.497753Z", "target": "eigencloud", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T15:24:25.816994Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-01T15:54:48.406097Z", "target": "Arbitrum", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}

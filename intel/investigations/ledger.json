@@ -4249,6 +4249,25 @@
     "symbol": "NOCHILL",
     "times_investigated": 1
   },
+  "43114:0xafc1d137a8f0764833d2e74efb2f0b171bc2cd87": {
+    "address": "0xAFc1D137a8F0764833d2E74eFb2F0b171BC2cd87",
+    "chain": "43114",
+    "creator_address": "0x59cca1fe4be37328769635594010cca5497858ef",
+    "first_investigated": "2026-08-01T15:54:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-155443-0xAFc1D137.md",
+        "score": 50,
+        "ts": "2026-08-01T15:54:43Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T15:54:43Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "REDWOLF",
+    "times_investigated": 1
+  },
   "43114:0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7": {
     "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
     "chain": "43114",

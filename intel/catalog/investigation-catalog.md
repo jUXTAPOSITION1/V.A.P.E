@@ -1061,3 +1061,5 @@
 | 2026-08-01 | auto | 0x395Ded77F105BBEf099f8add6Eb4f238d1fB49bd (tRUSH) | deep_investigation | REJECT (25/100) | Owner not renounced (0x4638d23cebf6621c4686541ea4603318eb31ac85) — can still act | +7d |
 
 | 2026-08-01 | auto | 0x91a1C5a6001e6Aa628f49094658C65A19794D7f6 (PHARM) | deep_investigation | REJECT (32/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-08-01 | auto | 0xAFc1D137a8F0764833d2E74eFb2F0b171BC2cd87 (REDWOLF) | deep_investigation | CAUTION (50/100) | Very low liquidity $380 (rug/illiquid) | +7d |
