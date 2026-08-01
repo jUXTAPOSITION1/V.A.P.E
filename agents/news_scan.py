@@ -37,10 +37,13 @@ def run():
     headlines = nc.gather_headlines()
     for h in headlines:
         h["published_sort"] = _parse_pubdate(h.get("published"))
-    # Recency first, then a STABLE re-sort that groups crypto/blockchain
-    # topics ahead of macro/stocks -- editorial rule: crypto/blockchain leads,
-    # especially breaking news, always occupies slot 1. Stability preserves
-    # each group's own recency order from the first sort.
+    # Recency first, then a STABLE re-sort that groups the flagship beats
+    # (crypto/blockchain/Web3, DeFi/cyber security, AI) ahead of the general-
+    # coverage beats (finance, US stocks/macro, global markets, technology,
+    # robotics) -- see news_common.py's NON_CRYPTO_TOPICS comment for the
+    # full editorial rule. Breaking flagship-beat news always occupies slot
+    # 1. Stability preserves each group's own recency order from the first
+    # sort.
     headlines.sort(key=lambda h: h["published_sort"], reverse=True)
     headlines.sort(key=lambda h: 0 if nc.is_crypto_topic(h.get("topic")) else 1)
 
