@@ -903,16 +903,23 @@ def _record_xai_image_usage():
         pass
 
 
-def ask_xai_image(prompt, *, aspect_ratio="16:9", timeout=45):
+def ask_xai_image(prompt, *, aspect_ratio="16:9", timeout=45, retries=1):
     """Real text-to-image call against xAI's Grok Imagine Image model
     (grok-imagine-image, explicit direction 2026-08-01 -- not the pricier
     "-quality" tier). Returns a real image URL on success, or
     None (never raises) if XAI_API_KEY_1 isn't set, today's daily cap is
-    already hit, or the call errors for any reason — callers must degrade
-    to the brand-mark logo fallback, never a broken image or a crash. The
+    already hit, or every attempt errors -- callers must degrade to the
+    brand-mark logo fallback, never a broken image or a crash. The
     returned URL is a plain http(s) string, not bytes — pass it straight to
     news_common.brand_image() exactly like already-decoded bytes; no
-    separate fetch step needed here."""
+    separate fetch step needed here.
+
+    Retries once by default on a transient failure (timeout, rate limit,
+    network hiccup) before giving up -- explicit direction 2026-08-01, after
+    a real user report that VAPE Wire's logo fallback ("no AI image
+    available this cycle") was showing up too often; a single retry costs
+    nothing against the daily cap since _record_xai_image_usage() only
+    fires on an eventual real success, not per attempt."""
     key = os.getenv("XAI_API_KEY_1")
     if not key:
         return None
@@ -926,24 +933,25 @@ def ask_xai_image(prompt, *, aspect_ratio="16:9", timeout=45):
         "response_format": "url",
         "aspect_ratio": aspect_ratio,
     }).encode()
-    req = urllib.request.Request(
-        "https://api.x.ai/v1/images/generations",
-        data=body,
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            data = json.loads(r.read().decode("utf-8", "replace"))
-        item = data["data"][0]
-        url = item.get("url")
-        if not url:
-            return None
-        _record_xai_image_usage()
-        return url
-    except Exception as e:
-        print(f"[llm] xai_image:{type(e).__name__}:{e}", file=sys.stderr)
-        return None
+    for attempt in range(retries + 1):
+        req = urllib.request.Request(
+            "https://api.x.ai/v1/images/generations",
+            data=body,
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                data = json.loads(r.read().decode("utf-8", "replace"))
+            item = data["data"][0]
+            url = item.get("url")
+            if not url:
+                continue
+            _record_xai_image_usage()
+            return url
+        except Exception as e:
+            print(f"[llm] xai_image attempt {attempt + 1}/{retries + 1}:{type(e).__name__}:{e}", file=sys.stderr)
+    return None
 
 
 def ask_safe(system, user, **kw):
