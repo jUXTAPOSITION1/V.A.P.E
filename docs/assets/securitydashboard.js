@@ -6,8 +6,9 @@
 // tamper-evidence chain, data/attack-feed.json) or a real GitHub API response
 // (Actions Runs, Code Scanning Alerts) — a lane whose signal can't be reached
 // reports null and renders an honest "unavailable" state, never a fabricated
-// number. See the module's own inline comments for exactly how each widget's
-// visual encoding maps back to a real underlying field.
+// number. Deliberately compact/single-screen layout (gauge, severity list +
+// donut, and a lane picker share one row; six Risk Breakdown cards share
+// another) rather than one full-width panel per widget.
 
 const SECDASH_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/security-dashboard.json';
 const SECDASH_HISTORY_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/security-dashboard-history.jsonl';
@@ -21,10 +22,11 @@ function cssVar(name) {
 }
 
 // The 5-bucket severity taxonomy agents/build_security_dashboard.py's
-// normalize_severity() produces — order matters for stacking/legend display
+// normalize_severity() produces — order matters for stacking/list display
 // (most severe first).
 const SEV_ORDER = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'INFO'];
 const SEV_VAR = { CRITICAL: '--sev-critical', HIGH: '--sev-high', MEDIUM: '--sev-medium', LOW: '--sev-low', INFO: '--sev-info' };
+const SEV_TITLE = { CRITICAL: 'Critical', HIGH: 'High', MEDIUM: 'Medium', LOW: 'Low', INFO: 'Info' };
 function sevColor(bucket) { return cssVar(SEV_VAR[bucket] || SEV_VAR.INFO); }
 
 const THREAT_ORDER = ['LOW', 'MEDIUM', 'HIGH'];
@@ -49,17 +51,18 @@ function statusBadge(text, colorVar, icon) {
 // (agents/build_security_dashboard.py's build_lanes() output) — a card with
 // no corresponding lane in a given snapshot simply renders "unavailable."
 const CARD_DEFS = [
-    { id: 'codeql', title: 'Static Analysis', icon: 'fa-magnifying-glass-chart', laneIds: ['codeql'] },
-    { id: 'dependency-audit', title: 'Dependencies (SCA)', icon: 'fa-box-archive', laneIds: ['dependency-audit'] },
-    { id: 'security-lint', title: 'CI / Workflow Hardening', icon: 'fa-gears', laneIds: ['security-lint'] },
-    { id: 'redteam', title: 'AI Red-Team', icon: 'fa-robot', laneIds: ['redteam', 'redteam-deep'] },
-    { id: 'intel-sweeps', title: 'On-Chain Attack Intelligence', icon: 'fa-satellite-dish', laneIds: ['intel-sweeps'] },
-    { id: 'ledger-integrity', title: 'Findings Ledger Integrity', icon: 'fa-link', laneIds: ['findings-seal', 'review-ledger'] },
+    { id: 'codeql', title: 'Static Analysis', laneIds: ['codeql'] },
+    { id: 'dependency-audit', title: 'Dependencies', laneIds: ['dependency-audit'] },
+    { id: 'security-lint', title: 'CI Hardening', laneIds: ['security-lint'] },
+    { id: 'redteam', title: 'AI Red-Team', laneIds: ['redteam', 'redteam-deep'] },
+    { id: 'intel-sweeps', title: 'On-Chain Intel', laneIds: ['intel-sweeps'] },
+    { id: 'ledger-integrity', title: 'Ledger Integrity', laneIds: ['findings-seal', 'review-ledger'] },
 ];
 
 const SecurityDashboard = {
     _data: null,
     _history: [],
+    _lanes: [],
     _timelineChart: null,
     _timelineSeries: 'severity',
 
@@ -122,7 +125,9 @@ const SecurityDashboard = {
     // category (LOW/MEDIUM/HIGH), rendered as progressive fill up to that
     // level's position — legitimate here specifically because it IS an
     // ordinal category, not a fabricated continuous score. Always paired
-    // with the explicit text label below it.
+    // with the explicit text label below it. The delta line is a real
+    // comparison against the previous appended history point, never a
+    // fabricated week-over-week percentage.
     _renderGauge() {
         const canvas = document.getElementById('secdashGauge');
         const label = document.getElementById('secdash-gauge-label');
@@ -146,7 +151,7 @@ const SecurityDashboard = {
                 maintainAspectRatio: false,
                 rotation: -90,
                 circumference: 180,
-                cutout: '75%',
+                cutout: '72%',
                 plugins: { legend: { display: false }, tooltip: { enabled: false } },
             },
         });
@@ -156,69 +161,123 @@ const SecurityDashboard = {
                 ? `<div style="color:${escapeHtml(color)}" class="font-semibold text-sm"><i class="fa-solid ${escapeHtml(icon)} text-[11px] mr-1"></i>${escapeHtml(level)}</div>`
                 : '<span class="text-zinc-500 text-xs">No signal</span>';
         }
+        const deltaEl = document.getElementById('secdash-gauge-delta');
+        if (deltaEl) {
+            const prev = this._history.length >= 2 ? this._history[this._history.length - 2] : null;
+            if (!prev) {
+                deltaEl.textContent = 'tracking since launch';
+            } else {
+                const prevIdx = THREAT_ORDER.indexOf((prev.overall_threat_level || '').toUpperCase());
+                if (prevIdx === idx) deltaEl.textContent = 'steady vs last check';
+                else if (idx > prevIdx) deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('HIGH'))}">&#9650; worsened</span> vs last check`;
+                else deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('LOW'))}">&#9660; improved</span> vs last check`;
+            }
+        }
     },
 
+    // Findings Count: a real count+percentage list (doubling as the
+    // required legend for a ≥2-series chart) beside a small donut with a
+    // real total in its center — matches the reference's list-plus-donut
+    // composition, more scannable than a bottom legend alone.
     _renderSeverityDonut() {
         const canvas = document.getElementById('secdashSeverityDonut');
+        const listEl = document.getElementById('secdash-sev-list');
         if (!canvas || typeof Chart === 'undefined') return;
         const bySev = this._data.findings_by_severity || {};
         const labels = SEV_ORDER.filter(k => (bySev[k] || 0) > 0);
         const values = labels.map(k => bySev[k]);
         const colors = labels.map(sevColor);
+        const total = values.reduce((a, b) => a + b, 0);
+
+        if (listEl) {
+            listEl.innerHTML = labels.length
+                ? labels.map((k, i) => `<li>
+                    <span class="secdash-sev-chip" style="background:${escapeHtml(colors[i])}"></span>
+                    <span class="secdash-sev-label">${escapeHtml(SEV_TITLE[k] || k)}</span>
+                    <span class="secdash-sev-count">${values[i].toLocaleString()}</span>
+                    <span class="secdash-sev-pct">${((values[i] / total) * 100).toFixed(1)}%</span>
+                </li>`).join('')
+                : '<li class="text-zinc-500">No findings logged yet.</li>';
+        }
+
         if (this._sevChart) this._sevChart.destroy();
+        const wrap = canvas.closest('.secdash-sev-donut-wrap');
         if (!labels.length) {
-            canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">No findings logged yet.</div>';
+            if (wrap) wrap.style.visibility = 'hidden';
             return;
         }
-        const total = values.reduce((a, b) => a + b, 0);
+        if (wrap) wrap.style.visibility = '';
         this._sevChart = new Chart(canvas, {
             type: 'doughnut',
             data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: cssVar('--bg-page') || '#09090b', borderWidth: 2 }] },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '68%',
                 plugins: {
-                    legend: { position: 'bottom', labels: { color: '#a1a1aa', boxWidth: 10, font: { size: 10 } } },
+                    legend: { display: false },
                     tooltip: { callbacks: { label: c => `${c.label}: ${c.parsed} (${((c.parsed / total) * 100).toFixed(1)}%)` } },
                 },
             },
         });
+        const totalValue = document.getElementById('secdash-sev-donut-total-value');
+        if (totalValue) totalValue.textContent = total.toLocaleString();
     },
 
-    // "Automated Security Lanes" strip — one tile per real workflow's last
-    // run, from the dashboard's own `lanes` array. Replaces the reference
-    // screenshot's fabricated "Active Campaigns" concept (VAPE has no
-    // campaign notion) while keeping its horizontal-scroll motion, since the
-    // underlying list is real.
+    // Automated Lanes — a <select> over the real per-workflow list driving
+    // one compact status readout, with pagination dots to page through the
+    // rest. Replaces the reference screenshot's fabricated "Active
+    // Campaigns" gauge+carousel concept (VAPE has no campaign notion) while
+    // keeping its dropdown+paged-indicator composition.
     _renderLanes() {
-        const el = document.getElementById('secdash-lanes');
-        if (!el) return;
+        const select = document.getElementById('secdash-lane-select');
+        const detail = document.getElementById('secdash-lane-detail');
+        const dots = document.getElementById('secdash-lane-dots');
+        if (!select || !detail) return;
         const lanes = this._data.lanes || [];
+        this._lanes = lanes;
         if (!lanes.length) {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">No lane data this cycle.</div>';
+            detail.innerHTML = '<span class="text-zinc-500 text-xs">No lane data this cycle.</span>';
+            select.innerHTML = '';
+            if (dots) dots.innerHTML = '';
             return;
         }
-        el.innerHTML = lanes.map(lane => {
-            const ok = lane.last_run_conclusion === 'success';
-            const color = lane.last_run_conclusion == null ? sevColor('INFO') : ok ? sevColor('LOW') : sevColor('CRITICAL');
-            const icon = lane.last_run_conclusion == null ? 'fa-circle-question' : ok ? 'fa-circle-check' : 'fa-circle-xmark';
-            return `<div class="panel-sm secdash-lane-tile">
-                <span class="text-[11px] text-zinc-400 leading-snug">${escapeHtml(lane.label || lane.id)}</span>
-                <span style="color:${escapeHtml(color)}" class="text-xs font-medium"><i class="fa-solid ${escapeHtml(icon)} text-[10px] mr-1"></i>${escapeHtml(lane.headline || lane.last_run_conclusion || 'unavailable')}</span>
-                <span class="text-[10px] text-zinc-600">${lane.last_run_at ? escapeHtml(ago(lane.last_run_at)) : 'no runs yet'}</span>
-            </div>`;
-        }).join('');
+        select.innerHTML = lanes.map((l, i) => `<option value="${i}">${escapeHtml(l.label || l.id)}</option>`).join('');
+        select.addEventListener('change', () => this._renderLaneDetail(Number(select.value)));
+        if (dots) {
+            dots.innerHTML = lanes.map((_, i) => `<button type="button" class="secdash-lane-dot" data-idx="${i}" aria-label="Lane ${i + 1}"></button>`).join('');
+            dots.querySelectorAll('.secdash-lane-dot').forEach(btn => {
+                btn.addEventListener('click', () => this._renderLaneDetail(Number(btn.dataset.idx)));
+            });
+        }
+        this._renderLaneDetail(0);
     },
 
-    // Six Risk Breakdown cards, each a ring + status badge + a horizontal
-    // stacked bar built from THAT card's own real sub-fields (not a forced
-    // fit onto the 5-severity taxonomy — most lanes don't carry a severity
-    // breakdown at all, so inventing one there would fabricate structure
-    // that doesn't exist). The ring's fill is deliberately coarse (1.0 when
-    // clear, a fixed lower fraction otherwise) rather than a fabricated
-    // fine-grained percentage with no real denominator behind it — the
-    // exact real count/label is always shown as the ring's center text and
-    // in the stat line beneath it.
+    _renderLaneDetail(idx) {
+        const detail = document.getElementById('secdash-lane-detail');
+        const dots = document.getElementById('secdash-lane-dots');
+        const select = document.getElementById('secdash-lane-select');
+        const lane = this._lanes[idx];
+        if (!detail || !lane) return;
+        const ok = lane.last_run_conclusion === 'success';
+        const color = lane.last_run_conclusion == null ? sevColor('INFO') : ok ? sevColor('LOW') : sevColor('CRITICAL');
+        const icon = lane.last_run_conclusion == null ? 'fa-circle-question' : ok ? 'fa-circle-check' : 'fa-circle-xmark';
+        detail.innerHTML = `
+            ${statusBadge(lane.headline || lane.last_run_conclusion || 'unavailable', color, icon)}
+            <span class="text-[10px] text-zinc-600">${lane.last_run_at ? escapeHtml(ago(lane.last_run_at)) : 'no runs yet'}</span>
+        `;
+        if (dots) dots.querySelectorAll('.secdash-lane-dot').forEach((d, i) => d.classList.toggle('is-active', i === idx));
+        if (select) select.value = String(idx);
+    },
+
+    // Six compact Risk Breakdown cards, one row (not a wrapping grid of
+    // larger cards) — each a small ring + single-letter status badge (the
+    // reference's own colored-circle-with-letter convention), a title, a
+    // real delta line, and a tick-bar built from THAT card's own real
+    // sub-fields with the exact real counts printed beneath it. Most lanes
+    // only carry a pass/fail conclusion, not a severity split, so the bar's
+    // segments/tick numbers are whatever that lane genuinely has — never
+    // forced onto the 5-severity taxonomy where no real breakdown exists.
     _renderCards() {
         const el = document.getElementById('secdash-cards');
         if (!el) return;
@@ -231,79 +290,79 @@ const SecurityDashboard = {
         const lanes = def.laneIds.map(id => byId[id]).filter(Boolean);
         if (!lanes.length) {
             return `<div class="panel-sm secdash-card">
-                <div class="secdash-card-head"><i class="fa-solid ${escapeHtml(def.icon)} text-zinc-500"></i><span class="text-sm text-zinc-300">${escapeHtml(def.title)}</span></div>
-                <span class="text-xs text-zinc-600">No data this cycle.</span>
+                <div class="secdash-card-head">
+                    <div class="secdash-ring-wrap">${this._ringSvg(0, sevColor('INFO'))}<span class="secdash-ring-badge" style="color:${escapeHtml(sevColor('INFO'))}">?</span></div>
+                    <div class="flex-1 min-w-0"><div class="secdash-card-title">${escapeHtml(def.title)}</div></div>
+                </div>
+                <span class="secdash-card-delta">No data this cycle.</span>
             </div>`;
         }
         const primary = lanes[0];
-        let segs, ringFrac, ringText, badge, stat;
+        let segs, letter, letterColor, delta, ticks;
 
         if (def.id === 'codeql') {
             const open = primary.open_alerts;
             const persisted = primary.persisted_high_critical_30d || 0;
             const clear = open === 0 && persisted === 0;
-            ringFrac = clear ? 1 : 0.65;
-            ringText = open == null ? '—' : String(open);
-            badge = clear ? statusBadge('clear', sevColor('LOW'), 'fa-circle-check') : statusBadge(`${open ?? '?'} open`, sevColor('HIGH'), 'fa-triangle-exclamation');
-            stat = `${open == null ? 'unavailable' : `${open} open alert(s)`} · ${persisted} persisted HIGH/CRITICAL, 30d`;
+            letter = open == null ? '?' : clear ? 'OK' : 'H';
+            letterColor = open == null ? sevColor('INFO') : clear ? sevColor('LOW') : sevColor('HIGH');
+            delta = open == null ? 'unavailable' : `${persisted} persisted, 30d`;
             segs = open == null ? [] : (clear ? [{ v: 1, c: sevColor('LOW') }] : [{ v: Math.max(open, 1), c: sevColor('HIGH') }, { v: persisted, c: sevColor('CRITICAL') }]);
+            ticks = open == null ? [] : [open, persisted];
         } else if (def.id === 'dependency-audit' || def.id === 'security-lint') {
             const ok = primary.last_run_conclusion === 'success';
-            ringFrac = ok ? 1 : primary.last_run_conclusion == null ? 0 : 0.65;
-            ringText = ok ? 'OK' : primary.last_run_conclusion == null ? '—' : '!';
-            badge = ok ? statusBadge('passing', sevColor('LOW'), 'fa-circle-check')
-                : primary.last_run_conclusion == null ? statusBadge('no runs yet', sevColor('INFO'), 'fa-circle-question')
-                    : statusBadge(escapeHtml(primary.last_run_conclusion), sevColor('CRITICAL'), 'fa-circle-xmark');
-            stat = `Last run: ${primary.last_run_at ? ago(primary.last_run_at) : 'never'}`;
+            letter = ok ? 'OK' : primary.last_run_conclusion == null ? '?' : '!';
+            letterColor = ok ? sevColor('LOW') : primary.last_run_conclusion == null ? sevColor('INFO') : sevColor('CRITICAL');
+            delta = primary.last_run_at ? ago(primary.last_run_at) : 'never run';
             segs = primary.last_run_conclusion == null ? [] : [{ v: 1, c: ok ? sevColor('LOW') : sevColor('CRITICAL') }];
+            ticks = [];
         } else if (def.id === 'redteam') {
             const bd = primary.severity_breakdown || {};
             const total = SEV_ORDER.reduce((s, k) => s + (bd[k] || 0), 0);
             const bad = (bd.CRITICAL || 0) + (bd.HIGH || 0);
-            ringFrac = total === 0 ? 1 : bad === 0 ? 1 : 0.65;
-            ringText = String(total);
-            badge = bad > 0 ? statusBadge(`${bad} HIGH/CRIT`, sevColor('HIGH'), 'fa-triangle-exclamation') : statusBadge('clean', sevColor('LOW'), 'fa-circle-check');
-            const deepNote = lanes[1] ? ` · deep sweep: ${lanes[1].headline || 'n/a'}` : '';
-            stat = `${primary.headline || 'no data'}${deepNote}`;
+            letter = total === 0 ? 'OK' : bad > 0 ? 'H' : 'L';
+            letterColor = (total === 0 || bad === 0) ? sevColor('LOW') : sevColor('HIGH');
+            delta = `${total} findings, 30d`;
             segs = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => ({ v: bd[k], c: sevColor(k) }));
+            ticks = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => bd[k]);
         } else if (def.id === 'intel-sweeps') {
             const ratio = typeof primary.coverage_ratio === 'number' ? primary.coverage_ratio : null;
-            ringFrac = ratio == null ? 0 : ratio;
-            ringText = ratio == null ? '—' : `${Math.round(ratio * 100)}%`;
-            badge = statusBadge(primary.threat_level || 'unknown', primary.threat_level === 'HIGH' ? sevColor('CRITICAL') : primary.threat_level === 'MEDIUM' ? sevColor('MEDIUM') : sevColor('LOW'), 'fa-satellite-dish');
+            letter = primary.threat_level === 'HIGH' ? 'H' : primary.threat_level === 'MEDIUM' ? 'M' : primary.threat_level === 'LOW' ? 'L' : '?';
+            letterColor = primary.threat_level === 'HIGH' ? sevColor('CRITICAL') : primary.threat_level === 'MEDIUM' ? sevColor('MEDIUM') : sevColor('LOW');
             const gaps = (primary.gap_patterns || []).length;
-            stat = ratio == null ? 'unavailable' : `${Math.round(ratio * 100)}% of known attack patterns covered · ${gaps} gap(s)`;
+            delta = ratio == null ? 'unavailable' : `${Math.round(ratio * 100)}% covered, ${gaps} gap(s)`;
             segs = ratio == null ? [] : [{ v: ratio, c: sevColor('LOW') }, { v: 1 - ratio, c: sevColor('MEDIUM') }];
+            ticks = [];
         } else { // ledger-integrity
             const seal = lanes.find(l => l.id === 'findings-seal') || primary;
             const drift = lanes.find(l => l.id === 'review-ledger');
             const intact = seal.chain_intact;
-            ringFrac = intact === true ? 1 : intact === false ? 0.4 : 0.65;
-            ringText = intact === true ? 'OK' : intact === false ? '!' : '—';
-            badge = intact === true ? statusBadge('intact', sevColor('LOW'), 'fa-link')
-                : intact === false ? statusBadge('broken', sevColor('CRITICAL'), 'fa-link-slash')
-                    : statusBadge('unknown', sevColor('INFO'), 'fa-circle-question');
+            letter = intact === true ? 'OK' : intact === false ? '!' : '?';
+            letterColor = intact === true ? sevColor('LOW') : intact === false ? sevColor('CRITICAL') : sevColor('INFO');
             const worsened = drift ? (drift.worsened_30d || 0) : 0;
             const improved = drift ? (drift.improved_30d || 0) : 0;
-            stat = `Chain ${intact === true ? 'intact' : intact === false ? 'broken' : 'unknown'} · ${worsened} worsened / ${improved} improved, 30d`;
+            delta = `${worsened} worse / ${improved} better, 30d`;
             segs = (worsened + improved) === 0 ? [{ v: 1, c: sevColor('LOW') }] : [{ v: worsened, c: sevColor('HIGH') }, { v: improved, c: sevColor('LOW') }];
+            ticks = (worsened + improved) === 0 ? [] : [worsened, improved];
         }
 
-        const ringSvg = this._ringSvg(ringFrac, segs.length && segs[0] ? segs[0].c : sevColor('INFO'));
+        const ringFrac = letterColor === sevColor('LOW') ? 1 : letterColor === sevColor('INFO') ? 0 : 0.7;
+        const ringSvg = this._ringSvg(ringFrac, letterColor);
         const barHtml = segs.length
-            ? `<div class="secdash-sev-bar">${segs.map(s => `<div class="secdash-sev-seg" style="flex:${Math.max(s.v, 0.02)} 0 auto; background:${escapeHtml(s.c)}"></div>`).join('')}</div>`
-            : `<div class="secdash-sev-bar"><div class="secdash-sev-seg" style="flex:1 0 auto; background:${escapeHtml(sevColor('INFO'))}"></div></div>`;
+            ? `<div class="secdash-tick-bar">${segs.map(s => `<div class="secdash-tick-seg" style="flex:${Math.max(s.v, 0.02)} 0 auto; background:${escapeHtml(s.c)}"></div>`).join('')}</div>`
+            : `<div class="secdash-tick-bar"><div class="secdash-tick-seg" style="flex:1 0 auto; background:${escapeHtml(sevColor('INFO'))}"></div></div>`;
+        const ticksHtml = ticks.length
+            ? `<div class="secdash-tick-labels">${ticks.map(t => `<span>${escapeHtml(String(t))}</span>`).join('')}</div>`
+            : '';
 
         return `<div class="panel-sm secdash-card">
             <div class="secdash-card-head">
-                <div class="secdash-ring-wrap">${ringSvg}<span class="secdash-ring-value">${escapeHtml(ringText)}</span></div>
-                <div class="flex-1 min-w-0">
-                    <div class="text-sm text-zinc-300 flex items-center gap-1.5"><i class="fa-solid ${escapeHtml(def.icon)} text-zinc-500 text-xs"></i>${escapeHtml(def.title)}</div>
-                    ${badge}
-                </div>
+                <div class="secdash-ring-wrap">${ringSvg}<span class="secdash-ring-badge" style="color:${escapeHtml(letterColor)}">${escapeHtml(letter)}</span></div>
+                <div class="flex-1 min-w-0"><div class="secdash-card-title">${escapeHtml(def.title)}</div></div>
             </div>
             ${barHtml}
-            <span class="text-[10.5px] text-zinc-600">${escapeHtml(stat)}</span>
+            ${ticksHtml}
+            <span class="secdash-card-delta">${escapeHtml(delta)}</span>
         </div>`;
     },
 
@@ -312,11 +371,11 @@ const SecurityDashboard = {
     // stroke-dasharray for the fill fraction, matching the reference's
     // small ring-gauge shape.
     _ringSvg(frac, color) {
-        const r = 18, c = 2 * Math.PI * r, filled = Math.max(0, Math.min(1, frac)) * c;
-        return `<svg viewBox="0 0 44 44" width="46" height="46">
-            <circle cx="22" cy="22" r="${r}" fill="none" stroke="${escapeHtml(cssVar('--bg-panel-sm') || '#27272a')}" stroke-width="4"/>
-            <circle cx="22" cy="22" r="${r}" fill="none" stroke="${escapeHtml(color)}" stroke-width="4"
-                stroke-dasharray="${filled} ${c}" stroke-linecap="round" transform="rotate(-90 22 22)"/>
+        const r = 13, c = 2 * Math.PI * r, filled = Math.max(0, Math.min(1, frac)) * c;
+        return `<svg viewBox="0 0 32 32" width="34" height="34">
+            <circle cx="16" cy="16" r="${r}" fill="none" stroke="${escapeHtml(cssVar('--bg-panel-sm') || '#27272a')}" stroke-width="3"/>
+            <circle cx="16" cy="16" r="${r}" fill="none" stroke="${escapeHtml(color)}" stroke-width="3"
+                stroke-dasharray="${filled} ${c}" stroke-linecap="round" transform="rotate(-90 16 16)"/>
         </svg>`;
     },
 
@@ -329,7 +388,6 @@ const SecurityDashboard = {
     // — never backfilled or faked to look fuller than it is.
     _renderTimeline() {
         const canvas = document.getElementById('secdashTimelineChart');
-        const note = document.getElementById('secdash-timeline-note');
         if (!canvas || typeof Chart === 'undefined') return;
         if (this._timelineChart) this._timelineChart.destroy();
 
@@ -350,11 +408,10 @@ const SecurityDashboard = {
                 },
                 options: this._barOptions(true),
             };
-            if (note) note.textContent = 'Bucketed by real ISO week, from VAPE’s own findings ledger.';
         } else {
             const points = this._history;
             if (!points.length) {
-                canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">Tracking since launch — no history yet. Check back after the next scheduled run.</div>';
+                canvas.parentElement.innerHTML = '<div class="text-zinc-500 text-sm">Tracking since launch — no history yet.</div>';
                 return;
             }
             const levelToY = { LOW: 1, MEDIUM: 2, HIGH: 3 };
@@ -375,7 +432,6 @@ const SecurityDashboard = {
                     },
                 },
             };
-            if (note) note.textContent = 'Tracking since this dashboard launched — never backfilled.';
         }
         this._timelineChart = new Chart(canvas, cfg);
     },
@@ -384,10 +440,10 @@ const SecurityDashboard = {
         return {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#a1a1aa', boxWidth: 10, font: { size: 10 } } } },
+            plugins: { legend: { position: 'bottom', labels: { color: '#a1a1aa', boxWidth: 8, font: { size: 9.5 } } } },
             scales: {
-                x: { stacked, ticks: { color: '#71717a', font: { size: 10 } }, grid: { display: false } },
-                y: { stacked, ticks: { color: '#71717a', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                x: { stacked, ticks: { color: '#71717a', font: { size: 9.5 } }, grid: { display: false } },
+                y: { stacked, ticks: { color: '#71717a', font: { size: 9.5 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
             },
         };
     },

@@ -273,63 +273,124 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     background: rgba(255, 255, 255, 0.35);
 }
 
-/* Security Dashboard — threat-level arc gauge. A Chart.js doughnut rotated
-   into a half-circle (rotation:-90, circumference:180) is the standard,
-   accepted way to render a gauge with Chart.js without a plugin; legitimate
-   here specifically because the underlying value is a real ordinal 3-state
+/* Security Dashboard — scoped blue accent (same #60a5fa as
+   #bounty-command-center's own scoped swap above) instead of the site's
+   global green --accent, so this section's interactive chrome (active
+   toggle pills, the lane <select>) reads as its own console rather than
+   inheriting the ambient accent used everywhere else — severity itself
+   stays on the --sev-* ramp below regardless, since that encodes real
+   data and is never themed. */
+#security-dashboard .term-btn-active {
+    border-color: #60a5fa;
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.14);
+}
+#security-dashboard .secdash-lane-select:focus {
+    border-color: #60a5fa;
+}
+
+/* Compact panel title — smaller/tighter than the site's default h3 so six
+   of these widgets can share one screen ("everything in one area," per
+   the reference), not stack as full sections down the page. */
+.secdash-panel { display: flex; flex-direction: column; }
+.secdash-panel-title {
+    font-size: 12px;
+    color: #a1a1aa;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Threat-level arc gauge. A Chart.js doughnut rotated into a half-circle
+   (rotation:-90, circumference:180) is the standard, accepted way to
+   render a gauge with Chart.js without a plugin; legitimate here
+   specifically because the underlying value is a real ordinal 3-state
    category (LOW/MEDIUM/HIGH from security_sweep.py::compute_threat_level),
    not a fabricated continuous dial — always paired with the explicit label
-   below it so the reading is never color-alone. */
+   below it so the reading is never color-alone. Sized to sit inside a
+   compact card alongside the other Row 1 widgets, not as its own
+   full-width section. */
 .secdash-gauge-wrap {
     position: relative;
-    height: 160px;
+    height: 108px;
     width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
+    max-width: 200px;
+    margin: 0.25rem auto 0;
 }
 .secdash-gauge-label {
     position: absolute;
     left: 50%;
-    bottom: 6px;
+    bottom: 2px;
     transform: translateX(-50%);
     text-align: center;
 }
 
-/* Category-card ring gauge (part-to-whole at small size — a legitimate
-   donut-cutout use, distinct from the full threat-level gauge above) +
-   status badge (icon + label, never color-alone) + horizontal stacked
-   severity bar with visible gaps between segments. */
-.secdash-card { display: flex; flex-direction: column; gap: 0.75rem; }
-.secdash-card-head { display: flex; align-items: center; gap: 0.75rem; }
-.secdash-ring-wrap { position: relative; width: 46px; height: 46px; flex-shrink: 0; }
-.secdash-ring-value {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-family: var(--font-mono); color: #d4d4d8;
+/* Findings Count: a real count+percentage list beside a small donut,
+   matching the reference's list-plus-donut composition (more scannable
+   than a bottom legend alone). */
+.secdash-sev-split { display: flex; align-items: center; gap: 0.75rem; flex: 1; }
+.secdash-sev-list { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; font-size: 11.5px; }
+.secdash-sev-list li { display: flex; align-items: center; gap: 0.45rem; }
+.secdash-sev-chip { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.secdash-sev-label { color: #a1a1aa; flex: 1; }
+.secdash-sev-count { font-family: var(--font-mono); color: #e4e4e7; }
+.secdash-sev-pct { font-family: var(--font-mono); color: #71717a; width: 3.2em; text-align: right; }
+.secdash-sev-donut-wrap { position: relative; width: 108px; height: 108px; flex-shrink: 0; }
+.secdash-sev-donut-total {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    pointer-events: none;
+}
+.secdash-sev-donut-total span:first-child { font-size: 9px; color: #71717a; text-transform: uppercase; }
+.secdash-sev-donut-total span:last-child { font-size: 13px; color: #e4e4e7; font-family: var(--font-mono); }
+
+/* Automated Lanes — a <select> (real per-workflow list) driving a single
+   compact status readout, with pagination dots to page through the rest
+   without needing a wide horizontal-scroll strip. Replaces the reference
+   screenshot's fabricated "Active Campaigns" gauge+carousel concept
+   (VAPE has no campaign notion) while keeping the reference's
+   dropdown+paged-indicator composition, sized to match the gauge/donut
+   cards beside it. */
+.secdash-lane-select {
+    max-width: 130px;
+    font-size: 10.5px;
+    padding: 0.2rem 0.4rem;
 }
 .secdash-badge {
-    display: inline-flex; align-items: center; gap: 0.35rem;
+    display: inline-flex; align-items: center; gap: 0.35rem; align-self: flex-start;
     font-size: 10.5px; padding: 0.2rem 0.55rem; border-radius: 999px;
     border: 1px solid var(--border); white-space: nowrap;
 }
-.secdash-sev-bar {
-    display: flex; height: 8px; width: 100%; border-radius: 999px; overflow: hidden;
-    background: var(--bg-panel-sm); gap: 2px;
+.secdash-lane-detail { display: flex; flex-direction: column; gap: 0.3rem; min-height: 62px; justify-content: center; }
+.secdash-lane-dots { display: flex; align-items: center; justify-content: center; gap: 0.3rem; margin-top: 0.5rem; }
+.secdash-lane-dot {
+    width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.18);
+    border: none; padding: 0; cursor: pointer;
 }
-.secdash-sev-seg { height: 100%; min-width: 2px; }
+.secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35); }
+.secdash-lane-dot.is-active { background: #60a5fa; }
 
-/* "Automated Security Lanes" strip — one small tile per real security
-   workflow's last-run status, reusing .offerings-scroll's horizontal-scroll
-   + scroll-snap motion (see site.css above) since the underlying list is a
-   real, growing set of workflows, not a chart. Replaces the reference
-   screenshot's fabricated "Active Campaigns" gauge+carousel concept, which
-   has no VAPE equivalent. */
-.secdash-lane-tile {
-    flex: 0 0 auto;
-    width: 168px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+/* Risk Breakdown cards — one compact row of six (not a wrapping grid of
+   larger cards), each: a small ring + single-letter severity badge (the
+   reference's own "M"/"H" circle convention) + title + a real delta line
+   + a horizontal tick-bar built from that card's own real sub-fields
+   (see securitydashboard.js — most lanes only carry a pass/fail
+   conclusion, not a severity split, so the bar's segments are whatever
+   that lane genuinely has, never forced onto the 5-severity taxonomy). */
+.secdash-card { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.65rem !important; }
+.secdash-card-head { display: flex; align-items: center; gap: 0.5rem; }
+.secdash-ring-wrap { position: relative; width: 34px; height: 34px; flex-shrink: 0; }
+.secdash-ring-badge {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; font-family: var(--font-mono);
 }
+.secdash-card-title { font-size: 11px; color: #d4d4d8; line-height: 1.25; }
+.secdash-card-delta { font-size: 9.5px; color: #71717a; }
+.secdash-tick-bar {
+    display: flex; height: 6px; width: 100%; border-radius: 999px; overflow: hidden;
+    background: var(--bg-panel-sm); gap: 1px;
+}
+.secdash-tick-seg { height: 100%; min-width: 2px; }
+.secdash-tick-labels { display: flex; justify-content: space-between; font-size: 8.5px; font-family: var(--font-mono); color: #52525b; }
 
 /* x402 Activity tiles — Transactions / Volume / Buyers, each a big number
    plus a small bar-sparkline of the same real per-day data backing the main
