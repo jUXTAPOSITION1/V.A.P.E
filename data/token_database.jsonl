@@ -108,3 +108,4 @@
 {"ts": "2026-08-01T12:50:33.627274Z", "address": "0xB8d7710f7d8349A506b75dD184F05777c82dAd0C", "chain": "43114", "symbol": "ARENA", "name": "ARENA", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-08-01T13:36:51.704296Z", "address": "0x330990DaE53BCa4C5811C5362B44C33a47db7777", "chain": "56", "symbol": "ASTEROID", "name": "ASTEROID", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-01T16:25:03.493493Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-08-01T18:56:36.601795Z", "address": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "exploit_check"}
