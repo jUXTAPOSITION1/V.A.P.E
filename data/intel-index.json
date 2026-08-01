@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T07:25:45Z",
+  "generated": "2026-08-01T07:34:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 135,
-    "investigations": 607,
+    "investigations": 608,
     "news": 39,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-071849-0x5949f201.md",
+      "file": "investigation-20260801-073359-0x44444e31.md",
       "title": "Investigation \u2014 CHEESE",
       "symbol": "CHEESE",
-      "name": "Cheese Head",
-      "date": "2026-08-01T07:18:49Z",
-      "target": "0x5949f201bE7A159D551d9480B900570ddCADAb7b",
+      "name": "Cheesed Pepe",
+      "date": "2026-08-01T07:33:59Z",
+      "target": "0x44444e3196faeF2FBe917622202CdD2dcCcB021B",
       "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $10,045; [-10] Violent 24h move +1177% (volatility/manipulation); [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 100% of li",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-071849-0x5949f201.md"
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 72% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,049. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 794+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-073359-0x44444e31.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-073359-0x44444e31.md",
+      "title": "Investigation \u2014 CHEESE",
+      "symbol": "CHEESE",
+      "name": "Cheesed Pepe",
+      "date": "2026-08-01T07:33:59Z",
+      "target": "0x44444e3196faeF2FBe917622202CdD2dcCcB021B",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 72% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,049. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 794+ days without a known incident in this scan; Custom verified source (not a mass-p",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-073359-0x44444e31.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-071849-0x5949f201.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MEMESTOCK (0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrat",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-004104-0x0C42cC85.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-002603-0x0Ffd8Add.md",
-      "title": "Investigation \u2014 MEMESTOCK",
-      "symbol": "MEMESTOCK",
-      "name": "MEMESTOCK",
-      "date": "2026-07-31T00:26:03Z",
-      "target": "0x0Ffd8Add68ED4D1c3305baA2BF66B5D6440206F7",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: 401K (0x7075DdC6b9D265a372b697296A9114ed1Af3F9D7) \u2014 REJECT 5/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-002603-0x0Ffd8Add.md"
     }
   ],
   "reports": [

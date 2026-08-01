@@ -1025,3 +1025,5 @@
 | 2026-08-01 | auto | 0x9A833F5ba55D4B040C5f0B1eddDdD00c27418768 (ZERO) | deep_investigation | CAUTION (65/100) | Violent 24h move +1599% (volatility/manipulation) | +7d |
 
 | 2026-08-01 | auto | 0x5949f201bE7A159D551d9480B900570ddCADAb7b (CHEESE) | deep_investigation | CAUTION (55/100) | Low liquidity $10,045 | +7d |
+
+| 2026-08-01 | auto | 0x44444e3196faeF2FBe917622202CdD2dcCcB021B (CHEESE) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 72% of supply — concentrated, easily manipula | +7d |

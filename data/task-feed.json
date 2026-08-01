@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-01T07:18:55Z",
-  "synthesis": "[automation] skill",
+  "generated": "2026-08-01T07:34:04Z",
+  "synthesis": "202",
   "tasks": [
+    {
+      "sha": "d10cbb6f35",
+      "kind": "automation",
+      "message": "news-intel 2026-08-01T07:25Z",
+      "date": "2026-08-01T07:25:45Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d10cbb6f3549b40127abbee2ec96cd66c1229fdf"
+    },
+    {
+      "sha": "5cb244fb7f",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-01T07:18Z",
+      "date": "2026-08-01T07:18:59Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5cb244fb7f2c52a317c2bf510976bce21fb52baf"
+    },
     {
       "sha": "32ae0195f9",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "VAPE repo review 2026-08-01T05:56Z",
       "date": "2026-08-01T05:56:24Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/284fe16e6088a8ceb8c130c48d91e3f51d8f6a97"
-    },
-    {
-      "sha": "41a1cb0651",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-01T05:48Z",
-      "date": "2026-08-01T05:48:43Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/41a1cb0651c04c36d0fe049565d2441569b14486"
-    },
-    {
-      "sha": "55d2833a23",
-      "kind": "sweep",
-      "message": "base_sweep 2026-08-01T05:47Z",
-      "date": "2026-08-01T05:47:33Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/55d2833a23261f713805423cdb420c3916cbbd5f"
     }
   ]
 }

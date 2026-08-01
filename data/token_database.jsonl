@@ -102,3 +102,4 @@
 {"ts": "2026-08-01T02:49:46.534062Z", "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "chain": "8453", "symbol": "ETD", "name": "ETD", "source": "base", "offering": "token_chart"}
 {"ts": "2026-08-01T03:19:38.944133Z", "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "chain": "8453", "symbol": "cbBTC", "name": "cbBTC", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-01T04:49:04.512942Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "token_chart"}
+{"ts": "2026-08-01T07:34:03.207196Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "token_safety_check"}
