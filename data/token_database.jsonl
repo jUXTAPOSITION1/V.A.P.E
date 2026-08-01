@@ -112,3 +112,4 @@
 {"ts": "2026-08-01T19:11:35.218762Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-01T19:57:01.332371Z", "address": "0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E", "chain": "42161", "symbol": "WINR", "name": "WINR", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-08-01T20:42:31.365687Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-08-01T21:27:38.034069Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "token_safety_check"}
