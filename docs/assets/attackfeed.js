@@ -6,9 +6,16 @@
 // incidents only. An empty or unreachable feed renders an honest empty
 // state; nothing here is ever fabricated to fill space.
 import { resolveProtocolLogo } from './icons.js';
+import { fetchStories, articleUrl, ago as agoIso } from './newswire.js';
 
 const ATTACK_FEED_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/attack-feed.json';
 const REPORT_BLOB_BASE = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
+
+// The top-of-page ticker is a combined feed (explicit direction 2026-08-01):
+// real security incidents interleaved with VAPE's own published VAPE Wire
+// articles, sorted by recency. Capped so one quiet week of incidents doesn't
+// get buried under months of article backlog, or vice versa.
+const TICKER_CAP = 30;
 
 // agents/hack_agent.py writes one real, standalone analysis per incident
 // (grounded only in this same feed's real fields, plus a live web search)
@@ -75,15 +82,38 @@ const AttackFeed = {
     _ledger: { q: '', severity: '', sort: 'date_desc', page: 0 },
 
     async init() {
-        try {
-            const res = await fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`);
-            this._data = await res.json();
-        } catch (e) {
-            this._data = null;
-        }
+        // Fetched independently (and in parallel) so a failure on one feed
+        // never wipes out a genuinely successful fetch of the other.
+        const [data, stories] = await Promise.all([
+            (async () => {
+                try {
+                    const res = await fetch(`${ATTACK_FEED_URL}?t=${Date.now()}`);
+                    return await res.json();
+                } catch (e) {
+                    return null;
+                }
+            })(),
+            fetchStories(),
+        ]);
+        this._data = data;
+        this._tickerItems = this._buildTickerItems(this._incidents(), stories);
         this._renderTicker();
         this._wireLedgerControls();
         this._renderLedger();
+    },
+
+    // Tags each item with its type so the ticker can render/link it
+    // correctly, then sorts the merged list by recency. Incident dates are
+    // day-only (attack-feed.json), so they sort to the start of that UTC day;
+    // story dates carry real timestamps (build_intel_index.py) — good enough
+    // for a decorative rotation, not used for anything precision-sensitive.
+    _buildTickerItems(incidents, stories) {
+        const tagged = [
+            ...incidents.map(data => ({ type: 'incident', ts: Date.parse(`${data.date}T00:00:00Z`) || 0, data })),
+            ...stories.map(data => ({ type: 'news', ts: Date.parse(data.date) || 0, data })),
+        ];
+        tagged.sort((a, b) => b.ts - a.ts);
+        return tagged.slice(0, TICKER_CAP);
     },
 
     _wireLedgerControls() {
@@ -228,7 +258,7 @@ const AttackFeed = {
     // desktop despite plenty of total width). Letting name size to its own
     // content first and giving technique the sole flex-grow means technique
     // gets everything name doesn't actually use.
-    _tickerLineHtml(item) {
+    _incidentTickerInner(item) {
         const sev = severityClass(item.amount_usd_m);
         return `<span class="w-1.5 h-1.5 rounded-full ${sev.dot} shrink-0"></span>
             ${this._iconHtml(item.name, 'w-4 h-4')}
@@ -236,6 +266,26 @@ const AttackFeed = {
             <span class="${sev.text} font-semibold shrink-0">${fmtLoss(item.amount_usd_m)}</span>
             <span class="text-zinc-600 truncate min-w-0" style="flex:1 1 0%">${escapeHtml(item.technique || '')}</span>
             <span class="text-zinc-700 shrink-0 font-mono text-[11px]">${escapeHtml(ago(item.date))}</span>`;
+    },
+
+    // Blue matches the site's other "featured/spotlight" callouts (never
+    // decoration elsewhere in this codebase) — distinct from rose, which
+    // stays a dedicated threat-severity signal and must not also mean "news."
+    _newsTickerInner(story) {
+        return `<span class="w-1.5 h-1.5 rounded-full bg-[#60a5fa] shrink-0"></span>
+            <i class="fa-solid fa-newspaper text-[11px] text-[#60a5fa] shrink-0"></i>
+            <span class="text-zinc-200 font-medium truncate min-w-0" style="flex:1 1 0%">${escapeHtml(story.title || '')}</span>
+            <span class="text-[#60a5fa] text-[11px] shrink-0">VAPE Wire</span>
+            <span class="text-zinc-700 shrink-0 font-mono text-[11px]">${escapeHtml(agoIso(story.date))}</span>`;
+    },
+
+    // Each rendered line is its own link to its real destination — the
+    // ticker's outer wrapper is a plain div (see index.html), not a single
+    // blanket link, so this always wraps the row itself.
+    _tickerEntryHtml(entry) {
+        const inner = entry.type === 'news' ? this._newsTickerInner(entry.data) : this._incidentTickerInner(entry.data);
+        const href = entry.type === 'news' ? articleUrl(entry.data) : '#threat-ledger';
+        return `<a href="${escapeHtml(href)}" class="flex items-center gap-2 min-w-0 w-full" draggable="false">${inner}</a>`;
     },
 
     // News-ticker motion: each incident slides in from the right, comes to
@@ -254,23 +304,23 @@ const AttackFeed = {
         this._tickerLine = line;
         this._tickerProgress = progress;
 
-        const incidents = this._incidents();
-        if (!incidents.length) {
+        const items = this._tickerItems || [];
+        if (!items.length) {
             line.style.transition = 'none';
             line.style.transform = 'translateX(0)';
-            line.innerHTML = '<span class="text-zinc-600">No incidents in the tracked feed this cycle — the ticker fills in as soon as one lands.</span>';
+            line.innerHTML = '<span class="text-zinc-600">No incidents or stories in the live feed this cycle — it fills in as soon as one lands.</span>';
             if (progress) progress.style.left = '-10%';
             return;
         }
-        this._tickerIncidents = incidents;
+        this._tickerIncidents = items;
 
         const paint = (idx) => {
-            line.innerHTML = this._tickerLineHtml(incidents[idx]);
+            line.innerHTML = this._tickerEntryHtml(items[idx]);
             this._enhanceIcons(line);
         };
 
         const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduceMotion || incidents.length === 1) {
+        if (reduceMotion || items.length === 1) {
             line.style.transition = 'none';
             line.style.transform = 'translateX(0)';
             paint(this._rotateIdx);
@@ -331,7 +381,7 @@ const AttackFeed = {
             this._rotateIdx = (this._rotateIdx + dir + len) % len;
             line.style.transition = 'none';
             line.style.transform = `translateX(${dir > 0 ? '100%' : '-100%'})`;
-            line.innerHTML = this._tickerLineHtml(this._tickerIncidents[this._rotateIdx]);
+            line.innerHTML = this._tickerEntryHtml(this._tickerIncidents[this._rotateIdx]);
             this._enhanceIcons(line);
             void line.offsetWidth;
             this._slideIn();

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The V.A.P.E Report — On-Chain Intelligence System</title>
-    <meta name="description" content="VAPE is an autonomous on-chain intelligence system for Base and Ethereum/EVM — continuous investigations, market intelligence, and security audits, hireable instantly via x402.">
+    <meta name="description" content="VAPE is an autonomous intelligence system for Base and the wider EVM ecosystem — continuous investigations, market intelligence, security audits, and its own VAPE Wire newsroom, hireable instantly via x402.">
     <link rel="canonical" href="https://juxtaposition1.github.io/V.A.P.E/">
 
     <!-- Open Graph / Facebook, Discord, Slack, LinkedIn -->
@@ -12,8 +12,8 @@
     <meta property="og:url" content="https://juxtaposition1.github.io/V.A.P.E/">
     <meta property="og:site_name" content="The V.A.P.E Report">
     <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="The V.A.P.E Report — Intelligence, verified on-chain.">
-    <meta property="og:description" content="VAPE is an autonomous on-chain intelligence system for Base and Ethereum/EVM — continuous investigations, market intelligence, and security audits, hireable instantly via x402.">
+    <meta property="og:title" content="The V.A.P.E Report — A single system, watching everything that matters.">
+    <meta property="og:description" content="VAPE is an autonomous intelligence system for Base and the wider EVM ecosystem — continuous investigations, market intelligence, security audits, and its own VAPE Wire newsroom, hireable instantly via x402.">
     <meta property="og:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -23,8 +23,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@based_vape">
     <meta name="twitter:creator" content="@based_vape">
-    <meta name="twitter:title" content="The V.A.P.E Report — Intelligence, verified on-chain.">
-    <meta name="twitter:description" content="VAPE is an autonomous on-chain intelligence system for Base and Ethereum/EVM — continuous investigations, market intelligence, and security audits, hireable instantly via x402.">
+    <meta name="twitter:title" content="The V.A.P.E Report — A single system, watching everything that matters.">
+    <meta name="twitter:description" content="VAPE is an autonomous intelligence system for Base and the wider EVM ecosystem — continuous investigations, market intelligence, security audits, and its own VAPE Wire newsroom, hireable instantly via x402.">
     <meta name="twitter:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
     <meta name="twitter:image:alt" content="VAPE — an on-chain intelligence system for Base and Ethereum, rendered as a figure in AR field glasses">
 
@@ -63,12 +63,12 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=11">
+    <link rel="stylesheet" href="assets/site.css?v=12">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
     <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-[1600px] mx-auto px-5 sm:px-8 xl:px-10 py-3.5 flex items-center justify-between gap-4">
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 py-3.5 flex items-center justify-between gap-4">
             <button id="nav-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu-panel" class="flex items-center gap-2.5 shrink-0">
                 <!-- Inline SVG rather than a Font Awesome glyph: on mobile this
                      is the only route into the nav, so it must not silently
@@ -112,7 +112,7 @@
              this. Visibility is animated via opacity/transform (not
              display:none) so the open/close transition can actually animate. -->
         <div id="nav-menu-panel" class="lg:hidden absolute top-full left-0 right-0 border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl invisible opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out origin-top">
-            <div class="max-w-[1600px] mx-auto px-5 py-3 flex flex-col gap-1 text-sm text-zinc-300">
+            <div class="max-w-[1600px] mx-auto px-3 py-3 flex flex-col gap-1 text-sm text-zinc-300">
                 <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Overview</a>
                 <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>News</a>
                 <a href="#case-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-star w-4 text-center text-zinc-500"></i>Investigation</a>
@@ -126,20 +126,26 @@
         </div>
     </nav>
 
-    <main class="max-w-[1600px] mx-auto px-5 sm:px-8 xl:px-10 pt-4 pb-24">
+    <main class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-4 pb-24">
 
-        <!-- ═══ 0. LIVE THREAT TICKER ═══
+        <!-- ═══ 0. LIVE TICKER ═══
              Fills the gap between the sticky nav and the hero — a single
              rotating line, not a dashboard, so it reads as ambient signal
-             rather than competing with the hero for attention. Real
-             incidents only (data/attack-feed.json, written by
-             agents/security_sweep.py from DeFiLlama's hacks feed) — an
-             empty feed renders an honest "no incidents" state, never a
-             placeholder attack. The whole bar is a single link to the full
-             Threat Ledger — tappable on mobile, not just a desktop-only
-             "Full Ledger" label. Rose is the one deliberate functional
-             danger-color exception (threat severity), not decoration. -->
-        <a href="#threat-ledger" id="attack-ticker" draggable="false" class="reveal mb-3 block group">
+             rather than competing with the hero for attention. Combined
+             feed (explicit direction 2026-08-01): real security incidents
+             (data/attack-feed.json, agents/security_sweep.py from
+             DeFiLlama's hacks feed) interleaved with VAPE's own published
+             VAPE Wire articles (data/intel-index.json's news array —
+             VAPE's own written stories, never the raw external headline-
+             discovery feed) — attackfeed.js merges and sorts both by
+             recency. Each item is its own link to its real destination
+             (an incident to the Threat Ledger below, an article to its own
+             reader page), not one blanket link around the whole box, so
+             the wrapper itself is a plain div now. An empty feed renders
+             an honest "no items" state, never a placeholder. Rose is the
+             one deliberate functional danger-color exception (threat
+             severity), not decoration. -->
+        <div id="attack-ticker" draggable="false" class="reveal mb-3 block group">
             <div class="panel-sm border-rose-500/20 transition-colors group-hover:border-rose-500/40">
                 <div class="flex items-center justify-between gap-3 mb-2">
                     <div class="flex items-center gap-2 shrink-0">
@@ -147,31 +153,38 @@
                             <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-60"></span>
                             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
                         </span>
-                        <span class="text-xs text-zinc-500 whitespace-nowrap">Exploits</span>
+                        <span class="text-xs text-zinc-500 whitespace-nowrap">Live Feed</span>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 text-[11px] text-zinc-500 group-hover:text-rose-400 transition shrink-0">
+                    <a href="#threat-ledger" class="inline-flex items-center gap-1.5 text-[11px] text-zinc-500 hover:text-rose-400 transition shrink-0">
                         <span class="sr-only sm:not-sr-only">Full Ledger</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                    </span>
+                    </a>
                 </div>
                 <div class="w-full h-5 relative overflow-hidden">
                     <div id="attack-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
-                        <span class="text-zinc-600">syncing threat feed…</span>
+                        <span class="text-zinc-600">syncing live feed…</span>
                     </div>
                 </div>
                 <div class="h-[2px] bg-white/5 relative overflow-hidden mt-3" aria-hidden="true">
                     <div id="attack-ticker-progress" class="absolute top-0 h-full w-8 rounded-full bg-rose-500/60" style="left:-10%"></div>
                 </div>
             </div>
-        </a>
+        </div>
 
-        <!-- ═══ 1. HERO ═══ -->
+        <!-- ═══ 1+2. HERO + PLATFORM OVERVIEW (merged, explicit direction 2026-08-01:
+             the standalone hero and the "[ system overview ]" card below it said the
+             same thing twice — one title, one combined description, doing both jobs. ═══ -->
         <header class="reveal pt-2 sm:pt-3 pb-8 sm:pb-12">
+            <div class="eyebrow mb-3"><i class="fa-solid fa-satellite-dish"></i>[ system overview ]</div>
             <h1 class="hero-title">
-                Intelligence, verified on-chain.
+                A single system, watching everything that matters.
             </h1>
-            <p class="text-zinc-400 mt-5 text-sm sm:text-base max-w-xl leading-relaxed">
-                VAPE continuously monitors Base, Ethereum, and the wider EVM ecosystem — live
-                investigations, market intelligence, and security audits, hireable instantly on-chain.
+            <p class="text-zinc-400 mt-5 text-sm sm:text-base max-w-2xl leading-relaxed">
+                VAPE is an autonomous intelligence system for Base, Ethereum, and the wider EVM ecosystem —
+                continuous investigations, market intelligence, security audits, and its own VAPE Wire newsroom,
+                hireable instantly on-chain. It turns the constant noise of on-chain activity into a small
+                number of things worth knowing — which tokens are safe to touch, which capital flows are
+                shifting, and which threats deserve attention right now — and runs continuously, citing its
+                sources every time.
             </p>
             <p class="text-zinc-600 mt-4 text-sm" id="last-sync">syncing…</p>
             <div class="flex flex-wrap gap-3 mt-7">
@@ -180,16 +193,10 @@
             </div>
         </header>
 
-        <!-- ═══ 2. PLATFORM OVERVIEW ═══ -->
+        <!-- ═══ 2. TRACK RECORD ═══ -->
         <section id="the-file" class="reveal panel mb-14">
-            <div class="eyebrow mb-3"><i class="fa-solid fa-satellite-dish"></i>[ system overview ]</div>
-            <h2 class="section-title text-lg mb-4">A single system, watching everything that matters on Base.</h2>
-            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-10">VAPE turns the constant noise of on-chain activity into a small number of things worth
-            knowing — which tokens are safe to touch, which capital flows are shifting, and which threats deserve attention right now. It runs
-            continuously and cites its sources.</p>
-
             <!-- live record, bound to data/reputation.json — never hand-typed -->
-            <div class="pt-8 border-t border-white/10">
+            <div>
                 <div class="flex items-center justify-between flex-wrap gap-2 mb-5">
                     <div>
                         <h3 class="section-title"><i class="fa-solid fa-chart-column text-zinc-500 text-sm mr-1.5"></i>Track Record</h3>
@@ -229,24 +236,9 @@
                 </div>
                 <a href="news.html" class="term-btn term-btn-sm shrink-0">Full VAPE Report <i class="fa-solid fa-arrow-right text-[9px] ml-1"></i></a>
             </div>
-            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">A live breaking-headlines ticker where crypto and blockchain news always
-            leads, alongside intel, security, and macro markets, plus VAPE's own investigative writeups underneath. Real sources cited inline, generated on a
-            schedule by a frontier model and independently fact-checked, never fabricated.</p>
-
-            <div class="mb-6 pb-5 border-b border-white/10">
-                <div class="flex items-center gap-2 text-[11px] text-zinc-500 mb-2">
-                    <span class="relative flex h-1.5 w-1.5" aria-hidden="true">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-rose-500"></span>
-                    </span>
-                    Breaking
-                </div>
-                <div id="news-ticker-wrap" class="w-full h-5 relative overflow-hidden">
-                    <div id="news-ticker-line" class="absolute inset-0 flex items-center gap-2 text-xs sm:text-[13px] text-zinc-400 whitespace-nowrap">
-                        <span class="text-zinc-600">syncing news feed…</span>
-                    </div>
-                </div>
-            </div>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">VAPE's own investigative writeups on crypto and blockchain news, alongside
+            security, intel, and macro markets — the breaking-headlines ticker for these now lives at the top of the page, combined with the live threat
+            feed. Real sources cited inline, generated on a schedule by a frontier model and independently fact-checked, never fabricated.</p>
 
             <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <div class="skeleton h-48"></div>
@@ -267,11 +259,46 @@
             <p class="text-zinc-400 text-sm mb-7 max-w-3xl leading-relaxed">Every x402 job VAPE settles for another agent or paying client — successful or not,
             logged the instant payment clears. Each entry is anchored to its real settlement on Base.</p>
 
-            <div id="x402-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+            <div id="x402-stats" class="stat-line mb-7 pb-7 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">jobs settled</span><span id="x402-jobs" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">revenue (usdc)</span><span id="x402-revenue" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">success rate</span><span id="x402-success" class="stat-value">—</span></span>
                 <span class="stat-pair"><span class="stat-label">verified</span><span class="stat-value"><i class="fa-solid fa-link text-[11px]"></i> basescan</span></span>
+            </div>
+
+            <!-- Activity — Transactions / Volume / Buyers, each a real number
+                 plus a real per-day sparkline over the selected window, all
+                 derived from the same /x402/stats feed as the bigger Volume &
+                 Revenue chart below. Buyers is a true unique-payer count for
+                 the whole window (worker/src/lib/jobLog.ts's range_buyers),
+                 not a naive sum of daily uniques, which would double-count a
+                 wallet that paid on more than one day. -->
+            <div class="mb-7 pb-7 border-b border-white/10">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <h3 class="text-sm text-zinc-500">Activity</h3>
+                    <div id="x402-activity-range" role="group" aria-label="Activity range" class="flex items-center gap-1 text-[11px]">
+                        <button type="button" data-days="7" aria-pressed="false" class="x402-activity-range-btn term-btn term-btn-sm">7D</button>
+                        <button type="button" data-days="30" aria-pressed="true" class="x402-activity-range-btn term-btn term-btn-sm term-btn-active">30D</button>
+                        <button type="button" data-days="90" aria-pressed="false" class="x402-activity-range-btn term-btn term-btn-sm">90D</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="panel-sm activity-tile">
+                        <span class="activity-tile-label">Transactions</span>
+                        <span id="x402-activity-jobs-value" class="activity-tile-value">—</span>
+                        <div id="x402-activity-jobs-spark" class="activity-sparkline"></div>
+                    </div>
+                    <div class="panel-sm activity-tile">
+                        <span class="activity-tile-label">Volume (USDC)</span>
+                        <span id="x402-activity-volume-value" class="activity-tile-value">—</span>
+                        <div id="x402-activity-volume-spark" class="activity-sparkline"></div>
+                    </div>
+                    <div class="panel-sm activity-tile">
+                        <span class="activity-tile-label">Buyers</span>
+                        <span id="x402-activity-buyers-value" class="activity-tile-value">—</span>
+                        <div id="x402-activity-buyers-spark" class="activity-sparkline"></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Protocol & discovery facts — real, static values (not fetched), so
@@ -435,7 +462,7 @@
                     <div class="text-xs text-zinc-500 mb-4">x402 · instant</div>
                     <p class="text-sm text-zinc-400 mb-5 leading-relaxed">Connect a wallet, authorize payment, and receive results immediately —
                     no account, no subscription.</p>
-                    <div id="rep-offerings-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-2">
+                    <div id="rep-offerings-grid" class="offerings-scroll gap-3 text-sm mb-2">
                         <div class="text-zinc-600 text-xs">loading offerings…</div>
                     </div>
                     <p class="text-[11px] text-zinc-600 mt-4">Each report is available to download the moment payment is confirmed.</p>
@@ -1112,13 +1139,13 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=34"></script>
+    <script src="assets/app.js?v=35"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
     <script type="module" src="assets/hire.js?v=13"></script>
-    <script type="module" src="assets/x402feed.js?v=3"></script>
-    <script type="module" src="assets/attackfeed.js?v=4"></script>
-    <script type="module" src="assets/newsfeed.js?v=1"></script>
+    <script type="module" src="assets/x402feed.js?v=4"></script>
+    <script type="module" src="assets/attackfeed.js?v=5"></script>
+    <script type="module" src="assets/newsfeed.js?v=2"></script>
 </body>
 </html>

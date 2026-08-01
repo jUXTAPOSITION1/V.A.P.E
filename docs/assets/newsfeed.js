@@ -1,16 +1,18 @@
-// Home-page VAPE Wire teaser — the breaking-headlines ticker plus a small
-// preview of the latest stories, sitting between Platform Overview and the
-// x402 Ledger. The full, searchable/filterable archive lives on its own
-// page (news.html, rendered by newspage.js) — this file intentionally only
-// ever shows a handful of tiles and points readers there.
-import { fetchTicker, fetchStories, wireTicker, storyCardHtml } from './newswire.js';
+// Home-page VAPE Wire teaser — a small preview of the latest stories,
+// sitting between Platform Overview and the x402 Ledger. The breaking-
+// headlines ticker that used to live here has moved to the top of the page
+// (attackfeed.js's combined live-feed ticker, explicit direction
+// 2026-08-01) — this file's only job now is the story tiles. The full,
+// searchable/filterable archive lives on its own page (news.html, rendered
+// by newspage.js) — this file intentionally only ever shows a handful of
+// tiles and points readers there.
+import { fetchStories, storyCardHtml } from './newswire.js';
 
 const TEASER_COUNT = 3;
 
 const NewsFeed = {
     async init() {
-        const [headlines, stories] = await Promise.all([fetchTicker(), fetchStories()]);
-        wireTicker(headlines, 'news-ticker');
+        const stories = await fetchStories();
         this._renderTeaser(stories);
     },
 

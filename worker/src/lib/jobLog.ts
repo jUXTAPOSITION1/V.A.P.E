@@ -88,6 +88,13 @@ export interface DailyEntry {
   date: string;
   jobs: number;
   revenue_usd: number;
+  // Unique paying wallets that day — derived on read from RECENT_JOBS (see
+  // getStats() below), never persisted in DAILY_HISTORY itself, so it's
+  // only as complete as RECENT_JOBS's own RECENT_CAP-bounded window (a day
+  // past that window reports 0 rather than a guess). Optional because the
+  // logJob() write path below never sets it — only getStats()'s returned
+  // copy does.
+  buyers?: number;
 }
 
 const RECENT_KEY = "RECENT_JOBS";
@@ -337,15 +344,24 @@ export async function queryFeed(kv: KVLike | undefined, query: FeedQuery): Promi
 
 export async function getStats(kv: KVLike | undefined, days: number | "all" = 30) {
   if (!kv) return null;
-  // Exactly 2 KV reads regardless of `days` — the old design did one GET
-  // per requested day, which meant a 90-day chart alone could approach
-  // Cloudflare's 50-subrequest-per-request cap on the free plan.
-  const [totals, dailyHistory] = await Promise.all([
+  // 3 KV reads regardless of `days` — RECENT_JOBS is read alongside the
+  // other two (not one-GET-per-day) purely to derive real unique-buyer
+  // counts per day below; still nowhere near Cloudflare's 50-subrequest cap.
+  const [totals, dailyHistory, recent] = await Promise.all([
     readJson<Totals>(kv, TOTALS_KEY, {
       jobs: 0, errors: 0, revenue_usd: 0, first_job_ts: null, last_job_ts: null, by_offering: {}, by_facilitator: {},
     }),
     readJson<DailyEntry[]>(kv, DAILY_HISTORY_KEY, []),
+    readJson<JobRecord[]>(kv, RECENT_KEY, []),
   ]);
+  const buyersByDate = new Map<string, Set<string>>();
+  for (const job of recent) {
+    const payer = job.payer?.toLowerCase();
+    if (!payer) continue;
+    const ds = dateKey(job.ts);
+    if (!buyersByDate.has(ds)) buyersByDate.set(ds, new Set());
+    buyersByDate.get(ds)!.add(payer);
+  }
   // Same migration guard as logJob() — real, already-stored KV data may
   // predate by_facilitator.
   totals.by_facilitator = totals.by_facilitator ?? {};
@@ -366,10 +382,21 @@ export async function getStats(kv: KVLike | undefined, days: number | "all" = 30
       ))
     : days;
   const daily: DailyEntry[] = [];
+  // True unique-payer count across the *whole* selected window — deliberately
+  // not "sum of each day's buyers" (buyersByDate above), which would double
+  // count any wallet that paid on more than one day in range. Same caveat as
+  // DailyEntry.buyers though: both are derived from RECENT_JOBS alone, which
+  // only retains RECENT_CAP records (~370+ days at current volume) — a
+  // `days` request wider than that (up to 400 is allowed) silently omits
+  // payers from whatever portion of the window RECENT_JOBS no longer covers,
+  // rather than fabricating a "complete" count for days it can't see.
+  const rangeBuyers = new Set<string>();
   for (let i = spanDays - 1; i >= 0; i--) {
     const ds = new Date(now.getTime() - i * 86400000).toISOString().slice(0, 10);
     const found = byDate.get(ds);
-    daily.push({ date: ds, jobs: found?.jobs ?? 0, revenue_usd: found?.revenue_usd ?? 0 });
+    const dayBuyers = buyersByDate.get(ds);
+    if (dayBuyers) for (const p of dayBuyers) rangeBuyers.add(p);
+    daily.push({ date: ds, jobs: found?.jobs ?? 0, revenue_usd: found?.revenue_usd ?? 0, buyers: dayBuyers?.size ?? 0 });
   }
-  return { totals, daily };
+  return { totals, daily, range_buyers: rangeBuyers.size };
 }
