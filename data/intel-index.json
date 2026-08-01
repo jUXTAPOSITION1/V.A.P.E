@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T05:48:40Z",
+  "generated": "2026-08-01T05:56:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 479,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 135,
     "investigations": 606,
-    "news": 36,
+    "news": 37,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-bank-of-italy-study-debunks-stablecoin-remittance-cost-advan.md",
+      "title": "Bank of Italy Study Debunks Stablecoin Remittance Cost Advantage Narrative",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01 05:56 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Fiat on- and off-ramp frictions, not blockchain fees, drive the cost and speed of cross-border stablecoin transfers, researchers find.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-bank-of-italy-study-debunks-stablecoin-remittance-cost-advan.md"
+    },
     {
       "file": "news-2026-08-01-google-earth-pulls-generative-ai-tool-24-hours-after-launch-.md",
       "title": "Google Earth Pulls Generative AI Tool 24 Hours After Launch Amid Misinformation Alarm",
