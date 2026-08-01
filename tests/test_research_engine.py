@@ -645,6 +645,50 @@ class TestSynthesize:
         assert "Connect evidence across sources" in system
         assert "Do NOT try to fill out a full structured report" not in system
 
+    # ── required-section headings baked into the core (non-thin) prompt ───
+    def test_rich_evidence_requests_the_task_types_required_headings(self):
+        # Real gap this closes: required_sections used to be checked only
+        # post-hoc by review_output() -- the model itself was never told
+        # what headings a threat_analysis report needs unless a specific
+        # caller (agents/hack_agent.py) hand-wrote its own instruction.
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._rich_result())  # task_type="threat_analysis"
+        system, _user = m.call_args[0]
+        assert "## Known Facts" in system
+        assert "## Timeline" in system
+        assert "## Root Cause" in system
+        assert "## Impact" in system
+        assert "## Response & Mitigation" in system
+
+    def test_required_headings_omit_the_mechanically_rendered_sections(self):
+        # Gaps & Confidence and Research Methodology and Sources are always
+        # rendered separately by render_gaps_section()/render_methodology_
+        # log() after synthesize() returns -- asking the model to also
+        # write those headings would duplicate them in the final report.
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._rich_result())
+        system, _user = m.call_args[0]
+        assert "## Gaps & Confidence" not in system
+        assert "## Research Methodology and Sources" not in system
+
+    def test_required_headings_are_task_type_specific(self):
+        result = dict(self._rich_result())
+        result["task_type"] = "general"
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "## Findings" in system
+        assert "## Known Facts" not in system  # threat_analysis-only heading
+
+    def test_thin_evidence_does_not_request_required_headings(self):
+        # The thin-evidence path (item #2) explicitly tells the model to
+        # skip headings it has nothing to fill -- baking in a hard heading
+        # requirement there would defeat that fix.
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result())  # thin by definition
+        system, _user = m.call_args[0]
+        assert "## Known Facts" not in system
+
     def test_thin_evidence_still_appends_header_and_trailer_instructions(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
             re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)

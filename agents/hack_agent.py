@@ -114,14 +114,6 @@ def _grounding(h):
     return facts
 
 
-_SECTION_INSTRUCTIONS = (
-    "Structure your narrative using these exact Markdown headings, in this order: "
-    "## Known Facts, ## Timeline, ## Root Cause, ## Impact, ## Response & Mitigation. "
-    "Only fill in what the research actually supports — if a section genuinely has nothing "
-    "to add, say so briefly under that heading rather than omitting it."
-)
-
-
 def _write_analysis(h):
     """Real threat-analysis narrative for one incident, via
     agents.research_engine's layered research pipeline. Returns
@@ -133,7 +125,7 @@ def _write_analysis(h):
     topic = f"{h['name']} hack exploit"
     known_facts = _grounding(h)
     result = research_engine.layered_research(topic, task_type="threat_analysis", known_facts=known_facts)
-    synth = research_engine.synthesize(result, role="security analyst", extra_instructions=_SECTION_INSTRUCTIONS)
+    synth = research_engine.synthesize(result, role="security analyst")
     text = (synth.get("narrative") or "").strip()
     if not text or text.startswith("_Synthesis unavailable"):
         return None, None
