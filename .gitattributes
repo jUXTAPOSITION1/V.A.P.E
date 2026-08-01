@@ -54,3 +54,13 @@ skillforge/memory/*_quota.json            merge=json-state
 # `driver true` (git's usual "keep ours" idiom) would have kept origin's STALE
 # copy instead.
 data/intel-index.json                     merge=keep-fresh
+
+# data/security-dashboard.json is the same kind of fully-regenerated derived
+# snapshot as data/intel-index.json above (agents/build_security_dashboard.py
+# rebuilds it from scratch every run) -- same spurious-conflict reasoning,
+# same fix. data/security-dashboard-history.jsonl is different: it's real
+# incremental state (one line appended per run, feeding the site's threat-
+# level-over-time chart), so it gets the same `union` treatment as every
+# other append-only ledger above, not `keep-fresh`.
+data/security-dashboard.json              merge=keep-fresh
+data/security-dashboard-history.jsonl     merge=union

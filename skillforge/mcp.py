@@ -322,6 +322,58 @@ class GitHubMCPWrapper:
         logger.error(f"[WRITE] Comment failed: {result}")
         return False, result
 
+    def list_workflow_runs(self, repo: str, workflow_file: str, per_page: int = 1) -> Tuple[bool, List[Dict[str, Any]]]:
+        """Most recent run(s) of one GitHub Actions workflow (read-only,
+        safe) — newest first, GitHub's own default ordering.
+
+        Use case: agents/build_security_dashboard.py reads each real
+        security workflow's (codeql.yml, security-lint.yml, etc.) own last
+        run conclusion/timestamp, rather than re-deriving or guessing a
+        status this repo hasn't computed itself.
+        """
+        endpoint = f"/repos/{repo}/actions/workflows/{workflow_file}/runs?per_page={per_page}"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, dict):
+            return False, []
+        runs = result.get("workflow_runs")
+        if not isinstance(runs, list):
+            return False, []
+        return True, [
+            {
+                "conclusion": r.get("conclusion"),
+                "status": r.get("status"),
+                "run_started_at": r.get("run_started_at"),
+                "created_at": r.get("created_at"),
+                "html_url": r.get("html_url"),
+            }
+            for r in runs if isinstance(r, dict)
+        ]
+
+    def list_code_scanning_alerts(self, repo: str, state: str = "open") -> Tuple[bool, List[Dict[str, Any]]]:
+        """Real, currently-open CodeQL code-scanning alerts (read-only,
+        safe) — GitHub already persists and queries these server-side, so
+        this is a plain read, not a new scan or storage surface.
+
+        Use case: agents/build_security_dashboard.py's "Static Analysis"
+        lane. Requires the `security-events: read` permission on whatever
+        token calls this.
+        """
+        endpoint = f"/repos/{repo}/code-scanning/alerts?state={state}&per_page=100"
+        success, result = self._call("GET", endpoint)
+        if not success or not isinstance(result, list):
+            return False, []
+        return True, [
+            {
+                "number": a.get("number"),
+                "rule_id": (a.get("rule") or {}).get("id"),
+                "severity": (a.get("rule") or {}).get("severity"),
+                "state": a.get("state"),
+                "created_at": a.get("created_at"),
+                "html_url": a.get("html_url"),
+            }
+            for a in result if isinstance(a, dict)
+        ]
+
     def list_issue_comments(self, repo: str, pr_number: int) -> Tuple[bool, List[Dict[str, Any]]]:
         """List comments on a PR (read-only, safe) — lets a caller find its
         own prior comment (by a hidden marker in the body) and update it in
