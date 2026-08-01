@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T02:37:10Z",
+  "generated": "2026-08-01T02:46:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 477,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 134,
     "investigations": 606,
-    "news": 33,
+    "news": 34,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-bitcoin-holds-monthly-gain-faces-choppy-august-as-forced-sel.md",
+      "title": "Bitcoin Holds Monthly Gain, Faces 'Choppy' August as 'Forced-Selling' Exhausted, Analysts Say",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01 02:46 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The largest cryptocurrency shrugged off a barrage of bad news in July, but traders remain cautious as rate hike fears and jobs data loom.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-bitcoin-holds-monthly-gain-faces-choppy-august-as-forced-sel.md"
+    },
     {
       "file": "news-2026-08-01-ai-data-center-pivot-hits-collateral-wall-inside-quantum-s-4.md",
       "title": "AI Data Center Pivot Hits Collateral Wall: Inside Quantum's 4,375 ETH Selloff",
