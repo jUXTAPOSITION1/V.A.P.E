@@ -1079,3 +1079,5 @@
 | 2026-08-01 | auto | 0xC0999aC376d383bd7744B59dFcee0c25F5C26393 (ZAMA) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-01 | auto | 0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD (CTM) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0x60dE974aF1215b5C1b5F1189B08235c67F7F35a1 (JEJEG) | deep_investigation | REJECT (40/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
