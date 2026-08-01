@@ -259,84 +259,79 @@
              reports null, never a plausible-looking placeholder. See
              docs/assets/securitydashboard.js. -->
         <section id="security-dashboard" class="reveal panel mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i>[ security posture ]</div>
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                <div class="eyebrow mb-1"><i class="fa-solid fa-shield-halved"></i>[ security posture ]</div>
                 <span id="secdash-updated" class="text-[11px] text-zinc-500 flex items-center gap-1.5">syncing…</span>
             </div>
-            <h2 class="section-title text-lg mb-3">VAPE's own security surface, measured continuously.</h2>
-            <p class="text-zinc-400 text-sm mb-7 max-w-3xl leading-relaxed">Every automated check VAPE runs on itself — static analysis, AI red-team
-            drills, on-chain attack-pattern coverage, dependency audits, and the tamper-evidence seal on its own findings ledger — aggregated into one
-            real, continuously-refreshed snapshot. Nothing here is fabricated: a signal that can't be reached shows as unavailable, never a guess.</p>
+            <h2 class="section-title text-lg mb-4">Security Dashboard</h2>
 
-            <!-- Threat level + findings-by-severity — the two headline reads. -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-7 pb-7 border-b border-white/10">
-                <div class="panel-sm flex flex-col items-center justify-center text-center">
-                    <h3 class="text-sm text-zinc-500 self-start mb-2">Overall Threat Level</h3>
+            <!-- Row 1: threat gauge | findings by severity | automated lanes. -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
+                <div class="panel-sm secdash-panel">
+                    <h3 class="secdash-panel-title">Risk Level</h3>
                     <div class="secdash-gauge-wrap">
                         <canvas id="secdashGauge"></canvas>
-                        <div id="secdash-gauge-label" class="secdash-gauge-label">
-                            <div class="skeleton h-4 w-16 mx-auto"></div>
+                        <div id="secdash-gauge-label" class="secdash-gauge-label"><div class="skeleton h-4 w-14 mx-auto"></div></div>
+                    </div>
+                    <div id="secdash-gauge-delta" class="text-[10.5px] text-zinc-500 text-center">—</div>
+                </div>
+                <div class="panel-sm secdash-panel">
+                    <h3 class="secdash-panel-title">Findings Count</h3>
+                    <div class="secdash-sev-split">
+                        <ul id="secdash-sev-list" class="secdash-sev-list">
+                            <li class="skeleton h-4"></li><li class="skeleton h-4"></li><li class="skeleton h-4"></li>
+                        </ul>
+                        <div class="secdash-sev-donut-wrap">
+                            <canvas id="secdashSeverityDonut"></canvas>
+                            <div class="secdash-sev-donut-total"><span>Total</span><span id="secdash-sev-donut-total-value">—</span></div>
                         </div>
                     </div>
-                    <p class="text-[10px] text-zinc-600 mt-1">From on-chain attack-pattern &amp; incident tracking (security_sweep.py).</p>
                 </div>
-                <div class="panel-sm">
-                    <h3 class="text-sm text-zinc-500 mb-3">Findings by Severity</h3>
-                    <div class="chart-shell-sm mb-3"><canvas id="secdashSeverityDonut"></canvas></div>
-                    <p class="text-[10px] text-zinc-600">Every real finding VAPE has logged on itself, normalized onto one 5-bucket scale. INFO
-                    means "no severity signal at all" — not "checked and cleared."</p>
-                </div>
-            </div>
-
-            <!-- Automated Security Lanes — one tile per real security workflow's
-                 last-run status (not a fabricated "campaign" concept). -->
-            <div class="mb-7 pb-7 border-b border-white/10">
-                <h3 class="text-sm text-zinc-500 mb-3">Automated Security Lanes</h3>
-                <div id="secdash-lanes" class="offerings-scroll gap-3">
-                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
-                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
-                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-panel">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
+                        <select id="secdash-lane-select" class="select-pill secdash-lane-select" aria-label="Choose a security lane"></select>
+                    </div>
+                    <div id="secdash-lane-detail" class="secdash-lane-detail"><div class="skeleton h-16"></div></div>
+                    <div id="secdash-lane-dots" class="secdash-lane-dots"></div>
                 </div>
             </div>
 
-            <!-- Risk breakdown — six real coverage lanes, each with a ring
-                 gauge + status badge + stacked severity bar. -->
-            <div class="mb-7 pb-7 border-b border-white/10">
-                <h3 class="text-sm text-zinc-500 mb-4">Risk Breakdown</h3>
-                <div id="secdash-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
-                </div>
+            <!-- Row 2: six compact Risk Breakdown cards, one row. -->
+            <div id="secdash-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-3">
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
             </div>
 
-            <!-- Findings over time, toggleable to threat-level over time. -->
-            <div class="mb-7 pb-7 border-b border-white/10">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <h3 class="text-sm text-zinc-500">Findings by Severity, Over Time</h3>
-                    <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[11px]">
-                        <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
-                        <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
+            <!-- Row 3: findings-over-time (toggleable) | findings-by-verdict. -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div class="panel-sm secdash-panel">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="secdash-panel-title mb-0">Findings Count per Severity</h3>
+                        <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
+                            <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
+                            <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
+                        </div>
+                    </div>
+                    <div class="chart-shell-sm">
+                        <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
+                        <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
                     </div>
                 </div>
-                <div class="panel-sm">
-                    <div class="chart-shell"><canvas id="secdashTimelineChart"></canvas></div>
-                    <p id="secdash-timeline-note" class="text-[10px] text-zinc-600 mt-3">Bucketed by real ISO week, from VAPE's own findings ledger.</p>
+                <div class="panel-sm secdash-panel">
+                    <h3 class="secdash-panel-title">Findings per Status</h3>
+                    <div class="chart-shell-sm">
+                        <canvas id="secdashVerdictChart" role="img" aria-label="Findings per status"></canvas>
+                        <div id="secdash-verdict-empty" class="secdash-chart-empty" hidden></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Findings by verdict. -->
-            <div>
-                <h3 class="text-sm text-zinc-500 mb-4">Findings by Verdict</h3>
-                <div class="panel-sm">
-                    <div class="chart-shell-sm"><canvas id="secdashVerdictChart"></canvas></div>
-                </div>
-            </div>
-
-            <p class="text-[11px] text-zinc-600 mt-8">Refreshed every 6 hours (<a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/build_security_dashboard.py" target="_blank" class="text-zinc-400 hover:underline">agents/build_security_dashboard.py</a>) — every field traces to a real file or a real GitHub API response.</p>
+            <p class="text-[10px] text-zinc-600 mt-3">Refreshed every 6h (<a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/build_security_dashboard.py" target="_blank" class="text-zinc-400 hover:underline">agents/build_security_dashboard.py</a>) — every field traces to a real file or GitHub API response. Nothing here is fabricated: an unreachable signal shows as unavailable, never a guess.</p>
         </section>
 
         <!-- ═══ 3. LIVE X402 LEDGER ═══ -->
