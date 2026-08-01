@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T03:04:41Z",
+  "generated": "2026-08-01T03:13:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 478,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 134,
     "investigations": 606,
-    "news": 35,
+    "news": 36,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-google-earth-pulls-generative-ai-tool-24-hours-after-launch-.md",
+      "title": "Google Earth Pulls Generative AI Tool 24 Hours After Launch Amid Misinformation Alarm",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01 03:13 UTC",
+      "topic": "Crypto Markets",
+      "dek": "The tech giant abruptly sidelined its new mapping visualization feature after users quickly demonstrated how easily it could be abused to fabricate convincing fake satellite imagery and geographical deepfakes.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-google-earth-pulls-generative-ai-tool-24-hours-after-launch-.md"
+    },
     {
       "file": "news-2026-08-01-vaneck-reintroduces-fees-on-spot-bitcoin-etf-after-missing-2.md",
       "title": "VanEck Reintroduces Fees on Spot Bitcoin ETF After Missing $2.5B Growth Target",
