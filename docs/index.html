@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=14">
+    <link rel="stylesheet" href="assets/site.css?v=15">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -283,7 +283,11 @@
                         <button type="button" data-days="all" aria-pressed="false" class="x402-activity-range-btn term-btn term-btn-sm">ALL</button>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- One tile per row at every breakpoint (not a 3-column grid) so
+                     each sparkline gets the section's full width, matching the
+                     reference activity widget's own layout on desktop rather than
+                     cramming three bar charts into a third of the screen each. -->
+                <div class="grid grid-cols-1 gap-3">
                     <div class="panel-sm activity-tile">
                         <span class="activity-tile-label">Transactions</span>
                         <span id="x402-activity-jobs-value" class="activity-tile-value">—</span>
@@ -1145,7 +1149,7 @@
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
     <script type="module" src="assets/hire.js?v=13"></script>
-    <script type="module" src="assets/x402feed.js?v=6"></script>
+    <script type="module" src="assets/x402feed.js?v=7"></script>
     <script type="module" src="assets/attackfeed.js?v=5"></script>
     <script type="module" src="assets/newsfeed.js?v=2"></script>
 </body>
