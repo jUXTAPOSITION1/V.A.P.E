@@ -689,6 +689,50 @@ class TestSynthesize:
         system, _user = m.call_args[0]
         assert "## Known Facts" not in system
 
+    # ── canonical reported/headline loss figure sentence ───────────────────
+    def test_known_loss_figure_is_called_out_as_canonical_reported_number(self):
+        result = self._base_result()
+        result["known_facts"] = {"loss_usd_m": 12.5}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "loss_usd_m=12.5" in system
+        assert "reported/headline loss figure" in system
+
+    def test_loss_figure_sentence_omitted_when_no_loss_fact_present(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(self._base_result())  # known_facts={}
+        system, _user = m.call_args[0]
+        assert "reported/headline loss figure" not in system
+
+    def test_loss_figure_sentence_checks_alternate_known_facts_key_names(self):
+        result = self._base_result()
+        result["known_facts"] = {"amount_usd_m": 3.2}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "amount_usd_m=3.2" in system
+
+    def test_loss_figure_sentence_also_present_in_thin_evidence_path(self):
+        # shared_rules (including this sentence) applies to both prompt
+        # paths -- the distinction between reported and confirmed figures
+        # matters just as much when evidence is thin.
+        result = self._base_result()
+        result["known_facts"] = {"loss_usd_m": 12.5}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)  # thin by definition (no findings/deep_extracts)
+        system, _user = m.call_args[0]
+        assert "Do NOT try to fill out a full structured report" in system
+        assert "reported/headline loss figure" in system
+
+    def test_zero_loss_value_is_not_treated_as_a_real_figure(self):
+        result = self._base_result()
+        result["known_facts"] = {"loss_usd_m": 0}
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result)
+        system, _user = m.call_args[0]
+        assert "reported/headline loss figure" not in system
+
     def test_thin_evidence_still_appends_header_and_trailer_instructions(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
             re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
