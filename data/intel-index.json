@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T12:05:19Z",
+  "generated": "2026-08-01T12:20:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 485,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 136,
-    "investigations": 618,
+    "investigations": 619,
     "news": 42,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-120515-0x8FD3437A.md",
+      "file": "investigation-20260801-122026-0x4BABA631.md",
       "title": "Investigation \u2014 ASTEROID",
       "symbol": "ASTEROID",
       "name": "ASTEROID",
-      "date": "2026-08-01T12:05:15Z",
-      "target": "0x8FD3437A13B298dD2e98Db902c56970a9d3C4985",
+      "date": "2026-08-01T12:20:26Z",
+      "target": "0x4BABA6318cbDd731DA9adA934B29Ca530D804444",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $15,648; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-120515-0x8FD3437A.md"
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,512. Positive evidence: Ownership renounced; 1966 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 309+ days without a known incident in this sca",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-122026-0x4BABA631.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-122026-0x4BABA631.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "ASTEROID",
+      "date": "2026-08-01T12:20:26Z",
+      "target": "0x4BABA6318cbDd731DA9adA934B29Ca530D804444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,512. Positive evidence: Ownership renounced; 1966 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 309+ days without a known incident in this sca",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-122026-0x4BABA631.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-120515-0x8FD3437A.md",
@@ -594,20 +608,6 @@
       "score": "40",
       "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: HEYI (0x4cE634563BB2F72961483357dc31b4C146A24444) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-5] Pair 25.9 days old \u2014 under a month, still ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-122711-0x28bBbE60.md",
-      "title": "Investigation \u2014 AKE",
-      "symbol": "AKE",
-      "name": "AKE",
-      "date": "2026-07-31T12:27:11Z",
-      "target": "0x28bBbE607DBABC83Acde091f25eEC3BEA922cB93",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $10,291; [-10] Pair 9.2 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-122711-0x28bBbE60.md"
     }
   ],
   "reports": [
