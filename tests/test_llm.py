@@ -865,11 +865,13 @@ def _fake_xai_image_response(url):
 
 
 class TestXaiImage:
-    """agents/llm.py::ask_xai_image() — the AI-image tier's working fallback
-    (reinstated 2026-07-28) behind xAI's Grok Image (grok-2-image-1212),
-    a separate billed-per-image product from every other xAI text use in
-    this file, hence its own daily-count cap file rather than the
-    token-based rate limiting used elsewhere."""
+    """agents/llm.py::ask_xai_image() — VAPE's real, working image-gen route
+    (promoted to primary 2026-08-01, since Gemini/Vertex are both confirmed
+    dead ends right now), behind xAI's Grok Image (grok-imagine-image-quality
+    -- grok-2-image-1212 was deprecated by xAI 2026-02-28 and 404s), a
+    separate billed-per-image product from every other xAI text use in this
+    file, hence its own daily-count cap file rather than the token-based
+    rate limiting used elsewhere."""
 
     def test_returns_none_when_key_unset(self, monkeypatch):
         monkeypatch.delenv("XAI_API_KEY_1", raising=False)
@@ -893,8 +895,9 @@ class TestXaiImage:
         assert result == "https://xai.example/generated.png"
         assert captured["url"] == "https://api.x.ai/v1/images/generations"
         assert captured["auth"] == "Bearer fake-xai-key"
-        assert captured["body"]["model"] == "grok-2-image-1212"
+        assert captured["body"]["model"] == "grok-imagine-image-quality"
         assert captured["body"]["prompt"] == "a close-up of gold coins on a dark table"
+        assert captured["body"]["aspect_ratio"] == "16:9"
 
     def test_records_usage_on_success(self, monkeypatch, tmp_path):
         monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")

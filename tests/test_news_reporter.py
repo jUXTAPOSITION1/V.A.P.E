@@ -213,14 +213,31 @@ def test_generate_ai_image_returns_none_when_no_prompt():
         assert news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug") is None
 
 
-def test_generate_ai_image_returns_none_when_gemini_call_fails():
+def test_generate_ai_image_returns_none_when_both_models_fail():
     with mock.patch.object(news_reporter, "_image_prompt", return_value="a prompt"), \
+         mock.patch("agents.llm.ask_xai_image", return_value=None), \
          mock.patch("agents.llm.ask_gemini_image", return_value=None):
         assert news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug") is None
 
 
-def test_generate_ai_image_brands_the_generated_bytes():
+def test_generate_ai_image_tries_xai_first_and_brands_the_url():
+    """xAI Grok Image is tried first (promoted to primary 2026-08-01, since
+    Gemini/Vertex are both confirmed dead ends right now) -- a success there
+    must short-circuit before ever calling Gemini."""
     with mock.patch.object(news_reporter, "_image_prompt", return_value="a prompt"), \
+         mock.patch("agents.llm.ask_xai_image", return_value="https://xai.example/generated.png") as xai, \
+         mock.patch("agents.llm.ask_gemini_image") as gemini, \
+         mock.patch.object(nc, "brand_image", return_value="assets/news-images/slug.jpg") as brand:
+        result = news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug")
+    assert result == "assets/news-images/slug.jpg"
+    xai.assert_called_once_with("a prompt")
+    gemini.assert_not_called()
+    brand.assert_called_once_with("https://xai.example/generated.png", "slug")
+
+
+def test_generate_ai_image_falls_back_to_gemini_when_xai_fails():
+    with mock.patch.object(news_reporter, "_image_prompt", return_value="a prompt"), \
+         mock.patch("agents.llm.ask_xai_image", return_value=None), \
          mock.patch("agents.llm.ask_gemini_image", return_value=b"fake-png-bytes"), \
          mock.patch.object(nc, "brand_image", return_value="assets/news-images/slug.jpg") as brand:
         result = news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug")
