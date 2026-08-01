@@ -1,0 +1,210 @@
+{
+  "generated_at": "2026-08-01T21:29:26Z",
+  "overall_threat_level": "HIGH",
+  "findings_by_severity": {
+    "CRITICAL": 1,
+    "HIGH": 314,
+    "MEDIUM": 211,
+    "LOW": 17,
+    "INFO": 812
+  },
+  "findings_by_verdict": {
+    "PROCEED": 85,
+    "CAUTION": 147,
+    "REJECT": 305
+  },
+  "findings_timeline": [
+    {
+      "period": "2026-W27",
+      "total": 64,
+      "CRITICAL": 0,
+      "HIGH": 4,
+      "MEDIUM": 5,
+      "LOW": 0,
+      "INFO": 55
+    },
+    {
+      "period": "2026-W28",
+      "total": 187,
+      "CRITICAL": 1,
+      "HIGH": 16,
+      "MEDIUM": 10,
+      "LOW": 0,
+      "INFO": 160
+    },
+    {
+      "period": "2026-W29",
+      "total": 238,
+      "CRITICAL": 0,
+      "HIGH": 49,
+      "MEDIUM": 29,
+      "LOW": 3,
+      "INFO": 157
+    },
+    {
+      "period": "2026-W30",
+      "total": 353,
+      "CRITICAL": 0,
+      "HIGH": 80,
+      "MEDIUM": 75,
+      "LOW": 5,
+      "INFO": 193
+    },
+    {
+      "period": "2026-W31",
+      "total": 475,
+      "CRITICAL": 0,
+      "HIGH": 161,
+      "MEDIUM": 89,
+      "LOW": 8,
+      "INFO": 217
+    }
+  ],
+  "ledger_integrity": {
+    "chain_intact": true,
+    "seals_checked": 69,
+    "lines_covered": 1347,
+    "unsealed_lines": 8
+  },
+  "lanes": [
+    {
+      "id": "codeql",
+      "label": "Static Analysis (CodeQL)",
+      "source_workflow": "codeql.yml",
+      "last_run_conclusion": null,
+      "last_run_at": "2026-08-01T21:28:52Z",
+      "headline": "100 open alert(s)",
+      "open_alerts": 100,
+      "persisted_high_critical_30d": 0
+    },
+    {
+      "id": "security-lint",
+      "label": "CI / Workflow Hardening",
+      "source_workflow": "security-lint.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T21:28:52Z",
+      "headline": "success"
+    },
+    {
+      "id": "vape-reviewer",
+      "label": "Code Review (VAPE Reviewer)",
+      "source_workflow": "vape-reviewer.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T21:26:39Z",
+      "headline": "success"
+    },
+    {
+      "id": "dependency-audit",
+      "label": "Dependencies (SCA)",
+      "source_workflow": "dependency-audit.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-07-31T20:09:31Z",
+      "headline": "success"
+    },
+    {
+      "id": "scan-parity",
+      "label": "Logic Parity",
+      "source_workflow": "scan-parity.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-07-26T15:39:58Z",
+      "headline": "success"
+    },
+    {
+      "id": "redteam",
+      "label": "AI Red-Team",
+      "source_workflow": "redteam.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T14:03:54Z",
+      "headline": "22 finding(s), 30d",
+      "severity_breakdown": {
+        "CRITICAL": 1,
+        "HIGH": 5,
+        "MEDIUM": 0,
+        "LOW": 16,
+        "INFO": 0
+      }
+    },
+    {
+      "id": "redteam-deep",
+      "label": "AI Red-Team (deep)",
+      "source_workflow": "redteam-deep.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T14:23:56Z",
+      "headline": "22 finding(s), 30d",
+      "severity_breakdown": {
+        "CRITICAL": 1,
+        "HIGH": 5,
+        "MEDIUM": 0,
+        "LOW": 16,
+        "INFO": 0
+      }
+    },
+    {
+      "id": "findings-seal",
+      "label": "Findings Ledger Seal",
+      "source_workflow": "findings-seal.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T18:59:30Z",
+      "headline": "intact",
+      "chain_intact": true
+    },
+    {
+      "id": "review-ledger",
+      "label": "Review Drift",
+      "source_workflow": "review-ledger.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T10:44:41Z",
+      "headline": "0 worsened / 0 improved, 30d",
+      "worsened_30d": 0,
+      "improved_30d": 0
+    },
+    {
+      "id": "intel-sweeps",
+      "label": "On-Chain Attack Intelligence",
+      "source_workflow": "intel-sweeps.yml",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-01T21:01:17Z",
+      "headline": "HIGH",
+      "threat_level": "HIGH",
+      "coverage_ratio": 0.23076923076923078,
+      "gap_patterns": [
+        {
+          "id": "oracle_flashloan",
+          "label": "Flashloan-driven price or oracle manipulation"
+        },
+        {
+          "id": "reentrancy",
+          "label": "Reentrancy"
+        },
+        {
+          "id": "signature",
+          "label": "Broken or replayable signature verification"
+        },
+        {
+          "id": "governance",
+          "label": "Malicious governance proposal or vote manipulation"
+        },
+        {
+          "id": "deposit_proof",
+          "label": "Missing or forged deposit/withdrawal proof validation"
+        },
+        {
+          "id": "donation_inflation",
+          "label": "First-depositor share-price / donation inflation attack"
+        },
+        {
+          "id": "hook_manipulation",
+          "label": "AMM hook / callback manipulation"
+        },
+        {
+          "id": "tokenomics_drain",
+          "label": "Malicious tokenomics / reserve- or LP-draining mechanics"
+        },
+        {
+          "id": "bridge_exploit",
+          "label": "Cross-chain bridge / message-verification exploit"
+        }
+      ]
+    }
+  ]
+}
