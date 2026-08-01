@@ -463,4 +463,205 @@ def test_run_stops_after_bounded_attempts_on_an_all_thin_feed(tmp_path, monkeypa
         written = news_reporter.run()
 
     assert written == []
-    assert ws.call_count == 3  # max(1*3, 3)
+    assert ws.call_count == 3
+
+
+# ── deep-dive mode (explicit direction, 2026-08-01, after a real user report
+#    on a thin single-source rewrite of a major story) ─────────────────────
+
+def test_mentions_large_dollar_amount_true_for_millions():
+    assert news_reporter._mentions_large_dollar_amount("Attackers stole $70 million in BTC") is True
+
+
+def test_mentions_large_dollar_amount_true_for_abbreviated_form():
+    assert news_reporter._mentions_large_dollar_amount("Exploit drains $1.2B from a bridge") is True
+
+
+def test_mentions_large_dollar_amount_false_for_small_figure():
+    assert news_reporter._mentions_large_dollar_amount("User loses $500 in a phishing scam") is False
+
+
+def test_mentions_large_dollar_amount_false_when_absent():
+    assert news_reporter._mentions_large_dollar_amount("Bitcoin rallies past resistance") is False
+
+
+def test_is_deep_dive_candidate_true_for_security_topic():
+    assert news_reporter._is_deep_dive_candidate({"title": "Minor bug fixed", "topic": "defi-security"}) is True
+
+
+def test_is_deep_dive_candidate_true_for_large_dollar_headline():
+    assert news_reporter._is_deep_dive_candidate(
+        {"title": "Hackers steal $70 million from cold wallets", "topic": "crypto-markets"}) is True
+
+
+def test_is_deep_dive_candidate_false_for_routine_story():
+    assert news_reporter._is_deep_dive_candidate(
+        {"title": "Bitcoin rallies past $100K", "topic": "crypto-markets"}) is False
+
+
+def test_gather_corroboration_single_query_for_routine_story():
+    calls = []
+
+    def fake_search(query, max_results=5):
+        calls.append((query, max_results))
+        return {"available": True, "provider": "tavily",
+                "results": [{"title": "Hit", "url": "https://x.example/1", "snippet": "s"}]}
+
+    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
+        out = news_reporter._gather_corroboration({"title": "Crypto markets rally", "topic": "crypto-markets"},
+                                                   deep_dive=False)
+    assert calls == [("Crypto markets rally", 5)]
+    assert out["results"] == [{"title": "Hit", "url": "https://x.example/1", "snippet": "s"}]
+
+
+def test_gather_corroboration_runs_multiple_queries_and_dedupes_for_deep_dive():
+    calls = []
+
+    def fake_search(query, max_results=5):
+        calls.append(query)
+        # The same URL comes back from every query -- must be deduped once,
+        # not duplicated per query, while each query's unique hit survives.
+        return {"available": True, "provider": "tavily",
+                "results": [{"title": "Shared hit", "url": "https://shared.example/1", "snippet": "s"},
+                            {"title": f"Unique {len(calls)}", "url": f"https://unique.example/{len(calls)}",
+                             "snippet": "s"}]}
+
+    candidate = {"title": "Coldcard firmware flaw drains $70M", "topic": "defi-security"}
+    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search):
+        out = news_reporter._gather_corroboration(candidate, deep_dive=True)
+    # Original headline + "explained analysis" + the security-beat root-cause query.
+    assert len(calls) == 3
+    assert calls[0] == "Coldcard firmware flaw drains $70M"
+    shared_hits = [r for r in out["results"] if r["url"] == "https://shared.example/1"]
+    assert len(shared_hits) == 1
+    assert len(out["results"]) == 4  # 1 shared + 3 query-unique hits
+
+
+def test_scrape_multiple_sources_collects_real_bodies_and_skips_failures():
+    bodies = {"https://a.example/1": "Body A", "https://c.example/3": "Body C"}
+
+    with mock.patch.object(nc, "scrape_article_text", side_effect=lambda url, max_len=3000: bodies.get(url)):
+        scraped = news_reporter._scrape_multiple_sources(
+            "https://a.example/1", [{"url": "https://b.example/2"}, {"url": "https://c.example/3"}], max_sources=3)
+    assert [u for u, _ in scraped] == ["https://a.example/1", "https://c.example/3"]  # b skipped, no body
+
+
+def test_scrape_multiple_sources_respects_max_sources_cap():
+    with mock.patch.object(nc, "scrape_article_text", side_effect=lambda url, max_len=3000: f"Body for {url}"):
+        scraped = news_reporter._scrape_multiple_sources(
+            "https://primary.example", [{"url": f"https://x.example/{i}"} for i in range(5)], max_sources=2)
+    assert len(scraped) == 2
+
+
+def test_write_story_deep_dive_builds_multi_source_grounding_with_longer_budget(tmp_path, monkeypatch):
+    """A high-impact security story (the real user-reported gap: a thin
+    single-source rewrite of a major story) must trigger deep-dive mode:
+    multiple search queries, multiple scraped source bodies presented as
+    separate labeled blocks, a larger drafting/editorial token budget, and
+    a Fact-checked field that says so."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Coldcard firmware flaw drains $70 million from cold wallets",
+                 "url": "https://example.com/primary", "source": "The Block",
+                 "published": "2026-07-31T00:00:00Z", "topic": "defi-security"}
+
+    search_calls = []
+
+    def fake_search(query, max_results=5):
+        search_calls.append((query, max_results))
+        return {"available": True, "provider": "tavily",
+                "results": [{"title": "Galaxy Research mapping", "url": "https://example.com/galaxy",
+                             "snippet": "1,082.65 BTC from 1,196 addresses"},
+                            {"title": "Block engineering post", "url": "https://example.com/block",
+                             "snippet": "RNG fallback root cause"}]}
+
+    def fake_scrape(url, max_len=3000):
+        return {
+            "https://example.com/primary": "Primary source body text about the theft.",
+            "https://example.com/galaxy": "Galaxy Research's full on-chain mapping body text.",
+            "https://example.com/block": "Block's engineering root-cause analysis body text.",
+        }.get(url)
+
+    captured = {}
+
+    def fake_synthesize(result, **kw):
+        captured["grounding"] = result["raw_user_block"]
+        captured["max_tokens"] = kw.get("max_tokens")
+        return _synth("The Entropy Mirage", "A five-year-old flaw let attackers reconstruct keys offline.",
+                      "## What Happened\nBody text.")
+
+    editor_calls = []
+
+    def fake_editor(role, grounding, instructions=None, max_tokens=2400, temperature=0.55, search=False):
+        editor_calls.append({"instructions": instructions, "max_tokens": max_tokens})
+        return "## What Happened\nEdited body text."
+
+    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search), \
+         mock.patch.object(nc, "scrape_article_text", side_effect=fake_scrape), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
+         mock.patch("agents.research_engine.synthesize", side_effect=fake_synthesize), \
+         mock.patch("agents.intel_common.grok_analysis", side_effect=fake_editor), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
+        path = news_reporter.write_story(candidate)
+
+    assert path is not None
+    text = open(path).read()
+    assert "The Entropy Mirage" in text
+    assert "Fact-checked:** Yes — multi-source deep-dive review completed" in text
+
+    # Multiple search queries actually ran (deep-dive, not the single-query path).
+    assert len(search_calls) == 3
+
+    # Multiple real source bodies were scraped and presented as separate,
+    # labeled blocks the model can cross-check and attribute figures against.
+    grounding = captured["grounding"]
+    assert "Scraped article bodies from 3 independent sources" in grounding
+    assert "Primary source body text about the theft." in grounding
+    assert "Galaxy Research's full on-chain mapping body text." in grounding
+    assert "Block's engineering root-cause analysis body text." in grounding
+
+    # Larger drafting/editorial token budgets for a genuinely deeper piece.
+    assert captured["max_tokens"] == 3600
+    assert editor_calls[0]["max_tokens"] == 3200
+    assert "numeric precision" in editor_calls[0]["instructions"]
+
+
+def test_write_story_routine_story_keeps_original_single_query_budget(tmp_path, monkeypatch):
+    """A routine, non-high-impact story must NOT trigger deep-dive mode --
+    same single search query and original token budgets as before."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Crypto markets rally", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-27T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary of the rally."}
+
+    search_calls = []
+
+    def fake_search(query, max_results=5):
+        search_calls.append((query, max_results))
+        return {"available": True, "provider": "tavily", "results": []}
+
+    captured = {}
+
+    def fake_synthesize(result, **kw):
+        captured["max_tokens"] = kw.get("max_tokens")
+        return _synth("Rally Deepens", "Momentum builds.", "Body text.")
+
+    editor_calls = []
+
+    def fake_editor(role, grounding, instructions=None, max_tokens=2400, temperature=0.55, search=False):
+        editor_calls.append(max_tokens)
+        return "Body text."
+
+    with mock.patch("agents.intel_common.web_search_snippets", side_effect=fake_search), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
+         mock.patch("agents.research_engine.synthesize", side_effect=fake_synthesize), \
+         mock.patch("agents.intel_common.grok_analysis", side_effect=fake_editor), \
+         mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
+        path = news_reporter.write_story(candidate)
+
+    assert path is not None
+    text = open(path).read()
+    assert "Fact-checked:** Yes — copy desk review completed" in text
+    assert len(search_calls) == 1
+    assert captured["max_tokens"] == 2200
+    assert editor_calls[0] == 2200

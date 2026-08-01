@@ -69,10 +69,26 @@ ago() still reads the latter); and the body instructions require a strong
 lede, ## subheadings every 150-250 words, and short paragraphs instead of
 academic-style blocks.
 
+Deep-dive mode (explicit direction, 2026-08-01, after a real user report on
+a thin single-source rewrite of a major story): a high-impact story gets
+noticeably more reporting depth, triggered deterministically (never an LLM
+judgment call) by _is_deep_dive_candidate() -- a security/exploit beat or a
+large ($10M+) dollar figure named in the headline/snippet. When triggered,
+write_story() runs several search queries instead of one (_gather_
+corroboration(), merged/deduped the same way base_sweep.py's targeted
+multi-query search already works), scrapes real body text from multiple
+independent sources instead of just the primary link (_scrape_multiple_
+sources()), and raises the drafting/editorial token budgets with explicit
+instructions to write a genuine investigative feature (lede, what
+happened, how it actually worked, the response, why it matters, concrete
+next steps) and to cross-check figures across sources rather than quietly
+picking one.
+
 Usage: python agents/news_reporter.py
 """
 import difflib
 import os
+import re
 import sys
 import json
 from datetime import datetime, timezone
@@ -165,7 +181,88 @@ def _is_derivative_headline(headline, source_title):
     return difflib.SequenceMatcher(None, h, s).ratio() > 0.85
 
 
-def _editorial_pass(grounding, draft_body):
+DEEP_DIVE_MIN_USD = 10_000_000
+_DOLLAR_AMOUNT_RE = re.compile(r"\$\s?([\d,]+(?:\.\d+)?)\s*(million|billion|m|b|k)?\b", re.IGNORECASE)
+_DOLLAR_UNIT_MULTIPLIER = {"million": 1e6, "m": 1e6, "billion": 1e9, "b": 1e9, "k": 1e3}
+
+
+def _mentions_large_dollar_amount(text, min_usd=DEEP_DIVE_MIN_USD):
+    """True if `text` names a dollar figure at or above min_usd -- a plain
+    regex scan, not an LLM guess, matching this codebase's rule-based-first
+    design law for anything a report's own header field depends on.
+    Catches "$70 million", "$1.2B", "$500K" (K excluded by the default
+    threshold); a bare "$500" with no unit is treated as literal dollars,
+    so it correctly never trips the threshold on its own."""
+    for m in _DOLLAR_AMOUNT_RE.finditer(text or ""):
+        try:
+            num = float(m.group(1).replace(",", ""))
+        except ValueError:
+            continue
+        mult = _DOLLAR_UNIT_MULTIPLIER.get((m.group(2) or "").lower(), 1)
+        if num * mult >= min_usd:
+            return True
+    return False
+
+
+def _is_deep_dive_candidate(candidate):
+    """Rule-based trigger for deep-dive mode (see module docstring) -- a
+    high-impact story deserves noticeably more reporting depth than a
+    routine headline, and that decision has to be reproducible, not left
+    to the drafting model's own judgment call. Triggers on either the
+    security/exploit beat (news_common.py's "defi-security" topic) or a
+    large ($10M+) dollar figure named in the headline/snippet -- both
+    cheap, deterministic signals available before any LLM call."""
+    if candidate.get("topic") == "defi-security":
+        return True
+    return _mentions_large_dollar_amount(f"{candidate.get('title', '')} {candidate.get('snippet', '')}")
+
+
+def _gather_corroboration(candidate, deep_dive):
+    """Web search corroboration for this story. Deep-dive stories run
+    several targeted queries instead of one -- the original headline plus
+    an "explained/analysis" angle, and (for the security beat) a
+    root-cause-specific query -- merged and deduped by URL, the same
+    multi-query idiom agents/base_sweep.py already uses for its own
+    targeted searches. A routine story still gets exactly the single query
+    this function replaced, so non-deep-dive behavior is unchanged."""
+    queries = [candidate["title"]]
+    if deep_dive:
+        queries.append(f"{candidate['title']} explained analysis")
+        if candidate.get("topic") == "defi-security":
+            queries.append(f"{candidate['title']} technical root cause")
+    max_results = 8 if deep_dive else 5
+    seen_urls, merged, provider = set(), [], None
+    for q in queries:
+        res = ic.web_search_snippets(q, max_results=max_results)
+        if res.get("provider") and not provider:
+            provider = res.get("provider")
+        for r in res.get("results", []):
+            if r.get("url") and r["url"] not in seen_urls:
+                seen_urls.add(r["url"])
+                merged.append(r)
+    return {"available": bool(merged), "provider": provider, "results": merged[: (12 if deep_dive else 5)]}
+
+
+def _scrape_multiple_sources(primary_url, corroboration_results, max_sources=3):
+    """Real article body text from the primary source plus additional
+    corroborating hits (deep-dive mode only) -- a genuine multi-source
+    research brief, not a single scrape with search snippets bolted on.
+    Returns a list of (url, body_text) tuples for every URL that actually
+    yielded real body text; silently skips (never fabricates a body for)
+    any URL that doesn't scrape cleanly, same degradation contract as
+    scrape_article_text() itself."""
+    scraped, seen = [], set()
+    for url in [primary_url] + [r["url"] for r in corroboration_results]:
+        if len(scraped) >= max_sources or not url or url in seen:
+            continue
+        seen.add(url)
+        text = nc.scrape_article_text(url)
+        if text:
+            scraped.append((url, text))
+    return scraped
+
+
+def _editorial_pass(grounding, draft_body, deep_dive=False):
     """A second, independent model call acting as VAPE Wire's copy desk —
     checks the drafted story against the same sourced material the reporter
     was given and either tightens it or flags what it can't stand behind.
@@ -174,7 +271,11 @@ def _editorial_pass(grounding, draft_body):
     real newsroom doesn't let a reporter self-publish. If the editor call
     itself is unavailable this cycle, the draft ships as-is rather than
     being replaced by a failure message — never worse than skipping this
-    step entirely."""
+    step entirely.
+
+    deep_dive=True (see module docstring) adds stricter numeric-precision/
+    attribution instructions and a larger token budget so the editor
+    doesn't truncate a genuinely longer deep-dive draft."""
     instructions = (
         "You are VAPE Wire's copy editor and fact-checker, reviewing a draft a staff reporter just "
         "filed. Check every factual claim, figure, and quote in the draft below against the sourced "
@@ -186,9 +287,18 @@ def _editorial_pass(grounding, draft_body):
         "editor's notes, no commentary about what you changed.\n\n"
         f"DRAFT TO REVIEW:\n{draft_body}"
     )
+    if deep_dive:
+        instructions += (
+            "\n\nThis is a deep-dive, high-impact story with multiple independent sources in the "
+            "sourced material above — pay special attention to numeric precision (dollar amounts, "
+            "counts, dates, version numbers) and confirm each figure is actually attributable to "
+            "the source that reported it, not blended across sources. If sources genuinely "
+            "disagree on a number, the draft should say so explicitly rather than silently picking "
+            "one."
+        )
     edited = ic.grok_analysis(
         "copy editor and fact-checker at VAPE Wire",
-        grounding, instructions=instructions, max_tokens=2200, temperature=0.3,
+        grounding, instructions=instructions, max_tokens=3200 if deep_dive else 2200, temperature=0.3,
     )
     if _is_llm_unavailable(edited) or not edited.strip():
         return draft_body, False
@@ -278,20 +388,25 @@ def _generate_ai_image(headline, dek, body, topic_label, slug):
 
 
 def write_story(candidate):
-    corroboration = ic.web_search_snippets(candidate["title"], max_results=5)
+    deep_dive = _is_deep_dive_candidate(candidate)
+    corroboration = _gather_corroboration(candidate, deep_dive)
 
     # Real substance for the model to actually report on -- see module
-    # docstring's "Real substance, not just a headline" note. The primary
-    # source article first; if that scrape comes up empty (paywall, JS-
-    # rendered page, dead link), fall through to the top 2 corroborating
-    # hits so the story still has real body text behind it rather than
-    # just a headline + search snippets.
-    article_text = nc.scrape_article_text(candidate["url"])
-    if not article_text:
-        for r in corroboration.get("results", [])[:2]:
-            article_text = nc.scrape_article_text(r["url"])
-            if article_text:
-                break
+    # docstring's "Real substance, not just a headline" note. Deep-dive
+    # stories scrape real body text from multiple independent sources
+    # (_scrape_multiple_sources()) instead of just the primary link; a
+    # routine story keeps the original single-scrape-with-fallback
+    # behavior unchanged.
+    if deep_dive:
+        scraped_sources = _scrape_multiple_sources(candidate["url"], corroboration.get("results", []), max_sources=3)
+    else:
+        article_text = nc.scrape_article_text(candidate["url"])
+        if not article_text:
+            for r in corroboration.get("results", [])[:2]:
+                article_text = nc.scrape_article_text(r["url"])
+                if article_text:
+                    break
+        scraped_sources = [(candidate["url"], article_text)] if article_text else []
 
     # "Only report on what we can source" (explicit direction, 2026-07-28):
     # a bare headline with no scraped body, no outlet-provided summary, and
@@ -303,12 +418,27 @@ def write_story(candidate):
     # call, rather than publish a report with nothing in it. Callers must
     # treat None as "no report written this candidate" and move on to the
     # next one -- see run()'s retry loop.
-    has_substance = bool(article_text) or bool((candidate.get("snippet") or "").strip()) \
+    has_substance = bool(scraped_sources) or bool((candidate.get("snippet") or "").strip()) \
         or bool(corroboration.get("results"))
     if not has_substance:
         return None
 
     topic_label = nc.TOPIC_LABELS.get(candidate.get("topic"), candidate.get("topic") or "General")
+    if len(scraped_sources) > 1:
+        # Deep-dive, multiple real sources scraped -- present each as its
+        # own labeled block so the drafting model can actually cross-check
+        # and attribute figures, instead of one undifferentiated blob.
+        body_block = (
+            f"Scraped article bodies from {len(scraped_sources)} independent sources -- cross-check "
+            "figures across them and note explicitly if they disagree:\n\n"
+            + "\n\n".join(f"SOURCE ({url}):\n{text[:3000]}" for url, text in scraped_sources)
+            + "\n\n"
+        )
+    elif scraped_sources:
+        body_block = f"Scraped article body:\n{scraped_sources[0][1]}\n\n"
+    else:
+        body_block = ("No article body could be scraped this cycle -- only the headline and any web "
+                      "search results below are real, verified material.\n\n")
     grounding = (
         f"ORIGINAL HEADLINE: {candidate['title']}\n"
         f"SOURCE: {candidate.get('source') or 'unknown'}\n"
@@ -320,9 +450,7 @@ def write_story(candidate):
         # in its own right, not just a fallback for when scraping fails --
         # included whenever present regardless of scrape outcome.
         + (f"Source outlet's own summary:\n{candidate['snippet']}\n\n" if candidate.get("snippet") else "")
-        + (f"Scraped article body:\n{article_text}\n\n" if article_text else
-           "No article body could be scraped this cycle -- only the headline and any web search "
-           "results below are real, verified material.\n\n")
+        + body_block
         + "Corroborating web search results:\n"
         + "\n".join(f"- [{r['title']}]({r['url']}) — {r['snippet']}" for r in corroboration.get("results", []))
     )
@@ -355,6 +483,19 @@ def write_story(candidate):
         "above or in a real source you found — authority of voice, not invention, is the standard. "
         "At least 400 words if the material genuinely supports it."
     )
+    if deep_dive:
+        instructions += (
+            "\n\nDEEP-DIVE MODE (this is a high-impact story): multiple independent sources were "
+            "gathered above -- cross-check every figure across them and explicitly attribute which "
+            "source reported which number if they differ (e.g. 'Early reports put the loss at $X; "
+            "a fuller mapping later put it at $Y'). Structure the piece as a real investigative "
+            "feature: strong lede, what happened, how it actually worked (the real technical/causal "
+            "mechanism, not a vague gesture at it), the response (official statements, fixes, "
+            "advisories), why it matters beyond this one incident, and concrete next steps for "
+            "anyone affected. Aim for 900-1500+ words if the sourced material genuinely supports "
+            "that depth -- do not pad with generic commentary to hit a length target; substance "
+            "drives length, never the reverse."
+        )
     result = {
         "topic": candidate["title"], "task_type": "news_report", "known_facts": {},
         "findings": [], "deep_extracts": [], "raw_user_block": grounding, "log": {},
@@ -366,7 +507,7 @@ def write_story(candidate):
             {"name": "headline", "label": "HEADLINE"},
             {"name": "dek", "label": "DEK"},
         ],
-        header_delimiter="---", trailers=[], max_tokens=2200, temperature=0.6,
+        header_delimiter="---", trailers=[], max_tokens=3600 if deep_dive else 2200, temperature=0.6,
     )
     body = (synth.get("narrative") or "").strip()
     if not body or body.startswith("_Synthesis unavailable"):
@@ -388,7 +529,7 @@ def write_story(candidate):
     dek = (synth["header"].get("dek") or "").strip()
     if not dek:
         return None
-    body, fact_checked = _editorial_pass(grounding, body)
+    body, fact_checked = _editorial_pass(grounding, body, deep_dive=deep_dive)
 
     slug = nc.slugify(headline)
     ai_image = _generate_ai_image(headline, dek, body, topic_label, slug)
@@ -412,7 +553,7 @@ def write_story(candidate):
 **Dek:** {dek}
 **Image:** {image}
 **Image source:** {image_source}
-**Fact-checked:** {"Yes — copy desk review completed" if fact_checked else "Draft not independently reviewed this cycle (copy desk unavailable)"}
+**Fact-checked:** {("Yes — multi-source deep-dive review completed" if deep_dive else "Yes — copy desk review completed") if fact_checked else "Draft not independently reviewed this cycle (copy desk unavailable)"}
 
 ---
 
