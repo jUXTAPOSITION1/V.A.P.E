@@ -18,11 +18,6 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # present — proof the call site actually passes the frontier/Grok-first
 # order, not just that the file imports it.
 _CRITICAL_CALL_SITES = {
-    "agents/base_sweep.py": "provider_order=llm.FRONTIER_ORDER",
-    "agents/security_sweep.py": "provider_order=llm.FRONTIER_ORDER",
-    "agents/virtuals_sweep.py": "provider_order=llm.FRONTIER_ORDER",
-    "agents/sentiment_sweep.py": "provider_order=llm.FRONTIER_ORDER",
-    "agents/macro_sweep.py": "provider_order=llm.FRONTIER_ORDER",
     "agents/redteam.py": "provider_order=FRONTIER_ORDER",
     "agents/self_improve.py": "provider_order=FRONTIER_ORDER",
     "agents/build_request.py": "provider_order=FRONTIER_ORDER",
@@ -39,6 +34,29 @@ def test_every_named_critical_call_site_uses_frontier_order():
         if needle not in text:
             missing.append(rel_path)
     assert not missing, f"critical call site(s) missing provider_order=FRONTIER_ORDER: {missing}"
+
+
+# The 5 sweeps below no longer call agents.llm.ask_oci_grok_safe() directly
+# with their own provider_order=llm.FRONTIER_ORDER kwarg (2026-08-01) —
+# they route through agents.research_engine.synthesize(), which hardcodes
+# provider_order=FRONTIER_ORDER internally and unconditionally, not
+# caller-overridable. Pin both halves of that indirection: each sweep
+# actually calls synthesize(), and synthesize() itself still uses
+# FRONTIER_ORDER — so a future refactor that drops FRONTIER_ORDER from
+# research_engine.py fails this test for all 5 sweeps at once, same as
+# before the migration.
+_SWEEPS_ROUTED_THROUGH_RESEARCH_ENGINE = [
+    "agents/base_sweep.py", "agents/security_sweep.py", "agents/virtuals_sweep.py",
+    "agents/sentiment_sweep.py", "agents/macro_sweep.py",
+]
+
+
+def test_sweeps_route_through_research_engine_synthesize_with_frontier_order():
+    missing = [p for p in _SWEEPS_ROUTED_THROUGH_RESEARCH_ENGINE
+               if "research_engine.synthesize(" not in (ROOT / p).read_text()]
+    assert not missing, f"sweep(s) no longer routed through research_engine.synthesize(): {missing}"
+    engine_text = (ROOT / "agents/research_engine.py").read_text()
+    assert "provider_order=FRONTIER_ORDER" in engine_text
 
 
 def test_deep_dive_and_dossier_use_ask_frontier_with_no_local_override():
