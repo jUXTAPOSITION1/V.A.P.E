@@ -1053,3 +1053,5 @@
 | 2026-08-01 | auto | 0xD77B108d4f6cefaa0Cae9506A934e825BEccA46E (WINR) | deep_investigation | CAUTION (50/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-01 | auto | 0x3e31966d4f81C72D2a55310A6365A56A4393E98D (WMTX) | deep_investigation | CAUTION (58/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0xE112Bc165f37eF842E66326E01A291927Bf9B468 (WMTX) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
