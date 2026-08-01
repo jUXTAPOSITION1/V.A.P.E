@@ -743,6 +743,29 @@ def _required_sections_instruction(task_type):
     )
 
 
+# Real known_facts keys different callers already populate for an
+# incident's loss amount (agents/hack_agent.py's _grounding() uses
+# "loss_usd_m"; other callers may pass a plainer "amount"/"loss"). Checked
+# in this order so the first one actually present wins.
+_LOSS_FACT_KEYS = ("loss_usd_m", "amount_usd_m", "loss", "amount")
+
+
+def _known_loss_figure(known_facts):
+    """(key, value) for the first loss-like known_facts entry that's
+    actually set, or None. Used to make the existing "distinguish headline
+    vs. realized figures" rule concrete instead of purely hypothetical --
+    telling the model exactly which number in Known Facts IS the reported/
+    headline figure to reconcile source-found figures against, rather than
+    leaving it to infer that from the evidence block on its own."""
+    if not isinstance(known_facts, dict):
+        return None
+    for key in _LOSS_FACT_KEYS:
+        val = known_facts.get(key)
+        if val not in (None, "", 0):
+            return key, val
+    return None
+
+
 def _is_thin_evidence(result):
     """Rule-based (not LLM) thin-evidence detector. Real gap this closes:
     synthesize() used to hand the model the exact same full structured-
@@ -868,6 +891,15 @@ def synthesize(result, role="research analyst", extra_instructions=None,
             "(e.g. an exploit's reported vs. recovered loss), explicitly distinguish them — never "
             "conflate them into one number.\n"
         )
+        loss_fact = _known_loss_figure(result.get("known_facts"))
+        if loss_fact:
+            loss_key, loss_val = loss_fact
+            shared_rules += (
+                f"- Known Facts above lists {loss_key}={loss_val} as this incident's reported/headline "
+                "loss figure — treat it as the canonical reported number, and if any source below states "
+                "a different confirmed, recovered, or revised amount, explicitly contrast it against this "
+                "reported figure rather than silently substituting one for the other.\n"
+            )
         thin = _is_thin_evidence(result)
         if thin:
             # Real gap this closes: the full structured-section prompt below
