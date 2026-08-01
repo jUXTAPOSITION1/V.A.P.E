@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-01T19:08:34Z",
+  "generated": "2026-08-01T19:09:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 490,
+    "reports": 491,
     "reports_by_type": {
+      "security": 91,
       "bounty": 115,
-      "security": 90,
       "macro": 26,
       "base": 99,
       "sentiment": 51,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-182637-0xE5D66322.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_180208.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T18:02:08Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T19:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: Claude / USDC +62% 24h (liq $1052095.8427) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_180208.md",
-      "bytes": 17175
+      "summary": "The real incident feed shows 7 incidents in the last 7 days, all under $50M, with the largest being a $24.15M private key compromise on AFX Bridge (Arbitrum) and a $9.7M hot wallet compromise on Triple-A (Ethereum, Tron, Arbitrum). Other events include a $8.2M loss on Crypto DAO (BSC), a $7.53M bridge verification bypass on Verus-Ethereum",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-19.md",
+      "bytes": 7061
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T19:00Z",
+      "threat": null,
+      "summary": "The real incident feed shows 7 incidents in the last 7 days, all under $50M, with the largest being a $24.15M private key compromise on AFX Bridge (Arbitrum) and a $9.7M hot wallet compromise on Triple-A (Ethereum, Tron, Arbitrum). Other events include a $8.2M loss on Crypto DAO (BSC), a $7.53M bridge verification bypass on Verus-Ethereum",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-19.md",
+      "bytes": 7061
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 05:32 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-05.md",
       "bytes": 3614
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-30-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-30T04:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-30 04:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-04.md",
-      "bytes": 3131
     }
   ],
   "broadcasts": [
