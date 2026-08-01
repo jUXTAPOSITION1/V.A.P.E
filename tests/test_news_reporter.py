@@ -148,6 +148,20 @@ def test_looks_truncated_true_for_empty_body():
     assert news_reporter._looks_truncated(None) is True
 
 
+def test_looks_truncated_true_for_url_with_its_own_balanced_parens():
+    """A real URL can legitimately contain a balanced parenthesized segment
+    (e.g. a Wikipedia-style '/Foo_(bar)' path) -- the naive check this
+    replaced mistook that inner ')' for the outer markdown link's own
+    closing paren and returned False here, when the link is genuinely
+    still unclosed (CodeRabbit, PR #394)."""
+    assert news_reporter._looks_truncated("[source](https://example.test/Foo_(bar)") is True
+
+
+def test_looks_truncated_false_for_a_link_whose_url_has_balanced_parens_and_actually_closes():
+    body = "See the [source](https://example.test/Foo_(bar)) for details."
+    assert news_reporter._looks_truncated(body) is False
+
+
 def test_write_story_returns_none_when_editorial_output_looks_truncated(tmp_path, monkeypatch):
     """End-to-end: a body that survives the derivative-headline/blank-dek
     gates but comes back from the editorial pass cut off mid-sentence must

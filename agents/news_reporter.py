@@ -93,7 +93,6 @@ Usage: python agents/news_reporter.py
 """
 import difflib
 import os
-import re
 import sys
 import json
 from datetime import datetime, timezone
@@ -186,7 +185,29 @@ def _is_derivative_headline(headline, source_title):
     return difflib.SequenceMatcher(None, h, s).ratio() > 0.85
 
 
-_UNCLOSED_MD_LINK_RE = re.compile(r"\[[^\]\n]*\]\([^)\n]*$")
+def _has_unclosed_markdown_link(text):
+    """True if the text's LAST markdown link ([text](url)) never actually
+    closes. Tracks parenthesis depth within the URL span rather than a
+    single regex that stops at the first ')' -- a real URL can legitimately
+    contain its own balanced parentheses (e.g. a Wikipedia-style
+    '/Foo_(bar)' path segment), and a naive "no ')' before end of string"
+    regex mistook that inner close for the outer link's own closing paren,
+    missing that the link itself was still unclosed (CodeRabbit, PR #394).
+    Only the last "](" in the text matters here -- a truncated response
+    cuts off at the very end, not in the middle of an earlier, already-
+    closed link."""
+    idx = text.rfind("](")
+    if idx == -1:
+        return False
+    depth = 1
+    for ch in text[idx + 2:]:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+            if depth == 0:
+                return False
+    return True
 
 
 def _looks_truncated(body):
@@ -206,7 +227,7 @@ def _looks_truncated(body):
     text = (body or "").rstrip()
     if not text:
         return True
-    if _UNCLOSED_MD_LINK_RE.search(text):
+    if _has_unclosed_markdown_link(text):
         return True
     return text[-1] not in ".!?\"'”’)]`*_"
 
