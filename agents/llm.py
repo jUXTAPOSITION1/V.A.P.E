@@ -682,23 +682,33 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
     (Nano Banana 2 Lite) launched on the Gemini API surface for developers
     and isn't mirrored into Vertex's Model Garden publisher-model path (its
     own docs page is literally titled "Gemini 3.1 Flash Lite Image |
-    Gemini API | Google AI for Developers", not a Vertex AI doc) — so this
-    reaches generativelanguage.googleapis.com directly instead.
+    Gemini API | Google AI for Developers", not a Vertex AI doc). Switching
+    to Vertex-hosted auth does NOT fix that — the model genuinely doesn't
+    exist on that surface regardless of auth mechanism. This still reaches
+    generativelanguage.googleapis.com directly.
 
-    Reuses GEMINI_API_KEY — the same key already powering the "gemini" free
-    frontier-tier text provider in PROVIDERS above via this exact API's
-    OpenAI-compatible endpoint — rather than requiring a new secret. This
-    call hits the native (non-OpenAI-compatible) generateContent endpoint
-    instead, since the OpenAI-compat surface has no responseModalities/
-    imageConfig equivalent for image generation.
+    Auth: prefers the same WIF-minted ADC access token already used by
+    _call_vertex_tuned() (VAPE_VERTEX_ACCESS_TOKEN) when set, via OAuth
+    Bearer + x-goog-user-project — Google's own documented alternative to
+    an API key for this exact host (ai.google.dev/gemini-api/docs/oauth).
+    Real gap this closes: a GEMINI_API_KEY minted before its GCP project's
+    billing was linked stays cached on the free tier's limit:0 image quota
+    even after billing is linked after the fact (confirmed live,
+    2026-08-01 — HTTP 429 "resource-exhausted... limit: 0" on every
+    dispatch); an OAuth token tied directly to the (already billing-linked)
+    project's live IAM identity isn't subject to that per-key snapshot.
+    Falls back to GEMINI_API_KEY's x-goog-api-key header (the original,
+    still-supported auth path) when no token is set, so a workflow without
+    the WIF auth step wired in still behaves exactly as before.
 
     Returns raw image bytes (already base64-decoded) on success, or None on
-    any failure/misconfiguration (including GEMINI_API_KEY unset) —
-    callers must degrade to a real scraped photo, then VAPE's brand mark,
+    any failure/misconfiguration (including neither auth method configured)
+    — callers must degrade to a real scraped photo, then VAPE's brand mark,
     exactly like every other best-effort image tier in this repo. Never
     raises."""
+    token = os.getenv("VAPE_VERTEX_ACCESS_TOKEN")
     key = os.getenv("GEMINI_API_KEY")
-    if not key:
+    if not token and not key:
         return None
     model = os.getenv("VAPE_GEMINI_IMAGE_MODEL", GEMINI_IMAGE_DEFAULT_MODEL)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -709,11 +719,16 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
             "imageConfig": {"aspectRatio": aspect_ratio},
         },
     }).encode()
-    req = urllib.request.Request(url, data=payload, headers={
-        "x-goog-api-key": key,
-        "Content-Type": "application/json",
-        "User-Agent": "VAPE-PrivateEye/1.0",
-    })
+    headers = {"Content-Type": "application/json", "User-Agent": "VAPE-PrivateEye/1.0"}
+    if token:
+        project = (os.getenv("VAPE_VERTEX_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+                   or os.getenv("CLOUDSDK_CORE_PROJECT")
+                   or os.getenv("VAPE_VERTEX_PROJECT_NUMBER", VERTEX_TUNED_DEFAULT_PROJECT_NUMBER))
+        headers["Authorization"] = f"Bearer {token}"
+        headers["x-goog-user-project"] = project
+    else:
+        headers["x-goog-api-key"] = key
+    req = urllib.request.Request(url, data=payload, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
             data = json.loads(r.read().decode())
