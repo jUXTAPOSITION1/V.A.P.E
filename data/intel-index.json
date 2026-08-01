@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T07:34:03Z",
+  "generated": "2026-08-01T07:48:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 135,
     "investigations": 608,
-    "news": 39,
+    "news": 40,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-bitcoin-etfs-rebound-with-modest-172m-july-inflow-after-reco.md",
+      "title": "Bitcoin ETFs Rebound With Modest $172M July Inflow After Record June Outflow",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T07:48:11Z",
+      "published_et": "August 1, 2026 \u00b7 3:48 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Year-to-date net withdrawals still stand at $5.3 billion as a single-day $265 million exit on July's final trading session highlights lingering caution.",
+      "image": "assets/news-images/bitcoin-etfs-rebound-with-modest-172m-july-inflow-after-reco.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-bitcoin-etfs-rebound-with-modest-172m-july-inflow-after-reco.md"
+    },
     {
       "file": "news-2026-08-01-second-time-s-the-charm-xrp-ledger-risks-reintroducing-featu.md",
       "title": "Second Time\u2019s the Charm? XRP Ledger Risks Reintroducing Features Previously Axed for Fee-Draining Bugs",

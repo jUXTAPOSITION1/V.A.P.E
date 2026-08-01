@@ -1,7 +1,15 @@
 {
-  "generated": "2026-08-01T07:24:53Z",
+  "generated": "2026-08-01T07:46:51Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Bitcoin ETFs end July in the green despite late-month selling",
+      "url": "https://cointelegraph.com/markets/bitcoin-etfs-july-green-despite-late-month-selling?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 01 Aug 2026 07:23:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "XRP Ledger upgrade brings back features once pulled over critical bugs",
       "url": "https://www.coindesk.com/tech/2026/08/01/xrp-ledger-upgrade-brings-back-features-once-pulled-over-critical-bugs",
@@ -179,14 +187,6 @@
       "crypto": true
     },
     {
-      "title": "Bybit adds tokenized Nvidia, Apple, Tesla stocks as loan collateral",
-      "url": "https://cointelegraph.com/news/bybit-tokenized-stocks-collateral-margin-loans?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 31 Jul 2026 16:23:21 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin losses linked to Coldcard vulnerability grow to $70 million, Galaxy Research says",
       "url": "https://www.theblock.co/post/410332/bitcoin-losses-linked-coldcard-vulnerability-70-million-galaxy-research?utm_source=rss&utm_medium=rss",
       "source": "The Block",
@@ -245,7 +245,7 @@
     {
       "title": "Bitcoin, Ethereum, and XRP Price Prediction for August 2026: Can the Bullish Momentum Continue?",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV3BYRGpLZm5DZjcxQVpsanc2TDdfUFlVeVpKQzhSWHk1SlRVTlBicVBLd2RjaG9VVll1cTgyeldNcW5wNTN3a0FEMEVqQnpkX2tINENtdi1naHVVaDlTcjQycFlfY0s0a2tCQmwxOHFTbTFNR1p2SHEwQUhvclBPbS0yczVlRUh1SVRiN3hodkRLQVZGU3VmZHlkT1ZJeVF4M3ZsaGtpOWkzXzNfbHVkVEN5RW91R1VwejRnUDRDZ1h6ZG1nZ1JIbtIBzgFBVV95cUxQWl8yZlJaQkc5aFp5UWI5dXR1eHdqSVctRDhBRGo5cGlESEFqbG9zV04xbjdtNzBsT2pfRkZPQzhsN0IxVXdmdXVtTERtaEMwRnp3bkdkMlFsZ3BiY0ZfUC02ektuRWkyalN2VDZGOVBJMTVJR0pVTEVjWkNQUHpfSVVza3NYQXloWk5vNXNybjFVRVdWVVEzNzA5OXFEdEpQQzlBTjZGWjcxMGRjNUxHZW1KV2xMdzZuMVZ3bkstQksxWGRoVXBDd0wyU1NzUQ?oc=5",
-      "source": "coinpedia.org",
+      "source": "Coinpedia Fintech News",
       "published": "Fri, 31 Jul 2026 22:47:01 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -269,7 +269,7 @@
     {
       "title": "Coinbase Says Revenue From Its Base Layer 2 Fell Despite Record Volume",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYXN3bUZWS3hfSW1udFJhdDRHMFRhMi1pRjhPQ3NjUFpndlB3Q1gwSWlCWDZmUGZrN3FFNkhSS0sycUhtSGZjalhxb1laa3RHa2FGVlB5M0lNNlYwRnJfM3ByREVJVFBFMEdfR2JwNGc3X3dzZGU1NHNkUmxaLTRLQzhwbDNjTnFOam1yT3l6MGZmVFh5ZkxPU0dFNmtQVEdoLXdsNQ?oc=5",
-      "source": "The Defiant",
+      "source": "thedefiant.io",
       "published": "Fri, 31 Jul 2026 20:31:25 GMT",
       "topic": "Base",
       "crypto": true
@@ -285,7 +285,7 @@
     {
       "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC Dropping to $60,000",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd2xXZHpwZ2pmcmZwckFzb2R4RjJGVXpXelowLUk5ZTFob0tna2NHQmZRaHg1ZE5DLUJWU3A3WkxFQ0ZaYVdvZ3E1cmZqYTkzTzJmSW1ibXBhWkdLNXpjcGJHWlU4YWpBM3lmMHlfZXZYVmlYSXUtMWFxYnZPVEhHb1pyRjlGWUYzdFZuNnlqVXR5MzFCZWxOcGlwWEd0UHNqWkE?oc=5",
-      "source": "Yahoo Finance",
+      "source": "finance.yahoo.com",
       "published": "Fri, 31 Jul 2026 02:17:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -333,7 +333,7 @@
     {
       "title": "Ostium Confirms $23.75M Hack Originated From Off-Chain Infrastructure Breach",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE92VWRZcTZRYnV6UGZVcEc3dFpUZ2ZfdzQyaWZndnQ0TkZ6Q2phREdrNEpIMHktajAyc0psWkVJc21IcXFIeHpMVmprY1dGM2t6SV9fczZwR2trZmM2NjNJZVIwQ2Y3bGU4V3dUcW5LZ2trUm50VTBEQlZtUVo?oc=5",
-      "source": "Bitcoin World",
+      "source": "bitcoinworld.co.in",
       "published": "Thu, 30 Jul 2026 07:20:11 GMT",
       "topic": "Security",
       "crypto": true
@@ -365,7 +365,7 @@
     {
       "title": "USDC Vs. USDT: The Stablecoin Market Has Split Into Two Economies",
       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOMEIxd3hzaE1NcVVBb2hCSl9wSGVHSnVKZEtObExmRUQwSW1qdU9ZRmVnd2VIQ29lY0Izc3g4TS1mc1RzNXNBNnFjOFZvRHZNX3NJNE1OdW80S1pNay0xTmU1ZV92djhTQThFTGdpbFBrUS11andVRHc0TU9Hb2pzRjBjOGdKZk9WRUNGSUpGSTNzY2xZLW5GTDZFbkJ2dlpJMDZiZzNqUDdqRTZ1TXFrVg?oc=5",
-      "source": "benzinga.com",
+      "source": "Benzinga",
       "published": "Mon, 27 Jul 2026 16:49:53 GMT",
       "topic": "Stablecoins",
       "crypto": true
@@ -419,14 +419,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
-      "source": "Crowdfund Insider",
-      "published": "Thu, 16 Jul 2026 20:25:13 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "BNB Chain Bets on AI Agents With New Layer-1 Blockchain",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOdUNGV0tsU1BMRzB1TEZMRG43N0hqMWdQNDFISUZ4SGljZ2p2NjZpOW9HTTZwSXpMaWwyazVNbmRCYjZMZ0UwM2Y5U05iLV83eUhWVjFvYVFoZnRyTVMyWnhNaGtwbUlZcG4tTWwwT2pfelBvLWM3MS1obmJKTWhBeFF6NlJCVEtsZjBrV0V1RjdkdllGalA0?oc=5",
       "source": "blockhead.co",
@@ -467,6 +459,14 @@
       "crypto": true
     },
     {
+      "title": "Coinbase-Backed Ethereum Network Base Recovers After Block Production Issue",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPQUJjanpjNjVyZXZPZXRrVC1CVEdCa2hETXpWODNnamFSSTVZNERWTWdnR3preWctVzNBSW03SHE5bnB0ZVZGQmc1MUhuTWxUdkZRZTBRcGFPaWJldWJZdlhuOXZxWGJVSlExSElDSURzQkV6eHhKWjYzeU1mWlJHcWZEdGloanlUbnZoRThuVEVzUQ?oc=5",
+      "source": "Decrypt",
+      "published": "Thu, 25 Jun 2026 07:00:00 GMT",
+      "topic": "Base",
+      "crypto": true
+    },
+    {
       "title": "Coinbase for Agents: AI Can Now Trade Crypto Autonomously",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53azRhNmZRTUhzM0IxNk91LVBZQzdGQ3BGRi01R2h3TTRvblVPZGREaTIzZkpyLTNOaGRlMklYWDNzbWVjTy15eFROLWxKY0FiYVNhbjJIOVdCMjRlUllsdml0MkVLSllwZ01Ma0lVdVM?oc=5",
       "source": "Bitcoin Foundation",
@@ -477,7 +477,7 @@
     {
       "title": "Best AI-Agent Crypto Coins to Buy in 2026",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5sOTBhY2NSSEYzMzJ4Um9OclVoSHdfUjc5M1d3T2RITkxNS0hjQTAzeC1CMHZXNUF1STBoY1A5bmdnd1pZa21WY0h3Q3BGYkVWZmh0elpwMlR2bUZKVGFELU1yWHJ3Ymgxb1BrZVFR?oc=5",
-      "source": "Changelly",
+      "source": "changelly.com",
       "published": "Fri, 05 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
