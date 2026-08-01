@@ -185,6 +185,53 @@ def _is_derivative_headline(headline, source_title):
     return difflib.SequenceMatcher(None, h, s).ratio() > 0.85
 
 
+def _has_unclosed_markdown_link(text):
+    """True if the text's LAST markdown link ([text](url)) never actually
+    closes. Tracks parenthesis depth within the URL span rather than a
+    single regex that stops at the first ')' -- a real URL can legitimately
+    contain its own balanced parentheses (e.g. a Wikipedia-style
+    '/Foo_(bar)' path segment), and a naive "no ')' before end of string"
+    regex mistook that inner close for the outer link's own closing paren,
+    missing that the link itself was still unclosed (CodeRabbit, PR #394).
+    Only the last "](" in the text matters here -- a truncated response
+    cuts off at the very end, not in the middle of an earlier, already-
+    closed link."""
+    idx = text.rfind("](")
+    if idx == -1:
+        return False
+    depth = 1
+    for ch in text[idx + 2:]:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+            if depth == 0:
+                return False
+    return True
+
+
+def _looks_truncated(body):
+    """Rule-based (not LLM) check for a body cut off mid-generation rather
+    than genuinely finished -- confirmed real, live bug (2026-08-01): a
+    Vertex-tuned Gemini candidate with a non-STOP finishReason (SAFETY/
+    RECITATION/MAX_TOKENS/etc, see agents/llm.py::_call_vertex_tuned())
+    returned a real but partial fragment that news_reporter published
+    unchanged, stopping mid-sentence inside an unclosed markdown link.
+    That specific provider-side bug is now fixed at the source, but this
+    gate exists as the same kind of defense-in-depth every other
+    deterministic check in this function already provides -- ANY future
+    truncation (a different provider's own quirk, a network hiccup) should
+    never reach publication either. Catches an unclosed markdown link
+    right at the end of the text, or a body that doesn't end on genuine
+    sentence-final punctuation or closing markdown."""
+    text = (body or "").rstrip()
+    if not text:
+        return True
+    if _has_unclosed_markdown_link(text):
+        return True
+    return text[-1] not in ".!?\"'”’)]`*_"
+
+
 def _gather_corroboration(candidate):
     """Web search corroboration for every story -- several targeted queries
     instead of one, merged and deduped by URL, the same multi-query idiom
@@ -490,6 +537,12 @@ def write_story(candidate):
     if not dek:
         return None
     body, fact_checked = _editorial_pass(grounding, body)
+    # Never publish a body cut off mid-generation -- see _looks_truncated()'s
+    # docstring for the real bug this closes. Same "skip this candidate,
+    # try the next headline" degradation as every other gate above, not a
+    # crash or a broken report shipped anyway.
+    if _looks_truncated(body):
+        return None
 
     slug = nc.slugify(headline)
     ai_image = _generate_ai_image(headline, dek, body, topic_label, slug)
