@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T16:09:55Z",
+  "generated": "2026-08-01T16:25:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,26 +15,26 @@
       "skillforge": 4
     },
     "broadcasts": 137,
-    "investigations": 632,
+    "investigations": 633,
     "news": 44,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 22
+    "skills": 23
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-160954-0x3Bf254aF.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-01T16:09:54Z",
-      "target": "0x3Bf254aF3338C89974b97a67D2E1E6066AA29B07",
+      "file": "investigation-20260801-162459-0xADFa1A1C.md",
+      "title": "Investigation \u2014 SQLITESTUDIO",
+      "symbol": "SQLITESTUDIO",
+      "name": "SQLITESTUDIO github.com/pawelsalawa/SQLITESTUDIO",
+      "date": "2026-08-01T16:24:59Z",
+      "target": "0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-160954-0x3Bf254aF.md"
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (126); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,715 (rug/illiquid); [-10] Low liquidity $5,715; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-162459-0xADFa1A1C.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-162459-0xADFa1A1C.md",
+      "title": "Investigation \u2014 SQLITESTUDIO",
+      "symbol": "SQLITESTUDIO",
+      "name": "SQLITESTUDIO github.com/pawelsalawa/SQLITESTUDIO",
+      "date": "2026-08-01T16:24:59Z",
+      "target": "0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (126); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,715 (rug/illiquid); [-10] Low liquidity $5,715; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-162459-0xADFa1A1C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-160954-0x3Bf254aF.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DOGE1 (0xAfB97Dd6630f1930B5cE8C542AfE7B988e40e805) \u2014 REJECT 18/100 \u2014 likely the same serial campa",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-194729-0x5a0CF2dB.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-193213-0xA6dbdd59.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid",
-      "date": "2026-07-31T19:32:13Z",
-      "target": "0xA6dbdd59318e212ad3Eb6Ca002D5De47195cA27c",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-193213-0xA6dbdd59.md"
     }
   ],
   "reports": [
@@ -2272,6 +2272,12 @@
       "title": "Token Risk Investigation Playbook",
       "summary": "When-to-use High-signal bounty cycles (e.g., 4/5 REJECT verdicts) or new token deployments on Ethereum/Base/BNB Chain showing honeypot, mintable-supply, hidden-owner, or concentrated-holder flags. Use immediately after h",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-risk-investigation-playbook.md"
+    },
+    {
+      "file": "token-risk-screening-via-investigate-py.md",
+      "title": "Token Risk Screening via investigate.py",
+      "summary": "When-to-use Screen any ERC-20/ BEP-20 token on Polygon (137), BSC (56) or Base (8453) before liquidity provision, swaps or wallet interaction. Use when tokensafety or contractrecon flags are unavailable or when a full 0-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-risk-screening-via-investigate-py.md"
     },
     {
       "file": "reconcile-ai-report-pipeline-against-prompt-inject.md",

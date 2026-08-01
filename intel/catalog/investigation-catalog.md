@@ -1065,3 +1065,5 @@
 | 2026-08-01 | auto | 0xAFc1D137a8F0764833d2E74eFb2F0b171BC2cd87 (REDWOLF) | deep_investigation | CAUTION (50/100) | Very low liquidity $380 (rug/illiquid) | +7d |
 
 | 2026-08-01 | auto | 0x3Bf254aF3338C89974b97a67D2E1E6066AA29B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-01 | auto | 0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92 (SQLITESTUDIO) | deep_investigation | REJECT (32/100) | Low holder count (126) | +7d |

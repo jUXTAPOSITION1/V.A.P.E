@@ -8482,6 +8482,25 @@
     "symbol": "SOSO",
     "times_investigated": 1
   },
+  "8453:0xadfa1a1ca0cd06cface8d26129f4c74ae7533f92": {
+    "address": "0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92",
+    "chain": "8453",
+    "creator_address": "0xd95a366a2c887033ba71743c6342e2df470e9db9",
+    "first_investigated": "2026-08-01T16:24:59Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-162459-0xADFa1A1C.md",
+        "score": 32,
+        "ts": "2026-08-01T16:24:59Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-01T16:24:59Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "SQLITESTUDIO",
+    "times_investigated": 1
+  },
   "8453:0xae45b8fae07ffb2e5f4373bfcb6f4bd827a45b07": {
     "address": "0xAE45b8faE07fFB2E5f4373bFCB6f4Bd827A45b07",
     "chain": "8453",
