@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T13:05:41Z",
+  "generated": "2026-08-01T13:20:54Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 485,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 136,
     "investigations": 622,
-    "news": 42,
+    "news": 43,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-cme-bets-extended-hours-on-single-stock-futures-will-finally.md",
+      "title": "CME Bets Extended Hours on Single-Stock Futures Will Finally Lure Liquidity to Nvidia and Tesla Trades",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T13:20:54Z",
+      "published_et": "August 1, 2026 \u00b7 9:20 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The 23-hour contracts target after-hours reactions to earnings and news, but repeat the same liquidity risks that sank OneChicago's earlier single-stock futures push.",
+      "image": "assets/news-images/cme-bets-extended-hours-on-single-stock-futures-will-finally.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-cme-bets-extended-hours-on-single-stock-futures-will-finally.md"
+    },
     {
       "file": "news-2026-08-01-russia-s-energy-crunch-claims-moscow-s-crypto-miners-in-seve.md",
       "title": "Russia\u2019s Energy Crunch Claims Moscow\u2019s Crypto Miners in Seven-Year Ban",

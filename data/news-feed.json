@@ -1,7 +1,47 @@
 {
-  "generated": "2026-08-01T10:40:37Z",
+  "generated": "2026-08-01T13:19:32Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Why CME wants phone traders slinging leveraged Nvidia contracts at 3 AM after earnings drop",
+      "url": "https://cryptoslate.com/why-cme-wants-phone-traders-slinging-leveraged-nvidia-contracts-at-3-am-after-earnings-drop/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 13:05:11 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Solana Foundation's new CISO warns AI is making crypto scams more convincing",
+      "url": "https://www.coindesk.com/tech/2026/07/31/solana-foundation-s-new-ciso-warns-ai-is-making-crypto-scams-more-convincing",
+      "source": "CoinDesk",
+      "published": "Sat, 01 Aug 2026 13:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Everyone has the perps convergence backwards",
+      "url": "https://www.coindesk.com/opinion/2026/08/01/everyone-has-the-perps-convergence-backwards",
+      "source": "CoinDesk",
+      "published": "Sat, 01 Aug 2026 13:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin just slept through Japan\u2019s rate decision, but a swollen yen short is quietly threatening a massive margin call",
+      "url": "https://cryptoslate.com/bitcoin-just-slept-through-japans-rate-decision-but-a-swollen-yen-short-is-quietly-threatening-a-massive-margin-call/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 12:10:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Wall Street is sitting on a $16.3 billion Bitcoin loss, and an August 14 deadline will expose who is quietly fleeing",
+      "url": "https://cryptoslate.com/wall-street-faces-an-aug-14-bitcoin-test-with-the-average-etf-position-down-22/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 11:05:48 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Russia expands crypto mining ban to Moscow through 2032",
       "url": "https://cointelegraph.com/news/russia-expands-crypto-mining-ban-moscow-2032?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
@@ -75,34 +115,10 @@
       "crypto": true
     },
     {
-      "title": "From crypto treasury to AI data centers: Inside the aggressive 4,375 ETH selloff that just hit a massive collateral wall",
-      "url": "https://cryptoslate.com/from-crypto-treasury-to-ai-data-centers-inside-the-aggressive-4375-eth-selloff-that-just-hit-a-massive-collateral-wall/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 22:25:26 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Why DeFi giant Aave is pulling the plug on six hyped blockchains making less than $5,000 a quarter",
-      "url": "https://cryptoslate.com/why-defi-giant-aave-is-pulling-the-plug-on-six-hyped-blockchains-making-less-than-5000-a-quarter/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 21:30:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin holds monthly gain, faces 'choppy' August as 'forced-selling' exhausted, analysts say",
       "url": "https://www.coindesk.com/markets/2026/07/31/bitcoin-holds-onto-july-gain-as-forced-selling-fuel-was-already-spent-analysts-say",
       "source": "CoinDesk",
       "published": "Fri, 31 Jul 2026 20:50:58 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "The free ride for VanEck\u2019s Bitcoin ETF is officially over after falling $1.4 billion short of growth target",
-      "url": "https://cryptoslate.com/the-free-ride-for-vanecks-bitcoin-etf-is-officially-over-after-falling-1-4-billion-short-of-growth-target/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 20:45:48 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -147,26 +163,10 @@
       "crypto": true
     },
     {
-      "title": "Tether posts $1.5 billion operating profit in Q2 as reserve buffer falls by half",
-      "url": "https://www.coindesk.com/business/2026/07/31/tether-posts-usd1-5-billion-operating-profit-in-q2-as-reserve-buffer-falls-by-half",
-      "source": "CoinDesk",
-      "published": "Fri, 31 Jul 2026 18:24:55 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Here\u2019s what happened in crypto today",
       "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Fri, 31 Jul 2026 18:09:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "The good and the bad of perps, according to crypto traders",
-      "url": "https://www.coindesk.com/business/2026/07/31/the-good-and-the-bad-of-perps-according-to-crypto-traders",
-      "source": "CoinDesk",
-      "published": "Fri, 31 Jul 2026 17:53:59 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -253,7 +253,7 @@
     {
       "title": "Crypto Market Today, July 31: Bitcoin Slides Below $63,000 and Coinbase Tumbles 10%",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNcHpmOWxzX1JGN052d29fUnVJaEhMNzhIWU8zS0NNN1RpWEdzNi1ieUpIeFRPZzUwMmJJXzBVdmMzWWNJWGpZN2Z6YTRPQkszQjJ5dVprRHhMTkFGWVE0Ykx0TWJXUHQ5MU81UjJsd0Q4UThURDJfb0JIRi1TU2dHd2RYR19VMVJjb2NpZFZPRjRIVVFfdTNYMXpSTG1TeG42UThqQnNfeXJBRW15T05qUXRNZlV5VWtaYy14R2llUlV2Zk9rYWd5bWRmNjgzTGtybGdDU04xZkhScGs?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "published": "Fri, 31 Jul 2026 22:18:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -277,7 +277,7 @@
     {
       "title": "Bitcoin slides on the final day of July while equities boom",
       "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZk5EWFRRVHU1YzNENnFLT1ZBLWdtSHNKU2QwSlFlS21fNzJuVkluYzhXQ1BDRUV5Wlhfak1YcExCNVNVd19xYUg4cHJIY0VoV1VLRzJyaW5nMG9PMlZ1UVJsR29iNXJyUGVEX05KNUcxbGtiSHNyNF9ManlXblJZcWtvS3JpdTBVdk1McE5FWGN2dU43S0RMOF8tMWxRWHc3UVRqdUliREt3WnhWZFFneDR2NFpqRE5SRUdRQjdRQ3VXUkQwZGNtMjNhdzVJTl9kWGpqcA?oc=5",
-      "source": "coindesk.com",
+      "source": "CoinDesk",
       "published": "Fri, 31 Jul 2026 11:08:21 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -309,7 +309,7 @@
     {
       "title": "Fed Holds Rates: Here's What the Decision Means for Bitcoin, Ethereum and Altcoins in August",
       "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQM1NsaWYwdzhRRF9PeDRzUHVhNmNXX0JVQ19CdWNodi10b3JNU0lvektzU21CajlfRTJMX3BvN0JjVVJBRmg5V2wzdnJVRnJRUTJNT181WmIwRXprcjJQVGstdkpIMDdnaXRiUEhJTUJYUzVwVnYzWUVSdFp6Q2QtNnV5aDN1WTZZUHJiMDB4X19JRmVrb3dhU1ZSeU5SMjA1M3k3WF9CNXIyRm1pYVUtNVpTNUNIT3VJUmNBNG9nbHQ0THdlOWNEdjdycHBBbE0?oc=5",
-      "source": "Bitcoin Foundation",
+      "source": "bitcoinfoundation.org",
       "published": "Thu, 30 Jul 2026 13:36:48 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -339,14 +339,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase Wrapped XRP Expands DeFi Utility Through Doppler Finance on Base",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBzeFRpS1Z5cTE5ZjhkT2NJS28tcUdkZTVYTndhQzQyb3h4cWx6WXBCZG1LdHhmOUk1cU54RXhsMk1ORHhYdXVUVjhiUjVNcllBNkx0QWRpOUFsZw?oc=5",
-      "source": "Cryptonews.net",
-      "published": "Thu, 30 Jul 2026 04:41:28 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "The CLARITY Act\u2019s 11th-Hour Push (and the SEC\u2019s Backup Plan)",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPVDRtbk9MRmhaSXcwWWp3ZmxsZy1WSldiS3hzcTdiXzN0WDZtU19JRVZUaUZRelFnZ1JES1VxOVplcS1FS2lLUHRlNEtNTnlabG4zb1NkYkpfT2FfNUIzUXNRaWFCX1UzSVgzb2NRSjh3NElrYThSVGd4LXpaMWRlNk90N1NIZ0FxQkZvUnZkMTNhWGd3VmcxSV9tOWxrWm40ZlIzTDF0RlJ4YUo3S0E?oc=5",
       "source": "Brownstone Research",
@@ -371,9 +363,17 @@
       "crypto": true
     },
     {
+      "title": "Coinbase CEO touts agentic finance as Base tops 100M AI payments",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOZ2g0UFA0cFM2WUhzbUdUTHNpdUtCQTItSDhycVprR3UzUE1NWUxsV3FyWFVrNHVGelA4ejlQMm1IalRJNTV1SU1ZUlp1ME8yQ3ZsT3JiSWYzNEFsYV9lWlB3T2ZxOGJ4UGxyd2txVW13UUZpNldNcnVkOHNnbXhlVXFsMVlxNV9wOFBKWkc2U3RUY3lYbUpNSklZWl9QZWlEcDJESUt0QmlaVER5VWljYS12OW5GdEltMjVpdUE5TXJBRmJJbDVZ?oc=5",
+      "source": "TradingView",
+      "published": "Mon, 27 Jul 2026 09:01:05 GMT",
+      "topic": "Base",
+      "crypto": true
+    },
+    {
       "title": "Senate Republican Crypto Bill Is Here: Why the Next 15 Days Could Change the Entire Crypto Market",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNTURwamtUVF9EZ2tDUVM2cVcwT0NkUXk0cU5vSjFCZ1ZWU1Uwd3JJR0Y1Q1JIVEtJb1hwVDdSOGg4XzNTWDFxNjROZW5tYlF0bkk0RU8xclBudEpfZVhDUWFBcEtlaFNjUnBuSHd0VldlWUE3enpCZ0RwR2duN3N2bHppYUVMbUZIdXlKdFVTbFZrVTVnYVZHT05BVEQ1ZDViZUVGS0dRbENEZlpZZF9fWDlTMlE4Z3lHVVg3QTV1WHMtZU44aFkxaVRfLXRkWDlkVml2ZVo5TlZUT2c?oc=5",
-      "source": "Bitcoin Foundation",
+      "source": "bitcoinfoundation.org",
       "published": "Thu, 23 Jul 2026 12:13:10 GMT",
       "topic": "Regulation",
       "crypto": true
@@ -381,7 +381,7 @@
     {
       "title": "Two Cross-Chain Bridges Hacked in One Day \u2014 AFX Loses $24 Million, Verus $7.5 Million",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVzVjY1h0dnd1bDQzOUwyS1hiUlpEOHFNOHpQbzF0c0IyMzFycTNTYnhGTVVTU3FFZmUxaWI5Q0xQQVFzd2dVMHdHRTZuS3B0UmxQV1lBTjdMaUM5Y0tMQTVpaHMwLWFZb1lZX0p6MksyOFE0NTRMY0lsNDZZZ2pwdQ?oc=5",
-      "source": "Bitcoin Foundation",
+      "source": "bitcoinfoundation.org",
       "published": "Thu, 23 Jul 2026 10:37:12 GMT",
       "topic": "Security",
       "crypto": true
@@ -421,7 +421,7 @@
     {
       "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
-      "source": "crowdfundinsider.com",
+      "source": "Crowdfund Insider",
       "published": "Thu, 16 Jul 2026 20:25:13 GMT",
       "topic": "Base",
       "crypto": true
@@ -437,7 +437,7 @@
     {
       "title": "The Stablecoin Wars: Which Regulations Will Create the Next Winners and Losers?",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQa1VLRGJhZTlBMXE2LUg5TkZQTE1PejM1UkJMc21lWUtHczFOaDBzSDBtclJpRTd1a3c2dDhZcnJBMnhUUnF4RmMwNExVcVU0RTJCX3RCWktWMmNGZ19kMTFMMERfRzNUTXRPTkpOZW5fYVZha04zdDdBVkFRcnExbm9qYk90bVJzblVIalY2Um5sTWNiRjJXdU5B?oc=5",
-      "source": "Bitcoin Foundation",
+      "source": "bitcoinfoundation.org",
       "published": "Wed, 08 Jul 2026 07:00:00 GMT",
       "topic": "Stablecoins",
       "crypto": true
@@ -453,7 +453,7 @@
     {
       "title": "Private keys, not smart contracts, caused 40% of crypto's $16 billion hack losses. Here's whats being done.",
       "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOaGJwX2ItUlN0LUlQU1RQWDg3emg5cUJsQlkwdVNqT0JGUUVoeG5wR2I3a2RaQk1oNFprbzFwWE1uMUFicDd0YldhcDVxTkdMQUE3akVZbG5tZTNuSll1VTdkdU9jVElVZkdkNHdhcGRmNjJqcEtya0M0LU9VdTRiYXZrVXpIb1U3TXgtQ0FsQUtjS2tPQi1NdE0taWJMV1U0aF9sZjJHallqOE5pU052TjVoU0hjQTU4NkVuS3lwaFR0RElLZmplMUl4YUNnLVBjR2dzbkNHY2NMTUNUb1E?oc=5",
-      "source": "coindesk.com",
+      "source": "CoinDesk",
       "published": "Mon, 29 Jun 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
@@ -461,7 +461,7 @@
     {
       "title": "Coinbase's Base blockchain resumes after two-hour outage disrupted network",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPcDZ6Q0FranM2Z0hBR3QtQnVHT1QzZWdiNXJkMWJaZnU1Y2pNd1lSbXkwc1hoS19zcFAwSjJ0b3gzdmlOOEo4b0J4SUJDVzQxRERPTDI0eW5zN18tWkFnTWdsc1J2U2lOc3R6c0NtRTlLVjBxcENhdzJGdjlSaVIzcEZJTEFVTUc2YzdsOHRfajBYN3F1OHJvamRfY0VNLWQwd1VPWXJYRW9iN3NmRHJNc19aYUVrUQ?oc=5",
-      "source": "coindesk.com",
+      "source": "CoinDesk",
       "published": "Thu, 25 Jun 2026 07:00:00 GMT",
       "topic": "Base",
       "crypto": true
@@ -469,7 +469,7 @@
     {
       "title": "Coinbase for Agents: AI Can Now Trade Crypto Autonomously",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53azRhNmZRTUhzM0IxNk91LVBZQzdGQ3BGRi01R2h3TTRvblVPZGREaTIzZkpyLTNOaGRlMklYWDNzbWVjTy15eFROLWxKY0FiYVNhbjJIOVdCMjRlUllsdml0MkVLSllwZ01Ma0lVdVM?oc=5",
-      "source": "Bitcoin Foundation",
+      "source": "bitcoinfoundation.org",
       "published": "Fri, 12 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
