@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T02:54:06Z",
+  "generated": "2026-08-01T02:57:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 478,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 134,
     "investigations": 606,
-    "news": 34,
+    "news": 35,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,17 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-vaneck-reintroduces-fees-on-spot-bitcoin-etf-after-missing-2.md",
+      "title": "VanEck Reintroduces Fees on Spot Bitcoin ETF After Missing $2.5B Growth Target",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01 02:57 UTC",
+      "topic": "Crypto Markets",
+      "dek": "Starting August 1, HODL investors will face a 0.20% sponsor fee as the fund\u2019s long-running fee waiver officially expires with $1.076 billion in assets.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-vaneck-reintroduces-fees-on-spot-bitcoin-etf-after-missing-2.md"
+    },
     {
       "file": "news-2026-08-01-bitcoin-holds-monthly-gain-faces-choppy-august-as-forced-sel.md",
       "title": "Bitcoin Holds Monthly Gain, Faces 'Choppy' August as 'Forced-Selling' Exhausted, Analysts Say",

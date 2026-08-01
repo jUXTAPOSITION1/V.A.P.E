@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T02:45:28Z",
+  "generated": "2026-08-01T02:57:00Z",
   "count": 60,
   "headlines": [
     {
@@ -253,7 +253,7 @@
     {
       "title": "Why Are Bitcoin, Ethereum and XRP Prices Crashing Today?",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4xN2d2Sy1zYnNNOFVZSG5fNFo0ZV9nQnFTanhMa3dFdFlXOGo2WktKVFJfUXNJVUxQQ0ZjLVlkbUtZRHk1ZllSRHo0ZDFhNFhSbUg2dEdFeWZhdEU?oc=5",
-      "source": "Cryptonews.net",
+      "source": "cryptonews.net",
       "published": "Fri, 31 Jul 2026 20:52:25 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -269,7 +269,7 @@
     {
       "title": "Coinbase Says Revenue From Its Base Layer 2 Fell Despite Record Volume",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYXN3bUZWS3hfSW1udFJhdDRHMFRhMi1pRjhPQ3NjUFpndlB3Q1gwSWlCWDZmUGZrN3FFNkhSS0sycUhtSGZjalhxb1laa3RHa2FGVlB5M0lNNlYwRnJfM3ByREVJVFBFMEdfR2JwNGc3X3dzZGU1NHNkUmxaLTRLQzhwbDNjTnFOam1yT3l6MGZmVFh5ZkxPU0dFNmtQVEdoLXdsNQ?oc=5",
-      "source": "thedefiant.io",
+      "source": "The Defiant",
       "published": "Fri, 31 Jul 2026 16:31:25 GMT",
       "topic": "Base",
       "crypto": true
@@ -285,7 +285,7 @@
     {
       "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC Dropping to $60,000",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd2xXZHpwZ2pmcmZwckFzb2R4RjJGVXpXelowLUk5ZTFob0tna2NHQmZRaHg1ZE5DLUJWU3A3WkxFQ0ZaYVdvZ3E1cmZqYTkzTzJmSW1ibXBhWkdLNXpjcGJHWlU4YWpBM3lmMHlfZXZYVmlYSXUtMWFxYnZPVEhHb1pyRjlGWUYzdFZuNnlqVXR5MzFCZWxOcGlwWEd0UHNqWkE?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "published": "Fri, 31 Jul 2026 02:17:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -325,7 +325,7 @@
     {
       "title": "SEC ready to act if Congress stalls on CLARITY Act",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5sN3dJcWZhbHRWeTRmc0dDYm81T1g2X0pBVkhFb005OElTWUtLZjJiWVVPbXFmcE5XMGhTN0J3V3hfZ1hYWGRwTGZzZW5KNnpzaFk2QU5BbzJ3Z3dha0FuNlNuaDRoY2E2SlBheEtqUWdqcWR3Njc2VUFSOA?oc=5",
-      "source": "Crypto News",
+      "source": "crypto.news",
       "published": "Thu, 30 Jul 2026 07:33:52 GMT",
       "topic": "Regulation",
       "crypto": true
@@ -333,7 +333,7 @@
     {
       "title": "Coinbase Wrapped XRP Expands DeFi Utility Through Doppler Finance on Base",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBzeFRpS1Z5cTE5ZjhkT2NJS28tcUdkZTVYTndhQzQyb3h4cWx6WXBCZG1LdHhmOUk1cU54RXhsMk1ORHhYdXVUVjhiUjVNcllBNkx0QWRpOUFsZw?oc=5",
-      "source": "Cryptonews.net",
+      "source": "cryptonews.net",
       "published": "Thu, 30 Jul 2026 04:41:28 GMT",
       "topic": "Base",
       "crypto": true
@@ -349,7 +349,7 @@
     {
       "title": "AEON hits $475M in cumulative on-chain volume, eyes AI agent payment infrastructure",
       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE84TGFYajBoek9zYnI3Wkx1VUlTLTQ1NHFJeFZFZGoyelc1Z2F2eVJ3Sndwb3NWa3hDR2JjLVpnNVRPc3JwZmdiLUFwT19CZ1BTUGxqNlMxYw?oc=5",
-      "source": "Cryptonews.net",
+      "source": "cryptonews.net",
       "published": "Wed, 29 Jul 2026 19:01:27 GMT",
       "topic": "AI Agents",
       "crypto": true
@@ -395,6 +395,14 @@
       "crypto": true
     },
     {
+      "title": "Base Moves to Independent Tech Stack, Reducing Reliance On Optimism Infrastructure",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORWhnR1J3cm1lUVpOeUtFbjFJZWltWW9Nc190SDJLT3Z4bG4xRU5rN3EwVzVUMUdWR0pPeXBTN0RhTmtHMURfd3EyS29iVFpmeDM4NG5YdXg2anFKT1lQbkxHb2NaN3lWdFhERi1hZjZTVzNxZm1LeHlBd3Q0eW1YckVvR3FOTlJLQmZEMTlfTTdBVE9CbDFjU0oxZVQ5VVNzWV9BVUxjN1M?oc=5",
+      "source": "Yellow.com",
+      "published": "Tue, 21 Jul 2026 14:29:38 GMT",
+      "topic": "Base",
+      "crypto": true
+    },
+    {
       "title": "Thailand\u2019s SEC Approves Tether\u2019s USDT and Circle\u2019s USDC Stablecoins for Trading on Regulated Exchanges",
       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQM3owMEVBSjZuc1pSQk83VW11NU4yRFA2cUJXQ1BQbGNlT2cwRnZZVXFydldmVmpUYmtwekRxVjBlS3ZOLVcwaTRDMzFJZTZCR1Rpdm5iYW56cDZ4QlBfeUZrbVJPRUNfQnpfUzBvR1hGVjR6VTJFYk83UHNDT0tMLS1mSHNUV2hHU3lOOUd4SmNLWkZGc1U0T2Y2OG1URU9HUW5Ra1FET1NORkRTN1VvYkpBQ19SeXJvd05yN0NXV0pmWmYzRWRNYTJPNU9UTVBwZkJSd0ZHSWs?oc=5",
       "source": "CoinMarketCap",
@@ -413,7 +421,7 @@
     {
       "title": "Base Creator Jesse Pollak Steps Back From App Leadership After Admitting Social Bet 'Was Wrong'",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPSDlBREhCd0NEeFZ4czVWYk9ydUF3a0doT2ZrOEwwei1ZSjdSNzh6YmhPWWpqYWV5NDJOTEoyWnctcFdWSmFLLVVVNTJEbXFqejdBcXRmRnAwMU1IS3NyWk4wNWFIREFXLTF2VG5XUEN2ZkJINHVOSFBfWlhxc1Y2ZHBUNHRzOVk1TUdMXzBac3JZSl9idFNCYUdhcFU?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "published": "Wed, 15 Jul 2026 07:00:00 GMT",
       "topic": "Base",
       "crypto": true
@@ -443,14 +451,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase's Base blockchain resumes after two-hour outage disrupted network",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPcDZ6Q0FranM2Z0hBR3QtQnVHT1QzZWdiNXJkMWJaZnU1Y2pNd1lSbXkwc1hoS19zcFAwSjJ0b3gzdmlOOEo4b0J4SUJDVzQxRERPTDI0eW5zN18tWkFnTWdsc1J2U2lOc3R6c0NtRTlLVjBxcENhdzJGdjlSaVIzcEZJTEFVTUc2YzdsOHRfajBYN3F1OHJvamRfY0VNLWQwd1VPWXJYRW9iN3NmRHJNc19aYUVrUQ?oc=5",
-      "source": "CoinDesk",
-      "published": "Thu, 25 Jun 2026 07:00:00 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "Coinbase for Agents: AI Can Now Trade Crypto Autonomously",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53azRhNmZRTUhzM0IxNk91LVBZQzdGQ3BGRi01R2h3TTRvblVPZGREaTIzZkpyLTNOaGRlMklYWDNzbWVjTy15eFROLWxKY0FiYVNhbjJIOVdCMjRlUllsdml0MkVLSllwZ01Ma0lVdVM?oc=5",
       "source": "bitcoinfoundation.org",
@@ -477,7 +477,7 @@
     {
       "title": "May\u2019s DeFi Hack Tally Grows as Verus Bridge Reportedly Loses $11.58 Million",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQlM3TkZzZXZXUzVZdG1wUk1IT3BTV1FuWDZ5QkZQb1FuOUItdnBYN19NeXliZU84NWcwejJsSllzdE1ZYnM0UWdwdzdSV2piZUROYVZzekRSOXdWbVB1dEVQb1Q5eTBHSnhzZm1UVlFVNTI1SlNZblYyMVM5TXNfUTRwSi1oeWoxN3VIc2psU2xqd3dE?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "published": "Sun, 17 May 2026 07:00:00 GMT",
       "topic": "Security",
       "crypto": true
