@@ -24,6 +24,19 @@
     --radius-lg: 14px;
     --radius-md: 10px;
     --radius-sm: 8px;
+    /* Security Dashboard's 5-bucket severity taxonomy (see
+       agents/build_security_dashboard.py::normalize_severity). Reused from
+       the dataviz skill's own pre-validated, mode-invariant status ramp
+       (good/warning/serious/critical) rather than hand-picked hexes -- LOW
+       through CRITICAL map onto that ramp in ascending order. INFO is
+       deliberately NOT part of that ramp: it means "no severity signal at
+       all", not "checked and safe", so it gets a plain muted-ink gray with
+       zero rating connotation instead of borrowing the ramp's green. */
+    --sev-critical: #d03b3b;
+    --sev-high: #ec835a;
+    --sev-medium: #fab219;
+    --sev-low: #0ca30c;
+    --sev-info: #71717a;
 }
 
 /* Site-wide base scale — the previous 16px root made every Tailwind rem-based
@@ -258,6 +271,64 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .offerings-scroll::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.35);
+}
+
+/* Security Dashboard — threat-level arc gauge. A Chart.js doughnut rotated
+   into a half-circle (rotation:-90, circumference:180) is the standard,
+   accepted way to render a gauge with Chart.js without a plugin; legitimate
+   here specifically because the underlying value is a real ordinal 3-state
+   category (LOW/MEDIUM/HIGH from security_sweep.py::compute_threat_level),
+   not a fabricated continuous dial — always paired with the explicit label
+   below it so the reading is never color-alone. */
+.secdash-gauge-wrap {
+    position: relative;
+    height: 160px;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+}
+.secdash-gauge-label {
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+/* Category-card ring gauge (part-to-whole at small size — a legitimate
+   donut-cutout use, distinct from the full threat-level gauge above) +
+   status badge (icon + label, never color-alone) + horizontal stacked
+   severity bar with visible gaps between segments. */
+.secdash-card { display: flex; flex-direction: column; gap: 0.75rem; }
+.secdash-card-head { display: flex; align-items: center; gap: 0.75rem; }
+.secdash-ring-wrap { position: relative; width: 46px; height: 46px; flex-shrink: 0; }
+.secdash-ring-value {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-family: var(--font-mono); color: #d4d4d8;
+}
+.secdash-badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 10.5px; padding: 0.2rem 0.55rem; border-radius: 999px;
+    border: 1px solid var(--border); white-space: nowrap;
+}
+.secdash-sev-bar {
+    display: flex; height: 8px; width: 100%; border-radius: 999px; overflow: hidden;
+    background: var(--bg-panel-sm); gap: 2px;
+}
+.secdash-sev-seg { height: 100%; min-width: 2px; }
+
+/* "Automated Security Lanes" strip — one small tile per real security
+   workflow's last-run status, reusing .offerings-scroll's horizontal-scroll
+   + scroll-snap motion (see site.css above) since the underlying list is a
+   real, growing set of workflows, not a chart. Replaces the reference
+   screenshot's fabricated "Active Campaigns" gauge+carousel concept, which
+   has no VAPE equivalent. */
+.secdash-lane-tile {
+    flex: 0 0 auto;
+    width: 168px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
 /* x402 Activity tiles — Transactions / Volume / Buyers, each a big number

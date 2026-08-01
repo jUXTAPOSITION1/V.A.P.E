@@ -249,6 +249,96 @@
             <a href="news.html" class="term-btn mt-5 inline-block">Read the full VAPE Report <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
         </section>
 
+        <!-- ═══ 2.75. SECURITY DASHBOARD ═══
+             VAPE's own security surface, aggregated from real signals already
+             tracked elsewhere in this repo (skillforge/memory/findings.jsonl,
+             its tamper-evidence chain, data/attack-feed.json, and GitHub's own
+             Actions Runs / Code Scanning Alerts APIs) into one snapshot —
+             agents/build_security_dashboard.py, refreshed every 6h. No
+             fabricated numbers: a lane whose real signal can't be reached
+             reports null, never a plausible-looking placeholder. See
+             docs/assets/securitydashboard.js. -->
+        <section id="security-dashboard" class="reveal panel mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i>[ security posture ]</div>
+                <span id="secdash-updated" class="text-[11px] text-zinc-500 flex items-center gap-1.5">syncing…</span>
+            </div>
+            <h2 class="section-title text-lg mb-3">VAPE's own security surface, measured continuously.</h2>
+            <p class="text-zinc-400 text-sm mb-7 max-w-3xl leading-relaxed">Every automated check VAPE runs on itself — static analysis, AI red-team
+            drills, on-chain attack-pattern coverage, dependency audits, and the tamper-evidence seal on its own findings ledger — aggregated into one
+            real, continuously-refreshed snapshot. Nothing here is fabricated: a signal that can't be reached shows as unavailable, never a guess.</p>
+
+            <!-- Threat level + findings-by-severity — the two headline reads. -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-7 pb-7 border-b border-white/10">
+                <div class="panel-sm flex flex-col items-center justify-center text-center">
+                    <h3 class="text-sm text-zinc-500 self-start mb-2">Overall Threat Level</h3>
+                    <div class="secdash-gauge-wrap">
+                        <canvas id="secdashGauge"></canvas>
+                        <div id="secdash-gauge-label" class="secdash-gauge-label">
+                            <div class="skeleton h-4 w-16 mx-auto"></div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-zinc-600 mt-1">From on-chain attack-pattern &amp; incident tracking (security_sweep.py).</p>
+                </div>
+                <div class="panel-sm">
+                    <h3 class="text-sm text-zinc-500 mb-3">Findings by Severity</h3>
+                    <div class="chart-shell-sm mb-3"><canvas id="secdashSeverityDonut"></canvas></div>
+                    <p class="text-[10px] text-zinc-600">Every real finding VAPE has logged on itself, normalized onto one 5-bucket scale. INFO
+                    means "no severity signal at all" — not "checked and cleared."</p>
+                </div>
+            </div>
+
+            <!-- Automated Security Lanes — one tile per real security workflow's
+                 last-run status (not a fabricated "campaign" concept). -->
+            <div class="mb-7 pb-7 border-b border-white/10">
+                <h3 class="text-sm text-zinc-500 mb-3">Automated Security Lanes</h3>
+                <div id="secdash-lanes" class="offerings-scroll gap-3">
+                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
+                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
+                    <div class="panel-sm secdash-lane-tile"><div class="skeleton h-16"></div></div>
+                </div>
+            </div>
+
+            <!-- Risk breakdown — six real coverage lanes, each with a ring
+                 gauge + status badge + stacked severity bar. -->
+            <div class="mb-7 pb-7 border-b border-white/10">
+                <h3 class="text-sm text-zinc-500 mb-4">Risk Breakdown</h3>
+                <div id="secdash-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                    <div class="panel-sm secdash-card"><div class="skeleton h-20"></div></div>
+                </div>
+            </div>
+
+            <!-- Findings over time, toggleable to threat-level over time. -->
+            <div class="mb-7 pb-7 border-b border-white/10">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <h3 class="text-sm text-zinc-500">Findings by Severity, Over Time</h3>
+                    <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[11px]">
+                        <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
+                        <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
+                    </div>
+                </div>
+                <div class="panel-sm">
+                    <div class="chart-shell"><canvas id="secdashTimelineChart"></canvas></div>
+                    <p id="secdash-timeline-note" class="text-[10px] text-zinc-600 mt-3">Bucketed by real ISO week, from VAPE's own findings ledger.</p>
+                </div>
+            </div>
+
+            <!-- Findings by verdict. -->
+            <div>
+                <h3 class="text-sm text-zinc-500 mb-4">Findings by Verdict</h3>
+                <div class="panel-sm">
+                    <div class="chart-shell-sm"><canvas id="secdashVerdictChart"></canvas></div>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-zinc-600 mt-8">Refreshed every 6 hours (<a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/build_security_dashboard.py" target="_blank" class="text-zinc-400 hover:underline">agents/build_security_dashboard.py</a>) — every field traces to a real file or a real GitHub API response.</p>
+        </section>
+
         <!-- ═══ 3. LIVE X402 LEDGER ═══ -->
         <section id="x402-ledger" class="reveal panel mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
@@ -1152,5 +1242,6 @@
     <script type="module" src="assets/x402feed.js?v=8"></script>
     <script type="module" src="assets/attackfeed.js?v=5"></script>
     <script type="module" src="assets/newsfeed.js?v=2"></script>
+    <script type="module" src="assets/securitydashboard.js?v=1"></script>
 </body>
 </html>
