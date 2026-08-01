@@ -44,7 +44,7 @@ import { latestCommunityBroadcast } from "./lib/communityBroadcast";
 import { bulkSafetyBundle } from "./lib/bulkSafetyBundle";
 import { reviewWebsite } from "./lib/websiteReview";
 import { researchQuery } from "./lib/webSourcer";
-import { logJob, getStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
+import { logJob, getStats, getSubDailyStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
 import { DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
 import type { Context } from "hono";
 
@@ -925,6 +925,22 @@ app.get("/x402/stats", cache({ cacheName: "vape-x402-stats", cacheControl: "max-
   const days: number | "all" = daysParam === "all" ? "all" : Math.min(Number(daysParam) || 30, 400);
   const stats = await getStats(c.env.VAPE_JOBS, days);
   return c.json(stats);
+});
+
+// Real hourly/multi-hour bucketing for the site's Activity tracker — see
+// getSubDailyStats()'s own comment for why this reads RECENT_JOBS directly
+// instead of paginating through /x402/feed (whose 200-record page cap
+// silently truncated any window wider than ~200 real jobs, the root cause
+// of a live bug where 7D and 30D reported identical totals). `resolution`
+// is minutes-per-bucket; clamped to keep the bucket count sane regardless
+// of what a caller asks for (max ~600 buckets, e.g. 30 days at 60-min
+// resolution or 7 days at 15-min).
+app.get("/x402/stats/sub", cache({ cacheName: "vape-x402-stats-sub", cacheControl: "max-age=30" }), async (c) => {
+  if (!c.env.VAPE_JOBS) return c.json({ error: "job feed not configured" }, 503);
+  const days = Math.min(Math.max(Number(c.req.query("days")) || 7, 1), 35);
+  const resolution = Math.min(Math.max(Number(c.req.query("resolution")) || 60, 15), 1440);
+  const result = await getSubDailyStats(c.env.VAPE_JOBS, days, resolution);
+  return c.json(result);
 });
 
 // Real, read-side self-check for CDP's Bazaar discovery catalog. CDP's

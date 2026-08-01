@@ -288,18 +288,19 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .activity-sparkline {
     display: flex;
     align-items: flex-end;
-    gap: 1px;
-    height: 72px;
+    gap: 2px;
+    height: 96px;
     margin-top: 0.5rem;
-    /* At 2px min-width each, 240 buckets (30D's 3-hour resolution) need more
-       width than an activity-tile actually has on most viewports — clip
-       rather than let bars spill past the tile's edge. */
+    /* Resolution is chosen (x402feed.js's _activityBucketMinutes) to land
+       around ~55-60 bars regardless of range, so this should never need to
+       clip in practice — kept as a backstop against an unexpectedly wide
+       bucket count rather than letting bars spill past the tile's edge. */
     overflow: hidden;
 }
 .activity-sparkline-bar {
     flex: 1 1 0%;
-    min-width: 2px;
-    background: rgba(96, 165, 250, 0.55);
+    min-width: 4px;
+    background: rgba(96, 165, 250, 0.6);
     border-radius: 2px 2px 0 0;
     transition: background 0.15s ease;
     cursor: default;
@@ -307,6 +308,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .activity-sparkline-bar:hover,
 .activity-sparkline-bar.is-latest {
     background: #60a5fa;
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
 }
 
 .skeleton {
