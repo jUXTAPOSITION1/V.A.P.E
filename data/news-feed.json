@@ -1,7 +1,15 @@
 {
-  "generated": "2026-08-01T07:46:51Z",
+  "generated": "2026-08-01T08:20:45Z",
   "count": 60,
   "headlines": [
+    {
+      "title": "Coinbase spent 5 years building a life raft away from Bitcoin and still managed to lose $359M",
+      "url": "https://cryptoslate.com/coinbase-spent-5-years-building-a-life-raft-away-from-bitcoin-trading-and-still-managed-to-lose-359-million/",
+      "source": "CryptoSlate",
+      "published": "Sat, 01 Aug 2026 07:54:39 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
     {
       "title": "Bitcoin ETFs end July in the green despite late-month selling",
       "url": "https://cointelegraph.com/markets/bitcoin-etfs-july-green-despite-late-month-selling?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
@@ -139,14 +147,6 @@
       "crypto": true
     },
     {
-      "title": "Dogecoin treasury firm borrowed $1.4M at 10.7% interest \u2013 promising repayment in CleanCore stock already pledged elsewhere",
-      "url": "https://cryptoslate.com/dogecoin-treasury-firm-borrowed-1-4m-at-10-7-interest-promising-repayment-in-cleancore-stock-already-pledged-elsewhere/",
-      "source": "CryptoSlate",
-      "published": "Fri, 31 Jul 2026 17:30:24 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Tether Reports $1.5B Q2 Profit as USDT Supply Grows, Gold Holdings Rise",
       "url": "https://decrypt.co/374796/tether-reports-1-5b-q2-profit-usdt-supply-grows",
       "source": "Decrypt",
@@ -269,7 +269,7 @@
     {
       "title": "Coinbase Says Revenue From Its Base Layer 2 Fell Despite Record Volume",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNYXN3bUZWS3hfSW1udFJhdDRHMFRhMi1pRjhPQ3NjUFpndlB3Q1gwSWlCWDZmUGZrN3FFNkhSS0sycUhtSGZjalhxb1laa3RHa2FGVlB5M0lNNlYwRnJfM3ByREVJVFBFMEdfR2JwNGc3X3dzZGU1NHNkUmxaLTRLQzhwbDNjTnFOam1yT3l6MGZmVFh5ZkxPU0dFNmtQVEdoLXdsNQ?oc=5",
-      "source": "thedefiant.io",
+      "source": "The Defiant",
       "published": "Fri, 31 Jul 2026 20:31:25 GMT",
       "topic": "Base",
       "crypto": true
@@ -285,7 +285,7 @@
     {
       "title": "Bitcoin, Ethereum Spike, XRP and Dogecoin Climb Amid Sharp Crypto Recovery: Analyst Says 'Don't Fear' BTC Dropping to $60,000",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd2xXZHpwZ2pmcmZwckFzb2R4RjJGVXpXelowLUk5ZTFob0tna2NHQmZRaHg1ZE5DLUJWU3A3WkxFQ0ZaYVdvZ3E1cmZqYTkzTzJmSW1ibXBhWkdLNXpjcGJHWlU4YWpBM3lmMHlfZXZYVmlYSXUtMWFxYnZPVEhHb1pyRjlGWUYzdFZuNnlqVXR5MzFCZWxOcGlwWEd0UHNqWkE?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "published": "Fri, 31 Jul 2026 02:17:00 GMT",
       "topic": "Crypto Markets",
       "crypto": true
@@ -419,6 +419,14 @@
       "crypto": true
     },
     {
+      "title": "Coinbase's Base Network Refocuses Priorities Following Leadership Transition And Strategic Reassessment",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOTzVuZk96QXEzT2p6d3F2RHpYZDdqOTQ0Z0EtSF91R3N5T19TUTU3b29MWDFvTkV0Wkh4bkdSNkRETW5QT2tYNFRsa1hQdlBBOHpQVmItT2lXUFEzUVd3Wm5BV3BOb3Q4Ujh4SDY5a2JQN2xqVTc4MjZnNVhYTXFYS2dSYTd0Q0RsazdITEJSeGRNdXQ4R2FWQVpDaWVoeTN2eWFsODJpbGdpSzg5eUdzbklhZGN5UWEydjVCTXhCNHpJVllkRmxfM01XUWZDWTc1OF92YjEtdmJzV0FhR3NrZ25aSkdLdw?oc=5",
+      "source": "Crowdfund Insider",
+      "published": "Thu, 16 Jul 2026 20:25:13 GMT",
+      "topic": "Base",
+      "crypto": true
+    },
+    {
       "title": "BNB Chain Bets on AI Agents With New Layer-1 Blockchain",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOdUNGV0tsU1BMRzB1TEZMRG43N0hqMWdQNDFISUZ4SGljZ2p2NjZpOW9HTTZwSXpMaWwyazVNbmRCYjZMZ0UwM2Y5U05iLV83eUhWVjFvYVFoZnRyTVMyWnhNaGtwbUlZcG4tTWwwT2pfelBvLWM3MS1obmJKTWhBeFF6NlJCVEtsZjBrV0V1RjdkdllGalA0?oc=5",
       "source": "blockhead.co",
@@ -437,7 +445,7 @@
     {
       "title": "OKX Launches Agentic Wallet, Bringing Autonomous Onchain Execution to AI Agents",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQSVBKeFkwOU1HbUx4ak1JVXk2QkFLYjM2S25kZXNDNnVwdFduLVp0S2p4YURwLWduSFpFc1hzNFNiV29wbWpjQTlnNF96ZmNmTlQ0dWtIVml2aVJmSVlBX2poelctLWtxMzNHUkZGdEQ2MWxxbWZldXV5ck5PcmhiZlZWLXdWRTU0alFiejRlOGtrb05zVFQ3b1pHT3JkaVlCWDgwS19jRlhSakNqcWc?oc=5",
-      "source": "FF News",
+      "source": "ffnews.com",
       "published": "Fri, 03 Jul 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true
@@ -459,14 +467,6 @@
       "crypto": true
     },
     {
-      "title": "Coinbase-Backed Ethereum Network Base Recovers After Block Production Issue",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPQUJjanpjNjVyZXZPZXRrVC1CVEdCa2hETXpWODNnamFSSTVZNERWTWdnR3preWctVzNBSW03SHE5bnB0ZVZGQmc1MUhuTWxUdkZRZTBRcGFPaWJldWJZdlhuOXZxWGJVSlExSElDSURzQkV6eHhKWjYzeU1mWlJHcWZEdGloanlUbnZoRThuVEVzUQ?oc=5",
-      "source": "Decrypt",
-      "published": "Thu, 25 Jun 2026 07:00:00 GMT",
-      "topic": "Base",
-      "crypto": true
-    },
-    {
       "title": "Coinbase for Agents: AI Can Now Trade Crypto Autonomously",
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53azRhNmZRTUhzM0IxNk91LVBZQzdGQ3BGRi01R2h3TTRvblVPZGREaTIzZkpyLTNOaGRlMklYWDNzbWVjTy15eFROLWxKY0FiYVNhbjJIOVdCMjRlUllsdml0MkVLSllwZ01Ma0lVdVM?oc=5",
       "source": "Bitcoin Foundation",
@@ -477,7 +477,7 @@
     {
       "title": "Best AI-Agent Crypto Coins to Buy in 2026",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5sOTBhY2NSSEYzMzJ4Um9OclVoSHdfUjc5M1d3T2RITkxNS0hjQTAzeC1CMHZXNUF1STBoY1A5bmdnd1pZa21WY0h3Q3BGYkVWZmh0elpwMlR2bUZKVGFELU1yWHJ3Ymgxb1BrZVFR?oc=5",
-      "source": "changelly.com",
+      "source": "Changelly",
       "published": "Fri, 05 Jun 2026 07:00:00 GMT",
       "topic": "AI Agents",
       "crypto": true

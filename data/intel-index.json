@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T08:19:29Z",
+  "generated": "2026-08-01T08:21:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 135,
     "investigations": 610,
-    "news": 40,
+    "news": 41,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-altcoin-and-layer-2-pivots-fail-to-shield-coinbase-from-a-35.md",
+      "title": "Altcoin and Layer-2 Pivots Fail to Shield Coinbase from a $359M Quarterly Storm",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T08:21:43Z",
+      "published_et": "August 1, 2026 \u00b7 4:21 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Even with 88% of net revenue flowing outside of Bitcoin spot trading, the exchange giant's Q2 earnings reveal that diversification has not broken its cycle dependency.",
+      "image": "assets/news-images/altcoin-and-layer-2-pivots-fail-to-shield-coinbase-from-a-35.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-altcoin-and-layer-2-pivots-fail-to-shield-coinbase-from-a-35.md"
+    },
     {
       "file": "news-2026-08-01-bitcoin-etfs-rebound-with-modest-172m-july-inflow-after-reco.md",
       "title": "Bitcoin ETFs Rebound With Modest $172M July Inflow After Record June Outflow",
