@@ -4780,6 +4780,25 @@
     "symbol": "BANK",
     "times_investigated": 1
   },
+  "56:0x3b4de3c7855c03bb9f50ea252cd2c9fa1125ab07": {
+    "address": "0x3B4de3c7855C03bB9F50ea252cD2c9FA1125Ab07",
+    "chain": "56",
+    "creator_address": "0x07afc17e7bf77097085c26f2ab29767c29d09d9d",
+    "first_investigated": "2026-08-01T12:50:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-125028-0x3B4de3c7.md",
+        "score": 70,
+        "ts": "2026-08-01T12:50:28Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T12:50:28Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "IDOL",
+    "times_investigated": 1
+  },
   "56:0x3c0541e68ce0f1f9073e4ba3db81b730eb614444": {
     "address": "0x3C0541e68CE0F1F9073E4BA3Db81b730Eb614444",
     "chain": "56",
