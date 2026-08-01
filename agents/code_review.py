@@ -31,8 +31,10 @@ Same design laws as every other agent here:
 Usage: python3 -m agents.code_review --pr <number>
 """
 import argparse
+import json
 import os
 import sys
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
@@ -51,6 +53,14 @@ except Exception:
     search_memory = None
 
 REPO_SLUG = "jUXTAPOSITION1/V.A.P.E"
+
+# Where scripts/code_lint.py's surviving HIGH/CRITICAL findings on a MERGED
+# PR get persisted (see persist_merged_findings below) — same file every
+# other real finding source in this repo (redteam.py, external_audit.py,
+# hack_sweep.py, investigate.py via append_to_memory) already writes to.
+FINDINGS_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "skillforge", "memory", "findings.jsonl"
+)
 
 # Kept short and specific rather than a generic OWASP checklist — this is
 # what actually distinguishes this reviewer from a generic tool: real rules
@@ -258,6 +268,114 @@ def annotate_reviewed_exceptions(findings):
     return annotated
 
 
+# ============================================================================
+# Findings persistence — closes the real gap where code_lint.py's findings
+# were only ever posted as an advisory PR comment and lost the moment the
+# PR closed, invisible to everything else that reads findings.jsonl
+# (self_improve.py's gap-finder, review_ledger.py's drift tracker,
+# agents/build_security_dashboard.py's Static Analysis lane). Triggered by
+# .github/workflows/vape-reviewer.yml's `pull_request: [closed]` path, gated
+# on `merged == true` so a closed-without-merging PR logs nothing.
+# ============================================================================
+
+def _select_persistable_findings(findings):
+    """HIGH/CRITICAL findings only, minus anything a human has already
+    reviewed and confirmed a false positive (annotate_reviewed_exceptions
+    has already embedded that confirmation into the message by the time
+    run_deterministic_pass returns it) — a confirmed non-issue doesn't
+    belong in the permanent ledger even though the advisory comment still
+    shows it for transparency."""
+    return [
+        (sev, path, lineno, msg)
+        for sev, path, lineno, msg in findings
+        if sev in ("HIGH", "CRITICAL") and "[Previously reviewed and confirmed a false positive" not in msg
+    ]
+
+
+def _already_persisted(pr_number, path, lineno, rule_tag):
+    """True if this exact (PR, file, line, rule) finding is already in
+    findings.jsonl — guards against a re-run of the same `pull_request:
+    closed` event (a GitHub Actions job re-run, a workflow retry)
+    double-logging the same real finding. Returns False (never raises) if
+    Memory is unavailable, same guarded-search law as
+    _find_reviewed_exception above."""
+    if not search_memory:
+        return False
+    try:
+        hits = search_memory(f"PR #{pr_number}", category="finding", tags=["code-lint", rule_tag], max_results=25)
+    except Exception:
+        return False
+    for hit in hits:
+        meta = hit.get("metadata") or {}
+        if meta.get("pr_number") == pr_number and meta.get("path") == path and meta.get("lineno") == lineno:
+            return True
+    return False
+
+
+def _append_finding_direct(entry):
+    """Writes straight to findings.jsonl with a TOP-LEVEL `severity` key —
+    deliberately bypasses append_to_memory() (whose MemoryEntry.to_dict()
+    nests every extra kwarg under `metadata`), mirroring the exact real
+    precedent agents/redteam.py, external_audit.py, and hack_sweep.py
+    already use, so agents/build_security_dashboard.py's
+    normalize_severity() picks this up at its first, highest-priority check
+    with no special-casing. Never raises — an unwritable ledger degrades to
+    a printed warning, the same law every other direct FINDINGS_PATH writer
+    in this repo follows."""
+    try:
+        os.makedirs(os.path.dirname(FINDINGS_PATH), exist_ok=True)
+        with open(FINDINGS_PATH, "a") as f:
+            f.write(json.dumps(entry) + "\n")
+        return True
+    except Exception as e:
+        print(f"[code_review] could not append finding: {e}", file=sys.stderr)
+        return False
+
+
+def persist_merged_findings(pr_number, merge_sha):
+    """Re-lints the merged PR's changed files at the real merge commit (so
+    only what actually shipped is logged, not a since-fixed intermediate
+    push), then appends each surviving HIGH/CRITICAL finding to
+    findings.jsonl. Never raises — returns the count actually persisted (0
+    on any failure, including no merge_sha, matching this repo's honest-
+    degradation law)."""
+    if not merge_sha:
+        return 0
+    _, files, err = fetch_pr_head_and_files(pr_number)
+    if err:
+        return 0
+    findings = run_deterministic_pass(merge_sha, files)
+    now = datetime.now(timezone.utc).isoformat()
+    persisted = 0
+    for sev, path, lineno, msg in _select_persistable_findings(findings):
+        rule_tag = _rule_tag_for_message(msg)
+        if _already_persisted(pr_number, path, lineno, rule_tag):
+            continue
+        entry = {
+            "category": "finding",
+            "title": f"code_lint: {rule_tag} in {path}:{lineno} (PR #{pr_number})",
+            "content": (
+                f"scripts/code_lint.py flagged this in the code merged via PR #{pr_number} "
+                f"(merge {merge_sha[:8]}): {msg}"
+            ),
+            "source": "agents/code_review.py",
+            "tags": ["code-lint", "static-analysis", rule_tag],
+            "confidence": 0.85,
+            "severity": sev,
+            "timestamp": now,
+            "metadata": {
+                "pr_number": pr_number,
+                "path": path,
+                "lineno": lineno,
+                "rule_tag": rule_tag,
+                "merge_sha": merge_sha,
+            },
+        }
+        if _append_finding_direct(entry):
+            persisted += 1
+    return persisted
+
+
 def _format_deterministic_findings(findings):
     if not findings:
         return "None."
@@ -364,6 +482,12 @@ def run(pr_number):
 def main():
     ap = argparse.ArgumentParser(description="VAPE Reviewer — automated security-forward PR review")
     ap.add_argument("--pr", required=True, type=int, help="pull request number")
+    ap.add_argument(
+        "--merge-sha", default=None,
+        help="If set, this is a merged PR: persist surviving HIGH/CRITICAL code_lint findings from the "
+             "merged tree into findings.jsonl instead of posting a review comment (see "
+             "persist_merged_findings, called from vape-reviewer.yml's pull_request:[closed] path).",
+    )
     args = ap.parse_args()
     # Advisory only, never a merge gate (see module docstring) — run() already
     # degrades any handled failure (GitHub API unreachable, comment-post
@@ -372,7 +496,11 @@ def main():
     # only a genuinely unexpected crash (a real bug, not an external failure)
     # should, so the CI job actually flags something worth looking at.
     try:
-        run(args.pr)
+        if args.merge_sha:
+            n = persist_merged_findings(args.pr, args.merge_sha)
+            print(f"[code_review] persisted {n} finding(s) from merged PR #{args.pr}")
+        else:
+            run(args.pr)
     except Exception as e:
         print(f"[code_review] unexpected crash: {e}", file=sys.stderr)
         sys.exit(1)
