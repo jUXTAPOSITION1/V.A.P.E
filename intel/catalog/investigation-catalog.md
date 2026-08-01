@@ -1021,3 +1021,5 @@
 | 2026-08-01 | auto | 0x3C5Cd672b204bA0FC48E93B98C0922920A87912D (BSW) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-01 | auto | 0x330990DaE53BCa4C5811C5362B44C33a47db7777 (ASTEROID) | deep_investigation | CAUTION (57/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-01 | auto | 0x9A833F5ba55D4B040C5f0B1eddDdD00c27418768 (ZERO) | deep_investigation | CAUTION (65/100) | Violent 24h move +1599% (volatility/manipulation) | +7d |

@@ -2480,6 +2480,25 @@
     "symbol": "Del404",
     "times_investigated": 1
   },
+  "1:0x9a833f5ba55d4b040c5f0b1eddddd00c27418768": {
+    "address": "0x9A833F5ba55D4B040C5f0B1eddDdD00c27418768",
+    "chain": "1",
+    "creator_address": "0x0cd3795c56a4cd245001bbc8f66abd436c083ce1",
+    "first_investigated": "2026-08-01T02:34:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-023446-0x9A833F5b.md",
+        "score": 65,
+        "ts": "2026-08-01T02:34:46Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T02:34:46Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "ZERO",
+    "times_investigated": 1
+  },
   "1:0x9a8e5a3732080cacc2bb52fad1cd065129801e50": {
     "address": "0x9A8E5a3732080cACc2Bb52fad1cD065129801e50",
     "chain": "1",
