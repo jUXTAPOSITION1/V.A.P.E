@@ -144,36 +144,43 @@ const SecurityDashboard = {
     _renderGauge() {
         const canvas = document.getElementById('secdashGauge');
         const label = document.getElementById('secdash-gauge-label');
-        if (!canvas || typeof Chart === 'undefined') return;
         const level = (this._data.overall_threat_level || '').toUpperCase();
         const idx = THREAT_ORDER.indexOf(level);
         const frac = idx >= 0 ? (idx + 1) / THREAT_ORDER.length : 0;
         const color = idx === 2 ? sevColor('CRITICAL') : idx === 1 ? sevColor('MEDIUM') : idx === 0 ? sevColor('LOW') : sevColor('INFO');
-        if (this._gaugeChart) this._gaugeChart.destroy();
-        this._gaugeChart = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: [frac, 1 - frac],
-                    backgroundColor: [color, cssVar('--bg-panel-sm') || '#27272a'],
-                    borderWidth: 0,
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                rotation: -90,
-                circumference: 180,
-                cutout: '72%',
-                plugins: { legend: { display: false }, tooltip: { enabled: false } },
-            },
-        });
+
+        // The label/delta text carry the actual signal and must render even
+        // if Chart.js itself is slow/blocked/failed to load — only the arc
+        // drawing below needs the library.
         if (label) {
             const icon = THREAT_ICON[level] || 'fa-circle-question';
             label.innerHTML = idx >= 0
                 ? `<div style="color:${escapeHtml(color)}" class="font-semibold text-sm"><i class="fa-solid ${escapeHtml(icon)} text-[11px] mr-1"></i>${escapeHtml(level)}</div>`
                 : '<span class="text-zinc-500 text-xs">No signal</span>';
         }
+
+        if (canvas && typeof Chart !== 'undefined') {
+            if (this._gaugeChart) this._gaugeChart.destroy();
+            this._gaugeChart = new Chart(canvas, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [frac, 1 - frac],
+                        backgroundColor: [color, cssVar('--bg-panel-sm') || '#27272a'],
+                        borderWidth: 0,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    rotation: -90,
+                    circumference: 180,
+                    cutout: '72%',
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                },
+            });
+        }
+
         const deltaEl = document.getElementById('secdash-gauge-delta');
         if (deltaEl) {
             const prev = this._history.length >= 2 ? this._history[this._history.length - 2] : null;
@@ -199,13 +206,15 @@ const SecurityDashboard = {
     _renderSeverityDonut() {
         const canvas = document.getElementById('secdashSeverityDonut');
         const listEl = document.getElementById('secdash-sev-list');
-        if (!canvas || typeof Chart === 'undefined') return;
         const bySev = this._data.findings_by_severity || {};
         const labels = SEV_ORDER.filter(k => (bySev[k] || 0) > 0);
         const values = labels.map(k => bySev[k]);
         const colors = labels.map(sevColor);
         const total = values.reduce((a, b) => a + b, 0);
 
+        // The count/percentage list carries the real numbers and needs no
+        // chart library — render it unconditionally so a slow/blocked/failed
+        // Chart.js load never leaves this panel stuck on its skeleton.
         if (listEl) {
             listEl.innerHTML = labels.length
                 ? labels.map((k, i) => `<li>
@@ -217,6 +226,7 @@ const SecurityDashboard = {
                 : '<li class="text-zinc-500">No findings logged yet.</li>';
         }
 
+        if (!canvas || typeof Chart === 'undefined') return;
         if (this._sevChart) this._sevChart.destroy();
         const wrap = canvas.closest('.secdash-sev-donut-wrap');
         if (!labels.length) {
