@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T00:18:53Z",
+  "generated": "2026-08-01T00:33:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 474,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 133,
-    "investigations": 601,
+    "investigations": 602,
     "news": 32,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-000357-0x65c0E98a.md",
-      "title": "Investigation \u2014 SRC",
-      "symbol": "SRC",
-      "name": "SOURCE",
-      "date": "2026-08-01T00:03:57Z",
-      "target": "0x65c0E98a4fE050e64E16754119C76EEbd4E660cc",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-10] Violent 24h move +4743% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verified source (not a mass-prod",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-000357-0x65c0E98a.md"
+      "file": "investigation-20260801-003357-0xC28475DE.md",
+      "title": "Investigation \u2014 jSTABLE",
+      "symbol": "jSTABLE",
+      "name": "JustStableIndex",
+      "date": "2026-08-01T00:33:57Z",
+      "target": "0xC28475DE46305BDf8E8522Fc282CC13106812ccC",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Very few holders (31) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-003357-0xC28475DE.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-003357-0xC28475DE.md",
+      "title": "Investigation \u2014 jSTABLE",
+      "symbol": "jSTABLE",
+      "name": "JustStableIndex",
+      "date": "2026-08-01T00:33:57Z",
+      "target": "0xC28475DE46305BDf8E8522Fc282CC13106812ccC",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Very few holders (31) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-003357-0xC28475DE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-000357-0x65c0E98a.md",
@@ -594,20 +608,6 @@
       "score": "100",
       "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 2739 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 820+ days without a known incident in this scan; Custom verified source (not a mass-produced factory",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-231107-0x7D4A2383.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260730-225601-0x851F679A.md",
-      "title": "Investigation \u2014 TrumpBucks",
-      "symbol": "TrumpBucks",
-      "name": "Trump Bucks",
-      "date": "2026-07-30T22:56:01Z",
-      "target": "0x851F679A5eDfb16E7cF1ad157C6995b7E7F333F2",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $17,930. Positive evidence: Trading 544+ days without a known in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260730-225601-0x851F679A.md"
     }
   ],
   "reports": [
