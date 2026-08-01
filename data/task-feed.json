@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-01T01:04:36Z",
-  "synthesis": "[investigation]",
+  "generated": "2026-08-01T01:19:38Z",
+  "synthesis": "VAPE automation has repeatedly committed featured investigations, run bounty radar sweeps, and generated reputation snapshots plus auto-reports.",
   "tasks": [
+    {
+      "sha": "29ae63133b",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-08-01T01:10Z",
+      "date": "2026-08-01T01:10:16Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/29ae63133b6743a85a6771631df298293198a440"
+    },
+    {
+      "sha": "d948c327ca",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-01T01:04Z",
+      "date": "2026-08-01T01:04:39Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d948c327ca06dd7a64051029aa991ca5766b39bf"
+    },
     {
       "sha": "36a31f0558",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-07-31T22:48Z",
       "date": "2026-07-31T22:48:33Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fe61b955372b3bce24e150a4b1453de9108a8f47"
-    },
-    {
-      "sha": "ef6ed909b7",
-      "kind": "automation",
-      "message": "x402 directory registration 2026-07-31T22:46Z",
-      "date": "2026-07-31T22:46:14Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ef6ed909b7388f10e5a5a2fcda9cde938c053ef9"
-    },
-    {
-      "sha": "e8e8b7f11d",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-07-31T22:33Z",
-      "date": "2026-07-31T22:33:20Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e8e8b7f11dc5a886ce514deec3ff495a9cc58b22"
     }
   ]
 }
