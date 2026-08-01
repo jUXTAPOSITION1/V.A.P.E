@@ -265,7 +265,12 @@ def _generate_ai_image(headline, dek, body, topic_label, slug):
         return None
     image_url = llm.ask_xai_image(prompt)
     if image_url:
-        return nc.brand_image(image_url, slug)
+        branded = nc.brand_image(image_url, slug)
+        if branded:
+            return branded
+        # brand_image() itself failed (URL fetch/composite error) -- fall
+        # through to Gemini rather than giving up on a real xAI image just
+        # because the branding step choked on it.
     image_bytes = llm.ask_gemini_image(prompt)
     if image_bytes:
         return nc.brand_image(image_bytes, slug)

@@ -899,6 +899,19 @@ class TestXaiImage:
         assert captured["body"]["prompt"] == "a close-up of gold coins on a dark table"
         assert captured["body"]["aspect_ratio"] == "16:9"
 
+    def test_passes_through_a_non_default_aspect_ratio(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
+        monkeypatch.setattr(llm, "IMAGE_USAGE_PATH", str(tmp_path / "xai_image_usage.json"))
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_xai_image_response("https://xai.example/generated.png")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_xai_image("a tall portrait shot", aspect_ratio="9:16")
+        assert captured["body"]["aspect_ratio"] == "9:16"
+
     def test_records_usage_on_success(self, monkeypatch, tmp_path):
         monkeypatch.setenv("XAI_API_KEY_1", "fake-xai-key")
         usage_path = tmp_path / "xai_image_usage.json"

@@ -111,6 +111,27 @@ def test_tvl_change_source_is_llama_chains_when_fields_present():
     assert out["tvl_24h_change_pct"] == 2.0
 
 
+def test_tvl_change_source_is_partial_when_only_one_field_missing():
+    """Only change_7d missing this cycle -- change_1d must be kept from
+    /v2/chains untouched (not silently overwritten by the historical
+    fallback), and the source label must reflect that only one field was
+    backfilled, not both."""
+    def fake_get(url, *args, **kwargs):
+        if "v2/chains" in url:
+            return [{"name": "Base", "tvl": 1_000_000.0, "change_1d": 3.5, "change_7d": None}]
+        if "historicalChainTvl" in url:
+            return _HIST
+        if "/protocols" in url:
+            return []
+        return {"error": "unexpected url in test", "url": url}
+
+    with mock.patch.object(df, "_get", side_effect=fake_get):
+        out = df.get_base_tvl_and_protocols(top_n=10)
+    assert out["tvl_change_source"] == "partial_historical_fallback"
+    assert out["tvl_24h_change_pct"] == 3.5  # kept from /v2/chains, not overwritten
+    assert out["tvl_7d_change_pct"] == 25.0  # backfilled from the historical series
+
+
 def test_get_token_price_falls_back_to_defillama_on_coingecko_failure():
     def fake_get(url, *args, **kwargs):
         if "simple/price" in url:

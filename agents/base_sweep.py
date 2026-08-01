@@ -331,9 +331,14 @@ def run():
         )
 
     tvl_note = ""
-    if tvl.get("tvl_change_source") == "historical_fallback":
+    tvl_change_source = tvl.get("tvl_change_source")
+    if tvl_change_source == "historical_fallback":
         tvl_note = ("\n_24h/7d TVL % change derived from DefiLlama's historical chain-TVL series "
-                    "(the `/v2/chains` change fields were unavailable for Base this cycle)._\n")
+                    "(the `/v2/chains` change fields were both unavailable for Base this cycle)._\n")
+    elif tvl_change_source == "partial_historical_fallback":
+        tvl_note = ("\n_One of the 24h/7d TVL % change figures above was derived from DefiLlama's "
+                    "historical chain-TVL series (only one `/v2/chains` change field was unavailable "
+                    "for Base this cycle)._\n")
 
     fng_row = ""
     if fng and not fng.get("error"):
