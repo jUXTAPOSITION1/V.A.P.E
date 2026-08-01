@@ -2023,3 +2023,4 @@
 {"ts": "2026-08-01T02:45:49Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 92829, "completion_tokens": 88, "total_tokens": 95025}
 {"ts": "2026-08-01T02:46:01Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 92786, "completion_tokens": 268, "total_tokens": 94684}
 {"ts": "2026-08-01T02:46:05Z", "provider": "vertex_tuned", "model": "vape-gemini-tuned", "tier": "fast", "prompt_tokens": 91749, "completion_tokens": 10, "total_tokens": 92045}
+{"ts": "2026-08-01T02:49:51Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1186, "completion_tokens": 26, "total_tokens": 2263}
