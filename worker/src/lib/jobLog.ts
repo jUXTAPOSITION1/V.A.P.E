@@ -400,3 +400,63 @@ export async function getStats(kv: KVLike | undefined, days: number | "all" = 30
   }
   return { totals, daily, range_buyers: rangeBuyers.size };
 }
+
+export interface SubDailyBucket {
+  ts: string;
+  jobs: number;
+  revenue_usd: number;
+  buyers: number;
+}
+
+// Real sub-daily bucketing (hourly/multi-hour) for the site's short/medium
+// Activity windows — deliberately reading RECENT_JOBS directly rather than
+// going through queryFeed()/`/x402/feed`, whose public route hard-caps
+// `limit` to 200 records (index.ts) for pagination-UI reasons. That cap
+// silently truncates any window whose real volume exceeds it — confirmed
+// live: 7D and 30D reported the identical total because both requests hit
+// the same 200-record ceiling and could "see" the same handful of most-
+// recent days regardless of the wider window asked for. Reading the KV
+// value directly here is bound only by RECENT_CAP (10000), not by any
+// per-request page size.
+export async function getSubDailyStats(
+  kv: KVLike | undefined,
+  days: number,
+  bucketMinutes: number,
+): Promise<{ buckets: SubDailyBucket[]; range_buyers: number }> {
+  if (!kv) return { buckets: [], range_buyers: 0 };
+  const recent = await readJson<JobRecord[]>(kv, RECENT_KEY, []);
+  const bucketMs = Math.max(1, bucketMinutes) * 60000;
+  const now = Date.now();
+  const count = Math.max(1, Math.ceil((days * 1440) / bucketMinutes));
+  const start = now - count * bucketMs;
+  const buckets = Array.from({ length: count }, (_, i) => ({
+    ts: start + i * bucketMs,
+    jobs: 0,
+    revenue_usd: 0,
+    payers: new Set<string>(),
+  }));
+  const rangeBuyers = new Set<string>();
+  for (const job of recent) {
+    const t = Date.parse(job.ts);
+    if (isNaN(t) || t < start) continue;
+    const idx = Math.min(count - 1, Math.floor((t - start) / bucketMs));
+    const b = buckets[idx];
+    if (!b) continue;
+    b.jobs += 1;
+    if (job.status === "settled") b.revenue_usd += job.amount_usd;
+    const payer = job.payer?.toLowerCase();
+    if (payer) {
+      b.payers.add(payer);
+      rangeBuyers.add(payer);
+    }
+  }
+  return {
+    buckets: buckets.map((b) => ({
+      ts: new Date(b.ts).toISOString(),
+      jobs: b.jobs,
+      revenue_usd: b.revenue_usd,
+      buyers: b.payers.size,
+    })),
+    range_buyers: rangeBuyers.size,
+  };
+}

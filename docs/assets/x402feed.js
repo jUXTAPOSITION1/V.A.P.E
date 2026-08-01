@@ -152,11 +152,14 @@ const X402Feed = {
     // instead of one bar per calendar day — matching the reference widget,
     // whose own tooltips show hour-level buckets ("Jul 27 17:00") even at a
     // 7-day view. Only the 90D+ tier falls back to the pre-aggregated daily
-    // /x402/stats feed, where daily resolution is already the right call
-    // (2000+ hourly bars would be unreadable, and infeasible to fetch raw).
+    // /x402/stats feed, where daily resolution is already the right call.
+    // Resolution is chosen to land around ~55-60 bars regardless of range —
+    // enough to read as a real bar chart rather than a needle-thin comb,
+    // while staying meaningfully sub-daily (3h/12h buckets, not one bucket
+    // per calendar day).
     _activityBucketMinutes(days) {
-        if (days <= 7) return 60;      // hourly
-        if (days <= 30) return 180;    // every 3 hours
+        if (days <= 7) return 180;     // 3-hour buckets, ~56 bars over 7D
+        if (days <= 30) return 720;    // 12-hour buckets, ~60 bars over 30D
         return null;                   // fall back to daily /x402/stats
     },
 
@@ -173,60 +176,45 @@ const X402Feed = {
         try {
             const bucketMin = this._activityBucketMinutes(days);
             const buckets = bucketMin
-                ? await this._activityBucketsFromFeed(days, bucketMin)
+                ? await this._activityBucketsFromSub(days, bucketMin)
                 : await this._activityBucketsFromStats(days);
             if (requestId !== this._activityRequestId) return;
             const jobs = buckets.reduce((s, b) => s + b.jobs, 0);
             const volume = buckets.reduce((s, b) => s + b.revenue_usd, 0);
-            const buyers = new Set();
-            buckets.forEach(b => (b.payers || []).forEach(p => buyers.add(p)));
             setTxt('x402-activity-jobs-value', jobs.toLocaleString());
             setTxt('x402-activity-volume-value', '$' + volume.toLocaleString(undefined, { maximumFractionDigits: 2 }));
-            // buyers.size covers feed-backed buckets (real per-job payer
-            // sets); buckets.rangeBuyers is the stats path's own true
-            // whole-window unique count (worker's range_buyers) — summing
-            // each bucket's own `buyers` would double-count any wallet that
-            // paid across more than one bucket, so that sum is a last resort
-            // only if neither real count is available.
-            const rangeBuyers = buyers.size || buckets.rangeBuyers || buckets.reduce((s, b) => s + (b.buyers || 0), 0);
+            // buckets.rangeBuyers is the worker's own true whole-window
+            // unique-payer count (range_buyers) — summing each bucket's own
+            // `buyers` would double-count any wallet that paid in more than
+            // one bucket, so that sum is only a last resort if the real
+            // count wasn't available for some reason.
+            const rangeBuyers = buckets.rangeBuyers ?? buckets.reduce((s, b) => s + (b.buyers || 0), 0);
             setTxt('x402-activity-buyers-value', rangeBuyers ? rangeBuyers.toLocaleString() : '—');
             this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs);
             this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd);
-            this._renderSparkline('x402-activity-buyers-spark', buckets, b => (b.payers ? b.payers.size : (b.buyers || 0)));
+            this._renderSparkline('x402-activity-buyers-spark', buckets, b => b.buyers || 0);
         } catch (e) {
             // Leave the last-good values on screen rather than blanking a
             // live number over one flaky poll.
         }
     },
 
-    // Fetches real per-job records (real `ts`/`payer`, not a pre-aggregate)
-    // and buckets them client-side at `bucketMin`-minute resolution over the
-    // trailing `days` window. `limit` is generous relative to VAPE's real
-    // observed volume (~27 jobs/day per the live x402scan listing) — 30 days
-    // of full volume is ~800 records, well under RECENT_CAP.
-    async _activityBucketsFromFeed(days, bucketMin) {
-        const r = await fetch(`${window.WORKER_BASE}/x402/feed?limit=2000&sort=ts_desc`);
+    // Real hourly/multi-hour bucketing computed server-side (worker's
+    // getSubDailyStats(), via GET /x402/stats/sub) — deliberately NOT
+    // /x402/feed, whose public route hard-caps `limit` to 200 records for
+    // pagination-UI reasons. That cap silently truncated any window whose
+    // real volume exceeded it: a real bug where 7D and 30D reported the
+    // exact same total, because both requests could only ever "see" the
+    // same ~200 most-recent records regardless of how wide a window was
+    // asked for. Reading RECENT_JOBS server-side isn't bound by that
+    // per-request page size.
+    async _activityBucketsFromSub(days, bucketMin) {
+        const r = await fetch(`${window.WORKER_BASE}/x402/stats/sub?days=${days}&resolution=${bucketMin}`);
         if (r.status === 503) return [];
-        const { jobs } = await r.json();
-        const bucketMs = bucketMin * 60000;
-        const now = Date.now();
-        const count = Math.ceil((days * 1440) / bucketMin);
-        const start = now - count * bucketMs;
-        const buckets = [];
-        for (let i = 0; i < count; i++) {
-            buckets.push({ ts: start + i * bucketMs, jobs: 0, revenue_usd: 0, payers: new Set() });
-        }
-        for (const j of (jobs || [])) {
-            const t = Date.parse(j.ts);
-            if (isNaN(t) || t < start) continue;
-            const idx = Math.min(count - 1, Math.floor((t - start) / bucketMs));
-            const b = buckets[idx];
-            if (!b) continue;
-            b.jobs += 1;
-            if (j.status === 'settled') b.revenue_usd += Number(j.amount_usd) || 0;
-            if (j.payer) b.payers.add(String(j.payer).toLowerCase());
-        }
-        return buckets;
+        const { buckets, range_buyers } = await r.json();
+        const out = (buckets || []).map(b => ({ ts: Date.parse(b.ts), jobs: b.jobs, revenue_usd: b.revenue_usd, buyers: b.buyers || 0 }));
+        out.rangeBuyers = range_buyers ?? null;
+        return out;
     },
 
     // Fallback for windows too wide to bucket sub-daily from raw records —
