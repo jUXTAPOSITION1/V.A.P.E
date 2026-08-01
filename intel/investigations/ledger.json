@@ -1819,6 +1819,25 @@
     "symbol": "Blinky",
     "times_investigated": 1
   },
+  "1:0x5949f201be7a159d551d9480b900570ddcadab7b": {
+    "address": "0x5949f201bE7A159D551d9480B900570ddCADAb7b",
+    "chain": "1",
+    "creator_address": "0xe4483ba16faeadbe44da019aaa08894eb1278dca",
+    "first_investigated": "2026-08-01T07:18:49Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-071849-0x5949f201.md",
+        "score": 55,
+        "ts": "2026-08-01T07:18:49Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T07:18:49Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "CHEESE",
+    "times_investigated": 1
+  },
   "1:0x5a0cf2dbbaa6541f4b8173ba6759e19885293c63": {
     "address": "0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63",
     "chain": "1",
