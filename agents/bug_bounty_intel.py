@@ -28,6 +28,7 @@ from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import intel_common as ic  # noqa: E402
+from agents import research_engine  # noqa: E402
 
 OPPORTUNITIES_PATH = os.path.join(ic.ROOT, "intel", "bounty-radar", "opportunities.json")
 LOOKBACK_DAYS = 14
@@ -88,24 +89,28 @@ def run():
 
     verdict = "IMMUNEFI LIVE" if immunefi_live else "NOT YET LAUNCHED"
 
-    briefing = ic.grok_analysis(
-        "bug-bounty-intelligence analyst",
-        (
-            f"VERDICT (deterministic, do not change): {verdict}\n\n"
-            f"Targeted search — Virtuals Protocol x Immunefi ({search.get('provider') or 'unavailable'}):\n"
-            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none")
-            + f"\n\nBroader search — Base bug bounty landscape ({landscape_search.get('provider') or 'unavailable'}):\n"
-            + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in landscape_search.get("results", [])) or "none")
-            + f"\n\nRecent Base-tagged opportunities from scout.py's archive (last {LOOKBACK_DAYS}d):\n{recent_rows}"
-        ),
-        instructions=(
+    grounding = (
+        f"VERDICT (deterministic, do not change): {verdict}\n\n"
+        f"Targeted search — Virtuals Protocol x Immunefi ({search.get('provider') or 'unavailable'}):\n"
+        + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in search.get("results", [])) or "none")
+        + f"\n\nBroader search — Base bug bounty landscape ({landscape_search.get('provider') or 'unavailable'}):\n"
+        + ("\n".join(f"- {r['title']} ({r['url']}): {r['snippet']}" for r in landscape_search.get("results", [])) or "none")
+        + f"\n\nRecent Base-tagged opportunities from scout.py's archive (last {LOOKBACK_DAYS}d):\n{recent_rows}"
+    )
+    synth = research_engine.synthesize(
+        {"topic": "Base/Virtuals bug-bounty landscape", "task_type": "general",
+         "known_facts": {}, "findings": [], "deep_extracts": [], "raw_user_block": grounding, "log": {}},
+        role="bug-bounty-intelligence analyst",
+        extra_instructions=(
             "Write the 'Analyst Briefing' section of this bug-bounty-intelligence report. Interpret "
             "what the search results actually suggest about the state of Base/Virtuals bug-bounty "
             "coverage — not just whether Immunefi is live, but what the broader landscape search "
             "implies about competing platforms, timing, or gaps VAPE itself could speak to. If the "
             "opportunities table shows a pattern worth flagging, say so."
         ),
+        trailers=[], max_tokens=900, temperature=0.5,
     )
+    briefing = synth["narrative"]
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     body = f"""# Bug Bounty Intelligence Report — Base & Virtuals Protocol
