@@ -38,7 +38,127 @@ sources:
     rss_url: https://cryptoslate.com/feed/
     priority: 1
     topics: [crypto-markets]
+  - name: Bitcoin Magazine
+    rss_url: https://bitcoinmagazine.com/feed
+    priority: 2
+    topics: [crypto-markets]
+  - name: Blockworks
+    rss_url: https://blockworks.co/feed
+    priority: 2
+    topics: [crypto-markets]
+  - name: BeInCrypto
+    rss_url: https://beincrypto.com/feed/
+    priority: 2
+    topics: [crypto-markets]
+  - name: The Defiant
+    rss_url: https://thedefiant.io/feed
+    priority: 2
+    topics: [crypto-markets]
+  - name: Ethereum Foundation Blog
+    rss_url: https://blog.ethereum.org/feed.xml
+    priority: 2
+    topics: [crypto-markets]
+  - name: Glassnode Insights
+    rss_url: https://insights.glassnode.com/rss/
+    priority: 2
+    topics: [crypto-markets]
   - name: CoinDesk (news listing)
     base_url: https://www.coindesk.com/coindesk-news
     priority: 2
     topics: [crypto-markets]
+  - name: Krebs on Security
+    rss_url: https://krebsonsecurity.com/feed/
+    priority: 1
+    topics: [cybersecurity]
+  - name: The Hacker News
+    rss_url: https://feeds.feedburner.com/TheHackersNews
+    priority: 1
+    topics: [cybersecurity]
+  - name: BleepingComputer
+    rss_url: https://www.bleepingcomputer.com/feed/
+    priority: 1
+    topics: [cybersecurity]
+  - name: Dark Reading
+    rss_url: https://www.darkreading.com/rss.xml
+    priority: 1
+    topics: [cybersecurity]
+  - name: SecurityWeek
+    rss_url: https://www.securityweek.com/feed/
+    priority: 2
+    topics: [cybersecurity]
+  - name: Infosecurity Magazine
+    rss_url: https://www.infosecurity-magazine.com/rss/news/
+    priority: 2
+    topics: [cybersecurity]
+  - name: SANS Internet Storm Center
+    rss_url: https://isc.sans.edu/rssfeed.xml
+    priority: 2
+    topics: [cybersecurity]
+  - name: PortSwigger Research
+    rss_url: https://portswigger.net/research/rss
+    priority: 2
+    topics: [cybersecurity]
+  - name: VentureBeat AI
+    rss_url: https://venturebeat.com/category/ai/feed/
+    priority: 1
+    topics: [ai]
+  - name: TechCrunch AI
+    rss_url: https://techcrunch.com/category/artificial-intelligence/feed/
+    priority: 1
+    topics: [ai]
+  - name: Hugging Face Blog
+    rss_url: https://huggingface.co/blog/feed.xml
+    priority: 2
+    topics: [ai]
+  - name: MarketWatch
+    rss_url: https://www.marketwatch.com/rss/topstories
+    priority: 1
+    topics: [finance]
+  - name: Investopedia
+    rss_url: https://www.investopedia.com/feedbuilder/feed/getfeed?feedName=rss_headline
+    priority: 2
+    topics: [finance]
+  - name: CNBC
+    rss_url: https://www.cnbc.com/id/100003114/device/rss/rss.html
+    priority: 1
+    topics: [finance]
+  - name: SEC Press Releases
+    rss_url: https://www.sec.gov/news/pressreleases.rss
+    priority: 1
+    topics: [regulation]
+  - name: Federal Reserve
+    rss_url: https://www.federalreserve.gov/feeds/press_all.xml
+    priority: 1
+    topics: [macro]
+  - name: IMF News
+    rss_url: https://www.imf.org/en/News/rss?language=eng
+    priority: 2
+    topics: [global-markets]
+  - name: TechCrunch
+    rss_url: https://techcrunch.com/feed/
+    priority: 1
+    topics: [technology]
+  - name: The Verge
+    rss_url: https://www.theverge.com/rss/index.xml
+    priority: 1
+    topics: [technology]
+  - name: Ars Technica
+    rss_url: https://feeds.arstechnica.com/arstechnica/index
+    priority: 1
+    topics: [technology]
+  - name: Wired
+    rss_url: https://www.wired.com/feed/rss
+    priority: 2
+    topics: [technology]
+  - name: The Robot Report
+    rss_url: https://www.therobotreport.com/feed/
+    priority: 1
+    topics: [robotics]
+  - name: IEEE Spectrum Robotics
+    rss_url: https://spectrum.ieee.org/feeds/topic/robotics.rss
+    priority: 2
+    topics: [robotics]
+  - name: Robohub
+    rss_url: https://robohub.org/feed/
+    priority: 2
+    topics: [robotics]

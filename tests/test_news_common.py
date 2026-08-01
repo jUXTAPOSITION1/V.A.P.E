@@ -349,6 +349,48 @@ def test_scrape_category_page_returns_empty_on_malformed_json(monkeypatch):
         assert nc.scrape_category_page("https://example.com/news", "Example", "crypto-markets") == []
 
 
+def test_native_rss_feeds_cover_every_new_beat():
+    """Guards the 2026-08-01 sourcing expansion: every beat the user asked
+    for (blockchain/crypto/Web3, cybersecurity, AI, finance, regulation,
+    macro, global markets, technology, robotics) must have at least one
+    real native RSS feed wired in, not just a Google News search query --
+    a topic with zero native feeds would silently regress to Google-News-
+    only coverage with no real outlet snippet/summary grounding."""
+    topics_with_feeds = {topic for _url, _name, topic in nc.NATIVE_RSS_FEEDS}
+    expected = {
+        "crypto-markets", "cybersecurity", "ai", "finance", "regulation",
+        "macro", "global-markets", "technology", "robotics",
+    }
+    assert expected.issubset(topics_with_feeds)
+
+
+def test_native_rss_feeds_are_well_formed_and_unique_urls():
+    assert len(nc.NATIVE_RSS_FEEDS) > 25
+    urls = [url for url, _name, _topic in nc.NATIVE_RSS_FEEDS]
+    assert len(set(urls)) == len(urls)
+    for url, name, topic in nc.NATIVE_RSS_FEEDS:
+        assert url.startswith("https://")
+        assert name.strip()
+        assert topic in nc.TOPIC_LABELS
+
+
+def test_every_topic_key_has_a_label_and_unique_key():
+    keys = [key for key, _query, _label in nc.TOPICS]
+    assert len(set(keys)) == len(keys)
+    for key, _query, label in nc.TOPICS:
+        assert nc.TOPIC_LABELS[key] == label
+
+
+def test_non_crypto_topics_are_a_real_subset_of_topic_keys():
+    topic_keys = {key for key, _query, _label in nc.TOPICS}
+    assert nc.NON_CRYPTO_TOPICS.issubset(topic_keys)
+    # The flagship beats (crypto/blockchain/Web3, DeFi security, AI agents,
+    # general AI) must never be demoted -- that would silently invert the
+    # "crypto/security/AI-first" editorial rule the sort in news_scan.py
+    # depends on.
+    assert not nc.NON_CRYPTO_TOPICS & {"crypto-markets", "defi-security", "ai-agents", "ai", "base"}
+
+
 def test_scrape_category_page_respects_max_results(monkeypatch):
     content = " ".join(f"[Story {i}](https://example.com/{i})" for i in range(5))
     monkeypatch.setattr("skillforge.research.scrape", lambda url: {"content": content})

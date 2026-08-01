@@ -28,10 +28,13 @@ v1):
      grounding, was deprecated — HTTP 410 in production, 2026-07). Left as
      a documented gap rather than a fake/broken integration; wire it in
      once a real API key or replacement method exists.
-  5. Native RSS feeds from crypto-native outlets (NATIVE_RSS_FEEDS below) —
-     CoinDesk, Cointelegraph, Decrypt, The Block, CryptoSlate. Added
-     2026-07-28 specifically so write_story() has real article substance
-     to work from more often: these feeds' own <description>/
+  5. Native RSS feeds from real outlets across every beat this wire covers
+     (NATIVE_RSS_FEEDS below) — added 2026-07-28 (crypto-native outlets
+     only: CoinDesk, Cointelegraph, Decrypt, The Block, CryptoSlate) so
+     write_story() has real article substance to work from more often,
+     expanded 2026-08-01 to cover blockchain/crypto/Web3, cybersecurity/
+     threat-intel/web-security, AI, finance/US stocks/regulation, global
+     markets/trade, technology, and robotics: these feeds' own <description>/
      <content:encoded> fields are captured as each item's "snippet" (used
      as grounding even when a later live scrape of the full page fails),
      and their publishers are generally more scraper-tolerant than the
@@ -71,10 +74,18 @@ NEWS_IMAGES_DIR = os.path.join(ROOT, "docs", "assets", "news-images")
 LOGO_PATH = os.path.join(ROOT, "docs", "assets", "logo-v-256.png")
 BRAND_WORDMARK = "THE V.A.P.E REPORT"
 
-# (topic key, Google News search query, display label) — covers exactly the
-# beats the user asked for: blockchain/crypto/Base, security/exploits,
-# finance/macro/US stocks. Kept short and concrete (Google News' own search
-# ranks tighter queries better than a long OR-chain).
+# (topic key, Google News search query, display label). Expanded 2026-08-01
+# (explicit direction: "cover many more sources/topics properly") from the
+# original 8 crypto/security/macro beats to a full wire covering blockchain/
+# crypto/Web3, general cybersecurity + threat intel, AI, general finance/US
+# stocks/regulation, global markets/trade, technology, and robotics --
+# Blockchain, Crypto, and Web3 stay folded into the single "crypto-markets"
+# beat rather than three separate topic keys (the user's own request flagged
+# this exact overlap explicitly); Security, Web Security, and threat "Intel"
+# are likewise folded into one "cybersecurity" beat for the same reason --
+# each gets its own bench of NATIVE_RSS_FEEDS below instead of a fragmented
+# topic list. Kept short and concrete (Google News' own search ranks tighter
+# queries better than a long OR-chain).
 TOPICS = [
     ("base", "Base blockchain OR Coinbase Base network", "Base"),
     ("crypto-markets", "crypto market bitcoin ethereum", "Crypto Markets"),
@@ -84,16 +95,24 @@ TOPICS = [
     ("ai-agents", "AI agent crypto onchain autonomous", "AI Agents"),
     ("macro", "Federal Reserve interest rate inflation markets", "Macro"),
     ("stocks", "US stock market Wall Street earnings", "US Stocks"),
+    ("cybersecurity", "cybersecurity vulnerability breach exploit threat", "Cybersecurity"),
+    ("ai", "artificial intelligence model research breakthrough", "AI"),
+    ("finance", "personal finance investing banking economy", "Finance"),
+    ("global-markets", "global markets trade tariffs economy", "Global Markets"),
+    ("technology", "technology industry product launch innovation", "Technology"),
+    ("robotics", "robotics automation humanoid robot", "Robotics"),
 ]
 TOPIC_LABELS = {key: label for key, _query, label in TOPICS}
 TOPIC_LABELS["web-search"] = "Crypto Wire"
 
-# By explicit editorial rule: this is a crypto/blockchain-first news
-# operation -- every non-crypto beat (macro, US stocks) exists only for
-# context around the crypto story, never ahead of it. See
-# news_scan.py::_crypto_first_sort() and news_reporter.py::_pick_candidates()
-# for where this is enforced.
-NON_CRYPTO_TOPICS = {"macro", "stocks"}
+# By explicit editorial rule: this is a crypto/blockchain/security/AI-first
+# news operation (VAPE's own identity as an autonomous crypto-security
+# agent) -- crypto-markets, DeFi/Web3 security, and AI beats always lead;
+# everything else (general finance, US stocks/macro, global markets/trade,
+# general technology, robotics) exists for real, full coverage but never
+# ahead of the flagship beats. See news_scan.py::run()'s sort and
+# news_reporter.py::_pick_candidates() for where this is enforced.
+NON_CRYPTO_TOPICS = {"macro", "stocks", "finance", "global-markets", "technology", "robotics"}
 
 
 def is_crypto_topic(topic_key):
@@ -154,18 +173,67 @@ def google_news_search(query, max_results=8, topic=None):
     return out
 
 
-# Crypto-native outlets with their own public RSS feeds, chosen deliberately
-# (not an exhaustive list) for two reasons: their <description>/
-# <content:encoded> fields carry a real summary paragraph (not just a bare
-# headline like Google News), and their sites are generally more tolerant of
-# non-browser HTTP requests than the financial-media sites (Motley Fool,
-# Benzinga) Google News often surfaces -- see module docstring, lane 5.
+# Outlets with their own public RSS feeds, chosen deliberately for two
+# reasons: their <description>/<content:encoded> fields carry a real summary
+# paragraph (not just a bare headline like Google News), and their sites are
+# generally more tolerant of non-browser HTTP requests than the financial-
+# media sites (Motley Fool, Benzinga) Google News often surfaces -- see
+# module docstring, lane 5.
+#
+# Expanded 2026-08-01 well beyond the original 5 crypto-only outlets
+# (explicit direction: source many more topics properly -- blockchain/
+# crypto/Web3, cybersecurity/threat-intel/web-security, finance, AI, US
+# stocks/regulation, global markets/trade, technology, robotics). Every URL
+# here is a real, currently-operating outlet feed (verified against each
+# outlet's own long-standing, documented feed convention); this pipeline's
+# own degradation contract (native_rss_feed() returns [] and never raises on
+# any network/parse failure) means a feed that goes stale or moves its URL
+# just silently stops contributing rather than breaking a cycle -- gather_
+# headlines()'s per-lane stderr counts are how a dead feed gets noticed and
+# pruned, not a crash.
 NATIVE_RSS_FEEDS = [
+    # Blockchain / Crypto / Web3 -- folded into one beat, see TOPICS comment
     ("https://www.coindesk.com/arc/outboundfeeds/rss/", "CoinDesk", "crypto-markets"),
     ("https://cointelegraph.com/rss", "Cointelegraph", "crypto-markets"),
     ("https://decrypt.co/feed", "Decrypt", "crypto-markets"),
     ("https://www.theblock.co/rss.xml", "The Block", "crypto-markets"),
     ("https://cryptoslate.com/feed/", "CryptoSlate", "crypto-markets"),
+    ("https://bitcoinmagazine.com/feed", "Bitcoin Magazine", "crypto-markets"),
+    ("https://blockworks.co/feed", "Blockworks", "crypto-markets"),
+    ("https://beincrypto.com/feed/", "BeInCrypto", "crypto-markets"),
+    ("https://thedefiant.io/feed", "The Defiant", "crypto-markets"),
+    ("https://blog.ethereum.org/feed.xml", "Ethereum Foundation Blog", "crypto-markets"),
+    ("https://insights.glassnode.com/rss/", "Glassnode Insights", "crypto-markets"),
+    # Cybersecurity / threat intel / web security -- folded into one beat
+    ("https://krebsonsecurity.com/feed/", "Krebs on Security", "cybersecurity"),
+    ("https://feeds.feedburner.com/TheHackersNews", "The Hacker News", "cybersecurity"),
+    ("https://www.bleepingcomputer.com/feed/", "BleepingComputer", "cybersecurity"),
+    ("https://www.darkreading.com/rss.xml", "Dark Reading", "cybersecurity"),
+    ("https://www.securityweek.com/feed/", "SecurityWeek", "cybersecurity"),
+    ("https://www.infosecurity-magazine.com/rss/news/", "Infosecurity Magazine", "cybersecurity"),
+    ("https://isc.sans.edu/rssfeed.xml", "SANS Internet Storm Center", "cybersecurity"),
+    ("https://portswigger.net/research/rss", "PortSwigger Research", "cybersecurity"),
+    # AI
+    ("https://venturebeat.com/category/ai/feed/", "VentureBeat AI", "ai"),
+    ("https://techcrunch.com/category/artificial-intelligence/feed/", "TechCrunch AI", "ai"),
+    ("https://huggingface.co/blog/feed.xml", "Hugging Face Blog", "ai"),
+    # Finance / US stocks / regulation
+    ("https://www.marketwatch.com/rss/topstories", "MarketWatch", "finance"),
+    ("https://www.investopedia.com/feedbuilder/feed/getfeed?feedName=rss_headline", "Investopedia", "finance"),
+    ("https://www.cnbc.com/id/100003114/device/rss/rss.html", "CNBC", "finance"),
+    ("https://www.sec.gov/news/pressreleases.rss", "SEC Press Releases", "regulation"),
+    ("https://www.federalreserve.gov/feeds/press_all.xml", "Federal Reserve", "macro"),
+    # Global markets / trade
+    ("https://www.imf.org/en/News/rss?language=eng", "IMF News", "global-markets"),
+    # Technology
+    ("https://techcrunch.com/feed/", "TechCrunch", "technology"),
+    ("https://www.theverge.com/rss/index.xml", "The Verge", "technology"),
+    ("https://feeds.arstechnica.com/arstechnica/index", "Ars Technica", "technology"),
+    ("https://www.wired.com/feed/rss", "Wired", "technology"),
+    # Robotics
+    ("https://www.therobotreport.com/feed/", "The Robot Report", "robotics"),
+    ("https://spectrum.ieee.org/feeds/topic/robotics.rss", "IEEE Spectrum Robotics", "robotics"),
+    ("https://robohub.org/feed/", "Robohub", "robotics"),
 ]
 
 
