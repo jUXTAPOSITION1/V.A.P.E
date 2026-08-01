@@ -4287,6 +4287,25 @@
     "symbol": "AEON",
     "times_investigated": 1
   },
+  "56:0x020d6c73897651988438e1fed554964abffa6666": {
+    "address": "0x020D6c73897651988438E1fED554964aBFfa6666",
+    "chain": "56",
+    "creator_address": "0xebe6ea187cbaad90cfe6d418a6717de8b718d4a0",
+    "first_investigated": "2026-08-01T11:05:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-110529-0x020D6c73.md",
+        "score": 75,
+        "ts": "2026-08-01T11:05:29Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-01T11:05:29Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "ASTEROID",
+    "times_investigated": 1
+  },
   "56:0x059ab32a5907ed5f09e6394d081a913f32f4da86": {
     "address": "0x059aB32a5907ed5F09e6394D081A913F32f4da86",
     "chain": "56",

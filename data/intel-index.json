@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T10:50:18Z",
+  "generated": "2026-08-01T11:05:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 484,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 136,
-    "investigations": 616,
+    "investigations": 617,
     "news": 42,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-104638-0x28CE689E.md",
-      "title": "Investigation \u2014 ClankerToken",
-      "symbol": "ClankerToken",
-      "name": null,
-      "date": "2026-08-01T10:46:38Z",
-      "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ClankerToken (0x006b340bEE30F8425cf65f064712F57B2BC0bB07) \u2014 REJECT 0/",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104638-0x28CE689E.md"
+      "file": "investigation-20260801-110529-0x020D6c73.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-08-01T11:05:29Z",
+      "target": "0x020D6c73897651988438E1fED554964aBFfa6666",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $31,216. Positive evidence: Ownership renounced; 1349 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-110529-0x020D6c73.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-110529-0x020D6c73.md",
+      "title": "Investigation \u2014 ASTEROID",
+      "symbol": "ASTEROID",
+      "name": "Asteroid Shiba",
+      "date": "2026-08-01T11:05:29Z",
+      "target": "0x020D6c73897651988438E1fED554964aBFfa6666",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $31,216. Positive evidence: Ownership renounced; 1349 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-110529-0x020D6c73.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-104638-0x28CE689E.md",
@@ -594,20 +608,6 @@
       "score": "35",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $86 (rug/illiquid); [-10] Low liquidity $86. Positive evidence: Ownership renounced; 28252 holders \u2014 reaso",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-121211-0xD29D072d.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260731-102610-0x7eA8e859.md",
-      "title": "Investigation \u2014 TRUMP2028",
-      "symbol": "TRUMP2028",
-      "name": "Trump 2028",
-      "date": "2026-07-31T10:26:10Z",
-      "target": "0x7eA8e8590fB12e81A828FCb121eb9324d5CFDa44",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3,580 (rug/illiquid); [-10] Low liqu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260731-102610-0x7eA8e859.md"
     }
   ],
   "reports": [
