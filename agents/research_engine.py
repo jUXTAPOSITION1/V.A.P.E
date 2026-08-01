@@ -461,13 +461,31 @@ def layered_research(topic, task_type="general", known_facts=None, max_queries=M
 
 
 # ── Layer 2/3: synthesis with explicit gap/confidence output ───────────────
+
+# Higher-credibility sources get more of the character budget when rendering
+# deep-extracted content — a rekt.news post-mortem is more likely to contain
+# the technical detail worth keeping than an unverified social post, so an
+# identical flat truncation for both wastes budget on the weaker source.
+# Falls back to the "unclassified" figure for any tier not listed here.
+_CONTENT_BUDGET_BY_TIER = {"security_research": 4000, "primary_platform": 3500, "news": 3000,
+                           "unclassified": 2500, "social_unverified": 2000}
+_MAX_ENTITIES_SHOWN = 20
+
+
 def _evidence_block(result):
     """Real gap this closes: a caller with its own already-well-structured
     grounding text (e.g. agents/news_reporter.py's headline/source/scraped-
     body/corroboration block) shouldn't have to force-fit it into
     known_facts/findings/deep_extracts/evidence_lines just to reach
     synthesize()'s shared header/trailer parsing and grounding discipline —
-    result["raw_user_block"], if given, is used verbatim instead."""
+    result["raw_user_block"], if given, is used verbatim instead.
+
+    findings and deep_extracts are rendered in credibility order (not
+    insertion order) so the highest-value sources are never pushed past the
+    findings[:15] cutoff or crowded out visually by weaker ones found later
+    (e.g. a second discovery round's low-tier hit landing after a first
+    round's security-research source). Neither the caller's result dict nor
+    its list objects are mutated — sorting happens on local copies."""
     if result.get("raw_user_block"):
         return result["raw_user_block"]
     lines = [f"Topic: {result['topic']}", f"Task type: {result['task_type']}"]
@@ -482,16 +500,30 @@ def _evidence_block(result):
         lines.append(f"\n=== EVIDENCE GATHERED THIS CYCLE ({len(result['evidence_lines'])} item(s)) ===")
         for e in result["evidence_lines"]:
             lines.append(f"- {e}")
-    if result.get("findings"):
-        lines.append(f"\n=== SEARCH SNIPPETS ({len(result['findings'])} sources found) ===")
-        for f in result["findings"][:15]:
+    findings = result.get("findings") or []
+    if findings:
+        ranked_findings = sorted(findings, key=lambda f: _TIER_RANK.get(f.get("credibility"), 3))
+        lines.append(f"\n=== SEARCH SNIPPETS ({len(findings)} sources found) ===")
+        for f in ranked_findings[:15]:
             lines.append(f"- [{f.get('credibility', 'unclassified')}] {f.get('title', '')} — {f['url']}\n"
                          f"  {f.get('snippet', '')}")
-    if result.get("deep_extracts"):
-        lines.append(f"\n=== DEEP-EXTRACTED SOURCE CONTENT ({len(result['deep_extracts'])} pages) ===")
-        for d in result["deep_extracts"]:
-            excerpt = (d.get("content") or "")[:3000]
-            lines.append(f"--- SOURCE: {d['url']} [{d.get('credibility', 'unclassified')}] ---\n{excerpt}")
+    deep_extracts = result.get("deep_extracts") or []
+    if deep_extracts:
+        ranked_extracts = sorted(deep_extracts, key=lambda d: _TIER_RANK.get(d.get("credibility"), 3))
+        lines.append(f"\n=== DEEP-EXTRACTED SOURCE CONTENT ({len(deep_extracts)} pages) ===")
+        for d in ranked_extracts:
+            tier = d.get("credibility", "unclassified")
+            budget = _CONTENT_BUDGET_BY_TIER.get(tier, _CONTENT_BUDGET_BY_TIER["unclassified"])
+            excerpt = (d.get("content") or "")[:budget]
+            header = f"--- SOURCE: {d['url']} [{tier}] ---"
+            entities = d.get("entities") or []
+            if entities:
+                # Surfaced as their own line, ahead of the (possibly
+                # truncated) prose excerpt, so a specific address/tx hash/CVE
+                # WebSourcer already extracted can't be lost to truncation or
+                # missed by the model skimming a long block of prose.
+                header += f"\nEntities found on this page: {', '.join(entities[:_MAX_ENTITIES_SHOWN])}"
+            lines.append(f"{header}\n{excerpt}")
     return "\n".join(lines)
 
 

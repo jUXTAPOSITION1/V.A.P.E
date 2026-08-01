@@ -406,6 +406,66 @@ def test_evidence_block_includes_facts_findings_and_deep_extracts():
     assert "full page text" in block
 
 
+def test_evidence_block_ranks_findings_and_extracts_by_credibility_not_insertion_order():
+    # Real gap this closes: a second discovery round's low-tier hit landing
+    # after a first round's security-research source used to render in
+    # insertion order -- the highest-value source should always come first,
+    # regardless of which round found it.
+    result = {
+        "topic": "Foo", "task_type": "threat_analysis", "known_facts": {},
+        "findings": [{"url": "https://x.com/social", "credibility": "social_unverified",
+                      "title": "social hit", "snippet": "s"},
+                     {"url": "https://rekt.news/a", "credibility": "security_research",
+                      "title": "sec hit", "snippet": "s"}],
+        "deep_extracts": [{"url": "https://x.com/social", "credibility": "social_unverified", "content": "weak"},
+                           {"url": "https://rekt.news/a", "credibility": "security_research", "content": "strong"}],
+    }
+    block = re_engine._evidence_block(result)
+    assert block.index("sec hit") < block.index("social hit")
+    assert block.index("SOURCE: https://rekt.news/a") < block.index("SOURCE: https://x.com/social")
+
+
+def test_evidence_block_does_not_mutate_the_callers_lists():
+    findings = [{"url": "https://x.com/social", "credibility": "social_unverified", "title": "s", "snippet": "s"},
+                {"url": "https://rekt.news/a", "credibility": "security_research", "title": "s", "snippet": "s"}]
+    result = {"topic": "Foo", "task_type": "general", "known_facts": {}, "findings": findings, "deep_extracts": []}
+    re_engine._evidence_block(result)
+    assert findings[0]["url"] == "https://x.com/social"  # original order untouched
+
+
+def test_evidence_block_gives_higher_credibility_sources_a_larger_character_budget():
+    long_text = "x" * 5000
+    result = {
+        "topic": "Foo", "task_type": "general", "known_facts": {}, "findings": [],
+        "deep_extracts": [{"url": "https://rekt.news/a", "credibility": "security_research", "content": long_text},
+                           {"url": "https://x.com/social", "credibility": "social_unverified", "content": long_text}],
+    }
+    block = re_engine._evidence_block(result)
+    sec_excerpt_len = len(block.split("SOURCE: https://rekt.news/a")[1].split("SOURCE:")[0])
+    social_excerpt_len = len(block.split("SOURCE: https://x.com/social")[1])
+    assert sec_excerpt_len > social_excerpt_len
+
+
+def test_evidence_block_surfaces_entities_ahead_of_the_excerpt():
+    result = {
+        "topic": "Foo", "task_type": "threat_analysis", "known_facts": {}, "findings": [],
+        "deep_extracts": [{"url": "https://rekt.news/a", "credibility": "security_research",
+                            "content": "long prose " * 500,
+                            "entities": ["0x" + "aa" * 20, "CVE-2026-1234"]}],
+    }
+    block = re_engine._evidence_block(result)
+    assert "Entities found on this page: 0x" + "aa" * 20 + ", CVE-2026-1234" in block
+    assert block.index("Entities found on this page") < block.index("long prose")
+
+
+def test_evidence_block_omits_entities_line_when_none_present():
+    result = {"topic": "Foo", "task_type": "general", "known_facts": {}, "findings": [],
+              "deep_extracts": [{"url": "https://rekt.news/a", "credibility": "security_research",
+                                  "content": "no entities here"}]}
+    block = re_engine._evidence_block(result)
+    assert "Entities found on this page" not in block
+
+
 # ── synthesize ────────────────────────────────────────────────────────────
 class TestSynthesize:
     def _base_result(self):
