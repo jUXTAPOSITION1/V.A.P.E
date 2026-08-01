@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-01T11:50:19Z",
+  "generated": "2026-08-01T12:04:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 484,
+    "reports": 485,
     "reports_by_type": {
+      "bounty": 113,
       "base": 99,
       "sentiment": 51,
-      "bounty": 112,
       "security": 88,
       "bug": 4,
       "mainnet": 4,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-110529-0x020D6c73.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-01-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-01T10:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260801_120319.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-01T12:03:19Z",
       "threat": null,
-      "summary": "Date: 2026-08-01 10:28 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-01-10.md",
-      "bytes": 8195
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_120319.md",
+      "bytes": 17150
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260801_120319.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-01T12:03:19Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_120319.md",
+      "bytes": 17150
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-29 21:52 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-29-21.md",
       "bytes": 3463
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260729_205720.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-29T20:57:20Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260729_205720.md",
-      "bytes": 16576
     }
   ],
   "broadcasts": [
