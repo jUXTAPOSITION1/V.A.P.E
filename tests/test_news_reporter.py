@@ -4,10 +4,59 @@ Hermetic: every LLM/web-search/network call is mocked, no real network or
 git-tracked file writes (write_news_report is redirected into tmp_path).
 """
 import json
+from datetime import datetime, timezone
 from unittest import mock
 
 from agents import news_common as nc
 from agents import news_reporter
+
+
+def test_publish_stamp_formats_iso_utc_and_et_in_summer():
+    now_utc = datetime(2026, 8, 1, 14, 30, 0, tzinfo=timezone.utc)
+    date_iso, published_et = news_reporter._publish_stamp(now_utc)
+    assert date_iso == "2026-08-01T14:30:00Z"
+    assert published_et == "August 1, 2026 · 10:30 AM EDT"
+
+
+def test_publish_stamp_formats_et_in_winter_standard_time():
+    """EST vs EDT is resolved from the real date via zoneinfo, not
+    hardcoded -- this crosses the DST boundary into standard time."""
+    now_utc = datetime(2026, 1, 15, 20, 5, 0, tzinfo=timezone.utc)
+    date_iso, published_et = news_reporter._publish_stamp(now_utc)
+    assert date_iso == "2026-01-15T20:05:00Z"
+    assert published_et == "January 15, 2026 · 3:05 PM EST"
+
+
+def test_publish_stamp_crosses_a_calendar_date_going_from_utc_to_et():
+    """UTC late night rolls back to the previous ET calendar date -- the
+    ET stamp must reflect the reader's own date, not a bare UTC-minus-hours
+    that silently keeps the wrong day."""
+    now_utc = datetime(2026, 8, 1, 3, 4, 0, tzinfo=timezone.utc)
+    date_iso, published_et = news_reporter._publish_stamp(now_utc)
+    assert date_iso == "2026-08-01T03:04:00Z"
+    assert published_et == "July 31, 2026 · 11:04 PM EDT"
+
+
+def test_is_derivative_headline_true_when_blank():
+    assert news_reporter._is_derivative_headline(None, "Some Source Headline") is True
+    assert news_reporter._is_derivative_headline("   ", "Some Source Headline") is True
+
+
+def test_is_derivative_headline_true_for_exact_match_case_and_whitespace_insensitive():
+    assert news_reporter._is_derivative_headline(
+        "  Bitcoin Rallies Past $100K  ", "bitcoin rallies past $100k") is True
+
+
+def test_is_derivative_headline_true_for_near_duplicate():
+    assert news_reporter._is_derivative_headline(
+        "Bitcoin Rallies Past $100000", "Bitcoin Rallies Past $100K") is True
+
+
+def test_is_derivative_headline_false_for_genuinely_distinct_headline():
+    assert news_reporter._is_derivative_headline(
+        "Bitcoin Tops $100K", "Bitcoin Rallies Past $100K") is False
+    assert news_reporter._is_derivative_headline(
+        "Rally Deepens", "Crypto markets rally") is False
 
 
 def test_pick_candidates_skips_already_reported(tmp_path, monkeypatch):
@@ -91,6 +140,8 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
     assert "**Agency:** VAPE Wire" in text
     assert "**Image:** assets/logo-v-256.png" in text
     assert "brand mark" in text
+    assert "**Date:**" in text  # machine-parseable UTC ISO timestamp
+    assert "**Published:**" in text  # human-facing US Eastern-time stamp
 
 
 def test_write_story_falls_back_to_brand_mark_when_no_ai_image(tmp_path, monkeypatch):
@@ -246,6 +297,71 @@ def test_write_story_skips_candidate_when_synthesis_unavailable(tmp_path, monkey
 
     assert result is None
     editor.assert_not_called()  # no copy-desk spend on a story that was never drafted
+
+
+def test_write_story_returns_none_when_headline_is_blank(tmp_path, monkeypatch):
+    """The HEADLINE drafting instruction is prompt-only -- write_story()
+    must not fall back to candidate["title"] (the source's own headline)
+    when the model returns a blank headline, since that would silently
+    publish the exact copy the originality requirement exists to prevent
+    (CodeRabbit, PR #390)."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some real headline", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth(None, "A dek.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()  # no copy-desk spend on a headline that failed the guard
+
+
+def test_write_story_returns_none_when_headline_copies_source_title(tmp_path, monkeypatch):
+    """Same guard, the other failure mode: the model returns the source
+    outlet's own headline verbatim instead of writing an original one."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Bitcoin Rallies Past $100K", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Bitcoin Rallies Past $100K", "A dek.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()
+
+
+def test_write_story_returns_none_when_dek_is_blank(tmp_path, monkeypatch):
+    """The DEK instruction asks for a genuine sub-headline -- a blank DEK
+    (empty string or None) must fail the same deterministic gate as a
+    blank/derivative headline, not pass through silently (CodeRabbit,
+    PR #390)."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some real headline", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("A Genuinely Original Headline", "  ", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()
 
 
 def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):
