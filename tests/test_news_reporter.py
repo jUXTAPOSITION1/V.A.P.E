@@ -44,19 +44,11 @@ def test_pick_candidates_returns_empty_when_all_reported(tmp_path, monkeypatch):
     assert news_reporter._pick_candidates(state, 3) == []
 
 
-def test_parse_llm_output_extracts_headline_dek_body():
-    raw = "HEADLINE: Base Hits Record TVL\nDEK: A milestone day for the L2.\n---\n## Body\nReal content here."
-    headline, dek, body = news_reporter._parse_llm_output(raw, "fallback")
-    assert headline == "Base Hits Record TVL"
-    assert dek == "A milestone day for the L2."
-    assert body == "## Body\nReal content here."
-
-
-def test_parse_llm_output_falls_back_on_malformed_response():
-    headline, dek, body = news_reporter._parse_llm_output("just plain prose, no markers", "Original Title")
-    assert headline == "Original Title"
-    assert dek == ""
-    assert body == "just plain prose, no markers"
+def _synth(headline, dek, body):
+    """Builds the dict shape agents.research_engine.synthesize() returns,
+    for mocking write_story()'s drafting call."""
+    return {"narrative": body, "header": {"headline": headline, "dek": dek},
+            "gaps": [], "verdict": None, "provider": "oci_grok"}
 
 
 def test_editorial_pass_uses_edited_text_when_available():
@@ -85,9 +77,9 @@ def test_write_story_marks_fact_checked_and_includes_sources(tmp_path, monkeypat
                                                 "snippet": "confirms the patch"}]}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis",
-                     side_effect=["HEADLINE: The Patch That Saved Millions\nDEK: A close call.\n---\n## Details\nBody text.",
-                                  "## Details\nEdited body text."]), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("The Patch That Saved Millions", "A close call.", "## Details\nBody text.")), \
+         mock.patch("agents.intel_common.grok_analysis", return_value="## Details\nEdited body text."), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
         path = news_reporter.write_story(candidate)
 
@@ -117,8 +109,9 @@ def test_write_story_falls_back_to_brand_mark_when_no_ai_image(tmp_path, monkeyp
                                                 "snippet": "confirms the rally"}]}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis",
-                     side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Rally Deepens", "Momentum builds.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis", return_value="Body text."), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None), \
          mock.patch.object(nc, "brand_image") as brand:
         path = news_reporter.write_story(candidate)
@@ -141,8 +134,9 @@ def test_write_story_uses_ai_generated_image_when_available(tmp_path, monkeypatc
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image",
                             return_value="assets/news-images/rally-deepens.jpg") as gen_ai, \
-         mock.patch("agents.intel_common.grok_analysis",
-                     side_effect=["HEADLINE: Rally Deepens\nDEK: Momentum builds.\n---\nBody text.", "Body text."]), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Rally Deepens", "Momentum builds.", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis", return_value="Body text."), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
         path = news_reporter.write_story(candidate)
 
@@ -194,15 +188,16 @@ def test_write_story_includes_native_rss_snippet_in_grounding(tmp_path, monkeypa
                  "snippet": "Bitcoin surged past $100,000 as spot ETF inflows accelerated this week."}
     captured = {}
 
-    def fake_grok_analysis(role, grounding, **kw):
-        captured["grounding"] = grounding
-        return "HEADLINE: Bitcoin Tops $100K\nDEK: A milestone.\n---\nBody text."
+    def fake_synthesize(result, **kw):
+        captured["grounding"] = result["raw_user_block"]
+        return _synth("Bitcoin Tops $100K", "A milestone.", "Body text.")
 
     with mock.patch("agents.intel_common.web_search_snippets",
                      return_value={"available": False, "provider": None, "results": []}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis", side_effect=fake_grok_analysis), \
+         mock.patch("agents.research_engine.synthesize", side_effect=fake_synthesize), \
+         mock.patch("agents.intel_common.grok_analysis", return_value="Body text."), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
         news_reporter.write_story(candidate)
 
@@ -222,11 +217,35 @@ def test_write_story_returns_none_when_nothing_sourceable(tmp_path, monkeypatch)
     with mock.patch("agents.intel_common.web_search_snippets",
                      return_value={"available": True, "provider": "tavily", "results": []}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis") as grok:
+         mock.patch("agents.research_engine.synthesize") as synth:
         result = news_reporter.write_story(candidate)
 
     assert result is None
-    grok.assert_not_called()  # no LLM spend on a candidate with nothing real to report
+    synth.assert_not_called()  # no LLM spend on a candidate with nothing real to report
+
+
+def test_write_story_skips_candidate_when_synthesis_unavailable(tmp_path, monkeypatch):
+    """An unavailable-LLM sentinel must never be published as a story
+    (CodeRabbit, PR #375) -- write_story() checks the narrative for the
+    "_Synthesis unavailable" prefix before ever reaching the editorial pass
+    or writing a report."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some headline", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+    unavailable = {"narrative": "_Synthesis unavailable this cycle (LLM call failed)._",
+                   "header": {"headline": None, "dek": None},
+                   "gaps": [], "verdict": None, "provider": None}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize", return_value=unavailable), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()  # no copy-desk spend on a story that was never drafted
 
 
 def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):
@@ -241,8 +260,9 @@ def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):
                      return_value={"available": True, "provider": "tavily", "results": []}), \
          mock.patch.object(nc, "scrape_article_text", return_value=None), \
          mock.patch.object(news_reporter, "_generate_ai_image", return_value=None), \
-         mock.patch("agents.intel_common.grok_analysis",
-                     side_effect=["HEADLINE: Title\nDEK: Dek.\n---\nBody.", "Body."]), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("Title", "Dek.", "Body.")), \
+         mock.patch("agents.intel_common.grok_analysis", return_value="Body."), \
          mock.patch("agents.intel_common.log_sweep_memory", return_value=None):
         result = news_reporter.write_story(candidate)
 

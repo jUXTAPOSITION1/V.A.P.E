@@ -1870,18 +1870,19 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     disagreement here is signal for self_improve.py/review_ledger.py, not
     a verdict change. Never raises.
 
-    Routed through research_engine.synthesize() (not a bare LLM call)
-    since PR #373 added exactly the two features this function needed to
-    migrate onto the shared engine rather than keep a parallel
-    implementation: `evidence_lines` (a caller-supplied, already-gathered
-    evidence list — this function never needed research_engine's own
-    web-search discovery layer, since callers upstream already ran GoPlus/
-    DexScreener/on-chain/web-reputation checks) and `verdict_options` (the
-    VERDICT ALIGNMENT AGREE|DISAGREE trailer this function's anti-injection
-    fix — PR #277 — depends on, now generalized inside synthesize() itself
-    rather than hand-rolled here). The underlying evidence, grounding
-    rules, and anti-injection parsing are unchanged; the picked-up bonus is
-    an explicit gaps/confidence read appended to every real investigation.
+    Routed through research_engine.synthesize() (not a bare LLM call) since
+    that engine now offers the features this function needed to migrate
+    onto the shared implementation rather than keep a parallel one:
+    `evidence_lines` (a caller-supplied, already-gathered evidence list —
+    this function never needed research_engine's own web-search discovery
+    layer, since callers upstream already ran GoPlus/DexScreener/on-chain/
+    web-reputation checks) and a generic, declarative `trailers` spec
+    requesting a VERDICT ALIGNMENT AGREE|DISAGREE trailer after GAPS_JSON —
+    this function's anti-injection fix (PR #277) generalized inside
+    synthesize() itself rather than hand-rolled here. The underlying
+    evidence, grounding rules, and anti-injection parsing are unchanged;
+    the picked-up bonus is an explicit gaps/confidence read appended to
+    every real investigation.
 
     Real, previously-live bug this fixes (confirmed 2026-07-25 from a live
     report, investigation-20260725-101257-0xdCf51302.md): this call used to
@@ -1971,7 +1972,9 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     # docstring for why passing it would defeat the point of this call.
     synth = research_engine.synthesize(
         result, role="lead investigator", extra_instructions=extra_instructions,
-        verdict_options=("AGREE", "DISAGREE"), verdict_label="VERDICT ALIGNMENT",
+        trailers=[{"type": "json", "name": "gaps", "label": "GAPS_JSON"},
+                  {"type": "enum", "name": "verdict", "label": "VERDICT ALIGNMENT",
+                   "options": ("AGREE", "DISAGREE")}],
         max_tokens=750, temperature=0.4,
     )
     text = (synth.get("narrative") or "").strip()

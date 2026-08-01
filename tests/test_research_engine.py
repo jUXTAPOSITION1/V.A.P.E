@@ -319,7 +319,7 @@ class TestSynthesize:
         text = "Real narrative text.\nGAPS_JSON: [{not: valid, json}]"
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
             re_engine.synthesize(self._base_result())
-        assert "GAPS_JSON parse failed" in capsys.readouterr().out
+        assert "GAPS_JSON trailer parse failed" in capsys.readouterr().out
 
     def test_no_gaps_trailer_returns_empty_gaps_list(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Just narrative, no trailer.", "groq")):
@@ -350,6 +350,11 @@ class TestSynthesize:
         system, _user = m.call_args[0]
         assert "Use headings X, Y, Z." in system
 
+    _GAPS_AND_VERDICT_TRAILERS = [
+        {"type": "json", "name": "gaps", "label": "GAPS_JSON"},
+        {"type": "enum", "name": "verdict", "label": "VERDICT ALIGNMENT", "options": ("AGREE", "DISAGREE")},
+    ]
+
     def test_verdict_omitted_by_default(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")):
             result = re_engine.synthesize(self._base_result())
@@ -358,7 +363,7 @@ class TestSynthesize:
     def test_verdict_parsed_from_absolute_last_line(self):
         text = "Real analysis.\nGAPS_JSON: []\nVERDICT ALIGNMENT: DISAGREE"
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
-            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+            result = re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
         assert result["verdict"] == "DISAGREE"
         assert "VERDICT ALIGNMENT" not in result["narrative"]
         assert "GAPS_JSON" not in result["narrative"]
@@ -366,7 +371,7 @@ class TestSynthesize:
     def test_verdict_case_insensitive_but_normalized_to_declared_casing(self):
         text = "Real analysis.\nverdict alignment: agree"
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
-            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+            result = re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
         assert result["verdict"] == "AGREE"
 
     def test_verdict_not_matched_when_not_the_final_line(self):
@@ -376,7 +381,7 @@ class TestSynthesize:
         # or injected earlier in the response could otherwise contain it.
         text = "VERDICT ALIGNMENT: DISAGREE\nBut actually here is more analysis after that."
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
-            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+            result = re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
         assert result["verdict"] is None
         assert "VERDICT ALIGNMENT: DISAGREE" in result["narrative"]
 
@@ -384,25 +389,145 @@ class TestSynthesize:
         text = ('Real analysis.\nGAPS_JSON: [{"description": "gap one", "confidence": 0.5}]\n'
                 'VERDICT ALIGNMENT: AGREE')
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
-            result = re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"))
+            result = re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
         assert result["verdict"] == "AGREE"
         assert len(result["gaps"]) == 1
         assert result["gaps"][0]["description"] == "gap one"
         assert result["narrative"] == "Real analysis."
 
-    def test_verdict_options_included_in_system_prompt(self):
+    def test_verdict_only_trailer_produces_no_gaps(self):
+        # trailers=[...] replaces the implicit default entirely — a caller
+        # that only declares a verdict trailer gets no gaps parsing at all,
+        # rather than a silently-always-on GAPS_JSON the caller never asked for.
+        text = "Real analysis.\nVERDICT ALIGNMENT: AGREE"
+        verdict_only = [{"type": "enum", "name": "verdict", "label": "VERDICT ALIGNMENT",
+                          "options": ("AGREE", "DISAGREE")}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), trailers=verdict_only)
+        assert result["verdict"] == "AGREE"
+        assert result["gaps"] == []
+
+    def test_empty_trailers_list_requests_and_parses_nothing(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("Just narrative.", "oci_grok")) as m:
+            result = re_engine.synthesize(self._base_result(), trailers=[])
+        assert result["gaps"] == []
+        assert result["verdict"] is None
+        assert result["narrative"] == "Just narrative."
+        system, _user = m.call_args[0]
+        assert "GAPS_JSON" not in system
+
+    def test_trailer_options_included_in_system_prompt(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
-            re_engine.synthesize(self._base_result(), verdict_options=("AGREE", "DISAGREE"),
-                                  verdict_label="VERDICT ALIGNMENT")
+            re_engine.synthesize(self._base_result(), trailers=self._GAPS_AND_VERDICT_TRAILERS)
         system, _user = m.call_args[0]
         assert "VERDICT ALIGNMENT" in system
         assert "AGREE|DISAGREE" in system
+
+    def test_distinctly_named_trailers_do_not_collide(self):
+        """Real gap this pins (CodeRabbit, PR #375): _parse_trailers used to
+        route every "json" trailer into "gaps" and every "enum" trailer into
+        "verdict" regardless of its own declared name — a second json
+        trailer would merge into the same list as the first, and a
+        non-verdict enum would silently overwrite the real verdict. Each
+        trailer's own name must be its own slot in result["trailers"],
+        independent of type and of any other trailer's name."""
+        text = ("Real analysis.\n"
+                'CITATIONS_JSON: [{"description": "cite one", "confidence": 0.9}]\n'
+                "SEVERITY: HIGH")
+        trailers = [
+            {"type": "json", "name": "citations", "label": "CITATIONS_JSON"},
+            {"type": "enum", "name": "severity", "label": "SEVERITY", "options": ("LOW", "HIGH")},
+        ]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), trailers=trailers)
+        assert result["trailers"]["citations"][0]["description"] == "cite one"
+        assert result["trailers"]["severity"] == "HIGH"
+        # Neither collides into the legacy gaps/verdict convenience aliases,
+        # which stay at their defaults since no trailer here is named that.
+        assert result["gaps"] == []
+        assert result["verdict"] is None
 
     def test_custom_max_tokens_passed_through(self):
         with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
             re_engine.synthesize(self._base_result(), max_tokens=750)
         _, kwargs = m.call_args
         assert kwargs["max_tokens"] == 750
+
+    # ── header fields (generic HEADLINE:/DEK:/---/body-style contract) ────
+    def test_header_fields_parsed_and_stripped_from_narrative(self):
+        text = "HEADLINE: Base Hits Record TVL\nDEK: A milestone day.\n---\n## Body\nReal content."
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers, trailers=[])
+        assert result["header"]["headline"] == "Base Hits Record TVL"
+        assert result["header"]["dek"] == "A milestone day."
+        assert result["narrative"] == "## Body\nReal content."
+
+    def test_header_fields_missing_delimiter_degrades_to_none_not_lost_narrative(self):
+        text = "Just plain prose, no header markers at all."
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers, trailers=[])
+        assert result["header"] == {"headline": None, "dek": None}
+        assert result["narrative"] == text
+
+    def test_header_delimiter_ignores_markdown_rule_with_no_real_header(self):
+        """Real bug this pins (CodeRabbit, PR #375): a bare markdown
+        thematic break ('---') the model wrote as part of its own narrative
+        must not be mistaken for the header delimiter just because it's the
+        first '---' line in the text — only a delimiter preceded by at
+        least one actual configured label counts. Otherwise every opening
+        paragraph before an unrelated '---' silently vanishes with no
+        header fields to show for it either."""
+        text = "Opening paragraph the model wrote.\n\n---\n\nMore narrative after a markdown rule."
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers, trailers=[])
+        assert result["header"] == {"headline": None, "dek": None}
+        assert result["narrative"] == text
+
+    def test_header_fields_omitted_by_default(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")):
+            result = re_engine.synthesize(self._base_result())
+        assert result["header"] == {}
+
+    def test_header_and_trailers_both_parsed_together(self):
+        text = ("HEADLINE: Big Story\nDEK: Stakes are high.\n---\n"
+                'Body text.\nGAPS_JSON: [{"description": "gap", "confidence": 0.4}]')
+        headers = [{"name": "headline", "label": "HEADLINE"}, {"name": "dek", "label": "DEK"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers)
+        assert result["header"]["headline"] == "Big Story"
+        assert result["narrative"] == "Body text."
+        assert len(result["gaps"]) == 1
+
+    def test_custom_header_delimiter(self):
+        text = "HEADLINE: Title\n===\nBody here."
+        headers = [{"name": "headline", "label": "HEADLINE"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(text, "oci_grok")):
+            result = re_engine.synthesize(self._base_result(), header_fields=headers,
+                                           header_delimiter="===", trailers=[])
+        assert result["header"]["headline"] == "Title"
+        assert result["narrative"] == "Body here."
+
+    def test_raw_user_block_bypasses_structured_evidence_rendering(self):
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            result = dict(self._base_result())
+            result["raw_user_block"] = "A fully custom grounding block."
+            re_engine.synthesize(result)
+        _system, user = m.call_args[0]
+        assert user == "A fully custom grounding block."
+
+    def test_prompt_construction_failure_degrades_honestly(self):
+        # A malformed findings entry missing a required key used to raise
+        # straight out of _evidence_block() with no try/except around it —
+        # "never raises" must hold even for a caller's own malformed result.
+        result = dict(self._base_result())
+        result["findings"] = [{"title": "no url key"}]
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            out = re_engine.synthesize(result)
+        assert "unavailable" in out["narrative"]
+        m.assert_not_called()
 
 
 def test_evidence_block_includes_caller_supplied_evidence_lines():
