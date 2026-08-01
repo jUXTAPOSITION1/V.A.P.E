@@ -109,3 +109,4 @@
 {"ts": "2026-08-01T13:36:51.704296Z", "address": "0x330990DaE53BCa4C5811C5362B44C33a47db7777", "chain": "56", "symbol": "ASTEROID", "name": "ASTEROID", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-01T16:25:03.493493Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-08-01T18:56:36.601795Z", "address": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "exploit_check"}
+{"ts": "2026-08-01T19:11:35.218762Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}
