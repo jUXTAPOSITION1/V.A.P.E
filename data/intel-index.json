@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T15:54:48Z",
+  "generated": "2026-08-01T16:01:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 137,
     "investigations": 631,
-    "news": 43,
+    "news": 44,
     "tools": 16,
     "tools_verified": 16,
     "skills": 22
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-01-the-great-hashrate-retreat-bitcoin-mining-difficulty-slides-.md",
+      "title": "The Great Hashrate Retreat: Bitcoin Mining Difficulty Slides 14% as Rigs Go Dark",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-01T16:01:58Z",
+      "published_et": "August 1, 2026 \u00b7 12:01 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "As weak mining economics squeeze margins, operators are powering down hardware and pivoting assets, with forward markets signaling a prolonged slump through the end of the year.",
+      "image": "assets/news-images/the-great-hashrate-retreat-bitcoin-mining-difficulty-slides-.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-01-the-great-hashrate-retreat-bitcoin-mining-difficulty-slides-.md"
+    },
     {
       "file": "news-2026-08-01-cme-bets-extended-hours-on-single-stock-futures-will-finally.md",
       "title": "CME Bets Extended Hours on Single-Stock Futures Will Finally Lure Liquidity to Nvidia and Tesla Trades",
