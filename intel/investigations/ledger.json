@@ -9681,6 +9681,25 @@
     "symbol": "TOWER",
     "times_investigated": 1
   },
+  "8453:0xfca95aeb5bf44ae355806a5ad14659c940dc6bf7": {
+    "address": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7",
+    "chain": "8453",
+    "creator_address": "0x5775358fFAbe8bDa93e31BdFD55e898b2bEE4A41",
+    "first_investigated": "2026-08-01T23:42:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260801-234234-0xFCa95aeb.md",
+        "score": 85,
+        "ts": "2026-08-01T23:42:34Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-01T23:42:34Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "SHIB",
+    "times_investigated": 1
+  },
   "8453:0xfd15909c86bcd27f195b0b9f9a791c17eb87eb07": {
     "address": "0xFd15909C86BCd27F195B0B9f9A791c17Eb87Eb07",
     "chain": "8453",

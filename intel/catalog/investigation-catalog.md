@@ -1091,3 +1091,5 @@
 | 2026-08-01 | auto | 0xC4e9A27D5a1C6857823fBf8dCCc607b8d7E32b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-01 | auto | 0x78a087d713Be963Bf307b18F2Ff8122EF9A63ae9 (BSWAP) | deep_investigation | CAUTION (53/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-01 | auto | 0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7 (SHIB) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
