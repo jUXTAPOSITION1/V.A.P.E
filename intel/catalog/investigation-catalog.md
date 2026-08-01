@@ -1085,3 +1085,5 @@
 | 2026-08-01 | auto | 0xE5D66322db2922dA6f8cc878d56430b1585f351F (AIPF) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-01 | auto | 0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD (OVPP) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
+
+| 2026-08-01 | auto | 0xCD743f1a54f4b665286864c4867A7216805fe09A (IDOL) | deep_investigation | REJECT (40/100) | Owner not renounced (0xc42e9af3f22da50d741d560dfdce4d338e3a6e94) — can still act | +7d |

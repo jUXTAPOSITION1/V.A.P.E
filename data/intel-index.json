@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T20:12:13Z",
+  "generated": "2026-08-01T20:27:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 492,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 642,
+    "investigations": 643,
     "news": 45,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260801-201210-0x8C0d3ADC.md",
-      "title": "Investigation \u2014 OVPP",
-      "symbol": "OVPP",
-      "name": "OpenVPP",
-      "date": "2026-08-01T20:12:10Z",
-      "target": "0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD",
-      "chain": "8453 (Base)",
-      "verdict": "PROCEED",
-      "score": "85",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 8679 holders \u2014 reasonably distributed; Trading 138+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template); DefiLlama has priced thi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-201210-0x8C0d3ADC.md"
+      "file": "investigation-20260801-202725-0xCD743f1a.md",
+      "title": "Investigation \u2014 IDOL",
+      "symbol": "IDOL",
+      "name": "IDOL Land Coin",
+      "date": "2026-08-01T20:27:25Z",
+      "target": "0xCD743f1a54f4b665286864c4867A7216805fe09A",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-10] Owner not renounced (0xc42e9af3f22da50d741d560dfdce4d338e3a6e94) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,118 (rug/illiquid); [-10] Low liquidity $6,118. Positive evidence: 81% of liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-202725-0xCD743f1a.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260801-202725-0xCD743f1a.md",
+      "title": "Investigation \u2014 IDOL",
+      "symbol": "IDOL",
+      "name": "IDOL Land Coin",
+      "date": "2026-08-01T20:27:25Z",
+      "target": "0xCD743f1a54f4b665286864c4867A7216805fe09A",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-10] Owner not renounced (0xc42e9af3f22da50d741d560dfdce4d338e3a6e94) \u2014 can still act on the contract; [-15] Top 9 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,118 (rug/illiquid); [-10] Low liquidity $6,118. Positive evidence: 81% of liquidity ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-202725-0xCD743f1a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260801-201210-0x8C0d3ADC.md",
@@ -594,20 +608,6 @@
       "score": "42",
       "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (24) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-5] Pair 21.7 days old \u2014 under a month, still unproven; [-10] No known third-party audit or veri",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-010432-0x3C5Cd672.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-004929-0x059aB32a.md",
-      "title": "Investigation \u2014 AKE",
-      "symbol": "AKE",
-      "name": "Akedo Games",
-      "date": "2026-08-01T00:49:29Z",
-      "target": "0x059aB32a5907ed5F09e6394D081A913F32f4da86",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $21,922; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified sour",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-004929-0x059aB32a.md"
     }
   ],
   "reports": [
