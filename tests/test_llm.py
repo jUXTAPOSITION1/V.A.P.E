@@ -631,17 +631,38 @@ def _fake_image_response(image_b64, mime="image/png"):
     return Resp()
 
 
+def _fake_imagen_response(image_b64, mime="image/png"):
+    body = {"predictions": [{"mimeType": mime, "bytesBase64Encoded": image_b64}]} if image_b64 else {"predictions": []}
+    payload = json.dumps(body).encode()
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            pass
+
+        def read(self):
+            return payload
+    return Resp()
+
+
 class TestGeminiImage:
     """agents/llm.py::ask_gemini_image() — VAPE's real image-generation
-    route (Google's Gemini image model, "Nano Banana"), called against the
-    Gemini Developer API (generativelanguage.googleapis.com), NOT Vertex AI
-    -- confirmed necessary by a real HTTP 404 from a live dispatch that
-    tried the Vertex publisher-model path first (this model launched on
-    the Gemini API surface, not yet mirrored into Vertex's Model Garden).
-    Prefers VAPE_VERTEX_ACCESS_TOKEN (WIF-minted ADC token, OAuth Bearer +
-    x-goog-user-project) when set, falling back to GEMINI_API_KEY's
-    x-goog-api-key header -- the same key already used by the 'gemini'
-    free-tier text provider in PROVIDERS, not a new secret."""
+    route. Tries Vertex AI's Imagen (_call_vertex_imagen(), the ADC/OAuth-
+    native path, explicit direction 2026-08-01: no API keys) first when
+    VAPE_VERTEX_ACCESS_TOKEN is set, falling back to the Gemini Developer
+    API's own image model ("Nano Banana", gemini-3.1-flash-lite-image) via
+    GEMINI_API_KEY's x-goog-api-key header -- the same key already used by
+    the 'gemini' free-tier text provider in PROVIDERS, not a new secret.
+
+    Vertex Imagen replaced an earlier design (an OAuth-Bearer variant of the
+    Gemini Developer API call itself) after live confirmation (2026-08-01)
+    that generativelanguage.googleapis.com's generateContent method rejects
+    ANY OAuth token outright (HTTP 403 ACCESS_TOKEN_SCOPE_INSUFFICIENT)
+    regardless of scope/IAM/API-enablement -- that host is structurally
+    API-key-only for inference. Imagen is a real, different Vertex publisher
+    model built around OAuth/ADC as its native auth."""
 
     def test_returns_none_when_neither_auth_method_set(self, monkeypatch):
         monkeypatch.delenv("GEMINI_API_KEY", raising=False)
@@ -713,25 +734,51 @@ class TestGeminiImage:
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             assert llm.ask_gemini_image("prompt") is None
 
-    def test_prefers_adc_token_over_api_key_when_both_set(self, monkeypatch):
+    def test_prefers_vertex_imagen_over_api_key_when_both_set(self, monkeypatch):
         monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
         monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-adc-token")
         monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "project-real-id")
+        import base64
+        raw_bytes = b"\x89PNG-fake-imagen-bytes"
         captured = {}
 
         def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
             captured["auth_header"] = req.get_header("Authorization")
-            captured["project_header"] = req.get_header("X-goog-user-project")
             captured["api_key_header"] = req.get_header("X-goog-api-key")
-            return _fake_image_response("")
+            captured["body"] = json.loads(req.data.decode())
+            return _fake_imagen_response(base64.b64encode(raw_bytes).decode())
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-            llm.ask_gemini_image("prompt")
+            result = llm.ask_gemini_image("prompt")
+        assert result == raw_bytes
+        assert captured["url"] == (
+            "https://us-central1-aiplatform.googleapis.com/v1/projects/project-real-id"
+            "/locations/us-central1/publishers/google/models/imagen-4.0-generate-001:predict")
         assert captured["auth_header"] == "Bearer fake-adc-token"
-        assert captured["project_header"] == "project-real-id"
         assert captured["api_key_header"] is None
+        assert captured["body"]["instances"] == [{"prompt": "prompt"}]
+        assert captured["body"]["parameters"]["aspectRatio"] == "16:9"
 
-    def test_adc_project_resolution_order(self, monkeypatch):
+    def test_falls_back_to_gemini_developer_api_when_vertex_imagen_returns_none(self, monkeypatch):
+        monkeypatch.setenv("GEMINI_API_KEY", "fake-gemini-key")
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-adc-token")
+        calls = []
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(req.full_url)
+            if urllib.parse.urlparse(req.full_url).hostname == "us-central1-aiplatform.googleapis.com":
+                return _fake_imagen_response("")
+            return _fake_image_response("ZmFrZQ==")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            result = llm.ask_gemini_image("prompt")
+        assert result == b"fake"
+        assert len(calls) == 2
+        assert urllib.parse.urlparse(calls[0]).hostname == "us-central1-aiplatform.googleapis.com"
+        assert urllib.parse.urlparse(calls[1]).hostname == "generativelanguage.googleapis.com"
+
+    def test_vertex_imagen_project_resolution_order(self, monkeypatch):
         # VAPE_VERTEX_PROJECT_ID > GOOGLE_CLOUD_PROJECT > CLOUDSDK_CORE_PROJECT >
         # VAPE_VERTEX_PROJECT_NUMBER > the hardcoded default -- explicit env vars
         # win over the auto-exported ones google-github-actions/auth sets.
@@ -742,19 +789,19 @@ class TestGeminiImage:
         captured = {}
 
         def fake_urlopen(req, timeout=None):
-            captured["project_header"] = req.get_header("X-goog-user-project")
-            return _fake_image_response("")
+            captured["url"] = req.full_url
+            return _fake_imagen_response("")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_gemini_image("prompt")
-        assert captured["project_header"] == "from-google-cloud-project"
+        assert "/projects/from-google-cloud-project/" in captured["url"]
 
         monkeypatch.setenv("VAPE_VERTEX_PROJECT_ID", "from-explicit-project-id")
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_gemini_image("prompt")
-        assert captured["project_header"] == "from-explicit-project-id"
+        assert "/projects/from-explicit-project-id/" in captured["url"]
 
-    def test_adc_falls_back_to_default_project_number(self, monkeypatch):
+    def test_vertex_imagen_falls_back_to_default_project_number(self, monkeypatch):
         monkeypatch.delenv("GEMINI_API_KEY", raising=False)
         monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-adc-token")
         monkeypatch.delenv("VAPE_VERTEX_PROJECT_ID", raising=False)
@@ -764,12 +811,42 @@ class TestGeminiImage:
         captured = {}
 
         def fake_urlopen(req, timeout=None):
-            captured["project_header"] = req.get_header("X-goog-user-project")
-            return _fake_image_response("")
+            captured["url"] = req.full_url
+            return _fake_imagen_response("")
 
         with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
             llm.ask_gemini_image("prompt")
-        assert captured["project_header"] == llm.VERTEX_TUNED_DEFAULT_PROJECT_NUMBER
+        assert f"/projects/{llm.VERTEX_TUNED_DEFAULT_PROJECT_NUMBER}/" in captured["url"]
+
+    def test_honors_env_overrides_for_imagen_location_and_model(self, monkeypatch):
+        monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-adc-token")
+        monkeypatch.setenv("GOOGLE_CLOUD_PROJECT", "project-real-id")
+        monkeypatch.setenv("VAPE_VERTEX_IMAGE_LOCATION", "europe-west4")
+        monkeypatch.setenv("VAPE_VERTEX_IMAGE_MODEL", "imagen-4.0-fast-generate-001")
+        captured = {}
+
+        def fake_urlopen(req, timeout=None):
+            captured["url"] = req.full_url
+            return _fake_imagen_response("")
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            llm.ask_gemini_image("prompt")
+        assert captured["url"] == (
+            "https://europe-west4-aiplatform.googleapis.com/v1/projects/project-real-id"
+            "/locations/europe-west4/publishers/google/models/imagen-4.0-fast-generate-001:predict")
+
+    def test_returns_none_when_vertex_imagen_errors_and_no_api_key_fallback(self, monkeypatch, capsys):
+        monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+        monkeypatch.setenv("VAPE_VERTEX_ACCESS_TOKEN", "fake-adc-token")
+
+        def fake_urlopen(req, timeout=None):
+            raise urllib.error.HTTPError(req.full_url, 403, "Forbidden", {},
+                                          io.BytesIO(b'{"error":{"message":"denied"}}'))
+
+        with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            assert llm.ask_gemini_image("prompt") is None
+        assert "vertex_imagen:HTTP403" in capsys.readouterr().err
 
 
 def _fake_xai_image_response(url):

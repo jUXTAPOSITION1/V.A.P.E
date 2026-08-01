@@ -662,53 +662,126 @@ def ask_vertex_candidate(system, user, *, temperature=0.7, max_tokens=2048, time
 
 
 GEMINI_IMAGE_DEFAULT_MODEL = "gemini-3.1-flash-lite-image"
+VERTEX_IMAGEN_DEFAULT_MODEL = "imagen-4.0-generate-001"
+VERTEX_IMAGEN_DEFAULT_LOCATION = "us-central1"
+
+
+def _resolve_vertex_project():
+    """Project ID (not the tuned model's project *number*) for any Vertex
+    publisher-model call keyed by project ID -- prefers an explicit override,
+    then the project ID google-github-actions/auth's export_environment_
+    variables already sets every CI step (confirmed live, 2026-08-01:
+    GOOGLE_CLOUD_PROJECT=project-ad5c5b86-3088-4903-97e), only falling to the
+    numeric default as a last resort for a non-CI caller with neither set."""
+    return (os.getenv("VAPE_VERTEX_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
+            or os.getenv("CLOUDSDK_CORE_PROJECT")
+            or os.getenv("VAPE_VERTEX_PROJECT_NUMBER", VERTEX_TUNED_DEFAULT_PROJECT_NUMBER))
+
+
+def _call_vertex_imagen(prompt, aspect_ratio, timeout):
+    """Vertex AI's Imagen predict endpoint (aiplatform.googleapis.com) --
+    the real ADC/OAuth-native image-generation path (explicit direction,
+    2026-08-01: no API keys, Application Default Credentials only).
+
+    Distinct model family from ask_gemini_image()'s "Nano Banana" (Gemini's
+    own multimodal generateContent model, gemini-3.1-flash-lite-image) --
+    that model lives only on the Gemini Developer API surface
+    (generativelanguage.googleapis.com) and was already confirmed (live
+    404s) to not exist on Vertex's Model Garden at all. Imagen is the
+    Google image model family that actually IS a first-class Vertex
+    publisher model, callable with the same WIF-minted OAuth access token
+    _call_vertex_tuned() already uses -- no API key involved anywhere in
+    this path.
+
+    Real gap this closes: generativelanguage.googleapis.com's generateContent
+    method rejects ANY OAuth Bearer token outright with HTTP 403
+    ACCESS_TOKEN_SCOPE_INSUFFICIENT regardless of the token's granted scope
+    or the calling service account's IAM roles or whether the Generative
+    Language API is enabled on the project (confirmed live, 2026-08-01,
+    identical error before and after enabling the API) -- that endpoint is
+    structurally API-key-only for inference; OAuth there only ever works for
+    its narrow Retriever/Tuning sub-APIs, never generateContent. No IAM/scope
+    grant can fix that because the auth mechanism itself isn't accepted on
+    that host for this call. Vertex's :predict endpoint has no such
+    restriction -- OAuth/ADC is its native, intended auth path.
+
+    Returns raw image bytes (base64-decoded) or None (no prediction / safety
+    filtered / any error) -- never raises; caller degrades exactly like the
+    Gemini Developer API path below."""
+    token = os.environ["VAPE_VERTEX_ACCESS_TOKEN"]
+    project = _resolve_vertex_project()
+    location = os.getenv("VAPE_VERTEX_IMAGE_LOCATION", VERTEX_IMAGEN_DEFAULT_LOCATION)
+    model = os.getenv("VAPE_VERTEX_IMAGE_MODEL", VERTEX_IMAGEN_DEFAULT_MODEL)
+    url = (f"https://{location}-aiplatform.googleapis.com/v1/projects/{project}"
+           f"/locations/{location}/publishers/google/models/{model}:predict")
+    payload = json.dumps({
+        "instances": [{"prompt": prompt}],
+        "parameters": {"sampleCount": 1, "aspectRatio": aspect_ratio},
+    }).encode()
+    req = urllib.request.Request(url, data=payload, headers={
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        try:
+            body = e.read().decode(errors="replace")[:500]
+        except Exception:
+            body = ""
+        print(f"[llm] vertex_imagen:HTTP{e.code}" + (f" {body}" if body else ""), file=sys.stderr)
+        return None
+    except Exception as e:
+        print(f"[llm] vertex_imagen:{type(e).__name__}:{e}", file=sys.stderr)
+        return None
+    for pred in data.get("predictions", []):
+        b64 = pred.get("bytesBase64Encoded")
+        if b64:
+            return base64.b64decode(b64)
+    return None
 
 
 def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
-    """Google's native Gemini image-generation model ("Nano Banana"),
-    called against the Gemini Developer API (generativelanguage.googleapis.
-    com) — VAPE's real image-generation route (explicit direction,
-    2026-07-28, replacing the xAI-based generate_image() that was built and
-    then fully removed the day before over an unrelated xAI credit
-    constraint — image generation is Google's own infrastructure, not a
-    third-party paid API, so that constraint doesn't apply here).
+    """VAPE's real AI image-generation route. Tries two Google image
+    surfaces in order:
 
-    NOT Vertex AI, despite every other Google-model call in this file
-    (_call_vertex_tuned() above) going through Vertex's publisher-model
-    generateContent endpoint. Confirmed by a real HTTP 404 from the first
-    live dispatch that tried exactly that path: "Publisher model
-    projects/.../publishers/google/models/gemini-3.1-flash-lite-image was
-    not found or your project does not have access to it." This model
-    (Nano Banana 2 Lite) launched on the Gemini API surface for developers
-    and isn't mirrored into Vertex's Model Garden publisher-model path (its
-    own docs page is literally titled "Gemini 3.1 Flash Lite Image |
-    Gemini API | Google AI for Developers", not a Vertex AI doc). Switching
-    to Vertex-hosted auth does NOT fix that — the model genuinely doesn't
-    exist on that surface regardless of auth mechanism. This still reaches
-    generativelanguage.googleapis.com directly.
+    1. Vertex AI's Imagen (_call_vertex_imagen() above) when
+       VAPE_VERTEX_ACCESS_TOKEN is set -- the ADC/OAuth-native path (no API
+       key, explicit direction 2026-08-01), reusing the same WIF-minted
+       token _call_vertex_tuned() already uses.
+    2. The Gemini Developer API's own image model ("Nano Banana",
+       gemini-3.1-flash-lite-image) via generativelanguage.googleapis.com,
+       using GEMINI_API_KEY -- the original, still-supported path, kept as
+       a fallback for a workflow without the WIF auth step wired in, or for
+       when Imagen itself errors.
 
-    Auth: prefers the same WIF-minted ADC access token already used by
-    _call_vertex_tuned() (VAPE_VERTEX_ACCESS_TOKEN) when set, via OAuth
-    Bearer + x-goog-user-project — Google's own documented alternative to
-    an API key for this exact host (ai.google.dev/gemini-api/docs/oauth).
-    Real gap this closes: a GEMINI_API_KEY minted before its GCP project's
-    billing was linked stays cached on the free tier's limit:0 image quota
-    even after billing is linked after the fact (confirmed live,
-    2026-08-01 — HTTP 429 "resource-exhausted... limit: 0" on every
-    dispatch); an OAuth token tied directly to the (already billing-linked)
-    project's live IAM identity isn't subject to that per-key snapshot.
-    Falls back to GEMINI_API_KEY's x-goog-api-key header (the original,
-    still-supported auth path) when no token is set, so a workflow without
-    the WIF auth step wired in still behaves exactly as before.
+    History: this used to also try an OAuth Bearer variant of path 2 (same
+    generativelanguage.googleapis.com host, VAPE_VERTEX_ACCESS_TOKEN as a
+    Bearer token instead of x-goog-api-key) as the preferred path, based on
+    that host's own documented OAuth support (ai.google.dev/gemini-api/docs/
+    oauth). Removed after live confirmation (2026-08-01) that this
+    specific method -- generateContent -- rejects OAuth tokens outright
+    (HTTP 403 ACCESS_TOKEN_SCOPE_INSUFFICIENT) no matter the token's scope
+    or the service account's IAM grants or the API's enabled state; that
+    host's OAuth support only covers its Retriever/Tuning sub-APIs, never
+    inference. Vertex Imagen (path 1) is the real fix: an actual different
+    Google product surface built around OAuth/ADC as its native auth,
+    rather than the same rejected mechanism on the same host.
 
     Returns raw image bytes (already base64-decoded) on success, or None on
     any failure/misconfiguration (including neither auth method configured)
-    — callers must degrade to a real scraped photo, then VAPE's brand mark,
-    exactly like every other best-effort image tier in this repo. Never
-    raises."""
+    — callers must degrade to VAPE's brand mark, exactly like every other
+    best-effort image tier in this repo. Never raises."""
     token = os.getenv("VAPE_VERTEX_ACCESS_TOKEN")
+    if token:
+        image = _call_vertex_imagen(prompt, aspect_ratio, timeout)
+        if image:
+            return image
+
     key = os.getenv("GEMINI_API_KEY")
-    if not token and not key:
+    if not key:
         return None
     model = os.getenv("VAPE_GEMINI_IMAGE_MODEL", GEMINI_IMAGE_DEFAULT_MODEL)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -719,15 +792,11 @@ def ask_gemini_image(prompt, *, aspect_ratio="16:9", timeout=60):
             "imageConfig": {"aspectRatio": aspect_ratio},
         },
     }).encode()
-    headers = {"Content-Type": "application/json", "User-Agent": "VAPE-PrivateEye/1.0"}
-    if token:
-        project = (os.getenv("VAPE_VERTEX_PROJECT_ID") or os.getenv("GOOGLE_CLOUD_PROJECT")
-                   or os.getenv("CLOUDSDK_CORE_PROJECT")
-                   or os.getenv("VAPE_VERTEX_PROJECT_NUMBER", VERTEX_TUNED_DEFAULT_PROJECT_NUMBER))
-        headers["Authorization"] = f"Bearer {token}"
-        headers["x-goog-user-project"] = project
-    else:
-        headers["x-goog-api-key"] = key
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "VAPE-PrivateEye/1.0",
+        "x-goog-api-key": key,
+    }
     req = urllib.request.Request(url, data=payload, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
