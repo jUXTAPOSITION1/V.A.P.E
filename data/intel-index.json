@@ -1,16 +1,16 @@
 {
-  "generated": "2026-08-01T14:52:56Z",
+  "generated": "2026-08-01T15:07:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 487,
+    "reports": 488,
     "reports_by_type": {
+      "macro": 26,
       "bounty": 114,
       "security": 89,
       "base": 99,
       "sentiment": 51,
       "bug": 4,
       "mainnet": 4,
-      "macro": 25,
       "virtuals": 97,
       "skillforge": 4
     },
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-145256-0xA3f75166.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_142710.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T14:27:10Z",
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-01-15.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-01T15:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: WMTX / WETH +58% 24h (liq $17880.5626) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_142710.md",
-      "bytes": 16523
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.45%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-01-15.md",
+      "bytes": 2046
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-01-15.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-01T15:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.45%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-01-15.md",
+      "bytes": 2046
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "The feed records 10 incidents over the last 7 days with a computed HIGH threat level and zero events reaching or exceeding $50M in the prior 14 days. Losses range from negligible ($0.0M on Zilliqa) to $24.15M (AFX Bridge private-key compromise on Arbitrum), with other notable figures including $9.7M (Triple-A hot-wallet compromise across ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-02.md",
       "bytes": 7288
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260730_000049.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-30T00:00:49Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_000049.md",
-      "bytes": 15635
     }
   ],
   "broadcasts": [
