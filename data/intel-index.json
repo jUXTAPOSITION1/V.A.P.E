@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-01T18:11:16Z",
+  "generated": "2026-08-01T18:19:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 489,
+    "reports": 490,
     "reports_by_type": {
       "bounty": 115,
+      "security": 90,
       "macro": 26,
-      "security": 89,
       "base": 99,
       "sentiment": 51,
       "bug": 4,
@@ -621,6 +621,17 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: Claude / USDC +62% 24h (liq $1052095.8427) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_180208.md",
       "bytes": 17175
+    },
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-18.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T18:00Z",
+      "threat": null,
+      "summary": "The feed shows 7 incidents in the last 7 days, all under $10M with no incidents =$50M in the prior 14 days. Confirmed losses include Garden ($0.45M, private key compromise across Ethereum/Base/Arbitrum/BSC), ChainConnect ($0.65M, unauthorized access on Ethereum/BSC/Avalanche/Polygon), Triple-A ($9.7M, hot wallet compromise on Ethereum/Tro",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-18.md",
+      "bytes": 6739
     },
     {
       "kind": "intel",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 04:08 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-04.md",
       "bytes": 3131
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260730_035744.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-30T03:57:44Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_035744.md",
-      "bytes": 17556
     }
   ],
   "broadcasts": [
