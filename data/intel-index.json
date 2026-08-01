@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-01T22:57:26Z",
+  "generated": "2026-08-01T23:01:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 495,
+    "reports": 496,
     "reports_by_type": {
-      "bounty": 117,
+      "bounty": 118,
       "base": 100,
       "sentiment": 52,
       "security": 91,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260801_215737.md",
+      "file": "bounty_report_20260801_230003.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T21:57:37Z",
+      "date": "2026-08-01T23:00:03Z",
       "threat": null,
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_215737.md",
-      "bytes": 17392
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_230003.md",
+      "bytes": 16660
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260801_230003.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-01T23:00:03Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_230003.md",
+      "bytes": 16660
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 10:59 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-10.md",
       "bytes": 3664
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260730_093212.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-30T09:32:12Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_093212.md",
-      "bytes": 14403
     }
   ],
   "broadcasts": [
