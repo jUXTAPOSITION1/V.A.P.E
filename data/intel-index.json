@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-01T02:49:47Z",
+  "generated": "2026-08-01T02:54:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 477,
+    "reports": 478,
     "reports_by_type": {
+      "security": 87,
       "bug": 4,
-      "security": 86,
       "mainnet": 4,
       "bounty": 110,
       "sentiment": 50,
@@ -38,14 +38,14 @@
     },
     "report": {
       "kind": "intel",
-      "type": "bug",
-      "file": "bug-bounty-intel-2026-08-01-02.md",
-      "title": "Bug Bounty Intelligence Report \u2014 Base & Virtuals Protocol",
+      "type": "security",
+      "file": "security-2026-08-01-0254.md",
+      "title": "VAPE Security Sweep Report",
       "date": "2026-08-01T02:00Z",
-      "threat": null,
-      "summary": "Real check: searched for a live Virtuals Protocol Immunefi listing this cycle. No matching immunefi.com listing found in this cycle's search results.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/bug-bounty-intel-2026-08-01-02.md",
-      "bytes": 2690
+      "threat": "HIGH",
+      "summary": "The global on-chain threat level is HIGH, driven by a significant volume of 7 incidents in the last 7 days, though no major exploits exceeding $50M have occurred in the last 14 days. Across the 15 incidents tracked over the last two weeks, several recurring attack vectors stand out: Private Key & Hot Wallet Compromises: This remains one o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-0254.md",
+      "bytes": 8450
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-01-0254.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-01T02:00Z",
+      "threat": "HIGH",
+      "summary": "The global on-chain threat level is HIGH, driven by a significant volume of 7 incidents in the last 7 days, though no major exploits exceeding $50M have occurred in the last 14 days. Across the 15 incidents tracked over the last two weeks, several recurring attack vectors stand out: Private Key & Hot Wallet Compromises: This remains one o",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-0254.md",
+      "bytes": 8450
+    },
     {
       "kind": "intel",
       "type": "bug",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-29 15:10 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-29-15.md",
       "bytes": 3063
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-29-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-29T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (29, prior day 29) and global market cap 24h change (-0.25%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-29-15.md",
-      "bytes": 2052
     }
   ],
   "broadcasts": [
