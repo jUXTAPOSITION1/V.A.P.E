@@ -767,7 +767,7 @@ class TestGeminiImage:
 
         def fake_urlopen(req, timeout=None):
             calls.append(req.full_url)
-            if "aiplatform.googleapis.com" in req.full_url:
+            if urllib.parse.urlparse(req.full_url).hostname == "us-central1-aiplatform.googleapis.com":
                 return _fake_imagen_response("")
             return _fake_image_response("ZmFrZQ==")
 
@@ -775,8 +775,8 @@ class TestGeminiImage:
             result = llm.ask_gemini_image("prompt")
         assert result == b"fake"
         assert len(calls) == 2
-        assert "aiplatform.googleapis.com" in calls[0]
-        assert "generativelanguage.googleapis.com" in calls[1]
+        assert urllib.parse.urlparse(calls[0]).hostname == "us-central1-aiplatform.googleapis.com"
+        assert urllib.parse.urlparse(calls[1]).hostname == "generativelanguage.googleapis.com"
 
     def test_vertex_imagen_project_resolution_order(self, monkeypatch):
         # VAPE_VERTEX_PROJECT_ID > GOOGLE_CLOUD_PROJECT > CLOUDSDK_CORE_PROJECT >
