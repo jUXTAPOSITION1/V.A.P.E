@@ -15,14 +15,14 @@ name: VAPE Reviewer (automated security-forward PR review)
 # itself enforces on every other workflow here.
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
 
 # Minimal top-level baseline (satisfies scripts/security_lint.py's "declare
 # permissions explicitly, don't rely on the default token scope" check) —
-# `pull-requests: write` is granted at the job level below instead of here,
-# so it's scoped to the one job that actually posts a comment (zizmor
-# excessive-permissions: a workflow-level grant applies to every job,
-# including any added later, wider than this workflow actually needs).
+# `pull-requests: write` / `contents: write` are granted at the job level
+# below instead of here, each scoped to the one job that actually needs it
+# (zizmor excessive-permissions: a workflow-level grant applies to every
+# job, including any added later, wider than this workflow actually needs).
 permissions:
   contents: read
 
@@ -32,6 +32,7 @@ concurrency:
 
 jobs:
   review:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,7 +44,7 @@ jobs:
             secrets.OPENROUTER_API_KEY != '' || secrets.GITHUB_MODELS_TOKEN != '' ||
             secrets.TOGETHER_API_KEY != '' || secrets.OCI_GENAI_API_KEY != '' }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           persist-credentials: false
@@ -69,3 +70,39 @@ jobs:
       - name: Skip review (no LLM secrets configured yet)
         if: ${{ env.HAS_ANY_LLM_KEY == 'false' }}
         run: echo "No LLM provider key set — VAPE Reviewer needs at least one (see .env.example). Skipping."
+
+  persist-findings:
+    # Closes the real gap where scripts/code_lint.py's findings were only
+    # ever posted as an advisory comment on the `review` job above and then
+    # lost the moment the PR closed. Only runs once the PR actually merged
+    # (never on a closed-without-merging PR) and re-lints the merged tree at
+    # the real merge commit, so only what actually shipped gets logged — see
+    # agents/code_review.py::persist_merged_findings.
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+
+      - name: Persist surviving HIGH/CRITICAL code_lint findings
+        run: python3 -m agents.code_review --pr "$PR_NUMBER" --merge-sha "$MERGE_SHA"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit findings
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          scripts/ci_commit_push.sh \
+            "code_review: persist merged-PR findings (PR #$PR_NUMBER)" \
+            skillforge/memory/findings.jsonl

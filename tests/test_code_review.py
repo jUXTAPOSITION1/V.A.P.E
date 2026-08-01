@@ -6,6 +6,8 @@ call) to assert the plumbing — diff/file fetching, the deterministic pass,
 prompt construction, comment formatting, and honest degradation on
 failure — is correct without ever touching the network.
 """
+import json
+
 import agents.code_review as cr
 
 
@@ -335,3 +337,131 @@ def test_run_posts_combined_report_on_success(monkeypatch):
     assert len(fake.posted) == 1
     assert "Nothing found" in fake.posted[0]
     assert "via groq" in fake.posted[0]
+
+
+# ============================================================================
+# Findings persistence (Phase 2: closes the gap where code_lint.py's
+# findings never survived past the advisory PR comment) — triggered by
+# vape-reviewer.yml's pull_request:[closed] path via persist_merged_findings.
+# ============================================================================
+
+def test_select_persistable_findings_keeps_high_critical_only():
+    findings = [
+        ("HIGH", "agents/bad.py", 3, "eval() called on a dynamically-built string"),
+        ("MEDIUM", "docs/assets/hire.js", 10, "innerHTML assigned directly from 'msg'"),
+        ("CRITICAL", "agents/worse.py", 1, "pickle.loads() on a non-literal"),
+    ]
+    selected = cr._select_persistable_findings(findings)
+    assert [f[0] for f in selected] == ["HIGH", "CRITICAL"]
+
+
+def test_select_persistable_findings_drops_reviewed_exceptions():
+    findings = [
+        ("HIGH", "agents/bad.py", 3,
+         "eval() called on a dynamically-built string [Previously reviewed and confirmed a false "
+         "positive in this file: safe]"),
+        ("HIGH", "agents/other.py", 5, "eval() called on a dynamically-built string"),
+    ]
+    selected = cr._select_persistable_findings(findings)
+    assert len(selected) == 1
+    assert selected[0][1] == "agents/other.py"
+
+
+def test_already_persisted_true_on_match(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", lambda *a, **kw: [
+        {"metadata": {"pr_number": 42, "path": "agents/bad.py", "lineno": 3}},
+    ])
+    assert cr._already_persisted(42, "agents/bad.py", 3, "eval-exec-dynamic") is True
+
+
+def test_already_persisted_false_no_match(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", lambda *a, **kw: [
+        {"metadata": {"pr_number": 41, "path": "agents/bad.py", "lineno": 3}},
+    ])
+    assert cr._already_persisted(42, "agents/bad.py", 3, "eval-exec-dynamic") is False
+
+
+def test_already_persisted_false_when_memory_unavailable(monkeypatch):
+    monkeypatch.setattr(cr, "search_memory", None)
+    assert cr._already_persisted(42, "agents/bad.py", 3, "eval-exec-dynamic") is False
+
+
+def test_append_finding_direct_writes_jsonl(tmp_path, monkeypatch):
+    path = tmp_path / "findings.jsonl"
+    monkeypatch.setattr(cr, "FINDINGS_PATH", str(path))
+    entry = {"category": "finding", "severity": "HIGH", "title": "x"}
+    assert cr._append_finding_direct(entry) is True
+    lines = path.read_text().splitlines()
+    assert len(lines) == 1
+    assert json.loads(lines[0])["severity"] == "HIGH"
+
+
+def test_append_finding_direct_handles_write_failure(monkeypatch):
+    def broken_makedirs(*a, **kw):
+        raise OSError("no disk")
+    monkeypatch.setattr(cr.os, "makedirs", broken_makedirs)
+    assert cr._append_finding_direct({"category": "finding"}) is False
+
+
+def test_persist_merged_findings_returns_zero_without_merge_sha():
+    assert cr.persist_merged_findings(1, None) == 0
+
+
+def test_persist_merged_findings_returns_zero_on_fetch_error(monkeypatch):
+    fake = _FakeGitHub(head_ok=False, files_ok=False)
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    assert cr.persist_merged_findings(1, "deadbeef") == 0
+
+
+def test_persist_merged_findings_writes_high_findings_and_skips_medium(tmp_path, monkeypatch):
+    fake = _FakeGitHub(files=[
+        {"path": "agents/bad.py", "status": "modified"},
+        {"path": "docs/assets/hire.js", "status": "modified"},
+    ])
+    fake._file_contents["agents/bad.py"] = "eval(x)\n"
+    fake._file_contents["docs/assets/hire.js"] = "el.innerHTML = msg;\n"
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    monkeypatch.setattr(cr, "search_memory", None)  # no dedup lookups needed for a fresh PR
+    findings_path = tmp_path / "findings.jsonl"
+    monkeypatch.setattr(cr, "FINDINGS_PATH", str(findings_path))
+
+    n = cr.persist_merged_findings(7, "deadbeef")
+
+    assert n == 1  # only the HIGH eval() finding -- innerHTML is MEDIUM, not persisted
+    lines = [json.loads(line) for line in findings_path.read_text().splitlines()]
+    assert len(lines) == 1
+    assert lines[0]["severity"] == "HIGH"
+    assert lines[0]["metadata"]["pr_number"] == 7
+    assert lines[0]["metadata"]["path"] == "agents/bad.py"
+    assert "PR #7" in lines[0]["title"]
+
+
+def test_persist_merged_findings_skips_already_persisted(tmp_path, monkeypatch):
+    fake = _FakeGitHub(files=[{"path": "agents/bad.py", "status": "modified"}])
+    fake._file_contents["agents/bad.py"] = "eval(x)\n"
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    monkeypatch.setattr(cr, "search_memory", lambda *a, **kw: [
+        {"metadata": {"pr_number": 7, "path": "agents/bad.py", "lineno": 1}},
+    ])
+    findings_path = tmp_path / "findings.jsonl"
+    monkeypatch.setattr(cr, "FINDINGS_PATH", str(findings_path))
+
+    n = cr.persist_merged_findings(7, "deadbeef")
+
+    assert n == 0
+    assert not findings_path.exists()
+
+
+def test_persist_merged_findings_excludes_reviewed_exceptions(tmp_path, monkeypatch):
+    fake = _FakeGitHub(files=[{"path": "agents/bad.py", "status": "modified"}])
+    fake._file_contents["agents/bad.py"] = "eval(x)\n"
+    monkeypatch.setattr(cr, "_gh", lambda: fake)
+    monkeypatch.setattr(cr, "search_memory", None)
+    monkeypatch.setattr(cr, "_find_reviewed_exception", lambda path, msg: "confirmed safe in this context")
+    findings_path = tmp_path / "findings.jsonl"
+    monkeypatch.setattr(cr, "FINDINGS_PATH", str(findings_path))
+
+    n = cr.persist_merged_findings(7, "deadbeef")
+
+    assert n == 0
+    assert not findings_path.exists()
