@@ -360,7 +360,12 @@ def write_story(candidate):
     if _is_derivative_headline(synth["header"].get("headline"), candidate["title"]):
         return None
     headline = synth["header"]["headline"].strip()
-    dek = synth["header"].get("dek") or ""
+    # Same deterministic-enforcement gap as the headline above (CodeRabbit,
+    # PR #390): the DEK instruction asks for a genuine sub-headline, but a
+    # blank DEK passed straight through. dek = "" or None both fail this.
+    dek = (synth["header"].get("dek") or "").strip()
+    if not dek:
+        return None
     body, fact_checked = _editorial_pass(grounding, body)
 
     slug = nc.slugify(headline)

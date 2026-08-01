@@ -342,6 +342,28 @@ def test_write_story_returns_none_when_headline_copies_source_title(tmp_path, mo
     editor.assert_not_called()
 
 
+def test_write_story_returns_none_when_dek_is_blank(tmp_path, monkeypatch):
+    """The DEK instruction asks for a genuine sub-headline -- a blank DEK
+    (empty string or None) must fail the same deterministic gate as a
+    blank/derivative headline, not pass through silently (CodeRabbit,
+    PR #390)."""
+    monkeypatch.setattr(nc, "NEWS_DIR", str(tmp_path))
+    candidate = {"title": "Some real headline", "url": "https://example.com/story",
+                 "source": "CoinDesk", "published": "2026-07-28T09:00:00Z", "topic": "crypto-markets",
+                 "snippet": "A real outlet-provided summary."}
+
+    with mock.patch("agents.intel_common.web_search_snippets",
+                     return_value={"available": True, "provider": "tavily", "results": []}), \
+         mock.patch.object(nc, "scrape_article_text", return_value=None), \
+         mock.patch("agents.research_engine.synthesize",
+                     return_value=_synth("A Genuinely Original Headline", "  ", "Body text.")), \
+         mock.patch("agents.intel_common.grok_analysis") as editor:
+        result = news_reporter.write_story(candidate)
+
+    assert result is None
+    editor.assert_not_called()
+
+
 def test_write_story_proceeds_when_only_snippet_is_real(tmp_path, monkeypatch):
     """A native-RSS candidate.get('snippet') alone is enough real substance
     to clear the gate, even with no scrape and no corroboration."""
