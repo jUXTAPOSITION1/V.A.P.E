@@ -700,6 +700,10 @@ class TestSynthesize:
         assert "Key Statements" not in system
         assert "Context & Impact" not in system
         assert "Adapt your structure to the story." in system
+        assert re_engine.TASK_TYPES["news_report"]["required_sections"] == [
+            "Gaps & Confidence",
+            "Research Methodology and Sources",
+        ]
 
     def test_thin_evidence_does_not_request_required_headings(self):
         # The thin-evidence path (item #2) explicitly tells the model to

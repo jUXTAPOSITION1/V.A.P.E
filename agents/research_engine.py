@@ -744,7 +744,9 @@ def _required_sections_instruction(task_type):
     across all task types, so review_output() is a safety net catching a
     model that ignored this instruction, not the only enforcement that
     exists. Returns "" if a task type has no model-facing sections (should
-    not happen for any currently-defined task type)."""
+    not happen for any currently-defined task type, though it's valid when a
+    task type's required_sections are all mechanically rendered -- e.g.
+    news_report, see its own comment)."""
     sections = [s for s in TASK_TYPES[task_type]["required_sections"] if s not in _MECHANICALLY_RENDERED_SECTIONS]
     if not sections:
         return ""
