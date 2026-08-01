@@ -58,7 +58,6 @@ Picks NEWS_REPORTER_PICKS stories per run (env, default 1) — run cadence
 Usage: python agents/news_reporter.py
 """
 import os
-import re
 import sys
 import json
 from datetime import datetime, timezone
@@ -67,6 +66,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents import news_common as nc  # noqa: E402
 from agents import intel_common as ic  # noqa: E402
 from agents import llm  # noqa: E402
+from agents import research_engine  # noqa: E402
 
 FALLBACK_IMAGE = "assets/logo-v-256.png"  # VAPE's own brand mark -- used only when no AI image or source photo is available
 
@@ -97,14 +97,6 @@ def _pick_candidates(state, n):
             if h not in picked and len(picked) < n:
                 picked.append(h)
     return picked
-
-
-def _parse_llm_output(text, fallback_title):
-    headline, dek, body = fallback_title, "", text
-    m = re.match(r"\s*HEADLINE:\s*(.+?)\n\s*DEK:\s*(.+?)\n-{3,}\n(.*)", text, re.S | re.I)
-    if m:
-        headline, dek, body = m.group(1).strip(), m.group(2).strip(), m.group(3).strip()
-    return headline, dek, body
 
 
 def _is_llm_unavailable(text):
@@ -265,18 +257,27 @@ def write_story(candidate):
         "or complicates the original story, say so explicitly. The one hard rule that never bends "
         "even under this house style: never invent a quote, figure, or fact not in the material "
         "above or in a real source you found — authority of voice, not invention, is the standard. "
-        "Respond in EXACTLY this format (no extra commentary before or after):\n\n"
-        "HEADLINE: <your own sharp, factually accurate headline for this story, not just a copy of the original>\n"
-        "DEK: <one punchy sentence summarizing the stakes, plain text, no markdown>\n"
-        "---\n"
-        "<the full report in markdown, using ## subheadings, at least 400 words if the material "
-        "genuinely supports it>"
+        "Write the full report body in markdown, using ## subheadings, at least 400 words if the "
+        "material genuinely supports it."
     )
-    raw = ic.grok_analysis(
-        "staff reporter at VAPE Wire, writing under the byline 'VAPE Reporter'",
-        grounding, instructions=instructions, max_tokens=2200, temperature=0.6,
+    result = {
+        "topic": candidate["title"], "task_type": "news_report", "known_facts": {},
+        "findings": [], "deep_extracts": [], "raw_user_block": grounding, "log": {},
+    }
+    synth = research_engine.synthesize(
+        result, role="staff reporter at VAPE Wire, writing under the byline 'VAPE Reporter'",
+        extra_instructions=instructions,
+        header_fields=[
+            {"name": "headline", "label": "HEADLINE"},
+            {"name": "dek", "label": "DEK"},
+        ],
+        header_delimiter="---", trailers=[], max_tokens=2200, temperature=0.6,
     )
-    headline, dek, body = _parse_llm_output(raw, candidate["title"])
+    body = (synth.get("narrative") or "").strip()
+    if not body or body.startswith("_Synthesis unavailable"):
+        return None
+    headline = synth["header"].get("headline") or candidate["title"]
+    dek = synth["header"].get("dek") or ""
     body, fact_checked = _editorial_pass(grounding, body)
 
     slug = nc.slugify(headline)
