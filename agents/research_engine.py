@@ -108,8 +108,21 @@ TASK_TYPES = {
         "lenses": ["what happened / primary announcement", "key actors, quotes, or official statements",
                    "broader market or ecosystem context", "immediate impact or reaction",
                    "related or prior events"],
-        "required_sections": ["What Happened", "Key Statements", "Context & Impact",
-                               "Gaps & Confidence", "Research Methodology and Sources"],
+        # Deliberately no free-text headings here (unlike every other task
+        # type) -- confirmed real, live bug (2026-08-01): synthesize()'s
+        # non-thin branch unconditionally injects "_required_sections_
+        # instruction()"'s "structure your narrative using these exact
+        # Markdown headings, in this order" rule BEFORE agents/
+        # news_reporter.py's own extra_instructions are appended, so the
+        # rigid "What Happened"/"Key Statements"/"Context & Impact"
+        # heading mandate that used to live here always won out over
+        # news_reporter.py's carefully-written free-form "adapt your
+        # structure to what the story actually is" instruction -- every
+        # live article kept the same three-heading template regardless.
+        # Only the two mechanically-rendered sections remain, which
+        # _required_sections_instruction() already filters out, so no
+        # heading mandate is injected for this task type at all.
+        "required_sections": ["Gaps & Confidence", "Research Methodology and Sources"],
         "framing": "what a reader should watch for next, grounded in the specific open questions found",
     },
     "investigation": {

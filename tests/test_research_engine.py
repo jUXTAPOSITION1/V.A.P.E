@@ -680,6 +680,27 @@ class TestSynthesize:
         assert "## Findings" in system
         assert "## Known Facts" not in system  # threat_analysis-only heading
 
+    def test_news_report_injects_no_rigid_heading_mandate(self):
+        # Real, live bug (2026-08-01): news_report's required_sections used
+        # to hardcode "What Happened"/"Key Statements"/"Context & Impact",
+        # and this instruction was injected BEFORE agents/news_reporter.py's
+        # own extra_instructions in the same prompt -- every live article
+        # kept the same three-heading template regardless of how carefully
+        # news_reporter.py's own "adapt your structure" instruction was
+        # worded, because the rigid mandate always won. Confirmed via the
+        # actual published article at intel/news/news-2026-08-01-
+        # centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.md.
+        result = dict(self._rich_result())
+        result["task_type"] = "news_report"
+        with mock.patch("agents.llm.ask_oci_grok_safe", return_value=("text", "oci_grok")) as m:
+            re_engine.synthesize(result, extra_instructions="Adapt your structure to the story.")
+        system, _user = m.call_args[0]
+        assert "exact Markdown headings" not in system
+        assert "What Happened" not in system
+        assert "Key Statements" not in system
+        assert "Context & Impact" not in system
+        assert "Adapt your structure to the story." in system
+
     def test_thin_evidence_does_not_request_required_headings(self):
         # The thin-evidence path (item #2) explicitly tells the model to
         # skip headings it has nothing to fill -- baking in a hard heading
