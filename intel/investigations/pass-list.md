@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-08-01T16:39:58Z — 68 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-08-01T16:55:05Z — 69 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| VM888 | Ethereum | `0x062570121e9519C77CB71C7936B6C1f76C7B1119` | 80/100 | 1 | 2026-08-01T16:55:05Z |
 | BANK | BNB Chain | `0x49083d8E7DAadA7EDe74c04Ed52EC512Fd9f006C` | 90/100 | 1 | 2026-07-31T16:01:24Z |
 | NOCHILL | Avalanche | `0xAcFb898Cff266E53278cC0124fC2C7C94C8cB9a5` | 90/100 | 1 | 2026-07-31T15:00:36Z |
 | Mars | BNB Chain | `0x1Fd448D0361c3212961a70930f3129A45f425B68` | 100/100 | 1 | 2026-07-31T02:26:28Z |
