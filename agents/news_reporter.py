@@ -38,7 +38,10 @@ photo of a story it broke is a real copyright exposure VAPE shouldn't carry,
 regardless of technical feasibility; revised again 2026-08-01, see below):
   1. AI-generated, described by a fresh, director-style, story-specific
      prompt (_image_prompt(), grounded in the real headline/dek/body, not a
-     generic template) and tried against two independent models in order:
+     generic template, and picking a real art/design style at random each
+     call from IMAGE_STYLES -- 2026-08-01, after every published image
+     collapsed into the same photorealistic/high-tech look with no style
+     variety at all) and tried against two independent models in order:
      xAI's Grok Imagine Image first (agents/llm.py::ask_xai_image(),
      grok-imagine-image -- the model that actually works today),
      then Google's Gemini image model (agents/llm.py::ask_gemini_image()) as
@@ -93,6 +96,7 @@ Usage: python agents/news_reporter.py
 """
 import difflib
 import os
+import random
 import sys
 import json
 from datetime import datetime, timezone
@@ -324,6 +328,60 @@ def _editorial_pass(grounding, draft_body):
     return edited.strip(), True
 
 
+# Every story before this rotation used the same hardcoded STYLE clause
+# ("photorealistic or cinematic-documentary") -- confirmed by a real user
+# report that every published image collapsed into the same generic
+# photorealistic/high-tech look regardless of story content, precisely
+# because that single style option was the only one the model was ever
+# given to pick. Rotating a real one of these into _image_prompt()'s own
+# instructions each call is what actually forces variety -- the model can't
+# default to photorealism if the instructions themselves name a different
+# style outright. One entry deliberately keeps a photorealistic option
+# alive (news imagery sometimes genuinely calls for it), the rest span
+# historical, painterly, print, and contemporary design movements so no two
+# consecutive stories look like they came out of the same generator.
+IMAGE_STYLES = [
+    # Classic & historical
+    "mid-century modern graphic design, limited color palette, geometric shapes, clean Swiss-inspired layout, 1950s-60s corporate aesthetic",
+    "Art Deco financial poster style, elegant gold and deep navy, strong vertical lines, luxurious geometric patterns, 1920s-30s elegance",
+    "Soviet constructivist poster, bold diagonals, limited red-black-white palette, dynamic composition, strong typographic energy in the composition itself",
+    "Japanese ukiyo-e woodblock print style reinterpreted for modern finance, bold outlines, flat color fields, traditional composition with a contemporary subject",
+    "Victorian-era engraving style, fine cross-hatching, detailed linework, sepia and black ink on aged paper texture",
+    # Retro-futurism & nostalgia
+    "1970s retro-futurism, chrome, orange and teal, optimistic space-age design, analog gauges",
+    "1980s synthwave / vaporwave aesthetic, neon pink and cyan, sunset gradients, subtle CRT scanline texture, nostalgic digital glitch",
+    "early 1990s cyberpunk, rain-soaked neon city, reflective surfaces, Blade Runner atmosphere, high contrast",
+    "Atomic Age design from the 1950s, starbursts, boomerang shapes, pastel and chrome, optimistic nuclear-era futurism",
+    "Y2K / early internet aesthetic, glossy plastics, chrome text-free surfaces, metallic gradients, late-90s tech optimism",
+    # Fine art & painting
+    "Impressionist painting, visible loose brushstrokes, soft atmospheric light, Monet-inspired color fields, emotional rather than precise",
+    "Expressionist painting, bold distorted forms, intense emotional color, thick impasto texture, psychological tension",
+    "Cubist interpretation, fragmented geometric planes, multiple viewpoints shown simultaneously",
+    "Surrealist scene, dreamlike juxtaposition, Magritte- or Dali-style atmosphere, unexpected scale and logic",
+    "abstract expressionist, energetic gestural marks, large color fields, Rothko- or de Kooning-style energy",
+    # Design systems & print
+    "Swiss International Style (International Typographic Style) applied to imagery, extreme grid discipline, clean forms, limited color, precise alignment",
+    "Risograph print aesthetic, limited ink colors, heavy grain texture, slight misregistration, DIY zine feel",
+    "screenprint / silkscreen poster style, bold flat colors, high contrast, slight ink imperfections",
+    "blueprint / architectural drawing style, precise technical lines, white on blue or black on white, measurement-mark textures",
+    "letterpress / wood type poster texture, tactile ink impression, bold woodblock forms, vintage printing texture",
+    # Modern & contemporary
+    "high-tech minimalist / brutalist tech aesthetic, stark dark background, precise cyan geometry, extreme negative space, cold precision",
+    "contemporary editorial illustration, sophisticated limited palette, conceptual visual metaphor, clean but not sterile",
+    "Memphis Group design from the 1980s, clashing patterns, bright primary colors, playful geometric shapes, postmodern energy",
+    "Scandinavian minimalism, soft neutrals, natural light, quiet composition, restrained elegance",
+    "neo-geo / 1980s geometric abstraction, hard-edged shapes, industrial color, sharp contrast",
+    # Experimental & atmospheric
+    "glitch art / data-moshing aesthetic, digital corruption patterns, colorful pixel-sorted textures, broken interface fragments",
+    "dark academic / mysterious archive style, aged paper, wax seals, faint diagrams, candlelit atmosphere",
+    "bioluminescent / organic-tech hybrid, glowing organic forms mixed with circuitry, deep ocean or night forest palette",
+    "Chinese ink wash painting (shuimo), elegant black ink on rice paper, flowing brush energy, negative space as composition",
+    # Kept deliberately in the rotation, not the default -- photorealism is
+    # still the right call sometimes, it just shouldn't be the only option.
+    "photorealistic photojournalism, suitable for a professional news report, cinematic-documentary treatment",
+]
+
+
 def _image_prompt(headline, dek, body, topic_label):
     """One vivid, director-style text-to-image prompt for this specific
     story -- not a generic per-topic template. Follows the formula xAI's
@@ -337,32 +395,44 @@ def _image_prompt(headline, dek, body, topic_label):
     likeness of a real named person (defamation/deepfake risk) and never
     any rendered text or logos (VAPE's own wordmark gets stamped on
     separately by brand_image(); a third party's brand/trademark has no
-    business appearing in VAPE's own illustration). Returns a plain-text
-    prompt string, or None if the LLM call fails -- callers must treat that
-    as "skip AI generation this story," never invent a placeholder prompt."""
+    business appearing in VAPE's own illustration).
+
+    The STYLE clause is picked fresh each call from IMAGE_STYLES (explicit
+    direction, 2026-08-01, after every published image collapsed into the
+    same photorealistic/high-tech look) rather than hardcoded -- models
+    weight early, explicit instructions heavily, so naming a real style
+    outright is what actually produces variety; a generic "make it more
+    artistic" ask does not. Returns a plain-text prompt string, or None if
+    the LLM call fails -- callers must treat that as "skip AI generation
+    this story," never invent a placeholder prompt."""
+    style = random.choice(IMAGE_STYLES)
     instructions = (
-        "Write ONE image-generation prompt for the photo that should accompany this news story, "
+        "Write ONE image-generation prompt for the illustration that should accompany this news story, "
         "40-80 words, as flowing natural-language sentences -- never a keyword list. Cover, in order: "
         "SUBJECT (a concrete, real-world subject grounded in the story below -- e.g. a close-up of "
         "physical coins/currency, a trading floor, server racks, a courthouse exterior, a city skyline, "
         "hands at a keyboard -- never an abstract 'crypto' cliche unless the story truly has no more "
         "concrete subject; lead with the subject, the first words carry the most weight); SCENE/ACTION "
         "(what's happening in the frame); SETTING (where); MOOD/ATMOSPHERE (grounded in the story's real "
-        "stakes -- for security/exploit/hack stories lean into a tense, high-tech, slightly noir "
-        "atmosphere rather than flat stock photography); LIGHTING (be specific -- e.g. dramatic side "
-        "lighting, cold blue monitor glow, golden hour, harsh overheads); STYLE (photorealistic or "
-        "cinematic-documentary, suitable for a professional news report); CAMERA/COMPOSITION (shot type, "
-        "angle, lens feel -- e.g. wide establishing shot, shallow depth of field, 35mm lens look). Avoid "
-        "empty filler words like 'stunning', 'beautiful', 'high quality', or 'detailed' -- earn the "
-        "impression through concrete specifics instead. Do NOT include any text, words, numbers, logos, "
-        "or brand marks anywhere in the image -- describe a clean photographic scene only. Do NOT "
-        "depict any specific named real person's likeness. Output ONLY the prompt itself, one "
-        "paragraph, no preamble, no quotation marks, no commentary.\n\n"
+        "stakes -- for security/exploit/hack stories lean into tension and stakes rather than a flat, "
+        "neutral illustration); LIGHTING OR LIGHT TREATMENT (be specific and appropriate to the style "
+        "below -- e.g. dramatic side lighting, cold blue glow, golden hour, flat poster lighting, ink "
+        "wash gradients, whatever the named style actually calls for); "
+        f"STYLE (this is fixed for this image, follow it precisely and commit to it fully -- {style}); "
+        "CAMERA/COMPOSITION (shot type, angle, framing appropriate to the style -- a painting or print "
+        "style has its own compositional logic, it does not need a camera lens described). Avoid empty "
+        "filler words like 'stunning', 'beautiful', 'high quality', or 'detailed' -- earn the impression "
+        "through concrete specifics instead. Do NOT include any text, words, numbers, logos, or brand "
+        "marks anywhere in the image -- describe a clean scene only. Do NOT depict any specific named "
+        "real person's likeness. Unless the named style above is itself photorealistic, do not default "
+        "back to photorealism, a stock-photo look, or a generic modern office/trading-floor interior -- "
+        "commit fully to the named style instead. Output ONLY the prompt itself, one paragraph, no "
+        "preamble, no quotation marks, no commentary.\n\n"
         f"HEADLINE: {headline}\nDEK: {dek}\nBEAT: {topic_label}\n\nSTORY BODY:\n{body[:1500]}"
     )
     prompt = ic.grok_analysis(
-        "director-level visual prompt engineer for VAPE Wire, specializing in Grok Imagine "
-        "photorealistic news imagery",
+        "director-level visual prompt engineer for VAPE Wire, fluent across historical, painterly, "
+        "print, and contemporary design movements as well as photorealistic news imagery",
         f"{headline}\n{dek}", instructions=instructions, max_tokens=300, temperature=0.7,
     )
     if _is_llm_unavailable(prompt) or not prompt.strip():

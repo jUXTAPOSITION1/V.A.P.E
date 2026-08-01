@@ -281,6 +281,40 @@ def test_image_prompt_returns_stripped_text():
         assert news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets") == "A close-up of gold coins."
 
 
+def test_image_styles_are_all_nonempty_strings():
+    assert len(news_reporter.IMAGE_STYLES) > 10
+    for style in news_reporter.IMAGE_STYLES:
+        assert isinstance(style, str) and style.strip()
+
+
+def test_image_prompt_picks_a_style_and_bakes_it_into_the_instructions():
+    """The whole point of the rotation is that the model can't fall back to
+    a hardcoded photorealistic default -- confirm the chosen style's own
+    text actually reaches grok_analysis()'s instructions, not just that a
+    style was picked and silently ignored."""
+    with mock.patch("agents.news_reporter.random.choice", return_value=news_reporter.IMAGE_STYLES[3]) as choice, \
+         mock.patch("agents.intel_common.grok_analysis", return_value="a prompt") as grok:
+        news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets")
+    choice.assert_called_once_with(news_reporter.IMAGE_STYLES)
+    instructions = grok.call_args.kwargs["instructions"]
+    assert news_reporter.IMAGE_STYLES[3] in instructions
+
+
+def test_image_prompt_style_rotation_produces_more_than_one_style_across_many_calls():
+    """A real regression this guards against: a rotation list that never
+    actually gets exercised (e.g. a copy-paste bug that always indexes [0])
+    would look correct at a glance but always emit the same style anyway."""
+    seen_styles = set()
+    with mock.patch("agents.intel_common.grok_analysis") as grok:
+        def _capture(*_args, **kwargs):
+            seen_styles.add(next(s for s in news_reporter.IMAGE_STYLES if s in kwargs["instructions"]))
+            return "a prompt"
+        grok.side_effect = _capture
+        for _ in range(60):
+            news_reporter._image_prompt("Headline", "Dek", "Body text", "Crypto Markets")
+    assert len(seen_styles) > 1
+
+
 def test_generate_ai_image_returns_none_when_no_prompt():
     with mock.patch.object(news_reporter, "_image_prompt", return_value=None):
         assert news_reporter._generate_ai_image("H", "D", "B", "Topic", "slug") is None
