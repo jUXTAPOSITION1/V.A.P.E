@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T00:27:25Z",
+  "generated": "2026-08-02T00:37:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 497,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 138,
     "investigations": 646,
-    "news": 45,
+    "news": 46,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-sec-enforcement-shakeup-14-year-veteran-sam-waldon-steps-dow.md",
+      "title": "SEC Enforcement Shakeup: 14-Year Veteran Sam Waldon Steps Down as Osman Nawaz Takes the Reins",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T00:37:00Z",
+      "published_et": "August 1, 2026 \u00b7 8:37 PM EDT",
+      "topic": "Regulation",
+      "dek": "The departure of the Division of Enforcement's second-in-command marks a pivotal leadership transition under Chairman Paul Atkins' newly minted administration.",
+      "image": "assets/news-images/sec-enforcement-shakeup-14-year-veteran-sam-waldon-steps-dow.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-sec-enforcement-shakeup-14-year-veteran-sam-waldon-steps-dow.md"
+    },
     {
       "file": "news-2026-08-01-centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.md",
       "title": "Centralization Crisis Deepens as Japanese Mining Giant SBI Crypto Shuts Down Bitcoin Pool",
