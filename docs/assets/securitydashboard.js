@@ -65,13 +65,77 @@ const CARD_DEFS = [
     { id: 'ledger-integrity', title: 'Ledger Integrity', laneIds: ['findings-seal', 'review-ledger'] },
 ];
 
+// A small custom Chart.js plugin (no external library, no hand-rolled orbit
+// physics) that adds three purely-decorative-but-real-data-driven touches to
+// the bubble charts below: a soft ambient glow behind each bubble, faint
+// dashed "orbit" lines from a fixed centroid to each bubble (Category Signal
+// Map only), and a centered text label for bubbles large enough to hold one
+// (the same letter/count already computed from real data — never a second,
+// separately-invented value). Registered once, opted into per-chart via
+// `options.plugins.secdashBubbleFx`.
+function registerSecdashChartPlugins() {
+    if (typeof Chart === 'undefined' || Chart.__secdashFxRegistered) return;
+    Chart.__secdashFxRegistered = true;
+    Chart.register({
+        id: 'secdashBubbleFx',
+        beforeDatasetsDraw(chart) {
+            const cfg = chart.config.options.plugins && chart.config.options.plugins.secdashBubbleFx;
+            if (!cfg) return;
+            const ctx = chart.ctx;
+            if (cfg.orbitCenter) {
+                const meta = chart.getDatasetMeta(0);
+                const cx = chart.scales.x.getPixelForValue(cfg.orbitCenter.x);
+                const cy = chart.scales.y.getPixelForValue(cfg.orbitCenter.y);
+                ctx.save();
+                ctx.strokeStyle = 'rgba(148, 163, 250, 0.16)';
+                ctx.setLineDash([2, 3]);
+                ctx.lineWidth = 1;
+                (meta.data || []).forEach(el => {
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(el.x, el.y);
+                    ctx.stroke();
+                });
+                ctx.restore();
+            }
+            if (cfg.glow) {
+                ctx.save();
+                ctx.shadowColor = 'rgba(148, 163, 250, 0.55)';
+                ctx.shadowBlur = 12;
+                chart.__secdashShadowOn = true;
+            }
+        },
+        afterDatasetsDraw(chart) {
+            const cfg = chart.config.options.plugins && chart.config.options.plugins.secdashBubbleFx;
+            if (!cfg) return;
+            const ctx = chart.ctx;
+            if (chart.__secdashShadowOn) { ctx.restore(); chart.__secdashShadowOn = false; }
+            if (cfg.centerLabel) {
+                const meta = chart.getDatasetMeta(0);
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = 'rgba(244, 244, 245, 0.92)';
+                (meta.data || []).forEach((el, i) => {
+                    const r = (cfg.pointRadii && cfg.pointRadii[i]) || 0;
+                    if (r < (cfg.minRadius || 9)) return;
+                    const text = cfg.centerLabel(i);
+                    if (!text) return;
+                    ctx.font = `600 ${Math.min(11, Math.max(8, r * 0.55))}px ui-monospace, monospace`;
+                    ctx.fillText(text, el.x, el.y);
+                });
+                ctx.restore();
+            }
+        },
+    });
+}
+
 const SecurityDashboard = {
     _data: null,
     _history: [],
     _lanes: [],
     _gaugeChart: null,
     _sevChart: null,
-    _verdictChart: null,
     _timelineChart: null,
     _signalMapChart: null,
     _timelineSeries: 'severity',
@@ -81,6 +145,7 @@ const SecurityDashboard = {
     _ledgerPageSize: 10,
 
     async init() {
+        registerSecdashChartPlugins();
         const [data, history] = await Promise.all([this._fetchJson(), this._fetchHistory()]);
         this._data = data;
         this._history = history;
@@ -93,8 +158,8 @@ const SecurityDashboard = {
         // in a given lane, a missing canvas) must not leave its siblings
         // stuck in their skeleton state.
         for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanes,
-            this._renderCategoryMap, this._renderTimeline, this._renderVerdictChart, this._wireTimelineToggle,
-            this._renderLedger, this._wireLedgerControls]) {
+            this._renderCategoryMap, this._renderTimeline, this._renderVerdictBars, this._wireTimelineToggle,
+            this._renderLedger, this._wireLedgerControls, this._renderLedgerSpark]) {
             try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
         }
     },
@@ -133,8 +198,11 @@ const SecurityDashboard = {
         if (laneDetail) laneDetail.innerHTML = '<span class="text-zinc-500 text-xs">Snapshot unavailable.</span>';
         const legend = document.getElementById('secdash-signalmap-legend');
         if (legend) legend.innerHTML = CARD_DEFS.map(def =>
-            `<div class="secdash-signalmap-item"><span class="secdash-signalmap-title">${escapeHtml(def.title)}</span>` +
-            `<span class="secdash-signalmap-delta">Unavailable.</span></div>`).join('');
+            `<div class="secdash-signalmap-item"><span class="secdash-signalmap-letter">?</span>` +
+            `<span class="secdash-signalmap-body"><span class="secdash-signalmap-title">${escapeHtml(def.title)}</span>` +
+            `<span class="secdash-signalmap-delta">Unavailable.</span></span></div>`).join('');
+        const verdictBody = document.getElementById('secdash-verdict-body');
+        if (verdictBody) verdictBody.innerHTML = '<span class="text-zinc-500 text-xs">Snapshot unavailable.</span>';
         const ledger = document.getElementById('secdash-ledger-body');
         if (ledger) ledger.innerHTML = '<tr><td colspan="5" class="text-zinc-500 text-xs py-4 text-center">Snapshot unavailable.</td></tr>';
     },
@@ -160,6 +228,9 @@ const SecurityDashboard = {
         const idx = THREAT_ORDER.indexOf(level);
         const frac = idx >= 0 ? (idx + 1) / THREAT_ORDER.length : 0;
         const color = idx === 2 ? sevColor('CRITICAL') : idx === 1 ? sevColor('MEDIUM') : idx === 0 ? sevColor('LOW') : sevColor('INFO');
+
+        const healthDot = document.querySelector('.secdash-health-dot');
+        if (healthDot) healthDot.style.background = color;
 
         // The label/delta text carry the actual signal and must render even
         // if Chart.js itself is slow/blocked/failed to load — only the arc
@@ -394,22 +465,35 @@ const SecurityDashboard = {
 
         if (legend) {
             legend.innerHTML = signals.map(s => `<div class="secdash-signalmap-item">
-                <span class="secdash-signalmap-dot" style="background:${escapeHtml(s.color)}"></span>
-                <span class="secdash-signalmap-title">${escapeHtml(s.title)}</span>
-                <span class="secdash-signalmap-delta">${escapeHtml(s.delta)}</span>
+                <span class="secdash-signalmap-letter" style="color:${escapeHtml(s.color)}">${escapeHtml(s.letter)}</span>
+                <span class="secdash-signalmap-body">
+                    <span class="secdash-signalmap-title">${escapeHtml(s.title)}</span>
+                    <span class="secdash-signalmap-delta">${escapeHtml(s.delta)}</span>
+                </span>
             </div>`).join('');
         }
 
         if (!canvas || typeof Chart === 'undefined') return;
         if (this._signalMapChart) this._signalMapChart.destroy();
+        // A real min-width (120px per category) on the chart container so
+        // bubbles keep a legible, non-overlapping size and the panel scrolls
+        // horizontally on a narrow viewport instead of crushing all six
+        // together (see .secdash-signalmap-scroll in site.css).
+        const chartWrap = canvas.closest('.secdash-signalmap-chart');
+        if (chartWrap) chartWrap.style.minWidth = `${CARD_DEFS.length * 120}px`;
         const points = signals.map((s, i) => ({
             x: i,
-            y: i % 2 === 0 ? 1.15 : 0.85,
-            r: 8 + s.magnitude * 20,
+            y: i % 2 === 0 ? 1.2 : 0.8,
+            r: 10 + s.magnitude * 22,
             label: s.title,
             delta: s.delta,
+            letter: s.letter,
             color: s.color,
         }));
+        // Centroid for the faint orbit lines — the middle x-slot at the
+        // staggered rows' vertical midpoint, not a computed center-of-mass
+        // (this is a decorative radar motif, not a physics simulation).
+        const orbitCenter = { x: (CARD_DEFS.length - 1) / 2, y: 1 };
         this._signalMapChart = new Chart(canvas, {
             type: 'bubble',
             data: {
@@ -423,10 +507,10 @@ const SecurityDashboard = {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                layout: { padding: { top: 6, bottom: 6 } },
+                layout: { padding: { top: 10, bottom: 10 } },
                 scales: {
                     x: { min: -0.6, max: CARD_DEFS.length - 0.4, display: false },
-                    y: { min: -0.3, max: 2.3, display: false },
+                    y: { min: -0.5, max: 2.5, display: false },
                 },
                 plugins: {
                     legend: { display: false },
@@ -435,6 +519,13 @@ const SecurityDashboard = {
                             title: items => points[items[0].dataIndex].label,
                             label: item => points[item.dataIndex].delta,
                         },
+                    },
+                    secdashBubbleFx: {
+                        glow: true,
+                        orbitCenter,
+                        centerLabel: i => points[i].letter,
+                        pointRadii: points.map(p => p.r),
+                        minRadius: 11,
                     },
                 },
             },
@@ -480,11 +571,17 @@ const SecurityDashboard = {
                 </span>`).join('');
             }
             const labels = timeline.map(t => t.period);
+            // A real min-width (28px per day) on the chart container, same
+            // rationale as the Category Signal Map above — one bubble per
+            // day+severity needs real horizontal room, so it scrolls on a
+            // narrow viewport instead of every day's bubbles overlapping.
+            const chartWrap = canvas.closest('.chart-shell');
+            if (chartWrap) chartWrap.style.minWidth = `${Math.max(500, labels.length * 28)}px`;
             const points = [];
             timeline.forEach((t, x) => {
                 SEV_ORDER.forEach(k => {
                     const count = t[k] || 0;
-                    if (count > 0) points.push({ x, y: sevTier(k), r: Math.max(3, Math.min(16, Math.sqrt(count) * 3)), sev: k, count, period: t.period });
+                    if (count > 0) points.push({ x, y: sevTier(k), r: Math.max(4, Math.min(20, Math.sqrt(count) * 3.5)), sev: k, count, period: t.period });
                 });
             });
             cfg = {
@@ -508,6 +605,12 @@ const SecurityDashboard = {
                                 label: item => `${SEV_TITLE[points[item.dataIndex].sev]}: ${points[item.dataIndex].count}`,
                             },
                         },
+                        secdashBubbleFx: {
+                            glow: true,
+                            centerLabel: i => String(points[i].count),
+                            pointRadii: points.map(p => p.r),
+                            minRadius: 9,
+                        },
                     },
                     scales: {
                         x: {
@@ -529,6 +632,8 @@ const SecurityDashboard = {
             };
         } else {
             if (legend) legend.innerHTML = '';
+            const chartWrap = canvas.closest('.chart-shell');
+            if (chartWrap) chartWrap.style.minWidth = '';
             const points = this._history;
             if (!points.length) {
                 this._setChartEmpty(emptyEl, canvas, 'Tracking since launch. No history yet.');
@@ -569,40 +674,39 @@ const SecurityDashboard = {
         };
     },
 
-    _renderVerdictChart() {
-        const canvas = document.getElementById('secdashVerdictChart');
-        const emptyEl = document.getElementById('secdash-verdict-empty');
-        if (!canvas || typeof Chart === 'undefined') return;
+    // Findings per Status — a compact per-verdict bar list (dot + label +
+    // proportional fill + count + %), not a full Chart.js canvas. Real
+    // per-verdict counts from findings_by_verdict, same data the old bar
+    // chart read; just rendered as a small purpose-built component sized to
+    // sit beside the equally-compact Risk Level strip (see index.html's
+    // lg:grid-cols-2 pairing).
+    _renderVerdictBars() {
+        const body = document.getElementById('secdash-verdict-body');
+        if (!body) return;
         const byVerdict = this._data.findings_by_verdict || {};
         const order = ['PROCEED', 'CAUTION', 'REJECT'];
+        const titles = { PROCEED: 'Proceed', CAUTION: 'Caution', REJECT: 'Reject' };
         const colors = { PROCEED: sevColor('LOW'), CAUTION: sevColor('MEDIUM'), REJECT: sevColor('HIGH') };
-        const labels = order.filter(k => (byVerdict[k] || 0) > 0);
+        const rows = order.filter(k => (byVerdict[k] || 0) > 0);
         const total = order.reduce((s, k) => s + (byVerdict[k] || 0), 0);
-        if (this._verdictChart) { this._verdictChart.destroy(); this._verdictChart = null; }
-        if (!labels.length) {
-            this._setChartEmpty(emptyEl, canvas, 'No verdict-bearing findings yet.');
+        if (!rows.length) {
+            body.innerHTML = '<span class="text-zinc-500 text-xs">No verdict-bearing findings yet.</span>';
             return;
         }
-        this._setChartEmpty(emptyEl, canvas, null);
-        this._verdictChart = new Chart(canvas, {
-            type: 'bar',
-            data: { labels, datasets: [{ data: labels.map(k => byVerdict[k]), backgroundColor: labels.map(k => colors[k]), borderRadius: 4 }] },
-            options: {
-                ...this._barOptions(false),
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: item => {
-                                const v = item.parsed.y;
-                                const pct = total ? ((v / total) * 100).toFixed(1) : '0.0';
-                                return `${v.toLocaleString()} (${pct}%)`;
-                            },
-                        },
-                    },
-                },
-            },
-        });
+        const max = Math.max(...rows.map(k => byVerdict[k]));
+        body.innerHTML = rows.map(k => {
+            const v = byVerdict[k];
+            const pct = total ? (v / total) * 100 : 0;
+            const widthPct = max ? (v / max) * 100 : 0;
+            const color = colors[k];
+            return `<div class="secdash-verdict-row">
+                <span class="secdash-verdict-dot" style="background:${escapeHtml(color)}"></span>
+                <span class="secdash-verdict-label">${escapeHtml(titles[k])}</span>
+                <span class="secdash-verdict-bar-wrap"><span class="secdash-verdict-bar" style="width:${widthPct}%;background:${escapeHtml(color)}"></span></span>
+                <span class="secdash-verdict-count">${v.toLocaleString()}</span>
+                <span class="secdash-verdict-pct">${pct.toFixed(1)}%</span>
+            </div>`;
+        }).join('');
     },
 
     _wireTimelineToggle() {
@@ -677,13 +781,22 @@ const SecurityDashboard = {
 
     _ledgerRowHtml(r, idx) {
         const sevColorVal = sevColor(r.severity);
+        // Subtle severity wash on the first cell only — a decorative
+        // reinforcement of the badge's own icon+text right beside it, never
+        // the sole conveyor of meaning. A small pulsing health dot on
+        // CRITICAL rows is a genuine "needs attention" cue, reusing the
+        // site's existing live-dot animation.
+        const rowWash = (r.severity === 'CRITICAL' || r.severity === 'HIGH') ? `${sevColorVal}12` : 'transparent';
+        const healthDot = r.severity === 'CRITICAL' ? `<span class="secdash-ledger-health-dot" style="color:${escapeHtml(sevColorVal)}"></span>` : '';
         const tagsHtml = (r.tags || []).slice(0, 4).map(t => `<span class="secdash-ledger-tag">${escapeHtml(t)}</span>`).join('');
+        const allTagsHtml = (r.tags || []).map(t => `<span class="secdash-ledger-tag">${escapeHtml(t)}</span>`).join('');
         const verdictKnown = KNOWN_VERDICTS.includes(r.verdict);
         const reportUrl = r.report ? REPO_BLOB + r.report : null;
-        return `<tr class="secdash-ledger-row" data-idx="${idx}">
+        const absTime = r.timestamp ? new Date(r.timestamp).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) : 'unknown';
+        return `<tr class="secdash-ledger-row" data-idx="${idx}" style="--row-sev:${escapeHtml(sevColorVal)};--row-sev-wash:${escapeHtml(rowWash)}">
             <td><span class="secdash-badge" style="color:${escapeHtml(sevColorVal)};border-color:${escapeHtml(sevColorVal)}55">
                 <i class="fa-solid ${escapeHtml(SEV_ICON[r.severity] || 'fa-circle-question')} text-[9px]"></i>${escapeHtml(SEV_TITLE[r.severity] || r.severity)}
-            </span></td>
+            </span>${healthDot}</td>
             <td class="secdash-ledger-title">${escapeHtml(r.title || 'Untitled finding')}</td>
             <td class="secdash-ledger-source">${escapeHtml((r.source || '').replace(/^agents\//, ''))}</td>
             <td class="secdash-ledger-tags">${tagsHtml}</td>
@@ -692,13 +805,35 @@ const SecurityDashboard = {
         <tr class="secdash-ledger-detail" data-for="${idx}">
             <td colspan="5">
                 <div class="secdash-ledger-detail-inner">
-                    <div><span class="text-zinc-600">ID</span> <span class="font-mono">${escapeHtml(r.id || '—')}</span></div>
-                    <div><span class="text-zinc-600">Logged</span> ${escapeHtml(r.timestamp || 'unknown')}</div>
-                    ${verdictKnown ? `<div><span class="text-zinc-600">Verdict</span> ${escapeHtml(r.verdict)}</div>` : ''}
-                    ${reportUrl ? `<div><a href="${escapeHtml(reportUrl)}" target="_blank" rel="noopener" class="text-zinc-400 hover:underline">View source report <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></div>` : ''}
+                    <div class="secdash-ledger-detail-field"><span class="secdash-ledger-detail-label">ID</span><span class="font-mono">${escapeHtml(r.id || '—')}</span></div>
+                    <div class="secdash-ledger-detail-field"><span class="secdash-ledger-detail-label">Severity</span>${escapeHtml(SEV_TITLE[r.severity] || r.severity)}</div>
+                    <div class="secdash-ledger-detail-field"><span class="secdash-ledger-detail-label">Logged</span>${escapeHtml(absTime)} (${escapeHtml(ago(r.timestamp))})</div>
+                    ${verdictKnown ? `<div class="secdash-ledger-detail-field"><span class="secdash-ledger-detail-label">Verdict</span>${escapeHtml(r.verdict)}</div>` : ''}
+                    ${allTagsHtml ? `<div class="secdash-ledger-detail-tags">${allTagsHtml}</div>` : ''}
+                    ${reportUrl ? `<div class="secdash-ledger-detail-link"><a href="${escapeHtml(reportUrl)}" target="_blank" rel="noopener" class="text-zinc-300 hover:underline">View source report <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></div>` : ''}
                 </div>
             </td>
         </tr>`;
+    },
+
+    // Ledger header mini-sparkline — real daily finding-volume trend, the
+    // same findings_timeline data backing the Signal Timeline chart above,
+    // just summed across severities per day. Plain div bars (see
+    // x402feed.js's own _renderSparkline for the established pattern this
+    // mirrors at a much smaller scale), not a second Chart.js instance, for
+    // a glance-value accent beside the panel title.
+    _renderLedgerSpark() {
+        const el = document.getElementById('secdash-ledger-spark');
+        if (!el) return;
+        const timeline = (this._data.findings_timeline || []).slice(-14);
+        if (!timeline.length) { el.innerHTML = ''; return; }
+        const totals = timeline.map(t => SEV_ORDER.reduce((s, k) => s + (t[k] || 0), 0));
+        const max = Math.max(1, ...totals);
+        el.innerHTML = timeline.map((t, i) => {
+            const pct = Math.max(6, Math.round((totals[i] / max) * 100));
+            const latest = i === timeline.length - 1 ? ' is-latest' : '';
+            return `<div class="secdash-ledger-spark-bar${latest}" style="height:${pct}%" title="${escapeHtml(t.period)}: ${totals[i]} finding(s)"></div>`;
+        }).join('');
     },
 
     _wireLedgerControls() {

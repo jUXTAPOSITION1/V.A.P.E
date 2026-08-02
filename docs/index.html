@@ -294,51 +294,60 @@
             <div class="panel-sm secdash-panel mb-3">
                 <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
                 <p class="secdash-panel-desc mb-2">Six categories of automated coverage. Bubble size reflects that category's own signal volume.</p>
-                <div class="secdash-signalmap-chart">
-                    <canvas id="secdashSignalMap"></canvas>
+                <div class="secdash-signalmap-scroll">
+                    <div class="secdash-signalmap-chart">
+                        <canvas id="secdashSignalMap"></canvas>
+                    </div>
                 </div>
                 <div id="secdash-signalmap-legend" class="secdash-signalmap-legend">
                     <div class="skeleton h-10"></div>
                 </div>
             </div>
 
-            <!-- Row 3: compact Risk Level strip, sized below the cards it now sits beneath. -->
-            <div class="panel-sm secdash-panel secdash-gauge-strip mb-3">
-                <div class="secdash-gauge-wrap">
-                    <canvas id="secdashGauge"></canvas>
-                    <div id="secdash-gauge-label" class="secdash-gauge-label"><div class="skeleton h-4 w-14 mx-auto"></div></div>
-                </div>
-                <div class="secdash-gauge-strip-text">
-                    <h3 class="secdash-panel-title mb-0">Risk Level</h3>
-                    <p class="secdash-panel-desc mb-0">Overall threat read: low, medium, or high.</p>
-                    <div id="secdash-gauge-delta" class="text-[10.5px] text-zinc-500">…</div>
-                    <div id="secdash-gauge-context" class="text-[10px] text-zinc-600">…</div>
-                </div>
-            </div>
-
-            <!-- Row 4: findings-over-time (toggleable) | findings-by-verdict. -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
-                <div class="panel-sm secdash-panel">
-                    <div class="flex items-center justify-between gap-2">
-                        <h3 class="secdash-panel-title mb-0">Signal Timeline</h3>
-                        <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
-                            <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
-                            <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
-                        </div>
+            <!-- Row 3: Signal Timeline, full width — the flagship chart, sized
+                 like .chart-shell (not -sm) now that it owns its own row. -->
+            <div class="panel-sm secdash-panel mb-3">
+                <div class="flex items-center justify-between gap-2">
+                    <h3 class="secdash-panel-title mb-0">Signal Timeline</h3>
+                    <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
+                        <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
+                        <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
                     </div>
-                    <p class="secdash-panel-desc">Daily finding volume by severity, or toggle to threat level over time.</p>
-                    <div class="chart-shell-sm">
+                </div>
+                <p class="secdash-panel-desc">Daily finding volume by severity, or toggle to threat level over time.</p>
+                <div class="secdash-timeline-scroll">
+                    <div class="chart-shell">
                         <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
                         <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
                     </div>
-                    <div id="secdash-timeline-legend" class="secdash-timeline-legend"></div>
+                </div>
+                <div id="secdash-timeline-legend" class="secdash-timeline-legend"></div>
+            </div>
+
+            <!-- Row 4: Risk Level | Findings per Status — both compact widgets
+                 (a small gauge strip and a purpose-built bar list, not a full
+                 Chart.js canvas), paired side by side on desktop since neither
+                 has enough content to fill a row on its own. -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
+                <div class="panel-sm secdash-panel secdash-gauge-strip">
+                    <div class="secdash-gauge-wrap">
+                        <canvas id="secdashGauge"></canvas>
+                        <div id="secdash-gauge-label" class="secdash-gauge-label"><div class="skeleton h-4 w-14 mx-auto"></div></div>
+                    </div>
+                    <div class="secdash-gauge-strip-text">
+                        <h3 class="secdash-panel-title mb-0">Risk Level<span class="secdash-health-dot" title="Live"></span></h3>
+                        <p class="secdash-panel-desc mb-0">Overall threat read: low, medium, or high.</p>
+                        <div id="secdash-gauge-delta" class="text-[10.5px] text-zinc-500">…</div>
+                        <div id="secdash-gauge-context" class="text-[10px] text-zinc-600">…</div>
+                    </div>
                 </div>
                 <div class="panel-sm secdash-panel">
                     <h3 class="secdash-panel-title mb-0">Findings per Status</h3>
                     <p class="secdash-panel-desc">Investigation verdicts: proceed, caution, or reject.</p>
-                    <div class="chart-shell-sm">
-                        <canvas id="secdashVerdictChart" role="img" aria-label="Findings per status"></canvas>
-                        <div id="secdash-verdict-empty" class="secdash-chart-empty" hidden></div>
+                    <div id="secdash-verdict-body" class="secdash-verdict-body">
+                        <div class="skeleton h-4"></div>
+                        <div class="skeleton h-4"></div>
+                        <div class="skeleton h-4"></div>
                     </div>
                 </div>
             </div>
@@ -347,7 +356,7 @@
                  table over the most recent ~150 real findings.jsonl rows. -->
             <div class="panel-sm secdash-panel">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                    <h3 class="secdash-panel-title mb-0">Findings Ledger</h3>
+                    <h3 class="secdash-panel-title mb-0 flex items-center">Findings Ledger<span id="secdash-ledger-spark" class="secdash-ledger-spark" title="Daily finding volume, last 14 days"></span></h3>
                     <div class="flex items-center gap-2">
                         <select id="secdash-ledger-sev-filter" class="select-pill" aria-label="Filter by severity"></select>
                         <input id="secdash-ledger-search" type="search" placeholder="Search title, source, tags…" class="text-xs bg-transparent border border-white/10 px-3 py-1.5 w-40 sm:w-56 focus:outline-none focus:border-white/30 placeholder:text-zinc-600">
