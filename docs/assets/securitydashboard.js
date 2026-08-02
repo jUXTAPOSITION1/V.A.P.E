@@ -6,12 +6,11 @@
 // tamper-evidence chain, data/attack-feed.json) or a real GitHub API response
 // (Actions Runs, Code Scanning Alerts) — a lane whose signal can't be reached
 // reports null and renders an honest "unavailable" state, never a fabricated
-// number. Deliberately compact/single-screen layout (gauge, severity list +
-// donut, and a lane picker share one row; six Risk Breakdown cards share
-// another) rather than one full-width panel per widget.
+// number.
 
 const SECDASH_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/security-dashboard.json';
 const SECDASH_HISTORY_URL = 'https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/data/security-dashboard-history.jsonl';
+const REPO_BLOB = 'https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/';
 
 function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -27,7 +26,12 @@ function cssVar(name) {
 const SEV_ORDER = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'INFO'];
 const SEV_VAR = { CRITICAL: '--sev-critical', HIGH: '--sev-high', MEDIUM: '--sev-medium', LOW: '--sev-low', INFO: '--sev-info' };
 const SEV_TITLE = { CRITICAL: 'Critical', HIGH: 'High', MEDIUM: 'Medium', LOW: 'Low', INFO: 'Info' };
+const KNOWN_VERDICTS = ['PROCEED', 'CAUTION', 'REJECT'];
 function sevColor(bucket) { return cssVar(SEV_VAR[bucket] || SEV_VAR.INFO); }
+// Fixed top-to-bottom severity tier for the Signal Timeline's y-axis —
+// CRITICAL always plots highest, INFO always lowest, regardless of which
+// buckets a given day actually has data in.
+function sevTier(bucket) { return SEV_ORDER.length - SEV_ORDER.indexOf(bucket); }
 
 const THREAT_ORDER = ['LOW', 'MEDIUM', 'HIGH'];
 const THREAT_ICON = { LOW: 'fa-circle-check', MEDIUM: 'fa-triangle-exclamation', HIGH: 'fa-triangle-exclamation' };
@@ -46,10 +50,12 @@ function statusBadge(text, colorVar, icon) {
         `<i class="fa-solid ${escapeHtml(icon)} text-[9px]"></i>${escapeHtml(text)}</span>`;
 }
 
+const SEV_ICON = { CRITICAL: 'fa-circle-exclamation', HIGH: 'fa-circle-exclamation', MEDIUM: 'fa-triangle-exclamation', LOW: 'fa-circle-check', INFO: 'fa-circle-question' };
+
 // One entry per real security workflow this repo runs, mapped to the six
 // Risk Breakdown category cards. Every source field name here is real
-// (agents/build_security_dashboard.py's build_lanes() output) — a card with
-// no corresponding lane in a given snapshot simply renders "unavailable."
+// (agents/build_security_dashboard.py's build_lanes() output) — a category
+// with no corresponding lane in a given snapshot simply renders "unavailable."
 const CARD_DEFS = [
     { id: 'codeql', title: 'Static Analysis', laneIds: ['codeql'] },
     { id: 'dependency-audit', title: 'Dependencies', laneIds: ['dependency-audit'] },
@@ -67,7 +73,12 @@ const SecurityDashboard = {
     _sevChart: null,
     _verdictChart: null,
     _timelineChart: null,
+    _signalMapChart: null,
     _timelineSeries: 'severity',
+    _ledgerQuery: '',
+    _ledgerSevFilter: '',
+    _ledgerPage: 0,
+    _ledgerPageSize: 10,
 
     async init() {
         const [data, history] = await Promise.all([this._fetchJson(), this._fetchHistory()]);
@@ -82,7 +93,8 @@ const SecurityDashboard = {
         // in a given lane, a missing canvas) must not leave its siblings
         // stuck in their skeleton state.
         for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanes,
-            this._renderCards, this._renderTimeline, this._renderVerdictChart, this._wireTimelineToggle]) {
+            this._renderCategoryMap, this._renderTimeline, this._renderVerdictChart, this._wireTimelineToggle,
+            this._renderLedger, this._wireLedgerControls]) {
             try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
         }
     },
@@ -119,12 +131,12 @@ const SecurityDashboard = {
         if (sevList) sevList.innerHTML = '<li class="text-zinc-500">Snapshot unavailable.</li>';
         const laneDetail = document.getElementById('secdash-lane-detail');
         if (laneDetail) laneDetail.innerHTML = '<span class="text-zinc-500 text-xs">Snapshot unavailable.</span>';
-        const cards = document.getElementById('secdash-cards');
-        if (cards) {
-            cards.innerHTML = CARD_DEFS.map(def =>
-                `<div class="panel-sm secdash-card"><div class="secdash-card-title">${escapeHtml(def.title)}</div>` +
-                `<span class="secdash-card-delta">Unavailable.</span></div>`).join('');
-        }
+        const legend = document.getElementById('secdash-signalmap-legend');
+        if (legend) legend.innerHTML = CARD_DEFS.map(def =>
+            `<div class="secdash-signalmap-item"><span class="secdash-signalmap-title">${escapeHtml(def.title)}</span>` +
+            `<span class="secdash-signalmap-delta">Unavailable.</span></div>`).join('');
+        const ledger = document.getElementById('secdash-ledger-body');
+        if (ledger) ledger.innerHTML = '<tr><td colspan="5" class="text-zinc-500 text-xs py-4 text-center">Snapshot unavailable.</td></tr>';
     },
 
     _renderUpdated() {
@@ -210,8 +222,7 @@ const SecurityDashboard = {
 
     // Findings Count: a real count+percentage list (doubling as the
     // required legend for a ≥2-series chart) beside a small donut with a
-    // real total in its center — matches the reference's list-plus-donut
-    // composition, more scannable than a bottom legend alone.
+    // real total in its center.
     _renderSeverityDonut() {
         const canvas = document.getElementById('secdashSeverityDonut');
         const listEl = document.getElementById('secdash-sev-list');
@@ -255,9 +266,7 @@ const SecurityDashboard = {
                 cutout: '68%',
                 // The adjacent list already shows every segment's exact
                 // count + percentage at all times, so a hover tooltip adds
-                // no information — and at this donut's compact size, the
-                // default tooltip position collided with the centered
-                // "Total" label. Disabled rather than repositioned.
+                // no information here.
                 plugins: { legend: { display: false }, tooltip: { enabled: false } },
             },
         });
@@ -265,9 +274,7 @@ const SecurityDashboard = {
 
     // Automated Lanes — a <select> over the real per-workflow list driving
     // one compact status readout, with pagination dots to page through the
-    // rest. Replaces the reference screenshot's fabricated "Active
-    // Campaigns" gauge+carousel concept (VAPE has no campaign notion) while
-    // keeping its dropdown+paged-indicator composition.
+    // rest.
     _renderLanes() {
         const select = document.getElementById('secdash-lane-select');
         const detail = document.getElementById('secdash-lane-detail');
@@ -312,40 +319,18 @@ const SecurityDashboard = {
         if (select) select.value = String(idx);
     },
 
-    // Six compact Risk Breakdown cards, one row (not a wrapping grid of
-    // larger cards) — each a small ring + single-letter status badge (the
-    // reference's own colored-circle-with-letter convention), a title, a
-    // real delta line, and a tick-bar built from THAT card's own real
-    // sub-fields with the exact real counts printed beneath it. Most lanes
-    // only carry a pass/fail conclusion, not a severity split, so the bar's
-    // segments/tick numbers are whatever that lane genuinely has — never
-    // forced onto the 5-severity taxonomy where no real breakdown exists.
-    _renderCards() {
-        const el = document.getElementById('secdash-cards');
-        if (!el) return;
-        const byId = {};
-        for (const lane of this._data.lanes || []) byId[lane.id] = lane;
-        el.innerHTML = CARD_DEFS.map(def => this._renderCard(def, byId)).join('');
-    },
-
-    _renderCard(def, byId) {
+    // Shared per-category signal calculation — the ONE place that decides
+    // what each of the six real security lanes' status/magnitude/delta text
+    // is. Both the Category Signal Map bubble chart and its caption list
+    // below read from this, so they can never drift out of sync with each
+    // other.
+    _categorySignal(def, byId) {
         const lanes = def.laneIds.map(id => byId[id]).filter(Boolean);
         if (!lanes.length) {
-            return `<div class="panel-sm secdash-card">
-                <div class="secdash-card-head">
-                    <div class="secdash-ring-wrap">${this._ringSvg(0, sevColor('INFO'))}<span class="secdash-ring-badge" style="color:${escapeHtml(sevColor('INFO'))}">?</span></div>
-                    <div class="flex-1 min-w-0"><div class="secdash-card-title">${escapeHtml(def.title)}</div></div>
-                </div>
-                <span class="secdash-card-delta">No data this cycle.</span>
-            </div>`;
+            return { title: def.title, ringStatus: 'info', color: sevColor('INFO'), magnitude: 0.2, delta: 'No data this cycle.', letter: '?' };
         }
         const primary = lanes[0];
-        // ringStatus drives the ring fill fraction explicitly (never derived
-        // from comparing rendered colors, which breaks if two severity
-        // tokens ever resolve to the same hex): 'low' = full ring (all
-        // clear), 'info' = empty ring (no signal), anything else = a
-        // partial ring indicating an open issue.
-        let segs, letter, letterColor, delta, ticks, ringStatus;
+        let letter, ringStatus, delta, magnitude;
 
         if (def.id === 'codeql') {
             const open = primary.open_alerts;
@@ -353,97 +338,116 @@ const SecurityDashboard = {
             const clear = open === 0 && persisted === 0;
             letter = open == null ? '?' : clear ? 'OK' : 'H';
             ringStatus = open == null ? 'info' : clear ? 'low' : 'other';
-            letterColor = ringStatus === 'info' ? sevColor('INFO') : ringStatus === 'low' ? sevColor('LOW') : sevColor('HIGH');
-            delta = open == null ? 'unavailable' : `${persisted} persisted, 30d`;
-            segs = open == null ? [] : (clear ? [{ v: 1, c: sevColor('LOW') }] : [{ v: Math.max(open, 1), c: sevColor('HIGH') }, { v: persisted, c: sevColor('CRITICAL') }]);
-            ticks = open == null ? [] : [open, persisted];
+            delta = open == null ? 'unavailable' : `${open} open alert(s), ${persisted} persisted 30d`;
+            magnitude = open == null ? 0.2 : Math.max(0.22, Math.min(1, open / 50));
         } else if (def.id === 'dependency-audit' || def.id === 'security-lint') {
             const ok = primary.last_run_conclusion === 'success';
             letter = ok ? 'OK' : primary.last_run_conclusion == null ? '?' : '!';
             ringStatus = ok ? 'low' : primary.last_run_conclusion == null ? 'info' : 'other';
-            letterColor = ringStatus === 'low' ? sevColor('LOW') : ringStatus === 'info' ? sevColor('INFO') : sevColor('CRITICAL');
-            delta = primary.last_run_at ? ago(primary.last_run_at) : 'never run';
-            segs = primary.last_run_conclusion == null ? [] : [{ v: 1, c: ok ? sevColor('LOW') : sevColor('CRITICAL') }];
-            ticks = [];
+            delta = primary.last_run_at ? `last run ${ago(primary.last_run_at)}` : 'never run';
+            magnitude = ok ? 0.3 : primary.last_run_conclusion == null ? 0.2 : 0.55;
         } else if (def.id === 'redteam') {
             const bd = primary.severity_breakdown || {};
             const total = SEV_ORDER.reduce((s, k) => s + (bd[k] || 0), 0);
             const bad = (bd.CRITICAL || 0) + (bd.HIGH || 0);
             letter = total === 0 ? 'OK' : bad > 0 ? 'H' : 'L';
             ringStatus = (total === 0 || bad === 0) ? 'low' : 'other';
-            letterColor = ringStatus === 'low' ? sevColor('LOW') : sevColor('HIGH');
-            delta = `${total} findings, 30d`;
-            segs = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => ({ v: bd[k], c: sevColor(k) }));
-            ticks = SEV_ORDER.filter(k => (bd[k] || 0) > 0).map(k => bd[k]);
+            delta = `${total} finding(s), 30d`;
+            magnitude = Math.max(0.22, Math.min(1, total / 20));
         } else if (def.id === 'intel-sweeps') {
             const ratio = typeof primary.coverage_ratio === 'number' ? primary.coverage_ratio : null;
             letter = primary.threat_level === 'HIGH' ? 'H' : primary.threat_level === 'MEDIUM' ? 'M' : primary.threat_level === 'LOW' ? 'L' : '?';
             ringStatus = primary.threat_level === 'LOW' ? 'low' : (primary.threat_level === 'HIGH' || primary.threat_level === 'MEDIUM') ? 'other' : 'info';
-            letterColor = primary.threat_level === 'HIGH' ? sevColor('CRITICAL') : primary.threat_level === 'MEDIUM' ? sevColor('MEDIUM')
-                : primary.threat_level === 'LOW' ? sevColor('LOW') : sevColor('INFO');
             const gaps = (primary.gap_patterns || []).length;
             delta = ratio == null ? 'unavailable' : `${Math.round(ratio * 100)}% covered, ${gaps} gap(s)`;
-            segs = ratio == null ? [] : [{ v: ratio, c: sevColor('LOW') }, { v: 1 - ratio, c: sevColor('MEDIUM') }];
-            ticks = [];
+            magnitude = ratio == null ? 0.2 : Math.max(0.22, 1 - ratio);
         } else { // ledger-integrity
             const seal = lanes.find(l => l.id === 'findings-seal') || primary;
             const drift = lanes.find(l => l.id === 'review-ledger');
             const intact = seal.chain_intact;
             letter = intact === true ? 'OK' : intact === false ? '!' : '?';
             ringStatus = intact === true ? 'low' : intact === false ? 'other' : 'info';
-            letterColor = ringStatus === 'low' ? sevColor('LOW') : ringStatus === 'info' ? sevColor('INFO') : sevColor('CRITICAL');
             const worsened = drift ? (drift.worsened_30d || 0) : 0;
             const improved = drift ? (drift.improved_30d || 0) : 0;
             delta = `${worsened} worse / ${improved} better, 30d`;
-            segs = (worsened + improved) === 0 ? [{ v: 1, c: sevColor('LOW') }] : [{ v: worsened, c: sevColor('HIGH') }, { v: improved, c: sevColor('LOW') }];
-            ticks = (worsened + improved) === 0 ? [] : [worsened, improved];
+            magnitude = Math.max(0.25, Math.min(1, (worsened + improved) / 10));
         }
 
-        const ringFrac = ringStatus === 'low' ? 1 : ringStatus === 'info' ? 0 : 0.7;
-        const ringSvg = this._ringSvg(ringFrac, letterColor);
-        const barHtml = segs.length
-            ? `<div class="secdash-tick-bar">${segs.map(s => `<div class="secdash-tick-seg" style="flex:${Math.max(s.v, 0.02)} 0 auto; background:${escapeHtml(s.c)}"></div>`).join('')}</div>`
-            : `<div class="secdash-tick-bar"><div class="secdash-tick-seg" style="flex:1 0 auto; background:${escapeHtml(sevColor('INFO'))}"></div></div>`;
-        const ticksHtml = ticks.length
-            ? `<div class="secdash-tick-labels">${ticks.map(t => `<span>${escapeHtml(String(t))}</span>`).join('')}</div>`
-            : '';
-
-        return `<div class="panel-sm secdash-card">
-            <div class="secdash-card-head">
-                <div class="secdash-ring-wrap">${ringSvg}<span class="secdash-ring-badge" style="color:${escapeHtml(letterColor)}">${escapeHtml(letter)}</span></div>
-                <div class="flex-1 min-w-0"><div class="secdash-card-title">${escapeHtml(def.title)}</div></div>
-            </div>
-            ${barHtml}
-            ${ticksHtml}
-            <span class="secdash-card-delta">${escapeHtml(delta)}</span>
-        </div>`;
+        const color = ringStatus === 'low' ? sevColor('LOW') : ringStatus === 'info' ? sevColor('INFO') : sevColor('HIGH');
+        return { title: def.title, ringStatus, color, magnitude, delta, letter };
     },
 
-    // A plain inline SVG ring (no Chart.js instance per card — six live
-    // chart instances for a coarse two-tone ring would be wasteful) using
-    // stroke-dasharray for the fill fraction, matching the reference's
-    // small ring-gauge shape.
-    _ringSvg(frac, color) {
-        const r = 13, c = 2 * Math.PI * r, filled = Math.max(0, Math.min(1, frac)) * c;
-        return `<svg viewBox="0 0 32 32" width="34" height="34">
-            <circle cx="16" cy="16" r="${r}" fill="none" stroke="${escapeHtml(cssVar('--bg-panel-sm') || '#27272a')}" stroke-width="3"/>
-            <circle cx="16" cy="16" r="${r}" fill="none" stroke="${escapeHtml(color)}" stroke-width="3"
-                stroke-dasharray="${filled} ${c}" stroke-linecap="round" transform="rotate(-90 16 16)"/>
-        </svg>`;
+    // Category Signal Map — six real lanes rendered as a staggered bubble
+    // cluster (Chart.js `bubble`, real primitive, no hand-rolled orbit
+    // physics): fixed x-slot per category (never reordered), radius scaled
+    // from that category's own real signal magnitude, color = the same
+    // clear/issue/no-signal status already used everywhere else on this
+    // dashboard. A caption list beneath carries the exact delta text each
+    // bubble represents, since a bubble chart has no room for per-point
+    // labels.
+    _renderCategoryMap() {
+        const canvas = document.getElementById('secdashSignalMap');
+        const legend = document.getElementById('secdash-signalmap-legend');
+        const byId = {};
+        for (const lane of this._data.lanes || []) byId[lane.id] = lane;
+        const signals = CARD_DEFS.map(def => this._categorySignal(def, byId));
+
+        if (legend) {
+            legend.innerHTML = signals.map(s => `<div class="secdash-signalmap-item">
+                <span class="secdash-signalmap-dot" style="background:${escapeHtml(s.color)}"></span>
+                <span class="secdash-signalmap-title">${escapeHtml(s.title)}</span>
+                <span class="secdash-signalmap-delta">${escapeHtml(s.delta)}</span>
+            </div>`).join('');
+        }
+
+        if (!canvas || typeof Chart === 'undefined') return;
+        if (this._signalMapChart) this._signalMapChart.destroy();
+        const points = signals.map((s, i) => ({
+            x: i,
+            y: i % 2 === 0 ? 1.15 : 0.85,
+            r: 8 + s.magnitude * 20,
+            label: s.title,
+            delta: s.delta,
+            color: s.color,
+        }));
+        this._signalMapChart = new Chart(canvas, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    data: points,
+                    backgroundColor: points.map(p => p.color + 'b3'),
+                    borderColor: points.map(p => p.color),
+                    borderWidth: 1.5,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: { padding: { top: 6, bottom: 6 } },
+                scales: {
+                    x: { min: -0.6, max: CARD_DEFS.length - 0.4, display: false },
+                    y: { min: -0.3, max: 2.3, display: false },
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: items => points[items[0].dataIndex].label,
+                            label: item => points[item.dataIndex].delta,
+                        },
+                    },
+                },
+            },
+        });
     },
 
-    // Findings-by-severity-over-time (bar, grouped by severity) with a
-    // toggle to threat-level-over-time (line) — one y-axis, never a dual-axis
-    // combo. The severity series is backfillable today from real historical
-    // findings.jsonl timestamps; the threat-level series has no retained
-    // history before this dashboard shipped, so it starts sparse and grows
-    // forward with every real run appended to security-dashboard-history.jsonl
-    // — never backfilled or faked to look fuller than it is.
-    // Empty states toggle a sibling node rather than replacing
-    // canvas.parentElement.innerHTML — destroying the canvas element would
-    // permanently break every later render call (the severity/threat-level
-    // toggle above all) since _renderTimeline/_renderVerdictChart both
-    // guard on `if (!canvas) return`.
+    // Findings-by-severity bubble timeline (real per-day counts,
+    // agents/build_security_dashboard.py now buckets by calendar day, not
+    // ISO week) — x = date, y = fixed severity tier (CRITICAL always plots
+    // highest, INFO lowest, regardless of which buckets a given day has
+    // data in), r = that day+severity's real count. Toggles to a
+    // threat-level-over-time line, same as before. One y-axis throughout —
+    // never a dual-axis combo.
     _setChartEmpty(emptyEl, canvas, message) {
         if (message) {
             if (emptyEl) { emptyEl.textContent = message; emptyEl.hidden = false; }
@@ -452,11 +456,14 @@ const SecurityDashboard = {
             if (emptyEl) emptyEl.hidden = true;
             canvas.style.visibility = '';
         }
+        const legend = document.getElementById('secdash-timeline-legend');
+        if (legend) legend.hidden = !!message || this._timelineSeries !== 'severity';
     },
 
     _renderTimeline() {
         const canvas = document.getElementById('secdashTimelineChart');
         const emptyEl = document.getElementById('secdash-timeline-empty');
+        const legend = document.getElementById('secdash-timeline-legend');
         if (!canvas || typeof Chart === 'undefined') return;
         if (this._timelineChart) { this._timelineChart.destroy(); this._timelineChart = null; }
 
@@ -467,17 +474,61 @@ const SecurityDashboard = {
                 this._setChartEmpty(emptyEl, canvas, 'No timeline data yet.');
                 return;
             }
+            if (legend) {
+                legend.innerHTML = SEV_ORDER.map(k => `<span class="secdash-timeline-legend-item">
+                    <span class="secdash-sev-chip" style="background:${escapeHtml(sevColor(k))}"></span>${escapeHtml(SEV_TITLE[k])}
+                </span>`).join('');
+            }
+            const labels = timeline.map(t => t.period);
+            const points = [];
+            timeline.forEach((t, x) => {
+                SEV_ORDER.forEach(k => {
+                    const count = t[k] || 0;
+                    if (count > 0) points.push({ x, y: sevTier(k), r: Math.max(3, Math.min(16, Math.sqrt(count) * 3)), sev: k, count, period: t.period });
+                });
+            });
             cfg = {
-                type: 'bar',
+                type: 'bubble',
                 data: {
-                    labels: timeline.map(t => t.period),
-                    datasets: SEV_ORDER.filter(k => timeline.some(t => (t[k] || 0) > 0)).map(k => ({
-                        label: k, data: timeline.map(t => t[k] || 0), backgroundColor: sevColor(k), stack: 'sev',
-                    })),
+                    datasets: [{
+                        data: points,
+                        backgroundColor: points.map(p => sevColor(p.sev) + 'b3'),
+                        borderColor: points.map(p => sevColor(p.sev)),
+                        borderWidth: 1,
+                    }],
                 },
-                options: this._barOptions(true),
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: items => points[items[0].dataIndex].period,
+                                label: item => `${SEV_TITLE[points[item.dataIndex].sev]}: ${points[item.dataIndex].count}`,
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            min: -0.5, max: labels.length - 0.5,
+                            ticks: {
+                                color: '#71717a', font: { size: 9 },
+                                callback: v => labels[v] ? labels[v].slice(5) : '',
+                                maxRotation: 0, autoSkip: true,
+                            },
+                            grid: { display: false },
+                        },
+                        y: {
+                            min: 0.3, max: SEV_ORDER.length + 0.7,
+                            ticks: { color: '#71717a', stepSize: 1, font: { size: 9 }, callback: v => SEV_TITLE[SEV_ORDER[SEV_ORDER.length - v]] || '' },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                        },
+                    },
+                },
             };
         } else {
+            if (legend) legend.innerHTML = '';
             const points = this._history;
             if (!points.length) {
                 this._setChartEmpty(emptyEl, canvas, 'Tracking since launch. No history yet.');
@@ -526,6 +577,7 @@ const SecurityDashboard = {
         const order = ['PROCEED', 'CAUTION', 'REJECT'];
         const colors = { PROCEED: sevColor('LOW'), CAUTION: sevColor('MEDIUM'), REJECT: sevColor('HIGH') };
         const labels = order.filter(k => (byVerdict[k] || 0) > 0);
+        const total = order.reduce((s, k) => s + (byVerdict[k] || 0), 0);
         if (this._verdictChart) { this._verdictChart.destroy(); this._verdictChart = null; }
         if (!labels.length) {
             this._setChartEmpty(emptyEl, canvas, 'No verdict-bearing findings yet.');
@@ -535,7 +587,21 @@ const SecurityDashboard = {
         this._verdictChart = new Chart(canvas, {
             type: 'bar',
             data: { labels, datasets: [{ data: labels.map(k => byVerdict[k]), backgroundColor: labels.map(k => colors[k]), borderRadius: 4 }] },
-            options: { ...this._barOptions(false), plugins: { legend: { display: false } } },
+            options: {
+                ...this._barOptions(false),
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: item => {
+                                const v = item.parsed.y;
+                                const pct = total ? ((v / total) * 100).toFixed(1) : '0.0';
+                                return `${v.toLocaleString()} (${pct}%)`;
+                            },
+                        },
+                    },
+                },
+            },
         });
     },
 
@@ -552,6 +618,112 @@ const SecurityDashboard = {
                 this._renderTimeline();
             });
         });
+    },
+
+    // Findings Ledger — a real, searchable/filterable/paginated table over
+    // security-dashboard.json's findings_recent (the most recent ~150 real
+    // findings.jsonl rows, newest first). Row click expands a detail line
+    // with the full real record: absolute timestamp, tags, verdict (only
+    // when it's a real PROCEED/CAUTION/REJECT investigation verdict — some
+    // sources like news_reporter.py reuse this same JSON key for an
+    // unrelated news category, so a value outside that set is shown as
+    // plain context text instead of a misleading verdict badge), and a
+    // link to the source report when one exists.
+    _ledgerRows() {
+        const all = this._data.findings_recent || [];
+        const q = this._ledgerQuery.trim().toLowerCase();
+        return all.filter(r => {
+            if (this._ledgerSevFilter && r.severity !== this._ledgerSevFilter) return false;
+            if (!q) return true;
+            const hay = [r.title, r.source, ...(r.tags || [])].filter(Boolean).join(' ').toLowerCase();
+            return hay.includes(q);
+        });
+    },
+
+    _renderLedger() {
+        const body = document.getElementById('secdash-ledger-body');
+        const countEl = document.getElementById('secdash-ledger-count');
+        const pageEl = document.getElementById('secdash-ledger-page');
+        const prevBtn = document.getElementById('secdash-ledger-prev');
+        const nextBtn = document.getElementById('secdash-ledger-next');
+        if (!body) return;
+
+        const rows = this._ledgerRows();
+        const size = this._ledgerPageSize;
+        const total = rows.length;
+        const pages = Math.max(1, Math.ceil(total / size));
+        if (this._ledgerPage > pages - 1) this._ledgerPage = pages - 1;
+        const page = this._ledgerPage;
+        const slice = rows.slice(page * size, page * size + size);
+
+        if (!total) {
+            body.innerHTML = `<tr><td colspan="5" class="text-zinc-500 text-xs py-4 text-center">${this._data.findings_recent && this._data.findings_recent.length ? 'No findings match this filter.' : 'No findings logged yet.'}</td></tr>`;
+        } else {
+            body.innerHTML = slice.map((r, i) => this._ledgerRowHtml(r, page * size + i)).join('');
+            body.querySelectorAll('.secdash-ledger-row').forEach(tr => {
+                tr.addEventListener('click', () => {
+                    const detail = body.querySelector(`.secdash-ledger-detail[data-for="${tr.dataset.idx}"]`);
+                    if (detail) detail.classList.toggle('is-open');
+                    tr.classList.toggle('is-expanded');
+                });
+            });
+        }
+
+        if (countEl) countEl.textContent = total ? `Showing ${page * size + 1}–${Math.min(total, page * size + size)} of ${total}` : 'No results';
+        if (pageEl) pageEl.textContent = `Page ${page + 1} of ${pages}`;
+        if (prevBtn) prevBtn.disabled = page <= 0;
+        if (nextBtn) nextBtn.disabled = page >= pages - 1;
+    },
+
+    _ledgerRowHtml(r, idx) {
+        const sevColorVal = sevColor(r.severity);
+        const tagsHtml = (r.tags || []).slice(0, 4).map(t => `<span class="secdash-ledger-tag">${escapeHtml(t)}</span>`).join('');
+        const verdictKnown = KNOWN_VERDICTS.includes(r.verdict);
+        const reportUrl = r.report ? REPO_BLOB + r.report : null;
+        return `<tr class="secdash-ledger-row" data-idx="${idx}">
+            <td><span class="secdash-badge" style="color:${escapeHtml(sevColorVal)};border-color:${escapeHtml(sevColorVal)}55">
+                <i class="fa-solid ${escapeHtml(SEV_ICON[r.severity] || 'fa-circle-question')} text-[9px]"></i>${escapeHtml(SEV_TITLE[r.severity] || r.severity)}
+            </span></td>
+            <td class="secdash-ledger-title">${escapeHtml(r.title || 'Untitled finding')}</td>
+            <td class="secdash-ledger-source">${escapeHtml((r.source || '').replace(/^agents\//, ''))}</td>
+            <td class="secdash-ledger-tags">${tagsHtml}</td>
+            <td class="secdash-ledger-time" title="${escapeHtml(r.timestamp || '')}">${escapeHtml(ago(r.timestamp))}<i class="fa-solid fa-chevron-down secdash-ledger-chevron"></i></td>
+        </tr>
+        <tr class="secdash-ledger-detail" data-for="${idx}">
+            <td colspan="5">
+                <div class="secdash-ledger-detail-inner">
+                    <div><span class="text-zinc-600">ID</span> <span class="font-mono">${escapeHtml(r.id || '—')}</span></div>
+                    <div><span class="text-zinc-600">Logged</span> ${escapeHtml(r.timestamp || 'unknown')}</div>
+                    ${verdictKnown ? `<div><span class="text-zinc-600">Verdict</span> ${escapeHtml(r.verdict)}</div>` : ''}
+                    ${reportUrl ? `<div><a href="${escapeHtml(reportUrl)}" target="_blank" rel="noopener" class="text-zinc-400 hover:underline">View source report <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></div>` : ''}
+                </div>
+            </td>
+        </tr>`;
+    },
+
+    _wireLedgerControls() {
+        const search = document.getElementById('secdash-ledger-search');
+        const sevSelect = document.getElementById('secdash-ledger-sev-filter');
+        const prevBtn = document.getElementById('secdash-ledger-prev');
+        const nextBtn = document.getElementById('secdash-ledger-next');
+        if (search) {
+            search.addEventListener('input', () => {
+                this._ledgerQuery = search.value;
+                this._ledgerPage = 0;
+                this._renderLedger();
+            });
+        }
+        if (sevSelect) {
+            sevSelect.innerHTML = '<option value="">All severities</option>' +
+                SEV_ORDER.map(k => `<option value="${k}">${escapeHtml(SEV_TITLE[k])}</option>`).join('');
+            sevSelect.addEventListener('change', () => {
+                this._ledgerSevFilter = sevSelect.value;
+                this._ledgerPage = 0;
+                this._renderLedger();
+            });
+        }
+        if (prevBtn) prevBtn.addEventListener('click', () => { this._ledgerPage = Math.max(0, this._ledgerPage - 1); this._renderLedger(); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { this._ledgerPage += 1; this._renderLedger(); });
     },
 };
 

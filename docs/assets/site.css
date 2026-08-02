@@ -388,31 +388,65 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35) content-box; }
 .secdash-lane-dot.is-active { background: #60a5fa content-box; }
 
-/* Risk Breakdown cards — one compact row of six (not a wrapping grid of
-   larger cards), each: a small ring + single-letter severity badge (the
-   reference's own "M"/"H" circle convention) + title + a real delta line
-   + a horizontal tick-bar built from that card's own real sub-fields
-   (see securitydashboard.js — most lanes only carry a pass/fail
-   conclusion, not a severity split, so the bar's segments are whatever
-   that lane genuinely has, never forced onto the 5-severity taxonomy). */
-.secdash-card { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.65rem !important; }
-.secdash-card-head { display: flex; align-items: center; gap: 0.5rem; }
-.secdash-ring-wrap { position: relative; width: 34px; height: 34px; flex-shrink: 0; }
-.secdash-ring-badge {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600; font-family: var(--font-mono);
+/* Category Signal Map — six real lanes as a staggered bubble cluster
+   (Chart.js `bubble`, real primitive), with a caption list beneath it
+   carrying the exact delta text each bubble represents (see
+   securitydashboard.js::_categorySignal(), the one place that computes
+   this — the chart and the caption list both read from it so they can't
+   drift out of sync with each other). */
+.secdash-signalmap-chart { position: relative; height: 150px; width: 100%; }
+.secdash-signalmap-legend {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.35rem 0.75rem; margin-top: 0.4rem;
 }
-.secdash-card-title { font-size: 11px; color: #d4d4d8; line-height: 1.25; }
-.secdash-card-delta { font-size: 10px; color: #71717a; }
-.secdash-tick-bar {
-    display: flex; height: 6px; width: 100%; border-radius: 999px; overflow: hidden;
-    background: var(--bg-panel-sm); gap: 1px;
-}
-.secdash-tick-seg { height: 100%; min-width: 2px; }
-.secdash-tick-labels { display: flex; justify-content: space-between; font-size: 10px; font-family: var(--font-mono); color: #52525b; }
+@media (min-width: 640px) { .secdash-signalmap-legend { grid-template-columns: repeat(3, 1fr); } }
+.secdash-signalmap-item { display: flex; align-items: baseline; gap: 0.4rem; font-size: 10.5px; min-width: 0; }
+.secdash-signalmap-dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; margin-top: 2px; }
+.secdash-signalmap-title { color: #d4d4d8; flex-shrink: 0; }
+.secdash-signalmap-delta { color: #71717a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Signal Timeline legend — small inline severity chips beneath the bubble
+   timeline chart (the "By Severity" toggle state only; hidden for the
+   Threat Level line-chart state, which has no per-bucket severity to key). */
+.secdash-timeline-legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+.secdash-timeline-legend-item { display: flex; align-items: center; gap: 0.3rem; font-size: 10px; color: #a1a1aa; }
+
 .secdash-chart-empty {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     text-align: center; padding: 0 1rem; font-size: 13px; color: #71717a;
+}
+
+/* Findings Ledger — a real, searchable/filterable/paginated table over the
+   most recent ~150 real findings.jsonl rows (security-dashboard.json's
+   findings_recent). Each row's sibling detail row expands in place; kept
+   as a real <tr> (not an absolutely-positioned overlay) so it pushes the
+   rows below it down rather than covering them. */
+.secdash-ledger-scroll { overflow-x: auto; }
+.secdash-ledger-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.secdash-ledger-table thead th {
+    text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.03em;
+    color: #71717a; font-weight: 500; padding: 0 0.5rem 0.4rem; border-bottom: 1px solid var(--border);
+}
+.secdash-ledger-row { cursor: pointer; transition: background-color 0.12s ease; }
+.secdash-ledger-row:hover { background: rgba(255, 255, 255, 0.03); }
+.secdash-ledger-row td { padding: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; white-space: nowrap; }
+.secdash-ledger-title {
+    color: #d4d4d8; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.secdash-ledger-source { color: #71717a; font-family: var(--font-mono); font-size: 10.5px; }
+.secdash-ledger-tags { max-width: 200px; overflow: hidden; }
+.secdash-ledger-tag {
+    display: inline-block; font-size: 9.5px; color: #a1a1aa; background: var(--bg-panel-sm);
+    border: 1px solid var(--border); border-radius: 999px; padding: 1px 7px; margin: 0 2px 2px 0;
+}
+.secdash-ledger-time { color: #71717a; font-family: var(--font-mono); font-size: 10.5px; display: flex; align-items: center; gap: 0.4rem; }
+.secdash-ledger-chevron { font-size: 8px; color: #52525b; transition: transform 0.15s ease; }
+.secdash-ledger-row.is-expanded .secdash-ledger-chevron { transform: rotate(180deg); }
+.secdash-ledger-detail { display: none; }
+.secdash-ledger-detail.is-open { display: table-row; }
+.secdash-ledger-detail td { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 0; white-space: normal; }
+.secdash-ledger-detail-inner {
+    display: flex; flex-wrap: wrap; gap: 0.9rem; padding: 0.6rem 0.5rem 0.8rem;
+    font-size: 10.5px; color: #a1a1aa; background: rgba(255, 255, 255, 0.015);
 }
 
 /* x402 Activity tiles — Transactions / Volume / Buyers, each a big number

@@ -288,16 +288,18 @@
                 </div>
             </div>
 
-            <!-- Row 2: six compact Risk Breakdown cards, one row. -->
-            <h3 class="secdash-panel-title mb-0">Risk Breakdown</h3>
-            <p class="secdash-panel-desc mb-2">Six categories of automated coverage. Each ring reflects that category's own signal.</p>
-            <div id="secdash-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-3">
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
-                <div class="panel-sm secdash-card"><div class="skeleton h-16"></div></div>
+            <!-- Row 2: Category Signal Map — six real lanes as a bubble cluster,
+                 sized by that lane's own signal magnitude, with a caption list
+                 underneath carrying the exact delta text each bubble represents. -->
+            <div class="panel-sm secdash-panel mb-3">
+                <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
+                <p class="secdash-panel-desc mb-2">Six categories of automated coverage. Bubble size reflects that category's own signal volume.</p>
+                <div class="secdash-signalmap-chart">
+                    <canvas id="secdashSignalMap"></canvas>
+                </div>
+                <div id="secdash-signalmap-legend" class="secdash-signalmap-legend">
+                    <div class="skeleton h-10"></div>
+                </div>
             </div>
 
             <!-- Row 3: compact Risk Level strip, sized below the cards it now sits beneath. -->
@@ -315,20 +317,21 @@
             </div>
 
             <!-- Row 4: findings-over-time (toggleable) | findings-by-verdict. -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
                 <div class="panel-sm secdash-panel">
                     <div class="flex items-center justify-between gap-2">
-                        <h3 class="secdash-panel-title mb-0">Findings Count per Severity</h3>
+                        <h3 class="secdash-panel-title mb-0">Signal Timeline</h3>
                         <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
                             <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
                             <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
                         </div>
                     </div>
-                    <p class="secdash-panel-desc">Weekly finding volume by severity, or toggle to threat level over time.</p>
+                    <p class="secdash-panel-desc">Daily finding volume by severity, or toggle to threat level over time.</p>
                     <div class="chart-shell-sm">
                         <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
                         <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
                     </div>
+                    <div id="secdash-timeline-legend" class="secdash-timeline-legend"></div>
                 </div>
                 <div class="panel-sm secdash-panel">
                     <h3 class="secdash-panel-title mb-0">Findings per Status</h3>
@@ -336,6 +339,45 @@
                     <div class="chart-shell-sm">
                         <canvas id="secdashVerdictChart" role="img" aria-label="Findings per status"></canvas>
                         <div id="secdash-verdict-empty" class="secdash-chart-empty" hidden></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5: Findings Ledger — a real, searchable/filterable/paginated
+                 table over the most recent ~150 real findings.jsonl rows. -->
+            <div class="panel-sm secdash-panel">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <h3 class="secdash-panel-title mb-0">Findings Ledger</h3>
+                    <div class="flex items-center gap-2">
+                        <select id="secdash-ledger-sev-filter" class="select-pill" aria-label="Filter by severity"></select>
+                        <input id="secdash-ledger-search" type="search" placeholder="Search title, source, tags…" class="text-xs bg-transparent border border-white/10 px-3 py-1.5 w-40 sm:w-56 focus:outline-none focus:border-white/30 placeholder:text-zinc-600">
+                    </div>
+                </div>
+                <p class="secdash-panel-desc mb-2">Every recent real finding, click a row for the full record.</p>
+                <div class="secdash-ledger-scroll">
+                    <table class="secdash-ledger-table">
+                        <thead>
+                            <tr>
+                                <th>Severity</th>
+                                <th>Title</th>
+                                <th>Source</th>
+                                <th>Tags</th>
+                                <th>Logged</th>
+                            </tr>
+                        </thead>
+                        <tbody id="secdash-ledger-body">
+                            <tr><td colspan="5"><div class="skeleton h-8 my-1"></div></td></tr>
+                            <tr><td colspan="5"><div class="skeleton h-8 my-1"></div></td></tr>
+                            <tr><td colspan="5"><div class="skeleton h-8 my-1"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 mt-2">
+                    <span id="secdash-ledger-count" class="pagination-info">…</span>
+                    <div class="pagination-controls">
+                        <button type="button" id="secdash-ledger-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                        <span id="secdash-ledger-page" class="text-zinc-400">Page 1</span>
+                        <button type="button" id="secdash-ledger-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
                     </div>
                 </div>
             </div>

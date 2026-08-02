@@ -102,17 +102,21 @@ def test_build_findings_summary_counts_by_severity_and_verdict():
     assert by_sev["MEDIUM"] == 1  # the caution-tag row
     assert by_sev["INFO"] == 1  # the PROCEED-verdict row
     assert by_verdict == {"PROCEED": 1, "CAUTION": 0, "REJECT": 1}
-    assert len(timeline) == 2  # two distinct ISO weeks
+    assert len(timeline) == 2  # two distinct days
 
 
-def test_build_findings_summary_buckets_by_iso_week():
+def test_build_findings_summary_buckets_by_day():
     entries = [
-        {"timestamp": "2026-07-01T00:00:00Z"},  # 2026-W27
-        {"timestamp": "2026-07-02T00:00:00Z"},  # same week
+        {"timestamp": "2026-07-01T00:00:00Z"},
+        {"timestamp": "2026-07-01T23:00:00Z"},  # same day
+        {"timestamp": "2026-07-02T00:00:00Z"},  # different day
     ]
     _by_sev, _by_verdict, timeline = bsd.build_findings_summary(entries)
-    assert len(timeline) == 1
+    assert len(timeline) == 2
+    assert timeline[0]["period"] == "2026-07-01"
     assert timeline[0]["total"] == 2
+    assert timeline[1]["period"] == "2026-07-02"
+    assert timeline[1]["total"] == 1
 
 
 def test_build_findings_summary_skips_entries_with_unparseable_timestamp():
@@ -127,6 +131,61 @@ def test_build_findings_summary_empty_input():
     assert by_sev == {s: 0 for s in bsd.SEVERITIES}
     assert by_verdict == {"PROCEED": 0, "CAUTION": 0, "REJECT": 0}
     assert timeline == []
+
+
+# ── build_findings_recent() ──────────────────────────────────────────────────
+
+def test_build_findings_recent_orders_newest_first():
+    entries = [
+        {"id": "a", "timestamp": "2026-07-01T00:00:00Z", "title": "old"},
+        {"id": "b", "timestamp": "2026-08-01T00:00:00Z", "title": "new"},
+        {"id": "c", "timestamp": "2026-07-15T00:00:00Z", "title": "mid"},
+    ]
+    recent = bsd.build_findings_recent(entries)
+    assert [r["id"] for r in recent] == ["b", "c", "a"]
+
+
+def test_build_findings_recent_excludes_unparseable_timestamps():
+    entries = [
+        {"id": "a", "timestamp": "2026-07-01T00:00:00Z"},
+        {"id": "b", "timestamp": "not-a-date"},
+        {"id": "c"},  # no timestamp at all
+    ]
+    recent = bsd.build_findings_recent(entries)
+    assert [r["id"] for r in recent] == ["a"]
+
+
+def test_build_findings_recent_respects_limit():
+    entries = [{"id": str(i), "timestamp": f"2026-07-{(i % 28) + 1:02d}T00:00:00Z"} for i in range(10)]
+    recent = bsd.build_findings_recent(entries, limit=3)
+    assert len(recent) == 3
+
+
+def test_build_findings_recent_row_shape_and_derived_fields():
+    entry = {
+        "id": "abc123",
+        "timestamp": "2026-08-01T00:00:00Z",
+        "title": "Investigation: FOO -> REJECT",
+        "source": "agents/investigate.py",
+        "tags": ["investigation", "reject"],
+        "metadata": {"verdict": "REJECT", "report": "reports/foo.md"},
+    }
+    row = bsd.build_findings_recent([entry])[0]
+    assert row["id"] == "abc123"
+    assert row["title"] == "Investigation: FOO -> REJECT"
+    assert row["source"] == "agents/investigate.py"
+    assert row["tags"] == ["investigation", "reject"]
+    assert row["verdict"] == "REJECT"
+    assert row["report"] == "reports/foo.md"
+    assert row["severity"] == "HIGH"  # normalize_severity() on a REJECT verdict
+
+
+def test_build_findings_recent_handles_missing_metadata_and_tags():
+    row = bsd.build_findings_recent([{"id": "x", "timestamp": "2026-08-01T00:00:00Z"}])[0]
+    assert row["verdict"] is None
+    assert row["report"] is None
+    assert row["tags"] == []
+    assert row["severity"] == "INFO"
 
 
 # ── build_lanes() ────────────────────────────────────────────────────────────
