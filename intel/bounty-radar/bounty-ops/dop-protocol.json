@@ -68,6 +68,38 @@
     {
       "item": "Submit the report to the DOP Protocol bug bounty program through the Hackenproof platform, ensuring that all required information is included and that the submission is made within any applicable deadlines or timeframes.",
       "done": false
+    },
+    {
+      "item": "Identify the specific Solidity/EVM smart contracts that are within the scope of the DOP Protocol bug bounty program to determine the target for the audit.",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py on the identified smart contracts to perform a comprehensive analysis using tools such as Slither, Halmos symbolic execution, Mythril, Aderyn static AST analysis, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the results from agents/deep_dive_audit.py to identify potential vulnerabilities, focusing on common issues such as access control, oracle trust, reentrancy, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contracts and analysis results to validate the findings, check for false positives, and identify any potential vulnerabilities that may have been missed by the automated tools.",
+      "done": false
+    },
+    {
+      "item": "Categorize and prioritize the identified vulnerabilities based on their severity and potential impact, using a real vulnerability taxonomy to ensure consistency and accuracy.",
+      "done": false
+    },
+    {
+      "item": "Prepare a detailed report of the findings, including descriptions of the vulnerabilities, steps to reproduce, and recommendations for remediation, to submit to the DOP Protocol bug bounty program.",
+      "done": false
+    },
+    {
+      "item": "Ensure the report meets the submission requirements outlined in the program's rules, including any specific formatting or content guidelines, to guarantee a successful submission.",
+      "done": false
+    },
+    {
+      "item": "Submit the report to the DOP Protocol bug bounty program through the Hackenproof platform, following the program's instructions for submission and awaiting feedback and potential reward.",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-26T17:38:53.931032Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T17:39:14.496689Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785087531.977282,
+  "checklistGeneratedAt": 1785692352.7370489,
   "vapeReportUrl": null,
   "name": "DOP Protocol",
   "platform": "hackenproof",
@@ -99,5 +135,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T17:38:51.977285Z"
+  "updatedAt": "2026-08-02T17:39:12.737051Z"
 }

@@ -72,6 +72,38 @@
     {
       "item": "Submit the findings to the Hackenproof platform, following their specific submission process and ensuring that all required information is included to be eligible for the bounty.",
       "done": false
+    },
+    {
+      "item": "Identify the Move/Sui smart contract code repository, likely available as a git repository, to obtain the target code for analysis.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the identified Move/Sui smart contract code to perform source fetch, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the results from agents/external_audit.py to identify potential vulnerabilities, focusing on common issues such as access control, oracle trust, reentrancy, and business logic flaws.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contract's code and documentation to check for potential vulnerabilities that may not have been caught by automated tools, using a real vulnerability taxonomy as a guide.",
+      "done": false
+    },
+    {
+      "item": "Investigate any identified potential vulnerabilities to determine their validity, impact, and exploitability, and gather evidence to support a bug bounty submission.",
+      "done": false
+    },
+    {
+      "item": "Document the findings, including steps to reproduce, expected behavior, and actual behavior, to create a clear and comprehensive bug bounty submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure the submission meets the requirements outlined on the Hackenproof program page, including any specific formatting or content guidelines, to increase the chances of a successful claim.",
+      "done": false
+    },
+    {
+      "item": "Submit the bug bounty report through the official Hackenproof channels, following their guidelines and procedures, to claim the potential $300,000 prize.",
+      "done": false
     }
   ],
   "progress": [
@@ -90,9 +122,13 @@
     {
       "ts": "2026-07-26T17:38:51.976729Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T17:39:12.736400Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785087530.23294,
+  "checklistGeneratedAt": 1785692351.08182,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Scallop Protocol (Smart Contract)",
   "platform": "hackenproof",
@@ -107,6 +143,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T17:38:50.232944Z",
+  "updatedAt": "2026-08-02T17:39:11.081824Z",
   "vapeReportKind": "external-audit"
 }

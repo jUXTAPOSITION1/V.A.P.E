@@ -68,6 +68,42 @@
     {
       "item": "Submit the documented vulnerabilities to the program, ensuring that all required information is included and that the submission is made within the program's specified timeframe and guidelines.",
       "done": false
+    },
+    {
+      "item": "Verify the current scope, rules, and payout tiers for the Cetus Smart Contracts bug bounty program directly on the Hackenproof program page to ensure accuracy and avoid any potential misunderstandings.",
+      "done": false
+    },
+    {
+      "item": "Identify the Move/Sui smart contract repository or codebase that is within the scope of the bug bounty program, likely available through a provided git repository link.",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py on the identified Move/Sui smart contract codebase to perform source fetch, Move Prover/sui-prover formal verification where applicable, and frontier-LLM review.",
+      "done": false
+    },
+    {
+      "item": "Analyze the output from agents/external_audit.py for potential vulnerabilities, focusing on common issues such as access control, oracle trust, and business logic flaws specific to Move/Sui smart contracts.",
+      "done": false
+    },
+    {
+      "item": "Manually review the contract code against a real vulnerability taxonomy, checking for reentrancy, front-running, and other attack vectors that may not be caught by automated tools.",
+      "done": false
+    },
+    {
+      "item": "Investigate any potential findings to determine their validity and impact, ensuring they are within the program's scope and meet the submission criteria.",
+      "done": false
+    },
+    {
+      "item": "Document all findings, including steps to reproduce, expected behavior, and actual behavior, to prepare a clear and comprehensive submission.",
+      "done": false
+    },
+    {
+      "item": "Ensure that the submission adheres to the program's guidelines and includes all required information, such as a detailed description of the vulnerability and any relevant code snippets or exploits.",
+      "done": false
+    },
+    {
+      "item": "Submit the findings through the Hackenproof platform, following the program's specified submission process, to be eligible for the $300,000 prize.",
+      "done": false
     }
   ],
   "progress": [
@@ -88,7 +124,7 @@
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785087528.5240827,
+  "checklistGeneratedAt": 1785692349.399433,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-cetusprotocol-cetus-clmm-interface-2026-07-19.md",
   "name": "Cetus Smart Contracts",
   "platform": "hackenproof",
@@ -102,6 +138,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T17:38:48.524086Z",
+  "updatedAt": "2026-08-02T17:39:09.399439Z",
   "vapeReportKind": "external-audit"
 }
