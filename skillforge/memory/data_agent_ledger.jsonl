@@ -548,3 +548,4 @@
 {"ts": "2026-08-02T11:59:19.853766Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-02T12:29:40.694197Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 55}
 {"ts": "2026-08-02T12:59:45.453394Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
+{"ts": "2026-08-02T13:29:36.766485Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
