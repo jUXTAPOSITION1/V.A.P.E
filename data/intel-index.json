@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-02T11:14:14Z",
+  "generated": "2026-08-02T11:22:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 505,
+    "reports": 506,
     "reports_by_type": {
+      "bounty": 123,
       "base": 102,
       "sentiment": 53,
-      "bounty": 122,
       "security": 93,
       "macro": 26,
       "bug": 4,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-105920-0x4BfAa776.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-02-10.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-02T10:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_112219.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T11:22:19Z",
       "threat": null,
-      "summary": "Date: 2026-08-02 10:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-02-10.md",
-      "bytes": 9152
+      "summary": "Base mover: HOME / WETH 0.3% +35% 24h (liq $56480.507) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_112219.md",
+      "bytes": 16984
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_112219.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T11:22:19Z",
+      "threat": null,
+      "summary": "Base mover: HOME / WETH 0.3% +35% 24h (liq $56480.507) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_112219.md",
+      "bytes": 16984
+    },
     {
       "kind": "intel",
       "type": "base",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 20:16 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-30-20.md",
       "bytes": 3206
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-30-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-30T19:00Z",
-      "threat": null,
-      "summary": "The last 7 days recorded 11 incidents totaling under $60M in losses, with no single event reaching $50M. The largest was the AFX Bridge private-key compromise on Arbitrum ($24.15M), followed by Crypto DAO on BSC ($8.2M), the Verus-Ethereum Bridge verification bypass ($7.53M), and the Wanchain signature exploit on Cardano ($6.5M). Remainin",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-30-19.md",
-      "bytes": 6651
     }
   ],
   "broadcasts": [
