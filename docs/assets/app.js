@@ -22,7 +22,7 @@ const RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 // which is exactly what caused the x402 hire flow to keep failing with a
 // stale CORS config after the fix had already shipped.
 const WORKER_BASE = "https://vape-x402.vapex402.workers.dev";
-const fmtUsd = n => n==null ? "—" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
+const fmtUsd = n => n==null ? "…" : (n>=1e9 ? "$"+(n/1e9).toFixed(2)+"B" : n>=1e6 ? "$"+(n/1e6).toFixed(1)+"M" : "$"+Number(n).toLocaleString());
 const pct = n => (typeof n==="number") ? `<span class="${n>=0?'text-emerald-400':'text-rose-400'}">${n>=0?'+':''}${n.toFixed(2)}%</span>` : "";
 
 // Shared chart-range map — one source of truth for every range selector on
@@ -213,7 +213,7 @@ const App = {
             this._wireAuditListControls();
             this._renderAuditList();
         } catch(e) {
-            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet — <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">browse the audit ledger</a>.</div>';
+            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet. <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">Browse the audit ledger</a>.</div>';
         }
     },
 
@@ -284,7 +284,7 @@ const App = {
         try {
             if (!this._rep) this._rep = await (await fetch(`${RAW}/data/reputation.json?t=`+Date.now())).json();
             const r = this._rep, a = r.verifiable_activity||{}, c = r.capabilities||{}, id = r.identity||{};
-            const set = (el,v)=>{const n=document.getElementById(el); if(n) n.textContent = (v==null?'—':Number(v).toLocaleString());};
+            const set = (el,v)=>{const n=document.getElementById(el); if(n) n.textContent = (v==null?'…':Number(v).toLocaleString());};
             set('rep-reports', a.reports_published);
             set('rep-broadcasts', a.intel_broadcasts);
             set('rep-investigations', a.catalog_investigations);
@@ -429,7 +429,7 @@ const App = {
 
         if (!this._workshop.builds.length) {
             el.innerHTML = `<div class="md:col-span-2 text-center py-8 text-zinc-500 text-sm">
-                No open build proposals right now — the last cycle found no gap worth building against
+                No open build proposals right now. The last cycle found no gap worth building against
                 (tool registry clean, no fresh findings to ground a proposal in). Checks run 2x/day automatically.
             </div>`;
             this._renderWorkshopPagination(0);
@@ -640,8 +640,8 @@ const App = {
                     <span class="px-3 py-1 border shrink-0" style="color:${vc};border-color:${vc}">${verdict[0]}</span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                    <div><div class="text-zinc-500">Holders</div><div class="stat">${gp.holder_count?Number(gp.holder_count).toLocaleString():'—'}</div></div>
-                    <div><div class="text-zinc-500">Liquidity</div><div class="stat">${liq?fmtUsd(liq):'—'}</div></div>
+                    <div><div class="text-zinc-500">Holders</div><div class="stat">${gp.holder_count?Number(gp.holder_count).toLocaleString():'…'}</div></div>
+                    <div><div class="text-zinc-500">Liquidity</div><div class="stat">${liq?fmtUsd(liq):'…'}</div></div>
                     <div><div class="text-zinc-500">Honeypot</div><div class="${gp.is_honeypot==='1'?'text-rose-400':'text-emerald-500'}">${gp.is_honeypot==='1'?'YES':'no'}</div></div>
                     <div><div class="text-zinc-500">Buy/Sell tax</div><div>${gp.buy_tax!=null?(gp.buy_tax*100).toFixed(1):'?'}% / ${gp.sell_tax!=null?(gp.sell_tax*100).toFixed(1):'?'}%</div></div>
                 </div>
@@ -678,7 +678,7 @@ const App = {
                     liq = fallback.liquidity_usd;
                     note = `Liquidity from an alternate source (primary market-data source temporarily unavailable: ${dsRaw._error}).`;
                 } else {
-                    note = `Market data unavailable (${dsRaw._error}) — liquidity may be understated.`;
+                    note = `Market data unavailable (${dsRaw._error}), liquidity may be understated.`;
                 }
             }
             this.renderScanResult(el, addr, chain, gp, liq, pairs, note);
@@ -691,9 +691,9 @@ const App = {
             const chains = await (await fetch('https://api.llama.fi/v2/chains')).json();
             const base = chains.find(c => (c.name||'').toLowerCase()==='base');
             document.getElementById('m-tvl').classList.remove('skeleton');
-            document.getElementById('m-tvl').textContent = base ? fmtUsd(base.tvl) : '—';
+            document.getElementById('m-tvl').textContent = base ? fmtUsd(base.tvl) : '…';
             this._tvl = base?.tvl;
-        } catch(e){ this._set('m-tvl','—'); }
+        } catch(e){ this._set('m-tvl','…'); }
 
         // Base block + gas — prefer the Alchemy-backed worker endpoint (more
         // reliable, keyless from the browser's perspective) and fall back to
@@ -714,14 +714,14 @@ const App = {
             }
             this._set('m-block', block.toLocaleString());
             this._set('m-gas', gasGwei.toFixed(3));
-        } catch(e){ this._set('m-block','—'); this._set('m-gas','—'); }
+        } catch(e){ this._set('m-block','…'); this._set('m-gas','…'); }
 
         // Prices
         try {
             const p = await (await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin&vs_currencies=usd&include_24hr_change=true')).json();
             this._ethPrice = p.ethereum.usd;
             this._set('m-price', `$${Math.round(p.ethereum.usd).toLocaleString()} / $${Math.round(p.bitcoin.usd).toLocaleString()}`);
-        } catch(e){ this._set('m-price','—'); }
+        } catch(e){ this._set('m-price','…'); }
     },
 
     // Broader-market context alongside the Base-specific tiles above — both
@@ -736,13 +736,13 @@ const App = {
             const v = d ? parseInt(d.value, 10) : null;
             const el = document.getElementById('m-feargreed');
             el.classList.remove('skeleton');
-            el.innerHTML = (v != null && !isNaN(v)) ? `${v} <span class="text-xs text-zinc-500 font-sans">${this._esc(d.value_classification || '')}</span>` : '—';
+            el.innerHTML = (v != null && !isNaN(v)) ? `${v} <span class="text-xs text-zinc-500 font-sans">${this._esc(d.value_classification || '')}</span>` : '…';
             const fill = document.getElementById('m-feargreed-fill');
             if (fill && v != null && !isNaN(v)) {
                 fill.style.width = `${v}%`;
                 fill.style.background = v <= 24 ? '#fb7185' : v <= 44 ? '#fbbf24' : v <= 55 ? '#a1a1aa' : v <= 75 ? '#84cc16' : '#10b981';
             }
-        } catch (e) { this._set('m-feargreed', '—'); }
+        } catch (e) { this._set('m-feargreed', '…'); }
 
         try {
             const g = await (await fetch('https://api.coingecko.com/api/v3/global')).json();
@@ -750,8 +750,8 @@ const App = {
             const chg = g?.data?.market_cap_change_percentage_24h_usd;
             const el = document.getElementById('m-mcap');
             el.classList.remove('skeleton');
-            el.innerHTML = mc != null ? `${fmtUsd(mc)}${typeof chg === 'number' ? ` <span class="text-xs font-sans">${pct(chg)}</span>` : ''}` : '—';
-        } catch (e) { this._set('m-mcap', '—'); }
+            el.innerHTML = mc != null ? `${fmtUsd(mc)}${typeof chg === 'number' ? ` <span class="text-xs font-sans">${pct(chg)}</span>` : ''}` : '…';
+        } catch (e) { this._set('m-mcap', '…'); }
     },
 
     // "Base Movers" — real data source, tried in order:
@@ -778,7 +778,7 @@ const App = {
                 await this._moversFromDexScreenerBoosts();
             } catch (e2) {
                 console.error('[baseMovers] Base Movers unavailable:', e2.message || e2);
-                el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable — retries next cycle.</div>`;
+                el.innerHTML = `<div class="text-amber-400 text-sm">Live trending data unavailable. Retries next cycle.</div>`;
             }
         }
     },
@@ -950,8 +950,8 @@ const App = {
                     <div class="text-xs text-zinc-500 truncate">${this._esc(p.baseToken?.name||'')}</div>
                 </div>
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
-                    <div class="stat text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
-                    <div class="text-xs">${typeof chg==='number'?pct(chg):'—'}</div>
+                    <div class="stat text-sm sm:text-base">${priceUsd!=null?'$'+priceUsd.toLocaleString(undefined,{maximumSignificantDigits:6}):'…'}</div>
+                    <div class="text-xs">${typeof chg==='number'?pct(chg):'…'}</div>
                 </div>
                 <div class="text-right shrink-0 hidden sm:block w-20">
                     <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
@@ -1047,13 +1047,13 @@ const App = {
     _renderVirtualsStats(snap) {
         const detail = snap.detail || {};
         const holders = snap.holders || {};
-        this._set('v-price', detail.priceUSD!=null ? '$'+Number(detail.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}) : '—');
+        this._set('v-price', detail.priceUSD!=null ? '$'+Number(detail.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}) : '…');
         this._set('v-mcap', fmtUsd(detail.marketCap));
         this._set('v-vol', fmtUsd(detail.volume24));
         const chgEl = document.getElementById('v-chg');
         if (chgEl) chgEl.innerHTML = pct(detail.change24);
         const holdEl = document.getElementById('v-holders');
-        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'—'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span>`;
+        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'…'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span>`;
         this._renderVirtualsSparkline(snap.bars);
     },
 
@@ -1129,7 +1129,7 @@ const App = {
             const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
                 : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
             const yesPct = yesPrice != null ? Math.round(yesPrice * 100) : null;
-            const pctLabel = yesPct != null ? yesPct + '% Yes' : '—';
+            const pctLabel = yesPct != null ? yesPct + '% Yes' : '…';
             // Probability-read color, not a VAPE Score — a quick "which way is
             // the market leaning" glance, same band language as the rest of
             // the site (green/amber/rose) but scoped to this one number.
@@ -1227,8 +1227,8 @@ const App = {
                     <div class="text-[10px] text-zinc-500 sm:hidden truncate">Vol ${fmtUsd(t.volume24)} · MCap ${fmtUsd(t.marketCap)}</div>
                 </div>
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
-                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
-                    <div class="text-xs">${typeof t.change24==='number'?pct(t.change24):'—'}</div>
+                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'…'}</div>
+                    <div class="text-xs">${typeof t.change24==='number'?pct(t.change24):'…'}</div>
                 </div>
                 <div class="text-right shrink-0 hidden sm:block w-20">
                     <div class="text-[10px] text-zinc-500 uppercase tracking-wider">Vol 24h</div>
@@ -1245,9 +1245,9 @@ const App = {
     },
 
     // Human-readable "launched Xh ago" from a unix-seconds createdAt. Real
-    // Codex data or nothing — returns '—' rather than a fabricated guess.
+    // Codex data or nothing — returns '…' rather than a fabricated guess.
     _launchAge(createdAt) {
-        if (typeof createdAt !== 'number') return '—';
+        if (typeof createdAt !== 'number') return '…';
         const mins = Math.floor((Date.now()/1000 - createdAt) / 60);
         if (mins < 60) return `${Math.max(mins,0)}m ago`;
         if (mins < 1440) return `${Math.floor(mins/60)}h ago`;
@@ -1287,7 +1287,7 @@ const App = {
                     <div class="text-[10px] text-zinc-500 sm:hidden truncate">Vol ${fmtUsd(t.volume24)} · MCap ${fmtUsd(t.marketCap)}</div>
                 </div>
                 <div class="text-right shrink-0 min-w-[4rem] sm:min-w-[6rem]">
-                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'—'}</div>
+                    <div class="stat text-sm sm:text-base">${t.priceUSD!=null?'$'+Number(t.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}):'…'}</div>
                     <div class="text-xs text-zinc-500">${this._launchAge(t.createdAt)}</div>
                 </div>
                 <div class="text-right shrink-0 hidden sm:block w-20">
@@ -1434,7 +1434,7 @@ const App = {
                     n.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline fill="none" stroke="${up?'#10b981':'#fb7185'}" stroke-width="1.5" points="${pts}"/></svg>`;
                 }
                 const feesEl = row?.querySelector('.proto-fees');
-                if (feesEl) feesEl.textContent = `Fees 24h ${detail.fees24h!=null ? fmtUsd(detail.fees24h) : '—'}`;
+                if (feesEl) feesEl.textContent = `Fees 24h ${detail.fees24h!=null ? fmtUsd(detail.fees24h) : '…'}`;
                 // Only the 8→9 real network requests need the courtesy
                 // stagger to the free public API — a cache hit (from a
                 // #proto-sort re-render, e.g.) fills instantly.
@@ -1607,12 +1607,12 @@ const App = {
             body.innerHTML = `
                 <div class="stat-line mb-5 pb-5 border-b border-white/10">
                     <span class="stat-pair"><span class="stat-label">tvl</span><span class="stat-value">${fmtUsd(base.tvl)}</span></span>
-                    <span class="stat-pair"><span class="stat-label">fees 24h</span><span id="proto-fees24" class="stat-value">${detail.fees24h!=null?fmtUsd(detail.fees24h):'—'}</span></span>
+                    <span class="stat-pair"><span class="stat-label">fees 24h</span><span id="proto-fees24" class="stat-value">${detail.fees24h!=null?fmtUsd(detail.fees24h):'…'}</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 7d</span><span id="proto-fees7" class="stat-value">…</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 30d</span><span id="proto-fees30" class="stat-value">…</span></span>
                     <span class="stat-pair"><span class="stat-label">fees 1y</span><span id="proto-fees1y" class="stat-value">…</span></span>
                     <span class="stat-pair"><span class="stat-label">fees all-time</span><span id="proto-fees-all" class="stat-value">…</span></span>
-                    <span class="stat-pair"><span class="stat-label">audits</span><span class="stat-value">${detail.audits?this._esc(String(detail.audits)):'—'}</span></span>
+                    <span class="stat-pair"><span class="stat-label">audits</span><span class="stat-value">${detail.audits?this._esc(String(detail.audits)):'…'}</span></span>
                 </div>
                 <div id="proto-treasury" class="text-xs text-zinc-500 mb-5"></div>
                 <div class="flex items-center justify-between mb-3">
@@ -1645,10 +1645,10 @@ const App = {
             // core view above is already visible, so a slow/failed extra
             // fetch never blocks or breaks the rest of the modal.
             this._ensureProtoExtras(slug).then(d => {
-                const f7 = document.getElementById('proto-fees7'); if (f7) f7.textContent = d.fees7d!=null?fmtUsd(d.fees7d):'—';
-                const f30 = document.getElementById('proto-fees30'); if (f30) f30.textContent = d.fees30d!=null?fmtUsd(d.fees30d):'—';
-                const f1y = document.getElementById('proto-fees1y'); if (f1y) f1y.textContent = d.fees1y!=null?fmtUsd(d.fees1y):'—';
-                const fAll = document.getElementById('proto-fees-all'); if (fAll) fAll.textContent = d.feesAllTime!=null?fmtUsd(d.feesAllTime):'—';
+                const f7 = document.getElementById('proto-fees7'); if (f7) f7.textContent = d.fees7d!=null?fmtUsd(d.fees7d):'…';
+                const f30 = document.getElementById('proto-fees30'); if (f30) f30.textContent = d.fees30d!=null?fmtUsd(d.fees30d):'…';
+                const f1y = document.getElementById('proto-fees1y'); if (f1y) f1y.textContent = d.fees1y!=null?fmtUsd(d.fees1y):'…';
+                const fAll = document.getElementById('proto-fees-all'); if (fAll) fAll.textContent = d.feesAllTime!=null?fmtUsd(d.feesAllTime):'…';
                 const tEl = document.getElementById('proto-treasury');
                 if (tEl && d.treasuryUsd) {
                     tEl.textContent = `Treasury ${fmtUsd(d.treasuryUsd)}` + (d.ownTokenShare!=null ? ` · ${(d.ownTokenShare*100).toFixed(0)}% own-token` : '');
@@ -1722,7 +1722,7 @@ const App = {
             this._pgWire('bounty-ops-pg', 6, () => this._renderBounties());
             this._renderBounties();
         } catch(e){
-            el.innerHTML = `<div class="text-zinc-500 text-sm">No VAPE-fit live bounty program currently tracked — <a class="text-zinc-400 hover:underline" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">browse intel</a>.</div>`;
+            el.innerHTML = `<div class="text-zinc-500 text-sm">No live bounty program in scope right now. <a class="text-zinc-400 hover:underline" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">Browse intel</a>.</div>`;
             if (searchEl) searchEl.classList.add('hidden');
         }
     },
@@ -1746,7 +1746,7 @@ const App = {
             <div class="diff-row">
                 <div class="flex items-start justify-between gap-2">
                     <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
-                    <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'—'}</div>
+                    <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'…'}</div>
                 </div>
                 <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
                 ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}

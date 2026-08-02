@@ -107,7 +107,7 @@ const Profile = {
             if (!res.ok) {
                 let detail = '';
                 try { detail = (await res.json()).error || ''; } catch (e) { /* non-JSON error body */ }
-                this._workerError = `worker returned HTTP ${res.status}${detail ? ' — ' + detail : ''}`;
+                this._workerError = `worker returned HTTP ${res.status}${detail ? ': ' + detail : ''}`;
                 return null;
             }
             const data = await res.json();
@@ -197,7 +197,7 @@ const Profile = {
         try {
             [holdings, nfts] = await Promise.all([this.loadHoldings(address), this.loadNfts(address)]);
         } catch (e) {
-            root.innerHTML = `<div class="text-amber-400 text-sm">Couldn't read holdings right now (RPC/price feed hiccup) — try again in a moment.</div>`;
+            root.innerHTML = `<div class="text-amber-400 text-sm">Couldn't read holdings right now (RPC/price feed hiccup). Try again in a moment.</div>`;
             return;
         }
         const total = holdings.reduce((s, h) => s + h.valueUsd, 0);
@@ -221,7 +221,7 @@ const Profile = {
                         <div class="stat text-3xl mt-1 ${pnl.deltaUsd >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${pnl.deltaUsd >= 0 ? '+' : ''}${fmtUsd(pnl.deltaUsd)}</div>
                         <div class="text-[11px] text-zinc-600 mt-2">${pct(pnl.deltaPct)} · based on ${pnl.coverage} of ${pnl.total} priced assets</div>
                     ` : `
-                        <div class="stat text-3xl mt-1 text-zinc-600">—</div>
+                        <div class="stat text-3xl mt-1 text-zinc-600">…</div>
                         <div class="text-[11px] text-zinc-600 mt-2">No priced holdings with 24h data yet</div>
                     `}
                 </div>
@@ -265,7 +265,7 @@ const Profile = {
                     <div class="text-zinc-400 text-xs uppercase tracking-wider">Cost basis estimate <span class="text-zinc-600 normal-case">(beta)</span></div>
                     <button id="profile-costbasis-btn" class="term-btn term-btn-sm shrink-0">Run estimate</button>
                 </div>
-                <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet — an approximation, not a full weighted-average cost basis across every acquisition.</p>
+                <p class="text-[11px] text-zinc-600 mb-3">Prices each token at its <em>first</em> recorded incoming transfer to this wallet: an approximation, not a full weighted-average cost basis across every acquisition.</p>
                 <div id="profile-costbasis"></div>
             </div>
             <div class="mb-6">
@@ -293,7 +293,7 @@ const Profile = {
         const el = document.getElementById('profile-costbasis');
         btn.disabled = true;
         btn.classList.add('opacity-50');
-        el.innerHTML = '<div class="text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Estimating (this can take a few seconds — one lookup per top holding)…</div>';
+        el.innerHTML = '<div class="text-zinc-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Estimating (this can take a few seconds, one lookup per top holding)…</div>';
         const { results, error } = await this.loadCostBasis(address);
         btn.disabled = false;
         btn.classList.remove('opacity-50');
@@ -302,7 +302,7 @@ const Profile = {
             return;
         }
         if (error || !results) {
-            el.innerHTML = '<div class="text-amber-400 text-sm">Estimate failed — try again in a moment.</div>';
+            el.innerHTML = '<div class="text-amber-400 text-sm">Estimate failed. Try again in a moment.</div>';
             return;
         }
         if (!results.length) {
@@ -311,7 +311,7 @@ const Profile = {
         }
         el.innerHTML = results.map(r => {
             const hasPnl = typeof r.pnlUsd === 'number';
-            const acquired = r.acquiredAt ? new Date(r.acquiredAt).toLocaleDateString() : '—';
+            const acquired = r.acquiredAt ? new Date(r.acquiredAt).toLocaleDateString() : '…';
             return `
             <div class="card-h diff-row flex items-center gap-3">
                 <div class="min-w-0 flex-1">
@@ -319,7 +319,7 @@ const Profile = {
                     <div class="text-[11px] text-zinc-600 truncate">${r.note ? escapeHtml(r.note) : `first acquired ${acquired}`}</div>
                 </div>
                 <div class="text-right shrink-0">
-                    <div class="stat text-sm ${hasPnl ? (r.pnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400') : 'text-zinc-600'}">${hasPnl ? `${r.pnlUsd >= 0 ? '+' : ''}${fmtUsd(r.pnlUsd)}` : '—'}</div>
+                    <div class="stat text-sm ${hasPnl ? (r.pnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400') : 'text-zinc-600'}">${hasPnl ? `${r.pnlUsd >= 0 ? '+' : ''}${fmtUsd(r.pnlUsd)}` : '…'}</div>
                     <div class="text-xs text-zinc-500">${typeof r.pnlPct === 'number' ? pct(r.pnlPct) : ''}</div>
                 </div>
             </div>`;
@@ -344,7 +344,7 @@ const Profile = {
                     : `<div class="flex items-center gap-3 min-w-0 flex-1">${icon}${nameBlock}</div>`}
                 <div class="text-right shrink-0">
                     <div class="stat text-sm">${h.balance < 0.0001 && h.balance > 0 ? '<0.0001' : h.balance.toLocaleString(undefined,{maximumFractionDigits:4})}</div>
-                    <div class="text-xs text-zinc-500">${h.valueUsd ? fmtUsd(h.valueUsd) : '—'} ${typeof h.change24h==='number' ? pct(h.change24h) : ''}</div>
+                    <div class="text-xs text-zinc-500">${h.valueUsd ? fmtUsd(h.valueUsd) : '…'} ${typeof h.change24h==='number' ? pct(h.change24h) : ''}</div>
                 </div>
             </div>`;
         }).join('');
@@ -433,7 +433,7 @@ const Profile = {
         const el = document.getElementById('profile-cases');
         if (!el) return;
         if (!cases.length) {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">No engagements yet from this wallet on this device — authorize an x402 service above in "Engagement Options" and it\'ll show up here.</div>';
+            el.innerHTML = '<div class="text-zinc-500 text-sm">No engagements yet from this wallet on this device. Authorize an x402 service above in "Engagement Options" and it\'ll show up here.</div>';
             return;
         }
         el.innerHTML = cases.slice(0, 50).map((c, i) => {
@@ -526,10 +526,10 @@ const Profile = {
             } catch (e) { /* fall back to 18 */ }
             this._manual.push({ symbol: addr.slice(0, 6) + '…', name: 'Manually added', address: addr, decimals });
             input.value = '';
-            status.textContent = 'Added — refreshing holdings…';
+            status.textContent = 'Added. Refreshing holdings…';
             await this.render(walletAddress);
         } catch (e) {
-            status.textContent = 'Could not read that contract — is it an ERC-20 on Base?';
+            status.textContent = 'Could not read that contract. Is it an ERC-20 on Base?';
             status.className = 'text-[11px] text-amber-400 mt-2';
         }
     },

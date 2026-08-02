@@ -54,7 +54,7 @@ async function init() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         text = await res.text();
     } catch (e) {
-        renderError('This story could not be loaded — it may have been moved or the archive is briefly unreachable.');
+        renderError('This story could not be loaded. It may have been moved or the archive is briefly unreachable.');
         return;
     }
 
@@ -67,7 +67,7 @@ async function init() {
     const image = field(text, 'Image');
     const factChecked = field(text, 'Fact-checked');
 
-    document.title = `${headline} — VAPE Wire`;
+    document.title = `${headline}: VAPE Wire`;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && dek) metaDesc.setAttribute('content', dek);
 
@@ -82,7 +82,7 @@ async function init() {
         <h1 class="article-headline">${escapeHtml(headline)}</h1>
         ${dek ? `<p class="article-dek">${escapeHtml(dek)}</p>` : ''}
         <div class="article-byline">
-            <span><i class="fa-solid fa-feather-pointed text-[10px] mr-1"></i>${escapeHtml(agency)} — ${escapeHtml(byline)}</span>
+            <span><i class="fa-solid fa-feather-pointed text-[10px] mr-1"></i>${escapeHtml(agency)}, ${escapeHtml(byline)}</span>
             ${dateStr ? `<span>${escapeHtml(dateStr)}</span>` : ''}
             ${factChecked ? `<span title="${escapeHtml(factChecked)}"><i class="fa-solid fa-circle-check text-[10px] mr-1 ${factChecked.startsWith('Yes') ? 'text-emerald-400' : 'text-zinc-500'}"></i>${factChecked.startsWith('Yes') ? 'Fact-checked' : 'Not independently reviewed'}</span>` : ''}
         </div>

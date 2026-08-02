@@ -308,7 +308,7 @@ const AttackFeed = {
         if (!items.length) {
             line.style.transition = 'none';
             line.style.transform = 'translateX(0)';
-            line.innerHTML = '<span class="text-zinc-600">No incidents or stories in the live feed this cycle — it fills in as soon as one lands.</span>';
+            line.innerHTML = '<span class="text-zinc-600">No incidents or stories in the live feed this cycle. It fills in as soon as one lands.</span>';
             if (progress) progress.style.left = '-10%';
             return;
         }
@@ -501,8 +501,8 @@ const AttackFeed = {
         if (!lesson) return '';
         let tone = 'text-zinc-500';
         let note = lesson.prevention
-            ? (lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap — noted'))
-            : 'unclassified — investigated anyway';
+            ? (lesson.covered_by ? 'already covered' : (lesson.out_of_scope ? 'out of scope' : 'coverage gap, noted'))
+            : 'unclassified, investigated anyway';
         if (lesson.backtest && lesson.backtest.would_have_flagged === false) {
             tone = 'text-rose-400/80';
             note = 'model backtest miss';
@@ -511,7 +511,7 @@ const AttackFeed = {
         }
         const title = lesson.prevention ? `${lesson.label}. Prevention: ${lesson.prevention}` : lesson.label;
         return `<div class="text-[10.5px] ${tone} mt-1 leading-relaxed" title="${escapeHtml(title)}">
-            <i class="fa-solid fa-shield-halved text-[9px] mr-1"></i>${escapeHtml(lesson.label)} — ${escapeHtml(note)}</div>`;
+            <i class="fa-solid fa-shield-halved text-[9px] mr-1"></i>${escapeHtml(lesson.label)}: ${escapeHtml(note)}</div>`;
     },
 
     // Stacked, not a single truncating row: a fixed date column used to eat
@@ -555,7 +555,7 @@ const AttackFeed = {
         if (!data) {
             body.innerHTML = `<div class="text-center py-10 text-zinc-500 text-xs">
                 <i class="fa-solid fa-satellite-dish text-xl mb-2 opacity-50 block"></i>
-                Live threat feed temporarily unavailable — try again shortly.
+                Live threat feed temporarily unavailable. Try again shortly.
             </div>`;
             if (updated) updated.textContent = 'unavailable';
             this._renderLedgerPagination(0);
