@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE Wire</title>
-    <meta name="description" content="A VAPE Wire story.">
+    <title>Search: The V.A.P.E Report</title>
+    <meta name="description" content="Search every VAPE Wire story, investigation, report, broadcast, and tool VAPE has published.">
     <link rel="icon" href="https://juxtaposition1.github.io/V.A.P.E/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/png" sizes="192x192" href="https://juxtaposition1.github.io/V.A.P.E/assets/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://juxtaposition1.github.io/V.A.P.E/assets/apple-touch-icon.png">
@@ -25,38 +25,49 @@
                 <svg id="nav-menu-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="hidden lg:hidden w-5 h-5 text-zinc-400 shrink-0"><path d="M5 5l14 14M19 5L5 19"/></svg>
                 <img src="assets/logo-v-256.png" alt="" width="26" height="26" class="w-[26px] h-[26px] shrink-0" onerror="this.remove()">
                 <div class="text-base tracking-tight leading-none whitespace-nowrap">
-                    <span class="sm:hidden">VAPE Wire</span>
-                    <span class="hidden sm:inline">The V.A.P.E Report: VAPE Wire</span>
+                    <span class="sm:hidden">Search</span>
+                    <span class="hidden sm:inline">The V.A.P.E Report: Search</span>
                 </div>
             </button>
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-500">
-                <a href="news.html" class="hover:text-zinc-100 transition">VAPE Wire</a>
                 <a href="index.html" class="hover:text-zinc-100 transition">Main Site</a>
-                <a href="search.html" aria-label="Search" class="text-zinc-500 hover:text-zinc-100 transition"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="news.html" class="hover:text-zinc-100 transition">VAPE Wire</a>
+                <a href="index.html#the-archive" class="hover:text-zinc-100 transition">The Archive</a>
             </div>
         </div>
         <div id="nav-menu-panel" class="lg:hidden absolute top-full left-0 right-0 border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl invisible opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out origin-top">
             <div class="max-w-[1600px] mx-auto px-3 py-3 flex flex-col gap-1 text-sm text-zinc-300">
-                <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>VAPE Wire</a>
                 <a href="index.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Main Site</a>
-                <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
+                <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>VAPE Wire</a>
+                <a href="index.html#the-archive" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-box-archive w-4 text-center text-zinc-500"></i>The Archive</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-[760px] mx-auto px-3 sm:px-8 pt-8 pb-24">
-        <div id="article-root">
-            <div class="skeleton h-6 w-24 mb-6"></div>
-            <div class="skeleton h-56 mb-6"></div>
-            <div class="skeleton h-8 mb-3"></div>
-            <div class="skeleton h-4 mb-8"></div>
-            <div class="skeleton h-4 mb-2"></div>
-            <div class="skeleton h-4 mb-2"></div>
-            <div class="skeleton h-4 mb-2 w-3/4"></div>
+    <main class="max-w-[900px] mx-auto px-3 sm:px-8 pt-8 pb-24">
+        <header class="mb-6">
+            <div class="eyebrow mb-3"><i class="fa-solid fa-magnifying-glass"></i>[ search ]</div>
+            <h1 class="hero-title !text-2xl sm:!text-3xl">Every story, investigation, and report VAPE has published.</h1>
+        </header>
+
+        <div class="relative mb-4">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
+            <input id="search-input" type="search" placeholder="Search by title, ticker, address, topic…"
+                   class="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-white/30 transition"
+                   autocomplete="off">
+        </div>
+
+        <div id="search-filters" class="flex flex-wrap gap-2 mb-6"></div>
+
+        <div id="search-status" class="text-xs text-zinc-500 mb-4"></div>
+        <div id="search-results" class="flex flex-col gap-2">
+            <div class="skeleton h-16 mb-1"></div>
+            <div class="skeleton h-16 mb-1"></div>
+            <div class="skeleton h-16 mb-1"></div>
         </div>
     </main>
 
     <script type="module" src="assets/nav.js"></script>
-    <script type="module" src="assets/article.js"></script>
+    <script type="module" src="assets/search.js"></script>
 </body>
 </html>
