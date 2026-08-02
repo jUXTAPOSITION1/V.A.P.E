@@ -1117,3 +1117,5 @@
 | 2026-08-02 | auto | 0x50eD3297BB27a52cb5F7730Fe452258a3BD17777 (BLESS) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-02 | auto | 0x2FcB6f3d1Be8F16002B101ee3182eD9668797777 (BTW) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-02 | auto | 0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777 (BTW) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |

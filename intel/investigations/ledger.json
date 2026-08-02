@@ -5445,6 +5445,25 @@
     "symbol": "Beat",
     "times_investigated": 1
   },
+  "56:0x544a93e8d412c01c6427cf83ec8b14bc2e157777": {
+    "address": "0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
+    "chain": "56",
+    "creator_address": "0xa2d4fefd790a1aec0683146488af2109028a7b83",
+    "first_investigated": "2026-08-02T12:59:42Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-125942-0x544a93E8.md",
+        "score": 0,
+        "ts": "2026-08-02T12:59:42Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T12:59:42Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "BTW",
+    "times_investigated": 1
+  },
   "56:0x56bbbc01a416fb9b995949d105a5697c2338cd09": {
     "address": "0x56BBbC01a416Fb9b995949d105a5697c2338Cd09",
     "chain": "56",

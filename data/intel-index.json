@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T12:44:45Z",
+  "generated": "2026-08-02T12:59:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 506,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 140,
-    "investigations": 658,
+    "investigations": 659,
     "news": 49,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-124443-0x2FcB6f3d.md",
+      "file": "investigation-20260802-125942-0x544a93E8.md",
       "title": "Investigation \u2014 BTW",
       "symbol": "BTW",
       "name": "BTW",
-      "date": "2026-08-02T12:44:43Z",
-      "target": "0x2FcB6f3d1Be8F16002B101ee3182eD9668797777",
+      "date": "2026-08-02T12:59:42Z",
+      "target": "0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 5 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,149 (rug/illiquid); [-10] Low liquidity $7,149; [-15] Pair only 0.8 day",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-124443-0x2FcB6f3d.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,089 (rug/illiquid); [-10] Low liquidity $7,089; [-15] Pair only 0.8 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-125942-0x544a93E8.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-125942-0x544a93E8.md",
+      "title": "Investigation \u2014 BTW",
+      "symbol": "BTW",
+      "name": "BTW",
+      "date": "2026-08-02T12:59:42Z",
+      "target": "0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,089 (rug/illiquid); [-10] Low liquidity $7,089; [-15] Pair only 0.8 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-125942-0x544a93E8.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-124443-0x2FcB6f3d.md",
@@ -594,20 +608,6 @@
       "score": "75",
       "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $16,160. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-p",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-123529-0x444400cA.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-122026-0x4BABA631.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "ASTEROID",
-      "date": "2026-08-01T12:20:26Z",
-      "target": "0x4BABA6318cbDd731DA9adA934B29Ca530D804444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 75% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,512. Positive evidence: Ownership renounced; 1966 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 309+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-122026-0x4BABA631.md"
     }
   ],
   "reports": [
