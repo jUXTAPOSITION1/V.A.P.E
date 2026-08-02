@@ -1,6 +1,5 @@
 {
   "narrated_investigations": [
-    "pass-list.md",
     "investigation-20260701-211118-0xcC67e54F.md",
     "investigation-20260705-220341-0x454777B9.md",
     "investigation-20260706-001140-0x454777B9.md",
@@ -495,6 +494,11 @@
     "investigation-20260802-005723-0x8E9AdB90.md",
     "investigation-20260802-022726-0xF7454880.md",
     "investigation-20260801-123529-0x444400cA.md",
-    "investigation-20260801-021931-0x330990Da.md"
+    "investigation-20260801-021931-0x330990Da.md",
+    "investigation-20260802-062730-0xa049d66F.md",
+    "investigation-20260802-044234-0xA4c6614f.md",
+    "investigation-20260728-024836-0x49Fcf04B.md",
+    "investigation-20260728-051856-0xe22b36dB.md",
+    "investigation-20260728-034850-0x7142b752.md"
   ]
 }
