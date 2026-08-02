@@ -5597,6 +5597,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x7c8217517ed4711fe2deccdfeffe8d906b9ae11f": {
+    "address": "0x7C8217517ed4711fe2DECCdFefFE8d906b9Ae11F",
+    "chain": "56",
+    "creator_address": "0x3f88c2a4a5f375339d0d615c849f880d9ee2c9af",
+    "first_investigated": "2026-08-02T11:29:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-112923-0x7C821751.md",
+        "score": 62,
+        "ts": "2026-08-02T11:29:23Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T11:29:23Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "BLESS",
+    "times_investigated": 1
+  },
   "56:0x7db662f5728ed008d60cabae098e88aea8fca36c": {
     "address": "0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C",
     "chain": "56",
