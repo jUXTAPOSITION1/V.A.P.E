@@ -161,7 +161,7 @@ const SecurityDashboard = {
         // Each panel renders independently — one throwing (a malformed field
         // in a given lane, a missing canvas) must not leave its siblings
         // stuck in their skeleton state.
-        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanesPanel,
+        for (const fn of [this._renderGauge, this._renderSeverityDonut,
             this._renderCategoryMap, this._renderTimeline, this._renderVerdictBars, this._wireTimelineToggle,
             this._renderLedger, this._wireLedgerControls, this._renderLedgerSpark]) {
             try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
@@ -198,10 +198,6 @@ const SecurityDashboard = {
         if (gaugeLabel) gaugeLabel.innerHTML = '<span class="text-zinc-500 text-xs">No snapshot yet</span>';
         const sevList = document.getElementById('secdash-sev-list');
         if (sevList) sevList.innerHTML = '<li class="text-zinc-500">Snapshot unavailable.</li>';
-        const lanesStat = document.getElementById('secdash-lanes-stat');
-        if (lanesStat) lanesStat.innerHTML = '<span class="text-zinc-500 text-sm">Snapshot unavailable.</span>';
-        const lanesList = document.getElementById('secdash-lanes-list');
-        if (lanesList) lanesList.innerHTML = '';
         const legend = document.getElementById('secdash-signalmap-legend');
         if (legend) legend.innerHTML = CARD_DEFS.map(def =>
             `<div class="secdash-signalmap-item"><span class="secdash-signalmap-letter">?</span>` +
@@ -349,11 +345,13 @@ const SecurityDashboard = {
         });
     },
 
-    // Automated Lanes — every real per-workflow lane (agents/
-    // build_security_dashboard.py's build_lanes(), one entry per real
-    // GitHub Actions security workflow), plotted on the radial signal ring
-    // below (_renderLanesRing) with a screen-reader-only text equivalent
-    // (_renderLanesA11yList) carrying the same real per-lane detail.
+    // Per-lane status/color/title — shared by the Category Signal Map's own
+    // detail panel below (_toggleSignalMapDetail). The Automated Lanes ring
+    // that used to also read these (_renderLanesRing/_renderLanesPanel/
+    // _toggleLaneDetail/_renderLanesA11yList) was replaced by VAPE City
+    // (docs/assets/cityscape.js, data/city-state.json's 10 lane-checkpoint
+    // buildings) on 2026-08-02 — every real per-workflow lane still has its
+    // own building there instead of its own ring segment.
     _laneStatus(lane) {
         if (lane.last_run_conclusion == null) return 'never';
         return lane.last_run_conclusion === 'success' ? 'pass' : 'fail';
@@ -365,147 +363,6 @@ const SecurityDashboard = {
 
     _laneStatusTitle(status) {
         return status === 'pass' ? 'Passing' : status === 'fail' ? 'Failing' : 'Never run';
-    },
-
-    _renderLanesPanel() {
-        const lanes = this._data.lanes || [];
-        this._lanes = lanes;
-        const statEl = document.getElementById('secdash-lanes-stat');
-        const sweptEl = document.getElementById('secdash-lanes-swept');
-        if (!statEl) return;
-        if (!lanes.length) {
-            statEl.innerHTML = '<span class="text-zinc-500 text-sm">No lane data this cycle.</span>';
-            if (sweptEl) sweptEl.textContent = '';
-            return;
-        }
-        const known = lanes.filter(l => l.last_run_conclusion != null);
-        const passing = known.filter(l => l.last_run_conclusion === 'success');
-        const denom = known.length || lanes.length;
-        statEl.innerHTML = `${passing.length}<span class="text-zinc-500 text-base">/${denom} lanes passing</span>`;
-        if (sweptEl) sweptEl.textContent = `Last full sweep ${ago(this._data.generated_at)}`;
-        this._renderLanesRing(lanes);
-        this._renderLanesA11yList(lanes);
-    },
-
-    // Every real lane, plotted as its own arc segment around a radial
-    // "signal ring" instead of a two-column flow diagram — a dial reads as
-    // one cohesive instrument rather than a bar chart that goes flat and
-    // solid-colored whenever most lanes share one status (the real,
-    // observed case here: passing lanes dominate). Segment length is
-    // uniform (one lane = one equal slice, no fabricated weighting);
-    // only position, color, and the glow on non-passing lanes carry
-    // meaning. Click a segment for that lane's own detail — a hover
-    // <title> covers the same text for pointer users.
-    _renderLanesRing(lanes) {
-        const container = document.getElementById('secdash-lanes-flow');
-        if (!container) return;
-        if (!lanes.length) {
-            container.innerHTML = '<div class="text-zinc-500 text-xs py-8 text-center">No lane data this cycle.</div>';
-            return;
-        }
-
-        const W = 320, H = 240, cx = W / 2, cy = H / 2 - 4, R = 84, thickness = 15;
-        const n = lanes.length;
-        const gapDeg = Math.min(6, 48 / n);
-        const span = 360 / n;
-        const arcSpan = Math.max(2, span - gapDeg);
-
-        const toXY = (r, deg) => {
-            const rad = (deg - 90) * Math.PI / 180;
-            return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
-        };
-        const arcPath = (r, a0, a1) => {
-            const p0 = toXY(r, a0), p1 = toXY(r, a1);
-            const large = (a1 - a0) > 180 ? 1 : 0;
-            return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${p1.x.toFixed(2)} ${p1.y.toFixed(2)}`;
-        };
-
-        const known = lanes.filter(l => l.last_run_conclusion != null);
-        const passing = known.filter(l => l.last_run_conclusion === 'success').length;
-        const denom = known.length || n;
-
-        // Shared glow, reserved for non-passing segments so a real problem
-        // pulls the eye without every lane needing its own emphasis.
-        let svg = `<defs><filter id="secdash-ring-glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="2.4" result="blur"></feGaussianBlur>
-            <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-        </filter></defs>`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="${R + thickness / 2 + 9}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="2 6"></circle>`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="${R - thickness / 2 - 8}" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"></circle>`;
-
-        lanes.forEach((l, i) => {
-            const status = this._laneStatus(l);
-            const color = this._laneStatusColor(status);
-            const a0 = i * span + gapDeg / 2;
-            const a1 = a0 + arcSpan;
-            const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
-            const isAlert = status === 'fail';
-            const arcLabel = `${l.label || l.id} — ${this._laneStatusTitle(status)} · ${when}${l.headline ? ' — ' + l.headline : ''}`;
-            svg += `<path class="secdash-ring-arc${isAlert ? ' is-alert' : ''}" data-idx="${i}"
-                tabindex="0" role="button" aria-label="${escapeHtml(arcLabel)}"
-                d="${arcPath(R, a0, a1)}" fill="none" stroke="${color}" stroke-width="${thickness}" stroke-linecap="round"
-                ${isAlert ? 'filter="url(#secdash-ring-glow)"' : ''}>
-                <title>${escapeHtml(arcLabel)}</title>
-            </path>`;
-        });
-
-        svg += `<text x="${cx}" y="${cy - 4}" text-anchor="middle" class="secdash-ring-center-value">${passing}/${denom}</text>
-            <text x="${cx}" y="${cy + 16}" text-anchor="middle" class="secdash-ring-center-label">LANES PASSING</text>`;
-
-        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`;
-
-        container.querySelectorAll('.secdash-ring-arc').forEach(arc => {
-            const idx = Number(arc.dataset.idx);
-            arc.addEventListener('click', () => this._toggleLaneDetail(idx));
-            arc.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._toggleLaneDetail(idx); }
-            });
-        });
-    },
-
-    // Click-driven detail for a single lane's own arc — deliberately NOT a
-    // full always-visible list (that was the redundant panel this replaced,
-    // repeating exactly what the ring already shows); this surfaces one
-    // lane's real headline/timestamp only on demand.
-    _toggleLaneDetail(idx) {
-        const panel = document.getElementById('secdash-lanes-detail');
-        if (!panel) return;
-        if (this._laneDetailOpenIdx === idx) {
-            panel.hidden = true;
-            this._laneDetailOpenIdx = null;
-            return;
-        }
-        const lane = (this._lanes || [])[idx];
-        if (!lane) return;
-        this._laneDetailOpenIdx = idx;
-        const status = this._laneStatus(lane);
-        const color = this._laneStatusColor(status);
-        const icon = status === 'pass' ? 'fa-circle-check' : status === 'fail' ? 'fa-circle-xmark' : 'fa-circle-question';
-        const when = lane.last_run_at ? ago(lane.last_run_at) : 'no runs yet';
-        panel.innerHTML = `
-            <div class="secdash-lanes-detail-title">
-                ${statusBadge(this._laneStatusTitle(status), color, icon)}
-                <span>${escapeHtml(lane.label || lane.id)}</span>
-                <button type="button" class="secdash-lanes-detail-close" data-close aria-label="Close lane detail">Close ✕</button>
-            </div>
-            <div class="secdash-lanes-detail-body">${escapeHtml(lane.headline || 'No headline this cycle.')} · ${escapeHtml(when)}</div>
-        `;
-        panel.hidden = false;
-        panel.querySelector('[data-close]')?.addEventListener('click', (e) => { e.stopPropagation(); this._toggleLaneDetail(idx); });
-    },
-
-    // Screen-reader-only equivalent of the ring — the dataviz accessibility
-    // requirement ("a table view exists") without visually duplicating the
-    // ring on-page for sighted users, which is exactly the redundancy this
-    // replaced.
-    _renderLanesA11yList(lanes) {
-        const el = document.getElementById('secdash-lanes-a11y');
-        if (!el) return;
-        el.innerHTML = lanes.map(l => {
-            const status = this._laneStatus(l);
-            const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
-            return `<li>${escapeHtml(l.label || l.id)}: ${escapeHtml(this._laneStatusTitle(status))}, ${escapeHtml(when)}${l.headline ? ' — ' + escapeHtml(l.headline) : ''}</li>`;
-        }).join('');
     },
 
     // Shared per-category signal calculation — the ONE place that decides

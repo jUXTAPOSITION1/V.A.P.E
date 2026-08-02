@@ -64,3 +64,10 @@ data/intel-index.json                     merge=keep-fresh
 # other append-only ledger above, not `keep-fresh`.
 data/security-dashboard.json              merge=keep-fresh
 data/security-dashboard-history.jsonl     merge=union
+
+# data/city-state.json (agents/build_city_state.py) is the same kind of
+# fully-regenerated derived snapshot -- it re-reads security-dashboard.json/
+# attack-feed.json/intel-index.json/opportunities.json/reputation.json fresh
+# every run for the site's VAPE City visualization. Same spurious-conflict
+# reasoning, same fix.
+data/city-state.json                      merge=keep-fresh

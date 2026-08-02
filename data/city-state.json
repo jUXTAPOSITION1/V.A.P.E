@@ -1,0 +1,445 @@
+{
+  "generated_at": "2026-08-02T22:16:17Z",
+  "district_stats": {
+    "overall_threat_level": "HIGH",
+    "lanes_passing": 9,
+    "lanes_total": 10,
+    "buildings_total": 17
+  },
+  "buildings": [
+    {
+      "id": "precinct-investigations",
+      "kind": "precinct",
+      "title": "Investigations Precinct",
+      "status": "ok",
+      "tier": 3,
+      "stat_primary": {
+        "label": "tracked",
+        "value": 671
+      },
+      "stat_secondary": [
+        {
+          "label": "reject",
+          "value": 361
+        },
+        {
+          "label": "caution",
+          "value": 185
+        },
+        {
+          "label": "proceed",
+          "value": 125
+        }
+      ],
+      "link": "investigations.html",
+      "gridX": 0,
+      "gridY": 1,
+      "footprint": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "tower-bounty",
+      "kind": "tower",
+      "title": "Bounty Ops Tower",
+      "status": "ok",
+      "tier": 3,
+      "stat_primary": {
+        "label": "tracked",
+        "value": 991
+      },
+      "stat_secondary": [
+        {
+          "label": "live",
+          "value": 564
+        },
+        {
+          "label": "platforms",
+          "value": 9
+        }
+      ],
+      "link": "bounty.html",
+      "gridX": 10,
+      "gridY": 1,
+      "footprint": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "newsroom",
+      "kind": "newsroom",
+      "title": "Newsroom",
+      "status": "ok",
+      "tier": 2,
+      "stat_primary": {
+        "label": "published",
+        "value": 53
+      },
+      "stat_secondary": [],
+      "link": "news.html",
+      "gridX": 0,
+      "gridY": 6,
+      "footprint": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "watchtower-threat",
+      "kind": "watchtower",
+      "title": "Watchtower",
+      "status": "alert",
+      "tier": 2,
+      "stat_primary": {
+        "label": "incidents (56d)",
+        "value": 56
+      },
+      "stat_secondary": [
+        {
+          "label": "threat level",
+          "value": "HIGH"
+        }
+      ],
+      "link": "bounty.html#threat-ledger",
+      "gridX": 10,
+      "gridY": 6,
+      "footprint": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "mint-x402",
+      "kind": "mint",
+      "title": "The Mint",
+      "status": "unknown",
+      "tier": 2,
+      "stat_primary": null,
+      "stat_secondary": [],
+      "live_only": true,
+      "link": "index.html#x402-ledger",
+      "gridX": 6,
+      "gridY": 0,
+      "footprint": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "foundry",
+      "kind": "foundry",
+      "title": "The Foundry",
+      "status": "ok",
+      "tier": 1,
+      "stat_primary": {
+        "label": "self-built tools",
+        "value": 14
+      },
+      "stat_secondary": [
+        {
+          "label": "verified tools",
+          "value": 16
+        }
+      ],
+      "link": "index.html#the-workshop",
+      "gridX": 5,
+      "gridY": 3,
+      "footprint": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "vault-ledger",
+      "kind": "vault",
+      "title": "The Vault",
+      "status": "ok",
+      "tier": 4,
+      "stat_primary": {
+        "label": "findings sealed",
+        "value": 1413
+      },
+      "stat_secondary": [
+        {
+          "label": "unsealed lines",
+          "value": 3
+        }
+      ],
+      "link": "index.html#security-dashboard",
+      "gridX": 6,
+      "gridY": 8,
+      "footprint": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "lane-codeql",
+      "kind": "checkpoint",
+      "title": "Static Analysis (CodeQL)",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 4,
+      "gridY": 2,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "100 open alert(s)"
+      },
+      "last_run_at": "2026-08-02T17:12:32Z",
+      "source_workflow": "codeql.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-security-lint",
+      "kind": "checkpoint",
+      "title": "CI / Workflow Hardening",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 6,
+      "gridY": 2,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "success"
+      },
+      "last_run_at": "2026-08-01T21:43:36Z",
+      "source_workflow": "security-lint.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-vape-reviewer",
+      "kind": "checkpoint",
+      "title": "Code Review (VAPE Reviewer)",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 8,
+      "gridY": 2,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "success"
+      },
+      "last_run_at": "2026-08-02T17:12:33Z",
+      "source_workflow": "vape-reviewer.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-dependency-audit",
+      "kind": "checkpoint",
+      "title": "Dependencies (SCA)",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 9,
+      "gridY": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "success"
+      },
+      "last_run_at": "2026-07-31T20:09:31Z",
+      "source_workflow": "dependency-audit.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-scan-parity",
+      "kind": "checkpoint",
+      "title": "Logic Parity",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 9,
+      "gridY": 5,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "success"
+      },
+      "last_run_at": "2026-07-26T15:39:58Z",
+      "source_workflow": "scan-parity.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-redteam",
+      "kind": "checkpoint",
+      "title": "AI Red-Team",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 8,
+      "gridY": 6,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "23 finding(s), 30d"
+      },
+      "last_run_at": "2026-08-02T14:05:28Z",
+      "source_workflow": "redteam.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-redteam-deep",
+      "kind": "checkpoint",
+      "title": "AI Red-Team (deep)",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 6,
+      "gridY": 6,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "23 finding(s), 30d"
+      },
+      "last_run_at": "2026-08-02T14:25:31Z",
+      "source_workflow": "redteam-deep.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-findings-seal",
+      "kind": "checkpoint",
+      "title": "Findings Ledger Seal",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 4,
+      "gridY": 6,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "intact"
+      },
+      "last_run_at": "2026-08-02T19:00:32Z",
+      "source_workflow": "findings-seal.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-review-ledger",
+      "kind": "checkpoint",
+      "title": "Review Drift",
+      "status": "ok",
+      "tier": 1,
+      "gridX": 3,
+      "gridY": 5,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "0 worsened / 0 improved, 30d"
+      },
+      "last_run_at": "2026-08-01T10:44:41Z",
+      "source_workflow": "review-ledger.yml",
+      "link": "index.html#security-dashboard"
+    },
+    {
+      "id": "lane-intel-sweeps",
+      "kind": "checkpoint",
+      "title": "On-Chain Attack Intelligence",
+      "status": "alert",
+      "tier": 1,
+      "gridX": 3,
+      "gridY": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "stat_primary": {
+        "label": "last run",
+        "value": "HIGH"
+      },
+      "last_run_at": "2026-08-02T19:11:12Z",
+      "source_workflow": "intel-sweeps.yml",
+      "link": "index.html#security-dashboard"
+    }
+  ],
+  "roads": [
+    [
+      "foundry",
+      "precinct-investigations"
+    ],
+    [
+      "foundry",
+      "tower-bounty"
+    ],
+    [
+      "foundry",
+      "newsroom"
+    ],
+    [
+      "foundry",
+      "watchtower-threat"
+    ],
+    [
+      "foundry",
+      "mint-x402"
+    ],
+    [
+      "foundry",
+      "vault-ledger"
+    ],
+    [
+      "foundry",
+      "lane-codeql"
+    ],
+    [
+      "foundry",
+      "lane-security-lint"
+    ],
+    [
+      "foundry",
+      "lane-vape-reviewer"
+    ],
+    [
+      "foundry",
+      "lane-dependency-audit"
+    ],
+    [
+      "foundry",
+      "lane-scan-parity"
+    ],
+    [
+      "foundry",
+      "lane-redteam"
+    ],
+    [
+      "foundry",
+      "lane-redteam-deep"
+    ],
+    [
+      "foundry",
+      "lane-findings-seal"
+    ],
+    [
+      "foundry",
+      "lane-review-ledger"
+    ],
+    [
+      "foundry",
+      "lane-intel-sweeps"
+    ]
+  ]
+}
