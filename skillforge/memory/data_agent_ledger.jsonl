@@ -551,3 +551,4 @@
 {"ts": "2026-08-02T13:29:36.766485Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-02T13:59:42.773923Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-02T14:29:42.698712Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
+{"ts": "2026-08-02T14:59:33.201908Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 55}
