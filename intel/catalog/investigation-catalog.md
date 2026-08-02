@@ -1113,3 +1113,5 @@
 | 2026-08-02 | auto | 0x7C8217517ed4711fe2DECCdFefFE8d906b9Ae11F (BLESS) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-02 | auto | 0x69f7d2B86470D3288D038da95B4c194053427777 (BLESS) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-02 | auto | 0x50eD3297BB27a52cb5F7730Fe452258a3BD17777 (BLESS) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |

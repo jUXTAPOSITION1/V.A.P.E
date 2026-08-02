@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T12:14:26Z",
+  "generated": "2026-08-02T12:29:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 506,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 140,
-    "investigations": 656,
+    "investigations": 657,
     "news": 49,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-121423-0x69f7d2B8.md",
+      "file": "investigation-20260802-122939-0x50eD3297.md",
       "title": "Investigation \u2014 BLESS",
       "symbol": "BLESS",
       "name": "God Bless Them",
-      "date": "2026-08-02T12:14:23Z",
-      "target": "0x69f7d2B86470D3288D038da95B4c194053427777",
+      "date": "2026-08-02T12:29:39Z",
+      "target": "0x50eD3297BB27a52cb5F7730Fe452258a3BD17777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,105 (rug/illiquid); [-10] Low liquidity $7,105; [-15] Pair only 0.9 day",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-121423-0x69f7d2B8.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,093 (rug/illiquid); [-10] Low liquidity $7,093; [-15] Pair only 0.9 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-122939-0x50eD3297.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-122939-0x50eD3297.md",
+      "title": "Investigation \u2014 BLESS",
+      "symbol": "BLESS",
+      "name": "God Bless Them",
+      "date": "2026-08-02T12:29:39Z",
+      "target": "0x50eD3297BB27a52cb5F7730Fe452258a3BD17777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,093 (rug/illiquid); [-10] Low liquidity $7,093; [-15] Pair only 0.9 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-122939-0x50eD3297.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-121423-0x69f7d2B8.md",
@@ -594,20 +608,6 @@
       "score": "45",
       "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $15,648; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positi",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-120515-0x8FD3437A.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-110529-0x020D6c73.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "Asteroid Shiba",
-      "date": "2026-08-01T11:05:29Z",
-      "target": "0x020D6c73897651988438E1fED554964aBFfa6666",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $31,216. Positive evidence: Ownership renounced; 1349 holders \u2014 reasonably distributed; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-110529-0x020D6c73.md"
     }
   ],
   "reports": [

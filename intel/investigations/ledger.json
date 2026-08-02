@@ -5388,6 +5388,25 @@
     "symbol": "HEYI",
     "times_investigated": 1
   },
+  "56:0x50ed3297bb27a52cb5f7730fe452258a3bd17777": {
+    "address": "0x50eD3297BB27a52cb5F7730Fe452258a3BD17777",
+    "chain": "56",
+    "creator_address": "0x74115107d6d91ab9b97cf3338e2f32e1f080e520",
+    "first_investigated": "2026-08-02T12:29:39Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-122939-0x50eD3297.md",
+        "score": 0,
+        "ts": "2026-08-02T12:29:39Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T12:29:39Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "BLESS",
+    "times_investigated": 1
+  },
   "56:0x535fde726f4fec5d501dab93378643a6bf6e9fc9": {
     "address": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
     "chain": "56",
