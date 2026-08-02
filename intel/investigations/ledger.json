@@ -9033,6 +9033,25 @@
     "symbol": "SOSO",
     "times_investigated": 1
   },
+  "8453:0xadf0e9720dda45c332a6a75e9a33e5ef37a8ce0f": {
+    "address": "0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
+    "chain": "8453",
+    "creator_address": "0xd95a366a2c887033ba71743c6342e2df470e9db9",
+    "first_investigated": "2026-08-02T18:14:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-181448-0xADF0e972.md",
+        "score": 70,
+        "ts": "2026-08-02T18:14:48Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T18:14:48Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "CHUMSKY",
+    "times_investigated": 1
+  },
   "8453:0xadfa1a1ca0cd06cface8d26129f4c74ae7533f92": {
     "address": "0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92",
     "chain": "8453",

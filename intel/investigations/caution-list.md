@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-02T17:59:39Z — 136 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-02T18:14:48Z — 137 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| CHUMSKY | Base | `0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F` | 70/100 | 1 | 2026-08-02T18:14:48Z |
 | SLOP | Ethereum | `0x999B49c0d1612E619A4A4f6280733184da025108` | 50/100 | 1 | 2026-08-02T13:44:44Z |
 | BLESS | BNB Chain | `0x7C8217517ed4711fe2DECCdFefFE8d906b9Ae11F` | 62/100 | 1 | 2026-08-02T11:29:23Z |
 | HOME | Base | `0x4BfAa776991E85e5f8b1255461cbbd216cFc714f` | 52/100 | 1 | 2026-08-02T10:59:20Z |

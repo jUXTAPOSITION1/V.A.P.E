@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T17:59:41Z",
+  "generated": "2026-08-02T18:14:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 512,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 141,
-    "investigations": 664,
+    "investigations": 665,
     "news": 51,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-175939-0x7297968F.md",
-      "title": "Investigation \u2014 ZEST",
-      "symbol": "ZEST",
-      "name": "Zest",
-      "date": "2026-08-02T17:59:39Z",
-      "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
+      "file": "investigation-20260802-181448-0xADF0e972.md",
+      "title": "Investigation \u2014 CHUMSKY",
+      "symbol": "CHUMSKY",
+      "name": "CHUMSKY github.com/zesterer/CHUMSKY",
+      "date": "2026-08-02T18:14:48Z",
+      "target": "0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
       "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x4ddae1d1bb8dacd4c8fa56792fde60f446755d0f) \u2014 can still act on the contract; [-8] Low holder count (124); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-175939-0x7297968F.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SQLITESTUDIO (0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92) \u2014 REJECT 32/100 \u2014 likely the same serial campaign. Positive evidence: 2312 holders \u2014 reasonably distributed; Trading 254+ days without a known incident in this scan; Custom verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-181448-0xADF0e972.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-181448-0xADF0e972.md",
+      "title": "Investigation \u2014 CHUMSKY",
+      "symbol": "CHUMSKY",
+      "name": "CHUMSKY github.com/zesterer/CHUMSKY",
+      "date": "2026-08-02T18:14:48Z",
+      "target": "0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SQLITESTUDIO (0xADFa1A1Ca0cd06cfACE8D26129F4C74AE7533F92) \u2014 REJECT 32/100 \u2014 likely the same serial campaign. Positive evidence: 2312 holders \u2014 reasonably distributed; Trading 254+ days without a known incident in this scan; Custom verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-181448-0xADF0e972.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-175939-0x7297968F.md",
