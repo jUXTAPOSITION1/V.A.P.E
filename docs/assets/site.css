@@ -1081,8 +1081,13 @@ a { transition: color .15s; }
 .invl-detail-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
 
 .invl-spark { display: inline-flex; align-items: flex-end; gap: 2px; height: 22px; }
-.invl-spark-bar { width: 5px; background: rgba(255, 255, 255, 0.18); border-radius: 1px 1px 0 0; }
-.invl-spark-bar.is-latest { background: #d4d4d8; }
+.invl-spark-bar { width: 5px; background: rgba(255, 255, 255, 0.18); border-radius: 1px 1px 0 0; transition: background 0.2s ease; }
+/* Uncolored buckets (no scored investigations that period) still get the
+   plain highlight; scored buckets are tinted by renderSparkline()'s inline
+   background (avg score for that window), so brightness -- not a flat
+   override -- is what marks the most recent bucket without erasing the
+   score color underneath it. */
+.invl-spark-bar.is-latest { filter: brightness(1.45); }
 /* Larger standalone sparkline (own row, not squeezed into a stat pill) used
    by both this page's own "Activity" strip and the main-site preview —
    renderSparkline()/wireSparkRangeToggle() in investigations-ledger.js are

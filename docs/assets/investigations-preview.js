@@ -39,7 +39,7 @@ const InvestigationsPreview = {
         if (updated) updated.textContent = this._all.length ? `${this._all.length.toLocaleString()} on record` : 'no investigations yet';
         this._renderStats();
         this._renderTable();
-        wireSparkRangeToggle(document.getElementById('invp-spark-range'), document.getElementById('invp-spark'), () => this._all, 'week');
+        wireSparkRangeToggle(document.getElementById('invp-spark-range'), document.getElementById('invp-spark'), () => this._all, 'all');
     },
 
     _renderStats() {
