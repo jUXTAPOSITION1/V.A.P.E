@@ -18,20 +18,20 @@ const INV_DIR_RAW = `${RAW}/intel/investigations`;
 
 const CHAIN_ID_MAP = { '1': 'ethereum', '8453': 'base', '42161': 'arbitrum', '10': 'optimism', '137': 'polygon', '56': 'bsc', '43114': 'avalanche' };
 const EXPLORER_HOSTS = { arbitrum: 'arbiscan.io', ethereum: 'etherscan.io', optimism: 'optimistic.etherscan.io', polygon: 'polygonscan.com', bsc: 'bscscan.com', avalanche: 'snowtrace.io', base: 'basescan.org' };
-function chainSlug(chain) {
+export function chainSlug(chain) {
     const m = String(chain || '').match(/\d+/);
     return (m && CHAIN_ID_MAP[m[0]]) || 'base';
 }
-function tokenIconUrl(address, chain) {
+export function tokenIconUrl(address, chain) {
     if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
     return `https://dd.dexscreener.com/ds-data/tokens/${chainSlug(chain)}/${address.toLowerCase()}.png?size=lg`;
 }
-function explorerUrl(address, chain) {
+export function explorerUrl(address, chain) {
     if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
     return `https://${EXPLORER_HOSTS[chainSlug(chain)] || 'basescan.org'}/address/${address}`;
 }
-function shortAddr(a) { return (a && a.length > 12) ? a.slice(0, 6) + '…' + a.slice(-4) : (a || ''); }
-function ago(iso) {
+export function shortAddr(a) { return (a && a.length > 12) ? a.slice(0, 6) + '…' + a.slice(-4) : (a || ''); }
+export function ago(iso) {
     if (!iso) return '';
     const d = new Date(iso);
     if (isNaN(d)) return iso;
@@ -40,14 +40,108 @@ function ago(iso) {
     if (s < 86400) return Math.floor(s / 3600) + 'h ago';
     return Math.floor(s / 86400) + 'd ago';
 }
-const VERDICT_COLOR = { REJECT: '#fb7185', CAUTION: '#fbbf24', PROCEED: '#10b981' };
-function verdictColor(v) { return VERDICT_COLOR[(v || '').toUpperCase()] || '#a1a1aa'; }
-function scoreColor(score) {
+export const VERDICT_COLOR = { REJECT: '#fb7185', CAUTION: '#fbbf24', PROCEED: '#10b981' };
+export function verdictColor(v) { return VERDICT_COLOR[(v || '').toUpperCase()] || '#a1a1aa'; }
+export function scoreColor(score) {
     const n = Number(score);
     if (isNaN(n)) return '#a1a1aa';
     if (n >= 70) return '#10b981';
     if (n >= 40) return '#fbbf24';
     return '#fb7185';
+}
+
+// Real per-investigation-date activity, bucketed for one of 4 ranges — the
+// exact same function backs both this page's own sparkline AND the main
+// site's Investigations preview (investigations-preview.js imports this
+// directly rather than reimplementing it), so "the same sparkline" is
+// literal, not just visually similar.
+//   day   -> last 24h,  hourly buckets (24 bars)
+//   week  -> last 7d,   daily buckets  (7 bars)
+//   month -> last 30d,  daily buckets  (30 bars)
+//   all   -> full real history from the earliest investigation to now,
+//            bucketed so the bar count never exceeds ~52 regardless of how
+//            long VAPE has been running (bucket width grows with the real
+//            span instead of hardcoding a unit).
+export const SPARK_RANGES = ['day', 'week', 'month', 'all'];
+export function sparklineBuckets(investigations, range) {
+    const now = Date.now();
+    const dates = investigations.map(inv => new Date(inv.date)).filter(d => !isNaN(d));
+    let bucketMs, n;
+    if (range === 'day') { bucketMs = 3600e3; n = 24; }
+    else if (range === 'month') { bucketMs = 86400e3; n = 30; }
+    else if (range === 'all') {
+        const earliest = dates.length ? Math.min(...dates.map(d => d.getTime())) : now;
+        const spanMs = Math.max(86400e3, now - earliest);
+        n = 52;
+        bucketMs = Math.max(86400e3, Math.ceil(spanMs / n));
+        n = Math.max(1, Math.min(52, Math.ceil(spanMs / bucketMs)));
+    } else { bucketMs = 86400e3; n = 7; } // 'week' (default)
+
+    const totals = new Array(n).fill(0);
+    dates.forEach(d => {
+        const diff = Math.floor((now - d.getTime()) / bucketMs);
+        if (diff >= 0 && diff < n) totals[n - 1 - diff]++;
+    });
+    return totals;
+}
+// A compact, non-expanding row — the same title/chain/verdict/score/date
+// cells _rowHtml() below renders for the full ledger, minus the click-to-
+// expand detail panel and PDF/report popup (a preview has nowhere to put an
+// expanded panel and no reason to duplicate the full page's report reader).
+// Exported so the main-site preview renders literally these cells, not a
+// re-implementation of them.
+export function investigationRowHtml(inv) {
+    const v = (inv.verdict || '').toUpperCase();
+    const vColor = verdictColor(v);
+    const sColor = scoreColor(inv.score);
+    const icon = tokenIconUrl(inv.target, inv.chain);
+    const heading = inv.symbol || shortAddr(inv.target) || inv.title || 'Investigation';
+    const score = inv.score != null && inv.score !== '' ? Number(inv.score) : null;
+    const href = inv.file ? `investigation.html?file=${encodeURIComponent(inv.file)}` : (inv.url || 'investigations.html');
+    const linkAttrs = inv.file ? '' : ' target="_blank" rel="noopener"';
+    return `<tr class="invl-row" data-idx="0" onclick="window.location.href='${escapeHtml(href)}'" style="--row-verdict:${escapeHtml(vColor)};--row-verdict-wash:${vColor}14">
+        <td>
+            <div class="invl-title-cell">
+                ${icon ? `<img src="${escapeHtml(icon)}" alt="" class="invl-icon" onerror="this.style.display='none'">` : `<div class="invl-icon flex items-center justify-center"><i class="fa-solid fa-magnifying-glass-chart text-[9px] text-zinc-600"></i></div>`}
+                <div class="min-w-0">
+                    <div class="invl-title">${escapeHtml(heading)}</div>
+                    <div class="invl-addr">${escapeHtml(shortAddr(inv.target) || '—')}</div>
+                </div>
+            </div>
+        </td>
+        <td class="invl-addr">${escapeHtml((inv.chain || '').replace(/\s*\(.*\)/, '') || '—')}</td>
+        <td>${v ? `<span class="invl-verdict-pill" style="color:${vColor}">${escapeHtml(v)}</span>` : '—'}</td>
+        <td>${score != null ? `<span class="invl-score-cell"><span class="invl-score-bar-wrap"><span class="invl-score-bar-fill" style="width:${Math.max(0, Math.min(100, score))}%;background:${sColor}"></span></span><span style="color:${sColor}">${escapeHtml(String(score))}</span></span>` : '—'}</td>
+        <td class="invl-time" title="${escapeHtml(inv.date || '')}">${escapeHtml(ago(inv.date))}</td>
+        <td><a href="${escapeHtml(href)}"${linkAttrs} onclick="event.stopPropagation()" class="text-zinc-500 hover:text-zinc-200" title="Open"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></td>
+    </tr>`;
+}
+
+export function renderSparkline(el, investigations, range) {
+    if (!el) return;
+    const totals = sparklineBuckets(investigations, range || 'week');
+    const max = Math.max(1, ...totals);
+    el.innerHTML = totals.map((n, i) => {
+        const pct = Math.max(6, Math.round((n / max) * 100));
+        const latest = i === totals.length - 1 ? ' is-latest' : '';
+        return `<span class="invl-spark-bar${latest}" style="height:${pct}%" title="${n} investigation(s)"></span>`;
+    }).join('');
+}
+// Wires a `.invl-range-btn[data-range]` toggle group to re-render the given
+// sparkline element on click, tracking active state via `.is-active`.
+export function wireSparkRangeToggle(toggleEl, sparkEl, getInvestigations, initial) {
+    if (!toggleEl) return;
+    let current = initial || 'week';
+    const render = () => renderSparkline(sparkEl, getInvestigations(), current);
+    toggleEl.querySelectorAll('.invl-range-btn').forEach(btn => {
+        btn.classList.toggle('is-active', btn.dataset.range === current);
+        btn.addEventListener('click', () => {
+            current = btn.dataset.range;
+            toggleEl.querySelectorAll('.invl-range-btn').forEach(b => b.classList.toggle('is-active', b === btn));
+            render();
+        });
+    });
+    render();
 }
 
 // Real risk-factor deltas straight out of the report's own summary text
@@ -95,8 +189,8 @@ const Ledger = {
         const updated = document.getElementById('invl-updated');
         if (updated) updated.textContent = this._all.length ? `${this._all.length} on record` : 'no investigations yet';
         this._renderStats();
-        this._renderDonut();
-        this._renderSpark();
+        this._renderVerdictBreakdown();
+        wireSparkRangeToggle(document.getElementById('invl-spark-range'), document.getElementById('invl-spark'), () => this._all, 'week');
         this._render();
     },
 
@@ -168,59 +262,112 @@ const Ledger = {
         set('invl-avg-score', scoreN ? Math.round(scoreSum / scoreN) + '/100' : '…');
     },
 
-    _renderDonut() {
+    // Verdict Breakdown — a full-width section at the bottom of the page
+    // (not a cramped side panel), built to actually carry detail and let a
+    // reader act on it: a bigger beveled donut (site.css's .invl-donut-wrap
+    // does the depth/glow styling — real 2D proportions underneath, no
+    // fake-3D perspective distortion of the slices themselves) with a real
+    // center total, plus a legend that's a genuine per-verdict data table
+    // (count, share, and average score — not just a color key) where every
+    // row is also a filter control: clicking Reject/Caution/Proceed here
+    // drives the exact same this._verdictFilter the <select> above the
+    // table already uses, so the chart and the ledger never disagree.
+    _renderVerdictBreakdown() {
         const canvas = document.getElementById('invl-verdict-donut');
-        if (!canvas || typeof Chart === 'undefined') return;
-        const counts = { REJECT: 0, CAUTION: 0, PROCEED: 0, OTHER: 0 };
+        const legendEl = document.getElementById('invl-verdict-legend');
+        const totalEl = document.getElementById('invl-donut-total');
+        const clearBtn = document.getElementById('invl-verdict-clear');
+        if (!canvas && !legendEl) return;
+
+        const buckets = { REJECT: [], CAUTION: [], PROCEED: [], OTHER: [] };
         this._all.forEach(inv => {
             const v = (inv.verdict || '').toUpperCase();
-            counts[counts[v] !== undefined ? v : 'OTHER']++;
+            (buckets[v] || buckets.OTHER).push(inv);
         });
+        const avgScore = rows => {
+            const scores = rows.map(r => Number(r.score)).filter(n => !isNaN(n));
+            return scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+        };
+        const total = this._all.length || 1;
         const series = [
-            ['Reject', counts.REJECT, VERDICT_COLOR.REJECT],
-            ['Caution', counts.CAUTION, VERDICT_COLOR.CAUTION],
-            ['Proceed', counts.PROCEED, VERDICT_COLOR.PROCEED],
-            ['Unclassified', counts.OTHER, '#71717a'],
-        ].filter(([, n]) => n > 0);
-        const labels = series.map(s => s[0]);
-        const values = series.map(s => s[1]);
-        const colors = series.map(s => s[2]);
-        if (this._donut) this._donut.destroy();
-        this._donut = new Chart(canvas, {
-            type: 'doughnut',
-            data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 0 }] },
-            options: {
-                responsive: true, maintainAspectRatio: false, cutout: '68%',
-                plugins: {
-                    legend: { display: true, position: 'bottom', labels: { color: '#a1a1aa', font: { size: 10.5 }, boxWidth: 8, padding: 10 } },
-                    tooltip: { callbacks: { label: c => `${c.label}: ${c.parsed} (${(c.parsed / this._all.length * 100).toFixed(0)}%)` } },
+            ['REJECT', 'Reject', buckets.REJECT.length, VERDICT_COLOR.REJECT],
+            ['CAUTION', 'Caution', buckets.CAUTION.length, VERDICT_COLOR.CAUTION],
+            ['PROCEED', 'Proceed', buckets.PROCEED.length, VERDICT_COLOR.PROCEED],
+            ['', 'Unclassified', buckets.OTHER.length, '#71717a'],
+        ].filter(([, , n]) => n > 0);
+
+        if (totalEl) totalEl.textContent = this._all.length.toLocaleString();
+
+        if (canvas && typeof Chart !== 'undefined') {
+            if (this._donut) this._donut.destroy();
+            this._donut = new Chart(canvas, {
+                type: 'doughnut',
+                data: {
+                    labels: series.map(s => s[1]),
+                    datasets: [{ data: series.map(s => s[2]), backgroundColor: series.map(s => s[3]), borderWidth: 0, hoverOffset: 10 }],
                 },
-            },
-        });
+                options: {
+                    responsive: true, maintainAspectRatio: false, cutout: '70%',
+                    onClick: (_evt, elements) => { if (elements.length) this._applyVerdictFilter(series[elements[0].index][0]); },
+                    onHover: (evt, elements) => { evt.native.target.style.cursor = elements.length ? 'pointer' : ''; },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: c => `${c.label}: ${c.parsed} (${Math.round(c.parsed / total * 100)}%)` } },
+                    },
+                },
+            });
+        }
+
+        if (legendEl) {
+            // Unclassified has no matching value in the verdict filter
+            // (which is only ever REJECT/CAUTION/PROCEED, same as the
+            // <select> above) — rendered as a plain row, not a click
+            // target, rather than wiring it to a filter it can't perform.
+            legendEl.innerHTML = series.map(([code, label, n, color]) => {
+                const pct = Math.round(n / total * 100);
+                const avg = avgScore(buckets[code] || buckets.OTHER);
+                const active = code && this._verdictFilter === code;
+                const tag = code ? 'button' : 'div';
+                const typeAttr = code ? ' type="button"' : '';
+                return `<${tag}${typeAttr} class="invl-verdict-row${active ? ' is-active' : ''}${code ? '' : ' is-static'}" data-verdict="${code}">
+                    <span class="invl-verdict-row-dot" style="background:${color}"></span>
+                    <span class="invl-verdict-row-label">${escapeHtml(label)}</span>
+                    <span class="invl-verdict-row-count">${n.toLocaleString()}</span>
+                    <span class="invl-verdict-row-pct">${pct}%</span>
+                    <span class="invl-verdict-row-avg">${avg != null ? `avg ${avg}/100` : 'avg —'}</span>
+                </${tag}>`;
+            }).join('');
+            legendEl.querySelectorAll('.invl-verdict-row[data-verdict]:not(.is-static)').forEach(row => {
+                row.addEventListener('click', () => this._applyVerdictFilter(row.dataset.verdict));
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.hidden = !this._verdictFilter;
+            clearBtn.onclick = () => this._clearVerdictFilter();
+        }
     },
 
-    // Real per-day investigation counts over the last 7 days — same "small
-    // bar strip" recipe as the Security Dashboard's Findings Ledger spark
-    // bars (site.css's .secdash-ledger-spark), reused here under its own
-    // .invl-spark classes rather than importing that page's module.
-    _renderSpark() {
-        const el = document.getElementById('invl-spark');
-        if (!el) return;
-        const days = 7;
-        const totals = new Array(days).fill(0);
-        const now = Date.now();
-        this._all.forEach(inv => {
-            const d = new Date(inv.date);
-            if (isNaN(d)) return;
-            const diffDays = Math.floor((now - d.getTime()) / 86400000);
-            if (diffDays >= 0 && diffDays < days) totals[days - 1 - diffDays]++;
-        });
-        const max = Math.max(1, ...totals);
-        el.innerHTML = totals.map((n, i) => {
-            const pct = Math.max(6, Math.round((n / max) * 100));
-            const latest = i === totals.length - 1 ? ' is-latest' : '';
-            return `<span class="invl-spark-bar${latest}" style="height:${pct}%" title="${n} investigation(s)"></span>`;
-        }).join('');
+    // Toggles off if the same verdict is clicked twice — click-to-filter
+    // controls read as pressed/unpressed, not one-way switches. Keeps the
+    // plain <select> above the table in sync too, since it's the same
+    // this._verdictFilter state either control can set.
+    _applyVerdictFilter(code) {
+        if (!code) return; // Unclassified slice/row — informational only, not filterable
+        this._verdictFilter = this._verdictFilter === code ? '' : code;
+        this._syncVerdictFilter();
+    },
+    _clearVerdictFilter() {
+        this._verdictFilter = '';
+        this._syncVerdictFilter();
+    },
+    _syncVerdictFilter() {
+        const select = document.getElementById('invl-verdict-filter');
+        if (select) select.value = this._verdictFilter;
+        this._page = 0;
+        this._render();
+        this._renderVerdictBreakdown();
+        if (this._verdictFilter) document.getElementById('invl-body')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     },
 
     _filtered() {

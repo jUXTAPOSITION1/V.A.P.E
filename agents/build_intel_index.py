@@ -397,7 +397,13 @@ def main():
             "investigation": latest_invest,
             "report": latest_report,
         },
-        "investigations": investigations[:40],
+        # Unlike reports/broadcasts/news below, this is never truncated —
+        # investigations.html is the dedicated full-record ledger page and
+        # needs every real investigation, not just the most recent 40 (the
+        # per-entry payload here is small: structured fields + a short
+        # summary, not the full report body, so the complete list is still
+        # a modest fetch).
+        "investigations": investigations,
         "reports": reports[:60],
         "broadcasts": broadcasts[:30],
         "news": news[:60],

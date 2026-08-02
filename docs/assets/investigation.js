@@ -73,7 +73,7 @@ function renderError(msg) {
         <div class="text-center py-20">
             <i class="fa-solid fa-magnifying-glass-chart text-2xl mb-3 opacity-40 block"></i>
             <div class="text-zinc-400 text-sm">${escapeHtml(msg)}</div>
-            <a href="index.html#the-archive" class="term-btn term-btn-sm inline-block mt-5">&larr; Back to The Archive</a>
+            <a href="investigations.html" class="term-btn term-btn-sm inline-block mt-5">&larr; Back to Investigations</a>
         </div>`;
 }
 
@@ -117,8 +117,8 @@ async function init() {
     const bodyHtml = simpleMarkdownToHtml(bodyAfterFrontmatter(text));
 
     document.getElementById('investigation-root').innerHTML = `
-        <a href="index.html#the-archive" class="text-xs text-zinc-500 hover:text-zinc-200 transition inline-flex items-center gap-1.5 mb-6">
-            <i class="fa-solid fa-arrow-left text-[10px]"></i> Back to The Archive
+        <a href="investigations.html" class="text-xs text-zinc-500 hover:text-zinc-200 transition inline-flex items-center gap-1.5 mb-6">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i> Back to Investigations
         </a>
         <div class="inv-header">
             ${icon
