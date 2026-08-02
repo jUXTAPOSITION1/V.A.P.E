@@ -129,3 +129,4 @@
 {"ts": "2026-08-02T16:59:17.930484Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-08-02T17:44:35.578426Z", "address": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "chain": "8453", "symbol": "SHIB", "name": "SHIB", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-02T23:01:27.961146Z", "address": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "chain": "8453", "symbol": "DUAL", "name": "DUAL", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-08-02T23:46:25.850949Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_chart"}
