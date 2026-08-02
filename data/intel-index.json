@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-02T14:59:34Z",
+  "generated": "2026-08-02T15:04:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 508,
+    "reports": 509,
     "reports_by_type": {
-      "bounty": 124,
+      "bounty": 125,
       "security": 94,
       "base": 102,
       "sentiment": 53,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260802_132331.md",
+      "file": "bounty_report_20260802_150330.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T13:23:31Z",
+      "date": "2026-08-02T15:03:30Z",
       "threat": null,
-      "summary": "Cycle: 20260802132331 \u00b7 Data timestamp (UTC): 2026-08-02T13:23:38Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_132331.md",
-      "bytes": 15813
+      "summary": "Base mover: HOME / WETH 0.3% +45% 24h (liq $57420.7939) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_150330.md",
+      "bytes": 16489
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_150330.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T15:03:30Z",
+      "threat": null,
+      "summary": "Base mover: HOME / WETH 0.3% +45% 24h (liq $57420.7939) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_150330.md",
+      "bytes": 16489
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 22:00 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-22.md",
       "bytes": 3443
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-30-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-30 21:18 UTC",
-      "date": "2026-07-30T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-30-21.md",
-      "bytes": 1702
     }
   ],
   "broadcasts": [
