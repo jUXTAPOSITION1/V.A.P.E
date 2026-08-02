@@ -59,7 +59,7 @@ function tickerLineHtml(h) {
         : 'text-zinc-400 border-white/15 bg-white/5';
     return `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border text-[9px] uppercase tracking-wide shrink-0 ${badgeCls}">${escapeHtml(h.topic || 'News')}</span>
             <span class="truncate">${escapeHtml(h.title)}</span>
-            <span class="text-zinc-600 shrink-0 hidden sm:inline">— ${escapeHtml(h.source || '')}</span>`;
+            <span class="text-zinc-600 shrink-0 hidden sm:inline">&middot; ${escapeHtml(h.source || '')}</span>`;
 }
 
 // Wires an auto-rotating headline ticker into `#${idPrefix}-wrap` /
@@ -70,7 +70,7 @@ export function wireTicker(headlines, idPrefix = 'news-ticker') {
     const line = document.getElementById(`${idPrefix}-line`);
     if (!wrap || !line) return;
     if (!headlines.length) {
-        line.innerHTML = '<span class="text-zinc-600">No breaking headlines this cycle — the wire fills in as soon as one lands.</span>';
+        line.innerHTML = '<span class="text-zinc-600">No breaking headlines this cycle. The wire fills in as soon as one lands.</span>';
         return;
     }
     let idx = 0, timer = null;
