@@ -97,26 +97,37 @@ export function scoreColor(score) {
 //            long VAPE has been running (bucket width grows with the real
 //            span instead of hardcoding a unit).
 export const SPARK_RANGES = ['day', 'week', 'month', 'all'];
+// Each bucket carries its count (bar height) AND the average safety score of
+// investigations logged in that window (bar color) -- so the sparkline shows
+// not just how much activity there was, but how it was ranked: a tall red
+// bucket is a busy, risky stretch; a tall green one is a busy, clean one. A
+// bucket with no scored investigations stays uncolored (no fabricated
+// signal) rather than defaulting to any particular color.
 export function sparklineBuckets(investigations, range) {
     const now = Date.now();
-    const dates = investigations.map(inv => new Date(inv.date)).filter(d => !isNaN(d));
+    const items = investigations
+        .map(inv => ({ d: new Date(inv.date), score: inv.score != null && inv.score !== '' ? Number(inv.score) : null }))
+        .filter(x => !isNaN(x.d));
     let bucketMs, n;
     if (range === 'day') { bucketMs = 3600e3; n = 24; }
     else if (range === 'month') { bucketMs = 86400e3; n = 30; }
     else if (range === 'all') {
-        const earliest = dates.length ? Math.min(...dates.map(d => d.getTime())) : now;
+        const earliest = items.length ? Math.min(...items.map(x => x.d.getTime())) : now;
         const spanMs = Math.max(86400e3, now - earliest);
         n = 52;
         bucketMs = Math.max(86400e3, Math.ceil(spanMs / n));
         n = Math.max(1, Math.min(52, Math.ceil(spanMs / bucketMs)));
-    } else { bucketMs = 86400e3; n = 7; } // 'week' (default)
+    } else { bucketMs = 86400e3; n = 7; } // 'week'
 
-    const totals = new Array(n).fill(0);
-    dates.forEach(d => {
+    const buckets = Array.from({ length: n }, () => ({ count: 0, scoreSum: 0, scoreN: 0 }));
+    items.forEach(({ d, score }) => {
         const diff = Math.floor((now - d.getTime()) / bucketMs);
-        if (diff >= 0 && diff < n) totals[n - 1 - diff]++;
+        if (diff < 0 || diff >= n) return;
+        const b = buckets[n - 1 - diff];
+        b.count++;
+        if (score != null && !isNaN(score)) { b.scoreSum += score; b.scoreN++; }
     });
-    return totals;
+    return buckets.map(b => ({ count: b.count, avgScore: b.scoreN ? b.scoreSum / b.scoreN : null }));
 }
 // A compact, non-expanding row — the same title/chain/verdict/score/date
 // cells _rowHtml() below renders for the full ledger, minus the click-to-
@@ -153,12 +164,14 @@ export function investigationRowHtml(inv) {
 
 export function renderSparkline(el, investigations, range) {
     if (!el) return;
-    const totals = sparklineBuckets(investigations, range || 'week');
-    const max = Math.max(1, ...totals);
-    el.innerHTML = totals.map((n, i) => {
-        const pct = Math.max(6, Math.round((n / max) * 100));
-        const latest = i === totals.length - 1 ? ' is-latest' : '';
-        return `<span class="invl-spark-bar${latest}" style="height:${pct}%" title="${n} investigation(s)"></span>`;
+    const buckets = sparklineBuckets(investigations, range || 'all');
+    const max = Math.max(1, ...buckets.map(b => b.count));
+    el.innerHTML = buckets.map((b, i) => {
+        const pct = Math.max(6, Math.round((b.count / max) * 100));
+        const latest = i === buckets.length - 1 ? ' is-latest' : '';
+        const style = b.avgScore != null ? `height:${pct}%;background:${scoreColor(b.avgScore)}` : `height:${pct}%`;
+        const title = b.avgScore != null ? `${b.count} investigation(s) · avg score ${Math.round(b.avgScore)}/100` : `${b.count} investigation(s)`;
+        return `<span class="invl-spark-bar${latest}" style="${style}" title="${escapeHtml(title)}"></span>`;
     }).join('');
 }
 // Wires a `.invl-range-btn[data-range]` toggle group to re-render the given
@@ -166,7 +179,7 @@ export function renderSparkline(el, investigations, range) {
 export function wireSparkRangeToggle(toggleEl, sparkEl, getInvestigations, initial) {
     if (!toggleEl || toggleEl.dataset.wired) return;
     toggleEl.dataset.wired = '1';
-    let current = initial || 'week';
+    let current = initial || 'all';
     const render = () => renderSparkline(sparkEl, getInvestigations(), current);
     const setState = activeBtn => {
         toggleEl.querySelectorAll('.invl-range-btn').forEach(b => {
@@ -232,7 +245,7 @@ const Ledger = {
         if (updated) updated.textContent = this._all.length ? `${this._all.length} on record` : 'no investigations yet';
         this._renderStats();
         this._renderVerdictBreakdown();
-        wireSparkRangeToggle(document.getElementById('invl-spark-range'), document.getElementById('invl-spark'), () => this._all, 'week');
+        wireSparkRangeToggle(document.getElementById('invl-spark-range'), document.getElementById('invl-spark'), () => this._all, 'all');
         this._render();
     },
 
