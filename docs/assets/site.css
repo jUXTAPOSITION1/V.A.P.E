@@ -273,20 +273,49 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     background: rgba(255, 255, 255, 0.35);
 }
 
-/* Security Dashboard — scoped blue accent (same #60a5fa as
-   #bounty-command-center's own scoped swap above) instead of the site's
-   global green --accent, so this section's interactive chrome (active
-   toggle pills, the lane <select>) reads as its own console rather than
-   inheriting the ambient accent used everywhere else — severity itself
-   stays on the --sev-* ramp below regardless, since that encodes real
-   data and is never themed. */
+/* Security Dashboard — blue-violet "high-tech console" theme. Two-tone
+   glow (blue #60a5fa, already used by Featured Investigation/Bounty
+   Command Center, plus violet #a78bfa, already the flagship beam's
+   secondary color) rather than a single flat accent or the site's global
+   green --accent, so this section's chrome — panel glows, the top beam,
+   active toggle pills, the lane <select>, lane dots — reads as one
+   deliberately-designed console. Severity itself stays on the --sev-*
+   ramp everywhere below regardless of this section's theme, since that
+   encodes real data and is never reskinned for decoration. */
+#security-dashboard {
+    --sd-blue: #60a5fa;
+    --sd-violet: #a78bfa;
+    --sd-glow-blue: rgba(96, 165, 250, 0.14);
+    --sd-glow-violet: rgba(167, 139, 250, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+#security-dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sd-blue) 35%, var(--sd-violet) 65%, transparent);
+    background-size: 200% 100%;
+    animation: flagship-beam 7s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) { #security-dashboard::before { animation: none; } }
+#security-dashboard .secdash-panel {
+    position: relative;
+    border-color: rgba(148, 163, 250, 0.14) !important;
+    background-image: radial-gradient(ellipse 130% 90% at 0% 0%, var(--sd-glow-blue), transparent 60%),
+                       radial-gradient(ellipse 120% 90% at 100% 100%, var(--sd-glow-violet), transparent 65%);
+    transition: border-color 0.2s ease;
+}
+#security-dashboard .secdash-panel:hover { border-color: rgba(148, 163, 250, 0.32) !important; }
+#security-dashboard .eyebrow { color: var(--sd-blue); }
 #security-dashboard .term-btn-active {
-    border-color: #60a5fa;
-    color: #60a5fa;
-    background: rgba(96, 165, 250, 0.14);
+    border-color: var(--sd-blue);
+    color: #c4d7fb;
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.16));
 }
 #security-dashboard .secdash-lane-select:focus {
-    border-color: #60a5fa;
+    border-color: var(--sd-blue);
 }
 
 /* Compact panel title — smaller/tighter than the site's default h3 so six
@@ -326,14 +355,23 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     max-width: 148px;
     margin: 0.25rem auto 0;
 }
-/* Risk Level sits below the Risk Breakdown cards as a compact horizontal
-   strip rather than its own full-size panel: a small gauge beside its
-   label and text, not a large standalone card. */
-.secdash-gauge-strip { display: flex; flex-direction: row; align-items: center; gap: 0.85rem; padding: 0.65rem !important; }
-.secdash-gauge-strip .secdash-gauge-wrap { height: 56px; width: 100px; max-width: 100px; margin: 0; flex-shrink: 0; }
+/* Risk Level: a compact horizontal strip (small gauge beside its label and
+   text) rather than its own full-size panel — sized down further and
+   paired side-by-side with Findings per Status on desktop (see the
+   lg:grid-cols-2 row in index.html) since neither widget has enough real
+   content to justify a full-width row on its own. The small live-dot next
+   to the title is a genuine liveness cue (this reads every refresh cycle,
+   like the x402 Ledger's own live indicators elsewhere on the site), not
+   decoration. */
+.secdash-gauge-strip { display: flex; flex-direction: row; align-items: center; gap: 0.75rem; padding: 0.65rem !important; height: 100%; }
+.secdash-gauge-strip .secdash-gauge-wrap { height: 46px; width: 82px; max-width: 82px; margin: 0; flex-shrink: 0; }
 .secdash-gauge-strip-text { flex: 1; min-width: 0; }
 .secdash-gauge-strip-text #secdash-gauge-delta,
 .secdash-gauge-strip-text #secdash-gauge-context { text-align: left; }
+.secdash-health-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 999px;
+    background: var(--sd-blue); margin-left: 0.35rem; vertical-align: middle;
+}
 .secdash-gauge-label {
     position: absolute;
     left: 50%;
@@ -386,7 +424,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     background: rgba(255, 255, 255, 0.18) content-box; box-sizing: border-box; cursor: pointer;
 }
 .secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35) content-box; }
-.secdash-lane-dot.is-active { background: #60a5fa content-box; }
+.secdash-lane-dot.is-active { background: linear-gradient(135deg, var(--sd-blue), var(--sd-violet)) content-box; }
 
 /* Category Signal Map — six real lanes as a staggered bubble cluster
    (Chart.js `bubble`, real primitive), with a caption list beneath it
@@ -394,15 +432,38 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
    securitydashboard.js::_categorySignal(), the one place that computes
    this — the chart and the caption list both read from it so they can't
    drift out of sync with each other). */
-.secdash-signalmap-chart { position: relative; height: 150px; width: 100%; }
+/* Both bubble charts below get a horizontal-scroll wrapper (same
+   overflow-x:auto convention as .secdash-ledger-scroll's wide table) —
+   securitydashboard.js sets a real min-width on the inner chart element
+   sized from the actual category/day count, so bubbles keep a legible,
+   non-overlapping fixed size and scroll instead of being crushed together
+   on a narrow viewport. */
+.secdash-signalmap-scroll, .secdash-timeline-scroll { overflow-x: auto; }
+
+/* Faint concentric "radar" rings behind the bubble cluster (pure CSS
+   background, no extra markup/JS) — echoes the reference screenshot's
+   orbit motif without hand-rolled physics; the bubbles themselves stay a
+   real Chart.js `bubble` dataset (see securitydashboard.js). */
+.secdash-signalmap-chart {
+    position: relative; height: 190px; width: 100%; min-width: 340px;
+    background-image:
+        radial-gradient(circle at 50% 58%, var(--sd-glow-violet), transparent 42%),
+        repeating-radial-gradient(circle at 50% 58%, rgba(148, 163, 250, 0.07) 0px, rgba(148, 163, 250, 0.07) 1px, transparent 1px, transparent 34px);
+    border-radius: var(--radius-md);
+}
 .secdash-signalmap-legend {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.35rem 0.75rem; margin-top: 0.4rem;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 0.75rem; margin-top: 0.5rem;
 }
 @media (min-width: 640px) { .secdash-signalmap-legend { grid-template-columns: repeat(3, 1fr); } }
-.secdash-signalmap-item { display: flex; align-items: baseline; gap: 0.4rem; font-size: 10.5px; min-width: 0; }
-.secdash-signalmap-dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; margin-top: 2px; }
-.secdash-signalmap-title { color: #d4d4d8; flex-shrink: 0; }
-.secdash-signalmap-delta { color: #71717a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.secdash-signalmap-item { display: flex; align-items: center; gap: 0.4rem; font-size: 10.5px; min-width: 0; }
+.secdash-signalmap-letter {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 17px; height: 17px; border-radius: 999px; font-size: 8px; font-weight: 600;
+    font-family: var(--font-mono); border: 1px solid currentColor;
+}
+.secdash-signalmap-body { min-width: 0; overflow: hidden; }
+.secdash-signalmap-title { color: #d4d4d8; display: block; }
+.secdash-signalmap-delta { color: #71717a; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Signal Timeline legend — small inline severity chips beneath the bubble
    timeline chart (the "By Severity" toggle state only; hidden for the
@@ -414,6 +475,23 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     text-align: center; padding: 0 1rem; font-size: 13px; color: #71717a;
 }
+
+/* Findings per Status — a compact per-verdict bar list (dot + label +
+   proportional fill bar + count + %) instead of a full Chart.js canvas.
+   The previous bar chart was a plain 3-bar chart stretched across a
+   200-260px .chart-shell-sm — a lot of chrome for three numbers. This is
+   a purpose-built small component (still ≥2 series with a legend, i.e.
+   the label beside each bar, so identity is never color-alone) sized to
+   sit beside the equally-compact Risk Level strip instead of dominating
+   its own row. */
+.secdash-verdict-body { display: flex; flex-direction: column; gap: 0.5rem; justify-content: center; height: 100%; min-height: 64px; }
+.secdash-verdict-row { display: flex; align-items: center; gap: 0.55rem; font-size: 11px; }
+.secdash-verdict-dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
+.secdash-verdict-label { color: #a1a1aa; width: 54px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.secdash-verdict-bar-wrap { flex: 1; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); overflow: hidden; min-width: 0; }
+.secdash-verdict-bar { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+.secdash-verdict-count { font-family: var(--font-mono); color: #e4e4e7; width: 34px; text-align: right; flex-shrink: 0; }
+.secdash-verdict-pct { font-family: var(--font-mono); color: #71717a; width: 40px; text-align: right; flex-shrink: 0; }
 
 /* Findings Ledger — a real, searchable/filterable/paginated table over the
    most recent ~150 real findings.jsonl rows (security-dashboard.json's
@@ -428,7 +506,14 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .secdash-ledger-row { cursor: pointer; transition: background-color 0.12s ease; }
 .secdash-ledger-row:hover { background: rgba(255, 255, 255, 0.03); }
-.secdash-ledger-row td { padding: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; white-space: nowrap; }
+.secdash-ledger-row td { padding: 0.55rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; white-space: nowrap; }
+/* Subtle severity wash on the first cell only (never the sole conveyor of
+   meaning — the badge's icon+text label right beside it always carries
+   the real signal) via a CSS var each row sets inline from its own real
+   severity color, plus a small pulsing dot for CRITICAL rows reusing the
+   site's existing live-dot animation as a genuine "needs attention" cue. */
+.secdash-ledger-row td:first-child { border-left: 2px solid var(--row-sev, transparent); background: var(--row-sev-wash, transparent); }
+.secdash-ledger-health-dot { display: inline-block; width: 5px; height: 5px; border-radius: 999px; background: currentColor; margin-left: 0.3rem; animation: pulse-ring 1.8s infinite; }
 .secdash-ledger-title {
     color: #d4d4d8; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
@@ -444,10 +529,33 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-ledger-detail { display: none; }
 .secdash-ledger-detail.is-open { display: table-row; }
 .secdash-ledger-detail td { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 0; white-space: normal; }
+/* Larger expanding detail pane — a bordered, glow-tinted card (matching
+   this section's blue-violet theme) with a real field grid instead of a
+   plain flex-wrap text line, so the expanded record reads as a genuine
+   detail view rather than an afterthought. */
 .secdash-ledger-detail-inner {
-    display: flex; flex-wrap: wrap; gap: 0.9rem; padding: 0.6rem 0.5rem 0.8rem;
-    font-size: 10.5px; color: #a1a1aa; background: rgba(255, 255, 255, 0.015);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem 1rem;
+    padding: 0.9rem 1rem; margin: 0.3rem 0.5rem 0.7rem;
+    font-size: 11px; color: #d4d4d8;
+    background: linear-gradient(135deg, var(--sd-glow-blue), var(--sd-glow-violet));
+    border: 1px solid rgba(148, 163, 250, 0.16); border-radius: var(--radius-md);
 }
+.secdash-ledger-detail-field { display: block; }
+.secdash-ledger-detail-label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; color: #71717a; margin-bottom: 0.2rem; }
+.secdash-ledger-detail-tags { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.secdash-ledger-detail-link { grid-column: 1 / -1; }
+
+/* Ledger header mini-sparkline — real daily finding-volume trend (the same
+   findings_timeline data backing the Signal Timeline chart, just summed
+   per day), reusing the x402 Ledger Activity tiles' bar-gradient look at a
+   much smaller scale since this is a glance-value accent beside the panel
+   title, not a primary chart. */
+.secdash-ledger-spark { display: inline-flex; align-items: flex-end; gap: 2px; height: 22px; margin-left: 0.6rem; vertical-align: middle; }
+.secdash-ledger-spark-bar {
+    flex: 0 0 auto; width: 3px; min-width: 3px; border-radius: 1px 1px 0 0;
+    background: linear-gradient(180deg, rgba(191, 219, 254, 0.75) 0%, var(--sd-blue) 45%, var(--sd-violet) 100%);
+}
+.secdash-ledger-spark-bar.is-latest { filter: brightness(1.25); box-shadow: 0 0 5px rgba(167, 139, 250, 0.6); }
 
 /* x402 Activity tiles — Transactions / Volume / Buyers, each a big number
    plus a small bar-sparkline of the same real per-day data backing the main
