@@ -5844,6 +5844,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0xa291392ecd53c6b4f396f56c7f4ead5470af4444": {
+    "address": "0xa291392EcD53c6b4f396F56c7f4EAD5470Af4444",
+    "chain": "56",
+    "creator_address": "0x074f481f4a8eff1713473a9bbc999397d46facc5",
+    "first_investigated": "2026-08-02T02:57:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-025723-0xa291392E.md",
+        "score": 60,
+        "ts": "2026-08-02T02:57:23Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T02:57:23Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "MEMES",
+    "times_investigated": 1
+  },
   "56:0xa7aee6cb644fcd1cef488f5a901d80d864bb4444": {
     "address": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
     "chain": "56",

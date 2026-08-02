@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T02:52:51Z",
+  "generated": "2026-08-02T02:57:27Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 498,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 648,
+    "investigations": 649,
     "news": 47,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-022726-0xF7454880.md",
-      "title": "Investigation \u2014 memes",
-      "symbol": "memes",
-      "name": "memes will continue",
-      "date": "2026-08-02T02:27:26Z",
-      "target": "0xF74548802f4c700315F019FdE17178b392EE4444",
+      "file": "investigation-20260802-025723-0xa291392E.md",
+      "title": "Investigation \u2014 MEMES",
+      "symbol": "MEMES",
+      "name": "The best memes",
+      "date": "2026-08-02T02:57:23Z",
+      "target": "0xa291392EcD53c6b4f396F56c7f4EAD5470Af4444",
       "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "92",
-      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration. Positive evidence: Ownership renounced; 24381 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 193+ days without a known incident in this scan; Custom verified source (not a mass-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-022726-0xF7454880.md"
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $22,729; [-5] Pair 26.8 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-025723-0xa291392E.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-025723-0xa291392E.md",
+      "title": "Investigation \u2014 MEMES",
+      "symbol": "MEMES",
+      "name": "The best memes",
+      "date": "2026-08-02T02:57:23Z",
+      "target": "0xa291392EcD53c6b4f396F56c7f4EAD5470Af4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $22,729; [-5] Pair 26.8 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-025723-0xa291392E.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-022726-0xF7454880.md",
@@ -594,20 +608,6 @@
       "score": "17",
       "summary": "Risk factors: [-8] Low holder count (94); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,793 (rug/illiquid); [-10] Low liquidity $8,793; [-10] No known third-party a",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-080430-0xA04bDB1f.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-074914-0x30277ce8.md",
-      "title": "Investigation \u2014 CHEESE",
-      "symbol": "CHEESE",
-      "name": "Cheese Head",
-      "date": "2026-08-01T07:49:14Z",
-      "target": "0x30277ce8c9a46E679E0263677318F692f1fEdE23",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,620 (rug/illiquid); [-10] Low liquidity $4,620. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 488+ days without a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-074914-0x30277ce8.md"
     }
   ],
   "reports": [

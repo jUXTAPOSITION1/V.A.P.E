@@ -1097,3 +1097,5 @@
 | 2026-08-02 | auto | 0x8E9AdB904824fDfBEc1a5f15c4146a23dc3453EF (IDOLL) | deep_investigation | REJECT (0/100) | Owner not renounced (0x18b7d3602142ca5942a13f790fbcbb407e3e1176) — can still act | +7d |
 
 | 2026-08-02 | auto | 0xF74548802f4c700315F019FdE17178b392EE4444 (memes) | deep_investigation | PROCEED (92/100) | Top 9 non-LP/burn holders control 69% of supply — meaningful concentration | +7d |
+
+| 2026-08-02 | auto | 0xa291392EcD53c6b4f396F56c7f4EAD5470Af4444 (MEMES) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 99% of supply — concentrated, easily manipula | +7d |
