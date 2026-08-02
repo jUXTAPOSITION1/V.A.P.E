@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T00:36:01Z",
+  "generated": "2026-08-02T02:44:35Z",
   "count": 60,
   "headlines": [
     {
@@ -75,6 +75,22 @@
       "crypto": true
     },
     {
+      "title": "Funding stock buybacks by selling your primary reserve asset is a dangerous game, but Lite Strategy just pulled it off without using a dime of debt",
+      "url": "https://cryptoslate.com/lite-strategy-retired-13-of-its-shares-but-estimated-litecoin-per-share-rose-just-1-66/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 02:05:43 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin ETFs just bled $265M in a brutal 24 hours, and Ethereum\u2019s supposed rescue is another BlackRock illusion",
+      "url": "https://cryptoslate.com/bitcoin-etfs-shed-265m-as-blackrocks-staked-ether-fund-takes-15-4m/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 01:10:43 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Bitwise is liquidating six crypto option ETFs that offered 25% payouts while returning investors\u2019 own capital",
       "url": "https://cryptoslate.com/bitwise-is-liquidating-six-crypto-option-etfs-that-offered-25-payouts-while-returning-investors-own-capital/",
       "source": "CryptoSlate",
@@ -147,27 +163,11 @@
       "crypto": true
     },
     {
-      "title": "Moonbeam just halted all user transactions, leaving late GLMR holders at  mercy of an email helpdesk to recover funds",
-      "url": "https://cryptoslate.com/moonbeam-just-halted-all-user-transactions-leaving-late-glmr-holders-at-the-mercy-of-an-email-helpdesk-to-recover-stranded-funds/",
-      "source": "CryptoSlate",
-      "published": "Sat, 01 Aug 2026 20:10:42 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "YouTuber Hank Green says his AI usage is \u2018not healthy\u2019",
       "url": "https://techcrunch.com/2026/08/01/youtuber-hank-green-says-his-ai-usage-is-not-healthy/",
       "source": "TechCrunch AI",
       "published": "Sat, 01 Aug 2026 19:45:45 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "A major Japanese Bitcoin mining pool just pulled the plug on its Bitcoin service just as 3 mega-miners claimed 60% of the network",
-      "url": "https://cryptoslate.com/a-major-japanese-bitcoin-mining-pool-just-pulled-the-plug-on-its-bitcoin-service-just-as-3-mega-miners-claimed-60-of-the-network/",
-      "source": "CryptoSlate",
-      "published": "Sat, 01 Aug 2026 19:05:49 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {

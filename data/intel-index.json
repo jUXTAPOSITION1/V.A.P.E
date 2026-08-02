@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T02:42:23Z",
+  "generated": "2026-08-02T02:45:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 497,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 138,
     "investigations": 648,
-    "news": 46,
+    "news": 47,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-silent-hijack-lg-moves-to-purge-rent-a-tv-proxy-sdks-from-we.md",
+      "title": "SILENT HIJACK: LG moves to purge rent-a-TV proxy SDKs from webOS store",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T02:45:36Z",
+      "published_et": "August 1, 2026 \u00b7 10:45 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "After research revealed over 40% of webOS apps secretly route third-party traffic, the electronics giant threatens non-compliant developers with immediate suspension.",
+      "image": "assets/news-images/silent-hijack-lg-moves-to-purge-rent-a-tv-proxy-sdks-from-we.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-silent-hijack-lg-moves-to-purge-rent-a-tv-proxy-sdks-from-we.md"
+    },
     {
       "file": "news-2026-08-02-sec-enforcement-shakeup-14-year-veteran-sam-waldon-steps-dow.md",
       "title": "SEC Enforcement Shakeup: 14-Year Veteran Sam Waldon Steps Down as Osman Nawaz Takes the Reins",
