@@ -1,7 +1,14 @@
 {
-  "generated": "2026-08-02T16:29:39Z",
-  "synthesis": "VAPE's automation has repeatedly generated featured investigations while running sweeps, bounty radar scans, reputation snapshots, red-team scans, repo reviews, and threat analyses.",
+  "generated": "2026-08-02T16:44:25Z",
+  "synthesis": "VAPE automation has repeatedly generated featured investigations while running sweeps, bounty radar scans, reputation snapshots, and assorted AI red-team and bounty reports.",
   "tasks": [
+    {
+      "sha": "e5ded53937",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-02T16:29Z",
+      "date": "2026-08-02T16:29:43Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/e5ded539379dc4564057f7feb5a3156c045cb605"
+    },
     {
       "sha": "0c544967b9",
       "kind": "automation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-08-02T14:59Z",
       "date": "2026-08-02T14:59:38Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a5119017e0c42a561f8610462f3b611080b31b33"
-    },
-    {
-      "sha": "b063970e66",
-      "kind": "automation",
-      "message": "threat analysis: 2026-08-02T14:54Z",
-      "date": "2026-08-02T14:54:41Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b063970e668e4ed01e682a256730b6e105d549a0"
     }
   ]
 }
