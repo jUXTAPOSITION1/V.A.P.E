@@ -17,6 +17,12 @@ const fmtUsd = n => n == null ? '…' : (n >= 1e9 ? '$' + (n / 1e9).toFixed(2) +
 
 const Bounty = {
     _esc(t) { return (t || '').replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c])); },
+    // Escaping alone doesn't neutralize a `javascript:` URI in an href — a
+    // remote-sourced url (opportunities.json aggregates external bounty-
+    // program listings, hack-sweep-reports' file.html_url, task-feed.json)
+    // needs a scheme check too. Falls back to '#' for anything that isn't
+    // plain http(s), same convention report.js's URL fields already use.
+    _safeUrl(u) { return /^https?:\/\//i.test(u || '') ? this._esc(u) : '#'; },
     _ago(iso) {
         if (!iso) return '';
         const d = new Date(iso);
@@ -59,11 +65,25 @@ const Bounty = {
         return items.slice(page * size, (page + 1) * size);
     },
 
+    // Shared, promise-cached fetch of opportunities.json — bountyCommand()'s
+    // telemetry and bounties()'s list filtering both need the same payload;
+    // same _loadBountyOps() promise-caching pattern already used below, so
+    // a page visit issues one request instead of two independent ones with
+    // different Date.now() cache-busters.
+    _opportunitiesPromise: null,
+    async _loadOpportunities() {
+        if (this._opportunitiesPromise) return this._opportunitiesPromise;
+        this._opportunitiesPromise = (async () => {
+            const data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=` + Date.now())).json();
+            return Array.isArray(data) ? data : [];
+        })();
+        return this._opportunitiesPromise;
+    },
+
     // Telemetry strip + live automation feed + VAPE's own audit track record.
     async bountyCommand() {
         try {
-            const data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=` + Date.now())).json();
-            const list = Array.isArray(data) ? data : [];
+            const list = await this._loadOpportunities();
             const liveStatuses = new Set(['live', 'active']);
             const live = list.filter(o => liveStatuses.has((o.status || '').toLowerCase())).length;
             const platforms = new Set(list.map(o => o.platform).filter(Boolean));
@@ -147,7 +167,7 @@ const Bounty = {
         taskFeedEl.innerHTML = items.length ? items.map(t => {
             const [icon, col] = this._taskFeedKindMeta[t.kind] || this._taskFeedKindMeta.automation || ['fa-gears', '#a1a1aa'];
             return `
-            <a href="${t.url || '#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
+            <a href="${this._safeUrl(t.url)}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
                 <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
                 <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message || '')}</div>
                 <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
@@ -174,7 +194,7 @@ const Bounty = {
         if (this._auditQuery) files = files.filter(f => f.name.includes(this._auditQuery));
         const items = this._pgSlice('bcc-audit-pg', files, 8);
         auditEl.innerHTML = items.length ? items.map(f => `
-                <a href="${f.url}" target="_blank" class="card-h diff-row block">
+                <a href="${this._safeUrl(f.url)}" target="_blank" class="card-h diff-row block">
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <i class="fa-solid ${f.stopped ? 'fa-ban text-zinc-500' : 'fa-file-shield text-[#60a5fa]'}"></i>
                         <span class="text-[10px] ${f.stopped ? 'text-zinc-500' : 'text-[#60a5fa]'}">${f.stopped ? 'Lead stopped' : 'Audit filed'}</span>
@@ -212,8 +232,7 @@ const Bounty = {
         const el = document.getElementById('bounties');
         const searchEl = document.getElementById('bounty-ops-search');
         try {
-            let data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=` + Date.now())).json();
-            if (!Array.isArray(data)) data = [];
+            let data = await this._loadOpportunities();
             data = data.filter(b => b.track === 'bounty' && b.vapeFit === true)
                        .sort((a, b) => (b.bountyFitScore || 0) - (a.bountyFitScore || 0)).slice(0, 30);
             if (!data.length) throw 0;
@@ -269,7 +288,7 @@ const Bounty = {
                     ${ops.vapeReportUrl ? `<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>` : ''}
                 </div>` : ''}
                 <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
-                    <a href="${b.url || '#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
+                    <a href="${this._safeUrl(b.url)}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
                     <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
                 </div>
             </div>`;

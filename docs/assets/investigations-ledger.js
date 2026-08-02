@@ -123,8 +123,31 @@ const Ledger = {
                 if (this._sortKey === key) this._sortDir = this._sortDir === 'asc' ? 'desc' : 'asc';
                 else { this._sortKey = key; this._sortDir = key === 'title' ? 'asc' : 'desc'; }
                 this._page = 0;
+                this._updateSortIndicators();
                 this._render();
             });
+        });
+        this._updateSortIndicators();
+    },
+
+    // Keeps aria-sort + the visible arrow (site.css's .invl-sort-arrow) in
+    // sync with the active column/direction — a keyboard or screen-reader
+    // user gets the same sort state a sighted mouse user already sees from
+    // the ledger's own row order.
+    _updateSortIndicators() {
+        document.querySelectorAll('.invl-table thead th[data-sort]').forEach(th => {
+            const btn = th.querySelector('.invl-sort-btn');
+            if (!btn) return;
+            btn.querySelector('.invl-sort-arrow')?.remove();
+            if (th.dataset.sort === this._sortKey) {
+                th.setAttribute('aria-sort', this._sortDir === 'asc' ? 'ascending' : 'descending');
+                const arrow = document.createElement('span');
+                arrow.className = 'invl-sort-arrow';
+                arrow.innerHTML = this._sortDir === 'asc' ? '&#9650;' : '&#9660;';
+                btn.appendChild(arrow);
+            } else {
+                th.setAttribute('aria-sort', 'none');
+            }
         });
     },
 
@@ -153,9 +176,15 @@ const Ledger = {
             const v = (inv.verdict || '').toUpperCase();
             counts[counts[v] !== undefined ? v : 'OTHER']++;
         });
-        const labels = ['Reject', 'Caution', 'Proceed', 'Unclassified'].filter((_, i) => Object.values(counts)[i] > 0);
-        const values = Object.values(counts).filter(v => v > 0);
-        const colors = [VERDICT_COLOR.REJECT, VERDICT_COLOR.CAUTION, VERDICT_COLOR.PROCEED, '#71717a'].filter((_, i) => Object.values(counts)[i] > 0);
+        const series = [
+            ['Reject', counts.REJECT, VERDICT_COLOR.REJECT],
+            ['Caution', counts.CAUTION, VERDICT_COLOR.CAUTION],
+            ['Proceed', counts.PROCEED, VERDICT_COLOR.PROCEED],
+            ['Unclassified', counts.OTHER, '#71717a'],
+        ].filter(([, n]) => n > 0);
+        const labels = series.map(s => s[0]);
+        const values = series.map(s => s[1]);
+        const colors = series.map(s => s[2]);
         if (this._donut) this._donut.destroy();
         this._donut = new Chart(canvas, {
             type: 'doughnut',
@@ -244,7 +273,7 @@ const Ledger = {
             body.querySelectorAll('[data-open-report]').forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.stopPropagation();
-                    this.openReport(btn.dataset.openReport);
+                    this.openReport(btn.dataset.openReport, btn);
                 });
             });
         }
@@ -319,21 +348,26 @@ const Ledger = {
 
     // ── Full-report popup ───────────────────────────────────────────────
     _modal: null,
+    _escHandler: null,
+    _modalTrigger: null,
     _closeModal() {
+        if (this._escHandler) { document.removeEventListener('keydown', this._escHandler); this._escHandler = null; }
         if (this._modal) { this._modal.remove(); this._modal = null; }
+        if (this._modalTrigger) { this._modalTrigger.focus(); this._modalTrigger = null; }
     },
 
-    async openReport(file) {
+    async openReport(file, triggerEl) {
         this._closeModal();
+        this._modalTrigger = triggerEl || null;
         const inv = this._all.find(i => i.file === file) || {};
         const modal = document.createElement('div');
         modal.id = 'invl-report-modal';
         modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
         modal.innerHTML = `
             <div class="absolute inset-0 bg-black/70" data-close></div>
-            <div class="relative popover p-6 max-h-[88vh] overflow-y-auto">
+            <div class="relative popover p-6 max-h-[88vh] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="invl-report-title">
                 <div class="flex items-center justify-between mb-4 gap-3">
-                    <h3 class="text-base flex items-center gap-2 min-w-0">
+                    <h3 id="invl-report-title" class="text-base flex items-center gap-2 min-w-0">
                         <i class="fa-solid fa-magnifying-glass-chart text-zinc-500 shrink-0"></i>
                         <span class="truncate">${escapeHtml(inv.symbol || inv.title || 'Investigation Report')}</span>
                     </h3>
@@ -344,8 +378,10 @@ const Ledger = {
         document.body.appendChild(modal);
         this._modal = modal;
         modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => this._closeModal()));
-        const escHandler = e => { if (e.key === 'Escape') { this._closeModal(); document.removeEventListener('keydown', escHandler); } };
-        document.addEventListener('keydown', escHandler);
+        this._escHandler = e => { if (e.key === 'Escape') this._closeModal(); };
+        document.addEventListener('keydown', this._escHandler);
+        const closeBtn = modal.querySelector('[data-close]');
+        if (closeBtn) closeBtn.focus();
 
         const body = document.getElementById('invl-report-body');
         try {
@@ -374,9 +410,10 @@ const Ledger = {
                     <span class="text-xs font-mono shrink-0" style="color:${sColor}">${escapeHtml(String(score))}/100</span>
                 </div>` : ''}
                 <article class="article-body">${simpleMarkdownToHtml(rawBody)}</article>
-                <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-white/10">
+                <div class="flex flex-wrap items-center gap-2 mt-6 pt-4 border-t border-white/10">
                     <button type="button" id="invl-download-pdf" class="term-btn term-btn-sm"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
                     <a href="investigation.html?file=${encodeURIComponent(file)}" class="term-btn term-btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open as full page</a>
+                    <span id="invl-pdf-status" class="text-[11px] text-rose-400"></span>
                 </div>`;
             const pdfBtn = document.getElementById('invl-download-pdf');
             if (pdfBtn) pdfBtn.addEventListener('click', () => this._downloadPdf(inv, rawBody));
@@ -391,7 +428,11 @@ const Ledger = {
     // markdown branch), so an investigation's PDF export carries the same
     // real V.A.P.E Report identity rather than a bespoke one-off layout.
     async _downloadPdf(inv, rawBody) {
-        if (!window.Report) return;
+        const status = document.getElementById('invl-pdf-status');
+        if (!window.Report) {
+            if (status) status.textContent = 'PDF export unavailable — try reloading the page.';
+            return;
+        }
         try {
             await window.Report.downloadPdf({
                 offering: 'investigation',
@@ -409,7 +450,13 @@ const Ledger = {
                     disclaimer: 'Real on-chain data. Not investment advice.',
                 },
             });
-        } catch (e) { /* jsPDF unavailable/blocked — the on-screen report itself still works */ }
+        } catch (e) {
+            // jsPDF unavailable/blocked (e.g. a wallet webview blocking a
+            // third-party CDN or file download) — the on-screen report
+            // itself still works either way, but the user clicked a button
+            // and deserves a reason it didn't do anything.
+            if (status) status.textContent = 'Could not generate the PDF — the on-screen report above is still complete.';
+        }
     },
 };
 

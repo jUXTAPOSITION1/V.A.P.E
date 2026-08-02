@@ -1029,9 +1029,13 @@ a { transition: color .15s; }
 .invl-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
 .invl-table thead th {
     text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em;
-    color: #71717a; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); white-space: nowrap; cursor: pointer;
+    color: #71717a; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); white-space: nowrap;
 }
-.invl-table thead th:hover { color: #d4d4d8; }
+.invl-sort-btn {
+    background: none; border: none; padding: 0; margin: 0; font: inherit; text-transform: inherit;
+    letter-spacing: inherit; color: inherit; cursor: pointer;
+}
+.invl-sort-btn:hover, .invl-sort-btn:focus-visible { color: #d4d4d8; }
 .invl-sort-arrow { font-size: 8px; margin-left: 0.3rem; opacity: 0.6; }
 .invl-row { cursor: pointer; transition: background-color 0.12s ease; }
 .invl-row:hover { background: rgba(255, 255, 255, 0.03); }
