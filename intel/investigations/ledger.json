@@ -2655,6 +2655,25 @@
     "symbol": "SHIB",
     "times_investigated": 1
   },
+  "1:0x999b49c0d1612e619a4a4f6280733184da025108": {
+    "address": "0x999B49c0d1612E619A4A4f6280733184da025108",
+    "chain": "1",
+    "creator_address": "0x0dc1dd32b1300818c977ce5a36a464a5c0c14550",
+    "first_investigated": "2026-08-02T13:44:44Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-134444-0x999B49c0.md",
+        "score": 50,
+        "ts": "2026-08-02T13:44:44Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T13:44:44Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "SLOP",
+    "times_investigated": 1
+  },
   "1:0x99e980265bf36516c442be982df1772a6ccb3233": {
     "address": "0x99E980265Bf36516C442be982df1772a6cCb3233",
     "chain": "1",
