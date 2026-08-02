@@ -93,6 +93,7 @@
                 <a href="bounty.html#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
                 <a href="#retain" class="hover:text-zinc-100 transition">Engagement</a>
                 <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
+                <a href="city.html" class="hover:text-zinc-100 transition">City</a>
                 <a href="#the-wire" class="hover:text-zinc-100 transition">Live Data</a>
                 <a href="#your-case-file" class="hover:text-zinc-100 transition">Portfolio</a>
             </div>
@@ -119,6 +120,7 @@
                 <a href="bounty.html#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-shield-halved w-4 text-center text-zinc-500"></i>Threats</a>
                 <a href="#retain" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-handshake w-4 text-center text-zinc-500"></i>Engagement</a>
                 <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
+                <a href="city.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-city w-4 text-center text-zinc-500"></i>City</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-chart-line w-4 text-center text-zinc-500"></i>Live Data</a>
                 <a href="#your-case-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-wallet w-4 text-center text-zinc-500"></i>Portfolio</a>
                 <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
@@ -315,20 +317,30 @@
                  needs the most horizontal room. -->
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-3">
                 <div class="panel-sm secdash-panel lg:col-span-3">
-                    <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
-                    <p class="secdash-panel-desc mb-2">Every automated security workflow this repo runs, plotted as its own segment on the ring. Click a segment for its detail.</p>
-                    <div class="secdash-lanes-headline mb-2">
-                        <div id="secdash-lanes-stat" class="secdash-lanes-stat"><div class="skeleton h-8 w-32"></div></div>
-                        <span id="secdash-lanes-swept" class="secdash-lanes-swept text-[11px] text-zinc-500">…</span>
+                    <div class="flex items-center justify-between gap-2 mb-0">
+                        <h3 class="secdash-panel-title mb-0">VAPE City</h3>
+                        <a href="city.html" class="text-[11px] text-zinc-500 hover:text-zinc-100 transition inline-flex items-center gap-1 shrink-0">
+                            <span class="sr-only sm:not-sr-only">Explore full city</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
                     </div>
-                    <div id="secdash-lanes-flow" class="secdash-lanes-flow"><div class="skeleton h-full w-full"></div></div>
-                    <div class="secdash-lanes-legend">
-                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-low)"></span>Passing</span>
-                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-critical)"></span>Failing</span>
-                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-info)"></span>Never run</span>
+                    <p class="secdash-panel-desc mb-2">Every automated lane and real process VAPE runs, mapped as one living city. Real x402 jobs move through its streets as they settle. Click a building for its detail.</p>
+                    <div class="city-stage" data-city-stage="compact">
+                        <div class="city-toolbar">
+                            <div class="city-layers">
+                                <button type="button" data-city-layer="overview" class="city-layer-btn is-active">Overview</button>
+                                <button type="button" data-city-layer="health" class="city-layer-btn">Health</button>
+                            </div>
+                        </div>
+                        <div class="city-stat-strip"></div>
                     </div>
-                    <div id="secdash-lanes-detail" class="secdash-lanes-detail" hidden></div>
-                    <ul id="secdash-lanes-a11y" class="sr-only"></ul>
+                    <div class="city-legend">
+                        <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-low)"></span>Passing / live</span>
+                        <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-medium)"></span>Caution</span>
+                        <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-critical)"></span>Alert</span>
+                        <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-info)"></span>Unknown</span>
+                        <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--city-mint)"></span>Live x402 delivery</span>
+                    </div>
+                    <ul data-city-a11y class="sr-only"></ul>
                 </div>
                 <div class="panel-sm secdash-panel lg:col-span-2">
                     <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
@@ -1112,5 +1124,6 @@
     <script type="module" src="assets/newsfeed.js?v=2"></script>
     <script type="module" src="assets/securitydashboard.js?v=1"></script>
     <script type="module" src="assets/investigations-preview.js?v=1"></script>
+    <script type="module" src="assets/cityscape.js?v=1"></script>
 </body>
 </html>

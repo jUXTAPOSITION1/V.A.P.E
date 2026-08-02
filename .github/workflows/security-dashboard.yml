@@ -41,10 +41,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 agents/build_security_dashboard.py
 
+      - name: Build VAPE City snapshot
+        # Zero-network, pure re-projection of the file just written above
+        # plus data/attack-feed.json, data/intel-index.json,
+        # intel/bounty-radar/opportunities.json, and data/reputation.json --
+        # runs right after so the city's 10 lane-checkpoint buildings reflect
+        # this same cycle's freshly-regenerated lane data. continue-on-error
+        # so a bug in this step never blocks the Security Dashboard commit
+        # below (a step failure otherwise skips every later step in the job).
+        continue-on-error: true
+        run: python3 agents/build_city_state.py
+
       - name: Commit snapshot + history
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           scripts/ci_commit_push.sh \
             "security-dashboard $(date -u +%Y-%m-%dT%H:%MZ)" \
-            data/security-dashboard.json data/security-dashboard-history.jsonl
+            data/security-dashboard.json data/security-dashboard-history.jsonl \
+            data/city-state.json

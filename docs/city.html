@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAPE City: The V.A.P.E Report</title>
+    <meta name="description" content="Every automated lane and real process VAPE runs, mapped as one living, bird's-eye isometric city — real data in every building, real x402 jobs moving through its streets.">
+    <link rel="canonical" href="https://juxtaposition1.github.io/V.A.P.E/city.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juxtaposition1.github.io/V.A.P.E/city.html">
+    <meta property="og:site_name" content="The V.A.P.E Report">
+    <meta property="og:title" content="VAPE City: The V.A.P.E Report">
+    <meta property="og:description" content="Every automated lane and real process VAPE runs, mapped as one living, bird's-eye isometric city.">
+    <meta property="og:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
+
+    <link rel="icon" href="https://juxtaposition1.github.io/V.A.P.E/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://juxtaposition1.github.io/V.A.P.E/assets/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://juxtaposition1.github.io/V.A.P.E/assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#09090b">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/site.css?v=19">
+</head>
+<body class="text-zinc-200 min-h-screen">
+    <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 py-3.5 flex items-center justify-between gap-4">
+            <button id="nav-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu-panel" class="flex items-center gap-2.5 shrink-0">
+                <svg id="nav-menu-bars" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="lg:hidden w-5 h-5 text-zinc-400 shrink-0"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                <svg id="nav-menu-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="hidden lg:hidden w-5 h-5 text-zinc-400 shrink-0"><path d="M5 5l14 14M19 5L5 19"/></svg>
+                <img src="assets/logo-v-256.png" alt="" width="26" height="26" class="w-[26px] h-[26px] shrink-0" onerror="this.remove()">
+                <div class="text-base tracking-tight leading-none whitespace-nowrap">
+                    <span class="sm:hidden">VAPE City</span>
+                    <span class="hidden sm:inline">The V.A.P.E Report: VAPE City</span>
+                </div>
+            </button>
+            <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-500">
+                <a href="index.html" class="hover:text-zinc-100 transition">Main Site</a>
+                <a href="news.html" class="hover:text-zinc-100 transition">VAPE Wire</a>
+                <a href="investigations.html" class="hover:text-zinc-100 transition">Investigations</a>
+                <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
+                <a href="search.html" aria-label="Search" class="text-zinc-500 hover:text-zinc-100 transition"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+        </div>
+        <div id="nav-menu-panel" class="lg:hidden absolute top-full left-0 right-0 border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl invisible opacity-0 scale-[0.98] -translate-y-1 pointer-events-none transition-all duration-200 ease-out origin-top">
+            <div class="max-w-[1600px] mx-auto px-3 py-3 flex flex-col gap-1 text-sm text-zinc-300">
+                <a href="index.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Main Site</a>
+                <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>VAPE Wire</a>
+                <a href="investigations.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass-chart w-4 text-center text-zinc-500"></i>Investigations</a>
+                <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
+                <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pb-16">
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-6 pb-4">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="eyebrow mb-3"><i class="fa-solid fa-city"></i>[ vape city ]</div>
+                <span id="city-updated" class="text-[11px] text-zinc-500">syncing…</span>
+            </div>
+            <h1 class="section-title text-xl sm:text-2xl mb-2">A living map of everything VAPE runs.</h1>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed">
+                Every automated security lane and real process — investigations, bounty ops, the newsroom,
+                threat intelligence, the tool-building foundry, the findings vault — laid out as one bird's-eye
+                city. Building size and status trace to real, current data; delivery trucks moving through the
+                streets are real x402 jobs settling right now.
+            </p>
+        </div>
+
+        <!-- Full-bleed stage: deliberately breaks out of the max-w-[1600px]
+             container every other page uses, per the explicit brief for
+             this page to be "as big as we can get it on desktop and
+             mobile." docs/index.html mounts the same engine at a small,
+             fixed compact size inside #security-dashboard instead. -->
+        <div class="city-stage city-stage--full" data-city-stage="full">
+            <div class="city-toolbar">
+                <div class="city-layers">
+                    <button type="button" data-city-layer="overview" class="city-layer-btn is-active">Overview</button>
+                    <button type="button" data-city-layer="health" class="city-layer-btn">Health</button>
+                </div>
+                <div class="city-zoom">
+                    <button type="button" class="city-zoom-btn" data-city-zoom="out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+                    <button type="button" class="city-zoom-btn" data-city-zoom="in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="city-hint"><i class="fa-solid fa-hand-pointer"></i>Drag to pan · scroll or pinch to zoom · tap a building</div>
+            <div class="city-stat-strip"></div>
+        </div>
+
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-4">
+            <div class="city-legend">
+                <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-low)"></span>Passing / live</span>
+                <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-medium)"></span>Caution</span>
+                <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-critical)"></span>Alert</span>
+                <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-info)"></span>Unknown</span>
+                <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--city-mint)"></span>Live x402 delivery</span>
+            </div>
+            <ul data-city-a11y class="sr-only"></ul>
+        </div>
+    </main>
+
+    <script type="module" src="assets/nav.js"></script>
+    <script type="module" src="assets/cityscape.js?v=1"></script>
+</body>
+</html>
