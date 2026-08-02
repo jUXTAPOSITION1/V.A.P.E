@@ -119,3 +119,4 @@
 {"ts": "2026-08-02T00:57:31.787523Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-02T01:57:22.192173Z", "address": "0x752C5a95d202972E124390F30a50154409d3c858", "chain": "8453", "symbol": "OFC", "name": "OFC", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-02T02:27:30.731251Z", "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "chain": "1", "symbol": "V4", "name": "V4", "source": "evm", "offering": "token_intel"}
+{"ts": "2026-08-02T05:27:34.447847Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
