@@ -134,8 +134,7 @@ const SecurityDashboard = {
     _data: null,
     _history: [],
     _lanes: [],
-    _lanesFilter: '',
-    _lanesSort: 'recency',
+    _laneDetailOpenIdx: null,
     _signalMapOpenIdx: null,
     _signalMapSignals: null,
     _signalMapById: null,
@@ -162,7 +161,7 @@ const SecurityDashboard = {
         // Each panel renders independently — one throwing (a malformed field
         // in a given lane, a missing canvas) must not leave its siblings
         // stuck in their skeleton state.
-        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanesPanel, this._wireLanesControls,
+        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanesPanel,
             this._renderCategoryMap, this._renderTimeline, this._renderVerdictBars, this._wireTimelineToggle,
             this._renderLedger, this._wireLedgerControls, this._renderLedgerSpark]) {
             try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
@@ -352,20 +351,9 @@ const SecurityDashboard = {
 
     // Automated Lanes — every real per-workflow lane (agents/
     // build_security_dashboard.py's build_lanes(), one entry per real
-    // GitHub Actions security workflow) shown at once: a real "N/M passing"
-    // headline, a horizontal bar-per-lane chart plotting each lane's real
-    // hours-since-last-run (longer bar = more overdue — the thing worth
-    // noticing, not the routine passes), and the full lane list beneath it,
-    // which both is the required accessible table view for that chart and
-    // carries each lane's own specific real detail text (open alert count,
-    // coverage %, chain-intact, etc. — whatever agents/build_security_
-    // dashboard.py already computed for that lane).
-    _hoursSince(iso) {
-        const d = new Date(iso);
-        if (isNaN(d)) return null;
-        return Math.max(0, (Date.now() - d.getTime()) / 3600000);
-    },
-
+    // GitHub Actions security workflow), plotted on the radial signal ring
+    // below (_renderLanesRing) with a screen-reader-only text equivalent
+    // (_renderLanesA11yList) carrying the same real per-lane detail.
     _laneStatus(lane) {
         if (lane.last_run_conclusion == null) return 'never';
         return lane.last_run_conclusion === 'success' ? 'pass' : 'fail';
@@ -388,8 +376,6 @@ const SecurityDashboard = {
         if (!lanes.length) {
             statEl.innerHTML = '<span class="text-zinc-500 text-sm">No lane data this cycle.</span>';
             if (sweptEl) sweptEl.textContent = '';
-            const listEl = document.getElementById('secdash-lanes-list');
-            if (listEl) listEl.innerHTML = '';
             return;
         }
         const known = lanes.filter(l => l.last_run_conclusion != null);
@@ -397,18 +383,20 @@ const SecurityDashboard = {
         const denom = known.length || lanes.length;
         statEl.innerHTML = `${passing.length}<span class="text-zinc-500 text-base">/${denom} lanes passing</span>`;
         if (sweptEl) sweptEl.textContent = `Last full sweep ${ago(this._data.generated_at)}`;
-        this._renderLanesFlow(lanes);
-        this._renderLanesList();
+        this._renderLanesRing(lanes);
+        this._renderLanesA11yList(lanes);
     },
 
-    // Every real lane, flowing into its real current status — a small
-    // hand-drawn Sankey (two columns: lanes on the left, the three real
-    // status buckets on the right; no charting-library dependency). Lanes
-    // are grouped by status purely to minimize ribbon crossings (a display
-    // ordering choice, not a data change); ribbon/node thickness is real
-    // count-driven (one uniform "unit" per lane, status nodes sized to
-    // their real lane count) — nothing here is fabricated or reweighted.
-    _renderLanesFlow(lanes) {
+    // Every real lane, plotted as its own arc segment around a radial
+    // "signal ring" instead of a two-column flow diagram — a dial reads as
+    // one cohesive instrument rather than a bar chart that goes flat and
+    // solid-colored whenever most lanes share one status (the real,
+    // observed case here: passing lanes dominate). Segment length is
+    // uniform (one lane = one equal slice, no fabricated weighting);
+    // only position, color, and the glow on non-passing lanes carry
+    // meaning. Click a segment for that lane's own detail — a hover
+    // <title> covers the same text for pointer users.
+    _renderLanesRing(lanes) {
         const container = document.getElementById('secdash-lanes-flow');
         if (!container) return;
         if (!lanes.length) {
@@ -416,149 +404,103 @@ const SecurityDashboard = {
             return;
         }
 
-        const groupOrder = { pass: 0, fail: 1, never: 2 };
-        const ordered = lanes.slice().sort((a, b) => groupOrder[this._laneStatus(a)] - groupOrder[this._laneStatus(b)]);
+        const W = 320, H = 240, cx = W / 2, cy = H / 2 - 4, R = 84, thickness = 15;
+        const n = lanes.length;
+        const gapDeg = Math.min(6, 48 / n);
+        const span = 360 / n;
+        const arcSpan = Math.max(2, span - gapDeg);
 
-        const W = 640, H = 260, y0 = 14, y1 = H - 14;
-        const availH = y1 - y0;
-        const n = ordered.length;
-        const unit = availH / n;
-        const leftX = 158, rightX = W - 158;
-        // A real spacer gap between adjacent ribbons (dataviz convention for
-        // stacked fills) so same-status lanes read as distinct flowing
-        // bands rather than melting into one solid block — sized as a fixed
-        // pixel amount (not unit-scaled) so it stays visible even with many
-        // thin lanes.
-        const gap = Math.min(2.4, unit * 0.32);
+        const toXY = (r, deg) => {
+            const rad = (deg - 90) * Math.PI / 180;
+            return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+        };
+        const arcPath = (r, a0, a1) => {
+            const p0 = toXY(r, a0), p1 = toXY(r, a1);
+            const large = (a1 - a0) > 180 ? 1 : 0;
+            return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${p1.x.toFixed(2)} ${p1.y.toFixed(2)}`;
+        };
 
-        const counts = { pass: 0, fail: 0, never: 0 };
-        ordered.forEach(l => counts[this._laneStatus(l)]++);
+        const known = lanes.filter(l => l.last_run_conclusion != null);
+        const passing = known.filter(l => l.last_run_conclusion === 'success').length;
+        const denom = known.length || n;
 
-        const statusOrder = ['pass', 'fail', 'never'];
-        const statusHeight = {}; const statusTop = {};
-        let cursor = y0;
-        statusOrder.forEach(s => {
-            statusHeight[s] = counts[s] * unit;
-            statusTop[s] = cursor;
-            cursor += statusHeight[s];
-        });
-
-        const rightCursor = { pass: statusTop.pass, fail: statusTop.fail, never: statusTop.never };
-
-        // One gradient per status present — each ribbon fades from a
-        // brighter tint at its own lane (left) to a softer tint at the
-        // shared status node (right), the visual cue that reads as "flow"
-        // rather than a flat fill; a shared glow filter matches the same
-        // ambient-glow motif already used on the bubble charts elsewhere on
-        // this dashboard.
-        let defs = `<defs><filter id="secdash-flow-glow" x="-30%" y="-60%" width="160%" height="220%">
-            <feGaussianBlur stdDeviation="1.4" result="blur"></feGaussianBlur>
+        // Shared glow, reserved for non-passing segments so a real problem
+        // pulls the eye without every lane needing its own emphasis.
+        let svg = `<defs><filter id="secdash-ring-glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="2.4" result="blur"></feGaussianBlur>
             <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-        </filter>`;
-        statusOrder.forEach(s => {
-            if (!counts[s]) return;
-            const color = this._laneStatusColor(s);
-            defs += `<linearGradient id="secdash-flow-grad-${s}" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="${color}" stop-opacity="0.42"></stop>
-                <stop offset="1" stop-color="${color}" stop-opacity="0.16"></stop>
-            </linearGradient>`;
-        });
-        defs += '</defs>';
+        </filter></defs>`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="${R + thickness / 2 + 9}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="2 6"></circle>`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="${R - thickness / 2 - 8}" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"></circle>`;
 
-        let ribbons = '', leftNodes = '', rightNodes = '';
-        ordered.forEach((l, i) => {
+        lanes.forEach((l, i) => {
             const status = this._laneStatus(l);
             const color = this._laneStatusColor(status);
-            const lt = y0 + i * unit + gap; const lb = lt + unit - gap * 2;
-            const rt = rightCursor[status] + gap; const rb = rt + unit - gap * 2;
-            rightCursor[status] += unit;
-
-            const cx = (leftX + rightX) / 2;
-            const path = `M ${leftX} ${lt} C ${cx} ${lt}, ${cx} ${rt}, ${rightX} ${rt} L ${rightX} ${rb} C ${cx} ${rb}, ${cx} ${lb}, ${leftX} ${lb} Z`;
+            const a0 = i * span + gapDeg / 2;
+            const a1 = a0 + arcSpan;
             const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
-            ribbons += `<path class="secdash-flow-ribbon" data-idx="${i}" d="${path}" fill="url(#secdash-flow-grad-${status})" stroke="${color}" stroke-width="0.75" stroke-opacity="0.55" filter="url(#secdash-flow-glow)"><title>${escapeHtml(l.label || l.id)} — ${escapeHtml(this._laneStatusTitle(status))} · ${escapeHtml(when)}${l.headline ? ' — ' + escapeHtml(l.headline) : ''}</title></path>`;
-
-            const labelY = (lt + lb) / 2;
-            const label = l.label || l.id;
-            const truncated = label.length > 22 ? label.slice(0, 20) + '…' : label;
-            leftNodes += `<g class="secdash-flow-lane-row" data-idx="${i}">
-                <rect class="secdash-flow-node-rect" x="${leftX - 6}" y="${lt}" width="6" height="${Math.max(1, lb - lt)}" fill="${color}" rx="2"></rect>
-                <text class="secdash-flow-node-label" x="${leftX - 12}" y="${labelY}" text-anchor="end" dominant-baseline="middle">${escapeHtml(truncated)}</text>
-            </g>`;
+            const isAlert = status === 'fail';
+            svg += `<path class="secdash-ring-arc${isAlert ? ' is-alert' : ''}" data-idx="${i}"
+                d="${arcPath(R, a0, a1)}" fill="none" stroke="${color}" stroke-width="${thickness}" stroke-linecap="round"
+                ${isAlert ? 'filter="url(#secdash-ring-glow)"' : ''}>
+                <title>${escapeHtml(l.label || l.id)} — ${escapeHtml(this._laneStatusTitle(status))} · ${escapeHtml(when)}${l.headline ? ' — ' + escapeHtml(l.headline) : ''}</title>
+            </path>`;
         });
 
-        statusOrder.forEach(s => {
-            if (!counts[s]) return;
-            const top = statusTop[s]; const h = statusHeight[s];
-            const midY = top + h / 2;
-            const color = this._laneStatusColor(s);
-            rightNodes += `<g>
-                <rect class="secdash-flow-node-rect" x="${rightX}" y="${top + 1}" width="6" height="${Math.max(1, h - 2)}" fill="${color}" rx="2"></rect>
-                <text class="secdash-flow-node-label is-strong" x="${rightX + 12}" y="${midY - 5}" dominant-baseline="middle">${escapeHtml(this._laneStatusTitle(s))}</text>
-                <text class="secdash-flow-node-count" x="${rightX + 12}" y="${midY + 8}" dominant-baseline="middle">${counts[s]} lane${counts[s] === 1 ? '' : 's'}</text>
-            </g>`;
-        });
+        svg += `<text x="${cx}" y="${cy - 4}" text-anchor="middle" class="secdash-ring-center-value">${passing}/${denom}</text>
+            <text x="${cx}" y="${cy + 16}" text-anchor="middle" class="secdash-ring-center-label">LANES PASSING</text>`;
 
-        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">${defs}${ribbons}${leftNodes}${rightNodes}</svg>`;
+        container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`;
 
-        container.querySelectorAll('.secdash-flow-lane-row').forEach(g => {
-            const idx = Number(g.dataset.idx);
-            const ribbon = container.querySelector(`.secdash-flow-ribbon[data-idx="${idx}"]`);
-            g.addEventListener('mouseenter', () => { if (ribbon) ribbon.style.opacity = '1'; });
-            g.addEventListener('mouseleave', () => { if (ribbon) ribbon.style.opacity = ''; });
+        container.querySelectorAll('.secdash-ring-arc').forEach(arc => {
+            const idx = Number(arc.dataset.idx);
+            arc.addEventListener('click', () => this._toggleLaneDetail(idx));
         });
     },
 
-    _lanesRows() {
-        const all = this._lanes || [];
-        let rows = this._lanesFilter ? all.filter(l => this._laneStatus(l) === this._lanesFilter) : all.slice();
-        if (this._lanesSort === 'name') {
-            rows.sort((a, b) => (a.label || a.id).localeCompare(b.label || b.id));
-        } else {
-            rows.sort((a, b) => {
-                const ah = this._hoursSince(a.last_run_at);
-                const bh = this._hoursSince(b.last_run_at);
-                if (ah == null && bh == null) return 0;
-                if (ah == null) return 1;
-                if (bh == null) return -1;
-                return ah - bh;
-            });
-        }
-        return rows;
-    },
-
-    _renderLanesList() {
-        const listEl = document.getElementById('secdash-lanes-list');
-        if (!listEl) return;
-        const rows = this._lanesRows();
-        if (!rows.length) {
-            listEl.innerHTML = '<div class="text-zinc-500 text-xs py-2">No lanes match this filter.</div>';
+    // Click-driven detail for a single lane's own arc — deliberately NOT a
+    // full always-visible list (that was the redundant panel this replaced,
+    // repeating exactly what the ring already shows); this surfaces one
+    // lane's real headline/timestamp only on demand.
+    _toggleLaneDetail(idx) {
+        const panel = document.getElementById('secdash-lanes-detail');
+        if (!panel) return;
+        if (this._laneDetailOpenIdx === idx) {
+            panel.hidden = true;
+            this._laneDetailOpenIdx = null;
             return;
         }
-        listEl.innerHTML = rows.map(l => {
-            const status = this._laneStatus(l);
-            const color = this._laneStatusColor(status);
-            const icon = status === 'pass' ? 'fa-circle-check' : status === 'fail' ? 'fa-circle-xmark' : 'fa-circle-question';
-            const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
-            return `<div class="secdash-lane-row">
+        const lane = (this._lanes || [])[idx];
+        if (!lane) return;
+        this._laneDetailOpenIdx = idx;
+        const status = this._laneStatus(lane);
+        const color = this._laneStatusColor(status);
+        const icon = status === 'pass' ? 'fa-circle-check' : status === 'fail' ? 'fa-circle-xmark' : 'fa-circle-question';
+        const when = lane.last_run_at ? ago(lane.last_run_at) : 'no runs yet';
+        panel.innerHTML = `
+            <div class="secdash-lanes-detail-title">
                 ${statusBadge(this._laneStatusTitle(status), color, icon)}
-                <span class="secdash-lane-row-label">${escapeHtml(l.label || l.id)}</span>
-                <span class="secdash-lane-row-headline">${escapeHtml(l.headline || '')}</span>
-                <span class="secdash-lane-row-time">${escapeHtml(when)}</span>
-            </div>`;
-        }).join('');
+                <span>${escapeHtml(lane.label || lane.id)}</span>
+                <span class="secdash-lanes-detail-close" data-close>Close ✕</span>
+            </div>
+            <div class="secdash-lanes-detail-body">${escapeHtml(lane.headline || 'No headline this cycle.')} · ${escapeHtml(when)}</div>
+        `;
+        panel.hidden = false;
+        panel.querySelector('[data-close]')?.addEventListener('click', (e) => { e.stopPropagation(); this._toggleLaneDetail(idx); });
     },
 
-    _wireLanesControls() {
-        const filterSel = document.getElementById('secdash-lanes-filter');
-        const sortSel = document.getElementById('secdash-lanes-sort');
-        if (filterSel) {
-            filterSel.innerHTML = '<option value="">All statuses</option><option value="pass">Passing</option><option value="fail">Failing</option><option value="never">Never run</option>';
-            filterSel.addEventListener('change', () => { this._lanesFilter = filterSel.value; this._renderLanesList(); });
-        }
-        if (sortSel) {
-            sortSel.addEventListener('change', () => { this._lanesSort = sortSel.value; this._renderLanesList(); });
-        }
+    // Screen-reader-only equivalent of the ring — the dataviz accessibility
+    // requirement ("a table view exists") without visually duplicating the
+    // ring on-page for sighted users, which is exactly the redundancy this
+    // replaced.
+    _renderLanesA11yList(lanes) {
+        const el = document.getElementById('secdash-lanes-a11y');
+        if (!el) return;
+        el.innerHTML = lanes.map(l => {
+            const status = this._laneStatus(l);
+            const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
+            return `<li>${escapeHtml(l.label || l.id)}: ${escapeHtml(this._laneStatusTitle(status))}, ${escapeHtml(when)}${l.headline ? ' — ' + escapeHtml(l.headline) : ''}</li>`;
+        }).join('');
     },
 
     // Shared per-category signal calculation — the ONE place that decides

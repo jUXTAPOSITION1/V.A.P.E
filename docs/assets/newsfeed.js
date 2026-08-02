@@ -8,7 +8,7 @@
 // tiles and points readers there.
 import { fetchStories, storyCardHtml } from './newswire.js';
 
-const TEASER_COUNT = 3;
+const TEASER_COUNT = 4;
 
 const NewsFeed = {
     async init() {

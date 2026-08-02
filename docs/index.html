@@ -175,23 +175,27 @@
         <!-- ═══ 1+2. HERO + PLATFORM OVERVIEW (merged, explicit direction 2026-08-01:
              the standalone hero and the "[ system overview ]" card below it said the
              same thing twice — one title, one combined description, doing both jobs. ═══ -->
-        <header class="reveal pt-2 sm:pt-3 pb-8 sm:pb-12">
-            <div class="eyebrow mb-3"><i class="fa-solid fa-satellite-dish"></i>[ system overview ]</div>
-            <h1 class="hero-title">
-                A single system, watching everything that matters.
-            </h1>
-            <p class="text-zinc-400 mt-5 text-sm sm:text-base max-w-2xl leading-relaxed">
-                VAPE is an autonomous intelligence system for Base, Ethereum, and the wider EVM ecosystem:
-                continuous investigations, market intelligence, security audits, and the VAPE Wire newsroom,
-                hireable instantly on-chain. It turns the constant noise of on-chain activity into a small
-                number of things worth knowing, including which tokens are safe to touch, which capital flows are
-                shifting, and which threats deserve attention right now, running continuously and citing its
-                sources every time.
-            </p>
-            <p class="text-zinc-600 mt-4 text-sm" id="last-sync">syncing…</p>
-            <div class="flex flex-wrap gap-3 mt-7">
-                <a href="#retain" class="term-btn">Engagement Options</a>
-                <a href="#the-wire" class="term-btn">View Live Feed</a>
+        <header class="reveal pt-2 sm:pt-3 pb-8 sm:pb-12 lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:items-center">
+            <div>
+                <div class="eyebrow mb-3"><i class="fa-solid fa-satellite-dish"></i>[ system overview ]</div>
+                <h1 class="hero-title">
+                    A single system, watching everything that matters.
+                </h1>
+            </div>
+            <div class="lg:border-l lg:border-white/10 lg:pl-10">
+                <p class="text-zinc-400 mt-5 lg:mt-0 text-sm sm:text-base lg:text-[15px] max-w-2xl lg:max-w-none leading-relaxed">
+                    VAPE is an autonomous intelligence system for Base, Ethereum, and the wider EVM ecosystem:
+                    continuous investigations, market intelligence, security audits, and the VAPE Wire newsroom,
+                    hireable instantly on-chain. It turns the constant noise of on-chain activity into a small
+                    number of things worth knowing, including which tokens are safe to touch, which capital flows are
+                    shifting, and which threats deserve attention right now, running continuously and citing its
+                    sources every time.
+                </p>
+                <p class="text-zinc-600 mt-4 text-sm" id="last-sync">syncing…</p>
+                <div class="flex flex-wrap gap-3 mt-7">
+                    <a href="#retain" class="term-btn">Engagement Options</a>
+                    <a href="#the-wire" class="term-btn">View Live Feed</a>
+                </div>
             </div>
         </header>
 
@@ -242,7 +246,8 @@
             security, intel, and macro markets. The breaking-headlines ticker for these now lives at the top of the page, combined with the live threat
             feed. Sources are cited inline, generated on a schedule by a frontier model and independently fact-checked.</p>
 
-            <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="skeleton h-48"></div>
                 <div class="skeleton h-48"></div>
                 <div class="skeleton h-48"></div>
                 <div class="skeleton h-48"></div>
@@ -312,17 +317,8 @@
                  needs the most horizontal room. -->
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-3">
                 <div class="panel-sm secdash-panel lg:col-span-3">
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-0">
-                        <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
-                        <div class="flex items-center gap-2">
-                            <select id="secdash-lanes-filter" class="select-pill" aria-label="Filter lanes by status"></select>
-                            <select id="secdash-lanes-sort" class="select-pill" aria-label="Sort lanes">
-                                <option value="recency">Most recent</option>
-                                <option value="name">Name A–Z</option>
-                            </select>
-                        </div>
-                    </div>
-                    <p class="secdash-panel-desc mb-2">Every automated security workflow this repo runs, flowing into its real current status.</p>
+                    <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
+                    <p class="secdash-panel-desc mb-2">Every automated security workflow this repo runs, plotted as its own segment on the ring. Click a segment for its detail.</p>
                     <div class="secdash-lanes-headline mb-2">
                         <div id="secdash-lanes-stat" class="secdash-lanes-stat"><div class="skeleton h-8 w-32"></div></div>
                         <span id="secdash-lanes-swept" class="secdash-lanes-swept text-[11px] text-zinc-500">…</span>
@@ -333,9 +329,8 @@
                         <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-critical)"></span>Failing</span>
                         <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-info)"></span>Never run</span>
                     </div>
-                    <div id="secdash-lanes-list" class="secdash-lanes-list">
-                        <div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div>
-                    </div>
+                    <div id="secdash-lanes-detail" class="secdash-lanes-detail" hidden></div>
+                    <ul id="secdash-lanes-a11y" class="sr-only"></ul>
                 </div>
                 <div class="panel-sm secdash-panel lg:col-span-2">
                     <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
