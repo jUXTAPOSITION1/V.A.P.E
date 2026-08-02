@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-02T16:59:18Z",
+  "generated": "2026-08-02T17:01:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 511,
+    "reports": 512,
     "reports_by_type": {
-      "bounty": 125,
+      "bounty": 126,
       "base": 103,
       "macro": 27,
       "security": 94,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260802_150330.md",
+      "file": "bounty_report_20260802_170036.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T15:03:30Z",
+      "date": "2026-08-02T17:00:36Z",
       "threat": null,
-      "summary": "Base mover: HOME / WETH 0.3% +45% 24h (liq $57420.7939) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_150330.md",
-      "bytes": 16489
+      "summary": "Cycle: 20260802170036 \u00b7 Data timestamp (UTC): 2026-08-02T17:00:42Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_170036.md",
+      "bytes": 16364
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_170036.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T17:00:36Z",
+      "threat": null,
+      "summary": "Cycle: 20260802170036 \u00b7 Data timestamp (UTC): 2026-08-02T17:00:42Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_170036.md",
+      "bytes": 16364
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-31 04:25 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-31-04.md",
       "bytes": 3314
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-31-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-31T02:00Z",
-      "threat": null,
-      "summary": "Nine incidents occurred across the last seven days, none exceeding $50M. The largest losses were the $24.15M AFX Bridge private-key compromise on Arbitrum and the $9.7M Triple-A hot-wallet compromise spanning Ethereum, Tron, and Arbitrum. Other notable events include the $8.2M Crypto DAO incident on BSC, the $7.53M Verus-Ethereum Bridge v",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-02.md",
-      "bytes": 7348
     }
   ],
   "broadcasts": [
