@@ -5520,6 +5520,25 @@
     "symbol": "BLESS",
     "times_investigated": 1
   },
+  "56:0x51cf4242ac4bd24ff6d13be521cba280962b4444": {
+    "address": "0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
+    "chain": "56",
+    "creator_address": "0xa20c95626c73b5ca8165d1322f1356ebc5026e33",
+    "first_investigated": "2026-08-02T19:15:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-191531-0x51cF4242.md",
+        "score": 75,
+        "ts": "2026-08-02T19:15:31Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T19:15:31Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "Pizza",
+    "times_investigated": 1
+  },
   "56:0x535fde726f4fec5d501dab93378643a6bf6e9fc9": {
     "address": "0x535fdE726f4FEC5d501daB93378643a6Bf6E9fc9",
     "chain": "56",

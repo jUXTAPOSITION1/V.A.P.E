@@ -1135,3 +1135,5 @@
 | 2026-08-02 | auto | 0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A (SRC) | deep_investigation | CAUTION (64/100) | Owner not renounced (0xb8a8b03d5f45b2454529f34e50ceaadb0b353ed4) — can still act | +7d |
 
 | 2026-08-02 | auto | 0x80ac288e9664D7E2B59428125048eF48D853a93B (LGNS) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-02 | auto | 0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444 (Pizza) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 82% of supply — concentrated, easily manipula | +7d |
