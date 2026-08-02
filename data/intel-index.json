@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T20:15:59Z",
+  "generated": "2026-08-02T20:31:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 513,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 669,
+    "investigations": 670,
     "news": 52,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-201550-0xE5f894E1.md",
-      "title": "Investigation \u2014 BabyAsteroid",
-      "symbol": "BabyAsteroid",
+      "file": "investigation-20260802-203111-0xd7A73942.md",
+      "title": "Investigation \u2014 BABYASTEROID",
+      "symbol": "BABYASTEROID",
       "name": "Baby Asteroid",
-      "date": "2026-08-02T20:15:50Z",
-      "target": "0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
+      "date": "2026-08-02T20:31:11Z",
+      "target": "0xd7A7394294f4687966C60A1F68920f29688BF546",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $19,394; [-10] Violent 24h move +457% (volatility/manipulation); [-15] Pair only 1.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 641 holders",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-201550-0xE5f894E1.md"
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $16,627. Positive evidence: Ownership renounced; 586 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-203111-0xd7A73942.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-203111-0xd7A73942.md",
+      "title": "Investigation \u2014 BABYASTEROID",
+      "symbol": "BABYASTEROID",
+      "name": "Baby Asteroid",
+      "date": "2026-08-02T20:31:11Z",
+      "target": "0xd7A7394294f4687966C60A1F68920f29688BF546",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "90",
+      "summary": "Risk factors: [-10] Low liquidity $16,627. Positive evidence: Ownership renounced; 586 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-203111-0xd7A73942.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-201550-0xE5f894E1.md",

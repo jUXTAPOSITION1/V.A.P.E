@@ -1139,3 +1139,5 @@
 | 2026-08-02 | auto | 0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444 (Pizza) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 82% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-02 | auto | 0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D (BabyAsteroid) | deep_investigation | CAUTION (55/100) | Low liquidity $19,394 | +7d |
+
+| 2026-08-02 | auto | 0xd7A7394294f4687966C60A1F68920f29688BF546 (BABYASTEROID) | deep_investigation | PROCEED (90/100) | Low liquidity $16,627 | +7d |

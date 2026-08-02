@@ -3466,6 +3466,25 @@
     "symbol": "DOGE1",
     "times_investigated": 1
   },
+  "1:0xd7a7394294f4687966c60a1f68920f29688bf546": {
+    "address": "0xd7A7394294f4687966C60A1F68920f29688BF546",
+    "chain": "1",
+    "creator_address": "0xe37bc2aa8559df70804a90f9819631fe880b27d9",
+    "first_investigated": "2026-08-02T20:31:11Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-203111-0xd7A73942.md",
+        "score": 90,
+        "ts": "2026-08-02T20:31:11Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-02T20:31:11Z",
+    "last_score": 90,
+    "last_verdict": "PROCEED",
+    "symbol": "BABYASTEROID",
+    "times_investigated": 1
+  },
   "1:0xd8526e86fdbcaf9b4d104d995e2c8023f73954c5": {
     "address": "0xd8526e86fDBcaf9b4d104D995e2c8023f73954c5",
     "chain": "1",
