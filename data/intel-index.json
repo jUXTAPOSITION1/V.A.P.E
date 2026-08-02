@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T16:14:44Z",
+  "generated": "2026-08-02T16:20:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 511,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 141,
     "investigations": 662,
-    "news": 50,
+    "news": 51,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-red-tape-in-the-crosshairs-sec-panel-targets-public-market-f.md",
+      "title": "Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T16:20:36Z",
+      "published_et": "August 2, 2026 \u00b7 12:20 PM EDT",
+      "topic": "Regulation",
+      "dek": "The Small Business Capital Formation Advisory Committee will reconvene on August 6 to finalize policy recommendations aimed at reviving the sluggish IPO pipeline and modernizing public market access.",
+      "image": "assets/news-images/red-tape-in-the-crosshairs-sec-panel-targets-public-market-f.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-red-tape-in-the-crosshairs-sec-panel-targets-public-market-f.md"
+    },
     {
       "file": "news-2026-08-02-h96-sticks-secretly-masquerade-as-phones-to-feed-global-ad-f.md",
       "title": "H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network",
