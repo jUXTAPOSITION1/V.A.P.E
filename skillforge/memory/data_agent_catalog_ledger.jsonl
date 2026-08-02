@@ -499,3 +499,4 @@
 {"ts": "2026-08-02T19:45:39.750519Z", "target": "bitget", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-02T20:00:46.026703Z", "target": "fluid-dex", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-02T20:15:58.464678Z", "target": "base", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-02T20:46:21.270641Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}

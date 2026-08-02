@@ -2711,6 +2711,25 @@
     "symbol": "SHIB",
     "times_investigated": 1
   },
+  "1:0x97b8c69d1bb0c10e3b32817f11a4a66785618b79": {
+    "address": "0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
+    "chain": "1",
+    "creator_address": "0xe3068432c878a307b75b682c911ba559f8c09141",
+    "first_investigated": "2026-08-02T20:46:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-204620-0x97B8C69D.md",
+        "score": 32,
+        "ts": "2026-08-02T20:46:20Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T20:46:20Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "BABYASTEROID",
+    "times_investigated": 1
+  },
   "1:0x999b49c0d1612e619a4a4f6280733184da025108": {
     "address": "0x999B49c0d1612E619A4A4f6280733184da025108",
     "chain": "1",

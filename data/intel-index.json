@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T20:31:15Z",
+  "generated": "2026-08-02T20:46:21Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 513,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 670,
+    "investigations": 671,
     "news": 52,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-203111-0xd7A73942.md",
+      "file": "investigation-20260802-204620-0x97B8C69D.md",
       "title": "Investigation \u2014 BABYASTEROID",
       "symbol": "BABYASTEROID",
       "name": "Baby Asteroid",
-      "date": "2026-08-02T20:31:11Z",
-      "target": "0xd7A7394294f4687966C60A1F68920f29688BF546",
+      "date": "2026-08-02T20:46:20Z",
+      "target": "0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "90",
-      "summary": "Risk factors: [-10] Low liquidity $16,627. Positive evidence: Ownership renounced; 586 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 106+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-203111-0xd7A73942.md"
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,518 (rug/illiquid); [-10] Low liquidity $6,518; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-204620-0x97B8C69D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-204620-0x97B8C69D.md",
+      "title": "Investigation \u2014 BABYASTEROID",
+      "symbol": "BABYASTEROID",
+      "name": "Baby Asteroid",
+      "date": "2026-08-02T20:46:20Z",
+      "target": "0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,518 (rug/illiquid); [-10] Low liquidity $6,518; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-204620-0x97B8C69D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-203111-0xd7A73942.md",

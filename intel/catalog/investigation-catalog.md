@@ -1141,3 +1141,5 @@
 | 2026-08-02 | auto | 0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D (BabyAsteroid) | deep_investigation | CAUTION (55/100) | Low liquidity $19,394 | +7d |
 
 | 2026-08-02 | auto | 0xd7A7394294f4687966C60A1F68920f29688BF546 (BABYASTEROID) | deep_investigation | PROCEED (90/100) | Low liquidity $16,627 | +7d |
+
+| 2026-08-02 | auto | 0x97B8C69D1bb0c10E3B32817f11a4A66785618B79 (BABYASTEROID) | deep_investigation | REJECT (32/100) | Low holder count (51) | +7d |
