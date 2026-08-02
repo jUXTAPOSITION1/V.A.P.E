@@ -68,6 +68,38 @@
     {
       "item": "Submit report only after internal triage confirms the issue is in-scope and previously unreported",
       "done": false
+    },
+    {
+      "item": "Verify current scope, in-scope contracts/addresses, rules, exclusions, and payout tiers directly on https://hackenproof.com/programs/layer3-smart-contracts before any other action",
+      "done": false
+    },
+    {
+      "item": "Extract the exact Git repository URL and Solidity contract targets listed on the program page",
+      "done": false
+    },
+    {
+      "item": "Clone the repository and isolate the in-scope contracts and deployment artifacts",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the cloned repo, enabling Slither, Mythril, Halmos symbolic execution, Aderyn, and frontier-LLM review",
+      "done": false
+    },
+    {
+      "item": "Manually inspect results for access-control flaws, reentrancy, oracle trust issues, and business-logic errors in the identified contracts",
+      "done": false
+    },
+    {
+      "item": "Cross-check any high-severity findings against the live deployed bytecode on Ethereum mainnet",
+      "done": false
+    },
+    {
+      "item": "Validate exploitability with concrete test cases or transaction traces where automated tools flag issues",
+      "done": false
+    },
+    {
+      "item": "Draft submission with clear reproduction steps, impact assessment, and suggested fix, formatted per Hackenproof requirements",
+      "done": false
     }
   ],
   "progress": [
@@ -84,7 +116,7 @@
       "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066397.6808074,
+  "checklistGeneratedAt": 1785679928.7503092,
   "vapeReportUrl": null,
   "name": "Layer3 Smart Contracts",
   "platform": "hackenproof",
@@ -100,5 +132,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:37.680814Z"
+  "updatedAt": "2026-08-02T14:12:08.750316Z"
 }

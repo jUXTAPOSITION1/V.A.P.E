@@ -68,6 +68,38 @@
     {
       "item": "Monitor the program's response and follow up as necessary to ensure that the submission is properly reviewed and addressed, and to provide any additional information or clarification that may be required.",
       "done": false
+    },
+    {
+      "item": "Verify current scope, in-scope contracts/addresses, rules, exclusions, and payout tiers directly on https://hackenproof.com/programs/smardex-smart-contracts before any further action",
+      "done": false
+    },
+    {
+      "item": "Locate and clone the exact GitHub repositories for the verified in-scope SmarDex Solidity contracts across Ethereum, Polygon, Arbitrum, BSC, and Base",
+      "done": false
+    },
+    {
+      "item": "Execute agents/deep_dive_audit.py on the cloned repositories, enabling Slither, Mythril, Halmos symbolic execution, Aderyn AST analysis, and frontier-LLM review",
+      "done": false
+    },
+    {
+      "item": "Run targeted Halmos symbolic tests on critical functions such as liquidity provision, swaps, and reward distribution identified during recon",
+      "done": false
+    },
+    {
+      "item": "Manually review all findings for access-control flaws, reentrancy vectors, oracle trust assumptions, and cross-chain business-logic inconsistencies",
+      "done": false
+    },
+    {
+      "item": "Validate any high-severity issues against deployed contract addresses on each supported chain using on-chain state inspection",
+      "done": false
+    },
+    {
+      "item": "Document reproducible proof-of-concept steps, exact impact, and mitigation recommendations for each confirmed vulnerability",
+      "done": false
+    },
+    {
+      "item": "Package the report with required severity classification and submit via the HackenProof platform per their disclosure workflow",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-26T11:46:27.534665Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T14:11:09.955502Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066385.7472143,
+  "checklistGeneratedAt": 1785679859.7325633,
   "vapeReportUrl": null,
   "name": "SmarDex Smart Contracts",
   "platform": "hackenproof",
@@ -103,5 +139,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:25.747217Z"
+  "updatedAt": "2026-08-02T14:10:59.732570Z"
 }

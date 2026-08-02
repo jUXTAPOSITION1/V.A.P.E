@@ -72,6 +72,38 @@
     {
       "item": "Submit the report to the MetaMask Validator Staking Smart Contracts bug bounty program through the Hackenproof platform, following the specified submission process and ensuring that all required information is included.",
       "done": false
+    },
+    {
+      "item": "Verify current scope, in-scope contracts/addresses, excluded contracts, rules, and payout tiers directly on https://hackenproof.com/programs/metamask-validator-staking-smart-contracts before any further action",
+      "done": false
+    },
+    {
+      "item": "Clone the official Git repository referenced in the program and map all Solidity contracts under the validator staking scope",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the full cloned repo with recon, Slither, Mythril, Aderyn, and Halmos symbolic execution enabled",
+      "done": false
+    },
+    {
+      "item": "Focus deep_dive_audit.py runs on the primary staking, validator registration, reward distribution, and slashing contracts identified in scope",
+      "done": false
+    },
+    {
+      "item": "Manually audit for access control bypasses, reentrancy in reward/withdrawal paths, oracle trust issues, and business-logic flaws in staking/unstaking flows",
+      "done": false
+    },
+    {
+      "item": "Check for improper upgradeability patterns, event emission gaps, and integer/rounding errors specific to validator reward calculations",
+      "done": false
+    },
+    {
+      "item": "Cross-reference all high/medium findings against the program's real severity definitions and in-scope criteria on the Hackenproof page",
+      "done": false
+    },
+    {
+      "item": "Draft submission with contract addresses, exact commit hash, reproduction steps, PoC transaction data, and clear impact statement matching Hackenproof format",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-19T11:39:39.437555Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T14:12:08.749591Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066395.9492688,
+  "checklistGeneratedAt": 1785679925.4552796,
   "vapeReportUrl": null,
   "name": "MetaMask Validator Staking Smart Contracts",
   "platform": "hackenproof",
@@ -101,5 +137,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:35.949273Z"
+  "updatedAt": "2026-08-02T14:12:05.455285Z"
 }

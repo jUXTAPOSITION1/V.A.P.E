@@ -72,6 +72,38 @@
     {
       "item": "Submit the findings through the Hackenproof platform, following their guidelines for bug bounty submissions to be eligible for the $250,000 prize.",
       "done": false
+    },
+    {
+      "item": "Verify current scope, in-scope contracts/addresses, rules, eligibility, and payout tiers directly on https://hackenproof.com/programs/citrea-protocol-and-smart-contracts before any other action",
+      "done": false
+    },
+    {
+      "item": "Locate and clone the exact Git repositories and contract sources referenced in the verified program scope",
+      "done": false
+    },
+    {
+      "item": "Execute agents/deep_dive_audit.py on all in-scope Solidity contracts targeting Ethereum, BSC, and Base deployments",
+      "done": false
+    },
+    {
+      "item": "Run the tool's full pipeline (Slither, Mythril, Halmos, Aderyn, frontier-LLM) to surface reentrancy, access-control, and arithmetic issues",
+      "done": false
+    },
+    {
+      "item": "Manually inspect business logic for Citrea-specific flows including deposit/withdrawal, state roots, and cross-chain messaging",
+      "done": false
+    },
+    {
+      "item": "Audit oracle, sequencer, and bridge trust assumptions plus any upgradeability or proxy patterns for unauthorized control",
+      "done": false
+    },
+    {
+      "item": "Confirm all candidate findings are within the verified scope and produce working reproduction steps or test cases",
+      "done": false
+    },
+    {
+      "item": "Prepare submission package with contract addresses, exact commit hashes, severity justification, and exploit impact per Hackenproof template",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-19T11:39:10.096790Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T14:11:19.986944Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066387.5351164,
+  "checklistGeneratedAt": 1785679869.9561665,
   "vapeReportUrl": null,
   "name": "Citrea Protocol & Smart Contracts",
   "platform": "hackenproof",
@@ -104,5 +140,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:27.535119Z"
+  "updatedAt": "2026-08-02T14:11:09.956170Z"
 }

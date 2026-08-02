@@ -68,6 +68,38 @@
     {
       "item": "Monitor the submission's status and respond to any follow-up questions or requests from the Crypto.com security team, providing additional information or clarification as necessary to facilitate the review and validation process.",
       "done": false
+    },
+    {
+      "item": "Verify current scope, eligible contracts/repos, rules, payout tiers, and disclosure policy directly on https://hackerone.com/crypto before any further action",
+      "done": false
+    },
+    {
+      "item": "Locate the exact Git repository URLs and deployed contract addresses listed as in-scope for Solidity/EVM targets",
+      "done": false
+    },
+    {
+      "item": "Run agents/deep_dive_audit.py against the confirmed repositories, specifying the ethereum network and contract addresses from scope",
+      "done": false
+    },
+    {
+      "item": "Execute Slither, Aderyn, and Mythril static scans on all in-scope contracts, followed by Halmos symbolic execution on high-value functions",
+      "done": false
+    },
+    {
+      "item": "Manually audit results for access-control issues, reentrancy, oracle trust violations, integer edge cases, and business-logic flaws matching the program's taxonomy",
+      "done": false
+    },
+    {
+      "item": "Validate any flagged findings against live on-chain state and the program's severity definitions",
+      "done": false
+    },
+    {
+      "item": "Draft a submission containing clear reproduction steps, impact, and suggested fix, formatted per HackerOne requirements",
+      "done": false
+    },
+    {
+      "item": "Submit the report through the HackerOne platform only after confirming it meets all scope and safe-harbor conditions",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-26T11:46:32.773170Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T14:11:43.039311Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066390.7824063,
+  "checklistGeneratedAt": 1785679893.2823222,
   "vapeReportUrl": null,
   "name": "Crypto.com",
   "platform": "hackerone",
@@ -101,5 +137,5 @@
     "bugbounty",
     "via:hackerone"
   ],
-  "updatedAt": "2026-07-26T11:46:30.782414Z"
+  "updatedAt": "2026-08-02T14:11:33.282326Z"
 }

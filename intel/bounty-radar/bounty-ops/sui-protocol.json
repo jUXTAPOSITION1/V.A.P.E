@@ -72,6 +72,42 @@
     {
       "item": "Monitor the submission status and respond to any follow-up questions or requests for additional information from the Sui Protocol team or Hackenproof.",
       "done": false
+    },
+    {
+      "item": "Verify current in-scope contracts, repos, eligibility rules, and payout tiers directly on https://hackenproof.com/programs/sui-protocol before any other action",
+      "done": false
+    },
+    {
+      "item": "Identify the exact Move package IDs, git repos, and Sui framework targets listed as in-scope on the program page",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py against the confirmed Move/Sui targets, supplying the fetched source and any provided package IDs",
+      "done": false
+    },
+    {
+      "item": "Execute Move Prover / sui-prover formal verification passes on the core modules via the external_audit agent",
+      "done": false
+    },
+    {
+      "item": "Perform frontier-LLM review of the same targets for Move-specific issues (capability leaks, object ownership errors, type confusion, arithmetic in u64/u128)",
+      "done": false
+    },
+    {
+      "item": "Manually audit for access-control, reentrancy-equivalent patterns, oracle/trusted-input assumptions, and business-logic flaws using the real vulnerability taxonomy",
+      "done": false
+    },
+    {
+      "item": "Cross-check any Rust components or off-chain services only if they are explicitly listed in the verified scope",
+      "done": false
+    },
+    {
+      "item": "Document reproducible PoCs with exact transaction payloads, object IDs, and Sui network state required for verification",
+      "done": false
+    },
+    {
+      "item": "Prepare the submission package per Hackenproof format, including severity justification, fix recommendation, and scope confirmation reference",
+      "done": false
     }
   ],
   "progress": [
@@ -92,7 +128,7 @@
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066392.773578,
+  "checklistGeneratedAt": 1785679903.0399432,
   "vapeReportUrl": "intel/audits/external-bounties/external-audit-scallop-io-sui-lending-protocol-2026-07-19.md",
   "name": "Sui Protocol",
   "platform": "hackenproof",
@@ -107,6 +143,6 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:32.773581Z",
+  "updatedAt": "2026-08-02T14:11:43.039948Z",
   "vapeReportKind": "external-audit"
 }

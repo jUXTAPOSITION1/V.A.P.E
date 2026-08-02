@@ -68,6 +68,38 @@
     {
       "item": "Submit the report to the HackenProof platform, following the program's guidelines for submission and ensuring that all required information is included to facilitate review and potential reward.",
       "done": false
+    },
+    {
+      "item": "Verify current scope, rules, payout tiers, and eligible targets directly on https://hackenproof.com/programs/aptos-function-values before any other action",
+      "done": false
+    },
+    {
+      "item": "Locate and clone the exact git_repo(s) listed in the program scope for Aptos Function Values",
+      "done": false
+    },
+    {
+      "item": "Run agents/external_audit.py against the confirmed Move modules and entry functions from the cloned repo",
+      "done": false
+    },
+    {
+      "item": "Execute Move Prover/sui-prover formal verification via external_audit.py on all in-scope packages",
+      "done": false
+    },
+    {
+      "item": "Manually audit for access control, capability leaks, signer checks, and business logic flaws in the Move code",
+      "done": false
+    },
+    {
+      "item": "Manually review for oracle dependencies, state transition errors, and resource accounting issues",
+      "done": false
+    },
+    {
+      "item": "Cross-check Rust components (if any) tied to the Move contracts for integration bugs",
+      "done": false
+    },
+    {
+      "item": "Compile all verified findings with reproduction steps and impact into a Hackenproof-formatted submission",
+      "done": false
     }
   ],
   "progress": [
@@ -82,9 +114,13 @@
     {
       "ts": "2026-07-26T11:46:35.948860Z",
       "event": "Checklist refreshed \u2014 9 new item(s) from Grok 4.3."
+    },
+    {
+      "ts": "2026-08-02T14:12:05.454646Z",
+      "event": "Checklist refreshed \u2014 8 new item(s) from Grok 4.3."
     }
   ],
-  "checklistGeneratedAt": 1785066394.2011259,
+  "checklistGeneratedAt": 1785679914.8469234,
   "vapeReportUrl": null,
   "name": "Aptos Function Values",
   "platform": "hackenproof",
@@ -99,5 +135,5 @@
     "bugbounty",
     "via:hackenproof"
   ],
-  "updatedAt": "2026-07-26T11:46:34.201130Z"
+  "updatedAt": "2026-08-02T14:11:54.846930Z"
 }
