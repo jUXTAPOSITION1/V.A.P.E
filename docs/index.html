@@ -262,99 +262,24 @@
             </div>
             <h2 class="section-title text-lg mb-4">Security Dashboard</h2>
 
-            <!-- Row 1: Findings Count. -->
-            <div class="panel-sm secdash-panel mb-3">
-                <h3 class="secdash-panel-title mb-0">Findings Count</h3>
-                <p class="secdash-panel-desc">Open findings from every automated audit and review, grouped by severity.</p>
-                <div class="secdash-sev-split">
-                    <ul id="secdash-sev-list" class="secdash-sev-list">
-                        <li class="skeleton h-4"></li><li class="skeleton h-4"></li><li class="skeleton h-4"></li>
-                    </ul>
-                    <div class="secdash-sev-donut-wrap">
-                        <canvas id="secdashSeverityDonut"></canvas>
-                        <div class="secdash-sev-donut-total"><span>Total</span><span id="secdash-sev-donut-total-value">…</span></div>
+            <!-- Row 1: Findings Count | Risk Level | Findings per Status — three
+                 compact stat cards side by side on desktop (the "top row" of a
+                 real dashboard grid), instead of stacking each as its own
+                 full-width section. -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
+                <div class="panel-sm secdash-panel">
+                    <h3 class="secdash-panel-title mb-0">Findings Count</h3>
+                    <p class="secdash-panel-desc">Open findings from every automated audit and review, grouped by severity.</p>
+                    <div class="secdash-sev-split">
+                        <ul id="secdash-sev-list" class="secdash-sev-list">
+                            <li class="skeleton h-4"></li><li class="skeleton h-4"></li><li class="skeleton h-4"></li>
+                        </ul>
+                        <div class="secdash-sev-donut-wrap">
+                            <canvas id="secdashSeverityDonut"></canvas>
+                            <div class="secdash-sev-donut-total"><span>Total</span><span id="secdash-sev-donut-total-value">…</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Row 1b: Automated Lanes — every real security workflow this repo
-                 runs (GitHub Actions), all shown at once (not hidden behind a
-                 single-lane dropdown): a big real pass-rate headline, a
-                 horizontal bar-per-lane freshness/status chart, and the full
-                 lane list beneath it doubling as the required accessible table
-                 view for that chart. -->
-            <div class="panel-sm secdash-panel mb-3">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-0">
-                    <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
-                    <div class="flex items-center gap-2">
-                        <select id="secdash-lanes-filter" class="select-pill" aria-label="Filter lanes by status"></select>
-                        <select id="secdash-lanes-sort" class="select-pill" aria-label="Sort lanes">
-                            <option value="recency">Most recent</option>
-                            <option value="name">Name A–Z</option>
-                        </select>
-                    </div>
-                </div>
-                <p class="secdash-panel-desc mb-2">Every automated security workflow this repo runs, and when it last ran.</p>
-                <div class="secdash-lanes-headline mb-3">
-                    <div id="secdash-lanes-stat" class="secdash-lanes-stat"><div class="skeleton h-8 w-32"></div></div>
-                    <span id="secdash-lanes-swept" class="secdash-lanes-swept text-[11px] text-zinc-500">…</span>
-                </div>
-                <div class="secdash-lanes-chart-scroll">
-                    <div class="secdash-lanes-chart">
-                        <canvas id="secdashLanesChart" role="img" aria-label="Each automated security lane's last-run recency and status"></canvas>
-                    </div>
-                </div>
-                <div class="secdash-lanes-legend">
-                    <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-low)"></span>Passing</span>
-                    <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-critical)"></span>Failing</span>
-                    <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-info)"></span>Never run</span>
-                </div>
-                <div id="secdash-lanes-list" class="secdash-lanes-list">
-                    <div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div>
-                </div>
-            </div>
-
-            <!-- Row 2: Category Signal Map — six real lanes as a bubble cluster,
-                 sized by that lane's own signal magnitude, with a caption list
-                 underneath carrying the exact delta text each bubble represents. -->
-            <div class="panel-sm secdash-panel mb-3">
-                <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
-                <p class="secdash-panel-desc mb-2">Six categories of automated coverage. Bubble size reflects that category's own signal volume.</p>
-                <div class="secdash-signalmap-scroll">
-                    <div class="secdash-signalmap-chart">
-                        <canvas id="secdashSignalMap"></canvas>
-                    </div>
-                </div>
-                <div id="secdash-signalmap-legend" class="secdash-signalmap-legend">
-                    <div class="skeleton h-10"></div>
-                </div>
-            </div>
-
-            <!-- Row 3: Signal Timeline, full width — the flagship chart, sized
-                 like .chart-shell (not -sm) now that it owns its own row. -->
-            <div class="panel-sm secdash-panel mb-3">
-                <div class="flex items-center justify-between gap-2">
-                    <h3 class="secdash-panel-title mb-0">Signal Timeline</h3>
-                    <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
-                        <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
-                        <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
-                    </div>
-                </div>
-                <p class="secdash-panel-desc">Daily finding volume by severity, or toggle to threat level over time.</p>
-                <div class="secdash-timeline-scroll">
-                    <div class="chart-shell">
-                        <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
-                        <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
-                    </div>
-                </div>
-                <div id="secdash-timeline-legend" class="secdash-timeline-legend"></div>
-            </div>
-
-            <!-- Row 4: Risk Level | Findings per Status — both compact widgets
-                 (a small gauge strip and a purpose-built bar list, not a full
-                 Chart.js canvas), paired side by side on desktop since neither
-                 has enough content to fill a row on its own. -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
                 <div class="panel-sm secdash-panel secdash-gauge-strip">
                     <div class="secdash-gauge-wrap">
                         <canvas id="secdashGauge"></canvas>
@@ -376,6 +301,73 @@
                         <div class="skeleton h-4"></div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Row 2: Automated Lanes (wide) | Category Signal Map (narrow) —
+                 an asymmetric pairing (not two equal full-width stacked
+                 sections) so the two "coverage" visualizations read as one
+                 grid unit, the wide slot going to the flow diagram since it
+                 needs the most horizontal room. -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-3">
+                <div class="panel-sm secdash-panel lg:col-span-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-0">
+                        <h3 class="secdash-panel-title mb-0">Automated Lanes</h3>
+                        <div class="flex items-center gap-2">
+                            <select id="secdash-lanes-filter" class="select-pill" aria-label="Filter lanes by status"></select>
+                            <select id="secdash-lanes-sort" class="select-pill" aria-label="Sort lanes">
+                                <option value="recency">Most recent</option>
+                                <option value="name">Name A–Z</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="secdash-panel-desc mb-2">Every automated security workflow this repo runs, flowing into its real current status.</p>
+                    <div class="secdash-lanes-headline mb-2">
+                        <div id="secdash-lanes-stat" class="secdash-lanes-stat"><div class="skeleton h-8 w-32"></div></div>
+                        <span id="secdash-lanes-swept" class="secdash-lanes-swept text-[11px] text-zinc-500">…</span>
+                    </div>
+                    <div id="secdash-lanes-flow" class="secdash-lanes-flow"><div class="skeleton h-full w-full"></div></div>
+                    <div class="secdash-lanes-legend">
+                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-low)"></span>Passing</span>
+                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-critical)"></span>Failing</span>
+                        <span class="secdash-lanes-legend-item"><span class="secdash-lanes-legend-dot" style="background:var(--sev-info)"></span>Never run</span>
+                    </div>
+                    <div id="secdash-lanes-list" class="secdash-lanes-list">
+                        <div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div><div class="skeleton h-8 my-1"></div>
+                    </div>
+                </div>
+                <div class="panel-sm secdash-panel lg:col-span-2">
+                    <h3 class="secdash-panel-title mb-0">Category Signal Map</h3>
+                    <p class="secdash-panel-desc mb-2">Six categories of automated coverage. Click a bubble for the real detail behind it.</p>
+                    <div class="secdash-signalmap-scroll">
+                        <div class="secdash-signalmap-chart">
+                            <canvas id="secdashSignalMap"></canvas>
+                        </div>
+                    </div>
+                    <div id="secdash-signalmap-legend" class="secdash-signalmap-legend">
+                        <div class="skeleton h-10"></div>
+                    </div>
+                    <div id="secdash-signalmap-detail" class="secdash-signalmap-detail" hidden></div>
+                </div>
+            </div>
+
+            <!-- Row 3: Signal Timeline, full width — the flagship chart, sized
+                 like .chart-shell (not -sm) now that it owns its own row. -->
+            <div class="panel-sm secdash-panel mb-3">
+                <div class="flex items-center justify-between gap-2">
+                    <h3 class="secdash-panel-title mb-0">Signal Timeline</h3>
+                    <div id="secdash-timeline-toggle" role="group" aria-label="Timeline series" class="flex items-center gap-1 text-[10.5px]">
+                        <button type="button" data-series="severity" aria-pressed="true" class="secdash-timeline-btn term-btn term-btn-sm term-btn-active">By Severity</button>
+                        <button type="button" data-series="threat" aria-pressed="false" class="secdash-timeline-btn term-btn term-btn-sm">Threat Level</button>
+                    </div>
+                </div>
+                <p class="secdash-panel-desc">Daily finding volume by severity, or toggle to threat level over time.</p>
+                <div class="secdash-timeline-scroll">
+                    <div class="chart-shell">
+                        <canvas id="secdashTimelineChart" role="img" aria-label="Findings count per severity over time"></canvas>
+                        <div id="secdash-timeline-empty" class="secdash-chart-empty" hidden></div>
+                    </div>
+                </div>
+                <div id="secdash-timeline-legend" class="secdash-timeline-legend"></div>
             </div>
 
             <!-- Row 5: Findings Ledger — a real, searchable/filterable/paginated
