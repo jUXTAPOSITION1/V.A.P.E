@@ -3604,6 +3604,25 @@
     "symbol": "MCU",
     "times_investigated": 1
   },
+  "1:0xe5f894e1ea4bda7ad44fa98610d14a6ea47d7c0d": {
+    "address": "0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
+    "chain": "1",
+    "creator_address": "0x851038fa6e415a5fd2db6bad0085e17d6c54bdb1",
+    "first_investigated": "2026-08-02T20:15:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-201550-0xE5f894E1.md",
+        "score": 55,
+        "ts": "2026-08-02T20:15:50Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T20:15:50Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "BabyAsteroid",
+    "times_investigated": 1
+  },
   "1:0xe76278619dde1f71e5f8547d8af9076a76c1322d": {
     "address": "0xe76278619DDe1f71E5f8547d8AF9076A76C1322D",
     "chain": "1",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T20:00:46Z",
+  "generated": "2026-08-02T20:15:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 513,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 668,
+    "investigations": 669,
     "news": 52,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-191531-0x51cF4242.md",
-      "title": "Investigation \u2014 Pizza",
-      "symbol": "Pizza",
-      "name": "Binance Pizza",
-      "date": "2026-08-02T19:15:31Z",
-      "target": "0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260802-201550-0xE5f894E1.md",
+      "title": "Investigation \u2014 BabyAsteroid",
+      "symbol": "BabyAsteroid",
+      "name": "Baby Asteroid",
+      "date": "2026-08-02T20:15:50Z",
+      "target": "0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
+      "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 82% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $17,487. Positive evidence: Ownership renounced; 2951 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 453+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-191531-0x51cF4242.md"
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $19,394; [-10] Violent 24h move +457% (volatility/manipulation); [-15] Pair only 1.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 641 holders",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-201550-0xE5f894E1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-201550-0xE5f894E1.md",
+      "title": "Investigation \u2014 BabyAsteroid",
+      "symbol": "BabyAsteroid",
+      "name": "Baby Asteroid",
+      "date": "2026-08-02T20:15:50Z",
+      "target": "0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $19,394; [-10] Violent 24h move +457% (volatility/manipulation); [-15] Pair only 1.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 641 holders",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-201550-0xE5f894E1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-191531-0x51cF4242.md",

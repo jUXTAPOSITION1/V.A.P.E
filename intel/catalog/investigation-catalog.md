@@ -1137,3 +1137,5 @@
 | 2026-08-02 | auto | 0x80ac288e9664D7E2B59428125048eF48D853a93B (LGNS) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-02 | auto | 0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444 (Pizza) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 82% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-02 | auto | 0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D (BabyAsteroid) | deep_investigation | CAUTION (55/100) | Low liquidity $19,394 | +7d |
