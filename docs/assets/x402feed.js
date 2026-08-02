@@ -194,7 +194,7 @@ const X402Feed = {
             // one bucket, so that sum is only a last resort if the real
             // count wasn't available for some reason.
             const rangeBuyers = buckets.rangeBuyers ?? buckets.reduce((s, b) => s + (b.buyers || 0), 0);
-            setTxt('x402-activity-buyers-value', rangeBuyers ? rangeBuyers.toLocaleString() : '—');
+            setTxt('x402-activity-buyers-value', rangeBuyers ? rangeBuyers.toLocaleString() : '…');
             this._renderSparkline('x402-activity-jobs-spark', buckets, b => b.jobs, 'Transactions', v => v.toLocaleString());
             this._renderSparkline('x402-activity-volume-spark', buckets, b => b.revenue_usd, 'Volume', fmtUsdCompact);
             this._renderSparkline('x402-activity-buyers-spark', buckets, b => b.buyers || 0, 'Buyers', v => v.toLocaleString());
@@ -262,7 +262,7 @@ const X402Feed = {
             // title is a real accessibility fallback (keyboard/screen-reader
             // users get it for free from the browser), kept alongside the
             // data-when/data-value pair the custom tooltip reads.
-            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" data-when="${escapeHtml(when)}" data-value="${escapeHtml(valueText)}" title="${escapeHtml(when)} — ${escapeHtml(valueText)}" tabindex="0"></div>`;
+            return `<div class="activity-sparkline-bar${latest}" style="height:${pct}%" data-when="${escapeHtml(when)}" data-value="${escapeHtml(valueText)}" title="${escapeHtml(when)}: ${escapeHtml(valueText)}" tabindex="0"></div>`;
         }).join('');
         // Bars are fixed-width, packed from the left by default, with an
         // auto left-margin on the first one (site.css) so a bucket count
@@ -469,10 +469,10 @@ const X402Feed = {
             const t = stats.totals || {};
             const settled = t.jobs - (t.errors || 0);
             const successRate = t.jobs ? Math.round((settled / t.jobs) * 100) : null;
-            setTxt('x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '—');
-            setTxt('rep-x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '—');
-            setTxt('x402-revenue', t.revenue_usd != null ? '$' + t.revenue_usd.toFixed(2) : '—');
-            setTxt('x402-success', successRate != null ? successRate + '%' : '—');
+            setTxt('x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '…');
+            setTxt('rep-x402-jobs', t.jobs != null ? t.jobs.toLocaleString() : '…');
+            setTxt('x402-revenue', t.revenue_usd != null ? '$' + t.revenue_usd.toFixed(2) : '…');
+            setTxt('x402-success', successRate != null ? successRate + '%' : '…');
             if (updated) updated.innerHTML = `<span class="w-2 h-2 bg-emerald-500 rounded-full live-dot"></span>live`;
 
             this._rawDaily = stats.daily || [];
@@ -489,8 +489,8 @@ const X402Feed = {
     _renderRangeStats(daily) {
         const setTxt = (id, v) => { const n = document.getElementById(id); if (n) n.textContent = v; };
         if (!daily.length) {
-            setTxt('x402-range-revenue', '—'); setTxt('x402-range-jobs', '—');
-            setTxt('x402-range-avg', '—'); setTxt('x402-range-best', '—');
+            setTxt('x402-range-revenue', '…'); setTxt('x402-range-jobs', '…');
+            setTxt('x402-range-avg', '…'); setTxt('x402-range-best', '…');
             return;
         }
         const revenue = daily.reduce((s, d) => s + d.revenue_usd, 0);
@@ -501,7 +501,7 @@ const X402Feed = {
         setTxt('x402-range-avg', '$' + (revenue / daily.length).toFixed(2));
         setTxt('x402-range-best', best.revenue_usd > 0
             ? `$${best.revenue_usd.toFixed(2)} (${new Date(best.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })})`
-            : '—');
+            : '…');
     },
 
     async _loadFeed() {
@@ -524,7 +524,7 @@ const X402Feed = {
             if (!jobs || !jobs.length) {
                 el.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-zinc-500 text-xs">
                     <i class="fa-solid fa-satellite-dish text-xl mb-2 opacity-50 block"></i>
-                    ${this._feed.q || this._feed.status ? 'No jobs match this filter.' : "No jobs logged yet — this fills in the moment VAPE's next paid job settles."}
+                    ${this._feed.q || this._feed.status ? 'No jobs match this filter.' : "No jobs logged yet. This fills in the moment the next paid job settles."}
                 </td></tr>`;
             } else {
                 const serviceUrlByOffering = Object.fromEntries(links.map(o => [o.name, o.directory_url]));
@@ -556,7 +556,7 @@ const X402Feed = {
 
     _row(j, serviceUrlByOffering = {}) {
         const icon = tokenIconByAddress(j.address, j.chain_id);
-        const label = j.symbol ? `$${j.symbol}` : (j.address ? j.address.slice(0, 8) + '…' : '—');
+        const label = j.symbol ? `$${j.symbol}` : (j.address ? j.address.slice(0, 8) + '…' : '…');
         const targetCell = j.address
             ? `<a href="${basescanAddrUrl(j.address)}" target="_blank" rel="noopener" class="text-zinc-200 hover:text-white flex items-center gap-1.5">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}<span class="whitespace-nowrap">${escapeHtml(label)}</span></a>`
             : `<span class="text-zinc-500">${escapeHtml(label)}</span>`;
@@ -565,7 +565,7 @@ const X402Feed = {
             : '<span class="w-1.5 h-1.5 bg-rose-500 rounded-full inline-block" title="error"></span>';
         const verdictPill = j.verdict
             ? `<span class="px-1.5 py-0.5 text-[10px] ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
-            : '<span class="text-zinc-700 text-[10px]">—</span>';
+            : '<span class="text-zinc-700 text-[10px]">…</span>';
         const tx = j.tx_hash
             ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on block explorer" class="text-zinc-300 hover:text-white underline decoration-zinc-700">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
             : '<span class="text-zinc-700">unsettled</span>';
@@ -585,7 +585,7 @@ const X402Feed = {
             <td class="py-2 pr-3">${targetCell}</td>
             <td class="py-2 pr-3 text-zinc-100 font-medium whitespace-nowrap">$${Number(j.amount_usd).toFixed(2)}</td>
             <td class="py-2 pr-3">${verdictPill}</td>
-            <td class="py-2 pr-3 text-zinc-600 whitespace-nowrap">${j.latency_ms != null ? j.latency_ms + 'ms' : '—'}${j.backfilled ? ' <span class="text-amber-500/70 text-[10px]" title="Reconstructed from on-chain history — logged after the fact, not watched live">hist</span>' : ''}</td>
+            <td class="py-2 pr-3 text-zinc-600 whitespace-nowrap">${j.latency_ms != null ? j.latency_ms + 'ms' : '…'}${j.backfilled ? ' <span class="text-amber-500/70 text-[10px]" title="Reconstructed from on-chain history, logged after the fact rather than watched live">hist</span>' : ''}</td>
             <td class="py-2 pr-3 whitespace-nowrap">${tx}</td>
         </tr>`;
     },
