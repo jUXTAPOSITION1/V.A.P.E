@@ -310,6 +310,14 @@ def scan_investigations():
             if len(cells) >= 6 and re.match(r"\d{4}-\d{2}-\d{2}", cells[0]):
                 target_cell = cells[2] if len(cells) > 2 else ""
                 tm = re.match(r"(0x[a-fA-F0-9]{40})\s*(?:\(([^)]+)\))?", target_cell)
+                # cells[4] is raw text like "CAUTION (55/100)" -- same shape as
+                # the report-source verdict line above, so reuse the same
+                # PROCEED/CAUTION/REJECT + "(NN/100)" extraction rather than
+                # storing the unparsed string (which left every catalog row
+                # showing "Unclassified" and no score pill on the site).
+                verdict_cell = cells[4] if len(cells) > 4 else ""
+                vcm = re.search(r"(PROCEED|CAUTION|REJECT)", verdict_cell, re.I)
+                scm = re.search(r"\((\d{1,3})\s*/\s*100\)", verdict_cell)
                 out.append({
                     "source": "catalog",
                     "date": cells[0],
@@ -317,7 +325,8 @@ def scan_investigations():
                     "target": tm.group(1) if tm else (target_cell or None),
                     "symbol": tm.group(2) if tm and tm.group(2) else None,
                     "offering": cells[3] if len(cells) > 3 else None,
-                    "verdict": cells[4] if len(cells) > 4 else None,
+                    "verdict": vcm.group(1).upper() if vcm else (verdict_cell or None),
+                    "score": scm.group(1) if scm else None,
                     "key_finding": cells[5] if len(cells) > 5 else None,
                     "url": f"{BLOB}/intel/catalog/investigation-catalog.md",
                 })
@@ -397,7 +406,13 @@ def main():
             "investigation": latest_invest,
             "report": latest_report,
         },
-        "investigations": investigations[:40],
+        # Unlike reports/broadcasts/news below, this is never truncated —
+        # investigations.html is the dedicated full-record ledger page and
+        # needs every real investigation, not just the most recent 40 (the
+        # per-entry payload here is small: structured fields + a short
+        # summary, not the full report body, so the complete list is still
+        # a modest fetch).
+        "investigations": investigations,
         "reports": reports[:60],
         "broadcasts": broadcasts[:30],
         "news": news[:60],

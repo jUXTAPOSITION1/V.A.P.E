@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=16">
+    <link rel="stylesheet" href="assets/site.css?v=18">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -95,7 +95,6 @@
                 <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
                 <a href="#the-wire" class="hover:text-zinc-100 transition">Live Data</a>
                 <a href="#your-case-file" class="hover:text-zinc-100 transition">Portfolio</a>
-                <a href="#the-archive" class="hover:text-zinc-100 transition">Archive</a>
             </div>
 
             <div class="flex items-center gap-2 sm:gap-3">
@@ -122,7 +121,6 @@
                 <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-chart-line w-4 text-center text-zinc-500"></i>Live Data</a>
                 <a href="#your-case-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-wallet w-4 text-center text-zinc-500"></i>Portfolio</a>
-                <a href="#the-archive" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-box-archive w-4 text-center text-zinc-500"></i>Archive</a>
                 <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
             </div>
         </div>
@@ -210,10 +208,10 @@
                     </div>
                 </div>
                 <div id="rep-stats" class="stat-line">
-                    <button onclick="App.gotoArchive('reports')" class="stat-pair-link text-left"><span class="stat-label">reports</span><span id="rep-reports" class="stat-value">…</span></button>
-                    <button onclick="App.gotoArchive('broadcasts')" class="stat-pair-link text-left"><span class="stat-label">broadcasts</span><span id="rep-broadcasts" class="stat-value">…</span></button>
-                    <button onclick="App.gotoArchive('investigations')" class="stat-pair-link text-left"><span class="stat-label">investigations</span><span id="rep-investigations" class="stat-value">…</span></button>
-                    <button onclick="App.gotoArchive('tools')" class="stat-pair-link text-left"><span class="stat-label">tools verified</span><span id="rep-tools" class="stat-value">…</span></button>
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/reports" target="_blank" rel="noopener" class="stat-pair-link"><span class="stat-label">reports</span><span id="rep-reports" class="stat-value">…</span></a>
+                    <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/broadcasts" target="_blank" rel="noopener" class="stat-pair-link"><span class="stat-label">broadcasts</span><span id="rep-broadcasts" class="stat-value">…</span></a>
+                    <a href="investigations.html" class="stat-pair-link"><span class="stat-label">investigations</span><span id="rep-investigations" class="stat-value">…</span></a>
+                    <a href="#the-workshop" class="stat-pair-link"><span class="stat-label">tools verified</span><span id="rep-tools" class="stat-value">…</span></a>
                     <a href="#the-workshop" class="stat-pair-link"><span class="stat-label">tools built</span><span id="rep-tools-built" class="stat-value">…</span></a>
                     <a href="#retain" class="stat-pair-link"><span class="stat-label">offerings</span><span id="rep-offerings" class="stat-value">…</span></a>
                     <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/skills" target="_blank" class="stat-pair-link"><span class="stat-label">skills</span><span id="rep-skills" class="stat-value">…</span></a>
@@ -686,26 +684,57 @@
 
 
 
-        <!-- ═══ 4. FEATURED INVESTIGATION (moved higher) ═══ -->
-        <section id="case-file" class="reveal spotlight-section mb-14">
+        <!-- ═══ 4. FEATURED INVESTIGATIONS ═══
+             A live, working preview of investigations.html — same stat
+             line, same sparkline (day/week/month/all-time toggle), same
+             row markup, imported straight from investigations-ledger.js
+             (docs/assets/investigations-preview.js) rather than a
+             lookalike, so it can never visually drift from the real page.
+             Full history + the interactive Verdict Breakdown live only on
+             the dedicated page, which this always points to. -->
+        <section id="investigations-preview" class="reveal panel mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="spotlight-kicker"><i class="fa-solid fa-star"></i>[ spotlight ]</div>
-                <span id="inv-updated" class="text-[11px] text-zinc-500">syncing…</span>
+                <div class="eyebrow mb-1"><i class="fa-solid fa-magnifying-glass-chart"></i>[ spotlight ]</div>
+                <span id="invp-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
-            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
-                <h2 class="section-title text-lg sm:text-xl">Featured Investigation &amp; Latest Report</h2>
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+                <h2 class="section-title text-lg sm:text-xl">Featured Investigations</h2>
                 <a href="investigations.html" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
                     Browse every investigation <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div id="inv-latest" class="spotlight-card">
-                    <div class="skeleton h-28"></div>
-                </div>
-                <div id="inv-report" class="spotlight-card">
-                    <div class="skeleton h-28"></div>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">Every deep investigation VAPE has published, in one expanding ledger — this is a live preview of the full page.</p>
+
+            <div id="invp-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+                <span class="stat-pair"><span class="stat-label">tracked</span><span id="invp-total" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">reject</span><span id="invp-reject" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">caution</span><span id="invp-caution" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">proceed</span><span id="invp-proceed" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">avg score</span><span id="invp-avg-score" class="stat-value skeleton">…</span></span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <h3 class="text-xs text-zinc-500 uppercase tracking-wider">Activity</h3>
+                <div id="invp-spark-range" class="invl-range-toggle" role="group" aria-label="Sparkline range">
+                    <button type="button" data-range="day" class="invl-range-btn">Day</button>
+                    <button type="button" data-range="week" class="invl-range-btn">Week</button>
+                    <button type="button" data-range="month" class="invl-range-btn">Month</button>
+                    <button type="button" data-range="all" class="invl-range-btn">All time</button>
                 </div>
             </div>
+            <div id="invp-spark" class="invl-spark invl-spark-lg mb-5"></div>
+
+            <div class="invl-scroll">
+                <table class="invl-table">
+                    <thead>
+                        <tr><th>Token</th><th>Chain</th><th>Verdict</th><th>Score</th><th>Date</th><th></th></tr>
+                    </thead>
+                    <tbody id="invp-body">
+                        <tr><td colspan="6" class="text-zinc-500 text-xs py-6 text-center">Loading investigations…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="investigations.html" class="term-btn mt-5 inline-block">Browse every investigation <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
         </section>
 
         <!-- ═══ 5. THREAT LEDGER (live attack tracking) ═══ -->
@@ -768,7 +797,7 @@
             </div>
 
             <p class="text-[11px] text-zinc-600 mt-4">Each incident is checked against known attack patterns for a concrete prevention takeaway.
-            See <a href="#the-archive" class="text-zinc-500 hover:text-rose-400 hover:underline">The Archive</a> for the resulting case files.</p>
+            See <a href="investigations.html" class="text-zinc-500 hover:text-rose-400 hover:underline">Investigations</a> for the resulting case files.</p>
         </section>
 
         <!-- ═══ 6. DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
@@ -1050,68 +1079,6 @@
             </div>
         </section>
 
-        <!-- ═══ 12. INVESTIGATION ARCHIVE (Intel Explorer) ═══ -->
-        <section id="the-archive" class="reveal panel mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
-                <div>
-                    <div class="eyebrow mb-3"><i class="fa-solid fa-box-archive"></i>[ records ]</div>
-                    <h2 class="section-title text-lg">Investigation Archive</h2>
-                </div>
-                <div class="icon-dropdown">
-                    <button class="icon-dropdown-btn" title="Archive options" aria-label="Menu">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <div class="icon-dropdown-menu">
-                        <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/data/intel-index.json" target="_blank"><i class="fa-solid fa-list"></i>View index</a>
-                        <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
-                        <div class="icon-dropdown-divider"></div>
-                        <button onclick="document.getElementById('intel-search').value=''; App._intelQuery=''; App._typeFilter=null; App._intelPage=0; App._renderIntel()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
-                    </div>
-                </div>
-            </div>
-            <p class="text-zinc-400 text-sm mb-4 max-w-2xl leading-relaxed">The complete, unedited case log: every investigation, report, broadcast, and
-            internal tool VAPE has published, indexed automatically as it happens.</p>
-
-            <div id="intel-tabs" class="flex flex-wrap gap-1 text-xs mb-4">
-                <button data-tab="investigations" class="term-btn term-btn-sm term-btn-active">Investigations <span id="c-investigations" class="opacity-70"></span></button>
-                <button data-tab="reports" class="term-btn term-btn-sm">Reports <span id="c-reports" class="opacity-70"></span></button>
-                <button data-tab="broadcasts" class="term-btn term-btn-sm">Broadcasts <span id="c-broadcasts" class="opacity-70"></span></button>
-                <button data-tab="tools" class="term-btn term-btn-sm">Tools <span id="c-tools" class="opacity-70"></span></button>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
-                    <input id="intel-search" type="text" placeholder="Search title, symbol, date…"
-                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
-                </div>
-                <select id="intel-sort" class="select-pill">
-                    <option value="date_desc">Newest first</option>
-                    <option value="date_asc">Oldest first</option>
-                    <option value="title_asc">Title A–Z</option>
-                </select>
-            </div>
-
-            <div id="intel-filter-wrap" class="mb-4 hidden">
-                <div id="intel-filter" class="flex flex-wrap gap-1.5 text-[11px]"></div>
-            </div>
-
-            <div id="intel-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
-                <div class="skeleton h-16 my-1"></div>
-                <div class="skeleton h-16 my-1"></div>
-                <div class="skeleton h-16 my-1"></div>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                <span id="intel-count">…</span>
-                <div class="flex items-center gap-2">
-                    <button type="button" id="intel-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                    <span id="intel-page" class="text-zinc-400">Page 1</span>
-                    <button type="button" id="intel-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                </div>
-            </div>
-        </section>
-
         <!-- ═══ 13. THE AGENT (closing profile) ═══ -->
         <section class="reveal panel mb-14">
             <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 items-center">
@@ -1209,7 +1176,7 @@
       x402feed.js change, or you'll chase "it's not fixed" reports that are
       actually just stale caches.
     -->
-    <script src="assets/app.js?v=35"></script>
+    <script src="assets/app.js?v=36"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/profile.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
@@ -1218,5 +1185,6 @@
     <script type="module" src="assets/attackfeed.js?v=5"></script>
     <script type="module" src="assets/newsfeed.js?v=2"></script>
     <script type="module" src="assets/securitydashboard.js?v=1"></script>
+    <script type="module" src="assets/investigations-preview.js?v=1"></script>
 </body>
 </html>

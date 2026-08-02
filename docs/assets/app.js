@@ -111,20 +111,18 @@ window.WORKER_BASE = WORKER_BASE;
 const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
-        this._intelPromise = null; // force a fresh intel-index fetch this cycle, shared by reports() + intel()
+        this._intelPromise = null; // force a fresh intel-index fetch this cycle, read by reports()
         // this.virtuals() sunset 2026-07-31 (VAPE is refocusing on Base/all-EVM/
         // Ethereum + x402, not the Virtuals ecosystem specifically) -- the
         // function and its #virtuals-stats/#virtuals-sparkline render targets
         // are left in place, just no longer invoked here.
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
 
-    // Shared, memoized-per-cycle intel-index fetch — reports() and intel()
-    // both want it and run concurrently in refresh()'s allSettled, so this
-    // avoids a duplicate fetch and the race of reports() reading `this._intel`
-    // before intel() has populated it.
+    // Shared, memoized-per-cycle intel-index fetch — reports() reads it;
+    // memoized so a refresh cycle never fetches the index more than once.
     _intelPromise: null,
     async _loadIntel() {
         if (!this._intelPromise) {
@@ -1572,10 +1570,6 @@ const App = {
         }
     },
 
-    // ── Intel index: investigation summary + explorer (from data/intel-index.json)
-    _intel: null, _tab: 'investigations', _typeFilter: null,
-    INTEL_PAGE_SIZE: 10,
-    _intelQuery: '', _intelSort: 'date_desc', _intelPage: 0,
     _verdictColor(v){
         v=(v||'').toUpperCase();
         if(/REJECT|CRITICAL|HIGH|BEARISH|RISK-OFF|FEAR/.test(v)) return '#fb7185';
@@ -1596,7 +1590,6 @@ const App = {
     // controlled data rendered here.
     _esc(t){ return (t||'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); },
     _shortAddr(a){ return (a && a.length>12) ? a.slice(0,6)+'…'+a.slice(-4) : (a||''); },
-    _symFromTitle(t){ const m=(t||'').match(/Investigation\s*[—-]\s*(.+)$/); return m ? m[1].trim() : null; },
     // Real bug fixed here: investigations are now genuinely multi-chain
     // (agents/investigate.py rotates auto-target across 7 EVM chains), but
     // this used to only distinguish arbitrum/ethereum/base — anything else
@@ -1613,19 +1606,6 @@ const App = {
     _tokenIcon(address, chain){
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
         return `https://dd.dexscreener.com/ds-data/tokens/${this._chainSlug(chain)}/${address.toLowerCase()}.png?size=lg`;
-    },
-    // Every dedicated investigation report (source==="report", i.e. it has
-    // its own real intel/investigations/investigation-*.md file) now reads
-    // on-site via investigation.html — reuses report.js's markdown renderer
-    // instead of sending visitors straight to a raw GitHub blob. The legacy
-    // catalog rows (source==="catalog") have no individual file of their
-    // own — one shared table backs many rows — so those keep linking out to
-    // the catalog's raw blob, same as before.
-    _investigationUrl(item){
-        return item.file ? `investigation.html?file=${encodeURIComponent(item.file)}` : item.url;
-    },
-    _investigationLinkAttrs(item){
-        return item.file ? '' : ' target="_blank" rel="noopener"';
     },
     _explorerUrl(address, chain){
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
@@ -1660,236 +1640,6 @@ const App = {
     _iconImg(address, chain, size=36, extra=''){
         const src = this._tokenIcon(address, chain);
         return src ? `<img src="${src}" alt="" width="${size}" height="${size}" class="rounded-full bg-white/5 object-cover shrink-0 ${extra}" onerror="this.remove()">` : '';
-    },
-
-    async intel(){
-        try{
-            this._intel = await this._loadIntel();
-            if(!this._intel) throw new Error('intel index unavailable');
-            const d=this._intel, c=d.counts||{};
-            document.getElementById('inv-updated').textContent = 'index '+this._ago(d.generated);
-            ['investigations','reports','broadcasts','tools'].forEach(k=>{
-                const n=document.getElementById('c-'+k); if(n) n.textContent='('+((c[k])??0)+')';
-            });
-            // hero: latest investigation
-            const inv=(d.latest_summary||{}).investigation;
-            const iel=document.getElementById('inv-latest');
-            if(inv){
-                const sym = inv.symbol || this._symFromTitle(inv.title);
-                const heading = sym || this._shortAddr(inv.target) || inv.title || 'target';
-                const showName = inv.name && inv.name.toLowerCase() !== (sym||'').toLowerCase();
-                const explorer = this._explorerUrl(inv.target, inv.chain);
-                iel.innerHTML=`
-                    <div class="flex items-center justify-between gap-2 mb-3">
-                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-magnifying-glass-chart"></i> Deep Investigation</div>
-                        ${this._pill(inv.verdict)}
-                    </div>
-                    <a href="${explorer||'#'}" target="_blank" rel="noopener" class="flex items-center gap-3 mb-1 ${explorer?'hover:opacity-80':'pointer-events-none'}">
-                        ${this._iconImg(inv.target, inv.chain, 48)}
-                        <div class="min-w-0">
-                            <div class="text-xl leading-tight truncate">${this._esc(heading)}</div>
-                            ${showName?`<div class="text-xs text-zinc-400 truncate">${this._esc(inv.name)}</div>`:''}
-                            ${inv.target?`<div class="font-mono text-[11px] text-zinc-500 truncate" title="${this._esc(inv.target)}">${this._esc(this._shortAddr(inv.target))} ${explorer?'<i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-60"></i>':''}</div>`:''}
-                        </div>
-                    </a>
-                    ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200 text-sm">${inv.score}</span><span class="text-zinc-600">/100</span></div>`:''}
-                    <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${this._investigationUrl(inv)}"${this._investigationLinkAttrs(inv)} class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Read full investigation ${inv.file ? '<i class="fa-solid fa-arrow-right text-[10px]"></i>' : '<i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>'}</a>`;
-            } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
-            // hero: latest report
-            const rep=(d.latest_summary||{}).report;
-            const rel=document.getElementById('inv-report');
-            if(rep){
-                rel.innerHTML=`
-                    <div class="flex items-center justify-between gap-2 mb-3">
-                        <div class="text-[10px] uppercase tracking-widest text-[#60a5fa] flex items-center gap-1.5"><i class="fa-solid fa-file-shield"></i> Latest Report · ${this._esc(rep.type||'')}</div>
-                        ${this._pill(rep.threat)}
-                    </div>
-                    <div class="text-xl leading-tight mb-1 break-words">${this._esc(rep.title||rep.file)}</div>
-                    <div class="text-[11px] text-zinc-500 mb-3">${this._ago(rep.date)}</div>
-                    <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc((rep.summary||'').slice(0,260))}${(rep.summary||'').length>260?'…':''}</div>
-                    <a href="${rep.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Open report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
-            } else { rel.innerHTML='<div class="text-zinc-500 text-sm">No report indexed.</div>'; }
-            this._renderIntel();
-        }catch(e){
-            document.getElementById('intel-body').innerHTML='<div class="text-amber-400 text-sm">Intel index unavailable (regenerating next cycle).</div>';
-        }
-    },
-
-    // Track Record stat tiles link here to jump straight to the matching
-    // Archive tab instead of dropping the visitor on the section and making
-    // them find it themselves.
-    gotoArchive(tab){
-        this._tab = tab; this._typeFilter = null; this._intelPage = 0;
-        const tabsEl = document.getElementById('intel-tabs');
-        if (tabsEl) {
-            [...tabsEl.querySelectorAll('button[data-tab]')].forEach(b=>{
-                b.className = b.dataset.tab===tab ? 'term-btn term-btn-sm term-btn-active' : 'term-btn term-btn-sm';
-            });
-        }
-        this._renderIntel();
-        document.getElementById('the-archive')?.scrollIntoView({ behavior:'smooth', block:'start' });
-    },
-
-    // Generic search text + date extractor per tab's differently-shaped
-    // items — lets one search box/sort control work across all 4 tabs
-    // without each tab needing its own filter UI.
-    _intelSearchText(tab, item){
-        if(tab==='investigations') return [item.title, item.symbol, item.name, item.target, item.date].filter(Boolean).join(' ');
-        if(tab==='reports') return [item.title, item.file, item.type, item.date].filter(Boolean).join(' ');
-        if(tab==='broadcasts') return [item.title, item.file, item.date].filter(Boolean).join(' ');
-        if(tab==='tools') return [item.name, item.tier, item.purpose, item.status].filter(Boolean).join(' ');
-        return '';
-    },
-    _intelTitle(tab, item){
-        return (tab==='tools' ? item.name : (item.title||item.file)) || '';
-    },
-    _intelDate(item){ return item.date ? new Date(item.date) : null; },
-
-    _wireIntelControls(){
-        if(this._intelWired) return;
-        this._intelWired = true;
-        const search = document.getElementById('intel-search');
-        const sort = document.getElementById('intel-sort');
-        const prev = document.getElementById('intel-prev');
-        const next = document.getElementById('intel-next');
-        if(search) search.addEventListener('input', ()=>{
-            this._intelQuery = search.value.trim().toLowerCase();
-            this._intelPage = 0;
-            this._renderIntel();
-        });
-        if(sort) sort.addEventListener('change', ()=>{
-            this._intelSort = sort.value;
-            this._intelPage = 0;
-            this._renderIntel();
-        });
-        if(prev) prev.addEventListener('click', ()=>{
-            this._intelPage = Math.max(0, this._intelPage - 1);
-            this._renderIntel();
-        });
-        if(next) next.addEventListener('click', ()=>{
-            this._intelPage += 1;
-            this._renderIntel();
-        });
-    },
-
-    _renderIntelPagination(total){
-        const countEl=document.getElementById('intel-count');
-        const pageEl=document.getElementById('intel-page');
-        const prev=document.getElementById('intel-prev');
-        const next=document.getElementById('intel-next');
-        const page=this._intelPage;
-        const pages=Math.max(1, Math.ceil(total/this.INTEL_PAGE_SIZE));
-        if(countEl) countEl.textContent = total
-            ? `Showing ${page*this.INTEL_PAGE_SIZE+1}–${Math.min(total,(page+1)*this.INTEL_PAGE_SIZE)} of ${total}`
-            : 'No entries match this filter.';
-        if(pageEl) pageEl.textContent = `Page ${page+1} of ${pages}`;
-        if(prev) prev.disabled = page<=0;
-        if(next) next.disabled = page+1>=pages;
-    },
-
-    _renderIntel(){
-        const d=this._intel; if(!d) return;
-        this._wireIntelControls();
-        const body=document.getElementById('intel-body');
-        const fw=document.getElementById('intel-filter-wrap');
-        const tab=this._tab;
-        // type filter chips (reports only)
-        if(tab==='reports'){
-            const types=Object.keys(d.counts.reports_by_type||{}).sort((a,b)=>d.counts.reports_by_type[b]-d.counts.reports_by_type[a]);
-            fw.classList.remove('hidden');
-            document.getElementById('intel-filter').innerHTML=
-                [['',' all']].concat(types.map(t=>[t,t])).map(([v,label])=>{
-                    const on=(this._typeFilter||'')===v;
-                    return `<button data-type="${v}" class="term-btn term-btn-sm ${on?'term-btn-active':''}">${label}${v?` <span class="opacity-60">${d.counts.reports_by_type[v]}</span>`:''}</button>`;
-                }).join('');
-        } else { fw.classList.add('hidden'); }
-
-        // Search + sort across whichever tab is active, then paginate —
-        // applied uniformly here so each per-tab branch below only needs to
-        // render whatever page slice it's handed.
-        const rawByTab = { investigations: d.investigations||[], reports: d.reports||[], broadcasts: d.broadcasts||[], tools: d.tools||[] };
-        let allItems = rawByTab[tab] || [];
-        if(tab==='reports' && this._typeFilter) allItems = allItems.filter(r=>r.type===this._typeFilter);
-        if(this._intelQuery) allItems = allItems.filter(item => this._intelSearchText(tab,item).toLowerCase().includes(this._intelQuery));
-        allItems = [...allItems].sort((a,b)=>{
-            if(this._intelSort==='title_asc') return this._intelTitle(tab,a).localeCompare(this._intelTitle(tab,b));
-            const da=this._intelDate(a), db=this._intelDate(b);
-            if(!da && !db) return 0;
-            if(!da) return 1;
-            if(!db) return -1;
-            return this._intelSort==='date_asc' ? da-db : db-da;
-        });
-        const page=this._intelPage;
-        const items = allItems.slice(page*this.INTEL_PAGE_SIZE, (page+1)*this.INTEL_PAGE_SIZE);
-        this._renderIntelPagination(allItems.length);
-
-        let rows='';
-        if(tab==='investigations'){
-            rows=items.length?items.map(i=>{
-                const sym = i.symbol || this._symFromTitle(i.title);
-                const showName = i.name && i.name.toLowerCase() !== (sym||'').toLowerCase();
-                const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
-                return `
-                <a href="${this._investigationUrl(i)}"${this._investigationLinkAttrs(i)} class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${icon ? this._iconChip(icon) : this._iconGlyph('fa-magnifying-glass-chart')}
-                    <div class="min-w-0 flex-1">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="min-w-0 truncate">
-                                <span class="text-xs">${this._esc(sym || this._shortAddr(i.target) || i.title || 'target')}</span>
-                                ${showName?`<span class="text-[11px] text-zinc-500 ml-1.5">${this._esc(i.name)}</span>`:''}
-                            </span>
-                            <span class="flex items-center gap-2 shrink-0">${i.score?`<span class="text-zinc-300 text-xs">${i.score}</span>`:''}${this._pill(i.verdict)}</span>
-                        </div>
-                        ${this._metaChips([
-                            i.target?`<span class="font-mono" title="${this._esc(i.target)}">${this._esc(this._shortAddr(i.target))}</span>`:null,
-                            this._esc(i.date||''),
-                            this._esc(i.offering||i.chain||'deep_investigation'),
-                        ])}
-                        ${(i.summary||i.key_finding)?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(i.summary||i.key_finding)}</div>`:''}
-                    </div>
-                </a>`;
-            }).join(''):'<div class="text-zinc-500 text-sm">No investigations logged yet.</div>';
-        } else if(tab==='reports'){
-            rows=items.length?items.map(r=>`
-                <a href="${r.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconGlyph('fa-file-lines')}
-                    <div class="min-w-0 flex-1">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-sm truncate min-w-0">${this._esc(r.title||r.file)}</span>
-                            ${this._pill(r.threat)}
-                        </div>
-                        ${this._metaChips([this._esc(r.type), this._esc(this._ago(r.date))])}
-                        ${r.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(r.summary)}</div>`:''}
-                    </div>
-                </a>`).join(''):'<div class="text-zinc-500 text-sm">No reports for this filter.</div>';
-        } else if(tab==='broadcasts'){
-            rows=items.length?items.map(b=>`
-                <a href="${b.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconGlyph('fa-tower-broadcast')}
-                    <div class="min-w-0 flex-1">
-                        <div class="text-sm break-words">${this._esc(b.title||b.file)}</div>
-                        ${this._metaChips([this._esc(this._ago(b.date))])}
-                        ${b.summary?`<div class="text-[11px] text-zinc-400 mt-1.5 leading-snug break-words line-clamp-2">${this._esc(b.summary)}</div>`:''}
-                    </div>
-                </a>`).join(''):'<div class="text-zinc-500 text-sm">No broadcasts yet.</div>';
-        } else if(tab==='tools'){
-            rows=items.length?items.map(t=>{
-                const ok=t.status==='verified'; const lim=t.known_limitation;
-                const col=ok?'#4ade80':(lim?'#fbbf24':'#a1a1aa');
-                return `<a href="${t.url||'#'}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
-                    ${this._iconGlyph(ok?'fa-circle-check':'fa-circle-dot', col)}
-                    <div class="min-w-0 flex-1">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-sm truncate min-w-0">${this._esc(t.name)}${t.version?`<span class="text-zinc-600"> v${this._esc(t.version)}</span>`:''}</span>
-                            <span class="text-[11px] px-2 py-0.5 border shrink-0" style="color:${col};border-color:${col}">${this._esc(t.status||'?')}</span>
-                        </div>
-                        ${this._metaChips([this._esc(t.tier), t.purpose?this._esc(t.purpose):null])}
-                    </div>
-                </a>`;
-            }).join(''):'<div class="text-zinc-500 text-sm">No tools registered.</div>';
-        }
-        body.innerHTML=rows;
     },
 
     _set(id,v){ const e=document.getElementById(id); e.classList.remove('skeleton'); e.textContent=v; }
@@ -1975,19 +1725,6 @@ window.addEventListener('load', () => {
     });
     // Enter key launches hunt
     document.getElementById('hunt-target').addEventListener('keypress', e=>{ if(e.key==='Enter') App.hunt(); });
-    // Intel Explorer tab switching
-    document.getElementById('intel-tabs').addEventListener('click', e=>{
-        const b=e.target.closest('button[data-tab]'); if(!b) return;
-        App._tab=b.dataset.tab; App._typeFilter=null; App._intelPage=0;
-        [...e.currentTarget.querySelectorAll('button')].forEach(x=>x.className='term-btn term-btn-sm');
-        b.className='term-btn term-btn-sm term-btn-active';
-        App._renderIntel();
-    });
-    // Report type filter
-    document.getElementById('intel-filter').addEventListener('click', e=>{
-        const b=e.target.closest('button[data-type]'); if(!b) return;
-        App._typeFilter=b.dataset.type||null; App._intelPage=0; App._renderIntel();
-    });
     // Sticky nav — mobile menu toggle + auto-close on link click
     const navToggle = document.getElementById('nav-menu-toggle');
     const navPanel = document.getElementById('nav-menu-panel');

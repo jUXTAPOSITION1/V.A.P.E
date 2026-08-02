@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=17">
+    <link rel="stylesheet" href="assets/site.css?v=18">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <nav class="border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
@@ -44,7 +44,6 @@
                 <a href="index.html" class="hover:text-zinc-100 transition">Main Site</a>
                 <a href="news.html" class="hover:text-zinc-100 transition">VAPE Wire</a>
                 <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
-                <a href="index.html#the-archive" class="hover:text-zinc-100 transition">The Archive</a>
                 <a href="search.html" aria-label="Search" class="text-zinc-500 hover:text-zinc-100 transition"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
         </div>
@@ -53,7 +52,6 @@
                 <a href="index.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Main Site</a>
                 <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>VAPE Wire</a>
                 <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
-                <a href="index.html#the-archive" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-box-archive w-4 text-center text-zinc-500"></i>The Archive</a>
                 <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
             </div>
         </div>
@@ -74,10 +72,20 @@
             <span class="stat-pair"><span class="stat-label">caution</span><span id="invl-caution" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">proceed</span><span id="invl-proceed" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">avg score</span><span id="invl-avg-score" class="stat-value">…</span></span>
-            <span class="stat-pair"><span class="stat-label">this week</span><span id="invl-spark-wrap" class="stat-value"><span id="invl-spark" class="invl-spark"></span></span></span>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-5 mb-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+            <h2 class="text-xs text-zinc-500 uppercase tracking-wider">Activity</h2>
+            <div id="invl-spark-range" class="invl-range-toggle" role="group" aria-label="Sparkline range">
+                <button type="button" data-range="day" class="invl-range-btn">Day</button>
+                <button type="button" data-range="week" class="invl-range-btn">Week</button>
+                <button type="button" data-range="month" class="invl-range-btn">Month</button>
+                <button type="button" data-range="all" class="invl-range-btn">All time</button>
+            </div>
+        </div>
+        <div id="invl-spark" class="invl-spark invl-spark-lg mb-5"></div>
+
+        <div class="grid grid-cols-1 gap-5 mb-5">
             <section class="panel">
                 <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
                     <div class="relative">
@@ -120,14 +128,31 @@
                     </div>
                 </div>
             </section>
-
-            <section class="panel">
-                <h2 class="text-xs text-zinc-500 uppercase tracking-wider mb-3">Verdicts</h2>
-                <div class="chart-shell-sm">
-                    <canvas id="invl-verdict-donut"></canvas>
-                </div>
-            </section>
         </div>
+
+        <section class="panel">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-5">
+                <div>
+                    <h2 class="section-title text-lg">Verdict Breakdown</h2>
+                    <p class="text-xs text-zinc-500 mt-1 max-w-md">Click a slice or a row to filter the ledger above by verdict.</p>
+                </div>
+                <button type="button" id="invl-verdict-clear" class="term-btn term-btn-sm" hidden>Clear filter</button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 items-center">
+                <div class="invl-donut-wrap">
+                    <canvas id="invl-verdict-donut"></canvas>
+                    <div class="invl-donut-center">
+                        <span id="invl-donut-total" class="invl-donut-total-value">…</span>
+                        <span class="invl-donut-total-label">tracked</span>
+                    </div>
+                </div>
+                <div id="invl-verdict-legend" class="invl-verdict-legend">
+                    <div class="skeleton h-10 my-1"></div>
+                    <div class="skeleton h-10 my-1"></div>
+                    <div class="skeleton h-10 my-1"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script type="module" src="assets/nav.js"></script>

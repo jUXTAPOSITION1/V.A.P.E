@@ -420,7 +420,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
    the chart already shows sighted users. */
 .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; border: 0;
 }
 
 .secdash-lanes-headline { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
@@ -457,7 +457,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .secdash-lanes-detail-title { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: #e4e4e7; margin-bottom: 0.3rem; }
 .secdash-lanes-detail-title span:nth-child(2) { flex: 1; min-width: 0; }
-.secdash-lanes-detail-close { color: #71717a; cursor: pointer; font-size: 10px; }
+.secdash-lanes-detail-close { color: #71717a; cursor: pointer; font-size: 10px; background: none; border: none; padding: 0; font-family: inherit; }
 .secdash-lanes-detail-close:hover { color: #e4e4e7; }
 .secdash-lanes-detail-body { color: #a1a1aa; }
 
@@ -1083,6 +1083,67 @@ a { transition: color .15s; }
 .invl-spark { display: inline-flex; align-items: flex-end; gap: 2px; height: 22px; }
 .invl-spark-bar { width: 5px; background: rgba(255, 255, 255, 0.18); border-radius: 1px 1px 0 0; }
 .invl-spark-bar.is-latest { background: #d4d4d8; }
+/* Larger standalone sparkline (own row, not squeezed into a stat pill) used
+   by both this page's own "Activity" strip and the main-site preview —
+   renderSparkline()/wireSparkRangeToggle() in investigations-ledger.js are
+   shared between the two, so this is literally the same chart, just given
+   more room here. */
+.invl-spark-lg { height: 64px; gap: 3px; width: 100%; }
+.invl-spark-lg .invl-spark-bar { width: 7px; flex: 1 1 auto; max-width: 14px; }
+
+.invl-range-toggle { display: inline-flex; gap: 2px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 999px; padding: 2px; }
+.invl-range-btn {
+    font-size: 10.5px; padding: 0.25rem 0.65rem; border-radius: 999px; color: #a1a1aa;
+    background: none; border: none; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease;
+}
+.invl-range-btn:hover { color: #e4e4e7; }
+.invl-range-btn.is-active { background: rgba(255, 255, 255, 0.1); color: #f4f4f5; }
+
+/* Verdict Breakdown donut — real 2D proportions underneath (Chart.js draws
+   the arcs; nothing here reweights a slice), styled with a shallow CSS 3D
+   tilt + ambient shadow + a soft highlight for a beveled "instrument" look
+   instead of the flat, tiny side-panel version this replaced. The tilt is a
+   uniform perspective transform of the whole chart, not a per-slice
+   expansion the way a fake-3D pie distorts area — angles stay honest. */
+.invl-donut-wrap {
+    position: relative; width: 100%; max-width: 260px; height: 260px; margin: 0 auto;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.5));
+    transform: perspective(700px) rotateX(6deg);
+    transition: transform 0.25s ease;
+}
+.invl-donut-wrap:hover { transform: perspective(700px) rotateX(2deg) scale(1.02); }
+.invl-donut-wrap::before {
+    content: ''; position: absolute; inset: -16px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.1), transparent 60%);
+}
+.invl-donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+.invl-donut-total-value { font-size: 1.75rem; font-family: var(--font-mono); color: #f4f4f5; font-weight: 700; line-height: 1.1; }
+.invl-donut-total-label { font-size: 9.5px; color: #71717a; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+@media (max-width: 640px) {
+    .invl-donut-wrap, .invl-donut-wrap:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .invl-donut-wrap { transition: none; }
+    .invl-donut-wrap:hover { transform: perspective(700px) rotateX(6deg); }
+}
+
+/* Each row is a real per-verdict data readout (count, share, average
+   score) AND a filter control — clicking it drives the same
+   this._verdictFilter the plain <select> above the ledger uses. */
+.invl-verdict-legend { display: flex; flex-direction: column; gap: 0.45rem; }
+.invl-verdict-row {
+    display: flex; align-items: center; gap: 0.65rem; width: 100%; text-align: left; font-size: 12px;
+    padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.invl-verdict-row.is-static { cursor: default; }
+.invl-verdict-row:not(.is-static):hover { border-color: rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.045); }
+.invl-verdict-row.is-active { border-color: rgba(148, 163, 250, 0.4); background: rgba(148, 163, 250, 0.08); }
+.invl-verdict-row-dot { width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0; }
+.invl-verdict-row-label { color: #e4e4e7; flex: 1 1 auto; min-width: 0; }
+.invl-verdict-row-count { font-family: var(--font-mono); color: #f4f4f5; font-variant-numeric: tabular-nums; }
+.invl-verdict-row-pct { font-family: var(--font-mono); color: #71717a; width: 3.4em; text-align: right; flex-shrink: 0; }
+.invl-verdict-row-avg { font-family: var(--font-mono); color: #71717a; font-size: 10.5px; flex-shrink: 0; width: 5.5em; text-align: right; }
 
 /* Full-report popup — same .popover/.fixed backdrop convention app.js's
    openProtocolReport() established, sized larger since a full markdown

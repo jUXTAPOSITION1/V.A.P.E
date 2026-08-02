@@ -440,10 +440,12 @@ const SecurityDashboard = {
             const a1 = a0 + arcSpan;
             const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
             const isAlert = status === 'fail';
+            const arcLabel = `${l.label || l.id} — ${this._laneStatusTitle(status)} · ${when}${l.headline ? ' — ' + l.headline : ''}`;
             svg += `<path class="secdash-ring-arc${isAlert ? ' is-alert' : ''}" data-idx="${i}"
+                tabindex="0" role="button" aria-label="${escapeHtml(arcLabel)}"
                 d="${arcPath(R, a0, a1)}" fill="none" stroke="${color}" stroke-width="${thickness}" stroke-linecap="round"
                 ${isAlert ? 'filter="url(#secdash-ring-glow)"' : ''}>
-                <title>${escapeHtml(l.label || l.id)} — ${escapeHtml(this._laneStatusTitle(status))} · ${escapeHtml(when)}${l.headline ? ' — ' + escapeHtml(l.headline) : ''}</title>
+                <title>${escapeHtml(arcLabel)}</title>
             </path>`;
         });
 
@@ -455,6 +457,9 @@ const SecurityDashboard = {
         container.querySelectorAll('.secdash-ring-arc').forEach(arc => {
             const idx = Number(arc.dataset.idx);
             arc.addEventListener('click', () => this._toggleLaneDetail(idx));
+            arc.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._toggleLaneDetail(idx); }
+            });
         });
     },
 
@@ -481,7 +486,7 @@ const SecurityDashboard = {
             <div class="secdash-lanes-detail-title">
                 ${statusBadge(this._laneStatusTitle(status), color, icon)}
                 <span>${escapeHtml(lane.label || lane.id)}</span>
-                <span class="secdash-lanes-detail-close" data-close>Close ✕</span>
+                <button type="button" class="secdash-lanes-detail-close" data-close aria-label="Close lane detail">Close ✕</button>
             </div>
             <div class="secdash-lanes-detail-body">${escapeHtml(lane.headline || 'No headline this cycle.')} · ${escapeHtml(when)}</div>
         `;
