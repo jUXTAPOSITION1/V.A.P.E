@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T10:04:09Z",
+  "generated": "2026-08-02T10:12:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 504,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 140,
-    "investigations": 652,
+    "investigations": 653,
     "news": 48,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-085654-0x004a487d.md",
-      "title": "Investigation \u2014 AIPF",
-      "symbol": "AIPF",
-      "name": "AI Powered Fiinance",
-      "date": "2026-08-02T08:56:54Z",
-      "target": "0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260802-101205-0x2940446b.md",
+      "title": "Investigation \u2014 NVIDIAPLUS",
+      "symbol": "NVIDIAPLUS",
+      "name": "nvidiaplus",
+      "date": "2026-08-02T10:12:05Z",
+      "target": "0x2940446b9612Df1b73CEF7Df1B5A98192368D15A",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "37",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AS (0xfb1561214348ee8D8198C06ea0D21232872cDEFd) \u2014 REJECT 27/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-085654-0x004a487d.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,847 (rug/illiquid); [-10] Low liquid",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-101205-0x2940446b.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-101205-0x2940446b.md",
+      "title": "Investigation \u2014 NVIDIAPLUS",
+      "symbol": "NVIDIAPLUS",
+      "name": "nvidiaplus",
+      "date": "2026-08-02T10:12:05Z",
+      "target": "0x2940446b9612Df1b73CEF7Df1B5A98192368D15A",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (6) \u2014 thin, easily manipulated distribution; [-15] Top 6 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2,847 (rug/illiquid); [-10] Low liquid",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-101205-0x2940446b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-085654-0x004a487d.md",
@@ -594,20 +608,6 @@
       "score": "0",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104559-0x454777B9.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-104540-0x7F42440C.md",
-      "title": "Investigation \u2014 ClankerToken",
-      "symbol": "ClankerToken",
-      "name": null,
-      "date": "2026-08-01T10:45:40Z",
-      "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "2",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: OpenAI (0x006b340bEE30F8425cf65f064712F57B2BC0bB07) \u2014 REJECT 0/100 \u2014 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104540-0x7F42440C.md"
     }
   ],
   "reports": [

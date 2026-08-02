@@ -1105,3 +1105,5 @@
 | 2026-08-02 | auto | 0xa049d66F7Aee24eCc4Cb6De75FAaCb55F0574444 (MEMES) | deep_investigation | REJECT (29/100) | Same deployer has a prior CAUTION/REJECT verdict on record: MarsCoin (0x1706f1e0 | +7d |
 
 | 2026-08-02 | auto | 0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60 (AIPF) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-02 | auto | 0x2940446b9612Df1b73CEF7Df1B5A98192368D15A (NVIDIAPLUS) | deep_investigation | REJECT (0/100) | Very few holders (6) — thin, easily manipulated distribution | +7d |

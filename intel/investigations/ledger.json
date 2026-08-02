@@ -1558,6 +1558,25 @@
     "symbol": "HLX",
     "times_investigated": 1
   },
+  "1:0x2940446b9612df1b73cef7df1b5a98192368d15a": {
+    "address": "0x2940446b9612Df1b73CEF7Df1B5A98192368D15A",
+    "chain": "1",
+    "creator_address": "0x1e3add1956238d739353b5f7949d7b21ef6efcb0",
+    "first_investigated": "2026-08-02T10:12:05Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-101205-0x2940446b.md",
+        "score": 0,
+        "ts": "2026-08-02T10:12:05Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T10:12:05Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "NVIDIAPLUS",
+    "times_investigated": 1
+  },
   "1:0x2a168c00310451e7024e1149a433c796c72d515d": {
     "address": "0x2A168c00310451E7024E1149A433c796c72d515D",
     "chain": "1",
