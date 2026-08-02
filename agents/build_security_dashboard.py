@@ -179,9 +179,12 @@ def _within_days(entry, days, now=None):
 def build_findings_summary(entries):
     """findings_by_severity (all-time), findings_by_verdict (all-time, from
     metadata.verdict specifically -- the reference dashboard's "Findings per
-    Status" analog), and a real weekly findings_timeline re-bucketed from
-    every entry's own timestamp -- genuinely backfillable today, not
-    fabricated history."""
+    Status" analog), and a real daily findings_timeline re-bucketed from
+    every entry's own timestamp -- genuinely backfillable today (this repo's
+    findings.jsonl already spans ~30 real days), not fabricated history.
+    Day (not ISO week) buckets give the Signal Timeline chart enough real
+    points to render a genuine per-day marker series rather than a handful
+    of flat weekly bars."""
     by_severity = {s: 0 for s in SEVERITIES}
     by_verdict = {"PROCEED": 0, "CAUTION": 0, "REJECT": 0}
     timeline = {}
@@ -193,14 +196,43 @@ def build_findings_summary(entries):
             by_verdict[verdict.strip().upper()] += 1
         ts = _parse_ts(e.get("timestamp"))
         if ts is not None:
-            week = f"{ts.isocalendar().year}-W{ts.isocalendar().week:02d}"
-            bucket = timeline.setdefault(week, {s: 0 for s in SEVERITIES})
+            day = ts.date().isoformat()
+            bucket = timeline.setdefault(day, {s: 0 for s in SEVERITIES})
             bucket[normalize_severity(e)] += 1
     findings_timeline = [
         {"period": period, "total": sum(counts.values()), **counts}
         for period, counts in sorted(timeline.items())
     ]
     return by_severity, by_verdict, findings_timeline
+
+
+def build_findings_recent(entries, limit=150):
+    """The most recent real findings, newest first -- backs the Findings
+    Ledger table. Every field here is a real value already present on the
+    entry (or a value normalize_severity()/the entry's own metadata already
+    derives elsewhere in this file); nothing here is synthesized. Entries
+    with no parseable timestamp are excluded (there's no honest position to
+    place them at in a newest-first ledger), same standard _within_days()
+    already applies to the lane calculations above."""
+    dated = []
+    for e in entries:
+        ts = _parse_ts(e.get("timestamp"))
+        if ts is None:
+            continue
+        metadata = e.get("metadata") if isinstance(e.get("metadata"), dict) else {}
+        tags = e.get("tags") if isinstance(e.get("tags"), list) else []
+        dated.append((ts, {
+            "id": e.get("id"),
+            "timestamp": e.get("timestamp"),
+            "title": e.get("title"),
+            "source": e.get("source"),
+            "severity": normalize_severity(e),
+            "verdict": metadata.get("verdict"),
+            "tags": tags,
+            "report": metadata.get("report"),
+        }))
+    dated.sort(key=lambda pair: pair[0], reverse=True)
+    return [row for _ts, row in dated[:limit]]
 
 
 def _lane_from_workflow_run(gh, workflow_file):
@@ -285,6 +317,7 @@ def build():
 
     gh = GitHubMCPWrapper()
     findings_by_severity, findings_by_verdict, findings_timeline = build_findings_summary(findings)
+    findings_recent = build_findings_recent(findings)
     seal_status = findings_chain.verify()
     lanes = build_lanes(gh, findings, attack_feed)
 
@@ -294,6 +327,7 @@ def build():
         "findings_by_severity": findings_by_severity,
         "findings_by_verdict": findings_by_verdict,
         "findings_timeline": findings_timeline,
+        "findings_recent": findings_recent,
         "ledger_integrity": {
             "chain_intact": seal_status.get("ok"),
             "seals_checked": seal_status.get("seals_checked"),
