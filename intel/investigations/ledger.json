@@ -5502,6 +5502,25 @@
     "symbol": "LUCKY",
     "times_investigated": 1
   },
+  "56:0x69f7d2b86470d3288d038da95b4c194053427777": {
+    "address": "0x69f7d2B86470D3288D038da95B4c194053427777",
+    "chain": "56",
+    "creator_address": "0x9794433fa10ee200a4f52f9c6e2f81fefb9d0e1f",
+    "first_investigated": "2026-08-02T12:14:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-121423-0x69f7d2B8.md",
+        "score": 0,
+        "ts": "2026-08-02T12:14:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T12:14:23Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "BLESS",
+    "times_investigated": 1
+  },
   "56:0x6c1dd3308e495889eea9485ee8393117adac7185": {
     "address": "0x6C1dd3308e495889eEa9485EE8393117adac7185",
     "chain": "56",
