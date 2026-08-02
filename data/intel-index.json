@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T08:26:52Z",
+  "generated": "2026-08-02T08:33:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 502,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 139,
     "investigations": 651,
-    "news": 47,
+    "news": 48,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-ex-cons-and-conspiracy-theorists-hawk-million-dollar-exploit.md",
+      "title": "Ex-Cons and Conspiracy Theorists Hawk Million-Dollar Exploits in Murky Cybersecurity Venture",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T08:33:43Z",
+      "published_et": "August 2, 2026 \u00b7 4:33 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "As IRIS C2 promises top dollar for zero-day vulnerabilities, experts warn of potential national security risks and question the true intentions of its convicted felon founders, who have a history of fake intelligence companies and dubious lobbying efforts.",
+      "image": "assets/news-images/ex-cons-and-conspiracy-theorists-hawk-million-dollar-exploit.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-ex-cons-and-conspiracy-theorists-hawk-million-dollar-exploit.md"
+    },
     {
       "file": "news-2026-08-02-silent-hijack-lg-moves-to-purge-rent-a-tv-proxy-sdks-from-we.md",
       "title": "SILENT HIJACK: LG moves to purge rent-a-TV proxy SDKs from webOS store",

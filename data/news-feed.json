@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T02:44:35Z",
+  "generated": "2026-08-02T08:32:26Z",
   "count": 60,
   "headlines": [
     {
@@ -72,6 +72,14 @@
       "source": "Krebs on Security",
       "published": "Thu, 02 Jul 2026 19:27:33 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Coldcard hack sparks biggest sub-1 BTC move since FTX: CryptoQuant",
+      "url": "https://cointelegraph.com/news/coldcard-biggest-sub-1-btc-transfer-ftx-cryptoquant?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sun, 02 Aug 2026 08:04:56 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -383,14 +391,6 @@
       "url": "https://cointelegraph.com/news/coldcard-bitcoin-loss-estimate-70-million-galaxy-analysis?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Sat, 01 Aug 2026 09:23:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin ETFs end July in the green despite late-month selling",
-      "url": "https://cointelegraph.com/markets/bitcoin-etfs-july-green-despite-late-month-selling?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sat, 01 Aug 2026 07:23:07 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
