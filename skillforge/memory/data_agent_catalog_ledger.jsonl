@@ -493,3 +493,4 @@
 {"ts": "2026-08-02T18:14:49.585279Z", "target": "bybit", "hired": ["protocol_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
 {"ts": "2026-08-02T18:29:53.529067Z", "target": "none", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
 {"ts": "2026-08-02T18:45:18.860792Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-02T19:00:14.190334Z", "target": "base", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
