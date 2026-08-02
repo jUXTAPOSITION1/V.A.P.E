@@ -1095,3 +1095,5 @@
 | 2026-08-01 | auto | 0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7 (SHIB) | deep_investigation | PROCEED (85/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-08-02 | auto | 0x8E9AdB904824fDfBEc1a5f15c4146a23dc3453EF (IDOLL) | deep_investigation | REJECT (0/100) | Owner not renounced (0x18b7d3602142ca5942a13f790fbcbb407e3e1176) — can still act | +7d |
+
+| 2026-08-02 | auto | 0xF74548802f4c700315F019FdE17178b392EE4444 (memes) | deep_investigation | PROCEED (92/100) | Top 9 non-LP/burn holders control 69% of supply — meaningful concentration | +7d |

@@ -6640,6 +6640,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0xf74548802f4c700315f019fde17178b392ee4444": {
+    "address": "0xF74548802f4c700315F019FdE17178b392EE4444",
+    "chain": "56",
+    "creator_address": "0xf77011e5c66815fafed85b8b19e85e45611ed7a5",
+    "first_investigated": "2026-08-02T02:27:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-022726-0xF7454880.md",
+        "score": 92,
+        "ts": "2026-08-02T02:27:26Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-02T02:27:26Z",
+    "last_score": 92,
+    "last_verdict": "PROCEED",
+    "symbol": "memes",
+    "times_investigated": 1
+  },
   "56:0xfb4ea38d713afbb3ed35869b790aec3ca53b0000": {
     "address": "0xFB4EA38d713afBb3eD35869B790aec3CA53B0000",
     "chain": "56",

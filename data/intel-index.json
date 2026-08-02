@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T02:12:10Z",
+  "generated": "2026-08-02T02:27:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 497,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 138,
-    "investigations": 647,
+    "investigations": 648,
     "news": 46,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-005723-0x8E9AdB90.md",
-      "title": "Investigation \u2014 IDOLL",
-      "symbol": "IDOLL",
-      "name": "Independent Dollar",
-      "date": "2026-08-02T00:57:23Z",
-      "target": "0x8E9AdB904824fDfBEc1a5f15c4146a23dc3453EF",
+      "file": "investigation-20260802-022726-0xF7454880.md",
+      "title": "Investigation \u2014 memes",
+      "symbol": "memes",
+      "name": "memes will continue",
+      "date": "2026-08-02T02:27:26Z",
+      "target": "0xF74548802f4c700315F019FdE17178b392EE4444",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-10] Owner not renounced (0x18b7d3602142ca5942a13f790fbcbb407e3e1176) \u2014 can still act on the contract; [-20] Very few holders (49) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-005723-0x8E9AdB90.md"
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration. Positive evidence: Ownership renounced; 24381 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 193+ days without a known incident in this scan; Custom verified source (not a mass-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-022726-0xF7454880.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-022726-0xF7454880.md",
+      "title": "Investigation \u2014 memes",
+      "symbol": "memes",
+      "name": "memes will continue",
+      "date": "2026-08-02T02:27:26Z",
+      "target": "0xF74548802f4c700315F019FdE17178b392EE4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "92",
+      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration. Positive evidence: Ownership renounced; 24381 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 193+ days without a known incident in this scan; Custom verified source (not a mass-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-022726-0xF7454880.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-005723-0x8E9AdB90.md",
@@ -594,20 +608,6 @@
       "score": "30",
       "summary": "Risk factors: [-20] Hidden owner; [-15] Top 9 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,620 (rug/illiquid); [-10] Low liquidity $4,620. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 488+ days without a",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-074914-0x30277ce8.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-073359-0x44444e31.md",
-      "title": "Investigation \u2014 CHEESE",
-      "symbol": "CHEESE",
-      "name": "Cheesed Pepe",
-      "date": "2026-08-01T07:33:59Z",
-      "target": "0x44444e3196faeF2FBe917622202CdD2dcCcB021B",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 72% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,049. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 794+ days without a known incident in this scan; Custom verified source (not a mass-p",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-073359-0x44444e31.md"
     }
   ],
   "reports": [
