@@ -386,3 +386,4 @@
 {"ts": "2026-08-02T14:44:37.533802Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-02T15:14:49.766420Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-02T15:44:55.398165Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-02T16:29:37.796895Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0}
