@@ -1,70 +1,2506 @@
 {
-  "generated_at": "2026-08-01T21:29:26Z",
+  "generated_at": "2026-08-02T03:00:00Z",
   "overall_threat_level": "HIGH",
   "findings_by_severity": {
     "CRITICAL": 1,
-    "HIGH": 314,
-    "MEDIUM": 211,
+    "HIGH": 315,
+    "MEDIUM": 213,
     "LOW": 17,
-    "INFO": 812
+    "INFO": 821
   },
   "findings_by_verdict": {
-    "PROCEED": 85,
-    "CAUTION": 147,
-    "REJECT": 305
+    "PROCEED": 87,
+    "CAUTION": 149,
+    "REJECT": 306
   },
   "findings_timeline": [
     {
-      "period": "2026-W27",
-      "total": 64,
+      "period": "2026-07-01",
+      "total": 7,
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 2,
+      "LOW": 0,
+      "INFO": 5
+    },
+    {
+      "period": "2026-07-02",
+      "total": 14,
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 1,
+      "LOW": 0,
+      "INFO": 13
+    },
+    {
+      "period": "2026-07-03",
+      "total": 10,
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 10
+    },
+    {
+      "period": "2026-07-04",
+      "total": 17,
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 2,
+      "LOW": 0,
+      "INFO": 13
+    },
+    {
+      "period": "2026-07-05",
+      "total": 16,
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 14
+    },
+    {
+      "period": "2026-07-06",
+      "total": 16,
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 14
+    },
+    {
+      "period": "2026-07-07",
+      "total": 35,
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 7,
+      "LOW": 0,
+      "INFO": 26
+    },
+    {
+      "period": "2026-07-08",
+      "total": 29,
+      "CRITICAL": 1,
+      "HIGH": 5,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 23
+    },
+    {
+      "period": "2026-07-09",
+      "total": 19,
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 19
+    },
+    {
+      "period": "2026-07-10",
+      "total": 23,
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 21
+    },
+    {
+      "period": "2026-07-11",
+      "total": 36,
+      "CRITICAL": 0,
+      "HIGH": 5,
+      "MEDIUM": 2,
+      "LOW": 0,
+      "INFO": 29
+    },
+    {
+      "period": "2026-07-12",
+      "total": 29,
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 1,
+      "LOW": 0,
+      "INFO": 28
+    },
+    {
+      "period": "2026-07-13",
+      "total": 40,
+      "CRITICAL": 0,
+      "HIGH": 9,
+      "MEDIUM": 4,
+      "LOW": 0,
+      "INFO": 27
+    },
+    {
+      "period": "2026-07-14",
+      "total": 28,
       "CRITICAL": 0,
       "HIGH": 4,
+      "MEDIUM": 3,
+      "LOW": 0,
+      "INFO": 21
+    },
+    {
+      "period": "2026-07-15",
+      "total": 35,
+      "CRITICAL": 0,
+      "HIGH": 6,
+      "MEDIUM": 6,
+      "LOW": 1,
+      "INFO": 22
+    },
+    {
+      "period": "2026-07-16",
+      "total": 29,
+      "CRITICAL": 0,
+      "HIGH": 6,
+      "MEDIUM": 2,
+      "LOW": 1,
+      "INFO": 20
+    },
+    {
+      "period": "2026-07-17",
+      "total": 33,
+      "CRITICAL": 0,
+      "HIGH": 6,
+      "MEDIUM": 4,
+      "LOW": 0,
+      "INFO": 23
+    },
+    {
+      "period": "2026-07-18",
+      "total": 36,
+      "CRITICAL": 0,
+      "HIGH": 8,
       "MEDIUM": 5,
       "LOW": 0,
-      "INFO": 55
+      "INFO": 23
     },
     {
-      "period": "2026-W28",
-      "total": 187,
-      "CRITICAL": 1,
-      "HIGH": 16,
-      "MEDIUM": 10,
+      "period": "2026-07-19",
+      "total": 37,
+      "CRITICAL": 0,
+      "HIGH": 10,
+      "MEDIUM": 5,
+      "LOW": 1,
+      "INFO": 21
+    },
+    {
+      "period": "2026-07-20",
+      "total": 44,
+      "CRITICAL": 0,
+      "HIGH": 5,
+      "MEDIUM": 13,
       "LOW": 0,
-      "INFO": 160
+      "INFO": 26
     },
     {
-      "period": "2026-W29",
-      "total": 238,
+      "period": "2026-07-21",
+      "total": 40,
       "CRITICAL": 0,
-      "HIGH": 49,
-      "MEDIUM": 29,
-      "LOW": 3,
-      "INFO": 157
+      "HIGH": 3,
+      "MEDIUM": 7,
+      "LOW": 0,
+      "INFO": 30
     },
     {
-      "period": "2026-W30",
-      "total": 353,
+      "period": "2026-07-22",
+      "total": 41,
       "CRITICAL": 0,
-      "HIGH": 80,
-      "MEDIUM": 75,
-      "LOW": 5,
-      "INFO": 193
+      "HIGH": 9,
+      "MEDIUM": 7,
+      "LOW": 1,
+      "INFO": 24
     },
     {
-      "period": "2026-W31",
-      "total": 475,
+      "period": "2026-07-23",
+      "total": 40,
       "CRITICAL": 0,
-      "HIGH": 161,
-      "MEDIUM": 89,
-      "LOW": 8,
-      "INFO": 217
+      "HIGH": 3,
+      "MEDIUM": 9,
+      "LOW": 1,
+      "INFO": 27
+    },
+    {
+      "period": "2026-07-24",
+      "total": 39,
+      "CRITICAL": 0,
+      "HIGH": 6,
+      "MEDIUM": 6,
+      "LOW": 0,
+      "INFO": 27
+    },
+    {
+      "period": "2026-07-25",
+      "total": 59,
+      "CRITICAL": 0,
+      "HIGH": 16,
+      "MEDIUM": 14,
+      "LOW": 1,
+      "INFO": 28
+    },
+    {
+      "period": "2026-07-26",
+      "total": 90,
+      "CRITICAL": 0,
+      "HIGH": 38,
+      "MEDIUM": 19,
+      "LOW": 2,
+      "INFO": 31
+    },
+    {
+      "period": "2026-07-27",
+      "total": 69,
+      "CRITICAL": 0,
+      "HIGH": 19,
+      "MEDIUM": 19,
+      "LOW": 0,
+      "INFO": 31
+    },
+    {
+      "period": "2026-07-28",
+      "total": 85,
+      "CRITICAL": 0,
+      "HIGH": 30,
+      "MEDIUM": 14,
+      "LOW": 2,
+      "INFO": 39
+    },
+    {
+      "period": "2026-07-29",
+      "total": 82,
+      "CRITICAL": 0,
+      "HIGH": 34,
+      "MEDIUM": 13,
+      "LOW": 1,
+      "INFO": 34
+    },
+    {
+      "period": "2026-07-30",
+      "total": 81,
+      "CRITICAL": 0,
+      "HIGH": 27,
+      "MEDIUM": 15,
+      "LOW": 2,
+      "INFO": 37
+    },
+    {
+      "period": "2026-07-31",
+      "total": 73,
+      "CRITICAL": 0,
+      "HIGH": 27,
+      "MEDIUM": 7,
+      "LOW": 2,
+      "INFO": 37
+    },
+    {
+      "period": "2026-08-01",
+      "total": 90,
+      "CRITICAL": 0,
+      "HIGH": 24,
+      "MEDIUM": 22,
+      "LOW": 1,
+      "INFO": 43
+    },
+    {
+      "period": "2026-08-02",
+      "total": 7,
+      "CRITICAL": 0,
+      "HIGH": 1,
+      "MEDIUM": 1,
+      "LOW": 0,
+      "INFO": 5
+    }
+  ],
+  "findings_recent": [
+    {
+      "id": "07f95416af3c",
+      "timestamp": "2026-08-02T02:57:23.227507",
+      "title": "Investigation: MEMES (0xa291392E) \u2192 CAUTION 60/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "memes"
+      ],
+      "report": "intel/investigations/investigation-20260802-025723-0xa291392E.md"
+    },
+    {
+      "id": "9e79ed833ae7",
+      "timestamp": "2026-08-02T02:52:51.362734",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-02-02.md"
+    },
+    {
+      "id": "a4c4c109f76a",
+      "timestamp": "2026-08-02T02:45:36.318047",
+      "title": "news_reporter.py: Cybersecurity",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Cybersecurity",
+      "tags": [
+        "news-intel",
+        "cybersecurity",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-02-silent-hijack-lg-moves-to-purge-rent-a-tv-proxy-sdks-from-we.md"
+    },
+    {
+      "id": "3750c1441692",
+      "timestamp": "2026-08-02T02:27:26.288301",
+      "title": "Investigation: memes (0xF7454880) \u2192 PROCEED 92/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "bsc",
+        "proceed",
+        "memes"
+      ],
+      "report": "intel/investigations/investigation-20260802-022726-0xF7454880.md"
+    },
+    {
+      "id": "647a46443e12",
+      "timestamp": "2026-08-02T00:57:23.808994",
+      "title": "Investigation: IDOLL (0x8E9AdB90) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "idoll"
+      ],
+      "report": "intel/investigations/investigation-20260802-005723-0x8E9AdB90.md"
+    },
+    {
+      "id": "4871913e6be9",
+      "timestamp": "2026-08-02T00:37:00.303165",
+      "title": "news_reporter.py: Regulation",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Regulation",
+      "tags": [
+        "news-intel",
+        "regulation",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-02-sec-enforcement-shakeup-14-year-veteran-sam-waldon-steps-dow.md"
+    },
+    {
+      "id": "26949c850966",
+      "timestamp": "2026-08-02T00:05:53.086967",
+      "title": "Bounty-cycle analysis 20260802_000536 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "b20e0ee272a8",
+      "timestamp": "2026-08-01T23:42:34.958187",
+      "title": "Investigation: SHIB (0xFCa95aeb) \u2192 PROCEED 85/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "base",
+        "proceed",
+        "shib"
+      ],
+      "report": "intel/investigations/investigation-20260801-234234-0xFCa95aeb.md"
+    },
+    {
+      "id": "699e628dde7c",
+      "timestamp": "2026-08-01T23:01:13.917973",
+      "title": "Bounty-cycle analysis 20260801_230003 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "f6d9baae5afd",
+      "timestamp": "2026-08-01T22:12:36.676332",
+      "title": "Investigation: BSWAP (0x78a087d7) \u2192 CAUTION 53/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "base",
+        "caution",
+        "bswap"
+      ],
+      "report": "intel/investigations/investigation-20260801-221236-0x78a087d7.md"
+    },
+    {
+      "id": "a95d4145623a",
+      "timestamp": "2026-08-01T21:58:24.075753",
+      "title": "Bounty-cycle analysis 20260801_215737 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "70489bcfc331",
+      "timestamp": "2026-08-01T21:46:13.714957",
+      "title": "base_sweep.py: 5.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "5.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-08-01-21.md"
+    },
+    {
+      "id": "c9d529e89a3f",
+      "timestamp": "2026-08-01T21:01:57.779996",
+      "title": "sentiment_sweep.py: Fear / Bearish-leaning",
+      "source": "agents/sentiment_sweep.py",
+      "severity": "INFO",
+      "verdict": "Fear / Bearish-leaning",
+      "tags": [
+        "sentiment",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/sentiment-2026-08-01-21.md"
+    },
+    {
+      "id": "c5b58c2268a5",
+      "timestamp": "2026-08-01T20:42:28.101371",
+      "title": "Investigation: Claude (0xC4e9A27D) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "claude"
+      ],
+      "report": "intel/investigations/investigation-20260801-204228-0xC4e9A27D.md"
+    },
+    {
+      "id": "2843db1863d6",
+      "timestamp": "2026-08-01T20:27:25.108441",
+      "title": "Investigation: IDOL (0xCD743f1a) \u2192 REJECT 40/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "idol"
+      ],
+      "report": "intel/investigations/investigation-20260801-202725-0xCD743f1a.md"
+    },
+    {
+      "id": "9e1b92baee3a",
+      "timestamp": "2026-08-01T20:12:10.454810",
+      "title": "Investigation: OVPP (0x8C0d3ADC) \u2192 PROCEED 85/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "base",
+        "proceed",
+        "ovpp"
+      ],
+      "report": "intel/investigations/investigation-20260801-201210-0x8C0d3ADC.md"
+    },
+    {
+      "id": "c40be552bfb9",
+      "timestamp": "2026-08-01T20:11:07.149305",
+      "title": "Bounty-cycle analysis 20260801_201023 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "653259a8bb62",
+      "timestamp": "2026-08-01T19:41:23.680662",
+      "title": "Community broadcast 2026-08-01-19",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "7f1232f72ad7",
+      "timestamp": "2026-08-01T19:09:34.706842",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-19.md"
+    },
+    {
+      "id": "a8f1da35f3f6",
+      "timestamp": "2026-08-01T19:08:33.924805",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-centralization-crisis-deepens-as-japanese-mining-giant-sbi-c.md"
+    },
+    {
+      "id": "86c0436dd775",
+      "timestamp": "2026-08-01T18:26:37.510836",
+      "title": "Investigation: AIPF (0xE5D66322) \u2192 CAUTION 62/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "caution",
+        "aipf"
+      ],
+      "report": "intel/investigations/investigation-20260801-182637-0xE5D66322.md"
+    },
+    {
+      "id": "34919282b282",
+      "timestamp": "2026-08-01T18:19:51.474629",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-18.md"
+    },
+    {
+      "id": "3a2e2fe88969",
+      "timestamp": "2026-08-01T18:11:10.271342",
+      "title": "Investigation: JEJEG (0x60dE974a) \u2192 REJECT 40/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "jejeg"
+      ],
+      "report": "intel/investigations/investigation-20260801-181110-0x60dE974a.md"
+    },
+    {
+      "id": "875aae5b5a74",
+      "timestamp": "2026-08-01T18:02:26.305323",
+      "title": "Bounty-cycle analysis 20260801_180208 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "5ca94b188263",
+      "timestamp": "2026-08-01T17:55:42.001242",
+      "title": "Investigation: CTM (0x080272BB) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "ctm"
+      ],
+      "report": "intel/investigations/investigation-20260801-175541-0x080272BB.md"
+    },
+    {
+      "id": "acf300896920",
+      "timestamp": "2026-08-01T17:40:34.469381",
+      "title": "Investigation: ZAMA (0xC0999aC3) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "zama"
+      ],
+      "report": "intel/investigations/investigation-20260801-174034-0xC0999aC3.md"
+    },
+    {
+      "id": "4345e70c004d",
+      "timestamp": "2026-08-01T17:25:12.731169",
+      "title": "Investigation: ZAMA (0x23104dcb) \u2192 REJECT 23/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "zama"
+      ],
+      "report": "intel/investigations/investigation-20260801-172512-0x23104dcb.md"
+    },
+    {
+      "id": "2b2e3fd75831",
+      "timestamp": "2026-08-01T17:10:14.889325",
+      "title": "Investigation: AAVE (0x7Fc66500) \u2192 CAUTION 69/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "aave"
+      ],
+      "report": "intel/investigations/investigation-20260801-171014-0x7Fc66500.md"
+    },
+    {
+      "id": "f52fd51c0ca1",
+      "timestamp": "2026-08-01T16:55:05.866739",
+      "title": "Investigation: VM888 (0x06257012) \u2192 PROCEED 80/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "eth",
+        "proceed",
+        "vm888"
+      ],
+      "report": "intel/investigations/investigation-20260801-165505-0x06257012.md"
+    },
+    {
+      "id": "d7743ce82ea9",
+      "timestamp": "2026-08-01T16:39:58.901622",
+      "title": "Investigation: EDM (0x0f9Cb629) \u2192 REJECT 35/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "edm"
+      ],
+      "report": "intel/investigations/investigation-20260801-163958-0x0f9Cb629.md"
+    },
+    {
+      "id": "31e587b1657f",
+      "timestamp": "2026-08-01T16:24:59.724584",
+      "title": "Investigation: SQLITESTUDIO (0xADFa1A1C) \u2192 REJECT 32/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "sqlitestudio"
+      ],
+      "report": "intel/investigations/investigation-20260801-162459-0xADFa1A1C.md"
+    },
+    {
+      "id": "44dababf3e0e",
+      "timestamp": "2026-08-01T16:09:54.719318",
+      "title": "Investigation: OpenAI (0x3Bf254aF) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "openai"
+      ],
+      "report": "intel/investigations/investigation-20260801-160954-0x3Bf254aF.md"
+    },
+    {
+      "id": "96355bf0a421",
+      "timestamp": "2026-08-01T16:01:58.444874",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-the-great-hashrate-retreat-bitcoin-mining-difficulty-slides-.md"
+    },
+    {
+      "id": "7a91d838e5f0",
+      "timestamp": "2026-08-01T15:54:43.090275",
+      "title": "Investigation: REDWOLF (0xAFc1D137) \u2192 CAUTION 50/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "avax",
+        "caution",
+        "redwolf"
+      ],
+      "report": "intel/investigations/investigation-20260801-155443-0xAFc1D137.md"
+    },
+    {
+      "id": "08a85f0cee99",
+      "timestamp": "2026-08-01T15:39:40.953467",
+      "title": "Investigation: PHARM (0x91a1C5a6) \u2192 REJECT 32/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "avax",
+        "reject",
+        "pharm"
+      ],
+      "report": "intel/investigations/investigation-20260801-153940-0x91a1C5a6.md"
+    },
+    {
+      "id": "87d6a4fb6f11",
+      "timestamp": "2026-08-01T15:24:19.431308",
+      "title": "Investigation: tRUSH (0x395Ded77) \u2192 REJECT 25/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "avax",
+        "reject",
+        "trush"
+      ],
+      "report": "intel/investigations/investigation-20260801-152419-0x395Ded77.md"
+    },
+    {
+      "id": "36deb92f2468",
+      "timestamp": "2026-08-01T15:07:25.224584",
+      "title": "macro_sweep.py: NEUTRAL",
+      "source": "agents/macro_sweep.py",
+      "severity": "INFO",
+      "verdict": "NEUTRAL",
+      "tags": [
+        "macro",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/macro-2026-08-01-15.md"
+    },
+    {
+      "id": "4897b07b224d",
+      "timestamp": "2026-08-01T14:52:56.634858",
+      "title": "Investigation: APEPE (0xA3f75166) \u2192 CAUTION 75/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "caution",
+        "apepe"
+      ],
+      "report": "intel/investigations/investigation-20260801-145256-0xA3f75166.md"
+    },
+    {
+      "id": "35b142481738",
+      "timestamp": "2026-08-01T14:37:30.055813",
+      "title": "Investigation: WMTX (0xE112Bc16) \u2192 REJECT 12/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "wmtx"
+      ],
+      "report": "intel/investigations/investigation-20260801-143730-0xE112Bc16.md"
+    },
+    {
+      "id": "028469375346",
+      "timestamp": "2026-08-01T14:27:51.695253",
+      "title": "Bounty-cycle analysis 20260801_142710 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "572843a0a1e4",
+      "timestamp": "2026-08-01T14:22:27.941601",
+      "title": "Investigation: WMTX (0x3e31966d) \u2192 CAUTION 58/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "base",
+        "caution",
+        "wmtx"
+      ],
+      "report": "intel/investigations/investigation-20260801-142227-0x3e31966d.md"
+    },
+    {
+      "id": "b56c0e65ccc5",
+      "timestamp": "2026-08-01T14:07:18.722495",
+      "title": "Investigation: WINR (0xD77B108d) \u2192 CAUTION 50/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "arbitrum",
+        "caution",
+        "winr"
+      ],
+      "report": "intel/investigations/investigation-20260801-140718-0xD77B108d.md"
+    },
+    {
+      "id": "3ba51db67646",
+      "timestamp": "2026-08-01T14:05:04.795587",
+      "title": "Community broadcast 2026-08-01-14",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-08-01T14:04:36.455419+00:00",
+      "title": "AI red-team (Builder): direct-blocked-construct-via-poisoned-memory \u2014 model complied, caught by validate_security",
+      "source": "agents/redteam_builder.py",
+      "severity": "LOW",
+      "verdict": null,
+      "tags": [
+        "ai-redteam",
+        "prompt-injection",
+        "vape-builder-pipeline",
+        "caught-by-backstop"
+      ],
+      "report": null
+    },
+    {
+      "id": "76008738a128",
+      "timestamp": "2026-08-01T13:52:03.088305",
+      "title": "Investigation: CTM (0xc8EF4398) \u2192 CAUTION 65/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "ctm"
+      ],
+      "report": "intel/investigations/investigation-20260801-135203-0xc8EF4398.md"
+    },
+    {
+      "id": "58bf7ed21b07",
+      "timestamp": "2026-08-01T13:36:48.747717",
+      "title": "Investigation: OFC (0xD14cEFca) \u2192 REJECT 20/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "ofc"
+      ],
+      "report": "intel/investigations/investigation-20260801-133648-0xD14cEFca.md"
+    },
+    {
+      "id": "ed047c638938",
+      "timestamp": "2026-08-01T13:23:43.747870",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-13.md"
+    },
+    {
+      "id": "9e158ac353b8",
+      "timestamp": "2026-08-01T13:20:54.541871",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-cme-bets-extended-hours-on-single-stock-futures-will-finally.md"
+    },
+    {
+      "id": "f91ed3061e47",
+      "timestamp": "2026-08-01T13:05:40.953044",
+      "title": "Investigation: OFC (0x752C5a95) \u2192 CAUTION 52/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "base",
+        "caution",
+        "ofc"
+      ],
+      "report": "intel/investigations/investigation-20260801-130540-0x752C5a95.md"
+    },
+    {
+      "id": "26f2b29096ef",
+      "timestamp": "2026-08-01T12:50:28.573463",
+      "title": "Investigation: IDOL (0x3B4de3c7) \u2192 CAUTION 70/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "idol"
+      ],
+      "report": "intel/investigations/investigation-20260801-125028-0x3B4de3c7.md"
+    },
+    {
+      "id": "61e2f6466862",
+      "timestamp": "2026-08-01T12:35:29.299455",
+      "title": "Investigation: ASTEROID (0x444400cA) \u2192 CAUTION 75/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-123529-0x444400cA.md"
+    },
+    {
+      "id": "fdd45f25b617",
+      "timestamp": "2026-08-01T12:20:26.969823",
+      "title": "Investigation: ASTEROID (0x4BABA631) \u2192 CAUTION 75/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-122026-0x4BABA631.md"
+    },
+    {
+      "id": "61698fd5e993",
+      "timestamp": "2026-08-01T12:05:15.879322",
+      "title": "Investigation: ASTEROID (0x8FD3437A) \u2192 REJECT 45/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-120515-0x8FD3437A.md"
+    },
+    {
+      "id": "0bdbb11c58c3",
+      "timestamp": "2026-08-01T12:03:59.680036",
+      "title": "Bounty-cycle analysis 20260801_120319 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "037c3de34837",
+      "timestamp": "2026-08-01T11:05:29.237573",
+      "title": "Investigation: ASTEROID (0x020D6c73) \u2192 CAUTION 75/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-110529-0x020D6c73.md"
+    },
+    {
+      "id": "f4afbf0e57ac",
+      "timestamp": "2026-08-01T10:46:38.074237",
+      "title": "Investigation: Clanker(0x28CE689E) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "clankertoken"
+      ],
+      "report": "intel/investigations/investigation-20260801-104638-0x28CE689E.md"
+    },
+    {
+      "id": "abdfcc7bcbbf",
+      "timestamp": "2026-08-01T10:46:18.687850",
+      "title": "Investigation: Clanker(0x006b340b) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "clankertoken"
+      ],
+      "report": "intel/investigations/investigation-20260801-104618-0x006b340b.md"
+    },
+    {
+      "id": "e0877c38db0b",
+      "timestamp": "2026-08-01T10:45:59.825118",
+      "title": "Investigation: OpenAI (0x454777B9) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "openai"
+      ],
+      "report": "intel/investigations/investigation-20260801-104559-0x454777B9.md"
+    },
+    {
+      "id": "384fe3856647",
+      "timestamp": "2026-08-01T10:45:40.135400",
+      "title": "Investigation: Clanker(0x7F42440C) \u2192 REJECT 2/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "clankertoken"
+      ],
+      "report": "intel/investigations/investigation-20260801-104540-0x7F42440C.md"
+    },
+    {
+      "id": "6fb645f7854e",
+      "timestamp": "2026-08-01T10:45:18.631235",
+      "title": "Investigation: Clanker(0x30EC37E2) \u2192 REJECT 2/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "clankertoken"
+      ],
+      "report": "intel/investigations/investigation-20260801-104518-0x30EC37E2.md"
+    },
+    {
+      "id": "266daa5d9cca",
+      "timestamp": "2026-08-01T10:41:48.493031",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-russia-s-energy-crunch-claims-moscow-s-crypto-miners-in-seve.md"
+    },
+    {
+      "id": "25b8f2129f55",
+      "timestamp": "2026-08-01T10:28:05.526684",
+      "title": "base_sweep.py: 5.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "5.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-08-01-10.md"
+    },
+    {
+      "id": "852885a2a7ad",
+      "timestamp": "2026-08-01T10:06:01.403413",
+      "title": "sentiment_sweep.py: Fear / Bearish-leaning",
+      "source": "agents/sentiment_sweep.py",
+      "severity": "INFO",
+      "verdict": "Fear / Bearish-leaning",
+      "tags": [
+        "sentiment",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/sentiment-2026-08-01-10.md"
+    },
+    {
+      "id": "f65395f7468c",
+      "timestamp": "2026-08-01T09:04:29.264771",
+      "title": "Investigation: ASTEROID (0x248918D6) \u2192 CAUTION 62/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-090429-0x248918D6.md"
+    },
+    {
+      "id": "66e89160445b",
+      "timestamp": "2026-08-01T08:38:41.029200",
+      "title": "Community broadcast 2026-08-01-08",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "98ac4b00853a",
+      "timestamp": "2026-08-01T08:26:21.418317",
+      "title": "Bounty-cycle analysis 20260801_082524 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "1bed9fee4c9d",
+      "timestamp": "2026-08-01T08:23:05.140476",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-08.md"
+    },
+    {
+      "id": "fe9baca6736c",
+      "timestamp": "2026-08-01T08:21:43.898817",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-altcoin-and-layer-2-pivots-fail-to-shield-coinbase-from-a-35.md"
+    },
+    {
+      "id": "298ff39c2b73",
+      "timestamp": "2026-08-01T08:04:30.018648",
+      "title": "Investigation: CHEESE (0xA04bDB1f) \u2192 REJECT 17/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "cheese"
+      ],
+      "report": "intel/investigations/investigation-20260801-080430-0xA04bDB1f.md"
+    },
+    {
+      "id": "e7c2c635e8ea",
+      "timestamp": "2026-08-01T07:49:14.399177",
+      "title": "Investigation: CHEESE (0x30277ce8) \u2192 REJECT 30/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "cheese"
+      ],
+      "report": "intel/investigations/investigation-20260801-074914-0x30277ce8.md"
+    },
+    {
+      "id": "5f9f2843b598",
+      "timestamp": "2026-08-01T07:48:11.897038",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-bitcoin-etfs-rebound-with-modest-172m-july-inflow-after-reco.md"
+    },
+    {
+      "id": "0d0e3d68b0a1",
+      "timestamp": "2026-08-01T07:33:59.331905",
+      "title": "Investigation: CHEESE (0x44444e31) \u2192 CAUTION 75/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "cheese"
+      ],
+      "report": "intel/investigations/investigation-20260801-073359-0x44444e31.md"
+    },
+    {
+      "id": "5fe9f60cb4d5",
+      "timestamp": "2026-08-01T07:25:45.046022",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-second-time-s-the-charm-xrp-ledger-risks-reintroducing-featu.md"
+    },
+    {
+      "id": "154280dde0be",
+      "timestamp": "2026-08-01T07:18:49.230055",
+      "title": "Investigation: CHEESE (0x5949f201) \u2192 CAUTION 55/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "cheese"
+      ],
+      "report": "intel/investigations/investigation-20260801-071849-0x5949f201.md"
+    },
+    {
+      "id": "d78f1a57fc70",
+      "timestamp": "2026-08-01T07:08:42.523491",
+      "title": "Bounty-cycle analysis 20260801_070810 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-08-01T06:05:24.561386+00:00",
+      "title": "HACK sweep deep-dive: Token \u2014 CAUTION (70/100)",
+      "source": "agents/hack_sweep.py",
+      "severity": "MEDIUM",
+      "verdict": null,
+      "tags": [
+        "hack-sweep",
+        "deep-dive",
+        "evm",
+        "1"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-08-01T06:05:02.803546+00:00",
+      "title": "HACK sweep deep-dive: SRC \u2014 CAUTION (65/100)",
+      "source": "agents/hack_sweep.py",
+      "severity": "MEDIUM",
+      "verdict": null,
+      "tags": [
+        "hack-sweep",
+        "deep-dive",
+        "evm",
+        "1"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-08-01T06:04:38.141499+00:00",
+      "title": "HACK sweep deep-dive: AIPF \u2014 CAUTION (62/100)",
+      "source": "agents/hack_sweep.py",
+      "severity": "MEDIUM",
+      "verdict": null,
+      "tags": [
+        "hack-sweep",
+        "deep-dive",
+        "evm",
+        "137"
+      ],
+      "report": null
+    },
+    {
+      "id": "49947b66b4ce",
+      "timestamp": "2026-08-01T06:01:49.900695",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-the-entropy-mirage-how-70m-in-bitcoin-cold-storage-melted-aw.md"
+    },
+    {
+      "id": "01276079e643",
+      "timestamp": "2026-08-01T05:56:31.617034",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-bank-of-italy-study-debunks-stablecoin-remittance-cost-advan.md"
+    },
+    {
+      "id": "6a8afee1170d",
+      "timestamp": "2026-08-01T05:47:32.845835",
+      "title": "base_sweep.py: 6.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "6.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-08-01-05.md"
+    },
+    {
+      "id": "2cd3b03743f5",
+      "timestamp": "2026-08-01T03:58:58.277205",
+      "title": "Community broadcast 2026-08-01-03",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "8594bccb1ff5",
+      "timestamp": "2026-08-01T03:13:07.396504",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-google-earth-pulls-generative-ai-tool-24-hours-after-launch-.md"
+    },
+    {
+      "id": "19f3eba89b26",
+      "timestamp": "2026-08-01T02:57:33.556037",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-vaneck-reintroduces-fees-on-spot-bitcoin-etf-after-missing-2.md"
+    },
+    {
+      "id": "9641002feaf2",
+      "timestamp": "2026-08-01T02:54:05.889984",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-0254.md"
+    },
+    {
+      "id": "7962389c4f9d",
+      "timestamp": "2026-08-01T02:46:05.371118",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-bitcoin-holds-monthly-gain-faces-choppy-august-as-forced-sel.md"
+    },
+    {
+      "id": "40d933545945",
+      "timestamp": "2026-08-01T02:37:10.516449",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-01-ai-data-center-pivot-hits-collateral-wall-inside-quantum-s-4.md"
+    },
+    {
+      "id": "1d10e151cd94",
+      "timestamp": "2026-08-01T02:34:46.043651",
+      "title": "Investigation: ZERO (0x9A833F5b) \u2192 CAUTION 65/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "zero"
+      ],
+      "report": "intel/investigations/investigation-20260801-023446-0x9A833F5b.md"
+    },
+    {
+      "id": "f54b8db15d6d",
+      "timestamp": "2026-08-01T02:19:31.467742",
+      "title": "Investigation: ASTEROID (0x330990Da) \u2192 CAUTION 57/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260801-021931-0x330990Da.md"
+    },
+    {
+      "id": "27180a396a26",
+      "timestamp": "2026-08-01T02:15:51.474089",
+      "title": "bug_bounty_intel.py: NOT YET LAUNCHED",
+      "source": "agents/bug_bounty_intel.py",
+      "severity": "INFO",
+      "verdict": "NOT YET LAUNCHED",
+      "tags": [
+        "bounty",
+        "virtuals",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/bug-bounty-intel-2026-08-01-02.md"
+    },
+    {
+      "id": "29091e75ccfe",
+      "timestamp": "2026-08-01T02:12:04.668821",
+      "title": "mainnet_patch_check.py: NEEDS REVIEW",
+      "source": "agents/mainnet_patch_check.py",
+      "severity": "INFO",
+      "verdict": "NEEDS REVIEW",
+      "tags": [
+        "virtuals",
+        "patch-check",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/mainnet-patch-check-2026-08-01-02.md"
+    },
+    {
+      "id": "c3c0728825bb",
+      "timestamp": "2026-08-01T02:09:37.173817",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-01-02.md"
+    },
+    {
+      "id": "5a10d75d0dbd",
+      "timestamp": "2026-08-01T02:00:47.450041",
+      "title": "Community broadcast 2026-08-01-02",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "b45a0bb0b199",
+      "timestamp": "2026-08-01T01:04:32.810590",
+      "title": "Investigation: BSW (0x3C5Cd672) \u2192 REJECT 42/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "bsw"
+      ],
+      "report": "intel/investigations/investigation-20260801-010432-0x3C5Cd672.md"
+    },
+    {
+      "id": "c3fbd59aebf7",
+      "timestamp": "2026-08-01T00:49:29.939274",
+      "title": "Investigation: AKE (0x059aB32a) \u2192 REJECT 45/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "ake"
+      ],
+      "report": "intel/investigations/investigation-20260801-004929-0x059aB32a.md"
+    },
+    {
+      "id": "67772b0fe35d",
+      "timestamp": "2026-08-01T00:33:57.030068",
+      "title": "Investigation: jSTABLE (0xC28475DE) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "jstable"
+      ],
+      "report": "intel/investigations/investigation-20260801-003357-0xC28475DE.md"
+    },
+    {
+      "id": "5350b3dc4d43",
+      "timestamp": "2026-08-01T00:03:57.802331",
+      "title": "Investigation: SRC (0x65c0E98a) \u2192 CAUTION 65/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "src"
+      ],
+      "report": "intel/investigations/investigation-20260801-000357-0x65c0E98a.md"
+    },
+    {
+      "id": "c193f56d29a6",
+      "timestamp": "2026-07-31T23:18:45.095255",
+      "title": "Investigation: ElonCoin (0xECe99d73) \u2192 CAUTION 57/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "eloncoin"
+      ],
+      "report": "intel/investigations/investigation-20260731-231845-0xECe99d73.md"
+    },
+    {
+      "id": "ff93a0d2a38b",
+      "timestamp": "2026-07-31T23:02:22.010488",
+      "title": "Bounty-cycle analysis 20260731_230153 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "9908c71f854e",
+      "timestamp": "2026-07-31T22:48:24.638259",
+      "title": "Investigation: SPCXB (0x627D4c16) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "spcxb"
+      ],
+      "report": "intel/investigations/investigation-20260731-224824-0x627D4c16.md"
+    },
+    {
+      "id": "fd88e8d04088",
+      "timestamp": "2026-07-31T22:06:37.525530",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md"
+    },
+    {
+      "id": "74a221dad0bb",
+      "timestamp": "2026-07-31T21:58:43.772802",
+      "title": "base_sweep.py: 6.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "6.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-07-31-21.md"
+    },
+    {
+      "id": "85d2e77c7e12",
+      "timestamp": "2026-07-31T21:48:34.496938",
+      "title": "Investigation: XFWA (0xAcfe7750) \u2192 REJECT 5/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "xfwa"
+      ],
+      "report": "intel/investigations/investigation-20260731-214834-0xAcfe7750.md"
+    },
+    {
+      "id": "aeb2c46406ba",
+      "timestamp": "2026-07-31T21:14:13.728133",
+      "title": "sentiment_sweep.py: Fear / Bearish-leaning",
+      "source": "agents/sentiment_sweep.py",
+      "severity": "INFO",
+      "verdict": "Fear / Bearish-leaning",
+      "tags": [
+        "sentiment",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/sentiment-2026-07-31-21.md"
+    },
+    {
+      "id": "2a11430e3afe",
+      "timestamp": "2026-07-31T21:05:56.515056",
+      "title": "Bounty-cycle analysis 20260731_210528 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "8e2f503715d3",
+      "timestamp": "2026-07-31T20:48:46.764419",
+      "title": "Investigation: FRONG (0x5B58e731) \u2192 REJECT 25/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "frong"
+      ],
+      "report": "intel/investigations/investigation-20260731-204846-0x5B58e731.md"
+    },
+    {
+      "id": "d4ed80df8c5a",
+      "timestamp": "2026-07-31T20:33:26.510710",
+      "title": "Investigation: SPCXB (0xbe9D1568) \u2192 REJECT 32/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "spcxb"
+      ],
+      "report": "intel/investigations/investigation-20260731-203326-0xbe9D1568.md"
+    },
+    {
+      "id": "c57314cc7919",
+      "timestamp": "2026-07-31T20:10:48.952409",
+      "title": "Bounty-cycle analysis 20260731_201025 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "0216628abf60",
+      "timestamp": "2026-07-31T20:02:41.862155",
+      "title": "Investigation: TRUMP2028 (0x20b688F4) \u2192 REJECT 10/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "trump2028"
+      ],
+      "report": "intel/investigations/investigation-20260731-200241-0x20b688F4.md"
+    },
+    {
+      "id": "a03b709b6c44",
+      "timestamp": "2026-07-31T20:00:27.666286",
+      "title": "Community broadcast 2026-07-31-20",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "6dae3a812216",
+      "timestamp": "2026-07-31T19:47:29.424907",
+      "title": "Investigation: ASTEROID (0x5a0CF2dB) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260731-194729-0x5a0CF2dB.md"
+    },
+    {
+      "id": "cc3fd2013cce",
+      "timestamp": "2026-07-31T19:32:13.932646",
+      "title": "Investigation: ASTEROID (0xA6dbdd59) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260731-193213-0xA6dbdd59.md"
+    },
+    {
+      "id": "75df49a6214a",
+      "timestamp": "2026-07-31T19:27:35.140080",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-07-31-19.md"
+    },
+    {
+      "id": "601a67e6eaee",
+      "timestamp": "2026-07-31T19:25:16.702059",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
+    },
+    {
+      "id": "2c2059281219",
+      "timestamp": "2026-07-31T19:17:02.348641",
+      "title": "Investigation: ASTEROID (0x93AA70E6) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "asteroid"
+      ],
+      "report": "intel/investigations/investigation-20260731-191702-0x93AA70E6.md"
+    },
+    {
+      "id": "1e7d99723665",
+      "timestamp": "2026-07-31T17:46:22.293857",
+      "title": "Investigation: AIPF (0x15e096f1) \u2192 CAUTION 62/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "caution",
+        "aipf"
+      ],
+      "report": "intel/investigations/investigation-20260731-174622-0x15e096f1.md"
+    },
+    {
+      "id": "606e1c489c53",
+      "timestamp": "2026-07-31T17:39:32.500614",
+      "title": "Bounty-cycle analysis 20260731_173905 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "ec5c8c69fe0a",
+      "timestamp": "2026-07-31T17:16:20.392237",
+      "title": "Investigation: ON (0xa0e0b50D) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "on"
+      ],
+      "report": "intel/investigations/investigation-20260731-171620-0xa0e0b50D.md"
+    },
+    {
+      "id": "03755174ba6e",
+      "timestamp": "2026-07-31T16:40:25.133191",
+      "title": "base_sweep.py: 6.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "6.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-07-31-16.md"
+    },
+    {
+      "id": "a46168742338",
+      "timestamp": "2026-07-31T16:05:25.510704",
+      "title": "macro_sweep.py: RISK-OFF",
+      "source": "agents/macro_sweep.py",
+      "severity": "INFO",
+      "verdict": "RISK-OFF",
+      "tags": [
+        "macro",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/macro-2026-07-31-16.md"
+    },
+    {
+      "id": "6f53425f25f7",
+      "timestamp": "2026-07-31T16:01:24.275295",
+      "title": "Investigation: BANK (0x49083d8E) \u2192 PROCEED 90/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "bsc",
+        "proceed",
+        "bank"
+      ],
+      "report": "intel/investigations/investigation-20260731-160124-0x49083d8E.md"
+    },
+    {
+      "id": "d25eeba13b44",
+      "timestamp": "2026-07-31T15:45:56.502960",
+      "title": "Investigation: GURS (0x223a368A) \u2192 REJECT 25/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "avax",
+        "reject",
+        "gurs"
+      ],
+      "report": "intel/investigations/investigation-20260731-154556-0x223a368A.md"
+    },
+    {
+      "id": "8150f61291e9",
+      "timestamp": "2026-07-31T15:30:56.777549",
+      "title": "Investigation: ZUM (0x63dc3cA0) \u2192 REJECT 35/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "avax",
+        "reject",
+        "zum"
+      ],
+      "report": "intel/investigations/investigation-20260731-153056-0x63dc3cA0.md"
+    },
+    {
+      "id": "4de2874823d2",
+      "timestamp": "2026-07-31T15:24:38.074212",
+      "title": "Bounty-cycle analysis 20260731_152355 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "b72f08f31bda",
+      "timestamp": "2026-07-31T15:22:43.584378",
+      "title": "virtuals_sweep.py: 4.5",
+      "source": "agents/virtuals_sweep.py",
+      "severity": "INFO",
+      "verdict": "4.5",
+      "tags": [
+        "virtuals",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/virtuals-2026-07-31-15.md"
+    },
+    {
+      "id": "1aefb1888523",
+      "timestamp": "2026-07-31T15:15:45.659580",
+      "title": "Investigation: OX (0xba0Dda87) \u2192 REJECT 25/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "avax",
+        "reject",
+        "ox"
+      ],
+      "report": "intel/investigations/investigation-20260731-151545-0xba0Dda87.md"
+    },
+    {
+      "id": "43b8d336a2e1",
+      "timestamp": "2026-07-31T15:00:36.013083",
+      "title": "Investigation: NOCHILL (0xAcFb898C) \u2192 PROCEED 90/100",
+      "source": "agents/investigate.py",
+      "severity": "INFO",
+      "verdict": "PROCEED",
+      "tags": [
+        "investigation",
+        "avax",
+        "proceed",
+        "nochill"
+      ],
+      "report": "intel/investigations/investigation-20260731-150036-0xAcFb898C.md"
+    },
+    {
+      "id": "e0a0ded9a047",
+      "timestamp": "2026-07-31T14:55:59.581520",
+      "title": "Community broadcast 2026-07-31-14",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-07-31T14:44:54.068718+00:00",
+      "title": "AI red-team (Builder): direct-blocked-construct-via-poisoned-memory \u2014 model complied, caught by validate_security",
+      "source": "agents/redteam_builder.py",
+      "severity": "LOW",
+      "verdict": null,
+      "tags": [
+        "ai-redteam",
+        "prompt-injection",
+        "vape-builder-pipeline",
+        "caught-by-backstop"
+      ],
+      "report": null
+    },
+    {
+      "id": null,
+      "timestamp": "2026-07-31T14:44:50.921093+00:00",
+      "title": "AI red-team: fake-clean-verdict-via-token-symbol \u2014 raw model susceptible, caught by reconciliation",
+      "source": "agents/redteam.py",
+      "severity": "LOW",
+      "verdict": null,
+      "tags": [
+        "ai-redteam",
+        "prompt-injection",
+        "vape-report-pipeline",
+        "caught-by-backstop"
+      ],
+      "report": null
+    },
+    {
+      "id": "2a3f57dc3de0",
+      "timestamp": "2026-07-31T14:30:19.000167",
+      "title": "Investigation: GRVT (0xAad93460) \u2192 REJECT 42/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "grvt"
+      ],
+      "report": "intel/investigations/investigation-20260731-143018-0xAad93460.md"
+    },
+    {
+      "id": "083e924767c2",
+      "timestamp": "2026-07-31T14:14:43.642016",
+      "title": "Investigation: CRO (0xAdA58DF0) \u2192 REJECT 27/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "cro"
+      ],
+      "report": "intel/investigations/investigation-20260731-141443-0xAdA58DF0.md"
+    },
+    {
+      "id": "363ab712304e",
+      "timestamp": "2026-07-31T14:09:54.908762",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-07-31-14.md"
+    },
+    {
+      "id": "618c8b3974f1",
+      "timestamp": "2026-07-31T14:06:33.951546",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md"
+    },
+    {
+      "id": "eddaa3fdb7ec",
+      "timestamp": "2026-07-31T13:29:12.186084",
+      "title": "Investigation: CZ Moon (0xDbDE3E2b) \u2192 REJECT 45/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "cz moon"
+      ],
+      "report": "intel/investigations/investigation-20260731-132912-0xDbDE3E2b.md"
+    },
+    {
+      "id": "8259374547ad",
+      "timestamp": "2026-07-31T13:14:06.790643",
+      "title": "Investigation: LGNS (0xC6F05bc3) \u2192 REJECT 47/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "lgns"
+      ],
+      "report": "intel/investigations/investigation-20260731-131406-0xC6F05bc3.md"
+    },
+    {
+      "id": "6e2412ea7e80",
+      "timestamp": "2026-07-31T12:57:39.005910",
+      "title": "Bounty-cycle analysis 20260731_125715 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "40eaf35f6193",
+      "timestamp": "2026-07-31T12:42:20.603010",
+      "title": "Investigation: MarsCoin (0x1706f1e0) \u2192 REJECT 40/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "marscoin"
+      ],
+      "report": "intel/investigations/investigation-20260731-124220-0x1706f1e0.md"
+    },
+    {
+      "id": "8758aa7f3778",
+      "timestamp": "2026-07-31T12:27:11.205144",
+      "title": "Investigation: AKE (0x28bBbE60) \u2192 CAUTION 55/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "bsc",
+        "caution",
+        "ake"
+      ],
+      "report": "intel/investigations/investigation-20260731-122711-0x28bBbE60.md"
+    },
+    {
+      "id": "ba99d8134731",
+      "timestamp": "2026-07-31T12:12:11.754534",
+      "title": "Investigation: AKE (0xD29D072d) \u2192 REJECT 35/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "ake"
+      ],
+      "report": "intel/investigations/investigation-20260731-121211-0xD29D072d.md"
+    },
+    {
+      "id": "e24600430b0e",
+      "timestamp": "2026-07-31T11:30:21.692300",
+      "title": "news_reporter.py: Crypto Markets",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Crypto Markets",
+      "tags": [
+        "news-intel",
+        "crypto markets",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md"
+    },
+    {
+      "id": "33a142f734bb",
+      "timestamp": "2026-07-31T11:22:56.696433",
+      "title": "base_sweep.py: 6.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "6.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-07-31-11.md"
+    },
+    {
+      "id": "c2a17c3f26fc",
+      "timestamp": "2026-07-31T10:46:54.296169",
+      "title": "sentiment_sweep.py: Fear / Bearish-leaning",
+      "source": "agents/sentiment_sweep.py",
+      "severity": "INFO",
+      "verdict": "Fear / Bearish-leaning",
+      "tags": [
+        "sentiment",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/sentiment-2026-07-31-10.md"
+    },
+    {
+      "id": "93993d6eb816",
+      "timestamp": "2026-07-31T10:41:16.273304",
+      "title": "Bounty-cycle analysis 20260731_104047 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "c51748aafe3e",
+      "timestamp": "2026-07-31T10:26:10.547502",
+      "title": "Investigation: TRUMP2028 (0x7eA8e859) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "trump2028"
+      ],
+      "report": "intel/investigations/investigation-20260731-102610-0x7eA8e859.md"
+    },
+    {
+      "id": "afdd0002337a",
+      "timestamp": "2026-07-31T09:48:19.648403",
+      "title": "virtuals_sweep.py: 4.5",
+      "source": "agents/virtuals_sweep.py",
+      "severity": "INFO",
+      "verdict": "4.5",
+      "tags": [
+        "virtuals",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/virtuals-2026-07-31-09.md"
+    },
+    {
+      "id": "32eca2ea8b9a",
+      "timestamp": "2026-07-31T09:23:06.013291",
+      "title": "Community broadcast 2026-07-31-09",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
+    {
+      "id": "4337d124b398",
+      "timestamp": "2026-07-31T08:51:22.278259",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-07-31-08.md"
+    },
+    {
+      "id": "0209fd8a1e02",
+      "timestamp": "2026-07-31T07:51:44.829998",
+      "title": "Bounty-cycle analysis 20260731_075118 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "f07fe5e5ee77",
+      "timestamp": "2026-07-31T06:56:55.114419",
+      "title": "Investigation: WMATIC (0xDbE20ADb) \u2192 REJECT 40/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "wmatic"
+      ],
+      "report": "intel/investigations/investigation-20260731-065655-0xDbE20ADb.md"
     }
   ],
   "ledger_integrity": {
     "chain_intact": true,
-    "seals_checked": 69,
-    "lines_covered": 1347,
-    "unsealed_lines": 8
+    "seals_checked": 70,
+    "lines_covered": 1363,
+    "unsealed_lines": 4
   },
   "lanes": [
     {
@@ -72,7 +2508,7 @@
       "label": "Static Analysis (CodeQL)",
       "source_workflow": "codeql.yml",
       "last_run_conclusion": null,
-      "last_run_at": "2026-08-01T21:28:52Z",
+      "last_run_at": "2026-08-02T02:59:40Z",
       "headline": "100 open alert(s)",
       "open_alerts": 100,
       "persisted_high_critical_30d": 0
@@ -82,16 +2518,16 @@
       "label": "CI / Workflow Hardening",
       "source_workflow": "security-lint.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-01T21:28:52Z",
+      "last_run_at": "2026-08-01T21:43:36Z",
       "headline": "success"
     },
     {
       "id": "vape-reviewer",
       "label": "Code Review (VAPE Reviewer)",
       "source_workflow": "vape-reviewer.yml",
-      "last_run_conclusion": "success",
-      "last_run_at": "2026-08-01T21:26:39Z",
-      "headline": "success"
+      "last_run_conclusion": null,
+      "last_run_at": "2026-08-02T02:59:40Z",
+      "headline": null
     },
     {
       "id": "dependency-audit",
@@ -144,7 +2580,7 @@
       "label": "Findings Ledger Seal",
       "source_workflow": "findings-seal.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-01T18:59:30Z",
+      "last_run_at": "2026-08-02T02:08:27Z",
       "headline": "intact",
       "chain_intact": true
     },
@@ -163,7 +2599,7 @@
       "label": "On-Chain Attack Intelligence",
       "source_workflow": "intel-sweeps.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-01T21:01:17Z",
+      "last_run_at": "2026-08-02T02:52:18Z",
       "headline": "HIGH",
       "threat_level": "HIGH",
       "coverage_ratio": 0.23076923076923078,
