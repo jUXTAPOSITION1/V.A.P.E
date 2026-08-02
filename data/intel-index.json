@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T19:00:14Z",
+  "generated": "2026-08-02T19:10:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 512,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 141,
     "investigations": 667,
-    "news": 51,
+    "news": 52,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10075,6 +10075,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-sec-locks-in-september-17-roundtable-as-overnight-equity-tra.md",
+      "title": "SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T19:10:58Z",
+      "published_et": "August 2, 2026 \u00b7 3:10 PM EDT",
+      "topic": "Regulation",
+      "dek": "Chairman Atkins frames the push as aligning U.S. markets with global 24-hour venues while keeping investor protections front and center.",
+      "image": "assets/news-images/sec-locks-in-september-17-roundtable-as-overnight-equity-tra.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-sec-locks-in-september-17-roundtable-as-overnight-equity-tra.md"
+    },
     {
       "file": "news-2026-08-02-red-tape-in-the-crosshairs-sec-panel-targets-public-market-f.md",
       "title": "Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms",
