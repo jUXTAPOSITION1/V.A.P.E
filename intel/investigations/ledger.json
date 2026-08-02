@@ -2370,6 +2370,25 @@
     "symbol": "YIELD",
     "times_investigated": 1
   },
+  "1:0x76b6ebc6762faa38de4efc85fab33effad84ead5": {
+    "address": "0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5",
+    "chain": "1",
+    "creator_address": "0x6f4c892a500719726952d0cfa4b124db35033106",
+    "first_investigated": "2026-08-02T22:31:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-223122-0x76B6Ebc6.md",
+        "score": 0,
+        "ts": "2026-08-02T22:31:22Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T22:31:22Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ADI",
+    "times_investigated": 1
+  },
   "1:0x7987f03462200b3d8a072e02c89a8a41dcb124ee": {
     "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE",
     "chain": "1",

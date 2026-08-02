@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-02T22:16:18Z — 315 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-02T22:31:22Z — 316 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ADI | Ethereum | `0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5` | 0/100 | 1 | 2026-08-02T22:31:22Z |
 | BABYASTEROID | Ethereum | `0x97B8C69D1bb0c10E3B32817f11a4A66785618B79` | 32/100 | 1 | 2026-08-02T20:46:20Z |
 | LGNS | Polygon | `0x80ac288e9664D7E2B59428125048eF48D853a93B` | 22/100 | 1 | 2026-08-02T18:45:12Z |
 | ZEST | Base | `0x7297968FFb753dd12e4f6B1f18d9865c76707FC2` | 22/100 | 1 | 2026-08-02T17:59:39Z |
