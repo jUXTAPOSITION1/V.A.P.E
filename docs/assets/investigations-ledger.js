@@ -31,6 +31,40 @@ export function explorerUrl(address, chain) {
     return `https://${EXPLORER_HOSTS[chainSlug(chain)] || 'basescan.org'}/address/${address}`;
 }
 export function shortAddr(a) { return (a && a.length > 12) ? a.slice(0, 6) + '…' + a.slice(-4) : (a || ''); }
+// HTML-escaping a URL interpolated into an inline JS event-handler attribute
+// (e.g. onclick="...='${escapedUrl}'") does NOT stop a string-context
+// breakout -- the browser HTML-decodes the attribute value before the JS
+// parser ever sees it, so an escaped apostrophe decodes right back to a
+// literal ' and terminates the JS string early. Validating the scheme here
+// AND avoiding inline JS attributes (data-href + one delegated listener,
+// see wireRowNavigation() below) closes both the injection and the
+// javascript:/data: open-redirect surface in inv.url, which — unlike
+// inv.file-derived hrefs — comes straight from repo data, not a fixed path
+// this code builds itself.
+export function safeExternalUrl(u) {
+    if (!u) return null;
+    try {
+        const parsed = new URL(u, window.location.href);
+        return (parsed.protocol === 'http:' || parsed.protocol === 'https:') ? parsed.href : null;
+    } catch (e) {
+        return null;
+    }
+}
+// Delegated click handler shared by both this page's preview rows
+// (investigationRowHtml()) and investigations-preview.js -- one listener
+// per container instead of an inline onclick per row. Skips navigation when
+// the click landed on the row's own explicit <a> (the browser already
+// handles that natively; navigating twice would be wrong).
+export function wireRowNavigation(containerEl) {
+    if (!containerEl || containerEl.dataset.navWired) return;
+    containerEl.dataset.navWired = '1';
+    containerEl.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        const row = e.target.closest('[data-href]');
+        if (!row) return;
+        window.location.href = row.dataset.href;
+    });
+}
 export function ago(iso) {
     if (!iso) return '';
     const d = new Date(iso);
@@ -97,9 +131,9 @@ export function investigationRowHtml(inv) {
     const icon = tokenIconUrl(inv.target, inv.chain);
     const heading = inv.symbol || shortAddr(inv.target) || inv.title || 'Investigation';
     const score = inv.score != null && inv.score !== '' ? Number(inv.score) : null;
-    const href = inv.file ? `investigation.html?file=${encodeURIComponent(inv.file)}` : (inv.url || 'investigations.html');
+    const href = inv.file ? `investigation.html?file=${encodeURIComponent(inv.file)}` : (safeExternalUrl(inv.url) || 'investigations.html');
     const linkAttrs = inv.file ? '' : ' target="_blank" rel="noopener"';
-    return `<tr class="invl-row" data-idx="0" onclick="window.location.href='${escapeHtml(href)}'" style="--row-verdict:${escapeHtml(vColor)};--row-verdict-wash:${vColor}14">
+    return `<tr class="invl-row" data-idx="0" data-href="${escapeHtml(href)}" style="--row-verdict:${escapeHtml(vColor)};--row-verdict-wash:${vColor}14">
         <td>
             <div class="invl-title-cell">
                 ${icon ? `<img src="${escapeHtml(icon)}" alt="" class="invl-icon" onerror="this.style.display='none'">` : `<div class="invl-icon flex items-center justify-center"><i class="fa-solid fa-magnifying-glass-chart text-[9px] text-zinc-600"></i></div>`}
@@ -113,7 +147,7 @@ export function investigationRowHtml(inv) {
         <td>${v ? `<span class="invl-verdict-pill" style="color:${vColor}">${escapeHtml(v)}</span>` : '—'}</td>
         <td>${score != null ? `<span class="invl-score-cell"><span class="invl-score-bar-wrap"><span class="invl-score-bar-fill" style="width:${Math.max(0, Math.min(100, score))}%;background:${sColor}"></span></span><span style="color:${sColor}">${escapeHtml(String(score))}</span></span>` : '—'}</td>
         <td class="invl-time" title="${escapeHtml(inv.date || '')}">${escapeHtml(ago(inv.date))}</td>
-        <td><a href="${escapeHtml(href)}"${linkAttrs} onclick="event.stopPropagation()" class="text-zinc-500 hover:text-zinc-200" title="Open"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></td>
+        <td><a href="${escapeHtml(href)}"${linkAttrs} class="text-zinc-500 hover:text-zinc-200" title="Open"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a></td>
     </tr>`;
 }
 
@@ -130,14 +164,22 @@ export function renderSparkline(el, investigations, range) {
 // Wires a `.invl-range-btn[data-range]` toggle group to re-render the given
 // sparkline element on click, tracking active state via `.is-active`.
 export function wireSparkRangeToggle(toggleEl, sparkEl, getInvestigations, initial) {
-    if (!toggleEl) return;
+    if (!toggleEl || toggleEl.dataset.wired) return;
+    toggleEl.dataset.wired = '1';
     let current = initial || 'week';
     const render = () => renderSparkline(sparkEl, getInvestigations(), current);
+    const setState = activeBtn => {
+        toggleEl.querySelectorAll('.invl-range-btn').forEach(b => {
+            const active = b === activeBtn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+    };
     toggleEl.querySelectorAll('.invl-range-btn').forEach(btn => {
-        btn.classList.toggle('is-active', btn.dataset.range === current);
+        if (btn.dataset.range === current) setState(btn);
         btn.addEventListener('click', () => {
             current = btn.dataset.range;
-            toggleEl.querySelectorAll('.invl-range-btn').forEach(b => b.classList.toggle('is-active', b === btn));
+            setState(btn);
             render();
         });
     });
@@ -207,7 +249,7 @@ const Ledger = {
             });
         }
         if (verdictSelect) {
-            verdictSelect.addEventListener('change', () => { this._verdictFilter = verdictSelect.value; this._page = 0; this._render(); });
+            verdictSelect.addEventListener('change', () => { this._verdictFilter = verdictSelect.value; this._syncVerdictFilter(); });
         }
         if (prevBtn) prevBtn.addEventListener('click', () => { this._page = Math.max(0, this._page - 1); this._render(); });
         if (nextBtn) nextBtn.addEventListener('click', () => { this._page += 1; this._render(); });
@@ -309,7 +351,7 @@ const Ledger = {
                 options: {
                     responsive: true, maintainAspectRatio: false, cutout: '70%',
                     onClick: (_evt, elements) => { if (elements.length) this._applyVerdictFilter(series[elements[0].index][0]); },
-                    onHover: (evt, elements) => { evt.native.target.style.cursor = elements.length ? 'pointer' : ''; },
+                    onHover: (evt, elements) => { if (evt.native) evt.native.target.style.cursor = elements.length ? 'pointer' : ''; },
                     plugins: {
                         legend: { display: false },
                         tooltip: { callbacks: { label: c => `${c.label}: ${c.parsed} (${Math.round(c.parsed / total * 100)}%)` } },

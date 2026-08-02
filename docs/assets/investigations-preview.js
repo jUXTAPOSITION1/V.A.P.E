@@ -6,7 +6,7 @@
 // + the most recent handful of investigations, then sends the reader to
 // investigations.html for the full record and the interactive Verdict
 // Breakdown (a preview section has no room to reproduce that safely).
-import { investigationRowHtml, wireSparkRangeToggle } from './investigations-ledger.js';
+import { investigationRowHtml, wireSparkRangeToggle, wireRowNavigation } from './investigations-ledger.js?v=1';
 
 const REPO = 'jUXTAPOSITION1/V.A.P.E';
 const INTEL_INDEX_URL = `https://raw.githubusercontent.com/${REPO}/main/data/intel-index.json`;
@@ -17,11 +17,22 @@ const InvestigationsPreview = {
 
     async init() {
         try {
-            const data = await (await fetch(`${INTEL_INDEX_URL}?t=` + Date.now())).json();
+            // No cache-buster here -- this preview only ever needs the same
+            // freshness the rest of the main site's fetches settle for, and
+            // letting the browser serve a recent cached copy on repeat
+            // visits avoids re-downloading the full multi-hundred-KB index
+            // just to render 6 rows.
+            const data = await (await fetch(INTEL_INDEX_URL)).json();
             this._all = Array.isArray(data.investigations) ? data.investigations.slice() : [];
         } catch (e) {
             const body = document.getElementById('invp-body');
             if (body) body.innerHTML = '<tr><td colspan="6" class="text-zinc-500 text-xs py-6 text-center">Investigations index is briefly unreachable.</td></tr>';
+            const updated = document.getElementById('invp-updated');
+            if (updated) updated.textContent = 'unavailable';
+            ['invp-total', 'invp-reject', 'invp-caution', 'invp-proceed', 'invp-avg-score'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.classList.remove('skeleton'); el.textContent = '—'; }
+            });
             return;
         }
         const updated = document.getElementById('invp-updated');
@@ -57,6 +68,7 @@ const InvestigationsPreview = {
         body.innerHTML = rows.length
             ? rows.map(investigationRowHtml).join('')
             : '<tr><td colspan="6" class="text-zinc-500 text-xs py-6 text-center">No investigations logged yet.</td></tr>';
+        wireRowNavigation(body);
     },
 };
 

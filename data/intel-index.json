@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T16:45:37Z",
+  "generated": "2026-08-02T16:59:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 511,
@@ -8008,7 +8008,8 @@
       "target": "0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE",
       "symbol": "VAPE token",
       "offering": "smart_contract_audit",
-      "verdict": "CAUTION (55/100)",
+      "verdict": "CAUTION",
+      "score": "55",
       "key_finding": "Owner-controlled burnFrom() can rug holders; no timelock on admin funcs",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8019,7 +8020,8 @@
       "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
+      "verdict": "CAUTION",
+      "score": "68",
       "key_finding": "Low liquidity $26,641",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8030,7 +8032,8 @@
       "target": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
+      "verdict": "CAUTION",
+      "score": "68",
       "key_finding": "Low liquidity $26,641",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8041,7 +8044,8 @@
       "target": "0x43D6e8F4e413028365E9cf83D1e6c2181e8e3b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (78/100)",
+      "verdict": "PROCEED",
+      "score": "78",
       "key_finding": "Violent 24h move +99949% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8052,7 +8056,8 @@
       "target": "0x7C797DA3704b6F682917005b01C89710Ec17db07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (78/100)",
+      "verdict": "PROCEED",
+      "score": "78",
       "key_finding": "Low liquidity $23,118",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8063,7 +8068,8 @@
       "target": "0x7CfA2a05e37bacbcC82B6221F41AD6C7AA253b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
+      "verdict": "CAUTION",
+      "score": "68",
       "key_finding": "Low liquidity $21,135",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8074,7 +8080,8 @@
       "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
       "symbol": "VELVET",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8085,7 +8092,8 @@
       "target": "0x31A626996E36a302b06b27283C561d5926db6b7c",
       "symbol": "USA250",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Low liquidity $19,800",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8096,7 +8104,8 @@
       "target": "0x2228B3832Ac68Eb8F35FB007d92d28e0C048206F",
       "symbol": "FAFO",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8107,7 +8116,8 @@
       "target": "0x044098A1b8B8e175035842952986bea0E2333B07",
       "symbol": "America250",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Low liquidity $34,531",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8118,7 +8128,8 @@
       "target": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
       "symbol": "CLAUDE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8129,7 +8140,8 @@
       "target": "0x9cb961dD3169e41726e4417d1a6EadeD333B6b07",
       "symbol": "claude",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8140,7 +8152,8 @@
       "target": "0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (60/100)",
+      "verdict": "CAUTION",
+      "score": "60",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8151,7 +8164,8 @@
       "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (25/100)",
+      "verdict": "REJECT",
+      "score": "25",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8162,7 +8176,8 @@
       "target": "0x7F42440C1E87187F523aE48980E7386508804B07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (45/100)",
+      "verdict": "REJECT",
+      "score": "45",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8173,7 +8188,8 @@
       "target": "0x853a7c99227499DbA9dB8C3A02aA691aFDeBf841",
       "symbol": "PLAY",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8184,7 +8200,8 @@
       "target": "0x25118290e6A5f4139381D072181157035864099d",
       "symbol": "RAIN",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (85/100)",
+      "verdict": "PROCEED",
+      "score": "85",
       "key_finding": "Pair 24.6 days old \u2014 under a month, still unproven",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8195,7 +8212,8 @@
       "target": "0x454777B9a11EC75B23E809F1cE3d4b30De7fAB07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8206,7 +8224,8 @@
       "target": "0x006b340bEE30F8425cf65f064712F57B2BC0bB07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8217,7 +8236,8 @@
       "target": "0x930389F6a4A8346698dC8a3D6b299fFCd9b1BE65",
       "symbol": "VELVET",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (78/100)",
+      "verdict": "CAUTION",
+      "score": "78",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8228,7 +8248,8 @@
       "target": "0x511ef9Ad5E645E533D15DF605B4628e3D0d0Ff53",
       "symbol": "VU",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Owner not renounced (0xe220329659d41b2a9f26e83816b424bdacf62567) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8239,7 +8260,8 @@
       "target": "0x0C1c1C109FE34733fca54b82d7B46B75CFb71F6e",
       "symbol": "CHIP",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8250,7 +8272,8 @@
       "target": "0x11030f79109269d796fd0FB956D6244e502757f7",
       "symbol": "CTR",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (82/100)",
+      "verdict": "PROCEED",
+      "score": "82",
       "key_finding": "Owner not renounced (0x8a99057cec644e91ca9ffc8ee5fddabafb929b66) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8261,7 +8284,8 @@
       "target": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8272,7 +8296,8 @@
       "target": "0xeF34d1ba20131f0e6Ea93a8C3E9397a871Ab7B07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8283,7 +8308,8 @@
       "target": "0x068c1c81B802DE01E60C1393Ee974d896138aD56",
       "symbol": "PLAY",
       "offering": "deep_investigation",
-      "verdict": "REJECT (35/100)",
+      "verdict": "REJECT",
+      "score": "35",
       "key_finding": "Very few holders (19) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8294,7 +8320,8 @@
       "target": "0x9999955f3dD86230d90c545f7C9b239514Ecb999",
       "symbol": "AI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (42/100)",
+      "verdict": "REJECT",
+      "score": "42",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8305,7 +8332,8 @@
       "target": "0x6db3cFe766818505e672f9D1ee7b812210B70B07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (25/100)",
+      "verdict": "REJECT",
+      "score": "25",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8316,7 +8344,8 @@
       "target": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
       "symbol": "BLINK",
       "offering": "deep_investigation",
-      "verdict": "REJECT (22/100)",
+      "verdict": "REJECT",
+      "score": "22",
       "key_finding": "High buy tax 11%",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8327,7 +8356,8 @@
       "target": "0x7db93b6C49f8D0b4eEBfE2532A8A734dE49dcB07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8338,7 +8368,8 @@
       "target": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
       "symbol": "DEXE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Owner not renounced (0x3f2b55627fc7d8254890f5e131d3f5ca8a9eeb6f) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8349,7 +8380,8 @@
       "target": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55",
       "symbol": "NOX",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8360,7 +8392,8 @@
       "target": "0x4200000000000000000000000000000000000042",
       "symbol": "OP",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8371,7 +8404,8 @@
       "target": "0x7991eeD0fB1F7affD57C8C240305b8F90C707b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8382,7 +8416,8 @@
       "target": "0xE23b60DF9dae1E54E81fc802Fd0E085f4F7e0B07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8393,7 +8428,8 @@
       "target": "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b",
       "symbol": "VIRTUAL",
       "offering": "deep_investigation",
-      "verdict": "REJECT (43/100)",
+      "verdict": "REJECT",
+      "score": "43",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8404,7 +8440,8 @@
       "target": "0x940181a94A35A4569E4529A3CDfB74e38FD98631",
       "symbol": "AERO",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8415,7 +8452,8 @@
       "target": "0xc99560Fcf31dFdFFAD4BF8308e124e6BA66711A4",
       "symbol": "AERO",
       "offering": "deep_investigation",
-      "verdict": "REJECT (48/100)",
+      "verdict": "REJECT",
+      "score": "48",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8426,7 +8464,8 @@
       "target": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
       "symbol": "VELO",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8437,7 +8476,8 @@
       "target": "0xd07379a755A8f11B57610154861D694b2A0f615a",
       "symbol": "BASE",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
+      "verdict": "CAUTION",
+      "score": "68",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8448,7 +8488,8 @@
       "target": "0x912CE59144191C1204E64559FE8253a0e49E6548",
       "symbol": "ARB",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8459,7 +8500,8 @@
       "target": "0x20Bc6CBB8C5C9b356f554de71d45Bf5508892346",
       "symbol": "BASE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8470,7 +8512,8 @@
       "target": "0xeC0d015979077ebDDB16f665cCF2b4022fa3Ab07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8481,7 +8524,8 @@
       "target": "0x5E1760831750DD0Be92d115e90CfEEF207c68B07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8492,7 +8536,8 @@
       "target": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
       "symbol": "DEXE",
       "offering": "deep_investigation",
-      "verdict": "REJECT (33/100)",
+      "verdict": "REJECT",
+      "score": "33",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8503,7 +8548,8 @@
       "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c",
       "symbol": "DUAL",
       "offering": "deep_investigation",
-      "verdict": "REJECT (33/100)",
+      "verdict": "REJECT",
+      "score": "33",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8514,7 +8560,8 @@
       "target": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8",
       "symbol": "PENDLE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8525,7 +8572,8 @@
       "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA",
       "symbol": "ELSA",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8536,7 +8584,8 @@
       "target": "0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF",
       "symbol": "ELSA",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8547,7 +8596,8 @@
       "target": "0x459d9e517DdAb532FCA6e34e760fe202829ACcCf",
       "symbol": "DEXE",
       "offering": "deep_investigation",
-      "verdict": "REJECT (3/100)",
+      "verdict": "REJECT",
+      "score": "3",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8558,7 +8608,8 @@
       "target": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8569,7 +8620,8 @@
       "target": "0x3c8B650257cFb5f272f799F5e2b4e65093a11a05",
       "symbol": "VELO",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (68/100)",
+      "verdict": "CAUTION",
+      "score": "68",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8580,7 +8632,8 @@
       "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610",
       "symbol": "CES",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (82/100)",
+      "verdict": "PROCEED",
+      "score": "82",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8591,7 +8644,8 @@
       "target": "0xb77FB1083E2544969Cc2949912bF5376C1876b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8602,7 +8656,8 @@
       "target": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
       "symbol": "EVAA",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8613,7 +8668,8 @@
       "target": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13",
       "symbol": "ETD",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (50/100)",
+      "verdict": "CAUTION",
+      "score": "50",
       "key_finding": "Very few holders (30) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8624,7 +8680,8 @@
       "target": "0xed327E881bdDe8a134E6FDdcf4a64881F86A3b07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8635,7 +8692,8 @@
       "target": "0x904567252D8F48555b7447c67dCA23F0372E16be",
       "symbol": "KITE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Owner not renounced (0x725e318e181d7e1bb26c0d77ddc58ff6ba463fd8) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8646,7 +8704,8 @@
       "target": "0xB2000000000000000000007BF6D5cBb0E24cB301",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (30/100)",
+      "verdict": "REJECT",
+      "score": "30",
       "key_finding": "Very few holders (0) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8657,7 +8716,8 @@
       "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb",
       "symbol": "wstETH",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (74/100)",
+      "verdict": "CAUTION",
+      "score": "74",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8668,7 +8728,8 @@
       "target": "0xCFB287565201763743A77c556dcA44A673d0a777",
       "symbol": "RISE",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "High sell tax 20%",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8679,7 +8740,8 @@
       "target": "0x932dDc710C39dF4838958553E8f2Da8331CBcB07",
       "symbol": "Claude",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8690,7 +8752,8 @@
       "target": "0x2c3a8Ee94dDD97244a93Bc48298f97d2C412F7Db",
       "symbol": "AKE",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Violent 24h move +215% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8701,7 +8764,8 @@
       "target": "0x9b88500C69CEa66c329Abd1C494319B197fb8453",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "Low liquidity $30,055",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8712,7 +8776,8 @@
       "target": "0x3ecced5b416e58664f04a39dD18935eB71D33B15",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (75/100)",
+      "verdict": "CAUTION",
+      "score": "75",
       "key_finding": "Owner can change balances (rug surface)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8723,7 +8788,8 @@
       "target": "0x2376A4fC1AE90A329B4B41fbb7611b9E76b9Eb07",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (30/100)",
+      "verdict": "REJECT",
+      "score": "30",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8734,7 +8800,8 @@
       "target": "0x71A64AA011566A33F79eE48ed1491752AEc254b6",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (28/100)",
+      "verdict": "REJECT",
+      "score": "28",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8745,7 +8812,8 @@
       "target": "0x693B8De886712f0039EEf578bbE5aC7ea3B598CE",
       "symbol": "doji",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (80/100)",
+      "verdict": "PROCEED",
+      "score": "80",
       "key_finding": "Owner not renounced (0x05e40bcba6e5e2f23c4bd87544c42ba3363c1aeb) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8756,7 +8824,8 @@
       "target": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
       "symbol": "DOJI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (37/100)",
+      "verdict": "REJECT",
+      "score": "37",
       "key_finding": "Low holder count (134)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8767,7 +8836,8 @@
       "target": "0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc",
       "symbol": "DOJI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (35/100)",
+      "verdict": "REJECT",
+      "score": "35",
       "key_finding": "Very few holders (4) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8778,7 +8848,8 @@
       "target": "0xF11D5aD2D7A8261E72E549eD0971c5207c049bC6",
       "symbol": "SMB",
       "offering": "deep_investigation",
-      "verdict": "REJECT (14/100)",
+      "verdict": "REJECT",
+      "score": "14",
       "key_finding": "Transfers can be paused by owner",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8789,7 +8860,8 @@
       "target": "0x0531f1e647b5ca694012EAb6Be2a9215B4070ba3",
       "symbol": "Doji",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (65/100)",
+      "verdict": "CAUTION",
+      "score": "65",
       "key_finding": "Violent 24h move +405% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8800,7 +8872,8 @@
       "target": "0xb2000000000000000000003833eD6154d9fA0f01",
       "symbol": "DOJI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (20/100)",
+      "verdict": "REJECT",
+      "score": "20",
       "key_finding": "Very few holders (0) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8811,7 +8884,8 @@
       "target": "0xC17c30e98541188614dF99239cABD40280810cA3",
       "symbol": "RISE",
       "offering": "deep_investigation",
-      "verdict": "REJECT (23/100)",
+      "verdict": "REJECT",
+      "score": "23",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8822,7 +8896,8 @@
       "target": "0x199084f1390B58493096Ff73Ec74c68164ba8453",
       "symbol": "$COBIE",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "Violent 24h move +1684% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8833,7 +8908,8 @@
       "target": "0x038ad3c2241F54492E25a8A419Fd3E4494C6dB07",
       "symbol": "DOJI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (10/100)",
+      "verdict": "REJECT",
+      "score": "10",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8844,7 +8920,8 @@
       "target": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
       "symbol": "WETH.e",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (88/100)",
+      "verdict": "PROCEED",
+      "score": "88",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8855,7 +8932,8 @@
       "target": "0x664645ba2018507b4f336a1529122C5f982b2Ac8",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (80/100)",
+      "verdict": "PROCEED",
+      "score": "80",
       "key_finding": "Pair 9.8 days old \u2014 under two weeks, no track record yet",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8866,7 +8944,8 @@
       "target": "0x936AD605716234B77b7A61CDb95D6b6A188Da8E8",
       "symbol": "YIELD",
       "offering": "deep_investigation",
-      "verdict": "REJECT (35/100)",
+      "verdict": "REJECT",
+      "score": "35",
       "key_finding": "Mintable supply (dilution risk)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8877,7 +8956,8 @@
       "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
       "symbol": "ESP",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8888,7 +8968,8 @@
       "target": "0x8453Cf5Dd4840072b5Da025Ca4c5caA13c192b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8899,7 +8980,8 @@
       "target": "0x0f020434fFa8649B6994781EeD1D1522411807Ee",
       "symbol": "YIELD",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (70/100)",
+      "verdict": "CAUTION",
+      "score": "70",
       "key_finding": "Very few holders (20) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8910,7 +8992,8 @@
       "target": "0x6fBBbD8bFB1cd3986B1D05e7861a0f62F87DB74b",
       "symbol": "VSN",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (92/100)",
+      "verdict": "PROCEED",
+      "score": "92",
       "key_finding": "Upgradeable proxy (verify implementation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8921,7 +9004,8 @@
       "target": "0xC4aa3dc36ba618EAA0D76A89750430181cFc7b07",
       "symbol": "OpenAI",
       "offering": "deep_investigation",
-      "verdict": "REJECT (0/100)",
+      "verdict": "REJECT",
+      "score": "0",
       "key_finding": "Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no te",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8932,7 +9016,8 @@
       "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82",
       "symbol": "SOL",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Owner not renounced (0x3eff766c76a1be2ce1acf2b69c78bcae257d5188) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8943,7 +9028,8 @@
       "target": "0xF0Cb96a4011A0A6F73d100c7080Bf8020D10F87a",
       "symbol": "ARMSTRONG",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (90/100)",
+      "verdict": "PROCEED",
+      "score": "90",
       "key_finding": "Violent 24h move +18481% (volatility/manipulation)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8954,7 +9040,8 @@
       "target": "0xf4B385849f2e817E92bffBfB9AEb48F950Ff4444",
       "symbol": "EGL1",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (100/100)",
+      "verdict": "PROCEED",
+      "score": "100",
       "key_finding": "clean",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8965,7 +9052,8 @@
       "target": "0xB20000000000000000000029784108e9706A0001",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (30/100)",
+      "verdict": "REJECT",
+      "score": "30",
       "key_finding": "Very few holders (2) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8976,7 +9064,8 @@
       "target": "0x13A466998Ce03Db73aBc2d4DF3bBD845Ed1f28E7",
       "symbol": "PHAR",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (72/100)",
+      "verdict": "CAUTION",
+      "score": "72",
       "key_finding": "Owner not renounced (0xd23f124bbbc958bcddc0ce624042b48154222fde) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8987,7 +9076,8 @@
       "target": "0xB200000000000000000000EAe54086e2363C0eC1",
       "symbol": "BRIAN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (30/100)",
+      "verdict": "REJECT",
+      "score": "30",
       "key_finding": "Very few holders (0) \u2014 thin, easily manipulated distribution",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -8998,7 +9088,8 @@
       "target": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
       "symbol": "IBNAi",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (55/100)",
+      "verdict": "CAUTION",
+      "score": "55",
       "key_finding": "Owner not renounced (0x0f5f60ad3e43839d6b9d4a6d1d8eded24db73c32) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -9009,7 +9100,8 @@
       "target": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
       "symbol": "TSG",
       "offering": "deep_investigation",
-      "verdict": "PROCEED (80/100)",
+      "verdict": "PROCEED",
+      "score": "80",
       "key_finding": "Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -9020,7 +9112,8 @@
       "target": "0x43976a124e6834b541840Ce741243dAD3dd538DA",
       "symbol": "RAIN",
       "offering": "deep_investigation",
-      "verdict": "REJECT (37/100)",
+      "verdict": "REJECT",
+      "score": "37",
       "key_finding": "Owner not renounced (0xaff5289591653038340645fdc1e1ed3a3b52e436) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     },
@@ -9031,7 +9124,8 @@
       "target": "0x5FbE62dfdB805E1711d36Db0c2E22a2D77195BA3",
       "symbol": "TSG",
       "offering": "deep_investigation",
-      "verdict": "CAUTION (50/100)",
+      "verdict": "CAUTION",
+      "score": "50",
       "key_finding": "Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/catalog/investigation-catalog.md"
     }
