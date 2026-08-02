@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T21:46:05Z",
+  "generated": "2026-08-02T21:57:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 515,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 142,
     "investigations": 671,
-    "news": 52,
+    "news": 53,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10131,6 +10131,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-wall-street-s-multi-million-dollar-mail-bill-faces-extinctio.md",
+      "title": "Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T21:57:51Z",
+      "published_et": "August 2, 2026 \u00b7 5:57 PM EDT",
+      "topic": "Regulation",
+      "dek": "The SEC\u2019s proposed \"Regulation E-Delivery\" would flip the decades-old paper-first default, forcing investors to actively opt out of digital disclosures.",
+      "image": "assets/news-images/wall-street-s-multi-million-dollar-mail-bill-faces-extinctio.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-wall-street-s-multi-million-dollar-mail-bill-faces-extinctio.md"
+    },
     {
       "file": "news-2026-08-02-sec-locks-in-september-17-roundtable-as-overnight-equity-tra.md",
       "title": "SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage",
