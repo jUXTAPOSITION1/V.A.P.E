@@ -112,11 +112,7 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, read by reports()
-        // this.virtuals() sunset 2026-07-31 (VAPE is refocusing on Base/all-EVM/
-        // Ethereum + x402, not the Virtuals ecosystem specifically) -- the
-        // function and its #virtuals-stats/#virtuals-sparkline render targets
-        // are left in place, just no longer invoked here.
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.baseTokenDiscovery(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -144,7 +140,39 @@ const App = {
             const live = list.filter(o => liveStatuses.has((o.status||'').toLowerCase())).length;
             this._set('bcc-total', list.length.toLocaleString());
             this._set('bcc-live', live.toLocaleString());
+            // Real discovery-rate sparkline from each opportunity's own
+            // firstSeen timestamp (agents/scout.py writes this) — bounty.html
+            // renders the same 12-week bucketing at full size; this is the
+            // teaser-sized version of the same real signal, not a lookalike.
+            this._renderMiniSparkline('bcc-spark', this._weeklyBuckets(list.map(o => o.firstSeen), 12));
         } catch(e) { /* teaser stats just stay skeletons — bounty.html has the full picture */ }
+    },
+
+    // Buckets an array of ISO timestamps into `weeks` trailing weekly counts.
+    _weeklyBuckets(isoDates, weeks) {
+        const now = Date.now();
+        const bucketMs = 7 * 86400e3;
+        const totals = new Array(weeks).fill(0);
+        (isoDates || []).forEach(iso => {
+            const t = new Date(iso).getTime();
+            if (isNaN(t)) return;
+            const diff = Math.floor((now - t) / bucketMs);
+            if (diff >= 0 && diff < weeks) totals[weeks - 1 - diff]++;
+        });
+        return totals;
+    },
+    // Reuses investigations-ledger.js's .invl-spark-bar visual language (same
+    // bar look site-wide) without importing that module — app.js is a
+    // classic script here, not an ES module.
+    _renderMiniSparkline(elId, totals) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        const max = Math.max(1, ...totals);
+        el.innerHTML = totals.map((n, i) => {
+            const pct = Math.max(6, Math.round(n / max * 100));
+            const latest = i === totals.length - 1 ? ' is-latest' : '';
+            return `<span class="invl-spark-bar${latest}" style="height:${pct}%" title="${n} new this week"></span>`;
+        }).join('');
     },
 
     _rep: null,
@@ -832,32 +860,31 @@ const App = {
             : '<div class="text-zinc-500 text-sm">No trending Base pairs right now.</div>');
     },
 
-    // ── Virtuals Protocol — VIRTUAL token stats + trending/new Base tokens ──
-    // Sourced entirely from Codex.io via the worker's /virtuals-snapshot,
-    // /trending-base, and /new-launches routes (worker/src/lib/codex.ts, a
-    // TS port of agents/codex_data.py) — Codex needs a bearer key that can't
-    // ship to the browser, so unlike protocols()/chart()/baseMovers() this
-    // can't be a direct client-side fetch. Intentionally no protocol TVL
-    // here: Codex is a token-market-data platform, not a DeFi-TVL
-    // aggregator, so this panel doesn't reach for DefiLlama to fill that
-    // gap — everything shown is real Codex data or nothing.
+    // ── Trending on Base / New Launches — real Base token discovery ──
+    // Sourced from Codex.io via the worker's /trending-base and /new-launches
+    // routes (worker/src/lib/codex.ts, a TS port of agents/codex_data.py) —
+    // Codex needs a bearer key that can't ship to the browser, so unlike
+    // protocols()/chart()/baseMovers() this can't be a direct client-side
+    // fetch. Was previously fetched only from inside virtuals() alongside
+    // the since-sunset (2026-07-31) VIRTUAL-token snapshot panel; when that
+    // panel's DOM was removed, virtuals() itself was dropped from refresh()'s
+    // call list too, silently taking these two unrelated panels down with it
+    // even though neither is Virtuals-specific — they just tag Virtuals-
+    // ecosystem tokens inline. Split out here and wired back into refresh()
+    // so they load independently of that sunset.
     _trendingBase: [],
     _newLaunches: [],
-    async virtuals() {
+    async baseTokenDiscovery() {
         if (!WORKER_BASE) return;
         try {
-            const [snapRes, trendRes, launchRes] = await Promise.allSettled([
-                fetch(`${WORKER_BASE}/virtuals-snapshot`).then(r=>r.json()),
+            const [trendRes, launchRes] = await Promise.allSettled([
                 // 30, not 12 — the worker route is edge-cached per exact query
                 // string (max-age=300), so a higher limit here doesn't cost any
-                // extra Codex requests, just gives the new search box (below)
-                // more rows to actually search across.
+                // extra Codex requests, just gives the search box (below) more
+                // rows to actually search across.
                 fetch(`${WORKER_BASE}/trending-base?limit=30`).then(r=>r.json()),
                 fetch(`${WORKER_BASE}/new-launches?limit=30`).then(r=>r.json()),
             ]);
-            const snap = snapRes.status==='fulfilled' ? snapRes.value : null;
-            if (snap && !snap.error) this._renderVirtualsStats(snap);
-            else this._renderVirtualsUnavailable();
             const trend = trendRes.status==='fulfilled' ? trendRes.value : null;
             if (trend && !trend.error && Array.isArray(trend.tokens)) {
                 this._trendingBase = trend.tokens;
@@ -875,84 +902,11 @@ const App = {
                 if (el) el.innerHTML = '<div class="text-zinc-500 text-sm">New-launches data unavailable right now.</div>';
             }
         } catch(e) {
-            this._renderVirtualsUnavailable();
             const trendEl = document.getElementById('trending-base');
             if (trendEl) trendEl.innerHTML = '<div class="text-zinc-500 text-sm">Trending data unavailable right now.</div>';
             const launchEl = document.getElementById('new-launches');
             if (launchEl) launchEl.innerHTML = '<div class="text-zinc-500 text-sm">New-launches data unavailable right now.</div>';
         }
-    },
-
-    // Swaps the four skeleton stat spans for an honest "unavailable" line —
-    // this panel has no keyless fallback (Codex needs a worker-side key), so
-    // an error here should read as "not available", not sit as a permanent
-    // skeleton that looks like it's still loading.
-    _renderVirtualsUnavailable() {
-        const el = document.getElementById('virtuals-stats');
-        if (el) el.innerHTML = '<span class="text-zinc-500 text-sm">Unavailable right now.</span>';
-    },
-
-    // 0-100, neutral start 50 — VIRTUAL's health from Codex-native signals:
-    // 24h price change (small weight, noisy on its own) and top-10-holder
-    // concentration (medium weight — a widely-held token is harder to
-    // manipulate than one a handful of wallets control). No TVL trend input
-    // here — see virtuals() above for why. Either factor is simply skipped
-    // (not defaulted to neutral/zero) if Codex didn't return it this cycle.
-    _virtualsScore(detail, holders) {
-        let score = 50;
-        const chg = detail && typeof detail.change24 === 'number' ? detail.change24 : null;
-        if (chg != null) {
-            if (chg >= 5) score += 10; else if (chg > 0) score += 5;
-            else if (chg <= -10) score -= 10; else if (chg < 0) score -= 5;
-        }
-        const top10 = holders && typeof holders.top10HoldersPercent === 'number' ? holders.top10HoldersPercent : null;
-        if (top10 != null) {
-            if (top10 <= 20) score += 20; else if (top10 <= 35) score += 10;
-            else if (top10 >= 70) score -= 20; else if (top10 >= 50) score -= 10;
-        }
-        return Math.max(0, Math.min(100, Math.round(score)));
-    },
-
-    _renderVirtualsStats(snap) {
-        const detail = snap.detail || {};
-        const holders = snap.holders || {};
-        this._set('v-price', detail.priceUSD!=null ? '$'+Number(detail.priceUSD).toLocaleString(undefined,{maximumSignificantDigits:6}) : '…');
-        this._set('v-mcap', fmtUsd(detail.marketCap));
-        this._set('v-vol', fmtUsd(detail.volume24));
-        const chgEl = document.getElementById('v-chg');
-        if (chgEl) chgEl.innerHTML = pct(detail.change24);
-        const holdEl = document.getElementById('v-holders');
-        if (holdEl) holdEl.innerHTML = `${holders.count!=null?Number(holders.count).toLocaleString():'…'} holders <span class="text-xs">${holders.top10HoldersPercent!=null?'top10 '+holders.top10HoldersPercent.toFixed(1)+'%':''}</span>`;
-        this._renderVirtualsSparkline(snap.bars);
-    },
-
-    // Real 30-day daily OHLCV close-price sparkline for VIRTUAL, from the
-    // same /virtuals-snapshot call above (worker/src/lib/codex.ts::tokenBars,
-    // Codex's getBars) — a minimal Chart.js line, no axes/gridlines, since
-    // this is a glance-value sparkline, not a full chart like the protocol
-    // detail modal's. Real data or nothing: skipped entirely on error/empty.
-    // Wrapped in try/catch (unlike the other Chart.js call sites on this
-    // page, which run standalone) because this one runs inside virtuals()'s
-    // shared try block alongside Trending on Base and New Launches — a
-    // blocked/failed Chart.js CDN load must not take those down with it.
-    _renderVirtualsSparkline(bars) {
-        try {
-            const canvas = document.getElementById('virtuals-sparkline');
-            if (!canvas || typeof Chart === 'undefined') return;
-            const points = (bars && !bars.error && Array.isArray(bars.points)) ? bars.points : [];
-            if (this._virtualsSparkChart) { this._virtualsSparkChart.destroy(); this._virtualsSparkChart = null; }
-            if (!points.length) return;
-            const data = points.map(p => p.c);
-            const up = data[data.length-1] >= data[0];
-            this._virtualsSparkChart = new Chart(canvas, {
-                type: 'line',
-                data: { labels: points.map(p => p.t), datasets: [{ data, borderColor: up?'#4ade80':'#fb7185',
-                    fill: false, tension: 0.25, pointRadius: 0, borderWidth: 1.5 }] },
-                options: { responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                    scales: { x: { display: false }, y: { display: false } } },
-            });
-        } catch (e) { /* non-fatal — the rest of the Virtuals panel still stands */ }
     },
 
     // Crypto/Base-relevant prediction-market odds from Polymarket + Kalshi
@@ -1041,7 +995,7 @@ const App = {
 
     // Client-side search state for the three Codex-backed token lists —
     // filters the already-fetched array, no extra network requests (the
-    // worker route is fetched once at a higher limit; see virtuals()).
+    // worker route is fetched once at a higher limit; see baseTokenDiscovery()).
     _searchTerms: { trending: '', launches: '', movers: '' },
     _setSearch(panel, term) {
         this._searchTerms[panel] = (term || '').trim().toLowerCase();
@@ -1059,7 +1013,7 @@ const App = {
     // Sorts one of the already-fetched Codex token arrays in place by a
     // numeric field, descending, nulls/missing last — shared by Trending on
     // Base and New Launches so both re-sort their existing 30-row fetch
-    // client-side (see virtuals() above for why limit=30 was chosen) rather
+    // client-side (see baseTokenDiscovery() above for why limit=30 was chosen) rather
     // than making a second network request per sort click.
     _sortTokensBy(items, field) {
         return [...items].sort((a, b) => {
@@ -1708,7 +1662,7 @@ window.addEventListener('load', () => {
         App._enrichProtocols();
     });
     // Trending on Base / New Launches sort — re-sorts the already-fetched
-    // 30-row Codex set (see App.virtuals()), no new request per click.
+    // 30-row Codex set (see App.baseTokenDiscovery()), no new request per click.
     document.getElementById('trending-sort').addEventListener('click', e => {
         const b = e.target.closest('button[data-s]'); if (!b) return;
         App._trendingSort = b.dataset.s;

@@ -34,6 +34,35 @@ const Bounty = {
     },
     _set(id, v) { const e = document.getElementById(id); if (!e) return; e.classList.remove('skeleton'); e.textContent = v; },
 
+    // Buckets an array of ISO timestamps into `weeks` trailing weekly counts,
+    // then renders them as a bar sparkline -- shared by the opportunities-
+    // discovered strip (.invl-spark-bar) and the inline Audit Track Record
+    // title sparkline (.secdash-ledger-spark-bar), just with a different bar
+    // class so each matches its own surrounding component's sizing.
+    _weeklyBuckets(isoDates, weeks) {
+        const now = Date.now();
+        const bucketMs = 7 * 86400e3;
+        const totals = new Array(weeks).fill(0);
+        (isoDates || []).forEach(iso => {
+            const t = new Date(iso).getTime();
+            if (isNaN(t)) return;
+            const diff = Math.floor((now - t) / bucketMs);
+            if (diff >= 0 && diff < weeks) totals[weeks - 1 - diff]++;
+        });
+        return totals;
+    },
+    _renderMiniSparkline(elId, totals, barClass) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        const cls = barClass || 'invl-spark-bar';
+        const max = Math.max(1, ...totals);
+        el.innerHTML = totals.map((n, i) => {
+            const pct = Math.max(6, Math.round(n / max * 100));
+            const latest = i === totals.length - 1 ? ' is-latest' : '';
+            return `<span class="${cls}${latest}" style="height:${pct}%" title="${n} this week"></span>`;
+        }).join('');
+    },
+
     // ── Generic client-side pagination (identical contract to app.js's own
     // _pgWire/_pgSlice/_pgReset — same "Showing X–Y of Z / Page N of M /
     // Prev/Next" footer convention used everywhere else on the site). ─────
@@ -90,6 +119,11 @@ const Bounty = {
             this._set('bcc-total', list.length.toLocaleString());
             this._set('bcc-live', live.toLocaleString());
             this._set('bcc-platforms', platforms.size);
+            // Real discovery-rate sparkline from each opportunity's own
+            // firstSeen timestamp (agents/scout.py writes this) -- the
+            // index.html teaser renders the same 12-week bucketing at a
+            // smaller size, off the same real signal.
+            this._renderMiniSparkline('bcc-spark', this._weeklyBuckets(list.map(o => o.firstSeen), 12));
             const updated = document.getElementById('bcc-updated');
             if (updated) updated.textContent = 'radar synced ' + new Date().toLocaleTimeString();
         } catch (e) {
@@ -141,6 +175,12 @@ const Bounty = {
             this._auditFiles = files;
             this._wireAuditListControls();
             this._renderAuditList();
+            // Real audits-filed-per-week, from each file's own real date
+            // (parsed off its filename, same field _renderAuditList() below
+            // already displays) -- an inline mini-sparkline next to the
+            // "Audit Track Record" heading, same pattern as Security
+            // Dashboard's Findings Ledger title sparkline.
+            this._renderMiniSparkline('bcc-audit-spark', this._weeklyBuckets(files.map(f => f.date), 12), 'secdash-ledger-spark-bar');
         } catch (e) {
             if (auditEl) auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet. <a class="text-zinc-400 hover:underline" href="https://github.com/' + REPO + '/tree/main/intel/audits/hack-sweep-reports" target="_blank">Browse the audit ledger</a>.</div>';
         }
