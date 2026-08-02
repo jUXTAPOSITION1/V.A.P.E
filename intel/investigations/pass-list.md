@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-08-02T22:31:22Z — 73 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-08-02T23:31:26Z — 74 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| Pizza | BNB Chain | `0x149002DdB0bb0342cDB1418C82B201bF415e7777` | 82/100 | 1 | 2026-08-02T23:31:26Z |
 | BABYASTEROID | Ethereum | `0xd7A7394294f4687966C60A1F68920f29688BF546` | 90/100 | 1 | 2026-08-02T20:31:11Z |
 | memes | BNB Chain | `0xF74548802f4c700315F019FdE17178b392EE4444` | 92/100 | 1 | 2026-08-02T02:27:26Z |
 | SHIB | Base | `0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7` | 85/100 | 1 | 2026-08-01T23:42:34Z |

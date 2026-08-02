@@ -1147,3 +1147,5 @@
 | 2026-08-02 | auto | 0x8B1484d57abBE239bB280661377363b03c89CaEa (ADI) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-02 | auto | 0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5 (ADI) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-02 | auto | 0x149002DdB0bb0342cDB1418C82B201bF415e7777 (Pizza) | deep_investigation | PROCEED (82/100) | Upgradeable proxy (verify implementation) | +7d |

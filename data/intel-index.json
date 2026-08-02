@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T23:19:40Z",
+  "generated": "2026-08-02T23:31:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 518,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 673,
+    "investigations": 674,
     "news": 53,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-223122-0x76B6Ebc6.md",
-      "title": "Investigation \u2014 ADI",
-      "symbol": "ADI",
-      "name": "ADI",
-      "date": "2026-08-02T22:31:22Z",
-      "target": "0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-223122-0x76B6Ebc6.md"
+      "file": "investigation-20260802-233126-0x149002Dd.md",
+      "title": "Investigation \u2014 Pizza",
+      "symbol": "Pizza",
+      "name": "Pizza",
+      "date": "2026-08-02T23:31:26Z",
+      "target": "0x149002DdB0bb0342cDB1418C82B201bF415e7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $10,818. Positive evidence: Ownership renounced; 5343 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 94+ days without a known incident in this scan; Custom verified source (not a mass-produc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-233126-0x149002Dd.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-233126-0x149002Dd.md",
+      "title": "Investigation \u2014 Pizza",
+      "symbol": "Pizza",
+      "name": "Pizza",
+      "date": "2026-08-02T23:31:26Z",
+      "target": "0x149002DdB0bb0342cDB1418C82B201bF415e7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $10,818. Positive evidence: Ownership renounced; 5343 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 94+ days without a known incident in this scan; Custom verified source (not a mass-produc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-233126-0x149002Dd.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-223122-0x76B6Ebc6.md",
