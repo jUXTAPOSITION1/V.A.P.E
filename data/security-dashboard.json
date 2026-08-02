@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T03:00:00Z",
+  "generated_at": "2026-08-02T03:57:42Z",
   "overall_threat_level": "HIGH",
   "findings_by_severity": {
     "CRITICAL": 1,
@@ -2507,8 +2507,8 @@
       "id": "codeql",
       "label": "Static Analysis (CodeQL)",
       "source_workflow": "codeql.yml",
-      "last_run_conclusion": null,
-      "last_run_at": "2026-08-02T02:59:40Z",
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-02T03:43:57Z",
       "headline": "100 open alert(s)",
       "open_alerts": 100,
       "persisted_high_critical_30d": 0
@@ -2525,9 +2525,9 @@
       "id": "vape-reviewer",
       "label": "Code Review (VAPE Reviewer)",
       "source_workflow": "vape-reviewer.yml",
-      "last_run_conclusion": null,
-      "last_run_at": "2026-08-02T02:59:40Z",
-      "headline": null
+      "last_run_conclusion": "success",
+      "last_run_at": "2026-08-02T03:43:56Z",
+      "headline": "success"
     },
     {
       "id": "dependency-audit",
