@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-02T20:46:20Z — 140 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-02T22:16:18Z — 141 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ADI | Ethereum | `0x8B1484d57abBE239bB280661377363b03c89CaEa` | 62/100 | 1 | 2026-08-02T22:16:18Z |
 | BabyAsteroid | Ethereum | `0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D` | 55/100 | 1 | 2026-08-02T20:15:50Z |
 | Pizza | BNB Chain | `0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444` | 75/100 | 1 | 2026-08-02T19:15:31Z |
 | SRC | Ethereum | `0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A` | 64/100 | 1 | 2026-08-02T18:29:51Z |

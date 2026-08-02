@@ -2579,6 +2579,25 @@
     "symbol": "Swing",
     "times_investigated": 1
   },
+  "1:0x8b1484d57abbe239bb280661377363b03c89caea": {
+    "address": "0x8B1484d57abBE239bB280661377363b03c89CaEa",
+    "chain": "1",
+    "creator_address": "0x2e6bdb43d646524e81c3ce18ef600255a02ecbd0",
+    "first_investigated": "2026-08-02T22:16:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-221618-0x8B1484d5.md",
+        "score": 62,
+        "ts": "2026-08-02T22:16:18Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T22:16:18Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "ADI",
+    "times_investigated": 1
+  },
   "1:0x8cddd6eea1067b78b77255e49861843f69d4703d": {
     "address": "0x8cDDd6EeA1067b78B77255e49861843F69D4703D",
     "chain": "1",

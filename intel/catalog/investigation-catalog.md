@@ -1143,3 +1143,5 @@
 | 2026-08-02 | auto | 0xd7A7394294f4687966C60A1F68920f29688BF546 (BABYASTEROID) | deep_investigation | PROCEED (90/100) | Low liquidity $16,627 | +7d |
 
 | 2026-08-02 | auto | 0x97B8C69D1bb0c10E3B32817f11a4A66785618B79 (BABYASTEROID) | deep_investigation | REJECT (32/100) | Low holder count (51) | +7d |
+
+| 2026-08-02 | auto | 0x8B1484d57abBE239bB280661377363b03c89CaEa (ADI) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
