@@ -1125,3 +1125,5 @@
 | 2026-08-02 | auto | 0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42 (SLOP) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-02 | auto | 0x154bD4F21310DCdFd52661456caD70f99dF43dA5 (IDOL) | deep_investigation | REJECT (35/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-02 | auto | 0x8554D38b95E4F7Ca11D391008627Df30B2b07777 (QLM) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
