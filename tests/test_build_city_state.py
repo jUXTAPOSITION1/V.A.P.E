@@ -75,6 +75,16 @@ def test_build_lane_checkpoints_positions_from_ring_never_collide():
     assert len(positions) == 10  # all 10 real ring slots used, no collisions
 
 
+def test_build_lane_checkpoints_beyond_ring_capacity_skips_not_overlaps():
+    """An 11th lane would silently wrap via modulo onto lane 0's grid cell
+    -- must be dropped instead of drawn on top of another building."""
+    lanes = [{"id": f"lane{i}"} for i in range(11)]
+    checkpoints = bcs.build_lane_checkpoints(lanes)
+    assert len(checkpoints) == 10
+    positions = {(c["gridX"], c["gridY"]) for c in checkpoints}
+    assert len(positions) == 10
+
+
 # ── build_landmarks() ──────────────────────────────────────────────────────────
 
 def _fixture_inputs():

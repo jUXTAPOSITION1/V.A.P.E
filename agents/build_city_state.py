@@ -90,10 +90,17 @@ def lane_status(lane):
 
 
 def build_lane_checkpoints(lanes):
-    """One uniform-size checkpoint building per real lane."""
+    """One uniform-size checkpoint building per real lane. LANE_RING has
+    exactly 10 hand-placed, collision-free slots -- as many as this repo's
+    real security lanes currently number. A lane beyond that is skipped
+    (with a warning) rather than silently wrapping via modulo, which would
+    draw two checkpoints on top of each other."""
     checkpoints = []
     for i, lane in enumerate(lanes):
-        pos = LANE_RING[i % len(LANE_RING)]
+        if i >= len(LANE_RING):
+            print(f"warning: lane {lane.get('id')!r} exceeds LANE_RING capacity ({len(LANE_RING)}), skipping", file=sys.stderr)
+            continue
+        pos = LANE_RING[i]
         checkpoints.append({
             "id": f"lane-{lane.get('id')}",
             "kind": "checkpoint",
@@ -265,8 +272,8 @@ def build():
         pos = LAYOUT.get(b["id"], {"gridX": 0, "gridY": 0, "footprint": [1, 1]})
         b.update(pos)
 
-    known = [l for l in lanes if l.get("last_run_conclusion") is not None]
-    lanes_passing = sum(1 for l in known if l.get("last_run_conclusion") == "success")
+    known = [lane for lane in lanes if lane.get("last_run_conclusion") is not None]
+    lanes_passing = sum(1 for lane in known if lane.get("last_run_conclusion") == "success")
 
     city = {
         "generated_at": now_iso(),

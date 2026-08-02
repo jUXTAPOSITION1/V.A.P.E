@@ -28,8 +28,42 @@ function escapeHtml(s) {
     return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// data/city-state.json's `link` fields are all repository-controlled
+// constants today (see agents/build_city_state.py's LAYOUT/build_landmarks),
+// but that file is fetched over the network from a mutable branch --
+// escapeHtml alone stops an attribute breakout, not a javascript:/data:
+// scheme landing in href. Only relative paths/anchors and explicit http(s)
+// pass through.
+function safeHref(url) {
+    const s = String(url ?? '').trim();
+    if (/^(https?:)?\/\//i.test(s)) return s;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';
+    return s;
+}
+
+// Cached -- the render loop calls this tens of times per frame at ~30fps,
+// and every one of these tokens is a static :root value that never changes
+// after first paint.
+const _cssVarCache = new Map();
 function cssVar(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    if (!_cssVarCache.has(name)) {
+        _cssVarCache.set(name, getComputedStyle(document.documentElement).getPropertyValue(name).trim());
+    }
+    return _cssVarCache.get(name);
+}
+
+// Canvas's `font` setter parses its value as a CSS <'font'> shorthand and
+// silently ignores anything containing var() (per the HTML spec, "property-
+// independent style sheet syntax" isn't allowed there) -- so `ctx.font =
+// '...var(--font-sans)...'` never actually applies and just keeps whatever
+// font canvas already had. Resolve the custom property to a real value once
+// and build the shorthand from that instead.
+let _canvasFontFamily = null;
+function canvasFontFamily() {
+    if (_canvasFontFamily === null) {
+        _canvasFontFamily = cssVar('--font-sans') || 'sans-serif';
+    }
+    return _canvasFontFamily;
 }
 
 // One vocabulary for every building kind: status -> color. Shared across
@@ -101,11 +135,21 @@ const CityScape = {
         if (!stages.length) return;
         try {
             const res = await fetch(`${CITY_STATE_URL}?t=${Math.floor(Date.now() / 300000)}`);
+            if (!res.ok) throw new Error(`city-state ${res.status}`);
             this._cityState = await res.json();
         } catch (e) {
             this._cityState = null;
         }
+        this._renderUpdated();
         stages.forEach(el => this._mount(el));
+    },
+
+    _renderUpdated() {
+        const el = document.getElementById('city-updated');
+        if (!el) return;
+        const ts = this._cityState && this._cityState.generated_at;
+        const d = ts && new Date(ts);
+        el.textContent = d && !isNaN(d) ? `updated ${d.toLocaleString()}` : 'city state unavailable this cycle';
     },
 
     _mount(el) {
@@ -124,6 +168,7 @@ const CityScape = {
             vehicles: [], ambient: [],
             lastX402: new Set(),
             lastFrame: 0,
+            visible: true,
         };
         this._instances.push(inst);
 
@@ -131,6 +176,9 @@ const CityScape = {
         this._wireInteraction(inst);
         this._resize(inst);
         new ResizeObserver(() => this._resize(inst)).observe(el);
+        // The compact stage sits inside a long page -- scrolled past, it has
+        // no reason to keep clearing/repainting ~30 times a second.
+        new IntersectionObserver(([entry]) => { inst.visible = entry.isIntersecting; }, { rootMargin: '100px' }).observe(el);
         requestAnimationFrame(t => this._frame(inst, t));
 
         if (WORKER_BASE) {
@@ -211,10 +259,15 @@ const CityScape = {
                 const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 inst.scale = clampScale(pinchStartScale * (dist / pinchStartDist));
                 moved = true;
-            } else if (dragStart && inst.mode === 'full') {
-                inst.offsetX = dragStart.offX + (e.clientX - dragStart.x);
-                inst.offsetY = dragStart.offY + (e.clientY - dragStart.y);
+            } else if (dragStart) {
+                // moved is tracked in every mode (a compact-stage drag must
+                // not be misread as a tap by the click handler below); only
+                // 'full' mode actually pans the camera with it.
                 if (Math.abs(e.clientX - dragStart.x) + Math.abs(e.clientY - dragStart.y) > 4) moved = true;
+                if (inst.mode === 'full') {
+                    inst.offsetX = dragStart.offX + (e.clientX - dragStart.x);
+                    inst.offsetY = dragStart.offY + (e.clientY - dragStart.y);
+                }
             }
         });
         const endPointer = (e) => {
@@ -256,7 +309,12 @@ const CityScape = {
         const w = inst.canvas.clientWidth, h = inst.canvas.clientHeight;
         const originX = w / 2 + inst.offsetX, originY = h * 0.32 + inst.offsetY;
         let hit = null;
-        for (const box of inst.hitboxes) {
+        // hitboxes are pushed in painter's-algorithm (back-to-front) draw
+        // order, and generous hit-box padding means neighbors overlap --
+        // walk it in reverse so an overlapping click resolves to whichever
+        // building was actually drawn on top.
+        for (let i = inst.hitboxes.length - 1; i >= 0; i--) {
+            const box = inst.hitboxes[i];
             const dx = (px - (originX + box.x * inst.scale)) / inst.scale;
             const dy = (py - (originY + box.y * inst.scale)) / inst.scale;
             if (Math.abs(dx) < box.hw && Math.abs(dy) < box.hh) { hit = box.building; break; }
@@ -291,7 +349,7 @@ const CityScape = {
                 <button type="button" class="city-detail-close" data-close>Close ✕</button>
             </div>
             ${rows.join('') || '<div class="city-detail-row"><span>No data this cycle.</span></div>'}
-            ${b.link ? `<a class="city-detail-link" href="${escapeHtml(b.link)}">Open <i class="fa-solid fa-arrow-right text-[9px]"></i></a>` : ''}
+            ${safeHref(b.link) ? `<a class="city-detail-link" href="${escapeHtml(safeHref(b.link))}">Open <i class="fa-solid fa-arrow-right text-[9px]"></i></a>` : ''}
         `;
         card.style.display = 'block';
         // Position near the building, clamped inside the stage.
@@ -318,12 +376,16 @@ const CityScape = {
     // ── Live x402 settlements -> moving delivery vehicles ───────────────────
     async _pollX402(inst) {
         try {
-            const r = await fetch(`${WORKER_BASE}/x402/feed?limit=6`);
+            const r = await fetch(`${WORKER_BASE}/x402/feed?limit=6`, { signal: AbortSignal.timeout(8000) });
             const data = await r.json();
             const jobs = Array.isArray(data.jobs) ? data.jobs : Array.isArray(data) ? data : [];
             inst.mintLive = jobs.length > 0;
             const mint = inst.buildings.find(b => b.id === 'mint-x402');
-            if (mint) mint.status = inst.mintLive ? 'ok' : 'unknown';
+            const nextMintStatus = inst.mintLive ? 'ok' : 'unknown';
+            if (mint && mint.status !== nextMintStatus) {
+                mint.status = nextMintStatus;
+                this._renderA11yList(inst); // the sr-only list is the canvas's declared text equivalent -- keep it in sync
+            }
             jobs.forEach(job => {
                 const key = job.tx_hash || job.id;
                 if (!key || inst.lastX402.has(key) || job.status !== 'settled') return;
@@ -355,10 +417,17 @@ const CityScape = {
     },
 
     _frame(inst, t) {
-        if (t - inst.lastFrame > 33) { // ~30fps cap, mobile-friendly
+        if (inst.visible && t - inst.lastFrame > 33) { // ~30fps cap, mobile-friendly
             inst.lastFrame = t;
-            this._advance(inst);
-            this._draw(inst);
+            // An uncaught throw here would stop this rAF chain from ever
+            // rescheduling itself, freezing the canvas for the rest of the
+            // page session -- degrade to a static frame instead.
+            try {
+                this._advance(inst);
+                this._draw(inst);
+            } catch (e) {
+                console.error('[CityScape] frame', e);
+            }
         }
         requestAnimationFrame(tt => this._frame(inst, tt));
     },
@@ -378,7 +447,7 @@ const CityScape = {
         ctx.clearRect(0, 0, w, h);
         if (!inst.buildings.length) {
             ctx.fillStyle = '#52525b';
-            ctx.font = '12px var(--font-sans), sans-serif';
+            ctx.font = `12px ${canvasFontFamily()}, sans-serif`;
             ctx.textAlign = 'center';
             ctx.fillText('Syncing city state…', w / 2, h / 2);
             return;
@@ -507,9 +576,9 @@ const CityScape = {
         // glyphs, so this stays a plain letter rather than a broken icon.
         if (!isCheckpoint && inst.mode === 'full') {
             ctx.fillStyle = 'rgba(9,9,11,0.55)';
-            ctx.font = '600 11px var(--font-sans), sans-serif';
+            ctx.font = `600 11px ${canvasFontFamily()}, sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText(b.title.charAt(0), top.x, top.y + 4);
+            ctx.fillText(String(b.title || '?').charAt(0), top.x, top.y + 4);
         }
 
         inst.hitboxes.push({ building: b, x: cx, y: cy - H / 2, hw: hw + 6, hh: hh + H / 2 + 6 });

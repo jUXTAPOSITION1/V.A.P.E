@@ -461,11 +461,26 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 30%, #17171d 0%, #0b0b0e 70%, #060608 100%);
     border: 1px solid var(--border);
+    /* Compact mode has no drag-to-pan (cityscape.js gates that on 'full'
+       mode) -- pan-y lets a one-finger drag over the diorama keep scrolling
+       the page instead of being swallowed as a dead gesture. */
+    touch-action: pan-y;
+}
+/* Full mode is genuinely draggable, so it gets the grab affordances and
+   claims the gesture outright (pinch-zoom needs both axes). 168px ~= sticky
+   nav (~65px) + this page's eyebrow/title/description block above the
+   stage; 100dvh (not vh) so mobile browsers' address-bar show/hide doesn't
+   leave the toolbar sitting under browser chrome. */
+.city-stage--full {
     touch-action: none;
     cursor: grab;
+    height: calc(100dvh - 168px);
+    min-height: 420px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
 }
-.city-stage:active { cursor: grabbing; }
-.city-stage--full { height: calc(100vh - 168px); min-height: 420px; border-radius: 0; border-left: none; border-right: none; }
+.city-stage--full:active { cursor: grabbing; }
 .city-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 
 .city-toolbar {
