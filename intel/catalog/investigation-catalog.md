@@ -1107,3 +1107,5 @@
 | 2026-08-02 | auto | 0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60 (AIPF) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-02 | auto | 0x2940446b9612Df1b73CEF7Df1B5A98192368D15A (NVIDIAPLUS) | deep_investigation | REJECT (0/100) | Very few holders (6) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-02 | auto | 0x4BfAa776991E85e5f8b1255461cbbd216cFc714f (HOME) | deep_investigation | CAUTION (52/100) | Owner not renounced (0x2d46c05f59e6e17d445f124c686bc478267d3261) — can still act | +7d |

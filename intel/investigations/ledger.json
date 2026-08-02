@@ -7801,6 +7801,25 @@
     "symbol": "Claude",
     "times_investigated": 1
   },
+  "8453:0x4bfaa776991e85e5f8b1255461cbbd216cfc714f": {
+    "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f",
+    "chain": "8453",
+    "creator_address": "0x81f6e2fe22337cbee8cbea38367d4c9986332977",
+    "first_investigated": "2026-08-02T10:59:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-105920-0x4BfAa776.md",
+        "score": 52,
+        "ts": "2026-08-02T10:59:20Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-02T10:59:20Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "HOME",
+    "times_investigated": 1
+  },
   "8453:0x4c433f4ef87fe506a7eed2fd1d822cbed411eba3": {
     "address": "0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
     "chain": "8453",
