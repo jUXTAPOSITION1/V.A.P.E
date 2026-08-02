@@ -1847,6 +1847,19 @@ const App = {
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
         return `https://dd.dexscreener.com/ds-data/tokens/${this._chainSlug(chain)}/${address.toLowerCase()}.png?size=lg`;
     },
+    // Every dedicated investigation report (source==="report", i.e. it has
+    // its own real intel/investigations/investigation-*.md file) now reads
+    // on-site via investigation.html — reuses report.js's markdown renderer
+    // instead of sending visitors straight to a raw GitHub blob. The legacy
+    // catalog rows (source==="catalog") have no individual file of their
+    // own — one shared table backs many rows — so those keep linking out to
+    // the catalog's raw blob, same as before.
+    _investigationUrl(item){
+        return item.file ? `investigation.html?file=${encodeURIComponent(item.file)}` : item.url;
+    },
+    _investigationLinkAttrs(item){
+        return item.file ? '' : ' target="_blank" rel="noopener"';
+    },
     _explorerUrl(address, chain){
         if(!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) return null;
         const slug = this._chainSlug(chain);
@@ -1914,7 +1927,7 @@ const App = {
                     </a>
                     ${inv.score?`<div class="text-xs text-zinc-400 mt-2 mb-2">Safety score <span class="text-zinc-200 text-sm">${inv.score}</span><span class="text-zinc-600">/100</span></div>`:''}
                     <div class="text-xs text-zinc-400 leading-relaxed break-words">${this._esc(inv.summary||inv.key_finding||'')}</div>
-                    <a href="${inv.url}" target="_blank" class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Read full investigation <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+                    <a href="${this._investigationUrl(inv)}"${this._investigationLinkAttrs(inv)} class="inline-flex items-center gap-1.5 text-[#60a5fa] text-xs mt-4 hover:underline">Read full investigation ${inv.file ? '<i class="fa-solid fa-arrow-right text-[10px]"></i>' : '<i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>'}</a>`;
             } else { iel.innerHTML='<div class="text-zinc-500 text-sm">No investigation logged yet.</div>'; }
             // hero: latest report
             const rep=(d.latest_summary||{}).report;
@@ -2051,7 +2064,7 @@ const App = {
                 const showName = i.name && i.name.toLowerCase() !== (sym||'').toLowerCase();
                 const icon = this._iconImg(i.target, i.chain, 36, 'w-full h-full');
                 return `
-                <a href="${i.url}" target="_blank" class="card-h diff-row flex items-start gap-3 overflow-hidden">
+                <a href="${this._investigationUrl(i)}"${this._investigationLinkAttrs(i)} class="card-h diff-row flex items-start gap-3 overflow-hidden">
                     ${icon ? this._iconChip(icon) : this._iconGlyph('fa-magnifying-glass-chart')}
                     <div class="min-w-0 flex-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
