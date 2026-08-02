@@ -296,9 +296,18 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-panel-title {
     font-size: 12px;
     color: #a1a1aa;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.15rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+}
+/* One-line plain-language caption under each panel/section title, answering
+   "what is this for" directly rather than leaving the reader to infer it
+   from the widget alone. */
+.secdash-panel-desc {
+    font-size: 10.5px;
+    color: #71717a;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
 }
 
 /* Threat-level arc gauge. A Chart.js doughnut rotated into a half-circle

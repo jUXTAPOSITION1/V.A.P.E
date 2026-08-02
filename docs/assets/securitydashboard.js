@@ -197,6 +197,15 @@ const SecurityDashboard = {
                 deltaEl.innerHTML = `<span style="color:${escapeHtml(sevColor('LOW'))}">&#9660; improved</span> vs last check`;
             }
         }
+
+        // A second real-data line explaining WHY the level reads the way it
+        // does, rather than leaving the arc + one word to speak for itself.
+        const contextEl = document.getElementById('secdash-gauge-context');
+        if (contextEl) {
+            const bySev = this._data.findings_by_severity;
+            const critHigh = bySev ? (bySev.CRITICAL || 0) + (bySev.HIGH || 0) : null;
+            contextEl.textContent = critHigh == null ? 'no severity signal yet' : `${critHigh.toLocaleString()} critical/high finding(s) open`;
+        }
     },
 
     // Findings Count: a real count+percentage list (doubling as the
@@ -241,10 +250,12 @@ const SecurityDashboard = {
                 responsive: true,
                 maintainAspectRatio: false,
                 cutout: '68%',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { callbacks: { label: c => `${c.label}: ${c.parsed} (${((c.parsed / total) * 100).toFixed(1)}%)` } },
-                },
+                // The adjacent list already shows every segment's exact
+                // count + percentage at all times, so a hover tooltip adds
+                // no information — and at this donut's compact size, the
+                // default tooltip position collided with the centered
+                // "Total" label. Disabled rather than repositioned.
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
             },
         });
         const totalValue = document.getElementById('secdash-sev-donut-total-value');
