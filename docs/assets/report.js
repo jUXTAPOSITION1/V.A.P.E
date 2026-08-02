@@ -23,7 +23,7 @@ const VERDICT_LABELS = { PROCEED: "GO", CAUTION: "CAUTION", REJECT: "NO-GO", LOW
 // site's live metrics strip, duplicated here (rather than imported) since
 // report.js renders arbitrary deliverable JSON, not just app.js's own data.
 function fmtUsdCompact(n) {
-    if (n === null || n === undefined || isNaN(n)) return '—';
+    if (n === null || n === undefined || isNaN(n)) return '…';
     const v = Number(n);
     // Global crypto market cap runs into the trillions — app.js's own
     // metrics-strip formatter tops out at "B" because nothing it renders
@@ -35,7 +35,7 @@ function fmtUsdCompact(n) {
     return '$' + v.toLocaleString();
 }
 function pctHtml(n) {
-    if (typeof n !== 'number' || isNaN(n)) return '—';
+    if (typeof n !== 'number' || isNaN(n)) return '…';
     return `<span class="${n >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${n >= 0 ? '+' : ''}${n.toFixed(2)}%</span>`;
 }
 
@@ -180,7 +180,7 @@ function renderDeliverableHtml(obj, depth = 0) {
                     const icon = knownIcon(sym);
                     return `<div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5">
                         <span class="text-zinc-500 shrink-0 flex items-center gap-1.5">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}${escapeHtml(humanLabel(sym))}</span>
-                        <span class="text-zinc-300 text-right">${price === null || price === undefined ? '—' : `$${price}`}</span>
+                        <span class="text-zinc-300 text-right">${price === null || price === undefined ? '…' : `$${price}`}</span>
                     </div>`;
                 }).join('')}
             </div>`;
@@ -229,7 +229,7 @@ function renderDeliverableHtml(obj, depth = 0) {
                     ${val.map(p => `
                         <div class="flex items-center justify-between gap-2 text-xs py-1 border-b border-white/5">
                             <span class="text-zinc-300">${escapeHtml(String(p.name))}</span>
-                            ${typeof p.change_24h_pct === 'number' ? pctHtml(p.change_24h_pct) : '—'}
+                            ${typeof p.change_24h_pct === 'number' ? pctHtml(p.change_24h_pct) : '…'}
                         </div>`).join('')}
                 </div>
             </div>`;
@@ -243,7 +243,7 @@ function renderDeliverableHtml(obj, depth = 0) {
                 ${Object.entries(val).map(([cat, pct]) => `
                     <div class="flex justify-between gap-3 text-xs py-1 border-b border-white/5">
                         <span class="text-zinc-500 shrink-0">${escapeHtml(cat)}</span>
-                        <span class="text-zinc-300 text-right">${typeof pct === 'number' ? pct.toFixed(1) + '%' : '—'}</span>
+                        <span class="text-zinc-300 text-right">${typeof pct === 'number' ? pct.toFixed(1) + '%' : '…'}</span>
                     </div>`).join('')}
             </div>`;
         }
@@ -318,7 +318,7 @@ function renderDeliverableHtml(obj, depth = 0) {
                 <span class="text-zinc-300 text-right">${fmtUsdCompact(val)}</span>
             </div>`;
         }
-        const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
+        const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '…' : String(val));
         // token_scan deliverables (token_safety_check) carry `symbol` alongside
         // `address`/`chain_id` at the same level — real per-token icon, same
         // DexScreener CDN already used for investigation/scan cards.
@@ -394,9 +394,9 @@ const Report = {
             ['Offering', humanLabel(opts.offering)],
             ...(pdfTokenParts.length ? [['Token', pdfTokenParts.join(' ')]] : []),
             ['Fulfillment', opts.via === 'x402' ? 'Paid via x402 (on-chain, real-time)' : 'Open-source preview scan'],
-            ['Price', opts.priceUsd != null ? `$${opts.priceUsd}` : '—'],
-            ['Target address', opts.requestedAddress || '—'],
-            ['Hired by', opts.hiredBy || '—'],
+            ['Price', opts.priceUsd != null ? `$${opts.priceUsd}` : '…'],
+            ['Target address', opts.requestedAddress || '…'],
+            ['Hired by', opts.hiredBy || '…'],
             ['Generated', generated],
         ];
         rows.forEach(([k, v]) => {
@@ -535,7 +535,7 @@ const Report = {
                 }
                 continue;
             }
-            const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '—' : String(val));
+            const display = Array.isArray(val) ? val.join(', ') : (val === null || val === undefined ? '…' : String(val));
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(9.5);
             doc.setTextColor(...INK);
@@ -641,7 +641,7 @@ const Report = {
         const disclaimer = (opts.result && opts.result.disclaimer) || 'Real on-chain data. Not investment advice.';
         const source = (opts.result && opts.result.source) || 'vape-real-data';
         const addr = opts.requestedAddress;
-        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-zinc-300 hover:underline">${escapeHtml(addr)}</a>` : '—';
+        const addrHtml = addr ? `<a href="${escapeHtml(basescanUrl(addr))}" target="_blank" rel="noopener" class="text-zinc-300 hover:underline">${escapeHtml(addr)}</a>` : '…';
         const flags = Array.isArray(deliverable.flags) ? deliverable.flags : [];
         // The audited project's own real, fetched logo (deep_dive_audit.py's
         // DexScreener-sourced logo_url, or external_audit.py's GitHub-org

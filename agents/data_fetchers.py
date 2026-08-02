@@ -178,7 +178,7 @@ def get_base_tvl_and_protocols(top_n=10):
             level = "MEDIUM"
         else:
             level = "LOW"
-        out["concentration_risk"] = f"{level} — top 3 protocols hold {top3_share:.1f}% of Base TVL"
+        out["concentration_risk"] = f"{level}: top 3 protocols hold {top3_share:.1f}% of Base TVL"
 
         # Real 24h movers among the top_n set only (a protocol outside the
         # top_n has no business being called a "top gainer/loser" here).
