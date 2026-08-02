@@ -126,14 +126,14 @@ const Wallet = {
             await this._bind(provider, 'coinbase', accounts[0]);
         } catch (e) {
             console.error('[wallet] Coinbase Wallet connect failed', e);
-            alert('Coinbase Wallet connect failed — see console for details.');
+            alert('Coinbase Wallet connect failed. See console for details.');
         }
         this._closePopover();
     },
 
     async connectWalletConnect() {
         if (!WALLETCONNECT_PROJECT_ID) {
-            alert('WalletConnect needs a Project ID (free at cloud.reown.com) — not configured yet. Use an injected wallet or Coinbase Wallet for now.');
+            alert('WalletConnect needs a Project ID (free at cloud.reown.com), not configured yet. Use an injected wallet or Coinbase Wallet for now.');
             return;
         }
         try {
@@ -153,7 +153,7 @@ const Wallet = {
             await this._bind(provider, 'walletconnect', provider.accounts[0]);
         } catch (e) {
             console.error('[wallet] WalletConnect connect failed', e);
-            alert('WalletConnect connect failed — see console for details.');
+            alert('WalletConnect connect failed. See console for details.');
         }
         this._closePopover();
     },
@@ -283,7 +283,7 @@ const Wallet = {
             if (el) el.textContent = `${eth < 0.0001 && eth > 0 ? '<0.0001' : eth.toFixed(4)} ETH`;
         } catch (e) {
             const el = document.getElementById('wallet-pop-balance');
-            if (el) el.textContent = '—';
+            if (el) el.textContent = '…';
         }
     },
 
