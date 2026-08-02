@@ -85,7 +85,7 @@ const NewsPage = {
         const items = renderPage(this._page, this._filtered(), PAGE_SIZE);
         el.innerHTML = items.length
             ? items.map(storyCardHtml).join('')
-            : '<div class="text-zinc-500 text-sm col-span-full">No stories match this filter yet — VAPE Wire publishes new coverage on a schedule.</div>';
+            : '<div class="text-zinc-500 text-sm col-span-full">No stories match this filter yet. New coverage publishes on a schedule.</div>';
     },
 };
 

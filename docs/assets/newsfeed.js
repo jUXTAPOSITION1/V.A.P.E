@@ -26,7 +26,7 @@ const NewsFeed = {
         const items = stories.slice(0, TEASER_COUNT);
         el.innerHTML = items.length
             ? items.map(storyCardHtml).join('')
-            : '<div class="text-zinc-500 text-sm col-span-full">No stories published yet — VAPE Wire publishes new coverage on a schedule.</div>';
+            : '<div class="text-zinc-500 text-sm col-span-full">No stories published yet. New coverage publishes on a schedule.</div>';
     },
 };
 
