@@ -100,6 +100,63 @@ const AttackFeed = {
         this._renderTicker();
         this._wireLedgerControls();
         this._renderLedger();
+        this._renderLedgerPreview();
+    },
+
+    // Main-site "Threat Intelligence" preview (#threat-intel-preview,
+    // index.html) — the full searchable ledger moved to bounty.html; this
+    // reuses the same already-fetched this._data rather than a second
+    // fetch. No-ops entirely if the preview markup isn't on the current
+    // page (e.g. bounty.html, which has the full ledger instead).
+    _weekBuckets(incidents, weeks) {
+        const now = Date.now();
+        const bucketMs = 7 * 86400e3;
+        const buckets = Array.from({ length: weeks }, () => ({ count: 0, amountSum: 0 }));
+        incidents.forEach(i => {
+            const t = Date.parse(`${i.date}T00:00:00Z`);
+            if (isNaN(t)) return;
+            const diff = Math.floor((now - t) / bucketMs);
+            if (diff < 0) return;
+            const bd = Math.min(diff, weeks - 1);
+            if (bd >= weeks) return;
+            const b = buckets[weeks - 1 - bd];
+            b.count++;
+            b.amountSum += Number(i.amount_usd_m) || 0;
+        });
+        return buckets;
+    },
+    _renderLedgerPreview() {
+        const spark = document.getElementById('tip-spark');
+        const totalEl = document.getElementById('tip-total');
+        const threatEl = document.getElementById('tip-threat');
+        const weekEl = document.getElementById('tip-week');
+        const updatedEl = document.getElementById('tip-updated');
+        if (!spark && !totalEl) return; // not on this page
+
+        const incidents = this._incidents();
+        const data = this._data;
+        if (totalEl) totalEl.textContent = incidents.length.toLocaleString();
+        if (threatEl) threatEl.textContent = (data && data.threat_level) ? data.threat_level : '…';
+        const weekLoss = incidents.reduce((sum, i) => {
+            const days = (Date.now() - Date.parse(`${i.date}T00:00:00Z`)) / 86400000;
+            return days >= 0 && days < 7 ? sum + (Number(i.amount_usd_m) || 0) : sum;
+        }, 0);
+        if (weekEl) weekEl.textContent = fmtLoss(weekLoss);
+        if (updatedEl) updatedEl.textContent = data && data.generated_at ? (isNaN(new Date(data.generated_at)) ? 'synced' : `synced ${new Date(data.generated_at).toLocaleTimeString()}`) : (data ? 'synced' : 'unavailable');
+
+        if (spark) {
+            const buckets = this._weekBuckets(incidents, 12);
+            const max = Math.max(1, ...buckets.map(b => b.count));
+            spark.innerHTML = buckets.map((b, i) => {
+                const pct = Math.max(6, Math.round((b.count / max) * 100));
+                const latest = i === buckets.length - 1 ? ' is-latest' : '';
+                const sev = b.count ? severityClass(b.amountSum) : null;
+                const color = sev ? (sev.dot === 'bg-rose-500' ? '#fb7185' : sev.dot === 'bg-amber-500' ? '#fbbf24' : '#71717a') : null;
+                const style = color ? `height:${pct}%;background:${color}` : `height:${pct}%`;
+                const title = b.count ? `${b.count} incident(s), ${fmtLoss(b.amountSum)} lost` : '0 incidents';
+                return `<span class="invl-spark-bar${latest}" style="${style}" title="${escapeHtml(title)}"></span>`;
+            }).join('');
+        }
     },
 
     // Tags each item with its type so the ticker can render/link it

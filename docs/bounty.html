@@ -42,6 +42,7 @@
                 <a href="index.html" class="hover:text-zinc-100 transition">Main Site</a>
                 <a href="news.html" class="hover:text-zinc-100 transition">VAPE Wire</a>
                 <a href="investigations.html" class="hover:text-zinc-100 transition">Investigations</a>
+                <a href="#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
                 <a href="search.html" aria-label="Search" class="text-zinc-500 hover:text-zinc-100 transition"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
             <div class="flex items-center gap-2 sm:gap-3">
@@ -53,6 +54,7 @@
                 <a href="index.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Main Site</a>
                 <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>VAPE Wire</a>
                 <a href="investigations.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass-chart w-4 text-center text-zinc-500"></i>Investigations</a>
+                <a href="#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-shield-halved w-4 text-center text-zinc-500"></i>Threats</a>
                 <a href="search.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-magnifying-glass w-4 text-center text-zinc-500"></i>Search</a>
             </div>
         </div>
@@ -70,12 +72,56 @@
             hireable directly from a matched program below.</p>
         </header>
 
-        <div id="bcc-telemetry" class="stat-line mb-6 pb-6 border-b border-white/10">
+        <div id="bcc-telemetry" class="stat-line mb-4 pb-6 border-b border-white/10">
             <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">live now</span><span id="bcc-live" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">platforms</span><span id="bcc-platforms" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">audits filed</span><span id="bcc-audits" class="stat-value">…</span></span>
             <span class="stat-pair"><span class="stat-label">tasks (recent)</span><span id="bcc-tasks" class="stat-value">…</span></span>
+        </div>
+
+        <div class="flex items-center justify-between gap-3 mb-8 pb-8 border-b border-white/10">
+            <span class="text-xs text-zinc-500">Programs discovered, last 12 weeks</span>
+            <div id="bcc-spark" class="invl-spark invl-spark-lg"></div>
+        </div>
+
+        <!-- Flagship offering: relocated from index.html's #commission-flagship
+             (explicit direction 2026-08-02) -- restyled to this page's own
+             plain-block convention (no homepage gradient/hero-title chrome)
+             since this page IS the dedicated commissioning destination now.
+             Same handler/offering key the card further down this page used
+             to use, so both entry points still dispatch identically. -->
+        <div class="mb-8 pb-8 border-b border-white/10">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
+                </span>
+                <span class="text-[11px] uppercase tracking-wider text-amber-400/90">Flagship offering</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
+                <div class="lg:col-span-7">
+                    <h2 class="section-title text-lg mb-3">Commission a real exploit against a real contract.</h2>
+                    <p class="text-zinc-400 text-sm max-w-xl leading-relaxed mb-4">Give VAPE a contract address or GitHub repo. It recons the code, drafts a real
+                    exploit with a frontier model, then <span class="text-amber-200/90">executes it with Foundry against a live fork of that contract's
+                    on-chain state</span>. What comes back is measured impact evidence — a submission-ready proof-of-concept, not a narrated guess.</p>
+                    <div class="flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-500">
+                        <span>✓ Executed exploit test, not narrated</span>
+                        <span>✓ Real forked on-chain state</span>
+                        <span>✓ Frontier-LLM vulnerability reasoning</span>
+                        <span>✓ Submission-ready report</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="panel">
+                        <div class="text-xs text-zinc-500 mb-1">Bounty Deep-Dive Audit</div>
+                        <div class="text-2xl mb-2 text-zinc-100">$1 <span class="text-sm text-zinc-500">USDC</span></div>
+                        <p class="text-xs text-zinc-500 mb-4 leading-relaxed">Settles instantly on Base — delivered the moment the exploit completes. No fixed turnaround.</p>
+                        <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="term-btn w-full">Authorize via x402</button>
+                        <p class="text-[10px] text-zinc-600 mt-3">Prefer to scope it to a specific program? Use the "Hire VAPE" button on any Bounty Ops card below. See <a href="#audit-track-record" class="text-zinc-500 hover:underline">past audits</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Live task feed — real recent automated commits + one
@@ -105,53 +151,33 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <!-- live radar -->
-            <div class="lg:col-span-7">
-                <div class="flex items-center justify-between gap-3 mb-4">
-                    <h3 class="text-sm text-zinc-500">Bounty Ops: Matched Programs, Live</h3>
-                    <input id="bounty-ops-search" type="search" placeholder="Search programs, platforms, tags…" class="hidden text-xs bg-transparent border border-white/10 px-3 py-1.5 w-44 sm:w-56 focus:outline-none focus:border-white/30 placeholder:text-zinc-600">
-                </div>
-                <div id="bounties" class="diff-list">
-                    <div class="skeleton h-20 my-1"></div>
-                    <div class="skeleton h-20 my-1"></div>
-                </div>
-                <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                    <span id="bounty-ops-pg-count">…</span>
-                    <div class="flex items-center gap-2">
-                        <button type="button" id="bounty-ops-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                        <span id="bounty-ops-pg-page" class="text-zinc-400">Page 1</span>
-                        <button type="button" id="bounty-ops-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                    </div>
-                </div>
-                <p class="text-[11px] text-zinc-600 mt-4">Live bug-bounty programs vetted against VAPE's tooling: Solidity/EVM or Move/Sui code-review scope only, not a historical exploit or a post-incident recovery offer. Historical incidents live in the <a href="index.html#threat-ledger" class="text-zinc-500 hover:text-rose-400 hover:underline">Threat Ledger</a>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar/bounty-ops" target="_blank" class="text-zinc-500 hover:underline">Browse Bounty Ops</a> · <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-zinc-500 hover:underline">view the full radar</a></p>
+        <!-- Bounty Ops: full width now that the Commission card above covers
+             the flagship hire CTA -- no reason to split this into a
+             5-column sidebar when the offer it made is already stated. -->
+        <div class="mb-10">
+            <div class="flex items-center justify-between gap-3 mb-4">
+                <h3 class="text-sm text-zinc-500">Bounty Ops: Matched Programs, Live</h3>
+                <input id="bounty-ops-search" type="search" placeholder="Search programs, platforms, tags…" class="hidden text-xs bg-transparent border border-white/10 px-3 py-1.5 w-44 sm:w-56 focus:outline-none focus:border-white/30 placeholder:text-zinc-600">
             </div>
-
-            <!-- hire CTA: deep-dive bounty -->
-            <div class="lg:col-span-5">
-                <div class="panel h-full flex flex-col">
-                    <h3 class="text-sm text-zinc-500 mb-2">Commission a Bounty Audit</h3>
-                    <div class="text-2xl mb-2 text-zinc-100">$1 <span class="text-sm text-zinc-500">USDC</span></div>
-                    <div class="text-sm text-zinc-400 mb-5 leading-relaxed">A submission-ready PoC and all supporting detail: full reconnaissance, static analysis,
-                    and a line-by-line review by a frontier language model. No fixed turnaround; delivered as soon as it completes.</div>
-                    <div class="stat-line mb-5 text-[11px]">
-                        <span class="stat-label">submission-ready PoC</span><span class="stat-label">·</span>
-                        <span class="stat-label">frontier model</span><span class="stat-label">·</span>
-                        <span class="stat-label">full recon</span><span class="stat-label">·</span>
-                        <span class="stat-label">committed report</span>
-                    </div>
-                    <div class="mt-auto space-y-2">
-                        <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="term-btn w-full">Authorize via x402</button>
-                    </div>
-                    <p class="text-[10px] text-zinc-600 mt-4">Settles instantly via x402. Prefer to scope it to a specific program? Use the "Hire VAPE" button on any Bounty Ops card at left.</p>
+            <div id="bounties" class="diff-list">
+                <div class="skeleton h-20 my-1"></div>
+                <div class="skeleton h-20 my-1"></div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
+                <span id="bounty-ops-pg-count">…</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="bounty-ops-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="bounty-ops-pg-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="bounty-ops-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
                 </div>
             </div>
+            <p class="text-[11px] text-zinc-600 mt-4">Live bug-bounty programs vetted against VAPE's tooling: Solidity/EVM or Move/Sui code-review scope only, not a historical exploit or a post-incident recovery offer. Historical incidents live in the <a href="#threat-ledger" class="text-zinc-500 hover:text-rose-400 hover:underline">Threat Ledger</a>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar/bounty-ops" target="_blank" class="text-zinc-500 hover:underline">Browse Bounty Ops</a> · <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-zinc-500 hover:underline">view the full radar</a></p>
         </div>
 
         <!-- VAPE's own audit track record -->
-        <div class="mt-10">
+        <div class="mt-10" id="audit-track-record">
             <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
-                <h3 class="text-sm text-zinc-500">Audit Track Record</h3>
+                <h3 class="text-sm text-zinc-500">Audit Track Record<span id="bcc-audit-spark" class="secdash-ledger-spark"></span></h3>
                 <div class="relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
                     <input id="bcc-audit-search" type="text" placeholder="Search audits…"
@@ -172,12 +198,69 @@
             </div>
             <p class="text-[11px] text-zinc-600 mt-4">A transparent record of every audit VAPE has performed, including cases where deeper investigation wasn't warranted.</p>
         </div>
+
+        <!-- Threat Ledger — relocated from index.html's #threat-ledger
+             (explicit direction 2026-08-02): VAPE's exploit-commissioning
+             and threat-tracking surfaces are both "security operations," so
+             they now live on one page. Same element IDs as before, so
+             attackfeed.js's _wireLedgerControls()/_renderLedger() work here
+             unmodified; only the surrounding chrome changed, from the
+             homepage's eyebrow+icon-dropdown treatment to this page's own
+             plain block convention. -->
+        <div class="mt-10" id="threat-ledger">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <h3 class="text-sm text-zinc-500">Threat Ledger</h3>
+                <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
+            </div>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of exploits across DeFi from roughly the past two months:
+            technique, amount, and where the next incident is likely to land.</p>
+
+            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
+                    <input id="threat-ledger-search" type="text" placeholder="Search protocol, chain, amount…"
+                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
+                </div>
+                <select id="threat-ledger-severity" class="select-pill">
+                    <option value="">All severity</option>
+                    <option value="extreme">Extreme</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select id="threat-ledger-sort" class="select-pill">
+                    <option value="date_desc">Newest first</option>
+                    <option value="date_asc">Oldest first</option>
+                    <option value="amount_desc">Amount: high → low</option>
+                    <option value="amount_asc">Amount: low → high</option>
+                </select>
+            </div>
+
+            <div id="threat-ledger-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
+                <div class="skeleton h-14 my-1"></div>
+                <div class="skeleton h-14 my-1"></div>
+                <div class="skeleton h-14 my-1"></div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
+                <span id="threat-ledger-count">…</span>
+                <div class="flex items-center gap-2">
+                    <button type="button" id="threat-ledger-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
+                    <span id="threat-ledger-page" class="text-zinc-400">Page 1</span>
+                    <button type="button" id="threat-ledger-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-zinc-600 mt-4">Each incident is checked against known attack patterns for a concrete prevention takeaway.
+            See <a href="investigations.html" class="text-zinc-500 hover:text-rose-400 hover:underline">Investigations</a> for the resulting case files.</p>
+        </div>
     </main>
 
     <script type="module" src="assets/nav.js"></script>
     <script type="module" src="assets/wallet.js?v=9"></script>
     <script type="module" src="assets/report.js?v=9"></script>
     <script type="module" src="assets/hire.js?v=13"></script>
-    <script type="module" src="assets/bounty.js"></script>
+    <script type="module" src="assets/bounty.js?v=2"></script>
+    <script type="module" src="assets/attackfeed.js"></script>
 </body>
 </html>

@@ -90,7 +90,7 @@
                 <a href="#the-file" class="hover:text-zinc-100 transition">Overview</a>
                 <a href="news.html" class="hover:text-zinc-100 transition">News</a>
                 <a href="investigations.html" class="hover:text-zinc-100 transition">Investigations</a>
-                <a href="#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
+                <a href="bounty.html#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
                 <a href="#retain" class="hover:text-zinc-100 transition">Engagement</a>
                 <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
                 <a href="#the-wire" class="hover:text-zinc-100 transition">Live Data</a>
@@ -116,7 +116,7 @@
                 <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Overview</a>
                 <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>News</a>
                 <a href="investigations.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-star w-4 text-center text-zinc-500"></i>Investigations</a>
-                <a href="#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-shield-halved w-4 text-center text-zinc-500"></i>Threats</a>
+                <a href="bounty.html#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-shield-halved w-4 text-center text-zinc-500"></i>Threats</a>
                 <a href="#retain" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-handshake w-4 text-center text-zinc-500"></i>Engagement</a>
                 <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-chart-line w-4 text-center text-zinc-500"></i>Live Data</a>
@@ -155,7 +155,7 @@
                         </span>
                         <span class="text-xs text-zinc-500 whitespace-nowrap">Live Feed</span>
                     </div>
-                    <a href="#threat-ledger" class="inline-flex items-center gap-1.5 text-[11px] text-zinc-500 hover:text-rose-400 transition shrink-0">
+                    <a href="bounty.html#threat-ledger" class="inline-flex items-center gap-1.5 text-[11px] text-zinc-500 hover:text-rose-400 transition shrink-0">
                         <span class="sr-only sm:not-sr-only">Full Ledger</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
                 </div>
@@ -407,7 +407,62 @@
             <p class="text-[10px] text-zinc-600 mt-3">Refreshed every 6h by <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/agents/build_security_dashboard.py" target="_blank" class="text-zinc-400 hover:underline">agents/build_security_dashboard.py</a>.</p>
         </section>
 
-        <!-- ═══ 3. LIVE X402 LEDGER ═══ -->
+        <!-- ═══ 3. FEATURED INVESTIGATIONS ═══
+             Positioned right after the Security Dashboard's Findings Ledger
+             (explicit direction 2026-08-02). A live, working preview of
+             investigations.html — same stat line, same sparkline (day/week/
+             month/all-time toggle), same row markup, imported straight from
+             investigations-ledger.js (docs/assets/investigations-preview.js)
+             rather than a lookalike, so it can never visually drift from the
+             real page. Full history + the interactive Verdict Breakdown live
+             only on the dedicated page, which this always points to. -->
+        <section id="investigations-preview" class="reveal panel mb-14">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                <div class="eyebrow mb-1"><i class="fa-solid fa-magnifying-glass-chart"></i>[ spotlight ]</div>
+                <span id="invp-updated" class="text-[11px] text-zinc-500">syncing…</span>
+            </div>
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+                <h2 class="section-title text-lg sm:text-xl">Featured Investigations</h2>
+                <a href="investigations.html" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
+                    Browse every investigation <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </div>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">Every deep investigation VAPE has published, in one expanding ledger — this is a live preview of the full page.</p>
+
+            <div id="invp-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+                <span class="stat-pair"><span class="stat-label">tracked</span><span id="invp-total" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">reject</span><span id="invp-reject" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">caution</span><span id="invp-caution" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">proceed</span><span id="invp-proceed" class="stat-value skeleton">…</span></span>
+                <span class="stat-pair"><span class="stat-label">avg score</span><span id="invp-avg-score" class="stat-value skeleton">…</span></span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <h3 class="text-xs text-zinc-500 uppercase tracking-wider">Activity</h3>
+                <div id="invp-spark-range" class="invl-range-toggle" role="group" aria-label="Sparkline range">
+                    <button type="button" data-range="day" class="invl-range-btn">Day</button>
+                    <button type="button" data-range="week" class="invl-range-btn">Week</button>
+                    <button type="button" data-range="month" class="invl-range-btn">Month</button>
+                    <button type="button" data-range="all" class="invl-range-btn">All time</button>
+                </div>
+            </div>
+            <div id="invp-spark" class="invl-spark invl-spark-lg mb-5"></div>
+
+            <div class="invl-scroll">
+                <table class="invl-table">
+                    <thead>
+                        <tr><th>Token</th><th>Chain</th><th>Verdict</th><th>Score</th><th>Date</th><th></th></tr>
+                    </thead>
+                    <tbody id="invp-body">
+                        <tr><td colspan="6" class="text-zinc-500 text-xs py-6 text-center">Loading investigations…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="investigations.html" class="term-btn mt-5 inline-block">Browse every investigation <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
+        </section>
+
+
+        <!-- ═══ 3.5. LIVE X402 LEDGER ═══ -->
         <section id="x402-ledger" class="reveal panel mb-14">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
                 <div class="eyebrow"><i class="fa-solid fa-money-bill-transfer"></i>[ on-chain settlement ]</div>
@@ -633,171 +688,37 @@
             </div>
         </section>
 
-        <!-- ═══ 3.5. FLAGSHIP: COMMISSION A BOUNTY ═══
-             VAPE's primary paid offering, elevated to a real focal point right
-             after Engagement Options — not a filed-away line item further down
-             the page. Same handler/offering key the detailed card in Bounty
-             Command Center already uses (Hire.openX402('bounty_deep_dive', 1))
-             so both entry points dispatch identically; this one just sells it. -->
-        <section id="commission-flagship" class="reveal flagship-section mb-14">
-            <div class="flex flex-wrap items-center gap-2 mb-4">
-                <span class="relative flex h-1.5 w-1.5">
-                    <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
-                </span>
-                <div class="flagship-kicker">[ flagship offering ]</div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-end">
-                <div class="lg:col-span-7">
-                    <h2 class="hero-title !text-xl sm:!text-2xl mb-4">Commission a real exploit against a real contract.</h2>
-                    <p class="text-zinc-300 text-sm sm:text-[15px] max-w-xl leading-relaxed mb-5">
-                        Give VAPE a contract address or GitHub repo. It recons the code, drafts a real exploit with a frontier
-                        model, then <span class="text-amber-200">executes it with Foundry against a live fork of that
-                        contract's on-chain state</span>. What comes back is measured impact evidence — a submission-ready
-                        proof-of-concept, not a narrated guess.
-                    </p>
-                    <div class="flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-400 mb-7">
-                        <span>✓ Executed exploit test, not narrated</span>
-                        <span>✓ Real forked on-chain state</span>
-                        <span>✓ Frontier-LLM vulnerability reasoning</span>
-                        <span>✓ Submission-ready report</span>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="flagship-btn">Authorize via x402 →</button>
-                        <a href="bounty.html" class="flagship-btn-ghost">See a sample report</a>
-                    </div>
-                </div>
-                <div class="lg:col-span-5">
-                    <div class="spotlight-card !border-amber-400/25">
-                        <div class="text-xs text-zinc-500 mb-1">Bounty Deep-Dive Audit</div>
-                        <div class="flagship-price">$1<span class="text-base text-zinc-500 font-normal"> USDC</span></div>
-                        <p class="text-xs text-zinc-500 mt-2 mb-5">Settles instantly on Base — delivered the moment the exploit completes.</p>
-                        <div class="stat-line text-[11px]">
-                            <span class="stat-label">contract address or repo</span>
-                            <span class="stat-label">·</span>
-                            <span class="stat-label">x402, instant settlement</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- ═══ 4. FEATURED INVESTIGATIONS ═══
-             A live, working preview of investigations.html — same stat
-             line, same sparkline (day/week/month/all-time toggle), same
-             row markup, imported straight from investigations-ledger.js
-             (docs/assets/investigations-preview.js) rather than a
-             lookalike, so it can never visually drift from the real page.
-             Full history + the interactive Verdict Breakdown live only on
-             the dedicated page, which this always points to. -->
-        <section id="investigations-preview" class="reveal panel mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow mb-1"><i class="fa-solid fa-magnifying-glass-chart"></i>[ spotlight ]</div>
-                <span id="invp-updated" class="text-[11px] text-zinc-500">syncing…</span>
-            </div>
-            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
-                <h2 class="section-title text-lg sm:text-xl">Featured Investigations</h2>
-                <a href="investigations.html" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
-                    Browse every investigation <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                </a>
-            </div>
-            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">Every deep investigation VAPE has published, in one expanding ledger — this is a live preview of the full page.</p>
-
-            <div id="invp-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
-                <span class="stat-pair"><span class="stat-label">tracked</span><span id="invp-total" class="stat-value skeleton">…</span></span>
-                <span class="stat-pair"><span class="stat-label">reject</span><span id="invp-reject" class="stat-value skeleton">…</span></span>
-                <span class="stat-pair"><span class="stat-label">caution</span><span id="invp-caution" class="stat-value skeleton">…</span></span>
-                <span class="stat-pair"><span class="stat-label">proceed</span><span id="invp-proceed" class="stat-value skeleton">…</span></span>
-                <span class="stat-pair"><span class="stat-label">avg score</span><span id="invp-avg-score" class="stat-value skeleton">…</span></span>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-                <h3 class="text-xs text-zinc-500 uppercase tracking-wider">Activity</h3>
-                <div id="invp-spark-range" class="invl-range-toggle" role="group" aria-label="Sparkline range">
-                    <button type="button" data-range="day" class="invl-range-btn">Day</button>
-                    <button type="button" data-range="week" class="invl-range-btn">Week</button>
-                    <button type="button" data-range="month" class="invl-range-btn">Month</button>
-                    <button type="button" data-range="all" class="invl-range-btn">All time</button>
-                </div>
-            </div>
-            <div id="invp-spark" class="invl-spark invl-spark-lg mb-5"></div>
-
-            <div class="invl-scroll">
-                <table class="invl-table">
-                    <thead>
-                        <tr><th>Token</th><th>Chain</th><th>Verdict</th><th>Score</th><th>Date</th><th></th></tr>
-                    </thead>
-                    <tbody id="invp-body">
-                        <tr><td colspan="6" class="text-zinc-500 text-xs py-6 text-center">Loading investigations…</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <a href="investigations.html" class="term-btn mt-5 inline-block">Browse every investigation <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
-        </section>
-
-        <!-- ═══ 5. THREAT LEDGER (live attack tracking) ═══ -->
-        <section id="threat-ledger" class="reveal panel mb-14 border-rose-500/15">
+        <!-- ═══ 5. THREAT INTELLIGENCE (preview) ═══
+             The full searchable/filterable Threat Ledger moved to
+             bounty.html -- VAPE's exploit-commissioning and threat-tracking
+             surfaces are both "security operations," so they now live on
+             one page. This stays behind as a live stats + sparkline
+             preview, same pattern as #investigations-preview and
+             #bounty-command-center, driven by attackfeed.js's
+             _renderLedgerPreview() off the same already-fetched
+             data/attack-feed.json the ticker above uses -- no second
+             fetch. -->
+        <section id="threat-intel-preview" class="reveal panel mb-14 border-rose-500/15">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
                 <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i>[ threat intelligence ]</div>
-                <div class="flex items-center gap-2">
-                    <span id="threat-ledger-updated" class="text-[11px] text-zinc-500 shrink-0">syncing…</span>
-                    <div class="icon-dropdown">
-                        <button class="icon-dropdown-btn" title="Threat Ledger options" aria-label="Menu">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <div class="icon-dropdown-menu">
-                            <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/reports" target="_blank"><i class="fa-solid fa-file-lines"></i>View reports</a>
-                            <button onclick="App.refresh()"><i class="fa-solid fa-arrows-rotate"></i>Refresh</button>
-                            <div class="icon-dropdown-divider"></div>
-                            <button onclick="document.getElementById('threat-ledger-search').value=''; document.getElementById('threat-ledger-severity').value=''; AttackFeed._ledger.q=''; AttackFeed._ledger.severity=''; AttackFeed._ledger.page=0; AttackFeed._renderLedger()"><i class="fa-solid fa-filter-circle-xmark"></i>Clear filters</button>
-                        </div>
-                    </div>
-                </div>
+                <span id="tip-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
             <h2 class="section-title text-lg mb-3">Every attack, tracked as it happens.</h2>
-            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-4">A running ledger of exploits across DeFi from roughly the past two months:
-            technique, amount, and where the next incident is likely to land.</p>
+            <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed mb-5">A running ledger of exploits across DeFi from roughly the past two months —
+            this is a live preview; the full searchable ledger lives on the Bounty Command Center.</p>
 
-            <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
-                    <input id="threat-ledger-search" type="text" placeholder="Search protocol, chain, amount…"
-                        class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[190px] sm:w-[240px]">
-                </div>
-                <select id="threat-ledger-severity" class="select-pill">
-                    <option value="">All severity</option>
-                    <option value="extreme">Extreme</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-                <select id="threat-ledger-sort" class="select-pill">
-                    <option value="date_desc">Newest first</option>
-                    <option value="date_asc">Oldest first</option>
-                    <option value="amount_desc">Amount: high → low</option>
-                    <option value="amount_asc">Amount: low → high</option>
-                </select>
+            <div id="tip-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
+                <span class="stat-pair"><span class="stat-label">tracked</span><span id="tip-total" class="stat-value">…</span></span>
+                <span class="stat-pair"><span class="stat-label">threat level</span><span id="tip-threat" class="stat-value">…</span></span>
+                <span class="stat-pair"><span class="stat-label">lost, this week</span><span id="tip-week" class="stat-value">…</span></span>
             </div>
 
-            <div id="threat-ledger-body" class="diff-list max-h-[440px] overflow-y-auto pr-1">
-                <div class="skeleton h-14 my-1"></div>
-                <div class="skeleton h-14 my-1"></div>
-                <div class="skeleton h-14 my-1"></div>
+            <div class="flex items-center justify-between gap-3 mb-3">
+                <h3 class="text-xs text-zinc-500 uppercase tracking-wider">Incidents, last 12 weeks</h3>
             </div>
+            <div id="tip-spark" class="invl-spark invl-spark-lg mb-5"></div>
 
-            <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                <span id="threat-ledger-count">…</span>
-                <div class="flex items-center gap-2">
-                    <button type="button" id="threat-ledger-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                    <span id="threat-ledger-page" class="text-zinc-400">Page 1</span>
-                    <button type="button" id="threat-ledger-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                </div>
-            </div>
-
-            <p class="text-[11px] text-zinc-600 mt-4">Each incident is checked against known attack patterns for a concrete prevention takeaway.
-            See <a href="investigations.html" class="text-zinc-500 hover:text-rose-400 hover:underline">Investigations</a> for the resulting case files.</p>
+            <a href="bounty.html#threat-ledger" class="term-btn inline-block">Open the full Threat Ledger <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
         </section>
 
         <!-- ═══ 6. DEVELOPMENT LEDGER (tools VAPE has built) ═══ -->
@@ -881,6 +802,11 @@
             <div id="bcc-teaser-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">…</span></span>
                 <span class="stat-pair"><span class="stat-label">live now</span><span id="bcc-live" class="stat-value">…</span></span>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 mb-5">
+                <span class="text-xs text-zinc-500">Programs discovered, last 12 weeks</span>
+                <div id="bcc-spark" class="invl-spark"></div>
             </div>
 
             <a href="bounty.html" class="term-btn inline-block">Open the Bounty Command Center <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>

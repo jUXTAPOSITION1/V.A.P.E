@@ -306,7 +306,11 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--sd-blue) 35%, var(--sd-white) 65%, transparent);
     background-size: 200% 100%;
-    animation: flagship-beam 7s linear infinite;
+    animation: top-beam-sweep 7s linear infinite;
+}
+@keyframes top-beam-sweep {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
 }
 @media (prefers-reduced-motion: reduce) { #security-dashboard::before { animation: none; } }
 #security-dashboard .secdash-panel {
@@ -769,90 +773,6 @@ a { transition: color .15s; }
     .reveal { transition: none; opacity: 1; transform: none; }
     html { scroll-behavior: auto; }
     .live-dot, .secdash-ledger-health-dot { animation: none; }
-}
-
-/* ── Flagship bounty-commission section ───────────────────────────────────
-   The single highest-priority CTA on the page (position #2, right after
-   the hero) — commissioning a paid bounty audit is VAPE's primary revenue
-   offering, so it gets real visual weight instead of living inside a flat
-   data panel further down. Deliberately its own color (amber/gold, with a
-   violet undertone in the beam) — distinct from --accent (green, ambient
-   liveness) and from #60a5fa (blue, already used by the Featured
-   Investigation spotlight + Bounty Command Center) so none of the site's
-   three "this matters" colors collide. */
-.flagship-section {
-    position: relative;
-    border: 1px solid rgba(251, 191, 36, 0.12);
-    border-radius: var(--radius-lg);
-    background-color: var(--bg-panel);
-    background-image: radial-gradient(ellipse 140% 100% at 15% 0%, rgba(251, 191, 36, 0.10), transparent 55%),
-                radial-gradient(ellipse 120% 100% at 100% 100%, rgba(167, 139, 250, 0.08), transparent 60%);
-    padding: 1.75rem;
-    overflow: hidden;
-}
-@media (min-width: 640px) { .flagship-section { padding: 2.75rem; } }
-.flagship-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #fbbf24 35%, #a78bfa 65%, transparent);
-    background-size: 200% 100%;
-    animation: flagship-beam 5s linear infinite;
-}
-@keyframes flagship-beam {
-    0% { background-position: 100% 0; }
-    100% { background-position: -100% 0; }
-}
-.flagship-kicker {
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #fbbf24;
-}
-.flagship-price {
-    font-size: 2.25rem;
-    font-weight: 600;
-    line-height: 1;
-    background: linear-gradient(90deg, #fbbf24, #f59e0b 45%, #a78bfa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.flagship-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.4rem;
-    border: 1px solid rgba(251, 191, 36, 0.45);
-    color: #fef3c7;
-    font-size: 0.875rem;
-    background: rgba(251, 191, 36, 0.08);
-    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-}
-.flagship-btn:hover {
-    border-color: rgba(251, 191, 36, 0.8);
-    background: rgba(251, 191, 36, 0.16);
-    color: #fffbeb;
-}
-.flagship-btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.4rem;
-    border: 1px solid var(--border);
-    color: #e4e4e7;
-    font-size: 0.875rem;
-    background: transparent;
-    transition: border-color 0.15s ease, color 0.15s ease;
-}
-.flagship-btn-ghost:hover { border-color: rgba(255, 255, 255, 0.35); color: #fff; }
-.flagship-live-dot { animation: pulse-ring 1.8s infinite; }
-@media (prefers-reduced-motion: reduce) {
-    .flagship-section::before { animation: none; }
-    .flagship-live-dot { animation: none; }
 }
 
 /* ── Featured Investigation spotlight ─────────────────────────────────────
