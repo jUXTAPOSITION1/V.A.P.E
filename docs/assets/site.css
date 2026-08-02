@@ -998,6 +998,32 @@ a { transition: color .15s; }
 .article-body { font-size: 0.9375rem; line-height: 1.7; }
 .article-body p { margin-bottom: 1rem; color: #d4d4d8; }
 
+/* GFM-style tables emitted by simpleMarkdownToHtml() (report.js) — shared by
+   article.html and investigation.html, wherever a report's real markdown
+   body contains a table (e.g. an investigation's per-category score table). */
+.md-table-wrap { overflow-x: auto; margin: 0.75rem 0 1.25rem; }
+.md-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+.md-table th, .md-table td { padding: 0.45rem 0.65rem; border: 1px solid var(--border); text-align: left; white-space: nowrap; }
+.md-table th { background: rgba(255, 255, 255, 0.04); color: #e4e4e7; font-weight: 600; }
+.md-table td { color: #d4d4d8; }
+
+/* ── investigation.html (full on-site investigation report reader) ──────── */
+.inv-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+.inv-icon { width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.05); object-fit: cover; flex-shrink: 0; }
+.inv-icon-fallback {
+    width: 52px; height: 52px; border-radius: 999px; flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; color: #71717a; font-size: 1rem;
+}
+.inv-meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; font-size: 11px; color: #71717a; margin-top: 0.4rem; }
+
 code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
 ::selection { background: rgba(74, 222, 128, 0.25); }

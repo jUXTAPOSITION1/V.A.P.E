@@ -80,6 +80,19 @@ export function escapeHtml(s) {
 // escapes first, then only ever inserts this function's own controlled
 // tags around the escaped text, so nothing in a model-authored report can
 // inject real HTML.
+// A GFM-style table row: cells separated by `|`, optional leading/trailing
+// pipe. `---`/`:---:` separator rows are matched by isTableSeparator() below
+// and never rendered themselves — they only mark where the header ends.
+function splitTableRow(line) {
+    let cells = line.trim().split('|');
+    if (cells.length && cells[0].trim() === '') cells.shift();
+    if (cells.length && cells[cells.length - 1].trim() === '') cells.pop();
+    return cells.map(c => c.trim());
+}
+function isTableSeparator(line) {
+    return /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?$/.test(line.trim());
+}
+
 export function simpleMarkdownToHtml(md) {
     const lines = String(md ?? '').split('\n');
     const htmlParts = [];
@@ -87,6 +100,17 @@ export function simpleMarkdownToHtml(md) {
     let listTag = null;
     const inline = (s) => escapeHtml(s)
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Single-asterisk italics, applied after bold so **x** is already
+        // consumed and can't be mistaken for two adjacent italic runs.
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // Underscore italics too (investigate.py's report writer uses this
+        // form for its "_No material gaps flagged this round._" caveat
+        // line). Word-boundary-guarded so it can't misfire inside a real
+        // snake_case identifier rendered as plain text elsewhere in these
+        // reports (e.g. "cannot_sell_all", "transfer_pausable") — those
+        // underscores always sit between word characters, which the
+        // lookbehind/lookahead here excludes.
+        .replace(/(?<!\w)_([^_\n]+?)_(?!\w)/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code class="text-zinc-200">$1</code>')
         // Image before link — deep_dive_audit.py/external_audit.py embed the
         // audited project's real logo as `![alt](url)`; without this it shows
@@ -102,11 +126,29 @@ export function simpleMarkdownToHtml(md) {
         listBuffer = [];
         listTag = null;
     };
-    for (const rawLine of lines) {
-        const line = rawLine.trimEnd();
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trimEnd();
         const heading = line.match(/^(#{1,6})\s+(.*)/);
         const bullet = line.match(/^[-*]\s+(.*)/);
         const numbered = line.match(/^\d+[.)]\s+(.*)/);
+        // A table is a header row immediately followed by a `---`-style
+        // separator row (real format written by investigate.py's report
+        // generator, e.g. the Executive Summary's per-category score table).
+        if (line.includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
+            flushList();
+            const headerCells = splitTableRow(line);
+            const bodyRows = [];
+            let j = i + 2;
+            while (j < lines.length && lines[j].trim() !== '' && lines[j].includes('|')) {
+                bodyRows.push(splitTableRow(lines[j]));
+                j++;
+            }
+            const thead = `<tr>${headerCells.map(c => `<th>${inline(c)}</th>`).join('')}</tr>`;
+            const tbody = bodyRows.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('');
+            htmlParts.push(`<div class="md-table-wrap"><table class="md-table"><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`);
+            i = j - 1;
+            continue;
+        }
         if (heading) {
             flushList();
             const size = heading[1].length <= 2 ? 'text-xs' : 'text-[11px]';
