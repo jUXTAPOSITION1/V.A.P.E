@@ -479,7 +479,7 @@ const SecurityDashboard = {
         } else {
             const points = this._history;
             if (!points.length) {
-                this._setChartEmpty(emptyEl, canvas, 'Tracking since launch — no history yet.');
+                this._setChartEmpty(emptyEl, canvas, 'Tracking since launch. No history yet.');
                 return;
             }
             const levelToY = { LOW: 1, MEDIUM: 2, HIGH: 3 };

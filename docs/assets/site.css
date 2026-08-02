@@ -326,6 +326,14 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     max-width: 148px;
     margin: 0.25rem auto 0;
 }
+/* Risk Level sits below the Risk Breakdown cards as a compact horizontal
+   strip rather than its own full-size panel: a small gauge beside its
+   label and text, not a large standalone card. */
+.secdash-gauge-strip { display: flex; flex-direction: row; align-items: center; gap: 0.85rem; padding: 0.65rem !important; }
+.secdash-gauge-strip .secdash-gauge-wrap { height: 56px; width: 100px; max-width: 100px; margin: 0; flex-shrink: 0; }
+.secdash-gauge-strip-text { flex: 1; min-width: 0; }
+.secdash-gauge-strip-text #secdash-gauge-delta,
+.secdash-gauge-strip-text #secdash-gauge-context { text-align: left; }
 .secdash-gauge-label {
     position: absolute;
     left: 50%;
