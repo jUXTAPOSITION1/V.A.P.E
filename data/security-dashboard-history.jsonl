@@ -1,3 +1,4 @@
 {"ts": "2026-08-01T21:29:26Z", "overall_threat_level": "HIGH", "findings_by_severity": {"CRITICAL": 1, "HIGH": 314, "MEDIUM": 211, "LOW": 17, "INFO": 812}}
 {"ts": "2026-08-02T03:00:00Z", "overall_threat_level": "HIGH", "findings_by_severity": {"CRITICAL": 1, "HIGH": 315, "MEDIUM": 213, "LOW": 17, "INFO": 821}}
 {"ts": "2026-08-02T03:57:42Z", "overall_threat_level": "HIGH", "findings_by_severity": {"CRITICAL": 1, "HIGH": 315, "MEDIUM": 213, "LOW": 17, "INFO": 821}}
+{"ts": "2026-08-02T08:39:08Z", "overall_threat_level": "HIGH", "findings_by_severity": {"CRITICAL": 1, "HIGH": 317, "MEDIUM": 216, "LOW": 17, "INFO": 827}}
