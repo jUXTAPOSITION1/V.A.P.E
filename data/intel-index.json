@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T10:27:33Z",
+  "generated": "2026-08-02T10:43:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 505,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 140,
     "investigations": 653,
-    "news": 48,
+    "news": 49,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-ai-turbocharges-microsoft-s-july-patch-haul-to-an-unpreceden.md",
+      "title": "AI Turbocharges Microsoft's July Patch Haul to an Unprecedented 570 Fixes",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T10:43:07Z",
+      "published_et": "August 2, 2026 \u00b7 6:43 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Two zero-days already under active attack plus nearly 60 critical flaws show how the same technology speeding up discoveries is also widening the window for exploitation.",
+      "image": "assets/news-images/ai-turbocharges-microsoft-s-july-patch-haul-to-an-unpreceden.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-ai-turbocharges-microsoft-s-july-patch-haul-to-an-unpreceden.md"
+    },
     {
       "file": "news-2026-08-02-ex-cons-and-conspiracy-theorists-hawk-million-dollar-exploit.md",
       "title": "Ex-Cons and Conspiracy Theorists Hawk Million-Dollar Exploits in Murky Cybersecurity Venture",

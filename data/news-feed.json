@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T08:32:26Z",
+  "generated": "2026-08-02T10:41:36Z",
   "count": 60,
   "headlines": [
     {
@@ -75,6 +75,62 @@
       "crypto": true
     },
     {
+      "title": "Ripple Lawsuit Architect Takes Over as US Director of National Intelligence",
+      "url": "https://beincrypto.com/jay-clayton-us-director-of-national-intelligence/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 10:36:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Donald Trump releases the $1.2 million data feed that lets Wall Street front-run his market-moving policy announcements",
+      "url": "https://cryptoslate.com/donald-trumps-new-1-2-million-data-feed-lets-wall-street-front-run-his-market-moving-policy-announcements/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 09:48:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Michael Saylor Shuts Down Viral $5 Billion MicroStrategy Bitcoin Sale Claims",
+      "url": "https://beincrypto.com/saylor-denies-microstrategy-bitcoin-sale-claim/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 09:44:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "$676 Million Reached Binance From an Iran-Linked Exchange Dubai Had Already Fined",
+      "url": "https://beincrypto.com/shelbit-binance-676-million-iran/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 09:30:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Trump Media sells another 2,628 BTC, holdings fall to 4,261 BTC",
+      "url": "https://cointelegraph.com/news/trump-media-2628-btc-crypto-com-4261-btc-holdings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sun, 02 Aug 2026 09:29:15 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Analyst Claims XRP Could Ease Japan\u2019s Yen Crisis: Is It Realistic?",
+      "url": "https://beincrypto.com/xrp-yen-carry-trade-trap-analyst-proposal/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 09:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Trump Media Sells More Bitcoin as Truth Social Plans Subscription Fees",
+      "url": "https://beincrypto.com/trump-media-bitcoin-truth-api-scrutiny/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 08:27:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Coldcard hack sparks biggest sub-1 BTC move since FTX: CryptoQuant",
       "url": "https://cointelegraph.com/news/coldcard-biggest-sub-1-btc-transfer-ftx-cryptoquant?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -83,7 +139,7 @@
       "crypto": true
     },
     {
-      "title": "Funding stock buybacks by selling your primary reserve asset is a dangerous game, but Lite Strategy just pulled it off without using a dime of debt",
+      "title": "Its a dangerous game to fund stock buybacks by selling your primary reserve asset \u2013 but one Litecoin company just pulled it off without using a dime of debt",
       "url": "https://cryptoslate.com/lite-strategy-retired-13-of-its-shares-but-estimated-litecoin-per-share-rose-just-1-66/",
       "source": "CryptoSlate",
       "published": "Sun, 02 Aug 2026 02:05:43 +0000",
@@ -143,14 +199,6 @@
       "url": "https://cointelegraph.com/news/on-chain-in-court-crypto-legal-news4?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Sat, 01 Aug 2026 21:14:39 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "One public crypto firm just staked its way to breaking even, but a $50M paper loss and 66% dilution threat tell a darker story",
-      "url": "https://cryptoslate.com/sdevs-2-2m-sky-staking-revenue-is-dwarfed-by-a-50-6m-unrealized-token-loss/",
-      "source": "CryptoSlate",
-      "published": "Sat, 01 Aug 2026 21:05:41 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -219,14 +267,6 @@
       "crypto": true
     },
     {
-      "title": "CZ Says Bear Market Money is Hunting, Social Capital Founder Says Skip AI Chips",
-      "url": "https://beincrypto.com/cz-chamath-bear-market-ai-money/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 16:49:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "CZ Warns Bitcoin Holders After $70 Million Wallet Exploit: 'Nothing Is 100%'",
       "url": "https://decrypt.co/374810/cz-warns-bitcoin-holders-70-million-coldcard-wallet-exploit",
       "source": "Decrypt",
@@ -291,14 +331,6 @@
       "crypto": true
     },
     {
-      "title": "MicroStrategy Post-Earnings CLARITY Act Push Could Add New Catalyst for Its Stock",
-      "url": "https://beincrypto.com/microstrategy-clarity-act-endorsement-stock-catalyst/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 14:40:48 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Hackers Poison Adform Script to Swap Crypto Wallet Addresses Across Customer Sites",
       "url": "https://thehackernews.com/2026/08/hackers-poison-adform-script-to-swap.html",
       "source": "The Hacker News",
@@ -315,27 +347,11 @@
       "crypto": true
     },
     {
-      "title": "South Korea\u2019s 22% Crypto Tax Crashes Trading Volume",
-      "url": "https://beincrypto.com/south-korea-crypto-tax-trading-volume-crash/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 12:40:14 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Balance Theory Raises $19 Million to Help Enterprises Manage Cybersecurity Investments",
       "url": "https://www.securityweek.com/balance-theory-raises-19-million-to-help-enterprises-manage-cybersecurity-investments/",
       "source": "SecurityWeek",
       "published": "Sat, 01 Aug 2026 12:30:00 +0000",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "BNB Chain Sues Ex-Employee Over A Tutorial Wallet That Became a Meme Coin",
-      "url": "https://beincrypto.com/bnb-chain-sues-ex-employee-meme-token/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 12:29:33 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -376,22 +392,6 @@
       "source": "BleepingComputer",
       "published": "Sat, 01 Aug 2026 10:20:30 -0400",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "America Broke a 28-Year Rule to Save the Yen and Bitcoin Felt It First",
-      "url": "https://beincrypto.com/bitcoin-us-yen-intervention-1998/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 09:51:54 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Coldcard Bitcoin loss estimate rises to $70M after Galaxy analysis",
-      "url": "https://cointelegraph.com/news/coldcard-bitcoin-loss-estimate-70-million-galaxy-analysis?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sat, 01 Aug 2026 09:23:56 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
