@@ -235,6 +235,9 @@ const SecurityDashboard = {
                 : '<li class="text-zinc-500">No findings logged yet.</li>';
         }
 
+        const totalValue = document.getElementById('secdash-sev-donut-total-value');
+        if (totalValue) totalValue.textContent = total.toLocaleString();
+
         if (!canvas || typeof Chart === 'undefined') return;
         if (this._sevChart) this._sevChart.destroy();
         const wrap = canvas.closest('.secdash-sev-donut-wrap');
@@ -258,8 +261,6 @@ const SecurityDashboard = {
                 plugins: { legend: { display: false }, tooltip: { enabled: false } },
             },
         });
-        const totalValue = document.getElementById('secdash-sev-donut-total-value');
-        if (totalValue) totalValue.textContent = total.toLocaleString();
     },
 
     // Automated Lanes — a <select> over the real per-workflow list driving
@@ -479,7 +480,7 @@ const SecurityDashboard = {
         } else {
             const points = this._history;
             if (!points.length) {
-                this._setChartEmpty(emptyEl, canvas, 'Tracking since launch — no history yet.');
+                this._setChartEmpty(emptyEl, canvas, 'Tracking since launch. No history yet.');
                 return;
             }
             const levelToY = { LOW: 1, MEDIUM: 2, HIGH: 3 };
