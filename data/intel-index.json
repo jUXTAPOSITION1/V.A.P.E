@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-02T15:44:55Z",
+  "generated": "2026-08-02T15:55:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 510,
+    "reports": 511,
     "reports_by_type": {
       "bounty": 125,
+      "base": 103,
       "macro": 27,
       "security": 94,
-      "base": 102,
       "sentiment": 53,
       "bug": 4,
       "mainnet": 4,
@@ -621,6 +621,17 @@
       "summary": "Base mover: HOME / WETH 0.3% +45% 24h (liq $57420.7939) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_150330.md",
       "bytes": 16489
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-02-15.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-02T15:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-02 15:55 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-02-15.md",
+      "bytes": 7742
     },
     {
       "kind": "intel",
@@ -1259,17 +1270,6 @@
       "summary": "Nine incidents occurred across the last seven days, none exceeding $50M. The largest losses were the $24.15M AFX Bridge private-key compromise on Arbitrum and the $9.7M Triple-A hot-wallet compromise spanning Ethereum, Tron, and Arbitrum. Other notable events include the $8.2M Crypto DAO incident on BSC, the $7.53M Verus-Ethereum Bridge v",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-02.md",
       "bytes": 7348
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_000300.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T00:03:00Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_000300.md",
-      "bytes": 16907
     }
   ],
   "broadcasts": [
