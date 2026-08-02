@@ -121,3 +121,4 @@
 {"ts": "2026-08-02T02:27:30.731251Z", "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "chain": "1", "symbol": "V4", "name": "V4", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-08-02T05:27:34.447847Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-08-02T07:57:01.798236Z", "address": "0x28CE689E12d8D9Ff18651E8684AAc88f1334Fb07", "chain": "8453", "symbol": "Claude", "name": "Claude", "source": "base", "offering": "token_safety_check"}
+{"ts": "2026-08-02T08:26:51.529670Z", "address": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "chain": "8453", "symbol": "ELSA", "name": "ELSA", "source": "base", "offering": "liquidity_check"}
