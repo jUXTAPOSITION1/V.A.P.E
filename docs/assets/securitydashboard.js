@@ -134,6 +134,9 @@ const SecurityDashboard = {
     _data: null,
     _history: [],
     _lanes: [],
+    _lanesChart: null,
+    _lanesFilter: '',
+    _lanesSort: 'recency',
     _gaugeChart: null,
     _sevChart: null,
     _timelineChart: null,
@@ -157,7 +160,7 @@ const SecurityDashboard = {
         // Each panel renders independently — one throwing (a malformed field
         // in a given lane, a missing canvas) must not leave its siblings
         // stuck in their skeleton state.
-        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanes,
+        for (const fn of [this._renderGauge, this._renderSeverityDonut, this._renderLanesPanel, this._wireLanesControls,
             this._renderCategoryMap, this._renderTimeline, this._renderVerdictBars, this._wireTimelineToggle,
             this._renderLedger, this._wireLedgerControls, this._renderLedgerSpark]) {
             try { fn.call(this); } catch (e) { console.error('[SecurityDashboard]', fn.name, e); }
@@ -194,8 +197,10 @@ const SecurityDashboard = {
         if (gaugeLabel) gaugeLabel.innerHTML = '<span class="text-zinc-500 text-xs">No snapshot yet</span>';
         const sevList = document.getElementById('secdash-sev-list');
         if (sevList) sevList.innerHTML = '<li class="text-zinc-500">Snapshot unavailable.</li>';
-        const laneDetail = document.getElementById('secdash-lane-detail');
-        if (laneDetail) laneDetail.innerHTML = '<span class="text-zinc-500 text-xs">Snapshot unavailable.</span>';
+        const lanesStat = document.getElementById('secdash-lanes-stat');
+        if (lanesStat) lanesStat.innerHTML = '<span class="text-zinc-500 text-sm">Snapshot unavailable.</span>';
+        const lanesList = document.getElementById('secdash-lanes-list');
+        if (lanesList) lanesList.innerHTML = '';
         const legend = document.getElementById('secdash-signalmap-legend');
         if (legend) legend.innerHTML = CARD_DEFS.map(def =>
             `<div class="secdash-signalmap-item"><span class="secdash-signalmap-letter">?</span>` +
@@ -343,51 +348,169 @@ const SecurityDashboard = {
         });
     },
 
-    // Automated Lanes — a <select> over the real per-workflow list driving
-    // one compact status readout, with pagination dots to page through the
-    // rest.
-    _renderLanes() {
-        const select = document.getElementById('secdash-lane-select');
-        const detail = document.getElementById('secdash-lane-detail');
-        const dots = document.getElementById('secdash-lane-dots');
-        if (!select || !detail) return;
-        const lanes = this._data.lanes || [];
-        this._lanes = lanes;
-        if (!lanes.length) {
-            detail.innerHTML = '<span class="text-zinc-500 text-xs">No lane data this cycle.</span>';
-            select.innerHTML = '';
-            if (dots) dots.innerHTML = '';
-            return;
-        }
-        select.innerHTML = lanes.map((l, i) => `<option value="${i}">${escapeHtml(l.label || l.id)}</option>`).join('');
-        select.addEventListener('change', () => this._renderLaneDetail(Number(select.value)));
-        if (dots) {
-            dots.innerHTML = lanes.map((l, i) => `<button type="button" class="secdash-lane-dot" data-idx="${i}" aria-current="false" aria-label="${escapeHtml(l.label || l.id)}"></button>`).join('');
-            dots.querySelectorAll('.secdash-lane-dot').forEach(btn => {
-                btn.addEventListener('click', () => this._renderLaneDetail(Number(btn.dataset.idx)));
-            });
-        }
-        this._renderLaneDetail(0);
+    // Automated Lanes — every real per-workflow lane (agents/
+    // build_security_dashboard.py's build_lanes(), one entry per real
+    // GitHub Actions security workflow) shown at once: a real "N/M passing"
+    // headline, a horizontal bar-per-lane chart plotting each lane's real
+    // hours-since-last-run (longer bar = more overdue — the thing worth
+    // noticing, not the routine passes), and the full lane list beneath it,
+    // which both is the required accessible table view for that chart and
+    // carries each lane's own specific real detail text (open alert count,
+    // coverage %, chain-intact, etc. — whatever agents/build_security_
+    // dashboard.py already computed for that lane).
+    _hoursSince(iso) {
+        const d = new Date(iso);
+        if (isNaN(d)) return null;
+        return Math.max(0, (Date.now() - d.getTime()) / 3600000);
     },
 
-    _renderLaneDetail(idx) {
-        const detail = document.getElementById('secdash-lane-detail');
-        const dots = document.getElementById('secdash-lane-dots');
-        const select = document.getElementById('secdash-lane-select');
-        const lane = this._lanes[idx];
-        if (!detail || !lane) return;
-        const ok = lane.last_run_conclusion === 'success';
-        const color = lane.last_run_conclusion == null ? sevColor('INFO') : ok ? sevColor('LOW') : sevColor('CRITICAL');
-        const icon = lane.last_run_conclusion == null ? 'fa-circle-question' : ok ? 'fa-circle-check' : 'fa-circle-xmark';
-        detail.innerHTML = `
-            ${statusBadge(lane.headline || lane.last_run_conclusion || 'unavailable', color, icon)}
-            <span class="text-[10px] text-zinc-600">${lane.last_run_at ? escapeHtml(ago(lane.last_run_at)) : 'no runs yet'}</span>
-        `;
-        if (dots) dots.querySelectorAll('.secdash-lane-dot').forEach((d, i) => {
-            d.classList.toggle('is-active', i === idx);
-            d.setAttribute('aria-current', String(i === idx));
+    _laneStatus(lane) {
+        if (lane.last_run_conclusion == null) return 'never';
+        return lane.last_run_conclusion === 'success' ? 'pass' : 'fail';
+    },
+
+    _laneStatusColor(status) {
+        return status === 'pass' ? sevColor('LOW') : status === 'fail' ? sevColor('CRITICAL') : sevColor('INFO');
+    },
+
+    _laneStatusTitle(status) {
+        return status === 'pass' ? 'Passing' : status === 'fail' ? 'Failing' : 'Never run';
+    },
+
+    _renderLanesPanel() {
+        const lanes = this._data.lanes || [];
+        this._lanes = lanes;
+        const statEl = document.getElementById('secdash-lanes-stat');
+        const sweptEl = document.getElementById('secdash-lanes-swept');
+        if (!statEl) return;
+        if (!lanes.length) {
+            statEl.innerHTML = '<span class="text-zinc-500 text-sm">No lane data this cycle.</span>';
+            if (sweptEl) sweptEl.textContent = '';
+            const listEl = document.getElementById('secdash-lanes-list');
+            if (listEl) listEl.innerHTML = '';
+            return;
+        }
+        const known = lanes.filter(l => l.last_run_conclusion != null);
+        const passing = known.filter(l => l.last_run_conclusion === 'success');
+        const denom = known.length || lanes.length;
+        statEl.innerHTML = `${passing.length}<span class="text-zinc-500 text-base">/${denom} lanes passing</span>`;
+        if (sweptEl) sweptEl.textContent = `Last full sweep ${ago(this._data.generated_at)}`;
+        this._renderLanesChart(lanes);
+        this._renderLanesList();
+    },
+
+    // The chart is a fixed, always-sorted-by-recency overview of every real
+    // lane (never reordered by the filter/sort controls below, which only
+    // affect the list) — a stable "big picture" reference to compare the
+    // interactive list against.
+    _renderLanesChart(lanes) {
+        const canvas = document.getElementById('secdashLanesChart');
+        if (!canvas || typeof Chart === 'undefined') return;
+        if (this._lanesChart) { this._lanesChart.destroy(); this._lanesChart = null; }
+        const chartWrap = canvas.closest('.secdash-lanes-chart');
+        if (chartWrap) chartWrap.style.minWidth = `${Math.max(420, lanes.length * 30 + 180)}px`;
+
+        const sorted = lanes.slice().sort((a, b) => {
+            const ah = this._hoursSince(a.last_run_at);
+            const bh = this._hoursSince(b.last_run_at);
+            if (ah == null && bh == null) return 0;
+            if (ah == null) return -1; // never-run lanes float to the top -- most in need of attention
+            if (bh == null) return 1;
+            return bh - ah; // most overdue (largest hours-ago) plotted first/top
         });
-        if (select) select.value = String(idx);
+        const labels = sorted.map(l => l.label || l.id);
+        const CAP = 168; // 7 days -- every real lane here runs at least daily, so this only clips genuine outliers
+        const values = sorted.map(l => {
+            const h = this._hoursSince(l.last_run_at);
+            return h == null ? 2 : Math.max(2, Math.min(CAP, h)); // a real never-run lane still gets a tiny visible/hoverable mark
+        });
+        const colors = sorted.map(l => this._laneStatusColor(this._laneStatus(l)));
+
+        this._lanesChart = new Chart(canvas, {
+            type: 'bar',
+            data: { labels, datasets: [{ data: values, backgroundColor: colors.map(c => c + 'b3'), borderColor: colors, borderWidth: 1.5, borderRadius: 4 }] },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    secdashBubbleFx: { glow: true },
+                    tooltip: {
+                        callbacks: {
+                            title: items => labels[items[0].dataIndex],
+                            label: item => {
+                                const lane = sorted[item.dataIndex];
+                                const status = this._laneStatus(lane);
+                                const when = lane.last_run_at ? ago(lane.last_run_at) : 'no runs yet';
+                                return [`${this._laneStatusTitle(status)} · ${when}`, lane.headline].filter(Boolean);
+                            },
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        min: 0, max: CAP,
+                        title: { display: true, text: 'Hours since last run (longer = more overdue)', color: '#71717a', font: { size: 9.5 } },
+                        ticks: { color: '#71717a', font: { size: 9 }, callback: v => v === 0 ? 'now' : `${v}h` },
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                    },
+                    y: { ticks: { color: '#a1a1aa', font: { size: 10.5 } }, grid: { display: false } },
+                },
+            },
+        });
+    },
+
+    _lanesRows() {
+        const all = this._lanes || [];
+        let rows = this._lanesFilter ? all.filter(l => this._laneStatus(l) === this._lanesFilter) : all.slice();
+        if (this._lanesSort === 'name') {
+            rows.sort((a, b) => (a.label || a.id).localeCompare(b.label || b.id));
+        } else {
+            rows.sort((a, b) => {
+                const ah = this._hoursSince(a.last_run_at);
+                const bh = this._hoursSince(b.last_run_at);
+                if (ah == null && bh == null) return 0;
+                if (ah == null) return 1;
+                if (bh == null) return -1;
+                return ah - bh;
+            });
+        }
+        return rows;
+    },
+
+    _renderLanesList() {
+        const listEl = document.getElementById('secdash-lanes-list');
+        if (!listEl) return;
+        const rows = this._lanesRows();
+        if (!rows.length) {
+            listEl.innerHTML = '<div class="text-zinc-500 text-xs py-2">No lanes match this filter.</div>';
+            return;
+        }
+        listEl.innerHTML = rows.map(l => {
+            const status = this._laneStatus(l);
+            const color = this._laneStatusColor(status);
+            const icon = status === 'pass' ? 'fa-circle-check' : status === 'fail' ? 'fa-circle-xmark' : 'fa-circle-question';
+            const when = l.last_run_at ? ago(l.last_run_at) : 'no runs yet';
+            return `<div class="secdash-lane-row">
+                ${statusBadge(this._laneStatusTitle(status), color, icon)}
+                <span class="secdash-lane-row-label">${escapeHtml(l.label || l.id)}</span>
+                <span class="secdash-lane-row-headline">${escapeHtml(l.headline || '')}</span>
+                <span class="secdash-lane-row-time">${escapeHtml(when)}</span>
+            </div>`;
+        }).join('');
+    },
+
+    _wireLanesControls() {
+        const filterSel = document.getElementById('secdash-lanes-filter');
+        const sortSel = document.getElementById('secdash-lanes-sort');
+        if (filterSel) {
+            filterSel.innerHTML = '<option value="">All statuses</option><option value="pass">Passing</option><option value="fail">Failing</option><option value="never">Never run</option>';
+            filterSel.addEventListener('change', () => { this._lanesFilter = filterSel.value; this._renderLanesList(); });
+        }
+        if (sortSel) {
+            sortSel.addEventListener('change', () => { this._lanesSort = sortSel.value; this._renderLanesList(); });
+        }
     },
 
     // Shared per-category signal calculation — the ONE place that decides
