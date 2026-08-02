@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T15:08:49Z",
+  "generated": "2026-08-02T15:14:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 510,
@@ -15,26 +15,26 @@
       "skillforge": 4
     },
     "broadcasts": 141,
-    "investigations": 661,
+    "investigations": 662,
     "news": 50,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 23
+    "skills": 24
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-135940-0x6c240ECC.md",
-      "title": "Investigation \u2014 SLOP",
-      "symbol": "SLOP",
-      "name": "SLOP",
-      "date": "2026-08-02T13:59:40Z",
-      "target": "0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260802-151446-0x154bD4F2.md",
+      "title": "Investigation \u2014 IDOL",
+      "symbol": "IDOL",
+      "name": "IDOL",
+      "date": "2026-08-02T15:14:46Z",
+      "target": "0x154bD4F21310DCdFd52661456caD70f99dF43dA5",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "3",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x43cd5919a45a5fa51b7f8fff8069902f405fe825) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-135940-0x6c240ECC.md"
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $20,000; [-10] Violent 24h move +104% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anony",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-151446-0x154bD4F2.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-151446-0x154bD4F2.md",
+      "title": "Investigation \u2014 IDOL",
+      "symbol": "IDOL",
+      "name": "IDOL",
+      "date": "2026-08-02T15:14:46Z",
+      "target": "0x154bD4F21310DCdFd52661456caD70f99dF43dA5",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $20,000; [-10] Violent 24h move +104% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anony",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-151446-0x154bD4F2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-135940-0x6c240ECC.md",
@@ -594,20 +608,6 @@
       "score": "20",
       "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x936323159e83c8e92b6dda95bc134902749cf213) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 65% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-133648-0xD14cEFca.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-130540-0x752C5a95.md",
-      "title": "Investigation \u2014 OFC",
-      "symbol": "OFC",
-      "name": "OFC",
-      "date": "2026-08-01T13:05:40Z",
-      "target": "0x752C5a95d202972E124390F30a50154409d3c858",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-10] Owner not renounced (0x80b12bd0f1793bf6cea767fa83eb2068eaa17dc8) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timest",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-130540-0x752C5a95.md"
     }
   ],
   "reports": [
@@ -2350,6 +2350,12 @@
       "title": "Token Risk Screening via investigate.py",
       "summary": "When-to-use Screen any ERC-20/ BEP-20 token on Polygon (137), BSC (56) or Base (8453) before liquidity provision, swaps or wallet interaction. Use when tokensafety or contractrecon flags are unavailable or when a full 0-",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-risk-screening-via-investigate-py.md"
+    },
+    {
+      "file": "triage-suspicious-contracts-from-vape-broadcasts.md",
+      "title": "Triage Suspicious Contracts from VAPE Broadcasts",
+      "summary": "Distilled 2026-08-02T08:29:14Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/triage-suspicious-contracts-from-vape-broadcasts.md"
     },
     {
       "file": "reconcile-ai-report-pipeline-against-prompt-inject.md",

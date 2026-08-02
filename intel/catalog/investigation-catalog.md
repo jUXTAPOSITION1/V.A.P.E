@@ -1123,3 +1123,5 @@
 | 2026-08-02 | auto | 0x999B49c0d1612E619A4A4f6280733184da025108 (SLOP) | deep_investigation | CAUTION (50/100) | Owner not renounced (0x0dc1dd32b1300818c977ce5a36a464a5c0c14550) — can still act | +7d |
 
 | 2026-08-02 | auto | 0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42 (SLOP) | deep_investigation | REJECT (3/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-02 | auto | 0x154bD4F21310DCdFd52661456caD70f99dF43dA5 (IDOL) | deep_investigation | REJECT (35/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
