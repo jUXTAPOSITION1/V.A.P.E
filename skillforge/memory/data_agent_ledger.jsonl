@@ -524,3 +524,4 @@
 {"ts": "2026-08-01T23:42:25.996160Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-01T23:57:35.261193Z", "target": "0x752C5a95d202972E124390F30a50154409d3c858", "hired": ["stablecoins"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
 {"ts": "2026-08-02T00:27:21.793689Z", "target": "0x752C5a95d202972E124390F30a50154409d3c858", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
+{"ts": "2026-08-02T00:57:27.340306Z", "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}

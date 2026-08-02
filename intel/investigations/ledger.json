@@ -5597,6 +5597,25 @@
     "symbol": "Subject 3",
     "times_investigated": 1
   },
+  "56:0x8e9adb904824fdfbec1a5f15c4146a23dc3453ef": {
+    "address": "0x8E9AdB904824fDfBEc1a5f15c4146a23dc3453EF",
+    "chain": "56",
+    "creator_address": "0x18b7d3602142ca5942a13f790fbcbb407e3e1176",
+    "first_investigated": "2026-08-02T00:57:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-005723-0x8E9AdB90.md",
+        "score": 0,
+        "ts": "2026-08-02T00:57:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T00:57:23Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "IDOLL",
+    "times_investigated": 1
+  },
   "56:0x8fd3437a13b298dd2e98db902c56970a9d3c4985": {
     "address": "0x8FD3437A13B298dD2e98Db902c56970a9d3C4985",
     "chain": "56",
