@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T17:44:36Z",
+  "generated": "2026-08-02T17:59:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 512,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 141,
-    "investigations": 663,
+    "investigations": 664,
     "news": 51,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-171427-0x8554D38b.md",
-      "title": "Investigation \u2014 QLM",
-      "symbol": "QLM",
-      "name": "\u5343\u91cc\u9a6c",
-      "date": "2026-08-02T17:14:27Z",
-      "target": "0x8554D38b95E4F7Ca11D391008627Df30B2b07777",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260802-175939-0x7297968F.md",
+      "title": "Investigation \u2014 ZEST",
+      "symbol": "ZEST",
+      "name": "Zest",
+      "date": "2026-08-02T17:59:39Z",
+      "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +5557007556% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team id",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-171427-0x8554D38b.md"
+      "score": "22",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x4ddae1d1bb8dacd4c8fa56792fde60f446755d0f) \u2014 can still act on the contract; [-8] Low holder count (124); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-175939-0x7297968F.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-175939-0x7297968F.md",
+      "title": "Investigation \u2014 ZEST",
+      "symbol": "ZEST",
+      "name": "Zest",
+      "date": "2026-08-02T17:59:39Z",
+      "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x4ddae1d1bb8dacd4c8fa56792fde60f446755d0f) \u2014 can still act on the contract; [-8] Low holder count (124); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-175939-0x7297968F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-171427-0x8554D38b.md",
