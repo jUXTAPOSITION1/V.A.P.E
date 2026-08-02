@@ -314,7 +314,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     color: #c4d7fb;
     background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.16));
 }
-#security-dashboard .secdash-lane-select:focus {
+#security-dashboard .secdash-lanes-filter:focus, #security-dashboard #secdash-lanes-sort:focus {
     border-color: var(--sd-blue);
 }
 
@@ -400,31 +400,36 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-sev-donut-total span:first-child { font-size: 7.5px; color: #71717a; text-transform: uppercase; }
 .secdash-sev-donut-total span:last-child { font-size: 10.5px; color: #e4e4e7; font-family: var(--font-mono); }
 
-/* Automated Lanes — a <select> (real per-workflow list) driving a single
-   compact status readout, with pagination dots to page through the rest
-   without needing a wide horizontal-scroll strip. Replaces the reference
-   screenshot's fabricated "Active Campaigns" gauge+carousel concept
-   (VAPE has no campaign notion) while keeping the reference's
-   dropdown+paged-indicator composition, sized to match the gauge/donut
-   cards beside it. */
-.secdash-lane-select {
-    max-width: 130px;
-    font-size: 10.5px;
-    padding: 0.2rem 0.4rem;
-}
 .secdash-badge {
     display: inline-flex; align-items: center; gap: 0.35rem; align-self: flex-start;
     font-size: 10.5px; padding: 0.2rem 0.55rem; border-radius: 999px;
     border: 1px solid var(--border); white-space: nowrap;
 }
-.secdash-lane-detail { display: flex; flex-direction: column; gap: 0.3rem; min-height: 40px; justify-content: center; }
-.secdash-lane-dots { display: flex; align-items: center; justify-content: center; gap: 0.15rem; margin-top: 0.3rem; }
-.secdash-lane-dot {
-    width: 24px; height: 24px; border-radius: 999px; border: none; padding: 9px;
-    background: rgba(255, 255, 255, 0.18) content-box; box-sizing: border-box; cursor: pointer;
+
+/* Automated Lanes — every real per-workflow lane shown at once (a
+   horizontal bar-per-lane chart plotting real hours-since-last-run,
+   colored by real status) instead of hiding all but one behind a
+   <select>+pagination-dots picker. A big real "N/M passing" headline plus
+   a filter/sort pair over the full list beneath the chart (which doubles
+   as this chart's required accessible table view) replace the old single
+   compact readout. */
+#secdash-lanes-filter, #secdash-lanes-sort { max-width: 132px; font-size: 10.5px; padding: 0.2rem 0.4rem; }
+.secdash-lanes-headline { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+.secdash-lanes-stat { font-size: 1.5rem; font-family: var(--font-mono); color: #f4f4f5; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.secdash-lanes-chart-scroll { overflow-x: auto; }
+.secdash-lanes-chart { position: relative; height: clamp(260px, 26vw, 340px); width: 100%; min-width: 420px; }
+.secdash-lanes-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0.6rem 0 0.75rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
+.secdash-lanes-legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 10.5px; color: #a1a1aa; }
+.secdash-lanes-legend-dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
+.secdash-lanes-list { display: flex; flex-direction: column; }
+.secdash-lane-row {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 11.5px;
 }
-.secdash-lane-dot:hover { background: rgba(255, 255, 255, 0.35) content-box; }
-.secdash-lane-dot.is-active { background: linear-gradient(135deg, var(--sd-blue), var(--sd-violet)) content-box; }
+.secdash-lane-row-label { color: #d4d4d8; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.secdash-lane-row-headline { color: #71717a; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.secdash-lane-row-time { color: #71717a; font-family: var(--font-mono); font-size: 10.5px; flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 640px) { .secdash-lane-row-headline { display: none; } }
 
 /* Category Signal Map — six real lanes as a staggered bubble cluster
    (Chart.js `bubble`, real primitive), with a caption list beneath it
