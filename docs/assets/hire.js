@@ -50,7 +50,7 @@ function siteTaggedFetch(input, init) {
 const DATA_OFFERINGS = {
     token_intel:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
                                     { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
-                                    { k: 'slug', label: 'Protocol slug (optional — adds fees/unlocks/treasury)', ph: 'aave', opt: true }] },
+                                    { k: 'slug', label: 'Protocol slug (optional, adds fees/unlocks/treasury)', ph: 'aave', opt: true }] },
     token_chart:     { inputs: [{ k: 'address', label: 'Token contract address', ph: '0x… token', addr: true },
                                     { k: 'chain', label: 'Chain slug', ph: 'base', def: 'base' },
                                     { k: 'span', label: 'Days of history', ph: '30', def: '30' }] },
@@ -88,7 +88,7 @@ const Hire = {
     _renderAddressRepoFields(fieldsEl, mode, hints) {
         const h = hints || {};
         fieldsEl.innerHTML = mode === 'repo' ? `
-            <label class="text-xs text-zinc-500 block mb-1">GitHub repo${h.repo ? ` — ${h.repo}` : ' to audit'}</label>
+            <label class="text-xs text-zinc-500 block mb-1">GitHub repo${h.repo ? `: ${h.repo}` : ' to audit'}</label>
             <input id="hire-repo" type="text" placeholder="owner/repo" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
         ` : `
             <label class="text-xs text-zinc-500 block mb-1">Target contract address${h.address ? ` ${h.address}` : ' to investigate'}</label>
@@ -161,7 +161,7 @@ const Hire = {
                 </div>
                 <div id="hire-body">
                     <div class="text-sm text-zinc-400 mb-1">${escapeHtml(offeringName.replace(/_/g,' '))} <span class="text-zinc-200 font-mono">$${priceUsd}</span></div>
-                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above — no gas fee, no subscription, settles on Base mainnet.</p>
+                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above, no gas fee, no subscription, settles on Base mainnet.</p>
                     ${isTxHash ? `
                     <label class="text-xs text-zinc-500 block mb-1">Transaction hash</label>
                     <input id="hire-address" type="text" placeholder="0x… 32-byte tx hash to decode" class="w-full bg-transparent border border-white/10 focus:border-white/30 outline-none px-3 py-2 text-xs font-mono mb-4">
@@ -282,7 +282,7 @@ const Hire = {
                 <div id="hire-body">
                     <div class="text-sm text-zinc-200 mb-1">${escapeHtml(record.name || 'Bounty program')}</div>
                     <div class="text-xs text-zinc-500 mb-4">${escapeHtml(record.platform || '')}${record.prizeUsd ? ` · up to $${Number(record.prizeUsd).toLocaleString()}` : ''} · bounty_deep_dive <span class="text-zinc-200 font-mono">$1</span></div>
-                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for $1 — no gas fee, no subscription. VAPE audits this specific program and delivers a submission-ready PoC with full technical detail.</p>
+                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for $1, no gas fee, no subscription. This audits the specific program you selected and delivers a submission-ready PoC with full technical detail.</p>
                     <div class="flex gap-2 mb-4">
                         <button data-mode="address" class="flex-1 term-btn${repoDefault ? '' : ' term-btn-active'}">Contract address</button>
                         <button data-mode="repo" class="flex-1 term-btn${repoDefault ? ' term-btn-active' : ''}">GitHub repo</button>
@@ -343,7 +343,7 @@ const Hire = {
         };
         const tick = async () => {
             if (Date.now() - startedAt > MAX_POLL_MS) {
-                giveUp("Still hasn't reported back after 90 minutes — unusual, but your payment is safe either way. The audit ledger (link above) is the source of truth if this modal gives up first.", 'text-amber-400');
+                giveUp("Still hasn't reported back after 90 minutes, which is unusual, but your payment is safe either way. The audit ledger (link above) is the source of truth if this modal gives up first.", 'text-amber-400');
                 return;
             }
             if (!window.WORKER_BASE) return;
@@ -367,13 +367,13 @@ const Hire = {
                 // (real but untrusted — VAPE's own dispatch-failure text, not
                 // attacker-controlled, but still external to this file) needs no
                 // escaping here; escaping it would double-escape and corrupt display.
-                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}) — your payment settled but the audit never started. Contact VAPE via X (@based_vape) to resolve.`, 'text-rose-400');
+                giveUp(`Dispatch failed server-side (${String(data.error || 'unknown error')}). Your payment settled but the audit never started. Contact @based_vape on X to resolve.`, 'text-rose-400');
                 return;
             }
             const el = document.getElementById('hire-poll-elapsed');
             if (el) {
                 const mins = Math.floor((Date.now() - startedAt) / 60000);
-                el.textContent = mins < 1 ? 'just started' : `${mins} minute${mins === 1 ? '' : 's'} elapsed — still running`;
+                el.textContent = mins < 1 ? 'just started' : `${mins} minute${mins === 1 ? '' : 's'} elapsed, still running`;
             }
         };
         if (this._pollTimer) clearInterval(this._pollTimer);
@@ -478,21 +478,21 @@ const Hire = {
                         <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                     </div>
                     <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">
-                        VAPE is running the full audit now — real static/symbolic tooling plus a frontier-tier LLM pass, not a canned check. This can take up to an hour; leave this open and the report will render right here — it's private to this engagement, never published anywhere.
+                        Running the full audit now: real static/symbolic tooling plus a frontier-tier LLM pass, not a canned check. This can take up to an hour. Leave this open and the report will render right here, private to this engagement and never published anywhere.
                         <div id="hire-poll-elapsed" class="text-zinc-500 mt-2">just started</div>
                     </div>
-                    <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — reopen this page (same wallet) if you close the tab.</div>`;
+                    <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below. Reopen this page (same wallet) if you close the tab.</div>`;
                 this._pollBountyJob(result.job, offeringName, priceUsd, targetLabel);
                 return;
             }
             body.innerHTML = `
                 <div class="text-center mb-4">
                     <i class="fa-solid fa-clock text-zinc-300 text-3xl mb-2"></i>
-                    <div class="text-lg">Paid — audit queued</div>
+                    <div class="text-lg">Paid, audit queued</div>
                     <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
                 </div>
-                <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Audit queued — a submission-ready PoC report lands as soon as it completes, delivered privately, never published.')}</div>
-                <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below — check back for the finished report.</div>`;
+                <div class="border border-white/10 p-4 mb-4 text-sm text-zinc-300 leading-relaxed">${escapeHtml(result.message || 'Audit queued. A submission-ready PoC report lands as soon as it completes, delivered privately, never published.')}</div>
+                <div class="text-xs text-zinc-500 mt-3 text-center">Saved to your Engagement History in "Portfolio Intelligence" below. Check back for the finished report.</div>`;
             return;
         }
         const deliverable = result.deliverable || {};
@@ -513,7 +513,7 @@ const Hire = {
                 <div class="text-lg">Paid & delivered</div>
                 <div class="text-xs text-zinc-500">${escapeHtml(offeringName.replace(/_/g,' '))} · $${priceUsd} settled on Base</div>
             </div>
-            <div class="border border-white/10 p-4 mb-4">${inlineReport || '<div class="text-xs text-amber-400">Could not render report preview — use Copy JSON below for the raw result.</div>'}</div>
+            <div class="border border-white/10 p-4 mb-4">${inlineReport || '<div class="text-xs text-amber-400">Could not render report preview. Use Copy JSON below for the raw result.</div>'}</div>
             <div class="flex gap-2">
                 <button id="hire-download" class="flex-1 term-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
                 <button id="hire-copy" class="flex-1 term-btn"><i class="fa-solid fa-copy"></i> Copy JSON</button>
@@ -562,7 +562,7 @@ const Hire = {
                 </div>
                 <div id="hire-body">
                     <div class="text-sm text-zinc-400 mb-1"><span class="text-zinc-200 font-mono">$${priceUsd}</span></div>
-                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above — no gas fee, no subscription, settles on Base mainnet.</p>
+                    <p class="text-xs text-zinc-500 mb-4">Settles via x402: your wallet signs a gasless USDC authorization for the exact price above, no gas fee, no subscription, settles on Base mainnet.</p>
                     ${fields || '<div class="mb-1"></div>'}
                     <button id="hire-submit" class="w-full term-btn mt-1">Authorize &amp; Fetch</button>
                     <div id="hire-status" class="text-xs text-zinc-500 mt-3"></div>
@@ -683,7 +683,7 @@ const Hire = {
         // javascript: URI on click, so this can't just reuse img()'s pattern.
         const safeHref = (url) => typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
         const fmt = (v) => {
-            if (v == null) return '—';
+            if (v == null) return '…';
             if (typeof v === 'number') return v.toLocaleString(undefined, { maximumFractionDigits: 6 });
             return escapeHtml(String(v));
         };
@@ -700,7 +700,7 @@ const Hire = {
                 // one level of nesting (e.g. price:{price,confidence}, first_price:{age_days})
                 const sub = Object.entries(v).filter(([, x]) => x != null && typeof x !== 'object')
                     .map(([sk, sx]) => `<span class="text-zinc-400">${escapeHtml(sk)}</span> ${fmt(sx)}`).join(' · ');
-                if (sub) rows.push(`<div class="text-xs mb-1"><span class="text-zinc-400 font-mono">${escapeHtml(k)}</span> — ${sub}</div>`);
+                if (sub) rows.push(`<div class="text-xs mb-1"><span class="text-zinc-400 font-mono">${escapeHtml(k)}</span>: ${sub}</div>`);
                 continue;
             }
             rows.push(`<div class="text-xs mb-1 flex justify-between gap-3"><span class="text-zinc-500 font-mono">${escapeHtml(k)}</span><span class="text-zinc-200 text-right">${fmt(v)}</span></div>`);
