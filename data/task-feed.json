@@ -1,7 +1,42 @@
 {
-  "generated": "2026-08-02T03:57:25Z",
-  "synthesis": "VAPE's automation repeatedly committed featured investigations every 15 minutes while also running security-dashboard, security sweep, news-intel, and findings-sealing tasks.",
+  "generated": "2026-08-02T04:12:20Z",
+  "synthesis": "VAPE's automation repeatedly posted featured investigations every 15 minutes while running security dashboards, sweeps, news-intel, toolchecks, broadcasts, and reputation snapshots.",
   "tasks": [
+    {
+      "sha": "728af3a7fb",
+      "kind": "automation",
+      "message": "skillforge toolcheck 2026-08-02T04:11Z",
+      "date": "2026-08-02T04:11:14Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/728af3a7fbc94a8c86dfb93e6aae9f55c9b62f7f"
+    },
+    {
+      "sha": "7072a634b1",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-08-02T04:02Z",
+      "date": "2026-08-02T04:02:55Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7072a634b1de2a688d89863afe3043b8c40a9707"
+    },
+    {
+      "sha": "5a5e176678",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-08-02T03:58Z",
+      "date": "2026-08-02T03:58:49Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5a5e1766781881c85c4f095630ce3039bf03a143"
+    },
+    {
+      "sha": "8a33032b1e",
+      "kind": "automation",
+      "message": "security-dashboard 2026-08-02T03:57Z",
+      "date": "2026-08-02T03:57:42Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8a33032b1e324b1bbf4591dd06b7f28dce3d84fb"
+    },
+    {
+      "sha": "ee67e4cedd",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-02T03:57Z",
+      "date": "2026-08-02T03:57:27Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ee67e4cedd62d5897dba06c4064d7e3e933e7d0d"
+    },
     {
       "sha": "8fe24d36e5",
       "kind": "investigation",
@@ -71,41 +106,6 @@
       "message": "Featured investigation 2026-08-02T02:12Z",
       "date": "2026-08-02T02:12:14Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b51cabdafa2ef05a483c0df2a9444c7ecfb5c8a9"
-    },
-    {
-      "sha": "b45b397d59",
-      "kind": "automation",
-      "message": "Seal findings chain 2026-08-02T02:08Z",
-      "date": "2026-08-02T02:08:35Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b45b397d59ba368b7ec2ffe4416895466d0648d2"
-    },
-    {
-      "sha": "8d12025079",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-02T01:57Z",
-      "date": "2026-08-02T01:57:25Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8d12025079f11fa3b3eeb814236b43952be14804"
-    },
-    {
-      "sha": "b9a4a05cf0",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-02T01:42Z",
-      "date": "2026-08-02T01:42:25Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b9a4a05cf073f0723fede4e7df1b162ac5d61613"
-    },
-    {
-      "sha": "2ed7e2e607",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-02T01:27Z",
-      "date": "2026-08-02T01:27:39Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/2ed7e2e6078d7e1cf399cbe9dc6c5a296fd68694"
-    },
-    {
-      "sha": "4e6c072218",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-02T01:12Z",
-      "date": "2026-08-02T01:12:28Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4e6c07221804452c761ac4193d75dcb7d8bdeeb5"
     }
   ]
 }
