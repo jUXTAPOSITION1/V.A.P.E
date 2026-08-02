@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T08:42:44Z",
+  "generated": "2026-08-02T08:57:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 502,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 140,
-    "investigations": 651,
+    "investigations": 652,
     "news": 48,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-062730-0xa049d66F.md",
-      "title": "Investigation \u2014 MEMES",
-      "symbol": "MEMES",
-      "name": "the best memes",
-      "date": "2026-08-02T06:27:30Z",
-      "target": "0xa049d66F7Aee24eCc4Cb6De75FAaCb55F0574444",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260802-085654-0x004a487d.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Fiinance",
+      "date": "2026-08-02T08:56:54Z",
+      "target": "0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "29",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MarsCoin (0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-8] Low holder count (134); [-8] Top 10 non-LP/burn holders control 63% of supply \u2014 meaningful concentration; [-10] Low liquidity $15,",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-062730-0xa049d66F.md"
+      "score": "37",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AS (0xfb1561214348ee8D8198C06ea0D21232872cDEFd) \u2014 REJECT 27/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-085654-0x004a487d.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-085654-0x004a487d.md",
+      "title": "Investigation \u2014 AIPF",
+      "symbol": "AIPF",
+      "name": "AI Powered Fiinance",
+      "date": "2026-08-02T08:56:54Z",
+      "target": "0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: AS (0xfb1561214348ee8D8198C06ea0D21232872cDEFd) \u2014 REJECT 27/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-085654-0x004a487d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-062730-0xa049d66F.md",
@@ -594,20 +608,6 @@
       "score": "2",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: OpenAI (0x006b340bEE30F8425cf65f064712F57B2BC0bB07) \u2014 REJECT 0/100 \u2014 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104540-0x7F42440C.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-104518-0x30EC37E2.md",
-      "title": "Investigation \u2014 ClankerToken",
-      "symbol": "ClankerToken",
-      "name": null,
-      "date": "2026-08-01T10:45:18Z",
-      "target": "0x30EC37E22FF8865e2E439d84E7d2ffD58296DB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "2",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: Claude (0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07) \u2014 REJECT 0/100 \u2014 ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104518-0x30EC37E2.md"
     }
   ],
   "reports": [

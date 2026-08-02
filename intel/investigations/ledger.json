@@ -131,6 +131,25 @@
     "symbol": "VELO",
     "times_investigated": 1
   },
+  "137:0x004a487d27e3a187310ee4fdb80d3800dbf97f60": {
+    "address": "0x004a487d27e3a187310Ee4fDB80d3800Dbf97F60",
+    "chain": "137",
+    "creator_address": "0xa53ea273252d38f2a9acf89f9544262545cf64fe",
+    "first_investigated": "2026-08-02T08:56:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-085654-0x004a487d.md",
+        "score": 37,
+        "ts": "2026-08-02T08:56:54Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T08:56:54Z",
+    "last_score": 37,
+    "last_verdict": "REJECT",
+    "symbol": "AIPF",
+    "times_investigated": 1
+  },
   "137:0x05fa81ae340098c8c7fcd310469195f9f8410858": {
     "address": "0x05FA81Ae340098c8C7fcd310469195F9f8410858",
     "chain": "137",
