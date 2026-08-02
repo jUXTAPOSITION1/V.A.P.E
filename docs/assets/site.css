@@ -513,7 +513,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
    severity color, plus a small pulsing dot for CRITICAL rows reusing the
    site's existing live-dot animation as a genuine "needs attention" cue. */
 .secdash-ledger-row td:first-child { border-left: 2px solid var(--row-sev, transparent); background: var(--row-sev-wash, transparent); }
-.secdash-ledger-health-dot { display: inline-block; width: 5px; height: 5px; border-radius: 999px; background: currentColor; margin-left: 0.3rem; animation: pulse-ring 1.8s infinite; }
+.secdash-ledger-health-dot { display: inline-block; width: 5px; height: 5px; border-radius: 999px; background: currentcolor; margin-left: 0.3rem; animation: pulse-ring 1.8s infinite; }
 .secdash-ledger-title {
     color: #d4d4d8; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
@@ -706,7 +706,7 @@ a { transition: color .15s; }
 @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; opacity: 1; transform: none; }
     html { scroll-behavior: auto; }
-    .live-dot { animation: none; }
+    .live-dot, .secdash-ledger-health-dot { animation: none; }
 }
 
 /* ── Flagship bounty-commission section ───────────────────────────────────
