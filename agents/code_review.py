@@ -95,7 +95,18 @@ This repo's real, adopted security/design laws (not aspirational):
   reported date) unsanitized right next to it (fixed, PR #372's follow-up).
 """
 
-MAX_DIFF_CHARS = 40000  # same courtesy-truncation pattern agents/run.py's market_context already uses
+
+# Real, observed miss this exact ceiling caused (PR #420, a 10-file/~112K-char
+# feature diff): build_diff_text() concatenates every changed file's patch in
+# get_pr_files() order, so a 40K cutoff silently dropped every file after the
+# first two — the LLM's own "## Changes" section only ever named the files it
+# was actually shown, with no signal to the reader that 7 of 10 changed files
+# were never in its context at all. frontier-tier providers here (OCI Grok/
+# Gemini/Groq's 70B, all in FRONTIER_ORDER) have context windows well past
+# 100K tokens, so this was leaving most of that budget unused out of pure
+# over-caution — raised to a size that comfortably covers a real multi-file
+# page-level feature PR while still bounding worst-case input.
+MAX_DIFF_CHARS = 150000
 
 # Hidden marker identifying VAPE Reviewer's own comment on a PR, so re-runs
 # (triggered on `synchronize` — every push) update that one comment in place

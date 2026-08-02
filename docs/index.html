@@ -89,10 +89,10 @@
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-500">
                 <a href="#the-file" class="hover:text-zinc-100 transition">Overview</a>
                 <a href="news.html" class="hover:text-zinc-100 transition">News</a>
-                <a href="#case-file" class="hover:text-zinc-100 transition">Investigation</a>
+                <a href="investigations.html" class="hover:text-zinc-100 transition">Investigations</a>
                 <a href="#threat-ledger" class="hover:text-zinc-100 transition">Threats</a>
                 <a href="#retain" class="hover:text-zinc-100 transition">Engagement</a>
-                <a href="#bounty-command-center" class="hover:text-zinc-100 transition">Bounties</a>
+                <a href="bounty.html" class="hover:text-zinc-100 transition">Bounties</a>
                 <a href="#the-wire" class="hover:text-zinc-100 transition">Live Data</a>
                 <a href="#your-case-file" class="hover:text-zinc-100 transition">Portfolio</a>
                 <a href="#the-archive" class="hover:text-zinc-100 transition">Archive</a>
@@ -116,10 +116,10 @@
             <div class="max-w-[1600px] mx-auto px-3 py-3 flex flex-col gap-1 text-sm text-zinc-300">
                 <a href="#the-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-satellite-dish w-4 text-center text-zinc-500"></i>Overview</a>
                 <a href="news.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-newspaper w-4 text-center text-zinc-500"></i>News</a>
-                <a href="#case-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-star w-4 text-center text-zinc-500"></i>Investigation</a>
+                <a href="investigations.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-star w-4 text-center text-zinc-500"></i>Investigations</a>
                 <a href="#threat-ledger" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-shield-halved w-4 text-center text-zinc-500"></i>Threats</a>
                 <a href="#retain" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-handshake w-4 text-center text-zinc-500"></i>Engagement</a>
-                <a href="#bounty-command-center" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
+                <a href="bounty.html" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-user-shield w-4 text-center text-zinc-500"></i>Bounties</a>
                 <a href="#the-wire" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-chart-line w-4 text-center text-zinc-500"></i>Live Data</a>
                 <a href="#your-case-file" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-wallet w-4 text-center text-zinc-500"></i>Portfolio</a>
                 <a href="#the-archive" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/5"><i class="fa-solid fa-box-archive w-4 text-center text-zinc-500"></i>Archive</a>
@@ -658,10 +658,10 @@
                 <div class="lg:col-span-7">
                     <h2 class="hero-title !text-xl sm:!text-2xl mb-4">Commission a real exploit against a real contract.</h2>
                     <p class="text-zinc-300 text-sm sm:text-[15px] max-w-xl leading-relaxed mb-5">
-                        Give VAPE a contract address or GitHub repo. It runs full recon, static and symbolic analysis, then a
-                        frontier model drafts an actual exploit test, which VAPE then <span class="text-amber-200">executes with
-                        Foundry against a live fork of that contract's on-chain state</span>. A pass is measured
-                        impact evidence from an executed exploit, built to submit as a genuine bug-bounty proof-of-concept.
+                        Give VAPE a contract address or GitHub repo. It recons the code, drafts a real exploit with a frontier
+                        model, then <span class="text-amber-200">executes it with Foundry against a live fork of that
+                        contract's on-chain state</span>. What comes back is measured impact evidence — a submission-ready
+                        proof-of-concept, not a narrated guess.
                     </p>
                     <div class="flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-400 mb-7">
                         <span>✓ Executed exploit test, not narrated</span>
@@ -671,14 +671,14 @@
                     </div>
                     <div class="flex flex-wrap gap-3">
                         <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="flagship-btn">Authorize via x402 →</button>
-                        <a href="#bounty-command-center" class="flagship-btn-ghost">See a sample report</a>
+                        <a href="bounty.html" class="flagship-btn-ghost">See a sample report</a>
                     </div>
                 </div>
                 <div class="lg:col-span-5">
                     <div class="spotlight-card !border-amber-400/25">
                         <div class="text-xs text-zinc-500 mb-1">Bounty Deep-Dive Audit</div>
                         <div class="flagship-price">$1<span class="text-base text-zinc-500 font-normal"> USDC</span></div>
-                        <p class="text-xs text-zinc-500 mt-2 mb-5">Settles instantly on Base. No fixed turnaround: delivered the moment the simulated attack completes.</p>
+                        <p class="text-xs text-zinc-500 mt-2 mb-5">Settles instantly on Base — delivered the moment the exploit completes.</p>
                         <div class="stat-line text-[11px]">
                             <span class="stat-label">contract address or repo</span>
                             <span class="stat-label">·</span>
@@ -699,9 +699,9 @@
             </div>
             <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
                 <h2 class="section-title text-lg sm:text-xl">Featured Investigation &amp; Latest Report</h2>
-                <button onclick="App.gotoArchive('investigations')" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
-                    Browse the full archive <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                </button>
+                <a href="investigations.html" class="text-xs text-zinc-400 hover:text-[#60a5fa] transition inline-flex items-center gap-1.5 shrink-0">
+                    Browse every investigation <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <div id="inv-latest" class="spotlight-card">
@@ -844,117 +844,22 @@
 
         <!-- ═══ 8. BOUNTY COMMAND CENTER ═══ -->
         <section id="bounty-command-center" class="reveal panel mb-14">
-            <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow"><i class="fa-solid fa-user-shield"></i>[ security operations ]</div>
-                <span id="bcc-updated" class="text-[11px] text-zinc-500">syncing…</span>
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                    <div class="eyebrow mb-3"><i class="fa-solid fa-user-shield"></i>[ security operations ]</div>
+                    <h2 class="section-title text-lg">Bounty Command Center</h2>
+                </div>
+                <a href="bounty.html" class="term-btn term-btn-sm shrink-0">Open Command Center <i class="fa-solid fa-arrow-right text-[9px] ml-1"></i></a>
             </div>
-            <h2 class="section-title text-lg mb-3">Bounty Command Center</h2>
-            <p class="text-zinc-400 text-sm mb-8 max-w-3xl leading-relaxed">Active bug-bounty programs, VAPE's audit record, and a
-            direct line to commission a paid engagement, from a $0.01 exploit check to a $1 submission-ready bounty audit,
-            hireable directly from a matched program below.</p>
+            <p class="text-zinc-400 text-sm mb-5 max-w-2xl leading-relaxed">Active bug-bounty programs, VAPE's audit record, and a
+            direct line to commission a paid engagement — from a $0.01 exploit check to a $1 submission-ready bounty audit.</p>
 
-            <div id="bcc-telemetry" class="stat-line mb-6 pb-6 border-b border-white/10">
+            <div id="bcc-teaser-stats" class="stat-line mb-5 pb-5 border-b border-white/10">
                 <span class="stat-pair"><span class="stat-label">tracked</span><span id="bcc-total" class="stat-value">…</span></span>
                 <span class="stat-pair"><span class="stat-label">live now</span><span id="bcc-live" class="stat-value">…</span></span>
-                <span class="stat-pair"><span class="stat-label">platforms</span><span id="bcc-platforms" class="stat-value">…</span></span>
-                <span class="stat-pair"><span class="stat-label">audits filed</span><span id="bcc-audits" class="stat-value">…</span></span>
-                <span class="stat-pair"><span class="stat-label">tasks (recent)</span><span id="bcc-tasks" class="stat-value">…</span></span>
             </div>
 
-            <!-- Live task feed — real recent automated commits + one
-                 OCI-Grok-authored synthesis line (agents/task_feed.py,
-                 data/task-feed.json). -->
-            <div class="mb-8 pb-8 border-b border-white/10">
-                <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
-                    <h3 class="text-sm text-zinc-500">Live Automation Feed</h3>
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
-                        <input id="bcc-task-search" type="text" placeholder="Search activity…"
-                            class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[160px] sm:w-[220px]">
-                    </div>
-                </div>
-                <p id="bcc-task-synthesis" class="text-xs text-[#60a5fa] mb-4 leading-relaxed"></p>
-                <div id="bcc-task-feed" class="diff-list">
-                    <div class="skeleton h-10 my-1"></div>
-                    <div class="skeleton h-10 my-1"></div>
-                </div>
-                <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                    <span id="bcc-task-pg-count">…</span>
-                    <div class="flex items-center gap-2">
-                        <button type="button" id="bcc-task-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                        <span id="bcc-task-pg-page" class="text-zinc-400">Page 1</span>
-                        <button type="button" id="bcc-task-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- live radar -->
-                <div class="lg:col-span-7">
-                    <div class="flex items-center justify-between gap-3 mb-4">
-                        <h3 class="text-sm text-zinc-500">Bounty Ops: Matched Programs, Live</h3>
-                        <input id="bounty-ops-search" type="search" placeholder="Search programs, platforms, tags…" class="hidden text-xs bg-transparent border border-white/10 px-3 py-1.5 w-44 sm:w-56 focus:outline-none focus:border-white/30 placeholder:text-zinc-600">
-                    </div>
-                    <div id="bounties" class="diff-list">
-                        <div class="skeleton h-20 my-1"></div>
-                        <div class="skeleton h-20 my-1"></div>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                        <span id="bounty-ops-pg-count">…</span>
-                        <div class="flex items-center gap-2">
-                            <button type="button" id="bounty-ops-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                            <span id="bounty-ops-pg-page" class="text-zinc-400">Page 1</span>
-                            <button type="button" id="bounty-ops-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-zinc-600 mt-4">Live bug-bounty programs vetted against VAPE's tooling: Solidity/EVM or Move/Sui code-review scope only, not a historical exploit or a post-incident recovery offer. Historical incidents live in the <a href="#threat-ledger" class="text-zinc-500 hover:text-rose-400 hover:underline">Threat Ledger</a>. <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar/bounty-ops" target="_blank" class="text-zinc-500 hover:underline">Browse Bounty Ops</a> · <a href="https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/intel/bounty-radar" target="_blank" class="text-zinc-500 hover:underline">view the full radar</a></p>
-                </div>
-
-                <!-- hire CTA: deep-dive bounty -->
-                <div class="lg:col-span-5">
-                    <div class="panel h-full flex flex-col">
-                        <h3 class="text-sm text-zinc-500 mb-2">Commission a Bounty Audit</h3>
-                        <div class="text-2xl mb-2 text-zinc-100">$1 <span class="text-sm text-zinc-500">USDC</span></div>
-                        <div class="text-sm text-zinc-400 mb-5 leading-relaxed">A submission-ready PoC and all supporting detail: full reconnaissance, static analysis,
-                        and a line-by-line review by a frontier language model. No fixed turnaround; delivered as soon as it completes.</div>
-                        <div class="stat-line mb-5 text-[11px]">
-                            <span class="stat-label">submission-ready PoC</span><span class="stat-label">·</span>
-                            <span class="stat-label">frontier model</span><span class="stat-label">·</span>
-                            <span class="stat-label">full recon</span><span class="stat-label">·</span>
-                            <span class="stat-label">committed report</span>
-                        </div>
-                        <div class="mt-auto space-y-2">
-                            <button onclick="Hire.openX402('bounty_deep_dive', 1)" class="term-btn w-full">Authorize via x402</button>
-                        </div>
-                        <p class="text-[10px] text-zinc-600 mt-4">Settles instantly via x402. Prefer to scope it to a specific program? Use the "Hire VAPE" button on any Bounty Ops card at left.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VAPE's own audit track record -->
-            <div class="mt-10">
-                <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
-                    <h3 class="text-sm text-zinc-500">Audit Track Record</h3>
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]"></i>
-                        <input id="bcc-audit-search" type="text" placeholder="Search audits…"
-                            class="bg-transparent border border-white/10 focus:border-white/30 outline-none pl-7 pr-2 py-1.5 text-[11px] text-zinc-200 placeholder:text-zinc-600 w-[160px] sm:w-[220px]">
-                    </div>
-                </div>
-                <div id="bcc-audit-list" class="diff-list">
-                    <div class="skeleton h-24 my-1"></div>
-                    <div class="skeleton h-24 my-1"></div>
-                </div>
-                <div class="flex flex-wrap items-center justify-between gap-3 mt-3 text-[11px] text-zinc-500">
-                    <span id="bcc-audit-pg-count">…</span>
-                    <div class="flex items-center gap-2">
-                        <button type="button" id="bcc-audit-pg-prev" class="term-btn term-btn-sm" disabled>&lsaquo; Prev</button>
-                        <span id="bcc-audit-pg-page" class="text-zinc-400">Page 1</span>
-                        <button type="button" id="bcc-audit-pg-next" class="term-btn term-btn-sm" disabled>Next &rsaquo;</button>
-                    </div>
-                </div>
-                <p class="text-[11px] text-zinc-600 mt-4">A transparent record of every audit VAPE has performed, including cases where deeper investigation wasn't warranted.</p>
-            </div>
+            <a href="bounty.html" class="term-btn inline-block">Open the Bounty Command Center <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i></a>
         </section>
 
         <!-- ═══ 9. LIVE INTELLIGENCE FEED / BASE TRACKING (moved lower) ═══ -->

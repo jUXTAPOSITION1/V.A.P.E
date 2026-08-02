@@ -116,7 +116,7 @@ const App = {
         // Ethereum + x402, not the Virtuals ecosystem specifically) -- the
         // function and its #virtuals-stats/#virtuals-sparkline render targets
         // are left in place, just no longer invoked here.
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bounties(), this.bountyCommand(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation(), this.intel()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -133,152 +133,23 @@ const App = {
         return this._intelPromise;
     },
 
-    // Bounty Command Center telemetry strip + VAPE's own audit track record.
-    // opportunities.json is the same real feed bounties() renders cards from;
-    // this just adds the aggregate counts and the separate hack-sweep-reports
-    // ledger (VAPE's own proactive research — never a paid buyer's PoC, which
-    // is delivered privately and never committed to this public repo).
-    async bountyCommand() {
+    // Bounty Command Center teaser — the full live task feed, matched Bounty
+    // Ops programs, commission CTA, and audit track record all moved to
+    // their own page (bounty.html/bounty.js) so the homepage stays lighter;
+    // this just keeps the on-page teaser card's 2 stats real instead of
+    // static copy, from the same opportunities.json feed the full page reads.
+    async bountyTeaser() {
         try {
             const data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
             const list = Array.isArray(data) ? data : [];
             const liveStatuses = new Set(['live','active']);
             const live = list.filter(o => liveStatuses.has((o.status||'').toLowerCase())).length;
-            const platforms = new Set(list.map(o=>o.platform).filter(Boolean));
             this._set('bcc-total', list.length.toLocaleString());
             this._set('bcc-live', live.toLocaleString());
-            this._set('bcc-platforms', platforms.size);
-            document.getElementById('bcc-updated').textContent = 'radar synced ' + new Date().toLocaleTimeString();
-        } catch(e) {
-            document.getElementById('bcc-updated').textContent = 'radar telemetry unavailable';
-        }
-
-        // Live task feed — real recent automated commits + one OCI-Grok
-        // synthesis line (agents/task_feed.py, data/task-feed.json). A
-        // separate try/catch from the telemetry/audit-list fetches above —
-        // this feed being unavailable shouldn't blank out either of those.
-        const taskFeedEl = document.getElementById('bcc-task-feed');
-        const synthesisEl = document.getElementById('bcc-task-synthesis');
-        const KIND_META = {
-            investigation: ['fa-magnifying-glass-chart', '#60a5fa'],
-            'bounty-radar': ['fa-satellite-dish', '#60a5fa'],
-            audit: ['fa-file-shield', '#60a5fa'],
-            broadcast: ['fa-tower-broadcast', '#a1a1aa'],
-            reputation: ['fa-chart-line', '#a1a1aa'],
-            sweep: ['fa-broom', '#a1a1aa'],
-            'data-agent': ['fa-database', '#a1a1aa'],
-            build: ['fa-code-merge', '#a1a1aa'],
-            automation: ['fa-gears', '#a1a1aa'],
-        };
-        try {
-            const feed = await (await fetch(`${RAW}/data/task-feed.json?t=`+Date.now())).json();
-            const tasks = Array.isArray(feed.tasks) ? feed.tasks : [];
-            this._set('bcc-tasks', tasks.length);
-            if (synthesisEl) synthesisEl.textContent = feed.synthesis || '';
-            if (!tasks.length) throw 0;
-            this._taskFeedItems = tasks;
-            this._taskFeedKindMeta = KIND_META;
-            this._wireTaskFeedControls();
-            this._renderTaskFeed();
-        } catch(e) {
-            if (taskFeedEl) taskFeedEl.innerHTML = '<div class="text-zinc-500 text-sm">No recent automated activity recorded.</div>';
-            this._set('bcc-tasks', 0);
-        }
-
-        // intel/audits/hack-sweep-reports/ — VAPE's own proactive daily HACK
-        // sweep, never a specific buyer's paid engagement — deliberately NOT
-        // intel/audits/poc-reports/, which used to live here. Real privacy
-        // gap this fixes: a paid buyer's PoC report may be the exact
-        // technical detail they still need to submit to a bounty program
-        // themselves; publicly listing it here (and it being committed to
-        // this public repo at all — see deep-dive-bounty.yml's matching
-        // fix) could let the audited project or another researcher see it
-        // before the buyer submits. Paid engagement reports no longer land
-        // in a publicly-committed directory at all as of that fix, so this
-        // widget now only ever shows VAPE's own non-buyer-specific work.
-        const auditEl = document.getElementById('bcc-audit-list');
-        try {
-            const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/audits/hack-sweep-reports`)).json();
-            const files = (Array.isArray(items)?items:[]).filter(f=>f.name.endsWith('.md'))
-                .map(f=>{
-                    const stopped = /-STOPPED/.test(f.name);
-                    const m = f.name.match(/(\d{4}-\d{2}-\d{2})/);
-                    const base = f.name.replace(/\.md$/,'').replace(/-STOPPED/,'').replace(/^(audit|lead|hack-sweep)-/,'').replace(/-\d{4}-\d{2}-\d{2}$/,'');
-                    return { name: base.replace(/-/g,' '), stopped, date: m?m[1]:'', url: f.html_url, isAudit: !stopped };
-                })
-                .sort((a,b)=>b.date.localeCompare(a.date));
-            this._set('bcc-audits', files.filter(f=>f.isAudit).length);
-            if (!files.length) throw 0;
-            this._auditFiles = files;
-            this._wireAuditListControls();
-            this._renderAuditList();
-        } catch(e) {
-            auditEl.innerHTML = '<div class="text-zinc-500 text-sm">No audits filed yet. <a class="text-zinc-400 hover:underline" href="https://github.com/'+REPO+'/tree/main/intel/audits/hack-sweep-reports" target="_blank">Browse the audit ledger</a>.</div>';
-        }
-    },
-
-    // Live Automation Feed — search + pagination over the already-fetched
-    // task-feed.json entries.
-    _taskFeedItems: [], _taskFeedKindMeta: {}, _taskFeedQuery: '',
-    _wireTaskFeedControls() {
-        if (this._taskFeedWired) return;
-        this._taskFeedWired = true;
-        const search = document.getElementById('bcc-task-search');
-        if (search) search.addEventListener('input', () => {
-            this._taskFeedQuery = search.value.trim().toLowerCase();
-            this._pgReset('bcc-task-pg');
-            this._renderTaskFeed();
-        });
-        this._pgWire('bcc-task-pg', 8, () => this._renderTaskFeed());
-    },
-    _renderTaskFeed() {
-        const taskFeedEl = document.getElementById('bcc-task-feed');
-        if (!taskFeedEl) return;
-        let tasks = this._taskFeedItems;
-        if (this._taskFeedQuery) tasks = tasks.filter(t => (t.message||'').toLowerCase().includes(this._taskFeedQuery) || (t.kind||'').toLowerCase().includes(this._taskFeedQuery));
-        const items = this._pgSlice('bcc-task-pg', tasks, 8);
-        taskFeedEl.innerHTML = items.length ? items.map(t => {
-            const [icon, col] = this._taskFeedKindMeta[t.kind] || this._taskFeedKindMeta.automation || ['fa-gears', '#a1a1aa'];
-            return `
-            <a href="${t.url||'#'}" target="_blank" rel="noopener" class="card-h diff-row flex items-center gap-3">
-                <i class="fa-solid ${icon} w-4 text-center shrink-0" style="color:${col}"></i>
-                <div class="min-w-0 flex-1 text-xs text-zinc-300 truncate">${this._esc(t.message||'')}</div>
-                <div class="text-[10px] text-zinc-500 shrink-0">${this._ago(t.date)}</div>
-            </a>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">No automated activity matches this filter.</div>';
+        } catch(e) { /* teaser stats just stay skeletons — bounty.html has the full picture */ }
     },
 
     _rep: null,
-    // Audit Track Record — search + pagination over the already-fetched
-    // hack-sweep-reports directory listing.
-    _auditFiles: [], _auditQuery: '',
-    _wireAuditListControls() {
-        if (this._auditWired) return;
-        this._auditWired = true;
-        const search = document.getElementById('bcc-audit-search');
-        if (search) search.addEventListener('input', () => {
-            this._auditQuery = search.value.trim().toLowerCase();
-            this._pgReset('bcc-audit-pg');
-            this._renderAuditList();
-        });
-        this._pgWire('bcc-audit-pg', 8, () => this._renderAuditList());
-    },
-    _renderAuditList() {
-        const auditEl = document.getElementById('bcc-audit-list');
-        if (!auditEl) return;
-        let files = this._auditFiles;
-        if (this._auditQuery) files = files.filter(f => f.name.includes(this._auditQuery));
-        const items = this._pgSlice('bcc-audit-pg', files, 8);
-        auditEl.innerHTML = items.length ? items.map(f => `
-                <a href="${f.url}" target="_blank" class="card-h diff-row block">
-                    <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <i class="fa-solid ${f.stopped?'fa-ban text-zinc-500':'fa-file-shield text-[#60a5fa]'}"></i>
-                        <span class="text-[10px] ${f.stopped?'text-zinc-500':'text-[#60a5fa]'}">${f.stopped?'Lead stopped':'Audit filed'}</span>
-                    </div>
-                    <div class="text-xs leading-snug capitalize">${this._esc(f.name)}</div>
-                    <div class="text-[10px] text-zinc-500 mt-1">${f.date}</div>
-                </a>`).join('') : '<div class="text-zinc-500 text-sm">No audits match this filter.</div>';
-    },
 
     async reputation() {
         try {
@@ -1657,110 +1528,6 @@ const App = {
         } catch(e) {
             body.innerHTML = '<div class="text-amber-400 text-sm">Protocol detail unavailable right now.</div>';
         }
-    },
-
-    // Bounty Ops (Task #197): real, checklist-tracked programs written by
-    // agents/bounty_ops.py to intel/bounty-radar/bounty-ops/*.json. Keyed
-    // by the same slug the backend generates (slugified program name) so a
-    // card can show live checklist progress + a link to VAPE's own report
-    // the moment one exists. Best-effort — a card renders fine with no
-    // bounty-ops record at all (not every VAPE-fit program is tracked yet).
-    _bountyOpsPromise: null,
-    async _loadBountyOps() {
-        if (this._bountyOpsPromise) return this._bountyOpsPromise;
-        this._bountyOpsPromise = (async () => {
-            try {
-                const items = await (await fetch(`https://api.github.com/repos/${REPO}/contents/intel/bounty-radar/bounty-ops`)).json();
-                const files = (Array.isArray(items) ? items : []).filter(f => f.name.endsWith('.json') && f.name !== 'INDEX.json');
-                const entries = await Promise.all(files.map(f =>
-                    fetch(`${RAW}/intel/bounty-radar/bounty-ops/${f.name}?t=`+Date.now()).then(r => r.json()).catch(() => null)
-                ));
-                const map = {};
-                entries.filter(Boolean).forEach(e => {
-                    const slug = (e.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-                    map[slug] = e;
-                });
-                return map;
-            } catch (e) { return {}; }
-        })();
-        return this._bountyOpsPromise;
-    },
-
-    _bountyOpsData: [], _bountyOpsMap: {},
-    async bounties() {
-        const el = document.getElementById('bounties');
-        const searchEl = document.getElementById('bounty-ops-search');
-        try {
-            let data = await (await fetch(`${RAW}/intel/bounty-radar/opportunities.json?t=`+Date.now())).json();
-            if (!Array.isArray(data)) data = [];
-            // Task #196 fix: only real, VAPE-fit LIVE BOUNTY PROGRAMS here —
-            // never a historical incident (track==="incident", already shown
-            // in the Threat Ledger) and never a program whose scope doesn't
-            // actually match VAPE's own tooling, regardless of headline $.
-            data = data.filter(b => b.track === 'bounty' && b.vapeFit === true)
-                       .sort((a,b)=>(b.bountyFitScore||0)-(a.bountyFitScore||0)).slice(0,30);
-            if (!data.length) throw 0;
-            const opsMap = await this._loadBountyOps();
-            this._bountyOpsData = data;
-            this._bountyOpsMap = opsMap;
-            // Keyed lookup so docs/assets/hire.js::openBountyOps() can read back
-            // full program context (name/platform/prize/vapeFitReason/tags) by
-            // slug without stuffing a JSON blob into an inline onclick string.
-            this._bountyOpsList = {};
-            data.forEach(b => {
-                const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-                this._bountyOpsList[slug] = b;
-            });
-            if (searchEl) {
-                searchEl.classList.remove('hidden');
-                searchEl.oninput = () => {
-                    this._bountyOpsQuery = searchEl.value.trim().toLowerCase();
-                    this._pgReset('bounty-ops-pg');
-                    this._renderBounties();
-                };
-            }
-            this._pgWire('bounty-ops-pg', 6, () => this._renderBounties());
-            this._renderBounties();
-        } catch(e){
-            el.innerHTML = `<div class="text-zinc-500 text-sm">No live bounty program in scope right now. <a class="text-zinc-400 hover:underline" href="https://github.com/${REPO}/tree/main/intel/bounty-radar" target="_blank">Browse intel</a>.</div>`;
-            if (searchEl) searchEl.classList.add('hidden');
-        }
-    },
-    _bountyOpsQuery: '',
-    _renderBounties() {
-        const el = document.getElementById('bounties');
-        if (!el) return;
-        const opsMap = this._bountyOpsMap;
-        let data = this._bountyOpsData;
-        if (this._bountyOpsQuery) {
-            const q = this._bountyOpsQuery;
-            data = data.filter(b => `${b.name||''} ${b.platform||''} ${(b.tags||[]).join(' ')}`.toLowerCase().includes(q));
-        }
-        const items = this._pgSlice('bounty-ops-pg', data, 6);
-        el.innerHTML = items.length ? items.map(b=>{
-            const slug = (b.name||'').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-            const ops = opsMap[slug];
-            const done = ops ? (ops.checklist||[]).filter(i=>i.done).length : 0;
-            const total = ops ? (ops.checklist||[]).length : 0;
-            return `
-            <div class="diff-row">
-                <div class="flex items-start justify-between gap-2">
-                    <div class="text-sm leading-snug">${this._esc(b.name||'Unknown')}</div>
-                    <div class="text-zinc-100 shrink-0">${b.prizeUsd?fmtUsd(b.prizeUsd):'…'}</div>
-                </div>
-                <div class="text-xs text-zinc-500 mt-2">${this._esc(b.platform||'')} ${b.status?'· '+this._esc(b.status):''}</div>
-                ${b.vapeFitReason?`<div class="text-[10px] text-[#60a5fa]/80 mt-1.5"><i class="fa-solid fa-check-circle"></i> ${this._esc(b.vapeFitReason)}</div>`:''}
-                ${(b.tags||[]).slice(0,4).map(t=>`<span class="inline-block text-[10px] mr-2 mt-2 text-zinc-500">${this._esc(t)}</span>`).join('')}
-                ${ops?`<div class="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500">
-                    <span><i class="fa-solid fa-list-check"></i> Bounty Ops tracked${total?` · ${done}/${total} checklist`:''}</span>
-                    ${ops.vapeReportUrl?`<span><i class="fa-solid fa-file-shield"></i> VAPE report</span>`:''}
-                </div>`:''}
-                <div class="mt-2.5 pt-2.5 border-t border-white/5 flex items-center gap-3">
-                    <a href="${b.url||'#'}" target="_blank" class="text-[11px] text-zinc-500 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square"></i> View program</a>
-                    <button onclick="Hire.openBountyOps('${slug}')" class="text-[11px] text-[#60a5fa]/90 hover:underline"><i class="fa-solid fa-bolt"></i> Hire VAPE for this bounty</button>
-                </div>
-            </div>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">No bounty programs match this filter.</div>';
     },
 
     // Prefers the generated intel index (real title/type/verdict/summary per
