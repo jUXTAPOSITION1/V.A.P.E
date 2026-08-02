@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T18:29:54Z",
+  "generated": "2026-08-02T18:45:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 512,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 141,
-    "investigations": 666,
+    "investigations": 667,
     "news": 51,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-182951-0x4743aB4E.md",
-      "title": "Investigation \u2014 SRC",
-      "symbol": "SRC",
-      "name": "Spinning Rat Coin",
-      "date": "2026-08-02T18:29:51Z",
-      "target": "0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "64",
-      "summary": "Risk factors: [-10] Owner not renounced (0xb8a8b03d5f45b2454529f34e50ceaadb0b353ed4) \u2014 can still act on the contract; [-8] Low holder count (68); [-8] Top 10 non-LP/burn holders control 58% of supply \u2014 meaningful concentration; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/an",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-182951-0x4743aB4E.md"
+      "file": "investigation-20260802-184512-0x80ac288e.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "New ORIGINLGNS",
+      "date": "2026-08-02T18:45:12Z",
+      "target": "0x80ac288e9664D7E2B59428125048eF48D853a93B",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $23,454; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-184512-0x80ac288e.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-184512-0x80ac288e.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "New ORIGINLGNS",
+      "date": "2026-08-02T18:45:12Z",
+      "target": "0x80ac288e9664D7E2B59428125048eF48D853a93B",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $23,454; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-184512-0x80ac288e.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-182951-0x4743aB4E.md",

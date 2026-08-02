@@ -623,6 +623,24 @@
     "symbol": "BTC",
     "times_investigated": 1
   },
+  "137:0x80ac288e9664d7e2b59428125048ef48d853a93b": {
+    "address": "0x80ac288e9664D7E2B59428125048eF48D853a93B",
+    "chain": "137",
+    "first_investigated": "2026-08-02T18:45:12Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260802-184512-0x80ac288e.md",
+        "score": 22,
+        "ts": "2026-08-02T18:45:12Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-02T18:45:12Z",
+    "last_score": 22,
+    "last_verdict": "REJECT",
+    "symbol": "LGNS",
+    "times_investigated": 1
+  },
   "137:0x831753dd7087cac61ab5644b308642cc1c33dc13": {
     "address": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
     "chain": "137",
