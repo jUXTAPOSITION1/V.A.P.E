@@ -484,3 +484,5 @@
 {"ts": "2026-08-02T14:29:44.637481Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-02T14:59:34.071987Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["token_safety_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
 {"ts": "2026-08-02T15:29:52.651036Z", "target": "none", "hired": ["prediction_market_odds"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-02T15:59:52.270151Z", "target": "Optimism", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-02T16:29:38.518422Z", "target": "mexc", "hired": ["treasury"], "paid": 0, "cost_usd": 0.0, "daily_target": 54}
