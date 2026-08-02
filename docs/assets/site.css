@@ -273,20 +273,20 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     background: rgba(255, 255, 255, 0.35);
 }
 
-/* Security Dashboard — blue-violet "high-tech console" theme. Two-tone
+/* Security Dashboard — blue/white "high-tech console" theme. Two-tone
    glow (blue #60a5fa, already used by Featured Investigation/Bounty
-   Command Center, plus violet #a78bfa, already the flagship beam's
-   secondary color) rather than a single flat accent or the site's global
-   green --accent, so this section's chrome — panel glows, the top beam,
-   active toggle pills, the lane <select>, lane dots — reads as one
-   deliberately-designed console. Severity itself stays on the --sev-*
-   ramp everywhere below regardless of this section's theme, since that
-   encodes real data and is never reskinned for decoration. */
+   Command Center, plus a soft near-white for depth/contrast rather than a
+   second hue) instead of a single flat accent or the site's global green
+   --accent, so this section's chrome — panel glows, the top beam, active
+   toggle pills, the lane <select>, lane dots — reads as one deliberately-
+   designed console. Severity itself stays on the --sev-* ramp everywhere
+   below regardless of this section's theme, since that encodes real data
+   and is never reskinned for decoration. */
 #security-dashboard {
     --sd-blue: #60a5fa;
-    --sd-violet: #a78bfa;
+    --sd-white: #d4d4d8;
     --sd-glow-blue: rgba(96, 165, 250, 0.14);
-    --sd-glow-violet: rgba(167, 139, 250, 0.12);
+    --sd-glow-white: rgba(228, 228, 231, 0.08);
     position: relative;
     overflow: hidden;
 }
@@ -295,7 +295,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--sd-blue) 35%, var(--sd-violet) 65%, transparent);
+    background: linear-gradient(90deg, transparent, var(--sd-blue) 35%, var(--sd-white) 65%, transparent);
     background-size: 200% 100%;
     animation: flagship-beam 7s linear infinite;
 }
@@ -304,7 +304,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     position: relative;
     border-color: rgba(148, 163, 250, 0.14) !important;
     background-image: radial-gradient(ellipse 130% 90% at 0% 0%, var(--sd-glow-blue), transparent 60%),
-                       radial-gradient(ellipse 120% 90% at 100% 100%, var(--sd-glow-violet), transparent 65%);
+                       radial-gradient(ellipse 120% 90% at 100% 100%, var(--sd-glow-white), transparent 65%);
     transition: border-color 0.2s ease;
 }
 #security-dashboard .secdash-panel:hover { border-color: rgba(148, 163, 250, 0.32) !important; }
@@ -312,7 +312,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 #security-dashboard .term-btn-active {
     border-color: var(--sd-blue);
     color: #c4d7fb;
-    background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.16));
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(228, 228, 231, 0.12));
 }
 #security-dashboard .secdash-lanes-filter:focus, #security-dashboard #secdash-lanes-sort:focus {
     border-color: var(--sd-blue);
@@ -416,8 +416,27 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 #secdash-lanes-filter, #secdash-lanes-sort { max-width: 132px; font-size: 10.5px; padding: 0.2rem 0.4rem; }
 .secdash-lanes-headline { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
 .secdash-lanes-stat { font-size: 1.5rem; font-family: var(--font-mono); color: #f4f4f5; font-variant-numeric: tabular-nums; line-height: 1.1; }
-.secdash-lanes-chart-scroll { overflow-x: auto; }
-.secdash-lanes-chart { position: relative; height: clamp(260px, 26vw, 340px); width: 100%; min-width: 420px; }
+
+/* Automated Lanes flow diagram — a real two-column Sankey-style ribbon
+   chart (lane nodes on the left, the same three real statuses as the
+   legend below as nodes on the right), built as plain inline SVG rather
+   than a bundled Sankey library: this repo's real shape (N lanes each
+   landing on exactly one of 3 outcomes) is a genuine, if small, flow —
+   ribbon thickness is uniform per lane (no fabricated weighting), color
+   is the lane's real status, and node height on the right is proportional
+   to its real real lane count. securitydashboard.js builds the <svg>. */
+.secdash-lanes-flow { position: relative; height: clamp(220px, 24vw, 300px); width: 100%; }
+.secdash-lanes-flow svg { width: 100%; height: 100%; display: block; }
+.secdash-flow-ribbon { transition: opacity 0.15s ease, fill-opacity 0.15s ease; cursor: pointer; }
+.secdash-lanes-flow svg:hover .secdash-flow-ribbon { opacity: 0.35; }
+.secdash-flow-ribbon:hover { opacity: 1 !important; }
+.secdash-flow-node-label { font-size: 9.5px; font-family: var(--font-sans); fill: #a1a1aa; }
+.secdash-flow-node-label.is-strong { fill: #e4e4e7; font-weight: 600; }
+.secdash-flow-node-count { font-size: 9px; font-family: var(--font-mono); fill: #71717a; }
+.secdash-flow-node-rect { transition: fill-opacity 0.15s ease; }
+.secdash-flow-lane-row { cursor: pointer; }
+.secdash-flow-lane-row:hover .secdash-flow-node-label { fill: #f4f4f5; }
+
 .secdash-lanes-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0.6rem 0 0.75rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
 .secdash-lanes-legend-item { display: flex; align-items: center; gap: 0.35rem; font-size: 10.5px; color: #a1a1aa; }
 .secdash-lanes-legend-dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
@@ -452,15 +471,22 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-signalmap-chart {
     position: relative; height: 190px; width: 100%; min-width: 340px;
     background-image:
-        radial-gradient(circle at 50% 58%, var(--sd-glow-violet), transparent 42%),
+        radial-gradient(circle at 50% 58%, var(--sd-glow-white), transparent 42%),
         repeating-radial-gradient(circle at 50% 58%, rgba(148, 163, 250, 0.07) 0px, rgba(148, 163, 250, 0.07) 1px, transparent 1px, transparent 34px);
     border-radius: var(--radius-md);
 }
 .secdash-signalmap-legend {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 0.75rem; margin-top: 0.5rem;
 }
-@media (min-width: 640px) { .secdash-signalmap-legend { grid-template-columns: repeat(3, 1fr); } }
-.secdash-signalmap-item { display: flex; align-items: center; gap: 0.4rem; font-size: 10.5px; min-width: 0; }
+/* Each legend item doubles as the click target for the expandable detail
+   panel below (see .secdash-signalmap-detail) — same real per-category
+   signal a bubble click triggers, since the legend item and its bubble
+   both come from the one _categorySignal() computation. */
+.secdash-signalmap-item {
+    display: flex; align-items: center; gap: 0.4rem; font-size: 10.5px; min-width: 0;
+    cursor: pointer; padding: 0.2rem; margin: -0.2rem; border-radius: 6px; transition: background-color 0.15s ease;
+}
+.secdash-signalmap-item:hover, .secdash-signalmap-item.is-active { background: rgba(255, 255, 255, 0.04); }
 .secdash-signalmap-letter {
     display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
     width: 17px; height: 17px; border-radius: 999px; font-size: 8px; font-weight: 600;
@@ -469,6 +495,26 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-signalmap-body { min-width: 0; overflow: hidden; }
 .secdash-signalmap-title { color: #d4d4d8; display: block; }
 .secdash-signalmap-delta { color: #71717a; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Expandable per-category detail — clicking a bubble or its matching legend
+   item opens this with that category's real underlying lane rows (and, for
+   On-Chain Intel, the real uncovered attack-pattern list) instead of only
+   ever showing the one-line delta text. */
+.secdash-signalmap-detail {
+    margin-top: 0.6rem; padding: 0.7rem 0.75rem; border-radius: var(--radius-md);
+    border: 1px solid rgba(148, 163, 250, 0.16);
+    background: linear-gradient(135deg, var(--sd-glow-blue), var(--sd-glow-white));
+    font-size: 11px;
+}
+.secdash-signalmap-detail-title { color: #e4e4e7; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.secdash-signalmap-detail-close { color: #71717a; cursor: pointer; font-size: 10px; }
+.secdash-signalmap-detail-close:hover { color: #e4e4e7; }
+.secdash-signalmap-detail-row { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 10.5px; }
+.secdash-signalmap-detail-row:first-of-type { border-top: none; }
+.secdash-signalmap-detail-label { color: #d4d4d8; flex-shrink: 0; }
+.secdash-signalmap-detail-value { color: #71717a; flex: 1; min-width: 0; }
+.secdash-signalmap-detail-gaps { margin-top: 0.4rem; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.secdash-signalmap-detail-gap { font-size: 9.5px; color: var(--sev-high); background: rgba(236, 131, 90, 0.1); border: 1px solid rgba(236, 131, 90, 0.3); border-radius: 999px; padding: 1px 7px; }
 
 /* Signal Timeline legend — small inline severity chips beneath the bubble
    timeline chart (the "By Severity" toggle state only; hidden for the
@@ -542,7 +588,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem 1rem;
     padding: 0.9rem 1rem; margin: 0.3rem 0.5rem 0.7rem;
     font-size: 11px; color: #d4d4d8;
-    background: linear-gradient(135deg, var(--sd-glow-blue), var(--sd-glow-violet));
+    background: linear-gradient(135deg, var(--sd-glow-blue), var(--sd-glow-white));
     border: 1px solid rgba(148, 163, 250, 0.16); border-radius: var(--radius-md);
 }
 .secdash-ledger-detail-field { display: block; }
@@ -558,7 +604,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .secdash-ledger-spark { display: inline-flex; align-items: flex-end; gap: 2px; height: 22px; margin-left: 0.6rem; vertical-align: middle; }
 .secdash-ledger-spark-bar {
     flex: 0 0 auto; width: 3px; min-width: 3px; border-radius: 1px 1px 0 0;
-    background: linear-gradient(180deg, rgba(191, 219, 254, 0.75) 0%, var(--sd-blue) 45%, var(--sd-violet) 100%);
+    background: linear-gradient(180deg, rgba(191, 219, 254, 0.75) 0%, var(--sd-blue) 45%, var(--sd-white) 100%);
 }
 .secdash-ledger-spark-bar.is-latest { filter: brightness(1.25); box-shadow: 0 0 5px rgba(167, 139, 250, 0.6); }
 
