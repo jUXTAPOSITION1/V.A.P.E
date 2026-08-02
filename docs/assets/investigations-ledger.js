@@ -122,8 +122,15 @@ export function sparklineBuckets(investigations, range) {
     const buckets = Array.from({ length: n }, () => ({ count: 0, scoreSum: 0, scoreN: 0 }));
     items.forEach(({ d, score }) => {
         const diff = Math.floor((now - d.getTime()) / bucketMs);
-        if (diff < 0 || diff >= n) return;
-        const b = buckets[n - 1 - diff];
+        if (diff < 0) return;
+        // 'all' sizes n from the same spanMs used to compute diff, so the
+        // very oldest item can land exactly on diff === n (a rounding edge,
+        // not out-of-range) -- fold it into the last bucket instead of
+        // dropping it. day/week/month have a fixed real window, so an
+        // out-of-range diff there is genuinely too old and stays excluded.
+        const bucketDiff = range === 'all' ? Math.min(diff, n - 1) : diff;
+        if (bucketDiff >= n) return;
+        const b = buckets[n - 1 - bucketDiff];
         b.count++;
         if (score != null && !isNaN(score)) { b.scoreSum += score; b.scoreN++; }
     });
