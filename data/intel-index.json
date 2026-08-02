@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-02T19:10:58Z",
+  "generated": "2026-08-02T19:11:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 512,
+    "reports": 513,
     "reports_by_type": {
-      "bounty": 126,
+      "bounty": 127,
       "base": 103,
       "macro": 27,
       "security": 94,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260802_170036.md",
+      "file": "bounty_report_20260802_191136.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T17:00:36Z",
+      "date": "2026-08-02T19:11:36Z",
       "threat": null,
-      "summary": "Cycle: 20260802170036 \u00b7 Data timestamp (UTC): 2026-08-02T17:00:42Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_170036.md",
-      "bytes": 16364
+      "summary": "Base mover: HOME / WETH 0.3% +34% 24h (liq $57011.9467) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_191136.md",
+      "bytes": 16466
     }
   },
   "investigations": [
@@ -9204,6 +9204,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260802_191136.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T19:11:36Z",
+      "threat": null,
+      "summary": "Base mover: HOME / WETH 0.3% +34% 24h (liq $57011.9467) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_191136.md",
+      "bytes": 16466
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260802_170036.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-02T17:00:36Z",
@@ -9849,17 +9860,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_042309.md",
       "bytes": 17096
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-31-04.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-31T04:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-31 04:25 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-31-04.md",
-      "bytes": 3314
     }
   ],
   "broadcasts": [
