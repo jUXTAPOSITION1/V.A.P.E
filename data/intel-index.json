@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-02T09:57:01Z",
+  "generated": "2026-08-02T09:58:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 502,
+    "reports": 503,
     "reports_by_type": {
+      "bounty": 122,
       "security": 93,
-      "bounty": 121,
       "base": 101,
       "sentiment": 52,
       "macro": 26,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-085654-0x004a487d.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-02-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-02T08:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_095813.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T09:58:13Z",
       "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days across multiple chains, with realized losses ranging from $0.01M (Set Protocol malicious SetToken contract on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Other confirmed events include an $8.2M Crypto DAO incident on BSC, $9.7M Triple-A hot-wallet compromise spanning ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-08.md",
-      "bytes": 6422
+      "summary": "Cycle: 20260802095813 \u00b7 Data timestamp (UTC): 2026-08-02T09:58:15Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_095813.md",
+      "bytes": 16263
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260802_095813.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-02T09:58:13Z",
+      "threat": null,
+      "summary": "Cycle: 20260802095813 \u00b7 Data timestamp (UTC): 2026-08-02T09:58:15Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_095813.md",
+      "bytes": 16263
+    },
     {
       "kind": "intel",
       "type": "security",
@@ -1259,17 +1270,6 @@
       "summary": "RECENT EXPLOIT: Crypto DAO $8.2M on ['BSC'] (None) \u00b7 RECENT EXPLOIT: LULA $0.578M on ['BSC'] (Price Manipulation Attack)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260730_162730.md",
       "bytes": 16211
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-30-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-30T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-30 16:21 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-16.md",
-      "bytes": 3533
     }
   ],
   "broadcasts": [
