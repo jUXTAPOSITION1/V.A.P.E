@@ -383,3 +383,4 @@
 {"ts": "2026-08-02T12:44:44.813318Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-02T13:29:39.237660Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-02T13:59:44.052771Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-02T14:44:37.533802Z", "target": "0xFCa95aeb5bF44aE355806A5ad14659c940dC6BF7", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
