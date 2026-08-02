@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-02T08:11:57Z",
+  "generated": "2026-08-02T08:26:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 501,
+    "reports": 502,
     "reports_by_type": {
+      "security": 93,
       "bounty": 121,
       "base": 101,
-      "security": 92,
       "sentiment": 52,
       "macro": 26,
       "bug": 4,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-062730-0xa049d66F.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_073210.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T07:32:10Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-02-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-02T08:00Z",
       "threat": null,
-      "summary": "Base mover: Claude / USDC +62% 24h (liq $0.002206087338) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_073210.md",
-      "bytes": 16656
+      "summary": "The feed shows 6 incidents in the last 7 days across multiple chains, with realized losses ranging from $0.01M (Set Protocol malicious SetToken contract on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Other confirmed events include an $8.2M Crypto DAO incident on BSC, $9.7M Triple-A hot-wallet compromise spanning ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-08.md",
+      "bytes": 6422
     }
   },
   "investigations": [
@@ -611,6 +611,17 @@
     }
   ],
   "reports": [
+    {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-02-08.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-02T08:00Z",
+      "threat": null,
+      "summary": "The feed shows 6 incidents in the last 7 days across multiple chains, with realized losses ranging from $0.01M (Set Protocol malicious SetToken contract on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Other confirmed events include an $8.2M Crypto DAO incident on BSC, $9.7M Triple-A hot-wallet compromise spanning ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-08.md",
+      "bytes": 6422
+    },
     {
       "kind": "bounty",
       "type": "bounty",
@@ -1259,17 +1270,6 @@
       "summary": "Date: 2026-07-30 16:21 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-30-16.md",
       "bytes": 3533
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-07-30-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-07-30T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28, prior day 29) and global market cap 24h change (1.26%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-07-30-15.md",
-      "bytes": 2222
     }
   ],
   "broadcasts": [
