@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T13:14:34Z",
+  "generated": "2026-08-02T13:21:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 506,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 140,
     "investigations": 659,
-    "news": 49,
+    "news": 50,
     "tools": 16,
     "tools_verified": 16,
     "skills": 23
@@ -1485,6 +1485,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-02-h96-sticks-secretly-masquerade-as-phones-to-feed-global-ad-f.md",
+      "title": "H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-02T13:21:44Z",
+      "published_et": "August 2, 2026 \u00b7 9:21 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Bitsight researcher traces the scheme to a single Chinese firm whose apps coordinate fake clicks on AI-generated sites while the devices also siphon bandwidth.",
+      "image": "assets/news-images/h96-sticks-secretly-masquerade-as-phones-to-feed-global-ad-f.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-02-h96-sticks-secretly-masquerade-as-phones-to-feed-global-ad-f.md"
+    },
     {
       "file": "news-2026-08-02-ai-turbocharges-microsoft-s-july-patch-haul-to-an-unpreceden.md",
       "title": "AI Turbocharges Microsoft's July Patch Haul to an Unprecedented 570 Fixes",

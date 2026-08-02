@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T10:41:36Z",
+  "generated": "2026-08-02T13:20:31Z",
   "count": 60,
   "headlines": [
     {
@@ -75,6 +75,78 @@
       "crypto": true
     },
     {
+      "title": "The reverse bridge: Crypto meets Wall Street using perps",
+      "url": "https://www.coindesk.com/business/2026/08/02/the-reverse-bridge-crypto-meets-wall-street-using-perps",
+      "source": "CoinDesk",
+      "published": "Sun, 02 Aug 2026 13:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "South Koreans are Sending Stablecoins to Foreign Exchanges at Record Rate",
+      "url": "https://beincrypto.com/south-korea-stablecoin-outflows-18-months/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 13:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Iran Denies Trump\u2019s Hormuz Deal, Oil Jumps but Bitcoin Watches",
+      "url": "https://beincrypto.com/iran-denies-trump-hormuz-deal-claim/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 12:39:21 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ethereum just outpaced Bitcoin with $365 million in ETF inflows, but on-chain data shows the real bottom isn\u2019t in yet",
+      "url": "https://cryptoslate.com/ethereum-just-outpaced-bitcoin-with-365-million-in-etf-inflows-but-on-chain-data-shows-the-real-bottom-isnt-in-yet/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 12:35:54 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Unlike the FTX collapse, the $89 million Coldcard exploit has investors sending bitcoin back to exchanges",
+      "url": "https://www.coindesk.com/markets/2026/08/02/unlike-the-ftx-collapse-the-usd88-million-coldcard-exploit-has-investors-sending-bitcoin-back-to-exchanges",
+      "source": "CoinDesk",
+      "published": "Sun, 02 Aug 2026 12:03:51 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sun, 02 Aug 2026 11:56:35 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "The sudden collapse of a $20 billion AI fund reveals why Bitcoin is the first thing Wall Street sells when margin calls hit",
+      "url": "https://cryptoslate.com/wall-streets-ai-margin-calls-are-here-is-bitcoin-the-next-source-of-cash/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 11:40:06 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "BNB Chain pursues legal action after ex-employee\u2019s memecoin launch",
+      "url": "https://cointelegraph.com/news/bnb-chain-legal-action-ex-employee-memecoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sun, 02 Aug 2026 11:20:06 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why a sudden 5,500 BTC drop in leveraged short positions failed to deliver the bullish confirmation Bitcoin traders wanted",
+      "url": "https://cryptoslate.com/why-a-sudden-5500-btc-drop-in-leveraged-short-positions-failed-to-deliver-the-bullish-confirmation-bitcoin-traders-wanted/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 10:45:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Ripple Lawsuit Architect Takes Over as US Director of National Intelligence",
       "url": "https://beincrypto.com/jay-clayton-us-director-of-national-intelligence/",
       "source": "BeInCrypto",
@@ -123,14 +195,6 @@
       "crypto": true
     },
     {
-      "title": "Trump Media Sells More Bitcoin as Truth Social Plans Subscription Fees",
-      "url": "https://beincrypto.com/trump-media-bitcoin-truth-api-scrutiny/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 08:27:38 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Coldcard hack sparks biggest sub-1 BTC move since FTX: CryptoQuant",
       "url": "https://cointelegraph.com/news/coldcard-biggest-sub-1-btc-transfer-ftx-cryptoquant?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -155,35 +219,11 @@
       "crypto": true
     },
     {
-      "title": "Bitwise is liquidating six crypto option ETFs that offered 25% payouts while returning investors\u2019 own capital",
-      "url": "https://cryptoslate.com/bitwise-is-liquidating-six-crypto-option-etfs-that-offered-25-payouts-while-returning-investors-own-capital/",
-      "source": "CryptoSlate",
-      "published": "Sun, 02 Aug 2026 00:05:43 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "How thin weekend Bitcoin liquidity turns minor geopolitical news into massive Monday price gaps for ETF holders",
-      "url": "https://cryptoslate.com/how-thin-weekend-liquidity-turns-minor-geopolitical-news-into-massive-monday-price-gaps-for-etf-holders/",
-      "source": "CryptoSlate",
-      "published": "Sat, 01 Aug 2026 23:10:43 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Coldcard Hardware Wallet Flaw Linked to $70 Million Bitcoin Theft in 41 Minutes",
       "url": "https://thehackernews.com/2026/08/coldcard-hardware-wallet-flaw-linked-to.html",
       "source": "The Hacker News",
       "published": "Sat, 01 Aug 2026 22:47:22 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Digital asset SPAC delays crucial merger vote, leaving a deeply undercapitalized Old Glory Bank waiting on a $50M lifeline",
-      "url": "https://cryptoslate.com/old-glory-bank-spac-delays-vote-as-50-million-cash-test-stays-unresolved/",
-      "source": "CryptoSlate",
-      "published": "Sat, 01 Aug 2026 22:10:43 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -224,14 +264,6 @@
       "source": "TechCrunch AI",
       "published": "Sat, 01 Aug 2026 19:45:45 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Pi Coin Defies Market Trend Before Key Deadline: Will the 10% Bounce Hold?",
-      "url": "https://beincrypto.com/pi-coin-price-protocol-v26-upgrade/",
-      "source": "BeInCrypto",
-      "published": "Sat, 01 Aug 2026 18:47:53 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -288,30 +320,6 @@
       "source": "TechCrunch AI",
       "published": "Sat, 01 Aug 2026 15:58:17 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin mining difficulty shrinks 14% from this year's high as plunging revenues force operators to pivot",
-      "url": "https://www.coindesk.com/business/2026/08/01/bitcoin-mining-difficulty-shrinks-14-from-this-year-s-high-as-plunging-revenues-force-operators-to-pivot",
-      "source": "CoinDesk",
-      "published": "Sat, 01 Aug 2026 15:51:10 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "SEC to review Nasdaq bitcoin options approval after CME challenge",
-      "url": "https://www.coindesk.com/policy/2026/08/01/sec-to-review-nasdaq-bitcoin-options-approval-after-cme-challenge",
-      "source": "CoinDesk",
-      "published": "Sat, 01 Aug 2026 15:48:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto PAC pours another $1M into Michigan House race",
-      "url": "https://cointelegraph.com/news/crypto-pac-michigan-thanedar-mckinney?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sat, 01 Aug 2026 15:44:02 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -376,14 +384,6 @@
       "source": "SecurityWeek",
       "published": "Sat, 01 Aug 2026 11:15:00 +0000",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Russia expands crypto mining ban to Moscow through 2032",
-      "url": "https://cointelegraph.com/news/russia-expands-crypto-mining-ban-moscow-2032?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sat, 01 Aug 2026 10:23:41 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
