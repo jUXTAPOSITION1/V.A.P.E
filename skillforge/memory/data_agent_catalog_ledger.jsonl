@@ -473,3 +473,4 @@
 {"ts": "2026-08-02T08:26:51.529975Z", "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 54}
 {"ts": "2026-08-02T08:57:01.400132Z", "target": "clearstar", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-02T09:27:00.251071Z", "target": "clearstar", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
+{"ts": "2026-08-02T09:57:01.218707Z", "target": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
