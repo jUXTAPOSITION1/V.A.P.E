@@ -1101,3 +1101,5 @@
 | 2026-08-02 | auto | 0xa291392EcD53c6b4f396F56c7f4EAD5470Af4444 (MEMES) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 99% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-02 | auto | 0xA4c6614f3aCB34ae8A0cB77A0c015DfB3D9b5Eee (01) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-02 | auto | 0xa049d66F7Aee24eCc4Cb6De75FAaCb55F0574444 (MEMES) | deep_investigation | REJECT (29/100) | Same deployer has a prior CAUTION/REJECT verdict on record: MarsCoin (0x1706f1e0 | +7d |

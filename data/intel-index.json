@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T06:12:20Z",
+  "generated": "2026-08-02T06:27:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 500,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 139,
-    "investigations": 650,
+    "investigations": 651,
     "news": 47,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260802-044234-0xA4c6614f.md",
-      "title": "Investigation \u2014 01",
-      "symbol": "01",
-      "name": "01",
-      "date": "2026-08-02T04:42:34Z",
-      "target": "0xA4c6614f3aCB34ae8A0cB77A0c015DfB3D9b5Eee",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260802-062730-0xa049d66F.md",
+      "title": "Investigation \u2014 MEMES",
+      "symbol": "MEMES",
+      "name": "the best memes",
+      "date": "2026-08-02T06:27:30Z",
+      "target": "0xa049d66F7Aee24eCc4Cb6De75FAaCb55F0574444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-044234-0xA4c6614f.md"
+      "score": "29",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MarsCoin (0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-8] Low holder count (134); [-8] Top 10 non-LP/burn holders control 63% of supply \u2014 meaningful concentration; [-10] Low liquidity $15,",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-062730-0xa049d66F.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260802-062730-0xa049d66F.md",
+      "title": "Investigation \u2014 MEMES",
+      "symbol": "MEMES",
+      "name": "the best memes",
+      "date": "2026-08-02T06:27:30Z",
+      "target": "0xa049d66F7Aee24eCc4Cb6De75FAaCb55F0574444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "29",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: MarsCoin (0x1706f1e06c69F3A8Cf33cce179d5d78a5c6f4444) \u2014 REJECT 40/100 \u2014 likely the same serial campaign; [-8] Low holder count (134); [-8] Top 10 non-LP/burn holders control 63% of supply \u2014 meaningful concentration; [-10] Low liquidity $15,",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260802-062730-0xa049d66F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260802-044234-0xA4c6614f.md",
@@ -594,20 +608,6 @@
       "score": "2",
       "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: Claude (0x0e7d4bDfe24aa679F9903F10414A25F56CBEBB07) \u2014 REJECT 0/100 \u2014 ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-104518-0x30EC37E2.md"
-    },
-    {
-      "source": "report",
-      "file": "investigation-20260801-090429-0x248918D6.md",
-      "title": "Investigation \u2014 ASTEROID",
-      "symbol": "ASTEROID",
-      "name": "ASTEROID",
-      "date": "2026-08-01T09:04:29Z",
-      "target": "0x248918D672E5523F9d64C0f3D4511513D7397777",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Low liquidity $25,733; [-10] Pair 3.8 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom verifi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260801-090429-0x248918D6.md"
     }
   ],
   "reports": [
