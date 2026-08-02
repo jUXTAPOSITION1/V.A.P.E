@@ -1131,3 +1131,5 @@
 | 2026-08-02 | auto | 0x7297968FFb753dd12e4f6B1f18d9865c76707FC2 (ZEST) | deep_investigation | REJECT (22/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-02 | auto | 0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F (CHUMSKY) | deep_investigation | CAUTION (70/100) | Same deployer has a prior CAUTION/REJECT verdict on record: SQLITESTUDIO (0xADFa | +7d |
+
+| 2026-08-02 | auto | 0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A (SRC) | deep_investigation | CAUTION (64/100) | Owner not renounced (0xb8a8b03d5f45b2454529f34e50ceaadb0b353ed4) — can still act | +7d |
