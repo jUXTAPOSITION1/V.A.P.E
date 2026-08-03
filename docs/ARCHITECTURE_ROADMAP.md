@@ -21,14 +21,14 @@ strategy is superseded — see notice above.)
 submit-ready deliverable. This connects the GitHub-built tool tier directly to ACP escrow income.
 
 ### Rail decision: ACP **CLI**, not the raw SDK
-VAPE already operates on the **ACP CLI** (signer provisioned, 31 offerings live, monitor
+VAPE already operates on the **ACP CLI** (signer provisioned, 30 offerings live, monitor
 catching jobs). We deliberately do **not** `pip install virtuals-acp` + put `ACP_WALLET_KEY`
 in `.env`: that would duplicate the rail and reintroduce raw private-key handling. The CLI
 stores the P256 signer in a file/keychain backend and signs via its own secure path. The
 bridge produces *deliverables*; the CLI does all *signing/submitting*. Keys never touch the
 repo or `.env`. (The SDK stays an option only if a future flow the CLI can't do appears.)
 
-**21 of 31 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
+**20 of 30 offerings auto-fulfill with zero manual work** — `agents/acp_fulfill.py`'s
 `HANDLERS` dict (ported field-for-field to `worker/src/handlers.ts`/`dataHandlers.ts` for
 the x402 side) covers all of them:
 
@@ -44,7 +44,6 @@ the x402 side) covers all of them:
 | community_intel_broadcast | 0.10 | `intel/broadcasts/` + `market_data.sh` (x402: `worker/src/lib/communityBroadcast.ts`) | [OK] auto, x402 + ACP |
 | 13 DefiLlama market-data tools (token_intel, chain_overview, yields, stablecoins, bridges, etc.) | 0.01 each | `agents/defillama.py` / `worker/src/lib/defillama.ts` | [OK] auto, x402 |
 | wallet_pnl_deepdive | 0.25 | x402 (`worker/src/dataHandlers.ts`): Alchemy balances + CoinGecko-priced unrealized-P&L estimate, Base only — rebuilt off Codex after its wallet-analytics fields turned out to be paid-plan-gated ("Not authorized: please upgrade your plan"). ACP path (`agents/acp_fulfill.py`/`agents/codex_data.py`) still calls Codex directly and hits that same gate — not yet ported to the Alchemy path. | [OK] auto, x402 · [TBD] ACP path still Codex-gated |
-| prediction_market_odds | 0.01 | `agents/prediction_markets.py` / `worker/src/lib/predictionMarkets.ts` (Polymarket + Kalshi: crypto/Base-relevant odds, ranked by volume) | [OK] auto, x402 |
 | deep_contract_audit | 1.00 | x402: address-only alias of `bounty_deep_dive`'s same real async audit pipeline (`worker/src/index.ts`'s `dispatchAddressAuditJob`) — Slither/Halmos/Mythril/Aderyn + frontier-model review, dispatched via `deep-dive-bounty.yml` | [OK] auto (async), x402 · [TBD] ACP path still manual (not in `acp_fulfill.py`'s `HANDLERS`) |
 | tx_decode | 0.05 | x402 (`worker/src/lib/txDecode.ts`): synchronous Etherscan + 4byte.directory decode | [OK] auto, x402 · [TBD] ACP path still manual |
 | bulk_safety_bundle | 0.50 | x402 (`worker/src/lib/bulkSafetyBundle.ts`): 5-25 addresses, one flat price | [OK] auto, x402 · [TBD] ACP path still manual |
@@ -233,8 +232,8 @@ the CI-side default with Groq as the low-latency path. [TBD] evaluate first.
 ---
 
 ## 4. Sequenced rollout (lowest effort → highest leverage)
-1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 21 of 31 offerings auto-fulfill
-   on ACP; 27 total are x402-payable (see the offerings table above).
+1. [OK] ACP fulfillment bridge (`acp_fulfill.py`) — done, 20 of 30 offerings auto-fulfill
+   on ACP; 26 total are x402-payable (see the offerings table above).
 2. [OK] Bridge wired into `scripts/acp-monitor/auto_fulfill.py` — settles with zero LLM cost
    for every offering except `dossier_check`/`community_intel_broadcast`.
 3. [OK] `agents/llm.py` multi-provider fallback (Groq/Cerebras/OpenRouter/GitHub Models/

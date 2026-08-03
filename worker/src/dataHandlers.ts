@@ -1,8 +1,7 @@
 /**
  * VAPE's market-data tool tier — one x402 endpoint per tool. Most are priced
- * at $0.01 and backed by lib/defillama.ts (keyless); prediction_market_odds
- * is also $0.01 but backed by lib/predictionMarkets.ts (also keyless);
- * wallet_pnl_deepdive is priced separately at $0.25 and backed by
+ * at $0.01 and backed by lib/defillama.ts (keyless); wallet_pnl_deepdive is
+ * priced separately at $0.25 and backed by
  * lib/codex.ts (needs a server-side CODEX_API_KEY, hence the `env`
  * parameter on `run` below — every other offering here ignores it).
  *
@@ -17,7 +16,6 @@
  * array, exactly the way the 6 security offerings work.
  */
 import * as dl from "./lib/defillama";
-import * as predictionMarkets from "./lib/predictionMarkets";
 import { getPortfolio } from "./lib/alchemy";
 import { getCurrentPrices } from "./lib/coingecko";
 import { estimateCostBasis } from "./lib/costBasis";
@@ -361,27 +359,6 @@ export const DL_OFFERINGS: DlOffering[] = [
         },
       };
     },
-  },
-  {
-    name: "prediction_market_odds",
-    price: "$0.01",
-    description: "Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi — "
-      + "market-implied probabilities on hacks, depegs, price thresholds, and protocol milestones, "
-      + "ranked by volume. Keyless, free-source data — no API key required either side.",
-    tags: ["prediction-markets", "odds", "sentiment", "crypto"],
-    inputSchema: {
-      properties: { limit: { type: "number", description: "max markets to return, default 20" } },
-      required: [],
-    },
-    inputExample: { limit: 10 },
-    output: {
-      count: 5,
-      markets: [{ platform: "polymarket", question: "Will Bitcoin hit $150k by end of 2026?",
-        outcomes: ["Yes", "No"], prices: [0.62, 0.38], volume: 125000.5, url: "https://polymarket.com/event/..." }],
-      sources: { polymarket: "ok", kalshi: "ok" },
-    },
-    run: async (q) => predictionMarkets.cryptoPredictionMarkets(
-      q.limit && q.limit > 0 ? Math.min(q.limit, 50) : 20),
   },
 ];
 

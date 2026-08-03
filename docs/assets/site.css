@@ -249,7 +249,7 @@ section[id] { scroll-margin-top: 4.5rem; }
    this file isn't guaranteed (network-timing dependent, worse on slow/mobile
    connections). Declaring display:block here raced Tailwind's `.flex` at
    equal specificity and intermittently won, collapsing every flex row (movers,
-   trending, new launches, wallets, prediction markets, protocol rows) into a
+   trending, new launches, wallets, protocol rows) into a
    vertical stack on mobile — the exact "chopping off" bug reported live. Bare
    <div class="diff-row"> (no utility) still defaults to block via the UA
    stylesheet, so this is safe to omit entirely. */
@@ -904,8 +904,8 @@ a { transition: color .15s; }
 /* ── Featured Investigation spotlight ─────────────────────────────────────
    The one section deliberately styled as a showcase rather than a flat
    data row — VAPE's best real, verifiable work gets a genuine focal point.
-   Uses its own blue accent (#60a5fa, already used elsewhere for wallet/
-   Polymarket chips) rather than --accent, so it reads as "this is the
+   Uses its own blue accent (#60a5fa, already used elsewhere for wallet
+   chips) rather than --accent, so it reads as "this is the
    highlight" and not another verdict/status color. */
 .spotlight-section {
     position: relative;
@@ -1058,9 +1058,17 @@ a { transition: color .15s; }
 /* GFM-style tables emitted by simpleMarkdownToHtml() (report.js) — shared by
    article.html and investigation.html, wherever a report's real markdown
    body contains a table (e.g. an investigation's per-category score table). */
+/* overflow-x: auto is a safety net for a genuinely wide table, not the
+   primary fix -- th/td used to force white-space: nowrap on every cell,
+   so a long Rationale/Category cell (the Scoring Dashboard table's own
+   prose columns) inflated the whole table far past the viewport instead
+   of wrapping, and on mobile that left the reader looking at whichever
+   slice of columns happened to be in the scrolled view rather than the
+   table's own left edge. Cells wrap by default now; only genuinely short,
+   single-token cells (a number, a short label) stay on one line. */
 .md-table-wrap { overflow-x: auto; margin: 0.75rem 0 1.25rem; }
-.md-table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
-.md-table th, .md-table td { padding: 0.45rem 0.65rem; border: 1px solid var(--border); text-align: left; white-space: nowrap; }
+.md-table { width: 100%; border-collapse: collapse; font-size: 0.85em; table-layout: fixed; }
+.md-table th, .md-table td { padding: 0.45rem 0.65rem; border: 1px solid var(--border); text-align: left; white-space: normal; overflow-wrap: break-word; word-break: break-word; }
 .md-table th { background: rgba(255, 255, 255, 0.04); color: #e4e4e7; font-weight: 600; }
 .md-table td { color: #d4d4d8; }
 

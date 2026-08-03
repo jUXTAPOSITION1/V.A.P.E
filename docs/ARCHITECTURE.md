@@ -106,7 +106,7 @@ top of this document.)
      (2/hour).
 ```
 
-The 27 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
+The 26 x402 routes: 6 priced security checks (`exploit_check` … `dossier_check`,
 $0.01-$0.10) + `bounty_deep_dive` ($1, async — pays, then dispatches either
 `.github/workflows/deep-dive-bounty.yml` (an on-chain address target — real
 Slither run + Halmos symbolic testing + Mythril symbolic-execution scan +
@@ -116,10 +116,10 @@ e.g. Move/Sui or any bounty program's own source repo — `agents/external_audit
 returning immediately either way since neither can finish inside a Worker's
 request window) + 5 more offerings closing the earlier ACP/x402 parity gap
 (`deep_contract_audit`, `tx_decode`, `community_intel_broadcast`,
-`bulk_safety_bundle`, and the new synchronous `website_review`) + 15 DefiLlama/
+`bulk_safety_bundle`, and the new synchronous `website_review`) + 14 DefiLlama/
 market-data micro-tools ($0.01-$0.25 each — `token_intel`, `chain_overview`,
-`yields`, `stablecoins`, `bridges`, `wallet_pnl_deepdive`,
-`prediction_market_odds`, etc. — `derivatives` was retired 2026-07-14 when
+`yields`, `stablecoins`, `bridges`, `wallet_pnl_deepdive`, etc. —
+`derivatives` was retired 2026-07-14 when
 DefiLlama paywalled its overview/derivatives endpoint with no free equivalent).
 Advertised for discovery
 via the x402 Bazaar extension and a claimed listing on
