@@ -543,7 +543,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .city-detail-title { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; color: #f4f4f5; font-size: 12.5px; margin-bottom: 0.15rem; }
 .city-detail-title .dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
-.city-detail-zone { font-size: 9.5px; color: #71717a; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+.city-detail-zone { font-size: 9.5px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
 .city-detail-close { margin-left: auto; color: #71717a; background: none; border: none; cursor: pointer; font-size: 10px; }
 .city-detail-close:hover { color: #e4e4e7; }
 .city-detail-row { display: flex; justify-content: space-between; font-size: 11px; color: #a1a1aa; padding: 1.5px 0; }

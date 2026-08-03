@@ -15,8 +15,9 @@
 //   - Road *layout* and the L-shaped street grid are a fixed display
 //     choice, same as before, just rendered with a visible asphalt bed
 //     instead of a near-invisible hairline.
-//   - Camera rotation (4 compass views) is a pure viewing transform — it
-//     changes how the same real data is projected, never what it says.
+//   - Camera rotation (8 compass views, 45° apart) is a pure viewing
+//     transform — it changes how the same real data is projected, never
+//     what it says.
 //   - Day/night (sky, sunsets, window lights, street lamps) is driven by
 //     the viewer's own real local clock (`Date()`), not a simulated cycle.
 //   - "Under construction" pulses only ever fire when a building's real
@@ -146,7 +147,7 @@ function buildingHeightPx(b) {
     return BASE_HEIGHT + (b.tier || 1) * TIER_UNIT;
 }
 
-// ── Camera: 4-way rotation around downtown ──────────────────────────────
+// ── Camera: 8-way rotation around downtown ──────────────────────────────
 // A pure viewing transform, exactly like SimCity/tycoon-game camera
 // rotation -- it changes which corner of the same real grid faces the
 // viewer, never the underlying gridX/gridY a building actually has.
@@ -235,6 +236,13 @@ function skyGradientStops(phase) {
 // so the world reads as one stable place across visits, never a randomly
 // different backdrop.
 const WORLD_BOUNDS = { minX: -75, maxX: 115, minY: -75, maxY: 100 };
+// Bounds on the per-rotation terrain cache: a hard pixel cap per canvas
+// (downscaled physically, stretched back to logical size on composite) and
+// an LRU cap on how many rotation stops stay resident at once. Both exist
+// purely to keep canvas memory bounded on mobile -- neither changes what
+// the terrain looks like at rest, only how much of it stays cached.
+const TERRAIN_CACHE_MAX_PIXELS = 6_000_000;
+const TERRAIN_CACHE_MAX_STOPS = 2;
 const VACANT_MARGIN = 5; // tiles of guaranteed "room to grow" ring around downtown
 const TERRAIN_SEED = 402019;
 // A handful of fixed "park" tiles just outside downtown, in the vacant
@@ -331,6 +339,7 @@ const CityScape = {
     // expensive -- the terrain only re-renders once a drag/arrow settles.
     _terrainCache: {},
     _terrainOrigin: {},
+    _terrainCacheOrder: [], // LRU order, oldest first -- see TERRAIN_CACHE_MAX_STOPS
 
     async init() {
         const stages = document.querySelectorAll('[data-city-stage]');
@@ -458,8 +467,42 @@ const CityScape = {
         }
         if (inst.lastEvents.size > 300) inst.lastEvents = new Set([...inst.lastEvents].slice(-150));
 
+        this._computeGroundCells(inst);
         this._renderStatStrip(inst, city);
         this._renderA11yList(inst);
+    },
+
+    // Every downtown grid cell not already a real building's footprint or
+    // a real road's own corridor -- computed fresh from this instance's
+    // actual buildings/roads (not hardcoded), so it stays correct if the
+    // real layout ever changes. Cached on the instance and only recomputed
+    // when _loadCity reloads, since _drawDowntownGround below redraws these
+    // every frame (downtown is ~400 cells at most -- cheap either way, but
+    // no reason to recompute occupancy 30 times a second).
+    _computeGroundCells(inst) {
+        const key = (x, y) => `${x},${y}`;
+        const occupied = new Set();
+        inst.buildings.forEach(b => {
+            const [fw, fh] = b.footprint || [1, 1];
+            for (let dx = 0; dx < fw; dx++) for (let dy = 0; dy < fh; dy++) occupied.add(key(b.gridX + dx, b.gridY + dy));
+        });
+        inst.roads.forEach(r => {
+            const [fromG, elbowG, toG] = this._roadPathGrid(r);
+            const xLo = Math.floor(Math.min(fromG.x, elbowG.x)), xHi = Math.ceil(Math.max(fromG.x, elbowG.x));
+            for (let x = xLo; x <= xHi; x++) occupied.add(key(x, Math.round(fromG.y)));
+            const yLo = Math.floor(Math.min(elbowG.y, toG.y)), yHi = Math.ceil(Math.max(elbowG.y, toG.y));
+            for (let y = yLo; y <= yHi; y++) occupied.add(key(Math.round(elbowG.x), y));
+        });
+        const cells = [];
+        for (let gx = CITY_BBOX.minX; gx <= CITY_BBOX.maxX; gx++) {
+            for (let gy = CITY_BBOX.minY; gy <= CITY_BBOX.maxY; gy++) {
+                if (occupied.has(key(gx, gy))) continue;
+                const h = _hash(gx * 13.7 + gy * 5.3, TERRAIN_SEED + 201);
+                const feature = h < 0.02 ? 'fountain' : h < 0.09 ? 'park' : h < 0.13 ? 'diner' : h < 0.22 ? 'bench' : null;
+                cells.push({ gx, gy, feature });
+            }
+        }
+        inst.groundCells = cells;
     },
 
     // Screen-reader-only equivalent of the canvas -- the dataviz
@@ -547,10 +590,28 @@ const CityScape = {
         const endPointer = (e) => {
             const wasTwoFinger = pointers.size === 2;
             pointers.delete(e.pointerId);
-            if (pointers.size === 0) dragStart = null;
+            if (pointers.size === 0) {
+                dragStart = null;
+            } else if (pointers.size === 1) {
+                // A finger lifted mid-gesture (e.g. out of a pinch/twist) --
+                // re-seed from where the remaining pointer actually is, so
+                // the next pointermove measures a delta from now instead of
+                // jumping by the full distance travelled during the gesture.
+                const [p] = [...pointers.values()];
+                dragStart = { x: p.x, y: p.y, offX: inst.offsetX, offY: inst.offsetY };
+            } else if (pointers.size === 2) {
+                // Dropped from 3 fingers back to 2 -- re-seed the pinch/twist
+                // baselines the same way pointerdown does, so scale and
+                // rotation don't jump from now-stale values.
+                const [a, b] = [...pointers.values()];
+                pinchStartDist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+                pinchStartScale = inst.scale;
+                pinchStartAngle = pointerAngleDeg(a, b);
+                pinchStartRotation = inst.rotation;
+            }
             // The twist gesture just ended -- settle on the nearest of the
             // 8 rotation stops, same as releasing the desktop compass dial.
-            if (wasTwoFinger && inst.mode === 'full') {
+            if (wasTwoFinger && pointers.size < 2 && inst.mode === 'full') {
                 inst.rotation = nearestRotationStop(inst.rotation);
                 inst.terrainRotation = inst.rotation;
                 this._syncCompassDial(inst);
@@ -821,12 +882,48 @@ const CityScape = {
         // by inst.terrainRotation (snapped), not the continuously-dragged
         // inst.rotation, so a mid-drag frame reuses the last-settled
         // terrain image instead of rebuilding ~30k tiles every frame.
+        //
+        // The whole scene has to read as one rigid world turning together,
+        // not a city spinning in place over a static backdrop -- so while
+        // a drag/twist is live (inst.rotation !== inst.terrainRotation),
+        // the cached image is spun by the outstanding angle around
+        // CAMERA_PIVOT's own screen point (which this projection always
+        // maps to the same pixel regardless of rotation, so it's the
+        // correct pivot). A plain screen rotation isn't pixel-identical to
+        // this isometric projection's real grid-then-project math (the 2:1
+        // tile aspect makes that a shear, not a similarity transform), but
+        // it's a fine live approximation for the terrain's own backdrop;
+        // the instant the gesture ends, terrainRotation snaps to match and
+        // the true re-projected cache takes over, pixel-correct again.
         if (inst.mode === 'full') {
             if (!this._terrainCache[inst.terrainRotation]) this._buildTerrainCache(inst.terrainRotation);
+            else this._touchTerrainCache(inst.terrainRotation);
             const tc = this._terrainCache[inst.terrainRotation], origin = this._terrainOrigin[inst.terrainRotation];
-            if (tc && origin) ctx.drawImage(tc, origin.x, origin.y);
+            if (tc && origin) {
+                const liveDelta = inst.rotation - inst.terrainRotation;
+                if (Math.abs(liveDelta) > 0.05) {
+                    // Rotating a rectangular cached image around the pivot
+                    // sweeps its corners away from where they used to cover
+                    // the viewport, so a wedge outside the swept rectangle
+                    // can peek through during the live drag. A flat vacant-
+                    // toned fallback fill first means that wedge reads as
+                    // more backdrop, never a hard black gap, at any hour.
+                    ctx.fillStyle = terrainColor('vacant');
+                    ctx.fillRect(-8000, -8000, 16000, 16000);
+                    const pivot = gridToScreen(CAMERA_PIVOT.x, CAMERA_PIVOT.y);
+                    ctx.save();
+                    ctx.translate(pivot.x, pivot.y);
+                    ctx.rotate((liveDelta * Math.PI) / 180);
+                    ctx.translate(-pivot.x, -pivot.y);
+                    ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
+                    ctx.restore();
+                } else {
+                    ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
+                }
+            }
             this._drawOceanGlints(inst);
         }
+        this._drawDowntownGround(inst, phase);
         this._drawRoads(inst, phase);
         if (inst.mode === 'full') this._drawRoadsideTrees(inst);
         this._drawAmbient(inst, phase);
@@ -877,6 +974,83 @@ const CityScape = {
         return projectGrid(gx, gy, rotation);
     },
 
+    // Downtown ground fill -- every real building/road already has its own
+    // real footprint, but the gaps between them had no ground tile at all
+    // (bare canvas). Filled with plain pavement, plus a deterministic
+    // scatter of parks/fountains/diners/benches -- all pure atmosphere,
+    // same non-data category as the roadside trees and outer-world terrain,
+    // computed fresh from this instance's own cells (not a static image,
+    // since downtown is cheap enough to redraw live every frame at ~400
+    // cells, unlike the much larger surrounding world).
+    _drawDowntownGround(inst, phase) {
+        const { ctx } = inst;
+        const night = inst.mode === 'full' && isNight(phase);
+        const hw = TILE_W / 2, hh = TILE_H / 2;
+        (inst.groundCells || []).forEach(({ gx, gy, feature }) => {
+            const r = rotateAroundPivot(gx + 0.5, gy + 0.5, inst.rotation);
+            const { x: cx, y: cy } = gridToScreen(r.x, r.y);
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - hh); ctx.lineTo(cx + hw, cy); ctx.lineTo(cx, cy + hh); ctx.lineTo(cx - hw, cy);
+            ctx.closePath();
+            ctx.fillStyle = feature === 'park' ? '#213b28' : '#212126';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            if (feature === 'park') {
+                [[-6, -2], [5, 1], [0, -6], [-2, 5]].forEach(([ox, oy]) => this._drawTreeGlyph(ctx, cx + ox, cy + oy, 0.8));
+            } else if (feature === 'fountain') {
+                this._drawFountain(ctx, cx, cy);
+            } else if (feature === 'diner') {
+                this._drawDiner(ctx, cx, cy, night);
+            } else if (feature === 'bench') {
+                this._drawBench(ctx, cx, cy);
+            }
+        });
+    },
+
+    _drawFountain(ctx, cx, cy) {
+        const t = performance.now();
+        ctx.save();
+        ctx.strokeStyle = 'rgba(180,190,200,0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.ellipse(cx, cy, 9, 4.5, 0, 0, Math.PI * 2); ctx.stroke();
+        const glint = 0.35 + 0.25 * Math.sin(t / 400);
+        ctx.fillStyle = `rgba(150,200,235,${glint.toFixed(2)})`;
+        ctx.beginPath(); ctx.ellipse(cx, cy, 6.5, 3.2, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(210,225,240,0.6)';
+        ctx.beginPath(); ctx.arc(cx, cy - 1, 1.4, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+    },
+
+    _drawDiner(ctx, cx, cy, night) {
+        ctx.save();
+        const hw = 9, hh = 6, H = 12;
+        const top = { x: cx, y: cy - hh - H }, right = { x: cx + hw, y: cy - H };
+        const bottom = { x: cx, y: cy + hh - H }, left = { x: cx - hw, y: cy - H };
+        const rightBase = { x: cx + hw, y: cy }, bottomBase = { x: cx, y: cy + hh }, leftBase = { x: cx - hw, y: cy };
+        ctx.fillStyle = '#7a4030';
+        ctx.beginPath(); ctx.moveTo(left.x, left.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(leftBase.x, leftBase.y); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#9a5138';
+        ctx.beginPath(); ctx.moveTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(rightBase.x, rightBase.y); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = night ? '#ffe6a8' : '#c96a4a';
+        ctx.beginPath(); ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)'; ctx.lineWidth = 1; ctx.stroke();
+        if (night) { ctx.fillStyle = 'rgba(255,224,150,0.9)'; ctx.shadowColor = 'rgba(255,210,140,0.7)'; ctx.shadowBlur = 4; ctx.fillRect(cx + hw * 0.1, cy - H * 0.55, 2, 2); ctx.fillRect(cx + hw * 0.5, cy - H * 0.4, 2, 2); ctx.shadowBlur = 0; }
+        ctx.restore();
+    },
+
+    _drawBench(ctx, cx, cy) {
+        ctx.save();
+        ctx.translate(cx, cy - 1);
+        ctx.fillStyle = '#5b4a3a';
+        ctx.fillRect(-5, -1.5, 10, 1.6);
+        ctx.fillRect(-4.5, 0.5, 1.2, 2.5);
+        ctx.fillRect(3.3, 0.5, 1.2, 2.5);
+        ctx.restore();
+    },
+
     // Road *hierarchy* -- real landmark spokes (Investigations, Bounty Ops,
     // Newsroom, Watchtower, Mint, Vault) render as wide avenues; the 10
     // uniform lane-checkpoint spokes render as narrower streets. This is a
@@ -895,6 +1069,13 @@ const CityScape = {
             pts.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
             ctx.stroke();
         };
+        // Relative to the busiest real road this cycle (log-scaled, since
+        // real per-building counts here span two orders of magnitude --
+        // e.g. 14 self-built tools vs. 1,413 sealed findings) so the
+        // overlay stays a genuine comparison instead of nearly every
+        // landmark clamping to the same saturated maximum.
+        const activityPeak = activity ? Math.max(1, ...inst.roads.map(r =>
+            r.to.stat_primary && typeof r.to.stat_primary.value === 'number' ? r.to.stat_primary.value : 0)) : 1;
         inst.roads.forEach(r => {
             const isAvenue = r.to.kind !== 'checkpoint';
             const pts = this._roadPathScreen(r, inst.rotation);
@@ -909,11 +1090,12 @@ const CityScape = {
             // per-connection volume we actually have.
             if (activity) {
                 const v = r.to.stat_primary && typeof r.to.stat_primary.value === 'number' ? r.to.stat_primary.value : 0;
-                const norm = Math.min(1, v / 40);
+                const norm = Math.min(1, Math.log1p(v) / Math.log1p(activityPeak));
                 bedWidth = 6 + norm * 11;
                 curbWidth = bedWidth + 3;
                 curbAlpha = 0.08 + norm * 0.4;
             }
+            strokePath(pts, curbWidth + 6, '#2b2b31'); // sidewalk -- a visible paved border, not bare ground, alongside every road
             strokePath(pts, curbWidth, `rgba(255,255,255,${curbAlpha.toFixed(2)})`); // curb / edge glow
             strokePath(pts, bedWidth, '#20202a'); // asphalt bed -- this is the fix for "can't see the roads"
             ctx.setLineDash(isAvenue ? [5, 5] : [3, 6]);
@@ -1085,17 +1267,20 @@ const CityScape = {
             ctx.fillStyle = 'rgba(0,0,0,0.5)';
             ctx.fillRect(cx - 2.5, cy + hh * 0.55 - 6, 5, 6);
         }
-        // Checkpoints (the 10 automated-lane markers) get a streetlamp glow
-        // at night instead -- they're spread through downtown like real
-        // intersections, not buildings with facades of their own.
-        if (night && isCheckpoint) {
-            ctx.beginPath();
-            ctx.arc(cx, cy - H - 5, 2.6, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255,230,150,0.9)';
-            ctx.shadowColor = 'rgba(255,220,140,0.85)';
-            ctx.shadowBlur = 10;
-            ctx.fill();
-            ctx.shadowBlur = 0;
+        // Checkpoints (the 10 automated-lane markers) double as real
+        // downtown intersections -- an always-visible traffic-light pole,
+        // plus a warm streetlamp glow layered on top at night.
+        if (isCheckpoint) {
+            this._drawTrafficLight(ctx, cx, cy, H);
+            if (night) {
+                ctx.beginPath();
+                ctx.arc(cx, cy - H - 5, 2.6, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,230,150,0.9)';
+                ctx.shadowColor = 'rgba(255,220,140,0.85)';
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
         }
 
         // A small initial-letter mark on the top face for landmarks (not
@@ -1264,6 +1449,26 @@ const CityScape = {
         ctx.restore();
     },
 
+    // A real traffic-light pole at each lane-checkpoint "intersection" --
+    // pure atmosphere, always visible (not just at night), same non-data
+    // category as the trees/benches/fountains above.
+    _drawTrafficLight(ctx, cx, cy, H) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(50,50,56,0.9)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(cx, cy - H); ctx.lineTo(cx, cy - H - 14); ctx.stroke();
+        ctx.fillStyle = '#1c1c22';
+        ctx.fillRect(cx - 2.3, cy - H - 22, 4.6, 9);
+        const colors = ['#ff3d40', '#ffd23d', '#2dd45a'];
+        colors.forEach((c, i) => {
+            ctx.beginPath();
+            ctx.arc(cx, cy - H - 19.7 + i * 3, 1, 0, Math.PI * 2);
+            ctx.fillStyle = c;
+            ctx.fill();
+        });
+        ctx.restore();
+    },
+
     _shade(hex, amt) {
         const h = (hex || '#71717a').replace('#', '');
         if (h.length !== 6) return hex;
@@ -1298,19 +1503,50 @@ const CityScape = {
             if (y < yMin) yMin = y; if (y > yMax) yMax = y;
         });
         xMin -= 40; xMax += 40; yMin -= 40; yMax += 60; // slack for mountain extrusion + pier decks
-        const w = Math.max(1, Math.ceil(xMax - xMin)), h = Math.max(1, Math.ceil(yMax - yMin));
+        const wLogical = Math.max(1, Math.ceil(xMax - xMin)), hLogical = Math.max(1, Math.ceil(yMax - yMin));
+        // WORLD_BOUNDS spans ~190x175 tiles -- the 0°/90° stops alone would
+        // otherwise allocate an ~70-megapixel (~280MB) canvas apiece with no
+        // upper bound, easily exhausting canvas memory on mobile. Downscale
+        // the *physical* canvas (via a single ctx.scale() below, so every
+        // existing draw call below needs zero coordinate changes) and
+        // stretch it back to logical size on composite -- soft, but this is
+        // a static, never-crisp-at-that-distance backdrop layer anyway.
+        const scale = Math.min(1, Math.sqrt(TERRAIN_CACHE_MAX_PIXELS / (wLogical * hLogical)));
+        const w = Math.max(1, Math.round(wLogical * scale)), h = Math.max(1, Math.round(hLogical * scale));
 
         const cvs = typeof OffscreenCanvas !== 'undefined'
             ? new OffscreenCanvas(w, h)
             : Object.assign(document.createElement('canvas'), { width: w, height: h });
         const ctx = cvs.getContext('2d');
+        if (scale < 1) ctx.scale(scale, scale);
 
         tiles.forEach(t => this._drawTerrainTile(ctx, t.biome, t.rx, t.ry, -xMin, -yMin, t.gx, t.gy));
         this._findBridgeSpots(tiles).forEach(spot => this._drawBridge(ctx, spot, rotation, -xMin, -yMin));
         this._drawExitRoads(ctx, rotation, -xMin, -yMin);
 
-        this._terrainCache[rotation] = cvs;
-        this._terrainOrigin[rotation] = { x: xMin, y: yMin };
+        this._cacheTerrain(rotation, cvs, { x: xMin, y: yMin, w: wLogical, h: hLogical });
+    },
+
+    // LRU eviction -- even pixel-capped, each cached canvas can be tens of
+    // MB, so keep at most TERRAIN_CACHE_MAX_STOPS resident rather than
+    // accumulating one per rotation stop ever viewed in a session.
+    _cacheTerrain(rotation, canvas, origin) {
+        if (!this._terrainCacheOrder) this._terrainCacheOrder = [];
+        this._terrainCache[rotation] = canvas;
+        this._terrainOrigin[rotation] = origin;
+        this._touchTerrainCache(rotation);
+        while (this._terrainCacheOrder.length > TERRAIN_CACHE_MAX_STOPS) {
+            const evict = this._terrainCacheOrder.shift();
+            delete this._terrainCache[evict];
+            delete this._terrainOrigin[evict];
+        }
+    },
+
+    _touchTerrainCache(rotation) {
+        if (!this._terrainCacheOrder) this._terrainCacheOrder = [];
+        const idx = this._terrainCacheOrder.indexOf(rotation);
+        if (idx !== -1) this._terrainCacheOrder.splice(idx, 1);
+        this._terrainCacheOrder.push(rotation);
     },
 
     _drawTerrainTile(ctx, biome, rx, ry, dx, dy, ogx, ogy) {
