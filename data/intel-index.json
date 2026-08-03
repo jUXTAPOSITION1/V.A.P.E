@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T16:31:53Z",
+  "generated": "2026-08-03T16:42:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 410,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 699,
+    "investigations": 700,
     "news": 56,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-135726-0x37b90664.md",
-      "title": "Investigation \u2014 SAFU",
-      "symbol": "SAFU",
-      "name": "Safumoon",
-      "date": "2026-08-03T13:57:26Z",
-      "target": "0x37b90664C3846107939E89d886051b208f866bF1",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260803-164225-0xb4f4A58F.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T16:42:25Z",
+      "target": "0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Low holder count (190); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,331 (rug/illiquid); [-10] Low liquidity $6,331; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-135726-0x37b90664.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (98); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,157; [-10] Violent 24h move +297% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-164225-0xb4f4A58F.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-164225-0xb4f4A58F.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T16:42:25Z",
+      "target": "0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (98); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,157; [-10] Violent 24h move +297% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-164225-0xb4f4A58F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-135726-0x37b90664.md",

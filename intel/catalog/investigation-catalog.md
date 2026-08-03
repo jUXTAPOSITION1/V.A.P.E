@@ -1199,3 +1199,5 @@
 | 2026-08-03 | auto | 0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d (ICNT) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-03 | auto | 0x37b90664C3846107939E89d886051b208f866bF1 (SAFU) | deep_investigation | REJECT (32/100) | Low holder count (190) | +7d |
+
+| 2026-08-03 | auto | 0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585 (CATE) | deep_investigation | REJECT (47/100) | Low holder count (98) | +7d |
