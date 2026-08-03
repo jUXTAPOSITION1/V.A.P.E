@@ -135,3 +135,4 @@
 {"ts": "2026-08-03T04:34:28.732958Z", "address": "0xBf8E8f0e8866a7052F948C16508644347c57aba3", "chain": "8453", "symbol": "aeon", "name": "aeon", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-03T06:04:20.689593Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-03T09:39:03.950985Z", "address": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2", "chain": "8453", "symbol": "ZEST", "name": "ZEST", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-08-03T10:10:05.978027Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "token_chart"}

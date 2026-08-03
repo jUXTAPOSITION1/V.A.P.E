@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T09:54:16Z",
+  "generated": "2026-08-03T10:10:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 401,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 689,
+    "investigations": 690,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-095415-0x3Bf4118F.md",
+      "file": "investigation-20260803-100958-0xF5f052D1.md",
       "title": "Investigation \u2014 UNISTREET",
       "symbol": "UNISTREET",
       "name": "Unistreet",
-      "date": "2026-08-03T09:54:15Z",
-      "target": "0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D",
+      "date": "2026-08-03T10:09:58Z",
+      "target": "0xF5f052D12ce3A522251Bb0ab42E356Fc9E2cbC47",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "2",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xfb60cd0b36ad4bd839b91767a6ad9055ab6ad825) \u2014 can still act on the contract; [-8] Low holder count (192); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-1",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-095415-0x3Bf4118F.md"
+      "score": "9",
+      "summary": "Risk factors: [-8] Low holder count (80); [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-100958-0xF5f052D1.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-100958-0xF5f052D1.md",
+      "title": "Investigation \u2014 UNISTREET",
+      "symbol": "UNISTREET",
+      "name": "Unistreet",
+      "date": "2026-08-03T10:09:58Z",
+      "target": "0xF5f052D12ce3A522251Bb0ab42E356Fc9E2cbC47",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "9",
+      "summary": "Risk factors: [-8] Low holder count (80); [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Pair only 0.7 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-100958-0xF5f052D1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-095415-0x3Bf4118F.md",
