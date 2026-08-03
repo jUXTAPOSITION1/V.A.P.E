@@ -1,4 +1,4 @@
-// VAPE City — a live, bird's-eye isometric map of VAPE's own real signals.
+// VAPE Sim — a live, bird's-eye isometric map of VAPE's own real signals.
 // Every building is one real process this repo runs (data/city-state.json,
 // written by agents/build_city_state.py from security-dashboard.json,
 // attack-feed.json, intel-index.json, opportunities.json, and
@@ -281,6 +281,25 @@ function targetForOffering(offering) {
     return 'foundry';
 }
 
+// Real event-driven "service vehicles" — agents/build_city_state.py's
+// recent_events (one real timestamped entry per investigation/article/
+// bounty-lead/incident, straight from the same 4 files every landmark
+// building already reads). Each type dispatches from the Foundry hub to
+// its own real building, and borrows that building's own already-validated
+// identity hue -- no new colors, no new data claim.
+const EVENT_TARGET = {
+    investigation: 'precinct-investigations',
+    news: 'newsroom',
+    bounty: 'tower-bounty',
+    threat: 'watchtower-threat',
+};
+const EVENT_COLOR_VAR = {
+    investigation: '--city-precinct',
+    news: '--city-newsroom',
+    bounty: '--city-tower',
+    threat: '--city-watchtower',
+};
+
 const CityScape = {
     _cityState: null,
     _instances: [],
@@ -344,6 +363,7 @@ const CityScape = {
             selected: null,
             vehicles: [], ambient: [], oceanGlints: [],
             lastX402: new Set(),
+            lastEvents: new Set(), eventsSeeded: false,
             lastFrame: 0,
             visible: true,
         };
@@ -396,6 +416,26 @@ const CityScape = {
             dir: Math.random() < 0.5 ? 1 : -1,
             kind: Math.random() < 0.7 ? 'car' : 'pedestrian',
         })) : [];
+
+        // Real event-driven dispatch vehicles -- seeded silently on this
+        // instance's first load (never replays the aggregator's whole
+        // recent-events history the moment the page opens); only a
+        // genuinely new event id after that spawns a vehicle, same
+        // discipline as _pollX402's lastX402 dedup above.
+        const events = city.recent_events || [];
+        if (!inst.eventsSeeded) {
+            events.forEach(e => inst.lastEvents.add(e.id));
+            inst.eventsSeeded = true;
+        } else {
+            events.forEach(e => {
+                if (!e.id || inst.lastEvents.has(e.id)) return;
+                inst.lastEvents.add(e.id);
+                const target = EVENT_TARGET[e.type];
+                if (target) this._spawnVehicle(inst, 'foundry', target, { kind: e.type, label: e.label });
+            });
+        }
+        if (inst.lastEvents.size > 300) inst.lastEvents = new Set([...inst.lastEvents].slice(-150));
+
         this._renderStatStrip(inst, city);
         this._renderA11yList(inst);
     },
@@ -601,7 +641,7 @@ const CityScape = {
                 if (!key || inst.lastX402.has(key) || job.status !== 'settled') return;
                 inst.lastX402.add(key);
                 this._spawnVehicle(inst, 'mint-x402', targetForOffering(job.offering), {
-                    offering: job.offering, amount_usd: job.amount_usd, tx_hash: job.tx_hash,
+                    kind: 'x402', offering: job.offering, amount_usd: job.amount_usd, tx_hash: job.tx_hash,
                 });
             });
             if (inst.lastX402.size > 200) inst.lastX402 = new Set([...inst.lastX402].slice(-100));
@@ -738,9 +778,15 @@ const CityScape = {
         return projectGrid(gx, gy, rotation);
     },
 
+    // Road *hierarchy* -- real landmark spokes (Investigations, Bounty Ops,
+    // Newsroom, Watchtower, Mint, Vault) render as wide avenues; the 10
+    // uniform lane-checkpoint spokes render as narrower streets. This is a
+    // real structural fact already in data/city-state.json (which building
+    // a road's other end actually is), not a fabricated road-class dataset.
     _drawRoads(inst, phase) {
         const { ctx } = inst;
         const lit = inst.mode === 'full' && isNight(phase);
+        const activity = inst.layer === 'activity';
         const strokePath = (pts, width, style) => {
             ctx.strokeStyle = style;
             ctx.lineWidth = width;
@@ -751,11 +797,28 @@ const CityScape = {
             ctx.stroke();
         };
         inst.roads.forEach(r => {
+            const isAvenue = r.to.kind !== 'checkpoint';
             const pts = this._roadPathScreen(r, inst.rotation);
-            strokePath(pts, 13, 'rgba(255,255,255,0.10)'); // curb / edge glow
-            strokePath(pts, 10.5, '#20202a'); // asphalt bed -- this is the fix for "can't see the roads"
-            ctx.setLineDash([4, 6]);
-            strokePath(pts, 1.2, lit ? 'rgba(255,224,150,0.55)' : 'rgba(255,255,255,0.32)'); // centerline
+            let bedWidth = isAvenue ? 13 : 8.5;
+            let curbWidth = isAvenue ? 16 : 10.5;
+            let curbAlpha = 0.10;
+            // "Activity" data layer -- an honest SimCity-style overlay: real
+            // per-building volume (the same stat_primary already shown in
+            // that building's own detail card) brightens/widens the road
+            // reaching it. No pollution/land-value layer exists here because
+            // VAPE has no real signal for either -- this is the one real
+            // per-connection volume we actually have.
+            if (activity) {
+                const v = r.to.stat_primary && typeof r.to.stat_primary.value === 'number' ? r.to.stat_primary.value : 0;
+                const norm = Math.min(1, v / 40);
+                bedWidth = 6 + norm * 11;
+                curbWidth = bedWidth + 3;
+                curbAlpha = 0.08 + norm * 0.4;
+            }
+            strokePath(pts, curbWidth, `rgba(255,255,255,${curbAlpha.toFixed(2)})`); // curb / edge glow
+            strokePath(pts, bedWidth, '#20202a'); // asphalt bed -- this is the fix for "can't see the roads"
+            ctx.setLineDash(isAvenue ? [5, 5] : [3, 6]);
+            strokePath(pts, isAvenue ? 1.6 : 1, lit ? 'rgba(255,224,150,0.55)' : 'rgba(255,255,255,0.32)'); // centerline
             ctx.setLineDash([]);
         });
     },
@@ -793,20 +856,34 @@ const CityScape = {
         });
     },
 
-    // Real settled x402 jobs -- bigger, glowing, mint-green, and visually
-    // distinct from the ambient gray traffic above.
+    // Real settled x402 jobs and real dispatched events -- bigger, glowing,
+    // and visually distinct from the ambient gray traffic above. Color
+    // comes from the real destination building's own kind (x402 stays
+    // mint-green, matching The Mint's own identity hue); threat-dispatch
+    // "emergency" vehicles also get a flashing red/cyan beacon, the one
+    // SimCity service-vehicle detail this module borrows outright since
+    // it's just a rendering flourish on an already-real incident.
     _drawVehicles(inst) {
         const { ctx } = inst;
         inst.vehicles.forEach(v => {
             const p = this._pointAlongRoadPath({ from: v.from, to: v.to }, v.t, inst.rotation);
+            const kind = (v.meta && v.meta.kind) || 'x402';
+            const colorVar = EVENT_COLOR_VAR[kind];
+            const color = colorVar ? cssVar(colorVar) : (cssVar('--city-mint') || '#008300');
             ctx.save();
             ctx.translate(p.x, p.y - 5);
-            ctx.fillStyle = cssVar('--city-mint') || '#008300';
-            ctx.shadowColor = ctx.fillStyle;
-            ctx.shadowBlur = 10;
+            ctx.fillStyle = color;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = kind === 'threat' ? 14 : 10;
             ctx.beginPath();
             if (ctx.roundRect) ctx.roundRect(-5, -3, 10, 6, 2); else ctx.rect(-5, -3, 10, 6);
             ctx.fill();
+            if (kind === 'threat') {
+                const flash = Math.sin(performance.now() / 90) > 0;
+                ctx.fillStyle = flash ? '#ff3d78' : '#2dd4ee';
+                ctx.shadowBlur = 0;
+                ctx.beginPath(); ctx.arc(0, -4, 1.5, 0, Math.PI * 2); ctx.fill();
+            }
             ctx.restore();
         });
     },
@@ -893,6 +970,14 @@ const CityScape = {
             ctx.fillText(String(b.title || '?').charAt(0), top.x, top.y + 4);
         }
 
+        // Real-tier "wealth" detailing -- build_city_state.py's tier_for()
+        // relative-percentile tier is this module's one honest analog of
+        // SimCity's wealth-driven material progression: a real tier-1
+        // building stays plain, a real tier-4 building earns the glass-
+        // curtain-wall streak and rooftop spire, exactly as much extra
+        // detail as its real relative volume actually earned.
+        if (!isCheckpoint) this._drawWealthDetailing(ctx, b.tier || 1, cx, cy, top, right, hw, H);
+
         // "Under construction" pulse -- fires only when _loadCity just saw
         // this building's real tier rise between two live fetches.
         if (b._upgradeUntil && performance.now() < b._upgradeUntil) {
@@ -914,6 +999,43 @@ const CityScape = {
         }
 
         inst.hitboxes.push({ building: b, x: cx, y: cy - H / 2, hw: hw + 6, hh: hh + H / 2 + 6 });
+    },
+
+    _drawWealthDetailing(ctx, tier, cx, cy, top, right, hw, H) {
+        if (tier >= 2) {
+            // Thin bright roofline trim -- the first step up from bare
+            // blockwork.
+            ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
+            ctx.stroke();
+        }
+        if (tier >= 3) {
+            // A glass curtain-wall streak on the sunlit face.
+            ctx.save();
+            ctx.globalAlpha = 0.24;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(right.x - hw * 0.15, right.y + 4);
+            ctx.lineTo(right.x + hw * 0.05, right.y + 4);
+            ctx.lineTo(cx + hw * 0.35, cy - H * 0.15);
+            ctx.lineTo(cx + hw * 0.15, cy - H * 0.15);
+            ctx.closePath(); ctx.fill();
+            ctx.restore();
+        }
+        if (tier >= 4) {
+            // A rooftop spire -- the skyline mark of a real tier-4 landmark.
+            ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(top.x, top.y); ctx.lineTo(top.x, top.y - 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(top.x, top.y - 11, 1.4, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.75)';
+            ctx.fill();
+        }
     },
 
     _drawBuildingWindows(ctx, cx, cy, hw, H) {
