@@ -151,15 +151,25 @@ function buildingHeightPx(b) {
 // rotation -- it changes which corner of the same real grid faces the
 // viewer, never the underlying gridX/gridY a building actually has.
 // Rotating around the real city's own footprint center (not the world's)
-// keeps downtown centered in view at every one of the 4 angles.
-const CITY_BBOX = { minX: 0, maxX: 12, minY: 0, maxY: 9 }; // real buildings' footprint-inclusive extent
-const CAMERA_PIVOT = { x: (CITY_BBOX.minX + CITY_BBOX.maxX) / 2, y: (CITY_BBOX.minY + CITY_BBOX.maxY) / 2 };
+// keeps downtown centered in view at every angle. `rotation` is a
+// continuous degree value (0-360, wrapping) so a compass drag/touch feels
+// fluid; only the 8 multiples of 45 are ever treated as "rest" positions
+// (footprint orientation and the terrain cache both snap to the nearest
+// one), but the underlying rotation math is real trigonometry, not a
+// 90°-only shortcut, so nothing looks discontinuous while dragging.
+const CITY_BBOX = { minX: 0, maxX: 22, minY: 0, maxY: 18 }; // real buildings' footprint-inclusive extent
+const CAMERA_PIVOT = { x: 11.5, y: 8.5 }; // The Foundry's own real footprint center -- the hub every road radiates from
+const ROTATION_STOPS = [0, 45, 90, 135, 180, 225, 270, 315];
+function nearestRotationStop(deg) {
+    const n = ((deg % 360) + 360) % 360;
+    return Math.round(n / 45) % 8 * 45;
+}
 
-function rotateAroundPivot(gx, gy, rotation) {
-    let dx = gx - CAMERA_PIVOT.x, dy = gy - CAMERA_PIVOT.y;
-    const steps = ((rotation % 4) + 4) % 4;
-    for (let i = 0; i < steps; i++) { const ndx = -dy, ndy = dx; dx = ndx; dy = ndy; }
-    return { x: CAMERA_PIVOT.x + dx, y: CAMERA_PIVOT.y + dy };
+function rotateAroundPivot(gx, gy, rotationDeg) {
+    const rad = (rotationDeg * Math.PI) / 180;
+    const cos = Math.cos(rad), sin = Math.sin(rad);
+    const dx = gx - CAMERA_PIVOT.x, dy = gy - CAMERA_PIVOT.y;
+    return { x: CAMERA_PIVOT.x + dx * cos - dy * sin, y: CAMERA_PIVOT.y + dx * sin + dy * cos };
 }
 function projectGrid(gx, gy, rotation) {
     const r = rotateAroundPivot(gx, gy, rotation);
@@ -224,9 +234,17 @@ function skyGradientStops(phase) {
 // bigger -- and it's fully deterministic (a fixed seed, not Math.random())
 // so the world reads as one stable place across visits, never a randomly
 // different backdrop.
-const WORLD_BOUNDS = { minX: -40, maxX: 60, minY: -40, maxY: 53 };
-const VACANT_MARGIN = 3; // tiles of guaranteed "room to grow" ring around downtown
+const WORLD_BOUNDS = { minX: -75, maxX: 115, minY: -75, maxY: 100 };
+const VACANT_MARGIN = 5; // tiles of guaranteed "room to grow" ring around downtown
 const TERRAIN_SEED = 402019;
+// A handful of fixed "park" tiles just outside downtown, in the vacant
+// margin ring -- pure world scenery (same non-data category as everything
+// else in this terrain layer), not derived from any real signal.
+const PARK_TILES = new Set([
+    '-3,3', '-2,3', '-3,4', '-2,4',
+    '24,3', '25,3', '24,4', '25,4',
+    '11,21', '12,21', '11,22', '12,22',
+]);
 
 function _hash(n, seed) {
     const x = Math.sin(n * 12.9898 + seed * 78.233) * 43758.5453;
@@ -239,10 +257,12 @@ function _valueNoise1D(x, seed) {
     return a + (b - a) * t;
 }
 // Two octaves so region edges (coastlines, mountain foothills) wobble
-// organically instead of reading as a ruler-straight boundary.
+// organically instead of reading as a ruler-straight boundary. Scaled up
+// alongside the wider city/world so the coastline's waviness stays
+// proportional instead of looking finicky against the bigger map.
 function _wobble(x, seedOffset) {
-    return (_valueNoise1D(x / 6, TERRAIN_SEED + seedOffset) - 0.5) * 6
-        + (_valueNoise1D(x / 2.4, TERRAIN_SEED + seedOffset + 1) - 0.5) * 2;
+    return (_valueNoise1D(x / 11, TERRAIN_SEED + seedOffset) - 0.5) * 10
+        + (_valueNoise1D(x / 4.5, TERRAIN_SEED + seedOffset + 1) - 0.5) * 3.5;
 }
 
 // Pure function of (gx, gy) + the fixed seed above -- same biome every
@@ -258,9 +278,9 @@ function biomeAt(gx, gy) {
         && gy >= CITY_BBOX.minY - VACANT_MARGIN && gy <= CITY_BBOX.maxY + VACANT_MARGIN;
     if (insideMargin) return 'vacant'; // guaranteed room to grow, regardless of the macro region below
     const u = gx - gy, v = gx + gy; // the same two axes gridToScreen already projects on
-    if (v < -30 + _wobble(u, 10)) return 'ocean';
-    if (v > 78 + _wobble(u, 20)) return 'mountain';
-    if (u < -49 + _wobble(v, 30)) return 'farmland';
+    if (v < -55 + _wobble(u, 10)) return 'ocean';
+    if (v > 145 + _wobble(u, 20)) return 'mountain';
+    if (u < -90 + _wobble(v, 30)) return 'farmland';
     return 'vacant';
 }
 
@@ -304,9 +324,11 @@ const CityScape = {
     _cityState: null,
     _instances: [],
     // The world is identical (same fixed seed) for every 'full' instance,
-    // so it's built once per rotation angle and shared rather than
-    // per-instance state. Keyed by rotation (0-3) since rotating the camera
-    // re-projects every tile onto a different patch of screen space.
+    // so it's built once per rotation stop and shared rather than
+    // per-instance state. Keyed by one of the 8 ROTATION_STOPS degree
+    // values (not the continuously-dragged inst.rotation) since rebuilding
+    // ~30k terrain tiles every animation frame mid-drag would be far too
+    // expensive -- the terrain only re-renders once a drag/arrow settles.
     _terrainCache: {},
     _terrainOrigin: {},
 
@@ -358,7 +380,7 @@ const CityScape = {
             buildings: [], roads: [], hitboxes: [],
             scale: mode === 'full' ? 1 : 0.72,
             offsetX: 0, offsetY: 0,
-            rotation: 0,
+            rotation: 0, terrainRotation: 0,
             layer: 'overview',
             selected: null,
             vehicles: [], ambient: [], oceanGlints: [],
@@ -470,6 +492,7 @@ const CityScape = {
         const { el, canvas } = inst;
         const pointers = new Map();
         let pinchStartDist = 0, pinchStartScale = 1;
+        let pinchStartAngle = 0, pinchStartRotation = 0;
         let dragStart = null;
         let moved = false;
 
@@ -477,6 +500,7 @@ const CityScape = {
         // reveals the entire ~100x93-tile world, not just downtown; compact
         // never shows the world at all, so its floor is unchanged.
         const clampScale = s => Math.max(inst.mode === 'full' ? 0.07 : 0.5, Math.min(2.6, s));
+        const pointerAngleDeg = (a, b) => Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI);
 
         canvas.addEventListener('pointerdown', (e) => {
             canvas.setPointerCapture(e.pointerId);
@@ -488,6 +512,8 @@ const CityScape = {
                 const [a, b] = [...pointers.values()];
                 pinchStartDist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 pinchStartScale = inst.scale;
+                pinchStartAngle = pointerAngleDeg(a, b);
+                pinchStartRotation = inst.rotation;
             }
         });
         canvas.addEventListener('pointermove', (e) => {
@@ -497,6 +523,15 @@ const CityScape = {
                 const [a, b] = [...pointers.values()];
                 const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 inst.scale = clampScale(pinchStartScale * (dist / pinchStartDist));
+                // Two-finger twist (the mobile analog of the desktop compass
+                // drag below) -- the same real-time pointer-angle delta a
+                // map app's rotate gesture uses, only meaningful in 'full'
+                // mode since compact has no rotation controls at all.
+                if (inst.mode === 'full') {
+                    const angleDelta = pointerAngleDeg(a, b) - pinchStartAngle;
+                    inst.rotation = ((pinchStartRotation + angleDelta) % 360 + 360) % 360;
+                    this._syncCompassDial(inst);
+                }
                 moved = true;
             } else if (dragStart) {
                 // moved is tracked in every mode (a compact-stage drag must
@@ -510,8 +545,16 @@ const CityScape = {
             }
         });
         const endPointer = (e) => {
+            const wasTwoFinger = pointers.size === 2;
             pointers.delete(e.pointerId);
             if (pointers.size === 0) dragStart = null;
+            // The twist gesture just ended -- settle on the nearest of the
+            // 8 rotation stops, same as releasing the desktop compass dial.
+            if (wasTwoFinger && inst.mode === 'full') {
+                inst.rotation = nearestRotationStop(inst.rotation);
+                inst.terrainRotation = inst.rotation;
+                this._syncCompassDial(inst);
+            }
         };
         canvas.addEventListener('pointerup', endPointer);
         canvas.addEventListener('pointercancel', endPointer);
@@ -541,16 +584,68 @@ const CityScape = {
         const zoomIn = inst.el.querySelector('[data-city-zoom="in"]');
         const zoomOut = inst.el.querySelector('[data-city-zoom="out"]');
         const zoomReset = inst.el.querySelector('[data-city-zoom="reset"]');
-        const rotateBtn = inst.el.querySelector('[data-city-rotate]');
         if (zoomIn) zoomIn.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 1.25); });
         if (zoomOut) zoomOut.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 0.8); });
         // A one-tap way back to downtown after zooming/panning/rotating out
         // to see the wider world -- only meaningful in 'full' mode.
-        if (zoomReset) zoomReset.addEventListener('click', () => { inst.scale = 1; inst.offsetX = 0; inst.offsetY = 0; inst.rotation = 0; });
-        // Rotates the camera 90° at a time around downtown, SimCity-style --
-        // a pure viewing transform, never a change to any building's real
-        // gridX/gridY.
-        if (rotateBtn) rotateBtn.addEventListener('click', () => { inst.rotation = (inst.rotation + 1) % 4; });
+        if (zoomReset) zoomReset.addEventListener('click', () => {
+            inst.scale = 1; inst.offsetX = 0; inst.offsetY = 0;
+            inst.rotation = 0; inst.terrainRotation = 0;
+            this._syncCompassDial(inst);
+        });
+
+        // ── Camera rotation: a compass dial you drag/touch (mouse on
+        // desktop, a finger on mobile -- Pointer Events unify both with one
+        // code path) plus two step arrows, 8 stops (45°) around downtown.
+        // A pure viewing transform, never a change to any building's real
+        // gridX/gridY. Lives on its own small dial element rather than the
+        // main canvas so it never fights with canvas drag-to-pan.
+        const dial = inst.el.querySelector('[data-city-rotate-dial]');
+        const rotateCCW = inst.el.querySelector('[data-city-rotate="ccw"]');
+        const rotateCW = inst.el.querySelector('[data-city-rotate="cw"]');
+        const stepRotate = dir => {
+            const next = nearestRotationStop(inst.rotation) + dir * 45;
+            inst.rotation = ((next % 360) + 360) % 360;
+            inst.terrainRotation = inst.rotation;
+            this._syncCompassDial(inst);
+        };
+        if (rotateCCW) rotateCCW.addEventListener('click', () => stepRotate(-1));
+        if (rotateCW) rotateCW.addEventListener('click', () => stepRotate(1));
+        if (dial) {
+            let dragging = false, startX = 0, startRotation = 0;
+            const ROTATE_SENSITIVITY = 0.7; // degrees per pixel of horizontal drag
+            dial.addEventListener('pointerdown', (e) => {
+                dial.setPointerCapture(e.pointerId);
+                dragging = true;
+                startX = e.clientX;
+                startRotation = inst.rotation;
+                dial.classList.add('is-dragging');
+            });
+            dial.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                const deg = startRotation + (e.clientX - startX) * ROTATE_SENSITIVITY;
+                inst.rotation = ((deg % 360) + 360) % 360;
+                this._syncCompassDial(inst);
+            });
+            const endDrag = () => {
+                if (!dragging) return;
+                dragging = false;
+                dial.classList.remove('is-dragging');
+                inst.rotation = nearestRotationStop(inst.rotation);
+                inst.terrainRotation = inst.rotation;
+                this._syncCompassDial(inst);
+            };
+            dial.addEventListener('pointerup', endDrag);
+            dial.addEventListener('pointercancel', endDrag);
+        }
+        this._syncCompassDial(inst);
+    },
+
+    // Rotates the compass dial's own needle to match inst.rotation -- a
+    // cheap DOM style update, not part of the canvas render loop.
+    _syncCompassDial(inst) {
+        const needle = inst.el.querySelector('[data-city-rotate-dial] .city-compass-needle');
+        if (needle) needle.style.transform = `translate(-50%, -100%) rotate(${inst.rotation}deg)`;
     },
 
     _handleClick(inst, px, py) {
@@ -720,16 +815,20 @@ const CityScape = {
         ctx.translate(w / 2 + inst.offsetX, h * 0.32 + inst.offsetY);
         ctx.scale(inst.scale, inst.scale);
 
-        // Terrain is cached per rotation angle (built lazily the first time
-        // that angle is viewed) -- gated on this instance's own mode so a
-        // compact instance never inherits the full-world backdrop.
+        // Terrain is cached per rotation *stop* (built lazily the first
+        // time that stop is viewed) -- gated on this instance's own mode so
+        // a compact instance never inherits the full-world backdrop. Keyed
+        // by inst.terrainRotation (snapped), not the continuously-dragged
+        // inst.rotation, so a mid-drag frame reuses the last-settled
+        // terrain image instead of rebuilding ~30k tiles every frame.
         if (inst.mode === 'full') {
-            if (!this._terrainCache[inst.rotation]) this._buildTerrainCache(inst.rotation);
-            const tc = this._terrainCache[inst.rotation], origin = this._terrainOrigin[inst.rotation];
+            if (!this._terrainCache[inst.terrainRotation]) this._buildTerrainCache(inst.terrainRotation);
+            const tc = this._terrainCache[inst.terrainRotation], origin = this._terrainOrigin[inst.terrainRotation];
             if (tc && origin) ctx.drawImage(tc, origin.x, origin.y);
             this._drawOceanGlints(inst);
         }
         this._drawRoads(inst, phase);
+        if (inst.mode === 'full') this._drawRoadsideTrees(inst);
         this._drawAmbient(inst, phase);
         inst.hitboxes = [];
         // Painter's algorithm: back-to-front by the *rotated* grid depth, so
@@ -823,6 +922,22 @@ const CityScape = {
         });
     },
 
+    // Trees alongside the real downtown street grid -- fixed, deterministic
+    // offsets per road (never Math.random() in the render loop, so nothing
+    // flickers or reshuffles frame to frame), full mode only to keep the
+    // small compact diorama uncluttered.
+    _drawRoadsideTrees(inst) {
+        const { ctx } = inst;
+        inst.roads.forEach((r, i) => {
+            if (r.to.kind === 'checkpoint' && i % 2 === 1) return; // a little breathing room on the minor streets
+            [0.22, 0.5, 0.78].forEach((t, j) => {
+                const p = this._pointAlongRoadPath(r, t, inst.rotation);
+                const side = (i + j) % 2 === 0 ? 1 : -1;
+                this._drawTreeGlyph(ctx, p.x + side * 9, p.y + 5, 0.75);
+            });
+        });
+    },
+
     _lerp(a, b, t) { return a + (b - a) * t; },
 
     // Ambient traffic + pedestrians -- pure atmosphere (same non-data
@@ -893,8 +1008,13 @@ const CityScape = {
         let [fw, fh] = b.footprint || [1, 1];
         // A rotated camera swaps which grid axis reads as "wide" on screen,
         // so a building's own footprint has to swap with it to keep its
-        // real width/depth ratio intact from every angle.
-        if (inst.rotation % 2 === 1) { [fw, fh] = [fh, fw]; }
+        // real width/depth ratio intact. Snapped to the nearest 90°
+        // quadrant (not continuous) since a rectangular footprint only
+        // has two honest orientations -- during a drag this "pops" once
+        // per quadrant crossing rather than smoothly stretching, which
+        // reads better than a distorted footprint mid-turn.
+        const quadrant = Math.round(inst.rotation / 90) % 4;
+        if (quadrant % 2 !== 0) { [fw, fh] = [fh, fw]; }
         const hw = (fw * TILE_W) / 2, hh = (fh * TILE_H) / 2;
         const H = buildingHeightPx(b);
         const { x: cx, y: cy } = buildingAnchorInfo(b, inst.rotation).screen;
@@ -910,6 +1030,17 @@ const CityScape = {
         const rightBase = { x: cx + hw, y: cy };
         const bottomBase = { x: cx, y: cy + hh };
         const leftBase = { x: cx - hw, y: cy };
+
+        // Ground shadow -- every building (checkpoints included) gets one,
+        // the cheapest single fix for "looks like a block floating on the
+        // grid" rather than a real object standing on real ground.
+        ctx.save();
+        ctx.globalAlpha = 0.28;
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.ellipse(cx, cy + hh * 0.2, hw * 0.95, hh * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
 
         if (alert) {
             ctx.save();
@@ -942,13 +1073,21 @@ const CityScape = {
 
         if (alert) ctx.restore();
 
-        // Lit windows at real local night-time -- deterministic pattern (no
-        // Math.random() in the render loop, which would flicker every
-        // frame), gated to landmarks so 10 tiny identical checkpoint marks
-        // don't turn into 10 tiny identical light grids at this scale.
-        if (night && !isCheckpoint) this._drawBuildingWindows(ctx, cx, cy, hw, H);
+        // Real facade -- a proper window grid fitted to both visible faces
+        // (not just a couple of hardcoded dots), day or night, on every
+        // landmark. This is the actual fix for "buildings just look like
+        // colored blocks": a lit/glazed grid reads as a real facade at a
+        // glance in a way a flat color never does.
+        if (!isCheckpoint) {
+            this._drawFacadeWindows(ctx, left, bottom, bottomBase, leftBase, H, hw, hh, night);
+            this._drawFacadeWindows(ctx, right, bottom, bottomBase, rightBase, H, hw, hh, night);
+            // A small dark entrance at street level on the near corner.
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(cx - 2.5, cy + hh * 0.55 - 6, 5, 6);
+        }
         // Checkpoints (the 10 automated-lane markers) get a streetlamp glow
-        // instead -- they're spread through downtown like real intersections.
+        // at night instead -- they're spread through downtown like real
+        // intersections, not buildings with facades of their own.
         if (night && isCheckpoint) {
             ctx.beginPath();
             ctx.arc(cx, cy - H - 5, 2.6, 0, Math.PI * 2);
@@ -969,6 +1108,14 @@ const CityScape = {
             ctx.textAlign = 'center';
             ctx.fillText(String(b.title || '?').charAt(0), top.x, top.y + 4);
         }
+
+        // Rooftop silhouette per real building *kind* -- a smokestack for
+        // the Foundry, an antenna for the Precinct, a dish for the
+        // Newsroom, a beacon for the Watchtower, a dome for the Vault, a
+        // sign frame for Bounty Ops, a coin disc for the Mint. `kind` is
+        // already-real data; which small shape represents it is a display
+        // choice, same category as its identity color.
+        if (!isCheckpoint) this._drawRoofIcon(ctx, b.kind, top);
 
         // Real-tier "wealth" detailing -- build_city_state.py's tier_for()
         // relative-percentile tier is this module's one honest analog of
@@ -1038,17 +1185,83 @@ const CityScape = {
         }
     },
 
-    _drawBuildingWindows(ctx, cx, cy, hw, H) {
-        const rows = Math.max(2, Math.round(H / 14));
-        ctx.fillStyle = 'rgba(255, 214, 120, 0.85)';
-        ctx.shadowColor = 'rgba(255,200,120,0.6)';
-        ctx.shadowBlur = 3;
+    // Tiles a real window grid across an isometric face quadrilateral via
+    // bilinear interpolation between its 4 real corners -- so every window
+    // actually sits flush on the face instead of floating near it. Day
+    // glazing is a muted blue-gray pane; night swaps to a warm lit color
+    // with a soft glow, same look _drawBuildingWindows used to hardcode in
+    // only two spots.
+    _drawFacadeWindows(ctx, topNear, topFar, bottomFar, bottomNear, H, hw, hh, night) {
+        const rows = Math.max(2, Math.round(H / 13));
+        const cols = Math.max(1, Math.round(Math.max(hw, hh) / 11));
+        const color = night ? 'rgba(255,214,120,0.9)' : 'rgba(196,214,230,0.32)';
+        if (night) { ctx.shadowColor = 'rgba(255,200,120,0.55)'; ctx.shadowBlur = 2.5; }
+        ctx.fillStyle = color;
         for (let r = 0; r < rows; r++) {
-            const fy = cy - H + 8 + r * ((H - 14) / Math.max(1, rows - 1));
-            if (r % 2 === 0) ctx.fillRect(cx - hw * 0.55 - 1, fy - 1, 2, 2);
-            if ((r + 1) % 2 === 0) ctx.fillRect(cx + hw * 0.5 - 1, fy - 1, 2, 2);
+            const v = (r + 0.35) / rows;
+            const nearX = this._lerp(topNear.x, bottomNear.x, v), nearY = this._lerp(topNear.y, bottomNear.y, v);
+            const farX = this._lerp(topFar.x, bottomFar.x, v), farY = this._lerp(topFar.y, bottomFar.y, v);
+            for (let c = 0; c < cols; c++) {
+                const u = (c + 0.5) / cols;
+                const x = this._lerp(nearX, farX, u), y = this._lerp(nearY, farY, u);
+                ctx.fillRect(x - 1.1, y - 1.3, 2.2, 2.6);
+            }
         }
         ctx.shadowBlur = 0;
+    },
+
+    _drawRoofIcon(ctx, kind, top) {
+        ctx.save();
+        ctx.lineWidth = 1;
+        if (kind === 'foundry') {
+            ctx.fillStyle = 'rgba(20,16,14,0.55)';
+            ctx.fillRect(top.x - 6, top.y - 10, 3, 10);
+            ctx.fillRect(top.x, top.y - 7, 3, 7);
+        } else if (kind === 'precinct') {
+            ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+            ctx.beginPath(); ctx.moveTo(top.x, top.y); ctx.lineTo(top.x, top.y - 9); ctx.stroke();
+            ctx.fillStyle = 'rgba(255,255,255,0.55)';
+            ctx.fillRect(top.x, top.y - 9, 6, 3.5);
+        } else if (kind === 'newsroom') {
+            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+            ctx.beginPath(); ctx.arc(top.x - 3, top.y - 5, 3.2, Math.PI, Math.PI * 1.85); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(top.x - 3, top.y - 5); ctx.lineTo(top.x - 3, top.y - 1); ctx.stroke();
+        } else if (kind === 'watchtower') {
+            ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+            ctx.beginPath(); ctx.moveTo(top.x, top.y); ctx.lineTo(top.x, top.y - 12); ctx.stroke();
+            ctx.beginPath(); ctx.arc(top.x, top.y - 13, 2, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,120,120,0.85)'; ctx.fill();
+        } else if (kind === 'vault') {
+            ctx.fillStyle = 'rgba(255,255,255,0.28)';
+            ctx.beginPath(); ctx.arc(top.x, top.y - 1, 5.5, Math.PI, 0); ctx.closePath(); ctx.fill();
+        } else if (kind === 'tower') {
+            ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+            ctx.strokeRect(top.x - 6, top.y - 9, 12, 5.5);
+        } else if (kind === 'mint') {
+            ctx.fillStyle = 'rgba(255,255,255,0.32)';
+            ctx.beginPath(); ctx.arc(top.x, top.y - 4, 4, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)'; ctx.stroke();
+        }
+        ctx.restore();
+    },
+
+    // A tiny deterministic tree glyph -- pure atmosphere, the same
+    // non-data category as the ambient traffic/pedestrian particles
+    // already in this file. Used both scattered through the surrounding
+    // terrain and alongside real downtown streets.
+    _drawTreeGlyph(ctx, x, y, s) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(s, s);
+        ctx.fillStyle = 'rgba(10,8,6,0.3)';
+        ctx.beginPath(); ctx.ellipse(0, 1.5, 3.4, 1.4, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#5b3a24';
+        ctx.fillRect(-0.6, -3, 1.2, 4.5);
+        ctx.fillStyle = '#2f6b3a';
+        ctx.beginPath(); ctx.arc(0, -6, 3.4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#3d8a4b';
+        ctx.beginPath(); ctx.arc(-1.2, -7.3, 2.1, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
     },
 
     _shade(hex, amt) {
@@ -1094,6 +1307,7 @@ const CityScape = {
 
         tiles.forEach(t => this._drawTerrainTile(ctx, t.biome, t.rx, t.ry, -xMin, -yMin, t.gx, t.gy));
         this._findBridgeSpots(tiles).forEach(spot => this._drawBridge(ctx, spot, rotation, -xMin, -yMin));
+        this._drawExitRoads(ctx, rotation, -xMin, -yMin);
 
         this._terrainCache[rotation] = cvs;
         this._terrainOrigin[rotation] = { x: xMin, y: yMin };
@@ -1143,6 +1357,88 @@ const CityScape = {
         if (biome === 'vacant') ctx.setLineDash([3, 3]); // a surveyed, undeveloped lot -- never a building
         ctx.stroke();
         if (biome === 'vacant') ctx.setLineDash([]);
+
+        // Trees + parks -- pure world scenery, same non-data category as
+        // the rest of this terrain layer. A handful of fixed tiles near
+        // downtown are designated parks (denser trees + a green tint,
+        // clearly distinct from a plain surveyed-vacant lot); everywhere
+        // else gets a light, deterministic sprinkle so the world doesn't
+        // read as bare dirt.
+        if (biome === 'vacant' || biome === 'farmland') {
+            if (PARK_TILES.has(`${ogx},${ogy}`)) {
+                ctx.save();
+                ctx.globalAlpha = 0.4;
+                ctx.fillStyle = '#2c5c33';
+                ctx.beginPath();
+                ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
+                ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
+                ctx.closePath(); ctx.fill();
+                ctx.restore();
+                [[-7, -2], [6, 1], [0, -7], [-2, 5]].forEach(([ox, oy]) => this._drawTreeGlyph(ctx, cx + ox, cy + oy, 1.05));
+            } else {
+                const seedVal = _hash(ogx * 13.7 + ogy * 5.3, TERRAIN_SEED + 77);
+                const threshold = biome === 'farmland' ? 0.05 : 0.15;
+                if (seedVal < threshold) this._drawTreeGlyph(ctx, cx + (seedVal / threshold) * 14 - 7, cy - 2, 0.85);
+            }
+        }
+    },
+
+    // Two fixed roads out of town -- purely structural world scenery, same
+    // non-data category as the fixed road layout itself, just extended
+    // past the city limits: one heads due west along the real street
+    // grid's own Main Street row out to a small marina on the coast, the
+    // other heads south out of town and tapers into open land.
+    _drawExitRoads(ctx, rotation, dx, dy) {
+        const project = (gx, gy) => {
+            const r = rotateAroundPivot(gx, gy, rotation);
+            const s = gridToScreen(r.x, r.y);
+            return { x: s.x + dx, y: s.y + dy };
+        };
+        const strokeLine = (p1, p2, width, style, dash) => {
+            ctx.save();
+            ctx.strokeStyle = style;
+            ctx.lineWidth = width;
+            ctx.lineCap = 'round';
+            if (dash) ctx.setLineDash(dash);
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+            ctx.restore();
+        };
+
+        const marinaA = project(0, CAMERA_PIVOT.y), marinaB = project(-70, CAMERA_PIVOT.y);
+        strokeLine(marinaA, marinaB, 11, '#20202a');
+        strokeLine(marinaA, marinaB, 1.4, 'rgba(255,255,255,0.28)', [5, 6]);
+        this._drawMarina(ctx, project(-66, CAMERA_PIVOT.y));
+
+        // A county road tapering south into open land -- shrinking segments
+        // instead of one long stroke so it visually fades rather than
+        // stopping dead at a hard edge.
+        for (let i = 0; i < 6; i++) {
+            const p0 = project(CAMERA_PIVOT.x, CITY_BBOX.maxY + i * 5);
+            const p1 = project(CAMERA_PIVOT.x, CITY_BBOX.maxY + (i + 1) * 5);
+            strokeLine(p0, p1, 9, `rgba(32,32,42,${(0.85 - i * 0.13).toFixed(2)})`);
+        }
+    },
+
+    _drawMarina(ctx, at) {
+        ctx.save();
+        ctx.translate(at.x, at.y);
+        ctx.strokeStyle = '#8a8a94';
+        ctx.lineWidth = 6;
+        ctx.beginPath(); ctx.moveTo(-15, 0); ctx.lineTo(15, 0); ctx.stroke();
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(0, -9); ctx.lineTo(0, 9); ctx.stroke();
+        [[-9, -4], [8, 3], [-3, 6]].forEach(([bx, by]) => {
+            ctx.save();
+            ctx.translate(bx, by);
+            ctx.fillStyle = '#e8ddb0';
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(-4, -2, 8, 4, 1.5); else ctx.rect(-4, -2, 8, 4);
+            ctx.fill();
+            ctx.restore();
+        });
+        ctx.restore();
     },
 
     // Two short, fixed, deterministic piers wherever the seeded coastline

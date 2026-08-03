@@ -512,6 +512,23 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .city-zoom-btn:hover { background: rgba(255,255,255,0.1); color: #f4f4f5; }
 
+/* Camera rotation: two step-arrows flanking a small draggable compass dial
+   (desktop click-hold-drag; mobile two-finger twist is wired on the canvas
+   itself in cityscape.js, not this dial -- the dial is the single-pointer
+   affordance for a mouse). */
+.city-compass-group { display: flex; align-items: center; gap: 4px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; }
+.city-compass {
+    width: 26px; height: 26px; border-radius: 999px; position: relative;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+    cursor: grab; touch-action: none; flex-shrink: 0;
+}
+.city-compass.is-dragging { cursor: grabbing; background: rgba(255,255,255,0.14); }
+.city-compass-needle {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -100%) rotate(0deg);
+    transform-origin: 50% 100%; color: #e4e4e7; font-size: 13px; line-height: 1; pointer-events: none;
+    transition: none;
+}
+
 .city-hint { position: absolute; bottom: 0.6rem; left: 0.6rem; z-index: 2; font-size: 9.5px; color: #71717a; background: rgba(9,9,11,0.5); border-radius: 999px; padding: 3px 9px; pointer-events: none; }
 .city-hint i { margin-right: 0.3rem; }
 
