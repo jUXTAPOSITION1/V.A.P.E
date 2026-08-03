@@ -430,3 +430,4 @@
 {"ts": "2026-08-03T16:42:29.665928Z", "target": "0xBf8E8f0e8866a7052F948C16508644347c57aba3", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-03T17:12:47.110825Z", "target": "0xBf8E8f0e8866a7052F948C16508644347c57aba3", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-03T17:43:26.077753Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-03T18:14:04.365148Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}

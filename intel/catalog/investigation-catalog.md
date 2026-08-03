@@ -1205,3 +1205,5 @@
 | 2026-08-03 | auto | 0x02c1d787521C20586b4aB070b1838D91FF85D656 (FRLZ) | deep_investigation | CAUTION (65/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-08-03 | auto | 0x515e72aF68A374C8f375534B59752277Ee9b4a51 (A51) | deep_investigation | CAUTION (72/100) | Owner not renounced (0x51ebb43f3d8be75937f77f49f9336ae70e774a51) — can still act | +7d |
+
+| 2026-08-03 | auto | 0xfD181Ca5EC0B355fc448403cc560D0423382e044 (DPUNK) | deep_investigation | REJECT (7/100) | Owner not renounced (0x455a1b0698ddeb0c50b40388408da07bdae452aa) — can still act | +7d |

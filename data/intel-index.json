@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T17:58:36Z",
+  "generated": "2026-08-03T18:14:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 702,
+    "investigations": 703,
     "news": 57,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-175833-0x515e72aF.md",
-      "title": "Investigation \u2014 A51",
-      "symbol": "A51",
-      "name": "Aliens",
-      "date": "2026-08-03T17:58:33Z",
-      "target": "0x515e72aF68A374C8f375534B59752277Ee9b4a51",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "72",
-      "summary": "Risk factors: [-10] Owner not renounced (0x51ebb43f3d8be75937f77f49f9336ae70e774a51) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,940. Positive evidence: 6012 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 red",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-175833-0x515e72aF.md"
+      "file": "investigation-20260803-181357-0xfD181Ca5.md",
+      "title": "Investigation \u2014 DPUNK",
+      "symbol": "DPUNK",
+      "name": "DogPunk",
+      "date": "2026-08-03T18:13:57Z",
+      "target": "0xfD181Ca5EC0B355fc448403cc560D0423382e044",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0x455a1b0698ddeb0c50b40388408da07bdae452aa) \u2014 can still act on the contract; [-8] Low holder count (181); [-15] Top 10 non-LP/burn holders control 137% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-181357-0xfD181Ca5.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-181357-0xfD181Ca5.md",
+      "title": "Investigation \u2014 DPUNK",
+      "symbol": "DPUNK",
+      "name": "DogPunk",
+      "date": "2026-08-03T18:13:57Z",
+      "target": "0xfD181Ca5EC0B355fc448403cc560D0423382e044",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0x455a1b0698ddeb0c50b40388408da07bdae452aa) \u2014 can still act on the contract; [-8] Low holder count (181); [-15] Top 10 non-LP/burn holders control 137% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-181357-0xfD181Ca5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-175833-0x515e72aF.md",

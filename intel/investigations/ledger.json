@@ -4078,6 +4078,25 @@
     "symbol": "RWA",
     "times_investigated": 1
   },
+  "1:0xfd181ca5ec0b355fc448403cc560d0423382e044": {
+    "address": "0xfD181Ca5EC0B355fc448403cc560D0423382e044",
+    "chain": "1",
+    "creator_address": "0x455a1b0698ddeb0c50b40388408da07bdae452aa",
+    "first_investigated": "2026-08-03T18:13:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-181357-0xfD181Ca5.md",
+        "score": 7,
+        "ts": "2026-08-03T18:13:57Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T18:13:57Z",
+    "last_score": 7,
+    "last_verdict": "REJECT",
+    "symbol": "DPUNK",
+    "times_investigated": 1
+  },
   "1:0xfdcd8be9dd37cf982472d30eeee4ec50a0296953": {
     "address": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
     "chain": "1",
