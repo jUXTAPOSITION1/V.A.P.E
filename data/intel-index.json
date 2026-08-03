@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T06:25:19Z",
+  "generated": "2026-08-03T06:25:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 521,
+    "reports": 522,
     "reports_by_type": {
+      "bounty": 132,
       "base": 104,
-      "bounty": 131,
       "security": 96,
       "sentiment": 54,
       "macro": 27,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 143,
     "investigations": 684,
-    "news": 55,
+    "news": 54,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-044934-0x420658A1.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-03-06.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-03T06:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_062429.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T06:24:29Z",
       "threat": null,
-      "summary": "Date: 2026-08-03 06:11 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-06.md",
-      "bytes": 8519
+      "summary": "Base mover: aeon / WETH +187% 24h (liq $1011448.2897) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_062429.md",
+      "bytes": 16768
     }
   },
   "investigations": [
@@ -9440,6 +9440,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_062429.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T06:24:29Z",
+      "threat": null,
+      "summary": "Base mover: aeon / WETH +187% 24h (liq $1011448.2897) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_062429.md",
+      "bytes": 16768
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-03-06.md",
@@ -10087,17 +10098,6 @@
       "summary": "Nine incidents occurred across the listed 7-day window, with a combined reported loss of roughly $59.4M. The largest single event was the $24.15M AFX Bridge private-key compromise on Arbitrum; the next largest were the $9.7M Triple-A hot-wallet compromise (Ethereum, Tron, Arbitrum) and the $8.2M Crypto DAO incident on BSC. Four incidents ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-14.md",
       "bytes": 7294
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_125715.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T12:57:15Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_125715.md",
-      "bytes": 17204
     }
   ],
   "broadcasts": [
@@ -10313,18 +10313,6 @@
     }
   ],
   "news": [
-    {
-      "file": "news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md",
-      "title": "La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown",
-      "byline": "VAPE Reporter",
-      "date": "2026-08-03T06:25:19Z",
-      "published_et": "August 3, 2026 \u00b7 2:25 AM EDT",
-      "topic": "Crypto Markets",
-      "dek": "The embattled real estate firm, plagued by three reverse stock splits and mounting liabilities, classifies its entire digital asset treasury as restricted.",
-      "image": "assets/news-images/la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.jpg",
-      "image_source": "AI-generated \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md"
-    },
     {
       "file": "news-2026-08-03-fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.md",
       "title": "FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet",
