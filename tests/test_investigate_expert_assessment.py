@@ -11,14 +11,56 @@ from agents import investigate as inv
 from agents.llm import FRONTIER_ORDER
 
 
-def _call(response_text):
+def _call(response_text, dex=None, project_narrative=None):
+    dex = dex if dex is not None else {"symbol": "TOKEN"}
     with mock.patch("agents.llm.ask_oci_grok_safe", return_value=(response_text, "xai_1")) as m:
         result = inv._expert_assessment(
             "0x" + "aa" * 20, "TOKEN", "8453", "REJECT", 10, ["HONEYPOT"], [],
-            {"is_honeypot": "1"}, {"symbol": "TOKEN"}, {"is_contract": True}, {},
-            [], None, [], None, None,
+            {"is_honeypot": "1"}, dex, {"is_contract": True}, {},
+            [], None, [], None, None, project_narrative=project_narrative,
         )
     return result, m
+
+
+def test_declared_website_and_socials_reach_the_llm_as_evidence():
+    """Real bug this pins (confirmed against a live report,
+    investigation-20260803-181357-0xfD181Ca5.md): the evidence this
+    function built never included dex's own declared website/social
+    links, so the model had zero signal they existed and confidently wrote
+    "no social proof available" while the SAME report's Project Links
+    section showed them. The declared links must reach the model's own
+    prompt (the `user` block passed to ask_oci_grok_safe), not just get
+    silently dropped."""
+    dex = {"symbol": "TOKEN", "websites": [{"url": "https://dogpunk.app"}],
+           "socials": [{"type": "twitter", "url": "https://x.com/dogpunkV4"}]}
+    _result, m = _call("Some analysis.\n\nVERDICT ALIGNMENT: AGREE", dex=dex)
+    args, _kwargs = m.call_args
+    user_block = args[1]
+    assert "https://dogpunk.app" in user_block
+    assert "https://x.com/dogpunkV4" in user_block
+
+
+def test_no_declared_web_presence_is_stated_as_a_real_absence():
+    dex = {"symbol": "TOKEN"}
+    _result, m = _call("Some analysis.\n\nVERDICT ALIGNMENT: AGREE", dex=dex)
+    args, _kwargs = m.call_args
+    user_block = args[1]
+    assert "none found" in user_block.lower()
+
+
+def test_project_narrative_research_reaches_the_llm_as_evidence():
+    """The dedicated real web-search synthesis (_project_narrative(), which
+    now runs BEFORE this function per investigate()'s own call-order fix)
+    must be visible to this function too, not just the raw declared
+    links -- otherwise this function still can't say anything about
+    whether that research actually found a coherent project story."""
+    narrative = {"text": "DogPunk presents as a meme-coin community project with an active Twitter presence.",
+                 "address_identity_verified": False}
+    _result, m = _call("Some analysis.\n\nVERDICT ALIGNMENT: AGREE", project_narrative=narrative)
+    args, _kwargs = m.call_args
+    user_block = args[1]
+    assert "DogPunk presents as a meme-coin community project" in user_block
+    assert "NOT independently confirmed" in user_block
 
 
 def test_agree_response_is_parsed_correctly():

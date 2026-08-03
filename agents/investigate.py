@@ -2043,7 +2043,7 @@ def _fmt_data_agent_deliverable(d):
 
 def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals,
                              gp, dex, onchain, verif, corr, web_rep, defillama,
-                             deployer_siblings, data_agent_intel):
+                             deployer_siblings, data_agent_intel, project_narrative=None):
     """Real synthesis of everything gathered this cycle — score() already
     produces a deterministic rule-based verdict, but write_report() below
     otherwise just lists each source's raw fields with no reasoning
@@ -2056,6 +2056,23 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     mutate" pattern as agents/critic.py's structural self-check; a real
     disagreement here is signal for self_improve.py/review_ledger.py, not
     a verdict change. Never raises.
+
+    Real bug this fixes (confirmed against a live report,
+    investigation-20260803-181357-0xfD181Ca5.md): the evidence this function
+    built never included the token's own declared website/social links
+    (dex["websites"]/dex["socials"] — cheap, already-fetched data every
+    caller already has), and this function used to run BEFORE
+    _project_narrative() (investigate()'s own real, targeted web-search
+    synthesis of exactly that declared presence) even computed its result —
+    so the model had zero visibility into social/web data the rest of the
+    SAME report already showed in "Project Links"/"Project Overview &
+    Narrative", and confidently wrote "no social proof available" directly
+    contradicting them. investigate() now runs _project_narrative() first
+    and passes its result in here via `project_narrative`, and the evidence
+    below states the declared links directly regardless of whether that
+    narrative synthesis itself succeeded — so this function's own read on
+    how much real narrative/social surface exists always agrees with what a
+    reader sees elsewhere in the same report, never blind to it.
 
     Routed through research_engine.synthesize() (not a bare LLM call) since
     that engine now offers the features this function needed to migrate
@@ -2106,6 +2123,22 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
         evidence.append(f"Market: {dex.get('symbol')}/{dex.get('name')}, price=${dex.get('price_usd')}, "
                          f"liquidity=${dex.get('liquidity_usd')}, 24h_vol=${dex.get('vol_24h_usd')}, "
                          f"24h_change={dex.get('change_24h_pct')}%, dex={dex.get('dex')}")
+        sites = [w.get("url") for w in (dex.get("websites") or []) if w.get("url")]
+        socials = [f"{s.get('type')}: {s.get('url')}" for s in (dex.get("socials") or []) if s.get("url")]
+        if sites or socials:
+            evidence.append("Declared web presence: " + "; ".join(
+                (["website(s): " + ", ".join(sites)] if sites else [])
+                + (["social(s): " + ", ".join(socials)] if socials else [])))
+        else:
+            evidence.append("Declared web presence: none found (no website or social link declared "
+                             "on the DEX listing) — a real absence, not a lookup failure.")
+    if project_narrative and project_narrative.get("text"):
+        verified = project_narrative.get("address_identity_verified")
+        evidence.append(
+            "Dedicated project-narrative research (a separate real web search targeted at "
+            "exactly this project's declared identity/history, address-level identity "
+            + ("independently confirmed" if verified else "NOT independently confirmed — self-declared only")
+            + f"): {project_narrative['text'][:600]}")
     if onchain:
         evidence.append(f"On-chain: is_contract={onchain.get('is_contract')}, "
                          f"code_size={onchain.get('code_size_bytes')}B")
@@ -2234,14 +2267,18 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
     from those real search-snippet results plus already-known declared data
     (CoinGecko description, DexScreener websites/socials) — explicitly told
     to say the search was thin rather than invent a history/team/utility
-    claim with no source. Deliberately does NOT escalate to a full-page
-    scrape (unlike web_reputation_check(), which only scrapes a hit that
-    already cleared a real scam-keyword bar) — this function's search
-    always runs, so an unconditional scrape here would roughly double this
-    pipeline's per-cycle scrape-quota consumption against
-    skillforge/research.py's shared, capped provider pool (CodeRabbit,
-    PR #282); the 300-char search snippets already grounding this synthesis
-    are proportionate to a narrative section, not a security scrape escalation.
+    claim with no source.
+
+    Also directly crawls the declared website/social links themselves now
+    (via _scrape_excerpt(), the same skillforge/research.py Firecrawl ->
+    Bright Data -> Apify -> keyless-fetch chain web_reputation_check()
+    already uses), capped at 3 URLs — per explicit request, a real
+    escalation from the name-search-only design this function originally
+    shipped with (which deliberately avoided it to bound scrape-quota
+    usage against skillforge/research.py's shared, capped provider pool,
+    see CodeRabbit PR #282). A platform that blocks scrapers (X/Twitter in
+    particular) degrades to an honest "couldn't be crawled" note rather
+    than a fabricated excerpt or a hard failure.
 
     Real, non-security-graded caveat this function must carry: the search
     query is built from this token's own DECLARED name/symbol, which a
@@ -2348,6 +2385,30 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
         socials = ", ".join(f"{s.get('type')}: {s.get('url')}" for s in dex["socials"] if s.get("url"))
         if socials:
             evidence.append(f"Declared social(s): {socials}")
+    # Real crawl of the declared links themselves, not just a name search --
+    # per explicit request. Capped at 3 (website first, then socials in
+    # declared order) same as worker/src/handlers.ts's verifySocials()'s
+    # identical cap, to bound scrape-quota usage against skillforge/
+    # research.py's shared, capped provider pool. A platform that blocks
+    # scrapers (X/Twitter in particular, JS-rendered/login-walled) degrades
+    # to simply no excerpt for that URL -- an honest miss, not a fabricated
+    # one, and doesn't block the rest of this function.
+    declared_urls = []
+    if dex and dex.get("websites"):
+        declared_urls += [w.get("url") for w in dex["websites"] if w.get("url")]
+    if dex and dex.get("socials"):
+        declared_urls += [(s.get("type"), s.get("url")) for s in dex["socials"] if s.get("url")]
+    crawled_any = False
+    for entry in declared_urls[:3]:
+        label, url = entry if isinstance(entry, tuple) else ("website", entry)
+        excerpt = _scrape_excerpt(url, max_len=500)
+        if excerpt:
+            crawled_any = True
+            evidence.append(f"Direct excerpt from declared {label} page ({url}): {excerpt}")
+    if declared_urls and not crawled_any:
+        evidence.append("Declared website/social pages were attempted but none could be crawled "
+                         "this cycle (blocked, JS-rendered, or scrape quota exhausted) — real "
+                         "declared links exist above even though their content couldn't be pulled.")
     if normalized:
         evidence.append("Real web search results:")
         for r in normalized:
@@ -2474,14 +2535,20 @@ def investigate(address, chain="8453", hint="", force=False):
         print(f"[investigate] CRITIC FLAGGED {address}: {critic_result['issues']}")
         critic.log_finding(address, chain, prelim_sym, critic_result["issues"])
 
+    # project_narrative runs BEFORE _expert_assessment() now (real bug this
+    # fixes: see _expert_assessment()'s own docstring) so the primary
+    # synthesis is never blind to the real, targeted social/web research
+    # this step already ran -- both the raw declared links and this
+    # dedicated research get threaded into the assessment's own evidence.
+    project_narrative = _project_narrative(prelim_sym, dex.get("name"), dex, cg_contract, address, chain)
+
     expert_assessment = _expert_assessment(address, prelim_sym, chain, verdict, s, reasons,
                                                positive_signals, gp, dex, onchain, verif, corr,
-                                               web_rep, dl_intel, siblings, data_agent_intel)
+                                               web_rep, dl_intel, siblings, data_agent_intel,
+                                               project_narrative=project_narrative)
     if expert_assessment and expert_assessment["disagrees"]:
         print(f"[investigate] EXPERT ASSESSMENT DISAGREES with {verdict} verdict for {address}")
         _log_expert_disagreement(address, chain, prelim_sym, verdict, s, expert_assessment["text"])
-
-    project_narrative = _project_narrative(prelim_sym, dex.get("name"), dex, cg_contract, address, chain)
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
                                     positive_signals, web_rep, dl_intel, siblings, critic_result,
