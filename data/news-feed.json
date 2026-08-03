@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T21:56:41Z",
+  "generated": "2026-08-03T02:45:07Z",
   "count": 60,
   "headlines": [
     {
@@ -75,6 +75,62 @@
       "crypto": true
     },
     {
+      "title": "After 3 reverse stock splits and a $13.5M  loss, this real estate firm bet $8M on crypto it may not be allowed to withdraw",
+      "url": "https://cryptoslate.com/la-rosas-8-1-million-crypto-balance-comes-with-one-unanswered-liquidity-question/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 23:45:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Coldcard exploit sparks Bitcoin flight, \u2018bullish\u2019 crypto consolidation: Hodler\u2019s Digest, August 2",
+      "url": "https://cointelegraph.com/magazine/coldcard-exploit-sparks-bitcoin-flight-clarity-act-no-vote-or-no-vote-hodlers-digest-august-2?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sun, 02 Aug 2026 23:44:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "XRP ETFs Keep Drawing Cash, So Why Is the Price Down 40%?",
+      "url": "https://beincrypto.com/xrp-etf-inflows-price-divergence/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 23:13:49 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Oil Plunges 9% as Trump Sets Monday Talks to Reopen Hormuz",
+      "url": "https://beincrypto.com/oil-falls-trump-iran-hormuz-talks/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 23:01:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "ADA Price Jumps 10% While Cardano Turns Toward Its Next Big Upgrade Era",
+      "url": "https://beincrypto.com/cardano-ada-rally-dijkstra-era-preparations/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 23:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "A tiny cluster of Solana bots unlocked a 3x trading advantage by routing through one proprietary protocol",
+      "url": "https://cryptoslate.com/a-tiny-cluster-of-solana-bots-unlocked-a-3x-trading-advantage-by-routing-through-one-proprietary-protocol/",
+      "source": "CryptoSlate",
+      "published": "Sun, 02 Aug 2026 22:50:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Japan Could Trigger the Biggest Market Shock of 2026: How Might Bitcoin React?",
+      "url": "https://beincrypto.com/japan-market-shock-bitcoin-reaction/",
+      "source": "BeInCrypto",
+      "published": "Sun, 02 Aug 2026 22:21:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "How Interactive Strength erased a $50M FET token bet and sent common shareholders to the back of the line",
       "url": "https://cryptoslate.com/after-a-failed-50m-crypto-gamble-interactive-strength-is-dodging-a-severe-cash-crunch-by-shoving-shareholders-behind-a-brutal-15-liquidation-wall/",
       "source": "CryptoSlate",
@@ -99,26 +155,10 @@
       "crypto": true
     },
     {
-      "title": "The Self-Proclaimed Satoshi Nakamoto Attacks Bitcoin Governance Model",
-      "url": "https://beincrypto.com/craig-wright-satoshi-criticizes-bitcoin-governance-model/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 20:51:37 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "CLARITY Act vanishes from Monday\u2019s Senate schedule, triggering 72-hour countdown to save it before recess",
       "url": "https://cryptoslate.com/cryptos-landmark-clarity-act-just-vanished-from-mondays-senate-schedule-triggering-a-desperate-72-hour-countdown-to-save-it-before-recess/",
       "source": "CryptoSlate",
       "published": "Sun, 02 Aug 2026 20:35:14 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Stop Acting Like the CLARITY Act Is Everything, Former Regulator Says",
-      "url": "https://beincrypto.com/giancarlo-clarity-act-crypto-innovation/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 20:30:00 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -131,14 +171,6 @@
       "crypto": true
     },
     {
-      "title": "SpaceX IPO Paid Wall Street $100 Million: Will It\u2019s First Earnings Repay Investors?",
-      "url": "https://beincrypto.com/spacex-earnings-morgan-stanley-10-trillion/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 19:45:02 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Another crypto wallet pulls the plug tomorrow with no exact cutoff, leaving users racing to rescue tokens",
       "url": "https://cryptoslate.com/ctrl-wallet-is-pulling-the-plug-tomorrow-with-no-exact-cutoff-time-leaving-users-racing-a-phantom-clock-to-rescue-their-crypto/",
       "source": "CryptoSlate",
@@ -147,19 +179,11 @@
       "crypto": true
     },
     {
-      "title": "Trump\u2019s Oil Order Meets OPEC+ Supply Hike: Why California Gas Costs $5.49",
-      "url": "https://beincrypto.com/trump-oil-order-opec-supply-hike/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 19:15:08 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "XRP extends the longest active ETF inflow streak in crypto as rival funds struggle for fresh cash",
-      "url": "https://cryptoslate.com/xrp-extends-the-longest-active-etf-inflow-streak-in-crypto-as-rival-funds-struggle-for-fresh-cash/",
-      "source": "CryptoSlate",
-      "published": "Sun, 02 Aug 2026 18:35:10 +0000",
-      "topic": "Crypto Markets",
+      "title": "OpenAI teases Astra, its next major AI model, after it solves 10 long-standing math problems",
+      "url": "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-teases-astra-its-next-major-ai-model-after-it-solves-10-long-standing-math-problems/",
+      "source": "BleepingComputer",
+      "published": "Sun, 02 Aug 2026 18:31:41 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -167,22 +191,6 @@
       "url": "https://www.coindesk.com/policy/2026/08/02/counting-down-the-days-state-of-crypto",
       "source": "CoinDesk",
       "published": "Sun, 02 Aug 2026 18:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BIP-110 Activation Frozen After Coldcard Exploit: Is the Soft Fork Dead?",
-      "url": "https://beincrypto.com/bip-110-activation-postponed-coldcard-exploit/",
-      "source": "BeInCrypto",
-      "published": "Sun, 02 Aug 2026 18:19:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Coldcard\u2019s $89M wallet bug triggers the biggest Bitcoin movement since FTX and completely distorts market signals",
-      "url": "https://cryptoslate.com/coldcards-89m-wallet-bug-triggers-the-biggest-bitcoin-movement-since-ftx-and-completely-distorts-market-signals/",
-      "source": "CryptoSlate",
-      "published": "Sun, 02 Aug 2026 17:30:03 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -215,14 +223,6 @@
       "url": "https://www.coindesk.com/web3/2026/08/02/why-a-defi-platform-ditched-its-consumer-app-to-become-the-secret-backend-for-tech-giants",
       "source": "CoinDesk",
       "published": "Sun, 02 Aug 2026 17:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "The US just blacklisted the Iranian maritime scheme forcing commercial ships to pay Bitcoin tolls for safe passage",
-      "url": "https://cryptoslate.com/the-us-just-blacklisted-an-iranian-maritime-scheme-forcing-commercial-ships-to-pay-bitcoin-tolls-for-safe-passage/",
-      "source": "CryptoSlate",
-      "published": "Sun, 02 Aug 2026 16:40:00 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -307,14 +307,6 @@
       "crypto": true
     },
     {
-      "title": "Coldcard hack sparks biggest sub-1 BTC move since FTX: CryptoQuant",
-      "url": "https://cointelegraph.com/news/coldcard-biggest-sub-1-btc-transfer-ftx-cryptoquant?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sun, 02 Aug 2026 08:07:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Coldcard Hardware Wallet Flaw Linked to $70 Million Bitcoin Theft in 41 Minutes",
       "url": "https://thehackernews.com/2026/08/coldcard-hardware-wallet-flaw-linked-to.html",
       "source": "The Hacker News",
@@ -327,14 +319,6 @@
       "url": "https://www.coindesk.com/markets/2026/08/01/strategy-holds-strc-dividend-at-12",
       "source": "CoinDesk",
       "published": "Sat, 01 Aug 2026 22:01:57 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Onchain, in court: What happened in crypto legal news this week",
-      "url": "https://cointelegraph.com/news/on-chain-in-court-crypto-legal-news4?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Sat, 01 Aug 2026 21:19:00 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -480,6 +464,22 @@
       "source": "Krebs on Security",
       "published": "Mon, 13 Jul 2026 15:03:28 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "As Earnings Season Peaks, Jim Cramer Highlights These 10 Rules for Investing",
+      "url": "https://beincrypto.com/jim-cramer-10-rules-investing/",
+      "source": "BeInCrypto",
+      "published": "Mon, 03 Aug 2026 02:25:42 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Suspected 4th Coldcard attack wave sweeps 389 Bitcoin: Galaxy\u2019s Thorn",
+      "url": "https://cointelegraph.com/news/suspected-4th-coldcard-attack-wave-sweeps-389-bitcoin-galaxys-thorn?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Mon, 03 Aug 2026 01:57:40 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     }
   ]

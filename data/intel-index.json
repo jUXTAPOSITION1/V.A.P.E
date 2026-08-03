@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T02:31:21Z",
+  "generated": "2026-08-03T02:46:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 518,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 142,
     "investigations": 676,
-    "news": 53,
+    "news": 54,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10201,6 +10201,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.md",
+      "title": "FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T02:46:05Z",
+      "published_et": "August 2, 2026 \u00b7 10:46 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The takedown of NetNut and the Popa botnet comes just weeks after security researchers exposed how the publicly traded Israeli company Alarum Technologies hijacked smart TVs and streaming boxes to fuel cybercrime.",
+      "image": "assets/news-images/fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.md"
+    },
     {
       "file": "news-2026-08-02-wall-street-s-multi-million-dollar-mail-bill-faces-extinctio.md",
       "title": "Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules",
