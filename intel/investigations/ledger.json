@@ -1860,6 +1860,25 @@
     "symbol": "V4",
     "times_investigated": 1
   },
+  "1:0x420658a1d8b8f5c36ddaf1bb828f347ba9011969": {
+    "address": "0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969",
+    "chain": "1",
+    "creator_address": "0xae40070d3553c7eda154dc406bdb936b54494d83",
+    "first_investigated": "2026-08-03T04:49:34Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-044934-0x420658A1.md",
+        "score": 75,
+        "ts": "2026-08-03T04:49:34Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T04:49:34Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "DEGEN",
+    "times_investigated": 1
+  },
   "1:0x44444e3196faef2fbe917622202cdd2dcccb021b": {
     "address": "0x44444e3196faeF2FBe917622202CdD2dcCcB021B",
     "chain": "1",
