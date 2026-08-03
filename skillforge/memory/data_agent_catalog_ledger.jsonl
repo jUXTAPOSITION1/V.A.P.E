@@ -514,3 +514,4 @@
 {"ts": "2026-08-02T23:46:25.851545Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 54}
 {"ts": "2026-08-03T00:31:30.460472Z", "target": "proxy", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-03T01:01:18.479761Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
+{"ts": "2026-08-03T01:31:23.836101Z", "target": "bitfinex", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 55}
