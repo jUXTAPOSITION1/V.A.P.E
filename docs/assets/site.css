@@ -506,14 +506,22 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     flex-wrap: wrap; z-index: 2; pointer-events: none;
 }
 .city-toolbar > * { pointer-events: auto; }
-.city-layers { display: flex; gap: 0.3rem; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+/* touch-action: none on every real touch target inside the toolbar --
+   not just the canvas underneath. Two fingers twisting to rotate are
+   centered near the top of the stage more often than not, so one of them
+   landing on a button group's own padding/background (not just its
+   canvas.city-layer-btn) was enough for the browser to treat that touch
+   point as eligible for its own native pinch-zoom, fighting the app's
+   own gesture and reading as random scale jumps or the whole page's
+   rendered bitmap re-rasterizing into a visibly gridded mess mid-gesture. */
+.city-layers { display: flex; gap: 0.3rem; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 3px; touch-action: none; }
 .city-layer-btn {
     font-size: 10px; letter-spacing: 0.02em; color: #a1a1aa; background: transparent; border: none;
     padding: 4px 9px; border-radius: 999px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
 }
 .city-layer-btn:hover { color: #e4e4e7; }
 .city-layer-btn.is-active { background: rgba(255,255,255,0.12); color: #f4f4f5; }
-.city-zoom { display: flex; gap: 2px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; }
+.city-zoom { display: flex; gap: 2px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; touch-action: none; }
 .city-zoom-btn {
     width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
     color: #a1a1aa; background: transparent; border: none; border-radius: 999px; cursor: pointer; font-size: 11px;
@@ -524,7 +532,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
    (desktop click-hold-drag; mobile two-finger twist is wired on the canvas
    itself in cityscape.js, not this dial -- the dial is the single-pointer
    affordance for a mouse). */
-.city-compass-group { display: flex; align-items: center; gap: 4px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; }
+.city-compass-group { display: flex; align-items: center; gap: 4px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; touch-action: none; }
 .city-compass {
     width: 26px; height: 26px; border-radius: 999px; position: relative;
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
@@ -540,7 +548,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .city-hint { position: absolute; bottom: 0.6rem; left: 0.6rem; z-index: 2; font-size: 9.5px; color: #71717a; background: rgba(9,9,11,0.5); border-radius: 999px; padding: 3px 9px; pointer-events: none; }
 .city-hint i { margin-right: 0.3rem; }
 
-.city-stat-strip { position: absolute; bottom: 0.6rem; right: 0.6rem; z-index: 2; display: flex; gap: 0.5rem; font-size: 10px; color: #d4d4d8; }
+.city-stat-strip { position: absolute; bottom: 0.6rem; right: 0.6rem; z-index: 2; display: flex; gap: 0.5rem; font-size: 10px; color: #d4d4d8; touch-action: none; }
 .city-stat-strip .stat { background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; }
 .city-stat-strip .stat b { font-family: var(--font-mono); color: #f4f4f5; margin-right: 0.3rem; }
 
@@ -548,6 +556,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     position: absolute; z-index: 3; width: 254px; max-width: calc(100% - 1.2rem);
     background: rgba(19,19,22,0.96); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-md);
     padding: 0.7rem 0.8rem; box-shadow: 0 12px 32px rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+    touch-action: none;
 }
 .city-detail-title { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; color: #f4f4f5; font-size: 12.5px; margin-bottom: 0.15rem; }
 .city-detail-title .dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
