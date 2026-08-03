@@ -1169,3 +1169,5 @@
 | 2026-08-03 | auto | 0x79bbF4508B1391af3A0F4B30bb5FC4aa9ab0E07C (Anon) | deep_investigation | REJECT (25/100) | Owner not renounced (0x8789f22a0456feddaf9074ff4cee55e4122095f0) — can still act | +7d |
 
 | 2026-08-03 | auto | 0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969 (DEGEN) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 73% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-03 | auto | 0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35 (DEGEN) | deep_investigation | CAUTION (57/100) | Top 10 non-LP/burn holders control 54% of supply — meaningful concentration | +7d |

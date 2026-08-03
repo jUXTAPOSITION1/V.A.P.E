@@ -524,3 +524,4 @@
 {"ts": "2026-08-03T05:04:27.224369Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-03T05:34:22.136256Z", "target": "optimism", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 55}
 {"ts": "2026-08-03T06:04:20.689788Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 55}
+{"ts": "2026-08-03T06:34:30.507113Z", "target": "morpho-blue", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}

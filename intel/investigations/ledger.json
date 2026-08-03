@@ -3813,6 +3813,25 @@
     "symbol": "DEL",
     "times_investigated": 1
   },
+  "1:0xf1c11bd495a1c50532a972168fca33fc1c11ef35": {
+    "address": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35",
+    "chain": "1",
+    "creator_address": "0x9b309d574f9c1cf379127e371e15e2ab0f1cbbee",
+    "first_investigated": "2026-08-03T06:34:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-063422-0xf1C11bd4.md",
+        "score": 57,
+        "ts": "2026-08-03T06:34:22Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T06:34:22Z",
+    "last_score": 57,
+    "last_verdict": "CAUTION",
+    "symbol": "DEGEN",
+    "times_investigated": 1
+  },
   "1:0xf1d3fbe00af8185add548e84d77075bc98f18ce0": {
     "address": "0xf1D3Fbe00aF8185add548E84d77075bc98f18cE0",
     "chain": "1",

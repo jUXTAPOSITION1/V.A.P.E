@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T06:25:23Z",
+  "generated": "2026-08-03T06:34:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 522,
@@ -15,8 +15,8 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 684,
-    "news": 54,
+    "investigations": 685,
+    "news": 55,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-044934-0x420658A1.md",
+      "file": "investigation-20260803-063422-0xf1C11bd4.md",
       "title": "Investigation \u2014 DEGEN",
       "symbol": "DEGEN",
-      "name": "Degen Arena",
-      "date": "2026-08-03T04:49:34Z",
-      "target": "0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969",
+      "name": "Degen",
+      "date": "2026-08-03T06:34:22Z",
+      "target": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35",
       "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,815. Positive evidence: Ownership renounced; 5034 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 417+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-044934-0x420658A1.md"
+      "score": "57",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Violent 24h move +2422% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-063422-0xf1C11bd4.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-063422-0xf1C11bd4.md",
+      "title": "Investigation \u2014 DEGEN",
+      "symbol": "DEGEN",
+      "name": "Degen",
+      "date": "2026-08-03T06:34:22Z",
+      "target": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Violent 24h move +2422% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-063422-0xf1C11bd4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-044934-0x420658A1.md",
@@ -10313,6 +10327,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md",
+      "title": "La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T06:25:19Z",
+      "published_et": "August 3, 2026 \u00b7 2:25 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The embattled real estate firm, plagued by three reverse stock splits and mounting liabilities, classifies its entire digital asset treasury as restricted.",
+      "image": "assets/news-images/la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md"
+    },
     {
       "file": "news-2026-08-03-fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.md",
       "title": "FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet",
