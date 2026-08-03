@@ -138,7 +138,7 @@ def main() -> int:
         for e in applied:
             print(f"  {e['file']}: {e['package']} {e['old']} -> {e['latest']}")
     if needs_review:
-        print("Needs manual review (major bump or pattern mismatch):")
+        print("Needs manual review:")
         for e in needs_review:
             print(f"  {e['file']}: {e['package']} {e.get('old', '?')} -> {e.get('latest', '?')} ({e['reason']})")
     if not applied and not needs_review:

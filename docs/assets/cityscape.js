@@ -818,15 +818,19 @@ const CityScape = {
             ${safeHref(b.link) ? `<a class="city-detail-link" href="${escapeHtml(safeHref(b.link))}">Open <i class="fa-solid fa-arrow-right text-[9px]"></i></a>` : ''}
         `;
         card.style.display = 'block';
-        // Position near the building, clamped inside the stage.
+        // Position near the building, clamped inside the stage. Measured
+        // off the card's own actual rendered size (its content -- stat
+        // rows, description, growth bar -- varies per building) rather
+        // than a fixed guess, so a card near the edge never clips.
+        const cardWidth = card.offsetWidth, cardHeight = card.offsetHeight;
         const box = inst.hitboxes.find(h => h.building.id === b.id);
         const w = inst.el.clientWidth, h = inst.el.clientHeight;
         if (box) {
             const originX = w / 2 + inst.offsetX, originY = h * 0.32 + inst.offsetY;
             let left = originX + box.x * inst.scale - 100;
             let top = originY + box.y * inst.scale - 70;
-            left = Math.max(6, Math.min(w - 226, left));
-            top = Math.max(6, Math.min(h - 140, top));
+            left = Math.max(6, Math.min(w - cardWidth - 6, left));
+            top = Math.max(6, Math.min(h - cardHeight - 6, top));
             card.style.left = `${left}px`;
             card.style.top = `${top}px`;
         }
