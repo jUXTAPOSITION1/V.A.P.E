@@ -54,6 +54,24 @@ def _fresh_state(tmp_path):
     return state
 
 
+def test_no_offering_this_module_hires_exceeds_the_price_ceiling():
+    """MAX_OFFERING_PRICE_USD is the documented contract for what this
+    module will ever hire -- every real entry in OFFERING_PARAMS and
+    CATALOG_OFFERINGS must actually clear it, not just the ones priced
+    individually in SCAN_TIER_PRICE_USD."""
+    for name in data_agent.OFFERING_PARAMS:
+        assert data_agent._price_for(name) <= data_agent.MAX_OFFERING_PRICE_USD
+    for name, _prefix, _kind in data_agent.CATALOG_OFFERINGS:
+        assert data_agent._price_for(name) <= data_agent.MAX_OFFERING_PRICE_USD
+
+
+def test_prefix_for_matches_scan_tier_membership():
+    assert data_agent._prefix_for("dossier_check") == "scan"
+    assert data_agent._prefix_for("rug_pull_alert") == "scan"
+    assert data_agent._prefix_for("market_intel") == "scan"
+    assert data_agent._prefix_for("token_intel") == "data"
+
+
 def test_non_base_chain_is_skipped_with_no_network_attempt(monkeypatch):
     monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", "0x" + "11" * 32)
     result = data_agent.run_for_investigation("0x" + "aa" * 20, chain="1")
@@ -124,12 +142,40 @@ def test_run_for_investigation_hires_exactly_one(monkeypatch, tmp_path):
     n = len(result["hired"])
     assert n == data_agent.HIRES_PER_RUN == 1
     assert all(h["paid"] for h in result["hired"])
-    assert result["cost_usd"] == round(n * 0.01, 2)
+    # OFFERING_PARAMS now spans several real prices (see SCAN_TIER_PRICE_USD)
+    # -- whichever offering actually got picked, not a flat $0.01.
+    expected = round(sum(data_agent._price_for(h["offering"]) for h in result["hired"]), 2)
+    assert result["cost_usd"] == expected
     assert data_agent._CDP_STATE.count_today() == n
     ledger_path = data_agent._CDP_STATE.ledger_path
     assert __import__("os").path.exists(ledger_path)
     logged = json.loads(open(ledger_path).read().strip().splitlines()[-1])
     assert logged["paid"] == n
+
+
+def test_run_for_investigation_routes_scan_tier_pick_to_scan_prefix(monkeypatch, tmp_path):
+    """Real bug this pins: OFFERING_PARAMS used to be all $0.01 DL data-tier
+    offerings, so _run()/_run_growth() never passed hire() a prefix and it
+    defaulted to "data". Once rug_pull_alert/dossier_check/market_intel (the
+    scan tier, up to MAX_OFFERING_PRICE_USD) were added, a pick landing on
+    one of those without the fix would hit the wrong route (/data/... instead
+    of /scan/...) and silently fail to ever actually pay for it."""
+    monkeypatch.setattr(data_agent, "_CDP_STATE", _fresh_state(tmp_path))
+    monkeypatch.setattr(data_agent.random, "sample", lambda seq, k: ["dossier_check"])
+
+    seen = {}
+
+    def responder(url, params):
+        seen["url"] = url
+        offering = url.rsplit("/", 1)[-1]
+        return _FakeResponse(200, {"offering": offering, "status": "ok", "deliverable": {"ok": True}})
+
+    monkeypatch.setattr(data_agent, "_build_session", lambda tag: _FakeSession(responder))
+
+    result = data_agent.run_for_investigation("0x" + "bb" * 20, chain="8453")
+    assert "/scan/dossier_check" in seen["url"]
+    assert result["hired"][0]["params"] == {"address": "0x" + "bb" * 20, "chain": "8453"}
+    assert result["cost_usd"] == 0.10
 
 
 def test_hire_reports_unpaid_on_non_200():

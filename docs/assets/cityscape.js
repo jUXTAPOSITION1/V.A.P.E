@@ -283,8 +283,22 @@ const WORLD_BOUNDS = { minX: -75, maxX: 115, minY: -75, maxY: 100 };
 // an LRU cap on how many rotation stops stay resident at once. Both exist
 // purely to keep canvas memory bounded on mobile -- neither changes what
 // the terrain looks like at rest, only how much of it stays cached.
-const TERRAIN_CACHE_MAX_PIXELS = 6_000_000;
-const TERRAIN_CACHE_MAX_STOPS = 2;
+//
+// Lowered from 6,000,000px/2 stops (halving the per-canvas budget and
+// dropping to a single resident stop -- ~4x less peak terrain-cache memory)
+// after real phone reports of a bright checkerboard pattern flooding
+// downtown, worst right after a refresh or mid-rotation -- exactly the two
+// moments this cache allocates its most memory at once (a cold full build,
+// or building a second rotation's canvas before the first is evicted). That
+// pattern is the classic signature of a lost/evicted 2D canvas context on
+// memory-constrained mobile GPUs (uninitialized texture memory), not
+// anything this module's own draw calls produce -- never reproduced in this
+// repo's own (memory-unconstrained) headless testing, so this is a real
+// memory-pressure reduction, not a confirmed fix; still a soft, never-
+// crisp-at-that-distance backdrop layer either way, so the quality trade is
+// cheap.
+const TERRAIN_CACHE_MAX_PIXELS = 3_000_000;
+const TERRAIN_CACHE_MAX_STOPS = 1;
 const VACANT_MARGIN = 5; // tiles of guaranteed "room to grow" ring around downtown
 const TERRAIN_SEED = 402019;
 // A handful of fixed "park" tiles just outside downtown, in the vacant
