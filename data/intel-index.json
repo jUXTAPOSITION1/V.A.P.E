@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T02:54:45Z",
+  "generated": "2026-08-03T03:02:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 519,
+    "reports": 520,
     "reports_by_type": {
       "bounty": 131,
-      "security": 95,
+      "security": 96,
       "sentiment": 54,
       "base": 103,
       "macro": 27,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 676,
+    "investigations": 677,
     "news": 54,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-011631-0x707266E2.md",
+      "file": "investigation-20260803-030250-0xF6345b34.md",
       "title": "Investigation \u2014 Pizza",
       "symbol": "Pizza",
       "name": "Pizza",
-      "date": "2026-08-03T01:16:31Z",
-      "target": "0x707266E2B21AD1921bdE5A8c5F4E1E034aFA7777",
+      "date": "2026-08-03T03:02:50Z",
+      "target": "0xF6345b34C132e9844992564F5c0Bd6AbC17A0085",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 9 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,746 (rug/illiquid); [-10] Low liquidity $4,746. Positive evidence: Ownership renounced; 8937 holders \u2014 reasonably distributed; 100% of liqui",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-011631-0x707266E2.md"
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-8] Top 9 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Low liquidity $12,518. Positive evidence: 2881 holders \u2014 reasonably distrib",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-030250-0xF6345b34.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-030250-0xF6345b34.md",
+      "title": "Investigation \u2014 Pizza",
+      "symbol": "Pizza",
+      "name": "Pizza",
+      "date": "2026-08-03T03:02:50Z",
+      "target": "0xF6345b34C132e9844992564F5c0Bd6AbC17A0085",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "57",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-8] Top 9 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Low liquidity $12,518. Positive evidence: 2881 holders \u2014 reasonably distrib",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-030250-0xF6345b34.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-011631-0x707266E2.md",
@@ -9339,6 +9353,17 @@
       "bytes": 16026
     },
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T02:00Z",
+      "threat": null,
+      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
+      "bytes": 8517
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260802_230226.md",
@@ -9975,17 +10000,6 @@
       "summary": "Date: 2026-07-31 11:22 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-11.md",
       "bytes": 3782
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_104047.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T10:40:47Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_104047.md",
-      "bytes": 16391
     }
   ],
   "broadcasts": [

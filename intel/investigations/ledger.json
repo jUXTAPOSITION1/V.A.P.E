@@ -7095,6 +7095,25 @@
     "symbol": "EGL1",
     "times_investigated": 1
   },
+  "56:0xf6345b34c132e9844992564f5c0bd6abc17a0085": {
+    "address": "0xF6345b34C132e9844992564F5c0Bd6AbC17A0085",
+    "chain": "56",
+    "creator_address": "0x8b5a7e57da4b551886c8a0e00b28e78b5dee74bf",
+    "first_investigated": "2026-08-03T03:02:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-030250-0xF6345b34.md",
+        "score": 57,
+        "ts": "2026-08-03T03:02:50Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T03:02:50Z",
+    "last_score": 57,
+    "last_verdict": "CAUTION",
+    "symbol": "Pizza",
+    "times_investigated": 1
+  },
   "56:0xf64859a8a25175ec8a35c4366c44eb2722fe154d": {
     "address": "0xf64859A8A25175Ec8a35c4366C44EB2722fE154D",
     "chain": "56",
