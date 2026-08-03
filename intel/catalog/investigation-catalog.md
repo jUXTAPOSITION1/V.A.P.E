@@ -1213,3 +1213,5 @@
 | 2026-08-03 | auto | 0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4 (pfUSDC-54) | deep_investigation | REJECT (33/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-03 | auto | 0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB (FWA) | deep_investigation | CAUTION (70/100) | Holder count unavailable — cannot assess distribution | +7d |
+
+| 2026-08-03 | auto | 0x80dc112e8620923453845607C6256677Ba3a4444 (SAFU) | deep_investigation | REJECT (32/100) | Low holder count (70) | +7d |

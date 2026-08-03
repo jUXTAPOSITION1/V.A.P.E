@@ -149,3 +149,4 @@
 {"ts": "2026-08-03T20:14:55.694519Z", "address": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "chain": "8453", "symbol": "ELSA", "name": "ELSA", "source": "base", "offering": "token_intel"}
 {"ts": "2026-08-03T21:44:52.833050Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "rug_pull_alert"}
 {"ts": "2026-08-03T22:30:08.151170Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "exploit_check"}
+{"ts": "2026-08-03T22:46:22.157942Z", "address": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35", "chain": "1", "symbol": "DEGEN", "name": "DEGEN", "source": "evm", "offering": "dossier_check"}

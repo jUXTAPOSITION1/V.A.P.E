@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T22:30:08Z",
+  "generated": "2026-08-03T22:46:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 146,
-    "investigations": 706,
+    "investigations": 707,
     "news": 58,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-222959-0x1F7B4051.md",
-      "title": "Investigation \u2014 FWA",
-      "symbol": "FWA",
-      "name": "Fake World Ass",
-      "date": "2026-08-03T22:29:59Z",
-      "target": "0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory templ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-222959-0x1F7B4051.md"
+      "file": "investigation-20260803-224605-0x80dc112e.md",
+      "title": "Investigation \u2014 SAFU",
+      "symbol": "SAFU",
+      "name": "SAFU",
+      "date": "2026-08-03T22:46:05Z",
+      "target": "0x80dc112e8620923453845607C6256677Ba3a4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (70); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,569 (rug/illiquid); [-10] Low liquidity $4,569; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-224605-0x80dc112e.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-224605-0x80dc112e.md",
+      "title": "Investigation \u2014 SAFU",
+      "symbol": "SAFU",
+      "name": "SAFU",
+      "date": "2026-08-03T22:46:05Z",
+      "target": "0x80dc112e8620923453845607C6256677Ba3a4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (70); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,569 (rug/illiquid); [-10] Low liquidity $4,569; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-224605-0x80dc112e.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-222959-0x1F7B4051.md",
