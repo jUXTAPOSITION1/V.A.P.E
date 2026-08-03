@@ -138,3 +138,4 @@
 {"ts": "2026-08-03T10:10:05.978027Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-08-03T10:40:18.371762Z", "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "chain": "8453", "symbol": "cbBTC", "name": "cbBTC", "source": "base", "offering": "exploit_check"}
 {"ts": "2026-08-03T11:10:15.332545Z", "address": "0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f", "chain": "1", "symbol": "ANON", "name": "ANON", "source": "evm", "offering": "exploit_check"}
+{"ts": "2026-08-03T11:40:14.168047Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_safety_check"}
