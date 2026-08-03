@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-03T19:38:13Z",
+  "generated": "2026-08-03T19:39:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 412,
+    "reports": 413,
     "reports_by_type": {
+      "security": 72,
       "bounty": 105,
       "base": 83,
       "macro": 22,
-      "security": 71,
       "bug": 5,
       "mainnet": 5,
       "sentiment": 43,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-184449-0x82fe329f.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_185131.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T18:51:31Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T19:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_185131.md",
-      "bytes": 16294
+      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. Documented events include LOOPSDAO ($0.696M, price manipulation, BSC), MOKE ($0.907M, price manipulation, BSC), COLDCARD ($115.0M, non-random private key generation, Bitcoin), Set Protocol ($0.01M, malicious SetToken & manager contract, Ethere",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-19.md",
+      "bytes": 7672
     }
   },
   "investigations": [
@@ -9734,6 +9734,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T19:00Z",
+      "threat": null,
+      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. Documented events include LOOPSDAO ($0.696M, price manipulation, BSC), MOKE ($0.907M, price manipulation, BSC), COLDCARD ($115.0M, non-random private key generation, Bitcoin), Set Protocol ($0.01M, malicious SetToken & manager contract, Ethere",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-19.md",
+      "bytes": 7672
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260803_185131.md",
@@ -10381,17 +10392,6 @@
       "summary": "The feed records 7 incidents in the last 7 days, none exceeding $50M in the prior 14 days. Documented events include a $0.01M malicious SetToken & Manager Contract on Ethereum (2026-07-30), an $8.2M incident on BSC (2026-07-28), a $0.578M price manipulation on BSC (2026-07-28), a $0.73M access-control exploit on WEMIX3.0 (2026-07-26), a $",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-02.md",
       "bytes": 6921
-    },
-    {
-      "kind": "intel",
-      "type": "mainnet",
-      "file": "mainnet-patch-check-2026-08-01-02.md",
-      "title": "Mainnet Patch Status Check \u2014 Virtuals Protocol AgentNftV2",
-      "date": "2026-08-01T02:00Z",
-      "threat": null,
-      "summary": "Date: 2026-08-01 02:12 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live on-chain verified source fetch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-08-01-02.md",
-      "bytes": 2981
     }
   ],
   "broadcasts": [
