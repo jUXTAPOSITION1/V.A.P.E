@@ -6,19 +6,19 @@ already-committed operating history, by
 Three sources, each with its own honesty story — see the module docstring for
 the full rationale:
 
-- **investigation** (299 examples) —
+- **investigation** (578 examples) —
   `intel/investigations/investigation-*.md`. INPUT is the real recon VAPE
   gathered (DexScreener, GoPlus, on-chain presence, contract verification,
   hack-feed correlation); OUTPUT is the verdict/score/rationale
   `agents/investigate.py::score()` actually produced — a DETERMINISTIC,
   rule-based function, not an LLM. The strongest signal in this corpus.
-- **sweep** (249 examples) —
+- **sweep** (245 examples) —
   `intel/reports/{security,base,virtuals,sentiment,macro}-*.md`. Same
   discipline across every domain VAPE covers. OUTPUT is ONLY each report's
   deterministic verdict heading + its immediate rule-based explanation — the
   LLM-written narrative sections further down each report are deliberately
   excluded from training.
-- **lesson** (44 examples) —
+- **lesson** (100 examples) —
   `skillforge/memory/lessons.jsonl`, VAPE's own logged operational history
   (self-improve builds, PR review outcomes, expert-assessment disagreements).
   Honesty note: this source is a MIX of deterministic outcomes and prior LLM
@@ -35,8 +35,8 @@ the full rationale:
   script's docstring for exactly which external sources qualified (verified
   real structure) and which didn't (SWC Registry, Sherlock — deferred, not
   silently dropped).
-- **pr_history** (27 examples, outcomes:
-  {'merged': 15, 'closed_unmerged': 12}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
+- **pr_history** (46 examples, outcomes:
+  {'merged': 25, 'closed_unmerged': 21}) — `data/finetune/pr_history_corpus.jsonl`, VAPE's own
   bot-authored PR history (`agents/self_improve.py`,
   `agents/skillforge_build.py`). INPUT is the real task/gap VAPE identified;
   OUTPUT is the actual code it generated. Honesty note: most of these PRs are
@@ -52,9 +52,9 @@ another model's guesses — with the lesson source's mixed provenance called
 out plainly rather than hidden.
 
 ## Stats
-- Total examples: **742** — {'investigation': 299, 'sweep': 249, 'lesson': 44, 'external': 123, 'pr_history': 27}
-- Investigation verdict mix: {'CAUTION': 79, 'PROCEED': 69, 'REJECT': 151}
-- Split (deterministic, hashed per-example key): **668 train / 74 val**
+- Total examples: **1092** — {'investigation': 578, 'sweep': 245, 'lesson': 100, 'external': 123, 'pr_history': 46}
+- Investigation verdict mix: {'CAUTION': 164, 'PROCEED': 89, 'REJECT': 325}
+- Split (deterministic, hashed per-example key): **987 train / 105 val**
 
 ## Intended use
 Fine-tune a small-to-mid open-weight instruct model (LoRA/QLoRA — verify the
