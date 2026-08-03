@@ -1,21 +1,21 @@
 {
-  "generated": "2026-08-03T13:42:05Z",
+  "generated": "2026-08-03T13:42:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 406,
+    "reports": 407,
     "reports_by_type": {
+      "bounty": 103,
       "bug": 5,
       "base": 82,
       "mainnet": 5,
       "sentiment": 43,
-      "bounty": 102,
       "security": 70,
       "macro": 21,
       "virtuals": 74,
       "skillforge": 4
     },
     "broadcasts": 144,
-    "investigations": 698,
+    "investigations": 697,
     "news": 56,
     "tools": 16,
     "tools_verified": 16,
@@ -24,45 +24,31 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-134202-0xE0Cd4cAc.md",
-      "title": "Investigation \u2014 ICNT",
-      "symbol": "ICNT",
-      "name": "Impossible Cloud Network Token",
-      "date": "2026-08-03T13:42:02Z",
-      "target": "0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260803-125702-0xc3bcd370.md",
+      "title": "Investigation \u2014 SAFU",
+      "symbol": "SAFU",
+      "name": "Safu Fund",
+      "date": "2026-08-03T12:57:02Z",
+      "target": "0xc3bcd37061bde710293D0272Bb2924D308D5314D",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 76387 holders \u2014 reasonably distributed; Trading 397+ days without a known incident in this scan; C",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-134202-0xE0Cd4cAc.md"
+      "score": "5",
+      "summary": "Risk factors: [-15] Transfers can be paused by owner; [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $3,697 (rug/illiquid); [-10] Low liquidity $3,697; [-10] No known third-party au",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-125702-0xc3bcd370.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "bug",
-      "file": "bug-bounty-intel-2026-08-03-13.md",
-      "title": "Bug Bounty Intelligence Report \u2014 Base & Virtuals Protocol",
-      "date": "2026-08-03T13:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_134137.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T13:41:37Z",
       "threat": null,
-      "summary": "Real check: searched for a live Virtuals Protocol Immunefi listing this cycle. No matching immunefi.com listing found in this cycle's search results.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/bug-bounty-intel-2026-08-03-13.md",
-      "bytes": 3013
+      "summary": "Base mover: aeon / WETH +197% 24h (liq $1019647.6312) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_134137.md",
+      "bytes": 16983
     }
   },
   "investigations": [
-    {
-      "source": "report",
-      "file": "investigation-20260803-134202-0xE0Cd4cAc.md",
-      "title": "Investigation \u2014 ICNT",
-      "symbol": "ICNT",
-      "name": "Impossible Cloud Network Token",
-      "date": "2026-08-03T13:42:02Z",
-      "target": "0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "28",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-20] Hidden owner; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 76387 holders \u2014 reasonably distributed; Trading 397+ days without a known incident in this scan; C",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-134202-0xE0Cd4cAc.md"
-    },
     {
       "source": "report",
       "file": "investigation-20260803-125702-0xc3bcd370.md",
@@ -9636,6 +9622,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_134137.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T13:41:37Z",
+      "threat": null,
+      "summary": "Base mover: aeon / WETH +197% 24h (liq $1019647.6312) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_134137.md",
+      "bytes": 16983
+    },
+    {
       "kind": "intel",
       "type": "bug",
       "file": "bug-bounty-intel-2026-08-03-13.md",
@@ -10283,17 +10280,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_201025.md",
       "bytes": 16943
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-07-31-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-07-31T19:00Z",
-      "threat": null,
-      "summary": "The current threat level is assessed as HIGH, driven by a significant volume of nine security incidents recorded across the broader DeFi ecosystem in the last seven days. While no ultra-high-severity exploits (exceeding $50M) occurred in the last two weeks, the sheer frequency of attacks and the diversity of vectors point to an active and",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-07-31-19.md",
-      "bytes": 5782
     }
   ],
   "broadcasts": [
