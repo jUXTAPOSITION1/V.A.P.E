@@ -79,7 +79,12 @@
     --city-terrain-ocean: #12283f;
     --city-terrain-mountain: #4a4038;
     --city-terrain-farmland: #5c5a34;
-    --city-terrain-vacant: #232329;
+    /* Neutralized from #232329 -- carried the same unwanted blue undertone
+       real phone screenshots flagged on the road/ground colors in
+       cityscape.js's _drawRoads()/_drawDowntownGround(); this is also the
+       mid-rotation "spinning" fallback fill, so the tint showed up moving
+       through the city, not just sitting still on distant vacant land. */
+    --city-terrain-vacant: #232323;
 }
 
 /* Site-wide base scale — the previous 16px root made every Tailwind rem-based

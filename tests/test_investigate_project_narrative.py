@@ -28,17 +28,22 @@ def _synth(narrative="Real grounded narrative text."):
 
 
 def _call(narrative="Real grounded narrative text.", search_return=_SEARCH_RESULTS,
-          dex=None, cg=None):
+          dex=None, cg=None, scrape_excerpt=None):
     dex = dex if dex is not None else {"websites": [{"url": "https://arena.social"}],
                                         "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
+    # _scrape_excerpt mocked to None (an honest "couldn't crawl" miss) by
+    # default -- it hits skillforge.research.scrape()'s real provider chain,
+    # which must never fire for real in a hermetic test. Override via
+    # scrape_excerpt=<callable> to exercise the real-crawl path.
     with mock.patch("skillforge.research.search", return_value=search_return) as m_search, \
-         mock.patch("agents.research_engine.synthesize", return_value=_synth(narrative)) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth(narrative)) as m_llm, \
+         mock.patch.object(inv, "_scrape_excerpt", side_effect=scrape_excerpt or (lambda *a, **k: None)) as m_scrape:
         result = inv._project_narrative("ARENA", "ArenaToken", dex, cg, "0x" + "aa" * 20, "43114")
-    return result, m_search, m_llm
+    return result, m_search, m_llm, m_scrape
 
 
 def test_returns_grounded_narrative_with_sources():
-    result, _m_search, m_llm = _call()
+    result, _m_search, m_llm, _m_scrape = _call()
     assert result is not None
     assert result["text"] == "Real grounded narrative text."
     assert result["sources"] == ["https://example.com/arena"]
@@ -51,7 +56,8 @@ def test_prompt_includes_declared_socials_and_coingecko_description():
     dex = {"websites": [{"url": "https://arena.social"}],
            "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
     with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
-         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm:
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm, \
+         mock.patch.object(inv, "_scrape_excerpt", return_value=None):
         inv._project_narrative("ARENA", "ArenaToken", dex, cg, "0x" + "aa" * 20, "43114")
     args, kwargs = m_llm.call_args
     result_arg = args[0]
@@ -60,6 +66,41 @@ def test_prompt_includes_declared_socials_and_coingecko_description():
     assert "Declared homepage: https://arena.social" in grounding
     assert "twitter: https://x.com/TheArenaApp" in grounding
     assert "address-level identity" in kwargs["extra_instructions"].lower()
+
+
+def test_crawls_declared_links_and_includes_real_excerpts():
+    """Per explicit request: this function should directly crawl the
+    declared website/social URLs, not just search by project name. A
+    successful crawl's real excerpt must reach the LLM's own grounding
+    block, capped at 3 URLs (website first, then socials in order)."""
+    dex = {"websites": [{"url": "https://arena.social"}],
+           "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
+
+    def fake_scrape(url, max_len=500):
+        if url == "https://arena.social":
+            return "Welcome to The Arena — creator monetization for the next generation."
+        return None
+
+    with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm, \
+         mock.patch.object(inv, "_scrape_excerpt", side_effect=fake_scrape):
+        inv._project_narrative("ARENA", "ArenaToken", dex, None, "0x" + "aa" * 20, "43114")
+    args, _kwargs = m_llm.call_args
+    grounding = args[0]["raw_user_block"]
+    assert "Welcome to The Arena" in grounding
+    assert "Direct excerpt from declared website page" in grounding
+
+
+def test_crawl_failure_is_an_honest_miss_not_a_fabrication():
+    dex = {"websites": [{"url": "https://arena.social"}]}
+    with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm, \
+         mock.patch.object(inv, "_scrape_excerpt", return_value=None):
+        inv._project_narrative("ARENA", "ArenaToken", dex, None, "0x" + "aa" * 20, "43114")
+    args, _kwargs = m_llm.call_args
+    grounding = args[0]["raw_user_block"]
+    assert "none could be crawled" in grounding
+    assert "Direct excerpt" not in grounding
 
 
 def test_returns_none_when_no_project_name_available():
@@ -85,20 +126,20 @@ def test_falls_back_to_declared_data_when_search_yields_no_usable_results():
     right there in already-fetched dex data -- a thinner but real narrative
     was always possible from that alone. Only bail when there's truly
     nothing to synthesize from: no search hits AND no declared presence."""
-    result, _m_search, m_llm = _call(search_return={"raw": {"results": []}})
+    result, _m_search, m_llm, _m_scrape = _call(search_return={"raw": {"results": []}})
     assert result is not None
     assert result["text"] == "Real grounded narrative text."
     m_llm.assert_called_once()
 
 
 def test_returns_none_when_search_empty_and_no_declared_data_either():
-    result, _m_search, m_llm = _call(search_return={"raw": {"results": []}}, dex={})
+    result, _m_search, m_llm, _m_scrape = _call(search_return={"raw": {"results": []}}, dex={})
     assert result is None
     m_llm.assert_not_called()
 
 
 def test_returns_none_when_llm_unavailable():
-    result, _m_search, _m_llm = _call(narrative="_Synthesis unavailable this cycle (no LLM provider reachable)._")
+    result, _m_search, _m_llm, _m_scrape = _call(narrative="_Synthesis unavailable this cycle (no LLM provider reachable)._")
     assert result is None
 
 
@@ -106,7 +147,7 @@ def test_address_identity_unverified_when_no_coingecko_contract():
     """No coingecko_contract passed in -> the address-level check never ran,
     so address_identity_verified must be False and the evidence/prompt must
     say so (CodeRabbit, PR #282: identity-binding gap)."""
-    result, m_search, m_llm = _call(cg=None)
+    result, m_search, m_llm, _m_scrape = _call(cg=None)
     assert result["address_identity_verified"] is False
     args, kwargs = m_llm.call_args
     grounding = args[0]["raw_user_block"]
@@ -120,7 +161,7 @@ def test_address_identity_verified_when_coingecko_contract_present():
     independently confirmed the name/symbol -- address_identity_verified
     must be True and the evidence must say CONFIRMED, not NOT CONFIRMED."""
     cg = {"description": "The Arena is a SocialFi platform."}
-    result, _m_search, m_llm = _call(cg=cg)
+    result, _m_search, m_llm, _m_scrape = _call(cg=cg)
     assert result["address_identity_verified"] is True
     args, _kwargs = m_llm.call_args
     grounding = args[0]["raw_user_block"]

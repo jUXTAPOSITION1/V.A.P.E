@@ -1097,7 +1097,11 @@ const CityScape = {
             ctx.beginPath();
             ctx.moveTo(cx, cy - hh); ctx.lineTo(cx + hw, cy); ctx.lineTo(cx, cy + hh); ctx.lineTo(cx - hw, cy);
             ctx.closePath();
-            ctx.fillStyle = feature === 'park' ? '#213b28' : '#212126';
+            // Non-park ground neutralized to true gray (#212126 carried the
+            // same unwanted blue undertone as the road colors above --
+            // see _drawRoads()'s comment); park stays its own deliberate
+            // green tint.
+            ctx.fillStyle = feature === 'park' ? '#213b28' : '#212121';
             ctx.fill();
 
             if (feature === 'park') {
@@ -1197,9 +1201,17 @@ const CityScape = {
                 curbWidth = bedWidth + 3;
                 curbAlpha = 0.08 + norm * 0.4;
             }
-            strokePath(pts, curbWidth + 6, '#2b2b31'); // sidewalk -- a visible paved border, not bare ground, alongside every road
+            // Both grays below used to carry a deliberate blue undertone
+            // (#2b2b31/#20202a -- B channel 6-10 higher than R/G) as a mood
+            // choice; real phone screenshots showed it reading as an
+            // obvious, unwanted blue-gray cast on the road network (OLED
+            // panels reproduce that kind of subtle tint far more visibly
+            // than a desktop monitor). Neutralized to true R=G=B gray at
+            // the same brightness -- same visible "paved, not bare ground"
+            // road, no color cast on any display.
+            strokePath(pts, curbWidth + 6, '#2c2c2c'); // sidewalk -- a visible paved border, not bare ground, alongside every road
             strokePath(pts, curbWidth, `rgba(255,255,255,${curbAlpha.toFixed(2)})`); // curb / edge glow
-            strokePath(pts, bedWidth, '#20202a'); // asphalt bed -- this is the fix for "can't see the roads"
+            strokePath(pts, bedWidth, '#212121'); // asphalt bed -- this is the fix for "can't see the roads"
             ctx.setLineDash(isAvenue ? [5, 5] : [3, 6]);
             strokePath(pts, isAvenue ? 1.6 : 1, lit ? 'rgba(255,224,150,0.55)' : 'rgba(255,255,255,0.32)'); // centerline
             ctx.setLineDash([]);
