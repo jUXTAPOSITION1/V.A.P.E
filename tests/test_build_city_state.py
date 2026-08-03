@@ -78,6 +78,37 @@ def test_build_lane_checkpoints_uniform_tier_and_real_fields():
     assert checkpoints[0]["stat_primary"] == {"label": "last run", "value": "0 open alert(s)"}
     assert checkpoints[1]["status"] == "alert"
     assert checkpoints[1]["source_workflow"] == "intel-sweeps.yml"
+    # Each checkpoint links to its own real GitHub Actions workflow file --
+    # not a shared generic anchor every lane used to point at alike.
+    assert checkpoints[0]["link"] == "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
+    assert checkpoints[1]["link"] == "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
+
+
+def test_build_lane_checkpoints_no_workflow_falls_back_to_dashboard_anchor():
+    checkpoints = bcs.build_lane_checkpoints([{"id": "mystery", "last_run_conclusion": "success"}])
+    assert checkpoints[0]["link"] == "index.html#security-dashboard"
+    assert checkpoints[0]["stat_secondary"] == []
+
+
+def test_build_lane_checkpoints_secondary_stats_are_real_lane_fields():
+    lanes = [
+        {"id": "codeql", "last_run_conclusion": "success", "last_run_at": "2026-08-01T00:00:00Z",
+         "open_alerts": 100, "persisted_high_critical_30d": 0},
+        {"id": "redteam", "last_run_conclusion": "success",
+         "severity_breakdown": {"CRITICAL": 1, "HIGH": 5, "MEDIUM": 0, "LOW": 17, "INFO": 0}},
+        {"id": "intel-sweeps", "last_run_conclusion": "failure", "coverage_ratio": 0.23076923076923078},
+        {"id": "findings-seal", "last_run_conclusion": "success", "chain_intact": True},
+        {"id": "review-ledger", "last_run_conclusion": "success", "worsened_30d": 0, "improved_30d": 2},
+    ]
+    checkpoints = bcs.build_lane_checkpoints(lanes)
+    by_id = {c["id"]: {s["label"]: s["value"] for s in c["stat_secondary"]} for c in checkpoints}
+    assert by_id["lane-codeql"]["last run at"] == "2026-08-01T00:00:00Z"
+    assert by_id["lane-codeql"]["open alerts"] == 100
+    assert by_id["lane-codeql"]["persisted high/critical (30d)"] == 0
+    assert by_id["lane-redteam"]["critical/high findings"] == 6
+    assert by_id["lane-intel-sweeps"]["attack-pattern coverage"] == "23%"
+    assert by_id["lane-findings-seal"]["ledger chain intact"] == "yes"
+    assert by_id["lane-review-ledger"]["worsened / improved (30d)"] == "0 / 2"
 
 
 def test_build_lane_checkpoints_positions_from_ring_never_collide():

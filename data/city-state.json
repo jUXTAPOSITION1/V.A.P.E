@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T10:09:11Z",
+  "generated_at": "2026-08-03T14:53:24Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 8,
@@ -15,12 +15,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 689
+        "value": 699
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 368
+          "value": 376
         },
         {
           "label": "caution",
@@ -28,7 +28,7 @@
         },
         {
           "label": "proceed",
-          "value": 127
+          "value": 129
         }
       ],
       "link": "investigations.html",
@@ -75,7 +75,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "published",
-        "value": 55
+        "value": 56
       },
       "stat_secondary": [],
       "link": "news.html",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1555
+        "value": 1582
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -234,9 +234,23 @@
         "label": "last run",
         "value": "100 open alert(s)"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-03T09:54:01Z"
+        },
+        {
+          "label": "open alerts",
+          "value": 100
+        },
+        {
+          "label": "persisted high/critical (30d)",
+          "value": 0
+        }
+      ],
       "last_run_at": "2026-08-03T09:54:01Z",
       "source_workflow": "codeql.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
     {
       "id": "lane-security-lint",
@@ -254,9 +268,15 @@
         "label": "last run",
         "value": "success"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-02T22:33:12Z"
+        }
+      ],
       "last_run_at": "2026-08-02T22:33:12Z",
       "source_workflow": "security-lint.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/security-lint.yml"
     },
     {
       "id": "lane-vape-reviewer",
@@ -274,9 +294,15 @@
         "label": "last run",
         "value": "action_required"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-03T09:54:01Z"
+        }
+      ],
       "last_run_at": "2026-08-03T09:54:01Z",
       "source_workflow": "vape-reviewer.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
     {
       "id": "lane-dependency-audit",
@@ -294,9 +320,15 @@
         "label": "last run",
         "value": "success"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-03T10:03:52Z"
+        }
+      ],
       "last_run_at": "2026-08-03T10:03:52Z",
       "source_workflow": "dependency-audit.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/dependency-audit.yml"
     },
     {
       "id": "lane-scan-parity",
@@ -314,9 +346,15 @@
         "label": "last run",
         "value": "success"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-07-26T15:39:58Z"
+        }
+      ],
       "last_run_at": "2026-07-26T15:39:58Z",
       "source_workflow": "scan-parity.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/scan-parity.yml"
     },
     {
       "id": "lane-redteam",
@@ -334,9 +372,19 @@
         "label": "last run",
         "value": "23 finding(s), 30d"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-02T14:05:28Z"
+        },
+        {
+          "label": "critical/high findings",
+          "value": 6
+        }
+      ],
       "last_run_at": "2026-08-02T14:05:28Z",
       "source_workflow": "redteam.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
     {
       "id": "lane-redteam-deep",
@@ -354,9 +402,19 @@
         "label": "last run",
         "value": "23 finding(s), 30d"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-02T14:25:31Z"
+        },
+        {
+          "label": "critical/high findings",
+          "value": 6
+        }
+      ],
       "last_run_at": "2026-08-02T14:25:31Z",
       "source_workflow": "redteam-deep.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
     {
       "id": "lane-findings-seal",
@@ -374,9 +432,19 @@
         "label": "last run",
         "value": "intact"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-03T09:31:32Z"
+        },
+        {
+          "label": "ledger chain intact",
+          "value": "yes"
+        }
+      ],
       "last_run_at": "2026-08-03T09:31:32Z",
       "source_workflow": "findings-seal.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
     {
       "id": "lane-review-ledger",
@@ -394,9 +462,19 @@
         "label": "last run",
         "value": "0 worsened / 0 improved, 30d"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-01T10:44:41Z"
+        },
+        {
+          "label": "worsened / improved (30d)",
+          "value": "0 / 0"
+        }
+      ],
       "last_run_at": "2026-08-01T10:44:41Z",
       "source_workflow": "review-ledger.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/review-ledger.yml"
     },
     {
       "id": "lane-intel-sweeps",
@@ -414,9 +492,19 @@
         "label": "last run",
         "value": "HIGH"
       },
+      "stat_secondary": [
+        {
+          "label": "last run at",
+          "value": "2026-08-03T09:47:36Z"
+        },
+        {
+          "label": "attack-pattern coverage",
+          "value": "23%"
+        }
+      ],
       "last_run_at": "2026-08-03T09:47:36Z",
       "source_workflow": "intel-sweeps.yml",
-      "link": "index.html#security-dashboard"
+      "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
   ],
   "roads": [
@@ -494,6 +582,82 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x37b90664C3846107939E89d886051b208f866bF1",
+      "type": "investigation",
+      "timestamp": "2026-08-03T13:57:26Z",
+      "label": "Safumoon",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d",
+      "type": "investigation",
+      "timestamp": "2026-08-03T13:42:02Z",
+      "label": "Impossible Cloud Network Token",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xc3bcd37061bde710293D0272Bb2924D308D5314D",
+      "type": "investigation",
+      "timestamp": "2026-08-03T12:57:02Z",
+      "label": "Safu Fund",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x3F117c342B46376B2F2527A56B4b4506A96D4444",
+      "type": "investigation",
+      "timestamp": "2026-08-03T12:41:49Z",
+      "label": "SAFU",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI",
+      "type": "news",
+      "timestamp": "2026-08-03T12:24:41Z",
+      "label": "The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI"
+    },
+    {
+      "id": "investigation:0x69C47C7474B7b2d6153Effc4fa958183f4af7777",
+      "type": "investigation",
+      "timestamp": "2026-08-03T12:10:13Z",
+      "label": "SAFU",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x68902977263936B5bCF51568342e6E5a70c71b0F",
+      "type": "investigation",
+      "timestamp": "2026-08-03T11:55:11Z",
+      "label": "Catecoin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
+      "type": "investigation",
+      "timestamp": "2026-08-03T11:25:20Z",
+      "label": "SAFU",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x3f2B10F3327ea2337C524eEf23F4cd61bC364444",
+      "type": "investigation",
+      "timestamp": "2026-08-03T10:55:22Z",
+      "label": "Funds are SAFU",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x08b82Ed4fF66635866203904A7BcAbB64A4594e3",
+      "type": "investigation",
+      "timestamp": "2026-08-03T10:25:14Z",
+      "label": "Unistreet",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xF5f052D12ce3A522251Bb0ab42E356Fc9E2cbC47",
+      "type": "investigation",
+      "timestamp": "2026-08-03T10:09:58Z",
+      "label": "Unistreet",
+      "verdict": "REJECT"
+    },
     {
       "id": "investigation:0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D",
       "type": "investigation",
@@ -582,81 +746,6 @@
       "type": "investigation",
       "timestamp": "2026-08-03T03:18:16Z",
       "label": "aeon",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xF6345b34C132e9844992564F5c0Bd6AbC17A0085",
-      "type": "investigation",
-      "timestamp": "2026-08-03T03:02:50Z",
-      "label": "Pizza",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet",
-      "type": "news",
-      "timestamp": "2026-08-03T02:46:05Z",
-      "label": "FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet"
-    },
-    {
-      "id": "investigation:0x707266E2B21AD1921bdE5A8c5F4E1E034aFA7777",
-      "type": "investigation",
-      "timestamp": "2026-08-03T01:16:31Z",
-      "label": "Pizza",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18",
-      "type": "investigation",
-      "timestamp": "2026-08-03T00:16:27Z",
-      "label": "Pizza",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x149002DdB0bb0342cDB1418C82B201bF415e7777",
-      "type": "investigation",
-      "timestamp": "2026-08-02T23:31:26Z",
-      "label": "Pizza",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5",
-      "type": "investigation",
-      "timestamp": "2026-08-02T22:31:22Z",
-      "label": "ADI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8B1484d57abBE239bB280661377363b03c89CaEa",
-      "type": "investigation",
-      "timestamp": "2026-08-02T22:16:18Z",
-      "label": "ADI",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules",
-      "type": "news",
-      "timestamp": "2026-08-02T21:57:51Z",
-      "label": "Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules"
-    },
-    {
-      "id": "investigation:0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
-      "type": "investigation",
-      "timestamp": "2026-08-02T20:46:20Z",
-      "label": "Baby Asteroid",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xd7A7394294f4687966C60A1F68920f29688BF546",
-      "type": "investigation",
-      "timestamp": "2026-08-02T20:31:11Z",
-      "label": "Baby Asteroid",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
-      "type": "investigation",
-      "timestamp": "2026-08-02T20:15:50Z",
-      "label": "Baby Asteroid",
       "verdict": "CAUTION"
     }
   ]

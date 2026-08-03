@@ -465,40 +465,39 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 
 /* ── VAPE Ave (docs/assets/cityscape.js) ─────────────────────────────────
-   One renderer, two mount sizes: a small live diorama replacing the old
-   Automated Lanes ring inside #security-dashboard, and a huge full-bleed
-   instance on docs/city.html. Both read the same data/city-state.json +
-   the same live x402 feed -- "compact" changes scale and how much chrome
-   surrounds the canvas, never whether the data is real or how often it
-   refreshes. */
+   One renderer, two mount sizes: a smaller embedded instance inside
+   #security-dashboard, and a huge full-bleed instance on docs/city.html.
+   Both read the same data/city-state.json + the same live x402 feed and
+   support the exact same interactions (drag/pinch/twist/zoom/click,
+   Overview/Health/Activity layers) -- "compact" only changes the viewport
+   size and default zoom, never the capability or the data. */
 .city-stage {
     position: relative;
     width: 100%;
-    height: clamp(240px, 24vw, 300px);
+    height: clamp(300px, 32vw, 380px);
     border-radius: var(--radius-md);
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 30%, #17171d 0%, #0b0b0e 70%, #060608 100%);
     border: 1px solid var(--border);
-    /* Compact mode has no drag-to-pan (cityscape.js gates that on 'full'
-       mode) -- pan-y lets a one-finger drag over the diorama keep scrolling
-       the page instead of being swallowed as a dead gesture. */
-    touch-action: pan-y;
-}
-/* Full mode is genuinely draggable, so it gets the grab affordances and
-   claims the gesture outright (pinch-zoom needs both axes). 168px ~= sticky
-   nav (~65px) + this page's eyebrow/title/description block above the
-   stage; 100dvh (not vh) so mobile browsers' address-bar show/hide doesn't
-   leave the toolbar sitting under browser chrome. */
-.city-stage--full {
+    /* Compact and full are the same one interactive grid (drag/pinch/twist/
+       click), just a smaller embedded viewport -- claim the gesture outright
+       here too so a one-finger drag pans the camera instead of scrolling
+       the page underneath it. */
     touch-action: none;
     cursor: grab;
+}
+.city-stage:active { cursor: grabbing; }
+/* Full mode is the same interaction, just full-bleed. 168px ~= sticky nav
+   (~65px) + this page's eyebrow/title/description block above the stage;
+   100dvh (not vh) so mobile browsers' address-bar show/hide doesn't leave
+   the toolbar sitting under browser chrome. */
+.city-stage--full {
     height: calc(100dvh - 168px);
     min-height: 420px;
     border-radius: 0;
     border-left: none;
     border-right: none;
 }
-.city-stage--full:active { cursor: grabbing; }
 .city-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 
 .city-toolbar {
@@ -546,13 +545,14 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .city-stat-strip .stat b { font-family: var(--font-mono); color: #f4f4f5; margin-right: 0.3rem; }
 
 .city-detail-card {
-    position: absolute; z-index: 3; width: 220px; max-width: calc(100% - 1.2rem);
+    position: absolute; z-index: 3; width: 254px; max-width: calc(100% - 1.2rem);
     background: rgba(19,19,22,0.96); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-md);
     padding: 0.7rem 0.8rem; box-shadow: 0 12px 32px rgba(0,0,0,0.5); backdrop-filter: blur(8px);
 }
 .city-detail-title { display: flex; align-items: center; gap: 0.4rem; font-weight: 600; color: #f4f4f5; font-size: 12.5px; margin-bottom: 0.15rem; }
 .city-detail-title .dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
 .city-detail-zone { font-size: 9.5px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+.city-detail-desc { font-size: 10.5px; color: #d4d4d8; line-height: 1.4; margin: 0 0 0.5rem; }
 .city-detail-close { margin-left: auto; color: #71717a; background: none; border: none; cursor: pointer; font-size: 10px; }
 .city-detail-close:hover { color: #e4e4e7; }
 .city-detail-row { display: flex; justify-content: space-between; font-size: 11px; color: #a1a1aa; padding: 1.5px 0; }
