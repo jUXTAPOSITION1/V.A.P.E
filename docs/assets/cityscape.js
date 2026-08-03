@@ -534,8 +534,14 @@ const CityScape = {
         ctx.translate(w / 2 + inst.offsetX, h * 0.32 + inst.offsetY);
         ctx.scale(inst.scale, inst.scale);
 
-        if (this._terrainCanvas) ctx.drawImage(this._terrainCanvas, this._terrainOrigin.x, this._terrainOrigin.y);
-        this._drawOceanGlints(inst);
+        // _terrainCanvas is a shared, page-level singleton (built once for
+        // whichever 'full' instance asks first) -- gate the draw on this
+        // instance's own mode, not just its existence, so a compact
+        // instance can never inherit the full-world backdrop/offsets.
+        if (inst.mode === 'full' && this._terrainCanvas) {
+            ctx.drawImage(this._terrainCanvas, this._terrainOrigin.x, this._terrainOrigin.y);
+            this._drawOceanGlints(inst);
+        }
         this._drawRoads(inst);
         this._drawAmbient(inst);
         inst.hitboxes = [];
