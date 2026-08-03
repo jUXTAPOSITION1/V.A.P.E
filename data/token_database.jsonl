@@ -142,3 +142,4 @@
 {"ts": "2026-08-03T13:42:05.273766Z", "address": "0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d", "chain": "8453", "symbol": "ICNT", "name": "ICNT", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-03T14:12:25.292966Z", "address": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "chain": "8453", "symbol": "DUAL", "name": "DUAL", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-03T18:14:08.074869Z", "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "chain": "137", "symbol": "AIPF", "name": "AIPF", "source": "evm", "offering": "rug_pull_alert"}
+{"ts": "2026-08-03T18:44:57.869472Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "rug_pull_alert"}

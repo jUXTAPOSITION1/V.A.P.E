@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T18:29:30Z",
+  "generated": "2026-08-03T18:44:58Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 704,
+    "investigations": 705,
     "news": 57,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-182924-0x5D5D0a23.md",
-      "title": "Investigation \u2014 DPUNK",
-      "symbol": "DPUNK",
-      "name": "DogPunk",
-      "date": "2026-08-03T18:29:24Z",
-      "target": "0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F",
+      "file": "investigation-20260803-184449-0x82fe329f.md",
+      "title": "Investigation \u2014 pfUSDC-54",
+      "symbol": "pfUSDC-54",
+      "name": "Peapods Interest Bearing USDC - 54",
+      "date": "2026-08-03T18:44:49Z",
+      "target": "0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentra",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-182924-0x5D5D0a23.md"
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x88eafe23769a4fc2bbf52e77767c3693e6acfbd5) \u2014 can still act on the contract; [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-184449-0x82fe329f.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-184449-0x82fe329f.md",
+      "title": "Investigation \u2014 pfUSDC-54",
+      "symbol": "pfUSDC-54",
+      "name": "Peapods Interest Bearing USDC - 54",
+      "date": "2026-08-03T18:44:49Z",
+      "target": "0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "33",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x88eafe23769a4fc2bbf52e77767c3693e6acfbd5) \u2014 can still act on the contract; [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-184449-0x82fe329f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-182924-0x5D5D0a23.md",

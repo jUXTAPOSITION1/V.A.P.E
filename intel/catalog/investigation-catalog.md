@@ -1209,3 +1209,5 @@
 | 2026-08-03 | auto | 0xfD181Ca5EC0B355fc448403cc560D0423382e044 (DPUNK) | deep_investigation | REJECT (7/100) | Owner not renounced (0x455a1b0698ddeb0c50b40388408da07bdae452aa) — can still act | +7d |
 
 | 2026-08-03 | auto | 0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F (DPUNK) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed | +7d |
+
+| 2026-08-03 | auto | 0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4 (pfUSDC-54) | deep_investigation | REJECT (33/100) | Mintable supply (dilution risk) | +7d |
