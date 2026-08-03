@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T04:19:00Z",
+  "generated": "2026-08-03T04:34:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 520,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 682,
+    "investigations": 683,
     "news": 54,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-041900-0x86bcD9b1.md",
-      "title": "Investigation \u2014 ANON",
-      "symbol": "ANON",
-      "name": "ANON",
-      "date": "2026-08-03T04:19:00Z",
-      "target": "0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5",
+      "file": "investigation-20260803-043423-0x79bbF450.md",
+      "title": "Investigation \u2014 Anon",
+      "symbol": "Anon",
+      "name": "HeyAnon",
+      "date": "2026-08-03T04:34:23Z",
+      "target": "0x79bbF4508B1391af3A0F4B30bb5FC4aa9ab0E07C",
       "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-10] Low liquidity $11,340. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1203+ days without a known incident in this scan; Custom verified source (not a mass-produced f",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-041900-0x86bcD9b1.md"
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x8789f22a0456feddaf9074ff4cee55e4122095f0) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $88",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-043423-0x79bbF450.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-043423-0x79bbF450.md",
+      "title": "Investigation \u2014 Anon",
+      "symbol": "Anon",
+      "name": "HeyAnon",
+      "date": "2026-08-03T04:34:23Z",
+      "target": "0x79bbF4508B1391af3A0F4B30bb5FC4aa9ab0E07C",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-10] Owner not renounced (0x8789f22a0456feddaf9074ff4cee55e4122095f0) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $88",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-043423-0x79bbF450.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-041900-0x86bcD9b1.md",

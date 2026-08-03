@@ -1165,3 +1165,5 @@
 | 2026-08-03 | auto | 0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23 (AEON) | deep_investigation | REJECT (27/100) | Low holder count (122) | +7d |
 
 | 2026-08-03 | auto | 0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5 (ANON) | deep_investigation | PROCEED (82/100) | Top 9 non-LP/burn holders control 69% of supply — meaningful concentration | +7d |
+
+| 2026-08-03 | auto | 0x79bbF4508B1391af3A0F4B30bb5FC4aa9ab0E07C (Anon) | deep_investigation | REJECT (25/100) | Owner not renounced (0x8789f22a0456feddaf9074ff4cee55e4122095f0) — can still act | +7d |
