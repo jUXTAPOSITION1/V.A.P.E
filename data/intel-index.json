@@ -1,22 +1,22 @@
 {
-  "generated": "2026-08-03T16:27:47Z",
+  "generated": "2026-08-03T17:12:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 409,
+    "reports": 411,
     "reports_by_type": {
+      "base": 83,
       "bounty": 104,
+      "macro": 22,
       "security": 71,
       "bug": 5,
-      "base": 82,
       "mainnet": 5,
       "sentiment": 43,
-      "macro": 21,
       "virtuals": 74,
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 699,
-    "news": 56,
+    "investigations": 700,
+    "news": 57,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -24,31 +24,45 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-135726-0x37b90664.md",
-      "title": "Investigation \u2014 SAFU",
-      "symbol": "SAFU",
-      "name": "Safumoon",
-      "date": "2026-08-03T13:57:26Z",
-      "target": "0x37b90664C3846107939E89d886051b208f866bF1",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260803-164225-0xb4f4A58F.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T16:42:25Z",
+      "target": "0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Low holder count (190); [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,331 (rug/illiquid); [-10] Low liquidity $6,331; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-135726-0x37b90664.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (98); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,157; [-10] Violent 24h move +297% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-164225-0xb4f4A58F.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_162648.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T16:26:48Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T17:00Z",
       "threat": null,
-      "summary": "Base mover: aeon / WETH +172% 24h (liq $992775.0614) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_162648.md",
-      "bytes": 16043
+      "summary": "Date: 2026-08-03 17:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-17.md",
+      "bytes": 8769
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-164225-0xb4f4A58F.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T16:42:25Z",
+      "target": "0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Low holder count (98); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $12,157; [-10] Violent 24h move +297% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-164225-0xb4f4A58F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-135726-0x37b90664.md",
@@ -9650,6 +9664,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T17:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-03 17:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-17.md",
+      "bytes": 8769
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260803_162648.md",
@@ -9659,6 +9684,17 @@
       "summary": "Base mover: aeon / WETH +172% 24h (liq $992775.0614) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_162648.md",
       "bytes": 16043
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-03-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-03T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (28, prior day 27) and global market cap 24h change (0.74%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-03-16.md",
+      "bytes": 2086
     },
     {
       "kind": "intel",
@@ -10286,28 +10322,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_230153.md",
       "bytes": 16146
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_210528.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T21:05:28Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_210528.md",
-      "bytes": 17640
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-31-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-31 21:14 UTC",
-      "date": "2026-07-31T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-31-21.md",
-      "bytes": 1980
     }
   ],
   "broadcasts": [
@@ -10523,6 +10537,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-openai-s-next-gen-astra-model-cracks-decade-old-mathematical.md",
+      "title": "OpenAI\u2019s Next-Gen \u2018Astra\u2019 Model Cracks Decade-Old Mathematical Mysteries for $2,000",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T17:10:45Z",
+      "published_et": "August 3, 2026 \u00b7 1:10 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The unreleased AI system, built for complex long-running tasks, formalized its own proofs using Lean verification software, signaling a massive leap toward automated scientific discovery.",
+      "image": "assets/news-images/openai-s-next-gen-astra-model-cracks-decade-old-mathematical.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-openai-s-next-gen-astra-model-cracks-decade-old-mathematical.md"
+    },
     {
       "file": "news-2026-08-03-the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.md",
       "title": "The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI",

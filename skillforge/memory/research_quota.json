@@ -1,10 +1,10 @@
 {
   "firecrawl": {
-    "count": 48,
+    "count": 50,
     "month": "2026-08"
   },
   "tavily": {
-    "count": 394,
+    "count": 405,
     "month": "2026-08"
   }
 }
