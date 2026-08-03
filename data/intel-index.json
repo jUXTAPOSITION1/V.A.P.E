@@ -1,16 +1,16 @@
 {
-  "generated": "2026-08-03T12:41:58Z",
+  "generated": "2026-08-03T12:52:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 404,
+    "reports": 405,
     "reports_by_type": {
       "base": 82,
+      "mainnet": 5,
       "sentiment": 43,
       "bounty": 102,
       "security": 70,
       "macro": 21,
       "bug": 4,
-      "mainnet": 4,
       "virtuals": 74,
       "skillforge": 4
     },
@@ -9620,6 +9620,17 @@
     },
     {
       "kind": "intel",
+      "type": "mainnet",
+      "file": "mainnet-patch-check-2026-08-03-12.md",
+      "title": "Mainnet Patch Status Check \u2014 Virtuals Protocol AgentNftV2",
+      "date": "2026-08-03T12:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-03 12:52 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live on-chain verified source fetch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-08-03-12.md",
+      "bytes": 2981
+    },
+    {
+      "kind": "intel",
       "type": "sentiment",
       "file": "sentiment-2026-08-03-11.md",
       "title": "Sentiment Sweep Report \u2014 2026-08-03 11:35 UTC",
@@ -10255,17 +10266,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_173905.md",
       "bytes": 17334
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-31-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-31T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-31 16:40 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-16.md",
-      "bytes": 3537
     }
   ],
   "broadcasts": [
