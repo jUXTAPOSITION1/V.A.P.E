@@ -1177,3 +1177,5 @@
 | 2026-08-03 | auto | 0x7138b48df7D98D7e3cc221BfE7192D0a178182D8 (SPYB) | deep_investigation | REJECT (17/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-03 | auto | 0x81a7DA4074b8e0eD51beA40f9dCbDF4d9d4832b4 (AIO) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 93% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-03 | auto | 0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D (UNISTREET) | deep_investigation | REJECT (2/100) | Mintable supply (dilution risk) | +7d |
