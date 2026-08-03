@@ -363,5 +363,20 @@
     "report": "intel/threat-analysis/2026-07-30-set-protocol.md",
     "provider": "oci_grok",
     "written_at": "2026-07-30T20:58:06Z"
+  },
+  "2026-08-02:LOOPSDAO": {
+    "report": "intel/threat-analysis/2026-08-02-loopsdao.md",
+    "provider": "xai_1",
+    "written_at": "2026-08-03T20:57:34Z"
+  },
+  "2026-08-02:MOKE": {
+    "report": "intel/threat-analysis/2026-08-02-moke.md",
+    "provider": "oci_grok",
+    "written_at": "2026-08-03T20:58:33Z"
+  },
+  "2026-07-31:COLDCARD": {
+    "report": "intel/threat-analysis/2026-07-31-coldcard.md",
+    "provider": "xai_1",
+    "written_at": "2026-08-03T20:59:32Z"
   }
 }
