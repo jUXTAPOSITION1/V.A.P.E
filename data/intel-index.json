@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T07:19:55Z",
+  "generated": "2026-08-03T07:35:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 522,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 686,
+    "investigations": 687,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-064940-0x93C5d5F1.md",
-      "title": "Investigation \u2014 ANON",
-      "symbol": "ANON",
-      "name": "ANON",
-      "date": "2026-08-03T06:49:40Z",
-      "target": "0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $27,802; [-10] Violent 24h move +3425% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ver",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-064940-0x93C5d5F1.md"
+      "file": "investigation-20260803-073520-0x7138b48d.md",
+      "title": "Investigation \u2014 SPYB",
+      "symbol": "SPYB",
+      "name": "SPY",
+      "date": "2026-08-03T07:35:20Z",
+      "target": "0x7138b48df7D98D7e3cc221BfE7192D0a178182D8",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-073520-0x7138b48d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-073520-0x7138b48d.md",
+      "title": "Investigation \u2014 SPYB",
+      "symbol": "SPYB",
+      "name": "SPY",
+      "date": "2026-08-03T07:35:20Z",
+      "target": "0x7138b48df7D98D7e3cc221BfE7192D0a178182D8",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-073520-0x7138b48d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-064940-0x93C5d5F1.md",

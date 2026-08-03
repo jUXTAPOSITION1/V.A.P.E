@@ -1173,3 +1173,5 @@
 | 2026-08-03 | auto | 0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35 (DEGEN) | deep_investigation | CAUTION (57/100) | Top 10 non-LP/burn holders control 54% of supply — meaningful concentration | +7d |
 
 | 2026-08-03 | auto | 0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f (ANON) | deep_investigation | CAUTION (55/100) | Low liquidity $27,802 | +7d |
+
+| 2026-08-03 | auto | 0x7138b48df7D98D7e3cc221BfE7192D0a178182D8 (SPYB) | deep_investigation | REJECT (17/100) | Upgradeable proxy (verify implementation) | +7d |
