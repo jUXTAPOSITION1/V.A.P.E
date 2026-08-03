@@ -9222,6 +9222,25 @@
     "symbol": "USOR OIL",
     "times_investigated": 1
   },
+  "8453:0xa8405797cec1dbb77b855621882ee58acaf3fa84": {
+    "address": "0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84",
+    "chain": "8453",
+    "creator_address": "0x617573225eea06e56c454471d049fa239d9b07a4",
+    "first_investigated": "2026-08-03T03:48:44Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-034844-0xA8405797.md",
+        "score": 22,
+        "ts": "2026-08-03T03:48:44Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T03:48:44Z",
+    "last_score": 22,
+    "last_verdict": "REJECT",
+    "symbol": "aeon",
+    "times_investigated": 1
+  },
   "8453:0xa8ec9351397e29e4a93d08f09badd56f3bd0b581": {
     "address": "0xa8Ec9351397e29e4a93D08f09Badd56f3Bd0b581",
     "chain": "8453",

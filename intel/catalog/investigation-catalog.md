@@ -1159,3 +1159,5 @@
 | 2026-08-03 | auto | 0xBf8E8f0e8866a7052F948C16508644347c57aba3 (aeon) | deep_investigation | CAUTION (65/100) | Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) — can still act | +7d |
 
 | 2026-08-03 | auto | 0x895BC7a6caBA2088409fdac388183cA084dc2F77 (AEON) | deep_investigation | CAUTION (55/100) | Top 9 non-LP/burn holders control 100% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-03 | auto | 0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84 (aeon) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
