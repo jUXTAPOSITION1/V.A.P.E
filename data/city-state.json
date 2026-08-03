@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-03T03:59:53Z",
+  "generated_at": "2026-08-03T10:09:11Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 10,
+    "lanes_passing": 8,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 680
+        "value": 689
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 364
+          "value": 368
         },
         {
           "label": "caution",
-          "value": 190
+          "value": 194
         },
         {
           "label": "proceed",
-          "value": 126
+          "value": 127
         }
       ],
       "link": "investigations.html",
@@ -75,7 +75,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "published",
-        "value": 54
+        "value": 55
       },
       "stat_secondary": [],
       "link": "news.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1435
+        "value": 1452
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 7
+          "value": 2
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1520
+        "value": 1555
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -234,7 +234,7 @@
         "label": "last run",
         "value": "100 open alert(s)"
       },
-      "last_run_at": "2026-08-03T03:41:47Z",
+      "last_run_at": "2026-08-03T09:54:01Z",
       "source_workflow": "codeql.yml",
       "link": "index.html#security-dashboard"
     },
@@ -262,7 +262,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -272,9 +272,9 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "success"
+        "value": "action_required"
       },
-      "last_run_at": "2026-08-03T03:41:47Z",
+      "last_run_at": "2026-08-03T09:54:01Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "index.html#security-dashboard"
     },
@@ -294,7 +294,7 @@
         "label": "last run",
         "value": "success"
       },
-      "last_run_at": "2026-07-31T20:09:31Z",
+      "last_run_at": "2026-08-03T10:03:52Z",
       "source_workflow": "dependency-audit.yml",
       "link": "index.html#security-dashboard"
     },
@@ -374,7 +374,7 @@
         "label": "last run",
         "value": "intact"
       },
-      "last_run_at": "2026-08-03T02:10:41Z",
+      "last_run_at": "2026-08-03T09:31:32Z",
       "source_workflow": "findings-seal.yml",
       "link": "index.html#security-dashboard"
     },
@@ -414,7 +414,7 @@
         "label": "last run",
         "value": "HIGH"
       },
-      "last_run_at": "2026-08-03T02:53:33Z",
+      "last_run_at": "2026-08-03T09:47:36Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "index.html#security-dashboard"
     }
@@ -494,6 +494,75 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D",
+      "type": "investigation",
+      "timestamp": "2026-08-03T09:54:15Z",
+      "label": "Unistreet",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x81a7DA4074b8e0eD51beA40f9dCbDF4d9d4832b4",
+      "type": "investigation",
+      "timestamp": "2026-08-03T08:36:22Z",
+      "label": "OLAXBT",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x7138b48df7D98D7e3cc221BfE7192D0a178182D8",
+      "type": "investigation",
+      "timestamp": "2026-08-03T07:35:20Z",
+      "label": "SPY",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f",
+      "type": "investigation",
+      "timestamp": "2026-08-03T06:49:40Z",
+      "label": "ANON",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35",
+      "type": "investigation",
+      "timestamp": "2026-08-03T06:34:22Z",
+      "label": "Degen",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "news:La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown",
+      "type": "news",
+      "timestamp": "2026-08-03T06:25:19Z",
+      "label": "La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown"
+    },
+    {
+      "id": "investigation:0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969",
+      "type": "investigation",
+      "timestamp": "2026-08-03T04:49:34Z",
+      "label": "Degen Arena",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x79bbF4508B1391af3A0F4B30bb5FC4aa9ab0E07C",
+      "type": "investigation",
+      "timestamp": "2026-08-03T04:34:23Z",
+      "label": "HeyAnon",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5",
+      "type": "investigation",
+      "timestamp": "2026-08-03T04:19:00Z",
+      "label": "ANON",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23",
+      "type": "investigation",
+      "timestamp": "2026-08-03T04:03:48Z",
+      "label": "AEON Token",
+      "verdict": "REJECT"
+    },
     {
       "id": "investigation:0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84",
       "type": "investigation",
@@ -589,74 +658,6 @@
       "timestamp": "2026-08-02T20:15:50Z",
       "label": "Baby Asteroid",
       "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
-      "type": "investigation",
-      "timestamp": "2026-08-02T19:15:31Z",
-      "label": "Binance Pizza",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage",
-      "type": "news",
-      "timestamp": "2026-08-02T19:10:58Z",
-      "label": "SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage"
-    },
-    {
-      "id": "investigation:0x80ac288e9664D7E2B59428125048eF48D853a93B",
-      "type": "investigation",
-      "timestamp": "2026-08-02T18:45:12Z",
-      "label": "New ORIGINLGNS",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A",
-      "type": "investigation",
-      "timestamp": "2026-08-02T18:29:51Z",
-      "label": "Spinning Rat Coin",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
-      "type": "investigation",
-      "timestamp": "2026-08-02T18:14:48Z",
-      "label": "CHUMSKY github.com/zesterer/CHUMSKY",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
-      "type": "investigation",
-      "timestamp": "2026-08-02T17:59:39Z",
-      "label": "Zest",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8554D38b95E4F7Ca11D391008627Df30B2b07777",
-      "type": "investigation",
-      "timestamp": "2026-08-02T17:14:27Z",
-      "label": "\u5343\u91cc\u9a6c",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms",
-      "type": "news",
-      "timestamp": "2026-08-02T16:20:36Z",
-      "label": "Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms"
-    },
-    {
-      "id": "investigation:0x154bD4F21310DCdFd52661456caD70f99dF43dA5",
-      "type": "investigation",
-      "timestamp": "2026-08-02T15:14:46Z",
-      "label": "IDOL",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42",
-      "type": "investigation",
-      "timestamp": "2026-08-02T13:59:40Z",
-      "label": "SLOP",
-      "verdict": "REJECT"
     }
   ]
 }
