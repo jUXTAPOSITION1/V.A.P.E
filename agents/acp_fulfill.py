@@ -461,27 +461,6 @@ def _bridges(req):
 
 
 
-def _prediction_markets():
-    try:
-        from agents import prediction_markets as _m
-    except ImportError:
-        import prediction_markets as _m
-    return _m
-
-
-def _prediction_market_odds(req):
-    """$0.01 crypto/Base-relevant prediction-market odds via Polymarket +
-    Kalshi (both free, keyless) — field-for-field the same as the x402
-    worker's prediction_market_odds route (worker/src/dataHandlers.ts)."""
-    r = req if isinstance(req, dict) else {}
-    limit = r.get("limit") or 20
-    try:
-        limit = min(int(limit), 50)
-    except (TypeError, ValueError):
-        limit = 20
-    return _prediction_markets().crypto_prediction_markets(limit)
-
-
 HANDLERS = {
     "token_safety_check": _token_safety,
     "liquidity_check": _liquidity,
@@ -504,7 +483,6 @@ HANDLERS = {
     "yields": _yields,
     "stablecoins": _stablecoins,
     "bridges": _bridges,
-    "prediction_market_odds": _prediction_market_odds,
     # deep_contract_audit / forensics_deep / wallet_recon route to the SKILLFORGE
     # tool tier (slither/aderyn/mythril, wallet_trace) via the monitor's handler;
     # they need the runner/keys, so are intentionally not auto-run here.

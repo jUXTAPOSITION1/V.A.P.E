@@ -20,12 +20,6 @@ in this repo), so exact schema shapes should be spot-checked against a real
 response the first time each function actually runs in GitHub Actions,
 exactly like the existing sweeps.
 
-Confirmed gaps (as of this module's introduction):
-- Prediction markets (Polymarket/Kalshi) are beta-gated to Codex's paid
-  Growth/Enterprise plans — not reachable on a free-tier key. VAPE sources
-  prediction-market data straight from Polymarket's own free, keyless
-  Gamma API instead (see agents/prediction_markets.py), not through Codex.
-
 Budget note: the Free-tier plan this key runs on caps out at 10,000
 requests/month total, shared with every worker-side Codex route
 (worker/src/lib/codex.ts's /virtuals-snapshot, /trending-base,

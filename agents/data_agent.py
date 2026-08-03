@@ -262,7 +262,6 @@ CATALOG_OFFERINGS = [
     ("yields", "data", "none"),
     ("stablecoins", "data", "none"),
     ("bridges", "data", "none"),
-    ("prediction_market_odds", "data", "none"),
 ]
 
 # Real, growing dataset of tokens/projects DATA AGENT has actually paid to

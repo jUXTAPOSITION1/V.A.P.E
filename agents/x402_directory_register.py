@@ -188,8 +188,7 @@ OFFERINGS = {
 # Market-data micro-services — mirrors worker/src/dataHandlers.ts's
 # DL_OFFERINGS exactly. These are served at /data/<name> (not /scan/<name>),
 # so they're kept in their own dict and routed accordingly below. Mostly
-# 0.01 USDC (the keyless DefiLlama tools, plus prediction_market_odds which
-# is also keyless via Polymarket/Kalshi); wallet_pnl_deepdive is priced
+# 0.01 USDC (the keyless DefiLlama tools); wallet_pnl_deepdive is priced
 # separately since it's a richer, Alchemy + CoinGecko-backed deliverable
 # (Base mainnet only — rebuilt off Codex after its wallet-analytics fields
 # turned out to be paid-plan-gated).
@@ -197,8 +196,6 @@ DATA_OFFERINGS = {
     "wallet_pnl_deepdive": ("0.25", "Real Base-mainnet wallet balances + an "
                        "unrealized-P&L estimate per holding (current value vs. first-"
                        "acquisition price)."),
-    "prediction_market_odds": ("0.01", "Live crypto/Base-relevant prediction-market odds from "
-                       "Polymarket and Kalshi, ranked by volume."),
     "token_intel": ("0.01", "Price + confidence, oracle-derived token age, optional "
                        "fees/unlocks/treasury, and the token's real logo."),
     "token_chart": ("0.01", "Daily price series (default 30d) + token logo."),
@@ -585,7 +582,7 @@ def build_awesome_x402_entry():
         f"token-safety/liquidity/rug-pull/dossier/tx-decode/community-intel/bulk-safety/"
         f"website-review checks) + {len(DATA_OFFERINGS)} market-data micro-services ($0.01-$0.25 "
         f"each: token price-oracle intel, wallet P&L, TVL/fees/unlocks/treasury, yields, stablecoin "
-        f"depeg, bridge volumes, prediction-market odds) + a $1 deep-dive bounty audit / address-only "
+        f"depeg, bridge volumes) + a $1 deep-dive bounty audit / address-only "
         f"deep_contract_audit alias (recon + Slither/Halmos/Mythril/Aderyn + frontier-model review — "
         f"a submission-ready PoC and full technical detail). Docs: "
         f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/ACP_PROTOCOL.md"

@@ -74,8 +74,7 @@ const OFFERING_ICONS = {
     'dex_volumes': 'fa-chart-bar',
     'yields': 'fa-arrow-trend-up',
     'stablecoins': 'fa-sack-dollar',
-    'bridges': 'fa-right-left',
-    'prediction_market_odds': 'fa-dice'
+    'bridges': 'fa-right-left'
 };
 
 // Every successful x402 hire gets saved here (browser localStorage, keyed by
@@ -112,7 +111,7 @@ const App = {
     async refresh() {
         document.getElementById('live-label').textContent = 'SYNCING';
         this._intelPromise = null; // force a fresh intel-index fetch this cycle, read by reports()
-        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.baseTokenDiscovery(), this.predictionMarkets(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation()]);
+        await Promise.allSettled([this.metrics(), this.sentiment(), this.protocols(), this.baseMovers(), this.baseTokenDiscovery(), this.bountyTeaser(), this.reports(), this.chart(this._chartRange||'30d'), this.reputation()]);
         document.getElementById('live-label').textContent = 'LIVE';
         document.getElementById('last-sync').textContent = 'synced ' + new Date().toLocaleTimeString();
     },
@@ -907,72 +906,6 @@ const App = {
             const launchEl = document.getElementById('new-launches');
             if (launchEl) launchEl.innerHTML = '<div class="text-zinc-500 text-sm">New-launches data unavailable right now.</div>';
         }
-    },
-
-    // Crypto/Base-relevant prediction-market odds from Polymarket + Kalshi
-    // (both free, keyless) via the worker's /prediction-markets route
-    // (worker/src/lib/predictionMarkets.ts) — same free-display + paid-x402
-    // dual pattern as everything else on this panel.
-    _predictionMarkets: [], _predictionQuery: '',
-    _wirePredictionControls() {
-        if (this._predictionWired) return;
-        this._predictionWired = true;
-        const search = document.getElementById('prediction-search');
-        if (search) search.addEventListener('input', () => {
-            this._predictionQuery = search.value.trim().toLowerCase();
-            this._pgReset('prediction-pg');
-            this._renderPredictionMarkets();
-        });
-        this._pgWire('prediction-pg', 8, () => this._renderPredictionMarkets());
-    },
-    async predictionMarkets() {
-        const el = document.getElementById('prediction-markets');
-        if (!el) return;
-        if (!WORKER_BASE) { el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>'; return; }
-        try {
-            const res = await fetch(`${WORKER_BASE}/prediction-markets?limit=25`).then(r => r.json());
-            if (!res || res.error || !Array.isArray(res.markets)) {
-                el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
-                return;
-            }
-            this._predictionMarkets = res.markets;
-            this._wirePredictionControls();
-            this._renderPredictionMarkets();
-        } catch (e) {
-            el.innerHTML = '<div class="text-zinc-500 text-sm">Prediction-market data unavailable right now.</div>';
-        }
-    },
-    _renderPredictionMarkets() {
-        const el = document.getElementById('prediction-markets');
-        if (!el) return;
-        let markets = this._predictionMarkets;
-        if (this._predictionQuery) markets = markets.filter(m => (m.question||'').toLowerCase().includes(this._predictionQuery));
-        const items = this._pgSlice('prediction-pg', markets, 8);
-        el.innerHTML = items.length ? items.map((m) => {
-            const yesPrice = Array.isArray(m.prices) && m.prices.length ? m.prices[0]
-                : (typeof m.yes_bid_cents === 'number' ? m.yes_bid_cents / 100 : null);
-            const yesPct = yesPrice != null ? Math.round(yesPrice * 100) : null;
-            const pctLabel = yesPct != null ? yesPct + '% Yes' : '…';
-            // Probability-read color, not a VAPE Score — a quick "which way is
-            // the market leaning" glance, same band language as the rest of
-            // the site (green/amber/rose) but scoped to this one number.
-            const pctColor = yesPct == null ? '#a1a1aa' : yesPct >= 65 ? '#4ade80' : yesPct <= 35 ? '#fb7185' : '#fbbf24';
-            const isPoly = m.platform === 'polymarket';
-            const platformLabel = isPoly ? 'Polymarket' : 'Kalshi';
-            const platformColor = isPoly ? '#818cf8' : '#34d399';
-            // Real link or nothing — never a dead "#" href.
-            const tag = m.url ? 'a' : 'div';
-            const linkAttrs = m.url ? `href="${this._esc(m.url)}" target="_blank" rel="noopener"` : '';
-            return `
-            <${tag} ${linkAttrs} class="card-h diff-row flex items-center gap-2 sm:gap-3 overflow-hidden">
-                <span class="text-[10px] px-1.5 py-0.5 border shrink-0 whitespace-nowrap" style="color:${platformColor};border-color:${platformColor}44">${platformLabel}</span>
-                <div class="min-w-0 flex-1 text-xs sm:text-sm truncate">${this._esc(m.question || '')}</div>
-                <div class="text-right shrink-0 min-w-[4.5rem]">
-                    <div class="stat text-sm" style="color:${pctColor}">${pctLabel}</div>
-                    <div class="text-[10px] text-zinc-500">${fmtUsd(m.volume)} vol</div>
-                </div>
-            </${tag}>`;
-        }).join('') : '<div class="text-zinc-500 text-sm">No crypto-relevant prediction markets match this filter.</div>';
     },
 
     // VAPE Score for a trending Base token — same 0-100/neutral-50/skip-on-

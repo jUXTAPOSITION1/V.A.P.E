@@ -32,17 +32,14 @@ DATA_TOOLS = {
     "chain_protocols", "chain_overview", "chain_fees", "dex_volumes",
     "yields", "stablecoins", "bridges",
 }
-# wallet_pnl_deepdive and prediction_market_odds are the two /data/* tools
-# NOT backed by DefiLlama — Alchemy + CoinGecko-backed (worker/src/
-# dataHandlers.ts, $0.25, x402-only — see its ACP-removal note in
-# agents/acp_fulfill.py) and Polymarket/Kalshi-backed (agents/
-# prediction_markets.py / worker/src/lib/predictionMarkets.ts, $0.01,
-# both x402 AND ACP) respectively. Both share the same DATA_OFFERINGS dict /
-# worker DL_OFFERINGS array / route prefix as the 13 DefiLlama tools, so
-# they're included in the x402-surface-parity check below but excluded from
-# the "13 DefiLlama tools" identity assertions and from the ACP-fulfillable
-# check (wallet_pnl_deepdive specifically is not ACP-fulfillable).
-NON_DEFILLAMA_DATA_TOOLS = {"wallet_pnl_deepdive", "prediction_market_odds"}
+# wallet_pnl_deepdive is the one /data/* tool NOT backed by DefiLlama —
+# Alchemy + CoinGecko-backed (worker/src/dataHandlers.ts, $0.25, x402-only —
+# see its ACP-removal note in agents/acp_fulfill.py). It shares the same
+# DATA_OFFERINGS dict / worker DL_OFFERINGS array / route prefix as the 13
+# DefiLlama tools, so it's included in the x402-surface-parity check below
+# but excluded from the "13 DefiLlama tools" identity assertions and from
+# the ACP-fulfillable check (it's not ACP-fulfillable).
+NON_DEFILLAMA_DATA_TOOLS = {"wallet_pnl_deepdive"}
 ALL_DATA_TOOLS = DATA_TOOLS | NON_DEFILLAMA_DATA_TOOLS
 ACP_FULFILLABLE_DATA_TOOLS = ALL_DATA_TOOLS - {"wallet_pnl_deepdive"}
 
@@ -68,7 +65,6 @@ def test_data_offerings_all_priced_one_cent():
     assert all(price == 0.01 for _n, price, _s in DL_OFFERINGS)
     assert all(meta[0] == "0.01" for name, meta in DATA_OFFERINGS.items() if name in DATA_TOOLS)
     assert DATA_OFFERINGS["wallet_pnl_deepdive"][0] == "0.25"
-    assert DATA_OFFERINGS["prediction_market_odds"][0] == "0.01"
 
 
 def _stub_defillama(monkeypatch):
@@ -159,42 +155,3 @@ def test_unlocks_and_bridges_deliver_normally_when_data_present(monkeypatch):
     assert out["deliverable"] == {"ok": "bridges"}
 
 
-def _stub_prediction_markets(monkeypatch):
-    """Same pattern as _stub_codex_data above, for agents.prediction_markets."""
-    import agents
-    fake = types.ModuleType("agents.prediction_markets")
-    calls = []
-
-    def fake_combined(*a, **k):
-        calls.append(("crypto_prediction_markets", a, k))
-        return {"ts": "2026-01-01T00:00:00Z", "count": 1,
-                "markets": [{"platform": "polymarket", "question": "Will Bitcoin hit $150k?"}],
-                "sources": {"polymarket": "ok", "kalshi": "ok"}}
-
-    fake.crypto_prediction_markets = fake_combined
-    monkeypatch.setitem(sys.modules, "agents.prediction_markets", fake)
-    monkeypatch.setattr(agents, "prediction_markets", fake, raising=False)
-    return calls
-
-
-def test_prediction_market_odds_routes_limit(monkeypatch):
-    calls = _stub_prediction_markets(monkeypatch)
-    from agents import acp_fulfill as A
-    out = A.fulfill("prediction_market_odds", {"limit": 5})
-    assert out["status"] == "ok"
-    assert out["deliverable"]["count"] == 1
-    assert calls == [("crypto_prediction_markets", (5,), {})]
-
-
-def test_prediction_market_odds_defaults_limit_to_20(monkeypatch):
-    calls = _stub_prediction_markets(monkeypatch)
-    from agents import acp_fulfill as A
-    A.fulfill("prediction_market_odds", {})
-    assert calls == [("crypto_prediction_markets", (20,), {})]
-
-
-def test_prediction_market_odds_caps_limit_at_50(monkeypatch):
-    calls = _stub_prediction_markets(monkeypatch)
-    from agents import acp_fulfill as A
-    A.fulfill("prediction_market_odds", {"limit": 999})
-    assert calls == [("crypto_prediction_markets", (50,), {})]

@@ -77,8 +77,7 @@ DL_NAMES = {n for n, _p, _s in DL_OFFERINGS}
 # a from-scratch Python Alchemy client, unlike the x402 path which was).
 AUTO = {"token_safety_check", "liquidity_check", "rug_pull_alert",
         "exploit_check", "dossier_check", "market_intel",
-        "community_intel_broadcast",
-        "prediction_market_odds"} | DL_NAMES
+        "community_intel_broadcast"} | DL_NAMES
 # Zero-LLM deliverables specifically. dossier_check stays in AUTO above
 # (the monitor still auto-prices/submits it with no triage wake — see
 # scripts/acp-monitor/HANDLER_BRIEF.md), but its own deliverable now
@@ -169,8 +168,6 @@ OFFERINGS = [
     ("web_research", 0.01, "General web research: search + scrape a handful of real results, tag "
      "on-chain addresses/tx hashes/CVEs/$TICKERs, and return a dense, agent-consumable summary — "
      "x402 only, not yet ACP-listed"),
-    ("prediction_market_odds", 0.01, "Live crypto/Base-relevant prediction-market odds from "
-     "Polymarket and Kalshi, ranked by volume"),
     *DL_OFFERINGS,
 ]
 

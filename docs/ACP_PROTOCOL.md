@@ -99,12 +99,11 @@ then it's discoverable via `agents/x402_directory_register.py`'s external
 listings and x402-payable directly, same as any other worker route.
 
 ### Market-data tools
-15 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
+14 real-time market-data tools, each auto-fulfilled by `agents/acp_fulfill.py`
 and also x402-payable at the worker's `/data/<name>` route. Protocol/chain
 tools carry real hosted logos; token tools carry the token's own hosted logo.
-Every result is real data or an honest `{error}` — never fabricated. 14 are
-0.01 USDC each (13 backed by keyless market-data aggregation, plus
-`prediction_market_odds` backed by the keyless Polymarket/Kalshi APIs);
+Every result is real data or an honest `{error}` — never fabricated. 13 are
+0.01 USDC each, backed by keyless market-data aggregation;
 `wallet_pnl_deepdive` is priced separately since it's a richer, real
 Base-mainnet-balance deliverable.
 
@@ -124,7 +123,6 @@ Base-mainnet-balance deliverable.
 | stablecoins | 0.01 | 5m | — | Stablecoins by supply with live peg + computed depeg |
 | bridges | 0.01 | 5m | — | Bridges ranked by daily volume — bridge-exploit threat data |
 | **wallet_pnl_deepdive** | **0.25** | 5m | `address` | Real Base-mainnet balances + an unrealized-P&L estimate per holding (current value vs. first-acquisition price) |
-| prediction_market_odds | 0.01 | 5m | optional `limit` | Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume |
 
 ## The autonomous monitor ([OK])
 Jobs are caught and fulfilled at near-zero compute via a 3-layer monitor:
@@ -172,7 +170,7 @@ acp wallet balance          # treasury
 - Real deliverables only — never fabricated findings, scores, or tx hashes.
 
 ## Roadmap
-- [OK] End-to-end deliverable automation for 21 of 31 offerings on the ACP
+- [OK] End-to-end deliverable automation for 20 of 30 offerings on the ACP
   side — `scripts/acp-monitor/auto_fulfill.py` imports
   `agents/acp_fulfill.py`'s `HANDLERS` dict directly, so the monitor
   auto-submits a real deliverable the moment escrow funds. [TBD] the
