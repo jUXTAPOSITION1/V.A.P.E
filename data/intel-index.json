@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T17:05:20Z",
+  "generated": "2026-08-03T17:10:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 145,
     "investigations": 700,
-    "news": 56,
+    "news": 57,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10537,6 +10537,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-openai-s-next-gen-astra-model-cracks-decade-old-mathematical.md",
+      "title": "OpenAI\u2019s Next-Gen \u2018Astra\u2019 Model Cracks Decade-Old Mathematical Mysteries for $2,000",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T17:10:45Z",
+      "published_et": "August 3, 2026 \u00b7 1:10 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The unreleased AI system, built for complex long-running tasks, formalized its own proofs using Lean verification software, signaling a massive leap toward automated scientific discovery.",
+      "image": "assets/news-images/openai-s-next-gen-astra-model-cracks-decade-old-mathematical.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-openai-s-next-gen-astra-model-cracks-decade-old-mathematical.md"
+    },
     {
       "file": "news-2026-08-03-the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.md",
       "title": "The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI",
