@@ -146,3 +146,4 @@
 {"ts": "2026-08-03T19:00:02.013734Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-03T19:44:49.579295Z", "address": "0xb23bB8c2C6Cb9169eeaC8f2Bd42fcf333A1a8C55", "chain": "42161", "symbol": "NOX", "name": "NOX", "source": "evm", "offering": "dossier_check"}
 {"ts": "2026-08-03T19:59:52.671928Z", "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "chain": "42161", "symbol": "ESP", "name": "ESP", "source": "evm", "offering": "token_safety_check"}
+{"ts": "2026-08-03T20:14:55.694519Z", "address": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "chain": "8453", "symbol": "ELSA", "name": "ELSA", "source": "base", "offering": "token_intel"}
