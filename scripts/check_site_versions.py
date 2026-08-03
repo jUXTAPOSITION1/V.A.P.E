@@ -48,9 +48,23 @@ TRACKED = [
         "pattern": re.compile(r"cdn\.jsdelivr\.net/npm/jspdf@" + VERSION_RE),
     },
     {
-        "file": REPO_ROOT / "docs/index.html",
+        # Font Awesome moved from the cdnjs CDN to a locally vendored copy
+        # at some point -- docs/index.html's own <link> has referenced
+        # assets/fontawesome/css/all.min.css (no version string at all)
+        # ever since, so the old cdnjs-URL pattern below could never match
+        # again and just kept filing the same unfixable review issue. The
+        # vendored file's own real version banner (present in every Font
+        # Awesome release) is the one signal left to track the actual
+        # installed version against npm's latest.
+        "file": REPO_ROOT / "docs/assets/fontawesome/css/all.min.css",
         "package": "@fortawesome/fontawesome-free",
-        "pattern": re.compile(r"cdnjs\.cloudflare\.com/ajax/libs/font-awesome/" + VERSION_RE),
+        "pattern": re.compile(r"Font Awesome Free " + VERSION_RE),
+        # This banner is just a label on already-downloaded files (css +
+        # webfonts) -- rewriting it in place would claim a newer version
+        # while shipping the old assets. Every bump here needs a human to
+        # actually re-vendor the files, so route it straight to manual
+        # review regardless of whether it's a same-major bump.
+        "vendored": True,
     },
 ]
 
@@ -105,6 +119,11 @@ def main() -> int:
 
         result = {"file": str(path.relative_to(REPO_ROOT)), "package": pkg, "old": current, "latest": latest}
 
+        if entry.get("vendored"):
+            result["reason"] = "vendored files, not a CDN URL — needs a human to re-download and replace them"
+            needs_review.append(result)
+            continue
+
         if major(latest) != major(current):
             result["reason"] = "major version bump — needs manual review of call sites"
             needs_review.append(result)
@@ -119,7 +138,7 @@ def main() -> int:
         for e in applied:
             print(f"  {e['file']}: {e['package']} {e['old']} -> {e['latest']}")
     if needs_review:
-        print("Needs manual review (major bump or pattern mismatch):")
+        print("Needs manual review:")
         for e in needs_review:
             print(f"  {e['file']}: {e['package']} {e.get('old', '?')} -> {e.get('latest', '?')} ({e['reason']})")
     if not applied and not needs_review:

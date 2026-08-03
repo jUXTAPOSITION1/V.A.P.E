@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css?v=18">
+    <link rel="stylesheet" href="assets/site.css?v=20">
 </head>
 <body class="text-zinc-200 min-h-screen">
     <!-- Navbar -->
@@ -329,8 +329,22 @@
                             <div class="city-layers">
                                 <button type="button" data-city-layer="overview" class="city-layer-btn is-active">Overview</button>
                                 <button type="button" data-city-layer="health" class="city-layer-btn">Health</button>
+                                <button type="button" data-city-layer="activity" class="city-layer-btn">Activity</button>
+                            </div>
+                            <div class="city-compass-group">
+                                <button type="button" class="city-zoom-btn" data-city-rotate="ccw" aria-label="Rotate left"><i class="fa-solid fa-chevron-left"></i></button>
+                                <div class="city-compass" data-city-rotate-dial aria-hidden="true">
+                                    <div class="city-compass-needle"><i class="fa-solid fa-caret-up"></i></div>
+                                </div>
+                                <button type="button" class="city-zoom-btn" data-city-rotate="cw" aria-label="Rotate right"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                            <div class="city-zoom">
+                                <button type="button" class="city-zoom-btn" data-city-zoom="out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+                                <button type="button" class="city-zoom-btn" data-city-zoom="in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+                                <button type="button" class="city-zoom-btn" data-city-zoom="reset" aria-label="Reset view to downtown"><i class="fa-solid fa-location-crosshairs"></i></button>
                             </div>
                         </div>
+                        <div class="city-hint"><i class="fa-solid fa-hand-pointer"></i>Drag · pinch to zoom · twist to rotate · tap a building</div>
                         <div class="city-stat-strip"></div>
                     </div>
                     <div class="city-legend">
@@ -1124,6 +1138,6 @@
     <script type="module" src="assets/newsfeed.js?v=2"></script>
     <script type="module" src="assets/securitydashboard.js?v=1"></script>
     <script type="module" src="assets/investigations-preview.js?v=1"></script>
-    <script type="module" src="assets/cityscape.js?v=1"></script>
+    <script type="module" src="assets/cityscape.js?v=2"></script>
 </body>
 </html>

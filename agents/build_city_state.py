@@ -125,6 +125,33 @@ def lane_status(lane):
     return "ok" if conclusion == "success" else "alert"
 
 
+def _checkpoint_secondary_stats(lane):
+    """Every extra real field a given lane happens to carry in
+    security-dashboard.json, beyond the generic headline every lane already
+    gets as stat_primary -- straight re-projection, never a fabricated
+    number, and never the same 2 stats for every lane since each lane's own
+    real check produces different fields (open_alerts vs. severity_breakdown
+    vs. coverage_ratio, etc.)."""
+    stats = []
+    if lane.get("last_run_at"):
+        stats.append({"label": "last run at", "value": lane["last_run_at"]})
+    if lane.get("open_alerts") is not None:
+        stats.append({"label": "open alerts", "value": lane["open_alerts"]})
+    if lane.get("persisted_high_critical_30d") is not None:
+        stats.append({"label": "persisted high/critical (30d)", "value": lane["persisted_high_critical_30d"]})
+    sev = lane.get("severity_breakdown")
+    if isinstance(sev, dict):
+        crit_high = (sev.get("CRITICAL") or 0) + (sev.get("HIGH") or 0)
+        stats.append({"label": "critical/high findings", "value": crit_high})
+    if lane.get("coverage_ratio") is not None:
+        stats.append({"label": "attack-pattern coverage", "value": f"{round(lane['coverage_ratio'] * 100)}%"})
+    if lane.get("chain_intact") is not None:
+        stats.append({"label": "ledger chain intact", "value": "yes" if lane["chain_intact"] else "no"})
+    if lane.get("worsened_30d") is not None or lane.get("improved_30d") is not None:
+        stats.append({"label": "worsened / improved (30d)", "value": f"{lane.get('worsened_30d', 0)} / {lane.get('improved_30d', 0)}"})
+    return stats
+
+
 def build_lane_checkpoints(lanes):
     """One uniform-size checkpoint building per real lane. LANE_RING has
     exactly 10 hand-placed, collision-free slots -- as many as this repo's
@@ -137,6 +164,14 @@ def build_lane_checkpoints(lanes):
             print(f"warning: lane {lane.get('id')!r} exceeds LANE_RING capacity ({len(LANE_RING)}), skipping", file=sys.stderr)
             continue
         pos = LANE_RING[i]
+        workflow = lane.get("source_workflow")
+        # The one accurate, specific link for this exact lane: the real
+        # GitHub Actions workflow file that IS this automated check --
+        # not a shared generic anchor every checkpoint used to point at.
+        link = (
+            f"https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/{workflow}"
+            if workflow else "index.html#security-dashboard"
+        )
         checkpoints.append({
             "id": f"lane-{lane.get('id')}",
             "kind": "checkpoint",
@@ -147,9 +182,10 @@ def build_lane_checkpoints(lanes):
             "gridY": pos[1],
             "footprint": [1, 1],
             "stat_primary": {"label": "last run", "value": lane.get("headline")},
+            "stat_secondary": _checkpoint_secondary_stats(lane),
             "last_run_at": lane.get("last_run_at"),
-            "source_workflow": lane.get("source_workflow"),
-            "link": "index.html#security-dashboard",
+            "source_workflow": workflow,
+            "link": link,
         })
     return checkpoints
 

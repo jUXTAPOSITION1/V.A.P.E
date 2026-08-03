@@ -125,6 +125,23 @@ const ZONE_FOR_KIND = {
     databureau: 'Infrastructure · Data Acquisition',
 };
 
+// One plain-language line on what a building actually does -- the zone
+// above is a SimCity-style label, this is the real-process explanation a
+// first-time visitor needs, shown right under it in the detail card.
+// checkpoint has no fixed line here since its own real title+headline
+// (e.g. "Static Analysis (CodeQL): 100 open alert(s)") already says it.
+const KIND_DESCRIPTION = {
+    precinct: 'Runs real contract/wallet investigations and publishes a reject, caution, or proceed verdict on each.',
+    tower: 'Tracks live bug-bounty programs across every platform VAPE watches.',
+    newsroom: 'VAPE Wire: the automated desk that publishes VAPE’s own news dispatches.',
+    watchtower: 'Surfaces on-chain attack intelligence and logs real security incidents as they’re found.',
+    mint: 'Settles every x402 job VAPE fulfills for another agent or paying client, live on Base.',
+    foundry: 'Where VAPE builds and verifies its own tools — the hub every dispatch in this city radiates from.',
+    vault: 'Seals every real security finding into a tamper-evident, hash-chained ledger.',
+    skillforge: 'Codifies verified skills and tools into VAPE’s own shared knowledge base.',
+    databureau: 'Logs every real internal paid hire of a market-data tool VAPE relies on.',
+};
+
 // Terrain hues are their own ramp -- deliberately not part of the 7
 // validated building-identity colors above (different job: quiet backdrop,
 // not a categorical data set shown side-by-side).
@@ -425,13 +442,13 @@ const CityScape = {
         };
         this._instances.push(inst);
 
-        // Only the full page ever shows the wider world -- the compact
-        // diorama stays exactly the tightly-cropped city glance it always
-        // was (no terrain build cost on a widely-embedded small widget).
-        if (mode === 'full') {
-            if (!this._terrainCache[0]) this._buildTerrainCache(0);
-            inst.oceanGlints = Array.from({ length: 10 }, () => this._spawnOceanGlint());
-        }
+        // 'compact' and 'full' are the same one grid, same camera rig --
+        // just a smaller viewport and a tighter default zoom. Both build
+        // the same world terrain cache (shared across instances by
+        // rotation stop, so a second instance is nearly free) so rotate/
+        // zoom/pan genuinely behave identically everywhere this mounts.
+        if (!this._terrainCache[0]) this._buildTerrainCache(0);
+        inst.oceanGlints = Array.from({ length: 10 }, () => this._spawnOceanGlint());
 
         if (this._cityState) this._loadCity(inst, this._cityState);
         this._wireInteraction(inst);
@@ -574,10 +591,9 @@ const CityScape = {
         let dragStart = null;
         let moved = false;
 
-        // Full mode's floor is low enough that zooming all the way out
-        // reveals the entire ~100x93-tile world, not just downtown; compact
-        // never shows the world at all, so its floor is unchanged.
-        const clampScale = s => Math.max(inst.mode === 'full' ? 0.07 : 0.5, Math.min(2.6, s));
+        // Same floor in every mode -- one grid, so zooming all the way out
+        // reveals the same wider world regardless of how small the stage is.
+        const clampScale = s => Math.max(0.07, Math.min(2.6, s));
         const pointerAngleDeg = (a, b) => Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI);
 
         canvas.addEventListener('pointerdown', (e) => {
@@ -603,23 +619,15 @@ const CityScape = {
                 inst.scale = clampScale(pinchStartScale * (dist / pinchStartDist));
                 // Two-finger twist (the mobile analog of the desktop compass
                 // drag below) -- the same real-time pointer-angle delta a
-                // map app's rotate gesture uses, only meaningful in 'full'
-                // mode since compact has no rotation controls at all.
-                if (inst.mode === 'full') {
-                    const angleDelta = pointerAngleDeg(a, b) - pinchStartAngle;
-                    inst.rotation = ((pinchStartRotation + angleDelta) % 360 + 360) % 360;
-                    this._syncCompassDial(inst);
-                }
+                // map app's rotate gesture uses, identical in every mode.
+                const angleDelta = pointerAngleDeg(a, b) - pinchStartAngle;
+                inst.rotation = ((pinchStartRotation + angleDelta) % 360 + 360) % 360;
+                this._syncCompassDial(inst);
                 moved = true;
             } else if (dragStart) {
-                // moved is tracked in every mode (a compact-stage drag must
-                // not be misread as a tap by the click handler below); only
-                // 'full' mode actually pans the camera with it.
                 if (Math.abs(e.clientX - dragStart.x) + Math.abs(e.clientY - dragStart.y) > 4) moved = true;
-                if (inst.mode === 'full') {
-                    inst.offsetX = dragStart.offX + (e.clientX - dragStart.x);
-                    inst.offsetY = dragStart.offY + (e.clientY - dragStart.y);
-                }
+                inst.offsetX = dragStart.offX + (e.clientX - dragStart.x);
+                inst.offsetY = dragStart.offY + (e.clientY - dragStart.y);
             }
         });
         const endPointer = (e) => {
@@ -646,7 +654,7 @@ const CityScape = {
             }
             // The twist gesture just ended -- settle on the nearest of the
             // 8 rotation stops, same as releasing the desktop compass dial.
-            if (wasTwoFinger && pointers.size < 2 && inst.mode === 'full') {
+            if (wasTwoFinger && pointers.size < 2) {
                 inst.rotation = nearestRotationStop(inst.rotation);
                 inst.terrainRotation = inst.rotation;
                 this._syncCompassDial(inst);
@@ -655,14 +663,12 @@ const CityScape = {
         canvas.addEventListener('pointerup', endPointer);
         canvas.addEventListener('pointercancel', endPointer);
 
-        if (inst.mode === 'full') {
-            canvas.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                const factor = e.deltaY < 0 ? 1.1 : 0.9;
-                inst.scale = clampScale(inst.scale * factor);
-            }, { passive: false });
-            canvas.addEventListener('dblclick', (e) => { inst.scale = clampScale(inst.scale * 1.4); });
-        }
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const factor = e.deltaY < 0 ? 1.1 : 0.9;
+            inst.scale = clampScale(inst.scale * factor);
+        }, { passive: false });
+        canvas.addEventListener('dblclick', (e) => { inst.scale = clampScale(inst.scale * 1.4); });
 
         canvas.addEventListener('click', (e) => {
             if (moved) return;
@@ -683,7 +689,7 @@ const CityScape = {
         if (zoomIn) zoomIn.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 1.25); });
         if (zoomOut) zoomOut.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 0.8); });
         // A one-tap way back to downtown after zooming/panning/rotating out
-        // to see the wider world -- only meaningful in 'full' mode.
+        // to see the wider world.
         if (zoomReset) zoomReset.addEventListener('click', () => {
             inst.scale = 1; inst.offsetX = 0; inst.offsetY = 0;
             inst.rotation = 0; inst.terrainRotation = 0;
@@ -772,6 +778,7 @@ const CityScape = {
         }
         const color = b.kind === 'checkpoint' ? statusColor(b.status) : kindColor(b.kind);
         const zone = ZONE_FOR_KIND[b.kind];
+        const description = KIND_DESCRIPTION[b.kind];
         const rows = [];
         if (b.stat_primary && b.stat_primary.value != null) {
             rows.push(`<div class="city-detail-row"><span>${escapeHtml(b.stat_primary.label)}</span><b>${escapeHtml(b.stat_primary.value)}</b></div>`);
@@ -805,20 +812,25 @@ const CityScape = {
                 <button type="button" class="city-detail-close" data-close>Close ✕</button>
             </div>
             ${zone ? `<div class="city-detail-zone">${escapeHtml(zone)}</div>` : ''}
+            ${description ? `<p class="city-detail-desc">${escapeHtml(description)}</p>` : ''}
             ${rows.join('') || '<div class="city-detail-row"><span>No data this cycle.</span></div>'}
             ${growthHtml}
             ${safeHref(b.link) ? `<a class="city-detail-link" href="${escapeHtml(safeHref(b.link))}">Open <i class="fa-solid fa-arrow-right text-[9px]"></i></a>` : ''}
         `;
         card.style.display = 'block';
-        // Position near the building, clamped inside the stage.
+        // Position near the building, clamped inside the stage. Measured
+        // off the card's own actual rendered size (its content -- stat
+        // rows, description, growth bar -- varies per building) rather
+        // than a fixed guess, so a card near the edge never clips.
+        const cardWidth = card.offsetWidth, cardHeight = card.offsetHeight;
         const box = inst.hitboxes.find(h => h.building.id === b.id);
         const w = inst.el.clientWidth, h = inst.el.clientHeight;
         if (box) {
             const originX = w / 2 + inst.offsetX, originY = h * 0.32 + inst.offsetY;
             let left = originX + box.x * inst.scale - 100;
             let top = originY + box.y * inst.scale - 70;
-            left = Math.max(6, Math.min(w - 226, left));
-            top = Math.max(6, Math.min(h - 140, top));
+            left = Math.max(6, Math.min(w - cardWidth - 6, left));
+            top = Math.max(6, Math.min(h - cardHeight - 6, top));
             card.style.left = `${left}px`;
             card.style.top = `${top}px`;
         }
@@ -952,9 +964,10 @@ const CityScape = {
 
         const phase = dayPhase();
         // Sky is drawn in plain screen space (before translate/scale) so it
-        // always fills the viewport regardless of pan/zoom/rotation --
-        // compact mode keeps its existing static CSS backdrop instead.
-        if (inst.mode === 'full') {
+        // always fills the viewport regardless of pan/zoom/rotation -- every
+        // mode gets the same real local-clock sky (it paints over compact's
+        // static CSS backdrop, same as the rest of this one shared scene).
+        {
             const sky = skyGradientStops(phase);
             const grad = ctx.createLinearGradient(0, 0, 0, h);
             grad.addColorStop(0, sky.top);
@@ -981,7 +994,7 @@ const CityScape = {
         // match and every position re-projects properly again.
         const liveRotation = inst.rotation;
         const liveDelta = liveRotation - inst.terrainRotation;
-        const spinning = inst.mode === 'full' && Math.abs(liveDelta) > 0.05;
+        const spinning = Math.abs(liveDelta) > 0.05;
         if (spinning) inst.rotation = inst.terrainRotation;
 
         if (spinning) {
@@ -999,13 +1012,11 @@ const CityScape = {
             ctx.fillRect(-8000, -8000, 16000, 16000);
         }
 
-        if (inst.mode === 'full') {
-            if (!this._terrainCache[inst.terrainRotation]) this._buildTerrainCache(inst.terrainRotation);
-            else this._touchTerrainCache(inst.terrainRotation);
-            const tc = this._terrainCache[inst.terrainRotation], origin = this._terrainOrigin[inst.terrainRotation];
-            if (tc && origin) ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
-            this._drawOceanGlints(inst);
-        }
+        if (!this._terrainCache[inst.terrainRotation]) this._buildTerrainCache(inst.terrainRotation);
+        else this._touchTerrainCache(inst.terrainRotation);
+        const tc = this._terrainCache[inst.terrainRotation], origin = this._terrainOrigin[inst.terrainRotation];
+        if (tc && origin) ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
+        this._drawOceanGlints(inst);
         this._drawDowntownGround(inst, phase);
         this._drawRoads(inst, phase);
         this._drawAmbient(inst, phase);
@@ -1069,7 +1080,7 @@ const CityScape = {
     // cells, unlike the much larger surrounding world).
     _drawDowntownGround(inst, phase) {
         const { ctx } = inst;
-        const night = inst.mode === 'full' && isNight(phase);
+        const night = isNight(phase);
         const hw = TILE_W / 2, hh = TILE_H / 2;
         (inst.groundCells || []).forEach(({ gx, gy, feature }) => {
             const r = rotateAroundPivot(gx + 0.5, gy + 0.5, inst.rotation);
@@ -1079,9 +1090,6 @@ const CityScape = {
             ctx.closePath();
             ctx.fillStyle = feature === 'park' ? '#213b28' : '#212126';
             ctx.fill();
-            ctx.strokeStyle = 'rgba(0,0,0,0.18)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
 
             if (feature === 'park') {
                 [[-6, -2], [5, 1], [0, -6], [-2, 5]].forEach(([ox, oy]) => this._drawTreeGlyph(ctx, cx + ox, cy + oy, 0.8));
@@ -1143,7 +1151,7 @@ const CityScape = {
     // a road's other end actually is), not a fabricated road-class dataset.
     _drawRoads(inst, phase) {
         const { ctx } = inst;
-        const lit = inst.mode === 'full' && isNight(phase);
+        const lit = isNight(phase);
         const activity = inst.layer === 'activity';
         const strokePath = (pts, width, style) => {
             ctx.strokeStyle = style;
@@ -1198,7 +1206,7 @@ const CityScape = {
     // night.
     _drawAmbient(inst, phase) {
         const { ctx } = inst;
-        const lit = inst.mode === 'full' && isNight(phase);
+        const lit = isNight(phase);
         inst.ambient.forEach(a => {
             const p = this._pointAlongRoadPath(a.road, a.t, inst.rotation);
             if (a.kind === 'pedestrian') {
@@ -1331,7 +1339,7 @@ const CityScape = {
         const isCheckpoint = b.kind === 'checkpoint';
         const base = isCheckpoint || inst.layer === 'health' ? statusColor(b.status) : kindColor(b.kind);
         const alert = b.status === 'alert';
-        const night = inst.mode === 'full' && isNight(phase);
+        const night = isNight(phase);
         const growth = isCheckpoint ? { levels: 0, fillFraction: 0 } : this._buildingGrowth(b);
 
         // Ground shadow -- every building (checkpoints included) gets one,
@@ -1431,7 +1439,7 @@ const CityScape = {
         // (not checkpoints -- 10 tiny identical marks would just be noise
         // at this scale). Canvas text can't render Font Awesome's ligature
         // glyphs, so this stays a plain letter rather than a broken icon.
-        if (!isCheckpoint && inst.mode === 'full') {
+        if (!isCheckpoint) {
             ctx.fillStyle = 'rgba(9,9,11,0.55)';
             ctx.font = `600 11px ${canvasFontFamily()}, sans-serif`;
             ctx.textAlign = 'center';
@@ -1886,12 +1894,6 @@ const CityScape = {
         ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
         ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
         ctx.closePath(); ctx.fill();
-
-        ctx.strokeStyle = 'rgba(0,0,0,0.12)';
-        ctx.lineWidth = 1;
-        if (biome === 'vacant') ctx.setLineDash([3, 3]); // a surveyed, undeveloped lot -- never a building
-        ctx.stroke();
-        if (biome === 'vacant') ctx.setLineDash([]);
 
         // Trees + parks -- pure world scenery, same non-data category as
         // the rest of this terrain layer. A handful of fixed tiles near
