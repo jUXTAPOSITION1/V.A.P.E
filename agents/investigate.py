@@ -19,14 +19,17 @@ Pipeline (all keyless where possible, graceful degradation):
 
 Scoring is deterministic — score() below is a pure weighted heuristic, never an
 LLM call, and its verdict is never overridden by one. On top of that, every
-report gets a real synthesis layer: _expert_assessment() routes the exact same
-evidence through agents/research_engine.py::synthesize() (frontier model via
-FRONTIER_ORDER) for actual analysis plus an explicit AGREE/DISAGREE second
-opinion on the verdict and an explicit gaps/confidence read — disagreements
-are logged to Memory as signal, never used to mutate the verdict itself. Same
-"surface, don't override" pattern as agents/critic.py's structural self-check.
-Degrades to "not available this cycle" with zero LLM keys configured, same as
-every other real-data source here.
+report leads with a real synthesis layer: _expert_assessment() routes the
+exact same evidence through agents/research_engine.py::synthesize() (frontier
+model via FRONTIER_ORDER) to write the primary Expert Assessment -- the
+detective's own conclusion, not a second opinion agreeing/disagreeing with
+the score. An internal AGREE/DISAGREE read against the rule-based verdict is
+still tracked (never rendered in the report) purely as signal: a real
+disagreement is logged to Memory for self_improve.py/review_ledger.py, never
+used to mutate the verdict itself. Same "surface, don't override" pattern as
+agents/critic.py's structural self-check. Degrades to "not available this
+cycle" with zero LLM keys configured, same as every other real-data source
+here.
 
 CLI:
   python agents/investigate.py --address 0x... [--chain 8453]
@@ -47,7 +50,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from agents.report_format import letterhead_md, verdict_stamp
+from agents.report_format import letterhead_md, verdict_stamp, score_badge
 from agents import critic
 
 INVEST_DIR = os.path.join(ROOT, "intel", "investigations")
@@ -226,6 +229,27 @@ def _sanitize_symbol(s):
     return s.strip()[:80] or None
 
 
+_SPARK_BLOCKS = "▁▂▃▄▅▆▇█"
+
+
+def _sparkline(values):
+    """A compact unicode block sparkline over already-real, already-fetched
+    numbers (e.g. DexScreener's own m5/h1/h6/h24 volume or price-change
+    windows) — never an interpolated or fabricated series, just the handful
+    of real points on hand scaled to 8 levels. None values are dropped
+    (never zero-filled, which would fabricate a data point); returns None
+    outright when fewer than 2 real numeric points remain, since a
+    "trend" over a single point isn't one."""
+    pts = [float(v) for v in (values or []) if isinstance(v, (int, float))]
+    if len(pts) < 2:
+        return None
+    lo, hi = min(pts), max(pts)
+    span = hi - lo
+    if span == 0:
+        return _SPARK_BLOCKS[0] * len(pts)
+    return "".join(_SPARK_BLOCKS[min(7, int((v - lo) / span * 7.999))] for v in pts)
+
+
 # ── recon steps ───────────────────────────────────────────────────────────────
 def goplus_security(address, chain="8453"):
     d = _get_with_retries(f"https://api.gopluslabs.io/api/v1/token_security/{chain}"
@@ -277,6 +301,16 @@ def dexscreener(address, chain="8453"):
         # deep-dive report show the audited project's actual branding
         # instead of none at all.
         "logo_url": info.get("imageUrl") or None,
+        # DexScreener's own multi-window price-change/volume fields — always
+        # returned in the same response as the h24 figures above, but only
+        # h24 was ever kept. A real (if short) trend, not a fabricated
+        # series: report rendering turns these into a compact sparkline
+        # (see _sparkline()) instead of discarding everything but the
+        # single most-recent window.
+        "price_change_windows": {k: v for k, v in (p.get("priceChange") or {}).items()
+                                  if k in ("m5", "h1", "h6", "h24") and isinstance(v, (int, float))},
+        "volume_windows": {k: v for k, v in (p.get("volume") or {}).items()
+                            if k in ("m5", "h1", "h6", "h24") and isinstance(v, (int, float))},
     }
 
 
@@ -1001,10 +1035,9 @@ _RISK_CATEGORIES = (
 
 def _bucket_for_report_reason(text):
     """First category (in _RISK_CATEGORIES' declared order) whose keyword
-    appears in `text`, or "Other" if none match. Shared by
-    _categorize_report_reasons() and _category_subscores() below so the two
-    views (which flags/signals landed where, and each category's derived
-    sub-score) can never silently drift apart."""
+    appears in `text`, or "Other" if none match. Used by
+    _categorize_report_reasons() below for the report's "Risk Breakdown by
+    Category" section."""
     low = text.lower()
     for name, keywords in _RISK_CATEGORIES:
         if any(k in low for k in keywords):
@@ -1038,27 +1071,147 @@ def _categorize_report_reasons(reasons, positive_signals):
 _REASON_WEIGHT_RE = re.compile(r"^\[([+-])(\d+)\]")
 
 
-def _category_subscores(reasons):
-    """Best-effort, clearly-derived per-category sub-scores for the
-    Executive Summary's composite ranking view (the user's explicit ask:
-    "Security 95/100, Fundamentals 70/100, Tokenomics 60/100 -> overall
-    rank"). NOT a second scoring engine — score() never computes categories
-    in isolation (some penalties interact with the overall legitimacy cap
-    that this simple per-category net can't see), so this is a readability
-    aid, not an independent source of truth; the real score/verdict from
-    score() remains authoritative and is always shown alongside it. Starts
-    every one of the 4 fixed categories at 100 and nets each of its own
-    weighted reasons against that, clamped to [0, 100]."""
-    totals = {name: 100 for name, _ in _RISK_CATEGORIES}
+# ── Scoring Dashboard: weighted, multi-factor category scores ──────────────
+# Replaces the old flat Executive Summary table (100 minus whichever of
+# score()'s flags happened to keyword-bucket into that name — real weights
+# from score()'s own penalty magnitudes, but blind to anything score() itself
+# never scores; there was no way to show low narrative/social proof as a
+# category weak point when no rule ever flagged it). This still isn't a
+# second scoring engine — score()'s own number/verdict stays the one
+# authoritative source of truth — but each category here draws on real,
+# direct signals beyond score()'s reason strings where those exist (declared
+# website/social presence, whether a real project narrative was actually
+# established), not just a keyword-matched net of the same flags every other
+# view already shows.
+_CATEGORY_WEIGHTS = (
+    ("Contract Security & Controls", 0.25),
+    ("Liquidity Health & Lock Quality", 0.20),
+    ("Holder Distribution & Concentration", 0.15),
+    ("Transparency & Provenance", 0.15),
+    ("Narrative Strength & Social Proof", 0.15),
+    ("Longevity & Clean Track Record", 0.10),
+)
+
+# Short badge labels for the Scoring Dashboard's score_badge() column — the
+# full category name is already the table's row label, so the badge itself
+# only needs a compact, distinct tag.
+_CATEGORY_SHORT_LABEL = {
+    "Contract Security & Controls": "security",
+    "Liquidity Health & Lock Quality": "liquidity",
+    "Holder Distribution & Concentration": "holders",
+    "Transparency & Provenance": "transparency",
+    "Narrative Strength & Social Proof": "narrative",
+    "Longevity & Clean Track Record": "longevity",
+}
+
+# Keyword buckets for the 5 categories that DO have real coverage in
+# score()'s own reasons/positive_signals — first match wins, most specific
+# first. Deliberately excludes "Narrative Strength & Social Proof": score()
+# has no rule that ever produces a narrative/social reason string (that's
+# exactly the gap this dashboard closes), so that category is built entirely
+# from direct signals in _compute_category_scores() below instead.
+_CATEGORY_KEYWORDS = (
+    ("Contract Security & Controls", (
+        "honeypot", "cannot sell", "mintable", "mint function",
+        "ownership can be reclaimed", "take back ownership", "change balances",
+        "hidden owner", "proxy", "pausable", "buy tax", "sell tax",
+        "not renounced", "renounced",
+    )),
+    ("Liquidity Health & Lock Quality", ("liquidity", "locked")),
+    ("Holder Distribution & Concentration", ("holder", "concentrat", "distribution", "manipulated", "supply")),
+    ("Transparency & Provenance", (
+        "audit", "verified source", "unverified", "factory", "template",
+        "deployer", "web search", "scam", "rug", "eoa", "no contract code",
+        "peg", "stablecoin", "impersonat", "fdv", "dilution",
+    )),
+    ("Longevity & Clean Track Record", (
+        "days old", "track record", "violent", "volatility", "24h move", "defillama",
+    )),
+)
+
+
+def _bucket_for_category_dashboard(text):
+    low = text.lower()
+    for name, keywords in _CATEGORY_KEYWORDS:
+        if any(k in low for k in keywords):
+            return name
+    return None
+
+
+def _category_rationale(name, score, hits):
+    """One short, human-readable sentence per category row — the user's
+    explicit ask that each row carry a real rationale, not just a bare
+    number. Built from the same hits (flags/signals/direct notes) the score
+    itself was netted against, so the sentence can never say something the
+    number doesn't back up."""
+    if not hits:
+        return "No signal either way this cycle." if score == 100 else "Derived from the evidence above."
+    return "; ".join(hits[:3]) + ("." if not hits[0].endswith(".") else "")
+
+
+def _compute_category_scores(reasons, positive_signals, dex=None, project_narrative=None, web_rep=None):
+    """Six weighted 0-100 category scores + a one-line rationale each, for
+    the report's Scoring Dashboard. Presentation-layer instrumentation, same
+    as _category_subscores() above — score()'s deterministic number/verdict
+    is never derived FROM these, only alongside them, so a caller can't
+    accidentally let a report's headline verdict drift from the one real
+    scoring engine. Never raises; missing evidence just leaves a category at
+    its neutral baseline rather than crashing report generation."""
+    totals = {name: 100.0 for name, _ in _CATEGORY_WEIGHTS}
+    hits = {name: [] for name, _ in _CATEGORY_WEIGHTS}
+
     for r in reasons or []:
         m = _REASON_WEIGHT_RE.match(r)
         if not m:
             continue
+        name = _bucket_for_category_dashboard(r)
+        if not name:
+            continue
         delta = int(m.group(2)) * (1 if m.group(1) == "+" else -1)
-        name = _bucket_for_report_reason(r)
-        if name in totals:
-            totals[name] += delta
-    return {name: max(0, min(100, totals[name])) for name in totals}
+        totals[name] += delta
+        if delta < 0:
+            hits[name].append(r.split("]", 1)[-1].strip())
+    for p in positive_signals or []:
+        name = _bucket_for_category_dashboard(p)
+        if name:
+            hits[name].append(f"(+) {p}")
+
+    # Narrative Strength & Social Proof — the one category score() has no
+    # rule for at all. A real anonymous/undocumented token starts LOW here
+    # (missing narrative/social surface is itself a disclosed risk, the
+    # same "absence of evidence isn't evidence of safety" principle score()
+    # already applies via its legitimacy cap), not neutral at 100 the way
+    # an untouched keyword bucket would default to.
+    narrative_score = 20.0
+    narrative_hits = []
+    site_links = [w.get("url") for w in ((dex or {}).get("websites") or []) if w.get("url")]
+    social_links = [soc for soc in ((dex or {}).get("socials") or []) if soc.get("url")]
+    if site_links:
+        narrative_score += 25
+        narrative_hits.append("has a declared project website")
+    if social_links:
+        narrative_score += 15 * min(2, len(social_links))
+        narrative_hits.append(f"{len(social_links)} declared social link(s)")
+    if project_narrative and project_narrative.get("text"):
+        if project_narrative.get("address_identity_verified"):
+            narrative_score += 25
+            narrative_hits.append("a real, address-verified project narrative was established")
+        else:
+            narrative_score += 10
+            narrative_hits.append("a narrative exists but this contract's affiliation with it is unverified")
+    else:
+        narrative_hits.append("no coherent project narrative could be established this cycle")
+    if web_rep and web_rep.get("available") and not web_rep.get("hits"):
+        narrative_score += 5
+    totals["Narrative Strength & Social Proof"] = narrative_score
+    hits["Narrative Strength & Social Proof"] = narrative_hits
+
+    result = {}
+    for name, weight in _CATEGORY_WEIGHTS:
+        score = max(0, min(100, round(totals[name])))
+        result[name] = {"score": score, "weight": weight,
+                         "rationale": _category_rationale(name, score, hits[name])}
+    return result
 
 
 # ── report + persistence ────────────────────────────────────────────────────
@@ -1104,25 +1257,47 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append("")
     L.append("---")
     L.append("")
+    # Real gap this closes: the Expert Assessment used to sit halfway down
+    # the report, framed as a second opinion "agreeing/disagreeing" with the
+    # verdict above it — two agents seemingly arguing, instead of the
+    # detective's own primary conclusion. It's the first substantive section
+    # now (right after the header), and never surfaces agree/disagree
+    # language — that internal signal still exists and still feeds
+    # self_improve.py/review_ledger.py (see _log_expert_disagreement()), it
+    # just isn't published as a rendered tag anymore. The categorized
+    # rule-based numbers below are supporting instrumentation for this
+    # judgment, not the other way around.
+    L.append("## Expert Assessment")
+    if expert_assessment and expert_assessment.get("text"):
+        L.append(expert_assessment["text"])
+    else:
+        L.append("- Expert assessment not available this cycle.")
+    L.append("")
     # Real gap this closes: a single flat score/verdict doesn't show WHERE a
     # token is strong vs. weak, and there was no top-level composite view at
     # all — the user's explicit template ask ("Executive Summary + Overall
     # Ranking Score, composite with category breakdown ... -> overall
-    # rank"). Derived entirely from score()'s own output (see
-    # _category_subscores()'s docstring for why this is a presentation aid,
-    # not a second scoring engine) — the authoritative score/verdict above
-    # is unchanged either way.
-    L.append("## Executive Summary")
-    L.append(f"**Overall: {verdict} ({s}/100)**")
+    # rank"). Replaces that flat "100 minus whichever flags happened to
+    # keyword-bucket here" table with real per-category weights and a
+    # one-line rationale each (_compute_category_scores()'s docstring) --
+    # still purely presentation-layer: score()'s own number/verdict above
+    # remains the one authoritative source of truth, never derived from
+    # this weighted sum.
+    L.append("## Scoring Dashboard")
+    L.append(f"**Overall: {s}/100 — {verdict}** {score_badge(s, label='overall')}")
     L.append("")
-    L.append("| Category | Score |")
-    L.append("|---|---|")
-    for name, sub in _category_subscores(reasons).items():
-        L.append(f"| {name} | {sub}/100 |")
+    L.append("| Category | Weight | Score | Rationale |")
+    L.append("|---|---|---|---|")
+    categories = _compute_category_scores(reasons, positive_signals, dex=dex,
+                                          project_narrative=project_narrative, web_rep=web_rep)
+    for name, cat in categories.items():
+        badge = score_badge(cat["score"], label=_CATEGORY_SHORT_LABEL.get(name, name))
+        L.append(f"| {name} | {cat['weight']*100:.0f}% | {badge} | {cat['rationale']} |")
     L.append("")
-    L.append("*Category scores are a derived readability aid (net effect of that "
-             "category's own flags against a 100 baseline) — the Overall score above, "
-             "computed by the full scoring engine, is the authoritative verdict.*")
+    L.append("*Weighted, multi-factor category view for where the risk actually concentrates — "
+             "the Overall score above, computed by the full deterministic scoring engine, is the "
+             "authoritative verdict; these categories are supporting instrumentation, not a second "
+             "scoring engine.*")
     L.append("")
     # Real gap this closes: the user's explicit template ask for a "Project
     # Overview & Narrative" section (what it is, utility, traction, history/
@@ -1191,15 +1366,6 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     else:
         L.append("- Nothing to categorize this cycle.")
         L.append("")
-    L.append("## Expert Assessment")
-    if expert_assessment and expert_assessment.get("text"):
-        tag = "⚠️ **DISAGREES with the verdict above**" if expert_assessment["disagrees"] else "Agrees with the verdict above"
-        L.append(f"- {tag}:")
-        L.append("")
-        L.append(expert_assessment["text"])
-    else:
-        L.append("- Expert assessment not available this cycle.")
-    L.append("")
     L.append("## Market & Liquidity")
     if dex:
         L.append(f"- Symbol/Name: {dex.get('symbol')} / {dex.get('name')}")
@@ -1208,6 +1374,26 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
         L.append(f"- 24h Volume: ${dex.get('vol_24h_usd')}")
         L.append(f"- 24h Change: {dex.get('change_24h_pct')}%")
         L.append(f"- DEX: {dex.get('dex')}")
+        # Real gap this closes: DexScreener's own multi-window (m5/h1/h6/h24)
+        # price-change and volume fields were already fetched but only the
+        # single h24 figure ever survived into the report -- a real, if
+        # short, trend line existed and was discarded every cycle. Rendered
+        # as a compact sparkline (_sparkline()'s docstring) over exactly
+        # those real points, oldest-to-newest; never shown when fewer than 2
+        # real windows are on hand, never interpolated.
+        pcw = dex.get("price_change_windows") or {}
+        vw = dex.get("volume_windows") or {}
+        window_order = ("m5", "h1", "h6", "h24")
+        pcw_keys = [k for k in window_order if k in pcw]
+        vw_keys = [k for k in window_order if k in vw]
+        pcw_spark = _sparkline([pcw[k] for k in pcw_keys])
+        vw_spark = _sparkline([vw[k] for k in vw_keys])
+        if pcw_spark:
+            L.append(f"- Price-change trend ({'/'.join(pcw_keys)}): `{pcw_spark}` "
+                     f"({', '.join(f'{k}: {pcw[k]:+.1f}%' for k in pcw_keys)})")
+        if vw_spark:
+            L.append(f"- Volume trend ({'/'.join(vw_keys)}): `{vw_spark}` "
+                     f"({', '.join(f'{k}: ${vw[k]:,.0f}' for k in vw_keys)})")
         # Real gap this closes: liquidity and market cap were both already
         # fetched (DexScreener + CoinGecko contract lookup, the same call
         # already used for the Tokenomics section below) but the ratio
@@ -1945,20 +2131,52 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
             evidence.append("Data agent bought " + "; ".join(
                 f"{h['offering']}={_fmt_data_agent_deliverable(h['deliverable'])}" for h in paid))
 
+    # Rewritten per a direct, concrete critique of a live report: the old
+    # instructions asked for detective work but still forced a framing where
+    # this section reads as a second opinion "agreeing/disagreeing" with the
+    # rule-based verdict above it — two agents seemingly arguing about the
+    # same evidence instead of one detective owning the full judgment. This
+    # is now told explicitly to BE the primary synthesis (write_report()
+    # moves it to the top of the report, right after the header), with the
+    # rule-based score/categories as its supporting instrumentation, not a
+    # peer to agree or disagree with. The AGREE/DISAGREE trailer request
+    # below is UNCHANGED and still real — see this function's own docstring
+    # for why (a genuine disagreement is signal for self_improve.py/
+    # review_ledger.py) — it's just never allowed to leak into the model's
+    # own prose anymore.
     extra_instructions = (
-        "This is a genuine investigation into a specific project/token — not grading a "
-        "checklist or restating fields you're given. Write actual detective work: what does "
-        "this evidence, taken together, say about who is actually behind this project, what it "
-        "actually does, and whether the picture holds together or has real gaps/contradictions "
-        "worth flagging? If you recognize this specific project, token, or deployer from your "
-        "own training, bring that background in explicitly — clearly marked as your own prior "
-        "knowledge, not something this cycle's evidence itself showed, since it wasn't "
-        "independently re-verified this run. Call out anything the rule-based verdict given in "
-        "the evidence may be underweighting or overweighting, grounded in a concrete evidence "
-        "gap or connection, not a vague feeling. Never name the specific third-party API/vendor "
-        "a piece of evidence came from (e.g. don't write 'according to GoPlus' or 'per "
-        "DexScreener') — describe it by what it measures instead (token-safety data, "
-        "market/liquidity data, etc.)."
+        "You are the lead investigator writing the primary Expert Assessment for this "
+        "investigation — the detective's own conclusion, not a second opinion checking someone "
+        "else's grade. The rule-based score/category breakdown elsewhere in this report is "
+        "supporting instrumentation for what you write here, not a verdict you are agreeing or "
+        "disagreeing with. Never frame your response that way, and never use the words "
+        "\"agree\"/\"disagree\"/\"the verdict above\" — own the judgment outright.\n\n"
+        "Structure your assessment in this order, as tight prose (short paragraphs, no "
+        "restating raw fields you're given):\n"
+        "1. Bottom-line posture in one clear sentence — your real stance on risk and legitimacy.\n"
+        "2. What the evidence actually supports — technical hygiene, ownership/lock quality, "
+        "holder distribution, longevity, and any other real positive signals; be specific and "
+        "quantitative, not vague.\n"
+        "3. Primary residual risks and missing surface, ranked by importance — explicitly call "
+        "out thin narrative/social proof, low absolute liquidity, concentration, or missing "
+        "team/provenance signals when the evidence shows them, don't let a clean security sweep "
+        "alone read as low risk.\n"
+        "4. Confidence and what would change the view — state your confidence in the technical "
+        "safety read separately from your confidence in the overall investment thesis, and name "
+        "the concrete signals that would raise or lower either one.\n"
+        "5. Actionable stance — a practical recommendation with size/exposure context (e.g. "
+        "\"acceptable only as a small, high-risk speculative position\", \"acceptable for "
+        "moderate size if liquidity deepens\", \"avoid until X improves\") and what would trigger "
+        "a re-check.\n\n"
+        "If you recognize this specific project, token, or deployer from your own training, "
+        "bring that background in explicitly — clearly marked as your own prior knowledge, not "
+        "something this cycle's evidence itself showed, since it wasn't independently "
+        "re-verified this run. Never invent facts, team members, utility, or history not in the "
+        "evidence or clearly marked as background knowledge. Never name the specific third-party "
+        "API/vendor a piece of evidence came from (e.g. don't write 'according to GoPlus' or "
+        "'per DexScreener') — describe it by what it measures instead (token-safety data, "
+        "market/liquidity data, etc.). Write in a direct, high-signal, professional style suited "
+        "to a real security dossier."
     )
     result = {
         "topic": f"{sym} ({target})", "task_type": "investigation", "known_facts": {},
@@ -1970,12 +2188,15 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     # with neither configured behaves identically to before this change.
     # search intentionally never enters this path — see this function's own
     # docstring for why passing it would defeat the point of this call.
+    # max_tokens raised (750 -> 900) and temperature tightened (0.4 -> 0.35)
+    # to give the now-5-part primary synthesis real room without drifting
+    # into looser, less evidence-anchored prose.
     synth = research_engine.synthesize(
         result, role="lead investigator", extra_instructions=extra_instructions,
         trailers=[{"type": "json", "name": "gaps", "label": "GAPS_JSON"},
                   {"type": "enum", "name": "verdict", "label": "VERDICT ALIGNMENT",
                    "options": ("AGREE", "DISAGREE")}],
-        max_tokens=750, temperature=0.4,
+        max_tokens=900, temperature=0.35,
     )
     text = (synth.get("narrative") or "").strip()
     if not text or text.startswith("_Synthesis unavailable"):
@@ -2047,10 +2268,6 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
     LLM path (same honest-degradation law as every other optional recon
     step here)."""
     try:
-        from skillforge.research import search as web_search
-    except Exception:
-        return None
-    try:
         from agents import research_engine
     except Exception:
         return None
@@ -2058,32 +2275,46 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
     query_name = (name or symbol or "").strip()
     if not query_name:
         return None
-    query = f'"{query_name}" crypto token project what is'
-    try:
-        res = web_search(query, max_results=5)
-    except Exception:
-        return None
-    raw = res.get("raw") if isinstance(res, dict) else None
-    results = []
-    if isinstance(raw, dict):
-        results = raw.get("results") or raw.get("data") or []
-    elif isinstance(raw, list):
-        results = raw
-    if not isinstance(results, list):
-        results = []
-    if not results and isinstance(res, dict) and res.get("results"):
-        results = res["results"]  # keyless fallback shape
 
+    # Real gap this closes (confirmed against a live report,
+    # investigation-20260802-203111-0xd7A73942.md): this function used to
+    # hard-bail to None the moment the web search itself failed or came back
+    # empty, EVEN WHEN the token had a real declared website/Twitter/
+    # Telegram (or a CoinGecko-tracked description) sitting right there in
+    # already-fetched data — a real, if thinner, narrative was always
+    # possible from that alone. Only bail when there's truly nothing to
+    # synthesize from at all: no fresh search hits AND no declared presence.
+    has_declared_data = bool(
+        (dex and (dex.get("websites") or dex.get("socials")))
+        or (coingecko_contract and (coingecko_contract.get("description") or coingecko_contract.get("homepage")))
+    )
+
+    query = f'"{query_name}" crypto token project what is'
     normalized = []
-    for r in results[:5]:
-        if not isinstance(r, dict):
-            continue
-        title = str(r.get("title") or "")
-        snippet = str(r.get("content") or r.get("snippet") or r.get("description") or "")
-        url = str(r.get("url") or "")
-        if title or snippet:
-            normalized.append({"title": title, "url": url, "snippet": snippet[:300]})
-    if not normalized:
+    try:
+        from skillforge.research import search as web_search
+        res = web_search(query, max_results=5)
+        raw = res.get("raw") if isinstance(res, dict) else None
+        results = []
+        if isinstance(raw, dict):
+            results = raw.get("results") or raw.get("data") or []
+        elif isinstance(raw, list):
+            results = raw
+        if not isinstance(results, list):
+            results = []
+        if not results and isinstance(res, dict) and res.get("results"):
+            results = res["results"]  # keyless fallback shape
+        for r in results[:5]:
+            if not isinstance(r, dict):
+                continue
+            title = str(r.get("title") or "")
+            snippet = str(r.get("content") or r.get("snippet") or r.get("description") or "")
+            url = str(r.get("url") or "")
+            if title or snippet:
+                normalized.append({"title": title, "url": url, "snippet": snippet[:300]})
+    except Exception:
+        normalized = []  # search unavailable this cycle -- fall through to declared-data-only below
+    if not normalized and not has_declared_data:
         return None
 
     # True only when CoinGecko's own /contract/{address} lookup — called
@@ -2116,9 +2347,14 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
         socials = ", ".join(f"{s.get('type')}: {s.get('url')}" for s in dex["socials"] if s.get("url"))
         if socials:
             evidence.append(f"Declared social(s): {socials}")
-    evidence.append("Real web search results:")
-    for r in normalized:
-        evidence.append(f"- \"{r['title']}\" ({r['url']}): {r['snippet']}")
+    if normalized:
+        evidence.append("Real web search results:")
+        for r in normalized:
+            evidence.append(f"- \"{r['title']}\" ({r['url']}): {r['snippet']}")
+    else:
+        evidence.append("Real web search results: none this cycle (search unavailable or returned nothing "
+                         "relevant) — synthesize from the declared data above only, and say so plainly "
+                         "rather than inventing detail to fill the gap.")
 
     grounding = "=== REAL EVIDENCE THIS CYCLE ===\n" + "\n".join(f"- {e}" for e in evidence)
     synth = research_engine.synthesize(
@@ -2146,7 +2382,16 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
     text = (synth.get("narrative") or "").strip()
     if not text or text.startswith("_Synthesis unavailable"):
         return None
-    return {"text": text, "sources": [r["url"] for r in normalized if r["url"]],
+    sources = [r["url"] for r in normalized if r["url"]]
+    if not sources:
+        # No fresh search hit to cite -- fall back to the token's own
+        # declared links so a reader still has somewhere real to click,
+        # rather than an empty Sources line under a real narrative.
+        if dex and dex.get("websites"):
+            sources.extend(w["url"] for w in dex["websites"] if w.get("url"))
+        if coingecko_contract and coingecko_contract.get("homepage"):
+            sources.append(coingecko_contract["homepage"])
+    return {"text": text, "sources": sources,
             "address_identity_verified": address_identity_verified}
 
 
