@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-03T14:53:24Z",
+  "generated_at": "2026-08-03T15:20:43Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 8,
+    "lanes_passing": 9,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -135,7 +135,7 @@
       "tier": 1,
       "stat_primary": {
         "label": "self-built tools",
-        "value": 14
+        "value": 15
       },
       "stat_secondary": [
         {
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1452
+        "value": 1471
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 2
+          "value": 1
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1582
+        "value": 1585
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T09:54:01Z"
+          "value": "2026-08-03T15:11:02Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-03T09:54:01Z",
+      "last_run_at": "2026-08-03T15:11:02Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T09:54:01Z"
+          "value": "2026-08-03T15:11:02Z"
         }
       ],
-      "last_run_at": "2026-08-03T09:54:01Z",
+      "last_run_at": "2026-08-03T15:11:02Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -370,7 +370,7 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "23 finding(s), 30d"
+        "value": "22 finding(s), 30d"
       },
       "stat_secondary": [
         {
@@ -379,7 +379,7 @@
         },
         {
           "label": "critical/high findings",
-          "value": 6
+          "value": 5
         }
       ],
       "last_run_at": "2026-08-02T14:05:28Z",
@@ -400,7 +400,7 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "23 finding(s), 30d"
+        "value": "22 finding(s), 30d"
       },
       "stat_secondary": [
         {
@@ -409,7 +409,7 @@
         },
         {
           "label": "critical/high findings",
-          "value": 6
+          "value": 5
         }
       ],
       "last_run_at": "2026-08-02T14:25:31Z",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T09:31:32Z"
+          "value": "2026-08-03T14:24:55Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-03T09:31:32Z",
+      "last_run_at": "2026-08-03T14:24:55Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -450,7 +450,7 @@
       "id": "lane-review-ledger",
       "kind": "checkpoint",
       "title": "Review Drift",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 5,
       "gridY": 10,
@@ -465,14 +465,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-01T10:44:41Z"
+          "value": "2026-08-03T12:21:47Z"
         },
         {
           "label": "worsened / improved (30d)",
           "value": "0 / 0"
         }
       ],
-      "last_run_at": "2026-08-01T10:44:41Z",
+      "last_run_at": "2026-08-03T12:21:47Z",
       "source_workflow": "review-ledger.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/review-ledger.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T09:47:36Z"
+          "value": "2026-08-03T14:40:56Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-03T09:47:36Z",
+      "last_run_at": "2026-08-03T14:40:56Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
