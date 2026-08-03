@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAPE Sim: The V.A.P.E Report</title>
-    <meta name="description" content="Every automated lane and real process VAPE runs, mapped as one living, bird's-eye isometric city — real data in every building, real x402 jobs moving through its streets.">
+    <title>VAPE Ave: The V.A.P.E Report</title>
+    <meta name="description" content="VAPE Ave: a real city built from VAPE's own operations, one building per real process, real data in every wall.">
     <link rel="canonical" href="https://juxtaposition1.github.io/V.A.P.E/city.html">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://juxtaposition1.github.io/V.A.P.E/city.html">
     <meta property="og:site_name" content="The V.A.P.E Report">
-    <meta property="og:title" content="VAPE Sim: The V.A.P.E Report">
+    <meta property="og:title" content="VAPE Ave: The V.A.P.E Report">
     <meta property="og:description" content="Every automated lane and real process VAPE runs, mapped as one living, bird's-eye isometric city.">
     <meta property="og:image" content="https://juxtaposition1.github.io/V.A.P.E/assets/og-image.jpg">
 
@@ -34,8 +34,8 @@
                 <svg id="nav-menu-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="hidden lg:hidden w-5 h-5 text-zinc-400 shrink-0"><path d="M5 5l14 14M19 5L5 19"/></svg>
                 <img src="assets/logo-v-256.png" alt="" width="26" height="26" class="w-[26px] h-[26px] shrink-0" onerror="this.remove()">
                 <div class="text-base tracking-tight leading-none whitespace-nowrap">
-                    <span class="sm:hidden">VAPE Sim</span>
-                    <span class="hidden sm:inline">The V.A.P.E Report: VAPE Sim</span>
+                    <span class="sm:hidden">VAPE Ave</span>
+                    <span class="hidden sm:inline">The V.A.P.E Report: VAPE Ave</span>
                 </div>
             </button>
             <div id="site-nav-links" class="hidden lg:flex items-center gap-6 text-[13px] text-zinc-500">
@@ -60,22 +60,21 @@
     <main class="pb-16">
         <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-6 pb-4">
             <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
-                <div class="eyebrow mb-3"><i class="fa-solid fa-city"></i>[ vape sim ]</div>
+                <div class="eyebrow mb-3"><i class="fa-solid fa-city"></i>[ vape ave ]</div>
                 <span id="city-updated" class="text-[11px] text-zinc-500">syncing…</span>
             </div>
             <h1 class="section-title text-xl sm:text-2xl mb-2">A living map of everything VAPE runs.</h1>
             <p class="text-zinc-400 text-sm max-w-2xl leading-relaxed">
-                Every automated security lane and real process — investigations, bounty ops, the newsroom,
-                threat intelligence, the tool-building foundry, the findings vault — laid out as one bird's-eye
-                city, on a real street grid with avenues to every real landmark and streets to every lane. A
-                building's own real rank sets how much detail it earns, from bare blockwork up to a glass
-                skyline spire; a real rank rising shows up live as a construction pulse. Dispatch vehicles roll
-                out from the Foundry the moment a real investigation, article, bounty lead, or incident lands —
-                emergency lights and all — and real x402 jobs settle as their own delivery trucks. Switch to the
-                Activity layer to see real per-building volume light up the streets. Rotate the camera to see
-                every side of downtown; the sky itself follows your own real local clock, never simulated. Zoom
-                out and the city sits inside a wider world — ocean, mountains, farmland, and open land held in
-                reserve for whatever VAPE builds next.
+                VAPE Ave is a city built entirely from VAPE's own operations. Each building corresponds to one
+                real process: investigations, bounty hunting, the newsroom, threat intelligence, the foundry
+                that builds VAPE's tools, and the vault that seals its findings. A building's size and condition
+                track real, current data, nothing invented for effect. The moment a real investigation closes,
+                an article publishes, a bounty lead appears, or an incident is logged, a dispatch vehicle leaves
+                the Foundry for it, and every settled x402 payment becomes its own delivery truck on the same
+                streets. Switch to the Activity layer to watch real transaction volume light the roads. Rotate
+                the avenue to study downtown from any side; the sky follows your own local clock rather than a
+                simulated one. Zoom out and the city sits inside open country, land held in reserve for
+                whatever VAPE builds next.
             </p>
         </div>
 
@@ -93,7 +92,7 @@
                 </div>
                 <div class="city-compass-group">
                     <button type="button" class="city-zoom-btn" data-city-rotate="ccw" aria-label="Rotate left"><i class="fa-solid fa-chevron-left"></i></button>
-                    <div class="city-compass" data-city-rotate-dial aria-label="Drag or swipe to rotate the camera">
+                    <div class="city-compass" data-city-rotate-dial aria-hidden="true">
                         <div class="city-compass-needle"><i class="fa-solid fa-caret-up"></i></div>
                     </div>
                     <button type="button" class="city-zoom-btn" data-city-rotate="cw" aria-label="Rotate right"><i class="fa-solid fa-chevron-right"></i></button>
@@ -108,7 +107,7 @@
             <div class="city-stat-strip"></div>
         </div>
 
-        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-4">
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-8 xl:px-10 pt-6">
             <div class="city-legend">
                 <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-low)"></span>Passing / live</span>
                 <span class="city-legend-item"><span class="city-legend-dot" style="background:var(--sev-medium)"></span>Caution</span>

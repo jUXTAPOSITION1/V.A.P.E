@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T01:59:33Z",
+  "generated_at": "2026-08-03T02:38:54Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 9,
@@ -447,31 +447,36 @@
       "id": "investigation:0x707266E2B21AD1921bdE5A8c5F4E1E034aFA7777",
       "type": "investigation",
       "timestamp": "2026-08-03T01:16:31Z",
-      "label": "Pizza"
+      "label": "Pizza",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18",
       "type": "investigation",
       "timestamp": "2026-08-03T00:16:27Z",
-      "label": "Pizza"
+      "label": "Pizza",
+      "verdict": "CAUTION"
     },
     {
       "id": "investigation:0x149002DdB0bb0342cDB1418C82B201bF415e7777",
       "type": "investigation",
       "timestamp": "2026-08-02T23:31:26Z",
-      "label": "Pizza"
+      "label": "Pizza",
+      "verdict": "PROCEED"
     },
     {
       "id": "investigation:0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5",
       "type": "investigation",
       "timestamp": "2026-08-02T22:31:22Z",
-      "label": "ADI"
+      "label": "ADI",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x8B1484d57abBE239bB280661377363b03c89CaEa",
       "type": "investigation",
       "timestamp": "2026-08-02T22:16:18Z",
-      "label": "ADI"
+      "label": "ADI",
+      "verdict": "CAUTION"
     },
     {
       "id": "news:Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules",
@@ -483,25 +488,29 @@
       "id": "investigation:0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
       "type": "investigation",
       "timestamp": "2026-08-02T20:46:20Z",
-      "label": "Baby Asteroid"
+      "label": "Baby Asteroid",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0xd7A7394294f4687966C60A1F68920f29688BF546",
       "type": "investigation",
       "timestamp": "2026-08-02T20:31:11Z",
-      "label": "Baby Asteroid"
+      "label": "Baby Asteroid",
+      "verdict": "PROCEED"
     },
     {
       "id": "investigation:0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
       "type": "investigation",
       "timestamp": "2026-08-02T20:15:50Z",
-      "label": "Baby Asteroid"
+      "label": "Baby Asteroid",
+      "verdict": "CAUTION"
     },
     {
       "id": "investigation:0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
       "type": "investigation",
       "timestamp": "2026-08-02T19:15:31Z",
-      "label": "Binance Pizza"
+      "label": "Binance Pizza",
+      "verdict": "CAUTION"
     },
     {
       "id": "news:SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage",
@@ -513,31 +522,36 @@
       "id": "investigation:0x80ac288e9664D7E2B59428125048eF48D853a93B",
       "type": "investigation",
       "timestamp": "2026-08-02T18:45:12Z",
-      "label": "New ORIGINLGNS"
+      "label": "New ORIGINLGNS",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A",
       "type": "investigation",
       "timestamp": "2026-08-02T18:29:51Z",
-      "label": "Spinning Rat Coin"
+      "label": "Spinning Rat Coin",
+      "verdict": "CAUTION"
     },
     {
       "id": "investigation:0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
       "type": "investigation",
       "timestamp": "2026-08-02T18:14:48Z",
-      "label": "CHUMSKY github.com/zesterer/CHUMSKY"
+      "label": "CHUMSKY github.com/zesterer/CHUMSKY",
+      "verdict": "CAUTION"
     },
     {
       "id": "investigation:0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
       "type": "investigation",
       "timestamp": "2026-08-02T17:59:39Z",
-      "label": "Zest"
+      "label": "Zest",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x8554D38b95E4F7Ca11D391008627Df30B2b07777",
       "type": "investigation",
       "timestamp": "2026-08-02T17:14:27Z",
-      "label": "\u5343\u91cc\u9a6c"
+      "label": "\u5343\u91cc\u9a6c",
+      "verdict": "REJECT"
     },
     {
       "id": "news:Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms",
@@ -549,19 +563,22 @@
       "id": "investigation:0x154bD4F21310DCdFd52661456caD70f99dF43dA5",
       "type": "investigation",
       "timestamp": "2026-08-02T15:14:46Z",
-      "label": "IDOL"
+      "label": "IDOL",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42",
       "type": "investigation",
       "timestamp": "2026-08-02T13:59:40Z",
-      "label": "SLOP"
+      "label": "SLOP",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x999B49c0d1612E619A4A4f6280733184da025108",
       "type": "investigation",
       "timestamp": "2026-08-02T13:44:44Z",
-      "label": "SLOP"
+      "label": "SLOP",
+      "verdict": "CAUTION"
     },
     {
       "id": "news:H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network",
@@ -573,19 +590,22 @@
       "id": "investigation:0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
       "type": "investigation",
       "timestamp": "2026-08-02T12:59:42Z",
-      "label": "BTW"
+      "label": "BTW",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x2FcB6f3d1Be8F16002B101ee3182eD9668797777",
       "type": "investigation",
       "timestamp": "2026-08-02T12:44:43Z",
-      "label": "BTW"
+      "label": "BTW",
+      "verdict": "REJECT"
     },
     {
       "id": "investigation:0x50eD3297BB27a52cb5F7730Fe452258a3BD17777",
       "type": "investigation",
       "timestamp": "2026-08-02T12:29:39Z",
-      "label": "God Bless Them"
+      "label": "God Bless Them",
+      "verdict": "REJECT"
     }
   ]
 }
