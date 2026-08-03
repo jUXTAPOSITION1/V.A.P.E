@@ -138,6 +138,11 @@ function terrainColor(kind) {
 // grid step) that keeps the math to four multiplies, no trig.
 const TILE_W = 64, TILE_H = 32;
 const TIER_UNIT = 15, BASE_HEIGHT = 18;
+// Real-count-driven growth -- every GROWTH_PER_LEVEL real jobs/reports a
+// building's own stat_primary.value accumulates earns one stacked setback
+// terrace, capped so an outlier count (the Vault's sealed-findings total
+// dwarfs everything else) never produces an absurd tower.
+const GROWTH_PER_LEVEL = 300, LEVEL_UNIT = 16, MAX_GROWTH_LEVELS = 4;
 
 function gridToScreen(gx, gy) {
     return { x: (gx - gy) * (TILE_W / 2), y: (gx + gy) * (TILE_H / 2) };
@@ -1210,6 +1215,20 @@ const CityScape = {
         });
     },
 
+    // Real jobs and reports don't just vanish on arrival anymore (see
+    // _advance's vehicle-absorption) -- they pile up inside their real
+    // destination building, visible through its own translucent walls,
+    // and enough of them (every GROWTH_PER_LEVEL) earn the building a
+    // real stacked terrace. Purely a re-reading of stat_primary.value,
+    // the exact same real cumulative count that building's detail card
+    // already shows -- never a second, invented number.
+    _buildingGrowth(b) {
+        const raw = b.stat_primary && typeof b.stat_primary.value === 'number' ? b.stat_primary.value : 0;
+        const levels = Math.min(MAX_GROWTH_LEVELS, Math.floor(raw / GROWTH_PER_LEVEL));
+        const fillFraction = raw > 0 ? (raw % GROWTH_PER_LEVEL) / GROWTH_PER_LEVEL : 0;
+        return { levels, fillFraction };
+    },
+
     _drawBuilding(inst, b, phase) {
         const { ctx } = inst;
         let [fw, fh] = b.footprint || [1, 1];
@@ -1223,20 +1242,13 @@ const CityScape = {
         const quadrant = Math.round(inst.rotation / 90) % 4;
         if (quadrant % 2 !== 0) { [fw, fh] = [fh, fw]; }
         const hw = (fw * TILE_W) / 2, hh = (fh * TILE_H) / 2;
-        const H = buildingHeightPx(b);
+        const baseH = buildingHeightPx(b);
         const { x: cx, y: cy } = buildingAnchorInfo(b, inst.rotation).screen;
         const isCheckpoint = b.kind === 'checkpoint';
         const base = isCheckpoint || inst.layer === 'health' ? statusColor(b.status) : kindColor(b.kind);
         const alert = b.status === 'alert';
         const night = inst.mode === 'full' && isNight(phase);
-
-        const top = { x: cx, y: cy - hh - H };
-        const right = { x: cx + hw, y: cy - H };
-        const bottom = { x: cx, y: cy + hh - H };
-        const left = { x: cx - hw, y: cy - H };
-        const rightBase = { x: cx + hw, y: cy };
-        const bottomBase = { x: cx, y: cy + hh };
-        const leftBase = { x: cx - hw, y: cy };
+        const growth = isCheckpoint ? { levels: 0, fillFraction: 0 } : this._buildingGrowth(b);
 
         // Ground shadow -- every building (checkpoints included) gets one,
         // the cheapest single fix for "looks like a block floating on the
@@ -1255,39 +1267,46 @@ const CityScape = {
             ctx.shadowBlur = 16;
         }
 
-        // Left face (darker), right face (mid), top face (brightest).
-        ctx.fillStyle = this._shade(base, -0.35);
-        ctx.beginPath();
-        ctx.moveTo(left.x, left.y); ctx.lineTo(bottom.x, bottom.y);
-        ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(leftBase.x, leftBase.y);
-        ctx.closePath(); ctx.fill();
+        // Real light-balls piling up inside, drawn before the walls so the
+        // translucent fill genuinely shows them "through the glass" rather
+        // than painted over them.
+        if (!isCheckpoint) this._drawContainedFill(ctx, cx, cy, hw, hh, baseH, growth.fillFraction, b.contained || []);
 
-        ctx.fillStyle = this._shade(base, -0.15);
-        ctx.beginPath();
-        ctx.moveTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y);
-        ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(rightBase.x, rightBase.y);
-        ctx.closePath(); ctx.fill();
+        // Ground level -- translucent (not checkpoints, which stay opaque
+        // uniform markers) at the building's real tier height.
+        const baseCorners = this._drawBoxFaces(ctx, cx, cy, hw, hh, baseH, base, isCheckpoint ? 1 : 0.62);
 
-        ctx.fillStyle = base;
-        ctx.beginPath();
-        ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
-        ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
-        ctx.closePath(); ctx.fill();
-
-        ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        // Growth terraces -- each real GROWTH_PER_LEVEL-job increment earns
+        // one stacked, narrower setback level, so real cumulative usage
+        // becomes actual added architecture instead of just a taller box.
+        // The lower level's own top face naturally shows as an exposed
+        // roof-deck ring around the narrower level stacked on it; a light
+        // railing outline is all that's added to read it as a terrace.
+        let topCorners = baseCorners, stackTopY = cy - baseH;
+        for (let i = 0; i < growth.levels; i++) {
+            const prevCorners = topCorners;
+            const scale = Math.max(0.45, 1 - (i + 1) * 0.15);
+            topCorners = this._drawBoxFaces(ctx, cx, stackTopY, hw * scale, hh * scale, LEVEL_UNIT, base, 0.62);
+            ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(prevCorners.top.x, prevCorners.top.y); ctx.lineTo(prevCorners.right.x, prevCorners.right.y);
+            ctx.lineTo(prevCorners.bottom.x, prevCorners.bottom.y); ctx.lineTo(prevCorners.left.x, prevCorners.left.y);
+            ctx.closePath(); ctx.stroke();
+            stackTopY -= LEVEL_UNIT;
+        }
+        const totalH = cy - stackTopY;
 
         if (alert) ctx.restore();
 
-        // Real facade -- a proper window grid fitted to both visible faces
-        // (not just a couple of hardcoded dots), day or night, on every
-        // landmark. This is the actual fix for "buildings just look like
-        // colored blocks": a lit/glazed grid reads as a real facade at a
-        // glance in a way a flat color never does.
+        // Real facade -- a proper window grid fitted to both visible
+        // ground-floor faces (not just a couple of hardcoded dots), day or
+        // night, on every landmark. This is the actual fix for "buildings
+        // just look like colored blocks": a lit/glazed grid reads as a
+        // real facade at a glance in a way a flat color never does.
         if (!isCheckpoint) {
-            this._drawFacadeWindows(ctx, left, bottom, bottomBase, leftBase, H, hw, hh, night);
-            this._drawFacadeWindows(ctx, right, bottom, bottomBase, rightBase, H, hw, hh, night);
+            this._drawFacadeWindows(ctx, baseCorners.left, baseCorners.bottom, baseCorners.bottomBase, baseCorners.leftBase, baseH, hw, hh, night);
+            this._drawFacadeWindows(ctx, baseCorners.right, baseCorners.bottom, baseCorners.bottomBase, baseCorners.rightBase, baseH, hw, hh, night);
             // A small dark entrance at street level on the near corner.
             ctx.fillStyle = 'rgba(0,0,0,0.5)';
             ctx.fillRect(cx - 2.5, cy + hh * 0.55 - 6, 5, 6);
@@ -1296,10 +1315,10 @@ const CityScape = {
         // downtown intersections -- an always-visible traffic-light pole,
         // plus a warm streetlamp glow layered on top at night.
         if (isCheckpoint) {
-            this._drawTrafficLight(ctx, cx, cy, H);
+            this._drawTrafficLight(ctx, cx, cy, baseH);
             if (night) {
                 ctx.beginPath();
-                ctx.arc(cx, cy - H - 5, 2.6, 0, Math.PI * 2);
+                ctx.arc(cx, cy - baseH - 5, 2.6, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255,230,150,0.9)';
                 ctx.shadowColor = 'rgba(255,220,140,0.85)';
                 ctx.shadowBlur = 10;
@@ -1308,15 +1327,15 @@ const CityScape = {
             }
         }
 
-        // A small initial-letter mark on the top face for landmarks (not
-        // checkpoints -- 10 tiny identical marks would just be noise at
-        // this scale). Canvas text can't render Font Awesome's ligature
+        // A small initial-letter mark on the topmost face for landmarks
+        // (not checkpoints -- 10 tiny identical marks would just be noise
+        // at this scale). Canvas text can't render Font Awesome's ligature
         // glyphs, so this stays a plain letter rather than a broken icon.
         if (!isCheckpoint && inst.mode === 'full') {
             ctx.fillStyle = 'rgba(9,9,11,0.55)';
             ctx.font = `600 11px ${canvasFontFamily()}, sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText(String(b.title || '?').charAt(0), top.x, top.y + 4);
+            ctx.fillText(String(b.title || '?').charAt(0), topCorners.top.x, topCorners.top.y + 4);
         }
 
         // Rooftop silhouette per real building *kind* -- a smokestack for
@@ -1324,16 +1343,18 @@ const CityScape = {
         // Newsroom, a beacon for the Watchtower, a dome for the Vault, a
         // sign frame for Bounty Ops, a coin disc for the Mint. `kind` is
         // already-real data; which small shape represents it is a display
-        // choice, same category as its identity color.
-        if (!isCheckpoint) this._drawRoofIcon(ctx, b.kind, top);
+        // choice, same category as its identity color. Sits on whichever
+        // level is actually on top, growth terraces included.
+        if (!isCheckpoint) this._drawRoofIcon(ctx, b.kind, topCorners.top);
 
         // Real-tier "wealth" detailing -- build_city_state.py's tier_for()
         // relative-percentile tier is this module's one honest analog of
         // SimCity's wealth-driven material progression: a real tier-1
         // building stays plain, a real tier-4 building earns the glass-
         // curtain-wall streak and rooftop spire, exactly as much extra
-        // detail as its real relative volume actually earned.
-        if (!isCheckpoint) this._drawWealthDetailing(ctx, b.tier || 1, cx, cy, top, right, hw, H);
+        // detail as its real relative volume actually earned. Anchored to
+        // the ground floor's own facade, independent of growth terraces.
+        if (!isCheckpoint) this._drawWealthDetailing(ctx, b.tier || 1, cx, cy, baseCorners.top, baseCorners.right, hw, baseH);
 
         // "Under construction" pulse -- fires only when _loadCity just saw
         // this building's real tier rise between two live fetches.
@@ -1344,18 +1365,105 @@ const CityScape = {
             ctx.lineWidth = 2;
             ctx.setLineDash([4, 3]);
             ctx.beginPath();
-            ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
-            ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
+            ctx.moveTo(topCorners.top.x, topCorners.top.y); ctx.lineTo(topCorners.right.x, topCorners.right.y);
+            ctx.lineTo(topCorners.bottom.x, topCorners.bottom.y); ctx.lineTo(topCorners.left.x, topCorners.left.y);
             ctx.closePath(); ctx.stroke();
             ctx.setLineDash([]);
             ctx.fillStyle = `rgba(255,255,255,${pulse.toFixed(2)})`;
             ctx.font = `600 9px ${canvasFontFamily()}, sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText('▲ upgrading', top.x, top.y - 8);
+            ctx.fillText('▲ upgrading', topCorners.top.x, topCorners.top.y - 8);
             ctx.restore();
         }
 
-        inst.hitboxes.push({ building: b, x: cx, y: cy - H / 2, hw: hw + 6, hh: hh + H / 2 + 6 });
+        inst.hitboxes.push({ building: b, x: cx, y: cy - totalH / 2, hw: hw + 6, hh: hh + totalH / 2 + 6 });
+    },
+
+    // One box segment's 3 visible isometric faces, at real alpha (< 1 for
+    // every real building except checkpoints, so the light-balls/fill
+    // drawn just before it genuinely show "through the glass" via normal
+    // alpha compositing). groundY is where this segment's own floor sits
+    // -- the base level's is the building's true ground; each growth
+    // terrace's is simply the level below's own returned top-face y.
+    _drawBoxFaces(ctx, cx, groundY, hw, hh, H, color, alpha) {
+        const top = { x: cx, y: groundY - hh - H };
+        const right = { x: cx + hw, y: groundY - H };
+        const bottom = { x: cx, y: groundY + hh - H };
+        const left = { x: cx - hw, y: groundY - H };
+        const rightBase = { x: cx + hw, y: groundY };
+        const bottomBase = { x: cx, y: groundY + hh };
+        const leftBase = { x: cx - hw, y: groundY };
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = this._shade(color, -0.35);
+        ctx.beginPath();
+        ctx.moveTo(left.x, left.y); ctx.lineTo(bottom.x, bottom.y);
+        ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(leftBase.x, leftBase.y);
+        ctx.closePath(); ctx.fill();
+
+        ctx.fillStyle = this._shade(color, -0.15);
+        ctx.beginPath();
+        ctx.moveTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y);
+        ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(rightBase.x, rightBase.y);
+        ctx.closePath(); ctx.fill();
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
+        ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
+        ctx.closePath(); ctx.fill();
+
+        ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
+
+        return { top, right, bottom, left, rightBase, bottomBase, leftBase };
+    },
+
+    // The "gumball machine" fill: a rising translucent volume from the
+    // ground up to how far this building's real cumulative count has
+    // gotten toward its next real growth level, plus one distinct light-
+    // ball per real event actually witnessed arriving this session (see
+    // _advance/_ballColorForVehicle) -- never a fabricated count of balls
+    // for the whole real history, since this session never saw most of it
+    // happen.
+    _drawContainedFill(ctx, cx, cy, hw, hh, H, fillFraction, balls) {
+        const fillH = Math.max(H * 0.08, H * Math.min(1, fillFraction));
+        const top = { x: cx, y: cy - hh - fillH };
+        const right = { x: cx + hw, y: cy - fillH };
+        const bottom = { x: cx, y: cy + hh - fillH };
+        const left = { x: cx - hw, y: cy - fillH };
+        const rightBase = { x: cx + hw, y: cy }, bottomBase = { x: cx, y: cy + hh }, leftBase = { x: cx - hw, y: cy };
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(150,180,255,0.38)';
+        ctx.beginPath();
+        ctx.moveTo(left.x, left.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(leftBase.x, leftBase.y);
+        ctx.closePath(); ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(rightBase.x, rightBase.y);
+        ctx.closePath(); ctx.fill();
+        ctx.fillStyle = 'rgba(190,205,255,0.5)';
+        ctx.beginPath();
+        ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
+        ctx.closePath(); ctx.fill();
+        ctx.restore();
+
+        const cols = 5;
+        balls.forEach((ball, i) => {
+            const row = Math.floor(i / cols) % 8, col = i % cols;
+            const fx = ((col + 0.5) / cols - 0.5) * 1.6;
+            const fy = 0.15 + (row / 8) * 0.75;
+            ctx.beginPath();
+            ctx.arc(cx + fx * hw, cy - fillH * fy, 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = ball.color;
+            ctx.shadowColor = ball.color;
+            ctx.shadowBlur = 4;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
     },
 
     _drawWealthDetailing(ctx, tier, cx, cy, top, right, hw, H) {
