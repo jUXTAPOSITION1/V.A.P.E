@@ -1191,3 +1191,5 @@
 | 2026-08-03 | auto | 0x68902977263936B5bCF51568342e6E5a70c71b0F (CATE) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-03 | auto | 0x69C47C7474B7b2d6153Effc4fa958183f4af7777 (SAFU) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-03 | auto | 0x3F117c342B46376B2F2527A56B4b4506A96D4444 (傻福) | deep_investigation | REJECT (40/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
