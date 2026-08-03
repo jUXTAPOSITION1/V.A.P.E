@@ -78,8 +78,21 @@ def test_returns_none_when_search_unavailable():
     m_llm.assert_not_called()
 
 
-def test_returns_none_when_search_yields_no_usable_results():
+def test_falls_back_to_declared_data_when_search_yields_no_usable_results():
+    """Real gap this pins (investigation-20260802-203111-0xd7A73942.md): the
+    function used to hard-bail to None the moment search came back empty,
+    even when the token had a real declared website/Twitter/Telegram sitting
+    right there in already-fetched dex data -- a thinner but real narrative
+    was always possible from that alone. Only bail when there's truly
+    nothing to synthesize from: no search hits AND no declared presence."""
     result, _m_search, m_llm = _call(search_return={"raw": {"results": []}})
+    assert result is not None
+    assert result["text"] == "Real grounded narrative text."
+    m_llm.assert_called_once()
+
+
+def test_returns_none_when_search_empty_and_no_declared_data_either():
+    result, _m_search, m_llm = _call(search_return={"raw": {"results": []}}, dex={})
     assert result is None
     m_llm.assert_not_called()
 

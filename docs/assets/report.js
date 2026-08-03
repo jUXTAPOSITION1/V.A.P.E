@@ -112,6 +112,13 @@ export function simpleMarkdownToHtml(md) {
         // lookbehind/lookahead here excludes.
         .replace(/(?<!\w)_([^_\n]+?)_(?!\w)/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code class="text-zinc-200">$1</code>')
+        // shields.io badges (investigate.py's Scoring Dashboard puts one per
+        // category, inside a table cell) are wide rectangles, not square
+        // logos — matched and styled BEFORE the generic image regex below so
+        // they never get its circular w-10 h-10 treatment (a wide badge
+        // squeezed into a rounded-full box the same width as its own height
+        // reads as broken, not as a badge).
+        .replace(/!\[([^\]]*)\]\((https:\/\/img\.shields\.io\/[^)\s]+)\)/g, '<img src="$2" alt="$1" class="h-[18px] inline-block align-middle" onerror="this.remove()">')
         // Image before link — deep_dive_audit.py/external_audit.py embed the
         // audited project's real logo as `![alt](url)`; without this it shows
         // up as literal broken Markdown text instead of the actual logo.

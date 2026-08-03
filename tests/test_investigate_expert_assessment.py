@@ -120,7 +120,7 @@ def test_log_expert_disagreement_noop_without_memory(monkeypatch):
 def test_write_report_renders_assessment_section(tmp_path, monkeypatch):
     monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
     gp, dex, onchain, verif = {}, {"symbol": "TOKEN"}, {"is_contract": True}, {}
-    assessment = {"text": "AGREE: real analysis here.", "disagrees": False}
+    assessment = {"text": "Real analysis here.", "disagrees": False}
     path, _sym, _emoji = inv.write_report(
         "0x" + "aa" * 20, "8453", gp, dex, onchain, verif, [], 10, "REJECT", ["HONEYPOT"], [],
         expert_assessment=assessment,
@@ -128,20 +128,43 @@ def test_write_report_renders_assessment_section(tmp_path, monkeypatch):
     content = open(path).read()
     assert "## Expert Assessment" in content
     assert "(Grok)" not in content
-    assert "AGREE: real analysis here." in content
-    assert "Agrees with the verdict above" in content
+    assert "Real analysis here." in content
 
 
-def test_write_report_renders_disagreement_flag(tmp_path, monkeypatch):
+def test_write_report_never_renders_agree_disagree_framing(tmp_path, monkeypatch):
+    """The internal disagrees flag is real (see _log_expert_disagreement()
+    and the module's own docstring) but must never surface as a published
+    "Agrees/Disagrees with the verdict above" tag — the Expert Assessment is
+    the primary synthesis now, not a second opinion on the score."""
     monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
     gp, dex, onchain, verif = {}, {"symbol": "TOKEN"}, {"is_contract": True}, {}
-    assessment = {"text": "DISAGREE: real counter-analysis.", "disagrees": True}
+    assessment = {"text": "Real counter-analysis.", "disagrees": True}
     path, _sym, _emoji = inv.write_report(
         "0x" + "aa" * 20, "8453", gp, dex, onchain, verif, [], 10, "REJECT", ["HONEYPOT"], [],
         expert_assessment=assessment,
     )
     content = open(path).read()
-    assert "DISAGREES with the verdict above" in content
+    assert "Real counter-analysis." in content
+    assert "DISAGREES with the verdict above" not in content
+    assert "Agrees with the verdict above" not in content
+
+
+def test_expert_assessment_is_the_first_section_after_the_header(tmp_path, monkeypatch):
+    """Real gap this closes: the Expert Assessment used to sit halfway down
+    the report, after the Executive Summary/Project Narrative/Verdict
+    Rationale sections — reading as a second opinion checking someone
+    else's work rather than the detective's own lead conclusion. It's the
+    first substantive section now, right after the header/verdict line."""
+    monkeypatch.setattr(inv, "INVEST_DIR", str(tmp_path))
+    gp, dex, onchain, verif = {}, {"symbol": "TOKEN"}, {"is_contract": True}, {}
+    assessment = {"text": "Real analysis here.", "disagrees": False}
+    path, _sym, _emoji = inv.write_report(
+        "0x" + "aa" * 20, "8453", gp, dex, onchain, verif, [], 10, "REJECT", ["HONEYPOT"], [],
+        expert_assessment=assessment,
+    )
+    content = open(path).read()
+    assert content.index("## Expert Assessment") < content.index("## Scoring Dashboard")
+    assert content.index("## Expert Assessment") < content.index("## Verdict Rationale")
 
 
 def test_write_report_handles_missing_assessment(tmp_path, monkeypatch):
