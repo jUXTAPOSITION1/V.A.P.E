@@ -172,6 +172,49 @@ def test_build_roads_foundry_is_hub_for_every_other_building():
     assert all(pair[0] == "foundry" for pair in roads)
 
 
+# ── build_recent_events() ─────────────────────────────────────────────────────
+
+def test_build_recent_events_real_fields_and_types():
+    intel_index = {
+        "investigations": [{"date": "2026-08-01T00:00:00Z", "target": "0xABC", "name": "0xABC token"}],
+        "news": [{"date": "2026-08-02T00:00:00Z", "title": "Some headline"}],
+    }
+    opportunities = [{"firstSeen": "2026-08-03T00:00:00.000000+00:00", "name": "Program X", "platform": "cantina"}]
+    attack_feed = {"incidents": [{"date": "2026-07-30", "name": "Some Protocol"}]}
+
+    events = bcs.build_recent_events(intel_index, opportunities, attack_feed)
+    types = {e["type"] for e in events}
+    assert types == {"investigation", "news", "bounty", "threat"}
+    # Most recent (bounty, 2026-08-03) sorts first.
+    assert events[0]["type"] == "bounty"
+    assert events[0]["label"] == "Program X"
+
+
+def test_build_recent_events_sorts_mixed_timestamp_formats_without_crashing():
+    """Attack-feed incidents carry date-only timestamps (no time, no
+    timezone) while every other source carries full offset-aware ISO --
+    comparing a naive and an aware datetime raises TypeError if not
+    normalized, which must never happen here."""
+    intel_index = {"investigations": [{"date": "2026-08-01T12:00:00Z", "target": "x"}]}
+    attack_feed = {"incidents": [{"date": "2026-08-02", "name": "y"}]}
+    events = bcs.build_recent_events(intel_index, [], attack_feed)
+    assert len(events) == 2
+    assert events[0]["type"] == "threat"  # 08-02 (date-only) is more recent than 08-01T12:00Z
+
+
+def test_build_recent_events_skips_entries_with_no_timestamp():
+    intel_index = {"investigations": [{"target": "no-date"}]}
+    events = bcs.build_recent_events(intel_index, [], {})
+    assert events == []
+
+
+def test_build_recent_events_caps_at_limit():
+    intel_index = {"news": [{"date": f"2026-08-{i:02d}T00:00:00Z", "title": f"n{i}"} for i in range(1, 25)]}
+    events = bcs.build_recent_events(intel_index, [], {}, limit=5)
+    assert len(events) == 5
+    assert events[0]["label"] == "n24"  # most recent first
+
+
 # ── build() end-to-end, all I/O redirected ───────────────────────────────────
 
 def test_build_writes_snapshot_with_real_paths(tmp_path, monkeypatch):
@@ -205,6 +248,7 @@ def test_build_writes_snapshot_with_real_paths(tmp_path, monkeypatch):
     assert len(city["buildings"]) == 8  # 7 landmarks + 1 lane checkpoint
     written = json.loads(out_path.read_text())
     assert written["district_stats"]["overall_threat_level"] == "LOW"
+    assert written["recent_events"] == []  # every fixture source above is empty of dated entries
     # Every building carries a gridX/gridY/footprint from LAYOUT/LANE_RING —
     # the forward-compatibility contract a future 3D renderer depends on.
     assert all("gridX" in b and "gridY" in b and "footprint" in b for b in written["buildings"])

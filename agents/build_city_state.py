@@ -248,6 +248,68 @@ def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation
     ]
 
 
+def build_recent_events(intel_index, opportunities, attack_feed, limit=24):
+    """Every VAPE process that already has its own live-updating building
+    also throws off individually-timestamped real events -- surfaced here so
+    cityscape.js can spawn one distinct "dispatch vehicle" per genuinely new
+    real event (an investigation closing, an article publishing, a bounty
+    lead appearing, an incident logged), the same honest-data discipline as
+    the live x402 delivery trucks, just covering four more real signals
+    instead of one. Purely a re-projection of fields these four files
+    already carry -- no new signal, no LLM, no network call."""
+    events = []
+    for inv in intel_index.get("investigations") or []:
+        ts = inv.get("date")
+        if not ts:
+            continue
+        events.append({
+            "id": f"investigation:{inv.get('target') or inv.get('title') or ts}",
+            "type": "investigation",
+            "timestamp": ts,
+            "label": inv.get("name") or inv.get("target") or inv.get("title") or "Investigation",
+        })
+    for a in intel_index.get("news") or []:
+        ts = a.get("date")
+        if not ts:
+            continue
+        events.append({
+            "id": f"news:{a.get('title') or ts}",
+            "type": "news",
+            "timestamp": ts,
+            "label": a.get("title") or "Dispatch",
+        })
+    for o in (opportunities if isinstance(opportunities, list) else []):
+        ts = o.get("firstSeen")
+        if not ts:
+            continue
+        events.append({
+            "id": f"bounty:{o.get('id') or o.get('name') or ts}",
+            "type": "bounty",
+            "timestamp": ts,
+            "label": o.get("name") or o.get("platform") or "Bounty lead",
+        })
+    for inc in attack_feed.get("incidents") or []:
+        ts = inc.get("date")
+        if not ts:
+            continue
+        events.append({
+            "id": f"threat:{inc.get('name') or ts}",
+            "type": "threat",
+            "timestamp": ts,
+            "label": inc.get("name") or "Incident",
+        })
+
+    def _parse(ts):
+        try:
+            dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        except ValueError:
+            return datetime.min.replace(tzinfo=timezone.utc)
+        return dt if dt.tzinfo is not None else dt.replace(tzinfo=timezone.utc)
+
+    events.sort(key=lambda e: _parse(e["timestamp"]), reverse=True)
+    return events[:limit]
+
+
 def build_roads(landmark_ids, lane_ids):
     """The Foundry as connective hub, per the explicit design brief: every
     other landmark and every lane checkpoint gets one spoke road running
@@ -285,6 +347,7 @@ def build():
         },
         "buildings": landmarks + checkpoints,
         "roads": build_roads([b["id"] for b in landmarks], [c["id"] for c in checkpoints]),
+        "recent_events": build_recent_events(intel_index, opportunities, attack_feed),
     }
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
