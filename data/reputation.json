@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T18:10:08Z",
+  "generated": "2026-08-03T20:00:28Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,10 +13,10 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 229,
-    "intel_reports": 307,
+    "reports_published": 231,
+    "intel_reports": 308,
     "intel_broadcasts": 145,
-    "catalog_investigations": 611,
+    "catalog_investigations": 614,
     "token_scans_logged": 0,
     "skills_codified": 24,
     "tools_total": 16,
@@ -241,13 +241,13 @@
         }
       }
     ],
-    "work_log_entries": 339,
+    "work_log_entries": 340,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260713",
     "latest_report": "20260803"
   },
   "capabilities": {
-    "offerings_live": 32,
+    "offerings_live": 31,
     "auto_fulfilled_zero_llm": [
       "bridges",
       "chain_fees",
@@ -258,7 +258,6 @@
       "exploit_check",
       "liquidity_check",
       "market_intel",
-      "prediction_market_odds",
       "protocol",
       "protocol_fees",
       "rug_pull_alert",
@@ -435,15 +434,6 @@
         "price_usd": 0.01,
         "summary": "General web research: search + scrape a handful of real results, tag on-chain addresses/tx hashes/CVEs/$TICKERs, and return a dense, agent-consumable summary \u2014 x402 only, not yet ACP-listed",
         "auto": false,
-        "x402": true,
-        "data": false,
-        "sla": "instant"
-      },
-      {
-        "name": "prediction_market_odds",
-        "price_usd": 0.01,
-        "summary": "Live crypto/Base-relevant prediction-market odds from Polymarket and Kalshi, ranked by volume",
-        "auto": true,
         "x402": true,
         "data": false,
         "sla": "instant"
