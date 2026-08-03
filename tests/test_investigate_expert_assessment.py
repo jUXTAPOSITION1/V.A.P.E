@@ -36,8 +36,8 @@ def test_declared_website_and_socials_reach_the_llm_as_evidence():
     _result, m = _call("Some analysis.\n\nVERDICT ALIGNMENT: AGREE", dex=dex)
     args, _kwargs = m.call_args
     user_block = args[1]
-    assert "https://dogpunk.app" in user_block
-    assert "https://x.com/dogpunkV4" in user_block
+    assert "Declared web presence: website(s): https://dogpunk.app" in user_block
+    assert "social(s): twitter: https://x.com/dogpunkV4" in user_block
 
 
 def test_no_declared_web_presence_is_stated_as_a_real_absence():

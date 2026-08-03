@@ -72,9 +72,13 @@ def test_crawls_declared_links_and_includes_real_excerpts():
     """Per explicit request: this function should directly crawl the
     declared website/social URLs, not just search by project name. A
     successful crawl's real excerpt must reach the LLM's own grounding
-    block, capped at 3 URLs (website first, then socials in order)."""
+    block, capped at 3 URLs (website first, then socials in declared
+    order) -- 4 declared URLs here so the cap and ordering are both
+    actually exercised, not just "at least one crawl happened"."""
     dex = {"websites": [{"url": "https://arena.social"}],
-           "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
+           "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"},
+                        {"type": "telegram", "url": "https://t.me/arena"},
+                        {"type": "discord", "url": "https://discord.gg/arena"}]}
 
     def fake_scrape(url, max_len=500):
         if url == "https://arena.social":
@@ -83,8 +87,11 @@ def test_crawls_declared_links_and_includes_real_excerpts():
 
     with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
          mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm, \
-         mock.patch.object(inv, "_scrape_excerpt", side_effect=fake_scrape):
+         mock.patch.object(inv, "_scrape_excerpt", side_effect=fake_scrape) as m_scrape:
         inv._project_narrative("ARENA", "ArenaToken", dex, None, "0x" + "aa" * 20, "43114")
+    crawled_urls = [c.args[0] for c in m_scrape.call_args_list]
+    assert crawled_urls == ["https://arena.social", "https://x.com/TheArenaApp", "https://t.me/arena"]
+    assert "https://discord.gg/arena" not in crawled_urls  # 4th declared URL, past the cap
     args, _kwargs = m_llm.call_args
     grounding = args[0]["raw_user_block"]
     assert "Welcome to The Arena" in grounding
@@ -99,8 +106,33 @@ def test_crawl_failure_is_an_honest_miss_not_a_fabrication():
         inv._project_narrative("ARENA", "ArenaToken", dex, None, "0x" + "aa" * 20, "43114")
     args, _kwargs = m_llm.call_args
     grounding = args[0]["raw_user_block"]
+    assert "Declared website page could not be crawled this cycle (https://arena.social)." in grounding
     assert "none could be crawled" in grounding
     assert "Direct excerpt" not in grounding
+
+
+def test_partial_crawl_failure_still_notes_the_failed_url():
+    """Real gap this pins (CodeRabbit): a per-URL failure used to be
+    completely silent whenever at least one OTHER declared URL succeeded
+    -- the model saw a real website excerpt but zero signal that a
+    declared social specifically couldn't be crawled, indistinguishable
+    from that social simply not being declared at all."""
+    dex = {"websites": [{"url": "https://arena.social"}],
+           "socials": [{"type": "twitter", "url": "https://x.com/TheArenaApp"}]}
+
+    def fake_scrape(url, max_len=500):
+        return "Welcome to The Arena." if url == "https://arena.social" else None
+
+    with mock.patch("skillforge.research.search", return_value=_SEARCH_RESULTS), \
+         mock.patch("agents.research_engine.synthesize", return_value=_synth()) as m_llm, \
+         mock.patch.object(inv, "_scrape_excerpt", side_effect=fake_scrape):
+        inv._project_narrative("ARENA", "ArenaToken", dex, None, "0x" + "aa" * 20, "43114")
+    args, _kwargs = m_llm.call_args
+    grounding = args[0]["raw_user_block"]
+    assert "Welcome to The Arena" in grounding
+    assert "Declared twitter page could not be crawled this cycle (https://x.com/TheArenaApp)." in grounding
+    # At least one crawl succeeded -- the aggregate "none could be crawled" note must not fire.
+    assert "Declared website/social pages were attempted but none could be crawled" not in grounding
 
 
 def test_returns_none_when_no_project_name_available():

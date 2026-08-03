@@ -2399,12 +2399,22 @@ def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
     if dex and dex.get("socials"):
         declared_urls += [(s.get("type"), s.get("url")) for s in dex["socials"] if s.get("url")]
     crawled_any = False
+    failed_urls = []
     for entry in declared_urls[:3]:
         label, url = entry if isinstance(entry, tuple) else ("website", entry)
         excerpt = _scrape_excerpt(url, max_len=500)
         if excerpt:
             crawled_any = True
             evidence.append(f"Direct excerpt from declared {label} page ({url}): {excerpt}")
+        else:
+            failed_urls.append((label, url))
+    # Real gap this closes (CodeRabbit): a per-URL failure used to be silent
+    # whenever at least one OTHER declared URL succeeded -- the model saw a
+    # real website excerpt but no signal at all that a declared social
+    # specifically couldn't be crawled, rather than an honest "unavailable"
+    # note for that one link.
+    for label, url in failed_urls:
+        evidence.append(f"Declared {label} page could not be crawled this cycle ({url}).")
     if declared_urls and not crawled_any:
         evidence.append("Declared website/social pages were attempted but none could be crawled "
                          "this cycle (blocked, JS-rendered, or scrape quota exhausted) — real "
