@@ -1171,3 +1171,5 @@
 | 2026-08-03 | auto | 0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969 (DEGEN) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 73% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-03 | auto | 0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35 (DEGEN) | deep_investigation | CAUTION (57/100) | Top 10 non-LP/burn holders control 54% of supply — meaningful concentration | +7d |
+
+| 2026-08-03 | auto | 0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f (ANON) | deep_investigation | CAUTION (55/100) | Low liquidity $27,802 | +7d |

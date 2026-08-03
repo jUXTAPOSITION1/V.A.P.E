@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T06:34:31Z",
+  "generated": "2026-08-03T06:49:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 522,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 685,
+    "investigations": 686,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-063422-0xf1C11bd4.md",
-      "title": "Investigation \u2014 DEGEN",
-      "symbol": "DEGEN",
-      "name": "Degen",
-      "date": "2026-08-03T06:34:22Z",
-      "target": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35",
+      "file": "investigation-20260803-064940-0x93C5d5F1.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-03T06:49:40Z",
+      "target": "0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f",
       "chain": "1 (Ethereum)",
       "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Violent 24h move +2422% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by defaul",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-063422-0xf1C11bd4.md"
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $27,802; [-10] Violent 24h move +3425% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ver",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-064940-0x93C5d5F1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-064940-0x93C5d5F1.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-03T06:49:40Z",
+      "target": "0x93C5d5F12bcdC0fB7a3539547306D4b58B6da19f",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $27,802; [-10] Violent 24h move +3425% (volatility/manipulation); [-15] Pair only 0.3 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Custom ver",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-064940-0x93C5d5F1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-063422-0xf1C11bd4.md",
