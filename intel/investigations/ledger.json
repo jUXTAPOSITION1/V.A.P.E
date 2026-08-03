@@ -7595,6 +7595,25 @@
     "symbol": "ClankerToken",
     "times_investigated": 2
   },
+  "8453:0x02c1d787521c20586b4ab070b1838d91ff85d656": {
+    "address": "0x02c1d787521C20586b4aB070b1838D91FF85D656",
+    "chain": "8453",
+    "creator_address": "0xcd8406470db4cc849956e476d4d75e692a2e8339",
+    "first_investigated": "2026-08-03T17:28:01Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-172801-0x02c1d787.md",
+        "score": 65,
+        "ts": "2026-08-03T17:28:01Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T17:28:01Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "FRLZ",
+    "times_investigated": 1
+  },
   "8453:0x02c4347ece55fe108c9a29e96221615f13070791": {
     "address": "0x02C4347ECE55Fe108c9A29e96221615f13070791",
     "chain": "8453",
