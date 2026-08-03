@@ -587,14 +587,12 @@ const CityScape = {
         const { el, canvas } = inst;
         const pointers = new Map();
         let pinchStartDist = 0, pinchStartScale = 1;
-        let pinchStartAngle = 0, pinchStartRotation = 0;
         let dragStart = null;
         let moved = false;
 
         // Same floor in every mode -- one grid, so zooming all the way out
         // reveals the same wider world regardless of how small the stage is.
         const clampScale = s => Math.max(0.07, Math.min(2.6, s));
-        const pointerAngleDeg = (a, b) => Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI);
 
         canvas.addEventListener('pointerdown', (e) => {
             canvas.setPointerCapture(e.pointerId);
@@ -606,23 +604,23 @@ const CityScape = {
                 const [a, b] = [...pointers.values()];
                 pinchStartDist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 pinchStartScale = inst.scale;
-                pinchStartAngle = pointerAngleDeg(a, b);
-                pinchStartRotation = inst.rotation;
             }
         });
         canvas.addEventListener('pointermove', (e) => {
             if (!pointers.has(e.pointerId)) return;
             pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
             if (pointers.size === 2) {
+                // Pinch-to-zoom only -- a two-finger *twist* used to also
+                // rotate the camera here (the same gesture driving both),
+                // but two real fingers can't hold a perfectly constant
+                // distance apart while twisting, so an intended rotate
+                // always dragged scale along with it and read as the whole
+                // view "tilting like a clock" mid-gesture. Rotation is the
+                // compass dial/step-arrows' job now (below); this gesture
+                // only ever changes scale.
                 const [a, b] = [...pointers.values()];
                 const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 inst.scale = clampScale(pinchStartScale * (dist / pinchStartDist));
-                // Two-finger twist (the mobile analog of the desktop compass
-                // drag below) -- the same real-time pointer-angle delta a
-                // map app's rotate gesture uses, identical in every mode.
-                const angleDelta = pointerAngleDeg(a, b) - pinchStartAngle;
-                inst.rotation = ((pinchStartRotation + angleDelta) % 360 + 360) % 360;
-                this._syncCompassDial(inst);
                 moved = true;
             } else if (dragStart) {
                 if (Math.abs(e.clientX - dragStart.x) + Math.abs(e.clientY - dragStart.y) > 4) moved = true;
@@ -631,33 +629,23 @@ const CityScape = {
             }
         });
         const endPointer = (e) => {
-            const wasTwoFinger = pointers.size === 2;
             pointers.delete(e.pointerId);
             if (pointers.size === 0) {
                 dragStart = null;
             } else if (pointers.size === 1) {
-                // A finger lifted mid-gesture (e.g. out of a pinch/twist) --
-                // re-seed from where the remaining pointer actually is, so
-                // the next pointermove measures a delta from now instead of
+                // A finger lifted mid-gesture (e.g. out of a pinch) -- re-
+                // seed from where the remaining pointer actually is, so the
+                // next pointermove measures a delta from now instead of
                 // jumping by the full distance travelled during the gesture.
                 const [p] = [...pointers.values()];
                 dragStart = { x: p.x, y: p.y, offX: inst.offsetX, offY: inst.offsetY };
             } else if (pointers.size === 2) {
-                // Dropped from 3 fingers back to 2 -- re-seed the pinch/twist
-                // baselines the same way pointerdown does, so scale and
-                // rotation don't jump from now-stale values.
+                // Dropped from 3 fingers back to 2 -- re-seed the pinch
+                // baseline the same way pointerdown does, so scale doesn't
+                // jump from a now-stale distance.
                 const [a, b] = [...pointers.values()];
                 pinchStartDist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
                 pinchStartScale = inst.scale;
-                pinchStartAngle = pointerAngleDeg(a, b);
-                pinchStartRotation = inst.rotation;
-            }
-            // The twist gesture just ended -- settle on the nearest of the
-            // 8 rotation stops, same as releasing the desktop compass dial.
-            if (wasTwoFinger && pointers.size < 2) {
-                inst.rotation = nearestRotationStop(inst.rotation);
-                inst.terrainRotation = inst.rotation;
-                this._syncCompassDial(inst);
             }
         };
         canvas.addEventListener('pointerup', endPointer);

@@ -468,7 +468,7 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
    One renderer, two mount sizes: a smaller embedded instance inside
    #security-dashboard, and a huge full-bleed instance on docs/city.html.
    Both read the same data/city-state.json + the same live x402 feed and
-   support the exact same interactions (drag/pinch/twist/zoom/click,
+   support the exact same interactions (drag/pinch-zoom/rotate/click,
    Overview/Health/Activity layers) -- "compact" only changes the viewport
    size and default zoom, never the capability or the data. */
 .city-stage {
@@ -479,10 +479,10 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 30%, #17171d 0%, #0b0b0e 70%, #060608 100%);
     border: 1px solid var(--border);
-    /* Compact and full are the same one interactive grid (drag/pinch/twist/
-       click), just a smaller embedded viewport -- claim the gesture outright
-       here too so a one-finger drag pans the camera instead of scrolling
-       the page underneath it. */
+    /* Compact and full are the same one interactive grid (drag/pinch-zoom/
+       rotate/click), just a smaller embedded viewport -- claim the gesture
+       outright here too so a one-finger drag pans the camera instead of
+       scrolling the page underneath it. */
     touch-action: none;
     cursor: grab;
 }
@@ -507,9 +507,9 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .city-toolbar > * { pointer-events: auto; }
 /* touch-action: none on every real touch target inside the toolbar --
-   not just the canvas underneath. Two fingers twisting to rotate are
-   centered near the top of the stage more often than not, so one of them
-   landing on a button group's own padding/background (not just its
+   not just the canvas underneath. A two-finger pinch on the stage is
+   centered near the top of it more often than not, so one finger landing
+   on a button group's own padding/background (not just its
    canvas.city-layer-btn) was enough for the browser to treat that touch
    point as eligible for its own native pinch-zoom, fighting the app's
    own gesture and reading as random scale jumps or the whole page's
@@ -528,10 +528,14 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 }
 .city-zoom-btn:hover { background: rgba(255,255,255,0.1); color: #f4f4f5; }
 
-/* Camera rotation: two step-arrows flanking a small draggable compass dial
-   (desktop click-hold-drag; mobile two-finger twist is wired on the canvas
-   itself in cityscape.js, not this dial -- the dial is the single-pointer
-   affordance for a mouse). */
+/* Camera rotation: two step-arrows flanking a small draggable compass dial.
+   Pointer Events unify mouse and touch on this one dial element, so a
+   single-finger drag rotates on mobile exactly like a click-hold-drag does
+   on desktop -- there's deliberately no two-finger twist gesture on the
+   canvas itself: a real twist can't hold pinch distance perfectly
+   constant, so it always dragged the zoom along with the rotation and
+   read as the view "tilting like a clock" mid-gesture. The canvas's own
+   two-finger gesture is pinch-to-zoom only now. */
 .city-compass-group { display: flex; align-items: center; gap: 4px; background: rgba(9,9,11,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 2px; touch-action: none; }
 .city-compass {
     width: 26px; height: 26px; border-radius: 999px; position: relative;
