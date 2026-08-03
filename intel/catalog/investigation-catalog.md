@@ -1193,3 +1193,5 @@
 | 2026-08-03 | auto | 0x69C47C7474B7b2d6153Effc4fa958183f4af7777 (SAFU) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-03 | auto | 0x3F117c342B46376B2F2527A56B4b4506A96D4444 (傻福) | deep_investigation | REJECT (40/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-03 | auto | 0xc3bcd37061bde710293D0272Bb2924D308D5314D (SAFU) | deep_investigation | REJECT (5/100) | Transfers can be paused by owner | +7d |
