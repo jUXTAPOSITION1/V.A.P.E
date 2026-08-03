@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-02T23:19:40Z",
-  "source_report": "intel/reports/security-2026-08-02-23.md",
+  "generated_at": "2026-08-03T02:54:24Z",
+  "source_report": "intel/reports/security-2026-08-03-02.md",
   "threat_level": "HIGH",
   "lookback_days": 56,
   "incidents": [
@@ -606,27 +606,6 @@
         "Ethereum"
       ],
       "technique": "Malicious Governance Proposal",
-      "source_url": null
-    },
-    {
-      "date": "2026-06-08",
-      "name": "Flooring Protocol",
-      "amount_usd_m": 0.0,
-      "chains": [
-        "Ethereum"
-      ],
-      "technique": "DN404 Forge Loop",
-      "source_url": null
-    },
-    {
-      "date": "2026-06-08",
-      "name": "Humanity",
-      "amount_usd_m": 32.0,
-      "chains": [
-        "Ethereum",
-        "BSC"
-      ],
-      "technique": "Private Key Compromised",
       "source_url": null
     }
   ]

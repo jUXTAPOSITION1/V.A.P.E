@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T02:46:06Z",
+  "generated": "2026-08-03T02:54:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 518,
+    "reports": 519,
     "reports_by_type": {
+      "security": 96,
       "bounty": 130,
-      "security": 95,
       "sentiment": 54,
       "base": 103,
       "macro": 27,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-011631-0x707266E2.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_230226.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T23:02:26Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T02:00Z",
       "threat": null,
-      "summary": "Cycle: 20260802230226 \u00b7 Data timestamp (UTC): 2026-08-02T23:02:34Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_230226.md",
-      "bytes": 16044
+      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
+      "bytes": 8517
     }
   },
   "investigations": [
@@ -9328,6 +9328,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T02:00Z",
+      "threat": null,
+      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
+      "bytes": 8517
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260802_230226.md",
@@ -9975,17 +9986,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_104047.md",
       "bytes": 16391
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-31-10.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-31 10:46 UTC",
-      "date": "2026-07-31T10:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-31-10.md",
-      "bytes": 1705
     }
   ],
   "broadcasts": [
