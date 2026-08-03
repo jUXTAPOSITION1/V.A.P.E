@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T11:10:15Z",
+  "generated": "2026-08-03T11:25:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 402,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 144,
-    "investigations": 692,
+    "investigations": 693,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-105522-0x3f2B10F3.md",
+      "file": "investigation-20260803-112520-0x3433a574.md",
       "title": "Investigation \u2014 SAFU",
       "symbol": "SAFU",
-      "name": "Funds are SAFU",
-      "date": "2026-08-03T10:55:22Z",
-      "target": "0x3f2B10F3327ea2337C524eEf23F4cd61bC364444",
+      "name": "SAFU",
+      "date": "2026-08-03T11:25:20Z",
+      "target": "0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
       "chain": "56 (BNB Chain)",
       "verdict": "PROCEED",
       "score": "82",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 62% of supply \u2014 meaningful concentration; [-10] Low liquidity $23,429. Positive evidence: Ownership renounced; 4224 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 304+ days without a known incident in this scan; Custom",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-105522-0x3f2B10F3.md"
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration; [-10] Low liquidity $19,352. Positive evidence: Ownership renounced; 2307 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 607+ days without a known incident in this scan; Custom",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-112520-0x3433a574.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-112520-0x3433a574.md",
+      "title": "Investigation \u2014 SAFU",
+      "symbol": "SAFU",
+      "name": "SAFU",
+      "date": "2026-08-03T11:25:20Z",
+      "target": "0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration; [-10] Low liquidity $19,352. Positive evidence: Ownership renounced; 2307 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 607+ days without a known incident in this scan; Custom",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-112520-0x3433a574.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-105522-0x3f2B10F3.md",
