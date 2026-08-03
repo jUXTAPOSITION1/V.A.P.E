@@ -549,3 +549,4 @@
 {"ts": "2026-08-03T17:43:28.259157Z", "target": "BNB Chain", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-03T17:58:35.584623Z", "target": "Avalanche", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}
 {"ts": "2026-08-03T18:14:08.075199Z", "target": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 60}
+{"ts": "2026-08-03T18:29:30.190878Z", "target": "fluid-dex", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}

@@ -2163,6 +2163,25 @@
     "symbol": "VIBE",
     "times_investigated": 1
   },
+  "1:0x5d5d0a239a1ee830c5cb0e9c3e521e11cf3e641f": {
+    "address": "0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F",
+    "chain": "1",
+    "creator_address": "0x856c1a92c879fe90e16a72c3d49fbf4b7402bb8a",
+    "first_investigated": "2026-08-03T18:29:24Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-182924-0x5D5D0a23.md",
+        "score": 0,
+        "ts": "2026-08-03T18:29:24Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T18:29:24Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "DPUNK",
+    "times_investigated": 1
+  },
   "1:0x61900eb95db9fee1910c58cbc4e9b510b4032d3c": {
     "address": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
     "chain": "1",

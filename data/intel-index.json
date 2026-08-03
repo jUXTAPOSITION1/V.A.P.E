@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T18:14:08Z",
+  "generated": "2026-08-03T18:29:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 703,
+    "investigations": 704,
     "news": 57,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-181357-0xfD181Ca5.md",
+      "file": "investigation-20260803-182924-0x5D5D0a23.md",
       "title": "Investigation \u2014 DPUNK",
       "symbol": "DPUNK",
       "name": "DogPunk",
-      "date": "2026-08-03T18:13:57Z",
-      "target": "0xfD181Ca5EC0B355fc448403cc560D0423382e044",
+      "date": "2026-08-03T18:29:24Z",
+      "target": "0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "7",
-      "summary": "Risk factors: [-10] Owner not renounced (0x455a1b0698ddeb0c50b40388408da07bdae452aa) \u2014 can still act on the contract; [-8] Low holder count (181); [-15] Top 10 non-LP/burn holders control 137% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-181357-0xfD181Ca5.md"
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentra",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-182924-0x5D5D0a23.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-182924-0x5D5D0a23.md",
+      "title": "Investigation \u2014 DPUNK",
+      "symbol": "DPUNK",
+      "name": "DogPunk",
+      "date": "2026-08-03T18:29:24Z",
+      "target": "0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentra",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-182924-0x5D5D0a23.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-181357-0xfD181Ca5.md",
@@ -11359,7 +11373,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49490878",
+      "version": "49496093",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11369,7 +11383,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.41 eth_dom 9.93 mcap_chg_24h 0.67",
+      "version": "btc_dom 56.46 eth_dom 9.94 mcap_chg_24h 0.54",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11389,7 +11403,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xff57f42d4a3b Ori 3266.17 from 0x83a12744 to 0x833589fc",
+      "version": "0x933838a16899 MERAD 5.0 from 0xcb857fb1 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11409,7 +11423,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-07-30 Set Protocol 0.01 M ['Ethereum'] Malicious SetToken & Manager Contrac",
+      "version": "2026-08-02 LOOPSDAO 0.7 M ['BSC'] Price Manipulation Attack",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
