@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-03T03:02:50Z — 143 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-03T03:18:16Z — 144 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| aeon | Base | `0xBf8E8f0e8866a7052F948C16508644347c57aba3` | 65/100 | 1 | 2026-08-03T03:18:16Z |
 | Pizza | BNB Chain | `0xF6345b34C132e9844992564F5c0Bd6AbC17A0085` | 57/100 | 1 | 2026-08-03T03:02:50Z |
 | Pizza | BNB Chain | `0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18` | 75/100 | 1 | 2026-08-03T00:16:27Z |
 | ADI | Ethereum | `0x8B1484d57abBE239bB280661377363b03c89CaEa` | 62/100 | 1 | 2026-08-02T22:16:18Z |

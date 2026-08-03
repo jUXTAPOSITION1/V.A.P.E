@@ -1155,3 +1155,5 @@
 | 2026-08-03 | auto | 0x707266E2B21AD1921bdE5A8c5F4E1E034aFA7777 (Pizza) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-03 | auto | 0xF6345b34C132e9844992564F5c0Bd6AbC17A0085 (Pizza) | deep_investigation | CAUTION (57/100) | Transfers can be paused by owner | +7d |
+
+| 2026-08-03 | auto | 0xBf8E8f0e8866a7052F948C16508644347c57aba3 (aeon) | deep_investigation | CAUTION (65/100) | Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) — can still act | +7d |

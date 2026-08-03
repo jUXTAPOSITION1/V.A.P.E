@@ -9682,6 +9682,25 @@
     "symbol": "OPENAI",
     "times_investigated": 1
   },
+  "8453:0xbf8e8f0e8866a7052f948c16508644347c57aba3": {
+    "address": "0xBf8E8f0e8866a7052F948C16508644347c57aba3",
+    "chain": "8453",
+    "creator_address": "0xb2f52cb5a2094a00101d91eeb65b85cb1d86431e",
+    "first_investigated": "2026-08-03T03:18:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-031816-0xBf8E8f0e.md",
+        "score": 65,
+        "ts": "2026-08-03T03:18:16Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T03:18:16Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "aeon",
+    "times_investigated": 1
+  },
   "8453:0xbf927b841994731c573bdf09ceb0c6b0aa887cdd": {
     "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd",
     "chain": "8453",
