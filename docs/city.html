@@ -2,7 +2,19 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- user-scalable=no is deliberate here (unlike every other page in
+         docs/): this whole page IS the interactive map, which already
+         provides its own pinch-to-zoom + explicit +/- controls on the
+         canvas itself. Without this, a two-finger gesture that starts
+         even slightly outside .city-stage (its touch-action: none only
+         claims touches that begin on it) gets caught by the browser's
+         own native page-zoom instead -- the whole page (nav text, toolbar,
+         canvas) scales/pans together, which reads as the world and the
+         city rotating at conflicting rates even though the canvas's own
+         rotation math never drifted. This doesn't affect OS-level
+         accessibility magnification, which operates above the browser
+         and ignores this meta tag entirely. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VAPE Ave: The V.A.P.E Report</title>
     <meta name="description" content="VAPE Ave: a real city built from VAPE's own operations, one building per real process, real data in every wall.">
     <link rel="canonical" href="https://juxtaposition1.github.io/V.A.P.E/city.html">
