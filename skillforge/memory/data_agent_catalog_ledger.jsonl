@@ -565,3 +565,4 @@
 {"ts": "2026-08-03T21:44:52.833384Z", "target": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 60}
 {"ts": "2026-08-03T21:59:44.219247Z", "target": "Avalanche", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}
 {"ts": "2026-08-03T22:14:47.417264Z", "target": "base", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}
+{"ts": "2026-08-03T22:30:08.151473Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}

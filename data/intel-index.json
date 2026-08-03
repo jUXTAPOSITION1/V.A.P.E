@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T22:14:47Z",
+  "generated": "2026-08-03T22:30:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 416,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 146,
-    "investigations": 705,
+    "investigations": 706,
     "news": 58,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-184449-0x82fe329f.md",
-      "title": "Investigation \u2014 pfUSDC-54",
-      "symbol": "pfUSDC-54",
-      "name": "Peapods Interest Bearing USDC - 54",
-      "date": "2026-08-03T18:44:49Z",
-      "target": "0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4",
+      "file": "investigation-20260803-222959-0x1F7B4051.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "Fake World Ass",
+      "date": "2026-08-03T22:29:59Z",
+      "target": "0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "33",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x88eafe23769a4fc2bbf52e77767c3693e6acfbd5) \u2014 can still act on the contract; [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-184449-0x82fe329f.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory templ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-222959-0x1F7B4051.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-222959-0x1F7B4051.md",
+      "title": "Investigation \u2014 FWA",
+      "symbol": "FWA",
+      "name": "Fake World Ass",
+      "date": "2026-08-03T22:29:59Z",
+      "target": "0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-5] Holder count unavailable \u2014 cannot assess distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced factory templ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-222959-0x1F7B4051.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-184449-0x82fe329f.md",
