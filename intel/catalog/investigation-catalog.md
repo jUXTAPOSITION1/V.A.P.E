@@ -1215,3 +1215,5 @@
 | 2026-08-03 | auto | 0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB (FWA) | deep_investigation | CAUTION (70/100) | Holder count unavailable — cannot assess distribution | +7d |
 
 | 2026-08-03 | auto | 0x80dc112e8620923453845607C6256677Ba3a4444 (SAFU) | deep_investigation | REJECT (32/100) | Low holder count (70) | +7d |
+
+| 2026-08-03 | auto | 0xf81c54264E8dE4f4cFD37106f33f95E51AdF4444 (SAFU) | deep_investigation | REJECT (47/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

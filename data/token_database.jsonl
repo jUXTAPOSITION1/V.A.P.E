@@ -150,3 +150,4 @@
 {"ts": "2026-08-03T21:44:52.833050Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "rug_pull_alert"}
 {"ts": "2026-08-03T22:30:08.151170Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "exploit_check"}
 {"ts": "2026-08-03T22:46:22.157942Z", "address": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35", "chain": "1", "symbol": "DEGEN", "name": "DEGEN", "source": "evm", "offering": "dossier_check"}
+{"ts": "2026-08-03T23:16:43.230696Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "exploit_check"}

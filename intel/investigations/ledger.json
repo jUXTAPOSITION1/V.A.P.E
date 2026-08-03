@@ -7588,6 +7588,25 @@
     "symbol": "memes",
     "times_investigated": 1
   },
+  "56:0xf81c54264e8de4f4cfd37106f33f95e51adf4444": {
+    "address": "0xf81c54264E8dE4f4cFD37106f33f95E51AdF4444",
+    "chain": "56",
+    "creator_address": "0x9942c26c642097b6795384cc5439618a251d431b",
+    "first_investigated": "2026-08-03T23:16:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-231638-0xf81c5426.md",
+        "score": 47,
+        "ts": "2026-08-03T23:16:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T23:16:38Z",
+    "last_score": 47,
+    "last_verdict": "REJECT",
+    "symbol": "SAFU",
+    "times_investigated": 1
+  },
   "56:0xfb4ea38d713afbb3ed35869b790aec3ca53b0000": {
     "address": "0xFB4EA38d713afBb3eD35869B790aec3CA53B0000",
     "chain": "56",
