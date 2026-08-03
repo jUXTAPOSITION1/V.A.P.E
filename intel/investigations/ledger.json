@@ -5539,6 +5539,25 @@
     "symbol": "UAI",
     "times_investigated": 1
   },
+  "56:0x3f2b10f3327ea2337c524eef23f4cd61bc364444": {
+    "address": "0x3f2B10F3327ea2337C524eEf23F4cd61bC364444",
+    "chain": "56",
+    "creator_address": "0x5f113ac48a2808fbff7a54b06d5260ae49c1093b",
+    "first_investigated": "2026-08-03T10:55:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-105522-0x3f2B10F3.md",
+        "score": 82,
+        "ts": "2026-08-03T10:55:22Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-03T10:55:22Z",
+    "last_score": 82,
+    "last_verdict": "PROCEED",
+    "symbol": "SAFU",
+    "times_investigated": 1
+  },
   "56:0x40b8129b786d766267a7a118cf8c07e31cdb6fde": {
     "address": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde",
     "chain": "56",

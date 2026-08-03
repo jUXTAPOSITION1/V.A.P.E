@@ -1183,3 +1183,5 @@
 | 2026-08-03 | auto | 0xF5f052D12ce3A522251Bb0ab42E356Fc9E2cbC47 (UNISTREET) | deep_investigation | REJECT (9/100) | Low holder count (80) | +7d |
 
 | 2026-08-03 | auto | 0x08b82Ed4fF66635866203904A7BcAbB64A4594e3 (UNISTREET) | deep_investigation | REJECT (25/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-03 | auto | 0x3f2B10F3327ea2337C524eEf23F4cd61bC364444 (SAFU) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 62% of supply — meaningful concentration | +7d |
