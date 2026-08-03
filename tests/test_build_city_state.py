@@ -7,6 +7,18 @@ import json
 from agents import build_city_state as bcs
 
 
+# ── _count_jsonl_lines() ──────────────────────────────────────────────────────
+
+def test_count_jsonl_lines_counts_real_lines(tmp_path):
+    p = tmp_path / "ledger.jsonl"
+    p.write_text('{"a": 1}\n{"a": 2}\n\n{"a": 3}\n')
+    assert bcs._count_jsonl_lines(str(p)) == 3  # blank line not counted
+
+
+def test_count_jsonl_lines_missing_file_is_zero(tmp_path):
+    assert bcs._count_jsonl_lines(str(tmp_path / "missing.jsonl")) == 0
+
+
 # ── lane_status() ────────────────────────────────────────────────────────────
 
 def test_lane_status_success_is_ok():
@@ -104,7 +116,7 @@ def _fixture_inputs():
         {"status": "active", "platform": "cantina"},
         {"status": "complete", "platform": "cantina"},
     ]
-    reputation = {"verifiable_activity": {"tools_built": 14, "tools_total": 16}}
+    reputation = {"verifiable_activity": {"tools_built": 14, "tools_total": 16, "skills_codified": 24}}
     return secdash, attack_feed, intel_index, opportunities, reputation
 
 
@@ -128,6 +140,14 @@ def test_build_landmarks_real_counts_and_verdict_split():
     assert by_id["foundry"]["stat_primary"]["value"] == 14
     assert by_id["vault-ledger"]["status"] == "ok"
     assert by_id["vault-ledger"]["stat_primary"]["value"] == 15  # sum of findings_by_severity
+    assert by_id["skillforge"]["stat_primary"]["value"] == 24
+    assert by_id["data-bureau"]["stat_primary"]["value"] == 0  # no data_agent_total passed in this fixture call
+
+
+def test_build_landmarks_data_bureau_uses_real_ledger_total():
+    landmarks = bcs.build_landmarks(*_fixture_inputs(), data_agent_total=1517)
+    by_id = {b["id"]: b for b in landmarks}
+    assert by_id["data-bureau"]["stat_primary"] == {"label": "data calls logged", "value": 1517}
 
 
 def test_build_landmarks_mint_is_live_only_with_no_static_stat():
@@ -159,6 +179,8 @@ def test_build_landmarks_empty_inputs_degrade_to_zero_not_fabricated():
     assert by_id["precinct-investigations"]["stat_primary"]["value"] == 0
     assert by_id["watchtower-threat"]["status"] == "unknown"
     assert by_id["foundry"]["stat_primary"]["value"] is None
+    assert by_id["skillforge"]["stat_primary"]["value"] is None
+    assert by_id["data-bureau"]["stat_primary"]["value"] == 0
 
 
 # ── build_roads() ──────────────────────────────────────────────────────────────
@@ -244,12 +266,15 @@ def test_build_writes_snapshot_with_real_paths(tmp_path, monkeypatch):
     monkeypatch.setattr(bcs, "INTEL_INDEX_PATH", str(intel_index_path))
     monkeypatch.setattr(bcs, "OPPORTUNITIES_PATH", str(opportunities_path))
     monkeypatch.setattr(bcs, "REPUTATION_PATH", str(reputation_path))
+    # Real repo paths by default -- redirect to nothing so this stays
+    # hermetic instead of reading this checkout's own real ledger files.
+    monkeypatch.setattr(bcs, "DATA_AGENT_LEDGER_PATHS", [])
 
     city = bcs.build()
 
     assert city["district_stats"]["lanes_passing"] == 1
     assert city["district_stats"]["lanes_total"] == 1
-    assert len(city["buildings"]) == 8  # 7 landmarks + 1 lane checkpoint
+    assert len(city["buildings"]) == 10  # 9 landmarks + 1 lane checkpoint
     written = json.loads(out_path.read_text())
     assert written["district_stats"]["overall_threat_level"] == "LOW"
     assert written["recent_events"] == []  # every fixture source above is empty of dated entries
@@ -265,9 +290,10 @@ def test_build_handles_all_missing_files_gracefully(tmp_path, monkeypatch):
     monkeypatch.setattr(bcs, "INTEL_INDEX_PATH", str(tmp_path / "no-intel-index.json"))
     monkeypatch.setattr(bcs, "OPPORTUNITIES_PATH", str(tmp_path / "no-opportunities.json"))
     monkeypatch.setattr(bcs, "REPUTATION_PATH", str(tmp_path / "no-reputation.json"))
+    monkeypatch.setattr(bcs, "DATA_AGENT_LEDGER_PATHS", [str(tmp_path / "no-data-agent.jsonl")])
 
     city = bcs.build()
 
     assert city["district_stats"]["overall_threat_level"] is None
     assert city["district_stats"]["lanes_total"] == 0
-    assert len(city["buildings"]) == 7  # 7 landmarks, zero lane checkpoints
+    assert len(city["buildings"]) == 9  # 9 landmarks, zero lane checkpoints

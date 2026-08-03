@@ -62,6 +62,15 @@
     --city-mint: #008300;
     --city-tower: #d55181;
     --city-vault: #9085e9;
+    /* Two more landmark hues added alongside The Skillforge and The Data
+       Bureau -- chosen to sit far from the 7 validated above (amber/gold
+       vs. every existing hue; steel blue-gray vs. precinct's brighter,
+       more saturated blue), but not yet re-run through
+       validate_palette.js as a 9-hue set -- do that before relying on
+       these two for anything beyond "icon + label" identification, same
+       mitigation every building here already carries regardless. */
+    --city-skillforge: #c9932f;
+    --city-databureau: #6b8fae;
     /* The surrounding world's 4 terrain hues (docs/city.html's full mode
        only) -- atmosphere, not categorical data encoding, so unlike the 7
        hues above these aren't part of a validated adjacency-checked set;
@@ -550,6 +559,11 @@ button.diff-row { width: 100%; text-align: left; background: none; border: none;
 .city-detail-row b { color: #e4e4e7; font-family: var(--font-mono); font-weight: 600; }
 .city-detail-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 10.5px; color: var(--sd-blue, #60a5fa); margin-top: 0.4rem; }
 .city-detail-link:hover { text-decoration: underline; }
+
+.city-detail-growth { margin-top: 0.35rem; }
+.city-detail-growth-bar { height: 4px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-bottom: 0.25rem; }
+.city-detail-growth-fill { height: 100%; background: linear-gradient(90deg, #7c93ff, #9db3ff); border-radius: 999px; }
+.city-detail-growth span { font-size: 9.5px; color: #a1a1aa; }
 
 .city-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 0.9rem; margin-top: 0.7rem; font-size: 10px; color: #71717a; }
 .city-legend-item { display: flex; align-items: center; gap: 0.3rem; }
