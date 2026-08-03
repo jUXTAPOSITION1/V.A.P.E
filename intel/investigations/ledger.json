@@ -2560,6 +2560,25 @@
     "symbol": "COTI",
     "times_investigated": 1
   },
+  "1:0x86bcd9b1c2b8f99ca2737f136ed02e3af971e8b5": {
+    "address": "0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5",
+    "chain": "1",
+    "creator_address": "0x3a4f28ae7f995649d5a020bee7c919fc576d2f44",
+    "first_investigated": "2026-08-03T04:19:00Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-041900-0x86bcD9b1.md",
+        "score": 82,
+        "ts": "2026-08-03T04:19:00Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-03T04:19:00Z",
+    "last_score": 82,
+    "last_verdict": "PROCEED",
+    "symbol": "ANON",
+    "times_investigated": 1
+  },
   "1:0x88888880d5ca13018d2dc11e2e4744bd91a5656f": {
     "address": "0x88888880d5Ca13018D2dC11e2e4744BD91a5656f",
     "chain": "1",

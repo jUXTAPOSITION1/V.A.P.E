@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T04:05:20Z",
+  "generated": "2026-08-03T04:19:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 520,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 681,
+    "investigations": 682,
     "news": 54,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-040348-0xd2fed901.md",
-      "title": "Investigation \u2014 AEON",
-      "symbol": "AEON",
-      "name": "AEON Token",
-      "date": "2026-08-03T04:03:48Z",
-      "target": "0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Low holder count (122); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Pair 5.7 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-040348-0xd2fed901.md"
+      "file": "investigation-20260803-041900-0x86bcD9b1.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-03T04:19:00Z",
+      "target": "0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-10] Low liquidity $11,340. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1203+ days without a known incident in this scan; Custom verified source (not a mass-produced f",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-041900-0x86bcD9b1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-041900-0x86bcD9b1.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-03T04:19:00Z",
+      "target": "0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "82",
+      "summary": "Risk factors: [-8] Top 9 non-LP/burn holders control 69% of supply \u2014 meaningful concentration; [-10] Low liquidity $11,340. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 1203+ days without a known incident in this scan; Custom verified source (not a mass-produced f",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-041900-0x86bcD9b1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-040348-0xd2fed901.md",
@@ -11015,7 +11029,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49458521",
+      "version": "49470530",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11025,7 +11039,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.26 eth_dom 10.05 mcap_chg_24h 1.23",
+      "version": "btc_dom 56.22 eth_dom 10.0 mcap_chg_24h -0.87",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11075,7 +11089,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "27 Fear",
+      "version": "28 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
