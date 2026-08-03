@@ -518,3 +518,4 @@
 {"ts": "2026-08-03T02:01:32.675148Z", "target": "0x29cC30f9D113B356Ce408667aa6433589CeCBDcA", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
 {"ts": "2026-08-03T02:31:20.765453Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 55}
 {"ts": "2026-08-03T03:02:57.664835Z", "target": "Polygon", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}
+{"ts": "2026-08-03T03:33:35.405371Z", "target": "arbitrum", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 55}

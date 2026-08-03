@@ -8900,6 +8900,25 @@
     "symbol": "CHECK",
     "times_investigated": 1
   },
+  "8453:0x895bc7a6caba2088409fdac388183ca084dc2f77": {
+    "address": "0x895BC7a6caBA2088409fdac388183cA084dc2F77",
+    "chain": "8453",
+    "creator_address": "0x269577cd3196c7f1cb0fc03af2793c8d4c26749c",
+    "first_investigated": "2026-08-03T03:33:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-033332-0x895BC7a6.md",
+        "score": 55,
+        "ts": "2026-08-03T03:33:32Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T03:33:32Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "AEON",
+    "times_investigated": 1
+  },
   "8453:0x89837420864ca27f36c6847b9d1e8dbe0c6eccdb": {
     "address": "0x89837420864ca27f36c6847B9d1E8Dbe0C6EccdB",
     "chain": "8453",
