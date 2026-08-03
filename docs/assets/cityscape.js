@@ -89,6 +89,17 @@ function kindColor(kind) {
     return v ? cssVar(v) : cssVar('--sev-info');
 }
 
+// Terrain hues are their own ramp -- deliberately not part of the 7
+// validated building-identity colors above (different job: quiet backdrop,
+// not a categorical data set shown side-by-side).
+const TERRAIN_KIND_VAR = {
+    ocean: '--city-terrain-ocean', mountain: '--city-terrain-mountain',
+    farmland: '--city-terrain-farmland', vacant: '--city-terrain-vacant',
+};
+function terrainColor(kind) {
+    return cssVar(TERRAIN_KIND_VAR[kind]) || '#232329';
+}
+
 // Isometric projection constants -- 2:1 tile ratio, the standard web
 // isometric convention (screen dx/dy are half the tile's width/height per
 // grid step) that keeps the math to four multiplies, no trig.
@@ -107,6 +118,54 @@ function buildingAnchor(b) {
 
 function buildingHeightPx(b) {
     return BASE_HEIGHT + (b.tier || 1) * TIER_UNIT;
+}
+
+// ── The surrounding world (full mode only) — ocean, mountains, farmland,
+// vacant land around the real-data city. Deliberately client-side and NOT
+// part of data/city-state.json: unlike every building/road/vehicle above,
+// terrain traces to no real signal at all, so it stays out of the
+// aggregator's "every number here is real" contract entirely. It's the
+// same kind of presentational, non-data choice as the fixed road layout,
+// just bigger -- and it's fully deterministic (a fixed seed, not
+// Math.random()) so the world reads as one stable place across visits,
+// never a randomly different backdrop.
+const WORLD_BOUNDS = { minX: -40, maxX: 60, minY: -40, maxY: 53 };
+const CITY_BBOX = { minX: 0, maxX: 12, minY: 0, maxY: 9 }; // real buildings' footprint-inclusive extent
+const VACANT_MARGIN = 3; // tiles of guaranteed "room to grow" ring around downtown
+const TERRAIN_SEED = 402019;
+
+function _hash(n, seed) {
+    const x = Math.sin(n * 12.9898 + seed * 78.233) * 43758.5453;
+    return x - Math.floor(x);
+}
+function _valueNoise1D(x, seed) {
+    const i = Math.floor(x), f = x - i;
+    const a = _hash(i, seed), b = _hash(i + 1, seed);
+    const t = f * f * (3 - 2 * f); // smoothstep
+    return a + (b - a) * t;
+}
+// Two octaves so region edges (coastlines, mountain foothills) wobble
+// organically instead of reading as a ruler-straight boundary.
+function _wobble(x, seedOffset) {
+    return (_valueNoise1D(x / 6, TERRAIN_SEED + seedOffset) - 0.5) * 6
+        + (_valueNoise1D(x / 2.4, TERRAIN_SEED + seedOffset + 1) - 0.5) * 2;
+}
+
+// Pure function of (gx, gy) + the fixed seed above -- same biome every
+// load, no canvas/DOM access, mirrors this module's own "scene model is
+// plain data" discipline. Returns null inside the real city's own
+// footprint (buildings own that ground, no terrain tile is drawn there).
+function biomeAt(gx, gy) {
+    const insideCity = gx >= CITY_BBOX.minX && gx <= CITY_BBOX.maxX && gy >= CITY_BBOX.minY && gy <= CITY_BBOX.maxY;
+    if (insideCity) return null;
+    const insideMargin = gx >= CITY_BBOX.minX - VACANT_MARGIN && gx <= CITY_BBOX.maxX + VACANT_MARGIN
+        && gy >= CITY_BBOX.minY - VACANT_MARGIN && gy <= CITY_BBOX.maxY + VACANT_MARGIN;
+    if (insideMargin) return 'vacant'; // guaranteed room to grow, regardless of the macro region below
+    const u = gx - gy, v = gx + gy; // the same two axes gridToScreen already projects on
+    if (v < -30 + _wobble(u, 10)) return 'ocean';
+    if (v > 78 + _wobble(u, 20)) return 'mountain';
+    if (u < -49 + _wobble(v, 30)) return 'farmland';
+    return 'vacant';
 }
 
 // Real offering-name -> building-id routing for live x402 "delivery truck"
@@ -129,6 +188,10 @@ function targetForOffering(offering) {
 const CityScape = {
     _cityState: null,
     _instances: [],
+    // The world is identical (same fixed seed) for every 'full' instance,
+    // so it's built once and shared rather than per-instance state.
+    _terrainCanvas: null,
+    _terrainOrigin: null,
 
     async init() {
         const stages = document.querySelectorAll('[data-city-stage]');
@@ -165,12 +228,20 @@ const CityScape = {
             offsetX: 0, offsetY: 0,
             layer: 'overview',
             selected: null,
-            vehicles: [], ambient: [],
+            vehicles: [], ambient: [], oceanGlints: [],
             lastX402: new Set(),
             lastFrame: 0,
             visible: true,
         };
         this._instances.push(inst);
+
+        // Only the full page ever shows the wider world -- the compact
+        // diorama stays exactly the tightly-cropped city glance it always
+        // was (no terrain build cost on a widely-embedded small widget).
+        if (mode === 'full') {
+            if (!this._terrainCanvas) this._buildTerrainCache();
+            inst.oceanGlints = Array.from({ length: 10 }, () => this._spawnOceanGlint());
+        }
 
         if (this._cityState) this._loadCity(inst, this._cityState);
         this._wireInteraction(inst);
@@ -237,7 +308,10 @@ const CityScape = {
         let dragStart = null;
         let moved = false;
 
-        const clampScale = s => Math.max(0.5, Math.min(2.6, s));
+        // Full mode's floor is low enough that zooming all the way out
+        // reveals the entire ~100x93-tile world, not just downtown; compact
+        // never shows the world at all, so its floor is unchanged.
+        const clampScale = s => Math.max(inst.mode === 'full' ? 0.07 : 0.5, Math.min(2.6, s));
 
         canvas.addEventListener('pointerdown', (e) => {
             canvas.setPointerCapture(e.pointerId);
@@ -301,8 +375,12 @@ const CityScape = {
         });
         const zoomIn = inst.el.querySelector('[data-city-zoom="in"]');
         const zoomOut = inst.el.querySelector('[data-city-zoom="out"]');
+        const zoomReset = inst.el.querySelector('[data-city-zoom="reset"]');
         if (zoomIn) zoomIn.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 1.25); });
         if (zoomOut) zoomOut.addEventListener('click', () => { inst.scale = clampScale(inst.scale * 0.8); });
+        // A one-tap way back to downtown after zooming/panning out to see
+        // the wider world -- only meaningful in 'full' mode.
+        if (zoomReset) zoomReset.addEventListener('click', () => { inst.scale = 1; inst.offsetX = 0; inst.offsetY = 0; });
     },
 
     _handleClick(inst, px, py) {
@@ -456,6 +534,14 @@ const CityScape = {
         ctx.translate(w / 2 + inst.offsetX, h * 0.32 + inst.offsetY);
         ctx.scale(inst.scale, inst.scale);
 
+        // _terrainCanvas is a shared, page-level singleton (built once for
+        // whichever 'full' instance asks first) -- gate the draw on this
+        // instance's own mode, not just its existence, so a compact
+        // instance can never inherit the full-world backdrop/offsets.
+        if (inst.mode === 'full' && this._terrainCanvas) {
+            ctx.drawImage(this._terrainCanvas, this._terrainOrigin.x, this._terrainOrigin.y);
+            this._drawOceanGlints(inst);
+        }
         this._drawRoads(inst);
         this._drawAmbient(inst);
         inst.hitboxes = [];
@@ -592,6 +678,109 @@ const CityScape = {
         const f = c => Math.max(0, Math.min(255, Math.round(c + (amt < 0 ? c * amt : (255 - c) * amt))));
         r = f(r); g = f(g); b = f(b);
         return `rgb(${r},${g},${b})`;
+    },
+
+    // ── The surrounding world (built once, shared by every 'full' instance)
+    _buildTerrainCache() {
+        const { minX, maxX, minY, maxY } = WORLD_BOUNDS;
+        // Screen-space bounding box of the whole world under gridToScreen,
+        // plus a small slack margin for mountain-peak extrusion.
+        const xMin = (minX - maxY) * (TILE_W / 2) - 40;
+        const xMax = (maxX - minY) * (TILE_W / 2) + 40;
+        const yMin = (minX + minY) * (TILE_H / 2) - 40;
+        const yMax = (maxX + maxY) * (TILE_H / 2) + 40;
+        const w = Math.ceil(xMax - xMin), h = Math.ceil(yMax - yMin);
+
+        const cvs = typeof OffscreenCanvas !== 'undefined'
+            ? new OffscreenCanvas(w, h)
+            : Object.assign(document.createElement('canvas'), { width: w, height: h });
+        const ctx = cvs.getContext('2d');
+
+        // Same back-to-front diagonal order as _draw()'s building sort, so
+        // overlapping mountain-peak extrusions occlude correctly.
+        for (let sum = minX + minY; sum <= maxX + maxY; sum++) {
+            const gxLo = Math.max(minX, sum - maxY), gxHi = Math.min(maxX, sum - minY);
+            for (let gx = gxLo; gx <= gxHi; gx++) {
+                const gy = sum - gx;
+                const biome = biomeAt(gx, gy);
+                if (biome) this._drawTerrainTile(ctx, biome, gx, gy, -xMin, -yMin);
+            }
+        }
+        this._terrainCanvas = cvs;
+        this._terrainOrigin = { x: xMin, y: yMin };
+    },
+
+    _drawTerrainTile(ctx, biome, gx, gy, dx, dy) {
+        const g = gridToScreen(gx + 0.5, gy + 0.5);
+        const cx = g.x + dx, cy = g.y + dy;
+        const hw = TILE_W / 2, hh = TILE_H / 2;
+        const color = terrainColor(biome);
+        // Mountains are the one terrain type with height -- kept short
+        // (8-24px, vs. buildings' 33-78px) so they read as backdrop, never
+        // competing with a real tier-4 landmark. A little per-tile noise
+        // keeps a mountain range from looking like a flat plateau.
+        const H = biome === 'mountain' ? 8 + Math.round(_valueNoise1D(gx * 7 + gy * 3, TERRAIN_SEED + 99) * 16) : 0;
+
+        const top = { x: cx, y: cy - hh - H };
+        const right = { x: cx + hw, y: cy - H };
+        const bottom = { x: cx, y: cy + hh - H };
+        const left = { x: cx - hw, y: cy - H };
+
+        if (H > 0) {
+            const rightBase = { x: cx + hw, y: cy }, bottomBase = { x: cx, y: cy + hh }, leftBase = { x: cx - hw, y: cy };
+            ctx.fillStyle = this._shade(color, -0.35);
+            ctx.beginPath();
+            ctx.moveTo(left.x, left.y); ctx.lineTo(bottom.x, bottom.y);
+            ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(leftBase.x, leftBase.y);
+            ctx.closePath(); ctx.fill();
+
+            ctx.fillStyle = this._shade(color, -0.15);
+            ctx.beginPath();
+            ctx.moveTo(right.x, right.y); ctx.lineTo(bottom.x, bottom.y);
+            ctx.lineTo(bottomBase.x, bottomBase.y); ctx.lineTo(rightBase.x, rightBase.y);
+            ctx.closePath(); ctx.fill();
+        }
+
+        // Cheap "tilled row" alternation for farmland; flat fill otherwise.
+        ctx.fillStyle = biome === 'farmland' && (gx + gy) % 2 === 0 ? this._shade(color, -0.08) : color;
+        ctx.beginPath();
+        ctx.moveTo(top.x, top.y); ctx.lineTo(right.x, right.y);
+        ctx.lineTo(bottom.x, bottom.y); ctx.lineTo(left.x, left.y);
+        ctx.closePath(); ctx.fill();
+
+        ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+        ctx.lineWidth = 1;
+        if (biome === 'vacant') ctx.setLineDash([3, 3]); // a surveyed, undeveloped lot -- never a building
+        ctx.stroke();
+        if (biome === 'vacant') ctx.setLineDash([]);
+    },
+
+    // A handful of drifting glints on the ocean -- pure atmosphere, same
+    // drifting-dot technique as _drawAmbient's road particles, just seeded
+    // to ocean coordinates instead of roads.
+    _spawnOceanGlint() {
+        for (let i = 0; i < 40; i++) {
+            const gx = Math.round(WORLD_BOUNDS.minX + Math.random() * (WORLD_BOUNDS.maxX - WORLD_BOUNDS.minX));
+            const gy = Math.round(WORLD_BOUNDS.minY + Math.random() * (WORLD_BOUNDS.maxY - WORLD_BOUNDS.minY));
+            if (biomeAt(gx, gy) === 'ocean') {
+                const { x, y } = gridToScreen(gx, gy);
+                return { x, y, phase: Math.random() * Math.PI * 2, speed: 0.0006 + Math.random() * 0.0004 };
+            }
+        }
+        return { x: 0, y: (WORLD_BOUNDS.minX + WORLD_BOUNDS.minY) * (TILE_H / 2) + 40, phase: 0, speed: 0.0008 };
+    },
+
+    _drawOceanGlints(inst) {
+        if (!inst.oceanGlints.length) return;
+        const { ctx } = inst;
+        const t = performance.now();
+        inst.oceanGlints.forEach(g => {
+            const alpha = 0.15 + 0.15 * (0.5 + 0.5 * Math.sin(g.phase + t * g.speed));
+            ctx.beginPath();
+            ctx.arc(g.x, g.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 210, 230, ${alpha.toFixed(2)})`;
+            ctx.fill();
+        });
     },
 };
 

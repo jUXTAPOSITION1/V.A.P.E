@@ -62,6 +62,15 @@
     --city-mint: #008300;
     --city-tower: #d55181;
     --city-vault: #9085e9;
+    /* The surrounding world's 4 terrain hues (docs/city.html's full mode
+       only) -- atmosphere, not categorical data encoding, so unlike the 7
+       hues above these aren't part of a validated adjacency-checked set;
+       chosen only to read as a quiet, low-saturation backdrop distinct
+       from every building-identity/status color already in use. */
+    --city-terrain-ocean: #12283f;
+    --city-terrain-mountain: #4a4038;
+    --city-terrain-farmland: #5c5a34;
+    --city-terrain-vacant: #232329;
 }
 
 /* Site-wide base scale — the previous 16px root made every Tailwind rem-based
