@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T17:43:28Z",
+  "generated": "2026-08-03T17:58:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 411,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 145,
-    "investigations": 701,
+    "investigations": 702,
     "news": 57,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-172801-0x02c1d787.md",
-      "title": "Investigation \u2014 FRLZ",
-      "symbol": "FRLZ",
-      "name": "Forlz",
-      "date": "2026-08-03T17:28:01Z",
-      "target": "0x02c1d787521C20586b4aB070b1838D91FF85D656",
+      "file": "investigation-20260803-175833-0x515e72aF.md",
+      "title": "Investigation \u2014 A51",
+      "symbol": "A51",
+      "name": "Aliens",
+      "date": "2026-08-03T17:58:33Z",
+      "target": "0x515e72aF68A374C8f375534B59752277Ee9b4a51",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Low liquidity $20,184. Positive evidence: Ownership renounced; 90931 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 725+ days without a known incident in this scan; Custom verified source (not a mass-produ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-172801-0x02c1d787.md"
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0x51ebb43f3d8be75937f77f49f9336ae70e774a51) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,940. Positive evidence: 6012 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 red",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-175833-0x515e72aF.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-175833-0x515e72aF.md",
+      "title": "Investigation \u2014 A51",
+      "symbol": "A51",
+      "name": "Aliens",
+      "date": "2026-08-03T17:58:33Z",
+      "target": "0x515e72aF68A374C8f375534B59752277Ee9b4a51",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "72",
+      "summary": "Risk factors: [-10] Owner not renounced (0x51ebb43f3d8be75937f77f49f9336ae70e774a51) \u2014 can still act on the contract; [-8] Top 10 non-LP/burn holders control 54% of supply \u2014 meaningful concentration; [-10] Low liquidity $26,940. Positive evidence: 6012 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 red",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-175833-0x515e72aF.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-172801-0x02c1d787.md",
