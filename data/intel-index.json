@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T02:54:25Z",
+  "generated": "2026-08-03T02:54:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 519,
     "reports_by_type": {
-      "security": 96,
-      "bounty": 130,
+      "bounty": 131,
+      "security": 95,
       "sentiment": 54,
       "base": 103,
       "macro": 27,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-011631-0x707266E2.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-03-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-03T02:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_025345.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T02:53:45Z",
       "threat": null,
-      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
-      "bytes": 8517
+      "summary": "Cycle: 20260803025345 \u00b7 Data timestamp (UTC): 2026-08-03T02:53:47Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_025345.md",
+      "bytes": 16026
     }
   },
   "investigations": [
@@ -9328,15 +9328,15 @@
   ],
   "reports": [
     {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-03-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-03T02:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_025345.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T02:53:45Z",
       "threat": null,
-      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
-      "bytes": 8517
+      "summary": "Cycle: 20260803025345 \u00b7 Data timestamp (UTC): 2026-08-03T02:53:47Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_025345.md",
+      "bytes": 16026
     },
     {
       "kind": "bounty",
