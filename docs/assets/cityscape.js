@@ -102,6 +102,7 @@ function statusColor(status) {
 const KIND_VAR = {
     precinct: '--city-precinct', tower: '--city-tower', newsroom: '--city-newsroom',
     watchtower: '--city-watchtower', mint: '--city-mint', foundry: '--city-foundry', vault: '--city-vault',
+    skillforge: '--city-skillforge', databureau: '--city-databureau',
 };
 function kindColor(kind) {
     const v = KIND_VAR[kind];
@@ -120,6 +121,8 @@ const ZONE_FOR_KIND = {
     foundry: 'Industrial · Fabrication',
     vault: 'Financial District',
     checkpoint: 'Infrastructure · Security Lane',
+    skillforge: 'Civic · Knowledge Archive',
+    databureau: 'Infrastructure · Data Acquisition',
 };
 
 // Terrain hues are their own ramp -- deliberately not part of the 7
@@ -140,9 +143,26 @@ const TILE_W = 64, TILE_H = 32;
 const TIER_UNIT = 15, BASE_HEIGHT = 18;
 // Real-count-driven growth -- every GROWTH_PER_LEVEL real jobs/reports a
 // building's own stat_primary.value accumulates earns one stacked setback
-// terrace, capped so an outlier count (the Vault's sealed-findings total
-// dwarfs everything else) never produces an absurd tower.
-const GROWTH_PER_LEVEL = 300, LEVEL_UNIT = 16, MAX_GROWTH_LEVELS = 4;
+// terrace, capped so an outlier count never produces an absurd tower. A
+// flat threshold would make this meaningless: the Foundry deals in real
+// tens (self-built tools) while the Vault deals in real thousands (sealed
+// findings), so each kind gets its own real-service-scaled increment
+// instead of one number that trivializes some buildings and permanently
+// caps others. Chosen so every real current count sits at a genuine,
+// non-trivial fraction of its next level, not already maxed or at zero.
+const GROWTH_PER_LEVEL_BY_KIND = {
+    precinct: 150,    // investigations tracked
+    tower: 200,       // bounty opportunities tracked
+    newsroom: 15,     // articles published
+    watchtower: 15,   // incidents tracked (56d window)
+    foundry: 4,       // self-built tools
+    vault: 350,        // findings sealed
+    mint: 50,          // reserved for if/when a real lifetime x402 total is ever wired in
+    skillforge: 6,     // skills codified
+    databureau: 400,   // real internal data-agent ledger entries
+};
+const DEFAULT_GROWTH_PER_LEVEL = 100;
+const LEVEL_UNIT = 16, MAX_GROWTH_LEVELS = 4;
 
 function gridToScreen(gx, gy) {
     return { x: (gx - gy) * (TILE_W / 2), y: (gx + gy) * (TILE_H / 2) };
@@ -163,7 +183,7 @@ function buildingHeightPx(b) {
 // (footprint orientation and the terrain cache both snap to the nearest
 // one), but the underlying rotation math is real trigonometry, not a
 // 90°-only shortcut, so nothing looks discontinuous while dragging.
-const CITY_BBOX = { minX: 0, maxX: 22, minY: 0, maxY: 18 }; // real buildings' footprint-inclusive extent
+const CITY_BBOX = { minX: 0, maxX: 22, minY: -5, maxY: 22 }; // real buildings' footprint-inclusive extent
 const CAMERA_PIVOT = { x: 11.5, y: 8.5 }; // The Foundry's own real footprint center -- the hub every road radiates from
 const ROTATION_STOPS = [0, 45, 90, 135, 180, 225, 270, 315];
 function nearestRotationStop(deg) {
@@ -431,19 +451,24 @@ const CityScape = {
     _loadCity(inst, city) {
         // A building's real tier only ever rises when build_city_state.py's
         // relative-percentile tier_for() genuinely ranks it higher this
-        // cycle -- that's the one and only trigger for the "upgrading"
-        // pulse drawn in _drawBuilding. prevTier is empty on first load, so
-        // nothing pulses on initial paint, only on a real change afterward.
+        // cycle, and its real growth level only ever rises when its own
+        // real cumulative count crosses another GROWTH_PER_LEVEL threshold
+        // -- those are the only two triggers for the "upgrading" crane
+        // pulse drawn in _drawBuilding. Both maps are empty on first load,
+        // so nothing pulses on initial paint, only on a real change after.
         const prevTier = new Map(inst.buildings.map(b => [b.id, b.tier]));
-        // _loadCity replaces every building object wholesale on each 90s
-        // refresh -- the real-event light-balls a building has already
-        // absorbed this session (see _advance's vehicle-arrival handling)
-        // have to be carried forward by id, or they'd vanish every reload.
-        const prevContained = new Map(inst.buildings.map(b => [b.id, b.contained]));
+        const prevGrowth = new Map(inst.buildings.map(b => [b.id, this._buildingGrowth(b).levels]));
         inst.buildings = (city.buildings || []).map(b => {
-            const prev = prevTier.get(b.id);
-            const upgraded = prev != null && (b.tier || 1) > prev;
-            return { ...b, _upgradeUntil: upgraded ? performance.now() + 6000 : 0, contained: prevContained.get(b.id) || [] };
+            const prevT = prevTier.get(b.id);
+            const nextGrowth = this._buildingGrowth(b).levels;
+            const prevG = prevGrowth.get(b.id);
+            const upgraded = (prevT != null && (b.tier || 1) > prevT) || (prevG != null && nextGrowth > prevG);
+            // The light-balls a building shows are recomputed fresh from
+            // its own real current numbers every reload (_ballsForBuilding)
+            // rather than accumulated -- accuracy in count and color always
+            // wins over continuity, and the real numbers already do change
+            // over time on their own.
+            return { ...b, _upgradeUntil: upgraded ? performance.now() + 6000 : 0, contained: this._ballsForBuilding(b) };
         });
         inst.roads = (city.roads || []).map(([fromId, toId]) => {
             const from = inst.buildings.find(b => b.id === fromId);
@@ -757,6 +782,22 @@ const CityScape = {
             if (s.value == null) return;
             rows.push(`<div class="city-detail-row"><span>${escapeHtml(s.label)}</span><b>${escapeHtml(s.value)}</b></div>`);
         });
+        // Real progress toward this building's next real growth level --
+        // the exact same stat_primary.value the rows above already show,
+        // just against its own real per-kind threshold (_buildingGrowth).
+        let growthHtml = '';
+        if (b.kind !== 'checkpoint' && b.stat_primary && typeof b.stat_primary.value === 'number') {
+            const growth = this._buildingGrowth(b);
+            const pct = Math.round(growth.fillFraction * 100);
+            const label = growth.maxed
+                ? `Fully grown (level ${growth.levels}/${MAX_GROWTH_LEVELS})`
+                : `${growth.remaining.toLocaleString()} more to level ${growth.levels + 1}/${MAX_GROWTH_LEVELS}`;
+            growthHtml = `
+                <div class="city-detail-growth">
+                    <div class="city-detail-growth-bar"><div class="city-detail-growth-fill" style="width:${pct}%"></div></div>
+                    <span>${escapeHtml(label)}</span>
+                </div>`;
+        }
         card.innerHTML = `
             <div class="city-detail-title">
                 <span class="dot" style="background:${color}"></span>
@@ -765,6 +806,7 @@ const CityScape = {
             </div>
             ${zone ? `<div class="city-detail-zone">${escapeHtml(zone)}</div>` : ''}
             ${rows.join('') || '<div class="city-detail-row"><span>No data this cycle.</span></div>'}
+            ${growthHtml}
             ${safeHref(b.link) ? `<a class="city-detail-link" href="${escapeHtml(safeHref(b.link))}">Open <i class="fa-solid fa-arrow-right text-[9px]"></i></a>` : ''}
         `;
         card.style.display = 'block';
@@ -855,17 +897,19 @@ const CityScape = {
         });
         inst.vehicles.forEach(v => { v.t += v.speed * 16; });
         // A vehicle that reaches its real destination doesn't just vanish --
-        // it's absorbed as one colored light-ball contained inside that
-        // building (see _drawBuilding's translucent fill), the same real
-        // job/report the vehicle always represented, now piled up on
-        // arrival instead of disappearing.
+        // it flashes into that building's translucent fill on arrival. The
+        // *persistent* light-balls a building shows (see _drawContainedFill)
+        // are recomputed fresh from its own real current numbers every
+        // reload instead (_ballsForBuilding, wired in _loadCity) -- count
+        // and color accuracy always wins over continuity, so this is only
+        // a one-off arrival flash, never a second source of truth for how
+        // many balls are actually shown.
         inst.vehicles.forEach(v => {
             if (v.t < 1) return;
             const b = inst.buildings.find(x => x.id === v.to.id);
             if (!b) return;
-            if (!b.contained) b.contained = [];
-            b.contained.push({ color: this._ballColorForVehicle(v), enteredAt: performance.now() });
-            if (b.contained.length > 60) b.contained.shift();
+            b._flashColor = this._ballColorForVehicle(v);
+            b._flashUntil = performance.now() + 900;
         });
         inst.vehicles = inst.vehicles.filter(v => v.t < 1);
     },
@@ -923,51 +967,43 @@ const CityScape = {
         ctx.translate(w / 2 + inst.offsetX, h * 0.32 + inst.offsetY);
         ctx.scale(inst.scale, inst.scale);
 
-        // Terrain is cached per rotation *stop* (built lazily the first
-        // time that stop is viewed) -- gated on this instance's own mode so
-        // a compact instance never inherits the full-world backdrop. Keyed
-        // by inst.terrainRotation (snapped), not the continuously-dragged
-        // inst.rotation, so a mid-drag frame reuses the last-settled
-        // terrain image instead of rebuilding ~30k tiles every frame.
-        //
-        // The whole scene has to read as one rigid world turning together,
-        // not a city spinning in place over a static backdrop -- so while
-        // a drag/twist is live (inst.rotation !== inst.terrainRotation),
-        // the cached image is spun by the outstanding angle around
-        // CAMERA_PIVOT's own screen point (which this projection always
-        // maps to the same pixel regardless of rotation, so it's the
-        // correct pivot). A plain screen rotation isn't pixel-identical to
-        // this isometric projection's real grid-then-project math (the 2:1
-        // tile aspect makes that a shear, not a similarity transform), but
-        // it's a fine live approximation for the terrain's own backdrop;
-        // the instant the gesture ends, terrainRotation snaps to match and
-        // the true re-projected cache takes over, pixel-correct again.
+        // The city is fixed to the map -- it is never allowed to rotate at
+        // a different rate than the world around it. Terrain is only ever
+        // cached at rest (inst.terrainRotation, snapped to one of the 8
+        // stops; rebuilding ~30k tiles every drag frame would be far too
+        // expensive), so while a drag/twist is live every position below
+        // is frozen to that same settled angle for this frame, and the
+        // *entire* already-drawn scene (world and downtown alike) is
+        // spun together by the outstanding angle around CAMERA_PIVOT's
+        // own screen point (a fixed pixel regardless of rotation). Both
+        // halves are the same ctx.rotate() call now, so they cannot drift
+        // apart. The instant the gesture ends, terrainRotation snaps to
+        // match and every position re-projects properly again.
+        const liveRotation = inst.rotation;
+        const liveDelta = liveRotation - inst.terrainRotation;
+        const spinning = inst.mode === 'full' && Math.abs(liveDelta) > 0.05;
+        if (spinning) inst.rotation = inst.terrainRotation;
+
+        if (spinning) {
+            const pivot = gridToScreen(CAMERA_PIVOT.x, CAMERA_PIVOT.y);
+            ctx.save();
+            ctx.translate(pivot.x, pivot.y);
+            ctx.rotate((liveDelta * Math.PI) / 180);
+            ctx.translate(-pivot.x, -pivot.y);
+            // Rotating the whole rigid scene around the pivot can sweep a
+            // wedge outside of what was drawn (most visibly the terrain
+            // image's own rectangular edge) into view -- a flat vacant-
+            // toned fallback fill first means that wedge reads as more
+            // backdrop, never a hard gap, at any hour.
+            ctx.fillStyle = terrainColor('vacant');
+            ctx.fillRect(-8000, -8000, 16000, 16000);
+        }
+
         if (inst.mode === 'full') {
             if (!this._terrainCache[inst.terrainRotation]) this._buildTerrainCache(inst.terrainRotation);
             else this._touchTerrainCache(inst.terrainRotation);
             const tc = this._terrainCache[inst.terrainRotation], origin = this._terrainOrigin[inst.terrainRotation];
-            if (tc && origin) {
-                const liveDelta = inst.rotation - inst.terrainRotation;
-                if (Math.abs(liveDelta) > 0.05) {
-                    // Rotating a rectangular cached image around the pivot
-                    // sweeps its corners away from where they used to cover
-                    // the viewport, so a wedge outside the swept rectangle
-                    // can peek through during the live drag. A flat vacant-
-                    // toned fallback fill first means that wedge reads as
-                    // more backdrop, never a hard black gap, at any hour.
-                    ctx.fillStyle = terrainColor('vacant');
-                    ctx.fillRect(-8000, -8000, 16000, 16000);
-                    const pivot = gridToScreen(CAMERA_PIVOT.x, CAMERA_PIVOT.y);
-                    ctx.save();
-                    ctx.translate(pivot.x, pivot.y);
-                    ctx.rotate((liveDelta * Math.PI) / 180);
-                    ctx.translate(-pivot.x, -pivot.y);
-                    ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
-                    ctx.restore();
-                } else {
-                    ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
-                }
-            }
+            if (tc && origin) ctx.drawImage(tc, origin.x, origin.y, origin.w, origin.h);
             this._drawOceanGlints(inst);
         }
         this._drawDowntownGround(inst, phase);
@@ -983,6 +1019,9 @@ const CityScape = {
         });
         ordered.forEach(b => this._drawBuilding(inst, b, phase));
         this._drawVehicles(inst);
+
+        if (spinning) ctx.restore();
+        inst.rotation = liveRotation;
 
         ctx.restore();
     },
@@ -1218,15 +1257,60 @@ const CityScape = {
     // Real jobs and reports don't just vanish on arrival anymore (see
     // _advance's vehicle-absorption) -- they pile up inside their real
     // destination building, visible through its own translucent walls,
-    // and enough of them (every GROWTH_PER_LEVEL) earn the building a
-    // real stacked terrace. Purely a re-reading of stat_primary.value,
-    // the exact same real cumulative count that building's detail card
-    // already shows -- never a second, invented number.
+    // and enough of them (every real per-kind increment) earn the
+    // building a real stacked terrace. Purely a re-reading of
+    // stat_primary.value, the exact same real cumulative count that
+    // building's detail card already shows -- never a second, invented
+    // number. `remaining`/`perLevel` let the detail card show real
+    // progress toward the next level.
     _buildingGrowth(b) {
         const raw = b.stat_primary && typeof b.stat_primary.value === 'number' ? b.stat_primary.value : 0;
-        const levels = Math.min(MAX_GROWTH_LEVELS, Math.floor(raw / GROWTH_PER_LEVEL));
-        const fillFraction = raw > 0 ? (raw % GROWTH_PER_LEVEL) / GROWTH_PER_LEVEL : 0;
-        return { levels, fillFraction };
+        const perLevel = GROWTH_PER_LEVEL_BY_KIND[b.kind] || DEFAULT_GROWTH_PER_LEVEL;
+        const levels = Math.min(MAX_GROWTH_LEVELS, Math.floor(raw / perLevel));
+        const intoLevel = raw > 0 ? raw % perLevel : 0;
+        const fillFraction = perLevel > 0 ? intoLevel / perLevel : 0;
+        const maxed = levels >= MAX_GROWTH_LEVELS;
+        return { levels, fillFraction, perLevel, intoLevel, remaining: maxed ? 0 : perLevel - intoLevel, maxed };
+    },
+
+    // The light-balls a building shows, recomputed fresh from its own real
+    // current numbers every _loadCity reload -- accuracy in count and
+    // color, not continuity, is the point. A building's real total is
+    // often far larger than can legibly render as individual dots (the
+    // Vault alone seals 1,000+ findings), so the displayed sample is
+    // capped for legibility but the *proportions* are exact: Investigations
+    // is the one landmark whose real stat_secondary already splits the
+    // same real total by category (reject/caution/proceed), so its sample
+    // is split in those exact real ratios (largest-remainder rounding, so
+    // the shown count still sums exactly) instead of one uniform color.
+    _ballsForBuilding(b) {
+        const total = b.stat_primary && typeof b.stat_primary.value === 'number' ? b.stat_primary.value : 0;
+        if (total <= 0) return [];
+        const CAP = 90;
+        const shown = Math.min(total, CAP);
+
+        if (b.id === 'precinct-investigations' && Array.isArray(b.stat_secondary)) {
+            const colorFor = label => label === 'reject' ? cssVar('--sev-critical')
+                : label === 'caution' ? cssVar('--sev-medium')
+                : label === 'proceed' ? cssVar('--sev-low') : cssVar('--sev-info');
+            const parts = b.stat_secondary
+                .map(s => ({ label: s.label, value: typeof s.value === 'number' ? s.value : 0 }))
+                .filter(p => p.value > 0);
+            const partTotal = parts.reduce((sum, p) => sum + p.value, 0);
+            if (partTotal > 0) {
+                const raw = parts.map(p => (p.value / partTotal) * shown);
+                const counts = raw.map(Math.floor);
+                let remainder = shown - counts.reduce((sum, c) => sum + c, 0);
+                const order = raw.map((v, i) => [v - counts[i], i]).sort((x, y) => y[0] - x[0]);
+                for (let i = 0; i < remainder && i < order.length; i++) counts[order[i][1]]++;
+                const balls = [];
+                parts.forEach((p, i) => { for (let k = 0; k < counts[i]; k++) balls.push({ color: colorFor(p.label) }); });
+                return balls;
+            }
+        }
+
+        const color = kindColor(b.kind);
+        return Array.from({ length: shown }, () => ({ color }));
     },
 
     _drawBuilding(inst, b, phase) {
@@ -1261,6 +1345,22 @@ const CityScape = {
         ctx.fill();
         ctx.restore();
 
+        // The Mint sits alone, far outside downtown -- a perimeter reads
+        // it as its own compound rather than a single building dropped in
+        // open land.
+        if (b.kind === 'mint') {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - hh * 1.7); ctx.lineTo(cx + hw * 1.7, cy);
+            ctx.lineTo(cx, cy + hh * 1.7); ctx.lineTo(cx - hw * 1.7, cy);
+            ctx.closePath(); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.restore();
+        }
+
         if (alert) {
             ctx.save();
             ctx.shadowColor = base;
@@ -1270,7 +1370,7 @@ const CityScape = {
         // Real light-balls piling up inside, drawn before the walls so the
         // translucent fill genuinely shows them "through the glass" rather
         // than painted over them.
-        if (!isCheckpoint) this._drawContainedFill(ctx, cx, cy, hw, hh, baseH, growth.fillFraction, b.contained || []);
+        if (!isCheckpoint) this._drawContainedFill(ctx, cx, cy, hw, hh, baseH, growth.fillFraction, b.contained || [], b);
 
         // Ground level -- translucent (not checkpoints, which stay opaque
         // uniform markers) at the building's real tier height.
@@ -1357,7 +1457,10 @@ const CityScape = {
         if (!isCheckpoint) this._drawWealthDetailing(ctx, b.tier || 1, cx, cy, baseCorners.top, baseCorners.right, hw, baseH);
 
         // "Under construction" pulse -- fires only when _loadCity just saw
-        // this building's real tier rise between two live fetches.
+        // this building's real tier rise, or its real growth level cross
+        // another real threshold, between two live fetches. A real
+        // skyscraper-scale (higher tier) building earns a bigger crane, so
+        // the more consequential the real change, the more it shows.
         if (b._upgradeUntil && performance.now() < b._upgradeUntil) {
             const pulse = 0.4 + 0.4 * Math.sin(performance.now() / 180);
             ctx.save();
@@ -1369,10 +1472,7 @@ const CityScape = {
             ctx.lineTo(topCorners.bottom.x, topCorners.bottom.y); ctx.lineTo(topCorners.left.x, topCorners.left.y);
             ctx.closePath(); ctx.stroke();
             ctx.setLineDash([]);
-            ctx.fillStyle = `rgba(255,255,255,${pulse.toFixed(2)})`;
-            ctx.font = `600 9px ${canvasFontFamily()}, sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.fillText('▲ upgrading', topCorners.top.x, topCorners.top.y - 8);
+            this._drawUpgradeCrane(ctx, topCorners.top, 1 + (b.tier || 1) * 0.4, pulse);
             ctx.restore();
         }
 
@@ -1424,12 +1524,11 @@ const CityScape = {
 
     // The "gumball machine" fill: a rising translucent volume from the
     // ground up to how far this building's real cumulative count has
-    // gotten toward its next real growth level, plus one distinct light-
-    // ball per real event actually witnessed arriving this session (see
-    // _advance/_ballColorForVehicle) -- never a fabricated count of balls
-    // for the whole real history, since this session never saw most of it
-    // happen.
-    _drawContainedFill(ctx, cx, cy, hw, hh, H, fillFraction, balls) {
+    // gotten toward its next real growth level (_buildingGrowth), holding
+    // a capped-but-proportionally-exact sample of real light-balls
+    // (_ballsForBuilding) -- count and color both trace directly to the
+    // same real numbers the detail card shows, never a fabricated tally.
+    _drawContainedFill(ctx, cx, cy, hw, hh, H, fillFraction, balls, b) {
         const fillH = Math.max(H * 0.08, H * Math.min(1, fillFraction));
         const top = { x: cx, y: cy - hh - fillH };
         const right = { x: cx + hw, y: cy - fillH };
@@ -1452,10 +1551,11 @@ const CityScape = {
         ctx.restore();
 
         const cols = 5;
+        const rows = Math.max(1, Math.ceil(balls.length / cols));
         balls.forEach((ball, i) => {
-            const row = Math.floor(i / cols) % 8, col = i % cols;
+            const row = Math.floor(i / cols), col = i % cols;
             const fx = ((col + 0.5) / cols - 0.5) * 1.6;
-            const fy = 0.15 + (row / 8) * 0.75;
+            const fy = 0.15 + (row / rows) * 0.75;
             ctx.beginPath();
             ctx.arc(cx + fx * hw, cy - fillH * fy, 2.2, 0, Math.PI * 2);
             ctx.fillStyle = ball.color;
@@ -1464,6 +1564,22 @@ const CityScape = {
             ctx.fill();
             ctx.shadowBlur = 0;
         });
+
+        // A brief bright flash where a real vehicle just arrived -- pure
+        // one-off feedback, never a second source of truth for the
+        // persistent count/color above (see _advance).
+        if (b && b._flashUntil && performance.now() < b._flashUntil) {
+            const life = 1 - (b._flashUntil - performance.now()) / 900;
+            ctx.beginPath();
+            ctx.arc(cx, cy - fillH * 0.85, 3 + life * 3, 0, Math.PI * 2);
+            ctx.fillStyle = b._flashColor;
+            ctx.globalAlpha = Math.max(0, 1 - life);
+            ctx.shadowColor = b._flashColor;
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+        }
     },
 
     _drawWealthDetailing(ctx, tier, cx, cy, top, right, hw, H) {
@@ -1556,9 +1672,38 @@ const CityScape = {
             ctx.strokeStyle = 'rgba(255,255,255,0.45)';
             ctx.strokeRect(top.x - 6, top.y - 9, 12, 5.5);
         } else if (kind === 'mint') {
+            // A tower crane, not a finished roofline -- the Mint's own
+            // remote compound reads as a real skyscraper still going up,
+            // not a completed building. Purely a display choice for this
+            // one kind, same category as every other roof icon here.
+            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+            ctx.lineWidth = 1.3;
+            ctx.beginPath(); ctx.moveTo(top.x, top.y); ctx.lineTo(top.x, top.y - 20); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(top.x - 3, top.y - 20); ctx.lineTo(top.x + 13, top.y - 20); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(top.x, top.y - 20); ctx.lineTo(top.x + 10, top.y - 17); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(top.x, top.y - 20); ctx.lineTo(top.x - 2, top.y - 17); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(top.x + 9, top.y - 20); ctx.lineTo(top.x + 9, top.y - 14); ctx.stroke();
+            ctx.fillStyle = 'rgba(255,200,80,0.85)';
+            ctx.fillRect(top.x + 7.5, top.y - 14, 3, 2);
+        } else if (kind === 'skillforge') {
+            // A stack of codified playbooks -- the self-growing skill
+            // ecosystem's own real archive.
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.fillRect(top.x - 6, top.y - 4, 12, 2.4);
             ctx.fillStyle = 'rgba(255,255,255,0.32)';
-            ctx.beginPath(); ctx.arc(top.x, top.y - 4, 4, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = 'rgba(0,0,0,0.3)'; ctx.stroke();
+            ctx.fillRect(top.x - 5, top.y - 7, 10, 2.4);
+            ctx.fillStyle = 'rgba(255,255,255,0.48)';
+            ctx.fillRect(top.x - 4, top.y - 10, 8, 2.4);
+        } else if (kind === 'databureau') {
+            // A small antenna array -- real internal data-agent calls
+            // being logged, distinct from Newsroom's own single dish.
+            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+            [-6, 0, 6].forEach((dx, i) => {
+                const h2 = 7 + (i === 1 ? 4 : 0);
+                ctx.beginPath(); ctx.moveTo(top.x + dx, top.y); ctx.lineTo(top.x + dx, top.y - h2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(top.x + dx, top.y - h2, 1.3, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(200,225,255,0.8)'; ctx.fill();
+            });
         }
         ctx.restore();
     },
@@ -1599,6 +1744,27 @@ const CityScape = {
             ctx.fillStyle = c;
             ctx.fill();
         });
+        ctx.restore();
+    },
+
+    // A large tower crane over whichever building just earned a real tier
+    // or growth-level upgrade -- scaled bigger for higher-tier buildings,
+    // "especially the skyscrapers," so the more consequential the real
+    // change the bigger the crane. Pure celebratory display, only ever
+    // shown for the same 6-second window the dashed-outline pulse uses.
+    _drawUpgradeCrane(ctx, top, scale, pulse) {
+        ctx.save();
+        ctx.translate(top.x, top.y);
+        ctx.scale(scale, scale);
+        ctx.strokeStyle = `rgba(255,255,255,${pulse.toFixed(2)})`;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -32); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-6, -32); ctx.lineTo(20, -32); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, -32); ctx.lineTo(15, -27); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, -32); ctx.lineTo(-4, -27); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(13, -32); ctx.lineTo(13, -20); ctx.stroke();
+        ctx.fillStyle = `rgba(255,205,90,${pulse.toFixed(2)})`;
+        ctx.fillRect(11, -20, 4, 3);
         ctx.restore();
     },
 

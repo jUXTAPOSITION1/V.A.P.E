@@ -4,25 +4,28 @@ VAPE City State Builder — zero-LLM, zero-network, pure aggregation.
 
 Mirrors agents/build_security_dashboard.py's pattern (pure re-projection of
 real, already-produced artifacts, no LLM call, no API call, fully-
-regenerated output every run) one level further: it reads five snapshots
+regenerated output every run) one level further: it reads real snapshots
 this repo already maintains and re-projects them into one building manifest
 for the site's interactive city visualization (docs/assets/cityscape.js) —
 
-  data/security-dashboard.json           -- 10 automated security lanes
-  data/attack-feed.json                  -- on-chain attack/incident intel
-  data/intel-index.json                  -- investigations, news, tools
-  intel/bounty-radar/opportunities.json  -- bounty-radar tracked programs
-  data/reputation.json                   -- verifiable self-build activity
+  data/security-dashboard.json                    -- 10 automated security lanes
+  data/attack-feed.json                           -- on-chain attack/incident intel
+  data/intel-index.json                           -- investigations, news, tools
+  intel/bounty-radar/opportunities.json           -- bounty-radar tracked programs
+  data/reputation.json                            -- verifiable self-build activity
+  skillforge/memory/data_agent_ledger.jsonl       -- real internal market-data hires
+  skillforge/memory/data_agent_vapor_ledger.jsonl -- real internal market-data hires
+  skillforge/memory/data_agent_catalog_ledger.jsonl -- real internal market-data hires
 
 into data/city-state.json: 10 uniform "lane checkpoint" buildings (one per
 real security lane, deliberately equal-sized — mirrors securitydashboard.js's
 signal-ring principle that position/color/status carry meaning while size
-never does, since there's no honest per-lane volume to compare) plus 7
+never does, since there's no honest per-lane volume to compare) plus real
 "landmark" buildings sized by real relative volume against each other.
 
-Every number here traces to one of the five files above. A source that
-can't be read degrades to nulls/zeros for its own landmark, never a
-fabricated placeholder — same rule as every other aggregator in this repo.
+Every number here traces to one of the files above. A source that can't be
+read degrades to nulls/zeros for its own landmark, never a fabricated
+placeholder — same rule as every other aggregator in this repo.
 """
 import json
 import os
@@ -38,6 +41,11 @@ ATTACK_FEED_PATH = os.path.join(ROOT, "data", "attack-feed.json")
 INTEL_INDEX_PATH = os.path.join(ROOT, "data", "intel-index.json")
 OPPORTUNITIES_PATH = os.path.join(ROOT, "intel", "bounty-radar", "opportunities.json")
 REPUTATION_PATH = os.path.join(ROOT, "data", "reputation.json")
+DATA_AGENT_LEDGER_PATHS = [
+    os.path.join(ROOT, "skillforge", "memory", "data_agent_ledger.jsonl"),
+    os.path.join(ROOT, "skillforge", "memory", "data_agent_vapor_ledger.jsonl"),
+    os.path.join(ROOT, "skillforge", "memory", "data_agent_catalog_ledger.jsonl"),
+]
 OUT_PATH = os.path.join(ROOT, "data", "city-state.json")
 
 LIVE_STATUSES = {"live", "active"}
@@ -48,13 +56,27 @@ LIVE_STATUSES = {"live", "active"}
 # version this is deliberately laying groundwork for) can read positions
 # straight from this same data file instead of a JS-only layout table.
 LAYOUT = {
-    "mint-x402": {"gridX": 12, "gridY": 0, "footprint": [1, 1]},
+    # Deliberately far outside the real downtown grid -- its own remote
+    # compound out past the vacant margin, connected back to the Foundry
+    # hub by one long real avenue, sitting just inside the vacant belt
+    # bordering this seeded world's mountain range (biomeAt in
+    # cityscape.js turns to real mountain terrain a bit further out along
+    # this same gx+gy diagonal). Bigger footprint than any other landmark
+    # since it's the one building meant to read as a compound in its own
+    # right, not a single tower shoulder-to-shoulder with downtown.
+    "mint-x402": {"gridX": 68, "gridY": 58, "footprint": [3, 3]},
     "precinct-investigations": {"gridX": 0, "gridY": 2, "footprint": [2, 2]},
     "tower-bounty": {"gridX": 20, "gridY": 2, "footprint": [2, 2]},
     "foundry": {"gridX": 10, "gridY": 7, "footprint": [3, 3]},
     "newsroom": {"gridX": 0, "gridY": 13, "footprint": [2, 2]},
     "watchtower-threat": {"gridX": 20, "gridY": 13, "footprint": [2, 2]},
     "vault-ledger": {"gridX": 12, "gridY": 17, "footprint": [1, 1]},
+    # Two new real processes, spreading downtown's own grid outward (north
+    # and south of the existing footprint) rather than into the remaining
+    # gaps between current landmarks -- room for whatever comes after these
+    # two stays in the gaps, not at the edges.
+    "skillforge": {"gridX": 10, "gridY": -5, "footprint": [2, 2]},
+    "data-bureau": {"gridX": 10, "gridY": 20, "footprint": [2, 2]},
 }
 # 10 lane-checkpoint slots ringed around the Foundry (center ~11.5,8.5) at a
 # wider radius than the landmarks sit at -- hand-placed (not trig-computed
@@ -78,6 +100,17 @@ def _read_json(path, default=None):
             return json.load(f)
     except (OSError, ValueError):
         return default if default is not None else {}
+
+
+def _count_jsonl_lines(path):
+    """One real logged event per line (skillforge/memory's ledger files) --
+    a plain line count, not a fabricated estimate. Missing/unreadable file
+    degrades to 0, same rule as every other source in this file."""
+    try:
+        with open(path, "rb") as f:
+            return sum(1 for line in f if line.strip())
+    except OSError:
+        return 0
 
 
 def lane_status(lane):
@@ -139,7 +172,7 @@ def tier_for(value, all_values):
     return 1
 
 
-def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation):
+def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation, data_agent_total=0):
     investigations = intel_index.get("investigations") or []
     news = intel_index.get("news") or []
     verdict_counts = {"REJECT": 0, "CAUTION": 0, "PROCEED": 0}
@@ -158,6 +191,7 @@ def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation
     verifiable_activity = (reputation or {}).get("verifiable_activity") or {}
     tools_built = verifiable_activity.get("tools_built")
     tools_total = verifiable_activity.get("tools_total")
+    skills_codified = verifiable_activity.get("skills_codified")
 
     ledger = secdash.get("ledger_integrity") or {}
     findings_total = sum((secdash.get("findings_by_severity") or {}).values())
@@ -169,6 +203,8 @@ def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation
         "watchtower-threat": len(incidents),
         "foundry": tools_built or 0,
         "vault-ledger": findings_total,
+        "skillforge": skills_codified or 0,
+        "data-bureau": data_agent_total,
     }
     all_volumes = list(volumes.values())
 
@@ -226,9 +262,13 @@ def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation
             # x402 jobs live, sub-minute, so its real numbers only exist
             # client-side (docs/assets/x402feed.js's own /x402/stats fetch).
             # cityscape.js fills stat_primary in at runtime; this entry only
-            # carries this building's fixed position/link.
+            # carries this building's fixed position/link. tier is fixed
+            # (not tier_for()-derived, same as before) at 3 rather than 2 --
+            # a deliberately taller starting base for its own remote
+            # compound, "the beginnings of a skyscraper" out by the
+            # mountains, not a claim about its real relative volume.
             "id": "mint-x402", "kind": "mint",
-            "title": "The Mint", "status": "unknown", "tier": 2,
+            "title": "The Mint", "status": "unknown", "tier": 3,
             "stat_primary": None, "stat_secondary": [], "live_only": True,
             "link": "index.html#x402-ledger",
         },
@@ -247,6 +287,31 @@ def build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation
             "stat_primary": {"label": "findings sealed", "value": findings_total},
             "stat_secondary": [{"label": "unsealed lines", "value": ledger.get("unsealed_lines")}],
             "link": "index.html#security-dashboard",
+        },
+        {
+            # The self-growing skill/tool ecosystem the README's own
+            # architecture table describes (harvest, toolcheck, synthesize,
+            # a shared Memory base) -- skills_codified is a real, distinct
+            # count from reputation.json, separate from the Foundry's own
+            # "self-built tools" number.
+            "id": "skillforge", "kind": "skillforge",
+            "title": "The Skillforge", "status": "ok",
+            "tier": tier_for(volumes["skillforge"], all_volumes),
+            "stat_primary": {"label": "skills codified", "value": skills_codified},
+            "stat_secondary": [{"label": "tools verified", "value": tools_total}],
+            "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge",
+        },
+        {
+            # VAPE's own internal real-time market-data acquisition system
+            # (skillforge/memory/data_agent_*.jsonl) -- each real line is one
+            # real paid internal hire of a market-data tool, distinct from
+            # every other landmark's own real signal.
+            "id": "data-bureau", "kind": "databureau",
+            "title": "The Data Bureau", "status": "ok",
+            "tier": tier_for(volumes["data-bureau"], all_volumes),
+            "stat_primary": {"label": "data calls logged", "value": data_agent_total},
+            "stat_secondary": [],
+            "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
         },
     ]
 
@@ -331,9 +396,11 @@ def build():
     opportunities = _read_json(OPPORTUNITIES_PATH, default=[])
     reputation = _read_json(REPUTATION_PATH)
 
+    data_agent_total = sum(_count_jsonl_lines(p) for p in DATA_AGENT_LEDGER_PATHS)
+
     lanes = secdash.get("lanes") or []
     checkpoints = build_lane_checkpoints(lanes)
-    landmarks = build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation)
+    landmarks = build_landmarks(secdash, attack_feed, intel_index, opportunities, reputation, data_agent_total)
 
     for b in landmarks:
         pos = LAYOUT.get(b["id"], {"gridX": 0, "gridY": 0, "footprint": [1, 1]})
