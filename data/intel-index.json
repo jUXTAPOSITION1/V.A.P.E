@@ -1,16 +1,16 @@
 {
-  "generated": "2026-08-03T16:27:47Z",
+  "generated": "2026-08-03T16:31:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 409,
+    "reports": 410,
     "reports_by_type": {
       "bounty": 104,
+      "macro": 22,
       "security": 71,
       "bug": 5,
       "base": 82,
       "mainnet": 5,
       "sentiment": 43,
-      "macro": 21,
       "virtuals": 74,
       "skillforge": 4
     },
@@ -9662,6 +9662,17 @@
     },
     {
       "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-03-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-03T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (28, prior day 27) and global market cap 24h change (0.74%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-03-16.md",
+      "bytes": 2086
+    },
+    {
+      "kind": "intel",
       "type": "security",
       "file": "security-2026-08-03-14.md",
       "title": "VAPE Security Sweep Report",
@@ -10297,17 +10308,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_210528.md",
       "bytes": 17640
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-07-31-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-07-31 21:14 UTC",
-      "date": "2026-07-31T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-07-31-21.md",
-      "bytes": 1980
     }
   ],
   "broadcasts": [
