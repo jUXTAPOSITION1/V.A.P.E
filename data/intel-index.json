@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T03:48:44Z",
+  "generated": "2026-08-03T04:03:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 520,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 142,
-    "investigations": 680,
+    "investigations": 681,
     "news": 54,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-034844-0xA8405797.md",
-      "title": "Investigation \u2014 aeon",
-      "symbol": "aeon",
-      "name": "aeon",
-      "date": "2026-08-03T03:48:44Z",
-      "target": "0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84",
+      "file": "investigation-20260803-040348-0xd2fed901.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON Token",
+      "date": "2026-08-03T04:03:48Z",
+      "target": "0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BRIAN (0x71A64AA011566A33F79eE48ed1491752AEc254b6) \u2014 REJECT 28/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-034844-0xA8405797.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Low holder count (122); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Pair 5.7 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-040348-0xd2fed901.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-040348-0xd2fed901.md",
+      "title": "Investigation \u2014 AEON",
+      "symbol": "AEON",
+      "name": "AEON Token",
+      "date": "2026-08-03T04:03:48Z",
+      "target": "0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Low holder count (122); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Pair 5.7 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-10",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-040348-0xd2fed901.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-034844-0xA8405797.md",

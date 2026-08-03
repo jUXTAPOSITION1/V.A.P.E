@@ -9997,6 +9997,25 @@
     "symbol": "OFC",
     "times_investigated": 1
   },
+  "8453:0xd2fed9015e81a74bea3bdd296f4760156a1a5b23": {
+    "address": "0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23",
+    "chain": "8453",
+    "creator_address": "0x60613bde5cb417e5ef0ccc3d4031f6a89999b027",
+    "first_investigated": "2026-08-03T04:03:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-040348-0xd2fed901.md",
+        "score": 27,
+        "ts": "2026-08-03T04:03:48Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T04:03:48Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "AEON",
+    "times_investigated": 1
+  },
   "8453:0xdb879f458a56d1919ae7d12e4a9662b1d8a3e892": {
     "address": "0xDB879F458a56d1919ae7D12e4a9662B1d8A3E892",
     "chain": "8453",

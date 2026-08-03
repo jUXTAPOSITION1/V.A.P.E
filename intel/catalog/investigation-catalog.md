@@ -1161,3 +1161,5 @@
 | 2026-08-03 | auto | 0x895BC7a6caBA2088409fdac388183cA084dc2F77 (AEON) | deep_investigation | CAUTION (55/100) | Top 9 non-LP/burn holders control 100% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-03 | auto | 0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84 (aeon) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-03 | auto | 0xd2fed9015E81A74BEA3BdD296f4760156A1a5b23 (AEON) | deep_investigation | REJECT (27/100) | Low holder count (122) | +7d |
