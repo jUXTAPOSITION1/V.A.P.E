@@ -5995,6 +5995,25 @@
     "symbol": "LUCKY",
     "times_investigated": 1
   },
+  "56:0x69c47c7474b7b2d6153effc4fa958183f4af7777": {
+    "address": "0x69C47C7474B7b2d6153Effc4fa958183f4af7777",
+    "chain": "56",
+    "creator_address": "0x61d10564156f844e65e673d8fb4c63314cd8f18f",
+    "first_investigated": "2026-08-03T12:10:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-121013-0x69C47C74.md",
+        "score": 0,
+        "ts": "2026-08-03T12:10:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T12:10:13Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "SAFU",
+    "times_investigated": 1
+  },
   "56:0x69f7d2b86470d3288d038da95b4c194053427777": {
     "address": "0x69f7d2B86470D3288D038da95B4c194053427777",
     "chain": "56",

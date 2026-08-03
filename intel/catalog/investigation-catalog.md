@@ -1189,3 +1189,5 @@
 | 2026-08-03 | auto | 0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C (SAFU) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 66% of supply — meaningful concentration | +7d |
 
 | 2026-08-03 | auto | 0x68902977263936B5bCF51568342e6E5a70c71b0F (CATE) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-03 | auto | 0x69C47C7474B7b2d6153Effc4fa958183f4af7777 (SAFU) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
