@@ -1149,3 +1149,5 @@
 | 2026-08-02 | auto | 0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5 (ADI) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-02 | auto | 0x149002DdB0bb0342cDB1418C82B201bF415e7777 (Pizza) | deep_investigation | PROCEED (82/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-03 | auto | 0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18 (Pizza) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |

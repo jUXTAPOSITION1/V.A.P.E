@@ -6621,6 +6621,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0xcd4ab72f52f6abec6aa518e0c6da80eba9edad18": {
+    "address": "0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18",
+    "chain": "56",
+    "creator_address": "0x66b2b9ad0471468d9c1761230681913d10830bd9",
+    "first_investigated": "2026-08-03T00:16:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-001627-0xCd4ab72f.md",
+        "score": 75,
+        "ts": "2026-08-03T00:16:27Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T00:16:27Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "Pizza",
+    "times_investigated": 1
+  },
   "56:0xcd743f1a54f4b665286864c4867a7216805fe09a": {
     "address": "0xCD743f1a54f4b665286864c4867A7216805fe09A",
     "chain": "56",
