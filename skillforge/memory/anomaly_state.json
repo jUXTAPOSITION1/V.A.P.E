@@ -14,5 +14,9 @@
   "mover:WMTX / WETH": {
     "ts": "2026-08-01T14:27:17Z",
     "value": 57.6
+  },
+  "mover:aeon / WETH": {
+    "ts": "2026-08-03T06:24:38Z",
+    "value": 186.878
   }
 }
