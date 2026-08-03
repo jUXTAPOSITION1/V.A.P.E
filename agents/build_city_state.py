@@ -48,20 +48,23 @@ LIVE_STATUSES = {"live", "active"}
 # version this is deliberately laying groundwork for) can read positions
 # straight from this same data file instead of a JS-only layout table.
 LAYOUT = {
-    "mint-x402": {"gridX": 6, "gridY": 0, "footprint": [1, 1]},
-    "precinct-investigations": {"gridX": 0, "gridY": 1, "footprint": [2, 2]},
-    "tower-bounty": {"gridX": 10, "gridY": 1, "footprint": [2, 2]},
-    "foundry": {"gridX": 5, "gridY": 3, "footprint": [3, 3]},
-    "newsroom": {"gridX": 0, "gridY": 6, "footprint": [2, 2]},
-    "watchtower-threat": {"gridX": 10, "gridY": 6, "footprint": [2, 2]},
-    "vault-ledger": {"gridX": 6, "gridY": 8, "footprint": [1, 1]},
+    "mint-x402": {"gridX": 12, "gridY": 0, "footprint": [1, 1]},
+    "precinct-investigations": {"gridX": 0, "gridY": 2, "footprint": [2, 2]},
+    "tower-bounty": {"gridX": 20, "gridY": 2, "footprint": [2, 2]},
+    "foundry": {"gridX": 10, "gridY": 7, "footprint": [3, 3]},
+    "newsroom": {"gridX": 0, "gridY": 13, "footprint": [2, 2]},
+    "watchtower-threat": {"gridX": 20, "gridY": 13, "footprint": [2, 2]},
+    "vault-ledger": {"gridX": 12, "gridY": 17, "footprint": [1, 1]},
 }
-# 10 lane-checkpoint slots ringed around the Foundry (center ~6.5,4.5) —
-# hand-placed (not trig-computed at runtime) so positions stay stable and
-# collision-free against the landmarks above regardless of lane order.
+# 10 lane-checkpoint slots ringed around the Foundry (center ~11.5,8.5) at a
+# wider radius than the landmarks sit at -- hand-placed (not trig-computed
+# at runtime) so positions stay stable and collision-free against the
+# landmarks above regardless of lane order. Spread out from the original
+# tightly-packed ring so real roads read as an actual street grid with
+# proper block spacing instead of everything crowding one hub tile.
 LANE_RING = [
-    (4, 2), (6, 2), (8, 2), (9, 3), (9, 5),
-    (8, 6), (6, 6), (4, 6), (3, 5), (3, 3),
+    (8, 4), (11, 3), (14, 4), (17, 6), (17, 10),
+    (14, 13), (11, 14), (8, 13), (5, 10), (5, 6),
 ]
 
 

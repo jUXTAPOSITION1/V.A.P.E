@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T22:29:34Z",
+  "generated_at": "2026-08-03T01:59:33Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 9,
@@ -15,25 +15,25 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 671
+        "value": 676
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 361
+          "value": 363
         },
         {
           "label": "caution",
-          "value": 185
+          "value": 187
         },
         {
           "label": "proceed",
-          "value": 125
+          "value": 126
         }
       ],
       "link": "investigations.html",
       "gridX": 0,
-      "gridY": 1,
+      "gridY": 2,
       "footprint": [
         2,
         2
@@ -60,8 +60,8 @@
         }
       ],
       "link": "bounty.html",
-      "gridX": 10,
-      "gridY": 1,
+      "gridX": 20,
+      "gridY": 2,
       "footprint": [
         2,
         2
@@ -80,7 +80,7 @@
       "stat_secondary": [],
       "link": "news.html",
       "gridX": 0,
-      "gridY": 6,
+      "gridY": 13,
       "footprint": [
         2,
         2
@@ -103,8 +103,8 @@
         }
       ],
       "link": "bounty.html#threat-ledger",
-      "gridX": 10,
-      "gridY": 6,
+      "gridX": 20,
+      "gridY": 13,
       "footprint": [
         2,
         2
@@ -120,7 +120,7 @@
       "stat_secondary": [],
       "live_only": true,
       "link": "index.html#x402-ledger",
-      "gridX": 6,
+      "gridX": 12,
       "gridY": 0,
       "footprint": [
         1,
@@ -144,8 +144,8 @@
         }
       ],
       "link": "index.html#the-workshop",
-      "gridX": 5,
-      "gridY": 3,
+      "gridX": 10,
+      "gridY": 7,
       "footprint": [
         3,
         3
@@ -168,8 +168,8 @@
         }
       ],
       "link": "index.html#security-dashboard",
-      "gridX": 6,
-      "gridY": 8,
+      "gridX": 12,
+      "gridY": 17,
       "footprint": [
         1,
         1
@@ -181,8 +181,8 @@
       "title": "Static Analysis (CodeQL)",
       "status": "ok",
       "tier": 1,
-      "gridX": 4,
-      "gridY": 2,
+      "gridX": 8,
+      "gridY": 4,
       "footprint": [
         1,
         1
@@ -201,8 +201,8 @@
       "title": "CI / Workflow Hardening",
       "status": "ok",
       "tier": 1,
-      "gridX": 6,
-      "gridY": 2,
+      "gridX": 11,
+      "gridY": 3,
       "footprint": [
         1,
         1
@@ -221,8 +221,8 @@
       "title": "Code Review (VAPE Reviewer)",
       "status": "ok",
       "tier": 1,
-      "gridX": 8,
-      "gridY": 2,
+      "gridX": 14,
+      "gridY": 4,
       "footprint": [
         1,
         1
@@ -241,8 +241,8 @@
       "title": "Dependencies (SCA)",
       "status": "ok",
       "tier": 1,
-      "gridX": 9,
-      "gridY": 3,
+      "gridX": 17,
+      "gridY": 6,
       "footprint": [
         1,
         1
@@ -261,8 +261,8 @@
       "title": "Logic Parity",
       "status": "ok",
       "tier": 1,
-      "gridX": 9,
-      "gridY": 5,
+      "gridX": 17,
+      "gridY": 10,
       "footprint": [
         1,
         1
@@ -281,8 +281,8 @@
       "title": "AI Red-Team",
       "status": "ok",
       "tier": 1,
-      "gridX": 8,
-      "gridY": 6,
+      "gridX": 14,
+      "gridY": 13,
       "footprint": [
         1,
         1
@@ -301,8 +301,8 @@
       "title": "AI Red-Team (deep)",
       "status": "ok",
       "tier": 1,
-      "gridX": 6,
-      "gridY": 6,
+      "gridX": 11,
+      "gridY": 14,
       "footprint": [
         1,
         1
@@ -321,8 +321,8 @@
       "title": "Findings Ledger Seal",
       "status": "ok",
       "tier": 1,
-      "gridX": 4,
-      "gridY": 6,
+      "gridX": 8,
+      "gridY": 13,
       "footprint": [
         1,
         1
@@ -341,8 +341,8 @@
       "title": "Review Drift",
       "status": "ok",
       "tier": 1,
-      "gridX": 3,
-      "gridY": 5,
+      "gridX": 5,
+      "gridY": 10,
       "footprint": [
         1,
         1
@@ -361,8 +361,8 @@
       "title": "On-Chain Attack Intelligence",
       "status": "alert",
       "tier": 1,
-      "gridX": 3,
-      "gridY": 3,
+      "gridX": 5,
+      "gridY": 6,
       "footprint": [
         1,
         1
@@ -441,5 +441,151 @@
       "foundry",
       "lane-intel-sweeps"
     ]
+  ],
+  "recent_events": [
+    {
+      "id": "investigation:0x707266E2B21AD1921bdE5A8c5F4E1E034aFA7777",
+      "type": "investigation",
+      "timestamp": "2026-08-03T01:16:31Z",
+      "label": "Pizza"
+    },
+    {
+      "id": "investigation:0xCd4ab72f52F6abEc6aA518e0C6dA80EBA9EDad18",
+      "type": "investigation",
+      "timestamp": "2026-08-03T00:16:27Z",
+      "label": "Pizza"
+    },
+    {
+      "id": "investigation:0x149002DdB0bb0342cDB1418C82B201bF415e7777",
+      "type": "investigation",
+      "timestamp": "2026-08-02T23:31:26Z",
+      "label": "Pizza"
+    },
+    {
+      "id": "investigation:0x76B6Ebc6762fAA38dE4EFc85Fab33EfFaD84EaD5",
+      "type": "investigation",
+      "timestamp": "2026-08-02T22:31:22Z",
+      "label": "ADI"
+    },
+    {
+      "id": "investigation:0x8B1484d57abBE239bB280661377363b03c89CaEa",
+      "type": "investigation",
+      "timestamp": "2026-08-02T22:16:18Z",
+      "label": "ADI"
+    },
+    {
+      "id": "news:Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules",
+      "type": "news",
+      "timestamp": "2026-08-02T21:57:51Z",
+      "label": "Wall Street's Multi-Million Dollar Mail Bill Faces Extinction Under Proposed SEC E-Delivery Rules"
+    },
+    {
+      "id": "investigation:0x97B8C69D1bb0c10E3B32817f11a4A66785618B79",
+      "type": "investigation",
+      "timestamp": "2026-08-02T20:46:20Z",
+      "label": "Baby Asteroid"
+    },
+    {
+      "id": "investigation:0xd7A7394294f4687966C60A1F68920f29688BF546",
+      "type": "investigation",
+      "timestamp": "2026-08-02T20:31:11Z",
+      "label": "Baby Asteroid"
+    },
+    {
+      "id": "investigation:0xE5f894E1ea4BdA7ad44fA98610D14A6eA47D7C0D",
+      "type": "investigation",
+      "timestamp": "2026-08-02T20:15:50Z",
+      "label": "Baby Asteroid"
+    },
+    {
+      "id": "investigation:0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
+      "type": "investigation",
+      "timestamp": "2026-08-02T19:15:31Z",
+      "label": "Binance Pizza"
+    },
+    {
+      "id": "news:SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage",
+      "type": "news",
+      "timestamp": "2026-08-02T19:10:58Z",
+      "label": "SEC Locks In September 17 Roundtable as Overnight Equity Trading Prep Moves Center Stage"
+    },
+    {
+      "id": "investigation:0x80ac288e9664D7E2B59428125048eF48D853a93B",
+      "type": "investigation",
+      "timestamp": "2026-08-02T18:45:12Z",
+      "label": "New ORIGINLGNS"
+    },
+    {
+      "id": "investigation:0x4743aB4EdDD6b38B7358Bb6E6f64e3eFAAE5BF8A",
+      "type": "investigation",
+      "timestamp": "2026-08-02T18:29:51Z",
+      "label": "Spinning Rat Coin"
+    },
+    {
+      "id": "investigation:0xADF0e9720dDA45c332a6a75e9A33e5EF37A8Ce0F",
+      "type": "investigation",
+      "timestamp": "2026-08-02T18:14:48Z",
+      "label": "CHUMSKY github.com/zesterer/CHUMSKY"
+    },
+    {
+      "id": "investigation:0x7297968FFb753dd12e4f6B1f18d9865c76707FC2",
+      "type": "investigation",
+      "timestamp": "2026-08-02T17:59:39Z",
+      "label": "Zest"
+    },
+    {
+      "id": "investigation:0x8554D38b95E4F7Ca11D391008627Df30B2b07777",
+      "type": "investigation",
+      "timestamp": "2026-08-02T17:14:27Z",
+      "label": "\u5343\u91cc\u9a6c"
+    },
+    {
+      "id": "news:Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms",
+      "type": "news",
+      "timestamp": "2026-08-02T16:20:36Z",
+      "label": "Red Tape in the Crosshairs: SEC Panel Targets Public Market Friction for Small Firms"
+    },
+    {
+      "id": "investigation:0x154bD4F21310DCdFd52661456caD70f99dF43dA5",
+      "type": "investigation",
+      "timestamp": "2026-08-02T15:14:46Z",
+      "label": "IDOL"
+    },
+    {
+      "id": "investigation:0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42",
+      "type": "investigation",
+      "timestamp": "2026-08-02T13:59:40Z",
+      "label": "SLOP"
+    },
+    {
+      "id": "investigation:0x999B49c0d1612E619A4A4f6280733184da025108",
+      "type": "investigation",
+      "timestamp": "2026-08-02T13:44:44Z",
+      "label": "SLOP"
+    },
+    {
+      "id": "news:H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network",
+      "type": "news",
+      "timestamp": "2026-08-02T13:21:44Z",
+      "label": "H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network"
+    },
+    {
+      "id": "investigation:0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
+      "type": "investigation",
+      "timestamp": "2026-08-02T12:59:42Z",
+      "label": "BTW"
+    },
+    {
+      "id": "investigation:0x2FcB6f3d1Be8F16002B101ee3182eD9668797777",
+      "type": "investigation",
+      "timestamp": "2026-08-02T12:44:43Z",
+      "label": "BTW"
+    },
+    {
+      "id": "investigation:0x50eD3297BB27a52cb5F7730Fe452258a3BD17777",
+      "type": "investigation",
+      "timestamp": "2026-08-02T12:29:39Z",
+      "label": "God Bless Them"
+    }
   ]
 }

@@ -91,14 +91,20 @@
                     <button type="button" data-city-layer="health" class="city-layer-btn">Health</button>
                     <button type="button" data-city-layer="activity" class="city-layer-btn">Activity</button>
                 </div>
+                <div class="city-compass-group">
+                    <button type="button" class="city-zoom-btn" data-city-rotate="ccw" aria-label="Rotate left"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="city-compass" data-city-rotate-dial aria-label="Drag or swipe to rotate the camera">
+                        <div class="city-compass-needle"><i class="fa-solid fa-caret-up"></i></div>
+                    </div>
+                    <button type="button" class="city-zoom-btn" data-city-rotate="cw" aria-label="Rotate right"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
                 <div class="city-zoom">
                     <button type="button" class="city-zoom-btn" data-city-zoom="out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
                     <button type="button" class="city-zoom-btn" data-city-zoom="in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
-                    <button type="button" class="city-zoom-btn" data-city-rotate="cw" aria-label="Rotate camera"><i class="fa-solid fa-rotate"></i></button>
                     <button type="button" class="city-zoom-btn" data-city-zoom="reset" aria-label="Reset view to downtown"><i class="fa-solid fa-location-crosshairs"></i></button>
                 </div>
             </div>
-            <div class="city-hint"><i class="fa-solid fa-hand-pointer"></i>Drag to pan · scroll or pinch to zoom · rotate to see every side · tap a building</div>
+            <div class="city-hint"><i class="fa-solid fa-hand-pointer"></i>Drag to pan · pinch to zoom · twist two fingers (or drag the compass) to rotate · tap a building</div>
             <div class="city-stat-strip"></div>
         </div>
 
