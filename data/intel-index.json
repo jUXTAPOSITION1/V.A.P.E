@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-03T16:57:39Z",
+  "generated": "2026-08-03T17:05:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 410,
+    "reports": 411,
     "reports_by_type": {
+      "base": 83,
       "bounty": 104,
       "macro": 22,
       "security": 71,
       "bug": 5,
-      "base": 82,
       "mainnet": 5,
       "sentiment": 43,
       "virtuals": 74,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-164225-0xb4f4A58F.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_162648.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T16:26:48Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T17:00Z",
       "threat": null,
-      "summary": "Base mover: aeon / WETH +172% 24h (liq $992775.0614) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_162648.md",
-      "bytes": 16043
+      "summary": "Date: 2026-08-03 17:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-17.md",
+      "bytes": 8769
     }
   },
   "investigations": [
@@ -9664,6 +9664,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-17.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T17:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-03 17:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-17.md",
+      "bytes": 8769
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260803_162648.md",
@@ -10311,17 +10322,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_230153.md",
       "bytes": 16146
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_210528.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T21:05:28Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_210528.md",
-      "bytes": 17640
     }
   ],
   "broadcasts": [
