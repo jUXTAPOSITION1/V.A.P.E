@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T19:30:00Z",
+  "generated": "2026-08-03T19:38:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 412,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 145,
     "investigations": 705,
-    "news": 57,
+    "news": 58,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10607,6 +10607,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-npm-supply-chain-breach-slips-cross-platform-rat-into-alibab.md",
+      "title": "npm Supply Chain Breach Slips Cross-Platform RAT into Alibaba Developer Workflows",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T19:38:13Z",
+      "published_et": "August 3, 2026 \u00b7 3:38 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The August 2026 report from The Hacker News flags 18 packages but provides no confirmed victim counts, payload hashes, or recovery figures.",
+      "image": "assets/news-images/npm-supply-chain-breach-slips-cross-platform-rat-into-alibab.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-npm-supply-chain-breach-slips-cross-platform-rat-into-alibab.md"
+    },
     {
       "file": "news-2026-08-03-openai-s-next-gen-astra-model-cracks-decade-old-mathematical.md",
       "title": "OpenAI\u2019s Next-Gen \u2018Astra\u2019 Model Cracks Decade-Old Mathematical Mysteries for $2,000",
