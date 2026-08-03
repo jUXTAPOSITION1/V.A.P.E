@@ -34,7 +34,7 @@ fixed caps, per the module's original design:
 Rate limits, CDP-pinned instance (this file's own run_for_investigation()/
 run_standalone()/run_catalog_sweep()) — a GROWING MINIMUM instead of a fixed
 cap, deliberately: VAPE wants real, ever-increasing x402 settlement volume
-through its own worker, not a plateau. GROWTH_BASE_DAILY (100) combined
+through its own worker, not a plateau. GROWTH_BASE_DAILY (110) combined
 transactions on day one, compounding GROWTH_RATE_PER_DAY (1%) higher every
 day after — unbounded, forever (see _daily_target_combined()). That combined
 target is split across this file's two independent CDP streams (the main
@@ -61,14 +61,22 @@ mapping is confirmed correct for THIS hire path's fixed offering set.
 
 run_catalog_sweep() below is a second, independently-gated stream (own 30m/
 48-per-day cap, own quota/ledger file) added specifically to (a) exercise
-every one of VAPE's own x402 offerings priced $0.02 or less — including
-protocol/protocol_fees/unlocks/treasury, sourcing a real DefiLlama slug via
-protocols_on_chain() rather than guessing one — and (b) build a real,
-growing dataset of tokens/projects VAPE has actually seen (data/
-token_database.jsonl), sourced fresh each cycle from Base movers, other EVM
-chains, and Virtuals-tagged tokens (the worker's own free /trending-base
-route), avoiding recently-seen addresses so the same handful of tokens don't
-dominate the dataset.
+every one of VAPE's own x402 offerings priced MAX_OFFERING_PRICE_USD or
+less — including protocol/protocol_fees/unlocks/treasury, sourcing a real
+DefiLlama slug via protocols_on_chain() rather than guessing one — and (b)
+build a real, growing dataset of tokens/projects VAPE has actually seen
+(data/token_database.jsonl), sourced fresh each cycle from Base movers,
+other EVM chains, and Virtuals-tagged tokens (the worker's own free
+/trending-base route), avoiding recently-seen addresses so the same handful
+of tokens don't dominate the dataset.
+
+Real per-offering cost is never guessed or flattened to one number: see
+SCAN_TIER_PRICE_USD/_price_for() below, the one place this module computes
+cost_usd from, mirroring worker/src/index.ts's own OFFERING_PRICES exactly.
+Raising MAX_OFFERING_PRICE_USD (currently $0.10, covering every real
+offering VAPE runs today) is how this module opens up to pricier future
+offerings — update that one constant plus CATALOG_OFFERINGS/OFFERING_PARAMS
+below, not the cost math, which already handles any real per-offering price.
 
 Never raises to its caller — a data-agent outage, an empty wallet, or a
 missing key must never sink the underlying investigation it was recruited
@@ -92,8 +100,44 @@ MIN_INTERVAL_SECONDS = 30 * 60  # VAPOR-pinned instance only now — see module 
 CATALOG_DAILY_CAP = 48  # no longer enforced by run_catalog_sweep() itself (growth-paced instead,
                         # see _daily_targets()) — kept only as a historical reference value
 
+# Real per-offering USD prices for the "scan" tier (worker/src/index.ts's own
+# OFFERING_PRICES — this module's one source of truth for what a hire really
+# costs, kept in sync with that file by hand since neither side can import
+# the other across the Python/TypeScript boundary). Every DL_OFFERINGS
+# "data"-tier offering is a flat $0.01 (DATA_TIER_PRICE_USD below) and isn't
+# repeated here. MAX_OFFERING_PRICE_USD is the ceiling this module will ever
+# hire up to — every real offering VAPE runs today clears it; raise it (and
+# add the new offering to CATALOG_OFFERINGS/OFFERING_PARAMS below) the day a
+# real offering prices above it.
+SCAN_TIER_PRICE_USD = {
+    "exploit_check": 0.01, "token_safety_check": 0.02, "liquidity_check": 0.02,
+    "rug_pull_alert": 0.03, "market_intel": 0.07, "dossier_check": 0.10,
+}
+DATA_TIER_PRICE_USD = 0.01
+MAX_OFFERING_PRICE_USD = 0.10
+
+
+def _price_for(name):
+    """Real USD price for one hire of `name` — SCAN_TIER_PRICE_USD if it's
+    priced individually, else the flat DATA_TIER_PRICE_USD every DL_OFFERINGS
+    market-data offering shares. The only place cost_usd is computed from."""
+    return SCAN_TIER_PRICE_USD.get(name, DATA_TIER_PRICE_USD)
+
+
+def _prefix_for(name):
+    """Route prefix hire() needs -- "scan" for the security-check tier
+    (SCAN_TIER_PRICE_USD's own keys), "data" for everything else (the
+    DL_OFFERINGS market-data tier). See hire()'s own docstring."""
+    return "scan" if name in SCAN_TIER_PRICE_USD else "data"
+
 # ── CDP-pinned growing-minimum target (see module docstring) ────────────────
-GROWTH_BASE_DAILY = 100       # combined target across both CDP streams, day one
+GROWTH_BASE_DAILY = 110       # combined target across both CDP streams, day one -- bumped 10% up
+                               # from the original 100 per explicit request, a one-time step on
+                               # top of the base rather than a change to the compounding rate
+                               # itself: multiplying the day-one base by 1.10 shifts the whole
+                               # GROWTH_RATE_PER_DAY curve up by the same 10% at every day_index,
+                               # so today's target jumps 10% from wherever it already was and the
+                               # existing steady daily increase continues unchanged on top of it.
 GROWTH_RATE_PER_DAY = 0.01    # +1% more, compounding, every day after — unbounded
 GROWTH_EPOCH_PATH = os.path.join(ROOT, "skillforge", "memory", "data_agent_growth.json")
 # Sanity floor only — never fire more than once/minute regardless of what the
@@ -187,10 +231,11 @@ CHAIN_META = {
     "Avalanche": {"id": "43114", "gecko": "avax",       "dex": "avalanche", "defillama_fee_slug": "avax"},
 }
 
-# Every one of VAPE's real x402 offerings priced $0.02 or less (worker/src/
-# index.ts's OFFERING_PRICES + worker/src/dataHandlers.ts's DL_OFFERINGS —
-# see agents/x402_directory_register.py for the same source-of-truth split),
-# tagged with how run_catalog_sweep() below resolves its input:
+# Every one of VAPE's real x402 offerings priced MAX_OFFERING_PRICE_USD or
+# less (worker/src/index.ts's OFFERING_PRICES + worker/src/dataHandlers.ts's
+# DL_OFFERINGS — see agents/x402_directory_register.py for the same
+# source-of-truth split), tagged with how run_catalog_sweep() below resolves
+# its input:
 #   - "address": needs a real token address+chain — sourced via
 #     _fresh_candidate(), which is also what grows data/token_database.jsonl.
 #   - "chain": needs just a chain name/slug — no address involved.
@@ -201,6 +246,9 @@ CATALOG_OFFERINGS = [
     ("exploit_check", "scan", "address"),
     ("token_safety_check", "scan", "address"),
     ("liquidity_check", "scan", "address"),
+    ("rug_pull_alert", "scan", "address"),
+    ("dossier_check", "scan", "address"),
+    ("market_intel", "scan", "none"),
     ("token_intel", "data", "address"),
     ("token_chart", "data", "address"),
     ("protocol", "data", "protocol"),
@@ -248,16 +296,25 @@ EXPECTED_WALLET = "0x52af3E6D13f7C13EC887A2E69058A1432aa5B768"
 # run_standalone() — Base-only, no protocol-slug offerings (see module
 # docstring). run_catalog_sweep() below is the separate stream that covers
 # protocol/protocol_fees/unlocks/treasury and every other chain.
+#
+# rug_pull_alert/dossier_check are /scan/ routes (see _prefix_for()) that
+# take the numeric chain id, same convention run_catalog_sweep() already
+# uses for the scan tier — NOT the DefiLlama chain slug token_intel/
+# token_chart take just above. market_intel takes no input at all (Base-wide
+# TVL/market data), same "none" shape as yields/stablecoins/bridges below.
 OFFERING_PARAMS = {
-    "token_intel":     lambda addr: {"address": addr, "chain": "base"},
-    "token_chart":     lambda addr: {"address": addr, "chain": "base"},
-    "chain_protocols": lambda addr: {"chain": "Base"},
-    "chain_overview":  lambda addr: {"chain": "Base"},
-    "chain_fees":      lambda addr: {"chain": "base"},
-    "dex_volumes":     lambda addr: {"chain": "base"},
-    "yields":          lambda addr: {},
-    "stablecoins":     lambda addr: {},
-    "bridges":         lambda addr: {},
+    "token_intel":      lambda addr: {"address": addr, "chain": "base"},
+    "token_chart":      lambda addr: {"address": addr, "chain": "base"},
+    "chain_protocols":  lambda addr: {"chain": "Base"},
+    "chain_overview":   lambda addr: {"chain": "Base"},
+    "chain_fees":       lambda addr: {"chain": "base"},
+    "dex_volumes":      lambda addr: {"chain": "base"},
+    "yields":           lambda addr: {},
+    "stablecoins":      lambda addr: {},
+    "bridges":          lambda addr: {},
+    "rug_pull_alert":   lambda addr: {"address": addr, "chain": "8453"},
+    "dossier_check":    lambda addr: {"address": addr, "chain": "8453"},
+    "market_intel":     lambda addr: {},
 }
 
 
@@ -619,16 +676,19 @@ def hire(session, offering, params, prefix="data"):
 
 def _run(address, chain, *, client_tag, state, log_prefix):
     """Original fixed-cap/fixed-interval core — now used ONLY by the
-    VAPOR-pinned instance (agents/data_agent_vapor.py), left completely
-    unchanged on purpose (see module docstring: the CDP-pinned instance's
-    own run_for_investigation()/run_standalone() below call _run_growth()
-    instead, a separate function rather than a new parameter here, so
-    VAPOR's behavior can never be accidentally altered by a change aimed at
-    CDP's growth pacing). Hires 1 random $0.01 x402 offering against
-    `address` (capped at DAILY_CAP total paid hires/day, and no more often
-    than once every 30m regardless of how often this is called) and returns
-    what it bought so a caller (agents/investigate.py's report, or
-    run_standalone() below) can fold it in.
+    VAPOR-pinned instance (agents/data_agent_vapor.py) (see module docstring:
+    the CDP-pinned instance's own run_for_investigation()/run_standalone()
+    below call _run_growth() instead, a separate function rather than a new
+    parameter here, so VAPOR's gating -- the 30m interval, DAILY_CAP -- can
+    never be accidentally altered by a change aimed at CDP's growth pacing).
+    Both functions still share OFFERING_PARAMS/_price_for()/_prefix_for(), so
+    a real per-offering price/route fix here (rather than the gating logic
+    the docstring above protects) applies to both on purpose. Hires 1 random
+    x402 offering (up to MAX_OFFERING_PRICE_USD) against `address` (capped
+    at DAILY_CAP total paid hires/day, and no more often than once every 30m
+    regardless of how often this is called) and returns what it bought so a
+    caller (agents/investigate.py's report, or run_standalone() below) can
+    fold it in.
 
     address=None means "pick your own fresh Base candidate" — this is what
     decouples the cadence from needing a successful auto-investigation to
@@ -662,15 +722,17 @@ def _run(address, chain, *, client_tag, state, log_prefix):
 
     hired = []
     paid_count = 0
+    cost_usd = 0.0
     for name in picks:
         params = OFFERING_PARAMS[name](address)
-        deliverable, paid = hire(session, name, params)
+        deliverable, paid = hire(session, name, params, prefix=_prefix_for(name))
         hired.append({"offering": name, "params": params, "deliverable": deliverable, "paid": paid})
         if paid:
             paid_count += 1
+            cost_usd += _price_for(name)
 
     state.record_hires(paid_count)
-    cost_usd = round(paid_count * 0.01, 2)
+    cost_usd = round(cost_usd, 2)
     state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": address,
@@ -719,15 +781,17 @@ def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
 
     hired = []
     paid_count = 0
+    cost_usd = 0.0
     for name in picks:
         params = OFFERING_PARAMS[name](address)
-        deliverable, paid = hire(session, name, params)
+        deliverable, paid = hire(session, name, params, prefix=_prefix_for(name))
         hired.append({"offering": name, "params": params, "deliverable": deliverable, "paid": paid})
         if paid:
             paid_count += 1
+            cost_usd += _price_for(name)
 
     state.record_hires(paid_count)
-    cost_usd = round(paid_count * 0.01, 2)
+    cost_usd = round(cost_usd, 2)
     state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": address,
@@ -811,7 +875,7 @@ def _run_catalog(*, client_tag, state, log_prefix):
         _record_token_db(*db_record, offering=name)
 
     state.record_hires(1 if paid else 0)
-    cost_usd = 0.02 if paid and name in ("token_safety_check", "liquidity_check") else (0.01 if paid else 0.0)
+    cost_usd = _price_for(name) if paid else 0.0
     state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": params.get("address") or params.get("slug") or params.get("chain") or "none",

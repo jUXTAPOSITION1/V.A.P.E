@@ -1590,7 +1590,7 @@ def write_report(target, chain, gp, dex, onchain, verif, corr, s, verdict, reaso
     L.append("## Data Agent Intel (VAPE's own x402 spend)")
     if data_agent_intel and data_agent_intel.get("hired"):
         paid_n = sum(1 for h in data_agent_intel["hired"] if h["paid"])
-        L.append(f"- DATA AGENT hired {len(data_agent_intel['hired'])} of VAPE's own $0.01 x402 "
+        L.append(f"- DATA AGENT hired {len(data_agent_intel['hired'])} of VAPE's own x402 "
                  f"market-data offerings against this token (real USDC on Base, {paid_n} settled, "
                  f"${data_agent_intel.get('cost_usd', 0):.2f} total):")
         for h in data_agent_intel["hired"]:
@@ -1979,8 +1979,9 @@ def _lp_lock_status(gp):
 def _data_agent_intel(address, chain):
     """Best-effort recruitment of BOTH DATA AGENT instances (agents/
     data_agent.py, CDP-pinned; agents/data_agent_vapor.py, VAPOR-pinned) to
-    each independently try to hire one of VAPE's own $0.01 x402 market-data
-    offerings against this token, paid for with the same real, funded wallet
+    each independently try to hire one of VAPE's own x402 market-data
+    offerings (up to agents.data_agent.MAX_OFFERING_PRICE_USD each) against
+    this token, paid for with the same real, funded wallet
     — the same rail an external buyer uses, just recruited internally. Each
     instance has its own 30m/48-per-day gate, so either, both, or neither may
     actually fire this cycle. Never raises and never blocks the investigation
