@@ -4078,6 +4078,25 @@
     "symbol": "RWA",
     "times_investigated": 1
   },
+  "1:0xfd181ca5ec0b355fc448403cc560d0423382e044": {
+    "address": "0xfD181Ca5EC0B355fc448403cc560D0423382e044",
+    "chain": "1",
+    "creator_address": "0x455a1b0698ddeb0c50b40388408da07bdae452aa",
+    "first_investigated": "2026-08-03T18:13:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-181357-0xfD181Ca5.md",
+        "score": 7,
+        "ts": "2026-08-03T18:13:57Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T18:13:57Z",
+    "last_score": 7,
+    "last_verdict": "REJECT",
+    "symbol": "DPUNK",
+    "times_investigated": 1
+  },
   "1:0xfdcd8be9dd37cf982472d30eeee4ec50a0296953": {
     "address": "0xFdcD8be9DD37CF982472d30eeeE4ec50A0296953",
     "chain": "1",
@@ -8679,6 +8698,25 @@
     "last_verdict": "PROCEED",
     "symbol": "VU",
     "times_investigated": 2
+  },
+  "8453:0x515e72af68a374c8f375534b59752277ee9b4a51": {
+    "address": "0x515e72aF68A374C8f375534B59752277Ee9b4a51",
+    "chain": "8453",
+    "creator_address": "0x51ebb43f3d8be75937f77f49f9336ae70e774a51",
+    "first_investigated": "2026-08-03T17:58:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-175833-0x515e72aF.md",
+        "score": 72,
+        "ts": "2026-08-03T17:58:33Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T17:58:33Z",
+    "last_score": 72,
+    "last_verdict": "CAUTION",
+    "symbol": "A51",
+    "times_investigated": 1
   },
   "8453:0x5b290ecdf0c4d2d8f2b69661a61b73e6be2dd04a": {
     "address": "0x5b290eCdF0c4d2D8F2b69661A61b73E6be2DD04A",
