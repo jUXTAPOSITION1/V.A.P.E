@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T12:14:25Z",
+  "generated": "2026-08-03T12:24:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 404,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 144,
     "investigations": 695,
-    "news": 55,
+    "news": 56,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10467,6 +10467,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.md",
+      "title": "The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T12:24:41Z",
+      "published_et": "August 3, 2026 \u00b7 8:24 AM EDT",
+      "topic": "AI",
+      "dek": "The OpenAI CEO\u2019s plea to 'pace' development marks a dramatic departure from his hyper-growth gospel, signaling scaling roadblocks and a shifting regulatory landscape.",
+      "image": "assets/news-images/the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.md"
+    },
     {
       "file": "news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md",
       "title": "La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown",
