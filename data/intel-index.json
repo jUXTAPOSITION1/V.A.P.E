@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T11:40:14Z",
+  "generated": "2026-08-03T11:55:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 403,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 144,
-    "investigations": 693,
+    "investigations": 694,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-112520-0x3433a574.md",
-      "title": "Investigation \u2014 SAFU",
-      "symbol": "SAFU",
-      "name": "SAFU",
-      "date": "2026-08-03T11:25:20Z",
-      "target": "0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
-      "chain": "56 (BNB Chain)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration; [-10] Low liquidity $19,352. Positive evidence: Ownership renounced; 2307 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 607+ days without a known incident in this scan; Custom",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-112520-0x3433a574.md"
+      "file": "investigation-20260803-115511-0x68902977.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T11:55:11Z",
+      "target": "0x68902977263936B5bCF51568342e6E5a70c71b0F",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x43cd5919a45a5fa51b7f8fff8069902f405fe825) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SLOP (0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42) \u2014 REJECT 3/100 \u2014 likely the same serial campaig",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-115511-0x68902977.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-115511-0x68902977.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-03T11:55:11Z",
+      "target": "0x68902977263936B5bCF51568342e6E5a70c71b0F",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0x43cd5919a45a5fa51b7f8fff8069902f405fe825) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SLOP (0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42) \u2014 REJECT 3/100 \u2014 likely the same serial campaig",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-115511-0x68902977.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-112520-0x3433a574.md",
