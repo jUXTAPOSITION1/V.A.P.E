@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-03T06:04:21Z",
+  "generated": "2026-08-03T06:11:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 520,
+    "reports": 521,
     "reports_by_type": {
+      "base": 104,
       "bounty": 131,
       "security": 96,
       "sentiment": 54,
-      "base": 103,
       "macro": 27,
       "bug": 4,
       "mainnet": 4,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-044934-0x420658A1.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_025345.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T02:53:45Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-06.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T06:00Z",
       "threat": null,
-      "summary": "Cycle: 20260803025345 \u00b7 Data timestamp (UTC): 2026-08-03T02:53:47Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_025345.md",
-      "bytes": 16026
+      "summary": "Date: 2026-08-03 06:11 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-06.md",
+      "bytes": 8519
     }
   },
   "investigations": [
@@ -9440,6 +9440,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-03-06.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-03T06:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-03 06:11 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-06.md",
+      "bytes": 8519
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260803_025345.md",
@@ -10087,17 +10098,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_125715.md",
       "bytes": 17204
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-07-31-11.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-07-31T11:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-31 11:22 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-11.md",
-      "bytes": 3782
     }
   ],
   "broadcasts": [
