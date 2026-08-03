@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T10:40:19Z",
+  "generated": "2026-08-03T10:44:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 401,
+    "reports": 402,
     "reports_by_type": {
+      "bounty": 102,
       "security": 70,
-      "bounty": 101,
       "base": 81,
       "sentiment": 42,
       "macro": 21,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-102514-0x08b82Ed4.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-03-09.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-03T09:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_104322.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T10:43:22Z",
       "threat": null,
-      "summary": "In the last 7 days, 3 incidents occurred. The feed lists 14 incidents total across the provided dates, with realized losses ranging from $0.01M (Set Protocol, Malicious SetToken & Manager Contract on Ethereum) to $24.15M (AFX Bridge, Private Key Compromised on Arbitrum). Other confirmed entries include Crypto DAO $8.2M on BSC, Triple-A $9",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-09.md",
-      "bytes": 6586
+      "summary": "Base mover: aeon / WETH +235% 24h (liq $1095246.5557) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_104322.md",
+      "bytes": 16480
     }
   },
   "investigations": [
@@ -9538,6 +9538,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260803_104322.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-03T10:43:22Z",
+      "threat": null,
+      "summary": "Base mover: aeon / WETH +235% 24h (liq $1095246.5557) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_104322.md",
+      "bytes": 16480
+    },
+    {
       "kind": "intel",
       "type": "security",
       "file": "security-2026-08-03-09.md",
@@ -10185,17 +10196,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_152355.md",
       "bytes": 18273
-    },
-    {
-      "kind": "intel",
-      "type": "virtuals",
-      "file": "virtuals-2026-07-31-15.md",
-      "title": "Virtuals Protocol & ACP Sweep Report",
-      "date": "2026-07-31T15:00Z",
-      "threat": null,
-      "summary": "Date: 2026-07-31 15:22 UTC Agent: VAPE (token 0x2b601d7fc4705361F0c0249a005a714b7A3EdaFE, Base chain 8453)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/virtuals-2026-07-31-15.md",
-      "bytes": 3113
     }
   ],
   "broadcasts": [
