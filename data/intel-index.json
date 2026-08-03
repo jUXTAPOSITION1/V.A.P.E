@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T06:19:08Z",
+  "generated": "2026-08-03T06:25:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 521,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 143,
     "investigations": 684,
-    "news": 54,
+    "news": 55,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10313,6 +10313,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md",
+      "title": "La Rosa\u2019s $8.1M Crypto Lifeline Locked in Regulatory Limbo Amid $13.5M Quarterly Meltdown",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-03T06:25:19Z",
+      "published_et": "August 3, 2026 \u00b7 2:25 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The embattled real estate firm, plagued by three reverse stock splits and mounting liabilities, classifies its entire digital asset treasury as restricted.",
+      "image": "assets/news-images/la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-03-la-rosa-s-8-1m-crypto-lifeline-locked-in-regulatory-limbo-am.md"
+    },
     {
       "file": "news-2026-08-03-fbi-seizes-nasdaq-listed-proxy-firm-s-2-million-node-botnet.md",
       "title": "FBI Seizes NASDAQ-Listed Proxy Firm's 2-Million-Node Botnet",
