@@ -6071,6 +6071,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x81a7da4074b8e0ed51bea40f9dcbdf4d9d4832b4": {
+    "address": "0x81a7DA4074b8e0eD51beA40f9dCbDF4d9d4832b4",
+    "chain": "56",
+    "creator_address": "0xe5a25f9f563384472f2cd45f15038a89fe430b5c",
+    "first_investigated": "2026-08-03T08:36:22Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-083622-0x81a7DA40.md",
+        "score": 70,
+        "ts": "2026-08-03T08:36:22Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-03T08:36:22Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "AIO",
+    "times_investigated": 1
+  },
   "56:0x8432db07e8fa11d096b7757ac81cc068558d4444": {
     "address": "0x8432dB07e8FA11D096b7757Ac81cc068558d4444",
     "chain": "56",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T08:20:47Z",
+  "generated": "2026-08-03T08:36:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 522,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 143,
-    "investigations": 687,
+    "investigations": 688,
     "news": 55,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260803-073520-0x7138b48d.md",
-      "title": "Investigation \u2014 SPYB",
-      "symbol": "SPYB",
-      "name": "SPY",
-      "date": "2026-08-03T07:35:20Z",
-      "target": "0x7138b48df7D98D7e3cc221BfE7192D0a178182D8",
+      "file": "investigation-20260803-083622-0x81a7DA40.md",
+      "title": "Investigation \u2014 AIO",
+      "symbol": "AIO",
+      "name": "OLAXBT",
+      "date": "2026-08-03T08:36:22Z",
+      "target": "0x81a7DA4074b8e0eD51beA40f9dCbDF4d9d4832b4",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "17",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 78% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-073520-0x7138b48d.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 59100 holders \u2014 reasonably distributed; Deep liquidity ($1,147,487); Trading 329+ days without a known incident i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-083622-0x81a7DA40.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260803-083622-0x81a7DA40.md",
+      "title": "Investigation \u2014 AIO",
+      "symbol": "AIO",
+      "name": "OLAXBT",
+      "date": "2026-08-03T08:36:22Z",
+      "target": "0x81a7DA4074b8e0eD51beA40f9dCbDF4d9d4832b4",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 59100 holders \u2014 reasonably distributed; Deep liquidity ($1,147,487); Trading 329+ days without a known incident i",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-083622-0x81a7DA40.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260803-073520-0x7138b48d.md",
