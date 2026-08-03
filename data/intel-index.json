@@ -1,15 +1,15 @@
 {
-  "generated": "2026-08-03T14:27:24Z",
+  "generated": "2026-08-03T14:41:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 407,
+    "reports": 408,
     "reports_by_type": {
+      "security": 71,
       "bounty": 103,
       "bug": 5,
       "base": 82,
       "mainnet": 5,
       "sentiment": 43,
-      "security": 70,
       "macro": 21,
       "virtuals": 74,
       "skillforge": 4
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260803-135726-0x37b90664.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_134137.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T13:41:37Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T14:00Z",
       "threat": null,
-      "summary": "Base mover: aeon / WETH +197% 24h (liq $1019647.6312) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_134137.md",
-      "bytes": 16983
+      "summary": "The feed shows three incidents in the last 7 days, all under $10M, with zero incidents at or above $50M in the prior 14 days. Documented events include a $0.45M private-key compromise affecting Garden across Ethereum, Base, Arbitrum and BSC; a $0.65M unauthorized-access event on ChainConnect spanning Ethereum, BSC, Avalanche and Polygon; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-14.md",
+      "bytes": 6057
     }
   },
   "investigations": [
@@ -9650,6 +9650,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-03-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-03T14:00Z",
+      "threat": null,
+      "summary": "The feed shows three incidents in the last 7 days, all under $10M, with zero incidents at or above $50M in the prior 14 days. Documented events include a $0.45M private-key compromise affecting Garden across Ethereum, Base, Arbitrum and BSC; a $0.65M unauthorized-access event on ChainConnect spanning Ethereum, BSC, Avalanche and Polygon; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-14.md",
+      "bytes": 6057
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260803_134137.md",
@@ -10297,17 +10308,6 @@
       "summary": "Date: 2026-07-31 21:58 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-07-31-21.md",
       "bytes": 3450
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260731_201025.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-07-31T20:10:25Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260731_201025.md",
-      "bytes": 16943
     }
   ],
   "broadcasts": [
