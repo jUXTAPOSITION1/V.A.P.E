@@ -176,17 +176,21 @@ def test_build_roads_foundry_is_hub_for_every_other_building():
 
 def test_build_recent_events_real_fields_and_types():
     intel_index = {
-        "investigations": [{"date": "2026-08-01T00:00:00Z", "target": "0xABC", "name": "0xABC token"}],
+        "investigations": [{"date": "2026-08-01T00:00:00Z", "target": "0xABC", "name": "0xABC token", "verdict": "REJECT"}],
         "news": [{"date": "2026-08-02T00:00:00Z", "title": "Some headline"}],
     }
     opportunities = [{"firstSeen": "2026-08-03T00:00:00.000000+00:00", "name": "Program X", "platform": "cantina"}]
-    attack_feed = {"incidents": [{"date": "2026-07-30", "name": "Some Protocol"}]}
+    attack_feed = {"incidents": [{"date": "2026-07-30", "name": "Some Protocol", "amount_usd_m": 12.5}]}
 
     events = bcs.build_recent_events(intel_index, opportunities, attack_feed)
     types = {e["type"] for e in events}
     assert types == {"investigation", "news", "bounty", "threat"}
     # Most recent (bounty, 2026-08-03) sorts first.
     assert events[0]["type"] == "bounty"
+
+    by_type = {e["type"]: e for e in events}
+    assert by_type["investigation"]["verdict"] == "REJECT"
+    assert by_type["threat"]["amount_usd_m"] == 12.5
     assert events[0]["label"] == "Program X"
 
 

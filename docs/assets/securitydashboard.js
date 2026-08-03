@@ -348,7 +348,7 @@ const SecurityDashboard = {
     // Per-lane status/color/title — shared by the Category Signal Map's own
     // detail panel below (_toggleSignalMapDetail). The Automated Lanes ring
     // that used to also read these (_renderLanesRing/_renderLanesPanel/
-    // _toggleLaneDetail/_renderLanesA11yList) was replaced by VAPE Sim
+    // _toggleLaneDetail/_renderLanesA11yList) was replaced by VAPE Ave
     // (docs/assets/cityscape.js, data/city-state.json's 10 lane-checkpoint
     // buildings) on 2026-08-02 — every real per-workflow lane still has its
     // own building there instead of its own ring segment.

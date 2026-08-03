@@ -270,6 +270,7 @@ def build_recent_events(intel_index, opportunities, attack_feed, limit=24):
             "type": "investigation",
             "timestamp": ts,
             "label": inv.get("name") or inv.get("target") or inv.get("title") or "Investigation",
+            "verdict": inv.get("verdict"),
         })
     for a in intel_index.get("news") or []:
         ts = a.get("date")
@@ -300,6 +301,7 @@ def build_recent_events(intel_index, opportunities, attack_feed, limit=24):
             "type": "threat",
             "timestamp": ts,
             "label": inc.get("name") or "Incident",
+            "amount_usd_m": inc.get("amount_usd_m"),
         })
 
     def _parse(ts):

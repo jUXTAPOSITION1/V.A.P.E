@@ -1,4 +1,4 @@
-// VAPE Sim — a live, bird's-eye isometric map of VAPE's own real signals.
+// VAPE Ave — a live, bird's-eye isometric map of VAPE's own real signals.
 // Every building is one real process this repo runs (data/city-state.json,
 // written by agents/build_city_state.py from security-dashboard.json,
 // attack-feed.json, intel-index.json, opportunities.json, and
@@ -430,10 +430,15 @@ const CityScape = {
         // pulse drawn in _drawBuilding. prevTier is empty on first load, so
         // nothing pulses on initial paint, only on a real change afterward.
         const prevTier = new Map(inst.buildings.map(b => [b.id, b.tier]));
+        // _loadCity replaces every building object wholesale on each 90s
+        // refresh -- the real-event light-balls a building has already
+        // absorbed this session (see _advance's vehicle-arrival handling)
+        // have to be carried forward by id, or they'd vanish every reload.
+        const prevContained = new Map(inst.buildings.map(b => [b.id, b.contained]));
         inst.buildings = (city.buildings || []).map(b => {
             const prev = prevTier.get(b.id);
             const upgraded = prev != null && (b.tier || 1) > prev;
-            return { ...b, _upgradeUntil: upgraded ? performance.now() + 6000 : 0 };
+            return { ...b, _upgradeUntil: upgraded ? performance.now() + 6000 : 0, contained: prevContained.get(b.id) || [] };
         });
         inst.roads = (city.roads || []).map(([fromId, toId]) => {
             const from = inst.buildings.find(b => b.id === fromId);
@@ -462,7 +467,7 @@ const CityScape = {
                 if (!e.id || inst.lastEvents.has(e.id)) return;
                 inst.lastEvents.add(e.id);
                 const target = EVENT_TARGET[e.type];
-                if (target) this._spawnVehicle(inst, 'foundry', target, { kind: e.type, label: e.label });
+                if (target) this._spawnVehicle(inst, 'foundry', target, { kind: e.type, label: e.label, verdict: e.verdict, amount_usd_m: e.amount_usd_m });
             });
         }
         if (inst.lastEvents.size > 300) inst.lastEvents = new Set([...inst.lastEvents].slice(-150));
@@ -844,7 +849,44 @@ const CityScape = {
             if (a.t > 1 || a.t < 0) { a.dir *= -1; a.t = Math.max(0, Math.min(1, a.t)); }
         });
         inst.vehicles.forEach(v => { v.t += v.speed * 16; });
+        // A vehicle that reaches its real destination doesn't just vanish --
+        // it's absorbed as one colored light-ball contained inside that
+        // building (see _drawBuilding's translucent fill), the same real
+        // job/report the vehicle always represented, now piled up on
+        // arrival instead of disappearing.
+        inst.vehicles.forEach(v => {
+            if (v.t < 1) return;
+            const b = inst.buildings.find(x => x.id === v.to.id);
+            if (!b) return;
+            if (!b.contained) b.contained = [];
+            b.contained.push({ color: this._ballColorForVehicle(v), enteredAt: performance.now() });
+            if (b.contained.length > 60) b.contained.shift();
+        });
         inst.vehicles = inst.vehicles.filter(v => v.t < 1);
+    },
+
+    // A real-event vehicle's color once it's absorbed into its destination
+    // building -- reuses whatever real severity signal that event type
+    // actually carries (an investigation's real verdict, an incident's real
+    // dollar loss), falling back to the destination's own identity hue
+    // where no honest severity concept exists (news, bounty leads, x402
+    // settlements are just "delivered," not pass/fail).
+    _ballColorForVehicle(v) {
+        const meta = v.meta || {};
+        if (meta.kind === 'investigation') {
+            const verdict = String(meta.verdict || '').toUpperCase();
+            if (verdict === 'REJECT') return cssVar('--sev-critical');
+            if (verdict === 'CAUTION') return cssVar('--sev-medium');
+            if (verdict === 'PROCEED') return cssVar('--sev-low');
+            return cssVar('--sev-info');
+        }
+        if (meta.kind === 'threat') {
+            const amt = typeof meta.amount_usd_m === 'number' ? meta.amount_usd_m : 0;
+            return amt >= 5 ? cssVar('--sev-critical') : cssVar('--sev-medium');
+        }
+        if (meta.kind === 'x402') return cssVar('--city-mint') || '#008300';
+        const colorVar = EVENT_COLOR_VAR[meta.kind];
+        return colorVar ? cssVar(colorVar) : cssVar('--sev-info');
     },
 
     _draw(inst) {
@@ -925,7 +967,6 @@ const CityScape = {
         }
         this._drawDowntownGround(inst, phase);
         this._drawRoads(inst, phase);
-        if (inst.mode === 'full') this._drawRoadsideTrees(inst);
         this._drawAmbient(inst, phase);
         inst.hitboxes = [];
         // Painter's algorithm: back-to-front by the *rotated* grid depth, so
@@ -1101,22 +1142,6 @@ const CityScape = {
             ctx.setLineDash(isAvenue ? [5, 5] : [3, 6]);
             strokePath(pts, isAvenue ? 1.6 : 1, lit ? 'rgba(255,224,150,0.55)' : 'rgba(255,255,255,0.32)'); // centerline
             ctx.setLineDash([]);
-        });
-    },
-
-    // Trees alongside the real downtown street grid -- fixed, deterministic
-    // offsets per road (never Math.random() in the render loop, so nothing
-    // flickers or reshuffles frame to frame), full mode only to keep the
-    // small compact diorama uncluttered.
-    _drawRoadsideTrees(inst) {
-        const { ctx } = inst;
-        inst.roads.forEach((r, i) => {
-            if (r.to.kind === 'checkpoint' && i % 2 === 1) return; // a little breathing room on the minor streets
-            [0.22, 0.5, 0.78].forEach((t, j) => {
-                const p = this._pointAlongRoadPath(r, t, inst.rotation);
-                const side = (i + j) % 2 === 0 ? 1 : -1;
-                this._drawTreeGlyph(ctx, p.x + side * 9, p.y + 5, 0.75);
-            });
         });
     },
 
