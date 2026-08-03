@@ -1273,6 +1273,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x08b82ed4ff66635866203904a7bcabb64a4594e3": {
+    "address": "0x08b82Ed4fF66635866203904A7BcAbB64A4594e3",
+    "chain": "1",
+    "creator_address": "0x856c1a92c879fe90e16a72c3d49fbf4b7402bb8a",
+    "first_investigated": "2026-08-03T10:25:14Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-102514-0x08b82Ed4.md",
+        "score": 25,
+        "ts": "2026-08-03T10:25:14Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T10:25:14Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "UNISTREET",
+    "times_investigated": 1
+  },
   "1:0x0c42cc855ad919717e1bb3618a440f6a59a5ca16": {
     "address": "0x0C42cC855Ad919717E1Bb3618a440F6a59a5Ca16",
     "chain": "1",
