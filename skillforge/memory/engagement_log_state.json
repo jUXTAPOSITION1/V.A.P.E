@@ -196,5 +196,9 @@
   "defillama-hack:LULA (exploit $578,000)": "no_target_found",
   "defillama-hack:WEMIX.FI Lend (exploit $730,000)": "not_yet_attempted",
   "defillama-hack:ChainConnect (exploit $650,000)": "no_target_found",
-  "defillama-hack:Set Protocol (exploit $9,600)": "no_target_found"
+  "defillama-hack:Set Protocol (exploit $9,600)": "no_target_found",
+  "defillama-hack:THORChain DEX (exploit $10,000,000)": "no_target_found",
+  "defillama-hack:MOKE (exploit $907,000)": "no_target_found",
+  "defillama-hack:COLDCARD (exploit $115,000,000)": "not_yet_attempted",
+  "defillama-hack:LOOPSDAO (exploit $696,000)": "no_target_found"
 }

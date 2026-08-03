@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-08-03T16:05:20Z
+# VAPE Engagement Status — 2026-08-03T18:21:22Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -6,6 +6,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 
 - Ostium (exploit $18,000,000) ($18,000,000, fit 95) — checked 2026-07-15T18:41:33Z, honestly unresolved.
 - AFX Bridge (exploit $24,150,000) ($24,150,000, fit 95) — checked 2026-07-23T04:57:11Z, honestly unresolved.
+- THORChain DEX (exploit $10,000,000) ($10,000,000, fit 95) — checked 2026-08-03T18:21:12Z, honestly unresolved.
 - Kelp (exploit $293,000,000) ($293,000,000, fit 90) — checked 2026-07-13T05:05:24Z, honestly unresolved.
 - Matcha (exploit $13,430,000) ($13,430,000, fit 90) — checked 2026-07-13T05:05:30Z, honestly unresolved.
 - Balancer V2 (exploit $128,000,000) ($128,000,000, fit 90) — checked 2026-07-13T09:30:23Z, honestly unresolved.
@@ -21,10 +22,12 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - 42DAO (exploit $912,000) ($912,000, fit 85) — checked 2026-07-22T18:44:26Z, honestly unresolved.
 - Edel (exploit $403,000) ($403,000, fit 81) — checked 2026-07-13T05:05:15Z, honestly unresolved.
 - Truebit (exploit $26,400,000) ($26,400,000, fit 80) — checked 2026-07-13T05:05:32Z, honestly unresolved.
+- MOKE (exploit $907,000) ($907,000, fit 80) — checked 2026-08-03T18:21:09Z, honestly unresolved.
 - Hinkal (exploit $820,000) ($820,000, fit 79) — checked 2026-07-13T05:05:12Z, honestly unresolved.
 - BarnBridge (exploit $776,000) ($776,000, fit 79) — checked 2026-07-15T18:41:35Z, honestly unresolved.
 - LULA (exploit $578,000) ($578,000, fit 78) — checked 2026-07-29T04:51:51Z, honestly unresolved.
 - ChainConnect (exploit $650,000) ($650,000, fit 78) — checked 2026-07-29T15:32:27Z, honestly unresolved.
+- LOOPSDAO (exploit $696,000) ($696,000, fit 78) — checked 2026-08-03T18:21:04Z, honestly unresolved.
 - DeBond (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:51Z, honestly unresolved.
 - Lien (exploit $542,000) ($542,000, fit 77) — checked 2026-07-25T04:48:54Z, honestly unresolved.
 - Projekt (exploit $560,000) ($560,000, fit 77) — checked 2026-07-27T20:07:41Z, honestly unresolved.
@@ -57,6 +60,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Yearn Ether (exploit $9,000,000) ($9,000,000, fit 80, defillama-hack)
 - GANA Payment (exploit $3,100,000) ($3,100,000, fit 80, defillama-hack)
 - BonkDAO (exploit $20,000,000) ($20,000,000, fit 80, defillama-hack)
+- COLDCARD (exploit $115,000,000) ($115,000,000, fit 80, defillama-hack)
 - SolvBTC (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - Ribbon (exploit $2,700,000) ($2,700,000, fit 79, defillama-hack)
 - SubQuery Network (exploit $60,000) ($60,000, fit 78, defillama-hack)

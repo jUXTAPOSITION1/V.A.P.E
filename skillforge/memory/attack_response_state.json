@@ -150,5 +150,17 @@
   "2026-07-30:Set Protocol": {
     "checked_at": "2026-07-30T18:58:07Z",
     "resolved": false
+  },
+  "2026-08-02:LOOPSDAO": {
+    "checked_at": "2026-08-03T18:21:04Z",
+    "resolved": false
+  },
+  "2026-08-02:MOKE": {
+    "checked_at": "2026-08-03T18:21:09Z",
+    "resolved": false
+  },
+  "2026-05-15:THORChain DEX": {
+    "checked_at": "2026-08-03T18:21:12Z",
+    "resolved": false
   }
 }

@@ -208,3 +208,7 @@
 {"ts": "2026-07-29T04:51:59Z", "lead": "WEMIX.FI Lend (exploit $730,000)", "platform": "defillama-hack", "prizeUsd": 730000, "fitScore": 74, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-07-29T15:32:37Z", "lead": "ChainConnect (exploit $650,000)", "platform": "defillama-hack", "prizeUsd": 650000, "fitScore": 78, "engagement": {"status": "no_target_found", "checked_at": "2026-07-29T15:32:27Z"}}
 {"ts": "2026-07-30T18:58:15Z", "lead": "Set Protocol (exploit $9,600)", "platform": "defillama-hack", "prizeUsd": 9600, "fitScore": 60, "engagement": {"status": "no_target_found", "checked_at": "2026-07-30T18:58:07Z"}}
+{"ts": "2026-08-03T18:21:22Z", "lead": "THORChain DEX (exploit $10,000,000)", "platform": "defillama-hack", "prizeUsd": 10000000, "fitScore": 95, "engagement": {"status": "no_target_found", "checked_at": "2026-08-03T18:21:12Z"}}
+{"ts": "2026-08-03T18:21:22Z", "lead": "MOKE (exploit $907,000)", "platform": "defillama-hack", "prizeUsd": 907000, "fitScore": 80, "engagement": {"status": "no_target_found", "checked_at": "2026-08-03T18:21:09Z"}}
+{"ts": "2026-08-03T18:21:22Z", "lead": "COLDCARD (exploit $115,000,000)", "platform": "defillama-hack", "prizeUsd": 115000000, "fitScore": 80, "engagement": {"status": "not_yet_attempted"}}
+{"ts": "2026-08-03T18:21:22Z", "lead": "LOOPSDAO (exploit $696,000)", "platform": "defillama-hack", "prizeUsd": 696000, "fitScore": 78, "engagement": {"status": "no_target_found", "checked_at": "2026-08-03T18:21:04Z"}}
