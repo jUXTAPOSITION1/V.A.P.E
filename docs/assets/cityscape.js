@@ -1081,7 +1081,14 @@ const CityScape = {
     _drawDowntownGround(inst, phase) {
         const { ctx } = inst;
         const night = isNight(phase);
-        const hw = TILE_W / 2, hh = TILE_H / 2;
+        // Bled a hair past each tile's exact geometric edge -- two adjacent
+        // fills that share an exact seam anti-alias independently of each
+        // other, so that shared line can land under full coverage on both
+        // sides and let the sky gradient drawn underneath bleed through as
+        // a faint grid of light lines across the entire ground. A small
+        // overlap (harmless for a flat, non-overlapping color) closes it.
+        const bleed = 0.75;
+        const hw = TILE_W / 2 + bleed, hh = TILE_H / 2 + bleed;
         (inst.groundCells || []).forEach(({ gx, gy, feature }) => {
             const r = rotateAroundPivot(gx + 0.5, gy + 0.5, inst.rotation);
             const { x: cx, y: cy } = gridToScreen(r.x, r.y);
@@ -1413,8 +1420,8 @@ const CityScape = {
         // just look like colored blocks": a lit/glazed grid reads as a
         // real facade at a glance in a way a flat color never does.
         if (!isCheckpoint) {
-            this._drawFacadeWindows(ctx, baseCorners.left, baseCorners.bottom, baseCorners.bottomBase, baseCorners.leftBase, baseH, hw, hh, night);
-            this._drawFacadeWindows(ctx, baseCorners.right, baseCorners.bottom, baseCorners.bottomBase, baseCorners.rightBase, baseH, hw, hh, night);
+            this._drawFacadeWindows(ctx, baseCorners.left, baseCorners.bottom, baseCorners.bottomBase, baseCorners.leftBase, baseH, hw, hh, night, inst.scale);
+            this._drawFacadeWindows(ctx, baseCorners.right, baseCorners.bottom, baseCorners.bottomBase, baseCorners.rightBase, baseH, hw, hh, night, inst.scale);
             // A small dark entrance at street level on the near corner.
             ctx.fillStyle = 'rgba(0,0,0,0.5)';
             ctx.fillRect(cx - 2.5, cy + hh * 0.55 - 6, 5, 6);
@@ -1633,11 +1640,21 @@ const CityScape = {
     // glazing is a muted blue-gray pane; night swaps to a warm lit color
     // with a soft glow, same look _drawBuildingWindows used to hardcode in
     // only two spots.
-    _drawFacadeWindows(ctx, topNear, topFar, bottomFar, bottomNear, H, hw, hh, night) {
-        const rows = Math.max(2, Math.round(H / 13));
-        const cols = Math.max(1, Math.round(Math.max(hw, hh) / 11));
+    _drawFacadeWindows(ctx, topNear, topFar, bottomFar, bottomNear, H, hw, hh, night, scale) {
+        // Row/col density (and the individual window's own size) both
+        // track the camera's real zoom so a window keeps roughly the same
+        // ON-SCREEN size at any zoom level -- without this, the same
+        // handful of windows sized for scale=1 balloon into oversized
+        // rectangles once zoomed in close, reading as a broken grid rather
+        // than a real facade. Clamped well inside the app's real 0.07-2.6
+        // zoom range since windows aren't the concern at extreme zoom-out
+        // (the whole building is only a few px there regardless).
+        const s = Math.min(2.2, Math.max(0.5, scale || 1));
+        const rows = Math.max(2, Math.round(H / 13 * s));
+        const cols = Math.max(1, Math.round(Math.max(hw, hh) / 11 * s));
+        const winW = 2.2 / s, winH = 2.6 / s;
         const color = night ? 'rgba(255,214,120,0.9)' : 'rgba(196,214,230,0.32)';
-        if (night) { ctx.shadowColor = 'rgba(255,200,120,0.55)'; ctx.shadowBlur = 2.5; }
+        if (night) { ctx.shadowColor = 'rgba(255,200,120,0.55)'; ctx.shadowBlur = 2.5 / s; }
         ctx.fillStyle = color;
         for (let r = 0; r < rows; r++) {
             const v = (r + 0.35) / rows;
@@ -1646,7 +1663,7 @@ const CityScape = {
             for (let c = 0; c < cols; c++) {
                 const u = (c + 0.5) / cols;
                 const x = this._lerp(nearX, farX, u), y = this._lerp(nearY, farY, u);
-                ctx.fillRect(x - 1.1, y - 1.3, 2.2, 2.6);
+                ctx.fillRect(x - winW / 2, y - winH / 2, winW, winH);
             }
         }
         ctx.shadowBlur = 0;
@@ -1827,7 +1844,7 @@ const CityScape = {
         const ctx = cvs.getContext('2d');
         if (scale < 1) ctx.scale(scale, scale);
 
-        tiles.forEach(t => this._drawTerrainTile(ctx, t.biome, t.rx, t.ry, -xMin, -yMin, t.gx, t.gy));
+        tiles.forEach(t => this._drawTerrainTile(ctx, t.biome, t.rx, t.ry, -xMin, -yMin, t.gx, t.gy, scale));
         this._findBridgeSpots(tiles).forEach(spot => this._drawBridge(ctx, spot, rotation, -xMin, -yMin));
         this._drawExitRoads(ctx, rotation, -xMin, -yMin);
 
@@ -1856,10 +1873,24 @@ const CityScape = {
         this._terrainCacheOrder.push(rotation);
     },
 
-    _drawTerrainTile(ctx, biome, rx, ry, dx, dy, ogx, ogy) {
+    _drawTerrainTile(ctx, biome, rx, ry, dx, dy, ogx, ogy, cacheScale) {
         const g = gridToScreen(rx + 0.5, ry + 0.5);
         const cx = g.x + dx, cy = g.y + dy;
-        const hw = TILE_W / 2, hh = TILE_H / 2;
+        // Bled past the exact edge for the same reason _drawDowntownGround
+        // is -- closes the anti-aliasing seam between adjacent same-color
+        // tiles that would otherwise let a faint grid of light lines show
+        // through from whatever's drawn underneath. This canvas is often
+        // physically downscaled well below 1 logical px per unit
+        // (TERRAIN_CACHE_MAX_PIXELS) and then stretched back up to
+        // composite -- confirmed via direct pixel probing that even a
+        // bleed comfortably over 1 physical pixel still left scattered
+        // true-transparent gap pixels at some tile edges (anti-aliasing
+        // eats into a 1px overlap from both sides), which the stretch-back
+        // then magnifies into an obvious grid instead of hiding it. 5
+        // physical px of overlap closes it with real margin, confirmed
+        // clean at every one of the 8 rotation stops.
+        const bleed = Math.max(0.75, 5 / (cacheScale || 1));
+        const hw = TILE_W / 2 + bleed, hh = TILE_H / 2 + bleed;
         const color = terrainColor(biome);
         // Mountains are the one terrain type with height -- kept short
         // (8-24px, vs. buildings' 33-78px) so they read as backdrop, never
