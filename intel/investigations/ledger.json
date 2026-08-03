@@ -10383,6 +10383,25 @@
     "symbol": "VCNT",
     "times_investigated": 1
   },
+  "8453:0xe0cd4cacddcbf4f36e845407ce53e87717b6601d": {
+    "address": "0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d",
+    "chain": "8453",
+    "creator_address": "0xdba1a7914c611b286498541b9b410c8100743eab",
+    "first_investigated": "2026-08-03T13:42:02Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260803-134202-0xE0Cd4cAc.md",
+        "score": 28,
+        "ts": "2026-08-03T13:42:02Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-03T13:42:02Z",
+    "last_score": 28,
+    "last_verdict": "REJECT",
+    "symbol": "ICNT",
+    "times_investigated": 1
+  },
   "8453:0xe112bc165f37ef842e66326e01a291927bf9b468": {
     "address": "0xE112Bc165f37eF842E66326E01A291927Bf9B468",
     "chain": "8453",

@@ -1195,3 +1195,5 @@
 | 2026-08-03 | auto | 0x3F117c342B46376B2F2527A56B4b4506A96D4444 (傻福) | deep_investigation | REJECT (40/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-03 | auto | 0xc3bcd37061bde710293D0272Bb2924D308D5314D (SAFU) | deep_investigation | REJECT (5/100) | Transfers can be paused by owner | +7d |
+
+| 2026-08-03 | auto | 0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d (ICNT) | deep_investigation | REJECT (28/100) | Mintable supply (dilution risk) | +7d |
