@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-03T03:29:10Z",
+  "generated_at": "2026-08-03T03:59:53Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 9,
+    "lanes_passing": 10,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 677
+        "value": 680
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 363
+          "value": 364
         },
         {
           "label": "caution",
-          "value": 188
+          "value": 190
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1413
+        "value": 1435
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 3
+          "value": 7
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1517
+        "value": 1520
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -234,7 +234,7 @@
         "label": "last run",
         "value": "100 open alert(s)"
       },
-      "last_run_at": "2026-08-02T17:12:32Z",
+      "last_run_at": "2026-08-03T03:41:47Z",
       "source_workflow": "codeql.yml",
       "link": "index.html#security-dashboard"
     },
@@ -254,7 +254,7 @@
         "label": "last run",
         "value": "success"
       },
-      "last_run_at": "2026-08-01T21:43:36Z",
+      "last_run_at": "2026-08-02T22:33:12Z",
       "source_workflow": "security-lint.yml",
       "link": "index.html#security-dashboard"
     },
@@ -274,7 +274,7 @@
         "label": "last run",
         "value": "success"
       },
-      "last_run_at": "2026-08-02T17:12:33Z",
+      "last_run_at": "2026-08-03T03:41:47Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "index.html#security-dashboard"
     },
@@ -374,7 +374,7 @@
         "label": "last run",
         "value": "intact"
       },
-      "last_run_at": "2026-08-02T19:00:32Z",
+      "last_run_at": "2026-08-03T02:10:41Z",
       "source_workflow": "findings-seal.yml",
       "link": "index.html#security-dashboard"
     },
@@ -402,7 +402,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -414,7 +414,7 @@
         "label": "last run",
         "value": "HIGH"
       },
-      "last_run_at": "2026-08-02T19:11:12Z",
+      "last_run_at": "2026-08-03T02:53:33Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "index.html#security-dashboard"
     }
@@ -494,6 +494,27 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0xA8405797CEC1dbB77B855621882EE58ACaf3Fa84",
+      "type": "investigation",
+      "timestamp": "2026-08-03T03:48:44Z",
+      "label": "aeon",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x895BC7a6caBA2088409fdac388183cA084dc2F77",
+      "type": "investigation",
+      "timestamp": "2026-08-03T03:33:32Z",
+      "label": "aengems",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xBf8E8f0e8866a7052F948C16508644347c57aba3",
+      "type": "investigation",
+      "timestamp": "2026-08-03T03:18:16Z",
+      "label": "aeon",
+      "verdict": "CAUTION"
+    },
     {
       "id": "investigation:0xF6345b34C132e9844992564F5c0Bd6AbC17A0085",
       "type": "investigation",
@@ -635,26 +656,6 @@
       "type": "investigation",
       "timestamp": "2026-08-02T13:59:40Z",
       "label": "SLOP",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x999B49c0d1612E619A4A4f6280733184da025108",
-      "type": "investigation",
-      "timestamp": "2026-08-02T13:44:44Z",
-      "label": "SLOP",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network",
-      "type": "news",
-      "timestamp": "2026-08-02T13:21:44Z",
-      "label": "H96 Sticks Secretly Masquerade as Phones to Feed Global Ad-Fraud Network"
-    },
-    {
-      "id": "investigation:0x544a93E8d412c01c6427Cf83Ec8b14Bc2E157777",
-      "type": "investigation",
-      "timestamp": "2026-08-02T12:59:42Z",
-      "label": "BTW",
       "verdict": "REJECT"
     }
   ]
