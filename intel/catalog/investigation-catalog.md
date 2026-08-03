@@ -1201,3 +1201,5 @@
 | 2026-08-03 | auto | 0x37b90664C3846107939E89d886051b208f866bF1 (SAFU) | deep_investigation | REJECT (32/100) | Low holder count (190) | +7d |
 
 | 2026-08-03 | auto | 0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585 (CATE) | deep_investigation | REJECT (47/100) | Low holder count (98) | +7d |
+
+| 2026-08-03 | auto | 0x02c1d787521C20586b4aB070b1838D91FF85D656 (FRLZ) | deep_investigation | CAUTION (65/100) | Owner can change balances (rug surface) | +7d |
