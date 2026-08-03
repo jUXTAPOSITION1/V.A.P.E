@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03T15:27:13Z",
+  "generated": "2026-08-03T15:42:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 408,
@@ -11291,7 +11291,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49484634",
+      "version": "49490878",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11301,7 +11301,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.19 eth_dom 9.94 mcap_chg_24h -0.56",
+      "version": "btc_dom 56.41 eth_dom 9.93 mcap_chg_24h 0.67",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11321,7 +11321,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xb0849c5c738c DEXHorizon 50.0 from 0xaa7f03de to 0x833589fc",
+      "version": "0xff57f42d4a3b Ori 3266.17 from 0x83a12744 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
