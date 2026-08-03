@@ -569,3 +569,4 @@
 {"ts": "2026-08-03T22:46:22.158156Z", "target": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 60}
 {"ts": "2026-08-03T23:01:26.694990Z", "target": "none", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}
 {"ts": "2026-08-03T23:16:43.230959Z", "target": "0xCFB287565201763743A77c556dcA44A673d0a777", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 60}
+{"ts": "2026-08-03T23:31:48.723514Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 60}
