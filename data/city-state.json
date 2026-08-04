@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T20:01:56Z",
+  "generated_at": "2026-08-04T03:42:58Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 9,
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 705
+        "value": 713
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 380
+          "value": 386
         },
         {
           "label": "caution",
-          "value": 196
+          "value": 198
         },
         {
           "label": "proceed",
@@ -75,7 +75,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "published",
-        "value": 58
+        "value": 59
       },
       "stat_secondary": [],
       "link": "news.html",
@@ -94,7 +94,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "incidents (56d)",
-        "value": 57
+        "value": 54
       },
       "stat_secondary": [
         {
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1490
+        "value": 1505
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 5
+          "value": 6
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1623
+        "value": 1679
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T18:38:13Z"
+          "value": "2026-08-03T20:50:57Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-03T18:38:13Z",
+      "last_run_at": "2026-08-03T20:50:57Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -297,10 +297,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T18:38:13Z"
+          "value": "2026-08-03T20:50:57Z"
         }
       ],
-      "last_run_at": "2026-08-03T18:38:13Z",
+      "last_run_at": "2026-08-03T20:50:57Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T19:23:12Z"
+          "value": "2026-08-04T01:56:21Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-03T19:23:12Z",
+      "last_run_at": "2026-08-04T01:56:21Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T19:38:31Z"
+          "value": "2026-08-04T02:37:28Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-03T19:38:31Z",
+      "last_run_at": "2026-08-04T02:37:28Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,68 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
+      "type": "investigation",
+      "timestamp": "2026-08-04T03:19:42Z",
+      "label": "ANON",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x847247787D3D9aedc69bF2Af30e0215f1f1b4444",
+      "type": "investigation",
+      "timestamp": "2026-08-04T03:04:02Z",
+      "label": "Jobless",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x30117E4bC17d7B044194b76A38365C53b72F7D49",
+      "type": "investigation",
+      "timestamp": "2026-08-04T02:47:26Z",
+      "label": "ETHGas",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week",
+      "type": "news",
+      "timestamp": "2026-08-04T02:30:35Z",
+      "label": "Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week"
+    },
+    {
+      "id": "investigation:0x69426A34E2D0AC95536B0a0B02050b18b4074444",
+      "type": "investigation",
+      "timestamp": "2026-08-04T02:02:37Z",
+      "label": "SAFU",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x99D0652ed57b49373B9BB720434BAe76C3649b07",
+      "type": "investigation",
+      "timestamp": "2026-08-04T00:02:41Z",
+      "label": "Velvet",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xf81c54264E8dE4f4cFD37106f33f95E51AdF4444",
+      "type": "investigation",
+      "timestamp": "2026-08-03T23:16:38Z",
+      "label": "SAFU",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x80dc112e8620923453845607C6256677Ba3a4444",
+      "type": "investigation",
+      "timestamp": "2026-08-03T22:46:05Z",
+      "label": "SAFU",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
+      "type": "investigation",
+      "timestamp": "2026-08-03T22:29:59Z",
+      "label": "Fake World Ass",
+      "verdict": "CAUTION"
+    },
     {
       "id": "news:npm Supply Chain Breach Slips Cross-Platform RAT into Alibaba Developer Workflows",
       "type": "news",
@@ -679,68 +741,6 @@
       "type": "investigation",
       "timestamp": "2026-08-03T12:57:02Z",
       "label": "Safu Fund",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x3F117c342B46376B2F2527A56B4b4506A96D4444",
-      "type": "investigation",
-      "timestamp": "2026-08-03T12:41:49Z",
-      "label": "SAFU",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI",
-      "type": "news",
-      "timestamp": "2026-08-03T12:24:41Z",
-      "label": "The Accelerationist-in-Chief Pivots: Inside Sam Altman's Sudden Call to Slow Down AI"
-    },
-    {
-      "id": "investigation:0x69C47C7474B7b2d6153Effc4fa958183f4af7777",
-      "type": "investigation",
-      "timestamp": "2026-08-03T12:10:13Z",
-      "label": "SAFU",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x68902977263936B5bCF51568342e6E5a70c71b0F",
-      "type": "investigation",
-      "timestamp": "2026-08-03T11:55:11Z",
-      "label": "Catecoin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
-      "type": "investigation",
-      "timestamp": "2026-08-03T11:25:20Z",
-      "label": "SAFU",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x3f2B10F3327ea2337C524eEf23F4cd61bC364444",
-      "type": "investigation",
-      "timestamp": "2026-08-03T10:55:22Z",
-      "label": "Funds are SAFU",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x08b82Ed4fF66635866203904A7BcAbB64A4594e3",
-      "type": "investigation",
-      "timestamp": "2026-08-03T10:25:14Z",
-      "label": "Unistreet",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xF5f052D12ce3A522251Bb0ab42E356Fc9E2cbC47",
-      "type": "investigation",
-      "timestamp": "2026-08-03T10:09:58Z",
-      "label": "Unistreet",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D",
-      "type": "investigation",
-      "timestamp": "2026-08-03T09:54:15Z",
-      "label": "Unistreet",
       "verdict": "REJECT"
     }
   ]
