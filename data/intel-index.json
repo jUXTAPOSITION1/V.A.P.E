@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T03:04:02Z",
+  "generated": "2026-08-04T03:19:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 418,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 146,
-    "investigations": 712,
+    "investigations": 713,
     "news": 59,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-030402-0x84724778.md",
-      "title": "Investigation \u2014 Jobless",
-      "symbol": "Jobless",
-      "name": "Jobless",
-      "date": "2026-08-04T03:04:02Z",
-      "target": "0x847247787D3D9aedc69bF2Af30e0215f1f1b4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,708. Positive evidence: Ownership renounced; 1085 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 330+ days without a known incident in this sca",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-030402-0x84724778.md"
+      "file": "investigation-20260804-031942-0xD0B74d81.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-04T03:19:42Z",
+      "target": "0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-031942-0xD0B74d81.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-031942-0xD0B74d81.md",
+      "title": "Investigation \u2014 ANON",
+      "symbol": "ANON",
+      "name": "ANON",
+      "date": "2026-08-04T03:19:42Z",
+      "target": "0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrat",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-031942-0xD0B74d81.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-030402-0x84724778.md",

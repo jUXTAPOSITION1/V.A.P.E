@@ -1225,3 +1225,5 @@
 | 2026-08-04 | auto | 0x30117E4bC17d7B044194b76A38365C53b72F7D49 (GWEI) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-04 | auto | 0x847247787D3D9aedc69bF2Af30e0215f1f1b4444 (Jobless) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 74% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-04 | auto | 0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07 (ANON) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
