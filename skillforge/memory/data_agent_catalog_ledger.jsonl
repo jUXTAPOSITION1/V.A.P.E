@@ -585,3 +585,4 @@
 {"ts": "2026-08-04T05:52:05.433629Z", "target": "Arbitrum", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T06:23:37.311531Z", "target": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T06:54:40.875542Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 61}
+{"ts": "2026-08-04T07:24:41.880565Z", "target": "spiko", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
