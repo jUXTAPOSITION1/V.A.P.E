@@ -448,3 +448,4 @@
 {"ts": "2026-08-04T03:19:47.611139Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-04T03:49:53.520847Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1}
 {"ts": "2026-08-04T04:20:00.658330Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-04T04:50:50.506294Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}

@@ -580,3 +580,4 @@
 {"ts": "2026-08-04T03:19:49.713388Z", "target": "bsc", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T03:49:55.800606Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["liquidity_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 61}
 {"ts": "2026-08-04T04:20:02.138581Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-04T04:50:53.368342Z", "target": "spiko", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
