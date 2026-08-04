@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T02:38:03Z",
+  "generated": "2026-08-04T02:47:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 418,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 146,
-    "investigations": 710,
+    "investigations": 711,
     "news": 59,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-020237-0x69426A34.md",
-      "title": "Investigation \u2014 SAFU",
-      "symbol": "SAFU",
-      "name": "SAFU",
-      "date": "2026-08-04T02:02:37Z",
-      "target": "0x69426A34E2D0AC95536B0a0B02050b18b4074444",
+      "file": "investigation-20260804-024726-0x30117E4b.md",
+      "title": "Investigation \u2014 GWEI",
+      "symbol": "GWEI",
+      "name": "ETHGas",
+      "date": "2026-08-04T02:47:26Z",
+      "target": "0x30117E4bC17d7B044194b76A38365C53b72F7D49",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "30",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $30,026; [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-020237-0x69426A34.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,496 (rug/illiquid); [-10] Low liquidity $4,496. Positive",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-024726-0x30117E4b.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-024726-0x30117E4b.md",
+      "title": "Investigation \u2014 GWEI",
+      "symbol": "GWEI",
+      "name": "ETHGas",
+      "date": "2026-08-04T02:47:26Z",
+      "target": "0x30117E4bC17d7B044194b76A38365C53b72F7D49",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,496 (rug/illiquid); [-10] Low liquidity $4,496. Positive",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-024726-0x30117E4b.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-020237-0x69426A34.md",

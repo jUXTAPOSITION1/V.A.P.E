@@ -5557,6 +5557,25 @@
     "symbol": "BTW",
     "times_investigated": 1
   },
+  "56:0x30117e4bc17d7b044194b76a38365c53b72f7d49": {
+    "address": "0x30117E4bC17d7B044194b76A38365C53b72F7D49",
+    "chain": "56",
+    "creator_address": "0xf1357d45671cb16de055752809c8d2e3ab4afe2e",
+    "first_investigated": "2026-08-04T02:47:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-024726-0x30117E4b.md",
+        "score": 27,
+        "ts": "2026-08-04T02:47:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T02:47:26Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "GWEI",
+    "times_investigated": 1
+  },
   "56:0x330990dae53bca4c5811c5362b44c33a47db7777": {
     "address": "0x330990DaE53BCa4C5811C5362B44C33a47db7777",
     "chain": "56",
