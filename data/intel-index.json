@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T02:17:33Z",
+  "generated": "2026-08-04T02:30:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 417,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 146,
     "investigations": 710,
-    "news": 58,
+    "news": 59,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10677,6 +10677,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-04-dating-apps-turned-financial-traps-hong-kong-romance-scams-n.md",
+      "title": "Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T02:30:35Z",
+      "published_et": "August 3, 2026 \u00b7 10:30 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "An insurance agent\u2019s $3.3 million loss headlines a devastating surge of 25 romance-linked crypto frauds reported to police in just seven days.",
+      "image": "assets/news-images/dating-apps-turned-financial-traps-hong-kong-romance-scams-n.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-dating-apps-turned-financial-traps-hong-kong-romance-scams-n.md"
+    },
     {
       "file": "news-2026-08-03-npm-supply-chain-breach-slips-cross-platform-rat-into-alibab.md",
       "title": "npm Supply Chain Breach Slips Cross-Platform RAT into Alibaba Developer Workflows",
