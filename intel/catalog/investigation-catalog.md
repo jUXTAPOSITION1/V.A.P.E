@@ -1277,3 +1277,5 @@
 | 2026-08-04 | auto | 0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3 (BEAT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
 
 | 2026-08-04 | auto | 0x000008D2175F9AEAdDb2430c26f8A6f73c5A0000 (UP) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x0958d8ab8bd86ce7451156dff0783152bea21514) — can still act | +7d |
+
+| 2026-08-04 | auto | 0x02Fca66C1D1aFB4E2A7884261eB00F63598a7436 (NVDAB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |

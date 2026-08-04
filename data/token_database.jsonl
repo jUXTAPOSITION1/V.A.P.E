@@ -172,3 +172,4 @@
 {"ts": "2026-08-04T19:02:45.736479Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-04T19:18:00.283622Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "rug_pull_alert"}
 {"ts": "2026-08-04T19:48:06.818981Z", "address": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "chain": "8453", "symbol": "aeon", "name": "aeon", "source": "base_trending", "offering": "rug_pull_alert"}
+{"ts": "2026-08-04T21:53:54.210119Z", "address": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0", "chain": "56", "symbol": "UAI", "name": "UAI", "source": "evm", "offering": "token_safety_check"}
