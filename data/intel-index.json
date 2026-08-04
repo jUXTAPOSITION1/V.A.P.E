@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-04T22:13:18Z",
+  "generated": "2026-08-04T22:14:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 434,
+    "reports": 435,
     "reports_by_type": {
+      "bounty": 116,
       "base": 87,
       "sentiment": 46,
-      "bounty": 115,
       "macro": 23,
       "security": 75,
       "bug": 5,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 150,
     "investigations": 739,
-    "news": 67,
+    "news": 66,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-215349-0x02Fca66C.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-04-22.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-04T22:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_221332.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T22:13:32Z",
       "threat": null,
-      "summary": "Date: 2026-08-04 22:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-04-22.md",
-      "bytes": 8543
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_221332.md",
+      "bytes": 16457
     }
   },
   "investigations": [
@@ -10210,6 +10210,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_221332.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T22:13:32Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_221332.md",
+      "bytes": 16457
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-04-22.md",
@@ -10857,17 +10868,6 @@
       "summary": "The feed shows 6 incidents in the last 7 days, none reaching the $50M threshold in the prior 14 days. Confirmed events include one private-key compromise spanning Ethereum/Base/Arbitrum/BSC, one access-control exploit on WEMIX3.0, one flash-loan exploit on Ethereum, one accounting-error loss on Ethereum, one oracle-misconfiguration loss o",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-02.md",
       "bytes": 5921
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_000536.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T00:05:36Z",
-      "threat": null,
-      "summary": "Cycle: 20260802000536 \u00b7 Data timestamp (UTC): 2026-08-02T00:05:39Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_000536.md",
-      "bytes": 16279
     }
   ],
   "broadcasts": [
@@ -11083,18 +11083,6 @@
     }
   ],
   "news": [
-    {
-      "file": "news-2026-08-04-bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.md",
-      "title": "Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments",
-      "byline": "VAPE Reporter",
-      "date": "2026-08-04T22:13:17Z",
-      "published_et": "August 4, 2026 \u00b7 6:13 PM EDT",
-      "topic": "Crypto Markets",
-      "dek": "The August 2026 post's page scrape returned only navigation menus and links, offering no primary claims or data to evaluate the custody debate.",
-      "image": "assets/news-images/bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.jpg",
-      "image_source": "AI-generated \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.md"
-    },
     {
       "file": "news-2026-08-04-greatness-phaas-quietly-rolls-out-device-code-phishing-to-hi.md",
       "title": "Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens",
@@ -11802,6 +11790,18 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md"
+    },
+    {
+      "file": "news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md",
+      "title": "Hong Kong's Tokenization Drive Exposes Banks to Quantum Risks With Sector at Just 2.3/10 Readiness",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-28 02:34 UTC",
+      "published_et": null,
+      "topic": "Crypto Markets",
+      "dek": "The HKMA is forcing banks to confront quantum decryption threats to current cryptography exactly as tokenized deposits and bonds move onto ledgers, with half the sector lacking any post-quantum plans.",
+      "image": "assets/news-images/hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.jpg",
+      "image_source": "Source photo \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md"
     }
   ],
   "tools": [
