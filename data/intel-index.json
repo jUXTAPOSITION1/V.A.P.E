@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T14:59:00Z",
+  "generated": "2026-08-04T15:15:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -11759,7 +11759,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49526256",
+      "version": "49533417",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11769,7 +11769,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.43 eth_dom 9.94 mcap_chg_24h 1.49",
+      "version": "btc_dom 56.56 eth_dom 9.93 mcap_chg_24h 0.5",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -11809,7 +11809,7 @@
       "name": "hack_feed",
       "tier": "recon",
       "status": "verified",
-      "version": "2026-08-02 LOOPSDAO 0.7 M ['BSC'] Price Manipulation Attack",
+      "version": "2026-08-03 RISEx 0.67 M ['RISE'] Access Control Exploit",
       "purpose": "Keyless DeFi exploit/hack feed (DeFiLlama /hacks): dated incidents, loss $, chain, technique. Scripts the security-sweep vertical.",
       "repo": "DefiLlama/defillama-server",
       "known_limitation": false,
