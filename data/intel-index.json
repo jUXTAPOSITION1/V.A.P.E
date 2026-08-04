@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T05:41:10Z",
+  "generated": "2026-08-04T05:48:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 420,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 147,
     "investigations": 716,
-    "news": 59,
+    "news": 60,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10761,6 +10761,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-04-solana-s-fee-overhaul-proposal-would-multiply-daily-burns-fo.md",
+      "title": "Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T05:48:25Z",
+      "published_et": "August 4, 2026 \u00b7 1:48 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "SGP-0003 links higher transaction fees to a doubled disinflation rate, yet still requires 40 million SOL in fresh validator backing to reach a formal vote.",
+      "image": "assets/news-images/solana-s-fee-overhaul-proposal-would-multiply-daily-burns-fo.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-solana-s-fee-overhaul-proposal-would-multiply-daily-burns-fo.md"
+    },
     {
       "file": "news-2026-08-04-dating-apps-turned-financial-traps-hong-kong-romance-scams-n.md",
       "title": "Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week",

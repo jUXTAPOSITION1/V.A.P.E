@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T02:29:19Z",
+  "generated": "2026-08-04T05:47:20Z",
   "count": 60,
   "headlines": [
     {
@@ -35,6 +35,94 @@
       "crypto": true
     },
     {
+      "title": "A new Solana proposal would take daily SOL burns from $47,000 to $650,000",
+      "url": "https://www.coindesk.com/tech/2026/08/04/a-new-solana-proposal-would-take-daily-sol-burns-from-usd47-000-to-usd650-000",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 05:39:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin nears $64,000 as traders look past the fourth Coldcard sweep",
+      "url": "https://www.coindesk.com/markets/2026/08/04/bitcoin-nears-usd64-000-as-traders-look-past-the-fourth-coldcard-sweep",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 05:21:13 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Microsoft Bug Bounty Program: $20 Million Paid to 500 Researchers",
+      "url": "https://www.securityweek.com/microsoft-bug-bounty-program-20-million-paid-to-500-researchers/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 05:18:34 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "A bitcoin wallet dormant since 2013 moved $31 million, and it's not the only one",
+      "url": "https://www.coindesk.com/markets/2026/08/04/a-bitcoin-wallet-dormant-since-2013-moved-usd31-million-and-it-s-not-the-only-one",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 04:48:40 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Coldcard Bitcoin theft tops $100M across 3 confirmed attack waves: Galaxy",
+      "url": "https://cointelegraph.com/news/coldcard-bitcoin-theft-100-million-three-waves?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 04:47:13 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "BitMine Stakes 87% of Its Ethereum Holdings in Fresh Conviction Bet",
+      "url": "https://beincrypto.com/bitmine-eth-staking-tom-lee-conviction/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 04:27:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitmine adds $19.6M in ETH, repurchases 4.5M shares",
+      "url": "https://cointelegraph.com/news/bitmine-buys-10399-eth-repurchases-4-5-million-shares?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 03:52:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Mastercard completes $1.8B BVNK acquisition in stablecoin push",
+      "url": "https://cointelegraph.com/news/mastercard-completes-bvnk-acquisition-stablecoin-push?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 02:58:51 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Japan Stocks Shrug Off Yen Shock, But Kioxia Signals More Pain Ahead",
+      "url": "https://beincrypto.com/kioxia-yen-intervention-nikkei-risk/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 02:50:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Solana Memecoin OnlyMarms is Outraising OnlyFans Subscriptions for a Marmot Study",
+      "url": "https://beincrypto.com/onlymarms-meme-coin-outraises-onlyfans/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 02:41:43 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "NYU Professor Says Watch Smaller AI Stocks When The Shakeout Hits",
+      "url": "https://beincrypto.com/damodaran-warns-ai-stocks-shakeout/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 02:13:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Malaysia Blockchain Week\u2019s OnlyFans scandal, lonely heart scammed for $3.3M: Asia Express",
       "url": "https://cointelegraph.com/magazine/hong-kong-lonely-heart-scammed-out-of-33m-in-crypto-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -55,6 +143,14 @@
       "url": "https://cointelegraph.com/news/caleb-brown-expands-to-uk-betting-on-untapped-crypto-demand?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Tue, 04 Aug 2026 00:51:32 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "NEAR co-founder proposes protocol sovereign fund for long-term sustainability",
+      "url": "https://www.theblock.co/post/410528/near-protocol-sovereign-fund?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 00:32:28 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -131,6 +227,14 @@
       "crypto": true
     },
     {
+      "title": "Mastercard completes BVNK acquisition to expand stablecoin payments infrastructure",
+      "url": "https://www.theblock.co/post/410521/mastercard-completes-bvnk-acquisition?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Mon, 03 Aug 2026 23:34:53 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "After killer quarter, Palantir CEO Alex Karp calls AI industry \u2018Marxist\u2019",
       "url": "https://techcrunch.com/2026/08/03/after-killer-quarter-palantir-ceo-alex-karp-calls-ai-industry-marxist/",
       "source": "TechCrunch AI",
@@ -203,14 +307,6 @@
       "crypto": true
     },
     {
-      "title": "Is SpaceX Stock a Buy Ahead of a $104 Billion Unlock? Elon Musk Answers",
-      "url": "https://beincrypto.com/spacex-stock-buy-elon-musk-share-unlock/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 21:21:55 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "\u2018We\u2019ll Get Through This Bear Market,\u2019 Says CEO of Bitcoin Treasury Company Strategy",
       "url": "https://bitcoinmagazine.com/news/strategy-to-get-through-bitcoin-bear-market",
       "source": "Bitcoin Magazine",
@@ -243,27 +339,11 @@
       "crypto": true
     },
     {
-      "title": "Bessent\u2019s top crypto adviser Tyler Williams exits US Treasury: Report",
-      "url": "https://cointelegraph.com/news/bessent-top-crypto-adviser-tyler-williams-leaves-us-treasury-report?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Mon, 03 Aug 2026 20:29:47 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Hotel Wi-Fi attacks use custom malware to breach Microsoft 365 accounts",
       "url": "https://www.bleepingcomputer.com/news/security/hotel-wi-fi-attacks-use-custom-malware-to-breach-microsoft-365-accounts/",
       "source": "BleepingComputer",
       "published": "Mon, 03 Aug 2026 20:17:15 -0400",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Palantir Just Crushed Wall Street by $125 Million: How Will Stock React?",
-      "url": "https://beincrypto.com/palantir-crushed-wall-street-stock-surging/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 20:14:46 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -283,34 +363,10 @@
       "crypto": true
     },
     {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Mon, 03 Aug 2026 19:52:11 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "FalconX cuts 10% of workforce amid prolonged crypto market slump: Report",
-      "url": "https://cointelegraph.com/news/falconx-workforce-reduction-amid-crypto-market-slump-report?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Mon, 03 Aug 2026 19:44:48 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Italy\u2019s biggest bank just slashed its Bitcoin ETF call position by 99% to triple down on staked Ethereum",
       "url": "https://cryptoslate.com/intesa-sanpaolos-ibit-call-row-plunged-99-as-its-staked-ethereum-shares-tripled/",
       "source": "CryptoSlate",
       "published": "Mon, 03 Aug 2026 19:35:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Benjamin Cowen: Crypto Hasn\u2019t Been This Cheap Since 2010, But It Might Drop Lower",
-      "url": "https://beincrypto.com/crypto-cheapest-since-2010-benjamin-cowen/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 19:35:13 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -320,14 +376,6 @@
       "source": "The Hacker News",
       "published": "Mon, 03 Aug 2026 19:33:11 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Jim Cramer and Tom Lee Share a Bullish Call That Could Shape Investors\u2019 Next Move",
-      "url": "https://beincrypto.com/cramer-amazon-tom-lee-2027-stocks/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 19:30:20 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -432,54 +480,6 @@
       "source": "The Block",
       "published": "Mon, 03 Aug 2026 16:46:31 -0400",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Congress\u2019 favorite AI tool? ChatGPT",
-      "url": "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/",
-      "source": "TechCrunch AI",
-      "published": "Mon, 03 Aug 2026 16:40:55 +0000",
-      "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Chinese Threat Actor Uses Leaked DarkSword Kit to Deploy GHOSTBLADE on iOS",
-      "url": "https://thehackernews.com/2026/08/chinese-threat-actor-uses-leaked.html",
-      "source": "The Hacker News",
-      "published": "Mon, 03 Aug 2026 16:19:06 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "New DOUBLECUP ClickFix service hides malware in browser cache images",
-      "url": "https://www.bleepingcomputer.com/news/security/new-doublecup-clickfix-service-hides-malware-in-browser-cache-images/",
-      "source": "BleepingComputer",
-      "published": "Mon, 03 Aug 2026 16:01:22 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Black Hat USA 2026 \u2013 Summary of Vendor Announcements (Part 1)",
-      "url": "https://www.securityweek.com/black-hat-usa-2026-summary-of-vendor-announcements-part-1/",
-      "source": "SecurityWeek",
-      "published": "Mon, 03 Aug 2026 15:50:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Visa to Acquire Fraud Intelligence Firm BioCatch for $2.4 Billion",
-      "url": "https://www.securityweek.com/visa-to-acquire-fraud-intelligence-firm-biocatch-for-2-4-billion/",
-      "source": "SecurityWeek",
-      "published": "Mon, 03 Aug 2026 15:32:05 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Fake Roblox Xeno script launcher pushes infostealer, RAT malware",
-      "url": "https://www.bleepingcomputer.com/news/security/fake-roblox-xeno-script-launcher-pushes-infostealer-rat-malware/",
-      "source": "BleepingComputer",
-      "published": "Mon, 03 Aug 2026 15:25:10 -0400",
-      "topic": "Cybersecurity",
       "crypto": true
     }
   ]
