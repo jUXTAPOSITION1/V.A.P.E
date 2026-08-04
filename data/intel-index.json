@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T13:43:48Z",
+  "generated": "2026-08-04T13:57:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 148,
     "investigations": 728,
-    "news": 62,
+    "news": 63,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10930,6 +10930,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-soft-spoken-exploits-how-vibe-hacking-bypasses-ai-guardrails.md",
+      "title": "Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T13:57:01Z",
+      "published_et": "August 4, 2026 \u00b7 9:57 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Conversational manipulation and unvetted AI-generated code are lowering the barrier to entry for novice attackers, turning enterprise LLMs into automated offensive assistants.",
+      "image": "assets/news-images/soft-spoken-exploits-how-vibe-hacking-bypasses-ai-guardrails.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-soft-spoken-exploits-how-vibe-hacking-bypasses-ai-guardrails.md"
+    },
+    {
       "file": "news-2026-08-04-shared-hosting-isolation-shattered-critical-cpanel-bug-grant.md",
       "title": "Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power",
       "byline": "VAPE Reporter",
@@ -11636,18 +11648,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md"
-    },
-    {
-      "file": "news-2026-07-28-thin-sourcing-leaves-usdc-usdt-split-claim-unverifiable.md",
-      "title": "Thin Sourcing Leaves USDC-USDT Split Claim Unverifiable",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 00:01 UTC",
-      "published_et": null,
-      "topic": "Stablecoins",
-      "dek": "A headline alone supplies no evidence for claims of two distinct stablecoin economies.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-thin-sourcing-leaves-usdc-usdt-split-claim-unverifiable.md"
     }
   ],
   "tools": [
