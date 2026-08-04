@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-04T02:32:18Z",
+  "generated": "2026-08-04T02:38:03Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 417,
+    "reports": 418,
     "reports_by_type": {
+      "security": 73,
       "bounty": 108,
       "sentiment": 44,
-      "security": 72,
       "base": 83,
       "macro": 22,
       "bug": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-020237-0x69426A34.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260804_001001.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-04T00:10:01Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-04-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-04T02:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_001001.md",
-      "bytes": 16771
+      "summary": "The real incident feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The $115M COLDCARD loss stemmed from non-random private key generation on Bitcoin. Multiple smaller incidents on BSC involved price manipulation attacks (LOOPSDAO, MOKE, LULA). Other entries include a malicious SetToken and manag",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-02.md",
+      "bytes": 6948
     }
   },
   "investigations": [
@@ -9804,6 +9804,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-04-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-04T02:00Z",
+      "threat": null,
+      "summary": "The real incident feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The $115M COLDCARD loss stemmed from non-random private key generation on Bitcoin. Multiple smaller incidents on BSC involved price manipulation attacks (LOOPSDAO, MOKE, LULA). Other entries include a malicious SetToken and manag",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-02.md",
+      "bytes": 6948
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260804_001001.md",
@@ -10451,17 +10462,6 @@
       "summary": "The feed shows 7 incidents in the last 7 days, all under $10M and none reaching the $50M threshold in the prior 14 days. Confirmed events include Set Protocol malicious SetToken & Manager contract on Ethereum ($0.01M), Crypto DAO on BSC ($8.2M), LULA price manipulation on BSC ($0.578M), WEMIX.FI Lend access control exploit on WEMIX3.0 ($0",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-08.md",
       "bytes": 7115
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_070810.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T07:08:10Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_070810.md",
-      "bytes": 14827
     }
   ],
   "broadcasts": [
