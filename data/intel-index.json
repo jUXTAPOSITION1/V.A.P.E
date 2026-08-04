@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-04T14:14:04Z",
+  "generated": "2026-08-04T14:15:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 426,
+    "reports": 427,
     "reports_by_type": {
+      "security": 75,
       "bounty": 112,
       "base": 85,
       "sentiment": 45,
-      "security": 74,
       "macro": 22,
       "bug": 5,
       "mainnet": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-134338-0xAc1166e5.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260804_130314.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-04T13:03:14Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-04-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-04T14:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10118% 24h (liq $0.002826083889) \u2014 volatility/rug watch \u00b7 Base mover: HOME / WETH 0.3% +73% 24h (liq $85906.1503) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_130314.md",
-      "bytes": 16799
+      "summary": "The real incident feed shows 8 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The sole large loss is the COLDCARD event at $115M from non-random private key generation on Bitcoin. The remaining incidents are all below $10M and cluster around price manipulation attacks (LOOPSDAO, MOKE, LULA on BSC), access ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-14.md",
+      "bytes": 7320
     }
   },
   "investigations": [
@@ -10056,6 +10056,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-04-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-04T14:00Z",
+      "threat": null,
+      "summary": "The real incident feed shows 8 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The sole large loss is the COLDCARD event at $115M from non-random private key generation on Bitcoin. The remaining incidents are all below $10M and cluster around price manipulation attacks (LOOPSDAO, MOKE, LULA on BSC), access ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-14.md",
+      "bytes": 7320
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260804_130314.md",
@@ -10703,17 +10714,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: Claude / USDC +62% 24h (liq $1052095.8427) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_180208.md",
       "bytes": 17175
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-01-18.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-01T18:00Z",
-      "threat": null,
-      "summary": "The feed shows 7 incidents in the last 7 days, all under $10M with no incidents =$50M in the prior 14 days. Confirmed losses include Garden ($0.45M, private key compromise across Ethereum/Base/Arbitrum/BSC), ChainConnect ($0.65M, unauthorized access on Ethereum/BSC/Avalanche/Polygon), Triple-A ($9.7M, hot wallet compromise on Ethereum/Tro",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-18.md",
-      "bytes": 6739
     }
   ],
   "broadcasts": [

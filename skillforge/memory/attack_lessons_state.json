@@ -128,5 +128,15 @@
     "logged_at": "2026-08-03T19:39:10Z",
     "pattern": "access_control",
     "has_backtest": false
+  },
+  "2026-08-03:RISEx": {
+    "logged_at": "2026-08-04T14:15:40Z",
+    "pattern": "access_control",
+    "has_backtest": false
+  },
+  "2026-07-30:Swan Treasury": {
+    "logged_at": "2026-08-04T14:15:40Z",
+    "pattern": "access_control",
+    "has_backtest": false
   }
 }
