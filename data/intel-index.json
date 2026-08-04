@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-04T12:57:16Z",
+  "generated": "2026-08-04T13:04:31Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 425,
+    "reports": 426,
     "reports_by_type": {
+      "bounty": 112,
       "base": 85,
-      "bounty": 111,
       "sentiment": 45,
       "security": 74,
       "macro": 22,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-125715-0x0C69199C.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-04-11.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-04T11:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_130314.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T13:03:14Z",
       "threat": null,
-      "summary": "Date: 2026-08-04 11:16 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-04-11.md",
-      "bytes": 7301
+      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10118% 24h (liq $0.002826083889) \u2014 volatility/rug watch \u00b7 Base mover: HOME / WETH 0.3% +73% 24h (liq $85906.1503) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_130314.md",
+      "bytes": 16799
     }
   },
   "investigations": [
@@ -10014,6 +10014,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_130314.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T13:03:14Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack) \u00b7 Base mover: OpenAI / USDC 0.01% +10118% 24h (liq $0.002826083889) \u2014 volatility/rug watch \u00b7 Base mover: HOME / WETH 0.3% +73% 24h (liq $85906.1503) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_130314.md",
+      "bytes": 16799
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-04-11.md",
@@ -10661,17 +10672,6 @@
       "summary": "The feed shows 7 incidents in the last 7 days, all under $10M with no incidents =$50M in the prior 14 days. Confirmed losses include Garden ($0.45M, private key compromise across Ethereum/Base/Arbitrum/BSC), ChainConnect ($0.65M, unauthorized access on Ethereum/BSC/Avalanche/Polygon), Triple-A ($9.7M, hot wallet compromise on Ethereum/Tro",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-18.md",
       "bytes": 6739
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-01-15.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-01T15:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.45%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-01-15.md",
-      "bytes": 2046
     }
   ],
   "broadcasts": [
