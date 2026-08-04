@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T15:30:18Z",
+  "generated": "2026-08-04T15:45:43Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -19,7 +19,7 @@
     "news": 64,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 24
+    "skills": 25
   },
   "latest_summary": {
     "investigation": {
@@ -11838,6 +11838,12 @@
       "title": "DeFi Protocol Security Audit Playbook",
       "summary": "Distilled 2026-07-05T09:12:01Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/defi-protocol-security-audit-playbook.md"
+    },
+    {
+      "file": "deployer-wallet-history-recon.md",
+      "title": "Deployer Wallet History Recon",
+      "summary": "When-to-use Bounty-cycle analysis (agents/run.py) returns REJECT or CAUTION on unverified deployer (e.g., CATE 20260803202705) where exploit hypothesis centers on post-launch mint/ownership calls; evidence is limited to ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/deployer-wallet-history-recon.md"
     },
     {
       "file": "investigating-smart-contract-security-with-slither.md",
