@@ -2818,3 +2818,4 @@
 {"ts": "2026-08-04T17:46:32Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1186, "completion_tokens": 31, "total_tokens": 1862}
 {"ts": "2026-08-04T18:01:35Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1186, "completion_tokens": 25, "total_tokens": 1758}
 {"ts": "2026-08-04T18:16:31Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1182, "completion_tokens": 31, "total_tokens": 1627}
+{"ts": "2026-08-04T18:28:14Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2791, "completion_tokens": 357, "total_tokens": 3819}
