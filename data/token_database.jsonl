@@ -152,3 +152,4 @@
 {"ts": "2026-08-03T22:46:22.157942Z", "address": "0xf1C11bd495a1c50532a972168fcA33Fc1C11ef35", "chain": "1", "symbol": "DEGEN", "name": "DEGEN", "source": "evm", "offering": "dossier_check"}
 {"ts": "2026-08-03T23:16:43.230696Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-08-03T23:31:48.723276Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "token_safety_check"}
+{"ts": "2026-08-04T00:17:55.475086Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
