@@ -165,3 +165,4 @@
 {"ts": "2026-08-04T09:55:40.625257Z", "address": "0x8F294a99a0609822C233b24867F331c292cE2DA9", "chain": "1", "symbol": "RELICS", "name": "RELICS", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-08-04T13:12:35.250745Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "exploit_check"}
 {"ts": "2026-08-04T14:44:38.148674Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "dossier_check"}
+{"ts": "2026-08-04T16:00:55.843093Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "dossier_check"}
