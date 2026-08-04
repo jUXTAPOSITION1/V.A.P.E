@@ -614,3 +614,4 @@
 {"ts": "2026-08-04T18:31:54.810753Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["dossier_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
 {"ts": "2026-08-04T18:47:26.687843Z", "target": "compound-v3", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T19:02:45.736805Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-04T19:18:00.283995Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}

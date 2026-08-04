@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T19:02:46Z",
+  "generated": "2026-08-04T19:18:00Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 149,
-    "investigations": 731,
+    "investigations": 732,
     "news": 65,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-184717-0x2285BB53.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Lord GENADES",
-      "date": "2026-08-04T18:47:17Z",
-      "target": "0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260804-191755-0xf1Bf52E0.md",
+      "title": "Investigation \u2014 UNI",
+      "symbol": "UNI",
+      "name": "UNICORN",
+      "date": "2026-08-04T19:17:55Z",
+      "target": "0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "27",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,482 (rug/illiquid); [-10] Low liquidity $8,482. Positiv",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-184717-0x2285BB53.md"
+      "score": "24",
+      "summary": "Risk factors: [-8] Low holder count (124); [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $43,370; [-10] Violent 24h move +445% (volatility/manipulation); [-15] Pair only 1.4 days ol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-191755-0xf1Bf52E0.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-191755-0xf1Bf52E0.md",
+      "title": "Investigation \u2014 UNI",
+      "symbol": "UNI",
+      "name": "UNICORN",
+      "date": "2026-08-04T19:17:55Z",
+      "target": "0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "24",
+      "summary": "Risk factors: [-8] Low holder count (124); [-8] Top 10 non-LP/burn holders control 66% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $43,370; [-10] Violent 24h move +445% (volatility/manipulation); [-15] Pair only 1.4 days ol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-191755-0xf1Bf52E0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-184717-0x2285BB53.md",

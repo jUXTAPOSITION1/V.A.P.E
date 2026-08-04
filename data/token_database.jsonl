@@ -170,3 +170,4 @@
 {"ts": "2026-08-04T17:01:37.561585Z", "address": "0x0C69199C1562233640e0Db5Ce2c399A88eB507C7", "chain": "56", "symbol": "CYS", "name": "CYS", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-08-04T17:46:28.319687Z", "address": "0x7987f03462200b3D8A072E02C89A8A41dCB124EE", "chain": "1", "symbol": "V4", "name": "V4", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-04T19:02:45.736479Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_intel"}
+{"ts": "2026-08-04T19:18:00.283622Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "rug_pull_alert"}
