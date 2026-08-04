@@ -1271,3 +1271,5 @@
 | 2026-08-04 | auto | 0x64f170A94CC75C406BA1398fD353841ba63a631D (UB402) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 83% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-04 | auto | 0x708383ae0e80E75377d664E4D6344404dede119A (EMT) | deep_investigation | CAUTION (65/100) | Very low liquidity $8,315 (rug/illiquid) | +7d |
+
+| 2026-08-04 | auto | 0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4 (O) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) — can still act | +7d |

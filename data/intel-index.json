@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T20:35:07Z",
+  "generated": "2026-08-04T20:50:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 432,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 735,
+    "investigations": 736,
     "news": 66,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-201952-0x708383ae.md",
-      "title": "Investigation \u2014 EMT",
-      "symbol": "EMT",
-      "name": "Earthmeta",
-      "date": "2026-08-04T20:19:52Z",
-      "target": "0x708383ae0e80E75377d664E4D6344404dede119A",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260804-205038-0x500A02a2.md",
+      "title": "Investigation \u2014 O",
+      "symbol": "O",
+      "name": "o1.exchange",
+      "date": "2026-08-04T20:50:38Z",
+      "target": "0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4",
+      "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-25] Very low liquidity $8,315 (rug/illiquid); [-10] Low liquidity $8,315. Positive evidence: 7572 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 612+ days without a known incident in this scan; Custom verified source (not a mass-produced factory template);",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-201952-0x708383ae.md"
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 34648 hol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-205038-0x500A02a2.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-205038-0x500A02a2.md",
+      "title": "Investigation \u2014 O",
+      "symbol": "O",
+      "name": "o1.exchange",
+      "date": "2026-08-04T20:50:38Z",
+      "target": "0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 34648 hol",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-205038-0x500A02a2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-201952-0x708383ae.md",
